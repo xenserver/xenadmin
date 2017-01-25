@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -280,7 +280,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			if (m_checkBoxManifest.Checked && m_checkBoxSign.Checked)
 			{
 				if (String.IsNullOrEmpty(m_textBoxCertificate.Text) || String.IsNullOrEmpty(m_textBoxPrivateKeyPwd.Text)
-					|| !PerformCheck(CheckCertificatePathValid, CheckCertificatePathExists, CheckSignPasswordValid))
+					|| !PerformCheck(CheckCertificatePathValid, CheckCertificatePathExists, CheckSignPasswordValid, CheckCertificateValid))
 				{
 					m_pictureBoxTickValidate.Visible = false;
 					m_isSignatureOk = false;
@@ -335,6 +335,25 @@ namespace XenAdmin.Wizards.ExportWizard
 
 			return true;
 		}
+
+        /// <summary>
+        /// Verify the certificate used to sign the package.
+        /// </summary>
+        private bool CheckCertificateValid(out string error)
+        {
+            error = string.Empty;
+
+            try
+            {
+                if (Certificate != null && Certificate.Verify())
+                    return true;
+            }
+            catch (CryptographicException)
+            { }
+
+            error = Messages.EXPORT_SECURITY_PAGE_ERROR_CERTIFICATE_INVALID;
+            return false;
+        }
 
 		#endregion
 

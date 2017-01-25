@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -35,37 +35,25 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.ConsoleView;
 using XenAPI;
-using XenAdmin.Core;
 using System.Drawing;
 
 
 namespace XenAdmin.Controls
 {
-    public class ConsolePanel : UserControl
+    public partial class ConsolePanel : UserControl
     {
         private const int MAX_ACTIVE_VM_CONSOLES = 10;
 
-        private List<VM> activeVMConsoles;
-        private Dictionary<VM, VNCView> vncViews;
-        private Label errorLabel;
-        private static string CouldNotConnect = Messages.VNC_COULD_NOT_CONNECT_CONSOLE;
-        private static string CouldNotFindConsole = Messages.VNC_COULD_NOT_FIND_CONSOLES;
-        public VNCView activeVNCView = null;
-        private Panel RbacWarningPanel;
-        private TableLayoutPanel tableLayoutPanel3;
-        private PictureBox pictureBox2;
-        private Label lableRbacWarning;
+        public VNCView activeVNCView;
+        private Dictionary<VM, VNCView> vncViews = new Dictionary<VM, VNCView>();
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ConsolePanel()
-            : base()
         {
             InitializeComponent();
-            this.vncViews = new Dictionary<VM, VNCView>();
-            this.activeVMConsoles = new List<VM>();
-            this.Dock = DockStyle.Fill;
-            pictureBox2.Image = SystemIcons.Warning.ToBitmap();
+            tableLayoutPanelRbac.Visible = false;
+            ClearErrorMessage();
         }
 
         public void PauseAllViews()
@@ -118,34 +106,37 @@ namespace XenAdmin.Controls
             // Start a timer for closing the inactive VNC connection after an interval (20 seconds)
             StartCloseVNCTimer(activeVNCView);
 
-            this.Controls.Clear();
+            tableLayoutPanelRbac.Visible = false;
+
+            if (activeVNCView != null)
+            {
+                Controls.Remove(activeVNCView);
+                activeVNCView = null;
+            }
 
             if (source == null)
-            {
-                activeVNCView = null;
                 return;
-            }
-            List<Role> allowedRoles = null;
+
+            List<Role> allowedRoles;
             if (RbacDenied(source, out allowedRoles))
             {
-                lableRbacWarning.Text = String.Format(allowedRoles.Count == 1 ? Messages.RBAC_CONSOLE_WARNING_ONE : Messages.RBAC_CONSOLE_WARNING_MANY,
-                                                      Role.FriendlyCSVRoleList(source.Connection.Session.Roles),
-                                                      Role.FriendlyCSVRoleList(allowedRoles));
+                string msg = allowedRoles.Count == 1 ? Messages.RBAC_CONSOLE_WARNING_ONE : Messages.RBAC_CONSOLE_WARNING_MANY;
+                lableRbacWarning.Text = string.Format(msg,
+                    Role.FriendlyCSVRoleList(source.Connection.Session.Roles),
+                    Role.FriendlyCSVRoleList(allowedRoles));
 
-                this.Controls.Add(RbacWarningPanel);
-                if (activeVNCView != null)
-                    this.Controls.Remove(activeVNCView);
+                tableLayoutPanelRbac.Visible = true;
                 return;
             }
-            activeVMConsoles.Remove(source);
-            activeVMConsoles.Add(source);
 
             StopCloseVncTimer(source);
-            
-            while (activeVMConsoles.Count > MAX_ACTIVE_VM_CONSOLES)
-            {
-                closeVNCForSource(activeVMConsoles[0]);
-            }
+
+            //remove one more as we're adding the selected further down
+            //Take(arg) returns empty list if the arg <= 0
+            var viewsToRemove = vncViews.Where(v => v.Key.opaque_ref != source.opaque_ref).Take(vncViews.Count -1 - MAX_ACTIVE_VM_CONSOLES);
+
+            foreach (var view in viewsToRemove)
+                closeVNCForSource(view.Key);
 
             if (vncViews.ContainsKey(source))
             {
@@ -153,102 +144,54 @@ namespace XenAdmin.Controls
             }
             else
             {
-                activeVNCView = new VNCView(source, null, null);
+                activeVNCView = new VNCView(source, null, null) { Dock = DockStyle.Fill };
                 vncViews[source] = activeVNCView;
             }
+
             activeVNCView.refreshIsoList();
-            this.Controls.Add(activeVNCView);
-            this.ClearErrorMessage();
+            Controls.Add(activeVNCView);
+            ClearErrorMessage();
         }
 
-        internal void setCurrentSource(Host source)
+        internal virtual void setCurrentSource(Host source)
         {
-            // sanity...
             if (source == null)
             {
-                log.Error("null source when attempting to connect to host VNC");
-                SetErrorMessage(CouldNotConnect);
+                log.Error("No local copy of host information when connecting to host VNC console.");
+                SetErrorMessage(Messages.VNC_COULD_NOT_CONNECT_CONSOLE);
                 return;
             }
 
-            if (source == null)
-            {
-                log.Error("No local copy of host information when connecting to host VNC console...");
-                SetErrorMessage(CouldNotConnect);
-                return;
-            }
-
-            if (source.resident_VMs == null)
+            VM dom0 = source.ControlDomainZero;
+            if (dom0 == null)
             {
                 log.Error("No dom0 on host when connecting to host VNC console.");
-                SetErrorMessage(CouldNotConnect);
-                return;
-            }
-
-            List<XenRef<VM>> controlVMs =
-                source.resident_VMs.FindAll((Predicate<XenRef<VM>>)delegate(XenRef<VM> vmRef)
-            {
-                VM vm = source.Connection.Resolve<VM>(vmRef);
-
-                if (vm == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return vm.is_control_domain;
-                }
-            });
-
-            if (controlVMs.Count > 0)
-            {
-                VM vm = source.Connection.Resolve<VM>(controlVMs[0]);
-                if (vm == null)
-                {
-                    SetErrorMessage(CouldNotFindConsole);
-                }
-                else
-                {
-                    this.setCurrentSource(vm);
-                }
+                SetErrorMessage(Messages.VNC_COULD_NOT_FIND_CONSOLES);
             }
             else
-            {
-                SetErrorMessage(CouldNotFindConsole);
-            }
+                setCurrentSource(dom0);
         }
 
-        public static bool RbacDenied(VM source, out List<Role> AllowedRoles)
+        public static bool RbacDenied(VM source, out List<Role> allowedRoles)
         {
 
             if (source == null || source.Connection == null)
             {
-                AllowedRoles = null;
+                allowedRoles = null;
                 return false;
             }
-            else
+            
+            var session = source.Connection.Session;
+            if (session != null && session.IsLocalSuperuser)
             {
-                var session = source.Connection.Session;
-                if (session != null && session.IsLocalSuperuser)
-                {
-                    AllowedRoles = null;
-                    return false;
-                }
-            }
-
-            List<Role> allowedRoles = null;
-            if (source.is_control_domain)
-                allowedRoles = Role.ValidRoleList("http/connect_console/host_console", source.Connection);
-            else
-                allowedRoles = Role.ValidRoleList("http/connect_console", source.Connection);
-
-            if (source.Connection.Session.Roles.Find(delegate(Role r) { return allowedRoles.Contains(r); }) != null)
-            {
-                AllowedRoles = allowedRoles;
+                allowedRoles = null;
                 return false;
             }
-            AllowedRoles = allowedRoles;
-            return true;
+
+            string roleList = source.IsControlDomainZero ? "http/connect_console/host_console" : "http/connect_console";
+            List<Role> validRoles = Role.ValidRoleList(roleList, source.Connection);
+            allowedRoles = validRoles;
+            return source.Connection.Session.Roles.Find(r => validRoles.Contains(r)) == null;
         }
 
         internal Image Snapshot(VM vm, string elevatedUsername, string elevatedPassword)
@@ -266,7 +209,7 @@ namespace XenAdmin.Controls
                     // use elevated credentials, if provided, to create a vncView (CA-91132)
                     useElevatedCredentials = !String.IsNullOrEmpty(elevatedUsername) && !String.IsNullOrEmpty(elevatedPassword);
                     if (useElevatedCredentials)
-                        view = new VNCView(vm, elevatedUsername, elevatedPassword);
+                        view = new VNCView(vm, elevatedUsername, elevatedPassword) { Dock = DockStyle.Fill };
                     else
                     {
                         setCurrentSource(vm);
@@ -311,9 +254,6 @@ namespace XenAdmin.Controls
 
             vncViews.Remove(source);
             vncView.Dispose();
-
-            if (activeVMConsoles.Contains(source)) 
-                activeVMConsoles.Remove(source);
         }
 
         public void closeVNCForSource(VM source, bool vncOnly)
@@ -324,93 +264,22 @@ namespace XenAdmin.Controls
             closeVNCForSource(source);
         }
 
-        public bool isVNCPausedForSource(VM source)
+        protected void SetErrorMessage(string message)
         {
-            Program.AssertOnEventThread();
-            VNCView vncView = null;
-            if (vncViews.ContainsKey(source))
-            {
-                vncView = vncViews[source];
-                return vncView.isPaused;
-            }
-            return false;
-        }
-
-        private void SetErrorMessage(String message)
-        {
-            this.errorLabel.Text = message;
-            this.errorLabel.Visible = true;
-            this.Controls.Add(this.errorLabel);
-            this.setCurrentSource((VM)null);
+            errorLabel.Text = message;
+            tableLayoutPanelError.Visible = true;
+            setCurrentSource((VM)null);
         }
 
         private void ClearErrorMessage()
         {
-            this.errorLabel.Text = "";
-            this.errorLabel.Visible = false;
-            this.Controls.Remove(this.errorLabel);
-        }
-
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsolePanel));
-            this.errorLabel = new System.Windows.Forms.Label();
-            this.RbacWarningPanel = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.lableRbacWarning = new System.Windows.Forms.Label();
-            this.RbacWarningPanel.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // errorLabel
-            // 
-            resources.ApplyResources(this.errorLabel, "errorLabel");
-            this.errorLabel.Name = "errorLabel";
-            // 
-            // RbacWarningPanel
-            // 
-            this.RbacWarningPanel.BackColor = System.Drawing.Color.Transparent;
-            this.RbacWarningPanel.Controls.Add(this.tableLayoutPanel3);
-            resources.ApplyResources(this.RbacWarningPanel, "RbacWarningPanel");
-            this.RbacWarningPanel.Name = "RbacWarningPanel";
-            // 
-            // tableLayoutPanel3
-            // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.pictureBox2, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lableRbacWarning, 1, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // pictureBox2
-            // 
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
-            // 
-            // lableRbacWarning
-            // 
-            resources.ApplyResources(this.lableRbacWarning, "lableRbacWarning");
-            this.lableRbacWarning.Name = "lableRbacWarning";
-            // 
-            // ConsolePanel
-            // 
-            this.Controls.Add(this.RbacWarningPanel);
-            this.Name = "ConsolePanel";
-            resources.ApplyResources(this, "$this");
-            this.RbacWarningPanel.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.ResumeLayout(false);
-
+            tableLayoutPanelError.Visible = false;
         }
 
         public void SendCAD()
         {
-            if (this.activeVNCView != null)
-                this.activeVNCView.SendCAD();
+            if (activeVNCView != null)
+                activeVNCView.SendCAD();
         }
 
         internal void SwitchIfRequired()
@@ -486,5 +355,27 @@ namespace XenAdmin.Controls
         }
 
         #endregion
+    }
+
+    internal class CvmConsolePanel : ConsolePanel
+    {
+        internal override void setCurrentSource(Host source)
+        {
+            if (source == null)
+            {
+                log.Error("No local copy of host information when connecting to host VNC console.");
+                SetErrorMessage(Messages.VNC_COULD_NOT_CONNECT_CONSOLE);
+                return;
+            }
+
+            VM cvm = source.OtherControlDomains.FirstOrDefault();
+            if (cvm == null)
+            {
+                log.Error("Could not find CVM console on host.");
+                SetErrorMessage(Messages.VNC_COULD_NOT_FIND_CONSOLES);
+            }
+            else
+                setCurrentSource(cvm);
+        }
     }
 }

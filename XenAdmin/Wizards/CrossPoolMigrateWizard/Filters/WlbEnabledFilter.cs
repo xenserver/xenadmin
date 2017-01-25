@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Core;
@@ -41,13 +42,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
     {
         private readonly List<VM> preSelectedVMs;
 
-        public WlbEnabledFilter(List<VM> preSelectedVMs) : this(null,preSelectedVMs)
-        {
-        }
-
         public WlbEnabledFilter(IXenObject item, List<VM> preSelectedVMs)
             : base(item)
         {
+            if (preSelectedVMs == null)
+                throw new ArgumentNullException("Pre-selected VMs are null");
             this.preSelectedVMs = preSelectedVMs;
         }
 

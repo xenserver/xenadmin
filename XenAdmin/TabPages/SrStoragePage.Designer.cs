@@ -21,6 +21,8 @@ namespace XenAdmin.TabPages
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SrStoragePage));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.rescanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moveVirtualDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteVirtualDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -34,17 +36,16 @@ namespace XenAdmin.TabPages
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTipContainerRescan = new XenAdmin.Controls.ToolTipContainer();
-            this.buttonRefresh = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonRescan = new System.Windows.Forms.Button();
             this.toolTipContainerMove = new XenAdmin.Controls.ToolTipContainer();
             this.buttonMove = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridViewVDIs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewVDIs = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pageContainerPanel.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.RemoveButtonContainer.SuspendLayout();
@@ -52,19 +53,21 @@ namespace XenAdmin.TabPages
             this.flowLayoutPanel1.SuspendLayout();
             this.toolTipContainerRescan.SuspendLayout();
             this.toolTipContainerMove.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVDIs)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageContainerPanel
             // 
-            this.pageContainerPanel.Controls.Add(this.panel1);
-            this.pageContainerPanel.Controls.Add(this.label1);
+            this.pageContainerPanel.Controls.Add(this.tableLayoutPanel1);
             resources.ApplyResources(this.pageContainerPanel, "pageContainerPanel");
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rescanToolStripMenuItem,
+            this.addToolStripMenuItem,
             this.moveVirtualDiskToolStripMenuItem,
             this.deleteVirtualDiskToolStripMenuItem,
             this.toolStripSeparator1,
@@ -72,6 +75,18 @@ namespace XenAdmin.TabPages
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
+            // 
+            // rescanToolStripMenuItem
+            // 
+            this.rescanToolStripMenuItem.Name = "rescanToolStripMenuItem";
+            resources.ApplyResources(this.rescanToolStripMenuItem, "rescanToolStripMenuItem");
+            this.rescanToolStripMenuItem.Click += new System.EventHandler(this.rescanToolStripMenuItem_Click);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            resources.ApplyResources(this.addToolStripMenuItem, "addToolStripMenuItem");
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // moveVirtualDiskToolStripMenuItem
             // 
@@ -83,7 +98,7 @@ namespace XenAdmin.TabPages
             // 
             this.deleteVirtualDiskToolStripMenuItem.Name = "deleteVirtualDiskToolStripMenuItem";
             resources.ApplyResources(this.deleteVirtualDiskToolStripMenuItem, "deleteVirtualDiskToolStripMenuItem");
-            this.deleteVirtualDiskToolStripMenuItem.Click += new System.EventHandler(this.removeVirtualDisk_Click);
+            this.deleteVirtualDiskToolStripMenuItem.Click += new System.EventHandler(this.deleteVirtualDiskToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -93,8 +108,8 @@ namespace XenAdmin.TabPages
             // editVirtualDiskToolStripMenuItem
             // 
             this.editVirtualDiskToolStripMenuItem.Image = global::XenAdmin.Properties.Resources.edit_16;
-            this.editVirtualDiskToolStripMenuItem.Name = "editVirtualDiskToolStripMenuItem";
             resources.ApplyResources(this.editVirtualDiskToolStripMenuItem, "editVirtualDiskToolStripMenuItem");
+            this.editVirtualDiskToolStripMenuItem.Name = "editVirtualDiskToolStripMenuItem";
             this.editVirtualDiskToolStripMenuItem.Click += new System.EventHandler(this.editVirtualDiskToolStripMenuItem_Click);
             // 
             // TitleLabel
@@ -105,8 +120,8 @@ namespace XenAdmin.TabPages
             // 
             // RemoveButtonContainer
             // 
-            resources.ApplyResources(this.RemoveButtonContainer, "RemoveButtonContainer");
             this.RemoveButtonContainer.Controls.Add(this.RemoveButton);
+            resources.ApplyResources(this.RemoveButtonContainer, "RemoveButtonContainer");
             this.RemoveButtonContainer.Name = "RemoveButtonContainer";
             // 
             // RemoveButton
@@ -145,7 +160,6 @@ namespace XenAdmin.TabPages
             // 
             this.flowLayoutPanel1.Controls.Add(this.toolTipContainerRescan);
             this.flowLayoutPanel1.Controls.Add(this.addVirtualDiskButton);
-            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.EditButtonContainer);
             this.flowLayoutPanel1.Controls.Add(this.toolTipContainerMove);
             this.flowLayoutPanel1.Controls.Add(this.RemoveButtonContainer);
@@ -154,22 +168,16 @@ namespace XenAdmin.TabPages
             // 
             // toolTipContainerRescan
             // 
-            this.toolTipContainerRescan.Controls.Add(this.buttonRefresh);
+            this.toolTipContainerRescan.Controls.Add(this.buttonRescan);
             resources.ApplyResources(this.toolTipContainerRescan, "toolTipContainerRescan");
             this.toolTipContainerRescan.Name = "toolTipContainerRescan";
             // 
-            // buttonRefresh
+            // buttonRescan
             // 
-            resources.ApplyResources(this.buttonRefresh, "buttonRefresh");
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
-            // groupBox1
-            // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            resources.ApplyResources(this.buttonRescan, "buttonRescan");
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.UseVisualStyleBackColor = true;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
             // 
             // toolTipContainerMove
             // 
@@ -184,18 +192,8 @@ namespace XenAdmin.TabPages
             this.buttonMove.UseVisualStyleBackColor = true;
             this.buttonMove.Click += new System.EventHandler(this.buttonMove_Click);
             // 
-            // panel1
-            // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.dataGridViewVDIs);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.Name = "panel1";
-            // 
             // dataGridViewVDIs
             // 
-            this.dataGridViewVDIs.AllowUserToAddRows = false;
-            this.dataGridViewVDIs.AllowUserToDeleteRows = false;
-            this.dataGridViewVDIs.AllowUserToResizeRows = false;
             this.dataGridViewVDIs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewVDIs.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewVDIs.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -207,11 +205,13 @@ namespace XenAdmin.TabPages
             this.ColumnSize,
             this.ColumnVM});
             resources.ApplyResources(this.dataGridViewVDIs, "dataGridViewVDIs");
+            this.dataGridViewVDIs.MultiSelect = true;
             this.dataGridViewVDIs.Name = "dataGridViewVDIs";
             this.dataGridViewVDIs.ReadOnly = true;
-            this.dataGridViewVDIs.RowHeadersVisible = false;
-            this.dataGridViewVDIs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewVDIs.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewVDIs_CellMouseUp);
+            this.dataGridViewVDIs.SelectionChanged += new System.EventHandler(this.dataGridViewVDIs_SelectedIndexChanged);
+            this.dataGridViewVDIs.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.DataGridViewObject_SortCompare);
+            this.dataGridViewVDIs.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridViewVDIs_KeyUp);
+            this.dataGridViewVDIs.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewVDIs_MouseUp);
             // 
             // ColumnName
             // 
@@ -248,6 +248,14 @@ namespace XenAdmin.TabPages
             this.ColumnVM.Name = "ColumnVM";
             this.ColumnVM.ReadOnly = true;
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewVDIs, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
             // SrStoragePage
             // 
             resources.ApplyResources(this, "$this");
@@ -257,15 +265,15 @@ namespace XenAdmin.TabPages
             this.Name = "SrStoragePage";
             this.Controls.SetChildIndex(this.pageContainerPanel, 0);
             this.pageContainerPanel.ResumeLayout(false);
-            this.pageContainerPanel.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.RemoveButtonContainer.ResumeLayout(false);
             this.EditButtonContainer.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.toolTipContainerRescan.ResumeLayout(false);
             this.toolTipContainerMove.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVDIs)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,20 +292,21 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Button RemoveButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Button buttonRescan;
         private XenAdmin.Controls.ToolTipContainer toolTipContainerRescan;
-        private System.Windows.Forms.GroupBox groupBox1;
         private XenAdmin.Controls.ToolTipContainer toolTipContainerMove;
         private System.Windows.Forms.Button buttonMove;
         private System.Windows.Forms.ToolStripMenuItem moveVirtualDiskToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.DataGridView dataGridViewVDIs;
+        private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewVDIs;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVolume;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVM;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem rescanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
 
     }
 }

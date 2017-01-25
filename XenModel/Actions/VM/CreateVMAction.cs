@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -57,7 +57,8 @@ namespace XenAdmin.Actions.VMActions
         private readonly VDI Cd;
         private readonly string Url;
         private readonly Host HomeServer;
-        private readonly long Vcpus;
+        private readonly long VcpusMax;
+        private readonly long VcpusAtStartup;
         private readonly long MemoryDynamicMin, MemoryDynamicMax, MemoryStaticMax;
         private readonly List<DiskDescription> Disks;
         private readonly List<VIF> Vifs;
@@ -112,7 +113,7 @@ namespace XenAdmin.Actions.VMActions
 
         public CreateVMAction(IXenConnection connection, VM template, Host copyBiosStringsFrom,
             string name, string description, InstallMethod installMethod,
-            string pvArgs, VDI cd, string url, Host homeServer, long vcpus,
+            string pvArgs, VDI cd, string url, Host homeServer, long vcpusMax, long vcpusAtStartup,
             long memoryDynamicMin, long memoryDynamicMax, long memoryStaticMax,
             List<DiskDescription> disks, SR fullCopySR, List<VIF> vifs, bool startAfter,
             Action<VM, bool> warningDialogHAInvalidConfig,
@@ -131,7 +132,8 @@ namespace XenAdmin.Actions.VMActions
             Cd = cd;
             Url = url;
             HomeServer = homeServer;
-            Vcpus = vcpus;
+            VcpusMax = vcpusMax;
+            VcpusAtStartup = vcpusAtStartup;
             MemoryDynamicMin = memoryDynamicMin;
             MemoryDynamicMax = memoryDynamicMax;
             MemoryStaticMax = memoryStaticMax;
@@ -208,6 +210,7 @@ namespace XenAdmin.Actions.VMActions
             AddDisks();
             AddNetworks();
             XenAdminConfigManager.Provider.ShowObject(VM.opaque_ref);
+            VM.IsBeingCreated = false;
             PointOfNoReturn = true;
 
             CloudCreateConfigDrive();
@@ -226,7 +229,10 @@ namespace XenAdmin.Actions.VMActions
 
         private void ApplyRecommendationsForVendorDevice()
         {
-            if (Template.HasVendorDeviceRecommendation && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
+            var pool = Helpers.GetPoolOfOne(Connection);
+            bool poolPolicyNoVendorDevice = pool == null || pool.policy_no_vendor_device;
+
+            if (Template.HasVendorDeviceRecommendation && !poolPolicyNoVendorDevice && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
             {
                 log.DebugFormat("Recommendation (has-vendor-device = true) has been found on the template ({0}) and the host is licensed, so applying it on VM ({1}) being created.", Template.opaque_ref, VM.opaque_ref);
                 VM.set_has_vendor_device(Connection.Session, VM.opaque_ref, true);
@@ -236,10 +242,13 @@ namespace XenAdmin.Actions.VMActions
                 log.DebugFormat("Recommendation (has-vendor-device = true) has not been applied on the VM ({0}) being created.", VM.opaque_ref);
 
                 if (!Template.HasVendorDeviceRecommendation)
-                    log.InfoFormat("Recommendation (has-vendor-device) is not set or false on the template ({0}).", Template.opaque_ref);
+                    log.DebugFormat("Recommendation (has-vendor-device) is not set or false on the template ({0}).", Template.opaque_ref);
+
+                if (poolPolicyNoVendorDevice)
+                    log.DebugFormat("pool.policy_no_vendor_device returned {0}", poolPolicyNoVendorDevice);
 
                 if (Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
-                    log.InfoFormat("Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice) returned {0}", Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice));
+                    log.DebugFormat("Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice) returned {0}", Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice));
             }
         }
 
@@ -284,6 +293,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void SetXenCenterProperties()
         {
+            VM.IsBeingCreated = true;
             XenAdminConfigManager.Provider.HideObject(VM.opaque_ref);
             AppliesTo.Add(VM.opaque_ref);
         }
@@ -293,7 +303,7 @@ namespace XenAdmin.Actions.VMActions
             Description = Messages.SETTING_VM_PROPERTIES;
             XenAPI.VM.set_name_label(Session, VM.opaque_ref, NameLabel);
             XenAPI.VM.set_name_description(Session, VM.opaque_ref, NameDescription);
-            ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, Vcpus);
+            ChangeVCPUSettingsAction vcpuAction = new ChangeVCPUSettingsAction(VM, VcpusMax, VcpusAtStartup);
             vcpuAction.RunExternal(Session);
 
             // set cores-per-socket
@@ -680,7 +690,7 @@ namespace XenAdmin.Actions.VMActions
         {
             get
             {
-                return string.Format("{0}{1}", Helpers.GuiTempObjectPrefix, NameLabel);
+                return Helpers.MakeHiddenName(NameLabel);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -276,13 +276,21 @@ namespace XenAdmin.SettingsPanels
         {
             // Check user has entered valid params
             if (DevicePositionChanged &&
-                vdi.type == vdi_type.system &&
-                DialogResult.Yes != new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.EDIT_SYS_DISK_WARNING, Messages.EDIT_SYS_DISK_WARNING_TITLE),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo).ShowDialog(this))
+                vdi.type == vdi_type.system)
             {
-                return null;
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.EDIT_SYS_DISK_WARNING,
+                        Messages.EDIT_SYS_DISK_WARNING_TITLE),
+                    ThreeButtonDialog.ButtonYes,
+                    ThreeButtonDialog.ButtonNo))
+                    {
+                        dialogResult = dlg.ShowDialog(this);
+                    }
+                if (DialogResult.Yes != dialogResult)
+                {
+                    return null;
+                }
             }
 
             bool diskAccessPriorityEnabled = diskAccessPriorityTrackBar.Enabled;
@@ -343,12 +351,14 @@ namespace XenAdmin.SettingsPanels
                 )
                 )
             {
-                Program.Invoke(Program.MainWindow, () => new ThreeButtonDialog(
-                                                             new ThreeButtonDialog.Details(SystemIcons.Information,
-                                                                                           Messages.
-                                                                                               DEVICE_POSITION_RESTART_REQUIRED,
-                                                                                           Messages.XENCENTER)).
-                                                             ShowDialog(Program.MainWindow));
+                Program.Invoke(Program.MainWindow, () => 
+                {
+                    using (var dlg = new ThreeButtonDialog(
+                                    new ThreeButtonDialog.Details(SystemIcons.Information, Messages.DEVICE_POSITION_RESTART_REQUIRED, Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
+                });
             }
         }
 

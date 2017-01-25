@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -72,30 +72,33 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             ApplyLicenseEditionAction action = new ApplyLicenseEditionAction(xos, _edition, _licenseServerAddress, _licenseServerPort, null);
-            ActionProgressDialog actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-
-            // close dialog even when there's an error as this action shows its own error dialog box.
-            action.Completed += s =>
-                                    {
-                                        Program.Invoke(Program.MainWindow, () =>
-                                        {
-                                            Failure f = action.Exception as Failure;
-                                            if (f != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED_FRIENDLY)
-                                                return;
-                                            actionProgress.Close();
-                                        });
-
-                                        if (action.Exception != null)
-                                        {
-                                            ShowLicensingFailureDialog(action.LicenseFailures, action.Exception.Message, Parent);
-                                        }
-                                    };
-
-            actionProgress.ShowDialog(Parent);
-
-            if (actionProgress.action.Succeeded)
+            using (var actionProgress = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
             {
-                InvokeSuccedded(null);
+                //ActionProgressDialog closureDialog = actionProgress;
+                // close dialog even when there's an error as this action shows its own error dialog box.
+                action.Completed += s =>
+                {
+                    Program.Invoke(Program.MainWindow, () =>
+                    {
+                        Failure f = action.Exception as Failure;
+                        if (f != null && f.ErrorDescription[0] == Failure.RBAC_PERMISSION_DENIED_FRIENDLY)
+                            return;
+
+                        actionProgress.Close();
+                    });
+
+                    if (action.Exception != null)
+                    {
+                        ShowLicensingFailureDialog(action.LicenseFailures, action.Exception.Message, Parent);
+                    }
+                };
+
+                actionProgress.ShowDialog(Parent);
+
+                if (actionProgress.action.Succeeded)
+                {
+                    InvokeSuccedded(null);
+                }
             }
         }
 
@@ -111,10 +114,15 @@ namespace XenAdmin.Commands
 
              if (licenseFailures.Count == 1)
              {
-                 Program.Invoke(Program.MainWindow, () => new ThreeButtonDialog(
-                                                              new ThreeButtonDialog.Details(SystemIcons.Error, licenseFailures[0].AlertText, 
-                                                                  Messages.LICENSE_ERROR_TITLE),
-                                                              ThreeButtonDialog.ButtonOK).ShowDialog(parent));
+                 Program.Invoke(Program.MainWindow, () =>
+                 {
+                     using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, licenseFailures[0].AlertText,
+                                                                Messages.LICENSE_ERROR_TITLE),
+                                                            ThreeButtonDialog.ButtonOK))
+                     {
+                         dlg.ShowDialog(parent);
+                     }
+                 });
              }
              else
              {
@@ -125,9 +133,13 @@ namespace XenAdmin.Commands
                      failureDic.Add(new SelectedItem(f.Host), f.AlertText);
                  }
 
-                 Program.Invoke(Program.MainWindow, () => new CommandErrorDialog(
-                                                              Messages.LICENSE_ERROR_TITLE, exceptionMessage, 
-                                                              failureDic).ShowDialog(parent));
+                 Program.Invoke(Program.MainWindow, () => 
+                 {
+                     using (var dlg = new CommandErrorDialog(Messages.LICENSE_ERROR_TITLE, exceptionMessage, failureDic))
+                     {
+                         dlg.ShowDialog(parent);
+                     }
+                 });
              }
         }
     }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -35,6 +35,7 @@ using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAdmin.Diagnostics.Problems.VMProblem;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
 using XenAPI;
 
 namespace XenAdmin.Diagnostics.Checks
@@ -46,10 +47,19 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (!Host.IsLive)
                 return new HostNotLiveWarning(this, Host);
+
+            // check if the pool has incompatible CPUs
+            Pool pool = Helpers.GetPoolOfOne(Host.Connection);
+            if (pool != null && PoolHasCpuIncompatibilityProblem(pool))
+            {
+                if (Host.IsMaster())
+                    return new CPUIncompatibilityProblem(this, pool);
+                return new CPUCIncompatibilityWarning(this, pool, Host);
+            }
 
             //vCPU configuration check
             foreach (var vm in Host.Connection.Cache.VMs.Where(vm => vm.is_a_real_vm))
@@ -59,6 +69,26 @@ namespace XenAdmin.Diagnostics.Checks
             }
 
             return base.RunCheck();
+        }
+
+        private bool PoolHasCpuIncompatibilityProblem(Pool pool)
+        {
+            if (pool == null)
+                return false;
+
+            if (!pool.Connection.Cache.VMs.Any(vm => vm.is_a_real_vm && vm.power_state != vm_power_state.Halted))
+                return false;
+
+            foreach (var host1 in pool.Connection.Cache.Hosts)
+            {
+                foreach (var host2 in pool.Connection.Cache.Hosts.Where(h => h.uuid != host1.uuid))
+                {
+                    if (!PoolJoinRules.CompatibleCPUs(host1, host2, false))
+                        return true;
+                }
+            }
+            return false;
+
         }
     }
 }

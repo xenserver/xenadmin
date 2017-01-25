@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -82,6 +82,11 @@ namespace XenAdmin.Wizards.ImportWizard
 			m_upDownCpuCount.Value = m_upDownCpuCount.Minimum;
 			m_upDownAddSpace.Value = m_upDownAddSpace.Minimum;
 		}
+
+        public override void SelectDefaultControl()
+        {
+            m_textBoxVMName.Select();
+        }
 
         public override bool EnableNext()
         {

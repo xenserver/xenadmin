@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -116,7 +116,7 @@ namespace XenAdmin.Commands
 
             if (newPaths.Count > 0)
             {
-                FolderAction action = new FolderAction(connection, FolderAction.Kind.New, newPaths.ToArray());
+                var action = new CreateFolderAction(connection, newPaths.ToArray());
 
                 Action<ActionBase> completed = null;
                 completed = delegate
@@ -171,7 +171,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._000_Folder_open_h32bit_16;
+                return Images.StaticImages._000_Folder_open_h32bit_16;
             }
         }
 

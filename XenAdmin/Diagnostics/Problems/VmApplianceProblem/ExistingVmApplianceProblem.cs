@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -70,11 +70,16 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
         {
             Program.AssertOnEventThread();
             string vmNames = string.Join(",", (from vm in vmsToDestroy select vm.Name).ToArray());
-            
-            if (new ThreeButtonDialog(
+
+            DialogResult dialogResult;
+            using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_VMS, vmNames, vmsToDestroy[0].Connection.Name), Messages.ACTION_SHUTDOWN_AND_DESTROY_VMS_TITLE),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo).ShowDialog() == DialogResult.Yes)
+                    ThreeButtonDialog.ButtonNo))
+            {
+                dialogResult = dlg.ShowDialog();
+            }
+            if (dialogResult == DialogResult.Yes)
             {
                 cancelled = false;
                 return new ShutdownAndDestroyVMsAction(vmsToDestroy[0].Connection, vmsToDestroy);

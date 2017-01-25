@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -404,7 +404,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
                 DesignedGraph cpudg = new DesignedGraph();
                 cpudg.DisplayName = Messages.GRAPHS_DEFAULT_NAME_CPU;
-                for (int i = 0; i < vm.VCPUs_max; i++)
+                for (int i = 0; i < vm.VCPUs_at_startup; i++)
                 {
                     AddDataSource(string.Format("vm:{0}:cpu{1}", vm.uuid, i), dsuuids, cpudg);
                 }
@@ -722,6 +722,11 @@ namespace XenAdmin.Controls.CustomDataGraph
         public void RestoreDefaultGraphs()
         {
             LoadDefaultGraphs();
+        }
+
+        public List<string> DisplayNames
+        {
+            get { return Graphs.ConvertAll(g => g.DisplayName); }
         }
 
         protected override void OnDrawToBuffer(PaintEventArgs paintEventArgs)

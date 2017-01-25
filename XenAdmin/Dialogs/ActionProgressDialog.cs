@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -77,6 +77,7 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             labelStatus.Text = text;
+            labelSubActionStatus.Visible = false;
             progressBar1.Style = ProgressBarStyle.Marquee;
             ShowIcon = false;
             HideTitleBarIcons();

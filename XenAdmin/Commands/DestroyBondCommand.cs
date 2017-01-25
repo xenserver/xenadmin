@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -92,41 +92,55 @@ namespace XenAdmin.Commands
                 Pool pool = Helpers.GetPool(network.Connection);
                 if (pool != null && pool.ha_enabled)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
                             string.Format(Messages.BOND_DELETE_HA_ENABLED, pif.Name, pool.Name),
-                            Messages.DELETE_BOND)).ShowDialog(Parent);
+                            Messages.DELETE_BOND)))
+                    {
+                        dlg.ShowDialog(Parent);
+                    }
                     return;
                 }
 
                 string message = string.Format(will_disturb_secondary ? Messages.BOND_DELETE_WILL_DISTURB_BOTH : Messages.BOND_DELETE_WILL_DISTURB_PRIMARY, msg);
-                if (DialogResult.OK !=
-                        new ThreeButtonDialog(
+
+                DialogResult result;
+                using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, message, Messages.DELETE_BOND),
                             "NetworkingConfigWarning",
                             new ThreeButtonDialog.TBDButton(Messages.BOND_DELETE_CONTINUE, DialogResult.OK),
-                            ThreeButtonDialog.ButtonCancel).ShowDialog(Parent))
+                            ThreeButtonDialog.ButtonCancel))
                 {
-                    return;
+                    result = dlg.ShowDialog(Parent);
                 }
+                if (DialogResult.OK != result)
+                    return;
             }
             else if (will_disturb_secondary)
             {
-                if (DialogResult.OK !=
-                    new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.BOND_DELETE_WILL_DISTURB_SECONDARY, msg), Messages.XENCENTER),
                         ThreeButtonDialog.ButtonOK,
-                        ThreeButtonDialog.ButtonCancel).ShowDialog(Parent))
+                        ThreeButtonDialog.ButtonCancel))
+                {
+                    dialogResult = dlg.ShowDialog(Parent);
+                }
+                if (DialogResult.OK != dialogResult)
                     return;
             }
             else
             {
-                if (DialogResult.OK !=
-                    new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.XENCENTER),
                         new ThreeButtonDialog.TBDButton(Messages.OK, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
-                        ThreeButtonDialog.ButtonCancel).ShowDialog(Program.MainWindow))
+                        ThreeButtonDialog.ButtonCancel))
+                {
+                    dialogResult = dlg.ShowDialog(Parent);
+                }
+                if (DialogResult.OK != dialogResult)
                     return;
             }
 

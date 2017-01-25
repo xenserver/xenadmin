@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
- Copyright (c) Citrix Systems Inc.
+ Copyright (c) Citrix Systems, Inc.
  All rights reserved.
  
  Redistribution and use in source and binary forms, 
@@ -37,6 +37,8 @@
     <?define ProductVersion="1.0.0" ?>
     <?define UpgradeCode="{[BRANDING_XENCENTER_UPGRADE_CODE_GUID]}"?>
     <?define ProductCode="{65AE1345-A520-456D-8A19-2F52D43D3A09}"?>
+	<?define HiddenFeatures="[BRANDING_HIDDEN_FEATURES]"?>
+	<?define AdditionalFeatures="[BRANDING_ADDITIONAL_FEATURES]"?>
     <Product Id="$(var.ProductCode)" Name="[Citrix] [XenCenter]" Language="$(env.WixLangId)" Version="$(var.ProductVersion)" Manufacturer="[BRANDING_COMPANY_NAME_LEGAL]" UpgradeCode="$(var.UpgradeCode)">
         <Package Description="[Citrix] [XenCenter]" Comments="none." InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
@@ -125,8 +127,8 @@
                                 </Extension>
                             </ProgId>
 							<!-- Define XBK extension -->
-							<ProgId Id="XenCenter.xbk" Description="[XenServer] Backup File" Icon="XkbIcon">
-                                <Extension Id="xbk" ContentType="application/xbk">
+							<ProgId Id="XenCenter.[xbk]" Description="[XenServer] Backup File" Icon="XkbIcon">
+                                <Extension Id="[xbk]" ContentType="application/[xbk]">
                                     <Verb Id="open" Command="Open" TargetFile="XenCenterEXE" Argument="restore &quot;%1&quot;" />
                                 </Extension>
                             </ProgId>
@@ -157,6 +159,7 @@
                             <File Id="hotfixSanibelToClearwaterSource" Source="..\Branding\Hotfixes\RPU001-src-pkgs.tar.gz" />
 							<?endif?>
                             <File Id="hotfixCreedence" Source="..\Branding\Hotfixes\RPU002.[xsupdate]" />
+                            <File Id="hotfixDundee" Source="..\Branding\Hotfixes\RPU003.[xsupdate]" />
                         </Component>
                         <?if "$(env.Branding)"="XenCenter"?>
 						<!-- TestResources -->
@@ -176,7 +179,6 @@
                         <Directory Id="Help" Name="Help">
                             <Component Id="HelpFiles" Guid="EA8D4F56-A94A-467c-9E6B-F3DC26F95B1E">
                                 <File Id="XenCenterCHM" Source="..\XenAdmin\bin\Release\Help\[XenCenter].chm" />
-                                <File Id="WLBCHM" Source="..\XenAdmin\bin\Release\Help\WLB.chm" />
                             </Component>
                         </Directory>
                         <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
@@ -221,7 +223,7 @@
 								  Vital="no"
 								  Name="XenServerHealthCheck"
 								  DisplayName="[Citrix] [XenServer] Health Check Service"
-								  Description="[Citrix] [XenServer] Health Check Service"
+								  Description="Enables monitoring of the health of your Citrix XenServer pools by periodically uploading data from the servers to Citrix Insight Services."
 								  Start="auto"
 								  Account="LocalSystem"
 								  ErrorControl="normal"
@@ -246,7 +248,7 @@
             <Directory Id="DesktopFolder" Name="Desktop">
                 <Component Id="ProgramFilesShortcut" Guid="63b44222-b5e8-4ab1-8f68-baed79abbf36">
                     <Condition>INSTALLSHORTCUT</Condition>
-                    <Shortcut Id="ApplicationDesktopShortcut" Name="[XenCenter]" Description="[XenCenter] Shortcut" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR"/>
+                    <Shortcut Id="ApplicationDesktopShortcut" Name="[XenCenter]" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR"/>
                     <RemoveFolder Id="DesktopFolder" On="uninstall"/>
                     <RegistryValue Root="HKCU" Key="Software\[Citrix]\[XenCenter]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
@@ -256,13 +258,18 @@
             <Component Id="RegistryEntries" Guid="[BRANDING_REGISTRY_ENTRIES_GUID]">
                 <RegistryKey Root="HKMU" Key="Software\[Citrix]\[XenCenter]">
                     <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" />
-                    <RegistryValue Type="string" Name="HiddenFeatures" Value="[BRANDING_HIDDEN_FEATURE]" />
+                    <?if "$(var.HiddenFeatures)" != ""?>
+						<RegistryValue Type="string" Name="HiddenFeatures" Value="$(var.HiddenFeatures)" />
+					<?endif?>
+                    <?if "$(var.AdditionalFeatures)" != ""?>
+						<RegistryValue Type="string" Name="AdditionalFeatures" Value="$(var.AdditionalFeatures)" />
+					<?endif?>
                 </RegistryKey>
             </Component>
         </DirectoryRef>
         <DirectoryRef Id="ApplicationProgramsFolder">
             <Component Id="ApplicationShortcut" Guid="[BRANDING_APPLICAION_SHOTCUT_GUID]">
-                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="[Citrix] [XenCenter]" Description="[XenCenter] Shortcut" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
+                <Shortcut Id="startmenuXenCenter" ShortName="XenCen50" Name="[Citrix] [XenCenter]" Target="[INSTALLDIR][XenCenter].exe" WorkingDirectory="INSTALLDIR" Icon="XenCenterICO" />
                 <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
                 <RegistryValue Root="HKCU" Key="Software\[Citrix]\[XenCenter]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
             </Component>
@@ -285,7 +292,7 @@
             <ComponentRef Id="ProgramFilesShortcut" />
   
            <?if "$(env.Branding)"="XenCenter"?>		
-				<Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="[Citrix] [XenServer] Health Check Service" Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
+				<Feature Id="HealthCheckService" Title="[Citrix] [XenServer] Health Check Service" Description="Enables monitoring of the health of your Citrix XenServer pools." Display="expand" Level="1" ConfigurableDirectory="HEALTHCHECKSERVICEDIR" AllowAdvertise="no" InstallDefault="local" Absent="allow" >
 					<ComponentRef Id="XenServerHealthCheck" /> 
 				</Feature>
 	       <?else ?>
@@ -303,8 +310,8 @@
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
-        <PropertyRef Id="NETFRAMEWORK45" />
-        <Condition Message=".NET Framework 4.5 is required for this installation."><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
+        <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />
+        <Condition Message=".NET Framework 4.6 is required for this installation."><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
         <Property Id="PERMACHINEINSTALL">
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\[Citrix]\[XenCenter]" Name="InstallDir" />
         </Property>

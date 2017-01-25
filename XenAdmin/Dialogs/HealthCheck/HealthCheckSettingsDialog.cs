@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -94,7 +94,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             Dictionary<int, string> days = new Dictionary<int, string>();
             foreach (var dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
             {
-                days.Add((int)dayOfWeek, dayOfWeek.ToString());
+                days.Add((int)dayOfWeek, HelpersGUI.DayOfWeekToString((DayOfWeek)dayOfWeek, true));
             }
             return days;
         }
@@ -408,6 +408,11 @@ namespace XenAdmin.Dialogs.HealthCheck
         private void authenticationRubricTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             Program.OpenURL(e.LinkText);
+        }
+
+        private void existingAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
         }
     }
 }

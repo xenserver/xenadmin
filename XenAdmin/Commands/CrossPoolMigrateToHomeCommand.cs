@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -38,21 +38,25 @@ using XenAPI;
 namespace XenAdmin.Commands
 {
     /// <summary>
-    /// The command for the 'Home Server' subitem which is shown when WLB isn't enabled in the submenu for start-on, resume-on or migrate.
+    /// The command for the 'Target Server' subitem which is shown when WLB isn't enabled in the submenu for start-on, resume-on or migrate.
     /// </summary>
     internal class CrossPoolMigrateToHomeCommand : CrossPoolMigrateCommand
     {
         public CrossPoolMigrateToHomeCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
             : base(mainWindow, selection, preSelectedHost)
         {
-            MenuText = Messages.HOME_SERVER_MENU_ITEM;
+        }
+
+        public override string MenuText
+        {
+            get { return Messages.HOME_SERVER_MENU_ITEM; }
         }
 
         public override Image MenuImage
         {
             get
             {
-                return Resources._000_ServerHome_h32bit_16;
+                return Images.StaticImages._000_ServerHome_h32bit_16;
             }
         }
     }

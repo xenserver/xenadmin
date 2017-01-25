@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -58,7 +58,7 @@ namespace XenAdmin.Actions
         private readonly string identityTokenDomainName = "https://cis.citrix.com";
         private readonly string uploadGrantTokenDomainName = "https://rttf.citrix.com";
         private readonly string uploadTokenDomainName = "https://rttf.citrix.com";
-        private readonly string diagnosticTokenDomainName = " https://taas.citrix.com";
+        private readonly string diagnosticTokenDomainName = " https://cis.citrix.com";
 
         private readonly string productKey = "1a2d94a4263cd016dd7a7d510bde87f058a0b75d";
 
@@ -195,7 +195,7 @@ namespace XenAdmin.Actions
             var json = new JavaScriptSerializer().Serialize(new
             {
                 agent = "XenServer",
-                max_age = 31536000  // one year
+                max_age = tokenExpiration
             });
             var urlString = string.Format("{0}{1}", diagnosticTokenDomainName, diagnosticTokenUrl);
 

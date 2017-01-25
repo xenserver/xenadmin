@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -42,7 +42,7 @@ namespace XenAdminTests.DialogTests.state1_xml
     public class OptionsDialogTest : VerticallyTabbedDialogTest<OptionsDialog>
     {
         public OptionsDialogTest()
-            : base(new string[] { "Security", "Updates", "Display", "Console", "Connection", "Save and Restore", "Plugins" })
+            : base(new[] {"Security", "Updates", "Display", "Console", "Connection", "Save and Restore", "Plugins", "Confirmations"})
         { }
 
         protected override OptionsDialog NewDialog()

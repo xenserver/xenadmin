@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -83,7 +83,19 @@ namespace XenAdmin.Commands
                 }
             }
 
-            Execute(selection[0].Connection, selection[0].HostAncestor, template);
+            var connection = selection[0].Connection;
+            Host host = null;
+
+            if (template != null)
+            {
+                host = template.Home();
+            }
+            else
+            {
+                host = selection[0].HostAncestor;
+            }
+
+            Execute(connection, host, template);
         }
 
         private void Execute(IXenConnection connection, Host DefaultAffinity, VM DefaultTemplate)
@@ -111,7 +123,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._000_CreateVM_h32bit_24;
+                return Images.StaticImages._000_CreateVM_h32bit_24;
             }
         }
 
@@ -119,7 +131,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_CreateVM_h32bit_16;
+                return Images.StaticImages._001_CreateVM_h32bit_16;
             }
         }
 

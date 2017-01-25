@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -83,6 +83,7 @@ namespace XenAPI
         public const string HOST_UNKNOWN_TO_MASTER = "HOST_UNKNOWN_TO_MASTER";
         public const string VM_HAS_VGPU = "VM_HAS_VGPU";
         public const string OUT_OF_SPACE = "OUT_OF_SPACE";
+        public const string PVS_SITE_CONTAINS_RUNNING_PROXIES = "PVS_SITE_CONTAINS_RUNNING_PROXIES";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

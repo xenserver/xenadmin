@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -38,17 +38,17 @@ namespace XenAdmin
 {
     public class OtherConfigAndTagsWatcher
     {
-        public static event EventHandler OtherConfigChanged;
-        public static event EventHandler TagsChanged;
-        public static event EventHandler GuiConfigChanged;
-        private static bool FireOtherConfigEvent = false;
-        private static bool FireTagsEvent = false;
-        private static bool FireGuiConfigEvent = false;
+        public static event Action OtherConfigChanged;
+        public static event Action TagsChanged;
+        public static event Action GuiConfigChanged;
+        private static bool FireOtherConfigEvent;
+        private static bool FireTagsEvent;
+        private static bool FireGuiConfigEvent;
 
         static OtherConfigAndTagsWatcher()
         {
             ConnectionsManager.XenConnections.CollectionChanged += XenConnections_CollectionChanged;
-            XenConnections_CollectionChanged(null, null);
+            MarkEventsReadyToFire(true);
         }
 
         public static void DeregisterEventHandlers()
@@ -77,7 +77,7 @@ namespace XenAdmin
             VDICollectionChangedWithInvoke = InvokeHelper.InvokeHandler(CollectionChanged<VDI>);
             NetworkCollectionChangedWithInvoke = InvokeHelper.InvokeHandler(CollectionChanged<XenAPI.Network>);
 
-            XenConnections_CollectionChanged(null, null);
+            MarkEventsReadyToFire(true);
         }
 
         private static CollectionChangeEventHandler PoolCollectionChangedWithInvoke;
@@ -86,50 +86,44 @@ namespace XenAdmin
         private static CollectionChangeEventHandler SRCollectionChangedWithInvoke;
         private static CollectionChangeEventHandler VDICollectionChangedWithInvoke;
         private static CollectionChangeEventHandler NetworkCollectionChangedWithInvoke;
-        
+
         private static void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            try
+            if (e == null)
+                return;
+
+            IXenConnection connection = e.Element as IXenConnection;
+            if (connection == null)
+                return;
+
+            if (e.Action == CollectionChangeAction.Add)
             {
-                IXenConnection connection = (IXenConnection)e.Element;
-                if (connection == null)
-                    return;
+                connection.Cache.RegisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
+                connection.Cache.RegisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
+                connection.Cache.RegisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
+                connection.Cache.RegisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
+                connection.Cache.RegisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
+                connection.Cache.RegisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
 
-                if (e.Action == CollectionChangeAction.Add)
-                {
-                    connection.Cache.RegisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
-                    connection.Cache.RegisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
-                    connection.Cache.RegisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
-                    connection.Cache.RegisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
-                    connection.Cache.RegisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
-                    connection.Cache.RegisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
-
-                    connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
-                    connection.XenObjectsUpdated += connection_XenObjectsUpdated;
-                    connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
-                    connection.ConnectionStateChanged += connection_ConnectionStateChanged;
-                }
-                else if (e.Action == CollectionChangeAction.Remove)
-                {
-                    connection.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
-
-                    connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
-                    connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
-                }
+                connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
+                connection.XenObjectsUpdated += connection_XenObjectsUpdated;
+                connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
+                connection.ConnectionStateChanged += connection_ConnectionStateChanged;
             }
-            catch (Exception)
+            else if (e.Action == CollectionChangeAction.Remove)
             {
-                // Can't do any more about this.
+                connection.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
+                connection.Cache.DeregisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
+
+                connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
+                connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
             }
 
-            FireOtherConfigEvent = true;
-            FireTagsEvent = true;
-            FireGuiConfigEvent = true;
+            MarkEventsReadyToFire(true);
         }
 
         private static void CollectionChanged<T>(object sender, CollectionChangeEventArgs e) where T : XenObject<T>
@@ -153,9 +147,7 @@ namespace XenAdmin
                     throw new NotImplementedException("CollectionChangeAction.Refresh is unhandled!");
             }
 
-            FireOtherConfigEvent = true;
-            FireTagsEvent = true;
-            FireGuiConfigEvent = true;
+            MarkEventsReadyToFire(true);
         }
 
         private static void PropertyChanged<T>(object sender1, PropertyChangedEventArgs e) where T : XenObject<T>
@@ -181,23 +173,26 @@ namespace XenAdmin
             if (FireGuiConfigEvent)
                 OnGuiConfigChanged();
 
-            FireOtherConfigEvent = false;
-            FireTagsEvent = false;
-            FireGuiConfigEvent = false;
+            MarkEventsReadyToFire(false);
         }
 
         private static void connection_ConnectionStateChanged(object sender, EventArgs e)
         {
-            InvokeHelper.Invoke(delegate()
+            InvokeHelper.Invoke(delegate
             {
                 OnOtherConfigChanged();
                 OnTagsChanged();
                 OnGuiConfigChanged();
 
-                FireOtherConfigEvent = false;
-                FireTagsEvent = false;
-                FireGuiConfigEvent = false;
+                MarkEventsReadyToFire(false);
             });
+        }
+
+        private static void MarkEventsReadyToFire(bool fire)
+        {
+            FireOtherConfigEvent = fire;
+            FireTagsEvent = fire;
+            FireGuiConfigEvent = fire;
         }
 
         private static void OnOtherConfigChanged()
@@ -205,7 +200,7 @@ namespace XenAdmin
             InvokeHelper.AssertOnEventThread();
 
             if (OtherConfigChanged != null)
-                OtherConfigChanged(null, new EventArgs());
+                OtherConfigChanged();
         }
 
         private static void OnTagsChanged()
@@ -213,7 +208,7 @@ namespace XenAdmin
             InvokeHelper.AssertOnEventThread();
 
             if (TagsChanged != null)
-                TagsChanged(null, new EventArgs());
+                TagsChanged();
         }
 
         private static void OnGuiConfigChanged()
@@ -221,7 +216,7 @@ namespace XenAdmin
             InvokeHelper.AssertOnEventThread();
 
             if (GuiConfigChanged != null)
-                GuiConfigChanged(null, new EventArgs());
+                GuiConfigChanged();
         }
     }
 }

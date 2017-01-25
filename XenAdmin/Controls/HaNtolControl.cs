@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -116,6 +116,7 @@ namespace XenAdmin.Controls
         [Browsable(false), ReadOnly(true)]
         public Dictionary<VM, VM.HA_Restart_Priority> Settings
         {
+            get { return settings; }
             set
             {
                 System.Diagnostics.Trace.Assert(value != null);
@@ -197,7 +198,7 @@ namespace XenAdmin.Controls
                     Session dupSess = connection.DuplicateSession(60 * 1000);
 
                     // Use a 1 minute timeout here (rather than the default 1 day)
-                    ntolMax = Pool.ha_compute_hypothetical_max_host_failures_to_tolerate(dupSess, config);
+                    ntolMax = Pool.GetMaximumTolerableHostFailures(dupSess, config);
 
                     if (exitNtolUpdateThread)
                         continue;

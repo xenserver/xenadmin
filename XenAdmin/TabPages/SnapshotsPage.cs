@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -137,7 +137,7 @@ namespace XenAdmin.TabPages
                         VM_BatchCollectionChanged);
                     m_VM.PropertyChanged += snapshot_PropertyChanged;
                     //Version setup
-                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = Registry.VMPRFeatureEnabled;
+                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection);
                     if (VM.SnapshotView != SnapshotsView.ListView)
                         TreeViewChecked();
                     else
@@ -471,7 +471,7 @@ namespace XenAdmin.TabPages
                 _name.Value = snapshot.name_label;
                 //Created On
                 Cells.Add(_creationTime);
-                _creationTime.Value = snapshot.snapshot_time.ToLocalTime() + snapshot.Connection.ServerTimeOffset;
+                _creationTime.Value = HelpersGUI.DateTimeToString(snapshot.snapshot_time.ToLocalTime() + snapshot.Connection.ServerTimeOffset, Messages.DATEFORMAT_DMY_HMS, true);
                 //Size
                 Cells.Add(_size);
                 _size.Value = GetStringSnapshotSize(snapshot);
@@ -1294,7 +1294,7 @@ namespace XenAdmin.TabPages
         }
 
 
-        private void chevronButton1_Click(object sender, EventArgs e)
+        private void chevronButton1_ButtonClick(object sender, EventArgs e)
         {
             if (contentTableLayoutPanel.ColumnStyles[1].Width == 0)
             {
@@ -1399,7 +1399,7 @@ namespace XenAdmin.TabPages
         private void chevronButton1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
-                chevronButton1_Click(sender, e);
+                chevronButton1_ButtonClick(sender, e);
         }
 
         private static void DeleteSnapshots(List<VM> snapshots)
@@ -1547,10 +1547,15 @@ namespace XenAdmin.TabPages
                 else
                     text = string.Format(Messages.ARCHIVE_SNAPSHOT_NOW_TEXT_MULTIPLE, VM.Connection.Resolve(VM.protection_policy).archive_target_config_location);
 
-                if (new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(SystemIcons.Information, text, Messages.ARCHIVE_VM_PROTECTION_TITLE),
                        ThreeButtonDialog.ButtonYes,
-                       ThreeButtonDialog.ButtonNo).ShowDialog() == DialogResult.Yes)
+                       ThreeButtonDialog.ButtonNo))
+                {
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                if (dialogResult == DialogResult.Yes)
                 {
                     foreach (var snapshot in selectedSnapshots)
                     {
@@ -1560,14 +1565,21 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                if (new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Error, Messages.POLICY_DOES_NOT_HAVE_ARCHIVE, Messages.POLICY_DOES_NOT_HAVE_ARCHIVE_TITLE),
                         ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo).ShowDialog() == DialogResult.Yes)
+                        ThreeButtonDialog.ButtonNo))
                 {
-                    var dialog = new PropertiesDialog(vmpp);
-                    dialog.SelectNewPolicyArchivePage();
-                    dialog.ShowDialog(this);
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                if (dialogResult == DialogResult.Yes)
+                {
+                    using (var dialog = new PropertiesDialog(vmpp))
+                    {
+                        dialog.SelectNewPolicyArchivePage();
+                        dialog.ShowDialog(this);
+                    }
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -312,13 +312,14 @@ namespace XenAdmin.Dialogs.VMPolicies
                 text = string.Format(numberOfProtectedVMs == 0 ? Messages.CONFIRM_DELETE_POLICIES_0 : Messages.CONFIRM_DELETE_POLICIES, numberOfProtectedVMs);
             }
 
-            if (new ThreeButtonDialog(
+            using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, text, Messages.DELETE_VM_PROTECTION_TITLE),
                     ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes)
-
-                new DestroyPolicyAction<T>(Pool.Connection, selectedPolicies).RunAsync();
-
+                    ThreeButtonDialog.ButtonNo))
+            {
+                if (dlg.ShowDialog(this) == DialogResult.Yes)
+                    new DestroyPolicyAction<T>(Pool.Connection, selectedPolicies).RunAsync();
+            }
         }
 
         private IVMPolicy currentSelected = null;

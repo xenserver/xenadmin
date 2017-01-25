@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.Text" xml:space="preserve">
-    <value> Specify a local workspace to put the downloaded files. If any of them exist they will be overwritten, therefore an empty folder is recommended.</value>
+    <value>Specify a local workspace to put the downloaded files. If any of them exist, they will be overwritten, therefore an empty folder is recommended.</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>

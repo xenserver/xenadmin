@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
         /// <param name="verify"></param>
         public ExportVmAction(IXenConnection connection, Host host,
             VM vm, string filename, bool verify)
-            : base(connection, string.Format(Messages.ACTION_EXPORT_VM_FROM_X, vm.Name, Helpers.GetName(connection)),
+            : base(connection, string.Format(Messages.EXPORT_VM_TITLE, vm.Name, Helpers.GetName(connection)),
             Messages.ACTION_EXPORT_DESCRIPTION_PREPARING)
         {
             #region RBAC Dependencies
@@ -131,7 +131,7 @@ namespace XenAdmin.Actions
                     // which probably means there was an exception in the GUI code before the
                     // action got going. Kill the task so that we don't block forever on
                     // taskThread.Join(). Brought to light by CA-11100.
-                    XenAPI.Task.destroy(this.Session, this.RelatedTask.opaque_ref);
+                    DestroyTask();
                 }
                 // Test for null: don't overwrite a previous exception
                 if (_exception == null)

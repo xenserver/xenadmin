@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -87,7 +87,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsDisabled(true));
             view.Verify(v => v.DrawAssignButtonAsDisabled(true));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
-            view.Verify(v => v.DrawActivateButtonAsHidden(false));
+            view.Verify(v => v.DrawActivateButtonAsHidden(true));
         }
 
         [Test, Category(TestCategories.SmokeTest)]
@@ -331,7 +331,7 @@ namespace XenAdminTests.LicensingTests
             view.Verify(v => v.DrawActivateButtonAsDisabled(true));
             view.Verify(v => v.DrawAssignButtonAsDisabled(true));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
-            view.Verify(v => v.DrawActivateButtonAsHidden(false));
+            view.Verify(v => v.DrawActivateButtonAsHidden(true));
         }
 
 

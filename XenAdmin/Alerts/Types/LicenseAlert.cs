@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -132,33 +132,10 @@ namespace XenAdmin.Alerts
             if (timeTillExpire.Ticks < 0)
                 return "";
             
-            if (capAtTenYears && timeTillExpire.TotalDays > 3653)
+            if (capAtTenYears && LicenseStatus.IsInfinite(timeTillExpire))
                 return Messages.UNLIMITED;
 
-            if (timeTillExpire.TotalDays > 60)
-            {
-                // Show remaining time in months
-                return string.Format(Messages.TIME_MONTHS,
-                    (long)(Math.Floor(timeTillExpire.TotalDays / 30)));
-            }
-            
-            if (timeTillExpire.TotalDays > 2)
-            {
-                // Show remaining time in days
-                return string.Format(Messages.TIME_DAYS,
-                    (long)timeTillExpire.TotalDays);
-            }
-            
-            if (timeTillExpire.TotalHours > 2)
-            {
-                // Show remaining time in hours
-                return string.Format(Messages.TIME_HOURS,
-                    (long)timeTillExpire.TotalHours);
-            }
-            
-            // Show remaining time in minutes (round up so you never get 'in 0 minutes')
-            return string.Format(Messages.TIME_MINUTES,
-                                 (long)Math.Ceiling(timeTillExpire.TotalMinutes));
+            return timeTillExpire.FuzzyTime();
         }
 
         #endregion

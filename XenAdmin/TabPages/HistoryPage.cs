@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -292,12 +292,12 @@ namespace XenAdmin.TabPages
 
             if (row.Expanded)
             {
-                row.Cells[columnExpander.Index].Value = Properties.Resources.contracted_triangle;
+                row.Cells[columnExpander.Index].Value = Images.StaticImages.contracted_triangle;
                 row.Cells[columnMessage.Index].Value = row.Action.GetTitle();
             }
             else
             {
-                row.Cells[columnExpander.Index].Value = Properties.Resources.expanded_triangle;
+                row.Cells[columnExpander.Index].Value = Images.StaticImages.expanded_triangle;
                 row.Cells[columnMessage.Index].Value = row.Action.GetDetails();
             }
             row.Expanded = !row.Expanded;
@@ -327,14 +327,29 @@ namespace XenAdmin.TabPages
 
         private void row_DismissalRequested(DataGridViewActionRow row)
         {
-            if (ConnectionsManager.History.Count > 0 &&
-                (Program.RunInAutomatedTestMode ||
-                 new ThreeButtonDialog(
-                     new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOG_DELETE),
-                     ThreeButtonDialog.ButtonYes,
-                     ThreeButtonDialog.ButtonNo).ShowDialog(this) == DialogResult.Yes))
+            if (ConnectionsManager.History.Count > 0)
             {
-                ConnectionsManager.History.Remove(row.Action);   
+                if (!Program.RunInAutomatedTestMode && !Properties.Settings.Default.DoNotConfirmDismissEvents)
+                {
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOG_DELETE),
+                        ThreeButtonDialog.ButtonYes,
+                        ThreeButtonDialog.ButtonNo)
+                    {
+                        ShowCheckbox = true,
+                        CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                    })
+                    {
+                        var result = dlg.ShowDialog(this);
+                        Properties.Settings.Default.DoNotConfirmDismissEvents = dlg.IsCheckBoxChecked;
+                        Settings.TrySaveSettings();
+
+                        if (result != DialogResult.Yes)
+                            return;
+                    }
+                }
+
+                ConnectionsManager.History.Remove(row.Action);
             }
         }
 
@@ -378,19 +393,10 @@ namespace XenAdmin.TabPages
                 return;
 
             DialogResult result = DialogResult.Yes;
+
             if (!Program.RunInAutomatedTestMode)
             {
-                if (!FilterIsOn)
-                {
-                    using (var dlog = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_NO_FILTER),
-                        new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
-                        ThreeButtonDialog.ButtonCancel))
-                    {
-                        result = dlog.ShowDialog(this);
-                    }
-                }
-                else
+                if (FilterIsOn)
                 {
                     using (var dlog = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE),
@@ -399,6 +405,22 @@ namespace XenAdmin.TabPages
                         ThreeButtonDialog.ButtonCancel))
                     {
                         result = dlog.ShowDialog(this);
+                    }
+                }
+                else if (!Properties.Settings.Default.DoNotConfirmDismissEvents)
+                {
+                    using (var dlog = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_NO_FILTER),
+                        new ThreeButtonDialog.TBDButton(Messages.DISMISS_ALL_YES_CONFIRM_BUTTON, DialogResult.Yes),
+                        ThreeButtonDialog.ButtonCancel)
+                    {
+                        ShowCheckbox = true,
+                        CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                    })
+                    {
+                        result = dlog.ShowDialog(this);
+                        Properties.Settings.Default.DoNotConfirmDismissEvents = dlog.IsCheckBoxChecked;
+                        Settings.TrySaveSettings();
                     }
                 }
 
@@ -415,14 +437,23 @@ namespace XenAdmin.TabPages
 
         private void tsmiDismissSelected_Click(object sender, EventArgs e)
         {
-            using (var dlog = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED),
-                    ThreeButtonDialog.ButtonYes,
-                    ThreeButtonDialog.ButtonNo))
+            if (!Properties.Settings.Default.DoNotConfirmDismissEvents)
             {
+                using (var dlog = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.MESSAGEBOX_LOGS_DELETE_SELECTED),
+                    ThreeButtonDialog.ButtonYes, ThreeButtonDialog.ButtonNo)
+                {
+                    ShowCheckbox = true,
+                    CheckboxCaption = Messages.DO_NOT_SHOW_THIS_MESSAGE
+                })
+                {
+                    var result = dlog.ShowDialog(this);
+                    Properties.Settings.Default.DoNotConfirmDismissEvents = dlog.IsCheckBoxChecked;
+                    Settings.TrySaveSettings();
 
-                if (dlog.ShowDialog(this) != DialogResult.Yes)
-                    return;
+                    if (result != DialogResult.Yes)
+                        return;
+                }
             }
 
             var actions = from DataGridViewActionRow row in dataGridView.SelectedRows where row != null && row.Action != null && row.Action.IsCompleted && row.Visible select row.Action;
@@ -509,12 +540,12 @@ namespace XenAdmin.TabPages
 
                 if (Expanded)
                 {
-                    expanderCell.Value = Properties.Resources.expanded_triangle;
+                    expanderCell.Value = Images.StaticImages.expanded_triangle;
                     messageCell.Value = Action.GetDetails();
                 }
                 else
                 {
-                    expanderCell.Value = Properties.Resources.contracted_triangle;
+                    expanderCell.Value = Images.StaticImages.contracted_triangle;
                     messageCell.Value = Action.GetTitle();
                 }
                 locationCell.Value = Action.GetLocation();
@@ -544,15 +575,7 @@ namespace XenAdmin.TabPages
                                 Action.GetStatusString(), messageCell.Value,
                                 locationCell.Value, dateCell.Value);
 
-                try
-                {
-                    Clipboard.SetText(text);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("Exception while trying to set clipboard text.", ex);
-                    log.Error(ex, ex);
-                }
+                Clip.SetClipboardText(text);
             }
         }
 

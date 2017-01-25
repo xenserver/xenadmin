@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -48,9 +48,12 @@ namespace XenAdmin.TabPages
         {
             get
             {
-                if (Status != null && Status.LicencedHost != null && Status.LicenseExpiresIn != null && Status.LicenseExpiresIn.TotalDays < 3653)
+                if (Status != null && Status.LicencedHost != null && Status.LicenseExpiresIn != null
+                    && !LicenseStatus.IsInfinite(Status.LicenseExpiresIn))
+                {
                     return HelpersGUI.DateTimeToString(Status.LicencedHost.LicenseExpiryUTC.ToLocalTime(),
-                                                        Messages.DATEFORMAT_DMY_LONG, true);
+                        Messages.DATEFORMAT_DMY_LONG, true);
+                }
 
                 return Messages.LICENSE_NEVER;
             }
@@ -86,13 +89,13 @@ namespace XenAdmin.TabPages
                     {
                         
                         if (s.TotalMinutes < 2)
-                            return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_ONE_MIN, s.Minutes);
+                            return Messages.LICENSE_REQUIRES_ACTIVATION_ONE_MIN;
 
                         if (s.TotalHours < 2)
-                            return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_MINUTES, s.Minutes);
+                            return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_MINUTES, Math.Floor(s.TotalMinutes));
 
                         if (s.TotalDays < 2)
-                            return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_HOURS, s.Hours);
+                            return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_HOURS, Math.Floor(s.TotalHours));
 
                         if (s.TotalDays < 30)
                             return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_DAYS, s.Days);
@@ -101,13 +104,13 @@ namespace XenAdmin.TabPages
                     }
 
                     if (s.TotalMinutes < 2)
-                        return String.Format(Messages.LICENSE_EXPIRES_ONE_MIN, s.Minutes);
+                        return Messages.LICENSE_EXPIRES_ONE_MIN;
 
                     if (s.TotalHours < 2)
-                        return String.Format(Messages.LICENSE_EXPIRES_MINUTES, s.Minutes);
+                        return String.Format(Messages.LICENSE_EXPIRES_MINUTES, Math.Floor(s.TotalMinutes));
 
                     if (s.TotalDays < 2)
-                        return String.Format(Messages.LICENSE_EXPIRES_HOURS, s.Hours);
+                        return String.Format(Messages.LICENSE_EXPIRES_HOURS, Math.Floor(s.TotalHours));
 
                     if (s.TotalDays < 30)
                         return String.Format(Messages.LICENSE_EXPIRES_DAYS, s.Days);

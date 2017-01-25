@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -116,8 +116,8 @@ namespace XenAdmin.Controls.GPU
             if (checkBox != null)
             {
                 shinyBarsContainerPanel.Controls.Add(checkBox, 0, index);
-                checkBox.Dock = DockStyle.Fill;
-                checkBox.Margin = new Padding(3, 14, 0, 0);
+                checkBox.Dock = DockStyle.Top;
+                checkBox.Margin = new Padding(6, 32, 0, 0);
                 checkBox.CheckedChanged += CheckedChanged;
                 checkBox.Checked = true;
             }

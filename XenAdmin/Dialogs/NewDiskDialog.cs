@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -79,8 +79,8 @@ namespace XenAdmin.Dialogs
             // Add events
             NameTextBox.Text = GetDefaultVDIName();
             SrListBox.srListBox.SelectedIndexChanged += new EventHandler(srListBox_SelectedIndexChanged);
-            SrListBox.ItemSelectionNotNull += new EventHandler(SrListBox_ItemSelectionNotNull);
-            SrListBox.ItemSelectionNull += new EventHandler(SrListBox_ItemSelectionNull);
+            SrListBox.ItemSelectionNotNull += SrListBox_ItemSelectionNotNull;
+            SrListBox.ItemSelectionNull += SrListBox_ItemSelectionNull;
             srListBox_SelectedIndexChanged(null, null);
 
             DiskSizeNumericUpDown.TextChanged += new EventHandler(DiskSizeNumericUpDown_TextChanged);
@@ -178,12 +178,12 @@ namespace XenAdmin.Dialogs
             return Helpers.MakeUniqueName(Messages.DEFAULT_VDI_NAME, usedNames);
         }
 
-        void SrListBox_ItemSelectionNull(object sender, EventArgs e)
+        void SrListBox_ItemSelectionNull()
         {
             SelectionNull = true;
         }
 
-        void SrListBox_ItemSelectionNotNull(object sender, EventArgs e)
+        void SrListBox_ItemSelectionNotNull()
         {
             SelectionNull = false;
         }
@@ -234,10 +234,15 @@ namespace XenAdmin.Dialogs
             XenAPI.SR sr = SrListBox.SR;
             if (!sr.shared && TheVM != null && TheVM.HaPriorityIsRestart())
             {
-                if (new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.NEW_SR_DIALOG_ATTACH_NON_SHARED_DISK_HA, Messages.XENCENTER),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(Program.MainWindow) != DialogResult.Yes)
+                                ThreeButtonDialog.ButtonNo))
+                {
+                    dialogResult = dlg.ShowDialog(Program.MainWindow);
+                }
+                if (dialogResult != DialogResult.Yes)
                     return;
                 new HAUnprotectVMAction(TheVM).RunExternal(TheVM.Connection.Session);
             }
@@ -699,13 +704,13 @@ namespace XenAdmin.Dialogs
             {
                 if (!Program.RunInAutomatedTestMode)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(SystemIcons.Information,
-                                                      Messages.
-                                                          NEWDISKWIZARD_MESSAGE,
-                                                      Messages.
-                                                          NEWDISKWIZARD_MESSAGE_TITLE))
-                        .ShowDialog(Program.MainWindow);
+                                                      Messages.NEWDISKWIZARD_MESSAGE,
+                                                      Messages.NEWDISKWIZARD_MESSAGE_TITLE)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
                 }
             });
         }

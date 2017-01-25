@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -102,7 +102,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources.edit_16;
+                return Images.StaticImages.edit_16;
             }
         }
     }
@@ -326,6 +326,23 @@ namespace XenAdmin.Commands
             using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
             {
                 dialog.SelectLogDestinationEditPage();
+                dialog.ShowDialog(Parent);
+            }
+        }
+    }
+
+    internal class VdiEditSizeLocationCommand : PropertiesCommand
+    {
+        public VdiEditSizeLocationCommand(IMainWindow mainWindow, IXenObject xenObject)
+            : base(mainWindow, xenObject)
+        {
+        }
+
+        protected override void Execute(IXenObject xenObject)
+        {
+            using (PropertiesDialog dialog = new PropertiesDialog(xenObject))
+            {
+                dialog.SelectVdiSizeLocationPage();
                 dialog.ShowDialog(Parent);
             }
         }

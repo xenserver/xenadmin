@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -89,12 +89,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             nfsVersionLabel.Visible = nfsVersionSelectorTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
         }
 
+        public override void SelectDefaultControl()
+        {
+            NfsServerPathTextBox.Select();
+        }
+
         #endregion
 
         private void UpdateButtons()
         {
             NfsScanButton.Enabled = SrWizardHelpers.ValidateNfsSharename(NfsServerPathTextBox.Text);
-            nfsVersionSelectorTableLayoutPanel.Enabled = radioButtonNfsNew.Checked;
 
             OnPageUpdated();
         }
@@ -152,9 +156,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             // Start probe
             SrProbeAction action = new SrProbeAction(Connection, master, SR.SRTypes.nfs, dconf);
-            ActionProgressDialog dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
 
             try
             {
@@ -166,6 +172,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                 if (!action.Succeeded)
                     return;
+
+                GetSupportedNfsVersionsAndSetUI(action.Result);
 
                 List<SR.SRInfo> SRs = SR.ParseSRListXML(action.Result);
                 if (SRs.Count == 0)
@@ -181,8 +189,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     listBoxNfsSRs.Items.Add(info);
 
                 listBoxNfsSRs.TryAndSelectUUID();
-
-                GetSupportedNfsVersionsAndSetUI(action.Result);
                 
                 ToggleReattachControlsEnabledState(true);
             }
@@ -262,7 +268,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     dconf[SERVERPATH] = fullpath[1];
                 }
 
-                if (nfsVersion4RadioButton.Enabled && nfsVersion4RadioButton.Checked)
+                if (nfsVersion4RadioButton.Checked)
                     dconf[NFSVERSION] = "4";
 
                 return dconf;

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -67,7 +67,7 @@ namespace XenAdminTests.TabsAndMenus
         private string[] UserTemplateTabs = new[] { "General", "Memory", "Storage", "Networking", "Search" };
         private string[] SRTabs = new[] { "General", "Storage", "Search" };
         private string[] SnapshotTabs = new[] { "General", "Memory", "Networking", "Search" };
-        private string[] VDITabs = new [] { "Search" };
+        private string[] VDITabs = new [] { "General", "Search" };
         private string[] NetworkTabs = new [] { "Search" };
         private string[] GroupingTagTabs = new[] { "Search" };
         private string[] FolderTabs = new[] { "Search" };
@@ -319,8 +319,6 @@ namespace XenAdminTests.TabsAndMenus
                                    new ExpectedTextMenuItem("&Add Server", true, false,
                                                             new ExpectedMenuItem[]
                                                                 {
-                                                                    new ExpectedTextMenuItem("(empty)", false),
-                                                                    new ExpectedSeparator(),
                                                                     new ExpectedTextMenuItem("&Add New Server...", true)
                                                                 }),
                                    new ExpectedTextMenuItem("&Disconnect", true),
@@ -588,11 +586,11 @@ namespace XenAdminTests.TabsAndMenus
             PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
-                foreach (VDI v in GetAllXenObjects<VDI>(v => v.name_label != "base copy" && !v.name_label.StartsWith("XenServer Transfer VM") && !v.is_a_snapshot))
+                var vdis = GetAllXenObjects<VDI>(v => v.name_label != "base copy" && !v.name_label.StartsWith("XenServer Transfer VM") && !v.is_a_snapshot);
+                foreach (VDI v in vdis)
                 {
-
                     VerifyContextMenu(v, new ExpectedMenuItem[] {
-                        new ExpectedTextMenuItem("&Move Virtual Disk...", v.VBDs.Count == 0), 
+                        new ExpectedTextMenuItem("&Move Virtual Disk...", true),//can migrate 
                         new ExpectedTextMenuItem("&Delete Virtual Disk", v.allowed_operations.Contains(vdi_operations.destroy)),
                         new ExpectedSeparator(),
                         new ExpectedTextMenuItem("P&roperties", true),

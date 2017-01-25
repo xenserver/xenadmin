@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -33,12 +33,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Alerts;
 
@@ -46,11 +43,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 {
     public partial class PatchingWizard_ModePage : XenTabPage
     {
+        private bool _tooltipShowing;
+
         public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
 
         public PatchingWizard_ModePage()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
         public override string Text
@@ -77,32 +76,92 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             return Messages.UPDATES_WIZARD_APPLY_UPDATE;
         }
-        
+
+        public Dictionary<string, livepatch_status> LivePatchCodesByHost
+        {
+            get;
+            set;
+        }
+
+        public Pool_update PoolUpdate
+        {
+            private get;
+            set;
+        }
+
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
 
             textBoxLog.Clear();
 
+            var unknownType = false;
+
+            var someHostMayRequireRestart = false; // If a host has restartHost guidance, even if is a live patch,  we want this true (as live patch may fail)
+
             switch (SelectedUpdateType)
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch);
-                    AutomaticRadioButton.Enabled = true;
-                    AutomaticRadioButton.Checked = true;
+                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, Patch, out someHostMayRequireRestart);
                     break;
-                case UpdateType.NewSuppPack:
+                case UpdateType.ISO:
                     AutomaticRadioButton.Enabled = true;
                     AutomaticRadioButton.Checked = true;
-                    textBoxLog.Text = PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers);
+                    textBoxLog.Text = PoolUpdate != null 
+                        ? PatchingWizardModeGuidanceBuilder.ModeRetailPatch(SelectedServers, PoolUpdate, LivePatchCodesByHost, out someHostMayRequireRestart)
+                        : PatchingWizardModeGuidanceBuilder.ModeSuppPack(SelectedServers, out someHostMayRequireRestart);
+                    break;
+                default:
+                    unknownType = true;
                     break;
             }
+            
+            var automaticDisabled = unknownType || (AnyPoolForbidsAutoRestart() && someHostMayRequireRestart);
 
-            if (SelectedUpdateType == UpdateType.NewSuppPack || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
+            AutomaticRadioButton.Enabled = !automaticDisabled;
+            AutomaticRadioButton.Checked = !automaticDisabled;
+            ManualRadioButton.Checked = automaticDisabled;
+
+            if (automaticDisabled)
+            {
+                tableLayoutPanel1.MouseMove += tableLayoutPanel1_MouseMove;
+            }
+
+            if (SelectedUpdateType == UpdateType.ISO || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
             {
                 removeUpdateFileCheckBox.Checked = false;
                 removeUpdateFileCheckBox.Visible = false;
+            }
+        }
+
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            tableLayoutPanel1.MouseMove -= tableLayoutPanel1_MouseMove;
+            base.PageLeave(direction, ref cancel);
+        }
+
+        /// <summary>
+        /// Display the tooltip over the automatic radio button only if it is disabled
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            var control = tableLayoutPanel1.GetChildAtPoint(e.Location);
+            if (control != null && !control.Enabled && control is RadioButton)
+            {
+                if (_tooltipShowing) return;
+
+                automaticRadioButtonTooltip.Show(Messages.POOL_FORBIDS_AUTOMATIC_RESTARTS,
+                    AutomaticRadioButton,
+                    e.Location.X, control.Height/2);
+                _tooltipShowing = true;
+            }
+            else
+            {
+                automaticRadioButtonTooltip.Hide(AutomaticRadioButton);
+                _tooltipShowing = false;
             }
         }
 
@@ -159,6 +218,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             UpdateEnablement();
         }
 
+        private bool AnyPoolForbidsAutoRestart()
+        {
+            foreach (var server in SelectedServers)
+            {
+                var pool = Helpers.GetPoolOfOne(server.Connection);
+                if (pool.IsAutoUpdateRestartsForbidden)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+            
         private void button1_Click(object sender, EventArgs e)
         {
             string filePath = Path.GetTempFileName();

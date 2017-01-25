@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -55,8 +55,8 @@ namespace XenAdminTests.Diagnostics
 
             //Execute the check
             var check = new HostLivenessCheck(host);
-            var problem = check.RunCheck();
-            Assert.IsNull(problem);
+            var problems = check.RunAllChecks();
+            Assert.IsEmpty(problems);
             fake.VerifyAll();
         }
 
@@ -68,8 +68,9 @@ namespace XenAdminTests.Diagnostics
 
             //Execute the check
             var check = new HostMaintenanceModeCheck(host);
-            var problem = check.RunCheck();
-            Assert.AreEqual(typeof(HostMaintenanceMode),problem.GetType());
+            var problems = check.RunAllChecks();
+            Assert.IsNotEmpty(problems);
+            Assert.AreEqual(typeof(HostMaintenanceMode), problems[0].GetType());
             fake.VerifyAll();
         }
 
@@ -81,8 +82,9 @@ namespace XenAdminTests.Diagnostics
 
             //Execute the check
             var check = new HostMaintenanceModeCheck(host);
-            var problem = check.RunCheck();
-            Assert.AreEqual(typeof(HostMaintenanceMode), problem.GetType());
+            var problems = check.RunAllChecks();
+            Assert.IsNotEmpty(problems);
+            Assert.AreEqual(typeof(HostMaintenanceMode), problems[0].GetType());
             mock.VerifyAll();
         }
 
@@ -94,8 +96,9 @@ namespace XenAdminTests.Diagnostics
 
             //Execute the check
             var check = new HostLivenessCheck(host);
-            var problem = check.RunCheck();
-            Assert.AreEqual(typeof(HostNotLive), problem.GetType());
+            var problems = check.RunAllChecks();
+            Assert.IsNotEmpty(problems);
+            Assert.AreEqual(typeof(HostNotLive), problems[0].GetType());
             mock.VerifyAll();
         }
         #endregion
@@ -109,8 +112,8 @@ namespace XenAdminTests.Diagnostics
 
             //Execute the check
             var check = new HAOffCheck(host);
-            var problem = check.RunCheck();
-            Assert.IsNull(problem);
+            var problems = check.RunAllChecks();
+            Assert.IsEmpty(problems);
         }
 
         [Test]
@@ -119,8 +122,8 @@ namespace XenAdminTests.Diagnostics
             var host = GetHostLiveness(GetMockConnectionWithCache(), true, false, true);
             //Execute the check
             var check = new HAOffCheck(host);
-            var problem = check.RunCheck();
-            Assert.IsNull(problem);
+            var problems = check.RunAllChecks();
+            Assert.IsEmpty(problems);
         }
 
         [Test]
@@ -130,9 +133,9 @@ namespace XenAdminTests.Diagnostics
 
             //Execute the check
             var check = new HAOffCheck(host);
-            var problem = check.RunCheck();
-            Assert.IsNotNull(problem);
-            Assert.AreEqual(typeof(HAEnabledProblem), problem.GetType());
+            var problems = check.RunAllChecks();
+            Assert.IsNotEmpty(problems);
+            Assert.AreEqual(typeof(HAEnabledProblem), problems[0].GetType());
         }
 
         #endregion
@@ -146,8 +149,8 @@ namespace XenAdminTests.Diagnostics
             var host = GetHostLiveness(mockConnection, true, false, true);
             //Execute the check
             var check = new PBDsPluggedCheck(host);
-            var problem = check.RunCheck();
-            Assert.IsNull(problem);
+            var problems = check.RunAllChecks();
+            Assert.IsEmpty(problems);
         }
 
         [Test]
@@ -162,8 +165,8 @@ namespace XenAdminTests.Diagnostics
             host.Connection.Cache.UpdateFrom(host.Connection, listofchanges);
             //Execute the check
             var check = new PBDsPluggedCheck(host);
-            var problem = check.RunCheck();
-            Assert.IsNull(problem);
+            var problems = check.RunAllChecks();
+            Assert.IsEmpty(problems);
         }
 
         #endregion

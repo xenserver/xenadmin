@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -109,22 +109,16 @@ namespace XenAdmin.Commands
                 }
 
                 AddHostToPoolCommand cmd = new AddHostToPoolCommand(Command.MainWindowCommandInterface, new Host[] { host }, Helpers.GetPool(connection), true);
-                CommandToolStripMenuItem hostMenuItem = new CommandToolStripMenuItem(cmd, hostName.EscapeAmpersands(), Resources._000_TreeConnected_h32bit_16);
+                CommandToolStripMenuItem hostMenuItem = new CommandToolStripMenuItem(cmd, hostName.EscapeAmpersands(), Images.StaticImages._000_TreeConnected_h32bit_16);
 
                 base.DropDownItems.Add(hostMenuItem);
             }
             
-            if (base.DropDownItems.Count <= 0)
-            {
-                ToolStripMenuItem hostMenuItem = new ToolStripMenuItem(Messages.HOST_MENU_EMPTY);
-                hostMenuItem.Enabled = false;
-                hostMenuItem.Font = Program.DefaultFont;
-                base.DropDownItems.Add(hostMenuItem);
-            }
-
             if (Helpers.GetPool(connection) != null)
             {
-                base.DropDownItems.Add(new ToolStripSeparator());
+                if (base.DropDownItems.Count > 0)
+                    base.DropDownItems.Add(new ToolStripSeparator());
+
                 // Add a final option for connecting a new server and adding it to the pool in one action
                 AddNewHostToPoolCommand cmd = new AddNewHostToPoolCommand(Command.MainWindowCommandInterface, Helpers.GetPool(connection));
                 CommandToolStripMenuItem connectAndAddToPoolMenuItem = new CommandToolStripMenuItem(cmd);

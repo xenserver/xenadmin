@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -101,6 +101,12 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             base.PageLeave(direction, ref cancel);
         }
 
+        public override void SelectDefaultControl()
+        {
+            if (string.IsNullOrEmpty(m_textBoxLocation.Text))
+                m_textBoxLocation.Select();
+        }
+
         public string OutputFile
         {
             get
@@ -198,7 +204,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 Registry.HealthCheckUploadTokenDomainName, Registry.HealthCheckDiagnosticDomainName, Registry.HealthCheckProductKey, 
                 TokenExpiration, false);
 
-            new ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog(Parent);
+            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Blocks))
+                dlg.ShowDialog(Parent);
 
             if (!action.Succeeded)
             {
@@ -240,7 +247,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            using (FolderBrowserDialog dlog = new FolderBrowserDialog {SelectedPath = m_textBoxLocation.Text})
+            using (FolderBrowserDialog dlog = new FolderBrowserDialog {SelectedPath = m_textBoxLocation.Text, Description = Messages.FOLDER_BROWSER_BUG_TOOL})
             {
                 if (dlog.ShowDialog() == DialogResult.OK)
                     m_textBoxLocation.Text = dlog.SelectedPath;

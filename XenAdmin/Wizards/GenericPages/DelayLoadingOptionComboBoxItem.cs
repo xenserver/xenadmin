@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using XenAdmin.Controls;
 using XenAPI;
@@ -41,7 +42,7 @@ namespace XenAdmin.Wizards.GenericPages
         IXenObject Item { get; }
     }
 
-    public abstract class DelayLoadingOptionComboBoxItem : IEnableableXenObjectComboBoxItem
+    public class DelayLoadingOptionComboBoxItem : IEnableableXenObjectComboBoxItem
     {
         public delegate void ReasonUpdatedEventHandler(object sender, EventArgs args);
         /// <summary>
@@ -52,14 +53,16 @@ namespace XenAdmin.Wizards.GenericPages
         private IXenObject xenObject;
         private const int defaultRetries = 10;
         private const int defaultTimeOut = 200;
+        private readonly List<ReasoningFilter> _filters;
 
         /// <summary>
         /// Creates a new class instance and starts a thread to load data
         /// </summary>
         /// <param name="xenObject"></param>
-        protected DelayLoadingOptionComboBoxItem(IXenObject xenObject)
+        public DelayLoadingOptionComboBoxItem(IXenObject xenObject, List<ReasoningFilter> filters)
         {
             this.xenObject = xenObject;
+            _filters = filters;
         }
 
         public void CopyFrom(DelayLoadingOptionComboBoxItem toCopy)
@@ -126,19 +129,16 @@ namespace XenAdmin.Wizards.GenericPages
                 }
                 catch
                 {
-                    if(retries <=0 )
+                    if (retries <= 0)
                     {
                         FailureReason = Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN;
                         return;
                     }
-                        
                     Thread.Sleep(timeOut);
                 }
-                
             } while (retries-- > 0);
 
             FailureReason = threadFailureReason;
-
         }
 
         /// <summary>
@@ -157,10 +157,10 @@ namespace XenAdmin.Wizards.GenericPages
         /// Setter will trigger reason updated event
         /// If no failure result is found on setting set the enabled
         /// </summary>
-        public string FailureReason
+        private string FailureReason
         {
             get { return failureReason; }
-            protected set
+            set
             {
                 if (failureReason == value)
                     return;
@@ -190,6 +190,17 @@ namespace XenAdmin.Wizards.GenericPages
         /// Returning String.Empty or null will mean no failure has been found
         /// </summary>
         /// <returns></returns>
-        protected abstract string FetchFailureReason();
+        protected virtual string FetchFailureReason()
+        {
+            foreach (ReasoningFilter filter in _filters)
+            {
+                if (filter.FailureFoundFor(Item))
+                {
+                    return filter.Reason;
+                }
+            }
+
+            return string.Empty;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -587,7 +587,7 @@ namespace XenAdmin.ConsoleView
                 {
                     if (Clipboard.ContainsText() && Clipboard.GetText() == text)
                         return;
-                    Clipboard.SetText(text);
+                    Clip.SetClipboardText(text);
                 });
             }
         }
@@ -880,15 +880,7 @@ namespace XenAdmin.ConsoleView
             Program.AssertOnEventThread();
             if (clipboardStash != "")
             {
-                try
-                {
-                    Clipboard.SetText(clipboardStash);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Clipboard.SetText failed");
-                    Log.Error(ex, ex);
-                }
+                Clip.SetClipboardText(clipboardStash);
             }
         }
 

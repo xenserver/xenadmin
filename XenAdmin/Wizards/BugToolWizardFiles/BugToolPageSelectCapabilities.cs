@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -242,11 +242,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
             if (combination == null || combination.Count <= 0)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         Messages.SERVER_STATUS_REPORT_CAPABILITIES_FAILED,
-                        Messages.SERVER_STATUS_REPORT)).ShowDialog(this);
+                        Messages.SERVER_STATUS_REPORT)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 cancelled = true;
                 return;
@@ -435,11 +438,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
             catch
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        Messages.HOMEPAGE_ERROR_MESSAGE,
-                       Messages.XENCENTER)).ShowDialog(this);
+                       Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
             }
         }
 

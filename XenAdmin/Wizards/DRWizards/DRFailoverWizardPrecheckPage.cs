@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -227,10 +227,12 @@ namespace XenAdmin.Wizards.DRWizards
 
         private DataGridViewRow ExecuteCheck(Check check)
         {
-            Problem problem = check.RunCheck();
-            if (problem != null)
+            var problems = check.RunAllChecks();
+            if (problems.Count != 0)
             {
-                return new PreCheckItemRow(problem);
+                // None of the checks used in the DR wizard returns more than one problem, so we just take the first.
+                // (Even if they did, we would only suffer the usability problem described in CA-77990).
+                return new PreCheckItemRow(problems[0]);
             } 
             return new PreCheckItemRow(check);
         }
@@ -617,8 +619,8 @@ namespace XenAdmin.Wizards.DRWizards
             private void UpdateRowFields()
             {
                 _iconCell.Value = Problem == null
-                    ? Resources._000_Tick_h32bit_16
-                    : Problem is Warning ? Resources._000_Alert2_h32bit_16 : Resources._000_Abort_h32bit_16;
+                    ? Images.GetImage16For(Icons.Ok)
+                    : Problem.Image;
 
                 if (Problem != null)
                     _descriptionCell.Value = String.Format(Messages.DR_WIZARD_PRECHECKPAGE_PROBLEM, _check.Description, Problem.Description);

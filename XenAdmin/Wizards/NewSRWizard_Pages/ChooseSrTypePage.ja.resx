@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -112,25 +112,28 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="radioButtonNfs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="radioButtonNfs.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="radioButtonNfs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="radioButtonNfs.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 29</value>
+  </data>
+  <data name="radioButtonNfs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
   </data>
   <data name="radioButtonNfs.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 22</value>
@@ -139,19 +142,19 @@
     <value>11</value>
   </data>
   <data name="radioButtonNfs.Text" xml:space="preserve">
-    <value>NFS VHD(&amp;V)</value>
+    <value>NFS(&amp;F)</value>
   </data>
   <data name="&gt;&gt;radioButtonNfs.Name" xml:space="preserve">
     <value>radioButtonNfs</value>
   </data>
   <data name="&gt;&gt;radioButtonNfs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonNfs.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonNfs.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="radioButtonIscsi.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -165,6 +168,9 @@
   <data name="radioButtonIscsi.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 53</value>
   </data>
+  <data name="radioButtonIscsi.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
+  </data>
   <data name="radioButtonIscsi.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 22</value>
   </data>
@@ -172,19 +178,19 @@
     <value>12</value>
   </data>
   <data name="radioButtonIscsi.Text" xml:space="preserve">
-    <value>ソフトウェア iSCSI(&amp;S)</value>
+    <value>iSCSI(&amp;S)</value>
   </data>
   <data name="&gt;&gt;radioButtonIscsi.Name" xml:space="preserve">
     <value>radioButtonIscsi</value>
   </data>
   <data name="&gt;&gt;radioButtonIscsi.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonIscsi.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonIscsi.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="radioButtonNfsIso.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -196,13 +202,16 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonNfsIso.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 183</value>
+    <value>6, 247</value>
+  </data>
+  <data name="radioButtonNfsIso.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
   </data>
   <data name="radioButtonNfsIso.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 22</value>
   </data>
   <data name="radioButtonNfsIso.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="radioButtonNfsIso.Text" xml:space="preserve">
     <value>NFS ISO(&amp;I)</value>
@@ -211,13 +220,13 @@
     <value>radioButtonNfsIso</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsIso.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsIso.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonNfsIso.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="radioButtonCifsIso.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -231,26 +240,29 @@
   <data name="radioButtonCifsIso.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 159</value>
   </data>
+  <data name="radioButtonCifsIso.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
+  </data>
   <data name="radioButtonCifsIso.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
   </data>
   <data name="radioButtonCifsIso.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="radioButtonCifsIso.Text" xml:space="preserve">
-    <value>Windows ファイル共有 (CIFS)(&amp;C)</value>
+    <value>Windows ファイル共有 (SMB/CIFS)(&amp;W)</value>
   </data>
   <data name="&gt;&gt;radioButtonCifsIso.Name" xml:space="preserve">
     <value>radioButtonCifsIso</value>
   </data>
   <data name="&gt;&gt;radioButtonCifsIso.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonCifsIso.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonCifsIso.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="radioButtonFibreChannel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -264,11 +276,14 @@
   <data name="radioButtonFibreChannel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 78</value>
   </data>
+  <data name="radioButtonFibreChannel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
+  </data>
   <data name="radioButtonFibreChannel.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 22</value>
   </data>
   <data name="radioButtonFibreChannel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>13</value>
   </data>
   <data name="radioButtonFibreChannel.Text" xml:space="preserve">
     <value>ハードウェア HBA(&amp;H)</value>
@@ -277,13 +292,13 @@
     <value>radioButtonFibreChannel</value>
   </data>
   <data name="&gt;&gt;radioButtonFibreChannel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonFibreChannel.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonFibreChannel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="radioButtonCslg.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -297,11 +312,14 @@
   <data name="radioButtonCslg.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 103</value>
   </data>
+  <data name="radioButtonCslg.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
+  </data>
   <data name="radioButtonCslg.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 22</value>
   </data>
   <data name="radioButtonCslg.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>16</value>
   </data>
   <data name="radioButtonCslg.Text" xml:space="preserve">
     <value>StorageLink テクノロジ(&amp;T)</value>
@@ -310,13 +328,13 @@
     <value>radioButtonCslg</value>
   </data>
   <data name="&gt;&gt;radioButtonCslg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonCslg.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;radioButtonCslg.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="labelISOlibrary.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -346,13 +364,13 @@
     <value>labelISOlibrary</value>
   </data>
   <data name="&gt;&gt;labelISOlibrary.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelISOlibrary.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;labelISOlibrary.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="labelVirtualDiskStorage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -382,13 +400,13 @@
     <value>labelVirtualDiskStorage</value>
   </data>
   <data name="&gt;&gt;labelVirtualDiskStorage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelVirtualDiskStorage.Parent" xml:space="preserve">
-    <value>panel1</value>
+    <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;labelVirtualDiskStorage.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="upsellPage1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -399,21 +417,21 @@
   <data name="upsellPage1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="upsellPage1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data mimetype="application/x-microsoft.net.object.bytearray.base64" name="upsellPage1.Image" type="System.Drawing.Bitmap, System.Drawing">
     <value>
-        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
+        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
 </value>
   </data>
   <data name="upsellPage1.Location" type="System.Drawing.Point, System.Drawing">
@@ -440,149 +458,8 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="verticalDividerLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 0</value>
-  </data>
-  <data name="verticalDividerLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>2, 224</value>
-  </data>
-  <data name="verticalDividerLine.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="verticalDividerLine.Text" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;verticalDividerLine.Name" xml:space="preserve">
-    <value>verticalDividerLine</value>
-  </data>
-  <data name="&gt;&gt;verticalDividerLine.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;verticalDividerLine.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;verticalDividerLine.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 224</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;SRBlurb.Name" xml:space="preserve">
-    <value>SRBlurb</value>
-  </data>
-  <data name="&gt;&gt;SRBlurb.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;SRBlurb.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;SRBlurb.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
-    <value>deprecationBanner</value>
-  </data>
-  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;selectedStoreTypeLabel.Name" xml:space="preserve">
-    <value>selectedStoreTypeLabel</value>
-  </data>
-  <data name="&gt;&gt;selectedStoreTypeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;selectedStoreTypeLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;selectedStoreTypeLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 3</value>
-  </data>
-  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 330</value>
-  </data>
-  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="upsellPage1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SRBlurb" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deprecationBanner" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="selectedStoreTypeLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,30,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 336</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="SRBlurb.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -681,7 +558,7 @@
     <value>selectedStoreTypeLabel</value>
   </data>
   <data name="&gt;&gt;selectedStoreTypeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;selectedStoreTypeLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
@@ -689,7 +566,169 @@
   <data name="&gt;&gt;selectedStoreTypeLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>219, 3</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 330</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="upsellPage1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="SRBlurb" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="deprecationBanner" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="selectedStoreTypeLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="radioButtonFcoe.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButtonFcoe.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="radioButtonFcoe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButtonFcoe.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 131</value>
+  </data>
+  <data name="radioButtonFcoe.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
+  </data>
+  <data name="radioButtonFcoe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 19</value>
+  </data>
+  <data name="radioButtonFcoe.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="radioButtonFcoe.Text" xml:space="preserve">
+    <value>ソフトウェア FCoE(&amp;E)</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFcoe.Name" xml:space="preserve">
+    <value>radioButtonFcoe</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFcoe.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFcoe.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;radioButtonFcoe.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="radioButtonCifs.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButtonCifs.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="radioButtonCifs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButtonCifs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 106</value>
+  </data>
+  <data name="radioButtonCifs.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
+  </data>
+  <data name="radioButtonCifs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 19</value>
+  </data>
+  <data name="radioButtonCifs.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="radioButtonCifs.Text" xml:space="preserve">
+    <value>SMB/CIFS(&amp;M)</value>
+  </data>
+  <data name="&gt;&gt;radioButtonCifs.Name" xml:space="preserve">
+    <value>radioButtonCifs</value>
+  </data>
+  <data name="&gt;&gt;radioButtonCifs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButtonCifs.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;radioButtonCifs.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 302</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="radioButtonFcoe" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonCifs" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonCslg" Row="6" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelVirtualDiskStorage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonNfs" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonFibreChannel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonIscsi" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelISOlibrary" Row="7" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonCifsIso" Row="8" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="radioButtonNfsIso" Row="9" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>540, 336</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="tableLayoutPanel2" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="tableLayoutPanel3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">

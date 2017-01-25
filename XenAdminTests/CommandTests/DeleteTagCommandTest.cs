@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -122,7 +122,7 @@ namespace XenAdminTests.CommandTests
 
             var rootNode = GetAllTreeNodes().Find(n => n.Parent == null);
 
-            yield return new SelectedItemCollection(new[] { new SelectedItem(gt, rootNode) });
+            yield return new SelectedItemCollection(new SelectedItem(gt, rootNode));
         }
     }
 }

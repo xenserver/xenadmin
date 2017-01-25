@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -47,28 +47,14 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (!Host.IsLive)
                 return new HostNotLiveWarning(this, Host);
 
-            if (Helpers.CreedenceOrGreater(Host) && !Helpers.DundeeOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).ShouldBeAppliedTo(Host))
-            {
+            var hotfix = hotfixFactory.Hotfix(Host);
+            if (hotfix != null && hotfix.ShouldBeAppliedTo(Host))
                 return new HostDoesNotHaveHotfix(this, Host);
-            }
-
-            if (Helpers.SanibelOrGreater(Host) && !Helpers.CreedenceOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).ShouldBeAppliedTo(Host))
-            {
-                return new HostDoesNotHaveHotfix(this, Host);
-            }
-
-            if (!Helpers.SanibelOrGreater(Host)
-                && hotfixFactory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).ShouldBeAppliedTo(Host))
-            {
-                return new HostDoesNotHaveHotfix(this, Host);
-            }
 
             return null;
         }

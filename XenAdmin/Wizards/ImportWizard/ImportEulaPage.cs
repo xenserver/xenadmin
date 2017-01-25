@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -128,6 +128,11 @@ namespace XenAdmin.Wizards.ImportWizard
 				m_tabControlEULA.TabPages.Add(tp);
 			}
 		}
+
+        public override void SelectDefaultControl()
+        {
+            m_tabControlEULA.Select();
+        }
 
         public override bool EnableNext()
         {

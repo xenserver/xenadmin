@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -95,7 +95,7 @@ namespace XenAdmin.Model
         public const string REPORT_ANALYSIS_UPLOAD_TIME = "ReportAnalysis.UploadTime";
 
 
-        private const string REPORT_LINK_DOMAIN_NAME = " https://taas.citrix.com";
+        private const string REPORT_LINK_DOMAIN_NAME = "https://cis.citrix.com";
         private const string REPORT_LINK_PATH = "AutoSupport/analysis/upload_overview";
 
         public HealthCheckSettings(Dictionary<string, string> config)

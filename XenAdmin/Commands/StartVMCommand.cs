@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -101,11 +101,15 @@ namespace XenAdmin.Commands
             }
             if (brokenCDs.Count > 0)
             {
-                DialogResult d = new ThreeButtonDialog(
+                DialogResult d;
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(null, Messages.EJECT_BEFORE_VM_START_MESSAGE_BOX, vms.Count > 1 ? Messages.STARTING_VMS_MESSAGEBOX_TITLE : Messages.STARTING_VM_MESSAGEBOX_TITLE), 
                     new ThreeButtonDialog.TBDButton(Messages.EJECT_BUTTON_LABEL, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true), 
                     new ThreeButtonDialog.TBDButton(Messages.IGNORE_BUTTON_LABEL, DialogResult.Ignore), 
-                    ThreeButtonDialog.ButtonCancel).ShowDialog(MainWindowCommandInterface.Form);
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    d = dlg.ShowDialog(MainWindowCommandInterface.Form);
+                }
                 if (d == DialogResult.Cancel)
                     return;
                 if (d == DialogResult.Ignore)
@@ -144,7 +148,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_PowerOn_h32bit_24;
+                return Images.StaticImages._001_PowerOn_h32bit_24;
             }
         }
 
@@ -160,7 +164,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_PowerOn_h32bit_16;
+                return Images.StaticImages._001_PowerOn_h32bit_16;
             }
         }
 

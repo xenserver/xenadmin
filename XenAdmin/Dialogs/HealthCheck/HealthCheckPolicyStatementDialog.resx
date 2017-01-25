@@ -129,7 +129,7 @@
     <value>NoControl</value>
   </data>
   <data name="OKButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 94</value>
+    <value>353, 127</value>
   </data>
   <data name="OKButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 23</value>
@@ -166,13 +166,13 @@
     <value>None</value>
   </data>
   <data name="policyStatementTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 80</value>
+    <value>424, 113</value>
   </data>
   <data name="policyStatementTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="policyStatementTextBox.Text" xml:space="preserve">
-    <value>The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at https://taas.citrix.com/legal/ and [Citrix] Privacy Policy at http://www.citrix.com/about/legal/privacy.html.</value>
+    <value>The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at https://cis.citrix.com/legal/ and [Citrix] Privacy Policy at http://www.citrix.com/about/legal/privacy.html.</value>
   </data>
   <data name="&gt;&gt;policyStatementTextBox.Name" xml:space="preserve">
     <value>policyStatementTextBox</value>
@@ -193,7 +193,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>444, 129</value>
+    <value>444, 162</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

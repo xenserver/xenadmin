@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -921,6 +921,10 @@ namespace XenAdmin.Network
                 {
                     return string.Format(Messages.CONNECT_NO_XAPI_FAILURE, this.Hostname);
                 }
+                else if (w.Status == WebExceptionStatus.SecureChannelFailure)
+                {
+                    return string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, this.Hostname);
+                }
                 else
                 {
                     return w.Message;
@@ -1532,13 +1536,17 @@ namespace XenAdmin.Network
                                 }
                                 MaybeStartNextSlaveTimer(reason, error);
                             }
-                            else
+                            else if (LastMasterHostname != "")
                             {
                                 log.DebugFormat("Stopping search for new master for {0}: timeout reached without success. Trying the old master one last time",
                                                 LastConnectionFullName);
                                 FindingNewMaster = false;
                                 Hostname = LastMasterHostname;
                                 ReconnectMaster();
+                            }
+                            else
+                            {
+                                OnConnectionResult(false, reason, error);
                             }
                         }
                     }
@@ -1924,10 +1932,7 @@ namespace XenAdmin.Network
         public List<VDI> ResolveAllShownXenModelObjects(List<XenRef<VDI>> xenRefs, bool showHiddenObjects)
         {
             List<VDI> result = ResolveAll(xenRefs);
-            result.RemoveAll(delegate(VDI vdi)
-                                 {
-                                     return !vdi.Show(showHiddenObjects);
-                                 });
+            result.RemoveAll(vdi => !vdi.Show(showHiddenObjects));
             return result;
         }
 

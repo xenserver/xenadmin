@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Network;
 using XenAPI;
-
+using System.Linq;
 
 namespace XenAdmin.Core
 {
@@ -65,6 +65,7 @@ namespace XenAdmin.Core
             DifferentCPUs,
             DifferentNetworkBackends,
             MasterHasHA,
+            NotPhysicalPif,
             WrongRoleOnMaster,
             WrongRoleOnSlave,
             NotConnected,
@@ -151,6 +152,9 @@ namespace XenAdmin.Core
             if (HaEnabled(masterConnection))
                 return Reason.MasterHasHA;
 
+            if (HasSlaveAnyNonPhysicalPif(slaveConnection))
+                return Reason.NotPhysicalPif;
+
             return Reason.Allowed;
         }
 
@@ -200,6 +204,8 @@ namespace XenAdmin.Core
                     return Messages.DISCONNECTED;
                 case Reason.MasterHasHA:
                     return Messages.POOL_JOIN_FORBIDDEN_BY_HA;
+                case Reason.NotPhysicalPif :
+                    return Messages.POOL_JOIN_NOT_PHYSICAL_PIF;
                 case Reason.WrongRoleOnMaster:
                     return Messages.NEWPOOL_MASTER_ROLE;
                 case Reason.WrongRoleOnSlave:
@@ -270,8 +276,8 @@ namespace XenAdmin.Core
                 if (slave_cpu_info["vendor"] != master_cpu_info["vendor"])
                     return false;
 
-                // No feature checks are needed for Dundee or greater hosts
-                if (Helpers.DundeeOrGreater(master))
+                // As of Dundee, feature levelling makes all CPUs from the same vendor compatible
+                if (Helpers.DundeeOrGreater(master) || Helpers.DundeeOrGreater(slave))
                     return true;
 
                 if (slave_cpu_info["features"] == master_cpu_info["features"])
@@ -604,6 +610,12 @@ namespace XenAdmin.Core
                     return true;
             }
             return false;
+        }
+
+        public static bool HasSlaveAnyNonPhysicalPif(IXenConnection slaveConnection)
+        {
+            return
+                slaveConnection.Cache.PIFs.Any(p => !p.physical);
         }
     }
 }

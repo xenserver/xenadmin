@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -36,7 +36,9 @@ using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Properties;
 using System.Drawing;
-using System.Collections.ObjectModel;
+using System.Linq;
+using XenAdmin.Core;
+using XenAPI;
 
 
 namespace XenAdmin.Commands
@@ -66,21 +68,14 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
-            {
-                if (xenConnection.IsConnected)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return ConnectionsManager.XenConnectionsCopy.Any(xenConnection => xenConnection.IsConnected);
         }
 
         public override Image ContextMenuImage
         {
             get
             {
-                return Resources._000_HostUnpatched_h32bit_16;
+                return Images.StaticImages._000_HostUnpatched_h32bit_16;
             }
         }
 

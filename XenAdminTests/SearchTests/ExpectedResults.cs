@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -73,7 +73,6 @@ namespace XenAdminTests.SearchTests
                 
         }
 
-        [Ignore]
         public void RunTest()
         {
             Assert.AreEqual(Search.Searches.Length, expectedResults.Count, "Wrong number of searches in results file " + resultsFileName);

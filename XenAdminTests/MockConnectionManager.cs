@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -66,7 +66,6 @@ namespace XenAdminTests
 
         private const string defaultUserName = "Default User Name";
         private const string defaultPassword = "Default Password";
-        private const string dummyOpaqueRef = "mockOpaqueRef";
 
         public Mock<IXenAdminConfigProvider> MockConfigProvider{ get { return config; } }
 
@@ -239,7 +238,7 @@ namespace XenAdminTests
                 throw new KeyNotFoundException("Connection id missing: " + connectionId);
 
             mock.Object.Connection = connections[connectionId].Object;
-            mock.Object.opaque_ref = dummyOpaqueRef;
+            mock.Object.opaque_ref = string.Format("OpaqueRef:{0}", DateTime.UtcNow.Ticks);
             xenObjects[connectionId].Add(mock);
             if(refreshCache)
                 RefreshCache(connectionId);

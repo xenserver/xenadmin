@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -41,7 +41,7 @@ namespace XenAdmin.Dialogs
         public RevertDialog(VM vm,string snapshotName)
         {
             InitializeComponent();
-            this.questionLabel.Text = string.Format(questionLabel.Text, snapshotName.Ellipsise(45));
+            this.questionLabel.Text = string.Format(questionLabel.Text, snapshotName.Ellipsise(40));
             this.takeSnapshotBeforeCheckBox.Enabled = vm.allowed_operations.Contains(vm_operations.snapshot);
             this.takeSnapshotBeforeCheckBox.Checked = this.takeSnapshotBeforeCheckBox.Enabled;
         }

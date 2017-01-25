@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -66,7 +67,9 @@ namespace XenAdmin.Actions.OVFActions
 										IEnumerable<string> eulas, bool signAppliance, bool createManifest, X509Certificate2 certificate,
 										bool encryptFiles, string encryptPassword, bool createOVA, bool compressOVFfiles,
 										string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway, bool shouldVerify)
-			: base(connection, Messages.EXPORT_APPLIANCE, networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
+			: base(connection,
+                string.Format(createOVA ? Messages.EXPORT_OVA_PACKAGE : Messages.EXPORT_OVF_PACKAGE, applianceFileName, Helpers.GetName(connection)),
+                networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
 		{
 			m_applianceDirectory = applianceDirectory;
 			m_applianceFileName = applianceFileName;
@@ -87,8 +90,10 @@ namespace XenAdmin.Actions.OVFActions
 
 		protected override void Run()
 		{
-		    SafeToExit = false;
+            base.Run();
+		    
 			var session = Connection.Session;
+
 			var url = session.Url;
 			Uri uri = new Uri(url);
 

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -52,6 +52,7 @@ namespace XenAdmin.SettingsPanels
         private static double SHADOW_MULTIPLIER_CPS = 4.0;
         private readonly ToolTip m_invalidParamToolTip;
         private VM vm = null;
+        private bool showCpsOptimisation;
 
         public VMAdvancedEditPage()
         {
@@ -65,7 +66,7 @@ namespace XenAdmin.SettingsPanels
                     ToolTipIcon = ToolTipIcon.Warning,
                     ToolTipTitle = Messages.INVALID_PARAMETER
                 };
-            this.CPSOptimizationRadioButton.Visible = !HiddenFeatures.CPSOptimizationHidden;
+            this.CPSOptimizationRadioButton.Visible = showCpsOptimisation = !HiddenFeatures.CPSOptimizationHidden;
         }
 
         public String SubText
@@ -107,7 +108,7 @@ namespace XenAdmin.SettingsPanels
             if (vm.power_state == vm_power_state.Suspended || vm.power_state == vm_power_state.Paused)
             {
                 CPSOptimizationRadioButton.Enabled = GeneralOptimizationRadioButton.Enabled = ManualOptimizationRadioButton.Enabled = false;
-                ManualOptimizationGroupBox.Enabled = labelShadowMultiplier.Enabled = ShadowMultiplierTextBox.Enabled = false;
+                labelShadowMultiplier.Enabled = ShadowMultiplierTextBox.Enabled = false;
                 iconWarning.Visible = labelWarning.Visible = true;
             }
             else
@@ -118,7 +119,7 @@ namespace XenAdmin.SettingsPanels
             {
                 GeneralOptimizationRadioButton.Checked = true;
             }
-            else if (mul == SHADOW_MULTIPLIER_CPS)
+            else if (mul == SHADOW_MULTIPLIER_CPS && showCpsOptimisation)
             {
                 CPSOptimizationRadioButton.Checked = true;
             }
@@ -198,17 +199,20 @@ namespace XenAdmin.SettingsPanels
 
         private void GeneralOptimizationRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            ShadowValue = SHADOW_MULTIPLIER_GENERAL_USE;
+            if (GeneralOptimizationRadioButton.Checked) 
+                ShadowValue = SHADOW_MULTIPLIER_GENERAL_USE;
         }
 
         private void CPSOptimizationRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            ShadowValue = SHADOW_MULTIPLIER_CPS;
+            if (CPSOptimizationRadioButton.Checked)
+                ShadowValue = SHADOW_MULTIPLIER_CPS;
         }
 
-        private void ManualOptimizationRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void ShadowMultiplierTextBox_TextChanged(object sender, EventArgs e)
         {
-            ManualOptimizationGroupBox.Enabled = ManualOptimizationRadioButton.Checked;
+            if (ShadowMultiplierTextBox.Focused)
+                ManualOptimizationRadioButton.Checked = true;
         }
     }
 }

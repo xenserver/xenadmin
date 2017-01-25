@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Drawing;
 using XenAdmin.Diagnostics.Checks;
 
 namespace XenAdmin.Diagnostics.Problems
@@ -43,6 +44,11 @@ namespace XenAdmin.Diagnostics.Problems
         public override string HelpMessage
         {
             get { return null; }
+        }
+
+        public override Image Image
+        {
+            get { return Images.GetImage16For(Icons.Warning); }
         }
     }
 }

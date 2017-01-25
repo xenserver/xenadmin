@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -127,8 +127,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             var scanAction = new SrCslgStoragePoolScanAction(Connection, credentials.Host, credentials.Username, credentials.PasswordSecret,
                                                              SystemStorage.StorageSystemId, SelectedStorageAdapter.Id);
 
-            ActionProgressDialog dialog = new ActionProgressDialog(scanAction, ProgressBarStyle.Marquee);
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(scanAction, ProgressBarStyle.Marquee))
+                dialog.ShowDialog(this);
 
             if (scanAction.Succeeded)
                 StoragePools = scanAction.CslgStoragePools;
@@ -148,7 +148,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private void buttonDiscoverBostonSS_Click(object sender, EventArgs e)
         {
             SrCslgStorageSystemScanAction action = new SrCslgStorageSystemScanAction(Connection, SelectedStorageAdapter.Id, textBoxTarget.Text, textBoxUsername.Text, textBoxPassword.Text);
-            new ActionProgressDialog(action, ProgressBarStyle.Marquee).ShowDialog(this);
+            using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
+                dlg.ShowDialog(this);
 
             var items = new List<object>();
             if (action.Succeeded)

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -55,9 +55,11 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         {
             Program.Invoke(Program.MainWindow, delegate()
             {
-                new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Message))
-                    .ShowDialog();
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Message)))
+                {
+                    dlg.ShowDialog();
+                }
             });
 
             cancelled = true;

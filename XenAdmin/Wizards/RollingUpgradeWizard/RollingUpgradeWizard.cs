@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -80,10 +80,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 .Any(master => master != null && master.Connection.Cache.SRs.Any(sr => sr.IsBroken(true)));
             if(brokenSRs)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning,
-                        Messages.BROKEN_SRS_AFTER_UPGRADE))
-                        .ShowDialog(Program.MainWindow);
+                        Messages.BROKEN_SRS_AFTER_UPGRADE)))
+                {
+                    dlg.ShowDialog(Program.MainWindow);
+                }
             }
             base.FinishWizard();
         }
@@ -151,8 +153,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                                                                           Messages.REVERTED_WIZARD_CHANGES,
                                                                           subActions, false, true))
                 {
-                    ActionProgressDialog dialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks);
-                    dialog.ShowDialog(Program.MainWindow);
+                    using (var dialog = new ActionProgressDialog(multipleAction, ProgressBarStyle.Blocks))
+                        dialog.ShowDialog(Program.MainWindow);
                 }
             }
         }

@@ -1,15 +1,15 @@
 From: "Saved by Internet Explorer 11"
 Subject: Citrix XenServer
-Date: Tue, 16 Feb 2016 18:18:24 -0000
+Date: Thu, 25 Feb 2016 14:06:50 -0000
 MIME-Version: 1.0
 Content-Type: multipart/related;
 	type="text/html";
-	boundary="----=_NextPart_000_0000_01D168E6.6CB764A0"
+	boundary="----=_NextPart_000_00AD_01D16FD5.C5E03F20"
 X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17609
 
 This is a multi-part message in MIME format.
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: text/html;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -70,11 +70,6 @@ opacity -->
 class=3D"cx-link"=20
   href=3D"xencenter://HelpContents/">Learn about using XenCenter</A>					=
 	 </LI>
-  <LI title=3D"Learn about XenServer and Workspace Cloud" =
-class=3D"cx-doc-icon"><A=20
-  class=3D"cx-link" href=3D"https://www.citrix.com/xenserver/clm">Learn =
-about=20
-  XenServer and Citrix Lifecycle Manager</A>						 </LI>
   <LI title=3D"Network with other XenServer users" =
 class=3D"cx-doc-icon"><A class=3D"cx-link"=20
   href=3D"http://xenserver.org/">Network with other XenServer users</A>
@@ -119,11 +114,13 @@ src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-tryVirtualizatio=
 n.png">
 <P>							Try Desktop Virtualization						 </P></A>				 </DIV><!-- end =
 card 3 -->
-			 </DIV></DIV><!-- END Bottom Section -->     </DIV><!--  end =
-container -->  =20
-</BODY></HTML>
+			 </DIV></DIV><!-- END Bottom Section -->     </DIV><IMG width=3D"0" =
+height=3D"0"=20
+src=3D"file:///C:/XenCenter/HomePage/media/icons/cx-icon-generic-doc.png"=
+>     <!--  end container -->=20
+  </BODY></HTML>
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/logos/cx-logo-citrixXenServer.png
@@ -196,7 +193,7 @@ EzHkdxcUB6rYFPyE3LMKoK9mwByKBUHB9ndFKouqQTGAfzETKKRDf7diaT72hiRJtx23g4TbMVAX
 AbwtRW+ob92XfZ2sP7uvGrkfV8En0j3/Z4buzsn7RfG3c3zs/K9Oe/LkCdN/AgwAEDB38/aPJQAA
 AAAASUVORK5CYII=
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-cloudServerGraphic.png
@@ -357,7 +354,7 @@ yw33zeHeGHs3MQFfTcUTT4WAEpHp9CyjFj+kIEU7hbHDhXtizGNOzz7xYwEwHU88NRal1tVoAT8r
 rENqV7Ii754jCCWJhCrcy2ksw7j4klkZHHA8ocmSBthRu9zMtcwMPFF2AkXi/wUYAKHmYva3WaRg
 AAAAAElFTkSuQmCC
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-addServer.png
@@ -436,7 +433,7 @@ rveJjysRyavryJegXL9kmayXGcosVGqxTLWYHEhem/QSbkf7XpgtYyUEJpaNpCXLpMXSe2P5b1jZ
 pcDfTVFELKlF12NWOpRX2q4IYm9pfNlcRhQroVCQessxqJ56pIuvFxWJSSfqukWzL3M1cqhQh6+h
 B/zVwbrePRnnAHiuSf6FhDMUhmM4n+aW1kx8M9+Hnq0U+hRgAIYz031FnvkhAAAAAElFTkSuQmCC
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-purchaseSupport.png
@@ -523,7 +520,7 @@ AHIxwDbF+7fBAc69COw1T3H6D5+rJQV56b0qPQ/bMh5KbQf5Ys7fxKOmLsW73m8GB/OLlT9fpts9
 QQskUviMJxTBAJ+Bdzz1UQdi/f67JRrJa9hu5tRXixt2K/RVWtVvBlOsaNMfCZZ9Iki9LrWvOcES
 FNGSk9lFae1Qi2cqRNVDjmd/CzAA4cJVq5HwYZMAAAAASUVORK5CYII=
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-tryVirtualization.png
@@ -610,7 +607,80 @@ ZkyahOFf5/dkEibT+2n++wr/pg35BJBn04aZbCr/8Yt2kVl9BCtg6vNUl1GCkBzlLP6d3UKRtpYZ
 MZWMTY2NIpzqiKWtmv7e6IVkbGo0ixj1B6W0zoCP/JYXbJCxcvDVQVvtLDEiyCOBPLsSfwUYAP2G
 LP9CyPswAAAAAElFTkSuQmCC
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: file:///C:/XenCenter/HomePage/media/icons/cx-icon-generic-doc.png
+
+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
+d9HcQ3PfRPpElkTem2cxTzmvLUo1Kj6qLmo82je6NLo/xi5mWczVWJ1YSWxLHDkuKq42bmy+3/zt
+84fineIL43sXmC/IXXB5oc7C9IWnFqkuEiw6lkBMiE44lPBBECqoFowl8hN3JY4KecIdwmciL9E2
+0YjYQ1wqHk7ySCpNepLskbw1eSTFM6Us5bmEJ6mQvEwNTN2bOp4WmnYgbTI9Or0xg5KRkHFCqiFN
+k7Zn6mfmZnbLrGWFsv7Fbou3Lx6VB8lrs5CsBVktCrZCpuhUWijXKgeyZ2VXZr/Nico5lqueK83t
+zLPK25A3nO+f/+0SwhLhkralhktXLR1Y5r2sajmyPHF52wrjFQUrhlYGrDy4irYqbdVPq+1Xl65+
+vSZ6TWuBXsHKgsG1AWvrC1UK5YV969zX7V1PWC9Z37Vh+oadGz4ViYquFNsXlxV/2CjceOUbh2/K
+v5nclLSpq8S5ZM9m0mbp5t4tnlsOlqqX5pcObg3Z2rQN31a07fX2Rdsvl80o27uDtkO5o788uLxl
+p8nOzTs/VKRU9FT6VDbu0t21Ydf4btHuG3u89jTs1dtbvPf9Psm+21UBVU3VZtVl+0n7s/c/romq
+6fiW+21drU5tce3HA9ID/QcjDrbXudTVHdI9VFKP1ivrRw7HH77+ne93LQ02DVWNnMbiI3BEeeTp
+9wnf9x4NOtp2jHus4QfTH3YdZx0vakKa8ppGm1Oa+1tiW7pPzD7R1ureevxH2x8PnDQ8WXlK81TJ
+adrpgtOTZ/LPjJ2VnX1+LvncYNuitnvnY87fag9v77oQdOHSRf+L5zu8O85c8rh08rLb5RNXuFea
+rzpfbep06jz+k9NPx7ucu5quuVxrue56vbV7ZvfpG543zt30vXnxFv/W1Z45Pd2983pv98X39d8W
+3X5yJ/3Oy7vZdyfurbxPvF/0QO1B2UPdh9U/W/7c2O/cf2rAd6Dz0dxH9waFg8/+kfWPD0MFj5mP
+y4YNhuueOD45OeI/cv3p/KdDz2TPJp4X/qL+y64XFi9++NXr187RmNGhl/KXk79tfKX96sDrGa/b
+xsLGHr7JeDMxXvRW++3Bd9x3He+j3w9P5Hwgfyj/aPmx9VPQp/uTGZOT/wQDmPP87zWUggAAABl0
+RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAMoaVRYdFhNTDpjb20uYWRvYmUueG1w
+AAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/
+PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAg
+Q29yZSA1LjYtYzExMSA3OS4xNTgzMjUsIDIwMTUvMDkvMTAtMDE6MTA6MjAgICAgICAgICI+IDxy
+ZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4
+LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25z
+LmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFw
+LzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUv
+UmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE1IChN
+YWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjE4REU0NDZEOTUyMTExRTU5MzdB
+OEQ0RkVEQ0NBMUM5IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjE4REU0NDZFOTUyMTExRTU5
+MzdBOEQ0RkVEQ0NBMUM5Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9Inht
+cC5paWQ6MThERTQ0NkI5NTIxMTFFNTkzN0E4RDRGRURDQ0ExQzkiIHN0UmVmOmRvY3VtZW50SUQ9
+InhtcC5kaWQ6MThERTQ0NkM5NTIxMTFFNTkzN0E4RDRGRURDQ0ExQzkiLz4gPC9yZGY6RGVzY3Jp
+cHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7ChOU+AAAB
+BUlEQVR42mL8//+/BgMDgwQDYXCPkZHxETYJRqAhC4C0JhA/x2OAMhBLArEj0KDLGLIgQ4A4AJ8T
+gPIFQPwJiN8CsTm6PBMD8eAfELMA8Q6gQXbkGgJSywfEbEC8GWiQMzmGsEFpLiBmB+J1QIP8GKDO
+g/kbFEMrsGiOgNI/gfgVEP+FYn4gXgPU586CpPgNECdgMQQkvgaIL2CRA6nXhxsCjLo/QOoBDq88
+gWL0WHNA9w4HkLIgMnzeAC29AuMge4cHh3ewgXNAjGkI0OQ3JBhCdmLDCZDDRApIbSNS336gywux
+eecZkDIYMt6pA7p4E05DBtw7VDEEVDz2AOkQCsxoAggwACbuXbJX+JbPAAAAAElFTkSuQmCC
+
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -1183,7 +1253,7 @@ hidden; content: "\0020";
 	clear: both;
 }
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -1277,7 +1347,7 @@ img#deskTopVirt {
 	width: 86px; height: 66px;
 }
 
-------=_NextPart_000_0000_01D168E6.6CB764A0
+------=_NextPart_000_00AD_01D16FD5.C5E03F20
 Content-Type: text/css;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -1313,4 +1383,4 @@ a:visited::after {
 	font-size: 90%; content: " (" attr(href) ")";
 }
 
-------=_NextPart_000_0000_01D168E6.6CB764A0--
+------=_NextPart_000_00AD_01D16FD5.C5E03F20--

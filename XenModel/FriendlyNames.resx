@@ -1104,7 +1104,7 @@
     <value>The license on host '{0}' will expire at {1}.</value>
   </data>
   <data name="Message.body-license_not_available" xml:space="preserve">
-    <value>The license server did not issue a license for {0} because there were no licenses of the specified type available.</value>
+    <value>The requested license is not available for {0}.</value>
   </data>
   <data name="Message.body-license_server_connected" xml:space="preserve">
     <value>The server {0} has successfully connected to the license server.</value>
@@ -1233,7 +1233,7 @@
     <value>Snapshot schedule  XAPI logon failure</value>
   </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
-    <value>Pool '{0}' failed to retrieve placement recommendations from WLB for VM '{1}'.</value>
+    <value>Pool '{0}' failed to retrieve placement recommendations from WLB for '{1}'.</value>
   </data>
   <data name="Message.body-wlb_optimization_alert" xml:space="preserve">
     <value>WLB reports that the pool '{0}' is in need of optimization. The pool optimization mode is set to '{1}' and the severity of the alert is '{2}'.</value>
@@ -1815,16 +1815,16 @@
     <value>Disk space allocations</value>
   </data>
   <data name="Label-performance.pool_session_count" xml:space="preserve">
-    <value>pool_session_count</value>
+    <value>Number of sessions</value>
   </data>
   <data name="Label-performance.pool_task_count" xml:space="preserve">
-    <value>pool_task_count</value>
+    <value>Number of tasks</value>
   </data>
   <data name="Label-performance.Tapdisks_in_low_memory_mode" xml:space="preserve">
     <value>Tapdisks in low memory mode</value>
   </data>
   <data name="Label-performance.xapi_open_fds" xml:space="preserve">
-    <value>xapi_open_fds</value>
+    <value>Number of open file descriptors</value>
   </data>
   <data name="Label-performance.io_errors" xml:space="preserve">
     <value>I/O errors</value>
@@ -1882,5 +1882,74 @@
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix] [XenServer product] Basic Edition</value>
+  </data>
+  <data name="Label-host.system_status-xscontainer" xml:space="preserve">
+    <value>Container management logs</value>
+  </data>
+  <data name="Description-host.system_status-conntest" xml:space="preserve">
+    <value>Tests for connectivity between [XenServer] and the internet</value>
+  </data>
+  <data name="Label-host.system_status-conntest" xml:space="preserve">
+    <value>Connection test</value>
+  </data>
+  <data name="Label-host.edition-standard" xml:space="preserve">
+    <value>[Citrix] [XenServer product] Standard Edition</value>
+  </data>
+  <data name="Label-Pool_patch.required-updates" xml:space="preserve">
+    <value>Required Updates</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanix" xml:space="preserve">
+    <value>Nutanix</value>
+  </data>
+  <data name="Label-SR.SRTypes-nutanixiso" xml:space="preserve">
+    <value>Nutanix ISO</value>
+  </data>
+  <data name="Message.name-pvs_proxy_setup_failed" xml:space="preserve">
+    <value>PVS proxy setup failed</value>
+  </data>
+  <data name="Message.name-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>No cache storage available for PVS site</value>
+  </data>
+  <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
+    <value>Unable to setup PVS-Accelerator on VM '{0}'. No cache storage found on site '{1}'.</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
+    <value>PVS-Accelerator eviction rate</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
+    <value>PVS-Accelerator hit rate</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
+    <value>PVS-Accelerator miss rate</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
+    <value>PVS-Accelerator observed read rate</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
+    <value>PVS-Accelerator space utilization</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
+    <value>PVS-Accelerator observed network traffic from clients</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
+    <value>PVS-Accelerator saved network traffic</value>
+  </data>
+  <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
+    <value>PVS-Accelerator observed network traffic from servers</value>
+  </data>
+  <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
+    <value>PVS-Accelerator status</value>
+  </data>
+  <data name="Label-performance.sr_rw_read" xml:space="preserve">
+    <value>'{0}' Read Throughput</value>
+  </data>
+  <data name="Label-performance.sr_rw_read_latency" xml:space="preserve">
+    <value>'{0}' Read Latency</value>
+  </data>
+  <data name="Label-performance.sr_rw_write" xml:space="preserve">
+    <value>'{0}' Write Throughput</value>
+  </data>
+  <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
+    <value>'{0}' Write Latency</value>
   </data>
 </root>

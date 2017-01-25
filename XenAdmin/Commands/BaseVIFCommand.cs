@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -51,11 +51,16 @@ namespace XenAdmin.Commands
             var action = (AsyncAction)sender;
             if (action.Result == false.ToString())
                 MainWindowCommandInterface.Invoke(() =>
-                new ThreeButtonDialog(
+                {
+                    using (var dlg =new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Information,
                             Messages.VIF_HOTPLUG_FAILED_MESSAGE,
-                            Messages.VIF_HOTPLUG_FAILED_TITLE)).ShowDialog(Program.MainWindow));
+                            Messages.VIF_HOTPLUG_FAILED_TITLE)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
+                });
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -109,9 +109,12 @@ namespace XenAdmin
             catch (ConfigurationErrorsException e)
             {
                 log.Error("Error parsing 'ProxySetting' from settings - settings file deemed corrupt", e);
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error,
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error,
                     string.Format(Messages.MESSAGEBOX_LOAD_CORRUPTED, Settings.GetUserConfigPath()),
-                    Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)).ShowDialog();
+                    Messages.MESSAGEBOX_LOAD_CORRUPTED_TITLE)))
+                {
+                    dlg.ShowDialog();
+                }
 
                 Environment.Exit(1);
             }

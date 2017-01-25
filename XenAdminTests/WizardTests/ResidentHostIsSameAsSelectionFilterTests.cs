@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -94,33 +94,31 @@ namespace XenAdminTests.WizardTests
                 yield return new TestCase ( singlePool, CreateSingleVmListFromTwoHostPool(), false );
                 yield return new TestCase ( singlePoolHost, CreateMultipleVmListFromTwoHostPool(), false );
                 yield return new TestCase ( singlePool, CreateMultipleVmListFromTwoHostPool(), false );
-
-                //Unsupported IXenObjects
-                yield return new TestCase ( CreateSingleVmListFromOneHostPool().First(), CreateSingleVmListFromOneHostPool(), false );
-                yield return new TestCase ( CreateSingleVmListFromOneHostPool().First(), CreateMultipleVmListFromTwoHostPool(), false );
             }
         }
 
-        [Test, ExpectedException(typeof(NullReferenceException))]
-        public void VerifyFailureFoundForNullConstructedCommand()
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void VerifyExceptionThrownForNullConstructedCommand()
         {
-            ResidentHostIsSameAsSelectionFilter cmd = new ResidentHostIsSameAsSelectionFilter(null);
-            Assert.That(cmd.FailureFound, Is.False);
+            var filter = new ResidentHostIsSameAsSelectionFilter(null, new List<VM>());
         }
 
-        [Test, ExpectedException(typeof(NullReferenceException))]
-        public void VerifyFailureFoundForDoubleNullConstructedCommand()
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void VerifyExceptionThrownForDoubleNullConstructedCommand()
         {
-            ResidentHostIsSameAsSelectionFilter cmd = new ResidentHostIsSameAsSelectionFilter(null, null);
-            Assert.That(cmd.FailureFound, Is.False);
+            var filter = new ResidentHostIsSameAsSelectionFilter(null, null);
         }
 
-        [Test]
-        public void ResponseForNullIXenObjectAsTarget()
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void VerifyExceptionThrownForNullIXenObjectAsTarget()
         {
-            ResidentHostIsSameAsSelectionFilter cmd = new ResidentHostIsSameAsSelectionFilter(null, CreateSingleVmListFromOneHostPool());
-            Assert.That(cmd.FailureFound, Is.False);
-            VerifyFailureFoundMessage(cmd);
+            var filter = new ResidentHostIsSameAsSelectionFilter(null, CreateSingleVmListFromOneHostPool());
+        }
+
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void VerifyExceptionThrownForUnsupportedTargetObject()
+        {
+            var filter = new ResidentHostIsSameAsSelectionFilter(CreateSingleVmListFromOneHostPool().First(), new List<VM>());
         }
 
         [Test]
@@ -140,7 +138,7 @@ namespace XenAdminTests.WizardTests
         #region Helper methods (private)
         private void VerifyFailureFoundMessage(ResidentHostIsSameAsSelectionFilter cmd)
         {
-            Assert.AreEqual(Messages.CPM_FAILURE_REASON_SAME_AS_RESIDENT_HOST, cmd.Reason);
+            Assert.AreEqual(Messages.HOST_MENU_CURRENT_SERVER, cmd.Reason);
         }
 
         private List<VM> CreateMultipleVmListFromOneHostPool()

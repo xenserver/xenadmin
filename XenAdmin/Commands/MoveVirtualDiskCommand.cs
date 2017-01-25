@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -31,7 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using XenAPI;
 using XenAdmin.Dialogs;
 
@@ -56,50 +56,34 @@ namespace XenAdmin.Commands
         {
         }
 
-        public MoveVirtualDiskCommand(IMainWindow mainWindow, VDI vdi)
-            : base(mainWindow, vdi)
-        {
-        }
-
         public override string ContextMenuText
         {
-            get
-            {
-                return Messages.MOVE_VDI_CONTEXT_MENU;
-            }
+            get { return GetSelection().Count > 1 ? Messages.MAINWINDOW_MOVE_OBJECTS : Messages.MOVE_VDI_CONTEXT_MENU; }
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            VDI vdi = (VDI)selection[0].XenObject;
-
-            
-            MainWindowCommandInterface.ShowPerXenModelObjectWizard(vdi, new MoveVirtualDiskDialog(vdi));
+            var vdis = selection.AsXenObjects<VDI>();
+            new MoveVirtualDiskDialog(selection.GetConnectionOfFirstItem(), vdis, null).Show(Program.MainWindow);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection != null && selection.Count == 1)
-            {
-                VDI vdi = selection[0].XenObject as VDI;
-                if (vdi == null)
-                    return false;
-                if (vdi.is_a_snapshot)
-                    return false;
-                if (vdi.Locked)
-                    return false;
-                if (vdi.VBDs.Count != 0)
-                    return false;
-                if (vdi.IsHaType)
-                    return false;
+            return selection.Count > 0 && selection.All(v => CanBeMoved(v.XenObject as VDI));
+        }
 
-                SR sr = vdi.Connection.Resolve(vdi.SR);
-                if (sr == null || sr.HBALunPerVDI)
-                    return false;
-                
-                return true;
-            }
-            return false;
+        private bool CanBeMoved(VDI vdi)
+        {
+            if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType)
+                return false;
+            if (vdi.VBDs.Count != 0)
+                return false;
+
+            SR sr = vdi.Connection.Resolve(vdi.SR);
+            if (sr == null || sr.HBALunPerVDI)
+                return false;
+
+            return true;
         }
 
         protected override string GetCantExecuteReasonCore(SelectedItem item)
@@ -107,6 +91,7 @@ namespace XenAdmin.Commands
             VDI vdi = item.XenObject as VDI;
             if (vdi == null)
                 return base.GetCantExecuteReasonCore(item);
+
             if (vdi.is_a_snapshot)
                 return Messages.CANNOT_MOVE_VDI_IS_SNAPSHOT;
             if (vdi.Locked)
@@ -117,7 +102,12 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_DR_VD;
             if (vdi.VBDs.Count != 0)
                 return Messages.CANNOT_MOVE_VDI_WITH_VBDS;
-            if (vdi.Connection.Resolve(vdi.SR).HBALunPerVDI)
+
+            SR sr = vdi.Connection.Resolve(vdi.SR);
+            if (sr == null)
+                return base.GetCantExecuteReasonCore(item);
+            
+            if (sr.HBALunPerVDI)
                 return Messages.UNSUPPORTED_SR_TYPE;
 
             return base.GetCantExecuteReasonCore(item);

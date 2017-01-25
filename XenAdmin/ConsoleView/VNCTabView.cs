@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -43,7 +43,8 @@ using XenAdmin.Commands;
 using XenAdmin.Dialogs;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
+using XenAdmin.Controls.ConsoleTab;
+
 
 namespace XenAdmin.ConsoleView
 {
@@ -65,8 +66,8 @@ namespace XenAdmin.ConsoleView
         private readonly VM source;
         private readonly Host targetHost;
         private VM_guest_metrics guestMetrics = null;
-        private Form fullscreenForm = null;
-        private Form fullscreenHint = null;
+        private FullScreenForm fullscreenForm;
+        private FullScreenHint fullscreenHint;
         private Size LastDesktopSize;
         private bool switchOnTabOpened = false;
 
@@ -96,7 +97,9 @@ namespace XenAdmin.ConsoleView
 
             HostLabel.Font = Program.HeaderGradientFont;
             HostLabel.ForeColor = Program.HeaderGradientForeColor;
-            multipleDvdIsoList1.SetTextColor(Program.HeaderGradientForeColor);
+            multipleDvdIsoList1.LabelSingleDvdForeColor = Program.HeaderGradientForeColor;
+            multipleDvdIsoList1.LabelNewCdForeColor = Program.HeaderGradientForeColor;
+            multipleDvdIsoList1.LinkLabelLinkColor = Color.White;
 
 #pragma warning disable 0219
             // Force the handle to be created, because resize events
@@ -131,7 +134,7 @@ namespace XenAdmin.ConsoleView
                         hostMetrics.PropertyChanged += Server_PropertyChanged;
                     }
 
-                    HostLabel.Text = string.Format(Messages.CONSOLE_HOST, host.Name);
+                    HostLabel.Text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name);
                     HostLabel.Visible = true;
                 }
             }
@@ -153,9 +156,10 @@ namespace XenAdmin.ConsoleView
             log.DebugFormat("'{0}' console: Update power state (on VNCTabView constructor)", this.source.Name);
             updatePowerState();
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
-            ShowGpuWarningIfRequired();
+            ShowGpuWarningIfRequired(vncScreen.MustConnectRemoteDesktop());
+            vncScreen.GpuStatusChanged += ShowGpuWarningIfRequired;
 
-            if (source.is_control_domain || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
+            if (source.IsControlDomainZero || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
                 toggleConsoleButton.Visible = false;
             }
@@ -185,8 +189,6 @@ namespace XenAdmin.ConsoleView
             this.vncScreen.Parent = this.contentPanel;
             this.vncScreen.Dock = DockStyle.Fill;
 
-            this.Dock = DockStyle.Fill;
-
             string rdpLabel = GuessNativeConsoleLabel(source);
             this.toggleConsoleButton.Text = rdpLabel;
 
@@ -208,6 +210,12 @@ namespace XenAdmin.ConsoleView
             //This change is only for Cream, because RDP port scan was removed in Cream.
             if ( Helpers.CreamOrGreater(source.Connection) && Properties.Settings.Default.AutoSwitchToRDP && RDPEnabled )
                 vncScreen.AutoSwitchRDPLater = true;
+        }
+
+        public bool IsScaled
+        {
+            get { return scaleCheckBox.Checked; }
+            set { scaleCheckBox.Checked = value; }
         }
 
         //CA-75479 - add to aid debugging
@@ -243,7 +251,7 @@ namespace XenAdmin.ConsoleView
 
         private void Host_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
                 return;
 
             Host host = e.Element as Host;
@@ -279,7 +287,7 @@ namespace XenAdmin.ConsoleView
             if (this.guestMetrics != null)
                 this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
 
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
                 if (host != null)
@@ -520,9 +528,11 @@ namespace XenAdmin.ConsoleView
 
             if (source.is_control_domain && e.PropertyName == "name_label")
             {
-                HostLabel.Text = string.Format(Messages.CONSOLE_HOST, source.AffinityServerString);
+                string text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, source.AffinityServerString);
+                HostLabel.Text = text;
+
                 if (parentVNCView != null && parentVNCView.undockedForm != null)
-                    parentVNCView.undockedForm.Text = source.AffinityServerString;
+                    parentVNCView.undockedForm.Text = text;
             }
         }
 
@@ -580,7 +590,7 @@ namespace XenAdmin.ConsoleView
 
         private void Server_EnabledPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "enabled" || source.is_control_domain)
+            if (e.PropertyName != "enabled" || source.IsControlDomainZero)
                 return;
 
             Host host = sender as Host;
@@ -601,14 +611,9 @@ namespace XenAdmin.ConsoleView
             multipleDvdIsoList1.VM = source;
         }
 
-        private void cdLabel_Click(object sender, EventArgs e)
-        {
-            new InstallToolsCommand(Program.MainWindow, source, this).Execute();
-        }
-
         private void updatePowerState()
         {
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
                 if (host == null)
@@ -674,7 +679,7 @@ namespace XenAdmin.ConsoleView
         private void hideTopBarContents()
         {
             VMPowerOff();
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 log.DebugFormat("'{0}' console: Hide top bar contents, server is unavailable", source.Name);
                 DisablePowerStateLabel(Messages.CONSOLE_HOST_DEAD);
@@ -764,17 +769,6 @@ namespace XenAdmin.ConsoleView
                         new ResumeVMCommand(Program.MainWindow, source).Execute();
                     }
                     break;
-            }
-        }
-
-        public bool isPaused
-        {
-            get
-            {
-                if (vncScreen != null && !isFullscreen)
-                    return vncScreen.wasPaused;
-                else
-                    return false;
             }
         }
 
@@ -904,7 +898,7 @@ namespace XenAdmin.ConsoleView
                     int twoTimeBorderPadding = VNCGraphicsClient.BORDER_PADDING * 2;
 
                     return new Size(vncScreen.DesktopSize.Width + twoTimeBorderPadding,
-                                    vncScreen.DesktopSize.Height + buttonPanel.Height + bottomPanel.Height + twoTimeBorderPadding);
+                                    vncScreen.DesktopSize.Height + gradientPanel1.Height + tableLayoutPanel1.Height + twoTimeBorderPadding);
                 }
                 else
                 {
@@ -1025,41 +1019,18 @@ namespace XenAdmin.ConsoleView
 
             if (!isFullscreen)
             {
-                if (vncScreen.showConnectionBar) 
-                    fullscreenForm = new XenAdmin.Controls.ConsoleTab.FullScreenForm(vncScreen);
-                else
-                    fullscreenForm = new Form();
-                fullscreenForm.ShowIcon = false;
-                fullscreenForm.ShowInTaskbar = false;
+                fullscreenForm = new FullScreenForm(this);
+                fullscreenForm.FormClosing += delegate { toggleFullscreen(); };
 
-                fullscreenForm.FormBorderStyle = FormBorderStyle.None;
-                fullscreenForm.FormClosing += new FormClosingEventHandler(
-                    delegate(Object o, FormClosingEventArgs a)
-                    {
-                        toggleFullscreen();
-                    });
-                //fullscreenForm.Deactivate += new EventHandler(
-                //    delegate(Object o, EventArgs e)
-                //    {
-                //        toggleFullscreen();
-                //    });
                 if (source != null && source.Connection != null)
                     source.Connection.BeforeConnectionEnd += Connection_BeforeConnectionEnd;
 
-                vncScreen.Parent = fullscreenForm is Controls.ConsoleTab.FullScreenForm
-                                       ? (Control) ((Controls.ConsoleTab.FullScreenForm) fullscreenForm).contentPanel
-                                       : fullscreenForm;
+                fullscreenForm.AttachVncScreen(vncScreen);
                 vncScreen.DisplayFocusRectangle = false;
 
-                Screen screen = Screen.FromControl(this);
-                fullscreenForm.StartPosition = FormStartPosition.Manual;
-                fullscreenForm.Location = screen.WorkingArea.Location;
-                fullscreenForm.Size = screen.Bounds.Size;
-
-                fullscreenHint = new Controls.ConsoleTab.FullScreenHint(GetFullScreenMessage());                
-                
-                fullscreenHint.Show(fullscreenForm);
+                fullscreenHint = new FullScreenHint();
                 fullscreenForm.Show();
+                fullscreenHint.Show(fullscreenForm);
 
                 FocusVNC();
                 vncScreen.CaptureKeyboardAndMouse();
@@ -1069,6 +1040,7 @@ namespace XenAdmin.ConsoleView
                 if (source != null && source.Connection != null)
                     source.Connection.BeforeConnectionEnd -= Connection_BeforeConnectionEnd;
 
+                fullscreenForm.DetachVncScreen(vncScreen);
                 vncScreen.Parent = this.contentPanel;
                 vncScreen.DisplayFocusRectangle = true;
                 FocusVNC();
@@ -1089,20 +1061,6 @@ namespace XenAdmin.ConsoleView
                 fullscreenForm.Refresh();
         }
 
-        string GetFullScreenMessage()
-        {
-            switch (Properties.Settings.Default.FullScreenShortcutKey)
-            {
-                case 0:
-                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ALT;
-                case 1:
-                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ALT_F;
-                case 2:
-                    return Messages.VNC_FULLSCREEN_MESSAGE_F12;
-                default:
-                    return Messages.VNC_FULLSCREEN_MESSAGE_CTRL_ENTER;
-            }
-  }
         void Connection_BeforeConnectionEnd(object sender, EventArgs e)
         {
             Program.Invoke(this, toggleFullscreen);
@@ -1200,12 +1158,16 @@ namespace XenAdmin.ConsoleView
 
                     if (CanEnableRDPOnCreamOrGreater(source.Connection))
                     {
-                        ThreeButtonDialog d = new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (ThreeButtonDialog dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(System.Drawing.SystemIcons.Question, Messages.FORCE_ENABLE_RDP),
-                                "EnableRDPonVM",
+                            "EnableRDPonVM",
                             new ThreeButtonDialog.TBDButton(Messages.YES, DialogResult.Yes),
-                            new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No));
-                        if (d.ShowDialog(Program.MainWindow) == DialogResult.Yes)
+                            new ThreeButtonDialog.TBDButton(Messages.NO, DialogResult.No)))
+                        {
+                            dialogResult = dlg.ShowDialog(Program.MainWindow);
+                        }
+                        if (dialogResult == DialogResult.Yes)
                         {
                             Session session = source.Connection.DuplicateSession();
                             Dictionary<string, string> _arguments = new Dictionary<string, string>();
@@ -1411,7 +1373,7 @@ namespace XenAdmin.ConsoleView
 
             ContextMenuItemCollection contextMenuItems = new ContextMenuItemCollection();
 
-            if (source.is_control_domain)
+            if (source.IsControlDomainZero)
             {
                 // We're looking at the host console
                 if (host.Connection.IsConnected)
@@ -1437,7 +1399,7 @@ namespace XenAdmin.ConsoleView
 
         public void showHeaderBar(bool showHeaderBar, bool showLifecycleIcon)
         {
-            panel2.Visible = showHeaderBar;
+            gradientPanel1.Visible = showHeaderBar;
             pictureBox1.Visible = showLifecycleIcon;
         }
 
@@ -1516,10 +1478,9 @@ namespace XenAdmin.ConsoleView
             inToogleConsoleFocus = false;
         }
 
-        internal void ShowGpuWarningIfRequired()
+        private void ShowGpuWarningIfRequired(bool mustConnectRemoteDesktop)
         {
-            dedicatedGpuWarning.Visible = vncScreen != null && (vncScreen.UseVNC || string.IsNullOrEmpty(vncScreen.rdpIP)) &&
-                vncScreen.Source.HasGPUPassthrough && vncScreen.Source.power_state == vm_power_state.Running;
+            dedicatedGpuWarning.Visible = mustConnectRemoteDesktop;
         }
 
         internal bool IsVNC
@@ -1544,7 +1505,10 @@ namespace XenAdmin.ConsoleView
                 {
                     log.Error("Error starting PuTTY.", ex);
 
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)).ShowDialog(Parent);
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.ERROR_PUTTY_LAUNCHING, Messages.XENCENTER)))
+                    {    
+                        dlg.ShowDialog(Parent);
+                    }
                 }
             }
         }
@@ -1571,7 +1535,7 @@ namespace XenAdmin.ConsoleView
                 if (source.IsWindows)
                     return false;
 
-                if (source.is_control_domain)
+                if (source.IsControlDomainZero)
                 {
                     Host host = source.Connection.Resolve<Host>(source.resident_on);
                     if (host == null)

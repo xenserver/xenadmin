@@ -148,12 +148,13 @@ namespace XenAPI
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
+        /// <param name="_host">The LVHD Host to upgrade to being thin-provisioned.</param>
         /// <param name="_sr">The LVHD SR to upgrade to being thin-provisioned.</param>
         /// <param name="_initial_allocation">The initial amount of space to allocate to a newly-created VDI in bytes</param>
         /// <param name="_allocation_quantum">The amount of space to allocate to a VDI when it needs to be enlarged in bytes</param>
-        public static void enable_thin_provisioning(Session session, string _sr, long _initial_allocation, long _allocation_quantum)
+        public static string enable_thin_provisioning(Session session, string _host, string _sr, long _initial_allocation, long _allocation_quantum)
         {
-            session.proxy.lvhd_enable_thin_provisioning(session.uuid, (_sr != null) ? _sr : "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse();
+            return (string)session.proxy.lvhd_enable_thin_provisioning(session.uuid, (_host != null) ? _host : "", (_sr != null) ? _sr : "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse();
         }
 
         /// <summary>
@@ -161,12 +162,13 @@ namespace XenAPI
         /// First published in XenServer Dundee.
         /// </summary>
         /// <param name="session">The session</param>
+        /// <param name="_host">The LVHD Host to upgrade to being thin-provisioned.</param>
         /// <param name="_sr">The LVHD SR to upgrade to being thin-provisioned.</param>
         /// <param name="_initial_allocation">The initial amount of space to allocate to a newly-created VDI in bytes</param>
         /// <param name="_allocation_quantum">The amount of space to allocate to a VDI when it needs to be enlarged in bytes</param>
-        public static XenRef<Task> async_enable_thin_provisioning(Session session, string _sr, long _initial_allocation, long _allocation_quantum)
+        public static XenRef<Task> async_enable_thin_provisioning(Session session, string _host, string _sr, long _initial_allocation, long _allocation_quantum)
         {
-            return XenRef<Task>.Create(session.proxy.async_lvhd_enable_thin_provisioning(session.uuid, (_sr != null) ? _sr : "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_lvhd_enable_thin_provisioning(session.uuid, (_host != null) ? _host : "", (_sr != null) ? _sr : "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse());
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -336,6 +336,12 @@ namespace XenAdmin.Dialogs
         private void labelError_TextChanged(object sender, EventArgs e)
         {
             pictureBoxError.Visible = labelError.Visible = (labelError.Text != "");
+        }
+
+        private void AddServerDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (connection != null)
+                XenConnectionUI.connectionDialogs.Remove(connection);
         }
     }
 

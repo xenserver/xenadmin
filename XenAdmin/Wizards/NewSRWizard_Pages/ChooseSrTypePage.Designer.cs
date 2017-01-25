@@ -44,8 +44,8 @@
             this.deprecationBanner = new XenAdmin.Controls.DeprecationBanner();
             this.selectedStoreTypeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.radioButtonCifs = new System.Windows.Forms.RadioButton();
             this.radioButtonFcoe = new System.Windows.Forms.RadioButton();
+            this.radioButtonCifs = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -141,6 +141,7 @@
             // 
             // SRBlurb
             // 
+            this.SRBlurb.AutoEllipsis = true;
             resources.ApplyResources(this.SRBlurb, "SRBlurb");
             this.SRBlurb.Name = "SRBlurb";
             // 
@@ -166,19 +167,10 @@
             this.tableLayoutPanel3.Controls.Add(this.radioButtonNfs, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonFibreChannel, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.radioButtonIscsi, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.labelISOlibrary, 0, 8);
-            this.tableLayoutPanel3.Controls.Add(this.radioButtonCifsIso, 0, 9);
-            this.tableLayoutPanel3.Controls.Add(this.radioButtonNfsIso, 0, 10);
+            this.tableLayoutPanel3.Controls.Add(this.labelISOlibrary, 0, 7);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonCifsIso, 0, 8);
+            this.tableLayoutPanel3.Controls.Add(this.radioButtonNfsIso, 0, 9);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // radioButtonCifs
-            // 
-            resources.ApplyResources(this.radioButtonCifs, "radioButtonCifs");
-            this.radioButtonCifs.BackColor = System.Drawing.Color.Transparent;
-            this.radioButtonCifs.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.radioButtonCifs.Name = "radioButtonCifs";
-            this.radioButtonCifs.UseVisualStyleBackColor = false;
-            this.radioButtonCifs.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // radioButtonFcoe
             // 
@@ -188,6 +180,15 @@
             this.radioButtonFcoe.Name = "radioButtonFcoe";
             this.radioButtonFcoe.UseVisualStyleBackColor = false;
             this.radioButtonFcoe.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+            // 
+            // radioButtonCifs
+            // 
+            resources.ApplyResources(this.radioButtonCifs, "radioButtonCifs");
+            this.radioButtonCifs.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonCifs.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.radioButtonCifs.Name = "radioButtonCifs";
+            this.radioButtonCifs.UseVisualStyleBackColor = false;
+            this.radioButtonCifs.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // ChooseSrTypePage
             // 

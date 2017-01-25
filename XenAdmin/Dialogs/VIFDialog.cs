@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -40,6 +40,7 @@ using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Core;
 using System.Collections;
+using System.Linq;
 
 
 namespace XenAdmin.Dialogs
@@ -360,19 +361,27 @@ namespace XenAdmin.Dialogs
 
         /// <summary>
         /// Determine if the MAC is accetable. It may not be if 
-        /// other VIFs on the same Network have the same MAC address as entered
+        /// other VIFs have the same MAC address as entered
         /// </summary>
         /// <returns>If the MAC address entered is acceptable</returns>
         private bool MACAddressIsAcceptable()
         {
-            foreach (VIF vif in connection.ResolveAll( SelectedNetwork.VIFs ) )
+            foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy.Where(c => c.IsConnected))
             {
-                if ( vif != ExistingVif && vif.MAC == SelectedMac )
+                foreach (VIF vif in xenConnection.Cache.VIFs)
                 {
-                    DialogResult result = MacAddressDuplicationWarningDialog( 
-                        SelectedMac, 
-                        connection.Resolve(vif.VM).Name ).ShowDialog(Program.MainWindow);
-                    return (result == DialogResult.Yes);
+                    var vm = xenConnection.Resolve(vif.VM);
+                    if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.is_a_real_vm)
+                    {
+                        DialogResult result;
+                        using (var dlg = MacAddressDuplicationWarningDialog(
+                            SelectedMac,
+                            vm.NameWithLocation))
+                        {
+                            result = dlg.ShowDialog(Program.MainWindow);
+                        }
+                        return (result == DialogResult.Yes);
+                    }
                 }
             }
             return true;

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -191,7 +191,10 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             GetDefaultParameters();
             if (errorRetrievingConfigParameters)
-                new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Error, Messages.VM_CLOUD_CONFIG_DRIVE_CANNOT_RETRIEVE_DEFAULT)))
+                {
+                    dlg.ShowDialog(this);
+                }
         }
 
         #region Implementation of IEditPage

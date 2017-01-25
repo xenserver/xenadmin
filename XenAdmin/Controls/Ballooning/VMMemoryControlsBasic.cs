@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -175,7 +175,7 @@ namespace XenAdmin.Controls.Ballooning
 
         private void SetIncrements()
         {
-            vmShinyBar.Increment = memorySpinnerDynMin.Increment = memorySpinnerDynMax.Increment = memorySpinnerFixed.Increment = CalcIncrement(memorySpinnerDynMax.Units);
+            vmShinyBar.Increment = memorySpinnerDynMin.Increment = memorySpinnerDynMax.Increment = memorySpinnerFixed.Increment = CalcIncrement(static_max, memorySpinnerDynMax.Units);
         }
 
         private void DynamicSpinners_ValueChanged(object sender, EventArgs e)

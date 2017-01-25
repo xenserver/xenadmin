@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -33,6 +33,7 @@ using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Net;
 using XenAdmin.Core;
@@ -120,7 +121,15 @@ namespace XenAdmin.Actions
 
         	try
             {
-                string vmRef = GetVmRef(applyFile());
+                string vmRef;
+
+				if (m_filename.EndsWith("ova.xml"))//importing version 1 from of VM
+				{
+					m_filename = m_filename.Replace("ova.xml", "");
+					vmRef = GetVmRef(applyVersionOneFiles());
+				}
+				else//importing current format of VM
+					vmRef = GetVmRef(applyFile());
 
             	if (Cancelling)
                     throw new CancelledException();
@@ -158,10 +167,13 @@ namespace XenAdmin.Actions
                 {
                     Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_NETWORKS : Messages.IMPORTVM_UPDATING_NETWORKS;
 
-                    // We need to destroy all vifs and recreate them.
+                    // For ElyOrGreater hosts, we can move the VIFs to another network, 
+                    // but for older hosts we need to destroy all vifs and recreate them
 
                     List<XenRef<VIF>> vifs = VM.get_VIFs(Session, vmRef);
                     List<XenAPI.Network> networks = new List<XenAPI.Network>();
+
+                    bool canMoveVifs = Helpers.ElyOrGreater(Connection);
 
                     foreach (XenRef<VIF> vif in vifs)
                     {
@@ -170,9 +182,27 @@ namespace XenAdmin.Actions
                         if (network != null)
                             networks.Add(network);
 
+                        if (canMoveVifs)
+                        {
+                            var vifObj = Connection.Resolve(vif);
+                            if (vifObj == null)
+                                continue;
+                            // try to find a matching VIF in the m_proxyVIFs list, based on the device field
+                            var matchingProxyVif = m_proxyVIFs.FirstOrDefault(proxyVIF => proxyVIF.device == vifObj.device);
+                            if (matchingProxyVif != null)
+                            {
+                                // move the VIF to the desired network
+                                VIF.move(Session, vif, matchingProxyVif.network);
+                                // remove matchingProxyVif from the list, so we don't create the VIF again later
+                                m_proxyVIFs.Remove(matchingProxyVif); 
+                                continue;
+                            }
+                        }
+                        // destroy the VIF, if we haven't managed to move it
                         VIF.destroy(Session, vif);
                     }
 
+                    // recreate VIFs if needed (m_proxyVIFs can be empty, if we moved all the VIFs in the previous step)
                     foreach (Proxy_VIF proxyVIF in m_proxyVIFs)
                     {
                         VIF vif = new VIF(proxyVIF) {VM = new XenRef<VM>(vmRef)};
@@ -266,6 +296,78 @@ namespace XenAdmin.Actions
                 s += getSize(d, s);
 
             return s;
+        }
+
+        private string applyVersionOneFiles()
+        {
+            RelatedTask = Task.create(Session, "importTask", Messages.IMPORTING);
+
+            try
+            {
+				long totalSize = getSize(new DirectoryInfo(m_filename), 0);
+                long bytesWritten = 0;
+
+                if (totalSize == 0)
+                {
+                    // We didn't find any .gz files, just bail out here
+                    throw new Exception(Messages.IMPORT_INCOMPLETE_FILES);
+                }
+
+            	CommandLib.Config config = new CommandLib.Config
+            	                           	{
+            	                           		hostname = Connection.Hostname,
+            	                           		username = Connection.Username,
+            	                           		password = Connection.Password
+            	                           	};
+                
+                CommandLib.thinCLIProtocol tCLIprotocol = null;
+                int exitCode = 0;
+            	tCLIprotocol = new CommandLib.thinCLIProtocol(delegate(string s) { throw new Exception(s); },
+            	                                              delegate { throw new Exception(Messages.EXPORTVM_NOT_HAPPEN); },
+            	                                              delegate(string s, CommandLib.thinCLIProtocol t) { log.Debug(s); },
+            	                                              delegate(string s) { log.Debug(s); },
+            	                                              delegate(string s) { log.Debug(s); },
+            	                                              delegate { throw new Exception(Messages.EXPORTVM_NOT_HAPPEN); },
+            	                                              delegate(int i)
+            	                                              	{
+            	                                              		exitCode = i;
+            	                                              		tCLIprotocol.dropOut = true;
+            	                                              	},
+            	                                              delegate(int i)
+            	                                              	{
+            	                                              		bytesWritten += i;
+            	                                              		PercentComplete = (int)(100.0*bytesWritten/totalSize);
+            	                                              	},
+            	                                              config);
+
+                string body = string.Format("vm-import\nsr-uuid={0}\nfilename={1}\ntask_id={2}\n",
+											SR.uuid, m_filename, RelatedTask.opaque_ref);
+				log.DebugFormat("Importing Geneva-style XVA from {0} to SR {1} using {2}", m_filename, SR.Name, body);
+                CommandLib.Messages.performCommand(body, tCLIprotocol);
+
+                // Check the task status -- Geneva-style XVAs don't raise an error, so we need to check manually.
+                List<string> excep = TaskErrorInfo();
+                if (excep.Count > 0)
+                    throw new Failure(excep);
+                
+                // CA-33665: We found a situation before were the task handling had been messed up, we should check the exit code as a failsafe
+				if (exitCode != 0)
+					throw new Failure(new[] {Messages.IMPORT_GENERIC_FAIL});
+
+                return Task.get_result(Session, RelatedTask);
+            }
+            catch (Exception exn)
+            {
+                List<string> excep = TaskErrorInfo();
+                if (excep.Count > 0)
+                    throw new Failure(excep);
+                else
+                    throw exn;
+            }
+            finally
+            {
+                Task.destroy(Session, RelatedTask);
+            }
         }
 
         private string applyFile()

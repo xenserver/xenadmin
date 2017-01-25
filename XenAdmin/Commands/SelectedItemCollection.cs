@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -55,6 +55,15 @@ namespace XenAdmin.Commands
             : base(new List<SelectedItem>())
         {
 
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectedItemCollection"/> class with one item
+        /// </summary>
+        /// <param name="item">The itemsthat will populate the collection.</param>
+        public SelectedItemCollection(SelectedItem item)
+            : base(new List<SelectedItem> {item})
+        {
         }
 
         /// <summary>
@@ -252,25 +261,11 @@ namespace XenAdmin.Commands
         }
 
         /// <summary>
-        /// Gets a value indicating whether the first item is a pool.
+        /// Gets a value indicating whether the first item is a T.
         /// </summary>
-        public bool FirstIsPool
+        public bool FirstIs<T>() where T : IXenObject
         {
-            get
-            {
-                return First is Pool;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the first item is a host.
-        /// </summary>
-        public bool FirstIsHost
-        {
-            get
-            {
-                return First is Host;
-            }
+            return First is T;
         }
 
         /// <summary>
@@ -280,29 +275,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return FirstIsHost && ((Host)this[0].XenObject).IsLive;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the first item is a VM.
-        /// </summary>
-        public bool FirstIsVM
-        {
-            get
-            {
-                return First is VM;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the first item is a SR.
-        /// </summary>
-        public bool FirstIsSR
-        {
-            get
-            {
-                return First is SR;
+                return FirstIs<Host>() && ((Host)this[0].XenObject).IsLive;
             }
         }
 
@@ -313,7 +286,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return FirstIsVM && !((VM)this[0].XenObject).is_a_template;
+                return FirstIs<VM>() && !((VM)this[0].XenObject).is_a_template;
             }
         }
 
@@ -324,29 +297,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return FirstIsVM && ((VM)this[0].XenObject).is_a_template && !((VM)this[0].XenObject).is_a_snapshot;
-            }
-        }
-
-		/// <summary>
-		/// Gets a value indicating whether the first item is a VM_appliance.
-		/// </summary>
-		public bool FirstIsVMappliance
-		{
-			get
-			{
-				return First is VM_appliance;
-			}
-		}
-
-        /// <summary>
-        /// Gets a value indicating whether the first item is a GroupingTag.
-        /// </summary>
-        public bool FirstIsGroup
-        {
-            get
-            {
-                return First is GroupingTag;
+                return FirstIs<VM>() && ((VM)this[0].XenObject).is_a_template && !((VM)this[0].XenObject).is_a_snapshot;
             }
         }
 

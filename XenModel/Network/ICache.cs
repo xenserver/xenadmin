@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -58,6 +58,7 @@ namespace XenAdmin.Network
         PGPU[] PGPUs { get; }
         PIF[] PIFs { get; }
         Pool_patch[] Pool_patches { get; }
+        Pool_update[] Pool_updates { get; }
         Pool[] Pools { get; }
         void AddFolder(XenRef<Folder> path, Folder folder);
         void RemoveFolder(XenRef<Folder> path);
@@ -83,6 +84,10 @@ namespace XenAdmin.Network
         VM[] VMs { get; }
         IEnumerable<IXenObject> XenSearchableObjects { get; }
         DockerContainer[] DockerContainers { get; }
+        PVS_site[] PVS_sites { get; }
+        PVS_server[] PVS_servers { get; }
+        PVS_proxy[] PVS_proxies { get; }
+        PVS_cache_storage[] PVS_cache_storages { get; }
         void UpdateDockerContainersForVM(IList<DockerContainer> d, VM v);
         void CheckDockerContainersBatchChange();
     }

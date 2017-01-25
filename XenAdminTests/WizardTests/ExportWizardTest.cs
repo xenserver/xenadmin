@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -48,7 +48,7 @@ namespace XenAdminTests.WizardTests.small_vms.ExportWizardTests
         protected override ExportApplianceWizard NewWizard()
         {
             var theVm = GetAnyVM(vm => vm.power_state == vm_power_state.Halted);
-            return new ExportApplianceWizard(theVm.Connection, new SelectedItemCollection(new[] { new SelectedItem(theVm) }));
+            return new ExportApplianceWizard(theVm.Connection, new SelectedItemCollection(new SelectedItem(theVm)));
         }
 
         protected override void TestPage(string pageName)
@@ -71,7 +71,7 @@ namespace XenAdminTests.WizardTests.small_vms.ExportWizardTests
         protected override ExportApplianceWizard NewWizard()
         {
             var theVm = GetAnyVM(vm => vm.power_state == vm_power_state.Halted);
-            return new ExportApplianceWizard(theVm.Connection, new SelectedItemCollection(new[] { new SelectedItem(theVm) }));
+            return new ExportApplianceWizard(theVm.Connection, new SelectedItemCollection(new SelectedItem(theVm)));
         }
 
         protected override void TestPage(string pageName)
