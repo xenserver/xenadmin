@@ -217,7 +217,7 @@ namespace XenAdmin.TabPages
                 guest_metrics.PropertyChanged -= guest_metrics_PropertyChanged;
         }
 
-        public void IsHidden()
+        public override void PageHidden()
         {
             UnregisterHandlers();
         }

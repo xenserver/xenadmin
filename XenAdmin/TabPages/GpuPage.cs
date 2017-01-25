@@ -292,6 +292,11 @@ namespace XenAdmin.TabPages
             }
         }
 
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
+        }
+
 
         internal class GpuSettings : IEquatable<GpuSettings>
         {
