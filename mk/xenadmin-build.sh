@@ -40,6 +40,11 @@ set -ex
 #
 #PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
 
+SET_ENV_FILE="/cygdrive/c/env.sh"
+if [ -f ${SET_ENV_FILE} ]; then
+   . ${SET_ENV_FILE}
+fi
+
 UNZIP="unzip -q -o"
 
 mkdir_clean()
