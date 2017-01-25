@@ -31,6 +31,9 @@
  * SUCH DAMAGE.
  */
 
+/* Note: the env variables are either Jenkins built-in variables
+   or own variables configured at Manage Jenkins > Configure System */
+
 properties([
   [
     $class  : 'BuildDiscarderProperty',
@@ -125,7 +128,7 @@ node("${params.BUILD_ON_NODE}") {
       ).trim()
 
       if (params.XC_BRANDING == 'citrix') {
-        String BRANDING_REMOTE = "https://code.citrite.net/scm/xs/branding.git"
+        GString BRANDING_REMOTE = "${env.CODE_ENDPOINT}/xs/branding.git"
 
         def branchExistsOnBranding = bat(
           returnStatus: true,
@@ -137,7 +140,7 @@ node("${params.BUILD_ON_NODE}") {
       } else {
 
         println "Overwriting Branding folder"
-        String BRAND_REMOTE = "https://code.citrite.net/scm/xsc/xenadmin-branding.git"
+        GString BRAND_REMOTE = "${env.CODE_ENDPOINT}/xsc/xenadmin-branding.git"
 
         def branchExistsOnBrand = bat(
           returnStatus: true,
@@ -245,6 +248,17 @@ node("${params.BUILD_ON_NODE}") {
     }
 
     stage('Run tests') {
+
+      if (params.XC_BRANDING != 'citrix') {
+        println "Testing package-and-sign script"
+        bat """
+            cd ${env.WORKSPACE}
+            mkdir -p TestXenAdminUnsigned
+            unzip -q -o output\\XenAdminUnsigned.zip -d TestXenAdminUnsigned
+            sh "TestXenAdminUnsigned/XenAdminUnsigned/mk/package-and-sign.sh"
+            """
+      }
+
       if (params.SKIP_TESTS) {
         println "Skipping tests on request."
       } else {
