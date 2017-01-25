@@ -60,7 +60,6 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.labelBlurb, "labelBlurb");
             this.tableLayoutPanel1.SetColumnSpan(this.labelBlurb, 2);
-            this.labelBlurb.MaximumSize = new System.Drawing.Size(380, 0);
             this.labelBlurb.Name = "labelBlurb";
             // 
             // buttonCancel
@@ -74,7 +73,6 @@ namespace XenAdmin.Dialogs
             // labelCurrentRoleValue
             // 
             resources.ApplyResources(this.labelCurrentRoleValue, "labelCurrentRoleValue");
-            this.labelCurrentRoleValue.MaximumSize = new System.Drawing.Size(250, 0);
             this.labelCurrentRoleValue.Name = "labelCurrentRoleValue";
             // 
             // labelCurrentRole
@@ -100,7 +98,6 @@ namespace XenAdmin.Dialogs
             // labelRequiredRoleValue
             // 
             resources.ApplyResources(this.labelRequiredRoleValue, "labelRequiredRoleValue");
-            this.labelRequiredRoleValue.MaximumSize = new System.Drawing.Size(250, 0);
             this.labelRequiredRoleValue.Name = "labelRequiredRoleValue";
             // 
             // TextBoxUsername
@@ -188,7 +185,6 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.labelBlurb2, "labelBlurb2");
             this.tableLayoutPanel1.SetColumnSpan(this.labelBlurb2, 2);
-            this.labelBlurb2.MaximumSize = new System.Drawing.Size(380, 0);
             this.labelBlurb2.Name = "labelBlurb2";
             // 
             // TextBoxPassword

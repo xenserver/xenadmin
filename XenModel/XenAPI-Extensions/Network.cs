@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -147,8 +147,8 @@ namespace XenAPI
 
         public override bool Show(bool showHiddenVMs)
         {
-            
-                if (IsGuestInstallerNetwork)
+                // CA-218956 - Expose HIMN when showing hidden objects
+                if (IsGuestInstallerNetwork && !showHiddenVMs)
                     return false;
 
                 if (!ShowAllPifs(showHiddenVMs))

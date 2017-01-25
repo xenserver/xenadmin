@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -55,7 +55,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
             Vm = vm;
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             foreach (VM existingVm in Pool.Connection.Cache.VMs)
             {

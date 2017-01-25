@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -166,6 +166,7 @@ namespace XenAdmin.Wizards
             xenTabControlBody.SelectedTab = wizardProgress.CurrentStepTabPage;
 
             wizardProgress.CurrentStepTabPage.PageLoaded(e.IsForwardsTransition ? PageLoadedDirection.Forward : PageLoadedDirection.Back);
+            wizardProgress.CurrentStepTabPage.SelectDefaultControl();
             UpdateWizard();
 
             if (wizardProgress.IsLastStep)
@@ -325,7 +326,11 @@ namespace XenAdmin.Wizards
         private void XenWizardBase_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
+            { 
+                if (buttonNext.CanSelect)
+                    buttonNext.Select();
                 buttonNext.PerformClick();
+            }
         }
 
         [Browsable(false)]

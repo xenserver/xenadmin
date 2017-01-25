@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -50,6 +50,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private bool m_disasterRecoveryTask;
         private SR m_srToReattach;
+        private List<String> my_srs = new List<String>();
         #endregion
 
         public CIFS_ISO()
@@ -68,7 +69,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public override bool EnableNext()
         {
             return SrWizardHelpers.ValidateCifsSharename(comboBoxCifsSharename.Text)
-                && !(checkBoxUseDifferentUsername.Checked && String.IsNullOrEmpty(textBoxCifsUsername.Text));
+                && !(checkBoxUseDifferentUsername.Checked && String.IsNullOrEmpty(textBoxCifsUsername.Text))
+                && !passwordFailure1.Visible;
         }
 
         public override bool EnablePrevious()
@@ -81,7 +83,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override void PopulatePage()
         {
-            var my_srs = new List<String>();
             var add_srs = new List<String>();
             foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
             {
@@ -106,6 +107,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // Remove all SRs that the current pool can see
             add_srs.RemoveAll(my_srs.Contains);
             this.comboBoxCifsSharename.Items.AddRange(add_srs.ToArray());
+        }
+
+        public override void SelectDefaultControl()
+        {
+            comboBoxCifsSharename.Select();
         }
 
         #endregion
@@ -165,7 +171,20 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         private void textBoxCifsSharename_TextChanged(object sender, EventArgs e)
         {
+            passwordFailure1.PerformCheck(IsIsoStorageAlreadyAttached);
+
             OnPageUpdated();
+        }
+
+        private bool IsIsoStorageAlreadyAttached(out string error)
+        {
+            error = string.Empty;
+            if (my_srs.Contains(comboBoxCifsSharename.Text))
+            {
+                error = string.Format(Messages.SMB_ISO_STORAGE_ALREADY_ATTACHED, Connection.FriendlyName);
+                return false;
+            }
+            return true;
         }
 
         private void checkBoxUseDifferentUsername_CheckedChanged(object sender, EventArgs e)

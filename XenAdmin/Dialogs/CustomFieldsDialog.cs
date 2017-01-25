@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -52,7 +52,7 @@ namespace XenAdmin.Dialogs
             CustomFieldsManager.CustomFieldsChanged += CustomFields_CustomFieldsChanged;
         }
 
-        void CustomFields_CustomFieldsChanged(object sender, EventArgs e)
+        void CustomFields_CustomFieldsChanged()
         {
             Build();
         }

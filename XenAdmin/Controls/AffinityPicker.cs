@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -215,6 +215,17 @@ namespace XenAdmin.Controls
                 DynamicRadioButton.Select();
             else
                 ServersGridView.Select();
+        }
+
+        bool selectedOnVisibleChanged = false;
+
+        private void ServersGridView_VisibleChanged(object sender, EventArgs e)
+        {
+            if (!selectedOnVisibleChanged)
+            {
+                selectedOnVisibleChanged = true;
+                SelectSomething();//CA-213728
+            }
         }
     }
 

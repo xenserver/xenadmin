@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -67,7 +67,6 @@ namespace XenAdmin.Wizards
         private readonly FilerDetails xenTabPageFilerDetails;
         private readonly ChooseSrTypePage xenTabPageChooseSrType;
         private readonly RBACWarningPage xenTabPageRbacWarning;
-        private readonly StorageProvisioning xenTabPageStorageProvisioningMethod;
         #endregion
 
         /// <summary>
@@ -118,7 +117,6 @@ namespace XenAdmin.Wizards
             xenTabPageRbacWarning = new RBACWarningPage((srToReattach == null && !disasterRecoveryTask)
                              ? Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_CREATE
                              : Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_ATTACH);
-            xenTabPageStorageProvisioningMethod = new StorageProvisioning();
 
             //do not use virtual members in constructor
             var format = (srToReattach == null && !disasterRecoveryTask)
@@ -261,21 +259,8 @@ namespace XenAdmin.Wizards
 
             if (m_srWizardType is SrWizardType_LvmoHba)
             {
-                if (!Helpers.DundeeOrGreater(xenConnection) && senderPage == xenTabPageLvmoHba)
+                if (senderPage == xenTabPageLvmoHba)
                 {
-                    return CanShowLVMoHBASummaryPage(xenTabPageLvmoHba.SrDescriptors);
-                }
-                else if (senderPage == xenTabPageStorageProvisioningMethod
-                            //if there is no sr to be created (all will be reattached)
-                            || senderPage == xenTabPageLvmoHba && xenTabPageLvmoHba.SrDescriptors.All(srDescriptor => !string.IsNullOrEmpty(srDescriptor.UUID)))
-                {
-                    //setting SM Config to the SRs being created (UUID == empty)
-                    if (xenTabPageStorageProvisioningMethod.SMConfig.Count > 0)
-                    {
-                        xenTabPageLvmoHba.SrDescriptors
-                            .Where(desc => string.IsNullOrEmpty(desc.UUID)).ToList()
-                            .ForEach(desc => desc.SMConfig = xenTabPageStorageProvisioningMethod.SMConfig);
-                    }
                     return CanShowLVMoHBASummaryPage(xenTabPageLvmoHba.SrDescriptors);
                 }
             }
@@ -297,19 +282,10 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_LvmoIscsi)
                 {
                     AddPage(xenTabPageLvmoIscsi);
-
-                    // DISABLED THIN PROVISIONING 
-                    //if (Helpers.DundeeOrGreater(xenConnection))
-                    //    AddPage(xenTabPageStorageProvisioningMethod);
                 }
                 else if (m_srWizardType is SrWizardType_LvmoHba)
                 {
                     AddPage(xenTabPageLvmoHba);
-
-                    // DISABLED THIN PROVISIONING
-                    //if (Helpers.DundeeOrGreater(xenConnection))
-                    //    AddPage(xenTabPageStorageProvisioningMethod);
-                    
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Fcoe)
@@ -388,18 +364,7 @@ namespace XenAdmin.Wizards
             }
             else if (senderPagetype == typeof(LVMoISCSI))
             {
-                xenTabPageStorageProvisioningMethod.SRSize = xenTabPageLvmoIscsi.SRSize;
                 SetCustomDescription(m_srWizardType, xenTabPageLvmoIscsi.SrDescription);
-
-                if (xenTabPageLvmoIscsi.UUID != null) //already existing SR
-                {
-                    xenTabPageStorageProvisioningMethod.SetControlsUsingExistingSMConfig(m_srWizardType.SMConfig);
-                    xenTabPageStorageProvisioningMethod.DisableControls();
-                }
-                else
-                {
-                    xenTabPageStorageProvisioningMethod.ResetControls();
-                }
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
@@ -474,23 +439,6 @@ namespace XenAdmin.Wizards
                     m_srWizardType.DeviceConfig[entry.Key] = entry.Value;
                 SetCustomDescription(m_srWizardType, xentabPageEqualLogic.SrDescription);
             }
-            else if (senderPagetype == typeof(LVMoHBA))
-            {
-                xenTabPageStorageProvisioningMethod.SRSize = xenTabPageLvmoHba.SRSize;
-                bool creatingNew = m_srWizardType.SrDescriptors.Any(srDescriptor => string.IsNullOrEmpty(srDescriptor.UUID));
-                if (!creatingNew)
-                {
-                    DisablePage(xenTabPageStorageProvisioningMethod, true);
-                    xenTabPageStorageProvisioningMethod.ResetControls();
-                }
-            }
-            else if (senderPagetype == typeof(StorageProvisioning))
-            {
-                m_srWizardType.SMConfig = xenTabPageStorageProvisioningMethod.SMConfig;
-                m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
-                m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
-
-            }
         }
 
         private static void SetCustomDescription(SrWizardType srwizardtype, string description)
@@ -524,8 +472,11 @@ namespace XenAdmin.Wizards
             if (pool == null)
             {
                 log.Error("New SR Wizard: Pool has disappeared");
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 closeWizard = true;
                 return;
@@ -535,8 +486,11 @@ namespace XenAdmin.Wizards
             if (master == null)
             {
                 log.Error("New SR Wizard: Master has disappeared");
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                   new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.NEW_SR_CONNECTION_LOST, Helpers.GetName(xenConnection)), Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 closeWizard = true;
                 return;
@@ -577,20 +531,21 @@ namespace XenAdmin.Wizards
             }
 
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
-            ActionProgressDialog dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true};
-
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            using (var dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true})
             {
-                ActionProgressDialog closureDialog = dialog;
-                // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
-                FinalAction.Completed +=
-                    s => Program.Invoke(Program.MainWindow, () =>
+                if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+                {
+                    ActionProgressDialog closureDialog = dialog;
+                    // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
+                    FinalAction.Completed +=
+                        s => Program.Invoke(Program.MainWindow, () =>
                         {
                             if (closureDialog != null)
                                 closureDialog.Close();
                         });
+                }
+                dialog.ShowDialog(this);
             }
-            dialog.ShowDialog(this);
 
             if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
             {
@@ -603,9 +558,11 @@ namespace XenAdmin.Wizards
             if (!FinalAction.Succeeded && FinalAction is SrReattachAction && _srToReattach.HasPBDs)
             {
                 // reattach failed. Ensure PBDs are now unplugged and destroyed.
-                dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle);
-                dialog.ShowCancel = false;
-                dialog.ShowDialog();
+                using (var dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle))
+                {
+                    dialog.ShowCancel = false;
+                    dialog.ShowDialog();
+                }
             }
 
             // If action failed and frontend wants to stay open, just return
@@ -726,10 +683,15 @@ namespace XenAdmin.Wizards
                     // introduce
                     if (m_srWizardType.ShowIntroducePrompt)
                     {
-                        return DialogResult.Yes == new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, m_srWizardType.UUID), Text),
                                 ThreeButtonDialog.ButtonYes,
-                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                                new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                        return DialogResult.Yes == dialogResult;
                     }
 
                 }
@@ -738,10 +700,15 @@ namespace XenAdmin.Wizards
                     // Reattach
                     if (m_srWizardType.ShowReattachWarning)
                     {
-                        return DialogResult.Yes == new ThreeButtonDialog(
+                        DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name), Text),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(this);
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                        return DialogResult.Yes == dialogResult;
                     }
                 }
                 else
@@ -753,13 +720,18 @@ namespace XenAdmin.Wizards
 
                     // Warn user SR is already attached to other pool, and then introduce to this pool 
 
-                    return DialogResult.OK == new ThreeButtonDialog(
+                    DialogResult dialogResult;
+                        using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Warning,
                             string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name, Helpers.GetName(xenConnection), 
                             Text)),
                         ThreeButtonDialog.ButtonOK,
-                        ThreeButtonDialog.ButtonCancel).ShowDialog(this);
+                        ThreeButtonDialog.ButtonCancel))
+                        {
+                            dialogResult = dlg.ShowDialog(this);
+                        }
+                    return DialogResult.OK == dialogResult;
                 }
             }
 
@@ -777,11 +749,14 @@ namespace XenAdmin.Wizards
 
             if (xenTabPageChooseSrType.MatchingFrontends <= 0)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         String.Format(Messages.CANNOT_FIND_SR_WIZARD_TYPE, _srToReattach.type),
-                        Messages.XENCENTER)).ShowDialog(this);
+                        Messages.XENCENTER)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 Close();
             }

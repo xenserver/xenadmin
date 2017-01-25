@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._000_AddApplicationServer_h32bit_16;
+                return Images.StaticImages._000_AddApplicationServer_h32bit_16;
             }
         }
 
@@ -106,7 +106,10 @@ namespace XenAdmin.Commands
                     string text = String.Format(Messages.HOST_ALREADY_IN_POOL, hostToAdd.Name, _pool.Name, hostPool.Name);
                     string caption = Messages.POOL_JOIN_IMPOSSIBLE;
 
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, text, caption)).ShowDialog(Program.MainWindow);
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, text, caption)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
                 }
                 else
                 {

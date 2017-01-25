@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -117,14 +117,20 @@ namespace XenAdmin.Controls.Ballooning
 
         private void setSpinnerValueDisplay(double value)
         {
+            decimal newValue;
             if (Units == "GB")
             {
-                Spinner.Value = (decimal)Util.ToGB(value, 1, RoundingBehaviour.Nearest);
+                newValue = (decimal)Util.ToGB(value, 1, RoundingBehaviour.Nearest);
             }
             else
             {
-                Spinner.Value = (long)Util.ToMB(value, RoundingBehaviour.Nearest);
+                newValue = (long)Util.ToMB(value, RoundingBehaviour.Nearest);
             }
+            if (newValue < Spinner.Minimum)
+                newValue = Spinner.Minimum;
+            if (newValue > Spinner.Maximum)
+                newValue = Spinner.Maximum;
+            Spinner.Value = newValue;
         }
 
         public static void CalcMBRanges(double minBytes, double maxBytes, out double minMB, out double maxMB)

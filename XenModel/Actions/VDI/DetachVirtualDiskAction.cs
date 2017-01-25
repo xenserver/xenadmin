@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            log.DebugFormat("Detatching VDI '{0}'", Helpers.GetName(vdi));
+            log.DebugFormat("Detaching VDI '{0}'", Helpers.GetName(vdi));
             Description = Messages.ACTION_DISK_DETACHING;
             try
             {
@@ -96,7 +96,7 @@ namespace XenAdmin.Actions
                 PollToCompletion(51, 100);
             }
             Description = Messages.ACTION_DISK_DETACHED;
-            log.DebugFormat("Detatched VDI '{0}'", Helpers.GetName(vdi));
+            log.DebugFormat("Detached VDI '{0}'", Helpers.GetName(vdi));
         }
 
         protected override void Clean()

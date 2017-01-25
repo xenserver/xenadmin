@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -43,7 +43,7 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             bool mayHaveWssVm = Host.Connection.ResolveAll(Host.resident_VMs).Any(vm =>vm != null && vm.CouldBeWss);
             bool mayHaveWssVdis = Host.Connection.Cache.VDIs.Any(vdi=>vdi != null && vdi.CouldBeWss);

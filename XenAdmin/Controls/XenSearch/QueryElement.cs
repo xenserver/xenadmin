@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -115,7 +115,7 @@ namespace XenAdmin.Controls.XenSearch
             CustomFieldsManager.CustomFieldsChanged += OtherConfigWatcher_OtherConfigChanged;
         }
 
-        private static void OtherConfigWatcher_OtherConfigChanged(object sender, EventArgs e)
+        private static void OtherConfigWatcher_OtherConfigChanged()
         {
             List<CustomFieldDefinition> customFieldDefinitions = CustomFieldsManager.GetCustomFields();
 
@@ -160,14 +160,14 @@ namespace XenAdmin.Controls.XenSearch
         private QueryScope queryScope;  // Normally null, meaning use the scope from searcher (see WantQueryType). Set for the subquery of a parent-child query.
         private QueryFilter lastQueryFilter;
 
-        public event EventHandler QueryChanged;
+        public event Action QueryChanged;
 
         protected virtual void OnQueryChanged()
         {
             try
             {
                 if (QueryChanged != null)
-                    QueryChanged(this, new EventArgs());
+                    QueryChanged();
             }
             catch (Exception e)
             {
@@ -203,9 +203,20 @@ namespace XenAdmin.Controls.XenSearch
 
             queryTypeComboButton.BeforePopup += new EventHandler(queryTypeComboButton_BeforePopup);
             resourceSelectButton.BeforePopup += new EventHandler(resourceSelectButton_BeforePopup);
-            SelectDefaultQueryType();
 
+            queryTypeComboButton.SelectedItemChanged += OnQueryTypeComboButton_OnSelectedItemChanged;
+
+            SelectDefaultQueryType();
             Setup();
+        }
+
+        private void OnQueryTypeComboButton_OnSelectedItemChanged(object sender, EventArgs e)
+        {
+            var selectedItem = queryTypeComboButton.SelectedItem;
+            if (selectedItem.Tag is CustomFieldQueryTypeBase)
+            {
+                queryTypeComboButton.Text = selectedItem.ToString().Ellipsise(24);
+            }
         }
 
         /// <summary> 
@@ -338,8 +349,8 @@ namespace XenAdmin.Controls.XenSearch
                 subQueryElement.Resize -= new EventHandler(subQueryElement_Resize);
                 subQueryElement.Resize += new EventHandler(subQueryElement_Resize);
 
-                subQueryElement.QueryChanged -= new EventHandler(subQueryElement_QueryChanged);
-                subQueryElement.QueryChanged += new EventHandler(subQueryElement_QueryChanged);
+                subQueryElement.QueryChanged -= subQueryElement_QueryChanged;
+                subQueryElement.QueryChanged += subQueryElement_QueryChanged;
 
                 if (category == QueryType.Category.ParentChild)
                 {
@@ -367,7 +378,7 @@ namespace XenAdmin.Controls.XenSearch
             this.Height = topOffset;
         }
 
-        void subQueryElement_QueryChanged(object sender, EventArgs e)
+        void subQueryElement_QueryChanged()
         {
             OnQueryChanged();
         }
@@ -2006,7 +2017,7 @@ namespace XenAdmin.Controls.XenSearch
                 OtherConfigAndTagsWatcher.TagsChanged += OtherConfigAndTagsWatcher_TagsChanged;
             }
 
-            void OtherConfigAndTagsWatcher_TagsChanged(object sender, EventArgs e)
+            void OtherConfigAndTagsWatcher_TagsChanged()
             {
                 tags = Tags.GetAllTags();
 

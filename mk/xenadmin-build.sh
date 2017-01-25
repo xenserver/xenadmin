@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) Citrix Systems Inc. 
+# Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, 
@@ -30,11 +30,16 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
-set -eu
+set -ex
 
-source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
+#==============================================================
+#Micro version override - please keep at the top of the script
+#==============================================================
+#Set and uncomment this to override the 3rd value of the product number 
+#normally fetched from branding
+#
+#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
 
-WGET_OPT="-q -N --timestamp"
 UNZIP="unzip -q -o"
 
 mkdir_clean()
@@ -42,17 +47,10 @@ mkdir_clean()
   rm -rf $1 && mkdir -p $1
 }
 
-#clear all working directories before anything else
-mkdir_clean ${SCRATCH_DIR}
-mkdir_clean ${OUTPUT_DIR}
-mkdir_clean ${BUILD_ARCHIVE}
-rm -rf ${TEST_DIR}/* ${XENCENTER_LOGDIR}/*.log || true
-
-if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
-then
-    git clone ${BUILD_TOOLS_REPO} ${BUILD_TOOLS}
-    chmod +x ${BUILD_TOOLS}/scripts/storefiles.py
-fi
+ROOT="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+REPO="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRATCH_DIR=${ROOT}/scratch
+OUTPUT_DIR=${ROOT}/output
 
 WIX_INSTALLER_DEFAULT_GUID=65AE1345-A520-456D-8A19-2F52D43D3A09
 WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL=0CE5C3E7-E786-467a-80CF-F3EC04D414E4
@@ -60,81 +58,37 @@ WIX_INSTALLER_DEFAULT_VERSION=1.0.0
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z])
 PRODUCT_GUID_VNCCONTROL=$(uuidgen | tr [a-z] [A-Z])
 
-#bring in stuff from dotnet-packages latest build
-XMLRPC_DIR=${REPO}/xml-rpc.net/obj/Release
-LOG4NET_DIR=${REPO}/log4net/build/bin/net/2.0/release
-DOTNETZIP_DIR=${REPO}/dotnetzip/DotNetZip-src/DotNetZip/Zip/bin/Release
-SHARPZIPLIB_DIR=${REPO}/sharpziplib/bin
-DISCUTILS_DIR=${REPO}/DiscUtils/src/bin/Release
-MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR=${REPO}/dotNetFx452_web_setup
-PUTTY_DIR=${REPO}/putty
-
-wget ${WGET_OPT} -O "${SCRATCH_DIR}/dotnet-packages-manifest" "${WEB_DOTNET}/manifest"
-mkdir_clean ${XMLRPC_DIR} && wget ${WGET_OPT} -P ${XMLRPC_DIR}  ${WEB_DOTNET}/UNSIGNED/CookComputing.XmlRpcV2.dll
-mkdir_clean ${LOG4NET_DIR} && wget ${WGET_OPT} -P ${LOG4NET_DIR} ${WEB_DOTNET}/UNSIGNED/log4net.dll
-mkdir_clean ${SHARPZIPLIB_DIR} && wget ${WGET_OPT} -P ${SHARPZIPLIB_DIR} ${WEB_DOTNET}/UNSIGNED/ICSharpCode.SharpZipLib.dll
-mkdir_clean ${DOTNETZIP_DIR} && wget ${WGET_OPT} -P ${DOTNETZIP_DIR} ${WEB_DOTNET}/UNSIGNED/Ionic.Zip.dll
-mkdir_clean ${DISCUTILS_DIR} && wget ${WGET_OPT} -P ${DISCUTILS_DIR} ${WEB_DOTNET}/UNSIGNED/DiscUtils.dll
-mkdir_clean ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR} && wget ${WGET_OPT} -P "${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}" "${WEB_DOTNET}/NDP452-KB2901954-Web.exe"
-mkdir_clean ${PUTTY_DIR} &&  wget ${WGET_OPT} -P "${PUTTY_DIR}" "${WEB_DOTNET}/UNSIGNED/putty.exe"
-
-wget ${WGET_OPT} -P "${REPO}" "${WEB_DOTNET}/sign.bat" && chmod a+x ${REPO}/sign.bat
-
-#bring in stuff from xencenter-ovf latest xe-phase-1
-wget ${WGET_OPT} -P "${SCRATCH_DIR}" "${WEB_XE_PHASE_1}/XenCenterOVF.zip"
-${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
-
-#bring manifest from latest xe-phase-1
-wget ${WGET_OPT} -O ${SCRATCH_DIR}/xe-phase-1-manifest "${WEB_XE_PHASE_1}/manifest"
-
-#bring XenServer.NET from latest xe-phase-2
-wget ${WGET_OPT} -P "${REPO}" "${WEB_XE_PHASE_2}/XenServer-SDK.zip" && ${UNZIP} -j ${REPO}/XenServer-SDK.zip XenServer-SDK/XenServer.NET/bin/XenServer.dll XenServer-SDK/XenServer.NET/bin/CookComputing.XmlRpcV2.dll -d ${REPO}/XenServer.NET
-
-#bring in some more libraries
-mkdir_clean ${REPO}/NUnit
-wget ${WGET_OPT} -P ${REPO}/NUnit ${WEB_LIB}/nunit.framework.dll 
-wget ${WGET_OPT} -O ${REPO}/NUnit/Moq.dll ${WEB_LIB}/Moq_dotnet4.dll 
-wget ${WGET_OPT} -P ${SCRATCH_DIR} ${WEB_LIB}/{wix39-sources-debug.zip,wix39-binaries.zip}
-
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
 
-#bring RPU hotfixes
-if [ "${BRANDING_UPDATE}" = "xsupdate" ]
-then
-  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU001/1.0/RPU001.xsupdate
-  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU001/1.0/RPU001-src-pkgs.tar && cd ${REPO}/Branding/Hotfixes && gzip RPU001-src-pkgs.tar
-  wget ${WGET_OPT} -P ${REPO}/Branding/Hotfixes ${WEB_HOTFIXES}/RPU002/1.0/RPU002.xsupdate
-fi
-
 #build
-MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.5 /p:VisualStudioVersion=13.0"
+MSBUILD="MSBuild.exe /nologo /m /verbosity:minimal /p:Configuration=Release /p:TargetFrameworkVersion=v4.6 /p:VisualStudioVersion=13.0"
 
+${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 cd ${REPO}
 $MSBUILD XenAdmin.sln
 $MSBUILD xe/Xe.csproj
 $MSBUILD VNCControl/VNCControl.sln
-SOLUTIONDIR=$(cygpath.exe -w "${REPO}/XenAdmin")
-$MSBUILD /p:SolutionDir="$SOLUTIONDIR" splash/splash.vcxproj
+$MSBUILD /p:SolutionDir="${REPO}/XenAdmin" splash/splash.vcxproj
 
 #prepare wix
 
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 WIX_SRC=${SCRATCH_DIR}/wixsrc
-# ${WIX_BIN}/
-CANDLE="candle.exe -nologo"
-LIT="lit.exe -nologo"
-LIGHT="light.exe -nologo"
+
+CANDLE="${WIX_BIN}/candle.exe -nologo"
+LIT="${WIX_BIN}/lit.exe -nologo"
+LIGHT="${WIX_BIN}/light.exe -nologo"
 
 mkdir_clean ${WIX_SRC}
-${UNZIP} ${SCRATCH_DIR}/wix39-sources-debug.zip -d ${SCRATCH_DIR}/wixsrc
+${UNZIP} ${SCRATCH_DIR}/wix310-debug.zip -d ${SCRATCH_DIR}/wixsrc
 cp ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeDlg.wxs ${WIX_SRC}/src/ext/UIExtension/wixlib/CustomizeStdDlg.wxs
 cd ${WIX_SRC}/src/ext/UIExtension/wixlib && patch -p1 --binary < ${REPO}/mk/patches/wix_src_patch
 cp -r ${WIX_SRC}/src/ext/UIExtension/wixlib ${REPO}/WixInstaller
 
 mkdir_clean ${WIX_BIN}
-${UNZIP} ${SCRATCH_DIR}/wix39-binaries.zip -d ${WIX_BIN}
+${UNZIP} ${SCRATCH_DIR}/wix310-binaries.zip -d ${WIX_BIN}
 touch ${REPO}/WixInstaller/PrintEula.dll
 
 #compile_wix
@@ -173,17 +127,16 @@ version_vnccontrol_installer ${WIX}/vnccontrol.wxs
 
 #copy dotNetInstaller files
 DOTNETINST=${REPO}/dotNetInstaller
-cp ${MICROSOFT_DOTNET_FRAMEWORK_INSTALLER_DIR}/NDP452-KB2901954-Web.exe ${DOTNETINST}
+cd ${DOTNETINST}
 DOTNETINSTALLER_FILEPATH="$(which dotNetInstaller.exe)"
 DOTNETINSTALLER_DIRPATH=${DOTNETINSTALLER_FILEPATH%/*}
 cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}
 
-# Collect the unsigned files, if the COLLECT_UNSIGNED_FILES is defined 
-# (the variable can be set from the jenkins ui by putting "export COLLECT_UNSIGNED_FILES=1" above the call for build script)
-if [ -n "${COLLECT_UNSIGNED_FILES+x}" ]; then
-	echo "INFO: Collect unsigned files..."
-	. ${REPO}/mk/archive-unsigned.sh
-fi
+echo "INFO: Collecting unsigned files..."
+mkdir_clean ${OUTPUT_DIR}/XenAdminUnsigned
+cp -R ${REPO}/* ${OUTPUT_DIR}/XenAdminUnsigned
+cd ${OUTPUT_DIR} && zip -q -r -m XenAdminUnsigned.zip XenAdminUnsigned
+echo "Unsigned artifacts archived"
 
 #build and sign the installers
 . ${REPO}/mk/build-installers.sh
@@ -203,16 +156,8 @@ cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 #include resources script and collect the resources for translations
 . ${REPO}/mk/find-resources.sh
 
-#collect output and extra files to the OUTPUT_DIR
-EN_CD_DIR=${OUTPUT_DIR}/CD_FILES.main/client_install
-mkdir_clean ${EN_CD_DIR}
-cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${EN_CD_DIR}
-cp ${REPO}/Branding/Images/AppIcon.ico ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico
-L10N_CD_DIR=${OUTPUT_DIR}/client_install
-mkdir_clean ${L10N_CD_DIR}
-cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_CD_DIR}
-
 cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
+cd ${WIX}/outVNCControl && tar cjf ${OUTPUT_DIR}/VNCControl.tar.bz2 VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 cp ${REPO}/CFUValidator/bin/CFUValidator.tgz ${OUTPUT_DIR}/CFUValidator.tgz
@@ -224,54 +169,30 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,Xe
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
-echo "INFO:	Create English iso files"
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
-install -m 755 ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
-cp ${REPO}/mk/ISO_files/* ${ISO_DIR}
-cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
-mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso" "${ISO_DIR}"
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+cp ${REPO}/mk/ISO_files/AUTORUN.INF ${ISO_DIR}
+cp ${REPO}/Branding/Images/AppIcon.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+#CP-18097
+mkdir_clean ${OUTPUT_DIR}/installer
+tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}Setup.exe
 
-echo "INFO:	Create l10n iso file"
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
-install -m 755 ${L10N_CD_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
-cp ${REPO}/mk/ISO_files/* ${L10N_ISO_DIR}
-cp ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
-mkisofs -J -r -v -publisher "${BRANDING_COMPANY_NAME_LEGAL}" -p "${BRANDING_COMPANY_NAME_LEGAL}" -V "${BRANDING_BRAND_CONSOLE}" -o "${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.iso" "${L10N_ISO_DIR}"
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+cp ${REPO}/mk/ISO_files/AUTORUN.INF ${L10N_ISO_DIR}
+cp ${REPO}/Branding/Images/AppIcon.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
+#CP-18097
+mkdir_clean ${OUTPUT_DIR}/installer.l10n
+tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
 
-# Create a tarball containing the XenCenter ISO, to be installed by the host installer
-# MAIN_PKG_DIR is our working directory, MAIN_PKG_ISO_SUBDIR is the pathname of the ISO
-# file within the tar file, and therefore the path it eventually installs into
-mkdir_clean ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso
-ln -sf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.iso ${OUTPUT_DIR}/PACKAGES.main/opt/xensource/packages/iso/${BRANDING_BRAND_CONSOLE}.iso
-tar -C ${OUTPUT_DIR}/PACKAGES.main -ch opt/xensource/packages/iso/${BRANDING_BRAND_CONSOLE}.iso | bzip2 > ${OUTPUT_DIR}/PACKAGES.main/${BRANDING_BRAND_CONSOLE}.iso.tar.bz2
-rm -rf ${OUTPUT_DIR}/PACKAGES.main/opt
+#now package the pdbs
+cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
 
-#bring in the pdbs from dotnet-packages latest build
-for pdb in CookComputing.XmlRpcV2.pdb DiscUtils.pdb ICSharpCode.SharpZipLib.pdb Ionic.Zip.pdb log4net.pdb
-do
-  wget ${WGET_OPT} -P "${OUTPUT_DIR}" "${WEB_DOTNET}/${pdb}"
-done
-
-#create manifest
-echo "@branch=${XS_BRANCH}" >> ${OUTPUT_DIR}/manifest
-echo "xenadmin xenadmin.git ${get_REVISION:0:12}" >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep xencenter-ovf >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep chroot-lenny >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/xe-phase-1-manifest | grep branding >> ${OUTPUT_DIR}/manifest
-cat ${SCRATCH_DIR}/dotnet-packages-manifest >> ${OUTPUT_DIR}/manifest
-if [ "${BUILD_KIND:+$BUILD_KIND}" = production ]
-then
-    echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-secure-build
-else
-    echo ${get_BUILD_URL} >> ${OUTPUT_DIR}/latest-successful-build
-fi
-
-# Write out version information
-echo "xc_product_version=${BRANDING_XC_PRODUCT_VERSION}" >> ${OUTPUT_DIR}/xcversion
-echo "build_number=${BUILD_NUMBER}" >> ${OUTPUT_DIR}/xcversion
 
 echo "INFO:	Build phase succeeded at "
 date

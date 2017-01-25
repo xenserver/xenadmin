@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) Citrix Systems Inc. 
+# Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, 
@@ -33,20 +33,20 @@
 set -eu
 
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-REPO=${XENADMIN_DIR}
 OUTPUT_DIR=${ROOT}/output
 DOTNETINST=${REPO}/dotNetInstaller
 	
-source ${REPO}/Branding/branding.sh
+BRANDING_BRAND_CONSOLE=[XenCenter]
+BRANDING_COMPANY_NAME_SHORT=[Citrix]
 
 WIX=${REPO}/WixInstaller
 WIX_BIN=${WIX}/bin
 
-CANDLE="candle.exe -nologo"
-LIT="lit.exe -nologo"
-LIGHT="light.exe -nologo"
+CANDLE="${WIX_BIN}/candle.exe -nologo" 
+LIT="${WIX_BIN}/lit.exe -nologo"
+LIGHT="${WIX_BIN}/light.exe -nologo"
 
 mkdir_clean()
 {
@@ -60,14 +60,15 @@ if [ -f ${SIGN_FILE} ]; then
 fi
    
 #build and sign the installers
+echo "INFO: Build and sign the installers..."
 . ${REPO}/mk/build-installers.sh
 
 #collect output and extra files to the OUTPUT_DIR
-EN_CD_DIR=${OUTPUT_DIR}/CD_FILES.main/client_install
+EN_CD_DIR=${OUTPUT_DIR}/installer
 mkdir_clean ${EN_CD_DIR}
 cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${EN_CD_DIR}
 cp ${REPO}/Branding/Images/AppIcon.ico ${EN_CD_DIR}/${BRANDING_BRAND_CONSOLE}.ico
-L10N_CD_DIR=${OUTPUT_DIR}/client_install
+L10N_CD_DIR=${OUTPUT_DIR}/installer.l10n
 mkdir_clean ${L10N_CD_DIR}
 cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_CD_DIR}
 

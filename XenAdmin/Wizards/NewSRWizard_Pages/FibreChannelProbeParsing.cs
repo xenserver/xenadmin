@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -38,18 +38,22 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 {
     class FibreChannelProbeParsing
     {
-        internal static void ProcessXML(string p, List<FibreChannelDevice> devices)
+        internal static List<FibreChannelDevice> ProcessXML(string p)
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(p);
 
+            var devices = new List<FibreChannelDevice>();
+
             foreach (XmlNode device in doc.GetElementsByTagName("BlockDevice"))
             {
-                ParseDevice(device, devices);
+                var dev = ParseDevice(device);
+                devices.Add(dev);
             }
+            return devices;
         }
 
-        private static void ParseDevice(XmlNode device, List<FibreChannelDevice> devices)
+        private static FibreChannelDevice ParseDevice(XmlNode device)
         {
             string vendor = "";
             long size = 0;
@@ -95,8 +99,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     eth = node.InnerText.Trim();
             }
 
-            devices.Add(new FibreChannelDevice(serial, path, vendor, size, 
-                scsiid, adapter, channel, id, lun, name_label, name_description, pool_metadata_detected, eth));
+            return new FibreChannelDevice(serial, path, vendor, size, 
+                scsiid, adapter, channel, id, lun, name_label, name_description, pool_metadata_detected, eth);
         }
 
         /// <summary>

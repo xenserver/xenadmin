@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin.Dialogs;
@@ -40,7 +41,7 @@ namespace XenAdminTests.DialogTests.boston.DownloadApplianceDialogTests
     {
         protected override DownloadApplianceDialog NewDialog()
         {
-            return new DownloadApplianceDialog("http://myuri");
+            return new DownloadApplianceDialog(new Uri("http://myuri"));
         }
 
         protected override void RunAfter()

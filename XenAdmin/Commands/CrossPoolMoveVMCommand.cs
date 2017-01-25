@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -46,7 +46,11 @@ namespace XenAdmin.Commands
         public CrossPoolMoveVMCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
             : base(mainWindow, selection, preSelectedHost)
         {
-            MenuText = Messages.MAINWINDOW_MOVEVM;
+        }
+
+        public override string MenuText
+        {
+            get { return Messages.MAINWINDOW_MOVEVM; }
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)

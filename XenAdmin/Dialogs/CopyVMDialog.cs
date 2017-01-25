@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -60,8 +60,8 @@ namespace XenAdmin.Dialogs
             IsRealVm = !vm.is_a_template;
             TheVM = vm;
             srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
-            srPicker1.ItemSelectionNotNull += new EventHandler(srPicker1_ItemSelectionNotNull);
-            srPicker1.ItemSelectionNull += new EventHandler(srPicker1_ItemSelectionNull);
+            srPicker1.ItemSelectionNotNull += srPicker1_ItemSelectionNotNull;
+            srPicker1.ItemSelectionNull += srPicker1_ItemSelectionNull;
             Host affinity = TheVM.Home();
             srPicker1.Connection = TheVM.Connection;
             srPicker1.DiskSize = vm.TotalVMSize;
@@ -104,12 +104,12 @@ namespace XenAdmin.Dialogs
             srPicker1.selectDefaultSROrAny();
         }
 
-        private void srPicker1_ItemSelectionNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNull()
         {
             EnableMoveButton();
         }
 
-        private void srPicker1_ItemSelectionNotNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNotNull()
         {
             EnableMoveButton();
         }

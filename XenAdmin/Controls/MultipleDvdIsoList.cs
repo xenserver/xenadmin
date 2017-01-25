@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -73,6 +72,34 @@ namespace XenAdmin.Controls
             }
         }
 
+        #region Designer browsable properties
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        public Color LabelSingleDvdForeColor
+        {
+            get { return labelSingleDvd.ForeColor; }
+            set { labelSingleDvd.ForeColor = value; }
+        }
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        public Color LabelNewCdForeColor
+        {
+            get { return newCDLabel.ForeColor; }
+            set { newCDLabel.ForeColor = value; }
+        }
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        public Color LinkLabelLinkColor
+        {
+            get { return linkLabel1.LinkColor; }
+            set { linkLabel1.LinkColor = value; }
+        }
+
+        #endregion
+
         protected virtual void DeregisterEvents()
         {
             if (vm == null)
@@ -111,7 +138,7 @@ namespace XenAdmin.Controls
             }
 
             comboBoxDrive.Items.Clear();
-            if (VM != null)
+            if (VM != null && !VM.is_control_domain)
             {
                 List<VBD> vbds = VM.Connection.ResolveAll(VM.VBDs);
                 if (vbds == null)
@@ -231,14 +258,9 @@ namespace XenAdmin.Controls
             if (VM != null)
             {
                 CreateCdDriveAction createDriveAction = new CreateCdDriveAction(VM, false,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox);
-                new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee).ShowDialog(this);
+                using (var dlg = new ActionProgressDialog(createDriveAction, ProgressBarStyle.Marquee))
+                    dlg.ShowDialog(this);
             }
-        }
-
-        public void SetTextColor(Color c)
-        {
-            labelSingleDvd.ForeColor = c;
-            newCDLabel.ForeColor = c;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

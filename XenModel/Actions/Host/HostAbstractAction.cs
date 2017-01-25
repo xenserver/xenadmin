@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -126,7 +126,7 @@ namespace XenAdmin.Actions
             if (pool != null && pool.ha_enabled)
             {
                 Dictionary<XenRef<VM>, string> config = Helpers.GetVmHaRestartPrioritiesForApi(Helpers.GetVmHaRestartPriorities(pool.Connection, true));
-                long max = XenAPI.Pool.ha_compute_hypothetical_max_host_failures_to_tolerate(this.Session, config);
+                long max = Pool.GetMaximumTolerableHostFailures(Session, config);
 
                 long currentNtol = pool.ha_host_failures_to_tolerate;
                 long targetNtol = Math.Max(0, max - 1);
@@ -170,18 +170,11 @@ namespace XenAdmin.Actions
             if (queryNtolIncrease && pool != null && pool.ha_enabled)
             {
                 Dictionary<XenRef<VM>, string> config = Helpers.GetVmHaRestartPrioritiesForApi(Helpers.GetVmHaRestartPriorities(pool.Connection, true));
-                long max = XenAPI.Pool.ha_compute_hypothetical_max_host_failures_to_tolerate(this.Session, config);
+                long max = Pool.GetMaximumTolerableHostFailures(Session, config);
                 long currentNtol = pool.ha_host_failures_to_tolerate;
 
-                if (currentNtol < max)
-                {
-                    bool doit = (AcceptNTolChangesOnEnable != null) ?  AcceptNTolChangesOnEnable(pool,Host, currentNtol, max) : false;
-
-                    if (doit)
-                    {
-                        XenAPI.Pool.set_ha_host_failures_to_tolerate(this.Session, pool.opaque_ref, max);
-                    }
-                }
+                if (currentNtol < max && AcceptNTolChangesOnEnable != null && AcceptNTolChangesOnEnable(pool, Host, currentNtol, max))
+                    Pool.set_ha_host_failures_to_tolerate(this.Session, pool.opaque_ref, max);
             }
         }
 

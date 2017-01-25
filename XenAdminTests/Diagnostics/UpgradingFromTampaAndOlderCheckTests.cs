@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -126,7 +126,7 @@ namespace XenAdminTests.Diagnostics
             host.Setup(h => h.IsFreeLicense()).Returns(tc.IsFree);
             host.Setup(h => h.InGrace).Returns(tc.InGrace);
             UpgradingFromTampaAndOlderCheck check = new UpgradingFromTampaAndOlderCheck(host.Object);
-            Assert.AreEqual(tc.ExpectProblem, check.RunCheck()!=null, "Problem found");
+            Assert.AreEqual(tc.ExpectProblem, check.RunAllChecks().Count != 0, "Problem found");
         }
     }
 }

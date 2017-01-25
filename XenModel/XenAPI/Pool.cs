@@ -80,7 +80,9 @@ namespace XenAPI
             List<pool_allowed_operations> allowed_operations,
             Dictionary<string, pool_allowed_operations> current_operations,
             Dictionary<string, string> guest_agent_config,
-            Dictionary<string, string> cpu_info)
+            Dictionary<string, string> cpu_info,
+            bool policy_no_vendor_device,
+            bool live_patching_disabled)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -115,6 +117,8 @@ namespace XenAPI
             this.current_operations = current_operations;
             this.guest_agent_config = guest_agent_config;
             this.cpu_info = cpu_info;
+            this.policy_no_vendor_device = policy_no_vendor_device;
+            this.live_patching_disabled = live_patching_disabled;
         }
 
         /// <summary>
@@ -161,6 +165,8 @@ namespace XenAPI
             current_operations = update.current_operations;
             guest_agent_config = update.guest_agent_config;
             cpu_info = update.cpu_info;
+            policy_no_vendor_device = update.policy_no_vendor_device;
+            live_patching_disabled = update.live_patching_disabled;
         }
 
         internal void UpdateFromProxy(Proxy_Pool proxy)
@@ -198,6 +204,8 @@ namespace XenAPI
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_pool_allowed_operations(proxy.current_operations);
             guest_agent_config = proxy.guest_agent_config == null ? null : Maps.convert_from_proxy_string_string(proxy.guest_agent_config);
             cpu_info = proxy.cpu_info == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_info);
+            policy_no_vendor_device = (bool)proxy.policy_no_vendor_device;
+            live_patching_disabled = (bool)proxy.live_patching_disabled;
         }
 
         public Proxy_Pool ToProxy()
@@ -236,6 +244,8 @@ namespace XenAPI
             result_.current_operations = Maps.convert_to_proxy_string_pool_allowed_operations(current_operations);
             result_.guest_agent_config = Maps.convert_to_proxy_string_string(guest_agent_config);
             result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
+            result_.policy_no_vendor_device = policy_no_vendor_device;
+            result_.live_patching_disabled = live_patching_disabled;
             return result_;
         }
 
@@ -278,6 +288,8 @@ namespace XenAPI
             current_operations = Maps.convert_from_proxy_string_pool_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
             guest_agent_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_agent_config"));
             cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
+            policy_no_vendor_device = Marshalling.ParseBool(table, "policy_no_vendor_device");
+            live_patching_disabled = Marshalling.ParseBool(table, "live_patching_disabled");
         }
 
         public bool DeepEquals(Pool other, bool ignoreCurrentOperations)
@@ -321,7 +333,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._ha_cluster_stack, other._ha_cluster_stack) &&
                 Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
                 Helper.AreEqual2(this._guest_agent_config, other._guest_agent_config) &&
-                Helper.AreEqual2(this._cpu_info, other._cpu_info);
+                Helper.AreEqual2(this._cpu_info, other._cpu_info) &&
+                Helper.AreEqual2(this._policy_no_vendor_device, other._policy_no_vendor_device) &&
+                Helper.AreEqual2(this._live_patching_disabled, other._live_patching_disabled);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -380,6 +394,14 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_wlb_verify_cert, server._wlb_verify_cert))
                 {
                     Pool.set_wlb_verify_cert(session, opaqueRef, _wlb_verify_cert);
+                }
+                if (!Helper.AreEqual2(_policy_no_vendor_device, server._policy_no_vendor_device))
+                {
+                    Pool.set_policy_no_vendor_device(session, opaqueRef, _policy_no_vendor_device);
+                }
+                if (!Helper.AreEqual2(_live_patching_disabled, server._live_patching_disabled))
+                {
+                    Pool.set_live_patching_disabled(session, opaqueRef, _live_patching_disabled);
                 }
 
                 return null;
@@ -771,6 +793,28 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the policy_no_vendor_device field of the given pool.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static bool get_policy_no_vendor_device(Session session, string _pool)
+        {
+            return (bool)session.proxy.pool_get_policy_no_vendor_device(session.uuid, (_pool != null) ? _pool : "").parse();
+        }
+
+        /// <summary>
+        /// Get the live_patching_disabled field of the given pool.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static bool get_live_patching_disabled(Session session, string _pool)
+        {
+            return (bool)session.proxy.pool_get_live_patching_disabled(session.uuid, (_pool != null) ? _pool : "").parse();
+        }
+
+        /// <summary>
         /// Set the name_label field of the given pool.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1011,6 +1055,30 @@ namespace XenAPI
         public static void set_wlb_verify_cert(Session session, string _pool, bool _wlb_verify_cert)
         {
             session.proxy.pool_set_wlb_verify_cert(session.uuid, (_pool != null) ? _pool : "", _wlb_verify_cert).parse();
+        }
+
+        /// <summary>
+        /// Set the policy_no_vendor_device field of the given pool.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_policy_no_vendor_device">New value to set</param>
+        public static void set_policy_no_vendor_device(Session session, string _pool, bool _policy_no_vendor_device)
+        {
+            session.proxy.pool_set_policy_no_vendor_device(session.uuid, (_pool != null) ? _pool : "", _policy_no_vendor_device).parse();
+        }
+
+        /// <summary>
+        /// Set the live_patching_disabled field of the given pool.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_live_patching_disabled">New value to set</param>
+        public static void set_live_patching_disabled(Session session, string _pool, bool _live_patching_disabled)
+        {
+            session.proxy.pool_set_live_patching_disabled(session.uuid, (_pool != null) ? _pool : "", _live_patching_disabled).parse();
         }
 
         /// <summary>
@@ -2646,5 +2714,43 @@ namespace XenAPI
             }
         }
         private Dictionary<string, string> _cpu_info;
+
+        /// <summary>
+        /// The pool-wide policy for clients on whether to use the vendor device or not on newly created VMs. This field will also be consulted if the 'has_vendor_device' field is not specified in the VM.create call.
+        /// First published in XenServer Dundee.
+        /// </summary>
+        public virtual bool policy_no_vendor_device
+        {
+            get { return _policy_no_vendor_device; }
+            set
+            {
+                if (!Helper.AreEqual(value, _policy_no_vendor_device))
+                {
+                    _policy_no_vendor_device = value;
+                    Changed = true;
+                    NotifyPropertyChanged("policy_no_vendor_device");
+                }
+            }
+        }
+        private bool _policy_no_vendor_device;
+
+        /// <summary>
+        /// The pool-wide flag to show if the live patching feauture is disabled or not.
+        /// First published in .
+        /// </summary>
+        public virtual bool live_patching_disabled
+        {
+            get { return _live_patching_disabled; }
+            set
+            {
+                if (!Helper.AreEqual(value, _live_patching_disabled))
+                {
+                    _live_patching_disabled = value;
+                    Changed = true;
+                    NotifyPropertyChanged("live_patching_disabled");
+                }
+            }
+        }
+        private bool _live_patching_disabled;
     }
 }

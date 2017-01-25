@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -456,11 +456,14 @@ namespace XenAdmin.Dialogs
                 }
                 catch (Failure)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                        new ThreeButtonDialog.Details(
                            SystemIcons.Warning,
                            Messages.NETWORK_RECONFIG_CONNECTION_LOST,
-                           Messages.XENCENTER)).ShowDialog(this);
+                           Messages.XENCENTER)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                     this.Close();
                     return;
                 }
@@ -502,12 +505,16 @@ namespace XenAdmin.Dialogs
                     string title = Pool == null ? Messages.NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_HOST 
                         : Messages.NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL;
 
-                    if (DialogResult.OK !=
-                        new ThreeButtonDialog(
+                    DialogResult dialogResult;
+                    using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, title),
                             "NetworkingPropertiesPMIWarning",
                             new ThreeButtonDialog.TBDButton(Messages.NETWORKING_PROPERTIES_CHANGING_MANAGEMENT_CONTINUE, DialogResult.OK),
-                            ThreeButtonDialog.ButtonCancel).ShowDialog(this))
+                            ThreeButtonDialog.ButtonCancel))
+                    {
+                        dialogResult = dlg.ShowDialog(this);
+                    }
+                    if (DialogResult.OK != dialogResult)
                     {
                         DialogResult = System.Windows.Forms.DialogResult.None;
                         return;

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -228,14 +228,15 @@ namespace XenAdmin.Actions
             {
                 Program.Invoke(Program.MainWindow, delegate
                 {
-                    ThreeButtonDialog d = new ThreeButtonDialog(
+                    using (var d = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(System.Drawing.SystemIcons.Warning, string.Format(Messages.FORCE_CLOSE_PLUGIN_PROMPT, _menuItemFeature.ToString())),
                         "ProcessForceClosePrompt",
                         new ThreeButtonDialog.TBDButton(Messages.FORCE_CLOSE, DialogResult.Yes),
-                        new ThreeButtonDialog.TBDButton(Messages.ALLOW_TO_CONTINUE, DialogResult.No));
-
-                    if (d.ShowDialog(Program.MainWindow) == DialogResult.Yes && !_extAppProcess.HasExited)
-                        _extAppProcess.Kill();
+                        new ThreeButtonDialog.TBDButton(Messages.ALLOW_TO_CONTINUE, DialogResult.No)))
+                    {
+                        if (d.ShowDialog(Program.MainWindow) == DialogResult.Yes && !_extAppProcess.HasExited)
+                            _extAppProcess.Kill();
+                    }
                 });
             }
             

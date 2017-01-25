@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -43,12 +43,14 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     {
         private int selectionCount;
         private WizardMode wizardMode;
+        private bool templatesOnly = false;
 
-        public CrossPoolMigrateFinishPage(int selectionCount, WizardMode wizardMode)
+        public CrossPoolMigrateFinishPage(int selectionCount, WizardMode wizardMode, bool templatesOnly)
 		{
             InitializeComponent();
             this.selectionCount = selectionCount;
             this.wizardMode = wizardMode;
+            this.templatesOnly = templatesOnly;
 		}
 
 		/// <summary>
@@ -59,7 +61,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 			get { return Messages.FINISH_PAGE_TEXT; }
 		}
 
-        public override string HelpID { get { return "MigrationSummary"; } }
+        public override string HelpID { get { return wizardMode == WizardMode.Copy ? "MigrationSummaryCopyMode" : "MigrationSummary"; } }
 
         /// <summary>
         /// Gets the page's title (headline)
@@ -68,10 +70,20 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
 		public override void PopulatePage()
 		{
-            if (selectionCount > 1)
-                m_labelIntro.Text = wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_FINISH_PAGE_INTRO_COPY : Messages.CPM_WIZARD_FINISH_PAGE_INTRO;
+            if (templatesOnly)
+            {
+                if (selectionCount > 1)
+                    m_labelIntro.Text = Messages.CPM_WIZARD_FINISH_PAGE_INTRO_COPY_TEMPLATE;
+                else
+                    m_labelIntro.Text = Messages.CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE_TEMPLATE;
+            }
             else
-                m_labelIntro.Text = wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE : Messages.CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE;
+            {
+                if (selectionCount > 1)
+                    m_labelIntro.Text = wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_FINISH_PAGE_INTRO_COPY : Messages.CPM_WIZARD_FINISH_PAGE_INTRO;
+                else
+                    m_labelIntro.Text = wizardMode == WizardMode.Copy ? Messages.CPM_WIZARD_FINISH_PAGE_INTRO_COPY_SINGLE : Messages.CPM_WIZARD_FINISH_PAGE_INTRO_SINGLE;
+            }
 
             if (SummaryRetreiver == null)
 				return;

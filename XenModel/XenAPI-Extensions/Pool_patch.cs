@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -92,12 +92,17 @@ namespace XenAPI
 
         public DateTime AppliedOn(Host host)
         {
-            foreach (Host_patch hostPatch in host.Connection.ResolveAll(host.patches))
-            {
-                Pool_patch patch = host.Connection.Resolve(hostPatch.pool_patch);
+            var hostPatches = host.Connection.ResolveAll(host.patches);
 
-                if (patch != null && string.Equals(patch.uuid, uuid, StringComparison.OrdinalIgnoreCase))
-                    return hostPatch.timestamp_applied;
+            if (hostPatches != null)
+            {
+                foreach (Host_patch hostPatch in hostPatches)
+                {
+                    Pool_patch patch = host.Connection.Resolve(hostPatch.pool_patch);
+
+                    if (patch != null && string.Equals(patch.uuid, uuid, StringComparison.OrdinalIgnoreCase))
+                        return hostPatch.timestamp_applied;
+                }
             }
 
             return DateTime.MaxValue;

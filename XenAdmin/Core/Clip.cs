@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -241,6 +241,21 @@ namespace XenAdmin.Core
 
             if (ClipboardChanged != null)
                 ClipboardChanged(null, null);
+        }
+
+        internal static void SetClipboardText(string text)
+        {
+            Program.AssertOnEventThread();
+
+            try
+            {
+                Clipboard.SetText(text);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Exception while trying to set clipboard text.", ex);
+                log.Error(ex, ex);
+            }
         }
     }
 }

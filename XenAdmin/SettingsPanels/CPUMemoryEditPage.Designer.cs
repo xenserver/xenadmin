@@ -34,6 +34,8 @@ namespace XenAdmin.SettingsPanels
             this.lblSliderLowest = new System.Windows.Forms.Label();
             this.lblPriority = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBoxInitialVCPUs = new System.Windows.Forms.ComboBox();
+            this.labelInitialVCPUs = new System.Windows.Forms.Label();
             this.labelInvalidVCPUWarning = new System.Windows.Forms.Label();
             this.comboBoxTopology = new XenAdmin.Controls.CPUTopologyComboBox();
             this.labelTopology = new System.Windows.Forms.Label();
@@ -80,20 +82,34 @@ namespace XenAdmin.SettingsPanels
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxInitialVCPUs, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelInitialVCPUs, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelInvalidVCPUWarning, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxTopology, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelTopology, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.MemWarningLabel, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblPriority, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.MemWarningLabel, 2, 9);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblPriority, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.lblVCPUs, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblVcpuWarning, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblMemory, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.VCPUWarningLabel, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // comboBoxInitialVCPUs
+            // 
+            this.comboBoxInitialVCPUs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxInitialVCPUs.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBoxInitialVCPUs, "comboBoxInitialVCPUs");
+            this.comboBoxInitialVCPUs.Name = "comboBoxInitialVCPUs";
+            // 
+            // labelInitialVCPUs
+            // 
+            resources.ApplyResources(this.labelInitialVCPUs, "labelInitialVCPUs");
+            this.labelInitialVCPUs.Name = "labelInitialVCPUs";
             // 
             // labelInvalidVCPUWarning
             // 
@@ -255,5 +271,7 @@ namespace XenAdmin.SettingsPanels
         private XenAdmin.Controls.CPUTopologyComboBox comboBoxTopology;
         private System.Windows.Forms.Label labelInvalidVCPUWarning;
         private System.Windows.Forms.ComboBox comboBoxVCPUs;
+        private System.Windows.Forms.ComboBox comboBoxInitialVCPUs;
+        private System.Windows.Forms.Label labelInitialVCPUs;
     }
 }

@@ -142,6 +142,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tests for connectivity between [XenServer] and the internet.
+        /// </summary>
+        public static string Description_host_system_status_conntest {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-conntest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information and statistics about the system&apos;s control groups.
         /// </summary>
         public static string Description_host_system_status_control_slice {
@@ -871,6 +880,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Standard Edition.
+        /// </summary>
+        public static string Label_host_edition_standard {
+            get {
+                return ResourceManager.GetString("Label-host.edition-standard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenServer product] Standard Per-Socket.
         /// </summary>
         public static string Label_host_edition_standard_per_socket {
@@ -1245,6 +1263,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_client_logs {
             get {
                 return ResourceManager.GetString("Label-host.system_status-client-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection test.
+        /// </summary>
+        public static string Label_host_system_status_conntest {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-conntest", resourceCulture);
             }
         }
         
@@ -1636,6 +1663,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Container management logs.
+        /// </summary>
+        public static string Label_host_system_status_xscontainer {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-xscontainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RPM package database.
         /// </summary>
         public static string Label_host_system_status_yum {
@@ -2005,7 +2041,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pool_session_count.
+        ///   Looks up a localized string similar to Number of sessions.
         /// </summary>
         public static string Label_performance_pool_session_count {
             get {
@@ -2014,11 +2050,83 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pool_task_count.
+        ///   Looks up a localized string similar to Number of tasks.
         /// </summary>
         public static string Label_performance_pool_task_count {
             get {
                 return ResourceManager.GetString("Label-performance.pool_task_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator eviction rate.
+        /// </summary>
+        public static string Label_performance_pvsaccelerator_evicted {
+            get {
+                return ResourceManager.GetString("Label-performance.pvsaccelerator_evicted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator hit rate.
+        /// </summary>
+        public static string Label_performance_pvsaccelerator_read_hits {
+            get {
+                return ResourceManager.GetString("Label-performance.pvsaccelerator_read_hits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator miss rate.
+        /// </summary>
+        public static string Label_performance_pvsaccelerator_read_misses {
+            get {
+                return ResourceManager.GetString("Label-performance.pvsaccelerator_read_misses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator observed read rate.
+        /// </summary>
+        public static string Label_performance_pvsaccelerator_read_total {
+            get {
+                return ResourceManager.GetString("Label-performance.pvsaccelerator_read_total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator space utilization.
+        /// </summary>
+        public static string Label_performance_pvsaccelerator_space_utilization {
+            get {
+                return ResourceManager.GetString("Label-performance.pvsaccelerator_space_utilization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator observed network traffic from clients.
+        /// </summary>
+        public static string Label_performance_pvsaccelerator_traffic_client_sent {
+            get {
+                return ResourceManager.GetString("Label-performance.pvsaccelerator_traffic_client_sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator saved network traffic.
+        /// </summary>
+        public static string Label_performance_pvsaccelerator_traffic_proxy_saved {
+            get {
+                return ResourceManager.GetString("Label-performance.pvsaccelerator_traffic_proxy_saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator observed network traffic from servers.
+        /// </summary>
+        public static string Label_performance_pvsaccelerator_traffic_server_sent {
+            get {
+                return ResourceManager.GetString("Label-performance.pvsaccelerator_traffic_server_sent", resourceCulture);
             }
         }
         
@@ -2199,6 +2307,42 @@ namespace XenAdmin {
         public static string Label_performance_sr_latency {
             get {
                 return ResourceManager.GetString("Label-performance.sr_latency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; Read Throughput.
+        /// </summary>
+        public static string Label_performance_sr_rw_read {
+            get {
+                return ResourceManager.GetString("Label-performance.sr_rw_read", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; Read Latency.
+        /// </summary>
+        public static string Label_performance_sr_rw_read_latency {
+            get {
+                return ResourceManager.GetString("Label-performance.sr_rw_read_latency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; Write Throughput.
+        /// </summary>
+        public static string Label_performance_sr_rw_write {
+            get {
+                return ResourceManager.GetString("Label-performance.sr_rw_write", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; Write Latency.
+        /// </summary>
+        public static string Label_performance_sr_rw_write_latency {
+            get {
+                return ResourceManager.GetString("Label-performance.sr_rw_write_latency", resourceCulture);
             }
         }
         
@@ -2491,7 +2635,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to xapi_open_fds.
+        ///   Looks up a localized string similar to Number of open file descriptors.
         /// </summary>
         public static string Label_performance_xapi_open_fds {
             get {
@@ -2613,6 +2757,15 @@ namespace XenAdmin {
         public static string Label_Pool_patch_partially_applied {
             get {
                 return ResourceManager.GetString("Label-Pool_patch.partially_applied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required Updates.
+        /// </summary>
+        public static string Label_Pool_patch_required_updates {
+            get {
+                return ResourceManager.GetString("Label-Pool_patch.required-updates", resourceCulture);
             }
         }
         
@@ -2793,6 +2946,24 @@ namespace XenAdmin {
         public static string Label_SR_SRTypes_nfs {
             get {
                 return ResourceManager.GetString("Label-SR.SRTypes-nfs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nutanix.
+        /// </summary>
+        public static string Label_SR_SRTypes_nutanix {
+            get {
+                return ResourceManager.GetString("Label-SR.SRTypes-nutanix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nutanix ISO.
+        /// </summary>
+        public static string Label_SR_SRTypes_nutanixiso {
+            get {
+                return ResourceManager.GetString("Label-SR.SRTypes-nutanixiso", resourceCulture);
             }
         }
         
@@ -3126,6 +3297,15 @@ namespace XenAdmin {
         public static string Label_VM_PV_args {
             get {
                 return ResourceManager.GetString("Label-VM.PV_args", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator status.
+        /// </summary>
+        public static string Label_VM_pvs_read_caching_status {
+            get {
+                return ResourceManager.GetString("Label-VM.pvs_read_caching_status", resourceCulture);
             }
         }
         
@@ -3645,7 +3825,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license server did not issue a license for {0} because there were no licenses of the specified type available..
+        ///   Looks up a localized string similar to The requested license is not available for {0}..
         /// </summary>
         public static string Message_body_license_not_available {
             get {
@@ -3776,6 +3956,15 @@ namespace XenAdmin {
         public static string Message_body_pool_master_transition {
             get {
                 return ResourceManager.GetString("Message.body-pool_master_transition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to setup PVS-Accelerator on VM &apos;{0}&apos;. No cache storage found on site &apos;{1}&apos;..
+        /// </summary>
+        public static string Message_body_pvs_proxy_no_cache_sr_available {
+            get {
+                return ResourceManager.GetString("Message.body-pvs_proxy_no_cache_sr_available", resourceCulture);
             }
         }
         
@@ -4059,7 +4248,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pool &apos;{0}&apos; failed to retrieve placement recommendations from WLB for VM &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Pool &apos;{0}&apos; failed to retrieve placement recommendations from WLB for &apos;{1}&apos;..
         /// </summary>
         public static string Message_body_wlb_consultation_failed {
             get {
@@ -4622,6 +4811,24 @@ namespace XenAdmin {
         public static string Message_name_pool_master_transition {
             get {
                 return ResourceManager.GetString("Message.name-pool_master_transition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No cache storage available for PVS site.
+        /// </summary>
+        public static string Message_name_pvs_proxy_no_cache_sr_available {
+            get {
+                return ResourceManager.GetString("Message.name-pvs_proxy_no_cache_sr_available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS proxy setup failed.
+        /// </summary>
+        public static string Message_name_pvs_proxy_setup_failed {
+            get {
+                return ResourceManager.GetString("Message.name-pvs_proxy_setup_failed", resourceCulture);
             }
         }
         

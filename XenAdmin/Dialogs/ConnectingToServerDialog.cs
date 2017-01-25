@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -97,6 +97,9 @@ namespace XenAdmin.Dialogs
                     ownerForm.Close();
                 return;
             }
+
+            if (_connection != null)
+                XenConnectionUI.connectionDialogs.Remove(_connection);
 
             base.OnFormClosing(e);
         }

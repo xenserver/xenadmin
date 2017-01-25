@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -810,11 +810,11 @@ namespace XenAdmin.XenSearch
                 VM vm = o as VM;
                 if (vm.is_a_snapshot)
                 {
-                    return (IComparable)ObjectTypes.Snapshot;
+                    return ObjectTypes.Snapshot;
                 }
                 else if (vm.is_a_template)
                 {
-                    return (IComparable)(vm.DefaultTemplate ? ObjectTypes.DefaultTemplate : ObjectTypes.UserTemplate);
+                    return vm.DefaultTemplate ? ObjectTypes.DefaultTemplate : ObjectTypes.UserTemplate;
                 }
                 else if (vm.is_control_domain)
                 {
@@ -822,41 +822,41 @@ namespace XenAdmin.XenSearch
                 }
                 else
                 {
-                    return (IComparable)ObjectTypes.VM;
+                    return ObjectTypes.VM;
                 }
             }
-			else if (o is VM_appliance)
-			{
-				return (IComparable)ObjectTypes.Appliance;
-			}
+            else if (o is VM_appliance)
+            {
+                return ObjectTypes.Appliance;
+            }
             else if (o is Host)
             {
-                return (IComparable)((o.Connection.IsConnected) ? ObjectTypes.Server : ObjectTypes.DisconnectedServer);
+                return o.Connection.IsConnected ? ObjectTypes.Server : ObjectTypes.DisconnectedServer;
             }
             else if (o is Pool)
             {
-                return (IComparable)ObjectTypes.Pool;
+                return ObjectTypes.Pool;
             }
             else if (o is SR)
             {
                 SR sr = o as SR;
-                return (IComparable)(sr.IsLocalSR ? ObjectTypes.LocalSR : ObjectTypes.RemoteSR);
+                return sr.IsLocalSR ? ObjectTypes.LocalSR : ObjectTypes.RemoteSR;
             }
             else if (o is XenAPI.Network)
             {
-                return (IComparable)ObjectTypes.Network;
+                return ObjectTypes.Network;
             }
             else if (o is VDI)
             {
-                return (IComparable)ObjectTypes.VDI;
+                return ObjectTypes.VDI;
             }
             else if (o is Folder)
             {
-                return (IComparable)ObjectTypes.Folder;
+                return ObjectTypes.Folder;
             }
             else if (o is DockerContainer)
             {
-                return (IComparable)ObjectTypes.DockerContainer;
+                return ObjectTypes.DockerContainer;
             }
 
             return null;
@@ -1253,6 +1253,8 @@ namespace XenAdmin.XenSearch
                                 return Icons.Ubuntu;
                             if (os.Contains("scientific"))
                                 return Icons.SciLinux;
+                            if (os.Contains("kylin"))
+                                return Icons.NeoKylin;
                             if (os.Contains("windows"))
                                 return Icons.Windows;
                             if (os.Contains("coreos"))

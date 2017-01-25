@@ -1110,4 +1110,40 @@
   <data name="XenServerUpdateAlert" xml:space="preserve">
     <value>7014</value>
   </data>
+  <data name="CrossPoolMigrateWizard_DestinationCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_MigrationSummaryCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_NetworkingCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_StorageCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_TransferNetworkCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="TabPageADUpsell" xml:space="preserve">
+    <value>1301</value>
+  </data>
+  <data name="Dom0MemoryDemandUsageMessageAlert" xml:space="preserve">
+    <value>7016</value>
+  </data>
+  <data name="ControlDomainMemoryDialog" xml:space="preserve">
+    <value>9909</value>
+  </data>
+  <data name="EnablePvsReadCachingDialog" xml:space="preserve">
+    <value>9908</value>
+  </data>
+  <data name="PvsCacheConfigurationDialog" xml:space="preserve">
+    <value>9907</value>
+  </data>
+  <data name="TabPagePvs" xml:space="preserve">
+    <value>9906</value>
+  </data>
+  <data name="PvsSiteDialog" xml:space="preserve">
+    <value>9910</value>
+  </data>
 </root>

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
             string newName = _newName;
             Folders.FixupRelativePath(ref newName);
 
-            FolderAction action = new FolderAction(_folder, newName, FolderAction.Kind.Rename);
+            FolderAction action = new RenameFolderAction(_folder, newName);
             action.Completed += action_Completed;
             action.RunAsync();
         }

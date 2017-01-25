@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -175,7 +175,7 @@ namespace XenAdmin.Actions
                             long.TryParse(parameters["allocation_quantum"], out allocation_quantum);
                     }
 
-                    LVHD.enable_thin_provisioning(Session, SR.opaque_ref, initial_allocation, allocation_quantum);
+                    LVHD.enable_thin_provisioning(Session, Host.opaque_ref, SR.opaque_ref, initial_allocation, allocation_quantum);
 
                     Description = string.Format(Messages.ACTION_SR_CONVERTED_TO_THIN, SR.NameWithLocation);
                     break;

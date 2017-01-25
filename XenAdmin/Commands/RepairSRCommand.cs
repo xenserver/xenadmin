@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -77,11 +77,14 @@ namespace XenAdmin.Commands
 
             if (srList.Find(s => !s.MultipathAOK) != null)
             {
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
                                    SystemIcons.Warning,
                                    Messages.MULTIPATH_FAILED,
-                                   Messages.MULTIPATHING)).ShowDialog(Parent);
+                                   Messages.MULTIPATHING)))
+                {
+                    dlg.ShowDialog(Parent);
+                }
             }
 
             new RepairSRDialog(srList).Show(Parent);
@@ -101,7 +104,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._000_StorageBroken_h32bit_16;
+                return Images.StaticImages._000_StorageBroken_h32bit_16;
             }
         }
 

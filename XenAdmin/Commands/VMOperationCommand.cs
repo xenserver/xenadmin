@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -203,20 +203,18 @@ namespace XenAdmin.Commands
         {
             Program.Invoke(Program.MainWindow, () =>
             {
-                if (
-                    new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                                      String.Format(
-                                                          isStart
-                                                              ? Messages.
-                                                                    HA_INVALID_CONFIG_START
-                                                              : Messages.
-                                                                    HA_INVALID_CONFIG_RESUME,
-                                                          Helpers.GetName(vm).Ellipsise(500)),
-                                                      Messages.HIGH_AVAILABILITY),
-                        ThreeButtonDialog.ButtonOK,
-                        ThreeButtonDialog.ButtonCancel).ShowDialog(
-                            Program.MainWindow) == DialogResult.Cancel)
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                        String.Format(isStart ? Messages.HA_INVALID_CONFIG_START : Messages.HA_INVALID_CONFIG_RESUME,
+                            Helpers.GetName(vm).Ellipsise(500)),
+                        Messages.HIGH_AVAILABILITY),
+                    ThreeButtonDialog.ButtonOK,
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    dialogResult = dlg.ShowDialog(Program.MainWindow);
+                }
+                if (dialogResult == DialogResult.Cancel)
                 {
                     throw new CancelledException();
                 }
@@ -224,7 +222,7 @@ namespace XenAdmin.Commands
         }
 
 
-        public static void StartDiagnosisForm(VM vm)
+        public static void StartDiagnosisForm(VM vm, bool isStart)
         {
             ThreadPool.QueueUserWorkItem(delegate
             {
@@ -246,6 +244,11 @@ namespace XenAdmin.Commands
                     foreach (Host host in connection.Cache.Hosts)
                     {
                         reasons[host] = string.Empty;
+                        if (!isStart && VMOperationHostCommand.VmCpuFeaturesIncompatibleWithHost(host, vm))
+                        {
+                            reasons[host] = FriendlyErrorNames.VM_INCOMPATIBLE_WITH_THIS_HOST;
+                            continue;
+                        }
                         try
                         {
                             VM.assert_can_boot_here(session, vm.opaque_ref, host.opaque_ref);
@@ -276,7 +279,7 @@ namespace XenAdmin.Commands
             if (failure.ErrorDescription[0] == Failure.NO_HOSTS_AVAILABLE)
             {
                 // Show a dialog displaying why the VM couldn't be started on each host
-                StartDiagnosisForm(VMStartAction.VM);
+                StartDiagnosisForm(VMStartAction.VM, VMStartAction.IsStart);
             }
             else if (failure.ErrorDescription[0] == Failure.HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN)
             {
@@ -299,7 +302,10 @@ namespace XenAdmin.Commands
                         Helpers.GetName(VMStartAction.VM).Ellipsise(100));
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.HIGH_AVAILABILITY)).ShowDialog(Program.MainWindow);
+                        using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.HIGH_AVAILABILITY)))
+                        {
+                            dlg.ShowDialog(Program.MainWindow);
+                        }
                     });
                 }
                 else
@@ -311,10 +317,14 @@ namespace XenAdmin.Commands
 
                     Program.Invoke(Program.MainWindow, delegate()
                     {
-                        DialogResult r = new ThreeButtonDialog(
+                        DialogResult r;
+                        using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, msg, Messages.HIGH_AVAILABILITY),
                             ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)).ShowDialog(Program.MainWindow);
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                        {
+                            r = dlg.ShowDialog(Program.MainWindow);
+                        }
 
                         if (r == DialogResult.Yes)
                         {

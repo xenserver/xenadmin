@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -91,8 +91,16 @@ namespace XenAdmin.Actions
             config["pass"] = password;
             try
             {
-                //CA-48122: Call disable just in case it was not disabled properly
-                Pool.disable_external_auth(Session, Pool.opaque_ref, new Dictionary<string, string>());
+                try
+                {
+                    //CA-48122: Call disable just in case it was not disabled properly
+                    Pool.disable_external_auth(Session, Pool.opaque_ref, new Dictionary<string, string>());
+                }
+                catch (Exception ex)
+                {
+                    log.Debug("Tried to disable AD before enabling it, but it has failed. Ignoring it, because in this case we are executing disable on best effort basis only.", ex);
+                }
+                
                 XenAPI.Pool.enable_external_auth(Session, Pool.opaque_ref, config, domain, Auth.AUTH_TYPE_AD);
             }
             catch (Failure f)

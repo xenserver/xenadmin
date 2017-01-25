@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -56,13 +56,18 @@ namespace XenAdmin.Commands
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly vm_operations _operation;
 
-        public VMOperationToolStripMenuItem(Command command, bool inContextMenu, vm_operations operation)
+        private readonly bool _resumeAfter;
+
+        protected VMOperationToolStripMenuItem(Command command, bool inContextMenu, vm_operations operation)
             : base(command, inContextMenu)
         {
             if (operation != vm_operations.start_on && operation != vm_operations.resume_on && operation != vm_operations.pool_migrate)
             {
                 throw new ArgumentException("Invalid operation", "operation");
             }
+
+            if (operation.Equals(vm_operations.resume_on))
+                _resumeAfter = true;
 
             _operation = operation;
             base.DropDownItems.Add(new ToolStripMenuItem());
@@ -88,18 +93,18 @@ namespace XenAdmin.Commands
 
             if (wlb)
             {
-                base.DropDownItems.Add(new VMOperationToolStripMenuSubItem(Messages.WLB_OPT_MENU_OPTIMAL_SERVER, Resources._000_ServerWlb_h32bit_16));
+                base.DropDownItems.Add(new VMOperationToolStripMenuSubItem(Messages.WLB_OPT_MENU_OPTIMAL_SERVER, Images.StaticImages._000_ServerWlb_h32bit_16));
             }
             else
             {
-                base.DropDownItems.Add(new VMOperationToolStripMenuSubItem(Messages.HOME_SERVER_MENU_ITEM, Resources._000_ServerHome_h32bit_16));
+                base.DropDownItems.Add(new VMOperationToolStripMenuSubItem(Messages.HOME_SERVER_MENU_ITEM, Images.StaticImages._000_ServerHome_h32bit_16));
             }
 
             List<Host> hosts = new List<Host>(connection.Cache.Hosts);
             hosts.Sort();
             foreach (Host host in hosts)
             {
-                VMOperationToolStripMenuSubItem item = new VMOperationToolStripMenuSubItem(String.Format(Messages.MAINWINDOW_CONTEXT_UPDATING, host.name_label.EscapeAmpersands()), Resources._000_ServerDisconnected_h32bit_16);
+                VMOperationToolStripMenuSubItem item = new VMOperationToolStripMenuSubItem(String.Format(Messages.MAINWINDOW_CONTEXT_UPDATING, host.name_label.EscapeAmpersands()), Images.StaticImages._000_ServerDisconnected_h32bit_16);
                 item.Tag = host;
                 base.DropDownItems.Add(item);
             }
@@ -139,9 +144,9 @@ namespace XenAdmin.Commands
             {
                 foreach (VMOperationToolStripMenuSubItem item in base.DropDownItems)
                 {
-                    if (item.Tag is Host)
+                    Host host = item.Tag as Host;
+                    if (host != null)
                     {
-                        Host host = (Host)item.Tag;
                         item.Command = new VMOperationWlbHostCommand(Command.MainWindowCommandInterface, selection, host, _operation, recommendations.GetStarRating(host));
                         hostMenuItems.Add(item);
                     }
@@ -191,17 +196,11 @@ namespace XenAdmin.Commands
             
             foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
             {
-                if (item.Tag is Host)
+                Host host = item.Tag as Host;
+                if (host != null)
                 {
-                    Host host = (Host)item.Tag;
-
-                    string hostNameText = host.Name.EscapeAmpersands();
-      
-                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, hostNameText, _operation, session);
-                    VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host)
-                                                    {
-                                                        MenuText = hostNameText
-                                                    };
+                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name.EscapeAmpersands(), _operation, session);
+                    VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
 
                     VMOperationToolStripMenuSubItem tempItem = item;
                     Program.Invoke(Program.MainWindow, delegate

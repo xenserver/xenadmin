@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -44,15 +44,21 @@ namespace XenAdmin.Controls
         // Migrate is the live VDI move operation
         public enum SRPickerType { VM, InstallFromTemplate, MoveOrCopy, Migrate, LunPerVDI };
         private SRPickerType usage = SRPickerType.VM;
+        
         //Used in the MovingVDI usage
         private VDI[] existingVDIs;
+        public void SetExistingVDIs(VDI[] vdis)
+        {
+            existingVDIs = vdis;
+        }
 
         private IXenConnection connection;
 
         private Host affinity;
         private SrPickerItem LastSelectedItem;
-        public event EventHandler ItemSelectionNull;
-        public event EventHandler ItemSelectionNotNull;
+        public event Action ItemSelectionNull;
+        public event Action ItemSelectionNotNull;
+        public event EventHandler DoubleClickOnRow;
         public long DiskSize = 0;
         public long? OverridenInitialAllocationRate = null;
 
@@ -71,7 +77,8 @@ namespace XenAdmin.Controls
             srListBox.ShowDescription = true;
             srListBox.ShowImages = true;
             srListBox.NodeIndent = 3;
-            srListBox.SelectedIndexChanged += new EventHandler(srListBox_SelectedIndexChanged);
+            srListBox.SelectedIndexChanged += srListBox_SelectedIndexChanged;
+            srListBox.DoubleClickOnRow += srListBox_DoubleClickOnRow;
 
             SrHint.Text = usage == SRPickerType.MoveOrCopy ?
                 Messages.IMPORT_WIZARD_TEMPLATE_SR_HINT_TEXT :
@@ -99,18 +106,6 @@ namespace XenAdmin.Controls
             set { usage = value; }
         }
 
-        public void SetUsageAsMovingVDI(VDI[] vdis)
-        {
-            usage = SRPickerType.MoveOrCopy;
-            existingVDIs = vdis;
-        }
-
-        public void SetUsageAsMigrateVDI(VDI[] vdis)
-        {
-            usage = SRPickerType.Migrate;
-            existingVDIs = vdis;
-        }
-
         /// <summary>
         /// For new disk dialog only
         /// </summary>
@@ -130,7 +125,8 @@ namespace XenAdmin.Controls
                 srListBox.ShowDescription = true;
                 srListBox.ShowImages = true;
                 srListBox.NodeIndent = 3;
-                srListBox.SelectedIndexChanged += new EventHandler(srListBox_SelectedIndexChanged);
+                srListBox.SelectedIndexChanged += srListBox_SelectedIndexChanged;
+                srListBox.DoubleClickOnRow += srListBox_DoubleClickOnRow;
 
                 SrHint.Text = Messages.NEW_DISK_DIALOG_SR_HINT_TEXT;
 
@@ -147,6 +143,11 @@ namespace XenAdmin.Controls
             }
         }
 
+        private void srListBox_DoubleClickOnRow(object sender, EventArgs e)
+        {
+            if (DoubleClickOnRow != null)
+                DoubleClickOnRow(sender, e);
+        }
 
         void srListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -159,13 +160,12 @@ namespace XenAdmin.Controls
             if (item == null || !item.Enabled)
             {
                 if (ItemSelectionNull != null)
-                    ItemSelectionNull(null, null);
+                    ItemSelectionNull();
                 return;
             }
-            else if (ItemSelectionNotNull != null)
-            {
-                ItemSelectionNotNull(null, null);
-            }
+
+            if (ItemSelectionNotNull != null)
+                ItemSelectionNotNull();
 
             if (!item.Enabled && LastSelectedItem != null && LastSelectedItem.TheSR.opaque_ref != item.TheSR.opaque_ref)
                 srListBox.SelectedItem = LastSelectedItem;
@@ -361,7 +361,7 @@ namespace XenAdmin.Controls
             }
 
             if (ItemSelectionNull != null)
-                ItemSelectionNull(null, null);
+                ItemSelectionNull();
         }
 
         internal void selectDefaultSROrAny()
@@ -379,7 +379,7 @@ namespace XenAdmin.Controls
                 }
             }
             if (ItemSelectionNull != null)
-                ItemSelectionNull(null, null);
+                ItemSelectionNull();
         }
 
         public void selectSRorDefaultorAny(SR sr)

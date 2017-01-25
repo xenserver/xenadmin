@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -299,6 +299,19 @@ namespace XenAPI
         {
             get { return other_config.ContainsKey("config-drive") && other_config["config-drive"].ToLower() == "true"; }
 
+        }
+
+        /// <summary>
+        /// Whether this is a Tools ISO.
+        /// The new method is to check the is_tools_iso flag, the old one to check the name_label.
+        /// </summary>
+        public bool IsToolsIso
+        {
+            get
+            {
+                string[] toolIsoNames = {"xswindrivers.iso", "xs-tools.iso", "guest-tools.iso"};
+                return is_tools_iso || toolIsoNames.Contains(name_label);
+            }
         }
         
         /// <summary>

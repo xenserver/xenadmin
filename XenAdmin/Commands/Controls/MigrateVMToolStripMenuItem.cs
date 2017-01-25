@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -46,12 +46,12 @@ namespace XenAdmin.Commands
     {
 
         public MigrateVMToolStripMenuItem()
-            : base(new MigrateVMCommand2(), false, vm_operations.pool_migrate)
+            : base(new MigrateVmToServerCommand(), false, vm_operations.pool_migrate)
         {
         }
 
         public MigrateVMToolStripMenuItem(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, bool inContextMenu)
-            : base(new MigrateVMCommand2(mainWindow, selection), inContextMenu, vm_operations.pool_migrate)
+            : base(new MigrateVmToServerCommand(mainWindow, selection), inContextMenu, vm_operations.pool_migrate)
         {
         }
 
@@ -76,60 +76,59 @@ namespace XenAdmin.Commands
             }
         }
 
-        private class MigrateVMCommand2 : Command
+        /// <summary>
+        /// This is the command used for enabling the VM's drop-right ToolStripMenuItem "Migrate to Server >"
+        /// </summary>
+        private class MigrateVmToServerCommand : Command
         {
-            public MigrateVMCommand2()
+            public MigrateVmToServerCommand()
             {
             }
 
-            public MigrateVMCommand2(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
+            public MigrateVmToServerCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
                 : base(mainWindow, selection)
             {
             }
 
             private static bool CanExecute(VM vm)
             {
-                if (vm.Connection != null && vm.Connection.IsConnected)
-                    if (Helpers.FeatureForbidden(vm.Connection, Host.RestrictIntraPoolMigrate))
+                if (vm == null || vm.Connection == null || !vm.Connection.IsConnected)
+                    return false;
+
+                if (vm.is_a_template || vm.Locked)
+                    return false;
+
+                if (Helpers.FeatureForbidden(vm.Connection, Host.RestrictIntraPoolMigrate))
                         return false;
 
-                if (vm != null && !vm.is_a_template && !vm.Locked)
-                {
-                    if(Helpers.TampaOrGreater(vm.Connection))
-                        return vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
+                if (Helpers.TampaOrGreater(vm.Connection))
+                    return vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
 
-                    return SelectionInVisiblePool(vm.Connection) && vm.Connection.Cache.HostCount > 1 && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
-                    
-                }
-                return false;
+                return SelectionInVisiblePool(vm.Connection) && vm.Connection.Cache.HostCount > 1 && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
             }
 
             protected override bool CanExecuteCore(SelectedItemCollection selection)
             {
-                if (!selection.AllItemsAre<VM>())
-                {
-                    return false;
-                }
+                IXenConnection connection = selection.GetConnectionOfFirstItem();
 
-                IXenConnection connection = null;
-
-                bool atLeaseOneCanExecute = false;
+                bool atLeastOneCanExecute = false;
                 foreach (SelectedItem item in selection)
                 {
-                    VM vm = (VM)item.XenObject;
+                    //all items should be VMs
+                    VM vm = item.XenObject as VM;
+                    if (vm == null)
+                        return false;
 
                     // all VMs must be on the same connection
                     if (connection != null && vm.Connection != connection)
-                    {
                         return false;
-                    }
 
-                    if (CanExecute(item.XenObject as VM))
-                    {
-                        atLeaseOneCanExecute = true;
-                    }
+                    //at least one VM should be able to execute
+                    if (CanExecute(vm))
+                        atLeastOneCanExecute = true;
+
                 }
-                return atLeaseOneCanExecute;
+                return atLeastOneCanExecute;
             }
 
             private static bool SelectionInVisiblePool(IXenConnection connection)
@@ -141,7 +140,7 @@ namespace XenAdmin.Commands
                 if (pool == null)
                     return false;
 
-                return pool!=null&&pool.IsVisible;
+                return pool.IsVisible;
             }
 
             public override string MenuText

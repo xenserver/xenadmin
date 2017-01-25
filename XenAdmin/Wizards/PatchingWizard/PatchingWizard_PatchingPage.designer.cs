@@ -59,7 +59,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             // labelError
             // 
-            this.labelError.AutoEllipsis = true;
             resources.ApplyResources(this.labelError, "labelError");
             this.labelError.BackColor = System.Drawing.SystemColors.Control;
             this.labelError.Name = "labelError";
@@ -73,8 +72,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.pictureBox1, 0, 0);
             this.panel1.Controls.Add(this.errorLinkLabel, 2, 0);
             this.panel1.Controls.Add(this.labelError, 1, 0);

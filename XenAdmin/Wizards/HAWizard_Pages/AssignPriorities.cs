@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -118,6 +118,14 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                     RemoveVmRow(vm);
                     break;
             }
+        }
+
+        /// <summary>
+        /// The current (uncommitted) VM restart priorities.
+        /// </summary>
+        public Dictionary<VM, VM.HA_Restart_Priority> CurrentSettings
+        {
+            get { return haNtolIndicator.Settings; }
         }
 
         /// <summary>
@@ -480,7 +488,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         /// <summary>
         /// Gets the current (uncommitted) VM restart priorities. Must be called on the GUI thread.
         /// </summary>
-        public Dictionary<VM, VM.HA_Restart_Priority> getCurrentSettings()
+        private Dictionary<VM, VM.HA_Restart_Priority> getCurrentSettings()
         {
             Program.AssertOnEventThread();
             Dictionary<VM, VM.HA_Restart_Priority> result = new Dictionary<VM, VM.HA_Restart_Priority>();
@@ -684,6 +692,11 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         {
             base.PageLoaded(direction);
             StartNtolUpdate();
+        }
+
+        public override void SelectDefaultControl()
+        {
+            dataGridViewVms.Select();
         }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)

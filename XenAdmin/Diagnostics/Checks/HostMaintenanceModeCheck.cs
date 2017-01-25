@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -41,7 +41,7 @@ namespace XenAdmin.Diagnostics.Checks
         {
         }
         
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (!Host.IsLive)
             {

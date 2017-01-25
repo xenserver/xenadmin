@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -374,6 +374,16 @@ namespace XenAdmin.Core
             get { return ReadInstalledKey(HIDDEN_FEATURES); }
         }
 
+        public static string AdditionalFeatures
+        {
+            get { return ReadInstalledKey(ADDITIONAL_FEATURES); }
+        }
+
+        public static string CustomUpdatesXmlLocation
+        {
+            get { return ReadKey(CUSTOM_UPDATES_XML_LOCATION); }
+        }
+
         private const string SSL_CERTIFICATES_CHANGED_ONLY = "CHANGED";
         private const string SSL_CERTIFICATES_ALL = "ALL";
         private const string SSL_CERTIFICATES_KEY = "ForceSSLCertificates";
@@ -396,6 +406,8 @@ namespace XenAdmin.Core
         private const string HEALTH_CHECK_DIAGNOSTIC_DOMAIN_NAME = "HealthCheckDiagnosticDomainName";
         private const string HEALTH_CHECK_PRODUCT_KEY = "HealthCheckProductKey";
         private const string HIDDEN_FEATURES = "HiddenFeatures";
+        private const string ADDITIONAL_FEATURES = "AdditionalFeatures";
+        private const string CUSTOM_UPDATES_XML_LOCATION = "CheckForUpdatesXmlLocationOverride";
     }
 
     public enum SSLCertificateTypes { None, Changed, All }

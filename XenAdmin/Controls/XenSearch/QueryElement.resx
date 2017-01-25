@@ -112,23 +112,23 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="textBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="textBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 2</value>
+    <value>346, 2</value>
   </data>
   <data name="textBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 20</value>
+    <value>218, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="textBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -136,7 +136,7 @@
     <value>textBox</value>
   </data>
   <data name="&gt;&gt;textBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox.Parent" xml:space="preserve">
     <value>$this</value>
@@ -151,7 +151,7 @@
     <value>NoControl</value>
   </data>
   <data name="removeButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>519, 1</value>
+    <value>577, 1</value>
   </data>
   <data name="removeButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -163,7 +163,7 @@
     <value>removeButton</value>
   </data>
   <data name="&gt;&gt;removeButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;removeButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -175,10 +175,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="dateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 2</value>
+    <value>346, 2</value>
   </data>
   <data name="dateTimePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 20</value>
+    <value>218, 20</value>
   </data>
   <data name="dateTimePicker.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -187,7 +187,7 @@
     <value>dateTimePicker</value>
   </data>
   <data name="&gt;&gt;dateTimePicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dateTimePicker.Parent" xml:space="preserve">
     <value>$this</value>
@@ -199,10 +199,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="numericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 2</value>
+    <value>346, 2</value>
   </data>
   <data name="numericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 20</value>
+    <value>174, 20</value>
   </data>
   <data name="numericUpDown.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -211,7 +211,7 @@
     <value>numericUpDown</value>
   </data>
   <data name="&gt;&gt;numericUpDown.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;numericUpDown.Parent" xml:space="preserve">
     <value>$this</value>
@@ -229,7 +229,7 @@
     <value>NoControl</value>
   </data>
   <data name="unitsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 5</value>
+    <value>528, 5</value>
   </data>
   <data name="unitsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
@@ -241,7 +241,7 @@
     <value>unitsLabel</value>
   </data>
   <data name="&gt;&gt;unitsLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;unitsLabel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -255,8 +255,8 @@
   <data name="ComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAA
-        DsMBx2+oZAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwgAA
+        DsIBFShKgAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
         /38Qm0EGiG8DMYjzEIgVwOIgAknBfiBWgoj9ZwAAhPclqFvZLCsAAAAASUVORK5CYII=
 </value>
   </data>
@@ -267,7 +267,7 @@
     <value>NoControl</value>
   </data>
   <data name="ComboButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 1</value>
+    <value>344, 1</value>
   </data>
   <data name="ComboButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -276,7 +276,7 @@
     <value>0, 0, 2, 0</value>
   </data>
   <data name="ComboButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 23</value>
+    <value>221, 23</value>
   </data>
   <data name="ComboButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -302,8 +302,8 @@
   <data name="matchTypeComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAA
-        DsMBx2+oZAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwgAA
+        DsIBFShKgAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
         /38Qm0EGiG8DMYjzEIgVwOIgAknBfiBWgoj9ZwAAhPclqFvZLCsAAAAASUVORK5CYII=
 </value>
   </data>
@@ -314,7 +314,7 @@
     <value>NoControl</value>
   </data>
   <data name="matchTypeComboButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 1</value>
+    <value>172, 1</value>
   </data>
   <data name="matchTypeComboButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -323,7 +323,7 @@
     <value>0, 0, 2, 0</value>
   </data>
   <data name="matchTypeComboButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 23</value>
+    <value>170, 23</value>
   </data>
   <data name="matchTypeComboButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -349,8 +349,8 @@
   <data name="queryTypeComboButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAA
-        DsMBx2+oZAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwgAA
+        DsIBFShKgAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
         /38Qm0EGiG8DMYjzEIgVwOIgAknBfiBWgoj9ZwAAhPclqFvZLCsAAAAASUVORK5CYII=
 </value>
   </data>
@@ -370,7 +370,7 @@
     <value>0, 0, 2, 0</value>
   </data>
   <data name="queryTypeComboButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 23</value>
+    <value>170, 23</value>
   </data>
   <data name="queryTypeComboButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -399,8 +399,8 @@
   <data name="resourceSelectButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAA
-        DsMBx2+oZAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwgAA
+        DsIBFShKgAAAAE9JREFUGFdjAIIeID4BxE+A+CcQPwPis0A8EYgZooH4PxYcA8QMjEB8BioAw5eAmInh
         /38Qm0EGiG8DMYjzEIgVwOIgAknBfiBWgoj9ZwAAhPclqFvZLCsAAAAASUVORK5CYII=
 </value>
   </data>
@@ -408,7 +408,7 @@
     <value>MiddleRight</value>
   </data>
   <data name="resourceSelectButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 1</value>
+    <value>172, 1</value>
   </data>
   <data name="resourceSelectButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -417,7 +417,7 @@
     <value>0, 0, 2, 0</value>
   </data>
   <data name="resourceSelectButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 23</value>
+    <value>393, 23</value>
   </data>
   <data name="resourceSelectButton.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -440,7 +440,7 @@
   <data name="&gt;&gt;resourceSelectButton.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -450,12 +450,12 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>559, 25</value>
+    <value>617, 25</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>QueryElement</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

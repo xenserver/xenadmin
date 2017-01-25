@@ -146,12 +146,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.tableLayoutPanel2.SetColumnSpan(this.autoHeightLabel1, 2);
             this.autoHeightLabel1.Name = "autoHeightLabel1";
             // 
-            // StorageSystem
+            // CslgLocation
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Name = "StorageSystem";
+            this.Name = "CslgLocation";
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

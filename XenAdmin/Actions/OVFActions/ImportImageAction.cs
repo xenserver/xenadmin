@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using XenAdmin.Core;
 using XenAdmin.Mappings;
 using XenAdmin.Network;
 
@@ -57,7 +58,8 @@ namespace XenAdmin.Actions.OVFActions
 
 		public ImportImageAction(IXenConnection connection, EnvelopeType ovfEnv, string directory, Dictionary<string, VmMapping> vmMappings, bool runfixups, SR selectedIsoSr,
 									string networkUuid, bool isTvmIpStatic, string tvmIpAddress, string tvmSubnetMask, string tvmGateway)
-			: base(connection, Messages.IMPORT_DISK_IMAGE, networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
+			: base(connection, string.Format(Messages.IMPORT_DISK_IMAGE, ovfEnv.Name, Helpers.GetName(connection)),
+                networkUuid, isTvmIpStatic, tvmIpAddress, tvmSubnetMask, tvmGateway)
 		{
 			m_ovfEnvelope = ovfEnv;
 			m_directory = directory;
@@ -68,7 +70,8 @@ namespace XenAdmin.Actions.OVFActions
 
 		protected override void Run()
 		{
-		    SafeToExit = false;
+		    base.Run();
+
 			Debug.Assert(m_vmMappings.Count == 1, "There is one VM mapping");
 
 			string systemid = m_vmMappings.Keys.ElementAt(0);

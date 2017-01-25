@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -117,7 +117,7 @@ namespace XenAdmin.Actions.Wlb
                     // which probably means there was an exception in the GUI code before the
                     // action got going. Kill the task so that we don't block forever on
                     // taskThread.Join(). Brought to light by CA-11100.
-                    XenAPI.Task.destroy(Session, RelatedTask.opaque_ref);
+                    DestroyTask();
                 }
                 if (exception == null)
                     exception = e;

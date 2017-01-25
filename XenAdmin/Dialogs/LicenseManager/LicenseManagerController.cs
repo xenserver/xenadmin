@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -156,11 +156,14 @@ namespace XenAdmin.Dialogs
 
         private void ShowPoolHostNotConnectedError()
         {
-            new ThreeButtonDialog(
+            using (var dlg = new ThreeButtonDialog(
                    new ThreeButtonDialog.Details(
                        SystemIcons.Error,
                        Messages.SELECTED_HOST_POOL_NOT_CONNECTED,
-                       Messages.XENCENTER)).ShowDialog(View.Parent);
+                       Messages.XENCENTER)))
+            {
+                dlg.ShowDialog(View.Parent);
+            }
         }
 
         private void SummariseDisconnectedRows(List<CheckableDataGridViewRow> rowsChecked)
@@ -264,12 +267,14 @@ namespace XenAdmin.Dialogs
                            }
                            catch (Exception)
                            {
-                               new ThreeButtonDialog(
+                               using (var dlg = new ThreeButtonDialog(
                                    new ThreeButtonDialog.Details(
                                        SystemIcons.Error,
-                                       string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK,
-                                                     url),
-                                       Messages.XENCENTER)).ShowDialog(View.Parent);
+                                       string.Format(Messages.LICENSE_SERVER_COULD_NOT_OPEN_LINK, url),
+                                       Messages.XENCENTER)))
+                                {
+                                    dlg.ShowDialog(View.Parent);
+                                }
                            }
                        };
         }
@@ -356,7 +361,7 @@ namespace XenAdmin.Dialogs
             View.DrawAssignButtonAsDisabled(true);
             View.DrawReleaseButtonAsDisabled(true);
             View.DrawActivateButtonAsDisabled(true);
-            View.DrawActivateButtonAsHidden(ReadOnlyView);
+            View.DrawActivateButtonAsHidden(true);
         }
 
         private void ResetButtonEnablement()

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -71,6 +71,15 @@ namespace XenAdmin.Wizards.GenericPages
         {
             m_labelIntro.Text = IntroductionText;
             label2.Text = TableIntroductionText;
+            m_colVmNetwork.HeaderText = NetworkColumnHeaderText;
+        }
+
+        protected virtual string NetworkColumnHeaderText
+        {
+            get
+            {
+                return m_colVmNetwork.HeaderText;
+            }
         }
 
 	    public abstract string IntroductionText { get; }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -402,6 +402,25 @@ namespace XenAdmin.Core
                 HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
         }
 
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool ElyOrGreater(IXenConnection conn)
+        {
+            return conn == null ? true : ElyOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Ely is ver. 2.1.1
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool ElyOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0 ||
+                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+        }
+
         /// <summary>
         /// Cream (Creedence SP1) has API version 2.4
         /// </summary>
@@ -410,6 +429,11 @@ namespace XenAdmin.Core
         public static bool CreamOrGreater(IXenConnection conn)
         {
             return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_4;
+        }
+
+        public static bool DundeePlusOrGreater(IXenConnection conn)
+        {
+            return conn == null || conn.Session == null || conn.Session.APIVersion >= API_Version.API_2_6;
         }
 
         /// Clearwater is ver. 1.7.0
@@ -974,6 +998,11 @@ namespace XenAdmin.Core
             return val;
         }
 
+        public static string MakeHiddenName(string name)
+        {
+            return string.Format("{0}{1}", GuiTempObjectPrefix, name);
+        }
+
         public static string GetFriendlyLicenseName(Host host)
         {
 			if (string.IsNullOrEmpty(host.edition))
@@ -1121,6 +1150,7 @@ namespace XenAdmin.Core
     	static Regex SrRegex = new Regex("^sr_[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}_cache_(size|hits|misses)");
         static Regex SrIORegex = new Regex("^(io_throughput|iops)_(read|write|total)_([a-f0-9]{8})$");
         static Regex SrOtherRegex = new Regex("^(latency|avgqu_sz|inflight|iowait)_([a-f0-9]{8})$");
+        static Regex SrReadWriteRegex = new Regex("^((read|write)(_latency)?)_([a-f0-9]{8})$");
         static Regex GpuRegex = new Regex(@"^gpu_((memory_(free|used))|power_usage|temperature|(utilisation_(compute|memory_io)))_(([a-fA-F0-9]{4}\/)?[a-fA-F0-9]{2}\/[0-1][a-fA-F0-9].[0-7])$");
 
         public static string GetFriendlyDataSourceName(string name, IXenObject iXenObject)
@@ -1262,6 +1292,16 @@ namespace XenAdmin.Core
                            ? null
                            : FormatFriendly(string.Format("Label-performance.sr_{0}", m.Groups[1].Value),
                                sr.Name.Ellipsise(30));
+            }
+
+            m = SrReadWriteRegex.Match(name);
+            if (m.Success)
+            {
+                SR sr = FindSr(iXenObject, m.Groups[4].Value);
+                return sr == null
+                    ? null
+                    : FormatFriendly(string.Format("Label-performance.sr_rw_{0}", m.Groups[1].Value),
+                        sr.Name.Ellipsise(30));
             }
 
             m = GpuRegex.Match(name);
@@ -1410,6 +1450,9 @@ namespace XenAdmin.Core
         /// </summary>
         public static string OEMName(Host host)
         {
+            if (host.software_version == null)
+                return string.Empty;
+
             if (!host.software_version.ContainsKey("oem_manufacturer"))
                 return "";
 
@@ -1455,22 +1498,22 @@ namespace XenAdmin.Core
         public static string GetNameAndObject(IXenObject XenObject)
         {
             if (XenObject is Pool)
-                return string.Format(Messages.POOL_X, Helpers.GetName(XenObject));
+                return string.Format(Messages.POOL_X, GetName(XenObject));
 
             if (XenObject is Host)
-                return string.Format(Messages.SERVER_X, Helpers.GetName(XenObject));
+                return string.Format(Messages.SERVER_X, GetName(XenObject));
 
             if (XenObject is VM)
             {
                 VM vm = (VM)XenObject;
-                if (vm.is_control_domain)
-                    return string.Format(Messages.SERVER_X, Helpers.GetName(XenObject.Connection.Resolve(vm.resident_on)));
+                if (vm.IsControlDomainZero)
+                    return string.Format(Messages.SERVER_X, GetName(XenObject.Connection.Resolve(vm.resident_on)));
                 else
-                    return string.Format(Messages.VM_X, Helpers.GetName(XenObject));
+                    return string.Format(Messages.VM_X, GetName(XenObject));
             }
 
             if (XenObject is SR)
-                return string.Format(Messages.STORAGE_REPOSITORY_X, Helpers.GetName(XenObject));
+                return string.Format(Messages.STORAGE_REPOSITORY_X, GetName(XenObject));
 
             return Messages.UNKNOWN_OBJECT;
         }
@@ -1601,7 +1644,12 @@ namespace XenAdmin.Core
                     VMSS vmss = message.Connection.Cache.Find_By_Uuid<VMSS>(message.obj_uuid);
                     if (vmss != null)
                         return vmss;
-                    break;
+					 break;					 
+                case cls.PVS_proxy:
+                    PVS_proxy proxy = message.Connection.Cache.Find_By_Uuid<PVS_proxy>(message.obj_uuid);
+                    if (proxy != null)
+                        return proxy;
+					break;
             }
             return null;
         }
@@ -2046,7 +2094,17 @@ namespace XenAdmin.Core
        public static bool ContainerCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           return CreamOrGreater(connection) && master != null && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+           if (master == null)
+               return false;
+           if (ElyOrGreater(connection))
+               return master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("xscontainer")); 
+           return CreamOrGreater(connection) && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+       }
+
+       public static bool PvsCacheCapability(IXenConnection connection)
+       {
+           var master = GetMaster(connection);
+           return master != null && master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("pvsaccelerator"));
        }
 
        /// <summary>

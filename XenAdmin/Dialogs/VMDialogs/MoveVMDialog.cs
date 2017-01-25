@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -53,17 +53,19 @@ namespace XenAdmin.Dialogs.VMDialogs
         {
             InitializeComponent();
             this.vm = vm;
-            srPicker1.ItemSelectionNotNull += new EventHandler(srPicker1_ItemSelectionNotNull);
-            srPicker1.ItemSelectionNull += new EventHandler(srPicker1_ItemSelectionNull);
+            srPicker1.ItemSelectionNotNull += srPicker1_ItemSelectionNotNull;
+            srPicker1.ItemSelectionNull += srPicker1_ItemSelectionNull;
+            srPicker1.DoubleClickOnRow += srPicker1_DoubleClickOnRow;
             srPicker1.SrHint.Visible = false;
             Host affinity = vm.Home();
             srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
             //this has to be set after ImportTemplate, otherwise the usage will be reset to VM
-            srPicker1.SetUsageAsMovingVDI((from VBD vbd in vm.Connection.ResolveAll(vm.VBDs)
+            var vdis = (from VBD vbd in vm.Connection.ResolveAll(vm.VBDs)
                                            where vbd.IsOwner
                                            let vdi = vm.Connection.Resolve(vbd.VDI)
                                            where vdi != null
-                                           select vdi).ToArray());
+                                           select vdi).ToArray();
+            srPicker1.SetExistingVDIs(vdis);
             srPicker1.Connection = vm.Connection;
             srPicker1.DiskSize = vm.TotalVMSize;
             srPicker1.SetAffinity(affinity);
@@ -71,6 +73,12 @@ namespace XenAdmin.Dialogs.VMDialogs
             srPicker1.selectDefaultSROrAny();
 
             EnableMoveButton();
+        }
+
+        private void srPicker1_DoubleClickOnRow(object sender, EventArgs e)
+        {
+            if (buttonMove.Enabled)
+                buttonMove.PerformClick();
         }
 
         private void buttonMove_Click(object sender, EventArgs e)
@@ -85,12 +93,12 @@ namespace XenAdmin.Dialogs.VMDialogs
             buttonMove.Enabled = srPicker1.SR != null;
         }
 
-        private void srPicker1_ItemSelectionNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNull()
         {
             EnableMoveButton();
         }
 
-        private void srPicker1_ItemSelectionNotNull(object sender, EventArgs e)
+        private void srPicker1_ItemSelectionNotNull()
         {
             EnableMoveButton();
         }

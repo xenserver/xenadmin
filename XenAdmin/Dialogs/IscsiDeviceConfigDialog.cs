@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -472,10 +472,11 @@ namespace XenAdmin.Dialogs
             }
 
             IscsiPopulateLunsAction.Completed += IscsiPopulateLunsAction_Completed;
-            ActionProgressDialog dialog =
-                new ActionProgressDialog(IscsiPopulateLunsAction, ProgressBarStyle.Marquee);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
+            using (var dialog = new ActionProgressDialog(IscsiPopulateLunsAction, ProgressBarStyle.Marquee))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
         }
 
         private void IscsiPopulateLunsAction_Completed(ActionBase sender)

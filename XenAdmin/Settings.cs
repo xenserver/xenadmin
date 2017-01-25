@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -407,12 +407,15 @@ namespace XenAdmin
             catch (ConfigurationErrorsException ex)
             {
                 // Show a warning to the user and exit the application.
-                new ThreeButtonDialog(
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(
                         SystemIcons.Error,
                         string.Format(Messages.MESSAGEBOX_SAVE_CORRUPTED, Settings.GetUserConfigPath()),
                         Messages.MESSAGEBOX_SAVE_CORRUPTED_TITLE)
-                    ).ShowDialog(Program.MainWindow);
+                    ))
+                {
+                    dlg.ShowDialog(Program.MainWindow);
+                }
 
                 log.Error("Could not save settings. Exiting application.");
                 log.Error(ex, ex);
@@ -465,7 +468,10 @@ namespace XenAdmin
 
                 // Ugly, but we need to warn the user...
                 if (!Program.RunInAutomatedTestMode)
-                    new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, Messages.MESSAGEBOX_SESSION_SAVE_UNABLE, Messages.MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE)).ShowDialog();
+                    using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, Messages.MESSAGEBOX_SESSION_SAVE_UNABLE, Messages.MESSAGEBOX_SESSION_SAVE_UNABLE_TITLE)))
+                    {
+                        dlg.ShowDialog();
+                    }
             }
         }
 

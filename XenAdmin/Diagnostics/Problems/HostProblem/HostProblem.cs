@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -47,6 +47,14 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
             _server = server;
         }
 
+        public string ServerName
+        {
+            get
+            {
+                return Helpers.GetName(_server).Ellipsise(30);
+            }
+        }
+
         public Host Server
         {
             get
@@ -57,7 +65,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
         public sealed override string Title
         {
-            get { return string.Format(Messages.PROBLEM_HOSTPROBLEM_TITLE, Helpers.GetName(Server).Ellipsise(30)); }
+            get { return string.Format(Messages.PROBLEM_HOSTPROBLEM_TITLE, ServerName); }
         }
 
 

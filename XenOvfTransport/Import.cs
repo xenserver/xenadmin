@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -312,6 +312,25 @@ namespace XenOvfTransport
 				}
 
             	#endregion
+
+                #region set has_vendor_device
+
+                if (Helpers.DundeeOrGreater(xenSession.Connection))
+                {
+                    var data = vhs.VirtualSystemOtherConfigurationData;
+                    if (data != null)
+                    {
+                        var datum = data.FirstOrDefault(s => s.Name == "VM_has_vendor_device");
+                        if (datum != null)
+                        {
+                            bool hasVendorDevice;
+                            if (bool.TryParse(datum.Value.Value, out hasVendorDevice) && hasVendorDevice)
+                                VM.set_has_vendor_device(xenSession, vmRef.opaque_ref, hasVendorDevice);
+                        }
+                    }
+                }
+
+                #endregion
 
                 #region Set vgpu
                 

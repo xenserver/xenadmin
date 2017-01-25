@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -31,14 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Wizards.HAWizard_Pages
@@ -48,7 +43,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         public HAFinishPage()
         {
             InitializeComponent();
-            pictureBox1.Visible = labelNoVmsProtected.Visible = labelNoHaGuaranteed.Visible = false;
+            ClearControls();
         }
 
         #region XenTabPage overrides
@@ -57,38 +52,26 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         public override string PageTitle { get { return Messages.HA_WIZARD_FINISH_PAGE_TITLE; } }
 
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            if (direction == PageLoadedDirection.Back)
+                ClearControls();
+            
+            base.PageLeave(direction, ref cancel);
+        }
+
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
-            int alwaysRestartHighPriority = 0, alwaysRestart = 0, bestEffort = 0, doNotRestart = 0;
-            foreach (VM.HA_Restart_Priority priority in RestartPriorities)
-            {
-                switch (priority)
-                {
-                    case VM.HA_Restart_Priority.AlwaysRestartHighPriority:
-                        alwaysRestartHighPriority++;
-                        break;
-                    case VM.HA_Restart_Priority.AlwaysRestart:
-                    case VM.HA_Restart_Priority.Restart:
-                        alwaysRestart++;
-                        break;
-                    case VM.HA_Restart_Priority.BestEffort:
-                        bestEffort++;
-                        break;
-                    case VM.HA_Restart_Priority.DoNotRestart:
-                        doNotRestart++;
-                        break;
-                }
-            }
-            labelSummary.Text = String.Format(Messages.HAWIZ_SUMMARY_NEW,
-                                                HeartbeatSrName.Ellipsise(50),
-                                                Ntol,
-                                                GetVmNumber(alwaysRestart),
-                                                GetVmNumber(bestEffort),
-                                                GetVmNumber(doNotRestart));
+            
+            labelSr.Text = HeartbeatSrName.Ellipsise(50);
+            labelNtol.Text = Ntol.ToString();
+            labelRestart.Text = GetVmNumber(AlwaysRestart);
+            labelBestEffort.Text = GetVmNumber(BestEffort);
+            labelDoNotRestart.Text = GetVmNumber(DoNotRestart);
 
             // If the user hasn't protected any VMs, show a warning.
-            labelNoVmsProtected.Visible = (bestEffort + alwaysRestart + alwaysRestartHighPriority == 0) && doNotRestart > 0;
+            labelNoVmsProtected.Visible = (BestEffort + AlwaysRestart + AlwaysRestartHighPriority == 0) && DoNotRestart > 0;
             labelNoHaGuaranteed.Visible = Ntol == 0;
             pictureBox1.Visible = labelNoVmsProtected.Visible || labelNoHaGuaranteed.Visible;
         }
@@ -97,11 +80,20 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         public string HeartbeatSrName { private get; set; }
         public long Ntol { private get; set; }
-        public IEnumerable<VM.HA_Restart_Priority> RestartPriorities { private get; set; }
+        public int AlwaysRestartHighPriority = 0;
+        public int AlwaysRestart = 0;
+        public int BestEffort = 0;
+        public int DoNotRestart = 0;
 
         private string GetVmNumber(int number)
         {
-            return string.Format("{0} {1}", number, number == 1 ? Messages.VM : Messages.VMS);
+            return number == 1 ? Messages.VMS_ONE : string.Format(Messages.VMS_MANY, number);
+        }
+
+        private void ClearControls()
+        {
+            pictureBox1.Visible = labelNoVmsProtected.Visible = labelNoHaGuaranteed.Visible = false;
+            labelSr.Text = labelNtol.Text = labelRestart.Text = labelBestEffort.Text = labelDoNotRestart.Text = string.Empty;
         }
     }
 }

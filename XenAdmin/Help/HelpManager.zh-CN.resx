@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivationServerUnavailable" xml:space="preserve">
+    <value>7018</value>
+  </data>
   <data name="AddServerDialog" xml:space="preserve">
     <value>6000</value>
+  </data>
+  <data name="AddStorageLinkSystemDialog" xml:space="preserve">
+    <value>4022</value>
+  </data>
+  <data name="AdPasswordPromptDisable" xml:space="preserve">
+    <value>1311</value>
   </data>
   <data name="AdPasswordPromptEnable" xml:space="preserve">
     <value>1310</value>
@@ -129,14 +138,26 @@
   <data name="AllowUpdatesDialog" xml:space="preserve">
     <value>6410</value>
   </data>
+  <data name="AssignLicenseDialog" xml:space="preserve">
+    <value>7019</value>
+  </data>
   <data name="AttachDiskDialog" xml:space="preserve">
     <value>3000</value>
+  </data>
+  <data name="BallooningDialog" xml:space="preserve">
+    <value>4210</value>
+  </data>
+  <data name="BallooningDialogAdvanced" xml:space="preserve">
+    <value>4211</value>
   </data>
   <data name="BallooningWizard_SettingsPane" xml:space="preserve">
     <value>4202</value>
   </data>
   <data name="BallooningWizard_VMsPane" xml:space="preserve">
     <value>4201</value>
+  </data>
+  <data name="BondConfigError" xml:space="preserve">
+    <value>6610</value>
   </data>
   <data name="BondProperties" xml:space="preserve">
     <value>6600</value>
@@ -171,11 +192,11 @@
   <data name="CloseXenCenterWarningDialog" xml:space="preserve">
     <value>1600</value>
   </data>
-  <data name="TabPageAD" xml:space="preserve">
-    <value>1301</value>
+  <data name="ConfigureAdDialogAccessChanged" xml:space="preserve">
+    <value>1303</value>
   </data>
-  <data name="GraphDetailsDialog" xml:space="preserve">
-    <value>6820</value>
+  <data name="ConfirmTemplateConvertDialog" xml:space="preserve">
+    <value>9600</value>
   </data>
   <data name="ConfirmVMDeleteDialog" xml:space="preserve">
     <value>6400</value>
@@ -186,6 +207,30 @@
   <data name="CpuUsageMessageAlert" xml:space="preserve">
     <value>7001</value>
   </data>
+  <data name="CrossPoolMigrateWizard_CopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_DestinationPane" xml:space="preserve">
+    <value>9845</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_IntraPoolCopyPane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_MigrationSummaryPane" xml:space="preserve">
+    <value>9852</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_NetworkingPane" xml:space="preserve">
+    <value>9847</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_RBACPane" xml:space="preserve">
+    <value>9853</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_StoragePane" xml:space="preserve">
+    <value>9846</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_TransferNetworkPane" xml:space="preserve">
+    <value>9848</value>
+  </data>
   <data name="CustomFieldsDialog" xml:space="preserve">
     <value>7400</value>
   </data>
@@ -195,8 +240,92 @@
   <data name="DisableWLBDialog" xml:space="preserve">
     <value>8620</value>
   </data>
+  <data name="DisconnectServerWarningDialog" xml:space="preserve">
+    <value>9850</value>
+  </data>
   <data name="DiskUsageMessageAlert" xml:space="preserve">
     <value>7002</value>
+  </data>
+  <data name="DRConfigureDialog" xml:space="preserve">
+    <value>9840</value>
+  </data>
+  <data name="DRFailoverWizard_Dryrun_BeforeYouStartPane" xml:space="preserve">
+    <value>9832</value>
+  </data>
+  <data name="DRFailoverWizard_Dryrun_PrechecksPane" xml:space="preserve">
+    <value>9835</value>
+  </data>
+  <data name="DRFailoverWizard_Dryrun_RbacPane" xml:space="preserve">
+    <value>9830</value>
+  </data>
+  <data name="DRFailoverWizard_Dryrun_RecoverPane" xml:space="preserve">
+    <value>9836</value>
+  </data>
+  <data name="DRFailoverWizard_Dryrun_ReportPane" xml:space="preserve">
+    <value>9837</value>
+  </data>
+  <data name="DRFailoverWizard_Dryrun_StoragePane" xml:space="preserve">
+    <value>9833</value>
+  </data>
+  <data name="DRFailoverWizard_Dryrun_vAppsPane" xml:space="preserve">
+    <value>9834</value>
+  </data>
+  <data name="DRFailoverWizard_Dryrun_WelcomePane" xml:space="preserve">
+    <value>9831</value>
+  </data>
+  <data name="DRFailoverWizard_Failback_BeforeYouStartPane" xml:space="preserve">
+    <value>9822</value>
+  </data>
+  <data name="DRFailoverWizard_Failback_PrechecksPane" xml:space="preserve">
+    <value>9825</value>
+  </data>
+  <data name="DRFailoverWizard_Failback_RbacPane" xml:space="preserve">
+    <value>9820</value>
+  </data>
+  <data name="DRFailoverWizard_Failback_RecoverPane" xml:space="preserve">
+    <value>9826</value>
+  </data>
+  <data name="DRFailoverWizard_Failback_ReportPane" xml:space="preserve">
+    <value>9827</value>
+  </data>
+  <data name="DRFailoverWizard_Failback_StoragePane" xml:space="preserve">
+    <value>9823</value>
+  </data>
+  <data name="DRFailoverWizard_Failback_vAppsPane" xml:space="preserve">
+    <value>9824</value>
+  </data>
+  <data name="DRFailoverWizard_Failback_WelcomePane" xml:space="preserve">
+    <value>9821</value>
+  </data>
+  <data name="DRFailoverWizard_Failover_BeforeYouStartPane" xml:space="preserve">
+    <value>9812</value>
+  </data>
+  <data name="DRFailoverWizard_Failover_PrechecksPane" xml:space="preserve">
+    <value>9815</value>
+  </data>
+  <data name="DRFailoverWizard_Failover_RbacPane" xml:space="preserve">
+    <value>9810</value>
+  </data>
+  <data name="DRFailoverWizard_Failover_RecoverPane" xml:space="preserve">
+    <value>9816</value>
+  </data>
+  <data name="DRFailoverWizard_Failover_ReportPane" xml:space="preserve">
+    <value>9817</value>
+  </data>
+  <data name="DRFailoverWizard_Failover_StoragePane" xml:space="preserve">
+    <value>9813</value>
+  </data>
+  <data name="DRFailoverWizard_Failover_vAppsPane" xml:space="preserve">
+    <value>9814</value>
+  </data>
+  <data name="DRFailoverWizard_Failover_WelcomePane" xml:space="preserve">
+    <value>9811</value>
+  </data>
+  <data name="DRFailoverWizard_RbacPane" xml:space="preserve">
+    <value>9808</value>
+  </data>
+  <data name="DRFailoverWizard_WelcomePane" xml:space="preserve">
+    <value>9809</value>
   </data>
   <data name="DummyAlert" xml:space="preserve">
     <value>7003</value>
@@ -213,6 +342,9 @@
   <data name="EditNetworkGeneralSettingsDialog" xml:space="preserve">
     <value>6252</value>
   </data>
+  <data name="EditNewDiskDialog" xml:space="preserve">
+    <value>5002</value>
+  </data>
   <data name="EditPoolGeneralSettingsDialog" xml:space="preserve">
     <value>6242</value>
   </data>
@@ -225,9 +357,6 @@
   <data name="EditVDIGeneralSettingsDialog" xml:space="preserve">
     <value>6262</value>
   </data>
-  <data name="VIFDialog" xml:space="preserve">
-    <value>6251</value>
-  </data>
   <data name="EditVMGeneralSettingsDialog" xml:space="preserve">
     <value>6241</value>
   </data>
@@ -237,8 +366,14 @@
   <data name="EditVmNetworkSettingsDialog" xml:space="preserve">
     <value>6270</value>
   </data>
+  <data name="EditVMPPGeneralSettingsDialog" xml:space="preserve">
+    <value>6536</value>
+  </data>
   <data name="EditVMStorageDialog" xml:space="preserve">
     <value>6261</value>
+  </data>
+  <data name="EditVM_applianceGeneralSettingsDialog" xml:space="preserve">
+    <value>9805</value>
   </data>
   <data name="EnterMasterPasswordDialog" xml:space="preserve">
     <value>6130</value>
@@ -246,11 +381,59 @@
   <data name="EvacuateHostDialog" xml:space="preserve">
     <value>6280</value>
   </data>
+  <data name="EventsPane" xml:space="preserve">
+    <value>9856</value>
+  </data>
+  <data name="ExportApplianceWizard_AppliancePane" xml:space="preserve">
+    <value>9501</value>
+  </data>
+  <data name="ExportApplianceWizard_ExportEulaPane" xml:space="preserve">
+    <value>9502</value>
+  </data>
+  <data name="ExportApplianceWizard_ExportFinishOvfPane" xml:space="preserve">
+    <value>9503</value>
+  </data>
+  <data name="ExportApplianceWizard_ExportFinishXvaPane" xml:space="preserve">
+    <value>9504</value>
+  </data>
+  <data name="ExportApplianceWizard_ExportOptionsPane" xml:space="preserve">
+    <value>9505</value>
+  </data>
+  <data name="ExportApplianceWizard_RbacExportOvfPane" xml:space="preserve">
+    <value>9506</value>
+  </data>
+  <data name="ExportApplianceWizard_RbacExportXvaPane" xml:space="preserve">
+    <value>9507</value>
+  </data>
+  <data name="ExportApplianceWizard_SelectVMsOvfPane" xml:space="preserve">
+    <value>9508</value>
+  </data>
+  <data name="ExportApplianceWizard_SelectVMsXvaPane" xml:space="preserve">
+    <value>9509</value>
+  </data>
+  <data name="ExportApplianceWizard_TvmIpExportPane" xml:space="preserve">
+    <value>9510</value>
+  </data>
   <data name="ExportVMDialog" xml:space="preserve">
     <value>6510</value>
   </data>
+  <data name="ExportVmDialogFSLimitExceeded" xml:space="preserve">
+    <value>6516</value>
+  </data>
+  <data name="ExportVmDialogInsufficientDiskSpace" xml:space="preserve">
+    <value>6515</value>
+  </data>
+  <data name="FileSystemUsageMessageAlert" xml:space="preserve">
+    <value>9857</value>
+  </data>
   <data name="FolderChangeDialog" xml:space="preserve">
     <value>7200</value>
+  </data>
+  <data name="GpuConfigurationDialog" xml:space="preserve">
+    <value>9900</value>
+  </data>
+  <data name="GraphDetailsDialog" xml:space="preserve">
+    <value>6820</value>
   </data>
   <data name="GuiOldAlert" xml:space="preserve">
     <value>7005</value>
@@ -258,8 +441,14 @@
   <data name="GuiOutOfDateAlert" xml:space="preserve">
     <value>7006</value>
   </data>
+  <data name="HADisable" xml:space="preserve">
+    <value>4501</value>
+  </data>
   <data name="HADropInNtolAlert" xml:space="preserve">
     <value>7007</value>
+  </data>
+  <data name="HaNtolMax" xml:space="preserve">
+    <value>3500</value>
   </data>
   <data name="HaNtolZero" xml:space="preserve">
     <value>3500</value>
@@ -270,6 +459,81 @@
   <data name="HAWizard" xml:space="preserve">
     <value>4500</value>
   </data>
+  <data name="HealthCheckOverviewDialog" xml:space="preserve">
+    <value>9904</value>
+  </data>
+  <data name="HealthCheckSettingsDialog" xml:space="preserve">
+    <value>9905</value>
+  </data>
+  <data name="ImportWizard_GlobalSelectHostPane" xml:space="preserve">
+    <value>9511</value>
+  </data>
+  <data name="ImportWizard_ImportEulaPane" xml:space="preserve">
+    <value>9512</value>
+  </data>
+  <data name="ImportWizard_ImportFinishImagePane" xml:space="preserve">
+    <value>9513</value>
+  </data>
+  <data name="ImportWizard_ImportFinishOvfPane" xml:space="preserve">
+    <value>9514</value>
+  </data>
+  <data name="ImportWizard_ImportFinishXvaPane" xml:space="preserve">
+    <value>9515</value>
+  </data>
+  <data name="ImportWizard_ImportOptionsImagePane" xml:space="preserve">
+    <value>9516</value>
+  </data>
+  <data name="ImportWizard_ImportOptionsOvfPane" xml:space="preserve">
+    <value>9517</value>
+  </data>
+  <data name="ImportWizard_NetworkPickerPane" xml:space="preserve">
+    <value>9528</value>
+  </data>
+  <data name="ImportWizard_RbacImportImagePane" xml:space="preserve">
+    <value>9519</value>
+  </data>
+  <data name="ImportWizard_RbacImportOvfPane" xml:space="preserve">
+    <value>9520</value>
+  </data>
+  <data name="ImportWizard_RbacImportXvaPane" xml:space="preserve">
+    <value>9521</value>
+  </data>
+  <data name="ImportWizard_SecurityPane" xml:space="preserve">
+    <value>9522</value>
+  </data>
+  <data name="ImportWizard_SelectHostImagePane" xml:space="preserve">
+    <value>9523</value>
+  </data>
+  <data name="ImportWizard_SelectHostOvfPane" xml:space="preserve">
+    <value>9524</value>
+  </data>
+  <data name="ImportWizard_SelectNetworkImagePane" xml:space="preserve">
+    <value>9525</value>
+  </data>
+  <data name="ImportWizard_SelectNetworkOvfPane" xml:space="preserve">
+    <value>9526</value>
+  </data>
+  <data name="ImportWizard_SelectStorageImagePane" xml:space="preserve">
+    <value>9527</value>
+  </data>
+  <data name="ImportWizard_SelectStorageOvfPane" xml:space="preserve">
+    <value>9534</value>
+  </data>
+  <data name="ImportWizard_SourcePane" xml:space="preserve">
+    <value>9529</value>
+  </data>
+  <data name="ImportWizard_StoragePickerPane" xml:space="preserve">
+    <value>9530</value>
+  </data>
+  <data name="ImportWizard_TvmIpImportImagePane" xml:space="preserve">
+    <value>9531</value>
+  </data>
+  <data name="ImportWizard_TvmIpImportOvfPane" xml:space="preserve">
+    <value>9532</value>
+  </data>
+  <data name="ImportWizard_VMConfigPane" xml:space="preserve">
+    <value>9533</value>
+  </data>
   <data name="InstallToolsWarningDialog" xml:space="preserve">
     <value>6700</value>
   </data>
@@ -278,6 +542,9 @@
   </data>
   <data name="IscsiChoicesDialog" xml:space="preserve">
     <value>9591</value>
+  </data>
+  <data name="IscsiDeviceConfigDialog" xml:space="preserve">
+    <value>9841</value>
   </data>
   <data name="LicenseKeyDialog" xml:space="preserve">
     <value>6800</value>
@@ -291,11 +558,20 @@
   <data name="LogWindow" xml:space="preserve">
     <value>7000</value>
   </data>
-  <data name="MessageAlert_EXTAUTH_IN_POOL_IS_NON_HOMOGENEOUS" xml:space="preserve">
-    <value>1302</value>
+  <data name="LVMoHBAWarningDialog" xml:space="preserve">
+    <value>9854</value>
+  </data>
+  <data name="ManageUpdatesDialog" xml:space="preserve">
+    <value>9851</value>
+  </data>
+  <data name="MemoryUsageMessageAlert" xml:space="preserve">
+    <value>7016</value>
   </data>
   <data name="MessageAlert_EXTAUTH_INIT_IN_HOST_FAILED" xml:space="preserve">
     <value>1300</value>
+  </data>
+  <data name="MessageAlert_EXTAUTH_IN_POOL_IS_NON_HOMOGENEOUS" xml:space="preserve">
+    <value>1302</value>
   </data>
   <data name="MessageAlert_HA_POOL_DROP_IN_PLAN_EXISTS_FOR" xml:space="preserve">
     <value>7007</value>
@@ -303,8 +579,32 @@
   <data name="MessageAlert_HA_POOL_OVERCOMMITTED" xml:space="preserve">
     <value>7008</value>
   </data>
+  <data name="MessageAlert_LICENSE_EXPIRED" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_NOT_AVAILABLE" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_SERVER_CONNECTED" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_SERVER_UNAVAILABLE" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_SERVER_UNREACHABLE" xml:space="preserve">
+    <value>7015</value>
+  </data>
+  <data name="MessageAlert_LICENSE_SERVER_VERSION_OBSOLETE" xml:space="preserve">
+    <value>7015</value>
+  </data>
   <data name="MissingIqnAlert" xml:space="preserve">
     <value>7010</value>
+  </data>
+  <data name="MoveVirtualDiskDialog" xml:space="preserve">
+    <value>5001</value>
+  </data>
+  <data name="MoveVMDialog" xml:space="preserve">
+    <value>9010</value>
   </data>
   <data name="NameAndConnectionPrompt" xml:space="preserve">
     <value>7300</value>
@@ -312,8 +612,14 @@
   <data name="NetUsageMessageAlert" xml:space="preserve">
     <value>7011</value>
   </data>
+  <data name="NetworkingConfigWarning" xml:space="preserve">
+    <value>8310</value>
+  </data>
   <data name="NetworkingProperties" xml:space="preserve">
     <value>8300</value>
+  </data>
+  <data name="NetworkingPropertiesPMIWarning" xml:space="preserve">
+    <value>8301</value>
   </data>
   <data name="NewCustomFieldDialog" xml:space="preserve">
     <value>7410</value>
@@ -327,6 +633,30 @@
   <data name="NewNetworkWizard" xml:space="preserve">
     <value>8000</value>
   </data>
+  <data name="NewPolicyWizard_ArchivesnapshotsPane" xml:space="preserve">
+    <value>6535</value>
+  </data>
+  <data name="NewPolicyWizard_EmailalertsPane" xml:space="preserve">
+    <value>6535</value>
+  </data>
+  <data name="NewPolicyWizard_FinishPane" xml:space="preserve">
+    <value>6535</value>
+  </data>
+  <data name="NewPolicyWizard_PolicyNamePane" xml:space="preserve">
+    <value>6535</value>
+  </data>
+  <data name="NewPolicyWizard_RbacPane" xml:space="preserve">
+    <value>9843</value>
+  </data>
+  <data name="NewPolicyWizard_SnapshotfrequencyPane" xml:space="preserve">
+    <value>6535</value>
+  </data>
+  <data name="NewPolicyWizard_SnapshottypePane" xml:space="preserve">
+    <value>6535</value>
+  </data>
+  <data name="NewPolicyWizard_VirtualMachinesPane" xml:space="preserve">
+    <value>6535</value>
+  </data>
   <data name="NewPoolDialog" xml:space="preserve">
     <value>5100</value>
   </data>
@@ -336,8 +666,68 @@
   <data name="NewSRWizard_FinishPane" xml:space="preserve">
     <value>4030</value>
   </data>
+  <data name="NewSRWizard_FlexVols" xml:space="preserve">
+    <value>4025</value>
+  </data>
+  <data name="NewSRWizard_Location_CIFSISOPane" xml:space="preserve">
+    <value>4024</value>
+  </data>
+  <data name="NewSRWizard_Location_CIFSPane" xml:space="preserve">
+    <value>4016</value>
+  </data>
+  <data name="NewSRWizard_Location_FCOEPane" xml:space="preserve">
+    <value>4015</value>
+  </data>
+  <data name="NewSRWizard_Location_HBAPane" xml:space="preserve">
+    <value>4013</value>
+  </data>
+  <data name="NewSRWizard_Location_ISCSIPane" xml:space="preserve">
+    <value>4012</value>
+  </data>
+  <data name="NewSRWizard_Location_NFSISOPane" xml:space="preserve">
+    <value>4021</value>
+  </data>
+  <data name="NewSRWizard_Location_NFSVHDPane" xml:space="preserve">
+    <value>4011</value>
+  </data>
+  <data name="NewSRWizard_NameandStorageSystemPane" xml:space="preserve">
+    <value>4023</value>
+  </data>
+  <data name="NewSRWizard_RbacPane" xml:space="preserve">
+    <value>4026</value>
+  </data>
+  <data name="NewSRWizard_SL_EQL_filerPane" xml:space="preserve">
+    <value>4015</value>
+  </data>
+  <data name="NewSRWizard_SL_EQL_optionsPane" xml:space="preserve">
+    <value>4016</value>
+  </data>
+  <data name="NewSRWizard_SL_NETAPP_filerPane" xml:space="preserve">
+    <value>4017</value>
+  </data>
+  <data name="NewSRWizard_SL_NETAPP_optionsPane" xml:space="preserve">
+    <value>4018</value>
+  </data>
   <data name="NewSRWizard_SL_SLServer_locationPane" xml:space="preserve">
     <value>4020</value>
+  </data>
+  <data name="NewSRWizard_SL_SLServer_optionsPane" xml:space="preserve">
+    <value>4019</value>
+  </data>
+  <data name="NewSRWizard_SL_SLServer_options_PreBostonPane" xml:space="preserve">
+    <value>4023</value>
+  </data>
+  <data name="NewSRWizard_SL_SystemPane" xml:space="preserve">
+    <value>4014</value>
+  </data>
+  <data name="NewSRWizard_SL_System_PreBostonPane" xml:space="preserve">
+    <value>4023</value>
+  </data>
+  <data name="NewSRWizard_SrNamePane" xml:space="preserve">
+    <value>4029</value>
+  </data>
+  <data name="NewSRWizard_Summary_HBAPane" xml:space="preserve">
+    <value>9855</value>
   </data>
   <data name="NewSRWizard_TypePane" xml:space="preserve">
     <value>4010</value>
@@ -345,14 +735,35 @@
   <data name="NewTagDialog" xml:space="preserve">
     <value>7220</value>
   </data>
+  <data name="NewVMApplianceWizard_FinishPane" xml:space="preserve">
+    <value>9804</value>
+  </data>
+  <data name="NewVMApplianceWizard_RbacPane" xml:space="preserve">
+    <value>9842</value>
+  </data>
+  <data name="NewVMApplianceWizard_vAppNamePane" xml:space="preserve">
+    <value>9801</value>
+  </data>
+  <data name="NewVMApplianceWizard_VMOrderAndDelaysPane" xml:space="preserve">
+    <value>9803</value>
+  </data>
+  <data name="NewVMApplianceWizard_VMsPane" xml:space="preserve">
+    <value>9802</value>
+  </data>
   <data name="NewVMNetworkWizard" xml:space="preserve">
     <value>8500</value>
   </data>
   <data name="NewVMWizard" xml:space="preserve">
     <value>2000</value>
   </data>
+  <data name="NewVMWizard_BIOSStringsPane" xml:space="preserve">
+    <value>2015</value>
+  </data>
   <data name="NewVMWizard_CdMediaPane" xml:space="preserve">
     <value>2030</value>
+  </data>
+  <data name="NewVMWizard_CloudConfigParametersPane" xml:space="preserve">
+    <value>2055</value>
   </data>
   <data name="NewVMWizard_CPU&amp;MemoryPane" xml:space="preserve">
     <value>2040</value>
@@ -362,6 +773,9 @@
   </data>
   <data name="NewVMWizard_FirstRunPane" xml:space="preserve">
     <value>2000</value>
+  </data>
+  <data name="NewVMWizard_GPUPane" xml:space="preserve">
+    <value>2080</value>
   </data>
   <data name="NewVMWizard_HomeServerPane" xml:space="preserve">
     <value>2035</value>
@@ -378,6 +792,12 @@
   <data name="NewVMWizard_NetworkMediaPane" xml:space="preserve">
     <value>2030</value>
   </data>
+  <data name="NewVMWizard_PermissionChecksPane" xml:space="preserve">
+    <value>9730</value>
+  </data>
+  <data name="NewVMWizard_RbacPane" xml:space="preserve">
+    <value>9844</value>
+  </data>
   <data name="NewVMWizard_SourcePane" xml:space="preserve">
     <value>2020</value>
   </data>
@@ -390,8 +810,53 @@
   <data name="OptionsDialog" xml:space="preserve">
     <value>6170</value>
   </data>
+  <data name="PatchingWizard_ApplyUpdatePane" xml:space="preserve">
+    <value>6315</value>
+  </data>
+  <data name="PatchingWizard_BeforeyoustartPane" xml:space="preserve">
+    <value>6315</value>
+  </data>
+  <data name="PatchingWizard_InstallUpdatePane" xml:space="preserve">
+    <value>6315</value>
+  </data>
+  <data name="PatchingWizard_SelectPatchPane" xml:space="preserve">
+    <value>6315</value>
+  </data>
+  <data name="PatchingWizard_SelectServersPane" xml:space="preserve">
+    <value>6315</value>
+  </data>
+  <data name="PatchingWizard_SelectUpdatePane" xml:space="preserve">
+    <value>6315</value>
+  </data>
+  <data name="PatchingWizard_UpdateModePane" xml:space="preserve">
+    <value>6315</value>
+  </data>
+  <data name="PatchingWizard_UpdatePrechecksPane" xml:space="preserve">
+    <value>6315</value>
+  </data>
+  <data name="PatchingWizard_UploadPatchPane" xml:space="preserve">
+    <value>6315</value>
+  </data>
   <data name="PluginListDialog" xml:space="preserve">
     <value>1200</value>
+  </data>
+  <data name="PoolJoinAdConfiguring" xml:space="preserve">
+    <value>5192</value>
+  </data>
+  <data name="PoolJoinCpuMasking" xml:space="preserve">
+    <value>5191</value>
+  </data>
+  <data name="PoolJoinRelicensing" xml:space="preserve">
+    <value>5190</value>
+  </data>
+  <data name="PoolJoinSuppPacks" xml:space="preserve">
+    <value>5193</value>
+  </data>
+  <data name="ProcessForceClosePrompt" xml:space="preserve">
+    <value>1002</value>
+  </data>
+  <data name="ReconnectAsDialog" xml:space="preserve">
+    <value>6005</value>
   </data>
   <data name="RelocateToDialog" xml:space="preserve">
     <value>6300</value>
@@ -402,7 +867,43 @@
   <data name="RepairSRDialog" xml:space="preserve">
     <value>6160</value>
   </data>
+  <data name="ResolvingSubjectsDialog" xml:space="preserve">
+    <value>9749</value>
+  </data>
+  <data name="RestoreVMsDialog" xml:space="preserve">
+    <value>6280</value>
+  </data>
+  <data name="RevertDialog" xml:space="preserve">
+    <value>6525</value>
+  </data>
+  <data name="RoleElevationDialog" xml:space="preserve">
+    <value>9700</value>
+  </data>
+  <data name="RoleSelectionDialog" xml:space="preserve">
+    <value>9710</value>
+  </data>
   <data name="RollingUpgradeWizard" xml:space="preserve">
+    <value>7500</value>
+  </data>
+  <data name="RollingUpgradeWizard_BeforeyoustartPane" xml:space="preserve">
+    <value>7500</value>
+  </data>
+  <data name="RollingUpgradeWizard_ReadyupgradePane" xml:space="preserve">
+    <value>7500</value>
+  </data>
+  <data name="RollingUpgradeWizard_SelectpoolPane" xml:space="preserve">
+    <value>7500</value>
+  </data>
+  <data name="RollingUpgradeWizard_upgrademethodPane" xml:space="preserve">
+    <value>7500</value>
+  </data>
+  <data name="RollingUpgradeWizard_UpgrademodePane" xml:space="preserve">
+    <value>7500</value>
+  </data>
+  <data name="RollingUpgradeWizard_UpgradepoolsPane" xml:space="preserve">
+    <value>7500</value>
+  </data>
+  <data name="RollingUpgradeWizard_UpgradeprechecksPane" xml:space="preserve">
     <value>7500</value>
   </data>
   <data name="SaveAndRestoreDialog" xml:space="preserve">
@@ -414,11 +915,26 @@
   <data name="SelectHostDialogBackup" xml:space="preserve">
     <value>6810</value>
   </data>
+  <data name="SelectHostDialogLicense" xml:space="preserve">
+    <value>6801</value>
+  </data>
+  <data name="SelectVMsToSuspendDialog" xml:space="preserve">
+    <value>6281</value>
+  </data>
   <data name="SetMasterPasswordDialog" xml:space="preserve">
     <value>6110</value>
   </data>
+  <data name="StorageUsageMessageAlert" xml:space="preserve">
+    <value>7009</value>
+  </data>
+  <data name="TabPageAD" xml:space="preserve">
+    <value>1301</value>
+  </data>
   <data name="TabPageBallooning" xml:space="preserve">
     <value>1033</value>
+  </data>
+  <data name="TabPageBallooningUpsell" xml:space="preserve">
+    <value>1034</value>
   </data>
   <data name="TabPageConsole" xml:space="preserve">
     <value>1020</value>
@@ -426,8 +942,20 @@
   <data name="TabPageCPUMemory" xml:space="preserve">
     <value>1040</value>
   </data>
+  <data name="TabPageDockerDetails" xml:space="preserve">
+    <value>9903</value>
+  </data>
+  <data name="TabPageDockerProcess" xml:space="preserve">
+    <value>9902</value>
+  </data>
+  <data name="TabPageGPU" xml:space="preserve">
+    <value>9901</value>
+  </data>
   <data name="TabPageHA" xml:space="preserve">
     <value>1095</value>
+  </data>
+  <data name="TabPageHAUpsell" xml:space="preserve">
+    <value>1096</value>
   </data>
   <data name="TabPageHistory" xml:space="preserve">
     <value>1100</value>
@@ -450,11 +978,11 @@
   <data name="TabPageNICs_Dedicate" xml:space="preserve">
     <value>1085</value>
   </data>
-  <data name="TabPageSearch" xml:space="preserve">
-    <value>1010</value>
-  </data>
   <data name="TabPagePerformance" xml:space="preserve">
     <value>1090</value>
+  </data>
+  <data name="TabPageSearch" xml:space="preserve">
+    <value>1010</value>
   </data>
   <data name="TabPageSettings" xml:space="preserve">
     <value>1030</value>
@@ -492,515 +1020,35 @@
   <data name="TabPageWLB" xml:space="preserve">
     <value>8610</value>
   </data>
+  <data name="TabPageWLBUpsell" xml:space="preserve">
+    <value>8611</value>
+  </data>
   <data name="UnknownCertificateDialog" xml:space="preserve">
     <value>6210</value>
   </data>
   <data name="UpdatesDialog" xml:space="preserve">
     <value>6310</value>
   </data>
-  <data name="PatchingWizard_ApplyUpdatePane" xml:space="preserve">
-    <value>6315</value>
-  </data>
-  <data name="PatchingWizard_SelectPatchPane" xml:space="preserve">
-    <value>6315</value>
-  </data>
-  <data name="PatchingWizard_UpdatePrechecksPane" xml:space="preserve">
-    <value>6315</value>
-  </data>
-  <data name="PatchingWizard_UpdateModePane" xml:space="preserve">
-    <value>6315</value>
-  </data>
-  <data name="PatchingWizard_SelectServersPane" xml:space="preserve">
-    <value>6315</value>
-  </data>
   <data name="VcpuWarningDialog" xml:space="preserve">
     <value>6290</value>
-  </data>
-  <data name="VmSnapshotDialog" xml:space="preserve">
-    <value>6520</value>
-  </data>
-  <data name="WLBReports" xml:space="preserve">
-    <value>8630</value>
-  </data>
-  <data name="WlbConfigurationDialog" xml:space="preserve">
-    <value>8600</value>
-  </data>
-  <data name="XenCenterUpdateAlert" xml:space="preserve">
-    <value>7012</value>
-  </data>
-  <data name="XenServerPatchAlert" xml:space="preserve">
-    <value>7013</value>
-  </data>
-  <data name="XenServerUpdateAlert" xml:space="preserve">
-    <value>7014</value>
-  </data>
-  <data name="NewVMWizard_PermissionChecksPane" xml:space="preserve">
-    <value>9730</value>
-  </data>
-  <data name="SelectVMsToSuspendDialog" xml:space="preserve">
-    <value>6281</value>
-  </data>
-  <data name="RollingUpgradeWizard_BeforeyoustartPane" xml:space="preserve">
-    <value>7500</value>
-  </data>
-  <data name="RollingUpgradeWizard_SelectpoolPane" xml:space="preserve">
-    <value>7500</value>
-  </data>
-  <data name="RollingUpgradeWizard_UpgradeprechecksPane" xml:space="preserve">
-    <value>7500</value>
-  </data>
-  <data name="BallooningDialog" xml:space="preserve">
-    <value>4210</value>
-  </data>
-  <data name="RoleElevationDialog" xml:space="preserve">
-    <value>9700</value>
-  </data>
-  <data name="RoleSelectionDialog" xml:space="preserve">
-    <value>9710</value>
-  </data>
-  <data name="ResolvingSubjectsDialog" xml:space="preserve">
-    <value>9749</value>
-  </data>
-  <data name="AssignLicenseDialog" xml:space="preserve">
-    <value>7019</value>
-  </data>
-  <data name="SelectHostDialogLicense" xml:space="preserve">
-    <value>6801</value>
-  </data>
-  <data name="NewSRWizard_NameandStorageSystemPane" xml:space="preserve">
-    <value>4023</value>
-  </data>
-  <data name="BallooningDialogAdvanced" xml:space="preserve">
-    <value>4211</value>
-  </data>
-  <data name="ActivationServerUnavailable" xml:space="preserve">
-    <value>7018</value>
-  </data>
-  <data name="BondConfigError" xml:space="preserve">
-    <value>6610</value>
-  </data>
-  <data name="ConfigureAdDialogAccessChanged" xml:space="preserve">
-    <value>1303</value>
-  </data>
-  <data name="ExportVmDialogFSLimitExceeded" xml:space="preserve">
-    <value>6516</value>
-  </data>
-  <data name="ExportVmDialogInsufficientDiskSpace" xml:space="preserve">
-    <value>6515</value>
-  </data>
-  <data name="NetworkingConfigWarning" xml:space="preserve">
-    <value>8310</value>
-  </data>
-  <data name="NetworkingPropertiesPMIWarning" xml:space="preserve">
-    <value>8301</value>
-  </data>
-  <data name="WlbCredentialsDialog" xml:space="preserve">
-    <value>8640</value>
-  </data>
-  <data name="AdPasswordPromptDisable" xml:space="preserve">
-    <value>1311</value>
-  </data>
-  <data name="PatchingWizard_BeforeyoustartPane" xml:space="preserve">
-    <value>6315</value>
-  </data>
-  <data name="PatchingWizard_SelectUpdatePane" xml:space="preserve">
-    <value>6315</value>
-  </data>
-  <data name="PatchingWizard_InstallUpdatePane" xml:space="preserve">
-    <value>6315</value>
-  </data>
-  <data name="ProcessForceClosePrompt" xml:space="preserve">
-    <value>1002</value>
-  </data>
-  <data name="WlbReportSubscriptionDialog" xml:space="preserve">
-    <value>8632</value>
-  </data>
-  <data name="ConfirmTemplateConvertDialog" xml:space="preserve">
-    <value>9600</value>
-  </data>
-  <data name="PoolJoinCpuMasking" xml:space="preserve">
-    <value>5191</value>
-  </data>
-  <data name="PoolJoinRelicensing" xml:space="preserve">
-    <value>5190</value>
-  </data>
-  <data name="NewVMWizard_BIOSStringsPane" xml:space="preserve">
-    <value>2015</value>
-  </data>
-  <data name="RestoreVMsDialog" xml:space="preserve">
-    <value>6280</value>
-  </data>
-  <data name="HaNtolMax" xml:space="preserve">
-    <value>3500</value>
-  </data>
-  <data name="RevertDialog" xml:space="preserve">
-    <value>6525</value>
-  </data>
-  <data name="WlbEditScheduledTask" xml:space="preserve">
-    <value>8605</value>
-  </data>
-  <data name="ReconnectAsDialog" xml:space="preserve">
-    <value>6005</value>
-  </data>
-  <data name="TabPageBallooningUpsell" xml:space="preserve">
-    <value>1034</value>
-  </data>
-  <data name="TabPageHAUpsell" xml:space="preserve">
-    <value>1096</value>
-  </data>
-  <data name="TabPageWLBUpsell" xml:space="preserve">
-    <value>8611</value>
-  </data>
-  <data name="VMSnapshotPage" xml:space="preserve">
-    <value>6530</value>
-  </data>
-  <data name="PoolJoinAdConfiguring" xml:space="preserve">
-    <value>5192</value>
-  </data>
-  <data name="PoolJoinSuppPacks" xml:space="preserve">
-    <value>5193</value>
-  </data>
-  <data name="NewSRWizard_FlexVols" xml:space="preserve">
-    <value>4025</value>
-  </data>
-  <data name="RollingUpgradeWizard_UpgradepoolsPane" xml:space="preserve">
-    <value>7500</value>
-  </data>
-  <data name="MoveVirtualDiskDialog" xml:space="preserve">
-    <value>5001</value>
-  </data>
-  <data name="NewPolicyWizard_ArchivesnapshotsPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_EmailalertsPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_FinishPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_PolicyNamePane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_SnapshotfrequencyPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_SnapshottypePane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="NewPolicyWizard_VirtualMachinesPane" xml:space="preserve">
-    <value>6535</value>
-  </data>
-  <data name="VMProtectionPoliciesDialog" xml:space="preserve">
-    <value>6536</value>
-  </data>
-  <data name="AddStorageLinkSystemDialog" xml:space="preserve">
-    <value>4022</value>
-  </data>
-  <data name="NewSRWizard_Location_CIFSISOPane" xml:space="preserve">
-    <value>4024</value>
-  </data>
-  <data name="NewSRWizard_Location_ISCSIPane" xml:space="preserve">
-    <value>4012</value>
-  </data>
-  <data name="NewSRWizard_Location_NFSISOPane" xml:space="preserve">
-    <value>4021</value>
-  </data>
-  <data name="NewSRWizard_Location_NFSVHDPane" xml:space="preserve">
-    <value>4011</value>
-  </data>
-  <data name="NewSRWizard_SL_EQL_filerPane" xml:space="preserve">
-    <value>4015</value>
-  </data>
-  <data name="NewSRWizard_SL_EQL_optionsPane" xml:space="preserve">
-    <value>4016</value>
-  </data>
-  <data name="NewSRWizard_SL_NETAPP_filerPane" xml:space="preserve">
-    <value>4017</value>
-  </data>
-  <data name="NewSRWizard_SL_NETAPP_optionsPane" xml:space="preserve">
-    <value>4018</value>
-  </data>
-  <data name="NewSRWizard_SL_SLServer_optionsPane" xml:space="preserve">
-    <value>4019</value>
-  </data>
-  <data name="NewSRWizard_SL_SystemPane" xml:space="preserve">
-    <value>4014</value>
-  </data>
-  <data name="NewSRWizard_Location_HBAPane" xml:space="preserve">
-    <value>4013</value>
-  </data>
-  <data name="ImportStorageLinkVolumeDialog" xml:space="preserve">
-    <value>4035</value>
-  </data>
-  <data name="EditNewDiskDialog" xml:space="preserve">
-    <value>5002</value>
-  </data>
-  <data name="EditVMPPGeneralSettingsDialog" xml:space="preserve">
-    <value>6536</value>
-  </data>
-  <data name="RollingUpgradeWizard_upgrademethodPane" xml:space="preserve">
-    <value>7500</value>
-  </data>
-  <data name="RollingUpgradeWizard_UpgrademodePane" xml:space="preserve">
-    <value>7500</value>
-  </data>
-  <data name="RollingUpgradeWizard_ReadyupgradePane" xml:space="preserve">
-    <value>7500</value>
-  </data>
-  <data name="DRFailoverWizard_Failover_BeforeYouStartPane" xml:space="preserve">
-    <value>9812</value>
-  </data>
-  <data name="DRFailoverWizard_Failover_PrechecksPane" xml:space="preserve">
-    <value>9815</value>
-  </data>
-  <data name="DRFailoverWizard_Failover_RecoverPane" xml:space="preserve">
-    <value>9816</value>
-  </data>
-  <data name="DRFailoverWizard_Failover_ReportPane" xml:space="preserve">
-    <value>9817</value>
-  </data>
-  <data name="DRFailoverWizard_Failover_StoragePane" xml:space="preserve">
-    <value>9813</value>
-  </data>
-  <data name="DRFailoverWizard_Failover_vAppsPane" xml:space="preserve">
-    <value>9814</value>
-  </data>
-  <data name="DRFailoverWizard_Failover_WelcomePane" xml:space="preserve">
-    <value>9811</value>
-  </data>
-  <data name="NewVMApplianceWizard_FinishPane" xml:space="preserve">
-    <value>9804</value>
-  </data>
-  <data name="NewVMApplianceWizard_vAppNamePane" xml:space="preserve">
-    <value>9801</value>
-  </data>
-  <data name="NewVMApplianceWizard_VMOrderAndDelaysPane" xml:space="preserve">
-    <value>9803</value>
-  </data>
-  <data name="NewVMApplianceWizard_VMsPane" xml:space="preserve">
-    <value>9802</value>
-  </data>
-  <data name="DRConfigureDialog" xml:space="preserve">
-    <value>9840</value>
-  </data>
-  <data name="EditVM_applianceGeneralSettingsDialog" xml:space="preserve">
-    <value>9805</value>
-  </data>
-  <data name="IscsiDeviceConfigDialog" xml:space="preserve">
-    <value>9841</value>
-  </data>
-  <data name="VMAppliancesDialog" xml:space="preserve">
-    <value>9800</value>
-  </data>
-  <data name="NewSRWizard_SrNamePane" xml:space="preserve">
-    <value>4029</value>
-  </data>
-  <data name="ExportApplianceWizard_AppliancePane" xml:space="preserve">
-    <value>9501</value>
-  </data>
-  <data name="ExportApplianceWizard_ExportEulaPane" xml:space="preserve">
-    <value>9502</value>
-  </data>
-  <data name="ExportApplianceWizard_ExportFinishOvfPane" xml:space="preserve">
-    <value>9503</value>
-  </data>
-  <data name="ExportApplianceWizard_ExportOptionsPane" xml:space="preserve">
-    <value>9505</value>
-  </data>
-  <data name="ExportApplianceWizard_SelectVMsOvfPane" xml:space="preserve">
-    <value>9508</value>
-  </data>
-  <data name="ExportApplianceWizard_TvmIpExportPane" xml:space="preserve">
-    <value>9510</value>
-  </data>
-  <data name="ImportWizard_GlobalSelectHostPane" xml:space="preserve">
-    <value>9511</value>
-  </data>
-  <data name="ImportWizard_ImportEulaPane" xml:space="preserve">
-    <value>9512</value>
-  </data>
-  <data name="ImportWizard_ImportFinishOvfPane" xml:space="preserve">
-    <value>9514</value>
-  </data>
-  <data name="ImportWizard_ImportOptionsOvfPane" xml:space="preserve">
-    <value>9517</value>
-  </data>
-  <data name="ImportWizard_NetworkPickerPane" xml:space="preserve">
-    <value>9528</value>
-  </data>
-  <data name="ImportWizard_SecurityPane" xml:space="preserve">
-    <value>9522</value>
-  </data>
-  <data name="ImportWizard_SelectHostOvfPane" xml:space="preserve">
-    <value>9524</value>
-  </data>
-  <data name="ImportWizard_SelectNetworkOvfPane" xml:space="preserve">
-    <value>9526</value>
-  </data>
-  <data name="ImportWizard_SelectStorageOvfPane" xml:space="preserve">
-    <value>9534</value>
-  </data>
-  <data name="ImportWizard_StoragePickerPane" xml:space="preserve">
-    <value>9530</value>
-  </data>
-  <data name="ImportWizard_TvmIpImportOvfPane" xml:space="preserve">
-    <value>9532</value>
-  </data>
-  <data name="ImportWizard_VMConfigPane" xml:space="preserve">
-    <value>9533</value>
-  </data>
-  <data name="ImportWizard_ImportFinishXvaPane" xml:space="preserve">
-    <value>9515</value>
-  </data>
-  <data name="HADisable" xml:space="preserve">
-    <value>4501</value>
-  </data>
-  <data name="ExportApplianceWizard_ExportFinishXvaPane" xml:space="preserve">
-    <value>9504</value>
-  </data>
-  <data name="ExportApplianceWizard_RbacExportOvfPane" xml:space="preserve">
-    <value>9506</value>
-  </data>
-  <data name="ExportApplianceWizard_RbacExportXvaPane" xml:space="preserve">
-    <value>9507</value>
-  </data>
-  <data name="ExportApplianceWizard_SelectVMsXvaPane" xml:space="preserve">
-    <value>9509</value>
-  </data>
-  <data name="ImportWizard_ImportFinishImagePane" xml:space="preserve">
-    <value>9513</value>
-  </data>
-  <data name="ImportWizard_ImportOptionsImagePane" xml:space="preserve">
-    <value>9516</value>
-  </data>
-  <data name="ImportWizard_RbacImportImagePane" xml:space="preserve">
-    <value>9519</value>
-  </data>
-  <data name="ImportWizard_RbacImportOvfPane" xml:space="preserve">
-    <value>9520</value>
-  </data>
-  <data name="ImportWizard_RbacImportXvaPane" xml:space="preserve">
-    <value>9521</value>
-  </data>
-  <data name="ImportWizard_SelectHostImagePane" xml:space="preserve">
-    <value>9523</value>
-  </data>
-  <data name="ImportWizard_SelectNetworkImagePane" xml:space="preserve">
-    <value>9525</value>
-  </data>
-  <data name="ImportWizard_SelectStorageImagePane" xml:space="preserve">
-    <value>9527</value>
-  </data>
-  <data name="ImportWizard_SourcePane" xml:space="preserve">
-    <value>9529</value>
-  </data>
-  <data name="ImportWizard_TvmIpImportImagePane" xml:space="preserve">
-    <value>9531</value>
-  </data>
-  <data name="NewSRWizard_SL_SLServer_options_PreBostonPane" xml:space="preserve">
-    <value>4023</value>
-  </data>
-  <data name="NewSRWizard_SL_System_PreBostonPane" xml:space="preserve">
-    <value>4023</value>
-  </data>
-  <data name="DRFailoverWizard_Dryrun_BeforeYouStartPane" xml:space="preserve">
-    <value>9832</value>
-  </data>
-  <data name="DRFailoverWizard_Dryrun_PrechecksPane" xml:space="preserve">
-    <value>9835</value>
-  </data>
-  <data name="DRFailoverWizard_Dryrun_RecoverPane" xml:space="preserve">
-    <value>9836</value>
-  </data>
-  <data name="DRFailoverWizard_Dryrun_ReportPane" xml:space="preserve">
-    <value>9837</value>
-  </data>
-  <data name="DRFailoverWizard_Dryrun_StoragePane" xml:space="preserve">
-    <value>9833</value>
-  </data>
-  <data name="DRFailoverWizard_Dryrun_vAppsPane" xml:space="preserve">
-    <value>9834</value>
-  </data>
-  <data name="DRFailoverWizard_Dryrun_WelcomePane" xml:space="preserve">
-    <value>9831</value>
-  </data>
-  <data name="DRFailoverWizard_Failback_BeforeYouStartPane" xml:space="preserve">
-    <value>9822</value>
-  </data>
-  <data name="DRFailoverWizard_Failback_PrechecksPane" xml:space="preserve">
-    <value>9825</value>
-  </data>
-  <data name="DRFailoverWizard_Failback_RecoverPane" xml:space="preserve">
-    <value>9826</value>
-  </data>
-  <data name="DRFailoverWizard_Failback_ReportPane" xml:space="preserve">
-    <value>9827</value>
-  </data>
-  <data name="DRFailoverWizard_Failback_StoragePane" xml:space="preserve">
-    <value>9823</value>
-  </data>
-  <data name="DRFailoverWizard_Failback_vAppsPane" xml:space="preserve">
-    <value>9824</value>
-  </data>
-  <data name="DRFailoverWizard_Failback_WelcomePane" xml:space="preserve">
-    <value>9821</value>
-  </data>
-  <data name="DRFailoverWizard_WelcomePane" xml:space="preserve">
-    <value>9809</value>
-  </data>
-  <data name="DRFailoverWizard_Dryrun_RbacPane" xml:space="preserve">
-    <value>9830</value>
-  </data>
-  <data name="DRFailoverWizard_Failback_RbacPane" xml:space="preserve">
-    <value>9820</value>
-  </data>
-  <data name="DRFailoverWizard_Failover_RbacPane" xml:space="preserve">
-    <value>9810</value>
-  </data>
-  <data name="DRFailoverWizard_RbacPane" xml:space="preserve">
-    <value>9808</value>
-  </data>
-  <data name="NewPolicyWizard_RbacPane" xml:space="preserve">
-    <value>9843</value>
-  </data>
-  <data name="NewVMApplianceWizard_RbacPane" xml:space="preserve">
-    <value>9842</value>
-  </data>
-  <data name="NewVMWizard_RbacPane" xml:space="preserve">
-    <value>9844</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_DestinationPane" xml:space="preserve">
-    <value>9845</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_NetworkingPane" xml:space="preserve">
-    <value>9847</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_StoragePane" xml:space="preserve">
-    <value>9846</value>
-  </data>
-  <data name="CrossPoolMigrateWizard_TransferNetworkPane" xml:space="preserve">
-    <value>9848</value>
-  </data>
-  <data name="DisconnectServerWarningDialog" xml:space="preserve">
-    <value>9850</value>
   </data>
   <data name="VDIMigrateDialog" xml:space="preserve">
     <value>9849</value>
   </data>
-  <data name="ManageUpdatesDialog" xml:space="preserve">
-    <value>9851</value>
+  <data name="VIFDialog" xml:space="preserve">
+    <value>6251</value>
   </data>
-  <data name="CrossPoolMigrateWizard_MigrationSummaryPane" xml:space="preserve">
-    <value>9852</value>
+  <data name="VMAppliancesDialog" xml:space="preserve">
+    <value>9800</value>
   </data>
-  <data name="NewSRWizard_RbacPane" xml:space="preserve">
-    <value>4026</value>
+  <data name="VMProtectionPoliciesDialog" xml:space="preserve">
+    <value>6536</value>
   </data>
-  <data name="MoveVMDialog" xml:space="preserve">
-    <value>9010</value>
+  <data name="VmSnapshotDialog" xml:space="preserve">
+    <value>6520</value>
   </data>
-  <data name="CrossPoolMigrateWizard_RBACPane" xml:space="preserve">
-    <value>9853</value>
+  <data name="VMSnapshotPage" xml:space="preserve">
+    <value>6530</value>
   </data>
   <data name="WarningVmLifeCycleForceReboot" xml:space="preserve">
     <value>8101</value>
@@ -1017,49 +1065,64 @@
   <data name="WarningVmLifeCycleSuspend" xml:space="preserve">
     <value>8105</value>
   </data>
-  <data name="StorageUsageMessageAlert" xml:space="preserve">
-    <value>7009</value>
+  <data name="WlbConfigurationDialog" xml:space="preserve">
+    <value>8600</value>
   </data>
-  <data name="MemoryUsageMessageAlert" xml:space="preserve">
+  <data name="WlbCredentialsDialog" xml:space="preserve">
+    <value>8640</value>
+  </data>
+  <data name="WlbEditScheduledTask" xml:space="preserve">
+    <value>8605</value>
+  </data>
+  <data name="WLBReports" xml:space="preserve">
+    <value>8630</value>
+  </data>
+  <data name="WlbReportSubscriptionDialog" xml:space="preserve">
+    <value>8632</value>
+  </data>
+  <data name="XenCenterUpdateAlert" xml:space="preserve">
+    <value>7012</value>
+  </data>
+  <data name="XenServerPatchAlert" xml:space="preserve">
+    <value>7013</value>
+  </data>
+  <data name="XenServerUpdateAlert" xml:space="preserve">
+    <value>7014</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_DestinationCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_MigrationSummaryCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_NetworkingCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_StorageCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="CrossPoolMigrateWizard_TransferNetworkCopyModePane" xml:space="preserve">
+    <value>9000</value>
+  </data>
+  <data name="TabPageADUpsell" xml:space="preserve">
+    <value>1301</value>
+  </data>
+  <data name="Dom0MemoryDemandUsageMessageAlert" xml:space="preserve">
     <value>7016</value>
   </data>
-  <data name="LVMoHBAWarningDialog" xml:space="preserve">
-    <value>9854</value>
+  <data name="ControlDomainMemoryDialog" xml:space="preserve">
+    <value>9909</value>
   </data>
-  <data name="NewSRWizard_Summary_HBAPane" xml:space="preserve">
-    <value>9855</value>
+  <data name="EnablePvsReadCachingDialog" xml:space="preserve">
+    <value>9908</value>
   </data>
-  <data name="NewVMWizard_GPUPane" xml:space="preserve">
-    <value>2080</value>
+  <data name="PvsCacheConfigurationDialog" xml:space="preserve">
+    <value>9907</value>
   </data>
-  <data name="EventsPane" xml:space="preserve">
-    <value>9856</value>
+  <data name="TabPagePvs" xml:space="preserve">
+    <value>9906</value>
   </data>
-  <data name="GpuConfigurationDialog" xml:space="preserve">
-    <value>9900</value>
-  </data>
-  <data name="TabPageGPU" xml:space="preserve">
-    <value>9901</value>
-  </data>
-  <data name="FileSystemUsageMessageAlert" xml:space="preserve">
-    <value>9857</value>
-  </data>
-  <data name="MessageAlert_LICENSE_EXPIRED" xml:space="preserve">
-    <value>7015</value>
-  </data>
-  <data name="MessageAlert_LICENSE_NOT_AVAILABLE" xml:space="preserve">
-    <value>7015</value>
-  </data>
-  <data name="MessageAlert_LICENSE_SERVER_CONNECTED" xml:space="preserve">
-    <value>7015</value>
-  </data>
-  <data name="MessageAlert_LICENSE_SERVER_UNAVAILABLE" xml:space="preserve">
-    <value>7015</value>
-  </data>
-  <data name="MessageAlert_LICENSE_SERVER_UNREACHABLE" xml:space="preserve">
-    <value>7015</value>
-  </data>
-  <data name="MessageAlert_LICENSE_SERVER_VERSION_OBSOLETE" xml:space="preserve">
-    <value>7015</value>
+  <data name="PvsSiteDialog" xml:space="preserve">
+    <value>9910</value>
   </data>
 </root>

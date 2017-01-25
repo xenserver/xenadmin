@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -292,7 +292,9 @@ namespace XenAdmin.Controls.NetworkingTab
                     foreach (var vif in vifs)
                     {
                         var network = vif.Connection.Resolve(vif.network);
-                        if (network != null && network.IsGuestInstallerNetwork)
+                        if (network != null &&
+                            // CA-218956 - Expose HIMN when showing hidden objects
+                            (network.IsGuestInstallerNetwork && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
                             continue;   // Don't show the guest installer network in the network tab (CA-73056)
                         vifRowsToAdd.Add(new VifRow(vif));
                     }
@@ -394,7 +396,10 @@ namespace XenAdmin.Controls.NetworkingTab
                 XenAPI.Network TheNetwork = SelectedNetwork;
 
                 AddNetworkButton.Enabled = !locked;
-                EditNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave && !TheNetwork.CreateInProgress;
+                EditNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave && !TheNetwork.CreateInProgress 
+                    && !TheNetwork.IsGuestInstallerNetwork;
+                // CA-218956 - Expose HIMN when showing hidden objects
+                // HIMN should not be editable
 
                 if (HasPhysicalNonBondNIC(TheNetwork))
                 {
@@ -403,7 +408,11 @@ namespace XenAdmin.Controls.NetworkingTab
                 }
                 else
                 {
-                    RemoveNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave && !TheNetwork.CreateInProgress;
+                    RemoveNetworkButton.Enabled = !locked && !TheNetwork.Locked && !TheNetwork.IsSlave && !TheNetwork.CreateInProgress
+                        && !TheNetwork.IsGuestInstallerNetwork;
+                    // CA-218956 - Expose HIMN when showing hidden objects
+                    // HIMN should not be removable
+
                     RemoveButtonContainer.SetToolTip("");
                 }
             }
@@ -478,11 +487,14 @@ namespace XenAdmin.Controls.NetworkingTab
 
                 if (NetworksGridView.Rows.Count >= vm.MaxVIFsAllowed)
                 {
-                    new ThreeButtonDialog(
-                      new ThreeButtonDialog.Details(
-                          SystemIcons.Error,
-                          FriendlyErrorNames.VIFS_MAX_ALLOWED,
-                           FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)).ShowDialog(Program.MainWindow);
+                    using (var dlg = new ThreeButtonDialog(
+                        new ThreeButtonDialog.Details(
+                            SystemIcons.Error,
+                            FriendlyErrorNames.VIFS_MAX_ALLOWED,
+                            FriendlyErrorNames.VIFS_MAX_ALLOWED_TITLE)))
+                    {
+                        dlg.ShowDialog(Program.MainWindow);
+                    }
                     return;
                 }
 
@@ -574,17 +586,23 @@ namespace XenAdmin.Controls.NetworkingTab
                 else if (XenObject is VM)
                 {
                     // Deleting a VIF, not a Network.
-                    result = new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.MESSAGEBOX_VIF_DELETE, Messages.MESSAGEBOX_VIF_DELETE_TITLE),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(Program.MainWindow);
+                                ThreeButtonDialog.ButtonNo))
+                    {
+                        result = dlg.ShowDialog(Program.MainWindow);
+                    }
                 }
                 else
                 {
-                    result = new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                                 new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.MESSAGEBOX_NETWORK_DELETE, Messages.MESSAGEBOX_NETWORK_DELETE_TITLE),
                                 ThreeButtonDialog.ButtonYes,
-                                ThreeButtonDialog.ButtonNo).ShowDialog(Program.MainWindow);
+                                ThreeButtonDialog.ButtonNo))
+                    {
+                        result = dlg.ShowDialog(Program.MainWindow);
+                    }
                 }
 
                 if (result == DialogResult.Yes)
@@ -799,7 +817,7 @@ namespace XenAdmin.Controls.NetworkingTab
                     if (String.IsNullOrEmpty(t))
                         return;
 
-                    Clipboard.SetText(t);
+                    Clip.SetClipboardText(t);
                 }
             }
         }

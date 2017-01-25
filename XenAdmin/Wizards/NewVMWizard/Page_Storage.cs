@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -93,6 +93,10 @@ namespace XenAdmin.Wizards.NewVMWizard
             LoadDisks();
             UpdateEnablement();
             UpdateCloneCheckboxEnablement(true);
+        }
+
+        public override void SelectDefaultControl()
+        {
             DisksGridView.Select();
         }
 
@@ -356,12 +360,13 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                List<KeyValuePair<string, string>> sum = new List<KeyValuePair<string, string>>();
-                int i = 0;
+                var sum = new List<KeyValuePair<string, string>>();
+
                 foreach (DiskDescription d in SelectedDisks)
                 {
-                    sum.Add(new KeyValuePair<string, string>(string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_DISK, i), Util.DiskSizeString(d.Disk.virtual_size)));
-                    i++;
+                    sum.Add(new KeyValuePair<string, string>(
+                        string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_DISK, Helpers.GetName(d.Disk).Ellipsise(30)),
+                        Util.DiskSizeString(d.Disk.virtual_size)));
                 }
                 return sum;
             }
@@ -411,6 +416,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private DataGridViewImageCell ImageCell;
         private DataGridViewTextBoxCell SizeCell;
+        private DataGridViewTextBoxCell NameCell;
         private DataGridViewTextBoxCell SrCell;
         private DataGridViewTextBoxCell SharedCell;
 
@@ -469,13 +475,13 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void AddCells()
         {
-            ImageCell = new DataGridViewImageCell(false);
-            ImageCell.ValueType = typeof(Image);
+            ImageCell = new DataGridViewImageCell(false) {ValueType = typeof(Image)};
+            NameCell = new DataGridViewTextBoxCell();
             SizeCell = new DataGridViewTextBoxCell();
             SrCell = new DataGridViewTextBoxCell();
             SharedCell = new DataGridViewTextBoxCell();
 
-            Cells.AddRange(new DataGridViewCell[] { ImageCell, SrCell, SizeCell, SharedCell });
+            Cells.AddRange(ImageCell, NameCell, SrCell, SizeCell, SharedCell);
 
             UpdateDetails();
         }
@@ -496,6 +502,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             ImageCell.ToolTipText = ImageToolTip;
             SizeCell.ToolTipText = ImageToolTip;
+            NameCell.ToolTipText = ImageToolTip;
             SrCell.ToolTipText = ImageToolTip;
             SharedCell.ToolTipText = ImageToolTip;
 
@@ -505,10 +512,12 @@ namespace XenAdmin.Wizards.NewVMWizard
             else
                 SizeCell.Value = sr.HBALunPerVDI ? String.Empty : Util.DiskSizeString(Disk.virtual_size);
 
+            NameCell.Value = Helpers.GetName(Disk);
+
             if (Disk.SR.opaque_ref != Helper.NullOpaqueRef)
             {
-                SrCell.Value = Helpers.GetName(Connection.Resolve<SR>(Disk.SR));
-                SharedCell.Value = (Connection.Resolve<SR>(Disk.SR).shared ? Messages.TRUE : Messages.FALSE);
+                SrCell.Value = Helpers.GetName(sr);
+                SharedCell.Value = sr.shared ? Messages.TRUE : Messages.FALSE;
             }
             else
             {

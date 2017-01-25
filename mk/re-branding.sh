@@ -1,5 +1,5 @@
 #!/bin/bash
-#Copyright (c) Citrix Systems Inc.
+#Copyright (c) Citrix Systems, Inc.
 #All rights reserved.
 #
 #Redistribution and use in source and binary forms, with or without modification,
@@ -23,31 +23,24 @@
 #ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #POSSIBILITY OF SUCH DAMAGE.
 
+echo Entered re-branding.sh
+set -u
 
 ROOT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-source ${XENADMIN_DIR}/mk/declarations.sh
-source ${REPO}/Branding/branding.sh
+REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 version_cpp()
 {
-  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}" | sed 's/\./, /g')
+  num=$(echo "${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}" | sed 's/\./, /g')
   sed -b -i -e "s/1,0,0,1/${num}/g" \
       -e "s/1, 0, 0, 1/${num}/g" \
-      -e "s/@BUILD_NUMBER@/${get_BUILD_NUMBER}/g" \
-      $1 
-}
-
-version_csharp_git()
-{
-  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
+      -e "s/@BUILD_NUMBER@/${BUILD_NUMBER}/g" \
       $1 
 }
 
 version_csharp()
 {
-  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${get_BUILD_NUMBER}/g" \
-      -e "s/0000/${BRANDING_CSET_NUMBER}/g" \
+  sed -b -i -e "s/0\.0\.0\.0/${BRANDING_XC_PRODUCT_VERSION}.${BUILD_NUMBER}/g" \
       $1 
 }
 
@@ -58,23 +51,27 @@ rebranding_global()
         -e "s#\"\[BRANDING_COPYRIGHT\]\"#${BRANDING_COPYRIGHT}#g" \
         -e "s#\"\[BRANDING_COPYRIGHT_2\]\"#${BRANDING_COPYRIGHT_2}#g" \
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
-        -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_PRODUCT_VERSION}#g" \
+        -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
         -e "s#\[xensearch\]#${BRANDING_SEARCH}#g" \
         -e "s#\[xsupdate\]#${BRANDING_UPDATE}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
         -e "s#\[XenCenter\]#${BRANDING_BRAND_CONSOLE}#g" \
+        -e "s#\[xbk\]#${BRANDING_BACKUP}#g" \
         -e "s#\[BRANDING_VERSION_5_6\]#${BRANDING_XC_PRODUCT_5_6_VERSION}#g" \
+        -e "s#\[BRANDING_VERSION_6_0\]#${BRANDING_XC_PRODUCT_6_0_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_6_2\]#${BRANDING_XC_PRODUCT_6_2_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_6_5\]#${BRANDING_XC_PRODUCT_6_5_VERSION}#g" \
+        -e "s#\[BRANDING_VERSION_7_0\]#${BRANDING_XC_PRODUCT_7_0_VERSION}#g" \
         -e "s#\[BRANDING_XENSERVER_UPDATE_URL\]#${BRANDING_XENSERVER_UPDATE_URL}#g" \
         $1    
 }
 
 rebranding_features()
 {
-  sed -b -i -e "s#\[BRANDING_HIDDEN_FEATURE\]#${BRANDING_HIDDEN_FEATURE}#g" \
-      $1   
+  sed -b -i -e "s#\[BRANDING_HIDDEN_FEATURES\]#${BRANDING_HIDDEN_FEATURES}#g" \
+	  -e "s#\[BRANDING_ADDITIONAL_FEATURES\]#${BRANDING_ADDITIONAL_FEATURES}#g" \
+	  $1   
 }
 
 rebranding_GUID()
@@ -118,7 +115,7 @@ version_brand_csharp()
   for projectName in $1
   do
     assemblyInfo=${REPO}/${projectName}/Properties/AssemblyInfo.cs
-    version_csharp_git ${assemblyInfo} && rebranding_global ${assemblyInfo}
+    version_csharp ${assemblyInfo} && rebranding_global ${assemblyInfo}
   done
 }
 
@@ -133,14 +130,13 @@ RESX_rebranding()
 }
 
 #splace rebranding
-version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/splash/splash.vcproj ${REPO}/splash/splash.vcxproj  ${REPO}/splash/util.cpp
-"
+version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/splash/splash.vcproj ${REPO}/splash/splash.vcxproj  ${REPO}/splash/util.cpp"
 
 #projects sign change
 cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
 
 #AssemblyInfo rebranding
-version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify VNCControl XenServerHealthCheck"
+version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServer VNCControl XenServerHealthCheck"
 
 #XenAdmin rebranding
 rebranding_global ${REPO}/XenAdmin/Branding.cs
@@ -171,6 +167,7 @@ rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper_l10n.xml
 
 #mk
 rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
+rebranding_global ${REPO}/mk/package-and-sign.sh
 
 #WixInstaller
 rebranding_global ${REPO}/WixInstaller/en-us.wxl
@@ -186,7 +183,8 @@ rebranding_global ${REPO}/XenAdminTests/TestResources/state1.treeview.orgview.xm
 rebranding_global ${REPO}/XenAdminTests/TestResources/searchresults.xml
 rebranding_global ${REPO}/XenAdminTests/TestResources/state3.xml
 rebranding_global ${REPO}/XenAdminTests/XenAdminTests.csproj
-mv ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
+echo cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
+cp ${REPO}/XenAdminTests/TestResources/succeed.[xsupdate] ${REPO}/XenAdminTests/TestResources/succeed.${BRANDING_UPDATE}
 
 #XenServerHealthCheck
 rebranding_global ${REPO}/XenServerHealthCheck/Branding.cs
@@ -210,3 +208,12 @@ then
   rm ${REPO}/XenAdmin/Help/XenCenter.chm ${REPO}/XenAdmin/Help/XenCenter.ja.chm ${REPO}/XenAdmin/Help/XenCenter.zh-CN.chm
   mv ${REPO}/Branding/Help/*.chm ${REPO}/XenAdmin/Help/
 fi
+
+#Overwrite HomePage
+if [ -d ${REPO}/Branding/HomePage ]
+then 
+  rm ${REPO}/XenAdmin/HomePage*.mht
+  cp ${REPO}/Branding/HomePage/*.mht ${REPO}/XenAdmin/
+fi
+
+set +u

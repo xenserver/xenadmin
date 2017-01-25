@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -47,28 +47,31 @@ namespace XenAdmin.Commands
 {
     internal class CrossPoolMigrateCommand : VMOperationCommand
     {
+        private bool _resumeAfter;
 
         public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection)
             : base(mainWindow, selection)
         { }
 
         protected Host preSelectedHost = null;
-        public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost)
+        public CrossPoolMigrateCommand(IMainWindow mainWindow, IEnumerable<SelectedItem> selection, Host preSelectedHost, bool resumeAfter=false)
             : base(mainWindow, selection)
         {
             this.preSelectedHost = preSelectedHost;
+            _resumeAfter = resumeAfter;
         }
 
-        private string menuText = Messages.HOST_MENU_CPM_TEXT;
         public override string MenuText
         {
-            get { return menuText; }
-            set { menuText = value; }
+            get { return preSelectedHost == null ? Messages.HOST_MENU_CPM_TEXT : preSelectedHost.Name.EscapeAmpersands(); }
         }
 
         public override string ContextMenuText { get { return Messages.HOST_MENU_CPM_TEXT; } }
 
-        public override Image MenuImage { get { return Resources._000_MigrateVM_h32bit_16; } }
+        public override Image MenuImage
+        {
+            get { return preSelectedHost == null ? Images.StaticImages._000_MigrateVM_h32bit_16 : Images.StaticImages._000_TreeConnected_h32bit_16; }
+        }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
@@ -80,10 +83,9 @@ namespace XenAdmin.Commands
             }
             else
             {
-                MainWindowCommandInterface.ShowPerConnectionWizard(con, 
-                    new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Migrate));
+                var wizard = new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Migrate, _resumeAfter);
+                MainWindowCommandInterface.ShowPerConnectionWizard(con, wizard); 
             }
-
         }
 
         protected override Host GetHost(VM vm)
@@ -93,9 +95,9 @@ namespace XenAdmin.Commands
 
         public static void ShowUpsellDialog(IWin32Window parent)
         {
-            UpsellDialog dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPM : Messages.UPSELL_BLURB_CPM + Messages.UPSELL_BLURB_CPM_MORE,
-                                                InvisibleMessages.UPSELL_LEARNMOREURL_CPM);
-            dlg.ShowDialog(parent);
+            using (var  dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_CPM : Messages.UPSELL_BLURB_CPM + Messages.UPSELL_BLURB_CPM_MORE,
+                                                InvisibleMessages.UPSELL_LEARNMOREURL_CPM))
+                dlg.ShowDialog(parent);
         }
 
         protected override bool CanExecute(VM vm)
@@ -109,7 +111,7 @@ namespace XenAdmin.Commands
 
             if (preselectedHost != null)
             {
-                failureFound = new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> { vm }).FailureFound;
+                failureFound = new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm}, WizardMode.Migrate).FailureFound;
             }
 
             return !failureFound &&

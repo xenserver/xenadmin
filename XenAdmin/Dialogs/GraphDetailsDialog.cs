@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -38,7 +38,6 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls.CustomDataGraph;
 using XenAdmin.Core;
-using XenAPI;
 
 
 namespace XenAdmin.Dialogs
@@ -56,6 +55,7 @@ namespace XenAdmin.Dialogs
         private DesignedGraph designedGraph;
         private GraphList graphList;
         private bool isNew;
+        private List<DataSourceItem> _dataSources = new List<DataSourceItem>();
 
         public GraphDetailsDialog(): this(null, null)
         {
@@ -64,12 +64,16 @@ namespace XenAdmin.Dialogs
         public GraphDetailsDialog(GraphList graphList, DesignedGraph designedGraph)
         {
             InitializeComponent();
+            tableLayoutPanel1.Visible = false;
 
             this.graphList = graphList;
             isNew = (designedGraph == null);
             if (isNew)
             {
                 this.designedGraph = new DesignedGraph();
+                // Generate an unique suggested name for the graph
+                if (graphList != null)
+                    this.designedGraph.DisplayName = Helpers.MakeUniqueName(Messages.GRAPH_NAME, graphList.DisplayNames);
                 base.Text = Messages.GRAPHS_NEW_TITLE;
             }
             else
@@ -87,24 +91,44 @@ namespace XenAdmin.Dialogs
         {
             Program.Invoke(this, delegate
             {
+                tableLayoutPanel1.Visible = false;
                 GetDataSourcesAction action = sender as GetDataSourcesAction;
                 if (action != null)
                 {
-                    List<DataSourceItem> dataSources = DataSourceItemList.BuildList(action.IXenObject, action.DataSources);
-                    foreach (DataSourceItem dataSourceItem in dataSources)
-                    {
-                        bool displayOnGraph = designedGraph.DataSources.Contains(dataSourceItem);
-                        dataGridView.Rows.Add(new DataSourceGridViewRow(dataSourceItem, displayOnGraph));
-                    }
-
-                    dataGridView.Sort(dataGridView.Columns[DisplayOnGraphColumnIndex], ListSortDirection.Ascending);
-                    if (dataGridView.Rows.Count > 0)
-                    {
-                        dataGridView.Rows[0].Cells[DisplayOnGraphColumnIndex].Selected = true;
-                    }
+                    _dataSources = DataSourceItemList.BuildList(action.IXenObject, action.DataSources);
+                    PopulateDataGridView();
                 }
+                searchTextBox.Enabled = true;
                 EnableControls();
             });
+        }
+
+        private void PopulateDataGridView()
+        {
+            try
+            {
+                dataGridView.SuspendLayout();
+                dataGridView.Rows.Clear();
+                
+                foreach (DataSourceItem dataSourceItem in _dataSources)
+                {
+                    if (!searchTextBox.Matches(dataSourceItem.ToString()))
+                        continue;
+
+                    bool displayOnGraph = designedGraph.DataSources.Contains(dataSourceItem);
+                    dataGridView.Rows.Add(new DataSourceGridViewRow(dataSourceItem, displayOnGraph));
+                }
+
+                dataGridView.Sort(dataGridView.Columns[DisplayOnGraphColumnIndex], ListSortDirection.Ascending);
+                if (dataGridView.Rows.Count > 0)
+                {
+                    dataGridView.Rows[0].Cells[DisplayOnGraphColumnIndex].Selected = true;
+                }
+            }
+            finally
+            {
+                dataGridView.ResumeLayout();
+            }
         }
 
         private void datasourcesGridView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -246,7 +270,7 @@ namespace XenAdmin.Dialogs
                 }
                 else
                 {
-                    result = string.Compare(row1.Cells[columnIndex].Value.ToString(),
+                    result = StringUtility.NaturalCompare(row1.Cells[columnIndex].Value.ToString(),
                                             row2.Cells[columnIndex].Value.ToString());
                 }
 
@@ -296,14 +320,11 @@ namespace XenAdmin.Dialogs
             public DataSourceGridViewRow(DataSourceItem dataSourceItem, bool displayOnGraph)
             {
                 this.dsi = dataSourceItem;
-                DataGridViewCheckBoxCell displayOnGraphCell = new DataGridViewCheckBoxCell { Value = displayOnGraph };
-                Cells.Add(displayOnGraphCell);
-                DataGridViewTextBoxCell datasourceCell = new DataGridViewTextBoxCell { Value = dsi.ToString() };
-                Cells.Add(datasourceCell);
-                DataGridViewTextBoxCell typeCell = new DataGridViewTextBoxCell { Value = dsi.DataType.ToStringI18N() };
-                Cells.Add(typeCell);
-                DataGridViewTextBoxCell colourCell = new DataGridViewTextBoxCell { Value = dsi.Color };
-                Cells.Add(colourCell);
+                var displayOnGraphCell = new DataGridViewCheckBoxCell { Value = displayOnGraph };
+                var datasourceCell = new DataGridViewTextBoxCell { Value = dsi.ToString() };
+                var typeCell = new DataGridViewTextBoxCell { Value = dsi.DataType.ToStringI18N() };
+                var colourCell = new DataGridViewTextBoxCell { Value = dsi.Color };
+                Cells.AddRange(displayOnGraphCell, datasourceCell, typeCell, colourCell);
             }
         }
 
@@ -350,7 +371,16 @@ namespace XenAdmin.Dialogs
         private void GraphDetailsDialog_Load(object sender, EventArgs e)
         {
             if (graphList != null)
+            {
+                tableLayoutPanel1.Visible = true;
+                searchTextBox.Enabled = false;
                 graphList.LoadDataSources(getDataSorucesAction_Completed);
+            }
+        }
+
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            PopulateDataGridView();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -239,11 +239,14 @@ namespace XenAdmin.Controls
 
             if (will_disturb_primary && will_disturb_secondary)
             {
-                new ThreeButtonDialog(
-                   new ThreeButtonDialog.Details(
-                       SystemIcons.Error,
-                       Messages.BOND_CREATE_WILL_DISTURB_BOTH,
-                       Messages.BOND_CREATE)).ShowDialog(this);
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(
+                        SystemIcons.Error,
+                        Messages.BOND_CREATE_WILL_DISTURB_BOTH,
+                        Messages.BOND_CREATE)))
+                {
+                    dlg.ShowDialog(this);
+                }
 
                 return DialogResult.Cancel;
             }
@@ -253,31 +256,44 @@ namespace XenAdmin.Controls
                 Pool pool = Helpers.GetPool(Connection);
                 if (pool != null && pool.ha_enabled)
                 {
-                    new ThreeButtonDialog(
+                    using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
                             string.Format(Messages.BOND_CREATE_HA_ENABLED, pool.Name),
-                            Messages.BOND_CREATE)).ShowDialog(this);
+                            Messages.BOND_CREATE)))
+                    {
+                        dlg.ShowDialog(this);
+                    }
                     
                     return DialogResult.Cancel;
                 }
 
-                return new ThreeButtonDialog(
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.BOND_CREATE_WILL_DISTURB_PRIMARY, Messages.BOND_CREATE),
                     "BondConfigError",
                     new ThreeButtonDialog.TBDButton(Messages.BOND_CREATE_CONTINUE, DialogResult.OK),
-                    ThreeButtonDialog.ButtonCancel).ShowDialog(this);
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                return dialogResult;
             }
             
             if (will_disturb_secondary)
             {
-                return new ThreeButtonDialog(
-                  new ThreeButtonDialog.Details(
-                          SystemIcons.Warning,
-                          Messages.BOND_CREATE_WILL_DISTURB_SECONDARY,
-                          Messages.BOND_CREATE),
-                      ThreeButtonDialog.ButtonOK,
-                      ThreeButtonDialog.ButtonCancel).ShowDialog(this);
+                DialogResult dialogResult;
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(
+                        SystemIcons.Warning,
+                        Messages.BOND_CREATE_WILL_DISTURB_SECONDARY,
+                        Messages.BOND_CREATE),
+                    ThreeButtonDialog.ButtonOK,
+                    ThreeButtonDialog.ButtonCancel))
+                {
+                    dialogResult = dlg.ShowDialog(this);
+                }
+                return dialogResult;
             }
             
             return DialogResult.OK;

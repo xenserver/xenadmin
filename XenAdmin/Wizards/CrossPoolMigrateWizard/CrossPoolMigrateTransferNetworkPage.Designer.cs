@@ -33,7 +33,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.networkComboBox = new XenAdmin.Controls.NetworkComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.blurbText = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -42,7 +42,7 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.blurbText, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // tableLayoutPanel2
@@ -67,10 +67,10 @@
             resources.ApplyResources(this.networkComboBox, "networkComboBox");
             this.networkComboBox.Name = "networkComboBox";
             // 
-            // label3
+            // blurbText
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.blurbText, "blurbText");
+            this.blurbText.Name = "blurbText";
             // 
             // CrossPoolMigrateTransferNetworkPage
             // 
@@ -92,7 +92,7 @@
         private XenAdmin.Controls.NetworkComboBox networkComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label blurbText;
 
 
 

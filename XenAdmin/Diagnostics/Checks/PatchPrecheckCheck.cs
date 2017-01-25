@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -39,6 +39,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Collections.Generic;
 using XenAdmin.Actions;
+using XenAdmin.Wizards.PatchingWizard;
 
 
 namespace XenAdmin.Diagnostics.Checks
@@ -46,19 +47,38 @@ namespace XenAdmin.Diagnostics.Checks
     class PatchPrecheckCheck : Check
     {
         private readonly Pool_patch _patch;
+        private readonly Pool_update _update;
 
         private static Regex PrecheckErrorRegex = new Regex("(<error).+(</error>)");
+        private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
 
-
+        private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
 
         public PatchPrecheckCheck(Host host, Pool_patch patch)
+            : this(host, patch, null)
+        { 
+        }
+
+        public PatchPrecheckCheck(Host host, Pool_update update)
+            : this(host, update, null)
+        {
+        }
+
+        public PatchPrecheckCheck(Host host, Pool_patch patch, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
             _patch = patch;
+            this.livePatchCodesByHost = livePatchCodesByHost;
         }
 
+        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost)
+            : base(host)
+        {
+            _update = update;
+            this.livePatchCodesByHost = livePatchCodesByHost;
+        }
 
-        public override Problem RunCheck()
+        protected override Problem RunCheck()
         {
             if (!Host.IsLive)
                 return new HostNotLiveWarning(this, Host);
@@ -71,16 +91,32 @@ namespace XenAdmin.Diagnostics.Checks
             //
             // Check patch isn't already applied here
             //
-            if (Patch.AppliedOn(Host) != DateTime.MaxValue)
+            if ((Patch != null && Patch.AppliedOn(Host) != DateTime.MaxValue)
+                || (Update != null && Update.AppliedOn(Host)))
             {
                 return new PatchAlreadyApplied(this, Host);
-
             }
 
             try
             {
-                return FindProblem(Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref));
+                if (Patch != null)
+                {
+                    string result = Pool_patch.precheck(session, Patch.opaque_ref, Host.opaque_ref);
+                    log.DebugFormat("Pool_patch.precheck returned: '{0}'", result);
 
+                    return FindProblem(result);
+                }
+                else if (Helpers.ElyOrGreater(Host))
+                {
+                    var livepatchStatus = Pool_update.precheck(session, Update.opaque_ref, Host.opaque_ref);
+
+                    log.DebugFormat("Pool_update.precheck returned livepatch_status: '{0}'", livepatchStatus);
+
+                    if (livePatchCodesByHost != null)
+                        livePatchCodesByHost[Host.uuid] = livepatchStatus;
+                }
+
+                return null;
             }
             catch (Failure f)
             {
@@ -107,6 +143,11 @@ namespace XenAdmin.Diagnostics.Checks
         public Pool_patch Patch
         {
             get { return _patch; }
+        }
+
+        public Pool_update Update
+        {
+            get { return _update; }
         }
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -188,18 +229,32 @@ namespace XenAdmin.Diagnostics.Checks
 
         private Problem FindProblem(string errorcode, string found, string required)
         {
+            long requiredSpace = 0;
+            long foundSpace = 0;
+            long reclaimableDiskSpace = 0;
+
+            DiskSpaceRequirements diskSpaceReq;
+
             switch (errorcode)
             {
+                case "UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION":
+                    return new WrongServerVersion(this, Host);
+
+                case "UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT":
+                    return new ConflictingUpdatePresent(this, found, Host);
+
+                case "UPDATE_PRECHECK_FAILED_PREREQUISITE_MISSING":
+                    return new PrerequisiteUpdateMissing(this, found, Host);
+
                 case "PATCH_PRECHECK_FAILED_WRONG_SERVER_VERSION":
                     return new WrongServerVersion(this, required, Host);
+
                 case "PATCH_PRECHECK_FAILED_OUT_OF_SPACE":
                     System.Diagnostics.Trace.Assert(Helpers.CreamOrGreater(Host.Connection));  // If not Cream or greater, we shouldn't get this error
-                    long requiredSpace = 0;
-                    long foundSpace = 0;
+
                     long.TryParse(found, out foundSpace);
                     long.TryParse(required, out requiredSpace);
                     // get reclaimable disk space (excluding current patch)
-                    long reclaimableDiskSpace = 0;
                     try
                     {
                         var args = new Dictionary<string, string> { { "exclude", Patch.uuid } };
@@ -211,9 +266,19 @@ namespace XenAdmin.Diagnostics.Checks
                         log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
                     }
 
-                    var diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Patch.Name, requiredSpace, foundSpace, reclaimableDiskSpace);
+                    diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Patch.Name, requiredSpace, foundSpace, reclaimableDiskSpace);
 
                     return new HostOutOfSpaceProblem(this, Host, Patch, diskSpaceReq);
+                   
+                case "UPDATE_PRECHECK_FAILED_OUT_OF_SPACE":
+                    System.Diagnostics.Trace.Assert(Helpers.ElyOrGreater(Host.Connection));  // If not Ely or greater, we shouldn't get this error
+                    long.TryParse(found, out foundSpace);
+                    long.TryParse(required, out requiredSpace);
+
+                    diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Update.Name, requiredSpace, foundSpace, 0);
+
+                    return new HostOutOfSpaceProblem(this, Host, Update, diskSpaceReq);
+
                 case "OUT_OF_SPACE":
                     if (Helpers.CreamOrGreater(Host.Connection))
                     {

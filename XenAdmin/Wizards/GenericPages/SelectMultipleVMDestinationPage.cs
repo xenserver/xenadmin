@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -101,15 +101,17 @@ namespace XenAdmin.Wizards.GenericPages
 	    protected void InitializeText()
 	    {
 	        m_labelIntro.Text = InstructionText;
-	        label1.Text = HomeServerText;
-	        label2.Text = HomeServerSelectionIntroText;
+	        label1.Text = TargetServerText;
+	        label2.Text = TargetServerSelectionIntroText;
+            m_colVmName.HeaderText = VmColumnHeaderText;
+	        m_colTarget.HeaderText = TargetColumnHeaderText;
 	    }
 
 	    private IXenObject _chosenItem;
 	    public IXenObject ChosenItem
 	    {
 	        get { return _chosenItem; }
-            private set
+            protected set
             {
                 _chosenItem = value;
                 OnChosenItemChanged();
@@ -122,14 +124,31 @@ namespace XenAdmin.Wizards.GenericPages
 	    protected abstract string InstructionText { get; }
 
         /// <summary>
-        /// Text demarking what the label fot the home server drop down should be
+        /// Text demarking what the label for the target server drop down should be
         /// </summary>
-	    protected abstract string HomeServerText { get; }
+	    protected abstract string TargetServerText { get; }
+
+        protected virtual string VmColumnHeaderText 
+        {
+            get
+            {
+                return m_colVmName.HeaderText;
+            }
+        }
+
+	    protected virtual string TargetColumnHeaderText
+	    {
+	        get
+	        {
+	            return m_colTarget.HeaderText;
+	        }
+	    }
+           
 
         /// <summary>
         /// Text above the table containing a list of VMs and concomitant home server
         /// </summary>
-        protected abstract string HomeServerSelectionIntroText { get; }
+        protected abstract string TargetServerSelectionIntroText { get; }
 
         protected virtual void OnChosenItemChanged()
         {}
@@ -152,8 +171,12 @@ namespace XenAdmin.Wizards.GenericPages
             base.PageLoaded(direction);
             ChosenItem = null;
             restoreGridHomeServerSelection = (direction == PageLoadedDirection.Back);
-            PopulateComboBox();
 		}
+
+        public override void SelectDefaultControl()
+        {
+            m_comboBoxConnection.Select();
+        }
 
         public override bool EnableNext()
         {
@@ -203,7 +226,7 @@ namespace XenAdmin.Wizards.GenericPages
 			m_selectedObject = xenObject;
 		}
 
-        public abstract DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem);
+        protected abstract DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem);
 
 		#region Private methods
         
@@ -238,7 +261,7 @@ namespace XenAdmin.Wizards.GenericPages
             m_dataGridView.Refresh();
         }
 
-		private void PopulateComboBox()
+		protected void PopulateComboBox()
 		{
 			Program.AssertOnEventThread();
 
@@ -365,7 +388,7 @@ namespace XenAdmin.Wizards.GenericPages
                         {
                             foreach (var pool in Connection.Cache.Pools)
                             {
-                                var item = new DoNotAssignHomeServerPoolItem(pool);
+                                var item = new NoTargetServerPoolItem(pool);
                                 cb.Items.Add(item);
 
                                 if ((m_selectedObject != null && m_selectedObject.opaque_ref == pool.opaque_ref) ||
@@ -378,7 +401,8 @@ namespace XenAdmin.Wizards.GenericPages
 
                         foreach (var host in Connection.Cache.Hosts)
                         {
-                            HomeServerItem item = new HomeServerItem(host, homeserverFilters);
+                            var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
+                            item.LoadAndWait();
                             cb.Items.Add(item);
 
                             if ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
@@ -544,7 +568,7 @@ namespace XenAdmin.Wizards.GenericPages
 			    {
 			        Cursor.Current = Cursors.WaitCursor;
 			        ChosenItem = item == null ? null : item.Item;
-			        Program.Invoke(Program.MainWindow, ()=> PopulateDataGridView(CreateHomeServerFilterList(item)));
+			        Program.Invoke(Program.MainWindow, ()=> PopulateDataGridView(CreateTargetServerFilterList(item)));
 			    }
 			    finally
 			    {
@@ -560,7 +584,7 @@ namespace XenAdmin.Wizards.GenericPages
         /// </summary>
         /// <param name="item">selected item from the host combobox</param>
         /// <returns></returns>
-        protected virtual List<ReasoningFilter> CreateHomeServerFilterList(IEnableableXenObjectComboBoxItem item)
+        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item)
         {
             return new List<ReasoningFilter>();
         }
