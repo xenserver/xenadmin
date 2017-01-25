@@ -11342,7 +11342,7 @@ namespace XenAdmin {
         public static string DISABLED_VMSS {
             get {
                 return ResourceManager.GetString("DISABLED_VMSS", resourceCulture);
-			{
+			}
 		}
 		
         /// <summary>		
@@ -13650,7 +13650,7 @@ namespace XenAdmin {
         public static string ENABLED_VMSS {
             get {
                 return ResourceManager.GetString("ENABLED_VMSS", resourceCulture);
-			{
+			 }
 		}
 
         /// <summary>		
@@ -23413,7 +23413,6 @@ namespace XenAdmin {
         public static string NEW_SEARCH {
             get {
                 return ResourceManager.GetString("NEW_SEARCH", resourceCulture);
->>>>>>> refs/remotes/xenserver/CAR-2205
             }
         }
         
