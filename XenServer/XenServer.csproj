@@ -377,6 +377,9 @@
       <Link>XenRef.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\XenModel\XenAPI\VMSS.cs" />
+    <Compile Include="..\XenModel\XenAPI\vmss_frequency.cs" />
+    <Compile Include="..\XenModel\XenAPI\vmss_type.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\XenModel\XenAPI\FriendlyErrorNames.ja.resx">
