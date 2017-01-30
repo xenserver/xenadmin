@@ -208,6 +208,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
+                //if host is unreachable
+                if (!host.IsLive)
+                {
+                    row.Enabled = false;
+                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE;
+                    return;
+                }
+
                 return;
             }
 
@@ -225,6 +233,13 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
+                return;
+            }
+
+            if (!host.IsLive)
+            {
+                row.Enabled = false;
+                row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE;
                 return;
             }
 
@@ -430,14 +445,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (poolSelectionOnly)
                 {
-                    return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts).ToList();
+                    if (IsInAutomaticMode)
+                        //prechecks will fail in automated updates mode if one of the hosts is unreachable
+                        return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts).ToList();
+                    //prechecks will issue warning but allow updates to be installed on the reachable hosts only
+                    return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts.Where(host => host.IsLive)).ToList();
                 }
                 else
                 {
                     List<Host> hosts = new List<Host>();
                     foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
                     {
-                        if (row.Tag is Host)
+                        if (row.IsSelectableHost)
                         {
                             if ((row.HasPool && ((int)row.Cells[POOL_ICON_HOST_CHECKBOX_COL].Value) == CHECKED) || (!row.HasPool && ((int)row.Cells[POOL_CHECKBOX_COL].Value) == CHECKED))
                                 hosts.Add((Host)row.Tag);

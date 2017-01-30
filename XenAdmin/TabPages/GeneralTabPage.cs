@@ -1677,7 +1677,7 @@ namespace XenAdmin.TabPages
             if (Helpers.ElyOrGreater(host))
             {
                 foreach (var update in host.AppliedUpdates())
-                    result.Add(update.Name);
+                    result.Add(UpdatesFriendlyName(update.Name));
             }
             else
             {
@@ -1770,7 +1770,7 @@ namespace XenAdmin.TabPages
 
             foreach (var update in updates)
                 if (predicate(update))
-                    output.Add(update.name_label);
+                    output.Add(UpdatesFriendlyName(update.Name));
 
             output.Sort(StringUtility.NaturalCompare);
 
@@ -1893,8 +1893,8 @@ namespace XenAdmin.TabPages
 
         private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_update update)
         {
-            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, update.Name, host.Name);
-            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_REBOOT_WARNING, host.Name, update.Name);
+            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, UpdatesFriendlyName(update.Name), host.Name);
+            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_REBOOT_WARNING, host.Name, UpdatesFriendlyName(update.Name));
 
             return new KeyValuePair<string, string>(key, value);
         }
@@ -1907,6 +1907,11 @@ namespace XenAdmin.TabPages
         private static string FriendlyName(string propertyName)
         {
             return Core.PropertyManager.GetFriendlyName(string.Format("Label-{0}", propertyName)) ?? propertyName;
+        }
+
+        private static string UpdatesFriendlyName(string propertyName)
+        {
+            return Core.PropertyManager.FriendlyNames.GetString(string.Format("Label-{0}", propertyName)) ?? propertyName;
         }
 
         private void linkLabelExpand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -115,6 +115,11 @@ namespace XenAdmin.Diagnostics.Checks
                     if (livePatchCodesByHost != null)
                         livePatchCodesByHost[Host.uuid] = livepatchStatus;
                 }
+                //trying to apply update to partially upgraded pool
+                else if (Helpers.ElyOrGreater(Helpers.GetMaster(Host.Connection)) && !Helpers.ElyOrGreater(Host))
+                {
+                    return new WrongServerVersion(this, Host);
+                }
 
                 return null;
             }
