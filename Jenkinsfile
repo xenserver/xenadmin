@@ -153,6 +153,19 @@ node("${params.BUILD_ON_NODE}") {
             rmdir /s /q "${env.WORKSPACE}\\xenadmin.git\\Branding"
             xcopy /e /y "${env.WORKSPACE}\\xenadmin-branding.git\\${XC_BRANDING}\\*" "${env.WORKSPACE}\\xenadmin.git\\Branding\\"
         """
+
+        println "Checking out branding specifics"
+        GString BRANDING_REMOTE = "${env.CODE_ENDPOINT}/xs/${XC_BRANDING}-branding.git"
+
+        def branchExistsOnBranding = bat(
+          returnStatus: true,
+          script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.XC_BRANCH}"""
+        )
+        String branchToCloneB = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'master'
+
+        bat """
+            git clone -b ${branchToCloneB} ${BRANDING_REMOTE} ${env.WORKSPACE}\\${XC_BRANDING}-branding.git
+        """
       }
     }
 
@@ -216,6 +229,17 @@ node("${params.BUILD_ON_NODE}") {
         ).trim()
 
         file << "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}\n"
+
+        def XC_BRANDING_TIP = bat(
+          returnStdout: true,
+          script: """
+                @echo off 
+                cd ${env.WORKSPACE}\\${XC_BRANDING}-branding.git
+                git rev-parse HEAD
+                """
+        ).trim()
+
+        file << "${XC_BRANDING}-branding ${XC_BRANDING}-branding.git ${XC_BRANDING_TIP}\n"
       }
 
       //for the time being we download a fixed version of the ovf fixup iso, hence put this in the manifest
@@ -253,7 +277,7 @@ node("${params.BUILD_ON_NODE}") {
         println "Testing package-and-sign script"
         bat """
             cd ${env.WORKSPACE}
-            mkdir -p TestXenAdminUnsigned
+            mkdir TestXenAdminUnsigned
             unzip -q -o output\\XenAdminUnsigned.zip -d TestXenAdminUnsigned
             sh "TestXenAdminUnsigned/XenAdminUnsigned/mk/package-and-sign.sh"
             """
