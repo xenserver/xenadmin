@@ -95,7 +95,8 @@ node("${params.BUILD_ON_NODE}") {
         httpRequest httpMode: 'POST',
           contentType: 'APPLICATION_FORM',
           requestBody: "nextBuildNumber=${nextBn}",
-          url: "${env.JOB_URL}nextbuildnumber/submit"
+          url: "${env.JOB_URL}nextbuildnumber/submit",
+          authentication: 'authentication'
       }
     }
 
@@ -170,8 +171,10 @@ node("${params.BUILD_ON_NODE}") {
     }
 
     stage('Download dependencies') {
-      GString remoteDotnet = readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\DOTNET_BUILD_LOCATION").trim()
-      GString downloadSpec = readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\deps-map.json").trim().replaceAll("@REMOTE_DOTNET@", remoteDotnet)
+      GString remoteDotnet = GString.EMPTY
+      remoteDotnet += readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\DOTNET_BUILD_LOCATION").trim()
+      GString downloadSpec = GString.EMPTY
+      downloadSpec += readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\deps-map.json").trim().replaceAll("@REMOTE_DOTNET@", remoteDotnet)
 
       def server = Artifactory.server('repo')
       server.download(downloadSpec)
@@ -193,7 +196,8 @@ node("${params.BUILD_ON_NODE}") {
           remoteBranch = 'trunk'
         }
 
-        GString hotFixSpec = readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\hotfix-map.json").trim().replaceAll("@BRANCH@", remoteBranch)
+        GString hotFixSpec = GString.EMPTY
+        hotFixSpec += readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\hotfix-map.json").trim().replaceAll("@BRANCH@", remoteBranch)
         server.download(hotFixSpec)
       }
     }
