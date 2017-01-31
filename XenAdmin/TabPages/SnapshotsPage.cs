@@ -137,7 +137,7 @@ namespace XenAdmin.TabPages
                         VM_BatchCollectionChanged);
                     m_VM.PropertyChanged += snapshot_PropertyChanged;
                     //Version setup
-                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection);
+                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = (Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection)) || !Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule);
                     if (VM.SnapshotView != SnapshotsView.ListView)
                         TreeViewChecked();
                     else
