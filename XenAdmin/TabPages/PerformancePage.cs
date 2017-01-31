@@ -279,7 +279,10 @@ namespace XenAdmin.TabPages
         {
             DeregEvents();
             if (ArchiveMaintainer != null && XenObject != null)
+            {
                 ArchiveMaintainer.Pause();
+                ArchiveMaintainer.DeregEvents();
+            }
         }
         
         private void ArchiveMaintainer_ArchivesUpdated(object sender, EventArgs args)

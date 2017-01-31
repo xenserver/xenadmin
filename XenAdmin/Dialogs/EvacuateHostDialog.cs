@@ -926,11 +926,14 @@ namespace XenAdmin.Dialogs
 
         private void EvacuateHostDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
-            foreach (Host host in connection.Cache.Hosts)
-            {
-                host.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
-            }
+            if (host != null)
+                host.PropertyChanged -= hostUpdate;
+            
+            foreach (var h in connection.Cache.Hosts)
+                h.PropertyChanged -= host_PropertyChanged;
+            
             deregisterVMEvents();
+
             if (elevatedSession != null && elevatedSession.uuid != null)
             {
                 // NOTE: This doesnt happen currently, as we always scan once. Here as cheap insurance.

@@ -145,6 +145,8 @@ namespace XenAdmin.TabPages
             }
 
             vm.PropertyChanged -= vm_PropertyChanged;
+
+            multipleDvdIsoList1.DeregisterEvents();
         }
 
         public override void PageHidden()

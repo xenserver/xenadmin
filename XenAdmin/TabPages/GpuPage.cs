@@ -295,6 +295,10 @@ namespace XenAdmin.TabPages
         public override void PageHidden()
         {
             UnregisterHandlers();
+
+            var gpuPlacementPolicyPanel = pageContainerPanel.Controls.OfType<GpuPlacementPolicyPanel>().FirstOrDefault();
+            if (gpuPlacementPolicyPanel != null)
+                gpuPlacementPolicyPanel.UnregisterHandlers();
         }
 
 

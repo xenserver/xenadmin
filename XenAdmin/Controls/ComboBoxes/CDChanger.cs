@@ -166,7 +166,7 @@ namespace XenAdmin.Controls
             action.RunAsync();
         }
 
-        protected override void DeregisterEvents()
+        internal override void DeregisterEvents()
         {
             // Remove VM listeners
             if (vm != null)

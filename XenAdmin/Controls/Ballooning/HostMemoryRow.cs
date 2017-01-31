@@ -29,12 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using XenAPI;
 
@@ -63,6 +57,12 @@ namespace XenAdmin.Controls.Ballooning
                 hostMemoryControls.host = value;
                 Refresh();
             }
+        }
+
+        internal void UnregisterHandlers()
+        {
+            memoryRowLabel.UnsubscribeEvents();
+            hostMemoryControls.UnregisterHandlers();
         }
     }
 }
