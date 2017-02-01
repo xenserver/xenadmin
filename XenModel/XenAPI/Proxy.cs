@@ -1196,6 +1196,10 @@ namespace XenAPI
         Response<string>
         pool_update_get_name_description(string session, string _pool_update);
 
+        [XmlRpcMethod("pool_update.get_version")]
+        Response<string>
+        pool_update_get_version(string session, string _pool_update);
+
         [XmlRpcMethod("pool_update.get_installation_size")]
         Response<string>
         pool_update_get_installation_size(string session, string _pool_update);
@@ -1331,6 +1335,10 @@ namespace XenAPI
         [XmlRpcMethod("VM.get_is_a_template")]
         Response<bool>
         vm_get_is_a_template(string session, string _vm);
+
+        [XmlRpcMethod("VM.get_is_default_template")]
+        Response<bool>
+        vm_get_is_default_template(string session, string _vm);
 
         [XmlRpcMethod("VM.get_suspend_VDI")]
         Response<string>
@@ -1927,6 +1935,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.resume")]
         Response<string>
         async_vm_resume(string session, string _vm, bool _start_paused, bool _force);
+
+        [XmlRpcMethod("VM.set_is_default_template")]
+        Response<string>
+        vm_set_is_default_template(string session, string _vm, bool _value);
+
+        [XmlRpcMethod("Async.VM.set_is_default_template")]
+        Response<string>
+        async_vm_set_is_default_template(string session, string _vm, bool _value);
 
         [XmlRpcMethod("VM.resume_on")]
         Response<string>
@@ -3314,7 +3330,7 @@ namespace XenAPI
 
         [XmlRpcMethod("host.emergency_ha_disable")]
         Response<string>
-        host_emergency_ha_disable(string session);
+        host_emergency_ha_disable(string session, bool _soft);
 
         [XmlRpcMethod("host.get_data_sources")]
         Response<Proxy_Data_source[]>
@@ -7399,6 +7415,7 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
+        public string version;
         public string installation_size;
         public string key;
         public string [] after_apply_guidance;
@@ -7417,6 +7434,7 @@ namespace XenAPI
         public string name_description;
         public string user_version;
         public bool is_a_template;
+        public bool is_default_template;
         public string suspend_VDI;
         public string resident_on;
         public string affinity;

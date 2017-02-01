@@ -56,6 +56,7 @@ namespace XenAPI
             string name_description,
             long user_version,
             bool is_a_template,
+            bool is_default_template,
             XenRef<VDI> suspend_VDI,
             XenRef<Host> resident_on,
             XenRef<Host> affinity,
@@ -136,6 +137,7 @@ namespace XenAPI
             this.name_description = name_description;
             this.user_version = user_version;
             this.is_a_template = is_a_template;
+            this.is_default_template = is_default_template;
             this.suspend_VDI = suspend_VDI;
             this.resident_on = resident_on;
             this.affinity = affinity;
@@ -228,6 +230,7 @@ namespace XenAPI
             name_description = update.name_description;
             user_version = update.user_version;
             is_a_template = update.is_a_template;
+            is_default_template = update.is_default_template;
             suspend_VDI = update.suspend_VDI;
             resident_on = update.resident_on;
             affinity = update.affinity;
@@ -311,6 +314,7 @@ namespace XenAPI
             name_description = proxy.name_description == null ? null : (string)proxy.name_description;
             user_version = proxy.user_version == null ? 0 : long.Parse((string)proxy.user_version);
             is_a_template = (bool)proxy.is_a_template;
+            is_default_template = (bool)proxy.is_default_template;
             suspend_VDI = proxy.suspend_VDI == null ? null : XenRef<VDI>.Create(proxy.suspend_VDI);
             resident_on = proxy.resident_on == null ? null : XenRef<Host>.Create(proxy.resident_on);
             affinity = proxy.affinity == null ? null : XenRef<Host>.Create(proxy.affinity);
@@ -395,6 +399,7 @@ namespace XenAPI
             result_.name_description = (name_description != null) ? name_description : "";
             result_.user_version = user_version.ToString();
             result_.is_a_template = is_a_template;
+            result_.is_default_template = is_default_template;
             result_.suspend_VDI = (suspend_VDI != null) ? suspend_VDI : "";
             result_.resident_on = (resident_on != null) ? resident_on : "";
             result_.affinity = (affinity != null) ? affinity : "";
@@ -483,6 +488,7 @@ namespace XenAPI
             name_description = Marshalling.ParseString(table, "name_description");
             user_version = Marshalling.ParseLong(table, "user_version");
             is_a_template = Marshalling.ParseBool(table, "is_a_template");
+            is_default_template = Marshalling.ParseBool(table, "is_default_template");
             suspend_VDI = Marshalling.ParseRef<VDI>(table, "suspend_VDI");
             resident_on = Marshalling.ParseRef<Host>(table, "resident_on");
             affinity = Marshalling.ParseRef<Host>(table, "affinity");
@@ -573,6 +579,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._name_description, other._name_description) &&
                 Helper.AreEqual2(this._user_version, other._user_version) &&
                 Helper.AreEqual2(this._is_a_template, other._is_a_template) &&
+                Helper.AreEqual2(this._is_default_template, other._is_default_template) &&
                 Helper.AreEqual2(this._suspend_VDI, other._suspend_VDI) &&
                 Helper.AreEqual2(this._resident_on, other._resident_on) &&
                 Helper.AreEqual2(this._affinity, other._affinity) &&
@@ -986,6 +993,17 @@ namespace XenAPI
         public static bool get_is_a_template(Session session, string _vm)
         {
             return (bool)session.proxy.vm_get_is_a_template(session.uuid, (_vm != null) ? _vm : "").parse();
+        }
+
+        /// <summary>
+        /// Get the is_default_template field of the given VM.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static bool get_is_default_template(Session session, string _vm)
+        {
+            return (bool)session.proxy.vm_get_is_default_template(session.uuid, (_vm != null) ? _vm : "").parse();
         }
 
         /// <summary>
@@ -2712,6 +2730,30 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Makes the specified VM a default template.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The boolean value for the is_default_template flag</param>
+        public static void set_is_default_template(Session session, string _vm, bool _value)
+        {
+            session.proxy.vm_set_is_default_template(session.uuid, (_vm != null) ? _vm : "", _value).parse();
+        }
+
+        /// <summary>
+        /// Makes the specified VM a default template.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The boolean value for the is_default_template flag</param>
+        public static XenRef<Task> async_set_is_default_template(Session session, string _vm, bool _value)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_set_is_default_template(session.uuid, (_vm != null) ? _vm : "", _value).parse());
+        }
+
+        /// <summary>
         /// Awaken the specified VM and resume it on a particular Host.  This can only be called when the specified VM is in the Suspended state.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -4090,6 +4132,25 @@ namespace XenAPI
             }
         }
         private bool _is_a_template;
+
+        /// <summary>
+        /// true if this is a default template. Default template VMs can never be started or migrated, they are used only for cloning other VMs
+        /// First published in .
+        /// </summary>
+        public virtual bool is_default_template
+        {
+            get { return _is_default_template; }
+            set
+            {
+                if (!Helper.AreEqual(value, _is_default_template))
+                {
+                    _is_default_template = value;
+                    Changed = true;
+                    NotifyPropertyChanged("is_default_template");
+                }
+            }
+        }
+        private bool _is_default_template;
 
         /// <summary>
         /// The VDI that a suspend image is stored on. (Only has meaning if VM is currently suspended)
