@@ -248,6 +248,8 @@ namespace XenAdmin.ConsoleView
         private void OnError(object sender, Exception e)
         {
             Program.AssertOffEventThread();
+            System.Diagnostics.Debug.Assert(sender == vncStream); // Please see to CA-236844 if this assertion fails
+
             if (sender != vncStream)
                 return;
             
@@ -263,8 +265,11 @@ namespace XenAdmin.ConsoleView
         {
             connected = false;
             terminated = true;
-            vncStream.ErrorOccurred -= OnError;
-            vncStream.ConnectionSuccess -= vncStream_ConnectionSuccess;
+            if (vncStream != null)
+            {
+                vncStream.ErrorOccurred -= OnError;
+                vncStream.ConnectionSuccess -= vncStream_ConnectionSuccess;
+            } 
             VNCStream s = vncStream;
             vncStream = null;
             if (s != null)
