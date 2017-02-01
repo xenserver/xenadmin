@@ -79,11 +79,10 @@ namespace XenAdmin.TabPages
                 }
 
                 //Management Interfaces
-                if (_xenObject != null)
-                    _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<XenAPI.PIF>(CollectionChanged);
+                UnregisterHandlers();
                 _xenObject = value;
                 if (_xenObject != null)
-                    _xenObject.Connection.Cache.RegisterBatchCollectionChanged<XenAPI.PIF>(CollectionChanged);
+                    _xenObject.Connection.Cache.RegisterBatchCollectionChanged<PIF>(CollectionChanged);
                 RepopulateManagementInterfaces();
 
                 networkList1.XenObject = value;
@@ -113,6 +112,19 @@ namespace XenAdmin.TabPages
                 refreshNeeded = false;
             }
             base.OnVisibleChanged(e);
+        }
+
+        private void UnregisterHandlers()
+        {
+            if (_xenObject == null) 
+                return;
+            _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<PIF>(CollectionChanged);
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
+            networkList1.UnregisterHandlers();
         }
 
 

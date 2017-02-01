@@ -67,8 +67,6 @@ namespace XenAdmin.TabPages
             this.ColumnActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDevicePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.multipleDvdIsoList1 = new XenAdmin.Controls.MultipleDvdIsoList();
-            this.gradientPanel1 = new XenAdmin.Controls.GradientPanel.GradientPanel();
-            this.TitleLabel = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,6 +77,7 @@ namespace XenAdmin.TabPages
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pageContainerPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.DeactivateButtonContainer.SuspendLayout();
             this.MoveButtonContainer.SuspendLayout();
@@ -87,8 +86,12 @@ namespace XenAdmin.TabPages
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).BeginInit();
-            this.gradientPanel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // pageContainerPanel
+            // 
+            this.pageContainerPanel.Controls.Add(this.tableLayoutPanel1);
+            resources.ApplyResources(this.pageContainerPanel, "pageContainerPanel");
             // 
             // AddButton
             // 
@@ -352,20 +355,6 @@ namespace XenAdmin.TabPages
             this.multipleDvdIsoList1.Name = "multipleDvdIsoList1";
             this.multipleDvdIsoList1.VM = null;
             // 
-            // gradientPanel1
-            // 
-            this.gradientPanel1.Controls.Add(this.TitleLabel);
-            resources.ApplyResources(this.gradientPanel1, "gradientPanel1");
-            this.gradientPanel1.Name = "gradientPanel1";
-            this.gradientPanel1.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
-            // 
-            // TitleLabel
-            // 
-            resources.ApplyResources(this.TitleLabel, "TitleLabel");
-            this.TitleLabel.AutoEllipsis = true;
-            this.TitleLabel.ForeColor = System.Drawing.Color.White;
-            this.TitleLabel.Name = "TitleLabel";
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -441,10 +430,10 @@ namespace XenAdmin.TabPages
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.gradientPanel1);
             this.DoubleBuffered = true;
             this.Name = "VMStoragePage";
+            this.Controls.SetChildIndex(this.pageContainerPanel, 0);
+            this.pageContainerPanel.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.DeactivateButtonContainer.ResumeLayout(false);
             this.MoveButtonContainer.ResumeLayout(false);
@@ -453,8 +442,8 @@ namespace XenAdmin.TabPages
             this.contextMenuStrip1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).EndInit();
-            this.gradientPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -465,11 +454,9 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Button EditButton;
         public System.Windows.Forms.Button DetachButton;
         public System.Windows.Forms.Button DeleteButton;
-        private System.Windows.Forms.Label TitleLabel;
         private XenAdmin.Controls.ToolTipContainer DetachButtonContainer;
         private XenAdmin.Controls.ToolTipContainer DeleteButtonContainer;
         private XenAdmin.Controls.ToolTipContainer DeactivateButtonContainer;
-        private XenAdmin.Controls.GradientPanel.GradientPanel gradientPanel1;
         public System.Windows.Forms.Button DeactivateButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private XenAdmin.Controls.MultipleDvdIsoList multipleDvdIsoList1;

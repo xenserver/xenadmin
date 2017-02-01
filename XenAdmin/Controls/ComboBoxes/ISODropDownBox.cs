@@ -273,7 +273,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected virtual void DeregisterEvents()
+        internal virtual void DeregisterEvents()
         {
             if (connection == null)
                 return;

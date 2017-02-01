@@ -31,10 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using XenAPI;
 
@@ -80,6 +76,11 @@ namespace XenAdmin.Controls.Ballooning
             panelLabel.Height = memoryRowLabel.Bottom + 1;
             panelControls.Top = memoryRowLabel.Bottom;
             this.Height = panelControls.Bottom;
+        }
+
+        internal void UnregisterHandlers()
+        {
+            vmMemoryControls.UnregisterHandlers();
         }
     }
 }

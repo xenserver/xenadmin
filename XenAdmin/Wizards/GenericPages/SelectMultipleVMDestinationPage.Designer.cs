@@ -15,7 +15,7 @@
         {
             if (disposing)
             {
-                ConnectionsManager.XenConnections.CollectionChanged -= CollectionChanged;
+                UnregisterHandlers();
 
                 if (components != null)
                     components.Dispose();
