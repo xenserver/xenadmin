@@ -252,7 +252,7 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED:
                     case Message.MessageType.VMSS_SNAPSHOT_LOCK_FAILED:
                         VMSS vmss = Helpers.XenObjectFromMessage(Message) as VMSS;
-                        var policyAlertVMSS = new PolicyAlert(Message.priority, Message.name, Message.timestamp, Message.body, vmss.Name);
+                        var policyAlertVMSS = new PolicyAlert(Message.priority, Message.name, Message.timestamp, Message.body, (vmss == null) ? "" : vmss.Name);
                         return policyAlertVMSS.Text;
                 }
 
