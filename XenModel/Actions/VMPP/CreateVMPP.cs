@@ -59,7 +59,7 @@ namespace XenAdmin.Actions
             {
                 ApiMethodsToRoleCheck.Add("VMSS.async_create");
                 ApiMethodsToRoleCheck.Add("VM.set_snapshot_schedule");
-                ApiMethodsToRoleCheck.Add("VMSS.protect_now");
+                ApiMethodsToRoleCheck.Add("VMSS.snapshot_now");
             }
         }
 
