@@ -300,11 +300,15 @@ namespace XenAdmin.Actions
             }
             else
             {
-                var webClient = new WebClient();
-                webClient.Proxy = proxy;
+                using (var webClient = new WebClient())
+                {
+                    webClient.Proxy = proxy;
 
-                var stream = new MemoryStream(webClient.DownloadData(uri));
-                xdoc.Load(stream);
+                    using (var stream = new MemoryStream(webClient.DownloadData(uri)))
+                    {
+                        xdoc.Load(stream);
+                    }
+                }
             }
 
             return xdoc;
