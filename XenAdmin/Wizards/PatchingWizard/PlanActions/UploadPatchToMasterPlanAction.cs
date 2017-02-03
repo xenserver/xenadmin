@@ -49,7 +49,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private AsyncAction inProgressAction = null;
 
         public UploadPatchToMasterPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
-            : base(connection, string.Format("Uploading update {0} to {1}...", patch.Name, connection.Name))
+            : base(connection, string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, patch.Name, connection.Name))
         {
             this.patch = patch;
             this.mappings = mappings;

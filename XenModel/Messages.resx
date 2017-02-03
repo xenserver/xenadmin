@@ -1867,9 +1867,6 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="APPLYING_PATCH" xml:space="preserve">
     <value>Applying Update '{0}' to Server '{1}'...</value>
   </data>
-  <data name="APPLYING_UPDATES" xml:space="preserve">
-    <value>Applying {0} update(s) to {1} server(s)</value>
-  </data>
   <data name="APPLYLICENSE_APPLIED" xml:space="preserve">
     <value>License applied</value>
   </data>
@@ -11756,6 +11753,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_RESUME_VM" xml:space="preserve">
     <value>Click here to resume this VM</value>
   </data>
+  <data name="UPDATES_WIZARD_RUNNING_PRECHECK" xml:space="preserve">
+    <value>Precheck for {0} in {1}...</value>
+  </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>Storage repository '{0}'</value>
   </data>
@@ -11764,6 +11764,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_TOOLS_CD" xml:space="preserve">
     <value>VM '{0}' has the tools CD in its drive.</value>
+  </data>
+  <data name="UPDATES_WIZARD_UPLOADING_UPDATE" xml:space="preserve">
+    <value>Uploading update {0} to {1}...</value>
   </data>
   <data name="UPDATES_WIZARD_VM_HAS_VGPU" xml:space="preserve">
     <value>The VM '{0}' has one or more virtual GPUs.</value>
@@ -11811,7 +11814,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Temporary virtual disk used for the installation of an update</value>
   </data>
   <data name="UPDATE_WAS_NOT_COMPLETED" xml:space="preserve">
-    <value>Update {0} was not completed successfully</value>
+    <value>The installation of update {0} was not completed successfully</value>
   </data>
   <data name="UPDATE_WAS_SUCCESSFULLY_INSTALLED" xml:space="preserve">
     <value>Update {0} was successfully installed</value>

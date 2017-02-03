@@ -49,7 +49,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private List<Host> hosts = null;
 
         public PatchPrechecksOnMultipleHostsInAPoolPlanAction(IXenConnection connection, XenServerPatch patch, List<Host> hosts, List<PoolPatchMapping> mappings)
-            : base(connection, string.Format("Precheck for {0} in {1}...", patch.Name, connection.Name))
+            : base(connection, string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, connection.Name))
         {
             this.patch = patch;
             this.hosts = hosts;
