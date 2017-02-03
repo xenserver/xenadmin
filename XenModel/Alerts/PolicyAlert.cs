@@ -104,7 +104,6 @@ namespace XenAdmin.Alerts
         public PolicyAlert(IXenConnection connection, string body)
         {
             PolicyType = "VMPP";
-            numberOfVMsFailed = Text.Split('\n').Length;
             var sb = new StringBuilder();
             try
             {
@@ -116,6 +115,7 @@ namespace XenAdmin.Alerts
                 if (_fnames[0].InnerText == "error")
                 {
                     Type = "error";
+                    numberOfVMsFailed = 0;
                     _fnames = xmlDocument.GetElementsByTagName("error");
                     for (int i = 0; i < _fnames.Count; i++)
                     {
@@ -128,6 +128,7 @@ namespace XenAdmin.Alerts
                                 if (vm == null)
                                     continue;
                                 sb.AppendFormat("VM '{0}': ", vm.Name);
+                                numberOfVMsFailed++;
                             }
                             if (child.Name == "errorcode")
                             {
