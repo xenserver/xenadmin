@@ -150,7 +150,8 @@ namespace XenAdmin.Network
             catch (WebException exn)
             {
                 log.Error(exn);
-                if (((HttpWebResponse)exn.Response).StatusCode == HttpStatusCode.ProxyAuthenticationRequired) // work-around for CA-214653
+                var webResponse = (HttpWebResponse)exn.Response;
+                if (webResponse != null && webResponse.StatusCode == HttpStatusCode.ProxyAuthenticationRequired) // work-around for CA-214653
                 {
                     if (session == null)
                         log.Debug("Heartbeat has failed due to null session; closing the main connection");
