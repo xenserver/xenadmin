@@ -31,6 +31,9 @@
  * SUCH DAMAGE.
  */
 
+/* Note: the env variables are either Jenkins built-in variables
+   or own variables configured at Manage Jenkins > Configure System */
+
 properties([
   [
     $class  : 'BuildDiscarderProperty',
@@ -92,7 +95,8 @@ node("${params.BUILD_ON_NODE}") {
         httpRequest httpMode: 'POST',
           contentType: 'APPLICATION_FORM',
           requestBody: "nextBuildNumber=${nextBn}",
-          url: "${env.JOB_URL}nextbuildnumber/submit"
+          url: "${env.JOB_URL}nextbuildnumber/submit",
+          authentication: 'authentication'
       }
     }
 
@@ -125,7 +129,7 @@ node("${params.BUILD_ON_NODE}") {
       ).trim()
 
       if (params.XC_BRANDING == 'citrix') {
-        String BRANDING_REMOTE = "https://code.citrite.net/scm/xs/branding.git"
+        GString BRANDING_REMOTE = "${env.CODE_ENDPOINT}/xs/branding.git"
 
         def branchExistsOnBranding = bat(
           returnStatus: true,
@@ -137,7 +141,7 @@ node("${params.BUILD_ON_NODE}") {
       } else {
 
         println "Overwriting Branding folder"
-        String BRAND_REMOTE = "https://code.citrite.net/scm/xsc/xenadmin-branding.git"
+        GString BRAND_REMOTE = "${env.CODE_ENDPOINT}/xsc/xenadmin-branding.git"
 
         def branchExistsOnBrand = bat(
           returnStatus: true,
@@ -150,12 +154,27 @@ node("${params.BUILD_ON_NODE}") {
             rmdir /s /q "${env.WORKSPACE}\\xenadmin.git\\Branding"
             xcopy /e /y "${env.WORKSPACE}\\xenadmin-branding.git\\${XC_BRANDING}\\*" "${env.WORKSPACE}\\xenadmin.git\\Branding\\"
         """
+
+        println "Checking out branding specifics"
+        GString BRANDING_REMOTE = "${env.CODE_ENDPOINT}/xs/${XC_BRANDING}-branding.git"
+
+        def branchExistsOnBranding = bat(
+          returnStatus: true,
+          script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.XC_BRANCH}"""
+        )
+        String branchToCloneB = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'master'
+
+        bat """
+            git clone -b ${branchToCloneB} ${BRANDING_REMOTE} ${env.WORKSPACE}\\${XC_BRANDING}-branding.git
+        """
       }
     }
 
     stage('Download dependencies') {
-      GString remoteDotnet = readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\DOTNET_BUILD_LOCATION").trim()
-      GString downloadSpec = readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\deps-map.json").trim().replaceAll("@REMOTE_DOTNET@", remoteDotnet)
+      GString remoteDotnet = GString.EMPTY
+      remoteDotnet += readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\DOTNET_BUILD_LOCATION").trim()
+      GString downloadSpec = GString.EMPTY
+      downloadSpec += readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\deps-map.json").trim().replaceAll("@REMOTE_DOTNET@", remoteDotnet)
 
       def server = Artifactory.server('repo')
       server.download(downloadSpec)
@@ -177,7 +196,8 @@ node("${params.BUILD_ON_NODE}") {
           remoteBranch = 'trunk'
         }
 
-        GString hotFixSpec = readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\hotfix-map.json").trim().replaceAll("@BRANCH@", remoteBranch)
+        GString hotFixSpec = GString.EMPTY
+        hotFixSpec += readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\hotfix-map.json").trim().replaceAll("@BRANCH@", remoteBranch)
         server.download(hotFixSpec)
       }
     }
@@ -213,6 +233,17 @@ node("${params.BUILD_ON_NODE}") {
         ).trim()
 
         file << "xenadmin-branding xenadmin-branding.git ${XENADMIN_BRANDING_TIP}\n"
+
+        def XC_BRANDING_TIP = bat(
+          returnStdout: true,
+          script: """
+                @echo off 
+                cd ${env.WORKSPACE}\\${XC_BRANDING}-branding.git
+                git rev-parse HEAD
+                """
+        ).trim()
+
+        file << "${XC_BRANDING}-branding ${XC_BRANDING}-branding.git ${XC_BRANDING_TIP}\n"
       }
 
       //for the time being we download a fixed version of the ovf fixup iso, hence put this in the manifest
@@ -245,6 +276,17 @@ node("${params.BUILD_ON_NODE}") {
     }
 
     stage('Run tests') {
+
+      if (params.XC_BRANDING != 'citrix') {
+        println "Testing package-and-sign script"
+        bat """
+            cd ${env.WORKSPACE}
+            mkdir TestXenAdminUnsigned
+            unzip -q -o output\\XenAdminUnsigned.zip -d TestXenAdminUnsigned
+            sh "TestXenAdminUnsigned/XenAdminUnsigned/mk/package-and-sign.sh"
+            """
+      }
+
       if (params.SKIP_TESTS) {
         println "Skipping tests on request."
       } else {

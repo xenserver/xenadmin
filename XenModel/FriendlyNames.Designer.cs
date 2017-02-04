@@ -2770,6 +2770,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator.
+        /// </summary>
+        public static string Label_pvsaccelerator {
+            get {
+                return ResourceManager.GetString("Label-pvsaccelerator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk space allocations.
         /// </summary>
         public static string Label_SR_disk_space_allocations {
@@ -3459,6 +3468,24 @@ namespace XenAdmin {
         public static string Label_VM_VirtualizationState {
             get {
                 return ResourceManager.GetString("Label-VM.VirtualizationState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Measured Boot.
+        /// </summary>
+        public static string Label_xenserver_measured_boot {
+            get {
+                return ResourceManager.GetString("Label-xenserver-measured-boot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container Management.
+        /// </summary>
+        public static string Label_xscontainer {
+            get {
+                return ResourceManager.GetString("Label-xscontainer", resourceCulture);
             }
         }
         

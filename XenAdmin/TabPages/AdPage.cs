@@ -166,6 +166,11 @@ namespace XenAdmin.TabPages
                 pool.Connection.Session.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(Session_PropertyChanged);
         }
 
+        public override void PageHidden()
+        {
+            ClearHandles();
+        }
+
         /// <summary>
         /// We keep track of the actions in currently running so we can disable the tab if we are in the middle of configuring AD.
         /// </summary>

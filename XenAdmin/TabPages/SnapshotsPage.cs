@@ -120,15 +120,7 @@ namespace XenAdmin.TabPages
         {
             set
             {
-                if (m_VM != null)
-                {
-                    m_VM.Connection.Cache.DeregisterBatchCollectionChanged<VM>(VM_BatchCollectionChanged);
-                    m_VM.PropertyChanged -= snapshot_PropertyChanged;
-                    foreach (VM snapshot in m_VM.Connection.ResolveAll<VM>(m_VM.snapshots))
-                    {
-                        snapshot.PropertyChanged -= snapshot_PropertyChanged;
-                    }
-                }
+                UnregisterHandlers();
                 if (value != null)
                 {
                     m_VM = value;
@@ -288,6 +280,23 @@ namespace XenAdmin.TabPages
             }
 
             m_NeedToUpdate = false;
+        }
+
+        private void UnregisterHandlers()
+        {
+            if (m_VM == null) 
+                return;
+            m_VM.Connection.Cache.DeregisterBatchCollectionChanged<VM>(VM_BatchCollectionChanged);
+            m_VM.PropertyChanged -= snapshot_PropertyChanged;
+            foreach (VM snapshot in m_VM.Connection.ResolveAll<VM>(m_VM.snapshots))
+            {
+                snapshot.PropertyChanged -= snapshot_PropertyChanged;
+            }
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
         }
 
         private void BuildList()

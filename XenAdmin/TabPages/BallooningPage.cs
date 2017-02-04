@@ -201,6 +201,22 @@ namespace XenAdmin.TabPages
 
             foreach (VM vm in vms)
                 UnregisterVMHandlers(vm);  // Should duplicate above line, but let's be safe
+
+            foreach (Control c in pageContainerPanel.Controls)
+            {
+                VMMemoryRow vmRow = c as VMMemoryRow;
+                if (vmRow != null)
+                {
+                    vmRow.UnregisterHandlers();
+                    continue;
+                }
+
+                HostMemoryRow hostRow = c as HostMemoryRow;
+                if (hostRow != null)
+                {
+                    hostRow.UnregisterHandlers();
+                }
+            }
         }
 
         private void UnregisterHostHandlers(Host host)
@@ -217,7 +233,7 @@ namespace XenAdmin.TabPages
                 guest_metrics.PropertyChanged -= guest_metrics_PropertyChanged;
         }
 
-        public void IsHidden()
+        public override void PageHidden()
         {
             UnregisterHandlers();
         }

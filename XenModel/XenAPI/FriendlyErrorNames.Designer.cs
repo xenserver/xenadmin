@@ -3009,7 +3009,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to connect to Equallogic Array, Permission denied;username/password invalid.
+        ///   Looks up a localized string similar to Failed to connect to Equallogic Array. Check your user name and password..
         /// </summary>
         public static string SR_BACKEND_FAILURE_169 {
             get {
@@ -3522,7 +3522,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The username is missing.
+        ///   Looks up a localized string similar to The user name is missing.
         /// </summary>
         public static string SR_BACKEND_FAILURE_433 {
             get {
@@ -3648,7 +3648,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extended characters are not supported in SMB paths, usernames, and passwords..
+        ///   Looks up a localized string similar to Extended characters are not supported in SMB paths, user names, and passwords..
         /// </summary>
         public static string SR_BACKEND_FAILURE_446 {
             get {
@@ -3945,7 +3945,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logging in to the iSCSI target failed. Check your username and password..
+        ///   Looks up a localized string similar to Logging in to the iSCSI target failed. Check your user name and password..
         /// </summary>
         public static string SR_BACKEND_FAILURE_68 {
             get {
@@ -4548,11 +4548,20 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: conflicting updates are present..
+        ///   Looks up a localized string similar to The update precheck stage failed: conflicting update(s) are present..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT {
             get {
                 return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update precheck stage failed: RPM package validation requires a GPG key that is not present on the host..
+        /// </summary>
+        public static string UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED {
+            get {
+                return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED", resourceCulture);
             }
         }
         

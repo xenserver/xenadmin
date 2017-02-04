@@ -131,7 +131,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        private void UnregisterHandlers()
+        internal void UnregisterHandlers()
         {
             if (xenObject == null)
                 return;

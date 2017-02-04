@@ -51,6 +51,7 @@ namespace XenAPI
         public Pool_update(string uuid,
             string name_label,
             string name_description,
+            string version,
             long installation_size,
             string key,
             List<update_after_apply_guidance> after_apply_guidance,
@@ -60,6 +61,7 @@ namespace XenAPI
             this.uuid = uuid;
             this.name_label = name_label;
             this.name_description = name_description;
+            this.version = version;
             this.installation_size = installation_size;
             this.key = key;
             this.after_apply_guidance = after_apply_guidance;
@@ -81,6 +83,7 @@ namespace XenAPI
             uuid = update.uuid;
             name_label = update.name_label;
             name_description = update.name_description;
+            version = update.version;
             installation_size = update.installation_size;
             key = update.key;
             after_apply_guidance = update.after_apply_guidance;
@@ -93,6 +96,7 @@ namespace XenAPI
             uuid = proxy.uuid == null ? null : (string)proxy.uuid;
             name_label = proxy.name_label == null ? null : (string)proxy.name_label;
             name_description = proxy.name_description == null ? null : (string)proxy.name_description;
+            version = proxy.version == null ? null : (string)proxy.version;
             installation_size = proxy.installation_size == null ? 0 : long.Parse((string)proxy.installation_size);
             key = proxy.key == null ? null : (string)proxy.key;
             after_apply_guidance = proxy.after_apply_guidance == null ? null : Helper.StringArrayToEnumList<update_after_apply_guidance>(proxy.after_apply_guidance);
@@ -106,6 +110,7 @@ namespace XenAPI
             result_.uuid = (uuid != null) ? uuid : "";
             result_.name_label = (name_label != null) ? name_label : "";
             result_.name_description = (name_description != null) ? name_description : "";
+            result_.version = (version != null) ? version : "";
             result_.installation_size = installation_size.ToString();
             result_.key = (key != null) ? key : "";
             result_.after_apply_guidance = (after_apply_guidance != null) ? Helper.ObjectListToStringArray(after_apply_guidance) : new string[] {};
@@ -123,6 +128,7 @@ namespace XenAPI
             uuid = Marshalling.ParseString(table, "uuid");
             name_label = Marshalling.ParseString(table, "name_label");
             name_description = Marshalling.ParseString(table, "name_description");
+            version = Marshalling.ParseString(table, "version");
             installation_size = Marshalling.ParseLong(table, "installation_size");
             key = Marshalling.ParseString(table, "key");
             after_apply_guidance = Helper.StringArrayToEnumList<update_after_apply_guidance>(Marshalling.ParseStringArray(table, "after_apply_guidance"));
@@ -140,6 +146,7 @@ namespace XenAPI
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._name_label, other._name_label) &&
                 Helper.AreEqual2(this._name_description, other._name_description) &&
+                Helper.AreEqual2(this._version, other._version) &&
                 Helper.AreEqual2(this._installation_size, other._installation_size) &&
                 Helper.AreEqual2(this._key, other._key) &&
                 Helper.AreEqual2(this._after_apply_guidance, other._after_apply_guidance) &&
@@ -223,6 +230,17 @@ namespace XenAPI
         public static string get_name_description(Session session, string _pool_update)
         {
             return (string)session.proxy.pool_update_get_name_description(session.uuid, (_pool_update != null) ? _pool_update : "").parse();
+        }
+
+        /// <summary>
+        /// Get the version field of the given pool_update.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
+        public static string get_version(Session session, string _pool_update)
+        {
+            return (string)session.proxy.pool_update_get_version(session.uuid, (_pool_update != null) ? _pool_update : "").parse();
         }
 
         /// <summary>
@@ -489,6 +507,24 @@ namespace XenAPI
             }
         }
         private string _name_description;
+
+        /// <summary>
+        /// Update version number
+        /// </summary>
+        public virtual string version
+        {
+            get { return _version; }
+            set
+            {
+                if (!Helper.AreEqual(value, _version))
+                {
+                    _version = value;
+                    Changed = true;
+                    NotifyPropertyChanged("version");
+                }
+            }
+        }
+        private string _version;
 
         /// <summary>
         /// Size of the update in bytes
