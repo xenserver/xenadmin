@@ -191,7 +191,7 @@ namespace XenAdmin.TabPages
                     linkLabelVMPPInfo.Text = Messages.VIEW_POLICIES;
                 }
             }
-            else if (Helpers.DundeeOrGreater(VM.Connection))
+            else if (Helpers.FalconOrGreater(VM.Connection))
             {
                 panelVMPP.Visible = true;
                 var vmss = VM.Connection.Resolve(VM.snapshot_schedule);
