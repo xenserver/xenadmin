@@ -194,8 +194,8 @@ namespace XenAdmin.Core
         {
             if (typeof(T) == typeof(VMPP) && (Helpers.ClearwaterOrGreater(connection)))
                 return false;
-            //VMSS is enabled Dundee onwards
-            if ((typeof(T) == typeof(VMSS)) && !Helpers.DundeeOrGreater(connection))
+            //VMSS is enabled Falcon onwards
+            if ((typeof(T) == typeof(VMSS)) && !Helpers.FalconOrGreater(connection))
                 return false;
             
             return typeof(T) == typeof(VMPP) ?
