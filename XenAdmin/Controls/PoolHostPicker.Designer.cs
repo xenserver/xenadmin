@@ -13,7 +13,7 @@ namespace XenAdmin.Controls
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            ConnectionsManager.XenConnections.CollectionChanged -= CollectionChanged;
+            UnregisterHandlers();
 
             if (disposing && (components != null))
             {

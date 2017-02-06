@@ -100,7 +100,7 @@ namespace XenAdmin.Controls
 
         #endregion
 
-        protected virtual void DeregisterEvents()
+        internal virtual void DeregisterEvents()
         {
             if (vm == null)
                 return;
@@ -118,6 +118,7 @@ namespace XenAdmin.Controls
             {
                 vbd.PropertyChanged -= vbd_PropertyChanged;
             }
+            cdChanger1.DeregisterEvents();
         }
 
         void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)

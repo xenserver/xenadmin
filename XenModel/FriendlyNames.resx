@@ -1952,4 +1952,13 @@
   <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
     <value>'{0}' Write Latency</value>
   </data>
+  <data name="Label-pvsaccelerator" xml:space="preserve">
+    <value>PVS-Accelerator</value>
+  </data>
+  <data name="Label-xenserver-measured-boot" xml:space="preserve">
+    <value>Measured Boot</value>
+  </data>
+  <data name="Label-xscontainer" xml:space="preserve">
+    <value>Container Management</value>
+  </data>
 </root>

@@ -48,7 +48,7 @@ using XenAdmin.Commands;
 
 namespace XenAdmin.TabPages
 {
-    internal partial class VMStoragePage : UserControl
+    internal partial class VMStoragePage : BaseTabPage
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -61,8 +61,7 @@ namespace XenAdmin.TabPages
             InitializeComponent();
             storageLinkColumn = ColumnSRVolume;
 
-            TitleLabel.ForeColor = Program.HeaderGradientForeColor;
-            TitleLabel.Font = Program.HeaderGradientFont;
+            Text = Messages.VIRTUAL_DISKS;
             dataGridViewStorage.Sort(ColumnDevicePosition, ListSortDirection.Ascending);
         }
 
@@ -72,22 +71,8 @@ namespace XenAdmin.TabPages
             {
                 Program.AssertOnEventThread();
 
-                // de-register old listener...
-                if (vm != null)
-                {
-                    foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
-                    {
-                        vbd.PropertyChanged -= vbd_PropertyChanged;
-
-                        VDI vdi = vm.Connection.Resolve(vbd.VDI);
-                        if (vdi == null)
-                            continue;
-
-                        vdi.PropertyChanged -= vdi_PropertyChanged;
-                    }
-
-                    vm.PropertyChanged -= vm_PropertyChanged;
-                }
+                // de-register old listeners...
+                UnregisterHandlers();
 
                 vm = value;
                 multipleDvdIsoList1.VM = vm;
@@ -141,6 +126,32 @@ namespace XenAdmin.TabPages
             {
                 UpdateData();
             }
+        }
+
+        private void UnregisterHandlers()
+        {
+            if (vm == null) 
+                return;
+
+            foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
+            {
+                vbd.PropertyChanged -= vbd_PropertyChanged;
+
+                VDI vdi = vm.Connection.Resolve(vbd.VDI);
+                if (vdi == null)
+                    continue;
+
+                vdi.PropertyChanged -= vdi_PropertyChanged;
+            }
+
+            vm.PropertyChanged -= vm_PropertyChanged;
+
+            multipleDvdIsoList1.DeregisterEvents();
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
         }
 
         private void UpdateData()

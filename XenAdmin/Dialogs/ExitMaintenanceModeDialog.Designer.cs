@@ -173,6 +173,7 @@
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.tableLayoutPanelBody);
             this.Name = "RestoreVMsDialog";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RestoreVMsDialog_FormClosing);
             this.tableLayoutPanelBody.ResumeLayout(false);
             this.tableLayoutPanelBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVms)).EndInit();

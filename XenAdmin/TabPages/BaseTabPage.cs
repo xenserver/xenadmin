@@ -78,5 +78,8 @@ namespace XenAdmin.TabPages
             get { return deprecationBanner1; }
         }
 
+        public virtual void PageHidden()
+        {
+        }
     }
 }

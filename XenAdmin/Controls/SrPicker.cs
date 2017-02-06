@@ -99,6 +99,7 @@ namespace XenAdmin.Controls
         public SrPicker()
         {
             InitializeComponent();
+            SR_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(SR_CollectionChanged);
         }
 
         public SRPickerType Usage
@@ -327,6 +328,28 @@ namespace XenAdmin.Controls
         void SR_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.Invoke(this, refresh);
+        }
+
+        private void UnregisterHandlers()
+        {
+            if (connection == null)
+                return;
+
+            var pool = Helpers.GetPoolOfOne(connection);
+            if (pool != null)
+                pool.PropertyChanged -= Server_PropertyChanged;
+
+            foreach (var sr in connection.Cache.SRs)
+            {
+                foreach (var pbd in sr.Connection.ResolveAll(sr.PBDs))
+                {
+                    if (pbd != null)
+                        pbd.PropertyChanged -= Server_PropertyChanged;
+                }
+                sr.PropertyChanged -= Server_PropertyChanged;
+            }
+
+            connection.Cache.DeregisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
         }
 
         /// <summary>
