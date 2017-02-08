@@ -37,6 +37,7 @@ using System.IO;
 using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
+using System.Net;
 
 
 namespace XenAdmin.Actions
@@ -291,18 +292,25 @@ namespace XenAdmin.Actions
         {
             var xdoc = new XmlDocument();
             var uri = new Uri(location);
-            
+            var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection);
+
             if (uri.IsFile)
             {
                 xdoc.Load(location);
             }
             else
             {
-                using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+                using (var webClient = new WebClient())
                 {
-                    xdoc = Helpers.LoadXmlDocument(xmlstream);
+                    webClient.Proxy = proxy;
+
+                    using (var stream = new MemoryStream(webClient.DownloadData(uri)))
+                    {
+                        xdoc.Load(stream);
+                    }
                 }
             }
+
             return xdoc;
         }
     }
