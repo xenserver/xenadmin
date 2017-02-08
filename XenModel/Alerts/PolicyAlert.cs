@@ -71,7 +71,7 @@ namespace XenAdmin.Alerts
             }
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat(Message.FriendlyBody(name), policyName, numberOfVMsFailed);
+            sb.AppendFormat(Message.FriendlyBody(name), policyName);
             string[] messageHeader = Regex.Split(body.Replace("\n", " "), "Details:");
 
              /* get a list of all VMs that have encountered an error */

@@ -4221,7 +4221,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The XenServer license you are using does not allow you to use the snapshot schedule feature..
+        ///   Looks up a localized string similar to The XenServer license you are using does not allow you to use the Scheduled Snapshots feature..
         /// </summary>
         public static string Message_body_vmss_license_error {
             get {
@@ -4230,7 +4230,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The snapshot schedule &apos;{0}&apos; failed because a snapshot could not be created on {1} VMs..
+        ///   Looks up a localized string similar to The snapshot schedule &apos;{0}&apos; failed because a snapshot could not be created..
         /// </summary>
         public static string Message_body_vmss_snapshot_failed {
             get {
@@ -4239,7 +4239,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to create snapshots at this time because the snapshot schedule operation for this policy is already in progress. Please try again later..
+        ///   Looks up a localized string similar to Unable to create snapshots at this time because a scheduled snapshot operation is already in progress in this pool. Only one scheduled snapshot operation can run at a time in the same pool. Please check that the snapshot schedules in this pool do not clash..
         /// </summary>
         public static string Message_body_vmss_snapshot_lock_failed {
             get {
@@ -4248,7 +4248,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to create snapshots at this time because a snapshot schedule&apos;s snapshot operation is already in progress in this pool. One only snapshot schedule operation can run at a time in the same pool. Please check that the snapshot schedules in this pool do not clash..
+        ///   Looks up a localized string similar to Unable to create snapshots at this time because the scheduled snapshot operation for this policy is already in progress. Please try again later..
         /// </summary>
         public static string Message_body_vmss_snapshot_missed_event {
             get {
