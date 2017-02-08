@@ -257,7 +257,7 @@ namespace XenAdmin.XenSearch
         public abstract void GetNextLevel(List<GroupKey> nextLevel);
     }
 
-    public struct GroupKey
+    public class GroupKey : IEquatable<GroupKey>
     {
         public Grouping grouping;
         public object key;
@@ -266,6 +266,22 @@ namespace XenAdmin.XenSearch
         {
             this.grouping = grouping;
             this.key = key;
+        }
+
+        public override int GetHashCode()
+        {
+            return key.GetHashCode();
+        }
+
+        public bool Equals(GroupKey other)
+        {
+            return other != null && grouping.Equals(other.grouping) && key.Equals(other.key);
+        }
+
+        public override bool Equals(object obj)
+        {
+            GroupKey other = obj as GroupKey;
+            return other != null && Equals(other);
         }
     }
 
