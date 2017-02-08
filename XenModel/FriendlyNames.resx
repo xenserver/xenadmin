@@ -1215,16 +1215,16 @@
     <value>Unable to log in to XAPI session.</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
-    <value>The XenServer license you are using does not allow you to use the snapshot schedule feature.</value>
+    <value>The XenServer license you are using does not allow you to use the Scheduled Snapshots feature.</value>
   </data>
   <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
-    <value>The snapshot schedule '{0}' failed because a snapshot could not be created on {1} VMs.</value>
+    <value>The snapshot schedule '{0}' failed because a snapshot could not be created.</value>
   </data>
   <data name="Message.body-vmss_snapshot_lock_failed" xml:space="preserve">
-    <value>Unable to create snapshots at this time because the snapshot schedule operation for this policy is already in progress. Please try again later.</value>
+    <value>Unable to create snapshots at this time because a scheduled snapshot operation is already in progress in this pool. Only one scheduled snapshot operation can run at a time in the same pool. Please check that the snapshot schedules in this pool do not clash.</value>
   </data>
   <data name="Message.body-vmss_snapshot_missed_event" xml:space="preserve">
-    <value>Unable to create snapshots at this time because a snapshot schedule's snapshot operation is already in progress in this pool. One only snapshot schedule operation can run at a time in the same pool. Please check that the snapshot schedules in this pool do not clash.</value>
+    <value>Unable to create snapshots at this time because the scheduled snapshot operation for this policy is already in progress. Please try again later.</value>
   </data>
   <data name="Message.body-vmss_snapshot_succeeded" xml:space="preserve">
     <value>Snapshot schedule succeeded</value>
