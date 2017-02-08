@@ -43,48 +43,35 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly List<Pool_update> updates;
-        private readonly List<Host> hosts;
+        private readonly Pool_update update;
+        private readonly Host host;
 
         private string output = "";
 
-        public ApplyUpdateAction(List<Pool_update> updates, List<Host> hosts)
-            : base(null, string.Format(Messages.APPLYING_UPDATES, updates.Count, hosts.Count))
+        public ApplyUpdateAction(Pool_update update, Host host)
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, update.Name, host.Name))
         {
-            this.updates = updates;
-            this.hosts = hosts;
+            this.update = update;
+            this.host = host;
         }
 
         protected override void Run()
         {
             SafeToExit = false;
 
-            foreach (Pool_update update in updates)
-            {
-                foreach (Host host in hosts)
-                {
-                    if (!update.AppliedOn(host))
-                        ApplyUpdate(host, update);
-                }
-            }
-        
-            if (hosts.Count > 1 || updates.Count > 1)
-                this.Description = Messages.ALL_UPDATES_APPLIED;
+            if (!update.AppliedOn(host))
+                ApplyUpdate();
         }
 
-        private void ApplyUpdate(Host host, Pool_update update)
+        private void ApplyUpdate()
         {
-            // Set the correct connection object, for RecomputeCanCancel
-            Connection = host.Connection;
-            Session session = host.Connection.DuplicateSession();
-
             try
             {
                 this.Description = String.Format(Messages.APPLYING_PATCH, update.Name, host.Name);
 
                 output += String.Format(Messages.APPLY_PATCH_LOG_MESSAGE, update.Name, host.Name);
                 
-                var poolUpdates = new List<Pool_update>(session.Connection.Cache.Pool_updates);
+                var poolUpdates = new List<Pool_update>(Connection.Cache.Pool_updates);
                 var poolUpdate = poolUpdates.FirstOrDefault(u => u != null && string.Equals(u.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
 
                 if (poolUpdate == null)
@@ -92,7 +79,7 @@ namespace XenAdmin.Actions
 
                 if (!poolUpdate.AppliedOn(host))
                 {
-                    Pool_update.apply(session, poolUpdate.opaque_ref, host.opaque_ref);
+                    Pool_update.apply(Session, poolUpdate.opaque_ref, host.opaque_ref);
 
                     this.Description = String.Format(Messages.PATCH_APPLIED, update.Name, host.Name);
                 }
@@ -112,10 +99,6 @@ namespace XenAdmin.Actions
                 log.Error(output, f);
 
                 throw;
-            }
-            finally
-            {
-                Connection = null;
             }
         }
     }

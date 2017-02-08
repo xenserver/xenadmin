@@ -5129,15 +5129,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applying {0} update(s) to {1} server(s).
-        /// </summary>
-        public static string APPLYING_UPDATES {
-            get {
-                return ResourceManager.GetString("APPLYING_UPDATES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to License applied.
         /// </summary>
         public static string APPLYLICENSE_APPLIED {
@@ -33206,7 +33197,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update {0} was not completed successfully.
+        ///   Looks up a localized string similar to The installation of update {0} was not completed successfully.
         /// </summary>
         public static string UPDATE_WAS_NOT_COMPLETED {
             get {
@@ -34068,6 +34059,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Precheck for {0} in {1}....
+        /// </summary>
+        public static string UPDATES_WIZARD_RUNNING_PRECHECK {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_RUNNING_PRECHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage repository &apos;{0}&apos;.
         /// </summary>
         public static string UPDATES_WIZARD_SR_TITLE {
@@ -34091,6 +34091,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_TOOLS_CD {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_TOOLS_CD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading update {0} to {1}....
+        /// </summary>
+        public static string UPDATES_WIZARD_UPLOADING_UPDATE {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_UPLOADING_UPDATE", resourceCulture);
             }
         }
         

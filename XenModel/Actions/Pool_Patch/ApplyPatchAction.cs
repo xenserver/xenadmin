@@ -111,41 +111,28 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly List<Pool_patch> patches;
-        private readonly List<Host> hosts; //do we need a generic list in action for hosts rather than specifying 1 host there and many here?
+        private readonly Pool_patch patch;
+        private readonly Host host; 
 
         private string output = "";
 
-        public ApplyPatchAction(List<Pool_patch> patches, List<Host> hosts)
-            : base(null, string.Format(Messages.APPLYING_UPDATES, patches.Count, hosts.Count))
+        public ApplyPatchAction(Pool_patch patch, Host host)
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name, host.Name))
         {
-            this.patches = patches;
-            this.hosts = hosts;
+            this.patch = patch;
+            this.host = host;
         }
 
         protected override void Run()
         {
             SafeToExit = false;
 
-            foreach (Pool_patch patch in patches)
-            {
-                foreach (Host host in hosts)
-                {
-                    if (patch.AppliedOn(host) == DateTime.MaxValue)
-                        ApplyPatch(host, patch);
-                }
-            }
-        
-            if (hosts.Count > 1 || patches.Count > 1)
-                this.Description = Messages.ALL_UPDATES_APPLIED;
+            if (patch.AppliedOn(host) == DateTime.MaxValue)
+                ApplyPatch();
         }
 
-        private void ApplyPatch(Host host, Pool_patch patch)
+        private void ApplyPatch()
         {
-            // Set the correct connection object, for RecomputeCanCancel
-            Connection = host.Connection;
-            Session session = host.Connection.DuplicateSession();
-
             XenRef<Pool_patch> patchRef = BringPatchToPoolForHost(host, patch);
 
             try
@@ -153,7 +140,7 @@ namespace XenAdmin.Actions
                 this.Description = String.Format(Messages.APPLYING_PATCH, patch.Name, host.Name);
 
                 output += String.Format(Messages.APPLY_PATCH_LOG_MESSAGE, patch.Name, host.Name);
-                output += Pool_patch.apply(session, patchRef, host.opaque_ref);
+                output += Pool_patch.apply(Session, patchRef, host.opaque_ref);
 
                 this.Description = String.Format(Messages.PATCH_APPLIED, patch.Name, host.Name);
             }
@@ -167,13 +154,7 @@ namespace XenAdmin.Actions
                     
                 throw;
             }
-            finally
-            {
-                Connection = null;
-            }
         }
-
-        
     }
 
     public class PatchDownloadFailedException : ApplicationException
