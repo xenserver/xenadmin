@@ -4521,7 +4521,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update failed to apply. Please see attached output..
+        ///   Looks up a localized string similar to The update failed to apply. View logs for more details..
         /// </summary>
         public static string UPDATE_APPLY_FAILED {
             get {
