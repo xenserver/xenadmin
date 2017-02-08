@@ -1608,7 +1608,7 @@ Authorized Roles: {1}</value>
     <value>The uploaded update already exists</value>
   </data>
   <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
-    <value>The update failed to apply. Please see attached output.</value>
+    <value>The update failed to apply. View logs for more details.</value>
   </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
     <value>The specified update has been applied and cannot be destroyed.</value>
