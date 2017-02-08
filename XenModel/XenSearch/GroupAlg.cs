@@ -332,8 +332,6 @@ namespace XenAdmin.XenSearch
 
         public override void PopulateFor(IAcceptGroups adapter, GroupKey group, int indent, bool defaultExpand)
         {
-            //System.Console.WriteLine(group.GetHashCode().ToString() + "   " + group.key.ToString() );
-
             if (grouped.ContainsKey(group))
             {
                 grouped[group].Populate(adapter, indent, defaultExpand);
