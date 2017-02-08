@@ -110,6 +110,12 @@ namespace XenAdmin
         private bool IgnoreTabChanges = false;
         private bool ToolbarsEnabled;
 
+        /// <summary>
+        /// Helper boolean to only trigger Resize_End when window is really resized by dragging edges
+        /// Without this Resize_End is triggered even when window is moved around and not resized
+        /// </summary>
+        private bool mainWindowResized = false;
+
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
         private readonly Dictionary<IXenObject, Form> activeXenModelObjectWizards = new Dictionary<IXenObject, Form>();
 
@@ -3280,9 +3286,16 @@ namespace XenAdmin
             SetSplitterDistance();
         }
 
+        FormWindowState lastState = FormWindowState.Normal;
         private void MainWindow_Resize(object sender, EventArgs e)
         {
             SetSplitterDistance();
+            if(WindowState != lastState && WindowState != FormWindowState.Minimized)
+            {
+                lastState = WindowState;
+                ConsolePanel.updateRDPResolution();
+            }
+            mainWindowResized = true;
         }
 
         private void SetSplitterDistance()
@@ -3301,6 +3314,18 @@ namespace XenAdmin
                 splitContainer1.SplitterDistance = min;
             else if (splitContainer1.SplitterDistance > max)
                 splitContainer1.SplitterDistance = max;
+        }
+      
+        private void MainWindow_ResizeEnd(object sender, EventArgs e)
+        {
+            if (mainWindowResized)
+                ConsolePanel.updateRDPResolution();
+            mainWindowResized = false;
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            ConsolePanel.updateRDPResolution();
         }
     }
 }

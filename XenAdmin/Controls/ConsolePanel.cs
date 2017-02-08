@@ -98,6 +98,12 @@ namespace XenAdmin.Controls
                 activeVNCView.FocusConsole();
         }
 
+        public void updateRDPResolution(bool fullscreen = false)
+        {
+            if (activeVNCView != null)
+                activeVNCView.updateRDPResolution(fullscreen);
+        }
+
         internal void setCurrentSource(VM source)
         {
             Program.AssertOnEventThread();

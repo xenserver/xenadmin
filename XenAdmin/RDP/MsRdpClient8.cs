@@ -31,9 +31,9 @@
 
 namespace XenAdmin.RDP
 {
-    public class MsRdpClient2 : AxMSTSCLib.AxMsRdpClient2
+    public class MsRdpClient8 : AxMSTSCLib.AxMsRdpClient8
     {
-        public MsRdpClient2()
+        public MsRdpClient8()
             : base()
         {
         }
