@@ -96,11 +96,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CookComputing.XmlRpcV2">
-      <HintPath>..\xml-rpc.net\obj\Release\CookComputing.XmlRpcV2.dll</HintPath>
+      <HintPath>..\packages\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\log4net\build\bin\net\2.0\release\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
