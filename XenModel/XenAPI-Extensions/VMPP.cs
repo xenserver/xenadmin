@@ -34,11 +34,12 @@ using System.Collections.Generic;
 using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
-
+using XenAdmin.Network;
+using XenAdmin.Actions;
 
 namespace XenAPI
 {
-    public partial class VMPP
+    public partial class VMPP : IVMPolicy
     {
         public DateTime GetNextRunTime()
         {
@@ -66,7 +67,7 @@ namespace XenAPI
 
         }
 
-        private static DateTime GetDailyDate(DateTime time, int min, int hour)
+        public static DateTime GetDailyDate(DateTime time, int min, int hour)
         {
             var nextDateTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
             if (time > nextDateTime)
@@ -74,7 +75,7 @@ namespace XenAPI
             return nextDateTime;
         }
 
-        private static DateTime GetHourlyDate(DateTime time, int min)
+        public static DateTime GetHourlyDate(DateTime time, int min)
         {
             var nextDateTime = new DateTime(time.Year, time.Month, time.Day, time.Hour, min, 0);
             if (time > nextDateTime)
@@ -166,6 +167,152 @@ namespace XenAPI
             get { return name_description; }
         }
 
+        public bool is_enabled
+        {
+            get { return this.is_policy_enabled; }
+        }
+
+        public bool is_running
+        {
+            get { return this.is_backup_running; }
+        }
+
+        public bool is_archiving
+        {
+            get { return this.is_archive_running; }
+        }
+
+        public Type _Type
+        {
+            get {return typeof(VMPP);}
+        }
+
+        public List<PolicyAlert> PolicyAlerts
+        {
+            get { return RecentAlerts;}
+        }
+
+        public bool hasArchive
+        {
+            get { return true; }
+        }
+        
+        public void set_vm_policy(Session session, string _vm, string _value)
+        {
+            VM.set_protection_policy(session, _vm, _value);
+        }
+
+        public void do_destroy(Session session, string _policy)
+        {
+            VMPP.destroy(session, _policy);
+        }
+
+        public string run_now(Session session, string _policy)
+        {
+            return VMPP.protect_now(session, _policy);
+        }
+
+        public void set_is_enabled(Session session, string _policy, bool _is_enabled)
+        {
+            VMPP.set_is_policy_enabled(session, _policy, _is_enabled);
+        }
+
+        public PureAsyncAction getAlertsAction(IVMPolicy policy, int hoursfromnow)
+        {
+            return new GetVMPPAlertsAction((VMPP)policy, hoursfromnow);
+        }
+
+        public policy_frequency policy_frequency
+        {
+            get 
+            {
+                switch(backup_frequency)
+                {
+                    case vmpp_backup_frequency.hourly:
+                        return policy_frequency.hourly;
+                    case vmpp_backup_frequency.daily:
+                        return policy_frequency.daily;
+                    case vmpp_backup_frequency.weekly:
+                        return policy_frequency.weekly;
+                    default:
+                        return policy_frequency.unknown;
+                }
+            }
+
+            set 
+            {
+                switch (value)
+                {
+                    case policy_frequency.hourly:
+                        backup_frequency = vmpp_backup_frequency.hourly;
+                        break;
+                    case policy_frequency.daily:
+                        backup_frequency = vmpp_backup_frequency.daily;
+                        break;
+                    case policy_frequency.weekly:
+                        backup_frequency = vmpp_backup_frequency.weekly;
+                        break;
+                    default:
+                        backup_frequency = vmpp_backup_frequency.unknown;
+                        break;
+                }
+            }
+        }
+
+        public Dictionary<string, string> policy_schedule 
+        {
+            get { return backup_schedule; }
+            set { backup_schedule = value; }
+        }
+
+        public long policy_retention 
+        {
+            get { return backup_retention_value; }
+            set { backup_retention_value = value; }
+        }
+
+        public policy_backup_type policy_type 
+        {
+            get
+            {
+                switch(backup_type)
+                {
+                    case vmpp_backup_type.checkpoint:
+                        return policy_backup_type.checkpoint;
+                    case vmpp_backup_type.snapshot:
+                        return policy_backup_type.snapshot;
+                    default:
+                        return policy_backup_type.unknown;
+                }
+            }
+
+            set 
+            {
+                switch (value)
+                {
+                    case policy_backup_type.checkpoint:
+                        backup_type = vmpp_backup_type.checkpoint;
+                        break;
+                    case policy_backup_type.snapshot:
+                        backup_type = vmpp_backup_type.snapshot;
+                        break;
+                    default:
+                        backup_type = vmpp_backup_type.unknown;
+                        break;
+                }
+            }
+        }
+
+        public XenRef<Task> async_task_create(Session session)
+        {
+            return VMPP.async_create(session, (VMPP)this);
+        }
+
+        public void set_policy(Session session, string _vm, string _value)
+        {
+            VM.set_protection_policy(session, _vm, _value);
+        }
+
         public string alarm_config_smtp_server
         {
             get
@@ -182,7 +329,7 @@ namespace XenAPI
             }
         }
 
-        private string TryGetKey(Dictionary<string, string> dict, string key)
+        public static string TryGetKey(Dictionary<string, string> dict, string key)
         {
             string r;
             if (dict.TryGetValue(key, out r))

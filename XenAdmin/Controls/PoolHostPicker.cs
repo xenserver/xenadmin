@@ -30,14 +30,8 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-
-using XenAdmin;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
@@ -195,6 +189,24 @@ namespace XenAdmin.Controls
         {
             Program.Invoke(this, buildList);
         }
+
+        private void UnregisterHandlers()
+        {
+            ConnectionsManager.XenConnections.CollectionChanged -= CollectionChanged;
+            foreach (IXenConnection xc in ConnectionsManager.XenConnectionsCopy)
+            {
+                Pool pool = Helpers.GetPoolOfOne(xc);
+                if (pool != null)
+                    pool.PropertyChanged -= PropertyChanged;
+
+                foreach (Host host in xc.Cache.Hosts)
+                    host.PropertyChanged -= PropertyChanged;
+
+                xc.ConnectionStateChanged -= xc_ConnectionStateChanged;
+                xc.CachePopulated -= xc_CachePopulated;
+                xc.Cache.DeregisterCollectionChanged<Host>(CollectionChangedWithInvoke);
+            }
+        } 
 
         private CustomTreeNode lastSelected;
         public bool AllowPoolSelect = true;

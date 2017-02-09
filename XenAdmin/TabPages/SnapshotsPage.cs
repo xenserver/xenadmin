@@ -120,15 +120,7 @@ namespace XenAdmin.TabPages
         {
             set
             {
-                if (m_VM != null)
-                {
-                    m_VM.Connection.Cache.DeregisterBatchCollectionChanged<VM>(VM_BatchCollectionChanged);
-                    m_VM.PropertyChanged -= snapshot_PropertyChanged;
-                    foreach (VM snapshot in m_VM.Connection.ResolveAll<VM>(m_VM.snapshots))
-                    {
-                        snapshot.PropertyChanged -= snapshot_PropertyChanged;
-                    }
-                }
+                UnregisterHandlers();
                 if (value != null)
                 {
                     m_VM = value;
@@ -137,7 +129,7 @@ namespace XenAdmin.TabPages
                         VM_BatchCollectionChanged);
                     m_VM.PropertyChanged += snapshot_PropertyChanged;
                     //Version setup
-                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection);
+                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = (Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection)) || !Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule);
                     if (VM.SnapshotView != SnapshotsView.ListView)
                         TreeViewChecked();
                     else
@@ -199,8 +191,29 @@ namespace XenAdmin.TabPages
                     linkLabelVMPPInfo.Text = Messages.VIEW_POLICIES;
                 }
             }
+            else if (Helpers.FalconOrGreater(VM.Connection))
+            {
+                panelVMPP.Visible = true;
+                var vmss = VM.Connection.Resolve(VM.snapshot_schedule);
+                if (vmss == null || Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule))
+                {
+                    labelVMPPInfo.Text = Messages.THIS_VM_IS_NOT_IN_VMSS;
+                    pictureBoxVMPPInfo.Image = Resources._000_BackupMetadata_h32bit_16;
+
+                    linkLabelVMPPInfo.Text = Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule) ? Messages.TELL_ME_MORE : Messages.VIEW_VMSS_POLICIES;
+
+                }
+                else
+                {
+                    labelVMPPInfo.Text = string.Format(Messages.THIS_VM_IS_IN_VMSS, vmss.Name);
+                    pictureBoxVMPPInfo.Image = Resources._000_Tick_h32bit_16;
+                    linkLabelVMPPInfo.Text = Messages.VIEW_VMSS_POLICIES;
+                }
+            }
             else
+            {
                 panelVMPP.Visible = false;
+            }
         }
 
 
@@ -267,6 +280,23 @@ namespace XenAdmin.TabPages
             }
 
             m_NeedToUpdate = false;
+        }
+
+        private void UnregisterHandlers()
+        {
+            if (m_VM == null) 
+                return;
+            m_VM.Connection.Cache.DeregisterBatchCollectionChanged<VM>(VM_BatchCollectionChanged);
+            m_VM.PropertyChanged -= snapshot_PropertyChanged;
+            foreach (VM snapshot in m_VM.Connection.ResolveAll<VM>(m_VM.snapshots))
+            {
+                snapshot.PropertyChanged -= snapshot_PropertyChanged;
+            }
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
         }
 
         private void BuildList()
@@ -358,10 +388,10 @@ namespace XenAdmin.TabPages
 
             foreach (VM root in roots)
             {
-                if (!(root.is_snapshot_from_vmpp && !toolStripMenuItemScheduledSnapshots.Checked))
+                if (!((root.is_snapshot_from_vmpp || root.is_vmss_snapshot) && !toolStripMenuItemScheduledSnapshots.Checked))
                 {
                     int icon;
-                    if (root.is_snapshot_from_vmpp)
+                    if (root.is_snapshot_from_vmpp || root.is_vmss_snapshot)
                         icon = root.power_state == vm_power_state.Suspended ? SnapshotIcon.ScheduledDiskMemorySnapshot : SnapshotIcon.ScheduledDiskSnapshot;
                     else
                         icon = root.power_state == vm_power_state.Suspended ? SnapshotIcon.DiskAndMemorySnapshot : SnapshotIcon.DiskSnapshot;
@@ -405,7 +435,7 @@ namespace XenAdmin.TabPages
             for (int i = 0; i < snapshots.Count; i++)
             {
                 VM snapshot = snapshots[i];
-                if (!(snapshot.is_snapshot_from_vmpp && !toolStripMenuItemScheduledSnapshots.Checked))
+                if (!(snapshot.is_snapshot_from_vmpp || snapshot.is_vmss_snapshot) || toolStripMenuItemScheduledSnapshots.Checked)
                 {
                     snapshot.PropertyChanged -= snapshot_PropertyChanged;
                     snapshot.PropertyChanged += snapshot_PropertyChanged;
@@ -414,6 +444,7 @@ namespace XenAdmin.TabPages
                     row.Tag = snapshot;
                     DataGridView.Rows.Add(row);
                 }
+
                 VM parent = VM.Connection.Resolve<VM>(snapshot.parent);
                 if (parent == null)
                     roots.Add(snapshot);
@@ -558,10 +589,10 @@ namespace XenAdmin.TabPages
                 if (VM.snapshots.Contains(child))
                 {
                     VM childSnapshot = VM.Connection.Resolve<VM>(child);
-                    if (!(childSnapshot.is_snapshot_from_vmpp && !toolStripMenuItemScheduledSnapshots.Checked))
+                    if (!((childSnapshot.is_snapshot_from_vmpp || childSnapshot.is_vmss_snapshot) && !toolStripMenuItemScheduledSnapshots.Checked))
                     {
                         int icon;
-                        if (childSnapshot.is_snapshot_from_vmpp)
+                        if (childSnapshot.is_snapshot_from_vmpp || childSnapshot.is_vmss_snapshot)
                             icon = childSnapshot.power_state == vm_power_state.Suspended ? SnapshotIcon.ScheduledDiskMemorySnapshot : SnapshotIcon.ScheduledDiskSnapshot;
                         else
                             icon = childSnapshot.power_state == vm_power_state.Suspended ? SnapshotIcon.DiskAndMemorySnapshot : SnapshotIcon.DiskSnapshot;
@@ -1093,7 +1124,11 @@ namespace XenAdmin.TabPages
                     {
                         VM snap = (VM)item.Tag;
                         if (snap != null && snap.is_a_snapshot)
-                            snapshots.Add(snap);
+                        {
+                            if(!(snap.is_snapshot_from_vmpp || snap.is_vmss_snapshot) || toolStripMenuItemScheduledSnapshots.Checked)
+                                snapshots.Add(snap);
+                        }
+                            
                     }
                     return snapshots;
                 }
@@ -1107,7 +1142,10 @@ namespace XenAdmin.TabPages
                     {
                         VM snap = (VM)row.Tag;
                         if (snap != null && snap.is_a_snapshot)
-                            snapshots.Add(snap);
+                        {
+                            if (!(snap.is_snapshot_from_vmpp || snap.is_vmss_snapshot) || toolStripMenuItemScheduledSnapshots.Checked)
+                                snapshots.Add(snap);
+                        }
                     }
                     return snapshots;
                 }
@@ -1568,14 +1606,29 @@ namespace XenAdmin.TabPages
 
         private void linkLabelVMPPInfo_Click(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
+            if (Helpers.DundeeOrGreater(VM.Connection))
             {
-                VMGroupCommand<VMPP>.ShowUpsellDialog(this);
+                if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
+                {
+                    VMGroupCommand<VMSS>.ShowUpsellDialog(this);
+                }
+                else
+                {
+                    var command = new VMGroupCommand<VMSS>(Program.MainWindow, VM);
+                    command.Execute();
+                }
             }
             else
             {
-                var command = new VMGroupCommand<VMPP>(Program.MainWindow, VM);
-                command.Execute();
+                if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
+                {
+                    VMGroupCommand<VMPP>.ShowUpsellDialog(this);
+                }
+                else
+                {
+                    var command = new VMGroupCommand<VMPP>(Program.MainWindow, VM);
+                    command.Execute();
+                }
             }
         }
 

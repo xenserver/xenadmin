@@ -32,11 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Core;
 
@@ -62,7 +58,7 @@ namespace XenAdmin.Dialogs
             this.connection = VMsToRestore[0].Connection;
 
             foreach (VM v in VMsToRestore)
-                v.PropertyChanged += new PropertyChangedEventHandler(v_PropertyChanged);
+                v.PropertyChanged += v_PropertyChanged;
 
             BuildList();
         }
@@ -129,6 +125,12 @@ namespace XenAdmin.Dialogs
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void RestoreVMsDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (VM v in VMsToRestore)
+                v.PropertyChanged -= v_PropertyChanged;
         }
     }
 }

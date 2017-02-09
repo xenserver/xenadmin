@@ -208,6 +208,24 @@ namespace XenAdmin.TabPages
             }
         }
 
+        private void UnregisterHandlers()
+        {
+            ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
+            Properties.Settings.Default.PropertyChanged -= Default_PropertyChanged;
+
+            if (sr != null)
+            {
+                sr.PropertyChanged -= sr_PropertyChanged;
+                sr.Connection.Cache.DeregisterBatchCollectionChanged<VDI>(VDI_BatchCollectionChanged);
+                sr.Connection.XenObjectsUpdated -= Connection_XenObjectsUpdated;
+            }
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
+        }
+
         #region events
         void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {

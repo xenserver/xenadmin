@@ -17,6 +17,7 @@ namespace XenAdmin.Controls
             {
                 components.Dispose();
             }
+            UnregisterHandlers();
             base.Dispose(disposing);
         }
 

@@ -117,18 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AddButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="AddButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>2, 2</value>
+  </data>
+  <data name="AddButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="AddButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AddButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -147,44 +153,17 @@
   <data name="&gt;&gt;AddButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="EditButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="EditButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="EditButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>507, 3</value>
-  </data>
-  <data name="EditButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
-  </data>
-  <data name="EditButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="EditButton.Text" xml:space="preserve">
-    <value>P&amp;roperties</value>
-  </data>
-  <data name="&gt;&gt;EditButton.Name" xml:space="preserve">
-    <value>EditButton</value>
-  </data>
-  <data name="&gt;&gt;EditButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;EditButton.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;EditButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="AttachButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="AttachButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 3</value>
+    <value>102, 2</value>
+  </data>
+  <data name="AttachButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="AttachButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="AttachButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -217,7 +196,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="DeactivateButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="DeactivateButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -238,10 +217,13 @@
     <value>1</value>
   </data>
   <data name="DeactivateButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 3</value>
+    <value>202, 2</value>
+  </data>
+  <data name="DeactivateButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="DeactivateButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="DeactivateButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -271,7 +253,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="MoveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="MoveButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -292,10 +274,13 @@
     <value>1</value>
   </data>
   <data name="MoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 3</value>
+    <value>302, 2</value>
+  </data>
+  <data name="MoveButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="MoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="MoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -312,6 +297,39 @@
   <data name="&gt;&gt;MoveButtonContainer.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="EditButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="EditButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="EditButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>402, 2</value>
+  </data>
+  <data name="EditButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="EditButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 23</value>
+  </data>
+  <data name="EditButton.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="EditButton.Text" xml:space="preserve">
+    <value>P&amp;roperties</value>
+  </data>
+  <data name="&gt;&gt;EditButton.Name" xml:space="preserve">
+    <value>EditButton</value>
+  </data>
+  <data name="&gt;&gt;EditButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EditButton.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;EditButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="DeleteButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -325,7 +343,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="DeleteButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="DeleteButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -346,10 +364,13 @@
     <value>1</value>
   </data>
   <data name="DeleteButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>633, 3</value>
+    <value>502, 2</value>
+  </data>
+  <data name="DeleteButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="DeleteButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="DeleteButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -379,7 +400,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="DetachButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="DetachButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -400,10 +421,13 @@
     <value>1</value>
   </data>
   <data name="DetachButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>759, 3</value>
+    <value>602, 2</value>
+  </data>
+  <data name="DetachButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="DetachButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>96, 23</value>
   </data>
   <data name="DetachButtonContainer.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -424,10 +448,13 @@
     <value>Fill</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 367</value>
+    <value>2, 252</value>
+  </data>
+  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>995, 92</value>
+    <value>796, 64</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -443,69 +470,6 @@
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="toolStripMenuItemAdd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 26</value>
-  </data>
-  <data name="toolStripMenuItemAdd.Text" xml:space="preserve">
-    <value>&amp;Add...</value>
-  </data>
-  <data name="toolStripMenuItemAttach.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 26</value>
-  </data>
-  <data name="toolStripMenuItemAttach.Text" xml:space="preserve">
-    <value>Attach Dis&amp;k...</value>
-  </data>
-  <data name="toolStripMenuItemDeactivate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 26</value>
-  </data>
-  <data name="toolStripMenuItemDeactivate.Text" xml:space="preserve">
-    <value>Dea&amp;ctivate</value>
-  </data>
-  <data name="toolStripMenuItemMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 26</value>
-  </data>
-  <data name="toolStripMenuItemMove.Text" xml:space="preserve">
-    <value>&amp;Move...</value>
-  </data>
-  <data name="toolStripMenuItemDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 26</value>
-  </data>
-  <data name="toolStripMenuItemDelete.Text" xml:space="preserve">
-    <value>&amp;Delete</value>
-  </data>
-  <data name="toolStripMenuItemDetach.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 26</value>
-  </data>
-  <data name="toolStripMenuItemDetach.Text" xml:space="preserve">
-    <value>D&amp;etach</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 6</value>
-  </data>
-  <data name="toolStripMenuItemProperties.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="toolStripMenuItemProperties.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 26</value>
-  </data>
-  <data name="toolStripMenuItemProperties.Text" xml:space="preserve">
-    <value>P&amp;roperties</value>
-  </data>
-  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 192</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
-    <value>contextMenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <metadata name="ColumnDevicePosition.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -598,16 +562,16 @@
     <value>Fill</value>
   </data>
   <data name="dataGridViewStorage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 75</value>
+    <value>2, 50</value>
   </data>
   <data name="dataGridViewStorage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 12</value>
+    <value>2, 2, 2, 10</value>
   </data>
   <data name="dataGridViewStorage.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1125, 0</value>
+    <value>900, 0</value>
   </data>
   <data name="dataGridViewStorage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>995, 277</value>
+    <value>796, 190</value>
   </data>
   <data name="dataGridViewStorage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -628,16 +592,16 @@
     <value>Top</value>
   </data>
   <data name="multipleDvdIsoList1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 15</value>
+    <value>2, 2</value>
   </data>
   <data name="multipleDvdIsoList1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 12</value>
+    <value>2, 2, 2, 10</value>
   </data>
   <data name="multipleDvdIsoList1.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1125, 45</value>
+    <value>900, 36</value>
   </data>
   <data name="multipleDvdIsoList1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>995, 45</value>
+    <value>796, 36</value>
   </data>
   <data name="multipleDvdIsoList1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -658,16 +622,13 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 46</value>
-  </data>
-  <data name="tableLayoutPanel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>12, 12, 12, 12</value>
+    <value>10, 10</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1025, 474</value>
+    <value>800, 318</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -679,82 +640,91 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>pageContainerPanel</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="flowLayoutPanel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dataGridViewStorage" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="multipleDvdIsoList1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,75,Percent,25" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="TitleLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 78</value>
   </data>
-  <data name="TitleLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11.25pt</value>
+  <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>820, 338</value>
   </data>
-  <data name="TitleLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
+    <value>pageContainerPanel</value>
   </data>
-  <data name="TitleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TitleLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="TitleLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 0, 0, 0</value>
-  </data>
-  <data name="TitleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1004, 46</value>
-  </data>
-  <data name="TitleLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="TitleLabel.Text" xml:space="preserve">
-    <value>Virtual Disks</value>
-  </data>
-  <data name="TitleLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;TitleLabel.Name" xml:space="preserve">
-    <value>TitleLabel</value>
-  </data>
-  <data name="&gt;&gt;TitleLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TitleLabel.Parent" xml:space="preserve">
-    <value>gradientPanel1</value>
-  </data>
-  <data name="&gt;&gt;TitleLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="gradientPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="gradientPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="gradientPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="gradientPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1025, 46</value>
-  </data>
-  <data name="gradientPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;gradientPanel1.Name" xml:space="preserve">
-    <value>gradientPanel1</value>
-  </data>
-  <data name="&gt;&gt;gradientPanel1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.GradientPanel.GradientPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;gradientPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;gradientPanel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="toolStripMenuItemAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="toolStripMenuItemAdd.Text" xml:space="preserve">
+    <value>&amp;Add...</value>
+  </data>
+  <data name="toolStripMenuItemAttach.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="toolStripMenuItemAttach.Text" xml:space="preserve">
+    <value>Attach Dis&amp;k...</value>
+  </data>
+  <data name="toolStripMenuItemDeactivate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="toolStripMenuItemDeactivate.Text" xml:space="preserve">
+    <value>Dea&amp;ctivate</value>
+  </data>
+  <data name="toolStripMenuItemMove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="toolStripMenuItemMove.Text" xml:space="preserve">
+    <value>&amp;Move...</value>
+  </data>
+  <data name="toolStripMenuItemDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="toolStripMenuItemDelete.Text" xml:space="preserve">
+    <value>&amp;Delete</value>
+  </data>
+  <data name="toolStripMenuItemDetach.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="toolStripMenuItemDetach.Text" xml:space="preserve">
+    <value>D&amp;etach</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 6</value>
+  </data>
+  <data name="toolStripMenuItemProperties.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="toolStripMenuItemProperties.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="toolStripMenuItemProperties.Text" xml:space="preserve">
+    <value>P&amp;roperties</value>
+  </data>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 164</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+    <value>contextMenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -793,7 +763,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
@@ -805,7 +775,7 @@
     <value>No</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1025, 520</value>
+    <value>820, 416</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemAdd.Name" xml:space="preserve">
     <value>toolStripMenuItemAdd</value>
@@ -979,6 +949,6 @@
     <value>VMStoragePage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

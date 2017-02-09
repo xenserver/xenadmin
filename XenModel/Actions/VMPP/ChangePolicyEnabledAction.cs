@@ -39,24 +39,27 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class ChangePolicyEnabledAction : PureAsyncAction
+    public class ChangePolicyEnabledAction<T> : PureAsyncAction where T : XenObject<T>
     {
-        private VMPP _vmpp;
-        public ChangePolicyEnabledAction(VMPP vmpp)
-            : base(vmpp.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, vmpp.Name))
+        private IVMPolicy _policy;
+        public ChangePolicyEnabledAction(IVMPolicy policy)
+            : base(policy.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, policy.Name))
         {
-            _vmpp = vmpp;
-            Pool = Helpers.GetPool(vmpp.Connection);
+            _policy = policy;
+            Pool = Helpers.GetPool(_policy.Connection);
         }
 
         protected override void Run()
         {
-            bool value = !_vmpp.is_policy_enabled;
-            Description = value ? string.Format(Messages.ENABLING_VMPP, _vmpp.Name) : string.Format(Messages.DISABLING_VMPP, _vmpp.Name);
-            
-            VMPP.set_is_policy_enabled(Session, _vmpp.opaque_ref, !_vmpp.is_policy_enabled);
-            Description = value ? string.Format(Messages.ENABLED_VMPP, _vmpp.Name) : string.Format(Messages.DISABLED_VMPP, _vmpp.Name);
-            
+            bool value = !_policy.is_enabled;
+            Description = value ? string.Format(typeof(T) == typeof(VMPP) ? Messages.ENABLING_VMPP : Messages.ENABLING_VMSS, _policy.Name) :
+                string.Format(typeof(T) == typeof(VMPP) ? Messages.DISABLING_VMPP : Messages.DISABLING_VMSS, _policy.Name);
+
+            _policy.set_is_enabled(Session, _policy.opaque_ref, !_policy.is_enabled);
+
+            Description = value ? string.Format(typeof(T) == typeof(VMPP) ? Messages.ENABLED_VMPP : Messages.ENABLED_VMSS, _policy.Name) :
+                string.Format(typeof(T) == typeof(VMPP) ? Messages.DISABLED_VMPP : Messages.DISABLED_VMSS, _policy.Name);
+           
         }
     }
 }

@@ -72,19 +72,7 @@ namespace XenAdmin.Controls.NetworkingTab
 
                 // Remove all old property change listeners.  They will get added back in the
                 // population of the DataGridView that follows (see BuildList).
-                DegregisterEventsOnXmo();
-                DeregisterEventsOnGridRows();
-
-                if (_xenObject is Host || _xenObject is Pool)
-                {
-                    _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<XenAPI.Network>(NetworkCollectionChanged);
-                    _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<PIF>(PIFCollectionChanged);
-                }
-                else if (_xenObject is VM)
-                {
-                    _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<VIF>(CollectionChanged);
-                    _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<VM_guest_metrics>(VM_guest_metrics_BatchCollectionChanged);
-                }
+                UnregisterHandlers();
 
                 _xenObject = value;
 
@@ -139,6 +127,23 @@ namespace XenAdmin.Controls.NetworkingTab
                 VM_guest_metrics vmGuestMetrics = vm.Connection.Resolve(vm.guest_metrics);
                 if (vmGuestMetrics != null)
                     vmGuestMetrics.PropertyChanged -= Server_PropertyChanged;
+            }
+        }
+
+        internal void UnregisterHandlers()
+        {
+            DegregisterEventsOnXmo();
+            DeregisterEventsOnGridRows();
+
+            if (_xenObject is Host || _xenObject is Pool)
+            {
+                _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<XenAPI.Network>(NetworkCollectionChanged);
+                _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<PIF>(PIFCollectionChanged);
+            }
+            else if (_xenObject is VM)
+            {
+                _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<VIF>(CollectionChanged);
+                _xenObject.Connection.Cache.DeregisterBatchCollectionChanged<VM_guest_metrics>(VM_guest_metrics_BatchCollectionChanged);
             }
         }
 
@@ -1036,8 +1041,6 @@ namespace XenAdmin.Controls.NetworkingTab
             }
             e.SortResult = StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString());
             e.Handled = true;
-
-                
         }
     }
 }

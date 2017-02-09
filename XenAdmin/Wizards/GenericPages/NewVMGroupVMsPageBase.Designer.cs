@@ -41,6 +41,7 @@
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCurrentGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnQuiesceSupported = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -80,12 +81,13 @@
             this.ColumnCheckBox,
             this.ColumnName,
             this.ColumnDescription,
-            this.ColumnCurrentGroup});
+            this.ColumnCurrentGroup,
+            this.ColumnQuiesceSupported});
             this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView1_RowStateChanged);
             // 
             // searchTextBox1
@@ -142,6 +144,13 @@
             this.ColumnCurrentGroup.Name = "ColumnCurrentGroup";
             this.ColumnCurrentGroup.ReadOnly = true;
             // 
+            // ColumnQuiesceSupported
+            // 
+            this.ColumnQuiesceSupported.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnQuiesceSupported, "ColumnQuiesceSupported");
+            this.ColumnQuiesceSupported.Name = "ColumnQuiesceSupported";
+            this.ColumnQuiesceSupported.ReadOnly = true;
+            // 
             // NewVMGroupVMsPageBase
             // 
             resources.ApplyResources(this, "$this");
@@ -169,5 +178,6 @@
         protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
         protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnCurrentGroup;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuiesceSupported;
     }
 }

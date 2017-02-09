@@ -194,6 +194,7 @@ namespace XenAdmin
             #endregion
 
             TheTabControl.SelectedIndexChanged += TheTabControl_SelectedIndexChanged;
+            TheTabControl.Deselected += TheTabControl_Deselected;
             navigationPane.DragDropCommandActivated += navigationPane_DragDropCommandActivated;
 
             PoolCollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged<Pool>);
@@ -1666,6 +1667,26 @@ namespace XenAdmin
             relocateToolStripMenuItem.Available = relocateToolStripMenuItem.Enabled;
             sendCtrlAltDelToolStripMenuItem.Enabled = (TheTabControl.SelectedTab == TabPageConsole) && vm && ((VM)SelectionManager.Selection.First).power_state == vm_power_state.Running;
 
+            IXenConnection conn;
+            conn = SelectionManager.Selection.GetConnectionOfAllItems();
+            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn))) /* hide VMPP */
+            {
+                assignSnapshotScheduleToolStripMenuItem.Available = true;
+                VMSnapshotScheduleToolStripMenuItem.Available = true;
+
+                assignPolicyToolStripMenuItem.Available = false;
+                vMProtectionAndRecoveryToolStripMenuItem.Available = false;
+
+            }
+            else /* hide VMSS */
+            {
+                assignSnapshotScheduleToolStripMenuItem.Available = false;
+                VMSnapshotScheduleToolStripMenuItem.Available = false;
+
+                assignPolicyToolStripMenuItem.Available = true;
+                vMProtectionAndRecoveryToolStripMenuItem.Available = true;
+            }
+            
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;
             customTemplatesToolStripMenuItem.Checked = Properties.Settings.Default.UserTemplatesVisible;
             localStorageToolStripMenuItem.Checked = Properties.Settings.Default.LocalSRsVisible;
@@ -1755,6 +1776,16 @@ namespace XenAdmin
             Help.HelpManager.Launch("LicenseKeyDialog");
         }
 
+        private void TheTabControl_Deselected(object sender, TabControlEventArgs e)
+        {
+            TabPage t = e.TabPage;
+            if (t == null)
+                return;
+            BaseTabPage tabPage = t.Controls.OfType<BaseTabPage>().FirstOrDefault();
+            if (tabPage != null)
+                tabPage.PageHidden();
+        }
+
         /// <param name="e">
         /// If null, then we deduce the method was called by TreeView_AfterSelect
         /// and don't focus the VNC console. i.e. we only focus the VNC console if the user
@@ -1770,9 +1801,6 @@ namespace XenAdmin
 
             if (!SearchMode)
                 History.NewHistoryItem(new XenModelObjectHistoryItem(SelectionManager.Selection.FirstAsXenObject, t));
-
-            if (t != TabPageBallooning)
-                BallooningPage.IsHidden();
 
             if (t == TabPageConsole)
             {
@@ -1972,11 +2000,6 @@ namespace XenAdmin
                     PvsPage.Connection = SelectionManager.Selection.GetConnectionOfFirstItem();
                 }
             }
-
-            if (t == TabPagePeformance)
-                PerformancePage.ResumeGraph();
-            else
-                PerformancePage.PauseGraph();
 
             if (t == TabPageSearch)
                 SearchPage.PanelShown();
