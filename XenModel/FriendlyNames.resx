@@ -1925,4 +1925,10 @@
   <data name="Label-xscontainer" xml:space="preserve">
     <value>Container Management</value>
   </data>
+  <data name="Description-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS-Accelerator Status</value>
+  </data>
+  <data name="Label-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS-Accelerator Status</value>
+  </data>
 </root>
