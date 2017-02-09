@@ -17060,7 +17060,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see http://www.citrix.com/welcome.html). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
+        ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see {0}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server..
         /// </summary>
         public static string HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN {
             get {
@@ -22508,6 +22508,15 @@ namespace XenAdmin {
         public static string MUST_SELECT_NETWORK {
             get {
                 return ResourceManager.GetString("MUST_SELECT_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.citrix.com/welcome.html.
+        /// </summary>
+        public static string MY_CITRIX_CREDENTIALS_URL {
+            get {
+                return ResourceManager.GetString("MY_CITRIX_CREDENTIALS_URL", resourceCulture);
             }
         }
         
@@ -31752,6 +31761,15 @@ namespace XenAdmin {
         public static string STATUS_FILTER_IN_PROGRESS {
             get {
                 return ResourceManager.GetString("STATUS_FILTER_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server..
+        /// </summary>
+        public static string STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE {
+            get {
+                return ResourceManager.GetString("STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE", resourceCulture);
             }
         }
         

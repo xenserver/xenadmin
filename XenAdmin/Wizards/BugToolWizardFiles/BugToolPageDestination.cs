@@ -73,7 +73,11 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             }
             usernameTextBox.Visible = usernameLabel.Visible = passwordLabel.Visible = passwordTextBox.Visible = 
                 caseNumberLabel.Visible = caseNumberTextBox.Visible = optionalLabel.Visible =
-                richTextBox1.Visible = uploadCheckBox.Visible = !HiddenFeatures.UploadOptionHidden;
+                enterCredentialsLinkLabel.Visible = uploadCheckBox.Visible = !HiddenFeatures.UploadOptionHidden;
+
+            string enterCredentialsMessage = string.Format(Messages.STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE, Messages.MY_CITRIX_CREDENTIALS_URL);
+            enterCredentialsLinkLabel.Text = (enterCredentialsMessage);
+            enterCredentialsLinkLabel.LinkArea = new System.Windows.Forms.LinkArea(enterCredentialsMessage.IndexOf(Messages.MY_CITRIX_CREDENTIALS_URL), Messages.MY_CITRIX_CREDENTIALS_URL.Length);
         }
 
         public override string Text { get { return Messages.BUGTOOL_PAGE_DESTINATION_TEXT; } }
@@ -273,9 +277,10 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
         #endregion
 
-        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        private void enterCredentialsLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Program.OpenURL(e.LinkText);
+            this.enterCredentialsLinkLabel.LinkVisited = true;
+            Program.OpenURL(Messages.MY_CITRIX_CREDENTIALS_URL);
         }
     }
 }

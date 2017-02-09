@@ -5971,7 +5971,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>Authentication with [Citrix] Insight Services is required in order to enable this feature. [XenCenter] detected a previous successful authentication for one of other connected pools. You can choose to re-use it or authenticate again.</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
-    <value>Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see http://www.citrix.com/welcome.html). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
+    <value>Authentication with [Citrix] Insight Services is required in order to enable this feature. Please register by providing MyCitrix credentials (see {0}). These credentials will only be used to obtain an upload token and will not be stored on this machine or on your server.</value>
   </data>
   <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
     <value>OK, Enable Health Check</value>
@@ -7835,6 +7835,9 @@ To learn more about the [XenServer] Live VDI Migration feature or to start a [Xe
   </data>
   <data name="MUST_SELECT_NETWORK" xml:space="preserve">
     <value>You must select a network</value>
+  </data>
+  <data name="MY_CITRIX_CREDENTIALS_URL" xml:space="preserve">
+    <value>http://www.citrix.com/welcome.html</value>
   </data>
   <data name="NAME" xml:space="preserve">
     <value>Name</value>
@@ -11021,6 +11024,9 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="STATUS_FILTER_IN_PROGRESS" xml:space="preserve">
     <value>In progress</value>
+  </data>
+  <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
+    <value>Enter your MyCitrix credentials (see {0}). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server.</value>
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>There was an error while packaging the server status report. Only a partial report may be available</value>
