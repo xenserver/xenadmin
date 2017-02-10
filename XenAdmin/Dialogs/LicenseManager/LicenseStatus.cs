@@ -97,14 +97,30 @@ namespace XenAdmin.Dialogs
             SetDefaultOptions();
             XenObject = xo;
 
-            if (xo is Host)
-                LicencedHost = xo as Host;
-            if (xo is Pool)
+            if (XenObject is Host)
+                LicencedHost = XenObject as Host;
+            if (XenObject is Pool)
             {
-                Pool pool = xo as Pool;
+                Pool pool = XenObject as Pool;
                 SetMinimumLicenseValueHost(pool);
             }
+
+            serverTime.ServerTimeObtained -= ServerTimeUpdatedEventHandler;
             serverTime.ServerTimeObtained += ServerTimeUpdatedEventHandler;
+            
+            if (XenObject != null)
+            {
+                XenObject.Connection.ConnectionStateChanged -= Connection_ConnectionStateChanged;
+                XenObject.Connection.ConnectionStateChanged += Connection_ConnectionStateChanged;
+            }
+        }
+
+        void Connection_ConnectionStateChanged(object sender, EventArgs e)
+        {
+            if (LicencedHost != null)
+            {
+                TriggerStatusUpdatedEvent();
+            }
         }
 
         private void SetMinimumLicenseValueHost(Pool pool)
@@ -397,6 +413,12 @@ namespace XenAdmin.Dialogs
             {
                 if(disposing)
                 {
+                    if (serverTime != null)
+                        serverTime.ServerTimeObtained -= ServerTimeUpdatedEventHandler;
+
+                    if (XenObject != null && XenObject.Connection != null)
+                        XenObject.Connection.ConnectionStateChanged -= Connection_ConnectionStateChanged;
+
                     Events.Dispose();
                 }
                 disposed = true;
