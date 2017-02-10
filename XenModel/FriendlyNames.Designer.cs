@@ -538,6 +538,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator Status.
+        /// </summary>
+        public static string Description_host_system_status_xspvscache {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-xspvscache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to YUM repository information and RPM package database listing.
         /// </summary>
         public static string Description_host_system_status_yum {
@@ -1668,6 +1677,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_xscontainer {
             get {
                 return ResourceManager.GetString("Label-host.system_status-xscontainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator Status.
+        /// </summary>
+        public static string Label_host_system_status_xspvscache {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-xspvscache", resourceCulture);
             }
         }
         
