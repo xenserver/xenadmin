@@ -268,7 +268,7 @@ namespace XenAPI
             return false;
         }
 
-        public static int getResultCode(string line)
+        private static int getResultCode(string line)
         {
             string[] bits = line.Split(new char[] { ' ' });
             return (bits.Length < 2 ? 0 : Int32.Parse(bits[1]));
@@ -490,7 +490,7 @@ namespace XenAPI
 
                 string basicField = fields.Find(str => str.StartsWith("Proxy-Authenticate: Basic"));
                 string digestField = fields.Find(str => str.StartsWith("Proxy-Authenticate: Digest"));
-                if (CurrentProxyAuthenticationMethod == HTTP.ProxyAuthenticationMethod.Basic)
+                if (CurrentProxyAuthenticationMethod == ProxyAuthenticationMethod.Basic)
                 {
                     if (string.IsNullOrEmpty(basicField))
                         throw new ProxyServerAuthenticationException("Basic authentication scheme is not supported/enabled by the proxy server.");
@@ -501,7 +501,7 @@ namespace XenAPI
                     WriteLine(authenticationFieldReply, stream);
                     WriteLine(stream);
                 }
-                else if (CurrentProxyAuthenticationMethod == HTTP.ProxyAuthenticationMethod.Digest)
+                else if (CurrentProxyAuthenticationMethod == ProxyAuthenticationMethod.Digest)
                 {
                     if (string.IsNullOrEmpty(digestField))
                         throw new ProxyServerAuthenticationException("Digest authentication scheme is not supported/enabled by the proxy server.");
