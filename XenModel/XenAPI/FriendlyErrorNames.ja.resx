@@ -1104,7 +1104,7 @@
     <value>スナップショット VDI のスナップショットを作成できません。サポートされない処理です。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_169" xml:space="preserve">
-    <value>EqualLogic アレイへの接続に失敗しました。ユーザー名/パスワードが不正なため拒否されました。</value>
+    <value>Equallogic アレイに接続できませんでした。ユーザー名とパスワードを確認してください。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_170" xml:space="preserve">
     <value>EqualLogic ターゲットのバージョンがサポートされていません。</value>
@@ -1275,7 +1275,7 @@
     <value>アダプタ ID がありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_433" xml:space="preserve">
-    <value>ユーザー名がありません。</value>
+    <value>ユーザー名がありません</value>
   </data>
   <data name="SR_BACKEND_FAILURE_434" xml:space="preserve">
     <value>パスワードがありません。</value>
@@ -1618,6 +1618,9 @@
   </data>
   <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
     <value>アップデートの事前チェックに失敗しました。競合するアップデートがあります。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED" xml:space="preserve">
+    <value>アップデートの事前チェックに失敗しました。このホストには、RPM パッケージの検証に必要な GPG キーがありません。</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
     <value>アップデートの事前チェックに失敗しました。必要な空き領域がサーバーにありません。</value>

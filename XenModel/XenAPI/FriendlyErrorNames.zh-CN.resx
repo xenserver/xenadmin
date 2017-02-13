@@ -1104,7 +1104,7 @@
     <value>无法创建快照 VDI 的快照，不支持的操作</value>
   </data>
   <data name="SR_BACKEND_FAILURE_169" xml:space="preserve">
-    <value>无法连接 Equallogic 阵列，权限遭拒绝；用户名/密码无效</value>
+    <value>无法连接到 Equallogic 阵列。请检查您的用户名和密码。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_170" xml:space="preserve">
     <value>不支持的 Equallogic 目标版本</value>
@@ -1416,7 +1416,7 @@
     <value>无法添加 iSCSI 设备</value>
   </data>
   <data name="SR_BACKEND_FAILURE_68" xml:space="preserve">
-    <value>登录 iSCSI 目标失败。请检查用户名和密码。</value>
+    <value>登录 iSCSI 目标失败。请检查您的用户名和密码。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_69" xml:space="preserve">
     <value>注销 iSCSI 目标失败</value>
@@ -1618,6 +1618,9 @@
   </data>
   <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
     <value>更新预检查阶段失败: 存在冲突的更新。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED" xml:space="preserve">
+    <value>更新预检查阶段失败: RPM 包验证所需的 GPG 密钥在主机上不存在。</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
     <value>更新预检查阶段失败: 服务器空间不足。</value>

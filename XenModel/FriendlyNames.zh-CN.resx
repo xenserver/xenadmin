@@ -1104,7 +1104,7 @@
     <value>主机“{0}”上的许可证将在 {1} 到期。</value>
   </data>
   <data name="Message.body-license_not_available" xml:space="preserve">
-    <value>许可证服务器没有为 {0} 颁发许可证，因为没有指定类型的许可证。</value>
+    <value>请求的许可证不适用于 {0}。</value>
   </data>
   <data name="Message.body-license_server_connected" xml:space="preserve">
     <value>服务器 {0} 已成功连接到许可证服务器。</value>
@@ -1213,6 +1213,24 @@
   </data>
   <data name="Message.body-vmpp_xapi_logon_failure" xml:space="preserve">
     <value>无法登录 XAPI 会话。</value>
+  </data>
+  <data name="Message.body-vmss_license_error" xml:space="preserve">
+    <value>正在使用的 XenServer 许可证不允许您使用计划快照功能。</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
+    <value>快照计划“{0}”失败，因为无法创建快照。</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_lock_failed" xml:space="preserve">
+    <value>当前无法创建快照，因为已在此池中执行计划快照操作。在同一池中一次只能运行一项计划快照操作。请检查此池中的快照计划，确保其不冲突。</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_missed_event" xml:space="preserve">
+    <value>当前无法创建快照，因为已在执行此策略计划的快照操作。请稍后再试。</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_succeeded" xml:space="preserve">
+    <value>快照计划成功</value>
+  </data>
+  <data name="Message.body-vmss_xapi_logon_failure" xml:space="preserve">
+    <value>快照计划 XAPI 登录失败</value>
   </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
     <value>池“{0}”无法从“{1}”的 WLB 中检索放置建议。</value>
@@ -1438,6 +1456,24 @@
   </data>
   <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
     <value>VMPP XAPI 登录失败</value>
+  </data>
+  <data name="Message.name-vmss_license_error" xml:space="preserve">
+    <value>快照计划失败: 计划的快照的许可证数量不足</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_failed" xml:space="preserve">
+    <value>快照计划失败</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_lock_failed" xml:space="preserve">
+    <value>快照计划失败</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_missed_event" xml:space="preserve">
+    <value>快照计划失败</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_succeeded" xml:space="preserve">
+    <value>快照计划成功</value>
+  </data>
+  <data name="Message.name-vmss_xapi_logon_failure" xml:space="preserve">
+    <value>快照计划 XAPI 登录失败</value>
   </data>
   <data name="Message.name-wlb_consultation_failed" xml:space="preserve">
     <value>WLB 咨询失败</value>
@@ -1915,5 +1951,14 @@
   </data>
   <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
     <value>“{0}”写入延迟</value>
+  </data>
+  <data name="Label-pvsaccelerator" xml:space="preserve">
+    <value>PVS 加速器</value>
+  </data>
+  <data name="Label-xenserver-measured-boot" xml:space="preserve">
+    <value>测量启动</value>
+  </data>
+  <data name="Label-xscontainer" xml:space="preserve">
+    <value>容器管理</value>
   </data>
 </root>
