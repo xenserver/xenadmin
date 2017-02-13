@@ -84,40 +84,26 @@ namespace XenAdmin.Dialogs.OptionsPages
             ProxyPortTextBox.Text = Properties.Settings.Default.ProxyPort.ToString();
             BypassForServersCheckbox.Checked = Properties.Settings.Default.BypassProxyForServers;
 
-            if (Registry.ProxyAuthenticationEnabled)
-            {
-                AuthenticationCheckBox.Checked = Properties.Settings.Default.ProvideProxyAuthentication;
+            AuthenticationCheckBox.Checked = Properties.Settings.Default.ProvideProxyAuthentication;
                 
-                switch ((HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod)
-                {
-                    case HTTP.ProxyAuthenticationMethod.Basic:
-                        BasicRadioButton.Checked = true;
-                        break;
-                    case HTTP.ProxyAuthenticationMethod.Digest:
-                        DigestRadioButton.Checked = true;
-                        break;
-                    default:
-                        DigestRadioButton.Checked = true;
-                        break;
-                }
-
-                // checks for empty default username/password which starts out unencrypted
-                string protectedUsername = Properties.Settings.Default.ProxyUsername;
-                ProxyUsernameTextBox.Text = string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername);
-                string protectedPassword = Properties.Settings.Default.ProxyPassword;
-                ProxyPasswordTextBox.Text = string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword);
-            }
-            else
+            switch ((HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod)
             {
-                // hide controls
-                AuthenticationCheckBox.Visible = false;
-                ProxyUsernameLabel.Visible = false;
-                ProxyUsernameTextBox.Visible = false;
-                ProxyPasswordLabel.Visible = false;
-                ProxyPasswordTextBox.Visible = false;
-                AuthenticationMethodPanel.Visible = false;
-                AuthenticationMethodLabel.Visible = false;
+                case HTTP.ProxyAuthenticationMethod.Basic:
+                    BasicRadioButton.Checked = true;
+                    break;
+                case HTTP.ProxyAuthenticationMethod.Digest:
+                    DigestRadioButton.Checked = true;
+                    break;
+                default:
+                    DigestRadioButton.Checked = true;
+                    break;
             }
+
+            // checks for empty default username/password which starts out unencrypted
+            string protectedUsername = Properties.Settings.Default.ProxyUsername;
+            ProxyUsernameTextBox.Text = string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyUsername);
+            string protectedPassword = Properties.Settings.Default.ProxyPassword;
+            ProxyPasswordTextBox.Text = string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(Properties.Settings.Default.ProxyPassword);
             
             ConnectionTimeoutNud.Value = Properties.Settings.Default.ConnectionTimeout / 1000;
 
@@ -242,17 +228,14 @@ namespace XenAdmin.Dialogs.OptionsPages
             if (ProxyAddressTextBox.Text != Properties.Settings.Default.ProxyAddress && !string.IsNullOrEmpty(ProxyAddressTextBox.Text))
                 Properties.Settings.Default.ProxyAddress = ProxyAddressTextBox.Text;
 
-            if (Registry.ProxyAuthenticationEnabled)
-            {
-                Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(ProxyUsernameTextBox.Text);
-                Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(ProxyPasswordTextBox.Text);
-                Properties.Settings.Default.ProvideProxyAuthentication = AuthenticationCheckBox.Checked;
+            Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(ProxyUsernameTextBox.Text);
+            Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(ProxyPasswordTextBox.Text);
+            Properties.Settings.Default.ProvideProxyAuthentication = AuthenticationCheckBox.Checked;
 
-                HTTP.ProxyAuthenticationMethod new_auth_method = BasicRadioButton.Checked ?
-                    HTTP.ProxyAuthenticationMethod.Basic : HTTP.ProxyAuthenticationMethod.Digest;
-                if (Properties.Settings.Default.ProxyAuthenticationMethod != (int)new_auth_method)
-                    Properties.Settings.Default.ProxyAuthenticationMethod = (int)new_auth_method;
-            }
+            HTTP.ProxyAuthenticationMethod new_auth_method = BasicRadioButton.Checked ?
+                HTTP.ProxyAuthenticationMethod.Basic : HTTP.ProxyAuthenticationMethod.Digest;
+            if (Properties.Settings.Default.ProxyAuthenticationMethod != (int)new_auth_method)
+                Properties.Settings.Default.ProxyAuthenticationMethod = (int)new_auth_method;
 
             try
             {
