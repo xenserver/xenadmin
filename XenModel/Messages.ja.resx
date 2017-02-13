@@ -1737,7 +1737,8 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>ストレージ スループット アラート</value>
   </data>
   <data name="ALERT_ALARM_STORAGE_DESCRIPTION" xml:space="preserve">
-    <value>ストレージ リポジトリ '{1}' 上の {0} の読み取りおよび書き込み合計スループットが直近の {3} で {2} です。合計スループットが {4} を超えるとアラートが送信されます。</value>
+    <value>ストレージ リポジトリ '{1}' 上の {0} の読み取りおよび書き込み合計スループットが直近の {3} で {2} です。
+合計スループットが {4} を超えるとアラートが送信されます。</value>
   </data>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(最初の {0} 項目を表示しています)</value>
@@ -1956,11 +1957,17 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="ASSIGNED_PROTECTION_POLICY" xml:space="preserve">
     <value>保護ポリシーが割り当てられました。</value>
   </data>
+  <data name="ASSIGNED_VMSS_POLICY" xml:space="preserve">
+    <value>スナップショット スケジュールが割り当てられました。</value>
+  </data>
   <data name="ASSIGNED_VM_APPLIANCE" xml:space="preserve">
     <value>vApp が割り当てられました。</value>
   </data>
   <data name="ASSIGNING_PROTECTION_POLICY" xml:space="preserve">
     <value>保護ポリシーを割り当てています...</value>
+  </data>
+  <data name="ASSIGNING_VMSS_POLICY" xml:space="preserve">
+    <value>スナップショット スケジュールを割り当てています...</value>
   </data>
   <data name="ASSIGNING_VM_APPLIANCE" xml:space="preserve">
     <value>vApp を割り当てています...</value>
@@ -1979,6 +1986,15 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="ASSIGN_PROTECTION_POLICY_NOAMP" xml:space="preserve">
     <value>VM 保護ポリシーの割り当て...</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
+    <value>スナップショット スケジュールへの VM の割り当て(&amp;O)</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
+    <value>スナップショット スケジュールへの VM の割り当て</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
+    <value>スナップショット スケジュールへの VM の割り当て...</value>
   </data>
   <data name="ASSIGN_VMS_TO_VAPP" xml:space="preserve">
     <value>vApp '{0}' への VM の割り当て</value>
@@ -2468,6 +2484,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>サーバーのパスワードの変更...</value>
   </data>
+  <data name="CHANGE_VMSS_POLICY" xml:space="preserve">
+    <value>スナップショット スケジュールへの VM の割り当て</value>
+  </data>
   <data name="CHANGE_VMS_APPLIANCE" xml:space="preserve">
     <value>vApp への VM の割り当て</value>
   </data>
@@ -2493,6 +2512,14 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>VM '{0}' には保護ポリシー '{1}' が割り当てられています。
     
 この VM にポリシー '{2}' を割り当て直しますか?</value>
+  </data>
+  <data name="CHANGE_VMS_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
+    <value>選択した VM の中にほかのスナップショット スケジュールが割り当てられているものがあります。
+これらの VM にスケジュール '{0}' を割り当て直しますか?</value>
+  </data>
+  <data name="CHANGE_VM_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
+    <value>VM '{0}' にはスナップショット スケジュール '{1}' が割り当てられています。
+この VM にスケジュール '{2}' を割り当て直しますか?</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>VM 移行状態のチェック</value>
@@ -2559,6 +2586,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CHOOSE_VMS_VMPP_RUBRIC" xml:space="preserve">
     <value>保護ポリシーに追加する VM のチェックボックスをオンにして、ポリシーから削除する VM のチェックボックスをオフにします。</value>
+  </data>
+  <data name="CHOOSE_VMS_VMSS_RUBRIC" xml:space="preserve">
+    <value>スナップショット スケジュールに追加する VM のチェックボックスをオンにして、スケジュールから削除する VM のチェックボックスをオフにします。</value>
   </data>
   <data name="CLEAR_SEARCH" xml:space="preserve">
     <value>検索のクリア</value>
@@ -3450,6 +3480,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="CREATED_VMPP" xml:space="preserve">
     <value>VM 保護ポリシー '{0}' が作成されました。</value>
   </data>
+  <data name="CREATED_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール '{0}' が作成されました。</value>
+  </data>
   <data name="CREATED_VM_APPLIANCE" xml:space="preserve">
     <value>vApp '{0}' が作成されました。</value>
   </data>
@@ -3525,6 +3558,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="CREATING_VMPP" xml:space="preserve">
     <value>VM 保護ポリシー '{0}' を作成しています...</value>
   </data>
+  <data name="CREATING_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール '{0}' を作成しています...</value>
+  </data>
   <data name="CREATING_VM_APPLIANCE" xml:space="preserve">
     <value>vApp '{0}' を作成しています...</value>
   </data>
@@ -3572,6 +3608,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   </data>
   <data name="CURRENT_POLICY" xml:space="preserve">
     <value>現在のポリシー</value>
+  </data>
+  <data name="CURRENT_SCHEDULE" xml:space="preserve">
+    <value>現在のスケジュール</value>
   </data>
   <data name="CURRENT_VAPP" xml:space="preserve">
     <value>現在の vApp</value>
@@ -3750,6 +3789,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DELETED_VMPP" xml:space="preserve">
     <value>VM 保護ポリシーが削除されました。</value>
   </data>
+  <data name="DELETED_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュールが削除されました。</value>
+  </data>
   <data name="DELETED_VM_APPLIANCES" xml:space="preserve">
     <value>vApp が削除されました。</value>
   </data>
@@ -3889,6 +3931,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DELETING_VMPP" xml:space="preserve">
     <value>VM 保護ポリシー '{0}' を削除しています</value>
   </data>
+  <data name="DELETING_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール'{0}' を削除しています</value>
+  </data>
   <data name="DELETING_VM_APPLIANCE" xml:space="preserve">
     <value>vApp '{0}' を削除しています</value>
   </data>
@@ -3979,6 +4024,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DISABLED_VMPP" xml:space="preserve">
     <value>VM 保護ポリシー '{0}' が無効になりました。</value>
   </data>
+  <data name="DISABLED_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール '{0}' が無効になりました。</value>
+  </data>
   <data name="DISABLE_HA" xml:space="preserve">
     <value>高可用性の無効化</value>
   </data>
@@ -4020,6 +4068,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   </data>
   <data name="DISABLING_VMPP" xml:space="preserve">
     <value>VM 保護ポリシー '{0}' を無効にしています...</value>
+  </data>
+  <data name="DISABLING_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール '{0}' を無効にしています...</value>
   </data>
   <data name="DISABLING_WLB" xml:space="preserve">
     <value>ワークロード バランスを一時停止しています </value>
@@ -4734,7 +4785,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>アラート メール</value>
   </data>
   <data name="EMAIL_ALERTS_TITLE" xml:space="preserve">
-    <value>VM 保護アラートの通知メールの構成</value>
+    <value>ポリシー アラートの通知メールの構成</value>
   </data>
   <data name="EMAIL_OPTIONS" xml:space="preserve">
     <value>メール オプション</value>
@@ -4753,6 +4804,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="ENABLED_VMPP" xml:space="preserve">
     <value>VM 保護ポリシー '{0}' が有効になりました。</value>
+  </data>
+  <data name="ENABLED_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール '{0}' が有効になりました。</value>
   </data>
   <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
     <value>高可用性の有効化(&amp;E)...</value>
@@ -4792,6 +4846,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="ENABLING_VMPP" xml:space="preserve">
     <value>VM 保護ポリシー '{0}' を有効にしています...</value>
+  </data>
+  <data name="ENABLING_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール '{0}' を有効にしています...</value>
   </data>
   <data name="ENABLING_WLB" xml:space="preserve">
     <value>ワークロード バランスを再開しています </value>
@@ -5409,9 +5466,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FINISH_PAGE_VMNAME" xml:space="preserve">
     <value>VM 名:</value>
   </data>
-  <data name="FINISH_TITLE" xml:space="preserve">
-    <value>新規 VM 保護ポリシーの作成</value>
-  </data>
   <data name="FLOPPY_DRIVE_LABEL_NUMBERED" xml:space="preserve">
     <value>フロッピー ドライブ {0}:</value>
   </data>
@@ -5546,6 +5600,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="GENERAL_PAGE_VMPP_SETTINGS" xml:space="preserve">
     <value>VM 保護ポリシーの名前と、任意で説明を入力します。</value>
+  </data>
+  <data name="GENERAL_PAGE_VMSS_SETTINGS" xml:space="preserve">
+    <value>スナップショット スケジュールの名前と、任意で説明を入力します。</value>
   </data>
   <data name="GENERAL_PAGE_VM_APPLIANCE_SETTINGS" xml:space="preserve">
     <value>vApp の名前と、任意で説明を入力します。</value>
@@ -5712,17 +5769,10 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>このプールの VM の高可用性再起動の優先度、再起動順序、および起動間隔の構成</value>
   </data>
-  <data name="HAWIZ_SUMMARY_NEW" xml:space="preserve">
-    <value>ハートビート SR:   {0}
 
-フェイルオーバー トレランス:   {1}
 
-再起動:   {2}
 
-可能なら再起動:   {3}
 
-再起動しない:   {4}</value>
-  </data>
   <data name="HA_ASSIGN_PRIORITIES_MIXED_PROTECTION_LEVELS" xml:space="preserve">
     <value>(複数の値)</value>
   </data>
@@ -8730,6 +8780,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
 
 この操作をキャンセルして、すべてのサーバーに最新のサプリメンタル パックをインストールしてからプールを作成することを強くお勧めします。</value>
   </data>
+  <data name="NEW_SCHEDULE" xml:space="preserve">
+    <value>新しいスケジュール(&amp;N)...</value>
+  </data>
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>新しい検索</value>
   </data>
@@ -8757,6 +8810,18 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="NEW_UPDATE_AVAILABLE" xml:space="preserve">
     <value>新しいアップデートのリリース - {0}</value>
+  </data>
+  <data name="NEW_VMPP_PAGE_TEXT" xml:space="preserve">
+    <value>このウィザードでは、VM を定期的なスナップショット作成で保護するための VM 保護ポリシーを定義します。</value>
+  </data>
+  <data name="NEW_VMPP_PAGE_TEXT_MORE" xml:space="preserve">
+    <value>まず、作成するポリシーの名前と説明 (オプション) を入力して、[次へ] をクリックします。</value>
+  </data>
+  <data name="NEW_VMSS_PAGE_TEXT" xml:space="preserve">
+    <value>このウィザードを使用して、自動で定期的な VM スナップショット ジョブを作成するスナップショット スケジュールを定義します。</value>
+  </data>
+  <data name="NEW_VMSS_PAGE_TEXT_MORE" xml:space="preserve">
+    <value>まず、作成するスケジュールの名前と説明 (オプション) を入力して、[次へ] をクリックします。</value>
   </data>
   <data name="NEW_VM_APPLIANCE" xml:space="preserve">
     <value>新規 vApp(&amp;N)...</value>
@@ -8917,9 +8982,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
     <value>ローカル ディスク上の VM によって、ディスクの再パーティションが阻止されます。
 
- [XenServer] [BRANDING_VERSION_7_0] では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
+ [XenServer] [BRANDING_VERSION_7_0] およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
 
-ただし、ローカル ストレージに VM が存在するため、現在のパーティション スキーマが保持されます。 [XenServer] [BRANDING_VERSION_7_0] にアップグレードして再パーティションを行うには、まず VM をローカル ストレージから移動する必要があります。</value>
+ただし、ローカル ストレージに VM が存在するため、現在のパーティション スキーマが保持されます。 [XenServer] [BRANDING_VERSION_7_0] およびそれ以降にアップグレードして再パーティションを行うには、まず VM をローカル ストレージから移動する必要があります。</value>
   </data>
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
     <value>{0}: ローカル ディスク上の VM によってディスクの再パーティションが阻止されます。</value>
@@ -8927,7 +8992,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
     <value>ローカル ストレージのディスク サイズによって、ディスクの再パーティションが阻止されます。
 
-[XenServer] [BRANDING_VERSION_7_0] では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
+[XenServer] [BRANDING_VERSION_7_0] およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
 
 ただし、ディスクの容量が不足しているため、再パーティションは行われず、現在のパーティション スキーマが保持されます。</value>
   </data>
@@ -9297,6 +9362,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>このサーバーでは、自動アップデートのライセンスが有効ではありません</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE" xml:space="preserve">
+    <value>サーバーに到達できません</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>アップデート適用済み</value>
   </data>
@@ -9304,12 +9372,16 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>適用されないアップデート</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
-    <value>アップデートする 1つまたは複数のプール、またはスタンドアロン ホストを選択してください。
+    <value>アップデートする 1つまたは複数のプール、またはスタンドアロン サーバーを選択してください。
 グレー表示されたサーバーは自動アップデートでアップデートできません。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT" xml:space="preserve">
-    <value>利用可能なサーバー一覧から 1つまたは複数のサーバーを選択します。
-選択されたアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
+    <value>選択されたアップデートを適用する 1つまたは複数のサーバーを選択します。
+このアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION" xml:space="preserve">
+    <value>選択されたアップデートを適用する 1つまたは複数のプール、またはスタンドアロン サーバーを選択します。
+このアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
     <value>このサーバーを自動アップデートでアップデートすることはできません</value>
@@ -9591,6 +9663,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="POLICY_NAME" xml:space="preserve">
     <value>ポリシー名</value>
+  </data>
+  <data name="POLICY_NAME_FIELD_TEXT" xml:space="preserve">
+    <value>ポリシー名(&amp;M):</value>
   </data>
   <data name="POLICY_NAME_TITLE" xml:space="preserve">
     <value>このポリシーの名前</value>
@@ -9957,6 +10032,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="RBAC_WARNING_VMPP" xml:space="preserve">
     <value>{0} ユーザーは VM 保護ポリシーを作成できません。適切な権限のあるアカウントでログインして再試行してください。</value>
   </data>
+  <data name="RBAC_WARNING_VMSS" xml:space="preserve">
+    <value>{0} ユーザーがスナップショット スケジュール を作成できません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
+  </data>
   <data name="RBAC_WARNING_VM_APPLIANCE" xml:space="preserve">
     <value>{0} ユーザーは vApp を作成できません。必要な権限を持つユーザーでログインし直して再試行してください。</value>
   </data>
@@ -10030,6 +10108,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="REMOVED_VMS_FROM_POLICY" xml:space="preserve">
     <value>VM 保護ポリシーから削除されました</value>
   </data>
+  <data name="REMOVED_VMS_FROM_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュールから削除されました</value>
+  </data>
   <data name="REMOVE_CRASHDUMP_FILES" xml:space="preserve">
     <value>クラッシュ ダンプ ファイルの削除</value>
   </data>
@@ -10099,11 +10180,17 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="REMOVE_VMS_FROM_POLICY" xml:space="preserve">
     <value>VM 保護ポリシー '{1}' からの VM の削除</value>
   </data>
+  <data name="REMOVE_VMS_FROM_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール '{1}' から VM を削除する</value>
+  </data>
   <data name="REMOVE_VM_FROM_APPLIANCE" xml:space="preserve">
     <value>vApp '{1}' からの VM '{0}' の削除</value>
   </data>
   <data name="REMOVE_VM_FROM_POLICY" xml:space="preserve">
     <value>VM 保護ポリシー '{1}' からの VM '{0}' の削除</value>
+  </data>
+  <data name="REMOVE_VM_FROM_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュール '{1}' から VM '{0}' を削除する</value>
   </data>
   <data name="REMOVING_FROM_FOLDER" xml:space="preserve">
     <value>フォルダからの削除</value>
@@ -10122,6 +10209,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="REMOVING_VMS_FROM_POLICY" xml:space="preserve">
     <value>VM 保護ポリシーから削除しています</value>
+  </data>
+  <data name="REMOVING_VMS_FROM_VMSS" xml:space="preserve">
+    <value>スナップショット スケジュールから削除しています</value>
   </data>
   <data name="RENAMED" xml:space="preserve">
     <value>名前が変更されました</value>
@@ -10330,7 +10420,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>ポリシー '{0}' の実行中</value>
   </data>
   <data name="RUN_POLICY_STARTED" xml:space="preserve">
-    <value>VM 保護ポリシーが開始されました</value>
+    <value>ポリシーの開始</value>
   </data>
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
     <value>事前チェックの実行(&amp;R)</value>
@@ -10394,12 +10484,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="SCAN_IN_PROGRESS_TOOLTIP" xml:space="preserve">
     <value>この SR に対するスキャンは既に実行されています</value>
-  </data>
-  <data name="SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
-    <value>プール '{0}' に定義されている VM 保護ポリシー ({2} 項目中 {1} 項目の VM が保護されています):</value>
-  </data>
-  <data name="SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
-    <value>サーバー '{0}' に定義されている VM 保護ポリシー ({2} 項目中 {1} 項目の VM が保護されています):</value>
   </data>
   <data name="SEARCHBOX_TOOLTIP" xml:space="preserve">
     <value>リソース ペイン内のリソースを検索します</value>
@@ -10702,6 +10786,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>＜</value>
   </data>
+  <data name="SMB_ISO_STORAGE_ALREADY_ATTACHED" xml:space="preserve">
+    <value>この SMB ISO ストレージは既に '{0}' に接続されています</value>
+  </data>
   <data name="SNAPSHOTS" xml:space="preserve">
     <value>スナップショット</value>
   </data>
@@ -10739,7 +10826,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>スナップショットを削除しています...</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY" xml:space="preserve">
-    <value>スケジュール</value>
+    <value>スナップショット スケジュール</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY_TITLE" xml:space="preserve">
     <value>スナップショットの作成日時</value>
@@ -11255,6 +11342,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="THE_SNAPSHOT" xml:space="preserve">
     <value>スナップショット '{0}'</value>
+  </data>
+  <data name="THIS_VM_IS_IN_VMSS" xml:space="preserve">
+    <value>この VM は現在スナップショット スケジュール '{0}' の一部です</value>
+  </data>
+  <data name="THIS_VM_IS_NOT_IN_VMSS" xml:space="preserve">
+    <value>この VM は現在スナップショット スケジュールの一部ではありません</value>
   </data>
   <data name="THIS_VM_IS_NOT_PROTECTED" xml:space="preserve">
     <value>現在、この VM は VM 保護ポリシーで保護されていません。</value>
@@ -12002,6 +12095,13 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
 
 下のボタンを使用して、役割ベースのアクセス制御機能や [XenServer] の試用についての情報を参照できます。</value>
   </data>
+  <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
+    <value>VM の定期的なスナップショット作成を有効にするには、[XenServer] ライセンスをアップグレードします。VM の定期的なスナップショット作成機能で、重要な VM のスナップショットを自動で作成できます。</value>
+  </data>
+  <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
+    <value>
+下のボタンを使用して、[XenServer] VM の定期的なスナップショット機能や XenServer の試用についての情報を参照できます。</value>
+  </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>vApp 機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能では、いくつかの VM を単一の仮想アプライアンスとしてグループ化して、それらを一緒に起動したり停止したりできます。また、プライマリの本稼働サイトに障害が発生した場合に、それらの VM を障害回復 (DR) サイトに簡単にフェイルオーバーできます。</value>
   </data>
@@ -12203,6 +12303,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="VIEW_TAG_MENU_OPTION" xml:space="preserve">
     <value>タグを表示...</value>
   </data>
+  <data name="VIEW_VMSS_POLICIES" xml:space="preserve">
+    <value>スナップショット スケジュールの表示</value>
+  </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
     <value>仮想ネットワークへの変更は、VM の再起動後に反映されます。</value>
   </data>
@@ -12281,14 +12384,116 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="VMPP" xml:space="preserve">
     <value>VM 保護ポリシー</value>
   </data>
+  <data name="VMPP_DIALOG_TEXT" xml:space="preserve">
+    <value>VM を保護するポリシーを作成して、定期的にスナップショットを作成したり、CIFS や NFS の共有にスナップショットをアーカイブしたりできます。</value>
+  </data>
+  <data name="VMPP_DIALOG_TITLE" xml:space="preserve">
+    <value>VM 保護ポリシー</value>
+  </data>
+  <data name="VMPP_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
+    <value>VM 保護ジョブのアラートをメールで送信する(&amp;E)</value>
+  </data>
+  <data name="VMPP_EMAIL_PAGE_TEXT" xml:space="preserve">
+    <value>XenServer での VM 保護ジョブに関するアラート (VM スナップショットが作成またはアーカイブされた場合や、スナップショットまたはアーカイブが失敗した場合など) が生成されたときに、通知メールが送信されるように設定できます。</value>
+  </data>
+  <data name="VMPP_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
+    <value>[完了] をクリックして新規 VM 保護ジョブを実行する(&amp;R)</value>
+  </data>
+  <data name="VMPP_FINISH_PAGE_TEXT" xml:space="preserve">
+    <value>VM 保護ポリシーの内容を確認します。設定内容を変更するには [前へ] をクリックし、このままポリシーを作成するには [完了] をクリックします。</value>
+  </data>
+  <data name="VMPP_FINISH_TITLE" xml:space="preserve">
+    <value>新規ポリシーの作成</value>
+  </data>
+  <data name="VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
+    <value>プール '{0}' に定義されている VM 保護ポリシー ({2} 項目中 {1} 項目の VM が保護されています):</value>
+  </data>
+  <data name="VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
+    <value>サーバー '{0}' に定義されている VM 保護ポリシー ({2} 項目中 {1} 項目の VM が保護されています):</value>
+  </data>
+  <data name="VMPP_TYPE" xml:space="preserve">
+    <value>保護ポリシー</value>
+  </data>
+  <data name="VMPP_WIZARD_TITLE" xml:space="preserve">
+    <value>新規 VM 保護ポリシー</value>
+  </data>
   <data name="VMS" xml:space="preserve">
     <value>VM</value>
+  </data>
+  <data name="VMSS_ALERT_DETAILS" xml:space="preserve">
+    <value>詳細:</value>
+  </data>
+  <data name="VMSS_ALERT_VM_ERROR_FORMAT" xml:space="preserve">
+    <value>{0}。{1}: {2}</value>
+  </data>
+  <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
+    <value>スナップショット スケジュール(&amp;U)...</value>
+  </data>
+  <data name="VMSS_DIALOG_TEXT" xml:space="preserve">
+    <value>VM のスナップショット スケジュールを作成する。</value>
+  </data>
+  <data name="VMSS_DIALOG_TITLE" xml:space="preserve">
+    <value>スナップショット スケジュール</value>
+  </data>
+  <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
+    <value>スナップショット スケジュール ジョブのアラートをメールで送信する(&amp;E)</value>
+  </data>
+  <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
+    <value>XenServer でスナップショット スケジュール ジョブに関するアラート (VM スナップショットが作成された場合や、スナップショット作成が失敗した場合など) が生成されたときに、通知メールが送信されるように設定できます。</value>
+  </data>
+  <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
+    <value>[完了] をクリックして新規スナップショット スケジュール処理を実行する(&amp;R)</value>
+  </data>
+  <data name="VMSS_FINISH_PAGE_TEXT" xml:space="preserve">
+    <value>スナップショット スケジュールの内容を確認します。設定内容を変更するには [前へ] をクリックし、このまま新規スケジュールを作成するには [完了] をクリックします。</value>
+  </data>
+  <data name="VMSS_FINISH_TITLE" xml:space="preserve">
+    <value>新規スケジュールの作成</value>
+  </data>
+  <data name="VMSS_MAIN_MENU" xml:space="preserve">
+    <value>VM のスナップショット スケジュール(&amp;H)...</value>
+  </data>
+  <data name="VMSS_NAME" xml:space="preserve">
+    <value>スケジュール名</value>
+  </data>
+  <data name="VMSS_NAME_FIELD_TEXT" xml:space="preserve">
+    <value>スケジュール名(&amp;M):</value>
+  </data>
+  <data name="VMSS_NAME_TITLE" xml:space="preserve">
+    <value>このスケジュールの名前</value>
+  </data>
+  <data name="VMSS_POLICY_SUMMARY" xml:space="preserve">
+    <value>ジョブ名:\r\n    {0}\r\n\r\n選択した VM:\r\n    {1}\r\n\r\nスナップショットの種類:\r\n    {2}\r\n\r\nスケジュール:\r\n    {3}\r\n</value>
+  </data>
+  <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
+    <value>プール '{0}' で定義されているスナップショット スケジュール ({2} 項目中 {1} 項目の VM がスケジュールされています):</value>
+  </data>
+  <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
+    <value>サーバー '{0}' に定義されているスナップショット スケジュール ({2} 項目中 {1} 項目の VM がスケジュールされています):</value>
+  </data>
+  <data name="VMSS_TYPE" xml:space="preserve">
+    <value>スケジュール</value>
+  </data>
+  <data name="VMSS_VMS" xml:space="preserve">
+    <value>スナップショット スケジュールの VM</value>
+  </data>
+  <data name="VMSS_VMS_TITLE" xml:space="preserve">
+    <value>スナップショット スケジュールを作成する VM を選択する</value>
+  </data>
+  <data name="VMSS_WIZARD_TITLE" xml:space="preserve">
+    <value>新規スナップショット スケジュール</value>
   </data>
   <data name="VMS_IN_POOL" xml:space="preserve">
     <value>プール '{0}' の VM:</value>
   </data>
   <data name="VMS_IN_SERVER" xml:space="preserve">
     <value>サーバー '{0}' の VM:</value>
+  </data>
+  <data name="VMS_MANY" xml:space="preserve">
+    <value>{0} 項目の VM</value>
+  </data>
+  <data name="VMS_ONE" xml:space="preserve">
+    <value>1 項目の VM</value>
   </data>
   <data name="VM_ALREADY_SUSPENDED" xml:space="preserve">
     <value>この VM は既に一時停止状態です。</value>
@@ -12490,6 +12695,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="VM_SHUT_DOWN" xml:space="preserve">
     <value>この VM はシャットダウン状態です。</value>
+  </data>
+  <data name="VM_SNAPSHOT_SCHEDULE_FAILED" xml:space="preserve">
+    <value>{0} ({1} 項目の VM で失敗)</value>
   </data>
   <data name="VM_SUCCESSFULLY_CREATED" xml:space="preserve">
     <value>VM が作成されました</value>

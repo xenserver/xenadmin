@@ -219,6 +219,9 @@
   <data name="UPSELL_LEARNMOREURL_RBAC" xml:space="preserve">
     <value>http://www.citrix.com/xenserver/le/features/rbac</value>
   </data>
+  <data name="UPSELL_LEARNMOREURL_VMSS" xml:space="preserve">
+    <value/>
+  </data>
   <data name="UPSELL_LEARNMOREURL_VM_APPLIANCES" xml:space="preserve">
     <value>http://www.citrix.com/xenserver/le/features/vapps</value>
   </data>
