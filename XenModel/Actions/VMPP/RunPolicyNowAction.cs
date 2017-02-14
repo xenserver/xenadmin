@@ -36,20 +36,20 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class RunPolicyNowAction : PureAsyncAction
+    public class RunPolicyNowAction<T> : PureAsyncAction where T : XenObject<T>
     {
-        private VMPP _vmpp;
-        public RunPolicyNowAction( VMPP vmpp)
-            : base(vmpp.Connection, string.Format(Messages.RUN_POLICY, vmpp.Name))
+        private IVMPolicy _policy;
+        public RunPolicyNowAction(IVMPolicy policy)
+            : base(policy.Connection, string.Format(Messages.RUN_POLICY, policy.Name))
         {
-            _vmpp = vmpp;
-            Pool = Helpers.GetPool(vmpp.Connection);
+            _policy = policy;
+            Pool = Helpers.GetPool(policy.Connection);
         }
 
         protected override void Run()
         {
-            Result = VMPP.protect_now(Session, _vmpp.opaque_ref);
-            Description = string.Format(Messages.RUN_POLICY_STARTED, _vmpp.Name);
+            Result = _policy.run_now(Session, _policy.opaque_ref);
+            Description = string.Format(Messages.RUN_POLICY_STARTED, _policy.Name);
         }
     }
 }

@@ -320,7 +320,7 @@ namespace XenAdmin
 
             if (vm.is_a_snapshot)
             {
-                if (vm.is_snapshot_from_vmpp)
+                if (vm.is_snapshot_from_vmpp || vm.is_vmss_snapshot)
                 {
                     if (vm.power_state == vm_power_state.Suspended)
                         return Icons.ScheduledSnapshotDiskMemory;

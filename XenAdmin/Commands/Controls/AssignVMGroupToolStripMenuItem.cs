@@ -79,11 +79,25 @@ namespace XenAdmin.Commands
 
             Array.Sort(groups);
 
-            for (int index = 0; index < groups.Length; index++)
+            for (int index = 0, offset = 0; index < groups.Length; index++)
             {
                 T group = groups[index];
-                var menuText = index < 9
-                    ? String.Format(Messages.DYNAMIC_MENUITEM_WITH_ACCESS_KEY, index + 1, group.Name)
+
+                /* do not add unsupported policies to the drop down for VMSS */
+                XenAPI.VMSS policy = group as VMSS;
+                if (policy != null && policy.policy_type == policy_backup_type.snapshot_with_quiesce)
+                {
+                    List<VM> vms = Command.GetSelection().AsXenObjects<VM>();
+                    bool doNotInclude = vms.Any(vm => !vm.allowed_operations.Contains(vm_operations.snapshot_with_quiesce));
+                    if (doNotInclude)
+                    {
+                        offset--;
+                        continue;
+                    }
+                }
+
+                var menuText = (index + offset) < 9
+                    ? String.Format(Messages.DYNAMIC_MENUITEM_WITH_ACCESS_KEY, (index + offset) + 1, group.Name)
                     : String.Format(Messages.DYNAMIC_MENUITEM_WITHOUT_ACCESS_KEY, group.Name);
 
                 var cmdGroup = new AssignGroupToVMCommand(Command.MainWindowCommandInterface, Command.GetSelection(), group, menuText);
@@ -296,6 +310,12 @@ namespace XenAdmin.Commands
     /// Class used for the benefit of visual studio's form designer which has trouble with generic controls
     /// </summary>
     internal sealed class AssignGroupToolStripMenuItemVMPP : AssignGroupToolStripMenuItem<VMPP>
+    { }
+
+    /// <summary>
+    /// Class used for the benefit of visual studio's form designer which has trouble with generic controls
+    /// </summary>
+    internal sealed class AssignGroupToolStripMenuItemVMSS : AssignGroupToolStripMenuItem<VMSS>
     { }
 
     /// <summary>

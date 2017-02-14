@@ -44,6 +44,8 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 {
     public partial class PolicyHistory : UserControl
     {
+        public Pool pool;
+
         public PolicyHistory()
         {
             InitializeComponent();
@@ -69,11 +71,36 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             }
         }
 
-        private VMPP _vmpp;
-        public void RefreshTab(VMPP vmpp)
+        private IVMPolicy _policy;
+        public void StartRefreshTab()
         {
-            _vmpp = vmpp;
-            if (_vmpp == null)
+            /* hoursFromNow has 3 possible values:
+                1) 0 -> top 10 messages (default)
+                2) 24 -> messages from past 24 Hrs
+                3) 7 * 24 -> messages from lst 7 days */
+
+            var hoursFromNow = 0;
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0: /* default value*/
+                    break;
+                case 1:
+                    hoursFromNow = 24;
+                    break;
+                case 2:
+                    hoursFromNow = 7 * 24;
+                    break;
+            }
+
+            PureAsyncAction action = _policy.getAlertsAction(_policy, hoursFromNow);
+            action.Completed += action_Completed;
+            action.RunAsync();
+        }
+
+        public void RefreshTab(IVMPolicy policy)
+        {
+            _policy = policy;
+            if (_policy == null)
             {
                 labelHistory.Text = "";
                 comboBox1.Enabled = false;
@@ -81,14 +108,14 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             else
             {
                 comboBox1.Enabled = true;
-                RefreshGrid(_vmpp.RecentAlerts);
+                StartRefreshTab();
             }
 
         }
 
         private void RefreshGrid(List<PolicyAlert> alerts)
         {
-            if (_vmpp != null)
+            if (_policy != null)
             {
                 ReloadHistoryLabel();
                 dataGridView1.Rows.Clear();
@@ -164,50 +191,41 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_vmpp != null)
+            if (_policy != null)
             {
-                if (comboBox1.SelectedIndex == 0)
-                    RefreshGrid(_vmpp.RecentAlerts);
-                else if (comboBox1.SelectedIndex == 1)
-                {
-                    dataGridView1.Rows.Clear();
-                    panelLoading.Visible = true;
-                    GetVMPPAlertsAction action = new GetVMPPAlertsAction(_vmpp, 24);
-                    action.Completed += action_Completed;
-                    action.RunAsync();
-                }
-                else if (comboBox1.SelectedIndex == 2)
-                {
-                    dataGridView1.Rows.Clear();
-                    panelLoading.Visible = true;
-                    GetVMPPAlertsAction action = new GetVMPPAlertsAction(_vmpp, 7 * 24);
-                    action.Completed += action_Completed;
-                    action.RunAsync();
-                }
+               StartRefreshTab();  
             }
         }
 
         void action_Completed(ActionBase sender)
         {
-            var action = (GetVMPPAlertsAction)sender;
+            var action = sender;
             Program.Invoke(Program.MainWindow, () =>
             {
                 panelLoading.Visible = false;
-                RefreshGrid(action.VMPP.Alerts);
+                if (_policy._Type == typeof(VMPP))
+                {
+                    RefreshGrid(((GetVMPPAlertsAction)(action)).VMPP.Alerts);
+                }
+                else
+                {
+                    RefreshGrid(((GetVMSSAlertsAction)(action)).VMSS.Alerts);
+                }
             });
         }
 
         private void ReloadHistoryLabel()
         {
-            string vmppName = _vmpp.Name;
+            string Name;
+            Name = _policy.Name;
             // ellipsise if necessary
             using (System.Drawing.Graphics g = labelHistory.CreateGraphics())
             {
                 int maxWidth = label1.Left - labelHistory.Left;
                 int availableWidth = maxWidth - (int)g.MeasureString(string.Format(Messages.HISTORY_FOR_POLICY, ""), labelHistory.Font).Width;
-                vmppName = vmppName.Ellipsise(new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
+                Name = Name.Ellipsise(new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
             }
-            labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, vmppName);
+            labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, Name);
         }
     }
 }

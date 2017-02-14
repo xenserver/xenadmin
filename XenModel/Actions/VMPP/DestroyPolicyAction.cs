@@ -39,27 +39,28 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class DestroyPolicyAction:PureAsyncAction
+    public class DestroyPolicyAction <T> :PureAsyncAction where T: XenObject<T>
     {
-        private List<VMPP> _selectedToDelete;
-        public DestroyPolicyAction(IXenConnection connection,List<VMPP> deleteVMPPs) : base(connection, Messages.DELETE_POLICIES)
+        private List<IVMPolicy> _selectedToDelete;
+        public DestroyPolicyAction(IXenConnection connection,List<IVMPolicy> deletePolicies) : base(connection, Messages.DELETE_POLICIES)
         {
-            _selectedToDelete = deleteVMPPs;
+            _selectedToDelete = deletePolicies;
             Pool = Helpers.GetPool(connection);
         }
 
         protected override void Run()
         {
-            foreach (var vmpp in _selectedToDelete)
+
+            foreach (var policy in _selectedToDelete)
             {
-                Description = string.Format(Messages.DELETING_VMPP,vmpp.Name);
-                foreach (var vmref in vmpp.VMs)
+                Description = typeof(T) == typeof(VMPP) ? string.Format(Messages.DELETING_VMPP, policy.Name) : string.Format(Messages.DELETING_VMSS, policy.Name);
+                foreach (var vmref in policy.VMs)
                 {
-                    VM.set_protection_policy(Session, vmref.opaque_ref, null);
+                    policy.set_vm_policy(Session, vmref.opaque_ref, null);
                 }
                 try
                 {
-                    VMPP.destroy(Session, vmpp.opaque_ref);
+                    policy.do_destroy(Session, policy.opaque_ref);
                 }
                 catch (Exception e)
                 {
@@ -67,7 +68,7 @@ namespace XenAdmin.Actions
                         throw e;
                 }
             }
-            Description = Messages.DELETED_VMPP;
+            Description = typeof(T) == typeof(VMPP) ? Messages.DELETED_VMPP : Messages.DELETED_VMSS;
         }
     }
 }

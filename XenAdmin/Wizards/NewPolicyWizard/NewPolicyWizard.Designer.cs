@@ -32,18 +32,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewPolicyWizard));
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWizard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XSHelpButton)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBoxWizard
-            // 
-            resources.ApplyResources(this.pictureBoxWizard, "pictureBoxWizard");
-            this.pictureBoxWizard.Image = global::XenAdmin.Properties.Resources._000_BackupMetadata_h32bit_32;
-            // 
-            // XSHelpButton
-            // 
-            resources.ApplyResources(this.XSHelpButton, "XSHelpButton");
             // 
             // NewPolicyWizard
             // 
@@ -51,8 +40,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.HelpButton = true;
             this.Name = "NewPolicyWizard";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWizard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XSHelpButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

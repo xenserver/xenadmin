@@ -1950,11 +1950,17 @@ Archive destination: {0}</value>
   <data name="ASSIGNED_PROTECTION_POLICY" xml:space="preserve">
     <value>Protection policy assigned.</value>
   </data>
+  <data name="ASSIGNED_VMSS_POLICY" xml:space="preserve">
+    <value>Snapshot schedule assigned.</value>
+  </data>
   <data name="ASSIGNED_VM_APPLIANCE" xml:space="preserve">
     <value>vApp assigned.</value>
   </data>
   <data name="ASSIGNING_PROTECTION_POLICY" xml:space="preserve">
     <value>Assigning protection policy...</value>
+  </data>
+  <data name="ASSIGNING_VMSS_POLICY" xml:space="preserve">
+    <value>Assigning to a snapshot schedule...</value>
   </data>
   <data name="ASSIGNING_VM_APPLIANCE" xml:space="preserve">
     <value>Assigning vApp...</value>
@@ -1973,6 +1979,15 @@ Archive destination: {0}</value>
   </data>
   <data name="ASSIGN_PROTECTION_POLICY_NOAMP" xml:space="preserve">
     <value>Assign to VM Protection Policy...</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
+    <value>Assign VM to snapsh&amp;ot schedule</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
+    <value>Assign VM to snapshot schedule</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
+    <value>Assign VM to snapshot schedule...</value>
   </data>
   <data name="ASSIGN_VMS_TO_VAPP" xml:space="preserve">
     <value>Assign VMs to vApp '{0}'</value>
@@ -2462,6 +2477,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>Change Server Password...</value>
   </data>
+  <data name="CHANGE_VMSS_POLICY" xml:space="preserve">
+    <value>Assign VM to snapshot schedule</value>
+  </data>
   <data name="CHANGE_VMS_APPLIANCE" xml:space="preserve">
     <value>Assign VM to vApp</value>
   </data>
@@ -2487,6 +2505,16 @@ Do you want to assign these VMs to the policy '{0}' instead?</value>
     <value>The VM '{0}' is already assigned to the protection policy '{1}'.
     
 Do you want to assign it to the policy '{2}' instead?</value>
+  </data>
+  <data name="CHANGE_VMS_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
+    <value>Some of the VMs you selected are already assigned to a different snapshot schedule.
+    
+Do you want to assign these VMs to the schedule '{0}' instead?</value>
+  </data>
+  <data name="CHANGE_VM_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
+    <value>The VM '{0}' is already assigned to the snashot schedule '{1}'.
+    
+Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>Checking VM migration status</value>
@@ -2553,6 +2581,9 @@ Do you want to assign it to the policy '{2}' instead?</value>
   </data>
   <data name="CHOOSE_VMS_VMPP_RUBRIC" xml:space="preserve">
     <value>Select a checkbox to add a VM to the protection policy; clear its checkbox to remove it from the policy.</value>
+  </data>
+  <data name="CHOOSE_VMS_VMSS_RUBRIC" xml:space="preserve">
+    <value>Select a checkbox to add a VM to the snapshot schedule; clear its checkbox to remove it from the schedule.</value>
   </data>
   <data name="CLEAR_SEARCH" xml:space="preserve">
     <value>Clear Search</value>
@@ -3443,6 +3474,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CREATED_VMPP" xml:space="preserve">
     <value>VM protection policy '{0}' created.</value>
   </data>
+  <data name="CREATED_VMSS" xml:space="preserve">
+    <value>Snapshot schedule '{0}' created.</value>
+  </data>
   <data name="CREATED_VM_APPLIANCE" xml:space="preserve">
     <value>vApp '{0}' created.</value>
   </data>
@@ -3518,6 +3552,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="CREATING_VMPP" xml:space="preserve">
     <value>Creating VM protection policy '{0}'...</value>
   </data>
+  <data name="CREATING_VMSS" xml:space="preserve">
+    <value>Creating snapshot schedule '{0}'...</value>
+  </data>
   <data name="CREATING_VM_APPLIANCE" xml:space="preserve">
     <value>Creating vApp '{0}'...</value>
   </data>
@@ -3565,6 +3602,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   </data>
   <data name="CURRENT_POLICY" xml:space="preserve">
     <value>Current policy</value>
+  </data>
+  <data name="CURRENT_SCHEDULE" xml:space="preserve">
+    <value>Current schedule</value>
   </data>
   <data name="CURRENT_VAPP" xml:space="preserve">
     <value>Current vApp</value>
@@ -3743,6 +3783,9 @@ For optimal performance and reliability during VM migration, ensure that the net
   <data name="DELETED_VMPP" xml:space="preserve">
     <value>VM protection policies deleted.</value>
   </data>
+  <data name="DELETED_VMSS" xml:space="preserve">
+    <value>Snapshot schedules deleted.</value>
+  </data>
   <data name="DELETED_VM_APPLIANCES" xml:space="preserve">
     <value>vApps deleted.</value>
   </data>
@@ -3882,6 +3925,9 @@ This will also delete its subfolders.</value>
   <data name="DELETING_VMPP" xml:space="preserve">
     <value>Deleting VM protection policy '{0}'</value>
   </data>
+  <data name="DELETING_VMSS" xml:space="preserve">
+    <value>Deleting snapshot schedule '{0}'</value>
+  </data>
   <data name="DELETING_VM_APPLIANCE" xml:space="preserve">
     <value>Deleting vApp '{0}'</value>
   </data>
@@ -3972,6 +4018,9 @@ This will also delete its subfolders.</value>
   <data name="DISABLED_VMPP" xml:space="preserve">
     <value>VM protection policy '{0}' disabled.</value>
   </data>
+  <data name="DISABLED_VMSS" xml:space="preserve">
+    <value>Snapshot schedule '{0}' disabled.</value>
+  </data>
   <data name="DISABLE_HA" xml:space="preserve">
     <value>Disable HA</value>
   </data>
@@ -4013,6 +4062,9 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DISABLING_VMPP" xml:space="preserve">
     <value>Disabling VM protection policy '{0}'...</value>
+  </data>
+  <data name="DISABLING_VMSS" xml:space="preserve">
+    <value>Disabling snapshot schedule '{0}'...</value>
   </data>
   <data name="DISABLING_WLB" xml:space="preserve">
     <value>Pausing Workload Balancing </value>
@@ -4727,7 +4779,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Email Alerts</value>
   </data>
   <data name="EMAIL_ALERTS_TITLE" xml:space="preserve">
-    <value>Configure email notification for VM protection alerts</value>
+    <value>Configure email notification for policy alerts</value>
   </data>
   <data name="EMAIL_OPTIONS" xml:space="preserve">
     <value>Email Options</value>
@@ -4746,6 +4798,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLED_VMPP" xml:space="preserve">
     <value>VM protection policy '{0}' enabled.</value>
+  </data>
+  <data name="ENABLED_VMSS" xml:space="preserve">
+    <value>Snapshot schedule '{0}' enabled.</value>
   </data>
   <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
     <value>&amp;Enable HA...</value>
@@ -4785,6 +4840,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLING_VMPP" xml:space="preserve">
     <value>Enabling VM protection policy '{0}'...</value>
+  </data>
+  <data name="ENABLING_VMSS" xml:space="preserve">
+    <value>Enabling snapshot schedule '{0}'...</value>
   </data>
   <data name="ENABLING_WLB" xml:space="preserve">
     <value>Resuming Workload Balancing </value>
@@ -5402,9 +5460,6 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FINISH_PAGE_VMNAME" xml:space="preserve">
     <value>VM name:</value>
   </data>
-  <data name="FINISH_TITLE" xml:space="preserve">
-    <value>Create the new VM protection policy</value>
-  </data>
   <data name="FLOPPY_DRIVE_LABEL_NUMBERED" xml:space="preserve">
     <value>Floppy Drive {0}:</value>
   </data>
@@ -5539,6 +5594,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="GENERAL_PAGE_VMPP_SETTINGS" xml:space="preserve">
     <value>Enter the VM Protection Policy name and an optional description.</value>
+  </data>
+  <data name="GENERAL_PAGE_VMSS_SETTINGS" xml:space="preserve">
+    <value>Enter the snapshot schedule name and an optional description.</value>
   </data>
   <data name="GENERAL_PAGE_VM_APPLIANCE_SETTINGS" xml:space="preserve">
     <value>Enter the vApp name and an optional description.</value>
@@ -8716,6 +8774,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
 
 It is strongly recommended that you Cancel and apply the latest version of the packs to all servers before creating the pool.</value>
   </data>
+  <data name="NEW_SCHEDULE" xml:space="preserve">
+    <value>&amp;New schedule...</value>
+  </data>
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>New Search</value>
   </data>
@@ -8743,6 +8804,18 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NEW_UPDATE_AVAILABLE" xml:space="preserve">
     <value>New Update Available - {0}</value>
+  </data>
+  <data name="NEW_VMPP_PAGE_TEXT" xml:space="preserve">
+    <value>Use this wizard to define a VM protection policy that will ensure your critical VMs are protected via automatic scheduled snapshot jobs.</value>
+  </data>
+  <data name="NEW_VMPP_PAGE_TEXT_MORE" xml:space="preserve">
+    <value>To begin, enter a name for the policy and a description (optional), then click Next.</value>
+  </data>
+  <data name="NEW_VMSS_PAGE_TEXT" xml:space="preserve">
+    <value>Use this wizard to define a snapshot schedule that will create automatic scheduled snapshot jobs for your VMs.</value>
+  </data>
+  <data name="NEW_VMSS_PAGE_TEXT_MORE" xml:space="preserve">
+    <value>To begin, enter a name for the schedule and a description (optional), then click Next.</value>
   </data>
   <data name="NEW_VM_APPLIANCE" xml:space="preserve">
     <value>&amp;New vApp...</value>
@@ -9585,6 +9658,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POLICY_NAME" xml:space="preserve">
     <value>Policy Name</value>
   </data>
+  <data name="POLICY_NAME_FIELD_TEXT" xml:space="preserve">
+    <value>Policy na&amp;me:</value>
+  </data>
   <data name="POLICY_NAME_TITLE" xml:space="preserve">
     <value>What do you want to call this policy?</value>
   </data>
@@ -9950,6 +10026,9 @@ You must reconnect to {1} using an account with Pool Administrator permissions b
   <data name="RBAC_WARNING_VMPP" xml:space="preserve">
     <value>A {0} user cannot create VM protection policies. Log in as a different user with sufficient privileges and try again.</value>
   </data>
+  <data name="RBAC_WARNING_VMSS" xml:space="preserve">
+    <value>A {0} user cannot create a snapshot schedule. Log in as a different user with sufficient privileges and try again.</value>
+  </data>
   <data name="RBAC_WARNING_VM_APPLIANCE" xml:space="preserve">
     <value>A {0} user cannot create vApps. Log in as a different user with sufficient privileges and try again.</value>
   </data>
@@ -10023,6 +10102,9 @@ To log out of this server and log in again using a different user account, enter
   <data name="REMOVED_VMS_FROM_POLICY" xml:space="preserve">
     <value>Removed from VM Protection Policy</value>
   </data>
+  <data name="REMOVED_VMS_FROM_VMSS" xml:space="preserve">
+    <value>Removed from snapshot schedule</value>
+  </data>
   <data name="REMOVE_CRASHDUMP_FILES" xml:space="preserve">
     <value>Remove Crash Dump Files</value>
   </data>
@@ -10092,11 +10174,17 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REMOVE_VMS_FROM_POLICY" xml:space="preserve">
     <value>Remove VMs from VM Protection Policy '{1}'</value>
   </data>
+  <data name="REMOVE_VMS_FROM_VMSS" xml:space="preserve">
+    <value>Remove VMs from snapshot schedule '{1}'</value>
+  </data>
   <data name="REMOVE_VM_FROM_APPLIANCE" xml:space="preserve">
     <value>Remove VM '{0}' from vApp '{1}'</value>
   </data>
   <data name="REMOVE_VM_FROM_POLICY" xml:space="preserve">
     <value>Remove VM '{0}' from VM Protection Policy '{1}'</value>
+  </data>
+  <data name="REMOVE_VM_FROM_VMSS" xml:space="preserve">
+    <value>Remove VM '{0}' from snapshot schedule '{1}'</value>
   </data>
   <data name="REMOVING_FROM_FOLDER" xml:space="preserve">
     <value>Removing from folder</value>
@@ -10115,6 +10203,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REMOVING_VMS_FROM_POLICY" xml:space="preserve">
     <value>Removing from VM Protection Policy</value>
+  </data>
+  <data name="REMOVING_VMS_FROM_VMSS" xml:space="preserve">
+    <value>Removing from snapshot schedule</value>
   </data>
   <data name="RENAMED" xml:space="preserve">
     <value>Renamed</value>
@@ -10323,7 +10414,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Running policy '{0}'</value>
   </data>
   <data name="RUN_POLICY_STARTED" xml:space="preserve">
-    <value>VM Protection policy started</value>
+    <value>Policy started</value>
   </data>
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
     <value>&amp;Run Prechecks</value>
@@ -10387,12 +10478,6 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="SCAN_IN_PROGRESS_TOOLTIP" xml:space="preserve">
     <value>This SR already has a scan in progress</value>
-  </data>
-  <data name="SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
-    <value>VM protection policies defined in pool '{0}' ({1} out of {2} VMs currently protected):</value>
-  </data>
-  <data name="SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
-    <value>VM protection policies defined in server '{0}' ({1} out of {2} VMs currently protected):</value>
   </data>
   <data name="SEARCHBOX_TOOLTIP" xml:space="preserve">
     <value>Find resources in the Resources Pane</value>
@@ -10735,7 +10820,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Deleting snapshots ...</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY" xml:space="preserve">
-    <value>Snapshot Schedule</value>
+    <value>Snapshot schedule</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY_TITLE" xml:space="preserve">
     <value>When do you want snapshots to be taken?</value>
@@ -11251,6 +11336,12 @@ Refer to the "[XenServer product] Administrator's Guide" for instructions on how
   </data>
   <data name="THE_SNAPSHOT" xml:space="preserve">
     <value>the snapshot '{0}'</value>
+  </data>
+  <data name="THIS_VM_IS_IN_VMSS" xml:space="preserve">
+    <value>This VM is currently part of the snapshot schedule '{0}'</value>
+  </data>
+  <data name="THIS_VM_IS_NOT_IN_VMSS" xml:space="preserve">
+    <value>This VM is not currently part of a snapshot schedule</value>
   </data>
   <data name="THIS_VM_IS_NOT_PROTECTED" xml:space="preserve">
     <value>This VM is not currently protected with a VM protection policy</value>
@@ -12004,6 +12095,14 @@ To learn more about the [XenServer] Performance Reporting capabilities feature o
 
 To learn more about the [XenServer] Role Based Access Control feature or to start a [XenServer] trial, click the button below.</value>
   </data>
+  <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
+    <value>Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshost allows you to create automatic snapshots for your critical VMs.</value>
+  </data>
+  <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
+    <value>
+
+To learn more about the [XenServer] VM Scheduled Snapshots feature or to start a XenServer trial, click the button below.</value>
+  </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.</value>
   </data>
@@ -12205,6 +12304,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VIEW_TAG_MENU_OPTION" xml:space="preserve">
     <value>View tag...</value>
   </data>
+  <data name="VIEW_VMSS_POLICIES" xml:space="preserve">
+    <value>View snapshot schedules</value>
+  </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
     <value>The virtual network device changes will take effect when you next restart the VM.</value>
   </data>
@@ -12283,8 +12385,104 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMPP" xml:space="preserve">
     <value>VM Protection Policy</value>
   </data>
+  <data name="VMPP_DIALOG_TEXT" xml:space="preserve">
+    <value>Protect your critical VMs with a protection policy that takes regular scheduled snapshots and, optionally, archives the snapshots to a CIFS or NFS share.</value>
+  </data>
+  <data name="VMPP_DIALOG_TITLE" xml:space="preserve">
+    <value>VM Protection Policies</value>
+  </data>
+  <data name="VMPP_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
+    <value>Send &amp;email notifications about VM protection job alerts</value>
+  </data>
+  <data name="VMPP_EMAIL_PAGE_TEXT" xml:space="preserve">
+    <value>XenServer can send you email notifications when alerts associated with VM protection jobs are raised, such as when a VM snapshot is created or archived, or when a snapshot or archive operation fails.</value>
+  </data>
+  <data name="VMPP_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
+    <value>&amp;Run the new VM protection job when I click Finish</value>
+  </data>
+  <data name="VMPP_FINISH_PAGE_TEXT" xml:space="preserve">
+    <value>Review the new VM protection policy below and click Previous if you want to change any settings or Finish to create the new policy.</value>
+  </data>
+  <data name="VMPP_FINISH_TITLE" xml:space="preserve">
+    <value>Create the new policy</value>
+  </data>
+  <data name="VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
+    <value>VM protection policies defined in pool '{0}' ({1} out of {2} VMs currently protected):</value>
+  </data>
+  <data name="VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
+    <value>VM protection policies defined in server '{0}' ({1} out of {2} VMs currently protected):</value>
+  </data>
+  <data name="VMPP_TYPE" xml:space="preserve">
+    <value>protection policy</value>
+  </data>
+  <data name="VMPP_WIZARD_TITLE" xml:space="preserve">
+    <value>New VM Protection Policy</value>
+  </data>
   <data name="VMS" xml:space="preserve">
     <value>VMs</value>
+  </data>
+  <data name="VMSS_ALERT_DETAILS" xml:space="preserve">
+    <value>Details:</value>
+  </data>
+  <data name="VMSS_ALERT_VM_ERROR_FORMAT" xml:space="preserve">
+    <value>{0}. {1}: {2}</value>
+  </data>
+  <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
+    <value>Snapshot sched&amp;ules ...</value>
+  </data>
+  <data name="VMSS_DIALOG_TEXT" xml:space="preserve">
+    <value>Create a snapshot schedule for your VMs.</value>
+  </data>
+  <data name="VMSS_DIALOG_TITLE" xml:space="preserve">
+    <value>Snapshot schedules</value>
+  </data>
+  <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
+    <value>Send &amp;email notifications about snapshot schedule job alerts</value>
+  </data>
+  <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
+    <value>XenServer can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails.</value>
+  </data>
+  <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
+    <value>&amp;Run the new snapshot schedule job when I click Finish</value>
+  </data>
+  <data name="VMSS_FINISH_PAGE_TEXT" xml:space="preserve">
+    <value>Review the new snapshot schedule below and click Previous if you want to change any settings or Finish to create the new schedule.</value>
+  </data>
+  <data name="VMSS_FINISH_TITLE" xml:space="preserve">
+    <value>Create the new schedule</value>
+  </data>
+  <data name="VMSS_MAIN_MENU" xml:space="preserve">
+    <value>VM Snaps&amp;hot Schedules...</value>
+  </data>
+  <data name="VMSS_NAME" xml:space="preserve">
+    <value>Schedule Name</value>
+  </data>
+  <data name="VMSS_NAME_FIELD_TEXT" xml:space="preserve">
+    <value>Schedule na&amp;me:</value>
+  </data>
+  <data name="VMSS_NAME_TITLE" xml:space="preserve">
+    <value>What do you want to call this schedule?</value>
+  </data>
+  <data name="VMSS_POLICY_SUMMARY" xml:space="preserve">
+    <value>Job name:\r\n    {0}\r\n\r\nSelected VMs:\r\n    {1}\r\n\r\nSnapshot type:\r\n    {2}\r\n\r\nSchedule:\r\n    {3}\r\n</value>
+  </data>
+  <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
+    <value>Snapshot schedules defined in pool '{0}' ({1} out of {2} VMs currently in schedule):</value>
+  </data>
+  <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
+    <value>Snapshot schedules defined in server '{0}' ({1} out of {2} VMs currently in schedule):</value>
+  </data>
+  <data name="VMSS_TYPE" xml:space="preserve">
+    <value>schedule</value>
+  </data>
+  <data name="VMSS_VMS" xml:space="preserve">
+    <value>VMs in the snapshot schedule</value>
+  </data>
+  <data name="VMSS_VMS_TITLE" xml:space="preserve">
+    <value>Select the VMs that you want to schedule snapshots for</value>
+  </data>
+  <data name="VMSS_WIZARD_TITLE" xml:space="preserve">
+    <value>New snapshot schedule</value>
   </data>
   <data name="VMS_IN_POOL" xml:space="preserve">
     <value>VMs in pool '{0}':</value>
@@ -12498,6 +12696,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VM_SHUT_DOWN" xml:space="preserve">
     <value>This VM is shut down.</value>
+  </data>
+  <data name="VM_SNAPSHOT_SCHEDULE_FAILED" xml:space="preserve">
+    <value>{0} ({1} VMs failed)</value>
   </data>
   <data name="VM_SUCCESSFULLY_CREATED" xml:space="preserve">
     <value>VM successfully created</value>
