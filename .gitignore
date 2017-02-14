@@ -11,13 +11,8 @@ TAGS
 *.cache
 bin
 Debug
-log4net
 nant
-NUnit
 obj
-xml-rpc.net
-sharpziplib
-XenServer.NET/*
 Thumbs.db
 *-listing.txt
 *.ncb
@@ -38,13 +33,9 @@ WixInstaller/PrintEula.dll
 WixInstaller/XenCenter.l10n.wxs
 dotNetInstaller/*
 dotNetFx40_Full_setup/*
-putty/putty.exe
-XenOvfApi/External Tools/bootablereference.vhd.bz2
-XenOvfApi/External Tools/
-sign.bat
-XenServer-SDK.zip
+packages/*
+XenOvfApi/External Tools/*
+
 _ReSharper.*/
-glob:Nunit/nunit.framework.dll
-glob:XenOvfApi/External Tools/xenserver-linuxfixup-disk.iso
 *.opensdf
 *.sdf
