@@ -45,29 +45,29 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             this.caseNumberLabel = new System.Windows.Forms.Label();
             this.caseNumberTextBox = new System.Windows.Forms.TextBox();
             this.optionalLabel = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.enterCredentialsLinkLabel = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.usernameLabel, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.passwordLabel, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.passwordTextBox, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.usernameTextBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.usernameLabel, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.passwordLabel, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.passwordTextBox, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.usernameTextBox, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.m_textBoxName, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelFileLocation, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.m_textBoxLocation, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.BrowseButton, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.m_ctrlError, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.uploadCheckBox, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.caseNumberLabel, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.caseNumberTextBox, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.optionalLabel, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.caseNumberLabel, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.caseNumberTextBox, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.optionalLabel, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.enterCredentialsLinkLabel, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // usernameLabel
@@ -160,16 +160,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             resources.ApplyResources(this.optionalLabel, "optionalLabel");
             this.optionalLabel.Name = "optionalLabel";
             // 
-            // richTextBox1
+            // enterCredentialsLinkLabel
             // 
-            resources.ApplyResources(this.richTextBox1, "richTextBox1");
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 4);
-            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
+            resources.ApplyResources(this.enterCredentialsLinkLabel, "enterCredentialsLinkLabel");
+            this.tableLayoutPanel1.SetColumnSpan(this.enterCredentialsLinkLabel, 4);
+            this.enterCredentialsLinkLabel.Name = "enterCredentialsLinkLabel";
+            this.enterCredentialsLinkLabel.TabStop = true;
+            this.enterCredentialsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.enterCredentialsLinkLabel_LinkClicked);
             // 
             // BugToolPageDestination
             // 
@@ -201,6 +198,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
         private System.Windows.Forms.Label caseNumberLabel;
         private System.Windows.Forms.TextBox caseNumberTextBox;
         private System.Windows.Forms.Label optionalLabel;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.LinkLabel enterCredentialsLinkLabel;
     }
 }

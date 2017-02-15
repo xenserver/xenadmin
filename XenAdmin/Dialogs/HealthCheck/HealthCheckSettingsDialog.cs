@@ -114,9 +114,21 @@ namespace XenAdmin.Dialogs.HealthCheck
         {
             Text = String.Format(Messages.HEALTHCHECK_ENROLLMENT_TITLE, pool.Name);
             
-            authenticationRubricTextBox.Text = authenticationRequired
-                ? Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN
-                : Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;
+            string noAuthTokenMessage = string.Format(Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN, Messages.MY_CITRIX_CREDENTIALS_URL);
+            string existingAuthTokenMessage = Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;
+            string authenticationRubricLabelText = authenticationRequired ? noAuthTokenMessage : existingAuthTokenMessage;
+
+            if (authenticationRubricLabelText == noAuthTokenMessage)
+            {
+                authRubricTextLabel.Visible = false;
+                authRubricLinkLabel.Text = noAuthTokenMessage;
+                authRubricLinkLabel.LinkArea = new System.Windows.Forms.LinkArea(authenticationRubricLabelText.IndexOf(Messages.MY_CITRIX_CREDENTIALS_URL), Messages.MY_CITRIX_CREDENTIALS_URL.Length);
+            }
+            else
+            {
+                authRubricLinkLabel.Visible = false;
+                authRubricTextLabel.Text = existingAuthTokenMessage;
+            }
 
             enrollmentCheckBox.Checked = healthCheckSettings.Status != HealthCheckStatus.Disabled;
             frequencyNumericBox.Value = healthCheckSettings.IntervalInWeeks;
@@ -405,14 +417,15 @@ namespace XenAdmin.Dialogs.HealthCheck
             return false;
         }
 
-        private void authenticationRubricTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
-        {
-            Program.OpenURL(e.LinkText);
-        }
-
         private void existingAuthenticationRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             UpdateButtons();
         }
+
+        private void authRubricLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Program.OpenURL(Messages.MY_CITRIX_CREDENTIALS_URL);
+        }
+
     }
 }
