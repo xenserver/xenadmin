@@ -328,7 +328,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private string UpdateExtension
         {
-            get { return SelectedUpdateType != UpdateType.ISO ? "." + Branding.Update : "." + Branding.UpdateIso; }
+            get { return "." + Branding.Update; }
         }
 
         private bool isValidFile(string fileName)
