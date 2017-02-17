@@ -247,6 +247,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 case UpdateType.NewRetail:
                 case UpdateType.Existing:
+                    if (Helpers.ElyOrGreater(host))
+                    {
+                        row.Enabled = false;
+                        row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_NOT_APPLICABLE;
+                    }
                     disableNotApplicableHosts(row, applicableHosts, host);
                     break;
                 case UpdateType.ISO:
