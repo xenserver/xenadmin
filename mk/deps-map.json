@@ -11,22 +11,22 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/putty.exe",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/putty.exe",
       "target": "xenadmin.git/packages/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/NDP46-KB3045560-Web.exe",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/NDP46-KB3045560-Web.exe",
       "target": "xenadmin.git/dotNetInstaller/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/UNSIGNED/*.dll",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/*.dll",
       "target": "xenadmin.git/packages/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/*.pdb",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/*.pdb",
       "target": "output/",
       "flat": "true"
     },

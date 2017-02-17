@@ -44,11 +44,11 @@ SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE[0]})/../packages && pwd)
 #dotnet packages
 
 BUILD_LOCATION=$(cat ${SCRIPT_DIR}/DOTNET_BUILD_LOCATION)
-DOTNET="https://${DOMAIN}/api/archive/download/${BUILD_LOCATION}/UNSIGNED?archiveType=zip"
+DOTNET="https://${DOMAIN}/api/archive/download/${BUILD_LOCATION}/dotnet46?archiveType=zip"
 ZIP=dotnetpackages.zip
 
 curl --fail -u ${USERNAME}:${PASSWORD} ${DOTNET} -o ${SCRIPT_DIR}/${ZIP}
-unzip ${SCRIPT_DIR}/${ZIP} -d ${SCRIPT_DIR} "*.dll" "putty.exe" 
+unzip -o ${SCRIPT_DIR}/${ZIP} -d ${SCRIPT_DIR} "*.dll" "putty.exe" 
 rm -f ${SCRIPT_DIR}/${ZIP}
 
 #unit test dependencies
