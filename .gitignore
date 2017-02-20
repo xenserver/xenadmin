@@ -34,6 +34,8 @@ WixInstaller/XenCenter.l10n.wxs
 dotNetInstaller/*
 dotNetFx40_Full_setup/*
 packages/*
+!packages/DOTNET_BUILD_LOCATION
+!packages/DOTNET_BUILD_LOCATION_CTXSIGN
 XenOvfApi/External Tools/*
 
 _ReSharper.*/

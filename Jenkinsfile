@@ -170,9 +170,19 @@ node("${params.BUILD_ON_NODE}") {
       }
     }
 
+    def CTX_SIGN_DEFINED = bat(
+      returnStdout: true,
+      script: """
+              @echo off
+              if defined c (echo 1) else (echo 0)
+              """
+    ).trim()
+
     stage('Download dependencies') {
+      GString dotNetFile = (CTX_SIGN_DEFINED == '1') ? 'DOTNET_BUILD_LOCATION_CTXSIGN' : 'DOTNET_BUILD_LOCATION'
+
       GString remoteDotnet = GString.EMPTY
-      remoteDotnet += readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\DOTNET_BUILD_LOCATION").trim()
+      remoteDotnet += readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\${dotNetFile}").trim()
       GString downloadSpec = GString.EMPTY
       downloadSpec += readFile("${env.WORKSPACE}\\xenadmin.git\\mk\\deps-map.json").trim().replaceAll("@REMOTE_DOTNET@", remoteDotnet)
 
@@ -326,14 +336,6 @@ node("${params.BUILD_ON_NODE}") {
           //buildInfo.retention maxBuilds: 50, deleteBuildArtifacts: true
 
           GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${env.BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${params.XC_BRANCH};vcs.revision=${GIT_COMMIT_XENADMIN}"
-
-          def CTX_SIGN_DEFINED = bat(
-            returnStdout: true,
-            script: """
-                @echo off
-                if defined CTXSIGN (echo 1) else (echo 0)
-                """
-          ).trim()
 
           String targetSubRepo = (CTX_SIGN_DEFINED == '1') ? 'xenadmin-ctxsign' : 'xenadmin'
 
