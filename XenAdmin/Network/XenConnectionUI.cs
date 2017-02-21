@@ -223,6 +223,11 @@ namespace XenAdmin.Network
                     case WebExceptionStatus.ProtocolError:
                         if (w.Message != null && w.Message.Contains("(404)"))
                             AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                        else if (w.Message != null && w.Message.Contains("(407)"))
+                        {
+                            string proxyAddress = Properties.Settings.Default.ProxyAddress;
+                            AddError(owner, connection, string.Format(Messages.ERROR_PROXY_AUTHENTICATION, proxyAddress), string.Format(Messages.SOLUTION_CHECK_PROXY, proxyAddress));
+                        }
                         else
                             AddError(owner, connection, Messages.ERROR_UNKNOWN, Messages.SOLUTION_UNKNOWN);
                         break;
