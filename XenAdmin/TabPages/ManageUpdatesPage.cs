@@ -63,7 +63,6 @@ namespace XenAdmin.TabPages
         Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private List<string> selectedUpdates = new List<string>();
         private int checksQueue;
-        private bool PageWasRefreshed;
         private bool CheckForUpdatesInProgress;
 
         public ManageUpdatesPage()
@@ -79,7 +78,8 @@ namespace XenAdmin.TabPages
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
             pictureBox1.Image = SystemIcons.Information.ToBitmap();
-            PageWasRefreshed = false;
+            toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
+            toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
         }
 
         public void RefreshUpdateList()
@@ -238,7 +238,7 @@ namespace XenAdmin.TabPages
                     tableLayoutPanel3.Visible = true;
                     pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
 
-                    if (SomeOrAllUpdatesDisabled())
+                    if (AllUpdatesDisabled())
                     {
                         labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
                         checkForUpdatesNowButton.Visible = true;
@@ -247,6 +247,15 @@ namespace XenAdmin.TabPages
                     else
                     {
                         labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
+                        if (SomeButNotAllUpdatesDisabled())
+                        {
+                            this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 72);
+                            MakeWarningVisible();
+                        }
+                        else
+                        {
+                            MakeWarningInvisible();
+                        }
                     }
                     return;
                 }
@@ -321,6 +330,8 @@ namespace XenAdmin.TabPages
             checkForUpdatesNowButton2.Visible = false;
         }
 
+
+
         /// <summary>
         /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some, but not all types of updates.
         /// </summary>
@@ -332,20 +343,18 @@ namespace XenAdmin.TabPages
                     !Properties.Settings.Default.AllowXenServerUpdates) &&
                     (Properties.Settings.Default.AllowPatchesUpdates ||
                     Properties.Settings.Default.AllowXenCenterUpdates ||
-                    Properties.Settings.Default.AllowXenServerUpdates) &&
-                    !PageWasRefreshed;
+                    Properties.Settings.Default.AllowXenServerUpdates);
         }
 
         /// <summary>
-        /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some or all types of updates.
+        /// Checks if the automatic checking for updates in the Updates Options Page is disabled for all types of updates.
         /// </summary>
         /// <returns></returns>
-        private bool SomeOrAllUpdatesDisabled()
+        private bool AllUpdatesDisabled()
         {
-            return !((Properties.Settings.Default.AllowPatchesUpdates &&
-                   Properties.Settings.Default.AllowXenCenterUpdates &&
-                   Properties.Settings.Default.AllowXenServerUpdates) ||
-                   PageWasRefreshed);
+            return (!Properties.Settings.Default.AllowPatchesUpdates &&
+                   !Properties.Settings.Default.AllowXenCenterUpdates &&
+                   !Properties.Settings.Default.AllowXenServerUpdates);
         }
 
         /// <summary>
@@ -830,7 +839,6 @@ namespace XenAdmin.TabPages
         
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            PageWasRefreshed = true;
             checkForUpdatesNowButton.Visible = false;
             Updates.CheckForUpdates(true);
         }
@@ -930,19 +938,16 @@ namespace XenAdmin.TabPages
         {
             checkForUpdatesNowButton.Visible = false;
             Updates.CheckForUpdates(true);
-            PageWasRefreshed = true;
         }
 
         private void toolStripButtonRestoreDismissed_Click(object sender, EventArgs e)
         {
-            PageWasRefreshed = true;
             checkForUpdatesNowButton.Visible = false;
             Updates.RestoreDismissedUpdates();
         }        
         private void checkForUpdatesNowButton2_Click(object sender, EventArgs e)
         {            
             MakeWarningInvisible();
-            PageWasRefreshed = true;
             Updates.CheckForUpdates(true);
         }
 
