@@ -11333,10 +11333,10 @@ namespace XenAdmin {
         public static string DISABLED_VMSS {
             get {
                 return ResourceManager.GetString("DISABLED_VMSS", resourceCulture);
-			}
-		}
-		
-        /// <summary>		
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabling.
         /// </summary>
         public static string DISABLING {
@@ -13641,10 +13641,10 @@ namespace XenAdmin {
         public static string ENABLED_VMSS {
             get {
                 return ResourceManager.GetString("ENABLED_VMSS", resourceCulture);
-			 }
-		}
-
-        /// <summary>		
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabling.
         /// </summary>
         public static string ENABLING {
@@ -15973,10 +15973,10 @@ namespace XenAdmin {
         public static string GENERAL_PAGE_VMSS_SETTINGS {
             get {
                 return ResourceManager.GetString("GENERAL_PAGE_VMSS_SETTINGS", resourceCulture);
-			}
-		}
-
-        /// <summary>		
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} on {1}.
         /// </summary>
         public static string GENERAL_PANEL_UPDATE_KEY {
@@ -23404,10 +23404,10 @@ namespace XenAdmin {
         public static string NEW_SCHEDULE {
             get {
                 return ResourceManager.GetString("NEW_SCHEDULE", resourceCulture);
-			}
-		}
-		
-		/// <summary>
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Search.
         /// </summary>
         public static string NEW_SEARCH {
@@ -27106,6 +27106,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The same update cannot be applied to {0} and {1} versions of [XenServer].
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS", resourceCulture);
             }
         }
         
@@ -36557,20 +36566,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Details:.
-        /// </summary>
-        public static string VMSS_ALERT_DETAILS {
-            get {
-                return ResourceManager.GetString("VMSS_ALERT_DETAILS", resourceCulture);
-			}
-		}
-		
-		/// <summary>
         ///   Looks up a localized string similar to {0} VMs.
         /// </summary>
         public static string VMS_MANY {
             get {
                 return ResourceManager.GetString("VMS_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 VM.
+        /// </summary>
+        public static string VMS_ONE {
+            get {
+                return ResourceManager.GetString("VMS_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details:.
+        /// </summary>
+        public static string VMSS_ALERT_DETAILS {
+            get {
+                return ResourceManager.GetString("VMSS_ALERT_DETAILS", resourceCulture);
             }
         }
         
@@ -36751,15 +36769,6 @@ namespace XenAdmin {
         public static string VMSS_WIZARD_TITLE {
             get {
                 return ResourceManager.GetString("VMSS_WIZARD_TITLE", resourceCulture);
-			}
-		}
-		
-        /// <summary>		
-        ///   Looks up a localized string similar to 1 VM.
-        /// </summary>
-        public static string VMS_ONE {
-            get {
-                return ResourceManager.GetString("VMS_ONE", resourceCulture);
             }
         }
         
