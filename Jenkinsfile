@@ -323,7 +323,6 @@ node("${params.BUILD_ON_NODE}") {
           def buildInfo = Artifactory.newBuildInfo()
           buildInfo.env.filter.addInclude("*")
           buildInfo.env.collect()
-          buildInfo.retention maxBuilds: 50, deleteBuildArtifacts: true
 
           GString artifactMeta = "build.name=${env.JOB_NAME};build.number=${env.BUILD_NUMBER};vcs.url=${env.CHANGE_URL};vcs.branch=${params.XC_BRANCH};vcs.revision=${GIT_COMMIT_XENADMIN}"
 
