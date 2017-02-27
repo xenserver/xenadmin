@@ -394,12 +394,12 @@ namespace XenAdmin.ConsoleView
             if (Properties.Settings.Default.UncaptureShortcutKey == 0)
             {
                 // Right Ctrl
-                KeyHandler.AddKeyHandler(ConsoleShortcutKey.RIGHT_CTRL, ToogleConsoleFocus); 
+                KeyHandler.AddKeyHandler(ConsoleShortcutKey.RIGHT_CTRL, ToggleConsoleFocus); 
             }
             else if (Properties.Settings.Default.UncaptureShortcutKey == 1)
             {
                 // Left Alt
-                KeyHandler.AddKeyHandler(ConsoleShortcutKey.LEFT_ALT, ToogleConsoleFocus); 
+                KeyHandler.AddKeyHandler(ConsoleShortcutKey.LEFT_ALT, ToggleConsoleFocus); 
             }
         }
 
@@ -1034,6 +1034,7 @@ namespace XenAdmin.ConsoleView
 
                 FocusVNC();
                 vncScreen.CaptureKeyboardAndMouse();
+                UpdateRDPResolution(true);
             }
             else
             {
@@ -1049,6 +1050,7 @@ namespace XenAdmin.ConsoleView
                 fullscreenForm.Hide();
                 fullscreenForm.Dispose();
                 fullscreenForm = null;
+                UpdateRDPResolution();
             }
 
             //Everytime we toggle full screen I'm going to force an unpause to make sure we don't acidentally undock / dock a pause VNC
@@ -1457,15 +1459,15 @@ namespace XenAdmin.ConsoleView
             return null;
         }
 
-        private bool inToogleConsoleFocus = false;
-        private void ToogleConsoleFocus()
+        private bool inToggleConsoleFocus = false;
+        private void ToggleConsoleFocus()
         {
             Program.AssertOnEventThread();
 
-            if (inToogleConsoleFocus)
+            if (inToggleConsoleFocus)
                 return;
 
-            inToogleConsoleFocus = true;
+            inToggleConsoleFocus = true;
 
             if (vncScreen.Focused && vncScreen.ActiveControl == null)
                 vncScreen.CaptureKeyboardAndMouse(); // focus console
@@ -1475,7 +1477,7 @@ namespace XenAdmin.ConsoleView
                 vncScreen.Refresh();
             }
 
-            inToogleConsoleFocus = false;
+            inToggleConsoleFocus = false;
         }
 
         private void ShowGpuWarningIfRequired(bool mustConnectRemoteDesktop)
@@ -1486,6 +1488,12 @@ namespace XenAdmin.ConsoleView
         internal bool IsVNC
         {
             get { return vncScreen.UseVNC; }
+        }
+
+        public void UpdateRDPResolution(bool fullscreen = false)
+        {
+            if (vncScreen != null)
+                vncScreen.UpdateRDPResolution(fullscreen);
         }
         
         #region SSH Console methods
