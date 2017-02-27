@@ -26807,6 +26807,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The same update cannot be applied to {0} and {1} versions of [XenServer].
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update already applied.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED {
