@@ -510,12 +510,17 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-                new TransferProxySettingsAction((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
-                                Properties.Settings.Default.ProxyAddress,
-                                Properties.Settings.Default.ProxyPort,
-                                Properties.Settings.Default.ConnectionTimeout,
-                                Properties.Settings.Default.BypassProxyForLocal,
-                                true).RunAsync();
+                new TransferProxySettingsAction(
+                    (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
+                    Properties.Settings.Default.ProxyAddress,
+                    Properties.Settings.Default.ProxyPort,
+                    Properties.Settings.Default.ConnectionTimeout,
+                    true,
+                    Properties.Settings.Default.BypassProxyForServers,
+                    Properties.Settings.Default.ProvideProxyAuthentication,
+                    Properties.Settings.Default.ProxyUsername,
+                    Properties.Settings.Default.ProxyPassword,
+                    (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
             }
             catch (ConfigurationErrorsException ex)
             {

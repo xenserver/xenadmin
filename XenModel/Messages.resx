@@ -5057,6 +5057,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>Error preparing host</value>
   </data>
+  <data name="ERROR_PROXY_AUTHENTICATION" xml:space="preserve">
+    <value>Could not authenticate to proxy server on '{0}'.</value>
+  </data>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
     <value>[XenCenter] has encountered a problem launching PuTTY.</value>
   </data>
@@ -10878,6 +10881,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>Try again using a correct user name and password.</value>
+  </data>
+  <data name="SOLUTION_CHECK_PROXY" xml:space="preserve">
+    <value>Check that the proxy server on '{0}' is configured correctly and [XenCenter]'s connection settings are correct and try again.</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
     <value>Check that [XenServer] is configured correctly on '{0}' and try again.</value>

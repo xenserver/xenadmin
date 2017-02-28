@@ -68,7 +68,16 @@ namespace XenServerHealthCheck
                 Properties.Settings.Default.Save();
             }
 
+            ReconfigureConnectionSettings();
+
             log.InfoFormat("XenServer Health Check Service {0} starting...", Properties.Settings.Default.UUID);
+        }
+
+        public static void ReconfigureConnectionSettings()
+        {
+            XenAPI.Session.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null);
+            XenAPI.HTTP.CurrentProxyAuthenticationMethod =
+                (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod;
         }
 
         protected override void OnStart(string[] args)

@@ -56,7 +56,14 @@ namespace XenAdmin
     {
         public const int DEFAULT_WLB_PORT = 8012;
 
-
+        /// <summary>
+        /// Module for authenticating with proxy server using the Basic authentication scheme.
+        /// </summary>
+        private static IAuthenticationModule BasicAuthenticationModule = null;
+        /// <summary>
+        /// Module for authenticating with proxy server using the Digest authentication scheme.
+        /// </summary>
+        private static IAuthenticationModule DigestAuthenticationModule = null;
 
         /// <summary>
         /// A UUID for the current instance of XenCenter.  Used to identify our own task instances.
@@ -305,6 +312,7 @@ namespace XenAdmin
             ServicePointManager.ServerCertificateValidationCallback = SSL.ValidateServerCertificate;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             XenAPI.Session.UserAgent = string.Format("XenCenter/{0}", ClientVersion());
+            RememberProxyAuthenticationModules();
             ReconfigureConnectionSettings();
 
             log.Info("Application started");
@@ -997,7 +1005,54 @@ namespace XenAdmin
 
         public static void ReconfigureConnectionSettings()
         {
+            ReconfigureProxyAuthenticationSettings();
             XenAPI.Session.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null);
+        }
+
+        /// <summary>
+        /// Stores the Basic and Digest authentication modules, used for proxy server authentication, 
+        /// for later use; this is needed because we cannot create new instances of them and it 
+        /// saves us needing to create our own custom authentication modules.
+        /// </summary>
+        private static void RememberProxyAuthenticationModules()
+        {
+            var authModules = AuthenticationManager.RegisteredModules;
+            while (authModules.MoveNext())
+            {
+                var module = (IAuthenticationModule)authModules.Current;
+                if (module.AuthenticationType == "Basic")
+                    BasicAuthenticationModule = module;
+                else if (module.AuthenticationType == "Digest")
+                    DigestAuthenticationModule = module;
+            }
+        }
+
+        /// <summary>
+        /// Configures .NET's AuthenticationManager to only use the authentication module that is 
+        /// specified in the ProxyAuthenticationMethod setting. Also sets XenAPI's HTTP class to 
+        /// use the same authentication method.
+        /// </summary>
+        private static void ReconfigureProxyAuthenticationSettings()
+        {
+            var authModules = AuthenticationManager.RegisteredModules;
+            var modulesToUnregister = new List<IAuthenticationModule>();
+
+            while (authModules.MoveNext())
+            {
+                var module = (IAuthenticationModule)authModules.Current;
+                modulesToUnregister.Add(module);
+            }
+
+            foreach (var module in modulesToUnregister)
+                AuthenticationManager.Unregister(module);
+
+            var authSetting = (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod;
+            if (authSetting == HTTP.ProxyAuthenticationMethod.Basic)
+                AuthenticationManager.Register(BasicAuthenticationModule);
+            else
+                AuthenticationManager.Register(DigestAuthenticationModule);
+
+            XenAPI.HTTP.CurrentProxyAuthenticationMethod = authSetting;
         }
 
         private const string SplashWindowClass = "XenCenterSplash0001";

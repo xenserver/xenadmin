@@ -87,8 +87,7 @@ namespace XenAdmin.Actions
                 {
                     try
                     {
-                        var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection);
-                        client.Proxy = proxy;
+                        client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 
                         //register download events
                         client.DownloadProgressChanged += client_DownloadProgressChanged;

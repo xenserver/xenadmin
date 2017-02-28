@@ -14356,6 +14356,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not authenticate to proxy server on &apos;{0}&apos;..
+        /// </summary>
+        public static string ERROR_PROXY_AUTHENTICATION {
+            get {
+                return ResourceManager.GetString("ERROR_PROXY_AUTHENTICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] has encountered a problem launching PuTTY..
         /// </summary>
         public static string ERROR_PUTTY_LAUNCHING {
@@ -31321,6 +31330,15 @@ namespace XenAdmin {
         public static string SOLUTION_AUTHENTICATION {
             get {
                 return ResourceManager.GetString("SOLUTION_AUTHENTICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check that the proxy server on &apos;{0}&apos; is configured correctly and [XenCenter]&apos;s connection settings are correct and try again..
+        /// </summary>
+        public static string SOLUTION_CHECK_PROXY {
+            get {
+                return ResourceManager.GetString("SOLUTION_CHECK_PROXY", resourceCulture);
             }
         }
         
