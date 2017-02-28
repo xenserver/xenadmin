@@ -290,7 +290,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             var firstCheckedRow = dataGridViewHosts.Rows.Cast<PatchingHostsDataGridViewRow>().FirstOrDefault(row => row.CheckValue > UNCHECKED);
             if (firstCheckedRow == null)
                 return null;
-            return firstCheckedRow.Tag as Host ?? Helpers.GetMaster(((IXenObject)firstCheckedRow.Tag).Connection);
+            return firstCheckedRow.Tag as Host ?? Helpers.GetMaster(firstCheckedRow.Tag as Pool);
         }
 
         private void disableNotApplicableHosts(PatchingHostsDataGridViewRow row, List<Host> applicableHosts, Host host)
@@ -601,7 +601,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
             {
-                var host = row.IsAHostRow ? row.Tag as Host : Helpers.GetMaster(((IXenObject) row.Tag).Connection);
+                var host = row.Tag as Host ?? Helpers.GetMaster(row.Tag as Pool);
                 if (host != null)
                     EnabledRow(host, SelectedUpdateType, row.Index);
             }
