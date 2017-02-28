@@ -60,9 +60,6 @@
     <Setting Name="ProxyAddress" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="BypassProxyForLocal" Roaming="true" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="ProxyPort" Roaming="true" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">80</Value>
     </Setting>
@@ -163,6 +160,21 @@
     </Setting>
     <Setting Name="ShowAboutDialog" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ProvideProxyAuthentication" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProxyUsername" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ProxyPassword" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BypassProxyForServers" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProxyAuthenticationMethod" Roaming="true" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="DoNotConfirmDismissAlerts" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

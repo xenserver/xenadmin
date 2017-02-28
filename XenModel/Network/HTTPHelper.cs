@@ -323,11 +323,11 @@ namespace XenAPI
             return HTTP.PUT(uri, XenAdminConfigManager.Provider.GetProxyFromSettings(null), ContentLength, XenAdminConfigManager.Provider.GetProxyTimeout(timeout));
         }
 
-        public static Stream GET(Uri uri, IXenConnection connection, bool timeout, bool do_log)
+        public static Stream GET(Uri uri, IXenConnection connection, bool timeout, bool do_log, bool isForXenServer = true)
         {
             if (do_log)
                 log.DebugFormat("HTTP GETTING file from {0}", uri);
-            return HTTP.GET(uri, XenAdminConfigManager.Provider.GetProxyFromSettings(connection), XenAdminConfigManager.Provider.GetProxyTimeout(timeout));
+            return HTTP.GET(uri, XenAdminConfigManager.Provider.GetProxyFromSettings(connection, isForXenServer), XenAdminConfigManager.Provider.GetProxyTimeout(timeout));
         }
     }
 }

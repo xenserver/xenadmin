@@ -62,7 +62,7 @@ namespace XenServerHealthCheck
             {
                 UPLOAD_URL = uploadUrl;
             }
-            proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(connection);
+            proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(connection, false);
         }
 
         // Request an upload and fetch the uploading id from CIS.

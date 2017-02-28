@@ -219,6 +219,7 @@ namespace XenAdmin.Actions
             }
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
+            httpWebRequest.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
