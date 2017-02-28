@@ -125,10 +125,16 @@
   <data name="ContentPanel.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ContentPanel.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="ContentPanel.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>486, 0</value>
+  </data>
   <data name="confirmationOptionsPage1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="confirmationOptionsPage1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -139,7 +145,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="confirmationOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>534, 466</value>
   </data>
   <data name="confirmationOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -169,7 +175,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="pluginOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>534, 466</value>
   </data>
   <data name="pluginOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -202,7 +208,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="saveAndRestoreOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>534, 466</value>
   </data>
   <data name="saveAndRestoreOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -232,7 +238,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="securityOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>534, 466</value>
   </data>
   <data name="securityOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -262,7 +268,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="updatesOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>534, 466</value>
   </data>
   <data name="updatesOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -292,7 +298,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="graphsOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>534, 466</value>
   </data>
   <data name="graphsOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -325,7 +331,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="consolesOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>534, 466</value>
   </data>
   <data name="consolesOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -358,7 +364,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="connectionOptionsPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 451</value>
+    <value>534, 466</value>
   </data>
   <data name="connectionOptionsPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -385,7 +391,7 @@
     <value>10, 49, 10, 10</value>
   </data>
   <data name="ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>554, 510</value>
+    <value>554, 525</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Name" xml:space="preserve">
     <value>ContentPanel</value>
@@ -400,7 +406,7 @@
     <value>1</value>
   </data>
   <data name="verticalTabs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 512</value>
+    <value>222, 527</value>
   </data>
   <data name="&gt;&gt;verticalTabs.Name" xml:space="preserve">
     <value>verticalTabs</value>
@@ -415,7 +421,7 @@
     <value>0</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>719, 530</value>
+    <value>719, 545</value>
   </data>
   <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
@@ -430,7 +436,7 @@
     <value>1</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>639, 530</value>
+    <value>639, 545</value>
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
@@ -469,7 +475,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>782, 512</value>
+    <value>782, 527</value>
   </data>
   <data name="&gt;&gt;splitContainer.Name" xml:space="preserve">
     <value>splitContainer</value>
@@ -484,7 +490,7 @@
     <value>0</value>
   </data>
   <data name="blueBorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>556, 512</value>
+    <value>556, 527</value>
   </data>
   <data name="&gt;&gt;blueBorder.Name" xml:space="preserve">
     <value>blueBorder</value>
@@ -505,13 +511,13 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>803, 565</value>
+    <value>803, 580</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>819, 604</value>
+    <value>819, 619</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
