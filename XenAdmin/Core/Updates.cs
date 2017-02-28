@@ -184,17 +184,18 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// If AutomaticCheck is enabled it checks for updates regardless the
-        /// value of the parameter force. If AutomaticCheck is disabled it only
-        /// checks if force is true.
+        /// value of the parameter force. If AutomaticCheck is disabled it 
+        /// checks for all update types if force is true; forceRefresh causes 
+        /// the check for update action to run and refresh the Updates page
         /// </summary>
-        public static void CheckForUpdates(bool force)
+        public static void CheckForUpdates(bool force, bool forceRefresh = false)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
 
             if (Properties.Settings.Default.AllowXenCenterUpdates ||
                 Properties.Settings.Default.AllowXenServerUpdates ||
-                Properties.Settings.Default.AllowPatchesUpdates || force)
+                Properties.Settings.Default.AllowPatchesUpdates || force || forceRefresh)
             {
                 DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction(
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
