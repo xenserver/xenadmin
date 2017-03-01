@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
 # 
@@ -32,31 +30,41 @@
 
 # help script to download third party binaries to local dev environment
 
-echo -n "Artifactory domain (e.g. artifactory.domain.com): "
-read DOMAIN
-echo -n "Username: "
-read USERNAME
-echo -n "Password: "
-read -s PASSWORD
-
-SCRIPT_DIR=$(cd $(dirname ${BASH_SOURCE[0]})/../packages && pwd)
+$DOMAIN = Read-Host "Artifactory domain (e.g. artifactory.domain.com): "
+$DOMAIN = $DOMAIN.Trim()
+$CREDENTIALS = Get-Credential
+$PACKAGE_DIR = Get-Item "$PSScriptRoot\..\packages" | select -ExpandProperty FullName
 
 #dotnet packages
 
-BUILD_LOCATION=$(cat ${SCRIPT_DIR}/DOTNET_BUILD_LOCATION)
-DOTNET="https://${DOMAIN}/api/archive/download/${BUILD_LOCATION}/dotnet46?archiveType=zip"
-ZIP=dotnetpackages.zip
+$BUILD_LOCATION = Get-Content "$PACKAGE_DIR\DOTNET_BUILD_LOCATION"
+$BUILD_LOCATION = $BUILD_LOCATION.Trim()
+$DOTNET = "https://$DOMAIN/api/archive/download/$BUILD_LOCATION/dotnet46?archiveType=zip"
+$ZIP_PATH = "$PACKAGE_DIR\dotnetpackages.zip"
 
-curl --fail -u ${USERNAME}:${PASSWORD} ${DOTNET} -o ${SCRIPT_DIR}/${ZIP}
-unzip -o ${SCRIPT_DIR}/${ZIP} -d ${SCRIPT_DIR} "*.dll" "putty.exe" 
-rm -f ${SCRIPT_DIR}/${ZIP}
+Invoke-WebRequest -Uri $DOTNET -Credential $CREDENTIALS -Method Get -OutFile $ZIP_PATH
+
+$shell = New-Object -COM 'Shell.Application'
+$zip = $shell.NameSpace($ZIP_PATH)
+
+foreach($item in $zip.items())
+{
+    $name = [System.IO.Path]::GetFileName($item.Path)
+    $ext = [System.IO.Path]::GetExtension($item.Path)
+    
+    if (($name -eq "putty.exe") -or ($ext -like "*.dll")) {
+        $shell.Namespace($PACKAGE_DIR).CopyHere($item, 4 -bor 16)
+    }
+}
+
+Remove-Item $ZIP_PATH
 
 #unit test dependencies
 
-MOQ="Moq.dll"
-MOQ_URL="https://${DOMAIN}/ctx-local-contrib/Moq/4.0.10827.0/4.0/${MOQ}"
-NUNIT="nunit.framework.dll"
-NUNIT_URL="https://${DOMAIN}/ctx-local-contrib/NUnit/NUnit/2.5.2.9122/3.5/${NUNIT}"
+$MOQ="Moq.dll"
+$MOQ_URL="https://$DOMAIN/ctx-local-contrib/Moq/4.0.10827.0/4.0/$MOQ"
+$NUNIT="nunit.framework.dll"
+$NUNIT_URL="https://$DOMAIN/ctx-local-contrib/NUnit/NUnit/2.5.2.9122/3.5/$NUNIT"
 
-curl --fail ${MOQ_URL}   -o ${SCRIPT_DIR}/${MOQ}
-curl --fail ${NUNIT_URL} -o ${SCRIPT_DIR}/${NUNIT}
+Invoke-WebRequest -Uri $MOQ_URL   -Method Get -OutFile "$PACKAGE_DIR\$MOQ"
+Invoke-WebRequest -Uri $NUNIT_URL -Method Get -OutFile "$PACKAGE_DIR\$NUNIT"
