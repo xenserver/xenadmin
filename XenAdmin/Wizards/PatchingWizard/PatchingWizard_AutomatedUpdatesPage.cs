@@ -328,18 +328,18 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                         // any non-restart-alike delayed action needs to be run if:
                         // - this host is pre-Ely and there isn't any restart plan action among the delayed actions, or
-                        // - this host is Ely or above and bgw.AvoidRestartHosts contains the host's uuid (shows that live patching must have succeeded)
+                        // - this host is Ely or above and bgw.AvoidRestartHosts contains the host's uuid (shows that live patching must have succeeded) or there isn't any restart plan action among the delayed actions
                         if (!Helpers.ElyOrGreater(h) && !actions.Any(pa => pa.IsRestartRelatedPlanAction())
-                            || Helpers.ElyOrGreater(h) && bgw.AvoidRestartHosts != null && bgw.AvoidRestartHosts.Contains(h.uuid))
+                            || Helpers.ElyOrGreater(h) && (bgw.AvoidRestartHosts != null && bgw.AvoidRestartHosts.Contains(h.uuid) || !actions.Any(pa => pa.IsRestartRelatedPlanAction())))
                         {
                             RunPlanAction(bgw, action);
                         }
                         else
                         {
+                            //skip running it
+
                             action.Visible = false;
                             bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action); //still need to report progress, mainly for the progress bar
-
-                            continue; //yes, skipping this action
                         }
 
                     }
