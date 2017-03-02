@@ -1146,4 +1146,7 @@
   <data name="PvsSiteDialog" xml:space="preserve">
     <value>9910</value>
   </data>
+  <data name="EnableRDPonVM" xml:space="preserve">
+    <value>1020</value>
+  </data>
 </root>
