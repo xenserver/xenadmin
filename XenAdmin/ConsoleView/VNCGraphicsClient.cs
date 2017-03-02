@@ -46,7 +46,7 @@ namespace XenAdmin.ConsoleView
 {
     public class VNCGraphicsClient : UserControl, IVNCGraphicsClient, IRemoteConsole
     {
-        public const int BORDER_PADDING = 4;
+        public const int BORDER_PADDING = 5;
         public const int BORDER_WIDTH = 1;
 
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

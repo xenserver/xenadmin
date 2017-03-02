@@ -88,24 +88,24 @@ namespace XenAdmin.ConsoleView
             rdpControl.Resize += resizeHandler;
         }
 
-        private void RDPConfigure(Size oldSize)
+        private void RDPConfigure(Size currentConsoleSize)
         {
             rdpControl.BeginInit();
-
+            rdpLocationOffset = new Point(2, 2); //small offset to accomodate focus rectangle
             rdpControl.Dock = DockStyle.None;
-            rdpControl.Anchor = AnchorStyles.None;
-            rdpControl.Size = oldSize;
+            rdpControl.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
+            rdpControl.Size = currentConsoleSize;
             RDPAddOnDisconnected();
             rdpControl.Enter += RdpEnter;
             rdpControl.Leave += rdpClient_Leave;
             rdpControl.GotFocus += rdpClient_GotFocus;
-
-            rdpControl.Location = new Point(
-                    parent.ClientSize.Width > oldSize.Width ? (parent.ClientSize.Width - oldSize.Width) / 2 : 0,
-                    parent.ClientSize.Height > oldSize.Height ? (parent.ClientSize.Height - oldSize.Height) / 2 : 0
-                );
-
             rdpControl.EndInit();
+        }
+
+
+        public Point rdpLocationOffset
+        {
+            set { rdpControl.Location = value; }
         }
 
         private void RDPAddOnDisconnected()
@@ -170,6 +170,20 @@ namespace XenAdmin.ConsoleView
                 rdpClient8.DesktopWidth = w;
                 rdpClient8.DesktopHeight = h;
                 rdpClient8.Connect();
+            }
+        }
+
+        public void Reconnect( int width, int height)
+        {
+            if (rdpControl == null)
+                return;
+
+            Log.DebugFormat("Reconnecting RDPClient8 using width '{0}' and height '{1}'", width, height);
+
+            if (Connected && rdpClient8 != null)
+            {
+                rdpClient8.Size = new Size(width, height);
+                rdpClient8.Reconnect((uint)width, (uint)height);
             }
         }
 
