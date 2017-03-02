@@ -292,7 +292,7 @@ namespace XenAdmin.Actions
         {
             var xdoc = new XmlDocument();
             var uri = new Uri(location);
-            var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection);
+            var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
 
             if (uri.IsFile)
             {
