@@ -9736,6 +9736,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   <data name="POOL_JOIN_IMPOSSIBLE" xml:space="preserve">
     <value>Pool join not possible</value>
   </data>
+  <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
+    <value>This server must not have any bonds, non management VLANs or cross-server private networks</value>
+  </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
     <value>This server must not have any bonds, VLANs or cross-server private networks</value>
   </data>

@@ -27911,6 +27911,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs or cross-server private networks.
+        /// </summary>
+        public static string POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This server must not have any bonds, VLANs or cross-server private networks.
         /// </summary>
         public static string POOL_JOIN_NOT_PHYSICAL_PIF {
