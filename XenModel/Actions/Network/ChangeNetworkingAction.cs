@@ -135,6 +135,12 @@ namespace XenAdmin.Actions
                     if (Pool != null)
                     {
                         progress += inc;
+                        if (!Helpers.FeatureForbidden(Connection, Host.RestrictManagementOnVLAN))
+                       {
+                            PoolReconfigureManagement(progress);
+                            return;
+                       }
+
                         ReconfigureManagement(false, progress);
                     }
 
@@ -193,6 +199,13 @@ namespace XenAdmin.Actions
 
             NetworkingActionHelpers.ReconfigureManagement(this, downManagement, newManagement, this_host, true, hi,
                                                           clearDownManagementIP);
+        }
+
+        private void PoolReconfigureManagement(int hi)
+        {
+            System.Diagnostics.Trace.Assert(newManagement != null);
+
+            NetworkingActionHelpers.PoolReconfigureManagement(this, newManagement, downManagement, hi);
         }
 
         private void BringUp(PIF new_pif, PIF existing_pif, int hi)

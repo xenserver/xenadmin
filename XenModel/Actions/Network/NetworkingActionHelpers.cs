@@ -32,7 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Threading;
 using XenAPI;
 
 using XenAdmin.Model;
@@ -268,6 +268,45 @@ namespace XenAdmin.Actions
             log.DebugFormat("Switched to PIF {0} {1} for management.", pif.Name, pif.uuid);
             action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name);
         }
+
+        internal static void PoolReconfigureManagement(AsyncAction action, PIF up_pif, PIF down_pif, int hi)
+       {
+           System.Diagnostics.Trace.Assert(down_pif.host.opaque_ref == up_pif.host.opaque_ref);
+
+           int lo = action.PercentComplete;
+           int inc = (hi - lo) / 3;
+           lo += inc;
+           PoolManagementReconfigure_( action, up_pif, lo);
+
+           /* Pool recover slaves spwans two tasks dbsync (update_env) and server_init on each slaves. 
+            * Only after their completion master will be able to execute reconfigure_IPs. 
+            * Hence, we allow some setteling time for them to complete.
+            */
+           Thread.Sleep(10000);
+           
+            /* Reconfigure IP for slaves and then master */
+           
+           lo += inc;
+           ForSomeHosts(action, down_pif, false, true, lo, ClearIP);
+           lo += inc;
+           ForSomeHosts(action, down_pif, true, true, hi, ClearIP);
+       }
+
+       /// <summary>
+       /// Switch the Pool's management interface from its current setting over to the given PIF.
+       /// </summary>
+       private static void PoolManagementReconfigure_(AsyncAction action, PIF pif, int hi)
+       {
+
+           log.DebugFormat("Switching to PIF {0} {1} for management...", pif.Name, pif.uuid);
+           action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURING, pif.Name);
+
+           action.RelatedTask = Pool.async_management_reconfigure(action.Session, pif.network.opaque_ref);
+           action.PollToCompletion(action.PercentComplete, hi);
+
+           action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name);
+           log.DebugFormat("Switched to PIF {0} {1} for management...", pif.Name, pif.uuid);
+       }
 
         /// <summary>
         /// Remove the IP address from the given PIF.
