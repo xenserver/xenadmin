@@ -1384,12 +1384,13 @@ namespace XenAdmin.ConsoleView
             return false;
         }
 
+        private Size oldSize;
         public void UpdateRDPResolution(bool fullscreen = false)
         {
             if (rdpClient == null)
                 return;
 
-            //remove offsets because there is no focus border to accomodate in fullscreen
+            //no offsets in fullscreen mode because there is no need to accomodate focus border 
             if (fullscreen)
             {
                 rdpClient.rdpLocationOffset = new Point(0, 0);
@@ -1397,8 +1398,11 @@ namespace XenAdmin.ConsoleView
             }
             else 
             {
+                if (oldSize.Equals(this.Size))
+                    return;
                 rdpClient.rdpLocationOffset = new Point(2, 2);
                 rdpClient.Reconnect(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
+                oldSize = new Size(this.Size.Width, this.Size.Height);
             }               
         }
     }
