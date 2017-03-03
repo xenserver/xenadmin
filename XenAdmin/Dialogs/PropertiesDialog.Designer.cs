@@ -32,16 +32,14 @@ namespace XenAdmin.Dialogs
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PropertiesDialog));
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            this.blueBorder.SuspendLayout();
             this.SuspendLayout();
             // 
             // ContentPanel
             // 
             resources.ApplyResources(this.ContentPanel, "ContentPanel");
+            this.ContentPanel.MinimumSize = new System.Drawing.Size(500, 500);
             // 
             // verticalTabs
             // 
@@ -62,9 +60,13 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.splitContainer, "splitContainer");
             // 
-            // blueBorder
+            // splitContainer.Panel1
             // 
-            resources.ApplyResources(this.blueBorder, "blueBorder");
+            resources.ApplyResources(this.splitContainer.Panel1, "splitContainer.Panel1");
+            // 
+            // splitContainer.Panel2
+            // 
+            resources.ApplyResources(this.splitContainer.Panel2, "splitContainer.Panel2");
             // 
             // PropertiesDialog
             // 
@@ -72,10 +74,7 @@ namespace XenAdmin.Dialogs
             this.Name = "PropertiesDialog";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PropertiesDialog_FormClosed);
             this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            this.blueBorder.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

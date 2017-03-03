@@ -112,46 +112,49 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ContentPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ContentPanel.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="ContentPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ContentPanel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="ContentPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </data>
-  <data name="ContentPanel.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>500, 500</value>
   </data>
   <data name="ContentPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 49, 10, 10</value>
   </data>
   <data name="ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>652, 509</value>
+    <value>651, 509</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Name" xml:space="preserve">
     <value>ContentPanel</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ContentPanel.Parent" xml:space="preserve">
     <value>blueBorder</value>
   </data>
   <data name="&gt;&gt;ContentPanel.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="verticalTabs.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="verticalTabs.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 511</value>
@@ -168,14 +171,17 @@
   <data name="&gt;&gt;verticalTabs.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="cancelButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>801, 529</value>
+    <value>800, 529</value>
   </data>
   <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
     <value>cancelButton</value>
   </data>
   <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -183,14 +189,20 @@
   <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="okButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>721, 529</value>
+    <value>720, 529</value>
+  </data>
+  <data name="okButton.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="&gt;&gt;okButton.Name" xml:space="preserve">
     <value>okButton</value>
   </data>
   <data name="&gt;&gt;okButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -198,11 +210,17 @@
   <data name="&gt;&gt;okButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="splitContainer.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="splitContainer.Panel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="&gt;&gt;splitContainer.Panel1.Name" xml:space="preserve">
     <value>splitContainer.Panel1</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel1.Parent" xml:space="preserve">
     <value>splitContainer</value>
@@ -210,11 +228,14 @@
   <data name="&gt;&gt;splitContainer.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="splitContainer.Panel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="&gt;&gt;splitContainer.Panel2.Name" xml:space="preserve">
     <value>splitContainer.Panel2</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer.Panel2.Parent" xml:space="preserve">
     <value>splitContainer</value>
@@ -223,7 +244,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>864, 511</value>
+    <value>863, 511</value>
   </data>
   <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
     <value>206</value>
@@ -232,7 +253,7 @@
     <value>splitContainer</value>
   </data>
   <data name="&gt;&gt;splitContainer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainer.Parent" xml:space="preserve">
     <value>$this</value>
@@ -240,29 +261,14 @@
   <data name="&gt;&gt;splitContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="blueBorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>654, 511</value>
-  </data>
-  <data name="&gt;&gt;blueBorder.Name" xml:space="preserve">
-    <value>blueBorder</value>
-  </data>
-  <data name="&gt;&gt;blueBorder.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.BlueBorderPanel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;blueBorder.Parent" xml:space="preserve">
-    <value>splitContainer.Panel2</value>
-  </data>
-  <data name="&gt;&gt;blueBorder.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>885, 566</value>
+    <value>884, 566</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
