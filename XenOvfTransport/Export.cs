@@ -356,9 +356,8 @@ namespace XenOvfTransport
                     }
                 }
 
-                var allProxies = PVS_proxy.get_all_records(xenSession).Select(kvp => kvp.Value).ToList();
-                
                 string pvsSiteUuid = string.Empty;
+                var allProxies = xenSession.Connection.Cache.PVS_proxies;                
 
                 foreach (var p in allProxies.Where(p => p != null && p.VIF != null))
                 {
@@ -372,9 +371,9 @@ namespace XenOvfTransport
                             if (pvsSite != null)
                             {
                                 pvsSiteUuid = pvsSite.uuid;
-                                
-                                break;
                             }
+
+                            break;
                         }
                     }
                 }
