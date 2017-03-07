@@ -6315,7 +6315,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>It is not possible to connect to the iLO service. Please review your configuration.</value>
   </data>
   <data name="ILO_POWERON_FAILED" xml:space="preserve">
-    <value>The iLO credentials are incorrect</value>
+    <value>The iLO power-on request failed</value>
   </data>
   <data name="IMAGE_DEFINITION_PAGE_TEXT" xml:space="preserve">
     <value>VM Definition</value>

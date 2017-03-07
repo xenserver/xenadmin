@@ -18045,7 +18045,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The iLO credentials are incorrect.
+        ///   Looks up a localized string similar to The iLO power-on request failed.
         /// </summary>
         public static string ILO_POWERON_FAILED {
             get {
