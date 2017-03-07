@@ -1825,6 +1825,7 @@ namespace XenAdmin
                     ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
+                ConsolePanel.UpdateRDPResolution();
             }
             else if (t == TabPageCvmConsole)
             {
@@ -3314,13 +3315,17 @@ namespace XenAdmin
         FormWindowState lastState = FormWindowState.Normal;
         private void MainWindow_Resize(object sender, EventArgs e)
         {
-            SetSplitterDistance();
-            if(WindowState != lastState && WindowState != FormWindowState.Minimized)
+            TabPage t = TheTabControl.SelectedTab;
+            if (t == TabPageConsole)
             {
-                lastState = WindowState;
-                ConsolePanel.UpdateRDPResolution();
+                if (WindowState != lastState && WindowState != FormWindowState.Minimized)
+                {
+                    lastState = WindowState;
+                    ConsolePanel.UpdateRDPResolution();
+                }
+                mainWindowResized = true;
             }
-            mainWindowResized = true;
+            SetSplitterDistance();
         }
 
         private void SetSplitterDistance()
@@ -3343,14 +3348,20 @@ namespace XenAdmin
       
         private void MainWindow_ResizeEnd(object sender, EventArgs e)
         {
-            if (mainWindowResized)
-                ConsolePanel.UpdateRDPResolution();
-            mainWindowResized = false;
+            TabPage t = TheTabControl.SelectedTab;
+            if (t == TabPageConsole) 
+            {
+                if (mainWindowResized)
+                    ConsolePanel.UpdateRDPResolution();
+                mainWindowResized = false;
+            }
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            ConsolePanel.UpdateRDPResolution();
+            TabPage t = TheTabControl.SelectedTab;
+            if (t == TabPageConsole)
+                ConsolePanel.UpdateRDPResolution();
         }
     }
 }
