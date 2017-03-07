@@ -12295,6 +12295,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU, {2}, {3} display)</value>
   </data>
+  <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU)</value>
+  </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>Pass-through whole GPU</value>
   </data>

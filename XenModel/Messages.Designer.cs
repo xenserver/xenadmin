@@ -35477,6 +35477,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU).
+        /// </summary>
+        public static string VGPU_DESCRIPTION_ZEROES {
+            get {
+                return ResourceManager.GetString("VGPU_DESCRIPTION_ZEROES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pass-through whole GPU.
         /// </summary>
         public static string VGPU_PASSTHRU_TOSTRING {
