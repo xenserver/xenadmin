@@ -55,6 +55,9 @@ namespace XenAPI
                 if (IsPassthrough)
                     return Messages.VGPU_PASSTHRU_TOSTRING;
 
+                if ((MaxResolution == "0x0" || string.IsNullOrEmpty(MaxResolution)) && max_heads < 1)
+                    return string.Format(Messages.VGPU_DESCRIPTION_ZEROES, model_name, Capacity);
+
                 return string.Format(max_heads == 1 ? Messages.VGPU_DESCRIPTION_ONE : Messages.VGPU_DESCRIPTION_MANY,
                     model_name, Capacity, MaxResolution, max_heads);
             }
@@ -129,7 +132,7 @@ namespace XenAPI
 
         public bool IsPassthrough
         {
-            get { return max_heads == 0; }
+            get { return model_name == "passthrough"; }
         }
     }
 }

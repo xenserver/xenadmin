@@ -203,10 +203,10 @@ namespace XenAdmin.Controls.GPU
                 vGpusPerGpuColumn.Value = string.Empty;
 
             if (!isPassThru)
-                maxResolutionColumn.Value = VGpuType.MaxResolution;
+                maxResolutionColumn.Value = (VGpuType.MaxResolution == "0x0" || String.IsNullOrEmpty(VGpuType.MaxResolution)) ? "" : VGpuType.MaxResolution;
 
             if (!isPassThru)
-                maxDisplaysColumn.Value = VGpuType.max_heads;
+                maxDisplaysColumn.Value = VGpuType.max_heads < 1 ? "" : String.Format("{0}",VGpuType.max_heads);
             else
                 maxDisplaysColumn.Value = string.Empty;
 
