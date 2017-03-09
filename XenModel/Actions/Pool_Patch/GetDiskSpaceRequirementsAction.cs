@@ -154,7 +154,8 @@ namespace XenAdmin.Actions
 
             DiskSpaceRequirements = new DiskSpaceRequirements(operation, Host, updateName, requiredDiskSpace, availableDiskSpace, reclaimableDiskSpace);
 
-            log.WarnFormat("Cleanup message: \r\n{0}", DiskSpaceRequirements.GetSpaceRequirementsMessage());
+            if (availableDiskSpace < requiredDiskSpace)
+                log.WarnFormat("Cleanup message: \r\n{0}", DiskSpaceRequirements.GetSpaceRequirementsMessage());
         }
     }
 
