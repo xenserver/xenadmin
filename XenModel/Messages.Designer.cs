@@ -23688,6 +23688,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server does not have the same updates as the pool master.
+        /// </summary>
+        public static string NEWPOOL_DIFF_PATCHES {
+            get {
+                return ResourceManager.GetString("NEWPOOL_DIFF_PATCHES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This server is a different version to the master.
         /// </summary>
         public static string NEWPOOL_DIFF_SERVER {

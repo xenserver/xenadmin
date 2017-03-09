@@ -8095,6 +8095,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_DIFF_HARDWARE" xml:space="preserve">
     <value>This server's hardware is incompatible with the master's</value>
   </data>
+  <data name="NEWPOOL_DIFF_PATCHES" xml:space="preserve">
+    <value>This server does not have the same updates as the pool master</value>
+  </data>
   <data name="NEWPOOL_DIFF_SERVER" xml:space="preserve">
     <value>This server is a different version to the master</value>
   </data>

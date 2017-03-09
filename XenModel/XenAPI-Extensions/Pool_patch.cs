@@ -206,4 +206,21 @@ namespace XenAPI
         }
 
     }
+    
+    class PatchUuidEqualityComparer : IEqualityComparer<Pool_patch>
+    {
+        public bool Equals(Pool_patch obj1, Pool_patch obj2)
+        {
+            if (obj1 == null && obj2 == null)
+                return true;
+            if (obj1 == null || obj2 == null)
+                return false;
+            return string.Equals(obj1.uuid, obj2.uuid, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public int GetHashCode(Pool_patch obj)
+        {
+            return obj.uuid.GetHashCode();
+        }
+    }
 }
