@@ -174,7 +174,7 @@ node("${params.BUILD_ON_NODE}") {
       returnStdout: true,
       script: """
               @echo off
-              if defined c (echo 1) else (echo 0)
+              if defined CTXSIGN (echo 1) else (echo 0)
               """
     ).trim()
 
