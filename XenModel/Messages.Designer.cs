@@ -23484,7 +23484,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server has running or suspended VMs.
+        ///   Looks up a localized string similar to This server has running VMs.
         /// </summary>
         public static string NEWPOOL_HAS_RUNNING_VMS {
             get {

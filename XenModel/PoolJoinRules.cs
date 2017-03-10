@@ -237,7 +237,7 @@ namespace XenAdmin.Core
         {
             foreach (VM vm in connection.Cache.VMs)
             {
-                if (vm.is_a_real_vm && (vm.power_state == XenAPI.vm_power_state.Running || vm.power_state == XenAPI.vm_power_state.Suspended))
+                if (vm.is_a_real_vm && vm.power_state == XenAPI.vm_power_state.Running)
                     return true;
             }
             return false;
