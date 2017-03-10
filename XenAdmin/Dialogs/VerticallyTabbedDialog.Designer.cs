@@ -82,9 +82,9 @@ namespace XenAdmin.Dialogs
             // 
             // TopPanel
             // 
-            resources.ApplyResources(this.TopPanel, "TopPanel");
             this.TopPanel.Controls.Add(this.TabImage);
             this.TopPanel.Controls.Add(this.TabTitle);
+            resources.ApplyResources(this.TopPanel, "TopPanel");
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Scheme = XenAdmin.Controls.GradientPanel.GradientPanel.Schemes.Tab;
             // 

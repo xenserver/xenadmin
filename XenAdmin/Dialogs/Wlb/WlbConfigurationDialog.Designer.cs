@@ -124,14 +124,12 @@ namespace XenAdmin.Dialogs.Wlb
             // 
             this.wlbAdvancedSettingsPage.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.wlbAdvancedSettingsPage, "wlbAdvancedSettingsPage");
-            this.wlbAdvancedSettingsPage.MinimumSize = new System.Drawing.Size(560, 560);
             this.wlbAdvancedSettingsPage.Name = "wlbAdvancedSettingsPage";
             // 
             // WlbConfigurationDialog
             // 
             resources.ApplyResources(this, "$this");
             this.Name = "WlbConfigurationDialog";
-            this.SizeChanged += new System.EventHandler(this.WlbConfigurationDialog_SizeChanged);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.okButton, 0);
             this.Controls.SetChildIndex(this.splitContainer, 0);
