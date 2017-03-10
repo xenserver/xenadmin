@@ -50,6 +50,7 @@ namespace XenAdmin.Dialogs
         {
             Properties.Settings.Default.AllowXenCenterUpdates = value;
             Properties.Settings.Default.AllowPatchesUpdates = value;
+            Properties.Settings.Default.AllowXenServerUpdates = value;
         }
 
         private void YesButtonClicked()
