@@ -8102,7 +8102,7 @@ You should only proceed if you have verified that these settings are correct.</v
     <value>You cannot add a Free Edition [XenServer] to a pool with [XenServer] Advanced Edition or higher licenses</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
-    <value>This server has running or suspended VMs</value>
+    <value>This server has running VMs</value>
   </data>
   <data name="NEWPOOL_HAS_SHARED_STORAGE" xml:space="preserve">
     <value>This server has shared storage</value>
