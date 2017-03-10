@@ -11,42 +11,42 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/putty.exe",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/putty.exe",
       "target": "xenadmin.git/putty/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/NDP46-KB3045560-Web.exe",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/NDP46-KB3045560-Web.exe",
       "target": "xenadmin.git/dotNetInstaller/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/UNSIGNED/CookComputing.XmlRpcV2.dll",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/CookComputing.XmlRpcV2.dll",
       "target": "xenadmin.git/xml-rpc.net/obj/Release/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/UNSIGNED/log4net.dll",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/log4net.dll",
       "target": "xenadmin.git/log4net/build/bin/net/2.0/release/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/UNSIGNED/ICSharpCode.SharpZipLib.dll",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/ICSharpCode.SharpZipLib.dll",
       "target": "xenadmin.git/sharpziplib/bin/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/UNSIGNED/Ionic.Zip.dll",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/Ionic.Zip.dll",
       "target": "xenadmin.git/dotnetzip/DotNetZip-src/DotNetZip/Zip/bin/Release/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/UNSIGNED/DiscUtils.dll",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/DiscUtils.dll",
       "target": "xenadmin.git/DiscUtils/src/bin/Release/",
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/*.pdb",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/*.pdb",
       "target": "output/",
       "flat": "true"
     },
