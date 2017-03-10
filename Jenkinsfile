@@ -135,7 +135,7 @@ node("${params.BUILD_ON_NODE}") {
           returnStatus: true,
           script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.XC_BRANCH}"""
         )
-        String branchToClone = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'master'
+        String branchToClone = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'release/ely/lcm'
 
         bat """git clone -b ${branchToClone} ${BRANDING_REMOTE} ${env.WORKSPACE}\\branding.git"""
       } else {
@@ -147,7 +147,7 @@ node("${params.BUILD_ON_NODE}") {
           returnStatus: true,
           script: """git ls-remote --heads ${BRAND_REMOTE} | grep ${params.XC_BRANCH}"""
         )
-        String branchToClone = (branchExistsOnBrand == 0) ?  params.XC_BRANCH : 'master'
+        String branchToClone = (branchExistsOnBrand == 0) ?  params.XC_BRANCH : 'release/ely/lcm'
 
         bat """
             git clone -b ${branchToClone} ${BRAND_REMOTE} ${env.WORKSPACE}\\xenadmin-branding.git
@@ -162,7 +162,7 @@ node("${params.BUILD_ON_NODE}") {
           returnStatus: true,
           script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.XC_BRANCH}"""
         )
-        String branchToCloneB = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'master'
+        String branchToCloneB = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'release/ely/lcm'
 
         bat """
             git clone -b ${branchToCloneB} ${BRANDING_REMOTE} ${env.WORKSPACE}\\${XC_BRANDING}-branding.git
