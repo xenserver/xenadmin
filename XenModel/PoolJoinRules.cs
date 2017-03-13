@@ -394,19 +394,16 @@ namespace XenAdmin.Core
             {
                 var masterUpdates = master.AppliedUpdates();
                 var slaveUpdates = slave.AppliedUpdates();
-                if (masterUpdates.Except(slaveUpdates, new UpdateUuidEqualityComparer()).Any() ||
-                    slaveUpdates.Except(masterUpdates, new UpdateUuidEqualityComparer()).Any())
-                    return true; 
+                return masterUpdates.Count != slaveUpdates.Count ||
+                       masterUpdates.Except(slaveUpdates, new UpdateUuidEqualityComparer()).Any();
             }
             else
             {
                 var masterPatches = master.AppliedPatches();
                 var slavePatches = slave.AppliedPatches();
-                if (masterPatches.Except(slavePatches, new PatchUuidEqualityComparer()).Any() ||
-                    slavePatches.Except(masterPatches, new PatchUuidEqualityComparer()).Any())
-                    return true; 
+                return masterPatches.Count != slavePatches.Count ||
+                       masterPatches.Except(slavePatches, new PatchUuidEqualityComparer()).Any();
             }
-            return false;
         }
 
         private static bool SameLinuxPack(Host slave, Host master)
