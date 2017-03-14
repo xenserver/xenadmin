@@ -115,7 +115,7 @@ namespace CFUValidator
             SetupMocks(xenServerPatches, xenServerVersions);
 
             Status = "Determining XenCenter update required...";
-            var xcupdateAlerts = XenAdmin.Core.Updates.NewXenCenterUpdateAlert(xenCenterVersions, new Version(ServerVersion));
+            var xcupdateAlerts = XenAdmin.Core.Updates.NewXenCenterUpdateAlerts(xenCenterVersions, new Version(ServerVersion));
 
             Status = "Determining XenServer update required...";
             var updateAlerts = XenAdmin.Core.Updates.NewXenServerVersionAlerts(xenServerVersions);
@@ -137,6 +137,7 @@ namespace CFUValidator
             Status = "Generating summary...";
 
             GeneratePatchSummary(patchAlerts, validators, updateAlerts, xcupdateAlerts);
+            GeneratePatchSummary(patchAlerts, validators, updateAlert, xcupdateAlerts);
         }
 
         private void CheckProvidedVersionNumber(List<XenServerVersion> xenServerVersions)
