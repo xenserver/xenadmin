@@ -38,16 +38,18 @@ namespace XenAdmin.Core
     {
         public Version Version;
         public string Name;
-        public bool IsLatest;
+        public bool Latest;
+        public bool LatestCr;
         public string Url;
         public string Lang;
         public DateTime TimeStamp;
 
-        public XenCenterVersion(string version_lang, string name, bool is_latest, string url, string timestamp)
+        public XenCenterVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp)
         {
             ParseVersion(version_lang);
             Name = name;
-            IsLatest = is_latest;
+            Latest = latest;
+            LatestCr = latest_cr;
             if (url.StartsWith("/XenServer"))
                 url = XenServerVersion.UpdateRoot + url;
             Url = url;
