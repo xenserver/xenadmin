@@ -41,6 +41,7 @@ namespace XenAdmin.Core
         public Version Version;
         public string Name;
         public bool Latest;
+        public bool LatestCr;
         public string Url;
         public string Oem;
         public List<XenServerPatch> Patches;
@@ -61,17 +62,19 @@ namespace XenAdmin.Core
         /// <param name="version_oem"></param>
         /// <param name="name"></param>
         /// <param name="latest"></param>
+        /// <param name="latestCr"></param>
         /// <param name="url"></param>
         /// <param name="patches"></param>
         /// <param name="minimumPatches">can be null (see <paramref name="MinimalPatches"/></param>
         /// <param name="timestamp"></param>
         /// <param name="buildNumber"></param>
-        public XenServerVersion(string version_oem, string name, bool latest, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
+        public XenServerVersion(string version_oem, string name, bool latest, bool latestCr, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
             string timestamp, string buildNumber)
         {
             ParseVersion(version_oem);
             Name = name;
             Latest = latest;
+            LatestCr = latestCr;
             if (url.StartsWith("/XenServer"))
                 url = UpdateRoot + url;
             Url = url;

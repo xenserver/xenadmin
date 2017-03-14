@@ -309,9 +309,9 @@ namespace XenAdmin.Core
                 if (xenCenterAlerts != null)
                     updateAlerts.AddRange(xenCenterAlerts.Where(a=>!a.IsDismissed()));
 
-                var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
-                if (xenServerUpdateAlert != null && !xenServerUpdateAlert.CanIgnore)
-                    updateAlerts.Add(xenServerUpdateAlert);
+                var xenServerUpdateAlerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
+                if (xenServerUpdateAlerts != null)
+                    updateAlerts.AddRange(xenServerUpdateAlerts.Where(a=>!a.CanIgnore));
 
                 var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
                 if (xenServerPatchAlerts != null)
@@ -740,16 +740,28 @@ namespace XenAdmin.Core
             }
         }
 
-        public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)
+        public static List<XenServerVersionAlert> NewXenServerVersionAlerts(List<XenServerVersion> xenServerVersions)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
 
             var latestVersion = xenServerVersions.FindAll(item => item.Latest).OrderByDescending(v => v.Version).FirstOrDefault();
-            if (latestVersion == null)
-                return null;
+            var latestCrVersion = xenServerVersions.FindAll(item => item.LatestCr).OrderByDescending(v => v.Version).FirstOrDefault();
 
-            var alert = new XenServerVersionAlert(latestVersion);
+            List<XenServerVersionAlert> alerts = new List<XenServerVersionAlert>();
+
+            if (latestVersion != null)
+                alerts.Add(CreateAlertForXenServerVersion(latestVersion));
+
+            if (latestCrVersion != null && latestCrVersion != latestVersion)
+                alerts.Add(CreateAlertForXenServerVersion(latestCrVersion));
+
+            return alerts;
+        }
+
+        private static XenServerVersionAlert CreateAlertForXenServerVersion(XenServerVersion version)
+        {
+            var alert = new XenServerVersionAlert(version);
 
             foreach (IXenConnection xc in ConnectionsManager.XenConnectionsCopy)
             {
@@ -762,7 +774,7 @@ namespace XenAdmin.Core
                 if (master == null || pool == null)
                     continue;
 
-                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < latestVersion.Version);
+                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < version.Version);
 
                 if (outOfDateHosts.Count() == hosts.Count)
                     alert.IncludeConnection(xc);
@@ -773,14 +785,13 @@ namespace XenAdmin.Core
             return alert;
         }
 
-
         public static void CheckServerVersion()
         {
-            var alert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
-            if (alert == null)
+            var alerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
+            if (alerts == null || alerts.Count == 0)
                 return;
 
-            CheckUpdate(alert);
+            alerts.ForEach(a => CheckUpdate(a));
         }
 
         public static void CheckServerPatches()
@@ -789,8 +800,7 @@ namespace XenAdmin.Core
             if (alerts == null)
                 return;
 
-            foreach (var alert in alerts)
-                CheckUpdate(alert);
+            alerts.ForEach(a => CheckUpdate(a));
         }
 
         private static void CheckUpdate(XenServerUpdateAlert alert)
