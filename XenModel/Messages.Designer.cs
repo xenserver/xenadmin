@@ -4833,7 +4833,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New [XenCenter] Available.
+        ///   Looks up a localized string similar to {0} is now available..
         /// </summary>
         public static string ALERT_NEW_VERSION {
             get {

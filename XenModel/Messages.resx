@@ -1791,7 +1791,7 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
     <value>Go to Web Page</value>
   </data>
   <data name="ALERT_NEW_VERSION" xml:space="preserve">
-    <value>New [XenCenter] Available</value>
+    <value>{0} is now available.</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
     <value>{0} is now available. Download the new version from the [Citrix] website.</value>
