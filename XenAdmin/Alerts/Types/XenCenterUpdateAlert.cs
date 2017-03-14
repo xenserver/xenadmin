@@ -102,15 +102,20 @@ namespace XenAdmin.Alerts
         }
 
         public override void Dismiss()
-        {            
-            Properties.Settings.Default.LatestXenCenterSeen = NewVersion.VersionAndLang;
+        {
+            List<string> current = new List<string>(Properties.Settings.Default.LatestXenCenterSeen.Split(','));
+            if (current.Contains(NewVersion.VersionAndLang))
+                return;
+            current.Add(NewVersion.VersionAndLang);
+            Properties.Settings.Default.LatestXenCenterSeen = string.Join(",", current.ToArray());
             Settings.TrySaveSettings();
             Updates.RemoveUpdate(this);
         }
 
         public override bool IsDismissed()
         {
-            return Properties.Settings.Default.LatestXenCenterSeen == NewVersion.VersionAndLang;
+            List<string> current = new List<string>(Properties.Settings.Default.LatestXenCenterSeen.Split(','));
+            return current.Contains(NewVersion.VersionAndLang);
         }
 
         public override bool Equals(Alert other)
