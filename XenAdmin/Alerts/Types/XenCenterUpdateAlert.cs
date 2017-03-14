@@ -61,7 +61,7 @@ namespace XenAdmin.Alerts
 
         public override string Title
         {
-            get { return Messages.ALERT_NEW_VERSION; }
+            get { return string.Format(Messages.ALERT_NEW_VERSION, NewVersion.Name); }
         }
 
         public override string Description
