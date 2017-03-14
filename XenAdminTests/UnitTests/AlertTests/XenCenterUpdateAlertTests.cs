@@ -43,7 +43,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         [Test]
         public void VerifyStoredDataWithDefaultConstructor()
         {
-            IUnitTestVerifier validator = new VerifyGetters(new XenCenterUpdateAlert(new XenCenterVersion("6.0.2", "xc", true, "http://url", new DateTime(2011, 12, 09).ToString())));
+            IUnitTestVerifier validator = new VerifyGetters(new XenCenterUpdateAlert(new XenCenterVersion("6.0.2", "xc", true, false, "http://url", new DateTime(2011, 12, 09).ToString())));
 
             validator.Verify(new AlertClassUnitTestData
             {
