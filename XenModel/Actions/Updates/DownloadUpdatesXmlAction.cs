@@ -119,7 +119,8 @@ namespace XenAdmin.Actions
                 {
                     string version_lang = "";
                     string name = "";
-                    bool is_latest = false;
+                    bool latest = false;
+                    bool latest_cr = false;
                     string url = "";
                     string timestamp = "";
 
@@ -130,14 +131,16 @@ namespace XenAdmin.Actions
                         else if (attrib.Name == "name")
                             name = attrib.Value;
                         else if (attrib.Name == "latest")
-                            is_latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                            latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                        else if (attrib.Name == "latestcr")
+                            latest_cr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;
                     }
 
-                    XenCenterVersions.Add(new XenCenterVersion(version_lang, name, is_latest, url, timestamp));
+                    XenCenterVersions.Add(new XenCenterVersion(version_lang, name, latest, latest_cr, url, timestamp));
                 }
             }
         }

@@ -305,9 +305,9 @@ namespace XenAdmin.Core
                     XenServerPatches = action.XenServerPatches;
                 }
 
-                var xenCenterAlert = NewXenCenterUpdateAlert(XenCenterVersions, Program.Version);
-                if (xenCenterAlert != null && !xenCenterAlert.IsDismissed())
-                    updateAlerts.Add(xenCenterAlert);
+                var xenCenterAlerts = NewXenCenterUpdateAlerts(XenCenterVersions, Program.Version);
+                if (xenCenterAlerts != null)
+                    updateAlerts.AddRange(xenCenterAlerts.Where(a=>!a.IsDismissed()));
 
                 var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
                 if (xenServerUpdateAlert != null && !xenServerUpdateAlert.CanIgnore)
@@ -354,33 +354,47 @@ namespace XenAdmin.Core
         }
 
 
-        public static XenCenterUpdateAlert NewXenCenterUpdateAlert(List<XenCenterVersion> xenCenterVersions, Version currentProgramVersion)
+        public static List<XenCenterUpdateAlert> NewXenCenterUpdateAlerts(List<XenCenterVersion> xenCenterVersions,
+            Version currentProgramVersion)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
-
-            XenCenterVersion toUse = null;
+            var alerts = new List<XenCenterUpdateAlert>();
+            XenCenterVersion latest = null, latestCr = null;
             if (xenCenterVersions.Count != 0 && currentProgramVersion != new Version(0, 0, 0, 0))
             {
-                var latest = from v in xenCenterVersions where v.IsLatest select v;
+                var latestVersions = from v in xenCenterVersions where v.Latest select v;
+                latest = latestVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                         latestVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
 
-                toUse = latest.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
-                        latest.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+                if (IsSuitableForXenCenterAlert(latest, currentProgramVersion))
+                    alerts.Add(new XenCenterUpdateAlert(latest));
+
+                var latestCrVersions = from v in xenCenterVersions where v.LatestCr select v;
+                latestCr = latestCrVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                           latestCrVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+
+                if (latestCr != latest && IsSuitableForXenCenterAlert(latestCr, currentProgramVersion))
+                    alerts.Add(new XenCenterUpdateAlert(latestCr));
             }
 
-            if (toUse == null)
-                return null;
-
-            if (toUse.Version > currentProgramVersion ||
-                (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
-                 !PropertyManager.IsCultureLoaded(Program.CurrentCulture)))
+            if (alerts.Count == 0)
             {
-                return new XenCenterUpdateAlert(toUse);
+                log.Info(string.Format("Not alerting XenCenter update - latest = {0},  latestcr = {1}, detected = {2}", 
+                    latest != null ? latest.VersionAndLang : "", latestCr != null ? latestCr.VersionAndLang : "", Program.VersionAndLanguage));
             }
 
-            log.Info(string.Format("Not alerting XenCenter update - lastest = {0}, detected = {1}",
-                                   toUse.VersionAndLang, Program.VersionAndLanguage));
-            return null;
+            return alerts;
+        }
+
+        private static bool IsSuitableForXenCenterAlert(XenCenterVersion toUse, Version currentProgramVersion)
+        {
+            if (toUse == null)
+                return false;
+
+            return toUse.Version > currentProgramVersion ||
+                   (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
+                    !PropertyManager.IsCultureLoaded(Program.CurrentCulture));
         }
 
         public static List<XenServerPatchAlert> NewXenServerPatchAlerts(List<XenServerVersion> xenServerVersions,

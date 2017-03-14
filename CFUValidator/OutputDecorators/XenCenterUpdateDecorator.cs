@@ -30,6 +30,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using XenAdmin.Alerts;
 
@@ -37,21 +39,33 @@ namespace CFUValidator.OutputDecorators
 {
     class XenCenterUpdateDecorator: Decorator
     {
-        private readonly XenCenterUpdateAlert alert;
+        private readonly List<XenCenterUpdateAlert> alerts;
         private const string header = "XenCenter updates required:";
         private const string updateNotFound = "XenCenter update could not be found";
 
-        public XenCenterUpdateDecorator(OuputComponent ouputComponent, XenCenterUpdateAlert alert)
+        public XenCenterUpdateDecorator(OuputComponent ouputComponent, List<XenCenterUpdateAlert> alerts)
         {
             SetComponent(ouputComponent);
-            this.alert = alert;
+            this.alerts = alerts;
         }
 
         public override StringBuilder Generate()
         {
             StringBuilder sb = base.Generate();
             sb.AppendLine(header);
-            sb.AppendLine(alert == null ? updateNotFound : alert.NewVersion.VersionAndLang);
+            if (alerts == null || alerts.Count == 0)
+            {
+                sb.AppendLine(updateNotFound);
+            }
+            else
+            {
+                var versions = from XenCenterUpdateAlert a in alerts
+                               let v = a.NewVersion.VersionAndLang
+                               where a.NewVersion != null
+                               select v;
+                sb.AppendLine(string.Join(",", versions));
+            }
+            
             return sb.AppendLine(String.Empty);
         }
     }
