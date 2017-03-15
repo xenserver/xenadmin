@@ -101,11 +101,15 @@ namespace XenAdmin.Alerts
             }
         }
 
+        static int DISMISSED_XC_VERSIONS_LIMIT = 5;
+
         public override void Dismiss()
         {
             List<string> current = new List<string>(Properties.Settings.Default.LatestXenCenterSeen.Split(','));
             if (current.Contains(NewVersion.VersionAndLang))
                 return;
+            if (current.Count >= DISMISSED_XC_VERSIONS_LIMIT)
+                current.RemoveRange(0, current.Count - DISMISSED_XC_VERSIONS_LIMIT + 1);
             current.Add(NewVersion.VersionAndLang);
             Properties.Settings.Default.LatestXenCenterSeen = string.Join(",", current.ToArray());
             Settings.TrySaveSettings();
