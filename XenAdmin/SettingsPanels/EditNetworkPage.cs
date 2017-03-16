@@ -122,6 +122,7 @@ namespace XenAdmin.SettingsPanels
 
         private void SetNetSettingsEnablement()
         {
+            string managementInterfaceName = "";
             // The non MTU controls block if any VMs are attached, presumably as their PIFs won't unplug
             bool blockDueToAttachedVMs = network.Connection.ResolveAll(network.VIFs).Exists(
                 delegate(VIF vif)
@@ -132,7 +133,10 @@ namespace XenAdmin.SettingsPanels
             bool blockDueToManagement = network.Connection.ResolveAll<PIF>(network.PIFs).Exists(
                 delegate(PIF p)
                 {
-                    return p.IsManagementInterface(XenAdmin.Properties.Settings.Default.ShowHiddenVMs);
+                    var isManagementInterface = p.IsManagementInterface(XenAdmin.Properties.Settings.Default.ShowHiddenVMs);
+                    if (isManagementInterface)
+                        managementInterfaceName = p.ManagementInterfaceNameOrUnknown;
+                    return isManagementInterface;
                 });
 
             bool physical = network.Connection.ResolveAll(network.PIFs).Exists(
@@ -168,7 +172,7 @@ namespace XenAdmin.SettingsPanels
                 numUpDownVLAN.Enabled = !blockDueToAttachedVMs && !blockDueToManagement;
                 warningText.Visible = blockDueToAttachedVMs || blockDueToManagement;
                 warningText.Text =
-                    blockDueToManagement ? string.Format(Messages.CANNOT_CONFIGURE_NET_DISTURB_MANAGEMENT, GetNetworksPIF().ManagementInterfaceNameOrUnknown) :
+                    blockDueToManagement ? string.Format(Messages.CANNOT_CONFIGURE_NET_DISTURB_MANAGEMENT, managementInterfaceName) :
                     blockDueToAttachedVMs ? Messages.CANNOT_CONFIGURE_NET_VMS_ATTACHED :
                     "";
             }
