@@ -439,6 +439,11 @@ namespace XenAdmin.Alerts
             }
         }
 
+        public override string Name
+        {
+            get { return Message.MessageTypeString; }
+        }
+
         public override void Dismiss()
         {
             new DestroyMessageAction(Message.Connection, Message.opaque_ref).RunAsync();
