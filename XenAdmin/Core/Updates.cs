@@ -405,6 +405,8 @@ namespace XenAdmin.Core
 
             var alerts = new List<XenServerPatchAlert>();
 
+            var xenServerVersionsAsUpdates = xenServerVersions.Where(v => v.IsVersionAvailableAsAnUpdate);
+
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
                 Host master = Helpers.GetMaster(xenConnection);
@@ -436,7 +438,9 @@ namespace XenAdmin.Core
 
                     foreach (XenServerPatch xenServerPatch in patches)
                     {
-                        var alert = new XenServerPatchAlert(xenServerPatch);
+                        XenServerVersion newServerVersion = xenServerVersionsAsUpdates.FirstOrDefault(newVersion => newVersion.PatchUuid.Equals(xenServerPatch.Uuid, StringComparison.OrdinalIgnoreCase));
+
+                        var alert = new XenServerPatchAlert(xenServerPatch, newServerVersion);
                         var existingAlert = alerts.Find(al => al.Equals(alert));
 
                         if (existingAlert != null)
