@@ -418,15 +418,7 @@ namespace XenAdmin.Core
                 if (master == null || pool == null)
                     continue;
 
-                var serverVersions = xenServerVersions.FindAll(version =>
-                                                  {
-                                                      if (version.BuildNumber != string.Empty)
-                                                          return (master.BuildNumberRaw == version.BuildNumber);
-
-                                                      return Helpers.HostProductVersionWithOEM(master) == version.VersionAndOEM
-                                                             || (version.Oem != null && Helpers.OEMName(master).StartsWith(version.Oem)
-                                                                 && Helpers.HostProductVersion(master) == version.Version.ToString());
-                                                  });
+                var serverVersions = GetServerVersions(master, xenServerVersions);
 
                 if (serverVersions.Count == 0)
                     continue;
@@ -456,46 +448,8 @@ namespace XenAdmin.Core
 
                         XenServerPatch serverPatch = xenServerPatch;
 
-                        // A patch can be installed on a host if:
-                        // 1. it is not already installed and
-                        // 2. the host has all the required patches installed and
-                        // 3. the host doesn't have any of the conflicting patches installed
-
-                        var noPatchHosts = hosts.Where(host =>
-                            {
-                                bool elyOrGreater = Helpers.ElyOrGreater(host);
-                                var appliedUpdates = host.AppliedUpdates();
-                                var appliedPatches = host.AppliedPatches();
-
-                                // 1. patch is not already installed 
-                                if (elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
-                                        return false;
-                                else if (!elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
-                                        return false;
-                                
-                                // 2. the host has all the required patches installed
-                                if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
-                                    !serverPatch.RequiredPatches
-                                    .All(requiredPatchUuid => 
-                                        elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        )
-                                    )
-                                    return false;
-
-                                // 3. the host doesn't have any of the conflicting patches installed
-                                if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
-                                    serverPatch.ConflictingPatches
-                                    .Any(conflictingPatchUuid =>
-                                        elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        )
-                                    )
-                                    return false;
-
-                                return true;
-                            });
-
+                        var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host));
+        
                         if (noPatchHosts.Count() == hosts.Count)
                             alert.IncludeConnection(xenConnection);
                         else
@@ -505,6 +459,48 @@ namespace XenAdmin.Core
             }
 
             return alerts;
+        }
+
+        private static bool PatchCanBeInstalledOnHost(XenServerPatch serverPatch, Host host)
+        {
+            Debug.Assert(serverPatch != null);
+            Debug.Assert(host != null);
+            // A patch can be installed on a host if:
+            // 1. it is not already installed and
+            // 2. the host has all the required patches installed and
+            // 3. the host doesn't have any of the conflicting patches installed
+
+            bool elyOrGreater = Helpers.ElyOrGreater(host);
+            var appliedUpdates = host.AppliedUpdates();
+            var appliedPatches = host.AppliedPatches();
+
+            // 1. patch is not already installed 
+            if (elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                return false;
+            if (!elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                return false;
+
+            // 2. the host has all the required patches installed
+            if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
+                !serverPatch.RequiredPatches
+                .All(requiredPatchUuid =>
+                    elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    )
+                )
+                return false;
+
+            // 3. the host doesn't have any of the conflicting patches installed
+            if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
+                serverPatch.ConflictingPatches
+                .Any(conflictingPatchUuid =>
+                    elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    )
+                )
+                return false;
+
+            return true;
         }
         
         /// <summary>
@@ -520,15 +516,7 @@ namespace XenAdmin.Core
             if (XenServerVersions == null)
                 return recommendedPatches;
 
-            var serverVersions = XenServerVersions.FindAll(version =>
-            {
-                if (version.BuildNumber != string.Empty)
-                    return (host.BuildNumberRaw == version.BuildNumber);
-
-                return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
-                       || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
-                           && Helpers.HostProductVersion(host) == version.Version.ToString());
-            });
+            var serverVersions = GetServerVersions(host, XenServerVersions);
 
             if (serverVersions.Count != 0)
             {
@@ -606,15 +594,7 @@ namespace XenAdmin.Core
 
             foreach (Host host in hosts)
             {
-                var hostVersions = xsVersions.FindAll(version =>
-                {
-                    if (version.BuildNumber != string.Empty)
-                        return (host.BuildNumberRaw == version.BuildNumber);
-
-                    return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
-                           || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
-                               && Helpers.HostProductVersion(host) == version.Version.ToString());
-                });
+                var hostVersions = GetServerVersions(host, xsVersions);
 
                 var foundVersion = hostVersions.FirstOrDefault();
 
@@ -770,6 +750,9 @@ namespace XenAdmin.Core
         {
             var alert = new XenServerVersionAlert(version);
 
+            // the patch that installs this version, if any
+            var patch  = XenServerPatches.FirstOrDefault(p => p.Uuid.Equals(version.PatchUuid, StringComparison.OrdinalIgnoreCase));
+
             foreach (IXenConnection xc in ConnectionsManager.XenConnectionsCopy)
             {
                 if (!xc.IsConnected)
@@ -781,7 +764,12 @@ namespace XenAdmin.Core
                 if (master == null || pool == null)
                     continue;
 
-                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < version.Version);
+                // Show the Upgrade alert for a host if:
+                // - the host version is older than this version AND
+                // - there is no patch (amongst the current version patches) that can update to this version OR, if there is a patch, the patch cannot be installed
+                var patchApplicable = patch != null && GetServerVersions(master, XenServerVersions).Any(v => v.Patches.Contains(patch));
+                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < version.Version
+                    && (!patchApplicable || !PatchCanBeInstalledOnHost(patch, host)));
 
                 if (outOfDateHosts.Count() == hosts.Count)
                     alert.IncludeConnection(xc);
@@ -790,6 +778,20 @@ namespace XenAdmin.Core
             }
 
             return alert;
+        }
+
+        private static List<XenServerVersion> GetServerVersions(Host host, List<XenServerVersion> xenServerVersions)
+        {
+            var serverVersions = xenServerVersions.FindAll(version =>
+            {
+                if (version.BuildNumber != string.Empty)
+                    return (host.BuildNumberRaw == version.BuildNumber);
+
+                return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
+                       || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
+                           && Helpers.HostProductVersion(host) == version.Version.ToString());
+            });
+            return serverVersions;
         }
 
         public static void CheckServerVersion()
