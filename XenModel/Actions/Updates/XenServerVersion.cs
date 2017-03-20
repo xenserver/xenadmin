@@ -69,7 +69,7 @@ namespace XenAdmin.Core
         /// <param name="minimumPatches">can be null (see <paramref name="MinimalPatches"/></param>
         /// <param name="timestamp"></param>
         /// <param name="buildNumber"></param>
-        /// <param name="patch-uuid"></param>
+        /// <param name="patchUuid"></param>
         public XenServerVersion(string version_oem, string name, bool latest, bool latestCr, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
             string timestamp, string buildNumber, string patchUuid)
         {
@@ -116,7 +116,7 @@ namespace XenAdmin.Core
         {
             get
             {
-                return string.IsNullOrEmpty(PatchUuid);
+                return !string.IsNullOrEmpty(PatchUuid);
             }
         }
 
