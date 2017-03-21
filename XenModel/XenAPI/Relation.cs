@@ -153,7 +153,12 @@ namespace XenAPI
                 new Relation("hosts", "host", "updates"),
             });
 
+            relations.Add(typeof(Proxy_PCI), new Relation[] {
+                new Relation("virtual_functions", "PCI", "physical_function"),
+            });
+
             relations.Add(typeof(Proxy_Host), new Relation[] {
+                new Relation("features", "Feature", "host"),
                 new Relation("PGPUs", "PGPU", "host"),
                 new Relation("PCIs", "PCI", "host"),
                 new Relation("patches", "host_patch", "host"),
@@ -162,6 +167,10 @@ namespace XenAPI
                 new Relation("resident_VMs", "VM", "resident_on"),
                 new Relation("PIFs", "PIF", "host"),
                 new Relation("PBDs", "PBD", "host"),
+            });
+
+            relations.Add(typeof(Proxy_VMSS), new Relation[] {
+                new Relation("VMs", "VM", "snapshot_schedule"),
             });
 
 

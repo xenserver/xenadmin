@@ -35,23 +35,21 @@ using System.Collections.Generic;
 
 namespace XenAPI
 {
-    public enum vmss_type
+    public enum sdn_controller_protocol
     {
-        snapshot, checkpoint, snapshot_with_quiesce, unknown
+        ssl, pssl, unknown
     }
 
-    public static class vmss_type_helper
+    public static class sdn_controller_protocol_helper
     {
-        public static string ToString(vmss_type x)
+        public static string ToString(sdn_controller_protocol x)
         {
             switch (x)
             {
-                case vmss_type.snapshot:
-                    return "snapshot";
-                case vmss_type.checkpoint:
-                    return "checkpoint";
-                case vmss_type.snapshot_with_quiesce:
-                    return "snapshot_with_quiesce";
+                case sdn_controller_protocol.ssl:
+                    return "ssl";
+                case sdn_controller_protocol.pssl:
+                    return "pssl";
                 default:
                     return "unknown";
             }

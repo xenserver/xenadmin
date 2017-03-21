@@ -532,6 +532,18 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the task status
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_task">The opaque_ref of the given task</param>
+        /// <param name="_value">task status value to be set</param>
+        public static void set_status(Session session, string _task, task_status_type _value)
+        {
+            session.proxy.task_set_status(session.uuid, (_task != null) ? _task : "", task_status_type_helper.ToString(_value)).parse();
+        }
+
+        /// <summary>
         /// Return a list of all the tasks known to the system.
         /// First published in XenServer 4.0.
         /// </summary>

@@ -1674,7 +1674,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the snapshot_schedule field of the given VM.
-        /// First published in XenServer Dundee.
+        /// First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -1685,7 +1685,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_vmss_snapshot field of the given VM.
-        /// First published in XenServer Dundee.
+        /// First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -2770,30 +2770,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Makes the specified VM a default template.
-        /// First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_value">The boolean value for the is_default_template flag</param>
-        public static void set_is_default_template(Session session, string _vm, bool _value)
-        {
-            session.proxy.vm_set_is_default_template(session.uuid, (_vm != null) ? _vm : "", _value).parse();
-        }
-
-        /// <summary>
-        /// Makes the specified VM a default template.
-        /// First published in .
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_value">The boolean value for the is_default_template flag</param>
-        public static XenRef<Task> async_set_is_default_template(Session session, string _vm, bool _value)
-        {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_is_default_template(session.uuid, (_vm != null) ? _vm : "", _value).parse());
-        }
-
-        /// <summary>
         /// Awaken the specified VM and resume it on a particular Host.  This can only be called when the specified VM is in the Suspended state.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -3685,7 +3661,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the value of the snapshot schedule field
-        /// First published in XenServer Dundee.
+        /// First published in .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -5270,7 +5246,7 @@ namespace XenAPI
 
         /// <summary>
         /// Ref pointing to a snapshot schedule for this VM
-        /// First published in XenServer Dundee.
+        /// First published in .
         /// </summary>
         public virtual XenRef<VMSS> snapshot_schedule
         {
@@ -5288,8 +5264,8 @@ namespace XenAPI
         private XenRef<VMSS> _snapshot_schedule;
 
         /// <summary>
-        /// true if this VM was created by a scheduled snapshot
-        /// First published in XenServer Dundee.
+        /// true if this snapshot was created by the snapshot schedule
+        /// First published in .
         /// </summary>
         public virtual bool is_vmss_snapshot
         {
