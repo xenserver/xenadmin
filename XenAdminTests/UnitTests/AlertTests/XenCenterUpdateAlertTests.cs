@@ -52,7 +52,7 @@ namespace XenAdminTests.UnitTests.AlertTests
                 HelpID = "XenCenterUpdateAlert",
                 Description = "xc is now available. Download the new version from the " + XenAdmin.Branding.COMPANY_NAME_SHORT + " website.",
                 HelpLinkText = "Help",
-                Title = "New " + XenAdmin.Branding.BRAND_CONSOLE + " Available",
+                Title = "xc is now available",
                 Priority = "Priority5"
             });
         }
