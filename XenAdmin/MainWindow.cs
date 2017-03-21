@@ -1627,7 +1627,7 @@ namespace XenAdmin
                     if (!plugin.Enabled)
                         continue;
 
-                    foreach (Feature feature in plugin.Features)
+                    foreach (Plugins.Feature feature in plugin.Features)
                     {
                         var menuItemFeature = feature as MenuItemFeature;
 

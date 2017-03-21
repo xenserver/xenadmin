@@ -39,7 +39,7 @@ namespace XenAPI {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XenAdmin.XenAPI.FriendlyErrorNames", typeof(FriendlyErrorNames).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XenAPI.FriendlyErrorNames", typeof(FriendlyErrorNames).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -201,6 +201,15 @@ namespace XenAPI {
         public static string BOOTLOADER_FAILED {
             get {
                 return ResourceManager.GetString("BOOTLOADER_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified bridge already exists..
+        /// </summary>
+        public static string BRIDGE_NAME_EXISTS {
+            get {
+                return ResourceManager.GetString("BRIDGE_NAME_EXISTS", resourceCulture);
             }
         }
         
@@ -1722,6 +1731,15 @@ namespace XenAPI {
         public static string NETWORK_CONTAINS_VIF {
             get {
                 return ResourceManager.GetString("NETWORK_CONTAINS_VIF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The network is not managed by xapi..
+        /// </summary>
+        public static string NETWORK_UNMANAGED {
+            get {
+                return ResourceManager.GetString("NETWORK_UNMANAGED", resourceCulture);
             }
         }
         
@@ -4971,6 +4989,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This VM is assigned to a snapshot schedule..
+        /// </summary>
+        public static string VM_ASSIGNED_TO_SNAPSHOT_SCHEDULE {
+            get {
+                return ResourceManager.GetString("VM_ASSIGNED_TO_SNAPSHOT_SCHEDULE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You attempted to start a VM that&apos;s attached to more than one VDI with a timeoffset marked as reset-on-boot..
         /// </summary>
         public static string VM_ATTACHED_TO_MORE_THAN_ONE_VDI_WITH_TIMEOFFSET_MARKED_AS_RESET_ON_BOOT {
@@ -5534,6 +5561,15 @@ namespace XenAPI {
         public static string VMS_FAILED_TO_COOPERATE {
             get {
                 return ResourceManager.GetString("VMS_FAILED_TO_COOPERATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is at least one VM assigned to snapshot schedule..
+        /// </summary>
+        public static string VMSS_HAS_VM {
+            get {
+                return ResourceManager.GetString("VMSS_HAS_VM", resourceCulture);
             }
         }
         

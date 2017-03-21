@@ -707,9 +707,11 @@ namespace XenAPI
         /// <summary>
         /// Get the vswitch_controller field of the given pool.
         /// First published in XenServer 5.6.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
+        [Deprecated("")]
         public static string get_vswitch_controller(Session session, string _pool)
         {
             return (string)session.proxy.pool_get_vswitch_controller(session.uuid, (_pool != null) ? _pool : "").parse();
@@ -1839,9 +1841,11 @@ namespace XenAPI
         /// <summary>
         /// Set the IP address of the vswitch controller.
         /// First published in XenServer 5.6.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_address">IP address of the vswitch controller.</param>
+        [Deprecated("")]
         public static void set_vswitch_controller(Session session, string _address)
         {
             session.proxy.pool_set_vswitch_controller(session.uuid, (_address != null) ? _address : "").parse();
@@ -1850,9 +1854,11 @@ namespace XenAPI
         /// <summary>
         /// Set the IP address of the vswitch controller.
         /// First published in XenServer 5.6.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_address">IP address of the vswitch controller.</param>
+        [Deprecated("")]
         public static XenRef<Task> async_set_vswitch_controller(Session session, string _address)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_set_vswitch_controller(session.uuid, (_address != null) ? _address : "").parse());

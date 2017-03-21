@@ -349,6 +349,7 @@
     <Compile Include="XenAPI\bond_mode.cs" />
     <Compile Include="XenAPI\DeprecatedAttribute.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
+    <Compile Include="XenAPI\Feature.cs" />
     <Compile Include="XenAPI\FriendlyErrorNames.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -374,6 +375,8 @@
     <Compile Include="XenAPI\pvs_proxy_status.cs" />
     <Compile Include="XenAPI\PVS_server.cs" />
     <Compile Include="XenAPI\PVS_site.cs" />
+    <Compile Include="XenAPI\SDN_controller.cs" />
+    <Compile Include="XenAPI\sdn_controller_protocol.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
