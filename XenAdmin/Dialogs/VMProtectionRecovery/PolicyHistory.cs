@@ -142,7 +142,6 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             {
                 Alert = alert;
                 Cells.Add(_expand);
-                _expand.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 Cells.Add(_result);
                 Cells.Add(_dateTime);
                 Cells.Add(_description);
