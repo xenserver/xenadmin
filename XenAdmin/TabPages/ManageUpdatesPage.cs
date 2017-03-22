@@ -69,7 +69,6 @@ namespace XenAdmin.TabPages
             InitializeProgressControls();
             tableLayoutPanel1.Visible = false;
             UpdateButtonEnablement();
-            dataGridViewUpdates.Sort(new NewVersionPriorityAlertComparer());
             informationLabel.Click += informationLabel_Click;
             Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
             Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
@@ -285,6 +284,10 @@ namespace XenAdmin.TabPages
                     if (dataGridViewUpdates.SortOrder == SortOrder.Descending)
                         updates.Reverse();
                 }
+                else
+                {
+                    updates.Sort(new NewVersionPriorityAlertComparer());
+                }
 
                 var rowList = new List<DataGridViewRow>();
 
@@ -292,11 +295,6 @@ namespace XenAdmin.TabPages
                     rowList.Add(NewUpdateRow(myAlert));
 
                 dataGridViewUpdates.Rows.AddRange(rowList.ToArray());
-
-                if (dataGridViewUpdates.SortedColumn == null)
-                {
-                    dataGridViewUpdates.Sort(new NewVersionPriorityAlertComparer());
-                }
 
                 foreach (DataGridViewRow row in dataGridViewUpdates.Rows)
                     row.Selected = selectedUpdates.Contains(((Alert)row.Tag).uuid);
@@ -984,7 +982,7 @@ namespace XenAdmin.TabPages
             labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
         }
 
-        public class NewVersionPriorityAlertComparer : IComparer
+        public class NewVersionPriorityAlertComparer : IComparer<Alert>
         {
             public int Compare(Alert alert1, Alert alert2)
             {
@@ -1010,13 +1008,6 @@ namespace XenAdmin.TabPages
                 return alert is XenServerPatchAlert && (alert as XenServerPatchAlert).NewServerVersion != null
                     || alert is XenServerVersionAlert
                     || alert is XenCenterUpdateAlert;
-            }
-
-            public int Compare(object x, object y)
-            {
-                return Compare(
-                    (x as DataGridViewRow).Tag as Alert, 
-                    (y as DataGridViewRow).Tag as Alert);
             }
         }
     }
