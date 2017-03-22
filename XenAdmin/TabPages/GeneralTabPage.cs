@@ -644,22 +644,17 @@ namespace XenAdmin.TabPages
             if (!string.IsNullOrEmpty(poolAppPatches))
             {
                 s.AddEntry(FriendlyName("Pool_patch.fully_applied"), poolAppPatches);
-                return;
             }
-
-            CommandToolStripMenuItem applypatch = new CommandToolStripMenuItem(
-                new InstallNewUpdateCommand(Program.MainWindow), true);
-
-            var menuItems = new[] { applypatch };
 
             var poolPartPatches = poolPartialPatches();
             if (!string.IsNullOrEmpty(poolPartPatches))
             {
-                s.AddEntry(FriendlyName("Pool_patch.partially_applied"), poolPartPatches, menuItems, Color.Red);
-                return;
-            }
+                CommandToolStripMenuItem applypatch = new CommandToolStripMenuItem(
+                    new InstallNewUpdateCommand(Program.MainWindow), true);
+                var menuItems = new[] { applypatch };
 
-            var poolNotAppPatches = poolNotAppliedPatches();
+                s.AddEntry(FriendlyName("Pool_patch.partially_applied"), poolPartPatches, menuItems, Color.Red);
+            }
         }
 
         private void generateHostPatchesBox()
