@@ -446,6 +446,8 @@ namespace XenAdmin
 
         void actionChanged_(ActionBase action)
         {
+            if (action.SuppressProgressReport) // suppress updates when the PureAsyncAction runs the action to populate the ApiMethodsToRoleCheck
+                return;
              var meddlingAction = action as MeddlingAction;
              if (meddlingAction == null)
                  statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;

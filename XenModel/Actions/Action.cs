@@ -303,7 +303,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        protected bool SuppressProgressReport { get; set; }
+        public bool SuppressProgressReport { get; set; }
         public void Tick(int percent, string description)
         {
             _description = description;

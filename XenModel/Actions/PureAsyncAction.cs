@@ -75,8 +75,10 @@ namespace XenAdmin.Actions
                 RbacMethodList rbacMethods = new RbacMethodList();
                 Session = new Session(RbacCollectorProxy.GetProxy(rbacMethods), Connection);
                 base.SuppressProgressReport = true;
+                var startDescription = Description;
                 Run();
                 base.SuppressProgressReport = false;
+                Description = startDescription; // reset Description;
                 return rbacMethods;
             }
         }
