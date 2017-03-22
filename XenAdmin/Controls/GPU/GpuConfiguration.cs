@@ -102,6 +102,8 @@ namespace XenAdmin.Controls.GPU
                                                    .ToArray());
                 }
                 SetCheckedValues();
+                HideColumnIfEmpty(MaxResolutionColumn);
+                HideColumnIfEmpty(MaxDisplaysColumn);
             }
             finally
             {
@@ -152,6 +154,22 @@ namespace XenAdmin.Controls.GPU
             rubricLabel.Text = PGpuList.Count == 1
                                    ? Messages.GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE
                                    : Messages.GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE;
+        }
+
+        private void HideColumnIfEmpty(DataGridViewColumn column)
+        {
+            bool columnEmpty = true;
+            foreach (DataGridViewRow row in dataGridViewEx1.Rows)
+            {
+                var value = row.Cells[column.Name].Value;
+                if (!String.IsNullOrEmpty((string)value))
+                {
+                    columnEmpty = false;
+                    break;
+                }
+            }
+            if (columnEmpty)
+                dataGridViewEx1.Columns[column.Name].Visible = false;
         }
     }
 
