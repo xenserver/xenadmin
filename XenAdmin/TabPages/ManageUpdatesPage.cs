@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -38,7 +39,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Controls;
@@ -69,7 +69,6 @@ namespace XenAdmin.TabPages
             InitializeProgressControls();
             tableLayoutPanel1.Visible = false;
             UpdateButtonEnablement();
-            dataGridViewUpdates.Sort(ColumnDate, ListSortDirection.Descending);
             informationLabel.Click += informationLabel_Click;
             Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
             Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
@@ -284,6 +283,10 @@ namespace XenAdmin.TabPages
 
                     if (dataGridViewUpdates.SortOrder == SortOrder.Descending)
                         updates.Reverse();
+                }
+                else
+                {
+                    updates.Sort(new NewVersionPriorityAlertComparer());
                 }
 
                 var rowList = new List<DataGridViewRow>();
@@ -977,6 +980,35 @@ namespace XenAdmin.TabPages
         private void tableLayoutPanel3_Resize(object sender, EventArgs e)
         {
             labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
+        }
+
+        public class NewVersionPriorityAlertComparer : IComparer<Alert>
+        {
+            public int Compare(Alert alert1, Alert alert2)
+            {
+                if (alert1 == null || alert2 == null)
+                    return 0;
+
+                int sortResult = 0;
+
+                if (IsVersionOrVersionUpdateAlert(alert1) && !IsVersionOrVersionUpdateAlert(alert2))
+                    sortResult = 1;
+
+                if (!IsVersionOrVersionUpdateAlert(alert1) && IsVersionOrVersionUpdateAlert(alert2))
+                    sortResult = -1;
+
+                if (sortResult == 0)
+                    sortResult = Alert.CompareOnDate(alert1, alert2);
+
+                return -sortResult;
+            }
+
+            private bool IsVersionOrVersionUpdateAlert(Alert alert)
+            {
+                return alert is XenServerPatchAlert && (alert as XenServerPatchAlert).NewServerVersion != null
+                    || alert is XenServerVersionAlert
+                    || alert is XenCenterUpdateAlert;
+            }
         }
     }
 }
