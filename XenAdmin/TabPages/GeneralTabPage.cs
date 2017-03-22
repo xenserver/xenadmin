@@ -692,9 +692,10 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            if (hostAppliedPatches(host) != "")
+            var appliedPatches = hostAppliedPatches(host);
+            if (!string.IsNullOrEmpty(appliedPatches))
             {
-                s.AddEntry(FriendlyName("Pool_patch.applied"), hostAppliedPatches(host));
+                s.AddEntry(FriendlyName("Pool_patch.applied"), appliedPatches);
             }
 
             var recommendedPatches = RecommendedPatchesForHost(host);
@@ -1677,7 +1678,7 @@ namespace XenAdmin.TabPages
             if (Helpers.ElyOrGreater(host))
             {
                 foreach (var update in host.AppliedUpdates())
-                    result.Add(UpdatesFriendlyName(update.Name));
+                    result.Add(UpdatesFriendlyNameAndVersion(update));
             }
             else
             {
@@ -1770,7 +1771,7 @@ namespace XenAdmin.TabPages
 
             foreach (var update in updates)
                 if (predicate(update))
-                    output.Add(UpdatesFriendlyName(update.Name));
+                    output.Add(UpdatesFriendlyNameAndVersion(update));
 
             output.Sort(StringUtility.NaturalCompare);
 
@@ -1912,6 +1913,14 @@ namespace XenAdmin.TabPages
         private static string UpdatesFriendlyName(string propertyName)
         {
             return Core.PropertyManager.FriendlyNames.GetString(string.Format("Label-{0}", propertyName)) ?? propertyName;
+        }
+
+        private static string UpdatesFriendlyNameAndVersion(Pool_update update)
+        {
+            var friendlyName = UpdatesFriendlyName(update.Name);
+            if (string.IsNullOrEmpty(update.version))
+                return friendlyName;
+            return string.Format(Messages.SUPP_PACK_DESCTIPTION, friendlyName, update.version);
         }
 
         private void linkLabelExpand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
