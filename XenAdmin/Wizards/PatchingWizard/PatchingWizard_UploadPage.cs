@@ -48,7 +48,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private DownloadAndUnzipXenServerPatchAction downloadAction = null;
-        private const int EllipsiseValueDownDescription = 50;
+        private const int EllipsiseValueDownDescription = 80;
 
         public PatchingWizard_UploadPage()
         {
@@ -597,7 +597,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             var poolOrHost = Helpers.GetPool(host.Connection) ?? (IXenObject)host;
 
-            string text = action == null ? Messages.UPLOAD_PATCH_ALREADY_UPLOADED : GetActionDescription(action);
+            string text = action == null ? Messages.UPLOAD_PATCH_ALREADY_UPLOADED : GetActionDescription(action).Ellipsise(EllipsiseValueDownDescription);
             drawActionText(Images.GetImage16For(poolOrHost),poolOrHost.Name, text, GetTextColor(action), e);
         }
 
