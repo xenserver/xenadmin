@@ -1734,14 +1734,6 @@ namespace XenAdmin.TabPages
                 : poolPatchString(patch => patch.host_patches.Count > 0 && patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
         }
 
-        private string poolNotAppliedPatches()
-        {
-            return 
-                Helpers.ElyOrGreater(xenObject.Connection)
-                ? poolUpdateString(update => update.AppliedOnHosts.Count == 0)
-                : poolPatchString(patch => patch.host_patches.Count == 0);
-        }
-
         private string poolPatchString(Predicate<Pool_patch> predicate)
         {
             Pool_patch[] patches = xenObject.Connection.Cache.Pool_patches;
