@@ -37,6 +37,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Alerts;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
@@ -65,6 +66,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return SelectedServers.Select(host => Helpers.GetPool(host.Connection)).Where(pool => pool != null).Distinct().ToList();
             }
         }
+
+        public XenServerPatchAlert UpdateAlert { private get; set; }
 
         public PatchingWizard_PrecheckPage()
         {
@@ -341,10 +344,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected virtual List<KeyValuePair<string, List<Check>>> GenerateCommonChecks()
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
+            List<Check> checkGroup;
+
+            //XenCenter version check
+            if (UpdateAlert != null && UpdateAlert.NewServerVersion != null)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_XENCENTER_VERSION, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                checkGroup.Add(new XenCenterVersionCheck(UpdateAlert.NewServerVersion));
+            }
 
             //HostLivenessCheck checks
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HOST_LIVENESS_STATUS, new List<Check>()));
-            List<Check> checkGroup = checks[checks.Count - 1].Value;
+            checkGroup = checks[checks.Count - 1].Value;
             foreach (Host host in SelectedServers)
             {
                 checkGroup.Add(new HostLivenessCheck(host));
@@ -641,7 +653,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     description = _check.SuccessfulCheckDescription;
                     if (string.IsNullOrEmpty(description))
-                        description = String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name, _check.Description);
+                        description = _check.Host != null
+                            ? String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name, _check.Description)
+                            : String.Format(Messages.PATCHING_WIZARD_CHECK_OK, _check.Description);
+
                 }
                 
                 if (description != string.Empty)

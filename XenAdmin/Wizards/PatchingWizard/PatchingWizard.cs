@@ -85,6 +85,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             PatchingWizard_SelectPatchPage.SelectDownloadAlert(alert);
             PatchingWizard_SelectPatchPage.SelectedUpdateAlert = alert;
             PatchingWizard_SelectServers.SelectedUpdateAlert = alert;
+            PatchingWizard_PrecheckPage.UpdateAlert = alert;
             PatchingWizard_UploadPage.SelectedUpdateAlert = alert;
         }
 
@@ -117,6 +118,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
+                PatchingWizard_PrecheckPage.UpdateAlert = alertPatch ?? fileFromDiskAlertPatch;
                 PatchingWizard_SelectServers.FileFromDiskAlert = fileFromDiskAlertPatch;
 
                 RemovePage(PatchingWizard_UploadPage);
