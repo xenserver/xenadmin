@@ -2558,6 +2558,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_WSS_STATUS" xml:space="preserve">
     <value>Checking the possible presence of WSS appliances</value>
   </data>
+  <data name="CHECKING_XENCENTER_VERSION" xml:space="preserve">
+    <value>Checking [XenCenter] version</value>
+  </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
     <value>Pool '{0}' cannot have WLB enabled</value>
   </data>
@@ -8853,6 +8856,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU" xml:space="preserve">
     <value>Ubuntu</value>
   </data>
+  <data name="NEW_XENCENTER_REQUIRED_INFO" xml:space="preserve">
+    <value>New [XenCenter] version required</value>
+  </data>
   <data name="NFS_ISO_ALREADY_ATTACHED" xml:space="preserve">
     <value>This NFS ISO storage is already attached to '{0}'</value>
   </data>
@@ -9424,6 +9430,9 @@ Please wait for this operation to complete, then click Next to continue with the
   <data name="PATCHING_WARNING_HA" xml:space="preserve">
     <value>Disable HA until after all the hosts have been rebooted</value>
   </data>
+  <data name="PATCHING_WIZARD_CHECK_OK" xml:space="preserve">
+    <value>{0} ok.</value>
+  </data>
   <data name="PATCHING_WIZARD_CONFIRMATION_DELETE" xml:space="preserve">
     <value>The patch {0} is going to be deleted. Do you want to continue?</value>
   </data>
@@ -9484,6 +9493,12 @@ Size: {3}</value>
   </data>
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
     <value>{0}: This patch is for servers with version matching the regular expression '{1}'.</value>
+  </data>
+  <data name="PATCH_INSTALLATION_SIZE" xml:space="preserve">
+    <value>Installation size: {0}</value>
+  </data>
+  <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
+    <value>This version requires [XenCenter] {0} or newer</value>
   </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>Not found</value>
@@ -9825,6 +9840,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   </data>
   <data name="PROBLEM_VMPROBLEM_TITLE" xml:space="preserve">
     <value>VM '{0}'</value>
+  </data>
+  <data name="PROBLEM_XENCENTER_VERSION_TITLE" xml:space="preserve">
+    <value>[XenCenter] version</value>
   </data>
   <data name="PROCEED" xml:space="preserve">
     <value>&amp;Proceed</value>
@@ -11637,6 +11655,9 @@ Verify that the file is a valid {1} export.</value>
   <data name="UPDATES_DOWNLOAD_AND_INSTALL" xml:space="preserve">
     <value>Download and Install</value>
   </data>
+  <data name="UPDATES_DOWNLOAD_REQUIRED_XENCENTER" xml:space="preserve">
+    <value>Download [XenCenter]</value>
+  </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
     <value>Install Update</value>
   </data>
@@ -11754,6 +11775,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_LOCAL_STORAGE" xml:space="preserve">
     <value>{0}: The VM '{1}' uses local storage and cannot be migrated.</value>
+  </data>
+  <data name="UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED" xml:space="preserve">
+    <value>[XenCenter] version {0} or newer is required.</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
     <value>The selected file does not have a valid extension. Valid extensions are: *.{0} and *.iso</value>
@@ -13573,6 +13597,9 @@ Are you sure you want to enable automated power management for this Host?</value
   </data>
   <data name="XENCENTER_NEWER_AVAILABLE" xml:space="preserve">
     <value>Newer [XenCenter] Available</value>
+  </data>
+  <data name="XENCENTER_VERSION_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>[XenCenter] version check</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
     <value>Saved Searches (*.{0})|*.{0}</value>
