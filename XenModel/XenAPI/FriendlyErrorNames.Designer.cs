@@ -39,7 +39,7 @@ namespace XenAPI {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XenAPI.FriendlyErrorNames", typeof(FriendlyErrorNames).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XenAdmin.XenAPI.FriendlyErrorNames", typeof(FriendlyErrorNames).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
