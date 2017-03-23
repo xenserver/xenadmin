@@ -1920,7 +1920,7 @@ namespace XenAdmin.TabPages
             var friendlyName = UpdatesFriendlyName(update.Name);
             if (string.IsNullOrEmpty(update.version))
                 return friendlyName;
-            return string.Format(Messages.SUPP_PACK_DESCTIPTION, friendlyName, update.version);
+            return string.Format(Messages.SUPP_PACK_DESCRIPTION, friendlyName, update.version);
         }
 
         private void linkLabelExpand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

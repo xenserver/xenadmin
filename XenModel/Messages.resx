@@ -11218,7 +11218,7 @@ The upper limit: SR size / {2}</value>
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>Sun</value>
   </data>
-  <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
+  <data name="SUPP_PACK_DESCRIPTION" xml:space="preserve">
     <value>{0} (version {1})</value>
   </data>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
