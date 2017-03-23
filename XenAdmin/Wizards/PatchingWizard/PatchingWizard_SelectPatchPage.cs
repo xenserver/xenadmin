@@ -62,8 +62,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             labelWithAutomatedUpdates.Visible = automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = false;
             downloadUpdateRadioButton.Checked = true;
-
-            dataGridViewPatches.Sort(ColumnDate, ListSortDirection.Descending);
         }
 
         private void CheckForUpdates_CheckForUpdatesStarted()
@@ -623,6 +621,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (obj is PatchGridViewRow)
                     return this.Equals((PatchGridViewRow)obj);
                 return false;
+            }
+
+            public void SetToolTip(string toolTip)
+            {
+                foreach (var c in Cells)
+                {
+                    if (c is DataGridViewLinkCell)
+                        continue;
+
+                    var cell = c as DataGridViewCell;
+                    if (c != null)
+                        ((DataGridViewCell)c).ToolTipText = toolTip;
+                }
             }
         }
 
