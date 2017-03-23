@@ -32338,9 +32338,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0} (version {1}).
         /// </summary>
-        public static string SUPP_PACK_DESCTIPTION {
+        public static string SUPP_PACK_DESCRIPTION {
             get {
-                return ResourceManager.GetString("SUPP_PACK_DESCTIPTION", resourceCulture);
+                return ResourceManager.GetString("SUPP_PACK_DESCRIPTION", resourceCulture);
             }
         }
         

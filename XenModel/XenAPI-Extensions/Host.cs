@@ -1658,7 +1658,7 @@ namespace XenAPI
             private bool parsed = false;
             public bool IsValid { get { return parsed; } }
 
-            public string LongDescription { get { return string.Format(Messages.SUPP_PACK_DESCTIPTION, description, version); } }
+            public string LongDescription { get { return string.Format(Messages.SUPP_PACK_DESCRIPTION, description, version); } }
 
             /// <summary>
             /// Try to parse the supp pack information from one key of software_version

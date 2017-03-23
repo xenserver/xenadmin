@@ -11209,7 +11209,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>日</value>
   </data>
-  <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
+  <data name="SUPP_PACK_DESCRIPTION" xml:space="preserve">
     <value>{0} (Version {1})</value>
   </data>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
