@@ -62,8 +62,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             labelWithAutomatedUpdates.Visible = automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = false;
             downloadUpdateRadioButton.Checked = true;
-
-            dataGridViewPatches.Sort(ColumnDate, ListSortDirection.Descending);
         }
 
         private void CheckForUpdates_CheckForUpdatesStarted()
@@ -255,7 +253,15 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void PopulatePatchesBox()
         {
             dataGridViewPatches.Rows.Clear();
-            var updates = new List<Alert>(Updates.UpdateAlerts);
+
+            var alerts = Updates.UpdateAlerts.ToList();
+            if (dataGridViewPatches.SortedColumn == null)
+            {
+                alerts.Sort(new NewVersionPriorityAlertComparer());
+            }
+
+            var updates = new List<Alert>(alerts);
+
             if (dataGridViewPatches.SortedColumn != null)
             {
                 if (dataGridViewPatches.SortedColumn.Index == ColumnUpdate.Index)
@@ -268,16 +274,25 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (dataGridViewPatches.SortOrder == SortOrder.Descending)
                     updates.Reverse();
             }
-           foreach (Alert alert in updates)
-           {
-               if (alert is XenServerPatchAlert)
-               {
-                   PatchGridViewRow row = new PatchGridViewRow(alert);
-                   if (!dataGridViewPatches.Rows.Contains(row))
-                   {
-                       dataGridViewPatches.Rows.Add(row);
-                   }
-               }
+
+            foreach (Alert alert in updates)
+            {
+                var patchAlert = alert as XenServerPatchAlert;
+
+                if (patchAlert != null)
+                {
+                    PatchGridViewRow row = new PatchGridViewRow(patchAlert);
+                    if (!dataGridViewPatches.Rows.Contains(row))
+                    {
+                        dataGridViewPatches.Rows.Add(row);
+
+                        if (patchAlert.RequiredXenCenterVersion != null)
+                        {
+                            row.Enabled = false;
+                            row.SetToolTip(string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED, patchAlert.RequiredXenCenterVersion.Version));
+                        }
+                    }
+                }
             }
         }
         
@@ -591,6 +606,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (obj is PatchGridViewRow)
                     return this.Equals((PatchGridViewRow)obj);
                 return false;
+            }
+
+            public void SetToolTip(string toolTip)
+            {
+                foreach (var c in Cells)
+                {
+                    if (c is DataGridViewLinkCell)
+                        continue;
+
+                    var cell = c as DataGridViewCell;
+                    if (c != null)
+                        ((DataGridViewCell)c).ToolTipText = toolTip;
+                }
             }
         }
 
