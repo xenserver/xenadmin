@@ -91,6 +91,9 @@
     <Compile Include="..\XenModel\XenAPI\Failure.cs">
       <Link>Failure.cs</Link>
     </Compile>
+    <Compile Include="..\XenModel\XenAPI\Feature.cs">
+      <Link>Feature.cs</Link>
+    </Compile>
     <Compile Include="..\XenModel\XenAPI\FriendlyErrorNames.Designer.cs">
       <Link>FriendlyErrorNames.Designer.cs</Link>
     </Compile>
@@ -231,6 +234,12 @@
     </Compile>
     <Compile Include="..\XenModel\XenAPI\Role.cs">
       <Link>Role.cs</Link>
+    </Compile>
+    <Compile Include="..\XenModel\XenAPI\SDN_controller.cs">
+      <Link>SDN_controller.cs</Link>
+    </Compile>
+    <Compile Include="..\XenModel\XenAPI\sdn_controller_protocol.cs">
+      <Link>sdn_controller_protocol.cs</Link>
     </Compile>
     <Compile Include="..\XenModel\XenAPI\Secret.cs">
       <Link>Secret.cs</Link>
