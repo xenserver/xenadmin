@@ -48,6 +48,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Text;
 using System.Diagnostics;
+using XenAdmin.Alerts;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -61,6 +62,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
 
         public List<Pool> SelectedPools { private get; set; }
+
+        public XenServerPatchAlert UpdateAlert { private get; set; }
+        public WizardMode WizardMode { private get; set; }
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
@@ -135,6 +139,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
             }
 
+            Debug.Assert(WizardMode != WizardMode.NewVersion || (WizardMode == WizardMode.NewVersion && UpdateAlert != null), "For version updates the UpdateAlert shouldn't be null");
+
             foreach (var pool in SelectedPools)
             {
                 var master = Helpers.GetMaster(pool.Connection);
@@ -147,9 +153,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     delayedActionsByHost.Add(host, new List<PlanAction>());
                 }
 
-                var hosts = pool.Connection.Cache.Hosts;
-
-                var us = Updates.GetUpgradeSequence(pool.Connection);
+                var us = WizardMode == WizardMode.NewVersion 
+                    ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, true)
+                    : Updates.GetUpgradeSequence(pool.Connection);
 
                 Debug.Assert(us != null, "Update sequence should not be null.");
 
