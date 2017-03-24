@@ -408,19 +408,19 @@ namespace XenAdmin
                                 if (statusBarAction != null)
                                 {
                                     statusBarAction.Changed -= actionChanged;
-                                    statusBarAction.Completed -= actionChanged;
+                                    statusBarAction.Completed -= actionCompleted;
                                 }
                                 statusBarAction = action;
                             }
                             action.Changed += actionChanged;
-                            action.Completed += actionChanged;
+                            action.Completed += actionCompleted;
                             actionChanged(action);
                             break;
                         }
                     case CollectionChangeAction.Remove:
                         {
                             action.Changed -= actionChanged;
-                            action.Completed -= actionChanged;
+                            action.Completed -= actionCompleted;
                             
                             int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
                             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
@@ -434,6 +434,13 @@ namespace XenAdmin
                         }
                 }
             });
+        }
+
+        void actionCompleted(ActionBase action)
+        {
+            actionChanged(action);
+            if (action is SrAction)
+                Program.Invoke(this, UpdateToolbars);
         }
 
         void actionChanged(ActionBase action)
