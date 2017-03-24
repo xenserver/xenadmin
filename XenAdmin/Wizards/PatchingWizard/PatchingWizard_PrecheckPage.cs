@@ -56,7 +56,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private BackgroundWorker _worker = null;
         public List<Host> SelectedServers = new List<Host>();
         public List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
-        public bool IsInAutomatedUpdatesMode { get; set; }
         private AsyncAction resolvePrechecksAction = null;
 
         protected List<Pool> SelectedPools
@@ -68,6 +67,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         public XenServerPatchAlert UpdateAlert { private get; set; }
+        public WizardMode WizardMode { private get; set; }
 
         public PatchingWizard_PrecheckPage()
         {
@@ -126,7 +126,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (direction == PageLoadedDirection.Back)
                     return;
 
-                if (IsInAutomatedUpdatesMode)
+                if (WizardMode == WizardMode.AutomatedUpdates)
                 {
                     labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE;
                 }
@@ -385,14 +385,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Disk space check for automated updates
-            if (IsInAutomatedUpdatesMode)
+            if (WizardMode != WizardMode.SingleUpdate)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
 
                 foreach (Pool pool in SelectedPools)
                 {
-                    var us = Updates.GetUpgradeSequence(pool.Connection);
+                    var us = WizardMode == WizardMode.NewVersion 
+                        ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, true)
+                        : Updates.GetUpgradeSequence(pool.Connection);
+
+                    if (us == null)
+                        continue;
 
                     bool elyOrGreater = Helpers.ElyOrGreater(pool.Connection);
 
@@ -434,7 +439,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (!IsInAutomatedUpdatesMode)
+            if (WizardMode != WizardMode.SingleUpdate)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
@@ -483,7 +488,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (!IsInAutomatedUpdatesMode)
+            if (WizardMode == WizardMode.SingleUpdate)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;

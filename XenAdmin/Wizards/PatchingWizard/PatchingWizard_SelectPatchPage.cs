@@ -158,7 +158,24 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public bool IsInAutomatedUpdatesMode { get { return AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked; } }
+        private bool IsInAutomatedUpdatesMode { get { return AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked; } }
+
+        public WizardMode WizardMode
+        {
+            get
+            {
+                if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
+                    return WizardMode.AutomatedUpdates;
+                var updateAlert = downloadUpdateRadioButton.Checked && dataGridViewPatches.SelectedRows.Count > 0
+                    ? (XenServerPatchAlert) ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).UpdateAlert
+                    : selectFromDiskRadioButton.Checked
+                        ? GetAlertFromFileName(fileNameTextBox.Text.ToLowerInvariant())
+                        : null;
+                if (updateAlert != null && updateAlert.NewServerVersion != null)
+                    return WizardMode.NewVersion;
+                return WizardMode.SingleUpdate;
+            } 
+        }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {

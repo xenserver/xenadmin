@@ -60,8 +60,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool poolSelectionOnly;
 
         public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
-
         public XenServerPatchAlert FileFromDiskAlert { private get; set; }
+        public WizardMode WizardMode { private get; set; }
 
         public PatchingWizard_SelectServers()
         {
@@ -95,8 +95,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLoaded(direction);
             try
             {
-                poolSelectionOnly = IsInAutomaticMode || SelectedUpdateAlert != null || FileFromDiskAlert != null;
-                label1.Text = IsInAutomaticMode 
+                poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null;
+                label1.Text = WizardMode == WizardMode.AutomatedUpdates 
                     ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE
                     : poolSelectionOnly ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
                 
@@ -142,16 +142,14 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             dataGridViewHosts.Select();
         }
-
-        public bool IsInAutomaticMode { set; get; }
-
+        
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
 
             var poolOfOne = Helpers.GetPoolOfOne(host.Connection);
 
-            if (IsInAutomaticMode)
+            if (WizardMode == WizardMode.AutomatedUpdates)
             {
                 // This check is first because it generally can't be fixed, it's a property of the host
                 if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden) // Forbids update auto restarts
@@ -475,7 +473,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (poolSelectionOnly)
                 {
-                    if (IsInAutomaticMode)
+                    if (WizardMode != WizardMode.SingleUpdate)
                         //prechecks will fail in automated updates mode if one of the hosts is unreachable
                         return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts).ToList();
                     //prechecks will issue warning but allow updates to be installed on the reachable hosts only
