@@ -255,7 +255,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void PopulatePatchesBox()
         {
             dataGridViewPatches.Rows.Clear();
-            var updates = new List<Alert>(Updates.UpdateAlerts);
+
+            var updates = Updates.UpdateAlerts.ToList();
+
             if (dataGridViewPatches.SortedColumn != null)
             {
                 if (dataGridViewPatches.SortedColumn.Index == ColumnUpdate.Index)
@@ -268,16 +270,29 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (dataGridViewPatches.SortOrder == SortOrder.Descending)
                     updates.Reverse();
             }
-           foreach (Alert alert in updates)
-           {
-               if (alert is XenServerPatchAlert)
-               {
-                   PatchGridViewRow row = new PatchGridViewRow(alert);
-                   if (!dataGridViewPatches.Rows.Contains(row))
-                   {
-                       dataGridViewPatches.Rows.Add(row);
-                   }
-               }
+            else
+            {
+                updates.Sort(new NewVersionPriorityAlertComparer());
+            }
+
+            foreach (Alert alert in updates)
+            {
+                var patchAlert = alert as XenServerPatchAlert;
+
+                if (patchAlert != null)
+                {
+                    PatchGridViewRow row = new PatchGridViewRow(patchAlert);
+                    if (!dataGridViewPatches.Rows.Contains(row))
+                    {
+                        dataGridViewPatches.Rows.Add(row);
+
+                        if (patchAlert.RequiredXenCenterVersion != null)
+                        {
+                            row.Enabled = false;
+                            row.SetToolTip(string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED, patchAlert.RequiredXenCenterVersion.Version));
+                        }
+                    }
+                }
             }
         }
         
