@@ -254,13 +254,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             dataGridViewPatches.Rows.Clear();
 
-            var alerts = Updates.UpdateAlerts.ToList();
-            if (dataGridViewPatches.SortedColumn == null)
-            {
-                alerts.Sort(new NewVersionPriorityAlertComparer());
-            }
-
-            var updates = new List<Alert>(alerts);
+            var updates = Updates.UpdateAlerts.ToList();
 
             if (dataGridViewPatches.SortedColumn != null)
             {
@@ -273,6 +267,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (dataGridViewPatches.SortOrder == SortOrder.Descending)
                     updates.Reverse();
+            }
+            else
+            {
+                updates.Sort(new NewVersionPriorityAlertComparer());
             }
 
             foreach (Alert alert in updates)
