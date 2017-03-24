@@ -568,6 +568,46 @@ namespace XenAdmin.Core
             }
         }
 
+        public static UpgradeSequence GetUpgradeSequence(IXenConnection conn, XenServerPatchAlert alert)
+        {
+            var uSeq = new UpgradeSequence();
+
+            if (XenServerVersions == null)
+                return null;
+
+            Host master = Helpers.GetMaster(conn);
+            if (master == null)
+                return null;
+
+            var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
+
+            if (version != null)
+            {
+                //if it's a version updgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
+                if (alert.NewServerVersion != null)
+                {
+                    if (alert.NewServerVersion.MinimalPatches == null)
+                        return null;
+
+                    uSeq.MinimalPatches = new List<XenServerPatch>();
+                    uSeq.MinimalPatches.Add(alert.Patch);
+                    uSeq.MinimalPatches.AddRange(alert.NewServerVersion.MinimalPatches);
+
+                    List<Host> hosts = conn.Cache.Hosts.ToList();
+
+                    foreach (Host h in hosts)
+                    {
+                        uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches);
+                    }
+
+                    return uSeq;
+                }
+            }
+
+            return null;
+        }
+
+
         /// <summary>
         /// Returns a XenServerVersion if all hosts of the pool have the same version
         /// Returns null if it is unknown or they don't match
