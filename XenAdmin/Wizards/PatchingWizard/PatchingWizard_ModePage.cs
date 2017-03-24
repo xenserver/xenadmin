@@ -45,8 +45,6 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         private bool _tooltipShowing;
 
-        public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
-
         public PatchingWizard_ModePage()
         {
             InitializeComponent();          
