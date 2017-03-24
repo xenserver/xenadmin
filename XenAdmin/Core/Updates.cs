@@ -581,27 +581,23 @@ namespace XenAdmin.Core
 
             var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
 
+            // the pool has to be homogeneous
             if (version != null)
             {
-                //if it's a version updgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
-                if (alert.NewServerVersion != null)
-                {
-                    if (alert.NewServerVersion.MinimalPatches == null)
-                        return null;
+                uSeq.MinimalPatches = new List<XenServerPatch>();
+                uSeq.MinimalPatches.Add(alert.Patch);
 
-                    uSeq.MinimalPatches = new List<XenServerPatch>();
-                    uSeq.MinimalPatches.Add(alert.Patch);
+                // if it's a version updgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
+                if (alert.NewServerVersion != null && alert.NewServerVersion.MinimalPatches != null)
+                {
                     uSeq.MinimalPatches.AddRange(alert.NewServerVersion.MinimalPatches);
 
-                    List<Host> hosts = conn.Cache.Hosts.ToList();
-
-                    foreach (Host h in hosts)
-                    {
-                        uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches);
-                    }
-
-                    return uSeq;
+                    conn.Cache.Hosts.ToList().ForEach(h =>
+                        uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches)
+                        );
                 }
+
+                return uSeq;
             }
 
             return null;
