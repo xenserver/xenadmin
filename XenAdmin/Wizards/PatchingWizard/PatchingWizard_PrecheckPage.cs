@@ -419,17 +419,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
-            //Checking can evacuate host for version updates
+            //Checking reboot required and can evacuate host for version updates
             if (WizardMode == Wizards.PatchingWizard.WizardMode.NewVersion && UpdateAlert != null && UpdateAlert.Patch != null &&  UpdateAlert.Patch.after_apply_guidance == after_apply_guidance.restartHost)
             {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
-                {
-                    checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
-                }
-
-
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
                 var guidance = new List<after_apply_guidance>() { UpdateAlert.Patch.after_apply_guidance };
@@ -437,6 +429,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var host in SelectedServers)
                 {
                     checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
+                }
+
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
                 }
             }
 
