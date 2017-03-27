@@ -269,7 +269,52 @@ namespace XenAdmin.Actions
             action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name);
         }
 
-        internal static void PoolReconfigureManagement(AsyncAction action, PIF up_pif, PIF down_pif, int hi)
+        internal static void WaitForslavesToRecover(Pool pool)
+        {
+            
+            int RetryLimit = 60, RetryAttempt = 0;
+
+            List<string> deadHost = new List<string>();
+
+            /* host count -1 is for excluding master */
+            while (deadHost.Count < (pool.Connection.Cache.HostCount -1) && (RetryAttempt <= RetryLimit))
+            {
+                foreach (Host host in pool.Connection.Cache.Hosts)
+                {
+                    if (host.IsMaster())
+                        continue;
+
+                    if (!host.IsLive && !deadHost.Contains(host.uuid))
+                    {
+                        deadHost.Add(host.uuid);
+                    }
+
+                }
+                RetryAttempt++;
+                Thread.Sleep(1000);
+            }
+
+            RetryAttempt = 0;
+
+            while (deadHost.Count != 0 && (RetryAttempt <= RetryLimit))
+            {
+                foreach (Host host in pool.Connection.Cache.Hosts)
+                {
+                    if (host.IsMaster())
+                        continue;
+
+                    if (host.IsLive && deadHost.Contains(host.uuid))
+                    {
+                        deadHost.Remove(host.uuid);
+                    }
+
+                }
+                RetryAttempt++;
+                Thread.Sleep(1000);
+            }
+        }
+
+        internal static void PoolReconfigureManagement(AsyncAction action, Pool pool, PIF up_pif, PIF down_pif, int hi)
        {
            System.Diagnostics.Trace.Assert(down_pif.host.opaque_ref == up_pif.host.opaque_ref);
 
@@ -278,11 +323,14 @@ namespace XenAdmin.Actions
            lo += inc;
            PoolManagementReconfigure_( action, up_pif, lo);
 
-           /* Pool recover slaves spwans two tasks dbsync (update_env) and server_init on each slaves. 
+           /* pool_management_reconfigure triggers a pool_recover_slaves, which in turn spawns two tasks
+            * dbsync (update_env) and server_init on each slaves. 
             * Only after their completion master will be able to execute reconfigure_IPs. 
-            * Hence, we allow some setteling time for them to complete.
+            * Hence, we check Host.IsLive metric of all slaves for a transition from true -> false -> true
             */
-           Thread.Sleep(10000);
+
+           action.Description = string.Format(Messages.ACTION_WAIT_FOR_SLAVES_TO_RECOVER);
+           WaitForslavesToRecover(pool);
            
             /* Reconfigure IP for slaves and then master */
            

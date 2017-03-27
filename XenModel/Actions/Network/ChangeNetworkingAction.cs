@@ -95,6 +95,8 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.Add("pif.plug");
             ApiMethodsToRoleCheck.AddRange(XenAPI.Role.CommonSessionApiList);
             ApiMethodsToRoleCheck.AddRange(XenAPI.Role.CommonTaskApiList);
+            if(!Helpers.FeatureForbidden(Connection, Host.RestrictManagementOnVLAN))
+                ApiMethodsToRoleCheck.Add("pool.management_reconfigure");
             #endregion
 
         }
@@ -203,9 +205,12 @@ namespace XenAdmin.Actions
 
         private void PoolReconfigureManagement(int hi)
         {
-            System.Diagnostics.Trace.Assert(newManagement != null);
+            System.Diagnostics.Trace.Assert(downManagement != null);
 
-            NetworkingActionHelpers.PoolReconfigureManagement(this, newManagement, downManagement, hi);
+            if (newManagement == null)
+                return;
+
+            NetworkingActionHelpers.PoolReconfigureManagement(this, Pool, newManagement, downManagement, hi);
         }
 
         private void BringUp(PIF new_pif, PIF existing_pif, int hi)
