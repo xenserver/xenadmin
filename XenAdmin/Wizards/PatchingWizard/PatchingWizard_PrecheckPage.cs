@@ -392,8 +392,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 foreach (Pool pool in SelectedPools)
                 {
-                    var us = WizardMode == WizardMode.NewVersion 
-                        ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, true)
+                    //if any host is not licensed for automated updates
+                    bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
+
+                    var us = WizardMode == WizardMode.NewVersion
+                        ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, !automatedUpdatesRestricted)
                         : Updates.GetUpgradeSequence(pool.Connection);
 
                     if (us == null)

@@ -153,8 +153,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     delayedActionsByHost.Add(host, new List<PlanAction>());
                 }
 
-                var us = WizardMode == WizardMode.NewVersion 
-                    ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, true)
+                //if any host is not licensed for automated updates
+                bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
+
+                var us = WizardMode == WizardMode.NewVersion
+                    ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, !automatedUpdatesRestricted)
                     : Updates.GetUpgradeSequence(pool.Connection);
 
                 Debug.Assert(us != null, "Update sequence should not be null.");
