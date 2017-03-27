@@ -428,6 +428,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
                 }
+
+
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                var guidance = new List<after_apply_guidance>() { UpdateAlert.Patch.after_apply_guidance };
+
+                foreach (var host in SelectedServers)
+                {
+                    checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
+                }
             }
 
             return checks;
@@ -469,7 +479,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             //Checking can evacuate host
             //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
             //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
-            if (WizardMode == WizardMode.SingleUpdate && (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)))
+            if (WizardMode != WizardMode.NewVersion && (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)))
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
