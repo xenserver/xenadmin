@@ -442,7 +442,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (WizardMode != WizardMode.SingleUpdate)
+            if (WizardMode == WizardMode.SingleUpdate)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
