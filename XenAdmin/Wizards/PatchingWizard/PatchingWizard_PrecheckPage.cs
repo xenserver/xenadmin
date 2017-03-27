@@ -68,6 +68,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public XenServerPatchAlert UpdateAlert { private get; set; }
         public WizardMode WizardMode { private get; set; }
+        public bool ApplyUpdatesToNewVersion { private get; set; }
 
         public PatchingWizard_PrecheckPage()
         {
@@ -396,7 +397,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
 
                     var us = WizardMode == WizardMode.NewVersion
-                        ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, !automatedUpdatesRestricted)
+                        ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
                         : Updates.GetUpgradeSequence(pool.Connection);
 
                     if (us == null)
