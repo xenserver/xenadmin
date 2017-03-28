@@ -29,12 +29,13 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
 
 namespace XenAdmin.Diagnostics.Problems
 {
-    public class XenCenterVersionProblem : Problem
+    public class XenCenterVersionProblem : ProblemWithInformationUrl
     {
         private XenCenterVersion _requiredXenCenterVersion;
 
@@ -56,10 +57,17 @@ namespace XenAdmin.Diagnostics.Problems
 
         public override string HelpMessage
         {
-            get
-            {
-                return "";
-            }
+            get { return LinkText; }
+        }
+
+        public override string LinkText
+        {
+            get { return Messages.PATCHING_WIZARD_WEBPAGE_CELL; }
+        }
+
+        public override Uri UriToLaunch
+        {
+            get { return new Uri(_requiredXenCenterVersion.Url); }
         }
     }
 }
