@@ -118,6 +118,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
                 xenConnections.Sort();
+                int licensedPoolCount = 0;
+                int poolCount = 0;
                 foreach (IXenConnection xenConnection in xenConnections)
                 {
                     // add pools, their members and standalone hosts
@@ -131,12 +133,33 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
 
                     Host[] hosts = xenConnection.Cache.Hosts;
+
+                    if (hosts.Length > 0)
+                    {
+                        poolCount++;
+                        var automatedUpdatesRestricted = hosts.Any(Host.RestrictBatchHotfixApply); //if any host is not licensed for automated updates
+                        if (!automatedUpdatesRestricted)
+                            licensedPoolCount++;
+                    }
+
                     Array.Sort(hosts);
                     foreach (Host host in hosts)
                     {
                         int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(host, hasPool, !poolSelectionOnly));
                         EnabledRow(host, SelectedUpdateType, index);
                     }
+                }
+
+                if (WizardMode == WizardMode.NewVersion && licensedPoolCount > 0) // in NewVersion mode and at least one pool licensed for automated updates 
+                {
+                    applyUpdatesCheckBox.Visible = true;
+                    applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
+                        ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES
+                        : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED;
+                }
+                else  // not in NewVersion mode or all pools unlicensed
+                {
+                    applyUpdatesCheckBox.Visible = false;
                 }
 
                 // restore server selection
@@ -530,6 +553,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
                 return pools;
+            }
+        }
+
+        public bool ApplyUpdatesToNewVersion
+        {
+            get
+            {
+                return applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
             }
         }
 

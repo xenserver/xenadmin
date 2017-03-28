@@ -163,8 +163,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var selectedServers = PatchingWizard_SelectServers.SelectedServers;
                 var selectedPools = PatchingWizard_SelectServers.SelectedPools;
                 var selectedMasters = PatchingWizard_SelectServers.SelectedMasters;
+                var applyUpdatesToNewVersion = PatchingWizard_SelectServers.ApplyUpdatesToNewVersion;
 
                 PatchingWizard_PrecheckPage.SelectedServers = selectedServers;
+                PatchingWizard_PrecheckPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
 
                 PatchingWizard_ModePage.SelectedServers = selectedServers;
 
@@ -176,6 +178,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.SelectedServers = selectedServers;
 
                 PatchingWizard_AutomatedUpdatesPage.SelectedPools = selectedPools;
+                PatchingWizard_AutomatedUpdatesPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {
