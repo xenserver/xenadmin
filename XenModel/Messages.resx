@@ -9388,6 +9388,9 @@ Greyed out servers cannot be updated with automated updates.</value>
     <value>Select one or more servers where you want to apply the selected update.
 Servers where this update cannot be applied appear disabled in this list.</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE" xml:space="preserve">
+    <value>Select one or more pools or standalone servers that you want to update to the new version.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION" xml:space="preserve">
     <value>Select one or more pools or standalone servers where you want to apply the selected update.
 Servers where this update cannot be applied appear disabled in this list.</value>
@@ -9403,6 +9406,9 @@ Servers where this update cannot be applied appear disabled in this list.</value
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you wish to update</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE" xml:space="preserve">
+    <value>The new version has been installed.</value>
   </data>
   <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
     <value>Automated updates have finished.</value>
@@ -9423,6 +9429,12 @@ Please wait for this operation to complete, then click Next to continue with the
   </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD" xml:space="preserve">
     <value>Uploading the selected file to your servers</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE" xml:space="preserve">
+    <value>Installing updates:</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE" xml:space="preserve">
+    <value>Installing new version:</value>
   </data>
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>Eject any virtual CDs from your VMs</value>
