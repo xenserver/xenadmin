@@ -86,7 +86,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.errorLinkLabel.Name = "errorLinkLabel";
             this.errorLinkLabel.TabStop = true;
             // 
-            // PatchingWizard_AutoUpdatingPage
+            // PatchingWizard_AutomatedUpdatesPage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -94,7 +94,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.textBoxLog);
             this.Controls.Add(this.labelTitle);
-            this.Name = "PatchingWizard_AutoUpdatingPage";
+            this.Name = "PatchingWizard_AutomatedUpdatesPage";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

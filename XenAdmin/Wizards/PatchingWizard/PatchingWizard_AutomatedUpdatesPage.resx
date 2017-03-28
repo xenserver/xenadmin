@@ -126,13 +126,10 @@
     <value>3, 13</value>
   </data>
   <data name="labelTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
+    <value>0, 13</value>
   </data>
   <data name="labelTitle.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="labelTitle.Text" xml:space="preserve">
-    <value>Installing updates:</value>
   </data>
   <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
     <value>labelTitle</value>
@@ -355,7 +352,7 @@
     <value>511, 335</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PatchingWizard_AutoUpdatingPage</value>
+    <value>PatchingWizard_AutomatedUpdatesPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
