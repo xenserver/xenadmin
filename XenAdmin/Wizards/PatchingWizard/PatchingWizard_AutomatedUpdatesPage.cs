@@ -139,7 +139,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
             }
 
-            Debug.Assert(WizardMode != WizardMode.NewVersion || (WizardMode == WizardMode.NewVersion && UpdateAlert != null), "For version updates the UpdateAlert shouldn't be null");
+            Debug.Assert(WizardMode == WizardMode.AutomatedUpdates || WizardMode == WizardMode.NewVersion && UpdateAlert != null);
+
+            if (WizardMode == WizardMode.AutomatedUpdates)
+            {
+                labelTitle.Text = Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE;
+            }
+            else if (WizardMode == WizardMode.NewVersion)
+            {
+                labelTitle.Text = Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
+            }
 
             foreach (var pool in SelectedPools)
             {
@@ -614,7 +623,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AllWorkersFinished()
         {
-            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
+            if (WizardMode == WizardMode.AutomatedUpdates)
+            {
+                labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
+            }
+            else if (WizardMode == WizardMode.NewVersion)
+            {
+                labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE;
+            }
+
             progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
