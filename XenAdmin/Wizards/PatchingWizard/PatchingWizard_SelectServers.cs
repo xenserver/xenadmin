@@ -109,9 +109,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                     case WizardMode.SingleUpdate :
                         label1.Text = poolSelectionOnly ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
                         break;
-                    default :
-                        Debug.Assert(false, "new mode?");
-                        break;
                 }
                 
                 // catch selected servers, in order to restore selection after the dataGrid is reloaded
