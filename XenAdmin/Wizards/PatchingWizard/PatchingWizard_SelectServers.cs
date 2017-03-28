@@ -42,6 +42,7 @@ using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Alerts;
 using System.Linq;
+using System.Diagnostics;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -96,9 +97,22 @@ namespace XenAdmin.Wizards.PatchingWizard
             try
             {
                 poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null;
-                label1.Text = WizardMode == WizardMode.AutomatedUpdates 
-                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE
-                    : poolSelectionOnly ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
+
+                switch (WizardMode)
+                {
+                    case WizardMode.AutomatedUpdates :
+                        label1.Text = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE;
+                        break;
+                    case WizardMode.NewVersion :
+                        label1.Text = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE;
+                        break;
+                    case WizardMode.SingleUpdate :
+                        label1.Text = poolSelectionOnly ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
+                        break;
+                    default :
+                        Debug.Assert(false, "new mode?");
+                        break;
+                }
                 
                 // catch selected servers, in order to restore selection after the dataGrid is reloaded
                 List<Host> selectedServers = SelectedServers;
