@@ -9395,7 +9395,8 @@ Greyed out servers cannot be updated with automated updates.</value>
 Servers where this update cannot be applied appear disabled in this list.</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE" xml:space="preserve">
-    <value>Select one or more pools or standalone servers that you want to update to the new version.</value>
+    <value>Select one or more pools or standalone servers that you want to update to the new version.
+Servers where this update cannot be applied appear disabled in this list.</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION" xml:space="preserve">
     <value>Select one or more pools or standalone servers where you want to apply the selected update.
