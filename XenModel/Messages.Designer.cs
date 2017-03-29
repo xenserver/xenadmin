@@ -26917,7 +26917,8 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select one or more pools or standalone servers that you want to update to the new version..
+        ///   Looks up a localized string similar to Select one or more pools or standalone servers that you want to update to the new version.
+        ///Servers where this update cannot be applied appear disabled in this list..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE {
             get {
