@@ -1227,6 +1227,9 @@
   <data name="ACTION_VM_TEMPLATIZING_TITLE" xml:space="preserve">
     <value>Converting VM '{0}' to template</value>
   </data>
+  <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
+    <value>Waiting for slaves to recover...</value>
+  </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>Disconnecting  Workload Balancing failed on pool {0}: {1}  Workload Balancing has been paused.</value>
   </data>
@@ -9735,6 +9738,9 @@ The VM protection policy for this VM does not have automatic archiving configure
   </data>
   <data name="POOL_JOIN_IMPOSSIBLE" xml:space="preserve">
     <value>Pool join not possible</value>
+  </data>
+  <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
+    <value>This server must not have any bonds, non management VLANs or cross-server private networks</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
     <value>This server must not have any bonds, VLANs or cross-server private networks</value>

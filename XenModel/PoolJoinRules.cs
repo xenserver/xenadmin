@@ -66,6 +66,7 @@ namespace XenAdmin.Core
             DifferentNetworkBackends,
             MasterHasHA,
             NotPhysicalPif,
+            NonCompatibleManagementInterface,
             WrongRoleOnMaster,
             WrongRoleOnSlave,
             NotConnected,
@@ -152,8 +153,11 @@ namespace XenAdmin.Core
             if (HaEnabled(masterConnection))
                 return Reason.MasterHasHA;
 
-            if (HasSlaveAnyNonPhysicalPif(slaveConnection))
+            if (Helpers.FeatureForbidden(slaveConnection, Host.RestrictManagementOnVLAN) && HasSlaveAnyNonPhysicalPif(slaveConnection))
                 return Reason.NotPhysicalPif;
+
+            if (!Helpers.FeatureForbidden(slaveConnection, Host.RestrictManagementOnVLAN) && !HasCompatibleManagementInterface(slaveConnection))
+                return Reason.NonCompatibleManagementInterface;
 
             return Reason.Allowed;
         }
@@ -206,6 +210,8 @@ namespace XenAdmin.Core
                     return Messages.POOL_JOIN_FORBIDDEN_BY_HA;
                 case Reason.NotPhysicalPif :
                     return Messages.POOL_JOIN_NOT_PHYSICAL_PIF;
+                case Reason.NonCompatibleManagementInterface :
+                    return Messages.POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE;
                 case Reason.WrongRoleOnMaster:
                     return Messages.NEWPOOL_MASTER_ROLE;
                 case Reason.WrongRoleOnSlave:
@@ -616,6 +622,24 @@ namespace XenAdmin.Core
         {
             return
                 slaveConnection.Cache.PIFs.Any(p => !p.physical);
+        }
+
+        public static bool HasCompatibleManagementInterface(IXenConnection slaveConnection)
+        {
+            /* if there are non physical pifs present then the slave should have 
+             * only one VLAN and it has to be the managment interface. 
+             * Bonds and cross server private networks are not allowed */
+
+            int numberOfNonPhysicalPifs = slaveConnection.Cache.PIFs.Count(p => !p.physical);
+            
+            /* allow the case where there are only physical pifs */
+            if (numberOfNonPhysicalPifs == 0)
+                return true;
+
+            if(numberOfNonPhysicalPifs != 1)
+                return false;
+            else
+                return slaveConnection.Cache.PIFs.Any(p => !p.physical && p.management && p.VLAN != -1);
         }
     }
 }
