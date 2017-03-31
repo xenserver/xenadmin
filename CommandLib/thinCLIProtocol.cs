@@ -185,8 +185,8 @@ namespace CommandLib
         public static Stream doRPC(String method, Uri uri, thinCLIProtocol tCLIprotocol, params string[] headers)
         {
             Stream http = Transport.connect(tCLIprotocol, uri.Host, uri.Port);
-            String header = string.Format("{0} {1} HTTP/1.0", method, uri.PathAndQuery);
-            writeLine(http, header);
+            String startLine = string.Format("{0} {1} HTTP/1.0", method, uri.PathAndQuery);
+            writeLine(http, startLine);
             foreach (string h in headers)
                 writeLine(http, h);
             writeLine(http, "");
