@@ -233,7 +233,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             foreach (PatchGridViewRow row in dataGridViewPatches.Rows)
             {
-                if (row.UpdateAlert.Name == Path.GetFileNameWithoutExtension(fileName))
+                if (string.Equals(row.UpdateAlert.Name, Path.GetFileNameWithoutExtension(fileName), StringComparison.OrdinalIgnoreCase))
                 {
                     return (XenServerPatchAlert)row.UpdateAlert;
                 }

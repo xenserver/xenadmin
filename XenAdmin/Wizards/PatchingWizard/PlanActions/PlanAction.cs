@@ -58,6 +58,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 return visible;
             }
+            set 
+            {
+                visible = value;
+            }
         }
         
         private string status;
