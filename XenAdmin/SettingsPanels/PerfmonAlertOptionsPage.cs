@@ -144,7 +144,11 @@ namespace XenAdmin.SettingsPanels
                 else
                 {
                     // Set default language value
-                    MailLanguageComboBox.SelectedIndex = 0;
+                    int defaultSelectedIndex = PerfmonOptionsDefinition.MailLanguageIndexFromCode(Branding.BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT);
+                    if (defaultSelectedIndex >= 0)
+                        MailLanguageComboBox.SelectedIndex = defaultSelectedIndex;
+                    else
+                        MailLanguageComboBox.SelectedIndex = 0;
                 }
             }
             catch { }
