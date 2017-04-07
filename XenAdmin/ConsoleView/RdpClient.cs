@@ -105,7 +105,13 @@ namespace XenAdmin.ConsoleView
 
         public Point rdpLocationOffset
         {
-            set { rdpControl.Location = value; }
+            set 
+            {
+                if (rdpControl == null)
+                    return;
+
+                rdpControl.Location = value; 
+            }
         }
 
         private void RDPAddOnDisconnected()
