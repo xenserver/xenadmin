@@ -1022,17 +1022,19 @@ namespace XenAPI
             CoreOS = 4,
             Debian = 5,
             NeoKylin = 6,
-            Oracle = 7,
-            RedHat = 8,
-            SciLinux = 9,
-            Suse = 10,
-            Ubuntu = 11,
-            Citrix = 12,
-            Solaris = 13,
-            Misc = 14,
-            Snapshot = 15,
-            SnapshotFromVmpp = 16,
-            Count = 17  //bump this if values are added
+            Asianux  = 7,
+            Turbo = 8,
+            Oracle = 9,
+            RedHat = 10,
+            SciLinux = 11,
+            Suse = 12,
+            Ubuntu = 13,
+            Citrix = 14,
+            Solaris = 15,
+            Misc = 16,
+            Snapshot = 17,
+            SnapshotFromVmpp = 18,
+            Count = 19  //bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -1082,6 +1084,12 @@ namespace XenAPI
 
                 if (os.Contains("kylin"))
                     return VmTemplateType.NeoKylin;
+
+                if (os.Contains("asianux"))
+                    return VmTemplateType.Asianux;
+
+                if (os.Contains("turbo"))
+                    return VmTemplateType.Turbo; 
 
                 if (os.Contains("solaris"))
                     return VmTemplateType.Solaris;
