@@ -757,14 +757,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Return the hg_id (Mercurial changeset number) of xapi on this host, or null if none can be found.
-        /// </summary>
-        public string hg_id
-        {
-            get { return Get(software_version, "hg_id"); }
-        }
-
-        /// <summary>
         /// Return the product_brand of this host, or null if none can be found.
         /// </summary>
         public string ProductBrand
@@ -1208,6 +1200,11 @@ namespace XenAPI
         public int XenCenterMax
         {
             get { return GetSVAsInt("xencenter_max"); }
+        }
+
+        public string GetDatabaseSchema()
+        {
+            return Get(software_version, "db_schema");
         }
 
         /// <summary>

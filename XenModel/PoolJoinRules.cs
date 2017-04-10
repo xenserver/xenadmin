@@ -382,10 +382,14 @@ namespace XenAdmin.Core
 
         private static bool DifferentServerVersion(Host slave, Host master)
         {
-            // Probably all the others will be equal if the hg_id is equal, but let's
-            // mimic the test on the server side (xen-api.hg:ocaml/xapi/xapi_pool.ml).
+            if (slave.API_version_major != master.API_version_major ||
+                slave.API_version_minor != master.API_version_minor)
+                return true;
+
+            if (slave.GetDatabaseSchema() != master.GetDatabaseSchema())
+                return true;
+            
             return
-                slave.hg_id != master.hg_id ||
                 !Helpers.ElyOrGreater(master) && !Helpers.ElyOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
                 slave.ProductVersion != master.ProductVersion ||
                 slave.ProductBrand != master.ProductBrand;
