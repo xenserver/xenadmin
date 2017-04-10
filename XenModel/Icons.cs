@@ -108,6 +108,8 @@ namespace XenAdmin
         Ubuntu,
         SciLinux,
         NeoKylin,
+        Asianux,
+        Turbo,       
         Windows,
         CoreOS,
 

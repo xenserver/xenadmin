@@ -1006,7 +1006,7 @@ namespace XenAPI
         /// Sort in the following order:
         /// 1) User Templates
         /// 2) Windows VMs
-        /// 3) Other VMs (e.g. Linux)
+        /// 3) Other VMs (e.g. Linux . Names in alphabetical order)
         /// 4) Citrix VMs (e.g. XenApp templates)
         /// 5) Misc VMs
         /// 6) Regular snapshots
@@ -1018,21 +1018,23 @@ namespace XenAPI
             NoTemplate = 0,//it's not a template
             Custom = 1,
             Windows = 2,
-            Centos = 3,
-            CoreOS = 4,
-            Debian = 5,
-            NeoKylin = 6,
-            Oracle = 7,
-            RedHat = 8,
-            SciLinux = 9,
-            Suse = 10,
-            Ubuntu = 11,
-            Citrix = 12,
-            Solaris = 13,
-            Misc = 14,
-            Snapshot = 15,
-            SnapshotFromVmpp = 16,
-            Count = 17  //bump this if values are added
+            Asianux  = 3,
+            Centos = 4,
+            CoreOS = 5,
+            Debian = 6,
+            NeoKylin = 7,
+            Oracle = 8,
+            RedHat = 9,
+            SciLinux = 10,
+            Suse = 11,
+            Turbo = 12,
+            Ubuntu = 13,
+            Citrix = 14,
+            Solaris = 15,
+            Misc = 16,
+            Snapshot = 17,
+            SnapshotFromVmpp = 18,
+            Count = 19  //bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -1082,6 +1084,12 @@ namespace XenAPI
 
                 if (os.Contains("kylin"))
                     return VmTemplateType.NeoKylin;
+
+                if (os.Contains("asianux"))
+                    return VmTemplateType.Asianux;
+
+                if (os.Contains("turbo"))
+                    return VmTemplateType.Turbo; 
 
                 if (os.Contains("solaris"))
                     return VmTemplateType.Solaris;

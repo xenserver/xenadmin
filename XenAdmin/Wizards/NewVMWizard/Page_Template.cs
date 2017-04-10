@@ -318,6 +318,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU;
                 case VM.VmTemplateType.NeoKylin:
                     return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN;
+                case VM.VmTemplateType.Asianux:
+                    return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX;
+                case VM.VmTemplateType.Turbo:
+                    return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_TURBO;        
                 case VM.VmTemplateType.Citrix:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_CITRIX;
                 case VM.VmTemplateType.Solaris:
@@ -356,6 +360,10 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Resources.ubuntu_16x;
                 case VM.VmTemplateType.NeoKylin:
                     return Resources.neokylin_16x;
+                case VM.VmTemplateType.Asianux:
+                    return Resources.asianux_16x;   
+                case VM.VmTemplateType.Turbo:
+                    return Resources.turbo_16x;                      
                 case VM.VmTemplateType.Citrix:
                     return Resources.Logo;
                 case VM.VmTemplateType.Solaris:

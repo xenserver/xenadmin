@@ -8850,6 +8850,12 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN" xml:space="preserve">
     <value>NeoKylin</value>
   </data>
+  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX" xml:space="preserve">
+    <value>Asianux</value>
+  </data>  
+  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_TURBO" xml:space="preserve">
+    <value>Turbo</value>
+  </data> 
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU" xml:space="preserve">
     <value>Ubuntu</value>
   </data>
