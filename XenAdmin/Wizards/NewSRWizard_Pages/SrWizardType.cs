@@ -57,15 +57,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     {
         public LvmOhbaSrDescriptor(FibreChannelDevice device, IXenConnection connection)
         {
-            Host master = Helpers.GetMaster(connection);
             Device = device;
-
-            // CA-19025: Change XenCenter SR.create for LVMoHBA to use the
-            // updated SCSIid parameter rather than the device path
-            if (master != null)
-            {
-                DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
-            }
+            DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
 
             Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
         }
