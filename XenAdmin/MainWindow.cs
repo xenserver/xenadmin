@@ -829,7 +829,7 @@ namespace XenAdmin
 
             log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6}.{7})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                Helpers.HostBuildNumber(master), Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
+                master.BuildNumberRaw, Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
                 Branding.XENCENTER_VERSION, Program.Version.Revision);
 
             // Check the PRODUCT_BRAND

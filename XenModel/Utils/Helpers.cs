@@ -77,25 +77,6 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
-        /// Return the build number of the given host, or the build number of the master if the
-        /// given host does not have a build number, or -1 if we can't find one.  This will often be
-        /// 0 or -1 for developer builds, so comparisons should generally treat those numbers as if
-        /// they were brand new.
-        /// </summary>
-        public static int HostBuildNumber(Host host)
-        {
-            if (host.BuildNumber <= 0)
-            {
-                Host master = GetMaster(host.Connection);
-                return master == null ? -1 : master.BuildNumber;
-            }
-            else
-            {
-                return host.BuildNumber;
-            }
-        }
-
-        /// <summary>
         /// Return the given host's product version, or the pool master's product version if
         /// the host does not have one, or null if none can be found.
         /// </summary>
@@ -347,8 +328,7 @@ namespace XenAdmin.Core
             
             string platform_version = Helpers.HostPlatformVersion(host);
             return
-                platform_version != null && Helpers.productVersionCompare(platform_version, "1.5.50") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && Helpers.productVersionCompare(platform_version, "1.5.50") >= 0;
         }
 
         public static bool SanibelOrGreater(IXenConnection conn)
@@ -360,8 +340,7 @@ namespace XenAdmin.Core
         {
             return
                 TampaOrGreater(host) ||  // CP-2480
-                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "6.0.1") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "6.0.1") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -379,8 +358,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -398,8 +376,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
@@ -417,8 +394,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0;
         }
 
         /// <summary>
@@ -462,8 +438,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0;
         }
 
         /// <summary>
