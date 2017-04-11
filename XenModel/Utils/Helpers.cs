@@ -289,17 +289,17 @@ namespace XenAdmin.Core
 
         public static bool IsConnected(IXenConnection connection)
         {
-            return (connection == null ? false : connection.IsConnected);
+            return (connection != null && connection.IsConnected);
         }
 
         public static bool IsConnected(Pool pool)
         {
-            return (pool == null ? false : IsConnected(pool.Connection));
+            return (pool != null && IsConnected(pool.Connection));
         }
 
         public static bool IsConnected(Host host)
         {
-            return (host == null ? false : IsConnected(host.Connection));
+            return (host != null && IsConnected(host.Connection));
         }
 
         public static bool HasFullyConnectedSharedStorage(IXenConnection connection)
@@ -315,7 +315,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool TampaOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : TampaOrGreater(Helpers.GetMaster(conn));
+            return conn == null || TampaOrGreater(Helpers.GetMaster(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -331,7 +331,7 @@ namespace XenAdmin.Core
 
         public static bool SanibelOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : SanibelOrGreater(Helpers.GetMaster(conn));
+            return conn == null || SanibelOrGreater(Helpers.GetMaster(conn));
         }
 
         public static bool SanibelOrGreater(Host host)
@@ -344,7 +344,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool CreedenceOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : CreedenceOrGreater(Helpers.GetMaster(conn));
+            return conn == null || CreedenceOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Creedence is ver. 1.9.0
@@ -362,7 +362,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : DundeeOrGreater(Helpers.GetMaster(conn));
+            return conn == null || DundeeOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Dundee is ver. 2.0.0
@@ -380,7 +380,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ElyOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : ElyOrGreater(Helpers.GetMaster(conn));
+            return conn == null || ElyOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Ely is ver. 2.1.1
@@ -398,7 +398,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : FalconOrGreater(Helpers.GetMaster(conn));
+            return conn == null || FalconOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Falcon is ver. 2.3.0
@@ -442,7 +442,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ClearwaterOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : ClearwaterOrGreater(Helpers.GetMaster(conn));
+            return conn == null || ClearwaterOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Clearwater is ver. 1.7.0
