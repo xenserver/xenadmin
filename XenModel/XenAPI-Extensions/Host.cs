@@ -703,11 +703,15 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// For legacy build numbers only (used to be integers + one char at the end)
+        /// From Falcon, this property is not used.
+        /// </summary>
+        /// <remarks>
         /// Return the build number of this host, or -1 if none can be found.  This will often be
         /// 0 or -1 for developer builds, so comparisons should generally treat those numbers as if
         /// they were brand new.
-        /// </summary>
-        public int BuildNumber
+        /// </remarks>
+        internal int BuildNumber
         {
             get
             {
@@ -727,8 +731,11 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Return the build number of this host, without stripping off the final letter etc.; or null if none can be found.
+        /// Return the exact build_number of this host
         /// </summary>
+        /// <remarks>
+        /// null if not found
+        /// </remarks>
         public virtual string BuildNumberRaw
         {
             get { return Get(software_version, "build_number"); }
@@ -742,7 +749,7 @@ namespace XenAPI
             get
             {
                 string productVersion = ProductVersion;
-                return productVersion != null ? string.Format("{0}.{1}", productVersion, BuildNumber) : null;
+                return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.FalconOrGreater(this) ? BuildNumberRaw : BuildNumber.ToString()) : null;
             }
         }
 
