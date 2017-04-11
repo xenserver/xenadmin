@@ -322,8 +322,7 @@ namespace XenAdmin.Wizards.DRWizards
 
             Host master = Helpers.GetMaster(Connection);
 
-            if (master != null && (Helpers.HostBuildNumber(master) >= 9633
-                                || Helpers.HostBuildNumber(master) == Helpers.CUSTOM_BUILD_NUMBER))
+            if (master != null)
             {
                 dconf[SrProbeAction.SCSIid] = device.SCSIid;
             }
