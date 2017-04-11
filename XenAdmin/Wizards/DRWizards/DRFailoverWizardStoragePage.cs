@@ -318,14 +318,8 @@ namespace XenAdmin.Wizards.DRWizards
             if (device == null)
                 return null;
 
-            Dictionary<String, String> dconf = new Dictionary<String, String>();
-
-            Host master = Helpers.GetMaster(Connection);
-
-            if (master != null)
-            {
-                dconf[SrProbeAction.SCSIid] = device.SCSIid;
-            }
+            var dconf = new Dictionary<string, string>();
+            dconf[SrProbeAction.SCSIid] = device.SCSIid;
 
             return dconf;
         }

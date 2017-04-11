@@ -38,6 +38,7 @@ using Citrix.XenCenter;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using System.Diagnostics;
 
 
 namespace XenAPI
@@ -715,6 +716,8 @@ namespace XenAPI
         {
             get
             {
+                Debug.Assert(!Helpers.FalconOrGreater(this));
+
                 string bn = BuildNumberRaw;
                 if (bn == null)
                     return -1;
