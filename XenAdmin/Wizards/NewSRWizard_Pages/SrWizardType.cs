@@ -66,10 +66,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             {
                 DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
             }
-            else
-            {
-                DeviceConfig[SrProbeAction.DEVICE] = device.Path;
-            }
 
             Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
         }
