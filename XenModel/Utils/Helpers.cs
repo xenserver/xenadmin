@@ -59,8 +59,6 @@ namespace XenAdmin.Core
         
         public const string GuiTempObjectPrefix = "__gui__";
 
-        public const int CUSTOM_BUILD_NUMBER = 6666;
-
         public static NumberFormatInfo _nfi = new CultureInfo("en-US", false).NumberFormat;
 
         public static readonly Regex SessionRefRegex = new Regex(@"OpaqueRef:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
