@@ -62,8 +62,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
             // CA-19025: Change XenCenter SR.create for LVMoHBA to use the
             // updated SCSIid parameter rather than the device path
-            if (master != null && (Helpers.HostBuildNumber(master) >= 9633
-                                   || Helpers.HostBuildNumber(master) == Helpers.CUSTOM_BUILD_NUMBER))
+            if (master != null)
             {
                 DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
             }
