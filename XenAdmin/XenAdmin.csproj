@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\GUIActions\DownloadUpdatesXmlAction.cs" />
     <Compile Include="Actions\GUIActions\ExportResourceReportAction.cs" />
     <Compile Include="Actions\GUIActions\DeleteAllAlertsAction.cs" />
     <Compile Include="Actions\GUIActions\ExternalPluginAction.cs" />
