@@ -35,6 +35,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.IO;
 using XenCenterLib.Archive;
+using System.Management;
 
 namespace XenAdmin.Actions
 {

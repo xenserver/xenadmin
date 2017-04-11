@@ -37,7 +37,8 @@ using System.IO;
 using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
-
+using System.Net;
+using System.Text;
 
 namespace XenAdmin.Actions
 {
@@ -291,19 +292,52 @@ namespace XenAdmin.Actions
         {
             var xdoc = new XmlDocument();
             var uri = new Uri(location);
-            
+
+            var uniqueIdHash = GetUniqueIdHash();
+
+            string buildText = Helpers.CommonCriteriaCertificationRelease
+                        ? string.Format("{0}: {1}", Program.Version.Revision, Messages.COMMON_CRITERIA_TEXT)
+                        : Program.Version.Revision.ToString();
+
             if (uri.IsFile)
             {
                 xdoc.Load(location);
             }
             else
             {
-                using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+                using (var webClient = new WebClient())
                 {
-                    xdoc = Helpers.LoadXmlDocument(xmlstream);
+                    webClient.Headers.Add("User-Agent", string.Format("{0} (v.{1})", Branding.BRAND_CONSOLE, buildText));
+                    webClient.Headers.Add("User-Agent-Id", uniqueIdHash);
+
+                    using (var stream = new MemoryStream(webClient.DownloadData(uri)))
+                    {
+                        xdoc.Load(stream);
+                    }
                 }
             }
             return xdoc;
+        }
+
+        private string GetUniqueIdHash()
+        {
+            string uniqueIdHash = "nil";
+
+            var managementObj = new System.Management.ManagementObject("Win32_OperatingSystem=@");
+            string serialNumber = (string)managementObj["SerialNumber"];
+
+            if (!string.IsNullOrWhiteSpace(serialNumber))
+            {
+                var serialBytes = Encoding.ASCII.GetBytes("JustSomeSaltForCheckForUpdates" + serialNumber);
+
+                using (var md = new System.Security.Cryptography.MD5CryptoServiceProvider()) // MD5 to keep it short enough as this hash is not used for security in any way
+                {
+                    var hash = md.ComputeHash(serialBytes);
+                    uniqueIdHash = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                }
+            }
+
+            return uniqueIdHash;
         }
     }
 }
