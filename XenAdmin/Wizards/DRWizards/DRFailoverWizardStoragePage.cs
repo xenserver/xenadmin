@@ -326,10 +326,6 @@ namespace XenAdmin.Wizards.DRWizards
             {
                 dconf[SrProbeAction.SCSIid] = device.SCSIid;
             }
-            else
-            {
-                dconf[SrProbeAction.DEVICE] = device.Path;
-            }
 
             return dconf;
         }
