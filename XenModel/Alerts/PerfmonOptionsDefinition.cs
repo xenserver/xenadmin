@@ -50,11 +50,11 @@ namespace XenAdmin.Alerts
 
         private class MailLanguageList
         {
-            private List<KeyValuePair<String, String>> _list;
+            private Dictionary<String, String> _list;
 
-            public MailLanguageList(List<KeyValuePair<String, String>> initList)
+            public MailLanguageList(Dictionary<String, String> initList)
             {
-                _list = new List<KeyValuePair<String, String>>(initList);
+                _list = new Dictionary<String, String>(initList);
             }
 
             public String CodeFromName(String name)
@@ -89,17 +89,14 @@ namespace XenAdmin.Alerts
                 return ret;
             }
 
-            public int IndexFromCode(String code)
+            public bool HasCode(String code)
             {
-                for (int i = 0; i < _list.Count; i++)
-                    if (code == _list[i].Key)
-                        return i;
-                return -1;
+                return _list.ContainsKey(code);
             }
 
-            public List<KeyValuePair<String, String>> dataSource()
+            public Dictionary<String, String> dataSource()
             {
-                return new List<KeyValuePair<String, String>>(_list);
+                return new Dictionary<String, String>(_list);
             }
         }
 
@@ -108,10 +105,10 @@ namespace XenAdmin.Alerts
         private readonly String mailDestination;
         private readonly String mailLanguageCode;
 
-        private static MailLanguageList ml_list = new MailLanguageList(new List<KeyValuePair<String, String>>() {
-            new KeyValuePair<String, String>(Messages.MAIL_LANGUAGE_ENGLISH_CODE, Messages.MAIL_LANGUAGE_ENGLISH_NAME),
-            new KeyValuePair<String, String>(Messages.MAIL_LANGUAGE_CHINESE_CODE, Messages.MAIL_LANGUAGE_CHINESE_NAME),
-            new KeyValuePair<String, String>(Messages.MAIL_LANGUAGE_JAPANESE_CODE, Messages.MAIL_LANGUAGE_JAPANESE_NAME)
+        private static MailLanguageList ml_list = new MailLanguageList(new Dictionary<String, String>() {
+            {Messages.MAIL_LANGUAGE_ENGLISH_CODE, Messages.MAIL_LANGUAGE_ENGLISH_NAME},
+            {Messages.MAIL_LANGUAGE_CHINESE_CODE, Messages.MAIL_LANGUAGE_CHINESE_NAME},
+            {Messages.MAIL_LANGUAGE_JAPANESE_CODE, Messages.MAIL_LANGUAGE_JAPANESE_NAME}
         });
 
         public PerfmonOptionsDefinition(String mailHub, String mailDestination, String mailLanguageCode)
@@ -199,7 +196,7 @@ namespace XenAdmin.Alerts
             string mailHub = GetSmtpMailHub(connection);
             string mailLanguageCode = GetMailLanguageCode(connection);
 
-            if (mailDestination == null || mailHub == null || mailLanguageCode == null)
+            if (mailDestination == null || mailHub == null)
                 return null;
 
             return new PerfmonOptionsDefinition(mailHub, mailDestination, mailLanguageCode);
@@ -287,9 +284,9 @@ namespace XenAdmin.Alerts
             return ml_list.CodeFromName(name);
         }
 
-        public static int MailLanguageIndexFromCode(String code)
+        public static bool MailLanguageHasCode(String code)
         {
-            return ml_list.IndexFromCode(code);
+            return ml_list.HasCode(code);
         }
 
         public static object MailLanguageDataSource()

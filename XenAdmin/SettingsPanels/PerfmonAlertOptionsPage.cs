@@ -139,14 +139,13 @@ namespace XenAdmin.SettingsPanels
                     SmtpServerAddrTextBox.Text = PerfmonOptionsDefinition.GetSmtpServerAddress(_PerfmonOptions.MailHub);
                     SmtpServerPortTextBox.Text = PerfmonOptionsDefinition.GetSmtpPort(_PerfmonOptions.MailHub);
                     if (null != _PerfmonOptions.MailLanguageCode)
-                        MailLanguageComboBox.SelectedIndex = PerfmonOptionsDefinition.MailLanguageIndexFromCode(_PerfmonOptions.MailLanguageCode);
+                        MailLanguageComboBox.SelectedValue = _PerfmonOptions.MailLanguageCode;
                 }
                 else
                 {
                     // Set default language value
-                    int defaultSelectedIndex = PerfmonOptionsDefinition.MailLanguageIndexFromCode(Branding.BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT);
-                    if (defaultSelectedIndex >= 0)
-                        MailLanguageComboBox.SelectedIndex = defaultSelectedIndex;
+                    if (PerfmonOptionsDefinition.MailLanguageHasCode(Branding.BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT))
+                        MailLanguageComboBox.SelectedValue = Branding.BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT;
                     else
                         MailLanguageComboBox.SelectedIndex = 0;
                 }

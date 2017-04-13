@@ -20562,7 +20562,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chinese(S).
+        ///   Looks up a localized string similar to Chinese (Simplified).
         /// </summary>
         public static string MAIL_LANGUAGE_CHINESE_NAME {
             get {
@@ -20580,7 +20580,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English(United States).
+        ///   Looks up a localized string similar to English (United States).
         /// </summary>
         public static string MAIL_LANGUAGE_ENGLISH_NAME {
             get {
@@ -20598,7 +20598,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Japanese(Japan).
+        ///   Looks up a localized string similar to Japanese (Japan).
         /// </summary>
         public static string MAIL_LANGUAGE_JAPANESE_NAME {
             get {

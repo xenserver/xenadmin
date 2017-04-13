@@ -7168,19 +7168,19 @@ SCSI ID: {2}
     <value>zh-CN</value>
   </data>
   <data name="MAIL_LANGUAGE_CHINESE_NAME" xml:space="preserve">
-    <value>Chinese(S)</value>
+    <value>Chinese (Simplified)</value>
   </data>
   <data name="MAIL_LANGUAGE_ENGLISH_CODE" xml:space="preserve">
     <value>en-US</value>
   </data>
   <data name="MAIL_LANGUAGE_ENGLISH_NAME" xml:space="preserve">
-    <value>English(United States)</value>
+    <value>English (United States)</value>
   </data>
   <data name="MAIL_LANGUAGE_JAPANESE_CODE" xml:space="preserve">
     <value>ja-JP</value>
   </data>
   <data name="MAIL_LANGUAGE_JAPANESE_NAME" xml:space="preserve">
-    <value>Japanese(Japan)</value>
+    <value>Japanese (Japan)</value>
   </data>
   <data name="MAINTENANCE_MODE" xml:space="preserve">
     <value>保守モード</value>
