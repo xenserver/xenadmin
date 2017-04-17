@@ -68,7 +68,8 @@ namespace XenAdmin.Actions
             {
                 Helpers.SetOtherConfig(Session, pool, PerfmonOptionsDefinition.MAIL_DESTINATION_KEY_NAME, perfmonOptions.MailDestination);
                 Helpers.SetOtherConfig(Session, pool, PerfmonOptionsDefinition.SMTP_MAILHUB_KEY_NAME, perfmonOptions.MailHub);
-                Helpers.SetOtherConfig(Session, pool, PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME, perfmonOptions.MailLanguageCode);
+                if(null != perfmonOptions.MailLanguageCode)
+                    Helpers.SetOtherConfig(Session, pool, PerfmonOptionsDefinition.MAIL_LANGUAGE_KEY_NAME, perfmonOptions.MailLanguageCode);
             }
         }
     }

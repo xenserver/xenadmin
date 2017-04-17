@@ -210,6 +210,9 @@
   <data name="MailLanguageComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
+  <data name="MailLanguageComboBox.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;MailLanguageComboBox.Name" xml:space="preserve">
     <value>MailLanguageComboBox</value>
   </data>
@@ -242,6 +245,9 @@
   </data>
   <data name="MailLanguageLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="MailLanguageLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;MailLanguageLabel.Name" xml:space="preserve">
     <value>MailLanguageLabel</value>

@@ -61,6 +61,9 @@ namespace XenAdmin.Alerts
             {
                 String ret = null;
 
+                if (null == name)
+                    return ret;
+
                 foreach(KeyValuePair<String, String> pair in _list)
                 {
                     if(pair.Value == name)
@@ -76,6 +79,9 @@ namespace XenAdmin.Alerts
             public String NameFromCode(String code)
             {
                 String ret = null;
+
+                if (null == code)
+                    return ret;
 
                 foreach (KeyValuePair<String, String> pair in _list)
                 {

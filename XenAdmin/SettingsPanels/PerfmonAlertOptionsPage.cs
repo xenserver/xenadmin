@@ -60,6 +60,7 @@ namespace XenAdmin.SettingsPanels
         private string _OrigSmtpServerAddrTextBox;
         private string _OrigSmtpServerPortTextBox;
         private string _OrigMailLanguageCodeComboBox;
+        private bool _bSupportMailLanguage;
 
         private readonly ToolTip InvalidParamToolTip;
 
@@ -112,9 +113,34 @@ namespace XenAdmin.SettingsPanels
             return !SmtpServerAddrTextBox.Text.ToCharArray().Any((c) => c >= 128) && SmtpServerAddrTextBox.Text.Trim().Length > 0;
         }
 
+        public void SetMailLanguageComboBoxValue(String code)
+        {
+            if (_bSupportMailLanguage)
+            {   // Feature supported
+                if (null == code)
+                {   // Set default value
+                    if (PerfmonOptionsDefinition.MailLanguageHasCode(Branding.BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT))
+                        MailLanguageComboBox.SelectedValue = Branding.BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT;
+                    else
+                        MailLanguageComboBox.SelectedIndex = 0;
+                }
+                else if (PerfmonOptionsDefinition.MailLanguageHasCode(code))
+                    MailLanguageComboBox.SelectedValue = code;  // Valid language code, set it to MailLanguageComboBox
+                else
+                    MailLanguageComboBox.SelectedValue = null;  // Invalid language code, set null to MailLanguageComboBox
+            }
+            else
+                MailLanguageComboBox.SelectedValue = null;  // Feature not supported
+        }
+
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             _XenModelObject = clone;
+
+            if (Helpers.FalconOrGreater(_XenModelObject.Connection))
+                _bSupportMailLanguage = true;
+            else
+                _bSupportMailLanguage = false;
 
             Repopulate();
 
@@ -123,7 +149,11 @@ namespace XenAdmin.SettingsPanels
             _OrigEmailAddressTextBox = EmailAddressTextBox.Text;
             _OrigSmtpServerAddrTextBox = SmtpServerAddrTextBox.Text;
             _OrigSmtpServerPortTextBox = SmtpServerPortTextBox.Text;
-            _OrigMailLanguageCodeComboBox = null == MailLanguageComboBox.SelectedValue ? "" : MailLanguageComboBox.SelectedValue.ToString();
+
+            if (_bSupportMailLanguage)
+                _OrigMailLanguageCodeComboBox = null == MailLanguageComboBox.SelectedValue ? null : MailLanguageComboBox.SelectedValue.ToString();
+            else
+                _OrigMailLanguageCodeComboBox = null;
         }
         public void Repopulate()
         {
@@ -131,6 +161,12 @@ namespace XenAdmin.SettingsPanels
                 return;
             try
             {
+                if (_bSupportMailLanguage)
+                {
+                    MailLanguageComboBox.Visible = true;
+                    MailLanguageLabel.Visible = true;
+                }
+
                 _PerfmonOptions = PerfmonOptionsDefinition.GetPerfmonOptionsDefinitions(_XenModelObject);
                 if (_PerfmonOptions != null)
                 {
@@ -138,16 +174,12 @@ namespace XenAdmin.SettingsPanels
                     EmailAddressTextBox.Text = _PerfmonOptions.MailDestination;
                     SmtpServerAddrTextBox.Text = PerfmonOptionsDefinition.GetSmtpServerAddress(_PerfmonOptions.MailHub);
                     SmtpServerPortTextBox.Text = PerfmonOptionsDefinition.GetSmtpPort(_PerfmonOptions.MailHub);
-                    if (null != _PerfmonOptions.MailLanguageCode)
-                        MailLanguageComboBox.SelectedValue = _PerfmonOptions.MailLanguageCode;
+
+                    SetMailLanguageComboBoxValue(_PerfmonOptions.MailLanguageCode);
                 }
                 else
                 {
-                    // Set default language value
-                    if (PerfmonOptionsDefinition.MailLanguageHasCode(Branding.BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT))
-                        MailLanguageComboBox.SelectedValue = Branding.BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT;
-                    else
-                        MailLanguageComboBox.SelectedIndex = 0;
+                    SetMailLanguageComboBoxValue(null);
                 }
             }
             catch { }
@@ -161,7 +193,7 @@ namespace XenAdmin.SettingsPanels
                         (_OrigEmailAddressTextBox != EmailAddressTextBox.Text) ||
                         (_OrigSmtpServerAddrTextBox != SmtpServerAddrTextBox.Text) ||
                         (_OrigSmtpServerPortTextBox != SmtpServerPortTextBox.Text) ||
-                        (_OrigMailLanguageCodeComboBox != MailLanguageComboBox.SelectedValue.ToString()));
+                        (_bSupportMailLanguage && null != MailLanguageComboBox.SelectedValue && (_OrigMailLanguageCodeComboBox != MailLanguageComboBox.SelectedValue.ToString())));
             }
         }
 
@@ -207,7 +239,10 @@ namespace XenAdmin.SettingsPanels
             if (EmailNotificationCheckBox.Checked)
             {
                 string smtpMailHub = SmtpServerAddrTextBox.Text + ":" + SmtpServerPortTextBox.Text;
-                perfmonOptions = new PerfmonOptionsDefinition(smtpMailHub, EmailAddressTextBox.Text, MailLanguageComboBox.SelectedValue.ToString());
+                string mailLanguageCode = null;
+                if (_bSupportMailLanguage && null != MailLanguageComboBox.SelectedValue)
+                    mailLanguageCode = MailLanguageComboBox.SelectedValue.ToString();
+                perfmonOptions = new PerfmonOptionsDefinition(smtpMailHub, EmailAddressTextBox.Text, mailLanguageCode);
             }
 
             return new PerfmonOptionsDefinitionAction(_XenModelObject.Connection, perfmonOptions, true);
