@@ -319,7 +319,7 @@ namespace XenAdmin.Actions
                 using (var webClient = new WebClient())
                 {
                     webClient.Proxy = proxy;
-                    webClient.Headers.Add("User-Agent", string.Format("{0} (v.{1})", Branding.BRAND_CONSOLE , buildText));
+                    webClient.Headers.Add("User-Agent", string.Format("{0}/{1}", Branding.BRAND_CONSOLE , buildText));
                     webClient.Headers.Add("User-Agent-Id", uniqueIdHash);
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
