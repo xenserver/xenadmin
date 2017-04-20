@@ -1394,14 +1394,14 @@ namespace XenAdmin.ConsoleView
             if (fullscreen)
             {
                 rdpClient.rdpLocationOffset = new Point(0, 0);
-                rdpClient.Reconnect(this.Size.Width, this.Size.Height);
+                rdpClient.UpdateDisplay(this.Size.Width, this.Size.Height);
             }
             else 
             {
                 if (oldSize.Equals(this.Size))
                     return;
                 rdpClient.rdpLocationOffset = new Point(2, 2);
-                rdpClient.Reconnect(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
+                rdpClient.UpdateDisplay(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
                 oldSize = new Size(this.Size.Width, this.Size.Height);
             }               
         }
