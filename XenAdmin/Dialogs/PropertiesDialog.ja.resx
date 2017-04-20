@@ -132,9 +132,6 @@
   <data name="ContentPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="ContentPanel.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>500, 500</value>
-  </data>
   <data name="ContentPanel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 49, 10, 10</value>
   </data>
