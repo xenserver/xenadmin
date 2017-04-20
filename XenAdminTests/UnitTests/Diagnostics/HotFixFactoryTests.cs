@@ -59,7 +59,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
             string[] enumNames = Enum.GetNames(typeof (HotfixFactory.HotfixableServerVersion));
             Array.Sort(enumNames);
 
-            string[] expectedNames = new []{"Boston", "SanibelToClearwater", "Creedence", "Dundee"};
+            string[] expectedNames = new []{"Boston", "SanibelToClearwater", "Creedence", "Dundee", "Ely"};
             Array.Sort(expectedNames);
 
             CollectionAssert.AreEqual(expectedNames, enumNames, "Expected contents of HotfixableServerVersion enum");
@@ -83,6 +83,10 @@ namespace XenAdminTests.UnitTests.Diagnostics
             Assert.AreEqual("474a0f28-0d33-4c9b-9e20-52baaea8ce5e",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).UUID,
                             "Dundee UUID lookup from enum");
+
+            Assert.AreEqual("1ac61687-8b65-43e6-957f-50602fb79572",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Ely).UUID,
+                            "Ely UUID lookup from enum");
         }
 
         [Test]
@@ -103,12 +107,16 @@ namespace XenAdminTests.UnitTests.Diagnostics
             Assert.AreEqual("RPU003",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).Filename,
                             "Dundee Filename lookup from enum");
+
+            Assert.AreEqual("RPU004",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Ely).Filename,
+                            "Ely Filename lookup from enum");
         }
 
         [Test]
-        [TestCase("2.1.1", Description = "Ely")]
+        [TestCase("2.2.50", Description = "Falcon")]
         [TestCase("9999.9999.9999", Description = "Future")]
-        public void TestPlatformVersionNumbersElyOrGreaterGiveNulls(string platformVersion)
+        public void TestPlatformVersionNumbersFalconOrGreaterGiveNulls(string platformVersion)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
             host.Setup(h => h.PlatformVersion).Returns(platformVersion);
@@ -126,7 +134,8 @@ namespace XenAdminTests.UnitTests.Diagnostics
         }
 
         [Test]
-        [TestCase("2.1.1", Description = "Ely", Result = false)]
+        [TestCase("2.2.50", Description = "Falcon", Result = false)]
+        [TestCase("2.1.1", Description = "Ely", Result = true)]
         [TestCase("2.0.0", Description = "Dundee", Result = true)]
         [TestCase("1.9.0", Description = "Creedence", Result = true)]
         [TestCase("1.8.0", Description = "Clearwater", Result = true)]
