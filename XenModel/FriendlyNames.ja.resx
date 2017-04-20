@@ -1961,4 +1961,10 @@
   <data name="Label-xscontainer" xml:space="preserve">
     <value>コンテナ管理</value>
   </data>
+  <data name="Description-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS アクセラレータの状態</value>
+  </data>
+  <data name="Label-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS アクセラレータの状態</value>
+  </data>
 </root>
