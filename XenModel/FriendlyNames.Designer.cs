@@ -385,6 +385,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scheduled snapshots log files.
+        /// </summary>
+        public static string Description_host_system_status_VM_snapshot_schedule {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-VM-snapshot-schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crash dumps files from the VNCTerm daemon.
         /// </summary>
         public static string Description_host_system_status_vncterm {
@@ -1515,6 +1524,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_tapdisk_logs {
             get {
                 return ResourceManager.GetString("Label-host.system_status-tapdisk-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scheduled snapshots log files.
+        /// </summary>
+        public static string Label_host_system_status_VM_snapshot_schedule {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-VM-snapshot-schedule", resourceCulture);
             }
         }
         
