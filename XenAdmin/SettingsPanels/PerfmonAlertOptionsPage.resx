@@ -139,7 +139,7 @@
     <value>0, 0, 0, 10</value>
   </data>
   <data name="SendEmailNoteLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 39</value>
+    <value>485, 39</value>
   </data>
   <data name="SendEmailNoteLabel.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -195,17 +195,14 @@
   <data name="groupBox1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="MailLanguageComboBox.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Popup</value>
-  </data>
   <data name="MailLanguageComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 71</value>
+    <value>100, 71</value>
   </data>
   <data name="MailLanguageComboBox.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
   <data name="MailLanguageComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 21</value>
+    <value>220, 21</value>
   </data>
   <data name="MailLanguageComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -235,13 +232,13 @@
     <value>8, 74</value>
   </data>
   <data name="MailLanguageLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+    <value>76, 13</value>
   </data>
   <data name="MailLanguageLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="MailLanguageLabel.Text" xml:space="preserve">
-    <value>Mail &amp;Language:</value>
+    <value>Mail &amp;language:</value>
   </data>
   <data name="MailLanguageLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -271,7 +268,7 @@
     <value>NoControl</value>
   </data>
   <data name="SmtpPortLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 48</value>
+    <value>330, 48</value>
   </data>
   <data name="SmtpPortLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -304,7 +301,7 @@
     <value>Top, Right</value>
   </data>
   <data name="SmtpServerPortTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 45</value>
+    <value>368, 45</value>
   </data>
   <data name="SmtpServerPortTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -334,7 +331,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="EmailAddressTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 19</value>
+    <value>100, 19</value>
   </data>
   <data name="EmailAddressTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>347, 20</value>
@@ -391,7 +388,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="SmtpServerAddrTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 45</value>
+    <value>100, 45</value>
   </data>
   <data name="SmtpServerAddrTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
@@ -487,7 +484,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 333</value>
+    <value>485, 333</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -514,7 +511,7 @@
     <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 333</value>
+    <value>485, 333</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PerfmonAlertOptionsPage</value>
