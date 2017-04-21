@@ -137,7 +137,6 @@ namespace CFUValidator
             Status = "Generating summary...";
 
             GeneratePatchSummary(patchAlerts, validators, updateAlerts, xcupdateAlerts);
-            GeneratePatchSummary(patchAlerts, validators, updateAlert, xcupdateAlerts);
         }
 
         private void CheckProvidedVersionNumber(List<XenServerVersion> xenServerVersions)
