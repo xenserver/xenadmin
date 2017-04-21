@@ -705,6 +705,9 @@ namespace XenAPI
                 CopyStream(fileStream, requestStream, dataCopiedDelegate, cancellingDelegate);
             }
         }
+        
+        private const int FILE_MOVE_MAX_RETRIES = 5;
+        private const int FILE_MOVE_SLEEP_BETWEEN_RETRIES = 100;
 
         /// <summary>
         /// A general HTTP GET method, with delegates for progress and cancelling. May throw various exceptions.
@@ -729,7 +732,24 @@ namespace XenAPI
                 }
 
                 File.Delete(path);
-                File.Move(tmpFile, path);
+
+                // Rename the file, retrying a few times (MAX_RETRIES) with a short sleep (SLEEP_BETWEEN_RETRIES) between retries;
+                // If the it still fails after these retries, then throw the error
+                int retriesRemaining = FILE_MOVE_MAX_RETRIES;
+                do
+                {
+                    try
+                    {
+                        File.Move(tmpFile, path);
+                        break;
+                    }
+                    catch (IOException)
+                    {
+                        if (retriesRemaining <= 0)
+                            throw;
+                        System.Threading.Thread.Sleep(FILE_MOVE_SLEEP_BETWEEN_RETRIES);
+                    }
+                } while (retriesRemaining-- > 0);
             }
             finally
             {
