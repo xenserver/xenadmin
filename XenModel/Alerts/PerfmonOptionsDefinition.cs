@@ -97,7 +97,7 @@ namespace XenAdmin.Alerts
 
             public bool HasCode(String code)
             {
-                return _list.ContainsKey(code);
+                return null == code ? false : _list.ContainsKey(code);
             }
 
             public Dictionary<String, String> dataSource()
