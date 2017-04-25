@@ -310,7 +310,7 @@ namespace XenAdmin.Actions
                 {
                     webClient.Proxy = proxy;
                     webClient.Headers.Add("User-Agent", _userAgent);
-                    webClient.Headers.Add("User-Agent-Id", _userAgentId);
+                    webClient.Headers.Add("X-User-Agent-Id", _userAgentId);
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
                     {
