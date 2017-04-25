@@ -1050,7 +1050,7 @@ namespace XenAdmin.ConsoleView
                 fullscreenForm.Hide();
                 fullscreenForm.Dispose();
                 fullscreenForm = null;
-                UpdateRDPResolution(true);
+                UpdateRDPResolution(false);
             }
 
             //Everytime we toggle full screen I'm going to force an unpause to make sure we don't acidentally undock / dock a pause VNC

@@ -97,9 +97,9 @@ namespace XenAdmin.ConsoleView
         private void RDPConfigure(Size currentConsoleSize)
         {
             rdpControl.BeginInit();
-            rdpLocationOffset = new Point(2, 2); //small offset to accomodate focus rectangle
+            rdpLocationOffset = new Point(3, 3); //small offset to accomodate focus rectangle
             rdpControl.Dock = DockStyle.None;
-            rdpControl.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
+            rdpControl.Anchor = AnchorStyles.None;
             rdpControl.Size = currentConsoleSize;
             RDPAddOnDisconnected();
             rdpControl.Enter += RdpEnter;
@@ -179,24 +179,27 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public void UpdateDisplay( int width, int height)
+        public void UpdateDisplay(int width, int height, Point locationOffset)
         {
             if (rdpControl == null)
                 return;
 
-            Log.DebugFormat("Updating display settings using width '{0}' and height '{1}'", width, height);
             if (Connected && rdpClient9 != null && allowDisplayUpdate)
             {
-                rdpClient9.Size = new Size(width, height);
                 try
                 {
+                    Log.DebugFormat("Updating display settings using width '{0}' and height '{1}'", width, height);
                     rdpClient9.UpdateSessionDisplaySettings((uint)width, (uint)height, (uint)width, (uint)height, 1, 1, 1);
+                    rdpClient9.Size = new Size(width, height);
+                    rdpLocationOffset = locationOffset;
+                    parent.AutoScroll = false;
                 }
                 catch
                 {
                     allowDisplayUpdate = false;
+                    parent.AutoScroll = true;
+                    parent.AutoScrollMinSize = rdpClient9.Size;
                 }
-                
             }
         }
 
@@ -230,8 +233,11 @@ namespace XenAdmin.ConsoleView
         {
             Program.AssertOnEventThread();
 
-            if(parent != null)
-                parent.Refresh();
+            if (rdpControl == null || parent == null)
+                return;
+
+            rdpControl.Size = DesktopSize;
+            parent.Refresh();
         }
 
         public void Connect(string rdpIP)
