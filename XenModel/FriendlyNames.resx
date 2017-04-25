@@ -1967,4 +1967,10 @@
   <data name="Label-host.system_status-xspvscache" xml:space="preserve">
     <value>PVS-Accelerator Status</value>
   </data>
+  <data name="Description-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>Scheduled snapshots log files</value>
+  </data>
+  <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>Scheduled snapshots log files</value>
+  </data>
 </root>
