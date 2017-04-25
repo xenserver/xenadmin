@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -38,7 +38,7 @@ namespace XenAdmin.Core
 {
     /// <summary>
     /// Used to centralise the encryption routines used for master password
-    /// & session lists
+    /// and session lists
     /// </summary>
     public class EncryptionUtils
     {

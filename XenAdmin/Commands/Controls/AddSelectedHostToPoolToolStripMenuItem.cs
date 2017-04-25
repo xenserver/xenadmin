@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -80,7 +80,7 @@ namespace XenAdmin.Commands
                 {
                     String poolName = Helpers.GetName(connection).EscapeAmpersands().Ellipsise(Helpers.DEFAULT_NAME_TRIM_LENGTH);
                     AddHostToPoolCommand cmd = new AddHostToPoolCommand(Command.MainWindowCommandInterface, selection.AsXenObjects<Host>(), Helpers.GetPool(connection), true);
-                    base.DropDownItems.Add(new CommandToolStripMenuItem(cmd, poolName, Resources._000_PoolConnected_h32bit_16));
+                    base.DropDownItems.Add(new CommandToolStripMenuItem(cmd, poolName, Images.StaticImages._000_PoolConnected_h32bit_16));
                 }
             }
 

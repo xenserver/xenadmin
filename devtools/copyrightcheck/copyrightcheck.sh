@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) Citrix Systems Inc. 
+# Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, 
@@ -30,31 +30,15 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
-set -u
+set -eu
 
-source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/declarations.sh"
+echo "INFO:	copyrightcheck"
 
-net stop ncover || true # Stop ncover if it's running, so we have a known good service
-net start ncover
+dir="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+src="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 
-echo "Running + monitoring coverage of tests..."
+output=$( /usr/bin/find "$src/XenAdmin" "$src/XenModel" "$src/XenOvfApi" "$src/XenOvfTransport" "$src/mk" "$src/Branding" "$src/XenServerHealthCheckTests" "$src/devtools" "$src/dotNetInstaller" -not -ipath '*obj/*' -type f \( -iname \*.cs -o -iname \*.sh \) -not -ipath '*Designer*' -exec grep -L "Copyright (c) Citrix Systems, Inc." {} \;)
 
-export NCOVER_USING_PROJECT="${NCOVER_PROJECT_ID}"
-export NCOVER_BUILD_ID="${BUILD_ID}"
+echo "$output" | sed -e "s,$src/,,g"
 
-source "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/tests-checks.sh"
-
-ncover summarize --project="XC Tests" --wait
-
-echo "Generating coverage report..."
-ncover report --project="XC Tests" --execution="${BUILD_ID}" --file="$(cygpath -d ${TEST_DIR})\coverage.html" --detail=method
-
-net stop ncover || true # Stop ncover, ignore the error if it's already stopped
-
-cp ${TEST_DIR}/coverage.html ${OUTPUT_DIR}
-
-
-
-
-
-
+test -z "$output"

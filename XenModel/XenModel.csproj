@@ -41,11 +41,11 @@
   <ItemGroup>
     <Reference Include="CookComputing.XmlRpcV2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\xml-rpc.net\obj\release\CookComputing.XmlRpcV2.dll</HintPath>
+      <HintPath>..\packages\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\log4net\build\bin\net\2.0\release\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -132,6 +132,7 @@
     <Compile Include="Actions\VMAppliances\DestroyVMApplianceAction.cs" />
     <Compile Include="Actions\VMAppliances\ShutDownApplianceAction.cs" />
     <Compile Include="Actions\VMAppliances\StartApplianceAction.cs" />
+    <Compile Include="Actions\VMSS\GetVMSSAlertsAction.cs" />
     <Compile Include="Actions\VM\ChangeMemorySettingsAction.cs" />
     <Compile Include="Actions\VM\CreateCdDriveAction.cs" />
     <Compile Include="Actions\VM\CreateVMAction.cs" />
@@ -329,6 +330,8 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
+    <Compile Include="XenAPI-Extensions\IVMPolicy.cs" />
+    <Compile Include="XenAPI-Extensions\VMSS.cs" />
     <Compile Include="XenAPI-Extensions\Pool_update.cs" />
     <Compile Include="XenAPI-Extensions\PVS_cache_storage.cs" />
     <Compile Include="XenAPI-Extensions\pvs_proxy_status.cs" />
@@ -346,12 +349,14 @@
     <Compile Include="XenAPI\bond_mode.cs" />
     <Compile Include="XenAPI\DeprecatedAttribute.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
+    <Compile Include="XenAPI\Feature.cs" />
     <Compile Include="XenAPI\FriendlyErrorNames.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FriendlyErrorNames.resx</DependentUpon>
     </Compile>
     <Compile Include="XenAPI\GPU_group.cs" />
+    <Compile Include="XenAPI\host_allowed_operations.cs" />
     <Compile Include="XenAPI\host_display.cs" />
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
     <Compile Include="XenAPI\livepatch_status.cs" />
@@ -370,6 +375,8 @@
     <Compile Include="XenAPI\pvs_proxy_status.cs" />
     <Compile Include="XenAPI\PVS_server.cs" />
     <Compile Include="XenAPI\PVS_site.cs" />
+    <Compile Include="XenAPI\SDN_controller.cs" />
+    <Compile Include="XenAPI\sdn_controller_protocol.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
@@ -378,6 +385,9 @@
     <Compile Include="XenAPI\vif_ipv4_configuration_mode.cs" />
     <Compile Include="XenAPI\vif_ipv6_configuration_mode.cs" />
     <Compile Include="XenAPI\vif_locking_mode.cs" />
+    <Compile Include="XenAPI\VMSS.cs" />
+    <Compile Include="XenAPI\vmss_frequency.cs" />
+    <Compile Include="XenAPI\vmss_type.cs" />
     <Compile Include="XenAPI\VM_appliance.cs" />
     <Compile Include="XenAPI\vm_appliance_operation.cs" />
     <Compile Include="XenSearch\Common.cs" />
@@ -454,7 +464,6 @@
     <Compile Include="XenAPI\Failure.cs" />
     <Compile Include="XenAPI\Helper.cs" />
     <Compile Include="XenAPI\Host.cs" />
-    <Compile Include="XenAPI\host_allowed_operations.cs" />
     <Compile Include="XenAPI\Host_cpu.cs" />
     <Compile Include="XenAPI\Host_crashdump.cs" />
     <Compile Include="XenAPI\Host_metrics.cs" />
@@ -574,6 +583,7 @@
       <Name>XenCenterLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

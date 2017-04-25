@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -200,7 +200,10 @@ namespace XenAdmin.SettingsPanels
                     var vgpuGroup = Connection.Resolve(vgpu.GPU_group);
 
                     if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu)
-                        currentGpuTuple = new GpuTuple(vgpuGroup, null, null);
+                    {
+                        if (vgpuGroup.HasPassthrough)
+                            currentGpuTuple = new GpuTuple(vgpuGroup, null, null); //GPU pass-through item
+                    }
                     else
                     {
                         VGPU_type vgpuType = Connection.Resolve(vgpu.type);
@@ -251,7 +254,8 @@ namespace XenAdmin.SettingsPanels
             {
                 if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu)
                 {
-                    comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));  //GPU pass-through item
+                    if (gpu_group.HasPassthrough)
+                        comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));  //GPU pass-through item
                 }
                 else
                 {

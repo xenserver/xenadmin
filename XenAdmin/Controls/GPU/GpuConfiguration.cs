@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -102,6 +102,8 @@ namespace XenAdmin.Controls.GPU
                                                    .ToArray());
                 }
                 SetCheckedValues();
+                HideColumnIfEmpty(MaxResolutionColumn);
+                HideColumnIfEmpty(MaxDisplaysColumn);
             }
             finally
             {
@@ -153,6 +155,22 @@ namespace XenAdmin.Controls.GPU
                                    ? Messages.GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_ONE
                                    : Messages.GPU_RUBRIC_PLEASE_SELECT_WHICH_GPU_MULTIPLE;
         }
+
+        private void HideColumnIfEmpty(DataGridViewColumn column)
+        {
+            bool columnEmpty = true;
+            foreach (DataGridViewRow row in dataGridViewEx1.Rows)
+            {
+                var value = row.Cells[column.Name].Value;
+                if (!String.IsNullOrEmpty((string)value))
+                {
+                    columnEmpty = false;
+                    break;
+                }
+            }
+            if (columnEmpty)
+                dataGridViewEx1.Columns[column.Name].Visible = false;
+        }
     }
 
     class VGpuDetailWithCheckBoxRow : DataGridViewExRow
@@ -203,10 +221,10 @@ namespace XenAdmin.Controls.GPU
                 vGpusPerGpuColumn.Value = string.Empty;
 
             if (!isPassThru)
-                maxResolutionColumn.Value = VGpuType.MaxResolution;
+                maxResolutionColumn.Value = (VGpuType.MaxResolution == "0x0" || String.IsNullOrEmpty(VGpuType.MaxResolution)) ? "" : VGpuType.MaxResolution;
 
             if (!isPassThru)
-                maxDisplaysColumn.Value = VGpuType.max_heads;
+                maxDisplaysColumn.Value = VGpuType.max_heads < 1 ? "" : String.Format("{0}",VGpuType.max_heads);
             else
                 maxDisplaysColumn.Value = string.Empty;
 

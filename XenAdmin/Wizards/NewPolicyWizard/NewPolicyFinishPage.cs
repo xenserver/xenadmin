@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -36,9 +36,14 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 {
     public partial class NewPolicyFinishPage : XenTabPage
     {
-        public NewPolicyFinishPage()
+        private readonly string _pageTitle;
+
+        public NewPolicyFinishPage(string pageText, string checkBoxText, string finishPageTitle)
         {
             InitializeComponent();
+            this.label13.Text = pageText;
+            this.checkBox1.Text = checkBoxText;
+            _pageTitle = finishPageTitle;
         }
 
         public override string Text
@@ -53,7 +58,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                return Messages.FINISH_TITLE;
+                return _pageTitle;
             }
         }
 

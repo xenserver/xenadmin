@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,12 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Core;
@@ -93,7 +89,7 @@ namespace XenAdmin.Controls.Ballooning
             }
         }
 
-        private void UnsubscribeEvents()
+        internal void UnsubscribeEvents()
         {
             foreach (IXenObject o in objs)
             {

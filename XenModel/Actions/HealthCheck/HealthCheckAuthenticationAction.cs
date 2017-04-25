@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -219,6 +219,7 @@ namespace XenAdmin.Actions
             }
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
+            httpWebRequest.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {

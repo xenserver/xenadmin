@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -74,14 +74,7 @@ namespace XenAdmin.TabPages
             }
             set
             {
-                if (host != null)
-                {
-                    host.Connection.Cache.DeregisterCollectionChanged<PIF>(PIF_CollectionChangedWithInvoke);
-                    foreach (PIF PIF in host.Connection.ResolveAll(host.PIFs))
-                    {
-                        UnregisterPIFEventHandlers(PIF);
-                    }
-                }
+                UnregisterHandlers();
 
                 host = value;
 
@@ -139,6 +132,24 @@ namespace XenAdmin.TabPages
                 pif.PIFMetrics.PropertyChanged -= PropertyChangedEventHandler;
             }
         }
+
+        private void UnregisterHandlers()
+        {
+            if (host == null)
+                return;
+
+            host.Connection.Cache.DeregisterCollectionChanged<PIF>(PIF_CollectionChangedWithInvoke);
+            foreach (PIF PIF in host.Connection.ResolveAll(host.PIFs))
+            {
+                UnregisterPIFEventHandlers(PIF);
+            }
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
+        }
+
 
         private void updateList()
         {

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -67,10 +67,12 @@ namespace XenAdmin.Dialogs
         private HostPowerONEditPage HostPowerONEditPage;
         private PoolPowerONEditPage PoolPowerONEditPage;
         private NewPolicySnapshotFrequencyPage newPolicySnapshotFrequencyPage1;
-        private NewPolicySnapshotTypePage newPolicySnapshotTypePage1;
+        private NewPolicySnapshotTypePageSpecific<VMPP> newPolicySnapshotTypePage1;
+        private NewPolicySnapshotTypePageSpecific<VMSS> newPolicyVMSSTypePage1;
         private NewPolicyArchivePage newPolicyArchivePage1;
         private NewPolicyEmailPage newPolicyEmailPage1;
         private NewVMGroupVMsPage<VMPP> newPolicyVMsPage1;
+        private NewVMGroupVMsPage<VMSS> newVMSSVMsPage1;
         private NewVMGroupVMsPage<VM_appliance> newVMApplianceVMsPage1;
         private NewVMApplianceVMOrderAndDelaysPage newVmApplianceVmOrderAndDelaysPage1;
         private UpsellPage GpuUpsellEditPage;
@@ -132,6 +134,8 @@ namespace XenAdmin.Dialogs
             bool is_VMPP = xenObjectCopy is VMPP;
 
             bool is_VM_appliance = xenObjectCopy is VM_appliance;
+
+            bool is_VMSS = xenObjectCopy is VMSS;
 
             ContentPanel.SuspendLayout();
             verticalTabs.BeginUpdate();
@@ -239,10 +243,17 @@ namespace XenAdmin.Dialogs
                 if (is_VMPP)
                 {
                     ShowTab(newPolicyVMsPage1 = new NewVMGroupVMsPage<VMPP> {Pool = pool});
-                    ShowTab(newPolicySnapshotTypePage1 = new NewPolicySnapshotTypePage());
+                    ShowTab(newPolicySnapshotTypePage1 = new NewPolicySnapshotTypePageSpecific<VMPP>());
                     ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
                     ShowTab(newPolicyArchivePage1 = new NewPolicyArchivePage {Pool = pool, PropertiesDialog = this});
-                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage {PropertiesDialog = this});
+                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage() {PropertiesDialog = this});
+                }
+
+                if(is_VMSS)
+                {
+                    ShowTab(newVMSSVMsPage1 = new NewVMGroupVMsPage<VMSS> {Pool = pool});
+                    ShowTab(newPolicyVMSSTypePage1 = new NewPolicySnapshotTypePageSpecific<VMSS>());
+                    ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
                 }
 
                 if (is_VM_appliance)
@@ -333,8 +344,24 @@ namespace XenAdmin.Dialogs
 
             // Add a save changes on the beginning of the actions to enact the alterations that were just changes to the xenObjectCopy.
             // Must come first because some pages' SaveChanges() rely on modifying the object via the xenObjectCopy before their actions are run.
-            actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
 
+            if(xenObjectBefore is VMSS)
+            {
+                XenAPI.VMSS VMSSObj = xenObjectBefore as XenAPI.VMSS;
+                if (VMSSObj.policy_type == policy_backup_type.snapshot_with_quiesce)
+                {
+                    actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
+                }
+                else
+                {
+                    actions.Insert(actions.Count, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
+                }
+            }
+            else
+            {
+                actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true)); 
+            }
+                
             _action = new MultipleAction(
                 connection,
                 string.Format(Messages.UPDATE_PROPERTIES, Helpers.GetName(xenObject).Ellipsise(50)),
@@ -460,6 +487,14 @@ namespace XenAdmin.Dialogs
 
         private void verticalTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+            var snapshotTypePageSpecific = verticalTabs.SelectedItem as NewPolicySnapshotTypePageSpecific<VMSS>;
+            if (snapshotTypePageSpecific != null)
+            {
+                newPolicyVMSSTypePage1.ToggleQuiesceCheckBox(newVMSSVMsPage1.SelectedVMs);
+                return;
+            }
+
             var selectedPage = verticalTabs.SelectedItem as NewPolicyArchivePage;
             if (selectedPage != null)
             {

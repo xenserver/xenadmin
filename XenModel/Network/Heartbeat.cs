@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -131,7 +131,7 @@ namespace XenAdmin.Network
 
                 // Now that we've successfully received a heartbeat, reset our 'second chance' for the server to timeout
                 if (retrying)
-                    log.DebugFormat("Heartbeat for {0} has come back", session == null ? "null" : session.Url);
+                    log.DebugFormat("Heartbeat for {0} has come back", session.Url);
                 retrying = false;
             }
             catch (TargetInvocationException exn)
@@ -146,13 +146,32 @@ namespace XenAdmin.Network
                     log.Error(exn);
                 }
                 HandleConnectionLoss();
-                return;
+            }
+            catch (WebException exn)
+            {
+                log.Error(exn);
+                var webResponse = (HttpWebResponse)exn.Response;
+                if (webResponse != null && webResponse.StatusCode == HttpStatusCode.ProxyAuthenticationRequired) // work-around for CA-214653
+                {
+                    if (session == null)
+                        log.Debug("Heartbeat has failed due to null session; closing the main connection");
+                    else if (session.proxy.Proxy.Credentials == null)
+                        log.DebugFormat("Heartbeat for {0} has failed due to missing credentials; closing the main connection", session.Url);
+                    else
+                        log.DebugFormat("Heartbeat for {0} has failed due to incorrect credentials; closing the main connection", session.Url);
+
+                    connection.Interrupt();
+                    DropSession();
+                }
+                else
+                {
+                    HandleConnectionLoss();
+                }
             }
             catch (Exception exn)
             {
                 log.Error(exn);
                 HandleConnectionLoss();
-                return;
             }
         }
 

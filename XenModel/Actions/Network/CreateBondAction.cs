@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -285,6 +285,7 @@ namespace XenAdmin.Actions
             if (network.other_config == null)
                 network.other_config = new Dictionary<string, string>();
             network.other_config[XenAPI.Network.CREATE_IN_PROGRESS] = "true";
+            network.managed = true;
 
             RelatedTask = XenAPI.Network.async_create(Session, network);
             PollToCompletion(lo, hi);

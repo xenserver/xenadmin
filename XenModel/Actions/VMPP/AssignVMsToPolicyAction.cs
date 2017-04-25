@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -36,57 +36,64 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class AssignVMsToPolicyAction:PureAsyncAction
+    public class AssignVMsToPolicyAction<T>:PureAsyncAction where T : XenObject<T>
     {
 
-        private VMPP _vmpp;
+        private IVMPolicy _policy;
         private List<XenRef<VM>> _selectedVMs;
 
-        public AssignVMsToPolicyAction(VMPP vmpp, List<XenRef<VM>> selectedVMs, bool suppressHistory)
-            : base(vmpp.Connection, Messages.ASSIGN_PROTECTION_POLICY_NOAMP, suppressHistory)
+        public AssignVMsToPolicyAction(IVMPolicy policy, List<XenRef<VM>> selectedVMs, bool suppressHistory)
+            : base(policy.Connection, (typeof(T) == typeof(VMPP) ? Messages.ASSIGN_PROTECTION_POLICY_NOAMP : Messages.ASSIGN_VMSS_POLICY_NOAMP), suppressHistory)
         {
-            _vmpp = vmpp;
+            _policy = policy;
             _selectedVMs = selectedVMs;
-            Pool = Helpers.GetPool(vmpp.Connection);
+            Pool = Helpers.GetPool(policy.Connection);
 
         }
 
         protected override void Run()
         {
-            Description = Messages.ASSIGNING_PROTECTION_POLICY;
-            foreach (var xenRef in _vmpp.VMs)
+            Description = typeof(T) == typeof(VMPP) ? Messages.ASSIGNING_PROTECTION_POLICY : Messages.ASSIGNING_VMSS_POLICY;
+
+            foreach (var xenRef in _policy.VMs)
             {
-                VM.set_protection_policy(Session, xenRef, null);
+                _policy.set_vm_policy(Session, xenRef, null);
             }
+
             foreach (var xenRef in _selectedVMs)
             {
-                VM.set_protection_policy(Session, xenRef, _vmpp.opaque_ref);
+                _policy.set_vm_policy(Session, xenRef, _policy.opaque_ref);
             }
-            Description = Messages.ASSIGNED_PROTECTION_POLICY;
+
+            Description = (typeof(T) == typeof(VMPP)) ? Messages.ASSIGNED_PROTECTION_POLICY : Messages.ASSIGNED_VMSS_POLICY;
         }
     }
 
-    public class RemoveVMsFromPolicyAction : PureAsyncAction
+    public class RemoveVMsFromPolicyAction<T> : PureAsyncAction where T : XenObject<T>
     {
         private List<XenRef<VM>> _selectedVMs;
+        private IVMPolicy _policy;
 
-        public RemoveVMsFromPolicyAction(VMPP vmpp, List<XenRef<VM>> selectedVMs)
-            : base(vmpp.Connection, selectedVMs.Count == 1 ?
-            string.Format(Messages.REMOVE_VM_FROM_POLICY, vmpp.Connection.Resolve(selectedVMs[0]), vmpp.Name)
-            : string.Format(Messages.REMOVE_VMS_FROM_POLICY, vmpp.Name))
+        public RemoveVMsFromPolicyAction(IVMPolicy policy, List<XenRef<VM>> selectedVMs)
+            : base(policy.Connection, 
+            selectedVMs.Count == 1 ?
+            string.Format(typeof(T) == typeof(VMPP) ? Messages.REMOVE_VM_FROM_POLICY : Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name) :
+            string.Format(typeof(T) == typeof(VMPP) ? Messages.REMOVE_VMS_FROM_POLICY : Messages.REMOVE_VMS_FROM_VMSS, policy.Name))
         {
+            _policy = policy;
             _selectedVMs = selectedVMs;
-            Pool = Helpers.GetPool(vmpp.Connection);
+            Pool = Helpers.GetPool(policy.Connection);
         }
 
         protected override void Run()
         {
-            Description = Messages.REMOVING_VMS_FROM_POLICY;
+            Description = typeof(T) == typeof(VMPP) ? Messages.REMOVING_VMS_FROM_POLICY : Messages.REMOVING_VMS_FROM_VMSS;
 
             foreach (var xenRef in _selectedVMs)
-                VM.set_protection_policy(Session, xenRef, null);
+                _policy.set_vm_policy(Session, xenRef, null);
+                
 
-            Description = Messages.REMOVED_VMS_FROM_POLICY;
+            Description = typeof(T) == typeof(VMPP) ? Messages.REMOVED_VMS_FROM_POLICY : Messages.REMOVED_VMS_FROM_VMSS;
         }
     }
 }

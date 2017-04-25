@@ -538,6 +538,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator Status.
+        /// </summary>
+        public static string Description_host_system_status_xspvscache {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-xspvscache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to YUM repository information and RPM package database listing.
         /// </summary>
         public static string Description_host_system_status_yum {
@@ -1672,6 +1681,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator Status.
+        /// </summary>
+        public static string Label_host_system_status_xspvscache {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-xspvscache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RPM package database.
         /// </summary>
         public static string Label_host_system_status_yum {
@@ -2770,6 +2788,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PVS-Accelerator.
+        /// </summary>
+        public static string Label_pvsaccelerator {
+            get {
+                return ResourceManager.GetString("Label-pvsaccelerator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk space allocations.
         /// </summary>
         public static string Label_SR_disk_space_allocations {
@@ -3459,6 +3486,24 @@ namespace XenAdmin {
         public static string Label_VM_VirtualizationState {
             get {
                 return ResourceManager.GetString("Label-VM.VirtualizationState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Measured Boot.
+        /// </summary>
+        public static string Label_xenserver_measured_boot {
+            get {
+                return ResourceManager.GetString("Label-xenserver-measured-boot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container Management.
+        /// </summary>
+        public static string Label_xscontainer {
+            get {
+                return ResourceManager.GetString("Label-xscontainer", resourceCulture);
             }
         }
         
@@ -4190,6 +4235,60 @@ namespace XenAdmin {
         public static string Message_body_vmpp_xapi_logon_failure {
             get {
                 return ResourceManager.GetString("Message.body-vmpp_xapi_logon_failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The XenServer license you are using does not allow you to use the Scheduled Snapshots feature..
+        /// </summary>
+        public static string Message_body_vmss_license_error {
+            get {
+                return ResourceManager.GetString("Message.body-vmss_license_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The snapshot schedule &apos;{0}&apos; failed because a snapshot could not be created..
+        /// </summary>
+        public static string Message_body_vmss_snapshot_failed {
+            get {
+                return ResourceManager.GetString("Message.body-vmss_snapshot_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to create snapshots at this time because a scheduled snapshot operation is already in progress in this pool. Only one scheduled snapshot operation can run at a time in the same pool. Please check that the snapshot schedules in this pool do not clash..
+        /// </summary>
+        public static string Message_body_vmss_snapshot_lock_failed {
+            get {
+                return ResourceManager.GetString("Message.body-vmss_snapshot_lock_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to create snapshots at this time because the scheduled snapshot operation for this policy is already in progress. Please try again later..
+        /// </summary>
+        public static string Message_body_vmss_snapshot_missed_event {
+            get {
+                return ResourceManager.GetString("Message.body-vmss_snapshot_missed_event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot schedule succeeded.
+        /// </summary>
+        public static string Message_body_vmss_snapshot_succeeded {
+            get {
+                return ResourceManager.GetString("Message.body-vmss_snapshot_succeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot schedule  XAPI logon failure.
+        /// </summary>
+        public static string Message_body_vmss_xapi_logon_failure {
+            get {
+                return ResourceManager.GetString("Message.body-vmss_xapi_logon_failure", resourceCulture);
             }
         }
         
@@ -5027,6 +5126,60 @@ namespace XenAdmin {
         public static string Message_name_vmpp_xapi_logon_failure {
             get {
                 return ResourceManager.GetString("Message.name-vmpp_xapi_logon_failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot schedule failed: insufficient license for Scheduled snapshots.
+        /// </summary>
+        public static string Message_name_vmss_license_error {
+            get {
+                return ResourceManager.GetString("Message.name-vmss_license_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot schedule failed.
+        /// </summary>
+        public static string Message_name_vmss_snapshot_failed {
+            get {
+                return ResourceManager.GetString("Message.name-vmss_snapshot_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot schedule failed.
+        /// </summary>
+        public static string Message_name_vmss_snapshot_lock_failed {
+            get {
+                return ResourceManager.GetString("Message.name-vmss_snapshot_lock_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot schedule failed.
+        /// </summary>
+        public static string Message_name_vmss_snapshot_missed_event {
+            get {
+                return ResourceManager.GetString("Message.name-vmss_snapshot_missed_event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot schedule succeeded.
+        /// </summary>
+        public static string Message_name_vmss_snapshot_succeeded {
+            get {
+                return ResourceManager.GetString("Message.name-vmss_snapshot_succeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snapshot schedule XAPI logon failure.
+        /// </summary>
+        public static string Message_name_vmss_xapi_logon_failure {
+            get {
+                return ResourceManager.GetString("Message.name-vmss_xapi_logon_failure", resourceCulture);
             }
         }
         

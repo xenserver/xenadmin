@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -177,6 +177,7 @@ namespace XenAdmin.Wizards.GenericPages
             private DataGridViewTextBoxCell _nameCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _descriptionCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _currentGroupCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell _quiesce_supported;
             public readonly VM Vm;
             public VMDataGridViewRow(bool selected, VM vm)
             {
@@ -185,6 +186,11 @@ namespace XenAdmin.Wizards.GenericPages
                 Cells.Add(_nameCell);
                 Cells.Add(_descriptionCell);
                 Cells.Add(_currentGroupCell);
+                if (VMGroup<T>.isQuescingSupported)
+                {
+                    _quiesce_supported = new DataGridViewTextBoxCell();
+                    Cells.Add(_quiesce_supported);
+                }
                 Refresh(selected);
             }
 
@@ -195,12 +201,27 @@ namespace XenAdmin.Wizards.GenericPages
                 _descriptionCell.Value = Vm.Description;
                 T group = Vm.Connection.Resolve(VMGroup<T>.VmToGroup(Vm));
                 _currentGroupCell.Value = group == null ? Messages.NONE : group.Name;
+                if(VMGroup<T>.isQuescingSupported)
+                {
+                    if (Vm.allowed_operations.Contains((vm_operations.snapshot_with_quiesce)) && !Helpers.FeatureForbidden(Vm, Host.RestrictVss))
+                    {
+                        _quiesce_supported.Value = Messages.YES;
+                    }
+                    else
+                    {
+                        _quiesce_supported.Value = Messages.NO;
+                    }
+                }
             }
         }
 
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
+            if (!VMGroup<T>.isQuescingSupported)
+            {
+                this.dataGridView1.Columns["ColumnQuiesceSupported"].Visible = false;
+            }
             RefreshTab(null);
         } 
 

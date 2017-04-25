@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -95,20 +95,7 @@ namespace XenAdmin.TabPages
         {
             set
             {
-                if (connection != null)
-                {
-                    connection.Cache.DeregisterCollectionChanged<PBD>(PBD_CollectionChangedWithInvoke);
-                    connection.XenObjectsUpdated -= XenObjectUpdated;
-                    
-                    foreach (SR sr in connection.Cache.SRs)
-                    {
-                        sr.PropertyChanged -= sr_PropertyChanged;
-                    }
-
-                    Pool pool = Helpers.GetPoolOfOne(connection);
-                    if(pool != null)
-                        pool.PropertyChanged -= pool_PropertyChanged;
-                }
+                UnregisterHandlers();
 
                 connection = value;
 
@@ -184,6 +171,29 @@ namespace XenAdmin.TabPages
             {
                 Program.Invoke(this, () => RefreshRowForSr((SR)sender));
             }
+        }
+
+        private void UnregisterHandlers()
+        {
+            if (connection == null) 
+                return;
+
+            connection.Cache.DeregisterCollectionChanged<PBD>(PBD_CollectionChangedWithInvoke);
+            connection.XenObjectsUpdated -= XenObjectUpdated;
+
+            foreach (SR sr in connection.Cache.SRs)
+            {
+                sr.PropertyChanged -= sr_PropertyChanged;
+            }
+
+            Pool pool = Helpers.GetPoolOfOne(connection);
+            if (pool != null)
+                pool.PropertyChanged -= pool_PropertyChanged;
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
         }
 
         /// <summary>

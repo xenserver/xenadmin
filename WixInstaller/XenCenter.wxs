@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
- Copyright (c) Citrix Systems Inc.
+ Copyright (c) Citrix Systems, Inc.
  All rights reserved.
  
  Redistribution and use in source and binary forms, 
@@ -160,6 +160,7 @@
 							<?endif?>
                             <File Id="hotfixCreedence" Source="..\Branding\Hotfixes\RPU002.[xsupdate]" />
                             <File Id="hotfixDundee" Source="..\Branding\Hotfixes\RPU003.[xsupdate]" />
+                            <File Id="hotfixEly" Source="..\Branding\Hotfixes\RPU004.iso" />
                         </Component>
                         <?if "$(env.Branding)"="XenCenter"?>
 						<!-- TestResources -->

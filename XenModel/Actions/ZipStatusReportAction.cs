@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -127,7 +127,7 @@ namespace XenAdmin.Actions
                                         tarIterator.ExtractCurrentFile(ms);
                                         string saneName = SanitizeTarName(tarIterator.CurrentFileName(), usedNames);
                                         tarWriter.Add(ms, saneName);
-                                        ModTimes[Path.Combine(outputDir, tarIterator.CurrentFileName())] = tarIterator.CurrentFileModificationTime();
+                                        ModTimes[Path.Combine(outputDir, saneName)] = tarIterator.CurrentFileModificationTime();
                                     }
 
                                 }

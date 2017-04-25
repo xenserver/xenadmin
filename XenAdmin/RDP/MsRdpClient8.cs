@@ -1,4 +1,4 @@
-/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -31,9 +31,9 @@
 
 namespace XenAdmin.RDP
 {
-    public class MsRdpClient2 : AxMSTSCLib.AxMsRdpClient2
+    public class MsRdpClient8 : AxMSTSCLib.AxMsRdpClient8
     {
-        public MsRdpClient2()
+        public MsRdpClient8()
             : base()
         {
         }

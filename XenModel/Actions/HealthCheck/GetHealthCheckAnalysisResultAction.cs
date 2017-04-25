@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -153,6 +153,7 @@ namespace XenAdmin.Actions
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(urlString);
                 httpWebRequest.Headers.Add("Authorization", authorizationHeader);
                 httpWebRequest.Method = "GET";
+                httpWebRequest.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 
                 string result;
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
@@ -201,6 +202,7 @@ namespace XenAdmin.Actions
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(urlString);
             httpWebRequest.Headers.Add("Authorization", authorizationHeader);
             httpWebRequest.Method = "GET";
+            httpWebRequest.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 
             string result;
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();

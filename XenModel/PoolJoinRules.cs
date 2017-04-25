@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -237,7 +237,7 @@ namespace XenAdmin.Core
         {
             foreach (VM vm in connection.Cache.VMs)
             {
-                if (vm.is_a_real_vm && (vm.power_state == XenAPI.vm_power_state.Running || vm.power_state == XenAPI.vm_power_state.Suspended))
+                if (vm.is_a_real_vm && vm.power_state == XenAPI.vm_power_state.Running)
                     return true;
             }
             return false;
@@ -373,11 +373,21 @@ namespace XenAdmin.Core
 
         private static bool DifferentServerVersion(Host slave, Host master)
         {
-            // Probably all the others will be equal if the hg_id is equal, but let's
-            // mimic the test on the server side (xen-api.hg:ocaml/xapi/xapi_pool.ml).
+            if (slave.API_version_major != master.API_version_major ||
+                slave.API_version_minor != master.API_version_minor)
+                return true;
+
+            if (Helpers.FalconOrGreater(slave) && string.IsNullOrEmpty(slave.GetDatabaseSchema()))
+                return true;
+            if (Helpers.FalconOrGreater(master) && string.IsNullOrEmpty(master.GetDatabaseSchema()))
+                return true;
+
+            if (Helpers.FalconOrGreater(slave) && Helpers.FalconOrGreater(master) &&
+                slave.GetDatabaseSchema() != master.GetDatabaseSchema())
+                return true;
+            
             return
-                slave.hg_id != master.hg_id ||
-                slave.BuildNumberRaw != master.BuildNumberRaw ||
+                !Helpers.FalconOrGreater(master) && slave.BuildNumber != master.BuildNumber ||
                 slave.ProductVersion != master.ProductVersion ||
                 slave.ProductBrand != master.ProductBrand;
         }

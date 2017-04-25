@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public string SubText
         {
-            get { return NewPolicyWizard.FormatSchedule(Schedule, ArchiveFrequency, DaysWeekCheckboxes.DaysMode.L10N_SHORT); }
+            get { return NewPolicyWizardSpecific<VMPP>.FormatSchedule(Schedule, ArchiveFrequency, DaysWeekCheckboxes.DaysMode.L10N_SHORT); }
         }
 
         public override string HelpID

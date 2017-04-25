@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>アクティブ化キーを適用するには、エディションの設定が free である必要があります。</value>
@@ -164,6 +164,9 @@
   </data>
   <data name="BOOTLOADER_FAILED" xml:space="preserve">
     <value>この VM のブートローダーからエラーが返されました -- VM が正しくインストールされていることを確認してください。{1}</value>
+  </data>
+  <data name="BRIDGE_NAME_EXISTS" xml:space="preserve">
+    <value>指定したブリッジは既に存在します。</value>
   </data>
   <data name="BRIDGE_NOT_AVAILABLE" xml:space="preserve">
     <value>VM で必要なブリッジが見つかりません。</value>
@@ -672,6 +675,9 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>ネットワークにはアクティブな VIF ({0}) があるため、削除できません。</value>
   </data>
+  <data name="NETWORK_UNMANAGED" xml:space="preserve">
+    <value>ネットワークは xapi で管理されていません。</value>
+  </data>
   <data name="NOT_ALLOWED_ON_OEM_EDITION" xml:space="preserve">
     <value>このコマンドは OEM エディションでは使用できません。</value>
   </data>
@@ -1104,7 +1110,7 @@
     <value>スナップショット VDI のスナップショットを作成できません。サポートされない処理です。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_169" xml:space="preserve">
-    <value>EqualLogic アレイへの接続に失敗しました。ユーザー名/パスワードが不正なため拒否されました。</value>
+    <value>Equallogic アレイに接続できませんでした。ユーザー名とパスワードを確認してください。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_170" xml:space="preserve">
     <value>EqualLogic ターゲットのバージョンがサポートされていません。</value>
@@ -1275,7 +1281,7 @@
     <value>アダプタ ID がありません。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_433" xml:space="preserve">
-    <value>ユーザー名がありません。</value>
+    <value>ユーザー名がありません</value>
   </data>
   <data name="SR_BACKEND_FAILURE_434" xml:space="preserve">
     <value>パスワードがありません。</value>
@@ -1608,7 +1614,7 @@
     <value>アップロードしたアップデートは既に存在しています</value>
   </data>
   <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
-    <value>このアップデートを適用できませんでした。添付の出力を参照してください。</value>
+    <value>アップデートの適用に失敗しました。詳しくはログを参照してください。</value>
   </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
     <value>指定されたアップデートは適用済みであり、破棄できません。</value>
@@ -1618,6 +1624,9 @@
   </data>
   <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
     <value>アップデートの事前チェックに失敗しました。競合するアップデートがあります。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED" xml:space="preserve">
+    <value>アップデートの事前チェックに失敗しました。このホストには、RPM パッケージの検証に必要な GPG キーがありません。</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
     <value>アップデートの事前チェックに失敗しました。必要な空き領域がサーバーにありません。</value>
@@ -1757,11 +1766,17 @@
   <data name="VMPP_HAS_VM" xml:space="preserve">
     <value>この保護ポリシーに割り当てられている VM があります。</value>
   </data>
+  <data name="VMSS_HAS_VM" xml:space="preserve">
+    <value>スナップショット スケジュールに割り当てられている VM があります。</value>
+  </data>
   <data name="VMS_FAILED_TO_COOPERATE" xml:space="preserve">
     <value>VM で正しくメモリを解放できませんでした。</value>
   </data>
   <data name="VM_ASSIGNED_TO_PROTECTION_POLICY" xml:space="preserve">
     <value>この VM は保護ポリシーに割り当てられています。</value>
+  </data>
+  <data name="VM_ASSIGNED_TO_SNAPSHOT_SCHEDULE" xml:space="preserve">
+    <value>この VM はスナップショット スケジュールに割り当てられています。</value>
   </data>
   <data name="VM_ATTACHED_TO_MORE_THAN_ONE_VDI_WITH_TIMEOFFSET_MARKED_AS_RESET_ON_BOOT" xml:space="preserve">
     <value>timeoffset が reset-on-boot としてマークされた複数の VDI に接続している VM を起動しようとしました。</value>

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -164,6 +164,11 @@ namespace XenAdmin.TabPages
 
             if (pool.Connection.Session != null)
                 pool.Connection.Session.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(Session_PropertyChanged);
+        }
+
+        public override void PageHidden()
+        {
+            ClearHandles();
         }
 
         /// <summary>

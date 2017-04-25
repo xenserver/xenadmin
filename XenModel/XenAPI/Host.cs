@@ -101,7 +101,8 @@ namespace XenAPI
             host_display display,
             long[] virtual_hardware_platform_versions,
             XenRef<VM> control_domain,
-            List<XenRef<Pool_update>> updates_requiring_reboot)
+            List<XenRef<Pool_update>> updates_requiring_reboot,
+            List<XenRef<Feature>> features)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -157,6 +158,7 @@ namespace XenAPI
             this.virtual_hardware_platform_versions = virtual_hardware_platform_versions;
             this.control_domain = control_domain;
             this.updates_requiring_reboot = updates_requiring_reboot;
+            this.features = features;
         }
 
         /// <summary>
@@ -224,6 +226,7 @@ namespace XenAPI
             virtual_hardware_platform_versions = update.virtual_hardware_platform_versions;
             control_domain = update.control_domain;
             updates_requiring_reboot = update.updates_requiring_reboot;
+            features = update.features;
         }
 
         internal void UpdateFromProxy(Proxy_Host proxy)
@@ -282,6 +285,7 @@ namespace XenAPI
             virtual_hardware_platform_versions = proxy.virtual_hardware_platform_versions == null ? null : Helper.StringArrayToLongArray(proxy.virtual_hardware_platform_versions);
             control_domain = proxy.control_domain == null ? null : XenRef<VM>.Create(proxy.control_domain);
             updates_requiring_reboot = proxy.updates_requiring_reboot == null ? null : XenRef<Pool_update>.Create(proxy.updates_requiring_reboot);
+            features = proxy.features == null ? null : XenRef<Feature>.Create(proxy.features);
         }
 
         public Proxy_Host ToProxy()
@@ -341,6 +345,7 @@ namespace XenAPI
             result_.virtual_hardware_platform_versions = (virtual_hardware_platform_versions != null) ? Helper.LongArrayToStringArray(virtual_hardware_platform_versions) : new string[] {};
             result_.control_domain = (control_domain != null) ? control_domain : "";
             result_.updates_requiring_reboot = (updates_requiring_reboot != null) ? Helper.RefListToStringArray(updates_requiring_reboot) : new string[] {};
+            result_.features = (features != null) ? Helper.RefListToStringArray(features) : new string[] {};
             return result_;
         }
 
@@ -404,6 +409,7 @@ namespace XenAPI
             virtual_hardware_platform_versions = Marshalling.ParseLongArray(table, "virtual_hardware_platform_versions");
             control_domain = Marshalling.ParseRef<VM>(table, "control_domain");
             updates_requiring_reboot = Marshalling.ParseSetRef<Pool_update>(table, "updates_requiring_reboot");
+            features = Marshalling.ParseSetRef<Feature>(table, "features");
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -468,7 +474,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._display, other._display) &&
                 Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions) &&
                 Helper.AreEqual2(this._control_domain, other._control_domain) &&
-                Helper.AreEqual2(this._updates_requiring_reboot, other._updates_requiring_reboot);
+                Helper.AreEqual2(this._updates_requiring_reboot, other._updates_requiring_reboot) &&
+                Helper.AreEqual2(this._features, other._features);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -1166,6 +1173,17 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the features field of the given host.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<XenRef<Feature>> get_features(Session session, string _host)
+        {
+            return XenRef<Feature>.Create(session.proxy.host_get_features(session.uuid, (_host != null) ? _host : "").parse());
+        }
+
+        /// <summary>
         /// Set the name/label field of the given host.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1766,9 +1784,10 @@ namespace XenAPI
         /// First published in XenServer 5.0.
         /// </summary>
         /// <param name="session">The session</param>
-        public static void emergency_ha_disable(Session session)
+        /// <param name="_soft">Disable HA temporarily, revert upon host reboot or further changes, idempotent First published in .</param>
+        public static void emergency_ha_disable(Session session, bool _soft)
         {
-            session.proxy.host_emergency_ha_disable(session.uuid).parse();
+            session.proxy.host_emergency_ha_disable(session.uuid, _soft).parse();
         }
 
         /// <summary>
@@ -2357,9 +2376,11 @@ namespace XenAPI
         /// <summary>
         /// Refresh the list of installed Supplemental Packs.
         /// First published in XenServer 5.6.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("")]
         public static void refresh_pack_info(Session session, string _host)
         {
             session.proxy.host_refresh_pack_info(session.uuid, (_host != null) ? _host : "").parse();
@@ -2368,9 +2389,11 @@ namespace XenAPI
         /// <summary>
         /// Refresh the list of installed Supplemental Packs.
         /// First published in XenServer 5.6.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("")]
         public static XenRef<Task> async_refresh_pack_info(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_refresh_pack_info(session.uuid, (_host != null) ? _host : "").parse());
@@ -3579,5 +3602,24 @@ namespace XenAPI
             }
         }
         private List<XenRef<Pool_update>> _updates_requiring_reboot;
+
+        /// <summary>
+        /// List of features available on this host
+        /// First published in .
+        /// </summary>
+        public virtual List<XenRef<Feature>> features
+        {
+            get { return _features; }
+            set
+            {
+                if (!Helper.AreEqual(value, _features))
+                {
+                    _features = value;
+                    Changed = true;
+                    NotifyPropertyChanged("features");
+                }
+            }
+        }
+        private List<XenRef<Feature>> _features;
     }
 }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -58,7 +58,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             set;
         }
 
-        private AsyncAction actionManualMode = null;
         private bool _thisPageHasBeenCompleted = false;
         private BackgroundWorker actionsWorker = null;
 
@@ -127,7 +126,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (_thisPageHasBeenCompleted)
             {
-                actionManualMode = null;
                 actionsWorker = null;
                 return;
             }
@@ -141,18 +139,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (SelectedUpdateType == UpdateType.ISO && PoolUpdate != null)
                 {
                     //Ely or greater: iso update format
-                    actionManualMode = new ApplyUpdateAction(new List<Pool_update>() { PoolUpdate }, SelectedServers);
+                    foreach (var server in SelectedServers)
+                        actions.Add(new ApplyUpdateAction(PoolUpdate, server));
                 }
                 else
                 {
                     //legacy mode
                     if (SelectedUpdateType != UpdateType.ISO)
-                        actionManualMode = new ApplyPatchAction(new List<Pool_patch> { Patch }, SelectedServers);
+                    {
+                        foreach (var server in SelectedServers)
+                            actions.Add(new ApplyPatchAction(Patch, server));
+                    }
                     else
-                        actionManualMode = new InstallSupplementalPackAction(SuppPackVdis, false);
+                        actions.Add(new InstallSupplementalPackAction(SuppPackVdis, false));
                 }
 
-                actions.Add(actionManualMode);
                 if (RemoveUpdateFile && SelectedUpdateType != UpdateType.ISO)
                 {
                     foreach (Pool pool in SelectedPools)
@@ -261,14 +262,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (sender.Exception != null)
                 {
-                    Program.Invoke(Program.MainWindow, () => FinishedWithErrors(new Exception(sender.Title, sender.Exception)));
+                    var multipleAction = sender as MultipleAction;
+                    var actionTitle = multipleAction != null ? multipleAction.SubActionTitle : sender.Title;
+                    Program.Invoke(Program.MainWindow, () => FinishedWithErrors(actionTitle, new Exception(actionTitle, sender.Exception)));
                 }
                 else
                     Program.Invoke(Program.MainWindow, FinishedSuccessfully);
             }
             catch (Exception except)
             {
-                Program.Invoke(Program.MainWindow, () => FinishedWithErrors(except));
+                Program.Invoke(Program.MainWindow, () => FinishedWithErrors(string.Empty, except));
             }
             Program.Invoke(Program.MainWindow, OnPageUpdated);
             _thisPageHasBeenCompleted = true;
@@ -336,8 +339,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Exception exception = e.Result as Exception;
                 if (exception != null)
                 {
-                    FinishedWithErrors(exception);
-
+                    FinishedWithErrors(exception.Message, exception); // here exception.Message is the Title of the action that failed (see how doWorkEventArgs.Result is assigned above) 
                 }
                 else
                 {
@@ -501,7 +503,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #endregion
 
-        private void FinishedWithErrors(Exception exception)
+        private void FinishedWithErrors(string actionTitle, Exception exception)
         {
             labelTitle.Text = string.Format(Messages.UPDATE_WAS_NOT_COMPLETED, GetUpdateName());
             
@@ -510,7 +512,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (exception != null && exception.InnerException != null && exception.InnerException is Failure)
             {
                 var innerEx = exception.InnerException as Failure;
-                errorMessage = innerEx.Message;
+                errorMessage = string.Format(Messages.STRING_SPACE_STRING, actionTitle, innerEx.Message); 
 
                 if (innerEx.ErrorDescription != null && innerEx.ErrorDescription.Count > 0)
                     log.Error(string.Concat(innerEx.ErrorDescription.ToArray()));

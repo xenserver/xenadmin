@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -44,6 +44,12 @@ namespace XenAdmin.ConsoleView
         private readonly VM source;
         private readonly VNCTabView vncTabView;
         public Form undockedForm = null;
+
+        /// <summary>
+        /// Helper boolean to only trigger Resize_End when window is really resized by dragging edges
+        /// Without this Resize_End is triggered even when window is moved around and not resized
+        /// </summary>
+        private bool undockedFormResized = false;
 
         public bool isDocked
         {
@@ -102,9 +108,17 @@ namespace XenAdmin.ConsoleView
                         this.DockUnDock();
                     });
                     undockedForm.StartPosition = FormStartPosition.CenterScreen;
+                    FormWindowState lastState = undockedForm.WindowState;
                     undockedForm.Resize += new EventHandler(
                          delegate(Object o, EventArgs a)
                          {
+                             undockedFormResized = true;
+                             if (undockedForm.WindowState != lastState && undockedForm.WindowState != FormWindowState.Minimized)
+                             {
+                                 lastState = undockedForm.WindowState;
+                                 UpdateRDPResolution();
+                             }
+
                              if (undockedForm.WindowState == FormWindowState.Minimized)
                              {
                                  vncTabView.Pause();
@@ -114,6 +128,15 @@ namespace XenAdmin.ConsoleView
                                  vncTabView.Unpause();
                              }
                          });
+
+                    undockedForm.ResizeEnd += new EventHandler(
+                         delegate(Object o, EventArgs a)
+                         {
+                             if (undockedFormResized)
+                                 UpdateRDPResolution();
+                             undockedFormResized = false;
+                         });
+                    
                 }
 
                 this.Controls.Remove(vncTabView);
@@ -174,6 +197,9 @@ namespace XenAdmin.ConsoleView
             //Every time we dock / undock I'm going to force an unpause to make sure we don't ever pause a visible one.
             vncTabView.Unpause();
             vncTabView.focus_vnc();
+
+            //reconnect RDP with docked/undocked window dimensions
+            UpdateRDPResolution();
         }
 
         private string UndockedWindowTitle(VM source)
@@ -255,6 +281,11 @@ namespace XenAdmin.ConsoleView
         internal bool IsVNC
         {
             get { return vncTabView.IsVNC; }
+        }
+
+        public void UpdateRDPResolution(bool fullscreen = false)
+        {
+            vncTabView.UpdateRDPResolution(fullscreen);
         }
     }
 }

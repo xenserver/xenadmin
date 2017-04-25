@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -33,6 +33,7 @@ using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Net;
 using XenAdmin.Core;
@@ -166,10 +167,13 @@ namespace XenAdmin.Actions
                 {
                     Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_NETWORKS : Messages.IMPORTVM_UPDATING_NETWORKS;
 
-                    // We need to destroy all vifs and recreate them.
+                    // For ElyOrGreater hosts, we can move the VIFs to another network, 
+                    // but for older hosts we need to destroy all vifs and recreate them
 
                     List<XenRef<VIF>> vifs = VM.get_VIFs(Session, vmRef);
                     List<XenAPI.Network> networks = new List<XenAPI.Network>();
+
+                    bool canMoveVifs = Helpers.ElyOrGreater(Connection);
 
                     foreach (XenRef<VIF> vif in vifs)
                     {
@@ -178,9 +182,27 @@ namespace XenAdmin.Actions
                         if (network != null)
                             networks.Add(network);
 
+                        if (canMoveVifs)
+                        {
+                            var vifObj = Connection.Resolve(vif);
+                            if (vifObj == null)
+                                continue;
+                            // try to find a matching VIF in the m_proxyVIFs list, based on the device field
+                            var matchingProxyVif = m_proxyVIFs.FirstOrDefault(proxyVIF => proxyVIF.device == vifObj.device);
+                            if (matchingProxyVif != null)
+                            {
+                                // move the VIF to the desired network
+                                VIF.move(Session, vif, matchingProxyVif.network);
+                                // remove matchingProxyVif from the list, so we don't create the VIF again later
+                                m_proxyVIFs.Remove(matchingProxyVif); 
+                                continue;
+                            }
+                        }
+                        // destroy the VIF, if we haven't managed to move it
                         VIF.destroy(Session, vif);
                     }
 
+                    // recreate VIFs if needed (m_proxyVIFs can be empty, if we moved all the VIFs in the previous step)
                     foreach (Proxy_VIF proxyVIF in m_proxyVIFs)
                     {
                         VIF vif = new VIF(proxyVIF) {VM = new XenRef<VM>(vmRef)};

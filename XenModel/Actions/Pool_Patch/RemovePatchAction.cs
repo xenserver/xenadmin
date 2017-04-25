@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -61,9 +61,15 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             Description = String.Format(Messages.REMOVING_UPDATE, patch.Name);
-
-            RelatedTask=Pool_patch.async_destroy(Session, patch.opaque_ref);
-            PollToCompletion(0, 100);
+            try
+            {
+                RelatedTask = Pool_patch.async_destroy(Session, patch.opaque_ref);
+                PollToCompletion(0, 100);
+            }
+            catch (Failure f)
+            {
+                log.Error("Clean up failed", f);
+            }
 
             Description = String.Format(Messages.REMOVED_UPDATE, patch.Name);
         }

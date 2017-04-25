@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) Citrix Systems Inc. 
+# Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, 
@@ -33,9 +33,8 @@
 set -eu
 
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
-XENADMIN_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-REPO=${XENADMIN_DIR}
 OUTPUT_DIR=${ROOT}/output
 DOTNETINST=${REPO}/dotNetInstaller
 	

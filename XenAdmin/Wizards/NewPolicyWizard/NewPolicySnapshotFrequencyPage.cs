@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public string SubText
         {
-            get { return NewPolicyWizard.FormatSchedule(Schedule, Frequency, DaysWeekCheckboxes.DaysMode.L10N_SHORT); }
+            get { return NewPolicyWizardSpecific<VMPP>.FormatSchedule(Schedule, Frequency, DaysWeekCheckboxes.DaysMode.L10N_SHORT); }
         }
 
         public Image Image
@@ -100,14 +100,14 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             {
                 var result = new Dictionary<string, string>();
 
-                if (Frequency == vmpp_backup_frequency.hourly)
+                if (Frequency == policy_frequency.hourly)
                     result.Add("min", comboBoxMin.SelectedItem.ToString());
-                else if (Frequency == vmpp_backup_frequency.daily)
+                else if (Frequency == policy_frequency.daily)
                 {
                     result.Add("hour", dateTimePickerDaily.Value.Hour.ToString());
                     result.Add("min", dateTimePickerDaily.Value.Minute.ToString());
                 }
-                else if (Frequency == vmpp_backup_frequency.weekly)
+                else if (Frequency == policy_frequency.weekly)
                 {
                     result.Add("hour", dateTimePickerWeekly.Value.Hour.ToString());
                     result.Add("min", dateTimePickerWeekly.Value.Minute.ToString());
@@ -118,13 +118,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
-        public vmpp_backup_frequency Frequency
+        public policy_frequency Frequency
         {
             get
             {
-                if (radioButtonHourly.Checked) return vmpp_backup_frequency.hourly;
-                else if (radioButtonDaily.Checked) return vmpp_backup_frequency.daily;
-                else if (radioButtonWeekly.Checked) return vmpp_backup_frequency.weekly;
+                if (radioButtonHourly.Checked) return policy_frequency.hourly;
+                else if (radioButtonDaily.Checked) return policy_frequency.daily;
+                else if (radioButtonWeekly.Checked) return policy_frequency.weekly;
 
                 throw new ArgumentException("Wrong value");
             }
@@ -165,7 +165,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             OnPageUpdated();
         }
 
-        private void RefreshTab(VMPP vmpp)
+        private void RefreshTab(IVMPolicy policy)
         {
             if (ParentForm != null)
             {
@@ -177,26 +177,26 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                     sectionLabelSchedule.LineColor = sectionLabelNumber.LineColor = SystemColors.ActiveBorder;
             }
 
-            switch (vmpp.backup_frequency)
+            switch (policy.policy_frequency)
             {
-                case vmpp_backup_frequency.hourly:
+                case policy_frequency.hourly:
                     radioButtonHourly.Checked = true;
-                    SetHourlyMinutes(Convert.ToDecimal(vmpp.backup_schedule_min));
+                    SetHourlyMinutes(Convert.ToDecimal(policy.backup_schedule_min));
                     break;
-                case vmpp_backup_frequency.daily:
+                case policy_frequency.daily:
                     radioButtonDaily.Checked = true;
-                    dateTimePickerDaily.Value = new DateTime(1970, 1, 1, Convert.ToInt32(vmpp.backup_schedule_hour),
-                                                                 Convert.ToInt32(vmpp.backup_schedule_min), 0);
+                    dateTimePickerDaily.Value = new DateTime(1970, 1, 1, Convert.ToInt32(policy.backup_schedule_hour),
+                                                                 Convert.ToInt32(policy.backup_schedule_min), 0);
                     break;
-                case vmpp_backup_frequency.weekly:
+                case policy_frequency.weekly:
                     radioButtonWeekly.Checked = true;
-                    dateTimePickerWeekly.Value = new DateTime(1970, 1, 1, Convert.ToInt32(vmpp.backup_schedule_hour),
-                                                                 Convert.ToInt32(vmpp.backup_schedule_min), 0);
-                    daysWeekCheckboxes.Days = vmpp.backup_schedule_days;
+                    dateTimePickerWeekly.Value = new DateTime(1970, 1, 1, Convert.ToInt32(policy.backup_schedule_hour),
+                                                                 Convert.ToInt32(policy.backup_schedule_min), 0);
+                    daysWeekCheckboxes.Days = policy.backup_schedule_days;
                     break;
             }
 
-            numericUpDownRetention.Value = vmpp.backup_retention_value;
+            numericUpDownRetention.Value = policy.policy_retention;
         }
 
         private void SetHourlyMinutes(decimal min)
@@ -224,26 +224,27 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public AsyncAction SaveSettings()
         {
-            _copy.backup_frequency = Frequency;
-            _copy.backup_schedule = Schedule;
-            _copy.backup_retention_value = BackupRetention;
+            _policyCopy.policy_frequency = Frequency;
+            _policyCopy.policy_schedule = Schedule;
+            _policyCopy.policy_retention = BackupRetention;
             return null;
         }
 
-        private VMPP _copy;
+        private IVMPolicy _policyCopy;
+
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            _copy = (VMPP)clone;
-            RefreshTab(_copy);
+            _policyCopy = (IVMPolicy)clone;
+            RefreshTab(_policyCopy);
         }
 
         public bool ValidToSave
         {
             get
             {
-                _copy.backup_frequency = Frequency;
-                _copy.backup_schedule = Schedule;
-                _copy.backup_retention_value = BackupRetention;
+                _policyCopy.policy_frequency = Frequency;
+                _policyCopy.policy_schedule = Schedule;
+                _policyCopy.policy_retention = BackupRetention;
                 return true;
             }
         }
@@ -260,12 +261,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                if (!Helper.AreEqual2(_copy.backup_frequency, Frequency))
+                if (!Helper.AreEqual2(_policyCopy.policy_frequency, Frequency))
                     return true;
-                if (!Helper.AreEqual2(_copy.backup_schedule, Schedule))
+                if (!Helper.AreEqual2(_policyCopy.policy_schedule, Schedule))
                     return true;
-                if (!Helper.AreEqual2(_copy.backup_retention_value, BackupRetention))
+                if (!Helper.AreEqual2(_policyCopy.policy_retention, BackupRetention))
                     return true;
+
                 return false;
             }
         }

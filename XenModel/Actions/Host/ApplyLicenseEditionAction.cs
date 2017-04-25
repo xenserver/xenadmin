@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -157,26 +157,20 @@ namespace XenAdmin.Actions
                             lock (lck)
                             {
                                 Alert alert = (Alert)e.Element;
-                                if (host != null && host.uuid == alert.HostUuid)
+                                Message.MessageType messageType;
+                                // if this is a message alert, its Name property will contain the MessageType
+                                if (host != null && host.uuid == alert.HostUuid && Enum.TryParse(alert.Name, out messageType))
                                 {
-                                    if (alert.Title == PropertyManager.GetFriendlyName("Message.name-license_not_available"))
+                                    switch (messageType)
                                     {
-                                        // the license server reported there were no licenses available.
-                                        alertText = string.Format(PropertyManager.GetFriendlyName("Message.body-license_not_available"), xoClosure.Name);
-                                    }
-                                    else if (alert.Title == PropertyManager.GetFriendlyName("Message.name-license_server_unreachable"))
-                                    {
-                                        // couldn't check out license because couldn't contact license server
-                                        alertText = string.Format(PropertyManager.GetFriendlyName("Message.body-license_server_unreachable"), xoClosure.Name);
-                                    }
-                                    else if (alert.Title == PropertyManager.GetFriendlyName("Message.name-license_server_version_obsolete"))
-                                    {
-                                        // the license server is obsolete
-                                        alertText = string.Format(PropertyManager.GetFriendlyName("Message.body-license_server_version_obsolete"), xoClosure.Name);
-                                    }
-                                    else if (alert.Title == PropertyManager.GetFriendlyName("Message.name-grace_license"))
-                                    {
-                                        alertText = string.Empty;
+                                        case Message.MessageType.LICENSE_NOT_AVAILABLE:
+                                        case Message.MessageType.LICENSE_SERVER_UNREACHABLE:
+                                        case Message.MessageType.LICENSE_SERVER_VERSION_OBSOLETE:
+                                            alertText = string.Format(Message.FriendlyBody(alert.Name), xoClosure.Name);
+                                            break;
+                                        case Message.MessageType.GRACE_LICENSE:
+                                            alertText = string.Empty;
+                                            break;
                                     }
                                 }
                             }

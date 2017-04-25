@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -79,6 +79,7 @@ namespace XenAdmin.Network
         VGPU_type[] VGPU_types { get; }
         VIF[] VIFs { get; }
         VMPP[] VMPPs { get; }
+        VMSS[] VMSSs { get; }
         VM_appliance[] VM_appliances { get; }
         VM[] VMs { get; }
         IEnumerable<IXenObject> XenSearchableObjects { get; }

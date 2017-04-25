@@ -1,28 +1,71 @@
 #!/bin/sh
 
-#the local revision numbers are the same as the local revision numbers on the remote repository;
-#also we know that xenadmin.git is not a patch queue style repository
-BRANDING_CSET_NUMBER=$(cd ${REPO} && git rev-list HEAD -1 && echo "")
+# Copyright (c) Citrix Systems, Inc. 
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, 
+# with or without modification, are permitted provided 
+# that the following conditions are met: 
+# 
+# *   Redistributions of source code must retain the above 
+#     copyright notice, this list of conditions and the 
+#     following disclaimer. 
+# *   Redistributions in binary form must reproduce the above 
+#     copyright notice, this list of conditions and the 
+#     following disclaimer in the documentation and/or other 
+#     materials provided with the distribution. 
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+# INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+# SUCH DAMAGE.
 
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 OUTPUT_DIR=${ROOT}/output
 
-rm -rf ${ROOT}/branding.git
-BRANDING_REMOTE=https://code.citrite.net/scm/xs/branding.git
+cd ${REPO}/Branding/Hotfixes
 
-if [ -z "$(git ls-remote --heads ${BRANDING_REMOTE} | grep ${XS_BRANCH})" ] ; then
-    echo "Branch ${XS_BRANCH} not found on branding.git. Reverting to master."
-    git clone -b master ${BRANDING_REMOTE} ${ROOT}/branding.git
-else
-    git clone -b ${XS_BRANCH} ${BRANDING_REMOTE} ${ROOT}/branding.git
-fi
+for hfx in RPU001 RPU002 RPU003
+do
+  if [ -d "${hfx}" ]; then
+    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
+    echo "INFO: Latest version of ${hfx} hotfix is $latest"
+    cp ${hfx}/$latest/${hfx}.xsupdate ${hfx}.xsupdate
+  fi
+done
 
-SERVER_BRANDING_TIP=$(cd ${ROOT}/branding.git && git rev-parse HEAD)
-echo "branding branding.git ${SERVER_BRANDING_TIP}" >> ${OUTPUT_DIR}/manifest
+for hfx in RPU004
+do
+  if [ -d "${hfx}" ]; then
+    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
+    echo "INFO: Latest version of ${hfx} hotfix is $latest"
+    cp ${hfx}/$latest/${hfx}.iso ${hfx}.iso
+  fi
+done
 
-TOPLEVEL_VERSIONS=${ROOT}/branding.git/Citrix/XenServer/toplevel-versions
-TOPLEVEL_BRANDING=${ROOT}/branding.git/Citrix/XenServer/toplevel-branding
+for hfx in RPU001
+do
+  if [ -d "${hfx}" ]; then
+    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
+    echo "INFO: Latest version of ${hfx} hotfix is $latest"
+    cp ${hfx}/$latest/${hfx}-src-pkgs.tar ${hfx}-src-pkgs.tar && rm -f ${hfx}-src-pkgs.tar.gz && gzip ${hfx}-src-pkgs.tar
+  fi
+done
+
+
+TOPLEVEL_VERSIONS=${ROOT}/branding.git/xenserver/toplevel-versions
+TOPLEVEL_BRANDING=${ROOT}/branding.git/xenserver/toplevel-branding
 
 BRANDING_COMPANY_NAME_LEGAL=$(cat ${TOPLEVEL_BRANDING} | grep -F "COMPANY_NAME_LEGAL := " | sed -e 's/COMPANY_NAME_LEGAL := //g')
 BRANDING_COMPANY_NAME_SHORT=$(cat ${TOPLEVEL_BRANDING} | grep -F "COMPANY_NAME_SHORT := " | sed -e 's/COMPANY_NAME_SHORT := //g')
@@ -39,7 +82,7 @@ BRANDING_BACKUP=xbk
 BRANDING_SERVER=${BRANDING_PRODUCT_BRAND}
 BRANDING_BRAND_CONSOLE=$(cat ${TOPLEVEL_BRANDING} | grep -F "BRAND_CONSOLE := " | sed -e 's/BRAND_CONSOLE := //g')
 
-# Check for the micro version override from declarations.sh and use it if present otherwise use the one from branding
+# Check for the micro version override and use it if present otherwise use the one from branding
 if [ -n "${PRODUCT_MICRO_VERSION_OVERRIDE+x}" ]; then
   BRANDING_PRODUCT_MICRO_VERSION=${PRODUCT_MICRO_VERSION_OVERRIDE}
   echo Using override for micro product number of: ${BRANDING_PRODUCT_MICRO_VERSION}

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -62,41 +62,18 @@ namespace XenAdmin.TabPages
             {
                 Program.AssertOnEventThread();
 
-                // Do nothing if value is being set to the same object again
-                if (value == xenObject)
-                {
-                    Rebuild();
-                    return;
-                }
-
-                if (xenObject != null)
-                {
-                    if (xenObject is Pool)
-                    {
-                        pool.PropertyChanged -= pool_PropertyChanged;
-                        foreach (Host slave in pool.Connection.Cache.Hosts)
-                        {
-                            slave.PropertyChanged -= host_PropertyChanged;
-                        }
-                        pool.Connection.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
-                    }
-                }
+                UnregisterHandlers();
 
                 xenObject = value;
-                pool = null;
-
-                if (xenObject != null)
+                pool = xenObject as Pool;
+                if (pool != null)
                 {
-                    if (xenObject is Pool)
+                    pool.PropertyChanged += pool_PropertyChanged;
+                    foreach (var host in pool.Connection.Cache.Hosts)
                     {
-                        this.pool = (Pool)xenObject;
-                        pool.PropertyChanged += pool_PropertyChanged;
-                        foreach (Host slave in pool.Connection.Cache.Hosts)
-                        {
-                            slave.PropertyChanged += host_PropertyChanged;
-                        }
-                        pool.Connection.Cache.RegisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
+                        host.PropertyChanged += host_PropertyChanged;
                     }
+                    pool.Connection.Cache.RegisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
                 }
 
                 Rebuild();
@@ -168,6 +145,23 @@ namespace XenAdmin.TabPages
                     // As of writing, ChangeableDictionary never raises this kind of event
                     throw new NotImplementedException();
             }
+        }
+
+        private void UnregisterHandlers()
+        {
+            if (pool == null) 
+                return;
+            pool.PropertyChanged -= pool_PropertyChanged;
+            foreach (var host in pool.Connection.Cache.Hosts)
+            {
+                host.PropertyChanged -= host_PropertyChanged;
+            }
+            pool.Connection.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
         }
 
         /// <summary>

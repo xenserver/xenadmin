@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -46,7 +46,7 @@ namespace XenAdmin.ConsoleView
 {
     public class VNCGraphicsClient : UserControl, IVNCGraphicsClient, IRemoteConsole
     {
-        public const int BORDER_PADDING = 4;
+        public const int BORDER_PADDING = 5;
         public const int BORDER_WIDTH = 1;
 
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -248,8 +248,11 @@ namespace XenAdmin.ConsoleView
         private void OnError(object sender, Exception e)
         {
             Program.AssertOffEventThread();
-            System.Diagnostics.Trace.Assert(sender == this.vncStream);
+            System.Diagnostics.Debug.Assert(sender == vncStream); // Please see to CA-236844 if this assertion fails
 
+            if (sender != vncStream)
+                return;
+            
             this.connected = false;
             if (ErrorOccurred != null)
                 ErrorOccurred(this, e);
@@ -262,6 +265,11 @@ namespace XenAdmin.ConsoleView
         {
             connected = false;
             terminated = true;
+            if (vncStream != null)
+            {
+                vncStream.ErrorOccurred -= OnError;
+                vncStream.ConnectionSuccess -= vncStream_ConnectionSuccess;
+            } 
             VNCStream s = vncStream;
             vncStream = null;
             if (s != null)
@@ -1473,9 +1481,9 @@ namespace XenAdmin.ConsoleView
                 this.AutoScroll = false;
 
                 float xScale = this.Size.Width /
-                    (float)(displayBorder ? this.DesktopSize.Width + BORDER_PADDING + BORDER_PADDING : this.DesktopSize.Width);
+                    (float)(displayBorder ? this.DesktopSize.Width + BORDER_PADDING * 3 : this.DesktopSize.Width);
                 float yScale = this.Size.Height /
-                    (float)(displayBorder ? this.DesktopSize.Height + BORDER_PADDING + BORDER_PADDING : this.DesktopSize.Height);
+                    (float)(displayBorder ? this.DesktopSize.Height + BORDER_PADDING * 3 : this.DesktopSize.Height);
 
                 scale = (xScale > yScale) ? yScale : xScale;
                 scale = (scale > 0.01) ? scale : (float)0.01;

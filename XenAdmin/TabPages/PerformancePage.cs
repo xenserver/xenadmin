@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -46,7 +46,6 @@ namespace XenAdmin.TabPages
     public partial class PerformancePage : BaseTabPage
     {
         private IXenObject _xenObject;
-        private bool PanelShowing;
         private bool _disposed;
         private readonly CollectionChangeEventHandler Message_CollectionChangedWithInvoke;
         private readonly ArchiveMaintainer ArchiveMaintainer = new ArchiveMaintainer();
@@ -184,8 +183,7 @@ namespace XenAdmin.TabPages
                     GraphList.LoadGraphs(XenObject);
                     LoadEvents();
                     ArchiveMaintainer.XenObject = value;
-                    if (PanelShowing)
-                        ArchiveMaintainer.Start(); // make sure we start twice
+                    ArchiveMaintainer.Start(); 
                 }
             }
         }
@@ -277,20 +275,16 @@ namespace XenAdmin.TabPages
             XenObject.Connection.Cache.DeregisterCollectionChanged<XenAPI.Message>(Message_CollectionChangedWithInvoke);
         }
 
-        public void PauseGraph()
+        public override void PageHidden()
         {
-            PanelShowing = false;
+            DeregEvents();
             if (ArchiveMaintainer != null && XenObject != null)
+            {
                 ArchiveMaintainer.Pause();
+                ArchiveMaintainer.DeregEvents();
+            }
         }
-
-        public void ResumeGraph()
-        {
-            PanelShowing = true;
-            if (ArchiveMaintainer != null && XenObject != null)
-                ArchiveMaintainer.Start();
-        }
-
+        
         private void ArchiveMaintainer_ArchivesUpdated(object sender, EventArgs args)
         {
             Program.Invoke(this, RefreshAll);

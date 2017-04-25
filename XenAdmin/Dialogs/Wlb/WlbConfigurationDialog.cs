@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -218,16 +218,5 @@ namespace XenAdmin.Dialogs.Wlb
                 }
             }
         }
-
-        private void WlbConfigurationDialog_SizeChanged(object sender, EventArgs e)
-        {
-            // When the size of configuration dialog is changed,
-            // the SplitContainer panels should expand and contract correspondingly.
-            // Originally the dialog height is 750, SplitContainer height is 674,
-            // the difference is 76.
-            // The SplitContainer height must track the change of the dialog height.
-            splitContainer.Height = this.Height - 76;
-        }
-
     }
 }

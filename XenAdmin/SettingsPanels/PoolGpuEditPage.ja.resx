@@ -184,7 +184,7 @@
     <value>5</value>
   </data>
   <data name="radioButtonMixture.Text" xml:space="preserve">
-    <value>混在: GPU グループごとに異なる設定を指定する</value>
+    <value>混在: GPU グループごとに異なる設定を指定する(&amp;X)</value>
   </data>
   <data name="&gt;&gt;radioButtonMixture.Name" xml:space="preserve">
     <value>radioButtonMixture</value>
@@ -214,7 +214,7 @@
     <value>3</value>
   </data>
   <data name="radioButtonDepth.Text" xml:space="preserve">
-    <value>密度の最大化: 同一 GPU に最大限の VM を割り当てる</value>
+    <value>密度の最大化: 同一 GPU に最大限の VM を割り当てる(&amp;D)</value>
   </data>
   <data name="&gt;&gt;radioButtonDepth.Name" xml:space="preserve">
     <value>radioButtonDepth</value>
@@ -244,7 +244,7 @@
     <value>4</value>
   </data>
   <data name="radioButtonBreadth.Text" xml:space="preserve">
-    <value>パフォーマンスの最大化: VM に最大限の GPU を割り当てる</value>
+    <value>パフォーマンスの最大化: VM に最大限の GPU を割り当てる(&amp;P)</value>
   </data>
   <data name="&gt;&gt;radioButtonBreadth.Name" xml:space="preserve">
     <value>radioButtonBreadth</value>
@@ -367,7 +367,7 @@
     <value>3</value>
   </data>
   <data name="radioButtonEnable.Text" xml:space="preserve">
-    <value>このサーバーは統合された GPU を使用します。</value>
+    <value>このサーバーは統合された GPU を使用します(&amp;U)</value>
   </data>
   <data name="&gt;&gt;radioButtonEnable.Name" xml:space="preserve">
     <value>radioButtonEnable</value>
@@ -397,7 +397,7 @@
     <value>7</value>
   </data>
   <data name="radioButtonDisable.Text" xml:space="preserve">
-    <value>このサーバーは統合された GPU を使用しません。</value>
+    <value>このサーバーは統合された GPU を使用しません(&amp;N)</value>
   </data>
   <data name="&gt;&gt;radioButtonDisable.Name" xml:space="preserve">
     <value>radioButtonDisable</value>

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -708,6 +708,7 @@ namespace XenAdmin.Commands
                 if (selection.FirstAsXenObject != null )
                     items.Add(new HACommand(mainWindow, selection));
                 items.AddIfEnabled(new VMGroupCommand<VMPP>(mainWindow, selection));
+                items.AddIfEnabled(new VMGroupCommand<VMSS>(mainWindow, selection));
                 items.AddIfEnabled(new VMGroupCommand<VM_appliance>(mainWindow, selection));
 
                 var drItem = new CommandToolStripMenuItem(new DRCommand(mainWindow, selection), true);
@@ -889,6 +890,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new TakeSnapshotCommand(mainWindow, selection));
                 items.AddIfEnabled(new ConvertVMToTemplateCommand(mainWindow, selection));
                 items.AddIfEnabled(new AssignGroupToolStripMenuItem<VMPP>(mainWindow, selection, true));
+                items.AddIfEnabled(new AssignGroupToolStripMenuItem<VMSS>(mainWindow, selection, true));
                 items.AddIfEnabled(new AssignGroupToolStripMenuItem<VM_appliance>(mainWindow, selection, true));
                 items.AddSeparator();
 
@@ -1083,6 +1085,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new MigrateVMToolStripMenuItem(mainWindow, selection, true));
 				items.AddIfEnabled(new ExportCommand(mainWindow, selection));
                 items.AddIfEnabled(new AssignGroupToolStripMenuItem<VMPP>(mainWindow, selection, true));
+                items.AddIfEnabled(new AssignGroupToolStripMenuItem<VMSS>(mainWindow, selection, true));
                 items.AddIfEnabled(new AssignGroupToolStripMenuItem<VM_appliance>(mainWindow, selection, true));
                 items.AddSeparator();
 

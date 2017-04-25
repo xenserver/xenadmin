@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -114,6 +114,11 @@ namespace XenAdmin.Diagnostics.Checks
 
                     if (livePatchCodesByHost != null)
                         livePatchCodesByHost[Host.uuid] = livepatchStatus;
+                }
+                //trying to apply update to partially upgraded pool
+                else if (Helpers.ElyOrGreater(Helpers.GetMaster(Host.Connection)) && !Helpers.ElyOrGreater(Host))
+                {
+                    return new WrongServerVersion(this, Host);
                 }
 
                 return null;

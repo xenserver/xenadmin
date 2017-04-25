@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -228,18 +228,24 @@ namespace XenServerHealthCheck
                         Properties.Settings.Default.ProxyAddress = proxySettings[2];
                         Properties.Settings.Default.ProxyPort = Int32.Parse(proxySettings[3]);
                         Properties.Settings.Default.ConnectionTimeout = Int32.Parse(proxySettings[4]);
-                        Properties.Settings.Default.BypassProxyForLocal = bool.Parse(proxySettings[5]);
-                        return;
+                        Properties.Settings.Default.BypassProxyForServers = bool.Parse(proxySettings[5]);
+                        Properties.Settings.Default.ProvideProxyAuthentication = bool.Parse(proxySettings[6]);
+                        Properties.Settings.Default.ProxyUsername = proxySettings[7];
+                        Properties.Settings.Default.ProxyPassword = proxySettings[8];
+                        Properties.Settings.Default.ProxyAuthenticationMethod = Int32.Parse(proxySettings[9]);
+                        break;
 
                     case HTTPHelper.ProxyStyle.SystemProxy:
                         Properties.Settings.Default.ProxySetting = (Int32)proxyStyle;
-                        return;
+                        break;
 
                     default:
                         Properties.Settings.Default.ProxySetting = (Int32)proxyStyle;
-                        return;
+                        break;
                 }
 
+                Properties.Settings.Default.Save();
+                XenServerHealthCheckService.ReconfigureConnectionSettings();
             }
             catch (Exception e)
             {

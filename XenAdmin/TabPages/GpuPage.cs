@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -290,6 +290,15 @@ namespace XenAdmin.TabPages
             {
                 UnregisterPgpuHandlers(pgpu);
             }
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
+
+            var gpuPlacementPolicyPanel = pageContainerPanel.Controls.OfType<GpuPlacementPolicyPanel>().FirstOrDefault();
+            if (gpuPlacementPolicyPanel != null)
+                gpuPlacementPolicyPanel.UnregisterHandlers();
         }
 
 

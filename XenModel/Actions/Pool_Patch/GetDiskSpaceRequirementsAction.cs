@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -154,7 +154,8 @@ namespace XenAdmin.Actions
 
             DiskSpaceRequirements = new DiskSpaceRequirements(operation, Host, updateName, requiredDiskSpace, availableDiskSpace, reclaimableDiskSpace);
 
-            log.WarnFormat("Cleanup message: \r\n{0}", DiskSpaceRequirements.GetSpaceRequirementsMessage());
+            if (availableDiskSpace < requiredDiskSpace)
+                log.WarnFormat("Cleanup message: \r\n{0}", DiskSpaceRequirements.GetSpaceRequirementsMessage());
         }
     }
 

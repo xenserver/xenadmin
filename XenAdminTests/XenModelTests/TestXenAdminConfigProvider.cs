@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -75,6 +75,11 @@ namespace XenAdminTests.XenModelTests
         }
 
         public IWebProxy GetProxyFromSettings(IXenConnection connection)
+        {
+            return new XenAdminSimulatorWebProxy(DbProxy.proxys[connection]);
+        }
+
+        public IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer)
         {
             return new XenAdminSimulatorWebProxy(DbProxy.proxys[connection]);
         }

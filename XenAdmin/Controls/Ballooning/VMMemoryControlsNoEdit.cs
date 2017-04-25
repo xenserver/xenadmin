@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -32,9 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards;
@@ -125,6 +123,18 @@ namespace XenAdmin.Controls.Ballooning
             }
             else
                 Program.MainWindow.ShowPerConnectionWizard(vm0.Connection, new BallooningWizard(vms));
+        }
+        
+        internal void UnregisterHandlers()
+        {
+            if (vms == null)
+                return;
+
+            foreach (var vm in vms)
+                vm.PropertyChanged -= vm_PropertyChanged;
+
+            foreach (var metrics in vm_metrics.Where(m => m != null))
+                metrics.PropertyChanged -= vm_metrics_PropertyChanged;
         }
     }
 }

@@ -205,6 +205,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The specified bridge already exists..
+        /// </summary>
+        public static string BRIDGE_NAME_EXISTS {
+            get {
+                return ResourceManager.GetString("BRIDGE_NAME_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find bridge required by VM..
         /// </summary>
         public static string BRIDGE_NOT_AVAILABLE {
@@ -1726,6 +1735,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The network is not managed by xapi..
+        /// </summary>
+        public static string NETWORK_UNMANAGED {
+            get {
+                return ResourceManager.GetString("NETWORK_UNMANAGED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There were no servers available to complete the specified operation..
         /// </summary>
         public static string NO_HOSTS_AVAILABLE {
@@ -3009,7 +3027,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to connect to Equallogic Array, Permission denied;username/password invalid.
+        ///   Looks up a localized string similar to Failed to connect to Equallogic Array. Check your user name and password..
         /// </summary>
         public static string SR_BACKEND_FAILURE_169 {
             get {
@@ -3522,7 +3540,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The username is missing.
+        ///   Looks up a localized string similar to The user name is missing.
         /// </summary>
         public static string SR_BACKEND_FAILURE_433 {
             get {
@@ -3648,7 +3666,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extended characters are not supported in SMB paths, usernames, and passwords..
+        ///   Looks up a localized string similar to Extended characters are not supported in SMB paths, user names, and passwords..
         /// </summary>
         public static string SR_BACKEND_FAILURE_446 {
             get {
@@ -3945,7 +3963,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logging in to the iSCSI target failed. Check your username and password..
+        ///   Looks up a localized string similar to Logging in to the iSCSI target failed. Check your user name and password..
         /// </summary>
         public static string SR_BACKEND_FAILURE_68 {
             get {
@@ -4521,7 +4539,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update failed to apply. Please see attached output..
+        ///   Looks up a localized string similar to The update failed to apply. View logs for more details..
         /// </summary>
         public static string UPDATE_APPLY_FAILED {
             get {
@@ -4548,11 +4566,20 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: conflicting updates are present..
+        ///   Looks up a localized string similar to The update precheck stage failed: conflicting update(s) are present..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT {
             get {
                 return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update precheck stage failed: RPM package validation requires a GPG key that is not present on the host..
+        /// </summary>
+        public static string UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED {
+            get {
+                return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED", resourceCulture);
             }
         }
         
@@ -4958,6 +4985,15 @@ namespace XenAPI {
         public static string VM_ASSIGNED_TO_PROTECTION_POLICY {
             get {
                 return ResourceManager.GetString("VM_ASSIGNED_TO_PROTECTION_POLICY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This VM is assigned to a snapshot schedule..
+        /// </summary>
+        public static string VM_ASSIGNED_TO_SNAPSHOT_SCHEDULE {
+            get {
+                return ResourceManager.GetString("VM_ASSIGNED_TO_SNAPSHOT_SCHEDULE", resourceCulture);
             }
         }
         
@@ -5525,6 +5561,15 @@ namespace XenAPI {
         public static string VMS_FAILED_TO_COOPERATE {
             get {
                 return ResourceManager.GetString("VMS_FAILED_TO_COOPERATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is at least one VM assigned to snapshot schedule..
+        /// </summary>
+        public static string VMSS_HAS_VM {
+            get {
+                return ResourceManager.GetString("VMSS_HAS_VM", resourceCulture);
             }
         }
         

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -123,7 +123,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._000_CreateVM_h32bit_24;
+                return Images.StaticImages._000_CreateVM_h32bit_24;
             }
         }
 
@@ -131,7 +131,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return Resources._001_CreateVM_h32bit_16;
+                return Images.StaticImages._001_CreateVM_h32bit_16;
             }
         }
 

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -201,6 +201,12 @@ namespace XenAdmin.SettingsPanels
             {
                 lblFolder.Visible = labelTags.Visible = folderPanel.Visible = tagsPanel.Visible = false;
                 labelTitle.Text = Messages.GENERAL_PAGE_VMPP_SETTINGS;
+            }
+
+            if (xenObjectCopy is VMSS)
+            {
+                lblFolder.Visible = labelTags.Visible = folderPanel.Visible = tagsPanel.Visible = false;
+                labelTitle.Text = Messages.GENERAL_PAGE_VMSS_SETTINGS;
             }
 
             if (xenObjectCopy is VM_appliance)

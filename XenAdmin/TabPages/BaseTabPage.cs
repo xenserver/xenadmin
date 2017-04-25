@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -78,5 +78,8 @@ namespace XenAdmin.TabPages
             get { return deprecationBanner1; }
         }
 
+        public virtual void PageHidden()
+        {
+        }
     }
 }

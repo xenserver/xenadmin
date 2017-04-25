@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -36,6 +36,7 @@ using System.IO;
 using System.Net;
 using XenAdmin;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.ServerDBs;
 using XenAPI;
@@ -90,6 +91,11 @@ namespace XenServerHealthCheck
 
         public IWebProxy GetProxyFromSettings(IXenConnection connection)
         {
+            return GetProxyFromSettings(connection, true);
+        }
+
+        public IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer)
+        {
             try
             {
                 if (connection != null && connection.Session != null && connection.Session.uuid == "dummy")
@@ -98,10 +104,24 @@ namespace XenServerHealthCheck
                 switch ((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting)
                 {
                     case HTTPHelper.ProxyStyle.SpecifiedProxy:
-                        return new WebProxy(string.Format("http://{0}:{1}",
+                        if (isForXenServer && Properties.Settings.Default.BypassProxyForServers)
+                            return null;
+
+                        string address = string.Format("http://{0}:{1}",
                             Properties.Settings.Default.ProxyAddress,
-                            Properties.Settings.Default.ProxyPort),
-                            Properties.Settings.Default.BypassProxyForLocal);
+                            Properties.Settings.Default.ProxyPort);
+
+                        if (Properties.Settings.Default.ProvideProxyAuthentication)
+                        {
+                            string protectedUsername = Properties.Settings.Default.ProxyUsername;
+                            string protectedPassword = Properties.Settings.Default.ProxyPassword;
+                            return new WebProxy(address, false, null, new NetworkCredential(
+                                // checks for empty default username/password which starts out unencrypted
+                                string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
+                                string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword)));
+                        }
+                        else
+                            return new WebProxy(address, false);
 
                     case HTTPHelper.ProxyStyle.SystemProxy:
                         return WebRequest.GetSystemWebProxy();

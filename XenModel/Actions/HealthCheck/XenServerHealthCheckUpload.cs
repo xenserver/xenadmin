@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -62,7 +62,7 @@ namespace XenServerHealthCheck
             {
                 UPLOAD_URL = uploadUrl;
             }
-            proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(connection);
+            proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(connection, false);
         }
 
         // Request an upload and fetch the uploading id from CIS.

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -184,17 +184,18 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// If AutomaticCheck is enabled it checks for updates regardless the
-        /// value of the parameter force. If AutomaticCheck is disabled it only
-        /// checks if force is true.
+        /// value of the parameter force. If AutomaticCheck is disabled it 
+        /// checks for all update types if force is true; forceRefresh causes 
+        /// the check for update action to run and refresh the Updates page
         /// </summary>
-        public static void CheckForUpdates(bool force)
+        public static void CheckForUpdates(bool force, bool forceRefresh = false)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
 
             if (Properties.Settings.Default.AllowXenCenterUpdates ||
                 Properties.Settings.Default.AllowXenServerUpdates ||
-                Properties.Settings.Default.AllowPatchesUpdates || force)
+                Properties.Settings.Default.AllowPatchesUpdates || force || forceRefresh)
             {
                 DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction(
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
@@ -258,17 +259,13 @@ namespace XenAdmin.Core
             {
                 lock (downloadedUpdatesLock)
                 {
-                    var xcvs = action.XenCenterVersions.Where(v => !XenCenterVersions.Contains(v));
-                    XenCenterVersions.AddRange(xcvs);
+                    XenCenterVersions = action.XenCenterVersions;
 
-                    var versForAutoCheck = action.XenServerVersionsForAutoCheck.Where(v => !XenServerVersionsForAutoCheck.Contains(v));
-                    XenServerVersionsForAutoCheck.AddRange(versForAutoCheck);
+                    XenServerVersionsForAutoCheck = action.XenServerVersionsForAutoCheck;
 
-                    var vers = action.XenServerVersions.Where(v => !XenServerVersions.Contains(v));
-                    XenServerVersions.AddRange(vers);
+                    XenServerVersions = action.XenServerVersions;
 
-                    var patches = action.XenServerPatches.Where(p => !XenServerPatches.Contains(p));
-                    XenServerPatches.AddRange(patches);
+                    XenServerPatches = action.XenServerPatches;
                 }
 
                 var xenCenterAlert = NewXenCenterUpdateAlert(XenCenterVersions, Program.Version);

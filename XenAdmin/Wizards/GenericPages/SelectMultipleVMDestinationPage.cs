@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -54,6 +54,7 @@ namespace XenAdmin.Wizards.GenericPages
 		private bool updatingDestinationCombobox;
         private bool m_buttonNextEnabled;
         protected List<IXenConnection> ignoredConnections = new List<IXenConnection>();
+        private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
 
         /// <summary>
         /// Combobox item that can executes a command but also be an IEnableableComboBoxItem
@@ -80,6 +81,7 @@ namespace XenAdmin.Wizards.GenericPages
 		{
 			InitializeComponent();
             InitializeText();
+            Host_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(CollectionChanged);
 			ConnectionsManager.XenConnections.CollectionChanged += CollectionChanged;
             ShowWarning(null);
 		}
@@ -307,7 +309,7 @@ namespace XenAdmin.Wizards.GenericPages
 				xenConnection.ConnectionStateChanged += xenConnection_ConnectionStateChanged;
 				xenConnection.CachePopulated -= xenConnection_CachePopulated;
 				xenConnection.CachePopulated += xenConnection_CachePopulated;
-				xenConnection.Cache.RegisterCollectionChanged<Host>(Program.ProgramInvokeHandler(CollectionChanged));
+				xenConnection.Cache.RegisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
 			}
 
 			m_comboBoxConnection.Items.Add(new AddHostExecutingComboBoxItem());
@@ -607,5 +609,28 @@ namespace XenAdmin.Wizards.GenericPages
 		}
 
 		#endregion
+        
+        private void UnregisterHandlers()
+        {
+            ConnectionsManager.XenConnections.CollectionChanged -= CollectionChanged;
+            foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy)
+            {
+                var pool = Helpers.GetPool(xenConnection);
+                if (pool == null)
+                {
+                    var host = Helpers.GetMaster(xenConnection);
+                    if (host != null)
+                        host.PropertyChanged -= PropertyChanged;
+                }
+                else
+                {
+                    pool.PropertyChanged -= PropertyChanged;
+                }
+
+                xenConnection.ConnectionStateChanged -= xenConnection_ConnectionStateChanged;
+                xenConnection.CachePopulated -= xenConnection_CachePopulated;
+                xenConnection.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
+            }
+        } 
 	}
 }

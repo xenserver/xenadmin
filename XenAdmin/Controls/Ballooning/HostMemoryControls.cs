@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -133,6 +133,21 @@ namespace XenAdmin.Controls.Ballooning
         {
             using (var dlg = new ControlDomainMemoryDialog(host))
                 dlg.ShowDialog(Program.MainWindow);
+        }
+
+        internal void UnregisterHandlers()
+        {
+            if (_host == null)
+                return;
+            host.PropertyChanged -= host_PropertyChanged;
+
+            foreach (var vm in _host.Connection.Cache.VMs)
+            {
+                vm.PropertyChanged -= vm_PropertyChanged;
+                var metrics = vm.Connection.Resolve(vm.metrics);
+                if (metrics != null)
+                    metrics.PropertyChanged -= vm_metrics_PropertyChanged;
+            }
         }
     }
 }

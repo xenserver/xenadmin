@@ -1214,6 +1214,24 @@
   <data name="Message.body-vmpp_xapi_logon_failure" xml:space="preserve">
     <value>Unable to log in to XAPI session.</value>
   </data>
+  <data name="Message.body-vmss_license_error" xml:space="preserve">
+    <value>The XenServer license you are using does not allow you to use the Scheduled Snapshots feature.</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
+    <value>The snapshot schedule '{0}' failed because a snapshot could not be created.</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_lock_failed" xml:space="preserve">
+    <value>Unable to create snapshots at this time because a scheduled snapshot operation is already in progress in this pool. Only one scheduled snapshot operation can run at a time in the same pool. Please check that the snapshot schedules in this pool do not clash.</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_missed_event" xml:space="preserve">
+    <value>Unable to create snapshots at this time because the scheduled snapshot operation for this policy is already in progress. Please try again later.</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_succeeded" xml:space="preserve">
+    <value>Snapshot schedule succeeded</value>
+  </data>
+  <data name="Message.body-vmss_xapi_logon_failure" xml:space="preserve">
+    <value>Snapshot schedule  XAPI logon failure</value>
+  </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
     <value>Pool '{0}' failed to retrieve placement recommendations from WLB for '{1}'.</value>
   </data>
@@ -1438,6 +1456,24 @@
   </data>
   <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
     <value>VMPP XAPI logon failure</value>
+  </data>
+  <data name="Message.name-vmss_license_error" xml:space="preserve">
+    <value>Snapshot schedule failed: insufficient license for Scheduled snapshots</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_failed" xml:space="preserve">
+    <value>Snapshot schedule failed</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_lock_failed" xml:space="preserve">
+    <value>Snapshot schedule failed</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_missed_event" xml:space="preserve">
+    <value>Snapshot schedule failed</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_succeeded" xml:space="preserve">
+    <value>Snapshot schedule succeeded</value>
+  </data>
+  <data name="Message.name-vmss_xapi_logon_failure" xml:space="preserve">
+    <value>Snapshot schedule XAPI logon failure</value>
   </data>
   <data name="Message.name-wlb_consultation_failed" xml:space="preserve">
     <value>WLB consultation has failed</value>
@@ -1915,5 +1951,20 @@
   </data>
   <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
     <value>'{0}' Write Latency</value>
+  </data>
+  <data name="Label-pvsaccelerator" xml:space="preserve">
+    <value>PVS-Accelerator</value>
+  </data>
+  <data name="Label-xenserver-measured-boot" xml:space="preserve">
+    <value>Measured Boot</value>
+  </data>
+  <data name="Label-xscontainer" xml:space="preserve">
+    <value>Container Management</value>
+  </data>
+  <data name="Description-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS-Accelerator Status</value>
+  </data>
+  <data name="Label-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS-Accelerator Status</value>
   </data>
 </root>

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
@@ -164,6 +164,9 @@
   </data>
   <data name="BOOTLOADER_FAILED" xml:space="preserve">
     <value>此 VM 的引导加载程序返回错误 -- 是否已成功安装 VM? {1}</value>
+  </data>
+  <data name="BRIDGE_NAME_EXISTS" xml:space="preserve">
+    <value>指定的桥接已存在。</value>
   </data>
   <data name="BRIDGE_NOT_AVAILABLE" xml:space="preserve">
     <value>找不到 VM 所需的桥接。</value>
@@ -672,6 +675,9 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>网络包含活动的 VIF ({0})，无法删除。</value>
   </data>
+  <data name="NETWORK_UNMANAGED" xml:space="preserve">
+    <value>网络不是由 xapi 管理。</value>
+  </data>
   <data name="NOT_ALLOWED_ON_OEM_EDITION" xml:space="preserve">
     <value>OEM 版中不允许使用此命令。</value>
   </data>
@@ -1104,7 +1110,7 @@
     <value>无法创建快照 VDI 的快照，不支持的操作</value>
   </data>
   <data name="SR_BACKEND_FAILURE_169" xml:space="preserve">
-    <value>无法连接 Equallogic 阵列，权限遭拒绝；用户名/密码无效</value>
+    <value>无法连接到 Equallogic 阵列。请检查您的用户名和密码。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_170" xml:space="preserve">
     <value>不支持的 Equallogic 目标版本</value>
@@ -1416,7 +1422,7 @@
     <value>无法添加 iSCSI 设备</value>
   </data>
   <data name="SR_BACKEND_FAILURE_68" xml:space="preserve">
-    <value>登录 iSCSI 目标失败。请检查用户名和密码。</value>
+    <value>登录 iSCSI 目标失败。请检查您的用户名和密码。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_69" xml:space="preserve">
     <value>注销 iSCSI 目标失败</value>
@@ -1608,7 +1614,7 @@
     <value>上载的更新已存在</value>
   </data>
   <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
-    <value>无法应用更新。请查看附加的输出。</value>
+    <value>无法应用更新。有关更多详细信息，请查看日志。</value>
   </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
     <value>指定的更新已应用，不能销毁。</value>
@@ -1618,6 +1624,9 @@
   </data>
   <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
     <value>更新预检查阶段失败: 存在冲突的更新。</value>
+  </data>
+  <data name="UPDATE_PRECHECK_FAILED_GPGKEY_NOT_IMPORTED" xml:space="preserve">
+    <value>更新预检查阶段失败: RPM 包验证所需的 GPG 密钥在主机上不存在。</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
     <value>更新预检查阶段失败: 服务器空间不足。</value>
@@ -1757,11 +1766,17 @@
   <data name="VMPP_HAS_VM" xml:space="preserve">
     <value>至少为此保护策略分配了一个 VM。</value>
   </data>
+  <data name="VMSS_HAS_VM" xml:space="preserve">
+    <value>至少存在一个已分配至快照计划的 VM。</value>
+  </data>
   <data name="VMS_FAILED_TO_COOPERATE" xml:space="preserve">
     <value>系统要求释放内存时，给定的 VM 无法执行该操作</value>
   </data>
   <data name="VM_ASSIGNED_TO_PROTECTION_POLICY" xml:space="preserve">
     <value>已将此 VM 分配给某项保护策略。</value>
+  </data>
+  <data name="VM_ASSIGNED_TO_SNAPSHOT_SCHEDULE" xml:space="preserve">
+    <value>此 VM 已分配至快照计划。</value>
   </data>
   <data name="VM_ATTACHED_TO_MORE_THAN_ONE_VDI_WITH_TIMEOFFSET_MARKED_AS_RESET_ON_BOOT" xml:space="preserve">
     <value>您尝试启动的 VM 已连接到偏移时间标记为启动时重置的多个 VDI。</value>

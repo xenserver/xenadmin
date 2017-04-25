@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -78,11 +78,7 @@ namespace XenAdmin.TabPages
             }
             set
             {
-                if (connection != null)
-                {
-                    connection.Cache.DeregisterCollectionChanged<PVS_proxy>(PvsProxy_CollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<VM>(PvsProxy_CollectionChangedWithInvoke);
-                }
+                UnregisterHandlers();
 
                 connection = value;
 
@@ -124,7 +120,7 @@ namespace XenAdmin.TabPages
 
                 var previousSelection = GetSelectedVMs();
 
-                UnregisterEventHandlers();
+                UnregisterVmEventHandlers();
 
                 dataGridViewVms.SortCompare += dataGridViewVms_SortCompare;
 
@@ -214,7 +210,7 @@ namespace XenAdmin.TabPages
             newRow.Cells.AddRange(vmCell, cacheEnabledCell, pvsSiteCell, statusCell);
 
             UpdateRow(newRow, vm, pvsProxy, showRow);
-            RegisterEventHandlers(vm, pvsProxy);
+            RegisterVmEventHandlers(vm, pvsProxy);
             return newRow;
         }
 
@@ -229,7 +225,7 @@ namespace XenAdmin.TabPages
             row.Visible = showRow;
         }
 
-        private void RegisterEventHandlers(VM vm, PVS_proxy pvsProxy)
+        private void RegisterVmEventHandlers(VM vm, PVS_proxy pvsProxy)
         {
             vm.PropertyChanged -= VmPropertyChanged;
             vm.PropertyChanged += VmPropertyChanged;
@@ -246,7 +242,7 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void UnregisterEventHandlers()
+        private void UnregisterVmEventHandlers()
         {
             dataGridViewVms.SelectionChanged -= VmSelectionChanged;
             dataGridViewVms.SortCompare -= dataGridViewVms_SortCompare;
@@ -266,6 +262,19 @@ namespace XenAdmin.TabPages
                         pvsSite.PropertyChanged -= PvsSitePropertyChanged;
                 }
             }
+        }
+
+        private void UnregisterHandlers()
+        {
+            if (connection == null) 
+                return;
+            connection.Cache.DeregisterCollectionChanged<PVS_proxy>(PvsProxy_CollectionChangedWithInvoke);
+            connection.Cache.DeregisterCollectionChanged<VM>(PvsProxy_CollectionChangedWithInvoke);
+        }
+
+        public override void PageHidden()
+        {
+            UnregisterHandlers();
         }
 
         void dataGridViewVms_SortCompare(object sender, DataGridViewSortCompareEventArgs e)

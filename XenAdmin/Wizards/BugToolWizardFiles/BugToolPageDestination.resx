@@ -133,7 +133,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="usernameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 189</value>
+    <value>30, 187</value>
   </data>
   <data name="usernameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>30, 5, 3, 5</value>
@@ -172,7 +172,7 @@
     <value>NoControl</value>
   </data>
   <data name="passwordLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 219</value>
+    <value>30, 217</value>
   </data>
   <data name="passwordLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>30, 5, 3, 5</value>
@@ -202,7 +202,7 @@
     <value>1</value>
   </data>
   <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 216</value>
+    <value>108, 214</value>
   </data>
   <data name="passwordTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 5</value>
@@ -226,7 +226,7 @@
     <value>2</value>
   </data>
   <data name="usernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 186</value>
+    <value>108, 184</value>
   </data>
   <data name="usernameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 5</value>
@@ -457,7 +457,7 @@
     <value />
   </data>
   <data name="m_ctrlError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 281</value>
+    <value>0, 279</value>
   </data>
   <data name="m_ctrlError.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 10, 0, 0</value>
@@ -523,7 +523,7 @@
     <value>NoControl</value>
   </data>
   <data name="caseNumberLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 249</value>
+    <value>30, 247</value>
   </data>
   <data name="caseNumberLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>30, 5, 3, 5</value>
@@ -550,7 +550,7 @@
     <value>12</value>
   </data>
   <data name="caseNumberTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 246</value>
+    <value>108, 244</value>
   </data>
   <data name="caseNumberTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 5</value>
@@ -583,7 +583,7 @@
     <value>NoControl</value>
   </data>
   <data name="optionalLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 249</value>
+    <value>360, 247</value>
   </data>
   <data name="optionalLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 5, 3, 5</value>
@@ -609,37 +609,40 @@
   <data name="&gt;&gt;optionalLabel.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="richTextBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="enterCredentialsLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="richTextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 131</value>
+  <data name="enterCredentialsLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="richTextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>32, 3, 6, 6</value>
+  <data name="enterCredentialsLinkLabel.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
+    <value>0, 0</value>
   </data>
-  <data name="richTextBox1.ScrollBars" type="System.Windows.Forms.RichTextBoxScrollBars, System.Windows.Forms">
-    <value>None</value>
+  <data name="enterCredentialsLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 128</value>
   </data>
-  <data name="richTextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>531, 44</value>
+  <data name="enterCredentialsLinkLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>30, 0, 3, 0</value>
   </data>
-  <data name="richTextBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="enterCredentialsLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
   </data>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Enter your MyCitrix credentials (see http://www.citrix.com/welcome.html). These credentials will only be used to authenticate with [Citrix] Insight Services once and will not be stored on this machine or on your server.</value>
+  <data name="enterCredentialsLinkLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
-    <value>richTextBox1</value>
+  <data name="enterCredentialsLinkLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;richTextBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;enterCredentialsLinkLabel.Name" xml:space="preserve">
+    <value>enterCredentialsLinkLabel</value>
   </data>
-  <data name="&gt;&gt;richTextBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;enterCredentialsLinkLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enterCredentialsLinkLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;richTextBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;enterCredentialsLinkLabel.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -652,7 +655,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>569, 419</value>
@@ -673,7 +676,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="usernameLabel" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="passwordLabel" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="passwordTextBox" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="usernameTextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_textBoxName" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelFileLocation" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_textBoxLocation" Row="2" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="BrowseButton" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="m_ctrlError" Row="8" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="uploadCheckBox" Row="3" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="caseNumberLabel" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="caseNumberTextBox" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="optionalLabel" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="richTextBox1" Row="4" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,100,AutoSize,100,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,24,AutoSize,0,AutoSize,100,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="usernameLabel" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="passwordLabel" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="passwordTextBox" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="usernameTextBox" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_textBoxName" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="labelFileLocation" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_textBoxLocation" Row="2" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="BrowseButton" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="m_ctrlError" Row="9" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="uploadCheckBox" Row="3" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="caseNumberLabel" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="caseNumberTextBox" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="optionalLabel" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="enterCredentialsLinkLabel" Row="5" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,51,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

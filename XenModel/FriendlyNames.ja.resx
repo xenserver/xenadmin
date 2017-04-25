@@ -1104,7 +1104,7 @@
     <value>ホスト '{0}' のライセンスの有効期限は {1} に切れます。</value>
   </data>
   <data name="Message.body-license_not_available" xml:space="preserve">
-    <value>指定された種類のライセンスがないため、{0} にライセンスが発行されませんでした。</value>
+    <value>{0} は要求されたライセンスを利用できません。</value>
   </data>
   <data name="Message.body-license_server_connected" xml:space="preserve">
     <value>サーバー {0} がライセンス サーバーに接続されました。</value>
@@ -1214,8 +1214,26 @@
   <data name="Message.body-vmpp_xapi_logon_failure" xml:space="preserve">
     <value>XAPI セッションにログインできません。</value>
   </data>
+  <data name="Message.body-vmss_license_error" xml:space="preserve">
+    <value>使用中の XenServer ライセンスでは、スナップショット スケジュール機能を使用できません。</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
+    <value>スナップショットが作成できなかったため、スナップショット スケジュール '{0}' が失敗しました。</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_lock_failed" xml:space="preserve">
+    <value>このプールで定期的なスナップショット作成が既に実行中のため、現在スナップショットを作成できません。プール内で同時に複数の定期的なスナップショット作成を実行することはできません。このプールのスナップショット スケジュールが競合していないことを確認してください。</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_missed_event" xml:space="preserve">
+    <value>このポリシーでスケジュールされているスナップショット作成が既に実行中のため、現在スナップショットを作成できません。後で再試行してください。</value>
+  </data>
+  <data name="Message.body-vmss_snapshot_succeeded" xml:space="preserve">
+    <value>スナップショット スケジュールの成功</value>
+  </data>
+  <data name="Message.body-vmss_xapi_logon_failure" xml:space="preserve">
+    <value>スナップショット スケジュール XAPI ログオンの失敗</value>
+  </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
-    <value>プール '{0}' で WLB サーバーから '{1}' に対する推奨再配置情報を取得できません。</value>
+    <value>プール '{0}' は WLB サーバーから '{1}' に対する推奨再配置情報を取得できませんでした。</value>
   </data>
   <data name="Message.body-wlb_optimization_alert" xml:space="preserve">
     <value>WLB により、プール '{0}' の最適化が必要であることが報告されました。プールの最適化モードは '{1}' で、アラートの重要度は '{2}' です。</value>
@@ -1438,6 +1456,24 @@
   </data>
   <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
     <value>VMPP XAPI ログオンの失敗</value>
+  </data>
+  <data name="Message.name-vmss_license_error" xml:space="preserve">
+    <value>スナップショット スケジュールの失敗: 定期的なスナップショット機能のライセンスがありません</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_failed" xml:space="preserve">
+    <value>スナップショット スケジュールの失敗</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_lock_failed" xml:space="preserve">
+    <value>スナップショット スケジュールの失敗</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_missed_event" xml:space="preserve">
+    <value>スナップショット スケジュールの失敗</value>
+  </data>
+  <data name="Message.name-vmss_snapshot_succeeded" xml:space="preserve">
+    <value>スナップショット スケジュールの成功</value>
+  </data>
+  <data name="Message.name-vmss_xapi_logon_failure" xml:space="preserve">
+    <value>スナップショット スケジュール XAPI ログオンの失敗</value>
   </data>
   <data name="Message.name-wlb_consultation_failed" xml:space="preserve">
     <value>WLB 情報の取得の失敗</value>
@@ -1875,34 +1911,34 @@
     <value>PVS サイトにキャッシュ ストレージがありません</value>
   </data>
   <data name="Message.body-pvs_proxy_no_cache_sr_available" xml:space="preserve">
-    <value>VM '{0}' で PVS-Accelerator をセットアップできません。サイト '{1}' にキャッシュ ストレージがありません。</value>
+    <value>VM '{0}' で PVS アクセラレータをセットアップできません。サイト '{1}' にキャッシュ ストレージがありません。</value>
   </data>
   <data name="Label-performance.pvsaccelerator_evicted" xml:space="preserve">
-    <value>PVS-Accelerator の削除の割合</value>
+    <value>PVS アクセラレータの削除の割合</value>
   </data>
   <data name="Label-performance.pvsaccelerator_read_hits" xml:space="preserve">
-    <value>PVS-Accelerator でヒットした割合</value>
+    <value>PVS アクセラレータでヒットした割合</value>
   </data>
   <data name="Label-performance.pvsaccelerator_read_misses" xml:space="preserve">
-    <value>PVS-Accelerator でヒットしなかった割合</value>
+    <value>PVS アクセラレータでヒットしなかった割合</value>
   </data>
   <data name="Label-performance.pvsaccelerator_read_total" xml:space="preserve">
-    <value>PVS-Accelerator で確認した読み取りの割合</value>
+    <value>PVS アクセラレータで確認した読み取りの割合</value>
   </data>
   <data name="Label-performance.pvsaccelerator_space_utilization" xml:space="preserve">
-    <value>PVS-Accelerator の容量使用率</value>
+    <value>PVS アクセラレータの容量使用率</value>
   </data>
   <data name="Label-performance.pvsaccelerator_traffic_client_sent" xml:space="preserve">
-    <value>PVS-Accelerator はクライアントからのネットワーク トラフィックを確認しました</value>
+    <value>PVS アクセラレータはクライアントからのネットワーク トラフィックを確認しました</value>
   </data>
   <data name="Label-performance.pvsaccelerator_traffic_proxy_saved" xml:space="preserve">
-    <value>PVS-Accelerator はネットワーク トラフィックを保存しました</value>
+    <value>PVS アクセラレータはネットワーク トラフィックを保存しました</value>
   </data>
   <data name="Label-performance.pvsaccelerator_traffic_server_sent" xml:space="preserve">
-    <value>PVS-Accelerator はサーバーからのネットワーク トラフィックを確認しました</value>
+    <value>PVS アクセラレータはサーバーからのネットワーク トラフィックを確認しました</value>
   </data>
   <data name="Label-VM.pvs_read_caching_status" xml:space="preserve">
-    <value>PVS-Accelerator の状態</value>
+    <value>PVS アクセラレータの状態</value>
   </data>
   <data name="Label-performance.sr_rw_read" xml:space="preserve">
     <value>'{0}' 読み取りスループット</value>
@@ -1915,5 +1951,20 @@
   </data>
   <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
     <value>'{0}' 書き込みの遅延</value>
+  </data>
+  <data name="Label-pvsaccelerator" xml:space="preserve">
+    <value>PVS アクセラレータ</value>
+  </data>
+  <data name="Label-xenserver-measured-boot" xml:space="preserve">
+    <value>計測された起動</value>
+  </data>
+  <data name="Label-xscontainer" xml:space="preserve">
+    <value>コンテナ管理</value>
+  </data>
+  <data name="Description-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS アクセラレータの状態</value>
+  </data>
+  <data name="Label-host.system_status-xspvscache" xml:space="preserve">
+    <value>PVS アクセラレータの状態</value>
   </data>
 </root>

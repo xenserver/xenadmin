@@ -184,7 +184,7 @@
     <value>5</value>
   </data>
   <data name="radioButtonMixture.Text" xml:space="preserve">
-    <value>混合: 对不同的 GPU 组使用不同的设置</value>
+    <value>混合(&amp;X): 对不同的 GPU 组使用不同的设置</value>
   </data>
   <data name="&gt;&gt;radioButtonMixture.Name" xml:space="preserve">
     <value>radioButtonMixture</value>
@@ -214,7 +214,7 @@
     <value>3</value>
   </data>
   <data name="radioButtonDepth.Text" xml:space="preserve">
-    <value>最大密度: 将尽可能多的 VM 放置在相同的 GPU 上</value>
+    <value>最大密度(&amp;D): 将尽可能多的 VM 放置在相同的 GPU 上</value>
   </data>
   <data name="&gt;&gt;radioButtonDepth.Name" xml:space="preserve">
     <value>radioButtonDepth</value>
@@ -244,7 +244,7 @@
     <value>4</value>
   </data>
   <data name="radioButtonBreadth.Text" xml:space="preserve">
-    <value>最高性能: 将 VM 放置在尽可能多的 GPU 上</value>
+    <value>最高性能(&amp;P): 将 VM 放置在尽可能多的 GPU 上</value>
   </data>
   <data name="&gt;&gt;radioButtonBreadth.Name" xml:space="preserve">
     <value>radioButtonBreadth</value>
@@ -367,7 +367,7 @@
     <value>3</value>
   </data>
   <data name="radioButtonEnable.Text" xml:space="preserve">
-    <value>此服务器将使用集成 GPU</value>
+    <value>此服务器将使用集成 GPU(&amp;U)</value>
   </data>
   <data name="&gt;&gt;radioButtonEnable.Name" xml:space="preserve">
     <value>radioButtonEnable</value>
@@ -397,7 +397,7 @@
     <value>7</value>
   </data>
   <data name="radioButtonDisable.Text" xml:space="preserve">
-    <value>此服务器将不使用集成 GPU</value>
+    <value>此服务器不使用集成 GPU(&amp;N)</value>
   </data>
   <data name="&gt;&gt;radioButtonDisable.Name" xml:space="preserve">
     <value>radioButtonDisable</value>

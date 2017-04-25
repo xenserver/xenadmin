@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -328,19 +328,8 @@ namespace XenAdmin.Wizards.DRWizards
             if (device == null)
                 return null;
 
-            Dictionary<String, String> dconf = new Dictionary<String, String>();
-
-            Host master = Helpers.GetMaster(Connection);
-
-            if (master != null && (Helpers.HostBuildNumber(master) >= 9633
-                                || Helpers.HostBuildNumber(master) == Helpers.CUSTOM_BUILD_NUMBER))
-            {
-                dconf[SrProbeAction.SCSIid] = device.SCSIid;
-            }
-            else
-            {
-                dconf[SrProbeAction.DEVICE] = device.Path;
-            }
+            var dconf = new Dictionary<string, string>();
+            dconf[SrProbeAction.SCSIid] = device.SCSIid;
 
             return dconf;
         }

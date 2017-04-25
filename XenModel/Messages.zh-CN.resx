@@ -1548,10 +1548,10 @@
 必须使用具有足够权限的用户帐户。</value>
   </data>
   <data name="AD_JOIN_DOMAIN_BLURB_SHORT" xml:space="preserve">
-    <value>输入完全限定 AD 域名以及具有足够权限的用户名和密码，以将服务器添加到域中。</value>
+    <value>输入完全限定的 AD 域名，以及具有足够的向域中添加服务器权限的用户名和密码。</value>
   </data>
   <data name="AD_JOIN_DOMAIN_BLURB_SHORT_HOST" xml:space="preserve">
-    <value>输入完全限定 AD 域名以及具有足够权限的用户名和密码，以将服务器添加到域中。</value>
+    <value>输入完全限定的 AD 域名，以及具有足够的向域中添加服务器权限的用户名和密码。</value>
   </data>
   <data name="AD_LEAVE_CONFIRM" xml:space="preserve">
     <value>您要从 AD 域“{1}”中删除“{0}”。使用 AD 进行身份验证的所有用户都将断开连接。
@@ -1733,7 +1733,8 @@
     <value>存储吞吐量警报</value>
   </data>
   <data name="ALERT_ALARM_STORAGE_DESCRIPTION" xml:space="preserve">
-    <value>在过去 {3}内存储库“{1}”上{0}的总读取和写入吞吐量为 {2}。此警报设置为在总吞吐量超过 {4} 时触发。</value>
+    <value>在过去 {3}内存储库“{1}”上{0}的总读取和写入吞吐量为 {2}。
+此警报设置为在总吞吐量超过 {4} 时触发。</value>
   </data>
   <data name="ALERT_CAP_LABEL" xml:space="preserve">
     <value>(显示前 {0} 个条目)</value>
@@ -1866,9 +1867,6 @@
   <data name="APPLYING_PATCH" xml:space="preserve">
     <value>正在将更新“{0}”应用到服务器“{1}”...</value>
   </data>
-  <data name="APPLYING_UPDATES" xml:space="preserve">
-    <value>正在将 {0} 个更新应用到 {1} 个服务器</value>
-  </data>
   <data name="APPLYLICENSE_APPLIED" xml:space="preserve">
     <value>已应用许可证</value>
   </data>
@@ -1952,11 +1950,17 @@
   <data name="ASSIGNED_PROTECTION_POLICY" xml:space="preserve">
     <value>已分配保护策略。</value>
   </data>
+  <data name="ASSIGNED_VMSS_POLICY" xml:space="preserve">
+    <value>已分配快照计划。</value>
+  </data>
   <data name="ASSIGNED_VM_APPLIANCE" xml:space="preserve">
     <value>已分配 vApp。</value>
   </data>
   <data name="ASSIGNING_PROTECTION_POLICY" xml:space="preserve">
     <value>正在分配保护策略...</value>
+  </data>
+  <data name="ASSIGNING_VMSS_POLICY" xml:space="preserve">
+    <value>正在分配至快照计划...</value>
   </data>
   <data name="ASSIGNING_VM_APPLIANCE" xml:space="preserve">
     <value>正在分配 vApp...</value>
@@ -1975,6 +1979,15 @@
   </data>
   <data name="ASSIGN_PROTECTION_POLICY_NOAMP" xml:space="preserve">
     <value>分配给 VM 保护策略...</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY" xml:space="preserve">
+    <value>将 VM 分配至快照计划(&amp;O)</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY_CONTEXT_MENU" xml:space="preserve">
+    <value>将 VM 分配至快照计划</value>
+  </data>
+  <data name="ASSIGN_VMSS_POLICY_NOAMP" xml:space="preserve">
+    <value>将 VM 分配至快照计划...</value>
   </data>
   <data name="ASSIGN_VMS_TO_VAPP" xml:space="preserve">
     <value>将 VM 分配给 vApp“{0}”</value>
@@ -2464,6 +2477,9 @@
   <data name="CHANGE_SERVER_PASSWORD" xml:space="preserve">
     <value>更改服务器密码...</value>
   </data>
+  <data name="CHANGE_VMSS_POLICY" xml:space="preserve">
+    <value>将 VM 分配至快照计划</value>
+  </data>
   <data name="CHANGE_VMS_APPLIANCE" xml:space="preserve">
     <value>将 VM 分配给 vApp</value>
   </data>
@@ -2489,6 +2505,14 @@
     <value>VM {0} 已分配给保护策略 {1}。
     
 是否要改为将此 VM 分配给策略 {2}?</value>
+  </data>
+  <data name="CHANGE_VMS_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
+    <value>已将选定的部分 VM 分配至其他快照计划。
+是否要改为将这些 VM 分配至计划“{0}”?</value>
+  </data>
+  <data name="CHANGE_VM_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
+    <value>已将 VM“{0}”分配至快照计划“{1}”。
+是否要改为将其分配至计划“{2}”?</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>正在检查 VM 迁移状态</value>
@@ -2555,6 +2579,9 @@
   </data>
   <data name="CHOOSE_VMS_VMPP_RUBRIC" xml:space="preserve">
     <value>选中某个复选框可将 VM 添加到保护策略；取消选中某个复选框可将 VM 从策略中删除。</value>
+  </data>
+  <data name="CHOOSE_VMS_VMSS_RUBRIC" xml:space="preserve">
+    <value>选中用于将 VM 添加到快照计划的复选框；取消选中该复选框会将其从计划中删除。</value>
   </data>
   <data name="CLEAR_SEARCH" xml:space="preserve">
     <value>清除搜索</value>
@@ -3030,7 +3057,7 @@
     <value>连接服务器</value>
   </data>
   <data name="CONNECT_TO_SERVER_BLURB" xml:space="preserve">
-    <value>输入用户名和密码以连接该服务器。</value>
+    <value>输入用户名和密码以连接至此服务器。</value>
   </data>
   <data name="CONSOLE" xml:space="preserve">
     <value>控制台</value>
@@ -3445,6 +3472,9 @@
   <data name="CREATED_VMPP" xml:space="preserve">
     <value>已创建 VM 保护策略“{0}”。</value>
   </data>
+  <data name="CREATED_VMSS" xml:space="preserve">
+    <value>已创建快照计划“{0}”。</value>
+  </data>
   <data name="CREATED_VM_APPLIANCE" xml:space="preserve">
     <value>已创建 vApp“{0}”。</value>
   </data>
@@ -3520,6 +3550,9 @@
   <data name="CREATING_VMPP" xml:space="preserve">
     <value>正在创建 VM 保护策略“{0}”...</value>
   </data>
+  <data name="CREATING_VMSS" xml:space="preserve">
+    <value>正在创建快照计划“{0}”...</value>
+  </data>
   <data name="CREATING_VM_APPLIANCE" xml:space="preserve">
     <value>正在创建 vApp“{0}”...</value>
   </data>
@@ -3567,6 +3600,9 @@
   </data>
   <data name="CURRENT_POLICY" xml:space="preserve">
     <value>当前策略</value>
+  </data>
+  <data name="CURRENT_SCHEDULE" xml:space="preserve">
+    <value>当前计划</value>
   </data>
   <data name="CURRENT_VAPP" xml:space="preserve">
     <value>当前 vApp</value>
@@ -3745,6 +3781,9 @@
   <data name="DELETED_VMPP" xml:space="preserve">
     <value>已删除 VM 保护策略。</value>
   </data>
+  <data name="DELETED_VMSS" xml:space="preserve">
+    <value>已删除快照计划。</value>
+  </data>
   <data name="DELETED_VM_APPLIANCES" xml:space="preserve">
     <value>已删除 vApp。</value>
   </data>
@@ -3883,6 +3922,9 @@
   <data name="DELETING_VMPP" xml:space="preserve">
     <value>正在删除 VM 保护策略“{0}”</value>
   </data>
+  <data name="DELETING_VMSS" xml:space="preserve">
+    <value>正在删除快照计划“{0}”</value>
+  </data>
   <data name="DELETING_VM_APPLIANCE" xml:space="preserve">
     <value>正在删除 vApp“{0}”</value>
   </data>
@@ -3973,6 +4015,9 @@
   <data name="DISABLED_VMPP" xml:space="preserve">
     <value>已禁用 VM 保护策略“{0}”。</value>
   </data>
+  <data name="DISABLED_VMSS" xml:space="preserve">
+    <value>已禁用快照计划“{0}”。</value>
+  </data>
   <data name="DISABLE_HA" xml:space="preserve">
     <value>禁用高可用性</value>
   </data>
@@ -4014,6 +4059,9 @@
   </data>
   <data name="DISABLING_VMPP" xml:space="preserve">
     <value>正在禁用 VM 保护策略“{0}”...</value>
+  </data>
+  <data name="DISABLING_VMSS" xml:space="preserve">
+    <value>正在禁用快照计划“{0}”...</value>
   </data>
   <data name="DISABLING_WLB" xml:space="preserve">
     <value>正在暂停 Workload Balancing </value>
@@ -4728,7 +4776,7 @@
     <value>电子邮件警报</value>
   </data>
   <data name="EMAIL_ALERTS_TITLE" xml:space="preserve">
-    <value>为 VM 保护警报配置电子邮件通知</value>
+    <value>配置策略警报的电子邮件通知</value>
   </data>
   <data name="EMAIL_OPTIONS" xml:space="preserve">
     <value>电子邮件选项</value>
@@ -4747,6 +4795,9 @@
   </data>
   <data name="ENABLED_VMPP" xml:space="preserve">
     <value>已启用 VM 保护策略“{0}”。</value>
+  </data>
+  <data name="ENABLED_VMSS" xml:space="preserve">
+    <value>已启用快照计划“{0}”。</value>
   </data>
   <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
     <value>启用高可用性(&amp;E)...</value>
@@ -4786,6 +4837,9 @@
   </data>
   <data name="ENABLING_VMPP" xml:space="preserve">
     <value>正在启用 VM 保护策略“{0}”...</value>
+  </data>
+  <data name="ENABLING_VMSS" xml:space="preserve">
+    <value>正在启用快照计划“{0}”...</value>
   </data>
   <data name="ENABLING_WLB" xml:space="preserve">
     <value>正在恢复 Workload Balancing </value>
@@ -4999,6 +5053,9 @@
   </data>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>准备主机时出错</value>
+  </data>
+  <data name="ERROR_PROXY_AUTHENTICATION" xml:space="preserve">
+    <value>无法在“{0}”对代理服务器进行身份验证。</value>
   </data>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
     <value>[XenCenter] 在启动 PuTTY 时遇到问题。</value>
@@ -5403,9 +5460,6 @@
   <data name="FINISH_PAGE_VMNAME" xml:space="preserve">
     <value>VM 名称:</value>
   </data>
-  <data name="FINISH_TITLE" xml:space="preserve">
-    <value>创建新的 VM 保护策略</value>
-  </data>
   <data name="FLOPPY_DRIVE_LABEL_NUMBERED" xml:space="preserve">
     <value>软盘 {0}:</value>
   </data>
@@ -5540,6 +5594,9 @@
   </data>
   <data name="GENERAL_PAGE_VMPP_SETTINGS" xml:space="preserve">
     <value>输入 VM 保护策略名称和可选说明。</value>
+  </data>
+  <data name="GENERAL_PAGE_VMSS_SETTINGS" xml:space="preserve">
+    <value>输入快照计划的名称和可选说明。</value>
   </data>
   <data name="GENERAL_PAGE_VM_APPLIANCE_SETTINGS" xml:space="preserve">
     <value>输入 vApp 名称和可选说明。</value>
@@ -5706,17 +5763,10 @@
   <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>为此池中的 VM 配置高可用性重启优先级、重启顺序和延迟间隔</value>
   </data>
-  <data name="HAWIZ_SUMMARY_NEW" xml:space="preserve">
-    <value>检测信号 SR:   {0}
 
-故障容错:   {1}
 
-重新启动:   {2}
 
-在可能时重新启动:   {3}
 
-不重新启动:   {4}</value>
-  </data>
   <data name="HA_ASSIGN_PRIORITIES_MIXED_PROTECTION_LEVELS" xml:space="preserve">
     <value>(多个值)</value>
   </data>
@@ -5983,7 +6033,7 @@
     <value>需要在 [Citrix] Insight Services 中进行身份验证才能启用此功能。[XenCenter] 检测到之前已成功为其他已连接的池之一进行身份验证。可以选择重复使用或再次进行身份验证。</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
-    <value>需要在 [Citrix] Insight Services 中进行身份验证才能启用此功能。请通过提供 MyCitrix 凭据进行注册(请参阅 http://www.citrix.com/welcome.html)。这些凭据只能用于获取上载令牌，不存储在此计算机或您的服务器上。</value>
+    <value>需要在 [Citrix] Insight Services 中进行身份验证才能启用此功能。请通过提供 MyCitrix 凭据进行注册(请参阅 {0})。这些凭据只能用于获取上载令牌，不存储在此计算机或您的服务器上。</value>
   </data>
   <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
     <value>好的，启用运行状况检查</value>
@@ -6266,7 +6316,7 @@
     <value>无法连接 iLO 服务。请检查配置。</value>
   </data>
   <data name="ILO_POWERON_FAILED" xml:space="preserve">
-    <value>iLO 凭据不正确</value>
+    <value>iLO 开机请求失败</value>
   </data>
   <data name="IMAGE_DEFINITION_PAGE_TEXT" xml:space="preserve">
     <value>VM 定义</value>
@@ -6807,7 +6857,7 @@ SCSI ID: {2}
     <value>独立</value>
   </data>
   <data name="JOINING_AD" xml:space="preserve">
-    <value>请输入具有足够权限的用户名和密码，以便将服务器添加到域“{0}”中。</value>
+    <value>请输入具有足够的向域“{0}”中添加服务器权限的用户名和密码。</value>
   </data>
   <data name="KEEP_WAITING_BUTTON_LABEL" xml:space="preserve">
     <value>继续等待(&amp;K)</value>
@@ -6837,7 +6887,7 @@ SCSI ID: {2}
     <value>许可证管理器</value>
   </data>
   <data name="LEAVING_AD" xml:space="preserve">
-    <value>输入具有足够权限的用户名和密码，以便从 AD 删除计算机帐户。即使无法删除计算机帐户，也将禁用身份验证。</value>
+    <value>输入具有足够的从 AD 中删除计算机帐户权限的用户名和密码。即使无法删除计算机帐户，也将禁用身份验证。</value>
   </data>
   <data name="LEFT_ALT" xml:space="preserve">
     <value>左 Alt 键</value>
@@ -7848,6 +7898,9 @@ SCSI ID: {2}
   <data name="MUST_SELECT_NETWORK" xml:space="preserve">
     <value>必须选择一个网络</value>
   </data>
+  <data name="MY_CITRIX_CREDENTIALS_URL" xml:space="preserve">
+    <value>http://www.citrix.com/welcome.html</value>
+  </data>
   <data name="NAME" xml:space="preserve">
     <value>名称</value>
   </data>
@@ -8050,7 +8103,7 @@ SCSI ID: {2}
     <value>不能将免费版 [XenServer] 添加到使用 [XenServer] Advanced Edition 或更高版本的许可证的池中</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
-    <value>此服务器有正在运行或已挂起的 VM</value>
+    <value>此服务器具有正在运行的 VM</value>
   </data>
   <data name="NEWPOOL_HAS_SHARED_STORAGE" xml:space="preserve">
     <value>此服务器有共享存储</value>
@@ -8728,6 +8781,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 
 强烈建议您首先单击“取消”并将最新版本的软件包应用到所有服务器，然后再创建池。</value>
   </data>
+  <data name="NEW_SCHEDULE" xml:space="preserve">
+    <value>新建计划(&amp;N)...</value>
+  </data>
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>新搜索</value>
   </data>
@@ -8755,6 +8811,18 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NEW_UPDATE_AVAILABLE" xml:space="preserve">
     <value>新更新可用 - {0}</value>
+  </data>
+  <data name="NEW_VMPP_PAGE_TEXT" xml:space="preserve">
+    <value>使用此向导可定义 VM 保护策略，这样可以确保通过自动执行的计划快照作业对关键 VM 进行保护。</value>
+  </data>
+  <data name="NEW_VMPP_PAGE_TEXT_MORE" xml:space="preserve">
+    <value>开始之前，请输入策略的名称和说明(可选)，然后单击“下一步”。</value>
+  </data>
+  <data name="NEW_VMSS_PAGE_TEXT" xml:space="preserve">
+    <value>使用此向导可定义为您的 VM 创建自动执行的计划快照作业的快照计划。</value>
+  </data>
+  <data name="NEW_VMSS_PAGE_TEXT_MORE" xml:space="preserve">
+    <value>开始之前，请输入计划的名称和说明(可选)，然后单击“下一步”。</value>
   </data>
   <data name="NEW_VM_APPLIANCE" xml:space="preserve">
     <value>新建 vApp(&amp;N)...</value>
@@ -8915,9 +8983,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
     <value>本地磁盘上的 VM 将阻止磁盘重新分区。
 
-新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] [BRANDING_VERSION_7_0] 中可用。
+新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] [BRANDING_VERSION_7_0] 及更高版本中可用。
 
-但是，本地存储上存在 VM，因此将保留当前的分区方案。要在升级到 [XenServer] [BRANDING_VERSION_7_0] 时从重新分区中获益，必须先从本地存储中删除 VM。</value>
+但是，本地存储上存在 VM，因此将保留当前的分区方案。要在升级到 [XenServer] [BRANDING_VERSION_7_0] 或更高版本时从重新分区中获益，必须先移动本地存储中的 VM。</value>
   </data>
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
     <value>{0}: 本地磁盘上的 VM 将阻止磁盘重新分区。</value>
@@ -8925,7 +8993,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
     <value>本地存储的磁盘大小阻止重新分区。
 
-新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] [BRANDING_VERSION_7_0] 中可用。
+新磁盘分区方案在包括更大的 dom0 和备份分区以及用于日志记录、交换和 UEFI 的专用分区的 [XenServer] [BRANDING_VERSION_7_0] 及更高版本中可用。
 
 但是，由于空间不足，无法执行重新分区，因此将保留当前的分区方案。</value>
   </data>
@@ -9295,6 +9363,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES" xml:space="preserve">
     <value>未许可此服务器执行自动更新</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE" xml:space="preserve">
+    <value>此服务器无法访问</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS" xml:space="preserve">
+    <value>无法对 [XenServer] 的 {0} 和 {1} 版本应用相同的更新</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>已应用更新</value>
   </data>
@@ -9302,12 +9376,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>更新不适用</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
-    <value>选择要更新的一个或多个池或独立主机。
-无法通过自动更新更新显示为灰色的服务器。</value>
+    <value>选择要更新的一个或多个池或独立服务器。
+无法通过自动更新更新的服务器在此列表中显示为已禁用。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT" xml:space="preserve">
-    <value>从可用服务器列表中选择一个或多个服务器。
-无法应用所选更新的服务器在此列表中显示为已禁用。</value>
+    <value>选择要应用所选更新的一个或多个服务器。
+无法应用此更新的服务器在此列表中显示为已禁用。</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION" xml:space="preserve">
+    <value>选择要应用选定更新的一个或多个池或独立服务器。
+无法应用此更新的服务器在此列表中显示为已禁用。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE" xml:space="preserve">
     <value>无法通过自动更新更新此服务器</value>
@@ -9589,6 +9667,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="POLICY_NAME" xml:space="preserve">
     <value>策略名称</value>
+  </data>
+  <data name="POLICY_NAME_FIELD_TEXT" xml:space="preserve">
+    <value>策略名称(&amp;M):</value>
   </data>
   <data name="POLICY_NAME_TITLE" xml:space="preserve">
     <value>要怎样命名此策略?</value>
@@ -9955,6 +10036,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="RBAC_WARNING_VMPP" xml:space="preserve">
     <value>权限为“{0}”的用户无法创建 VM 保护策略。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
+  <data name="RBAC_WARNING_VMSS" xml:space="preserve">
+    <value>{0} 用户无法创建快照计划。请使用具有足够权限的其他用户登录并重试。</value>
+  </data>
   <data name="RBAC_WARNING_VM_APPLIANCE" xml:space="preserve">
     <value>权限为“{0}”的用户无法创建 vApp。请以具有足够权限的其他用户身份登录，然后重试。</value>
   </data>
@@ -10028,6 +10112,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="REMOVED_VMS_FROM_POLICY" xml:space="preserve">
     <value>已从 VM 保护策略中删除</value>
   </data>
+  <data name="REMOVED_VMS_FROM_VMSS" xml:space="preserve">
+    <value>已从快照计划中删除</value>
+  </data>
   <data name="REMOVE_CRASHDUMP_FILES" xml:space="preserve">
     <value>删除故障转储文件</value>
   </data>
@@ -10097,11 +10184,17 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="REMOVE_VMS_FROM_POLICY" xml:space="preserve">
     <value>从 VM 保护策略 {1} 中删除 VM</value>
   </data>
+  <data name="REMOVE_VMS_FROM_VMSS" xml:space="preserve">
+    <value>从快照计划“{1}”中删除 VM</value>
+  </data>
   <data name="REMOVE_VM_FROM_APPLIANCE" xml:space="preserve">
     <value>从 vApp“{1}”删除 VM“{0}”</value>
   </data>
   <data name="REMOVE_VM_FROM_POLICY" xml:space="preserve">
     <value>从 VM 保护策略 {1} 中删除 VM {0}</value>
+  </data>
+  <data name="REMOVE_VM_FROM_VMSS" xml:space="preserve">
+    <value>从快照计划“{1}”中删除 VM“{0}”</value>
   </data>
   <data name="REMOVING_FROM_FOLDER" xml:space="preserve">
     <value>正在从文件夹删除</value>
@@ -10120,6 +10213,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="REMOVING_VMS_FROM_POLICY" xml:space="preserve">
     <value>正在从 VM 保护策略中删除</value>
+  </data>
+  <data name="REMOVING_VMS_FROM_VMSS" xml:space="preserve">
+    <value>正在从快照计划中删除</value>
   </data>
   <data name="RENAMED" xml:space="preserve">
     <value>已重命名</value>
@@ -10328,7 +10424,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>正在运行策略“{0}”</value>
   </data>
   <data name="RUN_POLICY_STARTED" xml:space="preserve">
-    <value>VM 保护策略已启动</value>
+    <value>策略已启动</value>
   </data>
   <data name="RUN_PRECHECKS_WITH_ACCESS_KEY" xml:space="preserve">
     <value>运行预检查(&amp;R)</value>
@@ -10392,12 +10488,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SCAN_IN_PROGRESS_TOOLTIP" xml:space="preserve">
     <value>该 SR 正在进行某项扫描</value>
-  </data>
-  <data name="SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
-    <value>池“{0}”中已定义 VM 保护策略({2} 个 VM 中有 {1} 个当前受到保护):</value>
-  </data>
-  <data name="SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
-    <value>服务器 {0} 中已定义 VM 保护策略(当前受保护的 VM 数为 {1}，总 VM 数为 {2}):</value>
   </data>
   <data name="SEARCHBOX_TOOLTIP" xml:space="preserve">
     <value>在资源窗格中查找资源</value>
@@ -10700,6 +10790,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SMALLER_THAN" xml:space="preserve">
     <value>小于</value>
   </data>
+  <data name="SMB_ISO_STORAGE_ALREADY_ATTACHED" xml:space="preserve">
+    <value>此 SMB ISO 存储已连接到“{0}”</value>
+  </data>
   <data name="SNAPSHOTS" xml:space="preserve">
     <value>快照</value>
   </data>
@@ -10789,6 +10882,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>使用正确的用户名和密码重试。</value>
+  </data>
+  <data name="SOLUTION_CHECK_PROXY" xml:space="preserve">
+    <value>检查“{0}”上的代理服务器是否已正确配置以及 [XenCenter] 的连接设置是否正确，然后重试。</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
     <value>检查确认已在“{0}”上正确配置 [XenServer]，然后重试。</value>
@@ -11024,6 +11120,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="STATUS_FILTER_IN_PROGRESS" xml:space="preserve">
     <value>进行中</value>
   </data>
+  <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
+    <value>输入您的 MyCitrix 凭据(请参阅 {0})。这些凭据将仅用于在 [Citrix] Insight Services 中进行一次身份验证，不会存储在此计算机或您的服务器上。</value>
+  </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>打包服务器状态报告时出错。可能只能获取部分报告</value>
   </data>
@@ -11120,7 +11219,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>日</value>
   </data>
-  <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
+  <data name="SUPP_PACK_DESCRIPTION" xml:space="preserve">
     <value>{0} (版本: {1})</value>
   </data>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
@@ -11253,6 +11352,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="THE_SNAPSHOT" xml:space="preserve">
     <value>快照“{0}”</value>
+  </data>
+  <data name="THIS_VM_IS_IN_VMSS" xml:space="preserve">
+    <value>此 VM 当前属于快照计划“{0}”的一部分</value>
+  </data>
+  <data name="THIS_VM_IS_NOT_IN_VMSS" xml:space="preserve">
+    <value>此 VM 当前不属于某个快照计划的一部分</value>
   </data>
   <data name="THIS_VM_IS_NOT_PROTECTED" xml:space="preserve">
     <value>此 VM 当前未通过 VM 保护策略进行保护</value>
@@ -11758,6 +11863,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_RESUME_VM" xml:space="preserve">
     <value>单击此处恢复该 VM</value>
   </data>
+  <data name="UPDATES_WIZARD_RUNNING_PRECHECK" xml:space="preserve">
+    <value>在 {1} 中执行 {0} 的预检查...</value>
+  </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>存储库“{0}”</value>
   </data>
@@ -11766,6 +11874,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_TOOLS_CD" xml:space="preserve">
     <value>VM“{0}”的驱动器中装有工具 CD。</value>
+  </data>
+  <data name="UPDATES_WIZARD_UPLOADING_UPDATE" xml:space="preserve">
+    <value>正在将更新 {0} 上载到 {1}...</value>
   </data>
   <data name="UPDATES_WIZARD_VM_HAS_VGPU" xml:space="preserve">
     <value>VM“{0}”有一个或多个虚拟 GPU。</value>
@@ -11813,7 +11924,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>用于安装更新的临时虚拟磁盘</value>
   </data>
   <data name="UPDATE_WAS_NOT_COMPLETED" xml:space="preserve">
-    <value>更新 {0} 未成功完成</value>
+    <value>更新 {0} 的安装未成功完成</value>
   </data>
   <data name="UPDATE_WAS_SUCCESSFULLY_INSTALLED" xml:space="preserve">
     <value>更新 {0} 已成功安装</value>
@@ -12000,6 +12111,13 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 
 要了解与 [XenServer] 基于角色的访问控制功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
+  <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
+    <value>升级您的 [XenServer] 许可证以启用 VM 计划快照功能。通过 VM 计划快照功能，可以为您的关键 VM 创建自动快照。</value>
+  </data>
+  <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
+    <value>
+要了解与 [XenServer] VM 计划快照功能有关的更多信息或者启动 XenServer 试用版，请单击下面的按钮。</value>
+  </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>升级您的 [XenServer] 许可证以启用 vApp。通过 vApp 功能，您可以将 VM 放置到组中，从而允许这些 VM 作为一个单元来启动或停止，同时还允许这些 VM 在主生产站点出现灾难性故障时在 DR 站点上轻松恢复。</value>
   </data>
@@ -12177,6 +12295,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
     <value>{0} 虚拟 GPU (每个 GPU {1} 个，{2}，{3} 个显示器)</value>
   </data>
+  <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
+    <value>{0} 虚拟 GPU (每个 GPU {1} 个)</value>
+  </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>在整个 GPU 中直通</value>
   </data>
@@ -12200,6 +12321,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VIEW_TAG_MENU_OPTION" xml:space="preserve">
     <value>查看标记...</value>
+  </data>
+  <data name="VIEW_VMSS_POLICIES" xml:space="preserve">
+    <value>查看快照计划</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
     <value>虚拟网络设备更改将在下次重新启动 VM 时生效。</value>
@@ -12279,14 +12403,116 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VMPP" xml:space="preserve">
     <value>VM 保护策略</value>
   </data>
+  <data name="VMPP_DIALOG_TEXT" xml:space="preserve">
+    <value>通过保护策略可保护重要的 VM，该策略将定期按计划生成快照并(可选)将这些快照存档到 CIFS 或 NFS 共享中。</value>
+  </data>
+  <data name="VMPP_DIALOG_TITLE" xml:space="preserve">
+    <value>VM 保护策略</value>
+  </data>
+  <data name="VMPP_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
+    <value>发送有关 VM 保护作业警报的电子邮件通知(&amp;E)</value>
+  </data>
+  <data name="VMPP_EMAIL_PAGE_TEXT" xml:space="preserve">
+    <value>XenServer 可以在引发了与 VM 保护作业有关的警报时向您发送电子邮件通知，例如创建或存档 VM 快照时或者快照生成或存档操作失败时。</value>
+  </data>
+  <data name="VMPP_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
+    <value>当我单击“完成”时运行新 VM 保护作业(&amp;R)</value>
+  </data>
+  <data name="VMPP_FINISH_PAGE_TEXT" xml:space="preserve">
+    <value>检查下面的新 VM 保护策略，如果需要更改任何设置，请单击“上一步”，或者单击“完成”以创建新策略。</value>
+  </data>
+  <data name="VMPP_FINISH_TITLE" xml:space="preserve">
+    <value>创建新策略</value>
+  </data>
+  <data name="VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
+    <value>池“{0}”中已定义 VM 保护策略({2} 个 VM 中有 {1} 个当前受到保护):</value>
+  </data>
+  <data name="VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
+    <value>服务器 {0} 中已定义 VM 保护策略(当前受保护的 VM 数为 {1}，总 VM 数为 {2}):</value>
+  </data>
+  <data name="VMPP_TYPE" xml:space="preserve">
+    <value>保护策略</value>
+  </data>
+  <data name="VMPP_WIZARD_TITLE" xml:space="preserve">
+    <value>新建 VM 保护策略</value>
+  </data>
   <data name="VMS" xml:space="preserve">
     <value>VM</value>
+  </data>
+  <data name="VMSS_ALERT_DETAILS" xml:space="preserve">
+    <value>详细信息:</value>
+  </data>
+  <data name="VMSS_ALERT_VM_ERROR_FORMAT" xml:space="preserve">
+    <value>{0}。{1}: {2}</value>
+  </data>
+  <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
+    <value>快照计划(&amp;U)...</value>
+  </data>
+  <data name="VMSS_DIALOG_TEXT" xml:space="preserve">
+    <value>为您的 VM 创建快照计划。</value>
+  </data>
+  <data name="VMSS_DIALOG_TITLE" xml:space="preserve">
+    <value>快照计划</value>
+  </data>
+  <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
+    <value>发送与快照计划作业警报有关的电子邮件通知(&amp;E)</value>
+  </data>
+  <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
+    <value>XenServer 可以在引发了与快照计划作业有关的警报时向您发送电子邮件通知，例如创建 VM 快照时或快照操作失败时。</value>
+  </data>
+  <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
+    <value>当我单击“完成”时运行新快照计划作业(&amp;R)</value>
+  </data>
+  <data name="VMSS_FINISH_PAGE_TEXT" xml:space="preserve">
+    <value>检查下面的新快照计划，如果要更改任何设置，请单击“上一步”，或者单击“完成”以创建新计划。</value>
+  </data>
+  <data name="VMSS_FINISH_TITLE" xml:space="preserve">
+    <value>创建新计划</value>
+  </data>
+  <data name="VMSS_MAIN_MENU" xml:space="preserve">
+    <value>VM 快照计划(&amp;H)...</value>
+  </data>
+  <data name="VMSS_NAME" xml:space="preserve">
+    <value>计划名称</value>
+  </data>
+  <data name="VMSS_NAME_FIELD_TEXT" xml:space="preserve">
+    <value>计划名称(&amp;M):</value>
+  </data>
+  <data name="VMSS_NAME_TITLE" xml:space="preserve">
+    <value>您想如何命名此计划?</value>
+  </data>
+  <data name="VMSS_POLICY_SUMMARY" xml:space="preserve">
+    <value>作业名称:\r\n    {0}\r\n\r\n所选 VM:\r\n    {1}\r\n\r\n快照类型:\r\n    {2}\r\n\r\n计划:\r\n    {3}\r\n</value>
+  </data>
+  <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL" xml:space="preserve">
+    <value>在池“{0}”中定义的快照计划(计划中当前包含 {1} 个 VM，共 {2} 个):</value>
+  </data>
+  <data name="VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER" xml:space="preserve">
+    <value>在服务器“{0}”中定义的快照计划(计划中当前包含 {1} 个 VM，共 {2} 个):</value>
+  </data>
+  <data name="VMSS_TYPE" xml:space="preserve">
+    <value>计划</value>
+  </data>
+  <data name="VMSS_VMS" xml:space="preserve">
+    <value>快照计划中的 VM</value>
+  </data>
+  <data name="VMSS_VMS_TITLE" xml:space="preserve">
+    <value>选择要为其计划快照的 VM</value>
+  </data>
+  <data name="VMSS_WIZARD_TITLE" xml:space="preserve">
+    <value>新建快照计划</value>
   </data>
   <data name="VMS_IN_POOL" xml:space="preserve">
     <value>池“{0}”中的 VM:</value>
   </data>
   <data name="VMS_IN_SERVER" xml:space="preserve">
     <value>服务器 {0} 中的 VM:</value>
+  </data>
+  <data name="VMS_MANY" xml:space="preserve">
+    <value>{0} 个 VM</value>
+  </data>
+  <data name="VMS_ONE" xml:space="preserve">
+    <value>1 个 VM</value>
   </data>
   <data name="VM_ALREADY_SUSPENDED" xml:space="preserve">
     <value>此 VM 已挂起。</value>
@@ -12488,6 +12714,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="VM_SHUT_DOWN" xml:space="preserve">
     <value>该 VM 已关闭。</value>
+  </data>
+  <data name="VM_SNAPSHOT_SCHEDULE_FAILED" xml:space="preserve">
+    <value>{0} ({1} 个 VM 失败)</value>
   </data>
   <data name="VM_SUCCESSFULLY_CREATED" xml:space="preserve">
     <value>已成功创建 VM</value>

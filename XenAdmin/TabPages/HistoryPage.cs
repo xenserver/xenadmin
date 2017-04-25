@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -292,12 +292,12 @@ namespace XenAdmin.TabPages
 
             if (row.Expanded)
             {
-                row.Cells[columnExpander.Index].Value = Properties.Resources.contracted_triangle;
+                row.Cells[columnExpander.Index].Value = Images.StaticImages.contracted_triangle;
                 row.Cells[columnMessage.Index].Value = row.Action.GetTitle();
             }
             else
             {
-                row.Cells[columnExpander.Index].Value = Properties.Resources.expanded_triangle;
+                row.Cells[columnExpander.Index].Value = Images.StaticImages.expanded_triangle;
                 row.Cells[columnMessage.Index].Value = row.Action.GetDetails();
             }
             row.Expanded = !row.Expanded;
@@ -540,12 +540,12 @@ namespace XenAdmin.TabPages
 
                 if (Expanded)
                 {
-                    expanderCell.Value = Properties.Resources.expanded_triangle;
+                    expanderCell.Value = Images.StaticImages.expanded_triangle;
                     messageCell.Value = Action.GetDetails();
                 }
                 else
                 {
-                    expanderCell.Value = Properties.Resources.contracted_triangle;
+                    expanderCell.Value = Images.StaticImages.contracted_triangle;
                     messageCell.Value = Action.GetTitle();
                 }
                 locationCell.Value = Action.GetLocation();

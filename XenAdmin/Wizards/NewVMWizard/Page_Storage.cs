@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -320,7 +320,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                if (!Template.DefaultTemplate && !CloneCheckBox.Checked)
+                if (!Template.DefaultTemplate && !Template.is_a_snapshot && !CloneCheckBox.Checked)
                 {
                     // if target disks are all on the same SR then use that SR
                     // otherwise iterate through disks and find first target disks that is on same SR as source disk

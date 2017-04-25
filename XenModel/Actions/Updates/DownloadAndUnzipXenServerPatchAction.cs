@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -87,6 +87,8 @@ namespace XenAdmin.Actions
                 {
                     try
                     {
+                        client.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
+
                         //register download events
                         client.DownloadProgressChanged += client_DownloadProgressChanged;
                         client.DownloadFileCompleted += client_DownloadFileCompleted;

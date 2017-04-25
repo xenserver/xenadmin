@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -73,10 +73,14 @@ namespace XenAdmin.Actions
             {
                 System.Diagnostics.Trace.Assert(ApiMethodsToRoleCheck.Count == 0);  // shouldn't set ApiMethodsToRoleCheck for PureAsyncAction: it will be ignored
                 RbacMethodList rbacMethods = new RbacMethodList();
+                var session = Session;
                 Session = new Session(RbacCollectorProxy.GetProxy(rbacMethods), Connection);
                 base.SuppressProgressReport = true;
+                var startDescription = Description;
                 Run();
                 base.SuppressProgressReport = false;
+                Session = session; // reset Session
+                Description = startDescription; // reset Description;
                 return rbacMethods;
             }
         }

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -61,6 +61,14 @@ namespace XenAPI
             {
                 return Connection.ResolveAll(PGPUs).Any(pgpu => pgpu.HasVGpu);
             }
+        }
+
+        /// <summary>
+        /// Has at least one supported_VGPU_type that is passthrough
+        /// </summary>
+        public bool HasPassthrough
+        {
+            get { return Connection.ResolveAll(supported_VGPU_types).Any(supportedType => supportedType.IsPassthrough); }
         }
 
 

@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -58,6 +58,7 @@ namespace XenAdmin.Dialogs
 			m_uri = uri;
 
 			m_webClient = new WebClient();
+            m_webClient.Proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
 			m_webClient.DownloadFileCompleted += webclient_DownloadFileCompleted;
 			m_webClient.DownloadProgressChanged += webclient_DownloadProgressChanged;
 		}
@@ -202,16 +203,6 @@ namespace XenAdmin.Dialogs
 				m_tlpProgress.Visible = true;
 				m_progressBar.Value = 0;
 				m_buttonDownload.Enabled = false;
-
-				Uri proxyUri = m_webClient.Proxy.GetProxy(m_uri);
-
-				if (proxyUri != m_uri)
-				{
-					DownloadedPath = null;
-					m_tlpProgress.Visible = false;
-					ShowDownloadError(Messages.PROXY_SERVERS_NOT_SUPPORTED);
-					return;
-				}
 
 				DownloadedPath = Path.Combine(m_textBoxWorkspace.Text, Path.GetFileName(m_uri.AbsolutePath));
 				

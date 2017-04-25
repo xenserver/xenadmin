@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -63,6 +63,7 @@ namespace XenAdmin.ConsoleView
         private const int RDP_POLL_INTERVAL = 30000;
         public const int RDP_PORT = 3389;
         private const int VNC_PORT = 5900;
+        private const int CONSOLE_SIZE_OFFSET = 6;
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -520,13 +521,12 @@ namespace XenAdmin.ConsoleView
 
             bool wasFocused = false;
             this.Controls.Clear();
-
-            Size oldSize = new Size(1024, 768);
-
+            //console size with some offset to accomodate focus rectangle
+            Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET); ;
+                
             // Kill the old client.
             if (RemoteConsole != null)
             {
-                oldSize = RemoteConsole.DesktopSize;
                 wasFocused = RemoteConsole.ConsoleControl != null && RemoteConsole.ConsoleControl.Focused;
                 RemoteConsole.DisconnectAndDispose();
                 RemoteConsole = null;
@@ -555,11 +555,8 @@ namespace XenAdmin.ConsoleView
                 if (rdpClient == null)
                 {
                     if (this.ParentForm is FullScreenForm)
-                        oldSize = ((FullScreenForm)ParentForm).GetContentSize();
-                    this.AutoScroll = true;
-                    this.AutoScrollMinSize = oldSize;
-
-                    rdpClient = new RdpClient(this, oldSize, ResizeHandler);
+                        currentConsoleSize = ((FullScreenForm)ParentForm).GetContentSize();
+                    rdpClient = new RdpClient(this, currentConsoleSize, ResizeHandler);
 
                     rdpClient.OnDisconnected += new EventHandler(parentVNCTabView.RdpDisconnectedHandler);
                 }
@@ -1385,6 +1382,28 @@ namespace XenAdmin.ConsoleView
                 return false;           
 
             return false;
+        }
+
+        private Size oldSize;
+        public void UpdateRDPResolution(bool fullscreen = false)
+        {
+            if (rdpClient == null)
+                return;
+
+            //no offsets in fullscreen mode because there is no need to accomodate focus border 
+            if (fullscreen)
+            {
+                rdpClient.rdpLocationOffset = new Point(0, 0);
+                rdpClient.Reconnect(this.Size.Width, this.Size.Height);
+            }
+            else 
+            {
+                if (oldSize.Equals(this.Size))
+                    return;
+                rdpClient.rdpLocationOffset = new Point(2, 2);
+                rdpClient.Reconnect(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
+                oldSize = new Size(this.Size.Width, this.Size.Height);
+            }               
         }
     }
 }

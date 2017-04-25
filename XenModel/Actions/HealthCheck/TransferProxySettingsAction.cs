@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -44,16 +44,25 @@ namespace XenAdmin.Actions
         private string proxyAddress;
         private int proxyPort;
         private int timeOut;
-        private bool bypassForLocal;
+        private bool bypassProxyForServers;
+        private bool provideProxyCredentials;
+        private string proxyUsername;
+        private string proxyPassword;
+        private HTTP.ProxyAuthenticationMethod proxyAuthenticationMethod;
 
-        public TransferProxySettingsAction(HTTPHelper.ProxyStyle style, string address, int port, int timeout, bool bypassLocal, bool suppressHistory)
+        public TransferProxySettingsAction(HTTPHelper.ProxyStyle style, string address, int port, int timeout,
+            bool suppressHistory, bool bypassForServer, bool provideCredentials, string username, string password, HTTP.ProxyAuthenticationMethod proxyAuthMethod)
             : base(null, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, suppressHistory)
         {
             proxyStyle = style;
             proxyAddress = address;
             proxyPort = port;
             timeOut = timeout;
-            bypassForLocal = bypassLocal;
+            bypassProxyForServers = bypassForServer;
+            provideProxyCredentials = provideCredentials;
+            proxyUsername = username;
+            proxyPassword = password;
+            proxyAuthenticationMethod = proxyAuthMethod;
         }
 
         private const string HEALTHCHECKSERVICENAME = "XenServerHealthCheck";
@@ -71,7 +80,11 @@ namespace XenAdmin.Actions
                             proxyAddress,
                             proxyPort.ToString(),
                             timeOut.ToString(),
-                            bypassForLocal.ToString()});
+                            bypassProxyForServers.ToString(),
+                            provideProxyCredentials.ToString(),
+                            proxyUsername.ToString(),
+                            proxyPassword.ToString(),
+                            ((Int32)proxyAuthenticationMethod).ToString()});
                     return proxySettings;
                     
                 case HTTPHelper.ProxyStyle.SystemProxy:

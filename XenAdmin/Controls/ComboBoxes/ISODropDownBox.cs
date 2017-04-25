@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -273,7 +273,7 @@ namespace XenAdmin.Controls
             }
         }
 
-        protected virtual void DeregisterEvents()
+        internal virtual void DeregisterEvents()
         {
             if (connection == null)
                 return;

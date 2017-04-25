@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -167,7 +167,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         foreach (var host in hostsToApply)
                         {
                             planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
-                            planActions.AddRange(GetMandatoryActionListForPatch(delayedActionsByHost[host], host, patch));
+                            planActions.AddRange(GetMandatoryActionListForPatch(host, patch));
                             UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
                         }
 
@@ -177,23 +177,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }//patch
                 }
 
-                //add all delayed actions to the end of the actions, per host
-                var delayedActions = new List<PlanAction>();
-                if (delayedActionsByHost.ContainsKey(master))
-                {
-                    delayedActions.AddRange(delayedActionsByHost[master]);
-                }
-                foreach (var kvp in delayedActionsByHost)
-                {
-                    if (kvp.Key != master)
-                    {
-                        delayedActions.AddRange(kvp.Value);
-                    }
-                }
-
                 if (planActions.Count > 0)
                 {
-                    var bgw = new UpdateProgressBackgroundWorker(master, planActions, delayedActions);
+                    var bgw = new UpdateProgressBackgroundWorker(master, planActions, delayedActionsByHost);
                     backgroundWorkers.Add(bgw);
 
                 }
@@ -290,68 +276,133 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
         {
             var bgw = sender as UpdateProgressBackgroundWorker;
+            PlanAction action = null;
 
-            foreach (PlanAction action in bgw.AllActions)
+            try
             {
-                try
+                //running actions (non-delayed)
+                foreach (var a in bgw.PlanActions)
                 {
+                    action = a;
+
                     if (bgw.CancellationPending)
                     {
                         doWorkEventArgs.Cancel = true;
                         return;
                     }
 
-                    InitializePlanAction(bgw, action);
-
-                    bgw.ReportProgress(0, action);
-                    action.Run();
-
-                    Thread.Sleep(1000);
-
-                    bgw.doneActions.Add(action);
-                    bgw.ReportProgress((int)((1.0 / (double)bgw.AllActions.Count) * 100), action);
+                    RunPlanAction(bgw, action);
                 }
-                catch (Exception e)
+
+                // running delayed actions, but skipping the ones that should be skipped
+                // iterating through hosts
+                foreach (var kvp in bgw.DelayedActionsByHost)
                 {
-                    bgw.FailedWithExceptionAction = action;
-                    errorActions.Add(action);
-                    inProgressActions.Remove(action);
+                    var h = kvp.Key;
+                    var actions = kvp.Value;
 
-                    log.Error("Failed to carry out plan.", e);
-                    log.Debug(action.Title);
-
-                    doWorkEventArgs.Result = new Exception(action.Title, e);
-
-                    //this pool failed, we will stop here, but try to remove update files at least
-                    try
+                    //run all restart-alike plan actions
+                    foreach (var a in actions.Where(a => a.IsRestartRelatedPlanAction()))
                     {
-                        var positionOfFailedAction = bgw.AllActions.IndexOf(action);
-                        if (positionOfFailedAction < bgw.AllActions.Count && !(action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction))
-                        {
-                            int pos = positionOfFailedAction;
+                        action = a;
 
-                            if (!(bgw.AllActions[pos] is RemoveUpdateFileFromMasterPlanAction)) //can't do anything if the remove action has failed
+                        if (bgw.CancellationPending)
+                        {
+                            doWorkEventArgs.Cancel = true;
+                            return;
+                        }
+
+                        RunPlanAction(bgw, action);
+                    }
+
+                    //run the rest
+                    foreach (var a in actions.Where(a => !a.IsRestartRelatedPlanAction()))
+                    {
+                        action = a;
+
+                        if (bgw.CancellationPending)
+                        {
+                            doWorkEventArgs.Cancel = true;
+                            return;
+                        }
+
+                        // any non-restart-alike delayed action needs to be run if:
+                        // - this host is pre-Ely and there isn't any restart plan action among the delayed actions, or
+                        // - this host is Ely or above and bgw.AvoidRestartHosts contains the host's uuid (shows that live patching must have succeeded) or there isn't any restart plan action among the delayed actions
+                        if (!Helpers.ElyOrGreater(h) && !actions.Any(pa => pa.IsRestartRelatedPlanAction())
+                            || Helpers.ElyOrGreater(h) && (bgw.AvoidRestartHosts != null && bgw.AvoidRestartHosts.Contains(h.uuid) || !actions.Any(pa => pa.IsRestartRelatedPlanAction())))
+                        {
+                            RunPlanAction(bgw, action);
+                        }
+                        else
+                        {
+                            //skip running it
+
+                            action.Visible = false;
+                            bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action); //still need to report progress, mainly for the progress bar
+                        }
+
+                    }
+                                        
+                }
+            }
+            catch (Exception e)
+            {
+                bgw.FailedWithExceptionAction = action;
+                errorActions.Add(action);
+                inProgressActions.Remove(action);
+
+                log.Error("Failed to carry out plan.", e);
+                log.Debug(action.Title);
+
+                doWorkEventArgs.Result = new Exception(action.Title, e);
+
+                //this pool failed, we will stop here, but try to remove update files at least
+                try
+                {
+                    var positionOfFailedAction = bgw.PlanActions.IndexOf(action);
+
+                    // can try to clean up the host after a failed PlanAction from bgw.PlanActions only
+                    if (positionOfFailedAction != -1 && !(action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction))
+                    {
+                        int pos = positionOfFailedAction;
+
+                        if (!(bgw.PlanActions[pos] is RemoveUpdateFileFromMasterPlanAction)) //can't do anything if the remove action has failed
+                        {
+                            while (++pos < bgw.PlanActions.Count)
                             {
-                                while (++pos < bgw.AllActions.Count)
+                                if (bgw.PlanActions[pos] is RemoveUpdateFileFromMasterPlanAction) //find the next remove
                                 {
-                                    if (bgw.AllActions[pos] is RemoveUpdateFileFromMasterPlanAction) //find the next remove
-                                    {
-                                        bgw.AllActions[pos].Run();
-                                        break;
-                                    }
+                                    bgw.PlanActions[pos].Run();
+                                    break;
                                 }
                             }
                         }
                     }
-                    catch
-                    {
-                        //already in an error case - best effort
-                    }
-
-                    bgw.ReportProgress(0);
-                    break;
                 }
+                catch (Exception ex2)
+                {
+                    //already in an error case - best effort
+
+                    log.Error("Failed to clean up (this was a best effort attempt)", ex2);
+                }
+
+                bgw.ReportProgress(0);
             }
+
+        }
+
+        private static void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
+        {
+            InitializePlanAction(bgw, action);
+
+            bgw.ReportProgress(0, action);
+            action.Run();
+
+            Thread.Sleep(1000);
+
+            bgw.doneActions.Add(action);
+            bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action);
         }
 
         private static void InitializePlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
@@ -398,28 +449,18 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             List<PlanAction> actions = GetAfterApplyGuidanceActionsForPatch(host, patch);
 
-            //if this is a restart, clean delayed list
-            if (patch.after_apply_guidance == after_apply_guidance.restartHost)
-                delayedGuidances.Clear();
-            
+            if (actions.Count == 0)
+                return;
+
             if (!patch.GuidanceMandatory)
             {
-                //not mandatory, so these actions will have to be run later
-                //add the ones that are not yet there
-                foreach (var ap in actions)
-                    if (!delayedGuidances.Any(da => da.GetType() == ap.GetType()))
-                    {
-                        //special rules
-                        //do not add restartXAPI if there is already a restartHost on the list
-                        if (delayedGuidances.Any(da => da is RebootHostPlanAction) && ap is RestartAgentPlanAction)
-                            continue;
-
-                        delayedGuidances.Add(ap);
-                    }
+                // add any action that is not already in the list
+                delayedGuidances.AddRange(actions.Where(a => !delayedGuidances.Any(dg => a.GetType() == dg.GetType())));
             }
             else
             {
-                //remove delayed action of the same kind for this host (because it is mandatory and will run immediately)
+                // remove all delayed action of the same kinds that have already been added (Because these actions are guidance-mandatory=true, therefore
+                // they will run immediately, making delayed ones obsolete)
                 delayedGuidances.RemoveAll(dg => actions.Any(ma => ma.GetType() == dg.GetType()));                 
             }
         }
@@ -455,7 +496,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return actions;
         }
 
-        private List<PlanAction> GetMandatoryActionListForPatch(List<PlanAction> delayedGuidances, Host host, XenServerPatch patch)
+        private List<PlanAction> GetMandatoryActionListForPatch(Host host, XenServerPatch patch)
         {
             var actions = new List<PlanAction>();
 
@@ -568,6 +609,15 @@ namespace XenAdmin.Wizards.PatchingWizard
             progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
+        }
+    }
+
+    public static class Extensions
+    {
+        public static bool IsRestartRelatedPlanAction(this PlanAction a)
+        {
+            return
+                a is EvacuateHostPlanAction || a is RebootHostPlanAction || a is BringBabiesBackAction;
         }
     }
 }
