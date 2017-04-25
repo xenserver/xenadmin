@@ -62,7 +62,7 @@ namespace XenAdmin.Actions
         {
             get
             {
-                if(_checkForServerVersion)
+                if(checkForServerVersion)
                 {
                     return XenServerVersions;
                 }
@@ -70,31 +70,36 @@ namespace XenAdmin.Actions
             }
         }
 
-        private readonly bool _checkForXenCenter;
-        private readonly bool _checkForServerVersion;
-        private readonly bool _checkForPatches;
-        private readonly string _checkForUpdatesUrl;
+        private readonly bool checkForXenCenter;
+        private readonly bool checkForServerVersion;
+        private readonly bool checkForPatches;
+        private readonly string checkForUpdatesUrl;
+        private readonly string userAgent;
+        private readonly string userAgentId;
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl = null)
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent, string userAgentId, string checkForUpdatesUrl = null)
             : base(null, "_get_updates", "_get_updates", true)
         {
             Debug.Assert(checkForUpdatesUrl != null, "Parameter checkForUpdatesUrl should not be null. This class does not default its value anymore.");
+            Debug.Assert(!string.IsNullOrWhiteSpace(userAgent) && !string.IsNullOrWhiteSpace(userAgentId));
 
             XenServerPatches = new List<XenServerPatch>();
             XenServerVersions = new List<XenServerVersion>();
             XenCenterVersions = new List<XenCenterVersion>();
 
-            _checkForXenCenter = checkForXenCenter;
-            _checkForServerVersion = checkForServerVersion;
-            _checkForPatches = checkForPatches;
-            _checkForUpdatesUrl = checkForUpdatesUrl;
+            this.checkForXenCenter = checkForXenCenter;
+            this.checkForServerVersion = checkForServerVersion;
+            this.checkForPatches = checkForPatches;
+            this.checkForUpdatesUrl = checkForUpdatesUrl;
+            this.userAgent = userAgent;
+            this.userAgentId = userAgentId;
         }
 
         protected override void Run()
         {
             this.Description = Messages.AVAILABLE_UPDATES_SEARCHING;
 
-            XmlDocument xdoc = FetchCheckForUpdatesXml(_checkForUpdatesUrl);
+            XmlDocument xdoc = FetchCheckForUpdatesXml(checkForUpdatesUrl);
 
             GetXenCenterVersions(xdoc);
             GetXenServerPatches(xdoc);
@@ -104,7 +109,7 @@ namespace XenAdmin.Actions
 
         private void GetXenCenterVersions(XmlDocument xdoc)
         {
-            if (!_checkForXenCenter)
+            if (!checkForXenCenter)
                 return;
 
             foreach (XmlNode versions in xdoc.GetElementsByTagName(XenCenterVersionsNode))
@@ -138,7 +143,7 @@ namespace XenAdmin.Actions
 
         private void GetXenServerPatches(XmlDocument xdoc)
         {
-            if (!_checkForPatches)
+            if (!checkForPatches)
                 return;
 
             foreach (XmlNode versions in xdoc.GetElementsByTagName(PatchesNode))
@@ -220,7 +225,7 @@ namespace XenAdmin.Actions
 
         private void GetXenServerVersions(XmlDocument xdoc)
         {
-            if (!_checkForServerVersion && !_checkForPatches)
+            if (!checkForServerVersion && !checkForPatches)
                 return;
 
             foreach (XmlNode versions in xdoc.GetElementsByTagName(XenServerVersionsNode))
@@ -293,12 +298,6 @@ namespace XenAdmin.Actions
             var xdoc = new XmlDocument();
             var uri = new Uri(location);
 
-            var uniqueIdHash = GetUniqueIdHash();
-
-            string buildText = Helpers.CommonCriteriaCertificationRelease
-                        ? string.Format("{0}: {1}", Program.Version.Revision, Messages.COMMON_CRITERIA_TEXT)
-                        : Program.Version.Revision.ToString();
-
             if (uri.IsFile)
             {
                 xdoc.Load(location);
@@ -307,8 +306,8 @@ namespace XenAdmin.Actions
             {
                 using (var webClient = new WebClient())
                 {
-                    webClient.Headers.Add("User-Agent", string.Format("{0}/{1}", Branding.BRAND_CONSOLE , buildText));
-                    webClient.Headers.Add("User-Agent-Id", uniqueIdHash);
+                    webClient.Headers.Add("User-Agent", userAgent);
+                    webClient.Headers.Add("User-Agent-Id", userAgentId);
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
                     {
@@ -319,25 +318,5 @@ namespace XenAdmin.Actions
             return xdoc;
         }
 
-        private string GetUniqueIdHash()
-        {
-            string uniqueIdHash = "nil";
-
-            var managementObj = new System.Management.ManagementObject("Win32_OperatingSystem=@");
-            string serialNumber = (string)managementObj["SerialNumber"];
-
-            if (!string.IsNullOrWhiteSpace(serialNumber))
-            {
-                var serialBytes = Encoding.ASCII.GetBytes("JustSomeSaltForCheckForUpdates" + serialNumber);
-
-                using (var md = new System.Security.Cryptography.MD5CryptoServiceProvider()) // MD5 to keep it short enough as this hash is not used for security in any way
-                {
-                    var hash = md.ComputeHash(serialBytes);
-                    uniqueIdHash = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
-                }
-            }
-
-            return uniqueIdHash;
-        }
     }
 }
