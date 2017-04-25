@@ -50,6 +50,7 @@ namespace XenAdmin
         public const string UPDATEISO = "[iso]";
         public const string BACKUP = "[xbk]";
         public const string CHECK_FOR_UPDATES_URL = "[BRANDING_XENSERVER_UPDATE_URL]";
+        public const string BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT = "[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT]";
 
         public static string Search
         {
