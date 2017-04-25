@@ -63,7 +63,7 @@ namespace XenAdmin.Actions
         {
             get
             {
-                if(checkForServerVersion)
+                if(_checkForServerVersion)
                 {
                     return XenServerVersions;
                 }
@@ -71,12 +71,12 @@ namespace XenAdmin.Actions
             }
         }
 
-        private readonly bool checkForXenCenter;
-        private readonly bool checkForServerVersion;
-        private readonly bool checkForPatches;
-        private readonly string checkForUpdatesUrl;
-        private readonly string userAgent;
-        private readonly string userAgentId;
+        private readonly bool _checkForXenCenter;
+        private readonly bool _checkForServerVersion;
+        private readonly bool _checkForPatches;
+        private readonly string _checkForUpdatesUrl;
+        private readonly string _userAgent;
+        private readonly string _userAgentId;
 
         public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent, string userAgentId, string checkForUpdatesUrl = null)
             : base(null, "_get_updates", "_get_updates", true)
@@ -88,19 +88,19 @@ namespace XenAdmin.Actions
             XenServerVersions = new List<XenServerVersion>();
             XenCenterVersions = new List<XenCenterVersion>();
 
-            this.checkForXenCenter = checkForXenCenter;
-            this.checkForServerVersion = checkForServerVersion;
-            this.checkForPatches = checkForPatches;
-            this.checkForUpdatesUrl = checkForUpdatesUrl;
-            this.userAgent = userAgent;
-            this.userAgentId = userAgentId;
+            _checkForXenCenter = checkForXenCenter;
+            _checkForServerVersion = checkForServerVersion;
+            _checkForPatches = checkForPatches;
+            _checkForUpdatesUrl = checkForUpdatesUrl;
+            _userAgent = userAgent;
+            _userAgentId = userAgentId;
         }
 
         protected override void Run()
         {
             this.Description = Messages.AVAILABLE_UPDATES_SEARCHING;
 
-            XmlDocument xdoc = FetchCheckForUpdatesXml(checkForUpdatesUrl);
+            XmlDocument xdoc = FetchCheckForUpdatesXml(_checkForUpdatesUrl);
 
             GetXenCenterVersions(xdoc);
             GetXenServerPatches(xdoc);
@@ -110,7 +110,7 @@ namespace XenAdmin.Actions
 
         private void GetXenCenterVersions(XmlDocument xdoc)
         {
-            if (!checkForXenCenter)
+            if (!_checkForXenCenter)
                 return;
 
             foreach (XmlNode versions in xdoc.GetElementsByTagName(XenCenterVersionsNode))
@@ -147,7 +147,7 @@ namespace XenAdmin.Actions
 
         private void GetXenServerPatches(XmlDocument xdoc)
         {
-            if (!checkForPatches)
+            if (!_checkForPatches)
                 return;
 
             foreach (XmlNode versions in xdoc.GetElementsByTagName(PatchesNode))
@@ -229,7 +229,7 @@ namespace XenAdmin.Actions
 
         private void GetXenServerVersions(XmlDocument xdoc)
         {
-            if (!checkForServerVersion && !checkForPatches)
+            if (!_checkForServerVersion && !_checkForPatches)
                 return;
 
             foreach (XmlNode versions in xdoc.GetElementsByTagName(XenServerVersionsNode))
@@ -318,8 +318,8 @@ namespace XenAdmin.Actions
                 using (var webClient = new WebClient())
                 {
                     webClient.Proxy = proxy;
-                    webClient.Headers.Add("User-Agent", userAgent);
-                    webClient.Headers.Add("User-Agent-Id", userAgentId);
+                    webClient.Headers.Add("User-Agent", _userAgent);
+                    webClient.Headers.Add("User-Agent-Id", _userAgentId);
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
                     {
