@@ -179,7 +179,8 @@ node("${params.BUILD_ON_NODE}") {
     ).trim()
 
     stage('Download dependencies') {
-      GString dotNetFile = (CTX_SIGN_DEFINED == '1') ? 'DOTNET_BUILD_LOCATION_CTXSIGN' : 'DOTNET_BUILD_LOCATION'
+      GString dotNetFile = GString.EMPTY
+      dotNetFile += (CTX_SIGN_DEFINED == '1') ? 'DOTNET_BUILD_LOCATION_CTXSIGN' : 'DOTNET_BUILD_LOCATION'
 
       GString remoteDotnet = GString.EMPTY
       remoteDotnet += readFile("${env.WORKSPACE}\\xenadmin.git\\packages\\${dotNetFile}").trim()
