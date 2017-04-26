@@ -522,7 +522,7 @@ namespace XenAdmin.ConsoleView
             bool wasFocused = false;
             this.Controls.Clear();
             //console size with some offset to accomodate focus rectangle
-            Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET); ;
+            Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
                 
             // Kill the old client.
             if (RemoteConsole != null)
@@ -556,6 +556,8 @@ namespace XenAdmin.ConsoleView
                 {
                     if (this.ParentForm is FullScreenForm)
                         currentConsoleSize = ((FullScreenForm)ParentForm).GetContentSize();
+                    this.AutoScroll = true;
+                    this.AutoScrollMinSize = oldSize;
                     rdpClient = new RdpClient(this, currentConsoleSize, ResizeHandler);
 
                     rdpClient.OnDisconnected += new EventHandler(parentVNCTabView.RdpDisconnectedHandler);
@@ -1387,23 +1389,16 @@ namespace XenAdmin.ConsoleView
         private Size oldSize;
         public void UpdateRDPResolution(bool fullscreen = false)
         {
-            if (rdpClient == null)
+            if (rdpClient == null || oldSize.Equals(this.Size))
                 return;
 
             //no offsets in fullscreen mode because there is no need to accomodate focus border 
             if (fullscreen)
-            {
-                rdpClient.rdpLocationOffset = new Point(0, 0);
-                rdpClient.Reconnect(this.Size.Width, this.Size.Height);
-            }
-            else 
-            {
-                if (oldSize.Equals(this.Size))
-                    return;
-                rdpClient.rdpLocationOffset = new Point(2, 2);
-                rdpClient.Reconnect(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
-                oldSize = new Size(this.Size.Width, this.Size.Height);
-            }               
+                rdpClient.UpdateDisplay(this.Size.Width, this.Size.Height, new Point(0,0));
+            else
+                rdpClient.UpdateDisplay(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET, new Point(3,3));
+            oldSize = new Size(this.Size.Width, this.Size.Height);
+            Refresh();
         }
     }
 }
