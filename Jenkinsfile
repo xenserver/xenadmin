@@ -197,19 +197,18 @@ node("${params.BUILD_ON_NODE}") {
       file << "@branch=${branchInfo}\n"
       file << "xenadmin xenadmin.git ${GIT_COMMIT_XENADMIN}\n"
 
-      if (params.XC_BRANDING == 'citrix') {
-        def SERVER_BRANDING_TIP = bat(
-          returnStdout: true,
-          script: """
+      def SERVER_BRANDING_TIP = bat(
+        returnStdout: true,
+        script: """
                 @echo off 
                 cd ${env.WORKSPACE}\\branding.git
                 git rev-parse HEAD
                 """
-        ).trim()
+      ).trim()
 
-        file << "branding branding.git ${SERVER_BRANDING_TIP}\n"
+      file << "branding branding.git ${SERVER_BRANDING_TIP}\n"
 
-      } else {
+      if (params.XC_BRANDING != 'citrix') {
         def XENADMIN_BRANDING_TIP = bat(
           returnStdout: true,
           script: """
