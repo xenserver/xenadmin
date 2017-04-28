@@ -168,7 +168,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void UpdateButtons()
         {
-            okButton.Enabled = m_ctrlError.PerformCheck(CheckCredentialsEntered);
+            okButton.Enabled = m_ctrlError.PerformCheck(CheckCredentialsEntered) && !errorLabel.Visible;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -207,6 +207,8 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void enrollmentCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            if (!enrollmentCheckBox.Checked)
+                HideTestCredentialsStatus();
             UpdateButtons();
         }
 
@@ -220,6 +222,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             SetXSCredentials(currentXsCredentialsRadioButton.Checked);
             testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked &&
                 !string.IsNullOrEmpty(textboxXSUserName.Text.Trim()) && !string.IsNullOrEmpty(textboxXSPassword.Text);
+            UpdateButtons();
         }
 
         private void SetXSCredentials(bool useCurrent)
@@ -260,7 +263,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         
         private bool CheckCredentialsEntered()
         {
-            if (!enrollmentCheckBox.Checked || !newAuthenticationRadioButton.Checked)
+            if (!enrollmentCheckBox.Checked)
                 return true;
 
             if (newAuthenticationRadioButton.Checked && 
@@ -316,7 +319,6 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void xsCredentials_TextChanged(object sender, EventArgs e)
         {
-            UpdateButtons();
             testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked &&
                 !string.IsNullOrEmpty(textboxXSUserName.Text.Trim()) && !string.IsNullOrEmpty(textboxXSPassword.Text);
             HideTestCredentialsStatus();
@@ -329,6 +331,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void testCredentialsButton_Click(object sender, EventArgs e)
         {
+            okButton.Enabled = false;
             CheckXenServerCredentials();
         }
 
@@ -375,9 +378,15 @@ namespace XenAdmin.Dialogs.HealthCheck
                 Program.Invoke(Program.MainWindow, () =>
                 {
                     if (passedRbacChecks)
-                        ShowTestCredentialsStatus(Resources._000_Tick_h32bit_16, null);
+                    {
+                         ShowTestCredentialsStatus(Resources._000_Tick_h32bit_16, null);
+                         okButton.Enabled = true;
+                    }
                     else
+                    {
+                        okButton.Enabled = false;
                         ShowTestCredentialsStatus(Resources._000_error_h32bit_16, action.Exception != null ? action.Exception.Message : Messages.HEALTH_CHECK_USER_NOT_AUTHORIZED);
+                    }   
                     textboxXSUserName.Enabled = textboxXSPassword.Enabled = testCredentialsButton.Enabled = newXsCredentialsRadioButton.Checked;
                 });
             };
