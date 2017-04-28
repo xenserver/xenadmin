@@ -134,9 +134,9 @@ node("${params.BUILD_ON_NODE}") {
         returnStatus: true,
         script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.XC_BRANCH}"""
       )
-      String branchToClone = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'release/ely/lcm'
+      String branchToCloneOnBranding = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'release/ely/lcm'
 
-      bat """git clone -b ${branchToClone} ${BRANDING_REMOTE} ${env.WORKSPACE}\\branding.git"""
+      bat """git clone -b ${branchToCloneOnBranding} ${BRANDING_REMOTE} ${env.WORKSPACE}\\branding.git"""
 	  
       if (params.XC_BRANDING != 'citrix') {
 
