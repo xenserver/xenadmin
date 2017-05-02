@@ -81,8 +81,8 @@ namespace XenAdmin.SettingsPanels
             // 
             // MailLanguageComboBox
             // 
-            this.MailLanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.MailLanguageComboBox, "MailLanguageComboBox");
+            this.MailLanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MailLanguageComboBox.FormattingEnabled = true;
             this.MailLanguageComboBox.Name = "MailLanguageComboBox";
             // 
