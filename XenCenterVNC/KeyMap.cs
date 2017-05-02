@@ -207,7 +207,7 @@ namespace DotNetVnc
             {
                 KBDLLHOOKSTRUCT kbStruct = *lParam;
 
-                bool extended = (kbStruct.flags & FLAG_EXTENDED) == 0;
+                bool extended = (kbStruct.flags & FLAG_EXTENDED) == FLAG_EXTENDED;
                 bool down = (wParam == WM_KEYDOWN) || (wParam == WM_SYSKEYDOWN);
                 int scanCode = kbStruct.scanCode;
 
@@ -216,7 +216,14 @@ namespace DotNetVnc
                     case 54:
                         break;
                     default:
-                        scanCode += (extended ? 0 : 128);
+                        /* 128 is added to scanCode to differentiate
+                         * an extended key. Scan code for all extended keys
+                         * needs to be prefixed with 0xe0, so adding 128
+                         * or ( | 0x80) will give a hint to qemu that this
+                         * scanCode is an extended one and qemu can then prefix
+                         * scanCode with 0xe0
+                         */
+                        scanCode += (extended ? 128 : 0);
                         break;
                 }
 
