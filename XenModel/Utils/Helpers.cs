@@ -413,6 +413,24 @@ namespace XenAdmin.Core
                 platform_version != null && productVersionCompare(platform_version, "2.2.50") >= 0;
         }
 
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool InvernessOrGreater(IXenConnection conn)
+        {
+            return conn == null || InvernessOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Inverness is ver. 2.4.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool InvernessOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "2.3.50") >= 0;
+        }
+
         /// <summary>
         /// Cream (Creedence SP1) has API version 2.4
         /// </summary>
