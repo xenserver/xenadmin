@@ -195,7 +195,8 @@ namespace DotNetVnc
             }
         }
 
-        private const int NUM_LOCK_SCAN = 197;
+        private const int RIGHT_SHIFT_SCAN = 54;
+        private const int NUM_LOCK_SCAN = 69;
 
         private static int HookCallback(int nCode, int wParam, KBDLLHOOKSTRUCT* lParam)
         {
@@ -211,10 +212,20 @@ namespace DotNetVnc
                 bool down = (wParam == WM_KEYDOWN) || (wParam == WM_SYSKEYDOWN);
                 int scanCode = kbStruct.scanCode;
 
+                /* kbStruct.scanCode for NUM_LOCK and PAUSE are the same (69).
+                 * But NUM_LOCK is an extended key, where as PAUSE is not.
+                 * QEMU doesn't support PAUSE and expects NUM_LOCK scanCode
+                 * to be sent as 69
+                 */
+
                 switch (scanCode)
                 {
-                    case 54:
-                        break;
+                    /* Although RIGHT_SHIFT, NUMS_LOCK are extended keys,
+                     * scan code for these keys are not prefixed with 0xe0.
+                     */
+                    case RIGHT_SHIFT_SCAN:
+                    case NUM_LOCK_SCAN:
+                       break;
                     default:
                         /* 128 is added to scanCode to differentiate
                          * an extended key. Scan code for all extended keys
