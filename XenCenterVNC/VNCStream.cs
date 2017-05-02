@@ -468,7 +468,7 @@ namespace DotNetVnc
             this.stream.writeInt32(key);
         }
 
-        public void keyScanEvent(bool down, int key)
+        public void keyScanEvent(bool down, int key, int sym)
         {
             lock (this.writeLock)
             {

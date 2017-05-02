@@ -150,7 +150,7 @@ namespace DotNetVnc
         private static LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
 
-        public delegate void KeyEvent(bool down, int scancode);
+        public delegate void KeyEvent(bool down, int scancode, int keysym);
         private static KeyEvent keyEvent = null;
 
 #pragma warning disable 0649
@@ -211,6 +211,7 @@ namespace DotNetVnc
                 bool extended = (kbStruct.flags & FLAG_EXTENDED) == FLAG_EXTENDED;
                 bool down = (wParam == WM_KEYDOWN) || (wParam == WM_SYSKEYDOWN);
                 int scanCode = kbStruct.scanCode;
+                int keySym = KeyMap.translateKey((Keys)kbStruct.vkCode);
 
                 /* kbStruct.scanCode for NUM_LOCK and PAUSE are the same (69).
                  * But NUM_LOCK is an extended key, where as PAUSE is not.
@@ -240,7 +241,7 @@ namespace DotNetVnc
 
                 if (InterceptKeys.keyEvent != null)
                 {
-                    InterceptKeys.keyEvent(down, scanCode);
+                    InterceptKeys.keyEvent(down, scanCode, keySym);
                 }
 
                 if (bubble || scanCode == NUM_LOCK_SCAN)

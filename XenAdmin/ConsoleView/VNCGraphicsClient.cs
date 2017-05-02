@@ -964,7 +964,7 @@ namespace XenAdmin.ConsoleView
 
                 foreach (int key in pressedScans)
                 {
-                    this.vncStream.keyScanEvent(false, key);
+                    this.vncStream.keyScanEvent(false, key, -1);
                 }
             });
 
@@ -1285,7 +1285,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public void keyScan(bool pressed, int scanCode)
+        public void keyScan(bool pressed, int scanCode, int keySym)
         {
             if (KeyHandler.handleExtras<int>(pressed, pressedScans, KeyHandler.ExtraScans, scanCode, KeyHandler.ModifierScans, ref modifierKeyPressedAlone))
             {
@@ -1293,21 +1293,26 @@ namespace XenAdmin.ConsoleView
                 {
                     // send key up anyway
                     modifierKeyPressedAlone = false;
-                    keyScan_(pressed, scanCode);
+                    keyScan_(pressed, scanCode, keySym);
                     return;
                 }
                 this.Focus();
                 return;
             }
 
-            keyScan_(pressed, scanCode);
+            keyScan_(pressed, scanCode, keySym);
         }
 
         private void keyScan_(bool pressed, int scanCode)
         {
+            keyScan_(pressed, scanCode, -1);
+        }
+
+        private void keyScan_(bool pressed, int scanCode, int keySym)
+        {
             DoIfConnected(delegate()
             {
-                this.vncStream.keyScanEvent(pressed, scanCode);
+                this.vncStream.keyScanEvent(pressed, scanCode, keySym);
             });
         }
 
