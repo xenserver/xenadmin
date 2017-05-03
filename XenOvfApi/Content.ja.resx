@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CONVERT_APP_NAME" xml:space="preserve">
     <value>Xen アプライアンス ウィザード</value>
@@ -149,6 +149,9 @@
   </data>
   <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_4" xml:space="preserve">
     <value>仮想 GPU の情報</value>
+  </data>
+  <data name="OTHER_SYSTEM_SETTING_DESCRIPTION_5" xml:space="preserve">
+    <value>PVS アクセラレータ情報</value>
   </data>
   <data name="POST_INSTALL_SECTION_INFO_1" xml:space="preserve">
     <value>[XenServer] インストール後処理のみ (Linux ディストリビューションの修復を試行)</value>

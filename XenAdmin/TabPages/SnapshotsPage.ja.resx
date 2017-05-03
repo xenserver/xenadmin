@@ -261,9 +261,6 @@
   <data name="tableLayoutPanelSimpleSelection.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="folderLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="folderLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -281,6 +278,9 @@
   </data>
   <data name="folderLabel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 25</value>
+  </data>
+  <data name="folderLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
   </data>
   <data name="folderLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 25</value>
@@ -333,9 +333,6 @@
   <data name="&gt;&gt;sizeLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tagsLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="tagsLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -353,6 +350,9 @@
   </data>
   <data name="tagsLabel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 25</value>
+  </data>
+  <data name="tagsLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
   </data>
   <data name="tagsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 25</value>
@@ -558,9 +558,6 @@
   <data name="&gt;&gt;tagsTitleLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="customFieldTitle1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="customFieldTitle1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -612,6 +609,9 @@
   <data name="customFieldContent1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
+  <data name="customFieldContent1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
   <data name="customFieldContent1.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 27</value>
   </data>
@@ -629,9 +629,6 @@
   </data>
   <data name="&gt;&gt;customFieldContent1.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="customFieldTitle2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="customFieldTitle2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -682,6 +679,9 @@
     <value>106, 143</value>
   </data>
   <data name="customFieldContent2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
+  <data name="customFieldContent2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="customFieldContent2.Size" type="System.Drawing.Size, System.Drawing">
@@ -742,6 +742,9 @@
     <value>106, 31</value>
   </data>
   <data name="labelMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
+  <data name="labelMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="labelMode.Size" type="System.Drawing.Size, System.Drawing">
@@ -1822,7 +1825,7 @@
     <value>186, 22</value>
   </data>
   <data name="toolStripMenuItemScheduledSnapshots.Text" xml:space="preserve">
-    <value>スケジュールによるスナップショット(&amp;S)</value>
+    <value>定期的なスナップショット作成(&amp;S)</value>
   </data>
   <data name="contextMenuStripView.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 76</value>
