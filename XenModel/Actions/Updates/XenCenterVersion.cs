@@ -48,8 +48,6 @@ namespace XenAdmin.Core
             ParseVersion(version_lang);
             Name = name;
             IsLatest = is_latest;
-            if (url.StartsWith("/XenServer"))
-                url = XenServerVersion.UpdateRoot + url;
             Url = url;
             DateTime.TryParse(timestamp, out TimeStamp);
         }
