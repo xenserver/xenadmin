@@ -131,7 +131,7 @@ namespace XenAdmin.SettingsPanels
         {
             _XenModelObject = clone;
 
-            _bSupportMailLanguage = Helpers.FalconOrGreater(_XenModelObject.Connection);
+            _bSupportMailLanguage = Helpers.InvernessOrGreater(_XenModelObject.Connection);
 
             Repopulate();
 
