@@ -1077,6 +1077,9 @@
   <data name="errorLabel.TabIndex" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
+  <data name="errorLabel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;errorLabel.Name" xml:space="preserve">
     <value>errorLabel</value>
   </data>
