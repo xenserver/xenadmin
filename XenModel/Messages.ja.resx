@@ -1871,9 +1871,6 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="APPLYING_PATCH" xml:space="preserve">
     <value>アップデート '{0}' をサーバー '{1}' に適用しています...</value>
   </data>
-  <data name="APPLYING_UPDATES" xml:space="preserve">
-    <value>{0} 個のアップデートの {1} 台のサーバーへの適用</value>
-  </data>
   <data name="APPLYLICENSE_APPLIED" xml:space="preserve">
     <value>ライセンスが適用されました</value>
   </data>
@@ -5063,6 +5060,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>ホストの準備エラー</value>
   </data>
+  <data name="ERROR_PROXY_AUTHENTICATION" xml:space="preserve">
+    <value>'{0}' のプロキシ サーバーに認証できませんでした。</value>
+  </data>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
     <value>[XenCenter] で PuTTY の開始中に問題が発生しました。</value>
   </data>
@@ -6035,7 +6035,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>この機能を有効にするには、[Citrix] Insight Services による認証が必要です。[XenCenter] によって、ほかの接続プールに対して成功した認証が検出されます。この認証を再び使用するか、新しく認証するかを選択できます。</value>
   </data>
   <data name="HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN" xml:space="preserve">
-    <value>この機能を有効にするには、[Citrix] Insight Services による認証が必要です。MyCitrix 資格情報を入力して登録してください (http://www.citrix.com/welcome.html 参照)。この資格情報はアップロード トークンの取得にのみ使用され、このマシンやサーバーには格納されません。</value>
+    <value>この機能を有効にするには、[Citrix] Insight Services による認証が必要です。MyCitrix 資格情報を入力して登録してください ({0} 参照)。この資格情報はアップロード トークンの取得にのみ使用され、このマシンやサーバーには格納されません。</value>
   </data>
   <data name="HEALTHCHECK_ENROLLMENT_CONFIRMATION_BUTTON_LABEL" xml:space="preserve">
     <value>OK、ヘルス チェックを有効にする</value>
@@ -6318,7 +6318,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>iLO サービスに接続できません。構成を確認してください。</value>
   </data>
   <data name="ILO_POWERON_FAILED" xml:space="preserve">
-    <value>iLO 資格情報が間違っています</value>
+    <value>iLO の電源投入要求が失敗しました</value>
   </data>
   <data name="IMAGE_DEFINITION_PAGE_TEXT" xml:space="preserve">
     <value>VM 定義</value>
@@ -7918,6 +7918,9 @@ SCSI ID: {2}
   <data name="MUST_SELECT_NETWORK" xml:space="preserve">
     <value>ネットワークを選択してください</value>
   </data>
+  <data name="MY_CITRIX_CREDENTIALS_URL" xml:space="preserve">
+    <value>http://www.citrix.com/welcome.html</value>
+  </data>
   <data name="NAME" xml:space="preserve">
     <value>名前</value>
   </data>
@@ -8120,7 +8123,7 @@ SCSI ID: {2}
     <value>[XenServer] Advanced Edition またはそれ以上のエディションのプールに Free Edition の [XenServer] を追加することはできません</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
-    <value>このサーバーには実行中または一時停止中の VM があります</value>
+    <value>このサーバーには実行中の VM があります</value>
   </data>
   <data name="NEWPOOL_HAS_SHARED_STORAGE" xml:space="preserve">
     <value>このサーバーには共有ストレージがあります</value>
@@ -9379,6 +9382,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE" xml:space="preserve">
     <value>サーバーに到達できません</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS" xml:space="preserve">
+    <value>[XenServer] の {0} および {1} バージョンに同じアップデートを適用することはできません</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>アップデート適用済み</value>
   </data>
@@ -9387,7 +9393,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
     <value>アップデートする 1つまたは複数のプール、またはスタンドアロン サーバーを選択してください。
-グレー表示されたサーバーは自動アップデートでアップデートできません。</value>
+この一覧で無効と表示されたサーバーは自動アップデートでアップデートできません。</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT" xml:space="preserve">
     <value>選択されたアップデートを適用する 1つまたは複数のサーバーを選択します。
@@ -10893,6 +10899,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>正しいユーザー名とパスワードを使用して再試行してください。</value>
   </data>
+  <data name="SOLUTION_CHECK_PROXY" xml:space="preserve">
+    <value>'{0}' のプロキシ サーバーの構成および [XenCenter] の接続設定が正しいことを確認して再試行してください。</value>
+  </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
     <value>'{0}' 上の [XenServer] が正しく構成されていることを確認して、再試行してください。</value>
   </data>
@@ -11126,6 +11135,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="STATUS_FILTER_IN_PROGRESS" xml:space="preserve">
     <value>進行中</value>
+  </data>
+  <data name="STATUS_REPORT_ENTER_CREDENTIALS_MESSAGE" xml:space="preserve">
+    <value>MyCitrix 資格情報を入力します ({0} 参照)。この資格情報は、[Citrix] Insight Services での認証に一度のみ使用され、このマシンやサーバーには格納されません。</value>
   </data>
   <data name="STATUS_REPORT_ZIP_FAILED" xml:space="preserve">
     <value>サーバーの状態レポートのパッケージ化時にエラーが発生しました。一部のレポートが作成されていない場合があります</value>
@@ -11867,6 +11879,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPDATES_WIZARD_RESUME_VM" xml:space="preserve">
     <value>この VM を再開するにはここをクリックしてください</value>
   </data>
+  <data name="UPDATES_WIZARD_RUNNING_PRECHECK" xml:space="preserve">
+    <value>{1} の {0} を事前チェック中...</value>
+  </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>ストレージ リポジトリ '{0}'</value>
   </data>
@@ -11875,6 +11890,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UPDATES_WIZARD_TOOLS_CD" xml:space="preserve">
     <value>VM '{0}' のドライブには、Tools CD があります。</value>
+  </data>
+  <data name="UPDATES_WIZARD_UPLOADING_UPDATE" xml:space="preserve">
+    <value>アップデート {0} を {1} にアップロードしています...</value>
   </data>
   <data name="UPDATES_WIZARD_VM_HAS_VGPU" xml:space="preserve">
     <value>VM '{0}' には仮想 GPU があります。</value>
@@ -12292,6 +12310,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
     <value>{0} 仮想 GPU ({1}/GPU、{2}、{3} ディスプレイ)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
+    <value>{0} 仮想 GPU ({1}/GPU)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>GPU 全体のパススルー</value>

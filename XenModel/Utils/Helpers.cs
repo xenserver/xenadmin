@@ -59,8 +59,6 @@ namespace XenAdmin.Core
         
         public const string GuiTempObjectPrefix = "__gui__";
 
-        public const int CUSTOM_BUILD_NUMBER = 6666;
-
         public static NumberFormatInfo _nfi = new CultureInfo("en-US", false).NumberFormat;
 
         public static readonly Regex SessionRefRegex = new Regex(@"OpaqueRef:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
@@ -74,25 +72,6 @@ namespace XenAdmin.Core
         public static bool DbProxyIsSimulatorUrl(string url)
         {
             return url.EndsWith(".db") || url.EndsWith(".xml") || url.EndsWith(".tmp");
-        }
-
-        /// <summary>
-        /// Return the build number of the given host, or the build number of the master if the
-        /// given host does not have a build number, or -1 if we can't find one.  This will often be
-        /// 0 or -1 for developer builds, so comparisons should generally treat those numbers as if
-        /// they were brand new.
-        /// </summary>
-        public static int HostBuildNumber(Host host)
-        {
-            if (host.BuildNumber <= 0)
-            {
-                Host master = GetMaster(host.Connection);
-                return master == null ? -1 : master.BuildNumber;
-            }
-            else
-            {
-                return host.BuildNumber;
-            }
         }
 
         /// <summary>
@@ -310,17 +289,17 @@ namespace XenAdmin.Core
 
         public static bool IsConnected(IXenConnection connection)
         {
-            return (connection == null ? false : connection.IsConnected);
+            return (connection != null && connection.IsConnected);
         }
 
         public static bool IsConnected(Pool pool)
         {
-            return (pool == null ? false : IsConnected(pool.Connection));
+            return (pool != null && IsConnected(pool.Connection));
         }
 
         public static bool IsConnected(Host host)
         {
-            return (host == null ? false : IsConnected(host.Connection));
+            return (host != null && IsConnected(host.Connection));
         }
 
         public static bool HasFullyConnectedSharedStorage(IXenConnection connection)
@@ -336,7 +315,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool TampaOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : TampaOrGreater(Helpers.GetMaster(conn));
+            return conn == null || TampaOrGreater(Helpers.GetMaster(conn));
         }
 
         /// <param name="host">May be null, in which case true is returned.</param>
@@ -347,27 +326,25 @@ namespace XenAdmin.Core
             
             string platform_version = Helpers.HostPlatformVersion(host);
             return
-                platform_version != null && Helpers.productVersionCompare(platform_version, "1.5.50") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && Helpers.productVersionCompare(platform_version, "1.5.50") >= 0;
         }
 
         public static bool SanibelOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : SanibelOrGreater(Helpers.GetMaster(conn));
+            return conn == null || SanibelOrGreater(Helpers.GetMaster(conn));
         }
 
         public static bool SanibelOrGreater(Host host)
         {
             return
                 TampaOrGreater(host) ||  // CP-2480
-                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "6.0.1") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "6.0.1") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool CreedenceOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : CreedenceOrGreater(Helpers.GetMaster(conn));
+            return conn == null || CreedenceOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Creedence is ver. 1.9.0
@@ -379,14 +356,13 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : DundeeOrGreater(Helpers.GetMaster(conn));
+            return conn == null || DundeeOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Dundee is ver. 2.0.0
@@ -398,14 +374,13 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ElyOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : ElyOrGreater(Helpers.GetMaster(conn));
+            return conn == null || ElyOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Ely is ver. 2.1.1
@@ -417,14 +392,13 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : FalconOrGreater(Helpers.GetMaster(conn));
+            return conn == null || FalconOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Falcon is ver. 2.3.0
@@ -436,8 +410,25 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "2.2.50") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "2.2.50") >= 0;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool InvernessOrGreater(IXenConnection conn)
+        {
+            return conn == null || InvernessOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Inverness is ver. 2.4.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool InvernessOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "2.3.50") >= 0;
         }
 
         /// <summary>
@@ -469,7 +460,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ClearwaterOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : ClearwaterOrGreater(Helpers.GetMaster(conn));
+            return conn == null || ClearwaterOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Clearwater is ver. 1.7.0
@@ -481,8 +472,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0;
         }
 
         /// <summary>

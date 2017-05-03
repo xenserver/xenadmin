@@ -260,6 +260,7 @@ namespace XenAdmin.TabPages
             // 
             // label1
             // 
+            this.label1.AutoEllipsis = true;
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             this.label1.UseMnemonic = false;
@@ -284,24 +285,28 @@ namespace XenAdmin.TabPages
             // 
             // customFieldTitle1
             // 
+            this.customFieldTitle1.AutoEllipsis = true;
             resources.ApplyResources(this.customFieldTitle1, "customFieldTitle1");
             this.customFieldTitle1.Name = "customFieldTitle1";
             this.customFieldTitle1.UseMnemonic = false;
             // 
             // customFieldContent1
             // 
+            this.customFieldContent1.AutoEllipsis = true;
             resources.ApplyResources(this.customFieldContent1, "customFieldContent1");
             this.customFieldContent1.Name = "customFieldContent1";
             this.customFieldContent1.UseMnemonic = false;
             // 
             // customFieldTitle2
             // 
+            this.customFieldTitle2.AutoEllipsis = true;
             resources.ApplyResources(this.customFieldTitle2, "customFieldTitle2");
             this.customFieldTitle2.Name = "customFieldTitle2";
             this.customFieldTitle2.UseMnemonic = false;
             // 
             // customFieldContent2
             // 
+            this.customFieldContent2.AutoEllipsis = true;
             resources.ApplyResources(this.customFieldContent2, "customFieldContent2");
             this.customFieldContent2.Name = "customFieldContent2";
             this.customFieldContent2.UseMnemonic = false;

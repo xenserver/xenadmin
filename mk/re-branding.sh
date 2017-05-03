@@ -53,6 +53,7 @@ rebranding_global()
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
+        -e "s#\[BRANDING_BUILD_NUMBER\]#${BUILD_NUMBER}#g" \
         -e "s#\[xensearch\]#${BRANDING_SEARCH}#g" \
         -e "s#\[xsupdate\]#${BRANDING_UPDATE}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
