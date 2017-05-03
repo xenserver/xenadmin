@@ -54,6 +54,7 @@ namespace XenAdmin.Wizards
         private readonly CIFS_ISO xenTabPageCifsIso;
         private readonly CifsFrontend xenTabPageCifs;
         private readonly CSLG xenTabPageCslg;
+        private readonly VHDoNFSNew xenTabPageVhdoNFSnew;
         private readonly VHDoNFS xenTabPageVhdoNFS;
         private readonly NFS_ISO xenTabPageNfsIso;
         private readonly NetApp xenTabPageNetApp;
@@ -102,6 +103,7 @@ namespace XenAdmin.Wizards
             xenTabPageCifsIso = new CIFS_ISO();
             xenTabPageCifs = new CifsFrontend();
             xenTabPageCslg = new CSLG();
+            xenTabPageVhdoNFSnew = new VHDoNFSNew();
             xenTabPageVhdoNFS = new VHDoNFS();
             xenTabPageNfsIso = new NFS_ISO();
             xenTabPageNetApp = new NetApp();
@@ -278,7 +280,12 @@ namespace XenAdmin.Wizards
                 m_srWizardType = xenTabPageChooseSrType.SrWizardType;
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
-                    AddPage(xenTabPageVhdoNFS);
+                {
+                    if (Helpers.FalconOrGreater(xenConnection))
+                        AddPage(xenTabPageVhdoNFSnew);
+                    else
+                        AddPage(xenTabPageVhdoNFS);
+                }
                 else if (m_srWizardType is SrWizardType_LvmoIscsi)
                 {
                     AddPage(xenTabPageLvmoIscsi);
@@ -334,7 +341,10 @@ namespace XenAdmin.Wizards
                 m_srWizardType.AutoDescriptionRequired = xenTabPageSrName.AutoDescriptionRequired;
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
+                {
+                    xenTabPageVhdoNFSnew.SrWizardType = m_srWizardType;
                     xenTabPageVhdoNFS.SrWizardType = m_srWizardType;
+                }
                 else if (m_srWizardType is SrWizardType_LvmoIscsi)
                     xenTabPageLvmoIscsi.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_LvmoHba)
@@ -379,6 +389,12 @@ namespace XenAdmin.Wizards
                 m_srWizardType.UUID = xenTabPageVhdoNFS.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageVhdoNFS.DeviceConfig;
                 SetCustomDescription(m_srWizardType, xenTabPageVhdoNFS.SrDescription);
+            }
+            else if (senderPagetype == typeof(VHDoNFSNew))
+            {
+                m_srWizardType.UUID = xenTabPageVhdoNFSnew.UUID;
+                m_srWizardType.DeviceConfig = xenTabPageVhdoNFSnew.DeviceConfig;
+                SetCustomDescription(m_srWizardType, xenTabPageVhdoNFSnew.SrDescription);
             }
             else if (senderPagetype == typeof(CSLG))
             {

@@ -40,6 +40,19 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 {
     public class SrWizardHelpers
     {
+        public static bool ValidateServerAddress(String address)
+        {
+            var serverNameType = Uri.CheckHostName(address);
+            return serverNameType != UriHostNameType.Unknown && serverNameType != UriHostNameType.IPv6;
+               
+        }
+
+        public static bool ValidateSharePath(String path)
+        {
+            Regex re = new Regex(@"^/[^:*?<>|\\]+$"); // make sure we match /share/folder
+            return re.IsMatch(path);
+        }
+
         public static bool ValidateNfsSharename(String sharename)
         {
             Regex re = new Regex(@"^[^/:*?<>|\\]+:/[^:*?<>|\\]+$"); // make sure we match server:/share/folder

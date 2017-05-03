@@ -90,11 +90,28 @@ namespace XenAdmin.Actions
             this.smconf = smconf;
         }
 
+        public static string XMLFromErrorDescription { get; set; }
+
         protected override void Run()
         {
             RelatedTask = XenAPI.SR.async_probe(this.Session, host.opaque_ref,
                 dconf, srType.ToString().ToLowerInvariant(), smconf);
-            PollToCompletion();
+            try
+            {
+                PollToCompletion();
+            }
+            catch (XenAPI.Failure exn)
+            {
+                // We expect an SR_BACKEND_FAILURE_101 error, with a message from
+                // xapi, stdout, and then stderr.
+                // stderr will be an XML with the server paths and supported versions.
+                if (srType.ToString() != "nfs" || exn.ErrorDescription[0] != "SR_BACKEND_FAILURE_101")
+                    throw;
+
+                XMLFromErrorDescription = exn.ErrorDescription[3].ToString();
+               
+            }
+            
             Description = Messages.ACTION_SR_SCAN_SUCCESSFUL;
         }
     }

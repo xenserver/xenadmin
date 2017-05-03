@@ -5126,6 +5126,12 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXAMPLE" xml:space="preserve">
     <value>Example: {0}</value>
   </data>
+  <data name="EXAMPLE_PATH_NFS3" xml:space="preserve">
+    <value>Example: /export/path</value>
+  </data>
+  <data name="EXAMPLE_PATH_NFS4" xml:space="preserve">
+    <value>Example: /path</value>
+  </data>
   <data name="EXCEPTION_GENERAL" xml:space="preserve">
     <value>A general exception has occurred.</value>
   </data>

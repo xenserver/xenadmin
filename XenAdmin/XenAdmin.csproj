@@ -730,6 +730,12 @@
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.Designer.cs">
       <DependentUpon>LVMoFCoE.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.designer.cs">
+      <DependentUpon>VHDoNFS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\NewVMWizard\Page_CloudConfigParameters.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -843,11 +849,11 @@
       <DependentUpon>NFS_ISO.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\SrWizardHelpers.cs" />
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.cs">
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFSNew.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.Designer.cs">
-      <DependentUpon>VHDoNFS.cs</DependentUpon>
+    <Compile Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFSNew.Designer.cs">
+      <DependentUpon>VHDoNFSNew.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\HAWizard_Pages\ChooseSR.cs">
       <SubType>UserControl</SubType>
@@ -2087,6 +2093,15 @@
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\LVMoFCoE.zh-CN.resx">
       <DependentUpon>LVMoFCoE.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.ja.resx">
+      <DependentUpon>VHDoNFS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.resx">
+      <DependentUpon>VHDoNFS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.zh-CN.resx">
+      <DependentUpon>VHDoNFS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_CloudConfigParameters.ja.resx">
       <DependentUpon>Page_CloudConfigParameters.cs</DependentUpon>
     </EmbeddedResource>
@@ -2173,9 +2188,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>NFS_ISO.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.resx">
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFSNew.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>VHDoNFS.cs</DependentUpon>
+      <DependentUpon>VHDoNFSNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomDataGraph\DataEventList.resx">
       <DependentUpon>DataEventList.cs</DependentUpon>
@@ -6511,11 +6526,11 @@
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CslgLocation.zh-CN.resx">
       <DependentUpon>CslgLocation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.ja.resx">
-      <DependentUpon>VHDoNFS.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFSNew.ja.resx">
+      <DependentUpon>VHDoNFSNew.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFS.zh-CN.resx">
-      <DependentUpon>VHDoNFS.cs</DependentUpon>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\VHDoNFSNew.zh-CN.resx">
+      <DependentUpon>VHDoNFSNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\NewSrWizardNamePage.ja.resx">
       <DependentUpon>NewSrWizardNamePage.cs</DependentUpon>
