@@ -55,7 +55,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         [Test]
         public void TestAlertWithConnectionAndHosts()
         {
-            XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123");
+            XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, false, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123", "");
             var alert = new XenServerVersionAlert(ver);
             alert.IncludeConnection(connA.Object);
             alert.IncludeConnection(connB.Object);
@@ -83,7 +83,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         [Test]
         public void TestAlertWithHostsAndNoConnection()
         {
-            XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123");
+            XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, false, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123", "");
             var alert = new XenServerVersionAlert(ver);
             alert.IncludeHosts(new List<Host> { hostA.Object, hostB.Object });
 
@@ -109,7 +109,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         [Test]
         public void TestAlertWithConnectionAndNoHosts()
         {
-            XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123");
+            XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, false, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123", "");
             var alert = new XenServerVersionAlert(ver);
             alert.IncludeConnection(connA.Object);
             alert.IncludeConnection(connB.Object);
@@ -136,7 +136,7 @@ namespace XenAdminTests.UnitTests.AlertTests
         [Test]
         public void TestAlertWithNoConnectionAndNoHosts()
         {
-            XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123");
+            XenServerVersion ver = new XenServerVersion("1.2.3", "name", true, false, "http://url", new List<XenServerPatch>(), new List<XenServerPatch>(), new DateTime(2011, 4, 1).ToString(), "123", "");
             var alert = new XenServerVersionAlert(ver);
 
             IUnitTestVerifier validator = new VerifyGetters(alert);

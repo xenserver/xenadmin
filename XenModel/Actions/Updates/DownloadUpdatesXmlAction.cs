@@ -37,6 +37,7 @@ using System.IO;
 using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
+using System.Net;
 
 
 namespace XenAdmin.Actions
@@ -112,7 +113,8 @@ namespace XenAdmin.Actions
                 {
                     string version_lang = "";
                     string name = "";
-                    bool is_latest = false;
+                    bool latest = false;
+                    bool latest_cr = false;
                     string url = "";
                     string timestamp = "";
 
@@ -123,14 +125,16 @@ namespace XenAdmin.Actions
                         else if (attrib.Name == "name")
                             name = attrib.Value;
                         else if (attrib.Name == "latest")
-                            is_latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                            latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                        else if (attrib.Name == "latestcr")
+                            latest_cr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;
                     }
 
-                    XenCenterVersions.Add(new XenCenterVersion(version_lang, name, is_latest, url, timestamp));
+                    XenCenterVersions.Add(new XenCenterVersion(version_lang, name, latest, latest_cr, url, timestamp));
                 }
             }
         }
@@ -229,9 +233,11 @@ namespace XenAdmin.Actions
                     string version_oem = "";
                     string name = "";
                     bool is_latest = false;
+                    bool is_latest_cr = false;
                     string url = "";
                     string timestamp = "";
                     string buildNumber = "";
+                    string patchUuid = "";
 
                     foreach (XmlAttribute attrib in version.Attributes)
                     {
@@ -241,12 +247,16 @@ namespace XenAdmin.Actions
                             name = attrib.Value;
                         else if (attrib.Name == "latest")
                             is_latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                        else if (attrib.Name == "latestcr")
+                            is_latest_cr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;
                         else if (attrib.Name == "build-number")
                             buildNumber = attrib.Value;
+                        else if (attrib.Name == "patch-uuid")
+                            patchUuid = attrib.Value;
                     }
 
                     List<XenServerPatch> patches = new List<XenServerPatch>();
@@ -281,8 +291,8 @@ namespace XenAdmin.Actions
 
                     }
 
-                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, minimalPatches, timestamp,
-                                                               buildNumber));
+                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, is_latest_cr, url, patches, minimalPatches, timestamp,
+                                                               buildNumber, patchUuid));
                 }
             }
         }
@@ -291,18 +301,25 @@ namespace XenAdmin.Actions
         {
             var xdoc = new XmlDocument();
             var uri = new Uri(location);
-            
+            var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection);
+
             if (uri.IsFile)
             {
                 xdoc.Load(location);
             }
             else
             {
-                using (Stream xmlstream = HTTPHelper.GET(new Uri(location), Connection, false, true))
+                using (var webClient = new WebClient())
                 {
-                    xdoc = Helpers.LoadXmlDocument(xmlstream);
+                    webClient.Proxy = proxy;
+
+                    using (var stream = new MemoryStream(webClient.DownloadData(uri)))
+                    {
+                        xdoc.Load(stream);
+                    }
                 }
             }
+
             return xdoc;
         }
     }

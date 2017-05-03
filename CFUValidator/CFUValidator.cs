@@ -115,10 +115,10 @@ namespace CFUValidator
             SetupMocks(xenServerPatches, xenServerVersions);
 
             Status = "Determining XenCenter update required...";
-            var xcupdateAlert = XenAdmin.Core.Updates.NewXenCenterUpdateAlert(xenCenterVersions, new Version(ServerVersion));
+            var xcupdateAlerts = XenAdmin.Core.Updates.NewXenCenterUpdateAlerts(xenCenterVersions, new Version(ServerVersion));
 
             Status = "Determining XenServer update required...";
-            var updateAlert = XenAdmin.Core.Updates.NewXenServerVersionAlert(xenServerVersions);
+            var updateAlerts = XenAdmin.Core.Updates.NewXenServerVersionAlerts(xenServerVersions);
 
             Status = "Determining patches required...";
             var patchAlerts = XenAdmin.Core.Updates.NewXenServerPatchAlerts(xenServerVersions, xenServerPatches).Where(alert => !alert.CanIgnore).ToList();
@@ -135,7 +135,8 @@ namespace CFUValidator
             RunValidators(validators);
            
             Status = "Generating summary...";
-            GeneratePatchSummary(patchAlerts, validators, updateAlert, xcupdateAlert);
+
+            GeneratePatchSummary(patchAlerts, validators, updateAlerts, xcupdateAlerts);
         }
 
         private void CheckProvidedVersionNumber(List<XenServerVersion> xenServerVersions)
@@ -196,11 +197,11 @@ namespace CFUValidator
         }
 
         private void GeneratePatchSummary(List<XenServerPatchAlert> alerts, List<AlertFeatureValidator> validators,
-                                          XenServerVersionAlert updateAlert, XenCenterUpdateAlert xcupdateAlert)
+                                          List<XenServerVersionAlert> updateAlerts, List<XenCenterUpdateAlert> xcupdateAlerts)
         {
             OuputComponent oc = new OutputTextOuputComponent(XmlLocation, ServerVersion);
-            XenCenterUpdateDecorator xcud = new XenCenterUpdateDecorator(oc, xcupdateAlert);
-            XenServerUpdateDecorator xsud = new XenServerUpdateDecorator(xcud, updateAlert);
+            XenCenterUpdateDecorator xcud = new XenCenterUpdateDecorator(oc, xcupdateAlerts);
+            XenServerUpdateDecorator xsud = new XenServerUpdateDecorator(xcud, updateAlerts);
             PatchAlertDecorator pad = new PatchAlertDecorator(xsud, alerts);
             AlertFeatureValidatorDecorator afdCoreFields = new AlertFeatureValidatorDecorator(pad,
                                                                                               validators.First(v => v is CorePatchDetailsValidator),
