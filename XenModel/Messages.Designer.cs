@@ -6954,15 +6954,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking license status.
-        /// </summary>
-        public static string CHECKING_LICENSING_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_LICENSING_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Checking role....
         /// </summary>
         public static string CHECKING_ROLE {
@@ -7031,24 +7022,6 @@ namespace XenAdmin {
         public static string CHECKING_UPGRADE_HOTFIX_STATUS {
             get {
                 return ResourceManager.GetString("CHECKING_UPGRADE_HOTFIX_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking the presence of VM Protection Policies.
-        /// </summary>
-        public static string CHECKING_VMPR_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_VMPR_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking the possible presence of WSS appliances.
-        /// </summary>
-        public static string CHECKING_WSS_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_WSS_STATUS", resourceCulture);
             }
         }
         
@@ -29880,42 +29853,6 @@ namespace XenAdmin {
         public static string ROLLINGUPGRADE_PRECHECKS {
             get {
                 return ResourceManager.GetString("ROLLINGUPGRADE_PRECHECKS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: New versions of [XenServer] require new licenses to be added to your license server..
-        /// </summary>
-        public static string RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER {
-            get {
-                return ResourceManager.GetString("RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking licensing status.
-        /// </summary>
-        public static string RPU_WIZARD_TAMPA_AND_OLDER_TITLE {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_TAMPA_AND_OLDER_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies were removed in [XenServer] [BRANDING_VERSION_6_2].
-        /// </summary>
-        public static string RPU_WIZARD_VMPR_VMPP_DEPRECATION {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_VMPR_VMPP_DEPRECATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers was removed in [XenServer] [BRANDING_VERSION_6_2].
-        /// </summary>
-        public static string RPU_WIZARD_WSS_DEPRECATED {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_WSS_DEPRECATED", resourceCulture);
             }
         }
         

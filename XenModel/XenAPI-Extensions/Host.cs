@@ -1562,9 +1562,6 @@ namespace XenAPI
         {
             get
             {
-                if(!Helpers.ClearwaterOrGreater(Connection))
-                    return true;
-                
                 return !Helpers.FeatureForbidden(Connection, RestrictHotfixApply);
             }
         }

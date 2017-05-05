@@ -237,9 +237,6 @@
   <data name="VMPR_DEPRECATION_URL" xml:space="preserve">
     <value>http://support.citrix.com/article/CTX137335</value>
   </data>
-  <data name="WSS_DEPRECATION_URL" xml:space="preserve">
-    <value>http://support.citrix.com/article/CTX137334</value>
-  </data>
   <data name="XENDESKTOP_URL" xml:space="preserve">
     <value>http://www.citrix.com/TryXenDesktop</value>
   </data>

@@ -215,39 +215,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 }
             }
 
-            //Upgrading to Clearwater and above - license changes warning and deprecations
-            var preClearwaterServers = SelectedServers.Where(h => !Helpers.ClearwaterOrGreater(h)).ToList();
-            if(preClearwaterServers.Any())
-            {
-                var hostsNeedingLicenseCheck = preClearwaterServers.Where(HostNeedsLicenseCheck).ToList();
-                if (hostsNeedingLicenseCheck.Any())
-                {
-                    checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_LICENSING_STATUS,
-                        new List<Check>()));
-                    checkGroup = checks[checks.Count - 1].Value;
-                    foreach (Host host in hostsNeedingLicenseCheck)
-                    {
-                        checkGroup.Add(new UpgradingFromTampaAndOlderCheck(host));
-                    }
-                }
-
-                //WSS removal
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_WSS_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in preClearwaterServers)
-                {
-                    checkGroup.Add(new HostHasWssCheck(host));
-                }
-
-                //VMP[RP]removal
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_VMPR_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in preClearwaterServers)
-                {
-                    checkGroup.Add(new VmprActivatedCheck(host));
-                }
-            }
-
             //SafeToUpgradeCheck - in automatic mode only
             if (!ManualUpgrade)
             {
