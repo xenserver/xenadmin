@@ -57,7 +57,7 @@ namespace XenAdmin.Commands
 
         protected override void AddAdditionalMenuItems(SelectedItemCollection selection)
         {
-            if (selection.ToList().All(item => Helpers.TampaOrGreater(item.Connection) && !Helpers.CrossPoolMigrationRestrictedWithWlb(item.Connection)))
+            if (selection.ToList().All(item => !Helpers.CrossPoolMigrationRestrictedWithWlb(item.Connection)))
             {
                 VMOperationCommand cmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection);
                 DropDownItems.Add(new ToolStripSeparator());
@@ -101,10 +101,7 @@ namespace XenAdmin.Commands
                 if (Helpers.FeatureForbidden(vm.Connection, Host.RestrictIntraPoolMigrate))
                         return false;
 
-                if (Helpers.TampaOrGreater(vm.Connection))
-                    return vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
-
-                return SelectionInVisiblePool(vm.Connection) && vm.Connection.Cache.HostCount > 1 && vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
+                return vm.allowed_operations != null && vm.allowed_operations.Contains(vm_operations.pool_migrate);
             }
 
             protected override bool CanExecuteCore(SelectedItemCollection selection)
@@ -129,18 +126,6 @@ namespace XenAdmin.Commands
 
                 }
                 return atLeastOneCanExecute;
-            }
-
-            private static bool SelectionInVisiblePool(IXenConnection connection)
-            {
-                if (connection == null)
-                    return false;
-
-                Pool pool = Helpers.GetPoolOfOne(connection);
-                if (pool == null)
-                    return false;
-
-                return pool.IsVisible;
             }
 
             public override string MenuText

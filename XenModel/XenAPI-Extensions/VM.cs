@@ -2093,7 +2093,7 @@ namespace XenAPI
         {
             get
             {
-                return !IsWindows && Helpers.TampaOrGreater(Connection) && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
+                return !IsWindows && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
             }
         }
 

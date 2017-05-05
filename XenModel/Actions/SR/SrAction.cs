@@ -108,8 +108,6 @@ namespace XenAdmin.Actions
                     break;
 
                 case SrActionKind.Destroy:
-                    if (!Helpers.TampaOrGreater(Connection))
-                        UnplugPBDs(ref inc);
                     RelatedTask = XenAPI.SR.async_destroy(Session, SR.opaque_ref);
                     PollToCompletion(50, 100);
                     Description = Messages.ACTION_SR_DESTROY_SUCCESSFUL;
@@ -117,8 +115,6 @@ namespace XenAdmin.Actions
 
                 case SrActionKind.Forget:
                     Description = string.Format(Messages.FORGETTING_SR_0, SR.NameWithoutHost);
-                    if (!Helpers.TampaOrGreater(Connection) && !SR.IsDetached && SR.IsDetachable())
-                        UnplugPBDs(ref inc);
                     if (!SR.allowed_operations.Contains(storage_operations.forget))
                     {
                         Description = Messages.ERROR_DIALOG_FORGET_SR_TITLE;

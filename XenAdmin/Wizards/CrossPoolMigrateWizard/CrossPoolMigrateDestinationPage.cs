@@ -141,7 +141,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             var filters = new List<ReasoningFilter>
             {
-                new CrossPoolMigrateVersionFilter(xenItem),
                 new ResidentHostIsSameAsSelectionFilter(xenItem, selectedVMs),
                 new CrossPoolMigrateCanMigrateFilter(xenItem, selectedVMs, wizardMode),
                 new WlbEnabledFilter(xenItem, selectedVMs)

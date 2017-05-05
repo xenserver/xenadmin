@@ -3512,7 +3512,6 @@
     <Compile Include="Wizards\ExportWizard\ApplianceChecks\ApplianceExistsCheck.cs" />
     <Compile Include="Wizards\GenericPages\NoTargetServerPoolItem.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateCanMigrateFilter.cs" />
-    <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateVersionFilter.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateDestinationPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
