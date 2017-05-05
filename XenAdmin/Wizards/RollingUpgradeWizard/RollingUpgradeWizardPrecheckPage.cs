@@ -138,12 +138,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Upgradeprechecks"; }
         }
 
-        private static bool HostNeedsLicenseCheck(Host host)
-        {
-            var edition = Host.GetEdition(host.edition);
-            return edition != Host.Edition.EnterpriseXD && edition != Host.Edition.XenDesktop;
-        }
-
         protected override List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();

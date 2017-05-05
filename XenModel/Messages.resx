@@ -1882,9 +1882,6 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="APPLYLICENSE_UPDATED" xml:space="preserve">
     <value>License updated</value>
   </data>
-  <data name="APPLY_ACTIVATION_KEY" xml:space="preserve">
-    <value>Apply Activation Key</value>
-  </data>
   <data name="APPLY_HOTFIX" xml:space="preserve">
     <value>Apply hotfix</value>
   </data>
@@ -6976,21 +6973,6 @@ Size: {3}</value>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>The license server {0} could not be reached. You have until {1} to reconnect to the license server.</value>
   </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION" xml:space="preserve">
-    <value>Expired (Requires activation)</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_DAYS" xml:space="preserve">
-    <value>Requires activation in {0} days</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_HOURS" xml:space="preserve">
-    <value>Requires activation in {0} hours</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_MINUTES" xml:space="preserve">
-    <value>Requires activation in {0} minutes</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_ONE_MIN" xml:space="preserve">
-    <value>Requires activation in 1 minute</value>
-  </data>
   <data name="LICENSE_RESTRICTION_MESSAGE" xml:space="preserve">
     <value>License Restriction: Could not connect to {0}, a server with an XE Express License already exists ({1})</value>
   </data>
@@ -7064,9 +7046,6 @@ Standard features only</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
     <value>One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Free [XenServer] products.</value>
-  </data>
-  <data name="LICENSING_DIALOG_TEXT" xml:space="preserve">
-    <value>Activate your free [XenServer] products or assign/release licenses for [XenServer] Advanced, Enterprise and Platinum Editions.</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
@@ -8089,9 +8068,6 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_DIFF_SERVER" xml:space="preserve">
     <value>This server is a different version to the master</value>
   </data>
-  <data name="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="preserve">
-    <value>You cannot add a Free Edition [XenServer] to a pool with [XenServer] Advanced Edition or higher licenses</value>
-  </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>This server has running VMs</value>
   </data>
@@ -8118,9 +8094,6 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NEWPOOL_MASTER_ROLE" xml:space="preserve">
     <value>Your current role on the master is not authorized to add hosts to the master's pool</value>
-  </data>
-  <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>You cannot add server with a [XenServer product] Advanced Edition or higher license to a pool of Free Edition servers</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>Pooling is restricted with this server's license</value>

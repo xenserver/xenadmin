@@ -1003,15 +1003,6 @@ namespace XenAdmin.TabPages
             if (!string.IsNullOrEmpty(host.edition))
             {
                 s.AddEntry(FriendlyName("host.edition"), Helpers.GetFriendlyLicenseName(host));
-                if (info.ContainsKey("sku_type"))
-                {
-                    info.Remove("sku_type");
-                }
-            }
-            else if (info.ContainsKey("sku_type"))
-            {
-                s.AddEntry(FriendlyName("host.license_params-sku_type"), Helpers.GetFriendlyLicenseName(host));
-                info.Remove("sku_type");
             }
 
             s.AddEntry(Messages.NUMBER_OF_SOCKETS, host.CpuSockets.ToString());

@@ -73,36 +73,16 @@ namespace XenAdmin.TabPages
 
                     if (Status.CurrentState == LicenseStatus.HostState.Expired)
                     {
-                        if (Status.LicencedHost.IsFreeLicense() && Status.PoolLicensingModel == LicenseStatus.LicensingModel.PreClearwater)
-                            return Messages.LICENSE_REQUIRES_ACTIVATION;
-                        
+                      
                         return Status.PoolLicensingModel == LicenseStatus.LicensingModel.Clearwater ? Messages.LICENSE_UNSUPPORTED : Messages.LICENSE_EXPIRED;
                     }
 
-                    if (Status.CurrentState == LicenseStatus.HostState.Free && Status.PoolLicensingModel != LicenseStatus.LicensingModel.PreClearwater)
+                    if (Status.CurrentState == LicenseStatus.HostState.Free)
                     {
                         return Status.PoolLicensingModel == LicenseStatus.LicensingModel.Clearwater ? Messages.LICENSE_UNSUPPORTED : Messages.LICENSE_EXPIRED;
                     }
 
                     TimeSpan s = Status.LicenseExpiresExactlyIn;
-                    if (Status.LicencedHost.IsFreeLicense())
-                    {
-                        
-                        if (s.TotalMinutes < 2)
-                            return Messages.LICENSE_REQUIRES_ACTIVATION_ONE_MIN;
-
-                        if (s.TotalHours < 2)
-                            return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_MINUTES, Math.Floor(s.TotalMinutes));
-
-                        if (s.TotalDays < 2)
-                            return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_HOURS, Math.Floor(s.TotalHours));
-
-                        if (s.TotalDays < 30)
-                            return String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_DAYS, s.Days);
-
-                        return Messages.LICENSE_ACTIVATED;
-                    }
-
                     if (s.TotalMinutes < 2)
                         return Messages.LICENSE_EXPIRES_ONE_MIN;
 
@@ -125,7 +105,7 @@ namespace XenAdmin.TabPages
         {
             get
             {
-                if (Status != null && Status.CurrentState == LicenseStatus.HostState.Free && Status.PoolLicensingModel != LicenseStatus.LicensingModel.PreClearwater)
+                if (Status != null && Status.CurrentState == LicenseStatus.HostState.Free)
                     return false;
                 return true;
             }

@@ -43,16 +43,13 @@ namespace XenAdmin.Dialogs
             this.editionsGroupBox = new System.Windows.Forms.GroupBox();
             this.editionLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.perSocketRadioButton = new System.Windows.Forms.RadioButton();
-            this.advancedRadioButton = new System.Windows.Forms.RadioButton();
-            this.enterpriseRadioButton = new System.Windows.Forms.RadioButton();
-            this.platinumRadioButton = new System.Windows.Forms.RadioButton();
             this.xenDesktopEnterpriseRadioButton = new System.Windows.Forms.RadioButton();
             this.enterprisePerSocketRadioButton = new System.Windows.Forms.RadioButton();
             this.enterprisePerUserRadioButton = new System.Windows.Forms.RadioButton();
+            this.desktopPlusRadioButton = new System.Windows.Forms.RadioButton();
             this.desktopRadioButton = new System.Windows.Forms.RadioButton();
             this.standardPerSocketRadioButton = new System.Windows.Forms.RadioButton();
             this.buttonsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.desktopPlusRadioButton = new System.Windows.Forms.RadioButton();
             this.mainLayoutPanel.SuspendLayout();
             this.licenseServerLayoutPanel.SuspendLayout();
             this.editionsGroupBox.SuspendLayout();
@@ -128,9 +125,6 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.editionLayoutPanel, "editionLayoutPanel");
             this.editionLayoutPanel.Controls.Add(this.perSocketRadioButton);
-            this.editionLayoutPanel.Controls.Add(this.advancedRadioButton);
-            this.editionLayoutPanel.Controls.Add(this.enterpriseRadioButton);
-            this.editionLayoutPanel.Controls.Add(this.platinumRadioButton);
             this.editionLayoutPanel.Controls.Add(this.xenDesktopEnterpriseRadioButton);
             this.editionLayoutPanel.Controls.Add(this.enterprisePerSocketRadioButton);
             this.editionLayoutPanel.Controls.Add(this.enterprisePerUserRadioButton);
@@ -146,24 +140,6 @@ namespace XenAdmin.Dialogs
             this.perSocketRadioButton.Name = "perSocketRadioButton";
             this.perSocketRadioButton.TabStop = true;
             this.perSocketRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // advancedRadioButton
-            // 
-            resources.ApplyResources(this.advancedRadioButton, "advancedRadioButton");
-            this.advancedRadioButton.Name = "advancedRadioButton";
-            this.advancedRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // enterpriseRadioButton
-            // 
-            resources.ApplyResources(this.enterpriseRadioButton, "enterpriseRadioButton");
-            this.enterpriseRadioButton.Name = "enterpriseRadioButton";
-            this.enterpriseRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // platinumRadioButton
-            // 
-            resources.ApplyResources(this.platinumRadioButton, "platinumRadioButton");
-            this.platinumRadioButton.Name = "platinumRadioButton";
-            this.platinumRadioButton.UseVisualStyleBackColor = true;
             // 
             // xenDesktopEnterpriseRadioButton
             // 
@@ -183,6 +159,12 @@ namespace XenAdmin.Dialogs
             this.enterprisePerUserRadioButton.Name = "enterprisePerUserRadioButton";
             this.enterprisePerUserRadioButton.UseVisualStyleBackColor = true;
             // 
+            // desktopPlusRadioButton
+            // 
+            resources.ApplyResources(this.desktopPlusRadioButton, "desktopPlusRadioButton");
+            this.desktopPlusRadioButton.Name = "desktopPlusRadioButton";
+            this.desktopPlusRadioButton.UseVisualStyleBackColor = true;
+            // 
             // desktopRadioButton
             // 
             resources.ApplyResources(this.desktopRadioButton, "desktopRadioButton");
@@ -201,12 +183,6 @@ namespace XenAdmin.Dialogs
             this.buttonsLayoutPanel.Controls.Add(this.okButton);
             this.buttonsLayoutPanel.Controls.Add(this.cancelButton);
             this.buttonsLayoutPanel.Name = "buttonsLayoutPanel";
-            // 
-            // desktopPlusRadioButton
-            // 
-            resources.ApplyResources(this.desktopPlusRadioButton, "desktopPlusRadioButton");
-            this.desktopPlusRadioButton.Name = "desktopPlusRadioButton";
-            this.desktopPlusRadioButton.UseVisualStyleBackColor = true;
             // 
             // AssignLicenseDialog
             // 
@@ -246,9 +222,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.GroupBox editionsGroupBox;
         private System.Windows.Forms.FlowLayoutPanel editionLayoutPanel;
         private System.Windows.Forms.RadioButton perSocketRadioButton;
-        private System.Windows.Forms.RadioButton advancedRadioButton;
-        private System.Windows.Forms.RadioButton enterpriseRadioButton;
-        private System.Windows.Forms.RadioButton platinumRadioButton;
         private System.Windows.Forms.RadioButton xenDesktopEnterpriseRadioButton;
         private System.Windows.Forms.RadioButton enterprisePerSocketRadioButton;
         private System.Windows.Forms.RadioButton enterprisePerUserRadioButton;

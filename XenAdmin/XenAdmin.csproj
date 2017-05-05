@@ -2812,7 +2812,6 @@
     <Compile Include="Dialogs\ConnectionRefusedDialog.Designer.cs">
       <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\LicenseManager\LicenseActivationRequest.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\ILicenseCheckableDataGridViewView.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\LicenseCheckableDataGridView.cs">
       <SubType>Component</SubType>
@@ -3049,7 +3048,6 @@
     <Compile Include="Actions\GUIActions\Wlb\WlbOptimizePoolAction.cs" />
     <Compile Include="Branding.cs" />
     <Compile Include="Commands\ActivateVBDCommand.cs" />
-    <Compile Include="Commands\ActivationRequestCommand.cs" />
     <Compile Include="Commands\AddHostCommand.cs">
     </Compile>
     <Compile Include="Commands\AddHostToPoolCommand.cs">

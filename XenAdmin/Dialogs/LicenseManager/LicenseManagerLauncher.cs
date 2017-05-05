@@ -108,13 +108,7 @@ namespace XenAdmin.Dialogs
                 List<IXenObject> itemsSelected = selectedObjects.AsXenObjects<Pool>().ConvertAll(p => p as IXenObject);
                 itemsSelected.AddRange(selectedObjects.AsXenObjects<Host>().Where(h => Helpers.GetPool(h.Connection) == null).ToList().ConvertAll(h => h as IXenObject));
                 itemsSelected.AddRange(selectedObjects.AsXenObjects<Host>().Where(h => Helpers.GetPool(h.Connection) != null).ToList().ConvertAll(h => Helpers.GetPool(h.Connection)).ConvertAll(p => p as IXenObject).Distinct());
-                if(itemsSelected.All(xo => Helpers.ClearwaterOrGreater(xo.Connection)) || 
-                   itemsSelected.All(xo => !Helpers.ClearwaterOrGreater(xo.Connection)))
-                {
-                    LaunchIfRequired(nag, connections, itemsSelected);
-                }
-                else
-                    LaunchIfRequired(nag, connections, itemsSelected.Where(xo => Helpers.ClearwaterOrGreater(xo.Connection)));
+                LaunchIfRequired(nag, connections, itemsSelected);
             }
             else
                 LaunchIfRequired(nag, connections);

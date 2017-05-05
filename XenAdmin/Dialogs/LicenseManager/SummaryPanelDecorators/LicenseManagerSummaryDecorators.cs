@@ -105,9 +105,7 @@ namespace XenAdmin.Dialogs
         {
             StringBuilder sb = base.BuildSummary();
             sb.AppendLine(Messages.LICENSE_MANAGER_SUMMARY_LICENSE_SOCKETS);
-            sb.AppendLine(Helpers.ClearwaterOrGreater(Row.XenObject.Connection)
-                              ? Row.NumberOfSockets.ToString()
-                              : Messages.UNKNOWN);
+            sb.AppendLine(Row.NumberOfSockets.ToString());
             return sb.AppendLine();
         }
     }
@@ -120,7 +118,7 @@ namespace XenAdmin.Dialogs
         {
             StringBuilder sb = base.BuildSummary();
 
-            if(Helpers.ClearwaterOrGreater(Row.XenObject.Connection) && Row.CurrentLicenseState == LicenseStatus.HostState.Free)
+            if(Row.CurrentLicenseState == LicenseStatus.HostState.Free)
                 return sb;
 
             sb.AppendLine(Messages.LICENSE_MANAGER_SUMMARY_LICENSE_EXPIRES);

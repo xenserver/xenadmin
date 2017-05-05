@@ -51,7 +51,6 @@ namespace XenAdmin.Dialogs
 
         public LicenseManagerController()
         {
-            ActivationRequest = new LicenseActivationRequest();
             VerifierFactory = new LicenseSelectionVerifierFactory();
             ReadOnlyView = HiddenFeatures.LicenseOperationsHidden; 
         }
@@ -60,8 +59,6 @@ namespace XenAdmin.Dialogs
         {
             View = view;
         }
-
-        public ILicenseActivationRequest ActivationRequest { private get; set; }
 
         public SelectionVerifierFactory VerifierFactory { private get; set; }
 
@@ -80,17 +77,7 @@ namespace XenAdmin.Dialogs
                 return;
             }
 
-            // show pool members as individual hosts if needed (i.e. can activate free license)
-            var allItemsToShow = new List<IXenObject>();
-            foreach (var xenObject in itemsToShow)
-            {
-                if (LicenseDataGridViewRow.RowShouldBeExpanded(xenObject))
-                {
-                    allItemsToShow.AddRange(xenObject.Connection.Cache.Hosts);
-                }
-                else
-                    allItemsToShow.Add(xenObject);
-            }
+            var allItemsToShow = itemsToShow.ToList();
 
             AddToGrid(allItemsToShow);
 
@@ -232,26 +219,6 @@ namespace XenAdmin.Dialogs
             ResetButtonEnablement();
         }
 
-        public void RequestActivationKey(List<CheckableDataGridViewRow> rowsChecked)
-        {
-            List<Host> checkedHosts = RowsToHosts(rowsChecked.ConvertAll(r => r as LicenseDataGridViewRow));
-            ActivationRequest.Hosts = checkedHosts;
-            using (MemoryStream ms = ActivationRequest.CreateRequestBestEffort())
-            {
-                ActivationRequestCommand activationRequestCommand = new ActivationRequestCommand(CommandInterface, ActivationRequest.RequestEncoding.GetString(ms.ToArray()));
-                activationRequestCommand.Execute();
-            }
-        }
-
-        public void ApplyActivationKey(List<CheckableDataGridViewRow> rowsChecked)
-        {
-            List<Host> checkedHosts = RowsToHosts(rowsChecked.ConvertAll(r => r as LicenseDataGridViewRow));
-            ActivationRequest.Hosts = checkedHosts;
-            Debug.Assert(ActivationRequest.HostsThatCanBeActivated.Count == 1,
-                "There must be one host that can be activated selected");
-            new OpenLicenseFileDialog(View.Parent, ActivationRequest.HostsThatCanBeActivated[0], Messages.APPLY_ACTIVATION_KEY, true).ShowDialogAndRunAction();
-        }
-
         public void DownloadLicenseManager()
         {
             LaunchUrl(InvisibleMessages.LICENSE_SERVER_DOWNLOAD_LINK).Invoke();
@@ -337,31 +304,12 @@ namespace XenAdmin.Dialogs
 
             //Release Button
             View.DrawReleaseButtonAsDisabled(!lRows.Any(r=>r.IsUsingLicenseServer || r.CurrentLicenseState == LicenseStatus.HostState.PartiallyLicensed));
-
-            List<Host> representedHosts = new List<Host>();
-            lRows.ForEach(r => representedHosts.AddRange(r.RepresentedHosts));
-            ActivationRequest.Hosts = representedHosts;
-
-            //Apply Button
-            if (ActivationRequest.HostsThatCanBeActivated.Count > 1)
-                View.DrawApplyButtonAsDisabled(true, Messages.LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION);
-            else
-                View.DrawApplyButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated, null);
-
-            //Request Button
-            View.DrawRequestButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated);
-
-            //Activate Button
-            View.DrawActivateButtonAsDisabled(!ActivationRequest.AllHostsCanBeActivated);
-            View.DrawActivateButtonAsHidden(representedHosts.Any(Helpers.ClearwaterOrGreater));
         }
 
         private void DisableAllButtons()
         {
             View.DrawAssignButtonAsDisabled(true);
             View.DrawReleaseButtonAsDisabled(true);
-            View.DrawActivateButtonAsDisabled(true);
-            View.DrawActivateButtonAsHidden(true);
         }
 
         private void ResetButtonEnablement()

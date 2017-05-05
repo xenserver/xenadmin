@@ -5069,15 +5069,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Activation Key.
-        /// </summary>
-        public static string APPLY_ACTIVATION_KEY {
-            get {
-                return ResourceManager.GetString("APPLY_ACTIVATION_KEY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Apply hotfix.
         /// </summary>
         public static string APPLY_HOTFIX {
@@ -20014,51 +20005,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expired (Requires activation).
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} days.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_DAYS {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_DAYS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} hours.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_HOURS {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_HOURS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} minutes.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_MINUTES {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_MINUTES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in 1 minute.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_ONE_MIN {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_ONE_MIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to License Restriction: Could not connect to {0}, a server with an XE Express License already exists ({1}).
         /// </summary>
         public static string LICENSE_RESTRICTION_MESSAGE {
@@ -20267,15 +20213,6 @@ namespace XenAdmin {
         public static string LICENSING_DIALOG_EXPIRING_SOON_TEXT {
             get {
                 return ResourceManager.GetString("LICENSING_DIALOG_EXPIRING_SOON_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Activate your free [XenServer] products or assign/release licenses for [XenServer] Advanced, Enterprise and Platinum Editions..
-        /// </summary>
-        public static string LICENSING_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("LICENSING_DIALOG_TEXT", resourceCulture);
             }
         }
         
@@ -23688,15 +23625,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot add a Free Edition [XenServer] to a pool with [XenServer] Advanced Edition or higher licenses.
-        /// </summary>
-        public static string NEWPOOL_FREE_HOST_PAID_MASTER {
-            get {
-                return ResourceManager.GetString("NEWPOOL_FREE_HOST_PAID_MASTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This server has running VMs.
         /// </summary>
         public static string NEWPOOL_HAS_RUNNING_VMS {
@@ -23774,15 +23702,6 @@ namespace XenAdmin {
         public static string NEWPOOL_MASTER_ROLE {
             get {
                 return ResourceManager.GetString("NEWPOOL_MASTER_ROLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You cannot add server with a [XenServer product] Advanced Edition or higher license to a pool of Free Edition servers.
-        /// </summary>
-        public static string NEWPOOL_PAID_HOST_FREE_MASTER {
-            get {
-                return ResourceManager.GetString("NEWPOOL_PAID_HOST_FREE_MASTER", resourceCulture);
             }
         }
         

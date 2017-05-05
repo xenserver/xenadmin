@@ -69,30 +69,5 @@ namespace XenAdminTests.LicensingTests
                 return GetField<Button>("okButton");
             }
         }
-
-        public RadioButton EnterpriseRadioButton
-        {
-            get
-            {
-                return GetField<RadioButton>("enterpriseRadioButton");
-            }
-        }
-
-        public RadioButton PlatinumRadioButton
-        {
-            get
-            {
-                return GetField<RadioButton>("platinumRadioButton");
-            }
-        }
-
-        public RadioButton AdvancedRadioButton
-        {
-            get
-            {
-                return GetField<RadioButton>("advancedRadioButton");
-            }
-        }
-
     }
 }

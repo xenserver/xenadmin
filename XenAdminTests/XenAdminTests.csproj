@@ -190,7 +190,6 @@
     </Content>
     <Compile Include="Controls\DecentGroupBoxTests.cs" />
     <Compile Include="Controls\Folders\FolderListItemTests.cs" />
-    <Compile Include="Diagnostics\UpgradingFromTampaAndOlderCheckTests.cs" />
     <Compile Include="DialogTests\LicenseManager\Comparers\NameColumnComparerTests.cs" />
     <Compile Include="DialogTests\LicenseManager\Comparers\ProductColumnComparerTests.cs" />
     <Compile Include="DialogTests\LicenseManager\SelectionVerifiers\CanUseLicenseServerVerifierTests.cs" />
