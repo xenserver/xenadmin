@@ -10618,7 +10618,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>プール マスターの現在の時間: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>このバージョンの [XenCenter] では [XenServer] [BRANDING_VERSION_6_0] 以降のバージョンがサポートされます。</value>
+    <value>このバージョンの [XenCenter] では [XenServer] [BRANDING_VERSION_6_2] 以降のバージョンがサポートされます。</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>このサーバーを管理するには、以前のバージョンの [XenCenter] を使用してください。</value>

@@ -30352,7 +30352,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards..
+        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_2] onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
