@@ -1297,6 +1297,10 @@ namespace DotNetVnc
                         incremental = false;
                         break;
 
+                    case QEMU_EXT_KEY_ENCODING:
+                        qemu_ext_key_encoding = true;
+                        break;
+
                     default:
                         throw new VNCException("unimplemented encoding: " + encoding);
                 }
