@@ -160,7 +160,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
     public class PropertiesDialogTest_SR : VerticallyTabbedDialogTest<PropertiesDialog>
     {
         public PropertiesDialogTest_SR()
-            : base(new string[] { "General", "Custom Fields" })
+            : base(new string[] { "General", "Custom Fields", "Alerts" })
         { }
 
         protected override PropertiesDialog NewDialog()
