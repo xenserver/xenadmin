@@ -1878,7 +1878,7 @@
     <value>Volume manager logs</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Premium Edition</value>
+    <value>[Citrix] [XenServer product] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix] [XenServer product] Basic Edition</value>
