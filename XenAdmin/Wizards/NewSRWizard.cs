@@ -281,7 +281,7 @@ namespace XenAdmin.Wizards
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                 {
-                    if (Helpers.FalconOrGreater(xenConnection))
+                    if (Helpers.InvernessOrGreater(xenConnection))
                         AddPage(xenTabPageVhdoNFSnew);
                     else
                         AddPage(xenTabPageVhdoNFS);
