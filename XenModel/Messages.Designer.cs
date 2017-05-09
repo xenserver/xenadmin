@@ -14554,6 +14554,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Example: /export/path.
+        /// </summary>
+        public static string EXAMPLE_PATH_NFS3 {
+            get {
+                return ResourceManager.GetString("EXAMPLE_PATH_NFS3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Example: /path.
+        /// </summary>
+        public static string EXAMPLE_PATH_NFS4 {
+            get {
+                return ResourceManager.GetString("EXAMPLE_PATH_NFS4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A general exception has occurred..
         /// </summary>
         public static string EXCEPTION_GENERAL {
