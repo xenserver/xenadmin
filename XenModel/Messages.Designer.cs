@@ -29723,6 +29723,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reverting resolved prechecks in {0}....
+        /// </summary>
+        public static string REVERTING_RESOLVED_PRECHECKS_POOL {
+            get {
+                return ResourceManager.GetString("REVERTING_RESOLVED_PRECHECKS_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reverting all changes done by this wizard.
         /// </summary>
         public static string REVERTING_WIZARD_CHANGES {

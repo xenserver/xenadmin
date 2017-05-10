@@ -10327,6 +10327,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REVERTING_RESOLVED_PRECHECKS" xml:space="preserve">
     <value>Reverting resolved prechecks</value>
   </data>
+  <data name="REVERTING_RESOLVED_PRECHECKS_POOL" xml:space="preserve">
+    <value>Reverting resolved prechecks in {0}...</value>
+  </data>
   <data name="REVERTING_WIZARD_CHANGES" xml:space="preserve">
     <value>Reverting all changes done by this wizard</value>
   </data>

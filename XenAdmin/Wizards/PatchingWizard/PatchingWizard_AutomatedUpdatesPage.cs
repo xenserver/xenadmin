@@ -141,6 +141,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 var planActions = new List<PlanAction>();
                 var delayedActionsByHost = new Dictionary<Host, List<PlanAction>>();
+                var finalActions = new List<PlanAction>();
 
                 foreach (var host in pool.Connection.Cache.Hosts)
                 {
@@ -177,9 +178,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }//patch
                 }
 
+                //add a revert pre-check action for this pool
+                finalActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck.Where(p => hosts.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList(),
+                    string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, pool.Connection.Name)));
+
                 if (planActions.Count > 0)
                 {
-                    var bgw = new UpdateProgressBackgroundWorker(master, planActions, delayedActionsByHost);
+                    var bgw = new UpdateProgressBackgroundWorker(master, planActions, delayedActionsByHost, finalActions);
                     backgroundWorkers.Add(bgw);
 
                 }
@@ -341,9 +346,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                             action.Visible = false;
                             bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action); //still need to report progress, mainly for the progress bar
                         }
-
                     }
-                                        
+                }
+
+                //running final actions (eg. revert pre-checks)
+                foreach (var a in bgw.FinalActions)
+                {
+                    action = a;
+
+                    if (bgw.CancellationPending)
+                    {
+                        doWorkEventArgs.Cancel = true;
+                        return;
+                    }
+
+                    RunPlanAction(bgw, action);
                 }
             }
             catch (Exception e)
