@@ -197,6 +197,10 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
+                    //CA-250234 no need to rebuild HA page if we lost connection to the pool 
+                    if (pool.Connection == null)
+                        return;
+
                     // Generate the tab contents depending on what XenObject we're displaying
 
                     if (pool.ha_enabled)
