@@ -50,10 +50,6 @@ namespace XenAPI
         public enum Edition
         {
             Free,
-            Advanced,
-            Enterprise,
-            Platinum,
-            EnterpriseXD,
             PerSocket,     //Added in Clearwater (PR-1589)
             XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
             EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
@@ -80,14 +76,6 @@ namespace XenAPI
         {
             switch (editionText)
             {
-                case "advanced":
-                    return Edition.Advanced;
-                case "enterprise":
-                    return Edition.Enterprise;
-                case "enterprise-xd":
-                    return Edition.EnterpriseXD;
-                case "platinum":
-                    return Edition.Platinum;
                 case "xendesktop":
                     return Edition.XenDesktop;
                 case "per-socket":
@@ -136,14 +124,7 @@ namespace XenAPI
         {
             switch (edition)
             {
-                case Edition.Advanced:
-                    return "advanced";
-                case Edition.Enterprise:
-                    return "enterprise";
-                case Edition.Platinum:
-                    return "platinum";
-                case Edition.EnterpriseXD:
-                    return "enterprise-xd";
+
                 case Edition.XenDesktop:
                     return "xendesktop";
                 case Edition.PerSocket:
@@ -454,10 +435,9 @@ namespace XenAPI
                     return BoolKeyPreferTrue(license_params, "restrict_export_resource_data");
                 }
                 // Pre-Creedence hosts:
-                // allowed on Per-Socket edition for Clearwater hosts and Advanced, Enterprise and Platinum editions for older hosts
+                // allowed on Per-Socket edition for Clearwater hosts
                 var hostEdition = GetEdition(edition);
-                if (hostEdition == Edition.PerSocket || hostEdition == Edition.Advanced ||
-                    hostEdition == Edition.Enterprise || hostEdition == Edition.Platinum)
+                if (hostEdition == Edition.PerSocket)
                 {
                     return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
                 }
@@ -1562,9 +1542,6 @@ namespace XenAPI
         {
             get
             {
-                if(!Helpers.ClearwaterOrGreater(Connection))
-                    return true;
-                
                 return !Helpers.FeatureForbidden(Connection, RestrictHotfixApply);
             }
         }

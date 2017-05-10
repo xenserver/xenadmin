@@ -81,7 +81,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                if (Helpers.ClearwaterOrGreater(Connection) && Enum.IsDefined(typeof(AlertPriority), _priority))
+                if (Enum.IsDefined(typeof(AlertPriority), _priority))
                     return (AlertPriority)_priority;
 
                 return AlertPriority.Unknown;

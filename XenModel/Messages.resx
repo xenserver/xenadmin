@@ -1882,9 +1882,6 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="APPLYLICENSE_UPDATED" xml:space="preserve">
     <value>License updated</value>
   </data>
-  <data name="APPLY_ACTIVATION_KEY" xml:space="preserve">
-    <value>Apply Activation Key</value>
-  </data>
   <data name="APPLY_HOTFIX" xml:space="preserve">
     <value>Apply hotfix</value>
   </data>
@@ -2525,9 +2522,6 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>Checking host liveness status</value>
   </data>
-  <data name="CHECKING_LICENSING_STATUS" xml:space="preserve">
-    <value>Checking license status</value>
-  </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>Checking role...</value>
   </data>
@@ -2551,12 +2545,6 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_UPGRADE_HOTFIX_STATUS" xml:space="preserve">
     <value>Checking upgrade hotfix status</value>
-  </data>
-  <data name="CHECKING_VMPR_STATUS" xml:space="preserve">
-    <value>Checking the presence of VM Protection Policies</value>
-  </data>
-  <data name="CHECKING_WSS_STATUS" xml:space="preserve">
-    <value>Checking the possible presence of WSS appliances</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
     <value>Pool '{0}' cannot have WLB enabled</value>
@@ -6985,21 +6973,6 @@ Size: {3}</value>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>The license server {0} could not be reached. You have until {1} to reconnect to the license server.</value>
   </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION" xml:space="preserve">
-    <value>Expired (Requires activation)</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_DAYS" xml:space="preserve">
-    <value>Requires activation in {0} days</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_HOURS" xml:space="preserve">
-    <value>Requires activation in {0} hours</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_MINUTES" xml:space="preserve">
-    <value>Requires activation in {0} minutes</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_ONE_MIN" xml:space="preserve">
-    <value>Requires activation in 1 minute</value>
-  </data>
   <data name="LICENSE_RESTRICTION_MESSAGE" xml:space="preserve">
     <value>License Restriction: Could not connect to {0}, a server with an XE Express License already exists ({1})</value>
   </data>
@@ -7073,9 +7046,6 @@ Standard features only</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
     <value>One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Free [XenServer] products.</value>
-  </data>
-  <data name="LICENSING_DIALOG_TEXT" xml:space="preserve">
-    <value>Activate your free [XenServer] products or assign/release licenses for [XenServer] Advanced, Enterprise and Platinum Editions.</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
@@ -8098,9 +8068,6 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_DIFF_SERVER" xml:space="preserve">
     <value>This server is a different version to the master</value>
   </data>
-  <data name="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="preserve">
-    <value>You cannot add a Free Edition [XenServer] to a pool with [XenServer] Advanced Edition or higher licenses</value>
-  </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
     <value>This server has running VMs</value>
   </data>
@@ -8127,9 +8094,6 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NEWPOOL_MASTER_ROLE" xml:space="preserve">
     <value>Your current role on the master is not authorized to add hosts to the master's pool</value>
-  </data>
-  <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>You cannot add server with a [XenServer product] Advanced Edition or higher license to a pool of Free Edition servers</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>Pooling is restricted with this server's license</value>
@@ -10398,18 +10362,6 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade did not complete.</value>
   </data>
-  <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
-    <value>'{0}': New versions of [XenServer] require new licenses to be added to your license server.</value>
-  </data>
-  <data name="RPU_WIZARD_TAMPA_AND_OLDER_TITLE" xml:space="preserve">
-    <value>Checking licensing status</value>
-  </data>
-  <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>'{0}': VM Protection Policies were removed in [XenServer] [BRANDING_VERSION_6_2]</value>
-  </data>
-  <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
-    <value>'{0}': The use of WSS servers was removed in [XenServer] [BRANDING_VERSION_6_2]</value>
-  </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
   </data>
@@ -10615,7 +10567,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>The current time on the pool master is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards.</value>
+    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_2] onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>Use an earlier version of [XenCenter] to manage this server.</value>

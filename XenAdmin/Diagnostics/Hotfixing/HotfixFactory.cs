@@ -30,7 +30,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -40,31 +39,13 @@ namespace XenAdmin.Diagnostics.Hotfixing
     {
         public enum HotfixableServerVersion
         {
-            Boston,
-            SanibelToClearwater,
+            Clearwater,
             Creedence,
             Dundee,
             Ely
         }
 
-        private readonly Hotfix bostonHotfix = new MultipleHotfix()
-                                        {
-                                            ComponentHotfixes = new List<Hotfix>
-                                                     {
-                                                          new SingleHotfix
-                                                         {
-                                                             Filename = "XS60E001",
-                                                             UUID = "95ac709c-e408-423f-8d22-84b8134a149e"
-                                                         },
-                                                          new SingleHotfix
-                                                         {
-                                                             Filename = "RPU001",
-                                                             UUID = "591d0209-531e-4ed8-9ed2-98df2a1a445c"
-                                                         }
-                                                     }
-                                        };
-
-        private readonly Hotfix sanibelToClearwaterHotfix = new SingleHotfix
+        private readonly Hotfix clearwaterHotfix = new SingleHotfix
                                                          {
                                                              Filename = "RPU001",
                                                              UUID = "591d0209-531e-4ed8-9ed2-98df2a1a445c"
@@ -96,10 +77,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
                 return Hotfix(HotfixableServerVersion.Dundee);
             if (Helpers.CreedenceOrGreater(host) && !Helpers.DundeeOrGreater(host))
                 return Hotfix(HotfixableServerVersion.Creedence);
-            if (Helpers.SanibelOrGreater(host) && !Helpers.CreedenceOrGreater(host))
-                return Hotfix(HotfixableServerVersion.SanibelToClearwater);
-            if (!Helpers.SanibelOrGreater(host))
-                return Hotfix(HotfixableServerVersion.Boston);
+            if (!Helpers.CreedenceOrGreater(host))
+                return Hotfix(HotfixableServerVersion.Clearwater);
 
             return null;
         }
@@ -112,10 +91,8 @@ namespace XenAdmin.Diagnostics.Hotfixing
                 return dundeeHotfix; 
             if (version == HotfixableServerVersion.Creedence)
                 return creedenceHotfix; 
-            if (version == HotfixableServerVersion.SanibelToClearwater)
-                return sanibelToClearwaterHotfix;
-            if (version == HotfixableServerVersion.Boston)
-                return bostonHotfix;
+            if (version == HotfixableServerVersion.Clearwater)
+                return clearwaterHotfix;
 
             throw new ArgumentException("A version was provided for which there is no hotfix filename");
         }

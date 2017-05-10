@@ -430,15 +430,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://support.citrix.com/article/CTX137334.
-        /// </summary>
-        public static string WSS_DEPRECATION_URL {
-            get {
-                return ResourceManager.GetString("WSS_DEPRECATION_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to xensearch.
         /// </summary>
         public static string XEN_SEARCH {

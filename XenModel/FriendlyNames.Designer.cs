@@ -781,15 +781,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Advanced Edition.
-        /// </summary>
-        public static string Label_host_edition_advanced {
-            get {
-                return ResourceManager.GetString("Label-host.edition-advanced", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [Citrix] [XenServer product] Basic Edition.
         /// </summary>
         public static string Label_host_edition_basic {
@@ -817,15 +808,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Enterprise Edition.
-        /// </summary>
-        public static string Label_host_edition_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.edition-enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [XenServer product] Enterprise Per-Socket.
         /// </summary>
         public static string Label_host_edition_enterprise_per_socket {
@@ -844,29 +826,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] for XenDesktop.
-        /// </summary>
-        public static string Label_host_edition_enterprise_xd {
-            get {
-                return ResourceManager.GetString("Label-host.edition-enterprise-xd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [XenServer product].
         /// </summary>
         public static string Label_host_edition_free {
             get {
                 return ResourceManager.GetString("Label-host.edition-free", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer product].
-        /// </summary>
-        public static string Label_host_edition_free_libre {
-            get {
-                return ResourceManager.GetString("Label-host.edition-free/libre", resourceCulture);
             }
         }
         
@@ -878,16 +842,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("Label-host.edition-per-socket", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Platinum Edition.
-        /// </summary>
-        public static string Label_host_edition_platinum {
-            get {
-                return ResourceManager.GetString("Label-host.edition-platinum", resourceCulture);
-            }
-        }
-        
+             
         /// <summary>
         ///   Looks up a localized string similar to [Citrix] [XenServer product] Ultimate Edition.
         /// </summary>
@@ -921,15 +876,6 @@ namespace XenAdmin {
         public static string Label_host_edition_xendesktop {
             get {
                 return ResourceManager.GetString("Label-host.edition-xendesktop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XenDesktop Platinum.
-        /// </summary>
-        public static string Label_host_edition_xendesktop_platinum {
-            get {
-                return ResourceManager.GetString("Label-host.edition-xendesktop-platinum", resourceCulture);
             }
         }
         
@@ -997,15 +943,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server License.
-        /// </summary>
-        public static string Label_host_license_params_sku_type {
-            get {
-                return ResourceManager.GetString("Label-host.license_params-sku_type", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to License Server Address.
         /// </summary>
         public static string Label_host_license_server_address {
@@ -1065,168 +1002,6 @@ namespace XenAdmin {
         public static string Label_host_ServerMemory {
             get {
                 return ResourceManager.GetString("Label-host.ServerMemory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_dell_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-dell_xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Express Edition.
-        /// </summary>
-        public static string Label_host_sku_type_dell_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-dell_xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Server Edition.
-        /// </summary>
-        public static string Label_host_sku_type_dell_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-dell_xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], Dell Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_dell_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-dell_xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_dell_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-dell_xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], Dell Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_dell_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-dell_xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], HP Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_hp_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-hp_xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_hp_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-hp_xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], HP Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_hp_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-hp_xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product].
-        /// </summary>
-        public static string Label_host_sku_type_FG_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product].
-        /// </summary>
-        public static string Label_host_sku_type_FG_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product].
-        /// </summary>
-        public static string Label_host_sku_type_FG_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_hp_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-hp_xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Select Edition.
-        /// </summary>
-        public static string Label_host_sku_type_hp_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-hp_xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Server Edition.
-        /// </summary>
-        public static string Label_host_sku_type_hp_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-hp_xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Express Edition.
-        /// </summary>
-        public static string Label_host_sku_type_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Server Edition.
-        /// </summary>
-        public static string Label_host_sku_type_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-xe_server", resourceCulture);
             }
         }
         

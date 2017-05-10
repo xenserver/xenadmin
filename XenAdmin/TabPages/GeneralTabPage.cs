@@ -1003,19 +1003,9 @@ namespace XenAdmin.TabPages
             if (!string.IsNullOrEmpty(host.edition))
             {
                 s.AddEntry(FriendlyName("host.edition"), Helpers.GetFriendlyLicenseName(host));
-                if (info.ContainsKey("sku_type"))
-                {
-                    info.Remove("sku_type");
-                }
-            }
-            else if (info.ContainsKey("sku_type"))
-            {
-                s.AddEntry(FriendlyName("host.license_params-sku_type"), Helpers.GetFriendlyLicenseName(host));
-                info.Remove("sku_type");
             }
 
-            if(Helpers.ClearwaterOrGreater(host))
-                s.AddEntry(Messages.NUMBER_OF_SOCKETS, host.CpuSockets.ToString());
+            s.AddEntry(Messages.NUMBER_OF_SOCKETS, host.CpuSockets.ToString());
 
             if (host.license_server.ContainsKey("address"))
             {
@@ -1321,8 +1311,7 @@ namespace XenAdmin.TabPages
             if (p != null)
             {
                 s.AddEntry(Messages.POOL_LICENSE, p.LicenseString);
-                if (Helpers.ClearwaterOrGreater(p.Connection))
-                    s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
+                s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
 
                 var master = p.Connection.Resolve(p.master);
                 if (master != null)

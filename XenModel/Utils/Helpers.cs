@@ -313,35 +313,6 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool TampaOrGreater(IXenConnection conn)
-        {
-            return conn == null || TampaOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool TampaOrGreater(Host host)
-        {
-            if (host == null)
-                return true;
-            
-            string platform_version = Helpers.HostPlatformVersion(host);
-            return
-                platform_version != null && Helpers.productVersionCompare(platform_version, "1.5.50") >= 0;
-        }
-
-        public static bool SanibelOrGreater(IXenConnection conn)
-        {
-            return conn == null || SanibelOrGreater(Helpers.GetMaster(conn));
-        }
-
-        public static bool SanibelOrGreater(Host host)
-        {
-            return
-                TampaOrGreater(host) ||  // CP-2480
-                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "6.0.1") >= 0;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool CreedenceOrGreater(IXenConnection conn)
         {
             return conn == null || CreedenceOrGreater(Helpers.GetMaster(conn));
@@ -2023,12 +1994,12 @@ namespace XenAdmin.Core
         }
 
        /// <summary>
-       /// Does the connection support Link aggregation (LACP) bonds (i.e., is Tampa or later on the vSwitch backend)?
+       /// Does the connection support Link aggregation (LACP) bonds (i.e. on the vSwitch backend)?
        /// </summary>
        public static bool SupportsLinkAggregationBond(IXenConnection connection)
        {
            Host master = GetMaster(connection);
-           return master != null && TampaOrGreater(master) && master.vSwitchNetworkBackend;
+           return master != null && master.vSwitchNetworkBackend;
        }
 
        /// <summary>
@@ -2037,8 +2008,8 @@ namespace XenAdmin.Core
        public static int BondSizeLimit(IXenConnection connection)
        {
            Host master = GetMaster(connection);
-           // For Tampa or later on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
-           return master != null && TampaOrGreater(master) && master.vSwitchNetworkBackend ? 4 : 2;
+           // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
+           return master != null && master.vSwitchNetworkBackend ? 4 : 2;
        }
 
        public static Host GetHostAncestor(IXenObject xenObject)

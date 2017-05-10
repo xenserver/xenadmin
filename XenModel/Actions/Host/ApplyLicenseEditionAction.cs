@@ -184,10 +184,7 @@ namespace XenAdmin.Actions
 
                     if(xo is Host && host != null)
                     {
-                        if (Helpers.ClearwaterOrGreater(host))
-                            Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition), false);
-                        else
-                            Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition));
+                        Host.apply_edition(host.Connection.Session, host.opaque_ref, Host.GetEditionText(_edition), false);
 
                         // PR-1102: populate the list of updated hosts
                         updatedHosts.Add(host, previousLicenseData);
@@ -195,18 +192,7 @@ namespace XenAdmin.Actions
 
                     if (xo is Pool)
                     {
-                        if(!Helpers.ClearwaterOrGreater(xo.Connection))
-                        {
-                            foreach (Host poolHost in xo.Connection.Cache.Hosts)
-                            {
-                                Host.apply_edition(host.Connection.Session, poolHost.opaque_ref, Host.GetEditionText(_edition));
-                            }  
-                        }
-                        else
-                        {
-                            Pool.apply_edition(xo.Connection.Session, pool.opaque_ref, Host.GetEditionText(_edition));
-                        }
-                            
+                        Pool.apply_edition(xo.Connection.Session, pool.opaque_ref, Host.GetEditionText(_edition));
 
                         xo.Connection.Cache.Hosts.ToList().ForEach(h => updatedHosts.Add(h, previousLicenseData));
                     }
