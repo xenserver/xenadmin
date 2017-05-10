@@ -179,8 +179,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 //add a revert pre-check action for this pool
-                finalActions.Add(new UnwindProblemsAction(ProblemsResolvedPreCheck.Where(p => hosts.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList(),
-                    string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, pool.Connection.Name)));
+                var problemsToRevert = ProblemsResolvedPreCheck.Where(p => hosts.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList();
+                if (problemsToRevert.Count > 0)
+                {
+                    finalActions.Add(new UnwindProblemsAction(problemsToRevert, string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, pool.Connection.Name)));
+                }
 
                 if (planActions.Count > 0)
                 {
