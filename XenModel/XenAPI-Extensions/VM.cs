@@ -1018,21 +1018,22 @@ namespace XenAPI
             NoTemplate = 0,//it's not a template
             Custom = 1,
             Windows = 2,
-            Centos = 3,
-            CoreOS = 4,
-            Debian = 5,
-            NeoKylin = 6,
-            Oracle = 7,
-            RedHat = 8,
-            SciLinux = 9,
-            Suse = 10,
-            Ubuntu = 11,
-            Citrix = 12,
-            Solaris = 13,
-            Misc = 14,
-            Snapshot = 15,
-            SnapshotFromVmpp = 16,
-            Count = 17  //bump this if values are added
+            LegacyWindows = 3,
+            Centos = 4,
+            CoreOS = 5,
+            Debian = 6,
+            NeoKylin = 7,
+            Oracle = 8,
+            RedHat = 9,
+            SciLinux = 10,
+            Suse = 11,
+            Ubuntu = 12,
+            Citrix = 13,
+            Solaris = 14,
+            Misc = 15,
+            Snapshot = 16,
+            SnapshotFromVmpp = 17,
+            Count = 18  //bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -1073,6 +1074,9 @@ namespace XenAPI
 
                 if (os.Contains("scientific"))
                     return VmTemplateType.SciLinux;
+
+                if (os.Contains("legacy windows"))
+                    return VmTemplateType.LegacyWindows; 
 
                 if (os.Contains("windows"))
                     return VmTemplateType.Windows;
