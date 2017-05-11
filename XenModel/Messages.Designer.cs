@@ -17172,6 +17172,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://cis.citrix.com/legal/.
+        /// </summary>
+        public static string HEALTH_CHECK_CIS_POLICY_URL {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_CIS_POLICY_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.citrix.com/about/legal/privacy.html.
+        /// </summary>
+        public static string HEALTH_CHECK_CITRIX_POLICY_URL {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_CITRIX_POLICY_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at {0} and [Citrix] Privacy Policy at {1}..
+        /// </summary>
+        public static string HEALTH_CHECK_PRIVACY_POLICY {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_PRIVACY_POLICY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This user is not authorized to access this server..
         /// </summary>
         public static string HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT {
