@@ -163,7 +163,7 @@
     <value>0, 0, 3, 0</value>
   </data>
   <data name="ConnectionTimeoutLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
+    <value>104, 23</value>
   </data>
   <data name="ConnectionTimeoutLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -190,7 +190,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="ConnectionTimeoutNud.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 3</value>
+    <value>107, 3</value>
   </data>
   <data name="ConnectionTimeoutNud.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 3, 0</value>
@@ -226,10 +226,10 @@
     <value>NoControl</value>
   </data>
   <data name="SecondsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 0</value>
+    <value>177, 0</value>
   </data>
   <data name="SecondsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
+    <value>46, 23</value>
   </data>
   <data name="SecondsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -259,7 +259,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 23</value>
+    <value>226, 23</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -292,7 +292,7 @@
     <value>9, 27</value>
   </data>
   <data name="TimeOutLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 18</value>
+    <value>388, 13</value>
   </data>
   <data name="TimeOutLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -319,13 +319,13 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="TimeoutGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 196</value>
+    <value>3, 267</value>
   </data>
   <data name="TimeoutGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
   <data name="TimeoutGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 74</value>
+    <value>584, 87</value>
   </data>
   <data name="TimeoutGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -358,7 +358,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="BypassForServersCheckbox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -592,13 +592,13 @@
     <value>NoControl</value>
   </data>
   <data name="ProxyAddressLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 75</value>
+    <value>20, 69</value>
   </data>
   <data name="ProxyAddressLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>20, 0, 0, 0</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="ProxyAddressLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 23</value>
+    <value>55, 23</value>
   </data>
   <data name="ProxyAddressLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -619,7 +619,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;ProxyAddressLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="UseProxyRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -631,10 +631,10 @@
     <value>NoControl</value>
   </data>
   <data name="UseProxyRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 53</value>
+    <value>3, 49</value>
   </data>
   <data name="UseProxyRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 19</value>
+    <value>132, 17</value>
   </data>
   <data name="UseProxyRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -652,7 +652,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;UseProxyRadioButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="DirectConnectionRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -667,7 +667,7 @@
     <value>3, 3</value>
   </data>
   <data name="DirectConnectionRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 19</value>
+    <value>144, 17</value>
   </data>
   <data name="DirectConnectionRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -685,7 +685,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;DirectConnectionRadioButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>8</value>
   </data>
   <data name="UseIERadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -697,10 +697,10 @@
     <value>NoControl</value>
   </data>
   <data name="UseIERadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 26</value>
   </data>
   <data name="UseIERadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 19</value>
+    <value>260, 17</value>
   </data>
   <data name="UseIERadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -718,7 +718,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;UseIERadioButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>9</value>
   </data>
   <data name="ProxyAddressTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -727,13 +727,13 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="ProxyAddressTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 78</value>
+    <value>75, 72</value>
   </data>
   <data name="ProxyAddressTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 3, 0</value>
   </data>
   <data name="ProxyAddressTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 20</value>
+    <value>222, 20</value>
   </data>
   <data name="ProxyAddressTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -796,13 +796,13 @@
     <value>NoControl</value>
   </data>
   <data name="ProxyPortLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 75</value>
+    <value>334, 74</value>
   </data>
   <data name="ProxyPortLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
   </data>
   <data name="ProxyPortLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 23</value>
+    <value>31, 13</value>
   </data>
   <data name="ProxyPortLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -823,7 +823,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;ProxyPortLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>12</value>
   </data>
   <data name="AuthenticationMethodLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -958,10 +958,10 @@
     <value>12, 19</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 122</value>
+    <value>505, 185</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -988,13 +988,13 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="ProxyGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 46</value>
+    <value>3, 41</value>
   </data>
   <data name="ProxyGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
   <data name="ProxyGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 144</value>
+    <value>584, 220</value>
   </data>
   <data name="ProxyGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1030,7 +1030,7 @@
     <value>3, 0, 3, 12</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 31</value>
+    <value>584, 26</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
