@@ -146,6 +146,9 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
 
+        protected virtual void AddAditionalMappings(Dictionary<string, VmMapping> vmMappings)
+        {}
+
 		#region Base class (XenTabPage) overrides
 
 		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
@@ -342,6 +345,9 @@ namespace XenAdmin.Wizards.GenericPages
                         }
                     }
                 }
+
+                AddAditionalMappings(m_vmMappings);
+
                 return m_vmMappings;
             }
             set { m_vmMappings = value; }
