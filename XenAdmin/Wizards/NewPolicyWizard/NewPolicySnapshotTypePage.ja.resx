@@ -211,7 +211,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioButtonDiskAndMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
+    <value>6, 127</value>
   </data>
   <data name="radioButtonDiskAndMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 18</value>
