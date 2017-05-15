@@ -343,14 +343,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             set;
         }
 
-        protected virtual List<KeyValuePair<string, List<Check>>> GenerateCommonChecks()
+        protected virtual List<KeyValuePair<string, List<Check>>> GenerateCommonChecks(List<Host> applicableServers)
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
 
             //HostLivenessCheck checks
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HOST_LIVENESS_STATUS, new List<Check>()));
             List<Check> checkGroup = checks[checks.Count - 1].Value;
-            foreach (Host host in SelectedServers)
+            foreach (Host host in applicableServers)
             {
                 checkGroup.Add(new HostLivenessCheck(host));
             }
@@ -367,7 +367,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             //PBDsPluggedCheck
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, new List<Check>()));
             checkGroup = checks[checks.Count - 1].Value;
-            foreach (Host host in SelectedServers)
+            foreach (Host host in applicableServers)
             {
                 checkGroup.Add(new PBDsPluggedCheck(host));
             }
@@ -404,7 +404,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
         {
-            List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks();
+            List<Host> applicableServers = patch != null ? SelectedServers.Where(h => patch.AppliedOn(h) == DateTime.MaxValue).ToList() : SelectedServers;
+
+            List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks(applicableServers);
             
             List<Check> checkGroup;
             
@@ -429,7 +431,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var guidance = patch != null
                     ? patch.after_apply_guidance
                     : new List<after_apply_guidance> {after_apply_guidance.restartHost};
-                foreach (var host in SelectedServers)
+                foreach (var host in applicableServers)
                 {
                     checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
                 }
@@ -442,7 +444,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
+                foreach (Host host in applicableServers)
                 {
                     checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
                 }
@@ -453,8 +455,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected virtual List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_update update)
         {
-            List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks();
+            List<Host> applicableServers = update != null ? SelectedServers.Where(h => !update.AppliedOn(h)).ToList() : SelectedServers;
 
+            List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks(applicableServers);
             List<Check> checkGroup;
 
             //Checking other things
@@ -478,7 +481,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var guidance = update != null
                     ? update.after_apply_guidance
                     : new List<update_after_apply_guidance> {update_after_apply_guidance.restartHost};
-                foreach (var host in SelectedServers)
+                foreach (var host in applicableServers)
                 {
                     checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
                 }
@@ -489,7 +492,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in SelectedServers)
+                foreach (Host host in applicableServers)
                 {
                     checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
                 }

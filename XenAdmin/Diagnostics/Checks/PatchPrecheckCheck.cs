@@ -80,14 +80,6 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunCheck()
         {
-            if (!Host.IsLive)
-                return new HostNotLiveWarning(this, Host);
-
-            if (!Host.Connection.IsConnected)
-                throw new EndOfStreamException(Helpers.GetName(Host.Connection));
-
-            Session session = Host.Connection.DuplicateSession();
-
             //
             // Check patch isn't already applied here
             //
@@ -96,6 +88,16 @@ namespace XenAdmin.Diagnostics.Checks
             {
                 return new PatchAlreadyApplied(this, Host);
             }
+            
+            if (!Host.IsLive)
+                return new HostNotLiveWarning(this, Host);
+
+            if (!Host.Connection.IsConnected)
+                throw new EndOfStreamException(Helpers.GetName(Host.Connection));
+
+            Session session = Host.Connection.DuplicateSession();
+
+            
 
             try
             {
