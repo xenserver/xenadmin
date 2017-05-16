@@ -42,6 +42,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Host host;
         private readonly XenServerPatch xenServerPatch;
         private readonly List<PoolPatchMapping> mappings;
+        private readonly string masterUuid;
 
         public ApplyXenServerPatchPlanAction(Host host, XenServerPatch xenServerPatch, List<PoolPatchMapping> mappings)
             : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name))
@@ -49,14 +50,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             this.host = host;
             this.xenServerPatch = xenServerPatch;
             this.mappings = mappings;
+
+            var master = Helpers.GetMaster(host.Connection);
+            this.masterUuid = master.uuid;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-
-            var master = Helpers.GetMaster(host.Connection);
             var mapping = mappings.Find(m => m.XenServerPatch.Equals(xenServerPatch)
-                                             && m.MasterHost != null && master != null && m.MasterHost.uuid == master.uuid);
+                                             && m.MasterHost != null && m.MasterHost.uuid == masterUuid);
 
             if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
@@ -75,8 +77,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
             else
             {
-                if (xenServerPatch != null && master != null)
-                    log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, master.uuid);
+                if (xenServerPatch != null)
+                    log.ErrorFormat("Mapping not found for patch {0} on master {1}", xenServerPatch.Uuid, masterUuid);
 
                 throw new Exception("Pool_patch or Pool_update not found.");
             }
