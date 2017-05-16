@@ -233,17 +233,19 @@ namespace XenAdmin.Wizards.GenericPages
 
         private void AddStorageMappings(ref List<SummaryDetails> decoratedSummary)
         {
+            bool firstItem = true;
             foreach (var pair in mapping.Storage)
             {
                 VDI vdi = connection.Resolve(new XenRef<VDI>(pair.Key));
-                if (vdi == null)
+                if (vdi == null || vdi.is_a_snapshot) // don't display the storage mappings for the shapshots
                     continue;
 
                 string valueToAdd = vdi.Name + separatorText + pair.Value.Name;
-
-                if (pair.Key == mapping.Storage.First().Key)
+                
+                if (firstItem)
                 {
                     decoratedSummary.Add(new SummaryDetails(Messages.CPM_SUMMARY_KEY_STORAGE, valueToAdd));
+                    firstItem = false;
                 }
                 else
                 {

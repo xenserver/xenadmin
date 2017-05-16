@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using XenAdmin.Controls;
+using XenAdmin.Mappings;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
 
@@ -109,6 +110,39 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             get
             {
                 return templatesOnly ? Messages.CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_TEMPLATE : Messages.CPS_WIZARD_STORAGE_PAGE_DISK_COLUMN_HEADER_FOR_VM;
+            }
+        }
+
+        /// <summary>
+        /// Add storage mappings for snapshots
+        /// </summary>
+        /// <param name="vmMappings"></param>
+        protected override void AddAditionalMappings(Dictionary<string, VmMapping> vmMappings)
+        {
+            foreach (var kvp in vmMappings)
+            {
+                var vm = Connection.Resolve(new XenRef<VM>(kvp.Key));
+                if (vm == null)
+                    continue;
+
+                var vmMapping = kvp.Value;
+                var suitableSr = vmMapping.Storage.Values.FirstOrDefault(); //an SR already selected for VM's disks
+
+                foreach (var snapshot in Connection.ResolveAll(vm.snapshots))
+                {
+                    foreach (IStorageResource resourceData in ResourceData(snapshot.opaque_ref))
+                    {
+                        var snapshotVdi = Connection.Resolve(new XenRef<VDI>(resourceData.Tag.ToString()));
+                        if (snapshotVdi == null)
+                            continue;
+
+                        // try to use the mapping of the original vdi; if this doesn't exist, then use another suitable SR
+                        if (snapshotVdi.snapshot_of != null && vmMapping.Storage.ContainsKey(snapshotVdi.snapshot_of.opaque_ref))
+                            vmMapping.Storage[snapshotVdi.opaque_ref] = vmMapping.Storage[snapshotVdi.snapshot_of.opaque_ref];
+                        else if (suitableSr != null)
+                            vmMapping.Storage[snapshotVdi.opaque_ref] = suitableSr;
+                    }
+                }
             }
         }
     }
