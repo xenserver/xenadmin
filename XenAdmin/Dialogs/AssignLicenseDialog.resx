@@ -685,7 +685,7 @@
     <value>525, 201</value>
   </data>
   <data name="editionsGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="editionsGroupBox.Text" xml:space="preserve">
     <value>License</value>
