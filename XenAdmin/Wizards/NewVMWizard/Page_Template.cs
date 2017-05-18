@@ -306,6 +306,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_CENTOS;
                 case VM.VmTemplateType.Debian:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_DEBIAN;
+                case VM.VmTemplateType.Linx:
+                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_LINX; 
                 case VM.VmTemplateType.Oracle:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_ORACLE;
                 case VM.VmTemplateType.RedHat:
@@ -316,6 +318,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_SUSE;
                 case VM.VmTemplateType.Ubuntu:
                     return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU;
+                case VM.VmTemplateType.YinheKylin:
+                    return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN;    
                 case VM.VmTemplateType.NeoKylin:
                     return Messages.NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN;
                 case VM.VmTemplateType.Asianux:
@@ -348,6 +352,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Resources.centos_16x;
                 case VM.VmTemplateType.Debian:
                     return Resources.debian_16x;
+                case VM.VmTemplateType.Linx:
+                    return Resources.linx_16x;     
                 case VM.VmTemplateType.Oracle:
                     return Resources.oracle_16x;
                 case VM.VmTemplateType.RedHat:
@@ -358,6 +364,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Resources.suse_16x;
                 case VM.VmTemplateType.Ubuntu:
                     return Resources.ubuntu_16x;
+                case VM.VmTemplateType.YinheKylin:
+                    return Resources.yinhekylin_16x;
                 case VM.VmTemplateType.NeoKylin:
                     return Resources.neokylin_16x;
                 case VM.VmTemplateType.Asianux:

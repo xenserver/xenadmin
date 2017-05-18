@@ -4397,6 +4397,8 @@
     <None Include="Images\neokylin_16x.png" />
     <None Include="Images\asianux_16x.png" />
     <None Include="Images\turbo_16x.png" />
+    <None Include="Images\linx_16x.png" />
+    <None Include="Images\yinhekylin_16x.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
