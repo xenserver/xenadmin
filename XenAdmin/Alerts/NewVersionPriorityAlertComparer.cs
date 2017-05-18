@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -31,47 +31,38 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Net;
-using System.IO;
-using XenAdmin.Network;
-using XenAdmin.Core;
-using XenAPI;
+using System.Threading.Tasks;
 
-
-namespace XenAdmin.Actions
+namespace XenAdmin.Alerts
 {
-    public class RemovePatchAction : AsyncAction
+    public class NewVersionPriorityAlertComparer : IComparer<Alert>
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        private readonly Pool_patch patch;
-
-        /// <summary>
-        /// This constructor is used to remove a single 'normal' patch
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="path"></param>
-        public RemovePatchAction(Pool_patch patch)
-            : base(patch.Connection, Messages.REMOVE_PATCH)
+        public int Compare(Alert alert1, Alert alert2)
         {
-            this.patch = patch;
+            if (alert1 == null || alert2 == null)
+                return 0;
+
+            int sortResult = 0;
+
+            if (IsVersionOrVersionUpdateAlert(alert1) && !IsVersionOrVersionUpdateAlert(alert2))
+                sortResult = 1;
+
+            if (!IsVersionOrVersionUpdateAlert(alert1) && IsVersionOrVersionUpdateAlert(alert2))
+                sortResult = -1;
+
+            if (sortResult == 0)
+                sortResult = Alert.CompareOnDate(alert1, alert2);
+
+            return -sortResult;
         }
 
-        protected override void Run()
+        private bool IsVersionOrVersionUpdateAlert(Alert alert)
         {
-            Description = String.Format(Messages.REMOVING_UPDATE, patch.Name);
-            try
-            {
-                RelatedTask = Pool_patch.async_destroy(Session, patch.opaque_ref);
-                PollToCompletion(0, 100);
-            }
-            catch (Failure f)
-            {
-                log.Error("Clean up failed", f);
-            }
-
-            Description = String.Format(Messages.REMOVED_UPDATE, patch.Name);
+            return alert is XenServerPatchAlert && (alert as XenServerPatchAlert).NewServerVersion != null
+                || alert is XenServerVersionAlert
+                || alert is XenCenterUpdateAlert;
         }
     }
 }

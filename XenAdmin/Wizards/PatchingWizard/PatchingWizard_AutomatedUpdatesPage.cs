@@ -48,6 +48,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Text;
 using System.Diagnostics;
+using XenAdmin.Alerts;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -61,6 +62,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
 
         public List<Pool> SelectedPools { private get; set; }
+
+        public XenServerPatchAlert UpdateAlert { private get; set; }
+        public WizardMode WizardMode { private get; set; }
+        public bool ApplyUpdatesToNewVersion { private get; set; }
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
@@ -135,6 +140,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return;
             }
 
+            Debug.Assert(WizardMode == WizardMode.AutomatedUpdates || WizardMode == WizardMode.NewVersion && UpdateAlert != null);
+
+            if (WizardMode == WizardMode.AutomatedUpdates)
+            {
+                labelTitle.Text = Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE;
+            }
+            else if (WizardMode == WizardMode.NewVersion)
+            {
+                labelTitle.Text = Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
+            }
+
             foreach (var pool in SelectedPools)
             {
                 var master = Helpers.GetMaster(pool.Connection);
@@ -147,9 +163,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     delayedActionsByHost.Add(host, new List<PlanAction>());
                 }
 
-                var hosts = pool.Connection.Cache.Hosts;
+                //if any host is not licensed for automated updates
+                bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
 
-                var us = Updates.GetUpgradeSequence(pool.Connection);
+                var us = WizardMode == WizardMode.NewVersion
+                    ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                    : Updates.GetUpgradeSequence(pool.Connection);
 
                 Debug.Assert(us != null, "Update sequence should not be null.");
 
@@ -605,7 +624,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void AllWorkersFinished()
         {
-            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
+            if (WizardMode == WizardMode.AutomatedUpdates)
+            {
+                labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
+            }
+            else if (WizardMode == WizardMode.NewVersion)
+            {
+                labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE;
+            }
+
             progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;

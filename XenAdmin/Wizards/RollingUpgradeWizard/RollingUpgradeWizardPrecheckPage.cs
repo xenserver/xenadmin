@@ -147,10 +147,21 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         protected override List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
+            List<Check> checkGroup;
+
+            //XenCenter version check (if any of the selected server version is not the latest)
+            var latestCrVersion = Updates.XenServerVersions.FindAll(item => item.LatestCr).OrderByDescending(v => v.Version).FirstOrDefault();
+            if (latestCrVersion != null &&
+                SelectedServers.Any(host => new Version(Helpers.HostProductVersion(host)) < latestCrVersion.Version))
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_XENCENTER_VERSION, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                checkGroup.Add(new XenCenterVersionCheck(null));
+            }
 
             //HostMaintenanceModeCheck checks
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HOST_LIVENESS_STATUS, new List<Check>()));
-            List<Check> checkGroup = checks[checks.Count - 1].Value;
+            checkGroup = checks[checks.Count - 1].Value;
             foreach (Host host in SelectedServers)
             {
                 checkGroup.Add(new HostMaintenanceModeCheck(host));

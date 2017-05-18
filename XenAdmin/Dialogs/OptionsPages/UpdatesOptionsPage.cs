@@ -91,19 +91,19 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             if(refreshUpdatesTab)
             {
-                Updates.CheckForUpdates(false);
+                Updates.CheckForUpdates(false, true);
             }
         }
 
         /// <summary>
-        /// Returns true if at least one other box has been checked in Updates Options. Otherwise returns false.
+        /// Returns true if at least one box has been changed in Updates Options. Otherwise returns false.
         /// </summary>
         /// <returns></returns>
         private bool IsCheckForUpdatesRequired()
         {
-            return (AllowXenCenterUpdatesCheckBox.Checked && !Properties.Settings.Default.AllowXenCenterUpdates) ||
-                   (AllowXenServerPatchesCheckBox.Checked && !Properties.Settings.Default.AllowPatchesUpdates) ||
-                   (AllowXenServerUpdatesCheckBox.Checked && !Properties.Settings.Default.AllowXenServerUpdates);
+            return (AllowXenCenterUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenCenterUpdates) ||
+                   (AllowXenServerPatchesCheckBox.Checked != Properties.Settings.Default.AllowPatchesUpdates) ||
+                   (AllowXenServerUpdatesCheckBox.Checked != Properties.Settings.Default.AllowXenServerUpdates);
         }
 
         #endregion

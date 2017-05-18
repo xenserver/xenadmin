@@ -62,8 +62,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             labelWithAutomatedUpdates.Visible = automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = false;
             downloadUpdateRadioButton.Checked = true;
-
-            dataGridViewPatches.Sort(ColumnDate, ListSortDirection.Descending);
         }
 
         private void CheckForUpdates_CheckForUpdatesStarted()
@@ -152,13 +150,30 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 AutomatedUpdatesRadioButton.Checked = automatedUpdatesPossible;
                 downloadUpdateRadioButton.Checked = !automatedUpdatesPossible;
-
+                Updates.CheckServerPatches();
                 PopulatePatchesBox();
                 OnPageUpdated();
             }
         }
 
-        public bool IsInAutomatedUpdatesMode { get { return AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked; } }
+        private bool IsInAutomatedUpdatesMode { get { return AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked; } }
+
+        public WizardMode WizardMode
+        {
+            get
+            {
+                if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
+                    return WizardMode.AutomatedUpdates;
+                var updateAlert = downloadUpdateRadioButton.Checked && dataGridViewPatches.SelectedRows.Count > 0
+                    ? (XenServerPatchAlert) ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).UpdateAlert
+                    : selectFromDiskRadioButton.Checked
+                        ? GetAlertFromFileName(fileNameTextBox.Text.ToLowerInvariant())
+                        : null;
+                if (updateAlert != null && updateAlert.NewServerVersion != null)
+                    return WizardMode.NewVersion;
+                return WizardMode.SingleUpdate;
+            } 
+        }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
@@ -255,7 +270,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void PopulatePatchesBox()
         {
             dataGridViewPatches.Rows.Clear();
-            var updates = new List<Alert>(Updates.UpdateAlerts);
+
+            var updates = Updates.UpdateAlerts.ToList();
+
             if (dataGridViewPatches.SortedColumn != null)
             {
                 if (dataGridViewPatches.SortedColumn.Index == ColumnUpdate.Index)
@@ -268,16 +285,29 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (dataGridViewPatches.SortOrder == SortOrder.Descending)
                     updates.Reverse();
             }
-           foreach (Alert alert in updates)
-           {
-               if (alert is XenServerPatchAlert)
-               {
-                   PatchGridViewRow row = new PatchGridViewRow(alert);
-                   if (!dataGridViewPatches.Rows.Contains(row))
-                   {
-                       dataGridViewPatches.Rows.Add(row);
-                   }
-               }
+            else
+            {
+                updates.Sort(new NewVersionPriorityAlertComparer());
+            }
+
+            foreach (Alert alert in updates)
+            {
+                var patchAlert = alert as XenServerPatchAlert;
+
+                if (patchAlert != null)
+                {
+                    PatchGridViewRow row = new PatchGridViewRow(patchAlert);
+                    if (!dataGridViewPatches.Rows.Contains(row))
+                    {
+                        dataGridViewPatches.Rows.Add(row);
+
+                        if (patchAlert.RequiredXenCenterVersion != null)
+                        {
+                            row.Enabled = false;
+                            row.SetToolTip(string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED, patchAlert.RequiredXenCenterVersion.Version));
+                        }
+                    }
+                }
             }
         }
         
@@ -328,7 +358,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private string UpdateExtension
         {
-            get { return SelectedUpdateType != UpdateType.ISO ? "." + Branding.Update : "." + Branding.UpdateIso; }
+            get { return "." + Branding.Update; }
         }
 
         private bool isValidFile(string fileName)
@@ -591,6 +621,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (obj is PatchGridViewRow)
                     return this.Equals((PatchGridViewRow)obj);
                 return false;
+            }
+
+            public void SetToolTip(string toolTip)
+            {
+                foreach (var c in Cells)
+                {
+                    if (c is DataGridViewLinkCell)
+                        continue;
+
+                    var cell = c as DataGridViewCell;
+                    if (c != null)
+                        ((DataGridViewCell)c).ToolTipText = toolTip;
+                }
             }
         }
 

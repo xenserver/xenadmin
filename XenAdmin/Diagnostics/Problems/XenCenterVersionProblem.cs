@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -30,48 +30,44 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using System.IO;
-using XenAdmin.Network;
 using XenAdmin.Core;
-using XenAPI;
+using XenAdmin.Diagnostics.Checks;
 
-
-namespace XenAdmin.Actions
+namespace XenAdmin.Diagnostics.Problems
 {
-    public class RemovePatchAction : AsyncAction
+    public class XenCenterVersionProblem : ProblemWithInformationUrl
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private XenCenterVersion _requiredXenCenterVersion;
 
-        private readonly Pool_patch patch;
-
-        /// <summary>
-        /// This constructor is used to remove a single 'normal' patch
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="path"></param>
-        public RemovePatchAction(Pool_patch patch)
-            : base(patch.Connection, Messages.REMOVE_PATCH)
+        public XenCenterVersionProblem(Check check, XenCenterVersion requiredXenCenterVersion)
+            : base(check)
         {
-            this.patch = patch;
+            _requiredXenCenterVersion = requiredXenCenterVersion;
         }
 
-        protected override void Run()
+        public override string Title
         {
-            Description = String.Format(Messages.REMOVING_UPDATE, patch.Name);
-            try
-            {
-                RelatedTask = Pool_patch.async_destroy(Session, patch.opaque_ref);
-                PollToCompletion(0, 100);
-            }
-            catch (Failure f)
-            {
-                log.Error("Clean up failed", f);
-            }
+            get { return Messages.PROBLEM_XENCENTER_VERSION_TITLE; }
+        }
 
-            Description = String.Format(Messages.REMOVED_UPDATE, patch.Name);
+        public override string Description
+        {
+            get { return string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED, _requiredXenCenterVersion.Version); }
+        }
+
+        public override string HelpMessage
+        {
+            get { return LinkText; }
+        }
+
+        public override string LinkText
+        {
+            get { return Messages.PATCHING_WIZARD_WEBPAGE_CELL; }
+        }
+
+        public override Uri UriToLaunch
+        {
+            get { return new Uri(_requiredXenCenterVersion.Url); }
         }
     }
 }

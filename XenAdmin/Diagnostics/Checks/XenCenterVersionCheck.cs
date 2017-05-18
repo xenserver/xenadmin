@@ -1,4 +1,4 @@
-﻿/* Copyright (c) Citrix Systems Inc. 
+﻿/* Copyright (c) Citrix Systems, Inc. 
  * All rights reserved. 
  * 
  * Redistribution and use in source and binary forms, 
@@ -29,49 +29,36 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using System.IO;
-using XenAdmin.Network;
-using XenAdmin.Core;
 using XenAPI;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAdmin.Alerts;
 
 
-namespace XenAdmin.Actions
+namespace XenAdmin.Diagnostics.Checks
 {
-    public class RemovePatchAction : AsyncAction
+    public class XenCenterVersionCheck : Check
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private XenServerVersion _newServerVersion;
 
-        private readonly Pool_patch patch;
-
-        /// <summary>
-        /// This constructor is used to remove a single 'normal' patch
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="path"></param>
-        public RemovePatchAction(Pool_patch patch)
-            : base(patch.Connection, Messages.REMOVE_PATCH)
+        public XenCenterVersionCheck(XenServerVersion newServerVersion)
+            : base(null)
         {
-            this.patch = patch;
+            _newServerVersion = newServerVersion;
+        }
+        
+        protected override Problem RunCheck()
+        {
+            var requiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(_newServerVersion);
+            if (requiredXenCenterVersion != null)
+                return new XenCenterVersionProblem(this, requiredXenCenterVersion);
+            return null;
         }
 
-        protected override void Run()
+        public override string Description
         {
-            Description = String.Format(Messages.REMOVING_UPDATE, patch.Name);
-            try
-            {
-                RelatedTask = Pool_patch.async_destroy(Session, patch.opaque_ref);
-                PollToCompletion(0, 100);
-            }
-            catch (Failure f)
-            {
-                log.Error("Clean up failed", f);
-            }
-
-            Description = String.Format(Messages.REMOVED_UPDATE, patch.Name);
+            get { return Messages.XENCENTER_VERSION_CHECK_DESCRIPTION; }
         }
     }
 }

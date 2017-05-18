@@ -103,6 +103,7 @@
     <Compile Include="Actions\GUIActions\IgnorePatchAction.cs" />
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
+    <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerUpdateAlert.cs" />
     <Compile Include="Alerts\Types\DuplicateIqnAlert.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
+    <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNeedsReboot.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />
@@ -235,6 +237,7 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Diagnostics\Problems\XenCenterVersionProblem.cs" />
     <Compile Include="Dialogs\EnablePvsReadCachingDialog.cs">
       <SubType>Form</SubType>
     </Compile>

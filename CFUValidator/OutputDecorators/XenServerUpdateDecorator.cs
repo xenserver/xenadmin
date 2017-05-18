@@ -39,21 +39,21 @@ namespace CFUValidator.OutputDecorators
 {
     class XenServerUpdateDecorator : Decorator
     {
-        private readonly XenServerVersionAlert alert;
+        private readonly List<XenServerVersionAlert> alerts;
         private const string header = "XenServer updates required:";
         private const string updateNotFound = "XenServer update could not be found";
 
-        public XenServerUpdateDecorator(OuputComponent ouputComponent, XenServerVersionAlert alert)
+        public XenServerUpdateDecorator(OuputComponent ouputComponent, List<XenServerVersionAlert> alerts)
         {
             SetComponent(ouputComponent);
-            this.alert = alert;
+            this.alerts = alerts;
         }
 
         public override StringBuilder Generate()
         {
             StringBuilder sb = base.Generate();
             sb.AppendLine(header);
-            sb.AppendLine(alert == null ? updateNotFound : alert.Version.Name);
+            sb.AppendLine(alerts == null || alerts.Count == 0 ? updateNotFound : string.Join(",", alerts.SelectMany(a => a.Version.Name)));
             return sb.AppendLine(String.Empty);
         }
     }

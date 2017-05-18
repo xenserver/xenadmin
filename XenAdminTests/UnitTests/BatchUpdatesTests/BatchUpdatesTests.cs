@@ -76,7 +76,7 @@ namespace XenAdminTests.UnitTests
         {
             var serverVersions = new List<XenServerVersion>();
 
-            var version = new XenServerVersion("7.0.0", "XenServer Test 7", true, "", new List<XenServerPatch>(), new List<XenServerPatch>(), DateTime.MinValue.ToString(), "buildNo");
+            var version = new XenServerVersion("7.0.0", "XenServer Test 7", true, false, "", new List<XenServerPatch>(), new List<XenServerPatch>(), DateTime.MinValue.ToString(), "buildNo", "");
             for (int ii = 0; ii < numberOfPatches; ii++)
             {
                 var patch = new XenServerPatch("patch_uuid_" + ii, "patch name " + ii, "patch description" + ii, "", "", "1.0", "", "", "1970-01-01T00:00:00Z", "", "1000");
