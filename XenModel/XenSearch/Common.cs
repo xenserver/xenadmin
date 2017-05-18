@@ -1243,6 +1243,8 @@ namespace XenAdmin.XenSearch
                                 return Icons.Debian;
                             if (os.Contains("red"))
                                 return Icons.RHEL;
+                            if (os.Contains("rocky"))
+                                return Icons.Rocky; 
                             if (os.Contains("cent"))
                                 return Icons.CentOS;
                             if (os.Contains("oracle"))
