@@ -247,7 +247,7 @@
     <value>304, 23</value>
   </data>
   <data name="licenseServerNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;licenseServerNameTextBox.Name" xml:space="preserve">
     <value>licenseServerNameTextBox</value>
@@ -271,7 +271,7 @@
     <value>63, 23</value>
   </data>
   <data name="licenseServerPortTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="licenseServerPortTextBox.Text" xml:space="preserve">
     <value>27000</value>
@@ -454,7 +454,7 @@
     <value>214, 19</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.Text" xml:space="preserve">
     <value>[XenServer product] for &amp;XenDesktop</value>
@@ -487,7 +487,7 @@
     <value>245, 19</value>
   </data>
   <data name="enterprisePerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="enterprisePerSocketRadioButton.Text" xml:space="preserve">
     <value>[XenServer product] E&amp;nterprise Per-Socket</value>
@@ -520,7 +520,7 @@
     <value>233, 19</value>
   </data>
   <data name="enterprisePerUserRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="enterprisePerUserRadioButton.Text" xml:space="preserve">
     <value>[XenServer product] &amp;Enterprise Per-User</value>
@@ -556,7 +556,7 @@
     <value>186, 19</value>
   </data>
   <data name="desktopPlusRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>4</value>
   </data>
   <data name="desktopPlusRadioButton.Text" xml:space="preserve">
     <value>XenApp/XenDesktop &amp;Platinum</value>
@@ -589,7 +589,7 @@
     <value>135, 19</value>
   </data>
   <data name="desktopRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>5</value>
   </data>
   <data name="desktopRadioButton.Text" xml:space="preserve">
     <value>XenApp/Xen&amp;Desktop</value>
@@ -622,7 +622,7 @@
     <value>240, 19</value>
   </data>
   <data name="standardPerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="standardPerSocketRadioButton.Text" xml:space="preserve">
     <value>[XenServer product] &amp;Standard Per-Socket</value>
