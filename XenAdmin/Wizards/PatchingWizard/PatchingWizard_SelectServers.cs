@@ -260,12 +260,37 @@ namespace XenAdmin.Wizards.PatchingWizard
                         row.Enabled = false;
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
                     }
-                    if (applicableHosts != null)
+                    else
                     {
-                        disableNotApplicableHosts(row, applicableHosts, host);
+                        if (applicableHosts != null)
+                        {
+                            disableNotApplicableHosts(row, applicableHosts, host);
+                        }
+                        else
+                        {
+                            var firstCheckedHost = GetFirstCheckedHost();
+                            if (firstCheckedHost != null && (Helpers.ElyOrGreater(firstCheckedHost) != Helpers.ElyOrGreater(host)))
+                            {
+                                row.Enabled = false;
+                                row.Cells[3].ToolTipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS, firstCheckedHost.ProductVersionTextShort, host.ProductVersionTextShort);
+                            }
+                            else if (!row.Enabled)
+                            {
+                                row.Enabled = true;
+                                row.Cells[3].ToolTipText = null;
+                            }
+                        }
                     }
                     break;
             }
+        }
+
+        private Host GetFirstCheckedHost()
+        {
+            var firstCheckedRow = dataGridViewHosts.Rows.Cast<PatchingHostsDataGridViewRow>().FirstOrDefault(row => row.CheckValue > UNCHECKED);
+            if (firstCheckedRow == null)
+                return null;
+            return firstCheckedRow.Tag as Host ?? Helpers.GetMaster(firstCheckedRow.Tag as Pool);
         }
 
         private void disableNotApplicableHosts(PatchingHostsDataGridViewRow row, List<Host> applicableHosts, Host host)
@@ -574,6 +599,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void dataGridViewHosts_CheckBoxClicked(object sender, EventArgs e)
         {
+            foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
+            {
+                var host = row.Tag as Host ?? Helpers.GetMaster(row.Tag as Pool);
+                if (host != null)
+                    EnabledRow(host, SelectedUpdateType, row.Index);
+            }
             OnPageUpdated();
         }
 

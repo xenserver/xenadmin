@@ -178,7 +178,7 @@ namespace XenOvfTransport
             EnvelopeType ovfEnv = OVF.Load(openovf);
             Process(ovfEnv, ovfpath, passcode);
         }
-
+        
         public void Process(EnvelopeType ovfObj, string pathToOvf, string passcode)
         {
             Process(XenSession, ovfObj, pathToOvf, passcode);
@@ -350,7 +350,7 @@ namespace XenOvfTransport
 
                 #endregion
 
-				SetDeviceConnections(ovfObj, vhs);
+                SetDeviceConnections(ovfObj, vhs);
                 try
                 {
                     foreach (RASD_Type rasd in vhs.Item)
@@ -400,6 +400,30 @@ namespace XenOvfTransport
                         HandleInstallSection(xenSession, vmRef, installSection[0]);
                     }
                     ShowSystem(xenSession, vmRef);
+
+                    #region PVS Proxy
+                    var site = FindPvsSite(xenSession, vhs);
+
+                    if (site != null)
+                    {
+                        var vm =  xenSession.Connection.Resolve(vmRef);
+                        if (vm != null)
+                        {
+                            var vifs = xenSession.Connection.ResolveAll(vm.VIFs);
+                            var firstVif = vifs.FirstOrDefault(v => v.device.Equals("0"));
+
+                            if (firstVif != null)
+                            {
+                                var foundSite = PVS_site.get_by_uuid(xenSession, site.uuid);
+
+                                if (foundSite != null)
+                                {
+                                    PVS_proxy.create(xenSession, foundSite.opaque_ref, firstVif.opaque_ref);
+                                }
+                            }
+                        }
+                    }
+                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -1324,6 +1348,7 @@ namespace XenOvfTransport
         }
 
         public static Regex VGPU_REGEX = new Regex("^GPU_types={(.*)};VGPU_type_vendor_name=(.*);VGPU_type_model_name=(.*);$");
+        public static Regex PVS_SITE_REGEX = new Regex("^PVS_SITE={uuid=(.*)};$");
 
         private void FindGpuGroupAndVgpuType(Session xenSession, VirtualHardwareSection_Type system, out GPU_group gpuGroup, out VGPU_type vgpuType)
         {
@@ -1368,6 +1393,29 @@ namespace XenOvfTransport
 
             vgpuType = vgpuKey.Value;
             vgpuType.opaque_ref = vgpuKey.Key.opaque_ref;
+        }
+
+        private PVS_site FindPvsSite(Session xenSession, VirtualHardwareSection_Type system)
+        {
+            var data = system.VirtualSystemOtherConfigurationData;
+            if (data == null)
+                return null;
+
+            var datum = data.FirstOrDefault(s => s.Name == "pvssite");
+            if (datum == null)
+                return null;
+
+            Match m = PVS_SITE_REGEX.Match(datum.Value.Value);
+            if (!m.Success)
+                return null;
+
+            var siteUuid = m.Groups[1].Value;
+
+            var allSites = PVS_site.get_all_records(xenSession);
+
+            var site = allSites.Select(kvp => kvp.Value).FirstOrDefault(p => p.uuid == siteUuid);
+
+            return site;
         }
 
         private void RemoveSystem(Session xenSession, XenRef<VM> vm)
@@ -1538,7 +1586,7 @@ namespace XenOvfTransport
                         VIF vif = new VIF(vifHash);
                         try
                         {
-                            VIF.create(xenSession, vif);
+                            xenSession.Connection.WaitForCache(VIF.create(xenSession, vif));
                         }
                         catch (Exception ex)
                         {
@@ -2603,6 +2651,7 @@ namespace XenOvfTransport
                 _downloadexception = null;
                 OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.FileStart, "Web Download Start", downloadupdatemsg, 0, _filedownloadsize));
                 WebClient wc = new WebClient();
+                wc.Proxy = XenAdmin.XenAdminConfigManager.Provider.GetProxyFromSettings(null, false);
                 wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(wc_DownloadFileCompleted);
                 wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
                 wc.DownloadFileAsync(filetodownload, tmpfilename);

@@ -5078,15 +5078,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Activation Key.
-        /// </summary>
-        public static string APPLY_ACTIVATION_KEY {
-            get {
-                return ResourceManager.GetString("APPLY_ACTIVATION_KEY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Apply hotfix.
         /// </summary>
         public static string APPLY_HOTFIX {
@@ -6963,15 +6954,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking license status.
-        /// </summary>
-        public static string CHECKING_LICENSING_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_LICENSING_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Checking role....
         /// </summary>
         public static string CHECKING_ROLE {
@@ -7040,24 +7022,6 @@ namespace XenAdmin {
         public static string CHECKING_UPGRADE_HOTFIX_STATUS {
             get {
                 return ResourceManager.GetString("CHECKING_UPGRADE_HOTFIX_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking the presence of VM Protection Policies.
-        /// </summary>
-        public static string CHECKING_VMPR_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_VMPR_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking the possible presence of WSS appliances.
-        /// </summary>
-        public static string CHECKING_WSS_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_WSS_STATUS", resourceCulture);
             }
         }
         
@@ -14365,6 +14329,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not authenticate to proxy server on &apos;{0}&apos;..
+        /// </summary>
+        public static string ERROR_PROXY_AUTHENTICATION {
+            get {
+                return ResourceManager.GetString("ERROR_PROXY_AUTHENTICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] has encountered a problem launching PuTTY..
         /// </summary>
         public static string ERROR_PUTTY_LAUNCHING {
@@ -18045,7 +18018,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The iLO credentials are incorrect.
+        ///   Looks up a localized string similar to The iLO power-on request failed.
         /// </summary>
         public static string ILO_POWERON_FAILED {
             get {
@@ -20041,51 +20014,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expired (Requires activation).
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} days.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_DAYS {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_DAYS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} hours.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_HOURS {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_HOURS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} minutes.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_MINUTES {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_MINUTES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in 1 minute.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_ONE_MIN {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_ONE_MIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to License Restriction: Could not connect to {0}, a server with an XE Express License already exists ({1}).
         /// </summary>
         public static string LICENSE_RESTRICTION_MESSAGE {
@@ -20294,15 +20222,6 @@ namespace XenAdmin {
         public static string LICENSING_DIALOG_EXPIRING_SOON_TEXT {
             get {
                 return ResourceManager.GetString("LICENSING_DIALOG_EXPIRING_SOON_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Activate your free [XenServer] products or assign/release licenses for [XenServer] Advanced, Enterprise and Platinum Editions..
-        /// </summary>
-        public static string LICENSING_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("LICENSING_DIALOG_TEXT", resourceCulture);
             }
         }
         
@@ -23715,16 +23634,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot add a Free Edition [XenServer] to a pool with [XenServer] Advanced Edition or higher licenses.
-        /// </summary>
-        public static string NEWPOOL_FREE_HOST_PAID_MASTER {
-            get {
-                return ResourceManager.GetString("NEWPOOL_FREE_HOST_PAID_MASTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This server has running or suspended VMs.
+        ///   Looks up a localized string similar to This server has running VMs.
         /// </summary>
         public static string NEWPOOL_HAS_RUNNING_VMS {
             get {
@@ -23801,15 +23711,6 @@ namespace XenAdmin {
         public static string NEWPOOL_MASTER_ROLE {
             get {
                 return ResourceManager.GetString("NEWPOOL_MASTER_ROLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You cannot add server with a [XenServer product] Advanced Edition or higher license to a pool of Free Edition servers.
-        /// </summary>
-        public static string NEWPOOL_PAID_HOST_FREE_MASTER {
-            get {
-                return ResourceManager.GetString("NEWPOOL_PAID_HOST_FREE_MASTER", resourceCulture);
             }
         }
         
@@ -27119,6 +27020,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The same update cannot be applied to {0} and {1} versions of [XenServer].
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update already applied.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED {
@@ -27138,7 +27048,7 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Select one or more pools or standalone servers that you want to have updated.
-        ///Greyed out servers cannot be updated with automated updates..
+        ///Servers that cannot be updated with automated updates appear disabled in this list..
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE {
             get {
@@ -29723,6 +29633,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reverting resolved prechecks in {0}....
+        /// </summary>
+        public static string REVERTING_RESOLVED_PRECHECKS_POOL {
+            get {
+                return ResourceManager.GetString("REVERTING_RESOLVED_PRECHECKS_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reverting all changes done by this wizard.
         /// </summary>
         public static string REVERTING_WIZARD_CHANGES {
@@ -29880,42 +29799,6 @@ namespace XenAdmin {
         public static string ROLLINGUPGRADE_PRECHECKS {
             get {
                 return ResourceManager.GetString("ROLLINGUPGRADE_PRECHECKS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: New versions of [XenServer] require new licenses to be added to your license server..
-        /// </summary>
-        public static string RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER {
-            get {
-                return ResourceManager.GetString("RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking licensing status.
-        /// </summary>
-        public static string RPU_WIZARD_TAMPA_AND_OLDER_TITLE {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_TAMPA_AND_OLDER_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies were removed in [XenServer] [BRANDING_VERSION_6_2].
-        /// </summary>
-        public static string RPU_WIZARD_VMPR_VMPP_DEPRECATION {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_VMPR_VMPP_DEPRECATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers was removed in [XenServer] [BRANDING_VERSION_6_2].
-        /// </summary>
-        public static string RPU_WIZARD_WSS_DEPRECATED {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_WSS_DEPRECATED", resourceCulture);
             }
         }
         
@@ -30496,7 +30379,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards..
+        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_2] onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -31330,6 +31213,15 @@ namespace XenAdmin {
         public static string SOLUTION_AUTHENTICATION {
             get {
                 return ResourceManager.GetString("SOLUTION_AUTHENTICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check that the proxy server on &apos;{0}&apos; is configured correctly and [XenCenter]&apos;s connection settings are correct and try again..
+        /// </summary>
+        public static string SOLUTION_CHECK_PROXY {
+            get {
+                return ResourceManager.GetString("SOLUTION_CHECK_PROXY", resourceCulture);
             }
         }
         
@@ -32329,9 +32221,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to {0} (version {1}).
         /// </summary>
-        public static string SUPP_PACK_DESCTIPTION {
+        public static string SUPP_PACK_DESCRIPTION {
             get {
-                return ResourceManager.GetString("SUPP_PACK_DESCTIPTION", resourceCulture);
+                return ResourceManager.GetString("SUPP_PACK_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -35464,6 +35356,15 @@ namespace XenAdmin {
         public static string VGPU_DESCRIPTION_ONE {
             get {
                 return ResourceManager.GetString("VGPU_DESCRIPTION_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} virtual GPU ({1} per GPU).
+        /// </summary>
+        public static string VGPU_DESCRIPTION_ZEROES {
+            get {
+                return ResourceManager.GetString("VGPU_DESCRIPTION_ZEROES", resourceCulture);
             }
         }
         

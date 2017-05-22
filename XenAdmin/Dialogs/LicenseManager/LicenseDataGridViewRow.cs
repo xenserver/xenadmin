@@ -73,26 +73,9 @@ namespace XenAdmin.Dialogs
             licenseStatus.BeginUpdate();
         }
 
-        private bool refreshing = false;
         private void licenseStatus_ItemUpdated(object sender, EventArgs e)
         {
-            if (refreshing)
-                return;
-
-            // check if we need to do a full refresh (i.e. pool members need to be displayed as individual items in the list)
-            if (RowShouldBeExpanded(XenObject) && DataGridView is LicenseCheckableDataGridView)
-            {
-                refreshing = true;
-                Program.Invoke(Program.MainWindow, TriggerRefreshAllEvent);  
-            }
-            else
-                Program.Invoke(Program.MainWindow, TriggerCellTextUpdatedEvent);
-        }
-
-        public static bool RowShouldBeExpanded(IXenObject xenObject)
-        {
-            return xenObject is Pool && xenObject.Connection.Cache.Hosts.Length > 1 
-                && LicenseActivationRequest.CanActivate(xenObject as Pool);
+            Program.Invoke(Program.MainWindow, TriggerCellTextUpdatedEvent);
         }
 
         public override Queue<object> CellText
@@ -228,7 +211,7 @@ namespace XenAdmin.Dialogs
 
         public bool HelperUrlRequired
         {
-            get { return XenObject == null ? false : Helpers.ClearwaterOrGreater(XenObject.Connection); }  // CA-115256
+            get { return XenObject != null; }  
         }
 
         public Status RowStatus
@@ -239,9 +222,8 @@ namespace XenAdmin.Dialogs
                 {
                     case Dialogs.LicenseStatus.HostState.Unavailable:
                     case Dialogs.LicenseStatus.HostState.Expired:
-                        return Status.Warning;
                     case Dialogs.LicenseStatus.HostState.Free:
-                        return licenseStatus.PoolLicensingModel == Dialogs.LicenseStatus.LicensingModel.PreClearwater ? Status.Ok : Status.Warning;
+                        return Status.Warning;
                     case Dialogs.LicenseStatus.HostState.Licensed:
                         return Status.Ok;
                     case Dialogs.LicenseStatus.HostState.PartiallyLicensed:

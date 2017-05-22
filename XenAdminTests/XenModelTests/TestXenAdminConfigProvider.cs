@@ -79,6 +79,11 @@ namespace XenAdminTests.XenModelTests
             return new XenAdminSimulatorWebProxy(DbProxy.proxys[connection]);
         }
 
+        public IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer)
+        {
+            return new XenAdminSimulatorWebProxy(DbProxy.proxys[connection]);
+        }
+
         public int GetProxyTimeout(bool timeout)
         {
             return 0;

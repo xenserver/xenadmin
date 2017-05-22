@@ -56,7 +56,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            var session = Connection.DuplicateSession();
+            var session = NewSession();
 
             Description = string.Format(Messages.ACTION_TOOLSTACK_RESTARTING_ON, Host.Name.Ellipsise(30));
             RelatedTask = Host.async_restart_agent(session, Host.opaque_ref);

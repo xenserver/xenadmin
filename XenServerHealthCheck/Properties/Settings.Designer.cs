@@ -93,12 +93,12 @@ namespace XenServerHealthCheck.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool BypassProxyForLocal {
+        public bool BypassProxyForServers {
             get {
-                return ((bool)(this["BypassProxyForLocal"]));
+                return ((bool)(this["BypassProxyForServers"]));
             }
             set {
-                this["BypassProxyForLocal"] = value;
+                this["BypassProxyForServers"] = value;
             }
         }
         
@@ -125,6 +125,54 @@ namespace XenServerHealthCheck.Properties {
             }
             set {
                 this["ConnectionTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProvideProxyAuthentication {
+            get {
+                return ((bool)(this["ProvideProxyAuthentication"]));
+            }
+            set {
+                this["ProvideProxyAuthentication"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProxyUsername {
+            get {
+                return ((string)(this["ProxyUsername"]));
+            }
+            set {
+                this["ProxyUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProxyPassword {
+            get {
+                return ((string)(this["ProxyPassword"]));
+            }
+            set {
+                this["ProxyPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ProxyAuthenticationMethod {
+            get {
+                return ((int)(this["ProxyAuthenticationMethod"]));
+            }
+            set {
+                this["ProxyAuthenticationMethod"] = value;
             }
         }
     }

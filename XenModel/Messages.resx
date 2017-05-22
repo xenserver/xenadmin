@@ -1885,9 +1885,6 @@ Warning: you must ensure that the SR is not in use by any server not connected t
   <data name="APPLYLICENSE_UPDATED" xml:space="preserve">
     <value>License updated</value>
   </data>
-  <data name="APPLY_ACTIVATION_KEY" xml:space="preserve">
-    <value>Apply Activation Key</value>
-  </data>
   <data name="APPLY_HOTFIX" xml:space="preserve">
     <value>Apply hotfix</value>
   </data>
@@ -2528,9 +2525,6 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_HOST_LIVENESS_STATUS" xml:space="preserve">
     <value>Checking host liveness status</value>
   </data>
-  <data name="CHECKING_LICENSING_STATUS" xml:space="preserve">
-    <value>Checking license status</value>
-  </data>
   <data name="CHECKING_ROLE" xml:space="preserve">
     <value>Checking role...</value>
   </data>
@@ -2554,12 +2548,6 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_UPGRADE_HOTFIX_STATUS" xml:space="preserve">
     <value>Checking upgrade hotfix status</value>
-  </data>
-  <data name="CHECKING_VMPR_STATUS" xml:space="preserve">
-    <value>Checking the presence of VM Protection Policies</value>
-  </data>
-  <data name="CHECKING_WSS_STATUS" xml:space="preserve">
-    <value>Checking the possible presence of WSS appliances</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
     <value>Pool '{0}' cannot have WLB enabled</value>
@@ -5060,6 +5048,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ERROR_PREPARING_HOST" xml:space="preserve">
     <value>Error preparing host</value>
   </data>
+  <data name="ERROR_PROXY_AUTHENTICATION" xml:space="preserve">
+    <value>Could not authenticate to proxy server on '{0}'.</value>
+  </data>
   <data name="ERROR_PUTTY_LAUNCHING" xml:space="preserve">
     <value>[XenCenter] has encountered a problem launching PuTTY.</value>
   </data>
@@ -6315,7 +6306,7 @@ Click Configure HA to alter the settings displayed below.</value>
     <value>It is not possible to connect to the iLO service. Please review your configuration.</value>
   </data>
   <data name="ILO_POWERON_FAILED" xml:space="preserve">
-    <value>The iLO credentials are incorrect</value>
+    <value>The iLO power-on request failed</value>
   </data>
   <data name="IMAGE_DEFINITION_PAGE_TEXT" xml:space="preserve">
     <value>VM Definition</value>
@@ -6985,21 +6976,6 @@ Size: {3}</value>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>The license server {0} could not be reached. You have until {1} to reconnect to the license server.</value>
   </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION" xml:space="preserve">
-    <value>Expired (Requires activation)</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_DAYS" xml:space="preserve">
-    <value>Requires activation in {0} days</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_HOURS" xml:space="preserve">
-    <value>Requires activation in {0} hours</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_MINUTES" xml:space="preserve">
-    <value>Requires activation in {0} minutes</value>
-  </data>
-  <data name="LICENSE_REQUIRES_ACTIVATION_ONE_MIN" xml:space="preserve">
-    <value>Requires activation in 1 minute</value>
-  </data>
   <data name="LICENSE_RESTRICTION_MESSAGE" xml:space="preserve">
     <value>License Restriction: Could not connect to {0}, a server with an XE Express License already exists ({1})</value>
   </data>
@@ -7073,9 +7049,6 @@ Standard features only</value>
   </data>
   <data name="LICENSING_DIALOG_EXPIRING_SOON_TEXT" xml:space="preserve">
     <value>One or more managed servers will expire soon. Either assign [XenServer] licenses, or activate Free [XenServer] products.</value>
-  </data>
-  <data name="LICENSING_DIALOG_TEXT" xml:space="preserve">
-    <value>Activate your free [XenServer] products or assign/release licenses for [XenServer] Advanced, Enterprise and Platinum Editions.</value>
   </data>
   <data name="LINK_STATUS" xml:space="preserve">
     <value>Link Status</value>
@@ -8098,11 +8071,8 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_DIFF_SERVER" xml:space="preserve">
     <value>This server is a different version to the master</value>
   </data>
-  <data name="NEWPOOL_FREE_HOST_PAID_MASTER" xml:space="preserve">
-    <value>You cannot add a Free Edition [XenServer] to a pool with [XenServer] Advanced Edition or higher licenses</value>
-  </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
-    <value>This server has running or suspended VMs</value>
+    <value>This server has running VMs</value>
   </data>
   <data name="NEWPOOL_HAS_SHARED_STORAGE" xml:space="preserve">
     <value>This server has shared storage</value>
@@ -8127,9 +8097,6 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NEWPOOL_MASTER_ROLE" xml:space="preserve">
     <value>Your current role on the master is not authorized to add hosts to the master's pool</value>
-  </data>
-  <data name="NEWPOOL_PAID_HOST_FREE_MASTER" xml:space="preserve">
-    <value>You cannot add server with a [XenServer product] Advanced Edition or higher license to a pool of Free Edition servers</value>
   </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>Pooling is restricted with this server's license</value>
@@ -9365,6 +9332,9 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE" xml:space="preserve">
     <value>The server is unreachable</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS" xml:space="preserve">
+    <value>The same update cannot be applied to {0} and {1} versions of [XenServer]</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>Update already applied</value>
   </data>
@@ -9373,7 +9343,7 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE" xml:space="preserve">
     <value>Select one or more pools or standalone servers that you want to have updated.
-Greyed out servers cannot be updated with automated updates.</value>
+Servers that cannot be updated with automated updates appear disabled in this list.</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT" xml:space="preserve">
     <value>Select one or more servers where you want to apply the selected update.
@@ -10327,6 +10297,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REVERTING_RESOLVED_PRECHECKS" xml:space="preserve">
     <value>Reverting resolved prechecks</value>
   </data>
+  <data name="REVERTING_RESOLVED_PRECHECKS_POOL" xml:space="preserve">
+    <value>Reverting resolved prechecks in {0}...</value>
+  </data>
   <data name="REVERTING_WIZARD_CHANGES" xml:space="preserve">
     <value>Reverting all changes done by this wizard</value>
   </data>
@@ -10397,18 +10370,6 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade did not complete.</value>
-  </data>
-  <data name="RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER" xml:space="preserve">
-    <value>'{0}': New versions of [XenServer] require new licenses to be added to your license server.</value>
-  </data>
-  <data name="RPU_WIZARD_TAMPA_AND_OLDER_TITLE" xml:space="preserve">
-    <value>Checking licensing status</value>
-  </data>
-  <data name="RPU_WIZARD_VMPR_VMPP_DEPRECATION" xml:space="preserve">
-    <value>'{0}': VM Protection Policies were removed in [XenServer] [BRANDING_VERSION_6_2]</value>
-  </data>
-  <data name="RPU_WIZARD_WSS_DEPRECATED" xml:space="preserve">
-    <value>'{0}': The use of WSS servers was removed in [XenServer] [BRANDING_VERSION_6_2]</value>
   </data>
   <data name="RUNNING_ARCHIVE" xml:space="preserve">
     <value>Archiving</value>
@@ -10615,7 +10576,7 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>The current time on the pool master is: {0}</value>
   </data>
   <data name="SERVER_TOO_OLD" xml:space="preserve">
-    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards.</value>
+    <value>This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_2] onwards.</value>
   </data>
   <data name="SERVER_TOO_OLD_SOLUTION" xml:space="preserve">
     <value>Use an earlier version of [XenCenter] to manage this server.</value>
@@ -10881,6 +10842,9 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>Try again using a correct user name and password.</value>
+  </data>
+  <data name="SOLUTION_CHECK_PROXY" xml:space="preserve">
+    <value>Check that the proxy server on '{0}' is configured correctly and [XenCenter]'s connection settings are correct and try again.</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
     <value>Check that [XenServer] is configured correctly on '{0}' and try again.</value>
@@ -11215,7 +11179,7 @@ The upper limit: SR size / {2}</value>
   <data name="SUNDAY_SHORT" xml:space="preserve">
     <value>Sun</value>
   </data>
-  <data name="SUPP_PACK_DESCTIPTION" xml:space="preserve">
+  <data name="SUPP_PACK_DESCRIPTION" xml:space="preserve">
     <value>{0} (version {1})</value>
   </data>
   <data name="SUPP_PACK_INSTALL_FAILED" xml:space="preserve">
@@ -12291,6 +12255,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VGPU_DESCRIPTION_ONE" xml:space="preserve">
     <value>{0} virtual GPU ({1} per GPU, {2}, {3} display)</value>
+  </data>
+  <data name="VGPU_DESCRIPTION_ZEROES" xml:space="preserve">
+    <value>{0} virtual GPU ({1} per GPU)</value>
   </data>
   <data name="VGPU_PASSTHRU_TOSTRING" xml:space="preserve">
     <value>Pass-through whole GPU</value>

@@ -86,6 +86,11 @@ namespace XenAdmin
 
         public IWebProxy GetProxyFromSettings(IXenConnection connection)
         {
+            return GetProxyFromSettings(connection, true);
+        }
+
+        public IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer)
+        {
             try
             {
                 if (connection != null && connection.Session != null && connection.Session.uuid == "dummy")
@@ -94,10 +99,24 @@ namespace XenAdmin
                 switch ((HTTPHelper.ProxyStyle)XenAdmin.Properties.Settings.Default.ProxySetting)
                 {
                     case HTTPHelper.ProxyStyle.SpecifiedProxy:
-                        return new WebProxy(string.Format("http://{0}:{1}",
+                        if (isForXenServer && Properties.Settings.Default.BypassProxyForServers)
+                            return null;
+
+                        string address = string.Format("http://{0}:{1}",
                             XenAdmin.Properties.Settings.Default.ProxyAddress,
-                            XenAdmin.Properties.Settings.Default.ProxyPort),
-                            XenAdmin.Properties.Settings.Default.BypassProxyForLocal);
+                            XenAdmin.Properties.Settings.Default.ProxyPort);
+
+                        if (XenAdmin.Properties.Settings.Default.ProvideProxyAuthentication)
+                        {
+                            string protectedUsername = XenAdmin.Properties.Settings.Default.ProxyUsername;
+                            string protectedPassword = XenAdmin.Properties.Settings.Default.ProxyPassword;
+                            return new WebProxy(address, false, null, new NetworkCredential(
+                                // checks for empty default username/password which starts out unencrypted
+                                string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
+                                string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword)));
+                        }
+                        else
+                            return new WebProxy(address, false);
 
                     case HTTPHelper.ProxyStyle.SystemProxy:
                         return WebRequest.GetSystemWebProxy();

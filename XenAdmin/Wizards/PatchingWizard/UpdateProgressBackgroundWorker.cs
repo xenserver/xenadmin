@@ -43,7 +43,9 @@ namespace XenAdmin.Wizards.PatchingWizard
     class UpdateProgressBackgroundWorker : BackgroundWorker
     {
         public List<PlanAction> PlanActions { get; private set; }
-        public List<PlanAction> DelayedActions { get; private set; }
+        public Dictionary<Host, List<PlanAction>> DelayedActionsByHost {get; private set; }
+        public List<PlanAction> FinalActions { get; private set; }
+
         private Host master;
 
         public List<PlanAction> FinsihedActions = new List<PlanAction>();
@@ -65,34 +67,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public UpdateProgressBackgroundWorker(Host master, List<PlanAction> planActions, List<PlanAction> delayedActions)
+        public UpdateProgressBackgroundWorker(Host master, List<PlanAction> planActions, Dictionary<Host, List<PlanAction>> delayedActionsByHost, 
+            List<PlanAction> finalActions)
         {
             this.master = master;
             this.PlanActions = planActions;
-            this.DelayedActions = delayedActions;
+            this.DelayedActionsByHost = delayedActionsByHost;
+            this.FinalActions = finalActions;
         }
 
-        public List<PlanAction> AllActions 
+        public int ActionsCount
         {
             get
             {
-                return PlanActions.Concat(DelayedActions).ToList();
-            }
-        }
-
-        public int TotalNumberOfActions
-        {
-            get
-            {
-                return PlanActions.Count + DelayedActions.Count;
-            }
-        }
-
-        public int ProgressPercent
-        {
-            get
-            {
-                return (int)(1.0 / (double)TotalNumberOfActions * (double)(FinsihedActions.Count));
+                return PlanActions.Count + DelayedActionsByHost.Sum(kvp => kvp.Value.Count) + FinalActions.Count;
             }
         }
 

@@ -154,7 +154,7 @@
     <value>510, 375</value>
   </data>
   <data name="clearAllButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 23</value>
+    <value>117, 23</value>
   </data>
   <data name="clearAllButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -178,7 +178,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="selectAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>407, 375</value>
+    <value>397, 375</value>
   </data>
   <data name="selectAllButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 23</value>

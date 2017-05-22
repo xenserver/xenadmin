@@ -110,6 +110,12 @@ namespace XenAdmin
         private bool IgnoreTabChanges = false;
         private bool ToolbarsEnabled;
 
+        /// <summary>
+        /// Helper boolean to only trigger Resize_End when window is really resized by dragging edges
+        /// Without this Resize_End is triggered even when window is moved around and not resized
+        /// </summary>
+        private bool mainWindowResized = false;
+
         private readonly Dictionary<IXenConnection, IList<Form>> activePoolWizards = new Dictionary<IXenConnection, IList<Form>>();
         private readonly Dictionary<IXenObject, Form> activeXenModelObjectWizards = new Dictionary<IXenObject, Form>();
 
@@ -402,19 +408,19 @@ namespace XenAdmin
                                 if (statusBarAction != null)
                                 {
                                     statusBarAction.Changed -= actionChanged;
-                                    statusBarAction.Completed -= actionChanged;
+                                    statusBarAction.Completed -= actionCompleted;
                                 }
                                 statusBarAction = action;
                             }
                             action.Changed += actionChanged;
-                            action.Completed += actionChanged;
+                            action.Completed += actionCompleted;
                             actionChanged(action);
                             break;
                         }
                     case CollectionChangeAction.Remove:
                         {
                             action.Changed -= actionChanged;
-                            action.Completed -= actionChanged;
+                            action.Completed -= actionCompleted;
                             
                             int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
                             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
@@ -430,6 +436,13 @@ namespace XenAdmin
             });
         }
 
+        void actionCompleted(ActionBase action)
+        {
+            actionChanged(action);
+            if (action is SrAction)
+                Program.Invoke(this, UpdateToolbars);
+        }
+
         void actionChanged(ActionBase action)
         {
             if (Program.Exiting)
@@ -440,6 +453,8 @@ namespace XenAdmin
 
         void actionChanged_(ActionBase action)
         {
+            if (action.SuppressProgressReport) // suppress updates when the PureAsyncAction runs the action to populate the ApiMethodsToRoleCheck
+                return;
              var meddlingAction = action as MeddlingAction;
              if (meddlingAction == null)
                  statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
@@ -510,12 +525,17 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-                new TransferProxySettingsAction((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
-                                Properties.Settings.Default.ProxyAddress,
-                                Properties.Settings.Default.ProxyPort,
-                                Properties.Settings.Default.ConnectionTimeout,
-                                Properties.Settings.Default.BypassProxyForLocal,
-                                true).RunAsync();
+                new TransferProxySettingsAction(
+                    (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
+                    Properties.Settings.Default.ProxyAddress,
+                    Properties.Settings.Default.ProxyPort,
+                    Properties.Settings.Default.ConnectionTimeout,
+                    true,
+                    Properties.Settings.Default.BypassProxyForServers,
+                    Properties.Settings.Default.ProvideProxyAuthentication,
+                    Properties.Settings.Default.ProxyUsername,
+                    Properties.Settings.Default.ProxyPassword,
+                    (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
             }
             catch (ConfigurationErrorsException ex)
             {
@@ -830,7 +850,7 @@ namespace XenAdmin
 
             log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6}.{7})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                Helpers.HostBuildNumber(master), Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
+                master.BuildNumberRaw, Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
                 Branding.XENCENTER_VERSION, Program.Version.Revision);
 
             // Check the PRODUCT_BRAND
@@ -1614,7 +1634,7 @@ namespace XenAdmin
                     if (!plugin.Enabled)
                         continue;
 
-                    foreach (Feature feature in plugin.Features)
+                    foreach (Plugins.Feature feature in plugin.Features)
                     {
                         var menuItemFeature = feature as MenuItemFeature;
 
@@ -1814,6 +1834,7 @@ namespace XenAdmin
                     ConsolePanel.setCurrentSource((Host)SelectionManager.Selection.First);
                     UnpauseVNC(e != null && sender == TheTabControl);
                 }
+                ConsolePanel.UpdateRDPResolution();
             }
             else if (t == TabPageCvmConsole)
             {
@@ -3300,8 +3321,19 @@ namespace XenAdmin
             SetSplitterDistance();
         }
 
+        FormWindowState lastState = FormWindowState.Normal;
         private void MainWindow_Resize(object sender, EventArgs e)
         {
+            TabPage t = TheTabControl.SelectedTab;
+            if (t == TabPageConsole)
+            {
+                if (WindowState != lastState && WindowState != FormWindowState.Minimized)
+                {
+                    lastState = WindowState;
+                    ConsolePanel.UpdateRDPResolution();
+                }
+                mainWindowResized = true;
+            }
             SetSplitterDistance();
         }
 
@@ -3321,6 +3353,24 @@ namespace XenAdmin
                 splitContainer1.SplitterDistance = min;
             else if (splitContainer1.SplitterDistance > max)
                 splitContainer1.SplitterDistance = max;
+        }
+      
+        private void MainWindow_ResizeEnd(object sender, EventArgs e)
+        {
+            TabPage t = TheTabControl.SelectedTab;
+            if (t == TabPageConsole) 
+            {
+                if (mainWindowResized)
+                    ConsolePanel.UpdateRDPResolution();
+                mainWindowResized = false;
+            }
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            TabPage t = TheTabControl.SelectedTab;
+            if (t == TabPageConsole)
+                ConsolePanel.UpdateRDPResolution();
         }
     }
 }

@@ -65,7 +65,6 @@ namespace XenAdmin.Actions
         private readonly long mtu;
         private readonly bond_mode bondMode;
         private readonly Dictionary<Host, List<PIF>> PIFs = new Dictionary<Host, List<PIF>>();
-        private readonly bool tampaOrGreater;  
         private readonly Host Master;
         private readonly Bond.hashing_algoritm hashingAlgoritm;
 
@@ -92,8 +91,6 @@ namespace XenAdmin.Actions
             Master = Connection.Resolve(Pool.master);
             if (Master == null)
                 throw new Failure(Failure.INTERNAL_ERROR, "Pool master has gone away");
-
-            tampaOrGreater = Helpers.TampaOrGreater(connection);
 
             foreach (Host host in Connection.Cache.Hosts)
                 AppliesTo.Add(host.opaque_ref);
@@ -157,9 +154,7 @@ namespace XenAdmin.Actions
                     if (bondMode == bond_mode.lacp)
                         bondProperties.Add("hashing_algorithm", Bond.HashingAlgoritmToString(hashingAlgoritm));
 
-                    RelatedTask = tampaOrGreater ?
-                        Bond.async_create(Session, network_ref, pif_refs, "", bondMode, bondProperties) :
-                        Bond.async_create(Session, network_ref, pif_refs, "", bondMode);
+                    RelatedTask = Bond.async_create(Session, network_ref, pif_refs, "", bondMode, bondProperties);
 
                     PollToCompletion(lo, lo + inc);
                     lo += inc;
@@ -285,6 +280,7 @@ namespace XenAdmin.Actions
             if (network.other_config == null)
                 network.other_config = new Dictionary<string, string>();
             network.other_config[XenAPI.Network.CREATE_IN_PROGRESS] = "true";
+            network.managed = true;
 
             RelatedTask = XenAPI.Network.async_create(Session, network);
             PollToCompletion(lo, hi);

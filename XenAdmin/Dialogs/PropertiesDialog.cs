@@ -156,7 +156,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(VMHAEditPage = new VMHAEditPage {VerticalTabs = verticalTabs});
                 }
 
-                if (is_vm || is_host || (is_sr && Helpers.ClearwaterOrGreater(connection)))
+                if (is_vm || is_host || is_sr)
                 {
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
                     {

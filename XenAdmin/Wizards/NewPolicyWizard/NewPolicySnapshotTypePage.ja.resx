@@ -211,7 +211,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioButtonDiskAndMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
+    <value>6, 127</value>
   </data>
   <data name="radioButtonDiskAndMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 18</value>
@@ -314,7 +314,7 @@
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
     <value>スケジュールされたディスクとメモリのスナップショットは、この {0} の対象 VM が以下のすべての条件を満たす場合のみ作成されます。
-1. スケジュールされた時間に VM が実行中である。
+1. スケジュールされた時間に VM が実行中である、または一時停止している。
 2. VM に [XenServer product] Tools がインストールされている。
 3. VM に専用の GPU が割り当てられていない。</value>
   </data>

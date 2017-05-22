@@ -190,7 +190,6 @@
     </Content>
     <Compile Include="Controls\DecentGroupBoxTests.cs" />
     <Compile Include="Controls\Folders\FolderListItemTests.cs" />
-    <Compile Include="Diagnostics\UpgradingFromTampaAndOlderCheckTests.cs" />
     <Compile Include="DialogTests\LicenseManager\Comparers\NameColumnComparerTests.cs" />
     <Compile Include="DialogTests\LicenseManager\Comparers\ProductColumnComparerTests.cs" />
     <Compile Include="DialogTests\LicenseManager\SelectionVerifiers\CanUseLicenseServerVerifierTests.cs" />
@@ -205,7 +204,6 @@
     <Compile Include="UnitTests\MiscTests\UtilTests.cs" />
     <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockPoolOfVersionedHosts.cs" />
     <Compile Include="UnitTests\UnitTestHelper\MockObjectBuilders\MockVersionedHost.cs" />
-    <Compile Include="WizardTests\CrossPoolMigrateWizard\Filters\CrossPoolMigrateVersionFilterTests.cs" />
     <Compile Include="WizardTests\CrossPoolMigrateWizard\Filters\WlbEnabledFilterTests.cs" />
     <Compile Include="WizardTests\ExportWizard\ApplianceExistsCheckTests.cs" />
     <Compile Include="WizardTests\PatchingWizard\PatchingWizardModeGuidanceBuilderTests.cs" />
@@ -366,7 +364,6 @@
     <Compile Include="UnitTests\WlbTests\WlbScheduledTasksTests.cs" />
     <Compile Include="UnitTests\WlbTests\WlbScheduledTaskTests.cs" />
     <Compile Include="WizardTests\CrossPoolMigrateCanMigrateFilterTest.cs" />
-    <Compile Include="WizardTests\CrossPoolMigrateVersionFilterTest.cs" />
     <Compile Include="WizardTests\CrossPoolMigrateWizardTest.cs" />
     <Compile Include="WizardTests\DRFailoverWizardSummaryReportTests.cs" />
     <Compile Include="WizardTests\DRFailoverWizardTests.cs" />

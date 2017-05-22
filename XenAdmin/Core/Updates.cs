@@ -40,6 +40,7 @@ using XenAdmin.Network;
 using System.Diagnostics;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
+using System.Text;
 
 namespace XenAdmin.Core
 {
@@ -184,19 +185,20 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// If AutomaticCheck is enabled it checks for updates regardless the
-        /// value of the parameter force. If AutomaticCheck is disabled it only
-        /// checks if force is true.
+        /// value of the parameter force. If AutomaticCheck is disabled it 
+        /// checks for all update types if force is true; forceRefresh causes 
+        /// the check for update action to run and refresh the Updates page
         /// </summary>
-        public static void CheckForUpdates(bool force)
+        public static void CheckForUpdates(bool force, bool forceRefresh = false)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return;
 
             if (Properties.Settings.Default.AllowXenCenterUpdates ||
                 Properties.Settings.Default.AllowXenServerUpdates ||
-                Properties.Settings.Default.AllowPatchesUpdates || force)
+                Properties.Settings.Default.AllowPatchesUpdates || force || forceRefresh)
             {
-                DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction(
+                var action = CreateDownloadUpdatesXmlAction(
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
                     Properties.Settings.Default.AllowXenServerUpdates || force,
                     Properties.Settings.Default.AllowPatchesUpdates || force,
@@ -211,6 +213,42 @@ namespace XenAdmin.Core
             }
         }
 
+        private static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl = null)
+        {
+            string userAgent = string.Format("[XenCenter]/{0}.{1} ({2}-bit)", Branding.XENCENTER_VERSION, Program.Version.Revision.ToString(), IntPtr.Size * 8);
+            string userAgentId = GetUniqueIdHash();
+
+            return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches, userAgent, userAgentId, checkForUpdatesUrl);
+        }
+
+        private static string GetUniqueIdHash()
+        {
+            string uniqueIdHash = "nil";
+
+            try
+            {
+                var managementObj = new System.Management.ManagementObject("Win32_OperatingSystem=@");
+                string serialNumber = (string)managementObj["SerialNumber"];
+
+                if (!string.IsNullOrWhiteSpace(serialNumber))
+                {
+                    var serialBytes = Encoding.ASCII.GetBytes(serialNumber);
+
+                    using (var md = new System.Security.Cryptography.MD5CryptoServiceProvider()) // MD5 to keep it short enough as this hash is not used for security in any way
+                    {
+                        var hash = md.ComputeHash(serialBytes);
+                        uniqueIdHash = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+
+            return uniqueIdHash;
+        }
+
         /// <summary>
         /// It does exactly what CheckForUpdates(true) does, but this is sync and shows an ActionProgressDialog while running
         /// </summary>
@@ -220,7 +258,7 @@ namespace XenAdmin.Core
             if (Helpers.CommonCriteriaCertificationRelease)
                 return false;
 
-            DownloadUpdatesXmlAction action = new DownloadUpdatesXmlAction(true, true, true, Updates.CheckForUpdatesUrl);
+            var action = CreateDownloadUpdatesXmlAction(true, true, true, Updates.CheckForUpdatesUrl);
             action.Completed += actionCompleted;
 
             if (CheckForUpdatesStarted != null)

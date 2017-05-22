@@ -38,6 +38,7 @@ using Citrix.XenCenter;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using System.Diagnostics;
 
 
 namespace XenAPI
@@ -49,10 +50,6 @@ namespace XenAPI
         public enum Edition
         {
             Free,
-            Advanced,
-            Enterprise,
-            Platinum,
-            EnterpriseXD,
             PerSocket,     //Added in Clearwater (PR-1589)
             XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
             EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
@@ -79,14 +76,6 @@ namespace XenAPI
         {
             switch (editionText)
             {
-                case "advanced":
-                    return Edition.Advanced;
-                case "enterprise":
-                    return Edition.Enterprise;
-                case "enterprise-xd":
-                    return Edition.EnterpriseXD;
-                case "platinum":
-                    return Edition.Platinum;
                 case "xendesktop":
                     return Edition.XenDesktop;
                 case "per-socket":
@@ -135,14 +124,7 @@ namespace XenAPI
         {
             switch (edition)
             {
-                case Edition.Advanced:
-                    return "advanced";
-                case Edition.Enterprise:
-                    return "enterprise";
-                case Edition.Platinum:
-                    return "platinum";
-                case Edition.EnterpriseXD:
-                    return "enterprise-xd";
+
                 case Edition.XenDesktop:
                     return "xendesktop";
                 case Edition.PerSocket:
@@ -463,10 +445,9 @@ namespace XenAPI
                     return BoolKeyPreferTrue(license_params, "restrict_export_resource_data");
                 }
                 // Pre-Creedence hosts:
-                // allowed on Per-Socket edition for Clearwater hosts and Advanced, Enterprise and Platinum editions for older hosts
+                // allowed on Per-Socket edition for Clearwater hosts
                 var hostEdition = GetEdition(edition);
-                if (hostEdition == Edition.PerSocket || hostEdition == Edition.Advanced ||
-                    hostEdition == Edition.Enterprise || hostEdition == Edition.Platinum)
+                if (hostEdition == Edition.PerSocket)
                 {
                     return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
                 }
@@ -723,14 +704,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// For legacy build numbers only (used to be integers + one char at the end)
+        /// From Falcon, this property is not used.
+        /// </summary>
+        /// <remarks>
         /// Return the build number of this host, or -1 if none can be found.  This will often be
         /// 0 or -1 for developer builds, so comparisons should generally treat those numbers as if
         /// they were brand new.
-        /// </summary>
-        public int BuildNumber
+        /// </remarks>
+        internal int BuildNumber
         {
             get
             {
+                Debug.Assert(!Helpers.FalconOrGreater(this));
+
                 string bn = BuildNumberRaw;
                 if (bn == null)
                     return -1;
@@ -747,8 +734,11 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Return the build number of this host, without stripping off the final letter etc.; or null if none can be found.
+        /// Return the exact build_number of this host
         /// </summary>
+        /// <remarks>
+        /// null if not found
+        /// </remarks>
         public virtual string BuildNumberRaw
         {
             get { return Get(software_version, "build_number"); }
@@ -762,16 +752,8 @@ namespace XenAPI
             get
             {
                 string productVersion = ProductVersion;
-                return productVersion != null ? string.Format("{0}.{1}", productVersion, BuildNumber) : null;
+                return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.FalconOrGreater(this) ? BuildNumberRaw : BuildNumber.ToString()) : null;
             }
-        }
-
-        /// <summary>
-        /// Return the hg_id (Mercurial changeset number) of xapi on this host, or null if none can be found.
-        /// </summary>
-        public string hg_id
-        {
-            get { return Get(software_version, "hg_id"); }
         }
 
         /// <summary>
@@ -1220,6 +1202,11 @@ namespace XenAPI
             get { return GetSVAsInt("xencenter_max"); }
         }
 
+        public string GetDatabaseSchema()
+        {
+            return Get(software_version, "db_schema");
+        }
+
         /// <summary>
         /// The amount of memory free on the host. For George and earlier hosts, we use to use
         /// the obvious Host_metrics.memory_free. Since Midnight Ride, however, we use
@@ -1565,9 +1552,6 @@ namespace XenAPI
         {
             get
             {
-                if(!Helpers.ClearwaterOrGreater(Connection))
-                    return true;
-                
                 return !Helpers.FeatureForbidden(Connection, RestrictHotfixApply);
             }
         }
@@ -1668,7 +1652,7 @@ namespace XenAPI
             private bool parsed = false;
             public bool IsValid { get { return parsed; } }
 
-            public string LongDescription { get { return string.Format(Messages.SUPP_PACK_DESCTIPTION, description, version); } }
+            public string LongDescription { get { return string.Format(Messages.SUPP_PACK_DESCRIPTION, description, version); } }
 
             /// <summary>
             /// Try to parse the supp pack information from one key of software_version

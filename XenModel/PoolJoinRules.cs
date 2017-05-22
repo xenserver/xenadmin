@@ -56,8 +56,6 @@ namespace XenAdmin.Core
             IsAPool,
             LicenseRestriction,
             NotSameLinuxPack,
-            PaidHostFreeMaster,
-            FreeHostPaidMaster,
             LicensedHostUnlicensedMaster,
             UnlicensedHostLicensedMaster,
             LicenseMismatch,
@@ -120,14 +118,10 @@ namespace XenAdmin.Core
                 return Reason.DifferentServerVersion;
 
             if (FreeHostPaidMaster(slaveHost, masterHost, allowLicenseUpgrade))
-                return Helpers.ClearwaterOrGreater(masterHost) ? 
-                    Reason.UnlicensedHostLicensedMaster : 
-                    Reason.FreeHostPaidMaster;
+                return Reason.UnlicensedHostLicensedMaster;
 
             if (PaidHostFreeMaster(slaveHost, masterHost))
-                return Helpers.ClearwaterOrGreater(masterHost) ?
-                    Reason.LicensedHostUnlicensedMaster : 
-                    Reason.PaidHostFreeMaster;
+                return Reason.LicensedHostUnlicensedMaster;
 
             if (LicenseMismatch(slaveHost, masterHost))
                 return Reason.LicenseMismatch;
@@ -188,10 +182,6 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_POOLINGRESTRICTED;
                 case Reason.NotSameLinuxPack:
                     return Messages.NEWPOOL_LINUXPACK;
-                case Reason.PaidHostFreeMaster:
-                    return Messages.NEWPOOL_PAID_HOST_FREE_MASTER;
-                case Reason.FreeHostPaidMaster:
-                    return Messages.NEWPOOL_FREE_HOST_PAID_MASTER;
                 case Reason.LicensedHostUnlicensedMaster:
                     return Messages.NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER;
                 case Reason.UnlicensedHostLicensedMaster:
@@ -243,7 +233,7 @@ namespace XenAdmin.Core
         {
             foreach (VM vm in connection.Cache.VMs)
             {
-                if (vm.is_a_real_vm && (vm.power_state == XenAPI.vm_power_state.Running || vm.power_state == XenAPI.vm_power_state.Suspended))
+                if (vm.is_a_real_vm && vm.power_state == XenAPI.vm_power_state.Running)
                     return true;
             }
             return false;
@@ -379,11 +369,21 @@ namespace XenAdmin.Core
 
         private static bool DifferentServerVersion(Host slave, Host master)
         {
-            // Probably all the others will be equal if the hg_id is equal, but let's
-            // mimic the test on the server side (xen-api.hg:ocaml/xapi/xapi_pool.ml).
+            if (slave.API_version_major != master.API_version_major ||
+                slave.API_version_minor != master.API_version_minor)
+                return true;
+
+            if (Helpers.FalconOrGreater(slave) && string.IsNullOrEmpty(slave.GetDatabaseSchema()))
+                return true;
+            if (Helpers.FalconOrGreater(master) && string.IsNullOrEmpty(master.GetDatabaseSchema()))
+                return true;
+
+            if (Helpers.FalconOrGreater(slave) && Helpers.FalconOrGreater(master) &&
+                slave.GetDatabaseSchema() != master.GetDatabaseSchema())
+                return true;
+            
             return
-                slave.hg_id != master.hg_id ||
-                slave.BuildNumberRaw != master.BuildNumberRaw ||
+                !Helpers.FalconOrGreater(master) && slave.BuildNumber != master.BuildNumber ||
                 slave.ProductVersion != master.ProductVersion ||
                 slave.ProductBrand != master.ProductBrand;
         }
@@ -416,20 +416,7 @@ namespace XenAdmin.Core
             if (slave == null || master == null)
                 return false;
             
-            // Is using per socket generation licenses?
-            if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master))
-                return slave.IsFreeLicense() && !master.IsFreeLicense() && !allowLicenseUpgrade;
-
-            if (Host.RestrictHA(slave) && !Host.RestrictHA(master))
-            {
-                // See http://scale.ad.xensource.com/confluence/display/engp/v6+licensing+for+XenServer+Essentials, req R21a.
-                // That section implies that we should downgrade a paid host to join a free pool, but that can't be the intention
-                // (confirmed by Carl Fischer). Carl's also not concerned about fixing up Enterprise/Platinum mismatches.
-                if (allowLicenseUpgrade)
-                    return false;
-                return true;
-            }
-            return false;
+            return slave.IsFreeLicense() && !master.IsFreeLicense() && !allowLicenseUpgrade;
         }
 
         private static bool PaidHostFreeMaster(Host slave, Host master)
@@ -437,11 +424,7 @@ namespace XenAdmin.Core
             if (slave == null || master == null)
                 return false;
 
-            // Is using per socket generation licenses?
-            if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master))
-                return !slave.IsFreeLicense() && master.IsFreeLicense();
-
-            return (!Host.RestrictHA(slave) && Host.RestrictHA(master));
+            return !slave.IsFreeLicense() && master.IsFreeLicense();
         }
 
         private static bool LicenseMismatch(Host slave, Host master)

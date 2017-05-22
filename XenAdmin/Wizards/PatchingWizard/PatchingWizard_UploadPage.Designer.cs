@@ -56,6 +56,7 @@
             // 
             // labelProgress
             // 
+            this.labelProgress.AutoEllipsis = true;
             resources.ApplyResources(this.labelProgress, "labelProgress");
             this.labelProgress.Name = "labelProgress";
             // 

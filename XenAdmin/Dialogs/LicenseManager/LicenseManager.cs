@@ -70,12 +70,9 @@ namespace XenAdmin.Dialogs
             checkableDataGridView.RefreshAll += checkableDataGridView_RefreshAll;
             
             //Buttons
-            activateFreeXenServerButton.Click += activateFreeXenServerButton_Click;
             cancelButton.Click += closeButton_Click;
             releaseLicenseButton.Click += releaseLicenseButton_Click;
             assignLicenceButton.Click += assignLicenceButton_Click;
-            applyActivationKeyToolStripMenuItem.Click += applyActivationKeyToolStripMenuItem_Click;
-            requestActivationKeyToolStripMenuItem.Click += requestActivationKeyToolStripMenuItem_Click;
             downloadLicenseServerLink.LinkClicked += downloadLicenseServerLink_LinkClicked;
             
             //Controllers
@@ -91,21 +88,6 @@ namespace XenAdmin.Dialogs
         private void assignLicenceButton_Click(object sender, EventArgs e)
         {
             Controller.AssignLicense(checkableDataGridView.CheckedRows);
-        }
-
-        private void activateFreeXenServerButton_Click(object sender, EventArgs e)
-        {
-            freeXenServerContextMenuStrip.Show(activateFreeXenServerButton, new Point(0,activateFreeXenServerButton.Height));
-        }
-
-        private void applyActivationKeyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Controller.ApplyActivationKey(checkableDataGridView.CheckedRows);
-        }
-
-        private void requestActivationKeyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Controller.RequestActivationKey(checkableDataGridView.CheckedRows);
         }
 
         private void downloadLicenseServerLink_LinkClicked(object sender, EventArgs e)
@@ -248,34 +230,6 @@ namespace XenAdmin.Dialogs
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void DrawActivateButtonAsDisabled(bool isDisabled)
-        {
-            activateFreeXenServerButton.Enabled = !isDisabled;
-        }
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public void DrawActivateButtonAsHidden(bool isHidden)
-        {
-            if(isHidden)
-                activateFreeXenServerButton.Hide();
-            else
-                activateFreeXenServerButton.Show();
-        }
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public void DrawRequestButtonAsDisabled(bool isDisabled)
-        {
-            requestActivationKeyToolStripMenuItem.Enabled = !isDisabled;
-        }
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public void DrawApplyButtonAsDisabled(bool isDisabled, string disabledReason)
-        {
-            applyActivationKeyToolStripMenuItem.Enabled = !isDisabled;
-            applyActivationKeyToolStripMenuItem.ToolTipText = string.IsNullOrEmpty(disabledReason) ? null : disabledReason;
-        }
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public void ClearAllGridRows()
         {
             checkableDataGridView.ClearAllGridRows();
@@ -302,7 +256,6 @@ namespace XenAdmin.Dialogs
         {
             if (isReadOnly)
             {
-                activateFreeXenServerButton.Hide();
                 assignLicenceButton.Hide();
                 releaseLicenseButton.Hide();
             }

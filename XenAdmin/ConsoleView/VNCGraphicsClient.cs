@@ -46,7 +46,7 @@ namespace XenAdmin.ConsoleView
 {
     public class VNCGraphicsClient : UserControl, IVNCGraphicsClient, IRemoteConsole
     {
-        public const int BORDER_PADDING = 4;
+        public const int BORDER_PADDING = 5;
         public const int BORDER_WIDTH = 1;
 
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -1481,9 +1481,9 @@ namespace XenAdmin.ConsoleView
                 this.AutoScroll = false;
 
                 float xScale = this.Size.Width /
-                    (float)(displayBorder ? this.DesktopSize.Width + BORDER_PADDING + BORDER_PADDING : this.DesktopSize.Width);
+                    (float)(displayBorder ? this.DesktopSize.Width + BORDER_PADDING * 3 : this.DesktopSize.Width);
                 float yScale = this.Size.Height /
-                    (float)(displayBorder ? this.DesktopSize.Height + BORDER_PADDING + BORDER_PADDING : this.DesktopSize.Height);
+                    (float)(displayBorder ? this.DesktopSize.Height + BORDER_PADDING * 3 : this.DesktopSize.Height);
 
                 scale = (xScale > yScale) ? yScale : xScale;
                 scale = (scale > 0.01) ? scale : (float)0.01;

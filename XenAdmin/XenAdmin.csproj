@@ -2804,12 +2804,6 @@
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
     <Compile Include="Diagnostics\Checks\HostMaintenanceModeCheck.cs" />
-    <Compile Include="Diagnostics\Checks\UpgradingFromTampaAndOlderCheck.cs" />
-    <Compile Include="Diagnostics\Checks\HostHasWssCheck.cs" />
-    <Compile Include="Diagnostics\Checks\VmprActivatedCheck.cs" />
-    <Compile Include="Diagnostics\Problems\ConnectionProblem\UpgradingFromTampaAndOlderWarning.cs" />
-    <Compile Include="Diagnostics\Problems\ConnectionProblem\VmprActivatedWarning.cs" />
-    <Compile Include="Diagnostics\Problems\HostProblem\HostHasWssWarning.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
     <Compile Include="Diagnostics\Problems\WarningWithInformationUrl.cs" />
     <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
@@ -2818,7 +2812,6 @@
     <Compile Include="Dialogs\ConnectionRefusedDialog.Designer.cs">
       <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\LicenseManager\LicenseActivationRequest.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\ILicenseCheckableDataGridViewView.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\LicenseCheckableDataGridView.cs">
       <SubType>Component</SubType>
@@ -3030,7 +3023,7 @@
       <DependentUpon>LVMoHBAWarningDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Network\XenConnectionUI.cs" />
-    <Compile Include="RDP\MsRdpClient2.cs">
+    <Compile Include="RDP\MsRdpClient9.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RDP\MsRdpClient6.cs">
@@ -3055,7 +3048,6 @@
     <Compile Include="Actions\GUIActions\Wlb\WlbOptimizePoolAction.cs" />
     <Compile Include="Branding.cs" />
     <Compile Include="Commands\ActivateVBDCommand.cs" />
-    <Compile Include="Commands\ActivationRequestCommand.cs" />
     <Compile Include="Commands\AddHostCommand.cs">
     </Compile>
     <Compile Include="Commands\AddHostToPoolCommand.cs">
@@ -3512,7 +3504,6 @@
     <Compile Include="Wizards\ExportWizard\ApplianceChecks\ApplianceExistsCheck.cs" />
     <Compile Include="Wizards\GenericPages\NoTargetServerPoolItem.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateCanMigrateFilter.cs" />
-    <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateVersionFilter.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateDestinationPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

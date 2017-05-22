@@ -267,13 +267,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (comboBoxProvisionOptions.Items.Count > 0)
                     comboBoxProvisionOptions.SelectedIndex = 0;
 
-                SetCHAPAuthenticationControls(Helpers.ClearwaterOrGreater(Connection)
-                                                  ? SystemStorage.SupportsCHAP
-                                                  : true);
+                SetCHAPAuthenticationControls(SystemStorage.SupportsCHAP);
             }
             else
             {
-                SetCHAPAuthenticationControls(!Helpers.ClearwaterOrGreater(Connection));
+                SetCHAPAuthenticationControls(false);
             }
         }
 

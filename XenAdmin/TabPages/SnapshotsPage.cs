@@ -716,10 +716,10 @@ namespace XenAdmin.TabPages
                     customFieldContent1.Text = customFields[0].Value.ToString();
                     tableLayoutPanelSimpleSelection.RowStyles[6].Height = 0;
 
-                    if (customFields.Count == 2)
+                    if (customFields.Count >= 2)
                     {
                         tableLayoutPanelSimpleSelection.RowStyles[6].Height = 30;
-                        customFieldTitle2.Text = customFields[1].Definition.Name.ToString();
+                        customFieldTitle2.Text = String.Format("{0}:",customFields[1].Definition.Name.ToString());
                         customFieldContent2.Text = customFields[1].Value.ToString();
                     }
 

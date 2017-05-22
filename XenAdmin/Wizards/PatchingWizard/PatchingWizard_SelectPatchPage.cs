@@ -54,6 +54,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool CheckForUpdatesInProgress;
         public XenServerPatchAlert SelectedUpdateAlert;
         public XenServerPatchAlert FileFromDiskAlert;
+        private bool firstLoad = true;
         
         public PatchingWizard_SelectPatchPage()
         {
@@ -150,12 +151,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                 labelWithAutomatedUpdates.Visible = automatedUpdatesOptionLabel.Visible = AutomatedUpdatesRadioButton.Visible = automatedUpdatesPossible;
                 labelWithoutAutomatedUpdates.Visible = !automatedUpdatesPossible;
 
-                AutomatedUpdatesRadioButton.Checked = automatedUpdatesPossible;
-                downloadUpdateRadioButton.Checked = !automatedUpdatesPossible;
+                if (firstLoad)
+                {
+                    AutomatedUpdatesRadioButton.Checked = automatedUpdatesPossible;
+                    downloadUpdateRadioButton.Checked = !automatedUpdatesPossible;
+                }
+                else if (!automatedUpdatesPossible && AutomatedUpdatesRadioButton.Checked)
+                {
+                    downloadUpdateRadioButton.Checked = true;
+                }
+
                 Updates.CheckServerPatches();
                 PopulatePatchesBox();
                 OnPageUpdated();
             }
+
+            firstLoad = false;
         }
 
         public bool IsInAutomatedUpdatesMode { get { return AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked; } }
@@ -233,7 +244,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             foreach (PatchGridViewRow row in dataGridViewPatches.Rows)
             {
-                if (row.UpdateAlert.Name == Path.GetFileNameWithoutExtension(fileName))
+                if (string.Equals(row.UpdateAlert.Name, Path.GetFileNameWithoutExtension(fileName), StringComparison.OrdinalIgnoreCase))
                 {
                     return (XenServerPatchAlert)row.UpdateAlert;
                 }

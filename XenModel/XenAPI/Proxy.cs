@@ -444,6 +444,10 @@ namespace XenAPI
         Response<string>
         async_task_cancel(string session, string _task);
 
+        [XmlRpcMethod("task.set_status")]
+        Response<string>
+        task_set_status(string session, string _task, string _value);
+
         [XmlRpcMethod("task.get_all")]
         Response<string []>
         task_get_all(string session);
@@ -1944,14 +1948,6 @@ namespace XenAPI
         Response<string>
         async_vm_resume(string session, string _vm, bool _start_paused, bool _force);
 
-        [XmlRpcMethod("VM.set_is_default_template")]
-        Response<string>
-        vm_set_is_default_template(string session, string _vm, bool _value);
-
-        [XmlRpcMethod("Async.VM.set_is_default_template")]
-        Response<string>
-        async_vm_set_is_default_template(string session, string _vm, bool _value);
-
         [XmlRpcMethod("VM.resume_on")]
         Response<string>
         vm_resume_on(string session, string _vm, string _host, bool _start_paused, bool _force);
@@ -3256,6 +3252,10 @@ namespace XenAPI
         Response<string []>
         host_get_updates_requiring_reboot(string session, string _host);
 
+        [XmlRpcMethod("host.get_features")]
+        Response<string []>
+        host_get_features(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -4103,6 +4103,10 @@ namespace XenAPI
         [XmlRpcMethod("network.get_bridge")]
         Response<string>
         network_get_bridge(string session, string _network);
+
+        [XmlRpcMethod("network.get_managed")]
+        Response<bool>
+        network_get_managed(string session, string _network);
 
         [XmlRpcMethod("network.get_blobs")]
         Response<Object>
@@ -7427,6 +7431,102 @@ namespace XenAPI
         [XmlRpcMethod("PVS_cache_storage.get_all_records")]
         Response<Object>
         pvs_cache_storage_get_all_records(string session);
+
+        [XmlRpcMethod("Feature.get_record")]
+        Response<Proxy_Feature>
+        feature_get_record(string session, string _feature);
+
+        [XmlRpcMethod("Feature.get_by_uuid")]
+        Response<string>
+        feature_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("Feature.get_by_name_label")]
+        Response<string []>
+        feature_get_by_name_label(string session, string _label);
+
+        [XmlRpcMethod("Feature.get_uuid")]
+        Response<string>
+        feature_get_uuid(string session, string _feature);
+
+        [XmlRpcMethod("Feature.get_name_label")]
+        Response<string>
+        feature_get_name_label(string session, string _feature);
+
+        [XmlRpcMethod("Feature.get_name_description")]
+        Response<string>
+        feature_get_name_description(string session, string _feature);
+
+        [XmlRpcMethod("Feature.get_enabled")]
+        Response<bool>
+        feature_get_enabled(string session, string _feature);
+
+        [XmlRpcMethod("Feature.get_experimental")]
+        Response<bool>
+        feature_get_experimental(string session, string _feature);
+
+        [XmlRpcMethod("Feature.get_version")]
+        Response<string>
+        feature_get_version(string session, string _feature);
+
+        [XmlRpcMethod("Feature.get_host")]
+        Response<string>
+        feature_get_host(string session, string _feature);
+
+        [XmlRpcMethod("Feature.get_all")]
+        Response<string []>
+        feature_get_all(string session);
+
+        [XmlRpcMethod("Feature.get_all_records")]
+        Response<Object>
+        feature_get_all_records(string session);
+
+        [XmlRpcMethod("SDN_controller.get_record")]
+        Response<Proxy_SDN_controller>
+        sdn_controller_get_record(string session, string _sdn_controller);
+
+        [XmlRpcMethod("SDN_controller.get_by_uuid")]
+        Response<string>
+        sdn_controller_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("SDN_controller.get_uuid")]
+        Response<string>
+        sdn_controller_get_uuid(string session, string _sdn_controller);
+
+        [XmlRpcMethod("SDN_controller.get_protocol")]
+        Response<string>
+        sdn_controller_get_protocol(string session, string _sdn_controller);
+
+        [XmlRpcMethod("SDN_controller.get_address")]
+        Response<string>
+        sdn_controller_get_address(string session, string _sdn_controller);
+
+        [XmlRpcMethod("SDN_controller.get_port")]
+        Response<string>
+        sdn_controller_get_port(string session, string _sdn_controller);
+
+        [XmlRpcMethod("SDN_controller.introduce")]
+        Response<string>
+        sdn_controller_introduce(string session, string _protocol, string _address, string _port);
+
+        [XmlRpcMethod("Async.SDN_controller.introduce")]
+        Response<string>
+        async_sdn_controller_introduce(string session, string _protocol, string _address, string _port);
+
+        [XmlRpcMethod("SDN_controller.forget")]
+        Response<string>
+        sdn_controller_forget(string session, string _sdn_controller);
+
+        [XmlRpcMethod("Async.SDN_controller.forget")]
+        Response<string>
+        async_sdn_controller_forget(string session, string _sdn_controller);
+
+        [XmlRpcMethod("SDN_controller.get_all")]
+        Response<string []>
+        sdn_controller_get_all(string session);
+
+        [XmlRpcMethod("SDN_controller.get_all_records")]
+        Response<Object>
+        sdn_controller_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7804,6 +7904,7 @@ namespace XenAPI
         public string [] virtual_hardware_platform_versions;
         public string control_domain;
         public string [] updates_requiring_reboot;
+        public string [] features;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7873,6 +7974,7 @@ namespace XenAPI
         public string MTU;
         public Object other_config;
         public string bridge;
+        public bool managed;
         public Object blobs;
         public string [] tags;
         public string default_locking_mode;
@@ -8344,6 +8446,27 @@ namespace XenAPI
         public string site;
         public string size;
         public string VDI;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Feature
+    {
+        public string uuid;
+        public string name_label;
+        public string name_description;
+        public bool enabled;
+        public bool experimental;
+        public string version;
+        public string host;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_SDN_controller
+    {
+        public string uuid;
+        public string protocol;
+        public string address;
+        public string port;
     }
 
 }

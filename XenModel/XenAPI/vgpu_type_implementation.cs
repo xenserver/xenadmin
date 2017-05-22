@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum vgpu_type_implementation
     {
-        passthrough, nvidia, gvt_g, unknown
+        passthrough, nvidia, gvt_g, mxgpu, unknown
     }
 
     public static class vgpu_type_implementation_helper
@@ -52,6 +52,8 @@ namespace XenAPI
                     return "nvidia";
                 case vgpu_type_implementation.gvt_g:
                     return "gvt_g";
+                case vgpu_type_implementation.mxgpu:
+                    return "mxgpu";
                 default:
                     return "unknown";
             }

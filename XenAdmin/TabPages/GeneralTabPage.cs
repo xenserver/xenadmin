@@ -644,22 +644,17 @@ namespace XenAdmin.TabPages
             if (!string.IsNullOrEmpty(poolAppPatches))
             {
                 s.AddEntry(FriendlyName("Pool_patch.fully_applied"), poolAppPatches);
-                return;
             }
-
-            CommandToolStripMenuItem applypatch = new CommandToolStripMenuItem(
-                new InstallNewUpdateCommand(Program.MainWindow), true);
-
-            var menuItems = new[] { applypatch };
 
             var poolPartPatches = poolPartialPatches();
             if (!string.IsNullOrEmpty(poolPartPatches))
             {
-                s.AddEntry(FriendlyName("Pool_patch.partially_applied"), poolPartPatches, menuItems, Color.Red);
-                return;
-            }
+                CommandToolStripMenuItem applypatch = new CommandToolStripMenuItem(
+                    new InstallNewUpdateCommand(Program.MainWindow), true);
+                var menuItems = new[] { applypatch };
 
-            var poolNotAppPatches = poolNotAppliedPatches();
+                s.AddEntry(FriendlyName("Pool_patch.partially_applied"), poolPartPatches, menuItems, Color.Red);
+            }
         }
 
         private void generateHostPatchesBox()
@@ -692,9 +687,10 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            if (hostAppliedPatches(host) != "")
+            var appliedPatches = hostAppliedPatches(host);
+            if (!string.IsNullOrEmpty(appliedPatches))
             {
-                s.AddEntry(FriendlyName("Pool_patch.applied"), hostAppliedPatches(host));
+                s.AddEntry(FriendlyName("Pool_patch.applied"), appliedPatches);
             }
 
             var recommendedPatches = RecommendedPatchesForHost(host);
@@ -1007,19 +1003,9 @@ namespace XenAdmin.TabPages
             if (!string.IsNullOrEmpty(host.edition))
             {
                 s.AddEntry(FriendlyName("host.edition"), Helpers.GetFriendlyLicenseName(host));
-                if (info.ContainsKey("sku_type"))
-                {
-                    info.Remove("sku_type");
-                }
-            }
-            else if (info.ContainsKey("sku_type"))
-            {
-                s.AddEntry(FriendlyName("host.license_params-sku_type"), Helpers.GetFriendlyLicenseName(host));
-                info.Remove("sku_type");
             }
 
-            if(Helpers.ClearwaterOrGreater(host))
-                s.AddEntry(Messages.NUMBER_OF_SOCKETS, host.CpuSockets.ToString());
+            s.AddEntry(Messages.NUMBER_OF_SOCKETS, host.CpuSockets.ToString());
 
             if (host.license_server.ContainsKey("address"))
             {
@@ -1070,7 +1056,7 @@ namespace XenAdmin.TabPages
             bool isXCP = host.IsXCP;
             if (host.software_version.ContainsKey("date"))
                 pdSectionVersion.AddEntry(isXCP ? Messages.SOFTWARE_VERSION_XCP_DATE : Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
-            if (host.software_version.ContainsKey("build_number"))
+            if (!Helpers.FalconOrGreater(host) && host.software_version.ContainsKey("build_number"))
                 pdSectionVersion.AddEntry(isXCP ? Messages.SOFTWARE_VERSION_XCP_BUILD_NUMBER : Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
             if (isXCP && host.software_version.ContainsKey("platform_version"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_XCP_PLATFORM_VERSION, host.software_version["platform_version"]);
@@ -1325,8 +1311,7 @@ namespace XenAdmin.TabPages
             if (p != null)
             {
                 s.AddEntry(Messages.POOL_LICENSE, p.LicenseString);
-                if (Helpers.ClearwaterOrGreater(p.Connection))
-                    s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
+                s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
 
                 var master = p.Connection.Resolve(p.master);
                 if (master != null)
@@ -1677,7 +1662,7 @@ namespace XenAdmin.TabPages
             if (Helpers.ElyOrGreater(host))
             {
                 foreach (var update in host.AppliedUpdates())
-                    result.Add(UpdatesFriendlyName(update.Name));
+                    result.Add(UpdatesFriendlyNameAndVersion(update));
             }
             else
             {
@@ -1739,14 +1724,6 @@ namespace XenAdmin.TabPages
                 : poolPatchString(patch => patch.host_patches.Count > 0 && patch.host_patches.Count != xenObject.Connection.Cache.HostCount);
         }
 
-        private string poolNotAppliedPatches()
-        {
-            return 
-                Helpers.ElyOrGreater(xenObject.Connection)
-                ? poolUpdateString(update => update.AppliedOnHosts.Count == 0)
-                : poolPatchString(patch => patch.host_patches.Count == 0);
-        }
-
         private string poolPatchString(Predicate<Pool_patch> predicate)
         {
             Pool_patch[] patches = xenObject.Connection.Cache.Pool_patches;
@@ -1770,7 +1747,7 @@ namespace XenAdmin.TabPages
 
             foreach (var update in updates)
                 if (predicate(update))
-                    output.Add(UpdatesFriendlyName(update.Name));
+                    output.Add(UpdatesFriendlyNameAndVersion(update));
 
             output.Sort(StringUtility.NaturalCompare);
 
@@ -1912,6 +1889,14 @@ namespace XenAdmin.TabPages
         private static string UpdatesFriendlyName(string propertyName)
         {
             return Core.PropertyManager.FriendlyNames.GetString(string.Format("Label-{0}", propertyName)) ?? propertyName;
+        }
+
+        private static string UpdatesFriendlyNameAndVersion(Pool_update update)
+        {
+            var friendlyName = UpdatesFriendlyName(update.Name);
+            if (string.IsNullOrEmpty(update.version))
+                return friendlyName;
+            return string.Format(Messages.SUPP_PACK_DESCRIPTION, friendlyName, update.version);
         }
 
         private void linkLabelExpand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

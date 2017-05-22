@@ -301,6 +301,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             switch (templateType)
             {
                 case VM.VmTemplateType.Windows:
+                case VM.VmTemplateType.LegacyWindows:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_WINDOWS;
                 case VM.VmTemplateType.Centos:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_CENTOS;
@@ -339,6 +340,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 case VM.VmTemplateType.Custom:
                     return Resources._000_UserTemplate_h32bit_16;
                 case VM.VmTemplateType.Windows:
+                case VM.VmTemplateType.LegacyWindows:
                     return Resources.windows_h32bit_16;
                 case VM.VmTemplateType.Centos:
                     return Resources.centos_16x;

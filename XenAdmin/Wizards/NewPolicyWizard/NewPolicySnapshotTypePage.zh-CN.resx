@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="radioButtonDiskOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -160,7 +160,7 @@
     <value>6, 36</value>
   </data>
   <data name="radioButtonDiskOnly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 17</value>
+    <value>132, 20</value>
   </data>
   <data name="radioButtonDiskOnly.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -211,7 +211,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioButtonDiskAndMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 98</value>
+    <value>6, 127</value>
   </data>
   <data name="radioButtonDiskAndMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 17</value>
@@ -314,7 +314,7 @@
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
     <value>请注意，将仅创建此 {0} 中满足以下所有条件的 VM 的计划磁盘和内存快照:
-1. 计划快照时 VM 正在运行。
+1. 计划快照时 VM 正在运行或已暂停。
 2. VM 上已安装 [XenServer product] Tools。
 3. VM 没有为其分配的专用 GPU。</value>
   </data>
