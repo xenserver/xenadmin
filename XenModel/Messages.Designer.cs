@@ -33672,6 +33672,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it lacks the ability to suspend. Please ensure it has up-to-date drivers installed..
+        /// </summary>
+        public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos; for an unknown reason. See application logs for more details..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON {
@@ -34284,6 +34293,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_VM_HAS_VGPU {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_VM_HAS_VGPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;: please ensure it has up-to-date drivers installed..
+        /// </summary>
+        public static string UPDATES_WIZARD_VM_MISSING_FEATURE {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_VM_MISSING_FEATURE", resourceCulture);
             }
         }
         

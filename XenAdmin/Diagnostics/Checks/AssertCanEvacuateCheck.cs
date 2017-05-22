@@ -98,7 +98,7 @@ namespace XenAdmin.Diagnostics.Checks
 
                 if (restrictMigration && residentVM.is_a_real_vm && !VMsWithProblems.Contains(residentVM.opaque_ref))
                 {
-                    problems.Add(new CannotMigrateVM(this, residentVM, true));
+                    problems.Add(new CannotMigrateVM(this, residentVM, CannotMigrateVM.CannotMigrateVMReason.LicenseRestriction));
                     VMsWithProblems.Add(residentVM.opaque_ref);
                 }
             }
@@ -183,6 +183,22 @@ namespace XenAdmin.Diagnostics.Checks
                             throw new NullReferenceException(Failure.VM_MISSING_PV_DRIVERS);
 
                         return new NoPVDrivers(this, vm);
+
+                    case Failure.VM_LACKS_FEATURE:
+                        vm = connection.Resolve<VM>(vmRef);
+
+                        if (vm == null)
+                            throw new NullReferenceException(Failure.VM_LACKS_FEATURE);
+
+                        return new CannotMigrateVM(this, vm, CannotMigrateVM.CannotMigrateVMReason.LacksFeature);
+
+                    case Failure.VM_LACKS_FEATURE_SUSPEND:
+                        vm = connection.Resolve<VM>(vmRef);
+
+                        if (vm == null)
+                            throw new NullReferenceException(Failure.VM_LACKS_FEATURE_SUSPEND);
+
+                        return new CannotMigrateVM(this, vm, CannotMigrateVM.CannotMigrateVMReason.LacksFeatureSuspend);
 
                     case "VM_OLD_PV_DRIVERS":
                         vm = connection.Resolve<VM>(vmRef);

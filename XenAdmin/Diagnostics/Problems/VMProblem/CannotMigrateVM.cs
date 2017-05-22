@@ -38,21 +38,42 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 {
     public class CannotMigrateVM : VMProblem
     {
-        private readonly bool licenseRestriction;
+        private readonly CannotMigrateVMReason reason;
 
-        public CannotMigrateVM(Check check, VM vm, bool licenseRestriction = false)
+        public enum CannotMigrateVMReason { Unknown, LicenseRestriction, LacksFeature, LacksFeatureSuspend }
+
+        public CannotMigrateVM(Check check, VM vm, CannotMigrateVMReason licenseRestriction = CannotMigrateVMReason.Unknown)
             : base(check, vm) 
         {
-            this.licenseRestriction = licenseRestriction;
+            this.reason = licenseRestriction;
         }
 
         public override string Description
         {
             get 
             {
-                return String.Format(licenseRestriction
-                    ? Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON           
-                    : Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON, VM.Name); 
+                string descriptionFormat;
+
+                switch (reason)
+                {
+                    case CannotMigrateVMReason.LacksFeature:
+                        descriptionFormat = Messages.UPDATES_WIZARD_VM_MISSING_FEATURE;
+                        break;
+
+                    case CannotMigrateVMReason.LacksFeatureSuspend:
+                        descriptionFormat = Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON;
+                        break;
+
+                    case CannotMigrateVMReason.LicenseRestriction :
+                        descriptionFormat = Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON;
+                        break;
+
+                    default :
+                        descriptionFormat = Messages.UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON;
+                        break;
+                }
+
+                return String.Format(descriptionFormat, VM.Name); 
             }
         }
     }
