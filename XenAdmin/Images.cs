@@ -128,6 +128,7 @@ namespace XenAdmin
             ImageList16.Images.Add("debian_16x.png", Properties.Resources.debian_16x);
             ImageList16.Images.Add("oracle_16x.png", Properties.Resources.oracle_16x);
             ImageList16.Images.Add("redhat_16x.png", Properties.Resources.redhat_16x);
+            ImageList16.Images.Add("rocky_16x.png", Properties.Resources.rocky_16x);
             ImageList16.Images.Add("suse_16x.png", Properties.Resources.suse_16x);
             ImageList16.Images.Add("ubuntu_16x.png", Properties.Resources.ubuntu_16x);
             ImageList16.Images.Add("scilinux_16x.png", Properties.Resources.scilinux_16x);

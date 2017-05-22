@@ -311,6 +311,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_ORACLE;
                 case VM.VmTemplateType.RedHat:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_REDHAT;
+                case VM.VmTemplateType.Rocky:
+                    return Messages.NEWVMWIZARD_TEMPLATEPAGE_ROCKY; 
                 case VM.VmTemplateType.SciLinux:
                     return Messages.NEWVMWIZARD_TEMPLATEPAGE_SCILINUX;
                 case VM.VmTemplateType.Suse:
@@ -350,6 +352,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return Resources.oracle_16x;
                 case VM.VmTemplateType.RedHat:
                     return Resources.redhat_16x;
+                case VM.VmTemplateType.Rocky:
+                    return Resources.rocky_16x; 
                 case VM.VmTemplateType.SciLinux:
                     return Resources.scilinux_16x;
                 case VM.VmTemplateType.Suse:

@@ -104,6 +104,7 @@ namespace XenAdmin
         Debian,
         Oracle,
         RHEL,
+        Rocky,
         SUSE,
         Ubuntu,
         SciLinux,

@@ -1025,15 +1025,16 @@ namespace XenAPI
             NeoKylin = 7,
             Oracle = 8,
             RedHat = 9,
-            SciLinux = 10,
-            Suse = 11,
-            Ubuntu = 12,
-            Citrix = 13,
-            Solaris = 14,
-            Misc = 15,
-            Snapshot = 16,
-            SnapshotFromVmpp = 17,
-            Count = 18  //bump this if values are added
+            Rocky = 10,
+            SciLinux = 11,
+            Suse = 12,
+            Ubuntu = 13,
+            Citrix = 14,
+            Solaris = 15,
+            Misc = 16,
+            Snapshot = 17,
+            SnapshotFromVmpp = 18,
+            Count = 19  //bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -1065,6 +1066,9 @@ namespace XenAPI
 
                 if (os.Contains("red hat"))
                     return VmTemplateType.RedHat;
+
+                if (os.Contains("rocky"))
+                    return VmTemplateType.Rocky;
 
                 if (os.Contains("oracle"))
                     return VmTemplateType.Oracle;
