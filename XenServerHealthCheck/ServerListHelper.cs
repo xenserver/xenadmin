@@ -230,8 +230,8 @@ namespace XenServerHealthCheck
                         Properties.Settings.Default.ConnectionTimeout = Int32.Parse(proxySettings[4]);
                         Properties.Settings.Default.BypassProxyForServers = bool.Parse(proxySettings[5]);
                         Properties.Settings.Default.ProvideProxyAuthentication = bool.Parse(proxySettings[6]);
-                        Properties.Settings.Default.ProxyUsername = proxySettings[7];
-                        Properties.Settings.Default.ProxyPassword = proxySettings[8];
+                        Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(EncryptionUtils.UnprotectForLocalMachine(proxySettings[7]));
+                        Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(EncryptionUtils.UnprotectForLocalMachine(proxySettings[8]));
                         Properties.Settings.Default.ProxyAuthenticationMethod = Int32.Parse(proxySettings[9]);
                         break;
 

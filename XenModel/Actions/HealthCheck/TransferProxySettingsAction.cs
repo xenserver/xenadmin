@@ -33,6 +33,7 @@ using System;
 using System.IO.Pipes;
 using System.ServiceProcess;
 using System.Text;
+using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAPI;
 
@@ -82,8 +83,8 @@ namespace XenAdmin.Actions
                             timeOut.ToString(),
                             bypassProxyForServers.ToString(),
                             provideProxyCredentials.ToString(),
-                            proxyUsername.ToString(),
-                            proxyPassword.ToString(),
+                            EncryptionUtils.ProtectForLocalMachine(proxyUsername),
+                            EncryptionUtils.ProtectForLocalMachine(proxyPassword),
                             ((Int32)proxyAuthenticationMethod).ToString()});
                     return proxySettings;
                     
