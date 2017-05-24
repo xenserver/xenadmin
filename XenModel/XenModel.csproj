@@ -527,7 +527,7 @@
     <Compile Include="XenAPI\vm_power_state.cs" />
     <Compile Include="XenAPI\VTPM.cs" />
     <Compile Include="XenAPI\XenObject.cs" />
-    <Compile Include="XenAPI\XenObjectDownloader.cs" />
+    <Compile Include="XenObjectDownloader.cs" />
     <Compile Include="XenAPI\XenRef.cs" />
   </ItemGroup>
   <ItemGroup>

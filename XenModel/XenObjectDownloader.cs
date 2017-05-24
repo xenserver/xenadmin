@@ -32,23 +32,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
-using XenAdmin.Core;
+using XenAPI;
 
-namespace XenAPI
+namespace XenAdmin.Core
 {
     [Serializable]
-    public class EventNextBlockedException : Exception
+    public class EventFromBlockedException : Exception
     {
-        public EventNextBlockedException() : base() { }
+        public EventFromBlockedException() { }
 
-        public EventNextBlockedException(string message) : base(message) { }
+        public EventFromBlockedException(string message) : base(message) { }
 
-        public EventNextBlockedException(string message, Exception exception) : base(message, exception) { }
+        public EventFromBlockedException(string message, Exception exception) : base(message, exception) { }
 
-        protected EventNextBlockedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected EventFromBlockedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 
     public static class XenObjectDownloader
@@ -57,7 +56,7 @@ namespace XenAPI
 
         private const double EVENT_FROM_TIMEOUT = 30; // 30 seconds
 
-        /// <sumary>
+        /// <summary>
         /// Gets all objects from the server. Used in order to fill the cache.
         /// This function implements the new event system, available from in API version 1.9.
         /// In the new event system, (GetAllRecords + GetEvents) sequence will replace (RegisterForEvents + DownloadObjects + GetNextEvents).
@@ -102,9 +101,9 @@ namespace XenAPI
             }
             catch (WebException e)
             {
-                // Catch timeout, and turn it into an EventNextBlockedException so we can recognise it later (CA-33145)
+                // Catch timeout, and turn it into an EventFromBlockedException so we can recognise it later (CA-33145)
                 if (e.Status == WebExceptionStatus.Timeout)
-                    throw new EventNextBlockedException();
+                    throw new EventFromBlockedException();
                 else
                     throw;
             }

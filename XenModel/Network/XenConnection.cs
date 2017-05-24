@@ -1399,7 +1399,7 @@ namespace XenAdmin.Network
                 error = e;
                 log.Debug(e.Message);
             }
-            catch (EventNextBlockedException e)
+            catch (EventFromBlockedException e)
             {
                 EventNextBlocked = true;
                 error = e;
