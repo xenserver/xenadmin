@@ -8814,11 +8814,14 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN" xml:space="preserve">
     <value>NeoKylin</value>
   </data>
-  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_ROCKY" xml:space="preserve">
-    <value>Rocky</value>
+  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
+    <value>Linx</value>
   </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU" xml:space="preserve">
     <value>Ubuntu</value>
+  </data>
+  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN" xml:space="preserve">
+    <value>YinheKylin</value>
   </data>
   <data name="NFS_ISO_ALREADY_ATTACHED" xml:space="preserve">
     <value>This NFS ISO storage is already attached to '{0}'</value>

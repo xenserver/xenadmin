@@ -23497,6 +23497,15 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to YinheKylin.
+        /// </summary>
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Use this wizard to define a VM protection policy that will ensure your critical VMs are protected via automatic scheduled snapshot jobs..
@@ -25206,11 +25215,11 @@ namespace XenAdmin {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Rocky.
+        ///   Looks up a localized string similar to Linx.
         /// </summary>
-        public static string NEWVMWIZARD_TEMPLATEPAGE_ROCKY {
+        public static string NEWVMWIZARD_TEMPLATEPAGE_LINX {
             get {
-                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_ROCKY", resourceCulture);
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_LINX", resourceCulture);
             }
         }
         

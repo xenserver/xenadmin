@@ -102,11 +102,12 @@ namespace XenAdmin
 
         CentOS,
         Debian,
+        Linx,
         Oracle,
         RHEL,
-        Rocky,
         SUSE,
         Ubuntu,
+        YinheKylin,
         SciLinux,
         NeoKylin,
         Windows,
