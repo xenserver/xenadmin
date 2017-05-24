@@ -1042,7 +1042,7 @@
     <value>274, 42</value>
   </data>
   <data name="notEnrolledPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;notEnrolledPanel.Name" xml:space="preserve">
     <value>notEnrolledPanel</value>
@@ -1180,7 +1180,7 @@
     <value>75, 23</value>
   </data>
   <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Close</value>
@@ -1264,7 +1264,7 @@
     <value>790, 34</value>
   </data>
   <data name="rubricLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>0</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
     <value>Health Check will automatically upload a server status report to [Citrix] Insight Services, based on a predefined schedule configured on your [XenServer] pools.</value>
@@ -1297,7 +1297,7 @@
     <value>793, 414</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -1330,7 +1330,7 @@
     <value>469, 19</value>
   </data>
   <data name="showAgainCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="showAgainCheckBox.Text" xml:space="preserve">
     <value>&amp;Show this dialog when connecting to servers that are not enrolled into Health Check</value>

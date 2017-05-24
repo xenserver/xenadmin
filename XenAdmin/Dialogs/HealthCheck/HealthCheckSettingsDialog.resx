@@ -553,7 +553,7 @@
     <value>63, 29</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>U&amp;sername:</value>
@@ -595,7 +595,7 @@
     <value>63, 29</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Pass&amp;word:</value>
@@ -625,7 +625,7 @@
     <value>300, 23</value>
   </data>
   <data name="textBoxMyCitrixPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;textBoxMyCitrixPassword.Name" xml:space="preserve">
     <value>textBoxMyCitrixPassword</value>
@@ -649,7 +649,7 @@
     <value>300, 23</value>
   </data>
   <data name="textBoxMyCitrixUsername.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;textBoxMyCitrixUsername.Name" xml:space="preserve">
     <value>textBoxMyCitrixUsername</value>
@@ -679,7 +679,7 @@
     <value>167, 19</value>
   </data>
   <data name="existingAuthenticationRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="existingAuthenticationRadioButton.Text" xml:space="preserve">
     <value>Use existing &amp;authentication</value>
@@ -712,7 +712,7 @@
     <value>232, 19</value>
   </data>
   <data name="newAuthenticationRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="newAuthenticationRadioButton.Text" xml:space="preserve">
     <value>Authenticate using &amp;MyCitrix credentials</value>
@@ -742,7 +742,7 @@
     <value>0, 15</value>
   </data>
   <data name="authRubricLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;authRubricLinkLabel.Name" xml:space="preserve">
     <value>authRubricLinkLabel</value>
@@ -769,7 +769,7 @@
     <value>0, 15</value>
   </data>
   <data name="authRubricTextLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;authRubricTextLabel.Name" xml:space="preserve">
     <value>authRubricTextLabel</value>
@@ -1075,7 +1075,7 @@
     <value>378, 20</value>
   </data>
   <data name="errorLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>120</value>
+    <value>8</value>
   </data>
   <data name="errorLabel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1150,7 +1150,7 @@
     <value>591, 15</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>0</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Enter the credentials the Health Check Service will use to connect to XenServer.</value>
@@ -1192,7 +1192,7 @@
     <value>63, 29</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>&amp;Username:</value>
@@ -1234,7 +1234,7 @@
     <value>63, 29</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>&amp;Password:</value>
@@ -1264,7 +1264,7 @@
     <value>300, 23</value>
   </data>
   <data name="textboxXSPassword.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;textboxXSPassword.Name" xml:space="preserve">
     <value>textboxXSPassword</value>
@@ -1288,7 +1288,7 @@
     <value>300, 23</value>
   </data>
   <data name="textboxXSUserName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="textboxXSUserName.Text" xml:space="preserve">
     <value>root</value>
@@ -1321,7 +1321,7 @@
     <value>231, 19</value>
   </data>
   <data name="currentXsCredentialsRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="currentXsCredentialsRadioButton.Text" xml:space="preserve">
     <value>Use the cu&amp;rrent [XenCenter] credentials</value>
@@ -1354,7 +1354,7 @@
     <value>152, 19</value>
   </data>
   <data name="newXsCredentialsRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>2</value>
   </data>
   <data name="newXsCredentialsRadioButton.Text" xml:space="preserve">
     <value>Use different &amp;credentials</value>
@@ -1390,7 +1390,7 @@
     <value>99, 25</value>
   </data>
   <data name="testCredentialsButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="testCredentialsButton.Text" xml:space="preserve">
     <value>Test credentials</value>
