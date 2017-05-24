@@ -75,4 +75,21 @@ namespace XenAPI
             }
         }
     }
+
+    class UpdateUuidEqualityComparer : IEqualityComparer<Pool_update>
+    {
+        public bool Equals(Pool_update obj1, Pool_update obj2)
+        {
+            if (obj1 == null && obj2 == null)
+                return true;
+            if (obj1 == null || obj2 == null)
+                return false;
+            return string.Equals(obj1.uuid, obj2.uuid, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public int GetHashCode(Pool_update obj)
+        {
+            return obj.uuid.GetHashCode();
+        }
+    }
 }

@@ -60,6 +60,7 @@ namespace XenAdmin.Core
             UnlicensedHostLicensedMaster,
             LicenseMismatch,
             DifferentServerVersion,
+            DifferentPatches,
             DifferentCPUs,
             DifferentNetworkBackends,
             MasterHasHA,
@@ -115,6 +116,9 @@ namespace XenAdmin.Core
 
             if (DifferentServerVersion(slaveHost, masterHost))
                 return Reason.DifferentServerVersion;
+
+            if (DifferentPatches(slaveHost, masterHost))
+                return Reason.DifferentPatches;
 
             if (FreeHostPaidMaster(slaveHost, masterHost, allowLicenseUpgrade))
                 return Reason.UnlicensedHostLicensedMaster;
@@ -186,6 +190,8 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_LICENSEMISMATCH;
                 case Reason.DifferentServerVersion:
                     return Messages.NEWPOOL_DIFF_SERVER;
+                case Reason.DifferentPatches:
+                    return Messages.NEWPOOL_DIFF_PATCHES;
                 case Reason.DifferentCPUs:
                     return Messages.NEWPOOL_DIFF_HARDWARE;
                 case Reason.DifferentNetworkBackends:
@@ -380,6 +386,24 @@ namespace XenAdmin.Core
                 !Helpers.FalconOrGreater(master) && slave.BuildNumber != master.BuildNumber ||
                 slave.ProductVersion != master.ProductVersion ||
                 slave.ProductBrand != master.ProductBrand;
+        }
+
+        private static bool DifferentPatches(Host slave, Host master)
+        {
+            if (Helpers.ElyOrGreater(master))
+            {
+                var masterUpdates = master.AppliedUpdates();
+                var slaveUpdates = slave.AppliedUpdates();
+                return masterUpdates.Count != slaveUpdates.Count ||
+                       masterUpdates.Except(slaveUpdates, new UpdateUuidEqualityComparer()).Any();
+            }
+            else
+            {
+                var masterPatches = master.AppliedPatches();
+                var slavePatches = slave.AppliedPatches();
+                return masterPatches.Count != slavePatches.Count ||
+                       masterPatches.Except(slavePatches, new PatchUuidEqualityComparer()).Any();
+            }
         }
 
         private static bool SameLinuxPack(Host slave, Host master)
