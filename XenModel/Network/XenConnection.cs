@@ -315,14 +315,11 @@ namespace XenAdmin.Network
         public void LoadCache(Session session)
         {
             this.Cache.Clear();
-            if (XenObjectDownloader.LegacyEventSystem(session))
-                XenObjectDownloader.RegisterForEvents(session);
 
             cacheIsPopulated = false;
 
             string token = "";
-            bool legacyEventSystem = XenObjectDownloader.LegacyEventSystem(session);
-            XenObjectDownloader.GetAllObjects(session, eventQueue, () => false, legacyEventSystem, ref token);
+            XenObjectDownloader.GetAllObjects(session, eventQueue, () => false, ref token);
             List<ObjectChange> events = new List<ObjectChange>();
 
             while (eventQueue.NotEmpty)
@@ -1212,11 +1209,6 @@ namespace XenAdmin.Network
                 Session eventNextSession = DuplicateSession(EVENT_NEXT_TIMEOUT);
                 eventNextSession.ConnectionGroupName = eventNextConnectionGroupName; // this will force the eventNextSession onto its own set of TCP streams (see CA-108676)
 
-                bool legacyEventSystem = XenObjectDownloader.LegacyEventSystem(session);
-
-                if (legacyEventSystem)
-                    XenObjectDownloader.RegisterForEvents(session);
-
                 cacheIsPopulated = false;
                 session.CacheWarming = true;
 
@@ -1238,14 +1230,14 @@ namespace XenAdmin.Network
                             OnConnectionMessageChanged(string.Format(Messages.LABEL_SYNC, this.Hostname));
                         }
 
-                        XenObjectDownloader.GetAllObjects(session, eventQueue, task.GetCancelled, legacyEventSystem, ref token);
+                        XenObjectDownloader.GetAllObjects(session, eventQueue, task.GetCancelled, ref token);
                         session.CacheWarming = false;
                     }
                     else
                     {
                         try
                         {
-                            XenObjectDownloader.GetEvents(eventNextSession, eventQueue, task.GetCancelled, legacyEventSystem, ref token);
+                            XenObjectDownloader.GetEvents(eventNextSession, eventQueue, task.GetCancelled, ref token);
                             eventsExceptionLogged = false;
                         }
                         catch (Exception exn)
@@ -1407,7 +1399,7 @@ namespace XenAdmin.Network
                 error = e;
                 log.Debug(e.Message);
             }
-            catch (EventNextBlockedException e)
+            catch (EventFromBlockedException e)
             {
                 EventNextBlocked = true;
                 error = e;
