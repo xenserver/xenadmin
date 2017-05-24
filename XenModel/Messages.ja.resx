@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-    <xsd:element msdata:IsDataSet="true" name="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -5769,10 +5769,6 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="HAWIZARD_ASSIGNPRIORITIESPAGE_TITLE" xml:space="preserve">
     <value>このプールの VM の高可用性再起動の優先度、再起動順序、および起動間隔の構成</value>
   </data>
-
-
-
-
   <data name="HA_ASSIGN_PRIORITIES_MIXED_PROTECTION_LEVELS" xml:space="preserve">
     <value>(複数の値)</value>
   </data>
@@ -6079,6 +6075,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS" xml:space="preserve">
     <value>ユーザー名またはパスワードが無効です。再試行してください。</value>
+  </data>
+  <data name="HEALTH_CHECK_PRIVACY_POLICY" xml:space="preserve">
+    <value>ヘルス チェックによって [Citrix] Insight Services にアップロードされる情報は、トラブルシューティングや診断サポート、および [Citrix] Insight Services Policy ({0}) と [Citrix] Privacy Policy ({1}) で必要な製品の品質、信頼性、パフォーマンスを改善するために使用されます。</value>
   </data>
   <data name="HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT" xml:space="preserve">
     <value>このユーザーにはこのサーバーにアクセスする権限がありません。</value>
@@ -10901,7 +10900,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>権限のより多いユーザー アカウントで再試行してください。</value>
   </data>
   <data name="SOLUTION_UNKNOWN" xml:space="preserve">
-    <value/>
+    <value />
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>いくつかのエラーが発生しました。詳しくは、[XenCenter] のログを参照してください。</value>
@@ -11536,7 +11535,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>OVF または OVA パッケージからアプライアンスをインポートします。</value>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_VHD" xml:space="preserve">
-    <value/>
+    <value />
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>ローカルに格納された VM、テンプレート、またはスナップショットを新規 VM としてインポートします。</value>
@@ -12922,7 +12921,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>詳細</value>
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
-    <value/>
+    <value />
   </data>
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大</value>
