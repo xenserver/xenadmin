@@ -165,6 +165,15 @@ namespace XenServerHealthCheck
             }
         }
 
+        public void ClearServerList()
+        {
+            lock (serverListLock)
+            {
+                serverList.Clear();
+                updateServerList();
+            }
+        }
+
         public void UpdateServerCredential(string credential)
         {
             log.Info("Receive credential update message");
