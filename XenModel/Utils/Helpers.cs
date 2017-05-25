@@ -1615,11 +1615,6 @@ namespace XenAdmin.Core
                     if (sr != null)
                         return sr;
                     break;
-                case cls.VMPP:
-                    VMPP vmpp = message.Connection.Cache.Find_By_Uuid<VMPP>(message.obj_uuid);
-                    if (vmpp != null)
-                        return vmpp;
-                    break;
                 case cls.VMSS:
                     VMSS vmss = message.Connection.Cache.Find_By_Uuid<VMSS>(message.obj_uuid);
                     if (vmss != null)

@@ -705,12 +705,6 @@
     <Compile Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.Designer.cs">
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicySnapshotTypePageSpecific.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyWizardSpecific.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
       <SubType>UserControl</SubType>
@@ -3673,18 +3667,6 @@
     <Compile Include="Wizards\NewPolicyWizard\LocalServerTime.Designer.cs">
       <DependentUpon>LocalServerTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.Designer.cs">
-      <DependentUpon>NewPolicyArchivePage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.Designer.cs">
-      <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Wizards\NewPolicyWizard\NewPolicyFinishPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -6339,25 +6321,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewPolicyWizard\LocalServerTime.zh-CN.resx">
       <DependentUpon>LocalServerTime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.ja.resx">
-      <DependentUpon>NewPolicyArchivePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.resx">
-      <DependentUpon>NewPolicyArchivePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.zh-CN.resx">
-      <DependentUpon>NewPolicyArchivePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.ja.resx">
-      <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.resx">
-      <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.zh-CN.resx">
-      <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyFinishPage.ja.resx">
       <DependentUpon>NewPolicyFinishPage.cs</DependentUpon>

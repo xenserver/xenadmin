@@ -29,20 +29,16 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Core;
 
 
 namespace XenAdmin.Actions
 {
-    public class ChangePolicyEnabledAction<T> : PureAsyncAction where T : XenObject<T>
+    public class ChangePolicyEnabledAction : PureAsyncAction
     {
-        private IVMPolicy _policy;
-        public ChangePolicyEnabledAction(IVMPolicy policy)
+        private VMSS _policy;
+        public ChangePolicyEnabledAction(VMSS policy)
             : base(policy.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, policy.Name))
         {
             _policy = policy;
@@ -51,14 +47,14 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            bool value = !_policy.is_enabled;
-            Description = value ? string.Format(typeof(T) == typeof(VMPP) ? Messages.ENABLING_VMPP : Messages.ENABLING_VMSS, _policy.Name) :
-                string.Format(typeof(T) == typeof(VMPP) ? Messages.DISABLING_VMPP : Messages.DISABLING_VMSS, _policy.Name);
+            bool value = !_policy.enabled;
+            Description = value ? string.Format(Messages.ENABLING_VMSS, _policy.Name) :
+                string.Format(Messages.DISABLING_VMSS, _policy.Name);
 
-            _policy.set_is_enabled(Session, _policy.opaque_ref, !_policy.is_enabled);
+            VMSS.set_enabled(Session, _policy.opaque_ref, !_policy.enabled);
 
-            Description = value ? string.Format(typeof(T) == typeof(VMPP) ? Messages.ENABLED_VMPP : Messages.ENABLED_VMSS, _policy.Name) :
-                string.Format(typeof(T) == typeof(VMPP) ? Messages.DISABLED_VMPP : Messages.DISABLED_VMSS, _policy.Name);
+            Description = value ? string.Format(Messages.ENABLED_VMSS, _policy.Name) :
+                string.Format(Messages.DISABLED_VMSS, _policy.Name);
            
         }
     }

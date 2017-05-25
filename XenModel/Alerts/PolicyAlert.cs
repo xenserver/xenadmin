@@ -177,15 +177,10 @@ namespace XenAdmin.Alerts
                             else
                             {
                                 return string.Format(Messages.VM_SNAPSHOT_SCHEDULE_FAILED, Message.FriendlyName(XenAPI.Message.MessageType.VMSS_SNAPSHOT_FAILED.ToString()), numberOfVMsFailed);
-                            }
-                                
+                            }      
                         }
-                        else
-                        {
-                            return string.Format(Messages.VM_PROTECTION_POLICY_FAILED, Message.FriendlyName(XenAPI.Message.MessageType.VMPP_SNAPSHOT_FAILED.ToString()), numberOfVMsFailed);
-                        }  
                     }
-                    else return Text;
+                    return Text;
                 }
             }
         }

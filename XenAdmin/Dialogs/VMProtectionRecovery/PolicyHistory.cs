@@ -71,7 +71,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             }
         }
 
-        private IVMPolicy _policy;
+        private VMSS _policy;
         public void StartRefreshTab()
         {
             /* hoursFromNow has 3 possible values:
@@ -92,12 +92,12 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
                     break;
             }
 
-            PureAsyncAction action = _policy.getAlertsAction(_policy, hoursFromNow);
+            PureAsyncAction action = new GetVMSSAlertsAction(_policy, hoursFromNow);
             action.Completed += action_Completed;
             action.RunAsync();
         }
 
-        public void RefreshTab(IVMPolicy policy)
+        public void RefreshTab(VMSS policy)
         {
             _policy = policy;
             if (_policy == null)
@@ -202,14 +202,7 @@ namespace XenAdmin.Dialogs.VMProtectionRecovery
             Program.Invoke(Program.MainWindow, () =>
             {
                 panelLoading.Visible = false;
-                if (_policy._Type == typeof(VMPP))
-                {
-                    RefreshGrid(((GetVMPPAlertsAction)(action)).VMPP.Alerts);
-                }
-                else
-                {
-                    RefreshGrid(((GetVMSSAlertsAction)(action)).VMSS.Alerts);
-                }
+                RefreshGrid(((GetVMSSAlertsAction)(action)).VMSS.Alerts);
             });
         }
 

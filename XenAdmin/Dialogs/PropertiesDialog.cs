@@ -67,11 +67,7 @@ namespace XenAdmin.Dialogs
         private HostPowerONEditPage HostPowerONEditPage;
         private PoolPowerONEditPage PoolPowerONEditPage;
         private NewPolicySnapshotFrequencyPage newPolicySnapshotFrequencyPage1;
-        private NewPolicySnapshotTypePageSpecific<VMPP> newPolicySnapshotTypePage1;
-        private NewPolicySnapshotTypePageSpecific<VMSS> newPolicyVMSSTypePage1;
-        private NewPolicyArchivePage newPolicyArchivePage1;
-        private NewPolicyEmailPage newPolicyEmailPage1;
-        private NewVMGroupVMsPage<VMPP> newPolicyVMsPage1;
+        private NewPolicySnapshotTypePage newPolicyVMSSTypePage1;
         private NewVMGroupVMsPage<VMSS> newVMSSVMsPage1;
         private NewVMGroupVMsPage<VM_appliance> newVMApplianceVMsPage1;
         private NewVMApplianceVMOrderAndDelaysPage newVmApplianceVmOrderAndDelaysPage1;
@@ -131,8 +127,6 @@ namespace XenAdmin.Dialogs
 
             bool wlb_enabled = (Helpers.WlbEnabledAndConfigured(xenObjectCopy.Connection));
 
-            bool is_VMPP = xenObjectCopy is VMPP;
-
             bool is_VM_appliance = xenObjectCopy is VM_appliance;
 
             bool is_VMSS = xenObjectCopy is VMSS;
@@ -146,7 +140,7 @@ namespace XenAdmin.Dialogs
 
                 ShowTab(GeneralEditPage = new GeneralEditPage());
 
-                if (!is_VMPP && !is_VM_appliance)
+                if (!is_VM_appliance)
                     ShowTab(CustomFieldsEditPage = new CustomFieldsDisplayPage {AutoScroll = true});
 
                 if (is_vm)
@@ -240,19 +234,10 @@ namespace XenAdmin.Dialogs
                 if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanHaveCloudConfigDrive)
                     ShowTab(CloudConfigParametersPage = new Page_CloudConfigParameters());
 
-                if (is_VMPP)
-                {
-                    ShowTab(newPolicyVMsPage1 = new NewVMGroupVMsPage<VMPP> {Pool = pool});
-                    ShowTab(newPolicySnapshotTypePage1 = new NewPolicySnapshotTypePageSpecific<VMPP>());
-                    ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
-                    ShowTab(newPolicyArchivePage1 = new NewPolicyArchivePage {Pool = pool, PropertiesDialog = this});
-                    ShowTab(newPolicyEmailPage1 = new NewPolicyEmailPage() {PropertiesDialog = this});
-                }
-
                 if(is_VMSS)
                 {
                     ShowTab(newVMSSVMsPage1 = new NewVMGroupVMsPage<VMSS> {Pool = pool});
-                    ShowTab(newPolicyVMSSTypePage1 = new NewPolicySnapshotTypePageSpecific<VMSS>());
+                    ShowTab(newPolicyVMSSTypePage1 = new NewPolicySnapshotTypePage());
                     ShowTab(newPolicySnapshotFrequencyPage1 = new NewPolicySnapshotFrequencyPage {Pool = pool});
                 }
 
@@ -348,7 +333,7 @@ namespace XenAdmin.Dialogs
             if(xenObjectBefore is VMSS)
             {
                 XenAPI.VMSS VMSSObj = xenObjectBefore as XenAPI.VMSS;
-                if (VMSSObj.policy_type == policy_backup_type.snapshot_with_quiesce)
+                if (VMSSObj.type == vmss_type.snapshot_with_quiesce)
                 {
                     actions.Insert(0, new SaveChangesAction(xenObjectCopy, xenObjectBefore, true));
                 }
@@ -488,18 +473,10 @@ namespace XenAdmin.Dialogs
         private void verticalTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-            var snapshotTypePageSpecific = verticalTabs.SelectedItem as NewPolicySnapshotTypePageSpecific<VMSS>;
-            if (snapshotTypePageSpecific != null)
+            var snapshotTypePage = verticalTabs.SelectedItem as NewPolicySnapshotTypePage;
+            if (snapshotTypePage != null)
             {
                 newPolicyVMSSTypePage1.ToggleQuiesceCheckBox(newVMSSVMsPage1.SelectedVMs);
-                return;
-            }
-
-            var selectedPage = verticalTabs.SelectedItem as NewPolicyArchivePage;
-            if (selectedPage != null)
-            {
-                if (newPolicySnapshotFrequencyPage1.ValidToSave)
-                    selectedPage.SetXenObjects(null, null);
                 return;
             }
 
@@ -568,11 +545,6 @@ namespace XenAdmin.Dialogs
         public void SelectPerfmonAlertEditPage()
         {
             SelectPage(PerfmonAlertEditPage);
-        }
-
-        public void SelectNewPolicyArchivePage()
-        {
-            SelectPage(newPolicyArchivePage1);
         }
 
         public void SelectStartupOptionsEditPage()

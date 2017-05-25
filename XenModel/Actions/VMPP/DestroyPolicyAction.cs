@@ -39,10 +39,10 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class DestroyPolicyAction <T> :PureAsyncAction where T: XenObject<T>
+    public class DestroyPolicyAction: PureAsyncAction
     {
-        private List<IVMPolicy> _selectedToDelete;
-        public DestroyPolicyAction(IXenConnection connection,List<IVMPolicy> deletePolicies) : base(connection, Messages.DELETE_POLICIES)
+        private List<VMSS> _selectedToDelete;
+        public DestroyPolicyAction(IXenConnection connection,List<VMSS> deletePolicies) : base(connection, Messages.DELETE_POLICIES)
         {
             _selectedToDelete = deletePolicies;
             Pool = Helpers.GetPool(connection);
@@ -53,14 +53,14 @@ namespace XenAdmin.Actions
 
             foreach (var policy in _selectedToDelete)
             {
-                Description = typeof(T) == typeof(VMPP) ? string.Format(Messages.DELETING_VMPP, policy.Name) : string.Format(Messages.DELETING_VMSS, policy.Name);
+                Description = string.Format(Messages.DELETING_VMSS, policy.Name);
                 foreach (var vmref in policy.VMs)
                 {
-                    policy.set_vm_policy(Session, vmref.opaque_ref, null);
+                    VM.set_snapshot_schedule(Session, vmref.opaque_ref, null);
                 }
                 try
                 {
-                    policy.do_destroy(Session, policy.opaque_ref);
+                    VMSS.destroy(Session, policy.opaque_ref);
                 }
                 catch (Exception e)
                 {
@@ -68,7 +68,7 @@ namespace XenAdmin.Actions
                         throw e;
                 }
             }
-            Description = typeof(T) == typeof(VMPP) ? Messages.DELETED_VMPP : Messages.DELETED_VMSS;
+            Description =Messages.DELETED_VMSS;
         }
     }
 }

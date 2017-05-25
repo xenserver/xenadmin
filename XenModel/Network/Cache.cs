@@ -89,7 +89,6 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<VM>, VM> _vm = new ChangeableDictionary<XenRef<VM>, VM>();
         private readonly ChangeableDictionary<XenRef<VM_metrics>, VM_metrics> _vm_metrics = new ChangeableDictionary<XenRef<VM_metrics>, VM_metrics>();
         private readonly ChangeableDictionary<XenRef<VM_guest_metrics>, VM_guest_metrics> _vm_guest_metrics = new ChangeableDictionary<XenRef<VM_guest_metrics>, VM_guest_metrics>();
-        private readonly ChangeableDictionary<XenRef<VMPP>, VMPP> _vmmp = new ChangeableDictionary<XenRef<VMPP>, VMPP>();
         private readonly ChangeableDictionary<XenRef<VMSS>, VMSS> _vmss = new ChangeableDictionary<XenRef<VMSS>, VMSS>();
         private readonly ChangeableDictionary<XenRef<VM_appliance>, VM_appliance> _vm_appliance = new ChangeableDictionary<XenRef<VM_appliance>, VM_appliance>();
         private readonly ChangeableDictionary<XenRef<Crashdump>, Crashdump> _crashdump = new ChangeableDictionary<XenRef<Crashdump>, Crashdump>();
@@ -114,11 +113,6 @@ namespace XenAdmin.Network
         public Bond[] Bonds
         {
             get { return contents(_bond); }
-        }
-
-        public VMPP[] VMPPs
-        {
-            get { return contents(_vmmp); }
         }
 
         public VMSS[] VMSSs

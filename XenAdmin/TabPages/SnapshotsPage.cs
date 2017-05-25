@@ -129,7 +129,7 @@ namespace XenAdmin.TabPages
                         VM_BatchCollectionChanged);
                     m_VM.PropertyChanged += snapshot_PropertyChanged;
                     //Version setup
-                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = (Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection)) || !Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule);
+                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = !Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule);
                     if (VM.SnapshotView != SnapshotsView.ListView)
                         TreeViewChecked();
                     else
@@ -146,8 +146,7 @@ namespace XenAdmin.TabPages
                     BuildList();
                     RefreshDetailsGroupBox(true);
                     RefreshToolStripButtons();
-                    RefreshVMProtectionPanel();
-                    RefreshArchiveNowOption();
+                    RefreshVMSSPanel();
                 }
             }
             get
@@ -156,42 +155,9 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void RefreshArchiveNowOption()
+        private void RefreshVMSSPanel()
         {
-            if(Helpers.ClearwaterOrGreater(VM.Connection))
-            {
-                archiveSnapshotNowToolStripMenuItem.Enabled = archiveSnapshotNowToolStripMenuItem.Visible = false;
-                archiveToolStripMenuItem.Enabled = archiveToolStripMenuItem.Visible = false;
-            }
-            else
-            {
-                archiveSnapshotNowToolStripMenuItem.Enabled = archiveSnapshotNowToolStripMenuItem.Visible = true;
-                archiveToolStripMenuItem.Enabled = archiveToolStripMenuItem.Visible = true;
-            }
-        }
-
-        private void RefreshVMProtectionPanel()
-        {
-            if (Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection))
-            {
-                panelVMPP.Visible = true;
-                var vmpp = VM.Connection.Resolve(VM.protection_policy);
-                if (vmpp == null || Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
-                {
-                    labelVMPPInfo.Text = Messages.THIS_VM_IS_NOT_PROTECTED;
-                    pictureBoxVMPPInfo.Image = Resources._000_BackupMetadata_h32bit_16;
-
-                    linkLabelVMPPInfo.Text = Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection) ? Messages.TELL_ME_MORE : Messages.VIEW_POLICIES;
-
-                }
-                else
-                {
-                    labelVMPPInfo.Text = string.Format(Messages.THIS_VM_IS_PROTECTED, vmpp.Name);
-                    pictureBoxVMPPInfo.Image = Resources._000_Tick_h32bit_16;
-                    linkLabelVMPPInfo.Text = Messages.VIEW_POLICIES;
-                }
-            }
-            else if (Helpers.FalconOrGreater(VM.Connection))
+            if (Helpers.FalconOrGreater(VM.Connection))
             {
                 panelVMPP.Visible = true;
                 var vmss = VM.Connection.Resolve(VM.snapshot_schedule);
@@ -536,9 +502,6 @@ namespace XenAdmin.TabPages
                 case "snapshots":
                     m_NeedToUpdate = true;
                     break;
-                case "protection_policy":
-                    RefreshVMProtectionPanel();
-                    break;
             }
         }
 
@@ -624,11 +587,6 @@ namespace XenAdmin.TabPages
                 EnableDelete();
             else
                 DisableAllButtons();
-
-
-            //Archive now
-            archiveSnapshotNowToolStripMenuItem.Available = CanArchive;
-
         }
 
         private void DisableAllButtons()
@@ -1178,9 +1136,6 @@ namespace XenAdmin.TabPages
         {
             contextMenuStrip.Items.Clear();
 
-            if (CanArchive)
-                contextMenuStrip.Items.Add(archiveToolStripMenuItem);
-
             contextMenuStrip.Items.AddRange(new ToolStripItem[]
                 {
                     viewToolStripMenuItem,
@@ -1189,14 +1144,6 @@ namespace XenAdmin.TabPages
                 });
         }
 
-        private bool CanArchive
-        {
-            get
-            {
-                var vmpp = VM.Connection.Resolve(VM.protection_policy);
-                return vmpp != null;
-            }
-        }
 
         private void SetContextMenuSnapshot()
         {
@@ -1213,9 +1160,6 @@ namespace XenAdmin.TabPages
                     saveTemplateToolStripMenuItem,
                     exportToolStripMenuItem
                 });
-
-            if (CanArchive)
-                contextMenuStrip.Items.Add(archiveToolStripMenuItem);
 
             contextMenuStrip.Items.AddRange(new ToolStripItem[]
                 {
@@ -1544,55 +1488,6 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void archiveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var vmpp = VM.Connection.Resolve(VM.protection_policy);
-            if (vmpp.archive_frequency != vmpp_archive_frequency.never)
-            {
-                var selectedSnapshots = GetSelectedSnapshots();
-                string text = "";
-                if (selectedSnapshots.Count == 1)
-                    text = string.Format(Messages.ARCHIVE_SNAPSHOT_NOW_TEXT_SINGLE, VM.Connection.Resolve(VM.protection_policy).archive_target_config_location);
-                else
-                    text = string.Format(Messages.ARCHIVE_SNAPSHOT_NOW_TEXT_MULTIPLE, VM.Connection.Resolve(VM.protection_policy).archive_target_config_location);
-
-                DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(SystemIcons.Information, text, Messages.ARCHIVE_VM_PROTECTION_TITLE),
-                       ThreeButtonDialog.ButtonYes,
-                       ThreeButtonDialog.ButtonNo))
-                {
-                    dialogResult = dlg.ShowDialog(this);
-                }
-                if (dialogResult == DialogResult.Yes)
-                {
-                    foreach (var snapshot in selectedSnapshots)
-                    {
-                        new ArchiveNowAction(snapshot).RunAsync();
-                    }
-                }
-            }
-            else
-            {
-                DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Error, Messages.POLICY_DOES_NOT_HAVE_ARCHIVE, Messages.POLICY_DOES_NOT_HAVE_ARCHIVE_TITLE),
-                        ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo))
-                {
-                    dialogResult = dlg.ShowDialog(this);
-                }
-                if (dialogResult == DialogResult.Yes)
-                {
-                    using (var dialog = new PropertiesDialog(vmpp))
-                    {
-                        dialog.SelectNewPolicyArchivePage();
-                        dialog.ShowDialog(this);
-                    }
-                }
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             contextMenuStripView.Show(buttonView, 0, buttonView.Height);
@@ -1606,35 +1501,15 @@ namespace XenAdmin.TabPages
 
         private void linkLabelVMPPInfo_Click(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (Helpers.DundeeOrGreater(VM.Connection))
+            if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule))
             {
-                if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
-                {
-                    VMGroupCommand<VMSS>.ShowUpsellDialog(this);
-                }
-                else
-                {
-                    var command = new VMGroupCommand<VMSS>(Program.MainWindow, VM);
-                    command.Execute();
-                }
+                VMGroupCommand<VMSS>.ShowUpsellDialog(this);
             }
             else
             {
-                if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
-                {
-                    VMGroupCommand<VMPP>.ShowUpsellDialog(this);
-                }
-                else
-                {
-                    var command = new VMGroupCommand<VMPP>(Program.MainWindow, VM);
-                    command.Execute();
-                }
+                var command = new VMGroupCommand<VMSS>(Program.MainWindow, VM);
+                command.Execute();
             }
-        }
-
-        private void saveMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            saveMenuStrip.Items[saveMenuStrip.Items.Count - 1].Available = CanArchive;
         }
 
         private void snapshotTreeView_Leave(object sender, EventArgs e)
