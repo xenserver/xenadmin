@@ -38,7 +38,7 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Commands;
 using XenAdmin.Core;
-using XenAdmin.Dialogs.VMProtectionRecovery;
+using XenAdmin.Controls;
 using XenAdmin.Wizards.ImportWizard;
 using XenAdmin.Wizards.NewVMApplianceWizard;
 using XenAdmin.Wizards.ExportWizard;

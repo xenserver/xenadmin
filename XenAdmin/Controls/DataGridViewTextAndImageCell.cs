@@ -35,7 +35,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace XenAdmin.Dialogs.VMProtectionRecovery
+namespace XenAdmin.Controls
 {
     public class DataGridViewTextAndImageCell : DataGridViewTextBoxCell
     {

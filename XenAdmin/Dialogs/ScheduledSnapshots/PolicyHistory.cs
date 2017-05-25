@@ -30,17 +30,17 @@
  */
 
 using System;
-using System.Windows.Forms;
-using XenAdmin.Alerts;
-using XenAPI;
-using XenAdmin.Properties;
-using System.ComponentModel;
-using XenAdmin.Actions;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using XenAdmin.Actions;
+using XenAdmin.Alerts;
+using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Properties;
+using XenAPI;
 
-
-namespace XenAdmin.Dialogs.VMProtectionRecovery
+namespace XenAdmin.Dialogs.ScheduledSnapshots
 {
     public partial class PolicyHistory : UserControl
     {

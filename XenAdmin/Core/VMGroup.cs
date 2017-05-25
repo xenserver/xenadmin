@@ -33,8 +33,8 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
+using XenAdmin.Dialogs.ScheduledSnapshots;
 using XenAdmin.Dialogs.VMAppliances;
-using XenAdmin.Dialogs.VMProtection_Recovery;
 using XenAdmin.Network;
 using XenAdmin.Wizards;
 using XenAdmin.Wizards.NewPolicyWizard;
@@ -182,7 +182,7 @@ namespace XenAdmin.Core
 
         internal static XenDialogBase ManageGroupsDialog(Pool pool)
         {
-            return typeof(T) == typeof(VMSS) ? (XenDialogBase)(new VMProtectionPoliciesDialog(pool)) : (XenDialogBase)(new VMAppliancesDialog(pool));
+            return typeof(T) == typeof(VMSS) ? (XenDialogBase)(new ScheduledSnapshotsDialog(pool)) : (XenDialogBase)(new VMAppliancesDialog(pool));
         }
 
         internal static bool FeaturePossible(IXenConnection connection)

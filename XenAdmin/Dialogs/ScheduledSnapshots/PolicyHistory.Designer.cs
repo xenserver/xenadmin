@@ -1,6 +1,6 @@
 ﻿using XenAdmin.Controls.DataGridViewEx;
 
-namespace XenAdmin.Dialogs.VMProtectionRecovery
+namespace XenAdmin.Dialogs.ScheduledSnapshots
 {
     partial class PolicyHistory
     {

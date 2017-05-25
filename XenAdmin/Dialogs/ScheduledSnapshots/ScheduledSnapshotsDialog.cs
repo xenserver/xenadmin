@@ -32,23 +32,23 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Alerts;
+using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAdmin.Wizards.NewPolicyWizard;
 using XenAPI;
-using XenAdmin.Core;
-using XenAdmin.Dialogs.VMProtectionRecovery;
-using XenAdmin.Alerts;
-using System.Linq;
 
-namespace XenAdmin.Dialogs.VMProtection_Recovery
+namespace XenAdmin.Dialogs.ScheduledSnapshots
 {
-    public partial class VMProtectionPoliciesDialog: XenDialogBase
+    public partial class ScheduledSnapshotsDialog: XenDialogBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public readonly Pool Pool;
-        public VMProtectionPoliciesDialog(Pool pool)
+        public ScheduledSnapshotsDialog(Pool pool)
             : base(pool.Connection)
         {
             Pool = pool;
@@ -60,7 +60,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             policyHistory1.pool = pool;
             RefreshPoolTitle(pool);
         }
-        public VMProtectionPoliciesDialog() { }
+        public ScheduledSnapshotsDialog() { }
         
         public class PolicyRow : DataGridViewRow
         {
