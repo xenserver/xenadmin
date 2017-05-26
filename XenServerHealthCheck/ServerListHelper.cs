@@ -181,6 +181,12 @@ namespace XenServerHealthCheck
             string decryptCredential = EncryptionUtils.UnprotectForLocalMachine(credential);
             string[] decryptCredentialComps = decryptCredential.Split(SEPARATOR);
 
+            if (decryptCredentialComps.Length != 1 && decryptCredentialComps.Length != 3)
+                return;
+
+            if (decryptCredentialComps.Length == 3 && (string.IsNullOrEmpty(decryptCredentialComps[1]) || string.IsNullOrEmpty(decryptCredentialComps[2])))
+                return; //ignore null or empty username and password
+
             lock (serverListLock)
             {
                 if (decryptCredentialComps.Length == 3)
