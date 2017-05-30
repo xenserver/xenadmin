@@ -171,25 +171,13 @@ namespace XenAdmin.Dialogs
                 ResetButtonEnablement();
                 return;
             }
-                
-            List<LicenseDataGridViewRow> licenseRows = rowsChecked.ConvertAll(r => r as LicenseDataGridViewRow).
-                Where(lr => lr.CanUseLicenseServer).ToList();
 
-            if(licenseRows.Count > 0)
-            {
-                AssignLicenseDialog ald = new AssignLicenseDialog(licenseRows.ConvertAll(r=>r.XenObject),
+            List<LicenseDataGridViewRow> licenseRows = rowsChecked.ConvertAll(r => r as LicenseDataGridViewRow);
+            AssignLicenseDialog ald = new AssignLicenseDialog(licenseRows.ConvertAll(r=>r.XenObject),
                                                                   licenseRows.First().LicenseServerAddress,
                                                                   licenseRows.First().LicenseServerPort,
                                                                   licenseRows.First().LicenseEdition);
-                ald.ShowDialog(View.Parent);
-            }
-            else
-            {
-                Debug.Assert(rowsChecked.Count == 1, "rowsChecked.Count == 1");
-                List<LicenseDataGridViewRow> validRows = rowsChecked.ConvertAll(r => r as LicenseDataGridViewRow);
-                Debug.Assert(!validRows[0].CanUseLicenseServer, "Should not be able to use the license server");
-                new OpenLicenseFileDialog(View.Parent, RowsToHosts(validRows)[0], Messages.INSTALL_LICENSE_KEY, false).ShowDialogAndRunAction();
-            }
+            ald.ShowDialog(View.Parent);
 
             SummariseDisconnectedRows(rowsChecked);
             ResetButtonEnablement();

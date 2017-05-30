@@ -2968,7 +2968,6 @@
     <Compile Include="Dialogs\LicenseManager\LicenseRowComparers\ExpiryComparer.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseRowComparers\NameColumnComparer.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseRowComparers\ProductColumnComparer.cs" />
-    <Compile Include="Dialogs\LicenseManager\OpenLicenseFileDialog.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\CanUseLicenseServerVerifier.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\HaOnVerifier.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\LicenseSelectionVerifier.cs" />
