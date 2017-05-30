@@ -43,12 +43,12 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 {
     public partial class NewPolicyWizard : XenWizardBase
     {
-        protected NewPolicyPolicyNamePage xenTabPagePolicy;
+        private readonly NewPolicyPolicyNamePage xenTabPagePolicy;
         private readonly NewVMGroupVMsPage<VMSS> xenTabPageVMsPage;
         private readonly NewPolicySnapshotTypePage xenTabPageSnapshotType;
-        protected NewPolicySnapshotFrequencyPage xenTabPageSnapshotFrequency;
-        protected NewPolicyFinishPage xenTabPageFinish;
-        protected RBACWarningPage xenTabPageRBAC; 
+        private readonly NewPolicySnapshotFrequencyPage xenTabPageSnapshotFrequency;
+        private readonly NewPolicyFinishPage xenTabPageFinish;
+        private readonly RBACWarningPage xenTabPageRBAC; 
 
         public readonly Pool Pool;
         public NewPolicyWizard(Pool pool)
@@ -105,12 +105,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                                      FormatSchedule(xenTabPageSnapshotFrequency.Schedule, xenTabPageSnapshotFrequency.Frequency, DaysWeekCheckboxes.DaysMode.L10N_LONG));
         }
 
-        private int GetBackupDaysCount()
-        {
-            string days;
-            return xenTabPageSnapshotFrequency.Schedule.TryGetValue("days", out days) ? days.Split(',').Length : 0;
-        }
-
         private static string FormatBackupType(vmss_type backupType)
         {
             if (backupType == vmss_type.snapshot)
@@ -121,34 +115,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                 return Messages.QUIESCED_SNAPSHOTS;
 
             throw new ArgumentException("wrong argument");
-        }
-
-        
-        // These two instances of FormatSchedule used to be in the VMPP class. That's probably where
-        // they really belong, but because of the way they're constructed (see DaysWeekCheckboxes.L10NDays())
-        // they had to move into the View. (CA-51612).
-        internal static string FormatSchedule(Dictionary<string, string> schedule, vmpp_archive_frequency archiveType, DaysWeekCheckboxes.DaysMode mode)
-        {
-            if (archiveType == vmpp_archive_frequency.always_after_backup)
-            {
-                return Messages.ASAPSNAPSHOTTAKEN;
-            }
-            else if (archiveType == vmpp_archive_frequency.never)
-            {
-                return Messages.NEVER;
-            }
-            else if (archiveType == vmpp_archive_frequency.daily)
-            {
-                DateTime value = DateTime.Parse(string.Format("{0}:{1}", schedule["hour"], schedule["min"]), CultureInfo.InvariantCulture);
-                return string.Format(Messages.DAILY_SCHEDULE_FORMAT, HelpersGUI.DateTimeToString(value, Messages.DATEFORMAT_HM, true));
-            }
-            else if (archiveType == vmpp_archive_frequency.weekly)
-            {
-                DateTime value = DateTime.Parse(string.Format("{0}:{1}", schedule["hour"], schedule["min"]), CultureInfo.InvariantCulture);
-                return string.Format(Messages.WEEKLY_SCHEDULE_FORMAT, HelpersGUI.DateTimeToString(value, Messages.DATEFORMAT_HM, true), DaysWeekCheckboxes.L10NDays(schedule["days"], mode));
-            }
-            return "";
-
         }
 
         internal static string FormatSchedule(Dictionary<string, string> schedule, vmss_frequency backupFrequency, DaysWeekCheckboxes.DaysMode mode)

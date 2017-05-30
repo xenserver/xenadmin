@@ -57,7 +57,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
             chevronButton1.Image = Properties.Resources.PDChevronDown;
             policyHistory1.Visible = false;
-            policyHistory1.pool = pool;
             RefreshPoolTitle(pool);
         }
         public ScheduledSnapshotsDialog() { }

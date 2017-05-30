@@ -44,8 +44,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 {
     public partial class PolicyHistory : UserControl
     {
-        public Pool pool;
-
         public PolicyHistory()
         {
             InitializeComponent();

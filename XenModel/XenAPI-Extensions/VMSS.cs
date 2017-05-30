@@ -46,11 +46,6 @@ namespace XenAPI
             get { return false; }
         }
 
-        public Type _Type
-        {
-            get { return typeof(VMSS); }
-        }
-
         public List<PolicyAlert> PolicyAlerts
         {
             get { return Alerts; }

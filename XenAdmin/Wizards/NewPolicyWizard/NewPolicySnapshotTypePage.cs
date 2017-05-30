@@ -59,12 +59,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             this.labelWarning.Text = string.Format(this.labelWarning.Text, Messages.VMSS_TYPE);
         }
 
-        public NewPolicySnapshotTypePage(List<VM> selectedVMS)
-        {
-            InitializeComponent();
-            SelectedVMs = selectedVMS;
-        }
-
         public string SubText
         {
             get
