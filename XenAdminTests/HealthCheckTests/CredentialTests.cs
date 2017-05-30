@@ -50,11 +50,22 @@ namespace XenAdminTests.HealthCheckTests
     {
         private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
 
-        [Test]
-        public void CredentialOp()
+        [TestFixtureSetUp]
+        public void FixtureSetup()
         {
             CredentialReceiver.instance.Init();
             ServerListHelper.instance.Init();
+        }
+
+        [TestFixtureTearDown]
+        public void FixtureTearDown()
+        {
+            CredentialReceiver.instance.UnInit();
+        }
+
+        [Test]
+        public void CredentialOp()
+        {
             string HostName = "Host1";
             string UserName = "User1";
             string Password = "password1";
@@ -156,8 +167,6 @@ namespace XenAdminTests.HealthCheckTests
             System.Threading.Thread.Sleep(1000);
             con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize);
-
-            CredentialReceiver.instance.UnInit();
         }
     }
 }
