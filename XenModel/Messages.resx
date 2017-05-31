@@ -12358,6 +12358,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VIRTUAL_MACHINES" xml:space="preserve">
     <value>Virtual Machines</value>
   </data>
+  <data name="VLAN_NETWORK_NAME" xml:space="preserve">
+    <value>Network {0} on VLAN {1}</value>
+  </data>
   <data name="VM" xml:space="preserve">
     <value>VM</value>
   </data>
