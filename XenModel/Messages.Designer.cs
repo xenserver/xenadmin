@@ -35666,6 +35666,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Network {0} on VLAN {1}.
+        /// </summary>
+        public static string VLAN_NETWORK_NAME {
+            get {
+                return ResourceManager.GetString("VLAN_NETWORK_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM.
         /// </summary>
         public static string VM {
