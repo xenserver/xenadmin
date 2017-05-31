@@ -610,7 +610,7 @@ namespace XenAdmin.Core
         public static bool HasCompatibleManagementInterface(IXenConnection slaveConnection)
         {
             /* if there are non physical pifs present then the slave should have 
-             * only one VLAN and it has to be the managment interface. 
+             * only one VLAN and it has to be the management interface. 
              * Bonds and cross server private networks are not allowed */
 
             int numberOfNonPhysicalPifs = slaveConnection.Cache.PIFs.Count(p => !p.physical);
