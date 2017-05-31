@@ -755,19 +755,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Whether this host is an XCP host
-        /// </summary>
-        public bool IsXCP
-        {
-            get
-            {
-                return
-                    ProductVersion == null && PlatformVersion != null ||  // for Tampa and later
-                    ProductBrand == "XCP";  // for Boston and earlier
-            }
-        }
-
-        /// <summary>
         /// The remote syslog target. May return null if not set on the server. Set to null to unset.
         /// </summary>
         public string SysLogDestination
