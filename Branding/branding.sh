@@ -25,8 +25,8 @@ do
 done
 
 
-TOPLEVEL_VERSIONS=${ROOT}/branding.git/Citrix/XenServer/toplevel-versions
-TOPLEVEL_BRANDING=${ROOT}/branding.git/Citrix/XenServer/toplevel-branding
+TOPLEVEL_VERSIONS=${ROOT}/branding.git/xenserver/toplevel-versions
+TOPLEVEL_BRANDING=${ROOT}/branding.git/xenserver/toplevel-branding
 
 BRANDING_COMPANY_NAME_LEGAL=$(cat ${TOPLEVEL_BRANDING} | grep -F "COMPANY_NAME_LEGAL := " | sed -e 's/COMPANY_NAME_LEGAL := //g')
 BRANDING_COMPANY_NAME_SHORT=$(cat ${TOPLEVEL_BRANDING} | grep -F "COMPANY_NAME_SHORT := " | sed -e 's/COMPANY_NAME_SHORT := //g')
