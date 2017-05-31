@@ -30858,33 +30858,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XCP build number.
-        /// </summary>
-        public static string SOFTWARE_VERSION_XCP_BUILD_NUMBER {
-            get {
-                return ResourceManager.GetString("SOFTWARE_VERSION_XCP_BUILD_NUMBER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XCP build date.
-        /// </summary>
-        public static string SOFTWARE_VERSION_XCP_DATE {
-            get {
-                return ResourceManager.GetString("SOFTWARE_VERSION_XCP_DATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XCP version.
-        /// </summary>
-        public static string SOFTWARE_VERSION_XCP_PLATFORM_VERSION {
-            get {
-                return ResourceManager.GetString("SOFTWARE_VERSION_XCP_PLATFORM_VERSION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Try again using a correct user name and password..
         /// </summary>
         public static string SOLUTION_AUTHENTICATION {

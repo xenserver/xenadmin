@@ -87,9 +87,6 @@ namespace XenAdmin
             DateTime now = DateTime.UtcNow - connection.ServerTimeOffset;
             foreach (Host host in connection.Cache.Hosts)
             {
-                if (host.IsXCP)
-                    continue;
-
                 DateTime expiryDate = host.LicenseExpiryUTC;
                 TimeSpan timeToExpiry = expiryDate.Subtract(now);
 

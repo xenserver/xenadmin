@@ -969,9 +969,6 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionLicense;
 
-            if (host.license_params == null || host.IsXCP)
-                return;
-
             Dictionary<string, string> info = new Dictionary<string, string>(host.license_params);
 
             // This field is now supressed as it has no meaning under the current license scheme, and was never
@@ -1053,14 +1050,11 @@ namespace XenAdmin.TabPages
             if (host == null || host.software_version == null)
                 return;
 
-            bool isXCP = host.IsXCP;
             if (host.software_version.ContainsKey("date"))
-                pdSectionVersion.AddEntry(isXCP ? Messages.SOFTWARE_VERSION_XCP_DATE : Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
+                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
             if (!Helpers.FalconOrGreater(host) && host.software_version.ContainsKey("build_number"))
-                pdSectionVersion.AddEntry(isXCP ? Messages.SOFTWARE_VERSION_XCP_BUILD_NUMBER : Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
-            if (isXCP && host.software_version.ContainsKey("platform_version"))
-                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_XCP_PLATFORM_VERSION, host.software_version["platform_version"]);
-            if (!isXCP && host.software_version.ContainsKey("product_version"))
+                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
+            if (host.software_version.ContainsKey("product_version"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, host.ProductVersionText);
             if (host.software_version.ContainsKey("dbv"))
                 pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);

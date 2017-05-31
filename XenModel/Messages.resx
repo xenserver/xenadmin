@@ -10718,15 +10718,6 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SOFTWARE_VERSION_PRODUCT_VERSION" xml:space="preserve">
     <value>[XenServer] version</value>
   </data>
-  <data name="SOFTWARE_VERSION_XCP_BUILD_NUMBER" xml:space="preserve">
-    <value>XCP build number</value>
-  </data>
-  <data name="SOFTWARE_VERSION_XCP_DATE" xml:space="preserve">
-    <value>XCP build date</value>
-  </data>
-  <data name="SOFTWARE_VERSION_XCP_PLATFORM_VERSION" xml:space="preserve">
-    <value>XCP version</value>
-  </data>
   <data name="SOLUTION_AUTHENTICATION" xml:space="preserve">
     <value>Try again using a correct user name and password.</value>
   </data>
