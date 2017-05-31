@@ -969,6 +969,9 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionLicense;
 
+            if (host.license_params == null)
+                return;
+
             Dictionary<string, string> info = new Dictionary<string, string>(host.license_params);
 
             // This field is now supressed as it has no meaning under the current license scheme, and was never
