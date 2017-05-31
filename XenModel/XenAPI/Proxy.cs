@@ -3528,6 +3528,14 @@ namespace XenAPI
         Response<string>
         async_host_management_reconfigure(string session, string _pif);
 
+        [XmlRpcMethod("pool.management_reconfigure")]
+        Response<string>
+        pool_management_reconfigure(string session, string _network);
+
+        [XmlRpcMethod("Async.pool.management_reconfigure")]
+        Response<string>
+        async_pool_management_reconfigure(string session, string _network);
+
         [XmlRpcMethod("host.local_management_reconfigure")]
         Response<string>
         host_local_management_reconfigure(string session, string _interface);

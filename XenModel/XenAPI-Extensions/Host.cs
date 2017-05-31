@@ -406,6 +406,16 @@ namespace XenAPI
             return h._RestrictVgpu;
         }
 
+        public bool _RestrictManagementOnVLAN
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_management_on_vlan"); }
+        }
+
+        public static bool RestrictManagementOnVLAN(Host h)
+        {
+            return h._RestrictManagementOnVLAN;
+        }
+
         private bool _RestrictIntegratedGpuPassthrough
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_integrated_gpu_passthrough"); }

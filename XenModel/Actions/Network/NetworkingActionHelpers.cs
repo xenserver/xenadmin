@@ -32,7 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Threading;
 using XenAPI;
 
 using XenAdmin.Model;
@@ -268,6 +268,93 @@ namespace XenAdmin.Actions
             log.DebugFormat("Switched to PIF {0} {1} for management.", pif.Name, pif.uuid);
             action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name);
         }
+
+        internal static void WaitForslavesToRecover(Pool pool)
+        {
+            
+            int RetryLimit = 60, RetryAttempt = 0;
+
+            List<string> deadHost = new List<string>();
+
+            /* host count -1 is for excluding master */
+            while (deadHost.Count < (pool.Connection.Cache.HostCount -1) && (RetryAttempt <= RetryLimit))
+            {
+                foreach (Host host in pool.Connection.Cache.Hosts)
+                {
+                    if (host.IsMaster())
+                        continue;
+
+                    if (!host.IsLive && !deadHost.Contains(host.uuid))
+                    {
+                        deadHost.Add(host.uuid);
+                    }
+
+                }
+                RetryAttempt++;
+                Thread.Sleep(1000);
+            }
+
+            RetryAttempt = 0;
+
+            while (deadHost.Count != 0 && (RetryAttempt <= RetryLimit))
+            {
+                foreach (Host host in pool.Connection.Cache.Hosts)
+                {
+                    if (host.IsMaster())
+                        continue;
+
+                    if (host.IsLive && deadHost.Contains(host.uuid))
+                    {
+                        deadHost.Remove(host.uuid);
+                    }
+
+                }
+                RetryAttempt++;
+                Thread.Sleep(1000);
+            }
+        }
+
+        internal static void PoolReconfigureManagement(AsyncAction action, Pool pool, PIF up_pif, PIF down_pif, int hi)
+       {
+           System.Diagnostics.Trace.Assert(down_pif.host.opaque_ref == up_pif.host.opaque_ref);
+
+           int lo = action.PercentComplete;
+           int inc = (hi - lo) / 3;
+           lo += inc;
+           PoolManagementReconfigure_( action, up_pif, lo);
+
+           /* pool_management_reconfigure triggers a pool_recover_slaves, which in turn spawns two tasks
+            * dbsync (update_env) and server_init on each slaves. 
+            * Only after their completion master will be able to execute reconfigure_IPs. 
+            * Hence, we check Host.IsLive metric of all slaves for a transition from true -> false -> true
+            */
+
+           action.Description = string.Format(Messages.ACTION_WAIT_FOR_SLAVES_TO_RECOVER);
+           WaitForslavesToRecover(pool);
+           
+            /* Reconfigure IP for slaves and then master */
+           
+           lo += inc;
+           ForSomeHosts(action, down_pif, false, true, lo, ClearIP);
+           lo += inc;
+           ForSomeHosts(action, down_pif, true, true, hi, ClearIP);
+       }
+
+       /// <summary>
+       /// Switch the Pool's management interface from its current setting over to the given PIF.
+       /// </summary>
+       private static void PoolManagementReconfigure_(AsyncAction action, PIF pif, int hi)
+       {
+
+           log.DebugFormat("Switching to PIF {0} {1} for management...", pif.Name, pif.uuid);
+           action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURING, pif.Name);
+
+           action.RelatedTask = Pool.async_management_reconfigure(action.Session, pif.network.opaque_ref);
+           action.PollToCompletion(action.PercentComplete, hi);
+
+           action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name);
+           log.DebugFormat("Switched to PIF {0} {1} for management...", pif.Name, pif.uuid);
+       }
 
         /// <summary>
         /// Remove the IP address from the given PIF.

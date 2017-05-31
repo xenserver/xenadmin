@@ -3391,6 +3391,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting for slaves to recover....
+        /// </summary>
+        public static string ACTION_WAIT_FOR_SLAVES_TO_RECOVER {
+            get {
+                return ResourceManager.GetString("ACTION_WAIT_FOR_SLAVES_TO_RECOVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disconnecting  Workload Balancing failed on pool {0}: {1}  Workload Balancing has been paused..
         /// </summary>
         public static string ACTION_WLB_DECONFIGURE_FAILED {
@@ -27561,6 +27570,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs or cross-server private networks.
+        /// </summary>
+        public static string POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This server must not have any bonds, VLANs or cross-server private networks.
         /// </summary>
         public static string POOL_JOIN_NOT_PHYSICAL_PIF {
@@ -35292,6 +35310,15 @@ namespace XenAdmin {
         public static string VIRTUALIZATION_UNKNOWN {
             get {
                 return ResourceManager.GetString("VIRTUALIZATION_UNKNOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Network {0} on VLAN {1}.
+        /// </summary>
+        public static string VLAN_NETWORK_NAME {
+            get {
+                return ResourceManager.GetString("VLAN_NETWORK_NAME", resourceCulture);
             }
         }
         
