@@ -29,18 +29,13 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Drawing;
-using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Properties;
-using XenAdmin.SettingsPanels;
-using XenAPI;
 
 namespace XenAdmin.Wizards.NewPolicyWizard
 {
-    public partial class NewPolicyPolicyNamePage : XenTabPage, IEditPage
+    public partial class NewPolicyPolicyNamePage : XenTabPage
     {
         private readonly string _tabName;
         private readonly string _tabTitle;
@@ -103,43 +98,6 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         private void textBoxName_TextChanged(object sender, System.EventArgs e)
         {
             OnPageUpdated();
-        }
-
-        private void RefreshTab(VMPP vmpp)
-        {
-            textBoxName.Text = vmpp.Name;
-            textBoxDescription.Text = vmpp.Description;
-            labelwizard.Visible = false;
-        }
-
-        public AsyncAction SaveSettings()
-        {
-            return null;
-        }
-
-        public void SetXenObjects(IXenObject orig, IXenObject clone)
-        {
-            RefreshTab((VMPP) orig);
-        }
-
-        public bool ValidToSave
-        {
-            get { return false; }
-        }
-
-        public void ShowLocalValidationMessages()
-        {
-
-        }
-
-        public void Cleanup()
-        {
-
-        }
-
-        public bool HasChanged
-        {
-            get { return false; }
         }
     }
 }

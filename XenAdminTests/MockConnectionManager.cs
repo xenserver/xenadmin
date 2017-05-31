@@ -188,7 +188,7 @@ namespace XenAdminTests
             caches[connectionId].Setup(c => c.VDIs).Returns(GeneratedXenObjects<VDI>(connectionId));
             caches[connectionId].Setup(c => c.VGPUs).Returns(GeneratedXenObjects<VGPU>(connectionId));
             caches[connectionId].Setup(c => c.VIFs).Returns(GeneratedXenObjects<VIF>(connectionId));
-            caches[connectionId].Setup(c => c.VMPPs).Returns(GeneratedXenObjects<VMPP>(connectionId));
+            caches[connectionId].Setup(c => c.VMSSs).Returns(GeneratedXenObjects<VMSS>(connectionId));
             caches[connectionId].Setup(c => c.VM_appliances).Returns(GeneratedXenObjects<VM_appliance>(connectionId));
             caches[connectionId].Setup(c => c.VMs).Returns(GeneratedXenObjects<VM>(connectionId));
         }

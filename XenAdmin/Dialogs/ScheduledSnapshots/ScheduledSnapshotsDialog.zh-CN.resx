@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
+              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
+              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -118,14 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NameColum.HeaderText" xml:space="preserve">
-    <value>Name</value>
+    <value>名称</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="NameColum.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
   <data name="EnabledColumn.HeaderText" xml:space="preserve">
-    <value>Status</value>
+    <value>状态</value>
   </data>
   <data name="EnabledColumn.Width" type="System.Int32, mscorlib">
     <value>64</value>
@@ -134,7 +134,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnVMs.HeaderText" xml:space="preserve">
-    <value>#VMs</value>
+    <value>VM 数</value>
   </data>
   <data name="ColumnVMs.MinimumWidth" type="System.Int32, mscorlib">
     <value>3</value>
@@ -146,7 +146,7 @@
     <value>True</value>
   </metadata>
   <data name="DescriptionColum.HeaderText" xml:space="preserve">
-    <value>Next Snapshot Time</value>
+    <value>下次创建快照时间</value>
   </data>
   <data name="DescriptionColum.Width" type="System.Int32, mscorlib">
     <value>138</value>
@@ -155,7 +155,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnNextArchive.HeaderText" xml:space="preserve">
-    <value>Next Archive Time</value>
+    <value>下次存档时间</value>
   </data>
   <data name="ColumnNextArchive.Width" type="System.Int32, mscorlib">
     <value>138</value>
@@ -164,7 +164,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnLastResult.HeaderText" xml:space="preserve">
-    <value>Last Result</value>
+    <value>上次结果</value>
   </data>
   <data name="ColumnLastResult.MinimumWidth" type="System.Int32, mscorlib">
     <value>140</value>
@@ -172,16 +172,16 @@
   <data name="ColumnLastResult.Width" type="System.Int32, mscorlib">
     <value>140</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="dataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="dataGridView1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 24</value>
+    <value>3, 30</value>
   </data>
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -196,7 +196,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonProperties.Location" type="System.Drawing.Point, System.Drawing">
-    <value>741, 140</value>
+    <value>741, 146</value>
   </data>
   <data name="buttonProperties.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 23</value>
@@ -205,7 +205,7 @@
     <value>4</value>
   </data>
   <data name="buttonProperties.Text" xml:space="preserve">
-    <value>&amp;Properties</value>
+    <value>属性(&amp;P)</value>
   </data>
   <data name="&gt;&gt;buttonProperties.Name" xml:space="preserve">
     <value>buttonProperties</value>
@@ -235,13 +235,13 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="labelPolicyTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 15</value>
+    <value>258, 21</value>
   </data>
   <data name="labelPolicyTitle.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelPolicyTitle.Text" xml:space="preserve">
-    <value>Scheduled snapshot jobs defined for pool '{0}':</value>
+    <value>为池“{0}”定义的计划快照作业:</value>
   </data>
   <data name="&gt;&gt;labelPolicyTitle.Name" xml:space="preserve">
     <value>labelPolicyTitle</value>
@@ -265,10 +265,10 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="localServerTime1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 219</value>
+    <value>3, 262</value>
   </data>
   <data name="localServerTime1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 22</value>
+    <value>0, 0</value>
   </data>
   <data name="localServerTime1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -292,7 +292,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonEnable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>741, 53</value>
+    <value>741, 59</value>
   </data>
   <data name="buttonEnable.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 23</value>
@@ -301,7 +301,7 @@
     <value>1</value>
   </data>
   <data name="buttonEnable.Text" xml:space="preserve">
-    <value>&amp;Enable</value>
+    <value>启用(&amp;E)</value>
   </data>
   <data name="&gt;&gt;buttonEnable.Name" xml:space="preserve">
     <value>buttonEnable</value>
@@ -325,7 +325,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonRunNow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>741, 82</value>
+    <value>741, 88</value>
   </data>
   <data name="buttonRunNow.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 23</value>
@@ -334,7 +334,7 @@
     <value>2</value>
   </data>
   <data name="buttonRunNow.Text" xml:space="preserve">
-    <value>&amp;Run Now</value>
+    <value>立即运行(&amp;R)</value>
   </data>
   <data name="&gt;&gt;buttonRunNow.Name" xml:space="preserve">
     <value>buttonRunNow</value>
@@ -355,7 +355,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>741, 111</value>
+    <value>741, 117</value>
   </data>
   <data name="buttonDelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 23</value>
@@ -364,7 +364,7 @@
     <value>3</value>
   </data>
   <data name="buttonDelete.Text" xml:space="preserve">
-    <value>&amp;Delete</value>
+    <value>删除(&amp;D)</value>
   </data>
   <data name="&gt;&gt;buttonDelete.Name" xml:space="preserve">
     <value>buttonDelete</value>
@@ -385,7 +385,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>741, 24</value>
+    <value>741, 30</value>
   </data>
   <data name="buttonNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 23</value>
@@ -394,7 +394,7 @@
     <value>0</value>
   </data>
   <data name="buttonNew.Text" xml:space="preserve">
-    <value>&amp;New...</value>
+    <value>新建(&amp;N)...</value>
   </data>
   <data name="&gt;&gt;buttonNew.Name" xml:space="preserve">
     <value>buttonNew</value>
@@ -415,13 +415,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 70</value>
+    <value>3, 49</value>
   </data>
   <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 244</value>
+    <value>837, 265</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -439,10 +439,10 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="buttonProperties" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelPolicyTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dataGridView1" Row="1" RowSpan="6" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="localServerTime1" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonEnable" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonRunNow" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonDelete" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonNew" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="buttonProperties" Row="5" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelPolicyTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="dataGridView1" Row="1" RowSpan="6" Column="0" ColumnSpan="1" />&lt;Control Name="localServerTime1" Row="7" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="buttonEnable" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="buttonRunNow" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="buttonDelete" Row="4" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="buttonNew" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>732, 189</value>
+    <value>727, 166</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -466,7 +466,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>756, 3</value>
+    <value>773, 3</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
@@ -475,7 +475,7 @@
     <value>1</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Close</value>
+    <value>关闭</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
@@ -499,13 +499,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="policyHistory1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 323</value>
+    <value>8, 319</value>
   </data>
   <data name="policyHistory1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 6, 3, 3</value>
   </data>
   <data name="policyHistory1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 187</value>
+    <value>851, 187</value>
   </data>
   <data name="policyHistory1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -532,19 +532,19 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 3</value>
+    <value>0, 0, 3, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>799, 15</value>
+    <value>848, 23</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Protect your critical VMs with a protection policy that takes regular scheduled snapshots and, optionally, archives the snapshots to a CIFS or NFS share.</value>
+    <value>通过保护策略可保护重要的 VM，该策略将定期按计划生成快照并(可选)将这些快照存档到 CIFS 或 NFS 共享中。</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -577,13 +577,13 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="chevronButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 28</value>
+    <value>0, 0</value>
   </data>
   <data name="chevronButton1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="chevronButton1.Text" xml:space="preserve">
-    <value>Show Run History</value>
+    <value>显示运行历史记录</value>
   </data>
   <data name="&gt;&gt;chevronButton1.Name" xml:space="preserve">
     <value>chevronButton1</value>
@@ -622,13 +622,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="deprecationBanner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 21</value>
+    <value>3, 26</value>
   </data>
   <data name="deprecationBanner.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="deprecationBanner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 37</value>
+    <value>845, 37</value>
   </data>
   <data name="deprecationBanner.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -655,13 +655,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>8, 8</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 61</value>
+    <value>851, 39</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -679,7 +679,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="deprecationBanner" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="label2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="deprecationBanner" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="tableLayoutPanel4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -697,13 +697,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 516</value>
+    <value>8, 512</value>
   </data>
   <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 29</value>
+    <value>851, 30</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -721,7 +721,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="chevronButton1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonCancel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="chevronButton1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="buttonCancel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,AutoSize,0" />&lt;Rows Styles="AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="tableLayoutPanel5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -739,13 +739,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel5.RowCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>843, 548</value>
+    <value>867, 543</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -763,7 +763,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel5.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel3" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="policyHistory1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel4" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="tableLayoutPanel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="tableLayoutPanel3" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="policyHistory1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="tableLayoutPanel4" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -778,7 +778,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>867, 572</value>
+    <value>867, 543</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -790,7 +790,7 @@
     <value>12, 12, 12, 12</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>VM Protection Policies</value>
+    <value>VM 保护策略</value>
   </data>
   <data name="&gt;&gt;NameColum.Name" xml:space="preserve">
     <value>NameColum</value>
@@ -829,7 +829,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>VMProtectionPoliciesDialog</value>
+    <value>ScheduledSnapshotsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>

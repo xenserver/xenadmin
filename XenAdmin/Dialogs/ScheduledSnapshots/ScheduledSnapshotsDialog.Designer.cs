@@ -1,10 +1,9 @@
 ﻿using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Wizards.NewPolicyWizard;
-using XenAPI;
 
-namespace XenAdmin.Dialogs.VMProtection_Recovery
+namespace XenAdmin.Dialogs.ScheduledSnapshots
 {
-    partial class VMProtectionPoliciesDialog
+    partial class ScheduledSnapshotsDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +31,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VMProtectionPoliciesDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduledSnapshotsDialog));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.NameColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +47,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             this.buttonRunNow = new System.Windows.Forms.Button();
             this.labelPolicyTitle = new System.Windows.Forms.Label();
             this.buttonProperties = new System.Windows.Forms.Button();
-            this.policyHistory1 = new XenAdmin.Dialogs.VMProtectionRecovery.PolicyHistory();
+            this.policyHistory1 = new PolicyHistory();
             this.label2 = new System.Windows.Forms.Label();
             this.localServerTime1 = new XenAdmin.Wizards.NewPolicyWizard.LocalServerTime();
             this.chevronButton1 = new XenAdmin.Controls.ChevronButton();
@@ -245,13 +244,13 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
-            // VMProtectionPoliciesDialog
+            // ScheduledSnapshotsDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.tableLayoutPanel5);
-            this.Name = "VMProtectionPoliciesDialog";
+            this.Name = "ScheduledSnapshotsDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Load += new System.EventHandler(this.VMProtectionPoliciesDialog_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VMProtectionPoliciesDialog_FormClosed);
@@ -279,7 +278,7 @@ namespace XenAdmin.Dialogs.VMProtection_Recovery
         protected System.Windows.Forms.Button buttonRunNow;
         protected System.Windows.Forms.Label labelPolicyTitle;
         protected System.Windows.Forms.Button buttonProperties;
-        protected XenAdmin.Dialogs.VMProtectionRecovery.PolicyHistory policyHistory1;
+        protected PolicyHistory policyHistory1;
         protected System.Windows.Forms.Label label2;
         protected LocalServerTime localServerTime1;
         protected XenAdmin.Controls.ChevronButton chevronButton1;

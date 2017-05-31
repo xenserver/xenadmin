@@ -50,22 +50,40 @@ namespace XenAdminTests.HealthCheckTests
     {
         private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
 
-        [Test]
-        public void CredentialOp()
+        [TestFixtureSetUp]
+        public void FixtureSetup()
         {
             CredentialReceiver.instance.Init();
             ServerListHelper.instance.Init();
+        }
+
+        [TestFixtureTearDown]
+        public void FixtureTearDown()
+        {
+            CredentialReceiver.instance.UnInit();
+        }
+
+        [Test]
+        public void CredentialOp()
+        {
             string HostName = "Host1";
             string UserName = "User1";
             string Password = "password1";
-            int conSize = ServerListHelper.instance.GetServerList().Count;
+
+            // Empty list
+            ServerListHelper.instance.ClearServerList();
+            int conSize = 0;
+            List<ServerInfo> con = ServerListHelper.instance.GetServerList();
+            Assert.IsTrue(con.Count == conSize);
+
             //1. Empty credential 
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
             string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, null, null }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
-            List<ServerInfo> con = ServerListHelper.instance.GetServerList();
+            System.Threading.Thread.Sleep(1000);
+            con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize);
 
             //2. Send credential and check result
@@ -122,7 +140,7 @@ namespace XenAdminTests.HealthCheckTests
             Assert.IsTrue(con.Count == conSize);
 
 
-            //7. semd 2 credential
+            //7. send 2 credentials
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
             HostName = "host3";
@@ -136,7 +154,7 @@ namespace XenAdminTests.HealthCheckTests
             con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize + 2);
 
-            //8. remove 2 credential
+            //8. remove 2 credentials
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
             HostName = "host3";
@@ -149,8 +167,6 @@ namespace XenAdminTests.HealthCheckTests
             System.Threading.Thread.Sleep(1000);
             con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize);
-
-            CredentialReceiver.instance.UnInit();
         }
     }
 }

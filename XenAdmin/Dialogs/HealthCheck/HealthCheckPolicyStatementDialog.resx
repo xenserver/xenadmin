@@ -151,40 +151,40 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;OKButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
-  <data name="policyStatementTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="policyStatementTextBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="policyStatementTextBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="policyStatementTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
+    <value>12, 9</value>
   </data>
-  <data name="policyStatementTextBox.ScrollBars" type="System.Windows.Forms.RichTextBoxScrollBars, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="policyStatementTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="policyStatementTextBox.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>424, 113</value>
   </data>
-  <data name="policyStatementTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="policyStatementTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 15</value>
   </data>
-  <data name="policyStatementTextBox.Text" xml:space="preserve">
-    <value>The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at https://cis.citrix.com/legal/ and [Citrix] Privacy Policy at http://www.citrix.com/about/legal/privacy.html.</value>
+  <data name="policyStatementTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="policyStatementTextBox.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;policyStatementTextBox.Name" xml:space="preserve">
     <value>policyStatementTextBox</value>
   </data>
   <data name="&gt;&gt;policyStatementTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;policyStatementTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;policyStatementTextBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

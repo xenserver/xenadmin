@@ -39,159 +39,16 @@ using XenAdmin.Actions;
 
 namespace XenAPI
 {
-    public partial class VMSS : IVMPolicy
+    public partial class VMSS 
     {
-        public bool is_enabled
-        {
-            get { return this.enabled; }
-        }
-
         public bool is_running
         {
             get { return false; }
         }
 
-        public bool is_archiving
-        {
-            get { return false; }
-        }
-        public DateTime GetNextArchiveRunTime()
-        {
-            /*Not supported*/
-            return new DateTime();
-        }
-        public Type _Type
-        {
-            get { return typeof(VMSS); }
-        }
         public List<PolicyAlert> PolicyAlerts
         {
             get { return Alerts; }
-        }
-
-        public bool hasArchive
-        {
-            get { return false; }
-        }
-
-        public void set_vm_policy(Session session, string _vm, string _value)
-        {
-            VM.set_snapshot_schedule(session, _vm, _value);
-        }
-
-        public void do_destroy(Session session, string _policy)
-        {
-            VMSS.destroy(session, _policy);
-        }
-
-        public string run_now(Session session, string _policy)
-        {
-            return VMSS.snapshot_now(session, _policy);
-        }
-
-        public void set_is_enabled(Session session, string _policy, bool _is_enabled)
-        {
-            VMSS.set_enabled(session, _policy, _is_enabled);
-        }
-
-        public PureAsyncAction getAlertsAction(IVMPolicy policy, int hoursfromnow)
-        {
-            return new GetVMSSAlertsAction((VMSS)policy, hoursfromnow);
-        }
-
-        public policy_frequency policy_frequency 
-        {
-            get 
-            {
-                switch(frequency)
-                {
-                    case vmss_frequency.hourly:
-                        return policy_frequency.hourly;
-                    case vmss_frequency.daily:
-                        return policy_frequency.daily;
-                    case vmss_frequency.weekly:
-                        return policy_frequency.weekly;
-                    default:
-                        return policy_frequency.unknown;
-                }
-            }
-            set 
-            {
-                switch (value)
-                {
-                    case policy_frequency.hourly:
-                        frequency = vmss_frequency.hourly;
-                        break;
-                    case policy_frequency.daily:
-                        frequency = vmss_frequency.daily;
-                        break;
-                    case policy_frequency.weekly:
-                        frequency = vmss_frequency.weekly;
-                        break;
-                    default:
-                        frequency = vmss_frequency.unknown;
-                        break;
-                }
-            }
-        }
-
-        public Dictionary<string, string> policy_schedule
-        {
-            get { return schedule; }
-            set { schedule = value; }
-        }
-
-        public long policy_retention
-        {
-            get { return retained_snapshots; }
-            set { retained_snapshots = value; }
-        }
-
-        public policy_backup_type policy_type
-        {
-            get
-            {
-                switch(type)
-                {
-                    case vmss_type.checkpoint:
-                        return policy_backup_type.checkpoint;
-                    case vmss_type.snapshot:
-                        return policy_backup_type.snapshot;
-                    case vmss_type.snapshot_with_quiesce:
-                        return policy_backup_type.snapshot_with_quiesce;
-                    default:
-                        return policy_backup_type.unknown;
-                }
-            }
-
-            set 
-            {
-                switch (value)
-                {
-                    case policy_backup_type.checkpoint:
-                        type = vmss_type.checkpoint;
-                        break;
-                    case policy_backup_type.snapshot:
-                        type = vmss_type.snapshot;
-                        break;
-                    case policy_backup_type.snapshot_with_quiesce:
-                        type = vmss_type.snapshot_with_quiesce;
-                        break;
-                    default:
-                        type = vmss_type.unknown;
-                        break;
-                }
-            }
-        }
-
-        public XenRef<Task> async_task_create(Session session)
-        {
-            return VMSS.async_create(session, (VMSS)this);
-        }
-
-        public void set_policy(Session session, string _vm, string _value)
-        {
-            VM.set_snapshot_schedule(session, _vm, _value);
         }
 
         public DateTime GetNextRunTime()
@@ -220,19 +77,55 @@ namespace XenAPI
 
         }
 
-        private static DateTime GetDailyDate(DateTime time, int min, int hour)
+        public static DateTime GetDailyDate(DateTime time, int min, int hour)
         {
-            return VMPP.GetDailyDate(time, min, hour);
+            var nextDateTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
+            if (time > nextDateTime)
+                nextDateTime = nextDateTime.AddDays(1);
+            return nextDateTime;
         }
 
-        private static DateTime GetHourlyDate(DateTime time, int min)
+        public static DateTime GetHourlyDate(DateTime time, int min)
         {
-            return VMPP.GetHourlyDate(time, min);
+            var nextDateTime = new DateTime(time.Year, time.Month, time.Day, time.Hour, min, 0);
+            if (time > nextDateTime)
+                nextDateTime = nextDateTime.AddHours(1);
+            return nextDateTime;
         }
 
         public static DateTime GetWeeklyDate(DateTime time, int hour, int min, List<DayOfWeek> listDaysOfWeek)
         {
-            return VMPP.GetWeeklyDate(time, hour, min, listDaysOfWeek);
+            listDaysOfWeek.Sort();
+
+            int daysOfDifference;
+            DayOfWeek today = time.DayOfWeek;
+
+            int nextDay = listDaysOfWeek.FindIndex(x => x >= time.DayOfWeek);
+
+            // No scheduled days later in the week: take first day next week
+            if (nextDay < 0)
+            {
+                daysOfDifference = 7 - (today - listDaysOfWeek[0]);
+            }
+            else
+            {
+                daysOfDifference = listDaysOfWeek[nextDay] - today;
+
+                // Today is a scheduled day: but is the time already past?
+                if (daysOfDifference == 0)
+                {
+                    var todaysScheduledTime = new DateTime(time.Year, time.Month, time.Day, hour, min, 0);
+                    if (time > todaysScheduledTime)
+                    {
+                        // Yes, the time is already past. Find the next day in the schedule instead.
+                        if (listDaysOfWeek.Count == nextDay + 1)  // we're at the last scheduled day in the week: go to next week
+                            daysOfDifference = 7 - (today - listDaysOfWeek[0]);
+                        else
+                            daysOfDifference = listDaysOfWeek[nextDay + 1] - today;
+                    }
+                }
+            }
+            return (new DateTime(time.Year, time.Month, time.Day, hour, min, 0)).AddDays(daysOfDifference);
         }
 
         public IEnumerable<DayOfWeek> DaysOfWeekBackup
@@ -263,7 +156,16 @@ namespace XenAPI
                     yield return DayOfWeek.Sunday;
             }
         }
-
+        
+        public static string TryGetKey(Dictionary<string, string> dict, string key)
+        {
+            string r;
+            if (dict.TryGetValue(key, out r))
+            {
+                return r;
+            }
+            return "";
+        }
 
         public override string Name
         {
@@ -279,7 +181,7 @@ namespace XenAPI
         {
             get
             {
-                return VMPP.TryGetKey(schedule, "min");
+                return TryGetKey(schedule, "min");
             }
         }
 
@@ -288,7 +190,7 @@ namespace XenAPI
             get
             {
 
-                return VMPP.TryGetKey(schedule, "hour");
+                return TryGetKey(schedule, "hour");
             }
         }
 
@@ -297,7 +199,7 @@ namespace XenAPI
             get
             {
 
-                return VMPP.TryGetKey(schedule, "days");
+                return TryGetKey(schedule, "days");
             }
         }
         private List<PolicyAlert> _alerts = new List<PolicyAlert>();
@@ -320,7 +222,7 @@ namespace XenAPI
                     var listRecentAlerts = new List<PolicyAlert>(_alerts);
                     listRecentAlerts.Sort((x, y) => y.Time.CompareTo(x.Time));
                     if (listRecentAlerts[0].Type == "info")
-                        return Messages.VM_PROTECTION_POLICY_SUCCEEDED;
+                        return Messages.VMSS_SUCCEEDED;
 
                     return Messages.FAILED;
                 }

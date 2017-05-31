@@ -29,17 +29,16 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Core;
 
 
 namespace XenAdmin.Actions
 {
-    public class RunPolicyNowAction<T> : PureAsyncAction where T : XenObject<T>
+    public class RunPolicyNowAction : PureAsyncAction
     {
-        private IVMPolicy _policy;
-        public RunPolicyNowAction(IVMPolicy policy)
+        private VMSS _policy;
+        public RunPolicyNowAction(VMSS policy)
             : base(policy.Connection, string.Format(Messages.RUN_POLICY, policy.Name))
         {
             _policy = policy;
@@ -48,7 +47,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Result = _policy.run_now(Session, _policy.opaque_ref);
+            Result = VMSS.snapshot_now(Session, _policy.opaque_ref);
             Description = string.Format(Messages.RUN_POLICY_STARTED, _policy.Name);
         }
     }

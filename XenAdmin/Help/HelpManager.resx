@@ -1059,9 +1059,6 @@
   <data name="VMAppliancesDialog" xml:space="preserve">
     <value>9800</value>
   </data>
-  <data name="VMProtectionPoliciesDialog" xml:space="preserve">
-    <value>6536</value>
-  </data>
   <data name="VMSnapshotSchedulesDialog" xml:space="preserve">
     <value>6551</value>
   </data>

@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public string SubText
         {
-            get { return NewPolicyWizardSpecific<VMPP>.FormatSchedule(Schedule, Frequency, DaysWeekCheckboxes.DaysMode.L10N_SHORT); }
+            get { return NewPolicyWizard.FormatSchedule(Schedule, Frequency, DaysWeekCheckboxes.DaysMode.L10N_SHORT); }
         }
 
         public Image Image
@@ -100,14 +100,14 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             {
                 var result = new Dictionary<string, string>();
 
-                if (Frequency == policy_frequency.hourly)
+                if (Frequency == vmss_frequency.hourly)
                     result.Add("min", comboBoxMin.SelectedItem.ToString());
-                else if (Frequency == policy_frequency.daily)
+                else if (Frequency == vmss_frequency.daily)
                 {
                     result.Add("hour", dateTimePickerDaily.Value.Hour.ToString());
                     result.Add("min", dateTimePickerDaily.Value.Minute.ToString());
                 }
-                else if (Frequency == policy_frequency.weekly)
+                else if (Frequency == vmss_frequency.weekly)
                 {
                     result.Add("hour", dateTimePickerWeekly.Value.Hour.ToString());
                     result.Add("min", dateTimePickerWeekly.Value.Minute.ToString());
@@ -118,13 +118,13 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
-        public policy_frequency Frequency
+        public vmss_frequency Frequency
         {
             get
             {
-                if (radioButtonHourly.Checked) return policy_frequency.hourly;
-                else if (radioButtonDaily.Checked) return policy_frequency.daily;
-                else if (radioButtonWeekly.Checked) return policy_frequency.weekly;
+                if (radioButtonHourly.Checked) return vmss_frequency.hourly;
+                else if (radioButtonDaily.Checked) return vmss_frequency.daily;
+                else if (radioButtonWeekly.Checked) return vmss_frequency.weekly;
 
                 throw new ArgumentException("Wrong value");
             }
@@ -165,7 +165,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             OnPageUpdated();
         }
 
-        private void RefreshTab(IVMPolicy policy)
+        private void RefreshTab(VMSS policy)
         {
             if (ParentForm != null)
             {
@@ -177,18 +177,18 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                     sectionLabelSchedule.LineColor = sectionLabelNumber.LineColor = SystemColors.ActiveBorder;
             }
 
-            switch (policy.policy_frequency)
+            switch (policy.frequency)
             {
-                case policy_frequency.hourly:
+                case vmss_frequency.hourly:
                     radioButtonHourly.Checked = true;
                     SetHourlyMinutes(Convert.ToDecimal(policy.backup_schedule_min));
                     break;
-                case policy_frequency.daily:
+                case vmss_frequency.daily:
                     radioButtonDaily.Checked = true;
                     dateTimePickerDaily.Value = new DateTime(1970, 1, 1, Convert.ToInt32(policy.backup_schedule_hour),
                                                                  Convert.ToInt32(policy.backup_schedule_min), 0);
                     break;
-                case policy_frequency.weekly:
+                case vmss_frequency.weekly:
                     radioButtonWeekly.Checked = true;
                     dateTimePickerWeekly.Value = new DateTime(1970, 1, 1, Convert.ToInt32(policy.backup_schedule_hour),
                                                                  Convert.ToInt32(policy.backup_schedule_min), 0);
@@ -196,7 +196,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
                     break;
             }
 
-            numericUpDownRetention.Value = policy.policy_retention;
+            numericUpDownRetention.Value = policy.retained_snapshots;
         }
 
         private void SetHourlyMinutes(decimal min)
@@ -224,17 +224,17 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
         public AsyncAction SaveSettings()
         {
-            _policyCopy.policy_frequency = Frequency;
-            _policyCopy.policy_schedule = Schedule;
-            _policyCopy.policy_retention = BackupRetention;
+            _policyCopy.frequency = Frequency;
+            _policyCopy.schedule = Schedule;
+            _policyCopy.retained_snapshots = BackupRetention;
             return null;
         }
 
-        private IVMPolicy _policyCopy;
+        private VMSS _policyCopy;
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            _policyCopy = (IVMPolicy)clone;
+            _policyCopy = (VMSS)clone;
             RefreshTab(_policyCopy);
         }
 
@@ -242,9 +242,9 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                _policyCopy.policy_frequency = Frequency;
-                _policyCopy.policy_schedule = Schedule;
-                _policyCopy.policy_retention = BackupRetention;
+                _policyCopy.frequency = Frequency;
+                _policyCopy.schedule = Schedule;
+                _policyCopy.retained_snapshots = BackupRetention;
                 return true;
             }
         }
@@ -261,11 +261,11 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             get
             {
-                if (!Helper.AreEqual2(_policyCopy.policy_frequency, Frequency))
+                if (!Helper.AreEqual2(_policyCopy.frequency, Frequency))
                     return true;
-                if (!Helper.AreEqual2(_policyCopy.policy_schedule, Schedule))
+                if (!Helper.AreEqual2(_policyCopy.schedule, Schedule))
                     return true;
-                if (!Helper.AreEqual2(_policyCopy.policy_retention, BackupRetention))
+                if (!Helper.AreEqual2(_policyCopy.retained_snapshots, BackupRetention))
                     return true;
 
                 return false;

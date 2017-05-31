@@ -304,7 +304,6 @@ namespace XenAdminTests.TabsAndMenus
                                    new ExpectedSeparator(),
                                    new ExpectedTextMenuItem("&High Availability...", true)
                                };
-            expected.Add(new ExpectedTextMenuItem("VM Pr&otection Policies...", true));
             expected.Add(new ExpectedTextMenuItem("Manage &vApps...", true));
             expected.Add(new ExpectedTextMenuItem("Di&saster Recovery", true, new ExpectedMenuItem[]
                                                                                     {
@@ -410,7 +409,6 @@ namespace XenAdminTests.TabsAndMenus
 
 
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Ta&ke a Snapshot...", true));
-                expectedMenuItems.Add(new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true) }));
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }));
                 expectedMenuItems.Add(new ExpectedSeparator());
                 expectedMenuItems.Add(new ExpectedTextMenuItem("P&roperties", true));
@@ -429,7 +427,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("Force Re&boot", true),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Ta&ke a Snapshot...", true),
-                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true) }),
                     new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("Inst&all " + Branding.PRODUCT_BRAND + " Tools...", true),
@@ -459,7 +456,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&Export...", true),
                     new ExpectedTextMenuItem("Ta&ke a Snapshot...", true),
                     new ExpectedTextMenuItem("Co&nvert to Template...", true),
-                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true) }),
                     new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("&Delete VM...", true),
