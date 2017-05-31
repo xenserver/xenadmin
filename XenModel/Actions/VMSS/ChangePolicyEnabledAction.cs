@@ -29,48 +29,33 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using XenAPI;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Actions
 {
-    public class ArchiveNowAction : PureAsyncAction
+    public class ChangePolicyEnabledAction : PureAsyncAction
     {
-        private VM _snapshot;
-        public ArchiveNowAction(VM snapshot)
-            : base(snapshot.Connection, string.Format(Messages.ARCHIVE_SNAPSHOT_X, snapshot.Name))
+        private VMSS _policy;
+        public ChangePolicyEnabledAction(VMSS policy)
+            : base(policy.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, policy.Name))
         {
-            _snapshot = snapshot;
-            VM = snapshot.Connection.Resolve(snapshot.snapshot_of);
+            _policy = policy;
+            Pool = Helpers.GetPool(_policy.Connection);
         }
+
         protected override void Run()
         {
-            try
-            {
-                Description = string.Format(Messages.ARCHIVING_SNAPSHOT_X, _snapshot.Name);
-                RelatedTask=new XenRef<Task>(VMPP.archive_now(Session, _snapshot.opaque_ref));
-                PollToCompletion();
-                Description = string.Format(Messages.ARCHIVED_SNAPSHOT_X, _snapshot.Name);
-            }
-            catch (Exception e)
-            {
-                Failure f = e as Failure;
-                if (f != null)
-                {
-                    string msg = "";
-                    if (f.ErrorDescription.Count > 3)
-                    {
-                        msg = XenAPI.Message.FriendlyName(f.ErrorDescription[3]);
-                    }
+            bool value = !_policy.enabled;
+            Description = value ? string.Format(Messages.ENABLING_VMSS, _policy.Name) :
+                string.Format(Messages.DISABLING_VMSS, _policy.Name);
 
-                    throw new Exception(msg);
+            VMSS.set_enabled(Session, _policy.opaque_ref, !_policy.enabled);
 
-                }
-                throw;
-            }
+            Description = value ? string.Format(Messages.ENABLED_VMSS, _policy.Name) :
+                string.Format(Messages.DISABLED_VMSS, _policy.Name);
+           
         }
     }
 }

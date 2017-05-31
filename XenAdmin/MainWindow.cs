@@ -1689,22 +1689,16 @@ namespace XenAdmin
 
             IXenConnection conn;
             conn = SelectionManager.Selection.GetConnectionOfAllItems();
-            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn))) /* hide VMPP */
+            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn)))
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = true;
                 VMSnapshotScheduleToolStripMenuItem.Available = true;
-
-                assignPolicyToolStripMenuItem.Available = false;
-                vMProtectionAndRecoveryToolStripMenuItem.Available = false;
 
             }
             else /* hide VMSS */
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = false;
                 VMSnapshotScheduleToolStripMenuItem.Available = false;
-
-                assignPolicyToolStripMenuItem.Available = true;
-                vMProtectionAndRecoveryToolStripMenuItem.Available = true;
             }
             
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;

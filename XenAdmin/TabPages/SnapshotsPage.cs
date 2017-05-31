@@ -68,15 +68,15 @@ namespace XenAdmin.TabPages
             viewToolStripMenuItem.DropDown = contextMenuStripView;
             this.DoubleBuffered = true;
             base.Text = Messages.SNAPSHOTS_PAGE_TITLE;
-            dataGridView.TabIndex = TreeView.TabIndex;
-            DataGridView.Sorted += DataGridView_Sorted;
+            dataGridView.TabIndex = snapshotTreeView.TabIndex;
+            dataGridView.Sorted += DataGridView_Sorted;
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
         }
 
 
         void DataGridView_Sorted(object sender, EventArgs e)
         {
-            switch (DataGridView.SortedColumn.Index)
+            switch (dataGridView.SortedColumn.Index)
             {
                 case 0:
                     sortByTypeToolStripMenuItem.Checked = true;
@@ -105,17 +105,6 @@ namespace XenAdmin.TabPages
             }
         }
 
-
-        public SnapshotTreeView TreeView
-        {
-            get { return this.snapshotTreeView; }
-        }
-
-        public DataGridView DataGridView
-        {
-            get { return this.dataGridView; }
-        }
-
         public VM VM
         {
             set
@@ -124,12 +113,12 @@ namespace XenAdmin.TabPages
                 if (value != null)
                 {
                     m_VM = value;
-                    Program.Invoke(Program.MainWindow, () => TreeView.ChangeVMToSpinning(false, null));
+                    Program.Invoke(Program.MainWindow, () => snapshotTreeView.ChangeVMToSpinning(false, null));
                     m_VM.Connection.Cache.RegisterBatchCollectionChanged<VM>(
                         VM_BatchCollectionChanged);
                     m_VM.PropertyChanged += snapshot_PropertyChanged;
                     //Version setup
-                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = (Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection)) || !Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule);
+                    toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = !Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule);
                     if (VM.SnapshotView != SnapshotsView.ListView)
                         TreeViewChecked();
                     else
@@ -146,8 +135,7 @@ namespace XenAdmin.TabPages
                     BuildList();
                     RefreshDetailsGroupBox(true);
                     RefreshToolStripButtons();
-                    RefreshVMProtectionPanel();
-                    RefreshArchiveNowOption();
+                    RefreshVMSSPanel();
                 }
             }
             get
@@ -156,42 +144,9 @@ namespace XenAdmin.TabPages
             }
         }
 
-        private void RefreshArchiveNowOption()
+        private void RefreshVMSSPanel()
         {
-            if(Helpers.ClearwaterOrGreater(VM.Connection))
-            {
-                archiveSnapshotNowToolStripMenuItem.Enabled = archiveSnapshotNowToolStripMenuItem.Visible = false;
-                archiveToolStripMenuItem.Enabled = archiveToolStripMenuItem.Visible = false;
-            }
-            else
-            {
-                archiveSnapshotNowToolStripMenuItem.Enabled = archiveSnapshotNowToolStripMenuItem.Visible = true;
-                archiveToolStripMenuItem.Enabled = archiveToolStripMenuItem.Visible = true;
-            }
-        }
-
-        private void RefreshVMProtectionPanel()
-        {
-            if (Registry.VMPRFeatureEnabled && !Helpers.ClearwaterOrGreater(VM.Connection))
-            {
-                panelVMPP.Visible = true;
-                var vmpp = VM.Connection.Resolve(VM.protection_policy);
-                if (vmpp == null || Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
-                {
-                    labelVMPPInfo.Text = Messages.THIS_VM_IS_NOT_PROTECTED;
-                    pictureBoxVMPPInfo.Image = Resources._000_BackupMetadata_h32bit_16;
-
-                    linkLabelVMPPInfo.Text = Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection) ? Messages.TELL_ME_MORE : Messages.VIEW_POLICIES;
-
-                }
-                else
-                {
-                    labelVMPPInfo.Text = string.Format(Messages.THIS_VM_IS_PROTECTED, vmpp.Name);
-                    pictureBoxVMPPInfo.Image = Resources._000_Tick_h32bit_16;
-                    linkLabelVMPPInfo.Text = Messages.VIEW_POLICIES;
-                }
-            }
-            else if (Helpers.FalconOrGreater(VM.Connection))
+            if (Helpers.FalconOrGreater(VM.Connection))
             {
                 panelVMPP.Visible = true;
                 var vmss = VM.Connection.Resolve(VM.snapshot_schedule);
@@ -224,7 +179,7 @@ namespace XenAdmin.TabPages
             if (action != null)
             {
                 string message = action is VMSnapshotCreateAction ? Messages.SNAPSHOTTING : Messages.VM_REVERTING_ELLIPSIS;
-                Program.Invoke(Program.MainWindow, () => TreeView.ChangeVMToSpinning(true, message));
+                Program.Invoke(Program.MainWindow, () => snapshotTreeView.ChangeVMToSpinning(true, message));
             }
         }
 
@@ -247,10 +202,10 @@ namespace XenAdmin.TabPages
                                                                 string message = createAction is VMSnapshotCreateAction
                                                                                      ? Messages.SNAPSHOTTING
                                                                                      : Messages.VM_REVERTING_ELLIPSIS;
-                                                                if (TreeView.SpinningMessage != Messages.SNAPSHOTTING)
+                                                                if (snapshotTreeView.SpinningMessage != Messages.SNAPSHOTTING)
                                                                     Program.Invoke(Program.MainWindow,
                                                                                    () =>
-                                                                                   TreeView.ChangeVMToSpinning(true,
+                                                                                   snapshotTreeView.ChangeVMToSpinning(true,
                                                                                                                message));
                                                             }
                                                         });
@@ -262,7 +217,7 @@ namespace XenAdmin.TabPages
             ActionBase action = ConnectionsManager.History.Find(SpinningPredicate());
             if (action == null)
             {
-                Program.Invoke(Program.MainWindow, () => TreeView.ChangeVMToSpinning(false, null));
+                Program.Invoke(Program.MainWindow, () => snapshotTreeView.ChangeVMToSpinning(false, null));
             }
         }
 
@@ -303,7 +258,7 @@ namespace XenAdmin.TabPages
         {
             if (!this.Visible)
                 return;
-            lock (TreeView)
+            lock (snapshotTreeView)
             {
                 if (VM == null || VM.snapshots == null)
                     return;
@@ -312,7 +267,7 @@ namespace XenAdmin.TabPages
 
                 if (snapshots.Count == 0)
                 {
-                    TreeView.Clear();
+                    snapshotTreeView.Clear();
                     TreeViewChecked();
                     RefreshDetailsGroupBox(true);
                     toolStripButtonTreeView.Enabled = toolStripButtonListView.Enabled = false; ;
@@ -329,10 +284,10 @@ namespace XenAdmin.TabPages
 
         private void SelectPreviousItemVMTreeView()
         {
-            if (TreeView.Items.Count > 0)
+            if (snapshotTreeView.Items.Count > 0)
             {
-                TreeView.Select();
-                foreach (ListViewItem item in TreeView.Items)
+                snapshotTreeView.Select();
+                foreach (ListViewItem item in snapshotTreeView.Items)
                 {
                     if (item.ImageIndex == SnapshotIcon.VMImageIndex)
                     {
@@ -368,22 +323,22 @@ namespace XenAdmin.TabPages
 
         private void RefreshTreeView(IList<VM> roots)
         {
-            if (TreeView.Parent == null) return;
+            if (snapshotTreeView.Parent == null) return;
 
-            TreeView.SuspendLayout();
-            TreeView.BeginUpdate();
-            TreeView.Clear();
+            snapshotTreeView.SuspendLayout();
+            snapshotTreeView.BeginUpdate();
+            snapshotTreeView.Clear();
             Debug.WriteLine("Start refreshing Tree");
             SnapshotIcon rootIcon = null;
-            rootIcon = new SnapshotIcon(VM.Name, Messages.BASE, null, TreeView, SnapshotIcon.Template);
-            TreeView.AddSnapshot(rootIcon);
+            rootIcon = new SnapshotIcon(VM.Name, Messages.BASE, null, snapshotTreeView, SnapshotIcon.Template);
+            snapshotTreeView.AddSnapshot(rootIcon);
 
             //Set VM
             VM vmParent = VM.Connection.Resolve<VM>(VM.parent);
             if (vmParent == null || !vmParent.is_a_snapshot)
             {
-                SnapshotIcon vmIcon = new SnapshotIcon(Messages.NOW, "", rootIcon, TreeView, SnapshotIcon.VMImageIndex);
-                TreeView.AddSnapshot(vmIcon);
+                SnapshotIcon vmIcon = new SnapshotIcon(Messages.NOW, "", rootIcon, snapshotTreeView, SnapshotIcon.VMImageIndex);
+                snapshotTreeView.AddSnapshot(vmIcon);
             }
 
             foreach (VM root in roots)
@@ -396,8 +351,8 @@ namespace XenAdmin.TabPages
                     else
                         icon = root.power_state == vm_power_state.Suspended ? SnapshotIcon.DiskAndMemorySnapshot : SnapshotIcon.DiskSnapshot;
                     DateTime time = root.snapshot_time.ToLocalTime() + root.Connection.ServerTimeOffset;
-                    SnapshotIcon currentIcon = new SnapshotIcon(root.name_label, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_DMY_HMS, true), rootIcon, TreeView, icon);
-                    TreeView.AddSnapshot(currentIcon);
+                    SnapshotIcon currentIcon = new SnapshotIcon(root.name_label, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_DMY_HMS, true), rootIcon, snapshotTreeView, icon);
+                    snapshotTreeView.AddSnapshot(currentIcon);
                     currentIcon.Tag = root;
                     BuildTree(root, currentIcon);
                 }
@@ -405,12 +360,12 @@ namespace XenAdmin.TabPages
                     BuildTree(root, rootIcon);
             }
 
-            if (TreeView.Items.Count < 4)
-                TreeView.Clear();
+            if (snapshotTreeView.Items.Count < 4)
+                snapshotTreeView.Clear();
 
-            TreeView.EndUpdate();
-            TreeView.ResumeLayout();
-            TreeView.PerformLayout();
+            snapshotTreeView.EndUpdate();
+            snapshotTreeView.ResumeLayout();
+            snapshotTreeView.PerformLayout();
 
 
         }
@@ -420,7 +375,7 @@ namespace XenAdmin.TabPages
             IList<VM> snapshots = VM.Connection.ResolveAll(VM.snapshots);
             if (snapshots.Count == 0)
             {
-                TreeView.Clear();
+                snapshotTreeView.Clear();
                 TreeViewChecked();
                 return;
             }
@@ -429,8 +384,7 @@ namespace XenAdmin.TabPages
 
         private IList<VM> RefreshDataGridView(IList<VM> snapshots)
         {
-
-            DataGridView.Rows.Clear();
+            dataGridView.Rows.Clear();
             IList<VM> roots = new List<VM>();
             for (int i = 0; i < snapshots.Count; i++)
             {
@@ -442,7 +396,7 @@ namespace XenAdmin.TabPages
                     //Build DataGridView
                     SnapshotDataGridViewRow row = new SnapshotDataGridViewRow(snapshot);
                     row.Tag = snapshot;
-                    DataGridView.Rows.Add(row);
+                    dataGridView.Rows.Add(row);
                 }
 
                 VM parent = VM.Connection.Resolve<VM>(snapshot.parent);
@@ -453,8 +407,8 @@ namespace XenAdmin.TabPages
 
 
             }
-            if (DataGridView.SortedColumn == null)
-                DataGridView.Sort(DataGridView.Columns[1], ListSortDirection.Ascending);
+            if (dataGridView.SortedColumn == null)
+                dataGridView.Sort(dataGridView.Columns[1], ListSortDirection.Ascending);
             return roots;
         }
 
@@ -536,9 +490,6 @@ namespace XenAdmin.TabPages
                 case "snapshots":
                     m_NeedToUpdate = true;
                     break;
-                case "protection_policy":
-                    RefreshVMProtectionPanel();
-                    break;
             }
         }
 
@@ -578,8 +529,8 @@ namespace XenAdmin.TabPages
             //Set VM
             if (VM.Connection.Resolve<VM>(VM.parent) == currentNode)
             {
-                SnapshotIcon vmIcon = new SnapshotIcon(Messages.NOW, "", currentIcon, TreeView, SnapshotIcon.VMImageIndex);
-                TreeView.AddSnapshot(vmIcon);
+                SnapshotIcon vmIcon = new SnapshotIcon(Messages.NOW, "", currentIcon, snapshotTreeView, SnapshotIcon.VMImageIndex);
+                snapshotTreeView.AddSnapshot(vmIcon);
             }
 
             //Do childs
@@ -597,8 +548,8 @@ namespace XenAdmin.TabPages
                         else
                             icon = childSnapshot.power_state == vm_power_state.Suspended ? SnapshotIcon.DiskAndMemorySnapshot : SnapshotIcon.DiskSnapshot;
                         DateTime time = childSnapshot.snapshot_time.ToLocalTime() + childSnapshot.Connection.ServerTimeOffset;
-                        SnapshotIcon childIcon = new SnapshotIcon(childSnapshot.name_label, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_DMY_HMS, true), currentIcon, TreeView, icon);
-                        TreeView.AddSnapshot(childIcon);
+                        SnapshotIcon childIcon = new SnapshotIcon(childSnapshot.name_label, HelpersGUI.DateTimeToString(time, Messages.DATEFORMAT_DMY_HMS, true), currentIcon, snapshotTreeView, icon);
+                        snapshotTreeView.AddSnapshot(childIcon);
                         childIcon.Tag = childSnapshot;
                         BuildTree(childSnapshot, childIcon);
                     }
@@ -612,7 +563,7 @@ namespace XenAdmin.TabPages
         {
             RefreshDetailsGroupBox(false);
             RefreshToolStripButtons();
-            TreeView.Invalidate();
+            snapshotTreeView.Invalidate();
         }
 
         private void RefreshToolStripButtons()
@@ -624,11 +575,6 @@ namespace XenAdmin.TabPages
                 EnableDelete();
             else
                 DisableAllButtons();
-
-
-            //Archive now
-            archiveSnapshotNowToolStripMenuItem.Available = CanArchive;
-
         }
 
         private void DisableAllButtons()
@@ -801,7 +747,7 @@ namespace XenAdmin.TabPages
 
         void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if ((TreeViewButtonsChecked && TreeView.SelectedIndices.Count >= 1) || (GridViewButtonsChecked && DataGridView.SelectedRows.Count >= 1))
+            if ((TreeViewButtonsChecked && snapshotTreeView.SelectedIndices.Count >= 1) || (GridViewButtonsChecked && dataGridView.SelectedRows.Count >= 1))
                 screenshotPictureBox.Image = (Image)e.Result;
             else
             {
@@ -1049,15 +995,15 @@ namespace XenAdmin.TabPages
         private void TreeViewChecked()
         {
             viewPanel.Controls.Clear();
-            viewPanel.Controls.Add(TreeView);
-            TreeView.Dock = DockStyle.Fill;
+            viewPanel.Controls.Add(snapshotTreeView);
+            snapshotTreeView.Dock = DockStyle.Fill;
             TreeViewButtonsChecked = true;
             VM.SnapshotView = SnapshotsView.TreeView;
             GridViewButtonsChecked = false;
-            TreeView.SelectedItems.Clear();
-            foreach (DataGridViewRow row in DataGridView.SelectedRows)
+            snapshotTreeView.SelectedItems.Clear();
+            foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
-                foreach (ListViewItem item in TreeView.Items)
+                foreach (ListViewItem item in snapshotTreeView.Items)
                 {
                     if (row.Tag == item.Tag)
                     {
@@ -1072,8 +1018,8 @@ namespace XenAdmin.TabPages
         private void GridViewChecked()
         {
             viewPanel.Controls.Clear();
-            viewPanel.Controls.Add(DataGridView);
-            DataGridView.Dock = DockStyle.Fill;
+            viewPanel.Controls.Add(dataGridView);
+            dataGridView.Dock = DockStyle.Fill;
             GridViewButtonsChecked = true;
             VM.SnapshotView = SnapshotsView.ListView;
             TreeViewButtonsChecked = false;
@@ -1098,16 +1044,16 @@ namespace XenAdmin.TabPages
         {
             if (TreeViewButtonsChecked)
             {
-                if (TreeView.SelectedItems.Count == 1)
+                if (snapshotTreeView.SelectedItems.Count == 1)
                 {
-                    return (VM)TreeView.SelectedItems[0].Tag;
+                    return (VM)snapshotTreeView.SelectedItems[0].Tag;
                 }
             }
             else if (GridViewButtonsChecked)
             {
-                if (DataGridView.SelectedRows.Count == 1)
+                if (dataGridView.SelectedRows.Count == 1)
                 {
-                    return (VM)DataGridView.SelectedRows[0].Tag;
+                    return (VM)dataGridView.SelectedRows[0].Tag;
                 }
             }
             return null;
@@ -1117,10 +1063,10 @@ namespace XenAdmin.TabPages
         {
             if (TreeViewButtonsChecked)
             {
-                if (TreeView.SelectedItems.Count > 0)
+                if (snapshotTreeView.SelectedItems.Count > 0)
                 {
                     List<VM> snapshots = new List<VM>();
-                    foreach (ListViewItem item in TreeView.SelectedItems)
+                    foreach (ListViewItem item in snapshotTreeView.SelectedItems)
                     {
                         VM snap = (VM)item.Tag;
                         if (snap != null && snap.is_a_snapshot)
@@ -1135,10 +1081,10 @@ namespace XenAdmin.TabPages
             }
             else if (GridViewButtonsChecked)
             {
-                if (DataGridView.SelectedRows.Count > 0)
+                if (dataGridView.SelectedRows.Count > 0)
                 {
                     List<VM> snapshots = new List<VM>();
-                    foreach (DataGridViewRow row in DataGridView.SelectedRows)
+                    foreach (DataGridViewRow row in dataGridView.SelectedRows)
                     {
                         VM snap = (VM)row.Tag;
                         if (snap != null && snap.is_a_snapshot)
@@ -1178,9 +1124,6 @@ namespace XenAdmin.TabPages
         {
             contextMenuStrip.Items.Clear();
 
-            if (CanArchive)
-                contextMenuStrip.Items.Add(archiveToolStripMenuItem);
-
             contextMenuStrip.Items.AddRange(new ToolStripItem[]
                 {
                     viewToolStripMenuItem,
@@ -1189,14 +1132,6 @@ namespace XenAdmin.TabPages
                 });
         }
 
-        private bool CanArchive
-        {
-            get
-            {
-                var vmpp = VM.Connection.Resolve(VM.protection_policy);
-                return vmpp != null;
-            }
-        }
 
         private void SetContextMenuSnapshot()
         {
@@ -1213,9 +1148,6 @@ namespace XenAdmin.TabPages
                     saveTemplateToolStripMenuItem,
                     exportToolStripMenuItem
                 });
-
-            if (CanArchive)
-                contextMenuStrip.Items.Add(archiveToolStripMenuItem);
 
             contextMenuStrip.Items.AddRange(new ToolStripItem[]
                 {
@@ -1263,7 +1195,7 @@ namespace XenAdmin.TabPages
 
         private void snapshotTreeView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ListViewHitTestInfo test = TreeView.HitTest(e.Location);
+            ListViewHitTestInfo test = snapshotTreeView.HitTest(e.Location);
             SnapshotIcon snapIcon = test.Item as SnapshotIcon;
             if (snapIcon != null && snapIcon.Selectable)
                 revertButton_Click(sender, e);
@@ -1276,21 +1208,21 @@ namespace XenAdmin.TabPages
             switch (item.Name)
             {
                 case "sortByTypeToolStripMenuItem":
-                    DataGridView.Sort(DataGridView.Columns[0], ListSortDirection.Ascending);
-                    DataGridView.Columns[0].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
+                    dataGridView.Sort(dataGridView.Columns[0], ListSortDirection.Ascending);
+                    dataGridView.Columns[0].HeaderCell.SortGlyphDirection = SortOrder.Ascending;
                     break;
                 case "sortByNameToolStripMenuItem":
-                    DataGridView.Sort(DataGridView.Columns[1], ListSortDirection.Ascending);
+                    dataGridView.Sort(dataGridView.Columns[1], ListSortDirection.Ascending);
                     break;
                 case "sortByCreatedOnToolStripMenuItem":
-                    DataGridView.Sort(DataGridView.Columns[2], ListSortDirection.Ascending);
+                    dataGridView.Sort(dataGridView.Columns[2], ListSortDirection.Ascending);
                     break;
                 //case "sortBySizeToolStripMenuItem":
                 //    DataGridView.Sort(DataGridView.Columns[3], ListSortDirection.Ascending);
                 //    break;
             }
             if (item.Name != "sortByTypeToolStripMenuItem")
-                DataGridView.Columns[0].HeaderCell.SortGlyphDirection = SortOrder.None;
+                dataGridView.Columns[0].HeaderCell.SortGlyphDirection = SortOrder.None;
         }
 
 
@@ -1318,7 +1250,7 @@ namespace XenAdmin.TabPages
                 chevronButton1.Text = Messages.SHOW_DETAILS;
                 chevronButton1.Image = Resources.PDChevronLeft;
             }
-            TreeView.Invalidate();
+            snapshotTreeView.Invalidate();
         }
 
 
@@ -1371,11 +1303,11 @@ namespace XenAdmin.TabPages
         {
             if (GridViewButtonsChecked)
             {
-                if (DataGridView.SelectedRows.Count > 1)
+                if (dataGridView.SelectedRows.Count > 1)
                 {
                     SetContextMenuMultiSelection();
                 }
-                else if (DataGridView.SelectedRows.Count == 1)
+                else if (dataGridView.SelectedRows.Count == 1)
                     SetContextMenuSnapshot();
                 else
                     SetContextMenuNoneSelected();
@@ -1384,17 +1316,17 @@ namespace XenAdmin.TabPages
             else if (TreeViewButtonsChecked)
             {
 
-                if (TreeView.SelectedItems.Count > 1)
+                if (snapshotTreeView.SelectedItems.Count > 1)
                 {
                     SetContextMenuMultiSelection();
                 }
-                else if (TreeView.SelectedItems.Count < 1)
+                else if (snapshotTreeView.SelectedItems.Count < 1)
                 {
                     SetContextMenuNoneSelected();
                 }
-                else if (TreeView.SelectedItems.Count == 1)
+                else if (snapshotTreeView.SelectedItems.Count == 1)
                 {
-                    VM snapshot = (VM)TreeView.SelectedItems[0].Tag;
+                    VM snapshot = (VM)snapshotTreeView.SelectedItems[0].Tag;
 
                     if (snapshot != null && snapshot.is_a_snapshot)
                     {
@@ -1436,20 +1368,20 @@ namespace XenAdmin.TabPages
         {
             if (e.Button == MouseButtons.Right)
             {
-                DataGridView.HitTestInfo hitTestInfo = DataGridView.HitTest(e.X, e.Y);
+                DataGridView.HitTestInfo hitTestInfo = dataGridView.HitTest(e.X, e.Y);
 
                 if (hitTestInfo.RowIndex >= 0)
                 {
-                    if (DataGridView.SelectedRows.Count == 1)
-                        DataGridView.ClearSelection();
-                    DataGridView.Rows[hitTestInfo.RowIndex].Selected = true;
+                    if (dataGridView.SelectedRows.Count == 1)
+                        dataGridView.ClearSelection();
+                    dataGridView.Rows[hitTestInfo.RowIndex].Selected = true;
 
                 }
                 else
                 {
-                    DataGridView.ClearSelection();
+                    dataGridView.ClearSelection();
                 }
-                contextMenuStrip.Show(DataGridView, e.X, e.Y);
+                contextMenuStrip.Show(dataGridView, e.X, e.Y);
 
             }
         }
@@ -1458,26 +1390,26 @@ namespace XenAdmin.TabPages
         {
             if (e.Button == MouseButtons.Right)
             {
-                ListViewHitTestInfo hitTestInfo = TreeView.HitTest(e.X, e.Y);
+                ListViewHitTestInfo hitTestInfo = snapshotTreeView.HitTest(e.X, e.Y);
                 if (hitTestInfo.Item != null)
                 {
                     SnapshotIcon snapshotIcon = hitTestInfo.Item as SnapshotIcon;
                     if (snapshotIcon != null && snapshotIcon.Selectable)
                     {
-                        if (TreeView.SelectedItems.Count == 1)
-                            TreeView.SelectedItems.Clear();
+                        if (snapshotTreeView.SelectedItems.Count == 1)
+                            snapshotTreeView.SelectedItems.Clear();
                         hitTestInfo.Item.Selected = true;
                     }
                     else
                     {
-                        TreeView.SelectedItems.Clear();
+                        snapshotTreeView.SelectedItems.Clear();
                     }
                 }
                 else
                 {
-                    TreeView.SelectedItems.Clear();
+                    snapshotTreeView.SelectedItems.Clear();
                 }
-                contextMenuStrip.Show(TreeView, e.X, e.Y);
+                contextMenuStrip.Show(snapshotTreeView, e.X, e.Y);
 
             }
         }
@@ -1488,7 +1420,7 @@ namespace XenAdmin.TabPages
             SnapshotIcon icon = e.Item as SnapshotIcon;
             if (icon != null && icon.ImageIndex == SnapshotIcon.VMImageIndex)
             {
-                TreeView.DoDragDrop(e.Item, DragDropEffects.Move);
+                snapshotTreeView.DoDragDrop(e.Item, DragDropEffects.Move);
             }
 
         }
@@ -1496,15 +1428,15 @@ namespace XenAdmin.TabPages
         private void snapshotTreeView_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
-            Point hitPoint = TreeView.PointToClient(new Point(e.X, e.Y));
-            ListViewHitTestInfo info = TreeView.HitTest(hitPoint);
+            Point hitPoint = snapshotTreeView.PointToClient(new Point(e.X, e.Y));
+            ListViewHitTestInfo info = snapshotTreeView.HitTest(hitPoint);
             SnapshotIcon icon = info.Item as SnapshotIcon;
             if (icon != null && (icon.ImageIndex == SnapshotIcon.DiskAndMemorySnapshot || icon.ImageIndex == SnapshotIcon.DiskSnapshot))
             {
 
                 icon.Selected = true;
-                if (TreeView.SelectedItems.Count > 1)
-                    TreeView.SelectedItems.Clear();
+                if (snapshotTreeView.SelectedItems.Count > 1)
+                    snapshotTreeView.SelectedItems.Clear();
             }
 
         }
@@ -1517,8 +1449,8 @@ namespace XenAdmin.TabPages
 
         private void snapshotTreeView_DragDrop(object sender, DragEventArgs e)
         {
-            Point hitPoint = TreeView.PointToClient(new Point(e.X, e.Y));
-            ListViewHitTestInfo info = TreeView.HitTest(hitPoint);
+            Point hitPoint = snapshotTreeView.PointToClient(new Point(e.X, e.Y));
+            ListViewHitTestInfo info = snapshotTreeView.HitTest(hitPoint);
             SnapshotIcon icon = info.Item as SnapshotIcon;
             if (icon != null && (icon.ImageIndex == SnapshotIcon.DiskAndMemorySnapshot || icon.ImageIndex == SnapshotIcon.DiskSnapshot))
             {
@@ -1533,7 +1465,7 @@ namespace XenAdmin.TabPages
         private void snapshotTreeView_MouseMove(object sender, MouseEventArgs e)
         {
 
-            SnapshotIcon icon = TreeView.HitTest(e.X, e.Y).Item as SnapshotIcon;
+            SnapshotIcon icon = snapshotTreeView.HitTest(e.X, e.Y).Item as SnapshotIcon;
             if (icon != null && icon.ImageIndex == SnapshotIcon.VMImageIndex)
             {
                 this.Cursor = Cursors.Hand;
@@ -1541,55 +1473,6 @@ namespace XenAdmin.TabPages
             else
             {
                 this.Cursor = Cursors.Default;
-            }
-        }
-
-        private void archiveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var vmpp = VM.Connection.Resolve(VM.protection_policy);
-            if (vmpp.archive_frequency != vmpp_archive_frequency.never)
-            {
-                var selectedSnapshots = GetSelectedSnapshots();
-                string text = "";
-                if (selectedSnapshots.Count == 1)
-                    text = string.Format(Messages.ARCHIVE_SNAPSHOT_NOW_TEXT_SINGLE, VM.Connection.Resolve(VM.protection_policy).archive_target_config_location);
-                else
-                    text = string.Format(Messages.ARCHIVE_SNAPSHOT_NOW_TEXT_MULTIPLE, VM.Connection.Resolve(VM.protection_policy).archive_target_config_location);
-
-                DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                       new ThreeButtonDialog.Details(SystemIcons.Information, text, Messages.ARCHIVE_VM_PROTECTION_TITLE),
-                       ThreeButtonDialog.ButtonYes,
-                       ThreeButtonDialog.ButtonNo))
-                {
-                    dialogResult = dlg.ShowDialog(this);
-                }
-                if (dialogResult == DialogResult.Yes)
-                {
-                    foreach (var snapshot in selectedSnapshots)
-                    {
-                        new ArchiveNowAction(snapshot).RunAsync();
-                    }
-                }
-            }
-            else
-            {
-                DialogResult dialogResult;
-                using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Error, Messages.POLICY_DOES_NOT_HAVE_ARCHIVE, Messages.POLICY_DOES_NOT_HAVE_ARCHIVE_TITLE),
-                        ThreeButtonDialog.ButtonYes,
-                        ThreeButtonDialog.ButtonNo))
-                {
-                    dialogResult = dlg.ShowDialog(this);
-                }
-                if (dialogResult == DialogResult.Yes)
-                {
-                    using (var dialog = new PropertiesDialog(vmpp))
-                    {
-                        dialog.SelectNewPolicyArchivePage();
-                        dialog.ShowDialog(this);
-                    }
-                }
             }
         }
 
@@ -1606,45 +1489,25 @@ namespace XenAdmin.TabPages
 
         private void linkLabelVMPPInfo_Click(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (Helpers.DundeeOrGreater(VM.Connection))
+            if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule))
             {
-                if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
-                {
-                    VMGroupCommand<VMSS>.ShowUpsellDialog(this);
-                }
-                else
-                {
-                    var command = new VMGroupCommand<VMSS>(Program.MainWindow, VM);
-                    command.Execute();
-                }
+                VMGroupCommand<VMSS>.ShowUpsellDialog(this);
             }
             else
             {
-                if (Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMProtection))
-                {
-                    VMGroupCommand<VMPP>.ShowUpsellDialog(this);
-                }
-                else
-                {
-                    var command = new VMGroupCommand<VMPP>(Program.MainWindow, VM);
-                    command.Execute();
-                }
+                var command = new VMGroupCommand<VMSS>(Program.MainWindow, VM);
+                command.Execute();
             }
-        }
-
-        private void saveMenuStrip_Opening(object sender, CancelEventArgs e)
-        {
-            saveMenuStrip.Items[saveMenuStrip.Items.Count - 1].Available = CanArchive;
         }
 
         private void snapshotTreeView_Leave(object sender, EventArgs e)
         {
-            TreeView.Invalidate();
+            snapshotTreeView.Invalidate();
         }
 
         private void snapshotTreeView_Enter(object sender, EventArgs e)
         {
-            TreeView.Invalidate();
+            snapshotTreeView.Invalidate();
         }
     }
 }

@@ -181,13 +181,13 @@ namespace XenAdminTests.TabsAndMenus
                 Assert.AreEqual("view_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.ViewMenu.DropDownItems)[5].Text);
 
                 MainWindowWrapper.PoolMenu.ShowDropDown();
-                Assert.AreEqual("pool_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.PoolMenu.DropDownItems)[20].Text);
+                Assert.AreEqual("pool_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.PoolMenu.DropDownItems)[19].Text);
 
                 MainWindowWrapper.HostMenu.ShowDropDown();
                 Assert.AreEqual("server_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.HostMenu.DropDownItems)[21].Text);
 
                 MainWindowWrapper.VMMenu.ShowDropDown();
-                Assert.AreEqual("vm_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.VMMenu.DropDownItems)[19].Text);
+                Assert.AreEqual("vm_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.VMMenu.DropDownItems)[18].Text);
 
                 MainWindowWrapper.TemplatesMenu.ShowDropDown();
                 Assert.AreEqual("templates_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.TemplatesMenu.DropDownItems)[7].Text);

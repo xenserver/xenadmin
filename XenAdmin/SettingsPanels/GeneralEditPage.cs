@@ -197,12 +197,6 @@ namespace XenAdmin.SettingsPanels
                 labelIqnHint.Visible = true;
             }
 
-            if (xenObjectCopy is VMPP)
-            {
-                lblFolder.Visible = labelTags.Visible = folderPanel.Visible = tagsPanel.Visible = false;
-                labelTitle.Text = Messages.GENERAL_PAGE_VMPP_SETTINGS;
-            }
-
             if (xenObjectCopy is VMSS)
             {
                 lblFolder.Visible = labelTags.Visible = folderPanel.Visible = tagsPanel.Visible = false;

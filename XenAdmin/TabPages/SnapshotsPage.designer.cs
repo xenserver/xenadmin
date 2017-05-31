@@ -85,7 +85,6 @@ namespace XenAdmin.TabPages
             this.saveVMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.archiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.separatorDeleteToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortByToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,7 +113,6 @@ namespace XenAdmin.TabPages
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.saveAsTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAsBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.archiveSnapshotNowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripView = new XenAdmin.Controls.NonReopeningContextMenuStrip(this.components);
             this.toolStripButtonListView = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonTreeView = new System.Windows.Forms.ToolStripMenuItem();
@@ -461,7 +459,6 @@ namespace XenAdmin.TabPages
             this.saveVMToolStripMenuItem,
             this.saveTemplateToolStripMenuItem,
             this.exportToolStripMenuItem,
-            this.archiveToolStripMenuItem,
             this.separatorDeleteToolStripSeparator,
             this.viewToolStripMenuItem,
             this.sortByToolStripMenuItem,
@@ -506,12 +503,6 @@ namespace XenAdmin.TabPages
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportSnapshotToolStripMenuItem_Click);
-            // 
-            // archiveToolStripMenuItem
-            // 
-            this.archiveToolStripMenuItem.Name = "archiveToolStripMenuItem";
-            resources.ApplyResources(this.archiveToolStripMenuItem, "archiveToolStripMenuItem");
-            this.archiveToolStripMenuItem.Click += new System.EventHandler(this.archiveToolStripMenuItem_Click);
             // 
             // separatorDeleteToolStripSeparator
             // 
@@ -696,11 +687,9 @@ namespace XenAdmin.TabPages
             this.saveAsVMToolStripMenuItem,
             this.toolStripSeparator2,
             this.saveAsTemplateToolStripMenuItem,
-            this.exportAsBackupToolStripMenuItem,
-            this.archiveSnapshotNowToolStripMenuItem});
+            this.exportAsBackupToolStripMenuItem});
             this.saveMenuStrip.Name = "saveMenuStrip";
             resources.ApplyResources(this.saveMenuStrip, "saveMenuStrip");
-            this.saveMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.saveMenuStrip_Opening);
             // 
             // saveAsVMToolStripMenuItem
             // 
@@ -725,12 +714,6 @@ namespace XenAdmin.TabPages
             this.exportAsBackupToolStripMenuItem.Name = "exportAsBackupToolStripMenuItem";
             resources.ApplyResources(this.exportAsBackupToolStripMenuItem, "exportAsBackupToolStripMenuItem");
             this.exportAsBackupToolStripMenuItem.Click += new System.EventHandler(this.exportAsBackupToolStripMenuItem_Click);
-            // 
-            // archiveSnapshotNowToolStripMenuItem
-            // 
-            this.archiveSnapshotNowToolStripMenuItem.Name = "archiveSnapshotNowToolStripMenuItem";
-            resources.ApplyResources(this.archiveSnapshotNowToolStripMenuItem, "archiveSnapshotNowToolStripMenuItem");
-            this.archiveSnapshotNowToolStripMenuItem.Click += new System.EventHandler(this.archiveToolStripMenuItem_Click);
             // 
             // contextMenuStripView
             // 
@@ -868,7 +851,6 @@ namespace XenAdmin.TabPages
         private ToolTipContainer toolTipContainerRevertButton;
         private Label labelModeTitle;
         private Label labelMode;
-        private ToolStripMenuItem archiveToolStripMenuItem;
         private Panel panelPropertiesColumn;
         private Panel panelVMPP;
         private Label labelVMPPInfo;
@@ -880,7 +862,6 @@ namespace XenAdmin.TabPages
         private ToolStripMenuItem toolStripButtonTreeView;
         private ToolStripSeparator toolStripSeparatorView;
         private ToolStripMenuItem toolStripMenuItemScheduledSnapshots;
-        private ToolStripMenuItem archiveSnapshotNowToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
         private DataGridViewTextBoxColumn Live;
         private DataGridViewTextBoxColumn Snapshot;

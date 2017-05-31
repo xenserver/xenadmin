@@ -36,14 +36,14 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Actions
 {
-    public class AssignVMsToPolicyAction<T>:PureAsyncAction where T : XenObject<T>
+    public class AssignVMsToPolicyAction : PureAsyncAction
     {
 
-        private IVMPolicy _policy;
+        private VMSS _policy;
         private List<XenRef<VM>> _selectedVMs;
 
-        public AssignVMsToPolicyAction(IVMPolicy policy, List<XenRef<VM>> selectedVMs, bool suppressHistory)
-            : base(policy.Connection, (typeof(T) == typeof(VMPP) ? Messages.ASSIGN_PROTECTION_POLICY_NOAMP : Messages.ASSIGN_VMSS_POLICY_NOAMP), suppressHistory)
+        public AssignVMsToPolicyAction(VMSS policy, List<XenRef<VM>> selectedVMs, bool suppressHistory)
+            : base(policy.Connection, Messages.ASSIGN_VMSS_POLICY_NOAMP, suppressHistory)
         {
             _policy = policy;
             _selectedVMs = selectedVMs;
@@ -53,32 +53,32 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = typeof(T) == typeof(VMPP) ? Messages.ASSIGNING_PROTECTION_POLICY : Messages.ASSIGNING_VMSS_POLICY;
+            Description = Messages.ASSIGNING_VMSS_POLICY;
 
             foreach (var xenRef in _policy.VMs)
             {
-                _policy.set_vm_policy(Session, xenRef, null);
+                VM.set_snapshot_schedule(Session, xenRef, null);
             }
 
             foreach (var xenRef in _selectedVMs)
             {
-                _policy.set_vm_policy(Session, xenRef, _policy.opaque_ref);
+                VM.set_snapshot_schedule(Session, xenRef, _policy.opaque_ref);
             }
 
-            Description = (typeof(T) == typeof(VMPP)) ? Messages.ASSIGNED_PROTECTION_POLICY : Messages.ASSIGNED_VMSS_POLICY;
+            Description = Messages.ASSIGNED_VMSS_POLICY;
         }
     }
 
-    public class RemoveVMsFromPolicyAction<T> : PureAsyncAction where T : XenObject<T>
+    public class RemoveVMsFromPolicyAction : PureAsyncAction
     {
         private List<XenRef<VM>> _selectedVMs;
-        private IVMPolicy _policy;
+        private VMSS _policy;
 
-        public RemoveVMsFromPolicyAction(IVMPolicy policy, List<XenRef<VM>> selectedVMs)
+        public RemoveVMsFromPolicyAction(VMSS policy, List<XenRef<VM>> selectedVMs)
             : base(policy.Connection, 
             selectedVMs.Count == 1 ?
-            string.Format(typeof(T) == typeof(VMPP) ? Messages.REMOVE_VM_FROM_POLICY : Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name) :
-            string.Format(typeof(T) == typeof(VMPP) ? Messages.REMOVE_VMS_FROM_POLICY : Messages.REMOVE_VMS_FROM_VMSS, policy.Name))
+            string.Format(Messages.REMOVE_VM_FROM_VMSS, policy.Connection.Resolve(selectedVMs[0]), policy.Name) :
+            string.Format(Messages.REMOVE_VMS_FROM_VMSS, policy.Name))
         {
             _policy = policy;
             _selectedVMs = selectedVMs;
@@ -87,13 +87,13 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = typeof(T) == typeof(VMPP) ? Messages.REMOVING_VMS_FROM_POLICY : Messages.REMOVING_VMS_FROM_VMSS;
+            Description = Messages.REMOVING_VMS_FROM_VMSS;
 
             foreach (var xenRef in _selectedVMs)
-                _policy.set_vm_policy(Session, xenRef, null);
+                VM.set_snapshot_schedule(Session, xenRef, null);
                 
 
-            Description = typeof(T) == typeof(VMPP) ? Messages.REMOVED_VMS_FROM_POLICY : Messages.REMOVED_VMS_FROM_VMSS;
+            Description = Messages.REMOVED_VMS_FROM_VMSS;
         }
     }
 }

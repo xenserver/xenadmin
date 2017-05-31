@@ -1103,48 +1103,6 @@
   <data name="Message.body-vm_uncooperative" xml:space="preserve">
     <value>Virtual machine '{0}' did not reduce its memory usage when requested.</value>
   </data>
-  <data name="Message.body-vmpp_archive_failed_0" xml:space="preserve">
-    <value>The archive operation for this protection policy could not be completed.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_lock_failed" xml:space="preserve">
-    <value>Unable to archive a snapshot at this time because an archive operation is already in progress. One only VMPR archive operation can run at a time in the same pool. Please run the protection policy again later.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_missed_event" xml:space="preserve">
-    <value>Unable to archive a snapshot at this time because an archive operation is already in progress. One only VMPR archive operation can run at a time in the same pool. Please check that the archive schedules for the protection policies in this pool do not clash.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_succeeded" xml:space="preserve">
-    <value>Scheduled snapshot(s) have been archived successfully.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_target_mount_failed" xml:space="preserve">
-    <value>The remote CIFS or NFS share specified as the archive target in this VM protection policy could not be mounted. Please check the VMPR archive target configuration settings.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>The remote CIFS or NFS share specified as the archive target in this VM protection policy could not be unmounted. Please make sure than the local directory was mounted successfully and has no open handles.</value>
-  </data>
-  <data name="Message.body-vmpp_backup_succeeded" xml:space="preserve">
-    <value>Backup succeeded</value>
-  </data>
-  <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>The [XenServer product] license you are using does not allow you to use the VMPR feature. VMPR is available in [Citrix] [XenServer product] Advanced Edition or higher.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
-    <value>The snapshot is already archived.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_failed" xml:space="preserve">
-    <value>The VM protection policy failed to run because a snapshot could not be created.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_lock_failed" xml:space="preserve">
-    <value>Unable to create snapshots at this time because the scheduled snapshot operation for this policy is already in progress. Please try again later.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_missed_event" xml:space="preserve">
-    <value>Unable to create snapshots at this time because a scheduled snapshot operation is already in progress in this pool. One only VMPR snapshot operation can run at a time in the same pool. Please check that the snapshot schedules for the protection policies in this pool do not clash.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_succeeded" xml:space="preserve">
-    <value>Scheduled snapshot(s) have been successfully created.</value>
-  </data>
-  <data name="Message.body-vmpp_xapi_logon_failure" xml:space="preserve">
-    <value>Unable to log in to XAPI session.</value>
-  </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
     <value>The XenServer license you are using does not allow you to use the Scheduled Snapshots feature.</value>
   </data>
@@ -1345,48 +1303,6 @@
   </data>
   <data name="Message.name-vm_uncooperative" xml:space="preserve">
     <value>VM Uncooperative</value>
-  </data>
-  <data name="Message.name-vmpp_archive_failed_0" xml:space="preserve">
-    <value>VMPR archive operation failed</value>
-  </data>
-  <data name="Message.name-vmpp_archive_lock_failed" xml:space="preserve">
-    <value>VMPR archive operation failed</value>
-  </data>
-  <data name="Message.name-vmpp_archive_missed_event" xml:space="preserve">
-    <value>VMPR archive operation failed</value>
-  </data>
-  <data name="Message.name-vmpp_archive_succeeded" xml:space="preserve">
-    <value>Scheduled snapshot archive succeeded</value>
-  </data>
-  <data name="Message.name-vmpp_archive_target_mount_failed" xml:space="preserve">
-    <value>VMPR archive operation failed</value>
-  </data>
-  <data name="Message.name-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>Unable to unmount VMPR archive target</value>
-  </data>
-  <data name="Message.name-vmpp_backup_succeeded" xml:space="preserve">
-    <value>Backup succeeded</value>
-  </data>
-  <data name="Message.name-vmpp_license_error" xml:space="preserve">
-    <value>VMPR failed: insufficient license for VMPR</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_archive_already_exists" xml:space="preserve">
-    <value>Unable to archive snapshot</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_failed" xml:space="preserve">
-    <value>VMPR failed: snapshot could not be created</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_lock_failed" xml:space="preserve">
-    <value>VMPR failed: snapshot could not be created</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_missed_event" xml:space="preserve">
-    <value>VMPR failed: snapshot could not be created</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_succeeded" xml:space="preserve">
-    <value>Scheduled snapshot succeeded</value>
-  </data>
-  <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
-    <value>VMPP XAPI logon failure</value>
   </data>
   <data name="Message.name-vmss_license_error" xml:space="preserve">
     <value>Snapshot schedule failed: insufficient license for Scheduled snapshots</value>
