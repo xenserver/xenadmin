@@ -1255,6 +1255,10 @@ namespace XenAdmin.XenSearch
                                 return Icons.SciLinux;
                             if (os.Contains("kylin"))
                                 return Icons.NeoKylin;
+                            if (os.Contains("asianux"))
+                                return Icons.Asianux; 
+                            if (os.Contains("turbo"))
+                                return Icons.Turbo;         
                             if (os.Contains("windows"))
                                 return Icons.Windows;
                             if (os.Contains("coreos"))
