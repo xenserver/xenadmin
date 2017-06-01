@@ -1766,9 +1766,10 @@ namespace XenAPI
         /// First published in XenServer 5.0.
         /// </summary>
         /// <param name="session">The session</param>
-        public static void emergency_ha_disable(Session session)
+        /// <param name="_soft">Disable HA temporarily, revert upon host reboot or further changes, idempotent First published in .</param>
+        public static void emergency_ha_disable(Session session, bool _soft)
         {
-            session.proxy.host_emergency_ha_disable(session.uuid).parse();
+            session.proxy.host_emergency_ha_disable(session.uuid, _soft).parse();
         }
 
         /// <summary>
@@ -2357,9 +2358,11 @@ namespace XenAPI
         /// <summary>
         /// Refresh the list of installed Supplemental Packs.
         /// First published in XenServer 5.6.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("")]
         public static void refresh_pack_info(Session session, string _host)
         {
             session.proxy.host_refresh_pack_info(session.uuid, (_host != null) ? _host : "").parse();
@@ -2368,9 +2371,11 @@ namespace XenAPI
         /// <summary>
         /// Refresh the list of installed Supplemental Packs.
         /// First published in XenServer 5.6.
+        /// Deprecated since .
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
+        [Deprecated("")]
         public static XenRef<Task> async_refresh_pack_info(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_refresh_pack_info(session.uuid, (_host != null) ? _host : "").parse());

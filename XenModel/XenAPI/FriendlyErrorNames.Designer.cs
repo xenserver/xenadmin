@@ -4548,7 +4548,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update precheck stage failed: conflicting updates are present..
+        ///   Looks up a localized string similar to The update precheck stage failed: conflicting update(s) are present..
         /// </summary>
         public static string UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT {
             get {
