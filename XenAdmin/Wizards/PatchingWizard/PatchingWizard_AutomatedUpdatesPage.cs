@@ -303,11 +303,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 // running delayed actions, but skipping the ones that should be skipped
-                // iterating through hosts
-                foreach (var kvp in bgw.DelayedActionsByHost)
+                // iterating through hosts, master first
+                var hostsOrdered = bgw.DelayedActionsByHost.Keys.ToList();
+                hostsOrdered.Sort(); //master first
+
+                foreach (var h in hostsOrdered)
                 {
-                    var h = kvp.Key;
-                    var actions = kvp.Value;
+                    var actions = bgw.DelayedActionsByHost[h];
 
                     //run all restart-alike plan actions
                     foreach (var a in actions.Where(a => a.IsRestartRelatedPlanAction()))
