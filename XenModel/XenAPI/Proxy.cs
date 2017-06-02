@@ -1196,6 +1196,10 @@ namespace XenAPI
         Response<string>
         pool_update_get_name_description(string session, string _pool_update);
 
+        [XmlRpcMethod("pool_update.get_version")]
+        Response<string>
+        pool_update_get_version(string session, string _pool_update);
+
         [XmlRpcMethod("pool_update.get_installation_size")]
         Response<string>
         pool_update_get_installation_size(string session, string _pool_update);
@@ -3314,7 +3318,7 @@ namespace XenAPI
 
         [XmlRpcMethod("host.emergency_ha_disable")]
         Response<string>
-        host_emergency_ha_disable(string session);
+        host_emergency_ha_disable(string session, bool _soft);
 
         [XmlRpcMethod("host.get_data_sources")]
         Response<Proxy_Data_source[]>
@@ -7399,6 +7403,7 @@ namespace XenAPI
         public string uuid;
         public string name_label;
         public string name_description;
+        public string version;
         public string installation_size;
         public string key;
         public string [] after_apply_guidance;

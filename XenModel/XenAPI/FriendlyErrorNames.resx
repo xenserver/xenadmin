@@ -1617,7 +1617,7 @@ Authorized Roles: {1}</value>
     <value>The update cannot be applied for the following host(s).</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_CONFLICT_PRESENT" xml:space="preserve">
-    <value>The update precheck stage failed: conflicting updates are present.</value>
+    <value>The update precheck stage failed: conflicting update(s) are present.</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_OUT_OF_SPACE" xml:space="preserve">
     <value>The update precheck stage failed: the server does not have enough space.</value>
