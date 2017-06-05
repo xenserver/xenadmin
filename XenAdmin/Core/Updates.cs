@@ -308,13 +308,13 @@ namespace XenAdmin.Core
                     XenServerPatches.AddRange(patches);
                 }
 
-                var xenCenterAlert = NewXenCenterUpdateAlert(XenCenterVersions, Program.Version);
-                if (xenCenterAlert != null && !xenCenterAlert.IsDismissed())
-                    updateAlerts.Add(xenCenterAlert);
+                var xenCenterAlerts = NewXenCenterUpdateAlerts(XenCenterVersions, Program.Version);
+                if (xenCenterAlerts != null)
+                    updateAlerts.AddRange(xenCenterAlerts.Where(a=>!a.IsDismissed()));
 
-                var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
-                if (xenServerUpdateAlert != null && !xenServerUpdateAlert.CanIgnore)
-                    updateAlerts.Add(xenServerUpdateAlert);
+                var xenServerUpdateAlerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
+                if (xenServerUpdateAlerts != null)
+                    updateAlerts.AddRange(xenServerUpdateAlerts.Where(a=>!a.CanIgnore));
 
                 var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
                 if (xenServerPatchAlerts != null)
@@ -357,33 +357,47 @@ namespace XenAdmin.Core
         }
 
 
-        public static XenCenterUpdateAlert NewXenCenterUpdateAlert(List<XenCenterVersion> xenCenterVersions, Version currentProgramVersion)
+        public static List<XenCenterUpdateAlert> NewXenCenterUpdateAlerts(List<XenCenterVersion> xenCenterVersions,
+            Version currentProgramVersion)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
-
-            XenCenterVersion toUse = null;
+            var alerts = new List<XenCenterUpdateAlert>();
+            XenCenterVersion latest = null, latestCr = null;
             if (xenCenterVersions.Count != 0 && currentProgramVersion != new Version(0, 0, 0, 0))
             {
-                var latest = from v in xenCenterVersions where v.IsLatest select v;
+                var latestVersions = from v in xenCenterVersions where v.Latest select v;
+                latest = latestVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                         latestVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
 
-                toUse = latest.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
-                        latest.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+                if (IsSuitableForXenCenterAlert(latest, currentProgramVersion))
+                    alerts.Add(new XenCenterUpdateAlert(latest));
+
+                var latestCrVersions = from v in xenCenterVersions where v.LatestCr select v;
+                latestCr = latestCrVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                           latestCrVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+
+                if (latestCr != latest && IsSuitableForXenCenterAlert(latestCr, currentProgramVersion))
+                    alerts.Add(new XenCenterUpdateAlert(latestCr));
             }
 
-            if (toUse == null)
-                return null;
-
-            if (toUse.Version > currentProgramVersion ||
-                (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
-                 !PropertyManager.IsCultureLoaded(Program.CurrentCulture)))
+            if (alerts.Count == 0)
             {
-                return new XenCenterUpdateAlert(toUse);
+                log.Info(string.Format("Not alerting XenCenter update - latest = {0},  latestcr = {1}, detected = {2}", 
+                    latest != null ? latest.VersionAndLang : "", latestCr != null ? latestCr.VersionAndLang : "", Program.VersionAndLanguage));
             }
 
-            log.Info(string.Format("Not alerting XenCenter update - lastest = {0}, detected = {1}",
-                                   toUse.VersionAndLang, Program.VersionAndLanguage));
-            return null;
+            return alerts;
+        }
+
+        private static bool IsSuitableForXenCenterAlert(XenCenterVersion toUse, Version currentProgramVersion)
+        {
+            if (toUse == null)
+                return false;
+
+            return toUse.Version > currentProgramVersion ||
+                   (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
+                    !PropertyManager.IsCultureLoaded(Program.CurrentCulture));
         }
 
         public static List<XenServerPatchAlert> NewXenServerPatchAlerts(List<XenServerVersion> xenServerVersions,
@@ -729,16 +743,28 @@ namespace XenAdmin.Core
             }
         }
 
-        public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)
+        public static List<XenServerVersionAlert> NewXenServerVersionAlerts(List<XenServerVersion> xenServerVersions)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
 
             var latestVersion = xenServerVersions.FindAll(item => item.Latest).OrderByDescending(v => v.Version).FirstOrDefault();
-            if (latestVersion == null)
-                return null;
+            var latestCrVersion = xenServerVersions.FindAll(item => item.LatestCr).OrderByDescending(v => v.Version).FirstOrDefault();
 
-            var alert = new XenServerVersionAlert(latestVersion);
+            List<XenServerVersionAlert> alerts = new List<XenServerVersionAlert>();
+
+            if (latestVersion != null)
+                alerts.Add(CreateAlertForXenServerVersion(latestVersion));
+
+            if (latestCrVersion != null && latestCrVersion != latestVersion)
+                alerts.Add(CreateAlertForXenServerVersion(latestCrVersion));
+
+            return alerts;
+        }
+
+        private static XenServerVersionAlert CreateAlertForXenServerVersion(XenServerVersion version)
+        {
+            var alert = new XenServerVersionAlert(version);
 
             foreach (IXenConnection xc in ConnectionsManager.XenConnectionsCopy)
             {
@@ -751,7 +777,7 @@ namespace XenAdmin.Core
                 if (master == null || pool == null)
                     continue;
 
-                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < latestVersion.Version);
+                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < version.Version);
 
                 if (outOfDateHosts.Count() == hosts.Count)
                     alert.IncludeConnection(xc);
@@ -762,14 +788,13 @@ namespace XenAdmin.Core
             return alert;
         }
 
-
         public static void CheckServerVersion()
         {
-            var alert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
-            if (alert == null)
+            var alerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
+            if (alerts == null || alerts.Count == 0)
                 return;
 
-            CheckUpdate(alert);
+            alerts.ForEach(a => CheckUpdate(a));
         }
 
         public static void CheckServerPatches()
@@ -778,8 +803,7 @@ namespace XenAdmin.Core
             if (alerts == null)
                 return;
 
-            foreach (var alert in alerts)
-                CheckUpdate(alert);
+            alerts.ForEach(a => CheckUpdate(a));
         }
 
         private static void CheckUpdate(XenServerUpdateAlert alert)

@@ -119,7 +119,8 @@ namespace XenAdmin.Actions
                 {
                     string version_lang = "";
                     string name = "";
-                    bool is_latest = false;
+                    bool latest = false;
+                    bool latest_cr = false;
                     string url = "";
                     string timestamp = "";
 
@@ -130,14 +131,16 @@ namespace XenAdmin.Actions
                         else if (attrib.Name == "name")
                             name = attrib.Value;
                         else if (attrib.Name == "latest")
-                            is_latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                            latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                        else if (attrib.Name == "latestcr")
+                            latest_cr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
                         else if (attrib.Name == "timestamp")
                             timestamp = attrib.Value;
                     }
 
-                    XenCenterVersions.Add(new XenCenterVersion(version_lang, name, is_latest, url, timestamp));
+                    XenCenterVersions.Add(new XenCenterVersion(version_lang, name, latest, latest_cr, url, timestamp));
                 }
             }
         }
@@ -236,6 +239,7 @@ namespace XenAdmin.Actions
                     string version_oem = "";
                     string name = "";
                     bool is_latest = false;
+                    bool is_latest_cr = false;
                     string url = "";
                     string timestamp = "";
                     string buildNumber = "";
@@ -248,6 +252,8 @@ namespace XenAdmin.Actions
                             name = attrib.Value;
                         else if (attrib.Name == "latest")
                             is_latest = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                        else if (attrib.Name == "latestcr")
+                            is_latest_cr = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                         else if (attrib.Name == "url")
                             url = attrib.Value;
                         else if (attrib.Name == "timestamp")
@@ -288,7 +294,7 @@ namespace XenAdmin.Actions
 
                     }
 
-                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, url, patches, minimalPatches, timestamp,
+                    XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, is_latest_cr, url, patches, minimalPatches, timestamp,
                                                                buildNumber));
                 }
             }
