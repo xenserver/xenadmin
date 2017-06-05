@@ -871,7 +871,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Premium Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Ultimate Edition.
         /// </summary>
         public static string Label_host_edition_premium {
             get {

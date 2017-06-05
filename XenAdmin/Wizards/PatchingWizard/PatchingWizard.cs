@@ -143,6 +143,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_PrecheckPage.IsInAutomatedUpdatesMode = wizardIsInAutomatedUpdatesMode;
                 PatchingWizard_PrecheckPage.Patch = existPatch;
+                PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
+
                 PatchingWizard_PatchingPage.Patch = existPatch;
 
                 PatchingWizard_PrecheckPage.SelectedUpdateType = updateType;

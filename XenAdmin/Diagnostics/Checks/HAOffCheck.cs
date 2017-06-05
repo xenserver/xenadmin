@@ -69,5 +69,14 @@ namespace XenAdmin.Diagnostics.Checks
                 return Messages.HA_CHECK_DESCRIPTION;
             }
         }
+
+        public override string SuccessfulCheckDescription
+        {
+            get
+            {
+                var pool = Helpers.GetPool(Host.Connection);
+                return string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, pool != null ? pool.Name : Host.Name, Description);
+            }
+        }
     }
 }

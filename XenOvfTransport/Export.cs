@@ -40,6 +40,7 @@ using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;
 using XenAPI;
+using System.Linq;
 
 
 namespace XenOvfTransport
@@ -354,6 +355,36 @@ namespace XenOvfTransport
                         OVF.AddOtherSystemSettingData(ovfEnv, vsId, "vgpu", sb.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_4"));
                     }
                 }
+
+                string pvsSiteUuid = string.Empty;
+                var allProxies = xenSession.Connection.Cache.PVS_proxies;                
+
+                foreach (var p in allProxies.Where(p => p != null && p.VIF != null))
+                {
+                    var vif = xenSession.Connection.Resolve(p.VIF);
+                    if (vif != null)
+                    {
+                        var vmFromVif = xenSession.Connection.Resolve(vif.VM);
+                        if (vmFromVif != null && vmFromVif.uuid == vm.uuid)
+                        {
+                            var pvsSite = xenSession.Connection.Resolve(p.site);
+                            if (pvsSite != null)
+                            {
+                                pvsSiteUuid = pvsSite.uuid;
+                            }
+
+                            break;
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(pvsSiteUuid))
+                {
+                    var sb = new StringBuilder();
+                    sb.AppendFormat("PVS_SITE={{{0}}};", string.Format("uuid={0}", pvsSiteUuid));
+
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "pvssite", sb.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_5"));
+                }
                 #endregion
 
                 OVF.FinalizeEnvelope(ovfEnv);
@@ -367,7 +398,7 @@ namespace XenOvfTransport
             }
             return ovfEnv;
         }
-        
+
         private void _copydisks(EnvelopeType ovfEnv, string label, string targetPath)
         {
         	m_iscsi = new iSCSI
