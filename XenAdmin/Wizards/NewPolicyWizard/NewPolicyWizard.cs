@@ -41,23 +41,14 @@ using XenAdmin.Wizards.GenericPages;
 
 namespace XenAdmin.Wizards.NewPolicyWizard
 {
-    // This class acts as the base class for NewPolicyWizardSpecific. It's only here
-    // because of a bug in Visual Studio: the Designer can't design classes of a
-    // generic class. The workaround is to do the design in this non-generic class,
-    // and then inherit the generic class from it. See
-    // http://stackoverflow.com/questions/1627431/fix-embedded-resources-for-generic-usercontrol
-    // http://bytes.com/topic/c-sharp/answers/537310-can-you-have-generic-type-windows-form
-    // http://connect.microsoft.com/VisualStudio/feedback/details/115397/component-resource-manager-doesnt-work-with-generic-form-classes
-    // (or search on Google for [ComponentResourceManager generic]).
-
     public partial class NewPolicyWizard : XenWizardBase
     {
-        protected NewPolicyPolicyNamePage xenTabPagePolicy;
-        protected NewPolicySnapshotFrequencyPage xenTabPageSnapshotFrequency;
-        protected NewPolicyArchivePage xenTabPageArchive;
-        protected NewPolicyEmailPage xenTabPageEmail;
-        protected NewPolicyFinishPage xenTabPageFinish;
-        protected RBACWarningPage xenTabPageRBAC;
+        private readonly NewPolicyPolicyNamePage xenTabPagePolicy;
+        private readonly NewVMGroupVMsPage<VMSS> xenTabPageVMsPage;
+        private readonly NewPolicySnapshotTypePage xenTabPageSnapshotType;
+        private readonly NewPolicySnapshotFrequencyPage xenTabPageSnapshotFrequency;
+        private readonly NewPolicyFinishPage xenTabPageFinish;
+        private readonly RBACWarningPage xenTabPageRBAC; 
 
         public readonly Pool Pool;
         public NewPolicyWizard(Pool pool)
@@ -65,7 +56,151 @@ namespace XenAdmin.Wizards.NewPolicyWizard
         {
             InitializeComponent();
             Pool = pool;
+
+            this.Text = Messages.VMSS_WIZARD_TITLE;
+
+            xenTabPagePolicy = new NewPolicyPolicyNamePage(Messages.NEW_VMSS_PAGE_TEXT, Messages.NEW_VMSS_PAGE_TEXT_MORE,
+                                                            Messages.VMSS_NAME, Messages.VMSS_NAME_TITLE, Messages.VMSS_NAME_FIELD_TEXT);
+            xenTabPageSnapshotType = new NewPolicySnapshotTypePage();
+            xenTabPageVMsPage = new NewVMGroupVMsPage<VMSS>();
+            xenTabPageFinish = new NewPolicyFinishPage(Messages.VMSS_FINISH_PAGE_TEXT, Messages.VMSS_FINISH_PAGE_CHECKBOX_TEXT, Messages.VMSS_FINISH_TITLE);
+            xenTabPageRBAC = new RBACWarningPage();
+            xenTabPageVMsPage.Pool = pool;
+            xenTabPageSnapshotFrequency = new NewPolicySnapshotFrequencyPage();
+            xenTabPageSnapshotFrequency.Pool = pool;
+            
+            #region RBAC Warning Page Checks
+            if (Pool.Connection.Session.IsLocalSuperuser || Helpers.GetMaster(Pool.Connection).external_auth_type == Auth.AUTH_TYPE_NONE)
+            {
+                //do nothing
+            }
+            else
+            {
+                RBACWarningPage.WizardPermissionCheck check;
+                check = new RBACWarningPage.WizardPermissionCheck(Messages.RBAC_WARNING_VMSS);
+                check.AddApiCheck("VMSS.async_create");
+                check.Blocking = true;
+                xenTabPageRBAC.AddPermissionChecks(xenConnection, check);
+                AddPage(xenTabPageRBAC, 0);
+            }
+            #endregion
+
+            AddPages(xenTabPagePolicy, xenTabPageVMsPage);
+            AddPage(xenTabPageSnapshotType);
+            AddPages(xenTabPageSnapshotFrequency);
+            AddPages(xenTabPageFinish);
         }
+
+        public NewPolicyWizard(Pool pool, List<VM> selection)
+            : this(pool)
+        {
+            this.xenTabPageVMsPage.SelectedVMs = selection;
+        }
+
+        private new string GetSummary()
+        {
+
+            return string.Format(Messages.VMSS_POLICY_SUMMARY.Replace("\\n", "\n").Replace("\\r", "\r"), xenTabPagePolicy.PolicyName, CommaSeparated(xenTabPageVMsPage.SelectedVMs),
+                                     FormatBackupType(xenTabPageSnapshotType.BackupType),
+                                     FormatSchedule(xenTabPageSnapshotFrequency.Schedule, xenTabPageSnapshotFrequency.Frequency, DaysWeekCheckboxes.DaysMode.L10N_LONG));
+        }
+
+        private static string FormatBackupType(vmss_type backupType)
+        {
+            if (backupType == vmss_type.snapshot)
+                return Messages.DISKS_ONLY;
+            else if (backupType == vmss_type.checkpoint)
+                return Messages.DISKS_AND_MEMORY;
+            else if (backupType == vmss_type.snapshot_with_quiesce)
+                return Messages.QUIESCED_SNAPSHOTS;
+
+            throw new ArgumentException("wrong argument");
+        }
+
+        internal static string FormatSchedule(Dictionary<string, string> schedule, vmss_frequency backupFrequency, DaysWeekCheckboxes.DaysMode mode)
+        {
+            if (backupFrequency == vmss_frequency.hourly)
+            {
+                return string.Format(Messages.HOURLY_SCHEDULE_FORMAT, schedule["min"]);
+            }
+            else if (backupFrequency == vmss_frequency.daily)
+            {
+                DateTime value = DateTime.Parse(string.Format("{0}:{1}", schedule["hour"], schedule["min"]), CultureInfo.InvariantCulture);
+                return string.Format(Messages.DAILY_SCHEDULE_FORMAT, HelpersGUI.DateTimeToString(value, Messages.DATEFORMAT_HM, true));
+            }
+            else if (backupFrequency == vmss_frequency.weekly)
+            {
+                DateTime value = DateTime.Parse(string.Format("{0}:{1}", schedule["hour"], schedule["min"]), CultureInfo.InvariantCulture);
+                return string.Format(Messages.WEEKLY_SCHEDULE_FORMAT, HelpersGUI.DateTimeToString(value, Messages.DATEFORMAT_HM, true), DaysWeekCheckboxes.L10NDays(schedule["days"], mode));
+            }
+            return "";
+        }
+
+        private static string CommaSeparated(IEnumerable<VM> selectedVMs)
+        {
+            var sb = new StringBuilder();
+            foreach (var selectedVM in selectedVMs)
+            {
+                sb.Append(selectedVM.Name);
+                sb.Append(", ");
+            }
+            if (sb.Length > 2)
+                sb.Remove(sb.Length - 2, 2);
+            return sb.ToString();
+        }
+
+        protected override void UpdateWizardContent(XenTabPage senderPage)
+        {
+            var prevPageType = senderPage.GetType();
+
+            if (prevPageType == typeof(NewPolicyPolicyNamePage))
+            {
+                xenTabPageVMsPage.GroupName = xenTabPagePolicy.PolicyName;
+            }
+            else
+            {
+                if (prevPageType == typeof(NewPolicySnapshotFrequencyPage))
+                {
+                    xenTabPageFinish.Summary = GetSummary();
+                    xenTabPageFinish.SelectedVMsCount = xenTabPageVMsPage.SelectedVMs.Count;
+                }
+                else if (prevPageType == typeof(NewVMGroupVMsPage<VMSS>))
+                {
+                    xenTabPageSnapshotType.SelectedVMs = xenTabPageVMsPage.SelectedVMs;
+                }
+            }
+        }
+
+        protected override void FinishWizard()
+        {
+             var vmss = new VMSS
+                {
+                    name_label = xenTabPagePolicy.PolicyName,
+                    name_description = xenTabPagePolicy.PolicyDescription,
+                    type = (vmss_type)xenTabPageSnapshotType.BackupType,
+                    frequency = (vmss_frequency)xenTabPageSnapshotFrequency.Frequency,
+                    schedule = xenTabPageSnapshotFrequency.Schedule,
+                    retained_snapshots = xenTabPageSnapshotFrequency.BackupRetention,
+                    enabled = xenTabPageVMsPage.SelectedVMs.Count == 0 ? false : true,
+                    Connection = Pool.Connection
+                };
+
+            var action = new CreateVMPolicy(vmss, xenTabPageVMsPage.SelectedVMs, xenTabPageFinish.RunNow);
+
+            action.RunAsync();
+            base.FinishWizard();
+        }
+
+        protected override string WizardPaneHelpID()
+        {
+            if (CurrentStepTabPage is RBACWarningPage)
+            {
+                return FormatHelpId("Rbac");
+            }
+
+            return "NewPolicyWizardVMSS_" + CurrentStepTabPage.HelpID + "Pane";    
+        }
+
                         
     }
 }

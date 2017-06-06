@@ -969,7 +969,7 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionLicense;
 
-            if (host.license_params == null || host.IsXCP)
+            if (host.license_params == null)
                 return;
 
             Dictionary<string, string> info = new Dictionary<string, string>(host.license_params);
@@ -1003,19 +1003,9 @@ namespace XenAdmin.TabPages
             if (!string.IsNullOrEmpty(host.edition))
             {
                 s.AddEntry(FriendlyName("host.edition"), Helpers.GetFriendlyLicenseName(host));
-                if (info.ContainsKey("sku_type"))
-                {
-                    info.Remove("sku_type");
-                }
-            }
-            else if (info.ContainsKey("sku_type"))
-            {
-                s.AddEntry(FriendlyName("host.license_params-sku_type"), Helpers.GetFriendlyLicenseName(host));
-                info.Remove("sku_type");
             }
 
-            if(Helpers.ClearwaterOrGreater(host))
-                s.AddEntry(Messages.NUMBER_OF_SOCKETS, host.CpuSockets.ToString());
+            s.AddEntry(Messages.NUMBER_OF_SOCKETS, host.CpuSockets.ToString());
 
             if (host.license_server.ContainsKey("address"))
             {
@@ -1063,14 +1053,11 @@ namespace XenAdmin.TabPages
             if (host == null || host.software_version == null)
                 return;
 
-            bool isXCP = host.IsXCP;
             if (host.software_version.ContainsKey("date"))
-                pdSectionVersion.AddEntry(isXCP ? Messages.SOFTWARE_VERSION_XCP_DATE : Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
+                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
             if (!Helpers.FalconOrGreater(host) && host.software_version.ContainsKey("build_number"))
-                pdSectionVersion.AddEntry(isXCP ? Messages.SOFTWARE_VERSION_XCP_BUILD_NUMBER : Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
-            if (isXCP && host.software_version.ContainsKey("platform_version"))
-                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_XCP_PLATFORM_VERSION, host.software_version["platform_version"]);
-            if (!isXCP && host.software_version.ContainsKey("product_version"))
+                pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
+            if (host.software_version.ContainsKey("product_version"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, host.ProductVersionText);
             if (host.software_version.ContainsKey("dbv"))
                 pdSectionVersion.AddEntry("DBV", host.software_version["dbv"]);
@@ -1321,8 +1308,7 @@ namespace XenAdmin.TabPages
             if (p != null)
             {
                 s.AddEntry(Messages.POOL_LICENSE, p.LicenseString);
-                if (Helpers.ClearwaterOrGreater(p.Connection))
-                    s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
+                s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets.ToString());
 
                 var master = p.Connection.Resolve(p.master);
                 if (master != null)

@@ -42,7 +42,6 @@ namespace XenAdminTests.LicensingTests
     public class LicenseManagerTests : UnitTester_SingleConnectionTestFixture
     {
         private Mock<ILicenseManagerView> view;
-        private Mock<ILicenseActivationRequest> activation;
 
         private class TestCase
         {
@@ -54,7 +53,6 @@ namespace XenAdminTests.LicensingTests
         public void SetupMocks()
         {
             view = new Mock<ILicenseManagerView>();
-            activation = new Mock<ILicenseActivationRequest>();
             ObjectManager.ClearXenObjects(id);
         }
 
@@ -84,10 +82,8 @@ namespace XenAdminTests.LicensingTests
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object);
             view.Setup(v => v.GetCheckedRows).Returns(new List<CheckableDataGridViewRow>());
             licenseSummary.UpdateButtonEnablement();
-            view.Verify(v => v.DrawActivateButtonAsDisabled(true));
             view.Verify(v => v.DrawAssignButtonAsDisabled(true));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
-            view.Verify(v => v.DrawActivateButtonAsHidden(true));
         }
 
         [Test, Category(TestCategories.SmokeTest)]
@@ -96,20 +92,13 @@ namespace XenAdminTests.LicensingTests
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
                 {
                     VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllOkVerifier()),
-                    ActivationRequest = activation.Object
                 };
 
-            activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
-            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase { MockType = ObjectBuilderType.ClearwaterHost}));
 
             licenseSummary.UpdateButtonEnablement();
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
-            view.Verify(v => v.DrawRequestButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsHidden(true));
         }
 
         [Test, Category(TestCategories.SmokeTest)]
@@ -118,23 +107,15 @@ namespace XenAdminTests.LicensingTests
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
             {
                 VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllOkVerifier()),
-                ActivationRequest = activation.Object
             };
 
-            activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
-            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase { 
                                                                         MockType = ObjectBuilderType.ClearwaterHost, 
                                                                         License = Host.Edition.PerSocket}));
 
             licenseSummary.UpdateButtonEnablement();
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
-            view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsHidden(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
-            view.Verify(v => v.DrawRequestButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsDisabled(false));
-            
+            view.Verify(v => v.DrawReleaseButtonAsDisabled(false));          
         }
 
         [Test, Category(TestCategories.SmokeTest)]
@@ -143,11 +124,8 @@ namespace XenAdminTests.LicensingTests
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
             {
                 VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllOkVerifier()),
-                ActivationRequest = activation.Object
             };
 
-            activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
-            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(
                 new TestCase
                 {
@@ -163,10 +141,6 @@ namespace XenAdminTests.LicensingTests
             licenseSummary.UpdateButtonEnablement();
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsHidden(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
-            view.Verify(v => v.DrawRequestButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsDisabled(false));
         }
 
         [Test, Category(TestCategories.SmokeTest)]
@@ -175,11 +149,8 @@ namespace XenAdminTests.LicensingTests
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
             {
                 VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllOkVerifier()),
-                ActivationRequest = activation.Object
             };
 
-            activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
-            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(
                 new TestCase
                 {
@@ -195,121 +166,6 @@ namespace XenAdminTests.LicensingTests
             licenseSummary.UpdateButtonEnablement();
             view.Verify(v => v.DrawAssignButtonAsDisabled(false));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsHidden(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
-            view.Verify(v => v.DrawRequestButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsDisabled(false));
-        }
-
-        [Test, Category(TestCategories.SmokeTest)]
-        public void ButtonEnablementForUnlicensedTampaSelection()
-        {
-            LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
-            {
-                VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllOkVerifier()),
-                ActivationRequest = activation.Object
-            };
-
-            activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
-            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host> { new Host() }.AsReadOnly());
-            view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase
-            {
-                MockType = ObjectBuilderType.TampaHost,
-                License = Host.Edition.Free
-            }));
-
-            licenseSummary.UpdateButtonEnablement();
-            view.Verify(v => v.DrawAssignButtonAsDisabled(false));
-            view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
-            view.Verify(v => v.DrawActivateButtonAsHidden(false));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
-            view.Verify(v => v.DrawRequestButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsDisabled(false));
-        }
-
-        [Test, Category(TestCategories.SmokeTest)]
-        public void ButtonEnablementForMulitpleMixedTampaSelection()
-        {
-            LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
-            {
-                VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllOkVerifier()),
-                ActivationRequest = activation.Object
-            };
-
-            activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
-            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host> { new Host() }.AsReadOnly());
-            view.Setup(v => v.GetCheckedRows).Returns(CreateList(
-                new TestCase
-                {
-                    MockType = ObjectBuilderType.TampaHost,
-                    License = Host.Edition.Advanced
-                },
-                new TestCase
-                {
-                    MockType = ObjectBuilderType.TampaHost,
-                    License = Host.Edition.Free
-                }
-            ));
-
-            licenseSummary.UpdateButtonEnablement();
-            view.Verify(v => v.DrawAssignButtonAsDisabled(false));
-            view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsHidden(false));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
-            view.Verify(v => v.DrawRequestButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsDisabled(false));
-        }
-
-        [Test, Category(TestCategories.SmokeTest)]
-        public void ButtonEnablementForLicensedTampaSelection()
-        {
-            LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
-            {
-                VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllOkVerifier()),
-                ActivationRequest = activation.Object
-            };
-
-            activation.Setup(a => a.AllHostsCanBeActivated).Returns(true);
-            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
-            view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase
-            {
-                MockType = ObjectBuilderType.TampaHost,
-                License = Host.Edition.Advanced
-            }));
-
-            licenseSummary.UpdateButtonEnablement();
-            view.Verify(v => v.DrawAssignButtonAsDisabled(false));
-            view.Verify(v => v.DrawReleaseButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsHidden(false));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(false, null));
-            view.Verify(v => v.DrawRequestButtonAsDisabled(false));
-            view.Verify(v => v.DrawActivateButtonAsDisabled(false));
-        }
-
-        [Test, Category(TestCategories.SmokeTest)]
-        public void ButtonEnablementForUnactivatableHosts()
-        {
-            LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
-            {
-                VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllOkVerifier()),
-                ActivationRequest = activation.Object
-            };
-
-            activation.Setup(a => a.AllHostsCanBeActivated).Returns(false);
-            activation.Setup(a => a.HostsThatCanBeActivated).Returns(() => new List<Host>().AsReadOnly());
-            view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase
-            {
-                MockType = ObjectBuilderType.RioHost,
-                License = Host.Edition.Free
-            }));
-
-            licenseSummary.UpdateButtonEnablement();
-            view.Verify(v => v.DrawAssignButtonAsDisabled(false));
-            view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
-            view.Verify(v => v.DrawActivateButtonAsHidden(true));
-            view.Verify(v => v.DrawApplyButtonAsDisabled(true, null));
-            view.Verify(v => v.DrawRequestButtonAsDisabled(true));
-            view.Verify(v => v.DrawActivateButtonAsDisabled(true));
         }
 
         [Test, Category(TestCategories.SmokeTest)]
@@ -318,7 +174,6 @@ namespace XenAdminTests.LicensingTests
             LicenseManagerController licenseSummary = new LicenseManagerController(view.Object)
             {
                 VerifierFactory = new BlanketResponseSelectionVerifierFactory(new AllNotOkVerifier()),
-                ActivationRequest = activation.Object
             };
 
             view.Setup(v => v.GetCheckedRows).Returns(CreateList(new TestCase
@@ -328,13 +183,8 @@ namespace XenAdminTests.LicensingTests
             }));
 
             licenseSummary.UpdateButtonEnablement();
-            view.Verify(v => v.DrawActivateButtonAsDisabled(true));
             view.Verify(v => v.DrawAssignButtonAsDisabled(true));
             view.Verify(v => v.DrawReleaseButtonAsDisabled(true));
-            view.Verify(v => v.DrawActivateButtonAsHidden(true));
         }
-
-
-
     }
 }

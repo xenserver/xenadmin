@@ -58,18 +58,17 @@ namespace XenAdmin.Actions
         }
 
         private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
-        private string ProtectCredential(string Host, string username, string passwordSecret)
-        {
-            if (username == string.Empty || password == string.Empty)
-                return EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { Host }));
-            else
-                return EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { Host, username, passwordSecret }));
-        }
-
         private const string HEALTHCHECKSERVICENAME = "XenServerHealthCheck";
 
         protected override void Run()
         {
+            var host = Helpers.GetMaster(pool.Connection);
+            if (host == null)
+                return;
+
+            if (healthCheckSettings.Status == HealthCheckStatus.Enabled && (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)))
+                return; // do not send empty/null username or password (when the Health Check is enabled), as they will be ignored 
+
             ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
             try
             {
@@ -101,19 +100,12 @@ namespace XenAdmin.Actions
                 }
             } while (!pipeClient.IsConnected && retryCount-- != 0);
 
-            foreach (Host host in pool.Connection.Cache.Hosts)
-            {
-                if (host.IsMaster())
-                {
-                    string credential;
-                    if (healthCheckSettings.Status == HealthCheckStatus.Enabled)
-                        credential = ProtectCredential(host.address, username, password);
-                    else
-                        credential = ProtectCredential(host.address, string.Empty, string.Empty);
-                    pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, (Encoding.UTF8.GetBytes(credential)).Length);
-                    break;
-                }
-            }
+            var credential = healthCheckSettings.Status == HealthCheckStatus.Enabled
+                ? String.Join(SEPARATOR.ToString(), host.address, username, password)
+                : String.Join(SEPARATOR.ToString(), host.address);
+            var encryptedCredential = EncryptionUtils.ProtectForLocalMachine(credential);
+
+            pipeClient.Write(Encoding.UTF8.GetBytes(encryptedCredential), 0, (Encoding.UTF8.GetBytes(encryptedCredential)).Length);
 
             pipeClient.Write(Encoding.UTF8.GetBytes(HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE), 0, HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE.Length);
             pipeClient.Close();

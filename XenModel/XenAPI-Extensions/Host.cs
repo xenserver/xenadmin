@@ -50,10 +50,6 @@ namespace XenAPI
         public enum Edition
         {
             Free,
-            Advanced,
-            Enterprise,
-            Platinum,
-            EnterpriseXD,
             PerSocket,     //Added in Clearwater (PR-1589)
             XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
             EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
@@ -80,14 +76,6 @@ namespace XenAPI
         {
             switch (editionText)
             {
-                case "advanced":
-                    return Edition.Advanced;
-                case "enterprise":
-                    return Edition.Enterprise;
-                case "enterprise-xd":
-                    return Edition.EnterpriseXD;
-                case "platinum":
-                    return Edition.Platinum;
                 case "xendesktop":
                     return Edition.XenDesktop;
                 case "per-socket":
@@ -136,14 +124,7 @@ namespace XenAPI
         {
             switch (edition)
             {
-                case Edition.Advanced:
-                    return "advanced";
-                case Edition.Enterprise:
-                    return "enterprise";
-                case Edition.Platinum:
-                    return "platinum";
-                case Edition.EnterpriseXD:
-                    return "enterprise-xd";
+
                 case Edition.XenDesktop:
                     return "xendesktop";
                 case Edition.PerSocket:
@@ -315,16 +296,6 @@ namespace XenAPI
             get { return BoolKeyPreferTrue(license_params, "restrict_pooling"); }
         }
 
-        public static bool RestrictVMProtection(Host h)
-        {
-            return h._RestrictVMProtection;
-        }
-
-        private bool _RestrictVMProtection
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_vmpr"); }
-        }
-
         public static bool RestrictVMSnapshotSchedule(Host h)
         {
             return h._RestrictVMSnapshotSchedule;
@@ -435,6 +406,16 @@ namespace XenAPI
             return h._RestrictVgpu;
         }
 
+        public bool _RestrictManagementOnVLAN
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_management_on_vlan"); }
+        }
+
+        public static bool RestrictManagementOnVLAN(Host h)
+        {
+            return h._RestrictManagementOnVLAN;
+        }
+
         private bool _RestrictIntegratedGpuPassthrough
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_integrated_gpu_passthrough"); }
@@ -454,10 +435,9 @@ namespace XenAPI
                     return BoolKeyPreferTrue(license_params, "restrict_export_resource_data");
                 }
                 // Pre-Creedence hosts:
-                // allowed on Per-Socket edition for Clearwater hosts and Advanced, Enterprise and Platinum editions for older hosts
+                // allowed on Per-Socket edition for Clearwater hosts
                 var hostEdition = GetEdition(edition);
-                if (hostEdition == Edition.PerSocket || hostEdition == Edition.Advanced ||
-                    hostEdition == Edition.Enterprise || hostEdition == Edition.Platinum)
+                if (hostEdition == Edition.PerSocket)
                 {
                     return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
                 }
@@ -772,19 +752,6 @@ namespace XenAPI
         public string ProductBrand
         {
             get { return Get(software_version, "product_brand"); }
-        }
-
-        /// <summary>
-        /// Whether this host is an XCP host
-        /// </summary>
-        public bool IsXCP
-        {
-            get
-            {
-                return
-                    ProductVersion == null && PlatformVersion != null ||  // for Tampa and later
-                    ProductBrand == "XCP";  // for Boston and earlier
-            }
         }
 
         /// <summary>
@@ -1562,9 +1529,6 @@ namespace XenAPI
         {
             get
             {
-                if(!Helpers.ClearwaterOrGreater(Connection))
-                    return true;
-                
                 return !Helpers.FeatureForbidden(Connection, RestrictHotfixApply);
             }
         }

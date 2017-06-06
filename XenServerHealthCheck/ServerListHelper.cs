@@ -165,12 +165,27 @@ namespace XenServerHealthCheck
             }
         }
 
+        public void ClearServerList()
+        {
+            lock (serverListLock)
+            {
+                serverList.Clear();
+                updateServerList();
+            }
+        }
+
         public void UpdateServerCredential(string credential)
         {
             log.Info("Receive credential update message");
 
             string decryptCredential = EncryptionUtils.UnprotectForLocalMachine(credential);
             string[] decryptCredentialComps = decryptCredential.Split(SEPARATOR);
+
+            if (decryptCredentialComps.Length != 1 && decryptCredentialComps.Length != 3)
+                return;
+
+            if (decryptCredentialComps.Length == 3 && (string.IsNullOrEmpty(decryptCredentialComps[1]) || string.IsNullOrEmpty(decryptCredentialComps[2])))
+                return; //ignore null or empty username and password
 
             lock (serverListLock)
             {
@@ -230,8 +245,8 @@ namespace XenServerHealthCheck
                         Properties.Settings.Default.ConnectionTimeout = Int32.Parse(proxySettings[4]);
                         Properties.Settings.Default.BypassProxyForServers = bool.Parse(proxySettings[5]);
                         Properties.Settings.Default.ProvideProxyAuthentication = bool.Parse(proxySettings[6]);
-                        Properties.Settings.Default.ProxyUsername = proxySettings[7];
-                        Properties.Settings.Default.ProxyPassword = proxySettings[8];
+                        Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(EncryptionUtils.UnprotectForLocalMachine(proxySettings[7]));
+                        Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(EncryptionUtils.UnprotectForLocalMachine(proxySettings[8]));
                         Properties.Settings.Default.ProxyAuthenticationMethod = Int32.Parse(proxySettings[9]);
                         break;
 

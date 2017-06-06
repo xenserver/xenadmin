@@ -30,6 +30,12 @@
 
 # help script to download third party binaries to local dev environment
 
+if ($PSVersionTable.PSVersion.Major -lt 3)
+{
+    Write-Host "Failed to execute: Powershell version 3.x (or above) is required"
+    exit 1
+}
+
 $DOMAIN = Read-Host "Artifactory domain (e.g. artifactory.domain.com): "
 $DOMAIN = $DOMAIN.Trim()
 $CREDENTIALS = Get-Credential

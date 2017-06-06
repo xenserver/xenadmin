@@ -525,6 +525,9 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
+
+                string protectedUsername = Properties.Settings.Default.ProxyUsername;
+                string protectedPassword = Properties.Settings.Default.ProxyPassword;
                 new TransferProxySettingsAction(
                     (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
                     Properties.Settings.Default.ProxyAddress,
@@ -533,8 +536,8 @@ namespace XenAdmin
                     true,
                     Properties.Settings.Default.BypassProxyForServers,
                     Properties.Settings.Default.ProvideProxyAuthentication,
-                    Properties.Settings.Default.ProxyUsername,
-                    Properties.Settings.Default.ProxyPassword,
+                    string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
+                    string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword),
                     (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
             }
             catch (ConfigurationErrorsException ex)
@@ -1689,22 +1692,16 @@ namespace XenAdmin
 
             IXenConnection conn;
             conn = SelectionManager.Selection.GetConnectionOfAllItems();
-            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn))) /* hide VMPP */
+            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn)))
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = true;
                 VMSnapshotScheduleToolStripMenuItem.Available = true;
-
-                assignPolicyToolStripMenuItem.Available = false;
-                vMProtectionAndRecoveryToolStripMenuItem.Available = false;
 
             }
             else /* hide VMSS */
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = false;
                 VMSnapshotScheduleToolStripMenuItem.Available = false;
-
-                assignPolicyToolStripMenuItem.Available = true;
-                vMProtectionAndRecoveryToolStripMenuItem.Available = true;
             }
             
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;

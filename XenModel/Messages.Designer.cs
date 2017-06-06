@@ -3391,6 +3391,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting for slaves to recover....
+        /// </summary>
+        public static string ACTION_WAIT_FOR_SLAVES_TO_RECOVER {
+            get {
+                return ResourceManager.GetString("ACTION_WAIT_FOR_SLAVES_TO_RECOVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disconnecting  Workload Balancing failed on pool {0}: {1}  Workload Balancing has been paused..
         /// </summary>
         public static string ACTION_WLB_DECONFIGURE_FAILED {
@@ -5069,15 +5078,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Activation Key.
-        /// </summary>
-        public static string APPLY_ACTIVATION_KEY {
-            get {
-                return ResourceManager.GetString("APPLY_ACTIVATION_KEY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Apply hotfix.
         /// </summary>
         public static string APPLY_HOTFIX {
@@ -5174,89 +5174,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to archive the selected snapshots now?
-        ///Archive destination: {0}.
-        /// </summary>
-        public static string ARCHIVE_SNAPSHOT_NOW_TEXT_MULTIPLE {
-            get {
-                return ResourceManager.GetString("ARCHIVE_SNAPSHOT_NOW_TEXT_MULTIPLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do you want to archive the selected snapshot now?
-        ///Archive destination: {0}.
-        /// </summary>
-        public static string ARCHIVE_SNAPSHOT_NOW_TEXT_SINGLE {
-            get {
-                return ResourceManager.GetString("ARCHIVE_SNAPSHOT_NOW_TEXT_SINGLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Archive snapshot &apos;{0}&apos;.
-        /// </summary>
-        public static string ARCHIVE_SNAPSHOT_X {
-            get {
-                return ResourceManager.GetString("ARCHIVE_SNAPSHOT_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Archive Options.
-        /// </summary>
-        public static string ARCHIVE_SNAPSHOTS {
-            get {
-                return ResourceManager.GetString("ARCHIVE_SNAPSHOTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Automatically archive scheduled snapshots.
-        /// </summary>
-        public static string ARCHIVE_SNAPSHOTS_TITLE {
-            get {
-                return ResourceManager.GetString("ARCHIVE_SNAPSHOTS_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Archive Snapshot Now.
-        /// </summary>
-        public static string ARCHIVE_VM_PROTECTION_TITLE {
-            get {
-                return ResourceManager.GetString("ARCHIVE_VM_PROTECTION_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Example: \\server\sharename (CIFS) or server:/sharename (NFS).
-        /// </summary>
-        public static string ARCHIVE_VMPP_EXAMPLE_STORAGE_PATH {
-            get {
-                return ResourceManager.GetString("ARCHIVE_VMPP_EXAMPLE_STORAGE_PATH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Archived snapshot &apos;{0}&apos;.
-        /// </summary>
-        public static string ARCHIVED_SNAPSHOT_X {
-            get {
-                return ResourceManager.GetString("ARCHIVED_SNAPSHOT_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Archiving snapshot &apos;{0}&apos;.
-        /// </summary>
-        public static string ARCHIVING_SNAPSHOT_X {
-            get {
-                return ResourceManager.GetString("ARCHIVING_SNAPSHOT_X", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to are empty.
         /// </summary>
         public static string ARE_EMPTY {
@@ -5329,33 +5246,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign to VM Protection Polic&amp;y.
-        /// </summary>
-        public static string ASSIGN_PROTECTION_POLICY {
-            get {
-                return ResourceManager.GetString("ASSIGN_PROTECTION_POLICY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assign to VM Protection Polic&amp;y.
-        /// </summary>
-        public static string ASSIGN_PROTECTION_POLICY_CONTEXT_MENU {
-            get {
-                return ResourceManager.GetString("ASSIGN_PROTECTION_POLICY_CONTEXT_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assign to VM Protection Policy....
-        /// </summary>
-        public static string ASSIGN_PROTECTION_POLICY_NOAMP {
-            get {
-                return ResourceManager.GetString("ASSIGN_PROTECTION_POLICY_NOAMP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Assign to vA&amp;pp.
         /// </summary>
         public static string ASSIGN_VM_APPLIANCE {
@@ -5410,15 +5300,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Protection policy assigned..
-        /// </summary>
-        public static string ASSIGNED_PROTECTION_POLICY {
-            get {
-                return ResourceManager.GetString("ASSIGNED_PROTECTION_POLICY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to vApp assigned..
         /// </summary>
         public static string ASSIGNED_VM_APPLIANCE {
@@ -5433,15 +5314,6 @@ namespace XenAdmin {
         public static string ASSIGNED_VMSS_POLICY {
             get {
                 return ResourceManager.GetString("ASSIGNED_VMSS_POLICY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assigning protection policy....
-        /// </summary>
-        public static string ASSIGNING_PROTECTION_POLICY {
-            get {
-                return ResourceManager.GetString("ASSIGNING_PROTECTION_POLICY", resourceCulture);
             }
         }
         
@@ -6822,37 +6694,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some of the VMs you selected are already assigned to a different protection policy.
-        ///    
-        ///Do you want to assign these VMs to the policy &apos;{0}&apos; instead?.
-        /// </summary>
-        public static string CHANGE_VMS_POLICIES_WARNING {
-            get {
-                return ResourceManager.GetString("CHANGE_VMS_POLICIES_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assign VM to Protection Policy.
-        /// </summary>
-        public static string CHANGE_VMS_POLICY {
-            get {
-                return ResourceManager.GetString("CHANGE_VMS_POLICY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the protection policy &apos;{1}&apos;.
-        ///    
-        ///Do you want to assign it to the policy &apos;{2}&apos; instead?.
-        /// </summary>
-        public static string CHANGE_VMS_POLICY_WARNING {
-            get {
-                return ResourceManager.GetString("CHANGE_VMS_POLICY_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Some of the VMs you selected are already assigned to a different snapshot schedule.
         ///    
         ///Do you want to assign these VMs to the schedule &apos;{0}&apos; instead?.
@@ -6954,15 +6795,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking license status.
-        /// </summary>
-        public static string CHECKING_LICENSING_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_LICENSING_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Checking role....
         /// </summary>
         public static string CHECKING_ROLE {
@@ -7035,24 +6867,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking the presence of VM Protection Policies.
-        /// </summary>
-        public static string CHECKING_VMPR_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_VMPR_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking the possible presence of WSS appliances.
-        /// </summary>
-        public static string CHECKING_WSS_STATUS {
-            get {
-                return ResourceManager.GetString("CHECKING_WSS_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cross-server private network.
         /// </summary>
         public static string CHIN {
@@ -7103,15 +6917,6 @@ namespace XenAdmin {
         public static string CHOOSE_VMS_VAPP_RUBRIC {
             get {
                 return ResourceManager.GetString("CHOOSE_VMS_VAPP_RUBRIC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select a checkbox to add a VM to the protection policy; clear its checkbox to remove it from the policy..
-        /// </summary>
-        public static string CHOOSE_VMS_VMPP_RUBRIC {
-            get {
-                return ResourceManager.GetString("CHOOSE_VMS_VMPP_RUBRIC", resourceCulture);
             }
         }
         
@@ -9701,15 +9506,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM protection policy &apos;{0}&apos; created..
-        /// </summary>
-        public static string CREATED_VMPP {
-            get {
-                return ResourceManager.GetString("CREATED_VMPP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; created..
         /// </summary>
         public static string CREATED_VMSS {
@@ -9868,15 +9664,6 @@ namespace XenAdmin {
         public static string CREATING_VM_APPLIANCE {
             get {
                 return ResourceManager.GetString("CREATING_VM_APPLIANCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Creating VM protection policy &apos;{0}&apos;....
-        /// </summary>
-        public static string CREATING_VMPP {
-            get {
-                return ResourceManager.GetString("CREATING_VMPP", resourceCulture);
             }
         }
         
@@ -10797,11 +10584,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete VM Protection Policy.
+        ///   Looks up a localized string similar to Delete Snapshot Schedule.
         /// </summary>
-        public static string DELETE_VM_PROTECTION_TITLE {
+        public static string DELETE_VMSS_TITLE {
             get {
-                return ResourceManager.GetString("DELETE_VM_PROTECTION_TITLE", resourceCulture);
+                return ResourceManager.GetString("DELETE_VMSS_TITLE", resourceCulture);
             }
         }
         
@@ -10887,15 +10674,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM protection policies deleted..
-        /// </summary>
-        public static string DELETED_VMPP {
-            get {
-                return ResourceManager.GetString("DELETED_VMPP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedules deleted..
         /// </summary>
         public static string DELETED_VMSS {
@@ -10973,15 +10751,6 @@ namespace XenAdmin {
         public static string DELETING_VM_APPLIANCE {
             get {
                 return ResourceManager.GetString("DELETING_VM_APPLIANCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deleting VM protection policy &apos;{0}&apos;.
-        /// </summary>
-        public static string DELETING_VMPP {
-            get {
-                return ResourceManager.GetString("DELETING_VMPP", resourceCulture);
             }
         }
         
@@ -11319,15 +11088,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM protection policy &apos;{0}&apos; disabled..
-        /// </summary>
-        public static string DISABLED_VMPP {
-            get {
-                return ResourceManager.GetString("DISABLED_VMPP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; disabled..
         /// </summary>
         public static string DISABLED_VMSS {
@@ -11378,15 +11138,6 @@ namespace XenAdmin {
         public static string DISABLING_HA_ON {
             get {
                 return ResourceManager.GetString("DISABLING_HA_ON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disabling VM protection policy &apos;{0}&apos;....
-        /// </summary>
-        public static string DISABLING_VMPP {
-            get {
-                return ResourceManager.GetString("DISABLING_VMPP", resourceCulture);
             }
         }
         
@@ -13627,15 +13378,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM protection policy &apos;{0}&apos; enabled..
-        /// </summary>
-        public static string ENABLED_VMPP {
-            get {
-                return ResourceManager.GetString("ENABLED_VMPP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; enabled..
         /// </summary>
         public static string ENABLED_VMSS {
@@ -13686,15 +13428,6 @@ namespace XenAdmin {
         public static string ENABLING_HA_ON {
             get {
                 return ResourceManager.GetString("ENABLING_HA_ON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enabling VM protection policy &apos;{0}&apos;....
-        /// </summary>
-        public static string ENABLING_VMPP {
-            get {
-                return ResourceManager.GetString("ENABLING_VMPP", resourceCulture);
             }
         }
         
@@ -15968,15 +15701,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the VM Protection Policy name and an optional description..
-        /// </summary>
-        public static string GENERAL_PAGE_VMPP_SETTINGS {
-            get {
-                return ResourceManager.GetString("GENERAL_PAGE_VMPP_SETTINGS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Enter the snapshot schedule name and an optional description..
         /// </summary>
         public static string GENERAL_PAGE_VMSS_SETTINGS {
@@ -17204,6 +16928,33 @@ namespace XenAdmin {
         public static string HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS {
             get {
                 return ResourceManager.GetString("HEALTH_CHECK_AUTHENTICATION_INVALID_CREDENTIALS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://cis.citrix.com/legal/.
+        /// </summary>
+        public static string HEALTH_CHECK_CIS_POLICY_URL {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_CIS_POLICY_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.citrix.com/about/legal/privacy.html.
+        /// </summary>
+        public static string HEALTH_CHECK_CITRIX_POLICY_URL {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_CITRIX_POLICY_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The information that Health Check uploads to [Citrix] Insight Services will be used for troubleshooting and diagnostics support purposes, as well as to improve the quality, reliability, and performance of our products subject to the [Citrix] Insight Services Policy at {0} and [Citrix] Privacy Policy at {1}..
+        /// </summary>
+        public static string HEALTH_CHECK_PRIVACY_POLICY {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK_PRIVACY_POLICY", resourceCulture);
             }
         }
         
@@ -20041,51 +19792,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expired (Requires activation).
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} days.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_DAYS {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_DAYS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} hours.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_HOURS {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_HOURS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in {0} minutes.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_MINUTES {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_MINUTES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Requires activation in 1 minute.
-        /// </summary>
-        public static string LICENSE_REQUIRES_ACTIVATION_ONE_MIN {
-            get {
-                return ResourceManager.GetString("LICENSE_REQUIRES_ACTIVATION_ONE_MIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to License Restriction: Could not connect to {0}, a server with an XE Express License already exists ({1}).
         /// </summary>
         public static string LICENSE_RESTRICTION_MESSAGE {
@@ -20294,15 +20000,6 @@ namespace XenAdmin {
         public static string LICENSING_DIALOG_EXPIRING_SOON_TEXT {
             get {
                 return ResourceManager.GetString("LICENSING_DIALOG_EXPIRING_SOON_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Activate your free [XenServer] products or assign/release licenses for [XenServer] Advanced, Enterprise and Platinum Editions..
-        /// </summary>
-        public static string LICENSING_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("LICENSING_DIALOG_TEXT", resourceCulture);
             }
         }
         
@@ -23578,6 +23275,26 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN", resourceCulture);
             }
         }
+
+         /// <summary>
+        ///   Looks up a localized string similar to Asianux.
+        /// </summary>
+
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX", resourceCulture);
+            }
+        }        
+                
+        /// <summary>
+        ///   Looks up a localized string similar to Turbo.
+        /// </summary>
+        
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_TURBO {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_TURBO", resourceCulture);
+            }
+        }        
         
         /// <summary>
         ///   Looks up a localized string similar to Ubuntu.
@@ -23585,24 +23302,6 @@ namespace XenAdmin {
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU {
             get {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use this wizard to define a VM protection policy that will ensure your critical VMs are protected via automatic scheduled snapshot jobs..
-        /// </summary>
-        public static string NEW_VMPP_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("NEW_VMPP_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To begin, enter a name for the policy and a description (optional), then click Next..
-        /// </summary>
-        public static string NEW_VMPP_PAGE_TEXT_MORE {
-            get {
-                return ResourceManager.GetString("NEW_VMPP_PAGE_TEXT_MORE", resourceCulture);
             }
         }
         
@@ -23715,15 +23414,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You cannot add a Free Edition [XenServer] to a pool with [XenServer] Advanced Edition or higher licenses.
-        /// </summary>
-        public static string NEWPOOL_FREE_HOST_PAID_MASTER {
-            get {
-                return ResourceManager.GetString("NEWPOOL_FREE_HOST_PAID_MASTER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This server has running VMs.
         /// </summary>
         public static string NEWPOOL_HAS_RUNNING_VMS {
@@ -23801,15 +23491,6 @@ namespace XenAdmin {
         public static string NEWPOOL_MASTER_ROLE {
             get {
                 return ResourceManager.GetString("NEWPOOL_MASTER_ROLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You cannot add server with a [XenServer product] Advanced Edition or higher license to a pool of Free Edition servers.
-        /// </summary>
-        public static string NEWPOOL_PAID_HOST_FREE_MASTER {
-            get {
-                return ResourceManager.GetString("NEWPOOL_PAID_HOST_FREE_MASTER", resourceCulture);
             }
         }
         
@@ -27747,26 +27428,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to archive the selected snapshot(s). 
-        ///
-        ///The VM protection policy for this VM does not have automatic archiving configured. Do you want to edit the policy and configure it now?.
-        /// </summary>
-        public static string POLICY_DOES_NOT_HAVE_ARCHIVE {
-            get {
-                return ResourceManager.GetString("POLICY_DOES_NOT_HAVE_ARCHIVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Archive Snapshot Now.
-        /// </summary>
-        public static string POLICY_DOES_NOT_HAVE_ARCHIVE_TITLE {
-            get {
-                return ResourceManager.GetString("POLICY_DOES_NOT_HAVE_ARCHIVE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Policy Name.
         /// </summary>
         public static string POLICY_NAME {
@@ -27925,6 +27586,15 @@ namespace XenAdmin {
         public static string POOL_JOIN_IMPOSSIBLE {
             get {
                 return ResourceManager.GetString("POOL_JOIN_IMPOSSIBLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs or cross-server private networks.
+        /// </summary>
+        public static string POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE {
+            get {
+                return ResourceManager.GetString("POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE", resourceCulture);
             }
         }
         
@@ -28870,15 +28540,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A {0} user cannot create VM protection policies. Log in as a different user with sufficient privileges and try again..
-        /// </summary>
-        public static string RBAC_WARNING_VMPP {
-            get {
-                return ResourceManager.GetString("RBAC_WARNING_VMPP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A {0} user cannot create a snapshot schedule. Log in as a different user with sufficient privileges and try again..
         /// </summary>
         public static string RBAC_WARNING_VMSS {
@@ -29210,15 +28871,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove VM &apos;{0}&apos; from VM Protection Policy &apos;{1}&apos;.
-        /// </summary>
-        public static string REMOVE_VM_FROM_POLICY {
-            get {
-                return ResourceManager.GetString("REMOVE_VM_FROM_POLICY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Remove VM &apos;{0}&apos; from snapshot schedule &apos;{1}&apos;.
         /// </summary>
         public static string REMOVE_VM_FROM_VMSS {
@@ -29233,15 +28885,6 @@ namespace XenAdmin {
         public static string REMOVE_VMS_FROM_APPLIANCE {
             get {
                 return ResourceManager.GetString("REMOVE_VMS_FROM_APPLIANCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove VMs from VM Protection Policy &apos;{1}&apos;.
-        /// </summary>
-        public static string REMOVE_VMS_FROM_POLICY {
-            get {
-                return ResourceManager.GetString("REMOVE_VMS_FROM_POLICY", resourceCulture);
             }
         }
         
@@ -29278,15 +28921,6 @@ namespace XenAdmin {
         public static string REMOVED_VMS_FROM_APPLIANCE {
             get {
                 return ResourceManager.GetString("REMOVED_VMS_FROM_APPLIANCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removed from VM Protection Policy.
-        /// </summary>
-        public static string REMOVED_VMS_FROM_POLICY {
-            get {
-                return ResourceManager.GetString("REMOVED_VMS_FROM_POLICY", resourceCulture);
             }
         }
         
@@ -29341,15 +28975,6 @@ namespace XenAdmin {
         public static string REMOVING_VMS_FROM_APPLIANCE {
             get {
                 return ResourceManager.GetString("REMOVING_VMS_FROM_APPLIANCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removing from VM Protection Policy.
-        /// </summary>
-        public static string REMOVING_VMS_FROM_POLICY {
-            get {
-                return ResourceManager.GetString("REMOVING_VMS_FROM_POLICY", resourceCulture);
             }
         }
         
@@ -29723,6 +29348,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reverting resolved prechecks in {0}....
+        /// </summary>
+        public static string REVERTING_RESOLVED_PRECHECKS_POOL {
+            get {
+                return ResourceManager.GetString("REVERTING_RESOLVED_PRECHECKS_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reverting all changes done by this wizard.
         /// </summary>
         public static string REVERTING_WIZARD_CHANGES {
@@ -29880,42 +29514,6 @@ namespace XenAdmin {
         public static string ROLLINGUPGRADE_PRECHECKS {
             get {
                 return ResourceManager.GetString("ROLLINGUPGRADE_PRECHECKS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: New versions of [XenServer] require new licenses to be added to your license server..
-        /// </summary>
-        public static string RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER {
-            get {
-                return ResourceManager.GetString("RPU_WARNING_DESCRIPTION_CLEARWATER_OR_GREATER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checking licensing status.
-        /// </summary>
-        public static string RPU_WIZARD_TAMPA_AND_OLDER_TITLE {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_TAMPA_AND_OLDER_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: VM Protection Policies were removed in [XenServer] [BRANDING_VERSION_6_2].
-        /// </summary>
-        public static string RPU_WIZARD_VMPR_VMPP_DEPRECATION {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_VMPR_VMPP_DEPRECATION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos;: The use of WSS servers was removed in [XenServer] [BRANDING_VERSION_6_2].
-        /// </summary>
-        public static string RPU_WIZARD_WSS_DEPRECATED {
-            get {
-                return ResourceManager.GetString("RPU_WIZARD_WSS_DEPRECATED", resourceCulture);
             }
         }
         
@@ -30496,7 +30094,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_0] onwards..
+        ///   Looks up a localized string similar to This version of [XenCenter] supports [XenServer] [BRANDING_VERSION_6_2] onwards..
         /// </summary>
         public static string SERVER_TOO_OLD {
             get {
@@ -31294,33 +30892,6 @@ namespace XenAdmin {
         public static string SOFTWARE_VERSION_PRODUCT_VERSION {
             get {
                 return ResourceManager.GetString("SOFTWARE_VERSION_PRODUCT_VERSION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XCP build number.
-        /// </summary>
-        public static string SOFTWARE_VERSION_XCP_BUILD_NUMBER {
-            get {
-                return ResourceManager.GetString("SOFTWARE_VERSION_XCP_BUILD_NUMBER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XCP build date.
-        /// </summary>
-        public static string SOFTWARE_VERSION_XCP_DATE {
-            get {
-                return ResourceManager.GetString("SOFTWARE_VERSION_XCP_DATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XCP version.
-        /// </summary>
-        public static string SOFTWARE_VERSION_XCP_PLATFORM_VERSION {
-            get {
-                return ResourceManager.GetString("SOFTWARE_VERSION_XCP_PLATFORM_VERSION", resourceCulture);
             }
         }
         
@@ -32748,24 +32319,6 @@ namespace XenAdmin {
         public static string THIS_VM_IS_NOT_IN_VMSS {
             get {
                 return ResourceManager.GetString("THIS_VM_IS_NOT_IN_VMSS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This VM is not currently protected with a VM protection policy.
-        /// </summary>
-        public static string THIS_VM_IS_NOT_PROTECTED {
-            get {
-                return ResourceManager.GetString("THIS_VM_IS_NOT_PROTECTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This VM is currently protected with VM protection policy &apos;{0}&apos;.
-        /// </summary>
-        public static string THIS_VM_IS_PROTECTED {
-            get {
-                return ResourceManager.GetString("THIS_VM_IS_PROTECTED", resourceCulture);
             }
         }
         
@@ -34958,26 +34511,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Protection and Recovery. VM Protection and Recovery allows you to protect your critical VMs by scheduling automatic snapshots, and optionally, archiving those snapshots to a CIFS or NFS share..
-        /// </summary>
-        public static string UPSELL_BLURB_VM_PROTECTION {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_VM_PROTECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] VM Protection and Recovery feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_VM_PROTECTION_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_VM_PROTECTION_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshost allows you to create automatic snapshots for your critical VMs..
         /// </summary>
         public static string UPSELL_BLURB_VMSS {
@@ -35540,15 +35073,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View VM Protection Policies.
-        /// </summary>
-        public static string VIEW_POLICIES {
-            get {
-                return ResourceManager.GetString("VIEW_POLICIES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to View tag....
         /// </summary>
         public static string VIEW_TAG_MENU_OPTION {
@@ -35779,6 +35303,15 @@ namespace XenAdmin {
         public static string VIRTUALIZATION_UNKNOWN {
             get {
                 return ResourceManager.GetString("VIRTUALIZATION_UNKNOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Network {0} on VLAN {1}.
+        /// </summary>
+        public static string VLAN_NETWORK_NAME {
+            get {
+                return ResourceManager.GetString("VLAN_NETWORK_NAME", resourceCulture);
             }
         }
         
@@ -36224,51 +35757,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM Pr&amp;otection Policies....
-        /// </summary>
-        public static string VM_PROTECTION_CONTEXT_MENU {
-            get {
-                return ResourceManager.GetString("VM_PROTECTION_CONTEXT_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VM &amp;Protection Policies....
-        /// </summary>
-        public static string VM_PROTECTION_MAIN_MENU {
-            get {
-                return ResourceManager.GetString("VM_PROTECTION_MAIN_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} ({1} VMs failed).
-        /// </summary>
-        public static string VM_PROTECTION_POLICY_FAILED {
-            get {
-                return ResourceManager.GetString("VM_PROTECTION_POLICY_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pool master unreachable.
-        /// </summary>
-        public static string VM_PROTECTION_POLICY_HOST_NOT_LIVE {
-            get {
-                return ResourceManager.GetString("VM_PROTECTION_POLICY_HOST_NOT_LIVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Succeeded.
-        /// </summary>
-        public static string VM_PROTECTION_POLICY_SUCCEEDED {
-            get {
-                return ResourceManager.GetString("VM_PROTECTION_POLICY_SUCCEEDED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This VM is not using read caching.
         /// </summary>
         public static string VM_READ_CACHING_DISABLED {
@@ -36458,114 +35946,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VM Protection Policy.
-        /// </summary>
-        public static string VMPP {
-            get {
-                return ResourceManager.GetString("VMPP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Protect your critical VMs with a protection policy that takes regular scheduled snapshots and, optionally, archives the snapshots to a CIFS or NFS share..
-        /// </summary>
-        public static string VMPP_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("VMPP_DIALOG_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VM Protection Policies.
-        /// </summary>
-        public static string VMPP_DIALOG_TITLE {
-            get {
-                return ResourceManager.GetString("VMPP_DIALOG_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Send &amp;email notifications about VM protection job alerts.
-        /// </summary>
-        public static string VMPP_EMAIL_CHECKBOX_TEXT {
-            get {
-                return ResourceManager.GetString("VMPP_EMAIL_CHECKBOX_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XenServer can send you email notifications when alerts associated with VM protection jobs are raised, such as when a VM snapshot is created or archived, or when a snapshot or archive operation fails..
-        /// </summary>
-        public static string VMPP_EMAIL_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("VMPP_EMAIL_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &amp;Run the new VM protection job when I click Finish.
-        /// </summary>
-        public static string VMPP_FINISH_PAGE_CHECKBOX_TEXT {
-            get {
-                return ResourceManager.GetString("VMPP_FINISH_PAGE_CHECKBOX_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Review the new VM protection policy below and click Previous if you want to change any settings or Finish to create the new policy..
-        /// </summary>
-        public static string VMPP_FINISH_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("VMPP_FINISH_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create the new policy.
-        /// </summary>
-        public static string VMPP_FINISH_TITLE {
-            get {
-                return ResourceManager.GetString("VMPP_FINISH_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VM protection policies defined in pool &apos;{0}&apos; ({1} out of {2} VMs currently protected):.
-        /// </summary>
-        public static string VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL {
-            get {
-                return ResourceManager.GetString("VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VM protection policies defined in server &apos;{0}&apos; ({1} out of {2} VMs currently protected):.
-        /// </summary>
-        public static string VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER {
-            get {
-                return ResourceManager.GetString("VMPP_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to protection policy.
-        /// </summary>
-        public static string VMPP_TYPE {
-            get {
-                return ResourceManager.GetString("VMPP_TYPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to New VM Protection Policy.
-        /// </summary>
-        public static string VMPP_WIZARD_TITLE {
-            get {
-                return ResourceManager.GetString("VMPP_WIZARD_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to VMs.
         /// </summary>
         public static string VMS {
@@ -36701,6 +36081,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pool master unreachable.
+        /// </summary>
+        public static string VMSS_HOST_NOT_LIVE {
+            get {
+                return ResourceManager.GetString("VMSS_HOST_NOT_LIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VM Snaps&amp;hot Schedules....
         /// </summary>
         public static string VMSS_MAIN_MENU {
@@ -36760,6 +36149,15 @@ namespace XenAdmin {
         public static string VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER {
             get {
                 return ResourceManager.GetString("VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Succeeded.
+        /// </summary>
+        public static string VMSS_SUCCEEDED {
+            get {
+                return ResourceManager.GetString("VMSS_SUCCEEDED", resourceCulture);
             }
         }
         

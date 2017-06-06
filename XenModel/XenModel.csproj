@@ -282,14 +282,11 @@
     <Compile Include="Actions\VIF\DeleteVIFAction.cs" />
     <Compile Include="Actions\VIF\PlugVIFAction.cs" />
     <Compile Include="Actions\VIF\UpdateVIFAction.cs" />
-    <Compile Include="Actions\VMPP\ArchiveNowAction.cs" />
-    <Compile Include="Actions\VMPP\AssignVMsToPolicyAction.cs" />
-    <Compile Include="Actions\VMPP\ChangePolicyEnabledAction.cs" />
-    <Compile Include="Actions\VMPP\CreateVMPP.cs" />
-    <Compile Include="Actions\VMPP\DestroyPolicyAction.cs" />
-    <Compile Include="Actions\VMPP\GetVMPPAlertsAction.cs" />
-    <Compile Include="Actions\VMPP\RunPolicyNowAction.cs" />
-    <Compile Include="Actions\VMPP\TestArchiveTargetAction.cs" />
+    <Compile Include="Actions\VMSS\AssignVMsToPolicyAction.cs" />
+    <Compile Include="Actions\VMSS\ChangePolicyEnabledAction.cs" />
+    <Compile Include="Actions\VMSS\CreateVMPolicy.cs" />
+    <Compile Include="Actions\VMSS\DestroyPolicyAction.cs" />
+    <Compile Include="Actions\VMSS\RunPolicyNowAction.cs" />
     <Compile Include="Actions\VM\ChangeVCPUSettingsAction.cs" />
     <Compile Include="Actions\VM\ChangeVMISOAction.cs" />
     <Compile Include="Actions\VM\HAUnprotectVMAction.cs" />
@@ -330,7 +327,6 @@
     <Compile Include="WLB\WlbHostConfiguration.cs" />
     <Compile Include="WLB\WlbServerState.cs" />
     <Compile Include="XenAPI-Extensions\Blob.cs" />
-    <Compile Include="XenAPI-Extensions\IVMPolicy.cs" />
     <Compile Include="XenAPI-Extensions\VMSS.cs" />
     <Compile Include="XenAPI-Extensions\Pool_update.cs" />
     <Compile Include="XenAPI-Extensions\PVS_cache_storage.cs" />
@@ -447,7 +443,6 @@
     <Compile Include="XenAPI-Extensions\VDI.cs" />
     <Compile Include="XenAPI-Extensions\VIF.cs" />
     <Compile Include="XenAPI-Extensions\VM.cs" />
-    <Compile Include="XenAPI-Extensions\VMPP.cs" />
     <Compile Include="XenAPI-Extensions\VM_guest_metrics.cs" />
     <Compile Include="XenAPI-Extensions\XenObject.cs" />
     <Compile Include="XenAPI\after_apply_guidance.cs" />
@@ -527,7 +522,7 @@
     <Compile Include="XenAPI\vm_power_state.cs" />
     <Compile Include="XenAPI\VTPM.cs" />
     <Compile Include="XenAPI\XenObject.cs" />
-    <Compile Include="XenAPI\XenObjectDownloader.cs" />
+    <Compile Include="XenObjectDownloader.cs" />
     <Compile Include="XenAPI\XenRef.cs" />
   </ItemGroup>
   <ItemGroup>

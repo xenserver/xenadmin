@@ -2293,6 +2293,42 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool must not have any bonds..
+        /// </summary>
+        public static string POOL_JOINING_HOST_HAS_BONDS {
+            get {
+                return ResourceManager.GetString("POOL_JOINING_HOST_HAS_BONDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool must not have any non-management vlans..
+        /// </summary>
+        public static string POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS {
+            get {
+                return ResourceManager.GetString("POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool must not have any tunnels..
+        /// </summary>
+        public static string POOL_JOINING_HOST_HAS_TUNNELS {
+            get {
+                return ResourceManager.GetString("POOL_JOINING_HOST_HAS_TUNNELS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool must have the same management vlan..
+        /// </summary>
+        public static string POOL_JOINING_HOST_MANAGEMENT_VLAN_DOES_NOT_MATCH {
+            get {
+                return ResourceManager.GetString("POOL_JOINING_HOST_MANAGEMENT_VLAN_DOES_NOT_MATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The server joining the pool must have a physical management NIC (i.e. the management NIC must not be on a VLAN or bonded PIF)..
         /// </summary>
         public static string POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC {

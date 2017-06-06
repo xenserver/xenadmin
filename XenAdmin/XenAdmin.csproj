@@ -167,6 +167,7 @@
     <Compile Include="Controls\DataGridViewEx\DataGridViewEx.Designer.cs">
       <DependentUpon>DataGridViewEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridViewTextAndImageCell.cs" />
     <Compile Include="Controls\FolderChangeDialogTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -704,12 +705,6 @@
     </Compile>
     <Compile Include="Wizards\CrossPoolMigrateWizard\IntraPoolCopyPage.Designer.cs">
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicySnapshotTypePageSpecific.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyWizardSpecific.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
@@ -2804,12 +2799,6 @@
     <Compile Include="Controls\SrPickerItem.cs" />
     <Compile Include="Controls\SummaryPanel\ISummaryPanelView.cs" />
     <Compile Include="Diagnostics\Checks\HostMaintenanceModeCheck.cs" />
-    <Compile Include="Diagnostics\Checks\UpgradingFromTampaAndOlderCheck.cs" />
-    <Compile Include="Diagnostics\Checks\HostHasWssCheck.cs" />
-    <Compile Include="Diagnostics\Checks\VmprActivatedCheck.cs" />
-    <Compile Include="Diagnostics\Problems\ConnectionProblem\UpgradingFromTampaAndOlderWarning.cs" />
-    <Compile Include="Diagnostics\Problems\ConnectionProblem\VmprActivatedWarning.cs" />
-    <Compile Include="Diagnostics\Problems\HostProblem\HostHasWssWarning.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MissingMultipleFCSRsProblem.cs" />
     <Compile Include="Diagnostics\Problems\WarningWithInformationUrl.cs" />
     <Compile Include="Dialogs\ConnectionRefusedDialog.cs">
@@ -2818,7 +2807,6 @@
     <Compile Include="Dialogs\ConnectionRefusedDialog.Designer.cs">
       <DependentUpon>ConnectionRefusedDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\LicenseManager\LicenseActivationRequest.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\ILicenseCheckableDataGridViewView.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseCheckableDataGridView\LicenseCheckableDataGridView.cs">
       <SubType>Component</SubType>
@@ -2975,7 +2963,6 @@
     <Compile Include="Dialogs\LicenseManager\LicenseRowComparers\ExpiryComparer.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseRowComparers\NameColumnComparer.cs" />
     <Compile Include="Dialogs\LicenseManager\LicenseRowComparers\ProductColumnComparer.cs" />
-    <Compile Include="Dialogs\LicenseManager\OpenLicenseFileDialog.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\CanUseLicenseServerVerifier.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\HaOnVerifier.cs" />
     <Compile Include="Dialogs\LicenseManager\SelectionVerifiers\LicenseSelectionVerifier.cs" />
@@ -3055,7 +3042,6 @@
     <Compile Include="Actions\GUIActions\Wlb\WlbOptimizePoolAction.cs" />
     <Compile Include="Branding.cs" />
     <Compile Include="Commands\ActivateVBDCommand.cs" />
-    <Compile Include="Commands\ActivationRequestCommand.cs" />
     <Compile Include="Commands\AddHostCommand.cs">
     </Compile>
     <Compile Include="Commands\AddHostToPoolCommand.cs">
@@ -3462,18 +3448,17 @@
     <Compile Include="Dialogs\VMDialogs\MoveVMDialog.Designer.cs">
       <DependentUpon>MoveVMDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\VMProtectionRecovery\DataGridViewTextAndImageCell.cs" />
-    <Compile Include="Dialogs\VMProtectionRecovery\PolicyHistory.cs">
+    <Compile Include="Dialogs\ScheduledSnapshots\PolicyHistory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dialogs\VMProtectionRecovery\PolicyHistory.Designer.cs">
+    <Compile Include="Dialogs\ScheduledSnapshots\PolicyHistory.Designer.cs">
       <DependentUpon>PolicyHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\VMProtectionRecovery\VMProtectionPoliciesDialog.cs">
+    <Compile Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\VMProtectionRecovery\VMProtectionPoliciesDialog.Designer.cs">
-      <DependentUpon>VMProtectionPoliciesDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.Designer.cs">
+      <DependentUpon>ScheduledSnapshotsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Wlb\ConfirmDeconfigureWLBDialog.cs">
       <SubType>Form</SubType>
@@ -3512,7 +3497,6 @@
     <Compile Include="Wizards\ExportWizard\ApplianceChecks\ApplianceExistsCheck.cs" />
     <Compile Include="Wizards\GenericPages\NoTargetServerPoolItem.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateCanMigrateFilter.cs" />
-    <Compile Include="Wizards\CrossPoolMigrateWizard\Filters\CrossPoolMigrateVersionFilter.cs" />
     <Compile Include="Wizards\CrossPoolMigrateWizard\CrossPoolMigrateDestinationPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -3681,18 +3665,6 @@
     </Compile>
     <Compile Include="Wizards\NewPolicyWizard\LocalServerTime.Designer.cs">
       <DependentUpon>LocalServerTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.Designer.cs">
-      <DependentUpon>NewPolicyArchivePage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.Designer.cs">
-      <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\NewPolicyWizard\NewPolicyFinishPage.cs">
       <SubType>UserControl</SubType>
@@ -4395,6 +4367,8 @@
     <None Include="Images\PausedDC_16.png" />
     <None Include="Images\padlock.png" />
     <None Include="Images\neokylin_16x.png" />
+    <None Include="Images\asianux_16x.png" />
+    <None Include="Images\turbo_16x.png" />
     <Content Include="Images\Refresh16.png" />
     <None Include="Images\saved_searches_16.png" />
     <None Include="Images\server_up_16.png" />
@@ -5555,24 +5529,24 @@
     <EmbeddedResource Include="Dialogs\VMDialogs\SelectVMsToSuspendDialog.zh-CN.resx">
       <DependentUpon>SelectVMsToSuspendDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\VMProtectionRecovery\PolicyHistory.ja.resx">
+    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.ja.resx">
       <DependentUpon>PolicyHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\VMProtectionRecovery\PolicyHistory.resx">
+    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.resx">
       <DependentUpon>PolicyHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\VMProtectionRecovery\PolicyHistory.zh-CN.resx">
+    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.zh-CN.resx">
       <DependentUpon>PolicyHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\VMProtectionRecovery\VMProtectionPoliciesDialog.ja.resx">
-      <DependentUpon>VMProtectionPoliciesDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.ja.resx">
+      <DependentUpon>ScheduledSnapshotsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\VMProtectionRecovery\VMProtectionPoliciesDialog.resx">
-      <DependentUpon>VMProtectionPoliciesDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.resx">
+      <DependentUpon>ScheduledSnapshotsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\VMProtectionRecovery\VMProtectionPoliciesDialog.zh-CN.resx">
-      <DependentUpon>VMProtectionPoliciesDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.zh-CN.resx">
+      <DependentUpon>ScheduledSnapshotsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VmSnapshotDialog.ja.resx">
       <DependentUpon>VmSnapshotDialog.cs</DependentUpon>
@@ -6348,25 +6322,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewPolicyWizard\LocalServerTime.zh-CN.resx">
       <DependentUpon>LocalServerTime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.ja.resx">
-      <DependentUpon>NewPolicyArchivePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.resx">
-      <DependentUpon>NewPolicyArchivePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyArchivePage.zh-CN.resx">
-      <DependentUpon>NewPolicyArchivePage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.ja.resx">
-      <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.resx">
-      <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyEmailPage.zh-CN.resx">
-      <DependentUpon>NewPolicyEmailPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewPolicyWizard\NewPolicyFinishPage.ja.resx">
       <DependentUpon>NewPolicyFinishPage.cs</DependentUpon>

@@ -861,6 +861,18 @@
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
     <value>The external authentication configuration of the server joining the pool must match the pool's own external authentication configuration.</value>
   </data>
+  <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
+    <value>The host joining the pool must not have any bonds.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS" xml:space="preserve">
+    <value>The host joining the pool must not have any non-management vlans.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_TUNNELS" xml:space="preserve">
+    <value>The host joining the pool must not have any tunnels.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MANAGEMENT_VLAN_DOES_NOT_MATCH" xml:space="preserve">
+    <value>The host joining the pool must have the same management vlan.</value>
+  </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
     <value>The server joining the pool must have a physical management NIC (i.e. the management NIC must not be on a VLAN or bonded PIF).</value>
   </data>

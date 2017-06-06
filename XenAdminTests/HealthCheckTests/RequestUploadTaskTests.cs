@@ -50,6 +50,8 @@ namespace XenAdminTests.HealthCheckTests
     {
         private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
         private const string dbName = "TampaTwoHostPoolSelectioniSCSI.xml";
+        private const string nonEmptyPassword = "nonemptypassword"; // needed when the credentials are sent to the HealthCheck, as the credential receiver will othrwise ignore them
+
         public RequestUploadTaskTests() : base(dbName) { }
         private static string UUID = "test-test";
 
@@ -64,24 +66,32 @@ namespace XenAdminTests.HealthCheckTests
             config[HealthCheckSettings.LAST_FAILED_UPLOAD] = "";
             return config;
         }
+        [TestFixtureSetUp]
+        public void FixtureSetup()
+        {
+            CredentialReceiver.instance.Init();
+            ServerListHelper.instance.Init();
+        }
+
+        [TestFixtureTearDown]
+        public void FixtureTearDown()
+        {
+            CredentialReceiver.instance.UnInit();
+        }
 
         [Test]
         public void CheckUnenrolledHostShouldRemoved()
         {
-            CredentialReceiver.instance.Init();
-            ServerListHelper.instance.Init();
-            DatabaseManager.CreateNewConnection(dbName);
             IXenConnection connection = DatabaseManager.ConnectionFor(dbName);
             Session _session = DatabaseManager.ConnectionFor(dbName).Session;
-            DatabaseManager.ConnectionFor(dbName).LoadCache(_session);
             Dictionary<string, string> config = cleanStack();
-            connection.LoadCache(_session);
 
+            ServerListHelper.instance.ClearServerList();
             int conSize = ServerListHelper.instance.GetServerList().Count;
 
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
-            string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { connection.Hostname, connection.Username, connection.Password }));
+            string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { connection.Hostname, connection.Username, nonEmptyPassword }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
             System.Threading.Thread.Sleep(1000);
@@ -96,20 +106,17 @@ namespace XenAdminTests.HealthCheckTests
             Assert.IsFalse(RequestUploadTask.Request(connection, _session));
             con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize);
-            CredentialReceiver.instance.UnInit();
+            
         }
 
         [Test, Timeout( 100 * 1000 )]
         public void checkUploadLock()
         {
-            DatabaseManager.CreateNewConnection(dbName);
             IXenConnection connection = DatabaseManager.ConnectionFor(dbName);
             Session _session = DatabaseManager.ConnectionFor(dbName).Session;
-            DatabaseManager.ConnectionFor(dbName).LoadCache(_session);
             
             Dictionary<string, string> config = cleanStack();
-            connection.LoadCache(_session);
-
+            
             //1. If XenServer has not enroll, lock will not been set.
             config = cleanStack();
             config[HealthCheckSettings.STATUS] = "false";
@@ -217,12 +224,10 @@ namespace XenAdminTests.HealthCheckTests
         [Test]
         public void checkDemandLock()
         {
-            DatabaseManager.CreateNewConnection(dbName);
             IXenConnection connection = DatabaseManager.ConnectionFor(dbName);
             Session _session = DatabaseManager.ConnectionFor(dbName).Session;
-            DatabaseManager.ConnectionFor(dbName).LoadCache(_session);
             Dictionary<string, string> config = cleanStack();
-            connection.LoadCache(_session);
+            
             //1 Uploading is inprocess by current service, demand will be ignore
             config = cleanStack();
             config[HealthCheckSettings.UPLOAD_LOCK] = UUID + "|" + HealthCheckSettings.DateTimeToString(DateTime.UtcNow);

@@ -154,10 +154,6 @@ cp ${REPO}/mk/xenadmintests.sh ${REPO}/XenAdminTests/bin/Release/
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
 
-#build the CFUValidator
-cd ${REPO}/CFUValidator && $MSBUILD
-cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
-
 #include resources script and collect the resources for translations
 . ${REPO}/mk/find-resources.sh
 
@@ -165,7 +161,6 @@ cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
 cd ${WIX}/outVNCControl && tar cjf ${OUTPUT_DIR}/VNCControl.tar.bz2 VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
-cp ${REPO}/CFUValidator/bin/CFUValidator.tgz ${OUTPUT_DIR}/CFUValidator.tgz
 
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \

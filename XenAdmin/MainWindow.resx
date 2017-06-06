@@ -1965,12 +1965,6 @@
   <data name="VMSnapshotScheduleToolStripMenuItem.Text" xml:space="preserve">
     <value>VM Snapshot Schedule Policies...</value>
   </data>
-  <data name="vMProtectionAndRecoveryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
-  </data>
-  <data name="vMProtectionAndRecoveryToolStripMenuItem.Text" xml:space="preserve">
-    <value>VM &amp;Protection Policies...</value>
-  </data>
   <data name="exportResourceReportPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
   </data>
@@ -2245,124 +2239,124 @@
     <value>Ctrl+N</value>
   </data>
   <data name="NewVmToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="NewVmToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;New VM...</value>
   </data>
   <data name="startShutdownToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="startShutdownToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Start/Shut down</value>
   </data>
   <data name="resumeOnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="resumeOnToolStripMenuItem.Text" xml:space="preserve">
     <value>Res&amp;ume on Server</value>
   </data>
   <data name="relocateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="relocateToolStripMenuItem.Text" xml:space="preserve">
     <value>M&amp;igrate to Server</value>
   </data>
   <data name="startOnHostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="startOnHostToolStripMenuItem.Text" xml:space="preserve">
     <value>Start &amp;on Server</value>
   </data>
   <data name="toolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 6</value>
+    <value>242, 6</value>
   </data>
   <data name="assignSnapshotScheduleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="assignSnapshotScheduleToolStripMenuItem.Text" xml:space="preserve">
     <value>Assign to Snaps&amp;hot Schedule...</value>
   </data>
-  <data name="assignPolicyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
-  </data>
-  <data name="assignPolicyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Assign to VM &amp;Protection Policy...</value>
-  </data>
   <data name="assignToVirtualApplianceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="assignToVirtualApplianceToolStripMenuItem.Text" xml:space="preserve">
     <value>Assign to &amp;vApp</value>
   </data>
   <data name="toolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 6</value>
+    <value>242, 6</value>
   </data>
   <data name="copyVMtoSharedStorageMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="copyVMtoSharedStorageMenuItem.Text" xml:space="preserve">
     <value>&amp;Copy VM</value>
   </data>
   <data name="MoveVMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="MoveVMToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Move VM</value>
   </data>
   <data name="snapshotToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="snapshotToolStripMenuItem.Text" xml:space="preserve">
     <value>Ta&amp;ke a Snapshot</value>
   </data>
   <data name="convertToTemplateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="convertToTemplateToolStripMenuItem.Text" xml:space="preserve">
     <value>Convert to &amp;Template</value>
   </data>
   <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Export...</value>
   </data>
+  <data name="enablePVSReadcachingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="disablePVSReadcachingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
   <data name="toolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 6</value>
+    <value>242, 6</value>
   </data>
   <data name="installToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="installToolsToolStripMenuItem.Text" xml:space="preserve">
     <value>Inst&amp;all [XenServer product] Tools</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Text" xml:space="preserve">
     <value>Send Ctrl+&amp;Alt+Del</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 6</value>
+    <value>242, 6</value>
   </data>
   <data name="uninstallToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="uninstallToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Delete VM</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 6</value>
+    <value>242, 6</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="pluginItemsPlaceHolderToolStripMenuItem4.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
   <data name="VMPropertiesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>245, 22</value>
   </data>
   <data name="VMPropertiesToolStripMenuItem.Text" xml:space="preserve">
     <value>P&amp;roperties</value>
@@ -3141,10 +3135,10 @@
   <data name="&gt;&gt;DrWizardToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;vMProtectionAndRecoveryToolStripMenuItem.Name" xml:space="preserve">
-    <value>vMProtectionAndRecoveryToolStripMenuItem</value>
+  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Name" xml:space="preserve">
+    <value>VMSnapshotScheduleToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;vMProtectionAndRecoveryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Name" xml:space="preserve">
@@ -3447,12 +3441,6 @@
   <data name="&gt;&gt;assignSnapshotScheduleToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.AssignGroupToolStripMenuItemVMSS, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;assignPolicyToolStripMenuItem.Name" xml:space="preserve">
-    <value>assignPolicyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;assignPolicyToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.AssignGroupToolStripMenuItemVMPP, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;assignToVirtualApplianceToolStripMenuItem.Name" xml:space="preserve">
     <value>assignToVirtualApplianceToolStripMenuItem</value>
   </data>
@@ -3493,6 +3481,18 @@
     <value>exportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exportToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;enablePVSReadcachingToolStripMenuItem.Name" xml:space="preserve">
+    <value>enablePVSReadcachingToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;enablePVSReadcachingToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;disablePVSReadcachingToolStripMenuItem.Name" xml:space="preserve">
+    <value>disablePVSReadcachingToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;disablePVSReadcachingToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem12.Name" xml:space="preserve">
@@ -3896,12 +3896,6 @@
   </data>
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Name" xml:space="preserve">
-    <value>VMSnapshotScheduleToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

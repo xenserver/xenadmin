@@ -46,24 +46,6 @@ namespace XenAdminTests.XenModelTests
     public class PureAsyncActionTests : ActionTestBase
     {
         readonly AutoResetEvent _autoResetEvent = new AutoResetEvent(false);
-        [Test]
-        public void VMTestPureAsyncAction()
-        {
-            mockProxy.Setup(x => x.vmpp_archive_now(It.IsAny<string>(), "testvm")).Returns(new Response<string>(""));
-            mockProxy.Setup(x => x.task_add_to_other_config(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(new Response<string>(""));
-            mockProxy.Setup(x => x.task_remove_from_other_config(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(new Response<string>(""));
-            VM vm = GetVM();
-            SetupPureAsyncAction(vm);
-            //Async call pure async action extra setups needed
-            ExtraAsyncMethodsSetup();
-            var action = new ArchiveNowAction(vm);
-            action.Completed += action_Completed;
-            action.RunAsync();
-            _autoResetEvent.WaitOne();
-            Assert.True(action.Succeeded);
-            mockProxy.VerifyAll();
-
-        }
 
         private void ExtraAsyncMethodsSetup()
         {
@@ -137,7 +119,7 @@ namespace XenAdminTests.XenModelTests
             mockConnection.Setup(x => x.Cache).Returns(cache);
             mockConnection.Setup(x => x.ResolveAll(It.IsAny<IEnumerable<XenRef<Role>>>()))
                 .Returns(new List<Role>() { 
-                    new Role() { name_label = "vmpp.archive_now" }
+                    new Role() { name_label = "vm.set_is_a_template" }
                     ,new Role() { name_label = "vm.destroy" }
                     ,new Role() { name_label = "vm.clean_shutdown" }
                     , new Role() { name_label = "task.add_to_other_config/key:xencenteruuid" }

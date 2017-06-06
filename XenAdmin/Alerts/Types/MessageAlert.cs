@@ -81,7 +81,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                if (Helpers.ClearwaterOrGreater(Connection) && Enum.IsDefined(typeof(AlertPriority), _priority))
+                if (Enum.IsDefined(typeof(AlertPriority), _priority))
                     return (AlertPriority)_priority;
 
                 return AlertPriority.Unknown;
@@ -229,22 +229,6 @@ namespace XenAdmin.Alerts
                         }
                         break;
 
-                    //these here do not need the object
-                    case Message.MessageType.VMPP_ARCHIVE_FAILED_0:
-                    case Message.MessageType.VMPP_ARCHIVE_LOCK_FAILED:
-                    case Message.MessageType.VMPP_ARCHIVE_MISSED_EVENT:
-                    case Message.MessageType.VMPP_ARCHIVE_SUCCEEDED:
-                    case Message.MessageType.VMPP_ARCHIVE_TARGET_MOUNT_FAILED:
-                    case Message.MessageType.VMPP_ARCHIVE_TARGET_UNMOUNT_FAILED:
-                    case Message.MessageType.VMPP_SNAPSHOT_ARCHIVE_ALREADY_EXISTS:
-                    case Message.MessageType.VMPP_SNAPSHOT_FAILED:
-                    case Message.MessageType.VMPP_SNAPSHOT_LOCK_FAILED:
-                    case Message.MessageType.VMPP_SNAPSHOT_MISSED_EVENT:
-                    case Message.MessageType.VMPP_SNAPSHOT_SUCCEEDED:
-                    case Message.MessageType.VMPP_LICENSE_ERROR:
-                    case Message.MessageType.VMPP_XAPI_LOGON_FAILURE:
-                        var policyAlert = new PolicyAlert(Message.Connection, Message.body);
-                        return policyAlert.Text;
                     case Message.MessageType.VMSS_SNAPSHOT_MISSED_EVENT:
                     case Message.MessageType.VMSS_XAPI_LOGON_FAILURE:
                     case Message.MessageType.VMSS_LICENSE_ERROR:

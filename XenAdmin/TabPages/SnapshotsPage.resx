@@ -1411,7 +1411,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>105, 0</value>
@@ -1448,12 +1448,6 @@
   </data>
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;xport to File...</value>
-  </data>
-  <data name="archiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="archiveToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Archive Now</value>
   </data>
   <data name="separatorDeleteToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 6</value>
@@ -1513,7 +1507,7 @@
     <value>P&amp;roperties</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 242</value>
+    <value>210, 220</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
     <value>contextMenuStrip</value>
@@ -1788,14 +1782,8 @@
   <data name="exportAsBackupToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;xport to File...</value>
   </data>
-  <data name="archiveSnapshotNowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="archiveSnapshotNowToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Archive Now</value>
-  </data>
   <data name="saveMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 98</value>
+    <value>210, 76</value>
   </data>
   <data name="&gt;&gt;saveMenuStrip.Name" xml:space="preserve">
     <value>saveMenuStrip</value>
@@ -1888,12 +1876,6 @@
     <value>exportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;archiveToolStripMenuItem.Name" xml:space="preserve">
-    <value>archiveToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;archiveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;separatorDeleteToolStripSeparator.Name" xml:space="preserve">
@@ -2014,12 +1996,6 @@
     <value>exportAsBackupToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exportAsBackupToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;archiveSnapshotNowToolStripMenuItem.Name" xml:space="preserve">
-    <value>archiveSnapshotNowToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;archiveSnapshotNowToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonListView.Name" xml:space="preserve">

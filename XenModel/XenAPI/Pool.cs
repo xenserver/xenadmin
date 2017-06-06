@@ -1199,6 +1199,28 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Reconfigure the management network interface for all Hosts in the Pool
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The network</param>
+        public static void management_reconfigure(Session session, string _network)
+        {
+            session.proxy.pool_management_reconfigure(session.uuid, (_network != null) ? _network : "").parse();
+        }
+
+        /// <summary>
+        /// Reconfigure the management network interface for all Hosts in the Pool
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The network</param>
+        public static XenRef<Task> async_management_reconfigure(Session session, string _network)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pool_management_reconfigure(session.uuid, (_network != null) ? _network : "").parse());
+        }
+
+        /// <summary>
         /// Create PIFs, mapping a network to the same physical interface/VLAN on each host. This call is deprecated: use Pool.create_VLAN_from_PIF instead.
         /// First published in XenServer 4.0.
         /// </summary>
