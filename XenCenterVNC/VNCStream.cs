@@ -484,13 +484,19 @@ namespace DotNetVnc
             this.stream.writeInt32(key);
         }
 
-        public void keyScanEvent(bool down, int key, int sym)
+        /**
+         * use_qemu_ext_key_encoding: Dictates if we want to use QEMU_EXT_KEY encoding.
+         *
+         * XS6.2 doesn't properly support QEMU_EXT_KEY and XS6.5 supports QEMU_EXT_KEY encoding
+         * only if XS65ESP1051 is applied, so restrict QEMU_EXT_KEY encoding to Inverness and above.
+         */
+        public void keyScanEvent(bool down, int key, int sym, bool use_qemu_ext_key_encoding)
         {
             lock (this.writeLock)
             {
                 try
                 {
-                    if (qemu_ext_key_encoding)
+                    if (qemu_ext_key_encoding && use_qemu_ext_key_encoding)
                     {
                         writeQemuExtKey(QEMU_MSG, down, key, sym);
                     }

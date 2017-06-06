@@ -964,7 +964,7 @@ namespace XenAdmin.ConsoleView
 
                 foreach (int key in pressedScans)
                 {
-                    this.vncStream.keyScanEvent(false, key, -1);
+                    this.vncStream.keyScanEvent(false, key, -1, Helpers.InvernessOrGreater(this.SourceVM.Connection));
                 }
             });
 
@@ -1312,7 +1312,7 @@ namespace XenAdmin.ConsoleView
         {
             DoIfConnected(delegate()
             {
-                this.vncStream.keyScanEvent(pressed, scanCode, keySym);
+                this.vncStream.keyScanEvent(pressed, scanCode, keySym, Helpers.InvernessOrGreater(this.SourceVM.Connection));
             });
         }
 
