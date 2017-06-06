@@ -294,7 +294,7 @@ namespace XenAdmin.ConsoleView
         internal Set<int> pressedScans = new Set<int>();
         private bool modifierKeyPressedAlone = false;
 
-        private void handleRDPKey(bool pressed, int scancode)
+        private void handleRDPKey(bool pressed, int scancode, int keysym)
         {
             bool containsFocus = parent.ParentForm != null && parent.ParentForm.ContainsFocus;
 
