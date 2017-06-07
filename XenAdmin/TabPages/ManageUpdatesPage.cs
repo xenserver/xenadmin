@@ -258,7 +258,7 @@ namespace XenAdmin.TabPages
                     {
                         labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
                         checkForUpdatesNowButton.Visible = true;
-                        MakeWarningInvisible();
+                        ToggleWarningVisibility(false);
                     }
                     else
                     {
@@ -266,11 +266,11 @@ namespace XenAdmin.TabPages
                         if (SomeButNotAllUpdatesDisabled())
                         {
                             this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 72);
-                            MakeWarningVisible();
+                            ToggleWarningVisibility(true);
                         }
                         else
                         {
-                            MakeWarningInvisible();
+                            ToggleWarningVisibility(false);
                         }
                     }
                     return;
@@ -281,11 +281,11 @@ namespace XenAdmin.TabPages
                 if (SomeButNotAllUpdatesDisabled())
                 {
                     this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 72);
-                    MakeWarningVisible();
+                    ToggleWarningVisibility(true);
                 }
                 else
                 {
-                    MakeWarningInvisible();
+                    ToggleWarningVisibility(false);
                 }
 
                 updates.RemoveAll(FilterAlert);
@@ -325,28 +325,15 @@ namespace XenAdmin.TabPages
         }
 
         /// <summary>
-        /// Makes the warning that appears above the grid saying: "Automatic checking for updates 
-        /// is disabled for some types of updates" visible.
+        /// Toggles the viibility of the warning that appears above the grid saying:
+        /// "Automatic checking for updates is disabled for some types of updates".
         /// </summary>
-        private void MakeWarningVisible()
+        private void ToggleWarningVisibility(bool visible)
         {
-            pictureBox1.Visible = true;
-            AutoCheckForUpdatesDisabledLabel.Visible = true;
-            checkForUpdatesNowButton2.Visible = true;
+            pictureBox1.Visible = visible;
+            AutoCheckForUpdatesDisabledLabel.Visible = visible;
+            checkForUpdatesNowButton2.Visible = visible;
         }
-
-        /// <summary>
-        /// Makes the warning that appears above the grid saying: "Automatic checking for updates 
-        /// is disabled for some types of updates" invisible.
-        /// </summary>
-        private void MakeWarningInvisible()
-        {
-            pictureBox1.Visible = false;
-            AutoCheckForUpdatesDisabledLabel.Visible = false;
-            checkForUpdatesNowButton2.Visible = false;
-        }
-
-
 
         /// <summary>
         /// Checks if the automatic checking for updates in the Updates Options Page is disabled for some, but not all types of updates.
@@ -996,7 +983,7 @@ namespace XenAdmin.TabPages
 
         private void checkForUpdatesNowButton2_Click(object sender, EventArgs e)
         {            
-            MakeWarningInvisible();
+            ToggleWarningVisibility(false);
             Updates.CheckForUpdates(true);
         }
 
