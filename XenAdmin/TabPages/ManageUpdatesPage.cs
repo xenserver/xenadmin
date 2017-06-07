@@ -62,6 +62,7 @@ namespace XenAdmin.TabPages
         private List<string> selectedUpdates = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
+        private readonly CollectionChangeEventHandler m_updateCollectionChangedWithInvoke;
 
         public ManageUpdatesPage()
         {
@@ -71,7 +72,8 @@ namespace XenAdmin.TabPages
             UpdateButtonEnablement();
             dataGridViewUpdates.Sort(ColumnDate, ListSortDirection.Descending);
             informationLabel.Click += informationLabel_Click;
-            Updates.RegisterCollectionChanged(UpdatesCollectionChanged);
+            m_updateCollectionChangedWithInvoke = Program.ProgramInvokeHandler(UpdatesCollectionChanged);
+            Updates.RegisterCollectionChanged(m_updateCollectionChangedWithInvoke);
             Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
@@ -87,9 +89,25 @@ namespace XenAdmin.TabPages
             Rebuild();
         }
 
-        private void UpdatesCollectionChanged(object sender, EventArgs e)
+        private void UpdatesCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            Program.Invoke(Program.MainWindow, Rebuild);
+            Program.AssertOnEventThread();
+            if (e.Element == null)
+            {
+                // We take the null element to mean there has been a batch remove
+                Rebuild();
+                return;
+            }
+            Alert a = e.Element as Alert;
+            switch (e.Action)
+            {
+                case CollectionChangeAction.Add:
+                    Rebuild(); // rebuild entire alert list to ensure filtering and sorting
+                    break;
+                case CollectionChangeAction.Remove:
+                    RemoveUpdateRow(a);
+                    break;
+            }
         }
 
         private void CheckForUpdates_CheckForUpdatesStarted()
@@ -430,6 +448,15 @@ namespace XenAdmin.TabPages
             return newRow;
         }
 
+        private void RemoveUpdateRow(Alert a)
+        {
+            for (int i = 0; i < dataGridViewUpdates.Rows.Count; i++)
+            {
+                if (((Alert)dataGridViewUpdates.Rows[i].Tag).uuid == a.uuid)
+                    dataGridViewUpdates.Rows.RemoveAt(i);
+            }
+        }
+
         private List<ToolStripItem> GetAlertActionItems(Alert alert)
         {
             var items = new List<ToolStripItem>();
@@ -470,7 +497,7 @@ namespace XenAdmin.TabPages
       
         #region Update dismissal
  
-      private void DismissUpdates(IEnumerable<Alert> alerts)
+        private void DismissUpdates(IEnumerable<Alert> alerts)
         {
             var groups = from Alert alert in alerts
                          where alert != null && !alert.Dismissing
@@ -488,8 +515,8 @@ namespace XenAdmin.TabPages
                     }
                     toolStripButtonRestoreDismissed.Enabled = false;
                     DeleteAllAlertsAction action = new DeleteAllAlertsAction(g.Connection, g.Alerts);
+                    action.Completed += DeleteAllAllertAction_Completed;
                     action.RunAsync();
-                    action.Completed += DeleteAllAllertAction_Completed;                    
                 }
             }
         }
@@ -502,8 +529,7 @@ namespace XenAdmin.TabPages
         private void DeleteAllAllertAction_Completed(ActionBase sender)
         {
             Program.Invoke(Program.MainWindow, () =>
-            {                
-                Rebuild();
+            {
                 toolStripButtonRestoreDismissed.Enabled = true;
             });
         }
