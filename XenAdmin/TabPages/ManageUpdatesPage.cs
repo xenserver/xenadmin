@@ -233,6 +233,8 @@ namespace XenAdmin.TabPages
 
                 if (updates.Count == 0)
                 {
+                    ColumnWebPage.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
                     tableLayoutPanel3.Visible = true;
                     pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
 
@@ -257,6 +259,8 @@ namespace XenAdmin.TabPages
                     }
                     return;
                 }
+
+                ColumnWebPage.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
                 checkForUpdatesNowButton.Visible = false;
 
