@@ -180,10 +180,10 @@ namespace XenAdmin.Diagnostics.Checks
                         return new NoPVDrivers(this, vm);
 
                     case Failure.VM_LACKS_FEATURE:
-                        return new CannotMigrateVM(this, vm, CannotMigrateVM.CannotMigrateVMReason.LacksFeature);
+                        return new CannotMigrateVM(this, vm, GetMoreSpecificReasonForCannotMigrateVm(vm, CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVm));
 
                     case Failure.VM_LACKS_FEATURE_SUSPEND:
-                        return new CannotMigrateVM(this, vm, CannotMigrateVM.CannotMigrateVMReason.LacksFeatureSuspend);
+                        return new CannotMigrateVM(this, vm, GetMoreSpecificReasonForCannotMigrateVm(vm, CannotMigrateVM.CannotMigrateVMReason.LacksFeatureSuspend));
 
                     case "VM_OLD_PV_DRIVERS":
                         return new PVDriversOutOfDate(this, vm);
@@ -227,6 +227,25 @@ namespace XenAdmin.Diagnostics.Checks
 
                 throw new Failure(new List<String>(exception));
             }
+        }
+
+        private static CannotMigrateVM.CannotMigrateVMReason GetMoreSpecificReasonForCannotMigrateVm(VM vm, CannotMigrateVM.CannotMigrateVMReason reason)
+        {
+            var gm = vm.Connection.Resolve(vm.guest_metrics);
+
+            if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows)
+            {
+                if (gm != null && !gm.PV_drivers_detected)
+                {
+                    reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
+                }
+            }
+            else if (vm.virtualisation_status == 0 || vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            {
+                reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
+            }
+
+            return reason;
         }
 
         // This function only tests certain host-wide conditions.
