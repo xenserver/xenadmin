@@ -62,6 +62,7 @@ namespace XenAdmin.TabPages
         private List<string> selectedUpdates = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
+        private bool dismissedAll = false;
 
         public ManageUpdatesPage()
         {
@@ -285,6 +286,9 @@ namespace XenAdmin.TabPages
                     if (dataGridViewUpdates.SortOrder == SortOrder.Descending)
                         updates.Reverse();
                 }
+
+                if (dismissedAll)
+                    return;
 
                 var rowList = new List<DataGridViewRow>();
 
@@ -565,6 +569,7 @@ namespace XenAdmin.TabPages
                          : Updates.UpdateAlerts;
 
             DismissUpdates(alerts);
+            dismissedAll = true;
         }
 
         /// <summary>
@@ -964,6 +969,7 @@ namespace XenAdmin.TabPages
 
         private void toolStripButtonRestoreDismissed_Click(object sender, EventArgs e)
         {
+            dismissedAll = false;
             checkForUpdatesNowButton.Visible = false;
             Updates.RestoreDismissedUpdates();
         }        
