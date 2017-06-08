@@ -1117,6 +1117,7 @@ namespace XenAdmin.ConsoleView
                     v.SendScanCodes = UseSource && !this.sourceIsPV;
                     v.SourceVM = sourceVM;
                     v.Console = console;
+                    v.UseQemuExtKeyEncoding = sourceVM != null && Helpers.InvernessOrGreater(sourceVM.Connection);
                     v.connect(stream, this.vncPassword);
                 }
             });

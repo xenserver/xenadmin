@@ -156,6 +156,8 @@ namespace XenAdmin.ConsoleView
 
         public event EventHandler DesktopResized = null;
 
+        public bool UseQemuExtKeyEncoding { set; private get; }
+
         public VNCGraphicsClient(ContainerControl parent)
         {
             Program.AssertOnEventThread();
@@ -964,7 +966,7 @@ namespace XenAdmin.ConsoleView
 
                 foreach (int key in pressedScans)
                 {
-                    this.vncStream.keyScanEvent(false, key, -1, Helpers.InvernessOrGreater(this.SourceVM.Connection));
+                    this.vncStream.keyScanEvent(false, key, -1, UseQemuExtKeyEncoding);
                 }
             });
 
@@ -1312,7 +1314,7 @@ namespace XenAdmin.ConsoleView
         {
             DoIfConnected(delegate()
             {
-                this.vncStream.keyScanEvent(pressed, scanCode, keySym, Helpers.InvernessOrGreater(this.SourceVM.Connection));
+                this.vncStream.keyScanEvent(pressed, scanCode, keySym, UseQemuExtKeyEncoding);
             });
         }
 
