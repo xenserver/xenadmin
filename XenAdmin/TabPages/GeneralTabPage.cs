@@ -1733,7 +1733,7 @@ namespace XenAdmin.TabPages
 
             output.Sort(StringUtility.NaturalCompare);
 
-            return String.Join(",", output.ToArray());
+            return String.Join(", ", output.ToArray());
         }
 
         private string poolUpdateString(Predicate<Pool_update> predicate)
@@ -1748,7 +1748,7 @@ namespace XenAdmin.TabPages
 
             output.Sort(StringUtility.NaturalCompare);
 
-            return String.Join(",", output.ToArray());
+            return String.Join(", ", output.ToArray());
         }
 
         #endregion
