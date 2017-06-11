@@ -77,7 +77,6 @@ namespace XenAdmin.TabPages
             Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
-            pictureBox1.Image = SystemIcons.Information.ToBitmap();
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
         }
@@ -138,9 +137,11 @@ namespace XenAdmin.TabPages
             dataGridViewUpdates.Rows.Clear();
             dataGridViewUpdates.Refresh();
 
+            checkForUpdatesNowLink.Enabled = false;
+            checkForUpdatesNowButton.Visible = false;
             spinningTimer.Start();
-            tableLayoutPanel3.Visible = true;
             labelProgress.Text = Messages.AVAILABLE_UPDATES_SEARCHING;
+            tableLayoutPanel3.Visible = true;
         }
 
         private void CheckForUpdates_CheckForUpdatesCompleted(bool succeeded, string errorMessage)
@@ -150,22 +151,12 @@ namespace XenAdmin.TabPages
                     checksQueue--;
                     toolStripButtonRefresh.Enabled = true;
                     toolStripButtonRestoreDismissed.Enabled = true;
+                    checkForUpdatesNowLink.Enabled = true;
+                    checkForUpdatesNowButton.Visible = true;
                     spinningTimer.Stop();
 
                     if (succeeded)
                     {
-                        int alertCount = Updates.UpdateAlertsCount;
-
-                        if (alertCount > 0)
-                        {                            
-                            tableLayoutPanel3.Visible = false;
-                        }
-                        else
-                        {
-                            pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
-                            labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
-                        }
-
                         Rebuild();
                     }
                     else
@@ -234,8 +225,6 @@ namespace XenAdmin.TabPages
 
             SetFilterLabel();
 
-            this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 51);
-            
             try
             {
                 dataGridViewUpdates.SuspendLayout();
@@ -247,49 +236,15 @@ namespace XenAdmin.TabPages
                     dataGridViewUpdates.Refresh();
                 }
 
-                var updates = new List<Alert>(Updates.UpdateAlerts);           
-
+                ToggleCentreWarningVisibility();
+                var updates = new List<Alert>(Updates.UpdateAlerts);
                 if (updates.Count == 0)
-                {
-                    tableLayoutPanel3.Visible = true;
-                    pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
-
-                    if (AllUpdatesDisabled())
-                    {
-                        labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
-                        checkForUpdatesNowButton.Visible = true;
-                        ToggleWarningVisibility(false);
-                    }
-                    else
-                    {
-                        labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
-                        if (SomeButNotAllUpdatesDisabled())
-                        {
-                            this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 72);
-                            ToggleWarningVisibility(true);
-                        }
-                        else
-                        {
-                            ToggleWarningVisibility(false);
-                        }
-                    }
                     return;
-                }
 
-                checkForUpdatesNowButton.Visible = false;
-
-                if (SomeButNotAllUpdatesDisabled())
-                {
-                    this.dataGridViewUpdates.Location = new Point(this.dataGridViewUpdates.Location.X, 72);
-                    ToggleWarningVisibility(true);
-                }
-                else
-                {
-                    ToggleWarningVisibility(false);
-                }
 
                 updates.RemoveAll(FilterAlert);
                 tableLayoutPanel3.Visible = false;
+                ToggleWarningVisibility(SomeButNotAllUpdatesDisabled());
 
                 if (dataGridViewUpdates.SortedColumn != null)
                 {
@@ -324,6 +279,28 @@ namespace XenAdmin.TabPages
             }
         }
 
+        private void ToggleCentreWarningVisibility()
+        {
+            var updates = new List<Alert>(Updates.UpdateAlerts);
+
+            if (updates.Count == 0)
+            {
+                tableLayoutPanel3.Visible = true;
+                pictureBoxProgress.Image = SystemIcons.Information.ToBitmap();
+
+                if (AllUpdatesDisabled())
+                {
+                    labelProgress.Text = Messages.DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING;
+                    ToggleWarningVisibility(false);
+                }
+                else
+                {
+                    labelProgress.Text = Messages.AVAILABLE_UPDATES_NOT_FOUND;
+                    ToggleWarningVisibility(SomeButNotAllUpdatesDisabled());
+                }
+            }
+        }
+
         /// <summary>
         /// Toggles the viibility of the warning that appears above the grid saying:
         /// "Automatic checking for updates is disabled for some types of updates".
@@ -332,7 +309,7 @@ namespace XenAdmin.TabPages
         {
             pictureBox1.Visible = visible;
             AutoCheckForUpdatesDisabledLabel.Visible = visible;
-            checkForUpdatesNowButton2.Visible = visible;
+            checkForUpdatesNowLink.Visible = visible;
         }
 
         /// <summary>
@@ -518,6 +495,7 @@ namespace XenAdmin.TabPages
             Program.Invoke(Program.MainWindow, () =>
             {
                 toolStripButtonRestoreDismissed.Enabled = true;
+                ToggleCentreWarningVisibility();
             });
         }
 
@@ -874,7 +852,6 @@ namespace XenAdmin.TabPages
         
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            checkForUpdatesNowButton.Visible = false;
             Updates.CheckForUpdates(true);
         }
 
@@ -971,19 +948,16 @@ namespace XenAdmin.TabPages
         
         private void checkForUpdatesNowButton_Click(object sender, EventArgs e)
         {
-            checkForUpdatesNowButton.Visible = false;
             Updates.CheckForUpdates(true);
         }
 
         private void toolStripButtonRestoreDismissed_Click(object sender, EventArgs e)
         {
-            checkForUpdatesNowButton.Visible = false;
             Updates.RestoreDismissedUpdates();
-        }        
+        }
 
-        private void checkForUpdatesNowButton2_Click(object sender, EventArgs e)
-        {            
-            ToggleWarningVisibility(false);
+        private void checkForUpdatesNowLink_Click(object sender, EventArgs e)
+        {
             Updates.CheckForUpdates(true);
         }
 
