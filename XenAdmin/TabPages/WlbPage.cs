@@ -296,7 +296,7 @@ namespace XenAdmin.TabPages
                 {
                     this.wlbOptimizePool.SuspendLayout();
                     // Update optimizePool control properties (versionSupport, apply button) 
-                    this.wlbOptimizePool.SetOptControlProperties(_wlbPoolConfiguration.IsMROrLater, _wlbPoolConfiguration.AutoBalanceEnabled, _wlbPoolConfiguration.PowerManagementEnabled);
+                    this.wlbOptimizePool.SetOptControlProperties(_wlbPoolConfiguration.AutoBalanceEnabled, _wlbPoolConfiguration.PowerManagementEnabled);
                     this.wlbOptimizePool.ResumeLayout();
                 }
 
@@ -333,7 +333,7 @@ namespace XenAdmin.TabPages
             {
                 pdSectionConfiguration.AddEntry(Messages.WLB_SERVER_URL, getPoolWLBServer(_pool));
                 pdSectionConfiguration.AddEntry(Messages.WLB_OPT_MODE, getPoolOptMode(_pool));
-                if (null != _wlbPoolConfiguration && _wlbPoolConfiguration.IsMROrLater)
+                if (null != _wlbPoolConfiguration)
                 {
                     if (_wlbPoolConfiguration.AutomateOptimizationMode)
                     {

@@ -74,15 +74,6 @@ namespace XenAdmin.Wlb
     {
 
 #region Private Constants
-
-        private const int WlbVersion_Major_MNR = 2;
-        private const int WlbVersion_Minor_MNR = 0;
-        private const int WlbVersion_Major_Cowley = 2;
-        private const int WlbVersion_Minor_Cowley = 1;
-        private const int WlbVersion_Major_Boston = 6;
-        private const int WlbVersion_Minor_Boston = 0;
-        private const int WlbVersion_Major_Tampa = 6;
-        private const int WlbVersion_Minor_Tampa = 1;
         private const int WlbVersion_Major_Creedence = 6;
         private const int WlbVersion_Minor_Creedence = 5;
         private const int WlbVersion_Major_Dundee = 7;
@@ -383,7 +374,7 @@ namespace XenAdmin.Wlb
 
         public bool SupportsAutoBalance
         {
-            get { return IsMROrLater; }
+            get { return true; }
         }
 
         public bool AutoBalanceEnabled
@@ -391,10 +382,7 @@ namespace XenAdmin.Wlb
             get { return GetConfigValueBool("AutoBalanceEnabled"); }
             set
             {
-                if (IsMROrLater)
-                {
-                    SetConfigValueBool("AutoBalanceEnabled", value);
-                }
+                SetConfigValueBool("AutoBalanceEnabled", value);
             }
         }
 
@@ -403,10 +391,7 @@ namespace XenAdmin.Wlb
             get { return GetConfigValueDouble("AutoBalancePollIntervals"); }
             set
             {
-                if (IsMROrLater)
-                {
-                    SetConfigValueDouble("AutoBalancePollIntervals", value);
-                }
+                SetConfigValueDouble("AutoBalancePollIntervals", value);
             }
         }
 
@@ -415,10 +400,7 @@ namespace XenAdmin.Wlb
             get { return (WlbPoolAutoBalanceSeverity)Enum.Parse(typeof(WlbPoolAutoBalanceSeverity), GetConfigValueString("AutoBalanceSeverity")); }
             set
             {
-                if (IsMROrLater)
-                {
-                    SetConfigValueString("AutoBalanceSeverity", value.ToString());
-                }
+                SetConfigValueString("AutoBalanceSeverity", value.ToString());
             }
         }
 
@@ -427,10 +409,7 @@ namespace XenAdmin.Wlb
             get { return (WlbPoolAutoBalanceAggressiveness)Enum.Parse(typeof(WlbPoolAutoBalanceAggressiveness), GetConfigValueString("AutoBalanceAggressiveness")); }
             set
             {
-                if (IsMROrLater)
-                {
-                    SetConfigValueString("AutoBalanceAggressiveness", value.ToString());
-                }
+                SetConfigValueString("AutoBalanceAggressiveness", value.ToString());
             }
         }
 
@@ -450,33 +429,6 @@ namespace XenAdmin.Wlb
         {
             get { return ((this.WlbMajorVersion > WlbVersion_Major_Creedence) 
                 || ((this.WlbMajorVersion == WlbVersion_Major_Creedence) && (this.WlbMinorVersion >= WlbVersion_Minor_Creedence))); }
-        }
-
-        public bool IsTampaOrLater
-        {
-            get { return ((this.WlbMajorVersion >= WlbVersion_Major_Tampa) && (this.WlbMinorVersion >= WlbVersion_Minor_Tampa)); }
-        }
-
-        public bool IsBostonOrLater
-        {
-            get { return (this.WlbMajorVersion >= WlbVersion_Major_Boston); }
-        }
-
-        public bool IsMROrLater
-        {
-            get
-            {
-                // WLB Boston and later have a nice WLB Version value to check.
-                if (this.WlbMajorVersion != -1)
-                {
-                    return (this.WlbMajorVersion >= WlbVersion_Major_MNR);
-                }
-                //older version of WLB do not.
-                else
-                {
-                    return (base.Configuration.ContainsKey("AutoBalanceAggressiveness"));
-                }
-            }
         }
 
         public int WlbMajorVersion
@@ -512,10 +464,7 @@ namespace XenAdmin.Wlb
             get {return GetConfigValueBool("PowerManagementEnabled");}
             set
             {
-                if (IsMROrLater)
-                {
-                    SetConfigValueBool("PowerManagementEnabled", value);
-                }
+                SetConfigValueBool("PowerManagementEnabled", value);
             }
         }
 
@@ -524,10 +473,7 @@ namespace XenAdmin.Wlb
             get { return GetConfigValueDouble("PowerManagementPollIntervals"); }
             set
             {
-                if (IsMROrLater)
-                {
-                    SetConfigValueDouble("PowerManagementPollIntervals", value);
-                }
+                SetConfigValueDouble("PowerManagementPollIntervals", value);
             }
         }
 
@@ -551,10 +497,7 @@ namespace XenAdmin.Wlb
             get { return GetConfigValueBool("EnableOptimizationModeSchedules"); }
             set 
             {
-                if (IsMROrLater)
-                {
-                    SetConfigValueBool("EnableOptimizationModeSchedules", value);
-                }
+                SetConfigValueBool("EnableOptimizationModeSchedules", value);
             }
         }
 

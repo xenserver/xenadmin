@@ -68,16 +68,9 @@ namespace XenAdmin.Dialogs.Wlb
                 wlbOptimizationModePage.PoolConfiguration = _poolConfiguration;
                 wlbOptimizationModePage.Pool = _pool;
 
-                if (_poolConfiguration.IsMROrLater)
-                {
-                    verticalTabs.Items.Add(wlbAutomationPage);
-                    wlbAutomationPage.Connection = _pool.Connection;
-                    wlbAutomationPage.PoolConfiguration = _poolConfiguration;
-
-                    //verticalTabs.Items.Add(wlbPowerManagementPage);
-                    //wlbPowerManagementPage.Connection = _pool.Connection;
-                    //wlbPowerManagementPage.PoolConfiguration = _poolConfiguration;
-                }
+                verticalTabs.Items.Add(wlbAutomationPage);
+                wlbAutomationPage.Connection = _pool.Connection;
+                wlbAutomationPage.PoolConfiguration = _poolConfiguration;
 
                 verticalTabs.Items.Add(wlbThresholdsPage);
                 wlbThresholdsPage.Connection = _pool.Connection;
@@ -87,12 +80,9 @@ namespace XenAdmin.Dialogs.Wlb
                 wlbMetricWeightingPage.Connection = _pool.Connection;
                 wlbMetricWeightingPage.PoolConfiguration = _poolConfiguration;
 
-                if (_poolConfiguration.IsMROrLater)
-                {
-                    verticalTabs.Items.Add(wlbHostExclusionPage);
-                    wlbHostExclusionPage.PoolConfiguration = _poolConfiguration;
-                    wlbHostExclusionPage.Connection = _pool.Connection;
-                }
+                verticalTabs.Items.Add(wlbHostExclusionPage);
+                wlbHostExclusionPage.PoolConfiguration = _poolConfiguration;
+                wlbHostExclusionPage.Connection = _pool.Connection;
 
                 verticalTabs.Items.Add(wlbAdvancedSettingsPage);
                 wlbAdvancedSettingsPage.PoolConfiguration = _poolConfiguration;
