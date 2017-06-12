@@ -134,7 +134,7 @@ node("${params.BUILD_ON_NODE}") {
         returnStatus: true,
         script: """git ls-remote --heads ${BRANDING_REMOTE} | grep ${params.XC_BRANCH}"""
       )
-      String branchToCloneOnBranding = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'master'
+      String branchToCloneOnBranding = (branchExistsOnBranding == 0) ?  params.XC_BRANCH : 'release/falcon/lcm'
 
       bat """git clone -b ${branchToCloneOnBranding} ${BRANDING_REMOTE} ${env.WORKSPACE}\\branding.git"""
 	  
@@ -147,7 +147,7 @@ node("${params.BUILD_ON_NODE}") {
           returnStatus: true,
           script: """git ls-remote --heads ${BRAND_REMOTE} | grep ${params.XC_BRANCH}"""
         )
-        String branchToClone = (branchExistsOnBrand == 0) ?  params.XC_BRANCH : 'master'
+        String branchToClone = (branchExistsOnBrand == 0) ?  params.XC_BRANCH : 'release/falcon/lcm'
 
         bat """
             git clone -b ${branchToClone} ${BRAND_REMOTE} ${env.WORKSPACE}\\xenadmin-branding.git
