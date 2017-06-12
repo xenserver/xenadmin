@@ -23578,6 +23578,35 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN", resourceCulture);
             }
         }
+
+         /// <summary>
+        ///   Looks up a localized string similar to Asianux.
+        /// </summary>
+
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX", resourceCulture);
+            }
+        }        
+                
+        /// <summary>
+        ///   Looks up a localized string similar to YinheKylin.
+        /// </summary>
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turbo.
+        /// </summary>
+        
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_TURBO {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_TURBO", resourceCulture);
+            }
+        }        
         
         /// <summary>
         ///   Looks up a localized string similar to Ubuntu.
@@ -25310,6 +25339,15 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_TEMPLATEPAGE_REDHAT {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_REDHAT", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Linx.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_LINX {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_LINX", resourceCulture);
             }
         }
         

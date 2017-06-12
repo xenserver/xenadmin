@@ -1006,7 +1006,7 @@ namespace XenAPI
         /// Sort in the following order:
         /// 1) User Templates
         /// 2) Windows VMs
-        /// 3) Other VMs (e.g. Linux)
+        /// 3) Other VMs (e.g. Linux . Names in alphabetical order)
         /// 4) Citrix VMs (e.g. XenApp templates)
         /// 5) Misc VMs
         /// 6) Regular snapshots
@@ -1018,21 +1018,25 @@ namespace XenAPI
             NoTemplate = 0,//it's not a template
             Custom = 1,
             Windows = 2,
-            Centos = 3,
-            CoreOS = 4,
-            Debian = 5,
-            NeoKylin = 6,
-            Oracle = 7,
-            RedHat = 8,
-            SciLinux = 9,
-            Suse = 10,
-            Ubuntu = 11,
-            Citrix = 12,
-            Solaris = 13,
-            Misc = 14,
-            Snapshot = 15,
-            SnapshotFromVmpp = 16,
-            Count = 17  //bump this if values are added
+            Asianux  = 3,
+            Centos = 4,
+            CoreOS = 5,
+            Debian = 6,
+            Linx = 7,
+            NeoKylin = 8,
+            Oracle = 9,
+            RedHat = 10,
+            SciLinux = 11,
+            Suse = 12,
+            Turbo = 13,
+            Ubuntu = 14,
+            YinheKylin = 15,
+            Citrix = 16,
+            Solaris = 17,
+            Misc = 18,
+            Snapshot = 19,
+            SnapshotFromVmpp = 20,
+            Count = 21  //bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -1062,6 +1066,9 @@ namespace XenAPI
                 if (os.Contains("centos"))
                     return VmTemplateType.Centos;
 
+                if (os.Contains("linx"))
+                    return VmTemplateType.Linx;
+
                 if (os.Contains("red hat"))
                     return VmTemplateType.RedHat;
 
@@ -1080,8 +1087,17 @@ namespace XenAPI
                 if (os.Contains("ubuntu"))
                     return VmTemplateType.Ubuntu;
 
+                if (os.Contains("yinhe"))
+                    return VmTemplateType.YinheKylin;
+
                 if (os.Contains("kylin"))
                     return VmTemplateType.NeoKylin;
+
+                if (os.Contains("asianux"))
+                    return VmTemplateType.Asianux;
+
+                if (os.Contains("turbo"))
+                    return VmTemplateType.Turbo; 
 
                 if (os.Contains("solaris"))
                     return VmTemplateType.Solaris;

@@ -1241,6 +1241,8 @@ namespace XenAdmin.XenSearch
 
                             if (os.Contains("debian"))
                                 return Icons.Debian;
+                            if (os.Contains("linx"))
+                                return Icons.Linx;     
                             if (os.Contains("red"))
                                 return Icons.RHEL;
                             if (os.Contains("cent"))
@@ -1253,8 +1255,14 @@ namespace XenAdmin.XenSearch
                                 return Icons.Ubuntu;
                             if (os.Contains("scientific"))
                                 return Icons.SciLinux;
+                            if (os.Contains("yinhe"))
+                                return Icons.YinheKylin;    
                             if (os.Contains("kylin"))
                                 return Icons.NeoKylin;
+                            if (os.Contains("asianux"))
+                                return Icons.Asianux; 
+                            if (os.Contains("turbo"))
+                                return Icons.Turbo;         
                             if (os.Contains("windows"))
                                 return Icons.Windows;
                             if (os.Contains("coreos"))

@@ -2473,6 +2473,29 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+
+        internal static System.Drawing.Bitmap asianux_16x {
+            get {
+                object obj = ResourceManager.GetObject("asianux_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+
+        internal static System.Drawing.Bitmap turbo_16x {
+            get {
+                object obj = ResourceManager.GetObject("turbo_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+
         internal static System.Drawing.Bitmap notif_alerts_16 {
             get {
                 object obj = ResourceManager.GetObject("notif_alerts_16", resourceCulture);
@@ -2696,6 +2719,27 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap redhat_16x {
             get {
                 object obj = ResourceManager.GetObject("redhat_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap linx_16x {
+            get {
+                object obj = ResourceManager.GetObject("linx_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap yinhekylin_16x {
+            get {
+                object obj = ResourceManager.GetObject("yinhekylin_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
