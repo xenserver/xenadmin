@@ -52,6 +52,12 @@ namespace XenAdmin.TabPages
 
         private IXenObject xenObject;
 
+        private bool newPoolHABox;
+
+        private bool HBInitTimeElapsed;
+
+        private System.Timers.Timer networkHBInitDelay;
+
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
         /// <summary>
         /// The object that the panel is displaying HA info for. Must be set on the event thread.
@@ -90,6 +96,8 @@ namespace XenAdmin.TabPages
             base.Text = Messages.HIGH_AVAILABILITY;
 
             pictureBoxWarningTriangle.Image = SystemIcons.Warning.ToBitmap();
+            newPoolHABox = true;
+            HBInitTimeElapsed = false;
         }
 
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
@@ -301,8 +309,18 @@ namespace XenAdmin.TabPages
         private void generatePoolHABox(Pool pool)
         {
             if (!pool.ha_enabled)
+            {
+                newPoolHABox = true;
+                HBInitTimeElapsed = false;
                 return;
+            }
 
+            if (newPoolHABox)
+            {
+                newPoolHABox = false;
+                SetNetworkHBInitDelay();
+            }
+            
             // 'High Availability' heading
             CustomListRow header = CreateHeader(Messages.HA_CONFIGURATION_TITLE);
             customListPanel.AddRow(header);
@@ -444,27 +462,28 @@ namespace XenAdmin.TabPages
                 l.Padding = new Padding(0, 5, 0, 5);
                 l.Font = BaseTabPage.ItemValueFont;
                 l.AutoSize = true;
-                if (members[i].ha_network_peers.Length == members.Count)
+                l.ForeColor = (members[i].ha_network_peers.Length == members.Count && HBInitTimeElapsed) ? Color.Green : l.ForeColor = BaseTabPage.ItemValueForeColor;
+               
+                if (HBInitTimeElapsed)
                 {
-                    l.ForeColor = Color.Green;
-                }
+                    if (members[i].ha_network_peers.Length == 0)
+                    {
+                        l.Text = Messages.HA_HEARTBEAT_UNHEALTHY;
+                    }
+                    else if (members[i].ha_network_peers.Length == members.Count)
+                    {
+                        l.Text = Messages.HA_HEARTBEAT_HEALTHY;
+                    }
+                    else
+                    {
+                        l.Text = String.Format(Messages.HA_HEARTBEAT_SERVERS, members[i].ha_network_peers.Length, members.Count);
+                    }
+                }                
                 else
                 {
-                    l.ForeColor = BaseTabPage.ItemValueForeColor;
+                    l.Text = Messages.HA_HEARTBEAT_SERVERS_INITIALISING;
                 }
 
-                if (members[i].ha_network_peers.Length == 0)
-                {
-                    l.Text = Messages.HA_HEARTBEAT_UNHEALTHY;
-                }
-                else if (members[i].ha_network_peers.Length == members.Count)
-                {
-                    l.Text = Messages.HA_HEARTBEAT_HEALTHY;
-                }
-                else
-                {
-                    l.Text = string.Format(Messages.HA_HEARTBEAT_SERVERS, members[i].ha_network_peers.Length, members.Count);
-                }
                 tableLatencies.Controls.Add(l);
                 tableLatencies.SetCellPosition(l, new TableLayoutPanelCellPosition(1, i + 1));
                 tableLatencies.SetColumnSpan(l, 2);
@@ -669,6 +688,21 @@ namespace XenAdmin.TabPages
                 // Show wizard to enable HA
                 Program.MainWindow.ShowPerConnectionWizard(pool.Connection, new HAWizard(pool));
             }
+        }
+
+        private void SetNetworkHBInitDelay()
+        {
+            //30 second delay to allow network HB status to initialise  
+            networkHBInitDelay = new System.Timers.Timer(30000);
+            networkHBInitDelay.Elapsed += HBInitialisationTimeElapsed;
+            networkHBInitDelay.AutoReset = false;
+            networkHBInitDelay.Enabled = true;
+        }
+
+        private void HBInitialisationTimeElapsed(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            HBInitTimeElapsed = true;
+            Program.Invoke(Program.MainWindow, Rebuild);
         }
     }
 }
