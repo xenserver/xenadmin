@@ -377,7 +377,7 @@ namespace XenAdmin.Core
             // mimic the test on the server side (xen-api.hg:ocaml/xapi/xapi_pool.ml).
             return
                 slave.hg_id != master.hg_id ||
-                slave.BuildNumberRaw != master.BuildNumberRaw ||
+                !Helpers.ElyOrGreater(master) && slave.BuildNumber != master.BuildNumber ||
                 slave.ProductVersion != master.ProductVersion ||
                 slave.ProductBrand != master.ProductBrand;
         }
