@@ -383,7 +383,7 @@ namespace XenAdmin.Core
                 return true;
             
             return
-                !Helpers.FalconOrGreater(master) && slave.BuildNumber != master.BuildNumber ||
+                !Helpers.FalconOrGreater(master) && !Helpers.FalconOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
                 slave.ProductVersion != master.ProductVersion ||
                 slave.ProductBrand != master.ProductBrand;
         }
