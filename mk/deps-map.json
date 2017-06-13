@@ -21,7 +21,27 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/dotnet46/*.dll",
+      "pattern": "@REMOTE_DOTNET@/dotnet46/CookComputing.XmlRpcV2.dll",
+      "target": "xenadmin.git/packages/",
+      "flat": "true"
+    },
+    {
+      "pattern": "@REMOTE_DOTNET@/dotnet46/DiscUtils.dll",
+      "target": "xenadmin.git/packages/",
+      "flat": "true"
+    },
+    {
+      "pattern": "@REMOTE_DOTNET@/dotnet46/ICSharpCode.SharpZipLib.dll",
+      "target": "xenadmin.git/packages/",
+      "flat": "true"
+    },
+    {
+      "pattern": "@REMOTE_DOTNET@/dotnet46/Ionic.Zip.dll",
+      "target": "xenadmin.git/packages/",
+      "flat": "true"
+    },
+    {
+      "pattern": "@REMOTE_DOTNET@/dotnet46/log4net.dll",
       "target": "xenadmin.git/packages/",
       "flat": "true"
     },
