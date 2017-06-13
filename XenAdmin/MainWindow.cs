@@ -2553,6 +2553,9 @@ namespace XenAdmin
                     System.Windows.Forms.Help.ShowHelp(helpForm, chm, HelpNavigator.TopicId, topicID);
                 }
             }
+            // record help usage
+            Properties.Settings.Default.HelpLastUsed = DateTime.UtcNow.ToString("u");
+            Settings.TrySaveSettings();
         }
 
         public void MainWindow_HelpRequested(object sender, HelpEventArgs hlpevent)
