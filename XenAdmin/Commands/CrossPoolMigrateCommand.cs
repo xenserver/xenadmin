@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
                 var cantExecuteReason = CantExecuteReason;
                 return string.IsNullOrEmpty(cantExecuteReason)
                     ? preSelectedHost.Name.EscapeAmpersands()
-                    : string.Format(Messages.MAINWINDOW_CONTEXT_REASON, preSelectedHost.Name.EscapeAmpersands(), cantExecuteReason.TrimEnd('\n', '\r'));
+                    : string.Format(Messages.MAINWINDOW_CONTEXT_REASON, preSelectedHost.Name.EscapeAmpersands(), cantExecuteReason);
             }
         }
 
