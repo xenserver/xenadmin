@@ -62,9 +62,6 @@
     <Compile Include="..\XenModel\Messages.Designer.cs">
       <Link>Messages.Designer.cs</Link>
     </Compile>
-    <Compile Include="..\XenModel\Utils\Util.cs">
-      <Link>Util.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs">
       <SubType>Code</SubType>
