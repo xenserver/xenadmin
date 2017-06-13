@@ -7161,6 +7161,24 @@ SCSI ID: {2}
   <data name="MAC_INVALID" xml:space="preserve">
     <value>MAC 地址无效。</value>
   </data>
+  <data name="MAIL_LANGUAGE_CHINESE_CODE" xml:space="preserve">
+    <value>zh-CN</value>
+  </data>
+  <data name="MAIL_LANGUAGE_CHINESE_NAME" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="MAIL_LANGUAGE_ENGLISH_CODE" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+  <data name="MAIL_LANGUAGE_ENGLISH_NAME" xml:space="preserve">
+    <value>英语(美国)</value>
+  </data>
+  <data name="MAIL_LANGUAGE_JAPANESE_CODE" xml:space="preserve">
+    <value>ja-JP</value>
+  </data>
+  <data name="MAIL_LANGUAGE_JAPANESE_NAME" xml:space="preserve">
+    <value>日语(日本)</value>
+  </data>
   <data name="MAINTENANCE_MODE" xml:space="preserve">
     <value>维护模式</value>
   </data>

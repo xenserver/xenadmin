@@ -7056,6 +7056,24 @@ Size: {3}</value>
   <data name="MAC_INVALID" xml:space="preserve">
     <value>Invalid MAC address.</value>
   </data>
+  <data name="MAIL_LANGUAGE_CHINESE_CODE" xml:space="preserve">
+    <value>zh-CN</value>
+  </data>
+  <data name="MAIL_LANGUAGE_CHINESE_NAME" xml:space="preserve">
+    <value>Chinese (Simplified)</value>
+  </data>
+  <data name="MAIL_LANGUAGE_ENGLISH_CODE" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+  <data name="MAIL_LANGUAGE_ENGLISH_NAME" xml:space="preserve">
+    <value>English (United States)</value>
+  </data>
+  <data name="MAIL_LANGUAGE_JAPANESE_CODE" xml:space="preserve">
+    <value>ja-JP</value>
+  </data>
+  <data name="MAIL_LANGUAGE_JAPANESE_NAME" xml:space="preserve">
+    <value>Japanese (Japan)</value>
+  </data>
   <data name="MAINTENANCE_MODE" xml:space="preserve">
     <value>Maintenance Mode</value>
   </data>

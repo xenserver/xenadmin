@@ -7167,6 +7167,24 @@ SCSI ID: {2}
   <data name="MAC_INVALID" xml:space="preserve">
     <value>無効な MAC アドレスです。</value>
   </data>
+  <data name="MAIL_LANGUAGE_CHINESE_CODE" xml:space="preserve">
+    <value>zh-CN</value>
+  </data>
+  <data name="MAIL_LANGUAGE_CHINESE_NAME" xml:space="preserve">
+    <value>中国語 (簡体字)</value>
+  </data>
+  <data name="MAIL_LANGUAGE_ENGLISH_CODE" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+  <data name="MAIL_LANGUAGE_ENGLISH_NAME" xml:space="preserve">
+    <value>英語 (米国)</value>
+  </data>
+  <data name="MAIL_LANGUAGE_JAPANESE_CODE" xml:space="preserve">
+    <value>ja-JP</value>
+  </data>
+  <data name="MAIL_LANGUAGE_JAPANESE_NAME" xml:space="preserve">
+    <value>日本語 (日本)</value>
+  </data>
   <data name="MAINTENANCE_MODE" xml:space="preserve">
     <value>保守モード</value>
   </data>

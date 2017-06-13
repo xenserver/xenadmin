@@ -81,6 +81,7 @@ BRANDING_UPDATE=xsupdate
 BRANDING_BACKUP=xbk
 BRANDING_SERVER=${BRANDING_PRODUCT_BRAND}
 BRANDING_BRAND_CONSOLE=$(cat ${TOPLEVEL_BRANDING} | grep -F "BRAND_CONSOLE := " | sed -e 's/BRAND_CONSOLE := //g')
+BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT=en-US
 
 # Check for the micro version override and use it if present otherwise use the one from branding
 if [ -n "${PRODUCT_MICRO_VERSION_OVERRIDE+x}" ]; then

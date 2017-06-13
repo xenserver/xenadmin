@@ -20250,6 +20250,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to zh-CN.
+        /// </summary>
+        public static string MAIL_LANGUAGE_CHINESE_CODE {
+            get {
+                return ResourceManager.GetString("MAIL_LANGUAGE_CHINESE_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese (Simplified).
+        /// </summary>
+        public static string MAIL_LANGUAGE_CHINESE_NAME {
+            get {
+                return ResourceManager.GetString("MAIL_LANGUAGE_CHINESE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to en-US.
+        /// </summary>
+        public static string MAIL_LANGUAGE_ENGLISH_CODE {
+            get {
+                return ResourceManager.GetString("MAIL_LANGUAGE_ENGLISH_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English (United States).
+        /// </summary>
+        public static string MAIL_LANGUAGE_ENGLISH_NAME {
+            get {
+                return ResourceManager.GetString("MAIL_LANGUAGE_ENGLISH_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ja-JP.
+        /// </summary>
+        public static string MAIL_LANGUAGE_JAPANESE_CODE {
+            get {
+                return ResourceManager.GetString("MAIL_LANGUAGE_JAPANESE_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Japanese (Japan).
+        /// </summary>
+        public static string MAIL_LANGUAGE_JAPANESE_NAME {
+            get {
+                return ResourceManager.GetString("MAIL_LANGUAGE_JAPANESE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maintenance Mode.
         /// </summary>
         public static string MAINTENANCE_MODE {
