@@ -63,7 +63,16 @@ namespace XenAdmin.Commands
 
         public override string MenuText
         {
-            get { return preSelectedHost == null ? Messages.HOST_MENU_CPM_TEXT : preSelectedHost.Name.EscapeAmpersands(); }
+            get
+            {
+                if (preSelectedHost == null)
+                    return Messages.HOST_MENU_CPM_TEXT;
+
+                var cantExecuteReason = CantExecuteReason;
+                return string.IsNullOrEmpty(cantExecuteReason)
+                    ? preSelectedHost.Name.EscapeAmpersands()
+                    : string.Format(Messages.MAINWINDOW_CONTEXT_REASON, preSelectedHost.Name.EscapeAmpersands(), cantExecuteReason.TrimEnd('\n', '\r'));
+            }
         }
 
         public override string ContextMenuText { get { return Messages.HOST_MENU_CPM_TEXT; } }
@@ -100,18 +109,31 @@ namespace XenAdmin.Commands
                 dlg.ShowDialog(parent);
         }
 
+        private readonly Dictionary<VM, string> cantExecuteReasons = new Dictionary<VM, string>();
+
         protected override bool CanExecute(VM vm)
         {
-            return CanExecute(vm, preSelectedHost);
+            if (preSelectedHost == null)
+                return CanExecute(vm, preSelectedHost);
+
+            var filter = new CrossPoolMigrateCanMigrateFilter(preSelectedHost, new List<VM> {vm}, WizardMode.Migrate);
+            var canExecute = CanExecute(vm, preSelectedHost, filter);
+            if (string.IsNullOrEmpty(filter.Reason))
+                cantExecuteReasons.Remove(vm);
+            else
+                cantExecuteReasons[vm] = filter.Reason;
+            return canExecute;
         }
 
-        public static bool CanExecute(VM vm, Host preselectedHost)
+        public static bool CanExecute(VM vm, Host preselectedHost, CrossPoolMigrateCanMigrateFilter filter = null)
         {
             bool failureFound = false;
 
             if (preselectedHost != null)
             {
-                failureFound = new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm}, WizardMode.Migrate).FailureFound;
+                failureFound = filter == null 
+                    ? new CrossPoolMigrateCanMigrateFilter(preselectedHost, new List<VM> {vm}, WizardMode.Migrate).FailureFound
+                    : filter.FailureFound;
             }
 
             return !failureFound &&
@@ -120,6 +142,21 @@ namespace XenAdmin.Commands
                    !Helpers.CrossPoolMigrationRestrictedWithWlb(vm.Connection) &&
                    vm.SRs.ToList().All(sr=> sr != null && !sr.HBALunPerVDI) &&
                    (preselectedHost == null || vm.Connection.Resolve(vm.resident_on) != preselectedHost); //Not the same as the pre-selected host
+        }
+
+        public string CantExecuteReason
+        {
+            get
+            {
+                if (cantExecuteReasons.Count == GetSelection().Count) // none can execute
+                {
+                    var uniqueReasons = cantExecuteReasons.Values.Distinct().ToList();
+
+                    if (uniqueReasons.Count == 1)
+                        return uniqueReasons[0];
+                }
+                return null;
+            }
         }
     }
 }
