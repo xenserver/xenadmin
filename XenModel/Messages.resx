@@ -5761,7 +5761,7 @@ not currently live:
     <value>{0} out of {1} servers</value>
   </data>
   <data name="HA_HEARTBEAT_SERVERS_INITIALISING" xml:space="preserve">
-    <value>Initialising...</value>
+    <value>Initializing...</value>
   </data>
   <data name="HA_HEARTBEAT_SR" xml:space="preserve">
     <value>HA Heartbeat SR</value>
