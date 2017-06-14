@@ -55,11 +55,8 @@ namespace XenAdmin.ConsoleView
         /// </summary>
         private MsRdpClient9 rdpClient9 = null;
 
-        private MsRdpClient6 rdpClient6 = null;
-
         /// <summary>
-        /// This will be equal to rdpClient9, if the DLL that we've got is version 8, otherwise equal to
-        /// rdpClient6.
+        /// This will be equal to rdpClient9
         /// </summary>
         private AxHost rdpControl = null;
 
@@ -78,18 +75,18 @@ namespace XenAdmin.ConsoleView
                 rdpClient9.OnRemoteDesktopSizeChange += rdpClient_OnRemoteDesktopSizeChange;
 
                 // CA-96135: Try adding rdpControl to parent.Controls list; this will throw exception when
-                // MsRdpClient8 control cannot be created (there is no appropriate version of dll present)
+                // MsRdpClient9 control cannot be created (there is no appropriate version of dll present)
                 parent.Controls.Add(rdpControl);
                 allowDisplayUpdate = true;
             }
-            catch
+            catch (Exception ex)
             {
                 if (parent.Controls.Contains(rdpControl))
                     parent.Controls.Remove(rdpControl);
+                rdpControl.Dispose();
+                rdpControl = null;
                 rdpClient9 = null;
-                rdpControl = rdpClient6 = new MsRdpClient6();
-                RDPConfigure(size);
-                parent.Controls.Add(rdpControl);
+                Log.Error("Adding rdpControl to parent.Controls list caused an exception.", ex);
             }
             rdpControl.Resize += resizeHandler;
         }
@@ -97,7 +94,7 @@ namespace XenAdmin.ConsoleView
         private void RDPConfigure(Size currentConsoleSize)
         {
             rdpControl.BeginInit();
-            rdpLocationOffset = new Point(3, 3); //small offset to accomodate focus rectangle
+            rdpLocationOffset = new Point(3, 3); //small offset to accomodate focus border
             rdpControl.Dock = DockStyle.None;
             rdpControl.Anchor = AnchorStyles.None;
             rdpControl.Size = currentConsoleSize;
@@ -125,37 +122,22 @@ namespace XenAdmin.ConsoleView
             if (rdpControl == null)
                 return;
 
-            if (rdpClient9 == null)
-                rdpClient6.OnDisconnected += rdpClient_OnDisconnected;
-            else
-                rdpClient9.OnDisconnected += rdpClient_OnDisconnected;
+            rdpClient9.OnDisconnected += rdpClient_OnDisconnected;
         }
 
         private void RDPSetSettings()
         {
             if (rdpControl == null)
                 return;
-
-            if (rdpClient9 == null)
-            {
-                rdpClient6.SecuredSettings2.KeyboardHookMode = Properties.Settings.Default.WindowsShortcuts ? 1 : 0;
-                rdpClient6.SecuredSettings2.AudioRedirectionMode = Properties.Settings.Default.ReceiveSoundFromRDP ? 0 : 1;
-                rdpClient6.AdvancedSettings3.DisableRdpdr = Properties.Settings.Default.ClipboardAndPrinterRedirection ? 0 : 1;
-                rdpClient6.AdvancedSettings7.ConnectToAdministerServer = Properties.Settings.Default.ConnectToServerConsole;
-                //CA-103910 - enable NLA 
-                rdpClient6.AdvancedSettings5.AuthenticationLevel = 2;
-                rdpClient6.AdvancedSettings7.EnableCredSspSupport = true;
-            }
-            else
-            {
-                rdpClient9.SecuredSettings2.KeyboardHookMode = Properties.Settings.Default.WindowsShortcuts ? 1 : 0;
-                rdpClient9.SecuredSettings2.AudioRedirectionMode = Properties.Settings.Default.ReceiveSoundFromRDP ? 0 : 1;
-                rdpClient9.AdvancedSettings3.DisableRdpdr = Properties.Settings.Default.ClipboardAndPrinterRedirection ? 0 : 1;
-                rdpClient9.AdvancedSettings7.ConnectToAdministerServer = Properties.Settings.Default.ConnectToServerConsole;
-                //CA-103910 - enable NLA
-                rdpClient9.AdvancedSettings5.AuthenticationLevel = 2;
-                rdpClient9.AdvancedSettings7.EnableCredSspSupport = true;
-            }
+            
+            rdpClient9.SecuredSettings2.KeyboardHookMode = Properties.Settings.Default.WindowsShortcuts ? 1 : 0;
+            rdpClient9.SecuredSettings2.AudioRedirectionMode = Properties.Settings.Default.ReceiveSoundFromRDP ? 0 : 1;
+            rdpClient9.AdvancedSettings3.DisableRdpdr = Properties.Settings.Default.ClipboardAndPrinterRedirection ? 0 : 1;
+            rdpClient9.AdvancedSettings7.ConnectToAdministerServer = Properties.Settings.Default.ConnectToServerConsole;
+           
+            //CA-103910 - enable NLA
+            rdpClient9.AdvancedSettings5.AuthenticationLevel = 2;
+            rdpClient9.AdvancedSettings7.EnableCredSspSupport = true;
         }
 
         public void RDPConnect(string rdpIP, int w, int h)
@@ -163,26 +145,12 @@ namespace XenAdmin.ConsoleView
             if (rdpControl == null)
                 return;
 
-            Log.DebugFormat("Connecting RDPClient{0} using server '{1}', width '{2}' and height '{3}'",
-                rdpClient9 == null ? "6" : "9",
-                rdpIP,
-                w,
-                h);
+            Log.DebugFormat("Connecting RDPClient9 using server '{1}', width '{2}' and height '{3}'", rdpIP, w, h);
 
-            if (rdpClient9 == null)
-            {
-                rdpClient6.Server = rdpIP;
-                rdpClient6.DesktopWidth = w;
-                rdpClient6.DesktopHeight = h;
-                rdpClient6.Connect();
-            }
-            else
-            {
-                rdpClient9.Server = rdpIP;
-                rdpClient9.DesktopWidth = w;
-                rdpClient9.DesktopHeight = h;
-                rdpClient9.Connect();
-            }
+            rdpClient9.Server = rdpIP;
+            rdpClient9.DesktopWidth = w;
+            rdpClient9.DesktopHeight = h;
+            rdpClient9.Connect();
         }
 
         public void UpdateDisplay(int width, int height, Point locationOffset)
@@ -190,7 +158,7 @@ namespace XenAdmin.ConsoleView
             if (rdpControl == null)
                 return;
 
-            if (Connected && rdpClient9 != null && allowDisplayUpdate)
+            if (Connected && allowDisplayUpdate)
             {
                 try
                 {
@@ -211,17 +179,17 @@ namespace XenAdmin.ConsoleView
 
         private bool Connected
         {
-            get { return rdpControl == null ? false : (rdpClient9 == null ? rdpClient6.Connected == 1 : rdpClient9.Connected == 1); }
+            get { return rdpControl == null ? false : rdpClient9.Connected == 1; }
         }
 
         private int DesktopHeight
         {
-            get { return rdpControl == null ? 0 : (rdpClient9 == null ? rdpClient6.DesktopHeight : rdpClient9.DesktopHeight); }
+            get { return rdpControl == null ? 0 : rdpClient9.DesktopHeight; }
         }
 
         private int DesktopWidth
         {
-            get { return rdpControl == null ? 0 : (rdpClient9 == null ? rdpClient6.DesktopWidth : rdpClient9.DesktopWidth); }
+            get { return rdpControl == null ? 0 : rdpClient9.DesktopWidth; }
         }
 
         private static readonly List<System.Windows.Forms.Timer> RdpCleanupTimers = new List<System.Windows.Forms.Timer>();
@@ -269,10 +237,9 @@ namespace XenAdmin.ConsoleView
             {
                 if (Connected)
                 {
-                    if (rdpClient9 == null)
-                        rdpClient6.Disconnect();
-                    else
-                        rdpClient9.Disconnect();
+                    if (rdpControl == null)
+                        return;
+                    rdpClient9.Disconnect();
                 }  
             }
             catch(InvalidComObjectException ex)
