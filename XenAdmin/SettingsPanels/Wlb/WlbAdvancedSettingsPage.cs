@@ -103,105 +103,46 @@ namespace XenAdmin.SettingsPanels
         {
             _loading = true;
             
-            // Set up the Grooming numeric up/down
-            if (!_poolConfiguration.IsTampaOrLater)
+            // Set up the Relocation Interval numeric up/down
+            numericUpDownRelocationInterval.Value = (decimal)_poolConfiguration.RecentMoveMinutes;
+
+            // Disable it for alpha 3
+            // Set up the Use Reporting Services checkbox and SMTP Server textbox
+            // checkBoxUseReportingServices.Checked = _poolConfiguration.ReportingUseRSServer;
+
+            //Set up the Optimization Severity combobox
+            comboBoxOptimizationSeverity.DataSource = new BindingSource(BuildSeverity(), null);
+            comboBoxOptimizationSeverity.ValueMember = "key";
+            comboBoxOptimizationSeverity.DisplayMember = "value";
+            comboBoxOptimizationSeverity.SelectedValue = _poolConfiguration.AutoBalanceSeverity;
+
+            //Set up the Autobalance Aggressiveness combobox
+            comboBoxAutoBalanceAggressiveness.DataSource = new BindingSource(BuildAggressiveness(), null);
+            comboBoxAutoBalanceAggressiveness.ValueMember = "key";
+            comboBoxAutoBalanceAggressiveness.DisplayMember = "value";
+            comboBoxAutoBalanceAggressiveness.SelectedValue = _poolConfiguration.AutoBalanceAggressiveness;
+
+            //Set up the Pool Audit Trail Granularity
+            //This only works from Creedence
+            if(_poolConfiguration.IsCreedenceOrLater)
             {
-                if (_poolConfiguration.MetricGroomingPeriod > 0)
-                {
-                    //convert from days to weeks
-                    int periodWeeks = (int)(_poolConfiguration.MetricGroomingPeriod / DAYS_IN_WEEK);
-                    numericUpDownGroomingPeriod.Enabled = true;
-                    numericUpDownGroomingPeriod.Value = (decimal)periodWeeks;
-                }
-                else
-                {
-                    labelGroomingDefault.Hide();
-                    labelGroomingUnits.Hide();
-                    numericUpDownGroomingPeriod.Hide();
-                    labelHistData.Text = Messages.WLB_SQLEXPRESS_GROOMING_BLURB;
-                }
-            }
-
-            if (_poolConfiguration.IsMROrLater)
-            {
-                // Set up the Relocation Interval numeric up/down
-                numericUpDownRelocationInterval.Value = (decimal)_poolConfiguration.RecentMoveMinutes;
-
-                // Disable it for alpha 3
-                // Set up the Use Reporting Services checkbox and SMTP Server textbox
-                // checkBoxUseReportingServices.Checked = _poolConfiguration.ReportingUseRSServer;
-
-                if (!_poolConfiguration.IsTampaOrLater)
-                {
-                    string smtpServer = _poolConfiguration.ReportingSMTPServer;
-                    // Disable it for now, will enable after adding the port to WLB DB
-                    // string smtpServerPort = String.Empty;
-                    if (string.IsNullOrEmpty(smtpServer))
-                    {
-                        //We don't have an smtp server defined, so try to get the XS Alerts smtp server
-                        Dictionary<String, String> other_config = null;
-                        try
-                        {
-                            other_config = Helpers.GetOtherConfig(_pool);
-                        }
-                        catch { }
-                        if (null == other_config
-                            || !other_config.TryGetValue(SMTP_MAILHUB_KEY_NAME, out smtpServer)
-                            || string.IsNullOrEmpty(smtpServer))
-                        {
-                            //okay, that didnt work, so let's use the wlb server name (without the port)
-                            smtpServer = _pool.wlb_url.Split(':')[0];
-                            //BL: Disable it for now, will enable it after adding the port to WLB side
-                            //smtpServerPort = _pool.wlb_url.Split(':')[1];
-                        }
-                    }
-                    textBoxSMTPServer.Text = smtpServer;
-                    //BL: Disable it for now, will enable it after adding the port to WLB side
-                    //TextBoxSMTPServerPort.Text = smtpServerPort;
-                }
-                //Set up the Optimization Severity combobox
-                comboBoxOptimizationSeverity.DataSource = new BindingSource(BuildSeverity(), null);
-                comboBoxOptimizationSeverity.ValueMember = "key";
-                comboBoxOptimizationSeverity.DisplayMember = "value";
-                comboBoxOptimizationSeverity.SelectedValue = _poolConfiguration.AutoBalanceSeverity;
-
-                //Set up the Autobalance Aggressiveness combobox
-                comboBoxAutoBalanceAggressiveness.DataSource = new BindingSource(BuildAggressiveness(), null);
-                comboBoxAutoBalanceAggressiveness.ValueMember = "key";
-                comboBoxAutoBalanceAggressiveness.DisplayMember = "value";
-                comboBoxAutoBalanceAggressiveness.SelectedValue = _poolConfiguration.AutoBalanceAggressiveness;
-
-                //Set up the Pool Audit Trail Granularity
-                //This only works from Creedence
-                if(_poolConfiguration.IsCreedenceOrLater)
-                {
-                    comboBoxPoolAuditTrailLevel.DataSource = new BindingSource(PoolAuditGranularity(), null);
-                    comboBoxPoolAuditTrailLevel.ValueMember = "key";
-                    comboBoxPoolAuditTrailLevel.DisplayMember = "value";
-                    comboBoxPoolAuditTrailLevel.SelectedValue = _poolConfiguration.PoolAuditGranularity;
-                }
-                else
-                {
-                    HidePoolAuditTrailGranularitySection();
-                }
-
-                numericUpDownPollInterval.Value = (decimal)_poolConfiguration.AutoBalancePollIntervals;
-
-                numericUpDownRelocationInterval.Value = (decimal)_poolConfiguration.RecentMoveMinutes;
+                comboBoxPoolAuditTrailLevel.DataSource = new BindingSource(PoolAuditGranularity(), null);
+                comboBoxPoolAuditTrailLevel.ValueMember = "key";
+                comboBoxPoolAuditTrailLevel.DisplayMember = "value";
+                comboBoxPoolAuditTrailLevel.SelectedValue = _poolConfiguration.PoolAuditGranularity;
             }
             else
             {
-                // For versions before MNR, there are no report subscriptions and 
-                HideMigrationIntervalSection();
-                HideReportSubscriptionSection();
+                HidePoolAuditTrailGranularitySection();
             }
 
+            numericUpDownPollInterval.Value = (decimal)_poolConfiguration.AutoBalancePollIntervals;
+
+            numericUpDownRelocationInterval.Value = (decimal)_poolConfiguration.RecentMoveMinutes;
+
             // For Boston, we do not expose grooming, and no longer support report subscriptions
-            if (_poolConfiguration.IsBostonOrLater)
-            {
-                HideHistoricalDataSection();
-                HideReportSubscriptionSection();
-            }
+            HideHistoricalDataSection();
+            HideReportSubscriptionSection();
 
             _loading = false;
         }
@@ -354,30 +295,16 @@ namespace XenAdmin.SettingsPanels
 
         public AsyncAction SaveSettings()
         {
+            _poolConfiguration.AutoBalanceSeverity = (WlbPoolAutoBalanceSeverity)comboBoxOptimizationSeverity.SelectedValue;
+            _poolConfiguration.AutoBalanceAggressiveness = (WlbPoolAutoBalanceAggressiveness)comboBoxAutoBalanceAggressiveness.SelectedValue;
+            _poolConfiguration.AutoBalancePollIntervals = (double)numericUpDownPollInterval.Value;
 
-            if (_poolConfiguration.IsMROrLater)
+            if(_poolConfiguration.IsCreedenceOrLater)
             {
-                _poolConfiguration.AutoBalanceSeverity = (WlbPoolAutoBalanceSeverity)comboBoxOptimizationSeverity.SelectedValue;
-                _poolConfiguration.AutoBalanceAggressiveness = (WlbPoolAutoBalanceAggressiveness)comboBoxAutoBalanceAggressiveness.SelectedValue;
-                _poolConfiguration.AutoBalancePollIntervals = (double)numericUpDownPollInterval.Value;
-                if(_poolConfiguration.IsCreedenceOrLater)
-                {
-                    _poolConfiguration.PoolAuditGranularity = (WlbAuditTrailLogGranularity)comboBoxPoolAuditTrailLevel.SelectedValue;
-                }
+                _poolConfiguration.PoolAuditGranularity = (WlbAuditTrailLogGranularity)comboBoxPoolAuditTrailLevel.SelectedValue;
+            }
                 
-                if (!_poolConfiguration.IsTampaOrLater)
-                {
-                    _poolConfiguration.ReportingSMTPServer = textBoxSMTPServer.Text;
-                }
-                _poolConfiguration.RecentMoveMinutes = (double)numericUpDownRelocationInterval.Value;
-            }
-
-            if (!_poolConfiguration.IsTampaOrLater)
-            {
-                _poolConfiguration.MetricGroomingPeriod = (double)numericUpDownGroomingPeriod.Value * DAYS_IN_WEEK;
-            }
-            // Disable it for alpha 3
-            //_poolConfiguration.ReportingUseRSServer = checkBoxUseReportingServices.Checked;
+            _poolConfiguration.RecentMoveMinutes = (double)numericUpDownRelocationInterval.Value;
             
             return null;
         }
@@ -391,7 +318,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                return (_poolConfiguration.IsBostonOrLater || IsValidSmtpAddress());
+                return (IsValidSmtpAddress());
                 //BL: Disable it for now, will enable it after adding the port to WLB side
                 //return IsValidSmtpAddress() && PerfmonAlertOptionsPage.IsValidPort(TextBoxSMTPServerPort.Text);
             }

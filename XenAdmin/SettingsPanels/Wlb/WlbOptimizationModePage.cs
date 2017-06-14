@@ -99,21 +99,12 @@ namespace XenAdmin.SettingsPanels
         {
             _loading = true;
 
-            if (_poolConfiguration.IsMROrLater)
-            {
-                // Pass the pool connection
-                this.wlbOptModeScheduler1.Pool = _pool;
-                this.wlbOptModeScheduler1.ScheduledTasks = _poolConfiguration.ScheduledTasks;
-                this.wlbOptModeScheduler1.BaseMode = _poolConfiguration.PerformanceMode;
+            // Pass the pool connection
+            this.wlbOptModeScheduler1.Pool = _pool;
+            this.wlbOptModeScheduler1.ScheduledTasks = _poolConfiguration.ScheduledTasks;
+            this.wlbOptModeScheduler1.BaseMode = _poolConfiguration.PerformanceMode;
 
-                radioButtonAutomatedMode.Checked = _poolConfiguration.AutomateOptimizationMode;
-            }
-            else
-            {
-                decentGroupBoxAutomatedMode.Enabled = false;
-                radioButtonAutomatedMode.Enabled = false;
-            }
-
+            radioButtonAutomatedMode.Checked = _poolConfiguration.AutomateOptimizationMode;
             radioButtonMaxDensity.Checked = (_poolConfiguration.PerformanceMode == WlbPoolPerformanceMode.MaximizeDensity);
 
             _loading = false;
@@ -138,10 +129,7 @@ namespace XenAdmin.SettingsPanels
 
             // CA-37454: Adding a redraw of the scheduled tasks here so they don;t disappear when 
             // mode is switched to Fixed.
-            if (_poolConfiguration.IsMROrLater)
-            {
-                this.wlbOptModeScheduler1.RefreshScheduleList();
-            }
+            this.wlbOptModeScheduler1.RefreshScheduleList();
         }
 
         #region IEditPage Members
@@ -150,22 +138,19 @@ namespace XenAdmin.SettingsPanels
         {
             // We have to do this because of the way we delete existing scheduled tasks
             bool hasValidTasks = false;
-            if (this._poolConfiguration.IsMROrLater)
+            foreach (string key in wlbOptModeScheduler1.ScheduledTasks.TaskList.Keys)
             {
-                foreach (string key in wlbOptModeScheduler1.ScheduledTasks.TaskList.Keys)
+                if (!wlbOptModeScheduler1.ScheduledTasks.TaskList[key].DeleteTask
+                    && wlbOptModeScheduler1.ScheduledTasks.TaskList[key].Enabled)
                 {
-                    if (!wlbOptModeScheduler1.ScheduledTasks.TaskList[key].DeleteTask
-                        && wlbOptModeScheduler1.ScheduledTasks.TaskList[key].Enabled)
-                    {
-                        hasValidTasks = true;
-                    }
+                    hasValidTasks = true;
                 }
-                // Save all the tasks in the control, as some may have Delete flags set
-                _poolConfiguration.ScheduledTasks.TaskList.Clear();
-                foreach (string key in wlbOptModeScheduler1.ScheduledTasks.TaskList.Keys)
-                {
-                    _poolConfiguration.ScheduledTasks.TaskList.Add(key, wlbOptModeScheduler1.ScheduledTasks.TaskList[key]);
-                }
+            }
+            // Save all the tasks in the control, as some may have Delete flags set
+            _poolConfiguration.ScheduledTasks.TaskList.Clear();
+            foreach (string key in wlbOptModeScheduler1.ScheduledTasks.TaskList.Keys)
+            {
+                _poolConfiguration.ScheduledTasks.TaskList.Add(key, wlbOptModeScheduler1.ScheduledTasks.TaskList[key]);
             }
             
             // Set the Automate flag if the radio button is checked and there are scheduled tasks

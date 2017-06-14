@@ -414,20 +414,9 @@ namespace XenAdmin
             if (action.Succeeded)
             {
                 poolConfiguration = new WlbPoolConfiguration(action.WlbConfiguration);
-                _isMROrLater = poolConfiguration.IsMROrLater;
-                _isBostonOrLater = poolConfiguration.IsBostonOrLater;
-                _isCreedenceOrLater = poolConfiguration.IsCreedenceOrLater;
 
-                if (_isMROrLater && !_isBostonOrLater)
-                {
-                    _subscriptionCollection = new WlbReportSubscriptionCollection(action.WlbConfiguration);
-                }
-
-                if (_isBostonOrLater)
-                {
-                    this.splitContainerLeftPane.Panel2Collapsed = true;
-                    this.wlbReportView1.btnSubscribe.Visible=false;
-                }
+                this.splitContainerLeftPane.Panel2Collapsed = true;
+                this.wlbReportView1.btnSubscribe.Visible=false;
             }
             else
             {
