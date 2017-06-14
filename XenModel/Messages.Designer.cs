@@ -33681,7 +33681,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it lacks the ability to suspend..
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it cannot be suspended..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON {
             get {

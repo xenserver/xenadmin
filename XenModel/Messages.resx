@@ -11628,7 +11628,7 @@ Check your settings and try again.</value>
     <value>Cannot migrate VM '{0}' due to license restrictions.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
-    <value>Cannot migrate VM '{0}', because it lacks the ability to suspend.</value>
+    <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}' for an unknown reason. See application logs for more details.</value>
