@@ -66,8 +66,6 @@ namespace XenAdmin
         private WlbReportSubscriptionCollection _subscriptionCollection;
         private string _reportFile;
         private bool _runReport;
-        private bool _isMROrLater; // this can be used throughout the page to control feature availability
-        private bool _isBostonOrLater;
         private bool _isCreedenceOrLater;
 
         private List<string> _midnightRideReports = new List<string>(new [] 
@@ -151,15 +149,7 @@ namespace XenAdmin
                 // retrieve subscription
                 SetSubscriptionCollection();
 
-                if (_isMROrLater && _subscriptionCollection != null && !_isBostonOrLater)
-                {
-                    this.wlbReportView1.btnSubscribe.Visible = true;
-                }
-                else
-                {
-                    this.wlbReportView1.btnSubscribe.Visible = false;
-                }
-
+                this.wlbReportView1.btnSubscribe.Visible = false;
                 this.wlbReportView1.btnLaterReport.Visible = false;
                 this.wlbReportView1.IsCreedenceOrLater = _isCreedenceOrLater;
                 PopulateTreeView();
@@ -200,7 +190,7 @@ namespace XenAdmin
 
             treeViewSubscriptionList.ImageList = CreateReportImageList();
 
-            if (_isMROrLater && _subscriptionCollection != null)
+            if (_subscriptionCollection != null)
             {
                 this.lblSubscriptions.Visible = true;
                 this.treeViewSubscriptionList.Visible = true;
@@ -339,7 +329,7 @@ namespace XenAdmin
             treeViewSubscriptionList.Nodes.Clear();
 
             // Add subscription nodes if there is any
-            if (_isMROrLater && _subscriptionCollection.Count > 0)
+            if (_subscriptionCollection.Count > 0)
             {
                 foreach (string key in _subscriptionCollection.Keys)
                 {
@@ -361,7 +351,7 @@ namespace XenAdmin
                     treeViewSubscriptionList.SelectedNode = treeViewSubscriptionList.Nodes[0];
                 }
             }
-            else if (_isMROrLater && (selectedSub != null))
+            else if (selectedSub != null)
             {
                 // No nodes left in the tree so select the current report in the reportviewer tree
                 foreach (TreeNode reportNode in this.treeViewReportList.Nodes)
@@ -453,23 +443,6 @@ namespace XenAdmin
                 // Adds the report node
                 TreeNode currentReportTreeNode = GetReportTreeNode(currentNodes[i]);
                 treeViewReportList.Nodes.Add(currentReportTreeNode);
-
-                // Add in each subscription for the current report
-                if (_isMROrLater && _subscriptionCollection != null && !_isBostonOrLater)
-                {
-                    // Get subscriptions for this report
-                    Dictionary<string, WlbReportSubscription> subscriptionList = _subscriptionCollection.GetReportSubscriptionByReportName(((WlbReportInfo)currentReportTreeNode.Tag).ReportFile);
-
-                    if (subscriptionList.Count > 0)
-                    {
-                        // Add a subscription folder for the current report
-                        TreeNode subscriptionFolderNode = new TreeNode(Messages.WLB_SUBSCRIPTIONS, 2, 2);
-                        currentReportTreeNode.Nodes.Add(subscriptionFolderNode);
-
-                        // Add subscription nodes if this report has subscriptions
-                        AddNewSubscriptionNode(subscriptionFolderNode, subscriptionList, ((WlbReportInfo)currentReportTreeNode.Tag).ReportName, null);
-                    }
-                }
 
                 // Force to highlight the proper report treeNode if WLBReportWindow is called from WLB tab
                 if (!String.IsNullOrEmpty(_reportFile))
