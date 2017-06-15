@@ -415,6 +415,8 @@ namespace XenAdmin
             {
                 poolConfiguration = new WlbPoolConfiguration(action.WlbConfiguration);
 
+                _isCreedenceOrLater = poolConfiguration.IsCreedenceOrLater;
+
                 this.splitContainerLeftPane.Panel2Collapsed = true;
                 this.wlbReportView1.btnSubscribe.Visible=false;
             }
