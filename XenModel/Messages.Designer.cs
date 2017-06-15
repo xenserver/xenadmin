@@ -23322,6 +23322,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Asianux.
+        /// </summary>
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NeoKylin.
         /// </summary>
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN {
@@ -23329,35 +23338,15 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN", resourceCulture);
             }
         }
-
-         /// <summary>
-        ///   Looks up a localized string similar to Asianux.
-        /// </summary>
-
-        public static string NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX {
-            get {
-                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX", resourceCulture);
-            }
-        }        
-                
-        /// <summary>
-        ///   Looks up a localized string similar to YinheKylin.
-        /// </summary>
-        public static string NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN {
-            get {
-                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to Turbo.
         /// </summary>
-        
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_TURBO {
             get {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_TURBO", resourceCulture);
             }
-        }        
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Ubuntu.
@@ -23365,6 +23354,15 @@ namespace XenAdmin {
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU {
             get {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YinheKylin.
+        /// </summary>
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN", resourceCulture);
             }
         }
         
@@ -25013,6 +25011,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linx.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_LINX {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_LINX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Misc.
         /// </summary>
         public static string NEWVMWIZARD_TEMPLATEPAGE_MISC {
@@ -25054,15 +25061,6 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_TEMPLATEPAGE_REDHAT {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_REDHAT", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Linx.
-        /// </summary>
-        public static string NEWVMWIZARD_TEMPLATEPAGE_LINX {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_LINX", resourceCulture);
             }
         }
         
@@ -30991,6 +30989,15 @@ namespace XenAdmin {
         public static string SOLUTION_CHECK_XENSERVER {
             get {
                 return ResourceManager.GetString("SOLUTION_CHECK_XENSERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check the proxy settings and that [XenServer] is configured correctly on &apos;{0}&apos; and try again..
+        /// </summary>
+        public static string SOLUTION_CHECK_XENSERVER_WITH_PROXY {
+            get {
+                return ResourceManager.GetString("SOLUTION_CHECK_XENSERVER_WITH_PROXY", resourceCulture);
             }
         }
         

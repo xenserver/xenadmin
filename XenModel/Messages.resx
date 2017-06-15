@@ -8753,10 +8753,10 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX" xml:space="preserve">
     <value>Asianux</value>
-  </data>  
+  </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_TURBO" xml:space="preserve">
     <value>Turbo</value>
-  </data> 
+  </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
     <value>Linx</value>
   </data>
@@ -13454,5 +13454,8 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
+  </data>
+  <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
+    <value>Check the proxy settings and that [XenServer] is configured correctly on '{0}' and try again.</value>
   </data>
 </root>
