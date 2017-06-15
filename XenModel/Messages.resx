@@ -11541,6 +11541,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}' due to license restrictions.</value>
   </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>
+  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}' for an unknown reason. See application logs for more details.</value>
   </data>
@@ -13448,5 +13451,8 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
   </data>
 </root>
