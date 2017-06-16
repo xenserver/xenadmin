@@ -182,28 +182,14 @@ namespace XenServerHealthCheck
                 statAction.RunExternal(session);
             }
 
+            // output the slave/master info
             string mastersDestination = string.Format("{0}\\{1}-Masters.txt", filepath, timestring);
-            if (File.Exists(mastersDestination))
-                File.Delete(mastersDestination);
-
-            StreamWriter sw = null;
-            try
-            {
-                sw = new StreamWriter(mastersDestination);
-                foreach (string s in mastersInfo)
-                    sw.WriteLine(s);
-
-                sw.Flush();
-            }
-            catch (Exception e)
-            {
-                log.ErrorFormat("Exception while writing masters file: {0}", e);
-            }
-            finally
-            {
-                if (sw != null)
-                    sw.Close();
-            }
+            WriteExtraInfoToFile(mastersInfo, mastersDestination);
+            
+            // output the XenCenter metadata
+            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata();
+            string metadataDestination = string.Format("{0}\\{1}-Telemetry.json", filepath, timestring);
+            WriteExtraInfoToFile(new List<string> {metadata}, metadataDestination);
 
             // Finish the collection of logs with bugtool.
             // Start to zip the files.
@@ -212,5 +198,29 @@ namespace XenServerHealthCheck
             log.InfoFormat("Server Status Report is collected: {0}", outputFile);
         }
 
+        private void WriteExtraInfoToFile(List<string> info, string fileName)
+        {
+            if (File.Exists(fileName))
+                File.Delete(fileName);
+
+            StreamWriter sw = null;
+            try
+            {
+                sw = new StreamWriter(fileName);
+                foreach (string s in info)
+                    sw.WriteLine(s);
+
+                sw.Flush();
+            }
+            catch (Exception e)
+            {
+                log.ErrorFormat("Exception while writing {0} file: {1}", fileName, e);
+            }
+            finally
+            {
+                if (sw != null)
+                    sw.Close();
+            }
+        }
     }
 }

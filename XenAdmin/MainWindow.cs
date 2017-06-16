@@ -526,20 +526,7 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-
-                string protectedUsername = Properties.Settings.Default.ProxyUsername;
-                string protectedPassword = Properties.Settings.Default.ProxyPassword;
-                new TransferProxySettingsAction(
-                    (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
-                    Properties.Settings.Default.ProxyAddress,
-                    Properties.Settings.Default.ProxyPort,
-                    Properties.Settings.Default.ConnectionTimeout,
-                    true,
-                    Properties.Settings.Default.BypassProxyForServers,
-                    Properties.Settings.Default.ProvideProxyAuthentication,
-                    string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
-                    string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword),
-                    (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
+                HealthCheck.SendProxySettingsToHealthCheck(true);
             }
             catch (ConfigurationErrorsException ex)
             {
@@ -948,6 +935,8 @@ namespace XenAdmin
             
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
+
+            HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
         }
 
