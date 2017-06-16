@@ -39,8 +39,10 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
+using XenAdmin.Plugins;
 using XenAdmin.ServerDBs;
 using XenAPI;
+using XenAdmin.Telemetry;
 
 
 namespace XenAdmin
@@ -196,5 +198,12 @@ namespace XenAdmin
         {
             get { return XenAdmin.Properties.Settings.Default.ShowHiddenVMs; }
         }
+
+        public PluginManager PluginManager;
+
+        public string GetXenCenterMetadata()
+        {
+            return XenCenterTelemetry.GenerateMetadata(PluginManager);
+        }      
     }
 }

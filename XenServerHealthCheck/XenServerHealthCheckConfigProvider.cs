@@ -84,6 +84,11 @@ namespace XenServerHealthCheck
             get { return false; }
         }
 
+        public string GetXenCenterMetadata()
+        {
+            return "";
+        }
+
         public int GetProxyTimeout(bool timeout)
         {
             return timeout ? Properties.Settings.Default.HttpTimeout : 0;
