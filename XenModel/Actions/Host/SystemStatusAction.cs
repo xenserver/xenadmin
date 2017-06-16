@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
         private Object completeActionsMonitor = new Object();
 
         public SystemStatusAction(List<HostWithStatus> hosts,
-                                  List<string> entries)
+            List<string> entries)
             : base(null, Messages.ACTION_SYSTEM_STATUS_TITLE, null)
         {
             this.hosts = hosts;
@@ -76,7 +76,7 @@ namespace XenAdmin.Actions
             {
                 if (File.Exists(logDestination))
                     File.Delete(logDestination);
-                string logPath = XenAdminConfigManager.Provider.GetLogFile(); 
+                string logPath = XenAdminConfigManager.Provider.GetLogFile();
                 File.Copy(logPath, logDestination);
                 // Copy old XenCenter.log.* files too
                 DirectoryInfo di = new DirectoryInfo(Path.GetDirectoryName(logPath));
@@ -116,50 +116,35 @@ namespace XenAdmin.Actions
                 SingleHostStatusAction action = new SingleHostStatusAction(host, entries, filepath, timestring + "-" + ++i);
                 actions.Add(action);
                 action.Changed += (Action<ActionBase>)delegate
+                {
+                    int total = 0;
+
+                    foreach (SingleHostStatusAction a in actions)
                     {
-                        int total = 0;
+                        total += a.PercentComplete;
+                    }
 
-                        foreach (SingleHostStatusAction a in actions)
-                        {
-                            total += a.PercentComplete;
-                        }
-
-                        PercentComplete = (int)(total / n);
-                    };
+                    PercentComplete = (int)(total / n);
+                };
                 action.Completed += (Action<ActionBase>)delegate
+                {
+                    lock (completeActionsMonitor)
                     {
-                        lock (completeActionsMonitor)
-                        {
-                            completedActions--;
-                            Monitor.PulseAll(completeActionsMonitor);
-                        }
-                    };
+                        completedActions--;
+                        Monitor.PulseAll(completeActionsMonitor);
+                    }
+                };
                 action.RunAsync();
             }
 
             // output the slave/master info while we wait
             string mastersDestination = string.Format("{0}\\{1}-Masters.txt", filepath, timestring);
-            if (File.Exists(mastersDestination))
-                File.Delete(mastersDestination);
+            WriteExtraInfoToFile(mastersInfo, mastersDestination);
 
-            StreamWriter sw = null;
-            try
-            {
-                sw = new StreamWriter(mastersDestination);
-                foreach (string s in mastersInfo)
-                    sw.WriteLine(s);
-
-                sw.Flush();
-            }
-            catch (Exception e)
-            {
-                log.ErrorFormat("Exception while writing masters file: {0}", e);
-            }
-            finally
-            {
-                if (sw != null)
-                    sw.Close();
-            }
+            // output the XenCenter metadata
+            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata();
+            string metadataDestination = string.Format("{0}\\{1}-Telemetry.json", filepath, timestring);
+            WriteExtraInfoToFile(new List<string> {metadata}, metadataDestination);
 
             // now wait for the status actions to return
             lock (completeActionsMonitor)
@@ -199,6 +184,31 @@ namespace XenAdmin.Actions
             }
             else
                 Description = Messages.ACTION_SYSTEM_STATUS_SUCCESSFUL;
+        }
+
+        private void WriteExtraInfoToFile(List<string> info, string fileName)
+        {
+            if (File.Exists(fileName))
+                File.Delete(fileName);
+
+            StreamWriter sw = null;
+            try
+            {
+                sw = new StreamWriter(fileName);
+                foreach (string s in info)
+                    sw.WriteLine(s);
+
+                sw.Flush();
+            }
+            catch (Exception e)
+            {
+                log.ErrorFormat("Exception while writing {0} file: {1}", fileName, e);
+            }
+            finally
+            {
+                if (sw != null)
+                    sw.Close();
+            }
         }
 
         public override void RecomputeCanCancel()

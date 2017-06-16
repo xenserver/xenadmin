@@ -219,6 +219,7 @@ namespace XenAdmin
             pluginManager.PluginsChanged += pluginManager_PluginsChanged;
             pluginManager.LoadPlugins();
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, this);
+            ((WinformsXenAdminConfigProvider) XenAdminConfigManager.Provider).PluginManager = pluginManager;
 
             eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
