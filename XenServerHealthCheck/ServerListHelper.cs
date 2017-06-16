@@ -267,5 +267,24 @@ namespace XenServerHealthCheck
                 log.Error("Error parsing 'ProxySetting' from XenCenter", e);
             }
         }
+
+        public void UpdateXenCenterMetadata(string message)
+        {
+            log.Info("Receive XenCenter metadata update message");
+
+            try
+            {
+                string[] metadata = message.Split(SEPARATOR);
+                if (metadata.Length > 1)
+                {
+                    Properties.Settings.Default.XenCenterMetadata = metadata[1];
+                    Properties.Settings.Default.Save();
+                }
+            }
+            catch (Exception e)
+            {
+                log.Error("Error parsing 'XenCenterMetadata' from XenCenter", e);
+            }
+        }
     }
 }

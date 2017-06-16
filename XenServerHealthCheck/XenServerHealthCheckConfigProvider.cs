@@ -86,7 +86,7 @@ namespace XenServerHealthCheck
 
         public string GetXenCenterMetadata()
         {
-            return "";
+            return Properties.Settings.Default.XenCenterMetadata;
         }
 
         public int GetProxyTimeout(bool timeout)

@@ -87,7 +87,8 @@ namespace XenAdmin.Model
         public const string HEALTH_CHECK_PIPE = "HealthCheckServicePipe";
         public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
         public const string UPLOAD_UUID = "UploadUuid";
-        public const string PROXY_SETTINGS = "ProxySettings";
+        public const string PROXY_SETTINGS = "ProxySettings"; 
+        public const string XENCENTER_METADATA = "XenCenterMetadata";
         public const string DIAGNOSTIC_TOKEN_SECRET = "DiagnosticToken.Secret";
         public const string REPORT_ANALYSIS_SEVERITY = "ReportAnalysis.Severity";
         public const string REPORT_ANALYSIS_ISSUES_DETECTED = "ReportAnalysis.IssuesDetected";
