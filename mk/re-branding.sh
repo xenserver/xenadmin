@@ -78,8 +78,7 @@ rebranding_features()
 
 rebranding_GUID()
 {
-  sed -b -i -e "s#\[BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID\]#${BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID}#g" \
-      -e "s#\[BRANDING_VNC_MAIN_CONTROL_GUID\]#${BRANDING_VNC_MAIN_CONTROL_GUID}#g" \
+  sed -b -i \
       -e "s#\[BRANDING_XENCENTER_UPGRADE_CODE_GUID\]#${BRANDING_XENCENTER_UPGRADE_CODE_GUID}#g" \
       -e "s#\[BRANDING_JA_RESOURCES_GUID\]#${BRANDING_JA_RESOURCES_GUID}#g" \
       -e "s#\[BRANDING_SC_RESOURCES_GUID\]#${BRANDING_SC_RESOURCES_GUID}#g" \
@@ -138,7 +137,7 @@ version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/spla
 cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
 
 #AssemblyInfo rebranding
-version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServer VNCControl XenServerHealthCheck"
+version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServer XenServerHealthCheck"
 
 #XenAdmin rebranding
 rebranding_global ${REPO}/XenAdmin/Branding.cs
@@ -175,7 +174,7 @@ rebranding_global ${REPO}/mk/package-and-sign.sh
 rebranding_global ${REPO}/WixInstaller/en-us.wxl
 rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
 rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
-branding_wxs "${REPO}/WixInstaller/XenCenter.l10n.diff ${REPO}/WixInstaller/XenCenter.wxs ${REPO}/WixInstaller/vnccontrol.wxs"
+branding_wxs "${REPO}/WixInstaller/XenCenter.l10n.diff ${REPO}/WixInstaller/XenCenter.wxs
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml
