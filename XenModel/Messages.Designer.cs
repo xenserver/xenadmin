@@ -15638,7 +15638,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} available ({1} total).
+        ///   Looks up a localized string similar to {0} RAM available ({1} total).
         /// </summary>
         public static string GENERAL_MEMORY_SERVER_FREE {
             get {

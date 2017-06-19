@@ -5485,7 +5485,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Server:</value>
   </data>
   <data name="GENERAL_MEMORY_SERVER_FREE" xml:space="preserve">
-    <value>{0} available ({1} total)</value>
+    <value>{0} RAM available ({1} total)</value>
   </data>
   <data name="GENERAL_MEMORY_VM" xml:space="preserve">
     <value>VMs:</value>
