@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>An activation key can only be applied when the edition is set to 'free'.</value>
@@ -1389,7 +1389,7 @@ Authorized Roles: {1}</value>
     <value>Logical Volume mount/activate error</value>
   </data>
   <data name="SR_BACKEND_FAILURE_53" xml:space="preserve">
-    <value>The attempt to umount/deactivate the specified logical volume failed</value>
+    <value>The attempt to unmount/deactivate the specified logical volume failed</value>
   </data>
   <data name="SR_BACKEND_FAILURE_54" xml:space="preserve">
     <value>There was an error while attempting to write to the specified logical volume</value>

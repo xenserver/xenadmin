@@ -2896,7 +2896,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deactiviting virtual network interface....
+        ///   Looks up a localized string similar to Deactivating virtual network interface....
         /// </summary>
         public static string ACTION_VIF_UNPLUGGING {
             get {
@@ -11493,7 +11493,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Api Version.
+        ///   Looks up a localized string similar to API Version.
         /// </summary>
         public static string DOCKER_INFO_API_VERSION {
             get {
@@ -23322,6 +23322,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Asianux.
+        /// </summary>
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NeoKylin.
         /// </summary>
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN {
@@ -23329,35 +23338,15 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN", resourceCulture);
             }
         }
-
-         /// <summary>
-        ///   Looks up a localized string similar to Asianux.
-        /// </summary>
-
-        public static string NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX {
-            get {
-                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX", resourceCulture);
-            }
-        }        
-                
-        /// <summary>
-        ///   Looks up a localized string similar to YinheKylin.
-        /// </summary>
-        public static string NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN {
-            get {
-                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to Turbo.
         /// </summary>
-        
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_TURBO {
             get {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_TURBO", resourceCulture);
             }
-        }        
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Ubuntu.
@@ -23365,6 +23354,15 @@ namespace XenAdmin {
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU {
             get {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YinheKylin.
+        /// </summary>
+        public static string NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN {
+            get {
+                return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN", resourceCulture);
             }
         }
         
@@ -25013,6 +25011,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linx.
+        /// </summary>
+        public static string NEWVMWIZARD_TEMPLATEPAGE_LINX {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_LINX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Misc.
         /// </summary>
         public static string NEWVMWIZARD_TEMPLATEPAGE_MISC {
@@ -25054,15 +25061,6 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_TEMPLATEPAGE_REDHAT {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_REDHAT", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Linx.
-        /// </summary>
-        public static string NEWVMWIZARD_TEMPLATEPAGE_LINX {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_TEMPLATEPAGE_LINX", resourceCulture);
             }
         }
         
@@ -25373,7 +25371,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (There are currenltly no added timeline intervals).
+        ///   Looks up a localized string similar to (There are currently no added timeline intervals).
         /// </summary>
         public static string NO_TIMELINE_INTERVALS_TEXT {
             get {
@@ -34219,7 +34217,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Problems encountered when perfoming upgrade prechecks..
+        ///   Looks up a localized string similar to Problems encountered when performing upgrade prechecks..
         /// </summary>
         public static string UPGRADEWIZARD_PRECHECK_TITLE {
             get {
@@ -34601,7 +34599,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshost allows you to create automatic snapshots for your critical VMs..
+        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs..
         /// </summary>
         public static string UPSELL_BLURB_VMSS {
             get {
@@ -36944,7 +36942,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurd when WLB  establish a session with [XenServer]..
+        ///   Looks up a localized string similar to An error occurred when WLB tried to establish a session with [XenServer]..
         /// </summary>
         public static string WLB_ERROR_4001 {
             get {
@@ -37052,7 +37050,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an unknown execption..
+        ///   Looks up a localized string similar to WLB received an unknown exception..
         /// </summary>
         public static string WLB_ERROR_4014 {
             get {
