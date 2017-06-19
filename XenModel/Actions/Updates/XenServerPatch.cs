@@ -65,8 +65,6 @@ namespace XenAdmin.Core
             Guidance = guidance;
             Guidance_mandatory = guidance_mandatory;
             Version = new Version(version);
-            if (url.StartsWith("/XenServer"))
-                url = XenServerVersion.UpdateRoot + url;
             Url = url;
             PatchUrl = patchUrl;
             DateTime.TryParse(timestamp, out TimeStamp);

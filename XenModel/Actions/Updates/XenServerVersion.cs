@@ -52,7 +52,6 @@ namespace XenAdmin.Core
         public List<XenServerPatch> MinimalPatches;
         
         public DateTime TimeStamp;
-        public const string UpdateRoot = @"http://updates.xensource.com";
         public string BuildNumber;
 
         /// <summary>
@@ -72,8 +71,6 @@ namespace XenAdmin.Core
             ParseVersion(version_oem);
             Name = name;
             Latest = latest;
-            if (url.StartsWith("/XenServer"))
-                url = UpdateRoot + url;
             Url = url;
             Patches = patches;
             MinimalPatches = minimumPatches;
