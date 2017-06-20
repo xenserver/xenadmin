@@ -13563,27 +13563,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="WRONG_ROLE_DESC" xml:space="preserve">
     <value>この操作を実行するには、現在の役割に付与されていない追加権限が必要です。</value>
   </data>
-  <data name="XENAPPLIANCE_BAD_EXIT" xml:space="preserve">
-    <value>'{0}' が停止しました。終了コード: {1}</value>
-  </data>
-  <data name="XENAPPLIANCE_FINISHED" xml:space="preserve">
-    <value>'{0}' の実行が終了しました。</value>
-  </data>
-  <data name="XENAPPLIANCE_FORCE_CLOSE_PROMPT" xml:space="preserve">
-    <value>'{0}' がキャンセル要求に応答していません。プロセスを強制終了するか、バックグラウンドでの続行を許可するかを選択してください。</value>
-  </data>
-  <data name="XENAPPLIANCE_RUNNING" xml:space="preserve">
-    <value>'{0}' を実行しています</value>
-  </data>
-  <data name="XENAPPLIANCE_TITLE" xml:space="preserve">
-    <value>'{0}' の実行</value>
-  </data>
-  <data name="XENAPPLIANCE_TOOLS" xml:space="preserve">
-    <value>アプライアンス ツール</value>
-  </data>
-  <data name="XENAPPLIANCE_WIN32" xml:space="preserve">
-    <value>XenApplianceWizards の実行に失敗しました。詳しくは、クライアント ログを参照してください。</value>
-  </data>
   <data name="XENCENTER" xml:space="preserve">
     <value>[XenCenter]</value>
   </data>

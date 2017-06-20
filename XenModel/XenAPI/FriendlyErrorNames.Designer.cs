@@ -358,7 +358,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM cannot be started, as its network interfaces could not be connected.  One of the NICs is in use elsewhere..
+        ///   Looks up a localized string similar to This VM cannot be started because its network interfaces could not be connected.  One of the NICs is in use elsewhere..
         /// </summary>
         public static string CANNOT_PLUG_VIF {
             get {
@@ -1051,7 +1051,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation cannot be completed as the server is in use..
+        ///   Looks up a localized string similar to This operation cannot be completed because the server is in use..
         /// </summary>
         public static string HOST_IN_USE {
             get {
@@ -1060,7 +1060,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation cannot be completed as the server is still live..
+        ///   Looks up a localized string similar to This operation cannot be completed because the server is still live..
         /// </summary>
         public static string HOST_IS_LIVE {
             get {
@@ -1168,7 +1168,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation cannot be completed as the server power on mode is disabled..
+        ///   Looks up a localized string similar to This operation cannot be completed because the server power on mode is disabled..
         /// </summary>
         public static string HOST_POWER_ON_MODE_DISABLED {
             get {
@@ -1906,7 +1906,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The patch apply failed: there are backup files created while applying patch. Please remove these backup files before applying patch again..
+        ///   Looks up a localized string similar to The patch apply failed: backup files were created while applying the patch. Please remove these backup files before applying the patch again..
         /// </summary>
         public static string PATCH_APPLY_FAILED_BACKUP_FILES_EXIST {
             get {
@@ -4332,7 +4332,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The SR {0} is still connected to a server via a PBD. It cannot be destroyed..
+        ///   Looks up a localized string similar to The SR {0} is still connected to a server by a PBD. It cannot be destroyed..
         /// </summary>
         public static string SR_HAS_PBD {
             get {
@@ -4341,7 +4341,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The SR could not be destroyed, as the &apos;indestructible&apos; flag was set on it..
+        ///   Looks up a localized string similar to The SR could not be destroyed because the &apos;indestructible&apos; flag was set on it..
         /// </summary>
         public static string SR_INDESTRUCTIBLE {
             get {
@@ -4656,7 +4656,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only the local superuser can execute this operation.
+        ///   Looks up a localized string similar to Only the local superuser can perform this operation.
         /// </summary>
         public static string USER_IS_NOT_LOCAL_SUPERUSER {
             get {

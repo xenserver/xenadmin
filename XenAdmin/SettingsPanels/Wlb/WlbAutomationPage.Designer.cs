@@ -37,9 +37,9 @@ namespace XenAdmin.SettingsPanels
             this.decentGroupBoxPowerManagementHosts = new XenAdmin.Controls.DecentGroupBox();
             this.labelNoHosts = new System.Windows.Forms.Label();
             this.listViewExPowerManagementHosts = new XenAdmin.Controls.ListViewEx();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelWhichHostsBlurb = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.decentGroupBoxAutomationSettings.SuspendLayout();
@@ -108,11 +108,11 @@ namespace XenAdmin.SettingsPanels
             this.listViewExPowerManagementHosts.OwnerDraw = true;
             this.listViewExPowerManagementHosts.UseCompatibleStateImageBehavior = false;
             this.listViewExPowerManagementHosts.View = System.Windows.Forms.View.Details;
+            this.listViewExPowerManagementHosts.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.listViewExPowerManagementHosts_ColumnWidthChanged);
             this.listViewExPowerManagementHosts.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.listViewExPowerManagementHosts_DrawColumnHeader);
             this.listViewExPowerManagementHosts.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.listViewExPowerManagementHosts_DrawItem);
-            this.listViewExPowerManagementHosts.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.listViewExPowerManagementHosts_ColumnWidthChanged);
-            this.listViewExPowerManagementHosts.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listViewExPowerManagementHosts_ItemCheck);
             this.listViewExPowerManagementHosts.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.listViewExPowerManagementHosts_DrawSubItem);
+            this.listViewExPowerManagementHosts.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listViewExPowerManagementHosts_ItemCheck);
             // 
             // columnHeader2
             // 

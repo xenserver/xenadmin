@@ -13573,27 +13573,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="WRONG_ROLE_DESC" xml:space="preserve">
     <value>您正在尝试执行的操作需要当前角色授予更多权限。</value>
   </data>
-  <data name="XENAPPLIANCE_BAD_EXIT" xml:space="preserve">
-    <value>“{0}”已退出，退出代码: {1}</value>
-  </data>
-  <data name="XENAPPLIANCE_FINISHED" xml:space="preserve">
-    <value>“{0}”执行完毕</value>
-  </data>
-  <data name="XENAPPLIANCE_FORCE_CLOSE_PROMPT" xml:space="preserve">
-    <value>“{0}”尚未对您的取消请求作出响应。是强制关闭进程还是允许其继续在后台运行?</value>
-  </data>
-  <data name="XENAPPLIANCE_RUNNING" xml:space="preserve">
-    <value>正在运行“{0}”</value>
-  </data>
-  <data name="XENAPPLIANCE_TITLE" xml:space="preserve">
-    <value>执行“{0}”</value>
-  </data>
-  <data name="XENAPPLIANCE_TOOLS" xml:space="preserve">
-    <value>设备工具</value>
-  </data>
-  <data name="XENAPPLIANCE_WIN32" xml:space="preserve">
-    <value>无法运行 XenApplianceWizards 可执行文件。有关详细信息，请参阅客户端日志。</value>
-  </data>
   <data name="XENCENTER" xml:space="preserve">
     <value>[XenCenter]</value>
   </data>

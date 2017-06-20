@@ -199,7 +199,7 @@
     <value>0</value>
   </data>
   <data name="labelRubric.Text" xml:space="preserve">
-    <value>Live patching allows some Linux kernel and Xen updates to be installed without rebooting the server. Select whether you wish to use live patches when they are available.</value>
+    <value>Live patching allows some Linux kernel and Xen updates to be installed without rebooting the server. Select whether you want to use live patches when they are available.</value>
   </data>
   <data name="&gt;&gt;labelRubric.Name" xml:space="preserve">
     <value>labelRubric</value>
