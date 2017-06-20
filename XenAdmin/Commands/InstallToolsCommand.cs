@@ -301,8 +301,14 @@ namespace XenAdmin.Commands
             return vm != null && !vm.is_a_template && !vm.Locked &&
                 !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.UNKNOWN) &&
                 (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) || !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)) &&
-                vm.power_state == vm_power_state.Running
+                vm.power_state == vm_power_state.Running && !ResidentHostIsOlderThanMaster(vm)
                 && CanViewVMConsole(vm.Connection);
+        }
+
+        private static bool ResidentHostIsOlderThanMaster(VM vm)
+        {
+            var vmHome = vm.Home();
+            return vmHome != null && Helpers.IsOlderThanMaster(vmHome);
         }
 
         public static bool CanExecuteAll(List<VM> vms)
