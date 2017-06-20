@@ -358,7 +358,7 @@
     <value>0</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>By default [XenServer] stores its system logs locally on the server. If you wish however you may specify a remote log destination using the settings below.</value>
+    <value>By default [XenServer] stores its system logs locally on the server. If you want however you may specify a remote log destination using the settings below.</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

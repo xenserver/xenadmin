@@ -217,7 +217,7 @@
     <value>2</value>
   </data>
   <data name="labelBlurb.Text" xml:space="preserve">
-    <value>Select the role you wish to assign to .</value>
+    <value>Select the role you want to assign to .</value>
   </data>
   <data name="&gt;&gt;labelBlurb.Name" xml:space="preserve">
     <value>labelBlurb</value>

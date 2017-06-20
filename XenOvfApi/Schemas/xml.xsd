@@ -195,7 +195,7 @@
     <div class="bodytext">
      <p>
       This schema defines attributes and an attribute group suitable
-      for use by schemas wishing to allow <code>xml:base</code>,
+      for use by schemas wanting to allow <code>xml:base</code>,
       <code>xml:lang</code>, <code>xml:space</code> or
       <code>xml:id</code> attributes on elements they define.
      </p>

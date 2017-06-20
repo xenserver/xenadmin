@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.Text" xml:space="preserve">
-    <value>Select the checkboxes for each server you wish to include in the system status report. Select a pool checkbox to select all the available servers in that pool.</value>
+    <value>Select the checkboxes for each server you want to include in the system status report. Select a pool checkbox to select all the available servers in that pool.</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>

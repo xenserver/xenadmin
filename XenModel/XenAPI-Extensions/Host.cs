@@ -972,7 +972,7 @@ namespace XenAPI
         /// Save the list of VMs on this host, so we can try and put them back when finished.
         /// This may get run multiple times, after which some vms will have been suspended / shutdown.
         /// </summary>
-        /// <param name="session">Pass in the session you wish to use for the other config writing</param>
+        /// <param name="session">Pass in the session you want to use for the other config writing</param>
         public void SaveEvacuatedVMs(Session session)
         {
             //Program.AssertOffEventThread();
