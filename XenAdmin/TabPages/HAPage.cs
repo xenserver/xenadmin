@@ -52,11 +52,13 @@ namespace XenAdmin.TabPages
 
         private IXenObject xenObject;
 
-        private bool newPoolHABox;
+        private bool restartHBInitializationTimer;
 
-        private bool HBInitTimeElapsed;
+        private bool initializationDelayElapsed;
 
-        private System.Timers.Timer networkHBInitDelay;
+        private System.Timers.Timer initializationDelayTimer;
+
+        private const int HB_INITIALIZATION_DELAY = 30000;
 
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
         /// <summary>
@@ -96,8 +98,7 @@ namespace XenAdmin.TabPages
             base.Text = Messages.HIGH_AVAILABILITY;
 
             pictureBoxWarningTriangle.Image = SystemIcons.Warning.ToBitmap();
-            newPoolHABox = true;
-            HBInitTimeElapsed = false;
+            restartHBInitializationTimer = true;
         }
 
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
@@ -310,14 +311,13 @@ namespace XenAdmin.TabPages
         {
             if (!pool.ha_enabled)
             {
-                newPoolHABox = true;
-                HBInitTimeElapsed = false;
+                restartHBInitializationTimer = true;
                 return;
             }
 
-            if (newPoolHABox)
+            if (restartHBInitializationTimer)
             {
-                newPoolHABox = false;
+                restartHBInitializationTimer = false;
                 SetNetworkHBInitDelay();
             }
             
@@ -462,9 +462,9 @@ namespace XenAdmin.TabPages
                 l.Padding = new Padding(0, 5, 0, 5);
                 l.Font = BaseTabPage.ItemValueFont;
                 l.AutoSize = true;
-                l.ForeColor = (members[i].ha_network_peers.Length == members.Count && HBInitTimeElapsed) ? Color.Green : l.ForeColor = BaseTabPage.ItemValueForeColor;
-               
-                if (HBInitTimeElapsed)
+                l.ForeColor = (members[i].ha_network_peers.Length == members.Count && initializationDelayElapsed) ? Color.Green : BaseTabPage.ItemValueForeColor;
+
+                if (initializationDelayElapsed)
                 {
                     if (members[i].ha_network_peers.Length == 0)
                     {
@@ -692,16 +692,18 @@ namespace XenAdmin.TabPages
 
         private void SetNetworkHBInitDelay()
         {
-            //30 second delay to allow network HB status to initialise  
-            networkHBInitDelay = new System.Timers.Timer(30000);
-            networkHBInitDelay.Elapsed += HBInitialisationTimeElapsed;
-            networkHBInitDelay.AutoReset = false;
-            networkHBInitDelay.Enabled = true;
+            initializationDelayElapsed = false;
+
+            //30 second delay to allow network HB status to initialize  
+            initializationDelayTimer = new System.Timers.Timer(HB_INITIALIZATION_DELAY);
+            initializationDelayTimer.Elapsed += HeartbeatInitialization_TimeElapsed;
+            initializationDelayTimer.AutoReset = false;
+            initializationDelayTimer.Enabled = true;
         }
 
-        private void HBInitialisationTimeElapsed(Object source, System.Timers.ElapsedEventArgs e)
+        private void HeartbeatInitialization_TimeElapsed(Object source, System.Timers.ElapsedEventArgs e)
         {
-            HBInitTimeElapsed = true;
+            initializationDelayElapsed = true;
             Program.Invoke(Program.MainWindow, Rebuild);
         }
     }
