@@ -282,11 +282,7 @@ namespace XenAdmin.ConsoleView
 
         private bool RedirectingClipboard()
         {
-#if VNCControl
-            return true;
-#else
             return XenAdmin.Properties.Settings.Default.ClipboardAndPrinterRedirection;
-#endif
         }
 
         private static bool handlingChange = false;
@@ -866,17 +862,15 @@ namespace XenAdmin.ConsoleView
             ToolStripDropDownMenu popupMenu = new ToolStripDropDownMenu();
 
             ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY);
-#if !VNCControl
+
             copyItem.Image = XenAdmin.Properties.Resources.copy_16;
-#endif
             copyItem.Click += copyItem_Click;
+
             popupMenu.Items.Add(copyItem);
             if (sourceVM != null && sourceVM.power_state == XenAPI.vm_power_state.Running)
             {
                 ToolStripMenuItem pasteItem = new ToolStripMenuItem(Messages.PASTE);
-#if !VNCControl
                 pasteItem.Image = XenAdmin.Properties.Resources.paste_16;
-#endif
                 pasteItem.Click += pasteItem_Click;
 
                 popupMenu.Items.Add(pasteItem);
@@ -909,16 +903,12 @@ namespace XenAdmin.ConsoleView
 
         public void DisableMenuShortcuts()
         {
-#if !VNCControl
             Program.MainWindow.MenuShortcuts = false;
-#endif
         }
 
         public void EnableMenuShortcuts()
         {
-#if !VNCControl
             Program.MainWindow.MenuShortcuts = true;
-#endif
         }
 
         protected override void OnGotFocus(EventArgs e)

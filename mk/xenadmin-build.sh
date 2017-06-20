@@ -58,10 +58,8 @@ SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
 
 WIX_INSTALLER_DEFAULT_GUID=65AE1345-A520-456D-8A19-2F52D43D3A09
-WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL=0CE5C3E7-E786-467a-80CF-F3EC04D414E4
 WIX_INSTALLER_DEFAULT_VERSION=1.0.0
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z])
-PRODUCT_GUID_VNCCONTROL=$(uuidgen | tr [a-z] [A-Z])
 
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
@@ -73,7 +71,6 @@ ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 cd ${REPO}
 $MSBUILD XenAdmin.sln
 $MSBUILD xe/Xe.csproj
-$MSBUILD VNCControl/VNCControl.sln
 $MSBUILD /p:SolutionDir="${REPO}/XenAdmin" splash/splash.vcxproj
 
 #prepare wix
@@ -119,16 +116,9 @@ version_installer()
       $1 > $1.tmp
   mv -f $1.tmp $1
 }
-version_vnccontrol_installer()
-{
-  sed -e "s/${WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL}/${PRODUCT_GUID_VNCCONTROL}/g" \
-      -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${BRANDING_XC_PRODUCT_VERSION}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
-}
+
 version_installer ${WIX}/XenCenter.wxs
 version_installer ${WIX}/XenCenter.l10n.wxs
-version_vnccontrol_installer ${WIX}/vnccontrol.wxs
 
 #copy dotNetInstaller files
 DOTNETINST=${REPO}/dotNetInstaller
@@ -157,15 +147,12 @@ cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
 #include resources script and collect the resources for translations
 . ${REPO}/mk/find-resources.sh
 
-cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
-cd ${WIX}/outVNCControl && tar cjf ${OUTPUT_DIR}/VNCControl.tar.bz2 VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
 
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
-   ${REPO}/VNCControl/bin/Release/VNCControl.pdb \
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 

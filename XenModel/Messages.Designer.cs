@@ -2896,7 +2896,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deactiviting virtual network interface....
+        ///   Looks up a localized string similar to Deactivating virtual network interface....
         /// </summary>
         public static string ACTION_VIF_UNPLUGGING {
             get {
@@ -11493,7 +11493,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Api Version.
+        ///   Looks up a localized string similar to API Version.
         /// </summary>
         public static string DOCKER_INFO_API_VERSION {
             get {
@@ -15638,7 +15638,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} available ({1} total).
+        ///   Looks up a localized string similar to {0} RAM available ({1} total).
         /// </summary>
         public static string GENERAL_MEMORY_SERVER_FREE {
             get {
@@ -25371,7 +25371,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (There are currenltly no added timeline intervals).
+        ///   Looks up a localized string similar to (There are currently no added timeline intervals).
         /// </summary>
         public static string NO_TIMELINE_INTERVALS_TEXT {
             get {
@@ -34226,7 +34226,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Problems encountered when perfoming upgrade prechecks..
+        ///   Looks up a localized string similar to Problems encountered when performing upgrade prechecks..
         /// </summary>
         public static string UPGRADEWIZARD_PRECHECK_TITLE {
             get {
@@ -34608,7 +34608,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshost allows you to create automatic snapshots for your critical VMs..
+        ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs..
         /// </summary>
         public static string UPSELL_BLURB_VMSS {
             get {
@@ -36951,7 +36951,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurd when WLB  establish a session with [XenServer]..
+        ///   Looks up a localized string similar to An error occurred when WLB tried to establish a session with [XenServer]..
         /// </summary>
         public static string WLB_ERROR_4001 {
             get {
@@ -37059,7 +37059,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB received an unknown execption..
+        ///   Looks up a localized string similar to WLB received an unknown exception..
         /// </summary>
         public static string WLB_ERROR_4014 {
             get {

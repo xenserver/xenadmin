@@ -1060,7 +1060,7 @@
     <value>Deactivated virtual network interface</value>
   </data>
   <data name="ACTION_VIF_UNPLUGGING" xml:space="preserve">
-    <value>Deactiviting virtual network interface...</value>
+    <value>Deactivating virtual network interface...</value>
   </data>
   <data name="ACTION_VIF_UNPLUG_TITLE" xml:space="preserve">
     <value>Deactivating virtual network interface on VM '{0}'</value>
@@ -4091,7 +4091,7 @@ This will also delete its subfolders.</value>
     <value>Container Details</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
-    <value>Api Version</value>
+    <value>API Version</value>
   </data>
   <data name="DOCKER_INFO_ARCH" xml:space="preserve">
     <value>Arch</value>
@@ -5485,7 +5485,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Server:</value>
   </data>
   <data name="GENERAL_MEMORY_SERVER_FREE" xml:space="preserve">
-    <value>{0} available ({1} total)</value>
+    <value>{0} RAM available ({1} total)</value>
   </data>
   <data name="GENERAL_MEMORY_VM" xml:space="preserve">
     <value>VMs:</value>
@@ -8970,7 +8970,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>This VM does not have any snapshots.</value>
   </data>
   <data name="NO_TIMELINE_INTERVALS_TEXT" xml:space="preserve">
-    <value>(There are currenltly no added timeline intervals)</value>
+    <value>(There are currently no added timeline intervals)</value>
   </data>
   <data name="NO_VALID_DISK_LOCATION" xml:space="preserve">
     <value>There are no SR locations that can support this disk</value>
@@ -11822,7 +11822,7 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
     <value>Upgrade Prechecks</value>
   </data>
   <data name="UPGRADEWIZARD_PRECHECK_TITLE" xml:space="preserve">
-    <value>Problems encountered when perfoming upgrade prechecks.</value>
+    <value>Problems encountered when performing upgrade prechecks.</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS" xml:space="preserve">
     <value>Hosts in pool '{0}' have incompatible CPUs</value>
@@ -11989,7 +11989,7 @@ To learn more about the [XenServer] Performance Reporting capabilities feature o
 To learn more about the [XenServer] Role Based Access Control feature or to start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
-    <value>Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshost allows you to create automatic snapshots for your critical VMs.</value>
+    <value>Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs.</value>
   </data>
   <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
     <value>
@@ -12822,7 +12822,7 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>WLB unknown error.</value>
   </data>
   <data name="WLB_ERROR_4001" xml:space="preserve">
-    <value>An error occurd when WLB  establish a session with [XenServer].</value>
+    <value>An error occurred when WLB tried to establish a session with [XenServer].</value>
   </data>
   <data name="WLB_ERROR_4002" xml:space="preserve">
     <value>WLB could not log into [XenServer]. It could be due to invalid credentials.</value>
@@ -12858,7 +12858,7 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>WLB data collection service cannot migrate or start VMs.</value>
   </data>
   <data name="WLB_ERROR_4014" xml:space="preserve">
-    <value>WLB received an unknown execption.</value>
+    <value>WLB received an unknown exception.</value>
   </data>
   <data name="WLB_ERROR_4015" xml:space="preserve">
     <value>WLB does not know this pool.</value>

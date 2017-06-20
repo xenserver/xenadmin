@@ -619,7 +619,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only one shell or powershell command permitted..
+        ///   Looks up a localized string similar to Only one shell or PowerShell command permitted..
         /// </summary>
         public static string Exception_PluginOnlyOneCommandPermitted {
             get {
@@ -5073,7 +5073,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This template can be used to create a Linux VM with a built-in Linux distro for testing and demonstration purposes. It is not recommended for production use..
+        ///   Looks up a localized string similar to This template can be used to create a Linux VM with a built-in Linux distribution for testing and demonstration purposes. It is not recommended for production use..
         /// </summary>
         public static string VM_TemplateDescription_Demo_Linux_VM {
             get {

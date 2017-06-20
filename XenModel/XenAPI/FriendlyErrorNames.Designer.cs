@@ -3864,7 +3864,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The attempt to umount/deactivate the specified logical volume failed.
+        ///   Looks up a localized string similar to The attempt to unmount/deactivate the specified logical volume failed.
         /// </summary>
         public static string SR_BACKEND_FAILURE_53 {
             get {

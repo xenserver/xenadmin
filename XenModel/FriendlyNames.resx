@@ -280,7 +280,7 @@
     <value>'{0}.label' has not been defined in the resources file for plugin '{1}'.</value>
   </data>
   <data name="Exception-PluginOnlyOneCommandPermitted" xml:space="preserve">
-    <value>Only one shell or powershell command permitted.</value>
+    <value>Only one shell or PowerShell command permitted.</value>
   </data>
   <data name="Exception-PluginResourcesFileNotFound" xml:space="preserve">
     <value>Could not find resources file for plugin '{0}' at '{1}'.</value>
@@ -1452,7 +1452,7 @@
     <value>[XenServer product] Tools</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
-    <value>This template can be used to create a Linux VM with a built-in Linux distro for testing and demonstration purposes. It is not recommended for production use.</value>
+    <value>This template can be used to create a Linux VM with a built-in Linux distribution for testing and demonstration purposes. It is not recommended for production use.</value>
   </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>If the operating system you plan to use is not listed, you may be able to install it by selecting this template.  We recommend that only advanced users attempt to use this template, and you should note that our products have been tested running only the supported distributions and specific versions covered by the standard supplied templates.</value>

@@ -385,7 +385,7 @@ namespace XenOvf {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to find the strings section for lanugage {0}..
+        ///   Looks up a localized string similar to Failed to find the strings section for language {0}..
         /// </summary>
         public static string OVF_STRINGS_SECTION_MISSING {
             get {

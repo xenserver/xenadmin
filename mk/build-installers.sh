@@ -48,11 +48,6 @@ do
   cd ${REPO}/XenAdmin/ReportViewer && ${REPO}/sign.bat ${file}
 done
 
-for file in VNCControl.dll XenCenterLib.dll XenCenterVNC.dll XenServer.dll
-do
-  cd ${REPO}/VNCControl/bin/Release && ${REPO}/sign.bat ${file}
-done 
-
 cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET by Charles Cook, signed by ${BRANDING_COMPANY_NAME_SHORT}"
 cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat log4net.dll  "Log4Net by The Apache Software Foundation, signed by ${BRANDING_COMPANY_NAME_SHORT}"
 cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib by IC#Code, signed by ${BRANDING_COMPANY_NAME_SHORT}"
@@ -89,12 +84,7 @@ compile_installer()
    
   mkdir -p out${name}
   
-  if [ "${name}" = "VNCControl" ]
-  then
-   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
-  else
-   ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
-  fi
+${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
 }
 
 sign_msi()
@@ -150,8 +140,5 @@ sign_files()
 	done
 }
 sign_files "${BRANDING_BRAND_CONSOLE}Setup.exe ${BRANDING_BRAND_CONSOLE}Setup.l10n.exe"
-
-#create VNCCntrol installer
-compile_installer "VNCControl" "en-us" && sign_msi "VNCControl"
 
 set +u
