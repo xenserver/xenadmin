@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
 
-            if (selection.AllItemsAre<VM>() && new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute())
+            if (selection.Count > 1 && new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute())
             {
                 new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).Execute();
             }
