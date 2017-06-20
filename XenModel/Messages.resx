@@ -8536,6 +8536,9 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_TEMPLATEPAGE_DEBIAN" xml:space="preserve">
     <value>Debian</value>
   </data>
+  <data name="NEWVMWIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
+    <value>Linx</value>
+  </data>
   <data name="NEWVMWIZARD_TEMPLATEPAGE_MISC" xml:space="preserve">
     <value>Misc</value>
   </data>
@@ -8748,17 +8751,14 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_VM_WIZARD_NO_SR_OR_SRS_FULL" xml:space="preserve">
     <value>Cannot find a storage repository or all your storage repositories are full.</value>
   </data>
-  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN" xml:space="preserve">
-    <value>NeoKylin</value>
-  </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_ASIANUX" xml:space="preserve">
     <value>Asianux</value>
   </data>
+  <data name="NEW_VM_WIZARD_TEMPLATEPAGE_NEOKYLIN" xml:space="preserve">
+    <value>NeoKylin</value>
+  </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_TURBO" xml:space="preserve">
     <value>Turbo</value>
-  </data>
-  <data name="NEWVMWIZARD_TEMPLATEPAGE_LINX" xml:space="preserve">
-    <value>Linx</value>
   </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_UBUNTU" xml:space="preserve">
     <value>Ubuntu</value>
@@ -10763,6 +10763,9 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SOLUTION_CHECK_XENSERVER" xml:space="preserve">
     <value>Check that [XenServer] is configured correctly on '{0}' and try again.</value>
   </data>
+  <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
+    <value>Check the proxy settings and that [XenServer] is configured correctly on '{0}' and try again.</value>
+  </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>Please wait and then try again.</value>
   </data>
@@ -11540,6 +11543,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_LICENSE_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}' due to license restrictions.</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>
@@ -13451,11 +13457,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
-    <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
-  </data>
-  <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
-    <value>Check the proxy settings and that [XenServer] is configured correctly on '{0}' and try again.</value>
   </data>
 </root>
