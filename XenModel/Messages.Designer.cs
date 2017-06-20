@@ -30993,6 +30993,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check the proxy settings and that [XenServer] is configured correctly on &apos;{0}&apos; and try again..
+        /// </summary>
+        public static string SOLUTION_CHECK_XENSERVER_WITH_PROXY {
+            get {
+                return ResourceManager.GetString("SOLUTION_CHECK_XENSERVER_WITH_PROXY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please wait and then try again..
         /// </summary>
         public static string SOLUTION_HOST_STILL_BOOTING {
