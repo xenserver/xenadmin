@@ -16404,6 +16404,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initializing....
+        /// </summary>
+        public static string HA_HEARTBEAT_SERVERS_INITIALISING {
+            get {
+                return ResourceManager.GetString("HA_HEARTBEAT_SERVERS_INITIALISING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HA Heartbeat SR.
         /// </summary>
         public static string HA_HEARTBEAT_SR {
