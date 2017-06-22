@@ -543,20 +543,8 @@
   <data name="Label-host.edition" xml:space="preserve">
     <value>ライセンス</value>
   </data>
-  <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>[XenServer product] Advanced Edition</value>
-  </data>
-  <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>[XenServer product] Enterprise Edition</value>
-  </data>
-  <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>[XenServer product] for XenDesktop</value>
-  </data>
   <data name="Label-host.edition-free" xml:space="preserve">
     <value>[XenServer product]</value>
-  </data>
-  <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>[XenServer product] Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>有効</value>
@@ -579,9 +567,6 @@
   <data name="Label-host.license_params-serialnumber" xml:space="preserve">
     <value>シリアル番号</value>
   </data>
-  <data name="Label-host.license_params-sku_type" xml:space="preserve">
-    <value>サーバー ライセンス</value>
-  </data>
   <data name="Label-host.license_server-address" xml:space="preserve">
     <value>ライセンス サーバーのアドレス</value>
   </data>
@@ -599,60 +584,6 @@
   </data>
   <data name="Label-host.pool_members" xml:space="preserve">
     <value>プール メンバー</value>
-  </data>
-  <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product], Dell Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Dell Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product], Dell Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product], HP Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] HP Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product], HP Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product]</value>
-  </data>
-  <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product]</value>
-  </data>
-  <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product]</value>
-  </data>
-  <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Dell Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Dell Express Edition</value>
-  </data>
-  <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Dell Server Edition</value>
-  </data>
-  <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
-    <value>[Citrix] [XenServer product] HP Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] HP Select Edition</value>
-  </data>
-  <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
-    <value>[Citrix] [XenServer product] HP Server Edition</value>
-  </data>
-  <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Express Edition</value>
-  </data>
-  <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>[XenServer] ビルド番号</value>
@@ -1172,48 +1103,6 @@
   <data name="Message.body-vm_uncooperative" xml:space="preserve">
     <value>仮想マシン '{0}' のメモリ使用が要求どおりに減少しませんでした。</value>
   </data>
-  <data name="Message.body-vmpp_archive_failed_0" xml:space="preserve">
-    <value>この保護ポリシーのアーカイブ処理が完了しませんでした。</value>
-  </data>
-  <data name="Message.body-vmpp_archive_lock_failed" xml:space="preserve">
-    <value>現在アーカイブ処理が実行中のため、スナップショットをアーカイブできません。プール内で同時に複数の VMPR アーカイブ処理を実行することはできません。保護ポリシーを後で再試行してください。</value>
-  </data>
-  <data name="Message.body-vmpp_archive_missed_event" xml:space="preserve">
-    <value>現在アーカイブ処理が実行中のため、スナップショットをアーカイブできません。プール内で同時に複数の VMPR アーカイブ処理を実行することはできません。このプールの保護ポリシーでアーカイブ スケジュールが競合していないことを確認してください。</value>
-  </data>
-  <data name="Message.body-vmpp_archive_succeeded" xml:space="preserve">
-    <value>スケジュールされているスナップショットが正しくアーカイブされました。</value>
-  </data>
-  <data name="Message.body-vmpp_archive_target_mount_failed" xml:space="preserve">
-    <value>この保護ポリシーのアーカイブ先として指定されているリモートの CIFS または NFS 共有をマウントできません。VMPR のアーカイブ先の構成を確認してください。</value>
-  </data>
-  <data name="Message.body-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>この保護ポリシーのアーカイブ先として指定されているリモートの CIFS または NFS 共有をマウント解除できません。ローカル ディレクトリが正しくマウントされており、ハンドルが開いていないことを確認してください。</value>
-  </data>
-  <data name="Message.body-vmpp_backup_succeeded" xml:space="preserve">
-    <value>バックアップ成功</value>
-  </data>
-  <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>使用している [XenServer product] ライセンスでは、VMPR 機能を使用できません。VMPR 機能は、[Citrix] [XenServer product] Advanced Edition またはそれ以上のエディションで使用できます。</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
-    <value>このスナップショットはアーカイブ済みです。</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_failed" xml:space="preserve">
-    <value>スナップショットを作成できないため、保護ポリシーの実行に失敗しました。</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_lock_failed" xml:space="preserve">
-    <value>このポリシーでスケジュールされているスナップショット作成が既に実行中のため、現在スナップショットを作成できません。後で再試行してください。</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_missed_event" xml:space="preserve">
-    <value>このプールでスケジュールされているスナップショット作成が既に実行中のため、現在スナップショットを作成できません。プール内で同時に複数の VMPR スナップショット処理を実行することはできません。このプールの保護ポリシーでスナップショット スケジュールが競合していないことを確認してください。</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_succeeded" xml:space="preserve">
-    <value>スケジュールされているスナップショットが正しく作成されました。</value>
-  </data>
-  <data name="Message.body-vmpp_xapi_logon_failure" xml:space="preserve">
-    <value>XAPI セッションにログインできません。</value>
-  </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
     <value>使用中の XenServer ライセンスでは、スナップショット スケジュール機能を使用できません。</value>
   </data>
@@ -1414,48 +1303,6 @@
   </data>
   <data name="Message.name-vm_uncooperative" xml:space="preserve">
     <value>VM の非協調</value>
-  </data>
-  <data name="Message.name-vmpp_archive_failed_0" xml:space="preserve">
-    <value>VMPR アーカイブ処理に失敗しました</value>
-  </data>
-  <data name="Message.name-vmpp_archive_lock_failed" xml:space="preserve">
-    <value>VMPR アーカイブ処理に失敗しました</value>
-  </data>
-  <data name="Message.name-vmpp_archive_missed_event" xml:space="preserve">
-    <value>VMPR アーカイブ処理に失敗しました</value>
-  </data>
-  <data name="Message.name-vmpp_archive_succeeded" xml:space="preserve">
-    <value>スケジュールされたスナップショット アーカイブに成功しました</value>
-  </data>
-  <data name="Message.name-vmpp_archive_target_mount_failed" xml:space="preserve">
-    <value>VMPR アーカイブ処理に失敗しました</value>
-  </data>
-  <data name="Message.name-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>VMPR のアーカイブ先をマウント解除できません</value>
-  </data>
-  <data name="Message.name-vmpp_backup_succeeded" xml:space="preserve">
-    <value>バックアップ成功</value>
-  </data>
-  <data name="Message.name-vmpp_license_error" xml:space="preserve">
-    <value>VMPR の失敗: VMPR を使用できるライセンスがありません</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_archive_already_exists" xml:space="preserve">
-    <value>スナップショットをアーカイブできません</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_failed" xml:space="preserve">
-    <value>VMPR の失敗: スナップショットを作成できません</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_lock_failed" xml:space="preserve">
-    <value>VMPR の失敗: スナップショットを作成できません</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_missed_event" xml:space="preserve">
-    <value>VMPR の失敗: スナップショットを作成できません</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_succeeded" xml:space="preserve">
-    <value>スケジュールされているスナップショット作成に成功しました</value>
-  </data>
-  <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
-    <value>VMPP XAPI ログオンの失敗</value>
   </data>
   <data name="Message.name-vmss_license_error" xml:space="preserve">
     <value>スナップショット スケジュールの失敗: 定期的なスナップショット機能のライセンスがありません</value>
@@ -1715,9 +1562,6 @@
   <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
     <value>{0} {1} メモリ使用率</value>
   </data>
-  <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>[XenServer product]</value>
-  </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>SR が既に使用中であるため空き領域を解放できません</value>
   </data>
@@ -1753,9 +1597,6 @@
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
     <value>[XenServer product] Standard Per-Socket</value>
-  </data>
-  <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
-    <value>XenDesktop Platinum</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>ライセンスのヘルプ</value>
@@ -1878,7 +1719,7 @@
     <value>ボリューム マネージャーのログ</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Premium Edition</value>
+    <value>[Citrix] [XenServer product] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix] [XenServer product] Basic Edition</value>
@@ -1966,5 +1807,11 @@
   </data>
   <data name="Label-host.system_status-xspvscache" xml:space="preserve">
     <value>PVS アクセラレータの状態</value>
+  </data>
+  <data name="Description-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>スケジュールされたスナップショットのログ ファイル</value>
+  </data>
+  <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>スケジュールされたスナップショットのログ ファイル</value>
   </data>
 </root>

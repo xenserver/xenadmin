@@ -652,7 +652,7 @@
     <value>1</value>
   </data>
   <data name="warningText.Text" xml:space="preserve">
-    <value>(アクティブな VM が接続されているため、このネットワークの NIC と VLAN を変更できません)</value>
+    <value>(アクティブな仮想マシンが接続されているため、このネットワークの NIC と VLAN を変更できません)</value>
   </data>
   <data name="&gt;&gt;warningText.Name" xml:space="preserve">
     <value>warningText</value>
@@ -688,7 +688,7 @@
     <value>12</value>
   </data>
   <data name="labelCannotConfigureMTU.Text" xml:space="preserve">
-    <value>(XenServer Tools がインストールされていないアクティブな VM が接続されているため、このネットワークの MTU を変更できません)</value>
+    <value>(XenServer Tools がインストールされていないアクティブな仮想マシンが接続されているため、このネットワークの MTU を変更できません)</value>
   </data>
   <data name="&gt;&gt;labelCannotConfigureMTU.Name" xml:space="preserve">
     <value>labelCannotConfigureMTU</value>

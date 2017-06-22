@@ -502,7 +502,7 @@
     <value>58, 17</value>
   </data>
   <data name="nfsVersion3RadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>1</value>
   </data>
   <data name="nfsVersion3RadioButton.Text" xml:space="preserve">
     <value>NFSv3(&amp;3)</value>
