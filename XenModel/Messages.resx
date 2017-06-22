@@ -3913,9 +3913,6 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>Position {0} is already in use. Your VM will not boot with two disks in the same position. Do you want to swap the disk at '{0}' with this disk?</value>
   </data>
-  <data name="DEVICE_POSITION_IN_USE" xml:space="preserve">
-    <value>The selected device position is currently in use.</value>
-  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>You will have to restart the VM for changes in device position to take effect.</value>
   </data>
@@ -12125,6 +12122,12 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VBD_EDIT_CURRENTLY_ATTACHED" xml:space="preserve">
     <value>The disk is attached to a VM that is not in halted state.</value>
+  </data>
+  <data name="VBD_EDIT_CURRENTLY_IN_USE" xml:space="preserve">
+    <value>{0} - currently in use</value>
+  </data>
+  <data name="VBD_EDIT_CURRENTLY_IN_USE_BY" xml:space="preserve">
+    <value>{0} - currently in use by '{1}'</value>
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>The VCPUs can only be changed when the VM is shut down.</value>

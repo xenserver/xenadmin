@@ -10953,15 +10953,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected device position is currently in use..
-        /// </summary>
-        public static string DEVICE_POSITION_IN_USE {
-            get {
-                return ResourceManager.GetString("DEVICE_POSITION_IN_USE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You will have to restart the VM for changes in device position to take effect..
         /// </summary>
         public static string DEVICE_POSITION_RESTART_REQUIRED {
@@ -34986,6 +34977,24 @@ namespace XenAdmin {
         public static string VBD_EDIT_CURRENTLY_ATTACHED {
             get {
                 return ResourceManager.GetString("VBD_EDIT_CURRENTLY_ATTACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} - currently in use.
+        /// </summary>
+        public static string VBD_EDIT_CURRENTLY_IN_USE {
+            get {
+                return ResourceManager.GetString("VBD_EDIT_CURRENTLY_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} - currently in use by &apos;{1}&apos;.
+        /// </summary>
+        public static string VBD_EDIT_CURRENTLY_IN_USE_BY {
+            get {
+                return ResourceManager.GetString("VBD_EDIT_CURRENTLY_IN_USE_BY", resourceCulture);
             }
         }
         
