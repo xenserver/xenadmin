@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
@@ -860,6 +860,18 @@
   </data>
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
     <value>加入池的服务器的外部身份验证配置必须与池自身的外部身份验证配置匹配。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
+    <value>The host joining the pool must not have any bonds.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS" xml:space="preserve">
+    <value>The host joining the pool must not have any non-management vlans.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_TUNNELS" xml:space="preserve">
+    <value>The host joining the pool must not have any tunnels.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MANAGEMENT_VLAN_DOES_NOT_MATCH" xml:space="preserve">
+    <value>The host joining the pool must have the same management vlan.</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
     <value>加入池的服务器必须有物理管理 NIC (就是说，管理 NIC 不能位于 VLAN 或绑定的 PIF 中)。</value>
