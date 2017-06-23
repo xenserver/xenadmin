@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -39,11 +40,22 @@ namespace XenAdmin.Actions
     public class AssignVMsToVMApplianceAction : PureAsyncAction
     {
         private VM_appliance _vmAppliance;
-        private List<XenRef<VM>> _selectedVMs;
+        private List<VM> _selectedVMs;
 
-        public AssignVMsToVMApplianceAction(VM_appliance vmAppliance, List<XenRef<VM>> selectedVMs, bool suppressHistory)
+        public AssignVMsToVMApplianceAction(VM_appliance vmAppliance, List<XenRef<VM>> selectedVMRefs, bool suppressHistory)
+            : base(vmAppliance.Connection, selectedVMRefs.Count == 1 ?
+            string.Format(Messages.ASSIGN_VM_TO_VAPP, vmAppliance.Connection.Resolve(selectedVMRefs[0]), vmAppliance.Name)
+            : string.Format(Messages.ASSIGN_VMS_TO_VAPP, vmAppliance.Name), suppressHistory)
+        {
+            _vmAppliance = vmAppliance;
+            _selectedVMs = vmAppliance.Connection.ResolveAll(selectedVMRefs);
+            Pool = Helpers.GetPool(vmAppliance.Connection);
+
+        }
+
+        public AssignVMsToVMApplianceAction(VM_appliance vmAppliance, List<VM> selectedVMs, bool suppressHistory)
             : base(vmAppliance.Connection, selectedVMs.Count == 1 ?
-            string.Format(Messages.ASSIGN_VM_TO_VAPP, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name)
+            string.Format(Messages.ASSIGN_VM_TO_VAPP, selectedVMs[0], vmAppliance.Name)
             : string.Format(Messages.ASSIGN_VMS_TO_VAPP, vmAppliance.Name), suppressHistory)
         {
             _vmAppliance = vmAppliance;
@@ -57,11 +69,14 @@ namespace XenAdmin.Actions
             Description = Messages.ASSIGNING_VM_APPLIANCE;
             foreach (var xenRef in _vmAppliance.VMs)
             {
-                VM.set_appliance(Session, xenRef, null);
+                var found = _selectedVMs.Any(vm => vm.opaque_ref == xenRef);
+                if (!found)
+                    VM.set_appliance(Session, xenRef, null);
             }
-            foreach (var xenRef in _selectedVMs)
+            foreach (var vm in _selectedVMs)
             {
-                VM.set_appliance(Session, xenRef, _vmAppliance.opaque_ref);
+                if (vm.appliance == null || vm.appliance.opaque_ref != _vmAppliance.opaque_ref)
+                    VM.set_appliance(Session, vm.opaque_ref, _vmAppliance.opaque_ref);
             }
             Description = Messages.ASSIGNED_VM_APPLIANCE;
         }

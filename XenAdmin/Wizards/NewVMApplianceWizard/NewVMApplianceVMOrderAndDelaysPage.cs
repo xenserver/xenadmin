@@ -160,6 +160,11 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
                 _orderCell.Value = Settings.Order;
                 _startDelayCell.Value = Settings.StartDelay;
             }
+
+            public bool HasChanged()
+            {
+                return Vm.start_delay != Settings.StartDelay || Vm.order != Settings.Order;
+            }
         }
 
         private void updateTextBoxes()
@@ -210,7 +215,7 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
         /// Gets the current (uncommitted) VM settings. Must be called on the GUI thread.
         /// </summary>
         /// <returns></returns>
-        public Dictionary<VM, VMStartupOptions> getCurrentSettings()
+        private Dictionary<VM, VMStartupOptions> getCurrentSettings(bool all = true)
         {
             Program.AssertOnEventThread();
             if (dataGridView1.RowCount == 0)
@@ -219,9 +224,19 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
             var result = new Dictionary<VM, VMStartupOptions>();
             foreach (VMDataGridViewRow row in dataGridView1.Rows)
             {
-                result.Add(row.Vm, row.Settings);
+                if (all || row.HasChanged())
+                    result.Add(row.Vm, row.Settings);
             }
             return result;
+        }
+        
+        /// <summary>
+        /// Gets the changed (uncommitted) VM settings. Must be called on the GUI thread.
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<VM, VMStartupOptions> GetChangedSettings()
+        {
+            return getCurrentSettings(false);
         }
 
         #region Control event handlers
@@ -281,7 +296,7 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
 
         public AsyncAction SaveSettings()
         {
-            return new SetVMStartupOptionsAction(Pool.Connection, getCurrentSettings(), true);
+            return new SetVMStartupOptionsAction(Pool.Connection, GetChangedSettings(), true);
         }
 
         private VM_appliance _clone;

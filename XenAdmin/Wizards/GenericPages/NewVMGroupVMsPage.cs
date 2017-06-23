@@ -321,7 +321,7 @@ namespace XenAdmin.Wizards.GenericPages
         #region IEditPage implementation
         public override AsyncAction SaveSettings()
         {
-            return VMGroup<T>.AssignVMsToGroupAction(_clone, SelectedVMsRefs, true);
+            return VMGroup<T>.AssignVMsToGroupAction(_clone, SelectedVMs, true);
         }
 
         private T _clone;
