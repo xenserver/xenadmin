@@ -63,13 +63,15 @@ namespace XenAPI
                     if (vmGuestMetrics != null)
                     {
                         // PR-1373 - VM_guest_metrics.networks is a dictionary of IP addresses in the format:
-                        // [["0/ip", <IPv4 address>], ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
+                        // [["0/ip", <IPv4 address>], 
+                        //  ["0/ipv4/0", <IPv4 address>], ["0/ipv4/1", <IPv4 address>],
+                        //  ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
 
                         return
                             (from network in vmGuestMetrics.networks
                              where network.Key.StartsWith(string.Format("{0}/ip", this.device))
                              orderby network.Key
-                             select network.Value).ToList();
+                             select network.Value).Distinct().ToList();
                     }
                 }
 
