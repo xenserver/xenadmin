@@ -834,6 +834,9 @@
   <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>以下のエラーにより、外部認証が無効になりました。アクセス拒否により、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
   </data>
+  <data name="POOL_AUTH_DISABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>以下のエラーにより、外部認証が無効になりました。資格情報が無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
+  </data>
   <data name="POOL_AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>以下のエラーにより、外部認証が無効になりました。資格情報が無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
   </data>
