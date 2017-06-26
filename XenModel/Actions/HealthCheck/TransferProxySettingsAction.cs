@@ -30,16 +30,13 @@
  */
 
 using System;
-using System.IO.Pipes;
-using System.ServiceProcess;
-using System.Text;
 using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class TransferProxySettingsAction : PureAsyncAction
+    public class TransferProxySettingsAction : TransferDataToHealthCheckAction
     {
         private HTTPHelper.ProxyStyle proxyStyle;
         private string proxyAddress;
@@ -66,10 +63,7 @@ namespace XenAdmin.Actions
             proxyAuthenticationMethod = proxyAuthMethod;
         }
 
-        private const string HEALTHCHECKSERVICENAME = "XenServerHealthCheck";
-        private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
-
-        private string getProxySettings()
+        protected override string GetMessageToBeSent()
         {
             string proxySettings;
             switch (proxyStyle)
@@ -98,47 +92,6 @@ namespace XenAdmin.Actions
                             HealthCheckSettings.PROXY_SETTINGS, ((Int32)HTTPHelper.ProxyStyle.DirectConnection).ToString()});
                     return proxySettings;
             }
-        }
-
-        protected override void Run()
-        {
-            try
-            {
-                ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
-                if (sc.Status != ServiceControllerStatus.Running)
-                    return;
-            }
-            catch
-            {
-                return;
-            }
-
-            NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
-            int retryCount = 120;
-            do
-            {
-                try
-                {
-                    pipeClient.Connect(0);
-                }
-                catch (System.TimeoutException exp)
-                {
-                    throw exp;
-                }
-                catch 
-                {
-                    System.Threading.Thread.Sleep(1000);
-                    pipeClient = null;
-                    pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
-                }
-            } while (!pipeClient.IsConnected && retryCount-- != 0);
-
-            byte[] proxy = Encoding.UTF8.GetBytes(getProxySettings());
-            pipeClient.Write(proxy, 0, proxy.Length);
-
-            byte[] endMsg = Encoding.UTF8.GetBytes(HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE);
-            pipeClient.Write(endMsg, 0, endMsg.Length);
-            pipeClient.Close();
         }
     }
 }

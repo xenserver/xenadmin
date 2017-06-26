@@ -260,7 +260,7 @@ namespace XenAdmin.Dialogs.OptionsPages
 
             Program.ReconfigureConnectionSettings();
 
-            Core.HealthCheck.SendProxySettingsToHealthCheck(false);
+            Core.HealthCheck.SendProxySettingsToHealthCheck();
         }
 
         #endregion

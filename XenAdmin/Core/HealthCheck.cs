@@ -126,7 +126,7 @@ namespace XenAdmin.Core
                 CheckForAnalysisResultsCompleted(action.Succeeded);
         }
 
-        public static void SendProxySettingsToHealthCheck(bool suppressHistory)
+        public static void SendProxySettingsToHealthCheck()
         {
             string protectedUsername = Properties.Settings.Default.ProxyUsername;
             string protectedPassword = Properties.Settings.Default.ProxyPassword;
@@ -135,7 +135,7 @@ namespace XenAdmin.Core
                 Properties.Settings.Default.ProxyAddress,
                 Properties.Settings.Default.ProxyPort,
                 Properties.Settings.Default.ConnectionTimeout,
-                suppressHistory,
+                true,
                 Properties.Settings.Default.BypassProxyForServers,
                 Properties.Settings.Default.ProvideProxyAuthentication,
                 string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
@@ -150,10 +150,10 @@ namespace XenAdmin.Core
         {
             if (Program.Exiting)
                 return;
-            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata();
+            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(false);
             if (!string.IsNullOrEmpty(metadata))
             {
-                new TransferXenCenterMetadata(XenAdminConfigManager.Provider.GetXenCenterMetadata(), true).RunAsync();
+                new TransferXenCenterMetadataAction(metadata, true).RunAsync();
             }
         }
 

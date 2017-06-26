@@ -42,7 +42,6 @@ using XenAdmin.Network;
 using XenAdmin.Plugins;
 using XenAdmin.ServerDBs;
 using XenAPI;
-using XenAdmin.Telemetry;
 
 
 namespace XenAdmin
@@ -201,9 +200,9 @@ namespace XenAdmin
 
         public PluginManager PluginManager;
 
-        public string GetXenCenterMetadata()
+        public string GetXenCenterMetadata(bool isForXenCenter)
         {
-            return XenCenterTelemetry.GenerateMetadata(PluginManager);
+            return Metadata.Generate(PluginManager, isForXenCenter);
         }      
     }
 }

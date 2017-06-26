@@ -128,7 +128,7 @@ namespace XenAdminTests.XenModelTests
             get { return false; }
         }
 
-        public string GetXenCenterMetadata()
+        public string GetXenCenterMetadata(bool isForXenCenter)
         {
             return "";
         }

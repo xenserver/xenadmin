@@ -84,7 +84,7 @@ namespace XenServerHealthCheck
             get { return false; }
         }
 
-        public string GetXenCenterMetadata()
+        public string GetXenCenterMetadata(bool isForXenCenter)
         {
             return Properties.Settings.Default.XenCenterMetadata;
         }
