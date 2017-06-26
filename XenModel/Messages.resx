@@ -5971,6 +5971,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HEALTHCHECK_STATUS_ONE_ISSUE_FOUND" xml:space="preserve">
     <value>1 issue detected</value>
   </data>
+  <data name="HEALTH_CHECK" xml:space="preserve">
+    <value>HealthCheck</value>
+  </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>Authentication with [Citrix] Insight Services failed. See the application log files for more information.</value>
   </data>

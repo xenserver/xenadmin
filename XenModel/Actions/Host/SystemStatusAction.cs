@@ -142,7 +142,7 @@ namespace XenAdmin.Actions
             WriteExtraInfoToFile(mastersInfo, mastersDestination);
 
             // output the XenCenter metadata
-            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata();
+            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(true);
             string metadataDestination = string.Format("{0}\\{1}-Telemetry.json", filepath, timestring);
             WriteExtraInfoToFile(new List<string> {metadata}, metadataDestination);
 

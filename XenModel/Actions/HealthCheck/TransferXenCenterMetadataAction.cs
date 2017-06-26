@@ -29,39 +29,25 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Net;
-using XenAdmin.Actions;
-using XenAdmin.Network;
-using XenAPI;
+using XenAdmin.Core;
+using XenAdmin.Model;
 
-namespace XenAdmin
+namespace XenAdmin.Actions
 {
-    public static class XenAdminConfigManager
+    public class TransferXenCenterMetadataAction : TransferDataToHealthCheckAction
     {
-        public static IXenAdminConfigProvider Provider { get; set; }
-    }
+        private readonly string metadata;
 
-    public interface IXenAdminConfigProvider
-    {
-        Func<List<Role>, IXenConnection, string, AsyncAction.SudoElevationResult> SudoDialogDelegate { get; }
-        int ConnectionTimeout { get; }
-        Session CreateActionSession(Session session, IXenConnection connection);
-        bool Exiting { get; }
-        bool ForcedExiting { get; }
-        string XenCenterUUID { get; }
-        bool DontSudo { get; }
-        IWebProxy GetProxyFromSettings(IXenConnection connection);
-        IWebProxy GetProxyFromSettings(IXenConnection connection, bool isForXenServer);
-        int GetProxyTimeout(bool timeout);
-        void ShowObject(string newVMRef);
-        void HideObject(string newVMRef);
-        bool ObjectIsHidden(string opaqueRef);
-        string GetLogFile();
-        void UpdateServerHistory(string hostnameWithPort);
-        void SaveSettingsIfRequired();
-        bool ShowHiddenVMs { get; }
-        string GetXenCenterMetadata(bool isForXenCenter);
+        public TransferXenCenterMetadataAction(string metadata, bool suppressHistory)
+            : base(null, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, suppressHistory)
+        {
+            this.metadata = metadata;
+        }
+
+        protected override string GetMessageToBeSent()
+        {
+            return string.Join(SEPARATOR.ToString(), HealthCheckSettings.XENCENTER_METADATA,
+                EncryptionUtils.ProtectForLocalMachine(metadata));
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -10,73 +11,78 @@ using System.Web.Script.Serialization;
 using XenAdmin.Plugins;
 using XenAPI;
 
-namespace XenAdmin.Telemetry
+namespace XenAdmin.Core
 {
-    internal struct XenCenterMetadata
+    public static class Metadata
     {
-        public SystemInfo System;
-        public XenCenterSettings Settings;
-        public XenCenterInfrastructure Infrastructure;
-        public List<Plugin> Plugins;
-        public string Now;
-    }
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-    internal struct SystemInfo
-    {
-        public string Version;
-        public string DotNetVersion;
-        public string Culture;
-        public string OsVersion;
-        public string OsCulture;
-        public string IpAddress;
-    }
+        internal struct XenCenterMetadata
+        {
+            public SystemInfo System;
+            public XenCenterSettings Settings;
+            public XenCenterInfrastructure Infrastructure;
+            public List<Plugin> Plugins;
+            public string Now;
+            public string SourceOfData;
+        }
 
-    internal struct CFU
-    {
-        public bool AllowXenCenterUpdates;
-        public bool AllowPatchesUpdates;
-        public bool AllowXenServerUpdates;
-    }
+        internal struct SystemInfo
+        {
+            public string Version;
+            public string DotNetVersion;
+            public string Culture;
+            public string OsVersion;
+            public string OsCulture;
+            public string IpAddress;
+            public string Uuid;
+            public string Uptime;
+        }
 
-    internal struct Proxy
-    {
-        public bool UseProxy;
-        public bool UseIEProxy;
-        public bool BypassProxyForServers;
-        public bool ProxyAuthentication;
-        public string ProxyAuthenticationMethod;
-    }
+        internal struct CFU
+        {
+            public bool AllowXenCenterUpdates;
+            public bool AllowPatchesUpdates;
+            public bool AllowXenServerUpdates;
+        }
 
-    internal struct SaveAndRestore
-    {
-        public bool SaveSessionCredentials;
-        public bool RequireMasterPassword;
-    }
+        internal struct Proxy
+        {
+            public bool UseProxy;
+            public bool UseIEProxy;
+            public bool BypassProxyForServers;
+            public bool ProxyAuthentication;
+            public string ProxyAuthenticationMethod;
+        }
 
-    internal struct XenCenterSettings
-    {
-        public CFU CFU;
-        public Proxy Proxy;
-        public SaveAndRestore SaveAndRestore;
-        public string HelpLastUsed;
-    }
+        internal struct SaveAndRestore
+        {
+            public bool SaveSessionCredentials;
+            public bool RequireMasterPassword;
+        }
 
-    internal struct XenCenterInfrastructure
-    {
-        public int TotalConnections;
-        public int Connected;
-    }
+        internal struct XenCenterSettings
+        {
+            public CFU CFU;
+            public Proxy Proxy;
+            public SaveAndRestore SaveAndRestore;
+            public string HelpLastUsed;
+        }
 
-    internal struct Plugin
-    {
-        public string Name;
-        public string Organization;
-        public bool Enabled;
-    }
+        internal struct XenCenterInfrastructure
+        {
+            public int TotalConnections;
+            public int Connected;
+        }
 
-    public static class XenCenterTelemetry
-    {
-        public static string GenerateMetadata(PluginManager pluginManager)
+        internal struct Plugin
+        {
+            public string Name;
+            public string Organization;
+            public bool Enabled;
+        }
+
+        public static string Generate(PluginManager pluginManager, bool isForXenCenter)
         {
             var metadata = new XenCenterMetadata
             {
@@ -87,7 +93,9 @@ namespace XenAdmin.Telemetry
                     Culture = Thread.CurrentThread.CurrentUICulture.EnglishName,
                     OsVersion = Environment.OSVersion.ToString(),
                     OsCulture = CultureInfo.InstalledUICulture.EnglishName,
-                    IpAddress = GetLocalIPAddress()
+                    IpAddress = GetLocalIPAddress(),
+                    Uuid = Updates.GetUniqueIdHash(),
+                    Uptime = (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString()
                 },
                 Settings = new XenCenterSettings
                 {
@@ -118,7 +126,8 @@ namespace XenAdmin.Telemetry
                     Connected = ConnectionsManager.XenConnectionsCopy.Count(c => c.IsConnected)
                 },
                 Plugins = new List<Plugin>(),
-                Now = DateTime.UtcNow.ToString("u")
+                Now = isForXenCenter ? DateTime.UtcNow.ToString("u") : string.Empty,
+                SourceOfData = isForXenCenter ? Messages.XENCENTER : Messages.HEALTH_CHECK
             };
 
             if (pluginManager != null)
@@ -140,8 +149,16 @@ namespace XenAdmin.Telemetry
 
         private static string GetLocalIPAddress()
         {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = host.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
+            IPAddress ipAddress = null;
+            try
+            {
+                var host = Dns.GetHostEntry(Dns.GetHostName());
+               ipAddress = host.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
+            }
+            catch (Exception e)
+            {
+                log.ErrorFormat("Exception while getting the local IP address: {0}", e.Message);
+            }
             return ipAddress != null ? ipAddress.ToString() : null;
         }
     }
