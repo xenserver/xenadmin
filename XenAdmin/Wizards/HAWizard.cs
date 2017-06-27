@@ -150,7 +150,7 @@ namespace XenAdmin.Wizards
             long ntol = xenTabPageAssignPriorities.Ntol;
 
             // Save configured restart priorities and enable HA.
-            EnableHAAction action = new EnableHAAction(pool, xenTabPageAssignPriorities.GetCurrentStartupOptions(), new List<SR> { xenTabPageChooseSR.SelectedHeartbeatSR } , ntol);
+            EnableHAAction action = new EnableHAAction(pool, xenTabPageAssignPriorities.GetChangedStartupOptions(), new List<SR> { xenTabPageChooseSR.SelectedHeartbeatSR } , ntol);
             // We will need to re-enable buttons when the action completes
             action.Completed += Program.MainWindow.action_Completed;
             action.RunAsync();

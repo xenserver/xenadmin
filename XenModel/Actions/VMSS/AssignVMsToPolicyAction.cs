@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using XenAPI;
 using XenAdmin.Core;
 
@@ -48,21 +49,23 @@ namespace XenAdmin.Actions
             _policy = policy;
             _selectedVMs = selectedVMs;
             Pool = Helpers.GetPool(policy.Connection);
-
         }
 
         protected override void Run()
         {
             Description = Messages.ASSIGNING_VMSS_POLICY;
 
-            foreach (var xenRef in _policy.VMs)
+            var removedItems = _policy.VMs.Except(_selectedVMs);
+            foreach (var xenRef in removedItems)
             {
                 VM.set_snapshot_schedule(Session, xenRef, null);
             }
 
-            foreach (var xenRef in _selectedVMs)
+            foreach (var vmRef in _selectedVMs)
             {
-                VM.set_snapshot_schedule(Session, xenRef, _policy.opaque_ref);
+                var vm = _policy.Connection.Resolve(vmRef);
+                if (vm != null && (vm.snapshot_schedule == null || vm.snapshot_schedule.opaque_ref != _policy.opaque_ref))
+                    VM.set_snapshot_schedule(Session, vm.opaque_ref, _policy.opaque_ref);
             }
 
             Description = Messages.ASSIGNED_VMSS_POLICY;
