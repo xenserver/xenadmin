@@ -417,6 +417,10 @@ namespace XenAdmin.Dialogs.VMAppliances
             {
                 vm.PropertyChanged -= vm_PropertyChanged;
             }
+            foreach (VM_appliance vmAppliance in Pool.Connection.Cache.VM_appliances)
+            {
+                vmAppliance.PropertyChanged -= vApp_PropertyChanged;
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

@@ -41,17 +41,9 @@ namespace XenAdmin.Actions
     {
 
         private VMSS _policy;
-        private List<VM> _selectedVMs;
+        private List<XenRef<VM>> _selectedVMs;
 
-        public AssignVMsToPolicyAction(VMSS policy, List<XenRef<VM>> selectedVMRefs, bool suppressHistory)
-            : base(policy.Connection, Messages.ASSIGN_VMSS_POLICY_NOAMP, suppressHistory)
-        {
-            _policy = policy;
-            _selectedVMs = policy.Connection.ResolveAll(selectedVMRefs);
-            Pool = Helpers.GetPool(policy.Connection);
-        }
-
-        public AssignVMsToPolicyAction(VMSS policy, List<VM> selectedVMs, bool suppressHistory)
+        public AssignVMsToPolicyAction(VMSS policy, List<XenRef<VM>> selectedVMs, bool suppressHistory)
             : base(policy.Connection, Messages.ASSIGN_VMSS_POLICY_NOAMP, suppressHistory)
         {
             _policy = policy;
@@ -63,16 +55,16 @@ namespace XenAdmin.Actions
         {
             Description = Messages.ASSIGNING_VMSS_POLICY;
 
-            foreach (var xenRef in _policy.VMs)
+            var removedItems = _policy.VMs.Except(_selectedVMs);
+            foreach (var xenRef in removedItems)
             {
-                var found = _selectedVMs.Any(vm => vm.opaque_ref == xenRef);
-                if (!found) 
-                    VM.set_snapshot_schedule(Session, xenRef, null);
+                VM.set_snapshot_schedule(Session, xenRef, null);
             }
 
-            foreach (var vm in _selectedVMs)
+            foreach (var vmRef in _selectedVMs)
             {
-                if (vm.snapshot_schedule == null || vm.snapshot_schedule.opaque_ref != _policy.opaque_ref)
+                var vm = _policy.Connection.Resolve(vmRef);
+                if (vm != null && (vm.snapshot_schedule == null || vm.snapshot_schedule.opaque_ref != _policy.opaque_ref))
                     VM.set_snapshot_schedule(Session, vm.opaque_ref, _policy.opaque_ref);
             }
 
