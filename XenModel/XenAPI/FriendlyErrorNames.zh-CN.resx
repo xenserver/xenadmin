@@ -861,6 +861,9 @@
   <data name="POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>无法启用外部身份验证，所提供的凭据无效。</value>
   </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>Failed to enable external authentication, the supplied account was invalid.</value>
+  </data>
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
     <value>加入池的服务器的外部身份验证配置必须与池自身的外部身份验证配置匹配。</value>
   </data>

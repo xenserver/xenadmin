@@ -2291,6 +2291,15 @@ namespace XenAPI {
                 return ResourceManager.GetString("POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to enable external authentication, the supplied account was invalid..
+        /// </summary>
+        public static string POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT {
+            get {
+                return ResourceManager.GetString("POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to The external authentication configuration of the server joining the pool must match the pool&apos;s own external authentication configuration..
