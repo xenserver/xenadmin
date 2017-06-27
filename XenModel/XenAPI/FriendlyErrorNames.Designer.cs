@@ -2203,6 +2203,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server due to invalid account..
+        /// </summary>
+        public static string POOL_AUTH_DISABLE_FAILED_INVALID_ACCOUNT {
+            get {
+                return ResourceManager.GetString("POOL_AUTH_DISABLE_FAILED_INVALID_ACCOUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server as permission was denied..
         /// </summary>
         public static string POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED {
