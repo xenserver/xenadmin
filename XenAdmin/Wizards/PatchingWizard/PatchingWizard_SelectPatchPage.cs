@@ -44,6 +44,7 @@ using XenAdmin.Dialogs;
 using System.Drawing;
 using XenAdmin.Alerts;
 using System.Linq;
+using XenCenterLib.Archive;
 using XenAdmin.Actions;
 
 
@@ -55,7 +56,11 @@ namespace XenAdmin.Wizards.PatchingWizard
         public XenServerPatchAlert SelectedUpdateAlert;
         public XenServerPatchAlert FileFromDiskAlert;
         private bool firstLoad = true;
-        
+        private bool zippedUpdateSelected;
+        private string unzippedUpdateFilePath;
+
+        private UnzipXenServerPatchAction unzipUpdateAction = null;
+
         public PatchingWizard_SelectPatchPage()
         {
             InitializeComponent();
@@ -177,7 +182,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (!IsInAutomatedUpdatesMode)
                 {
-                    var fileName = fileNameTextBox.Text.ToLowerInvariant();
+                    var fileName = zippedUpdateSelected ? unzippedUpdateFilePath : fileNameTextBox.Text.ToLowerInvariant();
 
                     SelectedUpdateAlert = downloadUpdateRadioButton.Checked
                              ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
@@ -325,10 +330,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             else if (selectFromDiskRadioButton.Checked)
             {
                 if (isValidFile(fileNameTextBox.Text))
-                {
                     return true;
-                }
+
+                if (zippedUpdateSelected && isValidFile(unzippedUpdateFilePath))
+                    return true;
             }
+
             return false;
         }
 
@@ -344,7 +351,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private bool isValidFile(string fileName)
         {
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".zip") || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -370,9 +377,32 @@ namespace XenAdmin.Wizards.PatchingWizard
                     })
                 {
                     if (dlg.ShowDialog(this) == DialogResult.OK && dlg.CheckFileExists)
-                        AddFile(dlg.FileName);
+                    {
+                        if (dlg.FileName.ToLowerInvariant().EndsWith(".zip"))
+                        {
+                            zippedUpdateSelected = true;              
+                            ExtractPatchAction(dlg.FileName);
+                            unzippedUpdateFilePath = unzipUpdateAction.UnzippedUpdatePatchPath;
+                            if (unzippedUpdateFilePath == null)
+                            {
+                                using (var errdlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                                     SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_ZIPFILE, Path.GetFileName(dlg.FileName)), Messages.UPDATES)))
+                                {
+                                    errdlg.ShowDialog(this);
+                                }
+                            }
+                            AddFile(dlg.FileName);
+                        }
+                        else
+                        {
+                            zippedUpdateSelected = false;
+                            AddFile(dlg.FileName);
+                        }    
+                    }
+                        
                 }
-                OnPageUpdated();
+                OnPageUpdated(); 
+
             }
             finally
             {
@@ -382,7 +412,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void AddFile(string fileName)
         {
-            if (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso")) //this iso is supplemental pack iso for XS, not branded
+            if (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".zip")  || fileName.ToLowerInvariant().EndsWith(".iso")) //this iso is supplemental pack iso for XS, not branded
             {
                 fileNameTextBox.Text = fileName;
                 selectFromDiskRadioButton.Checked = true;
@@ -413,13 +443,32 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else if (selectFromDiskRadioButton.Checked)
                 {
-                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
-                              ? fileNameTextBox.Text
-                               : null;
+                    if (zippedUpdateSelected)
+                    {
+                        return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
+                            ? unzippedUpdateFilePath
+                            : null;
+                    }
+                    else
+                    {
+                        return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
+                            ? fileNameTextBox.Text
+                            : null;
+                    }
                 }
                 else return null;
             }
         }
+
+        private void ExtractPatchAction(string zippedUpdatePath)
+        {
+            unzipUpdateAction = new UnzipXenServerPatchAction(zippedUpdatePath, UpdateExtension);
+            using (var dlg = new ActionProgressDialog(unzipUpdateAction, ProgressBarStyle.Marquee))
+            {
+                dlg.ShowDialog(Parent);
+            }
+        }
+
 
         #region DataGridView
 
