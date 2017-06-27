@@ -95,7 +95,7 @@ namespace XenAdmin.Core
                     OsCulture = CultureInfo.InstalledUICulture.EnglishName,
                     IpAddress = GetLocalIPAddress(),
                     Uuid = Updates.GetUniqueIdHash(),
-                    Uptime = (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString()
+                    Uptime = isForXenCenter ? (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString() : string.Empty
                 },
                 Settings = new XenCenterSettings
                 {
@@ -153,13 +153,13 @@ namespace XenAdmin.Core
             try
             {
                 var host = Dns.GetHostEntry(Dns.GetHostName());
-               ipAddress = host.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
+                ipAddress = host.AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
             }
             catch (Exception e)
             {
                 log.ErrorFormat("Exception while getting the local IP address: {0}", e.Message);
             }
-            return ipAddress != null ? ipAddress.ToString() : null;
+            return ipAddress != null ? ipAddress.ToString() : String.Empty;
         }
     }
 }

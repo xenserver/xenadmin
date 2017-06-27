@@ -188,7 +188,7 @@ namespace XenServerHealthCheck
             
             // output the XenCenter metadata
             var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(false);
-            string metadataDestination = string.Format("{0}\\{1}-Telemetry.json", filepath, timestring);
+            string metadataDestination = string.Format("{0}\\{1}-Metadata.json", filepath, timestring);
             WriteExtraInfoToFile(new List<string> {metadata}, metadataDestination);
 
             // Finish the collection of logs with bugtool.
