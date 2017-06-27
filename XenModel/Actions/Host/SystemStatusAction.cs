@@ -143,7 +143,7 @@ namespace XenAdmin.Actions
 
             // output the XenCenter metadata
             var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(true);
-            string metadataDestination = string.Format("{0}\\{1}-Telemetry.json", filepath, timestring);
+            string metadataDestination = string.Format("{0}\\{1}-Metadata.json", filepath, timestring);
             WriteExtraInfoToFile(new List<string> {metadata}, metadataDestination);
 
             // now wait for the status actions to return
