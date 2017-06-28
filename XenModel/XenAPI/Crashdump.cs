@@ -139,9 +139,11 @@ namespace XenAPI
         /// <summary>
         /// Get a record containing the current state of the given crashdump.
         /// First published in XenServer 4.0.
+        /// Deprecated since Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
+        [Deprecated("Unreleased")]
         public static Crashdump get_record(Session session, string _crashdump)
         {
             return new Crashdump((Proxy_Crashdump)session.proxy.crashdump_get_record(session.uuid, (_crashdump != null) ? _crashdump : "").parse());
@@ -150,9 +152,11 @@ namespace XenAPI
         /// <summary>
         /// Get a reference to the crashdump instance with the specified UUID.
         /// First published in XenServer 4.0.
+        /// Deprecated since Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
+        [Deprecated("Unreleased")]
         public static XenRef<Crashdump> get_by_uuid(Session session, string _uuid)
         {
             return XenRef<Crashdump>.Create(session.proxy.crashdump_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
@@ -264,8 +268,10 @@ namespace XenAPI
         /// <summary>
         /// Return a list of all the crashdumps known to the system.
         /// First published in XenServer 4.0.
+        /// Deprecated since Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
+        [Deprecated("Unreleased")]
         public static List<XenRef<Crashdump>> get_all(Session session)
         {
             return XenRef<Crashdump>.Create(session.proxy.crashdump_get_all(session.uuid).parse());

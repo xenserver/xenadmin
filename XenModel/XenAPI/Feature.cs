@@ -40,7 +40,7 @@ namespace XenAPI
 {
     /// <summary>
     /// A new piece of functionality
-    /// First published in .
+    /// First published in XenServer 7.2.
     /// </summary>
     public partial class Feature : XenObject<Feature>
     {
@@ -154,7 +154,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given Feature.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_feature">The opaque_ref of the given feature</param>
@@ -165,7 +165,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the Feature instance with the specified UUID.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -176,7 +176,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the Feature instances with the given label.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_label">label of object to return</param>
@@ -187,7 +187,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given Feature.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_feature">The opaque_ref of the given feature</param>
@@ -198,7 +198,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/label field of the given Feature.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_feature">The opaque_ref of the given feature</param>
@@ -209,7 +209,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/description field of the given Feature.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_feature">The opaque_ref of the given feature</param>
@@ -220,7 +220,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the enabled field of the given Feature.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_feature">The opaque_ref of the given feature</param>
@@ -231,7 +231,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the experimental field of the given Feature.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_feature">The opaque_ref of the given feature</param>
@@ -242,7 +242,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the version field of the given Feature.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_feature">The opaque_ref of the given feature</param>
@@ -253,7 +253,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the host field of the given Feature.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_feature">The opaque_ref of the given feature</param>
@@ -264,7 +264,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the Features known to the system.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<Feature>> get_all(Session session)
@@ -274,7 +274,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the Feature Records at once, in a single XML RPC call
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Feature>, Feature> get_all_records(Session session)

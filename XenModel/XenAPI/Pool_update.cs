@@ -40,7 +40,7 @@ namespace XenAPI
 {
     /// <summary>
     /// Pool-wide updates to the host software
-    /// First published in .
+    /// First published in XenServer 7.1.
     /// </summary>
     public partial class Pool_update : XenObject<Pool_update>
     {
@@ -168,7 +168,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -179,7 +179,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the pool_update instance with the specified UUID.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -190,7 +190,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the pool_update instances with the given label.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_label">label of object to return</param>
@@ -201,7 +201,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -212,7 +212,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/label field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -223,7 +223,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/description field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -234,7 +234,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the version field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -245,7 +245,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the installation_size field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -256,7 +256,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the key field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -267,7 +267,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the after_apply_guidance field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -278,7 +278,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the vdi field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -289,7 +289,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the hosts field of the given pool_update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -300,7 +300,7 @@ namespace XenAPI
 
         /// <summary>
         /// Introduce update VDI
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The VDI which contains a software update.</param>
@@ -311,7 +311,7 @@ namespace XenAPI
 
         /// <summary>
         /// Introduce update VDI
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The VDI which contains a software update.</param>
@@ -322,7 +322,7 @@ namespace XenAPI
 
         /// <summary>
         /// Execute the precheck stage of the selected update on a host
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -334,7 +334,7 @@ namespace XenAPI
 
         /// <summary>
         /// Execute the precheck stage of the selected update on a host
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -346,7 +346,7 @@ namespace XenAPI
 
         /// <summary>
         /// Apply the selected update to a host
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -358,7 +358,7 @@ namespace XenAPI
 
         /// <summary>
         /// Apply the selected update to a host
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -370,7 +370,7 @@ namespace XenAPI
 
         /// <summary>
         /// Apply the selected update to all hosts in the pool
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -381,7 +381,7 @@ namespace XenAPI
 
         /// <summary>
         /// Apply the selected update to all hosts in the pool
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -392,7 +392,7 @@ namespace XenAPI
 
         /// <summary>
         /// Removes the update's files from all hosts in the pool, but does not revert the update
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -403,7 +403,7 @@ namespace XenAPI
 
         /// <summary>
         /// Removes the update's files from all hosts in the pool, but does not revert the update
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -414,7 +414,7 @@ namespace XenAPI
 
         /// <summary>
         /// Removes the database entry. Only works on unapplied update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -425,7 +425,7 @@ namespace XenAPI
 
         /// <summary>
         /// Removes the database entry. Only works on unapplied update.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -436,7 +436,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the pool_updates known to the system.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<Pool_update>> get_all(Session session)
@@ -446,7 +446,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the pool_update Records at once, in a single XML RPC call
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Pool_update>, Pool_update> get_all_records(Session session)

@@ -290,7 +290,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the subsystem_vendor_name field of the given PCI.
-        /// First published in .
+        /// First published in XenServer 6.2 SP1 Hotfix 11.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pci">The opaque_ref of the given pci</param>
@@ -301,7 +301,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the subsystem_device_name field of the given PCI.
-        /// First published in .
+        /// First published in XenServer 6.2 SP1 Hotfix 11.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pci">The opaque_ref of the given pci</param>
@@ -513,7 +513,7 @@ namespace XenAPI
 
         /// <summary>
         /// Subsystem vendor name
-        /// First published in .
+        /// First published in XenServer 6.2 SP1 Hotfix 11.
         /// </summary>
         public virtual string subsystem_vendor_name
         {
@@ -532,7 +532,7 @@ namespace XenAPI
 
         /// <summary>
         /// Subsystem device name
-        /// First published in .
+        /// First published in XenServer 6.2 SP1 Hotfix 11.
         /// </summary>
         public virtual string subsystem_device_name
         {
