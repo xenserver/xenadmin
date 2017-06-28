@@ -391,7 +391,7 @@ namespace XenAdmin.SettingsPanels
                     return position;
 
                 if (vdi != null)
-                    return string.Format(Messages.VBD_EDIT_CURRENTLY_IN_USE_BY, position, vdi.ToString());
+                    return string.Format(Messages.VBD_EDIT_CURRENTLY_IN_USE_BY, position, vdi.ToString().Ellipsise(30));
 
                 return string.Format(Messages.VBD_EDIT_CURRENTLY_IN_USE, position);
             }
