@@ -195,8 +195,14 @@
   <data name="devicePositionComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="devicePositionComboBox.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="devicePositionComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 84</value>
+  </data>
+  <data name="devicePositionComboBox.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="devicePositionComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 21</value>
