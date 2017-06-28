@@ -158,21 +158,13 @@ namespace XenAdmin.SettingsPanels
                         if (comboBoxItemWithVdi != null)
                         {
                             devicePositionComboBox.Items.Add(comboBoxItemWithVdi);
+
+                            if (vbd != null && comboBoxItemWithVdi.VBD.userdevice == vbd.userdevice)
+                                devicePositionComboBox.SelectedItem = comboBoxItemWithVdi;
                         }
                         else
                         {
                             devicePositionComboBox.Items.Add(new DevicePositionComboBoxItem(devicePosition));
-                        }
-                    }
-
-                    // Make sure the userdevice for the selected VBD is the one selected in the combobox
-                    foreach (DevicePositionComboBoxItem item in devicePositionComboBox.Items)
-                    {
-                        if (item.VBD != null && item.VBD.userdevice == vbd.userdevice)
-                        {
-                            devicePositionComboBox.SelectedItem = item;
-
-                            break;
                         }
                     }
                 }
