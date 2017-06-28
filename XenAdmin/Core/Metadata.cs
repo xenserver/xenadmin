@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using System.Web.Script.Serialization;
+using XenAdmin.Model;
 using XenAdmin.Plugins;
 using XenAPI;
 
@@ -23,8 +24,9 @@ namespace XenAdmin.Core
             public XenCenterSettings Settings;
             public XenCenterInfrastructure Infrastructure;
             public List<Plugin> Plugins;
-            public string Now;
             public string SourceOfData;
+            public string Created;
+            public string Reported;
         }
 
         internal struct SystemInfo
@@ -126,8 +128,9 @@ namespace XenAdmin.Core
                     Connected = ConnectionsManager.XenConnectionsCopy.Count(c => c.IsConnected)
                 },
                 Plugins = new List<Plugin>(),
-                Now = isForXenCenter ? DateTime.UtcNow.ToString("u") : string.Empty,
-                SourceOfData = isForXenCenter ? Messages.XENCENTER : Messages.HEALTH_CHECK
+                SourceOfData = isForXenCenter ? Messages.XENCENTER : Messages.HEALTH_CHECK,
+                Created = DateTime.UtcNow.ToString("u"),
+                Reported = isForXenCenter ? DateTime.UtcNow.ToString("u") : HealthCheckSettings.REPORT_TIME_PLACEHOLDER
             };
 
             if (pluginManager != null)
