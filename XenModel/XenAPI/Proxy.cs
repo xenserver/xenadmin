@@ -740,6 +740,14 @@ namespace XenAPI
         Response<string>
         async_pool_create_vlan(string session, string _device, string _network, string _vlan);
 
+        [XmlRpcMethod("pool.management_reconfigure")]
+        Response<string>
+        pool_management_reconfigure(string session, string _network);
+
+        [XmlRpcMethod("Async.pool.management_reconfigure")]
+        Response<string>
+        async_pool_management_reconfigure(string session, string _network);
+
         [XmlRpcMethod("pool.create_VLAN_from_PIF")]
         Response<string []>
         pool_create_vlan_from_pif(string session, string _pif, string _network, string _vlan);
@@ -3527,14 +3535,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.management_reconfigure")]
         Response<string>
         async_host_management_reconfigure(string session, string _pif);
-
-        [XmlRpcMethod("pool.management_reconfigure")]
-        Response<string>
-        pool_management_reconfigure(string session, string _network);
-
-        [XmlRpcMethod("Async.pool.management_reconfigure")]
-        Response<string>
-        async_pool_management_reconfigure(string session, string _network);
 
         [XmlRpcMethod("host.local_management_reconfigure")]
         Response<string>

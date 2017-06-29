@@ -1015,7 +1015,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_default_template field of the given VM.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -1674,7 +1674,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the snapshot_schedule field of the given VM.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -1685,7 +1685,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_vmss_snapshot field of the given VM.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -1806,7 +1806,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the has_vendor_device field of the given VM.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -1817,7 +1817,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the requires_reboot field of the given VM.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -1828,7 +1828,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the reference_label field of the given VM.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3053,7 +3053,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the memory allocation of this VM. Sets all of memory_static_max, memory_dynamic_min, and memory_dynamic_max to the given value, and leaves memory_static_min untouched.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3065,7 +3065,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the memory allocation of this VM. Sets all of memory_static_max, memory_dynamic_min, and memory_dynamic_max to the given value, and leaves memory_static_min untouched.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3661,7 +3661,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the value of the snapshot schedule field
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3947,7 +3947,7 @@ namespace XenAPI
 
         /// <summary>
         /// Controls whether, when the VM starts in HVM mode, its virtual hardware will include the emulated PCI device for which drivers may be available through Windows Update. Usually this should never be changed on a VM on which Windows has been installed: changing it on such a VM is likely to lead to a crash on next start.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3959,7 +3959,7 @@ namespace XenAPI
 
         /// <summary>
         /// Controls whether, when the VM starts in HVM mode, its virtual hardware will include the emulated PCI device for which drivers may be available through Windows Update. Usually this should never be changed on a VM on which Windows has been installed: changing it on such a VM is likely to lead to a crash on next start.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3971,7 +3971,7 @@ namespace XenAPI
 
         /// <summary>
         /// Import an XVA from a URI
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_url">The URL of the XVA file</param>
@@ -3985,7 +3985,7 @@ namespace XenAPI
 
         /// <summary>
         /// Import an XVA from a URI
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_url">The URL of the XVA file</param>
@@ -4163,7 +4163,7 @@ namespace XenAPI
 
         /// <summary>
         /// true if this is a default template. Default template VMs can never be started or migrated, they are used only for cloning other VMs
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual bool is_default_template
         {
@@ -5246,7 +5246,7 @@ namespace XenAPI
 
         /// <summary>
         /// Ref pointing to a snapshot schedule for this VM
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         public virtual XenRef<VMSS> snapshot_schedule
         {
@@ -5265,7 +5265,7 @@ namespace XenAPI
 
         /// <summary>
         /// true if this snapshot was created by the snapshot schedule
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         public virtual bool is_vmss_snapshot
         {
@@ -5473,7 +5473,7 @@ namespace XenAPI
 
         /// <summary>
         /// When an HVM guest starts, this controls the presence of the emulated C000 PCI device which triggers Windows Update to fetch or update PV drivers.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool has_vendor_device
         {
@@ -5492,7 +5492,7 @@ namespace XenAPI
 
         /// <summary>
         /// Indicates whether a VM requires a reboot in order to update its configuration, e.g. its memory allocation.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual bool requires_reboot
         {
@@ -5511,7 +5511,7 @@ namespace XenAPI
 
         /// <summary>
         /// Textual reference to the template used to create a VM. This can be used by clients in need of an immutable reference to the template since the latter's uuid and name_label may change, for example, after a package installation or upgrade.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual string reference_label
         {
