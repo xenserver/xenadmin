@@ -27118,7 +27118,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Also apply all released updates on the new version (only on servers licensed for automated updates).
+        ///   Looks up a localized string similar to Also apply all released updates on the new version (only on pools licensed for automated updates).
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED {
             get {
