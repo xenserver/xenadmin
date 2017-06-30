@@ -23466,6 +23466,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server has different updates from the master.
+        /// </summary>
+        public static string NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER {
+            get {
+                return ResourceManager.GetString("NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server has different updates from servers already in the pool.
+        /// </summary>
+        public static string NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL {
+            get {
+                return ResourceManager.GetString("NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This server&apos;s network backend is different from the master&apos;s.
         /// </summary>
         public static string NEWPOOL_DIFFERENT_NETWORK_BACKENDS {
