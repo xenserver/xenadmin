@@ -84,10 +84,9 @@ namespace XenAdmin.Actions
                                 UnzippedUpdatePatchPath = path;
 
                                 log.DebugFormat("Update file extracted to '{0}'", path);
-
-                                break;
                             }
                         }
+                        break;
                     }
                     if (zipIterator != null)
                     {
@@ -98,8 +97,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("Exception occurred when extracting downloaded archive: {0}", ex.Message);
-                throw new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR);
+                log.ErrorFormat("Exception occurred when extracting archive: {0}", ex.Message);
             }
             finally
             {
@@ -110,7 +108,7 @@ namespace XenAdmin.Actions
 
         void archiveIterator_CurrentFileExtractProgressChanged(object sender, ExtractProgressChangedEventArgs e)
         {
-            int pc = 95 + (int)(5.0 * e.BytesTransferred / e.TotalBytesToTransfer);
+            int pc = (int)(100.0 * e.BytesTransferred / e.TotalBytesToTransfer);
             if (pc != PercentComplete)
                 PercentComplete = pc;
         }

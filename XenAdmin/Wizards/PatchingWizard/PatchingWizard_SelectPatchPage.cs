@@ -44,7 +44,6 @@ using XenAdmin.Dialogs;
 using System.Drawing;
 using XenAdmin.Alerts;
 using System.Linq;
-using XenCenterLib.Archive;
 using XenAdmin.Actions;
 
 
@@ -56,10 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public XenServerPatchAlert SelectedUpdateAlert;
         public XenServerPatchAlert FileFromDiskAlert;
         private bool firstLoad = true;
-        private bool zippedUpdateSelected;
         private string unzippedUpdateFilePath;
-
-        private UnzipXenServerPatchAction unzipUpdateAction = null;
 
         public PatchingWizard_SelectPatchPage()
         {
@@ -182,7 +178,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (!IsInAutomatedUpdatesMode)
                 {
-                    var fileName = zippedUpdateSelected ? unzippedUpdateFilePath : fileNameTextBox.Text.ToLowerInvariant();
+                    var fileName = isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath : fileNameTextBox.Text.ToLowerInvariant();
 
                     SelectedUpdateAlert = downloadUpdateRadioButton.Checked
                              ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
@@ -329,10 +325,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (selectFromDiskRadioButton.Checked)
             {
-                if (isValidFile(fileNameTextBox.Text))
+                if (isValidFile(unzippedUpdateFilePath))
                     return true;
 
-                if (zippedUpdateSelected && isValidFile(unzippedUpdateFilePath))
+                if (isValidFile(fileNameTextBox.Text))
                     return true;
             }
 
@@ -351,7 +347,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private bool isValidFile(string fileName)
         {
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".zip") || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -380,22 +376,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         if (dlg.FileName.ToLowerInvariant().EndsWith(".zip"))
                         {
-                            zippedUpdateSelected = true;              
-                            ExtractPatchAction(dlg.FileName);
-                            unzippedUpdateFilePath = unzipUpdateAction.UnzippedUpdatePatchPath;
-                            if (unzippedUpdateFilePath == null)
-                            {
-                                using (var errdlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
-                                     SystemIcons.Error, string.Format(Messages.UPDATES_WIZARD_NOTVALID_ZIPFILE, Path.GetFileName(dlg.FileName)), Messages.UPDATES)))
-                                {
-                                    errdlg.ShowDialog(this);
-                                }
-                            }
-                            AddFile(dlg.FileName);
+                            unzippedUpdateFilePath = ExtractPatchAction(dlg.FileName);
+                            if (!string.IsNullOrEmpty(unzippedUpdateFilePath))
+                                AddFile(dlg.FileName);
                         }
                         else
                         {
-                            zippedUpdateSelected = false;
                             AddFile(dlg.FileName);
                         }    
                     }
@@ -443,29 +429,36 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else if (selectFromDiskRadioButton.Checked)
                 {
-                    if (zippedUpdateSelected)
-                    {
-                        return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
-                            ? unzippedUpdateFilePath
-                            : null;
-                    }
-                    else
-                    {
-                        return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
-                            ? fileNameTextBox.Text
-                            : null;
-                    }
+                    return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
+                        ? isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath : fileNameTextBox.Text : null;
                 }
-                else return null;
+                else 
+                    return null;
             }
         }
 
-        private void ExtractPatchAction(string zippedUpdatePath)
+        private string ExtractPatchAction(string zippedUpdatePath)
         {
-            unzipUpdateAction = new UnzipXenServerPatchAction(zippedUpdatePath, UpdateExtension);
-            using (var dlg = new ActionProgressDialog(unzipUpdateAction, ProgressBarStyle.Marquee))
+            UnzipXenServerPatchAction unzipAction = new UnzipXenServerPatchAction(zippedUpdatePath, UpdateExtension);
+            using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {
                 dlg.ShowDialog(Parent);
+            }
+
+            if (string.IsNullOrEmpty(unzipAction.UnzippedUpdatePatchPath))
+            {
+                using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
+                    SystemIcons.Error,
+                    string.Format(Messages.UPDATES_WIZARD_NOTVALID_ZIPFILE, Path.GetFileName(zippedUpdatePath)),
+                    Messages.UPDATES)))
+                {
+                    dlg.ShowDialog(this);
+                }
+                return null;
+            }
+            else
+            {
+                return unzipAction.UnzippedUpdatePatchPath;
             }
         }
 
