@@ -406,24 +406,26 @@ namespace XenAdmin.Core
             if (slave == null || master == null)
                 return false;
 
+            if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
+                return false;
+
             List<Host> allHosts = new List<Host>(master.Connection.Cache.Hosts);
             allHosts.Add(slave);
 
-            // Make a list of updates that should be homogeneous
-            var homogeneousUpdates = new List<Pool_update>();
+            // Collect the updates that should be homogeneous
+            var homogeneousUpdates = new Dictionary<string, int>();
             foreach (var host in allHosts)
             {
-                homogeneousUpdates.AddRange(host.AppliedUpdates().Where(update => update.enforce_homogeneity));
-            }
-
-            foreach (var update in homogeneousUpdates)
-            {
-                if (allHosts.Any(host => !host.AppliedUpdates().Exists(u => u.uuid == update.uuid)))
+                foreach (var update in (host.AppliedUpdates().Where(update => update.enforce_homogeneity)))
                 {
-                    return true;
+                    if (homogeneousUpdates.ContainsKey(update.uuid))
+                        homogeneousUpdates[update.uuid]++;
+                    else
+                        homogeneousUpdates.Add(update.uuid, 1);
                 }
             }
-            return false;
+
+            return homogeneousUpdates.Any(update => update.Value != allHosts.Count);
         }
 
         private static bool SameLinuxPack(Host slave, Host master)
