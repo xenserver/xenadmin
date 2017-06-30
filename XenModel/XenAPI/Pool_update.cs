@@ -56,7 +56,8 @@ namespace XenAPI
             string key,
             List<update_after_apply_guidance> after_apply_guidance,
             XenRef<VDI> vdi,
-            List<XenRef<Host>> hosts)
+            List<XenRef<Host>> hosts,
+            bool enforce_homogeneity)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -67,6 +68,7 @@ namespace XenAPI
             this.after_apply_guidance = after_apply_guidance;
             this.vdi = vdi;
             this.hosts = hosts;
+            this.enforce_homogeneity = enforce_homogeneity;
         }
 
         /// <summary>
@@ -89,6 +91,7 @@ namespace XenAPI
             after_apply_guidance = update.after_apply_guidance;
             vdi = update.vdi;
             hosts = update.hosts;
+            enforce_homogeneity = update.enforce_homogeneity;
         }
 
         internal void UpdateFromProxy(Proxy_Pool_update proxy)
@@ -102,6 +105,7 @@ namespace XenAPI
             after_apply_guidance = proxy.after_apply_guidance == null ? null : Helper.StringArrayToEnumList<update_after_apply_guidance>(proxy.after_apply_guidance);
             vdi = proxy.vdi == null ? null : XenRef<VDI>.Create(proxy.vdi);
             hosts = proxy.hosts == null ? null : XenRef<Host>.Create(proxy.hosts);
+            enforce_homogeneity = (bool)proxy.enforce_homogeneity;
         }
 
         public Proxy_Pool_update ToProxy()
@@ -116,6 +120,7 @@ namespace XenAPI
             result_.after_apply_guidance = (after_apply_guidance != null) ? Helper.ObjectListToStringArray(after_apply_guidance) : new string[] {};
             result_.vdi = (vdi != null) ? vdi : "";
             result_.hosts = (hosts != null) ? Helper.RefListToStringArray(hosts) : new string[] {};
+            result_.enforce_homogeneity = enforce_homogeneity;
             return result_;
         }
 
@@ -134,6 +139,7 @@ namespace XenAPI
             after_apply_guidance = Helper.StringArrayToEnumList<update_after_apply_guidance>(Marshalling.ParseStringArray(table, "after_apply_guidance"));
             vdi = Marshalling.ParseRef<VDI>(table, "vdi");
             hosts = Marshalling.ParseSetRef<Host>(table, "hosts");
+            enforce_homogeneity = Marshalling.ParseBool(table, "enforce_homogeneity");
         }
 
         public bool DeepEquals(Pool_update other)
@@ -151,7 +157,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._key, other._key) &&
                 Helper.AreEqual2(this._after_apply_guidance, other._after_apply_guidance) &&
                 Helper.AreEqual2(this._vdi, other._vdi) &&
-                Helper.AreEqual2(this._hosts, other._hosts);
+                Helper.AreEqual2(this._hosts, other._hosts) &&
+                Helper.AreEqual2(this._enforce_homogeneity, other._enforce_homogeneity);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool_update server)
@@ -296,6 +303,17 @@ namespace XenAPI
         public static List<XenRef<Host>> get_hosts(Session session, string _pool_update)
         {
             return XenRef<Host>.Create(session.proxy.pool_update_get_hosts(session.uuid, (_pool_update != null) ? _pool_update : "").parse());
+        }
+
+        /// <summary>
+        /// Get the enforce_homogeneity field of the given pool_update.
+        /// First published in .
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
+        public static bool get_enforce_homogeneity(Session session, string _pool_update)
+        {
+            return (bool)session.proxy.pool_update_get_enforce_homogeneity(session.uuid, (_pool_update != null) ? _pool_update : "").parse();
         }
 
         /// <summary>
@@ -615,5 +633,24 @@ namespace XenAPI
             }
         }
         private List<XenRef<Host>> _hosts;
+
+        /// <summary>
+        /// Flag - if true, all hosts in a pool must apply this update
+        /// First published in .
+        /// </summary>
+        public virtual bool enforce_homogeneity
+        {
+            get { return _enforce_homogeneity; }
+            set
+            {
+                if (!Helper.AreEqual(value, _enforce_homogeneity))
+                {
+                    _enforce_homogeneity = value;
+                    Changed = true;
+                    NotifyPropertyChanged("enforce_homogeneity");
+                }
+            }
+        }
+        private bool _enforce_homogeneity;
     }
 }

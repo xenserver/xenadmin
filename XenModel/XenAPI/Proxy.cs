@@ -1220,6 +1220,10 @@ namespace XenAPI
         Response<string []>
         pool_update_get_hosts(string session, string _pool_update);
 
+        [XmlRpcMethod("pool_update.get_enforce_homogeneity")]
+        Response<bool>
+        pool_update_get_enforce_homogeneity(string session, string _pool_update);
+
         [XmlRpcMethod("pool_update.introduce")]
         Response<string>
         pool_update_introduce(string session, string _vdi);
@@ -7409,6 +7413,7 @@ namespace XenAPI
         public string [] after_apply_guidance;
         public string vdi;
         public string [] hosts;
+        public bool enforce_homogeneity;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
