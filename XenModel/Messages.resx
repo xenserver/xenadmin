@@ -9357,7 +9357,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Also apply all released updates on the new version</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED" xml:space="preserve">
-    <value>Also apply all released updates on the new version (only on servers licensed for automated updates)</value>
+    <value>Also apply all released updates on the new version (only on pools licensed for automated updates)</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
     <value>Automated updates are not supported on this [XenServer] version</value>
