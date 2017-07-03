@@ -376,9 +376,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         if (dlg.FileName.ToLowerInvariant().EndsWith(".zip"))
                         {
-                            unzippedUpdateFilePath = ExtractPatchAction(dlg.FileName);
-                            if (!string.IsNullOrEmpty(unzippedUpdateFilePath))
+                            string unzippedFilePath = ExtractPatchAction(dlg.FileName);
+                            if (!string.IsNullOrEmpty(unzippedFilePath))
+                            {
+                                unzippedUpdateFilePath = unzippedFilePath;
                                 AddFile(dlg.FileName);
+                            }                              
                         }
                         else
                         {
@@ -439,13 +442,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private string ExtractPatchAction(string zippedUpdatePath)
         {
-            UnzipXenServerPatchAction unzipAction = new UnzipXenServerPatchAction(zippedUpdatePath, UpdateExtension);
+            DownloadAndUnzipXenServerPatchAction unzipAction = new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath), null, zippedUpdatePath, UpdateExtension,".iso");
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {
                 dlg.ShowDialog(Parent);
             }
 
-            if (string.IsNullOrEmpty(unzipAction.UnzippedUpdatePatchPath))
+            if (string.IsNullOrEmpty(unzipAction.PatchPath))
             {
                 using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(
                     SystemIcons.Error,
@@ -458,7 +461,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else
             {
-                return unzipAction.UnzippedUpdatePatchPath;
+                return unzipAction.PatchPath;
             }
         }
 
