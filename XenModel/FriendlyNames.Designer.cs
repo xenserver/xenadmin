@@ -3418,6 +3418,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Repair Storage.
+        /// </summary>
+        public static string Message_action_pbd_plug_failed_on_server_start {
+            get {
+                return ResourceManager.GetString("Message.action-pbd_plug_failed_on_server_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply License.
         /// </summary>
         public static string Message_action_vbd_qos_failed {
@@ -3762,7 +3771,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A storage repository could not be attached when server &apos;{0}&apos; started.  You may be able to fix this using the &apos;Repair Storage&apos; option in the Storage menu..
+        ///   Looks up a localized string similar to A storage repository could not be attached when server &apos;{0}&apos; started..
         /// </summary>
         public static string Message_body_pbd_plug_failed_on_server_start {
             get {
