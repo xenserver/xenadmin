@@ -281,9 +281,7 @@ namespace XenServerHealthCheck
                 string[] metadata = message.Split(SEPARATOR);
                 if (metadata.Length != 2) 
                     return;
-                var metadataString = EncryptionUtils.UnprotectForLocalMachine(metadata[1]);
-                metadataString = metadataString.Replace(HealthCheckSettings.REPORT_TIME_PLACEHOLDER, DateTime.UtcNow.ToString("u"));
-                Properties.Settings.Default.XenCenterMetadata = metadataString;
+                Properties.Settings.Default.XenCenterMetadata = EncryptionUtils.UnprotectForLocalMachine(metadata[1]);
                 Properties.Settings.Default.Save();
             }
             catch (Exception e)

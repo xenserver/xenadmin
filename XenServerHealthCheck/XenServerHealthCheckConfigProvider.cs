@@ -37,6 +37,7 @@ using System.Net;
 using XenAdmin;
 using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.ServerDBs;
 using XenAPI;
@@ -86,7 +87,8 @@ namespace XenServerHealthCheck
 
         public string GetXenCenterMetadata(bool isForXenCenter)
         {
-            return Properties.Settings.Default.XenCenterMetadata;
+            var metadataString = Properties.Settings.Default.XenCenterMetadata;
+            return metadataString.Replace(HealthCheckSettings.REPORT_TIME_PLACEHOLDER, DateTime.UtcNow.ToString("u"));
         }
 
         public int GetProxyTimeout(bool timeout)
