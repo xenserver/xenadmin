@@ -391,7 +391,8 @@ namespace XenAdmin.Core
             
             return
                 !Helpers.ElyOrGreater(master) && !Helpers.ElyOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
-                slave.ProductVersion != master.ProductVersion ||
+                !Helpers.TampaOrGreater(master) && !Helpers.TampaOrGreater(slave) && slave.ProductVersion != master.ProductVersion || //check product version for pre-Tampa hosts
+                slave.PlatformVersion != master.PlatformVersion ||
                 slave.ProductBrand != master.ProductBrand;
         }
 
