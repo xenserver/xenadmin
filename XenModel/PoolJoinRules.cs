@@ -60,6 +60,8 @@ namespace XenAdmin.Core
             UnlicensedHostLicensedMaster,
             LicenseMismatch,
             DifferentServerVersion,
+            DifferentHomogeneousUpdatesFromMaster,
+            DifferentHomogeneousUpdatesFromPool,
             DifferentCPUs,
             DifferentNetworkBackends,
             MasterHasHA,
@@ -116,6 +118,9 @@ namespace XenAdmin.Core
 
             if (DifferentServerVersion(slaveHost, masterHost))
                 return Reason.DifferentServerVersion;
+
+            if (DifferentHomogeneousUpdates(slaveHost, masterHost))
+                return masterHost.Connection.Cache.Hosts.Length > 1 ? Reason.DifferentHomogeneousUpdatesFromPool : Reason.DifferentHomogeneousUpdatesFromMaster;
 
             if (FreeHostPaidMaster(slaveHost, masterHost, allowLicenseUpgrade))
                 return Reason.UnlicensedHostLicensedMaster;
@@ -190,6 +195,10 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_LICENSEMISMATCH;
                 case Reason.DifferentServerVersion:
                     return Messages.NEWPOOL_DIFF_SERVER;
+                case Reason.DifferentHomogeneousUpdatesFromMaster:
+                    return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER;
+                case Reason.DifferentHomogeneousUpdatesFromPool:
+                    return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL;
                 case Reason.DifferentCPUs:
                     return Messages.NEWPOOL_DIFF_HARDWARE;
                 case Reason.DifferentNetworkBackends:
@@ -384,8 +393,39 @@ namespace XenAdmin.Core
             
             return
                 !Helpers.FalconOrGreater(master) && !Helpers.FalconOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
-                slave.ProductVersion != master.ProductVersion ||
+                slave.PlatformVersion != master.PlatformVersion ||
                 slave.ProductBrand != master.ProductBrand;
+        }
+
+        /// <summary>
+        /// Check whether all updates that request homogeneity are in fact homogeneous
+        /// across the proposed pool. This is used in CanJoinPool and prevents the pool from being created
+        /// </summary>
+        private static bool DifferentHomogeneousUpdates(Host slave, Host master)
+        {
+            if (slave == null || master == null)
+                return false;
+
+            if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
+                return false;
+
+            List<Host> allHosts = new List<Host>(master.Connection.Cache.Hosts);
+            allHosts.Add(slave);
+
+            // Collect the updates that should be homogeneous
+            var homogeneousUpdates = new Dictionary<string, int>();
+            foreach (var host in allHosts)
+            {
+                foreach (var update in (host.AppliedUpdates().Where(update => update.enforce_homogeneity)))
+                {
+                    if (homogeneousUpdates.ContainsKey(update.uuid))
+                        homogeneousUpdates[update.uuid]++;
+                    else
+                        homogeneousUpdates.Add(update.uuid, 1);
+                }
+            }
+
+            return homogeneousUpdates.Any(update => update.Value != allHosts.Count);
         }
 
         private static bool SameLinuxPack(Host slave, Host master)
