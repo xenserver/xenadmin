@@ -40,7 +40,7 @@ namespace XenAPI
 {
     /// <summary>
     /// VM Snapshot Schedule
-    /// First published in .
+    /// First published in XenServer 7.2.
     /// </summary>
     public partial class VMSS : XenObject<VMSS>
     {
@@ -204,7 +204,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -215,7 +215,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the VMSS instance with the specified UUID.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -226,7 +226,7 @@ namespace XenAPI
 
         /// <summary>
         /// Create a new VMSS instance, and return its handle.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_record">All constructor arguments</param>
@@ -237,7 +237,7 @@ namespace XenAPI
 
         /// <summary>
         /// Create a new VMSS instance, and return its handle.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_record">All constructor arguments</param>
@@ -248,7 +248,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroy the specified VMSS instance.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -259,7 +259,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroy the specified VMSS instance.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -270,7 +270,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the VMSS instances with the given label.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_label">label of object to return</param>
@@ -281,7 +281,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -292,7 +292,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/label field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -303,7 +303,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/description field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -314,7 +314,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the enabled field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -325,7 +325,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the type field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -336,7 +336,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the retained_snapshots field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -347,7 +347,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the frequency field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -358,7 +358,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the schedule field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -369,7 +369,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the last_run_time field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -380,7 +380,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the VMs field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -391,7 +391,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the name/label field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -403,7 +403,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the name/description field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -415,7 +415,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the enabled field of the given VMSS.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -427,7 +427,7 @@ namespace XenAPI
 
         /// <summary>
         /// This call executes the snapshot schedule immediately
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -438,7 +438,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -450,7 +450,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the value of the frequency field
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -462,7 +462,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -474,7 +474,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -487,7 +487,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -499,7 +499,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -511,7 +511,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
@@ -523,7 +523,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the VMSSs known to the system.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<VMSS>> get_all(Session session)
@@ -533,7 +533,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the VMSS Records at once, in a single XML RPC call
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VMSS>, VMSS> get_all_records(Session session)

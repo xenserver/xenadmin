@@ -420,7 +420,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the managed field of the given network.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The opaque_ref of the given network</param>
@@ -863,7 +863,7 @@ namespace XenAPI
 
         /// <summary>
         /// true if the bridge is managed by xapi
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         public virtual bool managed
         {

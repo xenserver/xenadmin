@@ -139,8 +139,6 @@ echo "Unsigned artifacts archived"
 #build the tests
 echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && $MSBUILD
-#this script is used by XenRT
-cp ${REPO}/mk/xenadmintests.sh ${REPO}/XenAdminTests/bin/Release/
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
 
@@ -162,9 +160,8 @@ install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRA
 cp ${REPO}/mk/ISO_files/AUTORUN.INF ${ISO_DIR}
 cp ${REPO}/Branding/Images/AppIcon.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
-mkdir_clean ${OUTPUT_DIR}/installer
-tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}Setup.exe
+tar cjf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
 
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
@@ -173,9 +170,8 @@ install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_
 cp ${REPO}/mk/ISO_files/AUTORUN.INF ${L10N_ISO_DIR}
 cp ${REPO}/Branding/Images/AppIcon.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
-mkdir_clean ${OUTPUT_DIR}/installer.l10n
-tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
+tar cjf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
+install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
 
 #now package the pdbs
 cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb

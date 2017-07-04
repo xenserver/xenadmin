@@ -264,11 +264,11 @@ namespace XenAPI
         /// <summary>
         /// Get the PV_drivers_up_to_date field of the given VM_guest_metrics.
         /// First published in XenServer 4.0.
-        /// Deprecated since XenServer Dundee.
+        /// Deprecated since XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
-        [Deprecated("XenServer Dundee")]
+        [Deprecated("XenServer 7.0")]
         public static bool get_PV_drivers_up_to_date(Session session, string _vm_guest_metrics)
         {
             return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_up_to_date(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
@@ -353,7 +353,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the can_use_hotplug_vbd field of the given VM_guest_metrics.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
@@ -364,7 +364,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the can_use_hotplug_vif field of the given VM_guest_metrics.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
@@ -375,7 +375,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the PV_drivers_detected field of the given VM_guest_metrics.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
@@ -643,7 +643,7 @@ namespace XenAPI
 
         /// <summary>
         /// The guest's statement of whether it supports VBD hotplug, i.e. whether it is capable of responding immediately to instantiation of a new VBD by bringing online a new PV block device. If the guest states that it is not capable, then the VBD plug and unplug operations will not be allowed while the guest is running.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual tristate_type can_use_hotplug_vbd
         {
@@ -662,7 +662,7 @@ namespace XenAPI
 
         /// <summary>
         /// The guest's statement of whether it supports VIF hotplug, i.e. whether it is capable of responding immediately to instantiation of a new VIF by bringing online a new PV network device. If the guest states that it is not capable, then the VIF plug and unplug operations will not be allowed while the guest is running.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual tristate_type can_use_hotplug_vif
         {
@@ -681,7 +681,7 @@ namespace XenAPI
 
         /// <summary>
         /// At least one of the guest's devices has successfully connected to the backend.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool PV_drivers_detected
         {

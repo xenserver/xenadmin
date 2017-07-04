@@ -386,7 +386,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the required_cluster_stack field of the given SM.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sm">The opaque_ref of the given sm</param>
@@ -691,7 +691,7 @@ namespace XenAPI
 
         /// <summary>
         /// The storage plugin requires that one of these cluster stacks is configured and running.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string[] required_cluster_stack
         {

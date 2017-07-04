@@ -92,12 +92,12 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
         public bool ChangesMade { get; private set; }
 
         private List<VM> _selectedVMs = null;
-        private Dictionary<VM, VMStartupOptions> _currentSettings = null; 
+        private Dictionary<VM, VMStartupOptions> _changedSettings = null; 
 
         public void SetSelectedVMs(List<VM> selectedVMs)
         {
             _selectedVMs = selectedVMs;
-            _currentSettings = getCurrentSettings();
+            _changedSettings = GetChangedSettings();
             RefreshTab();
         }
 
@@ -106,8 +106,8 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
             dataGridView1.Rows.Clear();
             foreach (VM vm in _selectedVMs)
             {
-                VMStartupOptions settings = _currentSettings != null && _currentSettings.ContainsKey(vm)
-                                          ? new VMStartupOptions(_currentSettings[vm].Order, _currentSettings[vm].StartDelay)
+                VMStartupOptions settings = _changedSettings != null && _changedSettings.ContainsKey(vm)
+                                          ? new VMStartupOptions(_changedSettings[vm].Order, _changedSettings[vm].StartDelay)
                                           : new VMStartupOptions(vm.order, vm.start_delay);
 
                 
@@ -160,6 +160,11 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
                 _orderCell.Value = Settings.Order;
                 _startDelayCell.Value = Settings.StartDelay;
             }
+
+            public bool HasChanged()
+            {
+                return Vm.start_delay != Settings.StartDelay || Vm.order != Settings.Order;
+            }
         }
 
         private void updateTextBoxes()
@@ -207,10 +212,10 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
         }
 
         /// <summary>
-        /// Gets the current (uncommitted) VM settings. Must be called on the GUI thread.
+        /// Gets the changed (uncommitted) VM settings. Must be called on the GUI thread.
         /// </summary>
         /// <returns></returns>
-        public Dictionary<VM, VMStartupOptions> getCurrentSettings()
+        public Dictionary<VM, VMStartupOptions> GetChangedSettings()
         {
             Program.AssertOnEventThread();
             if (dataGridView1.RowCount == 0)
@@ -219,7 +224,8 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
             var result = new Dictionary<VM, VMStartupOptions>();
             foreach (VMDataGridViewRow row in dataGridView1.Rows)
             {
-                result.Add(row.Vm, row.Settings);
+                if (row.HasChanged())
+                    result.Add(row.Vm, row.Settings);
             }
             return result;
         }
@@ -281,7 +287,7 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
 
         public AsyncAction SaveSettings()
         {
-            return new SetVMStartupOptionsAction(Pool.Connection, getCurrentSettings(), true);
+            return new SetVMStartupOptionsAction(Pool.Connection, GetChangedSettings(), true);
         }
 
         private VM_appliance _clone;

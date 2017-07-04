@@ -618,7 +618,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ipv4_configuration_mode field of the given VIF.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -629,7 +629,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ipv4_addresses field of the given VIF.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -640,7 +640,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ipv4_gateway field of the given VIF.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -651,7 +651,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ipv6_configuration_mode field of the given VIF.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -662,7 +662,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ipv6_addresses field of the given VIF.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -673,7 +673,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ipv6_gateway field of the given VIF.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -836,7 +836,7 @@ namespace XenAPI
 
         /// <summary>
         /// Move the specified VIF to the specified network, even while the VM is running
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -848,7 +848,7 @@ namespace XenAPI
 
         /// <summary>
         /// Move the specified VIF to the specified network, even while the VM is running
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -1028,7 +1028,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configure IPv4 settings for this virtual interface
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -1042,7 +1042,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configure IPv4 settings for this virtual interface
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -1056,7 +1056,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configure IPv6 settings for this virtual interface
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -1070,7 +1070,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configure IPv6 settings for this virtual interface
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vif">The opaque_ref of the given vif</param>
@@ -1486,7 +1486,7 @@ namespace XenAPI
 
         /// <summary>
         /// Determines whether IPv4 addresses are configured on the VIF
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual vif_ipv4_configuration_mode ipv4_configuration_mode
         {
@@ -1505,7 +1505,7 @@ namespace XenAPI
 
         /// <summary>
         /// IPv4 addresses in CIDR format
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string[] ipv4_addresses
         {
@@ -1524,7 +1524,7 @@ namespace XenAPI
 
         /// <summary>
         /// IPv4 gateway (the empty string means that no gateway is set)
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string ipv4_gateway
         {
@@ -1543,7 +1543,7 @@ namespace XenAPI
 
         /// <summary>
         /// Determines whether IPv6 addresses are configured on the VIF
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual vif_ipv6_configuration_mode ipv6_configuration_mode
         {
@@ -1562,7 +1562,7 @@ namespace XenAPI
 
         /// <summary>
         /// IPv6 addresses in CIDR format
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string[] ipv6_addresses
         {
@@ -1581,7 +1581,7 @@ namespace XenAPI
 
         /// <summary>
         /// IPv6 gateway (the empty string means that no gateway is set)
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string ipv6_gateway
         {

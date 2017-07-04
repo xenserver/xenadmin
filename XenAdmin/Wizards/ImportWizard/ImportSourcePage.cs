@@ -172,7 +172,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		public ImportWizard.ImportType TypeOfImport { get; private set; }
 
-		public string FilePath { get { return m_textBoxFile.Text; } }
+		public string FilePath { get { return m_textBoxFile.Text.Trim(); } }
 
 		/// <summary>
 		/// Maybe null if no valid ovf has been found
@@ -187,7 +187,7 @@ namespace XenAdmin.Wizards.ImportWizard
 				if (m_selectedOvfEnvelope == null)
 					_SelectedOvfPackage = null;
 				else
-					_SelectedOvfPackage = XenOvf.Package.Create(m_textBoxFile.Text);
+                    _SelectedOvfPackage = XenOvf.Package.Create(FilePath);
 			}
 		}
 
@@ -241,7 +241,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 			try
 			{
-				FileInfo info = new FileInfo(m_textBoxFile.Text);
+                FileInfo info = new FileInfo(FilePath);
 				ImageLength = info.Length > 0 ? (ulong)info.Length : 0;
 
 				DiskCapacity = IsXvaVersion1
@@ -259,7 +259,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			ulong totalSize = 0;
 			XmlDocument xmlMetadata = new XmlDocument();
-			xmlMetadata.Load(m_textBoxFile.Text);
+            xmlMetadata.Load(FilePath);
 			XPathNavigator nav = xmlMetadata.CreateNavigator();
 			XPathNodeIterator nodeIterator = nav.Select(".//vdi");
 
@@ -271,7 +271,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		private string GetXmlStringFromTarXVA()
 		{
-			using (Stream stream = new FileStream(m_textBoxFile.Text, FileMode.Open, FileAccess.Read))
+            using (Stream stream = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
 			{
 			    ArchiveIterator iterator = ArchiveFactory.Reader(ArchiveFactory.Type.Tar, stream);
                 if( iterator.HasNext() )
@@ -306,7 +306,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		private bool GetDiskCapacityImage(out string error)
 		{
 			error = string.Empty;
-			string filename = m_textBoxFile.Text;
+            string filename = FilePath;
 
 			FileInfo info = new FileInfo(filename);
 			ImageLength = info.Length > 0 ? (ulong)info.Length : 0;
@@ -357,13 +357,13 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			error = string.Empty;
 
-			if (m_lastValidAppliance == m_textBoxFile.Text)
+            if (m_lastValidAppliance == FilePath)
 				return true;
 
 			SelectedOvfEnvelope = GetOvfEnvelope(out error);
 			if (SelectedOvfEnvelope != null)
 			{
-				m_lastValidAppliance = m_textBoxFile.Text;
+                m_lastValidAppliance = FilePath;
 				return true;
 			}
 
@@ -373,7 +373,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		private EnvelopeType GetOvfEnvelope(out string error)
 		{
 			error = string.Empty;
-			string path = m_textBoxFile.Text;
+            string path = FilePath;
 			string extension = Path.GetExtension(path).ToLower();
 
 			if (extension == ".ovf")
@@ -428,7 +428,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		private bool IsUri()
 		{
 			Regex regex = new Regex(Messages.URI_REGEX, RegexOptions.IgnoreCase);
-			return regex.Match(m_textBoxFile.Text).Success;
+            return regex.Match(FilePath).Success;
 		}
 
 		/// <summary>
@@ -438,14 +438,14 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			error = string.Empty;
 
-			if (String.IsNullOrEmpty(m_textBoxFile.Text))
+            if (String.IsNullOrEmpty(FilePath))
 				return false;
 
 			//if it's URI ignore
 			if (IsUri())
 				return true;
 
-			if (!PathValidator.IsPathValid(m_textBoxFile.Text))
+            if (!PathValidator.IsPathValid(FilePath))
 			{
 				error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_INVALID_PATH;
 				return false;
@@ -462,7 +462,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			error = string.Empty;
 			IsWIM = false;
 
-			string filepath = m_textBoxFile.Text;
+            string filepath = FilePath;
 
 			foreach (var ext in m_supportedXvaTypes)
 			{
@@ -519,7 +519,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			error = string.Empty;
 
-			if (File.Exists(m_textBoxFile.Text))
+            if (File.Exists(FilePath))
 				return true;
 
 			error = Messages.IMPORT_SELECT_APPLIANCE_PAGE_ERROR_NONE_EXIST_PATH;
@@ -533,7 +533,7 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             error = string.Empty;
 
-            var directory = Path.GetDirectoryName(m_textBoxFile.Text);
+            var directory = Path.GetDirectoryName(FilePath);
             var touchFile = Path.Combine(directory, "_");
 
             try
@@ -559,7 +559,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		private bool CheckIsCompressed(out string error)
 		{
 		    error = string.Empty;
-			string fileName = m_textBoxFile.Text;
+            string fileName = FilePath;
 			string extension = Path.GetExtension(fileName).ToLower();
 
 			if (extension == ".gz")
@@ -588,7 +588,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		    Uri uri;
             try
             {
-                uri = new Uri(m_textBoxFile.Text);
+                uri = new Uri(FilePath);
             }
             catch (ArgumentNullException)
             {

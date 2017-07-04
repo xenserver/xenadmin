@@ -166,7 +166,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -177,7 +177,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the PVS_site instance with the specified UUID.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -188,7 +188,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the PVS_site instances with the given label.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_label">label of object to return</param>
@@ -199,7 +199,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -210,7 +210,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/label field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -221,7 +221,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/description field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -232,7 +232,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the PVS_uuid field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -243,7 +243,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cache_storage field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -254,7 +254,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the servers field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -265,7 +265,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the proxies field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -276,7 +276,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the name/label field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -288,7 +288,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the name/description field of the given PVS_site.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -300,7 +300,7 @@ namespace XenAPI
 
         /// <summary>
         /// Introduce new PVS site
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name_label">name of the PVS site</param>
@@ -313,7 +313,7 @@ namespace XenAPI
 
         /// <summary>
         /// Introduce new PVS site
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name_label">name of the PVS site</param>
@@ -326,7 +326,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a site's meta data
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -337,7 +337,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a site's meta data
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -348,7 +348,7 @@ namespace XenAPI
 
         /// <summary>
         /// Update the PVS UUID of the PVS site
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -360,7 +360,7 @@ namespace XenAPI
 
         /// <summary>
         /// Update the PVS UUID of the PVS site
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_site">The opaque_ref of the given pvs_site</param>
@@ -372,7 +372,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the PVS_sites known to the system.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<PVS_site>> get_all(Session session)
@@ -391,7 +391,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual string uuid
         {
@@ -410,7 +410,7 @@ namespace XenAPI
 
         /// <summary>
         /// a human-readable name
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual string name_label
         {
@@ -429,7 +429,7 @@ namespace XenAPI
 
         /// <summary>
         /// a notes field containing human-readable description
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual string name_description
         {
@@ -448,7 +448,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier of the PVS site, as configured in PVS
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual string PVS_uuid
         {
@@ -467,7 +467,7 @@ namespace XenAPI
 
         /// <summary>
         /// The SR used by PVS proxy for the cache
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual List<XenRef<PVS_cache_storage>> cache_storage
         {
@@ -486,7 +486,7 @@ namespace XenAPI
 
         /// <summary>
         /// The set of PVS servers in the site
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual List<XenRef<PVS_server>> servers
         {
@@ -505,7 +505,7 @@ namespace XenAPI
 
         /// <summary>
         /// The set of proxies associated with the site
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual List<XenRef<PVS_proxy>> proxies
         {

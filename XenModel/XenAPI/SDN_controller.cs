@@ -40,7 +40,7 @@ namespace XenAPI
 {
     /// <summary>
     /// Describes the SDN controller that is to connect with the pool
-    /// First published in .
+    /// First published in XenServer 7.2.
     /// </summary>
     public partial class SDN_controller : XenObject<SDN_controller>
     {
@@ -133,7 +133,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given SDN_controller.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
@@ -144,7 +144,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the SDN_controller instance with the specified UUID.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -155,7 +155,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given SDN_controller.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
@@ -166,7 +166,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the protocol field of the given SDN_controller.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
@@ -177,7 +177,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the address field of the given SDN_controller.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
@@ -188,7 +188,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the port field of the given SDN_controller.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
@@ -199,7 +199,7 @@ namespace XenAPI
 
         /// <summary>
         /// Introduce an SDN controller to the pool.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_protocol">Protocol to connect with the controller.</param>
@@ -212,7 +212,7 @@ namespace XenAPI
 
         /// <summary>
         /// Introduce an SDN controller to the pool.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_protocol">Protocol to connect with the controller.</param>
@@ -225,7 +225,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the OVS manager of the pool and destroy the db record.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
@@ -236,7 +236,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the OVS manager of the pool and destroy the db record.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
@@ -247,7 +247,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the SDN_controllers known to the system.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<SDN_controller>> get_all(Session session)
@@ -257,7 +257,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the SDN_controller Records at once, in a single XML RPC call
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<SDN_controller>, SDN_controller> get_all_records(Session session)

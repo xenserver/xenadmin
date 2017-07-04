@@ -342,6 +342,7 @@
     <Compile Include="XenAPI-Extensions\VM_Docker_Version.cs" />
     <Compile Include="XenAPI-Extensions\vm_power_state.cs" />
     <Compile Include="XenAPI\allocation_algorithm.cs" />
+    <Compile Include="XenAPI\ApiVersion.cs" />
     <Compile Include="XenAPI\bond_mode.cs" />
     <Compile Include="XenAPI\DeprecatedAttribute.cs" />
     <Compile Include="XenAPI\DR_task.cs" />

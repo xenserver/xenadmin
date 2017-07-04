@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>An activation key can only be applied when the edition is set to 'free'.</value>
@@ -140,6 +140,12 @@
   </data>
   <data name="AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
     <value>The server was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>The host failed to enable external authentication.</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
+    <value>The host failed to enable external authentication.</value>
   </data>
   <data name="AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>Failed to enable external authentication, permission on the AD server was denied.</value>
@@ -813,6 +819,9 @@
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>You tried to create a VLAN on top of another VLAN - use the underlying physical PIF/bond instead</value>
   </data>
+  <data name="PIF_NOT_PRESENT" xml:space="preserve">
+    <value>This host has no PIF on the given network.</value>
+  </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>Operation cannot proceed while a tunnel exists on this interface.</value>
   </data>
@@ -849,6 +858,9 @@
   <data name="POOL_AUTH_ENABLE_FAILED_DUPLICATE_HOSTNAME" xml:space="preserve">
     <value>Failed to enable external authentication, a duplicate hostname was detected.</value>
   </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>The pool failed to enable external authentication.</value>
+  </data>
   <data name="POOL_AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
     <value>The pool failed to enable external authentication.</value>
   </data>
@@ -860,6 +872,9 @@
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>Failed to enable external authentication, the supplied credentials were invalid.</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>Failed to enable external authentication, the supplied account was invalid.</value>
   </data>
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
     <value>The external authentication configuration of the server joining the pool must match the pool's own external authentication configuration.</value>
@@ -878,6 +893,12 @@
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
     <value>The server joining the pool must have a physical management NIC (i.e. the management NIC must not be on a VLAN or bonded PIF).</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION" xml:space="preserve">
+    <value>The host joining the pool must have the same API version as the pool master.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA" xml:space="preserve">
+    <value>The host joining the pool must have the same database schema as the pool master.</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
     <value>The server joining the pool must have the same product version as the pool master.</value>
@@ -1370,6 +1391,15 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>Unable to attach empty optical drive to VM.</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
+    <value>Unable to activate changed block tracking.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_458" xml:space="preserve">
+    <value>Unable to deactivate changed block tracking.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_459" xml:space="preserve">
+    <value>Changed block tracking log is in an inconsistent state.</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>The VDI is not available</value>
   </data>
@@ -1601,6 +1631,9 @@ Authorized Roles: {1}</value>
   <data name="TASK_CANCELLED" xml:space="preserve">
     <value>The request was asynchronously cancelled.</value>
   </data>
+  <data name="TLS_CONNECTION_FAILED" xml:space="preserve">
+    <value>Cannot contact the other host using TLS on the specified address and port</value>
+  </data>
   <data name="TOO_BUSY" xml:space="preserve">
     <value>The request was rejected because the server is too busy.</value>
   </data>
@@ -1828,6 +1861,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_HAS_CHECKPOINT" xml:space="preserve">
     <value>You attempted to migrate a VM which has a checkpoint.</value>
+  </data>
+  <data name="VM_HAS_NO_SUSPEND_VDI" xml:space="preserve">
+    <value>VM cannot be resumed because it has no suspend VDI</value>
   </data>
   <data name="VM_HAS_PCI_ATTACHED" xml:space="preserve">
     <value>This operation could not be performed because the VM has one or more PCI devices passed through.</value>

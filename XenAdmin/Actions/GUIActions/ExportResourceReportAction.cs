@@ -803,6 +803,7 @@ namespace XenAdmin.Actions
                         }
                     }
                 }
+                addresses = new ComparableList<ComparableAddress>(addresses.Distinct());
                 if (MacInfo.Length == 0)
                     MacInfo = Messages.HYPHEN;
 

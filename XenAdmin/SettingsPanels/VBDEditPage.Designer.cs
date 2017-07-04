@@ -33,7 +33,6 @@ namespace XenAdmin.SettingsPanels
             this.deviceLabel = new System.Windows.Forms.Label();
             this.devicePositionComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelDevicePositionMsg = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTipContainer1 = new XenAdmin.Controls.ToolTipContainer();
@@ -65,20 +64,11 @@ namespace XenAdmin.SettingsPanels
             this.devicePositionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.devicePositionComboBox.FormattingEnabled = true;
             this.devicePositionComboBox.Name = "devicePositionComboBox";
-            this.devicePositionComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBoxDevicePosition_SelectedIndexChanged);
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // labelDevicePositionMsg
-            // 
-            resources.ApplyResources(this.labelDevicePositionMsg, "labelDevicePositionMsg");
-            this.labelDevicePositionMsg.AutoEllipsis = true;
-            this.labelDevicePositionMsg.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.labelDevicePositionMsg.MaximumSize = new System.Drawing.Size(320, 32000);
-            this.labelDevicePositionMsg.Name = "labelDevicePositionMsg";
             // 
             // tableLayoutPanel1
             // 
@@ -143,7 +133,6 @@ namespace XenAdmin.SettingsPanels
             this.Controls.Add(this.toolTipContainer1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.PriorityToolTipContainer);
-            this.Controls.Add(this.labelDevicePositionMsg);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.devicePositionComboBox);
             this.Controls.Add(this.deviceLabel);
@@ -168,7 +157,6 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.ComboBox modeComboBox;
         private System.Windows.Forms.ComboBox devicePositionComboBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelDevicePositionMsg;
         private System.Windows.Forms.Label lblLowest;
         private System.Windows.Forms.Label lblHighest;
         private XenAdmin.Controls.TransparentTrackBar diskAccessPriorityTrackBar;

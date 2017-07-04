@@ -146,7 +146,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given PVS_cache_storage.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -157,7 +157,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the PVS_cache_storage instance with the specified UUID.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -168,7 +168,7 @@ namespace XenAPI
 
         /// <summary>
         /// Create a new PVS_cache_storage instance, and return its handle.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_record">All constructor arguments</param>
@@ -179,7 +179,7 @@ namespace XenAPI
 
         /// <summary>
         /// Create a new PVS_cache_storage instance, and return its handle.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_record">All constructor arguments</param>
@@ -190,7 +190,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroy the specified PVS_cache_storage instance.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -201,7 +201,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroy the specified PVS_cache_storage instance.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -212,7 +212,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given PVS_cache_storage.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -223,7 +223,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the host field of the given PVS_cache_storage.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -234,7 +234,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the SR field of the given PVS_cache_storage.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -245,7 +245,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the site field of the given PVS_cache_storage.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -256,7 +256,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the size field of the given PVS_cache_storage.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -267,7 +267,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the VDI field of the given PVS_cache_storage.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
@@ -278,7 +278,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the PVS_cache_storages known to the system.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<PVS_cache_storage>> get_all(Session session)
@@ -297,7 +297,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual string uuid
         {
@@ -316,7 +316,7 @@ namespace XenAPI
 
         /// <summary>
         /// The host on which this object defines PVS cache storage
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual XenRef<Host> host
         {
@@ -335,7 +335,7 @@ namespace XenAPI
 
         /// <summary>
         /// SR providing storage for the PVS cache
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual XenRef<SR> SR
         {
@@ -354,7 +354,7 @@ namespace XenAPI
 
         /// <summary>
         /// The PVS_site for which this object defines the storage
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual XenRef<PVS_site> site
         {
@@ -373,7 +373,7 @@ namespace XenAPI
 
         /// <summary>
         /// The size of the cache VDI (in bytes)
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual long size
         {
@@ -392,7 +392,7 @@ namespace XenAPI
 
         /// <summary>
         /// The VDI used for caching
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual XenRef<VDI> VDI
         {

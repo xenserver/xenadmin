@@ -369,7 +369,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the hvm field of the given VM_metrics.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
@@ -380,7 +380,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the nested_virt field of the given VM_metrics.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
@@ -391,7 +391,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the nomigrate field of the given VM_metrics.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
@@ -676,7 +676,7 @@ namespace XenAPI
 
         /// <summary>
         /// hardware virtual machine
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual bool hvm
         {
@@ -695,7 +695,7 @@ namespace XenAPI
 
         /// <summary>
         /// VM supports nested virtualisation
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual bool nested_virt
         {
@@ -714,7 +714,7 @@ namespace XenAPI
 
         /// <summary>
         /// VM is immobile and can't migrate between hosts
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual bool nomigrate
         {

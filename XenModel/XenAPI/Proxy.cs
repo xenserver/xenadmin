@@ -740,6 +740,14 @@ namespace XenAPI
         Response<string>
         async_pool_create_vlan(string session, string _device, string _network, string _vlan);
 
+        [XmlRpcMethod("pool.management_reconfigure")]
+        Response<string>
+        pool_management_reconfigure(string session, string _network);
+
+        [XmlRpcMethod("Async.pool.management_reconfigure")]
+        Response<string>
+        async_pool_management_reconfigure(string session, string _network);
+
         [XmlRpcMethod("pool.create_VLAN_from_PIF")]
         Response<string []>
         pool_create_vlan_from_pif(string session, string _pif, string _network, string _vlan);
@@ -1223,6 +1231,10 @@ namespace XenAPI
         [XmlRpcMethod("pool_update.get_hosts")]
         Response<string []>
         pool_update_get_hosts(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.get_enforce_homogeneity")]
+        Response<bool>
+        pool_update_get_enforce_homogeneity(string session, string _pool_update);
 
         [XmlRpcMethod("pool_update.introduce")]
         Response<string>
@@ -3527,14 +3539,6 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.management_reconfigure")]
         Response<string>
         async_host_management_reconfigure(string session, string _pif);
-
-        [XmlRpcMethod("pool.management_reconfigure")]
-        Response<string>
-        pool_management_reconfigure(string session, string _network);
-
-        [XmlRpcMethod("Async.pool.management_reconfigure")]
-        Response<string>
-        async_pool_management_reconfigure(string session, string _network);
 
         [XmlRpcMethod("host.local_management_reconfigure")]
         Response<string>
@@ -7661,6 +7665,7 @@ namespace XenAPI
         public string [] after_apply_guidance;
         public string vdi;
         public string [] hosts;
+        public bool enforce_homogeneity;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
