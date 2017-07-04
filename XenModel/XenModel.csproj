@@ -119,7 +119,6 @@
     <Compile Include="Actions\StorageLink\SrCslgAdaptersScanAction.cs" />
     <Compile Include="Actions\Updates\DownloadAndUnzipXenServerPatchAction.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
-    <Compile Include="Actions\Updates\UnzipXenServerPatchAction.cs" />
     <Compile Include="Actions\Updates\XenCenterVersion.cs" />
     <Compile Include="Actions\Updates\XenServerPatch.cs" />
     <Compile Include="Actions\Updates\XenServerVersion.cs" />
