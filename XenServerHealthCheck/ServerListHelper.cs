@@ -85,7 +85,7 @@ namespace XenServerHealthCheck
             }
         }
 
-        private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
+        public const char SEPARATOR = '\x202f'; // narrow non-breaking space.
         private string ProtectCredential(ServerInfo connection)
         {
             string Host = connection.HostName ?? string.Empty;
@@ -288,6 +288,12 @@ namespace XenServerHealthCheck
             {
                 log.Error("Error parsing 'XenCenterMetadata' from XenCenter", e);
             }
+        }
+
+
+        public string XenCenterMetadata
+        {
+            get { return Properties.Settings.Default.XenCenterMetadata; }
         }
     }
 }
