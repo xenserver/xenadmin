@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>アクティブ化キーを適用するには、エディションの設定が free である必要があります。</value>
@@ -140,6 +140,12 @@
   </data>
   <data name="AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
     <value>サーバーでドメイン サーバーに接続できないため外部認証を有効にできません。設定を確認し、ドメイン サーバーに接続できることを確認してください。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>ホストが外部認証を有効にできませんでした。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
+    <value>ホストが外部認証を有効にできませんでした。</value>
   </data>
   <data name="AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>外部認証を有効にできません。Active Directory サーバーへのアクセスが拒否されました。</value>
@@ -217,7 +223,7 @@
     <value>この PIF ボンディング スレーブなので接続できません。</value>
   </data>
   <data name="CANNOT_PLUG_VIF" xml:space="preserve">
-    <value>ネットワーク インターフェイスが接続できないため、この VM を起動できません。既にほかで使用されている NIC があります。</value>
+    <value>ネットワーク インターフェイスが接続できないため、この仮想マシンを起動できません。既にほかで使用されている NIC があります。</value>
   </data>
   <data name="CANNOT_RESET_CONTROL_DOMAIN" xml:space="preserve">
     <value>コントロール ドメインの電源の状態をリセットすることはできません。</value>
@@ -457,7 +463,7 @@
     <value>サーバーが使用中のため、この処理を完了できません。</value>
   </data>
   <data name="HOST_IS_LIVE" xml:space="preserve">
-    <value>サーバーがライブであるため、この処理を完了できません。</value>
+    <value>サーバーが稼働中であるため、この処理を完了できません。</value>
   </data>
   <data name="HOST_IS_SLAVE" xml:space="preserve">
     <value>対象のサーバーはスレーブです。</value>
@@ -733,7 +739,7 @@
     <value>アップデートの適用に失敗しました。詳しくはログを参照してください。</value>
   </data>
   <data name="PATCH_APPLY_FAILED_BACKUP_FILES_EXIST" xml:space="preserve">
-    <value>パッチの適用に失敗しました。パッチの適用中にバックアップファイルが作成されています。これらのバックアップ ファイルを削除してから、パッチを再び適用してください。</value>
+    <value>パッチの適用に失敗しました。パッチの適用中にバックアップファイルが作成されました。これらのバックアップ ファイルを削除してから、パッチを再び適用してください。</value>
   </data>
   <data name="PATCH_IS_APPLIED" xml:space="preserve">
     <value>指定されたパッチは適用済みであり、破棄できません。</value>
@@ -813,6 +819,9 @@
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>VLAN 上に VLAN を作成することはできません。物理 PIF/ボンディングを使用してください。</value>
   </data>
+  <data name="PIF_NOT_PRESENT" xml:space="preserve">
+    <value>このホストには指定されたネットワークの PIF がありません。</value>
+  </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>このインターフェイスにトンネルが存在している間は、処理を続行できません。</value>
   </data>
@@ -835,7 +844,7 @@
     <value>以下のエラーにより、外部認証が無効になりました。アクセス拒否により、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
   </data>
   <data name="POOL_AUTH_DISABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
-    <value>以下のエラーにより、外部認証が無効になりました。資格情報が無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
+    <value>次のエラーにより、外部認証が無効になりました: アカウントが無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
   </data>
   <data name="POOL_AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>以下のエラーにより、外部認証が無効になりました。資格情報が無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
@@ -848,6 +857,9 @@
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_DUPLICATE_HOSTNAME" xml:space="preserve">
     <value>外部認証を有効にできません。ホスト名の重複が検出されました。</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>プールが外部認証を有効にできませんでした。</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
     <value>プールへの外部認証の有効化に失敗しました。</value>
@@ -862,25 +874,31 @@
     <value>外部認証を有効にできません。資格情報の指定が無効です。</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
-    <value>Failed to enable external authentication, the supplied account was invalid.</value>
+    <value>プールが外部認証を有効にできませんでした。</value>
   </data>
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
     <value>プールに追加するサーバーの外部認証の構成は、追加先プールの設定と同じである必要があります。</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
-    <value>The host joining the pool must not have any bonds.</value>
+    <value>プールに追加しているホストに、ボンディングを含めることができません。</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS" xml:space="preserve">
-    <value>The host joining the pool must not have any non-management vlans.</value>
+    <value>プールに追加しているホストに、非管理 VLAN を含めることができません。</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_TUNNELS" xml:space="preserve">
-    <value>The host joining the pool must not have any tunnels.</value>
+    <value>プールに追加しているホストに、トンネルを含めることができません。</value>
   </data>
   <data name="POOL_JOINING_HOST_MANAGEMENT_VLAN_DOES_NOT_MATCH" xml:space="preserve">
-    <value>The host joining the pool must have the same management vlan.</value>
+    <value>プールに追加しているホストに、同じ管理 VLAN を含めることができません。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
     <value>プールに追加するサーバーには、物理管理 NIC (つまり VLAN またはボンディングした PIF 以外の NIC) がある必要があります。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION" xml:space="preserve">
+    <value>プールに追加するホストには、プール マスターと同じ API バージョンが必要です。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA" xml:space="preserve">
+    <value>プールに追加するホストには、プール マスターと同じデータベース スキーマが必要です。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
     <value>プールに追加するサーバーの製品バージョンは、プール マスターのものと同じである必要があります。</value>
@@ -1373,6 +1391,15 @@
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>空の光学式ドライブを VM に接続することはできません。</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
+    <value>変更ブロック追跡をアクティブにできません。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_458" xml:space="preserve">
+    <value>変更ブロック追跡を非アクティブにできません。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_459" xml:space="preserve">
+    <value>変更ブロック追跡ログに一貫性がありません。</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI が使用できません。</value>
   </data>
@@ -1551,7 +1578,7 @@
     <value>SR に PBD が接続されていません。</value>
   </data>
   <data name="SR_HAS_PBD" xml:space="preserve">
-    <value>SR {0} はまだ PBD 経由でサーバーに接続されているため、破棄できません。</value>
+    <value>SR {0} がまだ PBD でサーバーに接続されているため、破棄できません。</value>
   </data>
   <data name="SR_INDESTRUCTIBLE" xml:space="preserve">
     <value>'indestructible' フラグが設定されていないため、SR を破棄できません。</value>
@@ -1603,6 +1630,9 @@
   </data>
   <data name="TASK_CANCELLED" xml:space="preserve">
     <value>要求が非同期的にキャンセルされました。</value>
+  </data>
+  <data name="TLS_CONNECTION_FAILED" xml:space="preserve">
+    <value>指定されたアドレスとポートで TLS を使用して他のホストに通信することができません。</value>
   </data>
   <data name="TOO_BUSY" xml:space="preserve">
     <value>サーバーがビジー状態であるため、要求が拒否されました。</value>
@@ -1659,7 +1689,7 @@
     <value>アップデートの事前チェックに失敗しました。サーバーのバージョンが正しくありません。</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
-    <value>この処理を実行できるのはローカルの superuser だけです。</value>
+    <value>この処理を実行できるのはローカルのスーパー ユーザーだけです。</value>
   </data>
   <data name="UUID_INVALID" xml:space="preserve">
     <value>指定した UUID は無効です。</value>
@@ -1831,6 +1861,9 @@
   </data>
   <data name="VM_HAS_CHECKPOINT" xml:space="preserve">
     <value>チェックポイントが作成された VM を移行しようとしています。</value>
+  </data>
+  <data name="VM_HAS_NO_SUSPEND_VDI" xml:space="preserve">
+    <value>一時停止 VDI がないため、仮想マシンを再開できません</value>
   </data>
   <data name="VM_HAS_PCI_ATTACHED" xml:space="preserve">
     <value>VM で PCI デバイスのパススルーが設定されているため、この処理を実行できません。</value>

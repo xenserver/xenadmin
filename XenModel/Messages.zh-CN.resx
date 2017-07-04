@@ -250,10 +250,10 @@
     <value>正在创建 {0}</value>
   </data>
   <data name="ACTION_DEACTIVATING_MULTIPLE_VDIS_STATUS" xml:space="preserve">
-    <value>正在取消激活虚拟磁盘...</value>
+    <value>正在停用虚拟磁盘...</value>
   </data>
   <data name="ACTION_DEACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
-    <value>正在取消激活多个虚拟磁盘</value>
+    <value>正在停用多个虚拟磁盘</value>
   </data>
   <data name="ACTION_DELETE_PVS_SITE_DESCRIPTION" xml:space="preserve">
     <value>正在删除缓存配置</value>
@@ -331,13 +331,13 @@
     <value>正在将磁盘连接到 VM“{0}”...</value>
   </data>
   <data name="ACTION_DISK_DEACTIVATED" xml:space="preserve">
-    <value>已取消激活磁盘</value>
+    <value>已停用磁盘</value>
   </data>
   <data name="ACTION_DISK_DEACTIVATING" xml:space="preserve">
-    <value>正在取消激活磁盘...</value>
+    <value>正在停用磁盘...</value>
   </data>
   <data name="ACTION_DISK_DEACTIVATING_TITLE" xml:space="preserve">
-    <value>正在取消激活 VM“{1}”上的磁盘“{0}”...</value>
+    <value>正在停用 VM“{1}”上的磁盘“{0}”...</value>
   </data>
   <data name="ACTION_DISK_DELETING_TITLE" xml:space="preserve">
     <value>正在从 SR“{1}”删除磁盘“{0}”</value>
@@ -1057,13 +1057,13 @@
     <value>正在激活 VM“{0}”上的虚拟网络接口</value>
   </data>
   <data name="ACTION_VIF_UNPLUGGED" xml:space="preserve">
-    <value>已取消激活虚拟网络接口</value>
+    <value>已停用虚拟网络接口</value>
   </data>
   <data name="ACTION_VIF_UNPLUGGING" xml:space="preserve">
-    <value>正在取消激活虚拟网络接口...</value>
+    <value>正在停用虚拟网络接口...</value>
   </data>
   <data name="ACTION_VIF_UNPLUG_TITLE" xml:space="preserve">
-    <value>正在取消激活 VM“{0}”上的虚拟网络接口</value>
+    <value>正在停用 VM“{0}”上的虚拟网络接口</value>
   </data>
   <data name="ACTION_VIF_UPDATED" xml:space="preserve">
     <value>已更新虚拟网络接口</value>
@@ -1228,7 +1228,7 @@
     <value>正在将 VM“{0}”转换为模板</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
-    <value>Waiting for slaves to recover...</value>
+    <value>正在等待从属服务器恢复...</value>
   </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>在池 {0} 上断开连接 Workload Balancing 失败: {1}。Workload Balancing 已暂停。</value>
@@ -1631,13 +1631,13 @@
     <value>VM 超级管理员</value>
   </data>
   <data name="AD_SELECT_ROLE_GROUP" xml:space="preserve">
-    <value>选择要分配给组“{0}”的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
+    <value>选择要分配给组“{0}”的角色。每个角色将继承列表中其下从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_ROLE_MIXED" xml:space="preserve">
-    <value>选择要分配给这些用户和组的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
+    <value>选择要分配给这些用户和组的角色。每个角色将继承列表中其下从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_ROLE_USER" xml:space="preserve">
-    <value>选择要分配给用户“{0}”的角色。每个角色将继承列表中其下面从属角色的所有权限。</value>
+    <value>选择要分配给用户“{0}”的角色。每个角色将继承列表中其下从属角色的所有权限。</value>
   </data>
   <data name="AD_SELECT_SINGLE_SUBJECT" xml:space="preserve">
     <value>选择要更改角色的单个使用者</value>
@@ -1762,7 +1762,7 @@
 请注意，如果启用了 RBAC，则将仅影响您有权消除的警报。</value>
   </data>
   <data name="ALERT_DISMISS_CONFIRM" xml:space="preserve">
-    <value>系统警报一旦消除，就将从服务器上永久删除。是否继续?</value>
+    <value>系统警报一旦消除，就将从服务器上永久删除。是否要继续?</value>
   </data>
   <data name="ALERT_DISMISS_SELECTED_CONFIRM" xml:space="preserve">
     <value>此操作将从服务器中永久删除选定警报。是否要继续?
@@ -2158,7 +2158,7 @@
     <value>升级后存在损坏的 SR。要解决该问题，应重新连接 SR。</value>
   </data>
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
-    <value>Tools ISO 位于损坏的 SR 上，[XenCenter] 将尝试修复该问题，然后再继续操作。是否继续?</value>
+    <value>Tools ISO 位于损坏的 SR 上，[XenCenter] 将尝试修复该问题，然后再继续操作。是否要继续?</value>
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>status-report-</value>
@@ -2272,7 +2272,7 @@
     <value>必须先在 VM“{0}”上安装 [XenServer product] Tools，才能为该 VM 激活此虚拟磁盘。</value>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
-    <value>(无法更改网络的 MTU，因为它正作为管理接口“{0}”使用)</value>
+    <value>(无法更改网络的 MTU，因为该 MTU 正用作管理接口“{0}”)</value>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_VM_NO_TOOLS" xml:space="preserve">
     <value>(无法更改网络的 MTU，因为连接了活动的 VM 但未安装工具)</value>
@@ -2287,34 +2287,34 @@
     <value>(无法更改网络的 NIC 和 VLAN，因为连接了活动的 VM)</value>
   </data>
   <data name="CANNOT_DEACTIVATE_ISO_IN_USE" xml:space="preserve">
-    <value>此 ISO 存储正在使用，无法取消激活。</value>
+    <value>此 ISO 存储正在使用，无法停用。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_NOT_ACTIVE" xml:space="preserve">
-    <value>该虚拟磁盘已在 VM“{0}”上取消激活。</value>
+    <value>该虚拟磁盘已在 VM“{0}”上停用。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_SNAPSHOT_IN_USE" xml:space="preserve">
-    <value>此快照正在使用，无法取消激活。</value>
+    <value>此快照正在使用，无法停用。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_IN_USE" xml:space="preserve">
-    <value>此虚拟磁盘正在使用，无法取消激活。</value>
+    <value>此虚拟磁盘正在使用，无法停用。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_IO_DRIVERS" xml:space="preserve">
-    <value>必须先在 VM“{0}”上安装 I/O 驱动程序，才能为该 VM 取消激活此虚拟磁盘。</value>
+    <value>必须先在 VM“{0}”上安装 I/O 驱动程序，才能为该 VM 停用此虚拟磁盘。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_NEEDS_TOOLS" xml:space="preserve">
-    <value>必须先在 VM“{0}”上安装 [XenServer product] Tools，才能为该 VM 取消激活此虚拟磁盘。</value>
+    <value>必须先在 VM“{0}”上安装 [XenServer product] Tools，才能为该 VM 停用此虚拟磁盘。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
-    <value>无法在 VM“{0}”上取消激活该虚拟磁盘，因为 VM 未运行。</value>
+    <value>无法在 VM“{0}”上停用此虚拟磁盘，因为该 VM 未运行。</value>
   </data>
   <data name="CANNOT_DELETE_ACTIVE_VDI" xml:space="preserve">
-    <value>虚拟磁盘必须先取消激活，然后才能删除。该虚拟磁盘正由 VM“{0}”使用。</value>
+    <value>虚拟磁盘必须先停用，然后才能删除。该虚拟磁盘正由 VM“{0}”使用。</value>
   </data>
   <data name="CANNOT_DELETE_ACTIVE_VDI_ISO" xml:space="preserve">
     <value>ISO 存储必须从 VM 中弹出，然后才能删除。该存储正由 VM“{0}”使用。</value>
   </data>
   <data name="CANNOT_DELETE_CANNOT_DEACTIVATE_REASON" xml:space="preserve">
-    <value>无法在 VM“{0}”上取消激活该虚拟磁盘并将其删除: 
+    <value>无法在 VM“{0}”上停用该虚拟磁盘并将其删除: 
 
 {1}</value>
   </data>
@@ -2346,7 +2346,7 @@
     <value>不支持删除 [XenServer product] Tools ISO 存储。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_ACTIVE_ON" xml:space="preserve">
-    <value>该虚拟磁盘在 VM“{0}”上处于活动状态。请先将该虚拟磁盘取消激活，然后再删除。</value>
+    <value>该虚拟磁盘在 VM“{0}”上处于活动状态。请先将该虚拟磁盘停用，然后再删除。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_MULTIPLE_VBDS" xml:space="preserve">
     <value>该虚拟磁盘连接了多个 VM。请先将虚拟磁盘从这些 VM 分离，然后再删除。</value>
@@ -3912,9 +3912,6 @@
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>位置 {0} 已在使用。如果同一位置存在两个磁盘，虚拟机将不会启动。是否将位于“{0}”的磁盘与该磁盘交换?</value>
   </data>
-  <data name="DEVICE_POSITION_IN_USE" xml:space="preserve">
-    <value>所选设备位置当前正在使用。</value>
-  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>必须重新启动 VM，设备位置的更改才能生效。</value>
   </data>
@@ -4665,7 +4662,7 @@
     <value>如果希望将该网络自动添加到新 VM 中，请选中下面的复选框。还可以将该网络设置为内部网络，或者为其分配 VLAN 和 NIC。</value>
   </data>
   <data name="EDIT_SYS_DISK_WARNING" xml:space="preserve">
-    <value>该操作将更改此 VM 某个系统磁盘的设备位置，并可能使 VM 继续无法启动。是否确实要继续?</value>
+    <value>此操作将更改此 VM 的一个系统磁盘的设备位置，并可能使 VM 继续无法启动。是否确实要继续?</value>
   </data>
   <data name="EDIT_SYS_DISK_WARNING_TITLE" xml:space="preserve">
     <value>编辑存储设置</value>
@@ -4796,10 +4793,10 @@
     <value>[XenCenter] 在连接到此服务器时遇到问题。</value>
   </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_MESSAGE" xml:space="preserve">
-    <value>无法取消激活以下虚拟磁盘:</value>
+    <value>无法停用以下虚拟磁盘:</value>
   </data>
   <data name="ERROR_DEACTIVATING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
-    <value>取消激活虚拟磁盘时出错</value>
+    <value>停用虚拟磁盘时出错</value>
   </data>
   <data name="ERROR_DESTROYING_STORAGE_ITEMS_MESSAGE" xml:space="preserve">
     <value>无法销毁以下存储:</value>
@@ -5048,7 +5045,7 @@
     <value>退出维护模式(&amp;E)</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE_PROMPT" xml:space="preserve">
-    <value>是否将以下 VM 自动迁移回该服务器，并在服务器上进行恢复和启动?
+    <value>您想将以下 VM 自动迁移回此服务器，在此服务器上恢复还是在此服务器上启动?
 {0}</value>
   </data>
   <data name="EXIT_SERVER_FROM_MAINTENANCE_MODE" xml:space="preserve">
@@ -5202,13 +5199,13 @@
     <value>外部命令已退出，退出代码为: {0}</value>
   </data>
   <data name="EXTERNAL_PLUGIN_FINISHED" xml:space="preserve">
-    <value>插件执行完毕</value>
+    <value>插件已完成运行</value>
   </data>
   <data name="EXTERNAL_PLUGIN_RUNNING" xml:space="preserve">
     <value>正在运行“{0}”</value>
   </data>
   <data name="EXTERNAL_PLUGIN_TITLE" xml:space="preserve">
-    <value>从插件“{1}”执行“{0}”</value>
+    <value>从插件“{1}”运行“{0}”</value>
   </data>
   <data name="EXTERNAL_PLUGIN_WIN32" xml:space="preserve">
     <value>无法运行插件可执行文件。有关详细信息，请参阅客户端日志。</value>
@@ -5484,7 +5481,7 @@
     <value>服务器:</value>
   </data>
   <data name="GENERAL_MEMORY_SERVER_FREE" xml:space="preserve">
-    <value>{0} 可用(共 {1})</value>
+    <value>可用 RAM 为 {0} (共 {1})</value>
   </data>
   <data name="GENERAL_MEMORY_VM" xml:space="preserve">
     <value>VM:</value>
@@ -5589,10 +5586,10 @@
     <value>不可用</value>
   </data>
   <data name="GRAPHS_CANNOT_ADD_VM_HALTED" xml:space="preserve">
-    <value>无法在 VM {0} 上添加新的性能图表，因为该 VM 未运行。</value>
+    <value>无法在 VM“{0}”上添加新的性能图表，因为该 VM 未运行。</value>
   </data>
   <data name="GRAPHS_CANNOT_EDIT_VM_HALTED" xml:space="preserve">
-    <value>无法在 VM {0} 上编辑性能图表，因为该 VM 未运行。</value>
+    <value>无法在 VM“{0}”上编辑性能图表，因为该 VM 未运行。</value>
   </data>
   <data name="GRAPHS_DEFAULT_NAME_CPU" xml:space="preserve">
     <value>CPU 性能</value>
@@ -5760,7 +5757,7 @@
     <value>{0} 台服务器中的 {1} 台</value>
   </data>
   <data name="HA_HEARTBEAT_SERVERS_INITIALISING" xml:space="preserve">
-    <value>Initializing...</value>
+    <value>正在初始化...</value>
   </data>
   <data name="HA_HEARTBEAT_SR" xml:space="preserve">
     <value>高可用性检测信号 SR</value>
@@ -5986,7 +5983,7 @@
     <value>http://www.citrix.com/about/legal/privacy.html</value>
   </data>
   <data name="HEALTH_CHECK_PRIVACY_POLICY" xml:space="preserve">
-    <value>根据 Citrix Insight Services 策略(网址为 {0})和 Citrix 隐私策略(网址为 {1})的规定，运行状况检查上载到 Citrix Insight Services 的信息将用于故障诊断和诊断支持以及改进产品质量、可靠性和性能。</value>
+    <value>根据 [Citrix] Insight Services 策略(网址为 {0})和 [Citrix] 隐私策略(网址为 {1})的规定，运行状况检查上载到 [Citrix] Insight Services 的信息将用于故障排除和诊断支持目的，以及改进我们的产品质量、可靠性和性能。</value>
   </data>
   <data name="HEALTH_CHECK_USER_HAS_NO_PERMISSION_TO_CONNECT" xml:space="preserve">
     <value>此用户无权访问此服务器。</value>
@@ -7474,7 +7471,7 @@ SCSI ID: {2}
     <value>确认</value>
   </data>
   <data name="MESSAGEBOX_DEACTIVATE_VD_TITLE" xml:space="preserve">
-    <value>取消激活虚拟磁盘</value>
+    <value>停用虚拟磁盘</value>
   </data>
   <data name="MESSAGEBOX_DELETE_CUSTOM_FIELD" xml:space="preserve">
     <value>该操作将永久删除“{0}”，从而销毁所有与其相关联的数据。是否继续?</value>
@@ -7483,7 +7480,7 @@ SCSI ID: {2}
     <value>该操作将永久删除 {0}，从而销毁其中的数据。是否继续?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_ISO_MULTIPLE" xml:space="preserve">
-    <value>该操作将永久删除这些 ISO，从而销毁其中的所有数据。是否继续?</value>
+    <value>此操作将永久删除这些 ISO，进而销毁其中的所有数据。是否要继续?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_ISO_TITLE" xml:space="preserve">
     <value>删除存储</value>
@@ -7492,22 +7489,22 @@ SCSI ID: {2}
     <value>删除多个存储项</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SNAPSHOT" xml:space="preserve">
-    <value>不允许删除单个快照磁盘。该操作将删除整个快照和任何其他连接的磁盘。是否继续?</value>
+    <value>不允许删除单个快照磁盘。此操作将删除整个快照以及连接的任何其他磁盘。是否要继续?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SNAPSHOTS_TITLE_MULTIPLE" xml:space="preserve">
     <value>删除多个完整快照</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SNAPSHOT_MULTIPLE" xml:space="preserve">
-    <value>不允许删除单个快照磁盘。如果删除这些快照磁盘，将导致每个磁盘所属的整个快照以及连接的任何其他磁盘随之删除。是否继续?</value>
+    <value>不允许删除单个快照磁盘。如果删除这些快照磁盘，将导致每个磁盘所属的整个快照以及连接的任何其他磁盘随之删除。是否要继续?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SNAPSHOT_TITLE" xml:space="preserve">
     <value>删除整个快照</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK" xml:space="preserve">
-    <value>该操作将永久删除此系统磁盘，可能会使 VM 无法启动。是否继续?</value>
+    <value>此操作将永久删除此系统磁盘，可能会使 VM 无法启动。是否要继续?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK_MULTIPLE" xml:space="preserve">
-    <value>该操作将永久删除这些系统磁盘，可能会使其 VM 无法启动。是否继续?</value>
+    <value>此操作将永久删除这些系统磁盘，可能会使其 VM 无法启动。是否要继续?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK_TITLE" xml:space="preserve">
     <value>删除系统磁盘</value>
@@ -7519,7 +7516,7 @@ SCSI ID: {2}
     <value>该操作将永久删除此虚拟磁盘，从而销毁其中的数据。是否继续?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_VD_MULTIPLE" xml:space="preserve">
-    <value>该操作将永久删除这些虚拟磁盘，从而销毁其中的所有数据。是否继续?</value>
+    <value>此操作将永久删除这些虚拟磁盘，进而销毁其中的所有数据。是否要继续?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_VD_TITLE" xml:space="preserve">
     <value>删除虚拟磁盘</value>
@@ -8138,9 +8135,9 @@ SCSI ID: {2}
     <value>iSCSI SR [{0} ({1}; {2})]</value>
   </data>
   <data name="NEWSR_ISCSI_FORMAT_WARNING" xml:space="preserve">
-    <value>在此 LUN 中创建新虚拟磁盘将销毁其中的任何数据。必须确保没有其他系统正在使用该 LUN (包括任何服务器)，否则虚拟磁盘在使用时可能会遭到损坏。
+    <value>在此 LUN 中创建新虚拟磁盘将销毁其中的所有数据。必须确保没有其他系统正在使用该 LUN (包括任何服务器)，否则虚拟磁盘在使用时可能会被损坏。
 
-是否格式化磁盘?</value>
+是否要格式化磁盘?</value>
   </data>
   <data name="NEWSR_ISO_DESCRIPTION" xml:space="preserve">
     <value>NFS ISO 库 [{0}]</value>
@@ -9651,7 +9648,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>无法加入池</value>
   </data>
   <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>This server must not have any bonds, non management VLANs or cross-server private networks</value>
+    <value>此服务器不得具有任何绑定、非管理 VLAN 或跨服务器专用网络</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
     <value>此服务器不得具有任何绑定、VLAN 或跨服务器专用网络</value>
@@ -9837,12 +9834,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="QUESTION_LOGOUT_AD_USER_MANY" xml:space="preserve">
     <value>您将注销 {0} 个用户。
 
-是否继续?</value>
+是否要继续?</value>
   </data>
   <data name="QUESTION_LOGOUT_AD_USER_ONE" xml:space="preserve">
     <value>您将注销用户 {0}。
 
-是否继续?</value>
+是否要继续?</value>
   </data>
   <data name="QUESTION_MARK" xml:space="preserve">
     <value>?</value>
@@ -9850,12 +9847,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="QUESTION_REMOVE_AD_USER_MANY" xml:space="preserve">
     <value>您将删除 {0} 个用户。
 
-是否继续?</value>
+是否要继续?</value>
   </data>
   <data name="QUESTION_REMOVE_AD_USER_ONE" xml:space="preserve">
     <value>您将删除用户 {0}。
 
-是否继续?</value>
+是否要继续?</value>
   </data>
   <data name="QUIESCED_SNAPSHOTS" xml:space="preserve">
     <value>静止快照</value>
@@ -10767,7 +10764,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>检查确认已在“{0}”上正确配置 [XenServer]，然后重试。</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
-    <value>Check the proxy settings and that [XenServer] is configured correctly on '{0}' and try again.</value>
+    <value>检查代理设置以及 [XenServer] 在“{0}”上是否正确配置，然后重试。</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>请稍候，然后重试。</value>
@@ -11303,16 +11300,16 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>VM 挂起时无法激活或停用磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_SYSVDI" xml:space="preserve">
-    <value>VM 运行时无法激活或取消激活系统磁盘</value>
+    <value>VM 运行时无法激活或停用系统磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VDI_NEED_TOOLS" xml:space="preserve">
-    <value>不能从正在运行的未安装 [XenServer product] Tools 的 VM 中激活或取消激活磁盘</value>
+    <value>不能从正在运行的未安装 [XenServer product] Tools 的 VM 中激活或停用磁盘</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法停用网络</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_TOOLS" xml:space="preserve">
-    <value>在未安装工具的情况下，无法在运行中的 VM 上取消激活网络</value>
+    <value>在未安装工具的情况下，无法在运行中的 VM 上停用网络</value>
   </data>
   <data name="TOOLTIP_DELETE_SUSPENDED" xml:space="preserve">
     <value>VM 挂起时无法删除磁盘</value>
@@ -11330,7 +11327,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>VM 运行时无法分离系统磁盘</value>
   </data>
   <data name="TOOLTIP_DETACH_VDI_MUST_DEACTIVATE" xml:space="preserve">
-    <value>必须先取消激活磁盘，才能进行分离。</value>
+    <value>必须先停用磁盘，才能进行分离。</value>
   </data>
   <data name="TOOLTIP_DETACH_VDI_NEED_TOOLS" xml:space="preserve">
     <value>不能从正在运行的未安装 [XenServer product] Tools 的 VM 中移除磁盘</value>
@@ -11548,10 +11545,10 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>由于许可证限制，无法迁移 VM“{0}”。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
-    <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
+    <value>无法迁移 VM“{0}”，因为该 VM 未安装最新的驱动程序。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
-    <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>
+    <value>无法迁移 VM“{0}”，因为无法暂停该 VM。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON" xml:space="preserve">
     <value>由于未知原因，无法迁移 VM“{0}”。有关更多详细信息，请参阅应用程序日志。</value>
@@ -11664,7 +11661,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>{0}: 不需要重新启动此服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_REBOOT_NEEDED_LIVE_PATCH" xml:space="preserve">
-    <value>{0}: 不需要重新启动此服务器，因为使用实时修补。</value>
+    <value>{0}: 不需要重新启动此服务器，因为使用的是实时修补。</value>
   </data>
   <data name="UPDATES_WIZARD_NO_TOOLS" xml:space="preserve">
     <value>VM {0} 未安装 [XenServer product] Tools。</value>
@@ -11673,7 +11670,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>安装最新版本的 [XenServer product] Tools 之前不能暂停 VM {0}。</value>
   </data>
   <data name="UPDATES_WIZARD_PAGE1_TOPTEXT" xml:space="preserve">
-    <value>选中每个要更新的每个服务器所对应的复选框。选中池的复选框可选择该池中的所有可用服务器。</value>
+    <value>选中要更新的每个服务器对应的复选框。选中池的复选框可选择该池中的所有可用服务器。</value>
   </data>
   <data name="UPDATES_WIZARD_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>{0}: 更新已应用到该服务器。将跳过该服务器。</value>
@@ -12129,6 +12126,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="VBD_EDIT_CURRENTLY_ATTACHED" xml:space="preserve">
     <value>磁盘连接的 VM 未处于停止状态。</value>
   </data>
+  <data name="VBD_EDIT_CURRENTLY_IN_USE" xml:space="preserve">
+    <value>{0} - 当前正在使用中</value>
+  </data>
+  <data name="VBD_EDIT_CURRENTLY_IN_USE_BY" xml:space="preserve">
+    <value>{0} - 当前正由“{1}”使用</value>
+  </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>仅当 VM 关闭时才能更改 vCPU。</value>
   </data>
@@ -12268,7 +12271,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>虚拟机</value>
   </data>
   <data name="VLAN_NETWORK_NAME" xml:space="preserve">
-    <value>Network {0} on VLAN {1}</value>
+    <value>VLAN {1} 上的网络 {0}</value>
   </data>
   <data name="VM" xml:space="preserve">
     <value>VM</value>
@@ -12301,7 +12304,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>当我单击“完成”时运行新快照计划作业(&amp;R)</value>
   </data>
   <data name="VMSS_FINISH_PAGE_TEXT" xml:space="preserve">
-    <value>检查下面的新快照计划，如果要更改任何设置，请单击“上一步”，或者单击“完成”以创建新计划。</value>
+    <value>检查新快照计划，如果要更改任何设置，请单击“上一步”，或者单击“完成”以创建新计划。</value>
   </data>
   <data name="VMSS_FINISH_TITLE" xml:space="preserve">
     <value>创建新计划</value>
@@ -12825,7 +12828,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>WLB 未知错误。</value>
   </data>
   <data name="WLB_ERROR_4001" xml:space="preserve">
-    <value>WLB 与 [XenServer] 建立会话时出错。</value>
+    <value>WLB 尝试与 [XenServer] 建立会话时出错。</value>
   </data>
   <data name="WLB_ERROR_4002" xml:space="preserve">
     <value>WLB 无法登录 [XenServer]。这可能是因为凭据无效。</value>
@@ -12861,7 +12864,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>WLB 数据收集服务无法迁移或启动 VM。</value>
   </data>
   <data name="WLB_ERROR_4014" xml:space="preserve">
-    <value>WLB 接收到未知的异常。</value>
+    <value>WLB 接收到未知异常。</value>
   </data>
   <data name="WLB_ERROR_4015" xml:space="preserve">
     <value>WLB 无法识别该池。</value>
@@ -13200,7 +13203,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>刷新</value>
   </data>
   <data name="WLB_REPORT_REMOTE_QUERY" xml:space="preserve">
-    <value>尝试执行远程查询时出错: {0}</value>
+    <value>尝试运行远程查询时出错: {0}</value>
   </data>
   <data name="WLB_REPORT_SEARCH" xml:space="preserve">
     <value>搜索</value>

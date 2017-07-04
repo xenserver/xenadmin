@@ -1452,7 +1452,7 @@
     <value>[XenServer product] Tools</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
-    <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux VM を作成できます。業務での使用は推奨されません。</value>
+    <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux 仮想マシンを作成できます。業務での使用は推奨されません。</value>
   </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>一覧にないオペレーティング システムを使用する場合は、このテンプレートを選択します。このテンプレートは、詳しい知識がある管理者向けです。また、弊社の製品は、標準テンプレートでサポートされる特定のディストリビューションおよびバージョンでのみ、動作テストが実施されていることをご了承ください。</value>
