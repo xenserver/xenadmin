@@ -125,7 +125,7 @@ namespace XenAdmin.Core
                     DotNetVersion = Environment.Version.ToString(4),
                     Culture = Thread.CurrentThread.CurrentUICulture.EnglishName,
                     OsVersion = Environment.OSVersion.ToString(),
-                    OsCulture = CultureInfo.InstalledUICulture.EnglishName,
+                    OsCulture = CultureInfo.CurrentUICulture.EnglishName,
                     IpAddress = GetLocalIPAddress(),
                     Uuid = Updates.GetUniqueIdHash(),
                     Uptime = isForXenCenter ? (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString() : string.Empty
