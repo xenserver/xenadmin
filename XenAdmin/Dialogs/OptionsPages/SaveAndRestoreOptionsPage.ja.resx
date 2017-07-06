@@ -241,7 +241,7 @@
     <value>0</value>
   </data>
   <data name="masterPasswordLabel.Text" xml:space="preserve">
-    <value>マスター パスワードにより、すべてのサーバー用のログイン情報が保護されます。XenCenter セッションを開始するときに、このマスター パスワードを入力します。
+    <value>マスター パスワードにより、すべてのサーバー用のログイン情報が保護されます。[XenCenter] セッションを開始するときに、このマスター パスワードを入力します。
 </value>
   </data>
   <data name="&gt;&gt;masterPasswordLabel.Name" xml:space="preserve">

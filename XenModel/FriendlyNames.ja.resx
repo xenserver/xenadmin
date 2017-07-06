@@ -1215,7 +1215,7 @@
     <value>XAPI セッションにログインできません。</value>
   </data>
   <data name="Message.body-wlb_consultation_failed" xml:space="preserve">
-    <value>プール '{0}' で WLB サーバーから '{1}' に対する推奨再配置情報を取得できません。</value>
+    <value>プール '{0}' は WLB サーバーから '{1}' に対する推奨再配置情報を取得できませんでした。</value>
   </data>
   <data name="Message.body-wlb_optimization_alert" xml:space="preserve">
     <value>WLB により、プール '{0}' の最適化が必要であることが報告されました。プールの最適化モードは '{1}' で、アラートの重要度は '{2}' です。</value>
@@ -1842,7 +1842,7 @@
     <value>ボリューム マネージャーのログ</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Premium Edition</value>
+    <value>[Citrix] [XenServer product] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix] [XenServer product] Basic Edition</value>

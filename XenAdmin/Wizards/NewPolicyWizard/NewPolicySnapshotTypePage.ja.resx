@@ -178,7 +178,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioButtonDiskOnly.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <data name="quiesceCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>29, 87</value>
+  </data>
+  <data name="quiesceCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 34</value>
+  </data>
+  <data name="quiesceCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="quiesceCheckBox.Text" xml:space="preserve">
+    <value>VM を休止してからスナップショットを作成する (Windows のみ)(&amp;Q)</value>
+  </data>
+  <data name="&gt;&gt;quiesceCheckBox.Name" xml:space="preserve">
+    <value>quiesceCheckBox</value>
+  </data>
+  <data name="&gt;&gt;quiesceCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;quiesceCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;quiesceCheckBox.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="radioButtonDiskAndMemory.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -187,7 +211,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioButtonDiskAndMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
+    <value>6, 127</value>
   </data>
   <data name="radioButtonDiskAndMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 18</value>
@@ -217,7 +241,7 @@
     <value>25, 56</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 43</value>
+    <value>460, 40</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -388,7 +412,7 @@
     <value>True</value>
   </data>
   <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 64</value>
+    <value>25, 3</value>
   </data>
   <data name="labelWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
