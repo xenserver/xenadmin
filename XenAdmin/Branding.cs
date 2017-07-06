@@ -57,7 +57,7 @@ namespace XenAdmin
             get
             {
                 var s = SEARCH;
-                return s != "[" + "xensearch]" ? s : InvisibleMessages.XEN_SEARCH;
+                return s != "[" + "xensearch]" ? s.ToLowerInvariant() : InvisibleMessages.XEN_SEARCH.ToLowerInvariant();
             }
         }
         
@@ -66,7 +66,7 @@ namespace XenAdmin
             get
             {
                 var s = UPDATE;
-                return s != "[" + "xsupdate]" ? s : InvisibleMessages.XEN_UPDATE;
+                return s != "[" + "xsupdate]" ? s.ToLowerInvariant() : InvisibleMessages.XEN_UPDATE.ToLowerInvariant();
             }
         }
 
@@ -75,7 +75,7 @@ namespace XenAdmin
             get
             {
                 var s = UPDATEISO;
-                return s != "[" + "iso]" ? s : InvisibleMessages.ISO_UPDATE;
+                return s != "[" + "iso]" ? s.ToLowerInvariant() : InvisibleMessages.ISO_UPDATE.ToLowerInvariant();
             }
         }
 
