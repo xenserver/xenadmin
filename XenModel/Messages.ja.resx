@@ -1794,7 +1794,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>Web ページを開く</value>
   </data>
   <data name="ALERT_NEW_VERSION" xml:space="preserve">
-    <value>新しい [XenCenter] が使用可能</value>
+    <value>{0} がリリースされています</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
     <value>{0} がリリースされています。[Citrix] Web サイトから新しいバージョンをダウンロードできます。</value>
@@ -2193,7 +2193,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>アップグレード後に接続に問題が生じた SR があります。この問題を解決するには、SR を再接続してください。</value>
   </data>
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
-    <value>接続に問題が生じた SR 上に XenServer Tools ISO があるため、[XenCenter] によって修復が試行されます。続行しますか?</value>
+    <value>接続に問題が生じた SR 上に [XenServer product] Tools ISO があるため、[XenCenter] によって修復が試行されます。続行しますか?</value>
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>状態レポート -</value>
@@ -2310,7 +2310,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>(管理インターフェイス '{0}' により使用されているため、このネットワークの MTU を変更できません)</value>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_VM_NO_TOOLS" xml:space="preserve">
-    <value>(XenServer Tools がインストールされていないアクティブな VM が接続されているため、このネットワークの MTU を変更できません)</value>
+    <value>([XenServer product] Tools がインストールされていないアクティブな仮想マシンが接続されているため、このネットワークの MTU を変更できません)</value>
   </data>
   <data name="CANNOT_CONFIGURE_MORE_FREQ_ARCHIVE" xml:space="preserve">
     <value>スナップショットのスケジュールよりも頻繁なアーカイブを構成することはできません。</value>
@@ -2387,7 +2387,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>この仮想ディスクは複数の VM に接続されています。すべての VM から接続を解除してから削除してください。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_RUNNING_VM_NO_TOOLS" xml:space="preserve">
-    <value>実行中の VM の仮想ディスクを削除するには XenServer Tools をインストールする必要があります。このディスクは実行中の VM '{0}' により使用されています。</value>
+    <value>実行中の VM の仮想ディスクを削除するには [XenServer product] Tools をインストールする必要があります。このディスクは実行中の VM '{0}' により使用されています。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_SUSPENDED_VM" xml:space="preserve">
     <value>一時停止中の VM の仮想ディスクは削除できません。このディスクは一時停止中の VM '{0}' により使用されています。</value>
@@ -6925,7 +6925,7 @@ SCSI ID: {2}
     <value>無償の [XenServer] 製品をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>[BRANDING_VERSION_5_6] よりも古い XenServer にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
+    <value>[BRANDING_VERSION_5_6] よりも古い [XenServer] にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>ライセンス サーバー {0} に接続できません。再接続の猶予期間は {1} までです。</value>
@@ -8028,6 +8028,12 @@ SCSI ID: {2}
   <data name="NEWNETWORK_VNAME" xml:space="preserve">
     <value>新規プライベート ネットワーク</value>
   </data>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER" xml:space="preserve">
+    <value>このサーバーにはマスターのものと異なるアップデートがあります</value>
+  </data>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL" xml:space="preserve">
+    <value>このサーバーには既にプールにあるサーバーとは異なるアップデートがあります</value>
+  </data>
   <data name="NEWPOOL_DIFFERENT_NETWORK_BACKENDS" xml:space="preserve">
     <value>このサーバーのネットワーク バックエンドはマスターのものと異なります</value>
   </data>
@@ -8044,7 +8050,7 @@ SCSI ID: {2}
     <value>[XenServer] Advanced Edition またはそれ以上のエディションのプールに Free Edition の [XenServer] を追加することはできません</value>
   </data>
   <data name="NEWPOOL_HAS_RUNNING_VMS" xml:space="preserve">
-    <value>このサーバーには実行中または一時停止中の VM があります</value>
+    <value>このサーバーには実行中の VM があります</value>
   </data>
   <data name="NEWPOOL_HAS_SHARED_STORAGE" xml:space="preserve">
     <value>このサーバーには共有ストレージがあります</value>
@@ -8881,9 +8887,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_LONG" xml:space="preserve">
     <value>ローカル ディスク上の VM によって、ディスクの再パーティションが阻止されます。
 
- [XenServer] [BRANDING_VERSION_7_0] では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
+ [XenServer] [BRANDING_VERSION_7_0] およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
 
-ただし、ローカル ストレージに VM が存在するため、現在のパーティション スキーマが保持されます。 [XenServer] [BRANDING_VERSION_7_0] にアップグレードして再パーティションを行うには、まず VM をローカル ストレージから移動する必要があります。</value>
+ただし、ローカル ストレージに VM が存在するため、現在のパーティション スキーマが保持されます。 [XenServer] [BRANDING_VERSION_7_0] およびそれ以降にアップグレードして再パーティションを行うには、まず VM をローカル ストレージから移動する必要があります。</value>
   </data>
   <data name="NOT_SAFE_TO_UPGRADE_DEFAULT_WARNING_SHORT" xml:space="preserve">
     <value>{0}: ローカル ディスク上の VM によってディスクの再パーティションが阻止されます。</value>
@@ -8891,7 +8897,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NOT_SAFE_TO_UPGRADE_NOT_ENOUGH_SPACE_LONG" xml:space="preserve">
     <value>ローカル ストレージのディスク サイズによって、ディスクの再パーティションが阻止されます。
 
-[XenServer] [BRANDING_VERSION_7_0] では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
+[XenServer] [BRANDING_VERSION_7_0] およびそれ以降では、新しいディスク パーティション スキーマを使用できます。これにより、より多くのメモリが割り当てられた dom0 およびバックアップ パーティション、ログ専用のパーティション、スワッピング、および UEFI を使用できます。
 
 ただし、ディスクの容量が不足しているため、再パーティションは行われず、現在のパーティション スキーマが保持されます。</value>
   </data>
@@ -10198,6 +10204,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="REVERTING_RESOLVED_PRECHECKS" xml:space="preserve">
     <value>解決された事前チェックを元に戻しています</value>
   </data>
+  <data name="REVERTING_RESOLVED_PRECHECKS_POOL" xml:space="preserve">
+    <value>{0} の解決された事前チェックを元に戻しています...</value>
+  </data>
   <data name="REVERTING_WIZARD_CHANGES" xml:space="preserve">
     <value>このウィザードによるすべての変更を元に戻しています</value>
   </data>
@@ -11284,7 +11293,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>VM が一時停止しているためネットワークをアクティブにできません</value>
   </data>
   <data name="TOOLTIP_ACTIVATE_VIF_TOOLS" xml:space="preserve">
-    <value>XenServer Tools 未インストールの VM では実行中にネットワークをアクティブにできません</value>
+    <value>[XenServer product] Tools 未インストールの VM では実行中にネットワークをアクティブにできません</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_SUSPENDED" xml:space="preserve">
     <value>VM が一時停止しているため、ディスクをアクティブまたは非アクティブにできません</value>
@@ -11299,7 +11308,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>VM が一時停止しているためネットワークを非アクティブにできません</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_TOOLS" xml:space="preserve">
-    <value>XenServer Tools 未インストールの VM では実行中にネットワークを非アクティブにできません</value>
+    <value>[XenServer product] Tools 未インストールの VM では実行中にネットワークを非アクティブにできません</value>
   </data>
   <data name="TOOLTIP_DELETE_SUSPENDED" xml:space="preserve">
     <value>VM が一時停止しているためディスクを削除できません</value>

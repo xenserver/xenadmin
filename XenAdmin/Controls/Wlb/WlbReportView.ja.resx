@@ -799,7 +799,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelUsers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-4, 4</value>
+    <value>6, 4</value>
   </data>
   <data name="labelUsers.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 18</value>

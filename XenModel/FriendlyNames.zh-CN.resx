@@ -1842,7 +1842,7 @@
     <value>卷管理器日志</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix] [XenServer product] 旗舰版</value>
+    <value>[Citrix] [XenServer product] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix] [XenServer product] Basic Edition</value>

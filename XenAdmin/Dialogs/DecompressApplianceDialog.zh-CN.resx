@@ -151,7 +151,7 @@
     <value>0</value>
   </data>
   <data name="m_buttonDecompress.Text" xml:space="preserve">
-    <value>解压</value>
+    <value>解压(&amp;U)</value>
   </data>
   <data name="&gt;&gt;m_buttonDecompress.Name" xml:space="preserve">
     <value>m_buttonDecompress</value>

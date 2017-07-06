@@ -163,7 +163,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSelectAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>350, 318</value>
+    <value>345, 318</value>
   </data>
   <data name="buttonSelectAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -196,7 +196,7 @@
     <value>430, 318</value>
   </data>
   <data name="buttonClearAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 23</value>
+    <value>98, 28</value>
   </data>
   <data name="buttonClearAll.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -299,6 +299,15 @@
   </data>
   <data name="ColumnCurrentGroup.MinimumWidth" type="System.Int32, mscorlib">
     <value>120</value>
+  </data>
+  <metadata name="ColumnQuiesceSupported.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnQuiesceSupported.HeaderText" xml:space="preserve">
+    <value>支持静止操作</value>
+  </data>
+  <data name="ColumnQuiesceSupported.MinimumWidth" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
@@ -454,7 +463,13 @@
     <value>ColumnCurrentGroup</value>
   </data>
   <data name="&gt;&gt;ColumnCurrentGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnQuiesceSupported.Name" xml:space="preserve">
+    <value>ColumnQuiesceSupported</value>
+  </data>
+  <data name="&gt;&gt;ColumnQuiesceSupported.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>NewVMGroupVMsPageBase</value>
