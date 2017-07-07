@@ -31,16 +31,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using XenAdmin;
 using XenServerHealthCheck;
-using XenAPI;
 using XenAdmin.Core;
-using XenAdmin.Network;
-using XenAdminTests;
 using System.IO.Pipes;
-using System.IO;
 using XenAdmin.Model;
 using NUnit.Framework;
 
@@ -206,7 +200,7 @@ namespace XenAdminTests.HealthCheckTests
             System.Threading.Thread.Sleep(1000);
             con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize);
-            Assert.IsTrue(ServerListHelper.instance.XenCenterMetadata == metadata, "\"Send metadata containing the separator\" test failed");
+            Assert.IsTrue(ServerListHelper.instance.XenCenterMetadata == metadata, "\"Send metadata containing the separator\" test failed (separator at position {0})", separatorPosition);
 
             // Send empty metadata
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
