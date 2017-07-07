@@ -162,10 +162,6 @@ rebranding_global ${REPO}/XenOvfApi/app.config
 RESX_rebranding ${REPO}/XenOvfTransport/Messages
 rebranding_global ${REPO}/XenOvfTransport/app.config
 
-#dotNetInstaller
-rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper.xml
-rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper_l10n.xml
-
 #mk
 rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
 rebranding_global ${REPO}/mk/package-and-sign.sh
