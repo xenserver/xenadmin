@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
@@ -126,7 +127,7 @@
     <value>3, 3</value>
   </data>
   <data name="AddButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 29</value>
+    <value>95, 29</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="AddButton.TabIndex" type="System.Int32, mscorlib">
@@ -181,10 +182,13 @@
     <value>NoControl</value>
   </data>
   <data name="AttachButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 3</value>
+    <value>135, 3</value>
+  </data>
+  <data name="AttachButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="AttachButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 29</value>
+    <value>135, 29</value>
   </data>
   <data name="AttachButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -211,13 +215,13 @@
     <value>NoControl</value>
   </data>
   <data name="DeactivateButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>-5, 0</value>
   </data>
   <data name="DeactivateButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="DeactivateButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 29</value>
+    <value>135, 29</value>
   </data>
   <data name="DeactivateButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -239,6 +243,9 @@
   </data>
   <data name="DeactivateButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>255, 3</value>
+  </data>
+  <data name="DeactivateButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="DeactivateButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 29</value>
@@ -265,13 +272,13 @@
     <value>NoControl</value>
   </data>
   <data name="MoveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 0</value>
+    <value>10, 0</value>
   </data>
   <data name="MoveButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="MoveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 29</value>
+    <value>95, 29</value>
   </data>
   <data name="MoveButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -293,6 +300,9 @@
   </data>
   <data name="MoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>381, 3</value>
+  </data>
+  <data name="MoveButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
   <data name="MoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 29</value>

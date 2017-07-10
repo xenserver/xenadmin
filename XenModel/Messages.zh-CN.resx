@@ -7255,7 +7255,7 @@ SCSI ID: {2}
     <value>高可用性(&amp;H)...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>安装 [XenServer product] Tools(&amp;A)...</value>
+    <value>安装 [XenServer product] Tools(&amp;X)...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>快速创建(&amp;Q)</value>
