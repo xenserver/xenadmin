@@ -60,12 +60,14 @@ namespace XenAdmin.Actions
             get; private set;
         }
 
-        public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName)
-            : this(patchName, uri, outputFileName, InvisibleMessages.XEN_UPDATE)
-        { }
+        private bool UnzipOnly
+        {
+            get { return address == null; }
+        }
 
-        public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName, params string[] updateFileExtensions)
-            : base(null, string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, patchName), string.Empty, false)
+        public DownloadAndUnzipXenServerPatchAction(string patchName, Uri uri, string outputFileName, bool suppressHist, params string[] updateFileExtensions)
+            : base(null, uri == null ? string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_TITLE, patchName)
+            : string.Format(Messages.UPDATES_WIZARD_EXTRACT_ACTION_TITLE, patchName), string.Empty, suppressHist)
         {
             updateName = patchName;
             address = uri;
@@ -165,11 +167,11 @@ namespace XenAdmin.Actions
 
                     while (iterator.HasNext())
                     {
-                        string currentExtension = Path.GetExtension(iterator.CurrentFileName());
+                        string currentExtension = Path.GetExtension(iterator.CurrentFileName()).Replace(".","");
 
                         if (Array.Exists(updateFileExtensions, item => item == currentExtension))
                         {
-                            string path = address != null ? Path.Combine(Path.GetDirectoryName(zippedFileName), iterator.CurrentFileName())
+                            string path = !UnzipOnly ? Path.Combine(Path.GetDirectoryName(zippedFileName), iterator.CurrentFileName())
                                 : Path.Combine(Path.GetTempPath(), iterator.CurrentFileName());
 
                             log.DebugFormat("Found '{0}' in the downloaded archive when looking for a '{1}' file. Extracting...", iterator.CurrentFileName(), currentExtension);
@@ -203,11 +205,11 @@ namespace XenAdmin.Actions
                 if (iterator != null)
                     iterator.Dispose();
 
-                if (address != null)
+                if (!UnzipOnly)
                     File.Delete(zippedFileName);
             }
             
-            if (string.IsNullOrEmpty(PatchPath) && address != null)
+            if (string.IsNullOrEmpty(PatchPath) && !UnzipOnly)
             {
                 MarkCompleted(new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_FILE_NOT_FOUND));
                 log.DebugFormat("File '{0}.{1}' could not be located in downloaded archive", updateName, updateFileExtensions);
@@ -216,7 +218,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            if (address != null)
+            if (!UnzipOnly)
             {
                 log.DebugFormat("Downloading XenServer patch '{0}' (url: {1})", updateName, address);
 
@@ -243,7 +245,7 @@ namespace XenAdmin.Actions
 
         void archiveIterator_CurrentFileExtractProgressChanged(object sender, ExtractProgressChangedEventArgs e)
         {
-            int pc = address != null ? 95 + (int)(5.0 * e.BytesTransferred / e.TotalBytesToTransfer) : (int)(100.0 * e.BytesTransferred / e.TotalBytesToTransfer);
+            int pc = !UnzipOnly ? 95 + (int)(5.0 * e.BytesTransferred / e.TotalBytesToTransfer) : (int)(100.0 * e.BytesTransferred / e.TotalBytesToTransfer);
             if (pc != PercentComplete)
                 PercentComplete = pc;
         }

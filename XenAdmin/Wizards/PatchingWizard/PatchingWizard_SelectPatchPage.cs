@@ -380,6 +380,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (!string.IsNullOrEmpty(unzippedFilePath))
                             {
                                 unzippedUpdateFilePath = unzippedFilePath;
+                                PatchingWizard.PatchesToRemove.Add(unzippedUpdateFilePath);
                                 AddFile(dlg.FileName);
                             }                              
                         }
@@ -442,7 +443,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private string ExtractPatchAction(string zippedUpdatePath)
         {
-            DownloadAndUnzipXenServerPatchAction unzipAction = new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath), null, zippedUpdatePath, UpdateExtension,".iso");
+            DownloadAndUnzipXenServerPatchAction unzipAction = 
+                new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath), null, zippedUpdatePath, true, Branding.Update, Branding.UpdateIso);
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {
                 dlg.ShowDialog(Parent);

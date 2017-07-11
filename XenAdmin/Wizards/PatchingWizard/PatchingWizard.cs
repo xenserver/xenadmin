@@ -326,11 +326,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             RunMultipleActions(Messages.PATCHINGWIZARD_REMOVE_UPDATES, Messages.PATCHINGWIZARD_REMOVING_UPDATES, Messages.PATCHINGWIZARD_REMOVED_UPDATES, subActions);
         }
 
+        private static List<string> listOfDownloadedFiles = new List<string>();
+
+        public static List<string> PatchesToRemove
+        {
+            get { return listOfDownloadedFiles; }
+        }
+
         private void RemoveDownloadedPatches()
         {
             var isInAutomaticMode = PatchingWizard_SelectPatchPage.IsInAutomatedUpdatesMode;
-
-            List<string> listOfDownloadedFiles = new List<string>();
 
             if (isInAutomaticMode)
             {
