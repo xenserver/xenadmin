@@ -125,20 +125,8 @@ cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-tw.mst 1
 #sign again the combined msi because it seems the embedding breaks the signature
 cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/sign.bat ${BRANDING_BRAND_CONSOLE}.l10n.msi
 
-#create bundle exe installers - msi installers embedded
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${DOTNETINST}
-cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${DOTNETINST}
-
-cd ${DOTNETINST} && ./InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper.xml" "/e+" "/v+"
-cd ${DOTNETINST} && ./InstallerLinker.exe "/Output:${BRANDING_BRAND_CONSOLE}Setup.l10n.exe" "/Template:dotNetInstaller.exe" "/Configuration:XenCenterSetupBootstrapper_l10n.xml" "/e+" "/v+"
-
-sign_files()
-{
-	for file in $1
-	do
-		chmod a+rw ${file} && ${REPO}/sign.bat ${file}
-	done
-}
-sign_files "${BRANDING_BRAND_CONSOLE}Setup.exe ${BRANDING_BRAND_CONSOLE}Setup.l10n.exe"
+#copy the msi installers
+cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
+cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${OUTPUT_DIR}
 
 set +u
