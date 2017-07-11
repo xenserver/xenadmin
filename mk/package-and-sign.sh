@@ -52,6 +52,8 @@ mkdir_clean()
   rm -rf $1 && mkdir -p $1
 }
 
+mkdir_clean ${OUTPUT_DIR}
+
 #overwrite sign file
 SIGN_FILE=${ROOT}/sign.bat
 if [ -f ${SIGN_FILE} ]; then
