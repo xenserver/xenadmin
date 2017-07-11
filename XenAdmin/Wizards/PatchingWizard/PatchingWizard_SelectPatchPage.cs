@@ -659,6 +659,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RestoreDismUpdatesButton_Click(object sender, EventArgs e)
         {
+            dataGridViewPatches.Focus(); 
             Updates.RestoreDismissedUpdates();
         }
 
