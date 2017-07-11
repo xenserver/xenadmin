@@ -62,10 +62,6 @@ fi
 echo "INFO: Build and sign the installers..."
 . ${REPO}/mk/build-installers.sh
 
-#collect output and extra files to the OUTPUT_DIR
-cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}
-cp ${WIX}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${OUTPUT_DIR}
-
 echo "INFO:	Build phase succeeded at "
 date
 
