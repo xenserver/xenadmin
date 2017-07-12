@@ -409,22 +409,10 @@ namespace XenAdmin.Core
             if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
                 return false;
 
-            List<Host> hosts = new List<Host> {master, slave};
+            var masterUpdates = master.AppliedUpdates().Where(update => update.enforce_homogeneity).Select(update => update.uuid).ToList();
+            var slaveUpdates = slave.AppliedUpdates().Where(update => update.enforce_homogeneity).Select(update => update.uuid).ToList();
 
-            // Collect the updates that should be homogeneous
-            var homogeneousUpdates = new Dictionary<string, int>();
-            foreach (var host in hosts)
-            {
-                foreach (var update in (host.AppliedUpdates().Where(update => update.enforce_homogeneity)))
-                {
-                    if (homogeneousUpdates.ContainsKey(update.uuid))
-                        homogeneousUpdates[update.uuid]++;
-                    else
-                        homogeneousUpdates.Add(update.uuid, 1);
-                }
-            }
-
-            return homogeneousUpdates.Any(update => update.Value != hosts.Count);
+            return masterUpdates.Count != slaveUpdates.Count || !masterUpdates.All(slaveUpdates.Contains);
         }
 
         private static bool SameLinuxPack(Host slave, Host master)
