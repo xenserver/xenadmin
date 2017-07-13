@@ -175,6 +175,7 @@ cp ${REPO}/Branding/Images/AppIcon.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
 mkdir_clean ${OUTPUT_DIR}/installer
 tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
+mv ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}/installer
 
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
@@ -185,6 +186,7 @@ cp ${REPO}/Branding/Images/AppIcon.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}
 #CP-18097
 mkdir_clean ${OUTPUT_DIR}/installer.l10n
 tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
+mv ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${OUTPUT_DIR}/installer.l10n
 
 #now package the pdbs
 cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
