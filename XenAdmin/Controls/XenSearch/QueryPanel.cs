@@ -213,12 +213,12 @@ namespace XenAdmin.Controls.XenSearch
 
             if (s == "disks")
             {
-                return NewGridHeaderItem(Messages.OVERVIEW_DISKS, SortOrder.Descending, 120, 120);
+                return NewGridHeaderItem(Messages.OVERVIEW_DISKS, SortOrder.Descending, 138, 138);
             }
 
             if (s == "network")
             {
-                return NewGridHeaderItem(Messages.OVERVIEW_NETWORK, SortOrder.Descending, 120, 120);
+                return NewGridHeaderItem(Messages.OVERVIEW_NETWORK, SortOrder.Descending, 138, 138);
             }
 
             if (s == "ha")
