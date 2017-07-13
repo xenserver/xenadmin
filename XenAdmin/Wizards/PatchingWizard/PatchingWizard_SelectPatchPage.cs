@@ -350,6 +350,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
         }
 
+        //list to store unzipped files to be removed later by PatchingWizard
+        private static List<string> unzippedFiles = new List<string>();
+
+        public List<string> UnzippedUpdateFiles
+        {
+            get { return unzippedFiles; }
+        }
+
         private void BrowseButton_Click(object sender, EventArgs e)
         {
             // Showing this dialog has the (undocumented) side effect of changing the working directory
@@ -380,7 +388,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (!string.IsNullOrEmpty(unzippedFilePath))
                             {
                                 unzippedUpdateFilePath = unzippedFilePath;
-                                PatchingWizard.PatchesToRemove.Add(unzippedUpdateFilePath);
+                                unzippedFiles.Add(unzippedUpdateFilePath);
                                 AddFile(dlg.FileName);
                             }                              
                         }
