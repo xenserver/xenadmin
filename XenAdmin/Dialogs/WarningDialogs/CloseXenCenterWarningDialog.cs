@@ -196,7 +196,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
         {
             Program.BeginInvoke(this, () =>
             {
-                ActionBase action = (ActionBase)e.Element;
+                ActionBase action = e.Element as ActionBase;
                 switch (e.Action)
                 {
                     case CollectionChangeAction.Add:
@@ -211,7 +211,16 @@ namespace XenAdmin.Dialogs.WarningDialogs
                         }
                         break;
                     case CollectionChangeAction.Remove:
-                        RemoveActionRow(action);
+                        if (action != null)
+                        {
+                            RemoveActionRow(action);
+                        }
+                        else
+                        {
+                            var range = e.Element as List<ActionBase>;
+                            if (range != null)
+                                BuildList();
+                        }
                         break;
                     case CollectionChangeAction.Refresh:
                         BuildList();
