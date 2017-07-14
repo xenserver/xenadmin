@@ -13,7 +13,7 @@ namespace XenAdmin.TabPages
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            ConnectionsManager.XenConnections.CollectionChanged -= History_CollectionChanged;
+            ConnectionsManager.History.CollectionChanged -= History_CollectionChanged;
             XenAdmin.Actions.ActionBase.NewAction -= Action_NewAction;
 
             if (disposing && (components != null))
