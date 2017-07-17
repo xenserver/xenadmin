@@ -29,5 +29,5 @@
 ;  SUCH DAMAGE.
 	
 [AutoRun]
-shellexecute=[XenCenter]Setup.exe
+shellexecute=[XenCenter].msi
 icon=[XenCenter].ico
