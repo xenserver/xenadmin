@@ -238,7 +238,7 @@
     <value>xsupdate</value>
   </data>
   <data name="XENSERVER_UPDATE_URL" xml:space="preserve">
-    <value>http://updates.xensource.com/XenServer/updates.xml</value>
+    <value>https://updates.xensource.com/XenServer/updates.xml</value>
   </data>
   <data name="UPSELL_LEARNMOREURL_AD" xml:space="preserve">
     <value>http://www.citrix.com/xenserver/le/features/ad</value>
