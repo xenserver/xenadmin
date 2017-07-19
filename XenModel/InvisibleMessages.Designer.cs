@@ -439,7 +439,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://updates.xensource.com/XenServer/updates.xml.
+        ///   Looks up a localized string similar to https://updates.xensource.com/XenServer/updates.xml.
         /// </summary>
         public static string XENSERVER_UPDATE_URL {
             get {
