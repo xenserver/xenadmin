@@ -2162,7 +2162,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>アップグレード後に接続に問題が生じた SR があります。この問題を解決するには、SR を再接続してください。</value>
   </data>
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
-    <value>接続に問題が生じた SR 上に XenServer Tools ISO があるため、[XenCenter] によって修復が試行されます。続行しますか?</value>
+    <value>接続に問題が生じた SR 上に [XenServer product] Tools ISO があるため、[XenCenter] によって修復が試行されます。続行しますか?</value>
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>状態レポート -</value>
@@ -2279,7 +2279,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>(管理インターフェイス '{0}' により使用されているため、このネットワークの MTU を変更できません)</value>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_VM_NO_TOOLS" xml:space="preserve">
-    <value>(XenServer Tools がインストールされていないアクティブな仮想マシンが接続されているため、このネットワークの MTU を変更できません)</value>
+    <value>([XenServer product] Tools がインストールされていないアクティブな仮想マシンが接続されているため、このネットワークの MTU を変更できません)</value>
   </data>
   <data name="CANNOT_CONFIGURE_MORE_FREQ_ARCHIVE" xml:space="preserve">
     <value>スナップショットのスケジュールよりも頻繁なアーカイブを構成することはできません。</value>
@@ -2356,7 +2356,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>この仮想ディスクは複数の VM に接続されています。すべての VM から接続を解除してから削除してください。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_RUNNING_VM_NO_TOOLS" xml:space="preserve">
-    <value>実行中の VM の仮想ディスクを削除するには XenServer Tools をインストールする必要があります。このディスクは実行中の VM '{0}' により使用されています。</value>
+    <value>実行中の VM の仮想ディスクを削除するには [XenServer product] Tools をインストールする必要があります。このディスクは実行中の VM '{0}' により使用されています。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_SUSPENDED_VM" xml:space="preserve">
     <value>一時停止中の VM の仮想ディスクは削除できません。このディスクは一時停止中の VM '{0}' により使用されています。</value>
@@ -6898,7 +6898,7 @@ SCSI ID: {2}
     <value>無償の [XenServer] 製品をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>[BRANDING_VERSION_5_6] よりも古い XenServer にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
+    <value>[BRANDING_VERSION_5_6] よりも古い [XenServer] にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>ライセンス サーバー {0} に接続できません。再接続の猶予期間は {1} までです。</value>
@@ -7234,7 +7234,7 @@ SCSI ID: {2}
     <value>高可用性(&amp;H)...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>[XenServer product] Tools のインストール(&amp;A)...</value>
+    <value>[XenServer product] Tools のインストール(&amp;X)...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>高速作成(&amp;Q)</value>
@@ -8003,6 +8003,12 @@ SCSI ID: {2}
   </data>
   <data name="NEWNETWORK_VNAME" xml:space="preserve">
     <value>新規プライベート ネットワーク</value>
+  </data>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER" xml:space="preserve">
+    <value>このサーバーにはマスターのものと異なるアップデートがあります</value>
+  </data>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL" xml:space="preserve">
+    <value>このサーバーには既にプールにあるサーバーとは異なるアップデートがあります</value>
   </data>
   <data name="NEWPOOL_DIFFERENT_NETWORK_BACKENDS" xml:space="preserve">
     <value>このサーバーのネットワーク バックエンドはマスターのものと異なります</value>
@@ -11296,7 +11302,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>VM が一時停止しているためネットワークをアクティブにできません</value>
   </data>
   <data name="TOOLTIP_ACTIVATE_VIF_TOOLS" xml:space="preserve">
-    <value>XenServer Tools 未インストールの VM では実行中にネットワークをアクティブにできません</value>
+    <value>[XenServer product] Tools 未インストールの VM では実行中にネットワークをアクティブにできません</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_SUSPENDED" xml:space="preserve">
     <value>VM が一時停止しているため、ディスクをアクティブまたは非アクティブにできません</value>
@@ -11311,7 +11317,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>VM が一時停止しているためネットワークを非アクティブにできません</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_TOOLS" xml:space="preserve">
-    <value>XenServer Tools 未インストールの VM では実行中にネットワークを非アクティブにできません</value>
+    <value>[XenServer product] Tools 未インストールの VM では実行中にネットワークを非アクティブにできません</value>
   </data>
   <data name="TOOLTIP_DELETE_SUSPENDED" xml:space="preserve">
     <value>VM が一時停止しているためディスクを削除できません</value>
