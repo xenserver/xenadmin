@@ -3623,19 +3623,19 @@
     <value>yyyy-MM-dd</value>
   </data>
   <data name="DATEFORMAT_DMY_HM" xml:space="preserve">
-    <value>yyyy-MM-dd HH:mm</value>
+    <value>yyyy-MM-dd tt h:mm</value>
   </data>
   <data name="DATEFORMAT_DMY_HMS" xml:space="preserve">
-    <value>yyyy-MM-dd  HH:mm:ss</value>
+    <value>yyyy-MM-dd tt h:mm:ss</value>
   </data>
   <data name="DATEFORMAT_DMY_LONG" xml:space="preserve">
     <value>yyyy年M月d日</value>
   </data>
   <data name="DATEFORMAT_HM" xml:space="preserve">
-    <value>tt HH:mm</value>
+    <value>tt h:mm</value>
   </data>
   <data name="DATEFORMAT_HMS" xml:space="preserve">
-    <value>tt HH:mm:ss</value>
+    <value>tt h:mm:ss</value>
   </data>
   <data name="DATEFORMAT_H_SHORT" xml:space="preserve">
     <value>HH</value>
