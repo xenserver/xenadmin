@@ -36,7 +36,6 @@ ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 REPO="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 OUTPUT_DIR=${ROOT}/output
-DOTNETINST=${REPO}/dotNetInstaller
 	
 BRANDING_BRAND_CONSOLE=[XenCenter]
 BRANDING_COMPANY_NAME_SHORT=[Citrix]
@@ -53,6 +52,8 @@ mkdir_clean()
   rm -rf $1 && mkdir -p $1
 }
 
+mkdir_clean ${OUTPUT_DIR}
+
 #overwrite sign file
 SIGN_FILE=${ROOT}/sign.bat
 if [ -f ${SIGN_FILE} ]; then
@@ -62,10 +63,6 @@ fi
 #build and sign the installers
 echo "INFO: Build and sign the installers..."
 . ${REPO}/mk/build-installers.sh
-
-#collect output and extra files to the OUTPUT_DIR
-cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}
-cp ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}
 
 echo "INFO:	Build phase succeeded at "
 date

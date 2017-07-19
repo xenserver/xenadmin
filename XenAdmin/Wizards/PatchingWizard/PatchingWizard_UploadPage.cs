@@ -292,7 +292,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             canUpload = true;
             diskSpaceRequirements = null;
             var diskSpaceActions = new List<AsyncAction>();
-            foreach (Host master in SelectedMasters.Where(master => Helpers.CreamOrGreater(master.Connection)))
+            foreach (Host master in SelectedMasters.Where(master => Helpers.CreamOrGreater(master.Connection) && !Helpers.ElyOrGreater(master.Connection)))
             {
                 AsyncAction action = null;
                 switch (SelectedUpdateType)

@@ -153,10 +153,6 @@ namespace XenAPI
                 new Relation("hosts", "host", "updates"),
             });
 
-            relations.Add(typeof(Proxy_PCI), new Relation[] {
-                new Relation("virtual_functions", "PCI", "physical_function"),
-            });
-
             relations.Add(typeof(Proxy_Host), new Relation[] {
                 new Relation("features", "Feature", "host"),
                 new Relation("PGPUs", "PGPU", "host"),

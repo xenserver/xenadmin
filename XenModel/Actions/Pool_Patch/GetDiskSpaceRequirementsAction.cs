@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using XenAdmin.Core;
 using XenAPI;
 
 
@@ -107,18 +108,21 @@ namespace XenAdmin.Actions
 
             // get required disk space
             long requiredDiskSpace = updateSize;
-            try
+            if (!Helpers.ElyOrGreater(Host))  // for ElyOrGreater we don't need to call get_required_space, because it will always return updateSize
             {
-                var args = new Dictionary<string, string>();
-                args.Add("size", updateSize.ToString());
+                try
+                {
+                    var args = new Dictionary<string, string>();
+                    args.Add("size", updateSize.ToString());
 
-                result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_required_space", args);
-                requiredDiskSpace = Convert.ToInt64(result);
-            }
-            catch (Failure failure)
-            {
-                log.WarnFormat("Plugin call disk-space.get_required_space on {0} failed with {1}", Host.Name, failure.Message);
-                requiredDiskSpace = 0;
+                    result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "get_required_space", args);
+                    requiredDiskSpace = Convert.ToInt64(result);
+                }
+                catch (Failure failure)
+                {
+                    log.WarnFormat("Plugin call disk-space.get_required_space on {0} failed with {1}", Host.Name, failure.Message);
+                    requiredDiskSpace = 0;
+                }
             }
 
             // get available disk space
@@ -136,7 +140,7 @@ namespace XenAdmin.Actions
             // get reclaimable disk space (excluding current patch)
             long reclaimableDiskSpace = 0;
 
-            if (availableDiskSpace < requiredDiskSpace)
+            if (availableDiskSpace < requiredDiskSpace && !Helpers.ElyOrGreater(Host))  // for ElyOrGreater we shouldn't call get_reclaimable_disk_space
             {
                 try
                 {

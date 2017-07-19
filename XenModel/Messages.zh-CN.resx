@@ -3601,7 +3601,7 @@
     <value>yyyy年M月d日</value>
   </data>
   <data name="DATEFORMAT_HM" xml:space="preserve">
-    <value>HH:mm</value>
+    <value>tt h:mm</value>
   </data>
   <data name="DATEFORMAT_HMS" xml:space="preserve">
     <value>HH:mm:ss</value>

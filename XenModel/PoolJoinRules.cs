@@ -399,7 +399,7 @@ namespace XenAdmin.Core
 
         /// <summary>
         /// Check whether all updates that request homogeneity are in fact homogeneous
-        /// across the proposed pool. This is used in CanJoinPool and prevents the pool from being created
+        /// between master and slave. This is used in CanJoinPool and prevents the pool from being created
         /// </summary>
         private static bool DifferentHomogeneousUpdates(Host slave, Host master)
         {
@@ -409,23 +409,10 @@ namespace XenAdmin.Core
             if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
                 return false;
 
-            List<Host> allHosts = new List<Host>(master.Connection.Cache.Hosts);
-            allHosts.Add(slave);
+            var masterUpdates = master.AppliedUpdates().Where(update => update.enforce_homogeneity).Select(update => update.uuid).ToList();
+            var slaveUpdates = slave.AppliedUpdates().Where(update => update.enforce_homogeneity).Select(update => update.uuid).ToList();
 
-            // Collect the updates that should be homogeneous
-            var homogeneousUpdates = new Dictionary<string, int>();
-            foreach (var host in allHosts)
-            {
-                foreach (var update in (host.AppliedUpdates().Where(update => update.enforce_homogeneity)))
-                {
-                    if (homogeneousUpdates.ContainsKey(update.uuid))
-                        homogeneousUpdates[update.uuid]++;
-                    else
-                        homogeneousUpdates.Add(update.uuid, 1);
-                }
-            }
-
-            return homogeneousUpdates.Any(update => update.Value != allHosts.Count);
+            return masterUpdates.Count != slaveUpdates.Count || !masterUpdates.All(slaveUpdates.Contains);
         }
 
         private static bool SameLinuxPack(Host slave, Host master)
