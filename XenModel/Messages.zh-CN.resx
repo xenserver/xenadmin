@@ -2542,7 +2542,7 @@
     <value>跨服务器专用网络</value>
   </data>
   <data name="CHINS_NEED_VSWITCHCONTROLLER" xml:space="preserve">
-    <value>跨服务器专用网络需要配置并运行 vSwitch 控制器。</value>
+    <value>跨服务器专用网络需要配置并运行 vSwitch Controller。</value>
   </data>
   <data name="CHOOSE_ANOTHER_DESTINATION" xml:space="preserve">
     <value>选择其他目标(&amp;D)</value>
@@ -3632,10 +3632,10 @@
     <value>yyyy年M月d日</value>
   </data>
   <data name="DATEFORMAT_HM" xml:space="preserve">
-    <value>HH:mm</value>
+    <value>tt h:mm</value>
   </data>
   <data name="DATEFORMAT_HMS" xml:space="preserve">
-    <value>HH:mm:ss</value>
+    <value>tt h:mm:ss</value>
   </data>
   <data name="DATEFORMAT_H_SHORT" xml:space="preserve">
     <value>HH</value>
@@ -4645,7 +4645,7 @@
     <value>您要做些什么?</value>
   </data>
   <data name="DUPLEX" xml:space="preserve">
-    <value>双面打印</value>
+    <value>双工</value>
   </data>
   <data name="DVD_DRIVE" xml:space="preserve">
     <value>DVD 驱动器</value>

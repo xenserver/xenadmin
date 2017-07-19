@@ -180,30 +180,6 @@
   <data name="&gt;&gt;radioButtonDiskOnly.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="quiesceCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 87</value>
-  </data>
-  <data name="quiesceCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 34</value>
-  </data>
-  <data name="quiesceCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="quiesceCheckBox.Text" xml:space="preserve">
-    <value>VM を休止してからスナップショットを作成する (Windows のみ)(&amp;Q)</value>
-  </data>
-  <data name="&gt;&gt;quiesceCheckBox.Name" xml:space="preserve">
-    <value>quiesceCheckBox</value>
-  </data>
-  <data name="&gt;&gt;quiesceCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;quiesceCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;quiesceCheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="radioButtonDiskAndMemory.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
