@@ -133,6 +133,24 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The host failed to enable external authentication..
+        /// </summary>
+        public static string AUTH_ENABLE_FAILED_INVALID_ACCOUNT {
+            get {
+                return ResourceManager.GetString("AUTH_ENABLE_FAILED_INVALID_ACCOUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host failed to enable external authentication..
+        /// </summary>
+        public static string AUTH_ENABLE_FAILED_INVALID_OU {
+            get {
+                return ResourceManager.GetString("AUTH_ENABLE_FAILED_INVALID_OU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to enable external authentication, permission on the AD server was denied..
         /// </summary>
         public static string AUTH_ENABLE_FAILED_PERMISSION_DENIED {
@@ -2149,6 +2167,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This host has no PIF on the given network..
+        /// </summary>
+        public static string PIF_NOT_PRESENT {
+            get {
+                return ResourceManager.GetString("PIF_NOT_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation cannot proceed while a tunnel exists on this interface..
         /// </summary>
         public static string PIF_TUNNEL_STILL_EXISTS {
@@ -2257,6 +2284,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to enable external authentication, the supplied account was invalid..
+        /// </summary>
+        public static string POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT {
+            get {
+                return ResourceManager.GetString("POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The pool failed to enable external authentication..
         /// </summary>
         public static string POOL_AUTH_ENABLE_FAILED_INVALID_OU {
@@ -2289,15 +2325,6 @@ namespace XenAPI {
         public static string POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS {
             get {
                 return ResourceManager.GetString("POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to enable external authentication, the supplied account was invalid..
-        /// </summary>
-        public static string POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT {
-            get {
-                return ResourceManager.GetString("POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT", resourceCulture);
             }
         }
         
@@ -2352,6 +2379,24 @@ namespace XenAPI {
         public static string POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC {
             get {
                 return ResourceManager.GetString("POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool must have the same API version as the pool master..
+        /// </summary>
+        public static string POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION {
+            get {
+                return ResourceManager.GetString("POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool must have the same database schema as the pool master..
+        /// </summary>
+        public static string POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA {
+            get {
+                return ResourceManager.GetString("POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA", resourceCulture);
             }
         }
         
@@ -3819,6 +3864,33 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to activate changed block tracking..
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_457 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_457", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to deactivate changed block tracking..
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_458 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_458", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed block tracking log is in an inconsistent state..
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_459 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_459", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VDI is not available.
         /// </summary>
         public static string SR_BACKEND_FAILURE_46 {
@@ -4512,6 +4584,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot contact the other host using TLS on the specified address and port.
+        /// </summary>
+        public static string TLS_CONNECTION_FAILED {
+            get {
+                return ResourceManager.GetString("TLS_CONNECTION_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The request was rejected because the server is too busy..
         /// </summary>
         public static string TOO_BUSY {
@@ -5156,6 +5237,15 @@ namespace XenAPI {
         public static string VM_HAS_CHECKPOINT {
             get {
                 return ResourceManager.GetString("VM_HAS_CHECKPOINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM cannot be resumed because it has no suspend VDI.
+        /// </summary>
+        public static string VM_HAS_NO_SUSPEND_VDI {
+            get {
+                return ResourceManager.GetString("VM_HAS_NO_SUSPEND_VDI", resourceCulture);
             }
         }
         
