@@ -181,7 +181,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>提供 SR 所在共享的名称，并指定高级选项(可选)。在继续操作之前，请指示是要创建新 SR 还是重新连接现有 SR。</value>
+    <value>提供 SR 所在共享的名称，并指定高级选项(可选)。在继续操作之前，请指示要创建新 SR 还是重新连接现有 SR。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

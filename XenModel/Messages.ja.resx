@@ -1228,7 +1228,7 @@
     <value>VM '{0}' のテンプレートへの変換</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
-    <value>Waiting for slaves to recover...</value>
+    <value>スレーブの回復を待機しています...</value>
   </data>
   <data name="ACTION_WLB_DECONFIGURE_FAILED" xml:space="preserve">
     <value>プール {0} のワークロード バランスの切断に失敗しました。{1}。ワークロード バランスを一時停止しました。</value>
@@ -2042,7 +2042,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>照会に対するサーバー '{0}' の応答が不正です。</value>
   </data>
   <data name="BALLOONING_PAGE_CHOOSEVMS_PAGETITLE" xml:space="preserve">
-    <value>メモリ設定を変更する VM を選択します。</value>
+    <value>メモリ設定を変更する仮想マシンを選択します</value>
   </data>
   <data name="BALLOONING_PAGE_CHOOSEVMS_TEXT" xml:space="preserve">
     <value>VM の選択</value>
@@ -2162,7 +2162,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>アップグレード後に接続に問題が生じた SR があります。この問題を解決するには、SR を再接続してください。</value>
   </data>
   <data name="BROKEN_TOOLS_PROMPT" xml:space="preserve">
-    <value>接続に問題が生じた SR 上に XenServer Tools ISO があるため、[XenCenter] によって修復が試行されます。続行しますか?</value>
+    <value>接続に問題が生じた SR 上に [XenServer product] Tools ISO があるため、[XenCenter] によって修復が試行されます。続行しますか?</value>
   </data>
   <data name="BUGTOOL_FILE_PREFIX" xml:space="preserve">
     <value>状態レポート -</value>
@@ -2279,7 +2279,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>(管理インターフェイス '{0}' により使用されているため、このネットワークの MTU を変更できません)</value>
   </data>
   <data name="CANNOT_CONFIGURE_JUMBO_VM_NO_TOOLS" xml:space="preserve">
-    <value>(XenServer Tools がインストールされていないアクティブな VM が接続されているため、このネットワークの MTU を変更できません)</value>
+    <value>([XenServer product] Tools がインストールされていないアクティブな仮想マシンが接続されているため、このネットワークの MTU を変更できません)</value>
   </data>
   <data name="CANNOT_CONFIGURE_MORE_FREQ_ARCHIVE" xml:space="preserve">
     <value>スナップショットのスケジュールよりも頻繁なアーカイブを構成することはできません。</value>
@@ -2309,7 +2309,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>この仮想ディスクを VM '{0}' 上で非アクティブにするには、VM に [XenServer product] Tools をインストールする必要があります。</value>
   </data>
   <data name="CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING" xml:space="preserve">
-    <value>実行されていない VM '{0}' 上でこの仮想ディスクを非アクティブにすることはできません。</value>
+    <value>実行されていない仮想マシン '{0}' 上でこの仮想ディスクを非アクティブにすることはできません。</value>
   </data>
   <data name="CANNOT_DELETE_ACTIVE_VDI" xml:space="preserve">
     <value>仮想ディスクを削除するには、まず非アクティブにする必要があります。この仮想ディスクは VM '{0}' により使用されています。</value>
@@ -2356,7 +2356,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>この仮想ディスクは複数の VM に接続されています。すべての VM から接続を解除してから削除してください。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_RUNNING_VM_NO_TOOLS" xml:space="preserve">
-    <value>実行中の VM の仮想ディスクを削除するには XenServer Tools をインストールする必要があります。このディスクは実行中の VM '{0}' により使用されています。</value>
+    <value>実行中の VM の仮想ディスクを削除するには [XenServer product] Tools をインストールする必要があります。このディスクは実行中の VM '{0}' により使用されています。</value>
   </data>
   <data name="CANNOT_DELETE_VDI_SUSPENDED_VM" xml:space="preserve">
     <value>一時停止中の VM の仮想ディスクは削除できません。このディスクは一時停止中の VM '{0}' により使用されています。</value>
@@ -2371,7 +2371,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>[XenCenter] で種類 '{0}' の SR を構成できません。</value>
   </data>
   <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
-    <value>この仮想ディスクは実行中でない VM に接続されているため、削除できません。</value>
+    <value>この仮想ディスクは実行中でない仮想マシンに接続されているため、削除できません。</value>
   </data>
   <data name="CANNOT_MOVE_DR_VD" xml:space="preserve">
     <value>この仮想ディスクは障害回復で使用されているため、ほかのストレージ リポジトリに移動できません。</value>
@@ -3918,9 +3918,6 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DEVICE_POSITION_CONFLICT" xml:space="preserve">
     <value>場所 {0} は既に使用されています。同じ場所に 2 つのディスクを設定すると、VM は起動しません。'{0}' のディスクをこのディスクに置換しますか?</value>
   </data>
-  <data name="DEVICE_POSITION_IN_USE" xml:space="preserve">
-    <value>選択したデバイスの場所は現在使用中です。</value>
-  </data>
   <data name="DEVICE_POSITION_RESTART_REQUIRED" xml:space="preserve">
     <value>デバイスの場所の変更を反映させるには、VM を再起動する必要があります。</value>
   </data>
@@ -4671,7 +4668,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>新規 VM の作成時にこのネットワークを自動的に追加するかどうかを設定します。また、内部ネットワークを作成したり、VLAN および NIC を割り当てたりできます。</value>
   </data>
   <data name="EDIT_SYS_DISK_WARNING" xml:space="preserve">
-    <value>これにより、この VM のシステム ディスクのデバイスの場所が変更されるため、VM が起動不能になる可能性があります。続行しますか?</value>
+    <value>これにより、この仮想マシンのシステム ディスクのデバイスの場所が変更されるため、仮想マシンが起動不能になる可能性があります。続行しますか?</value>
   </data>
   <data name="EDIT_SYS_DISK_WARNING_TITLE" xml:space="preserve">
     <value>ストレージ設定の編集</value>
@@ -5054,7 +5051,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>保守モードからの切り替え(&amp;E)</value>
   </data>
   <data name="EXIT_MAINTENANCE_MODE_PROMPT" xml:space="preserve">
-    <value>以下の VM について、このサーバーでの自動移行、自動再開、または自動起動を設定しますか?
+    <value>以下の仮想マシンについて、このサーバーでの自動移行、自動再開、または自動起動を設定しますか?
 {0}</value>
   </data>
   <data name="EXIT_SERVER_FROM_MAINTENANCE_MODE" xml:space="preserve">
@@ -5490,7 +5487,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>サーバー:</value>
   </data>
   <data name="GENERAL_MEMORY_SERVER_FREE" xml:space="preserve">
-    <value>{0} 使用可能 ({1} 合計)</value>
+    <value>{0} のRAM が使用可能 ({1} 合計)</value>
   </data>
   <data name="GENERAL_MEMORY_VM" xml:space="preserve">
     <value>VM:</value>
@@ -5595,10 +5592,10 @@ CD をイジェクトしてから再試行してください。</value>
     <value>使用できません</value>
   </data>
   <data name="GRAPHS_CANNOT_ADD_VM_HALTED" xml:space="preserve">
-    <value>VM '{0}' は実行されていないため、パフォーマンス グラフを追加できません。</value>
+    <value>仮想マシン '{0}' は実行されていないため、パフォーマンス グラフを追加できません。</value>
   </data>
   <data name="GRAPHS_CANNOT_EDIT_VM_HALTED" xml:space="preserve">
-    <value>VM '{0}' は実行されていないため、パフォーマンス グラフを編集できません。</value>
+    <value>仮想マシン '{0}' は実行されていないため、パフォーマンス グラフを編集できません。</value>
   </data>
   <data name="GRAPHS_DEFAULT_NAME_CPU" xml:space="preserve">
     <value>CPU パフォーマンス</value>
@@ -5766,7 +5763,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>{1} 台のうちの {0} 台のサーバー</value>
   </data>
   <data name="HA_HEARTBEAT_SERVERS_INITIALISING" xml:space="preserve">
-    <value>Initializing...</value>
+    <value>初期化中...</value>
   </data>
   <data name="HA_HEARTBEAT_SR" xml:space="preserve">
     <value>高可用性ハートビート SR</value>
@@ -6901,7 +6898,7 @@ SCSI ID: {2}
     <value>無償の [XenServer] 製品をアクティブ化するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_NO_MULTISELECT_LICENSE" xml:space="preserve">
-    <value>[BRANDING_VERSION_5_6] よりも古い XenServer にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
+    <value>[BRANDING_VERSION_5_6] よりも古い [XenServer] にライセンスを適用するときは、サーバーを 1 つだけ選択してください。</value>
   </data>
   <data name="LICENSE_REGULAR_GRACE_TOOLTIP" xml:space="preserve">
     <value>ライセンス サーバー {0} に接続できません。再接続の猶予期間は {1} までです。</value>
@@ -7237,7 +7234,7 @@ SCSI ID: {2}
     <value>高可用性(&amp;H)...</value>
   </data>
   <data name="MAINWINDOW_INSTALL_TOOLS" xml:space="preserve">
-    <value>[XenServer product] Tools のインストール(&amp;A)...</value>
+    <value>[XenServer product] Tools のインストール(&amp;X)...</value>
   </data>
   <data name="MAINWINDOW_INSTANT_VM_FROM_TEMPLATE" xml:space="preserve">
     <value>高速作成(&amp;Q)</value>
@@ -7510,10 +7507,10 @@ SCSI ID: {2}
     <value>スナップショット全体の削除</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK" xml:space="preserve">
-    <value>これにより、このシステム ディスクは完全に削除され、VM が起動不能になる場合があります。続行しますか?</value>
+    <value>これにより、このシステム ディスクは完全に削除され、仮想マシンが起動不能になる場合があります。続行しますか?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK_MULTIPLE" xml:space="preserve">
-    <value>これにより、これらのシステム ディスクは完全に削除され、VM が起動不能になる場合があります。続行しますか?</value>
+    <value>これにより、これらのシステム ディスクは完全に削除され、仮想マシンが起動不能になる場合があります。続行しますか?</value>
   </data>
   <data name="MESSAGEBOX_DELETE_SYS_DISK_TITLE" xml:space="preserve">
     <value>システム ディスクの削除</value>
@@ -8007,6 +8004,12 @@ SCSI ID: {2}
   <data name="NEWNETWORK_VNAME" xml:space="preserve">
     <value>新規プライベート ネットワーク</value>
   </data>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER" xml:space="preserve">
+    <value>このサーバーにはマスターのものと異なるアップデートがあります</value>
+  </data>
+  <data name="NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL" xml:space="preserve">
+    <value>このサーバーには既にプールにあるサーバーとは異なるアップデートがあります</value>
+  </data>
   <data name="NEWPOOL_DIFFERENT_NETWORK_BACKENDS" xml:space="preserve">
     <value>このサーバーのネットワーク バックエンドはマスターのものと異なります</value>
   </data>
@@ -8069,7 +8072,7 @@ SMB ストレージ リポジトリは共有されているため、その中に
 SMB ストレージ リポジトリを構成する場合は、SMB サーバーのホスト名または IP アドレス、ユーザー名、パスワード、およびそのストレージ リポジトリを格納するディレクトリのパスを入力します。プール内のすべてのサーバーにそのパスがエクスポートされるように SMB サーバーを構成してください。</value>
   </data>
   <data name="NEWSR_CIFS_ISO_BLURB" xml:space="preserve">
-    <value>VM のインストール ISO イメージ ライブラリが Windows (SMB/CIFS) 共有にあり、それをホストまたはプールに接続する場合は、このオプションを選択します。</value>
+    <value>仮想マシンのインストール ISO イメージ ライブラリが Windows (SMB/CIFS) 共有にあり、それをホストまたはプールに接続する場合は、このオプションを選択します。</value>
   </data>
   <data name="NEWSR_CIFS_ISO_TYPE_NAME" xml:space="preserve">
     <value>Windows ファイル共有 (SMB/CIFS)</value>
@@ -8263,7 +8266,7 @@ VM の複製では、ファイラの複製機能とスナップショット機�
     <value>NetApp ファイラの詳細を入力します</value>
   </data>
   <data name="NEWSR_NFS_ISO_BLURB" xml:space="preserve">
-    <value>VM のインストール ISO イメージ ライブラリが NFS 共有にあり、それをホストまたはプールに接続する場合は、このオプションを選択します。</value>
+    <value>仮想マシンのインストール ISO イメージ ライブラリが NFS 共有にあり、それをホストまたはプールに接続する場合は、このオプションを選択します。</value>
   </data>
   <data name="NEWSR_NFS_ISO_TYPE_NAME" xml:space="preserve">
     <value>NFS ISO</value>
@@ -8604,7 +8607,7 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
     <value>ディスクの作成先のストレージ リポジトリを選択してください</value>
   </data>
   <data name="NEW_DVD_DRIVES_REQUIRED" xml:space="preserve">
-    <value>[XenServer product] Tools のインストール先の VM に DVD ドライブがないものがあります。必要に応じて新しい DVD ドライブを作成してもよろしいですか?</value>
+    <value>[XenServer product] Tools のインストール先の仮想マシンに DVD ドライブがないものがあります。必要に応じて新しい DVD ドライブを作成してもよろしいですか?</value>
   </data>
   <data name="NEW_DVD_DRIVE_CREATED" xml:space="preserve">
     <value>DVD ドライブが作成されました</value>
@@ -8626,7 +8629,7 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
 VM が再起動したら、[[XenServer product] Tools のインストール] を再度クリックしてください。</value>
   </data>
   <data name="NEW_DVD_DRIVE_REQUIRED" xml:space="preserve">
-    <value>[XenServer product] Tools のインストール先 VM には、DVD ドライブがありません。DVD ドライブを作成しますか?</value>
+    <value>[XenServer product] Tools のインストール先仮想マシンには、DVD ドライブがありません。DVD ドライブを作成しますか?</value>
   </data>
   <data name="NEW_FOLDER" xml:space="preserve">
     <value>新規フォルダ(&amp;N)...</value>
@@ -9653,7 +9656,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>プールへの追加不可</value>
   </data>
   <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>This server must not have any bonds, non management VLANs or cross-server private networks</value>
+    <value>このサーバーには、ボンディング、非管理 VLAN、またはサーバー間のプライベート ネットワークがを含めることができません</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
     <value>このサーバーには、ボンディング、VLAN、またはサーバー間のプライベート ネットワークがを含めることができません</value>
@@ -9716,7 +9719,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>サーバー '{0}'</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE" xml:space="preserve">
-    <value>この MAC アドレスは、以下の VM に割り当て済みです。\n {1} \n\n続行しますか?</value>
+    <value>この MAC アドレスは、以下の仮想マシンに割り当て済みです。\n {1} \n\n続行しますか?</value>
   </data>
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>MAC アドレスの重複</value>
@@ -10769,7 +10772,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>'{0}' 上の [XenServer] が正しく構成されていることを確認して、再試行してください。</value>
   </data>
   <data name="SOLUTION_CHECK_XENSERVER_WITH_PROXY" xml:space="preserve">
-    <value>Check the proxy settings and that [XenServer] is configured correctly on '{0}' and try again.</value>
+    <value>プロキシ設定と '{0}' 上の [XenServer] が正しく構成されていることを確認して、再試行してください。</value>
   </data>
   <data name="SOLUTION_HOST_STILL_BOOTING" xml:space="preserve">
     <value>後で再試行してください。</value>
@@ -11299,7 +11302,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>VM が一時停止しているためネットワークをアクティブにできません</value>
   </data>
   <data name="TOOLTIP_ACTIVATE_VIF_TOOLS" xml:space="preserve">
-    <value>XenServer Tools 未インストールの VM では実行中にネットワークをアクティブにできません</value>
+    <value>[XenServer product] Tools 未インストールの VM では実行中にネットワークをアクティブにできません</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_SUSPENDED" xml:space="preserve">
     <value>VM が一時停止しているため、ディスクをアクティブまたは非アクティブにできません</value>
@@ -11314,7 +11317,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>VM が一時停止しているためネットワークを非アクティブにできません</value>
   </data>
   <data name="TOOLTIP_DEACTIVATE_VIF_TOOLS" xml:space="preserve">
-    <value>XenServer Tools 未インストールの VM では実行中にネットワークを非アクティブにできません</value>
+    <value>[XenServer product] Tools 未インストールの VM では実行中にネットワークを非アクティブにできません</value>
   </data>
   <data name="TOOLTIP_DELETE_SUSPENDED" xml:space="preserve">
     <value>VM が一時停止しているためディスクを削除できません</value>
@@ -11550,10 +11553,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>ライセンスによる制限のため仮想マシン '{0}' を移行できません。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
-    <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
+    <value>仮想マシン '{0}' を移行できません。最新のドライバーがインストールされていません。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
-    <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>
+    <value>仮想マシン '{0}' は一時停止できないため、移行できません。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_UNKNOWN_REASON" xml:space="preserve">
     <value>不明な理由により、VM '{0}' を移行できません。詳しくは、アプリケーション ログを参照してください。</value>
@@ -11994,7 +11997,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
 下のボタンを使用して、役割ベースのアクセス制御機能や [XenServer] の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
-    <value>VM の定期的なスナップショット作成を有効にするには、[XenServer] ライセンスをアップグレードします。VM の定期的なスナップショット作成機能で、重要な VM のスナップショットを自動で作成できます。</value>
+    <value>仮想マシンのスケジュールされたスナップショット作成を有効にするには、[XenServer] ライセンスをアップグレードします。仮想マシンのスケジュールされたスナップショット作成機能で、重要な仮想マシンのスナップショットを自動で作成できます。</value>
   </data>
   <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
     <value>
@@ -12130,6 +12133,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="VBD_EDIT_CURRENTLY_ATTACHED" xml:space="preserve">
     <value>このディスクは、停止状態でない VM に接続されました。</value>
+  </data>
+  <data name="VBD_EDIT_CURRENTLY_IN_USE" xml:space="preserve">
+    <value>{0} - 使用中です</value>
+  </data>
+  <data name="VBD_EDIT_CURRENTLY_IN_USE_BY" xml:space="preserve">
+    <value>{0} - '{1}' により使用されています</value>
   </data>
   <data name="VCPU_ONLY_WHEN_HALTED" xml:space="preserve">
     <value>vCPU を変更するには、VM がシャットダウン状態である必要があります。</value>
@@ -12268,6 +12277,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="VIRTUAL_MACHINES" xml:space="preserve">
     <value>仮想マシン</value>
+  </data>
+  <data name="VLAN_NETWORK_NAME" xml:space="preserve">
+    <value>VLAN {1} 上のネットワーク {0}</value>
   </data>
   <data name="VM" xml:space="preserve">
     <value>VM</value>

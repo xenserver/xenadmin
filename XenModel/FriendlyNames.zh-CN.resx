@@ -1065,7 +1065,7 @@
     <value>池“{0}”中服务器的多路径状态发生变化。以下服务器当前具有非活动路径: {1}。有关完整详细信息，请参阅 [XenCenter] 日志。</value>
   </data>
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
-    <value>启动服务器“{0}”后，无法连接存储库。或许可以使用“存储”菜单中的“修复存储”选项修复此问题。</value>
+    <value>服务器“{0}”启动时无法附加存储库。</value>
   </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
     <value>服务器“{0}”现在是池“{1}”的主服务器。</value>
@@ -1813,5 +1813,8 @@
   </data>
   <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
     <value>计划快照日志文件</value>
+  </data>
+  <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
+    <value>修复存储</value>
   </data>
 </root>
