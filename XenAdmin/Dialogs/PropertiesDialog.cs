@@ -78,6 +78,7 @@ namespace XenAdmin.Dialogs
         private Page_CloudConfigParameters CloudConfigParametersPage;
         private SecurityEditPage SecurityEditPage;
         private LivePatchingEditPage LivePatchingEditPage;
+        private NetworkOptionsEditPage NetworkOptionsEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -201,6 +202,9 @@ namespace XenAdmin.Dialogs
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching))
                     ShowTab(LivePatchingEditPage = new LivePatchingEditPage());
+
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictIGMPSnooping) && Helpers.GetMaster(pool).vSwitchNetworkBackend)
+                    ShowTab(NetworkOptionsEditPage = new NetworkOptionsEditPage());
 
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());

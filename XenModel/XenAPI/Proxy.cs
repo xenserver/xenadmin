@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -604,6 +604,10 @@ namespace XenAPI
         Response<bool>
         pool_get_live_patching_disabled(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_igmp_snooping_enabled")]
+        Response<bool>
+        pool_get_igmp_snooping_enabled(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -1023,6 +1027,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.disable_ssl_legacy")]
         Response<string>
         async_pool_disable_ssl_legacy(string session, string _pool);
+
+        [XmlRpcMethod("pool.set_igmp_snooping_enabled")]
+        Response<string>
+        pool_set_igmp_snooping_enabled(string session, string _pool, bool _value);
+
+        [XmlRpcMethod("Async.pool.set_igmp_snooping_enabled")]
+        Response<string>
+        async_pool_set_igmp_snooping_enabled(string session, string _pool, bool _value);
 
         [XmlRpcMethod("pool.has_extension")]
         Response<bool>
@@ -7636,6 +7648,7 @@ namespace XenAPI
         public Object cpu_info;
         public bool policy_no_vendor_device;
         public bool live_patching_disabled;
+        public bool igmp_snooping_enabled;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
