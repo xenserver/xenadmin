@@ -117,7 +117,7 @@
     <Compile Include="Actions\ProduceConsumerQueue.cs" />
     <Compile Include="Actions\SR\SrTrimAction.cs" />
     <Compile Include="Actions\StorageLink\SrCslgAdaptersScanAction.cs" />
-    <Compile Include="Actions\Updates\DownloadAndUnzipXenServerPatchAction.cs" />
+    <Compile Include="Actions\Updates\DownloadAndUnzipUpdate.cs" />
     <Compile Include="Actions\Updates\DownloadUpdatesXmlAction.cs" />
     <Compile Include="Actions\Updates\XenCenterVersion.cs" />
     <Compile Include="Actions\Updates\XenServerPatch.cs" />

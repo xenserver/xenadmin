@@ -89,7 +89,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Uri address = new Uri(patchUri);
             tempFileName = Path.GetTempFileName();
 
-            var downloadAction = new DownloadAndUnzipXenServerPatchAction(patch.Name, address, tempFileName, false, Helpers.ElyOrGreater(Connection) ? Branding.UpdateIso : Branding.Update);
+            var downloadAction = new DownloadAndUnzipUpdate(patch.Name, address, tempFileName, false, Helpers.ElyOrGreater(Connection) ? Branding.UpdateIso : Branding.Update);
 
             if (downloadAction != null)
             {
@@ -128,11 +128,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (action.Succeeded)
             {
-                if (action is DownloadAndUnzipXenServerPatchAction)
+                if (action is DownloadAndUnzipUpdate)
                 {
                     Host master = Helpers.GetMaster(action.Connection);
 
-                    AllDownloadedPatches[patch] = (action as DownloadAndUnzipXenServerPatchAction).PatchPath;
+                    AllDownloadedPatches[patch] = (action as DownloadAndUnzipUpdate).PatchPath;
                 }
             }
            

@@ -328,19 +328,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RemoveDownloadedPatches()
         {
-            var isInAutomaticMode = PatchingWizard_SelectPatchPage.IsInAutomatedUpdatesMode;
-
             List<string> listOfDownloadedFiles = new List<string>();
 
-            if (isInAutomaticMode)
-            {
-                listOfDownloadedFiles.AddRange(PatchingWizard_AutomatedUpdatesPage.AllDownloadedPatches.Values);
-            }
-            else
-            {
-                listOfDownloadedFiles.AddRange(PatchingWizard_UploadPage.AllDownloadedPatches.Values);
-                listOfDownloadedFiles.AddRange(PatchingWizard_SelectPatchPage.UnzippedUpdateFiles);
-            }
+            listOfDownloadedFiles.AddRange(PatchingWizard_AutomatedUpdatesPage.AllDownloadedPatches.Values);
+            listOfDownloadedFiles.AddRange(PatchingWizard_UploadPage.AllDownloadedPatches.Values);
+            listOfDownloadedFiles.AddRange(PatchingWizard_SelectPatchPage.UnzippedUpdateFiles);
 
             foreach (string downloadedPatch in listOfDownloadedFiles)
             {

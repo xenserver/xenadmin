@@ -47,7 +47,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     public partial class PatchingWizard_UploadPage : XenTabPage
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private DownloadAndUnzipXenServerPatchAction downloadAction = null;
+        private DownloadAndUnzipUpdate downloadAction = null;
         private const int EllipsiseValueDownDescription = 80;
 
         public PatchingWizard_UploadPage()
@@ -143,7 +143,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             bool isIso = SelectedUpdateType == UpdateType.ISO;
 
-            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, false, isIso ? Branding.UpdateIso : Branding.Update);          
+            downloadAction = new DownloadAndUnzipUpdate(SelectedUpdateAlert.Name, address, tempFile, false, isIso ? Branding.UpdateIso : Branding.Update);          
 
             if (downloadAction != null)
             {
@@ -511,9 +511,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
                     }
 
-                    if (action is DownloadAndUnzipXenServerPatchAction)
+                    if (action is DownloadAndUnzipUpdate)
                     {
-                        SelectedNewPatchPath = ((DownloadAndUnzipXenServerPatchAction)action).PatchPath;
+                        SelectedNewPatchPath = ((DownloadAndUnzipUpdate)action).PatchPath;
                         if (SelectedUpdateAlert is XenServerPatchAlert && (SelectedUpdateAlert as XenServerPatchAlert).Patch != null)
                         {
                             AllDownloadedPatches.Add((SelectedUpdateAlert as XenServerPatchAlert).Patch.Uuid, SelectedNewPatchPath);
@@ -573,9 +573,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void flickerFreeListBox1_DrawItem(object sender, DrawItemEventArgs e)
         {            
-            if(e.Index >= 0 && (flickerFreeListBox1.Items[e.Index] is DownloadAndUnzipXenServerPatchAction)) 
+            if(e.Index >= 0 && (flickerFreeListBox1.Items[e.Index] is DownloadAndUnzipUpdate)) 
             {
-                DownloadAndUnzipXenServerPatchAction downAction = (DownloadAndUnzipXenServerPatchAction)flickerFreeListBox1.Items[e.Index];
+                DownloadAndUnzipUpdate downAction = (DownloadAndUnzipUpdate)flickerFreeListBox1.Items[e.Index];
                 drawActionText(Properties.Resources._000_Patch_h32bit_16, 
                                downAction.Title, 
                                GetActionDescription(downAction).Ellipsise(EllipsiseValueDownDescription), 
