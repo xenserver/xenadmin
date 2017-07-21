@@ -56,7 +56,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public XenServerPatchAlert FileFromDiskAlert;
         private bool firstLoad = true;
         private string unzippedUpdateFilePath;
-        private string zippedUpdateFilePath;
 
         public PatchingWizard_SelectPatchPage()
         {
@@ -177,16 +176,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (direction == PageLoadedDirection.Forward)
             {
-                //check if we are installing update user sees in textbox
-                if (Path.GetFileNameWithoutExtension(unzippedUpdateFilePath) != Path.GetFileNameWithoutExtension(fileNameTextBox.Text))
-                {
-                    unzippedUpdateFilePath = ExtractPatchAction(fileNameTextBox.Text);
-                    if (unzippedUpdateFilePath == null)
-                        cancel = true;
-
-                    unzippedFiles.Add(unzippedUpdateFilePath);
-                }
-
                 if (!IsInAutomatedUpdatesMode)
                 {
                     var fileName = isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath : fileNameTextBox.Text.ToLowerInvariant();
@@ -336,7 +325,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (selectFromDiskRadioButton.Checked)
             {
-                if (isValidFile(unzippedUpdateFilePath) && File.Exists(zippedUpdateFilePath))
+                if (isValidFile(unzippedUpdateFilePath))
                     return true;
 
                 if (isValidFile(fileNameTextBox.Text))
@@ -364,7 +353,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         //list to store unzipped files to be removed later by PatchingWizard
-        private List<string> unzippedFiles = new List<string>();
+        private static List<string> unzippedFiles = new List<string>();
 
         public List<string> UnzippedUpdateFiles
         {
@@ -395,7 +384,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (dlg.ShowDialog(this) == DialogResult.OK && dlg.CheckFileExists)
                     {
-                        AddFile(dlg.FileName);    
+                        if (dlg.FileName.ToLowerInvariant().EndsWith(".zip"))
+                        {
+                            string unzippedFilePath = ExtractPatchAction(dlg.FileName);
+                            if (!string.IsNullOrEmpty(unzippedFilePath))
+                            {
+                                unzippedUpdateFilePath = unzippedFilePath;
+                                unzippedFiles.Add(unzippedUpdateFilePath);
+                                AddFile(dlg.FileName);
+                            }                              
+                        }
+                        else
+                        {
+                            AddFile(dlg.FileName);
+                        }    
                     }
                         
                 }
@@ -451,8 +453,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private string ExtractPatchAction(string zippedUpdatePath)
         {
-            DownloadAndUnzipUpdate unzipAction = 
-                new DownloadAndUnzipUpdate(Path.GetFileNameWithoutExtension(zippedUpdatePath), null, zippedUpdatePath, true, Branding.Update, Branding.UpdateIso);
+            DownloadAndUnzipXenServerPatchAction unzipAction = 
+                new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath), null, zippedUpdatePath, true, Branding.Update, Branding.UpdateIso);
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
             {
                 dlg.ShowDialog(Parent);
@@ -689,7 +691,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void fileNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            zippedUpdateFilePath = fileNameTextBox.Text;
             selectFromDiskRadioButton.Checked = true;
             OnPageUpdated();
         }
