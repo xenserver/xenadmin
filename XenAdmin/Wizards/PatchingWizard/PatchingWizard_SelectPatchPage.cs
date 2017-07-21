@@ -193,7 +193,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else
                         unzippedUpdateFilePath = null;
 
-                    var fileName = isValidFile(unzippedUpdateFilePath.ToLowerInvariant()) ? unzippedUpdateFilePath.ToLowerInvariant() : fileNameTextBox.Text.ToLowerInvariant();
+                    var fileName = isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath.ToLowerInvariant() : fileNameTextBox.Text.ToLowerInvariant();
 
                     SelectedUpdateAlert = downloadUpdateRadioButton.Checked
                              ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
@@ -440,7 +440,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 else if (selectFromDiskRadioButton.Checked)
                 {
                     return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
-                        ? isValidFile(unzippedUpdateFilePath.ToLowerInvariant()) && Path.GetExtension(fileNameTextBox.Text).Equals(".zip")
+                        ? isValidFile(unzippedUpdateFilePath) && Path.GetExtension(fileNameTextBox.Text).ToLowerInvariant().Equals(".zip")
                         ? unzippedUpdateFilePath : fileNameTextBox.Text : null;
                 }
                 else 
