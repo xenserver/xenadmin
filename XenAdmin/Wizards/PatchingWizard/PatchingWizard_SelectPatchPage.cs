@@ -56,7 +56,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public XenServerPatchAlert FileFromDiskAlert;
         private bool firstLoad = true;
         private string unzippedUpdateFilePath;
-        private string zippedUpdateFilePath;
 
         public PatchingWizard_SelectPatchPage()
         {
@@ -177,18 +176,23 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (direction == PageLoadedDirection.Forward)
             {
-                //check if we are installing update user sees in textbox
-                if (Path.GetFileNameWithoutExtension(unzippedUpdateFilePath) != Path.GetFileNameWithoutExtension(fileNameTextBox.Text))
-                {
-                    unzippedUpdateFilePath = ExtractUpdate(fileNameTextBox.Text);
-                    if (unzippedUpdateFilePath == null)
-                        cancel = true;
-
-                    unzippedFiles.Add(unzippedUpdateFilePath);
-                }
-
                 if (!IsInAutomatedUpdatesMode)
                 {
+                    if (selectFromDiskRadioButton.Checked && Path.GetExtension(fileNameTextBox.Text).ToLowerInvariant().Equals(".zip"))
+                    {
+                        //check if we are installing update user sees in textbox
+                        if (Path.GetFileNameWithoutExtension(unzippedUpdateFilePath) != Path.GetFileNameWithoutExtension(fileNameTextBox.Text))
+                        {
+                            unzippedUpdateFilePath = ExtractUpdate(fileNameTextBox.Text);
+                            if (unzippedUpdateFilePath == null)
+                                cancel = true;
+
+                            unzippedFiles.Add(unzippedUpdateFilePath);
+                        }
+                    }
+                    else
+                        unzippedUpdateFilePath = null;
+                    
                     var fileName = isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath : fileNameTextBox.Text.ToLowerInvariant();
 
                     SelectedUpdateAlert = downloadUpdateRadioButton.Checked
@@ -336,9 +340,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             else if (selectFromDiskRadioButton.Checked)
             {
-                if (isValidFile(unzippedUpdateFilePath) && File.Exists(zippedUpdateFilePath))
-                    return true;
-
                 if (isValidFile(fileNameTextBox.Text))
                     return true;
             }
@@ -394,10 +395,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     })
                 {
                     if (dlg.ShowDialog(this) == DialogResult.OK && dlg.CheckFileExists)
-                    {
-                        AddFile(dlg.FileName);    
-                    }
-                        
+                        AddFile(dlg.FileName);  
                 }
                 OnPageUpdated(); 
 
@@ -442,7 +440,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 else if (selectFromDiskRadioButton.Checked)
                 {
                     return SelectedUpdateType == UpdateType.NewRetail || SelectedUpdateType == UpdateType.ISO
-                        ? isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath : fileNameTextBox.Text : null;
+                        ? isValidFile(unzippedUpdateFilePath) && Path.GetExtension(fileNameTextBox.Text).Equals(".zip")
+                        ? unzippedUpdateFilePath : fileNameTextBox.Text : null;
                 }
                 else 
                     return null;
@@ -688,7 +687,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void fileNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            zippedUpdateFilePath = fileNameTextBox.Text;
             selectFromDiskRadioButton.Checked = true;
             OnPageUpdated();
         }
