@@ -143,7 +143,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             bool isIso = SelectedUpdateType == UpdateType.ISO;
 
-            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, isIso ? Branding.UpdateIso : Branding.Update);          
+            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, false, isIso ? Branding.UpdateIso : Branding.Update);          
 
             if (downloadAction != null)
             {

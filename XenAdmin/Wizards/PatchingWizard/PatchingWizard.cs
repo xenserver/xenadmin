@@ -339,6 +339,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             else
             {
                 listOfDownloadedFiles.AddRange(PatchingWizard_UploadPage.AllDownloadedPatches.Values);
+                listOfDownloadedFiles.AddRange(PatchingWizard_SelectPatchPage.UnzippedUpdateFiles);
             }
 
             foreach (string downloadedPatch in listOfDownloadedFiles)
