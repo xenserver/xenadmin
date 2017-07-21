@@ -1505,6 +1505,15 @@
     <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.zh-CN.resx">
       <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.ja.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.zh-CN.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
     </EmbeddedResource>
