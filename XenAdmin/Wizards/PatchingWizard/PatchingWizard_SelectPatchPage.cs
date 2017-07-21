@@ -180,7 +180,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 //check if we are installing update user sees in textbox
                 if (Path.GetFileNameWithoutExtension(unzippedUpdateFilePath) != Path.GetFileNameWithoutExtension(fileNameTextBox.Text))
                 {
-                    unzippedUpdateFilePath = ExtractPatchAction(fileNameTextBox.Text);
+                    unzippedUpdateFilePath = ExtractUpdate(fileNameTextBox.Text);
                     if (unzippedUpdateFilePath == null)
                         cancel = true;
 
@@ -449,7 +449,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private string ExtractPatchAction(string zippedUpdatePath)
+        private string ExtractUpdate(string zippedUpdatePath)
         {
             var unzipAction = new DownloadAndUnzipXenServerPatchAction(Path.GetFileNameWithoutExtension(zippedUpdatePath), null, zippedUpdatePath, true, Branding.Update, Branding.UpdateIso);
             using (var dlg = new ActionProgressDialog(unzipAction, ProgressBarStyle.Marquee))
