@@ -358,7 +358,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private bool isValidFile(string fileName)
         {
-            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".zip") || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
+            return !string.IsNullOrEmpty(fileName) && File.Exists(fileName) && (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant())
+                || fileName.ToLowerInvariant().EndsWith(".zip") 
+                || fileName.ToLowerInvariant().EndsWith(".iso")); //this iso is supplemental pack iso for XS, not branded
         }
 
         //list to store unzipped files to be removed later by PatchingWizard
@@ -408,7 +410,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public void AddFile(string fileName)
         {
-            if (fileName.ToLowerInvariant().EndsWith(UpdateExtension.ToLowerInvariant()) || fileName.ToLowerInvariant().EndsWith(".zip")  || fileName.ToLowerInvariant().EndsWith(".iso")) //this iso is supplemental pack iso for XS, not branded
+            if (isValidFile(fileName))
             {
                 fileNameTextBox.Text = fileName;
                 selectFromDiskRadioButton.Checked = true;
