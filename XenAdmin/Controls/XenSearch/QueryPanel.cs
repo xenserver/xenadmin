@@ -213,13 +213,15 @@ namespace XenAdmin.Controls.XenSearch
 
             if (s == "disks")
             {
-                int colWidth = Int32.Parse(resources.GetString("DISKS_OVERVIEW_COL_WIDTH"));
+                int colWidth;
+                Int32.TryParse(resources.GetString("DISKS_OVERVIEW_COL_WIDTH"), out colWidth);
                 return NewGridHeaderItem(Messages.OVERVIEW_DISKS, SortOrder.Descending, colWidth, colWidth);
             }
 
             if (s == "network")
             {
-                int colWidth = Int32.Parse(resources.GetString("NETWORK_OVERVIEW_COL_WIDTH"));
+                int colWidth;
+                Int32.TryParse(resources.GetString("NETWORK_OVERVIEW_COL_WIDTH"), out colWidth);
                 return NewGridHeaderItem(Messages.OVERVIEW_NETWORK, SortOrder.Descending, colWidth, colWidth);
             }
 
@@ -734,13 +736,6 @@ namespace XenAdmin.Controls.XenSearch
         internal static void Prod()
         {
             MetricUpdater.Prod();
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            this.ResumeLayout(false);
-
         }
     }
 
