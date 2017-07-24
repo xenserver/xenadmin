@@ -965,5 +965,20 @@ namespace XenAdmin.TabPages
         {
             labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
         }
+
+        private void byUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void byHostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripSplitButtonView_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
