@@ -74,5 +74,18 @@ namespace XenAPI
                     this.Connection.Cache.Hosts.Where(h => this.AppliedOn(h)).ToList();
             }
         }
+
+        private string enforce_homogeneity_key = "enforce_homogeneity";
+
+        public bool EnforceHomogeneity
+        {
+            get
+            {
+                if (Helpers.InvernessOrGreater(Connection))
+                    return enforce_homogeneity;
+                var poolPatchOfUpdate = Connection.Cache.Pool_patches.FirstOrDefault(p => p.pool_update != null && p.pool_update.opaque_ref == opaque_ref);
+                return poolPatchOfUpdate != null && BoolKey(poolPatchOfUpdate.other_config, enforce_homogeneity_key);
+            }
+        }
     }
 }
