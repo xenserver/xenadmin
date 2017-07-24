@@ -55,6 +55,10 @@
             this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
             this.tableLayouPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new XenAdmin.Controls.ToolStripEx();
+            this.toolStripSplitButtonView = new System.Windows.Forms.ToolStripSplitButton();
+            this.byUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byHostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,6 +70,7 @@
             this.dismissAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dismissSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonRestoreDismissed = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -195,6 +200,8 @@
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSplitButtonView,
+            this.toolStripSeparator2,
             this.toolStripDropDownButtonServerFilter,
             this.toolStripDropDownButtonDateFilter,
             this.toolStripSeparator3,
@@ -203,9 +210,41 @@
             this.toolStripButtonExportAll,
             this.toolStripLabelFiltersOnOff,
             this.toolStripSplitButtonDismiss,
-            this.toolStripButtonRestoreDismissed});
+            this.toolStripButtonRestoreDismissed,
+            this.toolStripSeparator});
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.TabStop = true;
+            // 
+            // toolStripSplitButtonView
+            // 
+            this.toolStripSplitButtonView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButtonView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.byUpdateToolStripMenuItem,
+            this.byHostToolStripMenuItem});
+            resources.ApplyResources(this.toolStripSplitButtonView, "toolStripSplitButtonView");
+            this.toolStripSplitButtonView.Name = "toolStripSplitButtonView";
+            this.toolStripSplitButtonView.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripSplitButtonView_DropDownItemClicked);
+            // 
+            // byUpdateToolStripMenuItem
+            // 
+            this.byUpdateToolStripMenuItem.Checked = true;
+            this.byUpdateToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.byUpdateToolStripMenuItem.Image = global::XenAdmin.Properties.Resources.notif_updates_16;
+            this.byUpdateToolStripMenuItem.Name = "byUpdateToolStripMenuItem";
+            resources.ApplyResources(this.byUpdateToolStripMenuItem, "byUpdateToolStripMenuItem");
+            this.byUpdateToolStripMenuItem.Click += new System.EventHandler(this.byUpdateToolStripMenuItem_Click);
+            // 
+            // byHostToolStripMenuItem
+            // 
+            this.byHostToolStripMenuItem.Image = global::XenAdmin.Properties.Resources._000_TreeConnected_h32bit_16;
+            this.byHostToolStripMenuItem.Name = "byHostToolStripMenuItem";
+            resources.ApplyResources(this.byHostToolStripMenuItem, "byHostToolStripMenuItem");
+            this.byHostToolStripMenuItem.Click += new System.EventHandler(this.byHostToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // toolStripDropDownButtonServerFilter
             // 
@@ -283,6 +322,11 @@
             resources.ApplyResources(this.toolStripButtonRestoreDismissed, "toolStripButtonRestoreDismissed");
             this.toolStripButtonRestoreDismissed.Name = "toolStripButtonRestoreDismissed";
             this.toolStripButtonRestoreDismissed.Click += new System.EventHandler(this.toolStripButtonRestoreDismissed_Click);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            resources.ApplyResources(this.toolStripSeparator, "toolStripSeparator");
             // 
             // dataGridViewUpdates
             // 
@@ -423,5 +467,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
         private System.Windows.Forms.TableLayoutPanel tableLayouPanel5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButtonView;
+        private System.Windows.Forms.ToolStripMenuItem byUpdateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem byHostToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
