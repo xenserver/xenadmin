@@ -408,8 +408,8 @@ namespace XenAdmin.Core
             if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
                 return false;
 
-            var masterUpdates = master.AppliedUpdates().Where(update => update.enforce_homogeneity).Select(update => update.uuid).ToList();
-            var slaveUpdates = slave.AppliedUpdates().Where(update => update.enforce_homogeneity).Select(update => update.uuid).ToList();
+            var masterUpdates = master.AppliedUpdates().Where(update => update.EnforceHomogeneity).Select(update => update.uuid).ToList();
+            var slaveUpdates = slave.AppliedUpdates().Where(update => update.EnforceHomogeneity).Select(update => update.uuid).ToList();
 
             return masterUpdates.Count != slaveUpdates.Count || !masterUpdates.All(slaveUpdates.Contains);
         }
