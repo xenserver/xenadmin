@@ -141,5 +141,10 @@ namespace XenAdmin.Controls
             if (FilterChanged != null)
                 FilterChanged();
         }
+
+        public void ResetFilterDates()
+        {
+            DropDownItems[6].PerformClick();
+        }
     }
 }
