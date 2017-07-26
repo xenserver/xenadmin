@@ -74,24 +74,32 @@ namespace XenAdmin.Model
 
         private static void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            //Program.AssertOnEventThread();
             InvokeHelper.BeginInvoke(() =>
-                                                        {
-                                                            IXenConnection connection = e.Element as IXenConnection;
-                                                            if (connection == null)
-                                                                return;
+            {
+                IXenConnection connection = e.Element as IXenConnection;
 
-                                                            switch (e.Action)
-                                                            {
-                                                                case CollectionChangeAction.Add:
-                                                                    AddConnection(connection);
-                                                                    break;
+                switch (e.Action)
+                {
+                    case CollectionChangeAction.Add:
+                        if (connection != null)
+                            AddConnection(connection);
+                        break;
 
-                                                                case CollectionChangeAction.Remove:
-                                                                    RemoveConnection(connection);
-                                                                    break;
-                                                            }
-                                                        });
+                    case CollectionChangeAction.Remove:
+                        if (connection != null)
+                        {
+                            RemoveConnection(connection);
+                        }
+                        else
+                        {
+                            var range = e.Element as List<IXenConnection>;
+                            if (range != null)
+                                foreach (var con in range)
+                                    RemoveConnection(con);
+                        }
+                        break;
+                }
+            });
         }
 
         private static CollectionChangeEventHandler CollectionChangedWithInvoke;

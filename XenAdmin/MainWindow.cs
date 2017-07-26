@@ -393,14 +393,15 @@ namespace XenAdmin
 
             Program.BeginInvoke(Program.MainWindow, () =>
             {
-                ActionBase action = (ActionBase)e.Element;
-                if (action == null)
-                    return;
-
+                ActionBase action = e.Element as ActionBase;
+                
                 switch (e.Action)
                 {
                     case CollectionChangeAction.Add:
                         {
+                            if (action == null)
+                                return;
+
                             var meddlingAction = action as MeddlingAction;
                             if (meddlingAction == null)
                             {
@@ -419,9 +420,28 @@ namespace XenAdmin
                         }
                     case CollectionChangeAction.Remove:
                         {
-                            action.Changed -= actionChanged;
-                            action.Completed -= actionCompleted;
-                            
+                            if (action != null)
+                            {
+                                action.Changed -= actionChanged;
+                                action.Completed -= actionCompleted;
+                            }
+                            else
+                            {
+                                var range = e.Element as List<ActionBase>;
+                                if (range != null)
+                                {
+                                    foreach (var a in range)
+                                    {
+                                        a.Changed -= actionChanged;
+                                        a.Completed -= actionCompleted;
+                                    }
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+
                             int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
                             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
 
@@ -752,14 +772,15 @@ namespace XenAdmin
         {
             try
             {
-                IXenConnection connection = (IXenConnection)e.Element;
-                if (connection == null)
-                    return;
+                IXenConnection connection = e.Element as IXenConnection;
 
                 navigationPane.XenConnectionCollectionChanged(e);
 
                 if (e.Action == CollectionChangeAction.Add)
                 {
+                    if (connection == null)
+                        return;
+
                     connection.ClearingCache += connection_ClearingCache;
                     connection.ConnectionResult += Connection_ConnectionResult;
                     connection.ConnectionLost += Connection_ConnectionLost;
@@ -779,38 +800,54 @@ namespace XenAdmin
                 }
                 else if (e.Action == CollectionChangeAction.Remove)
                 {
-                    connection.ClearingCache -= connection_ClearingCache;
-                    connection.ConnectionResult -= Connection_ConnectionResult;
-                    connection.ConnectionLost -= Connection_ConnectionLost;
-                    connection.ConnectionClosed -= Connection_ConnectionClosed;
-                    connection.ConnectionReconnecting -= connection_ConnectionReconnecting;
-                    connection.XenObjectsUpdated -= Connection_XenObjectsUpdated;
-                    connection.Cache.DeregisterCollectionChanged<XenAPI.Message>(MessageCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<Folder>(FolderCollectionChangedWithInvoke);
-
-                    connection.Cache.DeregisterCollectionChanged<Task>(TaskCollectionChangedWithInvoke);
-
-                    connection.CachePopulated -= connection_CachePopulated;
-
-                    foreach (VM vm in connection.Cache.VMs)
+                    var range = new List<IXenConnection>();
+                    if (connection != null)
                     {
-                        ConsolePanel.closeVNCForSource(vm);
+                        range.Add(connection);
+                    }
+                    else
+                    {
+                        var r = e.Element as List<IXenConnection>;
+                        if (r != null)
+                            range = r;
+                        else
+                            return;
                     }
 
-                    foreach (Host host in connection.Cache.Hosts)
+                    foreach (var con in range)
                     {
-                        ConsolePanel.closeVNCForSource(host.ControlDomainZero);
+                        con.ClearingCache -= connection_ClearingCache;
+                        con.ConnectionResult -= Connection_ConnectionResult;
+                        con.ConnectionLost -= Connection_ConnectionLost;
+                        con.ConnectionClosed -= Connection_ConnectionClosed;
+                        con.ConnectionReconnecting -= connection_ConnectionReconnecting;
+                        con.XenObjectsUpdated -= Connection_XenObjectsUpdated;
+                        con.Cache.DeregisterCollectionChanged<XenAPI.Message>(MessageCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<Folder>(FolderCollectionChangedWithInvoke);
 
-                        foreach (VM vm in host.OtherControlDomains)
-                            CvmConsolePanel.closeVNCForSource(vm);
+                        con.Cache.DeregisterCollectionChanged<Task>(TaskCollectionChangedWithInvoke);
+
+                        con.CachePopulated -= connection_CachePopulated;
+
+                        foreach (VM vm in con.Cache.VMs)
+                        {
+                            ConsolePanel.closeVNCForSource(vm);
+                        }
+
+                        foreach (Host host in con.Cache.Hosts)
+                        {
+                            ConsolePanel.closeVNCForSource(host.ControlDomainZero);
+
+                            foreach (VM vm in host.OtherControlDomains)
+                                CvmConsolePanel.closeVNCForSource(vm);
+                        }
+
+                        con.EndConnect();
                     }
-
-                    connection.EndConnect();
-
                     RequestRefreshTreeView();
                     //CA-41228 refresh submenu items when there are no connections
                     SelectionManager.RefreshSelection();
