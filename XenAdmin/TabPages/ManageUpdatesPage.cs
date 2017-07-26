@@ -969,5 +969,32 @@ namespace XenAdmin.TabPages
         {
             labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
         }
+
+        private void byUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Adjust checked state
+            byHostToolStripMenuItem.Checked = false;
+            byUpdateToolStripMenuItem.Checked = true;
+
+            // Show three buttons
+            toolStripDropDownButtonDateFilter.Visible = true;
+            toolStripSplitButtonDismiss.Visible = true;
+            toolStripButtonRestoreDismissed.Visible = true;
+        }
+
+        private void byHostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Adjust checked state
+            byUpdateToolStripMenuItem.Checked = false;
+            byHostToolStripMenuItem.Checked = true;
+
+            // Hide three buttons
+            toolStripDropDownButtonDateFilter.Visible = false;
+            toolStripSplitButtonDismiss.Visible = false;
+            toolStripButtonRestoreDismissed.Visible = false;
+
+            // Turn off Date Filter
+            toolStripDropDownButtonDateFilter.ResetFilterDates();
+        }
     }
 }
