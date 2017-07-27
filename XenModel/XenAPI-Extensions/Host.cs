@@ -706,7 +706,7 @@ namespace XenAPI
         {
             get
             {
-                Debug.Assert(!Helpers.FalconOrGreater(this));
+                Debug.Assert(!Helpers.ElyOrGreater(this));
 
                 string bn = BuildNumberRaw;
                 if (bn == null)
@@ -742,7 +742,7 @@ namespace XenAPI
             get
             {
                 string productVersion = ProductVersion;
-                return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.FalconOrGreater(this) ? BuildNumberRaw : BuildNumber.ToString()) : null;
+                return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.ElyOrGreater(this) ? BuildNumberRaw : BuildNumber.ToString()) : null;
             }
         }
 
