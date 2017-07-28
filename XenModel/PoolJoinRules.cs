@@ -387,12 +387,11 @@ namespace XenAdmin.Core
             if (Helpers.FalconOrGreater(master) && string.IsNullOrEmpty(master.GetDatabaseSchema()))
                 return true;
 
-            if (Helpers.FalconOrGreater(slave) && Helpers.FalconOrGreater(master) &&
-                slave.GetDatabaseSchema() != master.GetDatabaseSchema())
+            if (slave.GetDatabaseSchema() != master.GetDatabaseSchema())
                 return true;
-            
+
             return
-                !Helpers.FalconOrGreater(master) && !Helpers.FalconOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
+                !Helpers.ElyOrGreater(master) && !Helpers.ElyOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
                 slave.PlatformVersion != master.PlatformVersion ||
                 slave.ProductBrand != master.ProductBrand;
         }
