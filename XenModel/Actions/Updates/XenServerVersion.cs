@@ -45,6 +45,7 @@ namespace XenAdmin.Core
         public string Url;
         public string Oem;
         public List<XenServerPatch> Patches;
+        public string PatchUuid;
         
         /// <summary>
         /// A host of this version is considered up-to-date when it has all the patches in this list installed on it
@@ -68,8 +69,9 @@ namespace XenAdmin.Core
         /// <param name="minimumPatches">can be null (see <paramref name="MinimalPatches"/></param>
         /// <param name="timestamp"></param>
         /// <param name="buildNumber"></param>
+        /// <param name="patchUuid"></param>
         public XenServerVersion(string version_oem, string name, bool latest, bool latestCr, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
-            string timestamp, string buildNumber)
+            string timestamp, string buildNumber, string patchUuid)
         {
             ParseVersion(version_oem);
             Name = name;
@@ -82,6 +84,7 @@ namespace XenAdmin.Core
             MinimalPatches = minimumPatches;
             DateTime.TryParse(timestamp, out TimeStamp);
             BuildNumber = buildNumber;
+            PatchUuid = patchUuid;
         }
 
         private void ParseVersion(string version_oem)
@@ -109,7 +112,13 @@ namespace XenAdmin.Core
             }
         }
 
-
+        public bool IsVersionAvailableAsAnUpdate
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(PatchUuid);
+            }
+        }
 
     }
 }
