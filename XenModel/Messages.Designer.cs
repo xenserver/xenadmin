@@ -18987,6 +18987,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installed Updates.
+        /// </summary>
+        public static string INSTALLED_UPDATES {
+            get {
+                return ResourceManager.GetString("INSTALLED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a CD drive on the selected VM..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_CD {
@@ -26292,6 +26301,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Patching Status.
+        /// </summary>
+        public static string PATCHING_STATUS {
+            get {
+                return ResourceManager.GetString("PATCHING_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable HA until after all the hosts have been rebooted.
         /// </summary>
         public static string PATCHING_WARNING_HA {
@@ -29234,6 +29252,15 @@ namespace XenAdmin {
         public static string REQUIRED_HOTFIX_ISNOT_INSTALLED {
             get {
                 return ResourceManager.GetString("REQUIRED_HOTFIX_ISNOT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required Updates.
+        /// </summary>
+        public static string REQUIRED_UPDATES {
+            get {
+                return ResourceManager.GetString("REQUIRED_UPDATES", resourceCulture);
             }
         }
         
@@ -35148,6 +35175,15 @@ namespace XenAdmin {
         public static string VERIFYING_SIGNATURE_ERROR {
             get {
                 return ResourceManager.GetString("VERIFYING_SIGNATURE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string VERSION {
+            get {
+                return ResourceManager.GetString("VERSION", resourceCulture);
             }
         }
         
