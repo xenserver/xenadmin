@@ -18987,6 +18987,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installed Updates.
+        /// </summary>
+        public static string INSTALLED_UPDATES {
+            get {
+                return ResourceManager.GetString("INSTALLED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a CD drive on the selected VM..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_CD {
@@ -25658,6 +25667,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Updated.
+        /// </summary>
+        public static string NOT_UPDATED {
+            get {
+                return ResourceManager.GetString("NOT_UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Upgraded.
         /// </summary>
         public static string NOT_UPGRADED {
@@ -26279,6 +26297,15 @@ namespace XenAdmin {
         public static string PATCHING_EJECT_CDS {
             get {
                 return ResourceManager.GetString("PATCHING_EJECT_CDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patching Status.
+        /// </summary>
+        public static string PATCHING_STATUS {
+            get {
+                return ResourceManager.GetString("PATCHING_STATUS", resourceCulture);
             }
         }
         
@@ -29225,6 +29252,15 @@ namespace XenAdmin {
         public static string REQUIRED_HOTFIX_ISNOT_INSTALLED {
             get {
                 return ResourceManager.GetString("REQUIRED_HOTFIX_ISNOT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required Updates.
+        /// </summary>
+        public static string REQUIRED_UPDATES {
+            get {
+                return ResourceManager.GetString("REQUIRED_UPDATES", resourceCulture);
             }
         }
         
@@ -33175,6 +33211,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Updated.
+        /// </summary>
+        public static string UPDATED {
+            get {
+                return ResourceManager.GetString("UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updated performance monitoring configuration.
         /// </summary>
         public static string UPDATED_PERFMON {
@@ -35130,6 +35175,15 @@ namespace XenAdmin {
         public static string VERIFYING_SIGNATURE_ERROR {
             get {
                 return ResourceManager.GetString("VERIFYING_SIGNATURE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string VERSION {
+            get {
+                return ResourceManager.GetString("VERSION", resourceCulture);
             }
         }
         
