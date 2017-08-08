@@ -8909,6 +8909,9 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="NOT_TRUSTED" xml:space="preserve">
     <value>not trusted</value>
   </data>
+  <data name="NOT_UPDATED" xml:space="preserve">
+    <value>Out of date</value>
+  </data>
   <data name="NOT_UPGRADED" xml:space="preserve">
     <value>Not Upgraded</value>
   </data>
@@ -11429,6 +11432,9 @@ Verify that the file is a valid {1} export.</value>
   </data>
   <data name="UNTIL_RESTART_X_AFTER_RESTART_Y" xml:space="preserve">
     <value>Until next restart {0}; after restart {1}</value>
+  </data>
+  <data name="UPDATED" xml:space="preserve">
+    <value>Up to date</value>
   </data>
   <data name="UPDATED_PERFMON" xml:space="preserve">
     <value>Updated performance monitoring configuration</value>
