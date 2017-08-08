@@ -343,16 +343,17 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            private string RecommendedPatchesForHost(Host host)
-            {
-                var result = new List<string>();
-                var recommendedPatches = Updates.RecommendedPatchesForHost(host);
+        }
 
-                foreach (var patch in recommendedPatches)
-                    result.Add(patch.Name);
+        private static string RecommendedPatchesForHost(Host host)
+        {
+            var result = new List<string>();
+            var recommendedPatches = Updates.RecommendedPatchesForHost(host);
 
-                return string.Join(", ", result.ToArray());
-            }
+            foreach (var patch in recommendedPatches)
+                result.Add(patch.Name);
+
+            return string.Join(", ", result.ToArray());
         }
 
         private void RebuildHostView()
@@ -1151,26 +1152,85 @@ namespace XenAdmin.TabPages
                 {
                     using (StreamWriter stream = new StreamWriter(fileName, false, UTF8Encoding.UTF8))
                     {
-                        stream.WriteLine("{0},{1},{2},{3},{4}", Messages.TITLE,
-                                         Messages.DESCRIPTION, Messages.APPLIES_TO,
-                                         Messages.TIMESTAMP, Messages.WEB_PAGE);
+                        if (byUpdateToolStripMenuItem.Checked)     // update view
+                        {
+                            stream.WriteLine("{0},{1},{2},{3},{4}", Messages.TITLE,
+                                Messages.DESCRIPTION, Messages.APPLIES_TO,
+                                Messages.TIMESTAMP, Messages.WEB_PAGE);
 
-                        if (exportAll)
-                        {
-                            foreach (Alert a in Updates.UpdateAlerts)
-                                stream.WriteLine(a.GetUpdateDetailsCSVQuotes());
-                        }
-                        else
-                        {
-                            foreach (DataGridViewRow row in dataGridViewUpdates.Rows)
+                            if (exportAll)
                             {
-                                var a = row.Tag as Alert;
-                                if (a != null)
+                                foreach (Alert a in Updates.UpdateAlerts)
                                     stream.WriteLine(a.GetUpdateDetailsCSVQuotes());
+                            }
+                            else
+                            {
+                                foreach (DataGridViewRow row in dataGridViewUpdates.Rows)
+                                {
+                                    var a = row.Tag as Alert;
+                                    if (a != null)
+                                        stream.WriteLine(a.GetUpdateDetailsCSVQuotes());
+                                }
+                            }
+                        }
+                        else      // host view
+                        {
+                            stream.WriteLine("{0},{1},{2},{3},{4},{5}", Messages.POOL,
+                                Messages.SERVER, Messages.VERSION, Messages.PATCHING_STATUS,
+                                Messages.REQUIRED_UPDATES, Messages.INSTALLED_UPDATES);
+
+                            if (exportAll)
+                            {
+                                List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
+                                xenConnections.Sort();
+
+                                foreach (IXenConnection xenConnection in xenConnections)
+                                {
+                                    Pool pool = Helpers.GetPool(xenConnection);
+                                    var hasPool = (pool != null);
+
+                                    Host[] hosts = xenConnection.Cache.Hosts;
+                                    Array.Sort(hosts);
+                                    foreach (Host host in hosts)
+                                        stream.WriteLine(GetHostUpdateDetailsCsvQuotes(xenConnection, host, hasPool));
+                                }
+                            }
+                            else
+                            {
+                                foreach (UpdatePageDataGridViewRow row in dataGridViewHosts.Rows)
+                                {
+                                    Host host = row.Tag as Host;
+                                    if (host != null)
+                                        stream.WriteLine(GetHostUpdateDetailsCsvQuotes(host.Connection, host, row.HasPool));
+                                }
                             }
                         }
                     }
                 }).RunAsync();
+        }
+
+        private string GetHostUpdateDetailsCsvQuotes(IXenConnection xenConnection, Host host, bool hasPool)
+        {
+            string pool = String.Empty;
+            string patchingStatus = String.Empty;
+            string requiredUpdates = String.Empty;
+            string installedUpdates = String.Empty;
+
+            Program.Invoke(Program.MainWindow, delegate
+            {
+                pool = hasPool ? Helpers.GetPool(xenConnection).Name : String.Empty;
+                patchingStatus = Updates.RecommendedPatchesForHost(host).Count > 0 ? Messages.NOT_UPDATED : Messages.UPDATED;
+                requiredUpdates = RecommendedPatchesForHost(host);
+                installedUpdates = string.Join(", ", Helpers.HostAppliedPatchesList(host).ToArray());
+            });
+
+            return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"",
+                                 pool.EscapeQuotes(),
+                                 host.Name.EscapeQuotes(),
+                                 host.ProductVersionTextShort.EscapeQuotes(),
+                                 patchingStatus.EscapeQuotes(),
+                                 requiredUpdates.EscapeQuotes(),
+                                 installedUpdates.EscapeQuotes());
         }
 
         #endregion

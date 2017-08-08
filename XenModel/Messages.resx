@@ -6587,6 +6587,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="INITIALIZING_WLB_ON" xml:space="preserve">
     <value>Connecting pool {0} to Workload Balancing server.</value>
   </data>
+  <data name="INSTALLED_UPDATES" xml:space="preserve">
+    <value>Installed Updates</value>
+  </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_CD" xml:space="preserve">
     <value>Could not find a CD drive on the selected VM.</value>
   </data>
@@ -9331,6 +9334,9 @@ Please wait for this operation to complete, then click Next to continue with the
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>Eject any virtual CDs from your VMs</value>
   </data>
+  <data name="PATCHING_STATUS" xml:space="preserve">
+    <value>Patching Status</value>
+  </data>
   <data name="PATCHING_WARNING_HA" xml:space="preserve">
     <value>Disable HA until after all the hosts have been rebooted</value>
   </data>
@@ -10156,6 +10162,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REQUIRED_HOTFIX_ISNOT_INSTALLED" xml:space="preserve">
     <value>{0}: The required hotfix is not installed</value>
+  </data>
+  <data name="REQUIRED_UPDATES" xml:space="preserve">
+    <value>Required Updates</value>
   </data>
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
@@ -12155,6 +12164,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VERIFYING_SIGNATURE_ERROR" xml:space="preserve">
     <value>Signature verification failed. {0}</value>
+  </data>
+  <data name="VERSION" xml:space="preserve">
+    <value>Version</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
     <value>[XenCenter] version {0} (build {1}.{2}) {3}-bit</value>
