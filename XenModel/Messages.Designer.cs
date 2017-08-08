@@ -25658,6 +25658,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Out of date.
+        /// </summary>
+        public static string NOT_UPDATED {
+            get {
+                return ResourceManager.GetString("NOT_UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Upgraded.
         /// </summary>
         public static string NOT_UPGRADED {
@@ -33171,6 +33180,15 @@ namespace XenAdmin {
         public static string UPDATE_WAS_SUCCESSFULLY_INSTALLED {
             get {
                 return ResourceManager.GetString("UPDATE_WAS_SUCCESSFULLY_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Up to date.
+        /// </summary>
+        public static string UPDATED {
+            get {
+                return ResourceManager.GetString("UPDATED", resourceCulture);
             }
         }
         
