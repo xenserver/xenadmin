@@ -16914,6 +16914,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HealthCheck.
+        /// </summary>
+        public static string HEALTH_CHECK {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services failed. See the application log files for more information..
         /// </summary>
         public static string HEALTH_CHECK_AUTHENTICATION_FAILED {

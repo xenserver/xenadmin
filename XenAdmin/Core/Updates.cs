@@ -221,7 +221,7 @@ namespace XenAdmin.Core
             return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches, userAgent, userAgentId, checkForUpdatesUrl);
         }
 
-        private static string GetUniqueIdHash()
+        internal static string GetUniqueIdHash()
         {
             string uniqueIdHash = "nil";
 
