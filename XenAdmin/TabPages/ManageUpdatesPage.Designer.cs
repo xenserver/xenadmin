@@ -34,11 +34,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageUpdatesPage));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.informationLabelIcon = new System.Windows.Forms.PictureBox();
             this.informationLabel = new System.Windows.Forms.LinkLabel();
@@ -71,12 +74,21 @@
             this.labelProgress = new System.Windows.Forms.Label();
             this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
             this.tableLayouPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridViewHosts = new XenAdmin.Controls.DataGridViewEx.CollapsingPoolHostDataGridView(this.components);
             this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnWebPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnIcon = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPatchingStatus = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnRequiredUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnInstalledUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -86,6 +98,8 @@
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
             this.tableLayouPanel5.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHosts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).BeginInit();
             this.SuspendLayout();
             // 
@@ -326,8 +340,36 @@
             this.tableLayouPanel5.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayouPanel5.Controls.Add(this.checkForUpdatesNowLink, 2, 0);
             this.tableLayouPanel5.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 0);
-            this.tableLayouPanel5.Controls.Add(this.dataGridViewUpdates, 0, 1);
+            this.tableLayouPanel5.Controls.Add(this.panel1, 3, 0);
             this.tableLayouPanel5.Name = "tableLayouPanel5";
+            // 
+            // panel1
+            // 
+            this.tableLayouPanel5.SetColumnSpan(this.panel1, 3);
+            this.panel1.Controls.Add(this.dataGridViewHosts);
+            this.panel1.Controls.Add(this.dataGridViewUpdates);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            this.tableLayouPanel5.SetRowSpan(this.panel1, 4);
+            // 
+            // dataGridViewHosts
+            // 
+            this.dataGridViewHosts.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewHosts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewHosts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewHosts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnIcon,
+            this.ColumnName,
+            this.ColumnVersion,
+            this.ColumnPatchingStatus,
+            this.ColumnStatus,
+            this.ColumnRequiredUpdate,
+            this.ColumnInstalledUpdate});
+            resources.ApplyResources(this.dataGridViewHosts, "dataGridViewHosts");
+            this.dataGridViewHosts.MultiSelect = true;
+            this.dataGridViewHosts.Name = "dataGridViewHosts";
+            this.dataGridViewHosts.ReadOnly = true;
+            this.dataGridViewHosts.Updating = false;
             // 
             // dataGridViewUpdates
             // 
@@ -341,7 +383,6 @@
             this.ColumnLocation,
             this.ColumnDate,
             this.ColumnWebPage});
-            this.tableLayouPanel5.SetColumnSpan(this.dataGridViewUpdates, 3);
             resources.ApplyResources(this.dataGridViewUpdates, "dataGridViewUpdates");
             this.dataGridViewUpdates.MultiSelect = true;
             this.dataGridViewUpdates.Name = "dataGridViewUpdates";
@@ -356,10 +397,10 @@
             // ColumnExpand
             // 
             this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle3.NullValue")));
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
             this.ColumnExpand.Name = "ColumnExpand";
             this.ColumnExpand.ReadOnly = true;
@@ -367,9 +408,9 @@
             // 
             // ColumnMessage
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColumnMessage.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnMessage.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColumnMessage.FillWeight = 40F;
             resources.ApplyResources(this.ColumnMessage, "ColumnMessage");
             this.ColumnMessage.Name = "ColumnMessage";
@@ -377,8 +418,8 @@
             // 
             // ColumnLocation
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnLocation.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnLocation.DefaultCellStyle = dataGridViewCellStyle5;
             this.ColumnLocation.FillWeight = 20F;
             resources.ApplyResources(this.ColumnLocation, "ColumnLocation");
             this.ColumnLocation.Name = "ColumnLocation";
@@ -387,8 +428,8 @@
             // 
             // ColumnDate
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.ColumnDate.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.ColumnDate.DefaultCellStyle = dataGridViewCellStyle6;
             this.ColumnDate.FillWeight = 20F;
             resources.ApplyResources(this.ColumnDate, "ColumnDate");
             this.ColumnDate.Name = "ColumnDate";
@@ -402,6 +443,68 @@
             this.ColumnWebPage.ReadOnly = true;
             this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnWebPage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnIcon
+            // 
+            this.ColumnIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.ColumnIcon.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.ColumnIcon, "ColumnIcon");
+            this.ColumnIcon.Name = "ColumnIcon";
+            this.ColumnIcon.ReadOnly = true;
+            this.ColumnIcon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ColumnName
+            // 
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnName.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ColumnName.FillWeight = 40F;
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // ColumnVersion
+            // 
+            this.ColumnVersion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnVersion.FillWeight = 20F;
+            resources.ApplyResources(this.ColumnVersion, "ColumnVersion");
+            this.ColumnVersion.Name = "ColumnVersion";
+            this.ColumnVersion.ReadOnly = true;
+            this.ColumnVersion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnVersion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnPatchingStatus
+            // 
+            this.ColumnPatchingStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnPatchingStatus, "ColumnPatchingStatus");
+            this.ColumnPatchingStatus.Name = "ColumnPatchingStatus";
+            this.ColumnPatchingStatus.ReadOnly = true;
+            // 
+            // ColumnStatus
+            // 
+            this.ColumnStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnStatus.FillWeight = 20F;
+            resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
+            this.ColumnStatus.Name = "ColumnStatus";
+            this.ColumnStatus.ReadOnly = true;
+            this.ColumnStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnRequiredUpdate
+            // 
+            resources.ApplyResources(this.ColumnRequiredUpdate, "ColumnRequiredUpdate");
+            this.ColumnRequiredUpdate.Name = "ColumnRequiredUpdate";
+            this.ColumnRequiredUpdate.ReadOnly = true;
+            this.ColumnRequiredUpdate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnRequiredUpdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnInstalledUpdate
+            // 
+            resources.ApplyResources(this.ColumnInstalledUpdate, "ColumnInstalledUpdate");
+            this.ColumnInstalledUpdate.Name = "ColumnInstalledUpdate";
+            this.ColumnInstalledUpdate.ReadOnly = true;
+            this.ColumnInstalledUpdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ManageUpdatesPage
             // 
@@ -427,6 +530,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
             this.tableLayouPanel5.ResumeLayout(false);
             this.tableLayouPanel5.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHosts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -473,5 +578,14 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonView;
         private System.Windows.Forms.ToolStripMenuItem byUpdateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem byHostToolStripMenuItem;
+        private Controls.DataGridViewEx.CollapsingPoolHostDataGridView dataGridViewHosts;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnIcon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVersion;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnPatchingStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRequiredUpdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstalledUpdate;
     }
 }
