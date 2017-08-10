@@ -34,7 +34,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageUpdatesPage));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -75,7 +74,7 @@
             this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
             this.tableLayouPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridViewHosts = new XenAdmin.Controls.DataGridViewEx.CollapsingPoolHostDataGridView(this.components);
+            this.dataGridViewHosts = new XenAdmin.TabPages.ManageUpdatesPage.UpdatePageByHostDataGridView();
             this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -473,7 +472,6 @@
             this.ColumnVersion.Name = "ColumnVersion";
             this.ColumnVersion.ReadOnly = true;
             this.ColumnVersion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColumnVersion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ColumnPatchingStatus
             // 
@@ -489,7 +487,6 @@
             resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
             this.ColumnStatus.Name = "ColumnStatus";
             this.ColumnStatus.ReadOnly = true;
-            this.ColumnStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ColumnRequiredUpdate
             // 
@@ -578,7 +575,7 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonView;
         private System.Windows.Forms.ToolStripMenuItem byUpdateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem byHostToolStripMenuItem;
-        private Controls.DataGridViewEx.CollapsingPoolHostDataGridView dataGridViewHosts;
+        private TabPages.ManageUpdatesPage.UpdatePageByHostDataGridView dataGridViewHosts;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewImageColumn ColumnIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
