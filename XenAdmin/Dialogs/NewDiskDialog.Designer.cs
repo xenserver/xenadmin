@@ -192,7 +192,6 @@ namespace XenAdmin.Dialogs
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
-            this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.tableLayoutPanel1.SetColumnSpan(this.label6, 4);
             this.label6.Name = "label6";
             // 
