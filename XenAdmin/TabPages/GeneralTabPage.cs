@@ -1254,30 +1254,7 @@ namespace XenAdmin.TabPages
                 s.AddEntry(Messages.TYPE, sr.FriendlyTypeName);
 
                 if (sr.content_type != SR.Content_Type_ISO && sr.GetSRType(false) != SR.SRTypes.udev)
-                {
                     s.AddEntry(FriendlyName("SR.size"), sr.SizeString);
-
-                    /* DISABLED THIN PROVISIONING
-                    if (sr.type == "lvmohba" || sr.type == "lvmoiscsi")
-                    {
-                        // add entries related to thin lvhd SRs
-                        IEnumerable<CommandToolStripMenuItem> menuItems = null;
-                        if (!sr.IsThinProvisioned)
-                        {
-                            menuItems = new[] { new CommandToolStripMenuItem(new ConvertToThinSRCommand(Program.MainWindow, new List<SelectedItem>() { new SelectedItem(xenObject) }), true) };
-                        }
-                        s.AddEntry(FriendlyName("SR.provisioning"), sr.IsThinProvisioned 
-                            ? string.Format(Messages.SR_THIN_PROVISIONING_COMMITTED, sr.PercentageCommitted) 
-                            : Messages.SR_THICK_PROVISIONING, menuItems);
-                        
-                        if(sr.IsThinProvisioned && sr.sm_config.ContainsKey("initial_allocation") && sr.sm_config.ContainsKey("allocation_quantum"))
-                        {
-                            s.AddEntry(FriendlyName("SR.disk-space-allocations"), 
-                                       Helpers.GetAllocationProperties(sr.sm_config["initial_allocation"], sr.sm_config["allocation_quantum"]));
-                        }
-                    } 
-                    */
-                }
 
                 if (sr.GetScsiID() != null)
                     s.AddEntry(FriendlyName("SR.scsiid"), sr.GetScsiID() ?? Messages.UNKNOWN);

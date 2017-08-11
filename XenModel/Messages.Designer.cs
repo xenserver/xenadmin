@@ -1996,60 +1996,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Convert SR &apos;{0}&apos; on &apos;{1}&apos;.
-        /// </summary>
-        public static string ACTION_SR_CONVERT {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Convert SR &apos;{0}&apos; to thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_CONVERT_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERT_TO_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converted SR.
-        /// </summary>
-        public static string ACTION_SR_CONVERTED {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converted SR &apos;{0}&apos; to thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_CONVERTED_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERTED_TO_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converting SR.
-        /// </summary>
-        public static string ACTION_SR_CONVERTING {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converting SR &apos;{0}&apos; to thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_CONVERTING_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERTING_TO_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Created SR.
         /// </summary>
         public static string ACTION_SR_CREATE_SUCCESSFUL {
@@ -21091,15 +21037,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Convert SR....
-        /// </summary>
-        public static string MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Start.
         /// </summary>
         public static string MAINWINDOW_START {
@@ -24935,15 +24872,6 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The SR &apos;{0}&apos; is over committed. There is only {1} of free space and the new VM requires {2} ({3} initially)..
-        /// </summary>
-        public static string NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN", resourceCulture);
             }
         }
         
@@ -31289,33 +31217,6 @@ namespace XenAdmin {
         public static string SR_SIZE_USED {
             get {
                 return ResourceManager.GetString("SR_SIZE_USED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fully provisioned.
-        /// </summary>
-        public static string SR_THICK_PROVISIONING {
-            get {
-                return ResourceManager.GetString("SR_THICK_PROVISIONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thinly provisioned.
-        /// </summary>
-        public static string SR_THIN_PROVISIONING {
-            get {
-                return ResourceManager.GetString("SR_THIN_PROVISIONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thinly provisioned ({0}% committed).
-        /// </summary>
-        public static string SR_THIN_PROVISIONING_COMMITTED {
-            get {
-                return ResourceManager.GetString("SR_THIN_PROVISIONING_COMMITTED", resourceCulture);
             }
         }
         

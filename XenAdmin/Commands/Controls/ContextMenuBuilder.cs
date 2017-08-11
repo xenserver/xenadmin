@@ -924,7 +924,6 @@ namespace XenAdmin.Commands
             {
                 items.AddIfEnabled(new RepairSRCommand(mainWindow, selection));
                 items.AddIfEnabled(new SetAsDefaultSRCommand(mainWindow, selection));
-                items.AddIfEnabled(new ConvertToThinSRCommand(mainWindow, selection));
                 items.AddSeparator();
 
                 items.AddIfEnabled(new DetachSRCommand(mainWindow, selection));

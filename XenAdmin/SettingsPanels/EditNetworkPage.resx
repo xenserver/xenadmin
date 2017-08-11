@@ -130,13 +130,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="HostNicLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 41</value>
+    <value>0, 70</value>
   </data>
   <data name="HostNicLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 3, 0</value>
+    <value>0, 0, 4, 0</value>
   </data>
   <data name="HostNicLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 21</value>
+    <value>48, 24</value>
   </data>
   <data name="HostNicLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -169,13 +169,13 @@
     <value>NoControl</value>
   </data>
   <data name="HostVLanLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 90</value>
+    <value>0, 130</value>
   </data>
   <data name="HostVLanLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 9, 3, 7</value>
+    <value>0, 11, 4, 9</value>
   </data>
   <data name="HostVLanLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 18</value>
+    <value>48, 22</value>
   </data>
   <data name="HostVLanLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -208,13 +208,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelVLAN0Info.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 92</value>
+    <value>167, 133</value>
   </data>
   <data name="labelVLAN0Info.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 11, 0, 0</value>
+    <value>4, 14, 0, 0</value>
   </data>
   <data name="labelVLAN0Info.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 13</value>
+    <value>333, 17</value>
   </data>
   <data name="labelVLAN0Info.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -256,10 +256,10 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="label2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 0, 0</value>
+    <value>4, 2, 0, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 15</value>
+    <value>324, 19</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -288,8 +288,11 @@
   <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="pictureBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 15</value>
+    <value>16, 19</value>
   </data>
   <data name="pictureBox2.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>AutoSize</value>
@@ -313,13 +316,13 @@
     <value>Fill</value>
   </data>
   <data name="panelLACPWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 232</value>
+    <value>8, 308</value>
   </data>
   <data name="panelLACPWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 0, 0, 2</value>
+    <value>8, 0, 0, 2</value>
   </data>
   <data name="panelLACPWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>511, 15</value>
+    <value>639, 19</value>
   </data>
   <data name="panelLACPWarning.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -355,10 +358,10 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="labelBlurb.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 15</value>
+    <value>0, 0, 0, 19</value>
   </data>
   <data name="labelBlurb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 41</value>
+    <value>647, 70</value>
   </data>
   <data name="labelBlurb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -382,13 +385,13 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="numUpDownVLAN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 88</value>
+    <value>52, 128</value>
   </data>
   <data name="numUpDownVLAN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 7, 0, 7</value>
+    <value>0, 9, 0, 9</value>
   </data>
   <data name="numUpDownVLAN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>111, 24</value>
   </data>
   <data name="numUpDownVLAN.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -418,13 +421,13 @@
     <value>NoControl</value>
   </data>
   <data name="nicHelpLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 68</value>
+    <value>52, 102</value>
   </data>
   <data name="nicHelpLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 6, 3, 0</value>
+    <value>0, 8, 4, 0</value>
   </data>
   <data name="nicHelpLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>473, 13</value>
+    <value>591, 17</value>
   </data>
   <data name="nicHelpLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -448,13 +451,13 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="HostPNICList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 41</value>
+    <value>52, 70</value>
   </data>
   <data name="HostPNICList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="HostPNICList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 21</value>
+    <value>379, 24</value>
   </data>
   <data name="HostPNICList.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -481,16 +484,16 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 24</value>
+    <value>16, 30</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="label1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 0, 0</value>
+    <value>4, 2, 0, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 15</value>
+    <value>529, 19</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -517,10 +520,13 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
+    <value>0, 30</value>
+  </data>
+  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 53</value>
+    <value>16, 46</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>AutoSize</value>
@@ -544,16 +550,16 @@
     <value>Fill</value>
   </data>
   <data name="panelDisruptionWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 348</value>
+    <value>0, 456</value>
   </data>
   <data name="panelDisruptionWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panelDisruptionWarning.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 24, 0, 0</value>
+    <value>0, 30, 0, 0</value>
   </data>
   <data name="panelDisruptionWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 77</value>
+    <value>647, 76</value>
   </data>
   <data name="panelDisruptionWarning.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -574,13 +580,13 @@
     <value>8</value>
   </data>
   <data name="numericUpDownMTU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 252</value>
+    <value>52, 333</value>
   </data>
   <data name="numericUpDownMTU.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 0, 3</value>
+    <value>0, 4, 0, 4</value>
   </data>
   <data name="numericUpDownMTU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>111, 22</value>
   </data>
   <data name="numericUpDownMTU.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -604,13 +610,13 @@
     <value>Fill</value>
   </data>
   <data name="labelMTU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 255</value>
+    <value>0, 337</value>
   </data>
   <data name="labelMTU.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 6, 3, 7</value>
+    <value>0, 8, 4, 9</value>
   </data>
   <data name="labelMTU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+    <value>48, 17</value>
   </data>
   <data name="labelMTU.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -640,13 +646,13 @@
     <value>NoControl</value>
   </data>
   <data name="warningText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 310</value>
+    <value>0, 407</value>
   </data>
   <data name="warningText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 12, 0, 0</value>
+    <value>0, 15, 0, 0</value>
   </data>
   <data name="warningText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 13</value>
+    <value>647, 17</value>
   </data>
   <data name="warningText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -676,13 +682,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelCannotConfigureMTU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 335</value>
+    <value>0, 439</value>
   </data>
   <data name="labelCannotConfigureMTU.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 12, 0, 0</value>
+    <value>0, 15, 0, 0</value>
   </data>
   <data name="labelCannotConfigureMTU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 13</value>
+    <value>647, 17</value>
   </data>
   <data name="labelCannotConfigureMTU.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -724,10 +730,13 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonLacpTcpudpPorts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 49</value>
+    <value>4, 62</value>
+  </data>
+  <data name="radioButtonLacpTcpudpPorts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="radioButtonLacpTcpudpPorts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 17</value>
+    <value>457, 21</value>
   </data>
   <data name="radioButtonLacpTcpudpPorts.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -751,10 +760,13 @@
     <value>True</value>
   </data>
   <data name="radioButtonBalanceSlb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>4, 4</value>
+  </data>
+  <data name="radioButtonBalanceSlb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="radioButtonBalanceSlb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 17</value>
+    <value>109, 21</value>
   </data>
   <data name="radioButtonBalanceSlb.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -778,10 +790,13 @@
     <value>True</value>
   </data>
   <data name="radioButtonActiveBackup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
+    <value>4, 33</value>
+  </data>
+  <data name="radioButtonActiveBackup.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="radioButtonActiveBackup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 17</value>
+    <value>120, 21</value>
   </data>
   <data name="radioButtonActiveBackup.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -808,10 +823,13 @@
     <value>NoControl</value>
   </data>
   <data name="radioButtonLacpSrcMac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 72</value>
+    <value>4, 91</value>
+  </data>
+  <data name="radioButtonLacpSrcMac.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="radioButtonLacpSrcMac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 17</value>
+    <value>386, 21</value>
   </data>
   <data name="radioButtonLacpSrcMac.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -835,19 +853,19 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanelBondMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+    <value>4, 19</value>
   </data>
   <data name="tableLayoutPanelBondMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanelBondMode.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 40</value>
+    <value>0, 50</value>
   </data>
   <data name="tableLayoutPanelBondMode.RowCount" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="tableLayoutPanelBondMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>371, 92</value>
+    <value>465, 116</value>
   </data>
   <data name="tableLayoutPanelBondMode.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -871,13 +889,16 @@
     <value>Fill</value>
   </data>
   <data name="groupBoxBondMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 118</value>
+    <value>4, 165</value>
+  </data>
+  <data name="groupBoxBondMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="groupBoxBondMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 10, 3</value>
+    <value>4, 4, 12, 4</value>
   </data>
   <data name="groupBoxBondMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 111</value>
+    <value>481, 139</value>
   </data>
   <data name="groupBoxBondMode.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -901,13 +922,16 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>12, 12</value>
+  </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 425</value>
+    <value>647, 532</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -928,13 +952,13 @@
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelVLAN0Info" Row="3" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="panelLACPWarning" Row="5" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelBlurb" Row="0" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="numUpDownVLAN" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="nicHelpLabel" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="HostVLanLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="HostNicLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="HostPNICList" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="panelDisruptionWarning" Row="11" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="numericUpDownMTU" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelMTU" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="autoCheckBox" Row="8" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="warningText" Row="9" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="labelCannotConfigureMTU" Row="10" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="groupBoxBondMode" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,67.44186,Percent,32.55814" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,89,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,23,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="autoCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 281</value>
+    <value>4, 371</value>
   </data>
   <data name="autoCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 0</value>
+    <value>4, 8, 4, 0</value>
   </data>
   <data name="autoCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 17</value>
+    <value>375, 21</value>
   </data>
   <data name="autoCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -958,16 +982,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+    <value>120, 120</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
+    <value>12, 12, 12, 12</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>537, 445</value>
+    <value>671, 556</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditNetworkPage</value>

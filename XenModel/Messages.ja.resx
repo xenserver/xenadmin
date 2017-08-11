@@ -783,24 +783,6 @@
   <data name="ACTION_SR_ATTACH_SUCCESSFUL" xml:space="preserve">
     <value>SR が接続されました</value>
   </data>
-  <data name="ACTION_SR_CONVERT" xml:space="preserve">
-    <value>'{1}' で SR '{0}' を変換</value>
-  </data>
-  <data name="ACTION_SR_CONVERTED" xml:space="preserve">
-    <value>SR を変換しました</value>
-  </data>
-  <data name="ACTION_SR_CONVERTED_TO_THIN" xml:space="preserve">
-    <value>シン プロビジョニングに SR '{0}' を変換しました</value>
-  </data>
-  <data name="ACTION_SR_CONVERTING" xml:space="preserve">
-    <value>SR を変換しています</value>
-  </data>
-  <data name="ACTION_SR_CONVERTING_TO_THIN" xml:space="preserve">
-    <value>シン プロビジョニングに SR '{0}' を変換しています</value>
-  </data>
-  <data name="ACTION_SR_CONVERT_TO_THIN" xml:space="preserve">
-    <value>シン プロビジョニングに SR '{0}' を変換</value>
-  </data>
   <data name="ACTION_SR_CREATE_SUCCESSFUL" xml:space="preserve">
     <value>SR が作成されました</value>
   </data>
@@ -7450,9 +7432,6 @@ SCSI ID: {2}
   <data name="MAINWINDOW_SHUTDOWN" xml:space="preserve">
     <value>シャットダウン(&amp;H)</value>
   </data>
-  <data name="MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU" xml:space="preserve">
-    <value>SR の変換(&amp;C)...</value>
-  </data>
   <data name="MAINWINDOW_START" xml:space="preserve">
     <value>起動(&amp;S)</value>
   </data>
@@ -8624,9 +8603,6 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
     <value>SR '{0}' がオーバー コミットされました。空き容量が {1} しかありません。新規 VM では {2} 必要です。</value>
-  </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN" xml:space="preserve">
-    <value>SR '{0}' がオーバー コミットされました。空き容量が {1} しかありません。新規 VM では {2} (最初は {3}) 必要です。</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>新規 VM のストレージを構成してください</value>
@@ -11042,15 +11018,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="SR_SIZE_USED" xml:space="preserve">
     <value>{0} 使用 / {1} 合計 ({2} 割り当て済み)</value>
-  </data>
-  <data name="SR_THICK_PROVISIONING" xml:space="preserve">
-    <value>完全にプロビジョニング済み</value>
-  </data>
-  <data name="SR_THIN_PROVISIONING" xml:space="preserve">
-    <value>仮想プロビジョニング済み</value>
-  </data>
-  <data name="SR_THIN_PROVISIONING_COMMITTED" xml:space="preserve">
-    <value>仮想プロビジョニング済み ({0}% コミット済み)</value>
   </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
     <value>SR が検出されたため空き領域を解放できません</value>

@@ -116,7 +116,6 @@
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
-    <Compile Include="Commands\ConvertToThinSRCommand.cs" />
     <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
@@ -180,12 +179,6 @@
     </Compile>
     <Compile Include="Controls\PvsCacheStorageRow.Designer.cs">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ThinProvisioningParametersControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ThinProvisioningParametersControl.Designer.cs">
-      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\NonReopeningContextMenuStrip.cs">
       <SubType>Component</SubType>
@@ -292,12 +285,6 @@
     </Compile>
     <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.designer.cs">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ConvertToThinSRDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ConvertToThinSRDialog.Designer.cs">
-      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.cs">
       <SubType>UserControl</SubType>
@@ -1496,15 +1483,6 @@
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.ja.resx">
-      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.resx">
-      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.zh-CN.resx">
-      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1710,16 +1688,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.zh-CN.resx">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.ja.resx">
-      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.resx">
-      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.zh-CN.resx">
-      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.ja.resx">
       <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
@@ -5808,9 +5776,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VDISizeLocationPage.ja.resx">
       <DependentUpon>VDISizeLocationPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VDISizeLocationPage.zh-CN.resx">
       <DependentUpon>VDISizeLocationPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VMAdvancedEditPage.ja.resx">
       <DependentUpon>VMAdvancedEditPage.cs</DependentUpon>

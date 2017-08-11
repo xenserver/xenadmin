@@ -1059,14 +1059,6 @@ namespace XenAPI
             }
         }
 
-        public bool IsThinProvisioned
-        {
-            get
-            {
-                return false; // DISABLED THIN PROVISIONING this.sm_config != null && this.sm_config.ContainsKey("allocation") && this.sm_config["allocation"] == "xlvhd";
-            }
-        }
-
         public long PercentageCommitted
         {
             get

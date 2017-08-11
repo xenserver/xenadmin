@@ -37,7 +37,7 @@ using System.Collections.Generic;
 
 namespace XenAdmin.Actions
 {
-    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UnplugAndDestroyPBDs, ConvertToThin };
+    public enum SrActionKind { SetAsDefault, Detach, Forget, Destroy, UnplugAndDestroyPBDs };
 
     public class SrAction : PureAsyncAction
     {
@@ -85,10 +85,6 @@ namespace XenAdmin.Actions
                 case SrActionKind.Forget:
                     return String.Format(Messages.ACTION_SR_FORGETTING,
                         sr.Name, Helpers.GetName(sr.Connection));
-
-                case SrActionKind.ConvertToThin:
-                    return String.Format(Messages.ACTION_SR_CONVERT_TO_THIN,
-                        sr.NameWithLocation);
             }
 
             return "";
@@ -156,25 +152,6 @@ namespace XenAdmin.Actions
                     Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost);
                     break;
 
-                case SrActionKind.ConvertToThin:
-                    Description = string.Format(Messages.ACTION_SR_CONVERTING_TO_THIN, SR.NameWithLocation);
-
-                    long initial_allocation = 0;
-                    long allocation_quantum = 0;
-
-                    if (parameters != null)
-                    {
-                        if (parameters.ContainsKey("initial_allocation"))
-                            long.TryParse(parameters["initial_allocation"], out initial_allocation);
-
-                        if (parameters.ContainsKey("allocation_quantum"))
-                            long.TryParse(parameters["allocation_quantum"], out allocation_quantum);
-                    }
-
-                    LVHD.enable_thin_provisioning(Session, Host.opaque_ref, SR.opaque_ref, initial_allocation, allocation_quantum);
-
-                    Description = string.Format(Messages.ACTION_SR_CONVERTED_TO_THIN, SR.NameWithLocation);
-                    break;
             }
         }
 
