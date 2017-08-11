@@ -37,7 +37,7 @@ using System.Windows.Forms;
 using XenAdmin.CustomFields;
 using XenAdmin.XenSearch;
 using XenAPI;
-
+using System.Resources;
 using XenAdmin.Core;
 using XenAdmin.Controls.CustomGridView;
 using XenAdmin.Dialogs;
@@ -67,8 +67,8 @@ namespace XenAdmin.Controls.XenSearch
         public event Action SearchChanged;
 
         private readonly UpdateManager listUpdateManager = new UpdateManager();
-
-
+        static readonly ResourceManager resources = new ResourceManager("XenAdmin.Controls.XenSearch.QueryPanel", typeof(QueryPanel).Assembly);
+       
         public QueryPanel()
         {
             this.SuspendLayout();
@@ -213,12 +213,16 @@ namespace XenAdmin.Controls.XenSearch
 
             if (s == "disks")
             {
-                return NewGridHeaderItem(Messages.OVERVIEW_DISKS, SortOrder.Descending, 120, 120);
+                int colWidth;
+                Int32.TryParse(resources.GetString("DISKS_OVERVIEW_COL_WIDTH"), out colWidth);
+                return NewGridHeaderItem(Messages.OVERVIEW_DISKS, SortOrder.Descending, colWidth, colWidth);
             }
 
             if (s == "network")
             {
-                return NewGridHeaderItem(Messages.OVERVIEW_NETWORK, SortOrder.Descending, 120, 120);
+                int colWidth;
+                Int32.TryParse(resources.GetString("NETWORK_OVERVIEW_COL_WIDTH"), out colWidth);
+                return NewGridHeaderItem(Messages.OVERVIEW_NETWORK, SortOrder.Descending, colWidth, colWidth);
             }
 
             if (s == "ha")

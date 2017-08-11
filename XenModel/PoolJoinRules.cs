@@ -60,6 +60,8 @@ namespace XenAdmin.Core
             UnlicensedHostLicensedMaster,
             LicenseMismatch,
             DifferentServerVersion,
+            DifferentHomogeneousUpdatesFromMaster,
+            DifferentHomogeneousUpdatesFromPool,
             DifferentCPUs,
             DifferentNetworkBackends,
             MasterHasHA,
@@ -116,6 +118,9 @@ namespace XenAdmin.Core
 
             if (DifferentServerVersion(slaveHost, masterHost))
                 return Reason.DifferentServerVersion;
+
+            if (DifferentHomogeneousUpdates(slaveHost, masterHost))
+                return masterHost.Connection.Cache.Hosts.Length > 1 ? Reason.DifferentHomogeneousUpdatesFromPool : Reason.DifferentHomogeneousUpdatesFromMaster;
 
             if (FreeHostPaidMaster(slaveHost, masterHost, allowLicenseUpgrade))
                 return Reason.UnlicensedHostLicensedMaster;
@@ -190,6 +195,10 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_LICENSEMISMATCH;
                 case Reason.DifferentServerVersion:
                     return Messages.NEWPOOL_DIFF_SERVER;
+                case Reason.DifferentHomogeneousUpdatesFromMaster:
+                    return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER;
+                case Reason.DifferentHomogeneousUpdatesFromPool:
+                    return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL;
                 case Reason.DifferentCPUs:
                     return Messages.NEWPOOL_DIFF_HARDWARE;
                 case Reason.DifferentNetworkBackends:
@@ -378,14 +387,31 @@ namespace XenAdmin.Core
             if (Helpers.FalconOrGreater(master) && string.IsNullOrEmpty(master.GetDatabaseSchema()))
                 return true;
 
-            if (Helpers.FalconOrGreater(slave) && Helpers.FalconOrGreater(master) &&
-                slave.GetDatabaseSchema() != master.GetDatabaseSchema())
+            if (slave.GetDatabaseSchema() != master.GetDatabaseSchema())
                 return true;
-            
+
             return
-                !Helpers.FalconOrGreater(master) && !Helpers.FalconOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
-                slave.ProductVersion != master.ProductVersion ||
+                !Helpers.ElyOrGreater(master) && !Helpers.ElyOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
+                slave.PlatformVersion != master.PlatformVersion ||
                 slave.ProductBrand != master.ProductBrand;
+        }
+
+        /// <summary>
+        /// Check whether all updates that request homogeneity are in fact homogeneous
+        /// between master and slave. This is used in CanJoinPool and prevents the pool from being created
+        /// </summary>
+        private static bool DifferentHomogeneousUpdates(Host slave, Host master)
+        {
+            if (slave == null || master == null)
+                return false;
+
+            if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
+                return false;
+
+            var masterUpdates = master.AppliedUpdates().Where(update => update.EnforceHomogeneity).Select(update => update.uuid).ToList();
+            var slaveUpdates = slave.AppliedUpdates().Where(update => update.EnforceHomogeneity).Select(update => update.uuid).ToList();
+
+            return masterUpdates.Count != slaveUpdates.Count || !masterUpdates.All(slaveUpdates.Contains);
         }
 
         private static bool SameLinuxPack(Host slave, Host master)

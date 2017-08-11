@@ -141,6 +141,12 @@
   <data name="AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
     <value>The server was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
   </data>
+  <data name="AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>The host failed to enable external authentication.</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
+    <value>The host failed to enable external authentication.</value>
+  </data>
   <data name="AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>Failed to enable external authentication, permission on the AD server was denied.</value>
   </data>
@@ -217,7 +223,7 @@
     <value>This PIF is a bond slave and cannot be plugged.</value>
   </data>
   <data name="CANNOT_PLUG_VIF" xml:space="preserve">
-    <value>This VM cannot be started, as its network interfaces could not be connected.  One of the NICs is in use elsewhere.</value>
+    <value>This VM cannot be started because its network interfaces could not be connected.  One of the NICs is in use elsewhere.</value>
   </data>
   <data name="CANNOT_RESET_CONTROL_DOMAIN" xml:space="preserve">
     <value>The power-state of a control domain cannot be reset.</value>
@@ -454,10 +460,10 @@
     <value>The backup could not be performed because the server is in recovery mode</value>
   </data>
   <data name="HOST_IN_USE" xml:space="preserve">
-    <value>This operation cannot be completed as the server is in use.</value>
+    <value>This operation cannot be completed because the server is in use.</value>
   </data>
   <data name="HOST_IS_LIVE" xml:space="preserve">
-    <value>This operation cannot be completed as the server is still live.</value>
+    <value>This operation cannot be completed because the server is still live.</value>
   </data>
   <data name="HOST_IS_SLAVE" xml:space="preserve">
     <value>The server that you are talking to is a slave</value>
@@ -493,7 +499,7 @@
     <value>Server could not be contacted</value>
   </data>
   <data name="HOST_POWER_ON_MODE_DISABLED" xml:space="preserve">
-    <value>This operation cannot be completed as the server power on mode is disabled.</value>
+    <value>This operation cannot be completed because the server power on mode is disabled.</value>
   </data>
   <data name="HOST_STILL_BOOTING" xml:space="preserve">
     <value>The server is still booting.</value>
@@ -733,7 +739,7 @@
     <value>The update failed to apply. View logs for more details.</value>
   </data>
   <data name="PATCH_APPLY_FAILED_BACKUP_FILES_EXIST" xml:space="preserve">
-    <value>The patch apply failed: there are backup files created while applying patch. Please remove these backup files before applying patch again.</value>
+    <value>The patch apply failed: backup files were created while applying the patch. Please remove these backup files before applying the patch again.</value>
   </data>
   <data name="PATCH_IS_APPLIED" xml:space="preserve">
     <value>The specified patch is applied and cannot be destroyed.</value>
@@ -813,6 +819,9 @@
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>You tried to create a VLAN on top of another VLAN - use the underlying physical PIF/bond instead</value>
   </data>
+  <data name="PIF_NOT_PRESENT" xml:space="preserve">
+    <value>This host has no PIF on the given network.</value>
+  </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>Operation cannot proceed while a tunnel exists on this interface.</value>
   </data>
@@ -834,6 +843,9 @@
   <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server as permission was denied.</value>
   </data>
+  <data name="POOL_AUTH_DISABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server due to invalid account.</value>
+  </data>
   <data name="POOL_AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server due to invalid credentials.</value>
   </data>
@@ -845,6 +857,9 @@
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_DUPLICATE_HOSTNAME" xml:space="preserve">
     <value>Failed to enable external authentication, a duplicate hostname was detected.</value>
+  </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>Failed to enable external authentication, the supplied account was invalid.</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
     <value>The pool failed to enable external authentication.</value>
@@ -875,6 +890,12 @@
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
     <value>The server joining the pool must have a physical management NIC (i.e. the management NIC must not be on a VLAN or bonded PIF).</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION" xml:space="preserve">
+    <value>The host joining the pool must have the same API version as the pool master.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA" xml:space="preserve">
+    <value>The host joining the pool must have the same database schema as the pool master.</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
     <value>The server joining the pool must have the same product version as the pool master.</value>
@@ -1367,6 +1388,15 @@ Authorized Roles: {1}</value>
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>Unable to attach empty optical drive to VM.</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
+    <value>Unable to activate changed block tracking.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_458" xml:space="preserve">
+    <value>Unable to deactivate changed block tracking.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_459" xml:space="preserve">
+    <value>Changed block tracking log is in an inconsistent state.</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>The VDI is not available</value>
   </data>
@@ -1545,10 +1575,10 @@ Authorized Roles: {1}</value>
     <value>The SR has no attached PBDs</value>
   </data>
   <data name="SR_HAS_PBD" xml:space="preserve">
-    <value>The SR {0} is still connected to a server via a PBD. It cannot be destroyed.</value>
+    <value>The SR {0} is still connected to a server by a PBD. It cannot be destroyed.</value>
   </data>
   <data name="SR_INDESTRUCTIBLE" xml:space="preserve">
-    <value>The SR could not be destroyed, as the 'indestructible' flag was set on it.</value>
+    <value>The SR could not be destroyed because the 'indestructible' flag was set on it.</value>
   </data>
   <data name="SR_IS_CACHE_SR" xml:space="preserve">
     <value>The SR is currently being used as a local cache SR.</value>
@@ -1597,6 +1627,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="TASK_CANCELLED" xml:space="preserve">
     <value>The request was asynchronously cancelled.</value>
+  </data>
+  <data name="TLS_CONNECTION_FAILED" xml:space="preserve">
+    <value>Cannot contact the other host using TLS on the specified address and port</value>
   </data>
   <data name="TOO_BUSY" xml:space="preserve">
     <value>The request was rejected because the server is too busy.</value>
@@ -1653,7 +1686,7 @@ Authorized Roles: {1}</value>
     <value>The update precheck stage failed: the server is of an incorrect version.</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
-    <value>Only the local superuser can execute this operation</value>
+    <value>Only the local superuser can perform this operation</value>
   </data>
   <data name="UUID_INVALID" xml:space="preserve">
     <value>The uuid you supplied was invalid.</value>
@@ -1825,6 +1858,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_HAS_CHECKPOINT" xml:space="preserve">
     <value>You attempted to migrate a VM which has a checkpoint.</value>
+  </data>
+  <data name="VM_HAS_NO_SUSPEND_VDI" xml:space="preserve">
+    <value>VM cannot be resumed because it has no suspend VDI</value>
   </data>
   <data name="VM_HAS_PCI_ATTACHED" xml:space="preserve">
     <value>This operation could not be performed because the VM has one or more PCI devices passed through.</value>

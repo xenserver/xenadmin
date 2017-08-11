@@ -91,20 +91,24 @@ namespace XenAdmin.TabPages
         private void UpdatesCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.AssertOnEventThread();
-            if (e.Element == null)
-            {
-                // We take the null element to mean there has been a batch remove
-                Rebuild();
-                return;
-            }
-            Alert a = e.Element as Alert;
+            
             switch (e.Action)
             {
                 case CollectionChangeAction.Add:
                     Rebuild(); // rebuild entire alert list to ensure filtering and sorting
                     break;
                 case CollectionChangeAction.Remove:
-                    RemoveUpdateRow(a);
+                    Alert a = e.Element as Alert;
+                    if (a != null)
+                    {
+                        RemoveUpdateRow(a);
+                    }
+                    else
+                    {
+                        var range = e.Element as List<Alert>;
+                        if (range != null)
+                            Rebuild();
+                    }
                     break;
             }
         }

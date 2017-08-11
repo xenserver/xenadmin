@@ -29,41 +29,34 @@
 # SUCH DAMAGE.
 
 # help script to download third party binaries to local dev environment
+# NOTE: do not remove the Requires directive
 
-if ($PSVersionTable.PSVersion.Major -lt 3)
-{
-    Write-Host "Failed to execute: Powershell version 3.x (or above) is required"
-    exit 1
-}
+#Requires -Version 3.0
 
-$DOMAIN = Read-Host "Artifactory domain (e.g. artifactory.domain.com): "
+Param(
+    [Parameter(Mandatory=$true, HelpMessage ="Artifactory domain (e.g. artifactory.domain.com)")]
+    [String]$DOMAIN
+)
+
 $DOMAIN = $DOMAIN.Trim()
-$CREDENTIALS = Get-Credential
 $PACKAGE_DIR = Get-Item "$PSScriptRoot\..\packages" | select -ExpandProperty FullName
+$MK_DIR = Get-Item "$PSScriptRoot\..\mk" | select -ExpandProperty FullName
 
 #dotnet packages
 
-$BUILD_LOCATION = Get-Content "$PACKAGE_DIR\DOTNET_BUILD_LOCATION"
-$BUILD_LOCATION = $BUILD_LOCATION.Trim()
-$DOTNET = "https://$DOMAIN/api/archive/download/$BUILD_LOCATION/dotnet46?archiveType=zip"
-$ZIP_PATH = "$PACKAGE_DIR\dotnetpackages.zip"
+$BUILD_LOCATION = (Get-Content "$PACKAGE_DIR\DOTNET_BUILD_LOCATION").Trim()
+$DEPS_MAP = Get-Content "$MK_DIR\deps-map.json" `
+            | foreach {$_ -replace '@REMOTE_DOTNET@',"$BUILD_LOCATION"} `
+            | ConvertFrom-Json
 
-Invoke-WebRequest -Uri $DOTNET -Credential $CREDENTIALS -Method Get -OutFile $ZIP_PATH
-
-$shell = New-Object -COM 'Shell.Application'
-$zip = $shell.NameSpace($ZIP_PATH)
-
-foreach($item in $zip.items())
-{
-    $name = [System.IO.Path]::GetFileName($item.Path)
-    $ext = [System.IO.Path]::GetExtension($item.Path)
+foreach($dep in $DEPS_MAP.files) {
+    $pattern = "https://$DOMAIN/" + $dep.pattern
+    $filename = Split-Path $pattern -leaf
     
-    if (($name -eq "putty.exe") -or ($ext -like "*.dll")) {
-        $shell.Namespace($PACKAGE_DIR).CopyHere($item, 4 -bor 16)
+    if (($filename -eq "putty.exe") -or ($filename -like "*.dll")) {
+        Invoke-WebRequest -Uri $pattern -Method Get -OutFile "$PACKAGE_DIR\$filename"
     }
 }
-
-Remove-Item $ZIP_PATH
 
 #unit test dependencies
 

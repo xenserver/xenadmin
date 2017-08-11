@@ -143,7 +143,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             bool isIso = SelectedUpdateType == UpdateType.ISO;
 
-            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, isIso ? Branding.UpdateIso : Branding.Update);          
+            downloadAction = new DownloadAndUnzipXenServerPatchAction(SelectedUpdateAlert.Name, address, tempFile, false, isIso ? Branding.UpdateIso : Branding.Update);          
 
             if (downloadAction != null)
             {
@@ -292,7 +292,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             canUpload = true;
             diskSpaceRequirements = null;
             var diskSpaceActions = new List<AsyncAction>();
-            foreach (Host master in SelectedMasters.Where(master => Helpers.CreamOrGreater(master.Connection)))
+            foreach (Host master in SelectedMasters.Where(master => Helpers.CreamOrGreater(master.Connection) && !Helpers.ElyOrGreater(master.Connection)))
             {
                 AsyncAction action = null;
                 switch (SelectedUpdateType)

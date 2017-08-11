@@ -285,7 +285,7 @@ node("${params.BUILD_ON_NODE}") {
               taskkill /f /fi "imagename eq nunit*"              
               echo Starting tests at %time% %date%
               
-              nunit-console /nologo /labels /stoponerror /nodots /process=separate /noshadow /labels /err="${env.WORKSPACE}\\tmp\\error.nunit.log" /timeout=40000 /xml="${env.WORKSPACE}\\tmp\\XenAdminTests.xml" "${env.WORKSPACE}\\tmp\\Release\\XenAdminTests.dll" /framework=net-4.5
+              nunit-console /nologo /labels /stoponerror /nodots /process=separate /noshadow /labels /err="${env.WORKSPACE}\\tmp\\error.nunit.log" /timeout=40000 /xml="${env.WORKSPACE}\\tmp\\XenAdminTests.xml" "${env.WORKSPACE}\\tmp\\Release\\XenAdminTests.dll" /framework=net-4.6
               
               echo Finished tests at %time% %date%              
               cp ${env.WORKSPACE}\\tmp\\XenAdminTests.xml ${env.WORKSPACE}\\output

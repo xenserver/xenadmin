@@ -358,12 +358,11 @@ namespace XenAdmin.Alerts
 					case XenAPI.Message.MessageType.MULTIPATH_PERIODIC_ALERT:
 						return Program.ViewLogFiles;
 
-						// CA-23823: XenCenter "Repair Storage" link broken
-						// PBD_PLUG_FAILED_ON_SERVER_START give us host not sr uuid.
-						// therefore nothing we can do.
-						//case XenAPI.Message.MessageType.PBD_PLUG_FAILED_ON_SERVER_START:
-						//    Menus.RepairSR(XenObject as XenObject<SR>);
-						//    break;
+					case XenAPI.Message.MessageType.PBD_PLUG_FAILED_ON_SERVER_START:
+						var repairSrCommand = new RepairSRCommand(Program.MainWindow, XenObject.Connection.Cache.SRs);
+						if (repairSrCommand.CanExecute())
+							return () => repairSrCommand.Execute();
+						return null;
 					default:
 						return null;
 				}

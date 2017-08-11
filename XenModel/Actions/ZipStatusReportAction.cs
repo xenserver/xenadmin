@@ -188,6 +188,8 @@ namespace XenAdmin.Actions
             }
             catch (CancelledException)
             {
+                CleanupFiles(extractTempDir, true);
+
                 throw;
             }
             catch (Exception exn)
@@ -207,7 +209,7 @@ namespace XenAdmin.Actions
             }
         }
 
-        private void CleanupFiles(string extractTempDir)
+        private void CleanupFiles(string extractTempDir, bool deleteDestFile = false)
         {
             // We completed successfully: delete temporary files
             log.Debug("Deleting temporary files");
@@ -229,6 +231,18 @@ namespace XenAdmin.Actions
             catch (Exception exn)
             {
                 log.Warn("Could not delete temporary extracted files directory", exn);
+            }
+
+            try
+            {
+                if (deleteDestFile)
+                {
+                    File.Delete(_destFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Warn("Could not delete destination file", ex);
             }
         }
 

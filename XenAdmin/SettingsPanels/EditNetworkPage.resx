@@ -658,7 +658,7 @@
     <value>1</value>
   </data>
   <data name="warningText.Text" xml:space="preserve">
-    <value>(The network's NIC and VLAN cannot be changed as there are active VMs attached)</value>
+    <value>(The network's NIC and VLAN cannot be changed because there are active VMs attached)</value>
   </data>
   <data name="&gt;&gt;warningText.Name" xml:space="preserve">
     <value>warningText</value>
@@ -694,7 +694,7 @@
     <value>12</value>
   </data>
   <data name="labelCannotConfigureMTU.Text" xml:space="preserve">
-    <value>(The network's MTU cannot be changed as there are active VMs attached without tools installed)</value>
+    <value>(The network's MTU cannot be changed because there are active VMs attached without tools installed)</value>
   </data>
   <data name="&gt;&gt;labelCannotConfigureMTU.Name" xml:space="preserve">
     <value>labelCannotConfigureMTU</value>

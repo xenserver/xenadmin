@@ -82,7 +82,7 @@ namespace XenAdmin.Actions.VMActions
                     catch (Failure exn)
                     {
                         // VM is not agile, but it is 'Protected' by HA. This is an inconsistent state (see CA-20820).
-                        // Warn the user about this and ask if they wish to fix it.
+                        // Warn the user about this and ask if they want to fix it.
                         log.Debug("VM is not agile, but protected", exn);
                         _WarningDialogHAInvalidConfig(VM,IsStart);
                         new HAUnprotectVMAction(VM).RunExternal(Session);

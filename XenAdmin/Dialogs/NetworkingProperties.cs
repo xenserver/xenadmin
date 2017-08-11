@@ -494,7 +494,7 @@ namespace XenAdmin.Dialogs
             }
 
             // Any PIFs that are in downPIFs but also in newPIFs need to be removed from the former.
-            // downPIFs should contain all those that we no longer wish to keep up.
+            // downPIFs should contain all those that we no longer want to keep up.
             downPIFs.RemoveAll(delegate(PIF p) { return PIFContains(newPIFs, p); });
 
             // Remove any PIFs that haven't changed -- there's nothing to do for these ones.  They are in this

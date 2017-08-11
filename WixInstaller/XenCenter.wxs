@@ -310,7 +310,7 @@
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
         <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />
-        <Condition Message=".NET Framework 4.6 is required for this installation."><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
+        <Condition Message="Microsoft .NET Framework 4.6 or later is required for this installation. Please install it from: https://www.microsoft.com/net/download/framework"><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
         <Property Id="PERMACHINEINSTALL">
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\[Citrix]\[XenCenter]" Name="InstallDir" />
         </Property>

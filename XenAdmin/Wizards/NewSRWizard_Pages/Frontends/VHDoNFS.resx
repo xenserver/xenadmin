@@ -181,7 +181,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Provide the name of the share where your SR is located, optionally specifying advanced options. Indicate whether you wish to create a new SR or reattach an existing SR before proceeding.</value>
+    <value>Provide the name of the share where your SR is located, optionally specifying advanced options. Indicate whether you want to create a new SR or reattach an existing SR before proceeding.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

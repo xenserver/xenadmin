@@ -706,7 +706,7 @@ namespace XenAPI
         {
             get
             {
-                Debug.Assert(!Helpers.FalconOrGreater(this));
+                Debug.Assert(!Helpers.ElyOrGreater(this));
 
                 string bn = BuildNumberRaw;
                 if (bn == null)
@@ -742,7 +742,7 @@ namespace XenAPI
             get
             {
                 string productVersion = ProductVersion;
-                return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.FalconOrGreater(this) ? BuildNumberRaw : BuildNumber.ToString()) : null;
+                return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.ElyOrGreater(this) ? BuildNumberRaw : BuildNumber.ToString()) : null;
             }
         }
 
@@ -972,7 +972,7 @@ namespace XenAPI
         /// Save the list of VMs on this host, so we can try and put them back when finished.
         /// This may get run multiple times, after which some vms will have been suspended / shutdown.
         /// </summary>
-        /// <param name="session">Pass in the session you wish to use for the other config writing</param>
+        /// <param name="session">Pass in the session you want to use for the other config writing</param>
         public void SaveEvacuatedVMs(Session session)
         {
             //Program.AssertOffEventThread();

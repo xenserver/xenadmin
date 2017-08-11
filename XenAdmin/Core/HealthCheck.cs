@@ -125,5 +125,38 @@ namespace XenAdmin.Core
             if (CheckForAnalysisResultsCompleted != null)
                 CheckForAnalysisResultsCompleted(action.Succeeded);
         }
+
+        public static void SendProxySettingsToHealthCheck()
+        {
+            string protectedUsername = Properties.Settings.Default.ProxyUsername;
+            string protectedPassword = Properties.Settings.Default.ProxyPassword;
+            new TransferProxySettingsAction(
+                (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
+                Properties.Settings.Default.ProxyAddress,
+                Properties.Settings.Default.ProxyPort,
+                Properties.Settings.Default.ConnectionTimeout,
+                true,
+                Properties.Settings.Default.BypassProxyForServers,
+                Properties.Settings.Default.ProvideProxyAuthentication,
+                string.IsNullOrEmpty(protectedUsername) ? "" : EncryptionUtils.Unprotect(protectedUsername),
+                string.IsNullOrEmpty(protectedPassword) ? "" : EncryptionUtils.Unprotect(protectedPassword),
+                (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
+        }
+
+        /// <summary>
+        /// Sends XenCenter metadata to the Health Check service; will not show the action progress.
+        /// </summary>
+        public static void SendMetadataToHealthCheck()
+        {
+            if (Program.Exiting)
+                return;
+            var metadata = XenAdminConfigManager.Provider.GetXenCenterMetadata(false);
+            if (!string.IsNullOrEmpty(metadata))
+            {
+                new TransferXenCenterMetadataAction(metadata, true).RunAsync();
+            }
+        }
+
+
     }
 }

@@ -832,11 +832,11 @@ namespace XenAPI
         /// <summary>
         /// Get the patches field of the given host.
         /// First published in XenServer 4.0.
-        /// Deprecated since .
+        /// Deprecated since XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
-        [Deprecated("")]
+        [Deprecated("XenServer 7.1")]
         public static List<XenRef<Host_patch>> get_patches(Session session, string _host)
         {
             return XenRef<Host_patch>.Create(session.proxy.host_get_patches(session.uuid, (_host != null) ? _host : "").parse());
@@ -844,7 +844,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the updates field of the given host.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1108,7 +1108,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ssl_legacy field of the given host.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1152,7 +1152,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the control_domain field of the given host.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1163,7 +1163,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the updates_requiring_reboot field of the given host.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1174,7 +1174,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the features field of the given host.
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1691,7 +1691,7 @@ namespace XenAPI
 
         /// <summary>
         /// Apply a new license to a host
-        /// First published in .
+        /// First published in XenServer 6.5 SP1 Hotfix 31.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1703,7 +1703,7 @@ namespace XenAPI
 
         /// <summary>
         /// Apply a new license to a host
-        /// First published in .
+        /// First published in XenServer 6.5 SP1 Hotfix 31.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1715,7 +1715,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove any license file from the specified host, and switch that host to the unlicensed edition
-        /// First published in .
+        /// First published in XenServer 6.5 SP1 Hotfix 31.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1726,7 +1726,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove any license file from the specified host, and switch that host to the unlicensed edition
-        /// First published in .
+        /// First published in XenServer 6.5 SP1 Hotfix 31.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -1784,7 +1784,7 @@ namespace XenAPI
         /// First published in XenServer 5.0.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_soft">Disable HA temporarily, revert upon host reboot or further changes, idempotent First published in .</param>
+        /// <param name="_soft">Disable HA temporarily, revert upon host reboot or further changes, idempotent First published in XenServer 7.1.</param>
         public static void emergency_ha_disable(Session session, bool _soft)
         {
             session.proxy.host_emergency_ha_disable(session.uuid, _soft).parse();
@@ -2222,7 +2222,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return true if the extension is available on the host
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2234,7 +2234,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return true if the extension is available on the host
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2246,7 +2246,7 @@ namespace XenAPI
 
         /// <summary>
         /// Call a XenAPI extension on this host
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2376,11 +2376,11 @@ namespace XenAPI
         /// <summary>
         /// Refresh the list of installed Supplemental Packs.
         /// First published in XenServer 5.6.
-        /// Deprecated since .
+        /// Deprecated since XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
-        [Deprecated("")]
+        [Deprecated("XenServer 7.1")]
         public static void refresh_pack_info(Session session, string _host)
         {
             session.proxy.host_refresh_pack_info(session.uuid, (_host != null) ? _host : "").parse();
@@ -2389,11 +2389,11 @@ namespace XenAPI
         /// <summary>
         /// Refresh the list of installed Supplemental Packs.
         /// First published in XenServer 5.6.
-        /// Deprecated since .
+        /// Deprecated since XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
-        [Deprecated("")]
+        [Deprecated("XenServer 7.1")]
         public static XenRef<Task> async_refresh_pack_info(Session session, string _host)
         {
             return XenRef<Task>.Create(session.proxy.async_host_refresh_pack_info(session.uuid, (_host != null) ? _host : "").parse());
@@ -2565,7 +2565,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable/disable SSLv3 for interoperability with older versions of XenServer. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -2577,7 +2577,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable/disable SSLv3 for interoperability with older versions of XenServer. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3041,7 +3041,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set of updates
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual List<XenRef<Pool_update>> updates
         {
@@ -3491,7 +3491,7 @@ namespace XenAPI
 
         /// <summary>
         /// Allow SSLv3 protocol and ciphersuites as used by older XenServers. This controls both incoming and outgoing connections. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool ssl_legacy
         {
@@ -3567,7 +3567,7 @@ namespace XenAPI
 
         /// <summary>
         /// The control domain (domain 0)
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual XenRef<VM> control_domain
         {
@@ -3586,7 +3586,7 @@ namespace XenAPI
 
         /// <summary>
         /// List of updates which require reboot
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual List<XenRef<Pool_update>> updates_requiring_reboot
         {
@@ -3605,7 +3605,7 @@ namespace XenAPI
 
         /// <summary>
         /// List of features available on this host
-        /// First published in .
+        /// First published in XenServer 7.2.
         /// </summary>
         public virtual List<XenRef<Feature>> features
         {

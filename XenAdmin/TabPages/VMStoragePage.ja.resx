@@ -133,7 +133,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="AddButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>105, 29</value>
   </data>
   <data name="AddButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -163,7 +163,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="AttachButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>130, 29</value>
   </data>
   <data name="AttachButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -196,7 +196,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="DeactivateButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>130, 29</value>
   </data>
   <data name="DeactivateButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -247,13 +247,13 @@
     <value>NoControl</value>
   </data>
   <data name="MoveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>5, 0</value>
   </data>
   <data name="MoveButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="MoveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
+    <value>105, 29</value>
   </data>
   <data name="MoveButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

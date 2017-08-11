@@ -1055,7 +1055,7 @@ namespace XenAdmin.TabPages
 
             if (host.software_version.ContainsKey("date"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_DATE, host.software_version["date"]);
-            if (!Helpers.FalconOrGreater(host) && host.software_version.ContainsKey("build_number"))
+            if (!Helpers.ElyOrGreater(host) && host.software_version.ContainsKey("build_number"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_BUILD_NUMBER, host.software_version["build_number"]);
             if (host.software_version.ContainsKey("product_version"))
                 pdSectionVersion.AddEntry(Messages.SOFTWARE_VERSION_PRODUCT_VERSION, host.ProductVersionText);

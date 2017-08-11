@@ -64,6 +64,7 @@
     <Compile Include="Actions\HealthCheck\TransferHealthCheckSettingAction.cs" />
     <Compile Include="Actions\HealthCheck\TransferProxySettingsAction.cs" />
     <Compile Include="Actions\HealthCheck\GetHealthCheckAnalysisResultAction.cs" />
+    <Compile Include="Actions\HealthCheck\TransferXenCenterMetadataAction.cs" />
     <Compile Include="Actions\HealthCheck\UploadServerStatusReportAction.cs" />
     <Compile Include="Actions\HealthCheck\XenServerHealthCheckUpload.cs" />
     <Compile Include="Actions\CancellingAction.cs" />
@@ -342,6 +343,7 @@
     <Compile Include="XenAPI-Extensions\VM_Docker_Version.cs" />
     <Compile Include="XenAPI-Extensions\vm_power_state.cs" />
     <Compile Include="XenAPI\allocation_algorithm.cs" />
+    <Compile Include="XenAPI\ApiVersion.cs" />
     <Compile Include="XenAPI\bond_mode.cs" />
     <Compile Include="XenAPI\DeprecatedAttribute.cs" />
     <Compile Include="XenAPI\DR_task.cs" />

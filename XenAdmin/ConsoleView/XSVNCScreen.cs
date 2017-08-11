@@ -366,7 +366,7 @@ namespace XenAdmin.ConsoleView
                     PIF pif = Helpers.FindPIF(network, host);
                     foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
                     {
-                        if (networkInfo.Key.EndsWith("ip")) // IPv4 address
+                        if (networkInfo.Key.EndsWith("ip") || networkInfo.Key.Contains("ipv4")) // IPv4 address
                         {
                             if (pif == null)
                                 ipAddressesForNetworksWithoutPifs.Add(networkInfo.Value);
@@ -387,6 +387,7 @@ namespace XenAdmin.ConsoleView
                         }
                     }
                 }
+                ipAddresses = ipAddresses.Distinct().ToList();
 
                 ipAddresses.AddRange(ipv6Addresses); // make sure IPv4 addresses are scanned first (CA-102755)
                 // add IP addresses for networks without PIFs

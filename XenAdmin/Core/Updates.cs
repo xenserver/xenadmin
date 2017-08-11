@@ -215,13 +215,13 @@ namespace XenAdmin.Core
 
         private static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl = null)
         {
-            string userAgent = string.Format("[XenCenter]/{0}.{1} ({2}-bit)", Branding.XENCENTER_VERSION, Program.Version.Revision.ToString(), IntPtr.Size * 8);
+            string userAgent = string.Format("{0}/{1}.{2} ({3}-bit)", Branding.BRAND_CONSOLE, Branding.XENCENTER_VERSION, Program.Version.Revision.ToString(), IntPtr.Size * 8);
             string userAgentId = GetUniqueIdHash();
 
             return new DownloadUpdatesXmlAction(checkForXenCenter, checkForServerVersion, checkForPatches, userAgent, userAgentId, checkForUpdatesUrl);
         }
 
-        private static string GetUniqueIdHash()
+        internal static string GetUniqueIdHash()
         {
             string uniqueIdHash = "nil";
 

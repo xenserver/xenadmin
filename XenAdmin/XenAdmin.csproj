@@ -90,6 +90,7 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -213,6 +214,7 @@
     </Compile>
     <Compile Include="Core\HealthCheck.cs" />
     <Compile Include="Core\HiddenFeatures.cs" />
+    <Compile Include="Core\Metadata.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
@@ -1482,6 +1484,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.ja.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.zh-CN.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>

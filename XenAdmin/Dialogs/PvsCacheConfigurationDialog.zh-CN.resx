@@ -145,7 +145,7 @@
     <value>5, 0, 3, 0</value>
   </data>
   <data name="addSiteButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 25</value>
+    <value>199, 20</value>
   </data>
   <data name="addSiteButton.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>

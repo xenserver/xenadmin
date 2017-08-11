@@ -2334,7 +2334,7 @@ namespace XenOvf
             #endregion
 
             #region OTHER CONTROLLER DISKS
-            // These are disks that were not found on an IDE or SCSI, but exist and wish to be exported.
+            // These are disks that were not found on an IDE or SCSI, but exist and want to be exported.
             // these could be USB, 1394 etc.
             foreach (DiskInfo di in vhdExports)
             {

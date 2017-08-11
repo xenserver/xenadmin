@@ -1079,6 +1079,7 @@ namespace XenAdmin.Commands
 
                 items.AddIfEnabled(new StartVMOnHostToolStripMenuItem(mainWindow, selection, true));
                 items.AddIfEnabled(new ResumeVMOnHostToolStripMenuItem(mainWindow, selection, true));
+                items.AddIfEnabled(new MoveVMCommand(mainWindow, selection));
                 items.AddIfEnabled(new MigrateVMToolStripMenuItem(mainWindow, selection, true));
 				items.AddIfEnabled(new ExportCommand(mainWindow, selection));
                 items.AddIfEnabled(new AssignGroupToolStripMenuItem<VMSS>(mainWindow, selection, true));

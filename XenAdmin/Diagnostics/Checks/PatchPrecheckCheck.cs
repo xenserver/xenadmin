@@ -258,6 +258,7 @@ namespace XenAdmin.Diagnostics.Checks
 
                 case "PATCH_PRECHECK_FAILED_OUT_OF_SPACE":
                     System.Diagnostics.Trace.Assert(Helpers.CreamOrGreater(Host.Connection));  // If not Cream or greater, we shouldn't get this error
+                    System.Diagnostics.Trace.Assert(!Helpers.ElyOrGreater(Host.Connection));   // If Ely or greater, we shouldn't get this error  
 
                     long.TryParse(found, out foundSpace);
                     long.TryParse(required, out requiredSpace);
@@ -287,9 +288,11 @@ namespace XenAdmin.Diagnostics.Checks
                     return new HostOutOfSpaceProblem(this, Host, Update, diskSpaceReq);
 
                 case "OUT_OF_SPACE":
-                    if (Helpers.CreamOrGreater(Host.Connection))
+                    if (Helpers.CreamOrGreater(Host.Connection) && (Patch != null || Update != null))
                     {
-                        var action = new GetDiskSpaceRequirementsAction(Host, Patch, true);
+                        var action = Patch != null
+                            ? new GetDiskSpaceRequirementsAction(Host, Patch, true)
+                            : new GetDiskSpaceRequirementsAction(Host, Update.Name, Update.installation_size, true);
                         try
                         {
                             action.RunExternal(action.Session);
@@ -299,7 +302,9 @@ namespace XenAdmin.Diagnostics.Checks
                             log.WarnFormat("Could not get disk space requirements");
                         }
                         if (action.Succeeded)
-                            return new HostOutOfSpaceProblem(this, Host, Patch, action.DiskSpaceRequirements);
+                            return Patch != null
+                                ? new HostOutOfSpaceProblem(this, Host, Patch, action.DiskSpaceRequirements)
+                                : new HostOutOfSpaceProblem(this, Host, Update, action.DiskSpaceRequirements);
                     }
                     break;
             }

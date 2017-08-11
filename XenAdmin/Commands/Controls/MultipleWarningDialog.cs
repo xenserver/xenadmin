@@ -76,7 +76,7 @@ namespace XenAdmin.Commands.Controls
         }
 
         /// <summary>
-        /// With this constructor you get the default 'Do you wish to proceed?' instruction message.
+        /// With this constructor you get the default 'Do you want to proceed?' instruction message.
         /// </summary>
         /// <param name="TitleMessage">The title of the dialog</param>
         /// <param name="MainMessage">A message informing the user what they are doing (e.g. You are about to delete multiple VDIs)</param>
