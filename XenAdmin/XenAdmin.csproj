@@ -4072,8 +4072,6 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartAgentPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\UnwindProblemsAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\VMsPlanAction.cs" />
-    <Compile Include="Wizards\RollingUpgradeWizard\Sorting\UpgradeDataGridViewDescriptionSorter.cs" />
-    <Compile Include="Wizards\RollingUpgradeWizard\Sorting\UpgradeDataGridViewVersionSorter.cs" />
     <Compile Include="Wlb\WlbPoolConfiguration.cs" />
     <Compile Include="Wlb\WlbReportInfo.cs" />
     <Compile Include="Wlb\WlbReportSubscription.cs" />
