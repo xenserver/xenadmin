@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
@@ -610,6 +611,38 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region Nested items
 
+        private class LocalVersionSorter : CollapsingPoolHostDataGridViewRowSorter
+        {
+            public LocalVersionSorter(ListSortDirection direction)
+                : base(direction)
+            {
+            }
+
+            protected override int PerformSort()
+            {
+                PatchingHostsDataGridViewRow leftSide = Lhs as PatchingHostsDataGridViewRow;
+                PatchingHostsDataGridViewRow rightSide = Rhs as PatchingHostsDataGridViewRow;
+
+                if (leftSide != null && rightSide != null)
+                {
+                    if (leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost)
+                        return -1;
+
+                    if (!leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost)
+                        return 1;
+
+                    if ((leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost) ||
+                        (!leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost))
+                    {
+                        return string.Compare(leftSide.Cells[leftSide.VersionCellIndex].Value.ToString(),
+                            rightSide.Cells[rightSide.VersionCellIndex].Value.ToString(), true);
+                    }
+                }
+
+                return 0;
+            }
+        }
+
         private class PatchingHostsDataGridView : CollapsingPoolHostDataGridView
         {
             protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
@@ -742,6 +775,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return CHECKED;
                 }
             }
+
+            protected override void SortAdditionalColumns()
+            {
+                PatchingHostsDataGridViewRow firstRow = Rows[0] as PatchingHostsDataGridViewRow;
+                if (firstRow == null)
+                    return;
+
+                if (columnToBeSortedIndex == firstRow.VersionCellIndex)
+                    SortAndRebuildTree(new LocalVersionSorter(direction));
+            }
         }
 
         private class PatchingHostsDataGridViewRow : CollapsingPoolHostDataGridViewRow
@@ -850,6 +893,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 _showHostCheckBox = showHostCheckBox;
                 SetupCells();
+            }
+
+            public int VersionCellIndex
+            {
+                get { return Cells.IndexOf(_versionCell); }
             }
 
             public override bool IsCheckable
