@@ -35,12 +35,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageUpdatesPage));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.informationLabelIcon = new System.Windows.Forms.PictureBox();
             this.informationLabel = new System.Windows.Forms.LinkLabel();
@@ -61,7 +61,7 @@
             this.dismissAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dismissSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonRestoreDismissed = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
             this.AutoCheckForUpdatesDisabledLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.checkForUpdatesNowLink = new System.Windows.Forms.LinkLabel();
@@ -75,12 +75,6 @@
             this.tableLayouPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridViewHosts = new XenAdmin.TabPages.ManageUpdatesPage.UpdatePageByHostDataGridView();
-            this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnWebPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +82,12 @@
             this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnRequiredUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnInstalledUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewUpdates = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnWebPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -149,12 +149,13 @@
             this.toolStripLabelFiltersOnOff,
             this.toolStripSplitButtonDismiss,
             this.toolStripButtonRestoreDismissed,
-            this.toolStripSeparator});
+            this.toolStripButtonUpdate});
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.TabStop = true;
             // 
             // toolStripDropDownButtonView
             // 
+            this.toolStripDropDownButtonView.AutoToolTip = false;
             this.toolStripDropDownButtonView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButtonView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.byUpdateToolStripMenuItem,
@@ -262,10 +263,13 @@
             this.toolStripButtonRestoreDismissed.Name = "toolStripButtonRestoreDismissed";
             this.toolStripButtonRestoreDismissed.Click += new System.EventHandler(this.toolStripButtonRestoreDismissed_Click);
             // 
-            // toolStripSeparator
+            // toolStripButtonUpdate
             // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            resources.ApplyResources(this.toolStripSeparator, "toolStripSeparator");
+            this.toolStripButtonUpdate.AutoToolTip = false;
+            this.toolStripButtonUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripButtonUpdate, "toolStripButtonUpdate");
+            this.toolStripButtonUpdate.Name = "toolStripButtonUpdate";
+            this.toolStripButtonUpdate.Click += new System.EventHandler(this.toolStripButtonUpdate_Click);
             // 
             // AutoCheckForUpdatesDisabledLabel
             // 
@@ -370,6 +374,66 @@
             this.dataGridViewHosts.ReadOnly = true;
             this.dataGridViewHosts.Updating = false;
             // 
+            // ColumnIcon
+            // 
+            this.ColumnIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.ColumnIcon.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.ColumnIcon, "ColumnIcon");
+            this.ColumnIcon.Name = "ColumnIcon";
+            this.ColumnIcon.ReadOnly = true;
+            this.ColumnIcon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ColumnName
+            // 
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnName.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ColumnName.FillWeight = 40F;
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // ColumnVersion
+            // 
+            this.ColumnVersion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnVersion.FillWeight = 20F;
+            resources.ApplyResources(this.ColumnVersion, "ColumnVersion");
+            this.ColumnVersion.Name = "ColumnVersion";
+            this.ColumnVersion.ReadOnly = true;
+            this.ColumnVersion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ColumnPatchingStatus
+            // 
+            this.ColumnPatchingStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnPatchingStatus, "ColumnPatchingStatus");
+            this.ColumnPatchingStatus.Name = "ColumnPatchingStatus";
+            this.ColumnPatchingStatus.ReadOnly = true;
+            // 
+            // ColumnStatus
+            // 
+            this.ColumnStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnStatus.FillWeight = 20F;
+            resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
+            this.ColumnStatus.Name = "ColumnStatus";
+            this.ColumnStatus.ReadOnly = true;
+            // 
+            // ColumnRequiredUpdate
+            // 
+            resources.ApplyResources(this.ColumnRequiredUpdate, "ColumnRequiredUpdate");
+            this.ColumnRequiredUpdate.Name = "ColumnRequiredUpdate";
+            this.ColumnRequiredUpdate.ReadOnly = true;
+            this.ColumnRequiredUpdate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnRequiredUpdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnInstalledUpdate
+            // 
+            resources.ApplyResources(this.ColumnInstalledUpdate, "ColumnInstalledUpdate");
+            this.ColumnInstalledUpdate.Name = "ColumnInstalledUpdate";
+            this.ColumnInstalledUpdate.ReadOnly = true;
+            this.ColumnInstalledUpdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // dataGridViewUpdates
             // 
             this.dataGridViewUpdates.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -443,66 +507,6 @@
             this.ColumnWebPage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColumnWebPage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // ColumnIcon
-            // 
-            this.ColumnIcon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.ColumnIcon.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.ColumnIcon, "ColumnIcon");
-            this.ColumnIcon.Name = "ColumnIcon";
-            this.ColumnIcon.ReadOnly = true;
-            this.ColumnIcon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ColumnName
-            // 
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnName.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColumnName.FillWeight = 40F;
-            resources.ApplyResources(this.ColumnName, "ColumnName");
-            this.ColumnName.Name = "ColumnName";
-            this.ColumnName.ReadOnly = true;
-            // 
-            // ColumnVersion
-            // 
-            this.ColumnVersion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnVersion.FillWeight = 20F;
-            resources.ApplyResources(this.ColumnVersion, "ColumnVersion");
-            this.ColumnVersion.Name = "ColumnVersion";
-            this.ColumnVersion.ReadOnly = true;
-            this.ColumnVersion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ColumnPatchingStatus
-            // 
-            this.ColumnPatchingStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnPatchingStatus, "ColumnPatchingStatus");
-            this.ColumnPatchingStatus.Name = "ColumnPatchingStatus";
-            this.ColumnPatchingStatus.ReadOnly = true;
-            // 
-            // ColumnStatus
-            // 
-            this.ColumnStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnStatus.FillWeight = 20F;
-            resources.ApplyResources(this.ColumnStatus, "ColumnStatus");
-            this.ColumnStatus.Name = "ColumnStatus";
-            this.ColumnStatus.ReadOnly = true;
-            // 
-            // ColumnRequiredUpdate
-            // 
-            resources.ApplyResources(this.ColumnRequiredUpdate, "ColumnRequiredUpdate");
-            this.ColumnRequiredUpdate.Name = "ColumnRequiredUpdate";
-            this.ColumnRequiredUpdate.ReadOnly = true;
-            this.ColumnRequiredUpdate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColumnRequiredUpdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ColumnInstalledUpdate
-            // 
-            resources.ApplyResources(this.ColumnInstalledUpdate, "ColumnInstalledUpdate");
-            this.ColumnInstalledUpdate.Name = "ColumnInstalledUpdate";
-            this.ColumnInstalledUpdate.ReadOnly = true;
-            this.ColumnInstalledUpdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // ManageUpdatesPage
             // 
             resources.ApplyResources(this, "$this");
@@ -570,7 +574,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
         private System.Windows.Forms.TableLayoutPanel tableLayouPanel5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonView;
         private System.Windows.Forms.ToolStripMenuItem byUpdateToolStripMenuItem;
@@ -584,5 +587,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRequiredUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstalledUpdate;
+        private System.Windows.Forms.ToolStripButton toolStripButtonUpdate;
     }
 }

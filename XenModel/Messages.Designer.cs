@@ -21275,6 +21275,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No update is needed..
+        /// </summary>
+        public static string MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Management.
         /// </summary>
         public static string MANAGEMENT {
