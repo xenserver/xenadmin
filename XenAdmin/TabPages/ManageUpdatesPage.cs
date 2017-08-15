@@ -82,6 +82,7 @@ namespace XenAdmin.TabPages
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
+            toolStripButtonUpdate.Visible = false;
         }
 
         public void RefreshUpdateList()
@@ -703,7 +704,31 @@ namespace XenAdmin.TabPages
 
         private void UpdateButtonEnablement()
         {
-            toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;            
+            toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;
+            toolStripButtonUpdate.ToolTipText = "";
+            var connectionList = ConnectionsManager.XenConnectionsCopy;
+
+            if (!connectionList.Any(xenConnection => xenConnection.IsConnected))
+            {
+                toolStripButtonUpdate.Enabled = false;
+                return;
+            }
+
+            // check Updates Availability
+            foreach (IXenConnection connection in connectionList)
+            {
+                foreach (Host host in connection.Cache.Hosts)
+                {
+                    if (RequiredUpdatesForHost(host).Length > 0)
+                    {
+                        toolStripButtonUpdate.Enabled = true;
+                        return;
+                    }
+                }
+            }
+
+            toolStripButtonUpdate.Enabled = false;
+            toolStripButtonUpdate.ToolTipText = Messages.MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE;
         }
 
         private void ShowInformationHelper(string reason)
@@ -1008,34 +1033,31 @@ namespace XenAdmin.TabPages
             if (string.IsNullOrEmpty(patchUri))
                 return;
 
-            Program.Invoke(Program.MainWindow, () =>
+            var wizard = new PatchingWizard();
+            wizard.Show();
+            wizard.NextStep();
+            wizard.AddAlert(patchAlert);
+            wizard.NextStep();
+
+            var hosts = patchAlert.DistinctHosts;
+            if (hosts.Count > 0)
+            {                          
+                wizard.SelectServers(hosts);
+            }
+            else
             {
-                var wizard = new PatchingWizard();
-                wizard.Show();
-                wizard.NextStep();
-                wizard.AddAlert(patchAlert);
-                wizard.NextStep();
+                string disconnectedServerNames =
+                       clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
-                var hosts = patchAlert.DistinctHosts;
-                if (hosts.Count > 0)
-                {                          
-                    wizard.SelectServers(hosts);
-                }
-                else
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                                  string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
+                                                               disconnectedServerNames),
+                                                  Messages.UPDATES_WIZARD)))
                 {
-                    string disconnectedServerNames =
-                           clickedRow.Cells[ColumnLocation.Index].Value.ToString();
-
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                                      string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
-                                                                   disconnectedServerNames),
-                                                      Messages.UPDATES_WIZARD)))
-                    {
-                        dlg.ShowDialog(this);
-                    }
-                 }
-            });
+                    dlg.ShowDialog(this);
+                }
+            }
         }
 
         private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)
@@ -1370,10 +1392,11 @@ namespace XenAdmin.TabPages
             byHostToolStripMenuItem.Checked = false;
             byUpdateToolStripMenuItem.Checked = true;
 
-            // Show three buttons
+            // buttons
             toolStripDropDownButtonDateFilter.Visible = true;
             toolStripSplitButtonDismiss.Visible = true;
             toolStripButtonRestoreDismissed.Visible = true;
+            toolStripButtonUpdate.Visible = false;
 
             // Switch the grid view
             dataGridViewUpdates.Visible = true;
@@ -1387,10 +1410,11 @@ namespace XenAdmin.TabPages
             byUpdateToolStripMenuItem.Checked = false;
             byHostToolStripMenuItem.Checked = true;
 
-            // Hide three buttons
+            // buttons
             toolStripDropDownButtonDateFilter.Visible = false;
             toolStripSplitButtonDismiss.Visible = false;
             toolStripButtonRestoreDismissed.Visible = false;
+            toolStripButtonUpdate.Visible = true;
 
             // Turn off Date Filter
             toolStripDropDownButtonDateFilter.ResetFilterDates();
@@ -1399,6 +1423,20 @@ namespace XenAdmin.TabPages
             dataGridViewUpdates.Visible = false;
             dataGridViewHosts.Visible = true;
             Rebuild();
+        }
+
+        private void toolStripButtonUpdate_Click(object sender, EventArgs e)
+        {
+            var wizard = new PatchingWizard();
+            wizard.Show();
+            wizard.NextStep();
+
+            var hostlist = new List<Host>();
+            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
+                hostlist.AddRange(c.Cache.Hosts);
+
+            if (hostlist.Count > 0)
+                wizard.SelectServers(hostlist);
         }
     }
 }
