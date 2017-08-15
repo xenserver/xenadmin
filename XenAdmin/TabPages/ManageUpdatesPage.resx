@@ -864,7 +864,7 @@
     <value>30</value>
   </data>
   <data name="ColumnVersion.Width" type="System.Int32, mscorlib">
-    <value>51</value>
+    <value>70</value>
   </data>
   <metadata name="ColumnPatchingStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -888,7 +888,7 @@
     <value>60</value>
   </data>
   <data name="ColumnStatus.Width" type="System.Int32, mscorlib">
-    <value>60</value>
+    <value>64</value>
   </data>
   <metadata name="ColumnRequiredUpdate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -933,7 +933,7 @@
     <value>dataGridViewHosts</value>
   </data>
   <data name="&gt;&gt;dataGridViewHosts.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.CollapsingPoolHostDataGridView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.TabPages.ManageUpdatesPage+UpdatePageByHostDataGridView, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dataGridViewHosts.Parent" xml:space="preserve">
     <value>panel1</value>
