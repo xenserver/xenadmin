@@ -611,38 +611,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region Nested items
 
-        private class LocalVersionSorter : CollapsingPoolHostDataGridViewRowSorter
-        {
-            public LocalVersionSorter(ListSortDirection direction)
-                : base(direction)
-            {
-            }
-
-            protected override int PerformSort()
-            {
-                PatchingHostsDataGridViewRow leftSide = Lhs as PatchingHostsDataGridViewRow;
-                PatchingHostsDataGridViewRow rightSide = Rhs as PatchingHostsDataGridViewRow;
-
-                if (leftSide != null && rightSide != null)
-                {
-                    if (leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost)
-                        return -1;
-
-                    if (!leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost)
-                        return 1;
-
-                    if ((leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost) ||
-                        (!leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost))
-                    {
-                        return string.Compare(leftSide.Cells[leftSide.VersionCellIndex].Value.ToString(),
-                            rightSide.Cells[rightSide.VersionCellIndex].Value.ToString(), true);
-                    }
-                }
-
-                return 0;
-            }
-        }
-
         private class PatchingHostsDataGridView : CollapsingPoolHostDataGridView
         {
             protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
@@ -776,14 +744,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
-            protected override void SortAdditionalColumns()
+            protected override void SortColumns()
             {
                 PatchingHostsDataGridViewRow firstRow = Rows[0] as PatchingHostsDataGridViewRow;
                 if (firstRow == null)
                     return;
 
-                if (columnToBeSortedIndex == firstRow.VersionCellIndex)
-                    SortAndRebuildTree(new LocalVersionSorter(direction));
+                if (columnToBeSortedIndex == firstRow.NameCellIndex ||
+                    columnToBeSortedIndex == firstRow.VersionCellIndex)
+                    SortAndRebuildTree(new CollapsingPoolHostRowSorter<PatchingHostsDataGridViewRow>(direction, columnToBeSortedIndex));
             }
         }
 
@@ -925,11 +894,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                                ? (int) Cells[POOL_CHECKBOX_COL].Value
                                : (int) Cells[POOL_ICON_HOST_CHECKBOX_COL].Value;
                 }
-            }
-
-            public bool IsPoolOrStandaloneHost
-            {
-                get { return IsAPoolRow || (IsAHostRow && !HasPool); }
             }
 
             public bool IsSelectableHost

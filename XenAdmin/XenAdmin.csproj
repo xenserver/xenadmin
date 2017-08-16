@@ -164,6 +164,7 @@
     <Compile Include="Controls\ConsolePanel.Designer.cs">
       <DependentUpon>ConsolePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridViewEx\CollapsingPoolHostRowSorter.cs" />
     <Compile Include="Controls\DataGridViewEx\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>

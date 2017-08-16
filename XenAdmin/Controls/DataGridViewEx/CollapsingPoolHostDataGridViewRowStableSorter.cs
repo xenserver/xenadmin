@@ -45,11 +45,13 @@ namespace XenAdmin.Controls.DataGridViewEx
     /// T is the sort of Row used which is a decendent of CollapsingPoolHostDataGridViewRow 
     /// </summary>
     /// <note>Base class takes care of the bi-direction behaviour</note>
-    public abstract class CollapsingPoolHostDataGridViewRowStableSorter<T> : CollapsingPoolHostDataGridViewRowSorter where T : PoolHostDataGridViewOneCheckboxRow
+    public abstract class CollapsingPoolHostDataGridViewRowStableSorter<T> : CollapsingPoolHostDataGridViewRowSorter where T : CollapsingPoolHostDataGridViewRow
     {
-        private IComparer stableSorter = new CollapsingPoolHostDataGridViewRowDefaultSorter();
-
         protected CollapsingPoolHostDataGridViewRowStableSorter(){}
+
+        protected CollapsingPoolHostDataGridViewRowStableSorter(ListSortDirection direction) : base(direction) { }
+
+        private IComparer stableSorter = new CollapsingPoolHostDataGridViewRowDefaultSorter();
 
         /// <summary>
         /// Use this IComparer to sort any values where the implementations sorter 
@@ -59,8 +61,6 @@ namespace XenAdmin.Controls.DataGridViewEx
         {
             set { stableSorter = value;  }
         }
-
-        protected CollapsingPoolHostDataGridViewRowStableSorter(ListSortDirection direction) : base(direction) { }
 
         protected override int PerformSort()
         {

@@ -93,6 +93,11 @@ namespace XenAdmin.Controls.DataGridViewEx
             get { return Tag is Host; }
         }
 
+        public bool IsPoolOrStandaloneHost
+        {
+            get { return IsAPoolRow || (IsAHostRow && !HasPool); }
+        }
+
         /// <summary>
         /// Get the underlying pool if a pool row otherwise returns null
         /// </summary>
