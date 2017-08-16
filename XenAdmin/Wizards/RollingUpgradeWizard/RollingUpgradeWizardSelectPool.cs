@@ -261,43 +261,20 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return clearAllButtonEnabled;
         }
 
-        private class LocalRowSorter : CollapsingPoolHostDataGridViewRowStableSorter<UpgradeDataGridViewRow>
-        {
-            private int columnClicked;
-
-            public LocalRowSorter(ListSortDirection direction, int columnClicked)
-                : base(direction)
-            {
-                this.columnClicked = columnClicked;
-            }
-
-            protected override int SortRowByColumnDetails(UpgradeDataGridViewRow leftSide, UpgradeDataGridViewRow rightSide)
-            {
-                if (columnClicked == leftSide.DescriptionCellIndex)
-                {
-                    return leftSide.DescriptionText.CompareTo(rightSide.DescriptionText);
-                }
-                else if (columnClicked == leftSide.VersionCellIndex)
-                {
-                    return Helpers.productVersionCompare(leftSide.VersionText, rightSide.VersionText);
-                }
-                return 0;
-            }
-        }
-
         private class UpgradeDataGridView : PoolHostDataGridViewOneCheckbox
         {
             public UpgradeDataGridView(){}
             public UpgradeDataGridView(IContainer container) : base(container){}
             
-            protected override void SortAdditionalColumns()
+            protected override void SortColumns()
             {
                 UpgradeDataGridViewRow firstRow = Rows[0] as UpgradeDataGridViewRow;
                 if (firstRow == null) return;
 
-                if (columnToBeSortedIndex == firstRow.DescriptionCellIndex ||
+                if (columnToBeSortedIndex == firstRow.NameCellIndex ||
+                    columnToBeSortedIndex == firstRow.DescriptionCellIndex ||
                     columnToBeSortedIndex == firstRow.VersionCellIndex)
-                    SortAndRebuildTree(new LocalRowSorter(direction, columnToBeSortedIndex));
+                    SortAndRebuildTree(new CollapsingPoolHostRowSorter<UpgradeDataGridViewRow>(direction, columnToBeSortedIndex));
             }
         }
 

@@ -94,7 +94,7 @@ namespace XenAdmin.Controls.DataGridViewEx
         /// Hook in order that sorting may be added for additional columns rather than those
         /// provided by the base class
         /// </summary>
-        protected virtual void SortAdditionalColumns() { }
+        protected virtual void SortColumns() { }
 
         /// <summary>
         /// Sort the rows but then remove and read the rows that should be expandable to be placed back under
@@ -169,12 +169,7 @@ namespace XenAdmin.Controls.DataGridViewEx
 
             DetermineSortDirection(e);
 
-            if (columnToBeSortedIndex == firstRow.NameCellIndex)
-            {
-                SortAndRebuildTree(new CollapsingPoolHostDataGridViewRowDefaultSorter(direction));
-            }
-
-            SortAdditionalColumns();
+            SortColumns();
 
             Columns[columnToBeSortedIndex].HeaderCell.SortGlyphDirection =
                 direction == ListSortDirection.Ascending

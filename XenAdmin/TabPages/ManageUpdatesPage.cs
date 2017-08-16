@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -227,52 +228,18 @@ namespace XenAdmin.TabPages
                 RebuildHostView();
         }
 
-        private class LocalRowSorter : CollapsingPoolHostDataGridViewRowSorter
-        {
-            private int columnClicked;
-
-            public LocalRowSorter(ListSortDirection direction, int columnClicked)
-                : base(direction)
-            {
-                this.columnClicked = columnClicked;
-            }
-
-            protected override int PerformSort()
-            {
-                UpdatePageDataGridViewRow leftSide = Lhs as UpdatePageDataGridViewRow;
-                UpdatePageDataGridViewRow rightSide = Rhs as UpdatePageDataGridViewRow;
-
-                if (leftSide != null && rightSide != null)
-                {
-                    if (leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost)
-                        return -1;
-
-                    if (!leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost)
-                        return 1;
-
-                    if ((leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost) ||
-                        (!leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost))
-                    {
-                        return string.Compare(leftSide.Cells[columnClicked].Value.ToString(),
-                            rightSide.Cells[columnClicked].Value.ToString(), true);
-                    }
-                }
-
-                return 0;
-            }
-        }
-
         private class UpdatePageByHostDataGridView : CollapsingPoolHostDataGridView
         {
-            protected override void SortAdditionalColumns()
+            protected override void SortColumns()
             {
                 UpdatePageDataGridViewRow firstRow = Rows[0] as UpdatePageDataGridViewRow;
                 if (firstRow == null)
                     return;
 
-                if (columnToBeSortedIndex == firstRow.VersionCellIndex ||
+                if (columnToBeSortedIndex == firstRow.NameCellIndex ||
+                    columnToBeSortedIndex == firstRow.VersionCellIndex ||
                     columnToBeSortedIndex == firstRow.StatusCellIndex)
-                    SortAndRebuildTree(new LocalRowSorter(direction, columnToBeSortedIndex));
+                    SortAndRebuildTree(new CollapsingPoolHostRowSorter<UpdatePageDataGridViewRow>(direction, columnToBeSortedIndex));
             }
         }
 
@@ -295,11 +262,6 @@ namespace XenAdmin.TabPages
                 : base(host, hasPool)
             {
                 SetupCells();
-            }
-
-            public bool IsPoolOrStandaloneHost
-            {
-                get { return IsAPoolRow || (IsAHostRow && !HasPool); }
             }
 
             public int VersionCellIndex
