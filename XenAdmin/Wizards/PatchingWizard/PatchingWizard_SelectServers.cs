@@ -611,32 +611,26 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #region Nested items
 
-        private class LocalVersionSorter : CollapsingPoolHostDataGridViewRowSorter
+        private class LocalVersionSorter : CollapsingPoolHostDataGridViewRowStableSorter<PatchingHostsDataGridViewRow>
         {
             public LocalVersionSorter(ListSortDirection direction)
                 : base(direction)
             {
             }
 
-            protected override int PerformSort()
+            protected override int SortRowByColumnDetails(PatchingHostsDataGridViewRow leftSide, PatchingHostsDataGridViewRow rightSide)
             {
-                PatchingHostsDataGridViewRow leftSide = Lhs as PatchingHostsDataGridViewRow;
-                PatchingHostsDataGridViewRow rightSide = Rhs as PatchingHostsDataGridViewRow;
+                if (leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost)
+                    return -1;
 
-                if (leftSide != null && rightSide != null)
+                if (!leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost)
+                    return 1;
+
+                if ((leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost) ||
+                    (!leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost))
                 {
-                    if (leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost)
-                        return -1;
-
-                    if (!leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost)
-                        return 1;
-
-                    if ((leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost) ||
-                        (!leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost))
-                    {
-                        return string.Compare(leftSide.Cells[leftSide.VersionCellIndex].Value.ToString(),
-                            rightSide.Cells[rightSide.VersionCellIndex].Value.ToString(), true);
-                    }
+                    return string.Compare(leftSide.Cells[leftSide.VersionCellIndex].Value.ToString(),
+                        rightSide.Cells[rightSide.VersionCellIndex].Value.ToString(), true);
                 }
 
                 return 0;
