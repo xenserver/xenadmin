@@ -45,7 +45,7 @@ namespace XenAdmin.Controls.DataGridViewEx
     /// T is the sort of Row used which is a decendent of CollapsingPoolHostDataGridViewRow 
     /// </summary>
     /// <note>Base class takes care of the bi-direction behaviour</note>
-    public abstract class CollapsingPoolHostDataGridViewRowStableSorter<T> : CollapsingPoolHostDataGridViewRowSorter where T : PoolHostDataGridViewOneCheckboxRow
+    public abstract class CollapsingPoolHostDataGridViewRowStableSorter<T> : CollapsingPoolHostDataGridViewRowSorter where T : CollapsingPoolHostDataGridViewRow
     {
         private IComparer stableSorter = new CollapsingPoolHostDataGridViewRowDefaultSorter();
 

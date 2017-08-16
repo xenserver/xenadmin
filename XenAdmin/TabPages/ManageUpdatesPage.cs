@@ -226,7 +226,7 @@ namespace XenAdmin.TabPages
                 RebuildHostView();
         }
 
-        private class LocalRowSorter : CollapsingPoolHostDataGridViewRowSorter
+        private class LocalRowSorter : CollapsingPoolHostDataGridViewRowStableSorter<UpdatePageDataGridViewRow>
         {
             private int columnClicked;
 
@@ -236,25 +236,19 @@ namespace XenAdmin.TabPages
                 this.columnClicked = columnClicked;
             }
 
-            protected override int PerformSort()
+            protected override int SortRowByColumnDetails(UpdatePageDataGridViewRow leftSide, UpdatePageDataGridViewRow rightSide)
             {
-                UpdatePageDataGridViewRow leftSide = Lhs as UpdatePageDataGridViewRow;
-                UpdatePageDataGridViewRow rightSide = Rhs as UpdatePageDataGridViewRow;
+                if (leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost)
+                    return -1;
 
-                if (leftSide != null && rightSide != null)
+                if (!leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost)
+                    return 1;
+
+                if ((leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost) ||
+                    (!leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost))
                 {
-                    if (leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost)
-                        return -1;
-
-                    if (!leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost)
-                        return 1;
-
-                    if ((leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost) ||
-                        (!leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost))
-                    {
-                        return string.Compare(leftSide.Cells[columnClicked].Value.ToString(),
-                            rightSide.Cells[columnClicked].Value.ToString(), true);
-                    }
+                    return string.Compare(leftSide.Cells[columnClicked].Value.ToString(),
+                        rightSide.Cells[columnClicked].Value.ToString(), true); 
                 }
 
                 return 0;
