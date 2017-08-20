@@ -57,7 +57,7 @@ mkdir_clean ${OUTPUT_DIR}
 #overwrite sign file
 SIGN_FILE=${ROOT}/sign.bat
 if [ -f ${SIGN_FILE} ]; then
-   cp ${SIGN_FILE} ${REPO}
+   mv -f ${SIGN_FILE} ${REPO}/mk
 fi
    
 #build and sign the installers
