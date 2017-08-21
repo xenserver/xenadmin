@@ -229,7 +229,7 @@
     <value>3</value>
   </data>
   <data name="SmtpServerAddrTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 20</value>
+    <value>185, 20</value>
   </data>
   <data name="SmtpServerLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -376,7 +376,7 @@
     <value>0, 0, 0, 10</value>
   </data>
   <data name="EmailAddressTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 19</value>
+    <value>115, 19</value>
   </data>
   <data name="MailLanguageComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>100, 71</value>
@@ -436,13 +436,13 @@
     <value>6</value>
   </data>
   <data name="SmtpPortLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 48</value>
+    <value>315, 48</value>
   </data>
   <data name="EmailAddressTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 20</value>
+    <value>327, 20</value>
   </data>
   <data name="SmtpServerAddrTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 45</value>
+    <value>115, 45</value>
   </data>
   <data name="EmailAddressLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
