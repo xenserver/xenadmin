@@ -196,7 +196,7 @@
     <value>430, 318</value>
   </data>
   <data name="buttonClearAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 28</value>
+    <value>98, 23</value>
   </data>
   <data name="buttonClearAll.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
