@@ -217,7 +217,7 @@
     <value>True</value>
   </data>
   <data name="SmtpPortLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 48</value>
+    <value>315, 48</value>
   </data>
   <data name="SmtpPortLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -250,13 +250,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="SmtpServerAddrTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 45</value>
+    <value>115, 45</value>
   </data>
   <data name="SmtpServerAddrTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
   <data name="SmtpServerAddrTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 20</value>
+    <value>185, 20</value>
   </data>
   <data name="SmtpServerAddrTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -277,10 +277,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="EmailAddressTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 19</value>
+    <value>115, 19</value>
   </data>
   <data name="EmailAddressTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 20</value>
+    <value>327, 20</value>
   </data>
   <data name="EmailAddressTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
