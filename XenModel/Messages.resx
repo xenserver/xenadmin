@@ -783,24 +783,6 @@
   <data name="ACTION_SR_ATTACH_SUCCESSFUL" xml:space="preserve">
     <value>Attached SR</value>
   </data>
-  <data name="ACTION_SR_CONVERT" xml:space="preserve">
-    <value>Convert SR '{0}' on '{1}'</value>
-  </data>
-  <data name="ACTION_SR_CONVERTED" xml:space="preserve">
-    <value>Converted SR</value>
-  </data>
-  <data name="ACTION_SR_CONVERTED_TO_THIN" xml:space="preserve">
-    <value>Converted SR '{0}' to thin provisioning</value>
-  </data>
-  <data name="ACTION_SR_CONVERTING" xml:space="preserve">
-    <value>Converting SR</value>
-  </data>
-  <data name="ACTION_SR_CONVERTING_TO_THIN" xml:space="preserve">
-    <value>Converting SR '{0}' to thin provisioning</value>
-  </data>
-  <data name="ACTION_SR_CONVERT_TO_THIN" xml:space="preserve">
-    <value>Convert SR '{0}' to thin provisioning</value>
-  </data>
   <data name="ACTION_SR_CREATE_SUCCESSFUL" xml:space="preserve">
     <value>Created SR</value>
   </data>
@@ -7342,9 +7324,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_SHUTDOWN" xml:space="preserve">
     <value>S&amp;hut Down</value>
   </data>
-  <data name="MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU" xml:space="preserve">
-    <value>&amp;Convert SR...</value>
-  </data>
   <data name="MAINWINDOW_START" xml:space="preserve">
     <value>&amp;Start</value>
   </data>
@@ -8520,9 +8499,6 @@ Review these settings, then click Previous if you need to change anything. Other
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
     <value>The SR '{0}' is over committed. There is only {1} of free space and the new VM requires {2}.</value>
-  </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN" xml:space="preserve">
-    <value>The SR '{0}' is over committed. There is only {1} of free space and the new VM requires {2} ({3} initially).</value>
   </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
@@ -10909,15 +10885,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="SR_SIZE_USED" xml:space="preserve">
     <value>{0} used of {1} total ({2} allocated)</value>
-  </data>
-  <data name="SR_THICK_PROVISIONING" xml:space="preserve">
-    <value>Fully provisioned</value>
-  </data>
-  <data name="SR_THIN_PROVISIONING" xml:space="preserve">
-    <value>Thinly provisioned</value>
-  </data>
-  <data name="SR_THIN_PROVISIONING_COMMITTED" xml:space="preserve">
-    <value>Thinly provisioned ({0}% committed)</value>
   </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
     <value>Cannot reclaim freed space, because the SR is detached.</value>

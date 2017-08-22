@@ -240,7 +240,6 @@ namespace XenAdmin
             this.ReattachStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.ForgetStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.DestroyStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.ConvertToThinStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.pluginItemsPlaceHolderToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.SRPropertiesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -1476,7 +1475,6 @@ namespace XenAdmin
             this.ReattachStorageRepositoryToolStripMenuItem,
             this.ForgetStorageRepositoryToolStripMenuItem,
             this.DestroyStorageRepositoryToolStripMenuItem,
-            this.ConvertToThinStorageRepositoryToolStripMenuItem,
             this.toolStripSeparator18,
             this.pluginItemsPlaceHolderToolStripMenuItem5,
             this.SRPropertiesToolStripMenuItem});
@@ -1569,12 +1567,6 @@ namespace XenAdmin
             this.DestroyStorageRepositoryToolStripMenuItem.Command = new XenAdmin.Commands.DestroySRCommand();
             this.DestroyStorageRepositoryToolStripMenuItem.Name = "DestroyStorageRepositoryToolStripMenuItem";
             resources.ApplyResources(this.DestroyStorageRepositoryToolStripMenuItem, "DestroyStorageRepositoryToolStripMenuItem");
-            // 
-            // ConvertToThinStorageRepositoryToolStripMenuItem
-            // 
-            this.ConvertToThinStorageRepositoryToolStripMenuItem.Command = new XenAdmin.Commands.ConvertToThinSRCommand();
-            this.ConvertToThinStorageRepositoryToolStripMenuItem.Name = "ConvertToThinStorageRepositoryToolStripMenuItem";
-            resources.ApplyResources(this.ConvertToThinStorageRepositoryToolStripMenuItem, "ConvertToThinStorageRepositoryToolStripMenuItem");
             // 
             // toolStripSeparator18
             // 
@@ -2012,7 +2004,6 @@ namespace XenAdmin
         private CommandToolStripMenuItem ReattachStorageRepositoryToolStripMenuItem;
         private CommandToolStripMenuItem ForgetStorageRepositoryToolStripMenuItem;
         private CommandToolStripMenuItem DestroyStorageRepositoryToolStripMenuItem;
-        private CommandToolStripMenuItem ConvertToThinStorageRepositoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem;
         private CommandToolStripMenuItem exportTemplateToolStripMenuItem;

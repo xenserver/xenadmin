@@ -267,12 +267,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 if (item.OverCommit != DiskOverCommit.None)
                 {
-                    item.ImageToolTip = sr.IsThinProvisioned ? 
-                        string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN,
-                                                Helpers.GetName(sr),
-                                                Util.DiskSizeString(sr.FreeSpace),
-                                                Util.DiskSizeString(totalDiskSize[sr.opaque_ref]), 
-                                                Util.DiskSizeString(totalDiskInitialAllocation[sr.opaque_ref])) :
+                    item.ImageToolTip = 
                         string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT, 
                                                 Helpers.GetName(sr), 
                                                 Util.DiskSizeString(sr.FreeSpace),

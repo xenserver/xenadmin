@@ -500,136 +500,6 @@ namespace XenAdmin.Core
             return WlbEnabledAndConfigured(conn) && !DundeeOrGreater(conn);
         }
 
-        #region AllocationBoundsStructAndMethods
-        public struct AllocationBounds
-        {
-            private readonly decimal min;
-            private readonly decimal max;
-            private readonly decimal defaultValue;
-            private readonly string unit;
-
-            public AllocationBounds(decimal min, decimal max, decimal defaultValue)
-            {
-                this.min = min;
-                this.max = max;
-                if (defaultValue < min)
-                {
-                    defaultValue = min;
-                }
-                else if (defaultValue > max)
-                {
-                    defaultValue = max;
-                }
-                this.defaultValue = defaultValue;
-                if (defaultValue >= Util.BINARY_GIGA)
-                    unit =  Messages.VAL_GIGB;
-                else
-                    unit = Messages.VAL_MEGB;
-            }
-
-            public AllocationBounds(decimal min, decimal max, decimal defaultValue, string unit)
-                : this(min, max, defaultValue)
-            {
-                this.unit = unit;
-            }
-
-            public decimal Min
-            {
-                get
-                {
-                    return min;
-                }
-            }
-
-            public decimal Max
-            {
-                get
-                {
-                    return max;
-                }
-            }
-
-            /// <summary>
-            /// Returns the minimum in the appropriate units
-            /// </summary>
-            public decimal MinInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(min);
-                }
-            }
-
-            public decimal MaxInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(max);
-                }
-            }
-
-            public decimal DefaultValueInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(defaultValue);
-                }
-            }
-
-            public string Unit
-            {
-                get
-                {
-                   return unit;
-                }
-            }
-
-            private decimal GetValueInUnits(decimal val)
-            {
-                if (unit == Messages.VAL_GIGB)
-                    return val / Util.BINARY_GIGA;
-                else
-                    return val / Util.BINARY_MEGA;
-            }
-        }
-
-        public static AllocationBounds SRIncrementalAllocationBounds(long SRSize)
-        {
-            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR , XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal max = Math.Max(SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR, XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal defaultValue = Math.Max(SRSize / XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR, min);
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds VDIIncrementalAllocationBounds(long SRSize, long SRIncrAllocation)
-        {
-            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR, XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal max = Math.Max(SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR, SRIncrAllocation);
-            decimal defaultValue = SRIncrAllocation;
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds SRInitialAllocationBounds(long SRSize)
-        {
-            decimal min = 0;
-            decimal max = SRSize;
-            decimal defaultValue = 0;
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds VDIInitialAllocationBounds(long VDISize, long SRInitialAllocation)
-        {
-            decimal min = 0;
-            decimal max = VDISize;
-            decimal defaultValue = Math.Min(SRInitialAllocation, max);
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        #endregion
 
         /// <summary>
         /// Determines whether two lists contain the same elements (but not necessarily in the same order).
@@ -2084,7 +1954,6 @@ namespace XenAdmin.Core
 
        /// <summary>
        /// This method returns the disk space required (bytes) on the provided SR for the provided VDI.
-       /// This method also considers thin provisioning. For thin provisioned SRs the provided sm_config in the VDI will be considered first, or it will use the values from the SR's sm_config in case the VDI does not have these set. For fully provisioned SRs the sm_config in the VDI will be ignored.
        /// </summary>
        /// <returns>Disk size required in bytes.</returns>
        public static long GetRequiredSpaceToCreateVdiOnSr(SR sr, VDI vdi)
@@ -2094,23 +1963,6 @@ namespace XenAdmin.Core
 
            if (vdi == null)
                throw new ArgumentNullException("vdi");
-
-           if (!sr.IsThinProvisioned)
-               return vdi.virtual_size;
-
-           long initialAllocationVdi = -1;
-           if (vdi.sm_config != null && vdi.sm_config.ContainsKey("initial_allocation"))
-               long.TryParse(vdi.sm_config["initial_allocation"], out initialAllocationVdi);
-
-           long initialAllocationSr = -1;
-           if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation"))
-               long.TryParse(sr.sm_config["initial_allocation"], out initialAllocationSr);
-
-           if (initialAllocationVdi > -1)
-               return initialAllocationVdi;
-
-           if (initialAllocationSr > -1)
-               return initialAllocationSr;
 
            return vdi.virtual_size;
        }
