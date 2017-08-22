@@ -121,9 +121,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                var patchDescription = NewServerVersion != null
-                    ? string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, NewServerVersion.Name)
-                    : Patch.Description;
+                var patchDescription = Patch.Description;
                 if (Patch.InstallationSize != 0)
                     return string.Format(Messages.PATCH_DESCRIPTION_AND_INSTALLATION_SIZE, patchDescription, Util.DiskSizeString(Patch.InstallationSize));
                 return patchDescription;
