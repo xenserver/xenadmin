@@ -302,6 +302,13 @@ namespace XenAdmin.Diagnostics.Checks
                             return new HostOutOfSpaceProblem(this, Host, Patch, action.DiskSpaceRequirements);
                     }
                     break;
+                case "UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR":
+                    // try to find the problem from the error parameters as xml string
+                    // e.g.
+                    //   ErrorDescription[0] = "UPDATE_PRECHECK_FAILED_UNKNOWN_ERROR"
+                    //   ErrorDescription[1] = "test-update"
+                    //   ErrorDescription[2] = "<?xml version="1.0" ?><error errorcode="LICENCE_RESTRICTION"></error>"
+                    return FindProblem(found);
             }
             return null;
         }
