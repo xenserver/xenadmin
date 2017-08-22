@@ -6,11 +6,6 @@
       "flat": "true"
     },
     {
-      "pattern": "@REMOTE_DOTNET@/sign.bat",
-      "target": "xenadmin.git/",
-      "flat": "true"
-    },
-    {
       "pattern": "@REMOTE_DOTNET@/dotnet46/putty.exe",
       "target": "xenadmin.git/packages/",
       "flat": "true"
