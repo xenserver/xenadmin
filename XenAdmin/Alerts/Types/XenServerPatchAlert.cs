@@ -125,9 +125,7 @@ namespace XenAdmin.Alerts
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(NewServerVersion != null
-                    ? string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, NewServerVersion.Name)
-                    : Patch.Description);
+                sb.Append(Patch.Description);
                 if (Patch.InstallationSize != 0)
                 {
                     sb.AppendLine();
