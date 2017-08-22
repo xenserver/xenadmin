@@ -230,6 +230,32 @@ namespace XenAdmin.TabPages
 
         private class UpdatePageByHostDataGridView : CollapsingPoolHostDataGridView
         {
+            protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
+            {
+                base.OnCellPainting(e);
+
+                if (e.RowIndex >= 0 && Rows[e.RowIndex].Tag is Host)
+                {
+                    UpdatePageDataGridViewRow row = (UpdatePageDataGridViewRow) Rows[e.RowIndex];
+
+                    // Host in pool
+                    if (row.HasPool && (e.ColumnIndex == row.ExpansionCellIndex ||
+                                        e.ColumnIndex == row.IconCellIndex ||
+                                        e.ColumnIndex == row.PatchingStatusCellIndex))
+                    {
+                        e.PaintBackground(e.ClipBounds, true);
+                        e.Handled = true;
+                    }
+
+                    // Standalone host
+                    else if (!row.HasPool && e.ColumnIndex == row.ExpansionCellIndex)
+                    {
+                        e.PaintBackground(e.ClipBounds, true);
+                        e.Handled = true;
+                    }
+                }
+            }
+
             protected override void SortColumns()
             {
                 UpdatePageDataGridViewRow firstRow = Rows[0] as UpdatePageDataGridViewRow;
@@ -245,9 +271,9 @@ namespace XenAdmin.TabPages
 
         private class UpdatePageDataGridViewRow : CollapsingPoolHostDataGridViewRow
         {
-            private DataGridViewCell _poolIconCell;
+            private DataGridViewImageCell _poolIconCell;
             private DataGridViewTextBoxCell _versionCell;
-            private DataGridViewCell _patchingStatusCell;
+            private DataGridViewImageCell _patchingStatusCell;
             private DataGridViewTextBoxCell _statusCell;
             private DataGridViewTextBoxCell _requiredUpdateCell;
             private DataGridViewTextBoxCell _installedUpdateCell;
@@ -264,9 +290,19 @@ namespace XenAdmin.TabPages
                 SetupCells();
             }
 
+            public int IconCellIndex
+            {
+                get { return Cells.IndexOf(_poolIconCell);  }
+            }
+
             public int VersionCellIndex
             {
                 get { return Cells.IndexOf(_versionCell); }
+            }
+
+            public int PatchingStatusCellIndex
+            {
+                get { return Cells.IndexOf(_patchingStatusCell); }
             }
 
             public int StatusCellIndex
@@ -274,26 +310,23 @@ namespace XenAdmin.TabPages
                 get { return Cells.IndexOf(_statusCell); }
             }
 
+            public override bool IsCheckable
+            {
+                get { return IsPoolOrStandaloneHost; }
+            }
+
             private void SetupCells()
             {
-                if (IsPoolOrStandaloneHost)
-                {
-                    _poolIconCell = new DataGridViewImageCell();
-                    _patchingStatusCell = new DataGridViewImageCell();
-                }
-                else
-                {
-                    _poolIconCell = new DataGridViewTextBoxCell();
-                    _patchingStatusCell = new DataGridViewTextBoxCell();
-                }
-
+                _expansionCell = new DataGridViewImageCell();
+                _poolIconCell = new DataGridViewImageCell();
                 _nameCell = new DataGridViewTextAndImageCell();
                 _versionCell = new DataGridViewTextBoxCell();
+                _patchingStatusCell = new DataGridViewImageCell();
                 _statusCell = new DataGridViewTextBoxCell();
                 _requiredUpdateCell = new DataGridViewTextBoxCell();
                 _installedUpdateCell = new DataGridViewTextBoxCell();
 
-                Cells.AddRange(new[] { _poolIconCell, _nameCell, _versionCell, _patchingStatusCell, _statusCell, _requiredUpdateCell, _installedUpdateCell });
+                Cells.AddRange(new DataGridViewCell[] { _expansionCell, _poolIconCell, _nameCell, _versionCell, _patchingStatusCell, _statusCell, _requiredUpdateCell, _installedUpdateCell });
 
                 this.UpdateDetails();
             }
@@ -306,6 +339,7 @@ namespace XenAdmin.TabPages
                 if (pool != null)
                 {
                     Host master = pool.Connection.Resolve(pool.master);
+                    SetCollapseIcon();
                     _poolIconCell.Value = Images.GetImage16For(pool);
 
                     DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
@@ -337,9 +371,7 @@ namespace XenAdmin.TabPages
 
                         if (_hasPool && nc != null) // host in pool
                         {
-                            _poolIconCell.Value = "";
                             nc.Image = Images.GetImage16For(host);
-                            _patchingStatusCell.Value = "";
                             _statusCell.Value = "";
                         }
                         else if (!_hasPool && nc != null) // standalone host
