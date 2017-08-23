@@ -48,14 +48,6 @@ namespace XenAdmin.Core
             }
         }
 
-        internal static bool VMPRFeatureEnabled
-        {
-            get
-            {
-                return ReadBool(VMPR_ENABLED, true);
-            }
-        }
-
         internal static bool DisablePlugins
         {
             get
@@ -390,7 +382,6 @@ namespace XenAdmin.Core
         private const string ALLOW_CREDENTIAL_SAVE = "AllowCredentialSave";
         private const string FORCE_SYSTEM_FONTS = "ForceSystemFonts";
         private const string DISABLE_PLUGINS = "DisablePlugins";
-        private const string VMPR_ENABLED = "VMPREnabled";
         private const string DONT_SUDO = "DontSudo";
         private const string XENCENTER_LOCAL_KEYS = @"SOFTWARE\" + Branding.COMPANY_NAME_SHORT + @"\" + Branding.BRAND_CONSOLE;
         private const string PSConsoleKey = @"Software\" + Branding.COMPANY_NAME_SHORT + @"\XenServerPSSnapIn";

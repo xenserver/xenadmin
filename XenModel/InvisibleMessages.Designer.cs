@@ -385,15 +385,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/vmpr.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_VM_PROTECTION {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_VM_PROTECTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string UPSELL_LEARNMOREURL_VMSS {
@@ -417,24 +408,6 @@ namespace XenAdmin {
         public static string UPSELL_SA {
             get {
                 return ResourceManager.GetString("UPSELL_SA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://support.citrix.com/article/CTX137335.
-        /// </summary>
-        public static string VMPR_DEPRECATION_URL {
-            get {
-                return ResourceManager.GetString("VMPR_DEPRECATION_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://support.citrix.com/article/CTX137334.
-        /// </summary>
-        public static string WSS_DEPRECATION_URL {
-            get {
-                return ResourceManager.GetString("WSS_DEPRECATION_URL", resourceCulture);
             }
         }
         
@@ -466,7 +439,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://updates.xensource.com/XenServer/updates.xml.
+        ///   Looks up a localized string similar to https://updates.xensource.com/XenServer/updates.xml.
         /// </summary>
         public static string XENSERVER_UPDATE_URL {
             get {

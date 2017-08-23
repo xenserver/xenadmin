@@ -150,7 +150,7 @@ namespace DotNetVnc
         private static LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
 
-        public delegate void KeyEvent(bool down, int scancode);
+        public delegate void KeyEvent(bool down, int scancode, int keysym);
         private static KeyEvent keyEvent = null;
 
 #pragma warning disable 0649
@@ -195,7 +195,8 @@ namespace DotNetVnc
             }
         }
 
-        private const int NUM_LOCK_SCAN = 197;
+        private const int RIGHT_SHIFT_SCAN = 54;
+        private const int NUM_LOCK_SCAN = 69;
 
         private static int HookCallback(int nCode, int wParam, KBDLLHOOKSTRUCT* lParam)
         {
@@ -207,22 +208,40 @@ namespace DotNetVnc
             {
                 KBDLLHOOKSTRUCT kbStruct = *lParam;
 
-                bool extended = (kbStruct.flags & FLAG_EXTENDED) == 0;
+                bool extended = (kbStruct.flags & FLAG_EXTENDED) == FLAG_EXTENDED;
                 bool down = (wParam == WM_KEYDOWN) || (wParam == WM_SYSKEYDOWN);
                 int scanCode = kbStruct.scanCode;
+                int keySym = KeyMap.translateKey((Keys)kbStruct.vkCode);
+
+                /* kbStruct.scanCode for NUM_LOCK and PAUSE are the same (69).
+                 * But NUM_LOCK is an extended key, where as PAUSE is not.
+                 * QEMU doesn't support PAUSE and expects NUM_LOCK scanCode
+                 * to be sent as 69
+                 */
 
                 switch (scanCode)
                 {
-                    case 54:
-                        break;
+                    /* Although RIGHT_SHIFT, NUMS_LOCK are extended keys,
+                     * scan code for these keys are not prefixed with 0xe0.
+                     */
+                    case RIGHT_SHIFT_SCAN:
+                    case NUM_LOCK_SCAN:
+                       break;
                     default:
-                        scanCode += (extended ? 0 : 128);
+                        /* 128 is added to scanCode to differentiate
+                         * an extended key. Scan code for all extended keys
+                         * needs to be prefixed with 0xe0, so adding 128
+                         * or ( | 0x80) will give a hint to qemu that this
+                         * scanCode is an extended one and qemu can then prefix
+                         * scanCode with 0xe0
+                         */
+                        scanCode += (extended ? 128 : 0);
                         break;
                 }
 
                 if (InterceptKeys.keyEvent != null)
                 {
-                    InterceptKeys.keyEvent(down, scanCode);
+                    InterceptKeys.keyEvent(down, scanCode, keySym);
                 }
 
                 if (bubble || scanCode == NUM_LOCK_SCAN)

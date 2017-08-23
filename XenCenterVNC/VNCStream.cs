@@ -54,12 +54,14 @@ namespace DotNetVnc
         private const int CURSOR_PSEUDO_ENCODING = -239;
         private const int DESKTOP_SIZE_PSEUDO_ENCODING = -223;
         private const int XENCENTER_ENCODING = -254;
+        private const int QEMU_EXT_KEY_ENCODING = -258;
 
         private const int SET_PIXEL_FORMAT = 0;
         private const int SET_ENCODINGS = 2;
         private const int FRAMEBUFFER_UPDATE_REQUEST = 3;
         private const int KEY_EVENT = 4;
         private const int KEY_SCAN_EVENT = 254;
+        private const int QEMU_MSG = 255;
         private const int POINTER_EVENT = 5;
         private const int CLIENT_CUT_TEXT = 6;
 
@@ -72,6 +74,8 @@ namespace DotNetVnc
         private const int FRAME_BUFFER_UPDATE = 0;
         private const int BELL = 2;
         private const int SERVER_CUT_TEXT = 3;
+
+        private const int QEMU_EXT_KEY_EVENT = 0;
 
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -118,7 +122,8 @@ namespace DotNetVnc
 	        RAW_ENCODING,
 	        CURSOR_PSEUDO_ENCODING,
 	        DESKTOP_SIZE_PSEUDO_ENCODING,
-            XENCENTER_ENCODING
+            XENCENTER_ENCODING,
+            QEMU_EXT_KEY_ENCODING
 	    };
 
         private readonly IVNCGraphicsClient client;
@@ -134,6 +139,7 @@ namespace DotNetVnc
         private int height;
 
         private bool incremental;
+        private bool qemu_ext_key_encoding = false;
 
         private PixelFormat pixelFormat;
         private PixelFormat pixelFormatCursor;
@@ -468,13 +474,36 @@ namespace DotNetVnc
             this.stream.writeInt32(key);
         }
 
-        public void keyScanEvent(bool down, int key)
+        private void writeQemuExtKey(int command, bool down, int key, int sym)
+        {
+            this.stream.writeInt8(command);
+            this.stream.writeInt8(QEMU_EXT_KEY_EVENT);
+            this.stream.writePadding(1);
+            this.stream.writeFlag(down);
+            this.stream.writeInt32(sym);
+            this.stream.writeInt32(key);
+        }
+
+        /**
+         * use_qemu_ext_key_encoding: Dictates if we want to use QEMU_EXT_KEY encoding.
+         *
+         * XS6.2 doesn't properly support QEMU_EXT_KEY and XS6.5 supports QEMU_EXT_KEY encoding
+         * only if XS65ESP1051 is applied, so restrict QEMU_EXT_KEY encoding to Inverness and above.
+         */
+        public void keyScanEvent(bool down, int key, int sym, bool use_qemu_ext_key_encoding)
         {
             lock (this.writeLock)
             {
                 try
                 {
-                    writeKey(KEY_SCAN_EVENT, down, key);
+                    if (qemu_ext_key_encoding && use_qemu_ext_key_encoding)
+                    {
+                        writeQemuExtKey(QEMU_MSG, down, key, sym);
+                    }
+                    else
+                    {
+                        writeKey(KEY_SCAN_EVENT, down, key);
+                    }
                     this.stream.Flush();
                 }
                 catch (IOException e)
@@ -1272,6 +1301,10 @@ namespace DotNetVnc
                         desktopSize(width, height);
                         // Since the desktop size has changed, we want a full buffer update next time
                         incremental = false;
+                        break;
+
+                    case QEMU_EXT_KEY_ENCODING:
+                        qemu_ext_key_encoding = true;
                         break;
 
                     default:

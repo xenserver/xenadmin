@@ -74,7 +74,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&High Availability...", false, false  ),
 				new ExpectedTextMenuItem("Di&saster Recovery", false, false ),
-                new ExpectedTextMenuItem("VM &Protection Policies...", false, false ),
                 new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                 new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                 new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", false, false  ),
@@ -117,7 +116,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("&New VM...", false, false  ),
 	            new ExpectedTextMenuItem("&Start/Shut down", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Start", false),new ExpectedTextMenuItem("S&uspend", false),new ExpectedTextMenuItem("Reb&oot", false),new ExpectedTextMenuItem("Start in Reco&very Mode", false),new ExpectedSeparator(),new ExpectedTextMenuItem("Force Shut&down", false),new ExpectedTextMenuItem("Force Re&boot", false  )}),
 	            new ExpectedSeparator(),
-                new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 				new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -150,7 +148,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -186,7 +183,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&High Availability...", true, false  ),
 				new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)}),
-                new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                 new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                 new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                 new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -229,7 +225,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("&New VM...", true, false  ),
 	            new ExpectedTextMenuItem("&Start/Shut down", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Start", false),new ExpectedTextMenuItem("S&uspend", false),new ExpectedTextMenuItem("Reb&oot", false),new ExpectedTextMenuItem("Start in Reco&very Mode", false),new ExpectedSeparator(),new ExpectedTextMenuItem("Force Shut&down", false),new ExpectedTextMenuItem("Force Re&boot", false  )}),
 	            new ExpectedSeparator(),
-                new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 				new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -262,7 +257,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -300,7 +294,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("&High Availability...", true, false  ),
 					new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                    new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                     new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                     new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                     new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -343,7 +336,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("&New VM...", true, false  ),
 	                new ExpectedTextMenuItem("&Start/Shut down", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Start", false),new ExpectedTextMenuItem("S&uspend", false),new ExpectedTextMenuItem("Reb&oot", false),new ExpectedTextMenuItem("Start in Reco&very Mode", false),new ExpectedSeparator(),new ExpectedTextMenuItem("Force Shut&down", false),new ExpectedTextMenuItem("Force Re&boot", false  )}),
 	                new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 					new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -375,7 +367,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                new ExpectedTextMenuItem("&Forget", false, false  ),
 	                new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-	                /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -414,7 +405,6 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&High Availability...", true, false  ),
 				new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                 new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                 new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
 	            new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -457,7 +447,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("&New VM...", true, false  ),
 	            new ExpectedTextMenuItem("&Start/Shut down", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Start", false),new ExpectedTextMenuItem("S&uspend", false),new ExpectedTextMenuItem("Reb&oot", false),new ExpectedTextMenuItem("Start in Reco&very Mode", false),new ExpectedSeparator(),new ExpectedTextMenuItem("Force Shut&down", false),new ExpectedTextMenuItem("Force Re&boot", false  )}),
                 new ExpectedSeparator(),
-	            new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 				new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	            new ExpectedSeparator(),
                 new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -489,7 +478,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-                /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -529,7 +517,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("&High Availability...", true, false  ),
 					new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                    new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                     new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                     new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                     new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -572,7 +559,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("&New VM...", true, false  ),
 	                new ExpectedTextMenuItem("&Start/Shut down", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Start", true),new ExpectedTextMenuItem("S&uspend", false),new ExpectedTextMenuItem("Reb&oot", false),new ExpectedTextMenuItem("Start in Reco&very Mode", false),new ExpectedSeparator(),new ExpectedTextMenuItem("Force Shut&down", false),new ExpectedTextMenuItem("Force Re&boot", false  )}),
 	                new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 					new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -605,7 +591,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                new ExpectedTextMenuItem("&Forget", false, false  ),
 	                new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-    	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -646,7 +631,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("&High Availability...", true, false  ),
 					new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                    new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                     new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                     new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                     new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -689,7 +673,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("&New VM...", true, false  ),
 	                new ExpectedTextMenuItem("&Start/Shut down", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Start", false),new ExpectedTextMenuItem("S&uspend", false),new ExpectedTextMenuItem("Reb&oot", false),new ExpectedTextMenuItem("Start in Reco&very Mode", false),new ExpectedSeparator(),new ExpectedTextMenuItem("Force Shut&down", false),new ExpectedTextMenuItem("Force Re&boot", false  )}),
 	                new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 					new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -722,7 +705,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                new ExpectedTextMenuItem("&Forget", CanForget(sr), false  ),
 	                new ExpectedTextMenuItem("Destr&oy...", CanDestroy(sr), false  ),
-    	                /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", CanConvertSR(sr), false  ), */
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", true, false  )
                 };
@@ -764,7 +746,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("&High Availability...", false, false  ),
 						new ExpectedTextMenuItem("Di&saster Recovery", false, false ),
-                        new ExpectedTextMenuItem("VM &Protection Policies...", false, false ),
                         new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                         new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                         new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", false, false  ),
@@ -807,7 +788,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("&New VM...", false, false  ),
 	                    new ExpectedTextMenuItem("&Start/Shut down", false, false),
 	                    new ExpectedSeparator(),
-                        new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 						new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -840,7 +820,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                    new ExpectedTextMenuItem("&Forget", false, false  ),
 	                    new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-        	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -885,7 +864,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("&High Availability...", false, false  ),
 					new ExpectedTextMenuItem("Di&saster Recovery", false, false ),
-                    new ExpectedTextMenuItem("VM &Protection Policies...", false, false ),
                     new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                     new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                     new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", false, false  ),
@@ -928,7 +906,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&New VM...", false, false  ),
                     new ExpectedTextMenuItem("&Start/Shut down", false, false),
                     new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 					new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -961,7 +938,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("R&eattach...", false, false  ),
                     new ExpectedTextMenuItem("&Forget", false, false  ),
                     new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-    	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1007,7 +983,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("&High Availability...", false, false  ),
 						new ExpectedTextMenuItem("Di&saster Recovery", false, false ),
-                        new ExpectedTextMenuItem("VM &Protection Policies...", false, false ),
                         new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                         new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                         new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", false, false  ),
@@ -1050,7 +1025,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("&New VM...", false, false  ),
 	                    new ExpectedTextMenuItem("&Start/Shut down", false, false),
 	                    new ExpectedSeparator(),
-                        new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 						new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -1083,7 +1057,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                    new ExpectedTextMenuItem("&Forget", false, false  ),
 	                    new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-        	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -1130,7 +1103,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("&High Availability...", false, false  ),
 					new ExpectedTextMenuItem("Di&saster Recovery", false, false ),
-                    new ExpectedTextMenuItem("VM &Protection Policies...", false, false ),
                     new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                     new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                     new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", false, false  ),
@@ -1173,7 +1145,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("&New VM...", false, false  ),
                     new ExpectedTextMenuItem("&Start/Shut down", false, false),
                     new ExpectedSeparator(),
-                    new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 					new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -1206,7 +1177,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedTextMenuItem("R&eattach...", false, false  ),
                     new ExpectedTextMenuItem("&Forget", false, false  ),
                     new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-    	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1254,7 +1224,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("&High Availability...", false, false  ),
 						new ExpectedTextMenuItem("Di&saster Recovery", false, false ),
-                        new ExpectedTextMenuItem("VM &Protection Policies...", false, false ),
                         new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                         new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                         new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", false, false  ),
@@ -1297,7 +1266,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("&New VM...", false, false  ),
 	                    new ExpectedTextMenuItem("&Start/Shut down", false, false),
 	                    new ExpectedSeparator(),
-                        new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 						new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -1330,7 +1298,6 @@ namespace XenAdminTests.TabsAndMenus
 	                    new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                    new ExpectedTextMenuItem("&Forget", false, false  ),
 	                    new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-        	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                    new ExpectedSeparator(),
 	                    new ExpectedTextMenuItem("P&roperties", false, false  )
                     };
@@ -1373,7 +1340,6 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("&High Availability...", true, false  ),
 				new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                 new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                 new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                 new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -1416,7 +1382,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("&New VM...", true, false  ),
 	            new ExpectedTextMenuItem("&Start/Shut down", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Start", false),new ExpectedTextMenuItem("S&uspend", false),new ExpectedTextMenuItem("Reb&oot", false),new ExpectedTextMenuItem("Start in Reco&very Mode", false),new ExpectedSeparator(),new ExpectedTextMenuItem("Force Shut&down", false),new ExpectedTextMenuItem("Force Re&boot", false  )}),
 	            new ExpectedSeparator(),
-                new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 				new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -1449,7 +1414,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-   	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -1485,7 +1449,6 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("&High Availability...", true, false  ),
 				new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                 new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                 new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                 new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -1528,7 +1491,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("&New VM...", true, false  ),
 	            new ExpectedTextMenuItem("&Start/Shut down", false, false, new ExpectedMenuItem[]{new ExpectedTextMenuItem("&Start", false),new ExpectedTextMenuItem("S&uspend", false),new ExpectedTextMenuItem("Reb&oot", false),new ExpectedTextMenuItem("Start in Reco&very Mode", false),new ExpectedSeparator(),new ExpectedTextMenuItem("Force Shut&down", false),new ExpectedTextMenuItem("Force Re&boot", false  )}),
 	            new ExpectedSeparator(),
-                new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false  ),
 				new ExpectedTextMenuItem("Assign to vA&pp", false, false  ),
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("&Copy VM...", false, false  ),
@@ -1561,7 +1523,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-   	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -1583,6 +1544,8 @@ namespace XenAdminTests.TabsAndMenus
         }
 
         [Test]
+        [Ignore("Ignore, as it currently fails because some additional members are added to the VMTooltripMenuItem on a separate thread (MigrateVMToolStripMenuItem.AddAdditionalMenuItems)." +
+                " Same problem as with ContextMenu_VMWithTools,see CA-123967.")]
         public void MainMenu_VMWithTools()
         {
             foreach (VM vm in GetAllXenObjects<VM>(HasTools))
@@ -1599,7 +1562,6 @@ namespace XenAdminTests.TabsAndMenus
                     new ExpectedSeparator(),
                     new ExpectedTextMenuItem("&High Availability...", true, false  ),
 				    new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                    new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                     new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                     new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                     new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -1668,9 +1630,10 @@ namespace XenAdminTests.TabsAndMenus
                                          residentOnInflames
                                              ? new ExpectedTextMenuItem("incubus (INTERNAL_ERROR)", false, false, true)
                                              : new ExpectedTextMenuItem("incubus (Current server)", false, false, true),
+                                         new ExpectedSeparator(),
+                                         new ExpectedTextMenuItem("&Migrate VM wizard...", false, false)
                                      }),
                             new ExpectedSeparator(),
-                            new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false),
                             new ExpectedTextMenuItem("Assign to vA&pp", true, false, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
                             new ExpectedSeparator(),
                             new ExpectedTextMenuItem("&Copy VM...", false, false),
@@ -1703,7 +1666,6 @@ namespace XenAdminTests.TabsAndMenus
 	                new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	                new ExpectedTextMenuItem("&Forget", false, false  ),
 	                new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-    	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	                new ExpectedSeparator(),
 	                new ExpectedTextMenuItem("P&roperties", false, false  )
                 };
@@ -1741,7 +1703,6 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("&High Availability...", true, false  ),
 			    new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                 new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                 new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                 new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -1797,7 +1758,6 @@ namespace XenAdminTests.TabsAndMenus
                                                          new ExpectedTextMenuItem("Shut Dow&n vApp", false)
                                                      }),
                         new ExpectedSeparator(),
-                        new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false),
                         new ExpectedTextMenuItem("Assign to vA&pp", true, false, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
                         new ExpectedSeparator(),
                         new ExpectedTextMenuItem("&Copy VM...", false, false),
@@ -1830,7 +1790,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-   	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };
@@ -1869,7 +1828,6 @@ namespace XenAdminTests.TabsAndMenus
                 new ExpectedSeparator(),
                 new ExpectedTextMenuItem("&High Availability...", true, false  ),
 			    new ExpectedTextMenuItem("Di&saster Recovery", true, false, new ExpectedMenuItem[]{ new ExpectedTextMenuItem("&Configure...", true), new ExpectedTextMenuItem("&Disaster Recovery Wizard...", true)} ),
-                new ExpectedTextMenuItem("VM &Protection Policies...", true, false ),
                 new ExpectedTextMenuItem("E&xport Resource Data...", false, false  ),
                 new ExpectedTextMenuItem("View Wor&kload Reports...", false, false  ),
                 new ExpectedTextMenuItem("Disconnect Workload &Balancing Server", true, false  ),
@@ -1934,7 +1892,6 @@ namespace XenAdminTests.TabsAndMenus
                                                          new ExpectedTextMenuItem("incubus (INTERNAL_ERROR)", false, false, true)
                                                      }),
                         new ExpectedSeparator(),
-                        new ExpectedTextMenuItem("Assign to VM Protection Polic&y", false, false),
                         new ExpectedTextMenuItem("Assign to vA&pp", true, false, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true) }),
                         new ExpectedSeparator(),
                         new ExpectedTextMenuItem("&Copy VM...", true, false),
@@ -1967,7 +1924,6 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("R&eattach...", false, false  ),
 	            new ExpectedTextMenuItem("&Forget", false, false  ),
 	            new ExpectedTextMenuItem("Destr&oy...", false, false  ),
-   	            /* REMOVED THIN PROVISIONING new ExpectedTextMenuItem("&Convert SR...", false, false  ), */
 	            new ExpectedSeparator(),
 	            new ExpectedTextMenuItem("P&roperties", false, false  )
             };

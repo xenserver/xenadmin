@@ -38,6 +38,7 @@ using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
 using System.Net;
+using System.Text;
 
 
 namespace XenAdmin.Actions
@@ -74,11 +75,14 @@ namespace XenAdmin.Actions
         private readonly bool _checkForServerVersion;
         private readonly bool _checkForPatches;
         private readonly string _checkForUpdatesUrl;
+        private readonly string _userAgent;
+        private readonly string _userAgentId;
 
-        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl = null)
+        public DownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string userAgent, string userAgentId, string checkForUpdatesUrl = null)
             : base(null, "_get_updates", "_get_updates", true)
         {
             Debug.Assert(checkForUpdatesUrl != null, "Parameter checkForUpdatesUrl should not be null. This class does not default its value anymore.");
+            Debug.Assert(!string.IsNullOrWhiteSpace(userAgent) && !string.IsNullOrWhiteSpace(userAgentId));
 
             XenServerPatches = new List<XenServerPatch>();
             XenServerVersions = new List<XenServerVersion>();
@@ -88,6 +92,8 @@ namespace XenAdmin.Actions
             _checkForServerVersion = checkForServerVersion;
             _checkForPatches = checkForPatches;
             _checkForUpdatesUrl = checkForUpdatesUrl;
+            _userAgent = userAgent;
+            _userAgentId = userAgentId;
         }
 
         protected override void Run()
@@ -302,7 +308,7 @@ namespace XenAdmin.Actions
             var xdoc = new XmlDocument();
             var uri = new Uri(location);
             var proxy = XenAdminConfigManager.Provider.GetProxyFromSettings(Connection, false);
-
+            
             if (uri.IsFile)
             {
                 xdoc.Load(location);
@@ -312,6 +318,8 @@ namespace XenAdmin.Actions
                 using (var webClient = new WebClient())
                 {
                     webClient.Proxy = proxy;
+                    webClient.Headers.Add("User-Agent", _userAgent);
+                    webClient.Headers.Add("X-User-Agent-Id", _userAgentId);
 
                     using (var stream = new MemoryStream(webClient.DownloadData(uri)))
                     {
@@ -322,5 +330,6 @@ namespace XenAdmin.Actions
 
             return xdoc;
         }
+
     }
 }

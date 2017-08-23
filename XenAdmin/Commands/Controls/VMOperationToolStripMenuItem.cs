@@ -200,13 +200,13 @@ namespace XenAdmin.Commands
                 if (host != null)
                 {
                     VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name.EscapeAmpersands(), _operation, session);
-                    VMOperationCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
+                    CrossPoolMigrateCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
 
                     VMOperationToolStripMenuSubItem tempItem = item;
                     Program.Invoke(Program.MainWindow, delegate
                                                            {
                                                                bool oldMigrateCmdCanRun = cmd.CanExecute();
-                                                               if (_operation == vm_operations.start_on || !oldMigrateCmdCanRun && !cpmCmd.CanExecute())
+                                                               if (_operation == vm_operations.start_on || (!oldMigrateCmdCanRun && !cpmCmd.CanExecute() && string.IsNullOrEmpty(cpmCmd.CantExecuteReason)))
                                                                    tempItem.Command = cmd;
                                                                else
                                                                    tempItem.Command = oldMigrateCmdCanRun ? cmd : cpmCmd;

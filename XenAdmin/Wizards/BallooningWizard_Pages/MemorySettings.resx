@@ -190,7 +190,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Assign the VMs a fixed memory or indicate the range you wish them to use. When ready, press Finish to apply the configuration.</value>
+    <value>Assign the VMs a fixed memory or indicate the range you want them to use. When ready, press Finish to apply the configuration.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

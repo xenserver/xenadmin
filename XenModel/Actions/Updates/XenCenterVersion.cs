@@ -50,8 +50,6 @@ namespace XenAdmin.Core
             Name = name;
             Latest = latest;
             LatestCr = latest_cr;
-            if (url.StartsWith("/XenServer"))
-                url = XenServerVersion.UpdateRoot + url;
             Url = url;
             DateTime.TryParse(timestamp, out TimeStamp);
         }

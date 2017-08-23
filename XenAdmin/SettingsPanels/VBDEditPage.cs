@@ -42,6 +42,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Dialogs;
+using System.Linq;
 
 
 namespace XenAdmin.SettingsPanels
@@ -149,16 +150,22 @@ namespace XenAdmin.SettingsPanels
                 {
                     devicePositionComboBox.Items.Clear();
 
-                    devicePositionComboBox.Items.AddRange(devices.ToArray());
+                    var comboBoxItems = vm.Connection.ResolveAll(vm.VBDs).Select(d => new DevicePositionComboBoxItem(d.userdevice, d));
 
-                    // Make sure the userdevice for the selected VBD is the one selected in the combobox
-                    foreach (String position in devicePositionComboBox.Items)
+                    foreach (var devicePosition in devices)
                     {
-                        if (position != vbd.userdevice)
-                            continue;
+                        var comboBoxItemWithVdi = comboBoxItems.FirstOrDefault(ci => ci.VBD.userdevice == devicePosition);
+                        if (comboBoxItemWithVdi != null)
+                        {
+                            devicePositionComboBox.Items.Add(comboBoxItemWithVdi);
 
-                        devicePositionComboBox.SelectedItem = position;
-                        break;
+                            if (vbd != null && comboBoxItemWithVdi.VBD.userdevice == vbd.userdevice)
+                                devicePositionComboBox.SelectedItem = comboBoxItemWithVdi;
+                        }
+                        else
+                        {
+                            devicePositionComboBox.Items.Add(new DevicePositionComboBoxItem(devicePosition));
+                        }
                     }
                 }
                 finally
@@ -212,28 +219,6 @@ namespace XenAdmin.SettingsPanels
             }
         }
 
-        private void comboBoxDevicePosition_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (DevicePosition == vbd.userdevice)
-            {
-                labelDevicePositionMsg.Visible = false;
-                return;
-            }
-
-            foreach (VBD otherVBD in vm.Connection.ResolveAll(vm.VBDs))
-            {
-                if (otherVBD.userdevice != DevicePosition)
-                    continue;
-
-                labelDevicePositionMsg.Text = string.Format(Messages.DEVICE_POSITION_IN_USE);
-                labelDevicePositionMsg.Visible = true;
-                return;
-            }
-
-            // No conflict found.
-            labelDevicePositionMsg.Visible = false;
-        }
-
         public bool HasChanged
         {
             get
@@ -258,7 +243,7 @@ namespace XenAdmin.SettingsPanels
             get
             {
                 if (devicePositionComboBox.SelectedItem != null)
-                    return devicePositionComboBox.SelectedItem.ToString();
+                    return ((DevicePositionComboBoxItem)devicePositionComboBox.SelectedItem).Position;
 
                 return String.Empty;
             }
@@ -284,9 +269,9 @@ namespace XenAdmin.SettingsPanels
                         Messages.EDIT_SYS_DISK_WARNING_TITLE),
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo))
-                    {
-                        dialogResult = dlg.ShowDialog(this);
-                    }
+                {
+                    dialogResult = dlg.ShowDialog(this);
+                }
                 if (DialogResult.Yes != dialogResult)
                 {
                     return null;
@@ -303,7 +288,7 @@ namespace XenAdmin.SettingsPanels
             {
                 priorityToSet = diskAccessPriority;
             }
-                
+
 
             bool changeDevicePosition = false;
             VBD other = null;
@@ -351,7 +336,7 @@ namespace XenAdmin.SettingsPanels
                 )
                 )
             {
-                Program.Invoke(Program.MainWindow, () => 
+                Program.Invoke(Program.MainWindow, () =>
                 {
                     using (var dlg = new ThreeButtonDialog(
                                     new ThreeButtonDialog.Details(SystemIcons.Information, Messages.DEVICE_POSITION_RESTART_REQUIRED, Messages.XENCENTER)))
@@ -368,6 +353,39 @@ namespace XenAdmin.SettingsPanels
             {
                 return String.Format(Messages.DEVICE_POSITION, DevicePosition,
                     modeComboBox.SelectedItem);
+            }
+        }
+
+        public class DevicePositionComboBoxItem
+        {
+            private VBD vbd;
+            private string position;
+
+            public VBD VBD { get { return vbd; } }
+            public string Position { get { return position; } }
+
+            public DevicePositionComboBoxItem(string position, VBD vbd = null)
+            {
+                this.vbd = vbd;
+                this.position = position;
+            }
+
+            public override string ToString()
+            {
+                VDI vdi = null;
+
+                if (vbd != null && vbd.Connection != null)
+                {
+                    vdi = vbd.Connection.Resolve(vbd.VDI);
+                }
+
+                if (vbd == null)
+                    return position;
+
+                if (vdi != null)
+                    return string.Format(Messages.VBD_EDIT_CURRENTLY_IN_USE_BY, position, vdi.ToString().Ellipsise(30));
+
+                return string.Format(Messages.VBD_EDIT_CURRENTLY_IN_USE, position);
             }
         }
     }

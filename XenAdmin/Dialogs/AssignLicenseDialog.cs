@@ -108,9 +108,6 @@ namespace XenAdmin.Dialogs
         {
             if (xos.TrueForAll(x => Helpers.CreedenceOrGreater(x.Connection)))
             {
-                platinumRadioButton.Visible = false;
-                enterpriseRadioButton.Visible = false;
-                advancedRadioButton.Visible = false;
                 perSocketRadioButton.Visible = false;
                 xenDesktopEnterpriseRadioButton.Visible = false;
                 enterprisePerSocketRadioButton.Checked = true;
@@ -118,11 +115,9 @@ namespace XenAdmin.Dialogs
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
                 standardPerSocketRadioButton.Text = String.Format(Messages.STANDARD_PERSOCKET_LICENSES_X_REQUIRED,
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
-            } else if(xos.TrueForAll(x=> Helpers.ClearwaterOrGreater(x.Connection)))
+            } 
+            else 
             {
-                platinumRadioButton.Visible = false;
-                enterpriseRadioButton.Visible = false;
-                advancedRadioButton.Visible = false;
                 enterprisePerSocketRadioButton.Visible = false;
                 enterprisePerUserRadioButton.Visible = false;
                 standardPerSocketRadioButton.Visible = false;
@@ -131,16 +126,6 @@ namespace XenAdmin.Dialogs
                 perSocketRadioButton.Checked = true;
                 perSocketRadioButton.Text = String.Format(Messages.PERSOCKET_LICENSES_X_REQUIRED,
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h=>h.CpuSockets)));
-            }
-            else
-            {
-                perSocketRadioButton.Visible = false;
-                enterprisePerSocketRadioButton.Visible = false;
-                enterprisePerUserRadioButton.Visible = false;
-                standardPerSocketRadioButton.Visible = false;
-                desktopPlusRadioButton.Visible = false;
-                desktopRadioButton.Visible = false;
-                advancedRadioButton.Checked = true;
             }
         }
 
@@ -155,17 +140,7 @@ namespace XenAdmin.Dialogs
             switch (currentEdition)
             {
                 case Host.Edition.XenDesktop:
-                case Host.Edition.EnterpriseXD:
                     CheckRadioButtonIfVisible(xenDesktopEnterpriseRadioButton);
-                    break;
-                case Host.Edition.Platinum:
-                    CheckRadioButtonIfVisible(platinumRadioButton);
-                    break;
-                case Host.Edition.Enterprise:
-                    CheckRadioButtonIfVisible(enterpriseRadioButton);
-                    break;
-                case  Host.Edition.Advanced:
-                    CheckRadioButtonIfVisible(advancedRadioButton);
                     break;
                 case Host.Edition.PerSocket:
                     CheckRadioButtonIfVisible(perSocketRadioButton);
@@ -191,16 +166,7 @@ namespace XenAdmin.Dialogs
         private Host.Edition GetCheckedEdition()
         {
             if (xenDesktopEnterpriseRadioButton.Checked)
-                return xos.TrueForAll(x=>Helpers.ClearwaterOrGreater(x.Connection)) ? Host.Edition.XenDesktop : Host.Edition.EnterpriseXD;
-
-            if (platinumRadioButton.Checked)
-                return Host.Edition.Platinum;
-
-            if (enterpriseRadioButton.Checked)
-                return Host.Edition.Enterprise;
-
-            if(advancedRadioButton.Checked)
-                return Host.Edition.Advanced;
+                return Host.Edition.XenDesktop;
 
             if (perSocketRadioButton.Checked)
                 return Host.Edition.PerSocket;

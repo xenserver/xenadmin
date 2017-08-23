@@ -40,7 +40,7 @@ namespace XenAPI
 {
     /// <summary>
     /// LVHD SR specific operations
-    /// First published in XenServer Dundee.
+    /// First published in XenServer 7.0.
     /// </summary>
     public partial class LVHD : XenObject<LVHD>
     {
@@ -112,7 +112,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given LVHD.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_lvhd">The opaque_ref of the given lvhd</param>
@@ -123,7 +123,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the LVHD instance with the specified UUID.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -134,7 +134,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given LVHD.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_lvhd">The opaque_ref of the given lvhd</param>
@@ -145,7 +145,7 @@ namespace XenAPI
 
         /// <summary>
         /// Upgrades an LVHD SR to enable thin-provisioning. Future VDIs created in this SR will be thinly-provisioned, although existing VDIs will be left alone. Note that the SR must be attached to the SRmaster for upgrade to work.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The LVHD Host to upgrade to being thin-provisioned.</param>
@@ -159,7 +159,7 @@ namespace XenAPI
 
         /// <summary>
         /// Upgrades an LVHD SR to enable thin-provisioning. Future VDIs created in this SR will be thinly-provisioned, although existing VDIs will be left alone. Note that the SR must be attached to the SRmaster for upgrade to work.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The LVHD Host to upgrade to being thin-provisioned.</param>

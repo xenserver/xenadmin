@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
@@ -164,6 +165,13 @@ namespace XenAdmin.Actions
                         File.Delete(retailPatchPath);
                      }
                      throw;
+                }
+                catch (TargetInvocationException ex)
+                {
+                    if (ex.InnerException != null)
+                        throw ex.InnerException;
+                    else
+                        throw;
                 }
 
                 finally

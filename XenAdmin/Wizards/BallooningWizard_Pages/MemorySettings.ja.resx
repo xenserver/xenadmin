@@ -190,7 +190,7 @@
     <value>2</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>VM に一定のメモリを割り当てたり、使用可能なメモリ範囲を指定したりできます。[完了] をクリックすると、構成が適用されます。</value>
+    <value>仮想マシンに一定のメモリを割り当てたり、使用可能なメモリ範囲を指定したりできます。[完了] をクリックすると、構成が適用されます。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

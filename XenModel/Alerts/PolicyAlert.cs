@@ -45,14 +45,12 @@ namespace XenAdmin.Alerts
         public readonly string Type;
         public readonly string Text;
         public readonly DateTime Time;
-        public readonly string PolicyType;
         public readonly int numberOfVMsFailed;
 
         public PolicyAlert(long priority, string name, DateTime _time, string body, string policyName)
         {
             Type = (priority == 4 ? "info": "error");
             Time = _time;
-            PolicyType = "VMSS";
 
             if(Type == "info")
             {
@@ -101,92 +99,24 @@ namespace XenAdmin.Alerts
             Text = sb.ToString();
         }
 
-        public PolicyAlert(IXenConnection connection, string body)
-        {
-            PolicyType = "VMPP";
-            var sb = new StringBuilder();
-            try
-            {
-                var xmlDocument = new XmlDocument();
-                xmlDocument.LoadXml(body);
-                XmlNodeList _fnames = xmlDocument.GetElementsByTagName("time");
-                Time = DateTime.Parse(_fnames[0].InnerText, CultureInfo.InvariantCulture);
-                _fnames = xmlDocument.GetElementsByTagName("messagetype");
-                if (_fnames[0].InnerText == "error")
-                {
-                    Type = "error";
-                    numberOfVMsFailed = 0;
-                    _fnames = xmlDocument.GetElementsByTagName("error");
-                    for (int i = 0; i < _fnames.Count; i++)
-                    {
-                        XmlNode item = _fnames[i];
-                        foreach (XmlNode child in item.ChildNodes)
-                        {
-                            if (child.Name == "vm")
-                            {
-                                var vm = connection.Cache.Find_By_Uuid<VM>(child.InnerText);
-                                if (vm == null)
-                                    continue;
-                                sb.AppendFormat("VM '{0}': ", vm.Name);
-                                numberOfVMsFailed++;
-                            }
-                            if (child.Name == "errorcode")
-                            {
-                                string text = FriendlyErrorNames.ResourceManager.GetString(child.InnerText);
-                                if (string.IsNullOrEmpty(text))
-                                    text = Message.FriendlyBody(child.InnerText);
-                                sb.Append(string.IsNullOrEmpty(text) ? child.InnerText : text);
-                            }
-                        }
-                        if (i + 1 < _fnames.Count)
-                            sb.AppendLine();
-                    }
-                    Text = sb.ToString();
-                }
-                else if (_fnames[0].InnerText == "info" || _fnames[0].InnerText == "warn")
-                {
-                    Type = _fnames[0].InnerText;
-                    XmlNodeList _messages = xmlDocument.GetElementsByTagName("message");
-
-                    foreach (XmlNode node in _messages)
-                    {
-                        if (node.InnerText == node.InnerXml)
-                        {
-                            Text = Message.FriendlyBody(node.InnerText);
-                            break;
-                        }
-                    }
-                }
-            }
-            catch (Exception) { }
-        }
-
         public string ShortFormatBody
         {
             get
             {
+                if (Type == "error")
                 {
-                    if (Type == "error")
-                    {   
-                        if (PolicyType == "VMSS")
-                        {  
-                            if (numberOfVMsFailed == 0)
-                            {
-                                return Message.FriendlyName(XenAPI.Message.MessageType.VMSS_SNAPSHOT_FAILED.ToString());
-                            }
-                            else
-                            {
-                                return string.Format(Messages.VM_SNAPSHOT_SCHEDULE_FAILED, Message.FriendlyName(XenAPI.Message.MessageType.VMSS_SNAPSHOT_FAILED.ToString()), numberOfVMsFailed);
-                            }
-                                
-                        }
-                        else
-                        {
-                            return string.Format(Messages.VM_PROTECTION_POLICY_FAILED, Message.FriendlyName(XenAPI.Message.MessageType.VMPP_SNAPSHOT_FAILED.ToString()), numberOfVMsFailed);
-                        }  
+                    if (numberOfVMsFailed == 0)
+                    {
+                        return Message.FriendlyName(XenAPI.Message.MessageType.VMSS_SNAPSHOT_FAILED.ToString());
                     }
-                    else return Text;
+                    else
+                    {
+                        return string.Format(Messages.VM_SNAPSHOT_SCHEDULE_FAILED,
+                            Message.FriendlyName(XenAPI.Message.MessageType.VMSS_SNAPSHOT_FAILED.ToString()),
+                            numberOfVMsFailed);
+                    }
                 }
+                return Text;
             }
         }
 

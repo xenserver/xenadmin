@@ -259,17 +259,8 @@ namespace XenAdmin.Dialogs.OptionsPages
             }
 
             Program.ReconfigureConnectionSettings();
-            new TransferProxySettingsAction(
-                (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
-                Properties.Settings.Default.ProxyAddress,
-                Properties.Settings.Default.ProxyPort,
-                Properties.Settings.Default.ConnectionTimeout,
-                false,
-                Properties.Settings.Default.BypassProxyForServers,
-                Properties.Settings.Default.ProvideProxyAuthentication,
-                Properties.Settings.Default.ProxyUsername,
-                Properties.Settings.Default.ProxyPassword,
-                (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
+
+            Core.HealthCheck.SendProxySettingsToHealthCheck();
         }
 
         #endregion

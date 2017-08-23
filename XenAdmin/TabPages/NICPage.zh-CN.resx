@@ -168,7 +168,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnDuplex.HeaderText" xml:space="preserve">
-    <value>双面打印</value>
+    <value>双工</value>
   </data>
   <data name="ColumnDuplex.Width" type="System.Int32, mscorlib">
     <value>68</value>

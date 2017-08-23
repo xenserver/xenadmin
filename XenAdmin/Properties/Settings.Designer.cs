@@ -799,5 +799,18 @@ namespace XenAdmin.Properties {
                 this["DoNotConfirmDismissUpdates"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string HelpLastUsed {
+            get {
+                return ((string)(this["HelpLastUsed"]));
+            }
+            set {
+                this["HelpLastUsed"] = value;
+            }
+        }
     }
 }

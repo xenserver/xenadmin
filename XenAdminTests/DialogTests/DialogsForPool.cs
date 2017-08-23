@@ -36,7 +36,7 @@ using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin.Controls;
 using XenAdmin.Dialogs;
-using XenAdmin.Dialogs.VMProtection_Recovery;
+using XenAdmin.Dialogs.ScheduledSnapshots;
 
 namespace XenAdminTests.DialogTests.state1_xml.DialogsForPool
 {
@@ -76,11 +76,11 @@ namespace XenAdminTests.DialogTests.state2_xml.DialogsForPool
 namespace XenAdminTests.DialogTests.cowleyPolicies_xml.DialogsForPool
 {
     [TestFixture, Category(TestCategories.UICategoryA)]
-    public class VMProtectionPoliciesDialogTest : DialogTest<VMProtectionPoliciesDialog>
+    public class VMProtectionPoliciesDialogTest : DialogTest<ScheduledSnapshotsDialog>
     {
-        protected override VMProtectionPoliciesDialog NewDialog()
+        protected override ScheduledSnapshotsDialog NewDialog()
         {
-            return new VMProtectionPoliciesDialog(GetAnyPool());
+            return new ScheduledSnapshotsDialog(GetAnyPool());
         }
     }
 }

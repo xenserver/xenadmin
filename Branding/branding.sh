@@ -30,6 +30,14 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
+#==============================================================
+#Micro version override - please keep at the top of the script
+#==============================================================
+#Set and uncomment this to override the 3rd value of the product number 
+#normally fetched from branding
+#
+#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
+
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 OUTPUT_DIR=${ROOT}/output
@@ -42,6 +50,15 @@ do
     latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
     echo "INFO: Latest version of ${hfx} hotfix is $latest"
     cp ${hfx}/$latest/${hfx}.xsupdate ${hfx}.xsupdate
+  fi
+done
+
+for hfx in RPU004
+do
+  if [ -d "${hfx}" ]; then
+    latest=$(ls ${hfx} | /usr/bin/sort -n | tail -n 1)
+    echo "INFO: Latest version of ${hfx} hotfix is $latest"
+    cp ${hfx}/$latest/${hfx}.iso ${hfx}.iso
   fi
 done
 
@@ -72,6 +89,7 @@ BRANDING_UPDATE=xsupdate
 BRANDING_BACKUP=xbk
 BRANDING_SERVER=${BRANDING_PRODUCT_BRAND}
 BRANDING_BRAND_CONSOLE=$(cat ${TOPLEVEL_BRANDING} | grep -F "BRAND_CONSOLE := " | sed -e 's/BRAND_CONSOLE := //g')
+BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT=en-US
 
 # Check for the micro version override and use it if present otherwise use the one from branding
 if [ -n "${PRODUCT_MICRO_VERSION_OVERRIDE+x}" ]; then
@@ -87,13 +105,11 @@ BRANDING_XC_PRODUCT_6_0_VERSION=6.0
 BRANDING_XC_PRODUCT_6_2_VERSION=6.2
 BRANDING_XC_PRODUCT_6_5_VERSION=6.5
 BRANDING_XC_PRODUCT_7_0_VERSION=7.0
-BRANDING_XENSERVER_UPDATE_URL="http://updates.xensource.com/XenServer/updates.xml"
+BRANDING_XENSERVER_UPDATE_URL="https://updates.xensource.com/XenServer/updates.xml"
 BRANDING_HIDDEN_FEATURES=""
 BRANDING_ADDITIONAL_FEATURES=""
 
 #GUID
-BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID=A77AF69F-14AF-4cd0-B978-236945C7AC97
-BRANDING_VNC_MAIN_CONTROL_GUID=C2E335C1-3ADF-492d-BD03-27DA10A44232
 BRANDING_XENCENTER_UPGRADE_CODE_GUID=EA0EF50F-5CC6-452B-B09F-3F5EC564899D
 BRANDING_JA_RESOURCES_GUID=D3ADD803-AF0B-4787-AC29-C6387FFF403B
 BRANDING_SC_RESOURCES_GUID=381e9319-f0c4-4c69-a1c2-0a2fc725bd19

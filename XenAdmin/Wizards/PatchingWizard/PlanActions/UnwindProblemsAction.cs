@@ -40,8 +40,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly List<Problem> _problems;
 
-        public UnwindProblemsAction(List<Problem> problems)
-            : base(Messages.PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTING)
+        public UnwindProblemsAction(List<Problem> problems, string TitleOverride = null)
+            : base(TitleOverride ?? Messages.PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTING)
         {
             base.TitlePlan = Messages.REVERTING_RESOLVED_PRECHECKS;
             _problems = problems;

@@ -637,11 +637,11 @@ namespace XenAPI
         /// <summary>
         /// Get the parent field of the given VDI.
         /// First published in XenServer 4.0.
-        /// Deprecated since .
+        /// Deprecated since XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
-        [Deprecated("")]
+        [Deprecated("XenServer 7.1")]
         public static XenRef<VDI> get_parent(Session session, string _vdi)
         {
             return XenRef<VDI>.Create(session.proxy.vdi_get_parent(session.uuid, (_vdi != null) ? _vdi : "").parse());
@@ -770,7 +770,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_tools_iso field of the given VDI.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -1293,8 +1293,8 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         /// <param name="_sr">The destination SR (only required if the destination VDI is not specified</param>
-        /// <param name="_base_vdi">The base VDI (only required if copying only changed blocks, by default all blocks will be copied) First published in XenServer 6.2 SP1 Hotfix XS62ESP1004.</param>
-        /// <param name="_into_vdi">The destination VDI to copy blocks into (if omitted then a destination SR must be provided and a fresh VDI will be created) First published in XenServer 6.2 SP1 Hotfix XS62ESP1004.</param>
+        /// <param name="_base_vdi">The base VDI (only required if copying only changed blocks, by default all blocks will be copied) First published in XenServer 6.2 SP1 Hotfix 4.</param>
+        /// <param name="_into_vdi">The destination VDI to copy blocks into (if omitted then a destination SR must be provided and a fresh VDI will be created) First published in XenServer 6.2 SP1 Hotfix 4.</param>
         public static XenRef<VDI> copy(Session session, string _vdi, string _sr, string _base_vdi, string _into_vdi)
         {
             return XenRef<VDI>.Create(session.proxy.vdi_copy(session.uuid, (_vdi != null) ? _vdi : "", (_sr != null) ? _sr : "", (_base_vdi != null) ? _base_vdi : "", (_into_vdi != null) ? _into_vdi : "").parse());
@@ -1307,8 +1307,8 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         /// <param name="_sr">The destination SR (only required if the destination VDI is not specified</param>
-        /// <param name="_base_vdi">The base VDI (only required if copying only changed blocks, by default all blocks will be copied) First published in XenServer 6.2 SP1 Hotfix XS62ESP1004.</param>
-        /// <param name="_into_vdi">The destination VDI to copy blocks into (if omitted then a destination SR must be provided and a fresh VDI will be created) First published in XenServer 6.2 SP1 Hotfix XS62ESP1004.</param>
+        /// <param name="_base_vdi">The base VDI (only required if copying only changed blocks, by default all blocks will be copied) First published in XenServer 6.2 SP1 Hotfix 4.</param>
+        /// <param name="_into_vdi">The destination VDI to copy blocks into (if omitted then a destination SR must be provided and a fresh VDI will be created) First published in XenServer 6.2 SP1 Hotfix 4.</param>
         public static XenRef<Task> async_copy(Session session, string _vdi, string _sr, string _base_vdi, string _into_vdi)
         {
             return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.uuid, (_vdi != null) ? _vdi : "", (_sr != null) ? _sr : "", (_base_vdi != null) ? _base_vdi : "", (_into_vdi != null) ? _into_vdi : "").parse());
@@ -2196,7 +2196,7 @@ namespace XenAPI
 
         /// <summary>
         /// Whether this VDI is a Tools ISO
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool is_tools_iso
         {

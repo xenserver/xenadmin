@@ -150,7 +150,11 @@
   <data name="textBox1.Text" xml:space="preserve">
     <value>everRun is a registered trademark of Stratus Technologies Bermuda Limited.
 
-XML-RPC.NET: Copyright © 2001-2006 Charles Cook.
+XML-RPC.NET - XML-RPC for .NET: Copyright (C) 2001-2010 Charles Cook (chascook@gmail.com)
+xmlrpcgen: Copyright (C) 2003 Joe Bork
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Log4Net: Developed by The Apache Software Foundation (http://www.apache.org/) as part of the Apache Logging Services project (http://logging.apache.org/log4net/), and released under the Apache software license.
 To learn more about the Apache software license, please visit http://www.apache.org/licenses/LICENSE-2.0. 

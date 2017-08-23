@@ -1006,7 +1006,7 @@ namespace XenAPI
         /// Sort in the following order:
         /// 1) User Templates
         /// 2) Windows VMs
-        /// 3) Other VMs (e.g. Linux)
+        /// 3) Other VMs (e.g. Linux . Names in alphabetical order)
         /// 4) Citrix VMs (e.g. XenApp templates)
         /// 5) Misc VMs
         /// 6) Regular snapshots
@@ -1018,21 +1018,26 @@ namespace XenAPI
             NoTemplate = 0,//it's not a template
             Custom = 1,
             Windows = 2,
-            Centos = 3,
-            CoreOS = 4,
-            Debian = 5,
-            NeoKylin = 6,
-            Oracle = 7,
-            RedHat = 8,
-            SciLinux = 9,
-            Suse = 10,
-            Ubuntu = 11,
-            Citrix = 12,
-            Solaris = 13,
-            Misc = 14,
-            Snapshot = 15,
-            SnapshotFromVmpp = 16,
-            Count = 17  //bump this if values are added
+            LegacyWindows = 3,
+            Asianux  = 4,
+            Centos = 5,
+            CoreOS = 6,
+            Debian = 7,
+            Linx = 8,
+            NeoKylin = 9,
+            Oracle = 10,
+            RedHat = 11,
+            SciLinux = 12,
+            Suse = 13,
+            Turbo = 14,
+            Ubuntu = 15,
+            YinheKylin = 16,
+            Citrix = 17,
+            Solaris = 18,
+            Misc = 19,
+            Snapshot = 20,
+            SnapshotFromVmpp = 21,
+            Count = 22  //bump this if values are added
         }
 
         public VmTemplateType TemplateType
@@ -1062,6 +1067,9 @@ namespace XenAPI
                 if (os.Contains("centos"))
                     return VmTemplateType.Centos;
 
+                if (os.Contains("linx"))
+                    return VmTemplateType.Linx;
+
                 if (os.Contains("red hat"))
                     return VmTemplateType.RedHat;
 
@@ -1074,14 +1082,26 @@ namespace XenAPI
                 if (os.Contains("scientific"))
                     return VmTemplateType.SciLinux;
 
+                if (os.Contains("legacy windows"))
+                    return VmTemplateType.LegacyWindows; 
+
                 if (os.Contains("windows"))
                     return VmTemplateType.Windows;
 
                 if (os.Contains("ubuntu"))
                     return VmTemplateType.Ubuntu;
 
+                if (os.Contains("yinhe"))
+                    return VmTemplateType.YinheKylin;
+
                 if (os.Contains("kylin"))
                     return VmTemplateType.NeoKylin;
+
+                if (os.Contains("asianux"))
+                    return VmTemplateType.Asianux;
+
+                if (os.Contains("turbo"))
+                    return VmTemplateType.Turbo; 
 
                 if (os.Contains("solaris"))
                     return VmTemplateType.Solaris;
@@ -2093,7 +2113,7 @@ namespace XenAPI
         {
             get
             {
-                return !IsWindows && Helpers.TampaOrGreater(Connection) && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
+                return !IsWindows && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
             }
         }
 

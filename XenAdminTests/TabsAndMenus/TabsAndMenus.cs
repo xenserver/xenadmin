@@ -343,7 +343,7 @@ namespace XenAdminTests.TabsAndMenus
 
         protected static bool CanConvertSR(SR sr)
         {
-            return sr != null && Helpers.DundeeOrGreater(sr.Connection) && (sr.type == "lvmohba" || sr.type == "lvmoiscsi") && !sr.IsThinProvisioned;
+            return sr != null && Helpers.DundeeOrGreater(sr.Connection) && (sr.type == "lvmohba" || sr.type == "lvmoiscsi");
         }
 
         /// <summary>

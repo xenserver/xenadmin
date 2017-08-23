@@ -348,6 +348,45 @@
   <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="toggleConsoleButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="toggleConsoleButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toggleConsoleButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="toggleConsoleButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>522, 6</value>
+  </data>
+  <data name="toggleConsoleButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 6, 6</value>
+  </data>
+  <data name="toggleConsoleButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 24</value>
+  </data>
+  <data name="toggleConsoleButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="toggleConsoleButton.Text" xml:space="preserve">
+    <value>ゲスト コンソールの検索中...</value>
+  </data>
+  <data name="toggleConsoleButton.ToolTip" xml:space="preserve">
+    <value>このゲストではリモート アクセスが有効になっていません</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Name" xml:space="preserve">
+    <value>toggleConsoleButton</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="LifeCycleMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>81, 17</value>
   </metadata>
@@ -509,45 +548,6 @@
   </data>
   <data name="&gt;&gt;buttonSSH.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="toggleConsoleButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="toggleConsoleButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toggleConsoleButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="toggleConsoleButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>522, 6</value>
-  </data>
-  <data name="toggleConsoleButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 6, 6</value>
-  </data>
-  <data name="toggleConsoleButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 24</value>
-  </data>
-  <data name="toggleConsoleButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="toggleConsoleButton.Text" xml:space="preserve">
-    <value>ゲスト コンソールの検索中...</value>
-  </data>
-  <data name="toggleConsoleButton.ToolTip" xml:space="preserve">
-    <value>このゲストではリモート アクセスが有効になっていません</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Name" xml:space="preserve">
-    <value>toggleConsoleButton</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="multipleDvdIsoList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

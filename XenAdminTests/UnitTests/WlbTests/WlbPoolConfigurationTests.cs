@@ -43,7 +43,7 @@ namespace XenAdminTests.UnitTests.WlbTests
     {
         private IUnitTestVerifier validator;
         private WlbPoolConfiguration wlbPool;
-        private const int NUMBER_OF_PROPERTIES = 36;
+        private const int NUMBER_OF_PROPERTIES = 33;
 
         [Test, ExpectedException(typeof(Exception))]
         public void NullCtorThrows()
@@ -81,7 +81,7 @@ namespace XenAdminTests.UnitTests.WlbTests
         }
 
         [Test]
-        public void SettersThatSetOnlyForMROrLaterForVersionNewerThanMR()
+        public void SettersTest()
         {
 
             Dictionary<string, string> inputData =  new Dictionary<string, string>()
@@ -111,48 +111,6 @@ namespace XenAdminTests.UnitTests.WlbTests
 
             validator.Verify( expectedData);
 
-        }
-
-        [Test]
-        public void SettersThatSetOnlyForMROrLaterForVersionOlderThanMR()
-        {
-
-            Dictionary<string, string> inputData = new Dictionary<string, string>()
-                                                        {
-                                                            {"WlbVersion", "1.0"},
-                                                            {"AutoBalanceEnabled", "false"},
-                                                            {"AutoBalancePollIntervals", "1.0"},
-                                                            {"AutoBalanceSeverity", "High"},
-                                                            {"AutoBalanceAggressiveness", "High"},
-                                                            {"PowerManagementEnabled", "false"},
-                                                            {"PowerManagementPollIntervals", "5.0"},
-                                                            {"EnableOptimizationModeSchedules", "false"} //Equal to AutomateOptimizationMode
-                                                        };
-            VerifyGettersAndSetters validatorGetSet = new VerifyGettersAndSetters(new WlbPoolConfiguration(inputData));
-
-            MRSensitiveData expectedData = new MRSensitiveData()
-            {
-                AutoBalanceEnabled = false,
-                AutoBalancePollIntervals = 1.0,
-                AutoBalanceSeverity = WlbPoolAutoBalanceSeverity.High,
-                AutoBalanceAggressiveness = WlbPoolAutoBalanceAggressiveness.High,
-                PowerManagementEnabled = false,
-                PowerManagementPollIntervals = 5.0,
-                AutomateOptimizationMode = false
-            };
-
-            MRSensitiveData dataToSet = new MRSensitiveData()
-            {
-                AutoBalanceEnabled = true,
-                AutoBalancePollIntervals = 2.0,
-                AutoBalanceSeverity = WlbPoolAutoBalanceSeverity.Low,
-                AutoBalanceAggressiveness = WlbPoolAutoBalanceAggressiveness.Medium,
-                PowerManagementEnabled = true,
-                PowerManagementPollIntervals = 7.0,
-                AutomateOptimizationMode = true
-            };
-
-            validatorGetSet.VerifySettersAndGetters(expectedData, dataToSet);
         }
 
         [Test]

@@ -37,7 +37,7 @@ echo "INFO:	copyrightcheck"
 dir="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 src="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 
-output=$( /usr/bin/find "$src/XenAdmin" "$src/XenModel" "$src/XenOvfApi" "$src/XenOvfTransport" "$src/mk" "$src/Branding" "$src/XenServerHealthCheckTests" "$src/devtools" "$src/dotNetInstaller" -not -ipath '*obj/*' -type f \( -iname \*.cs -o -iname \*.sh \) -not -ipath '*Designer*' -exec grep -L "Copyright (c) Citrix Systems, Inc." {} \;)
+output=$( /usr/bin/find "$src/XenAdmin" "$src/XenModel" "$src/XenOvfApi" "$src/XenOvfTransport" "$src/mk" "$src/Branding" "$src/XenServerHealthCheckTests" "$src/devtools" -not -ipath '*obj/*' -type f \( -iname \*.cs -o -iname \*.sh \) -not -ipath '*Designer*' -exec grep -L "Copyright (c) Citrix Systems, Inc." {} \;)
 
 echo "$output" | sed -e "s,$src/,,g"
 

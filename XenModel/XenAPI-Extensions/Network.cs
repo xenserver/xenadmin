@@ -116,7 +116,15 @@ namespace XenAPI
         private string PIFName(PIF pif)
         {
             bool bond;
-            return string.Format(Messages.NETWORK_NAME, pif.NICIdentifier(out bond));
+
+            if (pif.VLAN >= 0)
+            {
+                return string.Format(Messages.VLAN_NETWORK_NAME, pif.NICIdentifier(out bond), pif.VLAN);
+            }
+            else
+            {
+                return string.Format(Messages.NETWORK_NAME, pif.NICIdentifier(out bond));
+            }
         }
 
         public bool AutoPlug

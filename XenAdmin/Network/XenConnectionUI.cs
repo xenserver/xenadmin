@@ -212,17 +212,21 @@ namespace XenAdmin.Network
                     return;
 
                 WebException w = (WebException)error;
+
+                var solutionCheckXenServer = 
+                    Properties.Settings.Default.ProxySetting != (int)HTTPHelper.ProxyStyle.DirectConnection ? Messages.SOLUTION_CHECK_XENSERVER_WITH_PROXY : Messages.SOLUTION_CHECK_XENSERVER;
+
                 switch (w.Status)
                 {
                     case WebExceptionStatus.ConnectionClosed:
-                        AddError(owner, connection, Messages.CONNECTION_CLOSED_BY_SERVER, string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, Messages.CONNECTION_CLOSED_BY_SERVER, string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
                         break;
                     case WebExceptionStatus.ConnectFailure:
-                        AddError(owner, connection, Messages.CONNECTION_REFUSED, string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, Messages.CONNECTION_REFUSED, string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
                         break;
                     case WebExceptionStatus.ProtocolError:
                         if (w.Message != null && w.Message.Contains("(404)"))
-                            AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                            AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
                         else if (w.Message != null && w.Message.Contains("(407)"))
                         {
                             string proxyAddress = Properties.Settings.Default.ProxyAddress;
@@ -236,7 +240,7 @@ namespace XenAdmin.Network
                         break;
                     case WebExceptionStatus.ReceiveFailure:
                     case WebExceptionStatus.SendFailure:
-                        AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(Messages.SOLUTION_CHECK_XENSERVER, ((XenConnection)connection).Hostname));
+                        AddError(owner, connection, string.Format(Messages.ERROR_NO_XENSERVER, ((XenConnection)connection).Hostname), string.Format(solutionCheckXenServer, ((XenConnection)connection).Hostname));
                         break;
                     case WebExceptionStatus.SecureChannelFailure:
                         AddError(owner, connection, string.Format(Messages.ERROR_SECURE_CHANNEL_FAILURE, ((XenConnection)connection).Hostname), Messages.SOLUTION_UNKNOWN);

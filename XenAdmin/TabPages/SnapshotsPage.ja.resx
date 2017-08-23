@@ -261,9 +261,6 @@
   <data name="tableLayoutPanelSimpleSelection.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="folderLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="folderLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -281,6 +278,9 @@
   </data>
   <data name="folderLabel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 25</value>
+  </data>
+  <data name="folderLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
   </data>
   <data name="folderLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 25</value>
@@ -333,9 +333,6 @@
   <data name="&gt;&gt;sizeLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tagsLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="tagsLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -353,6 +350,9 @@
   </data>
   <data name="tagsLabel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 25</value>
+  </data>
+  <data name="tagsLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
   </data>
   <data name="tagsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 25</value>
@@ -558,9 +558,6 @@
   <data name="&gt;&gt;tagsTitleLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="customFieldTitle1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="customFieldTitle1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -612,6 +609,9 @@
   <data name="customFieldContent1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
+  <data name="customFieldContent1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
   <data name="customFieldContent1.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 27</value>
   </data>
@@ -629,9 +629,6 @@
   </data>
   <data name="&gt;&gt;customFieldContent1.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="customFieldTitle2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="customFieldTitle2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -682,6 +679,9 @@
     <value>106, 143</value>
   </data>
   <data name="customFieldContent2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
+  <data name="customFieldContent2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="customFieldContent2.Size" type="System.Drawing.Size, System.Drawing">
@@ -742,6 +742,9 @@
     <value>106, 31</value>
   </data>
   <data name="labelMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 0, 0</value>
+  </data>
+  <data name="labelMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 0, 0</value>
   </data>
   <data name="labelMode.Size" type="System.Drawing.Size, System.Drawing">
@@ -1108,7 +1111,7 @@
     <value>0</value>
   </data>
   <data name="contentTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="panelPropertiesColumn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="viewPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,Absolute,233" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="panelPropertiesColumn" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="viewPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100,Absolute,261" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1123,10 +1126,10 @@
     <value>NoControl</value>
   </data>
   <data name="newSnapshotButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>0, 3</value>
   </data>
   <data name="newSnapshotButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 30</value>
+    <value>133, 23</value>
   </data>
   <data name="newSnapshotButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1204,7 +1207,7 @@
     <value>408, 3</value>
   </data>
   <data name="buttonView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>75, 23</value>
   </data>
   <data name="buttonView.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1445,12 +1448,6 @@
   </data>
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>ファイルにエクスポート(&amp;X)...</value>
-  </data>
-  <data name="archiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="archiveToolStripMenuItem.Text" xml:space="preserve">
-    <value>直ちにアーカイブ(&amp;A)</value>
   </data>
   <data name="separatorDeleteToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 6</value>
@@ -1785,12 +1782,6 @@
   <data name="exportAsBackupToolStripMenuItem.Text" xml:space="preserve">
     <value>ファイルにエクスポート(&amp;X)...</value>
   </data>
-  <data name="archiveSnapshotNowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="archiveSnapshotNowToolStripMenuItem.Text" xml:space="preserve">
-    <value>直ちにアーカイブ(&amp;A)</value>
-  </data>
   <data name="saveMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 98</value>
   </data>
@@ -1822,7 +1813,7 @@
     <value>186, 22</value>
   </data>
   <data name="toolStripMenuItemScheduledSnapshots.Text" xml:space="preserve">
-    <value>スケジュールによるスナップショット(&amp;S)</value>
+    <value>定期的なスナップショット作成(&amp;S)</value>
   </data>
   <data name="contextMenuStripView.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 76</value>
@@ -1885,12 +1876,6 @@
     <value>exportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exportToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;archiveToolStripMenuItem.Name" xml:space="preserve">
-    <value>archiveToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;archiveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;separatorDeleteToolStripSeparator.Name" xml:space="preserve">
@@ -2011,12 +1996,6 @@
     <value>exportAsBackupToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exportAsBackupToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;archiveSnapshotNowToolStripMenuItem.Name" xml:space="preserve">
-    <value>archiveSnapshotNowToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;archiveSnapshotNowToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonListView.Name" xml:space="preserve">

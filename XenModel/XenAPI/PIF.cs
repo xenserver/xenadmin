@@ -683,7 +683,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the capabilities field of the given PIF.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1905,7 +1905,7 @@ namespace XenAPI
 
         /// <summary>
         /// Additional capabilities on the interface.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string[] capabilities
         {

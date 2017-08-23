@@ -15,7 +15,7 @@
         {
             if (disposing)
             {
-                XenAdmin.Core.Updates.DeregisterCollectionChanged(UpdatesCollectionChanged);
+                XenAdmin.Core.Updates.DeregisterCollectionChanged(m_updateCollectionChangedWithInvoke);
                 XenAdmin.Core.Updates.RestoreDismissedUpdatesStarted -= Updates_RestoreDismissedUpdatesStarted;
                 XenAdmin.Core.Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
                 XenAdmin.Core.Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
@@ -45,7 +45,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.AutoCheckForUpdatesDisabledLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.checkForUpdatesNowButton2 = new System.Windows.Forms.LinkLabel();
+            this.checkForUpdatesNowLink = new System.Windows.Forms.LinkLabel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -53,6 +53,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.labelProgress = new System.Windows.Forms.Label();
             this.pictureBoxProgress = new System.Windows.Forms.PictureBox();
+            this.tableLayouPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new XenAdmin.Controls.ToolStripEx();
             this.toolStripDropDownButtonServerFilter = new XenAdmin.Controls.FilterLocationToolStripDropDownButton();
             this.toolStripDropDownButtonDateFilter = new XenAdmin.Controls.FilterDatesToolStripDropDownButton();
@@ -78,6 +79,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).BeginInit();
+            this.tableLayouPanel5.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).BeginInit();
             this.SuspendLayout();
@@ -106,11 +108,8 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel2.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.checkForUpdatesNowButton2, 2, 1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // AutoCheckForUpdatesDisabledLabel
@@ -121,16 +120,16 @@
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // checkForUpdatesNowButton2
+            // checkForUpdatesNowLink
             // 
-            resources.ApplyResources(this.checkForUpdatesNowButton2, "checkForUpdatesNowButton2");
-            this.checkForUpdatesNowButton2.LinkColor = System.Drawing.Color.Black;
-            this.checkForUpdatesNowButton2.Name = "checkForUpdatesNowButton2";
-            this.checkForUpdatesNowButton2.TabStop = true;
-            this.checkForUpdatesNowButton2.Click += new System.EventHandler(this.checkForUpdatesNowButton2_Click);
+            resources.ApplyResources(this.checkForUpdatesNowLink, "checkForUpdatesNowLink");
+            this.checkForUpdatesNowLink.Name = "checkForUpdatesNowLink";
+            this.checkForUpdatesNowLink.TabStop = true;
+            this.checkForUpdatesNowLink.Click += new System.EventHandler(this.checkForUpdatesNowLink_Click);
             // 
             // button2
             // 
@@ -179,13 +178,22 @@
             this.pictureBoxProgress.Name = "pictureBoxProgress";
             this.pictureBoxProgress.TabStop = false;
             // 
+            // tableLayouPanel5
+            // 
+            resources.ApplyResources(this.tableLayouPanel5, "tableLayouPanel5");
+            this.tableLayouPanel5.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayouPanel5.Controls.Add(this.checkForUpdatesNowLink, 2, 0);
+            this.tableLayouPanel5.Controls.Add(this.AutoCheckForUpdatesDisabledLabel, 1, 0);
+            this.tableLayouPanel5.Controls.Add(this.dataGridViewUpdates, 0, 1);
+            this.tableLayouPanel5.Name = "tableLayouPanel5";
+            // 
             // toolStrip1
             // 
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStrip1.ClickThrough = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.toolStrip1, 3);
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButtonServerFilter,
             this.toolStripDropDownButtonDateFilter,
@@ -278,7 +286,6 @@
             // 
             // dataGridViewUpdates
             // 
-            resources.ApplyResources(this.dataGridViewUpdates, "dataGridViewUpdates");
             this.dataGridViewUpdates.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewUpdates.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewUpdates.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -289,6 +296,8 @@
             this.ColumnLocation,
             this.ColumnDate,
             this.ColumnWebPage});
+            this.tableLayouPanel5.SetColumnSpan(this.dataGridViewUpdates, 3);
+            resources.ApplyResources(this.dataGridViewUpdates, "dataGridViewUpdates");
             this.dataGridViewUpdates.MultiSelect = true;
             this.dataGridViewUpdates.Name = "dataGridViewUpdates";
             this.dataGridViewUpdates.ReadOnly = true;
@@ -356,20 +365,21 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayouPanel5);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.dataGridViewUpdates);
             this.Name = "ManageUpdatesPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.informationLabelIcon)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProgress)).EndInit();
+            this.tableLayouPanel5.ResumeLayout(false);
+            this.tableLayouPanel5.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUpdates)).EndInit();
@@ -403,7 +413,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonRestoreDismissed;
         private System.Windows.Forms.Label AutoCheckForUpdatesDisabledLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel checkForUpdatesNowButton2;
+        private System.Windows.Forms.LinkLabel checkForUpdatesNowLink;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button checkForUpdatesNowButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -412,5 +422,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnWebPage;
+        private System.Windows.Forms.TableLayoutPanel tableLayouPanel5;
     }
 }

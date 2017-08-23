@@ -38,6 +38,7 @@ using Citrix.XenCenter;
 using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
+using System.Diagnostics;
 
 
 namespace XenAPI
@@ -49,10 +50,6 @@ namespace XenAPI
         public enum Edition
         {
             Free,
-            Advanced,
-            Enterprise,
-            Platinum,
-            EnterpriseXD,
             PerSocket,     //Added in Clearwater (PR-1589)
             XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
             EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
@@ -79,14 +76,6 @@ namespace XenAPI
         {
             switch (editionText)
             {
-                case "advanced":
-                    return Edition.Advanced;
-                case "enterprise":
-                    return Edition.Enterprise;
-                case "enterprise-xd":
-                    return Edition.EnterpriseXD;
-                case "platinum":
-                    return Edition.Platinum;
                 case "xendesktop":
                     return Edition.XenDesktop;
                 case "per-socket":
@@ -135,14 +124,7 @@ namespace XenAPI
         {
             switch (edition)
             {
-                case Edition.Advanced:
-                    return "advanced";
-                case Edition.Enterprise:
-                    return "enterprise";
-                case Edition.Platinum:
-                    return "platinum";
-                case Edition.EnterpriseXD:
-                    return "enterprise-xd";
+
                 case Edition.XenDesktop:
                     return "xendesktop";
                 case Edition.PerSocket:
@@ -314,16 +296,6 @@ namespace XenAPI
             get { return BoolKeyPreferTrue(license_params, "restrict_pooling"); }
         }
 
-        public static bool RestrictVMProtection(Host h)
-        {
-            return h._RestrictVMProtection;
-        }
-
-        private bool _RestrictVMProtection
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_vmpr"); }
-        }
-
         public static bool RestrictVMSnapshotSchedule(Host h)
         {
             return h._RestrictVMSnapshotSchedule;
@@ -434,6 +406,16 @@ namespace XenAPI
             return h._RestrictVgpu;
         }
 
+        public bool _RestrictManagementOnVLAN
+        {
+            get { return BoolKeyPreferTrue(license_params, "restrict_management_on_vlan"); }
+        }
+
+        public static bool RestrictManagementOnVLAN(Host h)
+        {
+            return h._RestrictManagementOnVLAN;
+        }
+
         private bool _RestrictIntegratedGpuPassthrough
         {
             get { return BoolKeyPreferTrue(license_params, "restrict_integrated_gpu_passthrough"); }
@@ -453,10 +435,9 @@ namespace XenAPI
                     return BoolKeyPreferTrue(license_params, "restrict_export_resource_data");
                 }
                 // Pre-Creedence hosts:
-                // allowed on Per-Socket edition for Clearwater hosts and Advanced, Enterprise and Platinum editions for older hosts
+                // allowed on Per-Socket edition for Clearwater hosts
                 var hostEdition = GetEdition(edition);
-                if (hostEdition == Edition.PerSocket || hostEdition == Edition.Advanced ||
-                    hostEdition == Edition.Enterprise || hostEdition == Edition.Platinum)
+                if (hostEdition == Edition.PerSocket)
                 {
                     return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
                 }
@@ -713,14 +694,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// For legacy build numbers only (used to be integers + one char at the end)
+        /// From Falcon, this property is not used.
+        /// </summary>
+        /// <remarks>
         /// Return the build number of this host, or -1 if none can be found.  This will often be
         /// 0 or -1 for developer builds, so comparisons should generally treat those numbers as if
         /// they were brand new.
-        /// </summary>
-        public int BuildNumber
+        /// </remarks>
+        internal int BuildNumber
         {
             get
             {
+                Debug.Assert(!Helpers.ElyOrGreater(this));
+
                 string bn = BuildNumberRaw;
                 if (bn == null)
                     return -1;
@@ -737,8 +724,11 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Return the build number of this host, without stripping off the final letter etc.; or null if none can be found.
+        /// Return the exact build_number of this host
         /// </summary>
+        /// <remarks>
+        /// null if not found
+        /// </remarks>
         public virtual string BuildNumberRaw
         {
             get { return Get(software_version, "build_number"); }
@@ -752,16 +742,8 @@ namespace XenAPI
             get
             {
                 string productVersion = ProductVersion;
-                return productVersion != null ? string.Format("{0}.{1}", productVersion, BuildNumber) : null;
+                return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.ElyOrGreater(this) ? BuildNumberRaw : BuildNumber.ToString()) : null;
             }
-        }
-
-        /// <summary>
-        /// Return the hg_id (Mercurial changeset number) of xapi on this host, or null if none can be found.
-        /// </summary>
-        public string hg_id
-        {
-            get { return Get(software_version, "hg_id"); }
         }
 
         /// <summary>
@@ -770,19 +752,6 @@ namespace XenAPI
         public string ProductBrand
         {
             get { return Get(software_version, "product_brand"); }
-        }
-
-        /// <summary>
-        /// Whether this host is an XCP host
-        /// </summary>
-        public bool IsXCP
-        {
-            get
-            {
-                return
-                    ProductVersion == null && PlatformVersion != null ||  // for Tampa and later
-                    ProductBrand == "XCP";  // for Boston and earlier
-            }
         }
 
         /// <summary>
@@ -1003,7 +972,7 @@ namespace XenAPI
         /// Save the list of VMs on this host, so we can try and put them back when finished.
         /// This may get run multiple times, after which some vms will have been suspended / shutdown.
         /// </summary>
-        /// <param name="session">Pass in the session you wish to use for the other config writing</param>
+        /// <param name="session">Pass in the session you want to use for the other config writing</param>
         public void SaveEvacuatedVMs(Session session)
         {
             //Program.AssertOffEventThread();
@@ -1208,6 +1177,11 @@ namespace XenAPI
         public int XenCenterMax
         {
             get { return GetSVAsInt("xencenter_max"); }
+        }
+
+        public string GetDatabaseSchema()
+        {
+            return Get(software_version, "db_schema");
         }
 
         /// <summary>
@@ -1555,9 +1529,6 @@ namespace XenAPI
         {
             get
             {
-                if(!Helpers.ClearwaterOrGreater(Connection))
-                    return true;
-                
                 return !Helpers.FeatureForbidden(Connection, RestrictHotfixApply);
             }
         }
@@ -1658,7 +1629,7 @@ namespace XenAPI
             private bool parsed = false;
             public bool IsValid { get { return parsed; } }
 
-            public string LongDescription { get { return string.Format(Messages.SUPP_PACK_DESCTIPTION, description, version); } }
+            public string LongDescription { get { return string.Format(Messages.SUPP_PACK_DESCRIPTION, description, version); } }
 
             /// <summary>
             /// Try to parse the supp pack information from one key of software_version

@@ -225,20 +225,11 @@
   <data name="UPSELL_LEARNMOREURL_VM_APPLIANCES" xml:space="preserve">
     <value>http://www.citrix.com/xenserver/le/features/vapps</value>
   </data>
-  <data name="UPSELL_LEARNMOREURL_VM_PROTECTION" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/vmpr</value>
-  </data>
   <data name="UPSELL_LEARNMOREURL_WLB" xml:space="preserve">
     <value>http://www.citrix.com/xenserver/le/features/wlb</value>
   </data>
   <data name="UPSELL_SA" xml:space="preserve">
     <value>http://store.citrix.com/XSInProduct</value>
-  </data>
-  <data name="VMPR_DEPRECATION_URL" xml:space="preserve">
-    <value>http://support.citrix.com/article/CTX137335</value>
-  </data>
-  <data name="WSS_DEPRECATION_URL" xml:space="preserve">
-    <value>http://support.citrix.com/article/CTX137334</value>
   </data>
   <data name="XENDESKTOP_URL" xml:space="preserve">
     <value>http://www.citrix.com/TryXenDesktop</value>
@@ -247,7 +238,7 @@
     <value>xsupdate</value>
   </data>
   <data name="XENSERVER_UPDATE_URL" xml:space="preserve">
-    <value>http://updates.xensource.com/XenServer/updates.xml</value>
+    <value>https://updates.xensource.com/XenServer/updates.xml</value>
   </data>
   <data name="UPSELL_LEARNMOREURL_AD" xml:space="preserve">
     <value>http://www.citrix.com/xenserver/le/features/ad</value>

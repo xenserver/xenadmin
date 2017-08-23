@@ -267,12 +267,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 if (item.OverCommit != DiskOverCommit.None)
                 {
-                    item.ImageToolTip = sr.IsThinProvisioned ? 
-                        string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN,
-                                                Helpers.GetName(sr),
-                                                Util.DiskSizeString(sr.FreeSpace),
-                                                Util.DiskSizeString(totalDiskSize[sr.opaque_ref]), 
-                                                Util.DiskSizeString(totalDiskInitialAllocation[sr.opaque_ref])) :
+                    item.ImageToolTip = 
                         string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT, 
                                                 Helpers.GetName(sr), 
                                                 Util.DiskSizeString(sr.FreeSpace),
@@ -320,7 +315,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                if (!Template.DefaultTemplate && !CloneCheckBox.Checked)
+                if (!Template.DefaultTemplate && !Template.is_a_snapshot && !CloneCheckBox.Checked)
                 {
                     // if target disks are all on the same SR then use that SR
                     // otherwise iterate through disks and find first target disks that is on same SR as source disk

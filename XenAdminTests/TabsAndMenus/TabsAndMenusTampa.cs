@@ -268,7 +268,7 @@ namespace XenAdminTests.TabsAndMenus
         {
             foreach (VM vm in GetAllXenObjects<VM>(HasTools))
             {
-                if(vm.Name.Contains("23")) //Skip over the slave servers VMs 
+                if(vm.Name.Contains("22")) //Skip over the slave servers VMs 
                     continue;
 
                 List<ExpectedMenuItem> expectedMenuItems = new List<ExpectedMenuItem>();
@@ -298,7 +298,6 @@ namespace XenAdminTests.TabsAndMenus
                                                                        }));
                 expectedMenuItems.Add(new ExpectedSeparator());
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Ta&ke a Snapshot...", true));
-                expectedMenuItems.Add(new ExpectedTextMenuItem("Assign to VM Protection Polic&y", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New Policy...", true)}));
                 expectedMenuItems.Add(new ExpectedTextMenuItem("Assign to vA&pp", true, new ExpectedMenuItem[] { new ExpectedTextMenuItem("&New vApp...", true)}));
                 
                 

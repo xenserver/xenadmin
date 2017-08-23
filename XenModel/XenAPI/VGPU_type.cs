@@ -364,7 +364,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the implementation field of the given VGPU_type.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
@@ -375,7 +375,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the identifier field of the given VGPU_type.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
@@ -386,7 +386,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the experimental field of the given VGPU_type.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vgpu_type">The opaque_ref of the given vgpu_type</param>
@@ -637,7 +637,7 @@ namespace XenAPI
 
         /// <summary>
         /// The internal implementation of this VGPU type
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual vgpu_type_implementation implementation
         {
@@ -656,7 +656,7 @@ namespace XenAPI
 
         /// <summary>
         /// Key used to identify VGPU types and avoid creating duplicates - this field is used internally and not intended for interpretation by API clients
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string identifier
         {
@@ -675,7 +675,7 @@ namespace XenAPI
 
         /// <summary>
         /// Indicates whether VGPUs of this type should be considered experimental
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool experimental
         {

@@ -32,7 +32,7 @@
 
 set -eu
 
-WORDS="activiat.*\|appropiate\|availible\|availilbe\|availble\|cusomize\|debain\|defintion\|deleteing\|dependan.*\|destory\|equalogic\|extactly\|futher\|heath\|inteval\|maintainance\|maintainence\|maintanence\|maintenence\|managment\|mulitple\|neccessary\|numberic\|occured\|organis.*\|performace\|pervious\|prefered\|proirity\|reciev.*\|reciv.*\|remeber\|repositary\|seach\|seperat.*\|.*[^r]sever[^aei].*\|shrotcut\|sotre\|stroage\|strorage\|suceed.*\|sucess\|succesful\|updateing\|whilst\|licence[s]\?"
+WORDS="activiat.*\|appropiate\|availible\|availilbe\|availble\|cusomize\|debain\|defintion\|deleteing\|dependan.*\|destory\|equalogic\|extactly\|futher\|heath\|inteval\|maintainance\|maintainence\|maintanence\|maintenence\|managment\|mulitple\|neccessary\|numberic\|occured\|organis.*\|performace\|pervious\|prefered\|proirity\|reciev.*\|reciv.*\|remeber\|repositary\|seach\|seperat.*\|.*[^r]sever[^aei].*\|shrotcut\|sotre\|stroage\|strorage\|suceed.*\|sucess\|succesful\|updateing\|whilst\|wish\|licence[s]\?"
 
 FOUND_TYPO=$(grep -iow $WORDS $1)
 if [ "${FOUND_TYPO}" != "" ]

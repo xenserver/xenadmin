@@ -46,15 +46,82 @@ namespace XenAdmin.Alerts
     {
         public const String MAIL_DESTINATION_KEY_NAME = "mail-destination";
         public const String SMTP_MAILHUB_KEY_NAME = "ssmtp-mailhub";
+        public const String MAIL_LANGUAGE_KEY_NAME = "mail-language";
+
+        private class MailLanguageList
+        {
+            private Dictionary<String, String> _list;
+
+            public MailLanguageList(Dictionary<String, String> initList)
+            {
+                _list = new Dictionary<String, String>(initList);
+            }
+
+            public String CodeFromName(String name)
+            {
+                String ret = null;
+
+                if (null == name)
+                    return ret;
+
+                foreach(KeyValuePair<String, String> pair in _list)
+                {
+                    if(pair.Value == name)
+                    {
+                        ret = pair.Key;
+                        break;
+                    }
+                }
+
+                return ret;
+            }
+
+            public String NameFromCode(String code)
+            {
+                String ret = null;
+
+                if (null == code)
+                    return ret;
+
+                foreach (KeyValuePair<String, String> pair in _list)
+                {
+                    if (pair.Key == code)
+                    {
+                        ret = pair.Value;
+                        break;
+                    }
+                }
+
+                return ret;
+            }
+
+            public bool HasCode(String code)
+            {
+                return null == code ? false : _list.ContainsKey(code);
+            }
+
+            public Dictionary<String, String> dataSource()
+            {
+                return new Dictionary<String, String>(_list);
+            }
+        }
 
         private static readonly char[] mailHubDelim = new char[] { ':' };
         private readonly String mailHub;
         private readonly String mailDestination;
+        private readonly String mailLanguageCode;
 
-        public PerfmonOptionsDefinition(String mailHub, String mailDestination)
+        private static MailLanguageList ml_list = new MailLanguageList(new Dictionary<String, String>() {
+            {Messages.MAIL_LANGUAGE_ENGLISH_CODE, Messages.MAIL_LANGUAGE_ENGLISH_NAME},
+            {Messages.MAIL_LANGUAGE_CHINESE_CODE, Messages.MAIL_LANGUAGE_CHINESE_NAME},
+            {Messages.MAIL_LANGUAGE_JAPANESE_CODE, Messages.MAIL_LANGUAGE_JAPANESE_NAME}
+        });
+
+        public PerfmonOptionsDefinition(String mailHub, String mailDestination, String mailLanguageCode)
         {
             this.mailHub = mailHub;
             this.mailDestination = mailDestination;
+            this.mailLanguageCode = mailLanguageCode;
         }
 
         public String MailHub
@@ -70,6 +137,22 @@ namespace XenAdmin.Alerts
             get
             {
                 return mailDestination;
+            }
+        }
+
+        public String MailLanguageCode
+        {
+            get
+            {
+                return mailLanguageCode;
+            }
+        }
+
+        public String MailLanguageName
+        {
+            get
+            {
+                return ml_list.NameFromCode(mailLanguageCode);
             }
         }
 
@@ -117,11 +200,12 @@ namespace XenAdmin.Alerts
 
             string mailDestination = GetMailDestination(connection);
             string mailHub = GetSmtpMailHub(connection);
+            string mailLanguageCode = GetMailLanguageCode(connection);
 
-            if (mailDestination == null || mailDestination == null)
+            if (mailDestination == null || mailHub == null)
                 return null;
 
-            return new PerfmonOptionsDefinition(mailHub, mailDestination);
+            return new PerfmonOptionsDefinition(mailHub, mailDestination, mailLanguageCode);
         }
 
         public static string GetMailDestination(IXenConnection connection)
@@ -170,6 +254,50 @@ namespace XenAdmin.Alerts
                 return null;
 
             return mailHub;
+        }
+
+        public static string GetMailLanguageCode(IXenConnection connection)
+        {
+            Pool pool = Helpers.GetPoolOfOne(connection);
+            if (pool == null)
+                return null;
+
+            Dictionary<String, String> other_config = Helpers.GetOtherConfig(pool);
+            if (other_config == null)
+                return null;
+
+            if (!other_config.ContainsKey(MAIL_LANGUAGE_KEY_NAME))
+                return null;
+
+            String mailLanguageCode = other_config[MAIL_LANGUAGE_KEY_NAME];
+            if (mailLanguageCode == null)
+                return null;
+
+            mailLanguageCode.Trim();
+            if (String.IsNullOrEmpty(mailLanguageCode))
+                return null;
+
+            return mailLanguageCode;
+        }
+
+        public static String MailLanguageNameFromCode(String code)
+        {
+            return ml_list.NameFromCode(code);
+        }
+
+        public static String MailLanguageCodeFromName(String name)
+        {
+            return ml_list.CodeFromName(name);
+        }
+
+        public static bool MailLanguageHasCode(String code)
+        {
+            return ml_list.HasCode(code);
+        }
+
+        public static object MailLanguageDataSource()
+        {
+            return PerfmonOptionsDefinition.ml_list.dataSource();
         }
     }
 }

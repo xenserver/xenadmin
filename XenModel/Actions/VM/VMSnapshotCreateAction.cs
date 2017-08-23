@@ -121,9 +121,7 @@ namespace XenAdmin.Actions
             if (image == null)
                 return;  // Discarded
 
-            XenRef<Blob> blobRef = Helpers.TampaOrGreater(Session.Connection)
-                                       ? XenAPI.VM.create_new_blob(Session, newVmRef, VNC_SNAPSHOT, "image/jpeg", false)
-                                       : XenAPI.VM.create_new_blob(Session, newVmRef, VNC_SNAPSHOT, "image/jpeg");
+            XenRef<Blob> blobRef = XenAPI.VM.create_new_blob(Session, newVmRef, VNC_SNAPSHOT, "image/jpeg", false);
 
             Blob blob = null;
             while ((blob = Connection.Resolve(blobRef)) == null) Thread.Sleep(1000);

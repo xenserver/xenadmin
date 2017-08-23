@@ -56,16 +56,17 @@ namespace XenAdmin.Core
             IsAPool,
             LicenseRestriction,
             NotSameLinuxPack,
-            PaidHostFreeMaster,
-            FreeHostPaidMaster,
             LicensedHostUnlicensedMaster,
             UnlicensedHostLicensedMaster,
             LicenseMismatch,
             DifferentServerVersion,
+            DifferentHomogeneousUpdatesFromMaster,
+            DifferentHomogeneousUpdatesFromPool,
             DifferentCPUs,
             DifferentNetworkBackends,
             MasterHasHA,
             NotPhysicalPif,
+            NonCompatibleManagementInterface,
             WrongRoleOnMaster,
             WrongRoleOnSlave,
             NotConnected,
@@ -118,15 +119,14 @@ namespace XenAdmin.Core
             if (DifferentServerVersion(slaveHost, masterHost))
                 return Reason.DifferentServerVersion;
 
+            if (DifferentHomogeneousUpdates(slaveHost, masterHost))
+                return masterHost.Connection.Cache.Hosts.Length > 1 ? Reason.DifferentHomogeneousUpdatesFromPool : Reason.DifferentHomogeneousUpdatesFromMaster;
+
             if (FreeHostPaidMaster(slaveHost, masterHost, allowLicenseUpgrade))
-                return Helpers.ClearwaterOrGreater(masterHost) ? 
-                    Reason.UnlicensedHostLicensedMaster : 
-                    Reason.FreeHostPaidMaster;
+                return Reason.UnlicensedHostLicensedMaster;
 
             if (PaidHostFreeMaster(slaveHost, masterHost))
-                return Helpers.ClearwaterOrGreater(masterHost) ?
-                    Reason.LicensedHostUnlicensedMaster : 
-                    Reason.PaidHostFreeMaster;
+                return Reason.LicensedHostUnlicensedMaster;
 
             if (LicenseMismatch(slaveHost, masterHost))
                 return Reason.LicenseMismatch;
@@ -152,8 +152,11 @@ namespace XenAdmin.Core
             if (HaEnabled(masterConnection))
                 return Reason.MasterHasHA;
 
-            if (HasSlaveAnyNonPhysicalPif(slaveConnection))
+            if (Helpers.FeatureForbidden(slaveConnection, Host.RestrictManagementOnVLAN) && HasSlaveAnyNonPhysicalPif(slaveConnection))
                 return Reason.NotPhysicalPif;
+
+            if (!Helpers.FeatureForbidden(slaveConnection, Host.RestrictManagementOnVLAN) && !HasCompatibleManagementInterface(slaveConnection))
+                return Reason.NonCompatibleManagementInterface;
 
             return Reason.Allowed;
         }
@@ -184,10 +187,6 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_POOLINGRESTRICTED;
                 case Reason.NotSameLinuxPack:
                     return Messages.NEWPOOL_LINUXPACK;
-                case Reason.PaidHostFreeMaster:
-                    return Messages.NEWPOOL_PAID_HOST_FREE_MASTER;
-                case Reason.FreeHostPaidMaster:
-                    return Messages.NEWPOOL_FREE_HOST_PAID_MASTER;
                 case Reason.LicensedHostUnlicensedMaster:
                     return Messages.NEWPOOL_LICENSED_HOST_UNLICENSED_MASTER;
                 case Reason.UnlicensedHostLicensedMaster:
@@ -196,6 +195,10 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_LICENSEMISMATCH;
                 case Reason.DifferentServerVersion:
                     return Messages.NEWPOOL_DIFF_SERVER;
+                case Reason.DifferentHomogeneousUpdatesFromMaster:
+                    return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_MASTER;
+                case Reason.DifferentHomogeneousUpdatesFromPool:
+                    return Messages.NEWPOOL_DIFFERENT_HOMOGENEOUS_UPDATES_FROM_POOL;
                 case Reason.DifferentCPUs:
                     return Messages.NEWPOOL_DIFF_HARDWARE;
                 case Reason.DifferentNetworkBackends:
@@ -206,6 +209,8 @@ namespace XenAdmin.Core
                     return Messages.POOL_JOIN_FORBIDDEN_BY_HA;
                 case Reason.NotPhysicalPif :
                     return Messages.POOL_JOIN_NOT_PHYSICAL_PIF;
+                case Reason.NonCompatibleManagementInterface :
+                    return Messages.POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE;
                 case Reason.WrongRoleOnMaster:
                     return Messages.NEWPOOL_MASTER_ROLE;
                 case Reason.WrongRoleOnSlave:
@@ -373,13 +378,40 @@ namespace XenAdmin.Core
 
         private static bool DifferentServerVersion(Host slave, Host master)
         {
-            // Probably all the others will be equal if the hg_id is equal, but let's
-            // mimic the test on the server side (xen-api.hg:ocaml/xapi/xapi_pool.ml).
+            if (slave.API_version_major != master.API_version_major ||
+                slave.API_version_minor != master.API_version_minor)
+                return true;
+
+            if (Helpers.FalconOrGreater(slave) && string.IsNullOrEmpty(slave.GetDatabaseSchema()))
+                return true;
+            if (Helpers.FalconOrGreater(master) && string.IsNullOrEmpty(master.GetDatabaseSchema()))
+                return true;
+
+            if (slave.GetDatabaseSchema() != master.GetDatabaseSchema())
+                return true;
+
             return
-                slave.hg_id != master.hg_id ||
-                slave.BuildNumberRaw != master.BuildNumberRaw ||
-                slave.ProductVersion != master.ProductVersion ||
+                !Helpers.ElyOrGreater(master) && !Helpers.ElyOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
+                slave.PlatformVersion != master.PlatformVersion ||
                 slave.ProductBrand != master.ProductBrand;
+        }
+
+        /// <summary>
+        /// Check whether all updates that request homogeneity are in fact homogeneous
+        /// between master and slave. This is used in CanJoinPool and prevents the pool from being created
+        /// </summary>
+        private static bool DifferentHomogeneousUpdates(Host slave, Host master)
+        {
+            if (slave == null || master == null)
+                return false;
+
+            if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
+                return false;
+
+            var masterUpdates = master.AppliedUpdates().Where(update => update.EnforceHomogeneity).Select(update => update.uuid).ToList();
+            var slaveUpdates = slave.AppliedUpdates().Where(update => update.EnforceHomogeneity).Select(update => update.uuid).ToList();
+
+            return masterUpdates.Count != slaveUpdates.Count || !masterUpdates.All(slaveUpdates.Contains);
         }
 
         private static bool SameLinuxPack(Host slave, Host master)
@@ -410,20 +442,7 @@ namespace XenAdmin.Core
             if (slave == null || master == null)
                 return false;
             
-            // Is using per socket generation licenses?
-            if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master))
-                return slave.IsFreeLicense() && !master.IsFreeLicense() && !allowLicenseUpgrade;
-
-            if (Host.RestrictHA(slave) && !Host.RestrictHA(master))
-            {
-                // See http://scale.ad.xensource.com/confluence/display/engp/v6+licensing+for+XenServer+Essentials, req R21a.
-                // That section implies that we should downgrade a paid host to join a free pool, but that can't be the intention
-                // (confirmed by Carl Fischer). Carl's also not concerned about fixing up Enterprise/Platinum mismatches.
-                if (allowLicenseUpgrade)
-                    return false;
-                return true;
-            }
-            return false;
+            return slave.IsFreeLicense() && !master.IsFreeLicense() && !allowLicenseUpgrade;
         }
 
         private static bool PaidHostFreeMaster(Host slave, Host master)
@@ -431,11 +450,7 @@ namespace XenAdmin.Core
             if (slave == null || master == null)
                 return false;
 
-            // Is using per socket generation licenses?
-            if (Helpers.ClearwaterOrGreater(slave) && Helpers.ClearwaterOrGreater(master))
-                return !slave.IsFreeLicense() && master.IsFreeLicense();
-
-            return (!Host.RestrictHA(slave) && Host.RestrictHA(master));
+            return !slave.IsFreeLicense() && master.IsFreeLicense();
         }
 
         private static bool LicenseMismatch(Host slave, Host master)
@@ -616,6 +631,24 @@ namespace XenAdmin.Core
         {
             return
                 slaveConnection.Cache.PIFs.Any(p => !p.physical);
+        }
+
+        public static bool HasCompatibleManagementInterface(IXenConnection slaveConnection)
+        {
+            /* if there are non physical pifs present then the slave should have 
+             * only one VLAN and it has to be the management interface. 
+             * Bonds and cross server private networks are not allowed */
+
+            int numberOfNonPhysicalPifs = slaveConnection.Cache.PIFs.Count(p => !p.physical);
+            
+            /* allow the case where there are only physical pifs */
+            if (numberOfNonPhysicalPifs == 0)
+                return true;
+
+            if(numberOfNonPhysicalPifs != 1)
+                return false;
+            else
+                return slaveConnection.Cache.PIFs.Any(p => !p.physical && p.management && p.VLAN != -1);
         }
     }
 }

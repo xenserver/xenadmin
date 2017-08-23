@@ -440,7 +440,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the backtrace field of the given task.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_task">The opaque_ref of the given task</param>
@@ -529,6 +529,18 @@ namespace XenAPI
         public static XenRef<Task> async_cancel(Session session, string _task)
         {
             return XenRef<Task>.Create(session.proxy.async_task_cancel(session.uuid, (_task != null) ? _task : "").parse());
+        }
+
+        /// <summary>
+        /// Set the task status
+        /// First published in XenServer 7.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_task">The opaque_ref of the given task</param>
+        /// <param name="_value">task status value to be set</param>
+        public static void set_status(Session session, string _task, task_status_type _value)
+        {
+            session.proxy.task_set_status(session.uuid, (_task != null) ? _task : "", task_status_type_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -844,7 +856,7 @@ namespace XenAPI
 
         /// <summary>
         /// Function call trace for debugging.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string backtrace
         {

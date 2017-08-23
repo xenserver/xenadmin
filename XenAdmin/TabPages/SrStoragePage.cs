@@ -230,19 +230,40 @@ namespace XenAdmin.TabPages
         void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.BeginInvoke(Program.MainWindow, () =>
-                                                        {
-                                                            SrRefreshAction a = e.Element as SrRefreshAction;
-                                                            if (a == null)
-                                                                return;
+            {
+                SrRefreshAction a = e.Element as SrRefreshAction;
 
-                                                            if (e.Action == CollectionChangeAction.Add)
-                                                                a.Completed += a_Completed;
+                if (e.Action == CollectionChangeAction.Add)
+                {
+                    if (a != null)
+                        a.Completed += a_Completed;
+                    else
+                        return;
+                }
 
-                                                            if (e.Action == CollectionChangeAction.Remove)
-                                                                a.Completed -= a_Completed;
+                if (e.Action == CollectionChangeAction.Remove)
+                {
+                    if (a != null)
+                    {
+                        a.Completed -= a_Completed;
+                    }
+                    else
+                    {
+                        var range = e.Element as List<SrRefreshAction>;
+                        if (range != null)
+                        {
+                            foreach (var sra in range)
+                                sra.Completed -= a_Completed;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                }
 
-                                                            RefreshButtons();
-                                                        });
+                RefreshButtons();
+            });
         }
 
         void a_Completed(ActionBase sender)

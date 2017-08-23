@@ -138,12 +138,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Upgradeprechecks"; }
         }
 
-        private static bool HostNeedsLicenseCheck(Host host)
-        {
-            var edition = Host.GetEdition(host.edition);
-            return edition != Host.Edition.EnterpriseXD && edition != Host.Edition.XenDesktop;
-        }
-
         protected override List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
@@ -223,39 +217,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 foreach (Host host in preCreedenceServers)
                 {
                     checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
-                }
-            }
-
-            //Upgrading to Clearwater and above - license changes warning and deprecations
-            var preClearwaterServers = SelectedServers.Where(h => !Helpers.ClearwaterOrGreater(h)).ToList();
-            if(preClearwaterServers.Any())
-            {
-                var hostsNeedingLicenseCheck = preClearwaterServers.Where(HostNeedsLicenseCheck).ToList();
-                if (hostsNeedingLicenseCheck.Any())
-                {
-                    checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_LICENSING_STATUS,
-                        new List<Check>()));
-                    checkGroup = checks[checks.Count - 1].Value;
-                    foreach (Host host in hostsNeedingLicenseCheck)
-                    {
-                        checkGroup.Add(new UpgradingFromTampaAndOlderCheck(host));
-                    }
-                }
-
-                //WSS removal
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_WSS_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in preClearwaterServers)
-                {
-                    checkGroup.Add(new HostHasWssCheck(host));
-                }
-
-                //VMP[RP]removal
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_VMPR_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                foreach (Host host in preClearwaterServers)
-                {
-                    checkGroup.Add(new VmprActivatedCheck(host));
                 }
             }
 

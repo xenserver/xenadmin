@@ -38,7 +38,7 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Commands;
 using XenAdmin.Core;
-using XenAdmin.Dialogs.VMProtectionRecovery;
+using XenAdmin.Controls;
 using XenAdmin.Wizards.ImportWizard;
 using XenAdmin.Wizards.NewVMApplianceWizard;
 using XenAdmin.Wizards.ExportWizard;
@@ -121,11 +121,21 @@ namespace XenAdmin.Dialogs.VMAppliances
             return list;
         }
 
-        void VMApplianceCollectionChanged(object sender, EventArgs e)
+        void VMApplianceCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
+            VM_appliance vmAppliance = (VM_appliance)e.Element;
+            switch (e.Action)
+            {
+                case CollectionChangeAction.Add:
+                    vmAppliance.PropertyChanged -= vApp_PropertyChanged;
+                    vmAppliance.PropertyChanged += vApp_PropertyChanged;
+                    break;
+                case CollectionChangeAction.Remove:
+                    vmAppliance.PropertyChanged -= vApp_PropertyChanged;
+                    break;
+            }
             LoadVMAppliances();
         }
-
 
         QueuedBackgroundWorker worker = new QueuedBackgroundWorker();
         private void LoadVMAppliances()
@@ -146,20 +156,19 @@ namespace XenAdmin.Dialogs.VMAppliances
                 Cells.Add(_descriptionCell);
                 Cells.Add(_numVMsCell);
                 VMAppliance = vmAppliance;
-                CreateVmItems();
-                RefreshRow();
+                RefreshRow(true);
             }
 
-            private List<ListViewItem> vmItems;
+            private List<ListViewItem> vmItems = new List<ListViewItem>();
 
             public List<ListViewItem> VmItems
             {
                 get { return vmItems; }
             }
 
-            private void CreateVmItems()
+            private void RefreshVmItems()
             {
-                vmItems = new List<ListViewItem>();
+                vmItems.Clear();
                 List<VM> vms = VMAppliance.Connection.ResolveAll(VMAppliance.VMs);
                 vms.Sort();
                 foreach (var vm in vms)
@@ -171,12 +180,64 @@ namespace XenAdmin.Dialogs.VMAppliances
                 }
             }
 
-            public void RefreshRow()
+            public void RefreshRow(bool refreshItems)
             {
                 _nameCell.Value = VMAppliance.Name;
                 _nameCell.Image = null;
                 _descriptionCell.Value = VMAppliance.Description;
                 _numVMsCell.Value = VMAppliance.VMs.Count;
+                if (refreshItems)
+                    RefreshVmItems();
+            }
+        }
+
+        private VMApplianceRow FindVmApplianceRow(VM_appliance vmAppliance)
+        {
+            if (vmAppliance == null)
+                return null;
+            return dataGridViewVMAppliances.Rows.Cast<VMApplianceRow>().FirstOrDefault(row => vmAppliance.Equals(row.VMAppliance));
+        }
+
+        private void vApp_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var vmAppliance = (VM_appliance)sender;
+
+            if (vmAppliance == null)
+                return;
+
+            var selectedAppliance = dataGridViewVMAppliances.SelectedRows.Count > 0
+                ? ((VMApplianceRow)dataGridViewVMAppliances.SelectedRows[0]).VMAppliance
+                : null;
+
+            var selectedRowAffected = selectedAppliance != null && selectedAppliance.opaque_ref == vmAppliance.opaque_ref;
+
+            switch (e.PropertyName)
+            {
+                case "allowed_operations":
+                    if (selectedRowAffected)
+                        Program.Invoke(this, RefreshButtons);
+                    break;
+                case "name_label":
+                case "name_description":
+                    Program.Invoke(this, () =>
+                    {
+                        VMApplianceRow row = FindVmApplianceRow(vmAppliance);
+                        if (row != null)
+                            row.RefreshRow(false);
+                    });
+                    break;
+                case "VMs":
+                    Program.Invoke(this, () =>
+                    {
+                        VMApplianceRow row = FindVmApplianceRow(vmAppliance);
+                        if (row != null)
+                        {
+                            row.RefreshRow(true);
+                            if (selectedRowAffected)
+                                RefreshGroupMembersPanel();
+                        }
+                    });
+                    break;
             }
         }
         #endregion
@@ -206,23 +267,45 @@ namespace XenAdmin.Dialogs.VMAppliances
 
         private void vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Program.Invoke(this, () =>
+            var vm = (VM) sender;
+
+            if (vm == null)
+                return;
+
+            var selectedAppliance = dataGridViewVMAppliances.SelectedRows.Count > 0
+                ? ((VMApplianceRow)dataGridViewVMAppliances.SelectedRows[0]).VMAppliance
+                : null;
+
+            var selectedRowAffected = selectedAppliance != null && selectedAppliance.opaque_ref == vm.appliance.opaque_ref;
+
+            if (!selectedRowAffected)
+                return;
+
+            switch (e.PropertyName)
             {
-                // Find row for VM
-                ListViewItem item = FindItemFromVM((VM)sender);
-                if (item != null)
-                {
-                    listViewVMs.BeginUpdate();
-                    try
+                case "allowed_operations":
+                    Program.Invoke(this, RefreshButtons);
+                    break;
+                case "name_label":
+                case "power_state":
+                case "current_operations":
+                    Program.Invoke(this, () =>
                     {
-                        UpdateVmRow(item);
-                    }
-                    finally
-                    {
-                        listViewVMs.EndUpdate();
-                    }
-                }
-            });
+                        ListViewItem item = FindItemFromVM((VM) sender);
+                        if (item == null)
+                            return;
+                        listViewVMs.BeginUpdate();
+                        try
+                        {
+                            UpdateVmRow(item);
+                        }
+                        finally
+                        {
+                            listViewVMs.EndUpdate();
+                        }
+                    });
+                    break;
+            }
         }
 
         void VMCollectionChanged(object sender, CollectionChangeEventArgs e)
@@ -306,12 +389,17 @@ namespace XenAdmin.Dialogs.VMAppliances
         private void VMAppliancesDialog_Load(object sender, EventArgs e)
         {
             LoadVMAppliances();
-            Pool.Connection.Cache.RegisterBatchCollectionChanged<VM_appliance>(VMApplianceCollectionChanged);
+            Pool.Connection.Cache.RegisterCollectionChanged<VM_appliance>(VMApplianceCollectionChanged);
             Pool.Connection.Cache.RegisterCollectionChanged<VM>(VMCollectionChanged);
             foreach (VM vm in Pool.Connection.Cache.VMs)
             {
                 vm.PropertyChanged -= vm_PropertyChanged;
                 vm.PropertyChanged += vm_PropertyChanged;
+            }
+            foreach (var vApp in Pool.Connection.Cache.VM_appliances)
+            {
+                vApp.PropertyChanged -= vApp_PropertyChanged;
+                vApp.PropertyChanged += vApp_PropertyChanged;
             }
         }
 
@@ -323,11 +411,15 @@ namespace XenAdmin.Dialogs.VMAppliances
 
         private void VMAppliancesDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Pool.Connection.Cache.DeregisterBatchCollectionChanged<VM_appliance>(VMApplianceCollectionChanged);
+            Pool.Connection.Cache.DeregisterCollectionChanged<VM_appliance>(VMApplianceCollectionChanged);
             Pool.Connection.Cache.DeregisterCollectionChanged<VM>(VMCollectionChanged);
             foreach (VM vm in Pool.Connection.Cache.VMs)
             {
                 vm.PropertyChanged -= vm_PropertyChanged;
+            }
+            foreach (VM_appliance vmAppliance in Pool.Connection.Cache.VM_appliances)
+            {
+                vmAppliance.PropertyChanged -= vApp_PropertyChanged;
             }
         }
 
@@ -396,16 +488,6 @@ namespace XenAdmin.Dialogs.VMAppliances
 
             var applianceRow = (VMApplianceRow)dataGridViewVMAppliances.SelectedRows[0];
             labelVMApplianceName.Text = applianceRow.VMAppliance.Name.Ellipsise(120);
-
-            /*dataGridViewVMs.Rows.Clear();
-
-            foreach (var row in applianceRow.SubItems)
-            {
-                if (dataGridViewVMs.ColumnCount > 0)
-                {
-                    dataGridViewVMs.Rows.Add(row);
-                }
-            }*/
 
             listViewVMs.Clear();
             foreach (var vmItem in applianceRow.VmItems)

@@ -279,29 +279,10 @@ namespace XenAPI
             {
                 if (Connection == null)
                     return Messages.HYPHEN;
-                if (IsBondNIC && !Helpers.TampaOrGreater(Connection))  // CA-67284/CA-86417
-                {
-                    long v = long.MaxValue;
-                    foreach (Bond bond in Connection.ResolveAll<Bond>(bond_master_of))
-                    {
-                        foreach (PIF pif in Connection.ResolveAll<PIF>(bond.slaves))
-                        {
-                            PIF_metrics metrics = Connection.Resolve<PIF_metrics>(pif.metrics);
-                            if (metrics == null)
-                                continue;
-                            if (metrics.speed < v)
-                                v = metrics.speed;
-                        }
-                    }
-                    return string.Format(Messages.NICPANEL_BIT_RATE, v);
-                }
-                else
-                {
-                    PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
-                    if (metrics == null)
-                        return Messages.HYPHEN;
-                    return string.Format(Messages.NICPANEL_BIT_RATE, metrics.speed);
-                }
+                PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
+                if (metrics == null)
+                    return Messages.HYPHEN;
+                return string.Format(Messages.NICPANEL_BIT_RATE, metrics.speed);
             }
         }
 
@@ -319,28 +300,10 @@ namespace XenAPI
             {
                 if (Connection == null)
                     return Messages.HYPHEN;
-                if (IsBondNIC && !Helpers.TampaOrGreater(Connection))  // CA-67284/CA-86417
-                {
-                    foreach (Bond bond in Connection.ResolveAll<Bond>(bond_master_of))
-                    {
-                        foreach (PIF pif in Connection.ResolveAll<PIF>(bond.slaves))
-                        {
-                            PIF_metrics metrics = Connection.Resolve<PIF_metrics>(pif.metrics);
-                            if (metrics == null)
-                                continue;
-                            if (!metrics.duplex)
-                                return Messages.NICPANEL_HALF_DUPLEX;
-                        }
-                    }
-                    return Messages.NICPANEL_FULL_DUPLEX;
-                }
-                else
-                {
-                    PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
-                    if (metrics == null)
-                        return Messages.HYPHEN;
-                    return metrics.duplex ? Messages.NICPANEL_FULL_DUPLEX : Messages.NICPANEL_HALF_DUPLEX;
-                }
+                PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
+                if (metrics == null)
+                    return Messages.HYPHEN;
+                return metrics.duplex ? Messages.NICPANEL_FULL_DUPLEX : Messages.NICPANEL_HALF_DUPLEX;
             }
         }
 
@@ -350,28 +313,10 @@ namespace XenAPI
             {
                 if (Connection == null)
                     return false;
-                if (IsBondNIC && !Helpers.TampaOrGreater(Connection))  // CA-67284/CA-86417
-                {
-                    foreach (Bond bond in Connection.ResolveAll<Bond>(bond_master_of))
-                    {
-                        foreach (PIF pif in Connection.ResolveAll<PIF>(bond.slaves))
-                        {
-                            PIF_metrics metrics = Connection.Resolve<PIF_metrics>(pif.metrics);
-                            if (metrics == null)
-                                continue;
-                            if (metrics.carrier)
-                                return true;
-                        }
-                    }
+                PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
+                if (metrics == null)
                     return false;
-                }
-                else
-                {
-                    PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
-                    if (metrics == null)
-                        return false;
-                    return metrics.carrier;
-                }
+                return metrics.carrier;
             }
         }
 

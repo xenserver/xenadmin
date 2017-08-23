@@ -53,6 +53,7 @@ rebranding_global()
         -e "s#\[XenServer product\]#${BRANDING_PRODUCT_BRAND}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION\]#${BRANDING_XC_PRODUCT_VERSION}#g" \
         -e "s#\[BRANDING_PRODUCT_VERSION_TEXT\]#${BRANDING_PRODUCT_VERSION_TEXT}#g" \
+        -e "s#\[BRANDING_BUILD_NUMBER\]#${BUILD_NUMBER}#g" \
         -e "s#\[xensearch\]#${BRANDING_SEARCH}#g" \
         -e "s#\[xsupdate\]#${BRANDING_UPDATE}#g" \
         -e "s#\[XenServer\]#${BRANDING_SERVER}#g" \
@@ -64,6 +65,7 @@ rebranding_global()
         -e "s#\[BRANDING_VERSION_6_5\]#${BRANDING_XC_PRODUCT_6_5_VERSION}#g" \
         -e "s#\[BRANDING_VERSION_7_0\]#${BRANDING_XC_PRODUCT_7_0_VERSION}#g" \
         -e "s#\[BRANDING_XENSERVER_UPDATE_URL\]#${BRANDING_XENSERVER_UPDATE_URL}#g" \
+        -e "s#\[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT\]#${BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT}#g" \
         $1    
 }
 
@@ -76,8 +78,7 @@ rebranding_features()
 
 rebranding_GUID()
 {
-  sed -b -i -e "s#\[BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID\]#${BRANDING_VNC_CONTROL_UPGRADE_CODE_GUID}#g" \
-      -e "s#\[BRANDING_VNC_MAIN_CONTROL_GUID\]#${BRANDING_VNC_MAIN_CONTROL_GUID}#g" \
+  sed -b -i \
       -e "s#\[BRANDING_XENCENTER_UPGRADE_CODE_GUID\]#${BRANDING_XENCENTER_UPGRADE_CODE_GUID}#g" \
       -e "s#\[BRANDING_JA_RESOURCES_GUID\]#${BRANDING_JA_RESOURCES_GUID}#g" \
       -e "s#\[BRANDING_SC_RESOURCES_GUID\]#${BRANDING_SC_RESOURCES_GUID}#g" \
@@ -136,7 +137,7 @@ version_brand_cpp "${REPO}/splash/splash.rc ${REPO}/splash/main.cpp ${REPO}/spla
 cd ${REPO} && /usr/bin/find -name \*.csproj -exec sed -i 's#<SignManifests>false#<SignManifests>true#' {} \;
 
 #AssemblyInfo rebranding
-version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServer VNCControl XenServerHealthCheck"
+version_brand_csharp "XenAdmin CommandLib XenCenterLib XenModel XenOvfApi XenOvfTransport XenCenterVNC xe xva_verify XenServer XenServerHealthCheck"
 
 #XenAdmin rebranding
 rebranding_global ${REPO}/XenAdmin/Branding.cs
@@ -161,10 +162,6 @@ rebranding_global ${REPO}/XenOvfApi/app.config
 RESX_rebranding ${REPO}/XenOvfTransport/Messages
 rebranding_global ${REPO}/XenOvfTransport/app.config
 
-#dotNetInstaller
-rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper.xml
-rebranding_global ${REPO}/dotNetInstaller/XenCenterSetupBootstrapper_l10n.xml
-
 #mk
 rebranding_global ${REPO}/mk/ISO_files/AUTORUN.INF
 rebranding_global ${REPO}/mk/package-and-sign.sh
@@ -173,7 +170,7 @@ rebranding_global ${REPO}/mk/package-and-sign.sh
 rebranding_global ${REPO}/WixInstaller/en-us.wxl
 rebranding_global ${REPO}/WixInstaller/ja-jp.wxl
 rebranding_global ${REPO}/WixInstaller/zh-cn.wxl
-branding_wxs "${REPO}/WixInstaller/XenCenter.l10n.diff ${REPO}/WixInstaller/XenCenter.wxs ${REPO}/WixInstaller/vnccontrol.wxs"
+branding_wxs "${REPO}/WixInstaller/XenCenter.l10n.diff ${REPO}/WixInstaller/XenCenter.wxs"
 
 #XenAdminTests
 rebranding_global ${REPO}/XenAdminTests/TestResources/ContextMenuBuilderTestResults.xml

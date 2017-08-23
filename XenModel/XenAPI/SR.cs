@@ -521,7 +521,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the clustered field of the given SR.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sr">The opaque_ref of the given sr</param>
@@ -532,7 +532,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_tools_sr field of the given SR.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sr">The opaque_ref of the given sr</param>
@@ -1247,7 +1247,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sr">The opaque_ref of the given sr</param>
@@ -1258,7 +1258,7 @@ namespace XenAPI
 
         /// <summary>
         /// Start recording the specified data source
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sr">The opaque_ref of the given sr</param>
@@ -1270,7 +1270,7 @@ namespace XenAPI
 
         /// <summary>
         /// Query the latest value of the specified data source
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sr">The opaque_ref of the given sr</param>
@@ -1282,7 +1282,7 @@ namespace XenAPI
 
         /// <summary>
         /// Forget the recorded statistics related to the specified data source
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_sr">The opaque_ref of the given sr</param>
@@ -1661,7 +1661,7 @@ namespace XenAPI
 
         /// <summary>
         /// True if the SR is using aggregated local storage
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool clustered
         {
@@ -1680,7 +1680,7 @@ namespace XenAPI
 
         /// <summary>
         /// True if this is the SR that contains the Tools ISO VDIs
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool is_tools_sr
         {

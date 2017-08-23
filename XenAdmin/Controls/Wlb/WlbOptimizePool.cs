@@ -164,13 +164,13 @@ namespace XenAdmin.Controls.Wlb
             }
         }
 
-        public void SetOptControlProperties(bool powerManagementSupport, bool autoOptEnabled, bool powerManagementEnabled)
+        public void SetOptControlProperties(bool autoOptEnabled, bool powerManagementEnabled)
         {
             _autoOptEnabled = autoOptEnabled;
             _powerManagementEnabled = powerManagementEnabled;
 
             this.SuspendLayout();
-            if ((powerManagementSupport) && (WlbServerState.GetState(_pool) == WlbServerState.ServerState.Enabled))
+            if (WlbServerState.GetState(_pool) == WlbServerState.ServerState.Enabled)
             {
                 //linkLabelReportHistory.Visible = true;
 

@@ -1059,9 +1059,6 @@
   <data name="VMAppliancesDialog" xml:space="preserve">
     <value>9800</value>
   </data>
-  <data name="VMProtectionPoliciesDialog" xml:space="preserve">
-    <value>6536</value>
-  </data>
   <data name="VMSnapshotSchedulesDialog" xml:space="preserve">
     <value>6550</value>
   </data>
@@ -1148,5 +1145,8 @@
   </data>
   <data name="EnableRDPonVM" xml:space="preserve">
     <value>1020</value>
+  </data>
+  <data name="EditVMSSGeneralSettingsDialog" xml:space="preserve">
+    <value>6553</value>
   </data>
 </root>

@@ -1123,7 +1123,9 @@ namespace XenAdmin.XenSearch
                 foreach (VIF vif in vifs)
                 {
                     // PR-1373 - VM_guest_metrics.networks is a dictionary of IP addresses in the format:
-                    // [["0/ip", <IPv4 address>], ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
+                    // [["0/ip", <IPv4 address>], 
+                    //  ["0/ipv4/0", <IPv4 address>], ["0/ipv4/1", <IPv4 address>],
+                    //  ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
                     foreach (var network in metrics.networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
                     {
                         ComparableAddress ipAddress;
@@ -1133,6 +1135,7 @@ namespace XenAdmin.XenSearch
                         addresses.Add(ipAddress);
                     }
                 }
+                addresses =new ComparableList<ComparableAddress>(addresses.Distinct());
             }
             else if (o is Host)
             {
@@ -1241,6 +1244,8 @@ namespace XenAdmin.XenSearch
 
                             if (os.Contains("debian"))
                                 return Icons.Debian;
+                            if (os.Contains("linx"))
+                                return Icons.Linx;     
                             if (os.Contains("red"))
                                 return Icons.RHEL;
                             if (os.Contains("cent"))
@@ -1253,8 +1258,14 @@ namespace XenAdmin.XenSearch
                                 return Icons.Ubuntu;
                             if (os.Contains("scientific"))
                                 return Icons.SciLinux;
+                            if (os.Contains("yinhe"))
+                                return Icons.YinheKylin;    
                             if (os.Contains("kylin"))
                                 return Icons.NeoKylin;
+                            if (os.Contains("asianux"))
+                                return Icons.Asianux; 
+                            if (os.Contains("turbo"))
+                                return Icons.Turbo;         
                             if (os.Contains("windows"))
                                 return Icons.Windows;
                             if (os.Contains("coreos"))

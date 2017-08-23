@@ -42,19 +42,11 @@ namespace XenAdmin.Actions.VMActions
             VM = vm;
         }
 
-        
-
         protected override void Run()
         {
-            var vmHasSavedRestartPriority = VM.HasSavedRestartPriority;
             this.Description = Messages.ACTION_VM_SUSPENDING;
-            if (vmHasSavedRestartPriority)
-            {
-                // Disable HA protection
-                SetHaProtection(false, this, VM, 0, 50);
-            }
-            RelatedTask = XenAPI.VM.async_suspend(Session, VM.opaque_ref);
-            PollToCompletion(vmHasSavedRestartPriority ? 50 : 0, 100);
+            RelatedTask = VM.async_suspend(Session, VM.opaque_ref);
+            PollToCompletion(0, 100);
             this.Description = Messages.ACTION_VM_SUSPENDED;
         }
     }

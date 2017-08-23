@@ -43,7 +43,7 @@ namespace XenAdmin.Dialogs
         private List<VM> VMsToRestore;
         private Host TargetHost;
         /// <summary>
-        /// A dialog which shows a list of VMs, their current locations and state and asks the user whether they wish to restore them to their original locations.
+        /// A dialog which shows a list of VMs, their current locations and state and asks the user whether they want to restore them to their original locations.
         /// </summary>
         /// <param name="VMsToRestore">List of VMs that would be restored. Do not pass null or an empty list, this dialog makes no sense otherwise.</param>
         /// <param name="Host">The host which is exiting maintenance mode</param>

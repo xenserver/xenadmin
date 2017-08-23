@@ -421,6 +421,8 @@ namespace XenAdmin
                 log.Error(ex, ex);
                 Application.Exit();
             }
+
+            HealthCheck.SendMetadataToHealthCheck();
         }
 
         private static void EncryptServerList()

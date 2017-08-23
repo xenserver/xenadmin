@@ -122,6 +122,10 @@ namespace XenServerHealthCheck
                             {
                                 ServerListHelper.instance.UpdateProxy(message);
                             }
+                            else if (message.StartsWith(HealthCheckSettings.XENCENTER_METADATA))
+                            {
+                                ServerListHelper.instance.UpdateXenCenterMetadata(message);
+                            }    
                             else
                             {
                                 ServerListHelper.instance.UpdateServerCredential(message);

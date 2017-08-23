@@ -153,13 +153,12 @@
                         </Component>
                         <Component Id="UpdateFiles" Guid="[BRANDING_XSUPDATE_FILE_GUID]">
                             <?if "$(env.Branding)"="XenCenter"?>
-							<File Id="hotfixBoston" Source="..\Branding\Hotfixes\XS60E001.xsupdate" />
-							<File Id="hotfixBostonSource" Source="..\Branding\Hotfixes\XS60E001-src-pkgs.tar.gz" />
-							<File Id="hotfixSanibelToClearwater" Source="..\Branding\Hotfixes\RPU001.xsupdate" />
-                            <File Id="hotfixSanibelToClearwaterSource" Source="..\Branding\Hotfixes\RPU001-src-pkgs.tar.gz" />
+							<File Id="hotfixClearwater" Source="..\Branding\Hotfixes\RPU001.xsupdate" />
+                            <File Id="hotfixClearwaterSource" Source="..\Branding\Hotfixes\RPU001-src-pkgs.tar.gz" />
 							<?endif?>
                             <File Id="hotfixCreedence" Source="..\Branding\Hotfixes\RPU002.[xsupdate]" />
                             <File Id="hotfixDundee" Source="..\Branding\Hotfixes\RPU003.[xsupdate]" />
+                            <File Id="hotfixEly" Source="..\Branding\Hotfixes\RPU004.iso" />
                         </Component>
                         <?if "$(env.Branding)"="XenCenter"?>
 						<!-- TestResources -->
@@ -311,7 +310,7 @@
         <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
         <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
         <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />
-        <Condition Message=".NET Framework 4.6 is required for this installation."><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
+        <Condition Message="Microsoft .NET Framework 4.6 or later is required for this installation. Please install it from: https://www.microsoft.com/net/download/framework"><![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]></Condition>
         <Property Id="PERMACHINEINSTALL">
             <RegistrySearch Id="InstallRegistry" Type="raw" Root="HKLM" Key="Software\[Citrix]\[XenCenter]" Name="InstallDir" />
         </Property>

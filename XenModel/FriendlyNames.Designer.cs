@@ -385,6 +385,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scheduled snapshots log files.
+        /// </summary>
+        public static string Description_host_system_status_VM_snapshot_schedule {
+            get {
+                return ResourceManager.GetString("Description-host.system_status-VM-snapshot-schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crash dumps files from the VNCTerm daemon.
         /// </summary>
         public static string Description_host_system_status_vncterm {
@@ -610,7 +619,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only one shell or powershell command permitted..
+        ///   Looks up a localized string similar to Only one shell or PowerShell command permitted..
         /// </summary>
         public static string Exception_PluginOnlyOneCommandPermitted {
             get {
@@ -772,15 +781,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Advanced Edition.
-        /// </summary>
-        public static string Label_host_edition_advanced {
-            get {
-                return ResourceManager.GetString("Label-host.edition-advanced", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [Citrix] [XenServer product] Basic Edition.
         /// </summary>
         public static string Label_host_edition_basic {
@@ -808,15 +808,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Enterprise Edition.
-        /// </summary>
-        public static string Label_host_edition_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.edition-enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [XenServer product] Enterprise Per-Socket.
         /// </summary>
         public static string Label_host_edition_enterprise_per_socket {
@@ -835,29 +826,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] for XenDesktop.
-        /// </summary>
-        public static string Label_host_edition_enterprise_xd {
-            get {
-                return ResourceManager.GetString("Label-host.edition-enterprise-xd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to [XenServer product].
         /// </summary>
         public static string Label_host_edition_free {
             get {
                 return ResourceManager.GetString("Label-host.edition-free", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [XenServer product].
-        /// </summary>
-        public static string Label_host_edition_free_libre {
-            get {
-                return ResourceManager.GetString("Label-host.edition-free/libre", resourceCulture);
             }
         }
         
@@ -871,16 +844,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer product] Platinum Edition.
-        /// </summary>
-        public static string Label_host_edition_platinum {
-            get {
-                return ResourceManager.GetString("Label-host.edition-platinum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Premium Edition.
+        ///   Looks up a localized string similar to [Citrix] [XenServer product] Ultimate Edition.
         /// </summary>
         public static string Label_host_edition_premium {
             get {
@@ -912,15 +876,6 @@ namespace XenAdmin {
         public static string Label_host_edition_xendesktop {
             get {
                 return ResourceManager.GetString("Label-host.edition-xendesktop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XenDesktop Platinum.
-        /// </summary>
-        public static string Label_host_edition_xendesktop_platinum {
-            get {
-                return ResourceManager.GetString("Label-host.edition-xendesktop-platinum", resourceCulture);
             }
         }
         
@@ -988,15 +943,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server License.
-        /// </summary>
-        public static string Label_host_license_params_sku_type {
-            get {
-                return ResourceManager.GetString("Label-host.license_params-sku_type", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to License Server Address.
         /// </summary>
         public static string Label_host_license_server_address {
@@ -1056,168 +1002,6 @@ namespace XenAdmin {
         public static string Label_host_ServerMemory {
             get {
                 return ResourceManager.GetString("Label-host.ServerMemory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_dell_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-dell_xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Express Edition.
-        /// </summary>
-        public static string Label_host_sku_type_dell_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-dell_xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Server Edition.
-        /// </summary>
-        public static string Label_host_sku_type_dell_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-dell_xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], Dell Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_dell_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-dell_xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Dell Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_dell_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-dell_xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], Dell Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_dell_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-dell_xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], HP Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_hp_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-hp_xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_hp_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-hp_xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product], HP Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_FG_hp_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-hp_xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product].
-        /// </summary>
-        public static string Label_host_sku_type_FG_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product].
-        /// </summary>
-        public static string Label_host_sku_type_FG_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] Essentials for [XenServer product].
-        /// </summary>
-        public static string Label_host_sku_type_FG_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-FG-xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_hp_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-hp_xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Select Edition.
-        /// </summary>
-        public static string Label_host_sku_type_hp_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-hp_xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] HP Server Edition.
-        /// </summary>
-        public static string Label_host_sku_type_hp_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-hp_xe_server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Enterprise Edition.
-        /// </summary>
-        public static string Label_host_sku_type_xe_enterprise {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-xe_enterprise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Express Edition.
-        /// </summary>
-        public static string Label_host_sku_type_xe_express {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-xe_express", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to [Citrix] [XenServer product] Server Edition.
-        /// </summary>
-        public static string Label_host_sku_type_xe_server {
-            get {
-                return ResourceManager.GetString("Label-host.sku_type-xe_server", resourceCulture);
             }
         }
         
@@ -1515,6 +1299,15 @@ namespace XenAdmin {
         public static string Label_host_system_status_tapdisk_logs {
             get {
                 return ResourceManager.GetString("Label-host.system_status-tapdisk-logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scheduled snapshots log files.
+        /// </summary>
+        public static string Label_host_system_status_VM_snapshot_schedule {
+            get {
+                return ResourceManager.GetString("Label-host.system_status-VM-snapshot-schedule", resourceCulture);
             }
         }
         
@@ -3625,6 +3418,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Repair Storage.
+        /// </summary>
+        public static string Message_action_pbd_plug_failed_on_server_start {
+            get {
+                return ResourceManager.GetString("Message.action-pbd_plug_failed_on_server_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply License.
         /// </summary>
         public static string Message_action_vbd_qos_failed {
@@ -3969,7 +3771,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A storage repository could not be attached when server &apos;{0}&apos; started.  You may be able to fix this using the &apos;Repair Storage&apos; option in the Storage menu..
+        ///   Looks up a localized string similar to A storage repository could not be attached when server &apos;{0}&apos; started..
         /// </summary>
         public static string Message_body_pbd_plug_failed_on_server_start {
             get {
@@ -4109,132 +3911,6 @@ namespace XenAdmin {
         public static string Message_body_vm_uncooperative {
             get {
                 return ResourceManager.GetString("Message.body-vm_uncooperative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The archive operation for this protection policy could not be completed..
-        /// </summary>
-        public static string Message_body_vmpp_archive_failed_0 {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_archive_failed_0", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to archive a snapshot at this time because an archive operation is already in progress. One only VMPR archive operation can run at a time in the same pool. Please run the protection policy again later..
-        /// </summary>
-        public static string Message_body_vmpp_archive_lock_failed {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_archive_lock_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to archive a snapshot at this time because an archive operation is already in progress. One only VMPR archive operation can run at a time in the same pool. Please check that the archive schedules for the protection policies in this pool do not clash..
-        /// </summary>
-        public static string Message_body_vmpp_archive_missed_event {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_archive_missed_event", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Scheduled snapshot(s) have been archived successfully..
-        /// </summary>
-        public static string Message_body_vmpp_archive_succeeded {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_archive_succeeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The remote CIFS or NFS share specified as the archive target in this VM protection policy could not be mounted. Please check the VMPR archive target configuration settings..
-        /// </summary>
-        public static string Message_body_vmpp_archive_target_mount_failed {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_archive_target_mount_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The remote CIFS or NFS share specified as the archive target in this VM protection policy could not be unmounted. Please make sure than the local directory was mounted successfully and has no open handles..
-        /// </summary>
-        public static string Message_body_vmpp_archive_target_unmount_failed {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_archive_target_unmount_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Backup succeeded.
-        /// </summary>
-        public static string Message_body_vmpp_backup_succeeded {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_backup_succeeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The [XenServer product] license you are using does not allow you to use the VMPR feature. VMPR is available in [Citrix] [XenServer product] Advanced Edition or higher..
-        /// </summary>
-        public static string Message_body_vmpp_license_error {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_license_error", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The snapshot is already archived..
-        /// </summary>
-        public static string Message_body_vmpp_snapshot_archive_already_exists {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_snapshot_archive_already_exists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The VM protection policy failed to run because a snapshot could not be created..
-        /// </summary>
-        public static string Message_body_vmpp_snapshot_failed {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_snapshot_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to create snapshots at this time because the scheduled snapshot operation for this policy is already in progress. Please try again later..
-        /// </summary>
-        public static string Message_body_vmpp_snapshot_lock_failed {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_snapshot_lock_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to create snapshots at this time because a scheduled snapshot operation is already in progress in this pool. One only VMPR snapshot operation can run at a time in the same pool. Please check that the snapshot schedules for the protection policies in this pool do not clash..
-        /// </summary>
-        public static string Message_body_vmpp_snapshot_missed_event {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_snapshot_missed_event", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Scheduled snapshot(s) have been successfully created..
-        /// </summary>
-        public static string Message_body_vmpp_snapshot_succeeded {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_snapshot_succeeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to log in to XAPI session..
-        /// </summary>
-        public static string Message_body_vmpp_xapi_logon_failure {
-            get {
-                return ResourceManager.GetString("Message.body-vmpp_xapi_logon_failure", resourceCulture);
             }
         }
         
@@ -5004,132 +4680,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMPR archive operation failed.
-        /// </summary>
-        public static string Message_name_vmpp_archive_failed_0 {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_archive_failed_0", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMPR archive operation failed.
-        /// </summary>
-        public static string Message_name_vmpp_archive_lock_failed {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_archive_lock_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMPR archive operation failed.
-        /// </summary>
-        public static string Message_name_vmpp_archive_missed_event {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_archive_missed_event", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Scheduled snapshot archive succeeded.
-        /// </summary>
-        public static string Message_name_vmpp_archive_succeeded {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_archive_succeeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMPR archive operation failed.
-        /// </summary>
-        public static string Message_name_vmpp_archive_target_mount_failed {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_archive_target_mount_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to unmount VMPR archive target.
-        /// </summary>
-        public static string Message_name_vmpp_archive_target_unmount_failed {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_archive_target_unmount_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Backup succeeded.
-        /// </summary>
-        public static string Message_name_vmpp_backup_succeeded {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_backup_succeeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMPR failed: insufficient license for VMPR.
-        /// </summary>
-        public static string Message_name_vmpp_license_error {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_license_error", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to archive snapshot.
-        /// </summary>
-        public static string Message_name_vmpp_snapshot_archive_already_exists {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_snapshot_archive_already_exists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMPR failed: snapshot could not be created.
-        /// </summary>
-        public static string Message_name_vmpp_snapshot_failed {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_snapshot_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMPR failed: snapshot could not be created.
-        /// </summary>
-        public static string Message_name_vmpp_snapshot_lock_failed {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_snapshot_lock_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMPR failed: snapshot could not be created.
-        /// </summary>
-        public static string Message_name_vmpp_snapshot_missed_event {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_snapshot_missed_event", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Scheduled snapshot succeeded.
-        /// </summary>
-        public static string Message_name_vmpp_snapshot_succeeded {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_snapshot_succeeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VMPP XAPI logon failure.
-        /// </summary>
-        public static string Message_name_vmpp_xapi_logon_failure {
-            get {
-                return ResourceManager.GetString("Message.name-vmpp_xapi_logon_failure", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule failed: insufficient license for Scheduled snapshots.
         /// </summary>
         public static string Message_name_vmss_license_error {
@@ -5532,7 +5082,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This template can be used to create a Linux VM with a built-in Linux distro for testing and demonstration purposes. It is not recommended for production use..
+        ///   Looks up a localized string similar to This template can be used to create a Linux VM with a built-in Linux distribution for testing and demonstration purposes. It is not recommended for production use..
         /// </summary>
         public static string VM_TemplateDescription_Demo_Linux_VM {
             get {

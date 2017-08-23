@@ -126,7 +126,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 tableLayoutPanel1.MouseMove += tableLayoutPanel1_MouseMove;
             }
 
-            if (SelectedUpdateType == UpdateType.ISO || SelectedServers.Exists(server => !Helpers.ClearwaterOrGreater(server)))
+            if (SelectedUpdateType == UpdateType.ISO)
             {
                 removeUpdateFileCheckBox.Checked = false;
                 removeUpdateFileCheckBox.Visible = false;

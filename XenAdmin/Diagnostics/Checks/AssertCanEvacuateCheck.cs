@@ -98,7 +98,7 @@ namespace XenAdmin.Diagnostics.Checks
 
                 if (restrictMigration && residentVM.is_a_real_vm && !VMsWithProblems.Contains(residentVM.opaque_ref))
                 {
-                    problems.Add(new CannotMigrateVM(this, residentVM, true));
+                    problems.Add(new CannotMigrateVM(this, residentVM, CannotMigrateVM.CannotMigrateVMReason.LicenseRestriction));
                     VMsWithProblems.Add(residentVM.opaque_ref);
                 }
             }
@@ -147,16 +147,16 @@ namespace XenAdmin.Diagnostics.Checks
             {
                 System.Diagnostics.Trace.Assert(exception.Length > 0);
 
-                VM vm;
+                var vm = connection.Resolve<VM>(vmRef);
+
+                if (vm == null)
+                {
+                    throw new NullReferenceException(exception[0]);
+                }
 
                 switch (exception[0])
                 {
                     case Failure.VM_REQUIRES_SR:
-                        vm = connection.Resolve<VM>(vmRef);
-
-                        if (vm == null)
-                            throw new NullReferenceException(Failure.VM_REQUIRES_SR);
-
                         XenRef<SR> srRef = new XenRef<SR>(exception[2]);
                         SR sr = connection.Resolve<SR>(srRef);
 
@@ -177,36 +177,22 @@ namespace XenAdmin.Diagnostics.Checks
                         return null;
 
                     case Failure.VM_MISSING_PV_DRIVERS:
-                        vm = connection.Resolve<VM>(vmRef);
-
-                        if (vm == null)
-                            throw new NullReferenceException(Failure.VM_MISSING_PV_DRIVERS);
-
                         return new NoPVDrivers(this, vm);
 
+                    case Failure.VM_LACKS_FEATURE:
+                        return new CannotMigrateVM(this, vm, GetMoreSpecificReasonForCannotMigrateVm(vm, CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVm));
+
+                    case Failure.VM_LACKS_FEATURE_SUSPEND:
+                        return new CannotMigrateVM(this, vm, GetMoreSpecificReasonForCannotMigrateVm(vm, CannotMigrateVM.CannotMigrateVMReason.LacksFeatureSuspend));
+
                     case "VM_OLD_PV_DRIVERS":
-                        vm = connection.Resolve<VM>(vmRef);
-
-                        if (vm == null)
-                            throw new NullReferenceException("VM_OLD_PV_DRIVERS");
-
                         return new PVDriversOutOfDate(this, vm);
 
                     case Failure.NO_HOSTS_AVAILABLE:
                         //CA-63531: Boston server will come here in case of single host pool or standalone host
-                        vm = connection.Resolve<VM>(vmRef);
-
-                        if (vm == null)
-                            throw new NullReferenceException(Failure.NO_HOSTS_AVAILABLE);
-
                         return new NoHosts(this, vm);
 
                     case Failure.HOST_NOT_ENOUGH_FREE_MEMORY:
-                        vm = connection.Resolve<VM>(vmRef);
-
-                        if (vm == null)
-                            throw new NullReferenceException(Failure.HOST_NOT_ENOUGH_FREE_MEMORY);
-
                         Pool pool = Helpers.GetPool(vm.Connection);
 
                         if (pool == null || pool.Connection.Cache.HostCount == 1)
@@ -219,11 +205,6 @@ namespace XenAdmin.Diagnostics.Checks
                         return new NotEnoughMem(this, host);
 
                     case Failure.VM_REQUIRES_NETWORK:
-                        vm = connection.Resolve(vmRef);
-
-                        if (vm == null)
-                            throw new NullReferenceException(Failure.VM_REQUIRES_NETWORK);
-
                         XenRef<XenAPI.Network> netRef = new XenRef<XenAPI.Network>(exception[2]);
                         XenAPI.Network network = connection.Resolve(netRef);
 
@@ -233,11 +214,6 @@ namespace XenAdmin.Diagnostics.Checks
                         return new VMCannotSeeNetwork(this, vm, network);
 
                     case Failure.VM_HAS_VGPU:
-                        vm = connection.Resolve(vmRef);
-
-                        if (vm == null)
-                            throw new NullReferenceException(Failure.VM_HAS_VGPU);
-
                         return new VmHasVgpu(this, vm);
 
                     default:
@@ -251,6 +227,25 @@ namespace XenAdmin.Diagnostics.Checks
 
                 throw new Failure(new List<String>(exception));
             }
+        }
+
+        private static CannotMigrateVM.CannotMigrateVMReason GetMoreSpecificReasonForCannotMigrateVm(VM vm, CannotMigrateVM.CannotMigrateVMReason reason)
+        {
+            var gm = vm.Connection.Resolve(vm.guest_metrics);
+
+            if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows)
+            {
+                if (gm != null && !gm.PV_drivers_detected)
+                {
+                    reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
+                }
+            }
+            else if (vm.virtualisation_status == 0 || vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            {
+                reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
+            }
+
+            return reason;
         }
 
         // This function only tests certain host-wide conditions.

@@ -658,22 +658,22 @@
     <value>6535</value>
   </data>
   <data name="NewPolicyWizardVMSS_EmailalertsPane" xml:space="preserve">
-    <value>6551</value>
+    <value>6552</value>
   </data>
   <data name="NewPolicyWizardVMSS_FinishPane" xml:space="preserve">
-    <value>6551</value>
+    <value>6552</value>
   </data>
   <data name="NewPolicyWizardVMSS_PolicyNamePane" xml:space="preserve">
-    <value>6551</value>
+    <value>6552</value>
   </data>
   <data name="NewPolicyWizardVMSS_SnapshotfrequencyPane" xml:space="preserve">
-    <value>6551</value>
+    <value>6552</value>
   </data>
   <data name="NewPolicyWizardVMSS_SnapshottypePane" xml:space="preserve">
-    <value>6551</value>
+    <value>6552</value>
   </data>
   <data name="NewPolicyWizardVMSS_VMsPane" xml:space="preserve">
-    <value>6551</value>
+    <value>6552</value>
   </data>
   <data name="NewPoolDialog" xml:space="preserve">
     <value>5100</value>
@@ -1059,11 +1059,8 @@
   <data name="VMAppliancesDialog" xml:space="preserve">
     <value>9800</value>
   </data>
-  <data name="VMProtectionPoliciesDialog" xml:space="preserve">
-    <value>6536</value>
-  </data>
   <data name="VMSnapshotSchedulesDialog" xml:space="preserve">
-    <value>6550</value>
+    <value>6551</value>
   </data>
   <data name="VmSnapshotDialog" xml:space="preserve">
     <value>6520</value>
@@ -1148,5 +1145,8 @@
   </data>
   <data name="EnableRDPonVM" xml:space="preserve">
     <value>1020</value>
+  </data>
+  <data name="EditVMSSGeneralSettingsDialog" xml:space="preserve">
+    <value>6553</value>
   </data>
 </root>

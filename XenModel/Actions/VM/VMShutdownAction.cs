@@ -45,25 +45,6 @@ namespace XenAdmin.Actions.VMActions
             this.Host = vm.Home();
             this.Pool = Core.Helpers.GetPool(vm.Connection);
         }
-
-        /// <summary>
-        /// Enables or disables HA protection for a VM (VM.ha_always_run). Also does a pool.sync_database afterwards.
-        /// May throw a XenAPI.Failure.
-        /// </summary>
-        /// <param name="protect"></param>
-        /// <param name="act"></param>
-        /// <param name="session"></param>
-        /// <param name="vm"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        protected static void SetHaProtection(bool protect, AsyncAction action, VM vm, int start, int end)
-        {
-        	// Do database sync. Helps to ensure that the change persists over master failover.
-            action.RelatedTask = XenAPI.Pool.async_sync_database(action.Session);
-            action.PollToCompletion(start, end);
-        }
-
-
     }
 
     public class VMCleanShutdown : VMShutdownAction
@@ -75,17 +56,10 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            bool vmHasSavedRestartPriority = VM.HasSavedRestartPriority;
             this.Description = Messages.ACTION_VM_SHUTTING_DOWN;
 
-            if (vmHasSavedRestartPriority)
-            {
-                // Disable HA protection
-                SetHaProtection(false, this, VM, 0, 50);
-            }
-
-            RelatedTask = XenAPI.VM.async_clean_shutdown(Session, VM.opaque_ref);
-            PollToCompletion(vmHasSavedRestartPriority ? 50 : 0, 100);
+            RelatedTask = VM.async_clean_shutdown(Session, VM.opaque_ref);
+            PollToCompletion(0, 100);
             this.Description = Messages.ACTION_VM_SHUT_DOWN;
         }
     }
@@ -99,16 +73,10 @@ namespace XenAdmin.Actions.VMActions
 
         protected override void Run()
         {
-            bool vmHasSavedRestartPriority =VM.HasSavedRestartPriority;
             this.Description = Messages.ACTION_VM_SHUTTING_DOWN;
 
-            if (vmHasSavedRestartPriority)
-            {
-                // Disable HA protection
-                SetHaProtection(false, this, VM, 0, 70);
-            }
-            RelatedTask = XenAPI.VM.async_hard_shutdown(Session, VM.opaque_ref);
-            PollToCompletion(vmHasSavedRestartPriority ? 70 : 0, 100);
+            RelatedTask = VM.async_hard_shutdown(Session, VM.opaque_ref);
+            PollToCompletion(0, 100);
 
             this.Description = Messages.ACTION_VM_SHUT_DOWN;
         }
