@@ -358,11 +358,11 @@ namespace XenAdmin.TabPages
                     _requiredUpdateCell.Value = "";
                     _installedUpdateCell.Value = "";
 
-                    var poolPatchingStatus = pool.Connection.Cache.Hosts.Any(h => Updates.RecommendedPatchesForHost(h).Count > 0);
-                    _patchingStatusCell.Value = poolPatchingStatus
+                    var outOfDate = pool.Connection.Cache.Hosts.Any(h => RequiredUpdatesForHost(h).Length > 0);
+                    _patchingStatusCell.Value = outOfDate
                         ? Properties.Resources._000_error_h32bit_16
                         : Properties.Resources._000_Tick_h32bit_16;
-                    _statusCell.Value = poolPatchingStatus ? Messages.NOT_UPDATED : Messages.UPDATED;
+                    _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
                 }
                 
                 else
@@ -370,10 +370,9 @@ namespace XenAdmin.TabPages
                     Host host = Tag as Host;
                     if (host != null)
                     {
-                        var hostRequired = RecommendedPatchesForHost(host);
-                        var hostInstalledList = Helpers.HostAppliedPatchesList(host);
-                        var hostInstalled = string.Join(", ", hostInstalledList.ToArray());
-                        var hostStatus = Updates.RecommendedPatchesForHost(host).Count > 0;
+                        var hostRequired = RequiredUpdatesForHost(host);
+                        var hostInstalled = InstalledUpdatesForHost(host);
+                        var outOfDate = hostRequired.Length > 0;
 
                         DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
 
@@ -388,10 +387,10 @@ namespace XenAdmin.TabPages
                         {
                             _poolIconCell.Value = Images.GetImage16For(host);
                             nc.Image = null;
-                            _patchingStatusCell.Value = hostStatus
+                            _patchingStatusCell.Value = outOfDate
                                 ? Properties.Resources._000_error_h32bit_16
                                 : Properties.Resources._000_Tick_h32bit_16;
-                            _statusCell.Value = hostStatus ? Messages.NOT_UPDATED : Messages.UPDATED;
+                            _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
                         }
 
                         _nameCell.Value = host.Name();
@@ -404,14 +403,50 @@ namespace XenAdmin.TabPages
 
         }
 
-        private static string RecommendedPatchesForHost(Host host)
+        private static string RequiredUpdatesForHost(Host host)
         {
-            var result = new List<string>();
-            var recommendedPatches = Updates.RecommendedPatchesForHost(host);
+            var requiredUpdates = Updates.RecommendedPatchesForHost(host);
 
-            foreach (var patch in recommendedPatches)
+            if (requiredUpdates == null)
+            {
+                // versions with no minimum patches
+                var updatesList = new List<string>();
+                var alerts = new List<Alert>(Updates.UpdateAlerts);
+                if (alerts.Count == 0)
+                    return String.Empty;
+
+                foreach (Alert alert in alerts)
+                {
+                    if (!(alert is XenServerPatchAlert))
+                        continue;
+                    if (alert.AppliesTo.Contains(host.Name))
+                        updatesList.Add(alert.Name);
+                }
+
+                updatesList.Sort(StringUtility.NaturalCompare);
+                return string.Join(", ", updatesList.ToArray());
+            }
+
+            else
+            {
+                // versions with minimum patches
+                var result = new List<string>();
+                foreach (var patch in requiredUpdates)
+                    result.Add(patch.Name);
+
+                result.Sort(StringUtility.NaturalCompare);
+                return string.Join(", ", result.ToArray());
+            }
+        }
+
+        private static string InstalledUpdatesForHost(Host host)
+        {
+            List<string> result = new List<string>();
+
+            foreach (Pool_patch patch in host.AppliedPatches())
                 result.Add(patch.Name);
 
+            result.Sort(StringUtility.NaturalCompare);
             return string.Join(", ", result.ToArray());
         }
 
@@ -1278,9 +1313,9 @@ namespace XenAdmin.TabPages
             Program.Invoke(Program.MainWindow, delegate
             {
                 pool = hasPool ? Helpers.GetPool(xenConnection).Name : String.Empty;
-                patchingStatus = Updates.RecommendedPatchesForHost(host).Count > 0 ? Messages.NOT_UPDATED : Messages.UPDATED;
-                requiredUpdates = RecommendedPatchesForHost(host);
-                installedUpdates = string.Join(", ", Helpers.HostAppliedPatchesList(host).ToArray());
+                requiredUpdates = RequiredUpdatesForHost(host);
+                installedUpdates = InstalledUpdatesForHost(host);
+                patchingStatus = requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED;
             });
 
             return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"",
