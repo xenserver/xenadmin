@@ -1647,6 +1647,9 @@ namespace XenAdmin.TabPages
             var result = new List<string>();
             var recommendedPatches = Updates.RecommendedPatchesForHost(host);
 
+            if (recommendedPatches == null)
+                return String.Empty;
+
             foreach (var patch in recommendedPatches)
                 result.Add(patch.Name);
 
