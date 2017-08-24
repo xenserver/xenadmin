@@ -29,8 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using System.Threading;
-using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin.Wizards.NewPolicyWizard;
 
@@ -38,21 +36,21 @@ namespace XenAdminTests.WizardTests.cowleyPolicies_xml
 {
 
     [TestFixture, Category(TestCategories.UICategoryB)]
-    class NewPolicyWizardTest : WizardTest<NewPolicyWizardSpecific<XenAPI.VMPP>>
+    class NewPolicyWizardTest : WizardTest<NewPolicyWizard>
     {
         public NewPolicyWizardTest()
-            : base(new string[] { "Policy Name", "Protected VMs", "Snapshot Type", "Snapshot schedule","Archive Options","Email Alerts","Finish" }
+            : base(new string[] { "Schedule Name", "VMs in the snapshot schedule", "Snapshot Type", "Snapshot schedule","Finish" }
             , true, false)
         { }
 
-        protected override NewPolicyWizardSpecific<XenAPI.VMPP> NewWizard()
+        protected override NewPolicyWizard NewWizard()
         {
-            return new NewPolicyWizardSpecific<XenAPI.VMPP>(base.GetAnyPool());
+            return new NewPolicyWizard(base.GetAnyPool());
         }
 
         protected override void TestPage(string pageName)
         {
-            if (pageName == "Policy Name")
+            if (pageName == "Schedule Name")
             {
                 MW(() => (TestUtils.GetTextBox(wizard, "xenTabPagePolicy.textBoxName")).Text = "policy");
             }

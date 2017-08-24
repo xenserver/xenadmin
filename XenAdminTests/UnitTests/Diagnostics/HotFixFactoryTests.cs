@@ -59,7 +59,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
             string[] enumNames = Enum.GetNames(typeof (HotfixFactory.HotfixableServerVersion));
             Array.Sort(enumNames);
 
-            string[] expectedNames = new []{"Boston", "SanibelToClearwater", "Creedence", "Dundee"};
+            string[] expectedNames = new []{"Clearwater", "Creedence", "Dundee", "Ely"};
             Array.Sort(expectedNames);
 
             CollectionAssert.AreEqual(expectedNames, enumNames, "Expected contents of HotfixableServerVersion enum");
@@ -68,13 +68,9 @@ namespace XenAdminTests.UnitTests.Diagnostics
         [Test]
         public void UUIDLookedUpFromEnum()
         {
-            Assert.AreEqual("95ac709c-e408-423f-8d22-84b8134a149e;591d0209-531e-4ed8-9ed2-98df2a1a445c", 
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).UUID,
-                            "Boston UUID lookup from enum");
-
             Assert.AreEqual("591d0209-531e-4ed8-9ed2-98df2a1a445c", 
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).UUID,
-                            "SanibelToClearwater UUID lookup from enum");
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Clearwater).UUID,
+                            "Clearwater UUID lookup from enum");
 
             Assert.AreEqual("3f92b111-0a90-4ec6-b85a-737f241a3fc1 ",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).UUID,
@@ -83,18 +79,18 @@ namespace XenAdminTests.UnitTests.Diagnostics
             Assert.AreEqual("474a0f28-0d33-4c9b-9e20-52baaea8ce5e",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).UUID,
                             "Dundee UUID lookup from enum");
+
+            Assert.AreEqual("b8d21409-adb7-44a5-a7ff-a78ed97162a5",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Ely).UUID,
+                            "Ely UUID lookup from enum");
         }
 
         [Test]
         public void FilenameLookedUpFromEnum()
         {
-            Assert.AreEqual("XS60E001;RPU001",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Boston).Filename,
-                            "Boston Filename lookup from enum");
-
             Assert.AreEqual("RPU001",
-                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.SanibelToClearwater).Filename,
-                            "SanibelToClearwater Filename lookup from enum");
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Clearwater).Filename,
+                            "Clearwater Filename lookup from enum");
 
             Assert.AreEqual("RPU002",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Creedence).Filename,
@@ -103,12 +99,16 @@ namespace XenAdminTests.UnitTests.Diagnostics
             Assert.AreEqual("RPU003",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).Filename,
                             "Dundee Filename lookup from enum");
+
+            Assert.AreEqual("RPU004",
+                            factory.Hotfix(HotfixFactory.HotfixableServerVersion.Ely).Filename,
+                            "Ely Filename lookup from enum");
         }
 
         [Test]
-        [TestCase("2.1.1", Description = "Ely")]
+        [TestCase("2.2.50", Description = "Falcon")]
         [TestCase("9999.9999.9999", Description = "Future")]
-        public void TestPlatformVersionNumbersElyOrGreaterGiveNulls(string platformVersion)
+        public void TestPlatformVersionNumbersFalconOrGreaterGiveNulls(string platformVersion)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
             host.Setup(h => h.PlatformVersion).Returns(platformVersion);
@@ -116,21 +116,11 @@ namespace XenAdminTests.UnitTests.Diagnostics
         }
 
         [Test]
-        [TestCase("6.0.2", "RPU001", Description = "Sanibel")]
-        [TestCase("6.0.0", "XS60E001;RPU001", Description = "Boston")]
-        public void TestProductVersionNumbersWithHotfixes(string productVersion, string filenames)
-        {
-            Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
-            host.Setup(h => h.ProductVersion).Returns(productVersion);
-            Assert.That(filenames, Is.EqualTo(factory.Hotfix(host.Object).Filename));
-        }
-
-        [Test]
-        [TestCase("2.1.1", Description = "Ely", Result = false)]
+        [TestCase("2.2.50", Description = "Falcon", Result = false)]
+        [TestCase("2.1.1", Description = "Ely", Result = true)]
         [TestCase("2.0.0", Description = "Dundee", Result = true)]
         [TestCase("1.9.0", Description = "Creedence", Result = true)]
         [TestCase("1.8.0", Description = "Clearwater", Result = true)]
-        [TestCase("1.6.10", Description = "Tampa", Result = true)]
         [TestCase("9999.9999.9999", Description = "Future", Result = false)]
         public bool TestIsHotfixRequiredBasedOnPlatformVersion(string version)
         {
@@ -138,16 +128,5 @@ namespace XenAdminTests.UnitTests.Diagnostics
             host.Setup(h => h.PlatformVersion).Returns(version);
             return factory.IsHotfixRequired(host.Object);
         }
-
-        [Test]
-        [TestCase("6.0.2", Description = "Sanibel",  Result = true)]
-        [TestCase("6.0.0", Description = "Boston", Result = true)]
-        public bool TestIsHotfixRequiredBasedOnProductVersion(string productVersion)
-        {
-            Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
-            host.Setup(h => h.ProductVersion).Returns(productVersion);
-            return factory.IsHotfixRequired(host.Object);
-        }
-
     }
 }

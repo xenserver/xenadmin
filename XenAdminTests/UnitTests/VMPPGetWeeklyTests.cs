@@ -44,7 +44,7 @@ namespace XenAdminTests.UnitTests
         public void Test1()
         {
             //Test when the day this week already past
-            var time = VMPP.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 59, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Tuesday });
+            var time = VMSS.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 59, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Tuesday });
             Assert.AreEqual(new DateTime(2010, 10, 26, 10, 15, 0), time);
         }
 
@@ -52,7 +52,7 @@ namespace XenAdminTests.UnitTests
         public void Test2()
         {
             //Test when the day is today but the time alreday past
-            var time = VMPP.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 59, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday });
+            var time = VMSS.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 59, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday });
             Assert.AreEqual(new DateTime(2010, 10, 27, 10, 15, 0), time);
         }
 
@@ -60,7 +60,7 @@ namespace XenAdminTests.UnitTests
         public void Test3()
         {
             //Test when the day is today but the time did not pass
-            var time = VMPP.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 00, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday });
+            var time = VMSS.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 00, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday });
             Assert.AreEqual(new DateTime(2010, 10, 20, 10, 15, 0), time);
         }
 
@@ -68,7 +68,7 @@ namespace XenAdminTests.UnitTests
         public void Test4()
         {
             //Test when the day is today but the time did not pass with more than one day
-            var time = VMPP.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 00, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday,DayOfWeek.Monday });
+            var time = VMSS.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 00, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Monday });
             Assert.AreEqual(new DateTime(2010, 10, 20, 10, 15, 0), time);
         }
 
@@ -76,7 +76,7 @@ namespace XenAdminTests.UnitTests
         public void Test5()
         {
             //Today already past take next day in same week
-            var time = VMPP.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 30, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Thursday });
+            var time = VMSS.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 30, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Thursday });
             Assert.AreEqual(new DateTime(2010, 10, 21, 10, 15, 0), time);
         }
 
@@ -84,7 +84,7 @@ namespace XenAdminTests.UnitTests
         public void Test6()
         {
             //Today already past take next day in next week
-            var time = VMPP.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 30, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Monday });
+            var time = VMSS.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 30, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Monday });
             Assert.AreEqual(new DateTime(2010, 10, 25, 10, 15, 0), time);
         }
 
@@ -92,7 +92,7 @@ namespace XenAdminTests.UnitTests
         public void Test7()
         {
             //Today already past take next day in next week
-            var time = VMPP.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 15, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Monday });
+            var time = VMSS.GetWeeklyDate(new DateTime(2010, 10, 20, 10, 15, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Monday });
             Assert.AreEqual(new DateTime(2010, 10, 20, 10, 15, 0), time);
         }
 
@@ -100,7 +100,7 @@ namespace XenAdminTests.UnitTests
         public void Test8()
         {
             //Check Sunday and unsorted list
-            var time = VMPP.GetWeeklyDate(new DateTime(2010, 10, 24, 10, 16, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Sunday, DayOfWeek.Monday });
+            var time = VMSS.GetWeeklyDate(new DateTime(2010, 10, 24, 10, 16, 0), 10, 15, new List<DayOfWeek> { DayOfWeek.Sunday, DayOfWeek.Monday });
             Assert.AreEqual(new DateTime(2010, 10, 25, 10, 15, 0), time);
         }
 

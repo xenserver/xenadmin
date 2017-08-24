@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
@@ -180,8 +181,12 @@ namespace XenAdmin.Actions
                         log.Error("Failed to remove the VDI.", removeEx);
                     }
                 }
-                
-                throw ex; //after having tried to remove the VDI, the original exception is thrown for the UI
+
+                //after having tried to remove the VDI, the original exception is thrown for the UI
+                if (ex is TargetInvocationException && ex.InnerException != null)
+                    throw ex.InnerException;
+                else
+                    throw ex; 
             }
             finally
             {

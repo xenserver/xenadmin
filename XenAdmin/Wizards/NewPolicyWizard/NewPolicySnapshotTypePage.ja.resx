@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="radioButtonDiskOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioButtonDiskOnly.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="quiesceCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>29, 87</value>
@@ -211,7 +211,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioButtonDiskAndMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
+    <value>6, 127</value>
   </data>
   <data name="radioButtonDiskAndMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 18</value>
@@ -286,7 +286,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;checkpointInfoPictureBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -314,7 +314,7 @@
   </data>
   <data name="labelWarning.Text" xml:space="preserve">
     <value>スケジュールされたディスクとメモリのスナップショットは、この {0} の対象 VM が以下のすべての条件を満たす場合のみ作成されます。
-1. スケジュールされた時間に VM が実行中である。
+1. スケジュールされた時間に VM が実行中である、または一時停止している。
 2. VM に [XenServer product] Tools がインストールされている。
 3. VM に専用の GPU が割り当てられていない。</value>
   </data>
@@ -349,7 +349,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;pictureBoxWarning.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 214</value>

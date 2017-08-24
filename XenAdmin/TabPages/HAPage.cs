@@ -52,6 +52,14 @@ namespace XenAdmin.TabPages
 
         private IXenObject xenObject;
 
+        private bool restartHBInitializationTimer;
+
+        private bool initializationDelayElapsed;
+
+        private System.Timers.Timer initializationDelayTimer;
+
+        private const int HB_INITIALIZATION_DELAY = 30000;
+
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
         /// <summary>
         /// The object that the panel is displaying HA info for. Must be set on the event thread.
@@ -90,6 +98,7 @@ namespace XenAdmin.TabPages
             base.Text = Messages.HIGH_AVAILABILITY;
 
             pictureBoxWarningTriangle.Image = SystemIcons.Warning.ToBitmap();
+            restartHBInitializationTimer = true;
         }
 
         private void History_CollectionChanged(object sender, CollectionChangeEventArgs e)
@@ -197,6 +206,10 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
+                    //CA-250234 no need to rebuild HA page if we lost connection to the pool 
+                    if (pool.Connection == null || pool.Connection.Session == null || !pool.Connection.IsConnected)
+                        return;
+
                     // Generate the tab contents depending on what XenObject we're displaying
 
                     if (pool.ha_enabled)
@@ -297,8 +310,17 @@ namespace XenAdmin.TabPages
         private void generatePoolHABox(Pool pool)
         {
             if (!pool.ha_enabled)
+            {
+                restartHBInitializationTimer = true;
                 return;
+            }
 
+            if (restartHBInitializationTimer)
+            {
+                restartHBInitializationTimer = false;
+                SetNetworkHBInitDelay();
+            }
+            
             // 'High Availability' heading
             CustomListRow header = CreateHeader(Messages.HA_CONFIGURATION_TITLE);
             customListPanel.AddRow(header);
@@ -440,27 +462,28 @@ namespace XenAdmin.TabPages
                 l.Padding = new Padding(0, 5, 0, 5);
                 l.Font = BaseTabPage.ItemValueFont;
                 l.AutoSize = true;
-                if (members[i].ha_network_peers.Length == members.Count)
+                l.ForeColor = (members[i].ha_network_peers.Length == members.Count && initializationDelayElapsed) ? Color.Green : BaseTabPage.ItemValueForeColor;
+
+                if (initializationDelayElapsed)
                 {
-                    l.ForeColor = Color.Green;
-                }
+                    if (members[i].ha_network_peers.Length == 0)
+                    {
+                        l.Text = Messages.HA_HEARTBEAT_UNHEALTHY;
+                    }
+                    else if (members[i].ha_network_peers.Length == members.Count)
+                    {
+                        l.Text = Messages.HA_HEARTBEAT_HEALTHY;
+                    }
+                    else
+                    {
+                        l.Text = String.Format(Messages.HA_HEARTBEAT_SERVERS, members[i].ha_network_peers.Length, members.Count);
+                    }
+                }                
                 else
                 {
-                    l.ForeColor = BaseTabPage.ItemValueForeColor;
+                    l.Text = Messages.HA_HEARTBEAT_SERVERS_INITIALISING;
                 }
 
-                if (members[i].ha_network_peers.Length == 0)
-                {
-                    l.Text = Messages.HA_HEARTBEAT_UNHEALTHY;
-                }
-                else if (members[i].ha_network_peers.Length == members.Count)
-                {
-                    l.Text = Messages.HA_HEARTBEAT_HEALTHY;
-                }
-                else
-                {
-                    l.Text = string.Format(Messages.HA_HEARTBEAT_SERVERS, members[i].ha_network_peers.Length, members.Count);
-                }
                 tableLatencies.Controls.Add(l);
                 tableLatencies.SetCellPosition(l, new TableLayoutPanelCellPosition(1, i + 1));
                 tableLatencies.SetColumnSpan(l, 2);
@@ -665,6 +688,23 @@ namespace XenAdmin.TabPages
                 // Show wizard to enable HA
                 Program.MainWindow.ShowPerConnectionWizard(pool.Connection, new HAWizard(pool));
             }
+        }
+
+        private void SetNetworkHBInitDelay()
+        {
+            initializationDelayElapsed = false;
+
+            //30 second delay to allow network HB status to initialize  
+            initializationDelayTimer = new System.Timers.Timer(HB_INITIALIZATION_DELAY);
+            initializationDelayTimer.Elapsed += HeartbeatInitialization_TimeElapsed;
+            initializationDelayTimer.AutoReset = false;
+            initializationDelayTimer.Enabled = true;
+        }
+
+        private void HeartbeatInitialization_TimeElapsed(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            initializationDelayElapsed = true;
+            Program.Invoke(Program.MainWindow, Rebuild);
         }
     }
 }

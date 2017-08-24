@@ -156,6 +156,8 @@ namespace XenAdmin.ConsoleView
 
         public event EventHandler DesktopResized = null;
 
+        public bool UseQemuExtKeyEncoding { set; private get; }
+
         public VNCGraphicsClient(ContainerControl parent)
         {
             Program.AssertOnEventThread();
@@ -280,11 +282,7 @@ namespace XenAdmin.ConsoleView
 
         private bool RedirectingClipboard()
         {
-#if VNCControl
-            return true;
-#else
             return XenAdmin.Properties.Settings.Default.ClipboardAndPrinterRedirection;
-#endif
         }
 
         private static bool handlingChange = false;
@@ -864,17 +862,15 @@ namespace XenAdmin.ConsoleView
             ToolStripDropDownMenu popupMenu = new ToolStripDropDownMenu();
 
             ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY);
-#if !VNCControl
+
             copyItem.Image = XenAdmin.Properties.Resources.copy_16;
-#endif
             copyItem.Click += copyItem_Click;
+
             popupMenu.Items.Add(copyItem);
             if (sourceVM != null && sourceVM.power_state == XenAPI.vm_power_state.Running)
             {
                 ToolStripMenuItem pasteItem = new ToolStripMenuItem(Messages.PASTE);
-#if !VNCControl
                 pasteItem.Image = XenAdmin.Properties.Resources.paste_16;
-#endif
                 pasteItem.Click += pasteItem_Click;
 
                 popupMenu.Items.Add(pasteItem);
@@ -907,16 +903,12 @@ namespace XenAdmin.ConsoleView
 
         public void DisableMenuShortcuts()
         {
-#if !VNCControl
             Program.MainWindow.MenuShortcuts = false;
-#endif
         }
 
         public void EnableMenuShortcuts()
         {
-#if !VNCControl
             Program.MainWindow.MenuShortcuts = true;
-#endif
         }
 
         protected override void OnGotFocus(EventArgs e)
@@ -964,7 +956,7 @@ namespace XenAdmin.ConsoleView
 
                 foreach (int key in pressedScans)
                 {
-                    this.vncStream.keyScanEvent(false, key);
+                    this.vncStream.keyScanEvent(false, key, -1, UseQemuExtKeyEncoding);
                 }
             });
 
@@ -1285,7 +1277,7 @@ namespace XenAdmin.ConsoleView
             }
         }
 
-        public void keyScan(bool pressed, int scanCode)
+        public void keyScan(bool pressed, int scanCode, int keySym)
         {
             if (KeyHandler.handleExtras<int>(pressed, pressedScans, KeyHandler.ExtraScans, scanCode, KeyHandler.ModifierScans, ref modifierKeyPressedAlone))
             {
@@ -1293,21 +1285,26 @@ namespace XenAdmin.ConsoleView
                 {
                     // send key up anyway
                     modifierKeyPressedAlone = false;
-                    keyScan_(pressed, scanCode);
+                    keyScan_(pressed, scanCode, keySym);
                     return;
                 }
                 this.Focus();
                 return;
             }
 
-            keyScan_(pressed, scanCode);
+            keyScan_(pressed, scanCode, keySym);
         }
 
         private void keyScan_(bool pressed, int scanCode)
         {
+            keyScan_(pressed, scanCode, -1);
+        }
+
+        private void keyScan_(bool pressed, int scanCode, int keySym)
+        {
             DoIfConnected(delegate()
             {
-                this.vncStream.keyScanEvent(pressed, scanCode);
+                this.vncStream.keyScanEvent(pressed, scanCode, keySym, UseQemuExtKeyEncoding);
             });
         }
 

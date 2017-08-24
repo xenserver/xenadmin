@@ -29,7 +29,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LicenseManager));
             this.checkableDataGridView = new XenAdmin.Controls.LicenseCheckableDataGridView();
             this.checkBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -42,16 +41,11 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.assignLicenceButton = new System.Windows.Forms.Button();
             this.releaseLicenseButton = new System.Windows.Forms.Button();
-            this.activateFreeXenServerButton = new XenAdmin.Controls.DropDownButton();
             this.summaryPanel = new XenAdmin.Controls.SummaryPanel.SummaryPanel();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.freeXenServerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.requestActivationKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.applyActivationKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.checkableDataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.freeXenServerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkableDataGridView
@@ -123,7 +117,6 @@
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.assignLicenceButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.releaseLicenseButton, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.activateFreeXenServerButton, 2, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // assignLicenceButton
@@ -137,12 +130,6 @@
             resources.ApplyResources(this.releaseLicenseButton, "releaseLicenseButton");
             this.releaseLicenseButton.Name = "releaseLicenseButton";
             this.releaseLicenseButton.UseVisualStyleBackColor = true;
-            // 
-            // activateFreeXenServerButton
-            // 
-            resources.ApplyResources(this.activateFreeXenServerButton, "activateFreeXenServerButton");
-            this.activateFreeXenServerButton.Name = "activateFreeXenServerButton";
-            this.activateFreeXenServerButton.UseVisualStyleBackColor = true;
             // 
             // summaryPanel
             // 
@@ -158,24 +145,6 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // freeXenServerContextMenuStrip
-            // 
-            this.freeXenServerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.requestActivationKeyToolStripMenuItem,
-            this.applyActivationKeyToolStripMenuItem});
-            this.freeXenServerContextMenuStrip.Name = "freeXenServerContextMenuStrip";
-            resources.ApplyResources(this.freeXenServerContextMenuStrip, "freeXenServerContextMenuStrip");
-            // 
-            // requestActivationKeyToolStripMenuItem
-            // 
-            this.requestActivationKeyToolStripMenuItem.Name = "requestActivationKeyToolStripMenuItem";
-            resources.ApplyResources(this.requestActivationKeyToolStripMenuItem, "requestActivationKeyToolStripMenuItem");
-            // 
-            // applyActivationKeyToolStripMenuItem
-            // 
-            this.applyActivationKeyToolStripMenuItem.Name = "applyActivationKeyToolStripMenuItem";
-            resources.ApplyResources(this.applyActivationKeyToolStripMenuItem, "applyActivationKeyToolStripMenuItem");
-            // 
             // LicenseManager
             // 
             resources.ApplyResources(this, "$this");
@@ -187,8 +156,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.freeXenServerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -203,10 +170,6 @@
         private XenAdmin.Controls.SummaryPanel.SummaryPanel summaryPanel;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.LinkLabel downloadLicenseServerLink;
-        private XenAdmin.Controls.DropDownButton activateFreeXenServerButton;
-        private System.Windows.Forms.ContextMenuStrip freeXenServerContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem requestActivationKeyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem applyActivationKeyToolStripMenuItem;
         private System.Windows.Forms.DataGridViewCheckBoxColumn checkBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn poolColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productVersionColumn;

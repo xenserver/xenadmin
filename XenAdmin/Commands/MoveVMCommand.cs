@@ -66,16 +66,22 @@ namespace XenAdmin.Commands
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
-            VM vm = (VM)selection[0].XenObject;
 
-            if (CrossPoolMoveVMCommand.CanExecute(vm, null))
+            if (new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute())
+            {
                 new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).Execute();
+            }
             else
+            {
+                VM vm = (VM) selection[0].XenObject;
                 MainWindowCommandInterface.ShowPerXenModelObjectWizard(vm, new MoveVMDialog(vm));
+            }
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
+            if (selection.AllItemsAre<VM>() && new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute())
+                return true;
             return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }
 

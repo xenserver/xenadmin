@@ -47,7 +47,7 @@ namespace XenAdminTests.XenModelTests
         [Test]
         public void TestEmptyList()
         {
-            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<IVMPolicy>());
+            var action = new DestroyPolicyAction(mockConnection.Object, new List<VMSS>());
             action.Completed += action_Completed;
             action.RunAsync();
             _autoResetEvent.WaitOne();
@@ -62,30 +62,30 @@ namespace XenAdminTests.XenModelTests
         [Test]
         public void TestOneInList()
         {
-            mockProxy.Setup(x => x.vmpp_destroy(It.IsAny<string>(), "1")).Returns(new Response<string>(""));
-            mockProxy.Setup(x => x.vm_set_protection_policy(It.IsAny<string>(), "1", It.IsAny<string>())).Returns(new Response<string>(""));
-            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<IVMPolicy>()
-            {new VMPP(){opaque_ref = "1",VMs = new List<XenRef<VM>>(){new XenRef<VM>("1")}}});
+            mockProxy.Setup(x => x.vmss_destroy(It.IsAny<string>(), "1")).Returns(new Response<string>(""));
+            mockProxy.Setup(x => x.vm_set_snapshot_schedule(It.IsAny<string>(), "1", It.IsAny<string>())).Returns(new Response<string>(""));
+            var action = new DestroyPolicyAction(mockConnection.Object, new List<VMSS>()
+            {new VMSS(){opaque_ref = "1",VMs = new List<XenRef<VM>>(){new XenRef<VM>("1")}}});
             action.Completed += action_Completed;
             action.RunAsync();
             _autoResetEvent.WaitOne();
             Assert.True(action.Succeeded,action.Exception!=null?action.Exception.ToString():"");
             mockProxy.VerifyAll();
-            mockProxy.Verify(x => x.vm_set_protection_policy(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once());
+            mockProxy.Verify(x => x.vm_set_snapshot_schedule(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once());
         }
 
         [Test]
         public void TestOneWithTwonVMsInList()
         {
-            mockProxy.Setup(x => x.vmpp_destroy(It.IsAny<string>(),"1")).Returns(new Response<string>(""));
-            mockProxy.Setup(x => x.vm_set_protection_policy(It.IsAny<string>(),  It.Is<string>(s=>s=="1"||s=="2"), It.IsAny<string>())).Returns(new Response<string>(""));
-            var action = new DestroyPolicyAction<VMPP>(mockConnection.Object, new List<IVMPolicy>() 
-            { new VMPP() { opaque_ref = "1", VMs = new List<XenRef<VM>>() { new XenRef<VM>("1"), new XenRef<VM>("2") } } });
+            mockProxy.Setup(x => x.vmss_destroy(It.IsAny<string>(),"1")).Returns(new Response<string>(""));
+            mockProxy.Setup(x => x.vm_set_snapshot_schedule(It.IsAny<string>(), It.Is<string>(s => s == "1" || s == "2"), It.IsAny<string>())).Returns(new Response<string>(""));
+            var action = new DestroyPolicyAction(mockConnection.Object, new List<VMSS>() 
+            { new VMSS() { opaque_ref = "1", VMs = new List<XenRef<VM>>() { new XenRef<VM>("1"), new XenRef<VM>("2") } } });
             action.Completed += action_Completed;
             action.RunAsync();
             _autoResetEvent.WaitOne();
             Assert.True(action.Succeeded, action.Exception != null ? action.Exception.ToString() : "");
-            mockProxy.Verify(x => x.vm_set_protection_policy(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
+            mockProxy.Verify(x => x.vm_set_snapshot_schedule(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
             mockProxy.VerifyAll();
         }
        

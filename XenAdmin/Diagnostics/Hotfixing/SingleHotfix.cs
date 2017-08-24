@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -46,31 +47,63 @@ namespace XenAdmin.Diagnostics.Hotfixing
 
         public sealed override void Apply(Host host, Session session)
         {
-            Pool_patch patch = host.Connection.Cache.Find_By_Uuid<Pool_patch>(UUID);
-            if (patch == null)
-            {
-                var master = Helpers.GetMaster(host.Connection);
-                var action = new Actions.UploadPatchAction(master.Connection, Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, Branding.Update)));
-                action.RunExternal(session);
-                patch = action.PatchRefs[master];
-            }
-            Pool_patch.apply(session, patch.opaque_ref, host.opaque_ref);
+            bool elyOrGreater = Helpers.ElyOrGreater(host);
+            if (elyOrGreater)
+                UploadAndApplyUpdate(host, session);
+            else
+                UploadAndApplyPatch(host, session);
 
+            IXenObject patch;
             int numberRetries = 0;
             do
             {
                 Thread.Sleep(500);
-                patch = host.Connection.Cache.Find_By_Uuid<Pool_patch>(UUID);
+                patch = elyOrGreater
+                    ? (IXenObject)host.Connection.Cache.Find_By_Uuid<Pool_update>(UUID)
+                    : host.Connection.Cache.Find_By_Uuid<Pool_patch>(UUID);
                 numberRetries++;
 
             } while (patch == null && numberRetries < 10);
         }
 
+        private void UploadAndApplyPatch(Host host, Session session)
+        {
+            var patch = host.Connection.Cache.Find_By_Uuid<Pool_patch>(UUID);
+            if (patch == null)
+            {
+                var master = Helpers.GetMaster(host.Connection);
+                var filePath = Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, Branding.Update));
+                var action = new Actions.UploadPatchAction(master.Connection, filePath);
+                action.RunExternal(session);
+                patch = action.PatchRefs[master];
+            }
+            Pool_patch.apply(session, patch.opaque_ref, host.opaque_ref);
+        }
+
+        private void UploadAndApplyUpdate(Host host, Session session)
+        {
+            var update = host.Connection.Cache.Find_By_Uuid<Pool_update>(UUID);
+            if (update == null)
+            {
+                var master = Helpers.GetMaster(host.Connection);
+                var filePath = Path.Combine(Program.AssemblyDir, String.Format("{0}.{1}", Filename, Branding.UpdateIso));
+                var action = new Actions.UploadSupplementalPackAction(master.Connection, new List<Host>() { master }, filePath, true);
+                action.RunExternal(session);
+                update = action.PoolUpdate;
+            }
+            Pool_update.apply(session, update.opaque_ref, host.opaque_ref);
+        }
+        
         public override bool ShouldBeAppliedTo(Host host)
         {
+            if (Helpers.ElyOrGreater(host))
+            {
+                var updates = host.Connection.ResolveAll(host.updates);
+                return !updates.Any(update => UUID.ToLowerInvariant().Contains(update.uuid.ToLowerInvariant()));
+            }
             var patches = host.Connection.ResolveAll(host.patches);
             var poolPatches = patches.Select(hostPatch => hostPatch.Connection.Resolve(hostPatch.pool_patch));
-            return !poolPatches.Any( patch => UUID.ToLowerInvariant().Contains(patch.uuid.ToLowerInvariant()));
+            return !poolPatches.Any(patch => UUID.ToLowerInvariant().Contains(patch.uuid.ToLowerInvariant()));
         }
     }
 

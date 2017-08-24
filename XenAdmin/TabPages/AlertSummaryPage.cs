@@ -40,8 +40,6 @@ using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
-using XenAdmin.Network;
-using XenAPI;
 using XenAdmin.Alerts;
 using XenAdmin.Help;
 using System.Threading;
@@ -411,7 +409,6 @@ namespace XenAdmin.TabPages
             }
         }
 
-        #endregion
 
         private DataGridViewRow FindAlertRow(ToolStripMenuItem toolStripMenuItem)
         {
@@ -424,6 +421,8 @@ namespace XenAdmin.TabPages
                     where actionCell != null && actionCell.ContextMenu.Items.Cast<object>().Any(item => item is ToolStripMenuItem && item == toolStripMenuItem)
                     select row).FirstOrDefault();
         }
+
+        #endregion
 
         private void ToolStripMenuItemHelp_Click(object sender, EventArgs e)
         {
@@ -585,24 +584,27 @@ namespace XenAdmin.TabPages
         private void AlertsCollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             Program.AssertOnEventThread();
-            if (e.Element == null)
-            {
-                // We take the null element to mean there has been a batch remove
-                Rebuild();
-                return;
-            }
-            Alert a = e.Element as Alert;
+
             switch (e.Action)
             {
                 case CollectionChangeAction.Add:
                     Rebuild(); // rebuild entire alert list to ensure filtering and sorting
                     break;
                 case CollectionChangeAction.Remove:
-                    RemoveAlertRow(a);
+
+                    var a = e.Element as Alert;
+                    if (a != null)
+                        RemoveAlertRow(a);
+                    else
+                    {
+                        var range = e.Element as List<Alert>;
+                        if (range != null)
+                            Rebuild();
+                    }
                     break;
             }
         }
-
+        
         private void UpdateActionEnablement()
         {
             toolStripButtonExportAll.Enabled = Alert.NonDismissingAlertCount > 0;

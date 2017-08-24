@@ -319,9 +319,9 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>[XenCenter] によって、この VM の DVD ドライブに [XenServer product] Tools DVD が挿入され、コンソール画面に切り替わります。よろしいですか?
+    <value>[XenCenter] によって、この仮想マシンの DVD ドライブに [XenServer product] Tools DVD が挿入され、コンソール画面に切り替わります。よろしいですか?
 
-[XenServer product] Tools のインストールにより、現在 VM の DVD ドライブにあるディスクはすべてイジェクトされます。</value>
+[XenServer product] Tools のインストールにより、現在仮想マシンの DVD ドライブにあるディスクはすべてイジェクトされます。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>

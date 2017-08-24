@@ -451,7 +451,7 @@
     <value>0</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Enter any advanced boot parameters here. Leave this box blank if you do not wish to supply any parameters.</value>
+    <value>Enter any advanced boot parameters here. Leave this box blank if you do not want to supply any parameters.</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

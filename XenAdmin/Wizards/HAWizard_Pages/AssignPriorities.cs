@@ -641,19 +641,20 @@ namespace XenAdmin.Wizards.HAWizard_Pages
         }
 
         /// <summary>
-        /// Gets the current (uncommitted) VM startup options. Must be called on the GUI thread.
+        /// Gets the changed (uncommitted) VM startup options. Must be called on the GUI thread.
         /// </summary>
         /// <returns></returns>
-        public Dictionary<VM, VMStartupOptions> GetCurrentStartupOptions()
+        public Dictionary<VM, VMStartupOptions> GetChangedStartupOptions()
         {
             Program.AssertOnEventThread();
             Dictionary<VM, VMStartupOptions> result = new Dictionary<VM, VMStartupOptions>();
             
             foreach (var curRow in dataGridViewVms.Rows.Cast<VmWithSettingsRow>())
             {
-                result[curRow.Vm] = new VMStartupOptions(curRow.StartOrder,
-                                                         curRow.StartDelay,
-                                                         curRow.RestartPriority ?? VM.HA_Restart_Priority.BestEffort);
+                if (curRow.HasChanged())
+                    result[curRow.Vm] = new VMStartupOptions(curRow.StartOrder,
+                                                             curRow.StartDelay,
+                                                             curRow.RestartPriority ?? VM.HA_Restart_Priority.BestEffort);
             }
             return result;
         }
@@ -806,6 +807,11 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             public void SetAgileCalculating()
             {
                 cellAgile.Value = Messages.HA_CALCULATING_AGILITY;
+            }
+
+            public bool HasChanged()
+            {
+                return Vm.order != StartOrder || Vm.start_delay != StartDelay || Vm.HARestartPriority != RestartPriority;
             }
         }
 

@@ -35,6 +35,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Threading.Tasks;
 using XenAPI;
+using XenAdmin.Model;
 
 namespace XenServerHealthCheck
 {
@@ -84,7 +85,7 @@ namespace XenServerHealthCheck
             }
         }
 
-        private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
+        public const char SEPARATOR = '\x202f'; // narrow non-breaking space.
         private string ProtectCredential(ServerInfo connection)
         {
             string Host = connection.HostName ?? string.Empty;
@@ -165,12 +166,27 @@ namespace XenServerHealthCheck
             }
         }
 
+        public void ClearServerList()
+        {
+            lock (serverListLock)
+            {
+                serverList.Clear();
+                updateServerList();
+            }
+        }
+
         public void UpdateServerCredential(string credential)
         {
             log.Info("Receive credential update message");
 
             string decryptCredential = EncryptionUtils.UnprotectForLocalMachine(credential);
             string[] decryptCredentialComps = decryptCredential.Split(SEPARATOR);
+
+            if (decryptCredentialComps.Length != 1 && decryptCredentialComps.Length != 3)
+                return;
+
+            if (decryptCredentialComps.Length == 3 && (string.IsNullOrEmpty(decryptCredentialComps[1]) || string.IsNullOrEmpty(decryptCredentialComps[2])))
+                return; //ignore null or empty username and password
 
             lock (serverListLock)
             {
@@ -219,6 +235,9 @@ namespace XenServerHealthCheck
             try
             {
                 string[] proxySettings = proxy.Split(SEPARATOR);
+                if (proxySettings.Length < 2)
+                    return;
+
                 HTTPHelper.ProxyStyle proxyStyle = (HTTPHelper.ProxyStyle)Int32.Parse(proxySettings[1]);
 
                 switch (proxyStyle)
@@ -230,8 +249,8 @@ namespace XenServerHealthCheck
                         Properties.Settings.Default.ConnectionTimeout = Int32.Parse(proxySettings[4]);
                         Properties.Settings.Default.BypassProxyForServers = bool.Parse(proxySettings[5]);
                         Properties.Settings.Default.ProvideProxyAuthentication = bool.Parse(proxySettings[6]);
-                        Properties.Settings.Default.ProxyUsername = proxySettings[7];
-                        Properties.Settings.Default.ProxyPassword = proxySettings[8];
+                        Properties.Settings.Default.ProxyUsername = EncryptionUtils.Protect(EncryptionUtils.UnprotectForLocalMachine(proxySettings[7]));
+                        Properties.Settings.Default.ProxyPassword = EncryptionUtils.Protect(EncryptionUtils.UnprotectForLocalMachine(proxySettings[8]));
                         Properties.Settings.Default.ProxyAuthenticationMethod = Int32.Parse(proxySettings[9]);
                         break;
 
@@ -251,6 +270,30 @@ namespace XenServerHealthCheck
             {
                 log.Error("Error parsing 'ProxySetting' from XenCenter", e);
             }
+        }
+
+        public void UpdateXenCenterMetadata(string message)
+        {
+            log.Info("Receive XenCenter metadata update message");
+
+            try
+            {
+                string[] metadata = message.Split(SEPARATOR);
+                if (metadata.Length != 2) 
+                    return;
+                Properties.Settings.Default.XenCenterMetadata = EncryptionUtils.UnprotectForLocalMachine(metadata[1]);
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("Error parsing 'XenCenterMetadata' from XenCenter", e);
+            }
+        }
+
+
+        public string XenCenterMetadata
+        {
+            get { return Properties.Settings.Default.XenCenterMetadata; }
         }
     }
 }

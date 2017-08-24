@@ -163,7 +163,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSelectAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 318</value>
+    <value>320, 318</value>
   </data>
   <data name="buttonSelectAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 23</value>
@@ -196,7 +196,7 @@
     <value>442, 318</value>
   </data>
   <data name="buttonClearAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 23</value>
+    <value>110, 23</value>
   </data>
   <data name="buttonClearAll.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

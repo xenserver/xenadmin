@@ -53,6 +53,7 @@ namespace XenAdmin.Dialogs
 
         private List<PIF> ShownPIFs;
         private List<PIF> AllPIFs;
+        private bool AllowManagementOnVLAN;
 
         public NetworkingProperties()
         {
@@ -65,6 +66,7 @@ namespace XenAdmin.Dialogs
             Pool = null;
             connection = host.Connection;
             ObjectName = Helpers.GetName(host);
+            AllowManagementOnVLAN = !Helpers.FeatureForbidden(connection, Host.RestrictManagementOnVLAN);
 
             BlurbLabel.Text = string.Format(Messages.NETWORKING_PROPERTIES_BLURB_HOST, ObjectName);
 
@@ -78,6 +80,7 @@ namespace XenAdmin.Dialogs
             Pool = pool;
             connection = pool.Connection;
             ObjectName = Helpers.GetName(Pool);
+            AllowManagementOnVLAN = !Helpers.FeatureForbidden(connection, Host.RestrictManagementOnVLAN);
 
             Host =connection.Resolve(pool.master);
             if (Host == null)
@@ -192,7 +195,7 @@ namespace XenAdmin.Dialogs
 
         private void RefreshNetworkComboBox(Dictionary<XenAPI.Network, List<NetworkingPropertiesPage>> InUseMap, NetworkingPropertiesPage page)
         {
-            page.RefreshNetworkComboBox(InUseMap, ManagementNetwork());
+            page.RefreshNetworkComboBox(InUseMap, ManagementNetwork(), AllowManagementOnVLAN);
         }
 
         private List<PIF> GetKnownPIFs(bool include_invisible)
@@ -491,7 +494,7 @@ namespace XenAdmin.Dialogs
             }
 
             // Any PIFs that are in downPIFs but also in newPIFs need to be removed from the former.
-            // downPIFs should contain all those that we no longer wish to keep up.
+            // downPIFs should contain all those that we no longer want to keep up.
             downPIFs.RemoveAll(delegate(PIF p) { return PIFContains(newPIFs, p); });
 
             // Remove any PIFs that haven't changed -- there's nothing to do for these ones.  They are in this

@@ -63,6 +63,14 @@ namespace XenAPI
             }
         }
 
+        /// <summary>
+        /// Has at least one supported_VGPU_type that is passthrough
+        /// </summary>
+        public bool HasPassthrough
+        {
+            get { return Connection.ResolveAll(supported_VGPU_types).Any(supportedType => supportedType.IsPassthrough); }
+        }
+
 
         #region IEquatable<GPU_group> Members
 

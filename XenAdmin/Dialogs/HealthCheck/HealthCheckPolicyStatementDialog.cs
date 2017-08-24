@@ -46,11 +46,16 @@ namespace XenAdmin.Dialogs
         public HealthCheckPolicyStatementDialog()
         {
             InitializeComponent();
+            string cis_policy = Messages.HEALTH_CHECK_CIS_POLICY_URL;
+            string citrix_policy = Messages.HEALTH_CHECK_CITRIX_POLICY_URL;
+            policyStatementTextBox.Text = String.Format(Messages.HEALTH_CHECK_PRIVACY_POLICY, cis_policy, citrix_policy);
+            policyStatementTextBox.Links.Add(policyStatementTextBox.Text.IndexOf(cis_policy), cis_policy.Length, cis_policy);
+            policyStatementTextBox.Links.Add(policyStatementTextBox.Text.IndexOf(citrix_policy), citrix_policy.Length, citrix_policy);
         }
 
-        private void policyStatementTextBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        private void policyStatementTextBox_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Program.OpenURL(e.LinkText);
+            Program.OpenURL(e.Link.LinkData.ToString());
         }
     }
 }

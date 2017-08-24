@@ -58,62 +58,13 @@ namespace XenAdminTests.TabsAndMenus
             get
             {
                 yield return new TestData
-                 {
-                     IsFree = true,
-                     Expiry = new DateTime(2002, 10, 25),
-                     Ref = new DateTime(2012, 10, 10),
-                     Expected = Messages.LICENSE_REQUIRES_ACTIVATION,
-                     State = LicenseStatus.HostState.Expired
-                 };
-
-                yield return new TestData
                 {
                     IsFree = false,
                     Expiry = new DateTime(2002, 10, 25),
                     Ref = new DateTime(2012, 10, 10),
-                    Expected = Messages.LICENSE_EXPIRED,
+                    Expected = Messages.LICENSE_UNSUPPORTED,
                     State = LicenseStatus.HostState.Expired
                 };
-
-                yield return new TestData
-                {
-                    IsFree = true,
-                    Expiry = new DateTime(2012, 10, 25, 1, 2, 0, 0),
-                    Ref = new DateTime(2012, 10, 25, 1, 1, 0),
-                    Expected = Messages.LICENSE_REQUIRES_ACTIVATION_ONE_MIN
-                };
-
-                yield return new TestData
-                {
-                    IsFree = true,
-                    Expiry = new DateTime(2012, 10, 25, 2, 0, 0),
-                    Ref = new DateTime(2012, 10, 25, 1, 30, 0),
-                    Expected = String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_MINUTES, "30")
-                };
-
-                yield return new TestData
-                {
-                    IsFree = true,
-                    Expiry = new DateTime(2012, 10, 26, 2, 0, 0),
-                    Ref = new DateTime(2012, 10, 25, 8, 0, 0),
-                    Expected = String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_HOURS, "18")
-                };
-
-                yield return new TestData
-                {
-                    IsFree = true,
-                    Expiry = new DateTime(2012, 10, 12, 1, 0, 0),
-                    Ref = new DateTime(2012, 9, 25, 1, 0, 0),
-                    Expected = String.Format(Messages.LICENSE_REQUIRES_ACTIVATION_DAYS, "17")
-                };
-
-                yield return new TestData
-                 {
-                     IsFree = true,
-                     Expiry = new DateTime(2012, 10, 12),
-                     Ref = new DateTime(2012, 6, 25),
-                     Expected = Messages.LICENSE_ACTIVATED
-                 };
 
                 yield return new TestData
                 {

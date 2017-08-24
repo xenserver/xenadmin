@@ -224,10 +224,12 @@ namespace XenAdmin.SettingsPanels
             cpuAlert.Show(isVm || isHost);
             netAlert.Show(isVm || isHost);
             diskAlert.Show(isVm);
-            memoryAlert.Show(isHost && Helpers.ClearwaterOrGreater(_XenObject.Connection));
-            srAlert.Show(isSr && Helpers.ClearwaterOrGreater(_XenObject.Connection));
+            memoryAlert.Show(isHost);
+            srAlert.Show(isSr);
             dom0MemoryAlert.Show(isHost && Helpers.CreedenceOrGreater(_XenObject.Connection));
-            physicalUtilisationAlert.Show(isSr && ((SR)_XenObject).IsThinProvisioned);
+            // Always hidden since thin provisioning was removed, because that was the only case
+            // in which the calculation worked, but retaining it in case we use it again
+            physicalUtilisationAlert.Show(false);
 
             if (isHost)
             {

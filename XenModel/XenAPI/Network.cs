@@ -58,6 +58,7 @@ namespace XenAPI
             long MTU,
             Dictionary<string, string> other_config,
             string bridge,
+            bool managed,
             Dictionary<string, XenRef<Blob>> blobs,
             string[] tags,
             network_default_locking_mode default_locking_mode,
@@ -73,6 +74,7 @@ namespace XenAPI
             this.MTU = MTU;
             this.other_config = other_config;
             this.bridge = bridge;
+            this.managed = managed;
             this.blobs = blobs;
             this.tags = tags;
             this.default_locking_mode = default_locking_mode;
@@ -100,6 +102,7 @@ namespace XenAPI
             MTU = update.MTU;
             other_config = update.other_config;
             bridge = update.bridge;
+            managed = update.managed;
             blobs = update.blobs;
             tags = update.tags;
             default_locking_mode = update.default_locking_mode;
@@ -118,6 +121,7 @@ namespace XenAPI
             MTU = proxy.MTU == null ? 0 : long.Parse((string)proxy.MTU);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             bridge = proxy.bridge == null ? null : (string)proxy.bridge;
+            managed = (bool)proxy.managed;
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
             tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
             default_locking_mode = proxy.default_locking_mode == null ? (network_default_locking_mode) 0 : (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)proxy.default_locking_mode);
@@ -137,6 +141,7 @@ namespace XenAPI
             result_.MTU = MTU.ToString();
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.bridge = (bridge != null) ? bridge : "";
+            result_.managed = managed;
             result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
             result_.tags = tags;
             result_.default_locking_mode = network_default_locking_mode_helper.ToString(default_locking_mode);
@@ -160,6 +165,7 @@ namespace XenAPI
             MTU = Marshalling.ParseLong(table, "MTU");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             bridge = Marshalling.ParseString(table, "bridge");
+            managed = Marshalling.ParseBool(table, "managed");
             blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             tags = Marshalling.ParseStringArray(table, "tags");
             default_locking_mode = (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), Marshalling.ParseString(table, "default_locking_mode"));
@@ -185,6 +191,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._MTU, other._MTU) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._bridge, other._bridge) &&
+                Helper.AreEqual2(this._managed, other._managed) &&
                 Helper.AreEqual2(this._blobs, other._blobs) &&
                 Helper.AreEqual2(this._tags, other._tags) &&
                 Helper.AreEqual2(this._default_locking_mode, other._default_locking_mode) &&
@@ -409,6 +416,17 @@ namespace XenAPI
         public static string get_bridge(Session session, string _network)
         {
             return (string)session.proxy.network_get_bridge(session.uuid, (_network != null) ? _network : "").parse();
+        }
+
+        /// <summary>
+        /// Get the managed field of the given network.
+        /// First published in XenServer 7.2.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        public static bool get_managed(Session session, string _network)
+        {
+            return (bool)session.proxy.network_get_managed(session.uuid, (_network != null) ? _network : "").parse();
         }
 
         /// <summary>
@@ -842,6 +860,25 @@ namespace XenAPI
             }
         }
         private string _bridge;
+
+        /// <summary>
+        /// true if the bridge is managed by xapi
+        /// First published in XenServer 7.2.
+        /// </summary>
+        public virtual bool managed
+        {
+            get { return _managed; }
+            set
+            {
+                if (!Helper.AreEqual(value, _managed))
+                {
+                    _managed = value;
+                    Changed = true;
+                    NotifyPropertyChanged("managed");
+                }
+            }
+        }
+        private bool _managed;
 
         /// <summary>
         /// Binary blobs associated with this network

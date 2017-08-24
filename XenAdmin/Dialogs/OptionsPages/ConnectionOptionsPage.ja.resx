@@ -163,7 +163,7 @@
     <value>0, 0, 3, 0</value>
   </data>
   <data name="ConnectionTimeoutLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
+    <value>104, 23</value>
   </data>
   <data name="ConnectionTimeoutLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -190,7 +190,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="ConnectionTimeoutNud.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 3</value>
+    <value>107, 3</value>
   </data>
   <data name="ConnectionTimeoutNud.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 3, 0</value>
@@ -226,10 +226,10 @@
     <value>NoControl</value>
   </data>
   <data name="SecondsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 0</value>
+    <value>177, 0</value>
   </data>
   <data name="SecondsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
+    <value>46, 23</value>
   </data>
   <data name="SecondsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -259,7 +259,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 23</value>
+    <value>226, 23</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -292,7 +292,7 @@
     <value>9, 27</value>
   </data>
   <data name="TimeOutLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 18</value>
+    <value>388, 13</value>
   </data>
   <data name="TimeOutLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -319,13 +319,13 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="TimeoutGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 196</value>
+    <value>3, 267</value>
   </data>
   <data name="TimeoutGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
   <data name="TimeoutGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 74</value>
+    <value>584, 87</value>
   </data>
   <data name="TimeoutGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -358,13 +358,232 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="BypassForServersCheckbox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BypassForServersCheckbox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="BypassForServersCheckbox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BypassForServersCheckbox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 97</value>
+  </data>
+  <data name="BypassForServersCheckbox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="BypassForServersCheckbox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 17</value>
+  </data>
+  <data name="BypassForServersCheckbox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="BypassForServersCheckbox.Text" xml:space="preserve">
+    <value>すべての [XenServer] 接続でプロキシ サーバーを使用しない(&amp;B)</value>
+  </data>
+  <data name="&gt;&gt;BypassForServersCheckbox.Name" xml:space="preserve">
+    <value>BypassForServersCheckbox</value>
+  </data>
+  <data name="&gt;&gt;BypassForServersCheckbox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BypassForServersCheckbox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;BypassForServersCheckbox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ProxyPasswordTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ProxyPasswordTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="ProxyPasswordTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 139</value>
+  </data>
+  <data name="ProxyPasswordTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 3, 0</value>
+  </data>
+  <data name="ProxyPasswordTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="ProxyPasswordTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ProxyPasswordTextBox.Name" xml:space="preserve">
+    <value>ProxyPasswordTextBox</value>
+  </data>
+  <data name="&gt;&gt;ProxyPasswordTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProxyPasswordTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ProxyPasswordTextBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ProxyUsernameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ProxyUsernameLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="ProxyUsernameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ProxyUsernameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>40, 136</value>
+  </data>
+  <data name="ProxyUsernameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ProxyUsernameLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 0</value>
+  </data>
+  <data name="ProxyUsernameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 18</value>
+  </data>
+  <data name="ProxyUsernameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="ProxyUsernameLabel.Text" xml:space="preserve">
+    <value>ユーザー名(&amp;U):</value>
+  </data>
+  <data name="ProxyUsernameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;ProxyUsernameLabel.Name" xml:space="preserve">
+    <value>ProxyUsernameLabel</value>
+  </data>
+  <data name="&gt;&gt;ProxyUsernameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProxyUsernameLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ProxyUsernameLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ProxyUsernameTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ProxyUsernameTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="ProxyUsernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 139</value>
+  </data>
+  <data name="ProxyUsernameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 3, 0</value>
+  </data>
+  <data name="ProxyUsernameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 20</value>
+  </data>
+  <data name="ProxyUsernameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ProxyUsernameTextBox.Name" xml:space="preserve">
+    <value>ProxyUsernameTextBox</value>
+  </data>
+  <data name="&gt;&gt;ProxyUsernameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProxyUsernameTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ProxyUsernameTextBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ProxyPasswordLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="ProxyPasswordLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ProxyPasswordLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="ProxyPasswordLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ProxyPasswordLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 136</value>
+  </data>
+  <data name="ProxyPasswordLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 0, 0</value>
+  </data>
+  <data name="ProxyPasswordLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 0</value>
+  </data>
+  <data name="ProxyPasswordLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 18</value>
+  </data>
+  <data name="ProxyPasswordLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="ProxyPasswordLabel.Text" xml:space="preserve">
+    <value>パスワード(&amp;W):</value>
+  </data>
+  <data name="ProxyPasswordLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;ProxyPasswordLabel.Name" xml:space="preserve">
+    <value>ProxyPasswordLabel</value>
+  </data>
+  <data name="&gt;&gt;ProxyPasswordLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProxyPasswordLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ProxyPasswordLabel.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="AuthenticationCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="AuthenticationCheckBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="AuthenticationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="AuthenticationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 119</value>
+  </data>
+  <data name="AuthenticationCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 3, 0</value>
+  </data>
+  <data name="AuthenticationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="AuthenticationCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="AuthenticationCheckBox.Text" xml:space="preserve">
+    <value>資格情報を提供する(&amp;C):</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationCheckBox.Name" xml:space="preserve">
+    <value>AuthenticationCheckBox</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationCheckBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ProxyAddressLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="ProxyAddressLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="ProxyAddressLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="ProxyAddressLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -373,13 +592,13 @@
     <value>NoControl</value>
   </data>
   <data name="ProxyAddressLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 75</value>
+    <value>20, 69</value>
   </data>
   <data name="ProxyAddressLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>20, 0, 0, 0</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="ProxyAddressLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 23</value>
+    <value>55, 23</value>
   </data>
   <data name="ProxyAddressLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -400,7 +619,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;ProxyAddressLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="UseProxyRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -412,10 +631,10 @@
     <value>NoControl</value>
   </data>
   <data name="UseProxyRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 53</value>
+    <value>3, 49</value>
   </data>
   <data name="UseProxyRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 19</value>
+    <value>132, 17</value>
   </data>
   <data name="UseProxyRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -433,7 +652,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;UseProxyRadioButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>7</value>
   </data>
   <data name="DirectConnectionRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -448,7 +667,7 @@
     <value>3, 3</value>
   </data>
   <data name="DirectConnectionRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 19</value>
+    <value>144, 17</value>
   </data>
   <data name="DirectConnectionRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -466,7 +685,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;DirectConnectionRadioButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>8</value>
   </data>
   <data name="UseIERadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -478,10 +697,10 @@
     <value>NoControl</value>
   </data>
   <data name="UseIERadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 28</value>
+    <value>3, 26</value>
   </data>
   <data name="UseIERadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 19</value>
+    <value>260, 17</value>
   </data>
   <data name="UseIERadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -499,55 +718,22 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;UseIERadioButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>9</value>
   </data>
-  <data name="BypassLocalCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="BypassLocalCheckBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="BypassLocalCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="BypassLocalCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 103</value>
-  </data>
-  <data name="BypassLocalCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>20, 5, 3, 0</value>
-  </data>
-  <data name="BypassLocalCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 19</value>
-  </data>
-  <data name="BypassLocalCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="BypassLocalCheckBox.Text" xml:space="preserve">
-    <value>ローカル アドレスにはプロキシ サーバーを使用しない(&amp;B)</value>
-  </data>
-  <data name="&gt;&gt;BypassLocalCheckBox.Name" xml:space="preserve">
-    <value>BypassLocalCheckBox</value>
-  </data>
-  <data name="&gt;&gt;BypassLocalCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BypassLocalCheckBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;BypassLocalCheckBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="ProxyAddressTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="ProxyAddressTextBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
   <data name="ProxyAddressTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 78</value>
+    <value>75, 72</value>
   </data>
   <data name="ProxyAddressTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 3, 0</value>
   </data>
   <data name="ProxyAddressTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 20</value>
+    <value>222, 20</value>
   </data>
   <data name="ProxyAddressTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -562,13 +748,46 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;ProxyAddressTextBox.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="ProxyPortTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ProxyPortTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="ProxyPortTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 72</value>
+  </data>
+  <data name="ProxyPortTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 3, 0</value>
+  </data>
+  <data name="ProxyPortTextBox.MaxLength" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="ProxyPortTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="ProxyPortTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ProxyPortTextBox.Name" xml:space="preserve">
+    <value>ProxyPortTextBox</value>
+  </data>
+  <data name="&gt;&gt;ProxyPortTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProxyPortTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;ProxyPortTextBox.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="ProxyPortLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="ProxyPortLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="ProxyPortLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="ProxyPortLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
@@ -577,13 +796,13 @@
     <value>NoControl</value>
   </data>
   <data name="ProxyPortLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 75</value>
+    <value>334, 74</value>
   </data>
   <data name="ProxyPortLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 0, 0</value>
   </data>
   <data name="ProxyPortLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 23</value>
+    <value>31, 13</value>
   </data>
   <data name="ProxyPortLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -604,46 +823,145 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;ProxyPortLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>12</value>
   </data>
-  <data name="ProxyPortTextBox.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="AuthenticationMethodLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="AuthenticationMethodLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
-  <data name="ProxyPortTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 78</value>
+  <data name="AuthenticationMethodLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ProxyPortTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 3, 3, 0</value>
+  <data name="AuthenticationMethodLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>40, 159</value>
   </data>
-  <data name="ProxyPortTextBox.MaxLength" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="AuthenticationMethodLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="ProxyPortTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 20</value>
+  <data name="AuthenticationMethodLabel.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 0</value>
   </data>
-  <data name="ProxyPortTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="AuthenticationMethodLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 18</value>
   </data>
-  <data name="&gt;&gt;ProxyPortTextBox.Name" xml:space="preserve">
-    <value>ProxyPortTextBox</value>
+  <data name="AuthenticationMethodLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
-  <data name="&gt;&gt;ProxyPortTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="AuthenticationMethodLabel.Text" xml:space="preserve">
+    <value>認証方法:</value>
   </data>
-  <data name="&gt;&gt;ProxyPortTextBox.Parent" xml:space="preserve">
+  <data name="AuthenticationMethodLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationMethodLabel.Name" xml:space="preserve">
+    <value>AuthenticationMethodLabel</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationMethodLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationMethodLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;ProxyPortTextBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;AuthenticationMethodLabel.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="DigestRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="DigestRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="DigestRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="DigestRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 0</value>
+  </data>
+  <data name="DigestRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 17</value>
+  </data>
+  <data name="DigestRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="DigestRadioButton.Text" xml:space="preserve">
+    <value>要約(&amp;G)</value>
+  </data>
+  <data name="&gt;&gt;DigestRadioButton.Name" xml:space="preserve">
+    <value>DigestRadioButton</value>
+  </data>
+  <data name="&gt;&gt;DigestRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DigestRadioButton.Parent" xml:space="preserve">
+    <value>AuthenticationMethodPanel</value>
+  </data>
+  <data name="&gt;&gt;DigestRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="BasicRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BasicRadioButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="BasicRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BasicRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="BasicRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="BasicRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="BasicRadioButton.Text" xml:space="preserve">
+    <value>基本(&amp;S)</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Name" xml:space="preserve">
+    <value>BasicRadioButton</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.Parent" xml:space="preserve">
+    <value>AuthenticationMethodPanel</value>
+  </data>
+  <data name="&gt;&gt;BasicRadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="AuthenticationMethodPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>183, 162</value>
+  </data>
+  <data name="AuthenticationMethodPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="AuthenticationMethodPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationMethodPanel.Name" xml:space="preserve">
+    <value>AuthenticationMethodPanel</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationMethodPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationMethodPanel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;AuthenticationMethodPanel.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 19</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 122</value>
+    <value>505, 185</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -661,7 +979,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="ProxyAddressLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="UseProxyRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="DirectConnectionRadioButton" Row="0" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="UseIERadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="BypassLocalCheckBox" Row="4" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="ProxyAddressTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="ProxyPortLabel" Row="3" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="ProxyPortTextBox" Row="3" RowSpan="1" Column="3" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="BypassForServersCheckbox" Row="4" RowSpan="1" Column="1" ColumnSpan="6" />&lt;Control Name="ProxyPasswordTextBox" Row="6" RowSpan="1" Column="7" ColumnSpan="1" />&lt;Control Name="ProxyUsernameLabel" Row="6" RowSpan="1" Column="2" ColumnSpan="2" />&lt;Control Name="ProxyUsernameTextBox" Row="6" RowSpan="1" Column="3" ColumnSpan="2" />&lt;Control Name="ProxyPasswordLabel" Row="6" RowSpan="1" Column="6" ColumnSpan="1" />&lt;Control Name="AuthenticationCheckBox" Row="5" RowSpan="1" Column="1" ColumnSpan="6" />&lt;Control Name="ProxyAddressLabel" Row="3" RowSpan="1" Column="1" ColumnSpan="2" />&lt;Control Name="UseProxyRadioButton" Row="2" RowSpan="1" Column="0" ColumnSpan="6" />&lt;Control Name="DirectConnectionRadioButton" Row="0" RowSpan="1" Column="0" ColumnSpan="6" />&lt;Control Name="UseIERadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="6" />&lt;Control Name="ProxyAddressTextBox" Row="3" RowSpan="1" Column="3" ColumnSpan="3" />&lt;Control Name="ProxyPortTextBox" Row="3" RowSpan="1" Column="7" ColumnSpan="1" />&lt;Control Name="ProxyPortLabel" Row="3" RowSpan="1" Column="6" ColumnSpan="1" />&lt;Control Name="AuthenticationMethodLabel" Row="8" RowSpan="1" Column="2" ColumnSpan="3" />&lt;Control Name="AuthenticationMethodPanel" Row="8" RowSpan="1" Column="5" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="Absolute,20,Absolute,20,Absolute,35,Absolute,30,Absolute,75,Absolute,120,Absolute,65,Absolute,140" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="ProxyGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -670,13 +988,13 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="ProxyGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 46</value>
+    <value>3, 41</value>
   </data>
   <data name="ProxyGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 0</value>
   </data>
   <data name="ProxyGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 144</value>
+    <value>584, 220</value>
   </data>
   <data name="ProxyGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -712,7 +1030,7 @@
     <value>3, 0, 3, 12</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 31</value>
+    <value>584, 26</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

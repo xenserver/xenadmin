@@ -30,6 +30,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Core;
 using XenAPI;
 
@@ -55,13 +56,17 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             Description = Messages.ASSIGNING_VM_APPLIANCE;
-            foreach (var xenRef in _vmAppliance.VMs)
+            var removedItems = _vmAppliance.VMs.Except(_selectedVMs);
+            foreach (var xenRef in removedItems)
             {
                 VM.set_appliance(Session, xenRef, null);
             }
-            foreach (var xenRef in _selectedVMs)
+
+            foreach (var vmRef in _selectedVMs)
             {
-                VM.set_appliance(Session, xenRef, _vmAppliance.opaque_ref);
+                var vm = _vmAppliance.Connection.Resolve(vmRef);
+                if (vm != null && (vm.appliance == null || vm.appliance.opaque_ref != _vmAppliance.opaque_ref))
+                    VM.set_appliance(Session, vm.opaque_ref, _vmAppliance.opaque_ref);
             }
             Description = Messages.ASSIGNED_VM_APPLIANCE;
         }

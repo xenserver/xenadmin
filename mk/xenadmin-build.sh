@@ -32,14 +32,6 @@
 
 set -ex
 
-#==============================================================
-#Micro version override - please keep at the top of the script
-#==============================================================
-#Set and uncomment this to override the 3rd value of the product number 
-#normally fetched from branding
-#
-#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
-
 SET_ENV_FILE="/cygdrive/c/env.sh"
 if [ -f ${SET_ENV_FILE} ]; then
    . ${SET_ENV_FILE}
@@ -58,10 +50,8 @@ SCRATCH_DIR=${ROOT}/scratch
 OUTPUT_DIR=${ROOT}/output
 
 WIX_INSTALLER_DEFAULT_GUID=65AE1345-A520-456D-8A19-2F52D43D3A09
-WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL=0CE5C3E7-E786-467a-80CF-F3EC04D414E4
 WIX_INSTALLER_DEFAULT_VERSION=1.0.0
 PRODUCT_GUID=$(uuidgen | tr [a-z] [A-Z])
-PRODUCT_GUID_VNCCONTROL=$(uuidgen | tr [a-z] [A-Z])
 
 source ${REPO}/Branding/branding.sh
 source ${REPO}/mk/re-branding.sh
@@ -73,7 +63,6 @@ ${UNZIP} -d ${REPO}/XenOvfApi ${SCRATCH_DIR}/XenCenterOVF.zip
 cd ${REPO}
 $MSBUILD XenAdmin.sln
 $MSBUILD xe/Xe.csproj
-$MSBUILD VNCControl/VNCControl.sln
 $MSBUILD /p:SolutionDir="${REPO}/XenAdmin" splash/splash.vcxproj
 
 #prepare wix
@@ -119,23 +108,9 @@ version_installer()
       $1 > $1.tmp
   mv -f $1.tmp $1
 }
-version_vnccontrol_installer()
-{
-  sed -e "s/${WIX_INSTALLER_DEFAULT_GUID_VNCCONTROL}/${PRODUCT_GUID_VNCCONTROL}/g" \
-      -e "s/${WIX_INSTALLER_DEFAULT_VERSION}/${BRANDING_XC_PRODUCT_VERSION}/g" \
-      $1 > $1.tmp
-  mv -f $1.tmp $1
-}
+
 version_installer ${WIX}/XenCenter.wxs
 version_installer ${WIX}/XenCenter.l10n.wxs
-version_vnccontrol_installer ${WIX}/vnccontrol.wxs
-
-#copy dotNetInstaller files
-DOTNETINST=${REPO}/dotNetInstaller
-cd ${DOTNETINST}
-DOTNETINSTALLER_FILEPATH="$(which dotNetInstaller.exe)"
-DOTNETINSTALLER_DIRPATH=${DOTNETINSTALLER_FILEPATH%/*}
-cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}
 
 echo "INFO: Collecting unsigned files..."
 mkdir_clean ${OUTPUT_DIR}/XenAdminUnsigned
@@ -149,51 +124,37 @@ echo "Unsigned artifacts archived"
 #build the tests
 echo "INFO: Build the tests..."
 cd ${REPO}/XenAdminTests && $MSBUILD
-#this script is used by XenRT
-cp ${REPO}/mk/xenadmintests.sh ${REPO}/XenAdminTests/bin/Release/
 cp ${REPO}/XenAdmin/ReportViewer/* ${REPO}/XenAdminTests/bin/Release/
 cd ${REPO}/XenAdminTests/bin/ && tar -czf XenAdminTests.tgz ./Release
-
-#build the CFUValidator
-cd ${REPO}/CFUValidator && $MSBUILD
-cd ${REPO}/CFUValidator/bin/ && tar -czf CFUValidator.tgz ./Release
 
 #include resources script and collect the resources for translations
 . ${REPO}/mk/find-resources.sh
 
-cp ${WIX}/outVNCControl/VNCControl.msi ${OUTPUT_DIR}/VNCControl.msi
-cd ${WIX}/outVNCControl && tar cjf ${OUTPUT_DIR}/VNCControl.tar.bz2 VNCControl.msi
 cd ${REPO}/XenAdmin/TestResources && tar -cf ${OUTPUT_DIR}/XenCenterTestResources.tar * 
 cp ${REPO}/XenAdminTests/bin/XenAdminTests.tgz ${OUTPUT_DIR}/XenAdminTests.tgz
-cp ${REPO}/CFUValidator/bin/CFUValidator.tgz ${OUTPUT_DIR}/CFUValidator.tgz
 
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,XenCenterLib.pdb,XenCenterMain.pdb,XenCenterVNC.pdb,XenModel.pdb,XenOvf.pdb,XenOvfTransport.pdb} \
    ${REPO}/xe/bin/Release/xe.pdb \
    ${REPO}/xva_verify/bin/Release/xva_verify.pdb \
-   ${REPO}/VNCControl/bin/Release/VNCControl.pdb \
    ${REPO}/XenServerHealthCheck/bin/Release/XenServerHealthCheck.pdb \
    ${OUTPUT_DIR}
 
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+install -m 755 ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.msi
 cp ${REPO}/mk/ISO_files/AUTORUN.INF ${ISO_DIR}
 cp ${REPO}/Branding/Images/AppIcon.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
-mkdir_clean ${OUTPUT_DIR}/installer
-tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}Setup.exe
+tar cjf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
 
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+install -m 755 ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.msi
 cp ${REPO}/mk/ISO_files/AUTORUN.INF ${L10N_ISO_DIR}
 cp ${REPO}/Branding/Images/AppIcon.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
-mkdir_clean ${OUTPUT_DIR}/installer.l10n
-tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
+tar cjf ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
 
 #now package the pdbs
 cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb

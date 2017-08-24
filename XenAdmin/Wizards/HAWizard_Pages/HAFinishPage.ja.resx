@@ -508,7 +508,7 @@
     <value>406, 107</value>
   </data>
   <data name="StartVMGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="StartVMGroupBox.Text" xml:space="preserve">
     <value>構成内容</value>
@@ -544,7 +544,7 @@
     <value>535, 30</value>
   </data>
   <data name="labelNoVmsProtected.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>3</value>
   </data>
   <data name="labelNoVmsProtected.Text" xml:space="preserve">
     <value>保護されている VM がありません。この構成によりプール マスターが保護されますが、サーバーは保護されません。</value>
@@ -607,7 +607,7 @@
     <value>514, 30</value>
   </data>
   <data name="labelNoHaGuaranteed.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>2</value>
   </data>
   <data name="labelNoHaGuaranteed.Text" xml:space="preserve">
     <value>この構成では、このプールのフェイルオーバー トレランスは 0 になり、サーバー障害時に VM が再起動されなくなります。</value>
@@ -637,7 +637,7 @@
     <value>598, 361</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -652,7 +652,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="StartVMGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="labelNoVmsProtected" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="pictureBox1" Row="2" RowSpan="2" Column="0" ColumnSpan="1" />&lt;Control Name="labelNoHaGuaranteed" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,50,AutoSize,20,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="StartVMGroupBox" Row="1" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="labelNoVmsProtected" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="pictureBox1" Row="2" RowSpan="2" Column="0" ColumnSpan="1" />&lt;Control Name="labelNoHaGuaranteed" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -673,7 +673,7 @@
     <value>592, 30</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>以下の高可用性構成を確認してください。[完了] をクリックすると、この構成で高可用性が有効になります。構成を変更するには [前へ] をクリックします。</value>

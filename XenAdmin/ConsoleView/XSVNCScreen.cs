@@ -366,7 +366,7 @@ namespace XenAdmin.ConsoleView
                     PIF pif = Helpers.FindPIF(network, host);
                     foreach (var networkInfo in networks.Where(n => n.Key.StartsWith(String.Format("{0}/ip", vif.device))))
                     {
-                        if (networkInfo.Key.EndsWith("ip")) // IPv4 address
+                        if (networkInfo.Key.EndsWith("ip") || networkInfo.Key.Contains("ipv4")) // IPv4 address
                         {
                             if (pif == null)
                                 ipAddressesForNetworksWithoutPifs.Add(networkInfo.Value);
@@ -387,6 +387,7 @@ namespace XenAdmin.ConsoleView
                         }
                     }
                 }
+                ipAddresses = ipAddresses.Distinct().ToList();
 
                 ipAddresses.AddRange(ipv6Addresses); // make sure IPv4 addresses are scanned first (CA-102755)
                 // add IP addresses for networks without PIFs
@@ -522,7 +523,7 @@ namespace XenAdmin.ConsoleView
             bool wasFocused = false;
             this.Controls.Clear();
             //console size with some offset to accomodate focus rectangle
-            Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET); ;
+            Size currentConsoleSize = new Size(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
                 
             // Kill the old client.
             if (RemoteConsole != null)
@@ -556,6 +557,8 @@ namespace XenAdmin.ConsoleView
                 {
                     if (this.ParentForm is FullScreenForm)
                         currentConsoleSize = ((FullScreenForm)ParentForm).GetContentSize();
+                    this.AutoScroll = true;
+                    this.AutoScrollMinSize = oldSize;
                     rdpClient = new RdpClient(this, currentConsoleSize, ResizeHandler);
 
                     rdpClient.OnDisconnected += new EventHandler(parentVNCTabView.RdpDisconnectedHandler);
@@ -1115,6 +1118,7 @@ namespace XenAdmin.ConsoleView
                     v.SendScanCodes = UseSource && !this.sourceIsPV;
                     v.SourceVM = sourceVM;
                     v.Console = console;
+                    v.UseQemuExtKeyEncoding = sourceVM != null && Helpers.InvernessOrGreater(sourceVM.Connection);
                     v.connect(stream, this.vncPassword);
                 }
             });
@@ -1387,23 +1391,16 @@ namespace XenAdmin.ConsoleView
         private Size oldSize;
         public void UpdateRDPResolution(bool fullscreen = false)
         {
-            if (rdpClient == null)
+            if (rdpClient == null || oldSize.Equals(this.Size))
                 return;
 
             //no offsets in fullscreen mode because there is no need to accomodate focus border 
             if (fullscreen)
-            {
-                rdpClient.rdpLocationOffset = new Point(0, 0);
-                rdpClient.Reconnect(this.Size.Width, this.Size.Height);
-            }
-            else 
-            {
-                if (oldSize.Equals(this.Size))
-                    return;
-                rdpClient.rdpLocationOffset = new Point(2, 2);
-                rdpClient.Reconnect(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET);
-                oldSize = new Size(this.Size.Width, this.Size.Height);
-            }               
+                rdpClient.UpdateDisplay(this.Size.Width, this.Size.Height, new Point(0,0));
+            else
+                rdpClient.UpdateDisplay(this.Size.Width - CONSOLE_SIZE_OFFSET, this.Size.Height - CONSOLE_SIZE_OFFSET, new Point(3,3));
+            oldSize = new Size(this.Size.Width, this.Size.Height);
+            Refresh();
         }
     }
 }

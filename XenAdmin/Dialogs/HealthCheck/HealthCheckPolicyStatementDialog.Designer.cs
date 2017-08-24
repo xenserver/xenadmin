@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HealthCheckPolicyStatementDialog));
             this.OKButton = new System.Windows.Forms.Button();
-            this.policyStatementTextBox = new System.Windows.Forms.RichTextBox();
+            this.policyStatementTextBox = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // OKButton
@@ -42,30 +42,28 @@
             // 
             // policyStatementTextBox
             // 
+            this.policyStatementTextBox.AutoEllipsis = true;
             resources.ApplyResources(this.policyStatementTextBox, "policyStatementTextBox");
-            this.policyStatementTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.policyStatementTextBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.policyStatementTextBox.Name = "policyStatementTextBox";
-            this.policyStatementTextBox.ReadOnly = true;
-            this.policyStatementTextBox.TabStop = false;
-            this.policyStatementTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.policyStatementTextBox_LinkClicked);
+            this.policyStatementTextBox.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.policyStatementTextBox_LinkClicked);
             // 
             // HealthCheckPolicyStatementDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.OKButton);
             this.Controls.Add(this.policyStatementTextBox);
+            this.Controls.Add(this.OKButton);
             this.HelpButton = false;
             this.Name = "HealthCheckPolicyStatementDialog";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox policyStatementTextBox;
         internal System.Windows.Forms.Button OKButton;
+        private System.Windows.Forms.LinkLabel policyStatementTextBox;
 
 
     }

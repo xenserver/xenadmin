@@ -1965,12 +1965,6 @@
   <data name="VMSnapshotScheduleToolStripMenuItem.Text" xml:space="preserve">
     <value>VM 快照安排策略...</value>
   </data>
-  <data name="vMProtectionAndRecoveryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
-  </data>
-  <data name="vMProtectionAndRecoveryToolStripMenuItem.Text" xml:space="preserve">
-    <value>VM 保护策略(&amp;P)...</value>
-  </data>
   <data name="exportResourceReportPoolToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
   </data>
@@ -2283,12 +2277,6 @@
   <data name="assignSnapshotScheduleToolStripMenuItem.Text" xml:space="preserve">
     <value>分配至快照计划(&amp;H)...</value>
   </data>
-  <data name="assignPolicyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
-  </data>
-  <data name="assignPolicyToolStripMenuItem.Text" xml:space="preserve">
-    <value>分配给 VM 保护策略(&amp;P)...</value>
-  </data>
   <data name="assignToVirtualApplianceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 22</value>
   </data>
@@ -2328,6 +2316,12 @@
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>导出(&amp;E)...</value>
   </data>
+  <data name="enablePVSReadcachingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="disablePVSReadcachingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
   <data name="toolStripMenuItem12.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 6</value>
   </data>
@@ -2335,7 +2329,7 @@
     <value>246, 22</value>
   </data>
   <data name="installToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>安装 [XenServer product] Tools(&amp;A)</value>
+    <value>安装 [XenServer product] Tools(&amp;X)</value>
   </data>
   <data name="sendCtrlAltDelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 22</value>
@@ -2450,12 +2444,6 @@
   </data>
   <data name="DestroyStorageRepositoryToolStripMenuItem.Text" xml:space="preserve">
     <value>销毁(&amp;O)</value>
-  </data>
-  <data name="ConvertToThinStorageRepositoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="ConvertToThinStorageRepositoryToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
@@ -3141,10 +3129,10 @@
   <data name="&gt;&gt;DrWizardToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;vMProtectionAndRecoveryToolStripMenuItem.Name" xml:space="preserve">
-    <value>vMProtectionAndRecoveryToolStripMenuItem</value>
+  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Name" xml:space="preserve">
+    <value>VMSnapshotScheduleToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;vMProtectionAndRecoveryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;exportResourceReportPoolToolStripMenuItem.Name" xml:space="preserve">
@@ -3447,12 +3435,6 @@
   <data name="&gt;&gt;assignSnapshotScheduleToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.AssignGroupToolStripMenuItemVMSS, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;assignPolicyToolStripMenuItem.Name" xml:space="preserve">
-    <value>assignPolicyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;assignPolicyToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.AssignGroupToolStripMenuItemVMPP, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;assignToVirtualApplianceToolStripMenuItem.Name" xml:space="preserve">
     <value>assignToVirtualApplianceToolStripMenuItem</value>
   </data>
@@ -3493,6 +3475,18 @@
     <value>exportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exportToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;enablePVSReadcachingToolStripMenuItem.Name" xml:space="preserve">
+    <value>enablePVSReadcachingToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;enablePVSReadcachingToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;disablePVSReadcachingToolStripMenuItem.Name" xml:space="preserve">
+    <value>disablePVSReadcachingToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;disablePVSReadcachingToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem12.Name" xml:space="preserve">
@@ -3637,12 +3631,6 @@
     <value>DestroyStorageRepositoryToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;DestroyStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ConvertToThinStorageRepositoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>ConvertToThinStorageRepositoryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;ConvertToThinStorageRepositoryToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
@@ -3896,12 +3884,6 @@
   </data>
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Name" xml:space="preserve">
-    <value>VMSnapshotScheduleToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;VMSnapshotScheduleToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

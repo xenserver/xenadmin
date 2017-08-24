@@ -631,7 +631,7 @@
     <value>NoControl</value>
   </data>
   <data name="quiesceCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 3</value>
+    <value>18, 4</value>
   </data>
   <data name="quiesceCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>339, 19</value>

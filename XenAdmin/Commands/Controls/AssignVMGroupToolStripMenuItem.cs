@@ -34,16 +34,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using XenAdmin.Actions;
 using XenAdmin.Core;
-using XenAdmin.Wizards.NewPolicyWizard;
 using XenAPI;
 using XenAdmin.Dialogs;
 using System.Drawing;
-
-using XenAdmin.Wizards;
-using XenAdmin.Network;
-using XenAdmin.Wizards.NewVMApplianceWizard;
 
 namespace XenAdmin.Commands
 {
@@ -85,7 +79,7 @@ namespace XenAdmin.Commands
 
                 /* do not add unsupported policies to the drop down for VMSS */
                 XenAPI.VMSS policy = group as VMSS;
-                if (policy != null && policy.policy_type == policy_backup_type.snapshot_with_quiesce)
+                if (policy != null && policy.type == vmss_type.snapshot_with_quiesce)
                 {
                     List<VM> vms = Command.GetSelection().AsXenObjects<VM>();
                     bool doNotInclude = vms.Any(vm => !vm.allowed_operations.Contains(vm_operations.snapshot_with_quiesce));
@@ -305,12 +299,6 @@ namespace XenAdmin.Commands
             }
         }
     }
-
-    /// <summary>
-    /// Class used for the benefit of visual studio's form designer which has trouble with generic controls
-    /// </summary>
-    internal sealed class AssignGroupToolStripMenuItemVMPP : AssignGroupToolStripMenuItem<VMPP>
-    { }
 
     /// <summary>
     /// Class used for the benefit of visual studio's form designer which has trouble with generic controls

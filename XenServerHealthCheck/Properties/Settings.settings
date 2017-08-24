@@ -27,17 +27,20 @@
     <Setting Name="ConnectionTimeout" Roaming="true" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20000</Value>
     </Setting>
-    <Setting Name="ProvideProxyAuthentication" Type="System.Boolean" Scope="User">
+    <Setting Name="ProvideProxyAuthentication" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ProxyUsername" Type="System.String" Scope="User">
+    <Setting Name="ProxyUsername" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ProxyPassword" Type="System.String" Scope="User">
+    <Setting Name="ProxyPassword" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ProxyAuthenticationMethod" Type="System.Int32" Scope="User">
+    <Setting Name="ProxyAuthenticationMethod" Roaming="true" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="XenCenterMetadata" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

@@ -629,7 +629,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the health_check_config field of the given pool.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -707,9 +707,11 @@ namespace XenAPI
         /// <summary>
         /// Get the vswitch_controller field of the given pool.
         /// First published in XenServer 5.6.
+        /// Deprecated since XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
+        [Deprecated("XenServer 7.2")]
         public static string get_vswitch_controller(Session session, string _pool)
         {
             return (string)session.proxy.pool_get_vswitch_controller(session.uuid, (_pool != null) ? _pool : "").parse();
@@ -739,7 +741,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the ha_cluster_stack field of the given pool.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -772,7 +774,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the guest_agent_config field of the given pool.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -783,7 +785,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cpu_info field of the given pool.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -794,7 +796,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the policy_no_vendor_device field of the given pool.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -805,7 +807,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the live_patching_disabled field of the given pool.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -998,7 +1000,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the health_check_config field of the given pool.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1010,7 +1012,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add the given key-value pair to the health_check_config field of the given pool.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1023,7 +1025,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the given key and its corresponding value from the health_check_config field of the given pool.  If the key is not in that Map, then do nothing.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1059,7 +1061,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the policy_no_vendor_device field of the given pool.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1071,7 +1073,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the live_patching_disabled field of the given pool.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1220,6 +1222,28 @@ namespace XenAPI
         public static XenRef<Task> async_create_VLAN(Session session, string _device, string _network, long _vlan)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_create_vlan(session.uuid, (_device != null) ? _device : "", (_network != null) ? _network : "", _vlan.ToString()).parse());
+        }
+
+        /// <summary>
+        /// Reconfigure the management network interface for all Hosts in the Pool
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The network</param>
+        public static void management_reconfigure(Session session, string _network)
+        {
+            session.proxy.pool_management_reconfigure(session.uuid, (_network != null) ? _network : "").parse();
+        }
+
+        /// <summary>
+        /// Reconfigure the management network interface for all Hosts in the Pool
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The network</param>
+        public static XenRef<Task> async_management_reconfigure(Session session, string _network)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pool_management_reconfigure(session.uuid, (_network != null) ? _network : "").parse());
         }
 
         /// <summary>
@@ -1839,9 +1863,11 @@ namespace XenAPI
         /// <summary>
         /// Set the IP address of the vswitch controller.
         /// First published in XenServer 5.6.
+        /// Deprecated since XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_address">IP address of the vswitch controller.</param>
+        [Deprecated("XenServer 7.2")]
         public static void set_vswitch_controller(Session session, string _address)
         {
             session.proxy.pool_set_vswitch_controller(session.uuid, (_address != null) ? _address : "").parse();
@@ -1850,9 +1876,11 @@ namespace XenAPI
         /// <summary>
         /// Set the IP address of the vswitch controller.
         /// First published in XenServer 5.6.
+        /// Deprecated since XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_address">IP address of the vswitch controller.</param>
+        [Deprecated("XenServer 7.2")]
         public static XenRef<Task> async_set_vswitch_controller(Session session, string _address)
         {
             return XenRef<Task>.Create(session.proxy.async_pool_set_vswitch_controller(session.uuid, (_address != null) ? _address : "").parse());
@@ -1962,7 +1990,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1973,7 +2001,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1984,7 +2012,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1995,7 +2023,7 @@ namespace XenAPI
 
         /// <summary>
         /// Sets ssl_legacy true on each host, pool-master last. See Host.ssl_legacy and Host.set_ssl_legacy.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2006,7 +2034,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return true if the extension is available on the pool
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2018,7 +2046,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return true if the extension is available on the pool
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2030,7 +2058,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add a key-value pair to the pool-wide guest agent configuration
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2043,7 +2071,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add a key-value pair to the pool-wide guest agent configuration
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2056,7 +2084,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a key-value pair from the pool-wide guest agent configuration
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2068,7 +2096,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a key-value pair from the pool-wide guest agent configuration
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2434,7 +2462,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configuration for the automatic health check feature
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual Dictionary<string, string> health_check_config
         {
@@ -2624,7 +2652,7 @@ namespace XenAPI
 
         /// <summary>
         /// The HA cluster stack that is currently in use. Only valid when HA is enabled.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual string ha_cluster_stack
         {
@@ -2679,7 +2707,7 @@ namespace XenAPI
 
         /// <summary>
         /// Pool-wide guest agent configuration information
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual Dictionary<string, string> guest_agent_config
         {
@@ -2698,7 +2726,7 @@ namespace XenAPI
 
         /// <summary>
         /// Details about the physical CPUs on the pool
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual Dictionary<string, string> cpu_info
         {
@@ -2717,7 +2745,7 @@ namespace XenAPI
 
         /// <summary>
         /// The pool-wide policy for clients on whether to use the vendor device or not on newly created VMs. This field will also be consulted if the 'has_vendor_device' field is not specified in the VM.create call.
-        /// First published in XenServer Dundee.
+        /// First published in XenServer 7.0.
         /// </summary>
         public virtual bool policy_no_vendor_device
         {
@@ -2736,7 +2764,7 @@ namespace XenAPI
 
         /// <summary>
         /// The pool-wide flag to show if the live patching feauture is disabled or not.
-        /// First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         public virtual bool live_patching_disabled
         {

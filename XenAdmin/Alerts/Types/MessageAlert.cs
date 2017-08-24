@@ -81,7 +81,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                if (Helpers.ClearwaterOrGreater(Connection) && Enum.IsDefined(typeof(AlertPriority), _priority))
+                if (Enum.IsDefined(typeof(AlertPriority), _priority))
                     return (AlertPriority)_priority;
 
                 return AlertPriority.Unknown;
@@ -229,22 +229,6 @@ namespace XenAdmin.Alerts
                         }
                         break;
 
-                    //these here do not need the object
-                    case Message.MessageType.VMPP_ARCHIVE_FAILED_0:
-                    case Message.MessageType.VMPP_ARCHIVE_LOCK_FAILED:
-                    case Message.MessageType.VMPP_ARCHIVE_MISSED_EVENT:
-                    case Message.MessageType.VMPP_ARCHIVE_SUCCEEDED:
-                    case Message.MessageType.VMPP_ARCHIVE_TARGET_MOUNT_FAILED:
-                    case Message.MessageType.VMPP_ARCHIVE_TARGET_UNMOUNT_FAILED:
-                    case Message.MessageType.VMPP_SNAPSHOT_ARCHIVE_ALREADY_EXISTS:
-                    case Message.MessageType.VMPP_SNAPSHOT_FAILED:
-                    case Message.MessageType.VMPP_SNAPSHOT_LOCK_FAILED:
-                    case Message.MessageType.VMPP_SNAPSHOT_MISSED_EVENT:
-                    case Message.MessageType.VMPP_SNAPSHOT_SUCCEEDED:
-                    case Message.MessageType.VMPP_LICENSE_ERROR:
-                    case Message.MessageType.VMPP_XAPI_LOGON_FAILURE:
-                        var policyAlert = new PolicyAlert(Message.Connection, Message.body);
-                        return policyAlert.Text;
                     case Message.MessageType.VMSS_SNAPSHOT_MISSED_EVENT:
                     case Message.MessageType.VMSS_XAPI_LOGON_FAILURE:
                     case Message.MessageType.VMSS_LICENSE_ERROR:
@@ -374,12 +358,11 @@ namespace XenAdmin.Alerts
 					case XenAPI.Message.MessageType.MULTIPATH_PERIODIC_ALERT:
 						return Program.ViewLogFiles;
 
-						// CA-23823: XenCenter "Repair Storage" link broken
-						// PBD_PLUG_FAILED_ON_SERVER_START give us host not sr uuid.
-						// therefore nothing we can do.
-						//case XenAPI.Message.MessageType.PBD_PLUG_FAILED_ON_SERVER_START:
-						//    Menus.RepairSR(XenObject as XenObject<SR>);
-						//    break;
+					case XenAPI.Message.MessageType.PBD_PLUG_FAILED_ON_SERVER_START:
+						var repairSrCommand = new RepairSRCommand(Program.MainWindow, XenObject.Connection.Cache.SRs);
+						if (repairSrCommand.CanExecute())
+							return () => repairSrCommand.Execute();
+						return null;
 					default:
 						return null;
 				}
@@ -437,6 +420,11 @@ namespace XenAdmin.Alerts
 
                 return title;
             }
+        }
+
+        public override string Name
+        {
+            get { return Message.MessageTypeString; }
         }
 
         public override void Dismiss()

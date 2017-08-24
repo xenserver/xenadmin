@@ -29,10 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
@@ -90,11 +88,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (typeof(T) == typeof(VMPP) && selection.Any(s => Helpers.ClearwaterOrGreater(s.Connection)))
-            {
-                return false;
-            }
-            else if (typeof(T) == typeof(VMSS) && selection.Any(s => !Helpers.DundeeOrGreater(s.Connection)))
+            if (typeof(T) == typeof(VMSS) && selection.Any(s => !Helpers.FalconOrGreater(s.Connection)))
             {
                 return false;
             }
@@ -120,12 +114,6 @@ namespace XenAdmin.Commands
             }
         }
     }
-
-    /// <summary>
-    /// Class used for the benefit of visual studio's form designer which has trouble with generic controls
-    /// </summary>
-    internal sealed class VMGroupCommandVMPP : VMGroupCommand<VMPP>
-    { }
 
     /// <summary>
     /// Class used for the benefit of visual studio's form designer which has trouble with generic controls

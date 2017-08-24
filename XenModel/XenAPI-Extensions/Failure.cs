@@ -84,6 +84,8 @@ namespace XenAPI
         public const string VM_HAS_VGPU = "VM_HAS_VGPU";
         public const string OUT_OF_SPACE = "OUT_OF_SPACE";
         public const string PVS_SITE_CONTAINS_RUNNING_PROXIES = "PVS_SITE_CONTAINS_RUNNING_PROXIES";
+        public const string VM_LACKS_FEATURE = "VM_LACKS_FEATURE";
+        public const string VM_LACKS_FEATURE_SUSPEND = "VM_LACKS_FEATURE_SUSPEND";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

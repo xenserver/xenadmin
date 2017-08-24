@@ -139,7 +139,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given PVS_proxy.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
@@ -150,7 +150,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the PVS_proxy instance with the specified UUID.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -161,7 +161,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given PVS_proxy.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
@@ -172,7 +172,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the site field of the given PVS_proxy.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
@@ -183,7 +183,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the VIF field of the given PVS_proxy.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
@@ -194,7 +194,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the currently_attached field of the given PVS_proxy.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
@@ -205,7 +205,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the status field of the given PVS_proxy.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
@@ -216,7 +216,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configure a VM/VIF to use a PVS proxy
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_site">PVS site that we proxy for</param>
@@ -228,7 +228,7 @@ namespace XenAPI
 
         /// <summary>
         /// Configure a VM/VIF to use a PVS proxy
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_site">PVS site that we proxy for</param>
@@ -240,7 +240,7 @@ namespace XenAPI
 
         /// <summary>
         /// remove (or switch off) a PVS proxy for this VM
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
@@ -251,7 +251,7 @@ namespace XenAPI
 
         /// <summary>
         /// remove (or switch off) a PVS proxy for this VM
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
@@ -262,7 +262,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the PVS_proxys known to the system.
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<PVS_proxy>> get_all(Session session)
@@ -281,7 +281,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual string uuid
         {
@@ -300,7 +300,7 @@ namespace XenAPI
 
         /// <summary>
         /// PVS site this proxy is part of
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual XenRef<PVS_site> site
         {
@@ -319,7 +319,7 @@ namespace XenAPI
 
         /// <summary>
         /// VIF of the VM using the proxy
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual XenRef<VIF> VIF
         {
@@ -338,7 +338,7 @@ namespace XenAPI
 
         /// <summary>
         /// true = VM is currently proxied
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual bool currently_attached
         {
@@ -357,7 +357,7 @@ namespace XenAPI
 
         /// <summary>
         /// The run-time status of the proxy
-        /// Experimental. First published in .
+        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual pvs_proxy_status status
         {

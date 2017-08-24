@@ -279,14 +279,11 @@ namespace XenAdmin.Dialogs
             if (PoolIsPartiallyLicensed(XenObject))
                 return HostState.PartiallyLicensed;
 
-            if (PoolLicensingModel != LicensingModel.PreClearwater)
-            {
-                if (LicenseEdition == Host.Edition.Free)
-                    return HostState.Free;
+            if (LicenseEdition == Host.Edition.Free)
+                return HostState.Free;
 
-                if (!IsGraceLicence(LicenseExpiresIn))
-                    return HostState.Licensed;
-            }
+            if (!IsGraceLicence(LicenseExpiresIn))
+                return HostState.Licensed;
 
             if (IsInfinite(LicenseExpiresIn))
             {
@@ -368,8 +365,7 @@ namespace XenAdmin.Dialogs
                     return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;
                 }
 
-                if ((PoolLicensingModel == LicensingModel.Creedence || PoolLicensingModel == LicensingModel.Clearwater)
-                    && CurrentState == HostState.Free)
+                if (CurrentState == HostState.Free)
                 {
                     return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;
                 }
@@ -383,7 +379,6 @@ namespace XenAdmin.Dialogs
         #region LicensingModel
         public enum LicensingModel
         {
-            PreClearwater,
             Clearwater,
             Creedence
         }
@@ -392,9 +387,7 @@ namespace XenAdmin.Dialogs
         {
             if (Helpers.CreedenceOrGreater(connection))
                 return LicensingModel.Creedence;
-            if (Helpers.ClearwaterOrGreater(connection))
-                return LicensingModel.Clearwater;
-            return LicensingModel.PreClearwater;
+            return LicensingModel.Clearwater;
         }
 
         #endregion

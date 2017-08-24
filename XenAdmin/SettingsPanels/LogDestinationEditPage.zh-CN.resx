@@ -358,7 +358,7 @@
     <value>0</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>默认情况下，[XenServer] 将其系统日志存储在服务器本地。但如果您愿意，也可以使用以下设置指定远程日志的目标位置。</value>
+    <value>默认情况下，[XenServer] 将其系统日志存储在服务器本地。但如果您希望，也可以使用下面的设置指定远程日志的目标位置。</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>

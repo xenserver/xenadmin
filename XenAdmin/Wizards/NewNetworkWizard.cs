@@ -211,6 +211,7 @@ namespace XenAdmin.Wizards
                 result.MTU = pageChinDetails.MTU;
             else if (pageNetworkDetails.MTU.HasValue) //Custom MTU may not be allowed if we are making a virtual network or something
                 result.MTU = pageNetworkDetails.MTU.Value;
+            result.managed = true;
             return result;
         }
 

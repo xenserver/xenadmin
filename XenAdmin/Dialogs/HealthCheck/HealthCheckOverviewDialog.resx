@@ -157,7 +157,7 @@
     <value>495, 356</value>
   </data>
   <data name="poolsDataGridView.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;poolsDataGridView.Name" xml:space="preserve">
     <value>poolsDataGridView</value>
@@ -487,7 +487,7 @@
     <value>119, 15</value>
   </data>
   <data name="disableLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>2</value>
   </data>
   <data name="disableLinkLabel.Text" xml:space="preserve">
     <value>Disable Health Check</value>
@@ -523,7 +523,7 @@
     <value>187, 15</value>
   </data>
   <data name="uploadRequestLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>3</value>
   </data>
   <data name="uploadRequestLinkLabel.Text" xml:space="preserve">
     <value>Request an additional upload now</value>
@@ -598,7 +598,7 @@
     <value>145, 15</value>
   </data>
   <data name="editLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="editLinkLabel.Text" xml:space="preserve">
     <value>Edit Health Check settings</value>
@@ -736,7 +736,7 @@
     <value>111, 15</value>
   </data>
   <data name="ReportAnalysisLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="ReportAnalysisLinkLabel.Text" xml:space="preserve">
     <value>View report analysis</value>
@@ -784,7 +784,7 @@
     <value>159, 15</value>
   </data>
   <data name="viewReportLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="viewReportLinkLabel.Text" xml:space="preserve">
     <value>View previous report analysis</value>
@@ -970,7 +970,7 @@
     <value>63, 15</value>
   </data>
   <data name="enrollNowLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="enrollNowLinkLabel.Text" xml:space="preserve">
     <value>Enroll now</value>
@@ -1042,7 +1042,7 @@
     <value>274, 42</value>
   </data>
   <data name="notEnrolledPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;notEnrolledPanel.Name" xml:space="preserve">
     <value>notEnrolledPanel</value>
@@ -1222,7 +1222,7 @@
     <value>102, 15</value>
   </data>
   <data name="PolicyStatementLinkLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>0</value>
   </data>
   <data name="PolicyStatementLinkLabel.Text" xml:space="preserve">
     <value>Privacy Statement</value>
@@ -1264,7 +1264,7 @@
     <value>790, 34</value>
   </data>
   <data name="rubricLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>0</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
     <value>Health Check will automatically upload a server status report to [Citrix] Insight Services, based on a predefined schedule configured on your [XenServer] pools.</value>
@@ -1297,7 +1297,7 @@
     <value>793, 414</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -1330,7 +1330,7 @@
     <value>469, 19</value>
   </data>
   <data name="showAgainCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="showAgainCheckBox.Text" xml:space="preserve">
     <value>&amp;Show this dialog when connecting to servers that are not enrolled into Health Check</value>

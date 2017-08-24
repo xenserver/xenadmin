@@ -31,16 +31,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using XenAdmin;
 using XenServerHealthCheck;
-using XenAPI;
 using XenAdmin.Core;
-using XenAdmin.Network;
-using XenAdminTests;
 using System.IO.Pipes;
-using System.IO;
 using XenAdmin.Model;
 using NUnit.Framework;
 
@@ -48,30 +42,46 @@ namespace XenAdminTests.HealthCheckTests
 {
     public class CredentialTests : UnitTester_TestFixture
     {
-        private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
+        [TestFixtureSetUp]
+        public void FixtureSetup()
+        {
+            CredentialReceiver.instance.Init();
+            ServerListHelper.instance.Init();
+        }
+
+        [TestFixtureTearDown]
+        public void FixtureTearDown()
+        {
+            CredentialReceiver.instance.UnInit();
+        }
 
         [Test]
         public void CredentialOp()
         {
-            CredentialReceiver.instance.Init();
-            ServerListHelper.instance.Init();
             string HostName = "Host1";
             string UserName = "User1";
             string Password = "password1";
-            int conSize = ServerListHelper.instance.GetServerList().Count;
+
+            // Empty list
+            ServerListHelper.instance.ClearServerList();
+            int conSize = 0;
+            List<ServerInfo> con = ServerListHelper.instance.GetServerList();
+            Assert.IsTrue(con.Count == conSize);
+
             //1. Empty credential 
             NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
-            string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, null, null }));
+            string credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName, null, null }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
-            List<ServerInfo> con = ServerListHelper.instance.GetServerList();
+            System.Threading.Thread.Sleep(1000);
+            con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize);
 
             //2. Send credential and check result
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
             System.Threading.Thread.Sleep(1000);
@@ -81,7 +91,7 @@ namespace XenAdminTests.HealthCheckTests
             //3. Send credential twice and check result
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
             System.Threading.Thread.Sleep(1000);
@@ -91,7 +101,7 @@ namespace XenAdminTests.HealthCheckTests
             //4. remove credential and check result
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
             System.Threading.Thread.Sleep(1000);
@@ -104,7 +114,7 @@ namespace XenAdminTests.HealthCheckTests
             HostName = "Host01234546789012345467890123454678901234546789012345467890123454678901234546789012345467890123454678901234546789";
             UserName = "User01234546789012345467890123454678901234546789012345467890123454678901234546789012345467890123454678901234546789";
             Password = "password101234546789012345467890123454678901234546789012345467890123454678901234546789012345467890123454678901234546789";
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
             System.Threading.Thread.Sleep(1000);
@@ -114,7 +124,7 @@ namespace XenAdminTests.HealthCheckTests
             //6. remove long credential size
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
             System.Threading.Thread.Sleep(1000);
@@ -122,35 +132,109 @@ namespace XenAdminTests.HealthCheckTests
             Assert.IsTrue(con.Count == conSize);
 
 
-            //7. semd 2 credential
+            //7. send 2 credentials
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
             HostName = "host3";
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             HostName = "host4";
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName, UserName, Password }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
             System.Threading.Thread.Sleep(1000);
             con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize + 2);
 
-            //8. remove 2 credential
+            //8. remove 2 credentials
             pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
             pipeClient.Connect();
             HostName = "host3";
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             HostName = "host4";
-            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(SEPARATOR.ToString(), new[] { HostName }));
+            credential = EncryptionUtils.ProtectForLocalMachine(String.Join(ServerListHelper.SEPARATOR.ToString(), new[] { HostName }));
             pipeClient.Write(Encoding.UTF8.GetBytes(credential), 0, credential.Length);
             pipeClient.Close();
             System.Threading.Thread.Sleep(1000);
             con = ServerListHelper.instance.GetServerList();
             Assert.IsTrue(con.Count == conSize);
+        }
 
-            CredentialReceiver.instance.UnInit();
+        string metadata = "{\"XenCenter\":{\"System\":{\"Version\":\"0.0.0.0\",\"DotNetVersion\":\"4.0.30319.42000\",\"Culture\":\"English (United States)\"," +
+                           "\"OsVersion\":\"Microsoft Windows NT 6.1.7601 Service Pack 1\",\"OsCulture\":\"English (United States)\",\"IpAddress\":\"\"}," +
+                           "\"Settings\":{\"CFU\":{\"AllowXenCenterUpdates\":true,\"AllowPatchesUpdates\":true,\"AllowXenServerUpdates\":true}," +
+                           "\"Proxy\":{\"UseProxy\":true,\"UseIEProxy\":false,\"BypassProxyForServers\":false,\"ProxyAuthentication\":true,\"ProxyAuthenticationMethod\":\"Digest\"}," +
+                           "\"SaveAndRestore\":{\"SaveSessionCredentials\":true,\"RequireMasterPassword\":false},\"HelpLastUsed\":\"2017-06-09T11:57:49.4046357Z\"}," +
+                           "\"Infrastructure\":{\"TotalConnections\":22,\"Connected\":8},\"Plugins\":[],\"SourceOfData\":\"HealthCheck\",\"Created\":\"2017-07-03 14:24:14Z\"," + 
+                           "\"Reported\":\"@HealthCheckReportTime@\"}}";
+
+        [Test]
+        public void TestMetadata()
+        {
+            // Empty server list
+            ServerListHelper.instance.ClearServerList();
+            int conSize = 0;
+            List<ServerInfo> con = ServerListHelper.instance.GetServerList();
+            Assert.IsTrue(con.Count == conSize);
+
+            // Send metadata, then check that it has been received and processed and that the server list remained unchanged
+            NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+            pipeClient.Connect();
+            byte[] metadataBytes = Encoding.UTF8.GetBytes(String.Join(ServerListHelper.SEPARATOR.ToString(), HealthCheckSettings.XENCENTER_METADATA, EncryptionUtils.ProtectForLocalMachine(metadata)));
+            pipeClient.Write(metadataBytes, 0, metadataBytes.Length);
+            pipeClient.Close();
+            System.Threading.Thread.Sleep(1000);
+            con = ServerListHelper.instance.GetServerList();
+            Assert.IsTrue(con.Count == conSize); 
+            Assert.IsTrue(ServerListHelper.instance.XenCenterMetadata == metadata, "\"Send metadata\" test failed"); 
+
+            // Send metadata containing the separator
+            pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+            pipeClient.Connect();
+            int separatorPosition = new Random().Next(0, metadata.Length);
+            metadata = metadata.Insert(separatorPosition, ServerListHelper.SEPARATOR.ToString());
+            metadataBytes = Encoding.UTF8.GetBytes(String.Join(ServerListHelper.SEPARATOR.ToString(), HealthCheckSettings.XENCENTER_METADATA, EncryptionUtils.ProtectForLocalMachine(metadata)));
+            pipeClient.Write(metadataBytes, 0, metadataBytes.Length);
+            pipeClient.Close();
+            System.Threading.Thread.Sleep(1000);
+            con = ServerListHelper.instance.GetServerList();
+            Assert.IsTrue(con.Count == conSize);
+            Assert.IsTrue(ServerListHelper.instance.XenCenterMetadata == metadata, "\"Send metadata containing the separator\" test failed (separator at position {0})", separatorPosition);
+
+            // Send empty metadata
+            pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+            pipeClient.Connect();
+            metadataBytes = Encoding.UTF8.GetBytes(String.Join(ServerListHelper.SEPARATOR.ToString(), HealthCheckSettings.XENCENTER_METADATA, EncryptionUtils.ProtectForLocalMachine("")));
+            pipeClient.Write(metadataBytes, 0, metadataBytes.Length);
+            pipeClient.Close();
+            System.Threading.Thread.Sleep(1000);
+            con = ServerListHelper.instance.GetServerList();
+            Assert.IsTrue(con.Count == conSize);
+            Assert.IsTrue(ServerListHelper.instance.XenCenterMetadata.Length == 0, "\"Send empty metadata\" test failed");
+
+            // Send metadata unencrypted
+            pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+            pipeClient.Connect();
+            metadataBytes = Encoding.UTF8.GetBytes(String.Join(ServerListHelper.SEPARATOR.ToString(), HealthCheckSettings.XENCENTER_METADATA, metadata));
+            pipeClient.Write(metadataBytes, 0, metadataBytes.Length);
+            pipeClient.Close();
+            System.Threading.Thread.Sleep(1000);
+            con = ServerListHelper.instance.GetServerList();
+            Assert.IsTrue(con.Count == conSize);
+            Assert.IsTrue(ServerListHelper.instance.XenCenterMetadata.Length == 0, "\"Send metadata unencrypted\" test failed");
+            
+            // Send something else
+            pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
+            pipeClient.Connect();
+            var someText = "Some random text";
+            metadataBytes = Encoding.UTF8.GetBytes(String.Join(ServerListHelper.SEPARATOR.ToString(), "SomethingElse", EncryptionUtils.ProtectForLocalMachine(someText)));
+            pipeClient.Write(metadataBytes, 0, metadataBytes.Length);
+            pipeClient.Close();
+            System.Threading.Thread.Sleep(1000);
+            con = ServerListHelper.instance.GetServerList();
+            Assert.IsTrue(con.Count == conSize);
+            Assert.IsTrue(ServerListHelper.instance.XenCenterMetadata.Length == 0, "\"Send something else\" test failed");
         }
     }
 }

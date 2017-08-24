@@ -131,6 +131,7 @@ namespace XenServerHealthCheck.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public bool ProvideProxyAuthentication {
             get {
                 return ((bool)(this["ProvideProxyAuthentication"]));
@@ -143,6 +144,7 @@ namespace XenServerHealthCheck.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string ProxyUsername {
             get {
                 return ((string)(this["ProxyUsername"]));
@@ -155,6 +157,7 @@ namespace XenServerHealthCheck.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string ProxyPassword {
             get {
                 return ((string)(this["ProxyPassword"]));
@@ -167,12 +170,26 @@ namespace XenServerHealthCheck.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public int ProxyAuthenticationMethod {
             get {
                 return ((int)(this["ProxyAuthenticationMethod"]));
             }
             set {
                 this["ProxyAuthenticationMethod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string XenCenterMetadata {
+            get {
+                return ((string)(this["XenCenterMetadata"]));
+            }
+            set {
+                this["XenCenterMetadata"] = value;
             }
         }
     }

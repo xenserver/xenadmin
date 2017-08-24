@@ -280,7 +280,7 @@
     <value>'{0}.label' has not been defined in the resources file for plugin '{1}'.</value>
   </data>
   <data name="Exception-PluginOnlyOneCommandPermitted" xml:space="preserve">
-    <value>Only one shell or powershell command permitted.</value>
+    <value>Only one shell or PowerShell command permitted.</value>
   </data>
   <data name="Exception-PluginResourcesFileNotFound" xml:space="preserve">
     <value>Could not find resources file for plugin '{0}' at '{1}'.</value>
@@ -543,20 +543,8 @@
   <data name="Label-host.edition" xml:space="preserve">
     <value>License</value>
   </data>
-  <data name="Label-host.edition-advanced" xml:space="preserve">
-    <value>[XenServer product] Advanced Edition</value>
-  </data>
-  <data name="Label-host.edition-enterprise" xml:space="preserve">
-    <value>[XenServer product] Enterprise Edition</value>
-  </data>
-  <data name="Label-host.edition-enterprise-xd" xml:space="preserve">
-    <value>[XenServer product] for XenDesktop</value>
-  </data>
   <data name="Label-host.edition-free" xml:space="preserve">
     <value>[XenServer product]</value>
-  </data>
-  <data name="Label-host.edition-platinum" xml:space="preserve">
-    <value>[XenServer product] Platinum Edition</value>
   </data>
   <data name="Label-host.enabled" xml:space="preserve">
     <value>Enabled</value>
@@ -579,9 +567,6 @@
   <data name="Label-host.license_params-serialnumber" xml:space="preserve">
     <value>Serial number</value>
   </data>
-  <data name="Label-host.license_params-sku_type" xml:space="preserve">
-    <value>Server License</value>
-  </data>
   <data name="Label-host.license_server-address" xml:space="preserve">
     <value>License Server Address</value>
   </data>
@@ -599,60 +584,6 @@
   </data>
   <data name="Label-host.pool_members" xml:space="preserve">
     <value>Pool members</value>
-  </data>
-  <data name="Label-host.sku_type-FG-dell_xe_enterprise" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product], Dell Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-dell_xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Dell Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-dell_xe_server" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product], Dell Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-hp_xe_enterprise" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product], HP Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-hp_xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] HP Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-hp_xe_server" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product], HP Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-FG-xe_enterprise" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product]</value>
-  </data>
-  <data name="Label-host.sku_type-FG-xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product]</value>
-  </data>
-  <data name="Label-host.sku_type-FG-xe_server" xml:space="preserve">
-    <value>[Citrix] Essentials for [XenServer product]</value>
-  </data>
-  <data name="Label-host.sku_type-dell_xe_enterprise" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Dell Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-dell_xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Dell Express Edition</value>
-  </data>
-  <data name="Label-host.sku_type-dell_xe_server" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Dell Server Edition</value>
-  </data>
-  <data name="Label-host.sku_type-hp_xe_enterprise" xml:space="preserve">
-    <value>[Citrix] [XenServer product] HP Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-hp_xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] HP Select Edition</value>
-  </data>
-  <data name="Label-host.sku_type-hp_xe_server" xml:space="preserve">
-    <value>[Citrix] [XenServer product] HP Server Edition</value>
-  </data>
-  <data name="Label-host.sku_type-xe_enterprise" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Enterprise Edition</value>
-  </data>
-  <data name="Label-host.sku_type-xe_express" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Express Edition</value>
-  </data>
-  <data name="Label-host.sku_type-xe_server" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Server Edition</value>
   </data>
   <data name="Label-host.software_version-build_number" xml:space="preserve">
     <value>[XenServer] build number</value>
@@ -1134,7 +1065,7 @@
     <value>Servers in pool '{0}' have experienced a change in multipath status. Currently the following servers have inactive paths: {1}. See the [XenCenter] logs for the full details.</value>
   </data>
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
-    <value>A storage repository could not be attached when server '{0}' started.  You may be able to fix this using the 'Repair Storage' option in the Storage menu.</value>
+    <value>A storage repository could not be attached when server '{0}' started.</value>
   </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
     <value>Server '{0}' is now the master of pool '{1}'.</value>
@@ -1171,48 +1102,6 @@
   </data>
   <data name="Message.body-vm_uncooperative" xml:space="preserve">
     <value>Virtual machine '{0}' did not reduce its memory usage when requested.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_failed_0" xml:space="preserve">
-    <value>The archive operation for this protection policy could not be completed.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_lock_failed" xml:space="preserve">
-    <value>Unable to archive a snapshot at this time because an archive operation is already in progress. One only VMPR archive operation can run at a time in the same pool. Please run the protection policy again later.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_missed_event" xml:space="preserve">
-    <value>Unable to archive a snapshot at this time because an archive operation is already in progress. One only VMPR archive operation can run at a time in the same pool. Please check that the archive schedules for the protection policies in this pool do not clash.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_succeeded" xml:space="preserve">
-    <value>Scheduled snapshot(s) have been archived successfully.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_target_mount_failed" xml:space="preserve">
-    <value>The remote CIFS or NFS share specified as the archive target in this VM protection policy could not be mounted. Please check the VMPR archive target configuration settings.</value>
-  </data>
-  <data name="Message.body-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>The remote CIFS or NFS share specified as the archive target in this VM protection policy could not be unmounted. Please make sure than the local directory was mounted successfully and has no open handles.</value>
-  </data>
-  <data name="Message.body-vmpp_backup_succeeded" xml:space="preserve">
-    <value>Backup succeeded</value>
-  </data>
-  <data name="Message.body-vmpp_license_error" xml:space="preserve">
-    <value>The [XenServer product] license you are using does not allow you to use the VMPR feature. VMPR is available in [Citrix] [XenServer product] Advanced Edition or higher.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_archive_already_exists" xml:space="preserve">
-    <value>The snapshot is already archived.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_failed" xml:space="preserve">
-    <value>The VM protection policy failed to run because a snapshot could not be created.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_lock_failed" xml:space="preserve">
-    <value>Unable to create snapshots at this time because the scheduled snapshot operation for this policy is already in progress. Please try again later.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_missed_event" xml:space="preserve">
-    <value>Unable to create snapshots at this time because a scheduled snapshot operation is already in progress in this pool. One only VMPR snapshot operation can run at a time in the same pool. Please check that the snapshot schedules for the protection policies in this pool do not clash.</value>
-  </data>
-  <data name="Message.body-vmpp_snapshot_succeeded" xml:space="preserve">
-    <value>Scheduled snapshot(s) have been successfully created.</value>
-  </data>
-  <data name="Message.body-vmpp_xapi_logon_failure" xml:space="preserve">
-    <value>Unable to log in to XAPI session.</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
     <value>The XenServer license you are using does not allow you to use the Scheduled Snapshots feature.</value>
@@ -1415,48 +1304,6 @@
   <data name="Message.name-vm_uncooperative" xml:space="preserve">
     <value>VM Uncooperative</value>
   </data>
-  <data name="Message.name-vmpp_archive_failed_0" xml:space="preserve">
-    <value>VMPR archive operation failed</value>
-  </data>
-  <data name="Message.name-vmpp_archive_lock_failed" xml:space="preserve">
-    <value>VMPR archive operation failed</value>
-  </data>
-  <data name="Message.name-vmpp_archive_missed_event" xml:space="preserve">
-    <value>VMPR archive operation failed</value>
-  </data>
-  <data name="Message.name-vmpp_archive_succeeded" xml:space="preserve">
-    <value>Scheduled snapshot archive succeeded</value>
-  </data>
-  <data name="Message.name-vmpp_archive_target_mount_failed" xml:space="preserve">
-    <value>VMPR archive operation failed</value>
-  </data>
-  <data name="Message.name-vmpp_archive_target_unmount_failed" xml:space="preserve">
-    <value>Unable to unmount VMPR archive target</value>
-  </data>
-  <data name="Message.name-vmpp_backup_succeeded" xml:space="preserve">
-    <value>Backup succeeded</value>
-  </data>
-  <data name="Message.name-vmpp_license_error" xml:space="preserve">
-    <value>VMPR failed: insufficient license for VMPR</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_archive_already_exists" xml:space="preserve">
-    <value>Unable to archive snapshot</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_failed" xml:space="preserve">
-    <value>VMPR failed: snapshot could not be created</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_lock_failed" xml:space="preserve">
-    <value>VMPR failed: snapshot could not be created</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_missed_event" xml:space="preserve">
-    <value>VMPR failed: snapshot could not be created</value>
-  </data>
-  <data name="Message.name-vmpp_snapshot_succeeded" xml:space="preserve">
-    <value>Scheduled snapshot succeeded</value>
-  </data>
-  <data name="Message.name-vmpp_xapi_logon_failure" xml:space="preserve">
-    <value>VMPP XAPI logon failure</value>
-  </data>
   <data name="Message.name-vmss_license_error" xml:space="preserve">
     <value>Snapshot schedule failed: insufficient license for Scheduled snapshots</value>
   </data>
@@ -1605,7 +1452,7 @@
     <value>[XenServer product] Tools</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
-    <value>This template can be used to create a Linux VM with a built-in Linux distro for testing and demonstration purposes. It is not recommended for production use.</value>
+    <value>This template can be used to create a Linux VM with a built-in Linux distribution for testing and demonstration purposes. It is not recommended for production use.</value>
   </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>If the operating system you plan to use is not listed, you may be able to install it by selecting this template.  We recommend that only advanced users attempt to use this template, and you should note that our products have been tested running only the supported distributions and specific versions covered by the standard supplied templates.</value>
@@ -1715,9 +1562,6 @@
   <data name="Label-performance.gpu_utilisation_memory_io" xml:space="preserve">
     <value>{0} {1} Memory Utilization</value>
   </data>
-  <data name="Label-host.edition-free/libre" xml:space="preserve">
-    <value>[XenServer product]</value>
-  </data>
   <data name="Message.name-SRUnavailable" xml:space="preserve">
     <value>Cannot reclaim freed space because the SR is already busy</value>
   </data>
@@ -1753,9 +1597,6 @@
   </data>
   <data name="Label-host.edition-standard-per-socket" xml:space="preserve">
     <value>[XenServer product] Standard Per-Socket</value>
-  </data>
-  <data name="Label-host.edition-xendesktop-platinum" xml:space="preserve">
-    <value>XenDesktop Platinum</value>
   </data>
   <data name="Message.help-license_expired" xml:space="preserve">
     <value>Help on Licensing</value>
@@ -1878,7 +1719,7 @@
     <value>Volume manager logs</value>
   </data>
   <data name="Label-host.edition-premium" xml:space="preserve">
-    <value>[Citrix] [XenServer product] Premium Edition</value>
+    <value>[Citrix] [XenServer product] Ultimate Edition</value>
   </data>
   <data name="Label-host.edition-basic" xml:space="preserve">
     <value>[Citrix] [XenServer product] Basic Edition</value>
@@ -1966,5 +1807,14 @@
   </data>
   <data name="Label-host.system_status-xspvscache" xml:space="preserve">
     <value>PVS-Accelerator Status</value>
+  </data>
+  <data name="Description-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>Scheduled snapshots log files</value>
+  </data>
+  <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
+    <value>Scheduled snapshots log files</value>
+  </data>
+  <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
+    <value>Repair Storage</value>
   </data>
 </root>

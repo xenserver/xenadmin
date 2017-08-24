@@ -156,7 +156,7 @@ namespace XenAdmin
             this.disasterRecoveryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.drConfigureToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.DrWizardToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.vMProtectionAndRecoveryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.VMSnapshotScheduleToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.exportResourceReportPoolToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.wlbReportsToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.wlbDisconnectToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -207,7 +207,6 @@ namespace XenAdmin
             this.startOnHostToolStripMenuItem = new XenAdmin.Commands.StartVMOnHostToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.assignSnapshotScheduleToolStripMenuItem = new XenAdmin.Commands.AssignGroupToolStripMenuItemVMSS();
-            this.assignPolicyToolStripMenuItem = new XenAdmin.Commands.AssignGroupToolStripMenuItemVMPP();
             this.assignToVirtualApplianceToolStripMenuItem = new XenAdmin.Commands.AssignGroupToolStripMenuItemVM_appliance();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.copyVMtoSharedStorageMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -241,7 +240,6 @@ namespace XenAdmin
             this.ReattachStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.ForgetStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.DestroyStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
-            this.ConvertToThinStorageRepositoryToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.pluginItemsPlaceHolderToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.SRPropertiesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -287,7 +285,6 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.VMSnapshotScheduleToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -922,7 +919,6 @@ namespace XenAdmin
             this.highAvailabilityToolStripMenuItem,
             this.disasterRecoveryToolStripMenuItem,
             this.VMSnapshotScheduleToolStripMenuItem,
-            this.vMProtectionAndRecoveryToolStripMenuItem,
             this.exportResourceReportPoolToolStripMenuItem,
             this.wlbReportsToolStripMenuItem,
             this.wlbDisconnectToolStripMenuItem,
@@ -1014,11 +1010,11 @@ namespace XenAdmin
             this.DrWizardToolStripMenuItem.Name = "DrWizardToolStripMenuItem";
             resources.ApplyResources(this.DrWizardToolStripMenuItem, "DrWizardToolStripMenuItem");
             // 
-            // vMProtectionAndRecoveryToolStripMenuItem
+            // VMSnapshotScheduleToolStripMenuItem
             // 
-            this.vMProtectionAndRecoveryToolStripMenuItem.Command = new XenAdmin.Commands.VMGroupCommandVMPP();
-            this.vMProtectionAndRecoveryToolStripMenuItem.Name = "vMProtectionAndRecoveryToolStripMenuItem";
-            resources.ApplyResources(this.vMProtectionAndRecoveryToolStripMenuItem, "vMProtectionAndRecoveryToolStripMenuItem");
+            this.VMSnapshotScheduleToolStripMenuItem.Command = new XenAdmin.Commands.VMGroupCommandVMSS();
+            this.VMSnapshotScheduleToolStripMenuItem.Name = "VMSnapshotScheduleToolStripMenuItem";
+            resources.ApplyResources(this.VMSnapshotScheduleToolStripMenuItem, "VMSnapshotScheduleToolStripMenuItem");
             // 
             // exportResourceReportPoolToolStripMenuItem
             // 
@@ -1305,7 +1301,6 @@ namespace XenAdmin
             this.startOnHostToolStripMenuItem,
             this.toolStripSeparator20,
             this.assignSnapshotScheduleToolStripMenuItem,
-            this.assignPolicyToolStripMenuItem,
             this.assignToVirtualApplianceToolStripMenuItem,
             this.toolStripMenuItem9,
             this.copyVMtoSharedStorageMenuItem,
@@ -1362,11 +1357,6 @@ namespace XenAdmin
             // 
             this.assignSnapshotScheduleToolStripMenuItem.Name = "assignSnapshotScheduleToolStripMenuItem";
             resources.ApplyResources(this.assignSnapshotScheduleToolStripMenuItem, "assignSnapshotScheduleToolStripMenuItem");
-            // 
-            // assignPolicyToolStripMenuItem
-            // 
-            this.assignPolicyToolStripMenuItem.Name = "assignPolicyToolStripMenuItem";
-            resources.ApplyResources(this.assignPolicyToolStripMenuItem, "assignPolicyToolStripMenuItem");
             // 
             // assignToVirtualApplianceToolStripMenuItem
             // 
@@ -1485,7 +1475,6 @@ namespace XenAdmin
             this.ReattachStorageRepositoryToolStripMenuItem,
             this.ForgetStorageRepositoryToolStripMenuItem,
             this.DestroyStorageRepositoryToolStripMenuItem,
-            this.ConvertToThinStorageRepositoryToolStripMenuItem,
             this.toolStripSeparator18,
             this.pluginItemsPlaceHolderToolStripMenuItem5,
             this.SRPropertiesToolStripMenuItem});
@@ -1578,12 +1567,6 @@ namespace XenAdmin
             this.DestroyStorageRepositoryToolStripMenuItem.Command = new XenAdmin.Commands.DestroySRCommand();
             this.DestroyStorageRepositoryToolStripMenuItem.Name = "DestroyStorageRepositoryToolStripMenuItem";
             resources.ApplyResources(this.DestroyStorageRepositoryToolStripMenuItem, "DestroyStorageRepositoryToolStripMenuItem");
-            // 
-            // ConvertToThinStorageRepositoryToolStripMenuItem
-            // 
-            this.ConvertToThinStorageRepositoryToolStripMenuItem.Command = new XenAdmin.Commands.ConvertToThinSRCommand();
-            this.ConvertToThinStorageRepositoryToolStripMenuItem.Name = "ConvertToThinStorageRepositoryToolStripMenuItem";
-            resources.ApplyResources(this.ConvertToThinStorageRepositoryToolStripMenuItem, "ConvertToThinStorageRepositoryToolStripMenuItem");
             // 
             // toolStripSeparator18
             // 
@@ -1896,12 +1879,6 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
-            // VMSnapshotScheduleToolStripMenuItem
-            // 
-            this.VMSnapshotScheduleToolStripMenuItem.Command = new XenAdmin.Commands.VMGroupCommandVMSS();
-            this.VMSnapshotScheduleToolStripMenuItem.Name = "VMSnapshotScheduleToolStripMenuItem";
-            resources.ApplyResources(this.VMSnapshotScheduleToolStripMenuItem, "VMSnapshotScheduleToolStripMenuItem");
-            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2027,7 +2004,6 @@ namespace XenAdmin
         private CommandToolStripMenuItem ReattachStorageRepositoryToolStripMenuItem;
         private CommandToolStripMenuItem ForgetStorageRepositoryToolStripMenuItem;
         private CommandToolStripMenuItem DestroyStorageRepositoryToolStripMenuItem;
-        private CommandToolStripMenuItem ConvertToThinStorageRepositoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem templatesToolStripMenuItem;
         private CommandToolStripMenuItem exportTemplateToolStripMenuItem;
@@ -2125,8 +2101,6 @@ namespace XenAdmin
         private ToolStripMenuItem xenCenterPluginsOnlineToolStripMenuItem;
         private CommandToolStripMenuItem MoveVMToolStripMenuItem;
         private CommandToolStripMenuItem rollingUpgradeToolStripMenuItem;
-        private CommandToolStripMenuItem vMProtectionAndRecoveryToolStripMenuItem;
-        private AssignGroupToolStripMenuItemVMPP assignPolicyToolStripMenuItem;
         private CommandToolStripMenuItem changePoolPasswordToolStripMenuItem;
 		private ToolStripSeparator toolStripSeparator30;
 		private CommandToolStripMenuItem virtualAppliancesToolStripMenuItem;

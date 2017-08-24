@@ -46,10 +46,6 @@ namespace XenAdmin.Model
 {
     public class DockerContainers
     {
-        static DockerContainers()
-        {
-        }
-
         public static void InitDockerContainers()
         {
             Trace.Assert(InvokeHelper.Synchronizer != null);
@@ -64,22 +60,31 @@ namespace XenAdmin.Model
         private static void XenConnections_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             InvokeHelper.BeginInvoke(() =>
-                                                        {
-                                                            IXenConnection connection = e.Element as IXenConnection;
-                                                            if (connection == null)
-                                                                return;
+            {
+                IXenConnection connection = e.Element as IXenConnection;
 
-                                                            switch (e.Action)
-                                                            {
-                                                                case CollectionChangeAction.Add:
-                                                                    AddConnection(connection);
-                                                                    break;
+                switch (e.Action)
+                {
+                    case CollectionChangeAction.Add:
+                        if (connection != null)
+                            AddConnection(connection);
+                        break;
 
-                                                                case CollectionChangeAction.Remove:
-                                                                    RemoveConnection(connection);
-                                                                    break;
-                                                            }
-                                                        });
+                    case CollectionChangeAction.Remove:
+                        if (connection != null)
+                        {
+                            RemoveConnection(connection);
+                        }
+                        else
+                        {
+                            var range = e.Element as List<IXenConnection>;
+                            if (range != null)
+                                foreach (var con in range)
+                                    RemoveConnection(con);
+                        }
+                        break;
+                }
+            });
         }
 
         private static CollectionChangeEventHandler CollectionChangedWithInvoke;
@@ -106,9 +111,8 @@ namespace XenAdmin.Model
         {
             InvokeHelper.AssertOnEventThread();
 
-            Trace.Assert(e.Element is VM);
-
             var vm = e.Element as VM;
+            Trace.Assert(vm != null, "The item changed is not a VM");
 
             switch (e.Action)
             {

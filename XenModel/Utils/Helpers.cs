@@ -59,8 +59,6 @@ namespace XenAdmin.Core
         
         public const string GuiTempObjectPrefix = "__gui__";
 
-        public const int CUSTOM_BUILD_NUMBER = 6666;
-
         public static NumberFormatInfo _nfi = new CultureInfo("en-US", false).NumberFormat;
 
         public static readonly Regex SessionRefRegex = new Regex(@"OpaqueRef:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
@@ -74,25 +72,6 @@ namespace XenAdmin.Core
         public static bool DbProxyIsSimulatorUrl(string url)
         {
             return url.EndsWith(".db") || url.EndsWith(".xml") || url.EndsWith(".tmp");
-        }
-
-        /// <summary>
-        /// Return the build number of the given host, or the build number of the master if the
-        /// given host does not have a build number, or -1 if we can't find one.  This will often be
-        /// 0 or -1 for developer builds, so comparisons should generally treat those numbers as if
-        /// they were brand new.
-        /// </summary>
-        public static int HostBuildNumber(Host host)
-        {
-            if (host.BuildNumber <= 0)
-            {
-                Host master = GetMaster(host.Connection);
-                return master == null ? -1 : master.BuildNumber;
-            }
-            else
-            {
-                return host.BuildNumber;
-            }
         }
 
         /// <summary>
@@ -310,17 +289,17 @@ namespace XenAdmin.Core
 
         public static bool IsConnected(IXenConnection connection)
         {
-            return (connection == null ? false : connection.IsConnected);
+            return (connection != null && connection.IsConnected);
         }
 
         public static bool IsConnected(Pool pool)
         {
-            return (pool == null ? false : IsConnected(pool.Connection));
+            return (pool != null && IsConnected(pool.Connection));
         }
 
         public static bool IsConnected(Host host)
         {
-            return (host == null ? false : IsConnected(host.Connection));
+            return (host != null && IsConnected(host.Connection));
         }
 
         public static bool HasFullyConnectedSharedStorage(IXenConnection connection)
@@ -334,40 +313,9 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
-        public static bool TampaOrGreater(IXenConnection conn)
-        {
-            return conn == null ? true : TampaOrGreater(Helpers.GetMaster(conn));
-        }
-
-        /// <param name="host">May be null, in which case true is returned.</param>
-        public static bool TampaOrGreater(Host host)
-        {
-            if (host == null)
-                return true;
-            
-            string platform_version = Helpers.HostPlatformVersion(host);
-            return
-                platform_version != null && Helpers.productVersionCompare(platform_version, "1.5.50") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
-        }
-
-        public static bool SanibelOrGreater(IXenConnection conn)
-        {
-            return conn == null ? true : SanibelOrGreater(Helpers.GetMaster(conn));
-        }
-
-        public static bool SanibelOrGreater(Host host)
-        {
-            return
-                TampaOrGreater(host) ||  // CP-2480
-                Helpers.productVersionCompare(Helpers.HostProductVersion(host), "6.0.1") >= 0 ||
-                Helpers.HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
-        }
-
-        /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool CreedenceOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : CreedenceOrGreater(Helpers.GetMaster(conn));
+            return conn == null || CreedenceOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Creedence is ver. 1.9.0
@@ -379,14 +327,13 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "1.8.90") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool DundeeOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : DundeeOrGreater(Helpers.GetMaster(conn));
+            return conn == null || DundeeOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Dundee is ver. 2.0.0
@@ -398,14 +345,13 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "2.0.0") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ElyOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : ElyOrGreater(Helpers.GetMaster(conn));
+            return conn == null || ElyOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Ely is ver. 2.1.1
@@ -417,14 +363,13 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "2.1.1") >= 0;
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool FalconOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : FalconOrGreater(Helpers.GetMaster(conn));
+            return conn == null || FalconOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Falcon is ver. 2.3.0
@@ -436,8 +381,25 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "2.2.50") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "2.2.50") >= 0;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
+        public static bool InvernessOrGreater(IXenConnection conn)
+        {
+            return conn == null || InvernessOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Inverness is ver. 2.4.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool InvernessOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "2.3.50") >= 0;
         }
 
         /// <summary>
@@ -469,7 +431,7 @@ namespace XenAdmin.Core
         /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool ClearwaterOrGreater(IXenConnection conn)
         {
-            return conn == null ? true : ClearwaterOrGreater(Helpers.GetMaster(conn));
+            return conn == null || ClearwaterOrGreater(Helpers.GetMaster(conn));
         }
 
         /// Clearwater is ver. 1.7.0
@@ -481,8 +443,7 @@ namespace XenAdmin.Core
 
             string platform_version = HostPlatformVersion(host);
             return
-                platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0 ||
-                HostBuildNumber(host) == CUSTOM_BUILD_NUMBER;
+                platform_version != null && productVersionCompare(platform_version, "1.6.900") >= 0;
         }
 
         /// <summary>
@@ -539,136 +500,6 @@ namespace XenAdmin.Core
             return WlbEnabledAndConfigured(conn) && !DundeeOrGreater(conn);
         }
 
-        #region AllocationBoundsStructAndMethods
-        public struct AllocationBounds
-        {
-            private readonly decimal min;
-            private readonly decimal max;
-            private readonly decimal defaultValue;
-            private readonly string unit;
-
-            public AllocationBounds(decimal min, decimal max, decimal defaultValue)
-            {
-                this.min = min;
-                this.max = max;
-                if (defaultValue < min)
-                {
-                    defaultValue = min;
-                }
-                else if (defaultValue > max)
-                {
-                    defaultValue = max;
-                }
-                this.defaultValue = defaultValue;
-                if (defaultValue >= Util.BINARY_GIGA)
-                    unit =  Messages.VAL_GIGB;
-                else
-                    unit = Messages.VAL_MEGB;
-            }
-
-            public AllocationBounds(decimal min, decimal max, decimal defaultValue, string unit)
-                : this(min, max, defaultValue)
-            {
-                this.unit = unit;
-            }
-
-            public decimal Min
-            {
-                get
-                {
-                    return min;
-                }
-            }
-
-            public decimal Max
-            {
-                get
-                {
-                    return max;
-                }
-            }
-
-            /// <summary>
-            /// Returns the minimum in the appropriate units
-            /// </summary>
-            public decimal MinInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(min);
-                }
-            }
-
-            public decimal MaxInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(max);
-                }
-            }
-
-            public decimal DefaultValueInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(defaultValue);
-                }
-            }
-
-            public string Unit
-            {
-                get
-                {
-                   return unit;
-                }
-            }
-
-            private decimal GetValueInUnits(decimal val)
-            {
-                if (unit == Messages.VAL_GIGB)
-                    return val / Util.BINARY_GIGA;
-                else
-                    return val / Util.BINARY_MEGA;
-            }
-        }
-
-        public static AllocationBounds SRIncrementalAllocationBounds(long SRSize)
-        {
-            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR , XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal max = Math.Max(SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR, XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal defaultValue = Math.Max(SRSize / XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR, min);
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds VDIIncrementalAllocationBounds(long SRSize, long SRIncrAllocation)
-        {
-            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR, XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal max = Math.Max(SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR, SRIncrAllocation);
-            decimal defaultValue = SRIncrAllocation;
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds SRInitialAllocationBounds(long SRSize)
-        {
-            decimal min = 0;
-            decimal max = SRSize;
-            decimal defaultValue = 0;
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds VDIInitialAllocationBounds(long VDISize, long SRInitialAllocation)
-        {
-            decimal min = 0;
-            decimal max = VDISize;
-            decimal defaultValue = Math.Min(SRInitialAllocation, max);
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        #endregion
 
         /// <summary>
         /// Determines whether two lists contain the same elements (but not necessarily in the same order).
@@ -1654,11 +1485,6 @@ namespace XenAdmin.Core
                     if (sr != null)
                         return sr;
                     break;
-                case cls.VMPP:
-                    VMPP vmpp = message.Connection.Cache.Find_By_Uuid<VMPP>(message.obj_uuid);
-                    if (vmpp != null)
-                        return vmpp;
-                    break;
                 case cls.VMSS:
                     VMSS vmss = message.Connection.Cache.Find_By_Uuid<VMSS>(message.obj_uuid);
                     if (vmss != null)
@@ -2033,12 +1859,12 @@ namespace XenAdmin.Core
         }
 
        /// <summary>
-       /// Does the connection support Link aggregation (LACP) bonds (i.e., is Tampa or later on the vSwitch backend)?
+       /// Does the connection support Link aggregation (LACP) bonds (i.e. on the vSwitch backend)?
        /// </summary>
        public static bool SupportsLinkAggregationBond(IXenConnection connection)
        {
            Host master = GetMaster(connection);
-           return master != null && TampaOrGreater(master) && master.vSwitchNetworkBackend;
+           return master != null && master.vSwitchNetworkBackend;
        }
 
        /// <summary>
@@ -2047,8 +1873,8 @@ namespace XenAdmin.Core
        public static int BondSizeLimit(IXenConnection connection)
        {
            Host master = GetMaster(connection);
-           // For Tampa or later on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
-           return master != null && TampaOrGreater(master) && master.vSwitchNetworkBackend ? 4 : 2;
+           // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
+           return master != null && master.vSwitchNetworkBackend ? 4 : 2;
        }
 
        public static Host GetHostAncestor(IXenObject xenObject)
@@ -2128,7 +1954,6 @@ namespace XenAdmin.Core
 
        /// <summary>
        /// This method returns the disk space required (bytes) on the provided SR for the provided VDI.
-       /// This method also considers thin provisioning. For thin provisioned SRs the provided sm_config in the VDI will be considered first, or it will use the values from the SR's sm_config in case the VDI does not have these set. For fully provisioned SRs the sm_config in the VDI will be ignored.
        /// </summary>
        /// <returns>Disk size required in bytes.</returns>
        public static long GetRequiredSpaceToCreateVdiOnSr(SR sr, VDI vdi)
@@ -2138,23 +1963,6 @@ namespace XenAdmin.Core
 
            if (vdi == null)
                throw new ArgumentNullException("vdi");
-
-           if (!sr.IsThinProvisioned)
-               return vdi.virtual_size;
-
-           long initialAllocationVdi = -1;
-           if (vdi.sm_config != null && vdi.sm_config.ContainsKey("initial_allocation"))
-               long.TryParse(vdi.sm_config["initial_allocation"], out initialAllocationVdi);
-
-           long initialAllocationSr = -1;
-           if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation"))
-               long.TryParse(sr.sm_config["initial_allocation"], out initialAllocationSr);
-
-           if (initialAllocationVdi > -1)
-               return initialAllocationVdi;
-
-           if (initialAllocationSr > -1)
-               return initialAllocationSr;
 
            return vdi.virtual_size;
        }

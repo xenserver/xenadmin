@@ -148,6 +148,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_PrecheckPage.WizardMode = wizardMode;
                 PatchingWizard_PrecheckPage.Patch = existPatch;
+                PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
                 PatchingWizard_PrecheckPage.SelectedUpdateType = updateType;
                 PatchingWizard_PrecheckPage.UpdateAlert = alertPatch ?? fileFromDiskAlertPatch;
 
@@ -343,6 +344,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             else
             {
                 listOfDownloadedFiles.AddRange(PatchingWizard_UploadPage.AllDownloadedPatches.Values);
+                listOfDownloadedFiles.AddRange(PatchingWizard_SelectPatchPage.UnzippedUpdateFiles);
             }
 
             foreach (string downloadedPatch in listOfDownloadedFiles)

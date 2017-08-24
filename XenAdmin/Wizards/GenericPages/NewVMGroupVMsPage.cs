@@ -218,16 +218,13 @@ namespace XenAdmin.Wizards.GenericPages
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
-            if (!VMGroup<T>.isQuescingSupported)
-            {
-                this.dataGridView1.Columns["ColumnQuiesceSupported"].Visible = false;
-            }
             RefreshTab(null);
         } 
 
         private T _group = null;
         private void RefreshTab(T group)
         {
+            ColumnQuiesceSupported.Visible = VMGroup<T>.isQuescingSupported;
             _group = group;
             if (Pool != null)
             {

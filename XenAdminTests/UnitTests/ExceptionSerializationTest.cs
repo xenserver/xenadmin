@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using NUnit.Framework;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdminTests.UnitTests
@@ -155,8 +156,8 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void TestEventNextBlockedException()
         {
-            var exception = new EventNextBlockedException();
-            EventNextBlockedException deserializedException;
+            var exception = new EventFromBlockedException();
+            EventFromBlockedException deserializedException;
 
             // Serialize and de-serialize with a BinaryFormatter
             BinaryFormatter bf = new BinaryFormatter();
@@ -164,7 +165,7 @@ namespace XenAdminTests.UnitTests
             {
                 bf.Serialize(ms, exception);
                 ms.Seek(0, 0);
-                deserializedException = (EventNextBlockedException)(bf.Deserialize(ms));
+                deserializedException = (EventFromBlockedException)(bf.Deserialize(ms));
             }
 
             // Check that properties are preserved

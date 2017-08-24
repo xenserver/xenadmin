@@ -50,13 +50,14 @@ namespace XenAdmin
         public const string UPDATEISO = "[iso]";
         public const string BACKUP = "[xbk]";
         public const string CHECK_FOR_UPDATES_URL = "[BRANDING_XENSERVER_UPDATE_URL]";
+        public const string BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT = "[BRANDING_PERF_ALERT_MAIL_LANGUAGE_DEFAULT]";
 
         public static string Search
         {
             get
             {
                 var s = SEARCH;
-                return s != "[" + "xensearch]" ? s : InvisibleMessages.XEN_SEARCH;
+                return s != "[" + "xensearch]" ? s.ToLowerInvariant() : InvisibleMessages.XEN_SEARCH.ToLowerInvariant();
             }
         }
         
@@ -65,7 +66,7 @@ namespace XenAdmin
             get
             {
                 var s = UPDATE;
-                return s != "[" + "xsupdate]" ? s : InvisibleMessages.XEN_UPDATE;
+                return s != "[" + "xsupdate]" ? s.ToLowerInvariant() : InvisibleMessages.XEN_UPDATE.ToLowerInvariant();
             }
         }
 
@@ -74,7 +75,7 @@ namespace XenAdmin
             get
             {
                 var s = UPDATEISO;
-                return s != "[" + "iso]" ? s : InvisibleMessages.ISO_UPDATE;
+                return s != "[" + "iso]" ? s.ToLowerInvariant() : InvisibleMessages.ISO_UPDATE.ToLowerInvariant();
             }
         }
 

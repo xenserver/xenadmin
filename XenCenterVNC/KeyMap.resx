@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Menu" xml:space="preserve">
     <value>0xffe9</value>
@@ -176,6 +176,36 @@
   </data>
   <data name="NumLock" xml:space="preserve">
     <value>-1</value>
+  </data>
+  <data name="NumPad0" xml:space="preserve">
+    <value>0xffb0</value>
+  </data>
+  <data name="NumPad1" xml:space="preserve">
+    <value>0xffb1</value>
+  </data>
+  <data name="NumPad2" xml:space="preserve">
+    <value>0xffb2</value>
+  </data>
+  <data name="NumPad3" xml:space="preserve">
+    <value>0xffb3</value>
+  </data>
+  <data name="NumPad4" xml:space="preserve">
+    <value>0xffb4</value>
+  </data>
+  <data name="NumPad5" xml:space="preserve">
+    <value>0xffb5</value>
+  </data>
+  <data name="NumPad6" xml:space="preserve">
+    <value>0xffb6</value>
+  </data>
+  <data name="NumPad7" xml:space="preserve">
+    <value>0xffb7</value>
+  </data>
+  <data name="NumPad8" xml:space="preserve">
+    <value>0xffb8</value>
+  </data>
+  <data name="NumPad9" xml:space="preserve">
+    <value>0xffb9</value>
   </data>
   <data name="Separator" xml:space="preserve">
     <value>0xffac</value>

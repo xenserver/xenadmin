@@ -116,7 +116,10 @@ namespace XenAdmin.TabPages
                 foreach (VM vm in vms)
                     RegisterVMHandlers(vm);
 
-                Rebuild();
+                Program.BeginInvoke(Program.MainWindow, () =>
+                {
+                    Rebuild();
+                });
             }
         }
 

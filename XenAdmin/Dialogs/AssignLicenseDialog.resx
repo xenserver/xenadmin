@@ -247,7 +247,7 @@
     <value>304, 23</value>
   </data>
   <data name="licenseServerNameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;licenseServerNameTextBox.Name" xml:space="preserve">
     <value>licenseServerNameTextBox</value>
@@ -271,7 +271,7 @@
     <value>63, 23</value>
   </data>
   <data name="licenseServerPortTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="licenseServerPortTextBox.Text" xml:space="preserve">
     <value>27000</value>
@@ -418,7 +418,7 @@
     <value>7, 3</value>
   </data>
   <data name="perSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 19</value>
+    <value>190, 19</value>
   </data>
   <data name="perSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -438,105 +438,6 @@
   <data name="&gt;&gt;perSocketRadioButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="advancedRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="advancedRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="advancedRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="advancedRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 28</value>
-  </data>
-  <data name="advancedRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 19</value>
-  </data>
-  <data name="advancedRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="advancedRadioButton.Text" xml:space="preserve">
-    <value>[XenServer product] &amp;Advanced Edition</value>
-  </data>
-  <data name="&gt;&gt;advancedRadioButton.Name" xml:space="preserve">
-    <value>advancedRadioButton</value>
-  </data>
-  <data name="&gt;&gt;advancedRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;advancedRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;advancedRadioButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="enterpriseRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="enterpriseRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="enterpriseRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="enterpriseRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 53</value>
-  </data>
-  <data name="enterpriseRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 19</value>
-  </data>
-  <data name="enterpriseRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="enterpriseRadioButton.Text" xml:space="preserve">
-    <value>[XenServer product] &amp;Enterprise Edition</value>
-  </data>
-  <data name="&gt;&gt;enterpriseRadioButton.Name" xml:space="preserve">
-    <value>enterpriseRadioButton</value>
-  </data>
-  <data name="&gt;&gt;enterpriseRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;enterpriseRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;enterpriseRadioButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="platinumRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="platinumRadioButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="platinumRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="platinumRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 78</value>
-  </data>
-  <data name="platinumRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 19</value>
-  </data>
-  <data name="platinumRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="platinumRadioButton.Text" xml:space="preserve">
-    <value>[XenServer product] &amp;Platinum Edition</value>
-  </data>
-  <data name="&gt;&gt;platinumRadioButton.Name" xml:space="preserve">
-    <value>platinumRadioButton</value>
-  </data>
-  <data name="&gt;&gt;platinumRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;platinumRadioButton.Parent" xml:space="preserve">
-    <value>editionLayoutPanel</value>
-  </data>
-  <data name="&gt;&gt;platinumRadioButton.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="xenDesktopEnterpriseRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -547,13 +448,13 @@
     <value>NoControl</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 103</value>
+    <value>7, 28</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 19</value>
+    <value>214, 19</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="xenDesktopEnterpriseRadioButton.Text" xml:space="preserve">
     <value>[XenServer product] for &amp;XenDesktop</value>
@@ -568,7 +469,7 @@
     <value>editionLayoutPanel</value>
   </data>
   <data name="&gt;&gt;xenDesktopEnterpriseRadioButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="enterprisePerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -580,13 +481,13 @@
     <value>NoControl</value>
   </data>
   <data name="enterprisePerSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 128</value>
+    <value>7, 53</value>
   </data>
   <data name="enterprisePerSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 19</value>
+    <value>245, 19</value>
   </data>
   <data name="enterprisePerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="enterprisePerSocketRadioButton.Text" xml:space="preserve">
     <value>[XenServer product] E&amp;nterprise Per-Socket</value>
@@ -601,7 +502,7 @@
     <value>editionLayoutPanel</value>
   </data>
   <data name="&gt;&gt;enterprisePerSocketRadioButton.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="enterprisePerUserRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -613,13 +514,13 @@
     <value>NoControl</value>
   </data>
   <data name="enterprisePerUserRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 153</value>
+    <value>7, 78</value>
   </data>
   <data name="enterprisePerUserRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 19</value>
+    <value>233, 19</value>
   </data>
   <data name="enterprisePerUserRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="enterprisePerUserRadioButton.Text" xml:space="preserve">
     <value>[XenServer product] &amp;Enterprise Per-User</value>
@@ -637,7 +538,7 @@
     <value>editionLayoutPanel</value>
   </data>
   <data name="&gt;&gt;enterprisePerUserRadioButton.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="desktopPlusRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -649,13 +550,13 @@
     <value>NoControl</value>
   </data>
   <data name="desktopPlusRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 178</value>
+    <value>7, 103</value>
   </data>
   <data name="desktopPlusRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 19</value>
   </data>
   <data name="desktopPlusRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>4</value>
   </data>
   <data name="desktopPlusRadioButton.Text" xml:space="preserve">
     <value>XenApp/XenDesktop &amp;Platinum</value>
@@ -670,7 +571,7 @@
     <value>editionLayoutPanel</value>
   </data>
   <data name="&gt;&gt;desktopPlusRadioButton.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="desktopRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -682,13 +583,13 @@
     <value>NoControl</value>
   </data>
   <data name="desktopRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 203</value>
+    <value>7, 128</value>
   </data>
   <data name="desktopRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 19</value>
   </data>
   <data name="desktopRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>5</value>
   </data>
   <data name="desktopRadioButton.Text" xml:space="preserve">
     <value>XenApp/Xen&amp;Desktop</value>
@@ -703,7 +604,7 @@
     <value>editionLayoutPanel</value>
   </data>
   <data name="&gt;&gt;desktopRadioButton.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="standardPerSocketRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -715,13 +616,13 @@
     <value>NoControl</value>
   </data>
   <data name="standardPerSocketRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 228</value>
+    <value>7, 153</value>
   </data>
   <data name="standardPerSocketRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 19</value>
+    <value>240, 19</value>
   </data>
   <data name="standardPerSocketRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="standardPerSocketRadioButton.Text" xml:space="preserve">
     <value>[XenServer product] &amp;Standard Per-Socket</value>
@@ -736,7 +637,7 @@
     <value>editionLayoutPanel</value>
   </data>
   <data name="&gt;&gt;standardPerSocketRadioButton.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>6</value>
   </data>
   <data name="editionLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -754,7 +655,7 @@
     <value>4, 0, 4, 4</value>
   </data>
   <data name="editionLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>519, 254</value>
+    <value>519, 179</value>
   </data>
   <data name="editionLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -781,7 +682,7 @@
     <value>11, 92</value>
   </data>
   <data name="editionsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 276</value>
+    <value>525, 201</value>
   </data>
   <data name="editionsGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -814,7 +715,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="buttonsLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>350, 379</value>
+    <value>350, 304</value>
   </data>
   <data name="buttonsLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 8, 3, 3</value>
@@ -853,7 +754,7 @@
     <value>6</value>
   </data>
   <data name="mainLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>547, 397</value>
+    <value>547, 346</value>
   </data>
   <data name="mainLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -886,7 +787,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>547, 397</value>
+    <value>547, 346</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

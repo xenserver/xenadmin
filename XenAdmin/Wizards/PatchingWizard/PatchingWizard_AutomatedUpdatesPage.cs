@@ -157,11 +157,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 var planActions = new List<PlanAction>();
                 var delayedActionsByHost = new Dictionary<Host, List<PlanAction>>();
+                var finalActions = new List<PlanAction>();
 
                 foreach (var host in pool.Connection.Cache.Hosts)
                 {
                     delayedActionsByHost.Add(host, new List<PlanAction>());
                 }
+
+                var hosts = pool.Connection.Cache.Hosts;
 
                 //if any host is not licensed for automated updates
                 bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
@@ -196,9 +199,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }//patch
                 }
 
+                //add a revert pre-check action for this pool
+                var problemsToRevert = ProblemsResolvedPreCheck.Where(p => hosts.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList();
+                if (problemsToRevert.Count > 0)
+                {
+                    finalActions.Add(new UnwindProblemsAction(problemsToRevert, string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, pool.Connection.Name)));
+                }
+
                 if (planActions.Count > 0)
                 {
-                    var bgw = new UpdateProgressBackgroundWorker(master, planActions, delayedActionsByHost);
+                    var bgw = new UpdateProgressBackgroundWorker(master, planActions, delayedActionsByHost, finalActions);
                     backgroundWorkers.Add(bgw);
 
                 }
@@ -314,11 +324,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 // running delayed actions, but skipping the ones that should be skipped
-                // iterating through hosts
-                foreach (var kvp in bgw.DelayedActionsByHost)
+                // iterating through hosts, master first
+                var hostsOrdered = bgw.DelayedActionsByHost.Keys.ToList();
+                hostsOrdered.Sort(); //master first
+
+                foreach (var h in hostsOrdered)
                 {
-                    var h = kvp.Key;
-                    var actions = kvp.Value;
+                    var actions = bgw.DelayedActionsByHost[h];
 
                     //run all restart-alike plan actions
                     foreach (var a in actions.Where(a => a.IsRestartRelatedPlanAction()))
@@ -360,9 +372,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                             action.Visible = false;
                             bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action); //still need to report progress, mainly for the progress bar
                         }
-
                     }
-                                        
+                }
+
+                //running final actions (eg. revert pre-checks)
+                foreach (var a in bgw.FinalActions)
+                {
+                    action = a;
+
+                    if (bgw.CancellationPending)
+                    {
+                        doWorkEventArgs.Cancel = true;
+                        return;
+                    }
+
+                    RunPlanAction(bgw, action);
                 }
             }
             catch (Exception e)

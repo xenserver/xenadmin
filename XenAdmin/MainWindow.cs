@@ -219,6 +219,7 @@ namespace XenAdmin
             pluginManager.PluginsChanged += pluginManager_PluginsChanged;
             pluginManager.LoadPlugins();
             contextMenuBuilder = new ContextMenuBuilder(pluginManager, this);
+            ((WinformsXenAdminConfigProvider) XenAdminConfigManager.Provider).PluginManager = pluginManager;
 
             eventsPage.GoToXenObjectRequested += eventsPage_GoToXenObjectRequested;
             SearchPage.SearchChanged += SearchPanel_SearchChanged;
@@ -393,14 +394,15 @@ namespace XenAdmin
 
             Program.BeginInvoke(Program.MainWindow, () =>
             {
-                ActionBase action = (ActionBase)e.Element;
-                if (action == null)
-                    return;
-
+                ActionBase action = e.Element as ActionBase;
+                
                 switch (e.Action)
                 {
                     case CollectionChangeAction.Add:
                         {
+                            if (action == null)
+                                return;
+
                             var meddlingAction = action as MeddlingAction;
                             if (meddlingAction == null)
                             {
@@ -408,20 +410,39 @@ namespace XenAdmin
                                 if (statusBarAction != null)
                                 {
                                     statusBarAction.Changed -= actionChanged;
-                                    statusBarAction.Completed -= actionChanged;
+                                    statusBarAction.Completed -= actionCompleted;
                                 }
                                 statusBarAction = action;
                             }
                             action.Changed += actionChanged;
-                            action.Completed += actionChanged;
+                            action.Completed += actionCompleted;
                             actionChanged(action);
                             break;
                         }
                     case CollectionChangeAction.Remove:
                         {
-                            action.Changed -= actionChanged;
-                            action.Completed -= actionChanged;
-                            
+                            if (action != null)
+                            {
+                                action.Changed -= actionChanged;
+                                action.Completed -= actionCompleted;
+                            }
+                            else
+                            {
+                                var range = e.Element as List<ActionBase>;
+                                if (range != null)
+                                {
+                                    foreach (var a in range)
+                                    {
+                                        a.Changed -= actionChanged;
+                                        a.Completed -= actionCompleted;
+                                    }
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+
                             int errors = ConnectionsManager.History.Count(a => a.IsCompleted && !a.Succeeded);
                             navigationPane.UpdateNotificationsButton(NotificationsSubMode.Events, errors);
 
@@ -436,6 +457,13 @@ namespace XenAdmin
             });
         }
 
+        void actionCompleted(ActionBase action)
+        {
+            actionChanged(action);
+            if (action is SrAction)
+                Program.Invoke(this, UpdateToolbars);
+        }
+
         void actionChanged(ActionBase action)
         {
             if (Program.Exiting)
@@ -446,6 +474,8 @@ namespace XenAdmin
 
         void actionChanged_(ActionBase action)
         {
+            if (action.SuppressProgressReport) // suppress updates when the PureAsyncAction runs the action to populate the ApiMethodsToRoleCheck
+                return;
              var meddlingAction = action as MeddlingAction;
              if (meddlingAction == null)
                  statusProgressBar.Visible = action.ShowProgress && !action.IsCompleted;
@@ -516,17 +546,7 @@ namespace XenAdmin
             try
             {
                 Settings.RestoreSession();
-                new TransferProxySettingsAction(
-                    (HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting,
-                    Properties.Settings.Default.ProxyAddress,
-                    Properties.Settings.Default.ProxyPort,
-                    Properties.Settings.Default.ConnectionTimeout,
-                    true,
-                    Properties.Settings.Default.BypassProxyForServers,
-                    Properties.Settings.Default.ProvideProxyAuthentication,
-                    Properties.Settings.Default.ProxyUsername,
-                    Properties.Settings.Default.ProxyPassword,
-                    (HTTP.ProxyAuthenticationMethod)Properties.Settings.Default.ProxyAuthenticationMethod).RunAsync();
+                HealthCheck.SendProxySettingsToHealthCheck();
             }
             catch (ConfigurationErrorsException ex)
             {
@@ -740,14 +760,15 @@ namespace XenAdmin
         {
             try
             {
-                IXenConnection connection = (IXenConnection)e.Element;
-                if (connection == null)
-                    return;
+                IXenConnection connection = e.Element as IXenConnection;
 
                 navigationPane.XenConnectionCollectionChanged(e);
 
                 if (e.Action == CollectionChangeAction.Add)
                 {
+                    if (connection == null)
+                        return;
+
                     connection.ClearingCache += connection_ClearingCache;
                     connection.ConnectionResult += Connection_ConnectionResult;
                     connection.ConnectionLost += Connection_ConnectionLost;
@@ -767,38 +788,54 @@ namespace XenAdmin
                 }
                 else if (e.Action == CollectionChangeAction.Remove)
                 {
-                    connection.ClearingCache -= connection_ClearingCache;
-                    connection.ConnectionResult -= Connection_ConnectionResult;
-                    connection.ConnectionLost -= Connection_ConnectionLost;
-                    connection.ConnectionClosed -= Connection_ConnectionClosed;
-                    connection.ConnectionReconnecting -= connection_ConnectionReconnecting;
-                    connection.XenObjectsUpdated -= Connection_XenObjectsUpdated;
-                    connection.Cache.DeregisterCollectionChanged<XenAPI.Message>(MessageCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
-                    connection.Cache.DeregisterCollectionChanged<Folder>(FolderCollectionChangedWithInvoke);
-
-                    connection.Cache.DeregisterCollectionChanged<Task>(TaskCollectionChangedWithInvoke);
-
-                    connection.CachePopulated -= connection_CachePopulated;
-
-                    foreach (VM vm in connection.Cache.VMs)
+                    var range = new List<IXenConnection>();
+                    if (connection != null)
                     {
-                        ConsolePanel.closeVNCForSource(vm);
+                        range.Add(connection);
+                    }
+                    else
+                    {
+                        var r = e.Element as List<IXenConnection>;
+                        if (r != null)
+                            range = r;
+                        else
+                            return;
                     }
 
-                    foreach (Host host in connection.Cache.Hosts)
+                    foreach (var con in range)
                     {
-                        ConsolePanel.closeVNCForSource(host.ControlDomainZero);
+                        con.ClearingCache -= connection_ClearingCache;
+                        con.ConnectionResult -= Connection_ConnectionResult;
+                        con.ConnectionLost -= Connection_ConnectionLost;
+                        con.ConnectionClosed -= Connection_ConnectionClosed;
+                        con.ConnectionReconnecting -= connection_ConnectionReconnecting;
+                        con.XenObjectsUpdated -= Connection_XenObjectsUpdated;
+                        con.Cache.DeregisterCollectionChanged<XenAPI.Message>(MessageCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
+                        con.Cache.DeregisterCollectionChanged<Folder>(FolderCollectionChangedWithInvoke);
 
-                        foreach (VM vm in host.OtherControlDomains)
-                            CvmConsolePanel.closeVNCForSource(vm);
+                        con.Cache.DeregisterCollectionChanged<Task>(TaskCollectionChangedWithInvoke);
+
+                        con.CachePopulated -= connection_CachePopulated;
+
+                        foreach (VM vm in con.Cache.VMs)
+                        {
+                            ConsolePanel.closeVNCForSource(vm);
+                        }
+
+                        foreach (Host host in con.Cache.Hosts)
+                        {
+                            ConsolePanel.closeVNCForSource(host.ControlDomainZero);
+
+                            foreach (VM vm in host.OtherControlDomains)
+                                CvmConsolePanel.closeVNCForSource(vm);
+                        }
+
+                        con.EndConnect();
                     }
-
-                    connection.EndConnect();
-
                     RequestRefreshTreeView();
                     //CA-41228 refresh submenu items when there are no connections
                     SelectionManager.RefreshSelection();
@@ -841,7 +878,7 @@ namespace XenAdmin
 
             log.InfoFormat("Connected to {0} (version {1}, build {2}.{3}) with {4} {5} (build {6}.{7})",
                 Helpers.GetName(master), Helpers.HostProductVersionText(master), Helpers.HostProductVersion(master),
-                Helpers.HostBuildNumber(master), Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
+                master.BuildNumberRaw, Messages.XENCENTER, Branding.PRODUCT_VERSION_TEXT,
                 Branding.XENCENTER_VERSION, Program.Version.Revision);
 
             // Check the PRODUCT_BRAND
@@ -935,6 +972,8 @@ namespace XenAdmin
             
             Updates.CheckServerPatches();
             Updates.CheckServerVersion();
+
+            HealthCheck.SendMetadataToHealthCheck();
             RequestRefreshTreeView();
         }
 
@@ -1625,7 +1664,7 @@ namespace XenAdmin
                     if (!plugin.Enabled)
                         continue;
 
-                    foreach (Feature feature in plugin.Features)
+                    foreach (Plugins.Feature feature in plugin.Features)
                     {
                         var menuItemFeature = feature as MenuItemFeature;
 
@@ -1680,22 +1719,16 @@ namespace XenAdmin
 
             IXenConnection conn;
             conn = SelectionManager.Selection.GetConnectionOfAllItems();
-            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn))) /* hide VMPP */
+            if (SelectionManager.Selection.Count > 0 && (Helpers.GetMaster(conn) != null) && (Helpers.FalconOrGreater(conn)))
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = true;
                 VMSnapshotScheduleToolStripMenuItem.Available = true;
-
-                assignPolicyToolStripMenuItem.Available = false;
-                vMProtectionAndRecoveryToolStripMenuItem.Available = false;
 
             }
             else /* hide VMSS */
             {
                 assignSnapshotScheduleToolStripMenuItem.Available = false;
                 VMSnapshotScheduleToolStripMenuItem.Available = false;
-
-                assignPolicyToolStripMenuItem.Available = true;
-                vMProtectionAndRecoveryToolStripMenuItem.Available = true;
             }
             
             templatesToolStripMenuItem1.Checked = Properties.Settings.Default.DefaultTemplatesVisible;
@@ -2547,6 +2580,9 @@ namespace XenAdmin
                     System.Windows.Forms.Help.ShowHelp(helpForm, chm, HelpNavigator.TopicId, topicID);
                 }
             }
+            // record help usage
+            Properties.Settings.Default.HelpLastUsed = DateTime.UtcNow.ToString("u");
+            Settings.TrySaveSettings();
         }
 
         public void MainWindow_HelpRequested(object sender, HelpEventArgs hlpevent)
