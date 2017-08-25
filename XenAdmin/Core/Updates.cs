@@ -497,7 +497,7 @@ namespace XenAdmin.Core
             var recommendedPatches = new List<XenServerPatch>();
 
             if (XenServerVersions == null)
-                return recommendedPatches;
+                return null;
 
             var serverVersions = XenServerVersions.FindAll(version =>
             {
@@ -514,7 +514,7 @@ namespace XenAdmin.Core
                 var minimumPatches = serverVersions[0].MinimalPatches;
 
                 if (minimumPatches == null) //unknown
-                    return recommendedPatches;
+                    return null;
 
                 bool elyOrGreater = Helpers.ElyOrGreater(host);
 
