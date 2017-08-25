@@ -60,7 +60,7 @@ namespace XenAdmin.Alerts
 
         private bool IsVersionOrVersionUpdateAlert(Alert alert)
         {
-            return alert is XenServerPatchAlert && (alert as XenServerPatchAlert).NewServerVersion != null
+            return alert is XenServerPatchAlert && (alert as XenServerPatchAlert).ShowAsNewVersion
                 || alert is XenServerVersionAlert
                 || alert is XenCenterUpdateAlert;
         }

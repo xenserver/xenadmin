@@ -244,6 +244,7 @@ namespace XenAdmin.Actions
                     string timestamp = "";
                     string buildNumber = "";
                     string patchUuid = "";
+                    bool presentAsUpdate = false;
 
                     foreach (XmlAttribute attrib in version.Attributes)
                     {
@@ -263,6 +264,8 @@ namespace XenAdmin.Actions
                             buildNumber = attrib.Value;
                         else if (attrib.Name == "patch-uuid")
                             patchUuid = attrib.Value;
+                        else if (attrib.Name == "present-as-update")
+                            presentAsUpdate = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
                     }
 
                     List<XenServerPatch> patches = new List<XenServerPatch>();
@@ -298,7 +301,7 @@ namespace XenAdmin.Actions
                     }
 
                     XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, is_latest_cr, url, patches, minimalPatches, timestamp,
-                                                               buildNumber, patchUuid));
+                                                               buildNumber, patchUuid, presentAsUpdate));
                 }
             }
         }
