@@ -394,7 +394,7 @@ namespace XenAdmin.Network
             Session s = Session;
             if (s == null)
                 throw new DisconnectionException();
-            return SessionFactory.CreateSession(s, this, timeout);
+            return SessionFactory.DuplicateSession(s, this, timeout);
         }
 
         /// <summary>
