@@ -430,7 +430,6 @@ namespace XenAdmin.TabPages
                 foreach (var patch in requiredUpdates)
                     result.Add(patch.Name);
 
-                result.Sort(StringUtility.NaturalCompare);
                 return string.Join(", ", result.ToArray());
             }
         }
