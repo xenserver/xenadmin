@@ -41,7 +41,7 @@ using XenAPI;
 
 namespace XenAdmin.Controls.DataGridViewEx
 {
-    public partial class CollapsingPoolHostDataGridView : DataGridViewEx
+    public abstract partial class CollapsingPoolHostDataGridView : DataGridViewEx
     {
         public event EventHandler CheckBoxClicked;
 
@@ -91,10 +91,9 @@ namespace XenAdmin.Controls.DataGridViewEx
         {}
 
         /// <summary>
-        /// Hook in order that sorting may be added for additional columns rather than those
-        /// provided by the base class
+        /// Subclass needs to implement the sorter
         /// </summary>
-        protected virtual void SortColumns() { }
+        protected abstract void SortColumns();
 
         /// <summary>
         /// Sort the rows but then remove and read the rows that should be expandable to be placed back under

@@ -43,7 +43,7 @@ using System.Collections;
 namespace XenAdmin.Controls.DataGridViewEx
 {
     [ToolboxBitmap(typeof(DataGridView))]
-    public partial class PoolHostDataGridViewOneCheckbox : CollapsingPoolHostDataGridView
+    public abstract partial class PoolHostDataGridViewOneCheckbox : CollapsingPoolHostDataGridView
     {
         public PoolHostDataGridViewOneCheckbox()
         {
