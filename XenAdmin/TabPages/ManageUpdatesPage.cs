@@ -64,6 +64,7 @@ namespace XenAdmin.TabPages
 
         Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private List<string> selectedUpdates = new List<string>();
+        private List<string> collapsedPoolRowsList = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
         private readonly CollectionChangeEventHandler m_updateCollectionChangedWithInvoke;
@@ -142,7 +143,7 @@ namespace XenAdmin.TabPages
             toolStripButtonRefresh.Enabled = false;
             toolStripButtonRestoreDismissed.Enabled = false;
 
-            StoreSelectedUpdates();
+            StoreStateOfRows();
             dataGridViewUpdates.Rows.Clear();
             dataGridViewUpdates.Refresh();
             dataGridViewHosts.Rows.Clear();
@@ -462,7 +463,7 @@ namespace XenAdmin.TabPages
 
                 if (dataGridViewHosts.RowCount > 0)
                 {
-                    StoreSelectedUpdates();
+                    StoreStateOfRows();
                     dataGridViewHosts.Rows.Clear();
                     dataGridViewHosts.Refresh();
                 }
@@ -507,12 +508,31 @@ namespace XenAdmin.TabPages
 
                 dataGridViewHosts.Rows.AddRange(rowList.ToArray());
 
-                foreach (DataGridViewRow row in dataGridViewHosts.Rows)
+                // restore selected state and pool collapsed state
+                bool checkHostRow = false;
+                foreach (UpdatePageDataGridViewRow row in dataGridViewHosts.Rows)
                 {
-                    Pool pool = row.Tag as Pool;
+                    if (checkHostRow)
+                    {
+                        if (!row.IsPoolOrStandaloneHost)
+                        {
+                            row.Visible = !row.Visible;
+                            continue;
+                        }
+                        else
+                            checkHostRow = false;
+                    }
 
+                    Pool pool = row.Tag as Pool;
                     if (pool != null)
+                    {
                         row.Selected = selectedUpdates.Contains(pool.uuid);
+                        if (collapsedPoolRowsList.Contains(pool.uuid))
+                        {
+                            row.SetExpandIcon();
+                            checkHostRow = true;
+                        }
+                    }
                     else
                     {
                         Host host = row.Tag as Host;
@@ -549,7 +569,7 @@ namespace XenAdmin.TabPages
 
                 if (dataGridViewUpdates.RowCount > 0)
                 {
-                    StoreSelectedUpdates();
+                    StoreStateOfRows();
                     dataGridViewUpdates.Rows.Clear();
                     dataGridViewUpdates.Refresh();
                 }
@@ -674,26 +694,32 @@ namespace XenAdmin.TabPages
             return hide;
         }
 
-        private void StoreSelectedUpdates()
+        private void StoreStateOfRows()
         {
             selectedUpdates.Clear();
 
-            if (byUpdateToolStripMenuItem.Checked)
+            if (byUpdateToolStripMenuItem.Checked)    // by update view
             {
                 selectedUpdates = (dataGridViewUpdates.SelectedRows.Cast<DataGridViewRow>().Select(
                     selectedRow => ((Alert) selectedRow.Tag).uuid)).ToList();
             }
-            else
+            else    // by host view
             {
-                foreach (DataGridViewRow row in dataGridViewHosts.SelectedRows)
+                collapsedPoolRowsList.Clear();
+                foreach (UpdatePageDataGridViewRow row in dataGridViewHosts.Rows)
                 {
                     Pool pool = row.Tag as Pool;
                     if (pool != null)
-                        selectedUpdates.Add(pool.uuid);
+                    {
+                        if (row.Selected)
+                            selectedUpdates.Add(pool.uuid);
+                        if (row.IsACollapsedRow)
+                            collapsedPoolRowsList.Add(pool.uuid);
+                    }
                     else
                     {
                         Host host = row.Tag as Host;
-                        if (host != null)
+                        if (host != null && row.Selected)
                             selectedUpdates.Add(host.uuid);
                     }
                 }
