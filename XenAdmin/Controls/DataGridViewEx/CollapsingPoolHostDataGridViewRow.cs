@@ -125,12 +125,16 @@ namespace XenAdmin.Controls.DataGridViewEx
         public void SetCollapseIcon()
         {
             _expansionCell.Value = Resources.tree_minus;
+            IsACollapsedRow = false;
         }
 
         public void SetExpandIcon()
         {
             _expansionCell.Value = Resources.tree_plus;
+            IsACollapsedRow = true;
         }
+
+        public bool IsACollapsedRow { get; protected set; }
 
         /// <summary>
         /// Convert row to a standalone host row
