@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-    <xsd:element msdata:IsDataSet="true" name="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,453 +117,137 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="AddButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-  <data name="AddButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="AddButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="AddButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 29</value>
-  </data>
-  <data name="AddButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="AddButton.Text" xml:space="preserve">
     <value>追加(&amp;A)...</value>
   </data>
-  <data name="&gt;&gt;AddButton.Name" xml:space="preserve">
-    <value>AddButton</value>
-  </data>
-  <data name="&gt;&gt;AddButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AddButton.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;AddButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AttachButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="AttachButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 3</value>
-  </data>
-  <data name="AttachButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="AttachButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 29</value>
-  </data>
-  <data name="AttachButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="AttachButton.Text" xml:space="preserve">
-    <value>ディスクの接続(&amp;K)...</value>
-  </data>
-  <data name="&gt;&gt;AttachButton.Name" xml:space="preserve">
-    <value>AttachButton</value>
-  </data>
-  <data name="&gt;&gt;AttachButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AttachButton.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;AttachButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="DeactivateButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="DeactivateButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="DeactivateButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="DeactivateButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="DeactivateButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 29</value>
-  </data>
-  <data name="DeactivateButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="DeactivateButton.Text" xml:space="preserve">
-    <value>非アクティブ化(&amp;C)</value>
-  </data>
-  <data name="&gt;&gt;DeactivateButton.Name" xml:space="preserve">
-    <value>DeactivateButton</value>
-  </data>
-  <data name="&gt;&gt;DeactivateButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DeactivateButton.Parent" xml:space="preserve">
-    <value>DeactivateButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;DeactivateButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="DeactivateButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 3</value>
-  </data>
-  <data name="DeactivateButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="DeactivateButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
-  </data>
-  <data name="DeactivateButtonContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;DeactivateButtonContainer.Name" xml:space="preserve">
-    <value>DeactivateButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;DeactivateButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DeactivateButtonContainer.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;DeactivateButtonContainer.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="MoveButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="MoveButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="MoveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 0</value>
-  </data>
-  <data name="MoveButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="MoveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 29</value>
-  </data>
-  <data name="MoveButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="MoveButton.Text" xml:space="preserve">
-    <value>移動(&amp;M)...</value>
-  </data>
-  <data name="&gt;&gt;MoveButton.Name" xml:space="preserve">
-    <value>MoveButton</value>
-  </data>
-  <data name="&gt;&gt;MoveButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MoveButton.Parent" xml:space="preserve">
-    <value>MoveButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;MoveButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="MoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 3</value>
-  </data>
-  <data name="MoveButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="MoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
-  </data>
-  <data name="MoveButtonContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;MoveButtonContainer.Name" xml:space="preserve">
-    <value>MoveButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;MoveButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;MoveButtonContainer.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;MoveButtonContainer.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="EditButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="EditButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="EditButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 2</value>
-  </data>
-  <data name="EditButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>543, 2</value>
   </data>
   <data name="EditButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 23</value>
-  </data>
-  <data name="EditButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>120, 29</value>
   </data>
   <data name="EditButton.Text" xml:space="preserve">
     <value>プロパティ(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;EditButton.Name" xml:space="preserve">
-    <value>EditButton</value>
+  <data name="AttachButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 2</value>
   </data>
-  <data name="&gt;&gt;EditButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="AttachButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 29</value>
   </data>
-  <data name="&gt;&gt;EditButton.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
+  <data name="AttachButton.Text" xml:space="preserve">
+    <value>ディスクの接続(&amp;K)...</value>
   </data>
-  <data name="&gt;&gt;EditButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 255</value>
   </data>
-  <data name="DeleteButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>796, 61</value>
   </data>
-  <data name="DeleteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="DeactivateButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 2</value>
   </data>
-  <data name="DeleteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="DeactivateButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 29</value>
   </data>
-  <data name="DeleteButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="DeactivateButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 29</value>
   </data>
-  <data name="DeleteButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DeactivateButton.Text" xml:space="preserve">
+    <value>非アクティブ化(&amp;C)</value>
+  </data>
+  <data name="MoveButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>419, 2</value>
+  </data>
+  <data name="MoveButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 29</value>
   </data>
-  <data name="DeleteButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="MoveButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 29</value>
   </data>
-  <data name="DeleteButton.Text" xml:space="preserve">
-    <value>削除(&amp;D)</value>
-  </data>
-  <data name="&gt;&gt;DeleteButton.Name" xml:space="preserve">
-    <value>DeleteButton</value>
-  </data>
-  <data name="&gt;&gt;DeleteButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DeleteButton.Parent" xml:space="preserve">
-    <value>DeleteButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;DeleteButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="MoveButton.Text" xml:space="preserve">
+    <value>移動(&amp;M)...</value>
   </data>
   <data name="DeleteButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>633, 3</value>
-  </data>
-  <data name="DeleteButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>667, 2</value>
   </data>
   <data name="DeleteButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 29</value>
   </data>
-  <data name="DeleteButtonContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;DeleteButtonContainer.Name" xml:space="preserve">
-    <value>DeleteButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;DeleteButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DeleteButtonContainer.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;DeleteButtonContainer.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="DetachButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="DetachButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="DetachButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="DetachButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="DetachButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DeleteButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 29</value>
   </data>
-  <data name="DetachButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="DetachButton.Text" xml:space="preserve">
-    <value>接続解除(&amp;E)</value>
-  </data>
-  <data name="&gt;&gt;DetachButton.Name" xml:space="preserve">
-    <value>DetachButton</value>
-  </data>
-  <data name="&gt;&gt;DetachButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DetachButton.Parent" xml:space="preserve">
-    <value>DetachButtonContainer</value>
-  </data>
-  <data name="&gt;&gt;DetachButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="DeleteButton.Text" xml:space="preserve">
+    <value>削除(&amp;D)</value>
   </data>
   <data name="DetachButtonContainer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>759, 3</value>
-  </data>
-  <data name="DetachButtonContainer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>2, 35</value>
   </data>
   <data name="DetachButtonContainer.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 29</value>
   </data>
-  <data name="DetachButtonContainer.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="DetachButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 29</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Name" xml:space="preserve">
-    <value>DetachButtonContainer</value>
+  <data name="DetachButton.Text" xml:space="preserve">
+    <value>接続解除(&amp;E)</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.ToolTipContainer, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 164</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
+  <data name="toolStripMenuItemAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
   </data>
-  <data name="&gt;&gt;DetachButtonContainer.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="toolStripMenuItemAdd.Text" xml:space="preserve">
+    <value>追加(&amp;A)...</value>
   </data>
-  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="toolStripMenuItemAttach.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
   </data>
-  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 367</value>
+  <data name="toolStripMenuItemAttach.Text" xml:space="preserve">
+    <value>ディスクの接続(&amp;K)...</value>
   </data>
-  <data name="flowLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="toolStripMenuItemDeactivate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
   </data>
-  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>995, 92</value>
+  <data name="toolStripMenuItemDeactivate.Text" xml:space="preserve">
+    <value>非アクティブ化(&amp;C)</value>
   </data>
-  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="toolStripMenuItemMove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
+  <data name="toolStripMenuItemMove.Text" xml:space="preserve">
+    <value>移動(&amp;M)...</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolStripMenuItemDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+  <data name="toolStripMenuItemDelete.Text" xml:space="preserve">
+    <value>削除(&amp;D)</value>
   </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="toolStripMenuItemDetach.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
   </data>
-  <metadata name="ColumnDevicePosition.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnDevicePosition.HeaderText" xml:space="preserve">
-    <value>場所</value>
+  <data name="toolStripMenuItemDetach.Text" xml:space="preserve">
+    <value>接続解除(&amp;E)</value>
   </data>
-  <data name="ColumnDevicePosition.MinimumWidth" type="System.Int32, mscorlib">
-    <value>74</value>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 6</value>
   </data>
-  <data name="ColumnDevicePosition.Width" type="System.Int32, mscorlib">
-    <value>74</value>
+  <data name="toolStripMenuItemProperties.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
   </data>
-  <metadata name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnName.HeaderText" xml:space="preserve">
-    <value>名前</value>
-  </data>
-  <data name="ColumnName.Width" type="System.Int32, mscorlib">
-    <value>61</value>
-  </data>
-  <metadata name="ColumnDesc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnDesc.HeaderText" xml:space="preserve">
-    <value>説明</value>
-  </data>
-  <metadata name="ColumnSR.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnSR.HeaderText" xml:space="preserve">
-    <value>SR</value>
-  </data>
-  <data name="ColumnSR.Width" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <metadata name="ColumnSRVolume.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnSRVolume.HeaderText" xml:space="preserve">
-    <value>ボリューム</value>
-  </data>
-  <data name="ColumnSRVolume.Width" type="System.Int32, mscorlib">
-    <value>71</value>
-  </data>
-  <metadata name="ColumnSize.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnSize.HeaderText" xml:space="preserve">
-    <value>サイズ</value>
-  </data>
-  <data name="ColumnSize.Width" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <metadata name="ColumnReadOnly.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnReadOnly.HeaderText" xml:space="preserve">
-    <value>読み取り専用</value>
-  </data>
-  <data name="ColumnReadOnly.Width" type="System.Int32, mscorlib">
-    <value>85</value>
-  </data>
-  <metadata name="ColumnPriority.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnPriority.HeaderText" xml:space="preserve">
-    <value>優先度</value>
-  </data>
-  <data name="ColumnPriority.Width" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <metadata name="ColumnActive.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnActive.HeaderText" xml:space="preserve">
-    <value>アクティブ</value>
-  </data>
-  <data name="ColumnActive.Width" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <metadata name="ColumnDevicePath.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnDevicePath.HeaderText" xml:space="preserve">
-    <value>デバイス パス</value>
-  </data>
-  <data name="dataGridViewStorage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="toolStripMenuItemProperties.Text" xml:space="preserve">
+    <value>プロパティ(&amp;R)</value>
   </data>
   <data name="dataGridViewStorage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 75</value>
+    <value>3, 63</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dataGridViewStorage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 12</value>
   </data>
@@ -571,28 +255,37 @@
     <value>1125, 0</value>
   </data>
   <data name="dataGridViewStorage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>995, 277</value>
+    <value>794, 178</value>
   </data>
-  <data name="dataGridViewStorage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="ColumnDevicePosition.HeaderText" xml:space="preserve">
+    <value>場所</value>
   </data>
-  <data name="&gt;&gt;dataGridViewStorage.Name" xml:space="preserve">
-    <value>dataGridViewStorage</value>
+  <data name="ColumnName.HeaderText" xml:space="preserve">
+    <value>名前</value>
   </data>
-  <data name="&gt;&gt;dataGridViewStorage.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DataGridViewEx.DataGridViewEx, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="ColumnDesc.HeaderText" xml:space="preserve">
+    <value>説明</value>
   </data>
-  <data name="&gt;&gt;dataGridViewStorage.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
+  <data name="ColumnSRVolume.HeaderText" xml:space="preserve">
+    <value>ボリューム</value>
   </data>
-  <data name="&gt;&gt;dataGridViewStorage.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="ColumnSize.HeaderText" xml:space="preserve">
+    <value>サイズ</value>
   </data>
-  <data name="multipleDvdIsoList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="ColumnReadOnly.HeaderText" xml:space="preserve">
+    <value>読み取り専用</value>
+  </data>
+  <data name="ColumnPriority.HeaderText" xml:space="preserve">
+    <value>優先度</value>
+  </data>
+  <data name="ColumnActive.HeaderText" xml:space="preserve">
+    <value>アクティブ</value>
+  </data>
+  <data name="ColumnDevicePath.HeaderText" xml:space="preserve">
+    <value>デバイス パス</value>
   </data>
   <data name="multipleDvdIsoList1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 15</value>
+    <value>3, 3</value>
   </data>
   <data name="multipleDvdIsoList1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 12</value>
@@ -601,130 +294,7 @@
     <value>1125, 45</value>
   </data>
   <data name="multipleDvdIsoList1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>995, 45</value>
-  </data>
-  <data name="multipleDvdIsoList1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;multipleDvdIsoList1.Name" xml:space="preserve">
-    <value>multipleDvdIsoList1</value>
-  </data>
-  <data name="&gt;&gt;multipleDvdIsoList1.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.MultipleDvdIsoList, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;multipleDvdIsoList1.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;multipleDvdIsoList1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 46</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1025, 474</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>pageContainerPanel</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="flowLayoutPanel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="dataGridViewStorage" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="multipleDvdIsoList1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,Percent,75,Percent,25" />&lt;/TableLayoutSettings></value>
-  </data>
-  <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 78</value>
-  </data>
-  <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 338</value>
-  </data>
-  <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
-    <value>pageContainerPanel</value>
-  </data>
-  <data name="&gt;&gt;pageContainerPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pageContainerPanel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pageContainerPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="toolStripMenuItemAdd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="toolStripMenuItemAdd.Text" xml:space="preserve">
-    <value>追加(&amp;A)...</value>
-  </data>
-  <data name="toolStripMenuItemAttach.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="toolStripMenuItemAttach.Text" xml:space="preserve">
-    <value>ディスクの接続(&amp;K)...</value>
-  </data>
-  <data name="toolStripMenuItemDeactivate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="toolStripMenuItemDeactivate.Text" xml:space="preserve">
-    <value>非アクティブ化(&amp;C)</value>
-  </data>
-  <data name="toolStripMenuItemMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="toolStripMenuItemMove.Text" xml:space="preserve">
-    <value>移動(&amp;M)...</value>
-  </data>
-  <data name="toolStripMenuItemDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="toolStripMenuItemDelete.Text" xml:space="preserve">
-    <value>削除(&amp;D)</value>
-  </data>
-  <data name="toolStripMenuItemDetach.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="toolStripMenuItemDetach.Text" xml:space="preserve">
-    <value>接続解除(&amp;E)</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 6</value>
-  </data>
-  <data name="toolStripMenuItemProperties.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="toolStripMenuItemProperties.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
-  </data>
-  <data name="toolStripMenuItemProperties.Text" xml:space="preserve">
-    <value>プロパティ(&amp;R)</value>
-  </data>
-  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 164</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
-    <value>contextMenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>794, 45</value>
   </data>
   <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>名前</value>
@@ -737,9 +307,6 @@
   </data>
   <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
     <value>ストレージ ボリューム</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>デバイスの場所</value>
@@ -758,197 +325,5 @@
   </data>
   <data name="dataGridViewTextBoxColumn10.HeaderText" xml:space="preserve">
     <value>デバイス パス</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1025, 520</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemAdd.Name" xml:space="preserve">
-    <value>toolStripMenuItemAdd</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemAttach.Name" xml:space="preserve">
-    <value>toolStripMenuItemAttach</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemAttach.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemDeactivate.Name" xml:space="preserve">
-    <value>toolStripMenuItemDeactivate</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemDeactivate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemMove.Name" xml:space="preserve">
-    <value>toolStripMenuItemMove</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemMove.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemDelete.Name" xml:space="preserve">
-    <value>toolStripMenuItemDelete</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemDelete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemDetach.Name" xml:space="preserve">
-    <value>toolStripMenuItemDetach</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemDetach.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemProperties.Name" xml:space="preserve">
-    <value>toolStripMenuItemProperties</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemProperties.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDevicePosition.Name" xml:space="preserve">
-    <value>ColumnDevicePosition</value>
-  </data>
-  <data name="&gt;&gt;ColumnDevicePosition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
-    <value>ColumnName</value>
-  </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDesc.Name" xml:space="preserve">
-    <value>ColumnDesc</value>
-  </data>
-  <data name="&gt;&gt;ColumnDesc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnSR.Name" xml:space="preserve">
-    <value>ColumnSR</value>
-  </data>
-  <data name="&gt;&gt;ColumnSR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnSRVolume.Name" xml:space="preserve">
-    <value>ColumnSRVolume</value>
-  </data>
-  <data name="&gt;&gt;ColumnSRVolume.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnSize.Name" xml:space="preserve">
-    <value>ColumnSize</value>
-  </data>
-  <data name="&gt;&gt;ColumnSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnReadOnly.Name" xml:space="preserve">
-    <value>ColumnReadOnly</value>
-  </data>
-  <data name="&gt;&gt;ColumnReadOnly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnPriority.Name" xml:space="preserve">
-    <value>ColumnPriority</value>
-  </data>
-  <data name="&gt;&gt;ColumnPriority.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnActive.Name" xml:space="preserve">
-    <value>ColumnActive</value>
-  </data>
-  <data name="&gt;&gt;ColumnActive.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnDevicePath.Name" xml:space="preserve">
-    <value>ColumnDevicePath</value>
-  </data>
-  <data name="&gt;&gt;ColumnDevicePath.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn1</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn2</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn3</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn4</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn5</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn6</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn7</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn8</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn9.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn9</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn10.Name" xml:space="preserve">
-    <value>dataGridViewTextBoxColumn10</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewTextBoxColumn10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>VMStoragePage</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.TabPages.BaseTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
