@@ -385,7 +385,22 @@ namespace XenAdmin
 
         public static Icons GetIconFor(SR sr)
         {
-            return sr.GetIcon;
+            if (!sr.HasPBDs || sr.IsHidden)
+            {
+                return Icons.StorageDisabled;
+            }
+            else if (sr.IsDetached || sr.IsBroken() || !sr.MultipathAOK)
+            {
+                return Icons.StorageBroken;
+            }
+            else if (SR.IsDefaultSr(sr))
+            {
+                return Icons.StorageDefault;
+            }
+            else
+            {
+                return Icons.Storage;
+            }
         }
 
         public static Icons GetIconFor(Host host)

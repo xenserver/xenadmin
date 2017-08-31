@@ -249,7 +249,7 @@ namespace XenAdmin.TabPages
             row.SubItems[5].Tag = sr.physical_size;
             row.SubItems[6].Tag = sr.virtual_allocation;
 
-            row.ImageIndex = (int)sr.GetIcon;
+            row.ImageIndex = (int)Images.GetIconFor(sr);
         }
 
         private void BuildList()

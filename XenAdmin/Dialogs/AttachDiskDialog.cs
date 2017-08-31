@@ -298,7 +298,7 @@ namespace XenAdmin.Dialogs
         private void Update()
         {
             Text = TheSR.NameWithoutHost;
-            Image = Images.GetImage16For(TheSR.GetIcon);
+            Image = Images.GetImage16For(Images.GetIconFor(TheSR));
 
             Host affinity = TheVM.Connection.Resolve<Host>(TheVM.affinity);
             Host activeHost = TheVM.Connection.Resolve<Host>(TheVM.resident_on);

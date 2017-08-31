@@ -317,7 +317,7 @@ namespace XenAdmin.Dialogs
 				}
 
 				var cellTick = new DataGridViewCheckBoxCell { Value = IsDrEnabled };
-				var cellName = new DataGridViewTextAndImageCell { Value = sr.Name, Image = Images.GetImage16For(sr.GetIcon) };
+                var cellName = new DataGridViewTextAndImageCell { Value = sr.Name, Image = Images.GetImage16For(Images.GetIconFor(sr)) };
 				var cellDesc = new DataGridViewTextBoxCell { Value = sr.Description };
 				var cellType = new DataGridViewTextBoxCell { Value = sr.FriendlyTypeName };
 				var cellSpace = new DataGridViewTextBoxCell { Value = Util.DiskSizeString(availableSpace) };

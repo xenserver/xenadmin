@@ -427,7 +427,7 @@ namespace XenAdmin.TabPages
             {
                 // SR icon
                 PictureBox p = new PictureBox();
-                p.Image = Images.GetImage16For(heartbeatSRs[i].GetIcon);
+                p.Image = Images.GetImage16For(Images.GetIconFor(heartbeatSRs[i]));
                 p.SizeMode = PictureBoxSizeMode.AutoSize;
                 p.Padding = new Padding(0);
                 tableLatencies.Controls.Add(p);

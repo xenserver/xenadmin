@@ -940,29 +940,6 @@ namespace XenAPI
             }
         }
 
-        public Icons GetIcon
-        {
-            get
-            {
-                if (!HasPBDs || IsHidden)
-                {
-                    return Icons.StorageDisabled;
-                }
-                else if (IsDetached || IsBroken() || !MultipathAOK)
-                {
-                    return Icons.StorageBroken;
-                }
-                else if (SR.IsDefaultSr(this))
-                {
-                    return Icons.StorageDefault;
-                }
-                else
-                {
-                    return Icons.Storage;
-                }
-            }
-        }
-
         /// <summary>
         /// The amount of memory used as compared to the available and allocated amounts as a friendly string
         /// </summary>
