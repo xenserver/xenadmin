@@ -51,9 +51,12 @@ namespace XenAdmin.Diagnostics.Checks
         protected override Problem RunCheck()
         {
             var requiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(_newServerVersion);
-            if (requiredXenCenterVersion != null)
+            if (requiredXenCenterVersion == null) 
+                return null;
+            if (_newServerVersion != null) 
                 return new XenCenterVersionProblem(this, requiredXenCenterVersion);
-            return null;
+            else
+                return new XenCenterVersionWarning(this, requiredXenCenterVersion);
         }
 
         public override string Description

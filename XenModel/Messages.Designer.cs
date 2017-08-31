@@ -33766,6 +33766,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ensure you have upgraded [XenCenter] before upgrading [XenServer]..
+        /// </summary>
+        public static string UPDATES_WIZARD_NEWER_XENCENTER_WARNING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_NEWER_XENCENTER_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No further action is required for this update..
         /// </summary>
         public static string UPDATES_WIZARD_NO_ACTION {
