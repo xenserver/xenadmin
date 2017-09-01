@@ -400,7 +400,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
                         : Updates.GetUpgradeSequence(pool.Connection);
 
-                    log.InfoFormat("Minimal patches for {0}: {1}", pool.Name, string.Join(",", us.MinimalPatches.Select(p => p.Name)));
+                    log.InfoFormat("Minimal patches for {0}: {1}", pool.Name, us != null && us.MinimalPatches != null ? string.Join(",", us.MinimalPatches.Select(p => p.Name)) : "");
 
                     if (us == null)
                         continue;
