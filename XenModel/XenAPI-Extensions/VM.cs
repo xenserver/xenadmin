@@ -46,10 +46,6 @@ using System.Text.RegularExpressions;
 
 namespace XenAPI
 {
-    public enum SnapshotsView
-    {
-        ListView, TreeView, None
-    }
     public partial class VM : IComparable<VM>
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -64,8 +60,6 @@ namespace XenAPI
         public const long DEFAULT_MEM_ALLOWED = 1 * Util.BINARY_TERA;
         public const int DEFAULT_CORES_PER_SOCKET = 1;
         public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
-
-        private SnapshotsView _snapshotView = SnapshotsView.None;
 
         private XmlDocument xdRecommendations = null;
 
@@ -1621,12 +1615,6 @@ namespace XenAPI
                 
                 return Messages.VIRTUALIZATION_UNKNOWN;
             }
-        }
-
-        public SnapshotsView SnapshotView
-        {
-            get { return _snapshotView; }
-            set { _snapshotView = value; }
         }
 
         public bool HasProvisionXML
