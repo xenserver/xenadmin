@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -63,6 +64,7 @@ namespace XenAdmin.TabPages
 
         Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private List<string> selectedUpdates = new List<string>();
+        private List<string> collapsedPoolRowsList = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
         private readonly CollectionChangeEventHandler m_updateCollectionChangedWithInvoke;
@@ -137,7 +139,7 @@ namespace XenAdmin.TabPages
             toolStripButtonRefresh.Enabled = false;
             toolStripButtonRestoreDismissed.Enabled = false;
 
-            StoreSelectedUpdates();
+            StoreStateOfRows();
             dataGridViewUpdates.Rows.Clear();
             dataGridViewUpdates.Refresh();
             dataGridViewHosts.Rows.Clear();
@@ -227,60 +229,52 @@ namespace XenAdmin.TabPages
                 RebuildHostView();
         }
 
-        private class LocalRowSorter : CollapsingPoolHostDataGridViewRowSorter
-        {
-            private int columnClicked;
-
-            public LocalRowSorter(ListSortDirection direction, int columnClicked)
-                : base(direction)
-            {
-                this.columnClicked = columnClicked;
-            }
-
-            protected override int PerformSort()
-            {
-                UpdatePageDataGridViewRow leftSide = Lhs as UpdatePageDataGridViewRow;
-                UpdatePageDataGridViewRow rightSide = Rhs as UpdatePageDataGridViewRow;
-
-                if (leftSide != null && rightSide != null)
-                {
-                    if (leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost)
-                        return -1;
-
-                    if (!leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost)
-                        return 1;
-
-                    if ((leftSide.IsPoolOrStandaloneHost && rightSide.IsPoolOrStandaloneHost) ||
-                        (!leftSide.IsPoolOrStandaloneHost && !rightSide.IsPoolOrStandaloneHost))
-                    {
-                        return string.Compare(leftSide.Cells[columnClicked].Value.ToString(),
-                            rightSide.Cells[columnClicked].Value.ToString(), true);
-                    }
-                }
-
-                return 0;
-            }
-        }
-
         private class UpdatePageByHostDataGridView : CollapsingPoolHostDataGridView
         {
-            protected override void SortAdditionalColumns()
+            protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
+            {
+                base.OnCellPainting(e);
+
+                if (e.RowIndex >= 0 && Rows[e.RowIndex].Tag is Host)
+                {
+                    UpdatePageDataGridViewRow row = (UpdatePageDataGridViewRow) Rows[e.RowIndex];
+
+                    // Host in pool
+                    if (row.HasPool && (e.ColumnIndex == row.ExpansionCellIndex ||
+                                        e.ColumnIndex == row.IconCellIndex ||
+                                        e.ColumnIndex == row.PatchingStatusCellIndex))
+                    {
+                        e.PaintBackground(e.ClipBounds, true);
+                        e.Handled = true;
+                    }
+
+                    // Standalone host
+                    else if (!row.HasPool && e.ColumnIndex == row.ExpansionCellIndex)
+                    {
+                        e.PaintBackground(e.ClipBounds, true);
+                        e.Handled = true;
+                    }
+                }
+            }
+
+            protected override void SortColumns()
             {
                 UpdatePageDataGridViewRow firstRow = Rows[0] as UpdatePageDataGridViewRow;
                 if (firstRow == null)
                     return;
 
-                if (columnToBeSortedIndex == firstRow.VersionCellIndex ||
+                if (columnToBeSortedIndex == firstRow.NameCellIndex ||
+                    columnToBeSortedIndex == firstRow.VersionCellIndex ||
                     columnToBeSortedIndex == firstRow.StatusCellIndex)
-                    SortAndRebuildTree(new LocalRowSorter(direction, columnToBeSortedIndex));
+                    SortAndRebuildTree(new CollapsingPoolHostRowSorter<UpdatePageDataGridViewRow>(direction, columnToBeSortedIndex));
             }
         }
 
         private class UpdatePageDataGridViewRow : CollapsingPoolHostDataGridViewRow
         {
-            private DataGridViewCell _poolIconCell;
+            private DataGridViewImageCell _poolIconCell;
             private DataGridViewTextBoxCell _versionCell;
-            private DataGridViewCell _patchingStatusCell;
+            private DataGridViewImageCell _patchingStatusCell;
             private DataGridViewTextBoxCell _statusCell;
             private DataGridViewTextBoxCell _requiredUpdateCell;
             private DataGridViewTextBoxCell _installedUpdateCell;
@@ -297,9 +291,9 @@ namespace XenAdmin.TabPages
                 SetupCells();
             }
 
-            public bool IsPoolOrStandaloneHost
+            public int IconCellIndex
             {
-                get { return IsAPoolRow || (IsAHostRow && !HasPool); }
+                get { return Cells.IndexOf(_poolIconCell);  }
             }
 
             public int VersionCellIndex
@@ -307,31 +301,33 @@ namespace XenAdmin.TabPages
                 get { return Cells.IndexOf(_versionCell); }
             }
 
+            public int PatchingStatusCellIndex
+            {
+                get { return Cells.IndexOf(_patchingStatusCell); }
+            }
+
             public int StatusCellIndex
             {
                 get { return Cells.IndexOf(_statusCell); }
             }
 
+            public override bool IsCheckable
+            {
+                get { return IsPoolOrStandaloneHost; }
+            }
+
             private void SetupCells()
             {
-                if (IsPoolOrStandaloneHost)
-                {
-                    _poolIconCell = new DataGridViewImageCell();
-                    _patchingStatusCell = new DataGridViewImageCell();
-                }
-                else
-                {
-                    _poolIconCell = new DataGridViewTextBoxCell();
-                    _patchingStatusCell = new DataGridViewTextBoxCell();
-                }
-
+                _expansionCell = new DataGridViewImageCell();
+                _poolIconCell = new DataGridViewImageCell();
                 _nameCell = new DataGridViewTextAndImageCell();
                 _versionCell = new DataGridViewTextBoxCell();
+                _patchingStatusCell = new DataGridViewImageCell();
                 _statusCell = new DataGridViewTextBoxCell();
                 _requiredUpdateCell = new DataGridViewTextBoxCell();
                 _installedUpdateCell = new DataGridViewTextBoxCell();
 
-                Cells.AddRange(new[] { _poolIconCell, _nameCell, _versionCell, _patchingStatusCell, _statusCell, _requiredUpdateCell, _installedUpdateCell });
+                Cells.AddRange(new DataGridViewCell[] { _expansionCell, _poolIconCell, _nameCell, _versionCell, _patchingStatusCell, _statusCell, _requiredUpdateCell, _installedUpdateCell });
 
                 this.UpdateDetails();
             }
@@ -344,6 +340,7 @@ namespace XenAdmin.TabPages
                 if (pool != null)
                 {
                     Host master = pool.Connection.Resolve(pool.master);
+                    SetCollapseIcon();
                     _poolIconCell.Value = Images.GetImage16For(pool);
 
                     DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
@@ -375,9 +372,7 @@ namespace XenAdmin.TabPages
 
                         if (_hasPool && nc != null) // host in pool
                         {
-                            _poolIconCell.Value = "";
                             nc.Image = Images.GetImage16For(host);
-                            _patchingStatusCell.Value = "";
                             _statusCell.Value = "";
                         }
                         else if (!_hasPool && nc != null) // standalone host
@@ -464,7 +459,7 @@ namespace XenAdmin.TabPages
 
                 if (dataGridViewHosts.RowCount > 0)
                 {
-                    StoreSelectedUpdates();
+                    StoreStateOfRows();
                     dataGridViewHosts.Rows.Clear();
                     dataGridViewHosts.Refresh();
                 }
@@ -509,12 +504,31 @@ namespace XenAdmin.TabPages
 
                 dataGridViewHosts.Rows.AddRange(rowList.ToArray());
 
-                foreach (DataGridViewRow row in dataGridViewHosts.Rows)
+                // restore selected state and pool collapsed state
+                bool checkHostRow = false;
+                foreach (UpdatePageDataGridViewRow row in dataGridViewHosts.Rows)
                 {
-                    Pool pool = row.Tag as Pool;
+                    if (checkHostRow)
+                    {
+                        if (!row.IsPoolOrStandaloneHost)
+                        {
+                            row.Visible = !row.Visible;
+                            continue;
+                        }
+                        else
+                            checkHostRow = false;
+                    }
 
+                    Pool pool = row.Tag as Pool;
                     if (pool != null)
+                    {
                         row.Selected = selectedUpdates.Contains(pool.uuid);
+                        if (collapsedPoolRowsList.Contains(pool.uuid))
+                        {
+                            row.SetExpandIcon();
+                            checkHostRow = true;
+                        }
+                    }
                     else
                     {
                         Host host = row.Tag as Host;
@@ -551,7 +565,7 @@ namespace XenAdmin.TabPages
 
                 if (dataGridViewUpdates.RowCount > 0)
                 {
-                    StoreSelectedUpdates();
+                    StoreStateOfRows();
                     dataGridViewUpdates.Rows.Clear();
                     dataGridViewUpdates.Refresh();
                 }
@@ -676,26 +690,32 @@ namespace XenAdmin.TabPages
             return hide;
         }
 
-        private void StoreSelectedUpdates()
+        private void StoreStateOfRows()
         {
             selectedUpdates.Clear();
 
-            if (byUpdateToolStripMenuItem.Checked)
+            if (byUpdateToolStripMenuItem.Checked)    // by update view
             {
                 selectedUpdates = (dataGridViewUpdates.SelectedRows.Cast<DataGridViewRow>().Select(
                     selectedRow => ((Alert) selectedRow.Tag).uuid)).ToList();
             }
-            else
+            else    // by host view
             {
-                foreach (DataGridViewRow row in dataGridViewHosts.SelectedRows)
+                collapsedPoolRowsList.Clear();
+                foreach (UpdatePageDataGridViewRow row in dataGridViewHosts.Rows)
                 {
                     Pool pool = row.Tag as Pool;
                     if (pool != null)
-                        selectedUpdates.Add(pool.uuid);
+                    {
+                        if (row.Selected)
+                            selectedUpdates.Add(pool.uuid);
+                        if (row.IsACollapsedRow)
+                            collapsedPoolRowsList.Add(pool.uuid);
+                    }
                     else
                     {
                         Host host = row.Tag as Host;
-                        if (host != null)
+                        if (host != null && row.Selected)
                             selectedUpdates.Add(host.uuid);
                     }
                 }
