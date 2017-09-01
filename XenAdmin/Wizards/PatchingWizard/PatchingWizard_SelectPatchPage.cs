@@ -275,9 +275,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             foreach (PatchGridViewRow row in dataGridViewPatches.Rows)
             {
-                if (string.Equals(row.UpdateAlert.Name, Path.GetFileNameWithoutExtension(fileName), StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(row.UpdateAlert.Patch.Name, Path.GetFileNameWithoutExtension(fileName), StringComparison.OrdinalIgnoreCase))
                 {
-                    return (XenServerPatchAlert)row.UpdateAlert;
+                    return row.UpdateAlert;
                 }
             }
             return null;
@@ -565,7 +565,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private class PatchGridViewRow : DataGridViewExRow, IEquatable<PatchGridViewRow>
         {
-            private readonly Alert _alert;
+            private readonly XenServerPatchAlert _alert;
 
             private bool expanded = false;
 
@@ -579,7 +579,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             private DataGridViewTextBoxCell _statusCell;
             private DataGridViewLinkCell _webPageCell;
 
-            public PatchGridViewRow(Alert alert)
+            public PatchGridViewRow(XenServerPatchAlert alert)
             {   
                 _alert = alert;
                 _nameCell = new DataGridViewTextBoxCell();
@@ -605,7 +605,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 SetupCells();
             }
 
-            public Alert UpdateAlert
+            public XenServerPatchAlert UpdateAlert
             { 
                 get { return _alert; }
             }

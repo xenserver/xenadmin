@@ -70,4 +70,40 @@ namespace XenAdmin.Diagnostics.Problems
             get { return new Uri(_requiredXenCenterVersion.Url); }
         }
     }
+
+    public class XenCenterVersionWarning : WarningWithInformationUrl
+    {
+        private XenCenterVersion _requiredXenCenterVersion;
+
+        public XenCenterVersionWarning(Check check, XenCenterVersion requiredXenCenterVersion)
+            : base(check)
+        {
+            _requiredXenCenterVersion = requiredXenCenterVersion;
+        }
+
+        public override string Title
+        {
+            get { return Messages.PROBLEM_XENCENTER_VERSION_TITLE; }
+        }
+
+        public override string Description
+        {
+            get { return string.Format(Messages.UPDATES_WIZARD_NEWER_XENCENTER_WARNING, _requiredXenCenterVersion.Version); }
+        }
+
+        public override string HelpMessage
+        {
+            get { return LinkText; }
+        }
+
+        public override string LinkText
+        {
+            get { return Messages.PATCHING_WIZARD_WEBPAGE_CELL; }
+        }
+
+        public override Uri UriToLaunch
+        {
+            get { return new Uri(_requiredXenCenterVersion.Url); }
+        }
+    }
 }

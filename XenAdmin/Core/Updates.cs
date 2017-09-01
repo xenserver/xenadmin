@@ -588,7 +588,20 @@ namespace XenAdmin.Core
                     return null;
 
                 var uSeq = new UpgradeSequence();
-                uSeq.MinimalPatches = version.MinimalPatches;
+                uSeq.MinimalPatches = new List<XenServerPatch>(version.MinimalPatches);
+
+                // if there is a "new version" update in the update sequence, also add the minimal patches of this new version
+                if (uSeq.MinimalPatches.Count > 0)
+                {
+                    // assuming that the new version update (if there is one) is the last one in the minimal patches list
+                    var lastUpdate = uSeq.MinimalPatches[uSeq.MinimalPatches.Count - 1];
+                    
+                    var newServerVersion = XenServerVersions.FirstOrDefault(
+                        v => v.IsVersionAvailableAsAnUpdate && v.PatchUuid.Equals(lastUpdate.Uuid, StringComparison.OrdinalIgnoreCase));
+
+                    if (newServerVersion != null && newServerVersion.MinimalPatches != null)
+                        uSeq.MinimalPatches.AddRange(newServerVersion.MinimalPatches);
+                }
 
                 List<Host> hosts = conn.Cache.Hosts.ToList();
                 

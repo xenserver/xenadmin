@@ -125,9 +125,7 @@ namespace XenAdmin.Alerts
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(NewServerVersion != null
-                    ? string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, NewServerVersion.Name)
-                    : Patch.Description);
+                sb.Append(Patch.Description);
                 if (Patch.InstallationSize != 0)
                 {
                     sb.AppendLine();
@@ -146,7 +144,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                if (NewServerVersion != null)
+                if (ShowAsNewVersion)
                     return NewServerVersion.Name; 
                 return Patch.Name;
             }
@@ -177,7 +175,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                if (NewServerVersion != null)
+                if (ShowAsNewVersion)
                     return string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, NewServerVersion.Name); 
                 return string.Format(Messages.NEW_UPDATE_AVAILABLE, Patch.Name);
             }
@@ -216,6 +214,14 @@ namespace XenAdmin.Alerts
                 return string.Equals(Patch.Uuid, ((XenServerPatchAlert)other).Patch.Uuid, StringComparison.OrdinalIgnoreCase);
             }
             return base.Equals(other);
+        }
+
+        public bool ShowAsNewVersion
+        {
+            get
+            {
+                return NewServerVersion != null && !NewServerVersion.PresentAsUpdate;
+            }
         }
     }
 }
