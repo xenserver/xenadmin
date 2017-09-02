@@ -135,22 +135,7 @@ namespace XenAPI
                 // absence of the key gives AutoPlug=true, not false.
                 return Get(other_config, "automatic") != "false";
             }
-
-            set
-            {
-                Changed |= AutoPlug != value;
-                set_other_config("automatic", value ? "true" : "false");
-            }
-        }
-
-        void set_other_config(string key, string value)
-        {
-            Dictionary<string, string> new_other_config =
-                other_config == null ?
-                    new Dictionary<string, string>() :
-                    new Dictionary<string, string>(other_config);
-            new_other_config[key] = value;
-            other_config = new_other_config;
+            set { other_config = SetDictionaryKey(other_config, "automatic", value ? "true" : "false"); }
         }
 
         public override bool Show(bool showHiddenVMs)

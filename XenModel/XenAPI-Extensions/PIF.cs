@@ -83,15 +83,8 @@ namespace XenAPI
         // This is the name of the secondary management interface
         public string ManagementPurpose
         {
-            get
-            {
-                return Get(other_config, "management_purpose");
-            }
-            set
-            {
-                Changed |= ManagementPurpose != value;
-                set_other_config("management_purpose", value);
-            }
+            get { return Get(other_config, "management_purpose"); }
+            set { other_config = SetDictionaryKey(other_config, "management_purpose", value); }
         }
 
         internal string NICIdentifier(out bool is_bond)
@@ -318,19 +311,6 @@ namespace XenAPI
                     return false;
                 return metrics.carrier;
             }
-        }
-
-        void set_other_config(string key, string value)
-        {
-            Dictionary<string, string> new_other_config =
-                other_config == null ?
-                    new Dictionary<string, string>() :
-                    new Dictionary<string, string>(other_config);
-            if (value == null)
-                new_other_config.Remove(key);
-            else
-                new_other_config[key] = value;
-            other_config = new_other_config;
         }
 
         /// <summary>

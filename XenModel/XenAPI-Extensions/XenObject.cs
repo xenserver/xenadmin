@@ -230,6 +230,31 @@ namespace XenAPI
             }
         }
 
+        public static Dictionary<string, string> SetDictionaryKey(Dictionary<string, string> dict, string key, string value)
+        {
+            return SetDictionaryKeys(dict, new KeyValuePair<string, string>(key, value));
+        }
+
+        public static Dictionary<string, string> SetDictionaryKeys(Dictionary<string, string> dict, params KeyValuePair<string, string>[] kvps)
+        {
+            var newDict = dict == null
+                ? new Dictionary<string, string>()
+                : new Dictionary<string, string>(dict);
+
+            foreach (var kvp in kvps)
+            {
+                string key = kvp.Key;
+                string value = kvp.Value;
+
+                if (value == null)
+                    newDict.Remove(key);
+                else
+                    newDict[key] = value;
+            }
+
+            return newDict;
+        }
+
         /// <summary>
         /// If d[k] == "true", then return true.  Anything else is false.
         /// Handles all the cases with d being null or not containing k.

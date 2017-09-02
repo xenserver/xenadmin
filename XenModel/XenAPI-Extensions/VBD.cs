@@ -78,21 +78,7 @@ namespace XenAPI
         public bool IsOwner
         {
             get { return other_config != null && other_config.ContainsKey("owner"); }
-            set
-            {
-                if (value != IsOwner)
-                {
-                    Dictionary<string, string> new_other_config =
-                        other_config == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(other_config);
-                    if (value)
-                        new_other_config["owner"] = "true";
-                    else
-                        new_other_config.Remove("owner");
-                    other_config = new_other_config;
-                }
-            }
+            set { _other_config = SetDictionaryKey(other_config, "owner", value ? "true" : null); }
         }
 
         public int IONice
@@ -106,22 +92,15 @@ namespace XenAPI
             }
             set
             {
-                if (value != IONice)
-                {
-                    Dictionary<string, string> new_qos_algorithm_params =
-                        qos_algorithm_params == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(qos_algorithm_params);
-                    new_qos_algorithm_params["class"] = value.ToString();
+                // set the IO scheduling algorithm to use
+                qos_algorithm_type = "ionice";
 
-                    // set the IO scheduling algorithm to use
-                    qos_algorithm_type = "ionice";
-                    // which scheduling class ionice should use
-                    // best-effort for now (other options are 'rt' and 'idle')
-                    new_qos_algorithm_params["sched"] = "be";
+                // which scheduling class ionice should use
+                // best-effort for now (other options are 'rt' and 'idle')
 
-                    qos_algorithm_params = new_qos_algorithm_params;
-                }
+                qos_algorithm_params = SetDictionaryKeys(qos_algorithm_params,
+                    new KeyValuePair<string, string>("class", value.ToString()),
+                    new KeyValuePair<string, string>("sched", "be"));
             }
         }
 

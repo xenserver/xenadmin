@@ -151,18 +151,7 @@ namespace XenAPI
         public string iscsi_iqn
         {
             get { return Get(other_config, "iscsi_iqn") ?? ""; }
-            set
-            {
-                if (iscsi_iqn != value)
-                {
-                    Dictionary<string, string> new_other_config =
-                        other_config == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(other_config);
-                    new_other_config["iscsi_iqn"] = value;
-                    other_config = new_other_config;
-                }
-            }
+            set { other_config = SetDictionaryKey(other_config, "iscsi_iqn", value); }
         }
 
         public override string ToString()
@@ -760,27 +749,7 @@ namespace XenAPI
         public string SysLogDestination
         {
             get { return logging != null && logging.ContainsKey("syslog_destination") ? logging["syslog_destination"] : null; }
-            set
-            {
-                if (SysLogDestination != value)
-                {
-                    Dictionary<string, string> new_logging =
-                        logging == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(logging);
-
-                    if (value == null)
-                    {
-                        new_logging.Remove("syslog_destination");
-                    }
-                    else
-                    {
-                        new_logging["syslog_destination"] = value;
-                    }
-
-                    logging = new_logging;
-                }
-            }
+            set { logging = SetDictionaryKey(logging, "syslog_destination", value); }
         }
 
         public static bool IsFullyPatched(Host host,IEnumerable<IXenConnection> connections)

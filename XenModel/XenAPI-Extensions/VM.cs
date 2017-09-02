@@ -332,20 +332,7 @@ namespace XenAPI
 
                 return "CD";
             }
-            set
-            {
-                if (value == BootOrder)
-                    return;
-
-                Dictionary<string, string> new_HVM_boot_params =
-                        HVM_boot_params == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(HVM_boot_params);
-
-                new_HVM_boot_params["order"] = value.ToLower();
-
-                HVM_boot_params = new_HVM_boot_params;
-            }
+            set { HVM_boot_params = SetDictionaryKey(HVM_boot_params, "order", value.ToLower()); }
         }
 
         public long Memory
@@ -373,18 +360,7 @@ namespace XenAPI
                 else
                     return 256;
             }
-            set
-            {
-                if (value != VCPUWeight)
-                {
-                    Dictionary<string, string> new_VCPUs_params =
-                        VCPUs_params == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(VCPUs_params);
-                    new_VCPUs_params["weight"] = value.ToString();
-                    VCPUs_params = new_VCPUs_params;
-                }
-            }
+            set { VCPUs_params = SetDictionaryKey(VCPUs_params, "weight", value.ToString()); }
         }
 
         public bool DefaultTemplate
@@ -400,7 +376,7 @@ namespace XenAPI
         public string InstallRepository
         {
             get { return Get(other_config, "install-repository"); }
-            set { if (InstallRepository != value) { set_other_config("install-repository", value); } }
+            set { other_config = SetDictionaryKey(other_config, "install-repository", value); }
         }
 
         public string InstallDistro
@@ -561,16 +537,6 @@ namespace XenAPI
             }
         }
 
-        void set_other_config(string key, string value)
-        {
-            Dictionary<string, string> new_other_config =
-                other_config == null ?
-                    new Dictionary<string, string>() :
-                    new Dictionary<string, string>(other_config);
-            new_other_config[key] = value;
-            other_config = new_other_config;
-        }
-
         // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
         // enable it (http://support.citrix.com/article/CTX133910), so XenCenter has to be
         // able to recognise it, and turn it off during Rolling Pool Upgrade.
@@ -580,11 +546,7 @@ namespace XenAPI
             {
                 return BoolKey(other_config, "auto_poweron");
             }
-            set
-            {
-                if (value != AutoPowerOn)
-                    set_other_config("auto_poweron", value.ToString().ToLower());
-            }
+            set { other_config = SetDictionaryKey(other_config, "auto_poweron", value.ToString().ToLower()); }
         }
 
         public bool IgnoreExcessiveVcpus
@@ -593,11 +555,7 @@ namespace XenAPI
             {
                 return BoolKey(other_config, "ignore_excessive_vcpus");
             }
-            set
-            {
-                if (value != IgnoreExcessiveVcpus)
-                    set_other_config("ignore_excessive_vcpus", value.ToString().ToLower());
-            }
+            set { other_config = SetDictionaryKey(other_config, "ignore_excessive_vcpus", value.ToString().ToLower()); }
         }
 
         public string IsOnSharedStorage()
@@ -1744,19 +1702,7 @@ namespace XenAPI
                 }
                 return DEFAULT_CORES_PER_SOCKET;
             }
-            set
-            {
-                if (value != CoresPerSocket)
-                {
-
-                    Dictionary<string, string> newPlatform =
-                        platform == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(platform);
-                    newPlatform["cores-per-socket"] = value.ToString();
-                    platform = newPlatform;
-                }
-            }
+            set { platform = SetDictionaryKey(platform, "cores-per-socket", value.ToString()); }
         }
 
         public long MaxCoresPerSocket

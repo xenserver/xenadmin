@@ -151,18 +151,7 @@ namespace XenAPI
                 else
                     return "";
             }
-            set
-            {
-                if (value != VMHint)
-                {
-                    Dictionary<string, string> new_sm_config =
-                        sm_config == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(sm_config);
-                    new_sm_config["vmhint"] = value;
-                    sm_config = new_sm_config;
-                }
-            }
+            set { sm_config = SetDictionaryKey(sm_config, "vmhint", value); }
         }
 
         public override string ToString()
