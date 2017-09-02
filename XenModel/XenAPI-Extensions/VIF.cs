@@ -152,18 +152,7 @@ namespace XenAPI
 
                 return result;
             }
-        }
 
-        public bool RateLimited
-        {
-            get
-            {
-                return qos_algorithm_type == VIF.RATE_LIMIT_QOS_VALUE;
-            }
-            set
-            {
-                qos_algorithm_type = value ? VIF.RATE_LIMIT_QOS_VALUE : "";
-            }
         }
     }
 }

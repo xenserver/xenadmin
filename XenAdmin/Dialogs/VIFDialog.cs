@@ -122,7 +122,7 @@ namespace XenAdmin.Dialogs
                 else
                 {
                     promptTextBoxQoS.Text = ExistingVif.LimitString;
-                    checkboxQoS.Checked = ExistingVif.RateLimited;
+                    checkboxQoS.Checked = ExistingVif.qos_algorithm_type == VIF.RATE_LIMIT_QOS_VALUE;
                 }
                 flowLayoutPanelQoS.Enabled = checkboxQoS.Enabled = true;
 
@@ -258,7 +258,7 @@ namespace XenAdmin.Dialogs
             vif.device = Device.ToString();
 
             if (checkboxQoS.Checked)
-                vif.RateLimited = true;
+                vif.qos_algorithm_type = VIF.RATE_LIMIT_QOS_VALUE;
 
             // preserve this param even if we have decided not to turn on qos
             if (!string.IsNullOrEmpty(promptTextBoxQoS.Text))
@@ -285,7 +285,7 @@ namespace XenAdmin.Dialogs
             {
                 proxyVIF.qos_algorithm_type = VIF.RATE_LIMIT_QOS_VALUE;
             }
-            else if (ExistingVif != null && ExistingVif.RateLimited)
+            else if (ExistingVif != null && ExistingVif.qos_algorithm_type == VIF.RATE_LIMIT_QOS_VALUE)
             {
                 proxyVIF.qos_algorithm_type = "";
             }
@@ -318,7 +318,7 @@ namespace XenAdmin.Dialogs
                 if (ExistingVif.device != Device.ToString())
                     return true;
 
-                if (ExistingVif.RateLimited)
+                if (ExistingVif.qos_algorithm_type == VIF.RATE_LIMIT_QOS_VALUE)
                 {
                     if (!checkboxQoS.Checked)
                         return true;
