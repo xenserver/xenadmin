@@ -121,7 +121,7 @@ namespace XenAdminTests.TabsAndMenus
         public void Tabs_UserTemplate()
         {
             EnsureChecked(MainWindowWrapper.ViewMenuItems.TemplatesToolStripMenuItem);
-            foreach (VM vm in GetAllXenObjects<VM>(v =>!v.IsHidden &&v.is_a_template && !v.DefaultTemplate && !v.is_a_snapshot))
+            foreach (VM vm in GetAllXenObjects<VM>(v =>!v.IsHidden() &&v.is_a_template && !v.DefaultTemplate() && !v.is_a_snapshot))
             {
                 VerifyTabs(vm, UserTemplateTabs);
             }
@@ -131,7 +131,7 @@ namespace XenAdminTests.TabsAndMenus
         public void Tabs_SR()
         {
             EnsureChecked(MainWindowWrapper.ViewMenuItems.LocalStorageToolStripMenuItem);
-            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR))
+            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR()))
             {
                 VerifyTabs(sr, SRTabs);
             }
@@ -160,7 +160,7 @@ namespace XenAdminTests.TabsAndMenus
             PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
-                VerifyTabs(GetAnyVDI(v => ( v.name_label != "base copy" && !v.IsHidden )), VDITabs);
+                VerifyTabs(GetAnyVDI(v => v.name_label != "base copy" && !v.IsHidden()), VDITabs);
             }
             finally
             {
@@ -470,7 +470,7 @@ namespace XenAdminTests.TabsAndMenus
         {
             EnsureChecked(MainWindowWrapper.ViewMenuItems.LocalStorageToolStripMenuItem);
 
-            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR))
+            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR()))
             {
                 List<ExpectedMenuItem> expectedMenuItems = new List<ExpectedMenuItem>();
 
@@ -506,7 +506,7 @@ namespace XenAdminTests.TabsAndMenus
         {
             EnsureChecked(MainWindowWrapper.ViewMenuItems.TemplatesToolStripMenuItem);
 
-            foreach (VM vm in GetAllXenObjects<VM>(v => v.InstantTemplate))
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.InstantTemplate()))
             {
                 VerifyContextMenu(vm, new ExpectedMenuItem[] {
                     new ExpectedTextMenuItem("&New VM wizard...", true),
@@ -707,7 +707,7 @@ namespace XenAdminTests.TabsAndMenus
         {
             EnsureDefaultTemplatesShown();
 
-            foreach (VM vm in GetAllXenObjects<VM>(v => v.InstantTemplate))
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.InstantTemplate()))
             {
                 VerifyContextMenu(vm, new ExpectedMenuItem[] {
                     new ExpectedTextMenuItem("&New VM wizard...", true),
@@ -728,7 +728,7 @@ namespace XenAdminTests.TabsAndMenus
         {
             EnsureDefaultTemplatesShown();
 
-            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_template && !v.DefaultTemplate && !v.is_a_snapshot && !v.InstantTemplate && !v.name_label.StartsWith("XenServer Transfer VM")))
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_template && !v.DefaultTemplate() && !v.is_a_snapshot && !v.InstantTemplate() && !v.name_label.StartsWith("XenServer Transfer VM")))
             {
                 VerifyContextMenu(vm, new ExpectedMenuItem[] {
                     new ExpectedTextMenuItem("&New VM wizard...", true),

@@ -72,9 +72,9 @@ namespace XenAdmin.Dialogs.VMDialogs
         {
             base.OnShown(e);
 
-            var shortName = Server.Name;
+            var shortName = Server.Name();
             if (shortName.Length > 25)
-                shortName = Server.Name.Ellipsise(25);
+                shortName = Server.Name().Ellipsise(25);
 
             Text = string.Format(Messages.SELECT_VMS_TO_SUSPEND_DLOG_TITLE, shortName);
         }
@@ -87,7 +87,7 @@ namespace XenAdmin.Dialogs.VMDialogs
                 if (host.Equals(Server))
                     continue;
 
-                PoolMemoryFree += host.memory_free_calc;
+                PoolMemoryFree += host.memory_free_calc();
             }
 
             return Util.MemorySizeStringSuitableUnits(PoolMemoryFree, true);
@@ -205,7 +205,7 @@ namespace XenAdmin.Dialogs.VMDialogs
         private void UpdateDetails()
         {
             ImageCell.Value = Images.GetImage16For(Images.GetIconFor(Vm));
-            NameCell.Value = Vm.Name;
+            NameCell.Value = Vm.Name();
             MemoryCell.Value = Util.MemorySizeStringSuitableUnits(Vm.memory_dynamic_max, true);
             ActionCell.ValueType = typeof(ActionCellItem);
             ActionCell.ValueMember = "ActionCell";

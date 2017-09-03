@@ -777,7 +777,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             {
                 Vm = vm;
                 cellImage.Value = Images.GetImage16For(vm);
-                cellVm.Value = vm.Name;
+                cellVm.Value = vm.Name();
             }
 
             public void UpdateStartDelay(long startDelay)

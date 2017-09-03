@@ -41,7 +41,7 @@ namespace XenAdmin.Actions
     public class GetSystemStatusCapabilities : PureAsyncAction
     {
         public GetSystemStatusCapabilities(Host host)
-            : base(host.Connection, string.Format(Messages.ACTION_GET_SYSTEM_STATUS_CAPABILITIES_ON, host.Name),
+            : base(host.Connection, string.Format(Messages.ACTION_GET_SYSTEM_STATUS_CAPABILITIES_ON, host.Name()),
             null, true)
         {
             Host = host;

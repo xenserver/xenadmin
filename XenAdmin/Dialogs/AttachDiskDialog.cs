@@ -118,7 +118,7 @@ namespace XenAdmin.Dialogs
 
         private void DeactivateAttachButtonIfHvm()
         {
-            if (!TheVM.IsHVM)
+            if (!TheVM.IsHVM())
                 return;
 
             DiskListVdiItem vdiItem = DiskListTreeView.SelectedItem as DiskListVdiItem;
@@ -128,7 +128,7 @@ namespace XenAdmin.Dialogs
 
         private void DeactivateReadOnlyCheckBoxForHvmVm()
         {
-            if (!TheVM.IsHVM) 
+            if (!TheVM.IsHVM()) 
                 return;
 
             readonlyCheckboxToolTipContainer.SetToolTip(Messages.ATTACH_DISK_DIALOG_READONLY_DISABLED_FOR_HVM);
@@ -246,7 +246,7 @@ namespace XenAdmin.Dialogs
                 vbd.unpluggable = true;
 
                 // Try to hot plug the VBD.
-                new VbdSaveAndPlugAction(TheVM, vbd, TheVDI.Name, null, false,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox).RunAsync();
+                new VbdSaveAndPlugAction(TheVM, vbd, TheVDI.Name(), null, false,NewDiskDialog.ShowMustRebootBoxCD,NewDiskDialog.ShowVBDWarningBox).RunAsync();
             });
 
             Close();
@@ -297,7 +297,7 @@ namespace XenAdmin.Dialogs
 
         private void Update()
         {
-            Text = TheSR.NameWithoutHost;
+            Text = TheSR.NameWithoutHost();
             Image = Images.GetImage16For(Images.GetIconFor(TheSR));
 
             Host affinity = TheVM.Connection.Resolve<Host>(TheVM.affinity);
@@ -386,9 +386,9 @@ namespace XenAdmin.Dialogs
                 if (Show)
                 {
                     ForceReadOnly = true;
-                    Text = String.IsNullOrEmpty(TheVDI.Name) ? Messages.NO_NAME : TheVDI.Name;
-                    if (!string.IsNullOrEmpty(TheVDI.Description))
-                        Description = string.Format(Messages.ATTACHDISK_SIZE_DESCRIPTION, TheVDI.Description, Util.DiskSizeString(TheVDI.virtual_size));
+                    Text = String.IsNullOrEmpty(TheVDI.Name()) ? Messages.NO_NAME : TheVDI.Name();
+                    if (!string.IsNullOrEmpty(TheVDI.Description()))
+                        Description = string.Format(Messages.ATTACHDISK_SIZE_DESCRIPTION, TheVDI.Description(), Util.DiskSizeString(TheVDI.virtual_size));
                     else
                         Description = Util.DiskSizeString(TheVDI.virtual_size);
                     Image = Images.GetImage16For(Icons.VDI);
@@ -398,9 +398,9 @@ namespace XenAdmin.Dialogs
             {
                 Show = true;
                 ForceReadOnly = TheVDI.read_only;
-                Text = String.IsNullOrEmpty(TheVDI.Name) ? Messages.NO_NAME : TheVDI.Name;
-                if (!string.IsNullOrEmpty(TheVDI.Description))
-                    Description = string.Format(Messages.ATTACHDISK_SIZE_DESCRIPTION, TheVDI.Description, Util.DiskSizeString(TheVDI.virtual_size));
+                Text = String.IsNullOrEmpty(TheVDI.Name()) ? Messages.NO_NAME : TheVDI.Name();
+                if (!string.IsNullOrEmpty(TheVDI.Description()))
+                    Description = string.Format(Messages.ATTACHDISK_SIZE_DESCRIPTION, TheVDI.Description(), Util.DiskSizeString(TheVDI.virtual_size));
                 else
                     Description = Util.DiskSizeString(TheVDI.virtual_size);
                 Image = Images.GetImage16For(Icons.VDI);

@@ -108,7 +108,7 @@ namespace XenAdmin.Commands
             Host hostAncestor = selection.HostAncestor;
             Pool poolAncestor = selection.PoolAncestor;
 
-            if (hostAncestor != null && hostAncestor.enabled && hostAncestor.IsLive && selection[0].Connection.IsConnected)
+            if (hostAncestor != null && hostAncestor.enabled && hostAncestor.IsLive() && selection[0].Connection.IsConnected)
             {
                 return true;
             }

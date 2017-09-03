@@ -366,7 +366,7 @@ namespace XenAdmin.SettingsPanels
             List<string> deadHosts = new List<string>();
             foreach (Host member in pool.Connection.Cache.Hosts)
             {
-                if (!member.IsLive)
+                if (!member.IsLive())
                 {
                     deadHosts.Add(Helpers.GetName(member).Ellipsise(30));
                 }

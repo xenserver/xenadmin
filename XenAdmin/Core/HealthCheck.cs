@@ -99,7 +99,7 @@ namespace XenAdmin.Core
             if (pool == null || Helpers.FeatureForbidden(connection, Host.RestrictHealthCheck))
                 return null;
 
-            var healthCheckSettings = pool.HealthCheckSettings;
+            var healthCheckSettings = pool.HealthCheckSettings();
 
             if (healthCheckSettings.Status == HealthCheckStatus.Enabled && !healthCheckSettings.HasAnalysisResult)
             {

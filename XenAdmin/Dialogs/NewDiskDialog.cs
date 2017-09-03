@@ -138,8 +138,8 @@ namespace XenAdmin.Dialogs
             if (DiskTemplate == null)
                 return;
 
-            NameTextBox.Text = DiskTemplate.Name;
-            DescriptionTextBox.Text = DiskTemplate.Description;
+            NameTextBox.Text = DiskTemplate.Name();
+            DescriptionTextBox.Text = DiskTemplate.Description();
             SrListBox.selectSRorDefaultorAny(connection.Resolve(DiskTemplate.SR));
 
             // select the appropriate unit, based on size (CA-45905)
@@ -168,7 +168,7 @@ namespace XenAdmin.Dialogs
             List<string> usedNames = new List<string>();
             foreach (VDI v in connection.Cache.VDIs.Concat(_VDINamesInUse))
             {
-                usedNames.Add(v.Name);
+                usedNames.Add(v.Name());
             }
             return Helpers.MakeUniqueName(Messages.DEFAULT_VDI_NAME, usedNames);
         }
@@ -225,7 +225,7 @@ namespace XenAdmin.Dialogs
                 var alreadyHasBootableDisk = HasBootableDisk(TheVM);
 
                 Actions.DelegatedAsyncAction action = new Actions.DelegatedAsyncAction(connection,
-                    string.Format(Messages.ACTION_DISK_ADDING_TITLE, NameTextBox.Text, sr.NameWithoutHost),
+                    string.Format(Messages.ACTION_DISK_ADDING_TITLE, NameTextBox.Text, sr.NameWithoutHost()),
                     Messages.ACTION_DISK_ADDING, Messages.ACTION_DISK_ADDED,
                     delegate(XenAPI.Session session)
                     {
@@ -246,7 +246,7 @@ namespace XenAdmin.Dialogs
                         vbd.userdevice = ud;
 
                         // Now try to plug the VBD.
-                        new XenAdmin.Actions.VbdSaveAndPlugAction(TheVM, vbd, vdi.Name, session, false, ShowMustRebootBoxCD, ShowVBDWarningBox).RunAsync();
+                        new XenAdmin.Actions.VbdSaveAndPlugAction(TheVM, vbd, vdi.Name(), session, false, ShowMustRebootBoxCD, ShowVBDWarningBox).RunAsync();
                     });
                 action.VM = TheVM;
                 new Dialogs.ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog();
@@ -271,14 +271,14 @@ namespace XenAdmin.Dialogs
             {
                 var vbd = c.Resolve(vbdRef);
 
-                if (vbd != null && !vbd.IsCDROM && !vbd.IsFloppyDrive && vbd.bootable)
+                if (vbd != null && !vbd.IsCDROM() && !vbd.IsFloppyDrive() && vbd.bootable)
                 {
                     VDI vdi = c.Resolve(vbd.VDI);
 
                     if (vdi != null)
                     {
                         SR sr = c.Resolve(vdi.SR);
-                        if (sr != null && sr.IsToolsSR)
+                        if (sr != null && sr.IsToolsSR())
                         {
                             continue;
                         }

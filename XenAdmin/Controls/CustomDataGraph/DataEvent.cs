@@ -76,7 +76,7 @@ namespace XenAdmin.Controls.CustomDataGraph
 
         public override string ToString()
         {
-            return HelpersGUI.DateTimeToString(Message.TimestampLocal, Messages.DATEFORMAT_DMY_HM, true);
+            return HelpersGUI.DateTimeToString(Message.TimestampLocal(), Messages.DATEFORMAT_DMY_HM, true);
         }
 
         public bool Equals(DataEvent other)

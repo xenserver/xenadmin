@@ -657,7 +657,7 @@ namespace XenAdmin.Network
 
                 foreach (Pool pool in Pools)
                 {
-                    if (pool!=null&&pool.IsVisible)
+                    if (pool != null && pool.IsVisible())
                     {
                         yield return pool;
                         break;

@@ -183,16 +183,16 @@ namespace XenAdmin.Controls
 				{
 					string description = PIFDescription(pif);
 					XenAPI.Network network = Connection.Resolve<XenAPI.Network>(pif.network);
-					PIF_metrics metrics = pif.PIFMetrics;
+					PIF_metrics metrics = pif.PIFMetrics();
 
 					int rowIndex = dataGridView1.Rows.Add(new object[]
 					                                      	{
 					                                      		false,
-					                                      		String.Format("{0} {1}", pif.Name, description),
+					                                      		String.Format("{0} {1}", pif.Name(), description),
 					                                      		pif.MAC,
-					                                      		(network.PIFs.Count > 1) ? network.LinkStatusString : pif.LinkStatusString,
-					                                      		pif.Carrier ? pif.Speed : Messages.HYPHEN,
-					                                      		pif.Carrier ? pif.Duplex : Messages.HYPHEN,
+					                                      		(network.PIFs.Count > 1) ? network.LinkStatusString() : pif.LinkStatusString(),
+					                                      		pif.Carrier() ? pif.Speed() : Messages.HYPHEN,
+					                                      		pif.Carrier() ? pif.Duplex() : Messages.HYPHEN,
 					                                      		metrics == null ? "" : metrics.vendor_name,
 					                                      		metrics == null ? "" : metrics.device_name,
 					                                      		metrics == null ? "" : metrics.pci_bus_path
@@ -226,8 +226,8 @@ namespace XenAdmin.Controls
 
         private string PIFDescription(PIF pif)
         {
-            Bond bond = pif.BondSlaveOf;
-            return bond == null ? "" : string.Format(Messages.ALREADY_IN_BOND, bond.Name);
+            Bond bond = pif.BondSlaveOf();
+            return bond == null ? "" : string.Format(Messages.ALREADY_IN_BOND, bond.Name());
         }
 
         internal DialogResult ShowCreationWarning()
@@ -259,7 +259,7 @@ namespace XenAdmin.Controls
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
-                            string.Format(Messages.BOND_CREATE_HA_ENABLED, pool.Name),
+                            string.Format(Messages.BOND_CREATE_HA_ENABLED, pool.Name()),
                             Messages.BOND_CREATE)))
                     {
                         dlg.ShowDialog(this);

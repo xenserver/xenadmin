@@ -77,7 +77,7 @@ namespace XenAdminTests.WizardTests.state5_xml
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking -= DbProxy_Invoking;
 
             List<VBD> vbds = wizard.Action.VM.Connection.ResolveAll(wizard.Action.VM.VBDs);
-            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM), "IsOwner wasn't set");
+            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM()), "IsOwner wasn't set");
         }
     }
 
@@ -115,7 +115,7 @@ namespace XenAdminTests.WizardTests.state5_xml
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking -= DbProxy_Invoking;
 
             List<VBD> vbds = wizard.Action.VM.Connection.ResolveAll(wizard.Action.VM.VBDs);
-            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM), "IsOwner wasn't set");
+            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM()), "IsOwner wasn't set");
         }
 
         protected override void TestPage(string pageName)
@@ -172,7 +172,7 @@ namespace XenAdminTests.WizardTests.state5_xml
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking -= DbProxy_Invoking;
 
             List<VBD> vbds = wizard.Action.VM.Connection.ResolveAll(wizard.Action.VM.VBDs);
-            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM), "IsOwner wasn't set");
+            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM()), "IsOwner wasn't set");
         }
 
         protected override void TestPage(string pageName)
@@ -185,7 +185,7 @@ namespace XenAdminTests.WizardTests.state5_xml
                 HandleModalDialog<NewDiskDialogWrapper>("Edit Disk", propertiesButton.PerformClick,
                     delegate(NewDiskDialogWrapper w)
                     {
-                        w.SrListBox.selectSRorDefaultorAny(GetAnySR(sr => sr.Name.Contains("SCSI"))); //switch storage for new disk
+                        w.SrListBox.selectSRorDefaultorAny(GetAnySR(sr => sr.Name().Contains("SCSI"))); //switch storage for new disk
                         w.OkButton.PerformClick();
                     });
 
@@ -232,7 +232,7 @@ namespace XenAdminTests.WizardTests.state5_xml
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking -= DbProxy_Invoking;
 
             List<VBD> vbds = wizard.Action.VM.Connection.ResolveAll(wizard.Action.VM.VBDs);
-            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM), "IsOwner wasn't set");
+            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM()), "IsOwner wasn't set");
         }
 
         protected override void TestPage(string pageName)
@@ -250,7 +250,7 @@ namespace XenAdminTests.WizardTests.state5_xml
                     HandleModalDialog<NewDiskDialogWrapper>("Edit Disk", propertiesButton.PerformClick,
                         delegate(NewDiskDialogWrapper w)
                         {
-                            w.SrListBox.selectSRorDefaultorAny(GetAnySR(sr => sr.Name.Contains("SCSI"))); //switch storage for new disk
+                            w.SrListBox.selectSRorDefaultorAny(GetAnySR(sr => sr.Name().Contains("SCSI"))); //switch storage for new disk
                             w.OkButton.PerformClick();
                         });
                 }
@@ -300,7 +300,7 @@ namespace XenAdminTests.WizardTests.state5_xml
             DbProxy.proxys[ConnectionsManager.XenConnectionsCopy[0]].Invoking -= DbProxy_Invoking;
 
             List<VBD> vbds = wizard.Action.VM.Connection.ResolveAll(wizard.Action.VM.VBDs);
-            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM), "IsOwner wasn't set");
+            Assert.IsTrue(vbds.TrueForAll(v => v.IsOwner || v.IsCDROM()), "IsOwner wasn't set");
         }
     }
 }

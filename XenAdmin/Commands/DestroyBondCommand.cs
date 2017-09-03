@@ -59,7 +59,7 @@ namespace XenAdmin.Commands
             List<string> result = new List<string>();
             foreach (XenAPI.Network network in connection.Cache.Networks)
             {
-                result.Add(network.Name);
+                result.Add(network.Name());
             }
             return result;
         }
@@ -82,7 +82,7 @@ namespace XenAdmin.Commands
             // We just want one, so that we can name it.
             PIF pif = pifs[0];
 
-            string msg = string.Format(Messages.DELETE_BOND_MESSAGE, pif.Name);
+            string msg = string.Format(Messages.DELETE_BOND_MESSAGE, pif.Name());
 
             bool will_disturb_primary = NetworkingHelper.ContainsPrimaryManagement(pifs);
             bool will_disturb_secondary = NetworkingHelper.ContainsSecondaryManagement(pifs);
@@ -95,7 +95,7 @@ namespace XenAdmin.Commands
                     using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Error,
-                            string.Format(Messages.BOND_DELETE_HA_ENABLED, pif.Name, pool.Name),
+                            string.Format(Messages.BOND_DELETE_HA_ENABLED, pif.Name(), pool.Name()),
                             Messages.DELETE_BOND)))
                     {
                         dlg.ShowDialog(Parent);
@@ -146,7 +146,7 @@ namespace XenAdmin.Commands
 
             // The UI shouldn't offer deleting a bond in this case, but let's make sure we've
             // done the right thing and that the bond hasn't been deleted in the meantime. (CA-27436).
-            Bond bond = pif.BondMasterOf;
+            Bond bond = pif.BondMasterOf();
             if (bond != null)
                 new Actions.DestroyBondAction(bond).RunAsync();
         }

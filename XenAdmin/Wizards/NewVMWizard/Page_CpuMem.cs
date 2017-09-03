@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             initialising = true;
 
             Template = SelectedTemplate;
-            if (Template.has_ballooning && !Helpers.FeatureForbidden(Template, Host.RestrictDMC))
+            if (Template.has_ballooning() && !Helpers.FeatureForbidden(Template, Host.RestrictDMC))
                 memoryMode = (Template.memory_dynamic_max == Template.memory_static_max ? 2 : 3);
             else
                 memoryMode = 1;
@@ -112,7 +112,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     spinnerStatMax.Visible = false;
             }
 
-            isVcpuHotplugSupported = Template.SupportsVcpuHotplug;
+            isVcpuHotplugSupported = Template.SupportsVcpuHotplug();
             _prevVCPUsMax = Template.VCPUs_max;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
 
             label5.Text = GetRubric();
@@ -140,8 +140,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             labelInitialVCPUs.Text = Messages.VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL;
             labelInitialVCPUs.Visible = comboBoxInitialVCPUs.Visible = isVcpuHotplugSupported;
 
-            comboBoxTopology.Populate(Template.VCPUs_at_startup, Template.VCPUs_max, Template.CoresPerSocket, Template.MaxCoresPerSocket);
-            PopulateVCPUs(Template.MaxVCPUsAllowed, isVcpuHotplugSupported ? Template.VCPUs_max : Template.VCPUs_at_startup);
+            comboBoxTopology.Populate(Template.VCPUs_at_startup, Template.VCPUs_max, Template.CoresPerSocket, Template.MaxCoresPerSocket());
+            PopulateVCPUs(Template.MaxVCPUsAllowed(), isVcpuHotplugSupported ? Template.VCPUs_max : Template.VCPUs_at_startup);
 
             if (isVcpuHotplugSupported)
                 PopulateVCPUsAtStartup(Template.VCPUs_max, Template.VCPUs_at_startup);
@@ -191,7 +191,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             get
             {
                 long msm = Template.memory_static_max;
-                long mma = Template.MaxMemAllowed;
+                long mma = Template.MaxMemAllowed();
                 return (msm > mma ? msm : mma);
             }
         }
@@ -357,7 +357,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 // plus however much we can squeeze down the existing VMs. This assumes
                 // that the overhead won't increase when we create the new VM, so it
                 // has false negatives.
-                long memory_free = host.memory_available_calc;
+                long memory_free = host.memory_available_calc();
 
                 if (metrics != null && memory_free > max_mem_free)
                 {

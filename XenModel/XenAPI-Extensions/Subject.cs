@@ -95,9 +95,9 @@ namespace XenAPI
             return kvpList;
         }
 
-        public override string Name
+        public override string Name()
         {
-            get { return SubjectName; }
+            return SubjectName;
         }
 
         public static Subject GetBySID(IXenConnection connection, string sid)

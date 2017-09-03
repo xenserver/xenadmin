@@ -67,9 +67,9 @@ namespace XenAdminTests.CommandTests
         {
             Mock<VM> vm = ObjectFactory.BuiltObject<VM>(ObjectBuilderType.VmWithHomeServerHost, id);
             Mock<SR> sr = ObjectManager.NewXenObject<SR>(id);
-            vm.Setup(v => v.SRs).Returns(new List<SR> {sr.Object});
+            vm.Setup(v => v.SRs()).Returns(new List<SR> {sr.Object});
             vm.Setup(v => v.allowed_operations).Returns(new List<vm_operations> {vm_operations.migrate_send});
-            sr.Setup(s => s.HBALunPerVDI).Returns(IsLunPerVdi);
+            sr.Setup(s => s.HBALunPerVDI()).Returns(IsLunPerVdi);
 
             IMainWindow mw = new MockMainWindow();
 

@@ -176,8 +176,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 
                 if (value != null)
                 {
-                    SrName = _srToReattach.Name;
-                    Description = _srToReattach.Description;
+                    SrName = _srToReattach.Name();
+                    Description = _srToReattach.Description();
                     UUID = _srToReattach.uuid;
                 }
             }

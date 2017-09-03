@@ -53,7 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         {
             get
             {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_RUNNING_VM, Helpers.GetPoolOfOne(VM.Connection).Name); 
+                return String.Format(Messages.DR_WIZARD_PROBLEM_RUNNING_VM, Helpers.GetPoolOfOne(VM.Connection).Name()); 
             } 
         }
 

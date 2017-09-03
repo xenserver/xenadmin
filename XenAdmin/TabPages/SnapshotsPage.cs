@@ -169,7 +169,7 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
-                    labelVMPPInfo.Text = string.Format(Messages.THIS_VM_IS_IN_VMSS, vmss.Name);
+                    labelVMPPInfo.Text = string.Format(Messages.THIS_VM_IS_IN_VMSS, vmss.Name());
                     pictureBoxVMPPInfo.Image = Resources._000_Tick_h32bit_16;
                     linkLabelVMPPInfo.Text = Messages.VIEW_VMSS_POLICIES;
                 }
@@ -339,7 +339,7 @@ namespace XenAdmin.TabPages
             snapshotTreeView.Clear();
             Debug.WriteLine("Start refreshing Tree");
             SnapshotIcon rootIcon = null;
-            rootIcon = new SnapshotIcon(VM.Name, Messages.BASE, null, snapshotTreeView, SnapshotIcon.Template);
+            rootIcon = new SnapshotIcon(VM.Name(), Messages.BASE, null, snapshotTreeView, SnapshotIcon.Template);
             snapshotTreeView.AddSnapshot(rootIcon);
 
             //Set VM
@@ -452,8 +452,8 @@ namespace XenAdmin.TabPages
                 _tags.Value = ConcatWithSeparator(Tags.GetTags(snapshot), ", ");
                 //Description
                 Cells.Add(_description);
-                _description.Value = snapshot.Description != ""
-                                         ? snapshot.Description
+                _description.Value = snapshot.Description() != ""
+                                         ? snapshot.Description()
                                          : Messages.NONE;
             }
 
@@ -693,9 +693,9 @@ namespace XenAdmin.TabPages
                 nameLabel.Text = snapshot.name_label;
                 sizeLabel.Text = GetStringSnapshotSize(snapshot);
                 labelMode.Text = snapshot.power_state == vm_power_state.Halted ? Messages.DISKS_ONLY : Messages.DISKS_AND_MEMORY;
-                descriptionLabel.Text = (snapshot.Description != ""
-                                             ? snapshot.Description
-                                             : Messages.NONE);
+
+                var descr = snapshot.Description();
+                descriptionLabel.Text = string.IsNullOrEmpty(descr) ? Messages.NONE : descr;
                 toolTipDescriptionLabel.SetToolTip(descriptionLabel, 
                                             descriptionLabel.Height == descriptionLabel.MaximumSize.Height ? descriptionLabel.Text : "");
 

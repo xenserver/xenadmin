@@ -79,11 +79,11 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
 
                 if (patch != null)
                 {
-                    name = patch.Name;
+                    name = patch.Name();
                 }
                 else if (update != null)
                 {
-                    name = update.Name;
+                    name = update.Name();
                 }
 
                 switch (diskSpaceReq.Operation)

@@ -91,8 +91,8 @@ namespace XenAdmin.Commands
                 }
 
                 var menuText = (index + offset) < 9
-                    ? String.Format(Messages.DYNAMIC_MENUITEM_WITH_ACCESS_KEY, (index + offset) + 1, group.Name)
-                    : String.Format(Messages.DYNAMIC_MENUITEM_WITHOUT_ACCESS_KEY, group.Name);
+                    ? String.Format(Messages.DYNAMIC_MENUITEM_WITH_ACCESS_KEY, (index + offset) + 1, group.Name())
+                    : String.Format(Messages.DYNAMIC_MENUITEM_WITHOUT_ACCESS_KEY, group.Name());
 
                 var cmdGroup = new AssignGroupToVMCommand(Command.MainWindowCommandInterface, Command.GetSelection(), group, menuText);
                 var itemGroup = new CommandToolStripMenuItem(cmdGroup);
@@ -151,12 +151,12 @@ namespace XenAdmin.Commands
 
             public override string MenuText
             {
-                get { return (String.IsNullOrEmpty(_menuText) ? _group.Name : _menuText).Ellipsise(30); }
+                get { return (String.IsNullOrEmpty(_menuText) ? _group.Name() : _menuText).Ellipsise(30); }
             }
 
             protected override string EnabledToolTipText
             {
-                get { return _group.Name; }
+                get { return _group.Name(); }
             }
 
             protected override bool CanExecuteCore(SelectedItemCollection selection)
@@ -188,7 +188,7 @@ namespace XenAdmin.Commands
                     VM vm = vmsWithExistingGroup[0];
                     T oldGroup = vm.Connection.Resolve(VMGroup<T>.VmToGroup(vm));
                     text = string.Format(VMGroup<T>.ChangeOneWarningString,
-                        vm.Name.Ellipsise(250), oldGroup.Name.Ellipsise(250), groupName.Ellipsise(250));
+                        vm.Name().Ellipsise(250), oldGroup.Name().Ellipsise(250), groupName.Ellipsise(250));
                 }
                 else
                 {
@@ -220,7 +220,7 @@ namespace XenAdmin.Commands
                     }
                 }
 
-                if (!ChangesOK(selection.AsXenObjects<VM>(), _group, _group.Name))
+                if (!ChangesOK(selection.AsXenObjects<VM>(), _group, _group.Name()))
                     return;
 
                 var selectedRefVMs = selection.AsXenObjects().ConvertAll<XenRef<VM>>(converterVMRefs);
@@ -279,7 +279,7 @@ namespace XenAdmin.Commands
 
             public bool CanExecute(VM vm)
             {
-                return vm != null && vm.is_a_real_vm && !vm.Locked && VMGroup<T>.FeaturePossible(vm.Connection) &&
+                return vm != null && vm.is_a_real_vm() && !vm.Locked && VMGroup<T>.FeaturePossible(vm.Connection) &&
                        !Helpers.FeatureForbidden(vm.Connection, VMGroup<T>.FeatureRestricted);
             }
             protected override bool CanExecuteCore(SelectedItemCollection selection)

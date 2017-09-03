@@ -535,7 +535,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             List<XenRef<VM>> vms = new List<XenRef<VM>>();
             foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
             {
-                if (!vm.IsHVM || !vm.is_a_real_vm)
+                if (!vm.IsHVM() || !vm.is_a_real_vm())
                     continue;
                 vms.Add(new XenRef<VM>(vm.opaque_ref));
             }
@@ -547,7 +547,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             List<XenRef<VM>> vms = new List<XenRef<VM>>();
             foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
             {
-                if (vm.IsHVM || !vm.is_a_real_vm)
+                if (vm.IsHVM() || !vm.is_a_real_vm())
                     continue;
                 vms.Add(new XenRef<VM>(vm.opaque_ref));
             }
@@ -559,7 +559,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             List<XenRef<VM>> vms = new List<XenRef<VM>>();
             foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
             {
-                if (!vm.is_a_real_vm)
+                if (!vm.is_a_real_vm())
                     continue;
 
                 vms.Add(new XenRef<VM>(vm.opaque_ref));

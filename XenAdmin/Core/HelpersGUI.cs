@@ -531,14 +531,15 @@ namespace XenAdmin.Core
         {
             if (h.license_params != null && h.license_params.ContainsKey("expiry"))
             {
-                TimeSpan timeDiff = h.LicenseExpiryUTC.Subtract(referenceDate);
+                var licenceExpiryUtc = h.LicenseExpiryUTC();
+                TimeSpan timeDiff = licenceExpiryUtc.Subtract(referenceDate);
 
                 if (!LicenseStatus.IsInfinite(timeDiff))
                 {
                     var expiryString = "";
                     Program.Invoke(Program.MainWindow, delegate
                     {
-                        expiryString = DateTimeToString(h.LicenseExpiryUTC.ToLocalTime(),
+                        expiryString = DateTimeToString(licenceExpiryUtc.ToLocalTime(),
                             longFormat ? Messages.DATEFORMAT_DMY_LONG : Messages.DATEFORMAT_DMY, true);
                     });
                     return expiryString;

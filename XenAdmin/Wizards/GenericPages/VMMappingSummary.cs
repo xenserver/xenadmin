@@ -158,7 +158,7 @@ namespace XenAdmin.Wizards.GenericPages
                 Pool targetPool = Helpers.GetPool(targetHost.Connection);
                 if (targetPool != null)
                 {
-                    return targetPool.Name;
+                    return targetPool.Name();
                 }
 
                 return mapping.TargetName;
@@ -240,7 +240,7 @@ namespace XenAdmin.Wizards.GenericPages
                 if (vdi == null || vdi.is_a_snapshot) // don't display the storage mappings for the shapshots
                     continue;
 
-                string valueToAdd = vdi.Name + separatorText + pair.Value.Name;
+                string valueToAdd = vdi.Name() + separatorText + pair.Value.Name();
                 
                 if (firstItem)
                 {
@@ -285,8 +285,8 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 XenAPI.Network net = connection.Resolve(new XenRef<XenAPI.Network>(pair.Key));
                 bool networkNotFound = net == null;
-                string valueToAdd = networkNotFound ? Messages.CPM_SUMMARY_NETWORK_NOT_FOUND : net.Name;
-                valueToAdd += separatorText + pair.Value.Name;
+                string valueToAdd = networkNotFound ? Messages.CPM_SUMMARY_NETWORK_NOT_FOUND : net.Name();
+                valueToAdd += separatorText + pair.Value.Name();
                 decoratedSummary.Add(addSummaryKey
                                          ? new SummaryDetails(Messages.CPM_SUMMARY_KEY_NETWORK, valueToAdd, networkNotFound)
                                          : new SummaryDetails(String.Empty, valueToAdd, networkNotFound));

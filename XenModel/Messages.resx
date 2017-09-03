@@ -10285,9 +10285,6 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="RUNNING_ON" xml:space="preserve">
     <value>Running on</value>
   </data>
-  <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
-    <value>Taking snapshots</value>
-  </data>
   <data name="RUN_POLICY" xml:space="preserve">
     <value>Running policy '{0}'</value>
   </data>

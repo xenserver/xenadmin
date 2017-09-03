@@ -111,7 +111,7 @@ namespace XenAdminTests.WizardTests.state4_xml
                        });
 
                 // select a Windows template
-                VM defaultTemplate = GetAnyDefaultTemplate(v => v.IsHVM && v.name_label != "orphaned snapshot");
+                VM defaultTemplate = GetAnyDefaultTemplate(v => v.IsHVM() && v.name_label != "orphaned snapshot");
                 int row2 = FindRow(gridView, defaultTemplate);
                 MW(() => gridView.Rows[row2].Selected = true);
                 MWWaitFor(() => !checkBox.Checked, "Checkbox was checked for default-template.");
@@ -175,7 +175,7 @@ namespace XenAdminTests.WizardTests.state4_xml
                 MW(() => Assert.IsFalse(checkBox.Enabled, "Checkbox should be disabled when user-template selected."));
 
                 // select a Windows template
-                VM defaultTemplate = GetAnyDefaultTemplate(v => v.IsHVM);
+                VM defaultTemplate = GetAnyDefaultTemplate(v => v.IsHVM());
                 int row2 = FindRow(gridView, defaultTemplate);
                 MW(() => gridView.Rows[row2].Selected = true);
                 MWWaitFor(() => !checkBox.Checked, "Checkbox was checked for default-template.");
@@ -213,7 +213,7 @@ namespace XenAdminTests.WizardTests.state4_xml
 
         protected override NewVMWizard NewWizard()
         {
-            VM defTemplate = GetAnyDefaultTemplate(v => v.IsHVM);
+            VM defTemplate = GetAnyDefaultTemplate(v => v.IsHVM());
             Assert.NotNull(defTemplate, "Default template not found.");
             List<Host> hosts = new List<Host>(defTemplate.Connection.Cache.Hosts);
             Assert.IsTrue(hosts.Count > 0);
@@ -235,7 +235,7 @@ namespace XenAdminTests.WizardTests.state4_xml
                 MW(() => Assert.IsTrue(checkBox.Enabled, "Checkbox should be enabled when default-template selected."));
 
                 // select another default template
-                VM otherDefTemplate = GetAnyDefaultTemplate(v => v.IsHVM && v != ((Page_Template.TemplatesGridViewItem)gridView.SelectedRows[0]).Template);
+                VM otherDefTemplate = GetAnyDefaultTemplate(v => v.IsHVM() && v != ((Page_Template.TemplatesGridViewItem)gridView.SelectedRows[0]).Template);
                 int row2 = FindRow(gridView, otherDefTemplate);
 
                 // check the checkbox and move to another default template

@@ -52,10 +52,10 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            log.Debug("Disabling HA for pool " + Pool.Name);
+            log.Debug("Disabling HA for pool " + Pool.Name());
             RelatedTask = XenAPI.Pool.async_disable_ha(this.Session);
             PollToCompletion();
-            log.Debug("Success disabling HA on pool " + Pool.Name);
+            log.Debug("Success disabling HA on pool " + Pool.Name());
             this.Description = Messages.COMPLETED;
         }
     }

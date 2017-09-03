@@ -37,9 +37,9 @@ namespace XenAPI
     public partial class VBD : IComparable<VBD>
     {
 
-        public bool IsCDROM
+        public bool IsCDROM()
         {
-            get { return this.type == XenAPI.vbd_type.CD; }
+            return this.type == XenAPI.vbd_type.CD;
         }
 
         public override string ToString()
@@ -51,9 +51,9 @@ namespace XenAPI
         }
 
         // TODO: If we get floppy disk support extend the enum and fix this check to enable floppy disk drives in MultipleDvdIsoList.cs
-        public bool IsFloppyDrive
+        public bool IsFloppyDrive()
         {
-            get { return false; }
+            return false;
         }
 
         public VBD FindVMCDROM(VM vm)
@@ -61,8 +61,7 @@ namespace XenAPI
             if (vm == null)
                 return null;
 
-            List<VBD> vbds =
-                vm.Connection.ResolveAll(vm.VBDs).FindAll(delegate(VBD vbd) { return vbd.IsCDROM; });
+            List<VBD> vbds = vm.Connection.ResolveAll(vm.VBDs).FindAll(vbd => vbd.IsCDROM());
 
             if (vbds.Count > 0)
             {

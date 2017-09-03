@@ -44,39 +44,36 @@ namespace XenAPI
 
         public string IPAddressesAsString()
         {
-            var addresses = IPAddresses;
+            var addresses = IPAddresses();
             if (addresses.Count > 0)
                 return String.Join(", ", addresses.ToArray());
                 
             return Messages.IP_ADDRESS_UNKNOWN;
         }
 
-        public List<string> IPAddresses
+        public List<string> IPAddresses()
         {
-            get
+            VM vm = Connection.Resolve(this.VM);
+            if (vm != null && !vm.is_a_template)
             {
-                VM vm = Connection.Resolve(this.VM);
-                if (vm != null && !vm.is_a_template)
+                VM_guest_metrics vmGuestMetrics = Connection.Resolve(vm.guest_metrics);
+
+                if (vmGuestMetrics != null)
                 {
-                    VM_guest_metrics vmGuestMetrics = Connection.Resolve(vm.guest_metrics);
+                    // PR-1373 - VM_guest_metrics.networks is a dictionary of IP addresses in the format:
+                    // [["0/ip", <IPv4 address>], 
+                    //  ["0/ipv4/0", <IPv4 address>], ["0/ipv4/1", <IPv4 address>],
+                    //  ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
 
-                    if (vmGuestMetrics != null)
-                    {
-                        // PR-1373 - VM_guest_metrics.networks is a dictionary of IP addresses in the format:
-                        // [["0/ip", <IPv4 address>], 
-                        //  ["0/ipv4/0", <IPv4 address>], ["0/ipv4/1", <IPv4 address>],
-                        //  ["0/ipv6/0", <IPv6 address>], ["0/ipv6/1", <IPv6 address>]]
-
-                        return
-                            (from network in vmGuestMetrics.networks
-                             where network.Key.StartsWith(string.Format("{0}/ip", this.device))
-                             orderby network.Key
-                             select network.Value).Distinct().ToList();
-                    }
+                    return
+                    (from network in vmGuestMetrics.networks
+                        where network.Key.StartsWith(string.Format("{0}/ip", this.device))
+                        orderby network.Key
+                        select network.Value).Distinct().ToList();
                 }
-
-                return new List<string>();
             }
+
+            return new List<string>();
         }
 
         public string NetworkName()
@@ -85,7 +82,7 @@ namespace XenAPI
             Network network = Connection.Resolve(this.network);
             if (network != null)
             {
-                return network.Name;
+                return network.Name();
             }
             else
             {
@@ -137,22 +134,19 @@ namespace XenAPI
         /// Gets the kbps of a rate limited VIF.
         /// Will return the empty string if no qos_params have been set on the VIF.
         /// </summary>
-        public string LimitString
+        public string LimitString()
         {
-            get
+            string result = null;
+            if (qos_algorithm_params != null)
             {
-                string result = null;
-                if (qos_algorithm_params != null)
-                {
-                    if (qos_algorithm_params.ContainsKey(VIF.KBPS_QOS_PARAMS_KEY))
-                        result = qos_algorithm_params[VIF.KBPS_QOS_PARAMS_KEY];
-                }
-
-                if (result == null) result = "";
-
-                return result;
+                if (qos_algorithm_params.ContainsKey(VIF.KBPS_QOS_PARAMS_KEY))
+                    result = qos_algorithm_params[VIF.KBPS_QOS_PARAMS_KEY];
             }
 
+            if (result == null)
+                result = "";
+
+            return result;
         }
     }
 }

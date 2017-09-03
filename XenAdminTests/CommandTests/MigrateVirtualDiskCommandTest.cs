@@ -135,14 +135,14 @@ namespace XenAdminTests.CommandTests
         {
             DatabaseManager.ConnectionFor(dbName).Cache.VMs.ToList().ForEach(vm => VM.start(DatabaseManager.ConnectionFor(dbName).Session, vm.opaque_ref, false, false));
             DatabaseManager.ConnectionFor(dbName).LoadCache(DatabaseManager.ConnectionFor(dbName).Session);
-            Assert.IsTrue(DatabaseManager.ConnectionFor(dbName).Cache.VMs.All(vm => vm.IsRunning), "VMs are in a running state");
+            Assert.IsTrue(DatabaseManager.ConnectionFor(dbName).Cache.VMs.All(vm => vm.IsRunning()), "VMs are in a running state");
         }
 
         private void ShutdownAllVMs()
         {
             DatabaseManager.ConnectionFor(dbName).Cache.VMs.ToList().ForEach(vm => VM.hard_shutdown(DatabaseManager.ConnectionFor(dbName).Session, vm.opaque_ref));
             DatabaseManager.ConnectionFor(dbName).LoadCache(DatabaseManager.ConnectionFor(dbName).Session);
-            Assert.IsFalse(DatabaseManager.ConnectionFor(dbName).Cache.VMs.ToList().All(vm => vm.IsRunning), "VMs are in a shutdown state");
+            Assert.IsFalse(DatabaseManager.ConnectionFor(dbName).Cache.VMs.ToList().All(vm => vm.IsRunning()), "VMs are in a shutdown state");
         }
 
         private void ExecuteCommandCheckingReason(string expectedReason, VDI vdi)

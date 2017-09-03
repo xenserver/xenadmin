@@ -40,44 +40,38 @@ namespace XenAPI
 {
     public partial class PIF : IComparable<PIF>
     {
-        public override string Name
+        public override string Name()
         {
-            get
+            if (IsPhysical())
             {
-                if (IsPhysical)
-                {
-                    bool bond;
-                    string number = NICIdentifier(out bond);
-                    return string.Format(bond ? Messages.PIF_BOND : Messages.PIF_NIC, number);
-                }
-                else if (IsTunnelAccessPIF)
-                {
-                    // In the case of tunnel access PIFs, use the name of the corresponding transport PIF (CA-63296)
-                    Tunnel tunnel = Connection.Resolve(tunnel_access_PIF_of[0]);
-                    PIF transport_pif = Connection.Resolve(tunnel.transport_PIF);
-                    return transport_pif.Name;
-                }
-                else
-                {
-                    if (Connection == null)
-                        return "";
-                    VLAN vlan = Connection.Resolve(VLAN_master_of);
-                    if (vlan == null)
-                        return "";
-                    PIF slave = Connection.Resolve(vlan.tagged_PIF);
-                    if (slave == null)
-                        return "";
-                    return slave.Name;
-                }
+                bool bond;
+                string number = NICIdentifier(out bond);
+                return string.Format(bond ? Messages.PIF_BOND : Messages.PIF_NIC, number);
+            }
+            else if (IsTunnelAccessPIF())
+            {
+                // In the case of tunnel access PIFs, use the name of the corresponding transport PIF (CA-63296)
+                Tunnel tunnel = Connection.Resolve(tunnel_access_PIF_of[0]);
+                PIF transport_pif = Connection.Resolve(tunnel.transport_PIF);
+                return transport_pif.Name();
+            }
+            else
+            {
+                if (Connection == null)
+                    return "";
+                VLAN vlan = Connection.Resolve(VLAN_master_of);
+                if (vlan == null)
+                    return "";
+                PIF slave = Connection.Resolve(vlan.tagged_PIF);
+                if (slave == null)
+                    return "";
+                return slave.Name();
             }
         }
 
-        public PIF_metrics PIFMetrics
+        public PIF_metrics PIFMetrics()
         {
-            get
-            {
-                return (metrics == null || Connection == null) ? null : Connection.Resolve<PIF_metrics>(metrics);
-            }
+            return metrics == null || Connection == null ? null : Connection.Resolve(metrics);
         }
 
         // This is the name of the secondary management interface
@@ -123,23 +117,17 @@ namespace XenAPI
 
         public override string ToString()
         {
-            return Name;
+            return Name();
         }
 
-        public bool IsTunnelAccessPIF
+        public bool IsTunnelAccessPIF()
         {
-            get
-            {
-                return tunnel_access_PIF_of != null && tunnel_access_PIF_of.Count != 0;
-            }
+            return tunnel_access_PIF_of != null && tunnel_access_PIF_of.Count != 0;
         }
 
-        public bool IsPhysical
+        public bool IsPhysical()
         {
-            get
-            {
-                return VLAN == -1 && !IsTunnelAccessPIF;
-            }
+            return VLAN == -1 && !IsTunnelAccessPIF();
         }
 
         public override int CompareTo(PIF other)
@@ -153,15 +141,12 @@ namespace XenAPI
 
         public override bool Show(bool showHiddenVMs)
         {
-            return IsManaged && (showHiddenVMs || !IsHidden);
+            return IsManaged() && (showHiddenVMs || !IsHidden());
         }
 
-        public override bool IsHidden
+        public override bool IsHidden()
         {
-            get
-            {
-                return BoolKey(other_config, HIDE_FROM_XENCENTER);
-            }
+            return BoolKey(other_config, HIDE_FROM_XENCENTER);
         }
 
         /// <summary>
@@ -169,12 +154,9 @@ namespace XenAPI
         /// Note that this is the same as PIF.managed property for Clearwater SP1 and later hosts.
         /// And it is always true for older hosts, where the managed property is not available.
         /// </summary>
-        public bool IsManaged
+        public bool IsManaged()
         {
-            get
-            {
-                return Helpers.ClearwaterSp1OrGreater(Connection) ? managed : true;
-            }
+            return Helpers.ClearwaterSp1OrGreater(Connection) ? managed : true;
         }
 
         // Whether this PIF is a management interface in the XenCenter sense.
@@ -192,7 +174,7 @@ namespace XenAPI
                 return false;
 
             Network nw = Connection.Resolve(network);
-            return nw != null && !nw.IsGuestInstallerNetwork;
+            return nw != null && !nw.IsGuestInstallerNetwork();
         }
 
         // I lied slightly above. A secondary management interface in Boston and greater
@@ -213,186 +195,152 @@ namespace XenAPI
             return nw != null && nw.Show(showHiddenVMs);
         }
 
-        public string ManagementInterfaceNameOrUnknown
+        public string ManagementInterfaceNameOrUnknown()
         {
-            get
-            {
-                return management ? Messages.MANAGEMENT
-                    : string.IsNullOrEmpty(ManagementPurpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : ManagementPurpose;
-            }
+            return management ? Messages.MANAGEMENT
+                : string.IsNullOrEmpty(ManagementPurpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : ManagementPurpose;
         }
 
-        public bool IsBondSlave
+        public bool IsBondSlave()
         {
-            get { return BondSlaveOf != null; }
+            return BondSlaveOf() != null;
         }
 
         /// <summary>
         /// Whether this is a bond slave, and the bond master is plugged.
         /// </summary>
-        public bool IsInUseBondSlave
+        public bool IsInUseBondSlave()
         {
-            get
-            {
-                Bond bond = BondSlaveOf;
-                if (bond == null)
-                    return false;
-                PIF master = bond.Connection.Resolve(bond.master);
-                if (master == null)
-                    return false;
-                return master.currently_attached;
-            }
+            Bond bond = BondSlaveOf();
+            if (bond == null)
+                return false;
+            PIF master = bond.Connection.Resolve(bond.master);
+            if (master == null)
+                return false;
+            return master.currently_attached;
         }
 
         /// <summary>
         /// Returns the Bond of which this PIF is a slave, or null if it is not so.
         /// </summary>
-        public Bond BondSlaveOf
+        public Bond BondSlaveOf()
         {
-            get
-            {
-                return Connection == null ? null : Connection.Resolve(bond_slave_of);
-            }
+            return Connection == null ? null : Connection.Resolve(bond_slave_of);
         }
 
         /// <summary>
         /// Returns the Bond of which this PIF is a master, or null if it is not so.
         /// </summary>
-        public Bond BondMasterOf
+        public Bond BondMasterOf()
         {
-            get
-            {
-                return Connection == null || bond_master_of.Count == 0 ? null : Connection.Resolve(bond_master_of[0]);
-            }
+            return Connection == null || bond_master_of.Count == 0 ? null : Connection.Resolve(bond_master_of[0]);
         }
 
-        public string Speed
+        public string Speed()
         {
-            get
-            {
-                if (Connection == null)
-                    return Messages.HYPHEN;
-                PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
-                if (metrics == null)
-                    return Messages.HYPHEN;
-                return string.Format(Messages.NICPANEL_BIT_RATE, metrics.speed);
-            }
+            if (Connection == null)
+                return Messages.HYPHEN;
+            PIF_metrics pifMetrics = Connection.Resolve(this.metrics);
+            if (pifMetrics == null)
+                return Messages.HYPHEN;
+            return string.Format(Messages.NICPANEL_BIT_RATE, pifMetrics.speed);
         }
 
-        public bool IsBondNIC
+        public bool IsBondNIC()
         {
-            get
-            {
-                return bond_master_of.Count > 0;
-            }
+            return bond_master_of.Count > 0;
         }
 
-        public string Duplex
+        public string Duplex()
         {
-            get
-            {
-                if (Connection == null)
-                    return Messages.HYPHEN;
-                PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
-                if (metrics == null)
-                    return Messages.HYPHEN;
-                return metrics.duplex ? Messages.NICPANEL_FULL_DUPLEX : Messages.NICPANEL_HALF_DUPLEX;
-            }
+            if (Connection == null)
+                return Messages.HYPHEN;
+            PIF_metrics pifMetrics = Connection.Resolve(this.metrics);
+            if (pifMetrics == null)
+                return Messages.HYPHEN;
+            return pifMetrics.duplex ? Messages.NICPANEL_FULL_DUPLEX : Messages.NICPANEL_HALF_DUPLEX;
         }
 
-        public bool Carrier
+        public bool Carrier()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
-                PIF_metrics metrics = Connection.Resolve<PIF_metrics>(this.metrics);
-                if (metrics == null)
-                    return false;
-                return metrics.carrier;
-            }
+            if (Connection == null)
+                return false;
+            PIF_metrics pifMetrics = Connection.Resolve(this.metrics);
+            if (pifMetrics == null)
+                return false;
+            return pifMetrics.carrier;
         }
 
         /// <summary>
         /// Returns either the IP address of the PIF, DHCP or Unknown as appropriate
         /// </summary>
-        public string FriendlyIPAddress
+        public string FriendlyIPAddress()
         {
-            get
+            if (!string.IsNullOrEmpty(IP))
+                return IP;
+            switch (ip_configuration_mode)
             {
-                if (!string.IsNullOrEmpty(IP))
-                    return IP;
-                switch (ip_configuration_mode)
-                {
-                    case ip_configuration_mode.DHCP:
-                        return Messages.PIF_DHCP;
-                    default:
-                        return Messages.PIF_UNKNOWN;
-                }
+                case ip_configuration_mode.DHCP:
+                    return Messages.PIF_DHCP;
+                default:
+                    return Messages.PIF_UNKNOWN;
             }
         }
 
-        public string LinkStatusString
+        public string LinkStatusString()
         {
-            get
+            var linkStatus = LinkStatus();
+            switch (linkStatus)
             {
-                switch (LinkStatus)
-                {
-                    case LinkState.Connected:
-                        return Messages.CONNECTED;
-                    case LinkState.Disconnected:
-                        return Messages.DISCONNECTED;
-                    case LinkState.Unknown:
-                        return Messages.UNKNOWN;
-                }
-                return "-";
+                case LinkState.Connected:
+                    return Messages.CONNECTED;
+                case LinkState.Disconnected:
+                    return Messages.DISCONNECTED;
+                case LinkState.Unknown:
+                    return Messages.UNKNOWN;
             }
+            return "-";
         }
 
         public enum LinkState { Unknown, Connected, Disconnected };
-        public LinkState LinkStatus
+
+        public LinkState LinkStatus()
         {
-            get
+            if (IsTunnelAccessPIF())
             {
-                if (IsTunnelAccessPIF)
-                {
-                    Tunnel tunnel = Connection.Resolve(tunnel_access_PIF_of[0]);  // can only ever be the access PIF of one tunnel
-                    Dictionary<string, string> status = (tunnel == null ? null : tunnel.status);
-                    return (status != null && status.ContainsKey("active") && status["active"] == "true"
-                        ? LinkState.Connected : LinkState.Disconnected);
-                }
+                Tunnel tunnel = Connection.Resolve(tunnel_access_PIF_of[0]); // can only ever be the access PIF of one tunnel
+                Dictionary<string, string> status = (tunnel == null ? null : tunnel.status);
+                return (status != null && status.ContainsKey("active") && status["active"] == "true"
+                    ? LinkState.Connected : LinkState.Disconnected);
+            }
 
-                //if (!pif.IsPhysical && !poolwide)
-                //    return Messages.SPACED_HYPHEN;
+            //if (!pif.IsPhysical && !poolwide)
+            //    return Messages.SPACED_HYPHEN;
 
-                PIF_metrics metrics = PIFMetrics;
-                return metrics == null ? LinkState.Unknown :
-                            metrics.carrier ? LinkState.Connected :
-                                                        LinkState.Disconnected;
+            PIF_metrics pifMetrics = PIFMetrics();
+            return pifMetrics == null
+                ? LinkState.Unknown
+                : pifMetrics.carrier ? LinkState.Connected : LinkState.Disconnected;
+        }
+
+        public string IpConfigurationModeString()
+        {
+            switch (ip_configuration_mode)
+            {
+                case ip_configuration_mode.None:
+                    return Messages.PIF_NONE;
+                case ip_configuration_mode.DHCP:
+                    return Messages.PIF_DHCP;
+                case ip_configuration_mode.Static:
+                    return Messages.PIF_STATIC;
+                default:
+                    return Messages.PIF_UNKNOWN;
             }
         }
 
-        public string IpConfigurationModeString
+        public bool FCoECapable()
         {
-            get
-            {
-                switch (ip_configuration_mode)
-                {
-                    case ip_configuration_mode.None:
-                        return Messages.PIF_NONE;
-                    case ip_configuration_mode.DHCP:
-                        return Messages.PIF_DHCP;
-                    case ip_configuration_mode.Static:
-                        return Messages.PIF_STATIC;
-                    default:
-                        return Messages.PIF_UNKNOWN;
-                }
-            }
-        }
-
-        public bool FCoECapable
-        {
-            get { return capabilities.Any(capability => capability == "fcoe"); }
+            return capabilities.Any(capability => capability == "fcoe");
         }
     }
 }

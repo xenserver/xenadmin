@@ -97,7 +97,7 @@ namespace XenAdmin.Commands
             {
                 string newName = _newName;
                 Folders.FixupRelativePath(ref newName);
-                return newName != _folder.Name && !newName.Contains(";") && !newName.Contains("/"); // CA-29480
+                return newName != _folder.Name() && !newName.Contains(";") && !newName.Contains("/"); // CA-29480
             }
             return false;
         }

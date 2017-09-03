@@ -62,7 +62,7 @@ namespace XenAdmin.Commands
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             var actions = new List<AsyncAction>();
-            var liveHosts = selection.AsXenObjects<Host>().Where(h => h.IsLive);
+            var liveHosts = selection.AsXenObjects<Host>().Where(h => h.IsLive());
 
             foreach (Host host in liveHosts)
             {
@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            return selection.AllItemsAre<Host>() && selection.Any(item => ((Host)item.XenObject).IsLive);
+            return selection.AllItemsAre<Host>() && selection.Any(item => ((Host)item.XenObject).IsLive());
         }
 
         protected override string GetCantExecuteReasonCore(SelectedItem item)
@@ -85,7 +85,7 @@ namespace XenAdmin.Commands
             if (host == null)
                 return base.GetCantExecuteReasonCore(item);
 
-            if (!host.IsLive)
+            if (!host.IsLive())
                 return Messages.HOST_NOT_LIVE;
 
             return base.GetCantExecuteReasonCore(item);
@@ -113,7 +113,7 @@ namespace XenAdmin.Commands
                 List<Host> hosts = GetSelection().AsXenObjects<Host>();
 
                 return hosts.Count == 1
-                           ? string.Format(Messages.CONFIRM_RESTART_TOOLSTACK_ONE_SERVER, hosts[0].Name.Ellipsise(30))
+                           ? string.Format(Messages.CONFIRM_RESTART_TOOLSTACK_ONE_SERVER, hosts[0].Name().Ellipsise(30))
                            : Messages.CONFIRM_RESTART_TOOLSTACK_MANY_SERVERS;
             }
         }

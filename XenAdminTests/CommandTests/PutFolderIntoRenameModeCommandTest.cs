@@ -113,7 +113,7 @@ namespace XenAdminTests.CommandTests
                 {
                     VirtualTreeNode n = MainWindowWrapper.TreeView.SelectedNode;
                     Folder f = n == null ? null : n.Tag as Folder;
-                    return f != null && n.Text == newFolderName && f.Name == newFolderName && n.AllParentsAreExpanded;
+                    return f != null && n.Text == newFolderName && f.Name() == newFolderName && n.AllParentsAreExpanded;
                 }, "Couldn't find renamed folder.");
             }
         }

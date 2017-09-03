@@ -70,7 +70,7 @@ namespace XenAdmin.Actions
                 {
                     if (message.cls == cls.VMSS && message.obj_uuid == VMSS.uuid && messageCounter < 10)
                     {
-                        listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp, message.body, VMSS.Name));
+                        listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp, message.body, VMSS.Name()));
                         messageCounter++;
                     }
                     else if (messageCounter >= 10)
@@ -83,7 +83,7 @@ namespace XenAdmin.Actions
                 {
                     if (message.cls == cls.VMSS && message.obj_uuid == VMSS.uuid && message.timestamp > offset)
                     {
-                        listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp, message.body, VMSS.Name));
+                        listAlerts.Add(new PolicyAlert(message.priority, message.name, message.timestamp, message.body, VMSS.Name()));
                     }
 
                     /* since the messages are sorted on timestamp you need not scan the entire message list */

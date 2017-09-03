@@ -163,26 +163,26 @@ namespace XenAdmin.SettingsPanels
             ObjectName = Helpers.GetName(xenObjectCopy);
 
             VM vm = xenObjectCopy as VM;
-            if (vm != null && vm.DescriptionType == VM.VmDescriptionType.None)
+            if (vm != null && vm.DescriptionType() == VM.VmDescriptionType.None)
             {
                 lblDescription.Visible = false;
                 txtDescription.Visible = false;
                 lblDescrReadOnly.Visible = false;
                 txtDescrReadOnly.Visible = false;
             }
-            else if (vm != null && vm.DescriptionType == VM.VmDescriptionType.ReadOnly)
+            else if (vm != null && vm.DescriptionType() == VM.VmDescriptionType.ReadOnly)
             {
                 lblDescription.Visible = false;
                 txtDescription.Visible = false;
                 lblDescrReadOnly.Visible = true;
                 txtDescrReadOnly.Visible = true;
-                txtDescrReadOnly.Text = xenObjectCopy.Description;
+                txtDescrReadOnly.Text = xenObjectCopy.Description();
             }
             else
             {
                 lblDescription.Visible = true;
                 txtDescription.Visible = true;
-                txtDescription.Text = xenObjectCopy.Description;
+                txtDescription.Text = xenObjectCopy.Description();
                 lblDescrReadOnly.Visible = false;
                 txtDescrReadOnly.Visible = false;
                 saveDescription = true;
@@ -248,7 +248,7 @@ namespace XenAdmin.SettingsPanels
             get
             {
                 if (Helpers.GetName(xenObjectCopy) != this.ObjectName ||
-                    xenObjectCopy.Description != this.ObjectDescription)
+                    xenObjectCopy.Description() != this.ObjectDescription)
                     return true;
 
                 if (FolderChanged)
@@ -303,7 +303,7 @@ namespace XenAdmin.SettingsPanels
 
             if (ObjectName != "" && ObjectName != Helpers.GetName(xenObjectCopy))
                 xenObjectCopy.Set("name_label", ObjectName);
-            if (ObjectDescription != xenObjectCopy.Description)
+            if (ObjectDescription != xenObjectCopy.Description())
                 xenObjectCopy.Set("name_description", ObjectDescription);
 
             if (xenObjectCopy is Host)

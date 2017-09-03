@@ -75,7 +75,7 @@ namespace XenServerHealthCheck
                 {
                     try
                     {
-                        string opaqueref = Secret.get_by_uuid(session, pool.HealthCheckSettings.UploadTokenSecretUuid);
+                        string opaqueref = Secret.get_by_uuid(session, pool.HealthCheckSettings().UploadTokenSecretUuid);
                         uploadToken = Secret.get_value(session, opaqueref);
                     }
                     catch (Exception e)

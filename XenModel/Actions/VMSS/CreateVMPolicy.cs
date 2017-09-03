@@ -56,7 +56,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = string.Format(Messages.CREATING_VMSS, _record.Name);
+            Description = string.Format(Messages.CREATING_VMSS, _record.Name());
             RelatedTask = VMSS.async_create(Session, _record);
             PollToCompletion();
             var vmssref = new XenRef<VMSS>(Result);
@@ -65,7 +65,7 @@ namespace XenAdmin.Actions
             {
                 VM.set_snapshot_schedule(Session, selectedVM.opaque_ref, vmssref.opaque_ref);
             }
-            Description = string.Format(Messages.CREATED_VMSS, _record.Name);
+            Description = string.Format(Messages.CREATED_VMSS, _record.Name());
             PercentComplete = 60;
             if (_runNow)
                 VMSS.snapshot_now(Session, vmssref);

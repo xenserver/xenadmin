@@ -39,7 +39,7 @@ namespace XenAdmin.Actions
     public class DestroyHostAction : AsyncAction
     {
         public DestroyHostAction(Pool pool, Host hostToDestroy)
-            : base(pool.Connection, string.Format(Messages.DESTROY_HOST_ACTION_TITLE, hostToDestroy.Name))
+            : base(pool.Connection, string.Format(Messages.DESTROY_HOST_ACTION_TITLE, hostToDestroy.Name()))
         {
             this.Pool = pool;
             this.Host = hostToDestroy;
@@ -65,20 +65,20 @@ namespace XenAdmin.Actions
 
             while (i++ < max)
             {
-                if (!sr.HasPBDs)
+                if (!sr.HasPBDs())
                     return true;
 
                 Thread.Sleep(1000);
             }
 
-            return !sr.HasPBDs;
+            return !sr.HasPBDs();
         }
 
         protected override void Run()
         {
             Description = Messages.DESTROY_HOST_ACTION_DESC;
            
-            List<SR> srList = Connection.Cache.SRs.Where(sr => Host.Equals(sr.GetStorageHost()) && sr.IsLocalSR).ToList();
+            List<SR> srList = Connection.Cache.SRs.Where(sr => Host.Equals(sr.GetStorageHost()) && sr.IsLocalSR()).ToList();
             // number of SRs to forget + 1 host to destroy
             int n = srList.Count + 1;
             double p = 100.0 / n;

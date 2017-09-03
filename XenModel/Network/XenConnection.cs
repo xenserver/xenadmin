@@ -1307,10 +1307,13 @@ namespace XenAdmin.Network
 
                             task.Connected = true;
 
-                            FriendlyName =
-                                !string.IsNullOrEmpty(pool.Name) ? pool.Name :
-                                !string.IsNullOrEmpty(master.Name) ? master.Name :
-                                task.Hostname;
+                            string poolName = pool.Name();
+                            
+                            FriendlyName = !string.IsNullOrEmpty(poolName)
+                                ? poolName
+                                : !string.IsNullOrEmpty(master.Name())
+                                    ? master.Name()
+                                    : task.Hostname;
                         } // ConnectionsLock
 
                         // Remove any other (disconnected) entries for this server from the tree
@@ -1590,7 +1593,7 @@ namespace XenAdmin.Network
 
             string description;
             LastMasterHostname = Hostname;
-            string poolName = pool.Name;
+            string poolName = pool.Name();
             if (string.IsNullOrEmpty(poolName))
             {
                 LastConnectionFullName = HostnameWithPort;
@@ -1970,7 +1973,7 @@ namespace XenAdmin.Network
                     if (master.address == hostname)
                     {
                         // we have tried to connect to a slave that is a member of a pool we are already connected to.
-                        return pool.Name;
+                        return pool.Name();
                     }
                 }
             }
@@ -2098,8 +2101,7 @@ namespace XenAdmin.Network
             if (p == null)
                 return String.Format(Messages.ALREADY_CONNECTED, _this.Hostname);
 
-            return String.Format(Messages.SLAVE_ALREADY_CONNECTED,
-                _this.Hostname, p.Name);
+            return String.Format(Messages.SLAVE_ALREADY_CONNECTED, _this.Hostname, p.Name());
         }
     }
 

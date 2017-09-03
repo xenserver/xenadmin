@@ -150,8 +150,8 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
                 Cells.Add(_startDelayCell);;
                 
                 Settings = settings;
-                _nameCell.Value = Vm.Name;
-                _descriptionCell.Value = Vm.Description;
+                _nameCell.Value = Vm.Name();
+                _descriptionCell.Value = Vm.Description();
                 UpdateRow();
             }
 

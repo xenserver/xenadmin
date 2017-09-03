@@ -38,7 +38,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly XenRef<Pool_patch> _patchRef;
 
         public RemoveUpdateFile(Pool pool, Pool_patch patch)
-            : base(pool.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATE, patch.Name, pool.Name))
+            : base(pool.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATE, patch.Name(), pool.Name()))
         {
             this._patchRef = new XenRef<Pool_patch>(patch);
         }

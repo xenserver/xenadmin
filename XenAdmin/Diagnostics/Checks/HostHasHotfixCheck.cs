@@ -49,7 +49,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunCheck()
         {
-            if (!Host.IsLive)
+            if (!Host.IsLive())
                 return new HostNotLiveWarning(this, Host);
 
             var hotfix = hotfixFactory.Hotfix(Host);

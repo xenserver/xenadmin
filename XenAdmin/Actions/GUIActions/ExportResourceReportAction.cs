@@ -92,7 +92,7 @@ namespace XenAdmin.Actions
             if (Cancelling)
                 throw new CancelledException();
 
-            log.DebugFormat("Exporting resource list report from {1} to {2}", this.Connection.Cache.Pools[0].Name, _filename);
+            log.DebugFormat("Exporting resource list report from {1} to {2}", this.Connection.Cache.Pools[0].Name(), _filename);
 
             try
             {
@@ -108,7 +108,7 @@ namespace XenAdmin.Actions
             PercentComplete = 100;
             if (Cancelling || _exception is CancelledException)
             {
-                log.InfoFormat("Export of Pool {0} cancelled", this.Connection.Cache.Pools[0].Name);
+                log.InfoFormat("Export of Pool {0} cancelled", this.Connection.Cache.Pools[0].Name());
                 this.Description = Messages.ACTION_EXPORT_DESCRIPTION_CANCELLED;
 
                 log.DebugFormat("Deleting {0}", _filename);
@@ -125,7 +125,7 @@ namespace XenAdmin.Actions
             }
             else if (_exception != null)
             {
-                log.Warn(string.Format("Export of Pool {0} failed", this.Connection.Cache.Pools[0].Name), _exception);
+                log.Warn(string.Format("Export of Pool {0} failed", this.Connection.Cache.Pools[0].Name()), _exception);
                 log.DebugFormat("Progress of the action until exception: {0}", PercentComplete);
 
                 if (_exception is IOException)
@@ -148,7 +148,7 @@ namespace XenAdmin.Actions
             }
             else
             {
-                log.InfoFormat("Export of Pool {0} successful", this.Connection.Cache.Pools[0].Name);
+                log.InfoFormat("Export of Pool {0} successful", this.Connection.Cache.Pools[0].Name());
                 this.Description = Messages.ACTION_EXPORT_DESCRIPTION_SUCCESSFUL;
             }
         }
@@ -514,7 +514,7 @@ namespace XenAdmin.Actions
             string ParamValuesStr;
 
             ParamLabelsStr = "LBL_POOLINFO|";
-            ParamValuesStr = Messages.POOL + ":" + connection.Cache.Pools[0].Name + "|";
+            ParamValuesStr = Messages.POOL + ":" + connection.Cache.Pools[0].Name() + "|";
             ParamLabelsStr += "LBL_POOLUUID|";
             ParamValuesStr += Messages.UUID + ":" + connection.Cache.Pools[0].uuid + "|";
             //Host Infor
@@ -629,7 +629,7 @@ namespace XenAdmin.Actions
                 foreach (XenAPI.PBD pbd in PBDs)
                 {
                     SR sr = pbd.Connection.Resolve(pbd.SR);
-                    if(sr.IsLocalSR && sr.type.ToLower() == "lvm")
+                    if(sr.IsLocalSR() && sr.type.ToLower() == "lvm")
                     {
                         srSizeString += SRSizeString(sr) + ";";
                     }
@@ -643,7 +643,7 @@ namespace XenAdmin.Actions
                 
                 HostInfo buf = new HostInfo(host.name_label, host.address, host.uuid, cpu_usage,
                     host.IsMaster() ? Messages.YES : Messages.NO, network_usage, usage,
-                    Convert.ToString(host.Uptime), srSizeString, host.Description);
+                    Convert.ToString(host.Uptime()), srSizeString, host.Description());
                 m_Hosts.Add(buf);
                 PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
             }
@@ -660,7 +660,7 @@ namespace XenAdmin.Actions
                     throw new CancelledException();
 
                 // CA-218956 - Expose HIMN when showing hidden objects
-                if (network.IsGuestInstallerNetwork && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs)
+                if (network.IsGuestInstallerNetwork() && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs)
                 {
                     PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
                     continue;
@@ -670,13 +670,13 @@ namespace XenAdmin.Actions
                 string type;
                 if (Cancelling)
                     throw new CancelledException();
-                if (network.IsBond)
+                if (network.IsBond())
                     type = Messages.BOND;
-                else if (network.IsVLAN)
+                else if (network.IsVLAN())
                     type = Messages.EXTERNAL_NETWORK;
-                else if (pifs.Count != 0 && pifs[0].IsPhysical)
+                else if (pifs.Count != 0 && pifs[0].IsPhysical())
                     type = Messages.BUILTIN_NETWORK;
-                else if (pifs.Count != 0 && pifs[0].IsTunnelAccessPIF)
+                else if (pifs.Count != 0 && pifs[0].IsTunnelAccessPIF())
                     type = Messages.CHIN;
                 else if (pifs.Count == 0)
                     type = Messages.SINGLE_SERVER_PRIVATE_NETWORK;
@@ -694,9 +694,9 @@ namespace XenAdmin.Actions
 
                 NetworkInfo buf;
                 if (pifs.Count != 0)
-                    buf = new NetworkInfo(network.Name, Helpers.VlanString(pifs[0]), network.LinkStatusString, pifs[0].MAC, network.MTU.ToString(), type, location);
+                    buf = new NetworkInfo(network.Name(), Helpers.VlanString(pifs[0]), network.LinkStatusString(), pifs[0].MAC, network.MTU.ToString(), type, location);
                 else
-                    buf = new NetworkInfo(network.Name, Messages.HYPHEN, network.LinkStatusString, Messages.HYPHEN, network.MTU.ToString(), type, location);
+                    buf = new NetworkInfo(network.Name(), Messages.HYPHEN, network.LinkStatusString(), Messages.HYPHEN, network.MTU.ToString(), type, location);
                 
                 m_Networks.Add(buf);
                 
@@ -758,7 +758,7 @@ namespace XenAdmin.Actions
                 if (locationStr.Length == 0)
                     locationStr = Messages.HYPHEN;
 
-                SRInfo buf = new SRInfo(sr.Name, sr.uuid, sr.type, srSizeString, locationStr, sr.Description);
+                SRInfo buf = new SRInfo(sr.Name(), sr.uuid, sr.type, srSizeString, locationStr, sr.Description());
                 m_SRs.Add(buf);
                 PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
             }
@@ -778,7 +778,7 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
 
-                if (!vm.is_a_real_vm)
+                if (!vm.is_a_real_vm())
                 {
                     PercentComplete = Convert.ToInt32((++itemIndex) * baseIndex / itemCount);
                     continue;
@@ -810,10 +810,10 @@ namespace XenAdmin.Actions
                 foreach (XenRef<VBD> vbdRef in vm.VBDs)
                 {
                     var vbd = vm.Connection.Resolve(vbdRef);
-                    if (vbd != null && !vbd.IsCDROM && !vbd.IsFloppyDrive && vbd.bootable)
+                    if (vbd != null && !vbd.IsCDROM() && !vbd.IsFloppyDrive() && vbd.bootable)
                     {
                         VDI vdi = vm.Connection.Resolve(vbd.VDI);
-                        srInfo += vdi.name_label + ":" + vdi.SizeText + ";";
+                        srInfo += vdi.name_label + ":" + vdi.SizeText() + ";";
                     }
                 }
                 if (srInfo.Length == 0)
@@ -821,17 +821,17 @@ namespace XenAdmin.Actions
                 
                 if (vm.resident_on != null && !string.IsNullOrEmpty(vm.resident_on.opaque_ref) && !(vm.resident_on.opaque_ref.ToLower().Contains("null")))
                 {
-                    running_on = vm.Connection.Resolve(vm.resident_on).Name;
+                    running_on = vm.Connection.Resolve(vm.resident_on).Name();
                 }
 
                 string default_template_name = Messages.HYPHEN;
                 if(vm.other_config.ContainsKey("base_template_name"))
                     default_template_name = vm.other_config["base_template_name"];
 
-                VMInfo buf = new VMInfo(vm.Name, vm.uuid, PropertyAccessorHelper.vmCpuUsageStringByMetric(vm, MetricUpdater),
+                VMInfo buf = new VMInfo(vm.Name(), vm.uuid, PropertyAccessorHelper.vmCpuUsageStringByMetric(vm, MetricUpdater),
                     PropertyAccessorHelper.vmMemoryUsagePercentageStringByMetric(vm, MetricUpdater), srInfo, Convert.ToString(vm.VIFs.Count),
                     Convert.ToString(addresses), MacInfo, OSinfo, Convert.ToString(vm.power_state),
-                    Convert.ToString(vm.RunningTime), running_on, default_template_name, vm.Description);
+                    Convert.ToString(vm.RunningTime()), running_on, default_template_name, vm.Description());
                 
                 m_VMs.Add(buf);
 
@@ -859,7 +859,7 @@ namespace XenAdmin.Actions
                 string powerStatus = PropertyAccessorHelper.PGPUPowerUsageString(pGpu, MetricUpdater);
                 string utilisation = PropertyAccessorHelper.PGPUUtilisationString(pGpu, MetricUpdater);
                 string memInfo = PropertyAccessorHelper.PGPUMemoryUsageString(pGpu, MetricUpdater);
-                PGPUInfo buf = new PGPUInfo(pGpu.Name, pGpu.uuid, host.Name, pci.pci_id, utilisation,
+                PGPUInfo buf = new PGPUInfo(pGpu.Name(), pGpu.uuid, host.Name(), pci.pci_id, utilisation,
                     memInfo, temperature, powerStatus);
                 
                 m_PGPUs.Add(buf);
@@ -876,7 +876,7 @@ namespace XenAdmin.Actions
             foreach (XenAPI.VDI vdi in VDIs)
             {
                 XenAPI.SR sr = Connection.Resolve(vdi.SR);
-                VDIInfo buf = new VDIInfo(vdi.Name, vdi.uuid, Convert.ToString(vdi.type), vdi.SizeText, vdi.Description, sr.Name);
+                VDIInfo buf = new VDIInfo(vdi.Name(), vdi.uuid, Convert.ToString(vdi.type), vdi.SizeText(), vdi.Description(), sr.Name());
 
                 m_VDIs.Add(buf);
             }
@@ -1154,7 +1154,7 @@ namespace XenAdmin.Actions
             fs = new FileStream(_filename, FileMode.Create);
 
             //pool information part
-            items.Add(Messages.POOL + ":" + Connection.Cache.Pools[0].Name);
+            items.Add(Messages.POOL + ":" + Connection.Cache.Pools[0].Name());
             ComposeCSVRow(ref fs, ref items);
             items.Add(Messages.UUID + ":" + Connection.Cache.Pools[0].uuid);
             ComposeCSVRow(ref fs, ref items);

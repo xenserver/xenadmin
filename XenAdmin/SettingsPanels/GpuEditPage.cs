@@ -201,7 +201,7 @@ namespace XenAdmin.SettingsPanels
 
                     if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu)
                     {
-                        if (vgpuGroup.HasPassthrough)
+                        if (vgpuGroup.HasPassthrough())
                             currentGpuTuple = new GpuTuple(vgpuGroup, null, null); //GPU pass-through item
                     }
                     else
@@ -254,7 +254,7 @@ namespace XenAdmin.SettingsPanels
             {
                 if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu)
                 {
-                    if (gpu_group.HasPassthrough)
+                    if (gpu_group.HasPassthrough())
                         comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));  //GPU pass-through item
                 }
                 else
@@ -264,7 +264,7 @@ namespace XenAdmin.SettingsPanels
 
                     var disabledTypes = allTypes.FindAll(t => !enabledTypes.Exists(e => e.opaque_ref == t.opaque_ref));
 
-                    if (gpu_group.HasVGpu)
+                    if (gpu_group.HasVGpu())
                     {
                         allTypes.Sort();
                         allTypes.Reverse();

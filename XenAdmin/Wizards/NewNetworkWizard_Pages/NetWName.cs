@@ -115,7 +115,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             List<string> result = new List<string>();
             foreach (XenAPI.Network TheNetwork in connection.Cache.Networks)
             {
-                result.Add(TheNetwork.Name);
+                result.Add(TheNetwork.Name());
             }
             return result;
         }

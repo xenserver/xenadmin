@@ -41,37 +41,27 @@ namespace XenAPI
 {
     public partial class VMSS 
     {
-        public bool is_running
-        {
-            get { return false; }
-        }
-
-        public List<PolicyAlert> PolicyAlerts
-        {
-            get { return Alerts; }
-        }
-
         public DateTime GetNextRunTime()
         {
             var time = Host.get_server_localtime(Connection.Session, Helpers.GetMaster(Connection).opaque_ref);
 
             if (frequency == vmss_frequency.hourly)
             {
-                return GetHourlyDate(time, Convert.ToInt32(backup_schedule_min));
+                return GetHourlyDate(time, Convert.ToInt32(BackupScheduleMin()));
             }
             if (frequency == vmss_frequency.daily)
             {
 
-                var hour = Convert.ToInt32(backup_schedule_hour);
-                var min = Convert.ToInt32(backup_schedule_min);
+                var hour = Convert.ToInt32(BackupScheduleHour());
+                var min = Convert.ToInt32(BackupScheduleMin());
                 return GetDailyDate(time, min, hour);
 
             }
             if (frequency == vmss_frequency.weekly)
             {
-                var hour = Convert.ToInt32(backup_schedule_hour);
-                var min = Convert.ToInt32(backup_schedule_min);
-                return GetWeeklyDate(time, hour, min, new List<DayOfWeek>(DaysOfWeekBackup));
+                var hour = Convert.ToInt32(BackupScheduleHour());
+                var min = Convert.ToInt32(BackupScheduleMin());
+                return GetWeeklyDate(time, hour, min, new List<DayOfWeek>(DaysOfWeekBackup()));
             }
             return new DateTime();
 
@@ -128,12 +118,9 @@ namespace XenAPI
             return (new DateTime(time.Year, time.Month, time.Day, hour, min, 0)).AddDays(daysOfDifference);
         }
 
-        public IEnumerable<DayOfWeek> DaysOfWeekBackup
+        public IEnumerable<DayOfWeek> DaysOfWeekBackup()
         {
-            get
-            {
-                return GetDaysFromDictionary(schedule);
-            }
+            return GetDaysFromDictionary(schedule);
         }
 
         private static IEnumerable<DayOfWeek> GetDaysFromDictionary(Dictionary<string, string> dictionary)
@@ -167,41 +154,31 @@ namespace XenAPI
             return "";
         }
 
-        public override string Name
+        public override string Name()
         {
-            get { return name_label; }
+            return name_label;
         }
 
-        public override string Description
+        public override string Description()
         {
-            get { return name_description; }
+            return name_description;
         }
 
-        public string backup_schedule_min
+        public string BackupScheduleMin()
         {
-            get
-            {
-                return TryGetKey(schedule, "min");
-            }
+            return TryGetKey(schedule, "min");
         }
 
-        public string backup_schedule_hour
+        public string BackupScheduleHour()
         {
-            get
-            {
-
-                return TryGetKey(schedule, "hour");
-            }
+            return TryGetKey(schedule, "hour");
         }
 
-        public string backup_schedule_days
+        public string BackupScheduleDays()
         {
-            get
-            {
-
-                return TryGetKey(schedule, "days");
-            }
+            return TryGetKey(schedule, "days");
         }
+
         private List<PolicyAlert> _alerts = new List<PolicyAlert>();
 
         public List<PolicyAlert> Alerts
@@ -213,21 +190,18 @@ namespace XenAPI
             set { _alerts = value; }
         }
 
-        public string LastResult
+        public string LastResult()
         {
-            get
+            if (_alerts.Count > 0)
             {
-                if (_alerts.Count > 0)
-                {
-                    var listRecentAlerts = new List<PolicyAlert>(_alerts);
-                    listRecentAlerts.Sort((x, y) => y.Time.CompareTo(x.Time));
-                    if (listRecentAlerts[0].Type == "info")
-                        return Messages.VMSS_SUCCEEDED;
+                var listRecentAlerts = new List<PolicyAlert>(_alerts);
+                listRecentAlerts.Sort((x, y) => y.Time.CompareTo(x.Time));
+                if (listRecentAlerts[0].Type == "info")
+                    return Messages.VMSS_SUCCEEDED;
 
-                    return Messages.FAILED;
-                }
-                return Messages.NOT_YET_RUN;
+                return Messages.FAILED;
             }
+            return Messages.NOT_YET_RUN;
         }
     }
 }

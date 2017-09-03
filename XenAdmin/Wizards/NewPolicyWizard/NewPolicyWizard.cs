@@ -141,7 +141,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             var sb = new StringBuilder();
             foreach (var selectedVM in selectedVMs)
             {
-                sb.Append(selectedVM.Name);
+                sb.Append(selectedVM.Name());
                 sb.Append(", ");
             }
             if (sb.Length > 2)

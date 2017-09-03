@@ -58,7 +58,7 @@ namespace XenAdmin.Dialogs
             if (checkBox1.Checked)
             {
                 // User clicked 'ignore': set flag in VM.
-                log.DebugFormat("Setting IgnoreExcessiveVcpus flag to true for VM {0}", vm.Name);
+                log.DebugFormat("Setting IgnoreExcessiveVcpus flag to true for VM {0}", vm.Name());
 
                 VM copyVM = (VM)vm.Clone();
                 copyVM.IgnoreExcessiveVcpus = true;

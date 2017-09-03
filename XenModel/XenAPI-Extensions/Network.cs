@@ -45,72 +45,64 @@ namespace XenAPI
         public const long MTU_MAX = 9216;
 
 
-        public override string Description
+        public override string Description()
         {
-            get
-            {
-                return name_description;
-            }
+            return name_description;
         }
+
         /// <returns>A friendly name for the network.</returns>
-        public override string Name
+        public override string Name()
         {
-            get
+            // Return the name_label, if its been changed by the user, or Network n where n is the
+            // device number otherwise.  Take the device from the pool master by default, or from
+            // the first one we find otherwise.  If it's not attached anywhere, then give up and
+            // return the name_label, which will be in the default form.
+
+            if (name_label == "Host internal management network")
+                return Messages.HOST_INTERNAL_MANAGEMENT_NETWORK;
+
+            if (!name_label.StartsWith("Network associated with ") &&
+                !name_label.StartsWith("Pool-wide network associated with "))
             {
-                // Return the name_label, if its been changed by the user, or Network n where n is the
-                // device number otherwise.  Take the device from the pool master by default, or from
-                // the first one we find otherwise.  If it's not attached anywhere, then give up and
-                // return the name_label, which will be in the default form.
+                return name_label;
+            }
 
-                if (name_label == "Host internal management network")
-                    return Messages.HOST_INTERNAL_MANAGEMENT_NETWORK;
+            Pool pool = Helpers.GetPoolOfOne(Connection);
+            if (pool == null)
+                return name_label;
 
-                if (!name_label.StartsWith("Network associated with ") &&
-                    !name_label.StartsWith("Pool-wide network associated with "))
-                {
-                    return name_label;
-                }
+            string master_ref = pool.master.opaque_ref;
 
-                Pool pool = Helpers.GetPoolOfOne(Connection);
-                if (pool == null)
-                    return name_label;
-
-                string master_ref = pool.master.opaque_ref;
-
-                foreach (PIF pif in Connection.ResolveAll(PIFs))
-                {
-                    if (pif.host.opaque_ref == master_ref)
-                    {
-                        return PIFName(pif);
-                    }
-                }
-
-                foreach (PIF pif in Connection.ResolveAll(PIFs))
+            foreach (PIF pif in Connection.ResolveAll(PIFs))
+            {
+                if (pif.host.opaque_ref == master_ref)
                 {
                     return PIFName(pif);
                 }
-
-                return name_label;
             }
+
+            foreach (PIF pif in Connection.ResolveAll(PIFs))
+            {
+                return PIFName(pif);
+            }
+
+            return name_label;
         }
 
-        public bool AllHostsCanSeeNetwork
+        public bool AllHostsCanSeeNetwork()
         {
-            get
+            foreach (Host host in Connection.Cache.Hosts)
             {
-                foreach (Host host in Connection.Cache.Hosts)
-                {
-                    if (!host.CanSeeNetwork(this))
-                        return false;
-                }
-
-                return true;
+                if (!host.CanSeeNetwork(this))
+                    return false;
             }
+
+            return true;
         }
 
         public override string ToString()
         {
-            return Name;
+            return Name();
         }
 
         private string PIFName(PIF pif)
@@ -141,7 +133,7 @@ namespace XenAPI
         public override bool Show(bool showHiddenVMs)
         {
                 // CA-218956 - Expose HIMN when showing hidden objects
-                if (IsGuestInstallerNetwork && !showHiddenVMs)
+                if (IsGuestInstallerNetwork() && !showHiddenVMs)
                     return false;
 
                 if (!ShowAllPifs(showHiddenVMs))
@@ -150,94 +142,73 @@ namespace XenAPI
                 if (showHiddenVMs)
                     return true;
 
-                if (IsSlave)
+                if (IsSlave())
                     return false;
 
-                return !IsHidden;
+                return !IsHidden();
             
         }
 
         /// <summary>
         /// Returns whether the other_config.HideFromXenCenter flag is set to true.
         /// </summary>
-        public override bool IsHidden
+        public override bool IsHidden()
         {
-            get
-            {
-                return BoolKey(other_config, HIDE_FROM_XENCENTER); 
-            }
+            return BoolKey(other_config, HIDE_FROM_XENCENTER);
         }
 
-        public bool CreateInProgress
+        public bool CreateInProgress()
         {
-            get
-            {
-                return BoolKey(other_config, CREATE_IN_PROGRESS);
-            }
+            return BoolKey(other_config, CREATE_IN_PROGRESS);
         }
 
-        public bool IsGuestInstallerNetwork
+        public bool IsGuestInstallerNetwork()
         {
-            get
-            {
-                return BoolKey(other_config, "is_guest_installer_network");
-            }
+            return BoolKey(other_config, "is_guest_installer_network");
         }
 
         /// <summary>
         /// Return true if the given network represents a bond, i.e. it has a PIF with
         /// IsBondNIC == true.
         /// </summary>
-        public bool IsBond
+        public bool IsBond()
         {
-            get
-            {
-                return TheBonds.Count > 0;
-            }
+            return TheBonds().Count > 0;
         }
 
-        public List<XenRef<Bond>> TheBonds
+        public List<XenRef<Bond>> TheBonds()
         {
-            get
+            var ans = new List<XenRef<Bond>>();
+            foreach (PIF pif in Connection.ResolveAll(PIFs))
             {
-                var ans = new List<XenRef<Bond>>();
-                foreach (PIF pif in Connection.ResolveAll(PIFs))
-                {
-                    if (pif.IsBondNIC)
-                        ans.Add(pif.bond_master_of[0]);
-                }
-                return ans;
+                if (pif.IsBondNIC())
+                    ans.Add(pif.bond_master_of[0]);
             }
+            return ans;
         }
 
-        public bool IsSlave
+        public bool IsSlave()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
-                foreach (PIF pif in Connection.ResolveAll(PIFs))
-                {
-                    if (pif.IsBondSlave)
-                        return true;
-                }
+            if (Connection == null)
                 return false;
+            foreach (PIF pif in Connection.ResolveAll(PIFs))
+            {
+                if (pif.IsBondSlave())
+                    return true;
             }
+            return false;
         }
 
-        public bool IsInUseBondSlave
+        public bool IsInUseBondSlave()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
-                foreach (PIF pif in Connection.ResolveAll(PIFs))
-                {
-                    if (pif.IsInUseBondSlave)
-                        return true;
-                }
+            if (Connection == null)
                 return false;
+            foreach (PIF pif in Connection.ResolveAll(PIFs))
+            {
+                if (pif.IsInUseBondSlave())
+                    return true;
             }
+            return false;
         }
 
         private bool ShowAllPifs(bool showHiddenVMs)
@@ -255,83 +226,70 @@ namespace XenAPI
             return true;
         }
 
-        public bool HasActiveVIFs
+        public bool HasActiveVIFs()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
-                foreach (VIF vif in Connection.ResolveAll(VIFs))
-                {
-                    if (vif.currently_attached)
-                        return true;
-                }
+            if (Connection == null)
                 return false;
+            foreach (VIF vif in Connection.ResolveAll(VIFs))
+            {
+                if (vif.currently_attached)
+                    return true;
             }
+            return false;
         }
 
         /// <summary>
         /// Do not use for new networks, perform checks by hand:
         /// No jumbo frames on CHINs
         /// </summary>
-        public bool CanUseJumboFrames
+        public bool CanUseJumboFrames()
         {
-            get 
-            {
-                if (Connection == null)
-                    return false;
+            if (Connection == null)
+                return false;
 
-                // not supported on CHINs
-                if (Connection.ResolveAll<PIF>(PIFs).Find(delegate(PIF p) { return p.IsTunnelAccessPIF; }) != null)
-                    return false;
+            // not supported on CHINs
+            if (Connection.ResolveAll(PIFs).Find(p => p.IsTunnelAccessPIF()) != null)
+                return false;
 
-                return true;
-            }
+            return true;
         }
 
-        public string LinkStatusString
+        public string LinkStatusString()
         {
-            get
+            if (PIFs.Count == 0)
+                return Messages.NONE;
+
+            List<PIF.LinkState> states = new List<PIF.LinkState>();
+            foreach (PIF p in Connection.ResolveAll<PIF>(PIFs))
+                states.Add(p.LinkStatus());
+
+            bool Connected = states.Contains(PIF.LinkState.Connected);
+            bool Disconnected = states.Contains(PIF.LinkState.Disconnected);
+            bool Unknown = states.Contains(PIF.LinkState.Unknown);
+
+            if (Connected)
             {
-                if (PIFs.Count == 0)
-                    return Messages.NONE;
-
-                List<PIF.LinkState> states = new List<PIF.LinkState>();
-                foreach (PIF p in Connection.ResolveAll<PIF>(PIFs))
-                    states.Add(p.LinkStatus);
-
-                bool Connected = states.Contains(PIF.LinkState.Connected);
-                bool Disconnected = states.Contains(PIF.LinkState.Disconnected);
-                bool Unknown = states.Contains(PIF.LinkState.Unknown);
-
-                if (Connected)
-                {
-                    if (Disconnected || Unknown)
-                        return Messages.PARTIALLY_CONNECTED;
-                    else
-                        return Messages.CONNECTED;
-                }
-                else if (Disconnected)
-                {
-                    // "Partially disconnected" would a bit confusing as it might seem imply a known connected
-                    // PIF exists - go with Unknown if we just have d/c and unknown
-                    if (Unknown)
-                        return Messages.UNKNOWN;
-                    else
-                        return Messages.DISCONNECTED;
-                }
+                if (Disconnected || Unknown)
+                    return Messages.PARTIALLY_CONNECTED;
                 else
-                    return Messages.UNKNOWN;
-
+                    return Messages.CONNECTED;
             }
+            else if (Disconnected)
+            {
+                // "Partially disconnected" would a bit confusing as it might seem imply a known connected
+                // PIF exists - go with Unknown if we just have d/c and unknown
+                if (Unknown)
+                    return Messages.UNKNOWN;
+                else
+                    return Messages.DISCONNECTED;
+            }
+            else
+                return Messages.UNKNOWN;
         }
 
-        public bool IsVLAN
+        public bool IsVLAN()
         {
-            get
-            {
-                return Connection.ResolveAll(PIFs).Find(pif => pif.VLAN >= 0) != null;
-            }
+            return Connection.ResolveAll(PIFs).Find(pif => pif.VLAN >= 0) != null;
         }
 
 

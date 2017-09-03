@@ -108,7 +108,7 @@ namespace XenAdmin.Commands
 
             private bool CanExecute(Host host)
             {
-                return host != null && host.Connection != null && host.Connection.IsConnected && Helpers.GetPool(host.Connection) == null && !host.RestrictPooling;
+                return host != null && host.Connection != null && host.Connection.IsConnected && Helpers.GetPool(host.Connection) == null && !Host.RestrictPooling(host);
             }
 
             public override string MenuText
@@ -119,7 +119,7 @@ namespace XenAdmin.Commands
                     {
                         Host host = item.XenObject as Host;
 
-                        if (host != null && host.Connection != null && host.Connection.IsConnected && Helpers.GetPool(host.Connection) == null && host.RestrictPooling)
+                        if (host != null && host.Connection != null && host.Connection.IsConnected && Helpers.GetPool(host.Connection) == null && Host.RestrictPooling(host))
                         {
                             return Messages.HOST_MENU_ADD_TO_POOL_LICENSE_RESTRICTION;
                         }

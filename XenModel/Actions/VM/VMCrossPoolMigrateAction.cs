@@ -80,13 +80,13 @@ namespace XenAdmin.Actions.VMActions
         public static string GetTitle(VM vm, Host toHost, bool copy)
         {
             if (copy)
-                return string.Format(Messages.ACTION_VM_CROSS_POOL_COPY_TITLE, vm.Name, toHost.Name);
+                return string.Format(Messages.ACTION_VM_CROSS_POOL_COPY_TITLE, vm.Name(), toHost.Name());
 
             Host residentOn = vm.Connection.Resolve(vm.resident_on);
             
             return residentOn == null
-                ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.Name, toHost.Name)
-                : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name, Helpers.GetName(residentOn), toHost.Name);
+                ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.Name(), toHost.Name())
+                : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name(), Helpers.GetName(residentOn), toHost.Name());
         }
 
         protected override void Run()
@@ -112,7 +112,7 @@ namespace XenAdmin.Actions.VMActions
             catch (CancelledException)
             {
                 Description = string.Format(copy ? Messages.ACTION_VM_CROSS_POOL_COPY_CANCELLED : Messages.ACTION_VM_MIGRATE_CANCELLED, 
-                                            VM.Name);
+                                            VM.Name());
                 throw;
             }
             catch (Failure ex)

@@ -63,7 +63,7 @@ namespace XenAdmin.Controls.GPU
                 vms[vgpu] = vgpu.Connection.Resolve(vgpu.VM);
 
             maxCapacity = 1;
-            if (!Helpers.FeatureForbidden(pGPU, Host.RestrictVgpu) && pGPU.HasVGpu && pGPU.supported_VGPU_max_capacities != null)
+            if (!Helpers.FeatureForbidden(pGPU, Host.RestrictVgpu) && pGPU.HasVGpu() && pGPU.supported_VGPU_max_capacities != null)
             {
                 foreach (var n in pGPU.supported_VGPU_max_capacities.Values)
                 {
@@ -102,7 +102,7 @@ namespace XenAdmin.Controls.GPU
                 {
                     var vGpuType = PGPU.Connection.Resolve(vgpu.type);
 
-                    DrawSegment(g, segmentLength, vm.Name, vGpuType != null ? vGpuType.model_name : "",
+                    DrawSegment(g, segmentLength, vm.Name(), vGpuType != null ? vGpuType.model_name : "",
                         GpuShinyBarColors.GpuShinyBar_VMs[i++ % GpuShinyBarColors.GpuShinyBar_VMs.Length],
                         ref left);
                 }

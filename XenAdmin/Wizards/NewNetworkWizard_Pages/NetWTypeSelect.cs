@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
             Pool pool = Helpers.GetPoolOfOne(connection);
             labelCHIN.Visible = rbtnCHIN.Visible = !HiddenFeatures.CrossServerPrivateNetworkHidden;
-            if (!pool.vSwitchController)
+            if (!pool.vSwitchController())
             {
                 rbtnCHIN.Checked = false;
                 rbtnCHIN.Enabled = labelCHIN.Enabled = false;

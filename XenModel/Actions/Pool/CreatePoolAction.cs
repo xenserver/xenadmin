@@ -57,7 +57,7 @@ namespace XenAdmin.Actions
         /// <param name="getAdCredentials"></param>
         public CreatePoolAction(Host master, List<Host> slaves, string name, string description, Func<Host, AdUserAndPassword> getAdCredentials,
             Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Action<List<LicenseFailure>, string> doOnLicensingFailure)
-            : base(master.Connection, string.Format(Messages.CREATING_NAMED_POOL_WITH_MASTER, name, master.Name),
+            : base(master.Connection, string.Format(Messages.CREATING_NAMED_POOL_WITH_MASTER, name, master.Name()),
             getAdCredentials, acceptNTolChanges, doOnLicensingFailure)
         {
             System.Diagnostics.Trace.Assert(master != null);
@@ -123,7 +123,7 @@ namespace XenAdmin.Actions
 
             foreach (Host slave in _slaves)
             {
-                log.InfoFormat("Adding member {0}", slave.Name);
+                log.InfoFormat("Adding member {0}", slave.Name());
                 int lo = (int)(i2 * p2);
                 int hi = (int)((i2 + 1) * p2);
                 // RBAC: We have forced identical AD configs, but this will fail unless both slave-to-be and master sessions have the correct role.
@@ -132,7 +132,7 @@ namespace XenAdmin.Actions
                 PollToCompletion(lo, hi);
                 i2++;
 
-                log.InfoFormat("Dropping connection to {0}", slave.Name);
+                log.InfoFormat("Dropping connection to {0}", slave.Name());
                 slave.Connection.EndConnect();
                 // EndConnect will clear the cache itself, but on a background thread. To prevent a race between the event handlers 
                 // being removed with the connection, and the final cache clear events we explicitly call cache clear once more before

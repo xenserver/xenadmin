@@ -136,7 +136,7 @@ namespace XenAdmin.Commands
             {
                 return base.GetCantExecuteReasonCore(item);
             }
-            if (sr.IsDetached)
+            if (sr.IsDetached())
             {
                 return Messages.SR_DETACHED;
             }
@@ -144,7 +144,7 @@ namespace XenAdmin.Commands
             {
                 return Messages.SR_HAS_RUNNING_VMS;
             }
-            if (!sr.CanCreateWithXenCenter)
+            if (!sr.CanCreateWithXenCenter())
             {
                 return Messages.SR_CANNOT_BE_DETACHED_WITH_XC;
             }

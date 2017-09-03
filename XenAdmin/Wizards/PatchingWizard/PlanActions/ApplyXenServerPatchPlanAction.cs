@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly string masterUuid;
 
         public ApplyXenServerPatchPlanAction(Host host, XenServerPatch xenServerPatch, List<PoolPatchMapping> mappings)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name))
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name()))
         {
             this.host = host;
             this.xenServerPatch = xenServerPatch;

@@ -40,7 +40,7 @@ namespace XenAdmin.Actions
         private readonly PVS_site pvsSite;
 
         public DeletePvsSiteAction(PVS_site pvsSite)
-            : base(pvsSite.Connection, string.Format(Messages.ACTION_DELETE_PVS_SITE_TITLE, pvsSite.Name.Ellipsise(50)),
+            : base(pvsSite.Connection, string.Format(Messages.ACTION_DELETE_PVS_SITE_TITLE, pvsSite.Name().Ellipsise(50)),
                     Messages.ACTION_DELETE_PVS_SITE_DESCRIPTION, false)
         {
             System.Diagnostics.Trace.Assert(pvsSite != null);

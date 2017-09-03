@@ -42,7 +42,7 @@ namespace XenAdmin.Actions
         private readonly Pool_patch patch;
 
         public PoolPatchCleanAction(Pool pool, Pool_patch patch, bool suppressHistory)
-            : base(pool.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATE, patch.Name, pool.Name), suppressHistory)
+            : base(pool.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATE, patch.Name(), pool.Name()), suppressHistory)
         {
             this.patch = patch;
             if (patch == null)
@@ -56,7 +56,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            this.Description = string.Format(Messages.REMOVING_UPDATE, patch.Name);
+            this.Description = string.Format(Messages.REMOVING_UPDATE, patch.Name());
             List<Pool_patch> poolPatches = new List<Pool_patch>(Connection.Cache.Pool_patches);
             var poolPatch = poolPatches.Find(delegate(Pool_patch otherPatch)
             {
@@ -67,7 +67,7 @@ namespace XenAdmin.Actions
             {
                 Pool_patch.pool_clean(Session, poolPatch.opaque_ref);
             }
-            Description = String.Format(Messages.REMOVED_UPDATE, patch.Name);
+            Description = String.Format(Messages.REMOVED_UPDATE, patch.Name());
         }
     }
 }

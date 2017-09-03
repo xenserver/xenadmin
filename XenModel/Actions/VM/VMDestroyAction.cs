@@ -45,7 +45,7 @@ namespace XenAdmin.Actions.VMActions
         private List<VM> _deleteSnapshots;
 
         public VMDestroyAction(VM vm, List<VBD> deleteDisks, List<VM> deleteSnapshots)
-            : base(vm.Connection, String.Format(Messages.ACTION_VM_DESTROYING_TITLE, vm.Name, vm.Home() == null ? Helpers.GetName(vm.Connection) : Helpers.GetName(vm.Home())))
+            : base(vm.Connection, String.Format(Messages.ACTION_VM_DESTROYING_TITLE, vm.Name(), vm.Home() == null ? Helpers.GetName(vm.Connection) : Helpers.GetName(vm.Home())))
         {
             VM = vm;
             Host = vm.Home();

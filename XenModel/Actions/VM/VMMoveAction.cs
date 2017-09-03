@@ -59,7 +59,7 @@ namespace XenAdmin.Actions.VMActions
         }
 
         public VMMoveAction(VM vm, SR sr, Host host, string namelabel)
-            : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING_TITLE, vm.Name, namelabel, sr.NameWithoutHost))
+            : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING_TITLE, vm.Name(), namelabel, sr.NameWithoutHost()))
         {
             this.Description = Messages.ACTION_PREPARING;
             this.VM = vm;
@@ -153,7 +153,7 @@ namespace XenAdmin.Actions.VMActions
             }
             catch (CancelledException)
             {
-                this.Description = string.Format(Messages.MOVE_CANCELLED, VM.Name);
+                this.Description = string.Format(Messages.MOVE_CANCELLED, VM.Name());
                 throw;
             }
             this.Description = Messages.MOVED;

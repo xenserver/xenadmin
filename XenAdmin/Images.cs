@@ -320,7 +320,7 @@ namespace XenAdmin
 
         public static Icons GetIconFor(VM vm)
         {
-            bool disabled = vm.IsHidden;
+            bool disabled = vm.IsHidden();
 
             if (vm.is_a_snapshot)
             {
@@ -340,13 +340,13 @@ namespace XenAdmin
                 }
             }
 
-            if (vm.is_a_template && vm.DefaultTemplate)
+            if (vm.is_a_template && vm.DefaultTemplate())
                 return disabled ? Icons.TemplateDisabled : Icons.Template;
 
-            if (vm.is_a_template && !vm.DefaultTemplate)
+            if (vm.is_a_template && !vm.DefaultTemplate())
                 return disabled ? Icons.TemplateDisabled : Icons.TemplateUser;
 
-            if (!vm.ExistsOnServer)
+            if (!vm.ExistsOnServer())
                 return disabled ? Icons.VmStoppedDisabled : Icons.VmStopped;
 
             if (vm.current_operations.ContainsValue(vm_operations.migrate_send))
@@ -385,11 +385,11 @@ namespace XenAdmin
 
         public static Icons GetIconFor(SR sr)
         {
-            if (!sr.HasPBDs || sr.IsHidden)
+            if (!sr.HasPBDs() || sr.IsHidden())
             {
                 return Icons.StorageDisabled;
             }
-            else if (sr.IsDetached || sr.IsBroken() || !sr.MultipathAOK)
+            else if (sr.IsDetached() || sr.IsBroken() || !sr.MultipathAOK())
             {
                 return Icons.StorageBroken;
             }
@@ -411,7 +411,7 @@ namespace XenAdmin
 
             if (host_is_live)
             {
-                if (host.HasCrashDumps)
+                if (host.HasCrashDumps())
                 {
                     return Icons.HostHasCrashDumps;
                 }
@@ -445,7 +445,7 @@ namespace XenAdmin
         public static Icons GetIconFor(Pool pool)
         {
             return pool.Connection.IsConnected
-                       ? pool.IsPoolFullyUpgraded
+                       ? pool.IsPoolFullyUpgraded()
                              ? Icons.PoolConnected
                              : Icons.PoolNotFullyUpgraded
                        : Icons.HostDisconnected;

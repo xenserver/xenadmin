@@ -40,67 +40,54 @@ namespace XenAPI
 {
     public partial class VDI : IComparable<VDI>, IEquatable<VDI>
     {
-        public override string Name
+        public override string Name()
         {
-            get
+            if (Connection != null)
             {
-                if (Connection != null)
+                SR sr = Connection.Resolve(this.SR);
+                if (sr != null)
                 {
-                    SR sr = Connection.Resolve(this.SR);
-                    if (sr != null)
-                    {
-                        Host host = sr.GetStorageHost();
-                        if (sr.Physical && host != null)
-                            return string.Format(Messages.CD_DRIVE, host.Name);
+                    Host host = sr.GetStorageHost();
+                    if (sr.Physical() && host != null)
+                        return string.Format(Messages.CD_DRIVE, host.Name());
 
-                    }
                 }
-                return name_label;
-
             }
+            return name_label;
         }
 
-        public override string Description
+        public override string Description()
         {
-            get
-            {
-                return name_description;
-            }
+            return name_description;
         }
 
-
-        public string VMsOfVDI
+        public string VMsOfVDI()
         {
-            get
+
+            StringBuilder sb = new StringBuilder();
+            bool comma = false;
+
+            foreach (VM vm in this.GetVMs().Where(vm => vm.Show(true)))
             {
-                StringBuilder sb = new StringBuilder();
-                bool comma = false;
+                if (comma)
+                    sb.Append(", ");
+                else
+                    comma = true;
 
-                foreach (VM vm in this.GetVMs().Where(vm => vm.Show(true)))
-                {
-                    if (comma)
-                        sb.Append(", ");
-                    else
-                        comma = true;
-
-                    sb.Append(vm.is_a_snapshot ? String.Format(Messages.SNAPSHOT_BRACKETS, vm.Name) : vm.Name);
-                }
-
-                return sb.ToString();
+                sb.Append(vm.is_a_snapshot ? String.Format(Messages.SNAPSHOT_BRACKETS, vm.Name()) : vm.Name());
             }
+
+            return sb.ToString();
         }
 
         public override bool Show(bool showHiddenVMs)
         {
-            return (!missing && managed && (showHiddenVMs || !IsHidden));
+            return !missing && managed && (showHiddenVMs || !IsHidden());
         }
 
-        public override bool IsHidden
+        public override bool IsHidden()
         {
-            get
-            {
-                return BoolKey(other_config, HIDE_FROM_XENCENTER);
-            }
+            return BoolKey(other_config, HIDE_FROM_XENCENTER);
         }
 
         public IList<VM> GetVMs()
@@ -156,35 +143,29 @@ namespace XenAPI
 
         public override string ToString()
         {
-            return Name;
+            return Name();
         }
 
-        public virtual string SizeText
+        public virtual string SizeText()
         {
-            get
-            {
-                if (is_a_snapshot)
-                    return String.Empty;
-                else
-                    return Util.DiskSizeString(virtual_size);
-            }
+            if (is_a_snapshot)
+                return String.Empty;
+            else
+                return Util.DiskSizeString(virtual_size);
         }
 
-        public override string NameWithLocation
+        public override string NameWithLocation()
         {
-            get
+            if (Connection != null)
             {
-                if (Connection != null)
-                {
-                    var srOfVdi = Connection.Resolve(SR);
-                    if (srOfVdi == null)
-                        return base.NameWithLocation;
+                var srOfVdi = Connection.Resolve(SR);
+                if (srOfVdi == null)
+                    return base.NameWithLocation();
 
-                    return string.Format(Messages.VDI_ON_SR_TITLE, Name, srOfVdi.Name, srOfVdi.LocationString);
-                }
-
-                return base.NameWithLocation;
+                return string.Format(Messages.VDI_ON_SR_TITLE, Name(), srOfVdi.Name(), srOfVdi.LocationString());
             }
+
+            return base.NameWithLocation();
         }
 
         #region IEquatable<VDI> Members
@@ -211,98 +192,82 @@ namespace XenAPI
         /// These are some types of VDI we care to distinguish between in the GUI. Determining what type a VDI is for XC depends on not
         /// just the vdi.type fields supplied by the server but some other logic. 
         /// </summary>
-        public FriendlyType VDIType
+        public FriendlyType VDIType()
         {
-            get
-            {
-                SR sr = Connection.Resolve<SR>(SR);
-                if (sr == null)
-                    return FriendlyType.NONE;
+            SR sr = Connection.Resolve<SR>(SR);
+            if (sr == null)
+                return FriendlyType.NONE;
 
-                if (is_a_snapshot && GetVMs().Count >= 1)
-                    return FriendlyType.SNAPSHOT;
+            if (is_a_snapshot && GetVMs().Count >= 1)
+                return FriendlyType.SNAPSHOT;
 
-                if (sr.content_type == XenAPI.SR.Content_Type_ISO)
-                    return FriendlyType.ISO;
+            if (sr.content_type == XenAPI.SR.Content_Type_ISO)
+                return FriendlyType.ISO;
 
-                if (type == vdi_type.system)
-                    return FriendlyType.SYSTEM_DISK;
+            if (type == vdi_type.system)
+                return FriendlyType.SYSTEM_DISK;
 
-                return FriendlyType.VIRTUAL_DISK;
-            }
+            return FriendlyType.VIRTUAL_DISK;
         }
 
         /// <summary>
         /// Is the disk of a type used by HA?
         /// </summary>
-        public bool IsHaType
+        public bool IsHaType()
         {
-            get
-            {
-                return (type == vdi_type.ha_statefile || type == vdi_type.redo_log);
-            }
+            return type == vdi_type.ha_statefile || type == vdi_type.redo_log;
         }
 
         /// <summary>
         /// Is the disk currently being used by HA?
         /// </summary>
-        public bool IsUsedByHA
+        public bool IsUsedByHA()
         {
-            get
-            {
-                return (IsHaType && Helpers.GetPoolOfOne(Connection).ha_enabled);
-            }
+            return IsHaType() && Helpers.GetPoolOfOne(Connection).ha_enabled;
         }
 
         /// <summary>
         /// Is the disk used by DR?
         /// </summary>
-        public bool IsMetadataForDR
+        public bool IsMetadataForDR()
         {
-            get { return type == vdi_type.metadata; }
+            return type == vdi_type.metadata;
         }
 
         /// <summary>
         /// VDIs associated with storage motion are specially marked. This
         /// bool allows you to know if the current VDI is such.
         /// </summary>
-        public bool IsAnIntermediateStorageMotionSnapshot
+        public bool IsAnIntermediateStorageMotionSnapshot()
         {
-            get { return sm_config.ContainsKey("base_mirror"); }
+            return sm_config.ContainsKey("base_mirror");
         }
 
 
         /// <summary>
         /// Try to determine if this VDI belongs to a WSS VM - this is a best guess only
         /// </summary>
-        public bool CouldBeWss
+        public bool CouldBeWss()
         {
-            get
-            {
-                const string wssName = "Webss-disk";
-                return name_label.Contains(wssName);
-            }
+            const string wssName = "Webss-disk";
+            return name_label.Contains(wssName);
         }
 
-        public bool IsCloudConfigDrive
+        public bool IsCloudConfigDrive()
         {
-            get { return other_config.ContainsKey("config-drive") && other_config["config-drive"].ToLower() == "true"; }
-
+            return other_config.ContainsKey("config-drive") && other_config["config-drive"].ToLower() == "true";
         }
 
         /// <summary>
         /// Whether this is a Tools ISO.
         /// The new method is to check the is_tools_iso flag, the old one to check the name_label.
         /// </summary>
-        public bool IsToolsIso
+        public bool IsToolsIso()
         {
-            get
-            {
-                string[] toolIsoNames = {"xswindrivers.iso", "xs-tools.iso", "guest-tools.iso"};
-                return is_tools_iso || toolIsoNames.Contains(name_label);
-            }
+            string[] toolIsoNames = {"xswindrivers.iso", "xs-tools.iso", "guest-tools.iso"};
+            return is_tools_iso || toolIsoNames.Contains(name_label);
         }
-        
+
         /// <summary>
         /// Whether read caching is enabled on this disk on a specific host
         /// </summary>

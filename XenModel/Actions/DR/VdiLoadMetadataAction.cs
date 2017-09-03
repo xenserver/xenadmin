@@ -60,7 +60,7 @@ namespace XenAdmin.Actions.DR
         }
 
         public VdiLoadMetadataAction(IXenConnection connection, VDI vdi)
-            : base(connection, String.Format(Messages.ACTION_VDI_LOAD_METADATA_TITLE, connection.Resolve(vdi.SR).Name))
+            : base(connection, String.Format(Messages.ACTION_VDI_LOAD_METADATA_TITLE, connection.Resolve(vdi.SR).Name()))
         {
             _poolMetadata = new PoolMetadata(null, vdi);
 
@@ -77,9 +77,9 @@ namespace XenAdmin.Actions.DR
 
         protected override void Run()
         {
-            Description = String.Format(Messages.ACTION_VDI_LOAD_METADATA_STATUS, Connection.Resolve(_poolMetadata.Vdi.SR).Name);
-            log.DebugFormat("Loading metadata from VDI '{0}' on SR '{1}'", _poolMetadata.Vdi.Name,
-                            Connection.Resolve(_poolMetadata.Vdi.SR).Name);
+            Description = String.Format(Messages.ACTION_VDI_LOAD_METADATA_STATUS, Connection.Resolve(_poolMetadata.Vdi.SR).Name());
+            log.DebugFormat("Loading metadata from VDI '{0}' on SR '{1}'", _poolMetadata.Vdi.Name(),
+                            Connection.Resolve(_poolMetadata.Vdi.SR).Name());
 
             MetadataSessionRef = VDI.open_database(Session, _poolMetadata.Vdi.opaque_ref);
             PercentComplete = 30;
@@ -100,7 +100,7 @@ namespace XenAdmin.Actions.DR
                                               ? XenAPI.Host.get_name_label(MetadataSession, pool.master.opaque_ref)
                                               : pool.name_label;
                         _poolMetadata.Pool.name_label = poolName;
-                        log.DebugFormat("Found metadata of pool '{0}' (UUID={1})", _poolMetadata.Pool.Name,
+                        log.DebugFormat("Found metadata of pool '{0}' (UUID={1})", _poolMetadata.Pool.Name(),
                                         _poolMetadata.Pool.uuid);
                         break;
                     }
@@ -123,7 +123,7 @@ namespace XenAdmin.Actions.DR
                     foreach (var vmRef in vms.Keys)
                     {
                         VM vm = vms[vmRef];
-                        if (vm.not_a_real_vm)
+                        if (vm.not_a_real_vm())
                             continue;
                         vm.opaque_ref = vmRef.opaque_ref;
                         _poolMetadata.Vms.Add(vmRef, vm);
@@ -156,7 +156,7 @@ namespace XenAdmin.Actions.DR
         public int CompareTo(PoolMetadata other)
         {
             // Sort by the PoolName
-            return StringUtility.NaturalCompare(Pool.Name, other.Pool.Name); 
+            return StringUtility.NaturalCompare(Pool.Name(), other.Pool.Name()); 
         }
 
         public bool Equals(PoolMetadata other)

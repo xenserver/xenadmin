@@ -71,20 +71,20 @@ namespace XenAdmin.Actions
             {
                 case SrActionKind.SetAsDefault:
                     return String.Format(Messages.ACTION_SR_SETTING_DEFAULT,
-                        sr.Name, Helpers.GetName(sr.Connection));
+                        sr.Name(), Helpers.GetName(sr.Connection));
 
                 case SrActionKind.Detach:
                 case SrActionKind.UnplugAndDestroyPBDs:
                     return String.Format(Messages.ACTION_SR_DETACHING,
-                        sr.Name, Helpers.GetName(sr.Connection));
+                        sr.Name(), Helpers.GetName(sr.Connection));
 
                 case SrActionKind.Destroy:
                     return String.Format(Messages.ACTION_SR_DESTROYING,
-                        sr.Name, Helpers.GetName(sr.Connection));
+                        sr.Name(), Helpers.GetName(sr.Connection));
 
                 case SrActionKind.Forget:
                     return String.Format(Messages.ACTION_SR_FORGETTING,
-                        sr.Name, Helpers.GetName(sr.Connection));
+                        sr.Name(), Helpers.GetName(sr.Connection));
             }
 
             return "";
@@ -100,7 +100,7 @@ namespace XenAdmin.Actions
             {
                 case SrActionKind.Detach:
                     UnplugPBDs(ref inc);
-                    Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost);
+                    Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost());
                     break;
 
                 case SrActionKind.Destroy:
@@ -110,7 +110,7 @@ namespace XenAdmin.Actions
                     break;
 
                 case SrActionKind.Forget:
-                    Description = string.Format(Messages.FORGETTING_SR_0, SR.NameWithoutHost);
+                    Description = string.Format(Messages.FORGETTING_SR_0, SR.NameWithoutHost());
                     if (!SR.allowed_operations.Contains(storage_operations.forget))
                     {
                         Description = Messages.ERROR_DIALOG_FORGET_SR_TITLE;
@@ -119,7 +119,7 @@ namespace XenAdmin.Actions
                         
                     RelatedTask = XenAPI.SR.async_forget(Session, SR.opaque_ref);
                     PollToCompletion();
-                    Description = string.Format(Messages.SR_FORGOTTEN_0, SR.NameWithoutHost);
+                    Description = string.Format(Messages.SR_FORGOTTEN_0, SR.NameWithoutHost());
                     break;
 
                 case SrActionKind.SetAsDefault:
@@ -149,7 +149,7 @@ namespace XenAdmin.Actions
                 case SrActionKind.UnplugAndDestroyPBDs:
                     UnplugPBDs(ref inc);
                     DestroyPBDs(ref inc);
-                    Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost);
+                    Description = string.Format(Messages.ACTION_SR_DETACH_SUCCESSFUL, SR.NameWithoutHost());
                     break;
 
             }
