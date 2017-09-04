@@ -44,6 +44,8 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 {
     public partial class PolicyHistory : UserControl
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public PolicyHistory()
         {
             InitializeComponent();
@@ -70,7 +72,8 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         }
 
         private VMSS _policy;
-        public void StartRefreshTab()
+
+        private void StartRefreshTab()
         {
             /* hoursFromNow has 3 possible values:
                 1) 0 -> top 10 messages (default)
@@ -90,9 +93,11 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                     break;
             }
 
-            PureAsyncAction action = new GetVMSSAlertsAction(_policy, hoursFromNow);
-            action.Completed += action_Completed;
-            action.RunAsync();
+            var now = DateTime.Now;
+            var alerts = VMSS.GetAlerts(_policy, hoursFromNow);
+            log.DebugFormat("GetAlerts took: {0}", DateTime.Now - now);
+            panelLoading.Visible = false;
+            RefreshGrid(alerts);
         }
 
         public void RefreshTab(VMSS policy)
@@ -139,16 +144,14 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             public HistoryRow(PolicyAlert alert)
             {
                 Alert = alert;
-                Cells.Add(_expand);
-                Cells.Add(_result);
-                Cells.Add(_dateTime);
-                Cells.Add(_description);
-
+                Cells.AddRange(_expand, _result, _dateTime, _description);
                 RefreshRow();
 
             }
+
             [DefaultValue(false)]
             public bool Expanded { get; set; }
+
             public void RefreshRow()
             {
 
@@ -177,7 +180,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 else
                     _description.Value = Expanded ? Alert.Text : Alert.ShortFormatBody.Ellipsise(90);
             }
-
         }
 
 
@@ -192,16 +194,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             {
                StartRefreshTab();  
             }
-        }
-
-        void action_Completed(ActionBase sender)
-        {
-            var action = sender;
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                panelLoading.Visible = false;
-                RefreshGrid(((GetVMSSAlertsAction)(action)).VMSS.Alerts);
-            });
         }
 
         private void ReloadHistoryLabel()

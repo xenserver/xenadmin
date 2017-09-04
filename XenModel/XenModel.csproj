@@ -133,7 +133,6 @@
     <Compile Include="Actions\VMAppliances\DestroyVMApplianceAction.cs" />
     <Compile Include="Actions\VMAppliances\ShutDownApplianceAction.cs" />
     <Compile Include="Actions\VMAppliances\StartApplianceAction.cs" />
-    <Compile Include="Actions\VMSS\GetVMSSAlertsAction.cs" />
     <Compile Include="Actions\VM\ChangeMemorySettingsAction.cs" />
     <Compile Include="Actions\VM\CreateCdDriveAction.cs" />
     <Compile Include="Actions\VM\CreateVMAction.cs" />

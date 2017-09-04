@@ -31,11 +31,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
-using XenAdmin.Network;
-using XenAdmin.Actions;
+
 
 namespace XenAPI
 {
@@ -47,24 +47,17 @@ namespace XenAPI
 
             if (frequency == vmss_frequency.hourly)
             {
-                return GetHourlyDate(time, Convert.ToInt32(BackupScheduleMin()));
+                return GetHourlyDate(time, BackupScheduleMin());
             }
             if (frequency == vmss_frequency.daily)
             {
-
-                var hour = Convert.ToInt32(BackupScheduleHour());
-                var min = Convert.ToInt32(BackupScheduleMin());
-                return GetDailyDate(time, min, hour);
-
+                return GetDailyDate(time, BackupScheduleMin(), BackupScheduleHour());
             }
             if (frequency == vmss_frequency.weekly)
             {
-                var hour = Convert.ToInt32(BackupScheduleHour());
-                var min = Convert.ToInt32(BackupScheduleMin());
-                return GetWeeklyDate(time, hour, min, new List<DayOfWeek>(DaysOfWeekBackup()));
+                return GetWeeklyDate(time, BackupScheduleHour(), BackupScheduleMin(), new List<DayOfWeek>(DaysOfWeekBackup()));
             }
             return new DateTime();
-
         }
 
         public static DateTime GetDailyDate(DateTime time, int min, int hour)
@@ -144,16 +137,6 @@ namespace XenAPI
             }
         }
         
-        public static string TryGetKey(Dictionary<string, string> dict, string key)
-        {
-            string r;
-            if (dict.TryGetValue(key, out r))
-            {
-                return r;
-            }
-            return "";
-        }
-
         public override string Name()
         {
             return name_label;
@@ -164,44 +147,80 @@ namespace XenAPI
             return name_description;
         }
 
-        public string BackupScheduleMin()
+        public int BackupScheduleMin()
         {
-            return TryGetKey(schedule, "min");
+            string outStr;
+            int result;
+            if (schedule.TryGetValue("min", out outStr) && int.TryParse(outStr, out result))
+                return result;
+
+            return 0;
         }
 
-        public string BackupScheduleHour()
+        public int BackupScheduleHour()
         {
-            return TryGetKey(schedule, "hour");
+            string outStr;
+            int result;
+            if (schedule.TryGetValue("hour", out outStr) && int.TryParse(outStr, out result))
+                return result;
+
+            return 0;
         }
 
         public string BackupScheduleDays()
         {
-            return TryGetKey(schedule, "days");
+            string outStr;
+            if (schedule.TryGetValue("days", out outStr))
+                return outStr;
+
+            return string.Empty;
         }
 
-        private List<PolicyAlert> _alerts = new List<PolicyAlert>();
-
-        public List<PolicyAlert> Alerts
+        /// <summary>
+        /// If hoursFromNow is 0, this returns only the top 10 messages regardless timestamp.
+        /// Note the messages are ordered by descending timestamp.
+        /// </summary>
+        public static List<PolicyAlert> GetAlerts(VMSS vmss, int hoursFromNow)
         {
-            get
-            {
-                return _alerts;
-            }
-            set { _alerts = value; }
-        }
+            var messages = vmss.Connection.Cache.Messages;
 
-        public string LastResult()
-        {
-            if (_alerts.Count > 0)
-            {
-                var listRecentAlerts = new List<PolicyAlert>(_alerts);
-                listRecentAlerts.Sort((x, y) => y.Time.CompareTo(x.Time));
-                if (listRecentAlerts[0].Type == "info")
-                    return Messages.VMSS_SUCCEEDED;
+            var policyMessages = (from XenAPI.Message msg in messages
+                    where msg.cls == cls.VMSS
+                    group msg by msg.obj_uuid
+                    into g
+                    let gOrdered = g.OrderByDescending(m => m.timestamp).ToList()
+                    select new {PolicyUuid = g.Key, PolicyMessages = gOrdered})
+                .ToDictionary(x => x.PolicyUuid, x => x.PolicyMessages);
 
-                return Messages.FAILED;
+            var listAlerts = new List<PolicyAlert>();
+
+            DateTime currentTime = DateTime.Now;
+            DateTime offset = currentTime.Add(new TimeSpan(-hoursFromNow, 0, 0));
+
+            List<XenAPI.Message> value;
+            if (policyMessages.TryGetValue(vmss.uuid, out value))
+            {
+                if (hoursFromNow == 0)
+                {
+                    for (int i = 0; i < 10 && i < value.Count; i++)
+                    {
+                        var msg = value[i];
+                        listAlerts.Add(new PolicyAlert(msg.priority, msg.name, msg.timestamp, msg.body, vmss.Name()));
+                    }
+                }
+                else
+                {
+                    foreach (var msg in value)
+                    {
+                        if (msg.timestamp >= offset)
+                            listAlerts.Add(new PolicyAlert(msg.priority, msg.name, msg.timestamp, msg.body, vmss.Name()));
+                        else
+                            break;
+                    }
+                }
             }
-            return Messages.NOT_YET_RUN;
+
+            return listAlerts;
         }
     }
 }
