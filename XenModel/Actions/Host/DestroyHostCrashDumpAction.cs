@@ -42,7 +42,7 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public DestroyHostCrashDumpAction(Host host)
-            : base(host.Connection, string.Format(Messages.HOST_REMOVING_CRASHDUMPS_TITLE, host.Name))
+            : base(host.Connection, string.Format(Messages.HOST_REMOVING_CRASHDUMPS_TITLE, host.Name()))
         {
             Host = host;
         }

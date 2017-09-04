@@ -38,7 +38,7 @@ namespace XenAdmin.Dialogs.LicenseManagerLicenseRowComparers
     {
         public int Compare(CheckableDataGridViewRow x, CheckableDataGridViewRow y)
         {
-            return x.XenObject.Name.CompareTo(y.XenObject.Name);
+            return x.XenObject.Name().CompareTo(y.XenObject.Name());
         }
     }
 }

@@ -188,7 +188,7 @@ namespace XenAdmin.Dialogs
                                          if(lRow == null || lRow.XenObject == null)
                                              return;
 
-                                         summaryPanel.Title = lRow.XenObject.Name;
+                                         summaryPanel.Title = lRow.XenObject.Name();
                                          summaryPanel.HelperUrl = Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT;
                                          summaryPanel.HelperUrlVisible = lRow.HelperUrlRequired && !Controller.ReadOnlyView;
                                          summaryPanel.WarningVisible = lRow.WarningRequired;

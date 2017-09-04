@@ -153,7 +153,7 @@ namespace XenAdmin.Commands
             {
                 return Messages.VM_NOT_SHUT_DOWN;
             }
-            else if (vm.is_a_template && vm.DefaultTemplate)
+            else if (vm.is_a_template && vm.DefaultTemplate())
             {
                 return Messages.CANNOT_DELETE_DEFAULT_TEMPLATE;
             }

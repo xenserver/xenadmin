@@ -49,7 +49,7 @@ namespace XenAdmin.Network
         public static Bond GetMasterManagementBond(IXenConnection conn)
         {
             PIF pif = GetMasterManagementPIF(conn);
-            return pif == null ? null : pif.BondMasterOf;
+            return pif == null ? null : pif.BondMasterOf();
         }
 
         private static PIF GetMasterManagementPIF(IXenConnection conn)
@@ -80,7 +80,7 @@ namespace XenAdmin.Network
             List<PIF> result = new List<PIF>();
             foreach (PIF pif in host.Connection.ResolveAll(host.PIFs))
             {
-                if (!pif.IsBondNIC && pif.IsPhysical)
+                if (!pif.IsBondNIC() && pif.IsPhysical())
                     result.Add(pif);
             }
 

@@ -102,7 +102,7 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             log.Debug("Running SR.Create()");
-            log.DebugFormat("host='{0}'", Host.Name);
+            log.DebugFormat("host='{0}'", Host.Name());
             log.DebugFormat("name='{0}'", _srName);
             log.DebugFormat("description='{0}'", _srDescription);
             log.DebugFormat("type='{0}'", _srType);

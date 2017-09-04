@@ -56,7 +56,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunCheck()
         {
-            if (!Host.IsLive)
+            if (!Host.IsLive())
                 return new HostNotLiveWarning(this, Host);
 
             if (!Host.Connection.IsConnected)

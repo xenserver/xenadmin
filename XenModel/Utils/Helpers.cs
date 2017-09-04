@@ -81,17 +81,17 @@ namespace XenAdmin.Core
         /// <param name="Host">May be null.</param>
         public static string HostProductVersion(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersion);
+            return FromHostOrMaster(host, h => h.ProductVersion());
         }
 
         public static string HostProductVersionText(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersionText);
+            return FromHostOrMaster(host, h => h.ProductVersionText());
         }
 
         public static string HostProductVersionTextShort(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersionTextShort);
+            return FromHostOrMaster(host, h => h.ProductVersionTextShort());
         }
 
         public static string HostPlatformVersion(Host host)
@@ -99,7 +99,7 @@ namespace XenAdmin.Core
             if (host == null)
                 return null;
 
-            return host.PlatformVersion;
+            return host.PlatformVersion();
         }
 
         private delegate string HostToStr(Host host);
@@ -208,7 +208,7 @@ namespace XenAdmin.Core
 
             foreach (Pool thePool in connection.Cache.Pools)
             {
-                if (thePool != null && thePool.IsVisible)
+                if (thePool != null && thePool.IsVisible())
                     return thePool;
             }
             return null;
@@ -268,9 +268,7 @@ namespace XenAdmin.Core
         /// <param name="pool">May be null, in which case the empty string is returned.</param>
         public static string GetName(Pool pool)
         {
-            if (pool == null)
-                return "";
-            return pool.Name;
+            return pool == null ? "" : pool.Name();
         }
 
         /// <param name="connection">May be null, in which case the empty string is returned.</param>
@@ -282,9 +280,7 @@ namespace XenAdmin.Core
         /// <param name="o">May be null, in which case the empty string is returned.</param>
         public static string GetName(IXenObject o)
         {
-            if (o == null)
-                return "";
-            return o.Name;
+            return o == null ? "" : o.Name();
         }
 
         public static bool IsConnected(IXenConnection connection)
@@ -1027,7 +1023,7 @@ namespace XenAdmin.Core
                 return network == null
                            ? null //don't try to retrieve it in the FriendlyNames.
                            : FormatFriendly(string.Format("Label-performance.vif_{0}{1}",
-                               m.Groups[2].Value, m.Groups[3].Value), network.Name);
+                               m.Groups[2].Value, m.Groups[3].Value), network.Name());
             }
 
             m = PifEthRegex.Match(name);
@@ -1042,7 +1038,7 @@ namespace XenAdmin.Core
 			    return network == null
 			               ? null //don't try to retrieve it in the FriendlyNames.
 			               : FormatFriendly(string.Format("Label-performance.vlan_{0}{1}",
-			                   m.Groups[3].Value, m.Groups[4].Value), network.Name);
+			                   m.Groups[3].Value, m.Groups[4].Value), network.Name());
 			}
 
             m = PifBrRegex.Match(name);
@@ -1052,7 +1048,7 @@ namespace XenAdmin.Core
                 XenAPI.Network network = FindNetworkOfPIF(iXenObject, device);
             	return network == null
             	       	? null //don't try to retrieve it in the FriendlyNames.
-            	       	: FormatFriendly(string.Format("Label-performance.xenbr_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), network.Name);
+            	       	: FormatFriendly(string.Format("Label-performance.xenbr_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), network.Name());
             }
 
         	m = PifXapiRegex.Match(name);
@@ -1065,7 +1061,7 @@ namespace XenAdmin.Core
             	PIF pif = FindPIF(iXenObject, m.Groups[1].Value, false);
             	return pif == null
             	       	? null //pif doesn't exist anymore so don't try to retrieve it in the FriendlyNames.
-            	       	: FormatFriendly(string.Format("Label-performance.bond_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), pif.Name);
+            	       	: FormatFriendly(string.Format("Label-performance.bond_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), pif.Name());
             }
 
         	m = PifLoRegex.Match(name);
@@ -1131,7 +1127,7 @@ namespace XenAdmin.Core
                            ? null
                            : FormatFriendly(string.Format("Label-performance.sr_{0}_{1}",
                                m.Groups[1].Value, m.Groups[2].Value),
-                               sr.Name.Ellipsise(30));
+                               sr.Name().Ellipsise(30));
             }
 
             m = SrOtherRegex.Match(name);
@@ -1141,7 +1137,7 @@ namespace XenAdmin.Core
                 return sr == null
                            ? null
                            : FormatFriendly(string.Format("Label-performance.sr_{0}", m.Groups[1].Value),
-                               sr.Name.Ellipsise(30));
+                               sr.Name().Ellipsise(30));
             }
 
             m = SrReadWriteRegex.Match(name);
@@ -1151,7 +1147,7 @@ namespace XenAdmin.Core
                 return sr == null
                     ? null
                     : FormatFriendly(string.Format("Label-performance.sr_rw_{0}", m.Groups[1].Value),
-                        sr.Name.Ellipsise(30));
+                        sr.Name().Ellipsise(30));
             }
 
             m = GpuRegex.Match(name);
@@ -1162,7 +1158,7 @@ namespace XenAdmin.Core
                 return gpu == null
                            ? null
                            : FormatFriendly(string.Format("Label-performance.gpu_{0}", m.Groups[1].Value),
-                                            gpu.Name, pciId);
+                                            gpu.Name(), pciId);
             }
 
             if (NetworkLatencyRegex.IsMatch(name))
@@ -1246,7 +1242,7 @@ namespace XenAdmin.Core
         {
             foreach (PIF pif in iXenObject.Connection.Cache.PIFs)
             {
-                if ((!physical || pif.IsPhysical) && pif.device == device && (iXenObject is Host && pif.host.opaque_ref == iXenObject.opaque_ref || iXenObject is VM && pif.host.opaque_ref == ((VM)iXenObject).resident_on.opaque_ref))
+                if ((!physical || pif.IsPhysical()) && pif.device == device && (iXenObject is Host && pif.host.opaque_ref == iXenObject.opaque_ref || iXenObject is VM && pif.host.opaque_ref == ((VM)iXenObject).resident_on.opaque_ref))
                     return pif;
             }
             return null;
@@ -1353,10 +1349,10 @@ namespace XenAdmin.Core
             if (XenObject is Host)
                 return string.Format(Messages.SERVER_X, GetName(XenObject));
 
-            if (XenObject is VM)
+            VM vm = XenObject as VM;
+            if (vm != null)
             {
-                VM vm = (VM)XenObject;
-                if (vm.IsControlDomainZero)
+                if (vm.IsControlDomainZero())
                     return string.Format(Messages.SERVER_X, GetName(XenObject.Connection.Resolve(vm.resident_on)));
                 else
                     return string.Format(Messages.VM_X, GetName(XenObject));
@@ -1760,7 +1756,7 @@ namespace XenAdmin.Core
             List<string> names = new List<string>();
             foreach (Host obj in list)
             {
-                names.Add(obj.Name);
+                names.Add(obj.Name());
             }
 
             return string.Join(", ", names.ToArray());
@@ -1808,7 +1804,7 @@ namespace XenAdmin.Core
 
         public static bool CustomWithNoDVD(VM template)
         {
-            return template != null && !template.DefaultTemplate && template.FindVMCDROM() == null;
+            return template != null && !template.DefaultTemplate() && template.FindVMCDROM() == null;
         }
 
         public static string GetMacString(string mac)
@@ -1864,7 +1860,7 @@ namespace XenAdmin.Core
        public static bool SupportsLinkAggregationBond(IXenConnection connection)
        {
            Host master = GetMaster(connection);
-           return master != null && master.vSwitchNetworkBackend;
+           return master != null && master.vSwitchNetworkBackend();
        }
 
        /// <summary>
@@ -1874,7 +1870,7 @@ namespace XenAdmin.Core
        {
            Host master = GetMaster(connection);
            // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
-           return master != null && master.vSwitchNetworkBackend ? 4 : 2;
+           return master != null && master.vSwitchNetworkBackend() ? 4 : 2;
        }
 
        public static Host GetHostAncestor(IXenObject xenObject)
@@ -1882,24 +1878,24 @@ namespace XenAdmin.Core
            if (xenObject == null || xenObject.Connection == null)
                return null;
 
-           if (xenObject is Host)
-               return (Host)xenObject;
+           var h = xenObject as Host;
+           if (h != null)
+               return h;
 
-           if (xenObject is SR)
-               return ((SR)xenObject).Home;
-           
-           if (xenObject is VM)
-           {
-               VM vm = (VM) xenObject;
+           var sr = xenObject as SR;
+           if (sr != null)
+               return sr.Home();
+
+           var vm = xenObject as VM;
+           if (vm != null)
                return vm.Home();
-           }
 
            return null;
        }
 
        public static bool SameServerVersion(Host host, string longProductVersion)
        {
-           return host != null && host.LongProductVersion == longProductVersion;
+           return host != null && host.LongProductVersion() == longProductVersion;
        }
 
        public static bool EnabledTargetExists(Host host, IXenConnection connection)
@@ -1915,7 +1911,7 @@ namespace XenAdmin.Core
            if (FeatureForbidden(connection, Host.RestrictGpu))
                return false;
            var pool = GetPoolOfOne(connection);
-           return pool != null && pool.HasGpu;
+           return pool != null && pool.HasGpu();
        }
 
         public static bool VGpuCapability(IXenConnection connection)
@@ -1923,7 +1919,7 @@ namespace XenAdmin.Core
             if (FeatureForbidden(connection, Host.RestrictVgpu))
                 return false;
             var pool = GetPoolOfOne(connection);
-            return pool != null && pool.HasVGpu;
+            return pool != null && pool.HasVGpu();
         }
 
         /// <summary>
@@ -1933,7 +1929,7 @@ namespace XenAdmin.Core
        {
            Host master = GetMaster(connection);
            // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
-           return master != null && CreedenceOrGreater(master) && master.vSwitchNetworkBackend;
+           return master != null && CreedenceOrGreater(master) && master.vSwitchNetworkBackend();
        }
 
        public static bool ContainerCapability(IXenConnection connection)
@@ -1942,14 +1938,14 @@ namespace XenAdmin.Core
            if (master == null)
                return false;
            if (ElyOrGreater(connection))
-               return master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("xscontainer")); 
-           return CreamOrGreater(connection) && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+               return master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
+           return CreamOrGreater(connection) && master.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
 
        public static bool PvsCacheCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           return master != null && master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("pvsaccelerator"));
+           return master != null && master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
        }
 
        /// <summary>

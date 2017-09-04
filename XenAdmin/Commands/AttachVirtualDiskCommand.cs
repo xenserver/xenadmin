@@ -67,7 +67,7 @@ namespace XenAdmin.Commands
         {
             VM vm = (VM)selection[0].XenObject;
 
-            if (vm.VBDs.Count >= vm.MaxVBDsAllowed)
+            if (vm.VBDs.Count >= vm.MaxVBDsAllowed())
             {
                 using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(

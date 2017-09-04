@@ -70,10 +70,10 @@ namespace XenAdmin.Commands
             VM snapshot = (VM)selection[0].XenObject;
 
             // Generate list of all taken VM/snapshot/template names
-            List<string> takenNames = new List<VM>(snapshot.Connection.Cache.VMs).ConvertAll(v => v.Name);
+            List<string> takenNames = new List<VM>(snapshot.Connection.Cache.VMs).ConvertAll(v => v.Name());
 
             // Generate a unique suggested name for the new template
-            string defaultName = Helpers.MakeUniqueName(String.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_NAME, snapshot.Name), takenNames);
+            string defaultName = Helpers.MakeUniqueName(String.Format(Messages.TEMPLATE_FROM_SNAPSHOT_DEFAULT_NAME, snapshot.Name()), takenNames);
             string newName = InputPromptDialog.Prompt(Parent, Messages.NEW_TEMPLATE_PROMPT, Messages.SAVE_AS_TEMPLATE, defaultName, "VMSnapshotPage");
 
             if (newName != null) // is null if user cancelled

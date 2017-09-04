@@ -229,7 +229,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     // insert after template page
                     AddAfterPage(page_1_Template, page_1b_BiosLocking);
 
-                    page_4_HomeServer.DisableStep = selectedTemplate.DefaultTemplate;
+                    page_4_HomeServer.DisableStep = selectedTemplate.DefaultTemplate();
                 }
                 else
                 {
@@ -240,7 +240,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 // if custom template has no cd drive (must have been removed via cli) don't add one
                 var noInstallMedia = Helpers.CustomWithNoDVD(selectedTemplate);
 
-                if (selectedTemplate != null && selectedTemplate.DefaultTemplate && string.IsNullOrEmpty(selectedTemplate.InstallMethods))
+                if (selectedTemplate != null && selectedTemplate.DefaultTemplate() && string.IsNullOrEmpty(selectedTemplate.InstallMethods()))
                     noInstallMedia = true;
 
                 page_3_InstallationMedia.ShowInstallationMedia = !noInstallMedia;
@@ -251,14 +251,14 @@ namespace XenAdmin.Wizards.NewVMWizard
                     m_affinity = xenConnection.Resolve(selectedTemplate.affinity);
 
                 RemovePage(page_CloudConfigParameters);
-                if (selectedTemplate != null && selectedTemplate.CanHaveCloudConfigDrive && Helpers.ContainerCapability(xenConnection))
+                if (selectedTemplate != null && selectedTemplate.CanHaveCloudConfigDrive() && Helpers.ContainerCapability(xenConnection))
                 {
                     AddAfterPage(page_6_Storage, page_CloudConfigParameters);
                 }
             }
             else if (prevPageType == typeof(Page_CopyBiosStrings))
             {
-                if (page_1_Template.CopyBiosStrings && page_1_Template.SelectedTemplate.DefaultTemplate)
+                if (page_1_Template.CopyBiosStrings && page_1_Template.SelectedTemplate.DefaultTemplate())
                 {
                     m_affinity = page_1b_BiosLocking.CopyBiosStringsFrom;
                     page_4_HomeServer.Affinity = m_affinity;
@@ -291,7 +291,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             {
                 RemovePage(page_6b_LunPerVdi);
                 List<SR> srs = page_6_Storage.SelectedDisks.ConvertAll(d => xenConnection.Resolve(d.Disk.SR));
-                if (srs.Any(sr => sr.HBALunPerVDI))
+                if (srs.Any(sr => sr.HBALunPerVDI()))
                 {
                     page_6b_LunPerVdi.DisksToMap = page_6_Storage.SelectedDisks;
                     AddAfterPage(page_6_Storage, page_6b_LunPerVdi);

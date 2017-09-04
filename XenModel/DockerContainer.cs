@@ -278,12 +278,9 @@ namespace XenAdmin.Model
             return String.Empty;
         }
 
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return name_label;
-            }
+            return name_label;
         }
 
         public vm_power_state power_state
@@ -295,14 +292,11 @@ namespace XenAdmin.Model
             }
         }
 
-        public override string NameWithLocation
+        public override string NameWithLocation()
         {
-            get
-            {
-                if (parent == null)
-                    return base.NameWithLocation;
-                return string.Format(Messages.CONTAINER_ON_VM_TITLE, Name, parent.Name, parent.LocationString);
-            }
+            if (parent == null)
+                return base.NameWithLocation();
+            return string.Format(Messages.CONTAINER_ON_VM_TITLE, Name(), parent.Name(), parent.LocationString());
         }
 
         public List<DockerContainerPort> PortList

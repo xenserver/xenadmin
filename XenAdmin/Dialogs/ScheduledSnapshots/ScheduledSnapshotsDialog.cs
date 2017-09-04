@@ -97,15 +97,15 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
             private void RefreshRow()
             {
-                _name.Value = _policy.Name;
-                _numVMs.Value = _policy.VMs.FindAll(vm => _policy.Connection.Resolve(vm).is_a_real_vm).Count;
+                _name.Value = _policy.Name();
+                _numVMs.Value = _policy.VMs.FindAll(vm => _policy.Connection.Resolve(vm).is_a_real_vm()).Count;
                 _status.Value = _policy.enabled ? Messages.ENABLED : Messages.DISABLED;
-                if (_policy.is_running)
-                    _status.Value = Messages.RUNNING_SNAPSHOTS;
-                _lastResult.Value = _policy.LastResult;
-                if (_policy.LastResult == Messages.FAILED)
+
+                var policyLastResult = _policy.LastResult();
+                _lastResult.Value = policyLastResult;
+                if (policyLastResult == Messages.FAILED)
                     _lastResult.Image = Properties.Resources._075_WarningRound_h32bit_16;
-                else if (_policy.LastResult == Messages.NOT_YET_RUN)
+                else if (policyLastResult == Messages.NOT_YET_RUN)
                     _lastResult.Image = null;
                 else
                     _lastResult.Image = Properties.Resources._075_TickRound_h32bit_16;
@@ -125,7 +125,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
             foreach (var vm in pool.Connection.Cache.VMs)
             {
-                if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                if (vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
                 {
                     realVMs++;
                     if (vm.Connection.Resolve(vm.snapshot_schedule) != null)
@@ -137,7 +137,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
                                                         ? Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
                                                         : Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
-                                                    pool.Name.Ellipsise(45), protectedVMs, realVMs);
+                                                    pool.Name().Ellipsise(45), protectedVMs, realVMs);
         }
 
         void VMSSCollectionChanged(object sender, EventArgs e)
@@ -160,7 +160,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
             foreach (var policy in policyList)
             {
-                policy.PolicyAlerts.Clear();
+                policy.Alerts.Clear();
                 List<XenAPI.Message> messageList = new List<XenAPI.Message>();
                 policyMessage.Add(policy.uuid, messageList);
             }
@@ -190,9 +190,9 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                     policyMessage[policy.uuid].OrderByDescending(message => message.timestamp).ToList();
                 for (int messageCount = 0; messageCount < 10 && messageCount < messageListSorted.Count; messageCount++)
                 {
-                    policy.PolicyAlerts.Add(new PolicyAlert(messageListSorted[messageCount].priority,
+                    policy.Alerts.Add(new PolicyAlert(messageListSorted[messageCount].priority,
                         messageListSorted[messageCount].name, messageListSorted[messageCount].timestamp,
-                        messageListSorted[messageCount].body, policy.Name));
+                        messageListSorted[messageCount].body, policy.Name()));
                 }
                 if (dataGridView1.ColumnCount > 0)
                     dataGridView1.Rows.Add(new PolicyRow(policy));
@@ -249,7 +249,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             string text = "";
             if (selectedPolicies.Count == 1)
             {
-                text = String.Format(numberOfProtectedVMs == 0 ? Messages.CONFIRM_DELETE_POLICY_0 : Messages.CONFIRM_DELETE_POLICY, selectedPolicies[0].Name, numberOfProtectedVMs);
+                text = String.Format(numberOfProtectedVMs == 0 ? Messages.CONFIRM_DELETE_POLICY_0 : Messages.CONFIRM_DELETE_POLICY, selectedPolicies[0].Name(), numberOfProtectedVMs);
             }
             else
             {
@@ -279,9 +279,9 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             {
                 currentSelected = ((PolicyRow)dataGridView1.SelectedRows[0])._policy;
                 buttonEnable.Text = currentSelected.enabled? Messages.DISABLE : Messages.ENABLE;
-                buttonEnable.Enabled = currentSelected.VMs.Count == 0 && !currentSelected.enabled? false : true;
+                buttonEnable.Enabled = currentSelected.VMs.Count != 0 || currentSelected.enabled;
                 buttonProperties.Enabled = true;
-                buttonRunNow.Enabled = currentSelected.enabled && !currentSelected.is_running;
+                buttonRunNow.Enabled = currentSelected.enabled;
 
             }
             else

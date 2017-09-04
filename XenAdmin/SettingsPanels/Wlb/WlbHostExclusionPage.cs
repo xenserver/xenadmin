@@ -114,7 +114,7 @@ namespace XenAdmin.SettingsPanels
                     hostExcluded = _poolConfiguration.HostConfigurations[host.uuid].Excluded;
                 }
                 ListViewItem thisItem = new ListViewItem();
-                thisItem.SubItems.Add(host.Name);
+                thisItem.SubItems.Add(host.Name());
                 listViewExExcludedHosts.Items.Add(thisItem);
                 thisItem.Tag = host;
                 thisItem.Checked = hostExcluded;     

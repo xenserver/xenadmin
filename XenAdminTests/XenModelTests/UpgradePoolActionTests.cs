@@ -47,9 +47,10 @@ namespace XenAdminTests.XenModelTests
         {
             //Add master
             Pool pool = GetPool("1","1");
-            Assert.AreEqual(2,pool.HostsToUpgrade.Count);
-            Assert.IsTrue(pool.HostsToUpgrade.First().IsMaster());
-            Assert.IsFalse(pool.HostsToUpgrade.Last().IsMaster());
+            var hostsToUpgrade = pool.HostsToUpgrade();
+            Assert.AreEqual(2, hostsToUpgrade.Count);
+            Assert.IsTrue(hostsToUpgrade.First().IsMaster());
+            Assert.IsFalse(hostsToUpgrade.Last().IsMaster());
         }
 
         [Test]
@@ -57,8 +58,9 @@ namespace XenAdminTests.XenModelTests
         {
             //Add master
             Pool pool = GetPool("2","1");
-            Assert.AreEqual(1, pool.HostsToUpgrade.Count);
-            Assert.IsFalse(pool.HostsToUpgrade.First().IsMaster());
+            var hostsToUpgrade = pool.HostsToUpgrade();
+            Assert.AreEqual(1, hostsToUpgrade.Count);
+            Assert.IsFalse(hostsToUpgrade.First().IsMaster());
         }
 
         private Pool GetPool(string masterVersion,string slaveVersion)

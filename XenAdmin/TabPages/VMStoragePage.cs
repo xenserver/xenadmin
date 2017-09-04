@@ -211,14 +211,14 @@ namespace XenAdmin.TabPages
                     vbd.PropertyChanged -= new PropertyChangedEventHandler(vbd_PropertyChanged);
                     vbd.PropertyChanged += new PropertyChangedEventHandler(vbd_PropertyChanged);
 
-                    if (!vbd.IsCDROM && !vbd.IsFloppyDrive)
+                    if (!vbd.IsCDROM() && !vbd.IsFloppyDrive())
                     {
                         VDI vdi = vm.Connection.Resolve(vbd.VDI);
                         if (vdi == null || !vdi.Show(Properties.Settings.Default.ShowHiddenVMs))
                             continue;
 
                         SR sr = vm.Connection.Resolve(vdi.SR);
-                        if (sr == null || sr.IsToolsSR)
+                        if (sr == null || sr.IsToolsSR())
                             continue;
 
                         storageLinkColumnVisible = vdi.sm_config.ContainsKey("SVID");
@@ -712,16 +712,16 @@ namespace XenAdmin.TabPages
                 case 0:
                     return VBD.userdevice;
                 case 1:
-                    return VDI.Name;
+                    return VDI.Name();
                 case 2:
-                    return VDI.Description;
+                    return VDI.Description();
                 case 3:
-                    return SR.Name;
+                    return SR.Name();
                 case 4:
                     string name;
                     return VDI.sm_config.TryGetValue("displayname", out name) ? name : "";
                 case 5:
-                    return VDI.SizeText;
+                    return VDI.SizeText();
                 case 6:
                     return VBD.read_only ? Messages.YES : Messages.NO;
                 case 7:

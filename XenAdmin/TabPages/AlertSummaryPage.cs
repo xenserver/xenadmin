@@ -247,7 +247,8 @@ namespace XenAdmin.TabPages
             var newRow = new DataGridViewRow { Tag = alert, MinimumHeight = DataGridViewDropDownSplitButtonCell.MIN_ROW_HEIGHT };
 
             // Get the relevant image for the row depending on the type of the alert
-            Image typeImage = alert is MessageAlert && ((MessageAlert)alert).Message.ShowOnGraphs
+            var msgAlert = alert as MessageAlert;
+            Image typeImage = msgAlert != null && msgAlert.Message.ShowOnGraphs()
                                   ? Images.GetImage16For(((MessageAlert)alert).Message.Type)
                                   : Images.GetImage16For(alert.Priority);
 

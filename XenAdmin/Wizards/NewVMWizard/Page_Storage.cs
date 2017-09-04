@@ -82,8 +82,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             Template = template;
 
             InstallMethodIsNetwork = installMethodIsNetwork;
-            if ((!Template.DefaultTemplate && !Template.HasAtLeastOneDisk)
-                || (Template.IsHVM && InstallMethodIsNetwork)) // CA-46213 The default should be "diskless" if the install method is "boot from network"
+            if ((!Template.DefaultTemplate() && !Template.HasAtLeastOneDisk())
+                || (Template.IsHVM() && InstallMethodIsNetwork)) // CA-46213 The default should be "diskless" if the install method is "boot from network"
             {
                 DisklessVMRadioButton.Checked = true;
             }
@@ -174,11 +174,11 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void UpdateEnablement()
         {
-            AddButton.Enabled = DisksRadioButton.Checked && DisksGridView.Rows.Count < Template.MaxVBDsAllowed - 1;
+            AddButton.Enabled = DisksRadioButton.Checked && DisksGridView.Rows.Count < Template.MaxVBDsAllowed() - 1;
             PropertiesButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0;
             DeleteButton.Enabled = DisksRadioButton.Checked && DisksGridView.SelectedRows.Count > 0 && ((DiskGridRowItem)DisksGridView.SelectedRows[0]).CanDelete;
             DisksGridView.Enabled = DisksRadioButton.Checked;
-            DisklessVMRadioButton.Enabled = Template.IsHVM && InstallMethodIsNetwork;
+            DisklessVMRadioButton.Enabled = Template.IsHVM() && InstallMethodIsNetwork;
 
             CheckForOverCommit();
 
@@ -190,7 +190,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             CloneCheckBox.Enabled = false;
 
-            if (!Template.DefaultTemplate)
+            if (!Template.DefaultTemplate())
             {
                 foreach (DiskGridRowItem row in DisksGridView.Rows)
                 {
@@ -234,7 +234,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (sr == null) // no sr assigned
                     continue;
 
-                if(sr.HBALunPerVDI) //No over commit in this case
+                if(sr.HBALunPerVDI()) //No over commit in this case
                     continue;
 
                 if (totalDiskSize.ContainsKey(sr.opaque_ref))
@@ -256,13 +256,13 @@ namespace XenAdmin.Wizards.NewVMWizard
                 if (sr == null)
                     continue;
 
-                if (sr.HBALunPerVDI) //No over commit in this case
+                if (sr.HBALunPerVDI()) //No over commit in this case
                     continue;
 
                 if (item.Disk.SR.opaque_ref != sr.opaque_ref)
                     continue;
 
-                if (sr.FreeSpace < totalDiskInitialAllocation[sr.opaque_ref])
+                if (sr.FreeSpace() < totalDiskInitialAllocation[sr.opaque_ref])
                     overcommitedDisk = item.OverCommit = DiskOverCommit.Error;
 
                 if (item.OverCommit != DiskOverCommit.None)
@@ -270,7 +270,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     item.ImageToolTip = 
                         string.Format(Messages.NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT, 
                                                 Helpers.GetName(sr), 
-                                                Util.DiskSizeString(sr.FreeSpace),
+                                                Util.DiskSizeString(sr.FreeSpace()),
                                                 Util.DiskSizeString(totalDiskSize[sr.opaque_ref]));
                 }
                 item.UpdateDetails();
@@ -315,7 +315,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                if (!Template.DefaultTemplate && !Template.is_a_snapshot && !CloneCheckBox.Checked)
+                if (!Template.DefaultTemplate() && !Template.is_a_snapshot && !CloneCheckBox.Checked)
                 {
                     // if target disks are all on the same SR then use that SR
                     // otherwise iterate through disks and find first target disks that is on same SR as source disk
@@ -505,7 +505,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             if(sr == null)
                 SizeCell.Value = Util.DiskSizeString(Disk.virtual_size);
             else
-                SizeCell.Value = sr.HBALunPerVDI ? String.Empty : Util.DiskSizeString(Disk.virtual_size);
+                SizeCell.Value = sr.HBALunPerVDI() ? String.Empty : Util.DiskSizeString(Disk.virtual_size);
 
             NameCell.Value = Helpers.GetName(Disk);
 
@@ -557,7 +557,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         /// </summary>
         private static bool IsSufficientFreeSpaceAvailableOnSrForVdi(SR sr, VDI disk)
         {
-            return sr != null && !sr.IsFull && sr.FreeSpace > Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, disk);
+            return sr != null && !sr.IsFull() && sr.FreeSpace() > Helpers.GetRequiredSpaceToCreateVdiOnSr(sr, disk);
         }
     }
 

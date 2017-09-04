@@ -247,7 +247,7 @@ namespace XenAdminTests
             MWWaitFor(delegate
                 {
                     var nodes = new List<VirtualTreeNode>(MainWindowWrapper.TreeView.AllNodes);
-                    var defaultTemplates = nodes.Select(n => n.Tag is VM && ((VM)n.Tag).DefaultTemplate);
+                    var defaultTemplates = nodes.Select(n => n.Tag is VM && ((VM)n.Tag).DefaultTemplate());
                     return (defaultTemplates.Count() > 0);
                 });
         }

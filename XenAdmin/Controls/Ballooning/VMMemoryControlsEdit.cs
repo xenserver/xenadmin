@@ -54,7 +54,7 @@ namespace XenAdmin.Controls.Ballooning
             set
             {
                 base.VMs = value;
-                ballooning = vm0.has_ballooning;
+                ballooning = vm0.has_ballooning();
                 firstPaint = true;
                 maxMemAllowed = CalcMaxMemAllowed();
             }
@@ -104,10 +104,10 @@ namespace XenAdmin.Controls.Ballooning
 
         private long CalcMaxMemAllowed()
         {
-            long ans = (vms.Count == 0 ? VM.DEFAULT_MEM_ALLOWED : vms[0].MaxMemAllowed);
+            long ans = (vms.Count == 0 ? VM.DEFAULT_MEM_ALLOWED : vms[0].MaxMemAllowed());
             foreach (VM vm in vms)
             {
-                long max = vm.MaxMemAllowed;
+                long max = vm.MaxMemAllowed();
                 if (max < ans)
                     ans = max;
             }
@@ -246,7 +246,7 @@ namespace XenAdmin.Controls.Ballooning
             bool pv = false;
             foreach (VM vm in vms)
             {
-                if (vm.IsHVM)
+                if (vm.IsHVM())
                     hvm = true;
                 else
                     pv = true;

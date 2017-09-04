@@ -62,7 +62,7 @@ namespace XenAdmin.Actions.HostActions
 
             foreach(VM vm in Connection.ResolveAll(Host.resident_VMs))
             {
-                if (!vm.is_a_real_vm)
+                if (!vm.is_a_real_vm())
                     continue;
 
                 if (VmsRefsNotMigratable.Contains(vm.opaque_ref))

@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public bool ShowInstallationMedia { private get; set; }
 
-        public bool ShowBootParameters { get { return !SelectedTemplate.IsHVM; } }
+        public bool ShowBootParameters { get { return !SelectedTemplate.IsHVM(); } }
         
         public override void PageLoaded(PageLoadedDirection direction)
         {
@@ -100,16 +100,17 @@ namespace XenAdmin.Wizards.NewVMWizard
             }
             panelInstallationMethod.Enabled = true;
 
-            defaultTemplate = m_template.DefaultTemplate;
+            defaultTemplate = m_template.DefaultTemplate();
             userTemplate = !defaultTemplate;
-            hvm = m_template.IsHVM;
+            hvm = m_template.IsHVM();
             eli = !hvm && m_template.PV_bootloader == "eliloader";
-            installMethods = !string.IsNullOrEmpty(m_template.InstallMethods);
-            installCd = installMethods && m_template.InstallMethods.Contains("cdrom") && (hvm || eli);
-            installUrl = (installMethods &&
-                              (m_template.InstallMethods.Contains("http") ||
-                               m_template.InstallMethods.Contains("ftp") ||
-                               m_template.InstallMethods.Contains("nfs")) && eli);
+
+            var tmplMethods = m_template.InstallMethods();
+            installMethods = !string.IsNullOrEmpty(tmplMethods);
+            installCd = installMethods && tmplMethods.Contains("cdrom") && (hvm || eli);
+            installUrl = installMethods &&
+                         (tmplMethods.Contains("http") || tmplMethods.Contains("ftp") || tmplMethods.Contains("nfs")) &&
+                         eli;
             cds = Helpers.CDsExist(Connection);
             installed = userTemplate || !installMethods;
 
@@ -141,7 +142,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 else if (UrlRadioButton.Enabled)
                     UrlRadioButton.Checked = true;
                 else
-                    Trace.Assert(false, string.Format("No install options were enabled, something is wrong with the template '{0}'", m_template.Name));
+                    Trace.Assert(false, string.Format("No install options were enabled, something is wrong with the template '{0}'", m_template.Name()));
             }
             if(IsBootFromNetworkCustomTemplate(userTemplate))
             {
@@ -190,7 +191,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             if (Affinity == null || Affinity.Connection == null)
                 return null;
 
-            List<SR> dvdSRs = Affinity.Connection.Cache.SRs.Where(sr => sr.content_type == SR.Content_Type_ISO && sr.Physical && sr.GetStorageHost() == Affinity).ToList();
+            List<SR> dvdSRs = Affinity.Connection.Cache.SRs.Where(sr => sr.content_type == SR.Content_Type_ISO && sr.Physical() && sr.GetStorageHost() == Affinity).ToList();
 
             if (dvdSRs.Count > 0 && dvdSRs[0].VDIs.Count > 0)
                 return Affinity.Connection.Resolve(dvdSRs[0].VDIs[0]);
@@ -202,7 +203,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             get
             {
-                if (!ShowInstallationMedia || m_template.DefaultTemplate && String.IsNullOrEmpty(m_template.InstallMethods))
+                if (!ShowInstallationMedia || m_template.DefaultTemplate() && String.IsNullOrEmpty(m_template.InstallMethods()))
                     return InstallMethod.None;
                 if (CdRadioButton.Checked)
                     return InstallMethod.CD;
@@ -269,7 +270,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 {
                     case InstallMethod.CD:
                         sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_INSTALLATIONMEDIAPAGE_INSTALLMETHOD, Messages.NEWVMWIZARD_INSTALLATIONMEDIAPAGE_CD));
-                        sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CDMEDIAPAGE_INSTALLATIONSOURCE, SelectedCD != null ? SelectedCD.Name : Messages.NEWVMWIZARD_INSTALLATIONMEDIAPAGE_NONE));
+                        sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_CDMEDIAPAGE_INSTALLATIONSOURCE, SelectedCD != null ? SelectedCD.Name() : Messages.NEWVMWIZARD_INSTALLATIONMEDIAPAGE_NONE));
                         break;
                     case InstallMethod.Network:
                         sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_INSTALLATIONMEDIAPAGE_INSTALLMETHOD, Messages.NEWVMWIZARD_INSTALLATIONMEDIAPAGE_NETWORK));

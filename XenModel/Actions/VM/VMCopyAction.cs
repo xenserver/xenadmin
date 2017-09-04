@@ -43,7 +43,7 @@ namespace XenAdmin.Actions.VMActions
         private string _namedescription;
 
         public VMCopyAction(VM vm, Host host, SR sr, string nameLabel, string description)
-            : base(vm.Connection, string.Format(Messages.ACTION_VM_COPYING_TITLE, vm.Name, nameLabel, sr.NameWithoutHost))
+            : base(vm.Connection, string.Format(Messages.ACTION_VM_COPYING_TITLE, vm.Name(), nameLabel, sr.NameWithoutHost()))
         {
             this.Description = Messages.ACTION_PREPARING;
             this.VM = vm;
@@ -79,7 +79,7 @@ namespace XenAdmin.Actions.VMActions
             }
             catch (CancelledException)
             {
-                this.Description = string.Format(Messages.COPY_TO_SHARED_CANCELLED, VM.Name);
+                this.Description = string.Format(Messages.COPY_TO_SHARED_CANCELLED, VM.Name());
                 throw;
             }
             {

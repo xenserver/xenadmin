@@ -100,7 +100,7 @@ namespace XenAdmin.TabPages
             pGPUs.AddRange(from pGpu in allPgpus
                            let host = xenObject.Connection.Resolve(pGpu.host)
                            where pGpu.supported_VGPU_types.Count > 0 && (xenObject is Pool || xenObject == host)
-                           orderby host, pGpu.Name ascending
+                           orderby host, pGpu.Name() ascending
                            select pGpu
                 );
 
@@ -111,7 +111,7 @@ namespace XenAdmin.TabPages
                 var enabledTypes = pGpu.Connection.ResolveAll(pGpu.enabled_VGPU_types);
                 var supportedTypes = pGpu.Connection.ResolveAll(pGpu.supported_VGPU_types);
 
-                var newSettings = new GpuSettings(enabledTypes.ToArray(), supportedTypes.ToArray(), pGpu.Name);
+                var newSettings = new GpuSettings(enabledTypes.ToArray(), supportedTypes.ToArray(), pGpu.Name());
                 
                 var existingSettings = settingsToPGPUs.Keys.FirstOrDefault(ss => ss.Equals(newSettings));
 

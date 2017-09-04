@@ -94,7 +94,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 {
                     Pool pool = Helpers.GetPoolOfOne(master.Connection);
                     if (pool != null)
-                        SelectedServers.AddRange(pool.HostsToUpgrade);
+                        SelectedServers.AddRange(pool.HostsToUpgrade());
                     else
                         SelectedServers.Add(master);
                 }

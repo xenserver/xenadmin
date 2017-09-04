@@ -36,42 +36,32 @@ namespace XenAPI
 {
     partial class VGPU_type : IComparable<VGPU_type>, IEquatable<VGPU_type>
     {
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                if (IsPassthrough)
-                    return Messages.VGPU_PASSTHRU_TOSTRING;
+            if (IsPassthrough())
+                return Messages.VGPU_PASSTHRU_TOSTRING;
 
-                return string.Format(Messages.VGPU_TOSTRING, model_name, Capacity);
-            }
-
+            return string.Format(Messages.VGPU_TOSTRING, model_name, Capacity());
         }
 
-        public override string Description
+        public override string Description()
         {
-            get
-            {
-                if (IsPassthrough)
-                    return Messages.VGPU_PASSTHRU_TOSTRING;
+            if (IsPassthrough())
+                return Messages.VGPU_PASSTHRU_TOSTRING;
 
-                if ((MaxResolution == "0x0" || string.IsNullOrEmpty(MaxResolution)) && max_heads < 1)
-                    return string.Format(Messages.VGPU_DESCRIPTION_ZEROES, model_name, Capacity);
+            var maxRes = MaxResolution();
+            if ((maxRes == "0x0" || string.IsNullOrEmpty(maxRes)) && max_heads < 1)
+                return string.Format(Messages.VGPU_DESCRIPTION_ZEROES, model_name, Capacity());
 
-                return string.Format(max_heads == 1 ? Messages.VGPU_DESCRIPTION_ONE : Messages.VGPU_DESCRIPTION_MANY,
-                    model_name, Capacity, MaxResolution, max_heads);
-            }
-
+            return string.Format(max_heads == 1 ? Messages.VGPU_DESCRIPTION_ONE : Messages.VGPU_DESCRIPTION_MANY,
+                model_name, Capacity(), maxRes, max_heads);
         }
 
-        public string MaxResolution
+        public string MaxResolution()
         {
-            get
-            {
-                return max_resolution_x + "x" + max_resolution_y;
-            }
+            return max_resolution_x + "x" + max_resolution_y;
         }
-        
+
         #region IEquatable<VGPU_type> Members
 
         /// <summary>
@@ -92,11 +82,13 @@ namespace XenAPI
         // * In case of ties, highest resolution is biggest
         public override int CompareTo(VGPU_type other)
         {
-            if (this.IsPassthrough != other.IsPassthrough)
-                return this.IsPassthrough ? 1 : -1;
+            bool thisPassthrough = this.IsPassthrough();
+            bool otherPassthrough = other.IsPassthrough();
+            if (thisPassthrough != otherPassthrough)
+                return thisPassthrough ? 1 : -1;
 
-            long thisCapacity = this.Capacity;
-            long otherCapacity = other.Capacity;
+            long thisCapacity = this.Capacity();
+            long otherCapacity = other.Capacity();
             if (thisCapacity != otherCapacity)
                 return (int)(otherCapacity - thisCapacity);
 
@@ -107,32 +99,29 @@ namespace XenAPI
 
             return base.CompareTo(other);
         }
-    
+
         /// <summary>
         /// vGPUs per GPU
         /// </summary>
-        public long Capacity
+        public long Capacity()
         {
-            get
+            long capacity = 0;
+            if (supported_on_PGPUs != null && supported_on_PGPUs.Count > 0)
             {
-                long capacity = 0;
-                if (supported_on_PGPUs != null && supported_on_PGPUs.Count > 0)
+                PGPU pgpu = Connection.Resolve(supported_on_PGPUs[0]);
+                if (pgpu != null && pgpu.supported_VGPU_max_capacities != null && pgpu.supported_VGPU_max_capacities.Count > 0)
                 {
-                    PGPU pgpu = Connection.Resolve(supported_on_PGPUs[0]);
-                    if (pgpu != null && pgpu.supported_VGPU_max_capacities != null && pgpu.supported_VGPU_max_capacities.Count > 0)
-                    {
-                        var vgpuTypeRef = new XenRef<VGPU_type>(this);
-                        if (pgpu.supported_VGPU_max_capacities.ContainsKey(vgpuTypeRef)) 
-                            capacity = pgpu.supported_VGPU_max_capacities[vgpuTypeRef];
-                    }
+                    var vgpuTypeRef = new XenRef<VGPU_type>(this);
+                    if (pgpu.supported_VGPU_max_capacities.ContainsKey(vgpuTypeRef))
+                        capacity = pgpu.supported_VGPU_max_capacities[vgpuTypeRef];
                 }
-                return capacity;
             }
+            return capacity;
         }
 
-        public bool IsPassthrough
+        public bool IsPassthrough()
         {
-            get { return model_name == "passthrough"; }
+            return model_name == "passthrough";
         }
     }
 }

@@ -168,7 +168,7 @@ namespace XenAdmin.Controls
                 return;
             }
 
-            VM dom0 = source.ControlDomainZero;
+            VM dom0 = source.ControlDomainZero();
             if (dom0 == null)
             {
                 log.Error("No dom0 on host when connecting to host VNC console.");
@@ -194,7 +194,7 @@ namespace XenAdmin.Controls
                 return false;
             }
 
-            string roleList = source.IsControlDomainZero ? "http/connect_console/host_console" : "http/connect_console";
+            string roleList = source.IsControlDomainZero() ? "http/connect_console/host_console" : "http/connect_console";
             List<Role> validRoles = Role.ValidRoleList(roleList, source.Connection);
             allowedRoles = validRoles;
             return source.Connection.Session.Roles.Find(r => validRoles.Contains(r)) == null;
@@ -327,24 +327,24 @@ namespace XenAdmin.Controls
                               Program.AssertOnEventThread();
                               try
                               {
-                                  log.DebugFormat("ConsolePanel: closeVNCForSource({0}) in delegate", vm.Name);
+                                  log.DebugFormat("ConsolePanel: closeVNCForSource({0}) in delegate", vm.Name());
                                   closeVNCForSource(vm, true);
                               }
                               catch (Exception exception)
                               {
                                   log.ErrorFormat("ConsolePanel: Exception closing the VNC console for {0}: {1}",
-                                                  vm.Name, exception.Message);
+                                                  vm.Name(), exception.Message);
                               }
 
                               t.Stop();
                               CloseVNCTimers.Remove(vm);
                               log.DebugFormat(
                                   "ConsolePanel: CloseVNCTimer({0}): Timer stopped and removed in delegate",
-                                  vm.Name);
+                                  vm.Name());
                           };
 
             CloseVNCTimers.Add(vm, t);
-            log.DebugFormat("ConsolePanel: CloseVNCTimer({0}): Start timer (timers count {1})", vm.Name, CloseVNCTimers.Count);
+            log.DebugFormat("ConsolePanel: CloseVNCTimer({0}): Start timer (timers count {1})", vm.Name(), CloseVNCTimers.Count);
             t.Start();
         }
 
@@ -357,7 +357,7 @@ namespace XenAdmin.Controls
 
             CloseVNCTimers[vm].Stop();
             CloseVNCTimers.Remove(vm);
-            log.DebugFormat("ConsolePanel: StopCloseVncTimer({0}): Timer stopped and removed", vm.Name);
+            log.DebugFormat("ConsolePanel: StopCloseVncTimer({0}): Timer stopped and removed", vm.Name());
         }
 
         #endregion
@@ -374,7 +374,7 @@ namespace XenAdmin.Controls
                 return;
             }
 
-            VM cvm = source.OtherControlDomains.FirstOrDefault();
+            VM cvm = source.OtherControlDomains().FirstOrDefault();
             if (cvm == null)
             {
                 log.Error("Could not find CVM console on host.");

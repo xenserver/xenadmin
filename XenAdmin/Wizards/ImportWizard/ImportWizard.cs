@@ -467,9 +467,9 @@ namespace XenAdmin.Wizards.ImportWizard
 		private IEnumerable<Tuple> GetSummaryXva()
 		{
 			var temp = new List<Tuple>();
-			temp.Add(new Tuple(Messages.FINISH_PAGE_VMNAME, m_pageXvaStorage.ImportedVm.Name));
-			temp.Add(new Tuple(Messages.FINISH_PAGE_TARGET, m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection.Name : m_pageXvaHost.SelectedHost.Name));
-			temp.Add(new Tuple(Messages.FINISH_PAGE_STORAGE, m_pageXvaStorage.SR.Name));
+			temp.Add(new Tuple(Messages.FINISH_PAGE_VMNAME, m_pageXvaStorage.ImportedVm.Name()));
+			temp.Add(new Tuple(Messages.FINISH_PAGE_TARGET, m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection.Name : m_pageXvaHost.SelectedHost.Name()));
+			temp.Add(new Tuple(Messages.FINISH_PAGE_STORAGE, m_pageXvaStorage.SR.Name()));
 
 			var con = m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection : m_pageXvaHost.SelectedHost.Connection;
 
@@ -479,10 +479,10 @@ namespace XenAdmin.Wizards.ImportWizard
 				var netref = new XenRef<XenAPI.Network>(vif.network);
 				var network = con.Resolve(netref);
 				// CA-218956 - Expose HIMN when showing hidden objects
-				if (network == null || (network.IsGuestInstallerNetwork && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
+				if (network == null || (network.IsGuestInstallerNetwork() && !XenAdmin.Properties.Settings.Default.ShowHiddenVMs))
 					continue;
 
-				temp.Add(new Tuple(first ? Messages.FINISH_PAGE_NETWORK : "", network.Name));
+				temp.Add(new Tuple(first ? Messages.FINISH_PAGE_NETWORK : "", network.Name()));
 				first = false;
 			}
 
@@ -503,7 +503,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 			temp.Add(new Tuple(Messages.FINISH_PAGE_RUN_FIXUPS, m_pageOptions.RunFixups.ToYesNoStringI18n()));
 			if (m_pageOptions.RunFixups)
-				temp.Add(new Tuple(Messages.FINISH_PAGE_ISOSR, m_pageOptions.SelectedIsoSR.Name));
+				temp.Add(new Tuple(Messages.FINISH_PAGE_ISOSR, m_pageOptions.SelectedIsoSR.Name()));
 
 			temp.AddRange(GetVmMappingsSummary());
 			temp.AddRange(GetTransferVmSummary());
@@ -523,7 +523,7 @@ namespace XenAdmin.Wizards.ImportWizard
 
 			temp.Add(new Tuple(Messages.FINISH_PAGE_RUN_FIXUPS, m_pageOptions.RunFixups.ToYesNoStringI18n()));
 			if (m_pageOptions.RunFixups)
-				temp.Add(new Tuple(Messages.FINISH_PAGE_ISOSR, m_pageOptions.SelectedIsoSR.Name));
+				temp.Add(new Tuple(Messages.FINISH_PAGE_ISOSR, m_pageOptions.SelectedIsoSR.Name()));
 
 			temp.AddRange(GetVmMappingsSummary());
 			temp.AddRange(GetTransferVmSummary());
@@ -544,14 +544,14 @@ namespace XenAdmin.Wizards.ImportWizard
 				bool first = true;
 				foreach (var sr in mapping.Storage)
 				{
-					temp.Add(new Tuple(first ? storageLbl : "", sr.Value.Name));
+					temp.Add(new Tuple(first ? storageLbl : "", sr.Value.Name()));
 					first = false;
 				}
 
 				first = true;
 				foreach (var net in mapping.Networks)
 				{
-					temp.Add(new Tuple(first ? networkLbl : "", net.Value.Name));
+					temp.Add(new Tuple(first ? networkLbl : "", net.Value.Name()));
 					first = false;
 				}
 			}

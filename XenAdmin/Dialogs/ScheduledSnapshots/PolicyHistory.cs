@@ -207,7 +207,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         private void ReloadHistoryLabel()
         {
             string Name;
-            Name = _policy.Name;
+            Name = _policy.Name();
             // ellipsise if necessary
             using (System.Drawing.Graphics g = labelHistory.CreateGraphics())
             {

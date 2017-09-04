@@ -43,7 +43,7 @@ namespace XenAdmin.Actions
         private Action _showVBDWarningBox;
 
         public CreateCdDriveAction(VM vm, bool installingTools, Action showMustRebootBoxCD, Action showVBDWarningBox)
-            : base(vm.Connection, string.Format(Messages.NEW_DVD_DRIVE_CREATE_TITLE, vm.Name))
+            : base(vm.Connection, string.Format(Messages.NEW_DVD_DRIVE_CREATE_TITLE, vm.Name()))
         {
             _showMustRebootBoxCD = showMustRebootBoxCD;
             _showVBDWarningBox = showVBDWarningBox;
@@ -64,7 +64,7 @@ namespace XenAdmin.Actions
                 Description = Messages.NEW_DVD_DRIVE_CREATING;
                 // could not find a cd, try and make one
 
-                if (VM.VBDs.Count >= VM.MaxVBDsAllowed)
+                if (VM.VBDs.Count >= VM.MaxVBDsAllowed())
                 {
                     throw new Exception(Messages.CDDRIVE_MAX_ALLOWED_VBDS);
                 }

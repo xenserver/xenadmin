@@ -180,7 +180,7 @@ namespace XenAdmin.SettingsPanels
                 vm.memory_static_max >= vm.memory_static_min)
             {
                 decimal min = Convert.ToDecimal(vm.memory_static_min / Util.BINARY_MEGA);
-                decimal max = Convert.ToDecimal(vm.MaxMemAllowed / Util.BINARY_MEGA);
+                decimal max = Convert.ToDecimal(vm.MaxMemAllowed() / Util.BINARY_MEGA);
                 decimal value = Convert.ToDecimal(vm.memory_static_max / Util.BINARY_MEGA);
                 // Avoid setting the range to exclude the current value: CA-40041
                 if (value > max)
@@ -216,7 +216,7 @@ namespace XenAdmin.SettingsPanels
                 lblVcpuWarning.Visible = false;
             }
 
-            isVcpuHotplugSupported = vm.SupportsVcpuHotplug;
+            isVcpuHotplugSupported = vm.SupportsVcpuHotplug();
 
             label1.Text = GetRubric();
 
@@ -251,12 +251,13 @@ namespace XenAdmin.SettingsPanels
 
             comboBoxVCPUs.Enabled = comboBoxTopology.Enabled = vm.power_state == vm_power_state.Halted;
 
-            comboBoxTopology.Populate(vm.VCPUs_at_startup, vm.VCPUs_max, vm.CoresPerSocket, vm.MaxCoresPerSocket);
+            comboBoxTopology.Populate(vm.VCPUs_at_startup, vm.VCPUs_max, vm.CoresPerSocket, vm.MaxCoresPerSocket());
 
             // CA-12941 
             // We set a sensible maximum based on the template, but if the user sets something higher 
             // from the CLI then use that as the maximum.
-            long maxVCPUs = vm.MaxVCPUsAllowed < _OrigVCPUs ? _OrigVCPUs : vm.MaxVCPUsAllowed;
+            var maxAllowed = vm.MaxVCPUsAllowed();
+            long maxVCPUs = maxAllowed < _OrigVCPUs ? _OrigVCPUs : maxAllowed;
             PopulateVCPUs(maxVCPUs, _OrigVCPUs);
 
             if (isVcpuHotplugSupported)

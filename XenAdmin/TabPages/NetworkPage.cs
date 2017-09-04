@@ -228,7 +228,7 @@ namespace XenAdmin.TabPages
 
                 // the IP Setup cell
                 DataGridViewTextBoxCell ipSetupCell = new DataGridViewTextBoxCell();
-                ipSetupCell.Value = pif.IpConfigurationModeString;
+                ipSetupCell.Value = pif.IpConfigurationModeString();
                 Cells.Add(ipSetupCell);
 
                 // the ip address of the interface

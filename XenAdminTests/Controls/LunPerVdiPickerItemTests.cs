@@ -54,7 +54,7 @@ namespace XenAdminTests.Controls
         public bool IsValidForMapping(bool lunPerVDI)
         {
             Mock<SR> sr = ObjectManager.NewXenObject<SR>(id);
-            sr.Setup(s => s.HBALunPerVDI).Returns(lunPerVDI);
+            sr.Setup(s => s.HBALunPerVDI()).Returns(lunPerVDI);
             Mock<VDI> vdi = ObjectManager.NewXenObject<VDI>(id);
             LunPerVdiPickerItem item = new LunPerVdiPickerItem(sr.Object, vdi.Object);
             return item.IsValidForMapping;
@@ -96,7 +96,7 @@ namespace XenAdminTests.Controls
         {
             const string dummy = "DUMMY_STRING";
             Mock<VDI> vdi = ObjectManager.NewXenObject<VDI>(id);
-            vdi.Setup(v => v.Name).Returns(dummy);
+            vdi.Setup(v => v.Name()).Returns(dummy);
             LunPerVdiPickerItemWrapper item = new LunPerVdiPickerItemWrapper(null, vdi.Object);
             Assert.That(item.VdiColumn, Is.EqualTo(dummy));
             vdi.VerifyAll();
@@ -107,7 +107,7 @@ namespace XenAdminTests.Controls
         {
             const string dummy = "DUMMY_STRING";
             Mock<SR> sr = ObjectManager.NewXenObject<SR>(id);
-            sr.Setup(v => v.Name).Returns(dummy);
+            sr.Setup(v => v.Name()).Returns(dummy);
             LunPerVdiPickerItemWrapper item = new LunPerVdiPickerItemWrapper(sr.Object, null);
             Assert.That(item.SrColumn, Is.EqualTo(dummy));
             sr.VerifyAll();
@@ -125,10 +125,10 @@ namespace XenAdminTests.Controls
         {
             LunPerVdiPickerItem nullItem = new LunPerVdiPickerItem(null, null);
             Mock<VDI> vdi = ObjectManager.NewXenObject<VDI>(id);
-            vdi.Setup(v => v.Name).Returns("NAME");
+            vdi.Setup(v => v.Name()).Returns("NAME");
             LunPerVdiPickerItem item = new LunPerVdiPickerItem(null, vdi.Object);
             Assert.That(item.Equals(nullItem), Is.False);
-            vdi.VerifyGet(v=>v.Name);
+            vdi.VerifyGet(v=>v.Name());
         }
 
         [Test]

@@ -117,20 +117,21 @@ namespace XenAdmin.TabPages
             pif.PropertyChanged -= PIF_PropertyChangedEventHandler;
             pif.PropertyChanged += PIF_PropertyChangedEventHandler;
 
-            if (pif.PIFMetrics != null)
+            var pifMetrics = pif.PIFMetrics();
+            if (pifMetrics != null)
             {
-                pif.PIFMetrics.PropertyChanged -= PropertyChangedEventHandler;
-                pif.PIFMetrics.PropertyChanged += PropertyChangedEventHandler;
+                pifMetrics.PropertyChanged -= PropertyChangedEventHandler;
+                pifMetrics.PropertyChanged += PropertyChangedEventHandler;
             }
         }
 
         private void UnregisterPIFEventHandlers(PIF pif)
         {
             pif.PropertyChanged -= PIF_PropertyChangedEventHandler;
-            if (pif.PIFMetrics != null)
-            {
-                pif.PIFMetrics.PropertyChanged -= PropertyChangedEventHandler;
-            }
+            var pifMetrics = pif.PIFMetrics();
+
+            if (pifMetrics != null)
+                pifMetrics.PropertyChanged -= PropertyChangedEventHandler;
         }
 
         private void UnregisterHandlers()
@@ -166,7 +167,7 @@ namespace XenAdmin.TabPages
                 {
                     foreach (PIF PIF in host.Connection.ResolveAll(host.PIFs))
                     {
-                        if (!PIF.IsPhysical)
+                        if (!PIF.IsPhysical())
                             continue;
 
                         RegisterPIFEventHandlers(PIF);
@@ -208,7 +209,7 @@ namespace XenAdmin.TabPages
             public PIFRow(PIF pif)
             {
                 this.pif = pif;
-                PIF_metrics PIFMetrics = pif.PIFMetrics;
+                PIF_metrics PIFMetrics = pif.PIFMetrics();
                 if (PIFMetrics != null)
                 {
                     vendor = PIFMetrics.vendor_name;
@@ -228,19 +229,19 @@ namespace XenAdmin.TabPages
                 switch (index)
                 {
                     case 0:
-                        Cells[0].Value = pif.Name;
+                        Cells[0].Value = pif.Name();
                         break;
                     case 1:
                         Cells[1].Value = pif.MAC;
                         break;
                     case 2:
-                        Cells[2].Value = pif.Carrier ? Messages.CONNECTED : Messages.DISCONNECTED;
+                        Cells[2].Value = pif.Carrier() ? Messages.CONNECTED : Messages.DISCONNECTED;
                         break;
                     case 3:
-                        Cells[3].Value = pif.Carrier ? pif.Speed : Messages.HYPHEN;
+                        Cells[3].Value = pif.Carrier() ? pif.Speed() : Messages.HYPHEN;
                         break;
                     case 4:
-                        Cells[4].Value = pif.Carrier ? pif.Duplex : Messages.HYPHEN;
+                        Cells[4].Value = pif.Carrier() ? pif.Duplex() : Messages.HYPHEN;
                         break;
                     case 5:
                         Cells[5].Value = vendor;
@@ -252,7 +253,7 @@ namespace XenAdmin.TabPages
                         Cells[7].Value = busPath;
                         break;
                     case 8:
-                        Cells[8].Value = pif.FCoECapable ? Messages.YES : Messages.NO;
+                        Cells[8].Value = pif.FCoECapable().ToYesNoStringI18n();
                         break;
                 }
             }
@@ -265,8 +266,16 @@ namespace XenAdmin.TabPages
                 DeleteBondButton.Enabled = false;
                 return;
             }
+
             PIF pif = ((PIFRow)dataGridView1.SelectedRows[0]).pif;
-            DeleteBondButton.Enabled = pif != null && pif.BondMasterOf != null && !pif.BondMasterOf.Locked;
+            if (pif == null)
+            {
+                DeleteBondButton.Enabled = false;
+                return;
+            }
+
+            var bondMasterOf = pif.BondMasterOf();
+            DeleteBondButton.Enabled = bondMasterOf != null && !bondMasterOf.Locked;
         }
 
         private void CreateBondButton_Click(object sender, EventArgs e)
@@ -279,7 +288,7 @@ namespace XenAdmin.TabPages
         private void DeleteBondButton_Click(object sender, EventArgs e)
         {
             PIF pif = ((PIFRow)dataGridView1.SelectedRows[0]).pif;
-            System.Diagnostics.Trace.Assert(pif.IsBondNIC);
+            System.Diagnostics.Trace.Assert(pif.IsBondNIC());
             XenAPI.Network network = pif.Connection.Resolve(pif.network);
             var destroyBondCommand = new DestroyBondCommand(Program.MainWindow, network);
             destroyBondCommand.Execute();

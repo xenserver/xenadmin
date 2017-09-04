@@ -80,8 +80,8 @@ namespace XenAdminTests.UnitTests.UnitTestHelper.MockObjectBuilders
         private Mock<Host> CreateHost()
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(ConnectionId);
-            host.Setup(h => h.ProductVersion).Returns(ProductVersion);
-            host.Setup(h => h.PlatformVersion).Returns(PlatformVersion);
+            host.Setup(h => h.ProductVersion()).Returns(ProductVersion);
+            host.Setup(h => h.PlatformVersion()).Returns(PlatformVersion);
             return host;
         }
 

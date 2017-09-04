@@ -41,7 +41,7 @@ namespace XenAdmin.Dialogs.LicenseManagerSelectionVerifiers
 
         public override void Verify()
         {
-            if (AllHostsRepresentedByRows().All(host => !host.IsLive))
+            if (AllHostsRepresentedByRows().All(host => !host.IsLive()))
             {
                 Status = VerificationStatus.Error;
                 return;

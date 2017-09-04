@@ -96,7 +96,7 @@ namespace XenAdmin.Commands
 
             Program.Invoke(Program.MainWindow, () => Program.MainWindow.ConsolePanel.setCurrentSource(vm));
 
-            RevertDialog dialog = new RevertDialog(vm, _snapshot.Name);
+            RevertDialog dialog = new RevertDialog(vm, _snapshot.Name());
 
             if (dialog.ShowDialog() == DialogResult.Yes)
             {

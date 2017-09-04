@@ -29597,15 +29597,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Taking snapshots.
-        /// </summary>
-        public static string RUNNING_SNAPSHOTS {
-            get {
-                return ResourceManager.GetString("RUNNING_SNAPSHOTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Saturday.
         /// </summary>
         public static string SATURDAY_LONG {

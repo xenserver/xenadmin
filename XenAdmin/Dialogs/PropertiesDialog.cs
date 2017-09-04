@@ -120,7 +120,7 @@ namespace XenAdmin.Dialogs
             bool is_vdi = xenObjectCopy is VDI;
             bool is_network = xenObjectCopy is XenAPI.Network;
 
-            bool is_hvm = is_vm && ((VM)xenObjectCopy).IsHVM;
+            bool is_hvm = is_vm && ((VM)xenObjectCopy).IsHVM();
             bool is_in_pool = Helpers.GetPool(xenObjectCopy.Connection) != null;
 
             bool is_pool_or_standalone = is_pool || (is_host && !is_in_pool);
@@ -191,7 +191,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(PoolPowerONEditPage = new PoolPowerONEditPage());
 
                 if ((is_pool_or_standalone && Helpers.VGpuCapability(xenObjectCopy.Connection))
-                    || (is_host && ((Host)xenObjectCopy).CanEnableDisableIntegratedGpu))
+                    || (is_host && ((Host)xenObjectCopy).CanEnableDisableIntegratedGpu()))
                 {
                     ShowTab(PoolGpuEditPage = new PoolGpuEditPage());
                 }
@@ -228,10 +228,10 @@ namespace XenAdmin.Dialogs
                     ShowTab(VMAdvancedEditPage = new VMAdvancedEditPage());
                 }
 
-                if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanBeEnlightened)
+                if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanBeEnlightened())
                     ShowTab(VMEnlightenmentEditPage = new VMEnlightenmentEditPage());
 
-                if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanHaveCloudConfigDrive)
+                if (is_vm && Helpers.ContainerCapability(xenObject.Connection) && ((VM)xenObjectCopy).CanHaveCloudConfigDrive())
                     ShowTab(CloudConfigParametersPage = new Page_CloudConfigParameters());
 
                 if(is_VMSS)

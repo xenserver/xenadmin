@@ -146,7 +146,7 @@ namespace XenAdmin.Controls.GPU
 
         private void SetWindowTitle()
         {
-            var name = PGpuList[0].Name;
+            var name = PGpuList[0].Name();
             Text = PGpuList.Count == 1
                 ? String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE, name)
                 : String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS, name, PGpuList.Count);
@@ -211,17 +211,20 @@ namespace XenAdmin.Controls.GPU
 
         private void SetCells()
         {
-            bool isPassThru = VGpuType.IsPassthrough;
+            bool isPassThru = VGpuType.IsPassthrough();
 
             nameColumn.Value = isPassThru ? Messages.VGPU_PASSTHRU_TOSTRING : VGpuType.model_name;
 
             if (!isPassThru)
-                vGpusPerGpuColumn.Value = VGpuType.Capacity;
+                vGpusPerGpuColumn.Value = VGpuType.Capacity();
             else
                 vGpusPerGpuColumn.Value = string.Empty;
 
             if (!isPassThru)
-                maxResolutionColumn.Value = (VGpuType.MaxResolution == "0x0" || String.IsNullOrEmpty(VGpuType.MaxResolution)) ? "" : VGpuType.MaxResolution;
+            {
+                var maxRes = VGpuType.MaxResolution();
+                maxResolutionColumn.Value = maxRes == "0x0" || String.IsNullOrEmpty(maxRes) ? "" : maxRes;
+            }
 
             if (!isPassThru)
                 maxDisplaysColumn.Value = VGpuType.max_heads < 1 ? "" : String.Format("{0}",VGpuType.max_heads);

@@ -258,13 +258,14 @@ namespace XenAdmin.Controls
         private void UpdateDetails()
         {
             ImageCell.Value = Images.GetImage16For(Server);
-            NameCell.Value = Server.Name;
+            NameCell.Value = Server.Name();
 
-            Enabled = Server.IsLive;
+            bool isLiveHost = Server.IsLive();
+            Enabled = isLiveHost;
 
             if (showReason)
             {
-                ReasonCell.Value = Server.IsLive ? Server.HostMemoryString : Messages.HOMESERVER_PICKER_HOST_NOT_LIVE;
+                ReasonCell.Value = isLiveHost ? Server.HostMemoryString() : Messages.HOMESERVER_PICKER_HOST_NOT_LIVE;
             }
 
         }

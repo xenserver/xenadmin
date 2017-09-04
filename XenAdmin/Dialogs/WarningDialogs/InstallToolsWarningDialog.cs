@@ -85,7 +85,7 @@ namespace XenAdmin.Dialogs
             {
                 foreach (SR sr in c.Cache.SRs)
                 {
-                    if (sr.IsToolsSR && sr.IsBroken())
+                    if (sr.IsToolsSR() && sr.IsBroken())
                     {
                         Hide();
                         DialogResult dialogResult;

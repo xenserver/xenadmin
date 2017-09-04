@@ -92,7 +92,7 @@ namespace XenAdmin.SettingsPanels
         // Can the network's NIC and VLAN be edited?
         private bool Editable(PIF pif)
         {
-            return (pif == null || (!pif.IsPhysical && !pif.IsTunnelAccessPIF));
+            return (pif == null || (!pif.IsPhysical() && !pif.IsTunnelAccessPIF()));
         }
 
         private void EnableDisable()
@@ -135,7 +135,7 @@ namespace XenAdmin.SettingsPanels
                 {
                     var isManagementInterface = p.IsManagementInterface(XenAdmin.Properties.Settings.Default.ShowHiddenVMs);
                     if (isManagementInterface)
-                        managementInterfaceName = p.ManagementInterfaceNameOrUnknown;
+                        managementInterfaceName = p.ManagementInterfaceNameOrUnknown();
                     return isManagementInterface;
                 });
 
@@ -145,17 +145,9 @@ namespace XenAdmin.SettingsPanels
                    return pif.physical;
                });
 
-            bool bond = network.Connection.ResolveAll(network.PIFs).Exists(
-               delegate(PIF pif)
-               {
-                   return pif.IsBondNIC;
-               });
+            bool bond = network.Connection.ResolveAll(network.PIFs).Exists(pif => pif.IsBondNIC());
 
-            bool tunnel = network.Connection.ResolveAll(network.PIFs).Exists(
-               delegate(PIF pif)
-               {
-                   return pif.IsTunnelAccessPIF;
-               });
+            bool tunnel = network.Connection.ResolveAll(network.PIFs).Exists(pif => pif.IsTunnelAccessPIF());
 
             // If the original network restricts our settings we enable/disable controls here - this could actually only be run once if needed
             HostPNICList.Enabled = !blockDueToAttachedVMs && !blockDueToManagement;
@@ -192,7 +184,7 @@ namespace XenAdmin.SettingsPanels
 
         private void SetMTUControlEnablement()
         {
-            if (!network.CanUseJumboFrames)
+            if (!network.CanUseJumboFrames())
             {
                 labelCannotConfigureMTU.Visible = false;
                 labelMTU.Visible = numericUpDownMTU.Visible = false;
@@ -222,14 +214,14 @@ namespace XenAdmin.SettingsPanels
                     labelCannotConfigureMTU.Visible = true;
                     numericUpDownMTU.Enabled = false;
                 }
-                else if (networksPIF != null && networksPIF.IsTunnelAccessPIF)
+                else if (networksPIF != null && networksPIF.IsTunnelAccessPIF())
                 {
                     // This branch is currently not in use as setting the MTU is disabled on CHINs.
                     // Left in in case future support is added
 
                     // with no other more danger warnings we should tell the user it's recommended that they set the MTU on the underlying networks to match
                     XenAPI.Network mainNetwork = FindCHINMainNetwork(networksPIF);
-                    labelCannotConfigureMTU.Text = string.Format(Messages.SET_MTU_ON_CHINS_UNDER_NETWORK, mainNetwork.Name);
+                    labelCannotConfigureMTU.Text = string.Format(Messages.SET_MTU_ON_CHINS_UNDER_NETWORK, mainNetwork.Name());
                     // incase some odd value has been set on the CLI
                     numericUpDownMTU.Maximum = Math.Max(network.MTU, XenAPI.Network.MTU_MAX);
                     numericUpDownMTU.Minimum = Math.Min(network.MTU, XenAPI.Network.MTU_MIN);
@@ -249,7 +241,7 @@ namespace XenAdmin.SettingsPanels
             {
                 // physical or virtual external management (could be bond)
                 numericUpDownMTU.Enabled = false;
-                labelCannotConfigureMTU.Text = string.Format(Messages.CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT, networksPIF.ManagementInterfaceNameOrUnknown);
+                labelCannotConfigureMTU.Text = string.Format(Messages.CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT, networksPIF.ManagementInterfaceNameOrUnknown());
                 labelCannotConfigureMTU.Visible = true;
             }
         }
@@ -279,11 +271,11 @@ namespace XenAdmin.SettingsPanels
             if (p != null && p.physical)
                 return p;
 
-            if (p != null && p.IsBondNIC)
+            if (p != null && p.IsBondNIC())
                 return p;
 
             // also no need to look in the combo box if we're a CHIN as they can't be edited either
-            if (p != null && p.IsTunnelAccessPIF)
+            if (p != null && p.IsTunnelAccessPIF())
                 return p;
 
             p = NICNameToVirtualPIF((string)HostPNICList.SelectedItem, (long)numUpDownVLAN.Value);
@@ -325,12 +317,12 @@ namespace XenAdmin.SettingsPanels
                     numUpDownVLAN.Value = pif.VLAN;
                     PIF ThePhysicalPIF = FindAssociatedPhysicalPIF();
                     if (ThePhysicalPIF != null)
-                        HostPNICList.SelectedItem = ThePhysicalPIF.Name;
+                        HostPNICList.SelectedItem = ThePhysicalPIF.Name();
                     else
-                        HostPNICList.SelectedItem = pif.Name;
+                        HostPNICList.SelectedItem = pif.Name();
                 }
 
-                bool hasBondMode = network.IsBond;
+                bool hasBondMode = network.IsBond();
                 groupBoxBondMode.Visible = hasBondMode;
 
                 bool supportsLinkAggregation = Helpers.SupportsLinkAggregationBond(network.Connection);
@@ -381,7 +373,7 @@ namespace XenAdmin.SettingsPanels
             foreach (VIF v in network.Connection.ResolveAll<VIF>(network.VIFs))
             {
                 VM vm = network.Connection.Resolve<VM>(v.VM);
-                if (vm.power_state != vm_power_state.Running || vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                if (vm.power_state != vm_power_state.Running || vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                     continue;
 
                 runningVMsWithoutTools = true;
@@ -390,12 +382,12 @@ namespace XenAdmin.SettingsPanels
 
             // Populate Automatic checkbox
             autoCheckBox.Checked = network.AutoPlug;
-            autoCheckBox.Enabled = !network.IsGuestInstallerNetwork;
+            autoCheckBox.Enabled = !network.IsGuestInstallerNetwork();
             // in case some odd value has been set on the CLI
             numericUpDownMTU.Maximum = Math.Max(network.MTU, XenAPI.Network.MTU_MAX);
             numericUpDownMTU.Minimum = Math.Min(network.MTU, XenAPI.Network.MTU_MIN);
             numericUpDownMTU.Value = network.MTU;
-            numericUpDownMTU.Visible = network.CanUseJumboFrames;
+            numericUpDownMTU.Visible = network.CanUseJumboFrames();
         }
 
         private PIF GetNetworksPIF()
@@ -422,7 +414,7 @@ namespace XenAdmin.SettingsPanels
 
             // try to find the physical counterpart to our virtual pif
             foreach (PIF pif in network.Connection.Cache.PIFs)
-                if (pif.IsPhysical &&
+                if (pif.IsPhysical() &&
                     pif.host.opaque_ref == host.opaque_ref &&
                     pif.device == networkPif.device &&
                     pif.opaque_ref != networkPif.opaque_ref)
@@ -447,13 +439,13 @@ namespace XenAdmin.SettingsPanels
                         !pif.Show(Properties.Settings.Default.ShowHiddenVMs))
                         continue;
 
-                    if (!pif.IsPhysical || pif.IsBondSlave)
+                    if (!pif.IsPhysical() || pif.IsBondSlave())
                         continue;
 
                     if (pif.host.opaque_ref != host.opaque_ref)
                         continue;
                     
-                    HostPNICList.Items.Add(pif.Name);
+                    HostPNICList.Items.Add(pif.Name());
                 }
             }
             finally
@@ -522,7 +514,7 @@ namespace XenAdmin.SettingsPanels
                     if (!Editable(pif))
                         return false;
 
-                    if (pif.Name != (String)HostPNICList.SelectedItem)
+                    if (pif.Name() != (String)HostPNICList.SelectedItem)
                         return true;
 
                     if (pif.VLAN != (long)numUpDownVLAN.Value)
@@ -662,7 +654,7 @@ namespace XenAdmin.SettingsPanels
         {
             foreach (PIF pif in network.Connection.Cache.PIFs)
             {
-                if (pif.Name == p && pif.IsPhysical && pif.host.opaque_ref == host.opaque_ref)
+                if (pif.Name() == p && pif.IsPhysical() && pif.host.opaque_ref == host.opaque_ref)
                     return pif;
             }
             return null;
@@ -672,7 +664,7 @@ namespace XenAdmin.SettingsPanels
         {
             foreach (PIF pif in network.Connection.Cache.PIFs)
             {
-                if (pif.Name == p && !pif.IsPhysical && !pif.IsTunnelAccessPIF && pif.VLAN == vlan && pif.host.opaque_ref == host.opaque_ref)
+                if (pif.Name() == p && !pif.IsPhysical() && !pif.IsTunnelAccessPIF() && pif.VLAN == vlan && pif.host.opaque_ref == host.opaque_ref)
                     return pif;
             }
             return null;
@@ -686,7 +678,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                List<Bond> bonds = network.Connection.ResolveAll(network.TheBonds);
+                List<Bond> bonds = network.Connection.ResolveAll(network.TheBonds());
                 return ((bonds == null || bonds.Count == 0) ? bond_mode.unknown : bonds[0].mode);
             }
         }
@@ -699,15 +691,15 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                List<Bond> bonds = network.Connection.ResolveAll(network.TheBonds);
-                return ((bonds == null || bonds.Count == 0) ? Bond.hashing_algoritm.unknown : bonds[0].HashingAlgoritm);
+                List<Bond> bonds = network.Connection.ResolveAll(network.TheBonds());
+                return ((bonds == null || bonds.Count == 0) ? Bond.hashing_algoritm.unknown : bonds[0].HashingAlgoritm());
             }
         }
 
         private List<AsyncAction> SetBondModeActions()
         {
             var ans = new List<AsyncAction>();
-            foreach (var bond in network.Connection.ResolveAll(network.TheBonds))
+            foreach (var bond in network.Connection.ResolveAll(network.TheBonds()))
             {
                 Bond b = bond;  // have to copy it otherwise it will change to the last bond before the delegates are called
                 ans.Add(new DelegatedAsyncAction(bond.Connection,
@@ -724,7 +716,7 @@ namespace XenAdmin.SettingsPanels
         private List<AsyncAction> SetBondPropertiesActions()
         {
             var ans = new List<AsyncAction>();
-            foreach (var bond in network.Connection.ResolveAll(network.TheBonds))
+            foreach (var bond in network.Connection.ResolveAll(network.TheBonds()))
             {
                 Bond b = bond;  // have to copy it otherwise it will change to the last bond before the delegates are called
                 ans.Add(new DelegatedAsyncAction(bond.Connection,
@@ -746,10 +738,10 @@ namespace XenAdmin.SettingsPanels
                     return "";
 
                 PIF pif = GetNetworksPIF();
-                if (pif != null && pif.IsPhysical)
+                if (pif != null && pif.IsPhysical())
                     return Messages.PHYSICAL_DEVICE;
 
-                if (pif != null && pif.IsTunnelAccessPIF)
+                if (pif != null && pif.IsTunnelAccessPIF())
                     return Messages.CHIN;
 
                 if (HostPNICList.SelectedIndex == 0)

@@ -67,7 +67,7 @@ namespace XenAdmin.Dialogs.VMDialogs
                                            select vdi).ToArray();
             srPicker1.SetExistingVDIs(vdis);
             srPicker1.Connection = vm.Connection;
-            srPicker1.DiskSize = vm.TotalVMSize;
+            srPicker1.DiskSize = vm.TotalVMSize();
             srPicker1.SetAffinity(affinity);
             srPicker1.srListBox.Invalidate();
             srPicker1.selectDefaultSROrAny();
@@ -83,7 +83,7 @@ namespace XenAdmin.Dialogs.VMDialogs
 
         private void buttonMove_Click(object sender, EventArgs e)
         {
-            var action = new VMMoveAction(vm, srPicker1.SR, vm.GetStorageHost(false), vm.Name);
+            var action = new VMMoveAction(vm, srPicker1.SR, vm.GetStorageHost(false), vm.Name());
             action.RunAsync();
             Close();
         }

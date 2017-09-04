@@ -96,7 +96,7 @@ namespace XenAdminTests.CommandTests
                     MainWindowWrapper.StorageMenuItems.AttachVirtualDiskToolStripMenuItemInStorageMenu.PerformClick();
                     AttachDiskDialogWrapper attachDiskDialogWrapper = new AttachDiskDialogWrapper(WaitForWindowToAppear("Attach Disk"));
                     attachDiskDialogWrapper.DiskListTreeView.SelectedItem = attachDiskDialogWrapper.DiskListTreeView.Nodes.Find(n => n.Level == 1);
-                    if (colsureVM.IsHVM)
+                    if (colsureVM.IsHVM())
                     {
                         Assert.IsFalse(attachDiskDialogWrapper.ReadOnlyCheckBox.Enabled, "ReadOnly Checkbox enabled");
                         if (attachDiskDialogWrapper.ReadOnlyCheckBox.Checked)
@@ -151,7 +151,7 @@ namespace XenAdminTests.CommandTests
 
         private IEnumerable<IXenObject> GetSingleSelections()
         {
-            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_real_vm))
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_real_vm()))
             {
                 yield return vm;
             }

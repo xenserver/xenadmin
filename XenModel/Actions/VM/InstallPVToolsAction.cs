@@ -45,7 +45,7 @@ namespace XenAdmin.Actions
         private readonly bool _searchHiddenIsOs;
 
         public InstallPVToolsAction(VM vm, bool searchHiddenISOs)
-            : base(vm.Connection, string.Format(Messages.INSTALLTOOLS_TITLE, vm.Name))
+            : base(vm.Connection, string.Format(Messages.INSTALLTOOLS_TITLE, vm.Name()))
         {
             VM = vm;
             _searchHiddenIsOs = searchHiddenISOs;
@@ -53,7 +53,7 @@ namespace XenAdmin.Actions
             #region RBAC Dependencies
             foreach (SR sr in VM.Connection.Cache.SRs)
             {
-                if (sr.IsToolsSR && sr.IsBroken())
+                if (sr.IsToolsSR() && sr.IsBroken())
                 {
                     ApiMethodsToRoleCheck.Add("pbd.plug");
                     ApiMethodsToRoleCheck.Add("pbd.create");
@@ -71,7 +71,7 @@ namespace XenAdmin.Actions
             // check the xstools sr is present, if not try and repair it
             foreach(SR sr in VM.Connection.Cache.SRs)
             {
-                if (sr.IsToolsSR && sr.IsBroken())
+                if (sr.IsToolsSR() && sr.IsBroken())
                 {
                     try
                     {
@@ -88,7 +88,7 @@ namespace XenAdmin.Actions
 
             // Check the version (if any) of the PV tools already on this host...
             VM_guest_metrics guestMetrics = Connection.Resolve(VM.guest_metrics);
-            if (guestMetrics != null && !VM.HasNewVirtualisationStates && guestMetrics.PV_drivers_installed && guestMetrics.PV_drivers_up_to_date)
+            if (guestMetrics != null && !VM.HasNewVirtualisationStates() && guestMetrics.PV_drivers_installed() && guestMetrics.PV_drivers_up_to_date)
             {
                 this.Description = Messages.INSTALLTOOLS_EXIST;
                 return;
@@ -132,7 +132,7 @@ namespace XenAdmin.Actions
                 if (XenAPI.SR.SRTypes.iso.ToString() == sr.content_type)
                 {
                     var vdis = Connection.ResolveAllShownXenModelObjects(sr.VDIs, searchHiddenISOs);
-                    var vdi = vdis.FirstOrDefault(v => v.IsToolsIso);
+                    var vdi = vdis.FirstOrDefault(v => v.IsToolsIso());
                     if (vdi != null)
                         return vdi;
                 }

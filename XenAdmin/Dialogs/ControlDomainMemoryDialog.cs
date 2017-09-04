@@ -60,14 +60,14 @@ namespace XenAdmin.Dialogs
             hostMetrics = connection.Resolve(this.host.metrics);
             if (hostMetrics != null)
                 hostMetrics.PropertyChanged += Server_PropertyChanged;
-            Text = string.Format(Messages.CONTROL_DOMAIN_MEMORY_DIALOG_TITLE, this.host.Name);
+            Text = string.Format(Messages.CONTROL_DOMAIN_MEMORY_DIALOG_TITLE, this.host.Name());
             Populate();
         }
 
         private void UpdateMaintenanceWarning()
         {
             Host_metrics metrics = host.Connection.Resolve(host.metrics);
-            bool maintenanceMode = host.MaintenanceMode || (metrics != null && !metrics.live);
+            bool maintenanceMode = host.MaintenanceMode() || (metrics != null && !metrics.live);
 
             maintenanceWarningImage.Visible = maintenanceWarningLabel.Visible = maintenanceModeLinkLabel.Visible = !maintenanceMode;
             hostRebootWarningImage.Visible = hostRebootWarningLabel.Visible = maintenanceMode;
@@ -77,7 +77,7 @@ namespace XenAdmin.Dialogs
 
         private void Populate()
         {
-            VM vm = host.ControlDomainZero;
+            VM vm = host.ControlDomainZero();
 
             // Since updates come in dribs and drabs, avoid error if new max and min arrive
             // out of sync and maximum < minimum.
@@ -85,7 +85,7 @@ namespace XenAdmin.Dialogs
                 vm.memory_static_max >= vm.memory_static_min)
             {
                 double min = vm.memory_static_min;
-                double max = Math.Min(vm.memory_dynamic_min + host.memory_available_calc, MAXIMUM_DOM0_MEMORY_GB * Util.BINARY_GIGA);
+                double max = Math.Min(vm.memory_dynamic_min + host.memory_available_calc(), MAXIMUM_DOM0_MEMORY_GB * Util.BINARY_GIGA);
                 double value = vm.memory_dynamic_min;
                 // Avoid setting the range to exclude the current value: CA-40041
                 if (value > max)
@@ -131,8 +131,8 @@ namespace XenAdmin.Dialogs
             actions.Add(new RebootHostAction(host, AddHostToPoolCommand.NtolDialog));
 
             var multipleAction = new MultipleAction(connection, 
-                string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY, host.Name), 
-                string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY, host.Name), 
+                string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY, host.Name()), 
+                string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY, host.Name()), 
                 Messages.COMPLETED, actions, true, false, true);
 
             multipleAction.RunAsync();

@@ -97,7 +97,7 @@ namespace XenAdminTests.CommandTests
 
         private IEnumerable<IXenObject> GetSingleSelections()
         {
-            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_real_vm))
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_real_vm()))
             {
                 yield return vm;
             }

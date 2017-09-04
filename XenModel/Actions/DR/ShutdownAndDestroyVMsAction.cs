@@ -87,7 +87,7 @@ namespace XenAdmin.Actions.DR
         internal static void DestroyVM(Session session, VM vm)
         {
             Exception caught = null;
-            log.DebugFormat("Destroying VM '{0}'", vm.Name);
+            log.DebugFormat("Destroying VM '{0}'", vm.Name());
 
             if (vm.snapshots.Count > 0)
             {
@@ -144,7 +144,7 @@ namespace XenAdmin.Actions.DR
                 }
             }
 
-            log.DebugFormat("VM '{0}' destroyed", vm.Name);
+            log.DebugFormat("VM '{0}' destroyed", vm.Name());
 
             if (caught != null)
                 throw caught;

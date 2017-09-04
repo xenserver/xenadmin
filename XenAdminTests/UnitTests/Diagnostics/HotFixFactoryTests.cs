@@ -111,7 +111,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
         public void TestPlatformVersionNumbersFalconOrGreaterGiveNulls(string platformVersion)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
-            host.Setup(h => h.PlatformVersion).Returns(platformVersion);
+            host.Setup(h => h.PlatformVersion()).Returns(platformVersion);
             Assert.IsNull(factory.Hotfix(host.Object));
         }
 
@@ -125,7 +125,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
         public bool TestIsHotfixRequiredBasedOnPlatformVersion(string version)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
-            host.Setup(h => h.PlatformVersion).Returns(version);
+            host.Setup(h => h.PlatformVersion()).Returns(version);
             return factory.IsHotfixRequired(host.Object);
         }
     }

@@ -56,7 +56,7 @@ namespace XenAdmin.Diagnostics.Problems.PoolProblem
         {
             get
             {
-                return String.Format(sr.shared ? Messages.DR_WIZARD_PROBLEM_MISSING_SR : Messages.DR_WIZARD_PROBLEM_LOCAL_STORAGE, sr.Name);
+                return String.Format(sr.shared ? Messages.DR_WIZARD_PROBLEM_MISSING_SR : Messages.DR_WIZARD_PROBLEM_LOCAL_STORAGE, sr.Name());
             }
         }
     }

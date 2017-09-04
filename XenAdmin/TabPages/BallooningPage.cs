@@ -125,7 +125,7 @@ namespace XenAdmin.TabPages
 
         private bool VMWanted(VM vm, Host host)
         {
-            return vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && vm.Home() == host;
+            return vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && vm.Home() == host;
         }
 
         private readonly CollectionChangeEventHandler VM_CollectionChangedWithInvoke;
@@ -260,7 +260,7 @@ namespace XenAdmin.TabPages
         {
             // Only observe real VMs (but templates come through here too because
             // they change into real VMs during VM creation).
-            if (!((VM)sender).is_a_real_vm)
+            if (!((VM)sender).is_a_real_vm())
                 return;
 
             // These are used by MainWindow.VMHome() to determine which host the VM belongs to
@@ -335,10 +335,10 @@ namespace XenAdmin.TabPages
             foreach (VM vm in vms)
             {
                 MemSettings settings =
-                    vm.has_ballooning?
-                    new MemSettings(true, vm.power_state, (long)vm.memory_static_min, (long)vm.memory_static_max,
-                            (long)vm.memory_dynamic_min, (long)vm.memory_dynamic_max) :
-                    new MemSettings(false, vm.power_state, 0, (long)vm.memory_static_max, 0, 0);  // don't consider other mem settings if ballooning off
+                    vm.has_ballooning()
+                        ? new MemSettings(true, vm.power_state, vm.memory_static_min, vm.memory_static_max,
+                            vm.memory_dynamic_min, vm.memory_dynamic_max)
+                        : new MemSettings(false, vm.power_state, 0, vm.memory_static_max, 0, 0);  // don't consider other mem settings if ballooning off
                 if (!settingsToVMs.ContainsKey(settings))  // we've not seen these settings on another VM
                 {
                     settingsToVMs.Add(settings, new List<VM>());

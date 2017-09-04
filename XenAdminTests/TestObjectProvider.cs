@@ -136,7 +136,7 @@ namespace XenAdminTests
 
                 foreach (VM vm in connection.Cache.VMs)
                 {
-                    if (vm.is_a_real_vm && (cond == null || cond(vm)))
+                    if (vm.is_a_real_vm() && (cond == null || cond(vm)))
                         return vm;
                 }
             }
@@ -160,7 +160,7 @@ namespace XenAdminTests
                 {
                     if (vm.is_a_template && !vm.is_a_snapshot && 
                         vm.Show(XenAdminConfigManager.Provider.ShowHiddenVMs) &&
-                        vm.DefaultTemplate && (cond == null || cond(vm)))
+                        vm.DefaultTemplate() && (cond == null || cond(vm)))
                         return vm;
                 }
             }
@@ -183,7 +183,7 @@ namespace XenAdminTests
                 foreach (VM vm in connection.Cache.VMs)
                 {
                     if (vm.is_a_template && !vm.is_a_snapshot &&
-                        !vm.DefaultTemplate && (cond == null || cond(vm)))
+                        !vm.DefaultTemplate() && (cond == null || cond(vm)))
                         return vm;
                 }
             }

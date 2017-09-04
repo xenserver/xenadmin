@@ -80,7 +80,7 @@ namespace XenAdmin.Alerts
             if(host == null)
                 return false;
             
-            return !host.CanApplyHotfixes;
+            return !host.CanApplyHotfixes();
         }
 
         public XenServerPatchAlert(XenServerPatch patch)

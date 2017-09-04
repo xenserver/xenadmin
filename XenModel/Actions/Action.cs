@@ -156,7 +156,7 @@ namespace XenAdmin.Actions
                 SetAppliesTo(SR);
 
                 if (Host == null)
-                    Host = SR.Home;
+                    Host = SR.Home();
             }
         }
 
@@ -198,7 +198,7 @@ namespace XenAdmin.Actions
             else if (xo is SR)
             {
                 SR sr = (SR)xo;
-                SetAppliesTo(sr.Home);
+                SetAppliesTo(sr.Home());
                 AppliesTo.Add(sr.opaque_ref);
             }
             else if (xo is VDI)
@@ -475,17 +475,17 @@ namespace XenAdmin.Actions
 
         protected virtual string DescribeVM(VM v)
         {
-            return string.Format("VM {0} ({1}): ", v.uuid, v.Name);
+            return string.Format("VM {0} ({1}): ", v.uuid, v.Name());
         }
 
         protected virtual string DescribePool(Pool p)
         {
-            return string.Format("Pool {0} ({1}): ", p.uuid, p.Name);
+            return string.Format("Pool {0} ({1}): ", p.uuid, p.Name());
         }
 
         protected virtual string DescribeHost(Host h)
         {
-            return string.Format("Host {0} ({1}): ", h.uuid, h.Name);
+            return string.Format("Host {0} ({1}): ", h.uuid, h.Name());
         }
         #endregion
     }

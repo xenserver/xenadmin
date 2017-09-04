@@ -156,7 +156,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Suspend", false  ),
             };
 
-            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_template && !v.DefaultTemplate && !v.is_a_snapshot))
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_template && !v.DefaultTemplate() && !v.is_a_snapshot))
             {
                 VerifyToolbar(vm, buttons);
             }
@@ -180,7 +180,7 @@ namespace XenAdminTests.TabsAndMenus
 	            new ExpectedTextMenuItem("Suspend", false  ),
             };
 
-            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR))
+            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR()))
             {
                 VerifyToolbar(sr, buttons);
             }

@@ -254,7 +254,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void CloudCreateConfigDrive()
         {
-            if (Template.CanHaveCloudConfigDrive && !string.IsNullOrEmpty(cloudConfigDriveTemplateText))
+            if (Template.CanHaveCloudConfigDrive() && !string.IsNullOrEmpty(cloudConfigDriveTemplateText))
             {
                 Description = Messages.CREATING_CLOUD_CONFIG_DRIVE; 
 
@@ -285,7 +285,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void CopyBiosStrings()
         {
-            if (CopyBiosStringsFrom != null && Template.DefaultTemplate)
+            if (CopyBiosStringsFrom != null && Template.DefaultTemplate())
             {
                 VM.copy_bios_strings(Session, this.VM.opaque_ref, CopyBiosStringsFrom.opaque_ref);
             }
@@ -332,7 +332,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void SetVMBootParams()
         {
-            if (Template.IsHVM && (Disks.Count == 0 || InsMethod == InstallMethod.Network)) // CA-46213
+            if (Template.IsHVM() && (Disks.Count == 0 || InsMethod == InstallMethod.Network)) // CA-46213
             {
                 // boot from network
                 Dictionary<string, string> hvm_params = VM.HVM_boot_params;
@@ -353,7 +353,7 @@ namespace XenAdmin.Actions.VMActions
                 XenAPI.VM.set_other_config(Session, VM.opaque_ref, other_config);
             }
 
-            if (!Template.IsHVM)
+            if (!Template.IsHVM())
             {
                 XenAPI.VM.set_PV_args(Session, VM.opaque_ref, PvArgs);
             }
@@ -361,12 +361,12 @@ namespace XenAdmin.Actions.VMActions
 
         private bool IsEli()
         {
-            return !Template.IsHVM && Template.PV_bootloader == "eliloader";
+            return !Template.IsHVM() && Template.PV_bootloader == "eliloader";
         }
 
         private bool IsRhel()
         {
-            string distro = VM.InstallDistro;
+            string distro = VM.InstallDistro();
             return distro == "rhel41" || distro == "rhel44" || distro == "rhlike";
         }
 
@@ -496,7 +496,7 @@ namespace XenAdmin.Actions.VMActions
                     //use the first disk to set the VM.suspend_SR
                     SR vdiSR = Connection.Resolve(vdi.SR);
                     this.firstSR = vdiSR;
-                    if(vdiSR != null && !vdiSR.HBALunPerVDI)
+                    if(vdiSR != null && !vdiSR.HBALunPerVDI())
                         suspendSr = vdi.SR;
                     firstDisk = false;
                 }

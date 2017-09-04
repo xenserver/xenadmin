@@ -37,7 +37,7 @@ namespace XenAdmin.Actions
     public class HVMBootAction : PureAsyncAction
     {
         public HVMBootAction(VM vm)
-            : base(vm.Connection, string.Format(Messages.STARTING_IN_RECOVERY_MODE_TITLE, vm.Name))
+            : base(vm.Connection, string.Format(Messages.STARTING_IN_RECOVERY_MODE_TITLE, vm.Name()))
         {
             VM = vm;
         }
