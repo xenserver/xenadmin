@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -78,7 +76,8 @@ namespace XenAPI
             on_boot on_boot,
             XenRef<Pool> metadata_of_pool,
             bool metadata_latest,
-            bool is_tools_iso)
+            bool is_tools_iso,
+            bool cbt_enabled)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -111,6 +110,7 @@ namespace XenAPI
             this.metadata_of_pool = metadata_of_pool;
             this.metadata_latest = metadata_latest;
             this.is_tools_iso = is_tools_iso;
+            this.cbt_enabled = cbt_enabled;
         }
 
         /// <summary>
@@ -155,6 +155,7 @@ namespace XenAPI
             metadata_of_pool = update.metadata_of_pool;
             metadata_latest = update.metadata_latest;
             is_tools_iso = update.is_tools_iso;
+            cbt_enabled = update.cbt_enabled;
         }
 
         internal void UpdateFromProxy(Proxy_VDI proxy)
@@ -190,17 +191,18 @@ namespace XenAPI
             metadata_of_pool = proxy.metadata_of_pool == null ? null : XenRef<Pool>.Create(proxy.metadata_of_pool);
             metadata_latest = (bool)proxy.metadata_latest;
             is_tools_iso = (bool)proxy.is_tools_iso;
+            cbt_enabled = (bool)proxy.cbt_enabled;
         }
 
         public Proxy_VDI ToProxy()
         {
             Proxy_VDI result_ = new Proxy_VDI();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
             result_.current_operations = Maps.convert_to_proxy_string_vdi_operations(current_operations);
-            result_.SR = (SR != null) ? SR : "";
+            result_.SR = SR ?? "";
             result_.VBDs = (VBDs != null) ? Helper.RefListToStringArray(VBDs) : new string[] {};
             result_.crash_dumps = (crash_dumps != null) ? Helper.RefListToStringArray(crash_dumps) : new string[] {};
             result_.virtual_size = virtual_size.ToString();
@@ -210,22 +212,23 @@ namespace XenAPI
             result_.read_only = read_only;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.storage_lock = storage_lock;
-            result_.location = (location != null) ? location : "";
+            result_.location = location ?? "";
             result_.managed = managed;
             result_.missing = missing;
-            result_.parent = (parent != null) ? parent : "";
+            result_.parent = parent ?? "";
             result_.xenstore_data = Maps.convert_to_proxy_string_string(xenstore_data);
             result_.sm_config = Maps.convert_to_proxy_string_string(sm_config);
             result_.is_a_snapshot = is_a_snapshot;
-            result_.snapshot_of = (snapshot_of != null) ? snapshot_of : "";
+            result_.snapshot_of = snapshot_of ?? "";
             result_.snapshots = (snapshots != null) ? Helper.RefListToStringArray(snapshots) : new string[] {};
             result_.snapshot_time = snapshot_time;
             result_.tags = tags;
             result_.allow_caching = allow_caching;
             result_.on_boot = on_boot_helper.ToString(on_boot);
-            result_.metadata_of_pool = (metadata_of_pool != null) ? metadata_of_pool : "";
+            result_.metadata_of_pool = metadata_of_pool ?? "";
             result_.metadata_latest = metadata_latest;
             result_.is_tools_iso = is_tools_iso;
+            result_.cbt_enabled = cbt_enabled;
             return result_;
         }
 
@@ -266,6 +269,7 @@ namespace XenAPI
             metadata_of_pool = Marshalling.ParseRef<Pool>(table, "metadata_of_pool");
             metadata_latest = Marshalling.ParseBool(table, "metadata_latest");
             is_tools_iso = Marshalling.ParseBool(table, "is_tools_iso");
+            cbt_enabled = Marshalling.ParseBool(table, "cbt_enabled");
         }
 
         public bool DeepEquals(VDI other, bool ignoreCurrentOperations)
@@ -307,7 +311,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._on_boot, other._on_boot) &&
                 Helper.AreEqual2(this._metadata_of_pool, other._metadata_of_pool) &&
                 Helper.AreEqual2(this._metadata_latest, other._metadata_latest) &&
-                Helper.AreEqual2(this._is_tools_iso, other._is_tools_iso);
+                Helper.AreEqual2(this._is_tools_iso, other._is_tools_iso) &&
+                Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VDI server)
@@ -367,7 +372,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static VDI get_record(Session session, string _vdi)
         {
-            return new VDI((Proxy_VDI)session.proxy.vdi_get_record(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return new VDI((Proxy_VDI)session.proxy.vdi_get_record(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -378,7 +383,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VDI> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -411,7 +416,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void destroy(Session session, string _vdi)
         {
-            session.proxy.vdi_destroy(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            session.proxy.vdi_destroy(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -422,7 +427,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_destroy(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_destroy(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_destroy(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -433,7 +438,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<VDI>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -444,7 +449,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string get_uuid(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_get_uuid(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (string)session.proxy.vdi_get_uuid(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -455,7 +460,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string get_name_label(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_get_name_label(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (string)session.proxy.vdi_get_name_label(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -466,7 +471,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string get_name_description(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_get_name_description(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (string)session.proxy.vdi_get_name_description(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -477,7 +482,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<vdi_operations> get_allowed_operations(Session session, string _vdi)
         {
-            return Helper.StringArrayToEnumList<vdi_operations>(session.proxy.vdi_get_allowed_operations(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return Helper.StringArrayToEnumList<vdi_operations>(session.proxy.vdi_get_allowed_operations(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -488,7 +493,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static Dictionary<string, vdi_operations> get_current_operations(Session session, string _vdi)
         {
-            return Maps.convert_from_proxy_string_vdi_operations(session.proxy.vdi_get_current_operations(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return Maps.convert_from_proxy_string_vdi_operations(session.proxy.vdi_get_current_operations(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -499,7 +504,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<SR> get_SR(Session session, string _vdi)
         {
-            return XenRef<SR>.Create(session.proxy.vdi_get_sr(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<SR>.Create(session.proxy.vdi_get_sr(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -510,7 +515,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<XenRef<VBD>> get_VBDs(Session session, string _vdi)
         {
-            return XenRef<VBD>.Create(session.proxy.vdi_get_vbds(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<VBD>.Create(session.proxy.vdi_get_vbds(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -521,7 +526,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<XenRef<Crashdump>> get_crash_dumps(Session session, string _vdi)
         {
-            return XenRef<Crashdump>.Create(session.proxy.vdi_get_crash_dumps(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Crashdump>.Create(session.proxy.vdi_get_crash_dumps(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -532,7 +537,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static long get_virtual_size(Session session, string _vdi)
         {
-            return long.Parse((string)session.proxy.vdi_get_virtual_size(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return long.Parse((string)session.proxy.vdi_get_virtual_size(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -543,7 +548,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static long get_physical_utilisation(Session session, string _vdi)
         {
-            return long.Parse((string)session.proxy.vdi_get_physical_utilisation(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return long.Parse((string)session.proxy.vdi_get_physical_utilisation(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -554,7 +559,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static vdi_type get_type(Session session, string _vdi)
         {
-            return (vdi_type)Helper.EnumParseDefault(typeof(vdi_type), (string)session.proxy.vdi_get_type(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return (vdi_type)Helper.EnumParseDefault(typeof(vdi_type), (string)session.proxy.vdi_get_type(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -565,7 +570,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_sharable(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_sharable(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_sharable(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -576,7 +581,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_read_only(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_read_only(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_read_only(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -587,7 +592,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vdi)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_other_config(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_other_config(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -598,7 +603,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_storage_lock(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_storage_lock(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_storage_lock(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -609,7 +614,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string get_location(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_get_location(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (string)session.proxy.vdi_get_location(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -620,7 +625,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_managed(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_managed(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_managed(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -631,7 +636,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_missing(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_missing(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_missing(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -644,7 +649,7 @@ namespace XenAPI
         [Deprecated("XenServer 7.1")]
         public static XenRef<VDI> get_parent(Session session, string _vdi)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_parent(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_get_parent(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -655,7 +660,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static Dictionary<string, string> get_xenstore_data(Session session, string _vdi)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_xenstore_data(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_xenstore_data(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -666,7 +671,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static Dictionary<string, string> get_sm_config(Session session, string _vdi)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_sm_config(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_sm_config(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -677,7 +682,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_is_a_snapshot(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_is_a_snapshot(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_is_a_snapshot(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -688,7 +693,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<VDI> get_snapshot_of(Session session, string _vdi)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_snapshot_of(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_get_snapshot_of(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -699,7 +704,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<XenRef<VDI>> get_snapshots(Session session, string _vdi)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_snapshots(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_get_snapshots(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -710,7 +715,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static DateTime get_snapshot_time(Session session, string _vdi)
         {
-            return session.proxy.vdi_get_snapshot_time(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return session.proxy.vdi_get_snapshot_time(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -721,7 +726,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string[] get_tags(Session session, string _vdi)
         {
-            return (string [])session.proxy.vdi_get_tags(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (string [])session.proxy.vdi_get_tags(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -732,7 +737,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_allow_caching(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_allow_caching(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_allow_caching(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -743,7 +748,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static on_boot get_on_boot(Session session, string _vdi)
         {
-            return (on_boot)Helper.EnumParseDefault(typeof(on_boot), (string)session.proxy.vdi_get_on_boot(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return (on_boot)Helper.EnumParseDefault(typeof(on_boot), (string)session.proxy.vdi_get_on_boot(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -754,7 +759,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Pool> get_metadata_of_pool(Session session, string _vdi)
         {
-            return XenRef<Pool>.Create(session.proxy.vdi_get_metadata_of_pool(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Pool>.Create(session.proxy.vdi_get_metadata_of_pool(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -765,7 +770,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_metadata_latest(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_metadata_latest(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_metadata_latest(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -776,7 +781,18 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_is_tools_iso(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_is_tools_iso(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (bool)session.proxy.vdi_get_is_tools_iso(session.uuid, _vdi ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the cbt_enabled field of the given VDI.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static bool get_cbt_enabled(Session session, string _vdi)
+        {
+            return (bool)session.proxy.vdi_get_cbt_enabled(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -788,7 +804,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vdi, Dictionary<string, string> _other_config)
         {
-            session.proxy.vdi_set_other_config(session.uuid, (_vdi != null) ? _vdi : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.vdi_set_other_config(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -801,7 +817,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vdi, string _key, string _value)
         {
-            session.proxy.vdi_add_to_other_config(session.uuid, (_vdi != null) ? _vdi : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_add_to_other_config(session.uuid, _vdi ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -813,7 +829,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vdi, string _key)
         {
-            session.proxy.vdi_remove_from_other_config(session.uuid, (_vdi != null) ? _vdi : "", (_key != null) ? _key : "").parse();
+            session.proxy.vdi_remove_from_other_config(session.uuid, _vdi ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -825,7 +841,7 @@ namespace XenAPI
         /// <param name="_xenstore_data">New value to set</param>
         public static void set_xenstore_data(Session session, string _vdi, Dictionary<string, string> _xenstore_data)
         {
-            session.proxy.vdi_set_xenstore_data(session.uuid, (_vdi != null) ? _vdi : "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
+            session.proxy.vdi_set_xenstore_data(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
         }
 
         /// <summary>
@@ -838,7 +854,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_xenstore_data(Session session, string _vdi, string _key, string _value)
         {
-            session.proxy.vdi_add_to_xenstore_data(session.uuid, (_vdi != null) ? _vdi : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_add_to_xenstore_data(session.uuid, _vdi ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -850,7 +866,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_xenstore_data(Session session, string _vdi, string _key)
         {
-            session.proxy.vdi_remove_from_xenstore_data(session.uuid, (_vdi != null) ? _vdi : "", (_key != null) ? _key : "").parse();
+            session.proxy.vdi_remove_from_xenstore_data(session.uuid, _vdi ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -862,7 +878,7 @@ namespace XenAPI
         /// <param name="_sm_config">New value to set</param>
         public static void set_sm_config(Session session, string _vdi, Dictionary<string, string> _sm_config)
         {
-            session.proxy.vdi_set_sm_config(session.uuid, (_vdi != null) ? _vdi : "", Maps.convert_to_proxy_string_string(_sm_config)).parse();
+            session.proxy.vdi_set_sm_config(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_sm_config)).parse();
         }
 
         /// <summary>
@@ -875,7 +891,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_sm_config(Session session, string _vdi, string _key, string _value)
         {
-            session.proxy.vdi_add_to_sm_config(session.uuid, (_vdi != null) ? _vdi : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_add_to_sm_config(session.uuid, _vdi ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -887,7 +903,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_sm_config(Session session, string _vdi, string _key)
         {
-            session.proxy.vdi_remove_from_sm_config(session.uuid, (_vdi != null) ? _vdi : "", (_key != null) ? _key : "").parse();
+            session.proxy.vdi_remove_from_sm_config(session.uuid, _vdi ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -899,7 +915,7 @@ namespace XenAPI
         /// <param name="_tags">New value to set</param>
         public static void set_tags(Session session, string _vdi, string[] _tags)
         {
-            session.proxy.vdi_set_tags(session.uuid, (_vdi != null) ? _vdi : "", _tags).parse();
+            session.proxy.vdi_set_tags(session.uuid, _vdi ?? "", _tags).parse();
         }
 
         /// <summary>
@@ -911,7 +927,7 @@ namespace XenAPI
         /// <param name="_value">New value to add</param>
         public static void add_tags(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_add_tags(session.uuid, (_vdi != null) ? _vdi : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_add_tags(session.uuid, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -923,7 +939,7 @@ namespace XenAPI
         /// <param name="_value">Value to remove</param>
         public static void remove_tags(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_remove_tags(session.uuid, (_vdi != null) ? _vdi : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_remove_tags(session.uuid, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -935,7 +951,7 @@ namespace XenAPI
         /// <param name="_driver_params">Optional parameters that can be passed through to backend driver in order to specify storage-type-specific snapshot options First published in XenServer 4.1.</param>
         public static XenRef<VDI> snapshot(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_snapshot(session.uuid, (_vdi != null) ? _vdi : "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_snapshot(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
         }
 
         /// <summary>
@@ -947,7 +963,7 @@ namespace XenAPI
         /// <param name="_driver_params">Optional parameters that can be passed through to backend driver in order to specify storage-type-specific snapshot options First published in XenServer 4.1.</param>
         public static XenRef<Task> async_snapshot(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_snapshot(session.uuid, (_vdi != null) ? _vdi : "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_snapshot(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
         }
 
         /// <summary>
@@ -959,7 +975,7 @@ namespace XenAPI
         /// <param name="_driver_params">Optional parameters that are passed through to the backend driver in order to specify storage-type-specific clone options First published in XenServer 4.1.</param>
         public static XenRef<VDI> clone(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_clone(session.uuid, (_vdi != null) ? _vdi : "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_clone(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
         }
 
         /// <summary>
@@ -971,7 +987,7 @@ namespace XenAPI
         /// <param name="_driver_params">Optional parameters that are passed through to the backend driver in order to specify storage-type-specific clone options First published in XenServer 4.1.</param>
         public static XenRef<Task> async_clone(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_clone(session.uuid, (_vdi != null) ? _vdi : "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_clone(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
         }
 
         /// <summary>
@@ -983,7 +999,7 @@ namespace XenAPI
         /// <param name="_size">The new size of the VDI</param>
         public static void resize(Session session, string _vdi, long _size)
         {
-            session.proxy.vdi_resize(session.uuid, (_vdi != null) ? _vdi : "", _size.ToString()).parse();
+            session.proxy.vdi_resize(session.uuid, _vdi ?? "", _size.ToString()).parse();
         }
 
         /// <summary>
@@ -995,7 +1011,7 @@ namespace XenAPI
         /// <param name="_size">The new size of the VDI</param>
         public static XenRef<Task> async_resize(Session session, string _vdi, long _size)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_resize(session.uuid, (_vdi != null) ? _vdi : "", _size.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_resize(session.uuid, _vdi ?? "", _size.ToString()).parse());
         }
 
         /// <summary>
@@ -1007,7 +1023,7 @@ namespace XenAPI
         /// <param name="_size">The new size of the VDI</param>
         public static void resize_online(Session session, string _vdi, long _size)
         {
-            session.proxy.vdi_resize_online(session.uuid, (_vdi != null) ? _vdi : "", _size.ToString()).parse();
+            session.proxy.vdi_resize_online(session.uuid, _vdi ?? "", _size.ToString()).parse();
         }
 
         /// <summary>
@@ -1019,7 +1035,7 @@ namespace XenAPI
         /// <param name="_size">The new size of the VDI</param>
         public static XenRef<Task> async_resize_online(Session session, string _vdi, long _size)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_resize_online(session.uuid, (_vdi != null) ? _vdi : "", _size.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_resize_online(session.uuid, _vdi ?? "", _size.ToString()).parse());
         }
 
         /// <summary>
@@ -1040,7 +1056,7 @@ namespace XenAPI
         /// <param name="_sm_config">Storage-specific config</param>
         public static XenRef<VDI> introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_introduce(session.uuid, (_uuid != null) ? _uuid : "", (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_sr != null) ? _sr : "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), (_location != null) ? _location : "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
         }
 
         /// <summary>
@@ -1061,7 +1077,7 @@ namespace XenAPI
         /// <param name="_sm_config">Storage-specific config</param>
         public static XenRef<Task> async_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_introduce(session.uuid, (_uuid != null) ? _uuid : "", (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_sr != null) ? _sr : "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), (_location != null) ? _location : "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
         }
 
         /// <summary>
@@ -1089,7 +1105,7 @@ namespace XenAPI
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
         public static XenRef<VDI> introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_introduce(session.uuid, (_uuid != null) ? _uuid : "", (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_sr != null) ? _sr : "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), (_location != null) ? _location : "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), (_metadata_of_pool != null) ? _metadata_of_pool : "", _is_a_snapshot, _snapshot_time, (_snapshot_of != null) ? _snapshot_of : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
         }
 
         /// <summary>
@@ -1117,7 +1133,7 @@ namespace XenAPI
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
         public static XenRef<Task> async_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_introduce(session.uuid, (_uuid != null) ? _uuid : "", (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_sr != null) ? _sr : "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), (_location != null) ? _location : "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), (_metadata_of_pool != null) ? _metadata_of_pool : "", _is_a_snapshot, _snapshot_time, (_snapshot_of != null) ? _snapshot_of : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
         }
 
         /// <summary>
@@ -1138,7 +1154,7 @@ namespace XenAPI
         /// <param name="_sm_config">Storage-specific config First published in XenServer 4.1.</param>
         public static XenRef<VDI> db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.uuid, (_uuid != null) ? _uuid : "", (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_sr != null) ? _sr : "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), (_location != null) ? _location : "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
         }
 
         /// <summary>
@@ -1159,7 +1175,7 @@ namespace XenAPI
         /// <param name="_sm_config">Storage-specific config First published in XenServer 4.1.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.uuid, (_uuid != null) ? _uuid : "", (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_sr != null) ? _sr : "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), (_location != null) ? _location : "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
         }
 
         /// <summary>
@@ -1187,7 +1203,7 @@ namespace XenAPI
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
         public static XenRef<VDI> db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.uuid, (_uuid != null) ? _uuid : "", (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_sr != null) ? _sr : "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), (_location != null) ? _location : "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), (_metadata_of_pool != null) ? _metadata_of_pool : "", _is_a_snapshot, _snapshot_time, (_snapshot_of != null) ? _snapshot_of : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
         }
 
         /// <summary>
@@ -1215,7 +1231,65 @@ namespace XenAPI
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.uuid, (_uuid != null) ? _uuid : "", (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", (_sr != null) ? _sr : "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), (_location != null) ? _location : "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), (_metadata_of_pool != null) ? _metadata_of_pool : "", _is_a_snapshot, _snapshot_time, (_snapshot_of != null) ? _snapshot_of : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
+        }
+
+        /// <summary>
+        /// Create a new VDI record in the database only
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">The uuid of the disk to introduce First published in XenServer 4.1.</param>
+        /// <param name="_name_label">The name of the disk record First published in XenServer 4.1.</param>
+        /// <param name="_name_description">The description of the disk record First published in XenServer 4.1.</param>
+        /// <param name="_sr">The SR that the VDI is in First published in XenServer 4.1.</param>
+        /// <param name="_type">The type of the VDI First published in XenServer 4.1.</param>
+        /// <param name="_sharable">true if this disk may be shared First published in XenServer 4.1.</param>
+        /// <param name="_read_only">true if this disk may ONLY be mounted read-only First published in XenServer 4.1.</param>
+        /// <param name="_other_config">additional configuration First published in XenServer 4.1.</param>
+        /// <param name="_location">location information First published in XenServer 4.1.</param>
+        /// <param name="_xenstore_data">Data to insert into xenstore First published in XenServer 4.1.</param>
+        /// <param name="_sm_config">Storage-specific config First published in XenServer 4.1.</param>
+        /// <param name="_managed">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_virtual_size">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_physical_utilisation">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_metadata_of_pool">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_is_a_snapshot">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_snapshot_time">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_cbt_enabled">True if changed blocks are tracked for this VDI First published in Unreleased.</param>
+        public static XenRef<VDI> db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of, bool _cbt_enabled)
+        {
+            return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "", _cbt_enabled).parse());
+        }
+
+        /// <summary>
+        /// Create a new VDI record in the database only
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">The uuid of the disk to introduce First published in XenServer 4.1.</param>
+        /// <param name="_name_label">The name of the disk record First published in XenServer 4.1.</param>
+        /// <param name="_name_description">The description of the disk record First published in XenServer 4.1.</param>
+        /// <param name="_sr">The SR that the VDI is in First published in XenServer 4.1.</param>
+        /// <param name="_type">The type of the VDI First published in XenServer 4.1.</param>
+        /// <param name="_sharable">true if this disk may be shared First published in XenServer 4.1.</param>
+        /// <param name="_read_only">true if this disk may ONLY be mounted read-only First published in XenServer 4.1.</param>
+        /// <param name="_other_config">additional configuration First published in XenServer 4.1.</param>
+        /// <param name="_location">location information First published in XenServer 4.1.</param>
+        /// <param name="_xenstore_data">Data to insert into xenstore First published in XenServer 4.1.</param>
+        /// <param name="_sm_config">Storage-specific config First published in XenServer 4.1.</param>
+        /// <param name="_managed">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_virtual_size">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_physical_utilisation">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_metadata_of_pool">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_is_a_snapshot">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_snapshot_time">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
+        /// <param name="_cbt_enabled">True if changed blocks are tracked for this VDI First published in Unreleased.</param>
+        public static XenRef<Task> async_db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of, bool _cbt_enabled)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "", _cbt_enabled).parse());
         }
 
         /// <summary>
@@ -1226,7 +1300,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void db_forget(Session session, string _vdi)
         {
-            session.proxy.vdi_db_forget(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            session.proxy.vdi_db_forget(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1237,7 +1311,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_db_forget(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_db_forget(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_db_forget(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1248,7 +1322,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void update(Session session, string _vdi)
         {
-            session.proxy.vdi_update(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            session.proxy.vdi_update(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1259,7 +1333,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_update(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_update(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_update(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1271,7 +1345,7 @@ namespace XenAPI
         /// <param name="_sr">The destination SR (only required if the destination VDI is not specified</param>
         public static XenRef<VDI> copy(Session session, string _vdi, string _sr)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_copy(session.uuid, (_vdi != null) ? _vdi : "", (_sr != null) ? _sr : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_copy(session.uuid, _vdi ?? "", _sr ?? "").parse());
         }
 
         /// <summary>
@@ -1283,7 +1357,7 @@ namespace XenAPI
         /// <param name="_sr">The destination SR (only required if the destination VDI is not specified</param>
         public static XenRef<Task> async_copy(Session session, string _vdi, string _sr)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.uuid, (_vdi != null) ? _vdi : "", (_sr != null) ? _sr : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.uuid, _vdi ?? "", _sr ?? "").parse());
         }
 
         /// <summary>
@@ -1297,7 +1371,7 @@ namespace XenAPI
         /// <param name="_into_vdi">The destination VDI to copy blocks into (if omitted then a destination SR must be provided and a fresh VDI will be created) First published in XenServer 6.2 SP1 Hotfix 4.</param>
         public static XenRef<VDI> copy(Session session, string _vdi, string _sr, string _base_vdi, string _into_vdi)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_copy(session.uuid, (_vdi != null) ? _vdi : "", (_sr != null) ? _sr : "", (_base_vdi != null) ? _base_vdi : "", (_into_vdi != null) ? _into_vdi : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_copy(session.uuid, _vdi ?? "", _sr ?? "", _base_vdi ?? "", _into_vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1311,7 +1385,7 @@ namespace XenAPI
         /// <param name="_into_vdi">The destination VDI to copy blocks into (if omitted then a destination SR must be provided and a fresh VDI will be created) First published in XenServer 6.2 SP1 Hotfix 4.</param>
         public static XenRef<Task> async_copy(Session session, string _vdi, string _sr, string _base_vdi, string _into_vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.uuid, (_vdi != null) ? _vdi : "", (_sr != null) ? _sr : "", (_base_vdi != null) ? _base_vdi : "", (_into_vdi != null) ? _into_vdi : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.uuid, _vdi ?? "", _sr ?? "", _base_vdi ?? "", _into_vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1323,7 +1397,7 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's managed field</param>
         public static void set_managed(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_managed(session.uuid, (_vdi != null) ? _vdi : "", _value).parse();
+            session.proxy.vdi_set_managed(session.uuid, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1334,7 +1408,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void forget(Session session, string _vdi)
         {
-            session.proxy.vdi_forget(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            session.proxy.vdi_forget(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1345,7 +1419,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_forget(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_forget(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_forget(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1357,7 +1431,7 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's sharable field</param>
         public static void set_sharable(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_sharable(session.uuid, (_vdi != null) ? _vdi : "", _value).parse();
+            session.proxy.vdi_set_sharable(session.uuid, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1369,7 +1443,7 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's read_only field</param>
         public static void set_read_only(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_read_only(session.uuid, (_vdi != null) ? _vdi : "", _value).parse();
+            session.proxy.vdi_set_read_only(session.uuid, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1381,7 +1455,7 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's missing field</param>
         public static void set_missing(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_missing(session.uuid, (_vdi != null) ? _vdi : "", _value).parse();
+            session.proxy.vdi_set_missing(session.uuid, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1393,7 +1467,7 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's virtual size</param>
         public static void set_virtual_size(Session session, string _vdi, long _value)
         {
-            session.proxy.vdi_set_virtual_size(session.uuid, (_vdi != null) ? _vdi : "", _value.ToString()).parse();
+            session.proxy.vdi_set_virtual_size(session.uuid, _vdi ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -1405,7 +1479,7 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's physical utilisation</param>
         public static void set_physical_utilisation(Session session, string _vdi, long _value)
         {
-            session.proxy.vdi_set_physical_utilisation(session.uuid, (_vdi != null) ? _vdi : "", _value.ToString()).parse();
+            session.proxy.vdi_set_physical_utilisation(session.uuid, _vdi ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -1417,7 +1491,7 @@ namespace XenAPI
         /// <param name="_value">The new value indicating whether this VDI is a snapshot</param>
         public static void set_is_a_snapshot(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_is_a_snapshot(session.uuid, (_vdi != null) ? _vdi : "", _value).parse();
+            session.proxy.vdi_set_is_a_snapshot(session.uuid, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1429,7 +1503,7 @@ namespace XenAPI
         /// <param name="_value">The VDI of which this VDI is a snapshot</param>
         public static void set_snapshot_of(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_set_snapshot_of(session.uuid, (_vdi != null) ? _vdi : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_set_snapshot_of(session.uuid, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1441,7 +1515,7 @@ namespace XenAPI
         /// <param name="_value">The snapshot time of this VDI.</param>
         public static void set_snapshot_time(Session session, string _vdi, DateTime _value)
         {
-            session.proxy.vdi_set_snapshot_time(session.uuid, (_vdi != null) ? _vdi : "", _value).parse();
+            session.proxy.vdi_set_snapshot_time(session.uuid, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1453,7 +1527,7 @@ namespace XenAPI
         /// <param name="_value">The pool whose metadata is contained by this VDI</param>
         public static void set_metadata_of_pool(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_set_metadata_of_pool(session.uuid, (_vdi != null) ? _vdi : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_set_metadata_of_pool(session.uuid, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1465,7 +1539,7 @@ namespace XenAPI
         /// <param name="_value">The name lable for the VDI</param>
         public static void set_name_label(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_set_name_label(session.uuid, (_vdi != null) ? _vdi : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_set_name_label(session.uuid, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1477,7 +1551,7 @@ namespace XenAPI
         /// <param name="_value">The name lable for the VDI</param>
         public static XenRef<Task> async_set_name_label(Session session, string _vdi, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_set_name_label(session.uuid, (_vdi != null) ? _vdi : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_set_name_label(session.uuid, _vdi ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -1489,7 +1563,7 @@ namespace XenAPI
         /// <param name="_value">The name description for the VDI</param>
         public static void set_name_description(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_set_name_description(session.uuid, (_vdi != null) ? _vdi : "", (_value != null) ? _value : "").parse();
+            session.proxy.vdi_set_name_description(session.uuid, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1501,7 +1575,7 @@ namespace XenAPI
         /// <param name="_value">The name description for the VDI</param>
         public static XenRef<Task> async_set_name_description(Session session, string _vdi, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_set_name_description(session.uuid, (_vdi != null) ? _vdi : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_set_name_description(session.uuid, _vdi ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -1513,7 +1587,7 @@ namespace XenAPI
         /// <param name="_value">The value to set</param>
         public static void set_on_boot(Session session, string _vdi, on_boot _value)
         {
-            session.proxy.vdi_set_on_boot(session.uuid, (_vdi != null) ? _vdi : "", on_boot_helper.ToString(_value)).parse();
+            session.proxy.vdi_set_on_boot(session.uuid, _vdi ?? "", on_boot_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -1525,7 +1599,7 @@ namespace XenAPI
         /// <param name="_value">The value to set</param>
         public static XenRef<Task> async_set_on_boot(Session session, string _vdi, on_boot _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_set_on_boot(session.uuid, (_vdi != null) ? _vdi : "", on_boot_helper.ToString(_value)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_set_on_boot(session.uuid, _vdi ?? "", on_boot_helper.ToString(_value)).parse());
         }
 
         /// <summary>
@@ -1537,7 +1611,7 @@ namespace XenAPI
         /// <param name="_value">The value to set</param>
         public static void set_allow_caching(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_allow_caching(session.uuid, (_vdi != null) ? _vdi : "", _value).parse();
+            session.proxy.vdi_set_allow_caching(session.uuid, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1549,7 +1623,7 @@ namespace XenAPI
         /// <param name="_value">The value to set</param>
         public static XenRef<Task> async_set_allow_caching(Session session, string _vdi, bool _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_set_allow_caching(session.uuid, (_vdi != null) ? _vdi : "", _value).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_set_allow_caching(session.uuid, _vdi ?? "", _value).parse());
         }
 
         /// <summary>
@@ -1560,7 +1634,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Session> open_database(Session session, string _vdi)
         {
-            return XenRef<Session>.Create(session.proxy.vdi_open_database(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Session>.Create(session.proxy.vdi_open_database(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1571,7 +1645,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_open_database(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_open_database(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_open_database(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1582,7 +1656,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string read_database_pool_uuid(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_read_database_pool_uuid(session.uuid, (_vdi != null) ? _vdi : "").parse();
+            return (string)session.proxy.vdi_read_database_pool_uuid(session.uuid, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1593,7 +1667,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_read_database_pool_uuid(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_read_database_pool_uuid(session.uuid, (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_read_database_pool_uuid(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1606,7 +1680,7 @@ namespace XenAPI
         /// <param name="_options">Other parameters</param>
         public static XenRef<VDI> pool_migrate(Session session, string _vdi, string _sr, Dictionary<string, string> _options)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_pool_migrate(session.uuid, (_vdi != null) ? _vdi : "", (_sr != null) ? _sr : "", Maps.convert_to_proxy_string_string(_options)).parse());
+            return XenRef<VDI>.Create(session.proxy.vdi_pool_migrate(session.uuid, _vdi ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -1619,7 +1693,119 @@ namespace XenAPI
         /// <param name="_options">Other parameters</param>
         public static XenRef<Task> async_pool_migrate(Session session, string _vdi, string _sr, Dictionary<string, string> _options)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_pool_migrate(session.uuid, (_vdi != null) ? _vdi : "", (_sr != null) ? _sr : "", Maps.convert_to_proxy_string_string(_options)).parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_pool_migrate(session.uuid, _vdi ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
+        }
+
+        /// <summary>
+        /// Enable changed block tracking for the VDI. This call is idempotent - enabling CBT for a VDI for which CBT is already enabled results in a no-op, and no error will be thrown.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static void enable_cbt(Session session, string _vdi)
+        {
+            session.proxy.vdi_enable_cbt(session.uuid, _vdi ?? "").parse();
+        }
+
+        /// <summary>
+        /// Enable changed block tracking for the VDI. This call is idempotent - enabling CBT for a VDI for which CBT is already enabled results in a no-op, and no error will be thrown.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<Task> async_enable_cbt(Session session, string _vdi)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vdi_enable_cbt(session.uuid, _vdi ?? "").parse());
+        }
+
+        /// <summary>
+        /// Disable changed block tracking for the VDI. This call is only allowed on VDIs that support enabling CBT. It is an idempotent operation - disabling CBT for a VDI for which CBT is not enabled results in a no-op, and no error will be thrown.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static void disable_cbt(Session session, string _vdi)
+        {
+            session.proxy.vdi_disable_cbt(session.uuid, _vdi ?? "").parse();
+        }
+
+        /// <summary>
+        /// Disable changed block tracking for the VDI. This call is only allowed on VDIs that support enabling CBT. It is an idempotent operation - disabling CBT for a VDI for which CBT is not enabled results in a no-op, and no error will be thrown.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<Task> async_disable_cbt(Session session, string _vdi)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vdi_disable_cbt(session.uuid, _vdi ?? "").parse());
+        }
+
+        /// <summary>
+        /// Delete the data of the snapshot VDI, but keep its changed block tracking metadata. When successful, this call changes the type of the VDI to cbt_metadata. This operation is idempotent: calling it on a VDI of type cbt_metadata results in a no-op, and no error will be thrown.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static void data_destroy(Session session, string _vdi)
+        {
+            session.proxy.vdi_data_destroy(session.uuid, _vdi ?? "").parse();
+        }
+
+        /// <summary>
+        /// Delete the data of the snapshot VDI, but keep its changed block tracking metadata. When successful, this call changes the type of the VDI to cbt_metadata. This operation is idempotent: calling it on a VDI of type cbt_metadata results in a no-op, and no error will be thrown.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<Task> async_data_destroy(Session session, string _vdi)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vdi_data_destroy(session.uuid, _vdi ?? "").parse());
+        }
+
+        /// <summary>
+        /// Reports which blocks differ in the two VDIs. This operation is not allowed when vdi_to is attached to a VM.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        /// <param name="_vdi_to">The second VDI.</param>
+        public static string export_changed_blocks(Session session, string _vdi, string _vdi_to)
+        {
+            return (string)session.proxy.vdi_export_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse();
+        }
+
+        /// <summary>
+        /// Reports which blocks differ in the two VDIs. This operation is not allowed when vdi_to is attached to a VM.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        /// <param name="_vdi_to">The second VDI.</param>
+        public static XenRef<Task> async_export_changed_blocks(Session session, string _vdi, string _vdi_to)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vdi_export_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed to the NBD server running at the IP address and port specified by that URI as the export name.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static string[] get_nbd_info(Session session, string _vdi)
+        {
+            return (string [])session.proxy.vdi_get_nbd_info(session.uuid, _vdi ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed to the NBD server running at the IP address and port specified by that URI as the export name.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<Task> async_get_nbd_info(Session session, string _vdi)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vdi_get_nbd_info(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -2212,5 +2398,24 @@ namespace XenAPI
             }
         }
         private bool _is_tools_iso;
+
+        /// <summary>
+        /// True if changed blocks are tracked for this VDI
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual bool cbt_enabled
+        {
+            get { return _cbt_enabled; }
+            set
+            {
+                if (!Helper.AreEqual(value, _cbt_enabled))
+                {
+                    _cbt_enabled = value;
+                    Changed = true;
+                    NotifyPropertyChanged("cbt_enabled");
+                }
+            }
+        }
+        private bool _cbt_enabled;
     }
 }

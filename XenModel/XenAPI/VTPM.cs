@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -83,9 +81,9 @@ namespace XenAPI
         public Proxy_VTPM ToProxy()
         {
             Proxy_VTPM result_ = new Proxy_VTPM();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.VM = (VM != null) ? VM : "";
-            result_.backend = (backend != null) ? backend : "";
+            result_.uuid = uuid ?? "";
+            result_.VM = VM ?? "";
+            result_.backend = backend ?? "";
             return result_;
         }
 
@@ -132,7 +130,7 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static VTPM get_record(Session session, string _vtpm)
         {
-            return new VTPM((Proxy_VTPM)session.proxy.vtpm_get_record(session.uuid, (_vtpm != null) ? _vtpm : "").parse());
+            return new VTPM((Proxy_VTPM)session.proxy.vtpm_get_record(session.uuid, _vtpm ?? "").parse());
         }
 
         /// <summary>
@@ -143,7 +141,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VTPM> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VTPM>.Create(session.proxy.vtpm_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<VTPM>.Create(session.proxy.vtpm_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -176,7 +174,7 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static void destroy(Session session, string _vtpm)
         {
-            session.proxy.vtpm_destroy(session.uuid, (_vtpm != null) ? _vtpm : "").parse();
+            session.proxy.vtpm_destroy(session.uuid, _vtpm ?? "").parse();
         }
 
         /// <summary>
@@ -187,7 +185,7 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static XenRef<Task> async_destroy(Session session, string _vtpm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vtpm_destroy(session.uuid, (_vtpm != null) ? _vtpm : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vtpm_destroy(session.uuid, _vtpm ?? "").parse());
         }
 
         /// <summary>
@@ -198,7 +196,7 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static string get_uuid(Session session, string _vtpm)
         {
-            return (string)session.proxy.vtpm_get_uuid(session.uuid, (_vtpm != null) ? _vtpm : "").parse();
+            return (string)session.proxy.vtpm_get_uuid(session.uuid, _vtpm ?? "").parse();
         }
 
         /// <summary>
@@ -209,7 +207,7 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static XenRef<VM> get_VM(Session session, string _vtpm)
         {
-            return XenRef<VM>.Create(session.proxy.vtpm_get_vm(session.uuid, (_vtpm != null) ? _vtpm : "").parse());
+            return XenRef<VM>.Create(session.proxy.vtpm_get_vm(session.uuid, _vtpm ?? "").parse());
         }
 
         /// <summary>
@@ -220,7 +218,7 @@ namespace XenAPI
         /// <param name="_vtpm">The opaque_ref of the given vtpm</param>
         public static XenRef<VM> get_backend(Session session, string _vtpm)
         {
-            return XenRef<VM>.Create(session.proxy.vtpm_get_backend(session.uuid, (_vtpm != null) ? _vtpm : "").parse());
+            return XenRef<VM>.Create(session.proxy.vtpm_get_backend(session.uuid, _vtpm ?? "").parse());
         }
 
         /// <summary>

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -99,13 +97,13 @@ namespace XenAPI
         public Proxy_Blob ToProxy()
         {
             Proxy_Blob result_ = new Proxy_Blob();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.size = size.ToString();
             result_.pubblic = pubblic;
             result_.last_updated = last_updated;
-            result_.mime_type = (mime_type != null) ? mime_type : "";
+            result_.mime_type = mime_type ?? "";
             return result_;
         }
 
@@ -169,7 +167,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static Blob get_record(Session session, string _blob)
         {
-            return new Blob((Proxy_Blob)session.proxy.blob_get_record(session.uuid, (_blob != null) ? _blob : "").parse());
+            return new Blob((Proxy_Blob)session.proxy.blob_get_record(session.uuid, _blob ?? "").parse());
         }
 
         /// <summary>
@@ -180,7 +178,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Blob> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Blob>.Create(session.proxy.blob_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Blob>.Create(session.proxy.blob_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -191,7 +189,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<Blob>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<Blob>.Create(session.proxy.blob_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            return XenRef<Blob>.Create(session.proxy.blob_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -202,7 +200,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static string get_uuid(Session session, string _blob)
         {
-            return (string)session.proxy.blob_get_uuid(session.uuid, (_blob != null) ? _blob : "").parse();
+            return (string)session.proxy.blob_get_uuid(session.uuid, _blob ?? "").parse();
         }
 
         /// <summary>
@@ -213,7 +211,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static string get_name_label(Session session, string _blob)
         {
-            return (string)session.proxy.blob_get_name_label(session.uuid, (_blob != null) ? _blob : "").parse();
+            return (string)session.proxy.blob_get_name_label(session.uuid, _blob ?? "").parse();
         }
 
         /// <summary>
@@ -224,7 +222,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static string get_name_description(Session session, string _blob)
         {
-            return (string)session.proxy.blob_get_name_description(session.uuid, (_blob != null) ? _blob : "").parse();
+            return (string)session.proxy.blob_get_name_description(session.uuid, _blob ?? "").parse();
         }
 
         /// <summary>
@@ -235,7 +233,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static long get_size(Session session, string _blob)
         {
-            return long.Parse((string)session.proxy.blob_get_size(session.uuid, (_blob != null) ? _blob : "").parse());
+            return long.Parse((string)session.proxy.blob_get_size(session.uuid, _blob ?? "").parse());
         }
 
         /// <summary>
@@ -246,7 +244,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static bool get_public(Session session, string _blob)
         {
-            return (bool)session.proxy.blob_get_public(session.uuid, (_blob != null) ? _blob : "").parse();
+            return (bool)session.proxy.blob_get_public(session.uuid, _blob ?? "").parse();
         }
 
         /// <summary>
@@ -257,7 +255,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static DateTime get_last_updated(Session session, string _blob)
         {
-            return session.proxy.blob_get_last_updated(session.uuid, (_blob != null) ? _blob : "").parse();
+            return session.proxy.blob_get_last_updated(session.uuid, _blob ?? "").parse();
         }
 
         /// <summary>
@@ -268,7 +266,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static string get_mime_type(Session session, string _blob)
         {
-            return (string)session.proxy.blob_get_mime_type(session.uuid, (_blob != null) ? _blob : "").parse();
+            return (string)session.proxy.blob_get_mime_type(session.uuid, _blob ?? "").parse();
         }
 
         /// <summary>
@@ -280,7 +278,7 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _blob, string _label)
         {
-            session.proxy.blob_set_name_label(session.uuid, (_blob != null) ? _blob : "", (_label != null) ? _label : "").parse();
+            session.proxy.blob_set_name_label(session.uuid, _blob ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -292,7 +290,7 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _blob, string _description)
         {
-            session.proxy.blob_set_name_description(session.uuid, (_blob != null) ? _blob : "", (_description != null) ? _description : "").parse();
+            session.proxy.blob_set_name_description(session.uuid, _blob ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -304,7 +302,7 @@ namespace XenAPI
         /// <param name="_public">New value to set</param>
         public static void set_public(Session session, string _blob, bool _public)
         {
-            session.proxy.blob_set_public(session.uuid, (_blob != null) ? _blob : "", _public).parse();
+            session.proxy.blob_set_public(session.uuid, _blob ?? "", _public).parse();
         }
 
         /// <summary>
@@ -315,7 +313,7 @@ namespace XenAPI
         /// <param name="_mime_type">The mime-type of the blob. Defaults to 'application/octet-stream' if the empty string is supplied</param>
         public static XenRef<Blob> create(Session session, string _mime_type)
         {
-            return XenRef<Blob>.Create(session.proxy.blob_create(session.uuid, (_mime_type != null) ? _mime_type : "").parse());
+            return XenRef<Blob>.Create(session.proxy.blob_create(session.uuid, _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -327,7 +325,7 @@ namespace XenAPI
         /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Blob> create(Session session, string _mime_type, bool _public)
         {
-            return XenRef<Blob>.Create(session.proxy.blob_create(session.uuid, (_mime_type != null) ? _mime_type : "", _public).parse());
+            return XenRef<Blob>.Create(session.proxy.blob_create(session.uuid, _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -338,7 +336,7 @@ namespace XenAPI
         /// <param name="_blob">The opaque_ref of the given blob</param>
         public static void destroy(Session session, string _blob)
         {
-            session.proxy.blob_destroy(session.uuid, (_blob != null) ? _blob : "").parse();
+            session.proxy.blob_destroy(session.uuid, _blob ?? "").parse();
         }
 
         /// <summary>

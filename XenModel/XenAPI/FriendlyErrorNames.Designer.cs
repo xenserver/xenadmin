@@ -97,6 +97,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server due to invalid account.
+        /// </summary>
+        public static string AUTH_DISABLE_FAILED_INVALID_ACCOUNT {
+            get {
+                return ResourceManager.GetString("AUTH_DISABLE_FAILED_INVALID_ACCOUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to External authentication has been disabled with errors: Your AD machine account was not disabled on the AD server as permission was denied..
         /// </summary>
         public static string AUTH_DISABLE_FAILED_PERMISSION_DENIED {
@@ -210,6 +219,15 @@ namespace XenAPI {
         public static string BACKUP_SCRIPT_FAILED {
             get {
                 return ResourceManager.GetString("BACKUP_SCRIPT_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout trying to balloon down memory before VM migration. If the error occurs repeatedly, consider increasing the memory-dynamic-min value..
+        /// </summary>
+        public static string BALLOONING_TIMEOUT_BEFORE_MIGRATION {
+            get {
+                return ResourceManager.GetString("BALLOONING_TIMEOUT_BEFORE_MIGRATION", resourceCulture);
             }
         }
         
@@ -2820,6 +2838,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SM has thrown a generic python exception.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_1200 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_1200", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Netapp Username parameter missing in Dconf string.
         /// </summary>
         public static string SR_BACKEND_FAILURE_121 {
@@ -3954,7 +3981,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The attempt to unmount/deactivate the specified logical volume failed.
+        ///   Looks up a localized string similar to The attempt to umount/deactivate the specified logical volume failed.
         /// </summary>
         public static string SR_BACKEND_FAILURE_53 {
             get {
@@ -4881,6 +4908,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The requested operation is not allowed for VDIs with CBT enabled or VMs having such VDIs, and CBT is enabled for the specified VDI..
+        /// </summary>
+        public static string VDI_CBT_ENABLED {
+            get {
+                return ResourceManager.GetString("VDI_CBT_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VDI could not be opened for metadata recovery as it contains the current pool&apos;s metadata..
         /// </summary>
         public static string VDI_CONTAINS_METADATA_OF_THIS_POOL {
@@ -4971,6 +5007,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The requested operation is not allowed because the specified VDI does not have changed block tracking metadata..
+        /// </summary>
+        public static string VDI_NO_CBT_METADATA {
+            get {
+                return ResourceManager.GetString("VDI_NO_CBT_METADATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This operation cannot be performed because VDI {0} could not be properly attached to the VM..
         /// </summary>
         public static string VDI_NOT_AVAILABLE {
@@ -5007,7 +5052,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation is not permitted on VMs containing VDIs in the &apos;on-boot=reset&apos; mode.
+        ///   Looks up a localized string similar to This operation is not permitted on VDIs in the &apos;on-boot=reset&apos; mode, or on VMs having such VDIs..
         /// </summary>
         public static string VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION {
             get {

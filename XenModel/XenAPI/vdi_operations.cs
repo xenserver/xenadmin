@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum vdi_operations
     {
-        scan, clone, copy, resize, resize_online, snapshot, mirror, destroy, forget, update, force_unlock, generate_config, blocked, unknown
+        clone, copy, resize, resize_online, snapshot, mirror, destroy, forget, update, force_unlock, generate_config, enable_cbt, disable_cbt, data_destroy, export_changed_blocks, set_on_boot, blocked, unknown
     }
 
     public static class vdi_operations_helper
@@ -46,8 +46,6 @@ namespace XenAPI
         {
             switch (x)
             {
-                case vdi_operations.scan:
-                    return "scan";
                 case vdi_operations.clone:
                     return "clone";
                 case vdi_operations.copy:
@@ -70,6 +68,16 @@ namespace XenAPI
                     return "force_unlock";
                 case vdi_operations.generate_config:
                     return "generate_config";
+                case vdi_operations.enable_cbt:
+                    return "enable_cbt";
+                case vdi_operations.disable_cbt:
+                    return "disable_cbt";
+                case vdi_operations.data_destroy:
+                    return "data_destroy";
+                case vdi_operations.export_changed_blocks:
+                    return "export_changed_blocks";
+                case vdi_operations.set_on_boot:
+                    return "set_on_boot";
                 case vdi_operations.blocked:
                     return "blocked";
                 default:

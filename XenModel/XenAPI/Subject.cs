@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -87,8 +85,8 @@ namespace XenAPI
         public Proxy_Subject ToProxy()
         {
             Proxy_Subject result_ = new Proxy_Subject();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.subject_identifier = (subject_identifier != null) ? subject_identifier : "";
+            result_.uuid = uuid ?? "";
+            result_.subject_identifier = subject_identifier ?? "";
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.roles = (roles != null) ? Helper.RefListToStringArray(roles) : new string[] {};
             return result_;
@@ -139,7 +137,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static Subject get_record(Session session, string _subject)
         {
-            return new Subject((Proxy_Subject)session.proxy.subject_get_record(session.uuid, (_subject != null) ? _subject : "").parse());
+            return new Subject((Proxy_Subject)session.proxy.subject_get_record(session.uuid, _subject ?? "").parse());
         }
 
         /// <summary>
@@ -150,7 +148,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Subject> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Subject>.Create(session.proxy.subject_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Subject>.Create(session.proxy.subject_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -183,7 +181,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static void destroy(Session session, string _subject)
         {
-            session.proxy.subject_destroy(session.uuid, (_subject != null) ? _subject : "").parse();
+            session.proxy.subject_destroy(session.uuid, _subject ?? "").parse();
         }
 
         /// <summary>
@@ -194,7 +192,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static XenRef<Task> async_destroy(Session session, string _subject)
         {
-            return XenRef<Task>.Create(session.proxy.async_subject_destroy(session.uuid, (_subject != null) ? _subject : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_subject_destroy(session.uuid, _subject ?? "").parse());
         }
 
         /// <summary>
@@ -205,7 +203,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static string get_uuid(Session session, string _subject)
         {
-            return (string)session.proxy.subject_get_uuid(session.uuid, (_subject != null) ? _subject : "").parse();
+            return (string)session.proxy.subject_get_uuid(session.uuid, _subject ?? "").parse();
         }
 
         /// <summary>
@@ -216,7 +214,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static string get_subject_identifier(Session session, string _subject)
         {
-            return (string)session.proxy.subject_get_subject_identifier(session.uuid, (_subject != null) ? _subject : "").parse();
+            return (string)session.proxy.subject_get_subject_identifier(session.uuid, _subject ?? "").parse();
         }
 
         /// <summary>
@@ -227,7 +225,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static Dictionary<string, string> get_other_config(Session session, string _subject)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.subject_get_other_config(session.uuid, (_subject != null) ? _subject : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.subject_get_other_config(session.uuid, _subject ?? "").parse());
         }
 
         /// <summary>
@@ -238,7 +236,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static List<XenRef<Role>> get_roles(Session session, string _subject)
         {
-            return XenRef<Role>.Create(session.proxy.subject_get_roles(session.uuid, (_subject != null) ? _subject : "").parse());
+            return XenRef<Role>.Create(session.proxy.subject_get_roles(session.uuid, _subject ?? "").parse());
         }
 
         /// <summary>
@@ -250,7 +248,7 @@ namespace XenAPI
         /// <param name="_role">The unique role reference</param>
         public static void add_to_roles(Session session, string _subject, string _role)
         {
-            session.proxy.subject_add_to_roles(session.uuid, (_subject != null) ? _subject : "", (_role != null) ? _role : "").parse();
+            session.proxy.subject_add_to_roles(session.uuid, _subject ?? "", _role ?? "").parse();
         }
 
         /// <summary>
@@ -262,7 +260,7 @@ namespace XenAPI
         /// <param name="_role">The unique role reference in the subject's roles field</param>
         public static void remove_from_roles(Session session, string _subject, string _role)
         {
-            session.proxy.subject_remove_from_roles(session.uuid, (_subject != null) ? _subject : "", (_role != null) ? _role : "").parse();
+            session.proxy.subject_remove_from_roles(session.uuid, _subject ?? "", _role ?? "").parse();
         }
 
         /// <summary>
@@ -273,7 +271,7 @@ namespace XenAPI
         /// <param name="_subject">The opaque_ref of the given subject</param>
         public static string[] get_permissions_name_label(Session session, string _subject)
         {
-            return (string [])session.proxy.subject_get_permissions_name_label(session.uuid, (_subject != null) ? _subject : "").parse();
+            return (string [])session.proxy.subject_get_permissions_name_label(session.uuid, _subject ?? "").parse();
         }
 
         /// <summary>

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -123,17 +121,17 @@ namespace XenAPI
         public Proxy_PIF_metrics ToProxy()
         {
             Proxy_PIF_metrics result_ = new Proxy_PIF_metrics();
-            result_.uuid = (uuid != null) ? uuid : "";
+            result_.uuid = uuid ?? "";
             result_.io_read_kbs = io_read_kbs;
             result_.io_write_kbs = io_write_kbs;
             result_.carrier = carrier;
-            result_.vendor_id = (vendor_id != null) ? vendor_id : "";
-            result_.vendor_name = (vendor_name != null) ? vendor_name : "";
-            result_.device_id = (device_id != null) ? device_id : "";
-            result_.device_name = (device_name != null) ? device_name : "";
+            result_.vendor_id = vendor_id ?? "";
+            result_.vendor_name = vendor_name ?? "";
+            result_.device_id = device_id ?? "";
+            result_.device_name = device_name ?? "";
             result_.speed = speed.ToString();
             result_.duplex = duplex;
-            result_.pci_bus_path = (pci_bus_path != null) ? pci_bus_path : "";
+            result_.pci_bus_path = pci_bus_path ?? "";
             result_.last_updated = last_updated;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             return result_;
@@ -207,7 +205,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static PIF_metrics get_record(Session session, string _pif_metrics)
         {
-            return new PIF_metrics((Proxy_PIF_metrics)session.proxy.pif_metrics_get_record(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
+            return new PIF_metrics((Proxy_PIF_metrics)session.proxy.pif_metrics_get_record(session.uuid, _pif_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -218,7 +216,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PIF_metrics> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<PIF_metrics>.Create(session.proxy.pif_metrics_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<PIF_metrics>.Create(session.proxy.pif_metrics_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -229,7 +227,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_uuid(Session session, string _pif_metrics)
         {
-            return (string)session.proxy.pif_metrics_get_uuid(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return (string)session.proxy.pif_metrics_get_uuid(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -240,7 +238,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static double get_io_read_kbs(Session session, string _pif_metrics)
         {
-            return Convert.ToDouble(session.proxy.pif_metrics_get_io_read_kbs(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
+            return Convert.ToDouble(session.proxy.pif_metrics_get_io_read_kbs(session.uuid, _pif_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -251,7 +249,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static double get_io_write_kbs(Session session, string _pif_metrics)
         {
-            return Convert.ToDouble(session.proxy.pif_metrics_get_io_write_kbs(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
+            return Convert.ToDouble(session.proxy.pif_metrics_get_io_write_kbs(session.uuid, _pif_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -262,7 +260,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static bool get_carrier(Session session, string _pif_metrics)
         {
-            return (bool)session.proxy.pif_metrics_get_carrier(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return (bool)session.proxy.pif_metrics_get_carrier(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -273,7 +271,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_vendor_id(Session session, string _pif_metrics)
         {
-            return (string)session.proxy.pif_metrics_get_vendor_id(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return (string)session.proxy.pif_metrics_get_vendor_id(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -284,7 +282,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_vendor_name(Session session, string _pif_metrics)
         {
-            return (string)session.proxy.pif_metrics_get_vendor_name(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return (string)session.proxy.pif_metrics_get_vendor_name(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -295,7 +293,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_device_id(Session session, string _pif_metrics)
         {
-            return (string)session.proxy.pif_metrics_get_device_id(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return (string)session.proxy.pif_metrics_get_device_id(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -306,7 +304,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_device_name(Session session, string _pif_metrics)
         {
-            return (string)session.proxy.pif_metrics_get_device_name(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return (string)session.proxy.pif_metrics_get_device_name(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -317,7 +315,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static long get_speed(Session session, string _pif_metrics)
         {
-            return long.Parse((string)session.proxy.pif_metrics_get_speed(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
+            return long.Parse((string)session.proxy.pif_metrics_get_speed(session.uuid, _pif_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -328,7 +326,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static bool get_duplex(Session session, string _pif_metrics)
         {
-            return (bool)session.proxy.pif_metrics_get_duplex(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return (bool)session.proxy.pif_metrics_get_duplex(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -339,7 +337,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static string get_pci_bus_path(Session session, string _pif_metrics)
         {
-            return (string)session.proxy.pif_metrics_get_pci_bus_path(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return (string)session.proxy.pif_metrics_get_pci_bus_path(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -350,7 +348,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static DateTime get_last_updated(Session session, string _pif_metrics)
         {
-            return session.proxy.pif_metrics_get_last_updated(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse();
+            return session.proxy.pif_metrics_get_last_updated(session.uuid, _pif_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -361,7 +359,7 @@ namespace XenAPI
         /// <param name="_pif_metrics">The opaque_ref of the given pif_metrics</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pif_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pif_metrics_get_other_config(session.uuid, (_pif_metrics != null) ? _pif_metrics : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pif_metrics_get_other_config(session.uuid, _pif_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -373,7 +371,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pif_metrics, Dictionary<string, string> _other_config)
         {
-            session.proxy.pif_metrics_set_other_config(session.uuid, (_pif_metrics != null) ? _pif_metrics : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.pif_metrics_set_other_config(session.uuid, _pif_metrics ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -386,7 +384,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pif_metrics, string _key, string _value)
         {
-            session.proxy.pif_metrics_add_to_other_config(session.uuid, (_pif_metrics != null) ? _pif_metrics : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.pif_metrics_add_to_other_config(session.uuid, _pif_metrics ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -398,7 +396,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pif_metrics, string _key)
         {
-            session.proxy.pif_metrics_remove_from_other_config(session.uuid, (_pif_metrics != null) ? _pif_metrics : "", (_key != null) ? _key : "").parse();
+            session.proxy.pif_metrics_remove_from_other_config(session.uuid, _pif_metrics ?? "", _key ?? "").parse();
         }
 
         /// <summary>
