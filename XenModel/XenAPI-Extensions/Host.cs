@@ -143,10 +143,14 @@ namespace XenAPI
             }
         }
 
-        public string iscsi_iqn
+        public string GetIscsiIqn()
         {
-            get { return Get(other_config, "iscsi_iqn") ?? ""; }
-            set { other_config = SetDictionaryKey(other_config, "iscsi_iqn", value); }
+            return Get(other_config, "iscsi_iqn") ?? "";
+        }
+
+        public void SetIscsiIqn(string value)
+        {
+            SetDictionaryKey(other_config, "iscsi_iqn", value);
         }
 
         public override string ToString()
@@ -565,12 +569,19 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// The remote syslog target. May return null if not set on the server. Set to null to unset.
+        /// The remote syslog target. May return null if not set on the server.
         /// </summary>
-        public string SysLogDestination
+        public string GetSysLogDestination()
         {
-            get { return logging != null && logging.ContainsKey("syslog_destination") ? logging["syslog_destination"] : null; }
-            set { logging = SetDictionaryKey(logging, "syslog_destination", value); }
+            return logging != null && logging.ContainsKey("syslog_destination") ? logging["syslog_destination"] : null;
+        }
+
+        /// <summary>
+        /// Set to null to unset
+        /// </summary>
+        public void SetSysLogDestination(string value)
+        {
+            SetDictionaryKey(logging, "syslog_destination", value);
         }
 
         public static bool IsFullyPatched(Host host,IEnumerable<IXenConnection> connections)

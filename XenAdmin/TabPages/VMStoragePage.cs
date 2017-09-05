@@ -723,9 +723,9 @@ namespace XenAdmin.TabPages
                 case 5:
                     return VDI.SizeText();
                 case 6:
-                    return VBD.read_only ? Messages.YES : Messages.NO;
+                    return VBD.IsReadOnly() ? Messages.YES : Messages.NO;
                 case 7:
-                    return GetPriorityString(VBD.IONice);
+                    return GetPriorityString(VBD.GetIoNice());
                 case 8:
                     return VBD.currently_attached ? Messages.YES : Messages.NO;
                 case 9:

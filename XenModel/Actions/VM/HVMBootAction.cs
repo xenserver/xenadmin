@@ -47,11 +47,11 @@ namespace XenAdmin.Actions
         {
             Description = Messages.STARTING_IN_RECOVERY_MODE;
             string oldPolicy = VM.HVM_boot_policy; 
-            string oldOrder  = VM.BootOrder;
+            string oldOrder  = VM.GetBootOrder();
 
             vmCopy = (VM)VM.Clone();
             vmCopy.HVM_boot_policy = "BIOS order";
-            vmCopy.BootOrder = "DN";
+            vmCopy.SetBootOrder("DN");
 
             VM.Locked = true;
             vmCopy.SaveChanges(Session);
@@ -60,7 +60,7 @@ namespace XenAdmin.Actions
             XenAPI.VM.start(Session, VM.opaque_ref, false, false);
 
             vmCopy.HVM_boot_policy = oldPolicy;
-            vmCopy.BootOrder = oldOrder;
+            vmCopy.SetBootOrder(oldOrder);
 
             VM.Locked = true;
             vmCopy.SaveChanges(Session);

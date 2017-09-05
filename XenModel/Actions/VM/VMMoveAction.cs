@@ -106,7 +106,7 @@ namespace XenAdmin.Actions.VMActions
 
                 foreach (VBD oldVBD in vbds)
                 {
-                    if (!oldVBD.IsOwner)
+                    if (!oldVBD.GetIsOwner())
                         continue;
 
                     var curVdi = Connection.Resolve(oldVBD.VDI);
@@ -126,7 +126,6 @@ namespace XenAdmin.Actions.VMActions
  
                     var newVBD = new VBD
                                      {
-                                         IsOwner = oldVBD.IsOwner,
                                          userdevice = oldVBD.userdevice,
                                          bootable = oldVBD.bootable,
                                          mode = oldVBD.mode,
@@ -136,6 +135,7 @@ namespace XenAdmin.Actions.VMActions
                                          VDI = new XenRef<VDI>(newVDI.opaque_ref),
                                          VM = new XenRef<VM>(VM.opaque_ref)
                                      };
+                    newVBD.SetIsOwner(oldVBD.GetIsOwner());
 
                     VBD vbd = oldVBD;
                     BestEffort(ref exn, () => VDI.destroy(Session, vbd.VDI.opaque_ref));

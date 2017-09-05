@@ -129,16 +129,17 @@ namespace XenAPI
             return vms;
         }
 
-        public string VMHint
+        public string GetVmHint()
         {
-            get
-            {
-                if (sm_config != null && sm_config.ContainsKey("vmhint"))
-                    return sm_config["vmhint"];
-                else
-                    return "";
-            }
-            set { sm_config = SetDictionaryKey(sm_config, "vmhint", value); }
+            if (sm_config != null && sm_config.ContainsKey("vmhint"))
+                return sm_config["vmhint"];
+            else
+                return "";
+        }
+
+        public void SetVmHint(string value)
+        {
+            sm_config = SetDictionaryKey(sm_config, "vmhint", value);
         }
 
         public override string ToString()

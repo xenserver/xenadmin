@@ -383,13 +383,8 @@ namespace XenAdmin.Dialogs
 
         private string Purpose(PIF pif)
         {
-            string purpose = pif.ManagementPurpose;
+            string purpose = pif.GetManagementPurpose();
             return string.IsNullOrEmpty(purpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : purpose;
-        }
-
-        private string PIFTabName(PIF pif)
-        {
-            return pif.ManagementPurpose ?? AuxTabName();
         }
 
         private string AuxTabName()
@@ -626,7 +621,7 @@ namespace XenAdmin.Dialogs
 
             if (page.type == NetworkingPropertiesPage.Type.SECONDARY)
             {
-                newPIF.ManagementPurpose = page.PurposeTextBox.Text;
+                newPIF.SetManagementPurspose(page.PurposeTextBox.Text);
                 newPIF.management = false;
             }
             else

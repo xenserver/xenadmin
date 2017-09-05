@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void LoadDisks()
         {
-            XmlNode provision = Template.ProvisionXml;
+            XmlNode provision = Template.ProvisionXml();
             if (provision != null)
             {
                 foreach (XmlNode disk in provision.ChildNodes)

@@ -208,7 +208,7 @@ namespace XenAdmin.Dialogs
                 if (is_vm && !wlb_enabled)
                     ShowTab(HomeServerPage = new HomeServerEditPage());
 
-                if (is_vm && ((VM)xenObjectCopy).CanHaveGpu)
+                if (is_vm && ((VM)xenObjectCopy).CanHaveGpu())
                 {
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictGpu))
                     {

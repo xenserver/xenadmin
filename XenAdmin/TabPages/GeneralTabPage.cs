@@ -583,10 +583,10 @@ namespace XenAdmin.TabPages
                 if (pif.IsSecondaryManagementInterface(Properties.Settings.Default.ShowHiddenVMs))
                 {
                     if (!includeHostSuffix)
-                        s.AddEntry(pif.ManagementPurpose.Ellipsise(30), pif.FriendlyIPAddress(), editValue);
+                        s.AddEntry(pif.GetManagementPurpose().Ellipsise(30), pif.FriendlyIPAddress(), editValue);
                     else
                         s.AddEntry(
-                            string.Format(Messages.PROPERTY_ON_OBJECT, pif.ManagementPurpose.Ellipsise(30), Helpers.GetName(Host)),
+                            string.Format(Messages.PROPERTY_ON_OBJECT, pif.GetManagementPurpose().Ellipsise(30), Helpers.GetName(Host)),
                             pif.FriendlyIPAddress(),
                             editValue);
                 }
@@ -722,7 +722,7 @@ namespace XenAdmin.TabPages
 
             PDSection s = pdSectionHighAvailability;
 
-            s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority),
+            s.AddEntry(FriendlyName("VM.ha_restart_priority"), Helpers.RestartPriorityI18n(vm.HARestartPriority()),
                 new PropertiesToolStripMenuItem(new VmEditHaCommand(Program.MainWindow, xenObject)));
         }
 
@@ -1172,9 +1172,9 @@ namespace XenAdmin.TabPages
                     s.AddEntry(FriendlyName("host.enabled"), Messages.YES, item);
                 }
 
-                s.AddEntry(FriendlyName("host.iscsi_iqn"), host.iscsi_iqn,
+                s.AddEntry(FriendlyName("host.iscsi_iqn"), host.GetIscsiIqn(),
                     new PropertiesToolStripMenuItem(new IqnPropertiesCommand(Program.MainWindow, xenObject)));
-                s.AddEntry(FriendlyName("host.log_destination"), host.SysLogDestination ?? Messages.HOST_LOG_DESTINATION_LOCAL,
+                s.AddEntry(FriendlyName("host.log_destination"), host.GetSysLogDestination() ?? Messages.HOST_LOG_DESTINATION_LOCAL,
                    new PropertiesToolStripMenuItem(new HostEditLogDestinationCommand(Program.MainWindow, xenObject)));
 
                 PrettyTimeSpan uptime = host.Uptime();
@@ -1505,7 +1505,7 @@ namespace XenAdmin.TabPages
                 String ChangeHomeReason = vm.IsOnSharedStorage();
 
                 return !Helpers.WlbEnabledAndConfigured(vm.Connection) &&
-                    (String.IsNullOrEmpty(ChangeHomeReason) || vm.HasNoDisksAndNoLocalCD);
+                    (String.IsNullOrEmpty(ChangeHomeReason) || vm.HasNoDisksAndNoLocalCD());
             }
             return false;
         }
@@ -1676,7 +1676,7 @@ namespace XenAdmin.TabPages
 
         private static string HVMBootOrder(VM vm)
         {
-            var order = vm.BootOrder.ToUpper().Union(new[] { 'D', 'C', 'N' });
+            var order = vm.GetBootOrder().ToUpper().Union(new[] { 'D', 'C', 'N' });
             return string.Join("\n", order.Select(c => new BootDevice(c).ToString()).ToArray());
         }
 

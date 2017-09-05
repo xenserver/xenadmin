@@ -211,8 +211,16 @@ namespace XenAdmin.TabPages
 
                 // the management purpose cell
                 DataGridViewTextBoxCell interfaceCell = new DataGridViewTextBoxCell();
-                string purpose = pif.management ? Messages.MANAGEMENT
-                    : string.IsNullOrEmpty(pif.ManagementPurpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : pif.ManagementPurpose;
+                string purpose;
+                if (pif.management)
+                {
+                    purpose = Messages.MANAGEMENT;
+                }
+                else
+                {
+                    var managementPurpose = pif.GetManagementPurpose();
+                    purpose = string.IsNullOrEmpty(managementPurpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : managementPurpose;
+                }
                 interfaceCell.Value = purpose;
                 Cells.Add(interfaceCell);
 

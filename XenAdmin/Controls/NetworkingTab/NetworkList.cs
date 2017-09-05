@@ -941,7 +941,7 @@ namespace XenAdmin.Controls.NetworkingTab
                 DescriptionCell.Value = Network.Description();
                 NicCell.Value = Helpers.GetName(Pif);
                 VlanCell.Value = Helpers.VlanString(Pif);
-                AutoCell.Value = Network.AutoPlug ? Messages.YES : Messages.NO;
+                AutoCell.Value = Network.GetAutoPlug() ? Messages.YES : Messages.NO;
                 LinkStatusCell.Value = Xmo is Pool ? Network.LinkStatusString() : 
                     Pif == null ? Messages.NONE : Pif.LinkStatusString();
                 MacCell.Value = Pif != null && Pif.IsPhysical() ? Pif.MAC : Messages.SPACED_HYPHEN;

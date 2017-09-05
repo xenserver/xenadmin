@@ -401,7 +401,7 @@ namespace XenAdmin.XenSearch
                                             // when searching in a pre-Boston pool for VMs with HA restart priority = Restart, the search will return VMs with restart priority = AlwaysRestartHighPriority or AlwaysRestart
                                             if (vm.HaPriorityIsRestart()) 
                                                 return VM.HA_Restart_Priority.Restart;
-                                            return vm.HARestartPriority;
+                                            return vm.HARestartPriority();
                                         });
                 };
 

@@ -74,39 +74,40 @@ namespace XenAPI
             }
         }
 
-        public bool IsOwner
+        public bool GetIsOwner()
         {
-            get { return other_config != null && other_config.ContainsKey("owner"); }
-            set { _other_config = SetDictionaryKey(other_config, "owner", value ? "true" : null); }
+            return other_config != null && other_config.ContainsKey("owner");
         }
 
-        public int IONice
+        public void SetIsOwner(bool value)
         {
-            get
-            {
-                if (qos_algorithm_params != null && qos_algorithm_params.ContainsKey("class"))
-                    return int.Parse(qos_algorithm_params["class"]);
-                else
-                    return 0;
-            }
-            set
-            {
-                // set the IO scheduling algorithm to use
-                qos_algorithm_type = "ionice";
-
-                // which scheduling class ionice should use
-                // best-effort for now (other options are 'rt' and 'idle')
-
-                qos_algorithm_params = SetDictionaryKeys(qos_algorithm_params,
-                    new KeyValuePair<string, string>("class", value.ToString()),
-                    new KeyValuePair<string, string>("sched", "be"));
-            }
+            _other_config = SetDictionaryKey(other_config, "owner", value ? "true" : null);
         }
 
-        public bool read_only
+        public int GetIoNice()
         {
-            get { return mode == vbd_mode.RO; }
-            set { mode = value ? vbd_mode.RO : vbd_mode.RW; }
+            if (qos_algorithm_params != null && qos_algorithm_params.ContainsKey("class"))
+                return int.Parse(qos_algorithm_params["class"]);
+            else
+                return 0;
+        }
+
+        public void SetIoNice(int value)
+        {
+            // set the IO scheduling algorithm to use
+            qos_algorithm_type = "ionice";
+
+            // which scheduling class ionice should use
+            // best-effort for now (other options are 'rt' and 'idle')
+
+            qos_algorithm_params = SetDictionaryKeys(qos_algorithm_params,
+                new KeyValuePair<string, string>("class", value.ToString()),
+                new KeyValuePair<string, string>("sched", "be"));
+        }
+
+        public bool IsReadOnly()
+        {
+            return mode == vbd_mode.RO;
         }
 
         public override int CompareTo(VBD other)

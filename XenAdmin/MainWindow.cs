@@ -1149,15 +1149,8 @@ namespace XenAdmin
                     break;
 
                 case "power_state":
+                case "other_config": // other_config may contain HideFromXenCenter
                     UpdateToolbars();
-                    // Make all vms have the correct start times
-                    UpdateBodgedTime(vm, e.PropertyName);
-                    break;
-
-                case "other_config":
-                    // other_config may contain HideFromXenCenter
-                    UpdateToolbars();
-
                     // Make all vms have the correct start times
                     UpdateBodgedTime(vm, e.PropertyName);
                     break;
@@ -1172,11 +1165,7 @@ namespace XenAdmin
                 case "power_state":
                 case "is_a_template":
                 case "enabled":
-                    UpdateToolbars();
-                    break;
-
-                case "other_config":
-                    // other_config may contain HideFromXenCenter
+                case "other_config": // other_config may contain HideFromXenCenter
                     UpdateToolbars();
                     break;
             }
@@ -1189,13 +1178,13 @@ namespace XenAdmin
                 return;
             if (p == "power_state")
             {
-                vm.BodgeStartupTime = DateTime.UtcNow; // always newer than current bodge startup time
+                vm.SetBodgeStartupTime(DateTime.UtcNow); // always newer than current bodge startup time
             }
             else if (p == "other_config" && vm.other_config.ContainsKey("last_shutdown_time"))
             {
                 DateTime newTime = vm.LastShutdownTime();
-                if (newTime != DateTime.MinValue && newTime.Ticks > vm.BodgeStartupTime.Ticks)
-                    vm.BodgeStartupTime = newTime; // only update if is newer than current bodge startup time
+                if (newTime != DateTime.MinValue && newTime.Ticks > vm.GetBodgeStartupTime().Ticks)
+                    vm.SetBodgeStartupTime(newTime); // only update if is newer than current bodge startup time
             }
         }
 

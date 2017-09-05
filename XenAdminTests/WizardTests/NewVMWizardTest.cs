@@ -131,7 +131,7 @@ namespace XenAdminTests.WizardTests.state4_xml.NewVMWizardTests
                 {
                     if (!Helpers.GetName(vm).ToLowerInvariant().Contains("windows"))
                         return false;
-                    XmlNode xml = vm.ProvisionXml;
+                    XmlNode xml = vm.ProvisionXml();
                     return (xml != null && xml.FirstChild != null && 
                         long.Parse(xml.FirstChild.Attributes["size"].Value) < (long)20 * (1 << 30));  // less than 20GB
                 }));
@@ -160,7 +160,7 @@ namespace XenAdminTests.WizardTests.state4_xml.NewVMWizardTests
             VM template = GetAnyDefaultTemplate(new Predicate<VM>(
                 delegate(VM vm)
                 {
-                    XmlNode xml = vm.ProvisionXml;
+                    XmlNode xml = vm.ProvisionXml();
                     return (xml != null && xml.FirstChild != null &&
                         long.Parse(xml.FirstChild.Attributes["size"].Value) > (long)23 * (1 << 30));  // over 23GB
                 }));

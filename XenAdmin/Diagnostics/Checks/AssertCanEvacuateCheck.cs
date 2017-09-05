@@ -77,7 +77,7 @@ namespace XenAdmin.Diagnostics.Checks
             var residentVMs = Host.Connection.ResolveAll(Host.resident_VMs);
             foreach (var residentVM in residentVMs)
             {
-                if (residentVM.AutoPowerOn)
+                if (residentVM.GetAutoPowerOn())
                 {
                     problems.Add(new AutoStartEnabled(this, residentVM));
                     VMsWithProblems.Add(residentVM.opaque_ref);

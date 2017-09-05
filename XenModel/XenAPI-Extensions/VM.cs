@@ -298,44 +298,36 @@ namespace XenAPI
         /// <remarks>
         /// Default on server is CD - disk then optical
         /// </remarks>
-        public string BootOrder
+        public string GetBootOrder()
         {
-            get
-            {
-                if (this.HVM_boot_params.ContainsKey("order"))
-                    return this.HVM_boot_params["order"].ToUpper();
+            if (this.HVM_boot_params.ContainsKey("order"))
+                return this.HVM_boot_params["order"].ToUpper();
 
-                return "CD";
-            }
-            set { HVM_boot_params = SetDictionaryKey(HVM_boot_params, "order", value.ToLower()); }
+            return "CD";
         }
 
-        public long Memory
+        public void SetBootOrder(string value)
         {
-            set
-            {
-                memory_dynamic_min = value;
-                memory_dynamic_max = value;
-                memory_static_max = value;
-            }
+            HVM_boot_params = SetDictionaryKey(HVM_boot_params, "order", value.ToLower());
         }
 
-        public int VCPUWeight
+        public int GetVcpuWeight()
         {
-            get
+            if (VCPUs_params != null && VCPUs_params.ContainsKey("weight"))
             {
-                if (VCPUs_params != null && VCPUs_params.ContainsKey("weight"))
-                {
-                    int weight;
-                    if (int.TryParse(VCPUs_params["weight"], out weight)) // if we cant parse it we assume its because it is too large, obviously if it isnt a number (ie a string) then we will still go to the else
-                        return weight > 0 ? weight : 1; // because we perform a log on what is returned from this the weight must always be greater than 0
-                    else
-                        return 65536; // could not parse number, assume max
-                }
+                int weight;
+                if (int.TryParse(VCPUs_params["weight"], out weight)) // if we cant parse it we assume its because it is too large, obviously if it isnt a number (ie a string) then we will still go to the else
+                    return weight > 0 ? weight : 1; // because we perform a log on what is returned from this the weight must always be greater than 0
                 else
-                    return 256;
+                    return 65536; // could not parse number, assume max
             }
-            set { VCPUs_params = SetDictionaryKey(VCPUs_params, "weight", value.ToString()); }
+            else
+                return 256;
+        }
+
+        public void SetVcpuWeight(int value)
+        {
+            VCPUs_params = SetDictionaryKey(VCPUs_params, "weight", value.ToString());
         }
 
         public bool DefaultTemplate()
@@ -348,10 +340,9 @@ namespace XenAPI
             return Get(other_config, "xensource_internal") != null;
         }
 
-        public string InstallRepository
+        public string InstallRepository()
         {
-            get { return Get(other_config, "install-repository"); }
-            set { other_config = SetDictionaryKey(other_config, "install-repository", value); }
+           return Get(other_config, "install-repository");
         }
 
         public string InstallDistro()
@@ -410,115 +401,107 @@ namespace XenAPI
         ///   2a) the allow-gpu-passthrough restriction is absent or
         ///   2b) the allow-gpu-passthrough restriction is non-zero
         ///</summary>
-        public bool CanHaveGpu
+        public bool CanHaveGpu()
         {
-            get
+            if (!IsHVM())
+                return false;
+
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return true;
+
+            try
             {
-                if (!IsHVM())
-                    return false;
-
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
+                if (xn == null)
                     return true;
 
-                try
-                {
-                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
-                    if (xn == null)
-                        return true;
-
-                    return 
-                        Convert.ToInt32(xn.Attributes["value"].Value) != 0;
-                }
-                catch
-                {
-                    return true;
-                }
+                return
+                    Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+            }
+            catch
+            {
+                return true;
             }
         }
 
-        public bool HasVendorDeviceRecommendation
+        public bool HasVendorDeviceRecommendation()
         {
-            get
+            bool result = false;
+
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return result;
+
+            try
             {
-                bool result = false;
-
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
+                if (xn == null || xn.Attributes == null)
                     return result;
 
-                try
-                {
-                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
-                    if (xn == null || xn.Attributes == null)
-                        return result;
-
-                    result = bool.Parse(xn.Attributes["value"].Value);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("Error parsing has-vendor-device on the template.", ex);
-                }
-
-                return result;
+                result = bool.Parse(xn.Attributes["value"].Value);
             }
-        }
+            catch (Exception ex)
+            {
+                log.Error("Error parsing has-vendor-device on the template.", ex);
+            }
 
+            return result;
+        }
 
         /// <summary>Returns true if
         /// 1) the guest is HVM and
         ///   2a) the allow-vgpu restriction is absent or
         ///   2b) the allow-vgpu restriction is non-zero
         ///</summary>
-        public bool CanHaveVGpu
+        public bool CanHaveVGpu()
         {
-            get
+            if (!IsHVM() || !CanHaveGpu())
+                return false;
+
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return true;
+
+            try
             {
-                if (!IsHVM() || !CanHaveGpu)
-                    return false;
-
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
+                if (xn == null || xn.Attributes == null)
                     return true;
 
-                try
-                {
-                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
-                    if (xn == null || xn.Attributes == null)
-                        return true;
-
-                    return
-                        Convert.ToInt32(xn.Attributes["value"].Value) != 0;
-                }
-                catch
-                {
-                    return true;
-                }
+                return
+                    Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+            }
+            catch
+            {
+                return true;
             }
         }
 
         // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
         // enable it (http://support.citrix.com/article/CTX133910), so XenCenter has to be
         // able to recognise it, and turn it off during Rolling Pool Upgrade.
-        public bool AutoPowerOn
+        public bool GetAutoPowerOn()
         {
-            get
-            {
-                return BoolKey(other_config, "auto_poweron");
-            }
-            set { other_config = SetDictionaryKey(other_config, "auto_poweron", value.ToString().ToLower()); }
+            return BoolKey(other_config, "auto_poweron");
         }
 
-        public bool IgnoreExcessiveVcpus
+        public void SetAutoPowerOn(bool value)
         {
-            get
-            {
-                return BoolKey(other_config, "ignore_excessive_vcpus");
-            }
-            set { other_config = SetDictionaryKey(other_config, "ignore_excessive_vcpus", value.ToString().ToLower()); }
+            other_config = SetDictionaryKey(other_config, "auto_poweron", value.ToString().ToLower());
+        }
+
+        public bool GetIgnoreExcessiveVcpus()
+        {
+            return BoolKey(other_config, "ignore_excessive_vcpus");
+        }
+
+        public void SetIgnoreExcessiveVcpus(bool value)
+        {
+            other_config = SetDictionaryKey(other_config, "ignore_excessive_vcpus", value.ToString().ToLower());
         }
 
         public string IsOnSharedStorage()
@@ -618,24 +601,22 @@ namespace XenAPI
 
         private DateTime startuptime;
 
-        public DateTime BodgeStartupTime
+        public DateTime GetBodgeStartupTime()
         {
-            get
-            {
-                return startuptime;
-            }
-            set
-            {
-                startuptime = value;
-                // This has an impact on the virt state of the VM as we allow a set amount of time for tools to show up before assuming unvirt
-                NotifyPropertyChanged("virtualisation_status");
-                if (VirtualizationTimer != null)
-                    VirtualizationTimer.Stop();
-                // 2 minutes before we give up plus some breathing space
-                VirtualizationTimer = new Timer(182000) { AutoReset = false };
-                VirtualizationTimer.Elapsed += VirtualizationTimer_Elapsed;
-                VirtualizationTimer.Start();
-            }
+            return startuptime;
+        }
+
+        public void SetBodgeStartupTime(DateTime value)
+        {
+            startuptime = value;
+            // This has an impact on the virt state of the VM as we allow a set amount of time for tools to show up before assuming unvirt
+            NotifyPropertyChanged("virtualisation_status");
+            if (VirtualizationTimer != null)
+                VirtualizationTimer.Stop();
+            // 2 minutes before we give up plus some breathing space
+            VirtualizationTimer = new Timer(182000) {AutoReset = false};
+            VirtualizationTimer.Elapsed += VirtualizationTimer_Elapsed;
+            VirtualizationTimer.Start();
         }
 
         void VirtualizationTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -654,17 +635,14 @@ namespace XenAPI
             MANAGEMENT_INSTALLED        = 8,
         };
 
-        public string VirtualisationVersion
+        public string VirtualisationVersion()
         {
-            get
-            {
-                if (Connection == null)
-                    return "0.0";
-                VM_guest_metrics metrics = Connection.Resolve<VM_guest_metrics>(guest_metrics);
-                if (metrics == null || !metrics.PV_drivers_version.ContainsKey("major") || !metrics.PV_drivers_version.ContainsKey("minor"))
-                    return "0.0";
-                return string.Format("{0}.{1}", metrics.PV_drivers_version["major"], metrics.PV_drivers_version["minor"]);
-            }
+            if (Connection == null)
+                return "0.0";
+            VM_guest_metrics metrics = Connection.Resolve<VM_guest_metrics>(guest_metrics);
+            if (metrics == null || !metrics.PV_drivers_version.ContainsKey("major") || !metrics.PV_drivers_version.ContainsKey("minor"))
+                return "0.0";
+            return string.Format("{0}.{1}", metrics.PV_drivers_version["major"], metrics.PV_drivers_version["minor"]);
         }
 
         public string GetVirtualisationWarningMessages()
@@ -694,67 +672,61 @@ namespace XenAPI
             return HasNewVirtualisationStates() ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
         }
 
-        private VirtualisationStatus GetVirtualisationStatusOldVM
+        private VirtualisationStatus GetVirtualisationStatusOldVM()
         {
-            get
+            Debug.Assert(!HasNewVirtualisationStates());
+
+            VM_guest_metrics vm_guest_metrics = Connection.Resolve(guest_metrics);
+
+            if ((DateTime.UtcNow - GetBodgeStartupTime()).TotalMinutes < 2)
             {
-                Debug.Assert(!HasNewVirtualisationStates());
-
-                VM_guest_metrics vm_guest_metrics = Connection.Resolve(guest_metrics);
-
-                if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
+                // check to see if the metrics object has appeared, if so cancel the timer, no need to notify the property changed as this should be picked up on vm_guest_metrics being created.
+                if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed())
                 {
-                    // check to see if the metrics object has appeared, if so cancel the timer, no need to notify the property changed as this should be picked up on vm_guest_metrics being created.
-                    if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed())
-                    {
-                        if (vm_guest_metrics.PV_drivers_up_to_date)
-                            return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
-                        else
-                            return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-                    }
-
-                    return VirtualisationStatus.UNKNOWN;
+                    if (vm_guest_metrics.PV_drivers_up_to_date)
+                        return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
+                    else
+                        return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
                 }
 
-                if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed())
-                {
-                    return 0;
-                }
-                else if (!vm_guest_metrics.PV_drivers_up_to_date)
-                {
-                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-                }
-                else
-                {
-                    return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
-                }
+                return VirtualisationStatus.UNKNOWN;
+            }
+
+            if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed())
+            {
+                return 0;
+            }
+            else if (!vm_guest_metrics.PV_drivers_up_to_date)
+            {
+                return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+            }
+            else
+            {
+                return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
             }
         }
 
-        private VirtualisationStatus GetVirtualisationStatusNewVM
+        private VirtualisationStatus GetVirtualisationStatusNewVM()
         {
-            get
+            Debug.Assert(HasNewVirtualisationStates());
+
+            var flags = HasStaticIP()
+                ? VirtualisationStatus.MANAGEMENT_INSTALLED
+                : 0;
+
+            var vm_guest_metrics = Connection.Resolve(guest_metrics);
+            if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_detected)
+                flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
+
+            if ((DateTime.UtcNow - GetBodgeStartupTime()).TotalMinutes < 2)
             {
-                Debug.Assert(HasNewVirtualisationStates());
+                if (flags.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                    return flags;
 
-                var flags = HasStaticIP()
-                    ? VirtualisationStatus.MANAGEMENT_INSTALLED 
-                    : 0;
-
-                var vm_guest_metrics = Connection.Resolve(guest_metrics);
-                if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_detected)
-                    flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
-
-                if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
-                {
-                    if (flags.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                        return flags;
-
-                    return VirtualisationStatus.UNKNOWN;
-                }
-
-                return flags;
+                return VirtualisationStatus.UNKNOWN;
             }
+
+            return flags;
         }
 
         /// <summary>
@@ -787,7 +759,7 @@ namespace XenAPI
                 return VirtualisationStatus.UNKNOWN;
             }
 
-            return HasNewVirtualisationStates() ? GetVirtualisationStatusNewVM : GetVirtualisationStatusOldVM;
+            return HasNewVirtualisationStates() ? GetVirtualisationStatusNewVM() : GetVirtualisationStatusOldVM();
         }
 
         /// <summary>
@@ -855,31 +827,28 @@ namespace XenAPI
             return BoolKey(other_config, HIDE_FROM_XENCENTER);
         }
 
-        public bool HasNoDisksAndNoLocalCD
+        public bool HasNoDisksAndNoLocalCD()
         {
-            get
+            if (Connection == null)
+                return false;
+            foreach (VBD vbd in Connection.ResolveAll<VBD>(VBDs))
             {
-                if (Connection == null)
-                    return false;
-                foreach (VBD vbd in Connection.ResolveAll<VBD>(VBDs))
+                if (vbd.type == vbd_type.Disk)
                 {
-                    if (vbd.type == vbd_type.Disk)
-                    {
-                        return false;       // we have a disk :(
-                    }
-                    else
-                    {
-                        VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
-                        if (vdi == null)
-                            continue;
-                        SR sr = Connection.Resolve<SR>(vdi.SR);
-                        if (sr == null || sr.shared)
-                            continue;
-                        return false;       // we have a shared cd
-                    }
+                    return false; // we have a disk :(
                 }
-                return true;        // we have no disks hooray!!
+                else
+                {
+                    VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
+                    if (vdi == null)
+                        continue;
+                    SR sr = Connection.Resolve<SR>(vdi.SR);
+                    if (sr == null || sr.shared)
+                        continue;
+                    return false; // we have a shared cd
+                }
             }
+            return true; // we have no disks hooray!!
         }
 
         private const string P2V_SOURCE_MACHINE = "p2v_source_machine";
@@ -1147,19 +1116,12 @@ namespace XenAPI
         /// An enum-ified version of ha_restart_priority: use this one instead.
         /// NB setting this property does not change ha-always-run.
         /// </summary>
-        public HA_Restart_Priority HARestartPriority
+        public HA_Restart_Priority HARestartPriority()
         {
-            get
-            {
-                return StringToPriority(this.ha_restart_priority);
-            }
-            set
-            {
-                this.ha_restart_priority = PriorityToString(value);
-            }
+            return StringToPriority(this.ha_restart_priority);
         }
 
-        public override string NameWithLocation()
+         public override string NameWithLocation()
         {
             if (this.Connection != null)
             {
@@ -1214,8 +1176,7 @@ namespace XenAPI
         /// </summary>
         public bool HaPriorityIsRestart()
         {
-            HA_Restart_Priority haRestartPriority = HARestartPriority;
-            return HaPriorityIsRestart(Connection, HARestartPriority);
+            return HaPriorityIsRestart(Connection, HARestartPriority());
         }
 
         public static bool HaPriorityIsRestart(IXenConnection connection, HA_Restart_Priority haRestartPriority)
@@ -1295,7 +1256,7 @@ namespace XenAPI
             Pool myPool = Helpers.GetPoolOfOne(Connection);
             if (myPool == null)
                 return false;
-            return myPool.ha_enabled && this.HARestartPriority != HA_Restart_Priority.DoNotRestart;
+            return myPool.ha_enabled && HARestartPriority() != HA_Restart_Priority.DoNotRestart;
         }
 
         /// <summary>
@@ -1389,28 +1350,21 @@ namespace XenAPI
             }
         }
 
-        public XmlNode ProvisionXml
+        public XmlNode ProvisionXml()
         {
-            get
+            try
             {
-                try
-                {
-                    string xml = Get(other_config, "disks");
-                    if (string.IsNullOrEmpty(xml))
-                        return null;
-
-                    XmlDocument doc = new XmlDocument();
-                    doc.LoadXml(xml);
-                    return doc.FirstChild;
-                }
-                catch (Exception)
-                {
+                string xml = Get(other_config, "disks");
+                if (string.IsNullOrEmpty(xml))
                     return null;
-                }
+
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(xml);
+                return doc.FirstChild;
             }
-            set
+            catch (Exception)
             {
-                other_config["disks"] = value.OuterXml;
+                return null;
             }
         }
 
@@ -1447,13 +1401,13 @@ namespace XenAPI
             if (status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED))
             {
                 if (!HasNewVirtualisationStates())
-                    return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion);
+                    return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion());
                 else
                     return Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED;
             }
 
             if (status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-                return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion);
+                return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion());
 
             if (status == 0)
                 return Messages.PV_DRIVERS_NOT_INSTALLED;
@@ -1555,18 +1509,19 @@ namespace XenAPI
                        : null;
         }
 
-        public long CoresPerSocket
+        public long GetCoresPerSocket()
         {
-            get
+            if (platform != null && platform.ContainsKey("cores-per-socket"))
             {
-                if (platform != null && platform.ContainsKey("cores-per-socket"))
-                {
-                    long coresPerSocket;
-                    return long.TryParse(platform["cores-per-socket"], out coresPerSocket) ? coresPerSocket : DEFAULT_CORES_PER_SOCKET;
-                }
-                return DEFAULT_CORES_PER_SOCKET;
+                long coresPerSocket;
+                return long.TryParse(platform["cores-per-socket"], out coresPerSocket) ? coresPerSocket : DEFAULT_CORES_PER_SOCKET;
             }
-            set { platform = SetDictionaryKey(platform, "cores-per-socket", value.ToString()); }
+            return DEFAULT_CORES_PER_SOCKET;
+        }
+
+        public void SetCoresPerSocket(long value)
+        {
+            platform = SetDictionaryKey(platform, "cores-per-socket", value.ToString());
         }
 
         public long MaxCoresPerSocket()
@@ -1587,7 +1542,7 @@ namespace XenAPI
 
         public bool HasValidVCPUConfiguration()
         {
-            return ValidVCPUConfiguration(VCPUs_max, CoresPerSocket) == "";
+            return ValidVCPUConfiguration(VCPUs_max, GetCoresPerSocket()) == "";
         }
 
         public static string ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
@@ -1604,7 +1559,7 @@ namespace XenAPI
 
         public string Topology()
         {
-            var cores = CoresPerSocket;
+            var cores = GetCoresPerSocket();
             var sockets = ValidVCPUConfiguration(VCPUs_max, cores) == "" ? VCPUs_max/cores : 0;
             return GetTopology(sockets, cores);
         }
@@ -1735,7 +1690,7 @@ namespace XenAPI
 
             if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
             {
-                return Connection.ResolveAll(VBDs).Find(v => v.IsOwner) != null;
+                return Connection.ResolveAll(VBDs).Find(v => v.GetIsOwner()) != null;
             }
             return false;
         }

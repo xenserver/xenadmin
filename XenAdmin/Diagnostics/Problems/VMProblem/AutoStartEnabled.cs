@@ -86,7 +86,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                            var vm = _connection.Resolve(_VMref);
                            var vmclone = (VM)vm.Clone();
                            vm.Locked = true;
-                           vmclone.AutoPowerOn = autostartValue;
+                           vmclone.SetAutoPowerOn(autostartValue);
                            try
                            {
                                vmclone.SaveChanges(session);

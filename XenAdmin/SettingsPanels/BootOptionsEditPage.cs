@@ -79,13 +79,13 @@ namespace XenAdmin.SettingsPanels
 		{
 			get
 			{
-				return (vm.IsHVM() && GetOrder() != vm.BootOrder) || (m_textBoxOsParams.Text != vm.PV_args) || (VMPVBootableDVD() != bootFromCD);
+				return (vm.IsHVM() && GetOrder() != vm.GetBootOrder()) || (m_textBoxOsParams.Text != vm.PV_args) || (VMPVBootableDVD() != bootFromCD);
 			}
 		}
 
 		public AsyncAction SaveSettings()
 		{
-			vm.BootOrder = GetOrder();
+			vm.SetBootOrder(GetOrder());
 			
 			vm.PV_args = m_textBoxOsParams.Text;
 
@@ -194,7 +194,7 @@ namespace XenAdmin.SettingsPanels
 				m_autoHeightLabelNonHvm.Visible = false;
 				
 				m_checkedListBox.Items.Clear();
-				string order = vm.BootOrder.ToUpper();
+				string order = vm.GetBootOrder().ToUpper();
 
 				foreach (char c in order)
 					m_checkedListBox.Items.Add(new BootDevice(c),true);

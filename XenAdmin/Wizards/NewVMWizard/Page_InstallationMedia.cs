@@ -122,7 +122,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             UrlRadioButton.Enabled = (!installed && ((eli && installUrl) || hvm));
 
             UrlTextBox.Visible = !hvm;
-            UrlTextBox.Text = !installed ? m_template.InstallRepository ?? "" : "";
+            UrlTextBox.Text = !installed ? m_template.InstallRepository() ?? "" : "";
 
             if (installed || (installCd && cds)) // if installed we will always have the empty cd
             {
@@ -158,7 +158,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private bool IsBootFromNetworkCustomTemplate(bool userTemplate)
         {
-            return (userTemplate && m_template.BootOrder.StartsWith("N"));
+            return (userTemplate && m_template.GetBootOrder().StartsWith("N"));
         }
 
         private void LoadCdBox()

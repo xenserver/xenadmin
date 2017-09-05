@@ -238,7 +238,7 @@ namespace XenAdmin.Dialogs
                 vbd.VM = new XenRef<VM>(TheVM);
                 vbd.bootable = ud == "0";
                 vbd.device = "";
-                vbd.IsOwner = TheVDI.VBDs.Count == 0;
+                vbd.SetIsOwner(TheVDI.VBDs.Count == 0);
                 vbd.empty = false;
                 vbd.userdevice = ud;
                 vbd.type = vbd_type.Disk;
@@ -376,7 +376,7 @@ namespace XenAdmin.Dialogs
                 bool allRO = true;
                 foreach (VBD vbd in TheVDI.Connection.ResolveAll<VBD>(TheVDI.VBDs))
                 {
-                    if (!vbd.read_only&&vbd.currently_attached)
+                    if (!vbd.IsReadOnly() && vbd.currently_attached)
                     {
                         allRO = false;
                         break;

@@ -381,7 +381,7 @@ namespace XenAdmin.SettingsPanels
             }
 
             // Populate Automatic checkbox
-            autoCheckBox.Checked = network.AutoPlug;
+            autoCheckBox.Checked = network.GetAutoPlug();
             autoCheckBox.Enabled = !network.IsGuestInstallerNetwork();
             // in case some odd value has been set on the CLI
             numericUpDownMTU.Maximum = Math.Max(network.MTU, XenAPI.Network.MTU_MAX);
@@ -504,7 +504,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                if (autoCheckBox.Checked != network.AutoPlug || MtuHasChanged || BondModeHasChanged || HashingAlgorithmHasChanged)
+                if (autoCheckBox.Checked != network.GetAutoPlug() || MtuHasChanged || BondModeHasChanged || HashingAlgorithmHasChanged)
                     return true;
 
                 PIF pif = GetNetworksPIF();
@@ -574,7 +574,7 @@ namespace XenAdmin.SettingsPanels
         {
             List<AsyncAction> actions = new List<AsyncAction>();
 
-            network.AutoPlug = autoCheckBox.Checked;
+            network.SetAutoPlug(autoCheckBox.Checked);
             bool needPlugUnplug = MtuHasChanged;
 
             if (MtuHasChanged)

@@ -61,7 +61,7 @@ namespace XenAdmin.Dialogs.VMDialogs
             srPicker1.Usage = SrPicker.SRPickerType.MoveOrCopy;
             //this has to be set after ImportTemplate, otherwise the usage will be reset to VM
             var vdis = (from VBD vbd in vm.Connection.ResolveAll(vm.VBDs)
-                                           where vbd.IsOwner
+                                           where vbd.GetIsOwner()
                                            let vdi = vm.Connection.Resolve(vbd.VDI)
                                            where vdi != null
                                            select vdi).ToArray();

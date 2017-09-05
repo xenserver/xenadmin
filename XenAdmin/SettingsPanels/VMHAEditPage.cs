@@ -318,7 +318,7 @@ namespace XenAdmin.SettingsPanels
             // Select the current priority from the list
             foreach (PriorityWrapper p in m_comboBoxProtectionLevel.Items)
             {
-                if (p.Priority == vm.HARestartPriority)
+                if (p.Priority == vm.HARestartPriority())
                 {
                     m_comboBoxProtectionLevel.SelectedItem = p;
                     break;
@@ -429,7 +429,7 @@ namespace XenAdmin.SettingsPanels
 			System.Diagnostics.Trace.Assert(vm == null);
 			vm = (VM)clone;
 
-            origRestartPriority = vm.HARestartPriority;
+            origRestartPriority = vm.HARestartPriority();
 		    SelectedPriority = origRestartPriority;
 			origOrder = vm.order;
 			origStartDelay = vm.start_delay;

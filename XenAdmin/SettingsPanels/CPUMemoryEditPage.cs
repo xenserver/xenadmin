@@ -200,7 +200,7 @@ namespace XenAdmin.SettingsPanels
                 // run on (and so can't count the number of pCPUs).
                 if ( vm.power_state == vm_power_state.Running
                     && vm.VCPUs_at_startup > currentHost.host_CPUs.Count
-                    && !vm.IgnoreExcessiveVcpus)
+                    && !vm.GetIgnoreExcessiveVcpus())
                 {
                     lblVcpuWarning.Visible = true;
                     this.tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Absolute;
@@ -227,7 +227,7 @@ namespace XenAdmin.SettingsPanels
             _OrigVCPUs = isVcpuHotplugSupported ? _OrigVCPUsMax : _OrigVCPUsAtStartup;
             _prevVCPUsMax = _OrigVCPUsMax;  // we use variable in RefreshCurrentVCPUs for checking if VcpusAtStartup and VcpusMax were equal before VcpusMax changed
 
-            _CurrentVCPUWeight = Convert.ToDecimal(vm.VCPUWeight);
+            _CurrentVCPUWeight = Convert.ToDecimal(vm.GetVcpuWeight());
 
             InitializeVcpuControls();
             
@@ -251,7 +251,7 @@ namespace XenAdmin.SettingsPanels
 
             comboBoxVCPUs.Enabled = comboBoxTopology.Enabled = vm.power_state == vm_power_state.Halted;
 
-            comboBoxTopology.Populate(vm.VCPUs_at_startup, vm.VCPUs_max, vm.CoresPerSocket, vm.MaxCoresPerSocket());
+            comboBoxTopology.Populate(vm.VCPUs_at_startup, vm.VCPUs_max, vm.GetCoresPerSocket(), vm.MaxCoresPerSocket());
 
             // CA-12941 
             // We set a sensible maximum based on the template, but if the user sets something higher 
@@ -263,7 +263,7 @@ namespace XenAdmin.SettingsPanels
             if (isVcpuHotplugSupported)
                 PopulateVCPUsAtStartup(_OrigVCPUsMax, _OrigVCPUsAtStartup);
 
-            transparentTrackBar1.Value = Convert.ToInt32(Math.Log(Convert.ToDouble(vm.VCPUWeight)) / Math.Log(4.0d));
+            transparentTrackBar1.Value = Convert.ToInt32(Math.Log(Convert.ToDouble(vm.GetVcpuWeight())) / Math.Log(4.0d));
             panel1.Enabled = vm.power_state == vm_power_state.Halted;
         }
 
@@ -356,7 +356,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                return vm.CoresPerSocket != comboBoxTopology.CoresPerSocket;
+                return vm.GetCoresPerSocket() != comboBoxTopology.CoresPerSocket;
             }
         }
 
@@ -382,7 +382,7 @@ namespace XenAdmin.SettingsPanels
 
             if (HasVCPUWeightChanged)
             {
-                vm.VCPUWeight = Convert.ToInt32(_CurrentVCPUWeight);
+                vm.SetVcpuWeight(Convert.ToInt32(_CurrentVCPUWeight));
             }
 
             if (HasVCPUChanged || HasVCPUsAtStartupChanged)
@@ -392,7 +392,7 @@ namespace XenAdmin.SettingsPanels
 
             if (HasTopologyChanged)
             {
-                vm.CoresPerSocket = comboBoxTopology.CoresPerSocket;
+                vm.SetCoresPerSocket(comboBoxTopology.CoresPerSocket);
             }
 			
 			if (HasMemoryChanged)

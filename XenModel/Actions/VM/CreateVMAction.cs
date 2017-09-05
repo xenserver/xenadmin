@@ -231,8 +231,9 @@ namespace XenAdmin.Actions.VMActions
         {
             var pool = Helpers.GetPoolOfOne(Connection);
             bool poolPolicyNoVendorDevice = pool == null || pool.policy_no_vendor_device;
+            bool hasVendorDeviceRecommendation = Template.HasVendorDeviceRecommendation();
 
-            if (Template.HasVendorDeviceRecommendation && !poolPolicyNoVendorDevice && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
+            if (hasVendorDeviceRecommendation && !poolPolicyNoVendorDevice && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
             {
                 log.DebugFormat("Recommendation (has-vendor-device = true) has been found on the template ({0}) and the host is licensed, so applying it on VM ({1}) being created.", Template.opaque_ref, VM.opaque_ref);
                 VM.set_has_vendor_device(Connection.Session, VM.opaque_ref, true);
@@ -241,7 +242,7 @@ namespace XenAdmin.Actions.VMActions
             {
                 log.DebugFormat("Recommendation (has-vendor-device = true) has not been applied on the VM ({0}) being created.", VM.opaque_ref);
 
-                if (!Template.HasVendorDeviceRecommendation)
+                if (!hasVendorDeviceRecommendation)
                     log.DebugFormat("Recommendation (has-vendor-device) is not set or false on the template ({0}).", Template.opaque_ref);
 
                 if (poolPolicyNoVendorDevice)
@@ -387,7 +388,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void RewriteProvisionXML()
         {
-            XmlNode xml = VM.ProvisionXml;
+            XmlNode xml = VM.ProvisionXml();
 
             if (xml == null)
                 return;
@@ -626,7 +627,7 @@ namespace XenAdmin.Actions.VMActions
             if (devices.Count == 0)
                 throw new Exception(Messages.NO_MORE_USERDEVICES);
             VBD vbd = new VBD();
-            vbd.IsOwner = true;
+            vbd.SetIsOwner(true);
             vbd.bootable = bootable;
             vbd.empty = false;
             vbd.unpluggable = true;

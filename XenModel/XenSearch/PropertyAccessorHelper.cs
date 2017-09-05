@@ -317,7 +317,7 @@ namespace XenAdmin.XenSearch
         {
             if (!vm.is_a_real_vm())
                 return "-";
-            return Helpers.RestartPriorityI18n(vm.HARestartPriority);
+            return Helpers.RestartPriorityI18n(vm.HARestartPriority());
         }
 
         public static string PGPUMemoryUsageString(PGPU pGpu, MetricUpdater MetricUpdater)

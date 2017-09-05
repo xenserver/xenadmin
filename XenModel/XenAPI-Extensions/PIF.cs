@@ -74,11 +74,17 @@ namespace XenAPI
             return metrics == null || Connection == null ? null : Connection.Resolve(metrics);
         }
 
-        // This is the name of the secondary management interface
-        public string ManagementPurpose
+        /// <summary>
+        /// This is the name of the secondary management interface
+        /// </summary>
+        public string GetManagementPurpose()
         {
-            get { return Get(other_config, "management_purpose"); }
-            set { other_config = SetDictionaryKey(other_config, "management_purpose", value); }
+            return Get(other_config, "management_purpose");
+        }
+
+        public void SetManagementPurspose(string value)
+        {
+            other_config = SetDictionaryKey(other_config, "management_purpose", value);
         }
 
         internal string NICIdentifier(out bool is_bond)
@@ -197,8 +203,11 @@ namespace XenAPI
 
         public string ManagementInterfaceNameOrUnknown()
         {
-            return management ? Messages.MANAGEMENT
-                : string.IsNullOrEmpty(ManagementPurpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : ManagementPurpose;
+            if (management)
+                return Messages.MANAGEMENT;
+
+            var managementPurpose = GetManagementPurpose();
+            return string.IsNullOrEmpty(managementPurpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : managementPurpose;
         }
 
         public bool IsBondSlave()

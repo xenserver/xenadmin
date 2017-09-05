@@ -97,7 +97,7 @@ namespace XenAdmin.SettingsPanels
             Trace.Assert(!Helpers.FeatureForbidden(clone, Host.RestrictGpu));  // If license insufficient, we show upsell page instead
 
             vm = (VM)clone;
-            SelectedPriority = vm.HARestartPriority;
+            SelectedPriority = vm.HARestartPriority();
 
             if (Connection == null) // on the PropertiesDialog
                 Connection = vm.Connection;
@@ -199,7 +199,7 @@ namespace XenAdmin.SettingsPanels
                 {
                     var vgpuGroup = Connection.Resolve(vgpu.GPU_group);
 
-                    if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu)
+                    if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu())
                     {
                         if (vgpuGroup.HasPassthrough())
                             currentGpuTuple = new GpuTuple(vgpuGroup, null, null); //GPU pass-through item
@@ -252,7 +252,7 @@ namespace XenAdmin.SettingsPanels
             Array.Sort(gpu_groups);
             foreach (GPU_group gpu_group in gpu_groups)
             {
-                if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu)
+                if (Helpers.FeatureForbidden(Connection, Host.RestrictVgpu) || !vm.CanHaveVGpu())
                 {
                     if (gpu_group.HasPassthrough())
                         comboBoxGpus.Items.Add(new GpuTuple(gpu_group, null, null));  //GPU pass-through item
