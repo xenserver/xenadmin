@@ -506,7 +506,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (row.Tag is Pool)
                     {
-                        if (((int)row.Cells[POOL_CHECKBOX_COL].Value) != UNCHECKED)
+                        if (((int)row.Cells[POOL_CHECKBOX_COL].Value) != UNCHECKED && !pools.Contains((Pool)row.Tag))
                             pools.Add((Pool)row.Tag);
                     }
                     else if (row.Tag is Host)
@@ -515,7 +515,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             Host host = (Host)row.Tag;
                             Pool pool = Helpers.GetPoolOfOne(host.Connection);
-                            if (pool != null)
+                            if (pool != null && !pools.Contains(pool))
                                 pools.Add(pool);
                         }
                     }
