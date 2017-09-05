@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -99,13 +97,13 @@ namespace XenAPI
         public Proxy_Feature ToProxy()
         {
             Proxy_Feature result_ = new Proxy_Feature();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.enabled = enabled;
             result_.experimental = experimental;
-            result_.version = (version != null) ? version : "";
-            result_.host = (host != null) ? host : "";
+            result_.version = version ?? "";
+            result_.host = host ?? "";
             return result_;
         }
 
@@ -160,7 +158,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static Feature get_record(Session session, string _feature)
         {
-            return new Feature((Proxy_Feature)session.proxy.feature_get_record(session.uuid, (_feature != null) ? _feature : "").parse());
+            return new Feature((Proxy_Feature)session.proxy.feature_get_record(session.uuid, _feature ?? "").parse());
         }
 
         /// <summary>
@@ -171,7 +169,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Feature> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Feature>.Create(session.proxy.feature_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Feature>.Create(session.proxy.feature_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -182,7 +180,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<Feature>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<Feature>.Create(session.proxy.feature_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            return XenRef<Feature>.Create(session.proxy.feature_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -193,7 +191,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static string get_uuid(Session session, string _feature)
         {
-            return (string)session.proxy.feature_get_uuid(session.uuid, (_feature != null) ? _feature : "").parse();
+            return (string)session.proxy.feature_get_uuid(session.uuid, _feature ?? "").parse();
         }
 
         /// <summary>
@@ -204,7 +202,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static string get_name_label(Session session, string _feature)
         {
-            return (string)session.proxy.feature_get_name_label(session.uuid, (_feature != null) ? _feature : "").parse();
+            return (string)session.proxy.feature_get_name_label(session.uuid, _feature ?? "").parse();
         }
 
         /// <summary>
@@ -215,7 +213,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static string get_name_description(Session session, string _feature)
         {
-            return (string)session.proxy.feature_get_name_description(session.uuid, (_feature != null) ? _feature : "").parse();
+            return (string)session.proxy.feature_get_name_description(session.uuid, _feature ?? "").parse();
         }
 
         /// <summary>
@@ -226,7 +224,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static bool get_enabled(Session session, string _feature)
         {
-            return (bool)session.proxy.feature_get_enabled(session.uuid, (_feature != null) ? _feature : "").parse();
+            return (bool)session.proxy.feature_get_enabled(session.uuid, _feature ?? "").parse();
         }
 
         /// <summary>
@@ -237,7 +235,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static bool get_experimental(Session session, string _feature)
         {
-            return (bool)session.proxy.feature_get_experimental(session.uuid, (_feature != null) ? _feature : "").parse();
+            return (bool)session.proxy.feature_get_experimental(session.uuid, _feature ?? "").parse();
         }
 
         /// <summary>
@@ -248,7 +246,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static string get_version(Session session, string _feature)
         {
-            return (string)session.proxy.feature_get_version(session.uuid, (_feature != null) ? _feature : "").parse();
+            return (string)session.proxy.feature_get_version(session.uuid, _feature ?? "").parse();
         }
 
         /// <summary>
@@ -259,7 +257,7 @@ namespace XenAPI
         /// <param name="_feature">The opaque_ref of the given feature</param>
         public static XenRef<Host> get_host(Session session, string _feature)
         {
-            return XenRef<Host>.Create(session.proxy.feature_get_host(session.uuid, (_feature != null) ? _feature : "").parse());
+            return XenRef<Host>.Create(session.proxy.feature_get_host(session.uuid, _feature ?? "").parse());
         }
 
         /// <summary>

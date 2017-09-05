@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -255,13 +253,13 @@ namespace XenAPI
         public Proxy_Message ToProxy()
         {
             Proxy_Message result_ = new Proxy_Message();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name = (name != null) ? name : "";
+            result_.uuid = uuid ?? "";
+            result_.name = name ?? "";
             result_.priority = priority.ToString();
             result_.cls = cls_helper.ToString(cls);
-            result_.obj_uuid = (obj_uuid != null) ? obj_uuid : "";
+            result_.obj_uuid = obj_uuid ?? "";
             result_.timestamp = timestamp;
-            result_.body = (body != null) ? body : "";
+            result_.body = body ?? "";
             return result_;
         }
 
@@ -320,7 +318,7 @@ namespace XenAPI
         /// <param name="_body">The body of the message</param>
         public static XenRef<Message> create(Session session, string _name, long _priority, cls _cls, string _obj_uuid, string _body)
         {
-            return XenRef<Message>.Create(session.proxy.message_create(session.uuid, (_name != null) ? _name : "", _priority.ToString(), cls_helper.ToString(_cls), (_obj_uuid != null) ? _obj_uuid : "", (_body != null) ? _body : "").parse());
+            return XenRef<Message>.Create(session.proxy.message_create(session.uuid, _name ?? "", _priority.ToString(), cls_helper.ToString(_cls), _obj_uuid ?? "", _body ?? "").parse());
         }
 
         /// <summary>
@@ -331,7 +329,7 @@ namespace XenAPI
         /// <param name="_message">The opaque_ref of the given message</param>
         public static void destroy(Session session, string _message)
         {
-            session.proxy.message_destroy(session.uuid, (_message != null) ? _message : "").parse();
+            session.proxy.message_destroy(session.uuid, _message ?? "").parse();
         }
 
         /// <summary>
@@ -344,7 +342,7 @@ namespace XenAPI
         /// <param name="_since">The cutoff time</param>
         public static Dictionary<XenRef<Message>, Message> get(Session session, cls _cls, string _obj_uuid, DateTime _since)
         {
-            return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get(session.uuid, cls_helper.ToString(_cls), (_obj_uuid != null) ? _obj_uuid : "", _since).parse());
+            return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get(session.uuid, cls_helper.ToString(_cls), _obj_uuid ?? "", _since).parse());
         }
 
         /// <summary>
@@ -376,7 +374,7 @@ namespace XenAPI
         /// <param name="_message">The opaque_ref of the given message</param>
         public static Message get_record(Session session, string _message)
         {
-            return new Message((Proxy_Message)session.proxy.message_get_record(session.uuid, (_message != null) ? _message : "").parse());
+            return new Message((Proxy_Message)session.proxy.message_get_record(session.uuid, _message ?? "").parse());
         }
 
         /// <summary>
@@ -387,7 +385,7 @@ namespace XenAPI
         /// <param name="_uuid">The uuid of the message</param>
         public static XenRef<Message> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Message>.Create(session.proxy.message_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Message>.Create(session.proxy.message_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>

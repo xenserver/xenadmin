@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -33,13 +33,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using CookComputing.XmlRpc;
-
 
 namespace XenAPI
 {
     /// <summary>
     /// individual machine serving provisioning (block) data
+    /// First published in XenServer 7.1.
     /// </summary>
     public partial class PVS_server : XenObject<PVS_server>
     {
@@ -90,11 +89,11 @@ namespace XenAPI
         public Proxy_PVS_server ToProxy()
         {
             Proxy_PVS_server result_ = new Proxy_PVS_server();
-            result_.uuid = (uuid != null) ? uuid : "";
+            result_.uuid = uuid ?? "";
             result_.addresses = addresses;
             result_.first_port = first_port.ToString();
             result_.last_port = last_port.ToString();
-            result_.site = (site != null) ? site : "";
+            result_.site = site ?? "";
             return result_;
         }
 
@@ -139,84 +138,84 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given PVS_server.
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static PVS_server get_record(Session session, string _pvs_server)
         {
-            return new PVS_server((Proxy_PVS_server)session.proxy.pvs_server_get_record(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse());
+            return new PVS_server((Proxy_PVS_server)session.proxy.pvs_server_get_record(session.uuid, _pvs_server ?? "").parse());
         }
 
         /// <summary>
         /// Get a reference to the PVS_server instance with the specified UUID.
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PVS_server> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<PVS_server>.Create(session.proxy.pvs_server_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<PVS_server>.Create(session.proxy.pvs_server_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
         /// Get the uuid field of the given PVS_server.
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static string get_uuid(Session session, string _pvs_server)
         {
-            return (string)session.proxy.pvs_server_get_uuid(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse();
+            return (string)session.proxy.pvs_server_get_uuid(session.uuid, _pvs_server ?? "").parse();
         }
 
         /// <summary>
         /// Get the addresses field of the given PVS_server.
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static string[] get_addresses(Session session, string _pvs_server)
         {
-            return (string [])session.proxy.pvs_server_get_addresses(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse();
+            return (string [])session.proxy.pvs_server_get_addresses(session.uuid, _pvs_server ?? "").parse();
         }
 
         /// <summary>
         /// Get the first_port field of the given PVS_server.
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static long get_first_port(Session session, string _pvs_server)
         {
-            return long.Parse((string)session.proxy.pvs_server_get_first_port(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse());
+            return long.Parse((string)session.proxy.pvs_server_get_first_port(session.uuid, _pvs_server ?? "").parse());
         }
 
         /// <summary>
         /// Get the last_port field of the given PVS_server.
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static long get_last_port(Session session, string _pvs_server)
         {
-            return long.Parse((string)session.proxy.pvs_server_get_last_port(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse());
+            return long.Parse((string)session.proxy.pvs_server_get_last_port(session.uuid, _pvs_server ?? "").parse());
         }
 
         /// <summary>
         /// Get the site field of the given PVS_server.
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static XenRef<PVS_site> get_site(Session session, string _pvs_server)
         {
-            return XenRef<PVS_site>.Create(session.proxy.pvs_server_get_site(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse());
+            return XenRef<PVS_site>.Create(session.proxy.pvs_server_get_site(session.uuid, _pvs_server ?? "").parse());
         }
 
         /// <summary>
         /// introduce new PVS server
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_addresses">IPv4 addresses of the server</param>
@@ -225,12 +224,12 @@ namespace XenAPI
         /// <param name="_site">PVS site this server is a part of</param>
         public static XenRef<PVS_server> introduce(Session session, string[] _addresses, long _first_port, long _last_port, string _site)
         {
-            return XenRef<PVS_server>.Create(session.proxy.pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), (_site != null) ? _site : "").parse());
+            return XenRef<PVS_server>.Create(session.proxy.pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), _site ?? "").parse());
         }
 
         /// <summary>
         /// introduce new PVS server
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_addresses">IPv4 addresses of the server</param>
@@ -239,34 +238,34 @@ namespace XenAPI
         /// <param name="_site">PVS site this server is a part of</param>
         public static XenRef<Task> async_introduce(Session session, string[] _addresses, long _first_port, long _last_port, string _site)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), (_site != null) ? _site : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), _site ?? "").parse());
         }
 
         /// <summary>
         /// forget a PVS server
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static void forget(Session session, string _pvs_server)
         {
-            session.proxy.pvs_server_forget(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse();
+            session.proxy.pvs_server_forget(session.uuid, _pvs_server ?? "").parse();
         }
 
         /// <summary>
         /// forget a PVS server
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static XenRef<Task> async_forget(Session session, string _pvs_server)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_server_forget(session.uuid, (_pvs_server != null) ? _pvs_server : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pvs_server_forget(session.uuid, _pvs_server ?? "").parse());
         }
 
         /// <summary>
         /// Return a list of all the PVS_servers known to the system.
-        /// Experimental. First published in .
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<PVS_server>> get_all(Session session)
@@ -276,6 +275,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the PVS_server Records at once, in a single XML RPC call
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<PVS_server>, PVS_server> get_all_records(Session session)
@@ -285,7 +285,6 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
-        /// Experimental. First published in .
         /// </summary>
         public virtual string uuid
         {
@@ -304,7 +303,6 @@ namespace XenAPI
 
         /// <summary>
         /// IPv4 addresses of this server
-        /// Experimental. First published in .
         /// </summary>
         public virtual string[] addresses
         {
@@ -323,7 +321,6 @@ namespace XenAPI
 
         /// <summary>
         /// First UDP port accepted by this server
-        /// Experimental. First published in .
         /// </summary>
         public virtual long first_port
         {
@@ -342,7 +339,6 @@ namespace XenAPI
 
         /// <summary>
         /// Last UDP port accepted by this server
-        /// Experimental. First published in .
         /// </summary>
         public virtual long last_port
         {
@@ -361,7 +357,6 @@ namespace XenAPI
 
         /// <summary>
         /// PVS site this server is part of
-        /// Experimental. First published in .
         /// </summary>
         public virtual XenRef<PVS_site> site
         {

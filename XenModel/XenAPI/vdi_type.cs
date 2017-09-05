@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum vdi_type
     {
-        system, user, ephemeral, suspend, crashdump, ha_statefile, metadata, redo_log, rrd, pvs_cache, unknown
+        system, user, ephemeral, suspend, crashdump, ha_statefile, metadata, redo_log, rrd, pvs_cache, cbt_metadata, unknown
     }
 
     public static class vdi_type_helper
@@ -66,6 +66,8 @@ namespace XenAPI
                     return "rrd";
                 case vdi_type.pvs_cache:
                     return "pvs_cache";
+                case vdi_type.cbt_metadata:
+                    return "cbt_metadata";
                 default:
                     return "unknown";
             }

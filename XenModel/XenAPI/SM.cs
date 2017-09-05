@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -127,19 +125,19 @@ namespace XenAPI
         public Proxy_SM ToProxy()
         {
             Proxy_SM result_ = new Proxy_SM();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
-            result_.type = (type != null) ? type : "";
-            result_.vendor = (vendor != null) ? vendor : "";
-            result_.copyright = (copyright != null) ? copyright : "";
-            result_.version = (version != null) ? version : "";
-            result_.required_api_version = (required_api_version != null) ? required_api_version : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.type = type ?? "";
+            result_.vendor = vendor ?? "";
+            result_.copyright = copyright ?? "";
+            result_.version = version ?? "";
+            result_.required_api_version = required_api_version ?? "";
             result_.configuration = Maps.convert_to_proxy_string_string(configuration);
             result_.capabilities = capabilities;
             result_.features = Maps.convert_to_proxy_string_long(features);
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.driver_filename = (driver_filename != null) ? driver_filename : "";
+            result_.driver_filename = driver_filename ?? "";
             result_.required_cluster_stack = required_cluster_stack;
             return result_;
         }
@@ -214,7 +212,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static SM get_record(Session session, string _sm)
         {
-            return new SM((Proxy_SM)session.proxy.sm_get_record(session.uuid, (_sm != null) ? _sm : "").parse());
+            return new SM((Proxy_SM)session.proxy.sm_get_record(session.uuid, _sm ?? "").parse());
         }
 
         /// <summary>
@@ -225,7 +223,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<SM> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<SM>.Create(session.proxy.sm_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<SM>.Create(session.proxy.sm_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -236,7 +234,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<SM>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<SM>.Create(session.proxy.sm_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            return XenRef<SM>.Create(session.proxy.sm_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -247,7 +245,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_uuid(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_uuid(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_uuid(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -258,7 +256,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_name_label(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_name_label(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_name_label(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -269,7 +267,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_name_description(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_name_description(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_name_description(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -280,7 +278,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_type(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_type(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_type(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -291,7 +289,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_vendor(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_vendor(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_vendor(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -302,7 +300,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_copyright(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_copyright(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_copyright(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -313,7 +311,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_version(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_version(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_version(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -324,7 +322,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_required_api_version(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_required_api_version(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_required_api_version(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -335,7 +333,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, string> get_configuration(Session session, string _sm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.sm_get_configuration(session.uuid, (_sm != null) ? _sm : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.sm_get_configuration(session.uuid, _sm ?? "").parse());
         }
 
         /// <summary>
@@ -348,7 +346,7 @@ namespace XenAPI
         [Deprecated("XenServer 6.2")]
         public static string[] get_capabilities(Session session, string _sm)
         {
-            return (string [])session.proxy.sm_get_capabilities(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string [])session.proxy.sm_get_capabilities(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -359,7 +357,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, long> get_features(Session session, string _sm)
         {
-            return Maps.convert_from_proxy_string_long(session.proxy.sm_get_features(session.uuid, (_sm != null) ? _sm : "").parse());
+            return Maps.convert_from_proxy_string_long(session.proxy.sm_get_features(session.uuid, _sm ?? "").parse());
         }
 
         /// <summary>
@@ -370,7 +368,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static Dictionary<string, string> get_other_config(Session session, string _sm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.sm_get_other_config(session.uuid, (_sm != null) ? _sm : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.sm_get_other_config(session.uuid, _sm ?? "").parse());
         }
 
         /// <summary>
@@ -381,7 +379,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string get_driver_filename(Session session, string _sm)
         {
-            return (string)session.proxy.sm_get_driver_filename(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string)session.proxy.sm_get_driver_filename(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -392,7 +390,7 @@ namespace XenAPI
         /// <param name="_sm">The opaque_ref of the given sm</param>
         public static string[] get_required_cluster_stack(Session session, string _sm)
         {
-            return (string [])session.proxy.sm_get_required_cluster_stack(session.uuid, (_sm != null) ? _sm : "").parse();
+            return (string [])session.proxy.sm_get_required_cluster_stack(session.uuid, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -404,7 +402,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _sm, Dictionary<string, string> _other_config)
         {
-            session.proxy.sm_set_other_config(session.uuid, (_sm != null) ? _sm : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.sm_set_other_config(session.uuid, _sm ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -417,7 +415,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _sm, string _key, string _value)
         {
-            session.proxy.sm_add_to_other_config(session.uuid, (_sm != null) ? _sm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.sm_add_to_other_config(session.uuid, _sm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -429,7 +427,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _sm, string _key)
         {
-            session.proxy.sm_remove_from_other_config(session.uuid, (_sm != null) ? _sm : "", (_key != null) ? _key : "").parse();
+            session.proxy.sm_remove_from_other_config(session.uuid, _sm ?? "", _key ?? "").parse();
         }
 
         /// <summary>

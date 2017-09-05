@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -91,10 +89,10 @@ namespace XenAPI
         public Proxy_Console ToProxy()
         {
             Proxy_Console result_ = new Proxy_Console();
-            result_.uuid = (uuid != null) ? uuid : "";
+            result_.uuid = uuid ?? "";
             result_.protocol = console_protocol_helper.ToString(protocol);
-            result_.location = (location != null) ? location : "";
-            result_.VM = (VM != null) ? VM : "";
+            result_.location = location ?? "";
+            result_.VM = VM ?? "";
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             return result_;
         }
@@ -151,7 +149,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static Console get_record(Session session, string _console)
         {
-            return new Console((Proxy_Console)session.proxy.console_get_record(session.uuid, (_console != null) ? _console : "").parse());
+            return new Console((Proxy_Console)session.proxy.console_get_record(session.uuid, _console ?? "").parse());
         }
 
         /// <summary>
@@ -162,7 +160,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Console> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Console>.Create(session.proxy.console_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Console>.Create(session.proxy.console_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -195,7 +193,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static void destroy(Session session, string _console)
         {
-            session.proxy.console_destroy(session.uuid, (_console != null) ? _console : "").parse();
+            session.proxy.console_destroy(session.uuid, _console ?? "").parse();
         }
 
         /// <summary>
@@ -206,7 +204,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static XenRef<Task> async_destroy(Session session, string _console)
         {
-            return XenRef<Task>.Create(session.proxy.async_console_destroy(session.uuid, (_console != null) ? _console : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_console_destroy(session.uuid, _console ?? "").parse());
         }
 
         /// <summary>
@@ -217,7 +215,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static string get_uuid(Session session, string _console)
         {
-            return (string)session.proxy.console_get_uuid(session.uuid, (_console != null) ? _console : "").parse();
+            return (string)session.proxy.console_get_uuid(session.uuid, _console ?? "").parse();
         }
 
         /// <summary>
@@ -228,7 +226,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static console_protocol get_protocol(Session session, string _console)
         {
-            return (console_protocol)Helper.EnumParseDefault(typeof(console_protocol), (string)session.proxy.console_get_protocol(session.uuid, (_console != null) ? _console : "").parse());
+            return (console_protocol)Helper.EnumParseDefault(typeof(console_protocol), (string)session.proxy.console_get_protocol(session.uuid, _console ?? "").parse());
         }
 
         /// <summary>
@@ -239,7 +237,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static string get_location(Session session, string _console)
         {
-            return (string)session.proxy.console_get_location(session.uuid, (_console != null) ? _console : "").parse();
+            return (string)session.proxy.console_get_location(session.uuid, _console ?? "").parse();
         }
 
         /// <summary>
@@ -250,7 +248,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static XenRef<VM> get_VM(Session session, string _console)
         {
-            return XenRef<VM>.Create(session.proxy.console_get_vm(session.uuid, (_console != null) ? _console : "").parse());
+            return XenRef<VM>.Create(session.proxy.console_get_vm(session.uuid, _console ?? "").parse());
         }
 
         /// <summary>
@@ -261,7 +259,7 @@ namespace XenAPI
         /// <param name="_console">The opaque_ref of the given console</param>
         public static Dictionary<string, string> get_other_config(Session session, string _console)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.console_get_other_config(session.uuid, (_console != null) ? _console : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.console_get_other_config(session.uuid, _console ?? "").parse());
         }
 
         /// <summary>
@@ -273,7 +271,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _console, Dictionary<string, string> _other_config)
         {
-            session.proxy.console_set_other_config(session.uuid, (_console != null) ? _console : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.console_set_other_config(session.uuid, _console ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -286,7 +284,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _console, string _key, string _value)
         {
-            session.proxy.console_add_to_other_config(session.uuid, (_console != null) ? _console : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.console_add_to_other_config(session.uuid, _console ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -298,7 +296,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _console, string _key)
         {
-            session.proxy.console_remove_from_other_config(session.uuid, (_console != null) ? _console : "", (_key != null) ? _key : "").parse();
+            session.proxy.console_remove_from_other_config(session.uuid, _console ?? "", _key ?? "").parse();
         }
 
         /// <summary>

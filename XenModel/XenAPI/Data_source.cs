@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -103,11 +101,11 @@ namespace XenAPI
         public Proxy_Data_source ToProxy()
         {
             Proxy_Data_source result_ = new Proxy_Data_source();
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.enabled = enabled;
             result_.standard = standard;
-            result_.units = (units != null) ? units : "";
+            result_.units = units ?? "";
             result_.min = min;
             result_.max = max;
             result_.value = value;
