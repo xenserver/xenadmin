@@ -49,20 +49,20 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         public PolicyHistory()
         {
             InitializeComponent();
-            dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
+            dataGridViewRunHistory.CellClick += new DataGridViewCellEventHandler(dataGridViewRunHistory_CellClick);
             ColumnExpand.DefaultCellStyle.NullValue = null;
-            comboBox1.SelectedIndex = 0;
-            dataGridView1.Columns[2].ValueType = typeof(DateTime);
-            dataGridView1.Columns[2].DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HM;
+            comboBoxTimeSpan.SelectedIndex = 0;
+            dataGridViewRunHistory.Columns[2].ValueType = typeof(DateTime);
+            dataGridViewRunHistory.Columns[2].DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HM;
         }
 
 
 
-        void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        void dataGridViewRunHistory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                HistoryRow row = (HistoryRow)dataGridView1.Rows[e.RowIndex];
+                HistoryRow row = (HistoryRow)dataGridViewRunHistory.Rows[e.RowIndex];
                 if (row.Alert.Type != "info")
                 {
                     row.Expanded = !row.Expanded;
@@ -81,7 +81,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 3) 7 * 24 -> messages from lst 7 days */
 
             var hoursFromNow = 0;
-            switch (comboBox1.SelectedIndex)
+            switch (comboBoxTimeSpan.SelectedIndex)
             {
                 case 0: /* default value*/
                     break;
@@ -106,11 +106,11 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             if (_policy == null)
             {
                 labelHistory.Text = "";
-                comboBox1.Enabled = false;
+                comboBoxTimeSpan.Enabled = false;
             }
             else
             {
-                comboBox1.Enabled = true;
+                comboBoxTimeSpan.Enabled = true;
                 StartRefreshTab();
             }
 
@@ -121,13 +121,13 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             if (_policy != null)
             {
                 ReloadHistoryLabel();
-                dataGridView1.Rows.Clear();
+                dataGridViewRunHistory.Rows.Clear();
                 var readOnlyAlerts = alerts.AsReadOnly();
                 foreach (var alert in readOnlyAlerts)
                 {
-                    dataGridView1.Rows.Add(new HistoryRow(alert));
+                    dataGridViewRunHistory.Rows.Add(new HistoryRow(alert));
                 }
-                dataGridView1.Sort(ColumnDateTime, System.ComponentModel.ListSortDirection.Descending);
+                dataGridViewRunHistory.Sort(ColumnDateTime, System.ComponentModel.ListSortDirection.Descending);
             }
         }
 
@@ -185,10 +185,10 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
         public void Clear()
         {
-            dataGridView1.Rows.Clear();
+            dataGridViewRunHistory.Rows.Clear();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxTimeSpan_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_policy != null)
             {
@@ -203,7 +203,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // ellipsise if necessary
             using (System.Drawing.Graphics g = labelHistory.CreateGraphics())
             {
-                int maxWidth = label1.Left - labelHistory.Left;
+                int maxWidth = labelShow.Left - labelHistory.Left;
                 int availableWidth = maxWidth - (int)g.MeasureString(string.Format(Messages.HISTORY_FOR_POLICY, ""), labelHistory.Font).Width;
                 Name = Name.Ellipsise(new System.Drawing.Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
             }

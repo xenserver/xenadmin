@@ -34,40 +34,42 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.labelShow = new System.Windows.Forms.Label();
+            this.comboBoxTimeSpan = new System.Windows.Forms.ComboBox();
             this.labelHistory = new System.Windows.Forms.Label();
             this.panelLoading = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.labelLoading = new System.Windows.Forms.Label();
+            this.pictureBoxSpinner = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panelHistory = new System.Windows.Forms.Panel();
+            this.dataGridViewRunHistory = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLoading.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpinner)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panelHistory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRunHistory)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelShow
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelShow, "labelShow");
+            this.labelShow.Name = "labelShow";
             // 
-            // comboBox1
+            // comboBoxTimeSpan
             // 
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2")});
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            resources.ApplyResources(this.comboBoxTimeSpan, "comboBoxTimeSpan");
+            this.comboBoxTimeSpan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTimeSpan.FormattingEnabled = true;
+            this.comboBoxTimeSpan.Items.AddRange(new object[] {
+            resources.GetString("comboBoxTimeSpan.Items"),
+            resources.GetString("comboBoxTimeSpan.Items1"),
+            resources.GetString("comboBoxTimeSpan.Items2")});
+            this.comboBoxTimeSpan.Name = "comboBoxTimeSpan";
+            this.comboBoxTimeSpan.SelectedIndexChanged += new System.EventHandler(this.comboBoxTimeSpan_SelectedIndexChanged);
             // 
             // labelHistory
             // 
@@ -78,48 +80,56 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // 
             resources.ApplyResources(this.panelLoading, "panelLoading");
             this.panelLoading.BackColor = System.Drawing.SystemColors.Window;
-            this.panelLoading.Controls.Add(this.label2);
-            this.panelLoading.Controls.Add(this.pictureBox1);
+            this.panelLoading.Controls.Add(this.pictureBoxSpinner);
+            this.panelLoading.Controls.Add(this.labelLoading);
             this.panelLoading.Name = "panelLoading";
             // 
-            // label2
+            // labelLoading
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.labelLoading, "labelLoading");
+            this.labelLoading.Name = "labelLoading";
             // 
-            // pictureBox1
+            // pictureBoxSpinner
             // 
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Image = global::XenAdmin.Properties.Resources.ajax_loader;
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            resources.ApplyResources(this.pictureBoxSpinner, "pictureBoxSpinner");
+            this.pictureBoxSpinner.Image = global::XenAdmin.Properties.Resources.ajax_loader;
+            this.pictureBoxSpinner.Name = "pictureBoxSpinner";
+            this.pictureBoxSpinner.TabStop = false;
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanel2
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.labelHistory, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 2, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.labelHistory, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelShow, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.comboBoxTimeSpan, 2, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
-            // dataGridView1
+            // panelHistory
             // 
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.panelHistory.Controls.Add(this.panelLoading);
+            this.panelHistory.Controls.Add(this.dataGridViewRunHistory);
+            this.panelHistory.Controls.Add(this.tableLayoutPanel2);
+            resources.ApplyResources(this.panelHistory, "panelHistory");
+            this.panelHistory.Name = "panelHistory";
+            // 
+            // dataGridViewRunHistory
+            // 
+            this.dataGridViewRunHistory.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewRunHistory.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewRunHistory.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewRunHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewRunHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnExpand,
             this.ColumnResult,
             this.ColumnDateTime,
             this.ColumnDescription});
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
+            resources.ApplyResources(this.dataGridViewRunHistory, "dataGridViewRunHistory");
+            this.dataGridViewRunHistory.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridViewRunHistory.Name = "dataGridViewRunHistory";
+            this.dataGridViewRunHistory.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewRunHistory.RowsDefaultCellStyle = dataGridViewCellStyle3;
             // 
             // ColumnExpand
             // 
@@ -159,33 +169,33 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.panelLoading);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.panelHistory);
             this.Name = "PolicyHistory";
             this.panelLoading.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpinner)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.panelHistory.ResumeLayout(false);
+            this.panelHistory.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRunHistory)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private DataGridViewEx dataGridView1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private DataGridViewEx dataGridViewRunHistory;
+        private System.Windows.Forms.Label labelShow;
+        private System.Windows.Forms.ComboBox comboBoxTimeSpan;
         private System.Windows.Forms.Label labelHistory;
         private System.Windows.Forms.Panel panelLoading;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.PictureBox pictureBoxSpinner;
+        private System.Windows.Forms.Label labelLoading;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
+        private System.Windows.Forms.Panel panelHistory;
     }
 }
