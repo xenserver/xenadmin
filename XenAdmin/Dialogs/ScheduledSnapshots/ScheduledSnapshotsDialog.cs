@@ -48,6 +48,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public readonly Pool Pool;
+        private VMSS currentSelected = null;
 
         public ScheduledSnapshotsDialog(Pool pool)
             : base(pool.Connection)
@@ -144,7 +145,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 }
             }
             this.Text = Messages.VMSS_DIALOG_TITLE;
-            label2.Text = Messages.VMSS_DIALOG_TEXT;
+            labelTopBlurb.Text = Messages.VMSS_DIALOG_TEXT;
             labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
                                                         ? Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
                                                         : Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
@@ -158,21 +159,21 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
         private void LoadPolicies()
         {
-            dataGridView1.SuspendLayout();
+            dataGridViewPolicies.SuspendLayout();
             var selectedPolicy = currentSelected;
-            dataGridView1.Rows.Clear();
+            dataGridViewPolicies.Rows.Clear();
 
             var policyList = Pool.Connection.Cache.VMSSs;
 
             foreach (var policy in policyList)
             {
                 // add only 10 messages for each policy
-                dataGridView1.Rows.Add(new PolicyRow(policy, VMSS.GetAlerts(policy, 0)));
+                dataGridViewPolicies.Rows.Add(new PolicyRow(policy, VMSS.GetAlerts(policy, 0)));
             }
 
             if (selectedPolicy != null)
             {
-                foreach (PolicyRow row in dataGridView1.Rows)
+                foreach (PolicyRow row in dataGridViewPolicies.Rows)
                 {
                     if (row.Policy.uuid == selectedPolicy.uuid)
                     {
@@ -182,21 +183,11 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 }
             }
 
-            if (dataGridView1.SelectedRows.Count ==0 && dataGridView1.Rows.Count > 0)
-                dataGridView1.Rows[0].Selected = true;
+            if (dataGridViewPolicies.SelectedRows.Count ==0 && dataGridViewPolicies.Rows.Count > 0)
+                dataGridViewPolicies.Rows[0].Selected = true;
 
             RefreshPoolTitle(Pool);
-            dataGridView1.ResumeLayout();
-        }
-
-        private void buttonNew_Click(object sender, System.EventArgs e)
-        {
-            new NewPolicyWizard(Pool).Show(this);
-        }
-
-        private void buttonCancel_Click(object sender, System.EventArgs e)
-        {
-            this.Close();
+            dataGridViewPolicies.ResumeLayout();
         }
 
         private void VMProtectionPoliciesDialog_Load(object sender, EventArgs e)
@@ -208,11 +199,88 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             Pool.Connection.Cache.RegisterBatchCollectionChanged<VMSS>(VMSSCollectionChanged);
         }
 
+        private void VMProtectionPoliciesDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Pool.Connection.Cache.DeregisterBatchCollectionChanged<VMSS>(VMSSCollectionChanged);
+        }
+        
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            RefreshButtons();
+        }
+
+        private void RefreshButtons()
+        {
+            if (dataGridViewPolicies.SelectedRows.Count == 1)
+            {
+                currentSelected = ((PolicyRow)dataGridViewPolicies.SelectedRows[0]).Policy;
+                buttonEnable.Text = currentSelected.enabled? Messages.DISABLE : Messages.ENABLE;
+                buttonEnable.Enabled = currentSelected.VMs.Count != 0 || currentSelected.enabled;
+                buttonProperties.Enabled = true;
+                buttonRunNow.Enabled = currentSelected.enabled;
+            }
+            else
+            {
+                currentSelected = null;
+                buttonProperties.Enabled = buttonEnable.Enabled = buttonRunNow.Enabled = false;
+                policyHistory1.Clear();
+            }
+
+            policyHistory1.RefreshTab(currentSelected);
+            buttonDelete.Enabled = (dataGridViewPolicies.SelectedRows.Count != 0);
+        }
+
+        #region Button event handlers
+
+        private void buttonNew_Click(object sender, System.EventArgs e)
+        {
+            new NewPolicyWizard(Pool).Show(this);
+        }
+
+        private void buttonCancel_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonEnable_Click(object sender, EventArgs e)
+        {
+            if (currentSelected != null)
+            {
+                var action = new ChangePolicyEnabledAction(currentSelected);
+                action.RunAsync();
+            }
+        }
+
+        private void buttonRunNow_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPolicies.SelectedRows.Count == 1)
+            {
+                var policy = ((PolicyRow)dataGridViewPolicies.SelectedRows[0]).Policy;
+                var action = new RunPolicyNowAction(policy);
+                action.Completed += action_Completed;
+                buttonRunNow.Enabled = false;
+                action.RunAsync();
+            }
+        }
+
+        void action_Completed(ActionBase sender)
+        {
+            Program.Invoke(Program.MainWindow, RefreshButtons);
+        }
+
+        private void buttonProperties_Click(object sender, EventArgs e)
+        {
+            using (PropertiesDialog propertiesDialog = new PropertiesDialog((VMSS)currentSelected))
+            {
+                propertiesDialog.ShowDialog(this);
+            }
+        }
+
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             var selectedPolicies = new List<VMSS>();
             int numberOfProtectedVMs = 0;
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in dataGridViewPolicies.SelectedRows)
             {
                 var policy = (((PolicyRow)row).Policy);
                 selectedPolicies.Add(policy);
@@ -239,73 +307,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             }
         }
 
-        private VMSS currentSelected = null;
-
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            RefreshButtons();
-        }
-
-        private void RefreshButtons()
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                currentSelected = ((PolicyRow)dataGridView1.SelectedRows[0]).Policy;
-                buttonEnable.Text = currentSelected.enabled? Messages.DISABLE : Messages.ENABLE;
-                buttonEnable.Enabled = currentSelected.VMs.Count != 0 || currentSelected.enabled;
-                buttonProperties.Enabled = true;
-                buttonRunNow.Enabled = currentSelected.enabled;
-            }
-            else
-            {
-                currentSelected = null;
-                buttonProperties.Enabled = buttonEnable.Enabled = buttonRunNow.Enabled = false;
-                policyHistory1.Clear();
-            }
-
-            policyHistory1.RefreshTab(currentSelected);
-            buttonDelete.Enabled = (dataGridView1.SelectedRows.Count != 0);
-        }
-
-        private void VMProtectionPoliciesDialog_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Pool.Connection.Cache.DeregisterBatchCollectionChanged<VMSS>(VMSSCollectionChanged);
-        }
-
-        private void buttonEnable_Click(object sender, EventArgs e)
-        {
-            if (currentSelected != null)
-            {
-                var action = new ChangePolicyEnabledAction(currentSelected);
-                action.RunAsync();
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                var policy = ((PolicyRow)dataGridView1.SelectedRows[0]).Policy;
-                var action = new RunPolicyNowAction(policy);
-                action.Completed += action_Completed;
-                buttonRunNow.Enabled = false;
-                action.RunAsync();
-            }
-        }
-
-        void action_Completed(ActionBase sender)
-        {
-            Program.Invoke(Program.MainWindow, RefreshButtons);
-        }
-
-        private void buttonProperties_Click(object sender, EventArgs e)
-        {
-            using (PropertiesDialog propertiesDialog = new PropertiesDialog((VMSS)currentSelected))
-            {
-                propertiesDialog.ShowDialog(this);
-            }
-        }
-
+        #endregion
 
         private void chevronButton1_ButtonClick(object sender, EventArgs e)
         {

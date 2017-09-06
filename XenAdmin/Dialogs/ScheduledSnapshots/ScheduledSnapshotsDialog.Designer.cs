@@ -32,8 +32,8 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduledSnapshotsDialog));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridView1 = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.dataGridViewPolicies = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.NameColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EnabledColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,8 +47,8 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.buttonRunNow = new System.Windows.Forms.Button();
             this.labelPolicyTitle = new System.Windows.Forms.Label();
             this.buttonProperties = new System.Windows.Forms.Button();
-            this.policyHistory1 = new PolicyHistory();
-            this.label2 = new System.Windows.Forms.Label();
+            this.policyHistory1 = new XenAdmin.Dialogs.ScheduledSnapshots.PolicyHistory();
+            this.labelTopBlurb = new System.Windows.Forms.Label();
             this.localServerTime1 = new XenAdmin.Wizards.NewPolicyWizard.LocalServerTime();
             this.chevronButton1 = new XenAdmin.Controls.ChevronButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -56,32 +56,32 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPolicies)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridViewPolicies
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewPolicies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridViewPolicies.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewPolicies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewPolicies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NameColum,
             this.EnabledColumn,
             this.ColumnVMs,
             this.DescriptionColum,
             this.ColumnNextArchive,
             this.ColumnLastResult});
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.MultiSelect = true;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.tableLayoutPanel3.SetRowSpan(this.dataGridView1, 6);
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            resources.ApplyResources(this.dataGridViewPolicies, "dataGridViewPolicies");
+            this.dataGridViewPolicies.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridViewPolicies.MultiSelect = true;
+            this.dataGridViewPolicies.Name = "dataGridViewPolicies";
+            this.dataGridViewPolicies.ReadOnly = true;
+            this.tableLayoutPanel3.SetRowSpan(this.dataGridViewPolicies, 6);
+            this.dataGridViewPolicies.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // NameColum
             // 
@@ -101,8 +101,8 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // ColumnVMs
             // 
             this.ColumnVMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColumnVMs.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColumnVMs.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.ColumnVMs, "ColumnVMs");
             this.ColumnVMs.Name = "ColumnVMs";
             this.ColumnVMs.ReadOnly = true;
@@ -162,7 +162,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             resources.ApplyResources(this.buttonRunNow, "buttonRunNow");
             this.buttonRunNow.Name = "buttonRunNow";
             this.buttonRunNow.UseVisualStyleBackColor = true;
-            this.buttonRunNow.Click += new System.EventHandler(this.button1_Click);
+            this.buttonRunNow.Click += new System.EventHandler(this.buttonRunNow_Click);
             // 
             // labelPolicyTitle
             // 
@@ -182,10 +182,10 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             resources.ApplyResources(this.policyHistory1, "policyHistory1");
             this.policyHistory1.Name = "policyHistory1";
             // 
-            // label2
+            // labelTopBlurb
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.labelTopBlurb, "labelTopBlurb");
+            this.labelTopBlurb.Name = "labelTopBlurb";
             // 
             // localServerTime1
             // 
@@ -204,7 +204,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelTopBlurb, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.deprecationBanner, 0, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
@@ -220,7 +220,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
             this.tableLayoutPanel3.Controls.Add(this.buttonProperties, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.labelPolicyTitle, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.dataGridView1, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.dataGridViewPolicies, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.localServerTime1, 0, 7);
             this.tableLayoutPanel3.Controls.Add(this.buttonEnable, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.buttonRunNow, 1, 3);
@@ -252,9 +252,9 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.Controls.Add(this.tableLayoutPanel5);
             this.Name = "ScheduledSnapshotsDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Load += new System.EventHandler(this.VMProtectionPoliciesDialog_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VMProtectionPoliciesDialog_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.VMProtectionPoliciesDialog_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPolicies)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -270,7 +270,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
         #endregion
 
-        protected DataGridViewEx dataGridView1;
+        protected DataGridViewEx dataGridViewPolicies;
         protected System.Windows.Forms.Button buttonCancel;
         protected System.Windows.Forms.Button buttonNew;
         protected System.Windows.Forms.Button buttonEnable;
@@ -279,7 +279,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         protected System.Windows.Forms.Label labelPolicyTitle;
         protected System.Windows.Forms.Button buttonProperties;
         protected PolicyHistory policyHistory1;
-        protected System.Windows.Forms.Label label2;
+        protected System.Windows.Forms.Label labelTopBlurb;
         protected LocalServerTime localServerTime1;
         protected XenAdmin.Controls.ChevronButton chevronButton1;
         protected System.Windows.Forms.DataGridViewTextBoxColumn NameColum;
