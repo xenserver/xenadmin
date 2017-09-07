@@ -277,17 +277,17 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // tableLayoutPanel4
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.chevronButton1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.buttonCancel, 1, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             // 
             // tableLayoutPanel5
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-            this.tableLayoutPanel5.Controls.Add(this.panelHistory, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel3, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.chevronButton1, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.panelHistory, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 4);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // panelHistory
@@ -415,7 +415,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPolicies)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.panelHistory.ResumeLayout(false);
