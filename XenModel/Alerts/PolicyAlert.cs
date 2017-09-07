@@ -43,9 +43,11 @@ namespace XenAdmin.Alerts
         public readonly DateTime Time;
         public readonly int numberOfVMsFailed;
 
+        public const int INFO_PRIORITY = 4;
+
         public PolicyAlert(long priority, string name, DateTime time, string body, string policyName)
         {
-            Type = priority == 4 ? "info": "error";
+            Type = priority == INFO_PRIORITY ? "info" : "error";
             Time = time;
 
             if(Type == "info")

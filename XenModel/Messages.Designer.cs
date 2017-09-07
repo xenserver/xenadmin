@@ -36070,24 +36070,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a snapshot schedule for your VMs..
-        /// </summary>
-        public static string VMSS_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_DIALOG_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Snapshot schedules.
-        /// </summary>
-        public static string VMSS_DIALOG_TITLE {
-            get {
-                return ResourceManager.GetString("VMSS_DIALOG_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Send &amp;email notifications about snapshot schedule job alerts.
         /// </summary>
         public static string VMSS_EMAIL_CHECKBOX_TEXT {

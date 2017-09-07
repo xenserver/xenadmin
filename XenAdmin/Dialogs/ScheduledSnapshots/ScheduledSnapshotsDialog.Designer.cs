@@ -33,13 +33,11 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduledSnapshotsDialog));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridViewPolicies = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.NameColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EnabledColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnVMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescriptionColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnNextArchive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLastResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
             this.buttonEnable = new System.Windows.Forms.Button();
@@ -47,86 +45,47 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.buttonRunNow = new System.Windows.Forms.Button();
             this.labelPolicyTitle = new System.Windows.Forms.Label();
             this.buttonProperties = new System.Windows.Forms.Button();
-            this.policyHistory1 = new XenAdmin.Dialogs.ScheduledSnapshots.PolicyHistory();
             this.labelTopBlurb = new System.Windows.Forms.Label();
             this.localServerTime1 = new XenAdmin.Wizards.NewPolicyWizard.LocalServerTime();
             this.chevronButton1 = new XenAdmin.Controls.ChevronButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.deprecationBanner = new XenAdmin.Controls.DeprecationBanner();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.panelPolicies = new System.Windows.Forms.Panel();
+            this.panelLoading = new System.Windows.Forms.Panel();
+            this.labelLoading = new System.Windows.Forms.Label();
+            this.pictureBoxSpinner = new System.Windows.Forms.PictureBox();
+            this.dataGridViewPolicies = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.NameColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EnabledColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnVMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescriptionColum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLastResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPolicies)).BeginInit();
+            this.panelHistory = new System.Windows.Forms.Panel();
+            this.dataGridViewRunHistory = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.ColumnExpand = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColumnResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelHistory = new System.Windows.Forms.Label();
+            this.labelShow = new System.Windows.Forms.Label();
+            this.comboBoxTimeSpan = new System.Windows.Forms.ComboBox();
+            this.bgWorker = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.panelPolicies.SuspendLayout();
+            this.panelLoading.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpinner)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPolicies)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.panelHistory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRunHistory)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dataGridViewPolicies
-            // 
-            this.dataGridViewPolicies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dataGridViewPolicies.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridViewPolicies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridViewPolicies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NameColum,
-            this.EnabledColumn,
-            this.ColumnVMs,
-            this.DescriptionColum,
-            this.ColumnNextArchive,
-            this.ColumnLastResult});
-            resources.ApplyResources(this.dataGridViewPolicies, "dataGridViewPolicies");
-            this.dataGridViewPolicies.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewPolicies.MultiSelect = true;
-            this.dataGridViewPolicies.Name = "dataGridViewPolicies";
-            this.dataGridViewPolicies.ReadOnly = true;
-            this.tableLayoutPanel3.SetRowSpan(this.dataGridViewPolicies, 6);
-            this.dataGridViewPolicies.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // NameColum
-            // 
-            this.NameColum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.NameColum, "NameColum");
-            this.NameColum.Name = "NameColum";
-            this.NameColum.ReadOnly = true;
-            // 
-            // EnabledColumn
-            // 
-            this.EnabledColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.EnabledColumn, "EnabledColumn");
-            this.EnabledColumn.Name = "EnabledColumn";
-            this.EnabledColumn.ReadOnly = true;
-            this.EnabledColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ColumnVMs
-            // 
-            this.ColumnVMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColumnVMs.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.ColumnVMs, "ColumnVMs");
-            this.ColumnVMs.Name = "ColumnVMs";
-            this.ColumnVMs.ReadOnly = true;
-            // 
-            // DescriptionColum
-            // 
-            this.DescriptionColum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.DescriptionColum, "DescriptionColum");
-            this.DescriptionColum.Name = "DescriptionColum";
-            this.DescriptionColum.ReadOnly = true;
-            // 
-            // ColumnNextArchive
-            // 
-            this.ColumnNextArchive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.ColumnNextArchive, "ColumnNextArchive");
-            this.ColumnNextArchive.Name = "ColumnNextArchive";
-            this.ColumnNextArchive.ReadOnly = true;
-            // 
-            // ColumnLastResult
-            // 
-            this.ColumnLastResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            resources.ApplyResources(this.ColumnLastResult, "ColumnLastResult");
-            this.ColumnLastResult.Name = "ColumnLastResult";
-            this.ColumnLastResult.ReadOnly = true;
             // 
             // buttonCancel
             // 
@@ -177,11 +136,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.buttonProperties.UseVisualStyleBackColor = true;
             this.buttonProperties.Click += new System.EventHandler(this.buttonProperties_Click);
             // 
-            // policyHistory1
-            // 
-            resources.ApplyResources(this.policyHistory1, "policyHistory1");
-            this.policyHistory1.Name = "policyHistory1";
-            // 
             // labelTopBlurb
             // 
             resources.ApplyResources(this.labelTopBlurb, "labelTopBlurb");
@@ -218,15 +172,107 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.panelPolicies, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.buttonProperties, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.labelPolicyTitle, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.dataGridViewPolicies, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.localServerTime1, 0, 7);
             this.tableLayoutPanel3.Controls.Add(this.buttonEnable, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.buttonRunNow, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.buttonDelete, 1, 4);
             this.tableLayoutPanel3.Controls.Add(this.buttonNew, 1, 1);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // panelPolicies
+            // 
+            this.panelPolicies.Controls.Add(this.panelLoading);
+            this.panelPolicies.Controls.Add(this.dataGridViewPolicies);
+            resources.ApplyResources(this.panelPolicies, "panelPolicies");
+            this.panelPolicies.Name = "panelPolicies";
+            this.tableLayoutPanel3.SetRowSpan(this.panelPolicies, 6);
+            // 
+            // panelLoading
+            // 
+            resources.ApplyResources(this.panelLoading, "panelLoading");
+            this.panelLoading.BackColor = System.Drawing.SystemColors.Window;
+            this.panelLoading.Controls.Add(this.labelLoading);
+            this.panelLoading.Controls.Add(this.pictureBoxSpinner);
+            this.panelLoading.Name = "panelLoading";
+            // 
+            // labelLoading
+            // 
+            resources.ApplyResources(this.labelLoading, "labelLoading");
+            this.labelLoading.Name = "labelLoading";
+            // 
+            // pictureBoxSpinner
+            // 
+            resources.ApplyResources(this.pictureBoxSpinner, "pictureBoxSpinner");
+            this.pictureBoxSpinner.Image = global::XenAdmin.Properties.Resources.ajax_loader;
+            this.pictureBoxSpinner.Name = "pictureBoxSpinner";
+            this.pictureBoxSpinner.TabStop = false;
+            // 
+            // dataGridViewPolicies
+            // 
+            this.dataGridViewPolicies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridViewPolicies.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewPolicies.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewPolicies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NameColum,
+            this.EnabledColumn,
+            this.ColumnVMs,
+            this.DescriptionColum,
+            this.ColumnLastResult});
+            resources.ApplyResources(this.dataGridViewPolicies, "dataGridViewPolicies");
+            this.dataGridViewPolicies.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridViewPolicies.MultiSelect = true;
+            this.dataGridViewPolicies.Name = "dataGridViewPolicies";
+            this.dataGridViewPolicies.ReadOnly = true;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPolicies.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewPolicies.SelectionChanged += new System.EventHandler(this.dataGridViewPolicies_SelectionChanged);
+            // 
+            // NameColum
+            // 
+            this.NameColum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.NameColum, "NameColum");
+            this.NameColum.Name = "NameColum";
+            this.NameColum.ReadOnly = true;
+            // 
+            // EnabledColumn
+            // 
+            this.EnabledColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.EnabledColumn, "EnabledColumn");
+            this.EnabledColumn.Name = "EnabledColumn";
+            this.EnabledColumn.ReadOnly = true;
+            this.EnabledColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ColumnVMs
+            // 
+            this.ColumnVMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColumnVMs.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.ColumnVMs, "ColumnVMs");
+            this.ColumnVMs.Name = "ColumnVMs";
+            this.ColumnVMs.ReadOnly = true;
+            // 
+            // DescriptionColum
+            // 
+            this.DescriptionColum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.DescriptionColum, "DescriptionColum");
+            this.DescriptionColum.Name = "DescriptionColum";
+            this.DescriptionColum.ReadOnly = true;
+            // 
+            // ColumnLastResult
+            // 
+            this.ColumnLastResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnLastResult, "ColumnLastResult");
+            this.ColumnLastResult.Name = "ColumnLastResult";
+            this.ColumnLastResult.ReadOnly = true;
             // 
             // tableLayoutPanel4
             // 
@@ -238,11 +284,116 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             // tableLayoutPanel5
             // 
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.panelHistory, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel3, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.policyHistory1, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // panelHistory
+            // 
+            this.panelHistory.Controls.Add(this.dataGridViewRunHistory);
+            this.panelHistory.Controls.Add(this.tableLayoutPanel2);
+            resources.ApplyResources(this.panelHistory, "panelHistory");
+            this.panelHistory.Name = "panelHistory";
+            // 
+            // dataGridViewRunHistory
+            // 
+            this.dataGridViewRunHistory.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewRunHistory.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewRunHistory.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewRunHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewRunHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnExpand,
+            this.ColumnResult,
+            this.ColumnDateTime,
+            this.ColumnDescription});
+            resources.ApplyResources(this.dataGridViewRunHistory, "dataGridViewRunHistory");
+            this.dataGridViewRunHistory.GridColor = System.Drawing.SystemColors.Control;
+            this.dataGridViewRunHistory.Name = "dataGridViewRunHistory";
+            this.dataGridViewRunHistory.ReadOnly = true;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRunHistory.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRunHistory.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewRunHistory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRunHistory_CellClick);
+            // 
+            // ColumnExpand
+            // 
+            this.ColumnExpand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.NullValue = "System.Drawing.Bitmap";
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
+            this.ColumnExpand.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.ColumnExpand, "ColumnExpand");
+            this.ColumnExpand.Name = "ColumnExpand";
+            this.ColumnExpand.ReadOnly = true;
+            // 
+            // ColumnResult
+            // 
+            this.ColumnResult.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnResult.DefaultCellStyle = dataGridViewCellStyle4;
+            resources.ApplyResources(this.ColumnResult, "ColumnResult");
+            this.ColumnResult.Name = "ColumnResult";
+            this.ColumnResult.ReadOnly = true;
+            // 
+            // ColumnDateTime
+            // 
+            this.ColumnDateTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.ColumnDateTime, "ColumnDateTime");
+            this.ColumnDateTime.Name = "ColumnDateTime";
+            this.ColumnDateTime.ReadOnly = true;
+            // 
+            // ColumnDescription
+            // 
+            this.ColumnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnDescription, "ColumnDescription");
+            this.ColumnDescription.Name = "ColumnDescription";
+            this.ColumnDescription.ReadOnly = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.labelHistory, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelShow, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.comboBoxTimeSpan, 2, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // labelHistory
+            // 
+            resources.ApplyResources(this.labelHistory, "labelHistory");
+            this.labelHistory.Name = "labelHistory";
+            // 
+            // labelShow
+            // 
+            resources.ApplyResources(this.labelShow, "labelShow");
+            this.labelShow.Name = "labelShow";
+            // 
+            // comboBoxTimeSpan
+            // 
+            resources.ApplyResources(this.comboBoxTimeSpan, "comboBoxTimeSpan");
+            this.comboBoxTimeSpan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTimeSpan.FormattingEnabled = true;
+            this.comboBoxTimeSpan.Items.AddRange(new object[] {
+            resources.GetString("comboBoxTimeSpan.Items"),
+            resources.GetString("comboBoxTimeSpan.Items1"),
+            resources.GetString("comboBoxTimeSpan.Items2")});
+            this.comboBoxTimeSpan.Name = "comboBoxTimeSpan";
+            this.comboBoxTimeSpan.SelectedIndexChanged += new System.EventHandler(this.comboBoxTimeSpan_SelectedIndexChanged);
+            // 
+            // bgWorker
+            // 
+            this.bgWorker.WorkerSupportsCancellation = true;
+            this.bgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgWorker_DoWork);
+            this.bgWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgWorker_RunWorkerCompleted);
             // 
             // ScheduledSnapshotsDialog
             // 
@@ -252,17 +403,26 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.Controls.Add(this.tableLayoutPanel5);
             this.Name = "ScheduledSnapshotsDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ScheduledSnapshotsDialog_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.VMProtectionPoliciesDialog_FormClosed);
             this.Load += new System.EventHandler(this.VMProtectionPoliciesDialog_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPolicies)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.panelPolicies.ResumeLayout(false);
+            this.panelLoading.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSpinner)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPolicies)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.panelHistory.ResumeLayout(false);
+            this.panelHistory.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRunHistory)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,7 +430,6 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
 
         #endregion
 
-        protected DataGridViewEx dataGridViewPolicies;
         protected System.Windows.Forms.Button buttonCancel;
         protected System.Windows.Forms.Button buttonNew;
         protected System.Windows.Forms.Button buttonEnable;
@@ -278,20 +437,34 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
         protected System.Windows.Forms.Button buttonRunNow;
         protected System.Windows.Forms.Label labelPolicyTitle;
         protected System.Windows.Forms.Button buttonProperties;
-        protected PolicyHistory policyHistory1;
         protected System.Windows.Forms.Label labelTopBlurb;
         protected LocalServerTime localServerTime1;
         protected XenAdmin.Controls.ChevronButton chevronButton1;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn NameColum;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn EnabledColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnVMs;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn DescriptionColum;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnNextArchive;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
         protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         protected XenAdmin.Controls.DeprecationBanner deprecationBanner;
+        private System.Windows.Forms.Panel panelHistory;
+        private System.Windows.Forms.Panel panelLoading;
+        private System.Windows.Forms.PictureBox pictureBoxSpinner;
+        private System.Windows.Forms.Label labelLoading;
+        private DataGridViewEx dataGridViewRunHistory;
+        private System.Windows.Forms.DataGridViewImageColumn ColumnExpand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnResult;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label labelHistory;
+        private System.Windows.Forms.Label labelShow;
+        private System.Windows.Forms.ComboBox comboBoxTimeSpan;
+        private System.ComponentModel.BackgroundWorker bgWorker;
+        private System.Windows.Forms.Panel panelPolicies;
+        protected DataGridViewEx dataGridViewPolicies;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameColum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EnabledColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVMs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescriptionColum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLastResult;
     }
 }

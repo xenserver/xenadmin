@@ -175,52 +175,5 @@ namespace XenAPI
 
             return string.Empty;
         }
-
-        /// <summary>
-        /// If hoursFromNow is 0, this returns only the top 10 messages regardless timestamp.
-        /// Note the messages are ordered by descending timestamp.
-        /// </summary>
-        public static List<PolicyAlert> GetAlerts(VMSS vmss, int hoursFromNow)
-        {
-            var messages = vmss.Connection.Cache.Messages;
-
-            var policyMessages = (from XenAPI.Message msg in messages
-                    where msg.cls == cls.VMSS
-                    group msg by msg.obj_uuid
-                    into g
-                    let gOrdered = g.OrderByDescending(m => m.timestamp).ToList()
-                    select new {PolicyUuid = g.Key, PolicyMessages = gOrdered})
-                .ToDictionary(x => x.PolicyUuid, x => x.PolicyMessages);
-
-            var listAlerts = new List<PolicyAlert>();
-
-            DateTime currentTime = DateTime.Now;
-            DateTime offset = currentTime.Add(new TimeSpan(-hoursFromNow, 0, 0));
-
-            List<XenAPI.Message> value;
-            if (policyMessages.TryGetValue(vmss.uuid, out value))
-            {
-                if (hoursFromNow == 0)
-                {
-                    for (int i = 0; i < 10 && i < value.Count; i++)
-                    {
-                        var msg = value[i];
-                        listAlerts.Add(new PolicyAlert(msg.priority, msg.name, msg.timestamp, msg.body, vmss.Name()));
-                    }
-                }
-                else
-                {
-                    foreach (var msg in value)
-                    {
-                        if (msg.timestamp >= offset)
-                            listAlerts.Add(new PolicyAlert(msg.priority, msg.name, msg.timestamp, msg.body, vmss.Name()));
-                        else
-                            break;
-                    }
-                }
-            }
-
-            return listAlerts;
-        }
     }
 }

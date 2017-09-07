@@ -12267,12 +12267,6 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>Snapshot sched&amp;ules ...</value>
   </data>
-  <data name="VMSS_DIALOG_TEXT" xml:space="preserve">
-    <value>Create a snapshot schedule for your VMs.</value>
-  </data>
-  <data name="VMSS_DIALOG_TITLE" xml:space="preserve">
-    <value>Snapshot schedules</value>
-  </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>Send &amp;email notifications about snapshot schedule job alerts</value>
   </data>
