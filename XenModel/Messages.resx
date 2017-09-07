@@ -8706,12 +8706,6 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_UPDATE_AVAILABLE" xml:space="preserve">
     <value>New Update Available - {0}</value>
   </data>
-  <data name="NEW_VMSS_PAGE_TEXT" xml:space="preserve">
-    <value>Use this wizard to define a snapshot schedule that will create automatic scheduled snapshot jobs for your VMs.</value>
-  </data>
-  <data name="NEW_VMSS_PAGE_TEXT_MORE" xml:space="preserve">
-    <value>To begin, enter a name for the schedule and a description (optional), then click Next.</value>
-  </data>
   <data name="NEW_VM_APPLIANCE" xml:space="preserve">
     <value>&amp;New vApp...</value>
   </data>
@@ -10698,7 +10692,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Deleting snapshots ...</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY" xml:space="preserve">
-    <value>Snapshot schedule</value>
+    <value>Snapshot Schedule</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY_TITLE" xml:space="preserve">
     <value>When do you want snapshots to be taken?</value>
@@ -12300,9 +12294,6 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMSS_NAME" xml:space="preserve">
     <value>Schedule Name</value>
   </data>
-  <data name="VMSS_NAME_FIELD_TEXT" xml:space="preserve">
-    <value>Schedule na&amp;me:</value>
-  </data>
   <data name="VMSS_NAME_TITLE" xml:space="preserve">
     <value>What do you want to call this schedule?</value>
   </data>
@@ -12322,7 +12313,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>schedule</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
-    <value>VMs in the snapshot schedule</value>
+    <value>Virtual Machines</value>
   </data>
   <data name="VMSS_VMS_TITLE" xml:space="preserve">
     <value>Select the VMs that you want to schedule snapshots for</value>
