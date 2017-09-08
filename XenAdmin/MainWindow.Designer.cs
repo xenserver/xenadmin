@@ -285,6 +285,7 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.disableCbtToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1308,6 +1309,7 @@ namespace XenAdmin
             this.snapshotToolStripMenuItem,
             this.convertToTemplateToolStripMenuItem,
             this.exportToolStripMenuItem,
+            this.disableCbtToolStripMenuItem,
             this.enablePVSReadcachingToolStripMenuItem,
             this.disablePVSReadcachingToolStripMenuItem,
             this.toolStripMenuItem12,
@@ -1879,6 +1881,12 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
+            // disableCbtToolStripMenuItem
+            // 
+            this.disableCbtToolStripMenuItem.Command = new XenAdmin.Commands.DisableChangedBlockTrackingCommand();
+            this.disableCbtToolStripMenuItem.Name = "disableCbtToolStripMenuItem";
+            resources.ApplyResources(this.disableCbtToolStripMenuItem, "disableCbtToolStripMenuItem");
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -2146,6 +2154,7 @@ namespace XenAdmin
         private CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
         private CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
         private CommandToolStripMenuItem disablePVSReadcachingToolStripMenuItem;
+        private CommandToolStripMenuItem disableCbtToolStripMenuItem;
     }
 
 }

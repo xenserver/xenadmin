@@ -119,6 +119,7 @@
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
+    <Compile Include="Commands\DisableChangedBlockTrackingCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />

@@ -563,18 +563,34 @@ namespace XenAdmin {
                 return ResourceManager.GetString("ACTION_DETACHING_MULTIPLE_VDIS_TITLE", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking.
+        /// </summary>
+        public static string ACTION_DISABLE_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_CHANGED_BLOCK_TRACKING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling Changed Block Tracking for VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable IGMP snooping.
         /// </summary>
-        public static string ACTION_DISABLE_IGMP_SNOOPING
-        {
-            get
-            {
+        public static string ACTION_DISABLE_IGMP_SNOOPING {
+            get {
                 return ResourceManager.GetString("ACTION_DISABLE_IGMP_SNOOPING", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable live patching.
         /// </summary>
@@ -621,11 +637,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled Changed Block Tracking for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLED_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLED_CHANGED_BLOCK_TRACKING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabled PVS-Accelerator for selected VMs.
         /// </summary>
         public static string ACTION_DISABLED_PVS_READ_CACHING {
             get {
                 return ResourceManager.GetString("ACTION_DISABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling Changed Block Tracking for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLING_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLING_CHANGED_BLOCK_TRACKING", resourceCulture);
             }
         }
         
@@ -934,18 +968,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("ACTION_DR_TASK_DESTROY_TITLE", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Enable IGMP Snooping.
+        ///   Looks up a localized string similar to Enable IGMP snooping.
         /// </summary>
-        public static string ACTION_ENABLE_IGMP_SNOOPING
-        {
-            get
-            {
+        public static string ACTION_ENABLE_IGMP_SNOOPING {
+            get {
                 return ResourceManager.GetString("ACTION_ENABLE_IGMP_SNOOPING", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enable live patching.
         /// </summary>
@@ -7334,6 +7366,42 @@ namespace XenAdmin {
         public static string CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL {
             get {
                 return ResourceManager.GetString("CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VM. Do you wish to continue?.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VM {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking on VM &quot;{0}&quot;.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VM_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VMs. Do you wish to continue?.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VMS {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking on selected VMs.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VMs_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMs_TITLE", resourceCulture);
             }
         }
         
@@ -20591,6 +20659,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking.
+        /// </summary>
+        public static string MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dis&amp;connect.
         /// </summary>
         public static string MAINWINDOW_DISCONNECT {
@@ -22676,6 +22753,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Network Options.
+        /// </summary>
+        public static string NETWORK_OPTIONS {
+            get {
+                return ResourceManager.GetString("NETWORK_OPTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The connection to the server was lost. No changes have been made..
         /// </summary>
         public static string NETWORK_RECONFIG_CONNECTION_LOST {
@@ -22692,35 +22778,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NETWORK_SETTINGS", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Network Options.
-        /// </summary>
-        public static string NETWORK_OPTIONS {
-            get
-            {
-                return ResourceManager.GetString("NETWORK_OPTIONS", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to IGMP snooping enabled.
-        /// </summary>
-        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED {
-            get {
-                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to IGMP snooping disabled.
-        /// </summary>
-        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED {
-            get {
-                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} on {1}.
         /// </summary>
@@ -22868,6 +22926,24 @@ namespace XenAdmin {
         public static string NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL {
             get {
                 return ResourceManager.GetString("NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IGMP snooping disabled.
+        /// </summary>
+        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED {
+            get {
+                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IGMP snooping enabled.
+        /// </summary>
+        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED {
+            get {
+                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED", resourceCulture);
             }
         }
         
@@ -29969,7 +30045,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("SECURITYEDITPAGE_SUBTEXT_TLS", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select a filter....
         /// </summary>
