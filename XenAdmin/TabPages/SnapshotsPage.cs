@@ -153,7 +153,7 @@ namespace XenAdmin.TabPages
                 if (vmss == null || Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule))
                 {
                     labelVMPPInfo.Text = Messages.THIS_VM_IS_NOT_IN_VMSS;
-                    pictureBoxVMPPInfo.Image = Resources._000_BackupMetadata_h32bit_16;
+                    pictureBoxVMPPInfo.Image = Resources._000_Info3_h32bit_16;
 
                     linkLabelVMPPInfo.Text = Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule) ? Messages.TELL_ME_MORE : Messages.VIEW_VMSS_POLICIES;
 
@@ -478,6 +478,9 @@ namespace XenAdmin.TabPages
                 case "name_label":
                     BuildList();
                     RefreshDetailsGroupBox(true);
+                    break;
+                case "snapshot_schedule":
+                    RefreshVMSSPanel();
                     break;
                 case "name_description":
                 case "tags":

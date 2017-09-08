@@ -23313,24 +23313,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this wizard to define a snapshot schedule that will create automatic scheduled snapshot jobs for your VMs..
-        /// </summary>
-        public static string NEW_VMSS_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("NEW_VMSS_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To begin, enter a name for the schedule and a description (optional), then click Next..
-        /// </summary>
-        public static string NEW_VMSS_PAGE_TEXT_MORE {
-            get {
-                return ResourceManager.GetString("NEW_VMSS_PAGE_TEXT_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You need to shutdown and then restart the VM before it can access the new disk..
         /// </summary>
         public static string NEWDISKWIZARD_MESSAGE {
@@ -30723,7 +30705,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshot schedule.
+        ///   Looks up a localized string similar to Snapshot Schedule.
         /// </summary>
         public static string SNAPSHOT_FREQUENCY {
             get {
@@ -36169,15 +36151,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Schedule na&amp;me:.
-        /// </summary>
-        public static string VMSS_NAME_FIELD_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_NAME_FIELD_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to What do you want to call this schedule?.
         /// </summary>
         public static string VMSS_NAME_TITLE {
@@ -36232,7 +36205,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs in the snapshot schedule.
+        ///   Looks up a localized string similar to Virtual Machines.
         /// </summary>
         public static string VMSS_VMS {
             get {
