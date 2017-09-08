@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get 
             { 
-                return SelectedServers.Select(host => Helpers.GetPool(host.Connection)).Where(pool => pool != null).Distinct().ToList();
+                return SelectedServers.Select(host => Helpers.GetPoolOfOne(host.Connection)).Where(pool => pool != null).Distinct().ToList();
             }
         }
 
