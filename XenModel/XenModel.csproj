@@ -128,6 +128,7 @@
     <Compile Include="Actions\DR\VdiOpenDatabaseAction.cs" />
     <Compile Include="Actions\VDI\CreateDiskAction.cs" />
     <Compile Include="Actions\VDI\MigrateVirtualDiskAction.cs" />
+    <Compile Include="Actions\VDI\VDIDisableCbtAction.cs" />
     <Compile Include="Actions\VMAppliances\AssignVMsToVMApplianceAction.cs" />
     <Compile Include="Actions\VMAppliances\CreateVMApplianceAction.cs" />
     <Compile Include="Actions\VMAppliances\DestroyVMApplianceAction.cs" />

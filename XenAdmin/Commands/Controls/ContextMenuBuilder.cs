@@ -888,6 +888,7 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new ExportCommand(mainWindow, selection));
                 items.AddIfEnabled(new TakeSnapshotCommand(mainWindow, selection));
                 items.AddIfEnabled(new ConvertVMToTemplateCommand(mainWindow, selection));
+                items.AddIfEnabled(new DisableChangedBlockTrackingCommand(mainWindow, selection));
                 items.AddIfEnabled(new AssignGroupToolStripMenuItem<VMSS>(mainWindow, selection, true));
                 items.AddIfEnabled(new AssignGroupToolStripMenuItem<VM_appliance>(mainWindow, selection, true));
                 items.AddSeparator();

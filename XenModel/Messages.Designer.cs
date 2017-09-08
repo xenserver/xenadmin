@@ -565,6 +565,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking.
+        /// </summary>
+        public static string ACTION_DISABLE_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_CHANGED_BLOCK_TRACKING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling Changed Block Tracking for VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable live patching.
         /// </summary>
         public static string ACTION_DISABLE_LIVE_PATCHING {
@@ -610,11 +628,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled Changed Block Tracking for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLED_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLED_CHANGED_BLOCK_TRACKING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabled PVS-Accelerator for selected VMs.
         /// </summary>
         public static string ACTION_DISABLED_PVS_READ_CACHING {
             get {
                 return ResourceManager.GetString("ACTION_DISABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling Changed Block Tracking for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLING_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLING_CHANGED_BLOCK_TRACKING", resourceCulture);
             }
         }
         
@@ -7312,6 +7348,42 @@ namespace XenAdmin {
         public static string CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL {
             get {
                 return ResourceManager.GetString("CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VM. Do you wish to continue?.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VM {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking on VM &quot;{0}&quot;.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VM_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VMs. Do you wish to continue?.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VMS {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking on selected VMs.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VMs_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMs_TITLE", resourceCulture);
             }
         }
         
@@ -20556,6 +20628,15 @@ namespace XenAdmin {
         public static string MAINWINDOW_DETACH_SR {
             get {
                 return ResourceManager.GetString("MAINWINDOW_DETACH_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking.
+        /// </summary>
+        public static string MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING", resourceCulture);
             }
         }
         
