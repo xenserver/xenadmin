@@ -409,10 +409,11 @@ namespace XenAdmin.TabPages
 
                 foreach (Alert alert in alerts)
                 {
-                    if (!(alert is XenServerPatchAlert))
+                    var patchAlert = alert as XenServerPatchAlert;
+                    if (patchAlert == null)
                         continue;
-                    if (alert.AppliesTo.Contains(host.Name))
-                        updatesList.Add(alert.Name);
+                    if (patchAlert.DistinctHosts.Contains(host))
+                        updatesList.Add(patchAlert.Name);
                 }
 
                 updatesList.Sort(StringUtility.NaturalCompare);
