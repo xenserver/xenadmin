@@ -193,7 +193,7 @@ namespace XenAdmin.Wizards.ImportWizard
 					var networks = m_selectedConnection.Cache.Networks;
 					foreach (XenAPI.Network network in networks)
 					{
-						if (m_networkGridView.Rows.Count < m_vm.MaxVIFsAllowed() && ShowNetwork(network) && network.AutoPlug)
+						if (m_networkGridView.Rows.Count < m_vm.MaxVIFsAllowed() && ShowNetwork(network) && network.GetAutoPlug())
 						{
 							AddVIFRow(new VIF
 							          	{

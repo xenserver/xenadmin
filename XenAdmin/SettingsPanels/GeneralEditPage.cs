@@ -191,7 +191,7 @@ namespace XenAdmin.SettingsPanels
             if (xenObjectCopy is Host)
             {
                 Host host = xenObjectCopy as Host;
-                ServerIQN = host.iscsi_iqn;
+                ServerIQN = host.GetIscsiIqn();
                 txtIQN.Visible = true;
                 lblIQN.Visible = true;
                 labelIqnHint.Visible = true;
@@ -257,7 +257,7 @@ namespace XenAdmin.SettingsPanels
                 if (xenObjectCopy is Host)
                 {
                     Host host = xenObjectCopy as Host;
-                    if (host.iscsi_iqn != ServerIQN)
+                    if (host.GetIscsiIqn() != ServerIQN)
                         return true;
                 }
 
@@ -279,7 +279,7 @@ namespace XenAdmin.SettingsPanels
             {
                 Host host = xenObjectCopy as Host;
 
-                if (Helpers.ValidateIscsiIQN(ServerIQN) || ServerIQN == host.iscsi_iqn)
+                if (Helpers.ValidateIscsiIQN(ServerIQN) || ServerIQN == host.GetIscsiIqn())
                     return;
 
                 // Allow invalid IQN only if previously set from CLI
@@ -306,11 +306,9 @@ namespace XenAdmin.SettingsPanels
             if (ObjectDescription != xenObjectCopy.Description())
                 xenObjectCopy.Set("name_description", ObjectDescription);
 
-            if (xenObjectCopy is Host)
-            {
-                Host host = xenObjectCopy as Host;
-                host.iscsi_iqn = ServerIQN;
-            }
+            var host = xenObjectCopy as Host;
+            if (host != null)
+                host.SetIscsiIqn(ServerIQN);
 
             if (FolderChanged || TagsChanged)
                 return new GeneralEditPageAction(xenObjectOrig, xenObjectCopy, folderEditor.Path, tagsEditor.Tags, true);
@@ -327,7 +325,7 @@ namespace XenAdmin.SettingsPanels
                 Host host = xenObjectCopy as Host;
 
                 // Allow invalid IQN only if it was set by CLI
-                if (ServerIQN != host.iscsi_iqn)
+                if (ServerIQN != host.GetIscsiIqn())
                 {
                     _ValidToSave &= Helpers.ValidateIscsiIQN(txtIQN.Text.Trim());
                 }

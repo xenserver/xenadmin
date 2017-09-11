@@ -3430,12 +3430,6 @@
     <Compile Include="Dialogs\VMDialogs\MoveVMDialog.Designer.cs">
       <DependentUpon>MoveVMDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\ScheduledSnapshots\PolicyHistory.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ScheduledSnapshots\PolicyHistory.Designer.cs">
-      <DependentUpon>PolicyHistory.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -5512,15 +5506,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VMDialogs\SelectVMsToSuspendDialog.zh-CN.resx">
       <DependentUpon>SelectVMsToSuspendDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.ja.resx">
-      <DependentUpon>PolicyHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.resx">
-      <DependentUpon>PolicyHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.zh-CN.resx">
-      <DependentUpon>PolicyHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.ja.resx">
       <DependentUpon>ScheduledSnapshotsDialog.cs</DependentUpon>

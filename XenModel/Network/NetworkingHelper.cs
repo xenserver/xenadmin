@@ -239,7 +239,7 @@ namespace XenAdmin.Network
         public static PIF CopyIPConfig(PIF src, PIF dest)
         {
             PIF result = (PIF)dest.Clone();
-            result.ManagementPurpose = src.ManagementPurpose;
+            result.SetManagementPurspose(src.GetManagementPurpose());
             result.ip_configuration_mode = src.ip_configuration_mode;
             result.IP = src.IP;
             result.netmask = src.netmask;

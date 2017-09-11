@@ -1406,7 +1406,7 @@ namespace XenAdmin.Core
             {
                 if (vm.HaCanProtect(showHiddenVMs))
                 {
-                    result[vm] = vm.HARestartPriority;
+                    result[vm] = vm.HARestartPriority();
                 }
             }
             return result;
@@ -1446,7 +1446,7 @@ namespace XenAdmin.Core
             {
                 if (vm.HaCanProtect(showHiddenVMs))
                 {
-                    result[vm] = new VMStartupOptions(vm.order, vm.start_delay, vm.HARestartPriority);
+                    result[vm] = new VMStartupOptions(vm.order, vm.start_delay, vm.HARestartPriority());
                 }
             }
             return result;

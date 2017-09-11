@@ -64,7 +64,7 @@ namespace XenAdmin.Actions.VMActions
 
         public static void DestroyVM(Session session, VM vm, bool deleteAllOwnerDisks)
         {
-            DestroyVM(session, vm, deleteAllOwnerDisks ? vm.Connection.ResolveAll(vm.VBDs).FindAll(x=>x.IsOwner) : new List<VBD>(), new List<VM>());
+            DestroyVM(session, vm, deleteAllOwnerDisks ? vm.Connection.ResolveAll(vm.VBDs).FindAll(x => x.GetIsOwner()) : new List<VBD>(), new List<VM>());
         }
 
 

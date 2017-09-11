@@ -31,40 +31,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
-using XenAdmin.Network;
-using XenAdmin.Actions;
+
 
 namespace XenAPI
 {
     public partial class VMSS 
     {
-        public DateTime GetNextRunTime()
+        public DateTime GetNextRunTime(DateTime serverLocalTime)
         {
-            var time = Host.get_server_localtime(Connection.Session, Helpers.GetMaster(Connection).opaque_ref);
-
             if (frequency == vmss_frequency.hourly)
             {
-                return GetHourlyDate(time, Convert.ToInt32(BackupScheduleMin()));
+                return GetHourlyDate(serverLocalTime, BackupScheduleMin());
             }
             if (frequency == vmss_frequency.daily)
             {
-
-                var hour = Convert.ToInt32(BackupScheduleHour());
-                var min = Convert.ToInt32(BackupScheduleMin());
-                return GetDailyDate(time, min, hour);
-
+                return GetDailyDate(serverLocalTime, BackupScheduleMin(), BackupScheduleHour());
             }
             if (frequency == vmss_frequency.weekly)
             {
-                var hour = Convert.ToInt32(BackupScheduleHour());
-                var min = Convert.ToInt32(BackupScheduleMin());
-                return GetWeeklyDate(time, hour, min, new List<DayOfWeek>(DaysOfWeekBackup()));
+                return GetWeeklyDate(serverLocalTime, BackupScheduleHour(), BackupScheduleMin(), new List<DayOfWeek>(DaysOfWeekBackup()));
             }
             return new DateTime();
-
         }
 
         public static DateTime GetDailyDate(DateTime time, int min, int hour)
@@ -144,16 +135,6 @@ namespace XenAPI
             }
         }
         
-        public static string TryGetKey(Dictionary<string, string> dict, string key)
-        {
-            string r;
-            if (dict.TryGetValue(key, out r))
-            {
-                return r;
-            }
-            return "";
-        }
-
         public override string Name()
         {
             return name_label;
@@ -164,44 +145,33 @@ namespace XenAPI
             return name_description;
         }
 
-        public string BackupScheduleMin()
+        public int BackupScheduleMin()
         {
-            return TryGetKey(schedule, "min");
+            string outStr;
+            int result;
+            if (schedule.TryGetValue("min", out outStr) && int.TryParse(outStr, out result))
+                return result;
+
+            return 0;
         }
 
-        public string BackupScheduleHour()
+        public int BackupScheduleHour()
         {
-            return TryGetKey(schedule, "hour");
+            string outStr;
+            int result;
+            if (schedule.TryGetValue("hour", out outStr) && int.TryParse(outStr, out result))
+                return result;
+
+            return 0;
         }
 
         public string BackupScheduleDays()
         {
-            return TryGetKey(schedule, "days");
-        }
+            string outStr;
+            if (schedule.TryGetValue("days", out outStr))
+                return outStr;
 
-        private List<PolicyAlert> _alerts = new List<PolicyAlert>();
-
-        public List<PolicyAlert> Alerts
-        {
-            get
-            {
-                return _alerts;
-            }
-            set { _alerts = value; }
-        }
-
-        public string LastResult()
-        {
-            if (_alerts.Count > 0)
-            {
-                var listRecentAlerts = new List<PolicyAlert>(_alerts);
-                listRecentAlerts.Sort((x, y) => y.Time.CompareTo(x.Time));
-                if (listRecentAlerts[0].Type == "info")
-                    return Messages.VMSS_SUCCEEDED;
-
-                return Messages.FAILED;
-            }
-            return Messages.NOT_YET_RUN;
+            return string.Empty;
         }
     }
 }

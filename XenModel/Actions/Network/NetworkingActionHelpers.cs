@@ -118,7 +118,7 @@ namespace XenAdmin.Actions
         /// <param name="existing_pif">The PIF to configure</param>
         internal static void BringUp(AsyncAction action, PIF new_pif, string new_ip, PIF existing_pif, int hi)
         {
-            bool primary = string.IsNullOrEmpty(new_pif.ManagementPurpose);
+            bool primary = string.IsNullOrEmpty(new_pif.GetManagementPurpose());
 
             int lo = action.PercentComplete;
             int inc = (hi - lo) / (primary ? 2 : 3);
@@ -129,7 +129,7 @@ namespace XenAdmin.Actions
 
             PIF p = (PIF)existing_pif.Clone();
             p.disallow_unplug = !primary;
-            p.ManagementPurpose = new_pif.ManagementPurpose;
+            p.SetManagementPurspose(new_pif.GetManagementPurpose());
             p.SaveChanges(action.Session);
 
             action.PercentComplete = lo + inc;
@@ -208,7 +208,7 @@ namespace XenAdmin.Actions
         /// </summary>
         internal static void MoveManagementInterfaceName(AsyncAction action, PIF from, PIF to)
         {
-            string managementPurpose = from.ManagementPurpose;
+            string managementPurpose = from.GetManagementPurpose();
 
             if (string.IsNullOrEmpty(managementPurpose))
                 return;
@@ -216,11 +216,11 @@ namespace XenAdmin.Actions
             log.DebugFormat("Moving management interface name from {0} to {1}...", from.uuid, to.uuid);
 
             PIF to_clone = (PIF)to.Clone();
-            to_clone.ManagementPurpose = from.ManagementPurpose;
+            to_clone.SetManagementPurspose(from.GetManagementPurpose());
             to_clone.SaveChanges(action.Session);
 
             PIF from_clone = (PIF)from.Clone();
-            from_clone.ManagementPurpose = null;
+            from_clone.SetManagementPurspose(null);
             from_clone.SaveChanges(action.Session);
 
             log.DebugFormat("Moving management interface name from {0} to {1} done.", from.uuid, to.uuid);
@@ -236,7 +236,7 @@ namespace XenAdmin.Actions
 
             PIF p = (PIF)pif.Clone();
             p.disallow_unplug = false;
-            p.ManagementPurpose = null;
+            p.SetManagementPurspose(null);
             p.SaveChanges(action.Session);
 
             action.PercentComplete = hi;
@@ -257,7 +257,7 @@ namespace XenAdmin.Actions
 
             PIF p = (PIF)pif.Clone();
             p.disallow_unplug = false;
-            p.ManagementPurpose = null;
+            p.SetManagementPurspose(null);
             p.SaveChanges(action.Session);
 
             action.PercentComplete = mid;

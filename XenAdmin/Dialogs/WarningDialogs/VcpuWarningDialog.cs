@@ -61,7 +61,7 @@ namespace XenAdmin.Dialogs
                 log.DebugFormat("Setting IgnoreExcessiveVcpus flag to true for VM {0}", vm.Name());
 
                 VM copyVM = (VM)vm.Clone();
-                copyVM.IgnoreExcessiveVcpus = true;
+                copyVM.SetIgnoreExcessiveVcpus(true);
                 // Save changes to server
                 try
                 {

@@ -119,15 +119,16 @@ namespace XenAPI
             }
         }
 
-        public bool AutoPlug
+        public bool GetAutoPlug()
         {
-            get
-            {
-                // Note that this is not equivalent to BoolKey, because here
-                // absence of the key gives AutoPlug=true, not false.
-                return Get(other_config, "automatic") != "false";
-            }
-            set { other_config = SetDictionaryKey(other_config, "automatic", value ? "true" : "false"); }
+            // Note that this is not equivalent to BoolKey, because here
+            // absence of the key gives AutoPlug=true, not false.
+            return Get(other_config, "automatic") != "false";
+        }
+
+        public void SetAutoPlug(bool value)
+        {
+            other_config = SetDictionaryKey(other_config, "automatic", value ? "true" : "false");
         }
 
         public override bool Show(bool showHiddenVMs)

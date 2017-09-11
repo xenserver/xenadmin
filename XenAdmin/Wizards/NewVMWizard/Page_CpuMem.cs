@@ -140,7 +140,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             labelInitialVCPUs.Text = Messages.VM_CPUMEMPAGE_INITIAL_VCPUS_LABEL;
             labelInitialVCPUs.Visible = comboBoxInitialVCPUs.Visible = isVcpuHotplugSupported;
 
-            comboBoxTopology.Populate(Template.VCPUs_at_startup, Template.VCPUs_max, Template.CoresPerSocket, Template.MaxCoresPerSocket());
+            comboBoxTopology.Populate(Template.VCPUs_at_startup, Template.VCPUs_max, Template.GetCoresPerSocket(), Template.MaxCoresPerSocket());
             PopulateVCPUs(Template.MaxVCPUsAllowed(), isVcpuHotplugSupported ? Template.VCPUs_max : Template.VCPUs_at_startup);
 
             if (isVcpuHotplugSupported)

@@ -96,7 +96,7 @@ namespace XenAdmin.Commands
                 return false;
             if (vm.power_state != vm_power_state.Running)
                 return false;
-            if (vdi.type == vdi_type.system && vbd.IsOwner)
+            if (vdi.type == vdi_type.system && vbd.GetIsOwner())
                 return false;
             if (AreIODriversNeededAndMissing(vm))
                 return false;
@@ -137,7 +137,7 @@ namespace XenAdmin.Commands
                     Messages.CANNOT_DEACTIVATE_VDI_VM_NOT_RUNNING,
                     Helpers.GetName(vm).Ellipsise(50));
 
-            if (vdi.type == vdi_type.system && vbd.IsOwner)
+            if (vdi.type == vdi_type.system && vbd.GetIsOwner())
                 return Messages.TOOLTIP_DEACTIVATE_SYSVDI;
 
             if (AreIODriversNeededAndMissing(vm))

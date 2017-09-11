@@ -316,7 +316,7 @@ namespace XenAdmin.Dialogs
             vdi.name_description = DescriptionTextBox.Text;
             vdi.sharable = DiskTemplate != null ? DiskTemplate.sharable : false;
             vdi.type = DiskTemplate != null ? DiskTemplate.type : vdi_type.user;
-            vdi.VMHint = TheVM != null ? TheVM.uuid : "";
+            vdi.SetVmHint(TheVM != null ? TheVM.uuid : "");
             return vdi;
         }
 
@@ -334,7 +334,7 @@ namespace XenAdmin.Dialogs
             vbd.empty = false;
             vbd.type = XenAPI.vbd_type.Disk;
             vbd.mode = XenAPI.vbd_mode.RW;
-            vbd.IsOwner = true;
+            vbd.SetIsOwner(true);
             vbd.unpluggable = true;
             return vbd;
 

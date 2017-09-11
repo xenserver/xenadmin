@@ -271,7 +271,7 @@ namespace XenAdmin.Actions
             vdi.name_description = Helpers.ElyOrGreater(Connection) ? Messages.UPDATE_TEMP_VDI_DESCRIPTION : Messages.SUPP_PACK_TEMP_VDI_DESCRIPTION;
             vdi.sharable = false;
             vdi.type = vdi_type.user;
-            vdi.VMHint = "";
+            vdi.SetVmHint("");
             //mark the vdi as being a temporary supp pack iso
             vdi.other_config = new Dictionary<string, string> {{"supp_pack_iso", "true"}};
             return vdi;

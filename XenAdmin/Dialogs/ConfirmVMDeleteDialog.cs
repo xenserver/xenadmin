@@ -106,7 +106,7 @@ namespace XenAdmin.Dialogs
                                 item.SubItems.Add(vm.Name());
                                 item.Group = listView.Groups["listViewGroupAttachedDisks"];
                                 item.Tag = vbd;
-                                item.Checked = vbd.IsOwner;
+                                item.Checked = vbd.GetIsOwner();
                                 foreach (ListViewItem.ListViewSubItem subitem in item.SubItems)
                                     subitem.Tag = subitem.Text;
                                 listView.Items.Add(item);

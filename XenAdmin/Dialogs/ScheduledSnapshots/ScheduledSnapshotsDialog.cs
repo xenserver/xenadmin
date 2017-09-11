@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -38,8 +39,10 @@ using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Properties;
 using XenAdmin.Wizards.NewPolicyWizard;
 using XenAPI;
+
 
 namespace XenAdmin.Dialogs.ScheduledSnapshots
 {
@@ -47,74 +50,129 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public readonly Pool Pool;
+        private readonly Pool Pool;
+        private bool updatingPolicies;
+
         public ScheduledSnapshotsDialog(Pool pool)
             : base(pool.Connection)
         {
             Pool = pool;
             InitializeComponent();      
-            localServerTime1.Pool = pool;
             chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
             chevronButton1.Image = Properties.Resources.PDChevronDown;
-            policyHistory1.Visible = false;
+
+            ColumnExpand.DefaultCellStyle.NullValue = null;
+            comboBoxTimeSpan.SelectedIndex = 0;
+            dataGridViewRunHistory.Columns[2].ValueType = typeof(DateTime);
+            dataGridViewRunHistory.Columns[2].DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HM;
+            panelHistory.Visible = false;
             RefreshPoolTitle(pool);
+            RefreshButtons();
         }
+
         public ScheduledSnapshotsDialog() { }
-        
-        public class PolicyRow : DataGridViewRow
+
+        private PolicyRow SelectedVmssRow
+        {
+            get
+            {
+                if (dataGridViewPolicies.SelectedRows.Count > 0)
+                    return dataGridViewPolicies.SelectedRows[0] as PolicyRow;
+
+                return null;
+            }
+        }
+
+        private int RunHistoryTimeSpan
+        {
+            get
+            {
+                switch (comboBoxTimeSpan.SelectedIndex)
+                {
+                    case 0: //top 10 messages (default)
+                        return 0;
+                    case 1:
+                        return 24; //messages from past 24 Hrs
+                    case 2:
+                        return 7 * 24; //messages from last 7 days
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        private class PolicyRow : DataGridViewRow
         {
             private DataGridViewTextBoxCell _name = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _numVMs = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _nextRunTime = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell _status = new DataGridViewTextBoxCell();
-            private DataGridViewTextBoxCell _nextArchiveRuntime = new DataGridViewTextBoxCell();
             private DataGridViewTextAndImageCell _lastResult = new DataGridViewTextAndImageCell();
-            public readonly VMSS _policy;
-            public PolicyRow(VMSS policy)
-            {
-                Cells.Add(_name);
-                Cells.Add(_status);
-                Cells.Add(_numVMs);
-                Cells.Add(_nextRunTime);
-                Cells.Add(_nextArchiveRuntime);
-                Cells.Add(_lastResult);
-                _policy = policy;
-                RefreshRow();
-            }
 
-            private DateTime? GetVMPPDateTime(Func<DateTime> getDateTimeFunc)
+            private readonly DateTime? _serverLocalTime;
+            private readonly VMSS _policy;
+            private readonly List<XenAPI.Message> _alertMessages;
+
+            public bool IsBusy { get; set; }
+
+            public VMSS Policy { get { return _policy; } }
+
+            public List<XenAPI.Message> AlertMessages { get { return _alertMessages; } }
+
+            public string PolicyName { get; private set; }
+            public string PolicyStatus { get; private set; }
+            public int PolicyVmCount { get; private set; }
+            public DateTime? PolicyNextRunTime { get; private set; }
+            public string PolicyLastResult { get; private set; }
+            private Bitmap PolicyLastResultImage { get; set; }
+
+            public PolicyRow(VMSS policy, List<XenAPI.Message> alertMessages, DateTime? serverLocalTime)
             {
-                try
-                {
-                    return getDateTimeFunc();
-                }
-                catch (Exception e)
-                {
-                    log.Error("An error occurred while obtaining VMPP date time: ", e);
-                    return null;
-                }
+                Cells.AddRange(_name, _status, _numVMs, _nextRunTime, _lastResult);
+                _policy = policy;
+                _alertMessages = alertMessages;
+                _serverLocalTime = serverLocalTime;
+                RefreshRow();
             }
 
             private void RefreshRow()
             {
-                _name.Value = _policy.Name();
-                _numVMs.Value = _policy.VMs.FindAll(vm => _policy.Connection.Resolve(vm).is_a_real_vm()).Count;
-                _status.Value = _policy.enabled ? Messages.ENABLED : Messages.DISABLED;
+                PolicyName = _policy.Name();
+                PolicyVmCount = _policy.VMs.FindAll(vm => _policy.Connection.Resolve(vm).is_a_real_vm()).Count;
+                PolicyStatus = _policy.enabled ? Messages.ENABLED : Messages.DISABLED;
 
-                var policyLastResult = _policy.LastResult();
-                _lastResult.Value = policyLastResult;
-                if (policyLastResult == Messages.FAILED)
-                    _lastResult.Image = Properties.Resources._075_WarningRound_h32bit_16;
-                else if (policyLastResult == Messages.NOT_YET_RUN)
-                    _lastResult.Image = null;
+                if (_serverLocalTime.HasValue)
+                    PolicyNextRunTime = _policy.GetNextRunTime(_serverLocalTime.Value);
                 else
-                    _lastResult.Image = Properties.Resources._075_TickRound_h32bit_16;
+                    PolicyNextRunTime = null;
 
-                DateTime? nextRunTime = GetVMPPDateTime(() => _policy.GetNextRunTime());
-                _nextRunTime.Value = nextRunTime.HasValue
-                                         ? HelpersGUI.DateTimeToString(nextRunTime.Value, Messages.DATEFORMAT_DMY_HM,
-                                                                       true)
-                                         : Messages.VMSS_HOST_NOT_LIVE;
+                if (_alertMessages.Count > 0)
+                {
+                    if (_alertMessages[0].priority == PolicyAlert.INFO_PRIORITY)
+                    {
+                        PolicyLastResult = Messages.VMSS_SUCCEEDED;
+                        PolicyLastResultImage = Resources._075_TickRound_h32bit_16;
+                    }
+                    else
+                    {
+                        PolicyLastResult = Messages.FAILED;
+                        PolicyLastResultImage = Resources._075_WarningRound_h32bit_16;
+                    }
+                }
+                else
+                {
+                    PolicyLastResult = Messages.NOT_YET_RUN;
+                    PolicyLastResultImage = null;
+                }
+
+                _name.Value = PolicyName;
+                _numVMs.Value = PolicyVmCount;
+                _status.Value = PolicyStatus;
+                _lastResult.Value = PolicyLastResult;
+                _lastResult.Image = PolicyLastResultImage;
+                _nextRunTime.Value = PolicyNextRunTime.HasValue
+                    ? HelpersGUI.DateTimeToString(PolicyNextRunTime.Value, Messages.DATEFORMAT_DMY_HM, true)
+                    : Messages.VMSS_HOST_NOT_LIVE;
             }
         }
 
@@ -132,89 +190,133 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                         protectedVMs++;
                 }
             }
-            this.Text = Messages.VMSS_DIALOG_TITLE;
-            label2.Text = Messages.VMSS_DIALOG_TEXT;
+
             labelPolicyTitle.Text = string.Format(Helpers.IsPool(pool.Connection)
                                                         ? Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_POOL
                                                         : Messages.VMSS_SCHEDULED_SNAPSHOTS_DEFINED_FOR_SERVER,
                                                     pool.Name().Ellipsise(45), protectedVMs, realVMs);
         }
 
-        void VMSSCollectionChanged(object sender, EventArgs e)
+        private void VMSSCollectionChanged(object sender, EventArgs e)
         {
             LoadPolicies();
         }
 
         private void LoadPolicies()
         {
-            dataGridView1.SuspendLayout();
-            var selectedPolicy = currentSelected;
-            dataGridView1.Rows.Clear();
-            var policyList = Pool.Connection.Cache.VMSSs;
-
-            /* creating a dictionary to hold (policy_uuid, message list) */
-
-            Dictionary<string, List<XenAPI.Message>> policyMessage = new Dictionary<string, List<XenAPI.Message>>();
-
-            /* populate the dictionary with policy uuid */
-
-            foreach (var policy in policyList)
-            {
-                policy.Alerts.Clear();
-                List<XenAPI.Message> messageList = new List<XenAPI.Message>();
-                policyMessage.Add(policy.uuid, messageList);
-            }
-
-            /* iterate through all messages and populate the dictionary with message list */
-            var messages = Pool.Connection.Cache.Messages;
-            List<XenAPI.Message> value = new List<XenAPI.Message>();
-
-            foreach (var message in messages)
-            {
-                if (message.cls == cls.VMSS)
-                {
-                    if (policyMessage.TryGetValue(message.obj_uuid, out value))
-                    {
-                        value.Add(message);
-                    }
-                }
-            }
-
-            /* add only 10 messages for each policy and referesh the rows*/
-
-            foreach (var policy in policyList)
-            {
-                /* message list need not be always sorted */
-
-                var messageListSorted =
-                    policyMessage[policy.uuid].OrderByDescending(message => message.timestamp).ToList();
-                for (int messageCount = 0; messageCount < 10 && messageCount < messageListSorted.Count; messageCount++)
-                {
-                    policy.Alerts.Add(new PolicyAlert(messageListSorted[messageCount].priority,
-                        messageListSorted[messageCount].name, messageListSorted[messageCount].timestamp,
-                        messageListSorted[messageCount].body, policy.Name()));
-                }
-                if (dataGridView1.ColumnCount > 0)
-                    dataGridView1.Rows.Add(new PolicyRow(policy));
-            }
-
-            RefreshButtons();
-            if (selectedPolicy != null)
-            {
-                foreach (PolicyRow row in dataGridView1.Rows)
-                {
-                    if (row._policy.uuid == selectedPolicy.uuid)
-                    {
-                        dataGridView1.ClearSelection();
-                        row.Selected = true;
-                        break;
-                    }
-                }
-            }
-            RefreshPoolTitle(Pool);
-            dataGridView1.ResumeLayout();
+            var action = new LoadVmssAction(Pool.Connection);
+            action.Completed += action_Completed;
+            action.RunAsync();
         }
 
+        private void action_Completed(ActionBase sender)
+        {
+            var action = sender as LoadVmssAction;
+            if (action == null || !action.Succeeded)
+                return;
+
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                try
+                {
+                    panelLoading.Visible = false;
+                    updatingPolicies = true;
+
+                    var selectedPolicyUuids = (from PolicyRow row in dataGridViewPolicies.SelectedRows
+                        select row.Policy.uuid).ToList();
+
+                    var rowList = from kvp in action.SnapshotSchedules select new PolicyRow(kvp.Key, kvp.Value, action.ServerLocalTime);
+
+                    Func<PolicyRow, object> comparer = p => p.PolicyName;
+                    if (dataGridViewPolicies.SortedColumn != null)
+                    {
+                        if (dataGridViewPolicies.SortedColumn.Index == NameColum.Index)
+                            comparer = p => p.PolicyName;
+                        else if (dataGridViewPolicies.SortedColumn.Index == EnabledColumn.Index)
+                            comparer = p => p.PolicyStatus;
+                        else if (dataGridViewPolicies.SortedColumn.Index == ColumnVMs.Index)
+                            comparer = p => p.PolicyVmCount;
+                        else if (dataGridViewPolicies.SortedColumn.Index == DescriptionColum.Index)
+                            comparer = p => p.PolicyNextRunTime;
+                        else if (dataGridViewPolicies.SortedColumn.Index == ColumnLastResult.Index)
+                            comparer = p => p.PolicyLastResult;
+                    }
+
+                    var rows = dataGridViewPolicies.SortOrder == SortOrder.Descending
+                        ? rowList.OrderByDescending(comparer) : rowList.OrderBy(comparer);
+
+                    dataGridViewPolicies.SuspendLayout();
+                    dataGridViewPolicies.Rows.Clear();
+                    dataGridViewPolicies.Rows.AddRange(rows.Cast<DataGridViewRow>().ToArray());
+
+                    foreach (PolicyRow row in dataGridViewPolicies.Rows)
+                        row.Selected = selectedPolicyUuids.Contains(row.Policy.uuid);
+
+                    if (dataGridViewPolicies.SelectedRows.Count == 0 && dataGridViewPolicies.Rows.Count > 0)
+                        dataGridViewPolicies.Rows[0].Selected = true;
+                }
+                finally
+                {
+                    dataGridViewPolicies.ResumeLayout();
+                    updatingPolicies = false;
+
+                    if (action.ServerLocalTime.HasValue)
+                    {
+                        string time= HelpersGUI.DateTimeToString(action.ServerLocalTime.Value, Messages.DATEFORMAT_WDMY_HM_LONG, true);
+                        labelServerTime.Text = string.Format(Messages.SERVER_TIME, time);
+                    }
+
+                    RefreshPoolTitle(Pool);
+                    RefreshButtons();
+                    RefreshHistoryLabel();
+                    RefreshHistoryGrid();
+                }
+            });
+        }
+
+        private void VMProtectionPoliciesDialog_Load(object sender, EventArgs e)
+        {
+            panelLoading.Visible = true;
+            Pool.Connection.Cache.RegisterBatchCollectionChanged<VMSS>(VMSSCollectionChanged);
+            LoadPolicies();
+        }
+
+        private void VMProtectionPoliciesDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Pool.Connection.Cache.DeregisterBatchCollectionChanged<VMSS>(VMSSCollectionChanged);
+        }
+
+        private void dataGridViewPolicies_SelectionChanged(object sender, EventArgs e)
+        {
+            if (updatingPolicies)
+                return;
+
+            RefreshButtons();
+            RefreshHistoryLabel();
+            RefreshHistoryGrid();
+        }
+
+        private void RefreshButtons()
+        {
+            if (dataGridViewPolicies.SelectedRows.Count == 1)
+            {
+                var row = SelectedVmssRow;
+                buttonEnable.Text = row.Policy.enabled ? Messages.DISABLE : Messages.ENABLE;
+                buttonEnable.Enabled = !row.IsBusy && (row.Policy.VMs.Count != 0 || row.Policy.enabled);
+                buttonProperties.Enabled = !row.IsBusy;
+                buttonRunNow.Enabled = !row.IsBusy && row.Policy.enabled;
+                comboBoxTimeSpan.Enabled = !row.IsBusy;
+            }
+            else
+            {
+                buttonProperties.Enabled = buttonEnable.Enabled = buttonRunNow.Enabled =
+                    comboBoxTimeSpan.Enabled = false;
+            }
+
+            buttonDelete.Enabled = (from PolicyRow row in dataGridViewPolicies.SelectedRows where !row.IsBusy select row).Any();
+        }
+
+        #region Button event handlers
 
         private void buttonNew_Click(object sender, System.EventArgs e)
         {
@@ -226,35 +328,56 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             this.Close();
         }
 
-        private void VMProtectionPoliciesDialog_Load(object sender, EventArgs e)
+        private void buttonEnable_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Columns["ColumnNextArchive"].Visible = false;
+            var row = SelectedVmssRow;
+            if (row != null)
+            {
+                row.IsBusy = true;
+                RefreshButtons();
+                new ChangePolicyEnabledAction(row.Policy).RunAsync();
+            }
+        }
 
-            LoadPolicies();
-            localServerTime1.GetServerTime();
-            Pool.Connection.Cache.RegisterBatchCollectionChanged<VMSS>(VMSSCollectionChanged);
+        private void buttonRunNow_Click(object sender, EventArgs e)
+        {
+            var row = SelectedVmssRow;
+            if (row != null)
+            {
+                row.IsBusy = true;
+                RefreshButtons();
+                new RunPolicyNowAction(row.Policy).RunAsync();
+            }
+        }
+
+        private void buttonProperties_Click(object sender, EventArgs e)
+        {
+            var row = SelectedVmssRow;
+            if (row != null)
+            {
+                using (PropertiesDialog propertiesDialog = new PropertiesDialog(row.Policy))
+                    propertiesDialog.ShowDialog(this);
+            }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             var selectedPolicies = new List<VMSS>();
             int numberOfProtectedVMs = 0;
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                var policy = (((PolicyRow)row)._policy);
-                selectedPolicies.Add(policy);
-                numberOfProtectedVMs += policy.VMs.Count;
 
-            }
-            string text = "";
-            if (selectedPolicies.Count == 1)
+            foreach (PolicyRow row in dataGridViewPolicies.SelectedRows)
             {
-                text = String.Format(numberOfProtectedVMs == 0 ? Messages.CONFIRM_DELETE_POLICY_0 : Messages.CONFIRM_DELETE_POLICY, selectedPolicies[0].Name(), numberOfProtectedVMs);
+                selectedPolicies.Add(row.Policy);
+                numberOfProtectedVMs += row.Policy.VMs.Count;
             }
-            else
-            {
-                text = string.Format(numberOfProtectedVMs == 0 ? Messages.CONFIRM_DELETE_POLICIES_0 : Messages.CONFIRM_DELETE_POLICIES, numberOfProtectedVMs);
-            }
+
+            string text = selectedPolicies.Count == 1
+                ? String.Format(numberOfProtectedVMs == 0
+                    ? Messages.CONFIRM_DELETE_POLICY_0
+                    : Messages.CONFIRM_DELETE_POLICY, selectedPolicies[0].Name(), numberOfProtectedVMs)
+                : string.Format(numberOfProtectedVMs == 0
+                    ? Messages.CONFIRM_DELETE_POLICIES_0
+                    : Messages.CONFIRM_DELETE_POLICIES, numberOfProtectedVMs);
 
             using (var dlg = new ThreeButtonDialog(
                     new ThreeButtonDialog.Details(SystemIcons.Warning, text, Messages.DELETE_VMSS_TITLE),
@@ -262,78 +385,15 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                     ThreeButtonDialog.ButtonNo))
             {
                 if (dlg.ShowDialog(this) == DialogResult.Yes)
+                {
+                    foreach (PolicyRow row in dataGridViewPolicies.SelectedRows)
+                        row.IsBusy = true;
+
+                    RefreshButtons();
                     new DestroyPolicyAction(Pool.Connection, selectedPolicies).RunAsync();
+                }
             }
         }
-
-        private VMSS currentSelected = null;
-
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            RefreshButtons();
-        }
-
-        private void RefreshButtons()
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                currentSelected = ((PolicyRow)dataGridView1.SelectedRows[0])._policy;
-                buttonEnable.Text = currentSelected.enabled? Messages.DISABLE : Messages.ENABLE;
-                buttonEnable.Enabled = currentSelected.VMs.Count != 0 || currentSelected.enabled;
-                buttonProperties.Enabled = true;
-                buttonRunNow.Enabled = currentSelected.enabled;
-
-            }
-            else
-            {
-                currentSelected = null;
-                buttonProperties.Enabled = buttonEnable.Enabled = buttonRunNow.Enabled = false;
-                policyHistory1.Clear();
-            }
-
-            policyHistory1.RefreshTab(currentSelected);
-            buttonDelete.Enabled = (dataGridView1.SelectedRows.Count != 0);
-        }
-
-        private void VMProtectionPoliciesDialog_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Pool.Connection.Cache.DeregisterBatchCollectionChanged<VMSS>(VMSSCollectionChanged);
-        }
-
-        private void buttonEnable_Click(object sender, EventArgs e)
-        {
-            if (currentSelected != null)
-            {
-                var action = new ChangePolicyEnabledAction(currentSelected);
-                action.RunAsync();
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                var policy = ((PolicyRow)dataGridView1.SelectedRows[0])._policy;
-                var action = new RunPolicyNowAction(policy);
-                action.Completed += action_Completed;
-                buttonRunNow.Enabled = false;
-                action.RunAsync();
-            }
-        }
-
-        void action_Completed(ActionBase sender)
-        {
-            Program.Invoke(Program.MainWindow, RefreshButtons);
-        }
-
-        private void buttonProperties_Click(object sender, EventArgs e)
-        {
-            using (PropertiesDialog propertiesDialog = new PropertiesDialog((VMSS)currentSelected))
-            {
-                propertiesDialog.ShowDialog(this);
-            }
-        }
-
 
         private void chevronButton1_ButtonClick(object sender, EventArgs e)
         {
@@ -341,13 +401,13 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             {
                 chevronButton1.Text = Messages.SHOW_RUN_HISTORY;
                 chevronButton1.Image = Properties.Resources.PDChevronDown;
-                policyHistory1.Visible = false;
+                panelHistory.Visible = false;
             }
             else
             {
                 chevronButton1.Text = Messages.HIDE_RUN_HISTORY;
                 chevronButton1.Image = Properties.Resources.PDChevronUp;
-                policyHistory1.Visible = true;
+                panelHistory.Visible = true;
             }
         }
 
@@ -357,6 +417,8 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
                 chevronButton1_ButtonClick(sender, e);
         }
 
+        #endregion
+
         internal override string HelpName
         {
             get
@@ -365,5 +427,138 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             }
         }
 
+        private void dataGridViewRunHistory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                HistoryRow row = (HistoryRow)dataGridViewRunHistory.Rows[e.RowIndex];
+                if (row.Alert.Type != "info")
+                {
+                    row.Expanded = !row.Expanded;
+                    row.RefreshRow();
+                }
+            }
+        }
+
+        private void comboBoxTimeSpan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshHistoryGrid();
+        }
+
+        private void RefreshHistoryGrid()
+        {
+            try
+            {
+                dataGridViewRunHistory.SuspendLayout();
+                dataGridViewRunHistory.Rows.Clear();
+
+                var row = SelectedVmssRow;
+                if (row == null)
+                    return;
+
+                var vmss = row.Policy;
+                var messages = row.AlertMessages;
+
+                int hoursFromNow = RunHistoryTimeSpan;
+
+                DateTime currentTime = DateTime.Now;
+                DateTime offset = currentTime.Add(new TimeSpan(-hoursFromNow, 0, 0));
+
+                if (hoursFromNow == 0)
+                {
+                    for (int i = 0; i < 10 && i < messages.Count; i++)
+                    {
+                        var msg = messages[i];
+                        var alert = new PolicyAlert(msg.priority, msg.name, msg.timestamp, msg.body, vmss.Name());
+                        dataGridViewRunHistory.Rows.Add(new HistoryRow(alert));
+                    }
+                }
+                else
+                {
+                    foreach (var msg in messages)
+                    {
+                        if (msg.timestamp >= offset)
+                        {
+                            var alert = new PolicyAlert(msg.priority, msg.name, msg.timestamp, msg.body, vmss.Name());
+                            dataGridViewRunHistory.Rows.Add(new HistoryRow(alert));
+                        }
+                        else
+                            break;
+                    }
+                }
+            }
+            finally
+            {
+                dataGridViewRunHistory.ResumeLayout();
+            }
+        }
+
+        private void RefreshHistoryLabel()
+        {
+            var row = SelectedVmssRow;
+            if (row == null)
+            {
+                labelHistory.Text = "";
+                return;
+            }
+
+            string name = row.Policy.Name();
+
+            // ellipsise if necessary
+            using (Graphics g = labelHistory.CreateGraphics())
+            {
+                int maxWidth = labelShow.Left - labelHistory.Left;
+                int availableWidth = maxWidth - (int)g.MeasureString(string.Format(Messages.HISTORY_FOR_POLICY, ""), labelHistory.Font).Width;
+                name = name.Ellipsise(new Rectangle(0, 0, availableWidth, labelHistory.Height), labelHistory.Font);
+            }
+            labelHistory.Text = string.Format(Messages.HISTORY_FOR_POLICY, name);
+        }
+
+        private class HistoryRow : DataGridViewRow
+        {
+            private DataGridViewImageCell _expand = new DataGridViewImageCell();
+            private DataGridViewTextAndImageCell _result = new DataGridViewTextAndImageCell();
+            private DataGridViewTextBoxCell _dateTime = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell _description = new DataGridViewTextBoxCell();
+            public readonly PolicyAlert Alert;
+
+            public HistoryRow(PolicyAlert alert)
+            {
+                Alert = alert;
+                Cells.AddRange(_expand, _result, _dateTime, _description);
+                RefreshRow();
+            }
+
+            [DefaultValue(false)]
+            public bool Expanded { get; set; }
+
+            public void RefreshRow()
+            {
+                _expand.Value = Expanded ? Resources.expanded_triangle : Resources.contracted_triangle;
+                if (Alert.Type == "info")
+                    _expand.Value = null;
+
+                if (Alert.Type == "error")
+                {
+                    _result.Image = Properties.Resources._075_WarningRound_h32bit_16;
+                    _result.Value = Messages.ERROR;
+                }
+                else if (Alert.Type == "warn")
+                {
+                    _result.Image = Properties.Resources._075_WarningRound_h32bit_16;
+                    _result.Value = Messages.WARNING;
+                }
+                else if (Alert.Type == "info")
+                {
+                    _result.Image = Properties.Resources._075_TickRound_h32bit_16;
+                    _result.Value = Messages.INFORMATION;
+                }
+                _dateTime.Value = Alert.Time;
+                if (Alert.Type == "error")
+                    _description.Value = Expanded ? string.Format("{0}\r\n{1}", Alert.ShortFormatBody, Alert.Text) : Alert.ShortFormatBody.Ellipsise(80);
+                else
+                    _description.Value = Expanded ? Alert.Text : Alert.ShortFormatBody.Ellipsise(90);
+            }
+        }
     }
 }
