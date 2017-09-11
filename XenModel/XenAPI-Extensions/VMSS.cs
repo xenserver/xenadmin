@@ -41,21 +41,19 @@ namespace XenAPI
 {
     public partial class VMSS 
     {
-        public DateTime GetNextRunTime()
+        public DateTime GetNextRunTime(DateTime serverLocalTime)
         {
-            var time = Host.get_server_localtime(Connection.Session, Helpers.GetMaster(Connection).opaque_ref);
-
             if (frequency == vmss_frequency.hourly)
             {
-                return GetHourlyDate(time, BackupScheduleMin());
+                return GetHourlyDate(serverLocalTime, BackupScheduleMin());
             }
             if (frequency == vmss_frequency.daily)
             {
-                return GetDailyDate(time, BackupScheduleMin(), BackupScheduleHour());
+                return GetDailyDate(serverLocalTime, BackupScheduleMin(), BackupScheduleHour());
             }
             if (frequency == vmss_frequency.weekly)
             {
-                return GetWeeklyDate(time, BackupScheduleHour(), BackupScheduleMin(), new List<DayOfWeek>(DaysOfWeekBackup()));
+                return GetWeeklyDate(serverLocalTime, BackupScheduleHour(), BackupScheduleMin(), new List<DayOfWeek>(DaysOfWeekBackup()));
             }
             return new DateTime();
         }
