@@ -145,11 +145,13 @@ namespace XenAdmin.TabPages
             try
             {
                 ColumnVolume.Visible = data.ShowStorageLink;
+                var showCbtColumn = Helpers.InvernessOrGreater(sr.Connection);
+                ColumnCBT.Visible = showCbtColumn;
 
                 // Update existing rows
                 foreach (var vdiRow in data.VdiRowsToUpdate)
                 {
-                    vdiRow.RefreshRowDetails();
+                    vdiRow.RefreshRowDetails(showCbtColumn);
                 }
 
                 // Remove rows for deleted VDIs
@@ -161,7 +163,7 @@ namespace XenAdmin.TabPages
                 // Add rows for new VDIs
                 foreach (var vdi in data.VdisToAdd)
                 {
-                    dataGridViewVDIs.Rows.Add(new VDIRow(vdi));   
+                    dataGridViewVDIs.Rows.Add(new VDIRow(vdi, showCbtColumn));   
                 }
             }
             finally
@@ -591,13 +593,18 @@ namespace XenAdmin.TabPages
         {
             public VDI VDI { get; private set; }
 
-            public VDIRow(VDI vdi)
+            public VDIRow(VDI vdi, bool show_cbt)
             {
                 VDI = vdi;
                 for (int i = 0; i < 5; i++)
                 {
                     Cells.Add(new DataGridViewTextBoxCell());
                     Cells[i].Value = GetCellText(i);
+                }
+                if (show_cbt)
+                {
+                    Cells.Add(new DataGridViewTextBoxCell());
+                    Cells[5].Value = GetCellText(5);
                 }
             }
 
@@ -616,17 +623,21 @@ namespace XenAdmin.TabPages
                         return VDI.SizeText;
                     case 4:
                         return VDI.VMsOfVDI;
+                    case 5:
+                        return VDI.cbt_enabled ? Messages.ENABLED : Messages.DISABLED;
                     default:
                         return "";
                 }
             }
 
-            public void RefreshRowDetails()
+            public void RefreshRowDetails(bool show_cbt)
             {
                 for (int i = 0; i < 5; i++)
                 {
                     Cells[i].Value = GetCellText(i);
                 }
+                if (show_cbt)
+                    Cells[5].Value = GetCellText(5);
             }
         }
 
