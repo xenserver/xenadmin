@@ -2320,7 +2320,7 @@
     <value>244, 22</value>
   </data>
   <data name="disableCbtToolStripMenuItem.Text" xml:space="preserve">
-    <value>Disa&amp;ble Changed Block Tracking</value>
+    <value>D&amp;isable Changed Block Tracking</value>
   </data>
   <data name="enablePVSReadcachingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 22</value>

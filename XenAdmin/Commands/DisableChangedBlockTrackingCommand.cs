@@ -100,29 +100,20 @@ namespace XenAdmin.Commands
             Execute(selection.AsXenObjects<VM>());
         }
 
+        private bool CanExecute(VM vm)
+        {
+            return vm != null &&
+                !vm.is_a_template &&
+                vm.Connection.ResolveAll(vm.VBDs).Any(vbd => vm.Connection.Resolve(vbd.VDI) != null && vm.Connection.Resolve(vbd.VDI).cbt_enabled);
+        }
+
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
             // Can execute criteria: A selection of VMs in the same pool which is Inverness+, where at least one VM having CBT enabled
-            if (selection.Any() &&
-                selection.AllItemsAre<VM>() &&
+            return selection.AllItemsAre<VM>() &&
                 selection.GetConnectionOfAllItems() != null &&
-                Helpers.InvernessOrGreater(selection.GetConnectionOfAllItems()))
-            {
-                var vms = selection.AsXenObjects<VM>();
-                foreach (VM vm in vms)
-                {
-                    if (vm.is_a_template)
-                        continue;
-                    foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
-                    {
-                        VDI vdi = vm.Connection.Resolve(vbd.VDI);
-                        if (vdi != null && vdi.cbt_enabled)
-                            return true;
-                    }
-                }
-            }
-
-            return false;
+                Helpers.InvernessOrGreater(selection.GetConnectionOfFirstItem()) &&
+                selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }
 
         public override string MenuText
@@ -139,10 +130,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (GetSelection().Count == 1)
-                    return Messages.CONFIRM_DISABLE_CBT_VM;
-                else
-                    return Messages.CONFIRM_DISABLE_CBT_VMS;
+                return GetSelection().Count == 1 ? Messages.CONFIRM_DISABLE_CBT_VM : Messages.CONFIRM_DISABLE_CBT_VMS;
             }
         }
 
@@ -150,12 +138,8 @@ namespace XenAdmin.Commands
         {
             get
             {
-                if (GetSelection().Count == 1)
-                {
-                    var vms = GetSelection().AsXenObjects<VM>();
-                    return String.Format(Messages.CONFIRM_DISABLE_CBT_VM_TITLE, vms[0].Name);
-                }
-                return Messages.CONFIRM_DISABLE_CBT_VMs_TITLE;
+                return GetSelection().Count == 1 ? String.Format(Messages.CONFIRM_DISABLE_CBT_VM_TITLE, GetSelection().AsXenObjects<VM>()[0].Name) :
+                                                   Messages.CONFIRM_DISABLE_CBT_VMs_TITLE;
             }
         }
     }

@@ -20659,7 +20659,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable Changed Block Tracking.
+        ///   Looks up a localized string similar to D&amp;isable Changed Block Tracking.
         /// </summary>
         public static string MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING {
             get {

@@ -7196,7 +7196,7 @@ This will permanently delete and reinitialize all local storage on the servers. 
     <value>&amp;Detach...</value>
   </data>
   <data name="MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING" xml:space="preserve">
-    <value>Disable Changed Block Tracking</value>
+    <value>D&amp;isable Changed Block Tracking</value>
   </data>
   <data name="MAINWINDOW_DISCONNECT" xml:space="preserve">
     <value>Dis&amp;connect</value>

@@ -624,7 +624,7 @@ namespace XenAdmin.TabPages
                     case 4:
                         return VDI.VMsOfVDI();
                     case 5:
-                        return VDI.cbt_enabled ? "Enabled" : "Disabled";
+                        return VDI.cbt_enabled ? Messages.ENABLED : Messages.DISABLED;
                     default:
                         return "";
                 }
