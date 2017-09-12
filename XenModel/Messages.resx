@@ -2363,6 +2363,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
     <value>Cannot move this virtual disk because it is attached to a VM that is not running.</value>
   </data>
+  <data name="CANNOT_MOVE_CBT_ENABLED_VDI" xml:space="preserve">
+    <value>This virtual disk has CBT enabled. It cannot be moved to another storage repository.</value>
+  </data>
   <data name="CANNOT_MOVE_DR_VD" xml:space="preserve">
     <value>This virtual disk is used for DR. It cannot be moved to another storage repository.</value>
   </data>
