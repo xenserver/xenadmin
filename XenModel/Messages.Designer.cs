@@ -6513,6 +6513,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This virtual disk has CBT enabled. It cannot be moved to another storage repository..
+        /// </summary>
+        public static string CANNOT_MOVE_CBT_ENABLED_VDI {
+            get {
+                return ResourceManager.GetString("CANNOT_MOVE_CBT_ENABLED_VDI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This virtual disk is used for DR. It cannot be moved to another storage repository..
         /// </summary>
         public static string CANNOT_MOVE_DR_VD {
