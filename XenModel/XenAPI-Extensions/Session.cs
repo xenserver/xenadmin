@@ -35,8 +35,8 @@ using System.Text;
 using CookComputing.XmlRpc;
 using log4net.Core;
 using XenAdmin;
-using XenAdmin.Core;
 using XenAdmin.Network;
+using Newtonsoft.Json.Linq;
 
 
 namespace XenAPI
@@ -48,25 +48,21 @@ namespace XenAPI
         public bool IsElevatedSession = false;
 
         private Session(int timeout, IXenConnection connection, string url)
+            : this(CreateProxy(url, timeout), connection)
         {
-            Connection = connection;
-            _proxy = XmlRpcProxyGen.Create<Proxy>();
-            _proxy.Url = url;
-            _proxy.NonStandard = XmlRpcNonStandard.All;
-            _proxy.Timeout = timeout;
-            _proxy.UseIndentation = false;
-            _proxy.UserAgent = UserAgent;
-            _proxy.KeepAlive = true;
-            _proxy.RequestEvent += LogRequest;
-            _proxy.ResponseEvent += LogResponse;
-            _proxy.Proxy = Proxy;
-            // reverted because of CA-137829/CA-137959: _proxy.ConnectionGroupName = Guid.NewGuid().ToString(); // this will force the Session onto a different set of TCP streams (see CA-108676)
+            proxy.RequestEvent += LogRequest;
+            proxy.ResponseEvent += LogResponse;
         }
 
         public Session(Proxy proxy, IXenConnection connection)
         {
             Connection = connection;
-            _proxy = proxy;
+            this.proxy = proxy;
+        }
+
+        public Session(int timeout, IXenConnection connection, string host, int port)
+            : this(timeout, connection, GetUrl(host, port))
+        {
         }
 
         public Session(Session session, Proxy proxy, IXenConnection connection)
@@ -75,21 +71,26 @@ namespace XenAPI
             InitAD(session);
         }
 
-        public Session(int timeout, IXenConnection connection, string host, int port)
-            : this(timeout, connection, GetUrl(host, port))
-        {
-        }
-
         /// <summary>
         /// Create a new Session instance, using the given instance and timeout.  The connection details and Xen-API session handle will be
         /// copied from the given instance, but a new connection will be created.  Use this if you want a duplicate connection to a host,
         /// for example when you need to cancel an operation that is blocking the primary connection.
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="timeout"></param>
         public Session(Session session, IXenConnection connection, int timeout)
-            : this(timeout, connection, session.Url)
         {
+            if (session.JsonRpcClient != null)
+            {
+                JsonRpcClient = new JsonRpcClient(session.Url) {JsonRpcVersion = session.JsonRpcClient.JsonRpcVersion};
+                JsonRpcClient.RequestEvent += LogJsonRequest;
+            }
+            else
+            {
+                proxy = CreateProxy(session.Url, timeout);
+                proxy.RequestEvent += LogRequest;
+                proxy.ResponseEvent += LogResponse;
+            }
+
+            Connection = connection;
             InitAD(session);
         }
 
@@ -104,6 +105,21 @@ namespace XenAPI
             permissions = session.Permissions;
         }
 
+        private static Proxy CreateProxy(string url, int timeout)
+        {
+            var xmlrpcProxy = XmlRpcProxyGen.Create<Proxy>();
+            xmlrpcProxy.Url = url;
+            xmlrpcProxy.NonStandard = XmlRpcNonStandard.All;
+            xmlrpcProxy.Timeout = timeout;
+            xmlrpcProxy.UseIndentation = false;
+            xmlrpcProxy.UserAgent = UserAgent;
+            xmlrpcProxy.KeepAlive = true;
+
+            xmlrpcProxy.Proxy = Proxy;
+            // reverted because of CA-137829/CA-137959: _proxy.ConnectionGroupName = Guid.NewGuid().ToString(); // this will force the Session onto a different set of TCP streams (see CA-108676)
+            return xmlrpcProxy;
+        }
+
         /// <summary>
         /// When the CacheWarming flag is set, we output logging at Debug rather than Info level.
         /// This means that we don't spam the logs when the application starts.
@@ -113,6 +129,39 @@ namespace XenAPI
         {
             get { return _cacheWarming; }
             set { _cacheWarming = value; }
+        }
+
+        private void LogJsonRequest(string json)
+        {
+            string methodName;
+            string parameters;
+
+            try
+            {
+                JObject obj = JObject.Parse(json);
+                methodName = obj.Property("method").Value.ToString();
+                parameters = obj.Property("params").Value.ToString();
+            }
+            catch
+            {
+                methodName = json;
+                parameters = "";
+            }
+
+            // do not log while downloading objects
+            // also exclude calls occurring frequently; we don't need to know about them;
+            // only log the full parameters at Debug level because it may contain sensitive data
+
+            if (CacheWarming ||
+                methodName == "event.next" || methodName == "event.from" || methodName == "host.get_servertime" ||
+                methodName.StartsWith("task.get_"))
+            {
+                log.DebugFormat("Invoking JSON-RPC method '{0}' with params: {1}", methodName, parameters);
+            }
+            else
+            {
+                log.InfoFormat("Invoking JSON-RPC method '{0}'", methodName);
+            }
         }
 
         private void LogRequest(object o, XmlRpcRequestEventArgs args)
@@ -228,12 +277,6 @@ namespace XenAPI
             roles.Sort((r1, r2) => { return r2.CompareTo(r1); });
             //Take the highest role
             return roles[0].FriendlyName();
-        }
-
-        public string ConnectionGroupName
-        {
-            get { return _proxy.ConnectionGroupName; }
-            set { _proxy.ConnectionGroupName = value; }
         }
     }
 }

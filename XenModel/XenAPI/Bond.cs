@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -103,11 +105,11 @@ namespace XenAPI
         public Proxy_Bond ToProxy()
         {
             Proxy_Bond result_ = new Proxy_Bond();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.master = (master != null) ? master : "";
+            result_.uuid = uuid ?? "";
+            result_.master = master ?? "";
             result_.slaves = (slaves != null) ? Helper.RefListToStringArray(slaves) : new string[] {};
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.primary_slave = (primary_slave != null) ? primary_slave : "";
+            result_.primary_slave = primary_slave ?? "";
             result_.mode = bond_mode_helper.ToString(mode);
             result_.properties = Maps.convert_to_proxy_string_string(properties);
             result_.links_up = links_up.ToString();
@@ -150,8 +152,7 @@ namespace XenAPI
         public override string SaveChanges(Session session, string opaqueRef, Bond server)
         {
             if (opaqueRef == null)
-            {
-                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
+            {                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
                 return "";
             }
             else
@@ -172,7 +173,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static Bond get_record(Session session, string _bond)
         {
-            return new Bond((Proxy_Bond)session.proxy.bond_get_record(session.uuid, (_bond != null) ? _bond : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_record(session.uuid, _bond);
+            else
+                return new Bond((Proxy_Bond)session.proxy.bond_get_record(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -183,7 +187,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Bond> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Bond>.Create(session.proxy.bond_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<Bond>.Create(session.proxy.bond_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -194,7 +201,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static string get_uuid(Session session, string _bond)
         {
-            return (string)session.proxy.bond_get_uuid(session.uuid, (_bond != null) ? _bond : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_uuid(session.uuid, _bond);
+            else
+                return (string)session.proxy.bond_get_uuid(session.uuid, _bond ?? "").parse();
         }
 
         /// <summary>
@@ -205,7 +215,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static XenRef<PIF> get_master(Session session, string _bond)
         {
-            return XenRef<PIF>.Create(session.proxy.bond_get_master(session.uuid, (_bond != null) ? _bond : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_master(session.uuid, _bond);
+            else
+                return XenRef<PIF>.Create(session.proxy.bond_get_master(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -216,7 +229,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static List<XenRef<PIF>> get_slaves(Session session, string _bond)
         {
-            return XenRef<PIF>.Create(session.proxy.bond_get_slaves(session.uuid, (_bond != null) ? _bond : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_slaves(session.uuid, _bond);
+            else
+                return XenRef<PIF>.Create(session.proxy.bond_get_slaves(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -227,7 +243,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static Dictionary<string, string> get_other_config(Session session, string _bond)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.bond_get_other_config(session.uuid, (_bond != null) ? _bond : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_other_config(session.uuid, _bond);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.bond_get_other_config(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -238,7 +257,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static XenRef<PIF> get_primary_slave(Session session, string _bond)
         {
-            return XenRef<PIF>.Create(session.proxy.bond_get_primary_slave(session.uuid, (_bond != null) ? _bond : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_primary_slave(session.uuid, _bond);
+            else
+                return XenRef<PIF>.Create(session.proxy.bond_get_primary_slave(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -249,7 +271,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static bond_mode get_mode(Session session, string _bond)
         {
-            return (bond_mode)Helper.EnumParseDefault(typeof(bond_mode), (string)session.proxy.bond_get_mode(session.uuid, (_bond != null) ? _bond : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_mode(session.uuid, _bond);
+            else
+                return (bond_mode)Helper.EnumParseDefault(typeof(bond_mode), (string)session.proxy.bond_get_mode(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -260,7 +285,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static Dictionary<string, string> get_properties(Session session, string _bond)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.bond_get_properties(session.uuid, (_bond != null) ? _bond : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_properties(session.uuid, _bond);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.bond_get_properties(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -271,7 +299,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static long get_links_up(Session session, string _bond)
         {
-            return long.Parse((string)session.proxy.bond_get_links_up(session.uuid, (_bond != null) ? _bond : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_links_up(session.uuid, _bond);
+            else
+                return long.Parse((string)session.proxy.bond_get_links_up(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -283,7 +314,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _bond, Dictionary<string, string> _other_config)
         {
-            session.proxy.bond_set_other_config(session.uuid, (_bond != null) ? _bond : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.bond_set_other_config(session.uuid, _bond, _other_config);
+            else
+                session.proxy.bond_set_other_config(session.uuid, _bond ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -296,7 +330,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _bond, string _key, string _value)
         {
-            session.proxy.bond_add_to_other_config(session.uuid, (_bond != null) ? _bond : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.bond_add_to_other_config(session.uuid, _bond, _key, _value);
+            else
+                session.proxy.bond_add_to_other_config(session.uuid, _bond ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -308,7 +345,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _bond, string _key)
         {
-            session.proxy.bond_remove_from_other_config(session.uuid, (_bond != null) ? _bond : "", (_key != null) ? _key : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.bond_remove_from_other_config(session.uuid, _bond, _key);
+            else
+                session.proxy.bond_remove_from_other_config(session.uuid, _bond ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -321,7 +361,10 @@ namespace XenAPI
         /// <param name="_mac">The MAC address to use on the bond itself. If this parameter is the empty string then the bond will inherit its MAC address from the primary slave.</param>
         public static XenRef<Bond> create(Session session, string _network, List<XenRef<PIF>> _members, string _mac)
         {
-            return XenRef<Bond>.Create(session.proxy.bond_create(session.uuid, (_network != null) ? _network : "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, (_mac != null) ? _mac : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_create(session.uuid, _network, _members, _mac);
+            else
+                return XenRef<Bond>.Create(session.proxy.bond_create(session.uuid, _network ?? "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, _mac ?? "").parse());
         }
 
         /// <summary>
@@ -334,7 +377,10 @@ namespace XenAPI
         /// <param name="_mac">The MAC address to use on the bond itself. If this parameter is the empty string then the bond will inherit its MAC address from the primary slave.</param>
         public static XenRef<Task> async_create(Session session, string _network, List<XenRef<PIF>> _members, string _mac)
         {
-            return XenRef<Task>.Create(session.proxy.async_bond_create(session.uuid, (_network != null) ? _network : "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, (_mac != null) ? _mac : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_bond_create(session.uuid, _network, _members, _mac);
+          else
+              return XenRef<Task>.Create(session.proxy.async_bond_create(session.uuid, _network ?? "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, _mac ?? "").parse());
         }
 
         /// <summary>
@@ -348,7 +394,10 @@ namespace XenAPI
         /// <param name="_mode">Bonding mode to use for the new bond First published in XenServer 6.0.</param>
         public static XenRef<Bond> create(Session session, string _network, List<XenRef<PIF>> _members, string _mac, bond_mode _mode)
         {
-            return XenRef<Bond>.Create(session.proxy.bond_create(session.uuid, (_network != null) ? _network : "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, (_mac != null) ? _mac : "", bond_mode_helper.ToString(_mode)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_create(session.uuid, _network, _members, _mac, _mode);
+            else
+                return XenRef<Bond>.Create(session.proxy.bond_create(session.uuid, _network ?? "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, _mac ?? "", bond_mode_helper.ToString(_mode)).parse());
         }
 
         /// <summary>
@@ -362,7 +411,10 @@ namespace XenAPI
         /// <param name="_mode">Bonding mode to use for the new bond First published in XenServer 6.0.</param>
         public static XenRef<Task> async_create(Session session, string _network, List<XenRef<PIF>> _members, string _mac, bond_mode _mode)
         {
-            return XenRef<Task>.Create(session.proxy.async_bond_create(session.uuid, (_network != null) ? _network : "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, (_mac != null) ? _mac : "", bond_mode_helper.ToString(_mode)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_bond_create(session.uuid, _network, _members, _mac, _mode);
+          else
+              return XenRef<Task>.Create(session.proxy.async_bond_create(session.uuid, _network ?? "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, _mac ?? "", bond_mode_helper.ToString(_mode)).parse());
         }
 
         /// <summary>
@@ -377,7 +429,10 @@ namespace XenAPI
         /// <param name="_properties">Additional configuration parameters specific to the bond mode First published in XenServer 6.1.</param>
         public static XenRef<Bond> create(Session session, string _network, List<XenRef<PIF>> _members, string _mac, bond_mode _mode, Dictionary<string, string> _properties)
         {
-            return XenRef<Bond>.Create(session.proxy.bond_create(session.uuid, (_network != null) ? _network : "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, (_mac != null) ? _mac : "", bond_mode_helper.ToString(_mode), Maps.convert_to_proxy_string_string(_properties)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_create(session.uuid, _network, _members, _mac, _mode, _properties);
+            else
+                return XenRef<Bond>.Create(session.proxy.bond_create(session.uuid, _network ?? "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, _mac ?? "", bond_mode_helper.ToString(_mode), Maps.convert_to_proxy_string_string(_properties)).parse());
         }
 
         /// <summary>
@@ -392,7 +447,10 @@ namespace XenAPI
         /// <param name="_properties">Additional configuration parameters specific to the bond mode First published in XenServer 6.1.</param>
         public static XenRef<Task> async_create(Session session, string _network, List<XenRef<PIF>> _members, string _mac, bond_mode _mode, Dictionary<string, string> _properties)
         {
-            return XenRef<Task>.Create(session.proxy.async_bond_create(session.uuid, (_network != null) ? _network : "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, (_mac != null) ? _mac : "", bond_mode_helper.ToString(_mode), Maps.convert_to_proxy_string_string(_properties)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_bond_create(session.uuid, _network, _members, _mac, _mode, _properties);
+          else
+              return XenRef<Task>.Create(session.proxy.async_bond_create(session.uuid, _network ?? "", (_members != null) ? Helper.RefListToStringArray(_members) : new string[] {}, _mac ?? "", bond_mode_helper.ToString(_mode), Maps.convert_to_proxy_string_string(_properties)).parse());
         }
 
         /// <summary>
@@ -403,7 +461,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static void destroy(Session session, string _bond)
         {
-            session.proxy.bond_destroy(session.uuid, (_bond != null) ? _bond : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.bond_destroy(session.uuid, _bond);
+            else
+                session.proxy.bond_destroy(session.uuid, _bond ?? "").parse();
         }
 
         /// <summary>
@@ -414,7 +475,10 @@ namespace XenAPI
         /// <param name="_bond">The opaque_ref of the given bond</param>
         public static XenRef<Task> async_destroy(Session session, string _bond)
         {
-            return XenRef<Task>.Create(session.proxy.async_bond_destroy(session.uuid, (_bond != null) ? _bond : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_bond_destroy(session.uuid, _bond);
+          else
+              return XenRef<Task>.Create(session.proxy.async_bond_destroy(session.uuid, _bond ?? "").parse());
         }
 
         /// <summary>
@@ -426,7 +490,10 @@ namespace XenAPI
         /// <param name="_value">The new bond mode</param>
         public static void set_mode(Session session, string _bond, bond_mode _value)
         {
-            session.proxy.bond_set_mode(session.uuid, (_bond != null) ? _bond : "", bond_mode_helper.ToString(_value)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.bond_set_mode(session.uuid, _bond, _value);
+            else
+                session.proxy.bond_set_mode(session.uuid, _bond ?? "", bond_mode_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -438,7 +505,10 @@ namespace XenAPI
         /// <param name="_value">The new bond mode</param>
         public static XenRef<Task> async_set_mode(Session session, string _bond, bond_mode _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_bond_set_mode(session.uuid, (_bond != null) ? _bond : "", bond_mode_helper.ToString(_value)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_bond_set_mode(session.uuid, _bond, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_bond_set_mode(session.uuid, _bond ?? "", bond_mode_helper.ToString(_value)).parse());
         }
 
         /// <summary>
@@ -451,7 +521,10 @@ namespace XenAPI
         /// <param name="_value">The property value</param>
         public static void set_property(Session session, string _bond, string _name, string _value)
         {
-            session.proxy.bond_set_property(session.uuid, (_bond != null) ? _bond : "", (_name != null) ? _name : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.bond_set_property(session.uuid, _bond, _name, _value);
+            else
+                session.proxy.bond_set_property(session.uuid, _bond ?? "", _name ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -464,7 +537,10 @@ namespace XenAPI
         /// <param name="_value">The property value</param>
         public static XenRef<Task> async_set_property(Session session, string _bond, string _name, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_bond_set_property(session.uuid, (_bond != null) ? _bond : "", (_name != null) ? _name : "", (_value != null) ? _value : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_bond_set_property(session.uuid, _bond, _name, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_bond_set_property(session.uuid, _bond ?? "", _name ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -474,7 +550,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Bond>> get_all(Session session)
         {
-            return XenRef<Bond>.Create(session.proxy.bond_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_all(session.uuid);
+            else
+                return XenRef<Bond>.Create(session.proxy.bond_get_all(session.uuid).parse());
         }
 
         /// <summary>
@@ -484,7 +563,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Bond>, Bond> get_all_records(Session session)
         {
-            return XenRef<Bond>.Create<Proxy_Bond>(session.proxy.bond_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.bond_get_all_records(session.uuid);
+            else
+                return XenRef<Bond>.Create<Proxy_Bond>(session.proxy.bond_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
@@ -503,11 +585,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// The bonded interface
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PIF>))]
         public virtual XenRef<PIF> master
         {
             get { return _master; }
@@ -521,11 +604,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<PIF> _master;
+        private XenRef<PIF> _master = new XenRef<PIF>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// The interfaces which are part of this bond
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<PIF>))]
         public virtual List<XenRef<PIF>> slaves
         {
             get { return _slaves; }
@@ -539,7 +623,7 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<PIF>> _slaves;
+        private List<XenRef<PIF>> _slaves = new List<XenRef<PIF>>() {};
 
         /// <summary>
         /// additional configuration
@@ -557,12 +641,13 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
 
         /// <summary>
         /// The PIF of which the IP configuration and MAC were copied to the bond, and which will receive all configuration/VLANs/VIFs on the bond if the bond is destroyed
         /// First published in XenServer 6.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PIF>))]
         public virtual XenRef<PIF> primary_slave
         {
             get { return _primary_slave; }
@@ -576,12 +661,13 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<PIF> _primary_slave;
+        private XenRef<PIF> _primary_slave = new XenRef<PIF>("OpaqueRef:NULL");
 
         /// <summary>
         /// The algorithm used to distribute traffic among the bonded NICs
         /// First published in XenServer 6.0.
         /// </summary>
+        [JsonConverter(typeof(bond_modeConverter))]
         public virtual bond_mode mode
         {
             get { return _mode; }
@@ -595,7 +681,7 @@ namespace XenAPI
                 }
             }
         }
-        private bond_mode _mode;
+        private bond_mode _mode = bond_mode.balance_slb;
 
         /// <summary>
         /// Additional configuration properties specific to the bond mode.
@@ -614,7 +700,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _properties;
+        private Dictionary<string, string> _properties = new Dictionary<string, string>() {};
 
         /// <summary>
         /// Number of links up in this bond
@@ -633,6 +719,6 @@ namespace XenAPI
                 }
             }
         }
-        private long _links_up;
+        private long _links_up = 0;
     }
 }

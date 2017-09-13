@@ -712,8 +712,8 @@ namespace XenAdmin.Network
         /// 
         /// This blocks, so must only be used on a background thread.
         /// </summary>
-        /// <param name="xenRef"></param>
-        /// <param name="Cancelling">A delegate to check whether to cancel.  May be null, in which case it's ignored</param>
+        /// <param name="xenref"></param>
+        /// <param name="cancelling">A delegate to check whether to cancel.  May be null, in which case it's ignored</param>
         public T WaitForCache<T>(XenRef<T> xenref, Func<bool> cancelling) where T : XenObject<T>
         {
             lock (WaitForEventRegisteredLock)

@@ -91,13 +91,25 @@ namespace XenAdmin.Core
         /// </param>
         public static void GetEvents(Session session, LockFreeQueue<ObjectChange> eventQueue, HTTP.FuncBool cancelled, ref string token)
         {
-            Proxy_Event[] proxyEvents;
+            Proxy_Event[] proxyEvents = {};
+            Event[] events = {};
             try
             {
                 var classes = new [] { "*" }; // classes that we are interested in receiving events from
                 var eventResult = Event.from(session, classes, token, EVENT_FROM_TIMEOUT);
-                token = eventResult.token;
-                proxyEvents = eventResult.events;
+
+                if (session.JsonRpcClient != null)
+                {
+                    var batch = (EventBatch)eventResult;
+                    events = batch.events;
+                    token = batch.token;
+                }
+                else
+                {
+                    var evts = (Events)eventResult;
+                    proxyEvents = evts.events;
+                    token = evts.token;
+                }
             }
             catch (WebException e)
             {
@@ -111,24 +123,35 @@ namespace XenAdmin.Core
             if (cancelled())
                 return;
 
-            //We want to do the marshalling on this bg thread so as not to block the gui thread
-            foreach (Proxy_Event proxyEvent in proxyEvents)
+            //We want to do the marshalling on this background thread so as not to block the gui thread
+            if (session.JsonRpcClient != null)
             {
-                ObjectChange objectChange = ProcessEvent(proxyEvent);
+                foreach (Event evt in events)
+                {
+                    var objectChange = ProcessEvent(evt.class_, evt.operation, evt.opaqueRef, evt.snapshot, false);
 
-                if (objectChange != null)
-                    eventQueue.Enqueue(objectChange);
+                    if (objectChange != null)
+                        eventQueue.Enqueue(objectChange);
+                }
+            }
+            else
+            {
+                foreach (Proxy_Event proxyEvent in proxyEvents)
+                {
+                    var objectChange = ProcessEvent(proxyEvent.class_, proxyEvent.operation, proxyEvent.opaqueRef, proxyEvent.snapshot, true);
+
+                    if (objectChange != null)
+                        eventQueue.Enqueue(objectChange);
+                }
             }
         }
         
         /// <summary>
         /// Returns null if we get an event we're not interested in, or an unparseable event (e.g. for an object type we don't know about).
         /// </summary>
-        /// <param name="proxyEvent"></param>
-        /// <returns></returns>
-        private static ObjectChange ProcessEvent(Proxy_Event proxyEvent)
+        private static ObjectChange ProcessEvent(string class_, string operation, string  opaqueRef, object snapshot, bool marshall)
         {
-            switch (proxyEvent.class_.ToLowerInvariant())
+            switch (class_.ToLowerInvariant())
             {
                 case "session":
                 case "event":
@@ -139,24 +162,25 @@ namespace XenAdmin.Core
                     return null;
 
                 default:
-                    Type typ = Marshalling.GetXenAPIType(proxyEvent.class_);
+                    Type typ = Marshalling.GetXenAPIType(class_);
 
                     if (typ == null)
                     {
-                        log.DebugFormat("Unknown {0} event for class {1}.", proxyEvent.operation, proxyEvent.class_);
+                        log.DebugFormat("Unknown {0} event for class {1}.", operation, class_);
                         return null;
                     }
 
-                    switch (proxyEvent.operation)
+                    switch (operation)
                     {
                         case "add":
                         case "mod":
-                            return new ObjectChange(typ, proxyEvent.opaqueRef, Marshalling.convertStruct(typ, (Hashtable)proxyEvent.snapshot));
+                            var marshalled = marshall ? Marshalling.convertStruct(typ, (Hashtable)snapshot) : snapshot;
+                            return new ObjectChange(typ, opaqueRef, marshalled);
                         case "del":
-                            return new ObjectChange(typ, proxyEvent.opaqueRef, null);
+                            return new ObjectChange(typ, opaqueRef, null);
 
                         default:
-                            log.DebugFormat("Unknown event operation {0} for opaque ref {1}", proxyEvent.operation, proxyEvent.opaqueRef);
+                            log.DebugFormat("Unknown event operation {0} for opaque ref {1}", operation, opaqueRef);
                             return null;
                     }
             }

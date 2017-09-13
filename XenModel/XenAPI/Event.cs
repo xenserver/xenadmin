@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -30,12 +30,13 @@
 
 using System;
 using System.Collections.Generic;
-
 using CookComputing.XmlRpc;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(XenEventConverter))]
     public partial class Event : XenObject<Event>
     {
         public Event()
@@ -49,7 +50,7 @@ namespace XenAPI
 
         internal void UpdateFromProxy(Proxy_Event proxy)
         {
-            id = long.Parse((string)proxy.id);
+            id = long.Parse(proxy.id);
         }
 
         public override void UpdateFrom(Event update)
@@ -66,7 +67,7 @@ namespace XenAPI
 
         public override string SaveChanges(Session session, string opaqueRef, Event serverObject)
         {
-            Event server = (Event)serverObject;
+            Event server = serverObject;
             if (opaqueRef == null)
             {
                 Proxy_Event p = this.ToProxy();
@@ -85,42 +86,66 @@ namespace XenAPI
 
         public static Event get_record(Session session, string _event)
         {
-            return new Event((Proxy_Event)session.proxy.event_get_record(session.uuid, (_event != null) ? _event : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.event_get_record(session.uuid, _event);
+            else
+                return new Event(session.proxy.event_get_record(session.uuid, _event ?? "").parse());
         }
 
         public static string get_by_uuid(Session session, string _uuid)
         {
-            return (string)session.proxy.event_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.event_get_by_uuid(session.uuid, _uuid);
+            else
+                return session.proxy.event_get_by_uuid(session.uuid, _uuid ?? "").parse();
         }
 
         public static long get_id(Session session, string _event)
         {
-            return long.Parse((string)session.proxy.event_get_id(session.uuid, (_event != null) ? _event : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.event_get_id(session.uuid, _event);
+            else
+                return long.Parse(session.proxy.event_get_id(session.uuid, _event ?? "").parse());
         }
 
         public static void set_id(Session session, string _event, long _id)
         {
-            session.proxy.event_set_id(session.uuid, (_event != null) ? _event : "", _id.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.event_set_id(session.uuid, _event, _id);
+            else
+                session.proxy.event_set_id(session.uuid, _event ?? "", _id.ToString()).parse();
         }
 
         public static void register(Session session, string[] _classes)
         {
-            session.proxy.event_register(session.uuid, _classes).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.event_register(session.uuid, _classes);
+            else
+                session.proxy.event_register(session.uuid, _classes).parse();
         }
 
         public static void unregister(Session session, string[] _classes)
         {
-            session.proxy.event_unregister(session.uuid, _classes).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.event_unregister(session.uuid, _classes);
+            else
+                session.proxy.event_unregister(session.uuid, _classes).parse();
         }
 
         public static Proxy_Event[] next(Session session)
         {
-            return session.proxy.event_next(session.uuid).parse();
+            if (session.JsonRpcClient != null)
+                throw new NotImplementedException();
+            else
+                return session.proxy.event_next(session.uuid).parse();
         }
 
-        public static Events from(Session session, string[] _classes, string _token, double _timeout)
+        public static IEventCollection from(Session session, string[] _classes, string _token, double _timeout)
         {
-            return session.proxy.event_from(session.uuid, _classes, _token, _timeout).parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.event_from(session.uuid, _classes, _token, _timeout);
+            else
+                return session.proxy.event_from(session.uuid, _classes, _token, _timeout).parse();
         }
 
         private long _id;
@@ -129,5 +154,31 @@ namespace XenAPI
              get { return _id; }
              set { if (value != _id) { _id = value; Changed = true; NotifyPropertyChanged("id"); } }
         }
+
+        public string timestamp;
+
+        [XmlRpcMember("class")]
+        public string class_;
+
+        public string operation;
+
+        [XmlRpcMember("ref")]
+        public string opaqueRef;
+
+        [XmlRpcMember("snapshot")]
+        public object snapshot;
+    }
+
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class EventBatch : IEventCollection
+    {
+        public Event[] events;
+        public Dictionary<string, int> valid_ref_counts;
+        public string token;
+    }
+
+    public interface IEventCollection
+    {
     }
 }

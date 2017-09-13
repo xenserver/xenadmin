@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -399,18 +401,18 @@ namespace XenAPI
         public Proxy_VM ToProxy()
         {
             Proxy_VM result_ = new Proxy_VM();
-            result_.uuid = (uuid != null) ? uuid : "";
+            result_.uuid = uuid ?? "";
             result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
             result_.current_operations = Maps.convert_to_proxy_string_vm_operations(current_operations);
             result_.power_state = vm_power_state_helper.ToString(power_state);
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.user_version = user_version.ToString();
             result_.is_a_template = is_a_template;
             result_.is_default_template = is_default_template;
-            result_.suspend_VDI = (suspend_VDI != null) ? suspend_VDI : "";
-            result_.resident_on = (resident_on != null) ? resident_on : "";
-            result_.affinity = (affinity != null) ? affinity : "";
+            result_.suspend_VDI = suspend_VDI ?? "";
+            result_.resident_on = resident_on ?? "";
+            result_.affinity = affinity ?? "";
             result_.memory_overhead = memory_overhead.ToString();
             result_.memory_target = memory_target.ToString();
             result_.memory_static_max = memory_static_max.ToString();
@@ -428,59 +430,59 @@ namespace XenAPI
             result_.VBDs = (VBDs != null) ? Helper.RefListToStringArray(VBDs) : new string[] {};
             result_.crash_dumps = (crash_dumps != null) ? Helper.RefListToStringArray(crash_dumps) : new string[] {};
             result_.VTPMs = (VTPMs != null) ? Helper.RefListToStringArray(VTPMs) : new string[] {};
-            result_.PV_bootloader = (PV_bootloader != null) ? PV_bootloader : "";
-            result_.PV_kernel = (PV_kernel != null) ? PV_kernel : "";
-            result_.PV_ramdisk = (PV_ramdisk != null) ? PV_ramdisk : "";
-            result_.PV_args = (PV_args != null) ? PV_args : "";
-            result_.PV_bootloader_args = (PV_bootloader_args != null) ? PV_bootloader_args : "";
-            result_.PV_legacy_args = (PV_legacy_args != null) ? PV_legacy_args : "";
-            result_.HVM_boot_policy = (HVM_boot_policy != null) ? HVM_boot_policy : "";
+            result_.PV_bootloader = PV_bootloader ?? "";
+            result_.PV_kernel = PV_kernel ?? "";
+            result_.PV_ramdisk = PV_ramdisk ?? "";
+            result_.PV_args = PV_args ?? "";
+            result_.PV_bootloader_args = PV_bootloader_args ?? "";
+            result_.PV_legacy_args = PV_legacy_args ?? "";
+            result_.HVM_boot_policy = HVM_boot_policy ?? "";
             result_.HVM_boot_params = Maps.convert_to_proxy_string_string(HVM_boot_params);
             result_.HVM_shadow_multiplier = HVM_shadow_multiplier;
             result_.platform = Maps.convert_to_proxy_string_string(platform);
-            result_.PCI_bus = (PCI_bus != null) ? PCI_bus : "";
+            result_.PCI_bus = PCI_bus ?? "";
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.domid = domid.ToString();
-            result_.domarch = (domarch != null) ? domarch : "";
+            result_.domarch = domarch ?? "";
             result_.last_boot_CPU_flags = Maps.convert_to_proxy_string_string(last_boot_CPU_flags);
             result_.is_control_domain = is_control_domain;
-            result_.metrics = (metrics != null) ? metrics : "";
-            result_.guest_metrics = (guest_metrics != null) ? guest_metrics : "";
-            result_.last_booted_record = (last_booted_record != null) ? last_booted_record : "";
-            result_.recommendations = (recommendations != null) ? recommendations : "";
+            result_.metrics = metrics ?? "";
+            result_.guest_metrics = guest_metrics ?? "";
+            result_.last_booted_record = last_booted_record ?? "";
+            result_.recommendations = recommendations ?? "";
             result_.xenstore_data = Maps.convert_to_proxy_string_string(xenstore_data);
             result_.ha_always_run = ha_always_run;
-            result_.ha_restart_priority = (ha_restart_priority != null) ? ha_restart_priority : "";
+            result_.ha_restart_priority = ha_restart_priority ?? "";
             result_.is_a_snapshot = is_a_snapshot;
-            result_.snapshot_of = (snapshot_of != null) ? snapshot_of : "";
+            result_.snapshot_of = snapshot_of ?? "";
             result_.snapshots = (snapshots != null) ? Helper.RefListToStringArray(snapshots) : new string[] {};
             result_.snapshot_time = snapshot_time;
-            result_.transportable_snapshot_id = (transportable_snapshot_id != null) ? transportable_snapshot_id : "";
+            result_.transportable_snapshot_id = transportable_snapshot_id ?? "";
             result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
             result_.tags = tags;
             result_.blocked_operations = Maps.convert_to_proxy_vm_operations_string(blocked_operations);
             result_.snapshot_info = Maps.convert_to_proxy_string_string(snapshot_info);
-            result_.snapshot_metadata = (snapshot_metadata != null) ? snapshot_metadata : "";
-            result_.parent = (parent != null) ? parent : "";
+            result_.snapshot_metadata = snapshot_metadata ?? "";
+            result_.parent = parent ?? "";
             result_.children = (children != null) ? Helper.RefListToStringArray(children) : new string[] {};
             result_.bios_strings = Maps.convert_to_proxy_string_string(bios_strings);
-            result_.protection_policy = (protection_policy != null) ? protection_policy : "";
+            result_.protection_policy = protection_policy ?? "";
             result_.is_snapshot_from_vmpp = is_snapshot_from_vmpp;
-            result_.snapshot_schedule = (snapshot_schedule != null) ? snapshot_schedule : "";
+            result_.snapshot_schedule = snapshot_schedule ?? "";
             result_.is_vmss_snapshot = is_vmss_snapshot;
-            result_.appliance = (appliance != null) ? appliance : "";
+            result_.appliance = appliance ?? "";
             result_.start_delay = start_delay.ToString();
             result_.shutdown_delay = shutdown_delay.ToString();
             result_.order = order.ToString();
             result_.VGPUs = (VGPUs != null) ? Helper.RefListToStringArray(VGPUs) : new string[] {};
             result_.attached_PCIs = (attached_PCIs != null) ? Helper.RefListToStringArray(attached_PCIs) : new string[] {};
-            result_.suspend_SR = (suspend_SR != null) ? suspend_SR : "";
+            result_.suspend_SR = suspend_SR ?? "";
             result_.version = version.ToString();
-            result_.generation_id = (generation_id != null) ? generation_id : "";
+            result_.generation_id = generation_id ?? "";
             result_.hardware_platform_version = hardware_platform_version.ToString();
             result_.has_vendor_device = has_vendor_device;
             result_.requires_reboot = requires_reboot;
-            result_.reference_label = (reference_label != null) ? reference_label : "";
+            result_.reference_label = reference_label ?? "";
             return result_;
         }
 
@@ -671,8 +673,8 @@ namespace XenAPI
         {
             if (opaqueRef == null)
             {
-                Proxy_VM p = this.ToProxy();
-                return session.proxy.vm_create(session.uuid, p).parse();
+                var reference = create(session, this);
+                return reference == null ? null : reference.opaque_ref;
             }
             else
             {
@@ -856,7 +858,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static VM get_record(Session session, string _vm)
         {
-            return new VM((Proxy_VM)session.proxy.vm_get_record(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_record(session.uuid, _vm);
+            else
+                return new VM((Proxy_VM)session.proxy.vm_get_record(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -867,7 +872,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VM> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VM>.Create(session.proxy.vm_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -878,7 +886,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<VM> create(Session session, VM _record)
         {
-            return XenRef<VM>.Create(session.proxy.vm_create(session.uuid, _record.ToProxy()).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_create(session.uuid, _record);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_create(session.uuid, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -889,7 +900,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, VM _record)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_create(session.uuid, _record.ToProxy()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_create(session.uuid, _record);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_create(session.uuid, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -900,7 +914,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void destroy(Session session, string _vm)
         {
-            session.proxy.vm_destroy(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_destroy(session.uuid, _vm);
+            else
+                session.proxy.vm_destroy(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -911,7 +928,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_destroy(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_destroy(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_destroy(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_destroy(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -922,7 +942,10 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<VM>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<VM>.Create(session.proxy.vm_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_by_name_label(session.uuid, _label);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -933,7 +956,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_uuid(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_uuid(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_uuid(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_uuid(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -944,7 +970,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<vm_operations> get_allowed_operations(Session session, string _vm)
         {
-            return Helper.StringArrayToEnumList<vm_operations>(session.proxy.vm_get_allowed_operations(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_allowed_operations(session.uuid, _vm);
+            else
+                return Helper.StringArrayToEnumList<vm_operations>(session.proxy.vm_get_allowed_operations(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -955,7 +984,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, vm_operations> get_current_operations(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_vm_operations(session.proxy.vm_get_current_operations(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_current_operations(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_vm_operations(session.proxy.vm_get_current_operations(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -966,7 +998,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static vm_power_state get_power_state(Session session, string _vm)
         {
-            return (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)session.proxy.vm_get_power_state(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_power_state(session.uuid, _vm);
+            else
+                return (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)session.proxy.vm_get_power_state(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -977,7 +1012,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_name_label(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_name_label(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_name_label(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_name_label(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -988,7 +1026,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_name_description(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_name_description(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_name_description(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_name_description(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -999,7 +1040,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_user_version(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_user_version(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_user_version(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_user_version(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1010,7 +1054,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_a_template(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_is_a_template(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_is_a_template(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_is_a_template(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1021,7 +1068,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_default_template(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_is_default_template(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_is_default_template(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_is_default_template(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1032,7 +1082,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VDI> get_suspend_VDI(Session session, string _vm)
         {
-            return XenRef<VDI>.Create(session.proxy.vm_get_suspend_vdi(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_suspend_vdi(session.uuid, _vm);
+            else
+                return XenRef<VDI>.Create(session.proxy.vm_get_suspend_vdi(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1043,7 +1096,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Host> get_resident_on(Session session, string _vm)
         {
-            return XenRef<Host>.Create(session.proxy.vm_get_resident_on(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_resident_on(session.uuid, _vm);
+            else
+                return XenRef<Host>.Create(session.proxy.vm_get_resident_on(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1054,7 +1110,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Host> get_affinity(Session session, string _vm)
         {
-            return XenRef<Host>.Create(session.proxy.vm_get_affinity(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_affinity(session.uuid, _vm);
+            else
+                return XenRef<Host>.Create(session.proxy.vm_get_affinity(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1065,7 +1124,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_overhead(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_memory_overhead(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_memory_overhead(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_memory_overhead(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1078,7 +1140,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.6")]
         public static long get_memory_target(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_memory_target(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_memory_target(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_memory_target(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1089,7 +1154,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_static_max(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_memory_static_max(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_memory_static_max(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_memory_static_max(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1100,7 +1168,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_dynamic_max(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_memory_dynamic_max(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_memory_dynamic_max(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_memory_dynamic_max(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1111,7 +1182,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_dynamic_min(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_memory_dynamic_min(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_memory_dynamic_min(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_memory_dynamic_min(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1122,7 +1196,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_memory_static_min(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_memory_static_min(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_memory_static_min(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_memory_static_min(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1133,7 +1210,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_VCPUs_params(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_get_vcpus_params(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_vcpus_params(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_vcpus_params(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1144,7 +1224,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_VCPUs_max(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_vcpus_max(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_vcpus_max(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_vcpus_max(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1155,7 +1238,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_VCPUs_at_startup(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_vcpus_at_startup(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_vcpus_at_startup(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_vcpus_at_startup(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1166,7 +1252,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static on_normal_exit get_actions_after_shutdown(Session session, string _vm)
         {
-            return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_shutdown(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_actions_after_shutdown(session.uuid, _vm);
+            else
+                return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_shutdown(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1177,7 +1266,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static on_normal_exit get_actions_after_reboot(Session session, string _vm)
         {
-            return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_reboot(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_actions_after_reboot(session.uuid, _vm);
+            else
+                return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_reboot(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1188,7 +1280,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static on_crash_behaviour get_actions_after_crash(Session session, string _vm)
         {
-            return (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), (string)session.proxy.vm_get_actions_after_crash(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_actions_after_crash(session.uuid, _vm);
+            else
+                return (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), (string)session.proxy.vm_get_actions_after_crash(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1199,7 +1294,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<Console>> get_consoles(Session session, string _vm)
         {
-            return XenRef<Console>.Create(session.proxy.vm_get_consoles(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_consoles(session.uuid, _vm);
+            else
+                return XenRef<Console>.Create(session.proxy.vm_get_consoles(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1210,7 +1308,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VIF>> get_VIFs(Session session, string _vm)
         {
-            return XenRef<VIF>.Create(session.proxy.vm_get_vifs(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_vifs(session.uuid, _vm);
+            else
+                return XenRef<VIF>.Create(session.proxy.vm_get_vifs(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1221,7 +1322,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VBD>> get_VBDs(Session session, string _vm)
         {
-            return XenRef<VBD>.Create(session.proxy.vm_get_vbds(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_vbds(session.uuid, _vm);
+            else
+                return XenRef<VBD>.Create(session.proxy.vm_get_vbds(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1232,7 +1336,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<Crashdump>> get_crash_dumps(Session session, string _vm)
         {
-            return XenRef<Crashdump>.Create(session.proxy.vm_get_crash_dumps(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_crash_dumps(session.uuid, _vm);
+            else
+                return XenRef<Crashdump>.Create(session.proxy.vm_get_crash_dumps(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1243,7 +1350,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VTPM>> get_VTPMs(Session session, string _vm)
         {
-            return XenRef<VTPM>.Create(session.proxy.vm_get_vtpms(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_vtpms(session.uuid, _vm);
+            else
+                return XenRef<VTPM>.Create(session.proxy.vm_get_vtpms(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1254,7 +1364,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_bootloader(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_pv_bootloader(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_pv_bootloader(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_pv_bootloader(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1265,7 +1378,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_kernel(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_pv_kernel(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_pv_kernel(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_pv_kernel(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1276,7 +1392,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_ramdisk(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_pv_ramdisk(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_pv_ramdisk(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_pv_ramdisk(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1287,7 +1406,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_args(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_pv_args(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_pv_args(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_pv_args(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1298,7 +1420,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_bootloader_args(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_pv_bootloader_args(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_pv_bootloader_args(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_pv_bootloader_args(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1309,7 +1434,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_PV_legacy_args(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_pv_legacy_args(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_pv_legacy_args(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_pv_legacy_args(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1320,7 +1448,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_HVM_boot_policy(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_hvm_boot_policy(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_hvm_boot_policy(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_hvm_boot_policy(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1331,7 +1462,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_HVM_boot_params(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_get_hvm_boot_params(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_hvm_boot_params(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_hvm_boot_params(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1342,7 +1476,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static double get_HVM_shadow_multiplier(Session session, string _vm)
         {
-            return Convert.ToDouble(session.proxy.vm_get_hvm_shadow_multiplier(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_hvm_shadow_multiplier(session.uuid, _vm);
+            else
+                return Convert.ToDouble(session.proxy.vm_get_hvm_shadow_multiplier(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1353,7 +1490,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_platform(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_get_platform(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_platform(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_platform(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1366,7 +1506,10 @@ namespace XenAPI
         [Deprecated("XenServer 6.0")]
         public static string get_PCI_bus(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_pci_bus(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_pci_bus(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_pci_bus(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1377,7 +1520,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_get_other_config(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_other_config(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_other_config(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1388,7 +1534,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_domid(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_domid(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_domid(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_domid(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1399,7 +1548,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_domarch(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_domarch(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_domarch(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_domarch(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1410,7 +1562,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_last_boot_CPU_flags(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_get_last_boot_cpu_flags(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_last_boot_cpu_flags(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_last_boot_cpu_flags(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1421,7 +1576,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_control_domain(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_is_control_domain(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_is_control_domain(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_is_control_domain(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1432,7 +1590,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM_metrics> get_metrics(Session session, string _vm)
         {
-            return XenRef<VM_metrics>.Create(session.proxy.vm_get_metrics(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_metrics(session.uuid, _vm);
+            else
+                return XenRef<VM_metrics>.Create(session.proxy.vm_get_metrics(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1443,7 +1604,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM_guest_metrics> get_guest_metrics(Session session, string _vm)
         {
-            return XenRef<VM_guest_metrics>.Create(session.proxy.vm_get_guest_metrics(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_guest_metrics(session.uuid, _vm);
+            else
+                return XenRef<VM_guest_metrics>.Create(session.proxy.vm_get_guest_metrics(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1454,7 +1618,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_last_booted_record(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_last_booted_record(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_last_booted_record(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_last_booted_record(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1465,7 +1632,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_recommendations(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_recommendations(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_recommendations(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_recommendations(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1476,7 +1646,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_xenstore_data(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_get_xenstore_data(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_xenstore_data(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_xenstore_data(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1489,7 +1662,10 @@ namespace XenAPI
         [Deprecated("XenServer 6.0")]
         public static bool get_ha_always_run(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_ha_always_run(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_ha_always_run(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_ha_always_run(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1500,7 +1676,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_ha_restart_priority(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_ha_restart_priority(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_ha_restart_priority(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_ha_restart_priority(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1511,7 +1690,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_a_snapshot(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_is_a_snapshot(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_is_a_snapshot(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_is_a_snapshot(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1522,7 +1704,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM> get_snapshot_of(Session session, string _vm)
         {
-            return XenRef<VM>.Create(session.proxy.vm_get_snapshot_of(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_snapshot_of(session.uuid, _vm);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_get_snapshot_of(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1533,7 +1718,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VM>> get_snapshots(Session session, string _vm)
         {
-            return XenRef<VM>.Create(session.proxy.vm_get_snapshots(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_snapshots(session.uuid, _vm);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_get_snapshots(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1544,7 +1732,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static DateTime get_snapshot_time(Session session, string _vm)
         {
-            return session.proxy.vm_get_snapshot_time(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_snapshot_time(session.uuid, _vm);
+            else
+                return session.proxy.vm_get_snapshot_time(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1555,7 +1746,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_transportable_snapshot_id(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_transportable_snapshot_id(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_transportable_snapshot_id(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_transportable_snapshot_id(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1566,7 +1760,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, XenRef<Blob>> get_blobs(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.vm_get_blobs(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_blobs(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.vm_get_blobs(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1577,7 +1774,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string[] get_tags(Session session, string _vm)
         {
-            return (string [])session.proxy.vm_get_tags(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_tags(session.uuid, _vm);
+            else
+                return (string [])session.proxy.vm_get_tags(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1588,7 +1788,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<vm_operations, string> get_blocked_operations(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_vm_operations_string(session.proxy.vm_get_blocked_operations(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_blocked_operations(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_vm_operations_string(session.proxy.vm_get_blocked_operations(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1599,7 +1802,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_snapshot_info(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_get_snapshot_info(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_snapshot_info(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_snapshot_info(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1610,7 +1816,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_snapshot_metadata(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_snapshot_metadata(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_snapshot_metadata(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_snapshot_metadata(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1621,7 +1830,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM> get_parent(Session session, string _vm)
         {
-            return XenRef<VM>.Create(session.proxy.vm_get_parent(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_parent(session.uuid, _vm);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_get_parent(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1632,7 +1844,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VM>> get_children(Session session, string _vm)
         {
-            return XenRef<VM>.Create(session.proxy.vm_get_children(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_children(session.uuid, _vm);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_get_children(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1643,7 +1858,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> get_bios_strings(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_get_bios_strings(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_bios_strings(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_bios_strings(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1656,7 +1874,10 @@ namespace XenAPI
         [Deprecated("XenServer 6.2")]
         public static XenRef<VMPP> get_protection_policy(Session session, string _vm)
         {
-            return XenRef<VMPP>.Create(session.proxy.vm_get_protection_policy(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_protection_policy(session.uuid, _vm);
+            else
+                return XenRef<VMPP>.Create(session.proxy.vm_get_protection_policy(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1669,7 +1890,10 @@ namespace XenAPI
         [Deprecated("XenServer 6.2")]
         public static bool get_is_snapshot_from_vmpp(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_is_snapshot_from_vmpp(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_is_snapshot_from_vmpp(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_is_snapshot_from_vmpp(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1680,7 +1904,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VMSS> get_snapshot_schedule(Session session, string _vm)
         {
-            return XenRef<VMSS>.Create(session.proxy.vm_get_snapshot_schedule(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_snapshot_schedule(session.uuid, _vm);
+            else
+                return XenRef<VMSS>.Create(session.proxy.vm_get_snapshot_schedule(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1691,7 +1918,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_is_vmss_snapshot(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_is_vmss_snapshot(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_is_vmss_snapshot(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_is_vmss_snapshot(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1702,7 +1932,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<VM_appliance> get_appliance(Session session, string _vm)
         {
-            return XenRef<VM_appliance>.Create(session.proxy.vm_get_appliance(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_appliance(session.uuid, _vm);
+            else
+                return XenRef<VM_appliance>.Create(session.proxy.vm_get_appliance(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1713,7 +1946,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_start_delay(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_start_delay(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_start_delay(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_start_delay(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1724,7 +1960,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_shutdown_delay(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_shutdown_delay(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_shutdown_delay(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_shutdown_delay(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1735,7 +1974,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_order(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_order(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_order(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_order(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1746,7 +1988,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VGPU>> get_VGPUs(Session session, string _vm)
         {
-            return XenRef<VGPU>.Create(session.proxy.vm_get_vgpus(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_vgpus(session.uuid, _vm);
+            else
+                return XenRef<VGPU>.Create(session.proxy.vm_get_vgpus(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1757,7 +2002,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<PCI>> get_attached_PCIs(Session session, string _vm)
         {
-            return XenRef<PCI>.Create(session.proxy.vm_get_attached_pcis(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_attached_pcis(session.uuid, _vm);
+            else
+                return XenRef<PCI>.Create(session.proxy.vm_get_attached_pcis(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1768,7 +2016,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<SR> get_suspend_SR(Session session, string _vm)
         {
-            return XenRef<SR>.Create(session.proxy.vm_get_suspend_sr(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_suspend_sr(session.uuid, _vm);
+            else
+                return XenRef<SR>.Create(session.proxy.vm_get_suspend_sr(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1779,7 +2030,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_version(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_version(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_version(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_version(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1790,7 +2044,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_generation_id(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_generation_id(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_generation_id(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_generation_id(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1801,7 +2058,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long get_hardware_platform_version(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_get_hardware_platform_version(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_hardware_platform_version(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_get_hardware_platform_version(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1812,7 +2072,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_has_vendor_device(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_has_vendor_device(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_has_vendor_device(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_has_vendor_device(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1823,7 +2086,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static bool get_requires_reboot(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_requires_reboot(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_requires_reboot(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_requires_reboot(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1834,7 +2100,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string get_reference_label(Session session, string _vm)
         {
-            return (string)session.proxy.vm_get_reference_label(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_reference_label(session.uuid, _vm);
+            else
+                return (string)session.proxy.vm_get_reference_label(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1846,7 +2115,10 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _vm, string _label)
         {
-            session.proxy.vm_set_name_label(session.uuid, (_vm != null) ? _vm : "", (_label != null) ? _label : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_name_label(session.uuid, _vm, _label);
+            else
+                session.proxy.vm_set_name_label(session.uuid, _vm ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -1858,7 +2130,10 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _vm, string _description)
         {
-            session.proxy.vm_set_name_description(session.uuid, (_vm != null) ? _vm : "", (_description != null) ? _description : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_name_description(session.uuid, _vm, _description);
+            else
+                session.proxy.vm_set_name_description(session.uuid, _vm ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -1870,7 +2145,10 @@ namespace XenAPI
         /// <param name="_user_version">New value to set</param>
         public static void set_user_version(Session session, string _vm, long _user_version)
         {
-            session.proxy.vm_set_user_version(session.uuid, (_vm != null) ? _vm : "", _user_version.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_user_version(session.uuid, _vm, _user_version);
+            else
+                session.proxy.vm_set_user_version(session.uuid, _vm ?? "", _user_version.ToString()).parse();
         }
 
         /// <summary>
@@ -1882,7 +2160,10 @@ namespace XenAPI
         /// <param name="_is_a_template">New value to set</param>
         public static void set_is_a_template(Session session, string _vm, bool _is_a_template)
         {
-            session.proxy.vm_set_is_a_template(session.uuid, (_vm != null) ? _vm : "", _is_a_template).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_is_a_template(session.uuid, _vm, _is_a_template);
+            else
+                session.proxy.vm_set_is_a_template(session.uuid, _vm ?? "", _is_a_template).parse();
         }
 
         /// <summary>
@@ -1894,7 +2175,10 @@ namespace XenAPI
         /// <param name="_affinity">New value to set</param>
         public static void set_affinity(Session session, string _vm, string _affinity)
         {
-            session.proxy.vm_set_affinity(session.uuid, (_vm != null) ? _vm : "", (_affinity != null) ? _affinity : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_affinity(session.uuid, _vm, _affinity);
+            else
+                session.proxy.vm_set_affinity(session.uuid, _vm ?? "", _affinity ?? "").parse();
         }
 
         /// <summary>
@@ -1906,7 +2190,10 @@ namespace XenAPI
         /// <param name="_params">New value to set</param>
         public static void set_VCPUs_params(Session session, string _vm, Dictionary<string, string> _params)
         {
-            session.proxy.vm_set_vcpus_params(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_params)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_vcpus_params(session.uuid, _vm, _params);
+            else
+                session.proxy.vm_set_vcpus_params(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_params)).parse();
         }
 
         /// <summary>
@@ -1919,7 +2206,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_VCPUs_params(Session session, string _vm, string _key, string _value)
         {
-            session.proxy.vm_add_to_vcpus_params(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_vcpus_params(session.uuid, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_vcpus_params(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1931,7 +2221,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_VCPUs_params(Session session, string _vm, string _key)
         {
-            session.proxy.vm_remove_from_vcpus_params(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_from_vcpus_params(session.uuid, _vm, _key);
+            else
+                session.proxy.vm_remove_from_vcpus_params(session.uuid, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -1943,7 +2236,10 @@ namespace XenAPI
         /// <param name="_after_shutdown">New value to set</param>
         public static void set_actions_after_shutdown(Session session, string _vm, on_normal_exit _after_shutdown)
         {
-            session.proxy.vm_set_actions_after_shutdown(session.uuid, (_vm != null) ? _vm : "", on_normal_exit_helper.ToString(_after_shutdown)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_actions_after_shutdown(session.uuid, _vm, _after_shutdown);
+            else
+                session.proxy.vm_set_actions_after_shutdown(session.uuid, _vm ?? "", on_normal_exit_helper.ToString(_after_shutdown)).parse();
         }
 
         /// <summary>
@@ -1955,7 +2251,10 @@ namespace XenAPI
         /// <param name="_after_reboot">New value to set</param>
         public static void set_actions_after_reboot(Session session, string _vm, on_normal_exit _after_reboot)
         {
-            session.proxy.vm_set_actions_after_reboot(session.uuid, (_vm != null) ? _vm : "", on_normal_exit_helper.ToString(_after_reboot)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_actions_after_reboot(session.uuid, _vm, _after_reboot);
+            else
+                session.proxy.vm_set_actions_after_reboot(session.uuid, _vm ?? "", on_normal_exit_helper.ToString(_after_reboot)).parse();
         }
 
         /// <summary>
@@ -1967,7 +2266,10 @@ namespace XenAPI
         /// <param name="_after_crash">New value to set</param>
         public static void set_actions_after_crash(Session session, string _vm, on_crash_behaviour _after_crash)
         {
-            session.proxy.vm_set_actions_after_crash(session.uuid, (_vm != null) ? _vm : "", on_crash_behaviour_helper.ToString(_after_crash)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_actions_after_crash(session.uuid, _vm, _after_crash);
+            else
+                session.proxy.vm_set_actions_after_crash(session.uuid, _vm ?? "", on_crash_behaviour_helper.ToString(_after_crash)).parse();
         }
 
         /// <summary>
@@ -1979,7 +2281,10 @@ namespace XenAPI
         /// <param name="_bootloader">New value to set</param>
         public static void set_PV_bootloader(Session session, string _vm, string _bootloader)
         {
-            session.proxy.vm_set_pv_bootloader(session.uuid, (_vm != null) ? _vm : "", (_bootloader != null) ? _bootloader : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_pv_bootloader(session.uuid, _vm, _bootloader);
+            else
+                session.proxy.vm_set_pv_bootloader(session.uuid, _vm ?? "", _bootloader ?? "").parse();
         }
 
         /// <summary>
@@ -1991,7 +2296,10 @@ namespace XenAPI
         /// <param name="_kernel">New value to set</param>
         public static void set_PV_kernel(Session session, string _vm, string _kernel)
         {
-            session.proxy.vm_set_pv_kernel(session.uuid, (_vm != null) ? _vm : "", (_kernel != null) ? _kernel : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_pv_kernel(session.uuid, _vm, _kernel);
+            else
+                session.proxy.vm_set_pv_kernel(session.uuid, _vm ?? "", _kernel ?? "").parse();
         }
 
         /// <summary>
@@ -2003,7 +2311,10 @@ namespace XenAPI
         /// <param name="_ramdisk">New value to set</param>
         public static void set_PV_ramdisk(Session session, string _vm, string _ramdisk)
         {
-            session.proxy.vm_set_pv_ramdisk(session.uuid, (_vm != null) ? _vm : "", (_ramdisk != null) ? _ramdisk : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_pv_ramdisk(session.uuid, _vm, _ramdisk);
+            else
+                session.proxy.vm_set_pv_ramdisk(session.uuid, _vm ?? "", _ramdisk ?? "").parse();
         }
 
         /// <summary>
@@ -2015,7 +2326,10 @@ namespace XenAPI
         /// <param name="_args">New value to set</param>
         public static void set_PV_args(Session session, string _vm, string _args)
         {
-            session.proxy.vm_set_pv_args(session.uuid, (_vm != null) ? _vm : "", (_args != null) ? _args : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_pv_args(session.uuid, _vm, _args);
+            else
+                session.proxy.vm_set_pv_args(session.uuid, _vm ?? "", _args ?? "").parse();
         }
 
         /// <summary>
@@ -2027,7 +2341,10 @@ namespace XenAPI
         /// <param name="_bootloader_args">New value to set</param>
         public static void set_PV_bootloader_args(Session session, string _vm, string _bootloader_args)
         {
-            session.proxy.vm_set_pv_bootloader_args(session.uuid, (_vm != null) ? _vm : "", (_bootloader_args != null) ? _bootloader_args : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_pv_bootloader_args(session.uuid, _vm, _bootloader_args);
+            else
+                session.proxy.vm_set_pv_bootloader_args(session.uuid, _vm ?? "", _bootloader_args ?? "").parse();
         }
 
         /// <summary>
@@ -2039,7 +2356,10 @@ namespace XenAPI
         /// <param name="_legacy_args">New value to set</param>
         public static void set_PV_legacy_args(Session session, string _vm, string _legacy_args)
         {
-            session.proxy.vm_set_pv_legacy_args(session.uuid, (_vm != null) ? _vm : "", (_legacy_args != null) ? _legacy_args : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_pv_legacy_args(session.uuid, _vm, _legacy_args);
+            else
+                session.proxy.vm_set_pv_legacy_args(session.uuid, _vm ?? "", _legacy_args ?? "").parse();
         }
 
         /// <summary>
@@ -2051,7 +2371,10 @@ namespace XenAPI
         /// <param name="_boot_policy">New value to set</param>
         public static void set_HVM_boot_policy(Session session, string _vm, string _boot_policy)
         {
-            session.proxy.vm_set_hvm_boot_policy(session.uuid, (_vm != null) ? _vm : "", (_boot_policy != null) ? _boot_policy : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_hvm_boot_policy(session.uuid, _vm, _boot_policy);
+            else
+                session.proxy.vm_set_hvm_boot_policy(session.uuid, _vm ?? "", _boot_policy ?? "").parse();
         }
 
         /// <summary>
@@ -2063,7 +2386,10 @@ namespace XenAPI
         /// <param name="_boot_params">New value to set</param>
         public static void set_HVM_boot_params(Session session, string _vm, Dictionary<string, string> _boot_params)
         {
-            session.proxy.vm_set_hvm_boot_params(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_boot_params)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_hvm_boot_params(session.uuid, _vm, _boot_params);
+            else
+                session.proxy.vm_set_hvm_boot_params(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_boot_params)).parse();
         }
 
         /// <summary>
@@ -2076,7 +2402,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_HVM_boot_params(Session session, string _vm, string _key, string _value)
         {
-            session.proxy.vm_add_to_hvm_boot_params(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_hvm_boot_params(session.uuid, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_hvm_boot_params(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2088,7 +2417,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_HVM_boot_params(Session session, string _vm, string _key)
         {
-            session.proxy.vm_remove_from_hvm_boot_params(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_from_hvm_boot_params(session.uuid, _vm, _key);
+            else
+                session.proxy.vm_remove_from_hvm_boot_params(session.uuid, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2100,7 +2432,10 @@ namespace XenAPI
         /// <param name="_platform">New value to set</param>
         public static void set_platform(Session session, string _vm, Dictionary<string, string> _platform)
         {
-            session.proxy.vm_set_platform(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_platform)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_platform(session.uuid, _vm, _platform);
+            else
+                session.proxy.vm_set_platform(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_platform)).parse();
         }
 
         /// <summary>
@@ -2113,7 +2448,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_platform(Session session, string _vm, string _key, string _value)
         {
-            session.proxy.vm_add_to_platform(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_platform(session.uuid, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_platform(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2125,7 +2463,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_platform(Session session, string _vm, string _key)
         {
-            session.proxy.vm_remove_from_platform(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_from_platform(session.uuid, _vm, _key);
+            else
+                session.proxy.vm_remove_from_platform(session.uuid, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2139,7 +2480,10 @@ namespace XenAPI
         [Deprecated("XenServer 6.0")]
         public static void set_PCI_bus(Session session, string _vm, string _pci_bus)
         {
-            session.proxy.vm_set_pci_bus(session.uuid, (_vm != null) ? _vm : "", (_pci_bus != null) ? _pci_bus : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_pci_bus(session.uuid, _vm, _pci_bus);
+            else
+                session.proxy.vm_set_pci_bus(session.uuid, _vm ?? "", _pci_bus ?? "").parse();
         }
 
         /// <summary>
@@ -2151,7 +2495,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vm, Dictionary<string, string> _other_config)
         {
-            session.proxy.vm_set_other_config(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_other_config(session.uuid, _vm, _other_config);
+            else
+                session.proxy.vm_set_other_config(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -2164,7 +2511,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vm, string _key, string _value)
         {
-            session.proxy.vm_add_to_other_config(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_other_config(session.uuid, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_other_config(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2176,7 +2526,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vm, string _key)
         {
-            session.proxy.vm_remove_from_other_config(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_from_other_config(session.uuid, _vm, _key);
+            else
+                session.proxy.vm_remove_from_other_config(session.uuid, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2188,7 +2541,10 @@ namespace XenAPI
         /// <param name="_recommendations">New value to set</param>
         public static void set_recommendations(Session session, string _vm, string _recommendations)
         {
-            session.proxy.vm_set_recommendations(session.uuid, (_vm != null) ? _vm : "", (_recommendations != null) ? _recommendations : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_recommendations(session.uuid, _vm, _recommendations);
+            else
+                session.proxy.vm_set_recommendations(session.uuid, _vm ?? "", _recommendations ?? "").parse();
         }
 
         /// <summary>
@@ -2200,7 +2556,10 @@ namespace XenAPI
         /// <param name="_xenstore_data">New value to set</param>
         public static void set_xenstore_data(Session session, string _vm, Dictionary<string, string> _xenstore_data)
         {
-            session.proxy.vm_set_xenstore_data(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_xenstore_data(session.uuid, _vm, _xenstore_data);
+            else
+                session.proxy.vm_set_xenstore_data(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
         }
 
         /// <summary>
@@ -2213,7 +2572,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_xenstore_data(Session session, string _vm, string _key, string _value)
         {
-            session.proxy.vm_add_to_xenstore_data(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_xenstore_data(session.uuid, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_xenstore_data(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2225,7 +2587,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_xenstore_data(Session session, string _vm, string _key)
         {
-            session.proxy.vm_remove_from_xenstore_data(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_from_xenstore_data(session.uuid, _vm, _key);
+            else
+                session.proxy.vm_remove_from_xenstore_data(session.uuid, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2237,7 +2602,10 @@ namespace XenAPI
         /// <param name="_tags">New value to set</param>
         public static void set_tags(Session session, string _vm, string[] _tags)
         {
-            session.proxy.vm_set_tags(session.uuid, (_vm != null) ? _vm : "", _tags).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_tags(session.uuid, _vm, _tags);
+            else
+                session.proxy.vm_set_tags(session.uuid, _vm ?? "", _tags).parse();
         }
 
         /// <summary>
@@ -2249,7 +2617,10 @@ namespace XenAPI
         /// <param name="_value">New value to add</param>
         public static void add_tags(Session session, string _vm, string _value)
         {
-            session.proxy.vm_add_tags(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_tags(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_add_tags(session.uuid, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2261,7 +2632,10 @@ namespace XenAPI
         /// <param name="_value">Value to remove</param>
         public static void remove_tags(Session session, string _vm, string _value)
         {
-            session.proxy.vm_remove_tags(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_tags(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_remove_tags(session.uuid, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2273,7 +2647,10 @@ namespace XenAPI
         /// <param name="_blocked_operations">New value to set</param>
         public static void set_blocked_operations(Session session, string _vm, Dictionary<vm_operations, string> _blocked_operations)
         {
-            session.proxy.vm_set_blocked_operations(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_vm_operations_string(_blocked_operations)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_blocked_operations(session.uuid, _vm, _blocked_operations);
+            else
+                session.proxy.vm_set_blocked_operations(session.uuid, _vm ?? "", Maps.convert_to_proxy_vm_operations_string(_blocked_operations)).parse();
         }
 
         /// <summary>
@@ -2286,7 +2663,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_blocked_operations(Session session, string _vm, vm_operations _key, string _value)
         {
-            session.proxy.vm_add_to_blocked_operations(session.uuid, (_vm != null) ? _vm : "", vm_operations_helper.ToString(_key), (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_blocked_operations(session.uuid, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_blocked_operations(session.uuid, _vm ?? "", vm_operations_helper.ToString(_key), _value ?? "").parse();
         }
 
         /// <summary>
@@ -2298,7 +2678,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_blocked_operations(Session session, string _vm, vm_operations _key)
         {
-            session.proxy.vm_remove_from_blocked_operations(session.uuid, (_vm != null) ? _vm : "", vm_operations_helper.ToString(_key)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_remove_from_blocked_operations(session.uuid, _vm, _key);
+            else
+                session.proxy.vm_remove_from_blocked_operations(session.uuid, _vm ?? "", vm_operations_helper.ToString(_key)).parse();
         }
 
         /// <summary>
@@ -2310,7 +2693,10 @@ namespace XenAPI
         /// <param name="_suspend_sr">New value to set</param>
         public static void set_suspend_SR(Session session, string _vm, string _suspend_sr)
         {
-            session.proxy.vm_set_suspend_sr(session.uuid, (_vm != null) ? _vm : "", (_suspend_sr != null) ? _suspend_sr : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_suspend_sr(session.uuid, _vm, _suspend_sr);
+            else
+                session.proxy.vm_set_suspend_sr(session.uuid, _vm ?? "", _suspend_sr ?? "").parse();
         }
 
         /// <summary>
@@ -2322,7 +2708,10 @@ namespace XenAPI
         /// <param name="_hardware_platform_version">New value to set</param>
         public static void set_hardware_platform_version(Session session, string _vm, long _hardware_platform_version)
         {
-            session.proxy.vm_set_hardware_platform_version(session.uuid, (_vm != null) ? _vm : "", _hardware_platform_version.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_hardware_platform_version(session.uuid, _vm, _hardware_platform_version);
+            else
+                session.proxy.vm_set_hardware_platform_version(session.uuid, _vm ?? "", _hardware_platform_version.ToString()).parse();
         }
 
         /// <summary>
@@ -2334,7 +2723,10 @@ namespace XenAPI
         /// <param name="_new_name">The name of the snapshotted VM</param>
         public static XenRef<VM> snapshot(Session session, string _vm, string _new_name)
         {
-            return XenRef<VM>.Create(session.proxy.vm_snapshot(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_snapshot(session.uuid, _vm, _new_name);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_snapshot(session.uuid, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2346,7 +2738,10 @@ namespace XenAPI
         /// <param name="_new_name">The name of the snapshotted VM</param>
         public static XenRef<Task> async_snapshot(Session session, string _vm, string _new_name)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_snapshot(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_snapshot(session.uuid, _vm, _new_name);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_snapshot(session.uuid, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2358,7 +2753,10 @@ namespace XenAPI
         /// <param name="_new_name">The name of the snapshotted VM</param>
         public static XenRef<VM> snapshot_with_quiesce(Session session, string _vm, string _new_name)
         {
-            return XenRef<VM>.Create(session.proxy.vm_snapshot_with_quiesce(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_snapshot_with_quiesce(session.uuid, _vm, _new_name);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_snapshot_with_quiesce(session.uuid, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2370,7 +2768,10 @@ namespace XenAPI
         /// <param name="_new_name">The name of the snapshotted VM</param>
         public static XenRef<Task> async_snapshot_with_quiesce(Session session, string _vm, string _new_name)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_snapshot_with_quiesce(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_snapshot_with_quiesce(session.uuid, _vm, _new_name);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_snapshot_with_quiesce(session.uuid, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2382,7 +2783,10 @@ namespace XenAPI
         /// <param name="_new_name">The name of the cloned VM</param>
         public static XenRef<VM> clone(Session session, string _vm, string _new_name)
         {
-            return XenRef<VM>.Create(session.proxy.vm_clone(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_clone(session.uuid, _vm, _new_name);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_clone(session.uuid, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2394,7 +2798,10 @@ namespace XenAPI
         /// <param name="_new_name">The name of the cloned VM</param>
         public static XenRef<Task> async_clone(Session session, string _vm, string _new_name)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_clone(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_clone(session.uuid, _vm, _new_name);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_clone(session.uuid, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2407,7 +2814,10 @@ namespace XenAPI
         /// <param name="_sr">An SR to copy all the VM's disks into (if an invalid reference then it uses the existing SRs)</param>
         public static XenRef<VM> copy(Session session, string _vm, string _new_name, string _sr)
         {
-            return XenRef<VM>.Create(session.proxy.vm_copy(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "", (_sr != null) ? _sr : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_copy(session.uuid, _vm, _new_name, _sr);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_copy(session.uuid, _vm ?? "", _new_name ?? "", _sr ?? "").parse());
         }
 
         /// <summary>
@@ -2420,7 +2830,10 @@ namespace XenAPI
         /// <param name="_sr">An SR to copy all the VM's disks into (if an invalid reference then it uses the existing SRs)</param>
         public static XenRef<Task> async_copy(Session session, string _vm, string _new_name, string _sr)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_copy(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "", (_sr != null) ? _sr : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_copy(session.uuid, _vm, _new_name, _sr);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_copy(session.uuid, _vm ?? "", _new_name ?? "", _sr ?? "").parse());
         }
 
         /// <summary>
@@ -2431,7 +2844,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given snapshotted state</param>
         public static void revert(Session session, string _vm)
         {
-            session.proxy.vm_revert(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_revert(session.uuid, _vm);
+            else
+                session.proxy.vm_revert(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2442,7 +2858,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given snapshotted state</param>
         public static XenRef<Task> async_revert(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_revert(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_revert(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_revert(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2454,7 +2873,10 @@ namespace XenAPI
         /// <param name="_new_name">The name of the checkpointed VM</param>
         public static XenRef<VM> checkpoint(Session session, string _vm, string _new_name)
         {
-            return XenRef<VM>.Create(session.proxy.vm_checkpoint(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_checkpoint(session.uuid, _vm, _new_name);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_checkpoint(session.uuid, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2466,7 +2888,10 @@ namespace XenAPI
         /// <param name="_new_name">The name of the checkpointed VM</param>
         public static XenRef<Task> async_checkpoint(Session session, string _vm, string _new_name)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_checkpoint(session.uuid, (_vm != null) ? _vm : "", (_new_name != null) ? _new_name : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_checkpoint(session.uuid, _vm, _new_name);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_checkpoint(session.uuid, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2477,7 +2902,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void provision(Session session, string _vm)
         {
-            session.proxy.vm_provision(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_provision(session.uuid, _vm);
+            else
+                session.proxy.vm_provision(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2488,7 +2916,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_provision(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_provision(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_provision(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_provision(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2501,7 +2932,10 @@ namespace XenAPI
         /// <param name="_force">Attempt to force the VM to start. If this flag is false then the VM may fail pre-boot safety checks (e.g. if the CPU the VM last booted on looks substantially different to the current one)</param>
         public static void start(Session session, string _vm, bool _start_paused, bool _force)
         {
-            session.proxy.vm_start(session.uuid, (_vm != null) ? _vm : "", _start_paused, _force).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_start(session.uuid, _vm, _start_paused, _force);
+            else
+                session.proxy.vm_start(session.uuid, _vm ?? "", _start_paused, _force).parse();
         }
 
         /// <summary>
@@ -2514,7 +2948,10 @@ namespace XenAPI
         /// <param name="_force">Attempt to force the VM to start. If this flag is false then the VM may fail pre-boot safety checks (e.g. if the CPU the VM last booted on looks substantially different to the current one)</param>
         public static XenRef<Task> async_start(Session session, string _vm, bool _start_paused, bool _force)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_start(session.uuid, (_vm != null) ? _vm : "", _start_paused, _force).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_start(session.uuid, _vm, _start_paused, _force);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_start(session.uuid, _vm ?? "", _start_paused, _force).parse());
         }
 
         /// <summary>
@@ -2528,7 +2965,10 @@ namespace XenAPI
         /// <param name="_force">Attempt to force the VM to start. If this flag is false then the VM may fail pre-boot safety checks (e.g. if the CPU the VM last booted on looks substantially different to the current one)</param>
         public static void start_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
-            session.proxy.vm_start_on(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", _start_paused, _force).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_start_on(session.uuid, _vm, _host, _start_paused, _force);
+            else
+                session.proxy.vm_start_on(session.uuid, _vm ?? "", _host ?? "", _start_paused, _force).parse();
         }
 
         /// <summary>
@@ -2542,7 +2982,10 @@ namespace XenAPI
         /// <param name="_force">Attempt to force the VM to start. If this flag is false then the VM may fail pre-boot safety checks (e.g. if the CPU the VM last booted on looks substantially different to the current one)</param>
         public static XenRef<Task> async_start_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_start_on(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", _start_paused, _force).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_start_on(session.uuid, _vm, _host, _start_paused, _force);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_start_on(session.uuid, _vm ?? "", _host ?? "", _start_paused, _force).parse());
         }
 
         /// <summary>
@@ -2553,7 +2996,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void pause(Session session, string _vm)
         {
-            session.proxy.vm_pause(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_pause(session.uuid, _vm);
+            else
+                session.proxy.vm_pause(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2564,7 +3010,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_pause(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_pause(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_pause(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_pause(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2575,7 +3024,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void unpause(Session session, string _vm)
         {
-            session.proxy.vm_unpause(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_unpause(session.uuid, _vm);
+            else
+                session.proxy.vm_unpause(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2586,7 +3038,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_unpause(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_unpause(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_unpause(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_unpause(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2597,7 +3052,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void clean_shutdown(Session session, string _vm)
         {
-            session.proxy.vm_clean_shutdown(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_clean_shutdown(session.uuid, _vm);
+            else
+                session.proxy.vm_clean_shutdown(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2608,7 +3066,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_clean_shutdown(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_clean_shutdown(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_clean_shutdown(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_clean_shutdown(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2619,7 +3080,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void shutdown(Session session, string _vm)
         {
-            session.proxy.vm_shutdown(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_shutdown(session.uuid, _vm);
+            else
+                session.proxy.vm_shutdown(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2630,7 +3094,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_shutdown(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_shutdown(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_shutdown(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_shutdown(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2641,7 +3108,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void clean_reboot(Session session, string _vm)
         {
-            session.proxy.vm_clean_reboot(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_clean_reboot(session.uuid, _vm);
+            else
+                session.proxy.vm_clean_reboot(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2652,7 +3122,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_clean_reboot(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_clean_reboot(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_clean_reboot(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_clean_reboot(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2663,7 +3136,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void hard_shutdown(Session session, string _vm)
         {
-            session.proxy.vm_hard_shutdown(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_hard_shutdown(session.uuid, _vm);
+            else
+                session.proxy.vm_hard_shutdown(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2674,7 +3150,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_hard_shutdown(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_hard_shutdown(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_hard_shutdown(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_hard_shutdown(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2685,7 +3164,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void power_state_reset(Session session, string _vm)
         {
-            session.proxy.vm_power_state_reset(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_power_state_reset(session.uuid, _vm);
+            else
+                session.proxy.vm_power_state_reset(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2696,7 +3178,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_power_state_reset(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_power_state_reset(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_power_state_reset(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_power_state_reset(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2707,7 +3192,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void hard_reboot(Session session, string _vm)
         {
-            session.proxy.vm_hard_reboot(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_hard_reboot(session.uuid, _vm);
+            else
+                session.proxy.vm_hard_reboot(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2718,7 +3206,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_hard_reboot(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_hard_reboot(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_hard_reboot(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_hard_reboot(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2729,7 +3220,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void suspend(Session session, string _vm)
         {
-            session.proxy.vm_suspend(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_suspend(session.uuid, _vm);
+            else
+                session.proxy.vm_suspend(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2740,7 +3234,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_suspend(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_suspend(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_suspend(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_suspend(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2753,7 +3250,10 @@ namespace XenAPI
         /// <param name="_force">Attempt to force the VM to resume. If this flag is false then the VM may fail pre-resume safety checks (e.g. if the CPU the VM was running on looks substantially different to the current one)</param>
         public static void resume(Session session, string _vm, bool _start_paused, bool _force)
         {
-            session.proxy.vm_resume(session.uuid, (_vm != null) ? _vm : "", _start_paused, _force).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_resume(session.uuid, _vm, _start_paused, _force);
+            else
+                session.proxy.vm_resume(session.uuid, _vm ?? "", _start_paused, _force).parse();
         }
 
         /// <summary>
@@ -2766,7 +3266,10 @@ namespace XenAPI
         /// <param name="_force">Attempt to force the VM to resume. If this flag is false then the VM may fail pre-resume safety checks (e.g. if the CPU the VM was running on looks substantially different to the current one)</param>
         public static XenRef<Task> async_resume(Session session, string _vm, bool _start_paused, bool _force)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_resume(session.uuid, (_vm != null) ? _vm : "", _start_paused, _force).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_resume(session.uuid, _vm, _start_paused, _force);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_resume(session.uuid, _vm ?? "", _start_paused, _force).parse());
         }
 
         /// <summary>
@@ -2780,7 +3283,10 @@ namespace XenAPI
         /// <param name="_force">Attempt to force the VM to resume. If this flag is false then the VM may fail pre-resume safety checks (e.g. if the CPU the VM was running on looks substantially different to the current one)</param>
         public static void resume_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
-            session.proxy.vm_resume_on(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", _start_paused, _force).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_resume_on(session.uuid, _vm, _host, _start_paused, _force);
+            else
+                session.proxy.vm_resume_on(session.uuid, _vm ?? "", _host ?? "", _start_paused, _force).parse();
         }
 
         /// <summary>
@@ -2794,7 +3300,10 @@ namespace XenAPI
         /// <param name="_force">Attempt to force the VM to resume. If this flag is false then the VM may fail pre-resume safety checks (e.g. if the CPU the VM was running on looks substantially different to the current one)</param>
         public static XenRef<Task> async_resume_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_resume_on(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", _start_paused, _force).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_resume_on(session.uuid, _vm, _host, _start_paused, _force);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_resume_on(session.uuid, _vm ?? "", _host ?? "", _start_paused, _force).parse());
         }
 
         /// <summary>
@@ -2807,7 +3316,10 @@ namespace XenAPI
         /// <param name="_options">Extra configuration operations</param>
         public static void pool_migrate(Session session, string _vm, string _host, Dictionary<string, string> _options)
         {
-            session.proxy.vm_pool_migrate(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_options)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_pool_migrate(session.uuid, _vm, _host, _options);
+            else
+                session.proxy.vm_pool_migrate(session.uuid, _vm ?? "", _host ?? "", Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
         /// <summary>
@@ -2820,7 +3332,10 @@ namespace XenAPI
         /// <param name="_options">Extra configuration operations</param>
         public static XenRef<Task> async_pool_migrate(Session session, string _vm, string _host, Dictionary<string, string> _options)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_pool_migrate(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "", Maps.convert_to_proxy_string_string(_options)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_pool_migrate(session.uuid, _vm, _host, _options);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_pool_migrate(session.uuid, _vm ?? "", _host ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -2832,7 +3347,10 @@ namespace XenAPI
         /// <param name="_nvcpu">The number of VCPUs</param>
         public static void set_VCPUs_number_live(Session session, string _vm, long _nvcpu)
         {
-            session.proxy.vm_set_vcpus_number_live(session.uuid, (_vm != null) ? _vm : "", _nvcpu.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_vcpus_number_live(session.uuid, _vm, _nvcpu);
+            else
+                session.proxy.vm_set_vcpus_number_live(session.uuid, _vm ?? "", _nvcpu.ToString()).parse();
         }
 
         /// <summary>
@@ -2844,7 +3362,10 @@ namespace XenAPI
         /// <param name="_nvcpu">The number of VCPUs</param>
         public static XenRef<Task> async_set_VCPUs_number_live(Session session, string _vm, long _nvcpu)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_vcpus_number_live(session.uuid, (_vm != null) ? _vm : "", _nvcpu.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_vcpus_number_live(session.uuid, _vm, _nvcpu);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_vcpus_number_live(session.uuid, _vm ?? "", _nvcpu.ToString()).parse());
         }
 
         /// <summary>
@@ -2857,7 +3378,10 @@ namespace XenAPI
         /// <param name="_value">The value</param>
         public static void add_to_VCPUs_params_live(Session session, string _vm, string _key, string _value)
         {
-            session.proxy.vm_add_to_vcpus_params_live(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_add_to_vcpus_params_live(session.uuid, _vm, _key, _value);
+            else
+                session.proxy.vm_add_to_vcpus_params_live(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2870,7 +3394,10 @@ namespace XenAPI
         /// <param name="_value">The value</param>
         public static XenRef<Task> async_add_to_VCPUs_params_live(Session session, string _vm, string _key, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_add_to_vcpus_params_live(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_add_to_vcpus_params_live(session.uuid, _vm, _key, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_add_to_vcpus_params_live(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -2882,7 +3409,10 @@ namespace XenAPI
         /// <param name="_value">The value</param>
         public static void set_ha_restart_priority(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_ha_restart_priority(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_ha_restart_priority(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_ha_restart_priority(session.uuid, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2896,7 +3426,10 @@ namespace XenAPI
         [Deprecated("XenServer 6.0")]
         public static void set_ha_always_run(Session session, string _vm, bool _value)
         {
-            session.proxy.vm_set_ha_always_run(session.uuid, (_vm != null) ? _vm : "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_ha_always_run(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_ha_always_run(session.uuid, _vm ?? "", _value).parse();
         }
 
         /// <summary>
@@ -2907,7 +3440,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static long compute_memory_overhead(Session session, string _vm)
         {
-            return long.Parse((string)session.proxy.vm_compute_memory_overhead(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_compute_memory_overhead(session.uuid, _vm);
+            else
+                return long.Parse((string)session.proxy.vm_compute_memory_overhead(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2918,7 +3454,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_compute_memory_overhead(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_compute_memory_overhead(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_compute_memory_overhead(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_compute_memory_overhead(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2930,7 +3469,10 @@ namespace XenAPI
         /// <param name="_value">The new value of memory_dynamic_max</param>
         public static void set_memory_dynamic_max(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory_dynamic_max(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory_dynamic_max(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_memory_dynamic_max(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -2942,7 +3484,10 @@ namespace XenAPI
         /// <param name="_value">The new value of memory_dynamic_min</param>
         public static void set_memory_dynamic_min(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory_dynamic_min(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory_dynamic_min(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_memory_dynamic_min(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -2955,7 +3500,10 @@ namespace XenAPI
         /// <param name="_max">The new maximum value</param>
         public static void set_memory_dynamic_range(Session session, string _vm, long _min, long _max)
         {
-            session.proxy.vm_set_memory_dynamic_range(session.uuid, (_vm != null) ? _vm : "", _min.ToString(), _max.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory_dynamic_range(session.uuid, _vm, _min, _max);
+            else
+                session.proxy.vm_set_memory_dynamic_range(session.uuid, _vm ?? "", _min.ToString(), _max.ToString()).parse();
         }
 
         /// <summary>
@@ -2968,7 +3516,10 @@ namespace XenAPI
         /// <param name="_max">The new maximum value</param>
         public static XenRef<Task> async_set_memory_dynamic_range(Session session, string _vm, long _min, long _max)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_dynamic_range(session.uuid, (_vm != null) ? _vm : "", _min.ToString(), _max.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_memory_dynamic_range(session.uuid, _vm, _min, _max);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_dynamic_range(session.uuid, _vm ?? "", _min.ToString(), _max.ToString()).parse());
         }
 
         /// <summary>
@@ -2980,7 +3531,10 @@ namespace XenAPI
         /// <param name="_value">The new value of memory_static_max</param>
         public static void set_memory_static_max(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory_static_max(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory_static_max(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_memory_static_max(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -2992,7 +3546,10 @@ namespace XenAPI
         /// <param name="_value">The new value of memory_static_min</param>
         public static void set_memory_static_min(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory_static_min(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory_static_min(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_memory_static_min(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3005,7 +3562,10 @@ namespace XenAPI
         /// <param name="_max">The new maximum value</param>
         public static void set_memory_static_range(Session session, string _vm, long _min, long _max)
         {
-            session.proxy.vm_set_memory_static_range(session.uuid, (_vm != null) ? _vm : "", _min.ToString(), _max.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory_static_range(session.uuid, _vm, _min, _max);
+            else
+                session.proxy.vm_set_memory_static_range(session.uuid, _vm ?? "", _min.ToString(), _max.ToString()).parse();
         }
 
         /// <summary>
@@ -3018,7 +3578,10 @@ namespace XenAPI
         /// <param name="_max">The new maximum value</param>
         public static XenRef<Task> async_set_memory_static_range(Session session, string _vm, long _min, long _max)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_static_range(session.uuid, (_vm != null) ? _vm : "", _min.ToString(), _max.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_memory_static_range(session.uuid, _vm, _min, _max);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_static_range(session.uuid, _vm ?? "", _min.ToString(), _max.ToString()).parse());
         }
 
         /// <summary>
@@ -3033,7 +3596,10 @@ namespace XenAPI
         /// <param name="_dynamic_max">The new value of memory_dynamic_max.</param>
         public static void set_memory_limits(Session session, string _vm, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
         {
-            session.proxy.vm_set_memory_limits(session.uuid, (_vm != null) ? _vm : "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory_limits(session.uuid, _vm, _static_min, _static_max, _dynamic_min, _dynamic_max);
+            else
+                session.proxy.vm_set_memory_limits(session.uuid, _vm ?? "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse();
         }
 
         /// <summary>
@@ -3048,7 +3614,10 @@ namespace XenAPI
         /// <param name="_dynamic_max">The new value of memory_dynamic_max.</param>
         public static XenRef<Task> async_set_memory_limits(Session session, string _vm, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_limits(session.uuid, (_vm != null) ? _vm : "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_memory_limits(session.uuid, _vm, _static_min, _static_max, _dynamic_min, _dynamic_max);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_limits(session.uuid, _vm ?? "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse());
         }
 
         /// <summary>
@@ -3060,7 +3629,10 @@ namespace XenAPI
         /// <param name="_value">The new memory allocation (bytes).</param>
         public static void set_memory(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_memory(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_memory(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3072,7 +3644,10 @@ namespace XenAPI
         /// <param name="_value">The new memory allocation (bytes).</param>
         public static XenRef<Task> async_set_memory(Session session, string _vm, long _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_memory(session.uuid, _vm, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory(session.uuid, _vm ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -3086,7 +3661,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.6")]
         public static void set_memory_target_live(Session session, string _vm, long _target)
         {
-            session.proxy.vm_set_memory_target_live(session.uuid, (_vm != null) ? _vm : "", _target.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_memory_target_live(session.uuid, _vm, _target);
+            else
+                session.proxy.vm_set_memory_target_live(session.uuid, _vm ?? "", _target.ToString()).parse();
         }
 
         /// <summary>
@@ -3100,7 +3678,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.6")]
         public static XenRef<Task> async_set_memory_target_live(Session session, string _vm, long _target)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_memory_target_live(session.uuid, (_vm != null) ? _vm : "", _target.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_memory_target_live(session.uuid, _vm, _target);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_target_live(session.uuid, _vm ?? "", _target.ToString()).parse());
         }
 
         /// <summary>
@@ -3113,7 +3694,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.6")]
         public static void wait_memory_target_live(Session session, string _vm)
         {
-            session.proxy.vm_wait_memory_target_live(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_wait_memory_target_live(session.uuid, _vm);
+            else
+                session.proxy.vm_wait_memory_target_live(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3126,7 +3710,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.6")]
         public static XenRef<Task> async_wait_memory_target_live(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_wait_memory_target_live(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_wait_memory_target_live(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_wait_memory_target_live(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3139,7 +3726,10 @@ namespace XenAPI
         [Deprecated("XenServer 6.1")]
         public static bool get_cooperative(Session session, string _vm)
         {
-            return (bool)session.proxy.vm_get_cooperative(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_cooperative(session.uuid, _vm);
+            else
+                return (bool)session.proxy.vm_get_cooperative(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3152,7 +3742,10 @@ namespace XenAPI
         [Deprecated("XenServer 6.1")]
         public static XenRef<Task> async_get_cooperative(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_get_cooperative(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_get_cooperative(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_get_cooperative(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3164,7 +3757,10 @@ namespace XenAPI
         /// <param name="_value">The new shadow memory multiplier to set</param>
         public static void set_HVM_shadow_multiplier(Session session, string _vm, double _value)
         {
-            session.proxy.vm_set_hvm_shadow_multiplier(session.uuid, (_vm != null) ? _vm : "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_hvm_shadow_multiplier(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_hvm_shadow_multiplier(session.uuid, _vm ?? "", _value).parse();
         }
 
         /// <summary>
@@ -3176,7 +3772,10 @@ namespace XenAPI
         /// <param name="_multiplier">The new shadow memory multiplier to set</param>
         public static void set_shadow_multiplier_live(Session session, string _vm, double _multiplier)
         {
-            session.proxy.vm_set_shadow_multiplier_live(session.uuid, (_vm != null) ? _vm : "", _multiplier).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_shadow_multiplier_live(session.uuid, _vm, _multiplier);
+            else
+                session.proxy.vm_set_shadow_multiplier_live(session.uuid, _vm ?? "", _multiplier).parse();
         }
 
         /// <summary>
@@ -3188,7 +3787,10 @@ namespace XenAPI
         /// <param name="_multiplier">The new shadow memory multiplier to set</param>
         public static XenRef<Task> async_set_shadow_multiplier_live(Session session, string _vm, double _multiplier)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_shadow_multiplier_live(session.uuid, (_vm != null) ? _vm : "", _multiplier).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_shadow_multiplier_live(session.uuid, _vm, _multiplier);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_shadow_multiplier_live(session.uuid, _vm ?? "", _multiplier).parse());
         }
 
         /// <summary>
@@ -3200,7 +3802,10 @@ namespace XenAPI
         /// <param name="_value">The new maximum number of VCPUs</param>
         public static void set_VCPUs_max(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_vcpus_max(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_vcpus_max(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_vcpus_max(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3212,7 +3817,10 @@ namespace XenAPI
         /// <param name="_value">The new maximum number of VCPUs</param>
         public static void set_VCPUs_at_startup(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_vcpus_at_startup(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_vcpus_at_startup(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_vcpus_at_startup(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3224,7 +3832,10 @@ namespace XenAPI
         /// <param name="_key">The key to send</param>
         public static void send_sysrq(Session session, string _vm, string _key)
         {
-            session.proxy.vm_send_sysrq(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_send_sysrq(session.uuid, _vm, _key);
+            else
+                session.proxy.vm_send_sysrq(session.uuid, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -3236,7 +3847,10 @@ namespace XenAPI
         /// <param name="_key">The key to send</param>
         public static XenRef<Task> async_send_sysrq(Session session, string _vm, string _key)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_send_sysrq(session.uuid, (_vm != null) ? _vm : "", (_key != null) ? _key : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_send_sysrq(session.uuid, _vm, _key);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_send_sysrq(session.uuid, _vm ?? "", _key ?? "").parse());
         }
 
         /// <summary>
@@ -3248,7 +3862,10 @@ namespace XenAPI
         /// <param name="_trigger">The trigger to send</param>
         public static void send_trigger(Session session, string _vm, string _trigger)
         {
-            session.proxy.vm_send_trigger(session.uuid, (_vm != null) ? _vm : "", (_trigger != null) ? _trigger : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_send_trigger(session.uuid, _vm, _trigger);
+            else
+                session.proxy.vm_send_trigger(session.uuid, _vm ?? "", _trigger ?? "").parse();
         }
 
         /// <summary>
@@ -3260,7 +3877,10 @@ namespace XenAPI
         /// <param name="_trigger">The trigger to send</param>
         public static XenRef<Task> async_send_trigger(Session session, string _vm, string _trigger)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_send_trigger(session.uuid, (_vm != null) ? _vm : "", (_trigger != null) ? _trigger : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_send_trigger(session.uuid, _vm, _trigger);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_send_trigger(session.uuid, _vm ?? "", _trigger ?? "").parse());
         }
 
         /// <summary>
@@ -3273,7 +3893,10 @@ namespace XenAPI
         /// <param name="_approximate">If false the limit is calculated with the guest's current exact configuration. Otherwise a more approximate calculation is performed</param>
         public static long maximise_memory(Session session, string _vm, long _total, bool _approximate)
         {
-            return long.Parse((string)session.proxy.vm_maximise_memory(session.uuid, (_vm != null) ? _vm : "", _total.ToString(), _approximate).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_maximise_memory(session.uuid, _vm, _total, _approximate);
+            else
+                return long.Parse((string)session.proxy.vm_maximise_memory(session.uuid, _vm ?? "", _total.ToString(), _approximate).parse());
         }
 
         /// <summary>
@@ -3286,7 +3909,10 @@ namespace XenAPI
         /// <param name="_approximate">If false the limit is calculated with the guest's current exact configuration. Otherwise a more approximate calculation is performed</param>
         public static XenRef<Task> async_maximise_memory(Session session, string _vm, long _total, bool _approximate)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_maximise_memory(session.uuid, (_vm != null) ? _vm : "", _total.ToString(), _approximate).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_maximise_memory(session.uuid, _vm, _total, _approximate);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_maximise_memory(session.uuid, _vm ?? "", _total.ToString(), _approximate).parse());
         }
 
         /// <summary>
@@ -3302,7 +3928,10 @@ namespace XenAPI
         /// <param name="_options">Other parameters</param>
         public static XenRef<VM> migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
-            return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_migrate_send(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -3318,7 +3947,10 @@ namespace XenAPI
         /// <param name="_options">Other parameters</param>
         public static XenRef<Task> async_migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_migrate_send(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -3334,7 +3966,10 @@ namespace XenAPI
         /// <param name="_options">Other parameters</param>
         public static void assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
-            session.proxy.vm_assert_can_migrate(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_assert_can_migrate(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options);
+            else
+                session.proxy.vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
         /// <summary>
@@ -3350,7 +3985,10 @@ namespace XenAPI
         /// <param name="_options">Other parameters</param>
         public static XenRef<Task> async_assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.uuid, (_vm != null) ? _vm : "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_assert_can_migrate(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -3361,7 +3999,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static VM get_boot_record(Session session, string _vm)
         {
-            return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_boot_record(session.uuid, _vm);
+            else
+                return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3372,7 +4013,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<Data_source> get_data_sources(Session session, string _vm)
         {
-            return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.vm_get_data_sources(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_data_sources(session.uuid, _vm);
+            else
+                return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.vm_get_data_sources(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3384,7 +4028,10 @@ namespace XenAPI
         /// <param name="_data_source">The data source to record</param>
         public static void record_data_source(Session session, string _vm, string _data_source)
         {
-            session.proxy.vm_record_data_source(session.uuid, (_vm != null) ? _vm : "", (_data_source != null) ? _data_source : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_record_data_source(session.uuid, _vm, _data_source);
+            else
+                session.proxy.vm_record_data_source(session.uuid, _vm ?? "", _data_source ?? "").parse();
         }
 
         /// <summary>
@@ -3396,7 +4043,10 @@ namespace XenAPI
         /// <param name="_data_source">The data source to query</param>
         public static double query_data_source(Session session, string _vm, string _data_source)
         {
-            return Convert.ToDouble(session.proxy.vm_query_data_source(session.uuid, (_vm != null) ? _vm : "", (_data_source != null) ? _data_source : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_query_data_source(session.uuid, _vm, _data_source);
+            else
+                return Convert.ToDouble(session.proxy.vm_query_data_source(session.uuid, _vm ?? "", _data_source ?? "").parse());
         }
 
         /// <summary>
@@ -3408,7 +4058,10 @@ namespace XenAPI
         /// <param name="_data_source">The data source whose archives are to be forgotten</param>
         public static void forget_data_source_archives(Session session, string _vm, string _data_source)
         {
-            session.proxy.vm_forget_data_source_archives(session.uuid, (_vm != null) ? _vm : "", (_data_source != null) ? _data_source : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_forget_data_source_archives(session.uuid, _vm, _data_source);
+            else
+                session.proxy.vm_forget_data_source_archives(session.uuid, _vm ?? "", _data_source ?? "").parse();
         }
 
         /// <summary>
@@ -3420,7 +4073,10 @@ namespace XenAPI
         /// <param name="_op">proposed operation</param>
         public static void assert_operation_valid(Session session, string _vm, vm_operations _op)
         {
-            session.proxy.vm_assert_operation_valid(session.uuid, (_vm != null) ? _vm : "", vm_operations_helper.ToString(_op)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_assert_operation_valid(session.uuid, _vm, _op);
+            else
+                session.proxy.vm_assert_operation_valid(session.uuid, _vm ?? "", vm_operations_helper.ToString(_op)).parse();
         }
 
         /// <summary>
@@ -3432,7 +4088,10 @@ namespace XenAPI
         /// <param name="_op">proposed operation</param>
         public static XenRef<Task> async_assert_operation_valid(Session session, string _vm, vm_operations _op)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_operation_valid(session.uuid, (_vm != null) ? _vm : "", vm_operations_helper.ToString(_op)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_assert_operation_valid(session.uuid, _vm, _op);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_operation_valid(session.uuid, _vm ?? "", vm_operations_helper.ToString(_op)).parse());
         }
 
         /// <summary>
@@ -3443,7 +4102,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void update_allowed_operations(Session session, string _vm)
         {
-            session.proxy.vm_update_allowed_operations(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_update_allowed_operations(session.uuid, _vm);
+            else
+                session.proxy.vm_update_allowed_operations(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3454,7 +4116,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_update_allowed_operations(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_update_allowed_operations(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_update_allowed_operations(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_update_allowed_operations(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3465,7 +4130,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string[] get_allowed_VBD_devices(Session session, string _vm)
         {
-            return (string [])session.proxy.vm_get_allowed_vbd_devices(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_allowed_vbd_devices(session.uuid, _vm);
+            else
+                return (string [])session.proxy.vm_get_allowed_vbd_devices(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3476,7 +4144,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static string[] get_allowed_VIF_devices(Session session, string _vm)
         {
-            return (string [])session.proxy.vm_get_allowed_vif_devices(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_allowed_vif_devices(session.uuid, _vm);
+            else
+                return (string [])session.proxy.vm_get_allowed_vif_devices(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3487,7 +4158,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<Host>> get_possible_hosts(Session session, string _vm)
         {
-            return XenRef<Host>.Create(session.proxy.vm_get_possible_hosts(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_possible_hosts(session.uuid, _vm);
+            else
+                return XenRef<Host>.Create(session.proxy.vm_get_possible_hosts(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3498,7 +4172,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_get_possible_hosts(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_get_possible_hosts(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_get_possible_hosts(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_get_possible_hosts(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3510,7 +4187,10 @@ namespace XenAPI
         /// <param name="_host">The host</param>
         public static void assert_can_boot_here(Session session, string _vm, string _host)
         {
-            session.proxy.vm_assert_can_boot_here(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_assert_can_boot_here(session.uuid, _vm, _host);
+            else
+                session.proxy.vm_assert_can_boot_here(session.uuid, _vm ?? "", _host ?? "").parse();
         }
 
         /// <summary>
@@ -3522,7 +4202,10 @@ namespace XenAPI
         /// <param name="_host">The host</param>
         public static XenRef<Task> async_assert_can_boot_here(Session session, string _vm, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_boot_here(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_assert_can_boot_here(session.uuid, _vm, _host);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_boot_here(session.uuid, _vm ?? "", _host ?? "").parse());
         }
 
         /// <summary>
@@ -3535,7 +4218,10 @@ namespace XenAPI
         /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
         public static XenRef<Blob> create_new_blob(Session session, string _vm, string _name, string _mime_type)
         {
-            return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.uuid, (_vm != null) ? _vm : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_create_new_blob(session.uuid, _vm, _name, _mime_type);
+            else
+                return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.uuid, _vm ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -3548,7 +4234,10 @@ namespace XenAPI
         /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _vm, string _name, string _mime_type)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.uuid, (_vm != null) ? _vm : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_create_new_blob(session.uuid, _vm, _name, _mime_type);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.uuid, _vm ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -3562,7 +4251,10 @@ namespace XenAPI
         /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Blob> create_new_blob(Session session, string _vm, string _name, string _mime_type, bool _public)
         {
-            return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.uuid, (_vm != null) ? _vm : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_create_new_blob(session.uuid, _vm, _name, _mime_type, _public);
+            else
+                return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.uuid, _vm ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -3576,7 +4268,10 @@ namespace XenAPI
         /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _vm, string _name, string _mime_type, bool _public)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.uuid, (_vm != null) ? _vm : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_create_new_blob(session.uuid, _vm, _name, _mime_type, _public);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.uuid, _vm ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -3587,7 +4282,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static void assert_agile(Session session, string _vm)
         {
-            session.proxy.vm_assert_agile(session.uuid, (_vm != null) ? _vm : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_assert_agile(session.uuid, _vm);
+            else
+                session.proxy.vm_assert_agile(session.uuid, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3598,7 +4296,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_assert_agile(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_agile(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_assert_agile(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_agile(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3609,7 +4310,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<XenRef<Host>, string[]> retrieve_wlb_recommendations(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_XenRefHost_string_array(session.proxy.vm_retrieve_wlb_recommendations(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_retrieve_wlb_recommendations(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_XenRefHost_string_array(session.proxy.vm_retrieve_wlb_recommendations(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3620,7 +4324,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_retrieve_wlb_recommendations(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_retrieve_wlb_recommendations(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_retrieve_wlb_recommendations(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_retrieve_wlb_recommendations(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3632,7 +4339,10 @@ namespace XenAPI
         /// <param name="_host">The host to copy the BIOS strings from</param>
         public static void copy_bios_strings(Session session, string _vm, string _host)
         {
-            session.proxy.vm_copy_bios_strings(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_copy_bios_strings(session.uuid, _vm, _host);
+            else
+                session.proxy.vm_copy_bios_strings(session.uuid, _vm ?? "", _host ?? "").parse();
         }
 
         /// <summary>
@@ -3644,7 +4354,10 @@ namespace XenAPI
         /// <param name="_host">The host to copy the BIOS strings from</param>
         public static XenRef<Task> async_copy_bios_strings(Session session, string _vm, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_copy_bios_strings(session.uuid, (_vm != null) ? _vm : "", (_host != null) ? _host : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_copy_bios_strings(session.uuid, _vm, _host);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_copy_bios_strings(session.uuid, _vm ?? "", _host ?? "").parse());
         }
 
         /// <summary>
@@ -3656,7 +4369,10 @@ namespace XenAPI
         /// <param name="_value">The value</param>
         public static void set_protection_policy(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_protection_policy(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_protection_policy(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_protection_policy(session.uuid, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -3668,7 +4384,10 @@ namespace XenAPI
         /// <param name="_value">The value</param>
         public static void set_snapshot_schedule(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_snapshot_schedule(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_snapshot_schedule(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_snapshot_schedule(session.uuid, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -3680,7 +4399,10 @@ namespace XenAPI
         /// <param name="_value">This VM's start delay in seconds</param>
         public static void set_start_delay(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_start_delay(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_start_delay(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_start_delay(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3692,7 +4414,10 @@ namespace XenAPI
         /// <param name="_value">This VM's start delay in seconds</param>
         public static XenRef<Task> async_set_start_delay(Session session, string _vm, long _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_start_delay(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_start_delay(session.uuid, _vm, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_start_delay(session.uuid, _vm ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -3704,7 +4429,10 @@ namespace XenAPI
         /// <param name="_value">This VM's shutdown delay in seconds</param>
         public static void set_shutdown_delay(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_shutdown_delay(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_shutdown_delay(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_shutdown_delay(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3716,7 +4444,10 @@ namespace XenAPI
         /// <param name="_value">This VM's shutdown delay in seconds</param>
         public static XenRef<Task> async_set_shutdown_delay(Session session, string _vm, long _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_shutdown_delay(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_shutdown_delay(session.uuid, _vm, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_shutdown_delay(session.uuid, _vm ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -3728,7 +4459,10 @@ namespace XenAPI
         /// <param name="_value">This VM's boot order</param>
         public static void set_order(Session session, string _vm, long _value)
         {
-            session.proxy.vm_set_order(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_order(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_order(session.uuid, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3740,7 +4474,10 @@ namespace XenAPI
         /// <param name="_value">This VM's boot order</param>
         public static XenRef<Task> async_set_order(Session session, string _vm, long _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_order(session.uuid, (_vm != null) ? _vm : "", _value.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_order(session.uuid, _vm, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_order(session.uuid, _vm ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -3752,7 +4489,10 @@ namespace XenAPI
         /// <param name="_value">The suspend VDI uuid</param>
         public static void set_suspend_VDI(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_suspend_vdi(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_suspend_vdi(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_suspend_vdi(session.uuid, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -3764,7 +4504,10 @@ namespace XenAPI
         /// <param name="_value">The suspend VDI uuid</param>
         public static XenRef<Task> async_set_suspend_VDI(Session session, string _vm, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_suspend_vdi(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_suspend_vdi(session.uuid, _vm, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_suspend_vdi(session.uuid, _vm ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -3776,7 +4519,10 @@ namespace XenAPI
         /// <param name="_session_to">The session to which the VM is to be recovered.</param>
         public static void assert_can_be_recovered(Session session, string _vm, string _session_to)
         {
-            session.proxy.vm_assert_can_be_recovered(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_assert_can_be_recovered(session.uuid, _vm, _session_to);
+            else
+                session.proxy.vm_assert_can_be_recovered(session.uuid, _vm ?? "", _session_to ?? "").parse();
         }
 
         /// <summary>
@@ -3788,7 +4534,10 @@ namespace XenAPI
         /// <param name="_session_to">The session to which the VM is to be recovered.</param>
         public static XenRef<Task> async_assert_can_be_recovered(Session session, string _vm, string _session_to)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_be_recovered(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_assert_can_be_recovered(session.uuid, _vm, _session_to);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_be_recovered(session.uuid, _vm ?? "", _session_to ?? "").parse());
         }
 
         /// <summary>
@@ -3800,7 +4549,10 @@ namespace XenAPI
         /// <param name="_session_to">The session to which the SRs of the VM have to be recovered.</param>
         public static List<XenRef<SR>> get_SRs_required_for_recovery(Session session, string _vm, string _session_to)
         {
-            return XenRef<SR>.Create(session.proxy.vm_get_srs_required_for_recovery(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_srs_required_for_recovery(session.uuid, _vm, _session_to);
+            else
+                return XenRef<SR>.Create(session.proxy.vm_get_srs_required_for_recovery(session.uuid, _vm ?? "", _session_to ?? "").parse());
         }
 
         /// <summary>
@@ -3812,7 +4564,10 @@ namespace XenAPI
         /// <param name="_session_to">The session to which the SRs of the VM have to be recovered.</param>
         public static XenRef<Task> async_get_SRs_required_for_recovery(Session session, string _vm, string _session_to)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_get_srs_required_for_recovery(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_get_srs_required_for_recovery(session.uuid, _vm, _session_to);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_get_srs_required_for_recovery(session.uuid, _vm ?? "", _session_to ?? "").parse());
         }
 
         /// <summary>
@@ -3825,7 +4580,10 @@ namespace XenAPI
         /// <param name="_force">Whether the VM should replace newer versions of itself.</param>
         public static void recover(Session session, string _vm, string _session_to, bool _force)
         {
-            session.proxy.vm_recover(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "", _force).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_recover(session.uuid, _vm, _session_to, _force);
+            else
+                session.proxy.vm_recover(session.uuid, _vm ?? "", _session_to ?? "", _force).parse();
         }
 
         /// <summary>
@@ -3838,7 +4596,10 @@ namespace XenAPI
         /// <param name="_force">Whether the VM should replace newer versions of itself.</param>
         public static XenRef<Task> async_recover(Session session, string _vm, string _session_to, bool _force)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_recover(session.uuid, (_vm != null) ? _vm : "", (_session_to != null) ? _session_to : "", _force).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_recover(session.uuid, _vm, _session_to, _force);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_recover(session.uuid, _vm ?? "", _session_to ?? "", _force).parse());
         }
 
         /// <summary>
@@ -3853,7 +4614,10 @@ namespace XenAPI
         /// <param name="_remote_config">Remote configuration options</param>
         public static void import_convert(Session session, string _type, string _username, string _password, string _sr, Dictionary<string, string> _remote_config)
         {
-            session.proxy.vm_import_convert(session.uuid, (_type != null) ? _type : "", (_username != null) ? _username : "", (_password != null) ? _password : "", (_sr != null) ? _sr : "", Maps.convert_to_proxy_string_string(_remote_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_import_convert(session.uuid, _type, _username, _password, _sr, _remote_config);
+            else
+                session.proxy.vm_import_convert(session.uuid, _type ?? "", _username ?? "", _password ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_remote_config)).parse();
         }
 
         /// <summary>
@@ -3868,7 +4632,10 @@ namespace XenAPI
         /// <param name="_remote_config">Remote configuration options</param>
         public static XenRef<Task> async_import_convert(Session session, string _type, string _username, string _password, string _sr, Dictionary<string, string> _remote_config)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_import_convert(session.uuid, (_type != null) ? _type : "", (_username != null) ? _username : "", (_password != null) ? _password : "", (_sr != null) ? _sr : "", Maps.convert_to_proxy_string_string(_remote_config)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_import_convert(session.uuid, _type, _username, _password, _sr, _remote_config);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_import_convert(session.uuid, _type ?? "", _username ?? "", _password ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_remote_config)).parse());
         }
 
         /// <summary>
@@ -3880,7 +4647,10 @@ namespace XenAPI
         /// <param name="_value">The appliance to which this VM should be assigned.</param>
         public static void set_appliance(Session session, string _vm, string _value)
         {
-            session.proxy.vm_set_appliance(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_appliance(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_appliance(session.uuid, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -3892,7 +4662,10 @@ namespace XenAPI
         /// <param name="_value">The appliance to which this VM should be assigned.</param>
         public static XenRef<Task> async_set_appliance(Session session, string _vm, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_appliance(session.uuid, (_vm != null) ? _vm : "", (_value != null) ? _value : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_appliance(session.uuid, _vm, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_appliance(session.uuid, _vm ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -3903,7 +4676,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static Dictionary<string, string> query_services(Session session, string _vm)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_query_services(session.uuid, (_vm != null) ? _vm : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_query_services(session.uuid, _vm);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_query_services(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3914,7 +4690,10 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static XenRef<Task> async_query_services(Session session, string _vm)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_query_services(session.uuid, (_vm != null) ? _vm : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_query_services(session.uuid, _vm);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_query_services(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3928,7 +4707,10 @@ namespace XenAPI
         /// <param name="_args">Arguments for the function</param>
         public static string call_plugin(Session session, string _vm, string _plugin, string _fn, Dictionary<string, string> _args)
         {
-            return (string)session.proxy.vm_call_plugin(session.uuid, (_vm != null) ? _vm : "", (_plugin != null) ? _plugin : "", (_fn != null) ? _fn : "", Maps.convert_to_proxy_string_string(_args)).parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_call_plugin(session.uuid, _vm, _plugin, _fn, _args);
+            else
+                return (string)session.proxy.vm_call_plugin(session.uuid, _vm ?? "", _plugin ?? "", _fn ?? "", Maps.convert_to_proxy_string_string(_args)).parse();
         }
 
         /// <summary>
@@ -3942,7 +4724,10 @@ namespace XenAPI
         /// <param name="_args">Arguments for the function</param>
         public static XenRef<Task> async_call_plugin(Session session, string _vm, string _plugin, string _fn, Dictionary<string, string> _args)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_call_plugin(session.uuid, (_vm != null) ? _vm : "", (_plugin != null) ? _plugin : "", (_fn != null) ? _fn : "", Maps.convert_to_proxy_string_string(_args)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_call_plugin(session.uuid, _vm, _plugin, _fn, _args);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_call_plugin(session.uuid, _vm ?? "", _plugin ?? "", _fn ?? "", Maps.convert_to_proxy_string_string(_args)).parse());
         }
 
         /// <summary>
@@ -3954,7 +4739,10 @@ namespace XenAPI
         /// <param name="_value">True to provide the vendor PCI device.</param>
         public static void set_has_vendor_device(Session session, string _vm, bool _value)
         {
-            session.proxy.vm_set_has_vendor_device(session.uuid, (_vm != null) ? _vm : "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_has_vendor_device(session.uuid, _vm, _value);
+            else
+                session.proxy.vm_set_has_vendor_device(session.uuid, _vm ?? "", _value).parse();
         }
 
         /// <summary>
@@ -3966,7 +4754,10 @@ namespace XenAPI
         /// <param name="_value">True to provide the vendor PCI device.</param>
         public static XenRef<Task> async_set_has_vendor_device(Session session, string _vm, bool _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_set_has_vendor_device(session.uuid, (_vm != null) ? _vm : "", _value).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_has_vendor_device(session.uuid, _vm, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_has_vendor_device(session.uuid, _vm ?? "", _value).parse());
         }
 
         /// <summary>
@@ -3980,7 +4771,10 @@ namespace XenAPI
         /// <param name="_force">Force the import</param>
         public static List<XenRef<VM>> import(Session session, string _url, string _sr, bool _full_restore, bool _force)
         {
-            return XenRef<VM>.Create(session.proxy.vm_import(session.uuid, (_url != null) ? _url : "", (_sr != null) ? _sr : "", _full_restore, _force).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_import(session.uuid, _url, _sr, _full_restore, _force);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_import(session.uuid, _url ?? "", _sr ?? "", _full_restore, _force).parse());
         }
 
         /// <summary>
@@ -3994,7 +4788,10 @@ namespace XenAPI
         /// <param name="_force">Force the import</param>
         public static XenRef<Task> async_import(Session session, string _url, string _sr, bool _full_restore, bool _force)
         {
-            return XenRef<Task>.Create(session.proxy.async_vm_import(session.uuid, (_url != null) ? _url : "", (_sr != null) ? _sr : "", _full_restore, _force).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_import(session.uuid, _url, _sr, _full_restore, _force);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_import(session.uuid, _url ?? "", _sr ?? "", _full_restore, _force).parse());
         }
 
         /// <summary>
@@ -4004,7 +4801,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<VM>> get_all(Session session)
         {
-            return XenRef<VM>.Create(session.proxy.vm_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_all(session.uuid);
+            else
+                return XenRef<VM>.Create(session.proxy.vm_get_all(session.uuid).parse());
         }
 
         /// <summary>
@@ -4014,7 +4814,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VM>, VM> get_all_records(Session session)
         {
-            return XenRef<VM>.Create<Proxy_VM>(session.proxy.vm_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_all_records(session.uuid);
+            else
+                return XenRef<VM>.Create<Proxy_VM>(session.proxy.vm_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
@@ -4033,7 +4836,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
@@ -4051,7 +4854,7 @@ namespace XenAPI
                 }
             }
         }
-        private List<vm_operations> _allowed_operations;
+        private List<vm_operations> _allowed_operations = new List<vm_operations>() {};
 
         /// <summary>
         /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
@@ -4069,11 +4872,12 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, vm_operations> _current_operations;
+        private Dictionary<string, vm_operations> _current_operations = new Dictionary<string, vm_operations>() {};
 
         /// <summary>
         /// Current power state of the machine
         /// </summary>
+        [JsonConverter(typeof(vm_power_stateConverter))]
         public virtual vm_power_state power_state
         {
             get { return _power_state; }
@@ -4105,7 +4909,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_label;
+        private string _name_label = "";
 
         /// <summary>
         /// a notes field containing human-readable description
@@ -4123,7 +4927,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_description;
+        private string _name_description = "";
 
         /// <summary>
         /// Creators of VMs and templates may store version information here.
@@ -4178,11 +4982,12 @@ namespace XenAPI
                 }
             }
         }
-        private bool _is_default_template;
+        private bool _is_default_template = false;
 
         /// <summary>
         /// The VDI that a suspend image is stored on. (Only has meaning if VM is currently suspended)
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VDI>))]
         public virtual XenRef<VDI> suspend_VDI
         {
             get { return _suspend_VDI; }
@@ -4196,11 +5001,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VDI> _suspend_VDI;
+        private XenRef<VDI> _suspend_VDI = new XenRef<VDI>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// the host the VM is currently resident on
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Host>))]
         public virtual XenRef<Host> resident_on
         {
             get { return _resident_on; }
@@ -4214,11 +5020,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<Host> _resident_on;
+        private XenRef<Host> _resident_on = new XenRef<Host>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// A host which the VM has some affinity for (or NULL). This is used as a hint to the start call when it decides where to run the VM. Resource constraints may cause the VM to be started elsewhere.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Host>))]
         public virtual XenRef<Host> affinity
         {
             get { return _affinity; }
@@ -4232,7 +5039,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<Host> _affinity;
+        private XenRef<Host> _affinity = new XenRef<Host>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// Virtualization memory overhead (bytes).
@@ -4250,7 +5057,7 @@ namespace XenAPI
                 }
             }
         }
-        private long _memory_overhead;
+        private long _memory_overhead = 0;
 
         /// <summary>
         /// Dynamically-set memory target (bytes). The value of this field indicates the current target for memory available to this VM.
@@ -4268,7 +5075,7 @@ namespace XenAPI
                 }
             }
         }
-        private long _memory_target;
+        private long _memory_target = 0;
 
         /// <summary>
         /// Statically-set (i.e. absolute) maximum (bytes). The value of this field at VM start time acts as a hard limit of the amount of memory a guest can use. New values only take effect on reboot.
@@ -4358,7 +5165,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _VCPUs_params;
+        private Dictionary<string, string> _VCPUs_params = new Dictionary<string, string>() {};
 
         /// <summary>
         /// Max number of VCPUs
@@ -4399,6 +5206,7 @@ namespace XenAPI
         /// <summary>
         /// action to take after the guest has shutdown itself
         /// </summary>
+        [JsonConverter(typeof(on_normal_exitConverter))]
         public virtual on_normal_exit actions_after_shutdown
         {
             get { return _actions_after_shutdown; }
@@ -4417,6 +5225,7 @@ namespace XenAPI
         /// <summary>
         /// action to take after the guest has rebooted itself
         /// </summary>
+        [JsonConverter(typeof(on_normal_exitConverter))]
         public virtual on_normal_exit actions_after_reboot
         {
             get { return _actions_after_reboot; }
@@ -4435,6 +5244,7 @@ namespace XenAPI
         /// <summary>
         /// action to take if the guest crashes
         /// </summary>
+        [JsonConverter(typeof(on_crash_behaviourConverter))]
         public virtual on_crash_behaviour actions_after_crash
         {
             get { return _actions_after_crash; }
@@ -4453,6 +5263,7 @@ namespace XenAPI
         /// <summary>
         /// virtual console devices
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Console>))]
         public virtual List<XenRef<Console>> consoles
         {
             get { return _consoles; }
@@ -4466,11 +5277,12 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Console>> _consoles;
+        private List<XenRef<Console>> _consoles = new List<XenRef<Console>>() {};
 
         /// <summary>
         /// virtual network interfaces
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VIF>))]
         public virtual List<XenRef<VIF>> VIFs
         {
             get { return _VIFs; }
@@ -4484,11 +5296,12 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VIF>> _VIFs;
+        private List<XenRef<VIF>> _VIFs = new List<XenRef<VIF>>() {};
 
         /// <summary>
         /// virtual block devices
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VBD>))]
         public virtual List<XenRef<VBD>> VBDs
         {
             get { return _VBDs; }
@@ -4502,11 +5315,12 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VBD>> _VBDs;
+        private List<XenRef<VBD>> _VBDs = new List<XenRef<VBD>>() {};
 
         /// <summary>
         /// crash dumps associated with this VM
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Crashdump>))]
         public virtual List<XenRef<Crashdump>> crash_dumps
         {
             get { return _crash_dumps; }
@@ -4520,11 +5334,12 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Crashdump>> _crash_dumps;
+        private List<XenRef<Crashdump>> _crash_dumps = new List<XenRef<Crashdump>>() {};
 
         /// <summary>
         /// virtual TPMs
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VTPM>))]
         public virtual List<XenRef<VTPM>> VTPMs
         {
             get { return _VTPMs; }
@@ -4538,7 +5353,7 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VTPM>> _VTPMs;
+        private List<XenRef<VTPM>> _VTPMs = new List<XenRef<VTPM>>() {};
 
         /// <summary>
         /// name of or path to bootloader
@@ -4556,7 +5371,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _PV_bootloader;
+        private string _PV_bootloader = "";
 
         /// <summary>
         /// path to the kernel
@@ -4574,7 +5389,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _PV_kernel;
+        private string _PV_kernel = "";
 
         /// <summary>
         /// path to the initrd
@@ -4592,7 +5407,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _PV_ramdisk;
+        private string _PV_ramdisk = "";
 
         /// <summary>
         /// kernel command-line arguments
@@ -4610,7 +5425,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _PV_args;
+        private string _PV_args = "";
 
         /// <summary>
         /// miscellaneous arguments for the bootloader
@@ -4628,7 +5443,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _PV_bootloader_args;
+        private string _PV_bootloader_args = "";
 
         /// <summary>
         /// to make Zurich guests boot
@@ -4646,7 +5461,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _PV_legacy_args;
+        private string _PV_legacy_args = "";
 
         /// <summary>
         /// HVM boot policy
@@ -4664,7 +5479,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _HVM_boot_policy;
+        private string _HVM_boot_policy = "";
 
         /// <summary>
         /// HVM boot params
@@ -4682,7 +5497,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _HVM_boot_params;
+        private Dictionary<string, string> _HVM_boot_params = new Dictionary<string, string>() {};
 
         /// <summary>
         /// multiplier applied to the amount of shadow that will be made available to the guest
@@ -4701,7 +5516,7 @@ namespace XenAPI
                 }
             }
         }
-        private double _HVM_shadow_multiplier;
+        private double _HVM_shadow_multiplier = 1.000;
 
         /// <summary>
         /// platform-specific configuration
@@ -4719,7 +5534,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _platform;
+        private Dictionary<string, string> _platform = new Dictionary<string, string>() {};
 
         /// <summary>
         /// PCI bus path for pass-through devices
@@ -4737,7 +5552,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _PCI_bus;
+        private string _PCI_bus = "";
 
         /// <summary>
         /// additional configuration
@@ -4755,7 +5570,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
 
         /// <summary>
         /// domain ID (if available, -1 otherwise)
@@ -4791,7 +5606,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _domarch;
+        private string _domarch = "";
 
         /// <summary>
         /// describes the CPU flags on which the VM was last booted
@@ -4809,7 +5624,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _last_boot_CPU_flags;
+        private Dictionary<string, string> _last_boot_CPU_flags = new Dictionary<string, string>() {};
 
         /// <summary>
         /// true if this is a control domain (domain 0 or a driver domain)
@@ -4832,6 +5647,7 @@ namespace XenAPI
         /// <summary>
         /// metrics associated with this VM
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VM_metrics>))]
         public virtual XenRef<VM_metrics> metrics
         {
             get { return _metrics; }
@@ -4845,11 +5661,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VM_metrics> _metrics;
+        private XenRef<VM_metrics> _metrics = new XenRef<VM_metrics>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// metrics associated with the running guest
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VM_guest_metrics>))]
         public virtual XenRef<VM_guest_metrics> guest_metrics
         {
             get { return _guest_metrics; }
@@ -4863,7 +5680,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VM_guest_metrics> _guest_metrics;
+        private XenRef<VM_guest_metrics> _guest_metrics = new XenRef<VM_guest_metrics>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// marshalled value containing VM record at time of last boot, updated dynamically to reflect the runtime state of the domain
@@ -4882,7 +5699,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _last_booted_record;
+        private string _last_booted_record = "";
 
         /// <summary>
         /// An XML specification of recommended values and ranges for properties of this VM
@@ -4900,10 +5717,10 @@ namespace XenAPI
                 }
             }
         }
-        private string _recommendations;
+        private string _recommendations = "";
 
         /// <summary>
-        /// data to be inserted into the xenstore tree (/local/domain/<domid>/vm-data) after the VM is created.
+        /// data to be inserted into the xenstore tree (/local/domain/&lt;domid&gt;/vm-data) after the VM is created.
         /// First published in XenServer 4.1.
         /// </summary>
         public virtual Dictionary<string, string> xenstore_data
@@ -4919,7 +5736,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _xenstore_data;
+        private Dictionary<string, string> _xenstore_data = new Dictionary<string, string>() {};
 
         /// <summary>
         /// if true then the system will attempt to keep the VM running as much as possible.
@@ -4938,7 +5755,7 @@ namespace XenAPI
                 }
             }
         }
-        private bool _ha_always_run;
+        private bool _ha_always_run = false;
 
         /// <summary>
         /// has possible values: "best-effort" meaning "try to restart this VM if possible but don't consider the Pool to be overcommitted if this is not possible"; "restart" meaning "this VM should be restarted"; "" meaning "do not try to restart this VM"
@@ -4957,7 +5774,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _ha_restart_priority;
+        private string _ha_restart_priority = "";
 
         /// <summary>
         /// true if this is a snapshot. Snapshotted VMs can never be started, they are used only for cloning other VMs
@@ -4976,12 +5793,13 @@ namespace XenAPI
                 }
             }
         }
-        private bool _is_a_snapshot;
+        private bool _is_a_snapshot = false;
 
         /// <summary>
         /// Ref pointing to the VM this snapshot is of.
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VM>))]
         public virtual XenRef<VM> snapshot_of
         {
             get { return _snapshot_of; }
@@ -4995,12 +5813,13 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VM> _snapshot_of;
+        private XenRef<VM> _snapshot_of = new XenRef<VM>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// List pointing to all the VM snapshots.
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VM>))]
         public virtual List<XenRef<VM>> snapshots
         {
             get { return _snapshots; }
@@ -5014,12 +5833,13 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VM>> _snapshots;
+        private List<XenRef<VM>> _snapshots = new List<XenRef<VM>>() {};
 
         /// <summary>
         /// Date/time when this snapshot was created.
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime snapshot_time
         {
             get { return _snapshot_time; }
@@ -5033,7 +5853,7 @@ namespace XenAPI
                 }
             }
         }
-        private DateTime _snapshot_time;
+        private DateTime _snapshot_time = DateTime.ParseExact("19700101T00:00:00Z", "yyyyMMddTHH:mm:ssZ", CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Transportable ID of the snapshot VM
@@ -5052,12 +5872,13 @@ namespace XenAPI
                 }
             }
         }
-        private string _transportable_snapshot_id;
+        private string _transportable_snapshot_id = "";
 
         /// <summary>
         /// Binary blobs associated with this VM
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(StringXenRefMapConverter<Blob>))]
         public virtual Dictionary<string, XenRef<Blob>> blobs
         {
             get { return _blobs; }
@@ -5071,7 +5892,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, XenRef<Blob>> _blobs;
+        private Dictionary<string, XenRef<Blob>> _blobs = new Dictionary<string, XenRef<Blob>>() {};
 
         /// <summary>
         /// user-specified tags for categorization purposes
@@ -5090,7 +5911,7 @@ namespace XenAPI
                 }
             }
         }
-        private string[] _tags;
+        private string[] _tags = {};
 
         /// <summary>
         /// List of operations which have been explicitly blocked and an error code
@@ -5109,7 +5930,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<vm_operations, string> _blocked_operations;
+        private Dictionary<vm_operations, string> _blocked_operations = new Dictionary<vm_operations, string>() {};
 
         /// <summary>
         /// Human-readable information concerning this snapshot
@@ -5128,7 +5949,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _snapshot_info;
+        private Dictionary<string, string> _snapshot_info = new Dictionary<string, string>() {};
 
         /// <summary>
         /// Encoded information about the VM's metadata this is a snapshot of
@@ -5147,12 +5968,13 @@ namespace XenAPI
                 }
             }
         }
-        private string _snapshot_metadata;
+        private string _snapshot_metadata = "";
 
         /// <summary>
         /// Ref pointing to the parent of this VM
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VM>))]
         public virtual XenRef<VM> parent
         {
             get { return _parent; }
@@ -5166,12 +5988,13 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VM> _parent;
+        private XenRef<VM> _parent = new XenRef<VM>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// List pointing to all the children of this VM
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VM>))]
         public virtual List<XenRef<VM>> children
         {
             get { return _children; }
@@ -5185,7 +6008,7 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VM>> _children;
+        private List<XenRef<VM>> _children = new List<XenRef<VM>>() {};
 
         /// <summary>
         /// BIOS strings
@@ -5204,12 +6027,13 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _bios_strings;
+        private Dictionary<string, string> _bios_strings = new Dictionary<string, string>() {};
 
         /// <summary>
         /// Ref pointing to a protection policy for this VM
         /// First published in XenServer 5.6 FP1.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VMPP>))]
         public virtual XenRef<VMPP> protection_policy
         {
             get { return _protection_policy; }
@@ -5223,7 +6047,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VMPP> _protection_policy;
+        private XenRef<VMPP> _protection_policy = new XenRef<VMPP>("OpaqueRef:NULL");
 
         /// <summary>
         /// true if this snapshot was created by the protection policy
@@ -5242,12 +6066,13 @@ namespace XenAPI
                 }
             }
         }
-        private bool _is_snapshot_from_vmpp;
+        private bool _is_snapshot_from_vmpp = false;
 
         /// <summary>
         /// Ref pointing to a snapshot schedule for this VM
         /// First published in XenServer 7.2.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VMSS>))]
         public virtual XenRef<VMSS> snapshot_schedule
         {
             get { return _snapshot_schedule; }
@@ -5261,7 +6086,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VMSS> _snapshot_schedule;
+        private XenRef<VMSS> _snapshot_schedule = new XenRef<VMSS>("OpaqueRef:NULL");
 
         /// <summary>
         /// true if this snapshot was created by the snapshot schedule
@@ -5280,11 +6105,12 @@ namespace XenAPI
                 }
             }
         }
-        private bool _is_vmss_snapshot;
+        private bool _is_vmss_snapshot = false;
 
         /// <summary>
         /// the appliance to which this VM belongs
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VM_appliance>))]
         public virtual XenRef<VM_appliance> appliance
         {
             get { return _appliance; }
@@ -5298,7 +6124,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VM_appliance> _appliance;
+        private XenRef<VM_appliance> _appliance = new XenRef<VM_appliance>("OpaqueRef:NULL");
 
         /// <summary>
         /// The delay to wait before proceeding to the next order in the startup sequence (seconds)
@@ -5317,7 +6143,7 @@ namespace XenAPI
                 }
             }
         }
-        private long _start_delay;
+        private long _start_delay = 0;
 
         /// <summary>
         /// The delay to wait before proceeding to the next order in the shutdown sequence (seconds)
@@ -5336,7 +6162,7 @@ namespace XenAPI
                 }
             }
         }
-        private long _shutdown_delay;
+        private long _shutdown_delay = 0;
 
         /// <summary>
         /// The point in the startup or shutdown sequence at which this VM will be started
@@ -5355,12 +6181,13 @@ namespace XenAPI
                 }
             }
         }
-        private long _order;
+        private long _order = 0;
 
         /// <summary>
         /// Virtual GPUs
         /// First published in XenServer 6.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VGPU>))]
         public virtual List<XenRef<VGPU>> VGPUs
         {
             get { return _VGPUs; }
@@ -5374,12 +6201,13 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VGPU>> _VGPUs;
+        private List<XenRef<VGPU>> _VGPUs = new List<XenRef<VGPU>>() {};
 
         /// <summary>
         /// Currently passed-through PCI devices
         /// First published in XenServer 6.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<PCI>))]
         public virtual List<XenRef<PCI>> attached_PCIs
         {
             get { return _attached_PCIs; }
@@ -5393,12 +6221,13 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<PCI>> _attached_PCIs;
+        private List<XenRef<PCI>> _attached_PCIs = new List<XenRef<PCI>>() {};
 
         /// <summary>
         /// The SR on which a suspend image is stored
         /// First published in XenServer 6.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<SR>))]
         public virtual XenRef<SR> suspend_SR
         {
             get { return _suspend_SR; }
@@ -5412,7 +6241,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<SR> _suspend_SR;
+        private XenRef<SR> _suspend_SR = new XenRef<SR>("OpaqueRef:NULL");
 
         /// <summary>
         /// The number of times this VM has been recovered
@@ -5431,7 +6260,7 @@ namespace XenAPI
                 }
             }
         }
-        private long _version;
+        private long _version = 0;
 
         /// <summary>
         /// Generation ID of the VM
@@ -5450,7 +6279,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _generation_id;
+        private string _generation_id = "0:0";
 
         /// <summary>
         /// The host virtual hardware platform version the VM can run on
@@ -5469,7 +6298,7 @@ namespace XenAPI
                 }
             }
         }
-        private long _hardware_platform_version;
+        private long _hardware_platform_version = 0;
 
         /// <summary>
         /// When an HVM guest starts, this controls the presence of the emulated C000 PCI device which triggers Windows Update to fetch or update PV drivers.
@@ -5488,7 +6317,7 @@ namespace XenAPI
                 }
             }
         }
-        private bool _has_vendor_device;
+        private bool _has_vendor_device = false;
 
         /// <summary>
         /// Indicates whether a VM requires a reboot in order to update its configuration, e.g. its memory allocation.
@@ -5507,7 +6336,7 @@ namespace XenAPI
                 }
             }
         }
-        private bool _requires_reboot;
+        private bool _requires_reboot = false;
 
         /// <summary>
         /// Textual reference to the template used to create a VM. This can be used by clients in need of an immutable reference to the template since the latter's uuid and name_label may change, for example, after a package installation or upgrade.
@@ -5526,6 +6355,6 @@ namespace XenAPI
                 }
             }
         }
-        private string _reference_label;
+        private string _reference_label = "";
     }
 }

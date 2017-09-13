@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,14 +32,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
 {
     /// <summary>
     /// a proxy connects a VM/VIF with a PVS site
+    /// First published in XenServer 7.1.
     /// </summary>
     public partial class PVS_proxy : XenObject<PVS_proxy>
     {
@@ -90,9 +93,9 @@ namespace XenAPI
         public Proxy_PVS_proxy ToProxy()
         {
             Proxy_PVS_proxy result_ = new Proxy_PVS_proxy();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.site = (site != null) ? site : "";
-            result_.VIF = (VIF != null) ? VIF : "";
+            result_.uuid = uuid ?? "";
+            result_.site = site ?? "";
+            result_.VIF = VIF ?? "";
             result_.currently_attached = currently_attached;
             result_.status = pvs_proxy_status_helper.ToString(status);
             return result_;
@@ -128,8 +131,7 @@ namespace XenAPI
         public override string SaveChanges(Session session, string opaqueRef, PVS_proxy server)
         {
             if (opaqueRef == null)
-            {
-                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
+            {                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
                 return "";
             }
             else
@@ -139,149 +141,188 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given PVS_proxy.
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
         public static PVS_proxy get_record(Session session, string _pvs_proxy)
         {
-            return new PVS_proxy((Proxy_PVS_proxy)session.proxy.pvs_proxy_get_record(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_record(session.uuid, _pvs_proxy);
+            else
+                return new PVS_proxy((Proxy_PVS_proxy)session.proxy.pvs_proxy_get_record(session.uuid, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
         /// Get a reference to the PVS_proxy instance with the specified UUID.
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PVS_proxy> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
         /// Get the uuid field of the given PVS_proxy.
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
         public static string get_uuid(Session session, string _pvs_proxy)
         {
-            return (string)session.proxy.pvs_proxy_get_uuid(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_uuid(session.uuid, _pvs_proxy);
+            else
+                return (string)session.proxy.pvs_proxy_get_uuid(session.uuid, _pvs_proxy ?? "").parse();
         }
 
         /// <summary>
         /// Get the site field of the given PVS_proxy.
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
         public static XenRef<PVS_site> get_site(Session session, string _pvs_proxy)
         {
-            return XenRef<PVS_site>.Create(session.proxy.pvs_proxy_get_site(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_site(session.uuid, _pvs_proxy);
+            else
+                return XenRef<PVS_site>.Create(session.proxy.pvs_proxy_get_site(session.uuid, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
         /// Get the VIF field of the given PVS_proxy.
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
         public static XenRef<VIF> get_VIF(Session session, string _pvs_proxy)
         {
-            return XenRef<VIF>.Create(session.proxy.pvs_proxy_get_vif(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_vif(session.uuid, _pvs_proxy);
+            else
+                return XenRef<VIF>.Create(session.proxy.pvs_proxy_get_vif(session.uuid, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
         /// Get the currently_attached field of the given PVS_proxy.
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
         public static bool get_currently_attached(Session session, string _pvs_proxy)
         {
-            return (bool)session.proxy.pvs_proxy_get_currently_attached(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_currently_attached(session.uuid, _pvs_proxy);
+            else
+                return (bool)session.proxy.pvs_proxy_get_currently_attached(session.uuid, _pvs_proxy ?? "").parse();
         }
 
         /// <summary>
         /// Get the status field of the given PVS_proxy.
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
         public static pvs_proxy_status get_status(Session session, string _pvs_proxy)
         {
-            return (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), (string)session.proxy.pvs_proxy_get_status(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_status(session.uuid, _pvs_proxy);
+            else
+                return (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), (string)session.proxy.pvs_proxy_get_status(session.uuid, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
         /// Configure a VM/VIF to use a PVS proxy
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_site">PVS site that we proxy for</param>
         /// <param name="_vif">VIF for the VM that needs to be proxied</param>
         public static XenRef<PVS_proxy> create(Session session, string _site, string _vif)
         {
-            return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_create(session.uuid, (_site != null) ? _site : "", (_vif != null) ? _vif : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_create(session.uuid, _site, _vif);
+            else
+                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_create(session.uuid, _site ?? "", _vif ?? "").parse());
         }
 
         /// <summary>
         /// Configure a VM/VIF to use a PVS proxy
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_site">PVS site that we proxy for</param>
         /// <param name="_vif">VIF for the VM that needs to be proxied</param>
         public static XenRef<Task> async_create(Session session, string _site, string _vif)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_proxy_create(session.uuid, (_site != null) ? _site : "", (_vif != null) ? _vif : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pvs_proxy_create(session.uuid, _site, _vif);
+          else
+              return XenRef<Task>.Create(session.proxy.async_pvs_proxy_create(session.uuid, _site ?? "", _vif ?? "").parse());
         }
 
         /// <summary>
         /// remove (or switch off) a PVS proxy for this VM
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
         public static void destroy(Session session, string _pvs_proxy)
         {
-            session.proxy.pvs_proxy_destroy(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pvs_proxy_destroy(session.uuid, _pvs_proxy);
+            else
+                session.proxy.pvs_proxy_destroy(session.uuid, _pvs_proxy ?? "").parse();
         }
 
         /// <summary>
         /// remove (or switch off) a PVS proxy for this VM
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pvs_proxy">The opaque_ref of the given pvs_proxy</param>
         public static XenRef<Task> async_destroy(Session session, string _pvs_proxy)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_proxy_destroy(session.uuid, (_pvs_proxy != null) ? _pvs_proxy : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pvs_proxy_destroy(session.uuid, _pvs_proxy);
+          else
+              return XenRef<Task>.Create(session.proxy.async_pvs_proxy_destroy(session.uuid, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
         /// Return a list of all the PVS_proxys known to the system.
-        /// Experimental. First published in XenServer 7.1.
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<PVS_proxy>> get_all(Session session)
         {
-            return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_all(session.uuid);
+            else
+                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_get_all(session.uuid).parse());
         }
 
         /// <summary>
         /// Get all the PVS_proxy Records at once, in a single XML RPC call
+        /// First published in XenServer 7.1.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<PVS_proxy>, PVS_proxy> get_all_records(Session session)
         {
-            return XenRef<PVS_proxy>.Create<Proxy_PVS_proxy>(session.proxy.pvs_proxy_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_proxy_get_all_records(session.uuid);
+            else
+                return XenRef<PVS_proxy>.Create<Proxy_PVS_proxy>(session.proxy.pvs_proxy_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
         /// Unique identifier/object reference
-        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual string uuid
         {
@@ -296,12 +337,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// PVS site this proxy is part of
-        /// Experimental. First published in XenServer 7.1.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PVS_site>))]
         public virtual XenRef<PVS_site> site
         {
             get { return _site; }
@@ -315,12 +356,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<PVS_site> _site;
+        private XenRef<PVS_site> _site = new XenRef<PVS_site>("OpaqueRef:NULL");
 
         /// <summary>
         /// VIF of the VM using the proxy
-        /// Experimental. First published in XenServer 7.1.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VIF>))]
         public virtual XenRef<VIF> VIF
         {
             get { return _VIF; }
@@ -334,11 +375,10 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VIF> _VIF;
+        private XenRef<VIF> _VIF = new XenRef<VIF>("OpaqueRef:NULL");
 
         /// <summary>
         /// true = VM is currently proxied
-        /// Experimental. First published in XenServer 7.1.
         /// </summary>
         public virtual bool currently_attached
         {
@@ -353,12 +393,12 @@ namespace XenAPI
                 }
             }
         }
-        private bool _currently_attached;
+        private bool _currently_attached = false;
 
         /// <summary>
         /// The run-time status of the proxy
-        /// Experimental. First published in XenServer 7.1.
         /// </summary>
+        [JsonConverter(typeof(pvs_proxy_statusConverter))]
         public virtual pvs_proxy_status status
         {
             get { return _status; }
@@ -372,6 +412,6 @@ namespace XenAPI
                 }
             }
         }
-        private pvs_proxy_status _status;
+        private pvs_proxy_status _status = pvs_proxy_status.stopped;
     }
 }
