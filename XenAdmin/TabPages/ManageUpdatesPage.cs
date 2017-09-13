@@ -446,11 +446,20 @@ namespace XenAdmin.TabPages
                 items.Add(dismiss);
             }
 
-            if (patchAlert != null && patchAlert.CanApply && !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl))
+            if (patchAlert != null && patchAlert.CanApply && !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredXenCenterVersion == null)
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownload_Click;
                 items.Add(download);
+            }
+
+            var updateAlert = alert as XenServerUpdateAlert;
+
+            if (updateAlert != null && updateAlert.RequiredXenCenterVersion != null)
+            {
+                var downloadNewXenCenter = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_REQUIRED_XENCENTER);
+                downloadNewXenCenter.Click += ToolStripMenuItemDownloadNewXenCenter_Click;
+                items.Add(downloadNewXenCenter);
             }
 
             if (!string.IsNullOrEmpty(alert.WebPageLabel))
@@ -709,6 +718,24 @@ namespace XenAdmin.TabPages
                     }
                  }
             });
+        }
+
+        private void ToolStripMenuItemDownloadNewXenCenter_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
+                return;
+
+            XenServerUpdateAlert updateAlert = (XenServerUpdateAlert)clickedRow.Tag;
+
+            if (updateAlert == null || updateAlert.RequiredXenCenterVersion == null)
+                return;
+
+            string xenCenterUrl = updateAlert.RequiredXenCenterVersion.Url;
+            if (string.IsNullOrEmpty(xenCenterUrl))
+                return;
+
+            Program.Invoke(Program.MainWindow, () => Program.OpenURL(xenCenterUrl));
         }
 
         private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)

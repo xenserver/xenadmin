@@ -499,6 +499,36 @@ namespace XenAdmin.Core
 
             return true;
         }
+
+
+        /// <summary>
+        /// Returns the latest XenCenter version or null, if the current version is the latest. 
+        /// If a server version is provided, it returns the XenCenter version that is required to work with that server. 
+        /// If no server version is provided it will return the latestCr XenCenter.
+        /// </summary>
+        /// <param name="serverVersion"></param>
+        /// <returns></returns>
+        public static XenCenterVersion GetRequiredXenCenterVersion(XenServerVersion serverVersion)
+        {
+            if (XenCenterVersions.Count == 0)
+                return null;
+
+            var currentProgramVersion = Program.Version;
+            if (currentProgramVersion == new Version(0, 0, 0, 0))
+                return null;
+
+            var latestVersions = from v in XenCenterVersions where v.Latest select v;
+            var latest = latestVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                         latestVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+
+            var latestCrVersions = from v in XenCenterVersions where v.LatestCr select v;
+            var latestCr = latestCrVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                           latestCrVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+
+            if (serverVersion != null && serverVersion.Latest && latest != null)
+                return latest.Version > currentProgramVersion ? latest : null;
+            return latestCr != null && latestCr.Version > currentProgramVersion ? latestCr : null;  
+        }
         
         /// <summary>
         /// This method returns the minimal set of patches for a host if this class already has information about them. Otherwise it returns empty list.

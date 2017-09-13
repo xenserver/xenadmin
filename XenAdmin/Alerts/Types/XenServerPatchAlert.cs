@@ -36,6 +36,7 @@ using XenAdmin.Network;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
+using System.Text;
 
 
 namespace XenAdmin.Alerts
@@ -44,7 +45,7 @@ namespace XenAdmin.Alerts
     {
         public XenServerPatch Patch;
         public XenServerVersion NewServerVersion;
-
+       
         /// <summary>
         /// Can we apply this alert. Calling this sets the CannotApplyReason where applicable
         /// </summary>
@@ -93,6 +94,8 @@ namespace XenAdmin.Alerts
         {
             Patch = patch;
             NewServerVersion = newServerVersion;
+            if (NewServerVersion != null)
+                RequiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(NewServerVersion);
             _priority = patch.Priority;
             _timestamp = Patch.TimeStamp;
         }
@@ -121,12 +124,21 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                var patchDescription = NewServerVersion != null
+                StringBuilder sb = new StringBuilder();
+                sb.Append(NewServerVersion != null
                     ? string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, NewServerVersion.Name)
-                    : Patch.Description;
+                    : Patch.Description);
                 if (Patch.InstallationSize != 0)
-                    return string.Format(Messages.PATCH_DESCRIPTION_AND_INSTALLATION_SIZE, patchDescription, Util.DiskSizeString(Patch.InstallationSize));
-                return patchDescription;
+                {
+                    sb.AppendLine();
+                    sb.AppendFormat(Messages.PATCH_INSTALLATION_SIZE, Util.DiskSizeString(Patch.InstallationSize));
+                }
+                if (RequiredXenCenterVersion != null)
+                {
+                    sb.AppendLine();
+                    sb.AppendFormat(Messages.PATCH_NEEDS_NEW_XENCENTER, RequiredXenCenterVersion.Version);
+                }
+                return sb.ToString();
             }
         }
 

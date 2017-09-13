@@ -26477,6 +26477,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installation size: {0}.
+        /// </summary>
+        public static string PATCH_INSTALLATION_SIZE {
+            get {
+                return ResourceManager.GetString("PATCH_INSTALLATION_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This version requires [XenCenter] {0} or newer.
+        /// </summary>
+        public static string PATCH_NEEDS_NEW_XENCENTER {
+            get {
+                return ResourceManager.GetString("PATCH_NEEDS_NEW_XENCENTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not found.
         /// </summary>
         public static string PATCH_NOT_FOUND {
@@ -33706,6 +33724,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download [XenCenter].
+        /// </summary>
+        public static string UPDATES_DOWNLOAD_REQUIRED_XENCENTER {
+            get {
+                return ResourceManager.GetString("UPDATES_DOWNLOAD_REQUIRED_XENCENTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Install Update.
         /// </summary>
         public static string UPDATES_WIZARD {
@@ -34048,6 +34075,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_LOCAL_STORAGE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_LOCAL_STORAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] version {0} or newer is required..
+        /// </summary>
+        public static string UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED", resourceCulture);
             }
         }
         
