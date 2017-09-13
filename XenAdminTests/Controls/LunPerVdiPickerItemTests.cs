@@ -128,7 +128,7 @@ namespace XenAdminTests.Controls
             vdi.Setup(v => v.Name()).Returns("NAME");
             LunPerVdiPickerItem item = new LunPerVdiPickerItem(null, vdi.Object);
             Assert.That(item.Equals(nullItem), Is.False);
-            vdi.VerifyGet(v=>v.Name());
+            vdi.Verify(v=>v.Name());
         }
 
         [Test]
