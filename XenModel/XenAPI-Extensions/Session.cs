@@ -117,7 +117,6 @@ namespace XenAPI
 
         private void LogRequest(object o, XmlRpcRequestEventArgs args)
         {
-            Level logLevel;
             string xml = DumpStream(args.RequestStream, String.Empty);
 
             // Find the method name within the XML
@@ -125,30 +124,32 @@ namespace XenAPI
             int methodNameStart = xml.IndexOf("<methodName>");
             if (methodNameStart >= 0)
             {
-                methodNameStart += 12;  // skip past "<methodName>"
+                methodNameStart += 12; // skip past "<methodName>"
                 int methodNameEnd = xml.IndexOf('<', methodNameStart);
                 if (methodNameEnd > methodNameStart)
                     methodName = xml.Substring(methodNameStart, methodNameEnd - methodNameStart);
             }
 
-            if (CacheWarming)
-                logLevel = Level.Debug;
-            else if (methodName == "event.next" || methodName == "event.from" || methodName == "host.get_servertime" || methodName.StartsWith("task.get_"))  // these occur frequently and we don't need to know about them
-                logLevel = Level.Debug;
-            else
-                logLevel = Level.Info;
+            // do not log while downloading objects
+            // also exclude calls occurring frequently; we don't need to know about them;
+            // only log the full XML at Debug level because it may have sensitive data in: CA-80174
 
-            // Only log the full XML at Debug level because it may have sensitive data in: CA-80174
-            if (logLevel == Level.Debug)
-                LogMsg(logLevel, "Invoking XML-RPC method " +  methodName + ": " + xml);
+            if (CacheWarming ||
+                methodName == "event.next" || methodName == "event.from" || methodName == "host.get_servertime" ||
+                methodName.StartsWith("task.get_"))
+            {
+                log.DebugFormat("Invoking XML-RPC method {0}: {1}", methodName, xml);
+            }
             else
-                LogMsg(logLevel, "Invoking XML-RPC method " + methodName);
+            {
+                log.InfoFormat("Invoking XML-RPC method {0}", methodName);
+            }
         }
 
         private void LogResponse(object o, XmlRpcResponseEventArgs args)
         {
             if(log.IsDebugEnabled)
-                LogMsg(Level.Debug, DumpStream(args.ResponseStream, "XML-RPC response: "));
+                log.DebugFormat(DumpStream(args.ResponseStream, "XML-RPC response: "));
         }
 
         private string DumpStream(Stream s, string header)
@@ -166,19 +167,9 @@ namespace XenAPI
             }
             catch(OutOfMemoryException ex)
             {
-                LogMsg(Level.Debug, "Session ran out of memory while trying to log the XML response stream: " + ex.Message);
+                log.DebugFormat("Session ran out of memory while trying to log the XML response stream: {0}", ex.Message);
                 return String.Empty;
             }
-        }
-
-        private void LogMsg(Level logLevel, String msg)
-        {
-            if (logLevel == Level.Debug)
-                log.Debug(msg);
-            else if (logLevel == Level.Info)
-                log.Info(msg);
-            else
-                System.Diagnostics.Trace.Assert(false, "Missing log level");
         }
 
         /// <summary>
