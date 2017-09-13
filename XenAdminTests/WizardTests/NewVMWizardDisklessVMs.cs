@@ -47,7 +47,7 @@ namespace XenAdminTests.WizardTests.state1_xml
 
         protected override NewVMWizard NewWizard()
         {
-            VM template = GetAnyTemplate(vm => vm.IsHVM);
+            VM template = GetAnyTemplate(vm => vm.IsHVM());
             Assert.NotNull(template, "User template not found.");
             return new NewVMWizard(template.Connection, template, GetAnyHost());
         }

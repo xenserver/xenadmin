@@ -57,7 +57,7 @@ namespace XenAdmin.Dialogs.LicenseManagerLicenseRowComparers
                     result = lx.LicenseExpires.GetValueOrDefault().CompareTo(ly.LicenseExpires.GetValueOrDefault());
                 
                 if (result == 0)
-                    result = lx.XenObject.Name.CompareTo(ly.XenObject.Name);
+                    result = lx.XenObject.Name().CompareTo(ly.XenObject.Name());
             }
             return result;
         }

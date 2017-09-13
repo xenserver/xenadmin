@@ -66,7 +66,7 @@ namespace XenAdmin.Commands
 
             foreach (var vm in vms)
             {
-                var pvsProxy = vm.PvsProxy;
+                var pvsProxy = vm.PvsProxy();
                 if (pvsProxy != null)
                     actions.Add(new PvsProxyDestroyAction(pvsProxy));
             }
@@ -99,7 +99,7 @@ namespace XenAdmin.Commands
             if (selection.Any() &&  selection.AllItemsAre<VM>() && selection.GetConnectionOfAllItems() != null)
             {
                 var vms = selection.AsXenObjects<VM>();
-                if (vms.Any(vm => vm.PvsProxy != null))
+                if (vms.Any(vm => vm.PvsProxy() != null))
                 {
                     return true;
                 }

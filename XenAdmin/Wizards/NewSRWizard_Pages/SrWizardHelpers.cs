@@ -66,7 +66,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
                 foreach (SR sr in connection.Cache.SRs)
-                    if (sr.uuid == uuid && sr.HasPBDs)
+                    if (sr.uuid == uuid && sr.HasPBDs())
                         return sr;
 
             foreach (IXenConnection connection in ConnectionsManager.XenConnectionsCopy)
@@ -105,7 +105,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         
         public static String DefaultSRName(String potentialName, IXenConnection connection)
         {
-            return DefaultSRName(potentialName, connection.Cache.SRs.Select(sr => sr.Name));
+            return DefaultSRName(potentialName, connection.Cache.SRs.Select(sr => sr.Name()));
         }
 
         public static String ExtractUUID(String p)

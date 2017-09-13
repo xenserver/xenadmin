@@ -41,12 +41,12 @@ namespace XenAdmin.Actions
         private Host previousHost; // The host the VM was running on before the snapshot
 
         public VMSnapshotRevertAction(VM snapshot)
-            : base(snapshot.Connection, String.Format(Messages.ACTION_VM_REVERT_SNAPSHOT_TITLE, snapshot.Name))
+            : base(snapshot.Connection, String.Format(Messages.ACTION_VM_REVERT_SNAPSHOT_TITLE, snapshot.Name()))
         {
             this.VM = Connection.Resolve<VM>(snapshot.snapshot_of);
             previousHost = Connection.Resolve<Host>(VM.resident_on);
             this.m_Snapshot = snapshot;
-            Description = String.Format(Messages.VM_REVERTING, m_Snapshot.Name);
+            Description = String.Format(Messages.VM_REVERTING, m_Snapshot.Name());
 
         }
         private bool _finished = false;
@@ -54,12 +54,12 @@ namespace XenAdmin.Actions
         {
 
 
-            Description = String.Format(Messages.VM_REVERTING, m_Snapshot.Name);
+            Description = String.Format(Messages.VM_REVERTING, m_Snapshot.Name());
             RelatedTask = XenAPI.VM.async_revert(Session, m_Snapshot.opaque_ref);
             PollToCompletion();
             _finished = true;
             PercentComplete = 90;
-            Description = String.Format(Messages.REVERTING_POWER_STATE, VM.Name);
+            Description = String.Format(Messages.REVERTING_POWER_STATE, VM.Name());
             try
             {
                 RevertPowerState(m_Snapshot, VM);
@@ -67,7 +67,7 @@ namespace XenAdmin.Actions
             catch (Exception)
             { }
             PercentComplete = 100;
-            Description = String.Format(Messages.VM_REVERTED, m_Snapshot.Name);
+            Description = String.Format(Messages.VM_REVERTED, m_Snapshot.Name());
         }
 
         public override int PercentComplete

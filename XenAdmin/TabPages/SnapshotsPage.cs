@@ -62,6 +62,14 @@ namespace XenAdmin.TabPages
         private readonly ToolTip toolTipFolderLabel = new ToolTip();
         private readonly ToolTip toolTipTagsLabel = new ToolTip();
 
+        private enum SnapshotsView
+        {
+            ListView,
+            TreeView
+        }
+
+        private Dictionary<string, SnapshotsView> _storedViewsPerVm = new Dictionary<string, SnapshotsView>();
+
         public SnapshotsPage()
         {
             InitializeComponent();
@@ -119,7 +127,8 @@ namespace XenAdmin.TabPages
                     m_VM.PropertyChanged += snapshot_PropertyChanged;
                     //Version setup
                     toolStripMenuItemScheduledSnapshots.Available = toolStripSeparatorView.Available = !Helpers.FeatureForbidden(VM.Connection, Host.RestrictVMSnapshotSchedule);
-                    if (VM.SnapshotView != SnapshotsView.ListView)
+
+                    if (_storedViewsPerVm.ContainsKey(m_VM.opaque_ref) && _storedViewsPerVm[m_VM.opaque_ref] != SnapshotsView.ListView)
                         TreeViewChecked();
                     else
                         GridViewChecked();
@@ -160,7 +169,7 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
-                    labelVMPPInfo.Text = string.Format(Messages.THIS_VM_IS_IN_VMSS, vmss.Name);
+                    labelVMPPInfo.Text = string.Format(Messages.THIS_VM_IS_IN_VMSS, vmss.Name());
                     pictureBoxVMPPInfo.Image = Resources._000_Tick_h32bit_16;
                     linkLabelVMPPInfo.Text = Messages.VIEW_VMSS_POLICIES;
                 }
@@ -330,7 +339,7 @@ namespace XenAdmin.TabPages
             snapshotTreeView.Clear();
             Debug.WriteLine("Start refreshing Tree");
             SnapshotIcon rootIcon = null;
-            rootIcon = new SnapshotIcon(VM.Name, Messages.BASE, null, snapshotTreeView, SnapshotIcon.Template);
+            rootIcon = new SnapshotIcon(VM.Name(), Messages.BASE, null, snapshotTreeView, SnapshotIcon.Template);
             snapshotTreeView.AddSnapshot(rootIcon);
 
             //Set VM
@@ -443,8 +452,8 @@ namespace XenAdmin.TabPages
                 _tags.Value = ConcatWithSeparator(Tags.GetTags(snapshot), ", ");
                 //Description
                 Cells.Add(_description);
-                _description.Value = snapshot.Description != ""
-                                         ? snapshot.Description
+                _description.Value = snapshot.Description() != ""
+                                         ? snapshot.Description()
                                          : Messages.NONE;
             }
 
@@ -687,9 +696,9 @@ namespace XenAdmin.TabPages
                 nameLabel.Text = snapshot.name_label;
                 sizeLabel.Text = GetStringSnapshotSize(snapshot);
                 labelMode.Text = snapshot.power_state == vm_power_state.Halted ? Messages.DISKS_ONLY : Messages.DISKS_AND_MEMORY;
-                descriptionLabel.Text = (snapshot.Description != ""
-                                             ? snapshot.Description
-                                             : Messages.NONE);
+
+                var descr = snapshot.Description();
+                descriptionLabel.Text = string.IsNullOrEmpty(descr) ? Messages.NONE : descr;
                 toolTipDescriptionLabel.SetToolTip(descriptionLabel, 
                                             descriptionLabel.Height == descriptionLabel.MaximumSize.Height ? descriptionLabel.Text : "");
 
@@ -1001,7 +1010,7 @@ namespace XenAdmin.TabPages
             viewPanel.Controls.Add(snapshotTreeView);
             snapshotTreeView.Dock = DockStyle.Fill;
             TreeViewButtonsChecked = true;
-            VM.SnapshotView = SnapshotsView.TreeView;
+            _storedViewsPerVm[VM.opaque_ref] = SnapshotsView.TreeView;
             GridViewButtonsChecked = false;
             snapshotTreeView.SelectedItems.Clear();
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
@@ -1024,7 +1033,7 @@ namespace XenAdmin.TabPages
             viewPanel.Controls.Add(dataGridView);
             dataGridView.Dock = DockStyle.Fill;
             GridViewButtonsChecked = true;
-            VM.SnapshotView = SnapshotsView.ListView;
+            _storedViewsPerVm[VM.opaque_ref] = SnapshotsView.ListView;
             TreeViewButtonsChecked = false;
 
             RefreshToolStripButtons();

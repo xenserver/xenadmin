@@ -95,7 +95,7 @@ namespace XenAdminTests.CommandTests
 
         private bool VMExists(VM vm)
         {
-            List<VM> vms = GetAllTreeNodes().FindAll(n => n.Tag is VM && ((VM)n.Tag).is_a_real_vm).ConvertAll(n => (VM)n.Tag);
+            List<VM> vms = GetAllTreeNodes().FindAll(n => n.Tag is VM && ((VM)n.Tag).is_a_real_vm()).ConvertAll(n => (VM)n.Tag);
 
             return vms.Find(v => v.opaque_ref == vm.opaque_ref) != null;
         }

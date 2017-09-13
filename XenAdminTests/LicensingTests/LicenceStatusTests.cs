@@ -195,7 +195,7 @@ namespace XenAdminTests.LicensingTests
         private void SetupMockHostWithExpiry(Mock<Host> host, DateTime expiry)
         {
             Assert.IsNotNull(host.Object, "Host object");
-            host.Setup(h => h.LicenseExpiryUTC).Returns(expiry);
+            host.Setup(h => h.LicenseExpiryUTC()).Returns(expiry);
             host.Setup(h => h.license_params).Returns(new Dictionary<string, string> { { "expiry", "expiry" } });
         }
         #endregion

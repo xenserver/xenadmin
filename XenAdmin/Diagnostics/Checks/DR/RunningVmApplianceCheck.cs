@@ -62,7 +62,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
                 foreach (VM_appliance appliance in Pool.Connection.Cache.VM_appliances)
                 {
                     if (appliance.uuid == vmAppliance.uuid)
-                        return appliance.IsRunning ? new RunningVmApplianceProblem(this, appliance, false) : null;
+                        return appliance.IsRunning() ? new RunningVmApplianceProblem(this, appliance, false) : null;
                 }
             }
             return null;
@@ -72,7 +72,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
         {
             get
             {
-                return string.Format(Messages.DR_WIZARD_APPLIANCE_CHECK_DESCRIPTION, vmAppliance.Name); 
+                return string.Format(Messages.DR_WIZARD_APPLIANCE_CHECK_DESCRIPTION, vmAppliance.Name()); 
             }
         }
     }

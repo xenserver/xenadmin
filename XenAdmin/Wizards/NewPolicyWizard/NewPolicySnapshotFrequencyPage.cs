@@ -181,18 +181,18 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             {
                 case vmss_frequency.hourly:
                     radioButtonHourly.Checked = true;
-                    SetHourlyMinutes(Convert.ToDecimal(policy.backup_schedule_min));
+                    SetHourlyMinutes(policy.BackupScheduleMin());
                     break;
                 case vmss_frequency.daily:
                     radioButtonDaily.Checked = true;
-                    dateTimePickerDaily.Value = new DateTime(1970, 1, 1, Convert.ToInt32(policy.backup_schedule_hour),
-                                                                 Convert.ToInt32(policy.backup_schedule_min), 0);
+                    dateTimePickerDaily.Value = new DateTime(1970, 1, 1,
+                        policy.BackupScheduleHour(), policy.BackupScheduleMin(), 0);
                     break;
                 case vmss_frequency.weekly:
                     radioButtonWeekly.Checked = true;
-                    dateTimePickerWeekly.Value = new DateTime(1970, 1, 1, Convert.ToInt32(policy.backup_schedule_hour),
-                                                                 Convert.ToInt32(policy.backup_schedule_min), 0);
-                    daysWeekCheckboxes.Days = policy.backup_schedule_days;
+                    dateTimePickerWeekly.Value = new DateTime(1970, 1, 1,
+                        policy.BackupScheduleHour(), policy.BackupScheduleMin(), 0);
+                    daysWeekCheckboxes.Days = policy.BackupScheduleDays();
                     break;
             }
 

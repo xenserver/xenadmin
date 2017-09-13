@@ -56,11 +56,11 @@ namespace XenAdmin.Dialogs.VMAppliances
         {
             Pool = pool;
             InitializeComponent();
-            Text = string.Format(Messages.VM_APPLIANCES_TITLE, pool.Name);
+            Text = string.Format(Messages.VM_APPLIANCES_TITLE, pool.Name());
             labelVMAppliancesInPool.Text = string.Format(Helpers.IsPool(pool.Connection)
                                                              ? Messages.VM_APPLIANCES_DEFINED_FOR_POOL
                                                              : Messages.VM_APPLIANCES_DEFINED_FOR_SERVER,
-                                                         pool.Name.Ellipsise(250));
+                                                         pool.Name().Ellipsise(250));
 
             listViewVMs.SmallImageList = Images.ImageList16;
         }
@@ -182,9 +182,9 @@ namespace XenAdmin.Dialogs.VMAppliances
 
             public void RefreshRow(bool refreshItems)
             {
-                _nameCell.Value = VMAppliance.Name;
+                _nameCell.Value = VMAppliance.Name();
                 _nameCell.Image = null;
-                _descriptionCell.Value = VMAppliance.Description;
+                _descriptionCell.Value = VMAppliance.Description();
                 _numVMsCell.Value = VMAppliance.VMs.Count;
                 if (refreshItems)
                     RefreshVmItems();
@@ -249,7 +249,7 @@ namespace XenAdmin.Dialogs.VMAppliances
 
             // Icon/name
             row.ImageIndex = (int)Images.GetIconFor(vm);
-            row.Text = vm.Name;
+            row.Text = vm.Name();
         }
 
         /// <summary>
@@ -448,9 +448,9 @@ namespace XenAdmin.Dialogs.VMAppliances
             if (selectedAppliances.Count == 1)
             {
                 if (numberOfProtectedVMs == 1)
-                    text = String.Format(Messages.CONFIRM_DELETE_VM_APPLIANCE_1, selectedAppliances[0].Name.Ellipsise(120), numberOfProtectedVMs);
+                    text = String.Format(Messages.CONFIRM_DELETE_VM_APPLIANCE_1, selectedAppliances[0].Name().Ellipsise(120), numberOfProtectedVMs);
                 else
-                    text = String.Format(numberOfProtectedVMs == 0 ? Messages.CONFIRM_DELETE_VM_APPLIANCE_0 : Messages.CONFIRM_DELETE_VM_APPLIANCE, selectedAppliances[0].Name.Ellipsise(120), numberOfProtectedVMs);
+                    text = String.Format(numberOfProtectedVMs == 0 ? Messages.CONFIRM_DELETE_VM_APPLIANCE_0 : Messages.CONFIRM_DELETE_VM_APPLIANCE, selectedAppliances[0].Name().Ellipsise(120), numberOfProtectedVMs);
             }
             else
             {
@@ -487,7 +487,7 @@ namespace XenAdmin.Dialogs.VMAppliances
             }
 
             var applianceRow = (VMApplianceRow)dataGridViewVMAppliances.SelectedRows[0];
-            labelVMApplianceName.Text = applianceRow.VMAppliance.Name.Ellipsise(120);
+            labelVMApplianceName.Text = applianceRow.VMAppliance.Name().Ellipsise(120);
 
             listViewVMs.Clear();
             foreach (var vmItem in applianceRow.VmItems)

@@ -35,7 +35,7 @@ namespace XenAdmin.Actions
 {
     public class EjectHostFromPoolAction:PureAsyncAction
     {
-        public EjectHostFromPoolAction(Pool pool,Host hostToEject) : base(pool.Connection, string.Format(Messages.REMOVING_SERVER_FROM_POOL, hostToEject.Name, pool.Name))
+        public EjectHostFromPoolAction(Pool pool,Host hostToEject) : base(pool.Connection, string.Format(Messages.REMOVING_SERVER_FROM_POOL, hostToEject.Name(), pool.Name()))
         {
             this.Pool = pool;
             this.Host = hostToEject;

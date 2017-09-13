@@ -32,60 +32,64 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
-using XenAdmin.Core;
-using XenAdmin.Wlb;
-using XenAdmin.Network;
+using XenAdmin.Alerts;
 using XenAPI;
+using System.Diagnostics;
+using System.Linq;
+using XenAdmin.Core;
+using XenAdmin.Network;
 
-
-namespace XenAdmin.Actions.Wlb
+namespace XenAdmin.Actions
 {
-    public class EnableWLBAction : AsyncAction
+    public class LoadVmssAction : PureAsyncAction
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static string OPTIMIZINGPOOL = "wlb_optimizing_pool";
 
-        public Dictionary<string, string> WlbConfiguration = new Dictionary<string, string>();
-
-        public EnableWLBAction(Pool pool)
-            : base(pool.Connection, string.Format(Messages.ENABLING_WLB_ON, Helpers.GetName(pool).Ellipsise(50)), Messages.ENABLING_WLB, false)
+        public LoadVmssAction(IXenConnection connection)
+            : base(connection, "", true)
         {
-            #region RBAC Dependencies
-            ApiMethodsToRoleCheck.Add("pool.retrieve_wlb_configuration");
-            ApiMethodsToRoleCheck.Add("pool.set_wlb_enabled");
-            #endregion
-
-            this.Pool = pool;
+            ServerLocalTime = null;
+            SnapshotSchedules = new Dictionary<VMSS, List<Message>>();
         }
+
+        public DateTime? ServerLocalTime { get; private set; }
+
+        public Dictionary<VMSS, List<XenAPI.Message>> SnapshotSchedules { get; private set; }
 
         protected override void Run()
         {
             try
             {
-                log.Debug("Resuming WLB on pool " + Pool.Name());
-                XenAPI.Pool.set_wlb_enabled(this.Session, Pool.opaque_ref, true);
-                log.Debug("Success resuming WLB on pool " + Pool.Name());
-                this.Description = Messages.COMPLETED;
-
-                WlbServerState.SetState(this.Pool, WlbServerState.ServerState.Enabled);
-
-                //Clear the Optimizing Pool flag in case it was left behind
-                Helpers.SetOtherConfig(this.Session, this.Pool, OPTIMIZINGPOOL, string.Empty);
-
-                log.Debug("Retrieving Workload Balancing configuration for pool " + Pool.Name());
-                this.WlbConfiguration = XenAPI.Pool.retrieve_wlb_configuration(this.Session);
-                log.Debug("Success retrieving Workload Balancing configuration on pool " + Pool.Name());
-                this.Description = Messages.COMPLETED;
+                ServerLocalTime = Host.get_server_localtime(Connection.Session, Helpers.GetMaster(Connection).opaque_ref);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                if (ex is Failure)
-                {
-                    WlbServerState.SetState(Pool, WlbServerState.ServerState.ConnectionError, (Failure)ex);
-                }
-                throw ex;
+                log.Error("An error occurred while obtaining VMPP date time: ", e);
+                ServerLocalTime = null;
             }
+
+            var schedules = Connection.Cache.VMSSs;
+            var messages = Pool.Connection.Cache.Messages;
+
+            var allVmssMessages = (from XenAPI.Message msg in messages
+                    where msg.cls == cls.VMSS
+                    group msg by msg.obj_uuid
+                    into g
+                    let gOrdered = g.OrderByDescending(m => m.timestamp).ToList()
+                    select new {PolicyUuid = g.Key, PolicyMessages = gOrdered})
+                .ToDictionary(x => x.PolicyUuid, x => x.PolicyMessages);
+
+            var filteredVmssMessages = new Dictionary<VMSS, List<XenAPI.Message>>();
+            foreach (var schedule in schedules)
+            {
+                List<XenAPI.Message> value;
+                if (!allVmssMessages.TryGetValue(schedule.uuid, out value))
+                    value = new List<XenAPI.Message>();
+
+                filteredVmssMessages[schedule] = value;
+            }
+            
+            SnapshotSchedules = filteredVmssMessages;
         }
     }
 }

@@ -72,7 +72,7 @@ namespace XenAdmin.Dialogs
 
             this.pool = pool;
             InitializeComponent();
-            Text += string.Format(" - '{0}'", pool.Name.Ellipsise(30));
+            Text += string.Format(" - '{0}'", pool.Name().Ellipsise(30));
             assignPriorities.StatusChanged += assignPriorities_StatusChanged;
 
             pool.PropertyChanged += pool_PropertyChanged;
@@ -81,7 +81,7 @@ namespace XenAdmin.Dialogs
             if (pool.ha_statefiles.Length != 1)
             {
                 log.ErrorFormat("Cannot show dialog: pool {0} has {1} statefiles, but this dialog can only handle exactly 1. Closing dialog.",
-                    pool.Name, pool.ha_statefiles.Length);
+                    pool.Name(), pool.ha_statefiles.Length);
                 this.Close();
                 return;
             }
@@ -128,7 +128,7 @@ namespace XenAdmin.Dialogs
             Program.AssertOnEventThread();
 
             // Check that all hosts are live
-            bool deadHosts = Array.Find(pool.Connection.Cache.Hosts, h => !h.IsLive) != null;
+            bool deadHosts = Array.Find(pool.Connection.Cache.Hosts, h => !h.IsLive()) != null;
 
             assignPriorities.Enabled = !deadHosts;
             pictureBoxWarningIcon.Visible = deadHosts;
@@ -136,7 +136,7 @@ namespace XenAdmin.Dialogs
             if (deadHosts)
             {
                 buttonOk.Enabled = false;
-                labelBlurb.Text = String.Format(Messages.HA_CANNOT_EDIT_WITH_DEAD_HOSTS_SHORT, pool.Name.Ellipsise(30));
+                labelBlurb.Text = String.Format(Messages.HA_CANNOT_EDIT_WITH_DEAD_HOSTS_SHORT, pool.Name().Ellipsise(30));
             }
             else
             {
@@ -160,7 +160,7 @@ namespace XenAdmin.Dialogs
                         using (var dlg = new ThreeButtonDialog(
                            new ThreeButtonDialog.Details(
                                SystemIcons.Exclamation,
-                               String.Format(Messages.HA_WAS_DISABLED, pool.Name),
+                               String.Format(Messages.HA_WAS_DISABLED, pool.Name()),
                                Messages.HIGH_AVAILABILITY)))
                         {
                             dlg.ShowDialog(this);

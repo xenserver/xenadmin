@@ -29579,15 +29579,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Taking snapshots.
-        /// </summary>
-        public static string RUNNING_SNAPSHOTS {
-            get {
-                return ResourceManager.GetString("RUNNING_SNAPSHOTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Saturday.
         /// </summary>
         public static string SATURDAY_LONG {
@@ -36057,24 +36048,6 @@ namespace XenAdmin {
         public static string VMSS_CONTEXT_MENU {
             get {
                 return ResourceManager.GetString("VMSS_CONTEXT_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create a snapshot schedule for your VMs..
-        /// </summary>
-        public static string VMSS_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_DIALOG_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Snapshot schedules.
-        /// </summary>
-        public static string VMSS_DIALOG_TITLE {
-            get {
-                return ResourceManager.GetString("VMSS_DIALOG_TITLE", resourceCulture);
             }
         }
         

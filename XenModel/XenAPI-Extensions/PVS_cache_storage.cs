@@ -35,19 +35,16 @@ namespace XenAPI
 {
     public partial class PVS_cache_storage
     {
-        public bool IsInUse
+        public bool IsInUse()
         {
-            get
+            foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.currently_attached))
             {
-                foreach (var pvsProxy in Connection.Cache.PVS_proxies.Where(p => p.currently_attached))
-                {
-                    var vm = pvsProxy.VM;
-                    if (vm != null && vm.resident_on != null && vm.resident_on.opaque_ref == host.opaque_ref &&
-                        pvsProxy.site != null && pvsProxy.site.opaque_ref == site.opaque_ref)
-                        return true;
-                }
-                return false;
+                var vm = pvsProxy.VM();
+                if (vm != null && vm.resident_on != null && vm.resident_on.opaque_ref == host.opaque_ref &&
+                    pvsProxy.site != null && pvsProxy.site.opaque_ref == site.opaque_ref)
+                    return true;
             }
+            return false;
         }
     }
 }

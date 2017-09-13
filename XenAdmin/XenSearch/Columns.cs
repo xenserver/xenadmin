@@ -100,7 +100,7 @@ namespace XenAdmin.XenSearch
             VM vm = o as VM;
             if (vm != null)
             {
-                VM.VirtualisationStatus status = vm.virtualisation_status;
+                VM.VirtualisationStatus status = vm.GetVirtualisationStatus();
                 if (vm.power_state != vm_power_state.Running ||
                     status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED | VM.VirtualisationStatus.MANAGEMENT_INSTALLED) ||
                     status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
@@ -117,7 +117,7 @@ namespace XenAdmin.XenSearch
 
                 if (property == PropertyNames.memoryValue && !status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                 {
-                    if (vm.HasNewVirtualisationStates)
+                    if (vm.HasNewVirtualisationStates())
                     {
                         warningMessage = Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
                         colSpan = 1;
@@ -155,7 +155,7 @@ namespace XenAdmin.XenSearch
                     }
                 }
 
-                if (property == PropertyNames.diskText && vm.HasNewVirtualisationStates && !status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                if (property == PropertyNames.diskText && vm.HasNewVirtualisationStates() && !status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                 {
                     warningMessage = Messages.VIRTUALIZATION_STATE_VM_IO_NOT_OPTIMIZED;
                     colSpan = 2;
@@ -190,13 +190,13 @@ namespace XenAdmin.XenSearch
             }
 
             Pool pool = o as Pool;
-            if (pool != null && !pool.IsPoolFullyUpgraded)
+            if (pool != null && !pool.IsPoolFullyUpgraded())
             {
                 if (property == PropertyNames.memoryValue)
                 {
                     var master = pool.Connection.Resolve(pool.master);
 
-                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText),
+                    item = new GridStringItem(string.Format(Messages.POOL_VERSIONS_LINK_TEXT, master.ProductVersionText()),
                                   HorizontalAlignment.Center, VerticalAlignment.Middle, false, false,
                                   QueryPanel.LinkBrush, Program.DefaultFontUnderline, QueryPanel.LinkBrush,
                                   Program.DefaultFontUnderline, 3,

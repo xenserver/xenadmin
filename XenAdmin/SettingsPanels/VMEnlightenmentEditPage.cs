@@ -84,7 +84,7 @@ namespace XenAdmin.SettingsPanels
 
             vm = (VM)clone;
 
-            Trace.Assert(vm.CanBeEnlightened);  // If the VM cannot be enlightened, we shouldn't see this page
+            Trace.Assert(vm.CanBeEnlightened());  // If the VM cannot be enlightened, we shouldn't see this page
 
             PopulatePage();
         }
@@ -109,7 +109,7 @@ namespace XenAdmin.SettingsPanels
 
         private void PopulatePage()
         {
-            currentValue = vm.IsEnlightened;
+            currentValue = vm.IsEnlightened();
             enlightenCheckBox.Checked = currentValue;
         }
     }

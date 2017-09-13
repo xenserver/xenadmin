@@ -301,14 +301,14 @@ namespace XenAdminTests.TabsAndMenus
 
         protected static bool HasTools(VM vm)
         {
-            return !vm.is_a_template && vm.IsRunning&&
-                vm.virtualisation_status != 0 &&
-                !vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE);
+            var status = vm.GetVirtualisationStatus();
+            return !vm.is_a_template && vm.IsRunning() && status != 0 &&
+                   !status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE);
         }
 
         protected static bool NoTools(VM vm)
         {
-            return !vm.is_control_domain && !vm.is_a_template && vm.IsRunning && !HasTools(vm);
+            return !vm.is_control_domain && !vm.is_a_template && vm.IsRunning() && !HasTools(vm);
         }
 
         protected static bool IsShutdown(VM vm)
@@ -318,7 +318,7 @@ namespace XenAdminTests.TabsAndMenus
 
         protected static bool IsDefaultTemplate(VM vm)
         {
-            return vm.is_a_template && vm.DefaultTemplate && vm.name_label != "XenSource P2V Server";
+            return vm.is_a_template && vm.DefaultTemplate() && vm.name_label != "XenSource P2V Server";
         }
 
         protected static bool CanDetach(SR sr)
@@ -328,17 +328,17 @@ namespace XenAdminTests.TabsAndMenus
 
         protected static bool CanForget(SR sr)
         {
-            return !sr.HasRunningVMs() && sr.CanCreateWithXenCenter && sr.allowed_operations.Contains(storage_operations.forget) && !HelpersGUI.GetActionInProgress(sr);
+            return !sr.HasRunningVMs() && sr.CanCreateWithXenCenter() && sr.allowed_operations.Contains(storage_operations.forget) && !HelpersGUI.GetActionInProgress(sr);
         }
 
         protected static bool CanDestroy(SR sr)
         {
-            return !sr.HasRunningVMs() && sr.CanCreateWithXenCenter && sr.allowed_operations.Contains(storage_operations.destroy) && !HelpersGUI.GetActionInProgress(sr);
+            return !sr.HasRunningVMs() && sr.CanCreateWithXenCenter() && sr.allowed_operations.Contains(storage_operations.destroy) && !HelpersGUI.GetActionInProgress(sr);
         }
 
         protected static bool CanSetAsDefault(SR sr)
         {
-            return sr.HasPBDs && !SR.IsDefaultSr(sr) && sr.SupportsVdiCreate() && (sr.shared || sr.Connection.Cache.HostCount <= 1) && !HelpersGUI.GetActionInProgress(sr);
+            return sr.HasPBDs() && !SR.IsDefaultSr(sr) && sr.SupportsVdiCreate() && (sr.shared || sr.Connection.Cache.HostCount <= 1) && !HelpersGUI.GetActionInProgress(sr);
         }
 
         protected static bool CanConvertSR(SR sr)

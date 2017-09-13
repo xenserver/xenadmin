@@ -61,7 +61,7 @@ namespace XenAdmin.Controls
 
         private void Populate()
         {
-            labelHostName.Text = Host.Name;
+            labelHostName.Text = Host.Name();
 
             // initialize cacheSize
             SetupCacheSizeSpinner(OrigPvsCacheStorage == null ? DEFAULT_CACHE_SIZE_GB : (decimal)Util.ToGB(OrigPvsCacheStorage.size, 1, RoundingBehaviour.Nearest), 
@@ -70,7 +70,7 @@ namespace XenAdmin.Controls
             origCacheSizeGb = numericUpDownCacheSize.Value;
 
             PopulateCacheSrCombobox();
-            ReadOnly = OrigPvsCacheStorage != null && OrigPvsCacheStorage.IsInUse;
+            ReadOnly = OrigPvsCacheStorage != null && OrigPvsCacheStorage.IsInUse();
             comboBoxCacheSr.Enabled = numericUpDownCacheSize.Enabled = !ReadOnly;
         }
 
@@ -100,7 +100,7 @@ namespace XenAdmin.Controls
                 };
             }
 
-            var enabled = Host.dom0_memory_extra >= MIN_CACHE_SIZE_GB * Util.BINARY_GIGA;
+            var enabled = Host.dom0_memory_extra() >= MIN_CACHE_SIZE_GB * Util.BINARY_GIGA;
             var label = enabled ? Messages.PVS_CACHE_MEMORY_ONLY : Messages.PVS_CACHE_MEMORY_ONLY_DISABLED;
             var memorySrItem = new SrComboBoxItem(memorySr, label, enabled);
             comboBoxCacheSr.Items.Add(memorySrItem);
@@ -112,7 +112,7 @@ namespace XenAdmin.Controls
             availableSRs.Sort();
             foreach (var sr in availableSRs)
             {
-                var newItem = new SrComboBoxItem(sr, sr.Name);
+                var newItem = new SrComboBoxItem(sr, sr.Name());
                 comboBoxCacheSr.Items.Add(newItem);
                 if (OrigPvsCacheStorage != null && sr.opaque_ref == OrigPvsCacheStorage.SR.opaque_ref)
                     comboBoxCacheSr.SelectedItem = newItem;
@@ -121,7 +121,7 @@ namespace XenAdmin.Controls
 
         private bool SrIsSuitableForPvsCache(SR sr)
         {
-            return sr.Show(Properties.Settings.Default.ShowHiddenVMs) && sr.SupportsVdiCreate() && sr.FreeSpace >= MIN_CACHE_SIZE_GB * Util.BINARY_GIGA;
+            return sr.Show(Properties.Settings.Default.ShowHiddenVMs) && sr.SupportsVdiCreate() && sr.FreeSpace() >= MIN_CACHE_SIZE_GB * Util.BINARY_GIGA;
         }
 
         private void SetupCacheSizeSpinner(decimal value, decimal min, decimal max)
@@ -195,7 +195,7 @@ namespace XenAdmin.Controls
             var selectedSr = CacheSr;
             if (selectedSr != null)
             {
-                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory_extra : selectedSr.FreeSpace, 1, RoundingBehaviour.Down); 
+                var maxSize = (decimal)Util.ToGB(selectedSr.GetSRType(false) == SR.SRTypes.tmpfs ? Host.dom0_memory_extra() : selectedSr.FreeSpace(), 1, RoundingBehaviour.Down); 
                 maxSize = Math.Min(maxSize, MAX_CACHE_SIZE_GB);
 
                 if (maxSize != numericUpDownCacheSize.Maximum)

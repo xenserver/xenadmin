@@ -31,11 +31,7 @@
 
 using System;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
-using System.Xml;
-using XenAdmin.Network;
 using XenAPI;
 
 namespace XenAdmin.Alerts
@@ -47,10 +43,12 @@ namespace XenAdmin.Alerts
         public readonly DateTime Time;
         public readonly int numberOfVMsFailed;
 
-        public PolicyAlert(long priority, string name, DateTime _time, string body, string policyName)
+        public const int INFO_PRIORITY = 4;
+
+        public PolicyAlert(long priority, string name, DateTime time, string body, string policyName)
         {
-            Type = (priority == 4 ? "info": "error");
-            Time = _time;
+            Type = priority == INFO_PRIORITY ? "info" : "error";
+            Time = time;
 
             if(Type == "info")
             {
@@ -82,10 +80,9 @@ namespace XenAdmin.Alerts
                 sb.Append(Messages.VMSS_ALERT_DETAILS);
             }
             /* for each VM entry parse the data and get VM name and corresponding error message */
-            for (int vmIterator = 1; vmIterator < vmList.Length; vmIterator++)
+            for (int i = 1; i < vmList.Length; i++)
             {
-                vmList[vmIterator].Trim();
-                string[] tmp = Regex.Split(vmList[vmIterator], "Error:");
+                string[] tmp = Regex.Split(vmList[i].Trim(), "Error:");
                 string vmName = Regex.Split(tmp[0], "UUID:")[0];
               
                 string[] errorCode = Regex.Split(tmp[1].Replace("[", "").Replace("],", "").Replace("]", ""), "\',");
@@ -94,7 +91,7 @@ namespace XenAdmin.Alerts
 
                 string errorMessage = new Failure(errorCode).Message;
                 sb.AppendLine();
-                sb.AppendFormat(Messages.VMSS_ALERT_VM_ERROR_FORMAT, vmIterator, vmName.Trim(), errorMessage);
+                sb.AppendFormat(Messages.VMSS_ALERT_VM_ERROR_FORMAT, i, vmName.Trim(), errorMessage);
             }
             Text = sb.ToString();
         }
@@ -134,7 +131,6 @@ namespace XenAdmin.Alerts
         }
 
         #endregion
-
 
     }
 }

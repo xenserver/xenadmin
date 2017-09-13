@@ -280,7 +280,7 @@ namespace XenAdmin.SettingsPanels
                 var host = _XenObject as Host;
                 if (host != null)
                 {
-                    var dom0 = host.ControlDomainZero;
+                    var dom0 = host.ControlDomainZero();
 
                     if (dom0 != null)
                     {

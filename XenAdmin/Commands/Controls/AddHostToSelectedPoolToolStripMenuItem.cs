@@ -103,7 +103,7 @@ namespace XenAdmin.Commands
             {
                 string hostName = Helpers.GetName(host.Connection);
 
-                if (host.RestrictPooling)
+                if (Host.RestrictPooling(host))
                 {
                     hostName = String.Format(Messages.HOST_MENU_ADD_SERVER, hostName);
                 }

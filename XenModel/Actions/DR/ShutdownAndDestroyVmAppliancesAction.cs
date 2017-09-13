@@ -75,14 +75,14 @@ namespace XenAdmin.Actions.DR
                 // shutdown appliance
                 if (vmAppliance.allowed_operations.Contains(vm_appliance_operation.hard_shutdown))
                 {
-                    Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN, vmAppliance.Name);
+                    Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN, vmAppliance.Name());
                     VM_appliance.hard_shutdown(Session, vmAppliance.opaque_ref);
-                    Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN_COMPLETED, vmAppliance.Name);
+                    Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN_COMPLETED, vmAppliance.Name());
                 }
 
                 PercentComplete += increment;
 
-                Description = string.Format(Messages.DELETING_VM_APPLIANCE, vmAppliance.Name);
+                Description = string.Format(Messages.DELETING_VM_APPLIANCE, vmAppliance.Name());
                 // destroy VMs
                 foreach (var vm in Connection.ResolveAll<VM>(vmAppliance.VMs))
                 {

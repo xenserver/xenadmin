@@ -88,12 +88,12 @@ namespace XenAdmin.Controls.Ballooning
             if (host == null || host_metrics == null)
                 return;
             long total = host_metrics.memory_total;
-            long free = host.memory_free_calc;
+            long free = host.memory_free_calc();
             long used = total - free;
-            long xen_memory = host.xen_memory_calc;
-            long avail = host.memory_available_calc;
-            long tot_dyn_max = host.tot_dyn_max + xen_memory;
-            long dom0 = host.dom0_memory;
+            long xen_memory = host.xen_memory_calc();
+            long avail = host.memory_available_calc();
+            long tot_dyn_max = host.tot_dyn_max() + xen_memory;
+            long dom0 = host.dom0_memory();
 
             long overcommit = total > 0
                 ? (long)Math.Round((double)tot_dyn_max / (double)total * 100.0)

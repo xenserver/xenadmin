@@ -397,7 +397,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     try
                     {
                         Pool_update.pool_clean(session, poolUpdate.opaque_ref);
-                        if(!poolUpdate.AppliedOnHosts.Any())
+                        if(!poolUpdate.AppliedOnHosts().Any())
                             Pool_update.destroy(session, poolUpdate.opaque_ref);
                     }
                     catch (Failure f)

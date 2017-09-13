@@ -80,7 +80,7 @@ namespace XenAdmin.Commands
         {
             return sr != null
                 && !sr.HasRunningVMs()
-                && sr.CanCreateWithXenCenter
+                && sr.CanCreateWithXenCenter()
                 && sr.allowed_operations.Contains(storage_operations.forget)
                 && !HelpersGUI.GetActionInProgress(sr);
         }
@@ -108,7 +108,7 @@ namespace XenAdmin.Commands
                 List<SR> srs = GetSelection().AsXenObjects<SR>();
                 if (srs.Count == 1)
                 {
-                    return string.Format(Messages.MESSAGEBOX_FORGET_SR_CONTINUE, srs[0].Name);
+                    return string.Format(Messages.MESSAGEBOX_FORGET_SR_CONTINUE, srs[0].Name());
                 }
                 return Messages.MESSAGEBOX_FORGET_SRS_CONTINUE;
             }
@@ -142,7 +142,7 @@ namespace XenAdmin.Commands
             {
                 return Messages.SR_HAS_RUNNING_VMS;
             }
-            else if (!sr.CanCreateWithXenCenter)
+            else if (!sr.CanCreateWithXenCenter())
             {
                 return Messages.SR_CANNOT_BE_FORGOTTEN_WITH_XC;
             }

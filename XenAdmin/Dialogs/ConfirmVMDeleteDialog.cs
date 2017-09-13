@@ -75,7 +75,7 @@ namespace XenAdmin.Dialogs
             {
                 foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
                 {
-                    if (!vbd.IsCDROM)
+                    if (!vbd.IsCDROM())
                     {
                        
                         VDI vdi = vbd.Connection.Resolve(vbd.VDI);
@@ -102,11 +102,11 @@ namespace XenAdmin.Dialogs
                             else
                             {
                                 ListViewItem item = new ListViewItem();
-                                item.Text = vdi.Name;
-                                item.SubItems.Add(vm.Name);
+                                item.Text = vdi.Name();
+                                item.SubItems.Add(vm.Name());
                                 item.Group = listView.Groups["listViewGroupAttachedDisks"];
                                 item.Tag = vbd;
-                                item.Checked = vbd.IsOwner;
+                                item.Checked = vbd.GetIsOwner();
                                 foreach (ListViewItem.ListViewSubItem subitem in item.SubItems)
                                     subitem.Tag = subitem.Text;
                                 listView.Items.Add(item);
@@ -118,8 +118,8 @@ namespace XenAdmin.Dialogs
                 foreach (VM snapshot in vm.Connection.ResolveAll(vm.snapshots))
                 {
                     ListViewItem item = new ListViewItem();
-                    item.Text = snapshot.Name;
-                    item.SubItems.Add(vm.Name);
+                    item.Text = snapshot.Name();
+                    item.SubItems.Add(vm.Name());
                     item.Tag = snapshot;
                     item.Group = listView.Groups["listViewGroupSnapshots"];
                     foreach (ListViewItem.ListViewSubItem subitem in item.SubItems)
@@ -130,8 +130,8 @@ namespace XenAdmin.Dialogs
             foreach (VDI vdi in sharedVDIsCouldBeDelete)
             {
                 ListViewItem item = new ListViewItem();
-                item.Text = vdi.Name;
-                item.SubItems.Add(vdi.VMsOfVDI);
+                item.Text = vdi.Name();
+                item.SubItems.Add(vdi.VMsOfVDI());
                 item.Group = listView.Groups["listViewGroupAttachedDisks"];
                 item.Tag = vdi.Connection.ResolveAll(vdi.VBDs);
                 item.Checked = false;

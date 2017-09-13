@@ -44,8 +44,8 @@ namespace XenAdmin.Actions
 
         public AssignVMsToVMApplianceAction(VM_appliance vmAppliance, List<XenRef<VM>> selectedVMs, bool suppressHistory)
             : base(vmAppliance.Connection, selectedVMs.Count == 1 ?
-            string.Format(Messages.ASSIGN_VM_TO_VAPP, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name)
-            : string.Format(Messages.ASSIGN_VMS_TO_VAPP, vmAppliance.Name), suppressHistory)
+            string.Format(Messages.ASSIGN_VM_TO_VAPP, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name())
+            : string.Format(Messages.ASSIGN_VMS_TO_VAPP, vmAppliance.Name()), suppressHistory)
         {
             _vmAppliance = vmAppliance;
             _selectedVMs = selectedVMs;
@@ -78,8 +78,8 @@ namespace XenAdmin.Actions
 
         public RemoveVMsFromVMApplianceAction(VM_appliance vmAppliance, List<XenRef<VM>> selectedVMs)
             : base(vmAppliance.Connection, selectedVMs.Count == 1 ?
-            string.Format(Messages.REMOVE_VM_FROM_APPLIANCE, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name)
-            : string.Format(Messages.REMOVE_VMS_FROM_APPLIANCE, vmAppliance.Name))
+            string.Format(Messages.REMOVE_VM_FROM_APPLIANCE, vmAppliance.Connection.Resolve(selectedVMs[0]), vmAppliance.Name())
+            : string.Format(Messages.REMOVE_VMS_FROM_APPLIANCE, vmAppliance.Name()))
         {
             _selectedVMs = selectedVMs;
             Pool = Helpers.GetPool(vmAppliance.Connection);

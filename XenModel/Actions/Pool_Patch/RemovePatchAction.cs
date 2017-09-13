@@ -60,7 +60,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = String.Format(Messages.REMOVING_UPDATE, patch.Name);
+            Description = String.Format(Messages.REMOVING_UPDATE, patch.Name());
             try
             {
                 RelatedTask = Pool_patch.async_destroy(Session, patch.opaque_ref);
@@ -71,7 +71,7 @@ namespace XenAdmin.Actions
                 log.Error("Clean up failed", f);
             }
 
-            Description = String.Format(Messages.REMOVED_UPDATE, patch.Name);
+            Description = String.Format(Messages.REMOVED_UPDATE, patch.Name());
         }
     }
 }

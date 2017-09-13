@@ -121,11 +121,11 @@ namespace XenAdmin.TabPages
 
             VM vm = XenObject as VM;
             bool isRunning = XenObject != null && (vm != null)
-                                 ? vm.current_operations.Count == 0 && vm.IsRunning
+                                 ? vm.current_operations.Count == 0 && vm.IsRunning()
                                  : (XenObject is Host);
             
             string newText = (vm != null && !isRunning)
-                                 ? string.Format(Messages.GRAPHS_CANNOT_ADD_VM_HALTED, vm.Name)
+                                 ? string.Format(Messages.GRAPHS_CANNOT_ADD_VM_HALTED, vm.Name())
                                  : string.Empty;
 
             newGraphToolStripMenuItem.Enabled = isRunning;
@@ -135,7 +135,7 @@ namespace XenAdmin.TabPages
             newGraphToolStripContextMenuItem.ToolTipText = newText;
 
             string editText=(vm != null && !isRunning)
-                                 ? string.Format(Messages.GRAPHS_CANNOT_EDIT_VM_HALTED, vm.Name)
+                                 ? string.Format(Messages.GRAPHS_CANNOT_EDIT_VM_HALTED, vm.Name())
                                  : string.Empty;
 
             editGraphToolStripMenuItem.Enabled = canEnable && isRunning;
@@ -203,7 +203,7 @@ namespace XenAdmin.TabPages
 
         private void CheckMessage(XenAPI.Message m, CollectionChangeAction a)
         {
-            if (!m.ShowOnGraphs || m.cls != cls.VM)
+            if (!m.ShowOnGraphs() || m.cls != cls.VM)
                 return;
 
             Host h = XenObject as Host;

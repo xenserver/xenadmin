@@ -94,7 +94,7 @@ namespace XenAdmin.Commands
 
                 // At least one must not currently have a PVS Proxy
                 var vms = selection.AsXenObjects<VM>();
-                if (vms.Any(vm => vm.PvsProxy == null))
+                if (vms.Any(vm => vm.PvsProxy() == null))
                 {
                     return true;
                 }

@@ -43,15 +43,13 @@ namespace XenAdmin.Diagnostics.Checks
         
         protected override Problem RunCheck()
         {
-            if (!Host.IsLive)
+            if (!Host.IsLive())
             {
                 return new HostNotLive(this, Host);
             }
 
-            //
             // Check the host is not in Maintenance Mode (or disabled)
-            //
-            if (Host.MaintenanceMode || !Host.enabled)
+            if (Host.MaintenanceMode() || !Host.enabled)
             {
                 return new HostMaintenanceMode(this, Host);
             }

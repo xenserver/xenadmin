@@ -60,7 +60,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 _template = template;
                 ServersGridView.Rows.Clear();
 
-                if (template.DefaultTemplate)
+                if (template.DefaultTemplate())
                 {
                     List<Host> hosts = new List<Host>(Connection.Cache.Hosts);
                     hosts.Sort();
@@ -75,7 +75,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                         }
                     }
                 }
-                ServersGridView.Enabled = template.DefaultTemplate;
+                ServersGridView.Enabled = template.DefaultTemplate();
             }
         }
 
@@ -137,7 +137,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
                 if (CopyBiosStringsFrom != null)
                 {
-                    d.Add(new KeyValuePair<string,string>(Messages.NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_HOST, CopyBiosStringsFrom.Name));
+                    d.Add(new KeyValuePair<string,string>(Messages.NEWVMWIZARD_COPY_BIOS_STRINGS_PAGE_HOST, CopyBiosStringsFrom.Name()));
                 }
                 return d;
             }

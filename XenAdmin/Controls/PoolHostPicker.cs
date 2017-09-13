@@ -108,7 +108,7 @@ namespace XenAdmin.Controls
                             HostItem item2 = new HostItem(host);
                             if (SupressErrors)
                             {
-                                item2.Enabled = host.IsLive;
+                                item2.Enabled = host.IsLive();
                                 item2.Description = "";
                             }
                             AddChildNode(item, item2);
@@ -125,7 +125,7 @@ namespace XenAdmin.Controls
                             HostItem item = new HostItem(host);
                             if (SupressErrors)
                             {
-                                item.Enabled = host.IsLive;
+                                item.Enabled = host.IsLive();
                                 item.Description = "";
                             }
                             AddNode(item);
@@ -417,10 +417,11 @@ namespace XenAdmin.Controls
         {
             this.Image = Images.GetImage16For(TheHost);
             this.Text = Helpers.GetName(TheHost);
-            this.Enabled = TheHost.IsLive && CanCreateVMsWithAffinityTo(TheHost);
+            bool isLiveHost = TheHost.IsLive();
+            this.Enabled = isLiveHost && CanCreateVMsWithAffinityTo(TheHost);
             if (Enabled)
                 this.Description = "";
-            else if (!TheHost.IsLive)
+            else if (!isLiveHost)
                 this.Description = Messages.HOST_NOT_LIVE;
             else
                 this.Description = Messages.HOST_SEES_NO_STORAGE;

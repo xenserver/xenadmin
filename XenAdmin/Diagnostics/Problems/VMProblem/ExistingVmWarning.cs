@@ -62,7 +62,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         public override string Description
         {
-            get { return String.Format(Messages.DR_WIZARD_WARNING_EXISTING_VM, Helpers.GetPoolOfOne(Vm.Connection).Name); } 
+            get { return String.Format(Messages.DR_WIZARD_WARNING_EXISTING_VM, Helpers.GetPoolOfOne(Vm.Connection).Name()); } 
         }
     }   
 }

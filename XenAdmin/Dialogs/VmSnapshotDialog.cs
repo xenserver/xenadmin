@@ -149,8 +149,8 @@ namespace XenAdmin.Dialogs
                 tt = Messages.FIELD_DISABLED;
             else if (_VM.power_state != vm_power_state.Running)
                 tt = Messages.INFO_QUIESCE_MODE_POWER_STATE.Replace("\\n", "\n");
-            else if (!_VM.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
-                tt = (_VM.HasNewVirtualisationStates ? Messages.INFO_QUIESCE_MODE_NO_MGMNT : Messages.INFO_QUIESCE_MODE_NO_TOOLS).Replace("\\n", "\n");
+            else if (!_VM.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                tt = (_VM.HasNewVirtualisationStates() ? Messages.INFO_QUIESCE_MODE_NO_MGMNT : Messages.INFO_QUIESCE_MODE_NO_TOOLS).Replace("\\n", "\n");
             else
                 tt = Messages.INFO_QUIESCE_MODE.Replace("\\n","\n");  // This says that VSS must be enabled. This is a guess, because we can't tell whether it is or not.
             toolTip.Show(tt ,pictureBoxQuiesceInfo, 20, 0);
@@ -178,10 +178,10 @@ namespace XenAdmin.Dialogs
                 tt = Messages.FIELD_DISABLED;
             else if (_VM.power_state != vm_power_state.Running)
                 tt = Messages.INFO_DISKMEMORY_MODE_POWER_STATE.Replace("\\n", "\n");
-            else if (_VM.HasVGPUs)
+            else if (_VM.HasVGPUs())
                 tt = Messages.INFO_DISKMEMORY_MODE_GPU.Replace("\\n", "\n");
-            else if (!_VM.virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                tt = (_VM.HasNewVirtualisationStates ? Messages.INFO_DISKMEMORY_MODE_NO_IO_DRIVERS : Messages.INFO_DISKMEMORY_MODE_NO_TOOLS).Replace("\\n", "\n");
+            else if (!_VM.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                tt = (_VM.HasNewVirtualisationStates() ? Messages.INFO_DISKMEMORY_MODE_NO_IO_DRIVERS : Messages.INFO_DISKMEMORY_MODE_NO_TOOLS).Replace("\\n", "\n");
             else
                 tt = Messages.INFO_DISKMEMORY_MODE_MISC.Replace("\\n", "\n");
             toolTip.Show(tt, CheckpointInfoPictureBox, 20, 0);
