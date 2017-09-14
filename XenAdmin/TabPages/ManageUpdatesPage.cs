@@ -725,31 +725,37 @@ namespace XenAdmin.TabPages
 
         private void UpdateButtonEnablement()
         {
-            toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;
-            toolStripButtonUpdate.ToolTipText = "";
-            var connectionList = ConnectionsManager.XenConnectionsCopy;
+            if (byUpdateToolStripMenuItem.Checked)
+                toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;
 
-            if (!connectionList.Any(xenConnection => xenConnection.IsConnected))
+            else
             {
-                toolStripButtonUpdate.Enabled = false;
-                return;
-            }
+                toolStripButtonExportAll.Enabled = true;
+                toolStripButtonUpdate.ToolTipText = "";
+                var connectionList = ConnectionsManager.XenConnectionsCopy;
 
-            // check Updates Availability
-            foreach (IXenConnection connection in connectionList)
-            {
-                foreach (Host host in connection.Cache.Hosts)
+                if (!connectionList.Any(xenConnection => xenConnection.IsConnected))
                 {
-                    if (RequiredUpdatesForHost(host).Length > 0)
+                    toolStripButtonUpdate.Enabled = toolStripButtonExportAll.Enabled = false;
+                    return;
+                }
+
+                // check Updates Availability
+                foreach (IXenConnection connection in connectionList)
+                {
+                    foreach (Host host in connection.Cache.Hosts)
                     {
-                        toolStripButtonUpdate.Enabled = true;
-                        return;
+                        if (RequiredUpdatesForHost(host).Length > 0)
+                        {
+                            toolStripButtonUpdate.Enabled = true;
+                            return;
+                        }
                     }
                 }
-            }
 
-            toolStripButtonUpdate.Enabled = false;
-            toolStripButtonUpdate.ToolTipText = Messages.MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE;
+                toolStripButtonUpdate.Enabled = false;
+                toolStripButtonUpdate.ToolTipText = Messages.MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE;
+            }
         }
 
         private void ShowInformationHelper(string reason)
