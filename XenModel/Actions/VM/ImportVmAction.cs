@@ -54,7 +54,7 @@ namespace XenAdmin.Actions
         public const string IMPORT_TASK = "import_task";
 
 		private bool m_startAutomatically;
-    	private List<Proxy_VIF> m_proxyVIFs;
+    	private List<VIF> m_VIFs;
 
     	private object monitor = new object();
 		private bool m_wizardDone;
@@ -163,7 +163,7 @@ namespace XenAdmin.Actions
                 if (Cancelling)
                     throw new CancelledException();
 
-                if (m_proxyVIFs != null)
+                if (m_VIFs != null)
                 {
                     Description = isTemplate ? Messages.IMPORT_TEMPLATE_UPDATING_NETWORKS : Messages.IMPORTVM_UPDATING_NETWORKS;
 
@@ -188,13 +188,13 @@ namespace XenAdmin.Actions
                             if (vifObj == null)
                                 continue;
                             // try to find a matching VIF in the m_proxyVIFs list, based on the device field
-                            var matchingProxyVif = m_proxyVIFs.FirstOrDefault(proxyVIF => proxyVIF.device == vifObj.device);
+                            var matchingProxyVif = m_VIFs.FirstOrDefault(proxyVIF => proxyVIF.device == vifObj.device);
                             if (matchingProxyVif != null)
                             {
                                 // move the VIF to the desired network
                                 VIF.move(Session, vif, matchingProxyVif.network);
                                 // remove matchingProxyVif from the list, so we don't create the VIF again later
-                                m_proxyVIFs.Remove(matchingProxyVif); 
+                                m_VIFs.Remove(matchingProxyVif); 
                                 continue;
                             }
                         }
@@ -203,9 +203,9 @@ namespace XenAdmin.Actions
                     }
 
                     // recreate VIFs if needed (m_proxyVIFs can be empty, if we moved all the VIFs in the previous step)
-                    foreach (Proxy_VIF proxyVIF in m_proxyVIFs)
+                    foreach (VIF vif in m_VIFs)
                     {
-                        VIF vif = new VIF(proxyVIF) {VM = new XenRef<VM>(vmRef)};
+                        vif.VM = new XenRef<VM>(vmRef);
                         VIF.create(Session, vif);
                     }
 
@@ -412,10 +412,10 @@ namespace XenAdmin.Actions
             base.CancelRelatedTask();
         }
 
-		public void EndWizard(bool start, List<Proxy_VIF> vifs)
+		public void EndWizard(bool start, List<VIF> vifs)
 		{
 			m_startAutomatically = start;
-			m_proxyVIFs = vifs;
+			m_VIFs = vifs;
 
 			lock (monitor)
 			{

@@ -33,18 +33,17 @@ using System;
 using System.Collections.Generic;
 using XenAPI;
 
-using XenAdmin.Actions;
 
 namespace XenAdmin.Actions
 {
     public class CreateVIFAction : AsyncAction
     {
-        private Proxy_VIF _proxyVIF;
+        private VIF _vifDescriptor;
 
-        public CreateVIFAction(VM vm, Proxy_VIF proxyVIF)
+        public CreateVIFAction(VM vm, VIF vifDescriptor)
             : base(vm.Connection, String.Format(Messages.ACTION_VIF_CREATING_TITLE, vm.Name()))
         {
-            _proxyVIF = proxyVIF;
+            _vifDescriptor = vifDescriptor;
             VM = vm;
             XmlRpcMethods.ForEach( method => ApiMethodsToRoleCheck.Add( method ) );
         }
@@ -67,8 +66,7 @@ namespace XenAdmin.Actions
 
         private void CreateVIF()
         {
-            VIF newVIF = new VIF(_proxyVIF);
-            RelatedTask = XenAPI.VIF.async_create(Session, newVIF);
+            RelatedTask = XenAPI.VIF.async_create(Session, _vifDescriptor);
             
             PollToCompletion();
             string newVifRef = Result;

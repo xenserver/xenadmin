@@ -271,35 +271,34 @@ namespace XenAdmin.Dialogs
         }
 
         /// <summary>
-        /// Retrieves the new settings as a proxy vif object. You will need to set the VM field to use these settings in a vif action
+        /// Retrieves the new settings as a vif object. You will need to set the VM field to use these settings in a vif action
         /// </summary>
         /// <returns></returns>
-        public Proxy_VIF GetNewSettings()
+        public VIF GetNewSettings()
         {
-            Proxy_VIF proxyVIF = ExistingVif != null ? ExistingVif.ToProxy() : new Proxy_VIF();
-            proxyVIF.network = new XenRef<XenAPI.Network>(SelectedNetwork.opaque_ref);
-            proxyVIF.MAC = SelectedMac;
-            proxyVIF.device = Device.ToString();
+            var newVif = new VIF();
+            if (ExistingVif != null)
+                newVif.UpdateFrom(ExistingVif);
+
+            newVif.network = new XenRef<XenAPI.Network>(SelectedNetwork.opaque_ref);
+            newVif.MAC = SelectedMac;
+            newVif.device = Device.ToString();
 
             if (checkboxQoS.Checked)
             {
-                proxyVIF.qos_algorithm_type = VIF.RATE_LIMIT_QOS_VALUE;
+                newVif.qos_algorithm_type = VIF.RATE_LIMIT_QOS_VALUE;
             }
             else if (ExistingVif != null && ExistingVif.qos_algorithm_type == VIF.RATE_LIMIT_QOS_VALUE)
             {
-                proxyVIF.qos_algorithm_type = "";
+                newVif.qos_algorithm_type = "";
             }
             // else ... we leave it alone. Currently we only deal with "ratelimit" and "", don't overwrite the field if it's something else
 
             // preserve this param even if we turn off qos
             if (!string.IsNullOrEmpty(promptTextBoxQoS.Text))
-            {
-                Hashtable qos_algorithm_params = new Hashtable();
-                qos_algorithm_params.Add(VIF.KBPS_QOS_PARAMS_KEY, promptTextBoxQoS.Text);
-                proxyVIF.qos_algorithm_params = qos_algorithm_params;
-            }
+                newVif.qos_algorithm_params = new Dictionary<string, string> { { VIF.KBPS_QOS_PARAMS_KEY, promptTextBoxQoS.Text } };
 
-            return proxyVIF;
+            return newVif;
         }
 
         private bool ChangesHaveBeenMade
