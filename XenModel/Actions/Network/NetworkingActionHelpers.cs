@@ -118,18 +118,18 @@ namespace XenAdmin.Actions
         /// <param name="existing_pif">The PIF to configure</param>
         internal static void BringUp(AsyncAction action, PIF new_pif, string new_ip, PIF existing_pif, int hi)
         {
-            bool primary = string.IsNullOrEmpty(new_pif.ManagementPurpose);
+            bool primary = string.IsNullOrEmpty(new_pif.GetManagementPurpose());
 
             int lo = action.PercentComplete;
             int inc = (hi - lo) / (primary ? 2 : 3);
 
-            log.DebugFormat("Bringing PIF {0} {1} up as {2}/{3}, {4}, {5}...", existing_pif.Name, existing_pif.uuid,
+            log.DebugFormat("Bringing PIF {0} {1} up as {2}/{3}, {4}, {5}...", existing_pif.Name(), existing_pif.uuid,
                 new_ip, new_pif.netmask, new_pif.gateway, new_pif.DNS);
-            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_UP, existing_pif.Name);
+            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_UP, existing_pif.Name());
 
             PIF p = (PIF)existing_pif.Clone();
             p.disallow_unplug = !primary;
-            p.ManagementPurpose = new_pif.ManagementPurpose;
+            p.SetManagementPurspose(new_pif.GetManagementPurpose());
             p.SaveChanges(action.Session);
 
             action.PercentComplete = lo + inc;
@@ -138,29 +138,29 @@ namespace XenAdmin.Actions
             if (!primary)
                 Plug(action, existing_pif, hi);
 
-            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_UP_DONE, existing_pif.Name);
-            log.DebugFormat("Brought PIF {0} {1} up.", existing_pif.Name, existing_pif.uuid);
+            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_UP_DONE, existing_pif.Name());
+            log.DebugFormat("Brought PIF {0} {1} up.", existing_pif.Name(), existing_pif.uuid);
         }
 
         internal static void ReconfigureIP(AsyncAction action, PIF new_pif, PIF existing_pif, string ip, int hi)
         {
-            log.DebugFormat("Reconfiguring IP on {0} {1} ...", existing_pif.Name, existing_pif.uuid);
+            log.DebugFormat("Reconfiguring IP on {0} {1} ...", existing_pif.Name(), existing_pif.uuid);
 
             action.RelatedTask = PIF.async_reconfigure_ip(action.Session, existing_pif.opaque_ref,
                 new_pif.ip_configuration_mode, ip, new_pif.netmask, new_pif.gateway, new_pif.DNS);
             action.PollToCompletion(action.PercentComplete, hi);
 
-            log.DebugFormat("Reconfiguring IP on {0} {1} done.", existing_pif.Name, existing_pif.uuid);
+            log.DebugFormat("Reconfiguring IP on {0} {1} done.", existing_pif.Name(), existing_pif.uuid);
         }
         
         internal static void Plug(AsyncAction action, PIF pif, int hi)
         {
             if (!PIF.get_currently_attached(action.Session, pif.opaque_ref))
             {
-                log.DebugFormat("Plugging {0} {1} ...", pif.Name, pif.uuid);
+                log.DebugFormat("Plugging {0} {1} ...", pif.Name(), pif.uuid);
                 action.RelatedTask = PIF.async_plug(action.Session, pif.opaque_ref);
                 action.PollToCompletion(action.PercentComplete, hi);
-                log.DebugFormat("Plugging {0} {1} done.", pif.Name, pif.uuid);
+                log.DebugFormat("Plugging {0} {1} done.", pif.Name(), pif.uuid);
             }
         }
 
@@ -208,7 +208,7 @@ namespace XenAdmin.Actions
         /// </summary>
         internal static void MoveManagementInterfaceName(AsyncAction action, PIF from, PIF to)
         {
-            string managementPurpose = from.ManagementPurpose;
+            string managementPurpose = from.GetManagementPurpose();
 
             if (string.IsNullOrEmpty(managementPurpose))
                 return;
@@ -216,11 +216,11 @@ namespace XenAdmin.Actions
             log.DebugFormat("Moving management interface name from {0} to {1}...", from.uuid, to.uuid);
 
             PIF to_clone = (PIF)to.Clone();
-            to_clone.ManagementPurpose = from.ManagementPurpose;
+            to_clone.SetManagementPurspose(from.GetManagementPurpose());
             to_clone.SaveChanges(action.Session);
 
             PIF from_clone = (PIF)from.Clone();
-            from_clone.ManagementPurpose = null;
+            from_clone.SetManagementPurspose(null);
             from_clone.SaveChanges(action.Session);
 
             log.DebugFormat("Moving management interface name from {0} to {1} done.", from.uuid, to.uuid);
@@ -231,18 +231,18 @@ namespace XenAdmin.Actions
         /// </summary>
         private static void Depurpose(AsyncAction action, PIF pif, int hi)
         {
-            log.DebugFormat("Depurposing PIF {0} {1}...", pif.Name, pif.uuid);
-            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_DEPURPOSING, pif.Name);
+            log.DebugFormat("Depurposing PIF {0} {1}...", pif.Name(), pif.uuid);
+            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_DEPURPOSING, pif.Name());
 
             PIF p = (PIF)pif.Clone();
             p.disallow_unplug = false;
-            p.ManagementPurpose = null;
+            p.SetManagementPurspose(null);
             p.SaveChanges(action.Session);
 
             action.PercentComplete = hi;
 
-            log.DebugFormat("Depurposed PIF {0} {1}.", pif.Name, pif.uuid);
-            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_DEPURPOSED, pif.Name);
+            log.DebugFormat("Depurposed PIF {0} {1}.", pif.Name(), pif.uuid);
+            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_DEPURPOSED, pif.Name());
         }
 
         /// <summary>
@@ -250,14 +250,14 @@ namespace XenAdmin.Actions
         /// </summary>
         private static void ReconfigureManagement_(AsyncAction action, PIF pif, int hi)
         {
-            log.DebugFormat("Switching to PIF {0} {1} for management...", pif.Name, pif.uuid);
-            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURING, pif.Name);
+            log.DebugFormat("Switching to PIF {0} {1} for management...", pif.Name(), pif.uuid);
+            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURING, pif.Name());
 
             int mid = (hi + action.PercentComplete) / 2;
 
             PIF p = (PIF)pif.Clone();
             p.disallow_unplug = false;
-            p.ManagementPurpose = null;
+            p.SetManagementPurspose(null);
             p.SaveChanges(action.Session);
 
             action.PercentComplete = mid;
@@ -265,8 +265,8 @@ namespace XenAdmin.Actions
             action.RelatedTask = XenAPI.Host.async_management_reconfigure(action.Session, pif.opaque_ref);
             action.PollToCompletion(mid, hi);
 
-            log.DebugFormat("Switched to PIF {0} {1} for management.", pif.Name, pif.uuid);
-            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name);
+            log.DebugFormat("Switched to PIF {0} {1} for management.", pif.Name(), pif.uuid);
+            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name());
         }
 
         internal static void WaitForslavesToRecover(Pool pool)
@@ -284,7 +284,7 @@ namespace XenAdmin.Actions
                     if (host.IsMaster())
                         continue;
 
-                    if (!host.IsLive && !deadHost.Contains(host.uuid))
+                    if (!host.IsLive() && !deadHost.Contains(host.uuid))
                     {
                         deadHost.Add(host.uuid);
                     }
@@ -303,7 +303,7 @@ namespace XenAdmin.Actions
                     if (host.IsMaster())
                         continue;
 
-                    if (host.IsLive && deadHost.Contains(host.uuid))
+                    if (host.IsLive() && deadHost.Contains(host.uuid))
                     {
                         deadHost.Remove(host.uuid);
                     }
@@ -346,14 +346,14 @@ namespace XenAdmin.Actions
        private static void PoolManagementReconfigure_(AsyncAction action, PIF pif, int hi)
        {
 
-           log.DebugFormat("Switching to PIF {0} {1} for management...", pif.Name, pif.uuid);
-           action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURING, pif.Name);
+           log.DebugFormat("Switching to PIF {0} {1} for management...", pif.Name(), pif.uuid);
+           action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURING, pif.Name());
 
            action.RelatedTask = Pool.async_management_reconfigure(action.Session, pif.network.opaque_ref);
            action.PollToCompletion(action.PercentComplete, hi);
 
-           action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name);
-           log.DebugFormat("Switched to PIF {0} {1} for management...", pif.Name, pif.uuid);
+           action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_MANAGEMENT_RECONFIGURED, pif.Name());
+           log.DebugFormat("Switched to PIF {0} {1} for management...", pif.Name(), pif.uuid);
        }
 
         /// <summary>
@@ -361,14 +361,14 @@ namespace XenAdmin.Actions
         /// </summary>
         private static void ClearIP(AsyncAction action, PIF pif, int hi)
         {
-            log.DebugFormat("Removing IP address from {0} {1}...", pif.Name, pif.uuid);
-            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_DOWN, pif.Name);
+            log.DebugFormat("Removing IP address from {0} {1}...", pif.Name(), pif.uuid);
+            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_DOWN, pif.Name());
 
             action.RelatedTask = PIF.async_reconfigure_ip(action.Session, pif.opaque_ref, ip_configuration_mode.None, "", "", "", "");
             action.PollToCompletion(action.PercentComplete, hi);
 
-            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_DOWN_DONE, pif.Name);
-            log.DebugFormat("Removed IP address from {0} {1}.", pif.Name, pif.uuid);
+            action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_DOWN_DONE, pif.Name());
+            log.DebugFormat("Removed IP address from {0} {1}.", pif.Name(), pif.uuid);
         }
 
         internal delegate void PIFMethod(AsyncAction action, PIF pif, int hi);

@@ -100,7 +100,7 @@ namespace XenAdmin.Commands
 
         public new static bool CanExecute(VM vm, Host preSelectedHost)
         {
-            if (vm == null || !vm.is_a_template || vm.DefaultTemplate || vm.Locked)
+            if (vm == null || !vm.is_a_template || vm.DefaultTemplate() || vm.Locked)
                 return false;
 
             return CrossPoolMigrateCommand.CanExecute(vm, preSelectedHost);

@@ -73,9 +73,9 @@ namespace XenAdminTests.XenModelTests
                               opaque_ref = opaqueref,
                               VDI = new XenRef<VDI>(opaqueref),
                               other_config = new Dictionary<string, string>(),
-                              Connection = _mockConnection.Object,
-                              IsOwner = owner
+                              Connection = _mockConnection.Object
                           };
+            vbd.SetIsOwner(owner);
             _vbds.Add(vbd);
             _mockConnection.Setup(x => x.Resolve<VBD>(new XenRef<VBD>(opaqueref))).Returns(vbd);
             _mockConnection.Setup(x => x.Resolve<SR>(new XenRef<SR>(opaqueref))).Returns(new SR()

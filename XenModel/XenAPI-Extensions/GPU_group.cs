@@ -37,38 +37,32 @@ namespace XenAPI
 {
     partial class GPU_group : IComparable<GPU_group>, IEquatable<GPU_group>
     {
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                string name = name_label;
-                if (name.StartsWith("Group of "))
-                    name = name.Substring(9);
-                return name;
-            }
+            string name = name_label;
+            if (name.StartsWith("Group of "))
+                name = name.Substring(9);
+            return name;
         }
 
         public override string ToString()
         {
             return PGPUs.Count == 1 
-                ? String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE, Name)
-                : String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS, Name, PGPUs.Count);
+                ? String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS_ONE, Name())
+                : String.Format(Messages.GPU_GROUP_NAME_AND_NO_OF_GPUS, Name(), PGPUs.Count);
         }
 
-        public bool HasVGpu
+        public bool HasVGpu()
         {
-            get
-            {
-                return Connection.ResolveAll(PGPUs).Any(pgpu => pgpu.HasVGpu);
-            }
+            return Connection.ResolveAll(PGPUs).Any(pgpu => pgpu.HasVGpu());
         }
 
         /// <summary>
         /// Has at least one supported_VGPU_type that is passthrough
         /// </summary>
-        public bool HasPassthrough
+        public bool HasPassthrough()
         {
-            get { return Connection.ResolveAll(supported_VGPU_types).Any(supportedType => supportedType.IsPassthrough); }
+            return Connection.ResolveAll(supported_VGPU_types).Any(supportedType => supportedType.IsPassthrough());
         }
 
 

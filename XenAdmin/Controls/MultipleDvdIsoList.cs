@@ -114,7 +114,7 @@ namespace XenAdmin.Controls
             // remove VBD listeners
             var vbds = vm.Connection.ResolveAll(VM.VBDs);
                 
-            foreach (var vbd in vbds.Where(vbd => vbd.IsCDROM || vbd.IsFloppyDrive))
+            foreach (var vbd in vbds.Where(vbd => vbd.IsCDROM() || vbd.IsFloppyDrive()))
             {
                 vbd.PropertyChanged -= vbd_PropertyChanged;
             }
@@ -148,14 +148,14 @@ namespace XenAdmin.Controls
                     VM.Connection.CachePopulated += new EventHandler<EventArgs>(CachePopulatedMethod);
                     return;
                 }
-                vbds.RemoveAll(delegate(VBD vbd) { return !vbd.IsCDROM && !vbd.IsFloppyDrive; });
+                vbds.RemoveAll(vbd => !vbd.IsCDROM() && !vbd.IsFloppyDrive());
                 vbds.Sort();
                 int dvdCount = 0;
                 int floppyCount = 0;
                 foreach (VBD vbd in vbds)
                 {
                     vbd.PropertyChanged +=new PropertyChangedEventHandler(vbd_PropertyChanged);
-                    if (vbd.IsCDROM)
+                    if (vbd.IsCDROM())
                     {
                         dvdCount++;
                         VbdCombiItem i = new VbdCombiItem();

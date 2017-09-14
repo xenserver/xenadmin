@@ -227,7 +227,9 @@ namespace XenAdmin.SettingsPanels
             memoryAlert.Show(isHost);
             srAlert.Show(isSr);
             dom0MemoryAlert.Show(isHost && Helpers.CreedenceOrGreater(_XenObject.Connection));
-            physicalUtilisationAlert.Show(isSr && ((SR)_XenObject).IsThinProvisioned);
+            // Always hidden since thin provisioning was removed, because that was the only case
+            // in which the calculation worked, but retaining it in case we use it again
+            physicalUtilisationAlert.Show(false);
 
             if (isHost)
             {
@@ -278,7 +280,7 @@ namespace XenAdmin.SettingsPanels
                 var host = _XenObject as Host;
                 if (host != null)
                 {
-                    var dom0 = host.ControlDomainZero;
+                    var dom0 = host.ControlDomainZero();
 
                     if (dom0 != null)
                     {

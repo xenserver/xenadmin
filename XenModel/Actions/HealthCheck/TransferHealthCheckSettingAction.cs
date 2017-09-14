@@ -29,45 +29,39 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
 using XenAPI;
 using XenAdmin.Core;
 using System;
 using System.IO.Pipes;
-using System.IO;
 using System.Text;
 using System.ServiceProcess;
 using XenAdmin.Model;
+using XenAdmin.Network;
 
 namespace XenAdmin.Actions
 {
-    public class TransferHealthCheckSettingsAction : PureAsyncAction
+    public abstract class TransferDataToHealthCheckAction : PureAsyncAction
     {
-        private readonly Pool pool;
-        HealthCheckSettings healthCheckSettings;
-        string username;
-        string password;
-
-        public TransferHealthCheckSettingsAction(Pool pool, HealthCheckSettings healthCheckSettings, string username, string password, bool suppressHistory)
-            : base(pool.Connection, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, string.Format(Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, pool.Name), suppressHistory)
-        {
-            this.pool = pool;
-            this.healthCheckSettings = healthCheckSettings;
-            this.username = username;
-            this.password = password;
-        }
-
-        private const char SEPARATOR = '\x202f'; // narrow non-breaking space.
+        protected const char SEPARATOR = '\x202f'; // narrow non-breaking space.
         private const string HEALTHCHECKSERVICENAME = "XenServerHealthCheck";
+
+        public TransferDataToHealthCheckAction(IXenConnection connection, string title, string description, bool suppressHistory) 
+            : base(connection, title, description, suppressHistory)
+        {
+        }
 
         protected override void Run()
         {
-            var host = Helpers.GetMaster(pool.Connection);
-            if (host == null)
-                return;
+            var message = GetMessageToBeSent();
+            SendMessageToHealthCheck(message);
+        }
 
-            if (healthCheckSettings.Status == HealthCheckStatus.Enabled && (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)))
-                return; // do not send empty/null username or password (when the Health Check is enabled), as they will be ignored 
+        protected abstract string GetMessageToBeSent();
+
+        private void SendMessageToHealthCheck(string message)
+        {
+            if (string.IsNullOrEmpty(message))
+                return;
 
             ServiceController sc = new ServiceController(HEALTHCHECKSERVICENAME);
             try
@@ -92,23 +86,50 @@ namespace XenAdmin.Actions
                 {
                     throw exp;
                 }
-                catch 
+                catch
                 {
                     System.Threading.Thread.Sleep(1000);
-                    pipeClient = null;
                     pipeClient = new NamedPipeClientStream(".", HealthCheckSettings.HEALTH_CHECK_PIPE, PipeDirection.Out);
                 }
             } while (!pipeClient.IsConnected && retryCount-- != 0);
 
-            var credential = healthCheckSettings.Status == HealthCheckStatus.Enabled
-                ? String.Join(SEPARATOR.ToString(), host.address, username, password)
-                : String.Join(SEPARATOR.ToString(), host.address);
-            var encryptedCredential = EncryptionUtils.ProtectForLocalMachine(credential);
-
-            pipeClient.Write(Encoding.UTF8.GetBytes(encryptedCredential), 0, (Encoding.UTF8.GetBytes(encryptedCredential)).Length);
+            var bytes = Encoding.UTF8.GetBytes(message);
+            pipeClient.Write(bytes, 0, bytes.Length);
 
             pipeClient.Write(Encoding.UTF8.GetBytes(HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE), 0, HealthCheckSettings.HEALTH_CHECK_PIPE_END_MESSAGE.Length);
             pipeClient.Close();
+        }
+    }
+
+    public class TransferHealthCheckSettingsAction : TransferDataToHealthCheckAction
+    {
+        private readonly Pool pool;
+        HealthCheckSettings healthCheckSettings;
+        string username;
+        string password;
+
+        public TransferHealthCheckSettingsAction(Pool pool, HealthCheckSettings healthCheckSettings, string username, string password, bool suppressHistory)
+            : base(pool.Connection, Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, string.Format(Messages.ACTION_TRANSFER_HEALTHCHECK_SETTINGS, pool.Name()), suppressHistory)
+        {
+            this.pool = pool;
+            this.healthCheckSettings = healthCheckSettings;
+            this.username = username;
+            this.password = password;
+        }
+
+        protected override string GetMessageToBeSent()
+        {
+            var host = Helpers.GetMaster(pool.Connection);
+            if (host == null)
+                return null;
+
+            if (healthCheckSettings.Status == HealthCheckStatus.Enabled && (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)))
+                return null; // do not send empty/null username or password (when the Health Check is enabled), as they will be ignored 
+
+            var credential = healthCheckSettings.Status == HealthCheckStatus.Enabled
+                ? String.Join(SEPARATOR.ToString(), host.address, username, password)
+                : String.Join(SEPARATOR.ToString(), host.address);
+            return EncryptionUtils.ProtectForLocalMachine(credential);
         }
     }
 }

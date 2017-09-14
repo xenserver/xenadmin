@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -151,9 +149,9 @@ namespace XenAPI
         public Proxy_VMPP ToProxy()
         {
             Proxy_VMPP result_ = new Proxy_VMPP();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.is_policy_enabled = is_policy_enabled;
             result_.backup_type = vmpp_backup_type_helper.ToString(backup_type);
             result_.backup_retention_value = backup_retention_value.ToString();
@@ -304,7 +302,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static VMPP get_record(Session session, string _vmpp)
         {
-            return new VMPP((Proxy_VMPP)session.proxy.vmpp_get_record(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return new VMPP((Proxy_VMPP)session.proxy.vmpp_get_record(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -315,7 +313,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VMPP> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VMPP>.Create(session.proxy.vmpp_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<VMPP>.Create(session.proxy.vmpp_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -348,7 +346,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static void destroy(Session session, string _vmpp)
         {
-            session.proxy.vmpp_destroy(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            session.proxy.vmpp_destroy(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -359,7 +357,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static XenRef<Task> async_destroy(Session session, string _vmpp)
         {
-            return XenRef<Task>.Create(session.proxy.async_vmpp_destroy(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vmpp_destroy(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -370,7 +368,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<VMPP>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<VMPP>.Create(session.proxy.vmpp_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            return XenRef<VMPP>.Create(session.proxy.vmpp_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -381,7 +379,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static string get_uuid(Session session, string _vmpp)
         {
-            return (string)session.proxy.vmpp_get_uuid(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (string)session.proxy.vmpp_get_uuid(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -392,7 +390,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static string get_name_label(Session session, string _vmpp)
         {
-            return (string)session.proxy.vmpp_get_name_label(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (string)session.proxy.vmpp_get_name_label(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -403,7 +401,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static string get_name_description(Session session, string _vmpp)
         {
-            return (string)session.proxy.vmpp_get_name_description(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (string)session.proxy.vmpp_get_name_description(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -414,7 +412,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static bool get_is_policy_enabled(Session session, string _vmpp)
         {
-            return (bool)session.proxy.vmpp_get_is_policy_enabled(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (bool)session.proxy.vmpp_get_is_policy_enabled(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -425,7 +423,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static vmpp_backup_type get_backup_type(Session session, string _vmpp)
         {
-            return (vmpp_backup_type)Helper.EnumParseDefault(typeof(vmpp_backup_type), (string)session.proxy.vmpp_get_backup_type(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return (vmpp_backup_type)Helper.EnumParseDefault(typeof(vmpp_backup_type), (string)session.proxy.vmpp_get_backup_type(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -436,7 +434,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static long get_backup_retention_value(Session session, string _vmpp)
         {
-            return long.Parse((string)session.proxy.vmpp_get_backup_retention_value(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return long.Parse((string)session.proxy.vmpp_get_backup_retention_value(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -447,7 +445,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static vmpp_backup_frequency get_backup_frequency(Session session, string _vmpp)
         {
-            return (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), (string)session.proxy.vmpp_get_backup_frequency(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), (string)session.proxy.vmpp_get_backup_frequency(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -458,7 +456,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static Dictionary<string, string> get_backup_schedule(Session session, string _vmpp)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_backup_schedule(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_backup_schedule(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -469,7 +467,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static bool get_is_backup_running(Session session, string _vmpp)
         {
-            return (bool)session.proxy.vmpp_get_is_backup_running(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (bool)session.proxy.vmpp_get_is_backup_running(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -480,7 +478,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static DateTime get_backup_last_run_time(Session session, string _vmpp)
         {
-            return session.proxy.vmpp_get_backup_last_run_time(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return session.proxy.vmpp_get_backup_last_run_time(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -491,7 +489,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static vmpp_archive_target_type get_archive_target_type(Session session, string _vmpp)
         {
-            return (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), (string)session.proxy.vmpp_get_archive_target_type(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), (string)session.proxy.vmpp_get_archive_target_type(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -502,7 +500,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static Dictionary<string, string> get_archive_target_config(Session session, string _vmpp)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_archive_target_config(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_archive_target_config(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -513,7 +511,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static vmpp_archive_frequency get_archive_frequency(Session session, string _vmpp)
         {
-            return (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), (string)session.proxy.vmpp_get_archive_frequency(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), (string)session.proxy.vmpp_get_archive_frequency(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -524,7 +522,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static Dictionary<string, string> get_archive_schedule(Session session, string _vmpp)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_archive_schedule(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_archive_schedule(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -535,7 +533,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static bool get_is_archive_running(Session session, string _vmpp)
         {
-            return (bool)session.proxy.vmpp_get_is_archive_running(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (bool)session.proxy.vmpp_get_is_archive_running(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -546,7 +544,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static DateTime get_archive_last_run_time(Session session, string _vmpp)
         {
-            return session.proxy.vmpp_get_archive_last_run_time(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return session.proxy.vmpp_get_archive_last_run_time(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -557,7 +555,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static List<XenRef<VM>> get_VMs(Session session, string _vmpp)
         {
-            return XenRef<VM>.Create(session.proxy.vmpp_get_vms(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return XenRef<VM>.Create(session.proxy.vmpp_get_vms(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -568,7 +566,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static bool get_is_alarm_enabled(Session session, string _vmpp)
         {
-            return (bool)session.proxy.vmpp_get_is_alarm_enabled(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (bool)session.proxy.vmpp_get_is_alarm_enabled(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -579,7 +577,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static Dictionary<string, string> get_alarm_config(Session session, string _vmpp)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_alarm_config(session.uuid, (_vmpp != null) ? _vmpp : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_alarm_config(session.uuid, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -590,7 +588,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static string[] get_recent_alerts(Session session, string _vmpp)
         {
-            return (string [])session.proxy.vmpp_get_recent_alerts(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (string [])session.proxy.vmpp_get_recent_alerts(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -602,7 +600,7 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _vmpp, string _label)
         {
-            session.proxy.vmpp_set_name_label(session.uuid, (_vmpp != null) ? _vmpp : "", (_label != null) ? _label : "").parse();
+            session.proxy.vmpp_set_name_label(session.uuid, _vmpp ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -614,7 +612,7 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _vmpp, string _description)
         {
-            session.proxy.vmpp_set_name_description(session.uuid, (_vmpp != null) ? _vmpp : "", (_description != null) ? _description : "").parse();
+            session.proxy.vmpp_set_name_description(session.uuid, _vmpp ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -626,7 +624,7 @@ namespace XenAPI
         /// <param name="_is_policy_enabled">New value to set</param>
         public static void set_is_policy_enabled(Session session, string _vmpp, bool _is_policy_enabled)
         {
-            session.proxy.vmpp_set_is_policy_enabled(session.uuid, (_vmpp != null) ? _vmpp : "", _is_policy_enabled).parse();
+            session.proxy.vmpp_set_is_policy_enabled(session.uuid, _vmpp ?? "", _is_policy_enabled).parse();
         }
 
         /// <summary>
@@ -638,7 +636,7 @@ namespace XenAPI
         /// <param name="_backup_type">New value to set</param>
         public static void set_backup_type(Session session, string _vmpp, vmpp_backup_type _backup_type)
         {
-            session.proxy.vmpp_set_backup_type(session.uuid, (_vmpp != null) ? _vmpp : "", vmpp_backup_type_helper.ToString(_backup_type)).parse();
+            session.proxy.vmpp_set_backup_type(session.uuid, _vmpp ?? "", vmpp_backup_type_helper.ToString(_backup_type)).parse();
         }
 
         /// <summary>
@@ -649,7 +647,7 @@ namespace XenAPI
         /// <param name="_vmpp">The opaque_ref of the given vmpp</param>
         public static string protect_now(Session session, string _vmpp)
         {
-            return (string)session.proxy.vmpp_protect_now(session.uuid, (_vmpp != null) ? _vmpp : "").parse();
+            return (string)session.proxy.vmpp_protect_now(session.uuid, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -660,7 +658,7 @@ namespace XenAPI
         /// <param name="_snapshot">The snapshot to archive</param>
         public static string archive_now(Session session, string _snapshot)
         {
-            return (string)session.proxy.vmpp_archive_now(session.uuid, (_snapshot != null) ? _snapshot : "").parse();
+            return (string)session.proxy.vmpp_archive_now(session.uuid, _snapshot ?? "").parse();
         }
 
         /// <summary>
@@ -672,7 +670,7 @@ namespace XenAPI
         /// <param name="_hours_from_now">how many hours in the past the oldest record to fetch is</param>
         public static string[] get_alerts(Session session, string _vmpp, long _hours_from_now)
         {
-            return (string [])session.proxy.vmpp_get_alerts(session.uuid, (_vmpp != null) ? _vmpp : "", _hours_from_now.ToString()).parse();
+            return (string [])session.proxy.vmpp_get_alerts(session.uuid, _vmpp ?? "", _hours_from_now.ToString()).parse();
         }
 
         /// <summary>
@@ -684,7 +682,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_backup_retention_value(Session session, string _vmpp, long _value)
         {
-            session.proxy.vmpp_set_backup_retention_value(session.uuid, (_vmpp != null) ? _vmpp : "", _value.ToString()).parse();
+            session.proxy.vmpp_set_backup_retention_value(session.uuid, _vmpp ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -696,7 +694,7 @@ namespace XenAPI
         /// <param name="_value">the backup frequency</param>
         public static void set_backup_frequency(Session session, string _vmpp, vmpp_backup_frequency _value)
         {
-            session.proxy.vmpp_set_backup_frequency(session.uuid, (_vmpp != null) ? _vmpp : "", vmpp_backup_frequency_helper.ToString(_value)).parse();
+            session.proxy.vmpp_set_backup_frequency(session.uuid, _vmpp ?? "", vmpp_backup_frequency_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -708,7 +706,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_backup_schedule(Session session, string _vmpp, Dictionary<string, string> _value)
         {
-            session.proxy.vmpp_set_backup_schedule(session.uuid, (_vmpp != null) ? _vmpp : "", Maps.convert_to_proxy_string_string(_value)).parse();
+            session.proxy.vmpp_set_backup_schedule(session.uuid, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -720,7 +718,7 @@ namespace XenAPI
         /// <param name="_value">the archive frequency</param>
         public static void set_archive_frequency(Session session, string _vmpp, vmpp_archive_frequency _value)
         {
-            session.proxy.vmpp_set_archive_frequency(session.uuid, (_vmpp != null) ? _vmpp : "", vmpp_archive_frequency_helper.ToString(_value)).parse();
+            session.proxy.vmpp_set_archive_frequency(session.uuid, _vmpp ?? "", vmpp_archive_frequency_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -732,7 +730,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_archive_schedule(Session session, string _vmpp, Dictionary<string, string> _value)
         {
-            session.proxy.vmpp_set_archive_schedule(session.uuid, (_vmpp != null) ? _vmpp : "", Maps.convert_to_proxy_string_string(_value)).parse();
+            session.proxy.vmpp_set_archive_schedule(session.uuid, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -744,7 +742,7 @@ namespace XenAPI
         /// <param name="_value">the archive target config type</param>
         public static void set_archive_target_type(Session session, string _vmpp, vmpp_archive_target_type _value)
         {
-            session.proxy.vmpp_set_archive_target_type(session.uuid, (_vmpp != null) ? _vmpp : "", vmpp_archive_target_type_helper.ToString(_value)).parse();
+            session.proxy.vmpp_set_archive_target_type(session.uuid, _vmpp ?? "", vmpp_archive_target_type_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -756,7 +754,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_archive_target_config(Session session, string _vmpp, Dictionary<string, string> _value)
         {
-            session.proxy.vmpp_set_archive_target_config(session.uuid, (_vmpp != null) ? _vmpp : "", Maps.convert_to_proxy_string_string(_value)).parse();
+            session.proxy.vmpp_set_archive_target_config(session.uuid, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -768,7 +766,7 @@ namespace XenAPI
         /// <param name="_value">true if alarm is enabled for this policy</param>
         public static void set_is_alarm_enabled(Session session, string _vmpp, bool _value)
         {
-            session.proxy.vmpp_set_is_alarm_enabled(session.uuid, (_vmpp != null) ? _vmpp : "", _value).parse();
+            session.proxy.vmpp_set_is_alarm_enabled(session.uuid, _vmpp ?? "", _value).parse();
         }
 
         /// <summary>
@@ -780,7 +778,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_alarm_config(Session session, string _vmpp, Dictionary<string, string> _value)
         {
-            session.proxy.vmpp_set_alarm_config(session.uuid, (_vmpp != null) ? _vmpp : "", Maps.convert_to_proxy_string_string(_value)).parse();
+            session.proxy.vmpp_set_alarm_config(session.uuid, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -793,7 +791,7 @@ namespace XenAPI
         /// <param name="_value">the value to add</param>
         public static void add_to_backup_schedule(Session session, string _vmpp, string _key, string _value)
         {
-            session.proxy.vmpp_add_to_backup_schedule(session.uuid, (_vmpp != null) ? _vmpp : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vmpp_add_to_backup_schedule(session.uuid, _vmpp ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -806,7 +804,7 @@ namespace XenAPI
         /// <param name="_value">the value to add</param>
         public static void add_to_archive_target_config(Session session, string _vmpp, string _key, string _value)
         {
-            session.proxy.vmpp_add_to_archive_target_config(session.uuid, (_vmpp != null) ? _vmpp : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vmpp_add_to_archive_target_config(session.uuid, _vmpp ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -819,7 +817,7 @@ namespace XenAPI
         /// <param name="_value">the value to add</param>
         public static void add_to_archive_schedule(Session session, string _vmpp, string _key, string _value)
         {
-            session.proxy.vmpp_add_to_archive_schedule(session.uuid, (_vmpp != null) ? _vmpp : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vmpp_add_to_archive_schedule(session.uuid, _vmpp ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -832,7 +830,7 @@ namespace XenAPI
         /// <param name="_value">the value to add</param>
         public static void add_to_alarm_config(Session session, string _vmpp, string _key, string _value)
         {
-            session.proxy.vmpp_add_to_alarm_config(session.uuid, (_vmpp != null) ? _vmpp : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vmpp_add_to_alarm_config(session.uuid, _vmpp ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -844,7 +842,7 @@ namespace XenAPI
         /// <param name="_key">the key to remove</param>
         public static void remove_from_backup_schedule(Session session, string _vmpp, string _key)
         {
-            session.proxy.vmpp_remove_from_backup_schedule(session.uuid, (_vmpp != null) ? _vmpp : "", (_key != null) ? _key : "").parse();
+            session.proxy.vmpp_remove_from_backup_schedule(session.uuid, _vmpp ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -856,7 +854,7 @@ namespace XenAPI
         /// <param name="_key">the key to remove</param>
         public static void remove_from_archive_target_config(Session session, string _vmpp, string _key)
         {
-            session.proxy.vmpp_remove_from_archive_target_config(session.uuid, (_vmpp != null) ? _vmpp : "", (_key != null) ? _key : "").parse();
+            session.proxy.vmpp_remove_from_archive_target_config(session.uuid, _vmpp ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -868,7 +866,7 @@ namespace XenAPI
         /// <param name="_key">the key to remove</param>
         public static void remove_from_archive_schedule(Session session, string _vmpp, string _key)
         {
-            session.proxy.vmpp_remove_from_archive_schedule(session.uuid, (_vmpp != null) ? _vmpp : "", (_key != null) ? _key : "").parse();
+            session.proxy.vmpp_remove_from_archive_schedule(session.uuid, _vmpp ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -880,7 +878,7 @@ namespace XenAPI
         /// <param name="_key">the key to remove</param>
         public static void remove_from_alarm_config(Session session, string _vmpp, string _key)
         {
-            session.proxy.vmpp_remove_from_alarm_config(session.uuid, (_vmpp != null) ? _vmpp : "", (_key != null) ? _key : "").parse();
+            session.proxy.vmpp_remove_from_alarm_config(session.uuid, _vmpp ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -892,7 +890,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_backup_last_run_time(Session session, string _vmpp, DateTime _value)
         {
-            session.proxy.vmpp_set_backup_last_run_time(session.uuid, (_vmpp != null) ? _vmpp : "", _value).parse();
+            session.proxy.vmpp_set_backup_last_run_time(session.uuid, _vmpp ?? "", _value).parse();
         }
 
         /// <summary>
@@ -904,7 +902,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_archive_last_run_time(Session session, string _vmpp, DateTime _value)
         {
-            session.proxy.vmpp_set_archive_last_run_time(session.uuid, (_vmpp != null) ? _vmpp : "", _value).parse();
+            session.proxy.vmpp_set_archive_last_run_time(session.uuid, _vmpp ?? "", _value).parse();
         }
 
         /// <summary>

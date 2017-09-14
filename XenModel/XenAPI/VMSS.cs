@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -111,9 +109,9 @@ namespace XenAPI
         public Proxy_VMSS ToProxy()
         {
             Proxy_VMSS result_ = new Proxy_VMSS();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.enabled = enabled;
             result_.type = vmss_type_helper.ToString(type);
             result_.retained_snapshots = retained_snapshots.ToString();
@@ -210,7 +208,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static VMSS get_record(Session session, string _vmss)
         {
-            return new VMSS((Proxy_VMSS)session.proxy.vmss_get_record(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return new VMSS((Proxy_VMSS)session.proxy.vmss_get_record(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -221,7 +219,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VMSS> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VMSS>.Create(session.proxy.vmss_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<VMSS>.Create(session.proxy.vmss_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -254,7 +252,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static void destroy(Session session, string _vmss)
         {
-            session.proxy.vmss_destroy(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            session.proxy.vmss_destroy(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -265,7 +263,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static XenRef<Task> async_destroy(Session session, string _vmss)
         {
-            return XenRef<Task>.Create(session.proxy.async_vmss_destroy(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vmss_destroy(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -276,7 +274,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<VMSS>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<VMSS>.Create(session.proxy.vmss_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            return XenRef<VMSS>.Create(session.proxy.vmss_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -287,7 +285,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static string get_uuid(Session session, string _vmss)
         {
-            return (string)session.proxy.vmss_get_uuid(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            return (string)session.proxy.vmss_get_uuid(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -298,7 +296,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static string get_name_label(Session session, string _vmss)
         {
-            return (string)session.proxy.vmss_get_name_label(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            return (string)session.proxy.vmss_get_name_label(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -309,7 +307,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static string get_name_description(Session session, string _vmss)
         {
-            return (string)session.proxy.vmss_get_name_description(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            return (string)session.proxy.vmss_get_name_description(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -320,7 +318,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static bool get_enabled(Session session, string _vmss)
         {
-            return (bool)session.proxy.vmss_get_enabled(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            return (bool)session.proxy.vmss_get_enabled(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -331,7 +329,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static vmss_type get_type(Session session, string _vmss)
         {
-            return (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), (string)session.proxy.vmss_get_type(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), (string)session.proxy.vmss_get_type(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -342,7 +340,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static long get_retained_snapshots(Session session, string _vmss)
         {
-            return long.Parse((string)session.proxy.vmss_get_retained_snapshots(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return long.Parse((string)session.proxy.vmss_get_retained_snapshots(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -353,7 +351,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static vmss_frequency get_frequency(Session session, string _vmss)
         {
-            return (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), (string)session.proxy.vmss_get_frequency(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), (string)session.proxy.vmss_get_frequency(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -364,7 +362,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static Dictionary<string, string> get_schedule(Session session, string _vmss)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vmss_get_schedule(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vmss_get_schedule(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -375,7 +373,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static DateTime get_last_run_time(Session session, string _vmss)
         {
-            return session.proxy.vmss_get_last_run_time(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            return session.proxy.vmss_get_last_run_time(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -386,7 +384,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static List<XenRef<VM>> get_VMs(Session session, string _vmss)
         {
-            return XenRef<VM>.Create(session.proxy.vmss_get_vms(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            return XenRef<VM>.Create(session.proxy.vmss_get_vms(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -398,7 +396,7 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _vmss, string _label)
         {
-            session.proxy.vmss_set_name_label(session.uuid, (_vmss != null) ? _vmss : "", (_label != null) ? _label : "").parse();
+            session.proxy.vmss_set_name_label(session.uuid, _vmss ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -410,7 +408,7 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _vmss, string _description)
         {
-            session.proxy.vmss_set_name_description(session.uuid, (_vmss != null) ? _vmss : "", (_description != null) ? _description : "").parse();
+            session.proxy.vmss_set_name_description(session.uuid, _vmss ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -422,7 +420,7 @@ namespace XenAPI
         /// <param name="_enabled">New value to set</param>
         public static void set_enabled(Session session, string _vmss, bool _enabled)
         {
-            session.proxy.vmss_set_enabled(session.uuid, (_vmss != null) ? _vmss : "", _enabled).parse();
+            session.proxy.vmss_set_enabled(session.uuid, _vmss ?? "", _enabled).parse();
         }
 
         /// <summary>
@@ -433,7 +431,7 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static string snapshot_now(Session session, string _vmss)
         {
-            return (string)session.proxy.vmss_snapshot_now(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            return (string)session.proxy.vmss_snapshot_now(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -445,7 +443,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_retained_snapshots(Session session, string _vmss, long _value)
         {
-            session.proxy.vmss_set_retained_snapshots(session.uuid, (_vmss != null) ? _vmss : "", _value.ToString()).parse();
+            session.proxy.vmss_set_retained_snapshots(session.uuid, _vmss ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -457,7 +455,7 @@ namespace XenAPI
         /// <param name="_value">the snapshot schedule frequency</param>
         public static void set_frequency(Session session, string _vmss, vmss_frequency _value)
         {
-            session.proxy.vmss_set_frequency(session.uuid, (_vmss != null) ? _vmss : "", vmss_frequency_helper.ToString(_value)).parse();
+            session.proxy.vmss_set_frequency(session.uuid, _vmss ?? "", vmss_frequency_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -469,7 +467,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_schedule(Session session, string _vmss, Dictionary<string, string> _value)
         {
-            session.proxy.vmss_set_schedule(session.uuid, (_vmss != null) ? _vmss : "", Maps.convert_to_proxy_string_string(_value)).parse();
+            session.proxy.vmss_set_schedule(session.uuid, _vmss ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -482,7 +480,7 @@ namespace XenAPI
         /// <param name="_value">the value to add</param>
         public static void add_to_schedule(Session session, string _vmss, string _key, string _value)
         {
-            session.proxy.vmss_add_to_schedule(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vmss_add_to_schedule(session.uuid, _vmss ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -494,7 +492,7 @@ namespace XenAPI
         /// <param name="_key">the key to remove</param>
         public static void remove_from_schedule(Session session, string _vmss, string _key)
         {
-            session.proxy.vmss_remove_from_schedule(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "").parse();
+            session.proxy.vmss_remove_from_schedule(session.uuid, _vmss ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -506,7 +504,7 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_last_run_time(Session session, string _vmss, DateTime _value)
         {
-            session.proxy.vmss_set_last_run_time(session.uuid, (_vmss != null) ? _vmss : "", _value).parse();
+            session.proxy.vmss_set_last_run_time(session.uuid, _vmss ?? "", _value).parse();
         }
 
         /// <summary>
@@ -518,7 +516,7 @@ namespace XenAPI
         /// <param name="_value">the snapshot schedule type</param>
         public static void set_type(Session session, string _vmss, vmss_type _value)
         {
-            session.proxy.vmss_set_type(session.uuid, (_vmss != null) ? _vmss : "", vmss_type_helper.ToString(_value)).parse();
+            session.proxy.vmss_set_type(session.uuid, _vmss ?? "", vmss_type_helper.ToString(_value)).parse();
         }
 
         /// <summary>

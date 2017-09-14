@@ -61,6 +61,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DiscUtils, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -90,6 +93,7 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -116,7 +120,6 @@
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
-    <Compile Include="Commands\ConvertToThinSRCommand.cs" />
     <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
@@ -181,12 +184,6 @@
     <Compile Include="Controls\PvsCacheStorageRow.Designer.cs">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ThinProvisioningParametersControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ThinProvisioningParametersControl.Designer.cs">
-      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\NonReopeningContextMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -220,6 +217,7 @@
     </Compile>
     <Compile Include="Core\HealthCheck.cs" />
     <Compile Include="Core\HiddenFeatures.cs" />
+    <Compile Include="Core\Metadata.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
@@ -292,12 +290,6 @@
     </Compile>
     <Compile Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.designer.cs">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ConvertToThinSRDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ConvertToThinSRDialog.Designer.cs">
-      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.cs">
       <SubType>UserControl</SubType>
@@ -1502,14 +1494,14 @@
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.ja.resx">
-      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.ja.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.resx">
-      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ThinProvisioningParametersControl.zh-CN.resx">
-      <DependentUpon>ThinProvisioningParametersControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\XenSearch\QueryPanel.zh-CN.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
@@ -1716,16 +1708,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HealthCheck\HealthCheckSettingsDialog.zh-CN.resx">
       <DependentUpon>HealthCheckSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.ja.resx">
-      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.resx">
-      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ConvertToThinSRDialog.zh-CN.resx">
-      <DependentUpon>ConvertToThinSRDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\SaveAndRestoreOptionsPage.ja.resx">
       <DependentUpon>SaveAndRestoreOptionsPage.cs</DependentUpon>
@@ -2586,6 +2568,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
     <None Include="HomePage.zh-CN.mht">
@@ -3459,12 +3444,6 @@
     </Compile>
     <Compile Include="Dialogs\VMDialogs\MoveVMDialog.Designer.cs">
       <DependentUpon>MoveVMDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ScheduledSnapshots\PolicyHistory.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ScheduledSnapshots\PolicyHistory.Designer.cs">
-      <DependentUpon>PolicyHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.cs">
       <SubType>Form</SubType>
@@ -5543,15 +5522,6 @@
     <EmbeddedResource Include="Dialogs\VMDialogs\SelectVMsToSuspendDialog.zh-CN.resx">
       <DependentUpon>SelectVMsToSuspendDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.ja.resx">
-      <DependentUpon>PolicyHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.resx">
-      <DependentUpon>PolicyHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ScheduledSnapshots\PolicyHistory.zh-CN.resx">
-      <DependentUpon>PolicyHistory.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ScheduledSnapshots\ScheduledSnapshotsDialog.ja.resx">
       <DependentUpon>ScheduledSnapshotsDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -5823,9 +5793,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VDISizeLocationPage.ja.resx">
       <DependentUpon>VDISizeLocationPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VDISizeLocationPage.zh-CN.resx">
       <DependentUpon>VDISizeLocationPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VMAdvancedEditPage.ja.resx">
       <DependentUpon>VMAdvancedEditPage.cs</DependentUpon>

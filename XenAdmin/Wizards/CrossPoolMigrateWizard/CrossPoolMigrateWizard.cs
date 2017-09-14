@@ -142,7 +142,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         private bool IsIntraPoolMove(KeyValuePair<string, VmMapping> mapping)
         {
             VM vm = xenConnection.Resolve(new XenRef<VM>(mapping.Key));
-            return vm != null && vm.CanBeMoved && IsIntraPoolMigration(mapping);
+            return vm != null && vm.CanBeMoved() && IsIntraPoolMigration(mapping);
         }
 
         private bool IsCopyTemplate()
@@ -289,7 +289,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             {
                 VmMapping mapping = new VmMapping
                                         {
-                                            VmNameLabel = item.XenObject.Name
+                                            VmNameLabel = item.XenObject.Name()
                                         };
                 
                 m_vmMappings.Add(item.XenObject.opaque_ref, mapping);

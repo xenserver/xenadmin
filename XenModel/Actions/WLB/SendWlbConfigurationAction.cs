@@ -81,7 +81,7 @@ namespace XenAdmin.Actions.Wlb
 
         protected override void Run()
         {
-            log.Debug("Sending Workload Balancing configuration for pool " + Pool.Name);
+            log.Debug("Sending Workload Balancing configuration for pool " + Pool.Name());
 
             ClearKeys();
 
@@ -109,7 +109,7 @@ namespace XenAdmin.Actions.Wlb
             try
             {
                 XenAPI.Pool.send_wlb_configuration(this.Session, this.WlbConfiguration);
-                log.Debug("Successfully sent Workload Balancing configuration on pool " + Pool.Name);
+                log.Debug("Successfully sent Workload Balancing configuration on pool " + Pool.Name());
                 this.Description = Messages.COMPLETED;
             }
             catch (Exception ex)

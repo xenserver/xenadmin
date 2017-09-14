@@ -55,8 +55,8 @@ namespace XenAdmin.Actions
         /// <param name="cdrom">Must not be null.</param>
         public ChangeVMISOAction(IXenConnection connection, VM vm,
             VDI vdi, VBD cdrom)
-            : base(connection, vdi == null ? String.Format(Messages.ISO_UNLOADING, vm.Name) :
-            String.Format(Messages.ISO_LOADING, vdi.Name, vm.Name))
+            : base(connection, vdi == null ? String.Format(Messages.ISO_UNLOADING, vm.Name()) :
+            String.Format(Messages.ISO_LOADING, vdi.Name(), vm.Name()))
         {
             this.VM = vm;
             this.vdi = vdi;
@@ -82,12 +82,12 @@ namespace XenAdmin.Actions
                 RelatedTask = VBD.async_insert(Session, cdrom.opaque_ref, vdi.opaque_ref);
                 PollToCompletion(wasEmpty ? 50 : 0, 100);
                 Description = String.Format(Messages.ISO_LOADED,
-                    vdi.Name, VM.Name);
+                    vdi.Name(), VM.Name());
             }
             else
             {
                 Description = String.Format(Messages.ISO_UNLOADED,
-                    VM.Name);
+                    VM.Name());
             }
         }
     }

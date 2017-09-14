@@ -39,8 +39,8 @@ namespace XenAdmin.Actions
         {
             VDI disk = obj as VDI;
             if (disk != null)
-                Title = string.Format(Messages.ACTION_VDI_CREATING_TITLE, disk.Name,
-                                      disk.Connection.Resolve<SR>(disk.SR).NameWithoutHost);
+                Title = string.Format(Messages.ACTION_VDI_CREATING_TITLE, disk.Name(),
+                                      disk.Connection.Resolve<SR>(disk.SR).NameWithoutHost());
             Description = Messages.ACTION_VDI_CREATING;
         }
 

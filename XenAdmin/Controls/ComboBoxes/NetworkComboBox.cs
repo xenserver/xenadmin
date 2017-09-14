@@ -116,7 +116,7 @@ namespace XenAdmin.Controls
                            IncludePoolNameInComboBox = IncludePoolNameInComboBox,
                            IsManagement = pif.management,
                            Network = network,
-                           NetworkIsConnected = pif.LinkStatus == PIF.LinkState.Connected,
+                           NetworkIsConnected = pif.LinkStatus() == PIF.LinkState.Connected,
                            HasIPAddress = pif.IsManagementInterface(false)
                        };
         }
@@ -131,7 +131,7 @@ namespace XenAdmin.Controls
                 var selectedItem = (NetworkComboBoxItem)SelectedItem;
                 return selectedItem == null
                         ? new KeyValuePair<string, string>(string.Empty, string.Empty)
-                        : new KeyValuePair<string, string>(selectedItem.Network.uuid, selectedItem.Network.Name);
+                        : new KeyValuePair<string, string>(selectedItem.Network.uuid, selectedItem.Network.Name());
             }
         }
     }

@@ -129,7 +129,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		{
 			var pool = Helpers.GetPoolOfOne(Connection);
             label2.Text = string.Format(Helpers.IsPool(pool.Connection) ? Messages.VMS_IN_POOL : Messages.VMS_IN_SERVER,
-                                                pool.Name.Ellipsise(60));
+                                                pool.Name().Ellipsise(60));
 			VMsToExport.Clear();
 
 			try
@@ -184,7 +184,7 @@ namespace XenAdmin.Wizards.ExportWizard
 		
 		private bool IsVmExportable(VM vm)
 		{
-			if (!vm.is_a_real_vm)
+			if (!vm.is_a_real_vm())
 				return false;
 
 			if (!vm.Show(Properties.Settings.Default.ShowHiddenVMs))
@@ -201,7 +201,7 @@ namespace XenAdmin.Wizards.ExportWizard
 
 		private bool MatchesSearchText(VM vm)
 		{
-			return m_searchTextBox.Matches(vm.Name);
+			return m_searchTextBox.Matches(vm.Name());
 		}
 
 		private DataGridViewRow GetDataGridViewRow(VM vm, bool selected)
@@ -212,10 +212,10 @@ namespace XenAdmin.Wizards.ExportWizard
 			row.Cells.AddRange(new DataGridViewCell[]
 			                   	{
 			                   		new DataGridViewCheckBoxCell {Value = selected},
-			                   		new DataGridViewTextBoxCell {Value = vm.Name},
-			                   		new DataGridViewTextBoxCell {Value = vm.Description},
+			                   		new DataGridViewTextBoxCell {Value = vm.Name()},
+			                   		new DataGridViewTextBoxCell {Value = vm.Description()},
 			                   		new DataGridViewTextBoxCell {Value = Util.DiskSizeString(totalVmSize), Tag = totalVmSize},
-			                   		new DataGridViewTextBoxCell {Value = vmAppliance == null ? Messages.NONE : vmAppliance.Name}
+			                   		new DataGridViewTextBoxCell {Value = vmAppliance == null ? Messages.NONE : vmAppliance.Name()}
 			                   	});
 			return row;
 		}

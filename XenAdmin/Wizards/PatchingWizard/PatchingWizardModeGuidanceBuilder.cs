@@ -120,26 +120,26 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 continue;
 
                             if (host.IsMaster())
-                                sbLog.AppendFormat("\t{0} ({1})\r\n", host.Name, Messages.MASTER);
+                                sbLog.AppendFormat("\t{0} ({1})\r\n", host.Name(), Messages.MASTER);
                             else
-                                sbLog.AppendFormat("\t{0}\r\n", host.Name);
+                                sbLog.AppendFormat("\t{0}\r\n", host.Name());
 
                         }
                         break;
                     case after_apply_guidance.restartPV:
                         foreach (VM vm in Helpers.VMsRunningOn(servers))
                         {
-                            if (vm.IsHVM || !vm.is_a_real_vm)
+                            if (vm.IsHVM() || !vm.is_a_real_vm())
                                 continue;
-                            sbLog.AppendFormat("\t{0}\r\n", vm.Name);
+                            sbLog.AppendFormat("\t{0}\r\n", vm.Name());
                         }
                         break;
                     case after_apply_guidance.restartHVM:
                         foreach (VM vm in Helpers.VMsRunningOn(servers))
                         {
-                            if (!vm.IsHVM || !vm.is_a_real_vm)
+                            if (!vm.IsHVM() || !vm.is_a_real_vm())
                                 continue;
-                            sbLog.AppendFormat("\t{0}\r\n", vm.Name);
+                            sbLog.AppendFormat("\t{0}\r\n", vm.Name());
                         }
                         break;
                 }

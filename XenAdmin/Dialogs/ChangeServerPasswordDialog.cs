@@ -85,11 +85,11 @@ namespace XenAdmin.Dialogs
             if (host != null)
             {
                 XenAPI.Pool thePool = Core.Helpers.GetPoolOfOne(host.Connection);
-                name = thePool.Name;
+                name = thePool.Name();
             }
 
             if (pool != null)
-                name = pool.Name;
+                name = pool.Name();
 
             this.Text = string.Format(Messages.CHANGEPASS_DIALOG_TITLE, name);
             ServerNameLabel.Text = string.Format(Messages.CHANGEPASS_ROOT_PASS, name);

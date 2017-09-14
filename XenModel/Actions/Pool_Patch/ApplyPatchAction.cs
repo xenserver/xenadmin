@@ -81,7 +81,7 @@ namespace XenAdmin.Actions
 
                 // Then, put it on the pool that doesn't have it
 
-                Description = String.Format(Messages.UPLOADING_PATCH_TO, host.Name);
+                Description = String.Format(Messages.UPLOADING_PATCH_TO, host.Name());
 
                 Connection = host.Connection;
                 Session = host.Connection.DuplicateSession();
@@ -97,7 +97,7 @@ namespace XenAdmin.Actions
                 {
                     Connection = null;
                     Session = null;
-                    Description = String.Format(Messages.PATCH_UPLOADED, host.Name);
+                    Description = String.Format(Messages.PATCH_UPLOADED, host.Name());
                 }
             }
             finally
@@ -117,7 +117,7 @@ namespace XenAdmin.Actions
         private string output = "";
 
         public ApplyPatchAction(Pool_patch patch, Host host)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name, host.Name))
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name(), host.Name()))
         {
             this.patch = patch;
             this.host = host;
@@ -137,12 +137,12 @@ namespace XenAdmin.Actions
 
             try
             {
-                this.Description = String.Format(Messages.APPLYING_PATCH, patch.Name, host.Name);
+                this.Description = String.Format(Messages.APPLYING_PATCH, patch.Name(), host.Name());
 
-                output += String.Format(Messages.APPLY_PATCH_LOG_MESSAGE, patch.Name, host.Name);
+                output += String.Format(Messages.APPLY_PATCH_LOG_MESSAGE, patch.Name(), host.Name());
                 output += Pool_patch.apply(Session, patchRef, host.opaque_ref);
 
-                this.Description = String.Format(Messages.PATCH_APPLIED, patch.Name, host.Name);
+                this.Description = String.Format(Messages.PATCH_APPLIED, patch.Name(), host.Name());
             }
             catch (Failure f)
             {

@@ -69,35 +69,37 @@ namespace XenAdmin.Actions
         {
             try
             {
-                var diagnosticToken = Pool.HealthCheckSettings.GetSecretyInfo(Session, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
+                var healthCheckSettings = Pool.HealthCheckSettings();
+
+                var diagnosticToken = healthCheckSettings.GetSecretyInfo(Session, HealthCheckSettings.DIAGNOSTIC_TOKEN_SECRET);
                 if (string.IsNullOrEmpty(diagnosticToken))
                 {
-                    log.DebugFormat("Cannot get the diagnostic result for {0}, because couldn't retrieve the diagnostic token", Pool.Name);
+                    log.DebugFormat("Cannot get the diagnostic result for {0}, because couldn't retrieve the diagnostic token", Pool.Name());
                     Description = Messages.ACTION_GET_HEALTH_CHECK_RESULT_FAILED;
                     return;
                 }
-                if (!Pool.HealthCheckSettings.HasUpload)
+                if (!healthCheckSettings.HasUpload)
                 {
-                    log.DebugFormat("Cannot get the diagnostic result for {0}, because the there is no upload completed yet", Pool.Name);
+                    log.DebugFormat("Cannot get the diagnostic result for {0}, because the there is no upload completed yet", Pool.Name());
                     Description = Messages.ACTION_GET_HEALTH_CHECK_RESULT_FAILED;
                     return;
                 }
 
 
-                var analysisProgress = GetAnalysisProgress(diagnosticToken, Pool.HealthCheckSettings.UploadUuid);
+                var analysisProgress = GetAnalysisProgress(diagnosticToken, healthCheckSettings.UploadUuid);
 
                 if (analysisProgress >= 0 && analysisProgress < 100) // check if the progress is a valid value less than 100
                 {
-                    log.DebugFormat("Analysis for {0} not completed yet", Pool.Name);
+                    log.DebugFormat("Analysis for {0} not completed yet", Pool.Name());
                     Description = Messages.COMPLETED;
                     return;
                 }
 
-                var analysisResult = GetAnalysisResult(diagnosticToken, Pool.HealthCheckSettings.UploadUuid);
+                var analysisResult = GetAnalysisResult(diagnosticToken, healthCheckSettings.UploadUuid);
 
-                if (analysisResult.Count == 0 && analysisProgress == -1 && DateTime.Compare(Pool.HealthCheckSettings.LastSuccessfulUploadTime.AddMinutes(10), DateTime.UtcNow) > 0)
+                if (analysisResult.Count == 0 && analysisProgress == -1 && DateTime.Compare(healthCheckSettings.LastSuccessfulUploadTime.AddMinutes(10), DateTime.UtcNow) > 0)
                 {
-                    log.DebugFormat("Diagnostic result for {0} is empty. Maybe analysis result is not yet available", Pool.Name);
+                    log.DebugFormat("Diagnostic result for {0} is empty. Maybe analysis result is not yet available", Pool.Name());
                     Description = Messages.COMPLETED;
                     return;
                 }
@@ -106,8 +108,8 @@ namespace XenAdmin.Actions
                 Dictionary<string, string> newConfig = Pool.health_check_config;
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_SEVERITY] = GetMaxSeverity(analysisResult).ToString();
                 newConfig[HealthCheckSettings.REPORT_ANALYSIS_ISSUES_DETECTED] = GetDistinctIssueCount(analysisResult).ToString();
-                newConfig[HealthCheckSettings.REPORT_ANALYSIS_UPLOAD_UUID] = Pool.HealthCheckSettings.UploadUuid;
-                newConfig[HealthCheckSettings.REPORT_ANALYSIS_UPLOAD_TIME] = Pool.HealthCheckSettings.LastSuccessfulUpload;
+                newConfig[HealthCheckSettings.REPORT_ANALYSIS_UPLOAD_UUID] = healthCheckSettings.UploadUuid;
+                newConfig[HealthCheckSettings.REPORT_ANALYSIS_UPLOAD_TIME] = healthCheckSettings.LastSuccessfulUpload;
                 Pool.set_health_check_config(Session, Pool.opaque_ref, newConfig);
             }
             catch (Exception e)

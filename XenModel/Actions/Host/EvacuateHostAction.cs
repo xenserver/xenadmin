@@ -110,7 +110,7 @@ namespace XenAdmin.Actions
                                     Host toHost = Host.Connection.Cache.Find_By_Uuid<Host>(rec.HostUuid);
                                     if ((Session.Connection.Resolve(rec.Vm)).is_control_domain)
                                     {
-                                        if (!toHost.IsLive)
+                                        if (!toHost.IsLive())
                                         {
                                             try
                                             {
@@ -270,7 +270,7 @@ namespace XenAdmin.Actions
                     hostEvacuatRec.Label = rec.Value[(int)RecProperties.WLB];
                     hostEvacuatRec.Vm = rec.Key;
                     hostEvacuatRec.HostUuid = rec.Value[(int)RecProperties.ToHost];
-                    if ((Session.Connection.Resolve(rec.Key)).is_control_domain && !toHost.IsLive)
+                    if ((Session.Connection.Resolve(rec.Key)).is_control_domain && !toHost.IsLive())
                     {
                         hostPowerOnRecs.Add(hostEvacuatRec);
                     }

@@ -104,7 +104,9 @@ namespace XenAdmin.Commands
                     VDI vdi = selectedItems[0].XenObject as VDI;
                     SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
                     bool single = selectedItems.Count == 1;
-                    switch (vdi.VDIType)
+
+                    var typ = vdi.VDIType();
+                    switch (typ)
                     {
                         case VDI.FriendlyType.SNAPSHOT:
                             return single ? Messages.MESSAGEBOX_DELETE_SNAPSHOT : Messages.MESSAGEBOX_DELETE_SNAPSHOT_MULTIPLE;
@@ -132,9 +134,10 @@ namespace XenAdmin.Commands
                     // if there are mixed vdi types then we will use the multiple warning dialog in confirm() override
                     SelectedItemCollection selectedItems = GetSelection();
                     VDI vdi = selectedItems[0].XenObject as VDI;
-                    SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
                     bool single = selectedItems.Count == 1;
-                    switch (vdi.VDIType)
+
+                    var typ = vdi.VDIType();
+                    switch (typ)
                     {
                         case VDI.FriendlyType.SNAPSHOT:
                             return single ? Messages.MESSAGEBOX_DELETE_SNAPSHOT_TITLE : Messages.MESSAGEBOX_DELETE_SNAPSHOTS_TITLE_MULTIPLE;
@@ -173,7 +176,7 @@ namespace XenAdmin.Commands
                         if (v == null)
                             current = VDI.FriendlyType.NONE;
                         else
-                            current = v.VDIType;
+                            current = v.VDIType();
 
                         if (i > 0 && current != previous)
                         {
@@ -206,7 +209,8 @@ namespace XenAdmin.Commands
                 List<VDI> virtualDisks = new List<VDI>();
                 foreach (VDI vdi in selectedItems.AsXenObjects<VDI>())
                 {
-                    switch (vdi.VDIType)
+                    var typ = vdi.VDIType();
+                    switch (typ)
                     {
                         case VDI.FriendlyType.SNAPSHOT:
                             snapshots.Add(vdi); 
@@ -293,16 +297,18 @@ namespace XenAdmin.Commands
 
         protected bool CanExecute(VDI vdi)
         {
+            if (vdi == null)
+                return false;
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
-            if (vdi == null || sr == null)
+            if (sr == null)
                 return false;
             if (vdi.Locked)
                 return false;
-            if (sr.Physical)
+            if (sr.Physical())
                 return false;
-            if (sr.IsToolsSR)
+            if (sr.IsToolsSR())
                 return false;
-            if (vdi.IsUsedByHA)
+            if (vdi.IsUsedByHA())
             {
                 return false;
             }
@@ -329,7 +335,7 @@ namespace XenAdmin.Commands
                         return false;
                 }
             }
-            if (sr.HBALunPerVDI)
+            if (sr.HBALunPerVDI())
                 return true;
             if (!vdi.allowed_operations.Contains(vdi_operations.destroy))
             {
@@ -359,23 +365,23 @@ namespace XenAdmin.Commands
             if (sr == null)
                 return Messages.SR_COULD_NOT_BE_CONTACTED;
 
-            VDI.FriendlyType vdiType = vdi.VDIType;
+            VDI.FriendlyType vdiType = vdi.VDIType();
            
             if (vdi.Locked)
                 return vdiType == VDI.FriendlyType.SNAPSHOT ? Messages.CANNOT_DELETE_SNAPSHOT_IN_USE
                     : vdiType == VDI.FriendlyType.ISO ? Messages.CANNOT_DELETE_ISO_IN_USE
                     : Messages.CANNOT_DELETE_VD_IN_USE;
 
-            if (sr.Physical)
+            if (sr.Physical())
                 return FriendlyErrorNames.VDI_IS_A_PHYSICAL_DEVICE;
 
-            if (sr.IsToolsSR)
+            if (sr.IsToolsSR())
                 return Messages.CANNOT_DELETE_TOOLS_SR;
 
-            if (vdi.IsUsedByHA)
+            if (vdi.IsUsedByHA())
                 return Messages.CANNOT_DELETE_HA_VD;
 
-            if (vdi.IsMetadataForDR)
+            if (vdi.IsMetadataForDR())
                 return Messages.CANNOT_DELETE_DR_VD;
 
             List<VBD> vbds = vdi.Connection.ResolveAll<VBD>(vdi.VBDs);

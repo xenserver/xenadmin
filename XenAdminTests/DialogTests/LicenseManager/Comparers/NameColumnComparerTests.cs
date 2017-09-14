@@ -47,9 +47,9 @@ namespace XenAdminTests.DialogTests.LicenseManager.Comparers
         public void CompareStrings()
         {
             Mock<Host> hx = ObjectManager.NewXenObject<Host>(id);
-            hx.Setup(h => h.Name).Returns("A");
+            hx.Setup(h => h.Name()).Returns("A");
             Mock<Host> hy = ObjectManager.NewXenObject<Host>(id);
-            hy.Setup(h => h.Name).Returns("A");
+            hy.Setup(h => h.Name()).Returns("A");
 
             Mock<CheckableDataGridViewRow> x = new Mock<CheckableDataGridViewRow>(MockBehavior.Strict);
             x.Setup(r => r.XenObject).Returns(hx.Object);

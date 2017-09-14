@@ -68,7 +68,7 @@ namespace XenAdmin.Commands
                     continue;
 
                 var pool = Helpers.GetPoolOfOne(xenConnection);
-                if (pool != null && pool.IsUpgradeForbidden)
+                if (pool != null && pool.IsUpgradeForbidden())
                     continue;
 
                 return true;

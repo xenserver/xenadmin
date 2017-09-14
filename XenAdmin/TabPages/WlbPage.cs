@@ -369,7 +369,7 @@ namespace XenAdmin.TabPages
             {
                 List<Role> roleList = _pool.Connection.Session.Roles;
                 roleList.Sort();
-                rbacUser = roleList[0].FriendlyName;
+                rbacUser = roleList[0].FriendlyName();
             }
 
             AsyncAction thisAction = HelpersGUI.FindActiveWLBAction(_pool.Connection);
@@ -394,11 +394,11 @@ namespace XenAdmin.TabPages
 
                 if (passedRbacChecks)
                 {
-                    statusMessage = string.Format(Messages.WLB_INITIALIZE_WLB_BLURB, _pool.Name);
+                    statusMessage = string.Format(Messages.WLB_INITIALIZE_WLB_BLURB, _pool.Name());
                 }
                 else
                 {
-                    statusMessage = string.Format(Messages.WLB_INITIALIZE_WLB_BLURB_NO_PRIV, _pool.Name, rbacUser);
+                    statusMessage = string.Format(Messages.WLB_INITIALIZE_WLB_BLURB_NO_PRIV, _pool.Name(), rbacUser);
                 }
                 labelStatus.Text = statusMessage;
                 pictureBoxWarningTriangle.Visible = (WlbServerState.GetState(_pool) == WlbServerState.ServerState.ConnectionError);
@@ -457,11 +457,11 @@ namespace XenAdmin.TabPages
 
                 if (!passedRbacChecks)
                 {
-                    statusMessage = string.Format(Messages.WLB_ENABLE_WLB_BLURB_NO_PRIV, _pool.Name, rbacUser);
+                    statusMessage = string.Format(Messages.WLB_ENABLE_WLB_BLURB_NO_PRIV, _pool.Name(), rbacUser);
                 }
                 else
                 {
-                    statusMessage = string.Format(Messages.WLB_ENABLE_WLB_BLURB, _pool.Name);
+                    statusMessage = string.Format(Messages.WLB_ENABLE_WLB_BLURB, _pool.Name());
                 }
                 labelStatus.Text = statusMessage;
 
@@ -490,7 +490,7 @@ namespace XenAdmin.TabPages
                 }
                 else
                 {
-                    statusMessage = string.Format(Messages.WLB_ENABLED_BLURB, _pool.Name);
+                    statusMessage = string.Format(Messages.WLB_ENABLED_BLURB, _pool.Name());
                 }
 
                 labelStatus.Text = statusMessage;

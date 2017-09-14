@@ -789,24 +789,6 @@
   <data name="ACTION_SR_ATTACH_SUCCESSFUL" xml:space="preserve">
     <value>Attached SR</value>
   </data>
-  <data name="ACTION_SR_CONVERT" xml:space="preserve">
-    <value>Convert SR '{0}' on '{1}'</value>
-  </data>
-  <data name="ACTION_SR_CONVERTED" xml:space="preserve">
-    <value>Converted SR</value>
-  </data>
-  <data name="ACTION_SR_CONVERTED_TO_THIN" xml:space="preserve">
-    <value>Converted SR '{0}' to thin provisioning</value>
-  </data>
-  <data name="ACTION_SR_CONVERTING" xml:space="preserve">
-    <value>Converting SR</value>
-  </data>
-  <data name="ACTION_SR_CONVERTING_TO_THIN" xml:space="preserve">
-    <value>Converting SR '{0}' to thin provisioning</value>
-  </data>
-  <data name="ACTION_SR_CONVERT_TO_THIN" xml:space="preserve">
-    <value>Convert SR '{0}' to thin provisioning</value>
-  </data>
   <data name="ACTION_SR_CREATE_SUCCESSFUL" xml:space="preserve">
     <value>Created SR</value>
   </data>
@@ -5977,6 +5959,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="HEALTHCHECK_STATUS_ONE_ISSUE_FOUND" xml:space="preserve">
     <value>1 issue detected</value>
   </data>
+  <data name="HEALTH_CHECK" xml:space="preserve">
+    <value>HealthCheck</value>
+  </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>Authentication with [Citrix] Insight Services failed. See the application log files for more information.</value>
   </data>
@@ -7345,9 +7330,6 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_SHUTDOWN" xml:space="preserve">
     <value>S&amp;hut Down</value>
   </data>
-  <data name="MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU" xml:space="preserve">
-    <value>&amp;Convert SR...</value>
-  </data>
   <data name="MAINWINDOW_START" xml:space="preserve">
     <value>&amp;Start</value>
   </data>
@@ -8533,9 +8515,6 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
     <value>The SR '{0}' is over committed. There is only {1} of free space and the new VM requires {2}.</value>
   </data>
-  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN" xml:space="preserve">
-    <value>The SR '{0}' is over committed. There is only {1} of free space and the new VM requires {2} ({3} initially).</value>
-  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>Configure storage for the new VM</value>
   </data>
@@ -8741,12 +8720,6 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NEW_UPDATE_AVAILABLE" xml:space="preserve">
     <value>New Update Available - {0}</value>
-  </data>
-  <data name="NEW_VMSS_PAGE_TEXT" xml:space="preserve">
-    <value>Use this wizard to define a snapshot schedule that will create automatic scheduled snapshot jobs for your VMs.</value>
-  </data>
-  <data name="NEW_VMSS_PAGE_TEXT_MORE" xml:space="preserve">
-    <value>To begin, enter a name for the schedule and a description (optional), then click Next.</value>
   </data>
   <data name="NEW_VM_APPLIANCE" xml:space="preserve">
     <value>&amp;New vApp...</value>
@@ -9279,7 +9252,7 @@ However, there is not enough space to perform the repartitioning, so the current
     <value>Choose an existing update to install or upload a new one</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>[XenServer] Updates and Supplemental Packs (*.{0}, *.iso)|*.{0};*.iso</value>
+    <value>[XenServer] Updates and Supplemental Packs (*.{0}, *.iso,*.zip)|*.{0};*.iso;*.zip</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
     <value>Automated updates are not supported on this [XenServer] version</value>
@@ -10321,9 +10294,6 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="RUNNING_ON" xml:space="preserve">
     <value>Running on</value>
   </data>
-  <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
-    <value>Taking snapshots</value>
-  </data>
   <data name="RUN_POLICY" xml:space="preserve">
     <value>Running policy '{0}'</value>
   </data>
@@ -10734,7 +10704,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Deleting snapshots ...</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY" xml:space="preserve">
-    <value>Snapshot schedule</value>
+    <value>Snapshot Schedule</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY_TITLE" xml:space="preserve">
     <value>When do you want snapshots to be taken?</value>
@@ -10921,15 +10891,6 @@ The upper limit: SR size / {2}</value>
   </data>
   <data name="SR_SIZE_USED" xml:space="preserve">
     <value>{0} used of {1} total ({2} allocated)</value>
-  </data>
-  <data name="SR_THICK_PROVISIONING" xml:space="preserve">
-    <value>Fully provisioned</value>
-  </data>
-  <data name="SR_THIN_PROVISIONING" xml:space="preserve">
-    <value>Thinly provisioned</value>
-  </data>
-  <data name="SR_THIN_PROVISIONING_COMMITTED" xml:space="preserve">
-    <value>Thinly provisioned ({0}% committed)</value>
   </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
     <value>Cannot reclaim freed space, because the SR is detached.</value>
@@ -11613,6 +11574,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit maintenance mode</value>
   </data>
+  <data name="UPDATES_WIZARD_EXTRACT_ACTION_TITLE" xml:space="preserve">
+    <value>Extract {0}</value>
+  </data>
   <data name="UPDATES_WIZARD_FILE_NOT_FOUND" xml:space="preserve">
     <value>Unable to find the update file '{0}'.
 
@@ -11656,6 +11620,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
     <value>The selected file does not have a valid extension. Valid extensions are: *.{0} and *.iso</value>
+  </data>
+  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
+    <value>No valid update file found in {0}</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>This storage repository does not have enough space to suspend the required VMs.</value>
@@ -12309,12 +12276,6 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>Snapshot sched&amp;ules ...</value>
   </data>
-  <data name="VMSS_DIALOG_TEXT" xml:space="preserve">
-    <value>Create a snapshot schedule for your VMs.</value>
-  </data>
-  <data name="VMSS_DIALOG_TITLE" xml:space="preserve">
-    <value>Snapshot schedules</value>
-  </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>Send &amp;email notifications about snapshot schedule job alerts</value>
   </data>
@@ -12339,9 +12300,6 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="VMSS_NAME" xml:space="preserve">
     <value>Schedule Name</value>
   </data>
-  <data name="VMSS_NAME_FIELD_TEXT" xml:space="preserve">
-    <value>Schedule na&amp;me:</value>
-  </data>
   <data name="VMSS_NAME_TITLE" xml:space="preserve">
     <value>What do you want to call this schedule?</value>
   </data>
@@ -12361,7 +12319,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>schedule</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
-    <value>VMs in the snapshot schedule</value>
+    <value>Virtual Machines</value>
   </data>
   <data name="VMSS_VMS_TITLE" xml:space="preserve">
     <value>Select the VMs that you want to schedule snapshots for</value>

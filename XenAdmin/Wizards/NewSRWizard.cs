@@ -202,7 +202,7 @@ namespace XenAdmin.Wizards
             string description = m_srWizardType.Description;
             string name = m_srWizardType.SrName;
 
-            List<string> names = xenConnection.Cache.SRs.Select(sr => sr.Name).ToList();
+            List<string> names = xenConnection.Cache.SRs.Select(sr => sr.Name()).ToList();
 
             m_srWizardType.SrDescriptors.Clear();
             foreach (var lvmOhbaSrDescriptor in SrDescriptors)
@@ -496,11 +496,11 @@ namespace XenAdmin.Wizards
                 return;
             }
 
-            if (_srToReattach != null && _srToReattach.HasPBDs && _srToReattach.Connection == xenConnection)
+            if (_srToReattach != null && _srToReattach.HasPBDs() && _srToReattach.Connection == xenConnection)
             {
                 // Error - cannot reattach attached SR
                 MessageBox.Show(this,
-                    String.Format(Messages.STORAGE_IN_USE, _srToReattach.Name, Helpers.GetName(xenConnection)),
+                    String.Format(Messages.STORAGE_IN_USE, _srToReattach.Name(), Helpers.GetName(xenConnection)),
                     Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 FinishCanceled();
@@ -555,7 +555,7 @@ namespace XenAdmin.Wizards
                 }
             }
 
-            if (!FinalAction.Succeeded && FinalAction is SrReattachAction && _srToReattach.HasPBDs)
+            if (!FinalAction.Succeeded && FinalAction is SrReattachAction && _srToReattach.HasPBDs())
             {
                 // reattach failed. Ensure PBDs are now unplugged and destroyed.
                 using (var dialog = new ActionProgressDialog(new SrAction(SrActionKind.UnplugAndDestroyPBDs, _srToReattach), progressBarStyle))
@@ -702,7 +702,7 @@ namespace XenAdmin.Wizards
                     {
                         DialogResult dialogResult;
                         using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name), Text),
+                            new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.NEWSR_MULTI_POOL_WARNING, _srToReattach.Name()), Text),
                             ThreeButtonDialog.ButtonYes,
                             new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
                         {
@@ -724,7 +724,7 @@ namespace XenAdmin.Wizards
                         using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Warning,
-                            string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name, Helpers.GetName(xenConnection), 
+                            string.Format(Messages.ALREADY_ATTACHED_ELSEWHERE, _srToReattach.Name(), Helpers.GetName(xenConnection), 
                             Text)),
                         ThreeButtonDialog.ButtonOK,
                         ThreeButtonDialog.ButtonCancel))

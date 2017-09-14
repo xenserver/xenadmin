@@ -74,7 +74,7 @@ namespace XenAdmin.Commands
 
             if (vm != null)
             {
-                if (vm.VBDs.Count < vm.MaxVBDsAllowed)
+                if (vm.VBDs.Count < vm.MaxVBDsAllowed())
                 {
                     MainWindowCommandInterface.ShowPerXenModelObjectWizard(vm, new NewDiskDialog(vm.Connection, vm));
                 }

@@ -129,7 +129,7 @@ namespace XenOvfTransport
 
                 if (vm.power_state != vm_power_state.Halted && vm.power_state != vm_power_state.Suspended)
                 {
-                	var message = string.Format(Messages.ERROR_VM_NOT_HALTED, vm.Name);
+                	var message = string.Format(Messages.ERROR_VM_NOT_HALTED, vm.Name());
                 	OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.ExportProgress, "Export", message));
                     log.Info(message);
                     throw new Exception(message);

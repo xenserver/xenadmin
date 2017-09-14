@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin;
 using XenAdmin.Core;
 using XenAdmin.Network;
 
@@ -39,14 +38,14 @@ namespace XenAPI
 {
     public partial class Pool_patch : IComparable<Pool_patch>
     {
-        public override string Name
+        public override string Name()
         {
-            get { return name_label; }
+            return name_label;
         }
 
-        public override string Description
+        public override string Description()
         {
-            get { return name_description; }
+            return name_description;
         }
 
         private void AppliedTo(List<XenRef<Host>> appliedHosts)
@@ -108,8 +107,7 @@ namespace XenAPI
             return DateTime.MaxValue;
         }
 
-        private static bool FindPatch(Pool_patch patch,
-            IEnumerable<Pool_patch> patches)
+        private static bool FindPatch(Pool_patch patch, IEnumerable<Pool_patch> patches)
         {
             foreach (Pool_patch p in patches)
             {
@@ -125,7 +123,7 @@ namespace XenAPI
             List<Pool_patch> patches = new List<Pool_patch>();
 
             Pool pool = Helpers.GetPoolOfOne(host.Connection);
-            if (pool == null || pool.RollingUpgrade)
+            if (pool == null || pool.RollingUpgrade())
             {
                 foreach (Host_patch hostPatch in host.Connection.ResolveAll(host.patches))
                 {
@@ -146,7 +144,7 @@ namespace XenAPI
                 {
                     // ignore pools in rolling upgrade
                     pool = Helpers.GetPoolOfOne(connection);
-                    if (pool != null && pool.RollingUpgrade)
+                    if (pool != null && pool.RollingUpgrade())
                         continue;
 
                     // ignore this host

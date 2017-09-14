@@ -1244,9 +1244,25 @@ namespace XenAPI
         Response<string []>
         pool_update_get_hosts(string session, string _pool_update);
 
+        [XmlRpcMethod("pool_update.get_other_config")]
+        Response<Object>
+        pool_update_get_other_config(string session, string _pool_update);
+
         [XmlRpcMethod("pool_update.get_enforce_homogeneity")]
         Response<bool>
         pool_update_get_enforce_homogeneity(string session, string _pool_update);
+
+        [XmlRpcMethod("pool_update.set_other_config")]
+        Response<string>
+        pool_update_set_other_config(string session, string _pool_update, Object _other_config);
+
+        [XmlRpcMethod("pool_update.add_to_other_config")]
+        Response<string>
+        pool_update_add_to_other_config(string session, string _pool_update, string _key, string _value);
+
+        [XmlRpcMethod("pool_update.remove_from_other_config")]
+        Response<string>
+        pool_update_remove_from_other_config(string session, string _pool_update, string _key);
 
         [XmlRpcMethod("pool_update.introduce")]
         Response<string>
@@ -5668,6 +5684,10 @@ namespace XenAPI
         Response<bool>
         vdi_get_is_tools_iso(string session, string _vdi);
 
+        [XmlRpcMethod("VDI.get_cbt_enabled")]
+        Response<bool>
+        vdi_get_cbt_enabled(string session, string _vdi);
+
         [XmlRpcMethod("VDI.set_other_config")]
         Response<string>
         vdi_set_other_config(string session, string _vdi, Object _other_config);
@@ -5779,6 +5799,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VDI.db_introduce")]
         Response<string>
         async_vdi_db_introduce(string session, string _uuid, string _name_label, string _name_description, string _sr, string _type, bool _sharable, bool _read_only, Object _other_config, string _location, Object _xenstore_data, Object _sm_config, bool _managed, string _virtual_size, string _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of);
+
+        [XmlRpcMethod("VDI.db_introduce")]
+        Response<string>
+        vdi_db_introduce(string session, string _uuid, string _name_label, string _name_description, string _sr, string _type, bool _sharable, bool _read_only, Object _other_config, string _location, Object _xenstore_data, Object _sm_config, bool _managed, string _virtual_size, string _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of, bool _cbt_enabled);
+
+        [XmlRpcMethod("Async.VDI.db_introduce")]
+        Response<string>
+        async_vdi_db_introduce(string session, string _uuid, string _name_label, string _name_description, string _sr, string _type, bool _sharable, bool _read_only, Object _other_config, string _location, Object _xenstore_data, Object _sm_config, bool _managed, string _virtual_size, string _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of, bool _cbt_enabled);
 
         [XmlRpcMethod("VDI.db_forget")]
         Response<string>
@@ -5915,6 +5943,46 @@ namespace XenAPI
         [XmlRpcMethod("Async.VDI.pool_migrate")]
         Response<string>
         async_vdi_pool_migrate(string session, string _vdi, string _sr, Object _options);
+
+        [XmlRpcMethod("VDI.enable_cbt")]
+        Response<string>
+        vdi_enable_cbt(string session, string _vdi);
+
+        [XmlRpcMethod("Async.VDI.enable_cbt")]
+        Response<string>
+        async_vdi_enable_cbt(string session, string _vdi);
+
+        [XmlRpcMethod("VDI.disable_cbt")]
+        Response<string>
+        vdi_disable_cbt(string session, string _vdi);
+
+        [XmlRpcMethod("Async.VDI.disable_cbt")]
+        Response<string>
+        async_vdi_disable_cbt(string session, string _vdi);
+
+        [XmlRpcMethod("VDI.data_destroy")]
+        Response<string>
+        vdi_data_destroy(string session, string _vdi);
+
+        [XmlRpcMethod("Async.VDI.data_destroy")]
+        Response<string>
+        async_vdi_data_destroy(string session, string _vdi);
+
+        [XmlRpcMethod("VDI.export_changed_blocks")]
+        Response<string>
+        vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
+
+        [XmlRpcMethod("Async.VDI.export_changed_blocks")]
+        Response<string>
+        async_vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
+
+        [XmlRpcMethod("VDI.get_nbd_info")]
+        Response<string []>
+        vdi_get_nbd_info(string session, string _vdi);
+
+        [XmlRpcMethod("Async.VDI.get_nbd_info")]
+        Response<string>
+        async_vdi_get_nbd_info(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_all")]
         Response<string []>
@@ -7678,6 +7746,7 @@ namespace XenAPI
         public string [] after_apply_guidance;
         public string vdi;
         public string [] hosts;
+        public Object other_config;
         public bool enforce_homogeneity;
     }
 
@@ -8203,6 +8272,7 @@ namespace XenAPI
         public string metadata_of_pool;
         public bool metadata_latest;
         public bool is_tools_iso;
+        public bool cbt_enabled;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

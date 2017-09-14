@@ -61,7 +61,7 @@ namespace XenAdmin.Dialogs.HealthCheck
         {
             this.pool = pool;
             this.connection = pool.Connection;
-            healthCheckSettings = pool.HealthCheckSettings;
+            healthCheckSettings = pool.HealthCheckSettings();
             if (enrollNow)
                 healthCheckSettings.Status = HealthCheckStatus.Enabled;
             authenticated = healthCheckSettings.TryGetExistingTokens(pool.Connection, out authenticationToken, out diagnosticToken);
@@ -112,7 +112,7 @@ namespace XenAdmin.Dialogs.HealthCheck
 
         private void InitializeControls()
         {
-            Text = String.Format(Messages.HEALTHCHECK_ENROLLMENT_TITLE, pool.Name);
+            Text = String.Format(Messages.HEALTHCHECK_ENROLLMENT_TITLE, pool.Name());
             
             string noAuthTokenMessage = string.Format(Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_NO_TOKEN, Messages.MY_CITRIX_CREDENTIALS_URL);
             string existingAuthTokenMessage = Messages.HEALTHCHECK_AUTHENTICATION_RUBRIC_EXISTING_TOKEN;

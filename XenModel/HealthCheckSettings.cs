@@ -88,6 +88,8 @@ namespace XenAdmin.Model
         public const string HEALTH_CHECK_PIPE_END_MESSAGE = "HealthCheckServicePipe";
         public const string UPLOAD_UUID = "UploadUuid";
         public const string PROXY_SETTINGS = "ProxySettings";
+        public const string XENCENTER_METADATA = "XenCenterMetadata";
+        public const string REPORT_TIME_PLACEHOLDER = "@HealthCheckReportTime@";
         public const string DIAGNOSTIC_TOKEN_SECRET = "DiagnosticToken.Secret";
         public const string REPORT_ANALYSIS_SEVERITY = "ReportAnalysis.Severity";
         public const string REPORT_ANALYSIS_ISSUES_DETECTED = "ReportAnalysis.IssuesDetected";
@@ -366,8 +368,9 @@ namespace XenAdmin.Model
                 var poolOfOne = Helpers.GetPoolOfOne(connection);
                 if (poolOfOne != null)
                 {
-                    uploadToken = poolOfOne.HealthCheckSettings.GetSecretyInfo(connection, UPLOAD_TOKEN_SECRET);
-                    diagnosticToken = poolOfOne.HealthCheckSettings.GetSecretyInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
+                    var healthCheckSettings = poolOfOne.HealthCheckSettings();
+                    uploadToken = healthCheckSettings.GetSecretyInfo(connection, UPLOAD_TOKEN_SECRET);
+                    diagnosticToken = healthCheckSettings.GetSecretyInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
                     if (!String.IsNullOrEmpty(uploadToken) && !String.IsNullOrEmpty(diagnosticToken))
                         return true;
                 }

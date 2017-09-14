@@ -134,7 +134,7 @@ namespace XenAdminTests.CommandTests
                     Folder f = n == null ? null : n.Tag as Folder;
                     return f != null &&
                         n.Text == newFolderName &&
-                        f.Name == newFolderName &&
+                        f.Name() == newFolderName &&
                         n.AllParentsAreExpanded;
                 }, "Couldn't find new folder.");
             }

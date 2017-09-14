@@ -77,7 +77,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                         break;
                 }
 
-                return String.Format(descriptionFormat, VM.Name); 
+                return String.Format(descriptionFormat, VM.Name()); 
             }
         }
     }

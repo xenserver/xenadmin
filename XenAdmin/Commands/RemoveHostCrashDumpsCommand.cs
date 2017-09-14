@@ -81,7 +81,7 @@ namespace XenAdmin.Commands
             if (selection.Count == 1)
             {
                 Host hostAncestor = selection[0].HostAncestor;
-                return hostAncestor != null && hostAncestor.HasCrashDumps;
+                return hostAncestor != null && hostAncestor.HasCrashDumps();
             }
             return false;
         }

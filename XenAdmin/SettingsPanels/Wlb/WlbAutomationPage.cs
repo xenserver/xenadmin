@@ -121,11 +121,11 @@ namespace XenAdmin.SettingsPanels
                 thisItem.Checked = participatesInPowerManagement;
                 if (host.IsMaster())
                 {
-                    thisItem.SubItems.Add(string.Format("{0} ({1})", host.Name, Messages.POOL_MASTER));
+                    thisItem.SubItems.Add(string.Format("{0} ({1})", host.Name(), Messages.POOL_MASTER));
                 }
                 else
                 {
-                    thisItem.SubItems.Add(host.Name);
+                    thisItem.SubItems.Add(host.Name());
                 }
                 thisItem.SubItems.Add(GetHostPowerOnMode(host.power_on_mode));
                 thisItem.SubItems.Add(powerManagementTested);

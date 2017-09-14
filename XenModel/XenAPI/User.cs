@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -87,9 +85,9 @@ namespace XenAPI
         public Proxy_User ToProxy()
         {
             Proxy_User result_ = new Proxy_User();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.short_name = (short_name != null) ? short_name : "";
-            result_.fullname = (fullname != null) ? fullname : "";
+            result_.uuid = uuid ?? "";
+            result_.short_name = short_name ?? "";
+            result_.fullname = fullname ?? "";
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             return result_;
         }
@@ -150,7 +148,7 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static User get_record(Session session, string _user)
         {
-            return new User((Proxy_User)session.proxy.user_get_record(session.uuid, (_user != null) ? _user : "").parse());
+            return new User((Proxy_User)session.proxy.user_get_record(session.uuid, _user ?? "").parse());
         }
 
         /// <summary>
@@ -163,7 +161,7 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static XenRef<User> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<User>.Create(session.proxy.user_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<User>.Create(session.proxy.user_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -202,7 +200,7 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static void destroy(Session session, string _user)
         {
-            session.proxy.user_destroy(session.uuid, (_user != null) ? _user : "").parse();
+            session.proxy.user_destroy(session.uuid, _user ?? "").parse();
         }
 
         /// <summary>
@@ -215,7 +213,7 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static XenRef<Task> async_destroy(Session session, string _user)
         {
-            return XenRef<Task>.Create(session.proxy.async_user_destroy(session.uuid, (_user != null) ? _user : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_user_destroy(session.uuid, _user ?? "").parse());
         }
 
         /// <summary>
@@ -226,7 +224,7 @@ namespace XenAPI
         /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_uuid(Session session, string _user)
         {
-            return (string)session.proxy.user_get_uuid(session.uuid, (_user != null) ? _user : "").parse();
+            return (string)session.proxy.user_get_uuid(session.uuid, _user ?? "").parse();
         }
 
         /// <summary>
@@ -237,7 +235,7 @@ namespace XenAPI
         /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_short_name(Session session, string _user)
         {
-            return (string)session.proxy.user_get_short_name(session.uuid, (_user != null) ? _user : "").parse();
+            return (string)session.proxy.user_get_short_name(session.uuid, _user ?? "").parse();
         }
 
         /// <summary>
@@ -248,7 +246,7 @@ namespace XenAPI
         /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_fullname(Session session, string _user)
         {
-            return (string)session.proxy.user_get_fullname(session.uuid, (_user != null) ? _user : "").parse();
+            return (string)session.proxy.user_get_fullname(session.uuid, _user ?? "").parse();
         }
 
         /// <summary>
@@ -259,7 +257,7 @@ namespace XenAPI
         /// <param name="_user">The opaque_ref of the given user</param>
         public static Dictionary<string, string> get_other_config(Session session, string _user)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.user_get_other_config(session.uuid, (_user != null) ? _user : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.user_get_other_config(session.uuid, _user ?? "").parse());
         }
 
         /// <summary>
@@ -271,7 +269,7 @@ namespace XenAPI
         /// <param name="_fullname">New value to set</param>
         public static void set_fullname(Session session, string _user, string _fullname)
         {
-            session.proxy.user_set_fullname(session.uuid, (_user != null) ? _user : "", (_fullname != null) ? _fullname : "").parse();
+            session.proxy.user_set_fullname(session.uuid, _user ?? "", _fullname ?? "").parse();
         }
 
         /// <summary>
@@ -283,7 +281,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _user, Dictionary<string, string> _other_config)
         {
-            session.proxy.user_set_other_config(session.uuid, (_user != null) ? _user : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.user_set_other_config(session.uuid, _user ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -296,7 +294,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _user, string _key, string _value)
         {
-            session.proxy.user_add_to_other_config(session.uuid, (_user != null) ? _user : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.user_add_to_other_config(session.uuid, _user ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -308,7 +306,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _user, string _key)
         {
-            session.proxy.user_remove_from_other_config(session.uuid, (_user != null) ? _user : "", (_key != null) ? _key : "").parse();
+            session.proxy.user_remove_from_other_config(session.uuid, _user ?? "", _key ?? "").parse();
         }
 
         /// <summary>

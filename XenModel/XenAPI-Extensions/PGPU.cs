@@ -35,24 +35,20 @@ namespace XenAPI
 {
     partial class PGPU
     {
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                PCI pci = Connection.Resolve(PCI);
-                return pci != null ? pci.device_name : uuid;
-            }
+
+            PCI pci = Connection.Resolve(PCI);
+            return pci != null ? pci.device_name : uuid;
         }
+
         /// <summary>
         /// Has at least one supported_VGPU_type that is not passthrough
         /// </summary>
-        public bool HasVGpu
+        public bool HasVGpu()
         {
-            get
-            {
-                var supportedTypes = Connection.ResolveAll(supported_VGPU_types);
-                return supportedTypes.Any(supportedType => !supportedType.IsPassthrough);
-            }
+            var supportedTypes = Connection.ResolveAll(supported_VGPU_types);
+            return supportedTypes.Any(supportedType => !supportedType.IsPassthrough());
         }
     }
 }

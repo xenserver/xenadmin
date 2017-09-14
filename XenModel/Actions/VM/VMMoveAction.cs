@@ -59,7 +59,7 @@ namespace XenAdmin.Actions.VMActions
         }
 
         public VMMoveAction(VM vm, SR sr, Host host, string namelabel)
-            : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING_TITLE, vm.Name, namelabel, sr.NameWithoutHost))
+            : base(vm.Connection, string.Format(Messages.ACTION_VM_MOVING_TITLE, vm.Name(), namelabel, sr.NameWithoutHost()))
         {
             this.Description = Messages.ACTION_PREPARING;
             this.VM = vm;
@@ -106,7 +106,7 @@ namespace XenAdmin.Actions.VMActions
 
                 foreach (VBD oldVBD in vbds)
                 {
-                    if (!oldVBD.IsOwner)
+                    if (!oldVBD.GetIsOwner())
                         continue;
 
                     var curVdi = Connection.Resolve(oldVBD.VDI);
@@ -126,7 +126,6 @@ namespace XenAdmin.Actions.VMActions
  
                     var newVBD = new VBD
                                      {
-                                         IsOwner = oldVBD.IsOwner,
                                          userdevice = oldVBD.userdevice,
                                          bootable = oldVBD.bootable,
                                          mode = oldVBD.mode,
@@ -136,6 +135,7 @@ namespace XenAdmin.Actions.VMActions
                                          VDI = new XenRef<VDI>(newVDI.opaque_ref),
                                          VM = new XenRef<VM>(VM.opaque_ref)
                                      };
+                    newVBD.SetIsOwner(oldVBD.GetIsOwner());
 
                     VBD vbd = oldVBD;
                     BestEffort(ref exn, () => VDI.destroy(Session, vbd.VDI.opaque_ref));
@@ -153,7 +153,7 @@ namespace XenAdmin.Actions.VMActions
             }
             catch (CancelledException)
             {
-                this.Description = string.Format(Messages.MOVE_CANCELLED, VM.Name);
+                this.Description = string.Format(Messages.MOVE_CANCELLED, VM.Name());
                 throw;
             }
             this.Description = Messages.MOVED;

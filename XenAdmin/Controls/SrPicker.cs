@@ -60,7 +60,6 @@ namespace XenAdmin.Controls
         public event Action ItemSelectionNotNull;
         public event EventHandler DoubleClickOnRow;
         public long DiskSize = 0;
-        public long? OverridenInitialAllocationRate = null;
 
         public SrPicker(IXenConnection connection, SRPickerType usage) : this(connection)
         {
@@ -211,7 +210,6 @@ namespace XenAdmin.Controls
 
         /// <summary>
         /// Returns how much disk space is required to create the disk on an SR
-        /// This depends on whether the SR is thin provisioned and on what the initial allocation rate is
         /// </summary>
         /// <param name="sr"></param>
         /// <returns></returns>
@@ -221,23 +219,6 @@ namespace XenAdmin.Controls
 
             if (DiskSize > sr.physical_size)
                 return DiskSize;
-
-            if (sr != null && sr.IsThinProvisioned)
-            {
-                if (OverridenInitialAllocationRate.HasValue)
-                {
-                    allocationRate = OverridenInitialAllocationRate.Value;
-                }
-                else
-                {
-                    long temp = 0;
-
-                    if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation") && long.TryParse(sr.sm_config["initial_allocation"], out temp))
-                    {
-                        allocationRate = temp;
-                    }
-                }
-            }
 
             return Math.Min(allocationRate, DiskSize);
         }

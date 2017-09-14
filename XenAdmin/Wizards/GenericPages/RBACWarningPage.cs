@@ -234,7 +234,7 @@ namespace XenAdmin.Wizards.GenericPages
             foreach (WizardPermissionCheck wizardPermissionCheck in errors)
             {
                 // the string is a format string that needs to take the current role (we use the subject they were authorised under which could be a group or user)
-                string description = String.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName);
+                string description = String.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName());
                 AddDetailsRow(description, PermissionCheckResult.Failed);
             }
 
@@ -269,7 +269,7 @@ namespace XenAdmin.Wizards.GenericPages
                     wizardPermissionCheck.WarningAction();
 
                 // the string is a format string that needs to take the current role (we use the subject they were authorised under which could be a group or user)
-                string description = String.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName);
+                string description = String.Format(wizardPermissionCheck.WarningMessage, roleList[0].FriendlyName());
                 AddDetailsRow(description, PermissionCheckResult.Warning);
             }
         }
@@ -297,8 +297,8 @@ namespace XenAdmin.Wizards.GenericPages
         {
             Program.AssertOffEventThread();
 
-            string text = string.Format(Messages.RBAC_WARNING_PAGE_HEADER_ROW_DESC, connection.Session.UserFriendlyName,
-                                        connection.Session.FriendlyRoleDescription, connection.FriendlyName);
+            string text = string.Format(Messages.RBAC_WARNING_PAGE_HEADER_ROW_DESC, connection.Session.UserFriendlyName(),
+                                        connection.Session.FriendlyRoleDescription(), connection.FriendlyName);
             PermissionCheckHeaderRow headerRow = new PermissionCheckHeaderRow(text);
             Program.Invoke(this, delegate
                                      {

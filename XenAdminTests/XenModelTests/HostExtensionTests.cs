@@ -51,7 +51,7 @@ namespace XenAdminTests.XenModelTests
                             {
                                 cpu_info = new Dictionary<string, string> {{SocketKetCpuInfo, arrayValue}}
                             };
-            int actualSockets = host.CpuSockets;
+            int actualSockets = host.CpuSockets();
             Assert.That(actualSockets, Is.EqualTo(expectedSockets));
         }
 
@@ -62,7 +62,7 @@ namespace XenAdminTests.XenModelTests
                             {
                                 cpu_info = new Dictionary<string, string>()
                             };
-            int actualSockets = host.CpuSockets;
+            int actualSockets = host.CpuSockets();
             Assert.That(actualSockets, Is.EqualTo(0));
         }
 
@@ -73,7 +73,7 @@ namespace XenAdminTests.XenModelTests
                             {
                                 cpu_info = null
                             };
-            int actualSockets = host.CpuSockets;
+            int actualSockets = host.CpuSockets();
             Assert.That(actualSockets, Is.EqualTo(0));
         }
     }

@@ -39,6 +39,7 @@ using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
+using XenAdmin.Plugins;
 using XenAdmin.ServerDBs;
 using XenAPI;
 
@@ -61,7 +62,7 @@ namespace XenAdmin
 
         public Session CreateActionSession(Session session, IXenConnection connection)
         {
-            return SessionFactory.CreateSession(session, connection, ConnectionTimeout);
+            return SessionFactory.DuplicateSession(session, connection, ConnectionTimeout);
         }
 
         public bool Exiting
@@ -196,5 +197,12 @@ namespace XenAdmin
         {
             get { return XenAdmin.Properties.Settings.Default.ShowHiddenVMs; }
         }
+
+        public PluginManager PluginManager;
+
+        public string GetXenCenterMetadata(bool isForXenCenter)
+        {
+            return Metadata.Generate(PluginManager, isForXenCenter);
+        }      
     }
 }

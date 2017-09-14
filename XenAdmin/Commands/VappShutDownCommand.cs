@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
                     appsToShutDown.Add(firstVm.Connection.Resolve(firstVm.appliance));
                 }
 
-                var appNames = (from VM_appliance app in appsToShutDown select app.Name).ToArray();
+                var appNames = (from VM_appliance app in appsToShutDown select app.Name()).ToArray();
                 return string.Format(Messages.CONFIRM_SHUT_DOWN_APPLIANCES, string.Join(", ", appNames));
             }
         }
@@ -92,7 +92,7 @@ namespace XenAdmin.Commands
             if (selection.AllItemsAre<VM>())
             {
                 var firstVm = (VM)selection.First;
-                if (firstVm.IsAssignedToVapp)
+                if (firstVm.IsAssignedToVapp())
                 {
                     var firstVapp = firstVm.appliance;
                     if (selection.AsXenObjects<VM>().All(vm => vm.appliance != null && vm.appliance.opaque_ref == firstVapp.opaque_ref))

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -127,7 +125,7 @@ namespace XenAPI
         public Proxy_VM_guest_metrics ToProxy()
         {
             Proxy_VM_guest_metrics result_ = new Proxy_VM_guest_metrics();
-            result_.uuid = (uuid != null) ? uuid : "";
+            result_.uuid = uuid ?? "";
             result_.os_version = Maps.convert_to_proxy_string_string(os_version);
             result_.PV_drivers_version = Maps.convert_to_proxy_string_string(PV_drivers_version);
             result_.PV_drivers_up_to_date = PV_drivers_up_to_date;
@@ -214,7 +212,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static VM_guest_metrics get_record(Session session, string _vm_guest_metrics)
         {
-            return new VM_guest_metrics((Proxy_VM_guest_metrics)session.proxy.vm_guest_metrics_get_record(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return new VM_guest_metrics((Proxy_VM_guest_metrics)session.proxy.vm_guest_metrics_get_record(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -225,7 +223,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VM_guest_metrics> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VM_guest_metrics>.Create(session.proxy.vm_guest_metrics_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<VM_guest_metrics>.Create(session.proxy.vm_guest_metrics_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -236,7 +234,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static string get_uuid(Session session, string _vm_guest_metrics)
         {
-            return (string)session.proxy.vm_guest_metrics_get_uuid(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
+            return (string)session.proxy.vm_guest_metrics_get_uuid(session.uuid, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -247,7 +245,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_os_version(Session session, string _vm_guest_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_os_version(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_os_version(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -258,7 +256,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_PV_drivers_version(Session session, string _vm_guest_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_pv_drivers_version(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_pv_drivers_version(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -271,7 +269,7 @@ namespace XenAPI
         [Deprecated("XenServer 7.0")]
         public static bool get_PV_drivers_up_to_date(Session session, string _vm_guest_metrics)
         {
-            return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_up_to_date(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
+            return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_up_to_date(session.uuid, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -282,7 +280,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_memory(Session session, string _vm_guest_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_memory(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_memory(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -293,7 +291,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_disks(Session session, string _vm_guest_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_disks(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_disks(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -304,7 +302,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_networks(Session session, string _vm_guest_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_networks(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_networks(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -315,7 +313,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_other(Session session, string _vm_guest_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -326,7 +324,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static DateTime get_last_updated(Session session, string _vm_guest_metrics)
         {
-            return session.proxy.vm_guest_metrics_get_last_updated(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
+            return session.proxy.vm_guest_metrics_get_last_updated(session.uuid, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -337,7 +335,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vm_guest_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other_config(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other_config(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -348,7 +346,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static bool get_live(Session session, string _vm_guest_metrics)
         {
-            return (bool)session.proxy.vm_guest_metrics_get_live(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
+            return (bool)session.proxy.vm_guest_metrics_get_live(session.uuid, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -359,7 +357,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static tristate_type get_can_use_hotplug_vbd(Session session, string _vm_guest_metrics)
         {
-            return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vbd(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vbd(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -370,7 +368,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static tristate_type get_can_use_hotplug_vif(Session session, string _vm_guest_metrics)
         {
-            return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vif(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse());
+            return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vif(session.uuid, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -381,7 +379,7 @@ namespace XenAPI
         /// <param name="_vm_guest_metrics">The opaque_ref of the given vm_guest_metrics</param>
         public static bool get_PV_drivers_detected(Session session, string _vm_guest_metrics)
         {
-            return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_detected(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "").parse();
+            return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_detected(session.uuid, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -393,7 +391,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vm_guest_metrics, Dictionary<string, string> _other_config)
         {
-            session.proxy.vm_guest_metrics_set_other_config(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.vm_guest_metrics_set_other_config(session.uuid, _vm_guest_metrics ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -406,7 +404,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vm_guest_metrics, string _key, string _value)
         {
-            session.proxy.vm_guest_metrics_add_to_other_config(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vm_guest_metrics_add_to_other_config(session.uuid, _vm_guest_metrics ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -418,7 +416,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vm_guest_metrics, string _key)
         {
-            session.proxy.vm_guest_metrics_remove_from_other_config(session.uuid, (_vm_guest_metrics != null) ? _vm_guest_metrics : "", (_key != null) ? _key : "").parse();
+            session.proxy.vm_guest_metrics_remove_from_other_config(session.uuid, _vm_guest_metrics ?? "", _key ?? "").parse();
         }
 
         /// <summary>

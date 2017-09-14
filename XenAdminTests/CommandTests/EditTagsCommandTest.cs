@@ -129,7 +129,7 @@ namespace XenAdminTests.CommandTests
 
         private IEnumerable<SelectedItemCollection> GetMultipleSelections()
         {
-            yield return new SelectedItemCollection(GetAllXenObjects<VM>(v => v.is_a_real_vm).ConvertAll(v => new SelectedItem(v)));
+            yield return new SelectedItemCollection(GetAllXenObjects<VM>(v => v.is_a_real_vm()).ConvertAll(v => new SelectedItem(v)));
         }
     }
 }

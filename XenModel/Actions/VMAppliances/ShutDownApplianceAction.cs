@@ -53,10 +53,10 @@ namespace XenAdmin.Actions
 
 		protected override void Run()
 		{
-            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN, m_appliance.Name);
+            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN, m_appliance.Name());
             if (m_appliance.allowed_operations.Contains(vm_appliance_operation.shutdown))
                 VM_appliance.shutdown(Session, m_appliance.opaque_ref);
-			Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN_COMPLETED, m_appliance.Name);
+			Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN_COMPLETED, m_appliance.Name());
 		}
 	}
 
@@ -78,10 +78,10 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN, m_appliance.Name);
+            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN, m_appliance.Name());
             if (m_appliance.allowed_operations.Contains(vm_appliance_operation.hard_shutdown))
                 VM_appliance.hard_shutdown(Session, m_appliance.opaque_ref);
-            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN_COMPLETED, m_appliance.Name);
+            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN_COMPLETED, m_appliance.Name());
         }
     }
 
@@ -103,10 +103,10 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN, m_appliance.Name);
+            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN, m_appliance.Name());
             if (m_appliance.allowed_operations.Contains(vm_appliance_operation.clean_shutdown))
                 VM_appliance.clean_shutdown(Session, m_appliance.opaque_ref);
-            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN_COMPLETED, m_appliance.Name);
+            Description = string.Format(Messages.VM_APPLIANCE_SHUTTING_DOWN_COMPLETED, m_appliance.Name());
         }
     }
 }

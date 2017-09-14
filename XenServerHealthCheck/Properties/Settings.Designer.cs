@@ -179,5 +179,18 @@ namespace XenServerHealthCheck.Properties {
                 this["ProxyAuthenticationMethod"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string XenCenterMetadata {
+            get {
+                return ((string)(this["XenCenterMetadata"]));
+            }
+            set {
+                this["XenCenterMetadata"] = value;
+            }
+        }
     }
 }

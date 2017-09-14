@@ -97,7 +97,7 @@ namespace XenAdminTests.PluginTests
         [Test]
         public void TestIPAddressOfShutdownVM()
         {
-            IXenObject shutdownVM = GetAnyVM(v => v.is_a_real_vm && v.power_state == vm_power_state.Halted);
+            IXenObject shutdownVM = GetAnyVM(v => v.is_a_real_vm() && v.power_state == vm_power_state.Halted);
 
             List<Uri> urls = Placeholders.SubstituteUri(@"http://{$ip_address}/hello_there", shutdownVM);
 

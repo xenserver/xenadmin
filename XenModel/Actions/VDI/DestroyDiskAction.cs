@@ -45,7 +45,7 @@ namespace XenAdmin.Actions
         private VDI Disk;
 
         public DestroyDiskAction(VDI disk)
-            : base(disk.Connection, string.Format(Messages.ACTION_DISK_DELETING_TITLE, disk.Name, disk.Connection.Resolve<SR>(disk.SR).NameWithoutHost), false)
+            : base(disk.Connection, string.Format(Messages.ACTION_DISK_DELETING_TITLE, disk.Name(), disk.Connection.Resolve<SR>(disk.SR).NameWithoutHost()), false)
         {
             Disk = disk;
             Disk.Locked = true;

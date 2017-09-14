@@ -32,14 +32,6 @@
 
 set -ex
 
-#==============================================================
-#Micro version override - please keep at the top of the script
-#==============================================================
-#Set and uncomment this to override the 3rd value of the product number 
-#normally fetched from branding
-#
-#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
-
 SET_ENV_FILE="/cygdrive/c/env.sh"
 if [ -f ${SET_ENV_FILE} ]; then
    . ${SET_ENV_FILE}

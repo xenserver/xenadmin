@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(SR sr)
         {
-            return sr != null && sr.SupportsTrim && sr.GetFirstAttachedStorageHost() != null;
+            return sr != null && sr.SupportsTrim() && sr.GetFirstAttachedStorageHost() != null;
         }
 
         public override string MenuText
@@ -89,7 +89,7 @@ namespace XenAdmin.Commands
         protected override string GetCantExecuteReasonCore(SelectedItem item)
         {
             SR sr = item.XenObject as SR;
-            if (sr != null && !sr.SupportsTrim)
+            if (sr != null && !sr.SupportsTrim())
             {
                 return Messages.TOOLTIP_SR_TRIM_UNSUPPORTED;
             }
@@ -106,7 +106,7 @@ namespace XenAdmin.Commands
             get
             {
                 var selection = GetSelection();
-                var allUnsuported = selection.Count > 1 && selection.Select(item => item.XenObject as SR).All(sr => sr != null && !sr.SupportsTrim);
+                var allUnsuported = selection.Count > 1 && selection.Select(item => item.XenObject as SR).All(sr => sr != null && !sr.SupportsTrim());
                 return allUnsuported ? Messages.TOOLTIP_SR_TRIM_UNSUPPORTED_MULTIPLE : base.DisabledToolTipText;
             }
         }

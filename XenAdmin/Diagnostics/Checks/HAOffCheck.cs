@@ -48,7 +48,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunCheck()
         {
-            if (!Host.IsLive)
+            if (!Host.IsLive())
                 return new HostNotLiveWarning(this, Host);
 
             Pool pool = Helpers.GetPoolOfOne(Host.Connection);
@@ -75,7 +75,7 @@ namespace XenAdmin.Diagnostics.Checks
             get
             {
                 var pool = Helpers.GetPool(Host.Connection);
-                return string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, pool != null ? pool.Name : Host.Name, Description);
+                return string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, pool != null ? pool.Name() : Host.Name(), Description);
             }
         }
     }

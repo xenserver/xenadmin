@@ -42,7 +42,7 @@ namespace XenAdmin.Dialogs.WarningDialogs
         public RemoveCrashDumpsWarningDialog(Host host)
         {
             InitializeComponent();
-            label1.Text = string.Format(Messages.REMOVE_CRASHDUMP_WARNING, host.Name.Ellipsise(30));
+            label1.Text = string.Format(Messages.REMOVE_CRASHDUMP_WARNING, host.Name().Ellipsise(30));
         }
 
         private void button3_Click(object sender, EventArgs e)

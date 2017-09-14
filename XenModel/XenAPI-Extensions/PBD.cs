@@ -146,7 +146,7 @@ namespace XenAPI
             {
                 Session session = pbd.Connection.DuplicateSession();
 
-                log.DebugFormat("Waiting for PBDs {0} to become plugged", pbd.Name);
+                log.DebugFormat("Waiting for PBDs {0} to become plugged", pbd.Name());
                 // Wait 2 min for PBD to become plugged
                 if (WaitForPlug(session, pbd.opaque_ref))
                     continue;
@@ -155,12 +155,12 @@ namespace XenAPI
                 // fail, but at least we'll get a better error message.
                 try
                 {
-                    log.DebugFormat("Plugging PBD {0}", pbd.Name);
+                    log.DebugFormat("Plugging PBD {0}", pbd.Name());
                     plug(session, pbd.opaque_ref);
                 }
                 catch (Exception e)
                 {
-                    log.Debug(string.Format("Error plugging PBD {0}", pbd.Name), e);
+                    log.Debug(string.Format("Error plugging PBD {0}", pbd.Name()), e);
 
                     if (plugMode != PlugMode.NONCHALANT)
                         throw;
@@ -193,23 +193,18 @@ namespace XenAPI
             return result;
         }
 
-        public bool MultipathActive
+        public bool MultipathActive()
         {
-            get
-            {
-                return BoolKey(other_config, "multipathed");
-            }
+
+            return BoolKey(other_config, "multipathed");
         }
 
         /// <summary>
         /// The number of iSCSI sessions in use, as advertised by the SR backend, or -1 if the value is missing.
         /// </summary>
-        public int ISCSISessions
+        public int ISCSISessions()
         {
-            get
-            {
-                return IntKey(other_config, "iscsi_sessions", -1);
-            }
+            return IntKey(other_config, "iscsi_sessions", -1);
         }
 
         private static readonly Regex multipathCountRegex = new Regex(@"\[(\d+)L?,\s(\d+)L?");
@@ -229,20 +224,19 @@ namespace XenAPI
         /// <summary>
         /// The status of the PBD as a friendly string (unplugged, host down, connected)
         /// </summary>
-        public string StatusString
+        public string StatusString()
         {
-            get
-            {
-                Host h = Connection.Resolve(host);
-                if ((!currently_attached) || (h == null))
-                {
-                    return Messages.REPAIR_SR_DIALOG_UNPLUGGED;
-                }
-                else if (!h.IsLive)
-                    return Messages.HOST_NOT_LIVE;
-                else
-                    return Messages.CONNECTED;
-            }
+            if (!currently_attached)
+                return Messages.REPAIR_SR_DIALOG_UNPLUGGED;
+
+            Host h = Connection.Resolve(host);
+            if (h == null)
+                return Messages.REPAIR_SR_DIALOG_UNPLUGGED;
+
+            if (!h.IsLive())
+                return Messages.HOST_NOT_LIVE;
+
+            return Messages.CONNECTED;
         }
 
         public StorageLinkCredentials GetStorageLinkCredentials()

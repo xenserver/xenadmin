@@ -226,13 +226,14 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
 
                         foreach (Host host in connection.Cache.Hosts)
                         {
+                            bool isHostLive = host.IsLive();
                             HostCustomTreeNode childnode = new HostCustomTreeNode(true)
                                                                {
                                                                    Text = Helpers.GetName(host),
                                                                    Tag = host,
                                                                    HostOrPoolUuid = host.uuid,
-                                                                   Enabled = host.IsLive,
-                                                                   Description = host.IsLive ? "" : Messages.HOST_NOT_LIVE,
+                                                                   Enabled = isHostLive,
+                                                                   Description = isHostLive ? "" : Messages.HOST_NOT_LIVE,
                                                                    Image = Images.GetImage16For(host)
                                                                };
 
@@ -250,8 +251,9 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                         Host master = Helpers.GetMaster(connection);
                         if (master != null)
                         {
-                            node.Enabled = master.IsLive;
-                            node.Description = master.IsLive ? "" : Messages.HOST_NOT_LIVE;
+                            bool isMasterLive = master.IsLive();
+                            node.Enabled = isMasterLive;
+                            node.Description = isMasterLive ? "" : Messages.HOST_NOT_LIVE;
                             node.Image = Images.GetImage16For(master);
 
                             RegisterHostEvents(master);

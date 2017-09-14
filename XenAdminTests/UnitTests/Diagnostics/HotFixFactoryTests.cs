@@ -80,7 +80,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).UUID,
                             "Dundee UUID lookup from enum");
 
-            Assert.AreEqual("1ac61687-8b65-43e6-957f-50602fb79572",
+            Assert.AreEqual("b8d21409-adb7-44a5-a7ff-a78ed97162a5",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Ely).UUID,
                             "Ely UUID lookup from enum");
         }
@@ -111,7 +111,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
         public void TestPlatformVersionNumbersFalconOrGreaterGiveNulls(string platformVersion)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
-            host.Setup(h => h.PlatformVersion).Returns(platformVersion);
+            host.Setup(h => h.PlatformVersion()).Returns(platformVersion);
             Assert.IsNull(factory.Hotfix(host.Object));
         }
 
@@ -125,7 +125,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
         public bool TestIsHotfixRequiredBasedOnPlatformVersion(string version)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id);
-            host.Setup(h => h.PlatformVersion).Returns(version);
+            host.Setup(h => h.PlatformVersion()).Returns(version);
             return factory.IsHotfixRequired(host.Object);
         }
     }
