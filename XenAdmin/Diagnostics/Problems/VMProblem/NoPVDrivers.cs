@@ -53,7 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         public override string Description
         {
-            get { return String.Format(Messages.UPDATES_WIZARD_NO_TOOLS,_vm.Name); }
+            get { return String.Format(Messages.UPDATES_WIZARD_NO_TOOLS,_vm.Name()); }
         }
 
         public override string HelpMessage

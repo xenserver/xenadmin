@@ -41,9 +41,9 @@ namespace XenAPI
             return name_label;
         }
 
-        public override string Name
+        public override string Name()
         {
-            get { return name_label; }
+            return name_label;
         }
 
         public PVS_cache_storage PvsCacheStorage(Host host)
@@ -55,22 +55,19 @@ namespace XenAPI
                 pvsCacheStorage.site.opaque_ref == opaque_ref && pvsCacheStorage.host.opaque_ref == host.opaque_ref);
         }
 
-        public string NameWithWarning
+        public string NameWithWarning()
         {
-            get
+            if (!IsCacheConfigured())
             {
-                if (!IsCacheConfigured())
-                {
-                    return string.Format(Messages.PVS_CACHE_INCOMPLETE_CONFIGURATION, Name);
-                }
-
-                if (!IsStorageConfigured())
-                {
-                    return string.Format(Messages.PVS_CACHE_STORAGE_NOT_CONFIGURED, Name);
-                }
-
-                return Name;
+                return string.Format(Messages.PVS_CACHE_INCOMPLETE_CONFIGURATION, Name());
             }
+
+            if (!IsStorageConfigured())
+            {
+                return string.Format(Messages.PVS_CACHE_STORAGE_NOT_CONFIGURED, Name());
+            }
+
+            return Name();
         }
 
         private bool IsCacheConfigured()

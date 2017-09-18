@@ -2018,60 +2018,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Convert SR &apos;{0}&apos; on &apos;{1}&apos;.
-        /// </summary>
-        public static string ACTION_SR_CONVERT {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Convert SR &apos;{0}&apos; to thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_CONVERT_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERT_TO_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converted SR.
-        /// </summary>
-        public static string ACTION_SR_CONVERTED {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converted SR &apos;{0}&apos; to thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_CONVERTED_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERTED_TO_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converting SR.
-        /// </summary>
-        public static string ACTION_SR_CONVERTING {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converting SR &apos;{0}&apos; to thin provisioning.
-        /// </summary>
-        public static string ACTION_SR_CONVERTING_TO_THIN {
-            get {
-                return ResourceManager.GetString("ACTION_SR_CONVERTING_TO_THIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Created SR.
         /// </summary>
         public static string ACTION_SR_CREATE_SUCCESSFUL {
@@ -16936,6 +16882,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HealthCheck.
+        /// </summary>
+        public static string HEALTH_CHECK {
+            get {
+                return ResourceManager.GetString("HEALTH_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authentication with [Citrix] Insight Services failed. See the application log files for more information..
         /// </summary>
         public static string HEALTH_CHECK_AUTHENTICATION_FAILED {
@@ -21113,15 +21068,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Convert SR....
-        /// </summary>
-        public static string MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU {
-            get {
-                return ResourceManager.GetString("MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &amp;Start.
         /// </summary>
         public static string MAINWINDOW_START {
@@ -23417,24 +23363,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this wizard to define a snapshot schedule that will create automatic scheduled snapshot jobs for your VMs..
-        /// </summary>
-        public static string NEW_VMSS_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("NEW_VMSS_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To begin, enter a name for the schedule and a description (optional), then click Next..
-        /// </summary>
-        public static string NEW_VMSS_PAGE_TEXT_MORE {
-            get {
-                return ResourceManager.GetString("NEW_VMSS_PAGE_TEXT_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You need to shutdown and then restart the VM before it can access the new disk..
         /// </summary>
         public static string NEWDISKWIZARD_MESSAGE {
@@ -25003,15 +24931,6 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The SR &apos;{0}&apos; is over committed. There is only {1} of free space and the new VM requires {2} ({3} initially)..
-        /// </summary>
-        public static string NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN {
-            get {
-                return ResourceManager.GetString("NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN", resourceCulture);
             }
         }
         
@@ -26874,7 +26793,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [XenServer] Updates and Supplemental Packs (*.{0}, *.iso)|*.{0};*.iso.
+        ///   Looks up a localized string similar to [XenServer] Updates and Supplemental Packs (*.{0}, *.iso,*.zip)|*.{0};*.iso;*.zip.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT {
             get {
@@ -29710,15 +29629,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Taking snapshots.
-        /// </summary>
-        public static string RUNNING_SNAPSHOTS {
-            get {
-                return ResourceManager.GetString("RUNNING_SNAPSHOTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Saturday.
         /// </summary>
         public static string SATURDAY_LONG {
@@ -30836,7 +30746,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshot schedule.
+        ///   Looks up a localized string similar to Snapshot Schedule.
         /// </summary>
         public static string SNAPSHOT_FREQUENCY {
             get {
@@ -31357,33 +31267,6 @@ namespace XenAdmin {
         public static string SR_SIZE_USED {
             get {
                 return ResourceManager.GetString("SR_SIZE_USED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fully provisioned.
-        /// </summary>
-        public static string SR_THICK_PROVISIONING {
-            get {
-                return ResourceManager.GetString("SR_THICK_PROVISIONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thinly provisioned.
-        /// </summary>
-        public static string SR_THIN_PROVISIONING {
-            get {
-                return ResourceManager.GetString("SR_THIN_PROVISIONING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Thinly provisioned ({0}% committed).
-        /// </summary>
-        public static string SR_THIN_PROVISIONING_COMMITTED {
-            get {
-                return ResourceManager.GetString("SR_THIN_PROVISIONING_COMMITTED", resourceCulture);
             }
         }
         
@@ -33651,6 +33534,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extract {0}.
+        /// </summary>
+        public static string UPDATES_WIZARD_EXTRACT_ACTION_TITLE {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_EXTRACT_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to find the update file &apos;{0}&apos;.
         ///
         ///Check your settings and try again..
@@ -33865,6 +33757,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_NOTVALID_EXTENSION {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_NOTVALID_EXTENSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No valid update file found in {0}.
+        /// </summary>
+        public static string UPDATES_WIZARD_NOTVALID_ZIPFILE {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_NOTVALID_ZIPFILE", resourceCulture);
             }
         }
         
@@ -36201,24 +36102,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a snapshot schedule for your VMs..
-        /// </summary>
-        public static string VMSS_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_DIALOG_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Snapshot schedules.
-        /// </summary>
-        public static string VMSS_DIALOG_TITLE {
-            get {
-                return ResourceManager.GetString("VMSS_DIALOG_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Send &amp;email notifications about snapshot schedule job alerts.
         /// </summary>
         public static string VMSS_EMAIL_CHECKBOX_TEXT {
@@ -36291,15 +36174,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Schedule na&amp;me:.
-        /// </summary>
-        public static string VMSS_NAME_FIELD_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_NAME_FIELD_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to What do you want to call this schedule?.
         /// </summary>
         public static string VMSS_NAME_TITLE {
@@ -36354,7 +36228,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs in the snapshot schedule.
+        ///   Looks up a localized string similar to Virtual Machines.
         /// </summary>
         public static string VMSS_VMS {
             get {

@@ -79,7 +79,7 @@ namespace XenAdmin.Wizards.GenericPages
 
             public bool Enabled
             {
-                get { return (ulong)stringWrapper.item.FreeSpace > spaceRequired; }
+                get { return (ulong)stringWrapper.item.FreeSpace() > spaceRequired; }
             }
 
             public override string ToString()
@@ -415,9 +415,9 @@ namespace XenAdmin.Wizards.GenericPages
 					else
 						m_spaceRequirements.Add(uuid, storageDetail.RequiredSpace);
 
-					if ((ulong)selectedItem.item.FreeSpace <= m_spaceRequirements[uuid])
+					if ((ulong)selectedItem.item.FreeSpace() <= m_spaceRequirements[uuid])
 					{
-						error = String.Format(Messages.IMPORT_SELECT_STORAGE_PAGE_ERROR_SPACE_LIMITATION, selectedItem.item.Name);
+						error = String.Format(Messages.IMPORT_SELECT_STORAGE_PAGE_ERROR_SPACE_LIMITATION, selectedItem.item.Name());
 						return false;
 					}
 				}
@@ -435,7 +435,7 @@ namespace XenAdmin.Wizards.GenericPages
 					continue;
 
                 var sr = TargetConnection.Resolve(pbd.SR);
-                if (sr == null || sr.IsDetached || !sr.Show(XenAdminConfigManager.Provider.ShowHiddenVMs))
+                if (sr == null || sr.IsDetached() || !sr.Show(XenAdminConfigManager.Provider.ShowHiddenVMs))
 					continue;
 
                 if ((sr.content_type.ToLower() == "iso" || sr.type.ToLower() == "iso") && !resource.SRTypeInvalid)
@@ -445,7 +445,7 @@ namespace XenAdmin.Wizards.GenericPages
 
 				bool srOnHost = pbd.host != null && pbd.host.Equals(xenRef);
 
-				if ((sr.shared || srOnHost) && (ulong)sr.FreeSpace > resource.RequiredDiskCapacity && SrIsSuitable(sr))
+				if ((sr.shared || srOnHost) && (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity && SrIsSuitable(sr))
 				{
 					var count = (from ToStringWrapper<SR> existingItem in cb.Items
 					             where existingItem.item.opaque_ref == sr.opaque_ref
@@ -496,8 +496,8 @@ namespace XenAdmin.Wizards.GenericPages
 
 		private string GetSRDropDownItemDisplayString(SR sr)
 		{
-			var availableSpace = Util.DiskSizeString(sr.FreeSpace);
-			return String.Format("{0}, {1} {2}", sr.Name, availableSpace, Messages.AVAILABLE);
+			var availableSpace = Util.DiskSizeString(sr.FreeSpace());
+			return String.Format("{0}, {1} {2}", sr.Name(), availableSpace, Messages.AVAILABLE);
 		}
 
 		#endregion

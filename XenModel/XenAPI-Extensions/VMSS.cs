@@ -31,50 +31,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin;
 using XenAdmin.Alerts;
 using XenAdmin.Core;
-using XenAdmin.Network;
-using XenAdmin.Actions;
+
 
 namespace XenAPI
 {
     public partial class VMSS 
     {
-        public bool is_running
+        public DateTime GetNextRunTime(DateTime serverLocalTime)
         {
-            get { return false; }
-        }
-
-        public List<PolicyAlert> PolicyAlerts
-        {
-            get { return Alerts; }
-        }
-
-        public DateTime GetNextRunTime()
-        {
-            var time = Host.get_server_localtime(Connection.Session, Helpers.GetMaster(Connection).opaque_ref);
-
             if (frequency == vmss_frequency.hourly)
             {
-                return GetHourlyDate(time, Convert.ToInt32(backup_schedule_min));
+                return GetHourlyDate(serverLocalTime, BackupScheduleMin());
             }
             if (frequency == vmss_frequency.daily)
             {
-
-                var hour = Convert.ToInt32(backup_schedule_hour);
-                var min = Convert.ToInt32(backup_schedule_min);
-                return GetDailyDate(time, min, hour);
-
+                return GetDailyDate(serverLocalTime, BackupScheduleMin(), BackupScheduleHour());
             }
             if (frequency == vmss_frequency.weekly)
             {
-                var hour = Convert.ToInt32(backup_schedule_hour);
-                var min = Convert.ToInt32(backup_schedule_min);
-                return GetWeeklyDate(time, hour, min, new List<DayOfWeek>(DaysOfWeekBackup));
+                return GetWeeklyDate(serverLocalTime, BackupScheduleHour(), BackupScheduleMin(), new List<DayOfWeek>(DaysOfWeekBackup()));
             }
             return new DateTime();
-
         }
 
         public static DateTime GetDailyDate(DateTime time, int min, int hour)
@@ -128,12 +109,9 @@ namespace XenAPI
             return (new DateTime(time.Year, time.Month, time.Day, hour, min, 0)).AddDays(daysOfDifference);
         }
 
-        public IEnumerable<DayOfWeek> DaysOfWeekBackup
+        public IEnumerable<DayOfWeek> DaysOfWeekBackup()
         {
-            get
-            {
-                return GetDaysFromDictionary(schedule);
-            }
+            return GetDaysFromDictionary(schedule);
         }
 
         private static IEnumerable<DayOfWeek> GetDaysFromDictionary(Dictionary<string, string> dictionary)
@@ -157,77 +135,43 @@ namespace XenAPI
             }
         }
         
-        public static string TryGetKey(Dictionary<string, string> dict, string key)
+        public override string Name()
         {
-            string r;
-            if (dict.TryGetValue(key, out r))
-            {
-                return r;
-            }
-            return "";
+            return name_label;
         }
 
-        public override string Name
+        public override string Description()
         {
-            get { return name_label; }
+            return name_description;
         }
 
-        public override string Description
+        public int BackupScheduleMin()
         {
-            get { return name_description; }
+            string outStr;
+            int result;
+            if (schedule.TryGetValue("min", out outStr) && int.TryParse(outStr, out result))
+                return result;
+
+            return 0;
         }
 
-        public string backup_schedule_min
+        public int BackupScheduleHour()
         {
-            get
-            {
-                return TryGetKey(schedule, "min");
-            }
+            string outStr;
+            int result;
+            if (schedule.TryGetValue("hour", out outStr) && int.TryParse(outStr, out result))
+                return result;
+
+            return 0;
         }
 
-        public string backup_schedule_hour
+        public string BackupScheduleDays()
         {
-            get
-            {
+            string outStr;
+            if (schedule.TryGetValue("days", out outStr))
+                return outStr;
 
-                return TryGetKey(schedule, "hour");
-            }
-        }
-
-        public string backup_schedule_days
-        {
-            get
-            {
-
-                return TryGetKey(schedule, "days");
-            }
-        }
-        private List<PolicyAlert> _alerts = new List<PolicyAlert>();
-
-        public List<PolicyAlert> Alerts
-        {
-            get
-            {
-                return _alerts;
-            }
-            set { _alerts = value; }
-        }
-
-        public string LastResult
-        {
-            get
-            {
-                if (_alerts.Count > 0)
-                {
-                    var listRecentAlerts = new List<PolicyAlert>(_alerts);
-                    listRecentAlerts.Sort((x, y) => y.Time.CompareTo(x.Time));
-                    if (listRecentAlerts[0].Type == "info")
-                        return Messages.VMSS_SUCCEEDED;
-
-                    return Messages.FAILED;
-                }
-                return Messages.NOT_YET_RUN;
-            }
+            return string.Empty;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly VDI vdi;
 
         public InstallSupplementalPackPlanAction(Host host, VDI vdi)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, vdi.Name, host.Name))
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, vdi.Name(), host.Name()))
         {
             this.host = host;
             this.vdi = vdi;

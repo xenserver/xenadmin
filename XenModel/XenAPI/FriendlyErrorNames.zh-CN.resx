@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
@@ -140,6 +140,12 @@
   </data>
   <data name="AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
     <value>此服务器无法与域服务器联系以启用外部身份验证。请检查您的设置是否正确以及是否存在到服务器的路由。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>主机无法启用外部身份验证。</value>
+  </data>
+  <data name="AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
+    <value>主机无法启用外部身份验证。</value>
   </data>
   <data name="AUTH_ENABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>无法启用外部身份验证，AD 服务器的权限遭拒绝。</value>
@@ -454,10 +460,10 @@
     <value>无法执行备份，因为此服务器处于恢复模式</value>
   </data>
   <data name="HOST_IN_USE" xml:space="preserve">
-    <value>无法完成该操作，因为服务器正在使用。</value>
+    <value>无法完成此操作，因为服务器正在使用。</value>
   </data>
   <data name="HOST_IS_LIVE" xml:space="preserve">
-    <value>无法完成该操作，因为服务器仍处于活动状态。</value>
+    <value>无法完成此操作，因为服务器仍处于活动状态。</value>
   </data>
   <data name="HOST_IS_SLAVE" xml:space="preserve">
     <value>您正联系的服务器为从属服务器</value>
@@ -493,7 +499,7 @@
     <value>无法连接服务器</value>
   </data>
   <data name="HOST_POWER_ON_MODE_DISABLED" xml:space="preserve">
-    <value>无法完成该操作，因为已禁用服务器开机模式。</value>
+    <value>无法完成此操作，因为已禁用服务器开机模式。</value>
   </data>
   <data name="HOST_STILL_BOOTING" xml:space="preserve">
     <value>服务器仍在启动中。</value>
@@ -733,7 +739,7 @@
     <value>无法应用更新。有关更多详细信息，请查看日志。</value>
   </data>
   <data name="PATCH_APPLY_FAILED_BACKUP_FILES_EXIST" xml:space="preserve">
-    <value>应用修补程序失败: 存在应用修补程序过程中创建的备份文件。请先删除这些备份文件，然后再次应用修补程序。</value>
+    <value>应用修补程序失败: 应用修补程序过程中创建了备份文件。请先删除这些备份文件，然后再次应用修补程序。</value>
   </data>
   <data name="PATCH_IS_APPLIED" xml:space="preserve">
     <value>指定的修补程序已应用，无法销毁。</value>
@@ -813,6 +819,9 @@
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>您尝试在另一个 VLAN 之上创建 VLAN - 请改用基础物理 PIF/绑定</value>
   </data>
+  <data name="PIF_NOT_PRESENT" xml:space="preserve">
+    <value>此主机在给定的网络中没有 PIF。</value>
+  </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>此接口上存在隧道时，无法继续执行操作。</value>
   </data>
@@ -835,7 +844,7 @@
     <value>已禁用外部身份验证，出现以下错误: 由于权限遭拒绝，未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
   </data>
   <data name="POOL_AUTH_DISABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
-    <value>已禁用外部身份验证，错误消息如下: 由于账号无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
+    <value>已禁用外部身份验证，错误消息如下: 由于帐户无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
   </data>
   <data name="POOL_AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>已禁用外部身份验证，错误消息如下: 由于凭据无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
@@ -849,6 +858,9 @@
   <data name="POOL_AUTH_ENABLE_FAILED_DUPLICATE_HOSTNAME" xml:space="preserve">
     <value>无法启用外部身份验证，检测到重复的主机名。</value>
   </data>
+  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>无法启用外部身份验证，提供的帐户无效。</value>
+  </data>
   <data name="POOL_AUTH_ENABLE_FAILED_INVALID_OU" xml:space="preserve">
     <value>池无法启用外部身份验证。</value>
   </data>
@@ -861,26 +873,29 @@
   <data name="POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>无法启用外部身份验证，所提供的凭据无效。</value>
   </data>
-  <data name="POOL_AUTH_ENABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
-    <value>Failed to enable external authentication, the supplied account was invalid.</value>
-  </data>
   <data name="POOL_JOINING_EXTERNAL_AUTH_MISMATCH" xml:space="preserve">
     <value>加入池的服务器的外部身份验证配置必须与池自身的外部身份验证配置匹配。</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
-    <value>The host joining the pool must not have any bonds.</value>
+    <value>加入池的主机不得具有任何绑定。</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS" xml:space="preserve">
-    <value>The host joining the pool must not have any non-management vlans.</value>
+    <value>加入池的主机不得具有任何非管理 VLAN。</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_TUNNELS" xml:space="preserve">
-    <value>The host joining the pool must not have any tunnels.</value>
+    <value>加入池的主机不得具有任何通道。</value>
   </data>
   <data name="POOL_JOINING_HOST_MANAGEMENT_VLAN_DOES_NOT_MATCH" xml:space="preserve">
-    <value>The host joining the pool must have the same management vlan.</value>
+    <value>加入池的主机不得具有相同的管理 VLAN。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_PHYSICAL_MANAGEMENT_NIC" xml:space="preserve">
     <value>加入池的服务器必须有物理管理 NIC (就是说，管理 NIC 不能位于 VLAN 或绑定的 PIF 中)。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_API_VERSION" xml:space="preserve">
+    <value>加入池的主机的 API 版本必须与池主服务器相同。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_DB_SCHEMA" xml:space="preserve">
+    <value>加入池的主机的数据库架构必须与池主服务器相同。</value>
   </data>
   <data name="POOL_JOINING_HOST_MUST_HAVE_SAME_PRODUCT_VERSION" xml:space="preserve">
     <value>加入池的服务器必须与池的主服务器具有相同的产品版本。</value>
@@ -1373,6 +1388,15 @@
   <data name="SR_BACKEND_FAILURE_456" xml:space="preserve">
     <value>无法将空光盘驱动器连接到 VM。</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_457" xml:space="preserve">
+    <value>无法激活更改块跟踪功能。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_458" xml:space="preserve">
+    <value>无法停用更改块跟踪功能。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_459" xml:space="preserve">
+    <value>更改块跟踪日志处于不一致的状态。</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI 不可用</value>
   </data>
@@ -1551,7 +1575,7 @@
     <value>SR 未连接 PBD</value>
   </data>
   <data name="SR_HAS_PBD" xml:space="preserve">
-    <value>SR {0} 仍通过 PBD 与服务器连接。无法将其销毁。</value>
+    <value>SR {0} 仍通过 PBD 与服务器连接。不能将其销毁。</value>
   </data>
   <data name="SR_INDESTRUCTIBLE" xml:space="preserve">
     <value>无法销毁 SR，因为其中设置了“indestructible”标志。</value>
@@ -1604,6 +1628,9 @@
   <data name="TASK_CANCELLED" xml:space="preserve">
     <value>以异步方式取消了请求。</value>
   </data>
+  <data name="TLS_CONNECTION_FAILED" xml:space="preserve">
+    <value>在指定的地址和端口上无法使用 TLS 联系其他主机</value>
+  </data>
   <data name="TOO_BUSY" xml:space="preserve">
     <value>请求遭拒绝，因为服务器太忙。</value>
   </data>
@@ -1632,7 +1659,7 @@
     <value>上载的更新已存在</value>
   </data>
   <data name="UPDATE_APPLY_FAILED" xml:space="preserve">
-    <value>无法应用更新。有关更多详细信息，请查看日志。</value>
+    <value>无法应用更新。请查看日志，了解更多详细信息。</value>
   </data>
   <data name="UPDATE_IS_APPLIED" xml:space="preserve">
     <value>指定的更新已应用，不能销毁。</value>
@@ -1831,6 +1858,9 @@
   </data>
   <data name="VM_HAS_CHECKPOINT" xml:space="preserve">
     <value>您尝试迁移的 VM 具有一个检查点。</value>
+  </data>
+  <data name="VM_HAS_NO_SUSPEND_VDI" xml:space="preserve">
+    <value>无法恢复 VM，因为该 VM 没有挂起的 VDI</value>
   </data>
   <data name="VM_HAS_PCI_ATTACHED" xml:space="preserve">
     <value>无法执行该操作，因为 VM 传递了一个或多个 PCI 设备。</value>

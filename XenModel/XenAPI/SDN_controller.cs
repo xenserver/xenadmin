@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -87,9 +85,9 @@ namespace XenAPI
         public Proxy_SDN_controller ToProxy()
         {
             Proxy_SDN_controller result_ = new Proxy_SDN_controller();
-            result_.uuid = (uuid != null) ? uuid : "";
+            result_.uuid = uuid ?? "";
             result_.protocol = sdn_controller_protocol_helper.ToString(protocol);
-            result_.address = (address != null) ? address : "";
+            result_.address = address ?? "";
             result_.port = port.ToString();
             return result_;
         }
@@ -139,7 +137,7 @@ namespace XenAPI
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
         public static SDN_controller get_record(Session session, string _sdn_controller)
         {
-            return new SDN_controller((Proxy_SDN_controller)session.proxy.sdn_controller_get_record(session.uuid, (_sdn_controller != null) ? _sdn_controller : "").parse());
+            return new SDN_controller((Proxy_SDN_controller)session.proxy.sdn_controller_get_record(session.uuid, _sdn_controller ?? "").parse());
         }
 
         /// <summary>
@@ -150,7 +148,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<SDN_controller> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<SDN_controller>.Create(session.proxy.sdn_controller_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<SDN_controller>.Create(session.proxy.sdn_controller_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -161,7 +159,7 @@ namespace XenAPI
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
         public static string get_uuid(Session session, string _sdn_controller)
         {
-            return (string)session.proxy.sdn_controller_get_uuid(session.uuid, (_sdn_controller != null) ? _sdn_controller : "").parse();
+            return (string)session.proxy.sdn_controller_get_uuid(session.uuid, _sdn_controller ?? "").parse();
         }
 
         /// <summary>
@@ -172,7 +170,7 @@ namespace XenAPI
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
         public static sdn_controller_protocol get_protocol(Session session, string _sdn_controller)
         {
-            return (sdn_controller_protocol)Helper.EnumParseDefault(typeof(sdn_controller_protocol), (string)session.proxy.sdn_controller_get_protocol(session.uuid, (_sdn_controller != null) ? _sdn_controller : "").parse());
+            return (sdn_controller_protocol)Helper.EnumParseDefault(typeof(sdn_controller_protocol), (string)session.proxy.sdn_controller_get_protocol(session.uuid, _sdn_controller ?? "").parse());
         }
 
         /// <summary>
@@ -183,7 +181,7 @@ namespace XenAPI
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
         public static string get_address(Session session, string _sdn_controller)
         {
-            return (string)session.proxy.sdn_controller_get_address(session.uuid, (_sdn_controller != null) ? _sdn_controller : "").parse();
+            return (string)session.proxy.sdn_controller_get_address(session.uuid, _sdn_controller ?? "").parse();
         }
 
         /// <summary>
@@ -194,7 +192,7 @@ namespace XenAPI
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
         public static long get_port(Session session, string _sdn_controller)
         {
-            return long.Parse((string)session.proxy.sdn_controller_get_port(session.uuid, (_sdn_controller != null) ? _sdn_controller : "").parse());
+            return long.Parse((string)session.proxy.sdn_controller_get_port(session.uuid, _sdn_controller ?? "").parse());
         }
 
         /// <summary>
@@ -207,7 +205,7 @@ namespace XenAPI
         /// <param name="_port">TCP port of the controller.</param>
         public static XenRef<SDN_controller> introduce(Session session, sdn_controller_protocol _protocol, string _address, long _port)
         {
-            return XenRef<SDN_controller>.Create(session.proxy.sdn_controller_introduce(session.uuid, sdn_controller_protocol_helper.ToString(_protocol), (_address != null) ? _address : "", _port.ToString()).parse());
+            return XenRef<SDN_controller>.Create(session.proxy.sdn_controller_introduce(session.uuid, sdn_controller_protocol_helper.ToString(_protocol), _address ?? "", _port.ToString()).parse());
         }
 
         /// <summary>
@@ -220,7 +218,7 @@ namespace XenAPI
         /// <param name="_port">TCP port of the controller.</param>
         public static XenRef<Task> async_introduce(Session session, sdn_controller_protocol _protocol, string _address, long _port)
         {
-            return XenRef<Task>.Create(session.proxy.async_sdn_controller_introduce(session.uuid, sdn_controller_protocol_helper.ToString(_protocol), (_address != null) ? _address : "", _port.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_sdn_controller_introduce(session.uuid, sdn_controller_protocol_helper.ToString(_protocol), _address ?? "", _port.ToString()).parse());
         }
 
         /// <summary>
@@ -231,7 +229,7 @@ namespace XenAPI
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
         public static void forget(Session session, string _sdn_controller)
         {
-            session.proxy.sdn_controller_forget(session.uuid, (_sdn_controller != null) ? _sdn_controller : "").parse();
+            session.proxy.sdn_controller_forget(session.uuid, _sdn_controller ?? "").parse();
         }
 
         /// <summary>
@@ -242,7 +240,7 @@ namespace XenAPI
         /// <param name="_sdn_controller">The opaque_ref of the given sdn_controller</param>
         public static XenRef<Task> async_forget(Session session, string _sdn_controller)
         {
-            return XenRef<Task>.Create(session.proxy.async_sdn_controller_forget(session.uuid, (_sdn_controller != null) ? _sdn_controller : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_sdn_controller_forget(session.uuid, _sdn_controller ?? "").parse());
         }
 
         /// <summary>

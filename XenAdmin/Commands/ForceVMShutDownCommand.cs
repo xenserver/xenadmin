@@ -146,7 +146,7 @@ namespace XenAdmin.Commands
                     {
                         hasRunningTasks = true;
                     }
-                    if (vm.HAIsProtected)
+                    if (vm.HAIsProtected())
                     {
                         isHAProtected = true;
                     }
@@ -177,7 +177,7 @@ namespace XenAdmin.Commands
                             msg = Messages.CONFIRM_FORCESHUTDOWN_VM_NO_CANCEL_TASKS;
                         }
                     }
-                    return string.Format(msg, ((VM)selection[0].XenObject).Name);
+                    return string.Format(msg, ((VM)selection[0].XenObject).Name());
                 }
 
                 if (hasRunningTasks)

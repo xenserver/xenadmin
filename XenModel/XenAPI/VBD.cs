@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -159,13 +157,13 @@ namespace XenAPI
         public Proxy_VBD ToProxy()
         {
             Proxy_VBD result_ = new Proxy_VBD();
-            result_.uuid = (uuid != null) ? uuid : "";
+            result_.uuid = uuid ?? "";
             result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
             result_.current_operations = Maps.convert_to_proxy_string_vbd_operations(current_operations);
-            result_.VM = (VM != null) ? VM : "";
-            result_.VDI = (VDI != null) ? VDI : "";
-            result_.device = (device != null) ? device : "";
-            result_.userdevice = (userdevice != null) ? userdevice : "";
+            result_.VM = VM ?? "";
+            result_.VDI = VDI ?? "";
+            result_.device = device ?? "";
+            result_.userdevice = userdevice ?? "";
             result_.bootable = bootable;
             result_.mode = vbd_mode_helper.ToString(mode);
             result_.type = vbd_type_helper.ToString(type);
@@ -175,12 +173,12 @@ namespace XenAPI
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.currently_attached = currently_attached;
             result_.status_code = status_code.ToString();
-            result_.status_detail = (status_detail != null) ? status_detail : "";
+            result_.status_detail = status_detail ?? "";
             result_.runtime_properties = Maps.convert_to_proxy_string_string(runtime_properties);
-            result_.qos_algorithm_type = (qos_algorithm_type != null) ? qos_algorithm_type : "";
+            result_.qos_algorithm_type = qos_algorithm_type ?? "";
             result_.qos_algorithm_params = Maps.convert_to_proxy_string_string(qos_algorithm_params);
             result_.qos_supported_algorithms = qos_supported_algorithms;
-            result_.metrics = (metrics != null) ? metrics : "";
+            result_.metrics = metrics ?? "";
             return result_;
         }
 
@@ -300,7 +298,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static VBD get_record(Session session, string _vbd)
         {
-            return new VBD((Proxy_VBD)session.proxy.vbd_get_record(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return new VBD((Proxy_VBD)session.proxy.vbd_get_record(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -311,7 +309,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VBD> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VBD>.Create(session.proxy.vbd_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<VBD>.Create(session.proxy.vbd_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -344,7 +342,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void destroy(Session session, string _vbd)
         {
-            session.proxy.vbd_destroy(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            session.proxy.vbd_destroy(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -355,7 +353,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_destroy(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_destroy(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_destroy(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -366,7 +364,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_uuid(Session session, string _vbd)
         {
-            return (string)session.proxy.vbd_get_uuid(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (string)session.proxy.vbd_get_uuid(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -377,7 +375,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static List<vbd_operations> get_allowed_operations(Session session, string _vbd)
         {
-            return Helper.StringArrayToEnumList<vbd_operations>(session.proxy.vbd_get_allowed_operations(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return Helper.StringArrayToEnumList<vbd_operations>(session.proxy.vbd_get_allowed_operations(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -388,7 +386,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, vbd_operations> get_current_operations(Session session, string _vbd)
         {
-            return Maps.convert_from_proxy_string_vbd_operations(session.proxy.vbd_get_current_operations(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return Maps.convert_from_proxy_string_vbd_operations(session.proxy.vbd_get_current_operations(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -399,7 +397,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<VM> get_VM(Session session, string _vbd)
         {
-            return XenRef<VM>.Create(session.proxy.vbd_get_vm(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<VM>.Create(session.proxy.vbd_get_vm(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -410,7 +408,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<VDI> get_VDI(Session session, string _vbd)
         {
-            return XenRef<VDI>.Create(session.proxy.vbd_get_vdi(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<VDI>.Create(session.proxy.vbd_get_vdi(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -421,7 +419,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_device(Session session, string _vbd)
         {
-            return (string)session.proxy.vbd_get_device(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (string)session.proxy.vbd_get_device(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -432,7 +430,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_userdevice(Session session, string _vbd)
         {
-            return (string)session.proxy.vbd_get_userdevice(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (string)session.proxy.vbd_get_userdevice(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -443,7 +441,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_bootable(Session session, string _vbd)
         {
-            return (bool)session.proxy.vbd_get_bootable(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (bool)session.proxy.vbd_get_bootable(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -454,7 +452,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static vbd_mode get_mode(Session session, string _vbd)
         {
-            return (vbd_mode)Helper.EnumParseDefault(typeof(vbd_mode), (string)session.proxy.vbd_get_mode(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return (vbd_mode)Helper.EnumParseDefault(typeof(vbd_mode), (string)session.proxy.vbd_get_mode(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -465,7 +463,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static vbd_type get_type(Session session, string _vbd)
         {
-            return (vbd_type)Helper.EnumParseDefault(typeof(vbd_type), (string)session.proxy.vbd_get_type(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return (vbd_type)Helper.EnumParseDefault(typeof(vbd_type), (string)session.proxy.vbd_get_type(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -476,7 +474,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_unpluggable(Session session, string _vbd)
         {
-            return (bool)session.proxy.vbd_get_unpluggable(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (bool)session.proxy.vbd_get_unpluggable(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -487,7 +485,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_storage_lock(Session session, string _vbd)
         {
-            return (bool)session.proxy.vbd_get_storage_lock(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (bool)session.proxy.vbd_get_storage_lock(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -498,7 +496,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_empty(Session session, string _vbd)
         {
-            return (bool)session.proxy.vbd_get_empty(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (bool)session.proxy.vbd_get_empty(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -509,7 +507,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vbd)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_other_config(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_other_config(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -520,7 +518,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static bool get_currently_attached(Session session, string _vbd)
         {
-            return (bool)session.proxy.vbd_get_currently_attached(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (bool)session.proxy.vbd_get_currently_attached(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -531,7 +529,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static long get_status_code(Session session, string _vbd)
         {
-            return long.Parse((string)session.proxy.vbd_get_status_code(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return long.Parse((string)session.proxy.vbd_get_status_code(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -542,7 +540,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_status_detail(Session session, string _vbd)
         {
-            return (string)session.proxy.vbd_get_status_detail(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (string)session.proxy.vbd_get_status_detail(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -553,7 +551,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_runtime_properties(Session session, string _vbd)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_runtime_properties(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_runtime_properties(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -564,7 +562,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string get_qos_algorithm_type(Session session, string _vbd)
         {
-            return (string)session.proxy.vbd_get_qos_algorithm_type(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (string)session.proxy.vbd_get_qos_algorithm_type(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -575,7 +573,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static Dictionary<string, string> get_qos_algorithm_params(Session session, string _vbd)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_qos_algorithm_params(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.vbd_get_qos_algorithm_params(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -586,7 +584,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static string[] get_qos_supported_algorithms(Session session, string _vbd)
         {
-            return (string [])session.proxy.vbd_get_qos_supported_algorithms(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            return (string [])session.proxy.vbd_get_qos_supported_algorithms(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -597,7 +595,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<VBD_metrics> get_metrics(Session session, string _vbd)
         {
-            return XenRef<VBD_metrics>.Create(session.proxy.vbd_get_metrics(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<VBD_metrics>.Create(session.proxy.vbd_get_metrics(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -609,7 +607,7 @@ namespace XenAPI
         /// <param name="_userdevice">New value to set</param>
         public static void set_userdevice(Session session, string _vbd, string _userdevice)
         {
-            session.proxy.vbd_set_userdevice(session.uuid, (_vbd != null) ? _vbd : "", (_userdevice != null) ? _userdevice : "").parse();
+            session.proxy.vbd_set_userdevice(session.uuid, _vbd ?? "", _userdevice ?? "").parse();
         }
 
         /// <summary>
@@ -621,7 +619,7 @@ namespace XenAPI
         /// <param name="_bootable">New value to set</param>
         public static void set_bootable(Session session, string _vbd, bool _bootable)
         {
-            session.proxy.vbd_set_bootable(session.uuid, (_vbd != null) ? _vbd : "", _bootable).parse();
+            session.proxy.vbd_set_bootable(session.uuid, _vbd ?? "", _bootable).parse();
         }
 
         /// <summary>
@@ -633,7 +631,7 @@ namespace XenAPI
         /// <param name="_mode">New value to set</param>
         public static void set_mode(Session session, string _vbd, vbd_mode _mode)
         {
-            session.proxy.vbd_set_mode(session.uuid, (_vbd != null) ? _vbd : "", vbd_mode_helper.ToString(_mode)).parse();
+            session.proxy.vbd_set_mode(session.uuid, _vbd ?? "", vbd_mode_helper.ToString(_mode)).parse();
         }
 
         /// <summary>
@@ -645,7 +643,7 @@ namespace XenAPI
         /// <param name="_type">New value to set</param>
         public static void set_type(Session session, string _vbd, vbd_type _type)
         {
-            session.proxy.vbd_set_type(session.uuid, (_vbd != null) ? _vbd : "", vbd_type_helper.ToString(_type)).parse();
+            session.proxy.vbd_set_type(session.uuid, _vbd ?? "", vbd_type_helper.ToString(_type)).parse();
         }
 
         /// <summary>
@@ -657,7 +655,7 @@ namespace XenAPI
         /// <param name="_unpluggable">New value to set</param>
         public static void set_unpluggable(Session session, string _vbd, bool _unpluggable)
         {
-            session.proxy.vbd_set_unpluggable(session.uuid, (_vbd != null) ? _vbd : "", _unpluggable).parse();
+            session.proxy.vbd_set_unpluggable(session.uuid, _vbd ?? "", _unpluggable).parse();
         }
 
         /// <summary>
@@ -669,7 +667,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vbd, Dictionary<string, string> _other_config)
         {
-            session.proxy.vbd_set_other_config(session.uuid, (_vbd != null) ? _vbd : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.vbd_set_other_config(session.uuid, _vbd ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -682,7 +680,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vbd, string _key, string _value)
         {
-            session.proxy.vbd_add_to_other_config(session.uuid, (_vbd != null) ? _vbd : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vbd_add_to_other_config(session.uuid, _vbd ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -694,7 +692,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vbd, string _key)
         {
-            session.proxy.vbd_remove_from_other_config(session.uuid, (_vbd != null) ? _vbd : "", (_key != null) ? _key : "").parse();
+            session.proxy.vbd_remove_from_other_config(session.uuid, _vbd ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -706,7 +704,7 @@ namespace XenAPI
         /// <param name="_algorithm_type">New value to set</param>
         public static void set_qos_algorithm_type(Session session, string _vbd, string _algorithm_type)
         {
-            session.proxy.vbd_set_qos_algorithm_type(session.uuid, (_vbd != null) ? _vbd : "", (_algorithm_type != null) ? _algorithm_type : "").parse();
+            session.proxy.vbd_set_qos_algorithm_type(session.uuid, _vbd ?? "", _algorithm_type ?? "").parse();
         }
 
         /// <summary>
@@ -718,7 +716,7 @@ namespace XenAPI
         /// <param name="_algorithm_params">New value to set</param>
         public static void set_qos_algorithm_params(Session session, string _vbd, Dictionary<string, string> _algorithm_params)
         {
-            session.proxy.vbd_set_qos_algorithm_params(session.uuid, (_vbd != null) ? _vbd : "", Maps.convert_to_proxy_string_string(_algorithm_params)).parse();
+            session.proxy.vbd_set_qos_algorithm_params(session.uuid, _vbd ?? "", Maps.convert_to_proxy_string_string(_algorithm_params)).parse();
         }
 
         /// <summary>
@@ -731,7 +729,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_qos_algorithm_params(Session session, string _vbd, string _key, string _value)
         {
-            session.proxy.vbd_add_to_qos_algorithm_params(session.uuid, (_vbd != null) ? _vbd : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.vbd_add_to_qos_algorithm_params(session.uuid, _vbd ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -743,7 +741,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_qos_algorithm_params(Session session, string _vbd, string _key)
         {
-            session.proxy.vbd_remove_from_qos_algorithm_params(session.uuid, (_vbd != null) ? _vbd : "", (_key != null) ? _key : "").parse();
+            session.proxy.vbd_remove_from_qos_algorithm_params(session.uuid, _vbd ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -754,7 +752,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void eject(Session session, string _vbd)
         {
-            session.proxy.vbd_eject(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            session.proxy.vbd_eject(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -765,7 +763,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_eject(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_eject(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_eject(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -777,7 +775,7 @@ namespace XenAPI
         /// <param name="_vdi">The new VDI to 'insert'</param>
         public static void insert(Session session, string _vbd, string _vdi)
         {
-            session.proxy.vbd_insert(session.uuid, (_vbd != null) ? _vbd : "", (_vdi != null) ? _vdi : "").parse();
+            session.proxy.vbd_insert(session.uuid, _vbd ?? "", _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -789,7 +787,7 @@ namespace XenAPI
         /// <param name="_vdi">The new VDI to 'insert'</param>
         public static XenRef<Task> async_insert(Session session, string _vbd, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_insert(session.uuid, (_vbd != null) ? _vbd : "", (_vdi != null) ? _vdi : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_insert(session.uuid, _vbd ?? "", _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -800,7 +798,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void plug(Session session, string _vbd)
         {
-            session.proxy.vbd_plug(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            session.proxy.vbd_plug(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -811,7 +809,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_plug(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_plug(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_plug(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -822,7 +820,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void unplug(Session session, string _vbd)
         {
-            session.proxy.vbd_unplug(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            session.proxy.vbd_unplug(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -833,7 +831,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_unplug(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_unplug(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_unplug(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -844,7 +842,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void unplug_force(Session session, string _vbd)
         {
-            session.proxy.vbd_unplug_force(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            session.proxy.vbd_unplug_force(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -855,7 +853,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_unplug_force(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_unplug_force(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_unplug_force(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>
@@ -866,7 +864,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static void assert_attachable(Session session, string _vbd)
         {
-            session.proxy.vbd_assert_attachable(session.uuid, (_vbd != null) ? _vbd : "").parse();
+            session.proxy.vbd_assert_attachable(session.uuid, _vbd ?? "").parse();
         }
 
         /// <summary>
@@ -877,7 +875,7 @@ namespace XenAPI
         /// <param name="_vbd">The opaque_ref of the given vbd</param>
         public static XenRef<Task> async_assert_attachable(Session session, string _vbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_vbd_assert_attachable(session.uuid, (_vbd != null) ? _vbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vbd_assert_attachable(session.uuid, _vbd ?? "").parse());
         }
 
         /// <summary>

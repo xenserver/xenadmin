@@ -84,7 +84,7 @@ namespace XenAdmin.Controls.Ballooning
             DrawSegment(g, xen_memory - dom0_memory, bytesPerPixel, Messages.MEMORY_XEN, null, BallooningColors.HostShinyBar_Xen, ref left);
 
             // A bar for Dom0 memory
-            DrawSegment(g, dom0_memory, bytesPerPixel, string.Format(Messages.CONTROL_DOM_ON_HOST, host.Name), null, BallooningColors.HostShinyBar_ControlDomain, ref left);
+            DrawSegment(g, dom0_memory, bytesPerPixel, string.Format(Messages.CONTROL_DOM_ON_HOST, host.Name()), null, BallooningColors.HostShinyBar_ControlDomain, ref left);
 
             // A bar for each VM
             int i = 0;
@@ -97,7 +97,7 @@ namespace XenAdmin.Controls.Ballooning
                 VM_metrics metrics = vm_metrics[vm];
                 if (metrics != null)
                 {
-                    DrawSegment(g, metrics.memory_actual, bytesPerPixel, vm.Name, vm,
+                    DrawSegment(g, metrics.memory_actual, bytesPerPixel, vm.Name(), vm,
                         BallooningColors.HostShinyBar_VMs[i++ % BallooningColors.HostShinyBar_VMs.Length],
                         ref left);
                 }
@@ -123,7 +123,7 @@ namespace XenAdmin.Controls.Ballooning
             string bytesString = Util.MemorySizeStringSuitableUnits(mem, false);
             string caption = name + "\n" + bytesString;
             string toolTip = name + "\n" + string.Format(Messages.CURRENT_MEMORY_USAGE, Util.MemorySizeStringSuitableUnits(mem, true));
-            if (vm != null && vm.has_ballooning)
+            if (vm != null && vm.has_ballooning())
             {
                 if (vm.memory_dynamic_max == vm.memory_static_max)
                     toolTip += string.Format("\n{0}: {1}\n{2}: {3}",

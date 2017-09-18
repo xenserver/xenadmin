@@ -134,7 +134,7 @@ namespace XenAdmin.Commands
             else if (xenObject is SR)
             {
                 SR sr = (SR)xenObject;
-                _hostAncestor = sr.Home;
+                _hostAncestor = sr.Home();
                 _poolAncestor = Helpers.GetPool(_connection);
             }
             else if (xenObject is VM)

@@ -65,83 +65,61 @@ namespace XenAPI
 
         public override string ToString()
         {
-            return Name;
+            return Name();
         }
 
         /// <returns>A friendly name for the SR.</returns>
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return I18N("name_label", name_label, true);
-            }
+            return I18N("name_label", name_label, true);
         }
 
         /// <summary>
         /// Get the given SR's home, i.e. the host under which we are going to display it.  May return null, if this SR should live
         /// at the pool level.
         /// </summary>
-        public Host Home
+        public Host Home()
         {
-            get
-            {
-                if (shared || PBDs.Count != 1)
-                    return null;
+            if (shared || PBDs.Count != 1)
+                return null;
 
-                PBD pbd = Connection.Resolve(PBDs[0]);
-                if (pbd == null)
-                    return null;
+            PBD pbd = Connection.Resolve(PBDs[0]);
+            if (pbd == null)
+                return null;
 
-                return Connection.Resolve(pbd.host);
-            }
+            return Connection.Resolve(pbd.host);
         }
 
-
-        public string NameWithoutHost
+        public string NameWithoutHost()
         {
-            get
-            {
-                return I18N("name_label", name_label, false);
-            }
+            return I18N("name_label", name_label, false);
         }
 
         /// <returns>A friendly description for the SR.</returns>
-        public override string Description
+        public override string Description()
         {
-            get
-            {
-                return I18N("name_description", name_description, true);
-            }
+            return I18N("name_description", name_description, true);
         }
 
-        public bool Physical
+        public bool Physical()
         {
-            get
-            {
-                SRTypes type = GetSRType(false);
-                return type == SRTypes.local || (type == SRTypes.udev && SMConfigType == SM_Config_Type_CD);
-            }
+            SRTypes typ = GetSRType(false);
+            return typ == SRTypes.local || (typ == SRTypes.udev && SMConfigType() == SM_Config_Type_CD);
         }
 
-        public string SMConfigType
+        public string SMConfigType()
         {
-            get { return Get(sm_config, "type"); }
+            return Get(sm_config, "type");
         }
 
-        public bool IsToolsSR
+        public bool IsToolsSR()
         {
-            get
-            {
-                return name_label == SR.XenServer_Tools_Label || is_tools_sr;
-            }
+            return name_label == SR.XenServer_Tools_Label || is_tools_sr;
         }
 
-        public string FriendlyTypeName
+        public string FriendlyTypeName()
         {
-            get
-            {
-                return getFriendlyTypeName(GetSRType(false));
-            }
+            return getFriendlyTypeName(GetSRType(false));
         }
 
         /// <summary>
@@ -168,9 +146,9 @@ namespace XenAPI
             }
         }
 
-        public string ConfigType
+        public string ConfigType()
         {
-            get { return Get(sm_config, "type"); }
+           return Get(sm_config, "type");
         }
 
         private string I18N(string field_name, string field_value, bool with_host)
@@ -209,9 +187,8 @@ namespace XenAPI
             if (Connection == null)
                 return null;
             Host host = GetStorageHost();
-            return host == null ? null : host.Name;
+            return host == null ? null : host.Name();
         }
-
 
 
         /// <returns>The host to which the given SR belongs, or null if the SR is shared or completely disconnected.</returns>
@@ -244,49 +221,40 @@ namespace XenAPI
 
         public bool IsDetachable()
         {
-            return !IsDetached && !HasRunningVMs() && CanCreateWithXenCenter;
+            return !IsDetached() && !HasRunningVMs() && CanCreateWithXenCenter();
         }
 
         /// <summary>
         /// Can create with XC, or is citrix storage link gateway. Special case alert!
         /// </summary>
-        public bool CanCreateWithXenCenter
+        public bool CanCreateWithXenCenter()
         {
-            get
-            {
-                SRTypes type = GetSRType(false);
-                return type == SRTypes.iso
-                    || type == SRTypes.lvmoiscsi
-                    || type == SRTypes.nfs
-                    || type == SRTypes.equal
-                    || type == SRTypes.netapp
-                    || type == SRTypes.lvmohba
-                    || type == SRTypes.cslg
-                    || type == SRTypes.smb
-                    || type == SRTypes.lvmofcoe;
-            }
+            SRTypes typ = GetSRType(false);
+            return typ == SRTypes.iso
+                   || typ == SRTypes.lvmoiscsi
+                   || typ == SRTypes.nfs
+                   || typ == SRTypes.equal
+                   || typ == SRTypes.netapp
+                   || typ == SRTypes.lvmohba
+                   || typ == SRTypes.cslg
+                   || typ == SRTypes.smb
+                   || typ == SRTypes.lvmofcoe;
         }
 
-        public bool IsLocalSR
+        public bool IsLocalSR()
         {
-            get
-            {
-                SRTypes type = GetSRType(false);
-                return type == SRTypes.local
-                    || type == SRTypes.ext
-                    || type == SRTypes.lvm
-                    || type == SRTypes.udev
-                    || type == SRTypes.egeneracd
-                    || type == SRTypes.dummy;
-            }
+            SRTypes typ = GetSRType(false);
+            return typ == SRTypes.local
+                   || typ == SRTypes.ext
+                   || typ == SRTypes.lvm
+                   || typ == SRTypes.udev
+                   || typ == SRTypes.egeneracd
+                   || typ == SRTypes.dummy;
         }
 
-        public bool ShowForgetWarning
+        public bool ShowForgetWarning()
         {
-            get
-            {
-                return GetSRType(false) != SRTypes.iso;
-            }
+            return GetSRType(false) != SRTypes.iso;
         }
 
         /// <summary>
@@ -362,21 +330,15 @@ namespace XenAPI
         /// <summary>
         /// True if there is less than 0.5GB free. Always false for dummy and ebs SRs.
         /// </summary>
-        public bool IsFull
+        public bool IsFull()
         {
-            get
-            {
-                SRTypes t = GetSRType(false);
-                return t != SRTypes.dummy && t != SRTypes.ebs && FreeSpace < XenAdmin.Util.BINARY_GIGA / 2;
-            }
+            SRTypes t = GetSRType(false);
+            return t != SRTypes.dummy && t != SRTypes.ebs && FreeSpace() < XenAdmin.Util.BINARY_GIGA/2;
         }
 
-        public virtual long FreeSpace
+        public virtual long FreeSpace()
         {
-            get
-            {
-                return physical_size - physical_utilisation;
-            }
+            return physical_size - physical_utilisation;
         }
 
         public virtual bool ShowInVDISRList(bool showHiddenVMs)
@@ -387,24 +349,18 @@ namespace XenAPI
 
         }
 
-        public bool IsDetached
+        public bool IsDetached()
         {
-            get
-            {
-                // SR is detached when it has no PBDs or when all its PBDs are unplugged
-                return !HasPBDs || !AnyPBDAttached();
-            }
+            // SR is detached when it has no PBDs or when all its PBDs are unplugged
+            return !HasPBDs() || !AnyPBDAttached();
         }
 
-        public bool HasPBDs
+        public bool HasPBDs()
         {
-            get
-            {
-                // CA-15188: Show SRs with no PBDs on Orlando, as pool-eject bug has been fixed.
-                // SRs are detached if they have no PBDs
+            // CA-15188: Show SRs with no PBDs on Orlando, as pool-eject bug has been fixed.
+            // SRs are detached if they have no PBDs
 
-                return PBDs.Count > 0;
-            }
+            return PBDs.Count > 0;
         }
 
         public override bool Show(bool showHiddenVMs)
@@ -429,15 +385,12 @@ namespace XenAPI
 			if (introduced_by != null && introduced_by.opaque_ref != Helper.NullOpaqueRef)
 				return false;
 
-            return !IsHidden;
+            return !IsHidden();
         }
 
-        public override bool IsHidden
+        public override bool IsHidden()
         {
-            get
-            {
-                return BoolKey(other_config, HIDE_FROM_XENCENTER);
-            }
+            return BoolKey(other_config, HIDE_FROM_XENCENTER);
         }
 
         /// <summary>
@@ -492,7 +445,7 @@ namespace XenAPI
         {
             System.Diagnostics.Trace.Assert(Connection != null, "Connection must not be null");
 
-            return SupportsVdiCreate() && !IsBroken(false) && !IsFull;
+            return SupportsVdiCreate() && !IsBroken(false) && !IsFull();
         }
 
 
@@ -639,28 +592,25 @@ namespace XenAPI
         /// <summary>
         /// New Lun Per VDI mode (cf. LunPerVDI method) using the hba encapsulating type
         /// </summary>
-        public virtual bool HBALunPerVDI
+        public virtual bool HBALunPerVDI()
         {
-            get { return GetSRType(true) == SRTypes.rawhba; }
+            return GetSRType(true) == SRTypes.rawhba;
         }
 
         /// <summary>
         /// Legacy LunPerVDI mode - for old servers that this was set up on
         /// This is no longer an option (2012) for newer servers but we need to keep this
         /// </summary>
-        public bool LunPerVDI
+        public bool LunPerVDI()
         {
-            get
-            {
-                // Look for the mapping from scsi id -> vdi uuid 
-                // in sm-config.  
+            // Look for the mapping from scsi id -> vdi uuid 
+            // in sm-config.  
 
-                foreach (String key in sm_config.Keys)
-                    if (key.Contains("LUNperVDI") || key.StartsWith("scsi-"))
-                        return true;
+            foreach (String key in sm_config.Keys)
+                if (key.Contains("LUNperVDI") || key.StartsWith("scsi-"))
+                    return true;
 
-                return false;
-            }
+            return false;
         }
 
         private const String MPATH = "mpath";
@@ -675,7 +625,7 @@ namespace XenAPI
 
             foreach (PBD pbd in Connection.ResolveAll(PBDs))
             {
-                if (!pbd.MultipathActive)
+                if (!pbd.MultipathActive())
                     continue;
 
                 foreach (KeyValuePair<String, String> kvp in pbd.other_config)
@@ -738,7 +688,7 @@ namespace XenAPI
 
             foreach (PBD pbd in Connection.ResolveAll(PBDs))
             {
-                if (!pbd.MultipathActive)
+                if (!pbd.MultipathActive())
                     continue;
 
                 String status = String.Empty;
@@ -763,57 +713,49 @@ namespace XenAPI
             return result;
         }
 
-        public bool MultipathAOK
+        public bool MultipathAOK()
         {
-            get
-            {
-                if (!MultipathCapable)
-                    return true;
-
-                if (LunPerVDI)
-                {
-                    Dictionary<VM, Dictionary<VDI, String>>
-                        multipathStatus = GetMultiPathStatusLunPerVDI();
-
-                    foreach (VM vm in multipathStatus.Keys)
-                        foreach (VDI vdi in multipathStatus[vm].Keys)
-                            if (!CheckMultipathString(multipathStatus[vm][vdi]))
-                                return false;
-                }
-                else
-                {
-                    Dictionary<PBD, String> multipathStatus =
-                        GetMultiPathStatusLunPerSR();
-
-                    foreach (PBD pbd in multipathStatus.Keys)
-                        if (pbd.MultipathActive && !CheckMultipathString(multipathStatus[pbd]))
-                            return false;
-                }
-
+            if (!MultipathCapable())
                 return true;
-            }
-        }
 
-        public override string NameWithLocation
-        {
-            get
+            if (LunPerVDI())
             {
-                //return only the Name for local SRs
-                if (Connection != null && !shared)
-                {
-                    return Name;
-                }
+                Dictionary<VM, Dictionary<VDI, String>>
+                    multipathStatus = GetMultiPathStatusLunPerVDI();
 
-                return base.NameWithLocation;
+                foreach (VM vm in multipathStatus.Keys)
+                    foreach (VDI vdi in multipathStatus[vm].Keys)
+                        if (!CheckMultipathString(multipathStatus[vm][vdi]))
+                            return false;
             }
+            else
+            {
+                Dictionary<PBD, String> multipathStatus =
+                    GetMultiPathStatusLunPerSR();
+
+                foreach (PBD pbd in multipathStatus.Keys)
+                    if (pbd.MultipathActive() && !CheckMultipathString(multipathStatus[pbd]))
+                        return false;
+            }
+
+            return true;
         }
 
-        internal override string  LocationString
+        public override string NameWithLocation()
         {
-	        get
-	        { 
-		         return Home != null ? Home.LocationString : base.LocationString;
-	        }
+            //return only the Name for local SRs
+            if (Connection != null && !shared)
+            {
+                return Name();
+            }
+
+            return base.NameWithLocation();
+        }
+
+        internal override string LocationString()
+        {
+            var home = Home();
+            return home != null ? home.LocationString() : base.LocationString();
         }
 
         private bool CheckMultipathString(String status)
@@ -884,137 +826,84 @@ namespace XenAPI
             }
         }
 
-        //public bool TypeCIFS
-        //{
-        //    get
-        //    {
-        //        if (Connection == null || PBDs.Count == 0)
-        //            return false;
-        //        PBD pbd = Connection.Resolve<PBD>(PBDs[0]);
-        //        if (pbd == null)
-        //            return false;
-
-        //        return (pbd.device_config.ContainsKey("options") && pbd.device_config["options"].Contains("-t cifs"))
-        //            || (pbd.device_config.ContainsKey("type") && pbd.device_config["type"] == "cifs");
-        //    }
-        //}
-
-        public bool MultipathCapable
+        public bool MultipathCapable()
         {
-            get
-            {
-                return "true" == Get(sm_config, "multipathable");
-            }
+            return "true" == Get(sm_config, "multipathable");
         }
 
-        public string Target
+        public string Target()
         {
-            get
-            {
-                SR sr = Connection.Resolve(new XenRef<SR>(this.opaque_ref));
-                if (sr == null)
-                    return String.Empty;
-
-                foreach (PBD pbd in sr.Connection.ResolveAll(sr.PBDs))
-                {
-                    SRTypes type = sr.GetSRType(false);
-                    if ((type == SR.SRTypes.netapp || type == SR.SRTypes.lvmoiscsi || type == SR.SRTypes.equal) && pbd.device_config.ContainsKey("target")) // netapp or iscsi
-                    {
-                        return pbd.device_config["target"];
-                    }
-                    else if (type == SR.SRTypes.iso && pbd.device_config.ContainsKey("location")) // cifs or nfs iso
-                    {
-                        String target = Helpers.HostnameFromLocation(pbd.device_config["location"]); // has form //ip_address/path
-                        if (String.IsNullOrEmpty(target))
-                            continue;
-
-                        return target;
-                    }
-                    else if (type == SR.SRTypes.nfs && pbd.device_config.ContainsKey("server"))
-                    {
-                        return pbd.device_config["server"];
-                    }
-                }
-
+            SR sr = Connection.Resolve(new XenRef<SR>(this.opaque_ref));
+            if (sr == null)
                 return String.Empty;
-            }
-        }
 
-        public Icons GetIcon
-        {
-            get
+            foreach (PBD pbd in sr.Connection.ResolveAll(sr.PBDs))
             {
-                if (!HasPBDs || IsHidden)
+                SRTypes type = sr.GetSRType(false);
+                if ((type == SR.SRTypes.netapp || type == SR.SRTypes.lvmoiscsi || type == SR.SRTypes.equal) && pbd.device_config.ContainsKey("target")) // netapp or iscsi
                 {
-                    return Icons.StorageDisabled;
+                    return pbd.device_config["target"];
                 }
-                else if (IsDetached || IsBroken() || !MultipathAOK)
+                else if (type == SR.SRTypes.iso && pbd.device_config.ContainsKey("location")) // cifs or nfs iso
                 {
-                    return Icons.StorageBroken;
+                    String target = Helpers.HostnameFromLocation(pbd.device_config["location"]); // has form //ip_address/path
+                    if (String.IsNullOrEmpty(target))
+                        continue;
+
+                    return target;
                 }
-                else if (SR.IsDefaultSr(this))
+                else if (type == SR.SRTypes.nfs && pbd.device_config.ContainsKey("server"))
                 {
-                    return Icons.StorageDefault;
-                }
-                else
-                {
-                    return Icons.Storage;
+                    return pbd.device_config["server"];
                 }
             }
+
+            return String.Empty;
         }
 
         /// <summary>
         /// The amount of memory used as compared to the available and allocated amounts as a friendly string
         /// </summary>
-        public String SizeString
+        public String SizeString()
         {
-            get
-            {
-                return string.Format(Messages.SR_SIZE_USED,
-                    Util.DiskSizeString(physical_utilisation),
-                    Util.DiskSizeString(physical_size),
-                    Util.DiskSizeString(virtual_allocation));
-            }
+            return string.Format(Messages.SR_SIZE_USED,
+                Util.DiskSizeString(physical_utilisation),
+                Util.DiskSizeString(physical_size),
+                Util.DiskSizeString(virtual_allocation));
         }
 
         /// <summary>
         /// A friendly string indicating whether the sr is detached/broken/multipath failing/needs upgrade/ok
         /// </summary>
-        public String StatusString
+        public String StatusString()
         {
-            get
-            {
-                if (!HasPBDs)
-                    return Messages.DETACHED;
+            if (!HasPBDs())
+                return Messages.DETACHED;
 
-                if (IsDetached || IsBroken())
-                    return Messages.GENERAL_SR_STATE_BROKEN;
+            if (IsDetached() || IsBroken())
+                return Messages.GENERAL_SR_STATE_BROKEN;
 
-                if (!MultipathAOK)
-                    return Messages.GENERAL_MULTIPATH_FAILURE;
+            if (!MultipathAOK())
+                return Messages.GENERAL_MULTIPATH_FAILURE;
 
-                return Messages.GENERAL_STATE_OK;
-            }
+            return Messages.GENERAL_STATE_OK;
         }
 
         /// <summary>
         /// Returns true when there is a pbd containing adapterid else false
         /// </summary>
-        public bool CanRepairAfterUpgradeFromLegacySL
+        public bool CanRepairAfterUpgradeFromLegacySL()
         {
-            get
+            if (type == "cslg")
             {
-                if (type == "cslg")
+                var pbds = Connection.ResolveAll(PBDs);
+                if (pbds != null)
                 {
-                    var pbds = Connection.ResolveAll(PBDs);
-                    if (pbds != null)
-                    {
-                        return pbds.Any(pbd => pbd.device_config.ContainsKey("adapterid"));
-                    }
-                    return false;
+                    return pbds.Any(pbd => pbd.device_config.ContainsKey("adapterid"));
                 }
-                return true;
+                return false;
             }
+            return true;
         }
 
         /// <summary>
@@ -1048,31 +937,17 @@ namespace XenAPI
         /// Whether the underlying SR backend supports SR_TRIM
         /// </summary>
         /// <returns></returns>
-        public bool SupportsTrim
+        public bool SupportsTrim()
         {
-            get
-            {
-                System.Diagnostics.Trace.Assert(Connection != null, "Connection must not be null");
+            System.Diagnostics.Trace.Assert(Connection != null, "Connection must not be null");
 
-                SM sm = SM.GetByType(Connection, type);
-                return sm != null && sm.features != null && sm.features.ContainsKey("SR_TRIM");
-            }
+            SM sm = SM.GetByType(Connection, type);
+            return sm != null && sm.features != null && sm.features.ContainsKey("SR_TRIM");
         }
 
-        public bool IsThinProvisioned
+        public long PercentageCommitted()
         {
-            get
-            {
-                return false; // DISABLED THIN PROVISIONING this.sm_config != null && this.sm_config.ContainsKey("allocation") && this.sm_config["allocation"] == "xlvhd";
-            }
-        }
-
-        public long PercentageCommitted
-        {
-            get
-            {
-                return (long)Math.Round(virtual_allocation / (double)physical_size * 100.0);
-            }
+            return (long)Math.Round(virtual_allocation/(double)physical_size*100.0);
         }
 
         #region IEquatable<SR> Members

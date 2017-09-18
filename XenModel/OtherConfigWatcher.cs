@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using XenAdmin.Network;
 using XenAPI;
@@ -93,11 +94,12 @@ namespace XenAdmin
                 return;
 
             IXenConnection connection = e.Element as IXenConnection;
-            if (connection == null)
-                return;
 
             if (e.Action == CollectionChangeAction.Add)
             {
+                if (connection == null)
+                    return;
+
                 connection.Cache.RegisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
                 connection.Cache.RegisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
                 connection.Cache.RegisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
@@ -112,15 +114,32 @@ namespace XenAdmin
             }
             else if (e.Action == CollectionChangeAction.Remove)
             {
-                connection.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
-                connection.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
-                connection.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
-                connection.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
-                connection.Cache.DeregisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
-                connection.Cache.DeregisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
+                var range = new List<IXenConnection>();
+                if (connection != null)
+                {
+                    range.Add(connection);
+                }
+                else
+                {
+                    var r = e.Element as List<IXenConnection>;
+                    if (r != null)
+                        range = r;
+                    else
+                        return;
+                }
 
-                connection.XenObjectsUpdated -= connection_XenObjectsUpdated;
-                connection.ConnectionStateChanged -= connection_ConnectionStateChanged;
+                foreach (var con in range)
+                {
+                    con.Cache.DeregisterCollectionChanged<Pool>(PoolCollectionChangedWithInvoke);
+                    con.Cache.DeregisterCollectionChanged<Host>(HostCollectionChangedWithInvoke);
+                    con.Cache.DeregisterCollectionChanged<VM>(VMCollectionChangedWithInvoke);
+                    con.Cache.DeregisterCollectionChanged<SR>(SRCollectionChangedWithInvoke);
+                    con.Cache.DeregisterCollectionChanged<VDI>(VDICollectionChangedWithInvoke);
+                    con.Cache.DeregisterCollectionChanged<XenAPI.Network>(NetworkCollectionChangedWithInvoke);
+
+                    con.XenObjectsUpdated -= connection_XenObjectsUpdated;
+                    con.ConnectionStateChanged -= connection_ConnectionStateChanged;
+                }
             }
 
             MarkEventsReadyToFire(true);

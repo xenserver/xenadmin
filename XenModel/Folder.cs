@@ -186,12 +186,9 @@ namespace XenAdmin.Model
             return Parent.IsChildOf(target);
         }
 
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return name_label;
-            }
+            return name_label;
         }
     }
 }

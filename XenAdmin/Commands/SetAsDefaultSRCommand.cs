@@ -78,7 +78,7 @@ namespace XenAdmin.Commands
         private static bool CanExecute(SR sr)
         {
             return sr != null
-                    && sr.HasPBDs
+                    && sr.HasPBDs()
                     && !SR.IsDefaultSr(sr)
                     && sr.SupportsVdiCreate()
                     && (sr.shared || sr.Connection.Cache.HostCount <= 1)

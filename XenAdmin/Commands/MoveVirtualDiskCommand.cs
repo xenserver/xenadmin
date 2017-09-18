@@ -74,13 +74,13 @@ namespace XenAdmin.Commands
 
         private bool CanBeMoved(VDI vdi)
         {
-            if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType)
+            if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType())
                 return false;
             if (vdi.VBDs.Count != 0)
                 return false;
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
-            if (sr == null || sr.HBALunPerVDI)
+            if (sr == null || sr.HBALunPerVDI())
                 return false;
 
             return true;
@@ -96,9 +96,9 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_VDI_IS_SNAPSHOT;
             if (vdi.Locked)
                 return Messages.CANNOT_MOVE_VDI_IN_USE;
-            if (vdi.IsHaType)
+            if (vdi.IsHaType())
                 return Messages.CANNOT_MOVE_HA_VD;
-            if (vdi.IsMetadataForDR)
+            if (vdi.IsMetadataForDR())
                 return Messages.CANNOT_MOVE_DR_VD;
             if (vdi.VBDs.Count != 0)
                 return Messages.CANNOT_MOVE_VDI_WITH_VBDS;
@@ -107,7 +107,7 @@ namespace XenAdmin.Commands
             if (sr == null)
                 return base.GetCantExecuteReasonCore(item);
             
-            if (sr.HBALunPerVDI)
+            if (sr.HBALunPerVDI())
                 return Messages.UNSUPPORTED_SR_TYPE;
 
             return base.GetCantExecuteReasonCore(item);

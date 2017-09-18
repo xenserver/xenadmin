@@ -45,7 +45,7 @@ namespace XenAdmin.Actions
 
         public AddHostToPoolAction(Pool poolToJoin, Host joiningHost, Func<Host, AdUserAndPassword> getAdCredentials,
             Func<HostAbstractAction, Pool, long, long, bool> acceptNTolChanges, Action<List<LicenseFailure>, string> doOnLicensingFailure)
-            : base(joiningHost.Connection, string.Format(Messages.ADDING_SERVER_TO_POOL, joiningHost.Name, poolToJoin.Name),
+            : base(joiningHost.Connection, string.Format(Messages.ADDING_SERVER_TO_POOL, joiningHost.Name(), poolToJoin.Name()),
             getAdCredentials, acceptNTolChanges, doOnLicensingFailure)
         {
             this.Pool = poolToJoin;

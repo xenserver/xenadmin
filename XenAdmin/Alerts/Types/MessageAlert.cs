@@ -102,7 +102,8 @@ namespace XenAdmin.Alerts
             get
             {
                 // If you add something to this switch statement, be sure to add a corresponding entry to FriendlyNames.
-                switch (Message.Type)
+                var typ = Message.Type;
+                switch (typ)
                 {
                     case XenAPI.Message.MessageType.HA_POOL_DROP_IN_PLAN_EXISTS_FOR:
                     case XenAPI.Message.MessageType.HA_POOL_OVERCOMMITTED:
@@ -157,7 +158,7 @@ namespace XenAdmin.Alerts
                         {
                             Pool pool = Helpers.GetPoolOfOne(XenObject.Connection);
                             if (pool != null)
-                                return string.Format(FriendlyFormat(), Helpers.GetName(XenObject), pool.Name);
+                                return string.Format(FriendlyFormat(), Helpers.GetName(XenObject), pool.Name());
                         }
                         break;
                     
@@ -225,7 +226,7 @@ namespace XenAdmin.Alerts
                         var proxy = XenObject as PVS_proxy;
                         if (proxy != null)
                         {
-                            return string.Format(FriendlyFormat(), proxy.VM, proxy.Connection.Resolve(proxy.site));
+                            return string.Format(FriendlyFormat(), proxy.VM(), proxy.Connection.Resolve(proxy.site));
                         }
                         break;
 
@@ -236,7 +237,7 @@ namespace XenAdmin.Alerts
                     case Message.MessageType.VMSS_SNAPSHOT_SUCCEEDED:
                     case Message.MessageType.VMSS_SNAPSHOT_LOCK_FAILED:
                         VMSS vmss = Helpers.XenObjectFromMessage(Message) as VMSS;
-                        var policyAlertVMSS = new PolicyAlert(Message.priority, Message.name, Message.timestamp, Message.body, (vmss == null) ? "" : vmss.Name);
+                        var policyAlertVMSS = new PolicyAlert(Message.priority, Message.name, Message.timestamp, Message.body, (vmss == null) ? "" : vmss.Name());
                         return policyAlertVMSS.Text;
                 }
 
@@ -246,7 +247,7 @@ namespace XenAdmin.Alerts
 
         private string FriendlyFormat()
         {
-            return XenAPI.Message.FriendlyBody(Message.MessageTypeString);
+            return XenAPI.Message.FriendlyBody(Message.MessageTypeString());
         }
 
         private static readonly Regex extAuthRegex = new Regex(@"error=(.*)");
@@ -323,7 +324,7 @@ namespace XenAdmin.Alerts
         private string GetManagementBondName()
         {
             Bond bond = NetworkingHelper.GetMasterManagementBond(Connection);
-            return bond == null ? Messages.UNKNOWN : bond.Name;
+            return bond == null ? Messages.UNKNOWN : bond.Name();
         }
 
         public override Action FixLinkAction
@@ -333,7 +334,8 @@ namespace XenAdmin.Alerts
 				if (XenObject == null)
 					return null;
 
-				switch (Message.Type)
+			    var typ = Message.Type;
+				switch (typ)
 				{
 					case XenAPI.Message.MessageType.HA_HEARTBEAT_APPROACHING_TIMEOUT:
 					case XenAPI.Message.MessageType.HA_HOST_FAILED:
@@ -378,7 +380,7 @@ namespace XenAdmin.Alerts
 				if (FixLinkAction == null)
 					return null;
 
-				return Message.FriendlyAction(Message.MessageTypeString) ?? Messages.DETAILS;
+				return Message.FriendlyAction(Message.MessageTypeString()) ?? Messages.DETAILS;
 			}
         }
 
@@ -395,7 +397,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                return XenAPI.Message.FriendlyHelp(Message.MessageTypeString);
+                return XenAPI.Message.FriendlyHelp(Message.MessageTypeString());
             }
         }
 
@@ -403,7 +405,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                string title = XenAPI.Message.FriendlyName(Message.MessageTypeString);
+                string title = XenAPI.Message.FriendlyName(Message.MessageTypeString());
                 if (string.IsNullOrEmpty(title))
                     title = Message.name;
 
@@ -424,7 +426,7 @@ namespace XenAdmin.Alerts
 
         public override string Name
         {
-            get { return Message.MessageTypeString; }
+            get { return Message.MessageTypeString(); }
         }
 
         public override void Dismiss()
@@ -464,7 +466,7 @@ namespace XenAdmin.Alerts
         /// <returns></returns>
         public static Alert ParseMessage(XenAPI.Message msg)
         {
-            if (msg.IsPerfmonAlarm)
+            if (msg.IsPerfmonAlarm())
             {
                 return new AlarmMessageAlert(msg);
             }

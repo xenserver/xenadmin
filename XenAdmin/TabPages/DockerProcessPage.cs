@@ -98,7 +98,7 @@ namespace XenAdmin.TabPages
         {
             var args = new Dictionary<string, string>();
             args["vmuuid"] = parentVM.uuid;
-            args["object"] = container.Name;
+            args["object"] = container.Name();
 
             var action = new ExecuteContainerPluginAction(container, host,
                         "xscontainer", "get_top", args, true); 

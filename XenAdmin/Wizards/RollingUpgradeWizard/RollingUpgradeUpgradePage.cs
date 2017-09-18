@@ -132,7 +132,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 Pool pool = Helpers.GetPoolOfOne(host.Connection);
                 if (pool != null)
-                    hostNeedUpgrade.AddRange(pool.HostsToUpgrade);
+                    hostNeedUpgrade.AddRange(pool.HostsToUpgrade());
                 else
                     hostNeedUpgrade.Add(host);
             }
@@ -260,7 +260,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             var upgradeHostPlanAction = planAction;
             //Show dialog prepare host boot from CD or PXE boot and click OK to reboot
-            string msg = string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, planAction.Host.Name);
+            string msg = string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, planAction.Host.Name());
 
             UpgradeManualHostPlanAction action = upgradeHostPlanAction;
 
@@ -280,8 +280,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     }
                 }
             });
-            string beforeRebootProductVersion = upgradeHostPlanAction.Host.LongProductVersion;
-            string hostName = upgradeHostPlanAction.Host.Name;
+            string beforeRebootProductVersion = upgradeHostPlanAction.Host.LongProductVersion();
+            string hostName = upgradeHostPlanAction.Host.Name();
             upgradeHostPlanAction.Timeout += new EventHandler(upgradeHostPlanAction_Timeout);
             try
             {
@@ -457,7 +457,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var vms = new List<XenRef<VM>>();
             foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
             {
-                if (!vm.is_a_real_vm)
+                if (!vm.is_a_real_vm())
                     continue;
 
                 vms.Add(new XenRef<VM>(vm.opaque_ref));
@@ -512,7 +512,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 : this()
             {
                 Host = host;
-                taskCell.Value = string.Format(Host.IsMaster() ? Messages.UPGRADE_POOL_MASTER : Messages.UPGRADE_SLAVE, host.Name);
+                taskCell.Value = string.Format(Host.IsMaster() ? Messages.UPGRADE_POOL_MASTER : Messages.UPGRADE_SLAVE, host.Name());
                 UpdateStatus(HostUpgradeState.NotUpgraded, Messages.NOT_UPGRADED);
 
             }

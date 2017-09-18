@@ -48,7 +48,7 @@ namespace XenAdmin.Actions
     public class RestartToolstackAction : AsyncAction
     {
         public RestartToolstackAction(Host host)
-            : base(host.Connection, string.Format(Messages.ACTION_TOOLSTACK_RESTART_ON, host.Name.Ellipsise(30)))
+            : base(host.Connection, string.Format(Messages.ACTION_TOOLSTACK_RESTART_ON, host.Name().Ellipsise(30)))
         {
             Host = host;
             ApiMethodsToRoleCheck.Add("host.restart_agent");
@@ -58,7 +58,7 @@ namespace XenAdmin.Actions
         {
             var session = NewSession();
 
-            Description = string.Format(Messages.ACTION_TOOLSTACK_RESTARTING_ON, Host.Name.Ellipsise(30));
+            Description = string.Format(Messages.ACTION_TOOLSTACK_RESTARTING_ON, Host.Name().Ellipsise(30));
             RelatedTask = Host.async_restart_agent(session, Host.opaque_ref);
             PollToCompletion(0, 100);
 
@@ -66,7 +66,7 @@ namespace XenAdmin.Actions
             if (Helpers.HostIsMaster(Host))
                 Host.Connection.Interrupt();
 
-            Description = string.Format(Messages.ACTION_TOOLSTACK_RESTARTED_ON, Host.Name.Ellipsise(30));
+            Description = string.Format(Messages.ACTION_TOOLSTACK_RESTARTED_ON, Host.Name().Ellipsise(30));
         }
     }
 }

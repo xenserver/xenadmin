@@ -83,7 +83,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
         {
             get
             {
-                return string.Format(Messages.DR_WIZARD_VM_CHECK_DESCRIPTION, Vm.Name);
+                return string.Format(Messages.DR_WIZARD_VM_CHECK_DESCRIPTION, Vm.Name());
             }
         }
     }

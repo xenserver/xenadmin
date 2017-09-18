@@ -33,13 +33,10 @@ namespace XenAPI
 {
     partial class Bond
     {
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                PIF pif = FindMaster();
-                return pif == null ? "" : pif.Name;
-            }
+            PIF pif = FindMaster();
+            return pif == null ? "" : pif.Name();
         }
 
         private PIF FindMaster()
@@ -54,14 +51,11 @@ namespace XenAPI
             unknown
         }
 
-        public hashing_algoritm HashingAlgoritm 
+        public hashing_algoritm HashingAlgoritm()
         {
-            get
-            {
-                if (properties.ContainsKey("hashing_algorithm"))
-                    return StringToHashingAlgoritm(properties["hashing_algorithm"]);
-                return hashing_algoritm.unknown;
-            }
+            if (properties.ContainsKey("hashing_algorithm"))
+                return StringToHashingAlgoritm(properties["hashing_algorithm"]);
+            return hashing_algoritm.unknown;
         }
 
         public static string HashingAlgoritmToString(hashing_algoritm hashingAlgoritm)

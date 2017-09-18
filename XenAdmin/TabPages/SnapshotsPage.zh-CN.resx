@@ -1129,7 +1129,7 @@
     <value>3, 3</value>
   </data>
   <data name="newSnapshotButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 30</value>
+    <value>120, 23</value>
   </data>
   <data name="newSnapshotButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1207,7 +1207,7 @@
     <value>408, 3</value>
   </data>
   <data name="buttonView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 30</value>
+    <value>75, 23</value>
   </data>
   <data name="buttonView.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

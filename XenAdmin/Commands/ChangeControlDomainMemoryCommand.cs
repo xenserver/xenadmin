@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
         
         private bool CanExecute(Host host)
         {
-            return host != null && host.IsLive && Helpers.ElyOrGreater(host);
+            return host != null && host.IsLive() && Helpers.ElyOrGreater(host);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

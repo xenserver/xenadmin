@@ -107,7 +107,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             srPicker1.ItemSelectionNull += srPicker1_ItemSelectionNull;
             Host affinity = TheVM.Home();
             srPicker1.Connection = TheVM.Connection;
-            srPicker1.DiskSize = TheVM.TotalVMSize;
+            srPicker1.DiskSize = TheVM.TotalVMSize();
             srPicker1.SrHint.Text = TheVM.is_a_template ? Messages.COPY_TEMPLATE_SELECT_SR : Messages.COPY_VM_SELECT_SR;
             srPicker1.SetAffinity(affinity);
             Pool pool = Helpers.GetPoolOfOne(TheVM.Connection);
@@ -117,15 +117,17 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             NameTextBox.Text = GetDefaultCopyName(TheVM);
 
             bool allow_copy = !TheVM.is_a_template || TheVM.allowed_operations.Contains(vm_operations.copy);
+            bool anyDiskFastCloneable = TheVM.AnyDiskFastClonable();
+            bool hasAtLeastOneDisk = TheVM.HasAtLeastOneDisk();
 
-            CopyRadioButton.Enabled = allow_copy && TheVM.HasAtLeastOneDisk;
-            FastClonePanel.Enabled = !allow_copy || TheVM.AnyDiskFastClonable || !TheVM.HasAtLeastOneDisk;
+            CopyRadioButton.Enabled = allow_copy && hasAtLeastOneDisk;
+            FastClonePanel.Enabled = !allow_copy || anyDiskFastCloneable || !hasAtLeastOneDisk;
             if (!FastClonePanel.Enabled)
             {
                 CloneRadioButton.Checked = false;
             }
             toolTipContainer1.SetToolTip(Messages.FAST_CLONE_UNAVAILABLE);
-            if (TheVM.is_a_template && !(TheVM.AnyDiskFastClonable || allow_copy))
+            if (TheVM.is_a_template && !(anyDiskFastCloneable || allow_copy))
             {
                 CloneRadioButton.Text = Messages.COPY_VM_CLONE_TEMPLATE_SLOW;
                 FastCloneDescription.Text = Messages.COPY_VM_SLOW_CLONE_DESCRIPTION;
@@ -138,8 +140,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (!CloneRadioButton.Enabled)
                 CopyRadioButton.Checked = true;
 
-            if (TheVM.DescriptionType != VM.VmDescriptionType.None)
-                DescriptionTextBox.Text = TheVM.Description;
+            if (TheVM.DescriptionType() != VM.VmDescriptionType.None)
+                DescriptionTextBox.Text = TheVM.Description();
 
             srPicker1.srListBox.Invalidate();
             srPicker1.selectDefaultSROrAny();
@@ -208,9 +210,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             List<string> takenNames = new List<string>();
             foreach (VM vm in vmToCopy.Connection.Cache.VMs)
             {
-                takenNames.Add(vm.Name);
+                takenNames.Add(vm.Name());
             }
-            return Helpers.MakeUniqueName(string.Format(Messages.ACTION_TEMPLATE_CLONE_NEW_NAME, vmToCopy.Name), takenNames);
+            return Helpers.MakeUniqueName(string.Format(Messages.ACTION_TEMPLATE_CLONE_NEW_NAME, vmToCopy.Name()), takenNames);
         }
 
         private void CloneRadioButton_CheckedChanged(object sender, EventArgs e)

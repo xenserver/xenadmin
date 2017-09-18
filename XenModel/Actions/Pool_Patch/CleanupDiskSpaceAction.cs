@@ -53,7 +53,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = String.Format(Messages.ACTION_CLEANUP_DISK_SPACE_DESCRIPTION, Host.Name);
+            Description = String.Format(Messages.ACTION_CLEANUP_DISK_SPACE_DESCRIPTION, Host.Name());
             try
             {
                 var args = new Dictionary<string, string>();
@@ -62,11 +62,11 @@ namespace XenAdmin.Actions
 
                 Result = Host.call_plugin(Session, Host.opaque_ref, "disk-space", "cleanup_disk_space", args);
                 if (Result.ToLower() == "true")
-                    Description = String.Format(Messages.ACTION_CLEANUP_DISK_SPACE_SUCCESS, Host.Name);
+                    Description = String.Format(Messages.ACTION_CLEANUP_DISK_SPACE_SUCCESS, Host.Name());
             }
             catch (Failure failure)
             {
-                log.WarnFormat("Plugin call disk-space.cleanup_disk_space() on {0} failed with {1}", Host.Name,
+                log.WarnFormat("Plugin call disk-space.cleanup_disk_space() on {0} failed with {1}", Host.Name(),
                                failure.Message);
                 throw;
             }

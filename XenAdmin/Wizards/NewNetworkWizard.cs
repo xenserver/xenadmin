@@ -206,7 +206,7 @@ namespace XenAdmin.Wizards
             XenAPI.Network result = new XenAPI.Network();
             result.name_label = pageName.NetworkName;
             result.name_description = pageName.NetworkDescription;
-            result.AutoPlug = (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN ? pageChinDetails.isAutomaticAddNicToVM : pageNetworkDetails.isAutomaticAddNicToVM);
+            result.SetAutoPlug(pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN ? pageChinDetails.isAutomaticAddNicToVM : pageNetworkDetails.isAutomaticAddNicToVM);
             if (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN)
                 result.MTU = pageChinDetails.MTU;
             else if (pageNetworkDetails.MTU.HasValue) //Custom MTU may not be allowed if we are making a virtual network or something

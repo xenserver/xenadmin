@@ -87,7 +87,7 @@ namespace XenAdmin
             DateTime now = DateTime.UtcNow - connection.ServerTimeOffset;
             foreach (Host host in connection.Cache.Hosts)
             {
-                DateTime expiryDate = host.LicenseExpiryUTC;
+                DateTime expiryDate = host.LicenseExpiryUTC();
                 TimeSpan timeToExpiry = expiryDate.Subtract(now);
 
                 if (expiryDate < now)
@@ -164,12 +164,12 @@ namespace XenAdmin
             Program.AssertOnEventThread();
 
             log.InfoFormat("Server {0} has expired ({1}). Show License Summary if needed",
-                host.Name,
+                host.Name(),
                 HelpersGUI.DateTimeToString(expiryDate, Messages.DATEFORMAT_DMY_HMS, true));
 
             if (createAlert)
             {
-                var alert = new LicenseAlert(host.Name, now, expiryDate) { LicenseManagerLauncher = licenseManagerLauncher };
+                var alert = new LicenseAlert(host.Name(), now, expiryDate) { LicenseManagerLauncher = licenseManagerLauncher };
                 Alert.AddAlert(alert);
             }
 

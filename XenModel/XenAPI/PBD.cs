@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -95,9 +93,9 @@ namespace XenAPI
         public Proxy_PBD ToProxy()
         {
             Proxy_PBD result_ = new Proxy_PBD();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.host = (host != null) ? host : "";
-            result_.SR = (SR != null) ? SR : "";
+            result_.uuid = uuid ?? "";
+            result_.host = host ?? "";
+            result_.SR = SR ?? "";
             result_.device_config = Maps.convert_to_proxy_string_string(device_config);
             result_.currently_attached = currently_attached;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
@@ -162,7 +160,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static PBD get_record(Session session, string _pbd)
         {
-            return new PBD((Proxy_PBD)session.proxy.pbd_get_record(session.uuid, (_pbd != null) ? _pbd : "").parse());
+            return new PBD((Proxy_PBD)session.proxy.pbd_get_record(session.uuid, _pbd ?? "").parse());
         }
 
         /// <summary>
@@ -173,7 +171,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PBD> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<PBD>.Create(session.proxy.pbd_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<PBD>.Create(session.proxy.pbd_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -206,7 +204,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static void destroy(Session session, string _pbd)
         {
-            session.proxy.pbd_destroy(session.uuid, (_pbd != null) ? _pbd : "").parse();
+            session.proxy.pbd_destroy(session.uuid, _pbd ?? "").parse();
         }
 
         /// <summary>
@@ -217,7 +215,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static XenRef<Task> async_destroy(Session session, string _pbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_pbd_destroy(session.uuid, (_pbd != null) ? _pbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pbd_destroy(session.uuid, _pbd ?? "").parse());
         }
 
         /// <summary>
@@ -228,7 +226,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static string get_uuid(Session session, string _pbd)
         {
-            return (string)session.proxy.pbd_get_uuid(session.uuid, (_pbd != null) ? _pbd : "").parse();
+            return (string)session.proxy.pbd_get_uuid(session.uuid, _pbd ?? "").parse();
         }
 
         /// <summary>
@@ -239,7 +237,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static XenRef<Host> get_host(Session session, string _pbd)
         {
-            return XenRef<Host>.Create(session.proxy.pbd_get_host(session.uuid, (_pbd != null) ? _pbd : "").parse());
+            return XenRef<Host>.Create(session.proxy.pbd_get_host(session.uuid, _pbd ?? "").parse());
         }
 
         /// <summary>
@@ -250,7 +248,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static XenRef<SR> get_SR(Session session, string _pbd)
         {
-            return XenRef<SR>.Create(session.proxy.pbd_get_sr(session.uuid, (_pbd != null) ? _pbd : "").parse());
+            return XenRef<SR>.Create(session.proxy.pbd_get_sr(session.uuid, _pbd ?? "").parse());
         }
 
         /// <summary>
@@ -261,7 +259,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static Dictionary<string, string> get_device_config(Session session, string _pbd)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pbd_get_device_config(session.uuid, (_pbd != null) ? _pbd : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pbd_get_device_config(session.uuid, _pbd ?? "").parse());
         }
 
         /// <summary>
@@ -272,7 +270,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static bool get_currently_attached(Session session, string _pbd)
         {
-            return (bool)session.proxy.pbd_get_currently_attached(session.uuid, (_pbd != null) ? _pbd : "").parse();
+            return (bool)session.proxy.pbd_get_currently_attached(session.uuid, _pbd ?? "").parse();
         }
 
         /// <summary>
@@ -283,7 +281,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pbd)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pbd_get_other_config(session.uuid, (_pbd != null) ? _pbd : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pbd_get_other_config(session.uuid, _pbd ?? "").parse());
         }
 
         /// <summary>
@@ -295,7 +293,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pbd, Dictionary<string, string> _other_config)
         {
-            session.proxy.pbd_set_other_config(session.uuid, (_pbd != null) ? _pbd : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.pbd_set_other_config(session.uuid, _pbd ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -308,7 +306,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pbd, string _key, string _value)
         {
-            session.proxy.pbd_add_to_other_config(session.uuid, (_pbd != null) ? _pbd : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.pbd_add_to_other_config(session.uuid, _pbd ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -320,7 +318,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pbd, string _key)
         {
-            session.proxy.pbd_remove_from_other_config(session.uuid, (_pbd != null) ? _pbd : "", (_key != null) ? _key : "").parse();
+            session.proxy.pbd_remove_from_other_config(session.uuid, _pbd ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -331,7 +329,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static void plug(Session session, string _pbd)
         {
-            session.proxy.pbd_plug(session.uuid, (_pbd != null) ? _pbd : "").parse();
+            session.proxy.pbd_plug(session.uuid, _pbd ?? "").parse();
         }
 
         /// <summary>
@@ -342,7 +340,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static XenRef<Task> async_plug(Session session, string _pbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_pbd_plug(session.uuid, (_pbd != null) ? _pbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pbd_plug(session.uuid, _pbd ?? "").parse());
         }
 
         /// <summary>
@@ -353,7 +351,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static void unplug(Session session, string _pbd)
         {
-            session.proxy.pbd_unplug(session.uuid, (_pbd != null) ? _pbd : "").parse();
+            session.proxy.pbd_unplug(session.uuid, _pbd ?? "").parse();
         }
 
         /// <summary>
@@ -364,7 +362,7 @@ namespace XenAPI
         /// <param name="_pbd">The opaque_ref of the given pbd</param>
         public static XenRef<Task> async_unplug(Session session, string _pbd)
         {
-            return XenRef<Task>.Create(session.proxy.async_pbd_unplug(session.uuid, (_pbd != null) ? _pbd : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pbd_unplug(session.uuid, _pbd ?? "").parse());
         }
 
         /// <summary>
@@ -376,7 +374,7 @@ namespace XenAPI
         /// <param name="_value">The new value of the PBD's device_config</param>
         public static void set_device_config(Session session, string _pbd, Dictionary<string, string> _value)
         {
-            session.proxy.pbd_set_device_config(session.uuid, (_pbd != null) ? _pbd : "", Maps.convert_to_proxy_string_string(_value)).parse();
+            session.proxy.pbd_set_device_config(session.uuid, _pbd ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -388,7 +386,7 @@ namespace XenAPI
         /// <param name="_value">The new value of the PBD's device_config</param>
         public static XenRef<Task> async_set_device_config(Session session, string _pbd, Dictionary<string, string> _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pbd_set_device_config(session.uuid, (_pbd != null) ? _pbd : "", Maps.convert_to_proxy_string_string(_value)).parse());
+            return XenRef<Task>.Create(session.proxy.async_pbd_set_device_config(session.uuid, _pbd ?? "", Maps.convert_to_proxy_string_string(_value)).parse());
         }
 
         /// <summary>

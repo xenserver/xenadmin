@@ -84,7 +84,10 @@ namespace XenAdmin.Core
         {
             var toRemove = FindAll(match);
             base.RemoveAll(match);
-            toRemove.ForEach(item => OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, item)));
+            if (toRemove.Count > 1)
+                OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, toRemove));
+            else if (toRemove.Count == 1)
+                OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, toRemove[0]));
             return toRemove.Count;
         }
 

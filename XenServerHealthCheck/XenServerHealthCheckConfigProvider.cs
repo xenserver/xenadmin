@@ -37,6 +37,7 @@ using System.Net;
 using XenAdmin;
 using XenAdmin.Actions;
 using XenAdmin.Core;
+using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.ServerDBs;
 using XenAPI;
@@ -56,7 +57,7 @@ namespace XenServerHealthCheck
 
         public Session CreateActionSession(Session session, IXenConnection connection)
         {
-            return SessionFactory.CreateSession(session, connection, ConnectionTimeout);
+            return SessionFactory.DuplicateSession(session, connection, ConnectionTimeout);
         }
 
         public bool Exiting
@@ -82,6 +83,12 @@ namespace XenServerHealthCheck
         public bool ShowHiddenVMs
         {
             get { return false; }
+        }
+
+        public string GetXenCenterMetadata(bool isForXenCenter)
+        {
+            var metadataString = Properties.Settings.Default.XenCenterMetadata;
+            return metadataString.Replace(HealthCheckSettings.REPORT_TIME_PLACEHOLDER, DateTime.UtcNow.ToString("u"));
         }
 
         public int GetProxyTimeout(bool timeout)

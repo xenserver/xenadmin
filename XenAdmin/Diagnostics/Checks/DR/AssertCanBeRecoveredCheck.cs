@@ -140,7 +140,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
             }
             catch (Exception e)
             {
-                log.ErrorFormat("There was an error calling assert_can_be_recovered for object {0}", xenObject.Name);
+                log.ErrorFormat("There was an error calling assert_can_be_recovered for object {0}", xenObject.Name());
                 log.Error(e, e);
             }
             return null;
@@ -152,7 +152,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
             {
                 return String.Format(xenObject is VM 
                     ? Messages.DR_WIZARD_VM_CHECK_DESCRIPTION
-                    : Messages.DR_WIZARD_APPLIANCE_CHECK_DESCRIPTION, xenObject.Name); 
+                    : Messages.DR_WIZARD_APPLIANCE_CHECK_DESCRIPTION, xenObject.Name()); 
             }
         }
     }

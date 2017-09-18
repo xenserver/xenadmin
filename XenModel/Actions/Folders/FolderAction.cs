@@ -423,7 +423,7 @@ namespace XenAdmin.Actions
         private readonly Folder folder;
 
         public MoveToFolderAction(IXenObject obj, Folder folder)
-            : base(obj.Connection, string.Format(Messages.MOVE_OBJECT_TO_FOLDER, Helpers.GetName(obj), folder.Name))
+            : base(obj.Connection, string.Format(Messages.MOVE_OBJECT_TO_FOLDER, Helpers.GetName(obj), folder.Name()))
         {
             this.objs.Add(obj);
             this.folder = folder;
@@ -442,7 +442,7 @@ namespace XenAdmin.Actions
 
         // Constructor used for moving multiple objects, across multiple connections
         public MoveToFolderAction(List<IXenObject> objs, Folder folder)
-            : base(null, string.Format(Messages.MOVE_OBJECTS_TO_FOLDER, folder.Name))
+            : base(null, string.Format(Messages.MOVE_OBJECTS_TO_FOLDER, folder.Name()))
         {
             this.objs.AddRange(objs);
             this.folder = folder; 

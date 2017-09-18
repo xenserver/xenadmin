@@ -318,9 +318,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                return (IsValidSmtpAddress());
-                //BL: Disable it for now, will enable it after adding the port to WLB side
-                //return IsValidSmtpAddress() && PerfmonAlertOptionsPage.IsValidPort(TextBoxSMTPServerPort.Text);
+                return true; //this has been true since Boston
             }
         }
 

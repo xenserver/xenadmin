@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -72,8 +72,8 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
-                        string v = (table[key] != null) ? table[key] : "";
+                        string k = key ?? "";
+                        string v = table[key] ?? "";
                         result[k] = v;
                     }
                     catch
@@ -119,7 +119,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = table[key].ToString();
                         result[k] = v;
                     }
@@ -166,7 +166,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = host_allowed_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -213,7 +213,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = network_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -260,7 +260,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = pool_allowed_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -307,7 +307,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = storage_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -354,7 +354,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = task_allowed_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -401,7 +401,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = vbd_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -448,7 +448,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = vdi_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -495,7 +495,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = vif_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -542,7 +542,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = vm_appliance_operation_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -589,7 +589,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = vm_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }
@@ -636,8 +636,8 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
-                        string v = (table[key] != null) ? table[key] : "";
+                        string k = key ?? "";
+                        string v = table[key] ?? "";
                         result[k] = v;
                     }
                     catch
@@ -825,7 +825,7 @@ namespace XenAPI
                     try
                     {
                         string k = vm_operations_helper.ToString(key);
-                        string v = (table[key] != null) ? table[key] : "";
+                        string v = table[key] ?? "";
                         result[k] = v;
                     }
                     catch
@@ -871,8 +871,8 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
-                        string v = (table[key] != null) ? table[key] : "";
+                        string k = key ?? "";
+                        string v = table[key] ?? "";
                         result[k] = v;
                     }
                     catch
@@ -918,7 +918,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = table[key].ToString();
                         result[k] = v;
                     }
@@ -965,8 +965,8 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
-                        string v = (table[key] != null) ? table[key] : "";
+                        string k = key ?? "";
+                        string v = table[key] ?? "";
                         result[k] = v;
                     }
                     catch
@@ -1012,8 +1012,8 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
-                        string v = (table[key] != null) ? table[key] : "";
+                        string k = key ?? "";
+                        string v = table[key] ?? "";
                         result[k] = v;
                     }
                     catch
@@ -1059,8 +1059,8 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
-                        string v = (table[key] != null) ? table[key] : "";
+                        string k = key ?? "";
+                        string v = table[key] ?? "";
                         result[k] = v;
                     }
                     catch
@@ -1106,7 +1106,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string [] v = table[key];
                         result[k] = v;
                     }
@@ -1153,7 +1153,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         Object v = Maps.convert_to_proxy_string_string(table[key]);
                         result[k] = v;
                     }
@@ -1200,7 +1200,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string [] v = table[key];
                         result[k] = v;
                     }

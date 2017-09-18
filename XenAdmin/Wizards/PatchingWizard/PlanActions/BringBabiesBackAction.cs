@@ -46,10 +46,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly bool _enableOnly = false;
         public List<string> AvoidRestartHosts { private get; set; }
 
-        public BringBabiesBackAction(List<XenRef<VM>> vms, Host host,bool enableOnly)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE,host.Name))
+        public BringBabiesBackAction(List<XenRef<VM>> vms, Host host, bool enableOnly)
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, host.Name()))
         {
-            base.TitlePlan = string.Format(Messages.EXIT_SERVER_FROM_MAINTENANCE_MODE,host.Name); 
+            base.TitlePlan = string.Format(Messages.EXIT_SERVER_FROM_MAINTENANCE_MODE, host.Name());
             this._host = new XenRef<Host>(host);
             this._vms = vms;
             this._enableOnly = enableOnly;
@@ -155,7 +155,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Host hostModelObject = Connection.Resolve(_host);
             if (hostModelObject != null)
             {
-                log.DebugFormat("Cleaning up evacuated VMs from Host '{0}'", hostModelObject.Name);
+                log.DebugFormat("Cleaning up evacuated VMs from Host '{0}'", hostModelObject.Name());
                 hostModelObject.ClearEvacuatedVMs(session);
             }
         }

@@ -39,5 +39,8 @@
     <Setting Name="ProxyAuthenticationMethod" Roaming="true" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="XenCenterMetadata" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

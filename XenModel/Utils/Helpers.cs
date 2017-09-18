@@ -81,17 +81,17 @@ namespace XenAdmin.Core
         /// <param name="Host">May be null.</param>
         public static string HostProductVersion(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersion);
+            return FromHostOrMaster(host, h => h.ProductVersion());
         }
 
         public static string HostProductVersionText(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersionText);
+            return FromHostOrMaster(host, h => h.ProductVersionText());
         }
 
         public static string HostProductVersionTextShort(Host host)
         {
-            return FromHostOrMaster(host, h => h.ProductVersionTextShort);
+            return FromHostOrMaster(host, h => h.ProductVersionTextShort());
         }
 
         public static string HostPlatformVersion(Host host)
@@ -99,7 +99,7 @@ namespace XenAdmin.Core
             if (host == null)
                 return null;
 
-            return host.PlatformVersion;
+            return host.PlatformVersion();
         }
 
         private delegate string HostToStr(Host host);
@@ -208,7 +208,7 @@ namespace XenAdmin.Core
 
             foreach (Pool thePool in connection.Cache.Pools)
             {
-                if (thePool != null && thePool.IsVisible)
+                if (thePool != null && thePool.IsVisible())
                     return thePool;
             }
             return null;
@@ -268,9 +268,7 @@ namespace XenAdmin.Core
         /// <param name="pool">May be null, in which case the empty string is returned.</param>
         public static string GetName(Pool pool)
         {
-            if (pool == null)
-                return "";
-            return pool.Name;
+            return pool == null ? "" : pool.Name();
         }
 
         /// <param name="connection">May be null, in which case the empty string is returned.</param>
@@ -282,9 +280,7 @@ namespace XenAdmin.Core
         /// <param name="o">May be null, in which case the empty string is returned.</param>
         public static string GetName(IXenObject o)
         {
-            if (o == null)
-                return "";
-            return o.Name;
+            return o == null ? "" : o.Name();
         }
 
         public static bool IsConnected(IXenConnection connection)
@@ -500,136 +496,6 @@ namespace XenAdmin.Core
             return WlbEnabledAndConfigured(conn) && !DundeeOrGreater(conn);
         }
 
-        #region AllocationBoundsStructAndMethods
-        public struct AllocationBounds
-        {
-            private readonly decimal min;
-            private readonly decimal max;
-            private readonly decimal defaultValue;
-            private readonly string unit;
-
-            public AllocationBounds(decimal min, decimal max, decimal defaultValue)
-            {
-                this.min = min;
-                this.max = max;
-                if (defaultValue < min)
-                {
-                    defaultValue = min;
-                }
-                else if (defaultValue > max)
-                {
-                    defaultValue = max;
-                }
-                this.defaultValue = defaultValue;
-                if (defaultValue >= Util.BINARY_GIGA)
-                    unit =  Messages.VAL_GIGB;
-                else
-                    unit = Messages.VAL_MEGB;
-            }
-
-            public AllocationBounds(decimal min, decimal max, decimal defaultValue, string unit)
-                : this(min, max, defaultValue)
-            {
-                this.unit = unit;
-            }
-
-            public decimal Min
-            {
-                get
-                {
-                    return min;
-                }
-            }
-
-            public decimal Max
-            {
-                get
-                {
-                    return max;
-                }
-            }
-
-            /// <summary>
-            /// Returns the minimum in the appropriate units
-            /// </summary>
-            public decimal MinInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(min);
-                }
-            }
-
-            public decimal MaxInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(max);
-                }
-            }
-
-            public decimal DefaultValueInUnits
-            {
-                get
-                {
-                    return GetValueInUnits(defaultValue);
-                }
-            }
-
-            public string Unit
-            {
-                get
-                {
-                   return unit;
-                }
-            }
-
-            private decimal GetValueInUnits(decimal val)
-            {
-                if (unit == Messages.VAL_GIGB)
-                    return val / Util.BINARY_GIGA;
-                else
-                    return val / Util.BINARY_MEGA;
-            }
-        }
-
-        public static AllocationBounds SRIncrementalAllocationBounds(long SRSize)
-        {
-            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR , XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal max = Math.Max(SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR, XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal defaultValue = Math.Max(SRSize / XLVHD_DEF_ALLOCATION_QUANTUM_DIVISOR, min);
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds VDIIncrementalAllocationBounds(long SRSize, long SRIncrAllocation)
-        {
-            decimal min = Math.Max(SRSize / XLVHD_MIN_ALLOCATION_QUANTUM_DIVISOR, XLVHD_MIN_ALLOCATION_QUANTUM);
-            decimal max = Math.Max(SRSize / XLVHD_MAX_ALLOCATION_QUANTUM_DIVISOR, SRIncrAllocation);
-            decimal defaultValue = SRIncrAllocation;
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds SRInitialAllocationBounds(long SRSize)
-        {
-            decimal min = 0;
-            decimal max = SRSize;
-            decimal defaultValue = 0;
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        public static AllocationBounds VDIInitialAllocationBounds(long VDISize, long SRInitialAllocation)
-        {
-            decimal min = 0;
-            decimal max = VDISize;
-            decimal defaultValue = Math.Min(SRInitialAllocation, max);
-
-            return new AllocationBounds(min, max, defaultValue);
-        }
-
-        #endregion
 
         /// <summary>
         /// Determines whether two lists contain the same elements (but not necessarily in the same order).
@@ -1157,7 +1023,7 @@ namespace XenAdmin.Core
                 return network == null
                            ? null //don't try to retrieve it in the FriendlyNames.
                            : FormatFriendly(string.Format("Label-performance.vif_{0}{1}",
-                               m.Groups[2].Value, m.Groups[3].Value), network.Name);
+                               m.Groups[2].Value, m.Groups[3].Value), network.Name());
             }
 
             m = PifEthRegex.Match(name);
@@ -1172,7 +1038,7 @@ namespace XenAdmin.Core
 			    return network == null
 			               ? null //don't try to retrieve it in the FriendlyNames.
 			               : FormatFriendly(string.Format("Label-performance.vlan_{0}{1}",
-			                   m.Groups[3].Value, m.Groups[4].Value), network.Name);
+			                   m.Groups[3].Value, m.Groups[4].Value), network.Name());
 			}
 
             m = PifBrRegex.Match(name);
@@ -1182,7 +1048,7 @@ namespace XenAdmin.Core
                 XenAPI.Network network = FindNetworkOfPIF(iXenObject, device);
             	return network == null
             	       	? null //don't try to retrieve it in the FriendlyNames.
-            	       	: FormatFriendly(string.Format("Label-performance.xenbr_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), network.Name);
+            	       	: FormatFriendly(string.Format("Label-performance.xenbr_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), network.Name());
             }
 
         	m = PifXapiRegex.Match(name);
@@ -1195,7 +1061,7 @@ namespace XenAdmin.Core
             	PIF pif = FindPIF(iXenObject, m.Groups[1].Value, false);
             	return pif == null
             	       	? null //pif doesn't exist anymore so don't try to retrieve it in the FriendlyNames.
-            	       	: FormatFriendly(string.Format("Label-performance.bond_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), pif.Name);
+            	       	: FormatFriendly(string.Format("Label-performance.bond_{0}{1}", m.Groups[2].Value, m.Groups[3].Value), pif.Name());
             }
 
         	m = PifLoRegex.Match(name);
@@ -1261,7 +1127,7 @@ namespace XenAdmin.Core
                            ? null
                            : FormatFriendly(string.Format("Label-performance.sr_{0}_{1}",
                                m.Groups[1].Value, m.Groups[2].Value),
-                               sr.Name.Ellipsise(30));
+                               sr.Name().Ellipsise(30));
             }
 
             m = SrOtherRegex.Match(name);
@@ -1271,7 +1137,7 @@ namespace XenAdmin.Core
                 return sr == null
                            ? null
                            : FormatFriendly(string.Format("Label-performance.sr_{0}", m.Groups[1].Value),
-                               sr.Name.Ellipsise(30));
+                               sr.Name().Ellipsise(30));
             }
 
             m = SrReadWriteRegex.Match(name);
@@ -1281,7 +1147,7 @@ namespace XenAdmin.Core
                 return sr == null
                     ? null
                     : FormatFriendly(string.Format("Label-performance.sr_rw_{0}", m.Groups[1].Value),
-                        sr.Name.Ellipsise(30));
+                        sr.Name().Ellipsise(30));
             }
 
             m = GpuRegex.Match(name);
@@ -1292,7 +1158,7 @@ namespace XenAdmin.Core
                 return gpu == null
                            ? null
                            : FormatFriendly(string.Format("Label-performance.gpu_{0}", m.Groups[1].Value),
-                                            gpu.Name, pciId);
+                                            gpu.Name(), pciId);
             }
 
             if (NetworkLatencyRegex.IsMatch(name))
@@ -1376,7 +1242,7 @@ namespace XenAdmin.Core
         {
             foreach (PIF pif in iXenObject.Connection.Cache.PIFs)
             {
-                if ((!physical || pif.IsPhysical) && pif.device == device && (iXenObject is Host && pif.host.opaque_ref == iXenObject.opaque_ref || iXenObject is VM && pif.host.opaque_ref == ((VM)iXenObject).resident_on.opaque_ref))
+                if ((!physical || pif.IsPhysical()) && pif.device == device && (iXenObject is Host && pif.host.opaque_ref == iXenObject.opaque_ref || iXenObject is VM && pif.host.opaque_ref == ((VM)iXenObject).resident_on.opaque_ref))
                     return pif;
             }
             return null;
@@ -1483,10 +1349,10 @@ namespace XenAdmin.Core
             if (XenObject is Host)
                 return string.Format(Messages.SERVER_X, GetName(XenObject));
 
-            if (XenObject is VM)
+            VM vm = XenObject as VM;
+            if (vm != null)
             {
-                VM vm = (VM)XenObject;
-                if (vm.IsControlDomainZero)
+                if (vm.IsControlDomainZero())
                     return string.Format(Messages.SERVER_X, GetName(XenObject.Connection.Resolve(vm.resident_on)));
                 else
                     return string.Format(Messages.VM_X, GetName(XenObject));
@@ -1540,7 +1406,7 @@ namespace XenAdmin.Core
             {
                 if (vm.HaCanProtect(showHiddenVMs))
                 {
-                    result[vm] = vm.HARestartPriority;
+                    result[vm] = vm.HARestartPriority();
                 }
             }
             return result;
@@ -1580,7 +1446,7 @@ namespace XenAdmin.Core
             {
                 if (vm.HaCanProtect(showHiddenVMs))
                 {
-                    result[vm] = new VMStartupOptions(vm.order, vm.start_delay, vm.HARestartPriority);
+                    result[vm] = new VMStartupOptions(vm.order, vm.start_delay, vm.HARestartPriority());
                 }
             }
             return result;
@@ -1890,7 +1756,7 @@ namespace XenAdmin.Core
             List<string> names = new List<string>();
             foreach (Host obj in list)
             {
-                names.Add(obj.Name);
+                names.Add(obj.Name());
             }
 
             return string.Join(", ", names.ToArray());
@@ -1938,7 +1804,7 @@ namespace XenAdmin.Core
 
         public static bool CustomWithNoDVD(VM template)
         {
-            return template != null && !template.DefaultTemplate && template.FindVMCDROM() == null;
+            return template != null && !template.DefaultTemplate() && template.FindVMCDROM() == null;
         }
 
         public static string GetMacString(string mac)
@@ -1994,7 +1860,7 @@ namespace XenAdmin.Core
        public static bool SupportsLinkAggregationBond(IXenConnection connection)
        {
            Host master = GetMaster(connection);
-           return master != null && master.vSwitchNetworkBackend;
+           return master != null && master.vSwitchNetworkBackend();
        }
 
        /// <summary>
@@ -2004,7 +1870,7 @@ namespace XenAdmin.Core
        {
            Host master = GetMaster(connection);
            // For hosts on the vSwitch backend, we allow 4 NICs per bond; otherwise, 2
-           return master != null && master.vSwitchNetworkBackend ? 4 : 2;
+           return master != null && master.vSwitchNetworkBackend() ? 4 : 2;
        }
 
        public static Host GetHostAncestor(IXenObject xenObject)
@@ -2012,24 +1878,24 @@ namespace XenAdmin.Core
            if (xenObject == null || xenObject.Connection == null)
                return null;
 
-           if (xenObject is Host)
-               return (Host)xenObject;
+           var h = xenObject as Host;
+           if (h != null)
+               return h;
 
-           if (xenObject is SR)
-               return ((SR)xenObject).Home;
-           
-           if (xenObject is VM)
-           {
-               VM vm = (VM) xenObject;
+           var sr = xenObject as SR;
+           if (sr != null)
+               return sr.Home();
+
+           var vm = xenObject as VM;
+           if (vm != null)
                return vm.Home();
-           }
 
            return null;
        }
 
        public static bool SameServerVersion(Host host, string longProductVersion)
        {
-           return host != null && host.LongProductVersion == longProductVersion;
+           return host != null && host.LongProductVersion() == longProductVersion;
        }
 
        public static bool EnabledTargetExists(Host host, IXenConnection connection)
@@ -2045,7 +1911,7 @@ namespace XenAdmin.Core
            if (FeatureForbidden(connection, Host.RestrictGpu))
                return false;
            var pool = GetPoolOfOne(connection);
-           return pool != null && pool.HasGpu;
+           return pool != null && pool.HasGpu();
        }
 
         public static bool VGpuCapability(IXenConnection connection)
@@ -2053,7 +1919,7 @@ namespace XenAdmin.Core
             if (FeatureForbidden(connection, Host.RestrictVgpu))
                 return false;
             var pool = GetPoolOfOne(connection);
-            return pool != null && pool.HasVGpu;
+            return pool != null && pool.HasVGpu();
         }
 
         /// <summary>
@@ -2063,7 +1929,7 @@ namespace XenAdmin.Core
        {
            Host master = GetMaster(connection);
            // For Creedence or later on the vSwitch backend, we allow creation of VLAN 0
-           return master != null && CreedenceOrGreater(master) && master.vSwitchNetworkBackend;
+           return master != null && CreedenceOrGreater(master) && master.vSwitchNetworkBackend();
        }
 
        public static bool ContainerCapability(IXenConnection connection)
@@ -2072,19 +1938,18 @@ namespace XenAdmin.Core
            if (master == null)
                return false;
            if (ElyOrGreater(connection))
-               return master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("xscontainer")); 
-           return CreamOrGreater(connection) && master.SuppPacks.Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
+               return master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("xscontainer")); 
+           return CreamOrGreater(connection) && master.SuppPacks().Any(suppPack => suppPack.Name.ToLower().StartsWith("xscontainer")); 
        }
 
        public static bool PvsCacheCapability(IXenConnection connection)
        {
            var master = GetMaster(connection);
-           return master != null && master.AppliedUpdates().Any(update => update.Name.ToLower().StartsWith("pvsaccelerator"));
+           return master != null && master.AppliedUpdates().Any(update => update.Name().ToLower().StartsWith("pvsaccelerator"));
        }
 
        /// <summary>
        /// This method returns the disk space required (bytes) on the provided SR for the provided VDI.
-       /// This method also considers thin provisioning. For thin provisioned SRs the provided sm_config in the VDI will be considered first, or it will use the values from the SR's sm_config in case the VDI does not have these set. For fully provisioned SRs the sm_config in the VDI will be ignored.
        /// </summary>
        /// <returns>Disk size required in bytes.</returns>
        public static long GetRequiredSpaceToCreateVdiOnSr(SR sr, VDI vdi)
@@ -2094,23 +1959,6 @@ namespace XenAdmin.Core
 
            if (vdi == null)
                throw new ArgumentNullException("vdi");
-
-           if (!sr.IsThinProvisioned)
-               return vdi.virtual_size;
-
-           long initialAllocationVdi = -1;
-           if (vdi.sm_config != null && vdi.sm_config.ContainsKey("initial_allocation"))
-               long.TryParse(vdi.sm_config["initial_allocation"], out initialAllocationVdi);
-
-           long initialAllocationSr = -1;
-           if (sr.sm_config != null && sr.sm_config.ContainsKey("initial_allocation"))
-               long.TryParse(sr.sm_config["initial_allocation"], out initialAllocationSr);
-
-           if (initialAllocationVdi > -1)
-               return initialAllocationVdi;
-
-           if (initialAllocationSr > -1)
-               return initialAllocationSr;
 
            return vdi.virtual_size;
        }

@@ -37,7 +37,7 @@ namespace XenAdmin.Actions.VMActions
     public class VMSuspendAction : VMShutdownAction
     {
         public VMSuspendAction(VM vm)
-            : base(vm, string.Format(Messages.ACTION_VM_SUSPENDING_TITLE, vm.Name))
+            : base(vm, string.Format(Messages.ACTION_VM_SUSPENDING_TITLE, vm.Name()))
         {
             VM = vm;
         }

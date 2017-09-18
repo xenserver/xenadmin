@@ -76,7 +76,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
                     if (appliance.uuid == applianceToRecover.uuid)
                     {
                         // if the existing appliance is currently running, then the user must force shutdown this appliance first
-                        if (appliance.IsRunning)
+                        if (appliance.IsRunning())
                             return new RunningVmApplianceProblem(this, appliance, true);
 
                         // warn the user that the existing appliance will be replaced (but we still need to delete the appliance before recovery)
@@ -106,7 +106,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
         {
             get
             {
-                return string.Format(Messages.DR_WIZARD_APPLIANCE_CHECK_DESCRIPTION, applianceToRecover.Name); 
+                return string.Format(Messages.DR_WIZARD_APPLIANCE_CHECK_DESCRIPTION, applianceToRecover.Name()); 
             }
         }
     }

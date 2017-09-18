@@ -127,7 +127,7 @@ namespace XenAdmin.Commands
                 if (selection.Count == 1)
                 {
                     VM vm = (VM)selection[0].XenObject;
-                    return vm.HAIsProtected ? Messages.HA_CONFIRM_SHUTDOWN_VM : Messages.CONFIRM_SHUTDOWN_VM;
+                    return vm.HAIsProtected() ? Messages.HA_CONFIRM_SHUTDOWN_VM : Messages.CONFIRM_SHUTDOWN_VM;
                 }
 
                 return Messages.CONFIRM_SHUTDOWN_VMS;

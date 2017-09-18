@@ -49,12 +49,9 @@ namespace XenAPI
             return null;
         }
 
-        public override bool IsHidden
+        public override bool IsHidden()
         {
-            get
-            {
-                return BoolKey(other_config, HIDE_FROM_XENCENTER);
-            }
+            return BoolKey(other_config, HIDE_FROM_XENCENTER);
         }
     }
 }

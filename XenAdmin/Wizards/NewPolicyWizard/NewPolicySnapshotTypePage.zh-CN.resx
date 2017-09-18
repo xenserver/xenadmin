@@ -181,7 +181,7 @@
     <value>6</value>
   </data>
   <data name="quiesceCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 87</value>
+    <value>39, 92</value>
   </data>
   <data name="quiesceCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>419, 34</value>
@@ -211,7 +211,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="radioButtonDiskAndMemory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 127</value>
+    <value>6, 132</value>
   </data>
   <data name="radioButtonDiskAndMemory.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 17</value>
@@ -241,7 +241,7 @@
     <value>25, 65</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 30</value>
+    <value>460, 40</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -301,7 +301,7 @@
     <value>True</value>
   </data>
   <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 3</value>
+    <value>25, 8</value>
   </data>
   <data name="labelWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>

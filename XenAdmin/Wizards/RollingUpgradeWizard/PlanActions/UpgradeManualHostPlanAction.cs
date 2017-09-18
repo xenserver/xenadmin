@@ -81,17 +81,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 if (Host.enabled)
                 {
-                    log.DebugFormat("Disabling host {0}", _host.Name);
+                    log.DebugFormat("Disabling host {0}", _host.Name());
                     XenAPI.Host.disable(session, Host.opaque_ref);
                 }
 
                 timer.Start();
                 rebooting = true;
 
-                log.DebugFormat("Upgrading host {0}", _host.Name);
+                log.DebugFormat("Upgrading host {0}", _host.Name());
                 Status = Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER;
 
-                log.DebugFormat("Waiting for host {0} to reboot", _host.Name);
+                log.DebugFormat("Waiting for host {0} to reboot", _host.Name());
                 WaitForReboot(ref session, _session => XenAPI.Host.async_reboot(_session, Host.opaque_ref));
 
                 Status = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
@@ -99,10 +99,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts
                 
                 rebooting = false;
-                log.DebugFormat("Host {0} rebooted", _host.Name);
+                log.DebugFormat("Host {0} rebooted", _host.Name());
                 
                 Status = Messages.PLAN_ACTION_STATUS_HOST_UPGRADED;
-                log.DebugFormat("Upgraded host {0}", _host.Name);
+                log.DebugFormat("Upgraded host {0}", _host.Name());
             }
             finally
             {

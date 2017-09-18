@@ -45,7 +45,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_SUSPENDED_VM,VM.Name); }
+            get { return string.Format(Messages.UPDATES_WIZARD_SUSPENDED_VM, VM.Name()); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)

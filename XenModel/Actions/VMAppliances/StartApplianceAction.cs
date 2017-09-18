@@ -59,11 +59,11 @@ namespace XenAdmin.Actions
 
 		protected override void Run()
 		{
-			Description = string.Format(m_suspend ? Messages.VM_APPLIANCE_STARTING_PAUSED : Messages.VM_APPLIANCE_STARTING, m_appliance.Name);
+			Description = string.Format(m_suspend ? Messages.VM_APPLIANCE_STARTING_PAUSED : Messages.VM_APPLIANCE_STARTING, m_appliance.Name());
             //if (m_appliance.allowed_operations.Contains(vm_appliance_operation.start))
             if (m_appliance.VMs.Count > 0)
                 VM_appliance.start(Session, m_appliance.opaque_ref, m_suspend);
-			Description = string.Format(m_suspend ? Messages.VM_APPLIANCE_STARTING_PAUSED_COMPLETED : Messages.VM_APPLIANCE_STARTING_COMPLETED, m_appliance.Name);
+			Description = string.Format(m_suspend ? Messages.VM_APPLIANCE_STARTING_PAUSED_COMPLETED : Messages.VM_APPLIANCE_STARTING_COMPLETED, m_appliance.Name());
 		}
 	}
 }

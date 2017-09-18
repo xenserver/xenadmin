@@ -61,16 +61,12 @@ namespace XenAPI
             Premium                // Added in Indigo (premium)
         }
 
-        public static string LicenseServerWebConsolePort = "8082";
+        public const string LicenseServerWebConsolePort = "8082";
 
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return name_label;
-            }
+            return name_label;
         }
-
 
         public static Edition GetEdition(string editionText)
         {
@@ -100,7 +96,6 @@ namespace XenAPI
                     return Edition.Free;
             }
         }
-
 
         public bool CanSeeNetwork(XenAPI.Network network)
         {
@@ -148,21 +143,14 @@ namespace XenAPI
             }
         }
 
-        public string iscsi_iqn
+        public string GetIscsiIqn()
         {
-            get { return Get(other_config, "iscsi_iqn") ?? ""; }
-            set
-            {
-                if (iscsi_iqn != value)
-                {
-                    Dictionary<string, string> new_other_config =
-                        other_config == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(other_config);
-                    new_other_config["iscsi_iqn"] = value;
-                    other_config = new_other_config;
-                }
-            }
+            return Get(other_config, "iscsi_iqn") ?? "";
+        }
+
+        public void SetIscsiIqn(string value)
+        {
+            SetDictionaryKey(other_config, "iscsi_iqn", value);
         }
 
         public override string ToString()
@@ -170,53 +158,34 @@ namespace XenAPI
             return this.name_label;
         }
 
-        public override string Description
+        public override string Description()
         {
-            get
-            {
-                if (name_description == "Default install of XenServer" || name_description == "Default install")  // i18n: CA-30372, CA-207273
-                    return Messages.DEFAULT_INSTALL_OF_XENSERVER;
-                else if (name_description == null)
-                    return "";
-                else
-                    return name_description;
-            }
+            if (name_description == "Default install of XenServer" || name_description == "Default install") // i18n: CA-30372, CA-207273
+                return Messages.DEFAULT_INSTALL_OF_XENSERVER;
+            else if (name_description == null)
+                return "";
+            else
+                return name_description;
         }
 
         /// <summary>
         /// The expiry date of this host's license in UTC.
         /// </summary>
-        public virtual DateTime LicenseExpiryUTC
+        public virtual DateTime LicenseExpiryUTC()
         {
-            get
-            {
-                if (license_params != null && license_params.ContainsKey("expiry"))
-                    return TimeUtil.ParseISO8601DateTime(license_params["expiry"]);
-                return new DateTime(2030, 1, 1);
-            }
+            if (license_params != null && license_params.ContainsKey("expiry"))
+                return TimeUtil.ParseISO8601DateTime(license_params["expiry"]);
+            return new DateTime(2030, 1, 1);
         }
 
-        private bool _RestrictRBAC
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_rbac"); }
-        }
         public static bool RestrictRBAC(Host h)
         {
-            return h._RestrictRBAC;
+            return BoolKeyPreferTrue(h.license_params, "restrict_rbac");
         }
 
-        private bool _RestrictDMC
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_dmc"); }
-        }
         public static bool RestrictDMC(Host h)
         {
-            return h._RestrictDMC;
-        }
-
-        private bool _RestrictHotfixApply
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_hotfix_apply"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_dmc");
         }
 
         /// <summary>
@@ -226,12 +195,7 @@ namespace XenAPI
         /// <returns></returns>
         public static bool RestrictHotfixApply(Host h)
         {
-            return h._RestrictHotfixApply;
-        }
-
-        private bool _RestrictBatchHotfixApply
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_batch_hotfix_apply"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_hotfix_apply");
         }
 
         /// <summary>
@@ -241,99 +205,57 @@ namespace XenAPI
         /// <returns></returns>
         public static bool RestrictBatchHotfixApply(Host h)
         {
-            return h._RestrictBatchHotfixApply;
+            return BoolKeyPreferTrue(h.license_params, "restrict_batch_hotfix_apply");
         }
 
-        private bool _RestrictCheckpoint
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_checkpoint"); }
-        }
         public static bool RestrictCheckpoint(Host h)
         {
-            return h._RestrictCheckpoint;
+            return BoolKeyPreferTrue(h.license_params, "restrict_checkpoint");
         }
 
         public static bool RestrictCifs(Host h)
         {
-            return h._RestrictCifs;
-        }
-
-        private bool _RestrictCifs
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_cifs"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_cifs");
         }
 
         public static bool RestrictVendorDevice(Host h)
         {
-            return h._RestrictVendorDevice;
+            return BoolKeyPreferTrue(h.license_params, "restrict_pci_device_for_auto_update");
         }
 
-        private bool _RestrictVendorDevice
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_pci_device_for_auto_update"); }
-        }
-
-        private bool _RestrictWLB
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_wlb"); }
-        }
         public static bool RestrictWLB(Host h)
         {
-            return h._RestrictWLB;
+            return BoolKeyPreferTrue(h.license_params, "restrict_wlb");
         }
 
-        private bool _RestrictVSwitchController
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_vswitch_controller"); }
-        }
         public static bool RestrictVSwitchController(Host h)
         {
-            return h._RestrictVSwitchController;
+            return BoolKeyPreferTrue(h.license_params, "restrict_vswitch_controller"); 
         }
 
-        public bool RestrictPooling
+        public static bool RestrictPooling(Host h)
         {
-            get { return BoolKeyPreferTrue(license_params, "restrict_pooling"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_pooling");
         }
 
         public static bool RestrictVMSnapshotSchedule(Host h)
         {
-            return h._RestrictVMSnapshotSchedule;
-        }
-
-        private bool _RestrictVMSnapshotSchedule
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_vmss"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_vmss");
         }
 
         public static bool RestrictVMAppliances(Host h)
         {
-            return h._RestrictVMAppliances;
-        }
-
-        private bool _RestrictVMAppliances
-        {
-            get { return false; }
+            return false;
         }
 
         public static bool RestrictDR(Host h)
         {
-            return h._RestrictDR;
-        }
-
-        private bool _RestrictDR
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_dr"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_dr");
         }
 
         public static bool RestrictCrossPoolMigrate(Host h)
         {
-            return h._RestrictCrossPoolMigrate;
-        }
-
-        private bool _RestrictCrossPoolMigrate
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_storage_xen_motion"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_storage_xen_motion");
         }
 
         public virtual bool IsFreeLicense()
@@ -341,211 +263,117 @@ namespace XenAPI
             return edition == "free";
         }
 
-        private bool _RestrictHA
-        {
-            get { return !BoolKey(license_params, "enable_xha"); }
-        }
-
         public static bool RestrictHA(Host h)
         {
-            return h._RestrictHA;
+            return !BoolKey(h.license_params, "enable_xha");
         }
 
-        private bool _RestrictAlerts
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_email_alerting"); }
-        }
         public static bool RestrictAlerts(Host h)
         {
-            return h._RestrictAlerts;
+            return BoolKeyPreferTrue(h.license_params, "restrict_email_alerting");
         }
 
-        private bool _RestrictStorageChoices
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_netapp"); }
-        }
         public static bool RestrictStorageChoices(Host h)
         {
-            return h._RestrictStorageChoices;
+            return BoolKeyPreferTrue(h.license_params, "restrict_netapp");
         }
 
-        private bool _RestrictPerformanceGraphs
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_historical_performance"); }
-        }
         public static bool RestrictPerformanceGraphs(Host h)
         {
-            return h._RestrictPerformanceGraphs;
+            return BoolKeyPreferTrue(h.license_params, "restrict_historical_performance");
         }
 
-        private bool _RestrictCpuMasking
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_cpu_masking"); }
-        }
         public static bool RestrictCpuMasking(Host h)
         {
-            return h._RestrictCpuMasking;
-        }
-
-        private bool _RestrictGpu
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_gpu"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_cpu_masking");
         }
 
         public static bool RestrictGpu(Host h)
         {
-            return h._RestrictGpu;
+            return BoolKeyPreferTrue(h.license_params, "restrict_gpu");
         }
 
-        private bool _RestrictVgpu
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_vgpu"); }
-        }
         public static bool RestrictVgpu(Host h)
         {
-            return h._RestrictVgpu;
-        }
-
-        public bool _RestrictManagementOnVLAN
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_management_on_vlan"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_vgpu");
         }
 
         public static bool RestrictManagementOnVLAN(Host h)
         {
-            return h._RestrictManagementOnVLAN;
-        }
-
-        private bool _RestrictIntegratedGpuPassthrough
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_integrated_gpu_passthrough"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_management_on_vlan");
         }
 
         public static bool RestrictIntegratedGpuPassthrough(Host h)
         {
-            return h._RestrictIntegratedGpuPassthrough;
-        }
-
-        private bool _RestrictExportResourceData
-        {
-            get
-            {
-                if (Helpers.CreedenceOrGreater(Connection)) 
-                {
-                    return BoolKeyPreferTrue(license_params, "restrict_export_resource_data");
-                }
-                // Pre-Creedence hosts:
-                // allowed on Per-Socket edition for Clearwater hosts
-                var hostEdition = GetEdition(edition);
-                if (hostEdition == Edition.PerSocket)
-                {
-                    return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
-                }
-                return true;
-            }
+            return BoolKeyPreferTrue(h.license_params, "restrict_integrated_gpu_passthrough");
         }
 
         public static bool RestrictExportResourceData(Host h)
         {
-            return h._RestrictExportResourceData;
-        }
-
-        /// <summary>
-        /// Intra pool migration is restricted only if the "restrict_xen_motion" key exists and it is true
-        /// </summary>
-        private bool _RestrictIntraPoolMigrate
-        {
-            get { return BoolKey(license_params, "restrict_xen_motion"); }
+            if (Helpers.CreedenceOrGreater(h.Connection))
+            {
+                return BoolKeyPreferTrue(h.license_params, "restrict_export_resource_data");
+            }
+            // Pre-Creedence hosts:
+            // allowed on Per-Socket edition for Clearwater hosts
+            var hostEdition = GetEdition(h.edition);
+            if (hostEdition == Edition.PerSocket)
+            {
+                return h.LicenseExpiryUTC() < DateTime.UtcNow - h.Connection.ServerTimeOffset; // restrict if the license has expired
+            }
+            return true;
         }
 
         public static bool RestrictIntraPoolMigrate(Host h)
         {
-            return h._RestrictIntraPoolMigrate;
+            return BoolKey(h.license_params, "restrict_xen_motion"); 
         }
 
         /// <summary>
         /// Active directory is restricted only if the "restrict_ad" key exists and it is true
         /// </summary>
-        private bool _RestrictAD
-        {
-            get { return BoolKey(license_params, "restrict_ad"); }
-        }
-
         public static bool RestrictAD(Host h)
         {
-            return h._RestrictAD;
-        }
-
-        private bool _RestrictReadCaching
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_read_caching"); }
+            return BoolKey(h.license_params, "restrict_ad");
         }
 
         public static bool RestrictReadCaching(Host h)
         {
-            return h._RestrictReadCaching;
-        }
-
-        private bool _RestrictHealthCheck
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_health_check"); }
+            return BoolKeyPreferTrue(h.license_params, "restrict_read_caching");
         }
 
         public static bool RestrictHealthCheck(Host h)
         {
-            return h._RestrictHealthCheck;
+            return BoolKeyPreferTrue(h.license_params, "restrict_health_check"); 
         }
 
         /// <summary>
         /// Vss feature is restricted only if the "restrict_vss" key exists and it is true
         /// </summary>
-        private bool _RestrictVss
-        {
-            get { return BoolKey(license_params, "restrict_vss"); }
-        }
-
         public static bool RestrictVss(Host h)
         {
-            return h._RestrictVss;
+            return BoolKey(h.license_params, "restrict_vss"); 
+        }
+
+        public static bool RestrictPvsCache(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_pvs_proxy");
         }
 
         /// <summary>
         /// For Dundee and greater hosts: the feature is restricted only if the "restrict_ssl_legacy_switch" key exists and it is true
         /// For pre-Dundee hosts: the feature is restricted if the "restrict_ssl_legacy_switch" key is absent or it is true
         /// </summary>
-        private bool _RestrictSslLegacySwitch
-        {
-            get
-            {
-                return Helpers.DundeeOrGreater(this) 
-                    ? BoolKey(license_params, "restrict_ssl_legacy_switch") 
-                    : BoolKeyPreferTrue(license_params, "restrict_ssl_legacy_switch");
-            }
-        }
-
-        public static bool RestrictPvsCache(Host h)
-        {
-            return h._RestrictPvsCache;
-        }
-
-        private bool _RestrictPvsCache
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_pvs_proxy"); }
-        }
-
         public static bool RestrictSslLegacySwitch(Host h)
         {
-            return h._RestrictSslLegacySwitch;
-        }
-
-        private bool _RestrictLivePatching
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_live_patching"); }
+            return Helpers.DundeeOrGreater(h)
+                    ? BoolKey(h.license_params, "restrict_ssl_legacy_switch")
+                    : BoolKeyPreferTrue(h.license_params, "restrict_ssl_legacy_switch");
         }
 
         public static bool RestrictLivePatching(Host h)
         {
-            return h._RestrictLivePatching;
+            return BoolKeyPreferTrue(h.license_params, "restrict_live_patching");
         }
 
         public static bool RestrictIGMPSnooping(Host h)
@@ -555,26 +383,18 @@ namespace XenAPI
 
         public static bool RestrictVcpuHotplug(Host h)
         {
-            return h._RestrictVcpuHotplug;
-        }
-
-        private bool _RestrictVcpuHotplug
-        {
-            get
+            if (Helpers.ElyOrGreater(h.Connection))
             {
-                if (Helpers.ElyOrGreater(Connection))
-                {
-                    return BoolKeyPreferTrue(license_params, "restrict_set_vcpus_number_live");
-                }
-                // Pre-Ely hosts:
-                // allowed on Premium edition only
-                var hostEdition = GetEdition(edition);
-                if (hostEdition == Edition.Premium)
-                {
-                    return LicenseExpiryUTC < DateTime.UtcNow - Connection.ServerTimeOffset; // restrict if the license has expired
-                }
-                return true;
+                return BoolKeyPreferTrue(h.license_params, "restrict_set_vcpus_number_live");
             }
+            // Pre-Ely hosts:
+            // allowed on Premium edition only
+            var hostEdition = GetEdition(h.edition);
+            if (hostEdition == Edition.Premium)
+            {
+                return h.LicenseExpiryUTC() < DateTime.UtcNow - h.Connection.ServerTimeOffset; // restrict if the license has expired
+            }
+            return true;
         }
 
         public bool HasPBDTo(SR sr)
@@ -608,14 +428,14 @@ namespace XenAPI
         public const String MULTIPATH_HANDLE = "multipathhandle";
         public const String DMP = "dmp";
 
-        public bool MultipathEnabled
+        public bool MultipathEnabled()
         {
-            get { return BoolKey(other_config, MULTIPATH); }
+            return BoolKey(other_config, MULTIPATH);
         }
 
-        public String MultipathHandle
+        public String MultipathHandle()
         {
-            get { return Get(other_config, MULTIPATH_HANDLE); }
+           return Get(other_config, MULTIPATH_HANDLE);
         }
 
         public override int CompareTo(Host other)
@@ -654,48 +474,48 @@ namespace XenAPI
                 return false;
 
             Host master = Connection.Resolve<Host>(pool.master);
-            return master == null ? false : master.uuid == this.uuid;
+            return master != null && master.uuid == this.uuid;
         }
 
         /// <summary>
         /// Return this host's product version triplet (e.g. 5.6.100), or null if it can't be found.
         /// </summary>
-        public virtual string ProductVersion
+        public virtual string ProductVersion()
         {
-            get { return Get(software_version, "product_version"); }
+            return Get(software_version, "product_version");
         }
 
         private string MarketingVersion(string field)
         {
             string s = Get(software_version, field);
-            return string.IsNullOrEmpty(s) ? ProductVersion : s;
+            return string.IsNullOrEmpty(s) ? ProductVersion() : s;
         }
 
         /// <summary>
         /// Return this host's marketing version number (e.g. 5.6 Feature Pack 1),
         /// or ProductVersion (which can still be null) if it can't be found, including pre-Cowley hosts.
         /// </summary>
-        public string ProductVersionText
+        public string ProductVersionText()
         {
-            get { return MarketingVersion("product_version_text"); }
+            return MarketingVersion("product_version_text");
         }
 
         /// <summary>
         /// Return this host's marketing version number in short form (e.g. 5.6 FP1),
         /// or ProductVersion (which can still be null) if it can't be found, including pre-Cowley hosts.
         /// </summary>
-        public string ProductVersionTextShort
+        public string ProductVersionTextShort()
         {
-            get { return MarketingVersion("product_version_text_short"); }
+            return MarketingVersion("product_version_text_short");
         }
 
         /// <summary>
         /// Return this host's XCP version triplet (e.g. 1.0.50), or null if it can't be found,
         /// including all pre-Tampa hosts.
         /// </summary>
-        public virtual string PlatformVersion
+        public virtual string PlatformVersion()
         {
-            get { return Get(software_version, "platform_version"); }
+            return Get(software_version, "platform_version");
         }
 
         /// <summary>
@@ -707,25 +527,22 @@ namespace XenAPI
         /// 0 or -1 for developer builds, so comparisons should generally treat those numbers as if
         /// they were brand new.
         /// </remarks>
-        internal int BuildNumber
+        internal int BuildNumber()
         {
-            get
-            {
-                Debug.Assert(!Helpers.FalconOrGreater(this));
+            Debug.Assert(!Helpers.ElyOrGreater(this));
 
-                string bn = BuildNumberRaw;
-                if (bn == null)
-                    return -1;
-                while (bn.Length > 0 && !char.IsDigit(bn[bn.Length - 1]))
-                {
-                    bn = bn.Substring(0, bn.Length - 1);
-                }
-                int result;
-                if (int.TryParse(bn, out result))
-                    return result;
-                else
-                    return -1;
+            string bn = BuildNumberRaw();
+            if (bn == null)
+                return -1;
+            while (bn.Length > 0 && !char.IsDigit(bn[bn.Length - 1]))
+            {
+                bn = bn.Substring(0, bn.Length - 1);
             }
+            int result;
+            if (int.TryParse(bn, out result))
+                return result;
+            else
+                return -1;
         }
 
         /// <summary>
@@ -734,58 +551,42 @@ namespace XenAPI
         /// <remarks>
         /// null if not found
         /// </remarks>
-        public virtual string BuildNumberRaw
+        public virtual string BuildNumberRaw()
         {
-            get { return Get(software_version, "build_number"); }
+            return Get(software_version, "build_number");
         }
 
         /// <summary>
         /// Return this host's product version and build number (e.g. 5.6.100.72258), or null if product version can't be found.
         /// </summary>
-        public virtual string LongProductVersion
+        public virtual string LongProductVersion()
         {
-            get
-            {
-                string productVersion = ProductVersion;
-                return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.FalconOrGreater(this) ? BuildNumberRaw : BuildNumber.ToString()) : null;
-            }
+            string productVersion = ProductVersion();
+            return productVersion != null ? string.Format("{0}.{1}", productVersion, Helpers.ElyOrGreater(this) ? BuildNumberRaw() : BuildNumber().ToString()) : null;
         }
 
         /// <summary>
         /// Return the product_brand of this host, or null if none can be found.
         /// </summary>
-        public string ProductBrand
+        public string ProductBrand()
         {
-            get { return Get(software_version, "product_brand"); }
+            return Get(software_version, "product_brand");
         }
 
         /// <summary>
-        /// The remote syslog target. May return null if not set on the server. Set to null to unset.
+        /// The remote syslog target. May return null if not set on the server.
         /// </summary>
-        public string SysLogDestination
+        public string GetSysLogDestination()
         {
-            get { return logging != null && logging.ContainsKey("syslog_destination") ? logging["syslog_destination"] : null; }
-            set
-            {
-                if (SysLogDestination != value)
-                {
-                    Dictionary<string, string> new_logging =
-                        logging == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(logging);
+            return logging != null && logging.ContainsKey("syslog_destination") ? logging["syslog_destination"] : null;
+        }
 
-                    if (value == null)
-                    {
-                        new_logging.Remove("syslog_destination");
-                    }
-                    else
-                    {
-                        new_logging["syslog_destination"] = value;
-                    }
-
-                    logging = new_logging;
-                }
-            }
+        /// <summary>
+        /// Set to null to unset
+        /// </summary>
+        public void SetSysLogDestination(string value)
+        {
+            SetDictionaryKey(logging, "syslog_destination", value);
         }
 
         public static bool IsFullyPatched(Host host,IEnumerable<IXenConnection> connections)
@@ -835,115 +636,88 @@ namespace XenAPI
             return updates;
         }
 
-        public string XAPI_version
+        public string XAPI_version()
         {
-            get
-            {
-                return Get(software_version, "xapi");
-            }
+            return Get(software_version, "xapi");
         }
 
-        public bool LinuxPackPresent
+        public bool LinuxPackPresent()
         {
-            get
-            {
-                return software_version.ContainsKey("xs:linux");
-            }
+            return software_version.ContainsKey("xs:linux");
         }
 
-        public bool HasCrashDumps
+        public bool HasCrashDumps()
         {
-            get
-            {
-                return crashdumps != null && crashdumps.Count > 0;
-            }
+            return crashdumps != null && crashdumps.Count > 0;
         }
 
-        public bool IsLive
+        public bool IsLive()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
+            if (Connection == null)
+                return false;
 
-                Host_metrics hm = Connection.Resolve(metrics);
-                return hm == null ? false : hm.live;
-            }
+            Host_metrics hm = Connection.Resolve(metrics);
+            return hm != null && hm.live;
         }
 
         public const string MAINTENANCE_MODE = "MAINTENANCE_MODE";
 
-        public bool MaintenanceMode
+        public bool MaintenanceMode()
         {
-            get
-            {
-                return BoolKey(other_config, MAINTENANCE_MODE);
-            }
+            return BoolKey(other_config, MAINTENANCE_MODE);
         }
 
         public const string BOOT_TIME = "boot_time";
 
-        public double BootTime
+        public double BootTime()
         {
-            get
-            {
-                if (other_config == null)
-                    return 0.0;
+            if (other_config == null)
+                return 0.0;
 
-                if (!other_config.ContainsKey(BOOT_TIME))
-                    return 0.0;
+            if (!other_config.ContainsKey(BOOT_TIME))
+                return 0.0;
 
-                double bootTime;
+            double bootTime;
 
-                if (!double.TryParse(other_config[BOOT_TIME], NumberStyles.Number,
-                    CultureInfo.InvariantCulture, out bootTime))
-                    return 0.0;
+            if (!double.TryParse(other_config[BOOT_TIME], NumberStyles.Number,
+                CultureInfo.InvariantCulture, out bootTime))
+                return 0.0;
 
-                return bootTime;
-            }
+            return bootTime;
         }
 
-        public PrettyTimeSpan Uptime
+        public PrettyTimeSpan Uptime()
         {
-            get
-            {
-                double bootTime = BootTime;
-                if (bootTime == 0.0)
-                    return null;
-                return new PrettyTimeSpan(DateTime.UtcNow - Util.FromUnixTime(bootTime) - Connection.ServerTimeOffset);
-            }
+            double bootTime = BootTime();
+            if (bootTime == 0.0)
+                return null;
+            return new PrettyTimeSpan(DateTime.UtcNow - Util.FromUnixTime(bootTime) - Connection.ServerTimeOffset);
         }
 
         public const string AGENT_START_TIME = "agent_start_time";
 
-        public double AgentStartTime
+        public double AgentStartTime()
         {
-            get
-            {
-                if (other_config == null)
-                    return 0.0;
+            if (other_config == null)
+                return 0.0;
 
-                if (!other_config.ContainsKey(AGENT_START_TIME))
-                    return 0.0;
+            if (!other_config.ContainsKey(AGENT_START_TIME))
+                return 0.0;
 
-                double agentStartTime;
+            double agentStartTime;
 
-                if (!double.TryParse(other_config[AGENT_START_TIME], System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out agentStartTime))
-                    return 0.0;
+            if (!double.TryParse(other_config[AGENT_START_TIME], System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out agentStartTime))
+                return 0.0;
 
-                return agentStartTime;
-            }
+            return agentStartTime;
         }
 
-        public PrettyTimeSpan AgentUptime
+        public PrettyTimeSpan AgentUptime()
         {
-            get
-            {
-                double startTime = AgentStartTime;
-                if (startTime == 0.0)
-                    return null;
-                return new PrettyTimeSpan(DateTime.UtcNow - Util.FromUnixTime(startTime) - Connection.ServerTimeOffset);
-            }
+            double startTime = AgentStartTime();
+            if (startTime == 0.0)
+                return null;
+            return new PrettyTimeSpan(DateTime.UtcNow - Util.FromUnixTime(startTime) - Connection.ServerTimeOffset);
         }
 
         // Get the path counts from the Multipath Boot From SAN feature (see PR-1034 and CP-1696).
@@ -958,13 +732,10 @@ namespace XenAPI
                 PBD.ParsePathCounts(other_config["mpath-boot"], out current, out max));
         }
 
-        public bool HasRunningVMs
+        public bool HasRunningVMs()
         {
-            get
-            {
-                // 2 not 1, because the Control Domain doesn't count
-                return resident_VMs != null && resident_VMs.Count >= 2;
-            }
+            // 2 not 1, because the Control Domain doesn't count
+            return resident_VMs != null && resident_VMs.Count >= 2;
         }
 
         #region Save Evacuated VMs for later
@@ -1114,47 +885,38 @@ namespace XenAPI
         /// <summary>
         /// Will return null if cannot find connection or any control domain in list of vms
         /// </summary>
-        public VM ControlDomainZero
+        public VM ControlDomainZero()
         {
-            get
-            {
-                if (Connection == null)
-                    return null;
+            if (Connection == null)
+                return null;
 
-                if (!Helper.IsNullOrEmptyOpaqueRef(control_domain))
-                    return Connection.Resolve(control_domain);
+            if (!Helper.IsNullOrEmptyOpaqueRef(control_domain))
+                return Connection.Resolve(control_domain);
 
-                var vms = Connection.ResolveAll(resident_VMs);
-                return vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
-            }
+            var vms = Connection.ResolveAll(resident_VMs);
+            return vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
         }
 
-        public bool HasManyControlDomains
+        public bool HasManyControlDomains()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
+            if (Connection == null)
+                return false;
 
-                var vms = Connection.ResolveAll(resident_VMs);
-                return vms.FindAll(v => v.is_control_domain).Count > 1;
-            }
+            var vms = Connection.ResolveAll(resident_VMs);
+            return vms.FindAll(v => v.is_control_domain).Count > 1;
         }
 
-        public IEnumerable<VM> OtherControlDomains
+        public IEnumerable<VM> OtherControlDomains()
         {
-            get
-            {
-                if (Connection == null)
-                    return null;
+            if (Connection == null)
+                return null;
 
-                var vms = Connection.ResolveAll(resident_VMs);
+            var vms = Connection.ResolveAll(resident_VMs);
 
-                if (!Helper.IsNullOrEmptyOpaqueRef(control_domain))
-                    return vms.Where(v => v.is_control_domain && v.opaque_ref != control_domain);
+            if (!Helper.IsNullOrEmptyOpaqueRef(control_domain))
+                return vms.Where(v => v.is_control_domain && v.opaque_ref != control_domain);
 
-                return vms.Where(v => v.is_control_domain && v.domid != 0);
-            }
+            return vms.Where(v => v.is_control_domain && v.domid != 0);
         }
 
         /// <summary>
@@ -1171,17 +933,17 @@ namespace XenAPI
         /// <summary>
         /// The xencenter_min as a int, or 0. if we couldn't parse it.
         /// </summary>
-        public int XenCenterMin
+        public int XenCenterMin()
         {
-            get { return GetSVAsInt("xencenter_min"); }
+            return GetSVAsInt("xencenter_min");
         }
 
         /// <summary>
         /// The xencenter_max as a int, or 0 if we couldn't parse it.
         /// </summary>
-        public int XenCenterMax
+        public int XenCenterMax()
         {
-            get { return GetSVAsInt("xencenter_max"); }
+            return GetSVAsInt("xencenter_max");
         }
 
         public string GetDatabaseSchema()
@@ -1197,84 +959,72 @@ namespace XenAPI
         /// free), but it's the one we need to make the memory go down to zero when ballooning
         /// takes place.
         /// </summary>
-        public long memory_free_calc
+        public long memory_free_calc()
         {
-            get
+            Host_metrics host_metrics = Connection.Resolve(this.metrics);
+            if (host_metrics == null)
+                return 0;
+
+            long used = memory_overhead;
+            foreach (VM vm in Connection.ResolveAll(resident_VMs))
             {
-                Host_metrics host_metrics = Connection.Resolve(this.metrics);
-                if (host_metrics == null)
-                    return 0;
-
-                long used = memory_overhead;
-                foreach (VM vm in Connection.ResolveAll(resident_VMs))
-                {
-                    used += vm.memory_overhead;
-                    VM_metrics vm_metrics = vm.Connection.Resolve(vm.metrics);
-                    if (vm_metrics != null)
-                        used += vm_metrics.memory_actual;
-                }
-
-                // This hack is needed because of bug CA-32509. xapi uses a deliberately generous
-                // estimate of VM.memory_overhead: but the low-level squeezer code doesn't (and can't)
-                // know about the same calculation, and so uses some of this memory_overhead for the
-                // VM's memory_actual. This causes up to 1MB of double-counting per VM.
-                return ((host_metrics.memory_total > used) ? (host_metrics.memory_total - used) : 0);
+                used += vm.memory_overhead;
+                VM_metrics vm_metrics = vm.Connection.Resolve(vm.metrics);
+                if (vm_metrics != null)
+                    used += vm_metrics.memory_actual;
             }
+
+            // This hack is needed because of bug CA-32509. xapi uses a deliberately generous
+            // estimate of VM.memory_overhead: but the low-level squeezer code doesn't (and can't)
+            // know about the same calculation, and so uses some of this memory_overhead for the
+            // VM's memory_actual. This causes up to 1MB of double-counting per VM.
+            return ((host_metrics.memory_total > used) ? (host_metrics.memory_total - used) : 0);
         }
 
         /// <summary>
         /// The total of all the dynamic_minimum memories of all resident VMs other than the control domain.
         /// For non-ballonable VMs, we use the static_maximum instead, because the dynamic_minimum has no effect.
         /// </summary>
-        public long tot_dyn_min
+        public long tot_dyn_min()
         {
-            get
+            long ans = 0;
+            foreach (VM vm in Connection.ResolveAll(resident_VMs))
             {
-                long ans = 0;
-                foreach (VM vm in Connection.ResolveAll(resident_VMs))
-                {
-                    if (!vm.is_control_domain)
-                        ans += vm.has_ballooning ? vm.memory_dynamic_min : vm.memory_static_max;
-                }
-                return ans;
-           }
+                if (!vm.is_control_domain)
+                    ans += vm.has_ballooning() ? vm.memory_dynamic_min : vm.memory_static_max;
+            }
+            return ans;
         }
 
         /// <summary>
         /// The total of all the dynamic_maximum memories of all resident VMs other than the control domain.
         /// For non-ballonable VMs, we use the static_maximum instead, because the dynamic_maximum has no effect.
         /// </summary>
-        public long tot_dyn_max
+        public long tot_dyn_max()
         {
-            get
+            long ans = 0;
+            foreach (VM vm in Connection.ResolveAll(resident_VMs))
             {
-                long ans = 0;
-                foreach (VM vm in Connection.ResolveAll(resident_VMs))
-                {
-                    if (!vm.is_control_domain)
-                        ans += vm.has_ballooning ? vm.memory_dynamic_max : vm.memory_static_max;
-                }
-                return ans;
+                if (!vm.is_control_domain)
+                    ans += vm.has_ballooning() ? vm.memory_dynamic_max : vm.memory_static_max;
             }
+            return ans;
         }
 
         /// <summary>
         /// The amount of available memory on the host. This is not the same as the amount of free memory, because
         /// it includes the memory that could be freed by reducing balloonable VMs to their dynamic_minimum memory.
         /// </summary>
-        public long memory_available_calc
+        public long memory_available_calc()
         {
-            get
-            {
-                Host_metrics host_metrics = Connection.Resolve(this.metrics);
-                if (host_metrics == null)
-                    return 0;
+            Host_metrics host_metrics = Connection.Resolve(this.metrics);
+            if (host_metrics == null)
+                return 0;
 
-                long avail = host_metrics.memory_total - tot_dyn_min - xen_memory_calc;
-                if (avail < 0)
-                    avail = 0;   // I don't think this can happen, but I'm nervous about CA-32509: play it safe
-                return avail;
-            }
+            long avail = host_metrics.memory_total - tot_dyn_min() - xen_memory_calc();
+            if (avail < 0)
+                avail = 0; // I don't think this can happen, but I'm nervous about CA-32509: play it safe
+            return avail;
         }
 
         /// <summary>
@@ -1282,116 +1032,98 @@ namespace XenAPI
         /// Used to calculate this as total - free - tot_vm_mem, but that caused xen_mem to jump around
         /// during VM startup/shutdown because some changes happen before others.
         /// </summary>
-        public long xen_memory_calc
+        public long xen_memory_calc()
         {
-            get
+            long xen_mem = memory_overhead;
+            foreach (VM vm in Connection.ResolveAll(resident_VMs))
             {
-                long xen_mem = memory_overhead;
-                foreach (VM vm in Connection.ResolveAll(resident_VMs))
-                {
-                    xen_mem += vm.memory_overhead;
-                    if (vm.is_control_domain)
-                    {
-                        VM_metrics vmMetrics = vm.Connection.Resolve(vm.metrics);
-                        if (vmMetrics != null)
-                            xen_mem += vmMetrics.memory_actual;
-                    }
-                }
-                return xen_mem;
-            }
-        }
-
-        public long dom0_memory
-        {
-            get
-            {
-                long dom0_mem = 0;
-                VM vm = ControlDomainZero;
-                if (vm != null)
+                xen_mem += vm.memory_overhead;
+                if (vm.is_control_domain)
                 {
                     VM_metrics vmMetrics = vm.Connection.Resolve(vm.metrics);
-                    dom0_mem = vmMetrics != null ? vmMetrics.memory_actual : vm.memory_dynamic_min;
+                    if (vmMetrics != null)
+                        xen_mem += vmMetrics.memory_actual;
                 }
-                return dom0_mem;
             }
+            return xen_mem;
         }
 
-        public long dom0_memory_extra
+        public long dom0_memory()
         {
-            get
+            long dom0_mem = 0;
+            VM vm = ControlDomainZero();
+            if (vm != null)
             {
-                VM vm = ControlDomainZero;
-                return vm != null ? vm.memory_static_max - vm.memory_static_min : 0;
+                VM_metrics vmMetrics = vm.Connection.Resolve(vm.metrics);
+                dom0_mem = vmMetrics != null ? vmMetrics.memory_actual : vm.memory_dynamic_min;
             }
+            return dom0_mem;
+        }
+
+        public long dom0_memory_extra()
+        {
+            VM vm = ControlDomainZero();
+            return vm != null ? vm.memory_static_max - vm.memory_static_min : 0;
         }
 
 
         /// <summary>
         /// Friendly string showing memory usage on the host
         /// </summary>
-        public string HostMemoryString
+        public string HostMemoryString()
         {
-            get
-            {
-                Host_metrics m = Connection.Resolve(metrics);
-                if (m == null)
-                    return Messages.GENERAL_UNKNOWN;
+            Host_metrics m = Connection.Resolve(metrics);
+            if (m == null)
+                return Messages.GENERAL_UNKNOWN;
 
-                long ServerMBAvail = memory_available_calc;
-                long ServerMBTotal = m.memory_total;
+            long ServerMBAvail = memory_available_calc();
+            long ServerMBTotal = m.memory_total;
 
-                return string.Format(Messages.GENERAL_MEMORY_SERVER_FREE,
-                    Util.MemorySizeStringSuitableUnits(ServerMBAvail, true),
-                    Util.MemorySizeStringSuitableUnits(ServerMBTotal, true));
-            }
+            return string.Format(Messages.GENERAL_MEMORY_SERVER_FREE,
+                Util.MemorySizeStringSuitableUnits(ServerMBAvail, true),
+                Util.MemorySizeStringSuitableUnits(ServerMBTotal, true));
         }
 
         /// <summary>
         /// A friendly string for the XenMemory on this host
         /// </summary>
-        public string XenMemoryString
+        public string XenMemoryString()
         {
-            get
-            {
-                if (Connection.Resolve(metrics) == null)
-                    return Messages.GENERAL_UNKNOWN;
+            if (Connection.Resolve(metrics) == null)
+                return Messages.GENERAL_UNKNOWN;
 
-                return Util.MemorySizeStringSuitableUnits(xen_memory_calc, true);
-            }
+            return Util.MemorySizeStringSuitableUnits(xen_memory_calc(), true);
         }
 
         /// <summary>
         /// A friendly string of the resident VM's memory usage, with each entry separated by a line break
         /// </summary>
-        public string ResidentVMMemoryUsageString
+        public string ResidentVMMemoryUsageString()
         {
-            get
+            Host_metrics m = Connection.Resolve(metrics);
+
+            if (m == null)
+                return Messages.GENERAL_UNKNOWN;
+            else
             {
-                Host_metrics m = Connection.Resolve(metrics);
+                List<string> lines = new List<string>();
 
-                if (m == null)
-                    return Messages.GENERAL_UNKNOWN;
-                else
+                foreach (VM vm in Connection.ResolveAll(resident_VMs))
                 {
-                    List<string> lines = new List<string>();
+                    if (vm.is_control_domain)
+                        continue;
 
-                    foreach (VM vm in Connection.ResolveAll(resident_VMs))
-                    {
-                        if (vm.is_control_domain)
-                            continue;
+                    VM_metrics VMMetrics = Connection.Resolve(vm.metrics);
+                    if (VMMetrics == null)
+                        continue;
 
-                        VM_metrics VMMetrics = Connection.Resolve(vm.metrics);
-                        if (VMMetrics == null)
-                            continue;
+                    string message = string.Format(Messages.GENERAL_MEMORY_VM_USED, vm.Name(),
+                        Util.MemorySizeStringSuitableUnits(VMMetrics.memory_actual, true));
 
-                        string message = string.Format(Messages.GENERAL_MEMORY_VM_USED, vm.Name,
-                                Util.MemorySizeStringSuitableUnits(VMMetrics.memory_actual, true));
-
-                        lines.Add(message);
-                    }
-
-                    return string.Join("\n", lines.ToArray());
+                    lines.Add(message);
                 }
+
+                return string.Join("\n", lines.ToArray());
             }
         }
 
@@ -1403,7 +1135,7 @@ namespace XenAPI
         {
             bool allPBDsReady = false;
             int timeout = 120;
-            log.DebugFormat("Waiting for PBDs on host {0} to become plugged", Name);
+            log.DebugFormat("Waiting for PBDs on host {0} to become plugged", Name());
             
             do
             {
@@ -1442,167 +1174,131 @@ namespace XenAPI
 
                 try
                 {
-                    log.DebugFormat("Plugging PBD {0} on host {1}", pbd.Name, Name);
+                    log.DebugFormat("Plugging PBD {0} on host {1}", pbd.Name(), Name());
                     PBD.plug(session, pbd.opaque_ref);
                 }
                 catch (Exception e)
                 {
-                    log.Debug(string.Format("Error plugging PBD {0} on host {1}", pbd.Name, Name), e);
+                    log.Debug(string.Format("Error plugging PBD {0} on host {1}", pbd.Name(), Name()), e);
                 }
             }
         }
+
         /// <summary>
         /// Whether the host is running the vSwitch network stack
         /// </summary>
-        public bool vSwitchNetworkBackend
+        public bool vSwitchNetworkBackend()
         {
-            get
-            {
-                return software_version.ContainsKey("network_backend") &&
-                       software_version["network_backend"] == "openvswitch";
-            }
+            return software_version.ContainsKey("network_backend") &&
+                   software_version["network_backend"] == "openvswitch";
         }
 
         /// <summary>
         /// The number of CPU sockets the host has
         /// Return 0 if a problem is found
         /// </summary>
-        public virtual int CpuSockets
+        public virtual int CpuSockets()
         {
-            get
-            {
-                const string key = "socket_count";
-                const int defaultSockets = 0;
+            const string key = "socket_count";
+            const int defaultSockets = 0;
 
-                if (cpu_info == null || !cpu_info.ContainsKey(key))
-                    return defaultSockets;
+            if (cpu_info == null || !cpu_info.ContainsKey(key))
+                return defaultSockets;
 
-                int sockets;
-                bool parsed = int.TryParse(cpu_info[key], out sockets);
-                if (!parsed)
-                    return defaultSockets;
-                
-                return sockets;
+            int sockets;
+            bool parsed = int.TryParse(cpu_info[key], out sockets);
+            if (!parsed)
+                return defaultSockets;
 
-            }
+            return sockets;
         }
 
         /// <summary>
         /// The number of cpus the host has
         /// Return 0 if a problem is found
         /// </summary>
-        public int CpuCount
+        public int CpuCount()
         {
-            get
-            {
-                const string key = "cpu_count";
-                const int defaultCpuCount = 0;
+            const string key = "cpu_count";
+            const int defaultCpuCount = 0;
 
-                if (cpu_info == null || !cpu_info.ContainsKey(key))
-                    return defaultCpuCount;
+            if (cpu_info == null || !cpu_info.ContainsKey(key))
+                return defaultCpuCount;
 
-                int cpuCount;
-                bool parsed = int.TryParse(cpu_info[key], out cpuCount);
-                if (!parsed)
-                    return defaultCpuCount;
+            int cpuCount;
+            bool parsed = int.TryParse(cpu_info[key], out cpuCount);
+            if (!parsed)
+                return defaultCpuCount;
 
-                return cpuCount;
-            }
+            return cpuCount;
         }
 
         /// <summary>
         /// The number of cores per socket the host has
         /// Return 0 if a problem is found
         /// </summary>
-        public int CoresPerSocket
+        public int CoresPerSocket()
         {
-            get
-            {
-                var sockets = CpuSockets;
-                var cpuCount = CpuCount;
-                if (sockets > 0 && cpuCount > 0)
-                    return (cpuCount/sockets);
+            var sockets = CpuSockets();
+            var cpuCount = CpuCount();
+            if (sockets > 0 && cpuCount > 0)
+                return (cpuCount/sockets);
 
-                return 0;
-            }
+            return 0;
         }
 
         /// <summary>
         /// Is the host allowed to install hotfixes or are they restricted?
         /// </summary>
-        public virtual bool CanApplyHotfixes
+        public virtual bool CanApplyHotfixes()
         {
-            get
-            {
-                return !Helpers.FeatureForbidden(Connection, RestrictHotfixApply);
-            }
+            return !Helpers.FeatureForbidden(Connection, RestrictHotfixApply);
         }
 
         /// <summary>
         /// Grace is either upgrade or regular
         /// </summary>
-        public virtual bool InGrace
+        public virtual bool InGrace()
         {
-            get { return license_params.ContainsKey("grace"); }
+            return license_params.ContainsKey("grace");
         }
 
-        internal override string LocationString
+        internal override string LocationString()
         {
-            get
-            {
-                //for standalone hosts we do not show redundant location info
-                return Helpers.GetPool(Connection) == null ? string.Empty : base.LocationString;
-            }
+            //for standalone hosts we do not show redundant location info
+            return Helpers.GetPool(Connection) == null ? string.Empty : base.LocationString();
         }
 
-        public bool EnterpriseFeaturesEnabled
+        public bool EnterpriseFeaturesEnabled()
         {
-            get
-            {
-                var hostEdition = GetEdition(edition);
-                return EligibleForSupport && (hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser
-                    || hostEdition == Edition.PerSocket);
-            }
+            var hostEdition = GetEdition(edition);
+            return EligibleForSupport() && (hostEdition == Edition.EnterprisePerSocket || hostEdition == Edition.EnterprisePerUser
+                                          || hostEdition == Edition.PerSocket);
         }
 
-        public bool DesktopPlusFeaturesEnabled
+        public bool DesktopPlusFeaturesEnabled()
         {
-            get
-            {
-                return GetEdition(edition) == Edition.DesktopPlus;
-            }
+            return GetEdition(edition) == Edition.DesktopPlus;
         }
 
-        public bool DesktopFeaturesEnabled
+        public bool DesktopFeaturesEnabled()
         {
-            get
-            {
-                return GetEdition(edition) == Edition.Desktop;
-            }
+            return GetEdition(edition) == Edition.Desktop;
         }
 
-        public bool PremiumFeaturesEnabled
+        public bool PremiumFeaturesEnabled()
         {
-            get
-            {
-                return GetEdition(edition) == Edition.Premium;
-            }
+            return GetEdition(edition) == Edition.Premium;
         }
 
-        public bool StandardFeaturesEnabled
+        public bool StandardFeaturesEnabled()
         {
-            get
-            {
-                return GetEdition(edition) == Edition.Standard;
-            }
+            return GetEdition(edition) == Edition.Standard;
         }
 
-        public bool EligibleForSupport
+        public bool EligibleForSupport()
         {
-            get
-            {
-                return (Helpers.CreedenceOrGreater(this) &&  GetEdition(edition) != Edition.Free);
-            }
+            return (Helpers.CreedenceOrGreater(this) && GetEdition(edition) != Edition.Free);
         }
 
         #region Supplemental Packs
@@ -1688,55 +1384,39 @@ namespace XenAPI
         /// <summary>
         /// Return a list of the supplemental packs
         /// </summary>
-        public List<SuppPack> SuppPacks
+        public List<SuppPack> SuppPacks()
         {
-            get
-            {
-                List<SuppPack> packs = new List<SuppPack>();
-                if (software_version == null)
-                    return packs;
-                foreach (string key in software_version.Keys)
-                {
-                    SuppPack pack = new SuppPack(key, software_version[key]);
-                    if (pack.IsValid)
-                        packs.Add(pack);
-                }
+            List<SuppPack> packs = new List<SuppPack>();
+            if (software_version == null)
                 return packs;
+            foreach (string key in software_version.Keys)
+            {
+                SuppPack pack = new SuppPack(key, software_version[key]);
+                if (pack.IsValid)
+                    packs.Add(pack);
             }
+            return packs;
         }
 
-        public bool CanInstallSuppPack
-        {
-            get
-            {
-                return Helpers.CreamOrGreater(Connection);
-            }
-        }
         #endregion
 
         /// <summary>
         /// The PGPU that is the system display device or null
         /// </summary>
-        public PGPU SystemDisplayDevice
+        public PGPU SystemDisplayDevice()
         {
-            get
-            {
-                var pGpus = Connection.ResolveAll(PGPUs);
-                return pGpus.FirstOrDefault(pGpu => pGpu.is_system_display_device);
-            }
+            var pGpus = Connection.ResolveAll(PGPUs);
+            return pGpus.FirstOrDefault(pGpu => pGpu.is_system_display_device);
         }
 
         /// <summary>
         /// Is the host allowed to enable/disable integrated GPU passthrough or is the feature unavailable/restricted?
         /// </summary>
-        public bool CanEnableDisableIntegratedGpu
+        public bool CanEnableDisableIntegratedGpu()
         {
-            get
-            {
-                return Helpers.CreamOrGreater(Connection)
-                    && Helpers.GpuCapability(Connection)
-                    && !Helpers.FeatureForbidden(Connection, RestrictIntegratedGpuPassthrough);
-            }
+            return Helpers.CreamOrGreater(Connection)
+                   && Helpers.GpuCapability(Connection)
+                   && !Helpers.FeatureForbidden(Connection, RestrictIntegratedGpuPassthrough);
         }
 
         #region IEquatable<Host> Members

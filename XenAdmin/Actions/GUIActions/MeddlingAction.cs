@@ -47,7 +47,7 @@ namespace XenAdmin.Actions.GUIActions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public MeddlingAction(Task task)
-            : base(task.Title, task.Description, false, false)
+            : base(task.Title(), task.Description(), false, false)
         {
             RelatedTask = new XenRef<Task>(task.opaque_ref);
 
@@ -126,11 +126,11 @@ namespace XenAdmin.Actions.GUIActions
 
         private void SetAppliesToData(Task task)
         {
-            List<string> applies_to = task.AppliesTo;
+            List<string> applies_to = task.AppliesTo();
             if (applies_to != null)
             {
                 AppliesTo.AddRange(applies_to);
-                Description = task.Name;
+                Description = task.Name();
             }
             else
             {
@@ -156,7 +156,7 @@ namespace XenAdmin.Actions.GUIActions
         private void DestroyUnwantedOperations(Task task)
         {
             string[] err = task.error_info;
-            if (task.Name == "SR.create" && err != null && err.Length > 0 && err[0] == Failure.SR_BACKEND_FAILURE_107)
+            if (task.Name() == "SR.create" && err != null && err.Length > 0 && err[0] == Failure.SR_BACKEND_FAILURE_107)
             {
                 // This isn't an SR create at all, it is a scan for LUNs. Hide it, since the 'error' info contains loads of XML,
                 // and is not useful. We don't know this until the error occurs though. Destroy the MeddlingAction.

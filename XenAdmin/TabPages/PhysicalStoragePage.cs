@@ -231,9 +231,9 @@ namespace XenAdmin.TabPages
 
             row.SubItems.Clear();
             row.SubItems.AddRange(new string[] {
-                sr.Name,
-                sr.Description,
-                sr.FriendlyTypeName,
+                sr.Name(),
+                sr.Description(),
+                sr.FriendlyTypeName(),
                 sr.shared ? Messages.YES : Messages.NO,
                 percentString,
                 Util.DiskSizeString(sr.physical_size),
@@ -249,7 +249,7 @@ namespace XenAdmin.TabPages
             row.SubItems[5].Tag = sr.physical_size;
             row.SubItems[6].Tag = sr.virtual_allocation;
 
-            row.ImageIndex = (int)sr.GetIcon;
+            row.ImageIndex = (int)Images.GetIconFor(sr);
         }
 
         private void BuildList()
@@ -276,7 +276,7 @@ namespace XenAdmin.TabPages
                 {
                     SR sr = pbd.Connection.Resolve(pbd.SR);
 
-                    if (sr == null || sr.IsToolsSR || !sr.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    if (sr == null || sr.IsToolsSR() || !sr.Show(Properties.Settings.Default.ShowHiddenVMs))
                         continue;
 
                     // From MSDN:

@@ -210,7 +210,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             var host = SelectedMasters.First();
             Pool pool = host != null ? Helpers.GetPoolOfOne(host.Connection) : null;
-            host = pool != null ? pool.HostsToUpgrade.First() : null;
+            host = pool != null ? pool.HostsToUpgrade().First() : null;
 
             if (host == null)
             {

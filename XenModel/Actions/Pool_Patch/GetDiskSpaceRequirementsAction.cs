@@ -54,7 +54,7 @@ namespace XenAdmin.Actions
         /// This constructor is used to calculate the disk space requirements for installing or uploading a single patch
         /// </summary>
         public GetDiskSpaceRequirementsAction(Host host, Pool_patch patch, bool suppressHistory)
-            : this(host, patch.Name, patch.size, suppressHistory)
+            : this(host, patch.Name(), patch.size, suppressHistory)
         {
             currentPatch = patch;
         }
@@ -102,7 +102,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = String.Format(Messages.ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION, Host.Name);
+            Description = String.Format(Messages.ACTION_GET_DISK_SPACE_REQUIREMENTS_DESCRIPTION, Host.Name());
 
             string result;
 
@@ -120,7 +120,7 @@ namespace XenAdmin.Actions
                 }
                 catch (Failure failure)
                 {
-                    log.WarnFormat("Plugin call disk-space.get_required_space on {0} failed with {1}", Host.Name, failure.Message);
+                    log.WarnFormat("Plugin call disk-space.get_required_space on {0} failed with {1}", Host.Name(), failure.Message);
                     requiredDiskSpace = 0;
                 }
             }
@@ -134,7 +134,7 @@ namespace XenAdmin.Actions
             }
             catch (Failure failure)
             {
-                log.WarnFormat("Plugin call disk-space.get_avail_host_disk_space on {0} failed with {1}", Host.Name, failure.Message);
+                log.WarnFormat("Plugin call disk-space.get_avail_host_disk_space on {0} failed with {1}", Host.Name(), failure.Message);
             }
 
             // get reclaimable disk space (excluding current patch)
@@ -152,7 +152,7 @@ namespace XenAdmin.Actions
                 }
                 catch (Failure failure)
                 {
-                    log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
+                    log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name(), failure.Message);
                 }
             }
 
@@ -197,13 +197,13 @@ namespace XenAdmin.Actions
             switch (Operation)
             {
                 case OperationTypes.install :
-                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Host.Name, UpdateName);
+                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_INSTALL, Host.Name(), UpdateName);
                     break;
                 case OperationTypes.upload :
-                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Host.Name, UpdateName);
+                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_UPLOAD, Host.Name(), UpdateName);
                     break;
                 case OperationTypes.automatedUpdates :
-                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Host.Name);
+                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Host.Name());
                     break;
             }
 
