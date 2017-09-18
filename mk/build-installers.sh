@@ -35,32 +35,32 @@ set -eu
 #sign applications
 for file in XenCenterMain.exe CommandLib.dll MSTSCLib.dll XenCenterLib.dll XenCenterVNC.dll XenModel.dll XenOvf.dll XenOvfTransport.dll
 do
-  cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ${file}
+  cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ${file}
 done
 
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ${BRANDING_BRAND_CONSOLE}.exe
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ${BRANDING_BRAND_CONSOLE}.exe
 
-cd ${REPO}/xe/bin/Release         && ${REPO}/sign.bat xe.exe
-cd ${REPO}/xva_verify/bin/Release && ${REPO}/sign.bat xva_verify.exe
+cd ${REPO}/xe/bin/Release         && ${REPO}/mk/sign.bat xe.exe
+cd ${REPO}/xva_verify/bin/Release && ${REPO}/mk/sign.bat xva_verify.exe
 
 for file in Microsoft.ReportViewer.Common.dll Microsoft.ReportViewer.ProcessingObjectModel.dll Microsoft.ReportViewer.WinForms.dll
 do
-  cd ${REPO}/XenAdmin/ReportViewer && ${REPO}/sign.bat ${file}
+  cd ${REPO}/XenAdmin/ReportViewer && ${REPO}/mk/sign.bat ${file}
 done
 
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET by Charles Cook, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat log4net.dll  "Log4Net by The Apache Software Foundation, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib by IC#Code, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat DiscUtils.dll "DiscUtils by Kenneth Bell, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat Ionic.Zip.dll "OSS, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/sign.bat putty.exe "PuTTY by Simon Tatham, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET by Charles Cook, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat log4net.dll  "Log4Net by The Apache Software Foundation, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib by IC#Code, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat DiscUtils.dll "DiscUtils by Kenneth Bell, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Ionic.Zip.dll "OSS, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat putty.exe "PuTTY by Simon Tatham, signed by ${BRANDING_COMPANY_NAME_SHORT}"
 
 #copy signed files in XenServerHealthService folder
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
    ${REPO}/XenServerHealthCheck/bin/Release
 
 #sign XenServerHealthService
-cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/sign.bat XenServerHealthCheck.exe
+cd ${REPO}/XenServerHealthCheck/bin/Release && ${REPO}/mk/sign.bat XenServerHealthCheck.exe
 
 #create installers
 compile_installer()
@@ -89,7 +89,7 @@ ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wi
 
 sign_msi()
 {
-  cd ${WIX}/out$1 && chmod a+rw $1.msi && ${REPO}/sign.bat $1.msi
+  cd ${WIX}/out$1 && chmod a+rw $1.msi && ${REPO}/mk/sign.bat $1.msi
 }
 
 #create just english msi
@@ -123,7 +123,7 @@ cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi ja-jp.mst 1
 cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-cn.mst 2052
 cd ${WIX} && wscript WiSubStg.vbs ${BRANDING_BRAND_CONSOLE}.l10n.msi zh-tw.mst 1028
 #sign again the combined msi because it seems the embedding breaks the signature
-cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/sign.bat ${BRANDING_BRAND_CONSOLE}.l10n.msi
+cd ${WIX} && chmod a+rw ${BRANDING_BRAND_CONSOLE}.l10n.msi && ${REPO}/mk/sign.bat ${BRANDING_BRAND_CONSOLE}.l10n.msi
 
 #copy the msi installers
 cp ${WIX}/out${BRANDING_BRAND_CONSOLE}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}

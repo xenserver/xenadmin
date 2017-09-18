@@ -112,9 +112,9 @@ namespace XenAdmin.Dialogs
                 xenDesktopEnterpriseRadioButton.Visible = false;
                 enterprisePerSocketRadioButton.Checked = true;
                 enterprisePerSocketRadioButton.Text = String.Format(Messages.ENTERPRISE_PERSOCKET_LICENSES_X_REQUIRED,
-                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
+                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
                 standardPerSocketRadioButton.Text = String.Format(Messages.STANDARD_PERSOCKET_LICENSES_X_REQUIRED,
-                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets)));
+                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
             } 
             else 
             {
@@ -125,7 +125,7 @@ namespace XenAdmin.Dialogs
                 desktopRadioButton.Visible = false;
                 perSocketRadioButton.Checked = true;
                 perSocketRadioButton.Text = String.Format(Messages.PERSOCKET_LICENSES_X_REQUIRED,
-                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h=>h.CpuSockets)));
+                                                          xos.Sum(x => x.Connection.Cache.Hosts.Sum(h=>h.CpuSockets())));
             }
         }
 

@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     {
                         using (var dlg = new ThreeButtonDialog(
                             new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.RBAC_UPGRADE_WIZARD_MESSAGE, selectedMaster.Connection.Username,
-                                selectedMaster.Name), Messages.ROLLING_POOL_UPGRADE)))
+                                selectedMaster.Name()), Messages.ROLLING_POOL_UPGRADE)))
                         {
                             dlg.ShowDialog(this);
                         }
@@ -121,7 +121,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     IXenConnection connection = ((IXenObject)row.Tag).Connection;
 
                     if (connection == null || !connection.IsConnected)
-                        disconnectedServerNames.Add(((IXenObject)row.Tag).Name);
+                        disconnectedServerNames.Add(((IXenObject)row.Tag).Name());
                 }
             }
 
@@ -211,7 +211,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 {
                     int index = dataGridView1.Rows.Add(new UpgradeDataGridViewRow(pool));
 
-                    if ((IsNotAnUpgradeableVersion(pool.SmallerVersionHost) && !pool.RollingUpgrade) || pool.IsUpgradeForbidden)
+                    if ((IsNotAnUpgradeableVersion(pool.SmallerVersionHost()) && !pool.RollingUpgrade()) || pool.IsUpgradeForbidden())
                         ((DataGridViewExRow)dataGridView1.Rows[index]).Enabled = false;
                     else if (masters.Contains(pool.Connection.Resolve(pool.master)))
                         dataGridView1.CheckBoxChange(index, 1);
@@ -226,7 +226,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 foreach (Host host in hosts)
                 {
                     int index = dataGridView1.Rows.Add(new UpgradeDataGridViewRow(host, hasPool));
-                    if (IsNotAnUpgradeableVersion(host) || (poolOfOne != null && poolOfOne.IsUpgradeForbidden))
+                    if (IsNotAnUpgradeableVersion(host) || (poolOfOne != null && poolOfOne.IsUpgradeForbidden()))
                         ((DataGridViewExRow)dataGridView1.Rows[index]).Enabled = false;
                     else if (!hasPool && masters.Contains(host))
                         dataGridView1.CheckBoxChange(index, 1);
@@ -329,14 +329,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             protected override void UpdateAdditionalDetailsForPool(Pool pool, Host master)
             {
-                _description.Value = pool.Description;
-                _version.Value = pool.SmallerVersionHost.ProductVersionTextShort;
+                _description.Value = pool.Description();
+                _version.Value = pool.SmallerVersionHost().ProductVersionTextShort();
             }
 
             protected override void UpdateAdditionalDetailsForHost( Host host )
             {
-                _description.Value = host.Description;
-                _version.Value = host.ProductVersionTextShort;
+                _description.Value = host.Description();
+                _version.Value = host.ProductVersionTextShort();
             }
         }
 

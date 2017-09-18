@@ -53,7 +53,7 @@ namespace XenAdmin.Actions
         /// <param name="vm">The VM to detach it from</param>
         /// <param name="takeVDILock">Whether it is necessary to lock the VDI (we may be part of another disk action)</param>
         public DetachVirtualDiskAction(VDI disk, VM vm, bool takeVDILock)
-            : base(disk.Connection, string.Format(Messages.ACTION_DISK_DETACHING_TITLE, disk.Name, vm.Name, false))
+            : base(disk.Connection, string.Format(Messages.ACTION_DISK_DETACHING_TITLE, disk.Name(), vm.Name(), false))
         {
             this.takeVDILock = takeVDILock;
             vdi = disk;

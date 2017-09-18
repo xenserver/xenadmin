@@ -92,7 +92,7 @@ namespace XenAdmin.Actions.Wlb
 
             try
             {
-                log.Debug("Optimizing " + Pool.Name);
+                log.Debug("Optimizing " + Pool.Name());
 
                 // for checking whether to display recommendations on optimize pool listview
                 Helpers.SetOtherConfig(this.Session, this.Pool,WlbOptimizationRecommendation.OPTIMIZINGPOOL, Messages.IN_PROGRESS);
@@ -112,7 +112,7 @@ namespace XenAdmin.Actions.Wlb
                             AsyncAction hostAction = null;
                             int waitingInterval = 10 * 1000; // default to 10s 
 
-                            if (vmItem.Value.fromHost.IsLive)
+                            if (vmItem.Value.fromHost.IsLive())
                             {
                                 hostAction = new ShutdownHostAction(fromHost, AddHostToPoolCommand.NtolDialog);
                             }
@@ -140,7 +140,7 @@ namespace XenAdmin.Actions.Wlb
                         }
                         else
                         {
-                            log.Debug("Migrating VM " + vm.Name);
+                            log.Debug("Migrating VM " + vm.Name());
                             Host toHost = vmItem.Value.toHost;
 
                             try
@@ -182,7 +182,7 @@ namespace XenAdmin.Actions.Wlb
                     }
                     this.Description = Messages.WLB_OPT_OK_NOTICE_TEXT;
                     Helpers.SetOtherConfig(this.Session, this.Pool, WlbOptimizationRecommendation.OPTIMIZINGPOOL, optId);
-                    log.Debug("Completed optimizing " + Pool.Name);
+                    log.Debug("Completed optimizing " + Pool.Name());
                 }
             catch (Failure ex)
             {
@@ -200,7 +200,7 @@ namespace XenAdmin.Actions.Wlb
                 log.Error(ex, ex);
                 this.Description = Messages.WLB_OPT_FAILED;
                 Helpers.SetOtherConfig(this.Session, this.Pool, WlbOptimizationRecommendation.OPTIMIZINGPOOL, optId);
-                log.Debug("Optimizing " + Pool.Name + " is failed");
+                log.Debug("Optimizing " + Pool.Name() + " is failed");
             }
             this.PercentComplete = 100;
         }
@@ -260,7 +260,7 @@ namespace XenAdmin.Actions.Wlb
                 }
             }
 
-            if (!setDoNotRestart && vm.HasSavedRestartPriority)
+            if (!setDoNotRestart && vm.HasSavedRestartPriority())
             {
                 // If HA is turned on, setting ha_always_run will cause the VM to be started by itself
                 // but when the VM fails to start we want to know why, so we do a VM.start here too.

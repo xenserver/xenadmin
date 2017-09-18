@@ -55,8 +55,6 @@ namespace XenAdmin.Dialogs
         private long MinSize;
         private decimal min;
         private decimal max;
-        private string previousUnitsValueInitAlloc;
-        private string previousUnitsValueIncrAlloc;
 
         private bool SelectionNull = true;
         private readonly IEnumerable<VDI> _VDINamesInUse = new List<VDI>();
@@ -88,9 +86,6 @@ namespace XenAdmin.Dialogs
             max = (decimal)Math.Pow(1024, 4);//1 Petabit
             min = 0;
             comboBoxUnits.SelectedItem = comboBoxUnits.Items[0];
-            init_alloc_units.SelectedItem = init_alloc_units.Items[1];
-            incr_alloc_units.SelectedItem = incr_alloc_units.Items[1];
-            previousUnitsValueIncrAlloc = previousUnitsValueInitAlloc = Messages.VAL_MEGB;
             comboBoxUnits.SelectedIndexChanged += new EventHandler(comboBoxUnits_SelectedIndexChanged);
 
             SetNumUpDownIncrementAndDecimals(DiskSizeNumericUpDown, comboBoxUnits.SelectedItem.ToString());
@@ -143,8 +138,8 @@ namespace XenAdmin.Dialogs
             if (DiskTemplate == null)
                 return;
 
-            NameTextBox.Text = DiskTemplate.Name;
-            DescriptionTextBox.Text = DiskTemplate.Description;
+            NameTextBox.Text = DiskTemplate.Name();
+            DescriptionTextBox.Text = DiskTemplate.Description();
             SrListBox.selectSRorDefaultorAny(connection.Resolve(DiskTemplate.SR));
 
             // select the appropriate unit, based on size (CA-45905)
@@ -173,7 +168,7 @@ namespace XenAdmin.Dialogs
             List<string> usedNames = new List<string>();
             foreach (VDI v in connection.Cache.VDIs.Concat(_VDINamesInUse))
             {
-                usedNames.Add(v.Name);
+                usedNames.Add(v.Name());
             }
             return Helpers.MakeUniqueName(Messages.DEFAULT_VDI_NAME, usedNames);
         }
@@ -191,31 +186,6 @@ namespace XenAdmin.Dialogs
         void srListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateErrorsAndButtons();
-
-            initialAllocationNumericUpDown.Visible =
-            labelInitialAllocation.Visible =
-            allocationQuantumNumericUpDown.Visible =
-            init_alloc_units.Visible =
-            incr_alloc_units.Visible =
-            labelAllocationQuantum.Visible = IsSelectedSRThinProvisioned;
-
-            if (IsSelectedSRThinProvisioned)
-            {
-                DefaultToSRsConfig(userChangedInitialAllocationValue);
-            }
-        }
-
-        private bool IsSelectedSRThinProvisioned
-        {
-            get
-            {
-                var srToCheck = SrListBox.SR ?? SrListBox.DisabledSelectedSR;
-
-                if (srToCheck == null)
-                    return false;
-
-                return srToCheck.IsThinProvisioned;
-            }
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -255,7 +225,7 @@ namespace XenAdmin.Dialogs
                 var alreadyHasBootableDisk = HasBootableDisk(TheVM);
 
                 Actions.DelegatedAsyncAction action = new Actions.DelegatedAsyncAction(connection,
-                    string.Format(Messages.ACTION_DISK_ADDING_TITLE, NameTextBox.Text, sr.NameWithoutHost),
+                    string.Format(Messages.ACTION_DISK_ADDING_TITLE, NameTextBox.Text, sr.NameWithoutHost()),
                     Messages.ACTION_DISK_ADDING, Messages.ACTION_DISK_ADDED,
                     delegate(XenAPI.Session session)
                     {
@@ -276,7 +246,7 @@ namespace XenAdmin.Dialogs
                         vbd.userdevice = ud;
 
                         // Now try to plug the VBD.
-                        new XenAdmin.Actions.VbdSaveAndPlugAction(TheVM, vbd, vdi.Name, session, false, ShowMustRebootBoxCD, ShowVBDWarningBox).RunAsync();
+                        new XenAdmin.Actions.VbdSaveAndPlugAction(TheVM, vbd, vdi.Name(), session, false, ShowMustRebootBoxCD, ShowVBDWarningBox).RunAsync();
                     });
                 action.VM = TheVM;
                 new Dialogs.ActionProgressDialog(action, ProgressBarStyle.Blocks).ShowDialog();
@@ -301,14 +271,14 @@ namespace XenAdmin.Dialogs
             {
                 var vbd = c.Resolve(vbdRef);
 
-                if (vbd != null && !vbd.IsCDROM && !vbd.IsFloppyDrive && vbd.bootable)
+                if (vbd != null && !vbd.IsCDROM() && !vbd.IsFloppyDrive() && vbd.bootable)
                 {
                     VDI vdi = c.Resolve(vbd.VDI);
 
                     if (vdi != null)
                     {
                         SR sr = c.Resolve(vdi.SR);
-                        if (sr != null && sr.IsToolsSR)
+                        if (sr != null && sr.IsToolsSR())
                         {
                             continue;
                         }
@@ -318,64 +288,6 @@ namespace XenAdmin.Dialogs
                 }
             }
             return false;
-        }
-
-        // The values saved in the smconfig are in bytes.
-        public Dictionary<string, string> SMConfig
-        {
-            get
-            {
-                var smconfig = new Dictionary<string, string>();
-
-                if (SrListBox.SR.IsThinProvisioned)
-                {
-                    smconfig["allocation"] = "xlvhd";
-
-                    smconfig["allocation_quantum"] = (incr_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA)
-                                                                                                                    : (long)(allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA))
-                                                                                                                    .ToString(CultureInfo.InvariantCulture);
-                    smconfig["initial_allocation"] = (init_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? (long)(initialAllocationNumericUpDown.Value * Util.BINARY_MEGA)
-                                                                                                                    : (long)(initialAllocationNumericUpDown.Value * Util.BINARY_GIGA))
-                                                                                                                    .ToString(CultureInfo.InvariantCulture);
-                }
-
-                return smconfig;
-            }
-        }
-
-        void DefaultToSRsConfig(bool boundsOnly)
-        {
-            var srToCheck = SrListBox.SR ?? SrListBox.DisabledSelectedSR;
-
-            if (srToCheck == null)
-                return;
-
-            if (srToCheck.IsThinProvisioned)
-            {
-                var smConfig = new Dictionary<string, string>(srToCheck.sm_config);
-
-                // if the DiskTemplate contains initial_allocation and allocation_quantum settings, then use these values
-                if (DiskTemplate != null && DiskTemplate.sm_config != null)
-                {
-                    if (DiskTemplate.sm_config.ContainsKey("initial_allocation"))
-                        smConfig["initial_allocation"] = DiskTemplate.sm_config["initial_allocation"];
-                    if (DiskTemplate.sm_config.ContainsKey("allocation_quantum"))
-                        smConfig["allocation_quantum"] = DiskTemplate.sm_config["allocation_quantum"];
-                }
-
-                long temp = 0;
-                  
-                if (smConfig.ContainsKey("initial_allocation") && long.TryParse(smConfig["initial_allocation"], out temp))
-                {
-                    SetUpInitAllocationNumericUpDown(temp, boundsOnly); 
-  
-                }
-
-                if (smConfig.ContainsKey("allocation_quantum") && long.TryParse(smConfig["allocation_quantum"], out temp))
-                {
-                    SetUpIncrAllocationNumericUpDown(temp, srToCheck.physical_size, boundsOnly);
-                }
-            }
         }
 
         private void SetNumUpDownIncrementAndDecimals(NumericUpDown upDown, string units)
@@ -392,51 +304,6 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void SetUpInitAllocationNumericUpDown(long SRInitialAllocation, bool boundsOnly)
-        {
-            long vdiSizeBytes = (long) (SelectedUnits == DiskSizeUnits.GB ? DiskSizeNumericUpDown.Value * Util.BINARY_GIGA 
-                                                                          : DiskSizeNumericUpDown.Value * Util.BINARY_MEGA);
-
-            Helpers.AllocationBounds allocBounds = Helpers.VDIInitialAllocationBounds(vdiSizeBytes, SRInitialAllocation);
-
-            if (boundsOnly)
-            {
-                long userValInBytes = (long)(init_alloc_units.SelectedItem.ToString() == Messages.VAL_GIGB ? initialAllocationNumericUpDown.Value * Util.BINARY_GIGA 
-                                                                                                           : initialAllocationNumericUpDown.Value * Util.BINARY_MEGA);
-                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, 
-                                                           userValInBytes, init_alloc_units.SelectedItem.ToString());
-            }
-
-            init_alloc_units.SelectedItem = previousUnitsValueInitAlloc = allocBounds.Unit;
-
-            initialAllocationNumericUpDown.Minimum = allocBounds.MinInUnits;
-            initialAllocationNumericUpDown.Maximum = allocBounds.MaxInUnits;
-            initialAllocationNumericUpDown.Value = allocBounds.DefaultValueInUnits;
-
-            SetNumUpDownIncrementAndDecimals(initialAllocationNumericUpDown, allocBounds.Unit);
-        }
-
-        private void SetUpIncrAllocationNumericUpDown(long SRIncrementalAllocation, long SRSize, bool boundsOnly)
-        {
-            Helpers.AllocationBounds allocBounds = Helpers.VDIIncrementalAllocationBounds(SRSize, SRIncrementalAllocation);
-
-            if (boundsOnly)
-            {
-                long userValInBytes = (long)(incr_alloc_units.SelectedItem.ToString() == Messages.VAL_GIGB ? allocationQuantumNumericUpDown.Value * Util.BINARY_GIGA
-                                                                                                           : allocationQuantumNumericUpDown.Value * Util.BINARY_MEGA);
-                allocBounds = new Helpers.AllocationBounds(allocBounds.Min, allocBounds.Max, userValInBytes, 
-                                                           incr_alloc_units.SelectedItem.ToString());
-            }
-
-            incr_alloc_units.SelectedItem = previousUnitsValueIncrAlloc = allocBounds.Unit;
-
-            allocationQuantumNumericUpDown.Minimum = allocBounds.MinInUnits;
-            allocationQuantumNumericUpDown.Maximum = allocBounds.MaxInUnits;
-            allocationQuantumNumericUpDown.Value = allocBounds.DefaultValueInUnits;
-
-            SetNumUpDownIncrementAndDecimals(allocationQuantumNumericUpDown, allocBounds.Unit);
-        }        
-
         public VDI NewDisk()
         {
             VDI vdi = new VDI();
@@ -444,15 +311,12 @@ namespace XenAdmin.Dialogs
             vdi.read_only = DiskTemplate != null ? DiskTemplate.read_only : false;
             vdi.SR = new XenAPI.XenRef<XenAPI.SR>(SrListBox.SR);
 
-            if (SMConfig != null && SMConfig.Count > 0)
-                vdi.sm_config = SMConfig;
-
             vdi.virtual_size = Convert.ToInt64(DiskSizeNumericUpDown.Value * GetUnits());
             vdi.name_label = NameTextBox.Text;
             vdi.name_description = DescriptionTextBox.Text;
             vdi.sharable = DiskTemplate != null ? DiskTemplate.sharable : false;
             vdi.type = DiskTemplate != null ? DiskTemplate.type : vdi_type.user;
-            vdi.VMHint = TheVM != null ? TheVM.uuid : "";
+            vdi.SetVmHint(TheVM != null ? TheVM.uuid : "");
             return vdi;
         }
 
@@ -470,7 +334,7 @@ namespace XenAdmin.Dialogs
             vbd.empty = false;
             vbd.type = XenAPI.vbd_type.Disk;
             vbd.mode = XenAPI.vbd_mode.RW;
-            vbd.IsOwner = true;
+            vbd.SetIsOwner(true);
             vbd.unpluggable = true;
             return vbd;
 
@@ -641,12 +505,6 @@ namespace XenAdmin.Dialogs
                 try
                 {
                     SrListBox.DiskSize = (long)(Math.Round(newValue * GetUnits()));
-
-                    if (IsSelectedSRThinProvisioned && userChangedInitialAllocationValue)
-                    {
-                        SrListBox.OverridenInitialAllocationRate = (long)(init_alloc_units.SelectedItem.ToString() == Messages.VAL_MEGB ? initialAllocationNumericUpDown.Value * Util.BINARY_MEGA
-                                                                                                                                        : initialAllocationNumericUpDown.Value * Util.BINARY_GIGA); 
-                    }
                 }
                 catch (OverflowException)
                 {
@@ -654,10 +512,6 @@ namespace XenAdmin.Dialogs
                    SrListBox.DiskSize = newValue < 0 ? long.MinValue : long.MaxValue;
                 }
                 SrListBox.UpdateDiskSize();
-                if (IsSelectedSRThinProvisioned)
-                {
-                    DefaultToSRsConfig(userChangedInitialAllocationValue);
-                }
             }
             RefreshMinSize();
             updateErrorsAndButtons();
@@ -735,47 +589,6 @@ namespace XenAdmin.Dialogs
         private void initialAllocationNumericUpDown_Leave(object sender, EventArgs e)
         {
             userEntered = false;
-        }
-        
-        private void init_alloc_units_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateValuesWhenUnitsChanged(initialAllocationNumericUpDown, previousUnitsValueInitAlloc, init_alloc_units.SelectedItem.ToString());
-            previousUnitsValueInitAlloc = init_alloc_units.SelectedItem.ToString();
-        }
-
-        // The NumericUpDowns from the Storage Provisioning and Incremental Allocation from NewDiskDialog have the same behaviour when changing the units,
-        // therefore they use the same converting function.
-        private void incr_alloc_units_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateValuesWhenUnitsChanged(allocationQuantumNumericUpDown, previousUnitsValueIncrAlloc, incr_alloc_units.SelectedItem.ToString());
-            previousUnitsValueIncrAlloc = incr_alloc_units.SelectedItem.ToString();
-        }
-
-        private void UpdateValuesWhenUnitsChanged(NumericUpDown upDown, string previousUnits, string newUnits)
-        {
-            if (previousUnits == newUnits)
-                return;
-
-            if (newUnits == Messages.VAL_MEGB)
-            {
-                upDown.Maximum *= Util.BINARY_KILO;
-                upDown.Value *= Util.BINARY_KILO;
-                if(!userChangedInitialAllocationValue)
-                {
-                    upDown.Minimum *= Util.BINARY_KILO;
-                }
-            }
-            else
-            {
-                upDown.Minimum /= Util.BINARY_KILO;
-                upDown.Value /= Util.BINARY_KILO;
-                if (!userChangedInitialAllocationValue)
-                {
-                    upDown.Maximum /= Util.BINARY_KILO;
-                }
-            }
-
-            SetNumUpDownIncrementAndDecimals(upDown, newUnits);
         }
     }
 }

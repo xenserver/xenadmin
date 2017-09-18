@@ -69,7 +69,7 @@ namespace XenAdmin.Diagnostics.Checks
             catch (Failure failure)
             {
                 //note: handle the case when we get UNKNOWN_XENAPI_PLUGIN_FUNCTION - testSafe2Upgrade
-                log.WarnFormat("Plugin call prepare_host_upgrade.testSafe2Upgrade on {0} failed with {1}", Host.Name, failure.Message);
+                log.WarnFormat("Plugin call prepare_host_upgrade.testSafe2Upgrade on {0} failed with {1}", Host.Name(), failure.Message);
             }
 
             return null;

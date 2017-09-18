@@ -45,7 +45,7 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
 
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, Sr.NameWithoutHost); }
+            get { return string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, Sr.NameWithoutHost()); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)

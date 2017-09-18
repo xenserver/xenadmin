@@ -75,7 +75,7 @@ namespace XenAdmin.Actions
                                 // RBAC Failure
                                 var roles = Host.Connection.Session.Roles;
                                 roles.Sort();
-                                var msg = string.Format(Messages.BUGTOOL_RBAC_FAILURE, roles[0].FriendlyName);
+                                var msg = string.Format(Messages.BUGTOOL_RBAC_FAILURE, roles[0].FriendlyName());
                                 return string.Format(Messages.BUGTOOL_HOST_STATUS_FAILED_WITH_ERROR, msg);
                             }
 

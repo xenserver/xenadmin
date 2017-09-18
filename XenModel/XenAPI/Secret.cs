@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -83,8 +81,8 @@ namespace XenAPI
         public Proxy_Secret ToProxy()
         {
             Proxy_Secret result_ = new Proxy_Secret();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.value = (value != null) ? value : "";
+            result_.uuid = uuid ?? "";
+            result_.value = value ?? "";
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             return result_;
         }
@@ -141,7 +139,7 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static Secret get_record(Session session, string _secret)
         {
-            return new Secret((Proxy_Secret)session.proxy.secret_get_record(session.uuid, (_secret != null) ? _secret : "").parse());
+            return new Secret((Proxy_Secret)session.proxy.secret_get_record(session.uuid, _secret ?? "").parse());
         }
 
         /// <summary>
@@ -152,7 +150,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Secret> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Secret>.Create(session.proxy.secret_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Secret>.Create(session.proxy.secret_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -185,7 +183,7 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static void destroy(Session session, string _secret)
         {
-            session.proxy.secret_destroy(session.uuid, (_secret != null) ? _secret : "").parse();
+            session.proxy.secret_destroy(session.uuid, _secret ?? "").parse();
         }
 
         /// <summary>
@@ -196,7 +194,7 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static XenRef<Task> async_destroy(Session session, string _secret)
         {
-            return XenRef<Task>.Create(session.proxy.async_secret_destroy(session.uuid, (_secret != null) ? _secret : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_secret_destroy(session.uuid, _secret ?? "").parse());
         }
 
         /// <summary>
@@ -207,7 +205,7 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static string get_uuid(Session session, string _secret)
         {
-            return (string)session.proxy.secret_get_uuid(session.uuid, (_secret != null) ? _secret : "").parse();
+            return (string)session.proxy.secret_get_uuid(session.uuid, _secret ?? "").parse();
         }
 
         /// <summary>
@@ -218,7 +216,7 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static string get_value(Session session, string _secret)
         {
-            return (string)session.proxy.secret_get_value(session.uuid, (_secret != null) ? _secret : "").parse();
+            return (string)session.proxy.secret_get_value(session.uuid, _secret ?? "").parse();
         }
 
         /// <summary>
@@ -229,7 +227,7 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static Dictionary<string, string> get_other_config(Session session, string _secret)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.secret_get_other_config(session.uuid, (_secret != null) ? _secret : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.secret_get_other_config(session.uuid, _secret ?? "").parse());
         }
 
         /// <summary>
@@ -241,7 +239,7 @@ namespace XenAPI
         /// <param name="_value">New value to set</param>
         public static void set_value(Session session, string _secret, string _value)
         {
-            session.proxy.secret_set_value(session.uuid, (_secret != null) ? _secret : "", (_value != null) ? _value : "").parse();
+            session.proxy.secret_set_value(session.uuid, _secret ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -253,7 +251,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _secret, Dictionary<string, string> _other_config)
         {
-            session.proxy.secret_set_other_config(session.uuid, (_secret != null) ? _secret : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.secret_set_other_config(session.uuid, _secret ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -266,7 +264,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _secret, string _key, string _value)
         {
-            session.proxy.secret_add_to_other_config(session.uuid, (_secret != null) ? _secret : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.secret_add_to_other_config(session.uuid, _secret ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -278,7 +276,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _secret, string _key)
         {
-            session.proxy.secret_remove_from_other_config(session.uuid, (_secret != null) ? _secret : "", (_key != null) ? _key : "").parse();
+            session.proxy.secret_remove_from_other_config(session.uuid, _secret ?? "", _key ?? "").parse();
         }
 
         /// <summary>

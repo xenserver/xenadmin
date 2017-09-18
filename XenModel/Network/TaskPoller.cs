@@ -102,7 +102,7 @@ namespace XenAdmin.Network
             {
                 XenAPI.Task task = GetTask();
                 _action.Tick((int)(task.progress * _scale + _lo),
-                             task.Description == "" ? _action.Description : task.Description);
+                             task.Description() == "" ? _action.Description : task.Description());
                 switch (task.status)
                 {
                     case XenAPI.task_status_type.failure:

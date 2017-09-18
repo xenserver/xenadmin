@@ -40,14 +40,14 @@ namespace XenAPI
 {
     public partial class Pool_update : IComparable<Pool_update>
     {
-        public override string Name
+        public override string Name()
         {
-            get { return name_label; }
+            return name_label;
         }
 
-        public override string Description
+        public override string Description()
         {
-            get { return name_description; }
+            return name_description;
         }
 
         public bool AppliedOn(Host host)
@@ -66,13 +66,19 @@ namespace XenAPI
             return false;
         }
 
-        public List<Host> AppliedOnHosts
+        public List<Host> AppliedOnHosts()
         {
-            get 
-            {
-                return
-                    this.Connection.Cache.Hosts.Where(h => this.AppliedOn(h)).ToList();
-            }
+            return Connection.Cache.Hosts.Where(AppliedOn).ToList();
+        }
+
+        private const string ENFORCE_HOMOGENEITY = "enforce_homogeneity";
+
+        public bool EnforceHomogeneity()
+        {
+            if (Helpers.InvernessOrGreater(Connection))
+                return enforce_homogeneity;
+            var poolPatchOfUpdate = Connection.Cache.Pool_patches.FirstOrDefault(p => p.pool_update != null && p.pool_update.opaque_ref == opaque_ref);
+            return poolPatchOfUpdate != null && BoolKey(poolPatchOfUpdate.other_config, ENFORCE_HOMOGENEITY);
         }
     }
 }

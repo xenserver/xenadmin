@@ -267,7 +267,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 errorIconAtTargetLUN.Visible = true;
                 errorLabelAtTargetLUN.Visible = true;
-                errorLabelAtTargetLUN.Text = String.Format(Messages.NEWSR_LUN_IN_USE_ON_POOL, sr.Name, pool.Name);
+                errorLabelAtTargetLUN.Text = String.Format(Messages.NEWSR_LUN_IN_USE_ON_POOL, sr.Name(), pool.Name());
                 return true;
             }
 
@@ -276,7 +276,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 errorIconAtTargetLUN.Visible = true;
                 errorLabelAtTargetLUN.Visible = true;
-                errorLabelAtTargetLUN.Text = String.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name, master.Name);
+                errorLabelAtTargetLUN.Text = String.Format(Messages.NEWSR_LUN_IN_USE_ON_SERVER, sr.Name(), master.Name());
                 return true;
             }
 

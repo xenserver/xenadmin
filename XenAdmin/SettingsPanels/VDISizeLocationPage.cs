@@ -94,17 +94,7 @@ namespace XenAdmin.SettingsPanels
             if(vdi == null)
                 return;
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
-            labelLocationValueRO.Text = string.Format("'{0}'", sr.NameWithoutHost);
-
-            initial_alloc_value.Visible = incr_alloc_value.Visible 
-                                        = initial_allocation_label.Visible 
-                                        = incremental_allocation_label.Visible =  sr.IsThinProvisioned;
-            
-            if(sr.IsThinProvisioned && vdi.sm_config.ContainsKey("initial_allocation") && vdi.sm_config.ContainsKey("allocation_quantum"))
-            {
-                initial_alloc_value.Text = Util.MemorySizeStringSuitableUnits(Convert.ToDouble(vdi.sm_config["initial_allocation"]), true, Messages.VAL_MB);
-                incr_alloc_value.Text = Util.MemorySizeStringSuitableUnits(Convert.ToDouble(vdi.sm_config["allocation_quantum"]), true, Messages.VAL_MB);
-            }
+            labelLocationValueRO.Text = string.Format("'{0}'", sr.NameWithoutHost());
 
             if (vdi.allowed_operations.Contains(vdi_operations.resize) ||
                 vdi.allowed_operations.Contains(vdi_operations.resize_online))
@@ -224,7 +214,7 @@ namespace XenAdmin.SettingsPanels
                 {
                     reqSize = diskSize < 0 ? long.MinValue : long.MaxValue;
                 }
-                long freeSpace = vdi.Connection.Resolve<SR>(vdi.SR).FreeSpace;
+                long freeSpace = vdi.Connection.Resolve<SR>(vdi.SR).FreeSpace();
                 return reqSize - vdi.virtual_size > freeSpace
                            ? DiskSizeValidationResult.NotEnoughSpace
                            : DiskSizeValidationResult.Valid;

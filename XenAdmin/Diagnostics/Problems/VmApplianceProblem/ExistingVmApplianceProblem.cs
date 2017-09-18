@@ -57,7 +57,7 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
         {
             get
             {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE, Helpers.GetPoolOfOne(vmsToDestroy[0].Connection).Name); 
+                return String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_APPLIANCE, Helpers.GetPoolOfOne(vmsToDestroy[0].Connection).Name()); 
             } 
         }
 
@@ -69,7 +69,7 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             Program.AssertOnEventThread();
-            string vmNames = string.Join(",", (from vm in vmsToDestroy select vm.Name).ToArray());
+            string vmNames = string.Join(",", (from vm in vmsToDestroy select vm.Name()).ToArray());
 
             DialogResult dialogResult;
             using (var dlg = new ThreeButtonDialog(

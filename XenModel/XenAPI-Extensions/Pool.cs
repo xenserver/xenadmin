@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using XenAdmin.Core;
 using XenAdmin.Model;
 
@@ -42,39 +41,29 @@ namespace XenAPI
     {
         public override string ToString()
         {
-            return Name;
+            return Name();
         }
 
-        public override string Description
+        public override string Description()
         {
-            get
-            {
-                return name_description;
-            }
+            return name_description;
         }
 
-
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                if (name_label != "")
-                    return name_label;
+            if (name_label != "")
+                return name_label;
 
-                if (Connection == null)
-                    return string.Empty;
-                
-                Host master = Connection.Resolve(this.master);
-                return master == null ? "" : master.Name;
-            }
-        }
-
-        internal override string LocationString
-        {
-            get
-            {
+            if (Connection == null)
                 return string.Empty;
-            }
+
+            Host master = Connection.Resolve(this.master);
+            return master == null ? "" : master.Name();
+        }
+
+        internal override string LocationString()
+        {
+            return string.Empty;
         }
 
         public List<SR> GetHAHeartbeatSRs()
@@ -95,49 +84,39 @@ namespace XenAPI
             return result;
         }
 
-        public bool IsMasterUpgraded
+        public bool IsMasterUpgraded()
         {
-            get
+            Host master = Helpers.GetMaster(this);
+            foreach (var host in this.Connection.Cache.Hosts)
             {
-                Host master = Helpers.GetMaster(this);
-                foreach (var host in this.Connection.Cache.Hosts)
-                {
-                    if (host.LongProductVersion != master.LongProductVersion)
-                        return true;
-                }
-                return false;
+                if (host.LongProductVersion() != master.LongProductVersion())
+                    return true;
             }
+            return false;
         }
 
-        public string LicenseString
+        public string LicenseString()
         {
-            get
+            var hosts = new List<Host>(Connection.Cache.Hosts);
+            foreach (Host.Edition edition in Enum.GetValues(typeof(Host.Edition)))
             {
-                var hosts = new List<Host>(Connection.Cache.Hosts);
-                foreach (Host.Edition edition in Enum.GetValues(typeof(Host.Edition)))
-                {
-                    Host.Edition edition1 = edition;
-                    Host host = hosts.Find(h => Host.GetEdition(h.edition) == edition1);
+                Host.Edition edition1 = edition;
+                Host host = hosts.Find(h => Host.GetEdition(h.edition) == edition1);
 
-                    if (host != null)
-                    {
-                        return Helpers.GetFriendlyLicenseName(host);
-                    }
+                if (host != null)
+                {
+                    return Helpers.GetFriendlyLicenseName(host);
                 }
-                return PropertyManager.GetFriendlyName("Label-host.edition-free");
             }
+            return PropertyManager.GetFriendlyName("Label-host.edition-free");
         }
+
         /// <summary>
         /// Determine whether the given pool is a visible pool, i.e. not a pool-of-one.
         /// </summary>
-        /// <param name="ThePool"></param>
-        /// <returns></returns>
-        public bool IsVisible
+        public bool IsVisible()
         {
-            get
-            {
-                return Connection != null && (name_label != "" || Connection.Cache.HostCount > 1);
-            }
+            return Connection != null && (name_label != "" || Connection.Cache.HostCount > 1);
         }
 
         private const string ROLLING_UPGRADE_IN_PROGRESS = "rolling_upgrade_in_progress";
@@ -145,28 +124,19 @@ namespace XenAPI
         private const string FAULT_TOLERANCE_LIMIT_FOR_HCI = "hci-limit-fault-tolerance";
         private const string FORBID_UPDATE_AUTO_RESTARTS = "hci-forbid-update-auto-restart";
 
-        public bool RollingUpgrade
+        public bool RollingUpgrade()
         {
-            get
-            {
-                return other_config != null && other_config.ContainsKey(ROLLING_UPGRADE_IN_PROGRESS);
-            }
+            return other_config != null && other_config.ContainsKey(ROLLING_UPGRADE_IN_PROGRESS);
         }
 
-        public bool IsUpgradeForbidden
+        public bool IsUpgradeForbidden()
         {
-            get
-            {
-                return other_config != null && other_config.ContainsKey(FORBID_RPU_FOR_HCI);
-            }
+            return other_config != null && other_config.ContainsKey(FORBID_RPU_FOR_HCI);
         }
 
-        public bool IsAutoUpdateRestartsForbidden
+        public bool IsAutoUpdateRestartsForbidden()
         {
-            get
-            {
-                return other_config != null && other_config.ContainsKey(FORBID_UPDATE_AUTO_RESTARTS);
-            }
+            return other_config != null && other_config.ContainsKey(FORBID_UPDATE_AUTO_RESTARTS);
         }
 
         public static long GetMaximumTolerableHostFailures(Session session, Dictionary<XenRef<VM>, string> config)
@@ -215,105 +185,92 @@ namespace XenAPI
 
         // Whether the vSwitch Controller appears to be configured.
         // (Note that we can't tell whether it's actually working properly through the API).
-        public bool vSwitchController
+        public bool vSwitchController()
         {
-            get
+            if (string.IsNullOrEmpty(vswitch_controller))
+                return false;
+
+            foreach (Host h in Connection.Cache.Hosts)
             {
-                if (string.IsNullOrEmpty(vswitch_controller))
+                if (Host.RestrictVSwitchController(h) ||
+                    !h.software_version.ContainsKey("network_backend") ||
+                    h.software_version["network_backend"] != "openvswitch")
+                {
                     return false;
-
-                foreach (Host h in Connection.Cache.Hosts)
-                {
-                    if (Host.RestrictVSwitchController(h) ||
-                        !h.software_version.ContainsKey("network_backend") ||
-                        h.software_version["network_backend"] != "openvswitch")
-                    {
-                        return false;
-                    }
                 }
-
-                return true;
             }
+
+            return true;
         }
 
-        public List<XenAPI.Host> HostsToUpgrade
+        public List<XenAPI.Host> HostsToUpgrade()
         {
-            get
+            //First one to upgrade has to be the master
+            var master = Helpers.GetMaster(Connection);
+
+            List<XenAPI.Host> result = IsMasterUpgraded()
+                ? Connection.Cache.Hosts.Where(host => host.LongProductVersion() != master.LongProductVersion()).ToList()
+                : Connection.Cache.Hosts.ToList();
+            result.Sort();
+
+            return result;
+        }
+
+        public bool IsPoolFullyUpgraded()
+        {
+            Host master = Helpers.GetMaster(this);
+
+            foreach (var host in this.Connection.Cache.Hosts)
             {
-                //First one to upgrade has to be the master
-                var master = Helpers.GetMaster(Connection);
-
-                List<XenAPI.Host> result = IsMasterUpgraded
-                               ? Connection.Cache.Hosts.Where(host => host.LongProductVersion != master.LongProductVersion).ToList()
-                               : Connection.Cache.Hosts.ToList();
-                result.Sort();
-                
-                return result;
+                if (host.LongProductVersion() != master.LongProductVersion())
+                    return false;
             }
+            return true;
         }
 
-        public bool IsPoolFullyUpgraded
+        public Host SmallerVersionHost()
         {
-            get
+            Host hostWithSmallerVersion = null;
+            foreach (var host in this.Connection.Cache.Hosts)
             {
-                Host master = Helpers.GetMaster(this);
-
-                foreach (var host in this.Connection.Cache.Hosts)
-                {
-                    if (host.LongProductVersion != master.LongProductVersion)
-                        return false;
-                }
-                return true;
+                if (hostWithSmallerVersion == null)
+                    hostWithSmallerVersion = host;
+                else if (Helpers.productVersionCompare(hostWithSmallerVersion.ProductVersion(), host.ProductVersion()) > 0)
+                    hostWithSmallerVersion = host;
             }
+            return hostWithSmallerVersion;
         }
 
-        public Host SmallerVersionHost
+        public virtual int CpuSockets()
         {
-            get
-            {
-                Host hostWithSmallerVersion = null;
-                foreach (var host in this.Connection.Cache.Hosts)
-                {
-                    if (hostWithSmallerVersion == null)
-                        hostWithSmallerVersion = host;
-                    else if (Helpers.productVersionCompare(hostWithSmallerVersion.ProductVersion, host.ProductVersion) > 0)
-                        hostWithSmallerVersion = host;
-                }
-                return hostWithSmallerVersion;
-            }
+            return Connection.Cache.Hosts.Sum(h => h.CpuSockets());
         }
 
-        public virtual int CpuSockets
+        public bool HasGpu()
         {
-            get { return Connection.Cache.Hosts.Sum(h => h.CpuSockets); }
+            return Connection.Cache.PGPUs.Length > 0;
         }
 
-        public bool HasGpu
+        public bool HasVGpu()
         {
-            get { return Connection.Cache.PGPUs.Length > 0; }
-        }
-
-        public bool HasVGpu
-        {
-            get { return HasGpu && Connection.Cache.PGPUs.Any(pGpu => pGpu.HasVGpu); }
+            return HasGpu() && Connection.Cache.PGPUs.Any(pGpu => pGpu.HasVGpu());
         }
 
         /// <summary>
         /// ssl_legacy is true if any host in the pool is in legacy mode
         /// </summary>
-        public bool ssl_legacy
+        public bool ssl_legacy()
         {
-            get { return Connection.Cache.Hosts.Any(h => h.ssl_legacy);  }
+            return Connection.Cache.Hosts.Any(h => h.ssl_legacy);
         }
 
         #region Health Check settings
-        public HealthCheckSettings HealthCheckSettings
+
+        public HealthCheckSettings HealthCheckSettings()
         {
-            get 
-            {
-               return new HealthCheckSettings(health_check_config);
-            }
+            return new HealthCheckSettings(health_check_config);
         }
+
         #endregion
 
         #region IEquatable<Pool> Members

@@ -179,9 +179,9 @@ namespace XenAdmin.Wizards.GenericPages
         public override string ToString()
         {
             if (string.IsNullOrEmpty(FailureReason))
-                return Item.Name;
+                return Item.Name();
 
-            return String.Format(Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON, Item.Name, FailureReason);
+            return String.Format(Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_REASON, Item.Name(), FailureReason);
         }
 
         /// <summary>

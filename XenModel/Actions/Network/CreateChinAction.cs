@@ -43,7 +43,7 @@ namespace XenAdmin.Actions
 
         public CreateChinAction(IXenConnection connection, XenAPI.Network newNetwork, XenAPI.Network theInterface)
             : base(connection,
-                string.Format(Messages.NETWORK_ACTION_CREATING_NETWORK_TITLE, newNetwork.Name, Helpers.GetName(connection)))
+                string.Format(Messages.NETWORK_ACTION_CREATING_NETWORK_TITLE, newNetwork.Name(), Helpers.GetName(connection)))
         {
             this.newNetwork = newNetwork;
             this.theInterface = theInterface;

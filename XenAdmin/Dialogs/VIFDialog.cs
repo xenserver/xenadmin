@@ -64,7 +64,7 @@ namespace XenAdmin.Dialogs
 
             // Check if vSwitch Controller is configured for the pool (CA-46299)
             Pool pool = Helpers.GetPoolOfOne(connection);
-            vSwitchController = pool != null && pool.vSwitchController;
+            vSwitchController = pool != null && pool.vSwitchController();
 
             label1.Text = vSwitchController ? Messages.VIF_VSWITCH_CONTROLLER : Messages.VIF_LICENSE_RESTRICTION; 
             LoadNetworks();
@@ -121,8 +121,8 @@ namespace XenAdmin.Dialogs
                 }
                 else
                 {
-                    promptTextBoxQoS.Text = ExistingVif.LimitString;
-                    checkboxQoS.Checked = ExistingVif.RateLimited;
+                    promptTextBoxQoS.Text = ExistingVif.LimitString();
+                    checkboxQoS.Checked = ExistingVif.qos_algorithm_type == VIF.RATE_LIMIT_QOS_VALUE;
                 }
                 flowLayoutPanelQoS.Enabled = checkboxQoS.Enabled = true;
 
@@ -206,7 +206,7 @@ namespace XenAdmin.Dialogs
             networks.Sort();
             foreach (XenAPI.Network network in networks)
             {
-                if (!network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave)
+                if (!network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave())
                     continue;
 
                 comboBoxNetwork.Items.Add(new NetworkComboBoxItem(network));
@@ -258,7 +258,7 @@ namespace XenAdmin.Dialogs
             vif.device = Device.ToString();
 
             if (checkboxQoS.Checked)
-                vif.RateLimited = true;
+                vif.qos_algorithm_type = VIF.RATE_LIMIT_QOS_VALUE;
 
             // preserve this param even if we have decided not to turn on qos
             if (!string.IsNullOrEmpty(promptTextBoxQoS.Text))
@@ -285,7 +285,7 @@ namespace XenAdmin.Dialogs
             {
                 proxyVIF.qos_algorithm_type = VIF.RATE_LIMIT_QOS_VALUE;
             }
-            else if (ExistingVif != null && ExistingVif.RateLimited)
+            else if (ExistingVif != null && ExistingVif.qos_algorithm_type == VIF.RATE_LIMIT_QOS_VALUE)
             {
                 proxyVIF.qos_algorithm_type = "";
             }
@@ -318,7 +318,7 @@ namespace XenAdmin.Dialogs
                 if (ExistingVif.device != Device.ToString())
                     return true;
 
-                if (ExistingVif.RateLimited)
+                if (ExistingVif.qos_algorithm_type == VIF.RATE_LIMIT_QOS_VALUE)
                 {
                     if (!checkboxQoS.Checked)
                         return true;
@@ -371,12 +371,10 @@ namespace XenAdmin.Dialogs
                 foreach (VIF vif in xenConnection.Cache.VIFs)
                 {
                     var vm = xenConnection.Resolve(vif.VM);
-                    if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.is_a_real_vm)
+                    if (vif != ExistingVif && vif.MAC == SelectedMac && vm != null && vm.is_a_real_vm())
                     {
                         DialogResult result;
-                        using (var dlg = MacAddressDuplicationWarningDialog(
-                            SelectedMac,
-                            vm.NameWithLocation))
+                        using (var dlg = MacAddressDuplicationWarningDialog(SelectedMac, vm.NameWithLocation()))
                         {
                             result = dlg.ShowDialog(Program.MainWindow);
                         }

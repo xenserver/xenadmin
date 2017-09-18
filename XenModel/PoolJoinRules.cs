@@ -232,7 +232,7 @@ namespace XenAdmin.Core
         {
             foreach (SR sr in connection.Cache.SRs)
             {
-                if (sr.shared && !sr.IsToolsSR)
+                if (sr.shared && !sr.IsToolsSR())
                     return true;
             }
             return false;
@@ -242,7 +242,7 @@ namespace XenAdmin.Core
         {
             foreach (VM vm in connection.Cache.VMs)
             {
-                if (vm.is_a_real_vm && vm.power_state == XenAPI.vm_power_state.Running)
+                if (vm.is_a_real_vm() && vm.power_state == XenAPI.vm_power_state.Running)
                     return true;
             }
             return false;
@@ -260,7 +260,7 @@ namespace XenAdmin.Core
 
         private static bool LicenseRestriction(Host host)
         {
-            return host.RestrictPooling;
+            return Host.RestrictPooling(host);
         }
 
         // If CompatibleCPUs(slave, master, false) is true, the CPUs can be pooled without masking first.
@@ -387,14 +387,13 @@ namespace XenAdmin.Core
             if (Helpers.FalconOrGreater(master) && string.IsNullOrEmpty(master.GetDatabaseSchema()))
                 return true;
 
-            if (Helpers.FalconOrGreater(slave) && Helpers.FalconOrGreater(master) &&
-                slave.GetDatabaseSchema() != master.GetDatabaseSchema())
+            if (slave.GetDatabaseSchema() != master.GetDatabaseSchema())
                 return true;
-            
+
             return
-                !Helpers.FalconOrGreater(master) && !Helpers.FalconOrGreater(slave) && slave.BuildNumber != master.BuildNumber ||
-                slave.PlatformVersion != master.PlatformVersion ||
-                slave.ProductBrand != master.ProductBrand;
+                !Helpers.ElyOrGreater(master) && !Helpers.ElyOrGreater(slave) && slave.BuildNumber() != master.BuildNumber() ||
+                slave.PlatformVersion() != master.PlatformVersion() ||
+                slave.ProductBrand() != master.ProductBrand();
         }
 
         /// <summary>
@@ -409,15 +408,15 @@ namespace XenAdmin.Core
             if (!Helpers.ElyOrGreater(slave) || !Helpers.ElyOrGreater(master))
                 return false;
 
-            var masterUpdates = master.AppliedUpdates().Where(update => update.enforce_homogeneity).Select(update => update.uuid).ToList();
-            var slaveUpdates = slave.AppliedUpdates().Where(update => update.enforce_homogeneity).Select(update => update.uuid).ToList();
+            var masterUpdates = master.AppliedUpdates().Where(update => update.EnforceHomogeneity()).Select(update => update.uuid).ToList();
+            var slaveUpdates = slave.AppliedUpdates().Where(update => update.EnforceHomogeneity()).Select(update => update.uuid).ToList();
 
             return masterUpdates.Count != slaveUpdates.Count || !masterUpdates.All(slaveUpdates.Contains);
         }
 
         private static bool SameLinuxPack(Host slave, Host master)
         {
-            return slave.LinuxPackPresent == master.LinuxPackPresent;
+            return slave.LinuxPackPresent() == master.LinuxPackPresent();
         }
 
         public static bool CompatibleAdConfig(Host slave, Host master, bool allowSlaveConfig)
@@ -484,7 +483,7 @@ namespace XenAdmin.Core
             var slavePool = Helpers.GetPoolOfOne(slave.Connection);
 
             return masterPool != null && slavePool != null &&
-                   masterPool.vSwitchController && slavePool.vSwitchController &&
+                   masterPool.vSwitchController() && slavePool.vSwitchController() &&
                    masterPool.vswitch_controller != slavePool.vswitch_controller;
         }
 
@@ -503,7 +502,8 @@ namespace XenAdmin.Core
             Dictionary<string, string> homogeneousPacks = new Dictionary<string, string>();
             foreach (Host host in allHosts)
             {
-                foreach (Host.SuppPack suppPack in host.SuppPacks)
+                var suppPacks = host.SuppPacks();
+                foreach (Host.SuppPack suppPack in suppPacks)
                 {
                     if (suppPack.Homogeneous)
                         homogeneousPacks[suppPack.OriginatorAndName] = suppPack.Description;
@@ -524,7 +524,7 @@ namespace XenAdmin.Core
 
                 foreach (Host host in allHosts)
                 {
-                    Host.SuppPack matchingPack = host.SuppPacks.Find(sp => (sp.OriginatorAndName == pack));
+                    Host.SuppPack matchingPack = host.SuppPacks().Find(sp => (sp.OriginatorAndName == pack));
                     if (matchingPack == null)
                         missingHosts.Add(host);
                     else if (expectedVersion == null)

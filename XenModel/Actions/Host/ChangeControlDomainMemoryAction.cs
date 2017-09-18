@@ -41,7 +41,7 @@ namespace XenAdmin.Actions
         long memory;
 
         public ChangeControlDomainMemoryAction(Host host, long memory, bool suppressHistory)
-            : base(host.Connection, string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY, host.Name), suppressHistory)
+            : base(host.Connection, string.Format(Messages.ACTION_CHANGE_CONTROL_DOMAIN_MEMORY, host.Name()), suppressHistory)
         {
             Host = host;
             this.memory = memory;
@@ -55,7 +55,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            VM vm = Host.ControlDomainZero;
+            VM vm = Host.ControlDomainZero();
 
             XenAPI.VM.set_memory(Session, vm.opaque_ref, memory);
 

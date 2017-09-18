@@ -50,7 +50,7 @@ namespace XenAdmin.Actions
         /// This constructor is used to check disk space for uploading a single patch
         /// </summary>
         public CheckDiskSpaceForPatchUploadAction(Host host, Pool_patch patch, bool suppressHistory)
-            : this(host, patch.Name, patch.size, suppressHistory)
+            : this(host, patch.Name(), patch.size, suppressHistory)
         { }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             SafeToExit = false;
-            Description = String.Format(Messages.ACTION_CHECK_DISK_SPACE_DESCRIPTION, Host.Name);
+            Description = String.Format(Messages.ACTION_CHECK_DISK_SPACE_DESCRIPTION, Host.Name());
             if (!IsEnoughDiskSpace())
             {
                 DiskSpaceRequirements diskSpaceRequirements = null;
@@ -100,9 +100,9 @@ namespace XenAdmin.Actions
                 }
                 catch (Failure failure)
                 {
-                    log.WarnFormat("Getting disk space requirements on {0} failed with: {1}", Host.Name, failure.Message);
+                    log.WarnFormat("Getting disk space requirements on {0} failed with: {1}", Host.Name(), failure.Message);
                 }
-                Exception = new NotEnoughSpaceException(Host.Name, fileName, diskSpaceRequirements);
+                Exception = new NotEnoughSpaceException(Host.Name(), fileName, diskSpaceRequirements);
             }
         }
 
@@ -116,7 +116,7 @@ namespace XenAdmin.Actions
             }
             catch (Failure failure)
             {
-                log.WarnFormat("Plugin call disk-space.check_patch_upload({0}) on {1} failed with {2}", fileSize, Host.Name,
+                log.WarnFormat("Plugin call disk-space.check_patch_upload({0}) on {1} failed with {2}", fileSize, Host.Name(),
                                failure.Message);
                 return true;
             }

@@ -130,7 +130,7 @@ namespace XenAdmin.Actions
                 else if (f.ErrorDescription[0] == Failure.POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS)
                     throw new CredentialsFailure(f.ErrorDescription);
                 else
-                    throw new Exception(string.Format(Messages.AD_FAILURE_WITH_HOST, f.Message, host.Name));
+                    throw new Exception(string.Format(Messages.AD_FAILURE_WITH_HOST, f.Message, host.Name()));
             }
             Description = Messages.COMPLETED;
         }

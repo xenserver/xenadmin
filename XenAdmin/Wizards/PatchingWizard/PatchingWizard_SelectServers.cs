@@ -154,7 +154,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (IsInAutomaticMode)
             {
                 // This check is first because it generally can't be fixed, it's a property of the host
-                if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden) // Forbids update auto restarts
+                if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden()) // Forbids update auto restarts
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.POOL_FORBIDS_AUTOMATED_UPDATES;
@@ -162,7 +162,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 var pool = Helpers.GetPool(host.Connection);
-                if (pool != null && !pool.IsPoolFullyUpgraded) //partially upgraded pool is not supported
+                if (pool != null && !pool.IsPoolFullyUpgraded()) //partially upgraded pool is not supported
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_PARTIALLY_UPGRADED;
@@ -209,7 +209,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 //if host is unreachable
-                if (!host.IsLive)
+                if (!host.IsLive())
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE;
@@ -229,14 +229,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 applicableHosts = FileFromDiskAlert.DistinctHosts;
             }
 
-            if (!host.CanApplyHotfixes && (Helpers.ElyOrGreater(host) || type != UpdateType.ISO))
+            if (!host.CanApplyHotfixes() && (Helpers.ElyOrGreater(host) || type != UpdateType.ISO))
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED;
                 return;
             }
 
-            if (!host.IsLive)
+            if (!host.IsLive())
             {
                 row.Enabled = false;
                 row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNREACHABLE;
@@ -255,7 +255,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     disableNotApplicableHosts(row, applicableHosts, host);
                     break;
                 case UpdateType.ISO:
-                    if (!host.CanInstallSuppPack && !Helpers.ElyOrGreater(host)) //from Ely, iso does not mean supplemental pack
+                    if (!Helpers.CreamOrGreater(host.Connection) && !Helpers.ElyOrGreater(host)) //from Ely, iso does not mean supplemental pack
                     {
                         row.Enabled = false;
                         row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_CANNOT_INSTALL_SUPP_PACKS;
@@ -272,7 +272,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (firstCheckedHost != null && (Helpers.ElyOrGreater(firstCheckedHost) != Helpers.ElyOrGreater(host)))
                             {
                                 row.Enabled = false;
-                                row.Cells[3].ToolTipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS, firstCheckedHost.ProductVersionTextShort, host.ProductVersionTextShort);
+                                row.Cells[3].ToolTipText = string.Format(Messages.PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS, firstCheckedHost.ProductVersionTextShort(), host.ProductVersionTextShort());
                             }
                             else if (!row.Enabled)
                             {
@@ -371,10 +371,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         if (!(Role.CanPerform(new RbacMethodList("pool_patch.apply"), master.Connection)))
                         {
-                            string nameLabel = master.Name;
+                            string nameLabel = master.Name();
                             Pool pool = Helpers.GetPoolOfOne(master.Connection);
                             if (pool != null)
-                                nameLabel = pool.Name;
+                                nameLabel = pool.Name();
 
                             using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Warning, string.Format(Messages.RBAC_UPDATES_WIZARD, master.Connection.Username, nameLabel), Messages.UPDATES_WIZARD)))
                             {
@@ -406,7 +406,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     IXenConnection connection = ((IXenObject) row.Tag).Connection;
                     if (connection == null || !connection.IsConnected)
-                        disconnectedServerNames.Add(((IXenObject) row.Tag).Name);
+                        disconnectedServerNames.Add(((IXenObject) row.Tag).Name());
                 }
             }
 
@@ -479,7 +479,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         //prechecks will fail in automated updates mode if one of the hosts is unreachable
                         return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts).ToList();
                     //prechecks will issue warning but allow updates to be installed on the reachable hosts only
-                    return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts.Where(host => host.IsLive)).ToList();
+                    return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts.Where(host => host.IsLive())).ToList();
                 }
                 else
                 {
@@ -506,7 +506,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (row.Tag is Pool)
                     {
-                        if (((int)row.Cells[POOL_CHECKBOX_COL].Value) != UNCHECKED)
+                        if (((int)row.Cells[POOL_CHECKBOX_COL].Value) != UNCHECKED && !pools.Contains((Pool)row.Tag))
                             pools.Add((Pool)row.Tag);
                     }
                     else if (row.Tag is Host)
@@ -515,7 +515,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             Host host = (Host)row.Tag;
                             Pool pool = Helpers.GetPoolOfOne(host.Connection);
-                            if (pool != null)
+                            if (pool != null && !pools.Contains(pool))
                                 pools.Add(pool);
                         }
                     }
@@ -923,7 +923,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     _expansionCell.Value = Resources.tree_minus;
                     _poolIconHostCheckCell.Value = Images.GetImage16For(pool);
                     _nameCell.Value = pool;
-                    _versionCell.Value = master.ProductVersionTextShort;
+                    _versionCell.Value = master.ProductVersionTextShort();
                 }
                 else if (Tag is Host)
                 {
@@ -935,7 +935,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     else 
                         _poolIconHostCheckCell.Value = Images.GetImage16For(host);
                     _nameCell.Value = host;
-                    _versionCell.Value = host.ProductVersionTextShort;
+                    _versionCell.Value = host.ProductVersionTextShort();
                 }
             }
 

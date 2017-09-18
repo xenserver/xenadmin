@@ -30,6 +30,14 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
+#==============================================================
+#Micro version override - please keep at the top of the script
+#==============================================================
+#Set and uncomment this to override the 3rd value of the product number 
+#normally fetched from branding
+#
+#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
+
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 OUTPUT_DIR=${ROOT}/output
@@ -97,7 +105,7 @@ BRANDING_XC_PRODUCT_6_0_VERSION=6.0
 BRANDING_XC_PRODUCT_6_2_VERSION=6.2
 BRANDING_XC_PRODUCT_6_5_VERSION=6.5
 BRANDING_XC_PRODUCT_7_0_VERSION=7.0
-BRANDING_XENSERVER_UPDATE_URL="http://updates.xensource.com/XenServer/updates.xml"
+BRANDING_XENSERVER_UPDATE_URL="https://updates.xensource.com/XenServer/updates.xml"
 BRANDING_HIDDEN_FEATURES=""
 BRANDING_ADDITIONAL_FEATURES=""
 

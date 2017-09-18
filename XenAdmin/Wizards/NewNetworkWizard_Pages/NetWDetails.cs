@@ -150,7 +150,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
             foreach (PIF ThePIF in conn.Cache.PIFs)
             {
-                if (ThePIF.host.opaque_ref == host.opaque_ref && ThePIF.IsPhysical && (Properties.Settings.Default.ShowHiddenVMs || ThePIF.Show(Properties.Settings.Default.ShowHiddenVMs)) && !ThePIF.IsBondSlave)
+                if (ThePIF.host.opaque_ref == host.opaque_ref && ThePIF.IsPhysical() && (Properties.Settings.Default.ShowHiddenVMs || ThePIF.Show(Properties.Settings.Default.ShowHiddenVMs)) && !ThePIF.IsBondSlave())
                 {
                     comboBoxNICList.Items.Add(ThePIF);
                 }

@@ -38,7 +38,7 @@ namespace XenAdmin.Actions.VMActions
     {
 
         public VMToTemplateAction(VM vm)
-            : base(vm.Connection, string.Format(Messages.ACTION_VM_TEMPLATIZING_TITLE, vm.Name))
+            : base(vm.Connection, string.Format(Messages.ACTION_VM_TEMPLATIZING_TITLE, vm.Name()))
         {
             this.Description = Messages.ACTION_PREPARING;
             this.VM = vm;

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -211,13 +209,13 @@ namespace XenAPI
         public Proxy_Pool ToProxy()
         {
             Proxy_Pool result_ = new Proxy_Pool();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
-            result_.master = (master != null) ? master : "";
-            result_.default_SR = (default_SR != null) ? default_SR : "";
-            result_.suspend_image_SR = (suspend_image_SR != null) ? suspend_image_SR : "";
-            result_.crash_dump_SR = (crash_dump_SR != null) ? crash_dump_SR : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
+            result_.master = master ?? "";
+            result_.default_SR = default_SR ?? "";
+            result_.suspend_image_SR = suspend_image_SR ?? "";
+            result_.crash_dump_SR = crash_dump_SR ?? "";
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.ha_enabled = ha_enabled;
             result_.ha_configuration = Maps.convert_to_proxy_string_string(ha_configuration);
@@ -230,16 +228,16 @@ namespace XenAPI
             result_.tags = tags;
             result_.gui_config = Maps.convert_to_proxy_string_string(gui_config);
             result_.health_check_config = Maps.convert_to_proxy_string_string(health_check_config);
-            result_.wlb_url = (wlb_url != null) ? wlb_url : "";
-            result_.wlb_username = (wlb_username != null) ? wlb_username : "";
+            result_.wlb_url = wlb_url ?? "";
+            result_.wlb_username = wlb_username ?? "";
             result_.wlb_enabled = wlb_enabled;
             result_.wlb_verify_cert = wlb_verify_cert;
             result_.redo_log_enabled = redo_log_enabled;
-            result_.redo_log_vdi = (redo_log_vdi != null) ? redo_log_vdi : "";
-            result_.vswitch_controller = (vswitch_controller != null) ? vswitch_controller : "";
+            result_.redo_log_vdi = redo_log_vdi ?? "";
+            result_.vswitch_controller = vswitch_controller ?? "";
             result_.restrictions = Maps.convert_to_proxy_string_string(restrictions);
             result_.metadata_VDIs = (metadata_VDIs != null) ? Helper.RefListToStringArray(metadata_VDIs) : new string[] {};
-            result_.ha_cluster_stack = (ha_cluster_stack != null) ? ha_cluster_stack : "";
+            result_.ha_cluster_stack = ha_cluster_stack ?? "";
             result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
             result_.current_operations = Maps.convert_to_proxy_string_pool_allowed_operations(current_operations);
             result_.guest_agent_config = Maps.convert_to_proxy_string_string(guest_agent_config);
@@ -415,7 +413,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Pool get_record(Session session, string _pool)
         {
-            return new Pool((Proxy_Pool)session.proxy.pool_get_record(session.uuid, (_pool != null) ? _pool : "").parse());
+            return new Pool((Proxy_Pool)session.proxy.pool_get_record(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -426,7 +424,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Pool> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Pool>.Create(session.proxy.pool_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Pool>.Create(session.proxy.pool_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -437,7 +435,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static string get_uuid(Session session, string _pool)
         {
-            return (string)session.proxy.pool_get_uuid(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string)session.proxy.pool_get_uuid(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -448,7 +446,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static string get_name_label(Session session, string _pool)
         {
-            return (string)session.proxy.pool_get_name_label(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string)session.proxy.pool_get_name_label(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -459,7 +457,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static string get_name_description(Session session, string _pool)
         {
-            return (string)session.proxy.pool_get_name_description(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string)session.proxy.pool_get_name_description(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -470,7 +468,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<Host> get_master(Session session, string _pool)
         {
-            return XenRef<Host>.Create(session.proxy.pool_get_master(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<Host>.Create(session.proxy.pool_get_master(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -481,7 +479,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<SR> get_default_SR(Session session, string _pool)
         {
-            return XenRef<SR>.Create(session.proxy.pool_get_default_sr(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<SR>.Create(session.proxy.pool_get_default_sr(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -492,7 +490,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<SR> get_suspend_image_SR(Session session, string _pool)
         {
-            return XenRef<SR>.Create(session.proxy.pool_get_suspend_image_sr(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<SR>.Create(session.proxy.pool_get_suspend_image_sr(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -503,7 +501,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<SR> get_crash_dump_SR(Session session, string _pool)
         {
-            return XenRef<SR>.Create(session.proxy.pool_get_crash_dump_sr(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<SR>.Create(session.proxy.pool_get_crash_dump_sr(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -514,7 +512,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_other_config(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_other_config(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -525,7 +523,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_ha_enabled(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_ha_enabled(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_ha_enabled(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -536,7 +534,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, string> get_ha_configuration(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_ha_configuration(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_ha_configuration(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -547,7 +545,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static string[] get_ha_statefiles(Session session, string _pool)
         {
-            return (string [])session.proxy.pool_get_ha_statefiles(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string [])session.proxy.pool_get_ha_statefiles(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -558,7 +556,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static long get_ha_host_failures_to_tolerate(Session session, string _pool)
         {
-            return long.Parse((string)session.proxy.pool_get_ha_host_failures_to_tolerate(session.uuid, (_pool != null) ? _pool : "").parse());
+            return long.Parse((string)session.proxy.pool_get_ha_host_failures_to_tolerate(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -569,7 +567,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static long get_ha_plan_exists_for(Session session, string _pool)
         {
-            return long.Parse((string)session.proxy.pool_get_ha_plan_exists_for(session.uuid, (_pool != null) ? _pool : "").parse());
+            return long.Parse((string)session.proxy.pool_get_ha_plan_exists_for(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -580,7 +578,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_ha_allow_overcommit(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_ha_allow_overcommit(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_ha_allow_overcommit(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -591,7 +589,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_ha_overcommitted(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_ha_overcommitted(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_ha_overcommitted(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -602,7 +600,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, XenRef<Blob>> get_blobs(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.pool_get_blobs(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.pool_get_blobs(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -613,7 +611,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static string[] get_tags(Session session, string _pool)
         {
-            return (string [])session.proxy.pool_get_tags(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string [])session.proxy.pool_get_tags(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -624,7 +622,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, string> get_gui_config(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_gui_config(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_gui_config(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -635,7 +633,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, string> get_health_check_config(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_health_check_config(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_health_check_config(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -646,7 +644,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static string get_wlb_url(Session session, string _pool)
         {
-            return (string)session.proxy.pool_get_wlb_url(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string)session.proxy.pool_get_wlb_url(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -657,7 +655,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static string get_wlb_username(Session session, string _pool)
         {
-            return (string)session.proxy.pool_get_wlb_username(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string)session.proxy.pool_get_wlb_username(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -668,7 +666,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_wlb_enabled(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_wlb_enabled(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_wlb_enabled(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -679,7 +677,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_wlb_verify_cert(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_wlb_verify_cert(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_wlb_verify_cert(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -690,7 +688,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_redo_log_enabled(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_redo_log_enabled(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_redo_log_enabled(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -701,7 +699,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<VDI> get_redo_log_vdi(Session session, string _pool)
         {
-            return XenRef<VDI>.Create(session.proxy.pool_get_redo_log_vdi(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<VDI>.Create(session.proxy.pool_get_redo_log_vdi(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -714,7 +712,7 @@ namespace XenAPI
         [Deprecated("XenServer 7.2")]
         public static string get_vswitch_controller(Session session, string _pool)
         {
-            return (string)session.proxy.pool_get_vswitch_controller(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string)session.proxy.pool_get_vswitch_controller(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -725,7 +723,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, string> get_restrictions(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_restrictions(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_restrictions(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -736,7 +734,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static List<XenRef<VDI>> get_metadata_VDIs(Session session, string _pool)
         {
-            return XenRef<VDI>.Create(session.proxy.pool_get_metadata_vdis(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<VDI>.Create(session.proxy.pool_get_metadata_vdis(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -747,7 +745,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static string get_ha_cluster_stack(Session session, string _pool)
         {
-            return (string)session.proxy.pool_get_ha_cluster_stack(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (string)session.proxy.pool_get_ha_cluster_stack(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -758,7 +756,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static List<pool_allowed_operations> get_allowed_operations(Session session, string _pool)
         {
-            return Helper.StringArrayToEnumList<pool_allowed_operations>(session.proxy.pool_get_allowed_operations(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Helper.StringArrayToEnumList<pool_allowed_operations>(session.proxy.pool_get_allowed_operations(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -769,7 +767,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, pool_allowed_operations> get_current_operations(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_pool_allowed_operations(session.proxy.pool_get_current_operations(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_pool_allowed_operations(session.proxy.pool_get_current_operations(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -780,7 +778,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, string> get_guest_agent_config(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_guest_agent_config(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_guest_agent_config(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -791,7 +789,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, string> get_cpu_info(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_cpu_info(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_cpu_info(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -802,7 +800,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_policy_no_vendor_device(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_policy_no_vendor_device(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_policy_no_vendor_device(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -813,7 +811,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_live_patching_disabled(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_live_patching_disabled(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_live_patching_disabled(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -825,7 +823,7 @@ namespace XenAPI
         /// <param name="_name_label">New value to set</param>
         public static void set_name_label(Session session, string _pool, string _name_label)
         {
-            session.proxy.pool_set_name_label(session.uuid, (_pool != null) ? _pool : "", (_name_label != null) ? _name_label : "").parse();
+            session.proxy.pool_set_name_label(session.uuid, _pool ?? "", _name_label ?? "").parse();
         }
 
         /// <summary>
@@ -837,7 +835,7 @@ namespace XenAPI
         /// <param name="_name_description">New value to set</param>
         public static void set_name_description(Session session, string _pool, string _name_description)
         {
-            session.proxy.pool_set_name_description(session.uuid, (_pool != null) ? _pool : "", (_name_description != null) ? _name_description : "").parse();
+            session.proxy.pool_set_name_description(session.uuid, _pool ?? "", _name_description ?? "").parse();
         }
 
         /// <summary>
@@ -849,7 +847,7 @@ namespace XenAPI
         /// <param name="_default_sr">New value to set</param>
         public static void set_default_SR(Session session, string _pool, string _default_sr)
         {
-            session.proxy.pool_set_default_sr(session.uuid, (_pool != null) ? _pool : "", (_default_sr != null) ? _default_sr : "").parse();
+            session.proxy.pool_set_default_sr(session.uuid, _pool ?? "", _default_sr ?? "").parse();
         }
 
         /// <summary>
@@ -861,7 +859,7 @@ namespace XenAPI
         /// <param name="_suspend_image_sr">New value to set</param>
         public static void set_suspend_image_SR(Session session, string _pool, string _suspend_image_sr)
         {
-            session.proxy.pool_set_suspend_image_sr(session.uuid, (_pool != null) ? _pool : "", (_suspend_image_sr != null) ? _suspend_image_sr : "").parse();
+            session.proxy.pool_set_suspend_image_sr(session.uuid, _pool ?? "", _suspend_image_sr ?? "").parse();
         }
 
         /// <summary>
@@ -873,7 +871,7 @@ namespace XenAPI
         /// <param name="_crash_dump_sr">New value to set</param>
         public static void set_crash_dump_SR(Session session, string _pool, string _crash_dump_sr)
         {
-            session.proxy.pool_set_crash_dump_sr(session.uuid, (_pool != null) ? _pool : "", (_crash_dump_sr != null) ? _crash_dump_sr : "").parse();
+            session.proxy.pool_set_crash_dump_sr(session.uuid, _pool ?? "", _crash_dump_sr ?? "").parse();
         }
 
         /// <summary>
@@ -885,7 +883,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pool, Dictionary<string, string> _other_config)
         {
-            session.proxy.pool_set_other_config(session.uuid, (_pool != null) ? _pool : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.pool_set_other_config(session.uuid, _pool ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -898,7 +896,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pool, string _key, string _value)
         {
-            session.proxy.pool_add_to_other_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.pool_add_to_other_config(session.uuid, _pool ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -910,7 +908,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pool, string _key)
         {
-            session.proxy.pool_remove_from_other_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse();
+            session.proxy.pool_remove_from_other_config(session.uuid, _pool ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -922,7 +920,7 @@ namespace XenAPI
         /// <param name="_ha_allow_overcommit">New value to set</param>
         public static void set_ha_allow_overcommit(Session session, string _pool, bool _ha_allow_overcommit)
         {
-            session.proxy.pool_set_ha_allow_overcommit(session.uuid, (_pool != null) ? _pool : "", _ha_allow_overcommit).parse();
+            session.proxy.pool_set_ha_allow_overcommit(session.uuid, _pool ?? "", _ha_allow_overcommit).parse();
         }
 
         /// <summary>
@@ -934,7 +932,7 @@ namespace XenAPI
         /// <param name="_tags">New value to set</param>
         public static void set_tags(Session session, string _pool, string[] _tags)
         {
-            session.proxy.pool_set_tags(session.uuid, (_pool != null) ? _pool : "", _tags).parse();
+            session.proxy.pool_set_tags(session.uuid, _pool ?? "", _tags).parse();
         }
 
         /// <summary>
@@ -946,7 +944,7 @@ namespace XenAPI
         /// <param name="_value">New value to add</param>
         public static void add_tags(Session session, string _pool, string _value)
         {
-            session.proxy.pool_add_tags(session.uuid, (_pool != null) ? _pool : "", (_value != null) ? _value : "").parse();
+            session.proxy.pool_add_tags(session.uuid, _pool ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -958,7 +956,7 @@ namespace XenAPI
         /// <param name="_value">Value to remove</param>
         public static void remove_tags(Session session, string _pool, string _value)
         {
-            session.proxy.pool_remove_tags(session.uuid, (_pool != null) ? _pool : "", (_value != null) ? _value : "").parse();
+            session.proxy.pool_remove_tags(session.uuid, _pool ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -970,7 +968,7 @@ namespace XenAPI
         /// <param name="_gui_config">New value to set</param>
         public static void set_gui_config(Session session, string _pool, Dictionary<string, string> _gui_config)
         {
-            session.proxy.pool_set_gui_config(session.uuid, (_pool != null) ? _pool : "", Maps.convert_to_proxy_string_string(_gui_config)).parse();
+            session.proxy.pool_set_gui_config(session.uuid, _pool ?? "", Maps.convert_to_proxy_string_string(_gui_config)).parse();
         }
 
         /// <summary>
@@ -983,7 +981,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_gui_config(Session session, string _pool, string _key, string _value)
         {
-            session.proxy.pool_add_to_gui_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.pool_add_to_gui_config(session.uuid, _pool ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -995,7 +993,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_gui_config(Session session, string _pool, string _key)
         {
-            session.proxy.pool_remove_from_gui_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse();
+            session.proxy.pool_remove_from_gui_config(session.uuid, _pool ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -1007,7 +1005,7 @@ namespace XenAPI
         /// <param name="_health_check_config">New value to set</param>
         public static void set_health_check_config(Session session, string _pool, Dictionary<string, string> _health_check_config)
         {
-            session.proxy.pool_set_health_check_config(session.uuid, (_pool != null) ? _pool : "", Maps.convert_to_proxy_string_string(_health_check_config)).parse();
+            session.proxy.pool_set_health_check_config(session.uuid, _pool ?? "", Maps.convert_to_proxy_string_string(_health_check_config)).parse();
         }
 
         /// <summary>
@@ -1020,7 +1018,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_health_check_config(Session session, string _pool, string _key, string _value)
         {
-            session.proxy.pool_add_to_health_check_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.pool_add_to_health_check_config(session.uuid, _pool ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1032,7 +1030,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_health_check_config(Session session, string _pool, string _key)
         {
-            session.proxy.pool_remove_from_health_check_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse();
+            session.proxy.pool_remove_from_health_check_config(session.uuid, _pool ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -1044,7 +1042,7 @@ namespace XenAPI
         /// <param name="_wlb_enabled">New value to set</param>
         public static void set_wlb_enabled(Session session, string _pool, bool _wlb_enabled)
         {
-            session.proxy.pool_set_wlb_enabled(session.uuid, (_pool != null) ? _pool : "", _wlb_enabled).parse();
+            session.proxy.pool_set_wlb_enabled(session.uuid, _pool ?? "", _wlb_enabled).parse();
         }
 
         /// <summary>
@@ -1056,7 +1054,7 @@ namespace XenAPI
         /// <param name="_wlb_verify_cert">New value to set</param>
         public static void set_wlb_verify_cert(Session session, string _pool, bool _wlb_verify_cert)
         {
-            session.proxy.pool_set_wlb_verify_cert(session.uuid, (_pool != null) ? _pool : "", _wlb_verify_cert).parse();
+            session.proxy.pool_set_wlb_verify_cert(session.uuid, _pool ?? "", _wlb_verify_cert).parse();
         }
 
         /// <summary>
@@ -1068,7 +1066,7 @@ namespace XenAPI
         /// <param name="_policy_no_vendor_device">New value to set</param>
         public static void set_policy_no_vendor_device(Session session, string _pool, bool _policy_no_vendor_device)
         {
-            session.proxy.pool_set_policy_no_vendor_device(session.uuid, (_pool != null) ? _pool : "", _policy_no_vendor_device).parse();
+            session.proxy.pool_set_policy_no_vendor_device(session.uuid, _pool ?? "", _policy_no_vendor_device).parse();
         }
 
         /// <summary>
@@ -1080,7 +1078,7 @@ namespace XenAPI
         /// <param name="_live_patching_disabled">New value to set</param>
         public static void set_live_patching_disabled(Session session, string _pool, bool _live_patching_disabled)
         {
-            session.proxy.pool_set_live_patching_disabled(session.uuid, (_pool != null) ? _pool : "", _live_patching_disabled).parse();
+            session.proxy.pool_set_live_patching_disabled(session.uuid, _pool ?? "", _live_patching_disabled).parse();
         }
 
         /// <summary>
@@ -1093,7 +1091,7 @@ namespace XenAPI
         /// <param name="_master_password">The password for the master (for initial authentication)</param>
         public static void join(Session session, string _master_address, string _master_username, string _master_password)
         {
-            session.proxy.pool_join(session.uuid, (_master_address != null) ? _master_address : "", (_master_username != null) ? _master_username : "", (_master_password != null) ? _master_password : "").parse();
+            session.proxy.pool_join(session.uuid, _master_address ?? "", _master_username ?? "", _master_password ?? "").parse();
         }
 
         /// <summary>
@@ -1106,7 +1104,7 @@ namespace XenAPI
         /// <param name="_master_password">The password for the master (for initial authentication)</param>
         public static XenRef<Task> async_join(Session session, string _master_address, string _master_username, string _master_password)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_join(session.uuid, (_master_address != null) ? _master_address : "", (_master_username != null) ? _master_username : "", (_master_password != null) ? _master_password : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_join(session.uuid, _master_address ?? "", _master_username ?? "", _master_password ?? "").parse());
         }
 
         /// <summary>
@@ -1119,7 +1117,7 @@ namespace XenAPI
         /// <param name="_master_password">The password for the master (for initial authentication)</param>
         public static void join_force(Session session, string _master_address, string _master_username, string _master_password)
         {
-            session.proxy.pool_join_force(session.uuid, (_master_address != null) ? _master_address : "", (_master_username != null) ? _master_username : "", (_master_password != null) ? _master_password : "").parse();
+            session.proxy.pool_join_force(session.uuid, _master_address ?? "", _master_username ?? "", _master_password ?? "").parse();
         }
 
         /// <summary>
@@ -1132,7 +1130,7 @@ namespace XenAPI
         /// <param name="_master_password">The password for the master (for initial authentication)</param>
         public static XenRef<Task> async_join_force(Session session, string _master_address, string _master_username, string _master_password)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_join_force(session.uuid, (_master_address != null) ? _master_address : "", (_master_username != null) ? _master_username : "", (_master_password != null) ? _master_password : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_join_force(session.uuid, _master_address ?? "", _master_username ?? "", _master_password ?? "").parse());
         }
 
         /// <summary>
@@ -1143,7 +1141,7 @@ namespace XenAPI
         /// <param name="_host">The host to eject</param>
         public static void eject(Session session, string _host)
         {
-            session.proxy.pool_eject(session.uuid, (_host != null) ? _host : "").parse();
+            session.proxy.pool_eject(session.uuid, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1154,7 +1152,7 @@ namespace XenAPI
         /// <param name="_host">The host to eject</param>
         public static XenRef<Task> async_eject(Session session, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_eject(session.uuid, (_host != null) ? _host : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_eject(session.uuid, _host ?? "").parse());
         }
 
         /// <summary>
@@ -1175,7 +1173,7 @@ namespace XenAPI
         /// <param name="_master_address">The hostname of the master</param>
         public static void emergency_reset_master(Session session, string _master_address)
         {
-            session.proxy.pool_emergency_reset_master(session.uuid, (_master_address != null) ? _master_address : "").parse();
+            session.proxy.pool_emergency_reset_master(session.uuid, _master_address ?? "").parse();
         }
 
         /// <summary>
@@ -1208,7 +1206,7 @@ namespace XenAPI
         /// <param name="_vlan">VLAN tag for the new interface</param>
         public static List<XenRef<PIF>> create_VLAN(Session session, string _device, string _network, long _vlan)
         {
-            return XenRef<PIF>.Create(session.proxy.pool_create_vlan(session.uuid, (_device != null) ? _device : "", (_network != null) ? _network : "", _vlan.ToString()).parse());
+            return XenRef<PIF>.Create(session.proxy.pool_create_vlan(session.uuid, _device ?? "", _network ?? "", _vlan.ToString()).parse());
         }
 
         /// <summary>
@@ -1221,7 +1219,7 @@ namespace XenAPI
         /// <param name="_vlan">VLAN tag for the new interface</param>
         public static XenRef<Task> async_create_VLAN(Session session, string _device, string _network, long _vlan)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_create_vlan(session.uuid, (_device != null) ? _device : "", (_network != null) ? _network : "", _vlan.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_create_vlan(session.uuid, _device ?? "", _network ?? "", _vlan.ToString()).parse());
         }
 
         /// <summary>
@@ -1232,7 +1230,7 @@ namespace XenAPI
         /// <param name="_network">The network</param>
         public static void management_reconfigure(Session session, string _network)
         {
-            session.proxy.pool_management_reconfigure(session.uuid, (_network != null) ? _network : "").parse();
+            session.proxy.pool_management_reconfigure(session.uuid, _network ?? "").parse();
         }
 
         /// <summary>
@@ -1243,7 +1241,7 @@ namespace XenAPI
         /// <param name="_network">The network</param>
         public static XenRef<Task> async_management_reconfigure(Session session, string _network)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_management_reconfigure(session.uuid, (_network != null) ? _network : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_management_reconfigure(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -1256,7 +1254,7 @@ namespace XenAPI
         /// <param name="_vlan">VLAN tag for the new interface</param>
         public static List<XenRef<PIF>> create_VLAN_from_PIF(Session session, string _pif, string _network, long _vlan)
         {
-            return XenRef<PIF>.Create(session.proxy.pool_create_vlan_from_pif(session.uuid, (_pif != null) ? _pif : "", (_network != null) ? _network : "", _vlan.ToString()).parse());
+            return XenRef<PIF>.Create(session.proxy.pool_create_vlan_from_pif(session.uuid, _pif ?? "", _network ?? "", _vlan.ToString()).parse());
         }
 
         /// <summary>
@@ -1269,7 +1267,7 @@ namespace XenAPI
         /// <param name="_vlan">VLAN tag for the new interface</param>
         public static XenRef<Task> async_create_VLAN_from_PIF(Session session, string _pif, string _network, long _vlan)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_create_vlan_from_pif(session.uuid, (_pif != null) ? _pif : "", (_network != null) ? _network : "", _vlan.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_create_vlan_from_pif(session.uuid, _pif ?? "", _network ?? "", _vlan.ToString()).parse());
         }
 
         /// <summary>
@@ -1344,7 +1342,7 @@ namespace XenAPI
         /// <param name="_host">The host who should become the new master</param>
         public static void designate_new_master(Session session, string _host)
         {
-            session.proxy.pool_designate_new_master(session.uuid, (_host != null) ? _host : "").parse();
+            session.proxy.pool_designate_new_master(session.uuid, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1355,7 +1353,7 @@ namespace XenAPI
         /// <param name="_host">The host who should become the new master</param>
         public static XenRef<Task> async_designate_new_master(Session session, string _host)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_designate_new_master(session.uuid, (_host != null) ? _host : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_designate_new_master(session.uuid, _host ?? "").parse());
         }
 
         /// <summary>
@@ -1422,7 +1420,7 @@ namespace XenAPI
         /// <param name="_value">New number of host failures to consider</param>
         public static void set_ha_host_failures_to_tolerate(Session session, string _pool, long _value)
         {
-            session.proxy.pool_set_ha_host_failures_to_tolerate(session.uuid, (_pool != null) ? _pool : "", _value.ToString()).parse();
+            session.proxy.pool_set_ha_host_failures_to_tolerate(session.uuid, _pool ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -1434,7 +1432,7 @@ namespace XenAPI
         /// <param name="_value">New number of host failures to consider</param>
         public static XenRef<Task> async_set_ha_host_failures_to_tolerate(Session session, string _pool, long _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_set_ha_host_failures_to_tolerate(session.uuid, (_pool != null) ? _pool : "", _value.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_set_ha_host_failures_to_tolerate(session.uuid, _pool ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -1447,7 +1445,7 @@ namespace XenAPI
         /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
         public static XenRef<Blob> create_new_blob(Session session, string _pool, string _name, string _mime_type)
         {
-            return XenRef<Blob>.Create(session.proxy.pool_create_new_blob(session.uuid, (_pool != null) ? _pool : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+            return XenRef<Blob>.Create(session.proxy.pool_create_new_blob(session.uuid, _pool ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -1460,7 +1458,7 @@ namespace XenAPI
         /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _pool, string _name, string _mime_type)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_create_new_blob(session.uuid, (_pool != null) ? _pool : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_create_new_blob(session.uuid, _pool ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -1474,7 +1472,7 @@ namespace XenAPI
         /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Blob> create_new_blob(Session session, string _pool, string _name, string _mime_type, bool _public)
         {
-            return XenRef<Blob>.Create(session.proxy.pool_create_new_blob(session.uuid, (_pool != null) ? _pool : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
+            return XenRef<Blob>.Create(session.proxy.pool_create_new_blob(session.uuid, _pool ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -1488,7 +1486,7 @@ namespace XenAPI
         /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _pool, string _name, string _mime_type, bool _public)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_create_new_blob(session.uuid, (_pool != null) ? _pool : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_create_new_blob(session.uuid, _pool ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -1502,7 +1500,7 @@ namespace XenAPI
         /// <param name="_auth_type">The type of authentication (e.g. AD for Active Directory)</param>
         public static void enable_external_auth(Session session, string _pool, Dictionary<string, string> _config, string _service_name, string _auth_type)
         {
-            session.proxy.pool_enable_external_auth(session.uuid, (_pool != null) ? _pool : "", Maps.convert_to_proxy_string_string(_config), (_service_name != null) ? _service_name : "", (_auth_type != null) ? _auth_type : "").parse();
+            session.proxy.pool_enable_external_auth(session.uuid, _pool ?? "", Maps.convert_to_proxy_string_string(_config), _service_name ?? "", _auth_type ?? "").parse();
         }
 
         /// <summary>
@@ -1514,7 +1512,7 @@ namespace XenAPI
         /// <param name="_config">Optional parameters as a list of key-values containing the configuration data</param>
         public static void disable_external_auth(Session session, string _pool, Dictionary<string, string> _config)
         {
-            session.proxy.pool_disable_external_auth(session.uuid, (_pool != null) ? _pool : "", Maps.convert_to_proxy_string_string(_config)).parse();
+            session.proxy.pool_disable_external_auth(session.uuid, _pool ?? "", Maps.convert_to_proxy_string_string(_config)).parse();
         }
 
         /// <summary>
@@ -1525,7 +1523,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static void detect_nonhomogeneous_external_auth(Session session, string _pool)
         {
-            session.proxy.pool_detect_nonhomogeneous_external_auth(session.uuid, (_pool != null) ? _pool : "").parse();
+            session.proxy.pool_detect_nonhomogeneous_external_auth(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -1540,7 +1538,7 @@ namespace XenAPI
         /// <param name="_xenserver_password">The password used by the wlb server to authenticate with the xenserver</param>
         public static void initialize_wlb(Session session, string _wlb_url, string _wlb_username, string _wlb_password, string _xenserver_username, string _xenserver_password)
         {
-            session.proxy.pool_initialize_wlb(session.uuid, (_wlb_url != null) ? _wlb_url : "", (_wlb_username != null) ? _wlb_username : "", (_wlb_password != null) ? _wlb_password : "", (_xenserver_username != null) ? _xenserver_username : "", (_xenserver_password != null) ? _xenserver_password : "").parse();
+            session.proxy.pool_initialize_wlb(session.uuid, _wlb_url ?? "", _wlb_username ?? "", _wlb_password ?? "", _xenserver_username ?? "", _xenserver_password ?? "").parse();
         }
 
         /// <summary>
@@ -1555,7 +1553,7 @@ namespace XenAPI
         /// <param name="_xenserver_password">The password used by the wlb server to authenticate with the xenserver</param>
         public static XenRef<Task> async_initialize_wlb(Session session, string _wlb_url, string _wlb_username, string _wlb_password, string _xenserver_username, string _xenserver_password)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_initialize_wlb(session.uuid, (_wlb_url != null) ? _wlb_url : "", (_wlb_username != null) ? _wlb_username : "", (_wlb_password != null) ? _wlb_password : "", (_xenserver_username != null) ? _xenserver_username : "", (_xenserver_password != null) ? _xenserver_password : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_initialize_wlb(session.uuid, _wlb_url ?? "", _wlb_username ?? "", _wlb_password ?? "", _xenserver_username ?? "", _xenserver_password ?? "").parse());
         }
 
         /// <summary>
@@ -1650,7 +1648,7 @@ namespace XenAPI
         /// <param name="_body"></param>
         public static string send_test_post(Session session, string _host, long _port, string _body)
         {
-            return (string)session.proxy.pool_send_test_post(session.uuid, (_host != null) ? _host : "", _port.ToString(), (_body != null) ? _body : "").parse();
+            return (string)session.proxy.pool_send_test_post(session.uuid, _host ?? "", _port.ToString(), _body ?? "").parse();
         }
 
         /// <summary>
@@ -1663,7 +1661,7 @@ namespace XenAPI
         /// <param name="_body"></param>
         public static XenRef<Task> async_send_test_post(Session session, string _host, long _port, string _body)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_send_test_post(session.uuid, (_host != null) ? _host : "", _port.ToString(), (_body != null) ? _body : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_send_test_post(session.uuid, _host ?? "", _port.ToString(), _body ?? "").parse());
         }
 
         /// <summary>
@@ -1675,7 +1673,7 @@ namespace XenAPI
         /// <param name="_cert">The certificate</param>
         public static void certificate_install(Session session, string _name, string _cert)
         {
-            session.proxy.pool_certificate_install(session.uuid, (_name != null) ? _name : "", (_cert != null) ? _cert : "").parse();
+            session.proxy.pool_certificate_install(session.uuid, _name ?? "", _cert ?? "").parse();
         }
 
         /// <summary>
@@ -1687,7 +1685,7 @@ namespace XenAPI
         /// <param name="_cert">The certificate</param>
         public static XenRef<Task> async_certificate_install(Session session, string _name, string _cert)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_certificate_install(session.uuid, (_name != null) ? _name : "", (_cert != null) ? _cert : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_certificate_install(session.uuid, _name ?? "", _cert ?? "").parse());
         }
 
         /// <summary>
@@ -1698,7 +1696,7 @@ namespace XenAPI
         /// <param name="_name">The certificate name</param>
         public static void certificate_uninstall(Session session, string _name)
         {
-            session.proxy.pool_certificate_uninstall(session.uuid, (_name != null) ? _name : "").parse();
+            session.proxy.pool_certificate_uninstall(session.uuid, _name ?? "").parse();
         }
 
         /// <summary>
@@ -1709,7 +1707,7 @@ namespace XenAPI
         /// <param name="_name">The certificate name</param>
         public static XenRef<Task> async_certificate_uninstall(Session session, string _name)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_certificate_uninstall(session.uuid, (_name != null) ? _name : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_certificate_uninstall(session.uuid, _name ?? "").parse());
         }
 
         /// <summary>
@@ -1741,7 +1739,7 @@ namespace XenAPI
         /// <param name="_cert">The CRL</param>
         public static void crl_install(Session session, string _name, string _cert)
         {
-            session.proxy.pool_crl_install(session.uuid, (_name != null) ? _name : "", (_cert != null) ? _cert : "").parse();
+            session.proxy.pool_crl_install(session.uuid, _name ?? "", _cert ?? "").parse();
         }
 
         /// <summary>
@@ -1753,7 +1751,7 @@ namespace XenAPI
         /// <param name="_cert">The CRL</param>
         public static XenRef<Task> async_crl_install(Session session, string _name, string _cert)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_crl_install(session.uuid, (_name != null) ? _name : "", (_cert != null) ? _cert : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_crl_install(session.uuid, _name ?? "", _cert ?? "").parse());
         }
 
         /// <summary>
@@ -1764,7 +1762,7 @@ namespace XenAPI
         /// <param name="_name">The CRL name</param>
         public static void crl_uninstall(Session session, string _name)
         {
-            session.proxy.pool_crl_uninstall(session.uuid, (_name != null) ? _name : "").parse();
+            session.proxy.pool_crl_uninstall(session.uuid, _name ?? "").parse();
         }
 
         /// <summary>
@@ -1775,7 +1773,7 @@ namespace XenAPI
         /// <param name="_name">The CRL name</param>
         public static XenRef<Task> async_crl_uninstall(Session session, string _name)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_crl_uninstall(session.uuid, (_name != null) ? _name : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_crl_uninstall(session.uuid, _name ?? "").parse());
         }
 
         /// <summary>
@@ -1826,7 +1824,7 @@ namespace XenAPI
         /// <param name="_sr">SR to hold the redo log.</param>
         public static void enable_redo_log(Session session, string _sr)
         {
-            session.proxy.pool_enable_redo_log(session.uuid, (_sr != null) ? _sr : "").parse();
+            session.proxy.pool_enable_redo_log(session.uuid, _sr ?? "").parse();
         }
 
         /// <summary>
@@ -1837,7 +1835,7 @@ namespace XenAPI
         /// <param name="_sr">SR to hold the redo log.</param>
         public static XenRef<Task> async_enable_redo_log(Session session, string _sr)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_enable_redo_log(session.uuid, (_sr != null) ? _sr : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_enable_redo_log(session.uuid, _sr ?? "").parse());
         }
 
         /// <summary>
@@ -1870,7 +1868,7 @@ namespace XenAPI
         [Deprecated("XenServer 7.2")]
         public static void set_vswitch_controller(Session session, string _address)
         {
-            session.proxy.pool_set_vswitch_controller(session.uuid, (_address != null) ? _address : "").parse();
+            session.proxy.pool_set_vswitch_controller(session.uuid, _address ?? "").parse();
         }
 
         /// <summary>
@@ -1883,7 +1881,7 @@ namespace XenAPI
         [Deprecated("XenServer 7.2")]
         public static XenRef<Task> async_set_vswitch_controller(Session session, string _address)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_set_vswitch_controller(session.uuid, (_address != null) ? _address : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_set_vswitch_controller(session.uuid, _address ?? "").parse());
         }
 
         /// <summary>
@@ -1895,7 +1893,7 @@ namespace XenAPI
         /// <param name="_config">Location config settings to test</param>
         public static string test_archive_target(Session session, string _pool, Dictionary<string, string> _config)
         {
-            return (string)session.proxy.pool_test_archive_target(session.uuid, (_pool != null) ? _pool : "", Maps.convert_to_proxy_string_string(_config)).parse();
+            return (string)session.proxy.pool_test_archive_target(session.uuid, _pool ?? "", Maps.convert_to_proxy_string_string(_config)).parse();
         }
 
         /// <summary>
@@ -1906,7 +1904,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static void enable_local_storage_caching(Session session, string _pool)
         {
-            session.proxy.pool_enable_local_storage_caching(session.uuid, (_pool != null) ? _pool : "").parse();
+            session.proxy.pool_enable_local_storage_caching(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -1917,7 +1915,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<Task> async_enable_local_storage_caching(Session session, string _pool)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_enable_local_storage_caching(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_enable_local_storage_caching(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -1928,7 +1926,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static void disable_local_storage_caching(Session session, string _pool)
         {
-            session.proxy.pool_disable_local_storage_caching(session.uuid, (_pool != null) ? _pool : "").parse();
+            session.proxy.pool_disable_local_storage_caching(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -1939,7 +1937,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<Task> async_disable_local_storage_caching(Session session, string _pool)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_disable_local_storage_caching(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_disable_local_storage_caching(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -1950,7 +1948,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static Dictionary<string, string> get_license_state(Session session, string _pool)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_license_state(session.uuid, (_pool != null) ? _pool : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.pool_get_license_state(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -1961,7 +1959,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<Task> async_get_license_state(Session session, string _pool)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_get_license_state(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_get_license_state(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -1973,7 +1971,7 @@ namespace XenAPI
         /// <param name="_edition">The requested edition</param>
         public static void apply_edition(Session session, string _pool, string _edition)
         {
-            session.proxy.pool_apply_edition(session.uuid, (_pool != null) ? _pool : "", (_edition != null) ? _edition : "").parse();
+            session.proxy.pool_apply_edition(session.uuid, _pool ?? "", _edition ?? "").parse();
         }
 
         /// <summary>
@@ -1985,7 +1983,7 @@ namespace XenAPI
         /// <param name="_edition">The requested edition</param>
         public static XenRef<Task> async_apply_edition(Session session, string _pool, string _edition)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_apply_edition(session.uuid, (_pool != null) ? _pool : "", (_edition != null) ? _edition : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_apply_edition(session.uuid, _pool ?? "", _edition ?? "").parse());
         }
 
         /// <summary>
@@ -1996,7 +1994,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static void enable_ssl_legacy(Session session, string _pool)
         {
-            session.proxy.pool_enable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse();
+            session.proxy.pool_enable_ssl_legacy(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -2007,7 +2005,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<Task> async_enable_ssl_legacy(Session session, string _pool)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_enable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_enable_ssl_legacy(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -2018,7 +2016,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static void disable_ssl_legacy(Session session, string _pool)
         {
-            session.proxy.pool_disable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse();
+            session.proxy.pool_disable_ssl_legacy(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -2029,7 +2027,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static XenRef<Task> async_disable_ssl_legacy(Session session, string _pool)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_disable_ssl_legacy(session.uuid, (_pool != null) ? _pool : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_disable_ssl_legacy(session.uuid, _pool ?? "").parse());
         }
 
         /// <summary>
@@ -2041,7 +2039,7 @@ namespace XenAPI
         /// <param name="_name">The name of the API call</param>
         public static bool has_extension(Session session, string _pool, string _name)
         {
-            return (bool)session.proxy.pool_has_extension(session.uuid, (_pool != null) ? _pool : "", (_name != null) ? _name : "").parse();
+            return (bool)session.proxy.pool_has_extension(session.uuid, _pool ?? "", _name ?? "").parse();
         }
 
         /// <summary>
@@ -2053,7 +2051,7 @@ namespace XenAPI
         /// <param name="_name">The name of the API call</param>
         public static XenRef<Task> async_has_extension(Session session, string _pool, string _name)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_has_extension(session.uuid, (_pool != null) ? _pool : "", (_name != null) ? _name : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_has_extension(session.uuid, _pool ?? "", _name ?? "").parse());
         }
 
         /// <summary>
@@ -2066,7 +2064,7 @@ namespace XenAPI
         /// <param name="_value">The value to add</param>
         public static void add_to_guest_agent_config(Session session, string _pool, string _key, string _value)
         {
-            session.proxy.pool_add_to_guest_agent_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.pool_add_to_guest_agent_config(session.uuid, _pool ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2079,7 +2077,7 @@ namespace XenAPI
         /// <param name="_value">The value to add</param>
         public static XenRef<Task> async_add_to_guest_agent_config(Session session, string _pool, string _key, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_add_to_guest_agent_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_add_to_guest_agent_config(session.uuid, _pool ?? "", _key ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -2091,7 +2089,7 @@ namespace XenAPI
         /// <param name="_key">The key to remove</param>
         public static void remove_from_guest_agent_config(Session session, string _pool, string _key)
         {
-            session.proxy.pool_remove_from_guest_agent_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse();
+            session.proxy.pool_remove_from_guest_agent_config(session.uuid, _pool ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2103,7 +2101,7 @@ namespace XenAPI
         /// <param name="_key">The key to remove</param>
         public static XenRef<Task> async_remove_from_guest_agent_config(Session session, string _pool, string _key)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_remove_from_guest_agent_config(session.uuid, (_pool != null) ? _pool : "", (_key != null) ? _key : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_remove_from_guest_agent_config(session.uuid, _pool ?? "", _key ?? "").parse());
         }
 
         /// <summary>

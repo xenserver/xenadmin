@@ -250,7 +250,7 @@ namespace XenAdmin.Wlb
         {
             if (vm != null && !String.IsNullOrEmpty(powerOperation) && fromHost != null)
             {
-                return vm.is_control_domain && (powerOperation == Messages.WLB_OPT_OPERATION_HOST_POWERON) && !fromHost.IsLive;
+                return vm.is_control_domain && (powerOperation == Messages.WLB_OPT_OPERATION_HOST_POWERON) && !fromHost.IsLive();
             }
                 
             return false;
@@ -261,7 +261,7 @@ namespace XenAdmin.Wlb
         {
             if (vm != null && !String.IsNullOrEmpty(powerOperation) && fromHost != null)
             {
-                return vm.is_control_domain && (powerOperation == Messages.WLB_OPT_OPERATION_HOST_POWEROFF) && fromHost.IsLive;
+                return vm.is_control_domain && (powerOperation == Messages.WLB_OPT_OPERATION_HOST_POWEROFF) && fromHost.IsLive();
             }
                 
             return false;

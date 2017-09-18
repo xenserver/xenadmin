@@ -132,7 +132,7 @@ namespace XenAdmin.Dialogs
 
             foreach (Host host in pool.Connection.Cache.Hosts)
             {
-                if(host.LicenseExpiryUTC < LicencedHost.LicenseExpiryUTC)
+                if(host.LicenseExpiryUTC() < LicencedHost.LicenseExpiryUTC())
                     LicencedHost = host;
             }
         }
@@ -206,7 +206,7 @@ namespace XenAdmin.Dialogs
         {
             //ServerTime is UTC
             DateTime currentRefTime = serverTime.ServerTime;
-            return LicencedHost.LicenseExpiryUTC.Subtract(currentRefTime);
+            return LicencedHost.LicenseExpiryUTC().Subtract(currentRefTime);
         }
 
         internal static bool PoolIsMixedFreeAndExpiring(IXenObject xenObject)
@@ -221,7 +221,7 @@ namespace XenAdmin.Dialogs
                     return false;
 
                 var expiryGroups = from Host h in xenObject.Connection.Cache.Hosts
-                                   let exp = h.LicenseExpiryUTC
+                                   let exp = h.LicenseExpiryUTC()
                                    group h by exp
                                    into g
                                    select new { ExpiryDate = g.Key, Hosts = g };
@@ -337,7 +337,7 @@ namespace XenAdmin.Dialogs
             get
             {
                 if (LicencedHost.license_params != null && LicencedHost.license_params.ContainsKey("expiry"))
-                    return LicencedHost.LicenseExpiryUTC.ToLocalTime();
+                    return LicencedHost.LicenseExpiryUTC().ToLocalTime();
                 return null;
             }
         }
@@ -350,17 +350,17 @@ namespace XenAdmin.Dialogs
             {
                 if (PoolLicensingModel == LicensingModel.Creedence && CurrentState == HostState.Licensed)
                 {
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.EnterpriseFeaturesEnabled))
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.EnterpriseFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_ENTERPRISE_FEATURES_ENABLED;
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopPlusFeaturesEnabled))
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopPlusFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED;
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopFeaturesEnabled))
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED;
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.PremiumFeaturesEnabled))
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.PremiumFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED;
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.StandardFeaturesEnabled))
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.StandardFeaturesEnabled()))
                         return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
-                    if (XenObject.Connection.Cache.Hosts.All(h => h.EligibleForSupport))
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.EligibleForSupport()))
                         return Messages.LICENSE_SUPPORT_AND_STANDARD_FEATURES_ENABLED;
                     return Messages.LICENSE_NOT_ELIGIBLE_FOR_SUPPORT;
                 }

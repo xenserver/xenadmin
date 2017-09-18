@@ -38,7 +38,7 @@ namespace XenAdmin.Actions
     {
         private XenAPI.VIF _vif;
         public UnplugVIFAction(XenAPI.VIF vif)
-            : base(vif.Connection, string.Format(Messages.ACTION_VIF_UNPLUG_TITLE, vif.Connection.Resolve(vif.VM).Name))
+            : base(vif.Connection, string.Format(Messages.ACTION_VIF_UNPLUG_TITLE, vif.Connection.Resolve(vif.VM).Name()))
         {
             VM = vif.Connection.Resolve(vif.VM);
             _vif = vif;

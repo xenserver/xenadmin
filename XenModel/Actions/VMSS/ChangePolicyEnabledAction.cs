@@ -39,7 +39,7 @@ namespace XenAdmin.Actions
     {
         private VMSS _policy;
         public ChangePolicyEnabledAction(VMSS policy)
-            : base(policy.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, policy.Name))
+            : base(policy.Connection, string.Format(Messages.CHANGE_POLICY_STATUS, policy.Name()))
         {
             _policy = policy;
             Pool = Helpers.GetPool(_policy.Connection);
@@ -48,13 +48,13 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             bool value = !_policy.enabled;
-            Description = value ? string.Format(Messages.ENABLING_VMSS, _policy.Name) :
-                string.Format(Messages.DISABLING_VMSS, _policy.Name);
+            Description = value ? string.Format(Messages.ENABLING_VMSS, _policy.Name()) :
+                string.Format(Messages.DISABLING_VMSS, _policy.Name());
 
             VMSS.set_enabled(Session, _policy.opaque_ref, !_policy.enabled);
 
-            Description = value ? string.Format(Messages.ENABLED_VMSS, _policy.Name) :
-                string.Format(Messages.DISABLED_VMSS, _policy.Name);
+            Description = value ? string.Format(Messages.ENABLED_VMSS, _policy.Name()) :
+                string.Format(Messages.DISABLED_VMSS, _policy.Name());
            
         }
     }

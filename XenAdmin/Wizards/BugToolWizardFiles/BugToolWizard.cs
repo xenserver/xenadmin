@@ -158,7 +158,7 @@ namespace XenAdmin.Wizards
                 if (c.Key == "host-crashdump-dumps" && c.Checked)
                 {
                     var hostList = bugToolPageSelectHosts1.SelectedHosts;
-                    if (!hostList.Any(h => h.HasCrashDumps))
+                    if (!hostList.Any(h => h.HasCrashDumps()))
                         break;
 
                     DialogResult result;
@@ -173,7 +173,7 @@ namespace XenAdmin.Wizards
                     {
                         foreach (Host host in hostList)
                         {
-                            if (host != null && host.HasCrashDumps)
+                            if (host != null && host.HasCrashDumps())
                             {
                                 new Actions.DestroyHostCrashDumpAction(host).RunAsync();
                             }

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -111,9 +109,9 @@ namespace XenAPI
         public Proxy_GPU_group ToProxy()
         {
             Proxy_GPU_group result_ = new Proxy_GPU_group();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.PGPUs = (PGPUs != null) ? Helper.RefListToStringArray(PGPUs) : new string[] {};
             result_.VGPUs = (VGPUs != null) ? Helper.RefListToStringArray(VGPUs) : new string[] {};
             result_.GPU_types = GPU_types;
@@ -198,7 +196,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static GPU_group get_record(Session session, string _gpu_group)
         {
-            return new GPU_group((Proxy_GPU_group)session.proxy.gpu_group_get_record(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+            return new GPU_group((Proxy_GPU_group)session.proxy.gpu_group_get_record(session.uuid, _gpu_group ?? "").parse());
         }
 
         /// <summary>
@@ -209,7 +207,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<GPU_group> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<GPU_group>.Create(session.proxy.gpu_group_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<GPU_group>.Create(session.proxy.gpu_group_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -220,7 +218,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<GPU_group>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<GPU_group>.Create(session.proxy.gpu_group_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            return XenRef<GPU_group>.Create(session.proxy.gpu_group_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -231,7 +229,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static string get_uuid(Session session, string _gpu_group)
         {
-            return (string)session.proxy.gpu_group_get_uuid(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse();
+            return (string)session.proxy.gpu_group_get_uuid(session.uuid, _gpu_group ?? "").parse();
         }
 
         /// <summary>
@@ -242,7 +240,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static string get_name_label(Session session, string _gpu_group)
         {
-            return (string)session.proxy.gpu_group_get_name_label(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse();
+            return (string)session.proxy.gpu_group_get_name_label(session.uuid, _gpu_group ?? "").parse();
         }
 
         /// <summary>
@@ -253,7 +251,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static string get_name_description(Session session, string _gpu_group)
         {
-            return (string)session.proxy.gpu_group_get_name_description(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse();
+            return (string)session.proxy.gpu_group_get_name_description(session.uuid, _gpu_group ?? "").parse();
         }
 
         /// <summary>
@@ -264,7 +262,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static List<XenRef<PGPU>> get_PGPUs(Session session, string _gpu_group)
         {
-            return XenRef<PGPU>.Create(session.proxy.gpu_group_get_pgpus(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+            return XenRef<PGPU>.Create(session.proxy.gpu_group_get_pgpus(session.uuid, _gpu_group ?? "").parse());
         }
 
         /// <summary>
@@ -275,7 +273,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static List<XenRef<VGPU>> get_VGPUs(Session session, string _gpu_group)
         {
-            return XenRef<VGPU>.Create(session.proxy.gpu_group_get_vgpus(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+            return XenRef<VGPU>.Create(session.proxy.gpu_group_get_vgpus(session.uuid, _gpu_group ?? "").parse());
         }
 
         /// <summary>
@@ -286,7 +284,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static string[] get_GPU_types(Session session, string _gpu_group)
         {
-            return (string [])session.proxy.gpu_group_get_gpu_types(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse();
+            return (string [])session.proxy.gpu_group_get_gpu_types(session.uuid, _gpu_group ?? "").parse();
         }
 
         /// <summary>
@@ -297,7 +295,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static Dictionary<string, string> get_other_config(Session session, string _gpu_group)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.gpu_group_get_other_config(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.gpu_group_get_other_config(session.uuid, _gpu_group ?? "").parse());
         }
 
         /// <summary>
@@ -308,7 +306,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static allocation_algorithm get_allocation_algorithm(Session session, string _gpu_group)
         {
-            return (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)session.proxy.gpu_group_get_allocation_algorithm(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+            return (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)session.proxy.gpu_group_get_allocation_algorithm(session.uuid, _gpu_group ?? "").parse());
         }
 
         /// <summary>
@@ -319,7 +317,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static List<XenRef<VGPU_type>> get_supported_VGPU_types(Session session, string _gpu_group)
         {
-            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_supported_vgpu_types(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_supported_vgpu_types(session.uuid, _gpu_group ?? "").parse());
         }
 
         /// <summary>
@@ -330,7 +328,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static List<XenRef<VGPU_type>> get_enabled_VGPU_types(Session session, string _gpu_group)
         {
-            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_enabled_vgpu_types(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+            return XenRef<VGPU_type>.Create(session.proxy.gpu_group_get_enabled_vgpu_types(session.uuid, _gpu_group ?? "").parse());
         }
 
         /// <summary>
@@ -342,7 +340,7 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _gpu_group, string _label)
         {
-            session.proxy.gpu_group_set_name_label(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_label != null) ? _label : "").parse();
+            session.proxy.gpu_group_set_name_label(session.uuid, _gpu_group ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -354,7 +352,7 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _gpu_group, string _description)
         {
-            session.proxy.gpu_group_set_name_description(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_description != null) ? _description : "").parse();
+            session.proxy.gpu_group_set_name_description(session.uuid, _gpu_group ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -366,7 +364,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _gpu_group, Dictionary<string, string> _other_config)
         {
-            session.proxy.gpu_group_set_other_config(session.uuid, (_gpu_group != null) ? _gpu_group : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.gpu_group_set_other_config(session.uuid, _gpu_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -379,7 +377,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _gpu_group, string _key, string _value)
         {
-            session.proxy.gpu_group_add_to_other_config(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.gpu_group_add_to_other_config(session.uuid, _gpu_group ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -391,7 +389,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _gpu_group, string _key)
         {
-            session.proxy.gpu_group_remove_from_other_config(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_key != null) ? _key : "").parse();
+            session.proxy.gpu_group_remove_from_other_config(session.uuid, _gpu_group ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -403,7 +401,7 @@ namespace XenAPI
         /// <param name="_allocation_algorithm">New value to set</param>
         public static void set_allocation_algorithm(Session session, string _gpu_group, allocation_algorithm _allocation_algorithm)
         {
-            session.proxy.gpu_group_set_allocation_algorithm(session.uuid, (_gpu_group != null) ? _gpu_group : "", allocation_algorithm_helper.ToString(_allocation_algorithm)).parse();
+            session.proxy.gpu_group_set_allocation_algorithm(session.uuid, _gpu_group ?? "", allocation_algorithm_helper.ToString(_allocation_algorithm)).parse();
         }
 
         /// <summary>
@@ -416,7 +414,7 @@ namespace XenAPI
         /// <param name="_other_config"></param>
         public static XenRef<GPU_group> create(Session session, string _name_label, string _name_description, Dictionary<string, string> _other_config)
         {
-            return XenRef<GPU_group>.Create(session.proxy.gpu_group_create(session.uuid, (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+            return XenRef<GPU_group>.Create(session.proxy.gpu_group_create(session.uuid, _name_label ?? "", _name_description ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
         }
 
         /// <summary>
@@ -429,7 +427,7 @@ namespace XenAPI
         /// <param name="_other_config"></param>
         public static XenRef<Task> async_create(Session session, string _name_label, string _name_description, Dictionary<string, string> _other_config)
         {
-            return XenRef<Task>.Create(session.proxy.async_gpu_group_create(session.uuid, (_name_label != null) ? _name_label : "", (_name_description != null) ? _name_description : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+            return XenRef<Task>.Create(session.proxy.async_gpu_group_create(session.uuid, _name_label ?? "", _name_description ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
         }
 
         /// <summary>
@@ -440,7 +438,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static void destroy(Session session, string _gpu_group)
         {
-            session.proxy.gpu_group_destroy(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse();
+            session.proxy.gpu_group_destroy(session.uuid, _gpu_group ?? "").parse();
         }
 
         /// <summary>
@@ -451,7 +449,7 @@ namespace XenAPI
         /// <param name="_gpu_group">The opaque_ref of the given gpu_group</param>
         public static XenRef<Task> async_destroy(Session session, string _gpu_group)
         {
-            return XenRef<Task>.Create(session.proxy.async_gpu_group_destroy(session.uuid, (_gpu_group != null) ? _gpu_group : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_gpu_group_destroy(session.uuid, _gpu_group ?? "").parse());
         }
 
         /// <summary>
@@ -463,7 +461,7 @@ namespace XenAPI
         /// <param name="_vgpu_type">The VGPU_type for which the remaining capacity will be calculated</param>
         public static long get_remaining_capacity(Session session, string _gpu_group, string _vgpu_type)
         {
-            return long.Parse((string)session.proxy.gpu_group_get_remaining_capacity(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
+            return long.Parse((string)session.proxy.gpu_group_get_remaining_capacity(session.uuid, _gpu_group ?? "", _vgpu_type ?? "").parse());
         }
 
         /// <summary>
@@ -475,7 +473,7 @@ namespace XenAPI
         /// <param name="_vgpu_type">The VGPU_type for which the remaining capacity will be calculated</param>
         public static XenRef<Task> async_get_remaining_capacity(Session session, string _gpu_group, string _vgpu_type)
         {
-            return XenRef<Task>.Create(session.proxy.async_gpu_group_get_remaining_capacity(session.uuid, (_gpu_group != null) ? _gpu_group : "", (_vgpu_type != null) ? _vgpu_type : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_gpu_group_get_remaining_capacity(session.uuid, _gpu_group ?? "", _vgpu_type ?? "").parse());
         }
 
         /// <summary>

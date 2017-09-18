@@ -203,7 +203,7 @@ namespace XenAdmin.Alerts
                     case AlarmType.Storage:
                         return string.Format(Messages.ALERT_ALARM_STORAGE_DESCRIPTION,
                                              Helpers.GetNameAndObject(XenObject),
-                                             sr == null ? "" : sr.Name,
+                                             sr == null ? "" : sr.Name(),
                                              Util.DataRateString(CurrentValue * Util.BINARY_MEGA), //xapi unit is in Mib
                                              Util.TimeString(TriggerPeriod),
                                              Util.DataRateString(TriggerLevel * Util.BINARY_MEGA));
@@ -268,7 +268,7 @@ namespace XenAdmin.Alerts
                         else if (XenObject is VM)
                         {
                             VM vm = (VM)XenObject;
-                            xenObject = vm.IsControlDomainZero ? XenObject.Connection.Resolve(vm.resident_on) : XenObject;
+                            xenObject = vm.IsControlDomainZero() ? XenObject.Connection.Resolve(vm.resident_on) : XenObject;
                         }
 
                         if (xenObject == null)

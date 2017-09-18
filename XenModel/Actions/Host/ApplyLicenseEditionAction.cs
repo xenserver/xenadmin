@@ -166,7 +166,7 @@ namespace XenAdmin.Actions
                                         case Message.MessageType.LICENSE_NOT_AVAILABLE:
                                         case Message.MessageType.LICENSE_SERVER_UNREACHABLE:
                                         case Message.MessageType.LICENSE_SERVER_VERSION_OBSOLETE:
-                                            alertText = string.Format(Message.FriendlyBody(alert.Name), xoClosure.Name);
+                                            alertText = string.Format(Message.FriendlyBody(alert.Name), xoClosure.Name());
                                             break;
                                         case Message.MessageType.GRACE_LICENSE:
                                             alertText = string.Empty;
@@ -233,7 +233,7 @@ namespace XenAdmin.Actions
 
             if (LicenseFailures.Count > 0)
             {
-                string exceptionText = LicenseFailures.Count == 1 ? string.Format(Messages.LICENSE_ERROR_1, LicenseFailures[0].Host.Name) : string.Format(Messages.LICENSE_ERROR_MANY, LicenseFailures.Count, new List<IXenObject>(xos).Count);
+                string exceptionText = LicenseFailures.Count == 1 ? string.Format(Messages.LICENSE_ERROR_1, LicenseFailures[0].Host.Name()) : string.Format(Messages.LICENSE_ERROR_MANY, LicenseFailures.Count, new List<IXenObject>(xos).Count);
 
                 if (DoOnLicensingFailure != null)
                     DoOnLicensingFailure(LicenseFailures, exceptionText);

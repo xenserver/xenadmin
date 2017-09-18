@@ -90,8 +90,8 @@ namespace XenAdmin.Actions
         /// </summary>
         /// <param name="bond"></param>
         public DestroyBondAction(Bond bond)
-            : base(bond.Connection, string.Format(Messages.ACTION_DESTROY_BOND_TITLE, bond.Name),
-                   string.Format(Messages.ACTION_DESTROY_BOND_DESCRIPTION, bond.Name))
+            : base(bond.Connection, string.Format(Messages.ACTION_DESTROY_BOND_TITLE, bond.Name()),
+                   string.Format(Messages.ACTION_DESTROY_BOND_DESCRIPTION, bond.Name()))
         {
             #region RBAC Dependencies
             ApiMethodsToRoleCheck.Add("host.management_reconfigure");
@@ -105,7 +105,7 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.AddRange(XenAPI.Role.CommonTaskApiList);
             #endregion
 
-            Name = bond.Name;
+            Name = bond.Name();
 
             Pool = Helpers.GetPoolOfOne(Connection);
 
@@ -154,7 +154,7 @@ namespace XenAdmin.Actions
         {
             Connection.ExpectDisruption = true;
             List<VIF> unplugged_vifs = new List<VIF>();
-            string old_network_name = Network == null ? "" : Network.Name;
+            string old_network_name = Network == null ? "" : Network.Name();
             Exception e = null;
 
             BestEffort(ref e, ReconfigureManagementInterfaces);

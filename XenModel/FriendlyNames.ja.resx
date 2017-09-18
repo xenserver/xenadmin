@@ -1065,7 +1065,7 @@
     <value>プール '{0}' のサーバーでマルチパスの状態に変更がありました。現在、次のサーバーにアクティブでないパスがあります。{1}。詳しくは、[XenCenter] のログを参照してください。</value>
   </data>
   <data name="Message.body-pbd_plug_failed_on_server_start" xml:space="preserve">
-    <value>サーバー '{0}' の起動時にストレージ リポジトリを接続できませんでした。[ストレージ] メニューの [修復] でこの問題を解決できる場合があります。</value>
+    <value>サーバー '{0}' の起動時にストレージリポジトリを接続できませんでした。</value>
   </data>
   <data name="Message.body-pool_master_transition" xml:space="preserve">
     <value>現在、サーバー '{0}' がプール '{1}' のマスターとして動作しています。</value>
@@ -1452,7 +1452,7 @@
     <value>[XenServer product] Tools</value>
   </data>
   <data name="VM.TemplateDescription-Demo Linux VM" xml:space="preserve">
-    <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux VM を作成できます。業務での使用は推奨されません。</value>
+    <value>このテンプレートを使用して、デモ用またはテスト用のビルトイン Linux ディストリビューションが動作する Linux 仮想マシンを作成できます。業務での使用は推奨されません。</value>
   </data>
   <data name="VM.TemplateDescription-Other install media" xml:space="preserve">
     <value>一覧にないオペレーティング システムを使用する場合は、このテンプレートを選択します。このテンプレートは、詳しい知識がある管理者向けです。また、弊社の製品は、標準テンプレートでサポートされる特定のディストリビューションおよびバージョンでのみ、動作テストが実施されていることをご了承ください。</value>
@@ -1813,5 +1813,8 @@
   </data>
   <data name="Label-host.system_status-VM-snapshot-schedule" xml:space="preserve">
     <value>スケジュールされたスナップショットのログ ファイル</value>
+  </data>
+  <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
+    <value>ストレージの修復</value>
   </data>
 </root>

@@ -201,7 +201,7 @@ namespace XenAdmin.Wizards.DRWizards
 
         List<AsyncAction> CreateSubActionsFor(PoolMetadata poolMetadata)
         {
-            log.DebugFormat("Generating recovery actions from pool {0} (VDI {1})", poolMetadata.Pool.Name, poolMetadata.Vdi.Name);
+            log.DebugFormat("Generating recovery actions from pool {0} (VDI {1})", poolMetadata.Pool.Name(), poolMetadata.Vdi.Name());
                 
             List<AsyncAction> subActions = new List<AsyncAction>();
 
@@ -303,7 +303,7 @@ namespace XenAdmin.Wizards.DRWizards
             VdiOpenDatabaseAction senderAction = (VdiOpenDatabaseAction)sender;
             senderAction.Completed -= OpenDatabaseActionCompleted;
 
-            log.DebugFormat("Metadata database open ({0}). Now start recovering", senderAction.Vdi.Name);
+            log.DebugFormat("Metadata database open ({0}). Now start recovering", senderAction.Vdi.Name());
 
             metadataSession = senderAction.MetadataSession;
             if (metadataSession == null)
@@ -321,8 +321,8 @@ namespace XenAdmin.Wizards.DRWizards
             }
 
             multipleRecoverAction = new MultipleAction(Connection,
-                String.Format(Messages.DR_WIZARD_RECOVERPAGE_RECOVER_FROM, senderAction.Vdi.Name),
-                String.Format(Messages.DR_WIZARD_RECOVERPAGE_RECOVERING_FROM, senderAction.Vdi.Name), 
+                String.Format(Messages.DR_WIZARD_RECOVERPAGE_RECOVER_FROM, senderAction.Vdi.Name()),
+                String.Format(Messages.DR_WIZARD_RECOVERPAGE_RECOVERING_FROM, senderAction.Vdi.Name()), 
                 Messages.COMPLETED, 
                 recoverSubActions);
             multipleRecoverAction.Completed += MultipleRecoverActionCompleted;
@@ -374,7 +374,7 @@ namespace XenAdmin.Wizards.DRWizards
                     if (openDatabaseAction != null && !openDatabaseAction.IsCompleted)
                     {
                         startRecovery = true;
-                        log.DebugFormat("Open metadata database ({0})", openDatabaseAction.Vdi.Name);
+                        log.DebugFormat("Open metadata database ({0})", openDatabaseAction.Vdi.Name());
                         openDatabaseAction.RunAsync();
                         break;
                     }
@@ -494,8 +494,8 @@ namespace XenAdmin.Wizards.DRWizards
             {
                 XenObject = xenObject;
                 taskCell.Value = XenObject is VM
-                                     ? string.Format(Messages.ACTION_DR_RECOVER_VM_TITLE, XenObject.Name)
-                                     : string.Format(Messages.ACTION_DR_RECOVER_APPLIANCE_TITLE, XenObject.Name);
+                                     ? string.Format(Messages.ACTION_DR_RECOVER_VM_TITLE, XenObject.Name())
+                                     : string.Format(Messages.ACTION_DR_RECOVER_APPLIANCE_TITLE, XenObject.Name());
                 UpdateStatus(RecoverState.NotRecovered, Messages.DR_WIZARD_RECOVERPAGE_STATUS_PENDING);
             }
 

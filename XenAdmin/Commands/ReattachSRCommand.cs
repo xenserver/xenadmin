@@ -87,8 +87,8 @@ namespace XenAdmin.Commands
         private static bool CanReattachSR(SR sr)
         {
             return sr != null
-                && !sr.HasPBDs
-                && sr.CanCreateWithXenCenter
+                && !sr.HasPBDs()
+                && sr.CanCreateWithXenCenter()
                 && !HelpersGUI.GetActionInProgress(sr)
                 && !(sr.type == "cslg" && Helpers.FeatureForbidden(sr.Connection, Host.RestrictStorageChoices))
                 && (SM.GetByType(sr.Connection, sr.type) != null);

@@ -96,7 +96,7 @@ namespace XenAdmin.Commands
 
         private bool CanExecute(Host host)
         {
-            return host != null && host.IsLive ;
+            return host != null && host.IsLive();
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)

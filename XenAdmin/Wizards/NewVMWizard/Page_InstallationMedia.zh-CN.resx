@@ -451,7 +451,7 @@
     <value>0</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>请在此处输入任何高级启动参数。如果不希望提供任何参数，请将此框留空。</value>
+    <value>请在此处输入任何高级启动参数。如果不想提供任何参数，请将此框留空。</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

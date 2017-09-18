@@ -87,11 +87,11 @@ namespace XenAdmin.SettingsPanels
             get { return Properties.Resources.log_destination_16; }
         }
 
-        public void Repopulate()
+        private void Repopulate()
         {
             if (TheHost != null)
             {
-                string location = TheHost.SysLogDestination;
+                string location = TheHost.GetSysLogDestination();
                 if (location == null)
                 {
                     LocalRadioButton.Checked = true;
@@ -133,9 +133,9 @@ namespace XenAdmin.SettingsPanels
             if (TheHost != null)
             {
                 if (RemoteRadioButton.Checked)
-                    TheHost.SysLogDestination = ServerTextBox.Text;
+                    TheHost.SetSysLogDestination(ServerTextBox.Text);
                 else if (LocalRadioButton.Checked)
-                    TheHost.SysLogDestination = null;
+                    TheHost.SetSysLogDestination(null);
 
                 return new DelegatedAsyncAction(
                     TheHost.Connection,

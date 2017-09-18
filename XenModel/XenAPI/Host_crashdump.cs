@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -91,8 +89,8 @@ namespace XenAPI
         public Proxy_Host_crashdump ToProxy()
         {
             Proxy_Host_crashdump result_ = new Proxy_Host_crashdump();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.host = (host != null) ? host : "";
+            result_.uuid = uuid ?? "";
+            result_.host = host ?? "";
             result_.timestamp = timestamp;
             result_.size = size.ToString();
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
@@ -151,7 +149,7 @@ namespace XenAPI
         /// <param name="_host_crashdump">The opaque_ref of the given host_crashdump</param>
         public static Host_crashdump get_record(Session session, string _host_crashdump)
         {
-            return new Host_crashdump((Proxy_Host_crashdump)session.proxy.host_crashdump_get_record(session.uuid, (_host_crashdump != null) ? _host_crashdump : "").parse());
+            return new Host_crashdump((Proxy_Host_crashdump)session.proxy.host_crashdump_get_record(session.uuid, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -162,7 +160,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Host_crashdump> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Host_crashdump>.Create(session.proxy.host_crashdump_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Host_crashdump>.Create(session.proxy.host_crashdump_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -173,7 +171,7 @@ namespace XenAPI
         /// <param name="_host_crashdump">The opaque_ref of the given host_crashdump</param>
         public static string get_uuid(Session session, string _host_crashdump)
         {
-            return (string)session.proxy.host_crashdump_get_uuid(session.uuid, (_host_crashdump != null) ? _host_crashdump : "").parse();
+            return (string)session.proxy.host_crashdump_get_uuid(session.uuid, _host_crashdump ?? "").parse();
         }
 
         /// <summary>
@@ -184,7 +182,7 @@ namespace XenAPI
         /// <param name="_host_crashdump">The opaque_ref of the given host_crashdump</param>
         public static XenRef<Host> get_host(Session session, string _host_crashdump)
         {
-            return XenRef<Host>.Create(session.proxy.host_crashdump_get_host(session.uuid, (_host_crashdump != null) ? _host_crashdump : "").parse());
+            return XenRef<Host>.Create(session.proxy.host_crashdump_get_host(session.uuid, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -195,7 +193,7 @@ namespace XenAPI
         /// <param name="_host_crashdump">The opaque_ref of the given host_crashdump</param>
         public static DateTime get_timestamp(Session session, string _host_crashdump)
         {
-            return session.proxy.host_crashdump_get_timestamp(session.uuid, (_host_crashdump != null) ? _host_crashdump : "").parse();
+            return session.proxy.host_crashdump_get_timestamp(session.uuid, _host_crashdump ?? "").parse();
         }
 
         /// <summary>
@@ -206,7 +204,7 @@ namespace XenAPI
         /// <param name="_host_crashdump">The opaque_ref of the given host_crashdump</param>
         public static long get_size(Session session, string _host_crashdump)
         {
-            return long.Parse((string)session.proxy.host_crashdump_get_size(session.uuid, (_host_crashdump != null) ? _host_crashdump : "").parse());
+            return long.Parse((string)session.proxy.host_crashdump_get_size(session.uuid, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -217,7 +215,7 @@ namespace XenAPI
         /// <param name="_host_crashdump">The opaque_ref of the given host_crashdump</param>
         public static Dictionary<string, string> get_other_config(Session session, string _host_crashdump)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.host_crashdump_get_other_config(session.uuid, (_host_crashdump != null) ? _host_crashdump : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.host_crashdump_get_other_config(session.uuid, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -229,7 +227,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _host_crashdump, Dictionary<string, string> _other_config)
         {
-            session.proxy.host_crashdump_set_other_config(session.uuid, (_host_crashdump != null) ? _host_crashdump : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.host_crashdump_set_other_config(session.uuid, _host_crashdump ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -242,7 +240,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _host_crashdump, string _key, string _value)
         {
-            session.proxy.host_crashdump_add_to_other_config(session.uuid, (_host_crashdump != null) ? _host_crashdump : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.host_crashdump_add_to_other_config(session.uuid, _host_crashdump ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -254,7 +252,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _host_crashdump, string _key)
         {
-            session.proxy.host_crashdump_remove_from_other_config(session.uuid, (_host_crashdump != null) ? _host_crashdump : "", (_key != null) ? _key : "").parse();
+            session.proxy.host_crashdump_remove_from_other_config(session.uuid, _host_crashdump ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -265,7 +263,7 @@ namespace XenAPI
         /// <param name="_host_crashdump">The opaque_ref of the given host_crashdump</param>
         public static void destroy(Session session, string _host_crashdump)
         {
-            session.proxy.host_crashdump_destroy(session.uuid, (_host_crashdump != null) ? _host_crashdump : "").parse();
+            session.proxy.host_crashdump_destroy(session.uuid, _host_crashdump ?? "").parse();
         }
 
         /// <summary>
@@ -276,7 +274,7 @@ namespace XenAPI
         /// <param name="_host_crashdump">The opaque_ref of the given host_crashdump</param>
         public static XenRef<Task> async_destroy(Session session, string _host_crashdump)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_crashdump_destroy(session.uuid, (_host_crashdump != null) ? _host_crashdump : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_host_crashdump_destroy(session.uuid, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -289,7 +287,7 @@ namespace XenAPI
         /// <param name="_options">Extra configuration operations</param>
         public static void upload(Session session, string _host_crashdump, string _url, Dictionary<string, string> _options)
         {
-            session.proxy.host_crashdump_upload(session.uuid, (_host_crashdump != null) ? _host_crashdump : "", (_url != null) ? _url : "", Maps.convert_to_proxy_string_string(_options)).parse();
+            session.proxy.host_crashdump_upload(session.uuid, _host_crashdump ?? "", _url ?? "", Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
         /// <summary>
@@ -302,7 +300,7 @@ namespace XenAPI
         /// <param name="_options">Extra configuration operations</param>
         public static XenRef<Task> async_upload(Session session, string _host_crashdump, string _url, Dictionary<string, string> _options)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_crashdump_upload(session.uuid, (_host_crashdump != null) ? _host_crashdump : "", (_url != null) ? _url : "", Maps.convert_to_proxy_string_string(_options)).parse());
+            return XenRef<Task>.Create(session.proxy.async_host_crashdump_upload(session.uuid, _host_crashdump ?? "", _url ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>

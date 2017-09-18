@@ -127,7 +127,7 @@ namespace XenAdmin.Actions
                 }
             }
 
-            Description = string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS_DONE, VM.Name);
+            Description = string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS_DONE, VM.Name());
         }
 
       

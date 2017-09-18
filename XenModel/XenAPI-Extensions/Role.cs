@@ -48,28 +48,19 @@ namespace XenAPI
         public const string MR_ROLE_POOL_OPERATOR = "pool-operator";
         public const string MR_ROLE_POOL_ADMIN = "pool-admin";
 
-        public string FriendlyName
+        public string FriendlyName()
         {
-            get
-            {
-                return XenAdmin.Core.PropertyManager.GetFriendlyName(String.Format("Role.{0}.NameLabel", this.name_label.ToLowerInvariant()));
-            }
+            return PropertyManager.GetFriendlyName(String.Format("Role.{0}.NameLabel", this.name_label.ToLowerInvariant()));
         }
 
-        public string FriendlyDescription
+        public string FriendlyDescription()
         {
-            get
-            {
-                return XenAdmin.Core.PropertyManager.GetFriendlyName(String.Format("Role.{0}.Description", this.name_label.ToLowerInvariant()));
-            }
+            return PropertyManager.GetFriendlyName(String.Format("Role.{0}.Description", this.name_label.ToLowerInvariant()));
         }
 
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                return name_label;
-            }
+            return name_label;
         }
 
         /// <summary>
@@ -93,7 +84,7 @@ namespace XenAPI
         /// <summary>
         /// logout, login_with_password
         /// </summary>
-        public readonly static RbacMethodList CommonSessionApiList = new RbacMethodList(
+        public static readonly RbacMethodList CommonSessionApiList = new RbacMethodList(
             "session.logout", 
             "session.login_with_password"
         );
@@ -101,7 +92,7 @@ namespace XenAPI
         /// <summary>
         /// add_to_other_config, destroy
         /// </summary>
-        public readonly static RbacMethodList CommonTaskApiList = new RbacMethodList(
+        public static readonly RbacMethodList CommonTaskApiList = new RbacMethodList(
             new RbacMethod("task.add_to_other_config", "XenCenterUUID"),  // See AsyncAction.RelatedTask
             new RbacMethod("task.add_to_other_config", "applies_to"),
             new RbacMethod("task.destroy")
@@ -117,12 +108,7 @@ namespace XenAPI
             if (roles == null)
                 return "";
 
-            Converter<Role, String> roleConverter = new Converter<Role, string>(
-                delegate(Role r)
-                {
-                    return r.FriendlyName;
-                });
-            return String.Join(", ", roles.ConvertAll<String>(roleConverter).ToArray());
+            return String.Join(", ", roles.ConvertAll(r => r.FriendlyName()).ToArray());
         }
 
 

@@ -56,7 +56,7 @@ namespace XenAdmin.Wizards.GenericPages
                 _pool = value;
                 if (_pool != null)
                     label1.Text = string.Format(Helpers.IsPool(_pool.Connection) ? Messages.VMS_IN_POOL : Messages.VMS_IN_SERVER,
-                                                _pool.Name.Ellipsise(60));
+                                                _pool.Name().Ellipsise(60));
                 label2.Text = VMGroup<T>.ChooseVMsPage_Rubric;
                 dataGridView1.Columns["ColumnCurrentGroup"].HeaderText = VMGroup<T>.ChooseVMsPage_CurrentGroup;
             }
@@ -119,7 +119,7 @@ namespace XenAdmin.Wizards.GenericPages
                 dataGridView1.Rows.Clear();
                 foreach (var vm in Pool.Connection.Cache.VMs)
                 {
-                    if (searchTextBox1.Matches(vm.Name) && vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    if (searchTextBox1.Matches(vm.Name()) && vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
 						dataGridView1.Rows.Add(new VMDataGridViewRow(SelectedVMs.Contains(vm), vm));
                 }
 
@@ -197,10 +197,10 @@ namespace XenAdmin.Wizards.GenericPages
             void Refresh(bool selected)
             {
                 _selectedCell.Value = selected;
-                _nameCell.Value = Vm.Name;
-                _descriptionCell.Value = Vm.Description;
+                _nameCell.Value = Vm.Name();
+                _descriptionCell.Value = Vm.Description();
                 T group = Vm.Connection.Resolve(VMGroup<T>.VmToGroup(Vm));
-                _currentGroupCell.Value = group == null ? Messages.NONE : group.Name;
+                _currentGroupCell.Value = group == null ? Messages.NONE : group.Name();
                 if(VMGroup<T>.isQuescingSupported)
                 {
                     if (Vm.allowed_operations.Contains((vm_operations.snapshot_with_quiesce)) && !Helpers.FeatureForbidden(Vm, Host.RestrictVss))
@@ -232,7 +232,7 @@ namespace XenAdmin.Wizards.GenericPages
                 foreach (var vm in Pool.Connection.Cache.VMs)
                 {
                     int index = 0;
-                    if (vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
+                    if (vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs))
                     {
                         bool selected = group != null && VMGroup<T>.GroupToVMs(group).Contains(new XenRef<VM>(vm.opaque_ref));
 						index = dataGridView1.Rows.Add(new VMDataGridViewRow(selected, vm));
@@ -298,7 +298,7 @@ namespace XenAdmin.Wizards.GenericPages
 
         private bool userAcceptsWarning()
         {
-            string groupName = (_group != null) ? _group.Name : GroupName;
+            string groupName = _group != null ? _group.Name() : GroupName;
             return AssignGroupToolStripMenuItem<T>.AssignGroupToVMCommand.ChangesOK(SelectedVMs, _group, groupName);
         }
 

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -75,7 +73,7 @@ namespace XenAPI
         public Proxy_LVHD ToProxy()
         {
             Proxy_LVHD result_ = new Proxy_LVHD();
-            result_.uuid = (uuid != null) ? uuid : "";
+            result_.uuid = uuid ?? "";
             return result_;
         }
 
@@ -118,7 +116,7 @@ namespace XenAPI
         /// <param name="_lvhd">The opaque_ref of the given lvhd</param>
         public static LVHD get_record(Session session, string _lvhd)
         {
-            return new LVHD((Proxy_LVHD)session.proxy.lvhd_get_record(session.uuid, (_lvhd != null) ? _lvhd : "").parse());
+            return new LVHD((Proxy_LVHD)session.proxy.lvhd_get_record(session.uuid, _lvhd ?? "").parse());
         }
 
         /// <summary>
@@ -129,7 +127,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<LVHD> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<LVHD>.Create(session.proxy.lvhd_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<LVHD>.Create(session.proxy.lvhd_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -140,7 +138,7 @@ namespace XenAPI
         /// <param name="_lvhd">The opaque_ref of the given lvhd</param>
         public static string get_uuid(Session session, string _lvhd)
         {
-            return (string)session.proxy.lvhd_get_uuid(session.uuid, (_lvhd != null) ? _lvhd : "").parse();
+            return (string)session.proxy.lvhd_get_uuid(session.uuid, _lvhd ?? "").parse();
         }
 
         /// <summary>
@@ -154,7 +152,7 @@ namespace XenAPI
         /// <param name="_allocation_quantum">The amount of space to allocate to a VDI when it needs to be enlarged in bytes</param>
         public static string enable_thin_provisioning(Session session, string _host, string _sr, long _initial_allocation, long _allocation_quantum)
         {
-            return (string)session.proxy.lvhd_enable_thin_provisioning(session.uuid, (_host != null) ? _host : "", (_sr != null) ? _sr : "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse();
+            return (string)session.proxy.lvhd_enable_thin_provisioning(session.uuid, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse();
         }
 
         /// <summary>
@@ -168,7 +166,7 @@ namespace XenAPI
         /// <param name="_allocation_quantum">The amount of space to allocate to a VDI when it needs to be enlarged in bytes</param>
         public static XenRef<Task> async_enable_thin_provisioning(Session session, string _host, string _sr, long _initial_allocation, long _allocation_quantum)
         {
-            return XenRef<Task>.Create(session.proxy.async_lvhd_enable_thin_provisioning(session.uuid, (_host != null) ? _host : "", (_sr != null) ? _sr : "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse());
+            return XenRef<Task>.Create(session.proxy.async_lvhd_enable_thin_provisioning(session.uuid, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse());
         }
 
         /// <summary>

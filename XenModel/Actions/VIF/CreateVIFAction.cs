@@ -42,7 +42,7 @@ namespace XenAdmin.Actions
         private Proxy_VIF _proxyVIF;
 
         public CreateVIFAction(VM vm, Proxy_VIF proxyVIF)
-            : base(vm.Connection, String.Format(Messages.ACTION_VIF_CREATING_TITLE, vm.Name))
+            : base(vm.Connection, String.Format(Messages.ACTION_VIF_CREATING_TITLE, vm.Name()))
         {
             _proxyVIF = proxyVIF;
             VM = vm;

@@ -231,7 +231,7 @@ namespace XenAdmin.Actions
                         }
                         catch (Exception e)
                         {
-                            log.ErrorFormat("Exception while deleting network {0}. Squashing.", network.Name);
+                            log.ErrorFormat("Exception while deleting network {0}. Squashing.", network.Name());
                             log.Error(e, e);
                         }
                     }
@@ -342,7 +342,7 @@ namespace XenAdmin.Actions
 
                 string body = string.Format("vm-import\nsr-uuid={0}\nfilename={1}\ntask_id={2}\n",
 											SR.uuid, m_filename, RelatedTask.opaque_ref);
-				log.DebugFormat("Importing Geneva-style XVA from {0} to SR {1} using {2}", m_filename, SR.Name, body);
+				log.DebugFormat("Importing Geneva-style XVA from {0} to SR {1} using {2}", m_filename, SR.Name(), body);
                 CommandLib.Messages.performCommand(body, tCLIprotocol);
 
                 // Check the task status -- Geneva-style XVAs don't raise an error, so we need to check manually.
@@ -372,7 +372,7 @@ namespace XenAdmin.Actions
 
         private string applyFile()
         {
-            log.DebugFormat("Importing Rio-style XVA from {0} to SR {1}", m_filename, SR.Name);
+            log.DebugFormat("Importing Rio-style XVA from {0} to SR {1}", m_filename, SR.Name());
 
             Host host = SR.GetStorageHost();
 

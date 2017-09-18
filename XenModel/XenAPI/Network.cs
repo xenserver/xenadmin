@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -131,16 +129,16 @@ namespace XenAPI
         public Proxy_Network ToProxy()
         {
             Proxy_Network result_ = new Proxy_Network();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
             result_.current_operations = Maps.convert_to_proxy_string_network_operations(current_operations);
             result_.VIFs = (VIFs != null) ? Helper.RefListToStringArray(VIFs) : new string[] {};
             result_.PIFs = (PIFs != null) ? Helper.RefListToStringArray(PIFs) : new string[] {};
             result_.MTU = MTU.ToString();
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.bridge = (bridge != null) ? bridge : "";
+            result_.bridge = bridge ?? "";
             result_.managed = managed;
             result_.blobs = Maps.convert_to_proxy_string_XenRefBlob(blobs);
             result_.tags = tags;
@@ -239,7 +237,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static Network get_record(Session session, string _network)
         {
-            return new Network((Proxy_Network)session.proxy.network_get_record(session.uuid, (_network != null) ? _network : "").parse());
+            return new Network((Proxy_Network)session.proxy.network_get_record(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -250,7 +248,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Network> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Network>.Create(session.proxy.network_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<Network>.Create(session.proxy.network_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -283,7 +281,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static void destroy(Session session, string _network)
         {
-            session.proxy.network_destroy(session.uuid, (_network != null) ? _network : "").parse();
+            session.proxy.network_destroy(session.uuid, _network ?? "").parse();
         }
 
         /// <summary>
@@ -294,7 +292,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static XenRef<Task> async_destroy(Session session, string _network)
         {
-            return XenRef<Task>.Create(session.proxy.async_network_destroy(session.uuid, (_network != null) ? _network : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_network_destroy(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -305,7 +303,7 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<Network>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<Network>.Create(session.proxy.network_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            return XenRef<Network>.Create(session.proxy.network_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -316,7 +314,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static string get_uuid(Session session, string _network)
         {
-            return (string)session.proxy.network_get_uuid(session.uuid, (_network != null) ? _network : "").parse();
+            return (string)session.proxy.network_get_uuid(session.uuid, _network ?? "").parse();
         }
 
         /// <summary>
@@ -327,7 +325,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static string get_name_label(Session session, string _network)
         {
-            return (string)session.proxy.network_get_name_label(session.uuid, (_network != null) ? _network : "").parse();
+            return (string)session.proxy.network_get_name_label(session.uuid, _network ?? "").parse();
         }
 
         /// <summary>
@@ -338,7 +336,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static string get_name_description(Session session, string _network)
         {
-            return (string)session.proxy.network_get_name_description(session.uuid, (_network != null) ? _network : "").parse();
+            return (string)session.proxy.network_get_name_description(session.uuid, _network ?? "").parse();
         }
 
         /// <summary>
@@ -349,7 +347,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static List<network_operations> get_allowed_operations(Session session, string _network)
         {
-            return Helper.StringArrayToEnumList<network_operations>(session.proxy.network_get_allowed_operations(session.uuid, (_network != null) ? _network : "").parse());
+            return Helper.StringArrayToEnumList<network_operations>(session.proxy.network_get_allowed_operations(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -360,7 +358,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static Dictionary<string, network_operations> get_current_operations(Session session, string _network)
         {
-            return Maps.convert_from_proxy_string_network_operations(session.proxy.network_get_current_operations(session.uuid, (_network != null) ? _network : "").parse());
+            return Maps.convert_from_proxy_string_network_operations(session.proxy.network_get_current_operations(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -371,7 +369,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static List<XenRef<VIF>> get_VIFs(Session session, string _network)
         {
-            return XenRef<VIF>.Create(session.proxy.network_get_vifs(session.uuid, (_network != null) ? _network : "").parse());
+            return XenRef<VIF>.Create(session.proxy.network_get_vifs(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -382,7 +380,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static List<XenRef<PIF>> get_PIFs(Session session, string _network)
         {
-            return XenRef<PIF>.Create(session.proxy.network_get_pifs(session.uuid, (_network != null) ? _network : "").parse());
+            return XenRef<PIF>.Create(session.proxy.network_get_pifs(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -393,7 +391,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static long get_MTU(Session session, string _network)
         {
-            return long.Parse((string)session.proxy.network_get_mtu(session.uuid, (_network != null) ? _network : "").parse());
+            return long.Parse((string)session.proxy.network_get_mtu(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -404,7 +402,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static Dictionary<string, string> get_other_config(Session session, string _network)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.network_get_other_config(session.uuid, (_network != null) ? _network : "").parse());
+            return Maps.convert_from_proxy_string_string(session.proxy.network_get_other_config(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -415,7 +413,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static string get_bridge(Session session, string _network)
         {
-            return (string)session.proxy.network_get_bridge(session.uuid, (_network != null) ? _network : "").parse();
+            return (string)session.proxy.network_get_bridge(session.uuid, _network ?? "").parse();
         }
 
         /// <summary>
@@ -426,7 +424,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static bool get_managed(Session session, string _network)
         {
-            return (bool)session.proxy.network_get_managed(session.uuid, (_network != null) ? _network : "").parse();
+            return (bool)session.proxy.network_get_managed(session.uuid, _network ?? "").parse();
         }
 
         /// <summary>
@@ -437,7 +435,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static Dictionary<string, XenRef<Blob>> get_blobs(Session session, string _network)
         {
-            return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.network_get_blobs(session.uuid, (_network != null) ? _network : "").parse());
+            return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.network_get_blobs(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -448,7 +446,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static string[] get_tags(Session session, string _network)
         {
-            return (string [])session.proxy.network_get_tags(session.uuid, (_network != null) ? _network : "").parse();
+            return (string [])session.proxy.network_get_tags(session.uuid, _network ?? "").parse();
         }
 
         /// <summary>
@@ -459,7 +457,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static network_default_locking_mode get_default_locking_mode(Session session, string _network)
         {
-            return (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)session.proxy.network_get_default_locking_mode(session.uuid, (_network != null) ? _network : "").parse());
+            return (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)session.proxy.network_get_default_locking_mode(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -470,7 +468,7 @@ namespace XenAPI
         /// <param name="_network">The opaque_ref of the given network</param>
         public static Dictionary<XenRef<VIF>, string> get_assigned_ips(Session session, string _network)
         {
-            return Maps.convert_from_proxy_XenRefVIF_string(session.proxy.network_get_assigned_ips(session.uuid, (_network != null) ? _network : "").parse());
+            return Maps.convert_from_proxy_XenRefVIF_string(session.proxy.network_get_assigned_ips(session.uuid, _network ?? "").parse());
         }
 
         /// <summary>
@@ -482,7 +480,7 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _network, string _label)
         {
-            session.proxy.network_set_name_label(session.uuid, (_network != null) ? _network : "", (_label != null) ? _label : "").parse();
+            session.proxy.network_set_name_label(session.uuid, _network ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -494,7 +492,7 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _network, string _description)
         {
-            session.proxy.network_set_name_description(session.uuid, (_network != null) ? _network : "", (_description != null) ? _description : "").parse();
+            session.proxy.network_set_name_description(session.uuid, _network ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -506,7 +504,7 @@ namespace XenAPI
         /// <param name="_mtu">New value to set</param>
         public static void set_MTU(Session session, string _network, long _mtu)
         {
-            session.proxy.network_set_mtu(session.uuid, (_network != null) ? _network : "", _mtu.ToString()).parse();
+            session.proxy.network_set_mtu(session.uuid, _network ?? "", _mtu.ToString()).parse();
         }
 
         /// <summary>
@@ -518,7 +516,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _network, Dictionary<string, string> _other_config)
         {
-            session.proxy.network_set_other_config(session.uuid, (_network != null) ? _network : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.network_set_other_config(session.uuid, _network ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -531,7 +529,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _network, string _key, string _value)
         {
-            session.proxy.network_add_to_other_config(session.uuid, (_network != null) ? _network : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.network_add_to_other_config(session.uuid, _network ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -543,7 +541,7 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _network, string _key)
         {
-            session.proxy.network_remove_from_other_config(session.uuid, (_network != null) ? _network : "", (_key != null) ? _key : "").parse();
+            session.proxy.network_remove_from_other_config(session.uuid, _network ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -555,7 +553,7 @@ namespace XenAPI
         /// <param name="_tags">New value to set</param>
         public static void set_tags(Session session, string _network, string[] _tags)
         {
-            session.proxy.network_set_tags(session.uuid, (_network != null) ? _network : "", _tags).parse();
+            session.proxy.network_set_tags(session.uuid, _network ?? "", _tags).parse();
         }
 
         /// <summary>
@@ -567,7 +565,7 @@ namespace XenAPI
         /// <param name="_value">New value to add</param>
         public static void add_tags(Session session, string _network, string _value)
         {
-            session.proxy.network_add_tags(session.uuid, (_network != null) ? _network : "", (_value != null) ? _value : "").parse();
+            session.proxy.network_add_tags(session.uuid, _network ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -579,7 +577,7 @@ namespace XenAPI
         /// <param name="_value">Value to remove</param>
         public static void remove_tags(Session session, string _network, string _value)
         {
-            session.proxy.network_remove_tags(session.uuid, (_network != null) ? _network : "", (_value != null) ? _value : "").parse();
+            session.proxy.network_remove_tags(session.uuid, _network ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -592,7 +590,7 @@ namespace XenAPI
         /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
         public static XenRef<Blob> create_new_blob(Session session, string _network, string _name, string _mime_type)
         {
-            return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.uuid, (_network != null) ? _network : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+            return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.uuid, _network ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -605,7 +603,7 @@ namespace XenAPI
         /// <param name="_mime_type">The mime type for the data. Empty string translates to application/octet-stream</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _network, string _name, string _mime_type)
         {
-            return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.uuid, (_network != null) ? _network : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "").parse());
+            return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.uuid, _network ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -619,7 +617,7 @@ namespace XenAPI
         /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Blob> create_new_blob(Session session, string _network, string _name, string _mime_type, bool _public)
         {
-            return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.uuid, (_network != null) ? _network : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
+            return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.uuid, _network ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -633,7 +631,7 @@ namespace XenAPI
         /// <param name="_public">True if the blob should be publicly available First published in XenServer 6.1.</param>
         public static XenRef<Task> async_create_new_blob(Session session, string _network, string _name, string _mime_type, bool _public)
         {
-            return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.uuid, (_network != null) ? _network : "", (_name != null) ? _name : "", (_mime_type != null) ? _mime_type : "", _public).parse());
+            return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.uuid, _network ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -645,7 +643,7 @@ namespace XenAPI
         /// <param name="_value">The default locking mode for VIFs attached to this network.</param>
         public static void set_default_locking_mode(Session session, string _network, network_default_locking_mode _value)
         {
-            session.proxy.network_set_default_locking_mode(session.uuid, (_network != null) ? _network : "", network_default_locking_mode_helper.ToString(_value)).parse();
+            session.proxy.network_set_default_locking_mode(session.uuid, _network ?? "", network_default_locking_mode_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -657,7 +655,7 @@ namespace XenAPI
         /// <param name="_value">The default locking mode for VIFs attached to this network.</param>
         public static XenRef<Task> async_set_default_locking_mode(Session session, string _network, network_default_locking_mode _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_network_set_default_locking_mode(session.uuid, (_network != null) ? _network : "", network_default_locking_mode_helper.ToString(_value)).parse());
+            return XenRef<Task>.Create(session.proxy.async_network_set_default_locking_mode(session.uuid, _network ?? "", network_default_locking_mode_helper.ToString(_value)).parse());
         }
 
         /// <summary>

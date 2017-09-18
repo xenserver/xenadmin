@@ -75,7 +75,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public string DiskLabel
         {
-            get { return vdi.Name; }
+            get { return vdi.Name(); }
         }
 
         public object Tag

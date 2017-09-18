@@ -63,9 +63,9 @@ namespace XenAdmin.Actions.Wlb
         {
             try
             {
-                log.Debug("Resuming WLB on pool " + Pool.Name);
+                log.Debug("Resuming WLB on pool " + Pool.Name());
                 XenAPI.Pool.set_wlb_enabled(this.Session, Pool.opaque_ref, true);
-                log.Debug("Success resuming WLB on pool " + Pool.Name);
+                log.Debug("Success resuming WLB on pool " + Pool.Name());
                 this.Description = Messages.COMPLETED;
 
                 WlbServerState.SetState(this.Pool, WlbServerState.ServerState.Enabled);
@@ -73,9 +73,9 @@ namespace XenAdmin.Actions.Wlb
                 //Clear the Optimizing Pool flag in case it was left behind
                 Helpers.SetOtherConfig(this.Session, this.Pool, OPTIMIZINGPOOL, string.Empty);
 
-                log.Debug("Retrieving Workload Balancing configuration for pool " + Pool.Name);
+                log.Debug("Retrieving Workload Balancing configuration for pool " + Pool.Name());
                 this.WlbConfiguration = XenAPI.Pool.retrieve_wlb_configuration(this.Session);
-                log.Debug("Success retrieving Workload Balancing configuration on pool " + Pool.Name);
+                log.Debug("Success retrieving Workload Balancing configuration on pool " + Pool.Name());
                 this.Description = Messages.COMPLETED;
             }
             catch (Exception ex)

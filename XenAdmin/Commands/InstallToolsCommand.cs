@@ -298,9 +298,11 @@ namespace XenAdmin.Commands
 
         public static bool CanExecute(VM vm)
         {
+            var virtualisationStatus = vm.GetVirtualisationStatus();
+
             return vm != null && !vm.is_a_template && !vm.Locked &&
-                !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.UNKNOWN) &&
-                (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) || !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)) &&
+                !virtualisationStatus.HasFlag(VM.VirtualisationStatus.UNKNOWN) &&
+                (!virtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) || !virtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED)) &&
                 vm.power_state == vm_power_state.Running && !ResidentHostIsOlderThanMaster(vm)
                 && CanViewVMConsole(vm.Connection);
         }
