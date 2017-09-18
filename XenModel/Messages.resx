@@ -288,6 +288,9 @@
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>Disabled PVS-Accelerator for selected VMs</value>
   </data>
+  <data name="ACTION_DISABLE_IGMP_SNOOPING" xml:space="preserve">
+    <value>Disable IGMP snooping</value>
+  </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Disable live patching</value>
   </data>
@@ -407,6 +410,9 @@
   </data>
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>Enabled PVS-Accelerator for selected VMs</value>
+  </data>
+  <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
+    <value>Enable IGMP snooping</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Enable live patching</value>
@@ -7809,6 +7815,15 @@ To learn more about the [XenServer] Live VDI Migration feature or to start a [Xe
   </data>
   <data name="NETWORK" xml:space="preserve">
     <value>Network</value>
+  </data>
+  <data name="NETWORK_OPTIONS" xml:space="preserve">
+    <value>Network Options</value>
+  </data>
+  <data name="NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED" xml:space="preserve">
+    <value>IGMP snooping enabled</value>
+  </data>
+  <data name="NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED" xml:space="preserve">
+    <value>IGMP snooping disabled</value>
   </data>
   <data name="NETWORKING_PROPERTIES_AUX_TAB_NAME" xml:space="preserve">
     <value>Storage {0}</value>

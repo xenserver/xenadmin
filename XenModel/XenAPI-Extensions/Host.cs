@@ -376,6 +376,11 @@ namespace XenAPI
             return BoolKeyPreferTrue(h.license_params, "restrict_live_patching");
         }
 
+        public static bool RestrictIGMPSnooping(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_igmp_snooping");
+        }
+
         public static bool RestrictVcpuHotplug(Host h)
         {
             if (Helpers.ElyOrGreater(h.Connection))
