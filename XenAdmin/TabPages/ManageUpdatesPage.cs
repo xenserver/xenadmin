@@ -440,7 +440,7 @@ namespace XenAdmin.TabPages
             List<string> result = new List<string>();
 
             foreach (Pool_patch patch in host.AppliedPatches())
-                result.Add(patch.Name);
+                result.Add(patch.Name());
 
             result.Sort(StringUtility.NaturalCompare);
             return string.Join(", ", result.ToArray());
@@ -1360,7 +1360,7 @@ namespace XenAdmin.TabPages
 
             Program.Invoke(Program.MainWindow, delegate
             {
-                pool = hasPool ? Helpers.GetPool(xenConnection).Name : String.Empty;
+                pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
                 requiredUpdates = RequiredUpdatesForHost(host);
                 installedUpdates = InstalledUpdatesForHost(host);
                 patchingStatus = requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED;
@@ -1368,8 +1368,8 @@ namespace XenAdmin.TabPages
 
             return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"",
                                  pool.EscapeQuotes(),
-                                 host.Name.EscapeQuotes(),
-                                 host.ProductVersionTextShort.EscapeQuotes(),
+                                 host.Name().EscapeQuotes(),
+                                 host.ProductVersionTextShort().EscapeQuotes(),
                                  patchingStatus.EscapeQuotes(),
                                  requiredUpdates.EscapeQuotes(),
                                  installedUpdates.EscapeQuotes());
