@@ -65,6 +65,11 @@ namespace XenAPI
                 new Relation("PGPUs", "PGPU", "GPU_group"),
             });
 
+            relations.Add(typeof(Proxy_USB_group), new Relation[] {
+                new Relation("VUSBs", "VUSB", "USB_group"),
+                new Relation("PUSBs", "PUSB", "USB_group"),
+            });
+
             relations.Add(typeof(Proxy_Subject), new Relation[] {
                 new Relation("roles", "subject", "roles"),
             });
@@ -133,7 +138,12 @@ namespace XenAPI
                 new Relation("VMs", "VM", "protection_policy"),
             });
 
+            relations.Add(typeof(Proxy_PUSB), new Relation[] {
+                new Relation("attached", "VUSB", "attached"),
+            });
+
             relations.Add(typeof(Proxy_VM), new Relation[] {
+                new Relation("VUSBs", "VUSB", "VM"),
                 new Relation("VGPUs", "VGPU", "VM"),
                 new Relation("consoles", "console", "VM"),
                 new Relation("VTPMs", "VTPM", "VM"),
@@ -150,6 +160,7 @@ namespace XenAPI
 
             relations.Add(typeof(Proxy_Host), new Relation[] {
                 new Relation("features", "Feature", "host"),
+                new Relation("PUSBs", "PUSB", "host"),
                 new Relation("PGPUs", "PGPU", "host"),
                 new Relation("PCIs", "PCI", "host"),
                 new Relation("patches", "host_patch", "host"),

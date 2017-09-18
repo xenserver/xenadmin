@@ -1,0 +1,514 @@
+/*
+ * Copyright (c) Citrix Systems, Inc.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   1) Redistributions of source code must retain the above copyright
+ *      notice, this list of conditions and the following disclaimer.
+ *
+ *   2) Redistributions in binary form must reproduce the above
+ *      copyright notice, this list of conditions and the following
+ *      disclaimer in the documentation and/or other materials
+ *      provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+using CookComputing.XmlRpc;
+
+
+namespace XenAPI
+{
+    /// <summary>
+    /// Describes the vusb device
+    /// First published in Unreleased.
+    /// </summary>
+    public partial class VUSB : XenObject<VUSB>
+    {
+        public VUSB()
+        {
+        }
+
+        public VUSB(string uuid,
+            List<vusb_operations> allowed_operations,
+            Dictionary<string, vusb_operations> current_operations,
+            XenRef<VM> VM,
+            XenRef<USB_group> USB_group,
+            Dictionary<string, string> other_config,
+            XenRef<PUSB> attached)
+        {
+            this.uuid = uuid;
+            this.allowed_operations = allowed_operations;
+            this.current_operations = current_operations;
+            this.VM = VM;
+            this.USB_group = USB_group;
+            this.other_config = other_config;
+            this.attached = attached;
+        }
+
+        /// <summary>
+        /// Creates a new VUSB from a Proxy_VUSB.
+        /// </summary>
+        /// <param name="proxy"></param>
+        public VUSB(Proxy_VUSB proxy)
+        {
+            this.UpdateFromProxy(proxy);
+        }
+
+        public override void UpdateFrom(VUSB update)
+        {
+            uuid = update.uuid;
+            allowed_operations = update.allowed_operations;
+            current_operations = update.current_operations;
+            VM = update.VM;
+            USB_group = update.USB_group;
+            other_config = update.other_config;
+            attached = update.attached;
+        }
+
+        internal void UpdateFromProxy(Proxy_VUSB proxy)
+        {
+            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
+            allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<vusb_operations>(proxy.allowed_operations);
+            current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_vusb_operations(proxy.current_operations);
+            VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
+            USB_group = proxy.USB_group == null ? null : XenRef<USB_group>.Create(proxy.USB_group);
+            other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
+            attached = proxy.attached == null ? null : XenRef<PUSB>.Create(proxy.attached);
+        }
+
+        public Proxy_VUSB ToProxy()
+        {
+            Proxy_VUSB result_ = new Proxy_VUSB();
+            result_.uuid = (uuid != null) ? uuid : "";
+            result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
+            result_.current_operations = Maps.convert_to_proxy_string_vusb_operations(current_operations);
+            result_.VM = (VM != null) ? VM : "";
+            result_.USB_group = (USB_group != null) ? USB_group : "";
+            result_.other_config = Maps.convert_to_proxy_string_string(other_config);
+            result_.attached = (attached != null) ? attached : "";
+            return result_;
+        }
+
+        /// <summary>
+        /// Creates a new VUSB from a Hashtable.
+        /// </summary>
+        /// <param name="table"></param>
+        public VUSB(Hashtable table)
+        {
+            uuid = Marshalling.ParseString(table, "uuid");
+            allowed_operations = Helper.StringArrayToEnumList<vusb_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
+            current_operations = Maps.convert_from_proxy_string_vusb_operations(Marshalling.ParseHashTable(table, "current_operations"));
+            VM = Marshalling.ParseRef<VM>(table, "VM");
+            USB_group = Marshalling.ParseRef<USB_group>(table, "USB_group");
+            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            attached = Marshalling.ParseRef<PUSB>(table, "attached");
+        }
+
+        public bool DeepEquals(VUSB other, bool ignoreCurrentOperations)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
+
+            if (!ignoreCurrentOperations && !Helper.AreEqual2(this.current_operations, other.current_operations))
+                return false;
+
+            return Helper.AreEqual2(this._uuid, other._uuid) &&
+                Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
+                Helper.AreEqual2(this._VM, other._VM) &&
+                Helper.AreEqual2(this._USB_group, other._USB_group) &&
+                Helper.AreEqual2(this._other_config, other._other_config) &&
+                Helper.AreEqual2(this._attached, other._attached);
+        }
+
+        public override string SaveChanges(Session session, string opaqueRef, VUSB server)
+        {
+            if (opaqueRef == null)
+            {
+                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
+                return "";
+            }
+            else
+            {
+                if (!Helper.AreEqual2(_other_config, server._other_config))
+                {
+                    VUSB.set_other_config(session, opaqueRef, _other_config);
+                }
+
+                return null;
+            }
+        }
+        /// <summary>
+        /// Get a record containing the current state of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static VUSB get_record(Session session, string _vusb)
+        {
+            return new VUSB((Proxy_VUSB)session.proxy.vusb_get_record(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Get a reference to the VUSB instance with the specified UUID.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_uuid">UUID of object to return</param>
+        public static XenRef<VUSB> get_by_uuid(Session session, string _uuid)
+        {
+            return XenRef<VUSB>.Create(session.proxy.vusb_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+        }
+
+        /// <summary>
+        /// Get the uuid field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static string get_uuid(Session session, string _vusb)
+        {
+            return (string)session.proxy.vusb_get_uuid(session.uuid, (_vusb != null) ? _vusb : "").parse();
+        }
+
+        /// <summary>
+        /// Get the allowed_operations field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static List<vusb_operations> get_allowed_operations(Session session, string _vusb)
+        {
+            return Helper.StringArrayToEnumList<vusb_operations>(session.proxy.vusb_get_allowed_operations(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Get the current_operations field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static Dictionary<string, vusb_operations> get_current_operations(Session session, string _vusb)
+        {
+            return Maps.convert_from_proxy_string_vusb_operations(session.proxy.vusb_get_current_operations(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Get the VM field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static XenRef<VM> get_VM(Session session, string _vusb)
+        {
+            return XenRef<VM>.Create(session.proxy.vusb_get_vm(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Get the USB_group field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static XenRef<USB_group> get_USB_group(Session session, string _vusb)
+        {
+            return XenRef<USB_group>.Create(session.proxy.vusb_get_usb_group(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Get the other_config field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static Dictionary<string, string> get_other_config(Session session, string _vusb)
+        {
+            return Maps.convert_from_proxy_string_string(session.proxy.vusb_get_other_config(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Get the attached field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static XenRef<PUSB> get_attached(Session session, string _vusb)
+        {
+            return XenRef<PUSB>.Create(session.proxy.vusb_get_attached(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Set the other_config field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        /// <param name="_other_config">New value to set</param>
+        public static void set_other_config(Session session, string _vusb, Dictionary<string, string> _other_config)
+        {
+            session.proxy.vusb_set_other_config(session.uuid, (_vusb != null) ? _vusb : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+        }
+
+        /// <summary>
+        /// Add the given key-value pair to the other_config field of the given VUSB.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        /// <param name="_key">Key to add</param>
+        /// <param name="_value">Value to add</param>
+        public static void add_to_other_config(Session session, string _vusb, string _key, string _value)
+        {
+            session.proxy.vusb_add_to_other_config(session.uuid, (_vusb != null) ? _vusb : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+        }
+
+        /// <summary>
+        /// Remove the given key and its corresponding value from the other_config field of the given VUSB.  If the key is not in that Map, then do nothing.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        /// <param name="_key">Key to remove</param>
+        public static void remove_from_other_config(Session session, string _vusb, string _key)
+        {
+            session.proxy.vusb_remove_from_other_config(session.uuid, (_vusb != null) ? _vusb : "", (_key != null) ? _key : "").parse();
+        }
+
+        /// <summary>
+        /// Create a new vusb record in the database only
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The VM</param>
+        /// <param name="_usb_group"></param>
+        /// <param name="_other_config"></param>
+        public static XenRef<VUSB> create(Session session, string _vm, string _usb_group, Dictionary<string, string> _other_config)
+        {
+            return XenRef<VUSB>.Create(session.proxy.vusb_create(session.uuid, (_vm != null) ? _vm : "", (_usb_group != null) ? _usb_group : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+        }
+
+        /// <summary>
+        /// Create a new vusb record in the database only
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The VM</param>
+        /// <param name="_usb_group"></param>
+        /// <param name="_other_config"></param>
+        public static XenRef<Task> async_create(Session session, string _vm, string _usb_group, Dictionary<string, string> _other_config)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vusb_create(session.uuid, (_vm != null) ? _vm : "", (_usb_group != null) ? _usb_group : "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+        }
+
+        /// <summary>
+        /// Unplug the vusb device from the vm.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static void unplug(Session session, string _vusb)
+        {
+            session.proxy.vusb_unplug(session.uuid, (_vusb != null) ? _vusb : "").parse();
+        }
+
+        /// <summary>
+        /// Unplug the vusb device from the vm.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static XenRef<Task> async_unplug(Session session, string _vusb)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vusb_unplug(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Removes a VUSB record from the database
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static void destroy(Session session, string _vusb)
+        {
+            session.proxy.vusb_destroy(session.uuid, (_vusb != null) ? _vusb : "").parse();
+        }
+
+        /// <summary>
+        /// Removes a VUSB record from the database
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vusb">The opaque_ref of the given vusb</param>
+        public static XenRef<Task> async_destroy(Session session, string _vusb)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vusb_destroy(session.uuid, (_vusb != null) ? _vusb : "").parse());
+        }
+
+        /// <summary>
+        /// Return a list of all the VUSBs known to the system.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static List<XenRef<VUSB>> get_all(Session session)
+        {
+            return XenRef<VUSB>.Create(session.proxy.vusb_get_all(session.uuid).parse());
+        }
+
+        /// <summary>
+        /// Get all the VUSB Records at once, in a single XML RPC call
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        public static Dictionary<XenRef<VUSB>, VUSB> get_all_records(Session session)
+        {
+            return XenRef<VUSB>.Create<Proxy_VUSB>(session.proxy.vusb_get_all_records(session.uuid).parse());
+        }
+
+        /// <summary>
+        /// Unique identifier/object reference
+        /// </summary>
+        public virtual string uuid
+        {
+            get { return _uuid; }
+            set
+            {
+                if (!Helper.AreEqual(value, _uuid))
+                {
+                    _uuid = value;
+                    Changed = true;
+                    NotifyPropertyChanged("uuid");
+                }
+            }
+        }
+        private string _uuid;
+
+        /// <summary>
+        /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
+        /// </summary>
+        public virtual List<vusb_operations> allowed_operations
+        {
+            get { return _allowed_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _allowed_operations))
+                {
+                    _allowed_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("allowed_operations");
+                }
+            }
+        }
+        private List<vusb_operations> _allowed_operations;
+
+        /// <summary>
+        /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
+        /// </summary>
+        public virtual Dictionary<string, vusb_operations> current_operations
+        {
+            get { return _current_operations; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_operations))
+                {
+                    _current_operations = value;
+                    Changed = true;
+                    NotifyPropertyChanged("current_operations");
+                }
+            }
+        }
+        private Dictionary<string, vusb_operations> _current_operations;
+
+        /// <summary>
+        /// VM that owns the vUSB
+        /// </summary>
+        public virtual XenRef<VM> VM
+        {
+            get { return _VM; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VM))
+                {
+                    _VM = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VM");
+                }
+            }
+        }
+        private XenRef<VM> _VM;
+
+        /// <summary>
+        /// USB group used by the vUSB
+        /// </summary>
+        public virtual XenRef<USB_group> USB_group
+        {
+            get { return _USB_group; }
+            set
+            {
+                if (!Helper.AreEqual(value, _USB_group))
+                {
+                    _USB_group = value;
+                    Changed = true;
+                    NotifyPropertyChanged("USB_group");
+                }
+            }
+        }
+        private XenRef<USB_group> _USB_group;
+
+        /// <summary>
+        /// Additional configuration
+        /// </summary>
+        public virtual Dictionary<string, string> other_config
+        {
+            get { return _other_config; }
+            set
+            {
+                if (!Helper.AreEqual(value, _other_config))
+                {
+                    _other_config = value;
+                    Changed = true;
+                    NotifyPropertyChanged("other_config");
+                }
+            }
+        }
+        private Dictionary<string, string> _other_config;
+
+        /// <summary>
+        /// The PSUB on which this VUSB is running
+        /// </summary>
+        public virtual XenRef<PUSB> attached
+        {
+            get { return _attached; }
+            set
+            {
+                if (!Helper.AreEqual(value, _attached))
+                {
+                    _attached = value;
+                    Changed = true;
+                    NotifyPropertyChanged("attached");
+                }
+            }
+        }
+        private XenRef<PUSB> _attached;
+    }
+}
