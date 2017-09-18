@@ -548,14 +548,9 @@ namespace XenAPI
             return h._RestrictLivePatching;
         }
 
-        private bool _RestrictIGMPSnooping
-        {
-            get { return BoolKeyPreferTrue(license_params, "restrict_igmp_snooping"); }
-        }
-
         public static bool RestrictIGMPSnooping(Host h)
         {
-            return h._RestrictIGMPSnooping;
+            return BoolKeyPreferTrue(h.license_params, "restrict_igmp_snooping");
         }
 
         public static bool RestrictVcpuHotplug(Host h)

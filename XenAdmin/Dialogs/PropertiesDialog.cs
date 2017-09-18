@@ -203,7 +203,7 @@ namespace XenAdmin.Dialogs
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictLivePatching))
                     ShowTab(LivePatchingEditPage = new LivePatchingEditPage());
 
-                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictIGMPSnooping) && Helpers.GetMaster(pool).vSwitchNetworkBackend)
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictIGMPSnooping) && Helpers.GetMaster(pool).vSwitchNetworkBackend())
                     ShowTab(NetworkOptionsEditPage = new NetworkOptionsEditPage());
 
                 if (is_network)
