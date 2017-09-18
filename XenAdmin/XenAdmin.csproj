@@ -67,11 +67,11 @@
   <ItemGroup>
     <Reference Include="DiscUtils, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DiscUtils.dll</HintPath>
+      <HintPath>..\DiscUtils\src\bin\Release\DiscUtils.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net.dll</HintPath>
+      <HintPath>..\log4net\build\bin\net\2.0\release\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>ReportViewer\Microsoft.ReportViewer.WinForms.dll</HintPath>
@@ -215,6 +215,12 @@
     <Compile Include="Controls\UpsellPage.designer.cs">
       <DependentUpon>UpsellPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\USB\UsbList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\USB\UsbList.Designer.cs">
+      <DependentUpon>UsbList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\HealthCheck.cs" />
     <Compile Include="Core\HiddenFeatures.cs" />
     <Compile Include="Core\Metadata.cs" />
@@ -333,6 +339,12 @@
     <Compile Include="Dialogs\UpsellDialog.designer.cs">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\UsbUsageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UsbUsageDialog.Designer.cs">
+      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -349,6 +361,12 @@
     </Compile>
     <Compile Include="SettingsPanels\SecurityEditPage.Designer.cs">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPanels\USBEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\USBEditPage.Designer.cs">
+      <DependentUpon>USBEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\VMEnlightenmentEditPage.cs">
       <SubType>UserControl</SubType>
@@ -661,6 +679,12 @@
     </Compile>
     <Compile Include="SettingsPanels\HostMultipathPage.Designer.cs">
       <DependentUpon>HostMultipathPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\UsbPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\UsbPage.Designer.cs">
+      <DependentUpon>UsbPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\BallooningWizard.cs">
       <SubType>Form</SubType>
@@ -1488,6 +1512,9 @@
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\USB\UsbList.resx">
+      <DependentUpon>UsbList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\XenSearch\QueryPanel.ja.resx">
       <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -1716,6 +1743,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ReconnectAsDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UsbUsageDialog.resx">
+      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VMDialogs\MoveVMDialog.resx">
       <DependentUpon>MoveVMDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1893,6 +1923,9 @@
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.zh-CN.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\USBEditPage.resx">
+      <DependentUpon>USBEditPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VDISizeLocationPage.resx">
       <DependentUpon>VDISizeLocationPage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1985,6 +2018,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PvsPage.zh-CN.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\UsbPage.resx">
+      <DependentUpon>UsbPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.resx">
       <SubType>Designer</SubType>
@@ -6851,7 +6887,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -6866,6 +6904,6 @@
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"
 
-copy "$(ProjectDir)\..\packages\putty.exe" "$(TargetDir)"</PostBuildEvent>
+copy "$(ProjectDir)..\putty\putty.exe" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

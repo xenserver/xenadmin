@@ -34585,6 +34585,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to USB.
+        /// </summary>
+        public static string USB {
+            get {
+                return ResourceManager.GetString("USB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} device(s) attached.
+        /// </summary>
+        public static string USB_EDIT_SUBTEXT {
+            get {
+                return ResourceManager.GetString("USB_EDIT_SUBTEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB.
+        /// </summary>
+        public static string USB_EDIT_TEXT {
+            get {
+                return ResourceManager.GetString("USB_EDIT_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] was unable to authorize the action as {0}. See the application log files for more information..
         /// </summary>
         public static string USER_AUTHORIZATION_FAILED {

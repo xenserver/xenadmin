@@ -11991,6 +11991,15 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="URI_REGEX" xml:space="preserve">
     <value>^(http|https|file|ftp)://*</value>
   </data>
+  <data name="USB" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT" xml:space="preserve">
+    <value>{0} device(s) attached</value>
+  </data>
+  <data name="USB_EDIT_TEXT" xml:space="preserve">
+    <value>USB</value>
+  </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>[XenCenter] was unable to authorize the action as {0}. See the application log files for more information.</value>
   </data>
