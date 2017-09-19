@@ -1215,7 +1215,7 @@
     <value>无法登录 XAPI 会话。</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
-    <value>正在使用的 XenServer 许可证不允许您使用计划快照功能。</value>
+    <value>正在使用的 [XenServer product] 许可证不允许您使用计划快照功能。</value>
   </data>
   <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
     <value>快照计划“{0}”失败，因为无法创建快照。</value>

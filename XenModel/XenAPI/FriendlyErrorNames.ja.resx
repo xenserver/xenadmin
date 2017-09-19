@@ -1827,7 +1827,7 @@
     <value>古いバージョンのホストをアップグレードするときにこの VM 処理は実行できません。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>移行元ホストより古いバージョンの XenServer を実行している移行先のホストに VM を移行しようとしました。</value>
+    <value>移行元ホストより古いバージョンの [XenServer] を実行している移行先のホストに VM を移行しようとしました。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM のこのバージョンの仮想ハードウェア プラットフォームには、このホストとの互換性がありません。</value>

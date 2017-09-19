@@ -1827,7 +1827,7 @@
     <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>您尝试将 VM 迁移到的目标主机运行的 XenServer 版本低于源主机。</value>
+    <value>您尝试将 VM 迁移到的目标主机运行的 [XenServer] 版本低于源主机。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM 的虚拟硬件平台版本与此主机不兼容。</value>
