@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin;
@@ -46,6 +47,7 @@ namespace XenAPI
 
         private bool _locked;
 
+        [JsonIgnore]
         public IXenConnection Connection
         {
             get { return m_Connection; }
@@ -70,6 +72,7 @@ namespace XenAPI
         /// <summary>
         /// True if a server request is in progress.
         /// </summary>
+        [JsonIgnore]
         public bool Locked
         {
             get { return _locked; }
@@ -90,6 +93,7 @@ namespace XenAPI
 
         private String path = String.Empty;
 
+        [JsonIgnore]
         public String Path
         {
             get { return path; }

@@ -76,15 +76,16 @@ namespace XenAdmin.Actions
                     throw new Exception(Messages.CDDRIVE_MAX_ALLOWED_VBDS);
                 }
 
-                XenAPI.VBD cdDrive = new XenAPI.VBD();
-                cdDrive.VM = new XenAPI.XenRef<XenAPI.VM>(VM.opaque_ref);
-                cdDrive.VDI = null;
-                cdDrive.bootable = false;
-                cdDrive.device = "";
-                cdDrive.userdevice = allowedDevices.Contains("3") ? "3" : allowedDevices[0];
-                cdDrive.empty = true;
-                cdDrive.type = XenAPI.vbd_type.CD;
-                cdDrive.mode = XenAPI.vbd_mode.RO;
+                XenAPI.VBD cdDrive = new XenAPI.VBD
+                {
+                    VM = new XenAPI.XenRef<XenAPI.VM>(VM.opaque_ref),
+                    bootable = false,
+                    device = "",
+                    userdevice = allowedDevices.Contains("3") ? "3" : allowedDevices[0],
+                    empty = true,
+                    type = XenAPI.vbd_type.CD,
+                    mode = XenAPI.vbd_mode.RO
+                };
 
                 VbdSaveAndPlugAction cdCreate = new VbdSaveAndPlugAction(VM, cdDrive, Messages.DVD_DRIVE, Session, InstallingTools, true,_showMustRebootBoxCD,_showVBDWarningBox);
                 cdCreate.RunExternal(Session);

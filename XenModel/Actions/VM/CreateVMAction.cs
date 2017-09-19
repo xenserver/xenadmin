@@ -441,16 +441,16 @@ namespace XenAdmin.Actions.VMActions
             List<string> devices = AllowedVBDs;
             if (devices.Count == 0)
                 throw new Exception(Messages.NO_MORE_USERDEVICES);
-            VBD vbd = new VBD();
-            vbd.bootable = InsMethod == InstallMethod.CD;
-            vbd.empty = true;
-            vbd.unpluggable = true;
-            vbd.mode = vbd_mode.RO;
-            vbd.type = vbd_type.CD;
-            vbd.userdevice = devices.Contains("3") ? "3" : devices[0];
-            vbd.device = "";
-            vbd.VM = new XenRef<VM>(VM.opaque_ref);
-            vbd.VDI = null;
+            VBD vbd = new VBD
+            {
+                bootable = InsMethod == InstallMethod.CD,
+                empty = true,
+                unpluggable = true,
+                mode = vbd_mode.RO,
+                type = vbd_type.CD,
+                userdevice = devices.Contains("3") ? "3" : devices[0],
+                VM = new XenRef<VM>(VM.opaque_ref)
+            };
             RelatedTask = VBD.async_create(Session, vbd);
             PollToCompletion(60, 65);
 

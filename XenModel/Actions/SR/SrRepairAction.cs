@@ -118,15 +118,17 @@ namespace XenAdmin.Actions
                         this.Description = string.Format(Messages.ACTION_SR_REPAIR_CREATE_PBD, Helpers.GetName(host));
                         log.Debug(this.Description);
 
-                        Proxy_PBD proxyPBD = new Proxy_PBD();
-                        proxyPBD.currently_attached = false;
-                        proxyPBD.device_config = new Hashtable(template.device_config);
-                        proxyPBD.SR = template.SR;
-                        proxyPBD.host = new XenRef<Host>(host.opaque_ref);
+                        var newPbd = new PBD
+                        {
+                            currently_attached = false,
+                            device_config = new Dictionary<string, string>(template.device_config),
+                            SR = template.SR,
+                            host = new XenRef<Host>(host.opaque_ref)
+                        };
 
                         try
                         {
-                            RelatedTask = XenAPI.PBD.async_create(this.Session, new PBD(proxyPBD));
+                            RelatedTask = XenAPI.PBD.async_create(this.Session, newPbd);
 
                             if (PercentComplete + delta <= 100)
                             {

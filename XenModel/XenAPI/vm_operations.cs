@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vm_operationsConverter))]
     public enum vm_operations
     {
         snapshot, clone, copy, create_template, revert, checkpoint, snapshot_with_quiesce, provision, start, start_on, pause, unpause, clean_shutdown, clean_reboot, hard_shutdown, power_state_reset, hard_reboot, suspend, csvm, resume, resume_on, pool_migrate, migrate_send, get_boot_record, send_sysrq, send_trigger, query_services, shutdown, call_plugin, changing_memory_live, awaiting_memory_live, changing_dynamic_range, changing_static_range, changing_memory_limits, changing_shadow_memory, changing_shadow_memory_live, changing_VCPUs, changing_VCPUs_live, assert_operation_valid, data_source_op, update_allowed_operations, make_into_template, import, export, metadata_export, reverting, destroy, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vm_operations_helper
     {
         public static string ToString(vm_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vm_operations x)
         {
             switch (x)
             {
@@ -143,6 +151,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vm_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vm_operations)value).StringOf());
         }
     }
 }

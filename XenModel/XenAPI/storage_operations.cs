@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -29,20 +29,28 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(storage_operationsConverter))]
     public enum storage_operations
     {
-        scan, destroy, forget, plug, unplug, update, vdi_create, vdi_introduce, vdi_destroy, vdi_resize, vdi_clone, vdi_snapshot, vdi_mirror, pbd_create, pbd_destroy, unknown
+        scan, destroy, forget, plug, unplug, update, vdi_create, vdi_introduce, vdi_destroy, vdi_resize, vdi_clone, vdi_snapshot, vdi_mirror, vdi_enable_cbt, vdi_disable_cbt, vdi_data_destroy, vdi_export_changed_blocks, vdi_set_on_boot, pbd_create, pbd_destroy, unknown
     }
 
     public static class storage_operations_helper
     {
         public static string ToString(storage_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this storage_operations x)
         {
             switch (x)
             {
@@ -72,6 +80,16 @@ namespace XenAPI
                     return "vdi_snapshot";
                 case storage_operations.vdi_mirror:
                     return "vdi_mirror";
+                case storage_operations.vdi_enable_cbt:
+                    return "vdi_enable_cbt";
+                case storage_operations.vdi_disable_cbt:
+                    return "vdi_disable_cbt";
+                case storage_operations.vdi_data_destroy:
+                    return "vdi_data_destroy";
+                case storage_operations.vdi_export_changed_blocks:
+                    return "vdi_export_changed_blocks";
+                case storage_operations.vdi_set_on_boot:
+                    return "vdi_set_on_boot";
                 case storage_operations.pbd_create:
                     return "pbd_create";
                 case storage_operations.pbd_destroy:
@@ -79,6 +97,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class storage_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((storage_operations)value).StringOf());
         }
     }
 }

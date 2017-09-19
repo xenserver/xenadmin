@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  *   1) Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- * 
+ *
  *   2) Redistributions in binary form must reproduce the above
  *      copyright notice, this list of conditions and the following
  *      disclaimer in the documentation and/or other materials
  *      provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -32,8 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
-using CookComputing.XmlRpc;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -111,9 +113,9 @@ namespace XenAPI
         public Proxy_VMSS ToProxy()
         {
             Proxy_VMSS result_ = new Proxy_VMSS();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.name_label = (name_label != null) ? name_label : "";
-            result_.name_description = (name_description != null) ? name_description : "";
+            result_.uuid = uuid ?? "";
+            result_.name_label = name_label ?? "";
+            result_.name_description = name_description ?? "";
             result_.enabled = enabled;
             result_.type = vmss_type_helper.ToString(type);
             result_.retained_snapshots = retained_snapshots.ToString();
@@ -165,8 +167,8 @@ namespace XenAPI
         {
             if (opaqueRef == null)
             {
-                Proxy_VMSS p = this.ToProxy();
-                return session.proxy.vmss_create(session.uuid, p).parse();
+                var reference = create(session, this);
+                return reference == null ? null : reference.opaque_ref;
             }
             else
             {
@@ -210,7 +212,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static VMSS get_record(Session session, string _vmss)
         {
-            return new VMSS((Proxy_VMSS)session.proxy.vmss_get_record(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_record(session.uuid, _vmss);
+            else
+                return new VMSS((Proxy_VMSS)session.proxy.vmss_get_record(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -221,7 +226,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VMSS> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VMSS>.Create(session.proxy.vmss_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<VMSS>.Create(session.proxy.vmss_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -232,7 +240,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<VMSS> create(Session session, VMSS _record)
         {
-            return XenRef<VMSS>.Create(session.proxy.vmss_create(session.uuid, _record.ToProxy()).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_create(session.uuid, _record);
+            else
+                return XenRef<VMSS>.Create(session.proxy.vmss_create(session.uuid, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -243,7 +254,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, VMSS _record)
         {
-            return XenRef<Task>.Create(session.proxy.async_vmss_create(session.uuid, _record.ToProxy()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vmss_create(session.uuid, _record);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vmss_create(session.uuid, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -254,7 +268,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static void destroy(Session session, string _vmss)
         {
-            session.proxy.vmss_destroy(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_destroy(session.uuid, _vmss);
+            else
+                session.proxy.vmss_destroy(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -265,7 +282,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static XenRef<Task> async_destroy(Session session, string _vmss)
         {
-            return XenRef<Task>.Create(session.proxy.async_vmss_destroy(session.uuid, (_vmss != null) ? _vmss : "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vmss_destroy(session.uuid, _vmss);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vmss_destroy(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -276,7 +296,10 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<VMSS>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<VMSS>.Create(session.proxy.vmss_get_by_name_label(session.uuid, (_label != null) ? _label : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_by_name_label(session.uuid, _label);
+            else
+                return XenRef<VMSS>.Create(session.proxy.vmss_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -287,7 +310,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static string get_uuid(Session session, string _vmss)
         {
-            return (string)session.proxy.vmss_get_uuid(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_uuid(session.uuid, _vmss);
+            else
+                return (string)session.proxy.vmss_get_uuid(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -298,7 +324,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static string get_name_label(Session session, string _vmss)
         {
-            return (string)session.proxy.vmss_get_name_label(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_name_label(session.uuid, _vmss);
+            else
+                return (string)session.proxy.vmss_get_name_label(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -309,7 +338,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static string get_name_description(Session session, string _vmss)
         {
-            return (string)session.proxy.vmss_get_name_description(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_name_description(session.uuid, _vmss);
+            else
+                return (string)session.proxy.vmss_get_name_description(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -320,7 +352,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static bool get_enabled(Session session, string _vmss)
         {
-            return (bool)session.proxy.vmss_get_enabled(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_enabled(session.uuid, _vmss);
+            else
+                return (bool)session.proxy.vmss_get_enabled(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -331,7 +366,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static vmss_type get_type(Session session, string _vmss)
         {
-            return (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), (string)session.proxy.vmss_get_type(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_type(session.uuid, _vmss);
+            else
+                return (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), (string)session.proxy.vmss_get_type(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -342,7 +380,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static long get_retained_snapshots(Session session, string _vmss)
         {
-            return long.Parse((string)session.proxy.vmss_get_retained_snapshots(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_retained_snapshots(session.uuid, _vmss);
+            else
+                return long.Parse((string)session.proxy.vmss_get_retained_snapshots(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -353,7 +394,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static vmss_frequency get_frequency(Session session, string _vmss)
         {
-            return (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), (string)session.proxy.vmss_get_frequency(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_frequency(session.uuid, _vmss);
+            else
+                return (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), (string)session.proxy.vmss_get_frequency(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -364,7 +408,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static Dictionary<string, string> get_schedule(Session session, string _vmss)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vmss_get_schedule(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_schedule(session.uuid, _vmss);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vmss_get_schedule(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -375,7 +422,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static DateTime get_last_run_time(Session session, string _vmss)
         {
-            return session.proxy.vmss_get_last_run_time(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_last_run_time(session.uuid, _vmss);
+            else
+                return session.proxy.vmss_get_last_run_time(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -386,7 +436,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static List<XenRef<VM>> get_VMs(Session session, string _vmss)
         {
-            return XenRef<VM>.Create(session.proxy.vmss_get_vms(session.uuid, (_vmss != null) ? _vmss : "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_vms(session.uuid, _vmss);
+            else
+                return XenRef<VM>.Create(session.proxy.vmss_get_vms(session.uuid, _vmss ?? "").parse());
         }
 
         /// <summary>
@@ -398,7 +451,10 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _vmss, string _label)
         {
-            session.proxy.vmss_set_name_label(session.uuid, (_vmss != null) ? _vmss : "", (_label != null) ? _label : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_set_name_label(session.uuid, _vmss, _label);
+            else
+                session.proxy.vmss_set_name_label(session.uuid, _vmss ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -410,7 +466,10 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _vmss, string _description)
         {
-            session.proxy.vmss_set_name_description(session.uuid, (_vmss != null) ? _vmss : "", (_description != null) ? _description : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_set_name_description(session.uuid, _vmss, _description);
+            else
+                session.proxy.vmss_set_name_description(session.uuid, _vmss ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -422,7 +481,10 @@ namespace XenAPI
         /// <param name="_enabled">New value to set</param>
         public static void set_enabled(Session session, string _vmss, bool _enabled)
         {
-            session.proxy.vmss_set_enabled(session.uuid, (_vmss != null) ? _vmss : "", _enabled).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_set_enabled(session.uuid, _vmss, _enabled);
+            else
+                session.proxy.vmss_set_enabled(session.uuid, _vmss ?? "", _enabled).parse();
         }
 
         /// <summary>
@@ -433,7 +495,10 @@ namespace XenAPI
         /// <param name="_vmss">The opaque_ref of the given vmss</param>
         public static string snapshot_now(Session session, string _vmss)
         {
-            return (string)session.proxy.vmss_snapshot_now(session.uuid, (_vmss != null) ? _vmss : "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_snapshot_now(session.uuid, _vmss);
+            else
+                return (string)session.proxy.vmss_snapshot_now(session.uuid, _vmss ?? "").parse();
         }
 
         /// <summary>
@@ -445,7 +510,10 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_retained_snapshots(Session session, string _vmss, long _value)
         {
-            session.proxy.vmss_set_retained_snapshots(session.uuid, (_vmss != null) ? _vmss : "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_set_retained_snapshots(session.uuid, _vmss, _value);
+            else
+                session.proxy.vmss_set_retained_snapshots(session.uuid, _vmss ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -457,7 +525,10 @@ namespace XenAPI
         /// <param name="_value">the snapshot schedule frequency</param>
         public static void set_frequency(Session session, string _vmss, vmss_frequency _value)
         {
-            session.proxy.vmss_set_frequency(session.uuid, (_vmss != null) ? _vmss : "", vmss_frequency_helper.ToString(_value)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_set_frequency(session.uuid, _vmss, _value);
+            else
+                session.proxy.vmss_set_frequency(session.uuid, _vmss ?? "", vmss_frequency_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -469,7 +540,10 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_schedule(Session session, string _vmss, Dictionary<string, string> _value)
         {
-            session.proxy.vmss_set_schedule(session.uuid, (_vmss != null) ? _vmss : "", Maps.convert_to_proxy_string_string(_value)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_set_schedule(session.uuid, _vmss, _value);
+            else
+                session.proxy.vmss_set_schedule(session.uuid, _vmss ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -482,7 +556,10 @@ namespace XenAPI
         /// <param name="_value">the value to add</param>
         public static void add_to_schedule(Session session, string _vmss, string _key, string _value)
         {
-            session.proxy.vmss_add_to_schedule(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_add_to_schedule(session.uuid, _vmss, _key, _value);
+            else
+                session.proxy.vmss_add_to_schedule(session.uuid, _vmss ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -494,7 +571,10 @@ namespace XenAPI
         /// <param name="_key">the key to remove</param>
         public static void remove_from_schedule(Session session, string _vmss, string _key)
         {
-            session.proxy.vmss_remove_from_schedule(session.uuid, (_vmss != null) ? _vmss : "", (_key != null) ? _key : "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_remove_from_schedule(session.uuid, _vmss, _key);
+            else
+                session.proxy.vmss_remove_from_schedule(session.uuid, _vmss ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -506,7 +586,10 @@ namespace XenAPI
         /// <param name="_value">the value to set</param>
         public static void set_last_run_time(Session session, string _vmss, DateTime _value)
         {
-            session.proxy.vmss_set_last_run_time(session.uuid, (_vmss != null) ? _vmss : "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_set_last_run_time(session.uuid, _vmss, _value);
+            else
+                session.proxy.vmss_set_last_run_time(session.uuid, _vmss ?? "", _value).parse();
         }
 
         /// <summary>
@@ -518,7 +601,10 @@ namespace XenAPI
         /// <param name="_value">the snapshot schedule type</param>
         public static void set_type(Session session, string _vmss, vmss_type _value)
         {
-            session.proxy.vmss_set_type(session.uuid, (_vmss != null) ? _vmss : "", vmss_type_helper.ToString(_value)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vmss_set_type(session.uuid, _vmss, _value);
+            else
+                session.proxy.vmss_set_type(session.uuid, _vmss ?? "", vmss_type_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -528,7 +614,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<VMSS>> get_all(Session session)
         {
-            return XenRef<VMSS>.Create(session.proxy.vmss_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_all(session.uuid);
+            else
+                return XenRef<VMSS>.Create(session.proxy.vmss_get_all(session.uuid).parse());
         }
 
         /// <summary>
@@ -538,7 +627,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VMSS>, VMSS> get_all_records(Session session)
         {
-            return XenRef<VMSS>.Create<Proxy_VMSS>(session.proxy.vmss_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vmss_get_all_records(session.uuid);
+            else
+                return XenRef<VMSS>.Create<Proxy_VMSS>(session.proxy.vmss_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
@@ -557,7 +649,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// a human-readable name
@@ -575,7 +667,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_label;
+        private string _name_label = "";
 
         /// <summary>
         /// a notes field containing human-readable description
@@ -593,7 +685,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_description;
+        private string _name_description = "";
 
         /// <summary>
         /// enable or disable this snapshot schedule
@@ -611,11 +703,12 @@ namespace XenAPI
                 }
             }
         }
-        private bool _enabled;
+        private bool _enabled = true;
 
         /// <summary>
         /// type of the snapshot schedule
         /// </summary>
+        [JsonConverter(typeof(vmss_typeConverter))]
         public virtual vmss_type type
         {
             get { return _type; }
@@ -647,11 +740,12 @@ namespace XenAPI
                 }
             }
         }
-        private long _retained_snapshots;
+        private long _retained_snapshots = 7;
 
         /// <summary>
         /// frequency of taking snapshot from snapshot schedule
         /// </summary>
+        [JsonConverter(typeof(vmss_frequencyConverter))]
         public virtual vmss_frequency frequency
         {
             get { return _frequency; }
@@ -683,11 +777,12 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _schedule;
+        private Dictionary<string, string> _schedule = new Dictionary<string, string>() {};
 
         /// <summary>
         /// time of the last snapshot
         /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime last_run_time
         {
             get { return _last_run_time; }
@@ -701,11 +796,12 @@ namespace XenAPI
                 }
             }
         }
-        private DateTime _last_run_time;
+        private DateTime _last_run_time = DateTime.ParseExact("19700101T00:00:00Z", "yyyyMMddTHH:mm:ssZ", CultureInfo.InvariantCulture);
 
         /// <summary>
         /// all VMs attached to this snapshot schedule
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VM>))]
         public virtual List<XenRef<VM>> VMs
         {
             get { return _VMs; }
@@ -719,6 +815,6 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VM>> _VMs;
+        private List<XenRef<VM>> _VMs = new List<XenRef<VM>>() {};
     }
 }
