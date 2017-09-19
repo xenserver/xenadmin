@@ -1818,7 +1818,7 @@ Authorized Roles: {1}</value>
     <value>This VM operation cannot be performed on an older-versioned host during an upgrade.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>You attempted to migrate a VM to a destination host running a version of XenServer older than the source host.</value>
+    <value>You attempted to migrate a VM to a destination host running a version of [XenServer] older than the source host.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>The VM's Virtual Hardware Platform version is incompatible with this host.</value>
