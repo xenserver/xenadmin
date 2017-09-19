@@ -154,6 +154,8 @@ namespace XenAdmin.Controls
                     buttonUsage.Visible = false;
                     buttonAttach.Visible = true;
                     buttonDetach.Visible = true;
+                    buttonAttach.Enabled = true;
+                    buttonDetach.Enabled = false;
                 }
             }
             finally
@@ -256,7 +258,11 @@ namespace XenAdmin.Controls
 
         private void buttonAttach_Click(object sender, EventArgs e)
         {
-
+            if (_xenObject is VM)
+            {
+                AttachUsbDialog dialog = new AttachUsbDialog(_xenObject as VM);
+                dialog.ShowDialog(Program.MainWindow);
+            }
         }
 
         private void buttonDetach_Click(object sender, EventArgs e)
