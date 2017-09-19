@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
@@ -742,11 +743,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return CHECKED;
                 }
             }
+
+            protected override void SortColumns()
+            {
+                PatchingHostsDataGridViewRow firstRow = Rows[0] as PatchingHostsDataGridViewRow;
+                if (firstRow == null)
+                    return;
+
+                if (columnToBeSortedIndex == firstRow.NameCellIndex ||
+                    columnToBeSortedIndex == firstRow.VersionCellIndex)
+                    SortAndRebuildTree(new CollapsingPoolHostRowSorter<PatchingHostsDataGridViewRow>(direction, columnToBeSortedIndex));
+            }
         }
 
         private class PatchingHostsDataGridViewRow : CollapsingPoolHostDataGridViewRow
         {
-            private class DataGridViewNameCell : DataGridViewExNameCell
+            private class DataGridViewNameCell : DataGridViewTextBoxCell
             {
                 protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
                 {
@@ -852,6 +864,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 SetupCells();
             }
 
+            public int VersionCellIndex
+            {
+                get { return Cells.IndexOf(_versionCell); }
+            }
+
             public override bool IsCheckable
             {
                 get { return !HasPool; }
@@ -877,11 +894,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                                ? (int) Cells[POOL_CHECKBOX_COL].Value
                                : (int) Cells[POOL_ICON_HOST_CHECKBOX_COL].Value;
                 }
-            }
-
-            public bool IsPoolOrStandaloneHost
-            {
-                get { return IsAPoolRow || (IsAHostRow && !HasPool); }
             }
 
             public bool IsSelectableHost

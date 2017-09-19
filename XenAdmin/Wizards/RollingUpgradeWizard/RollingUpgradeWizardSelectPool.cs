@@ -41,7 +41,6 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Properties;
 using System.Linq;
-using XenAdmin.Wizards.RollingUpgradeWizard.Sorting;
 using XenAPI;
 using XenAdmin.Dialogs;
 
@@ -267,20 +266,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             public UpgradeDataGridView(){}
             public UpgradeDataGridView(IContainer container) : base(container){}
             
-            protected override void SortAdditionalColumns()
+            protected override void SortColumns()
             {
                 UpgradeDataGridViewRow firstRow = Rows[0] as UpgradeDataGridViewRow;
                 if (firstRow == null) return;
 
-                if (columnToBeSortedIndex == firstRow.DescriptionCellIndex)
-                {
-                    SortAndRebuildTree(new UpgradeDataGridViewDescriptionSorter(direction));
-                }
-
-                if (columnToBeSortedIndex == firstRow.VersionCellIndex)
-                {
-                    SortAndRebuildTree(new UpgradeDataGridViewVersionSorter(direction));
-                }
+                if (columnToBeSortedIndex == firstRow.NameCellIndex ||
+                    columnToBeSortedIndex == firstRow.DescriptionCellIndex ||
+                    columnToBeSortedIndex == firstRow.VersionCellIndex)
+                    SortAndRebuildTree(new CollapsingPoolHostRowSorter<UpgradeDataGridViewRow>(direction, columnToBeSortedIndex));
             }
         }
 
