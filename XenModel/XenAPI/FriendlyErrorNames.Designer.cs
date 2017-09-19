@@ -5142,7 +5142,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to migrate a VM to a destination host running a version of XenServer older than the source host..
+        ///   Looks up a localized string similar to You attempted to migrate a VM to a destination host running a version of [XenServer] older than the source host..
         /// </summary>
         public static string VM_HOST_INCOMPATIBLE_VERSION_MIGRATE {
             get {

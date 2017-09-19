@@ -4239,7 +4239,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The XenServer license you are using does not allow you to use the Scheduled Snapshots feature..
+        ///   Looks up a localized string similar to The [XenServer product] license you are using does not allow you to use the Scheduled Snapshots feature..
         /// </summary>
         public static string Message_body_vmss_license_error {
             get {
