@@ -30,6 +30,14 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
+#==============================================================
+#Micro version override - please keep at the top of the script
+#==============================================================
+#Set and uncomment this to override the 3rd value of the product number 
+#normally fetched from branding
+#
+PRODUCT_MICRO_VERSION_OVERRIDE=1
+
 # bring versions from the server branding repo
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
 OUTPUT_DIR=${ROOT}/output

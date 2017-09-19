@@ -32,14 +32,6 @@
 
 set -ex
 
-#==============================================================
-#Micro version override - please keep at the top of the script
-#==============================================================
-#Set and uncomment this to override the 3rd value of the product number 
-#normally fetched from branding
-#
-#PRODUCT_MICRO_VERSION_OVERRIDE=<My override value here>
-
 SET_ENV_FILE="/cygdrive/c/env.sh"
 if [ -f ${SET_ENV_FILE} ]; then
    . ${SET_ENV_FILE}
@@ -130,13 +122,6 @@ version_installer ${WIX}/XenCenter.wxs
 version_installer ${WIX}/XenCenter.l10n.wxs
 version_vnccontrol_installer ${WIX}/vnccontrol.wxs
 
-#copy dotNetInstaller files
-DOTNETINST=${REPO}/dotNetInstaller
-cd ${DOTNETINST}
-DOTNETINSTALLER_FILEPATH="$(which dotNetInstaller.exe)"
-DOTNETINSTALLER_DIRPATH=${DOTNETINSTALLER_FILEPATH%/*}
-cp -R "${DOTNETINSTALLER_DIRPATH}"/* ${DOTNETINST}
-
 echo "INFO: Collecting unsigned files..."
 mkdir_clean ${OUTPUT_DIR}/XenAdminUnsigned
 cp -R ${REPO}/* ${OUTPUT_DIR}/XenAdminUnsigned
@@ -176,24 +161,24 @@ cp ${REPO}/XenAdmin/bin/Release/{CommandLib.pdb,${BRANDING_BRAND_CONSOLE}.pdb,Xe
 
 ISO_DIR=${SCRATCH_DIR}/iso-staging
 mkdir_clean ${ISO_DIR}
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+install -m 755 ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.msi
 cp ${REPO}/mk/ISO_files/AUTORUN.INF ${ISO_DIR}
 cp ${REPO}/Branding/Images/AppIcon.ico ${ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
 mkdir_clean ${OUTPUT_DIR}/installer
 tar cjf ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}.installer.tar.bz2 -C ${ISO_DIR} .
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.exe ${OUTPUT_DIR}/installer/${BRANDING_BRAND_CONSOLE}Setup.exe
+mv ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.msi ${OUTPUT_DIR}/installer
 
 L10N_ISO_DIR=${SCRATCH_DIR}/l10n-iso-staging
 mkdir_clean ${L10N_ISO_DIR}
 # -o root -g root 
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}Setup.exe
+install -m 755 ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.msi
 cp ${REPO}/mk/ISO_files/AUTORUN.INF ${L10N_ISO_DIR}
 cp ${REPO}/Branding/Images/AppIcon.ico ${L10N_ISO_DIR}/${BRANDING_BRAND_CONSOLE}.ico
 #CP-18097
 mkdir_clean ${OUTPUT_DIR}/installer.l10n
 tar cjf ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}.installer.l10n.tar.bz2 -C ${L10N_ISO_DIR} .
-install -m 755 ${DOTNETINST}/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe ${OUTPUT_DIR}/installer.l10n/${BRANDING_BRAND_CONSOLE}Setup.l10n.exe
+mv ${OUTPUT_DIR}/${BRANDING_BRAND_CONSOLE}.l10n.msi ${OUTPUT_DIR}/installer.l10n
 
 #now package the pdbs
 cd ${OUTPUT_DIR} && tar cjf XenCenter.Symbols.tar.bz2 --remove-files *.pdb
