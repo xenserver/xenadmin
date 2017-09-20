@@ -3834,6 +3834,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changed block tracking is disabled for virtual disk {0} due to inconsistent metadata. To continue using changed block tracking with the virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
+        /// </summary>
+        public static string Message_body_vdi_cbt_metadata_inconsistent {
+            get {
+                return ResourceManager.GetString("Message.body-vdi_cbt_metadata_inconsistent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed block tracking is disabled for virtual disk {0} due to resizing failure. To continue using changed block tracking with the virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
+        /// </summary>
+        public static string Message_body_vdi_cbt_resize_failed {
+            get {
+                return ResourceManager.GetString("Message.body-vdi_cbt_resize_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed block tracking is disabled for virtual disk {0} due to snapshot failure. To continue using changed block tracking with the virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
+        /// </summary>
+        public static string Message_body_vdi_cbt_snapshot_failed {
+            get {
+                return ResourceManager.GetString("Message.body-vdi_cbt_snapshot_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quality of Service settings for network interface &apos;{0}&apos; on virtual machine &apos;{1}&apos; could not be obeyed..
         /// </summary>
         public static string Message_body_vif_qos_failed {
@@ -4595,6 +4622,33 @@ namespace XenAdmin {
         public static string Message_name_vcpu_qos_failed {
             get {
                 return ResourceManager.GetString("Message.name-vcpu_qos_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed block tracking disabled due to metadata inconsistent.
+        /// </summary>
+        public static string Message_name_vdi_cbt_metadata_inconsistent {
+            get {
+                return ResourceManager.GetString("Message.name-vdi_cbt_metadata_inconsistent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed block tracking disabled due to resizing failure.
+        /// </summary>
+        public static string Message_name_vdi_cbt_resize_failed {
+            get {
+                return ResourceManager.GetString("Message.name-vdi_cbt_resize_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed block tracking disabled due to snapshot failure.
+        /// </summary>
+        public static string Message_name_vdi_cbt_snapshot_failed {
+            get {
+                return ResourceManager.GetString("Message.name-vdi_cbt_snapshot_failed", resourceCulture);
             }
         }
         
