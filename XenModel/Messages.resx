@@ -2696,10 +2696,10 @@ This action is final and unrecoverable.</value>
     <value>&amp;Yes, Destroy</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VM" xml:space="preserve">
-    <value>This will disable Changed Block Tracking on the disks of the selected VM. Do you want to continue?</value>
+    <value>This will disable Changed Block Tracking on the disks of the selected VM. If you are using any third-party solutions to back up the VM, they might be affected. Note that Changed Block Tracking cannot be enabled again from XenCenter. Do you want to continue?</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
-    <value>This will disable Changed Block Tracking on the disks of the selected VMs. Do you want to continue?</value>
+    <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from XenCenter. Do you want to continue?</value>
   </data>
   <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on selected VMs</value>
