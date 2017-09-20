@@ -142,5 +142,10 @@ namespace XenAdmin.Commands
                                                    Messages.CONFIRM_DISABLE_CBT_VMs_TITLE;
             }
         }
+
+        protected override string ConfirmationDialogHelpId
+        {
+            get { return "WarningVmDisableChangedBlockTracking"; }
+        }
     }
 }
