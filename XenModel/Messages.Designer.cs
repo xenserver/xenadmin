@@ -7361,7 +7361,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VM. Do you want to continue?.
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VM. This might affect any third-party backup solutions that you are using to back up this VM. And CBT cannot be enabled again from XenCenter. Do you want to continue?.
         /// </summary>
         public static string CONFIRM_DISABLE_CBT_VM {
             get {
@@ -7379,7 +7379,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VMs. Do you want to continue?.
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VMs. This might affect any third-party backup solutions that you are using to back up this VM. And CBT cannot be enabled again from XenCenter. Do you want to continue?.
         /// </summary>
         public static string CONFIRM_DISABLE_CBT_VMS {
             get {

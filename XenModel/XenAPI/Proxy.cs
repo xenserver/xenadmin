@@ -5956,13 +5956,13 @@ namespace XenAPI
         Response<string>
         async_vdi_data_destroy(string session, string _vdi);
 
-        [XmlRpcMethod("VDI.export_changed_blocks")]
+        [XmlRpcMethod("VDI.list_changed_blocks")]
         Response<string>
-        vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
+        vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
 
-        [XmlRpcMethod("Async.VDI.export_changed_blocks")]
+        [XmlRpcMethod("Async.VDI.list_changed_blocks")]
         Response<string>
-        async_vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
+        async_vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
 
         [XmlRpcMethod("VDI.get_nbd_info")]
         Response<string []>

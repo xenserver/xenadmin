@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum vdi_operations
     {
-        clone, copy, resize, resize_online, snapshot, mirror, destroy, forget, update, force_unlock, generate_config, enable_cbt, disable_cbt, data_destroy, export_changed_blocks, set_on_boot, blocked, unknown
+        clone, copy, resize, resize_online, snapshot, mirror, destroy, forget, update, force_unlock, generate_config, enable_cbt, disable_cbt, data_destroy, list_changed_blocks, set_on_boot, blocked, unknown
     }
 
     public static class vdi_operations_helper
@@ -74,8 +74,8 @@ namespace XenAPI
                     return "disable_cbt";
                 case vdi_operations.data_destroy:
                     return "data_destroy";
-                case vdi_operations.export_changed_blocks:
-                    return "export_changed_blocks";
+                case vdi_operations.list_changed_blocks:
+                    return "list_changed_blocks";
                 case vdi_operations.set_on_boot:
                     return "set_on_boot";
                 case vdi_operations.blocked:
