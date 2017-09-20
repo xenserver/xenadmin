@@ -3834,6 +3834,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VDI {0} changed block tracking metadata inconsistent.
+        /// </summary>
+        public static string Message_body_vdi_cbt_metadata_inconsistent {
+            get {
+                return ResourceManager.GetString("Message.body-vdi_cbt_metadata_inconsistent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VDI {0} changed block tracking resize failed.
+        /// </summary>
+        public static string Message_body_vdi_cbt_resize_failed {
+            get {
+                return ResourceManager.GetString("Message.body-vdi_cbt_resize_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VDI {0} changed block tracking snapshot failed.
+        /// </summary>
+        public static string Message_body_vdi_cbt_snapshot_failed {
+            get {
+                return ResourceManager.GetString("Message.body-vdi_cbt_snapshot_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quality of Service settings for network interface &apos;{0}&apos; on virtual machine &apos;{1}&apos; could not be obeyed..
         /// </summary>
         public static string Message_body_vif_qos_failed {
@@ -4595,6 +4622,33 @@ namespace XenAdmin {
         public static string Message_name_vcpu_qos_failed {
             get {
                 return ResourceManager.GetString("Message.name-vcpu_qos_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VDI changed block tracking metadata inconsistent.
+        /// </summary>
+        public static string Message_name_vdi_cbt_metadata_inconsistent {
+            get {
+                return ResourceManager.GetString("Message.name-vdi_cbt_metadata_inconsistent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VDI changed block tracking resize failed.
+        /// </summary>
+        public static string Message_name_vdi_cbt_resize_failed {
+            get {
+                return ResourceManager.GetString("Message.name-vdi_cbt_resize_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VDI changed block tracking snapshot failed.
+        /// </summary>
+        public static string Message_name_vdi_cbt_snapshot_failed {
+            get {
+                return ResourceManager.GetString("Message.name-vdi_cbt_snapshot_failed", resourceCulture);
             }
         }
         
