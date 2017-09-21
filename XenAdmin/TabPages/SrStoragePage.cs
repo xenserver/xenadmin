@@ -145,7 +145,7 @@ namespace XenAdmin.TabPages
             try
             {
                 ColumnVolume.Visible = data.ShowStorageLink;
-                var showCbtColumn = Helpers.InvernessOrGreater(sr.Connection);
+                var showCbtColumn = !Helpers.FeatureForbidden(sr.Connection, Host.RestrictChangedBlockTracking);
                 ColumnCBT.Visible = showCbtColumn;
 
                 // Update existing rows
