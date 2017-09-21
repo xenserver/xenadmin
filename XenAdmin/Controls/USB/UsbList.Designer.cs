@@ -83,9 +83,9 @@
             this.buttonUsage.Location = new System.Drawing.Point(0, 5);
             this.buttonUsage.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.buttonUsage.Name = "buttonUsage";
-            this.buttonUsage.Size = new System.Drawing.Size(102, 23);
+            this.buttonUsage.Size = new System.Drawing.Size(120, 23);
             this.buttonUsage.TabIndex = 1;
-            this.buttonUsage.Text = "&Usage";
+            this.buttonUsage.Text = "Enable passthrough";
             this.buttonUsage.UseVisualStyleBackColor = true;
             this.buttonUsage.Click += new System.EventHandler(this.buttonUsage_Click);
             // 
@@ -104,7 +104,7 @@
             // 
             this.buttonAttach.BackColor = System.Drawing.Color.Transparent;
             this.buttonAttach.Enabled = false;
-            this.buttonAttach.Location = new System.Drawing.Point(105, 5);
+            this.buttonAttach.Location = new System.Drawing.Point(123, 5);
             this.buttonAttach.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.buttonAttach.Name = "buttonAttach";
             this.buttonAttach.Size = new System.Drawing.Size(102, 23);
@@ -117,7 +117,7 @@
             // 
             this.buttonDetach.BackColor = System.Drawing.Color.Transparent;
             this.buttonDetach.Enabled = false;
-            this.buttonDetach.Location = new System.Drawing.Point(210, 5);
+            this.buttonDetach.Location = new System.Drawing.Point(228, 5);
             this.buttonDetach.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.buttonDetach.Name = "buttonDetach";
             this.buttonDetach.Size = new System.Drawing.Size(102, 23);

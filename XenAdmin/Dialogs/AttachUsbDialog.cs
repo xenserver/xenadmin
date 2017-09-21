@@ -64,17 +64,13 @@ namespace XenAdmin.Dialogs
                 Host[] hosts = _vm.Connection.Cache.Hosts;
                 foreach (Host host in hosts)
                 {
-                    CustomTreeNode hostNode = new CustomTreeNode();
-                    hostNode.Text = host.name_label;
-                    hostNode.Description = null;
+                    HostItem hostNode = new HostItem(host);
                     treeUsbList.AddNode(hostNode);
                     List<PUSB> pusbs = _vm.Connection.ResolveAll(host.PUSBs);
                     foreach (PUSB pusb in pusbs)
                     {
-                        CustomTreeNode usbnode = new CustomTreeNode();
-                        usbnode.Text = pusb.description;
-                        usbnode.Description = null;
-                        treeUsbList.AddChildNode(hostNode, usbnode);
+                        UsbItem usbNode = new UsbItem(pusb);
+                        treeUsbList.AddChildNode(hostNode, usbNode);
                     }
                 }
             }
@@ -86,7 +82,6 @@ namespace XenAdmin.Dialogs
 
         private void treeUsbList_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void buttonAttach_Click(object sender, EventArgs e)
@@ -99,6 +94,32 @@ namespace XenAdmin.Dialogs
         {
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
+        }
+
+        private class HostItem : CustomTreeNode
+        {
+            private Host _host;
+
+            public HostItem(Host host) :base(false)
+            {
+                _host = host;
+                Text = host.name_label;
+                Description = null;
+                Image = Images.GetImage16For(Images.GetIconFor(_host));
+            }
+        }
+
+        private class UsbItem : CustomTreeNode
+        {
+            private PUSB _pusb;
+
+            public UsbItem(PUSB pusb) :base(true)
+            {
+                _pusb = pusb;
+                Text = _pusb.description;
+                Description = _pusb.path;
+                Image = null;
+            }
         }
     }
 }

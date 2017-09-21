@@ -274,22 +274,29 @@ namespace XenAdmin.Controls
         {
             selectedUsb = null;
 
-            if (UsbGridView.Rows.Count <= 0)
+            try
             {
-                buttonUsage.Enabled = false;
-            }
-            else
-            {
-                try
+                if (UsbGridView.Rows.Count <= 0)
+                {
+                    buttonUsage.Enabled = false;
+                }
+                else
                 {
                     HostUsbRow row = (HostUsbRow)UsbGridView.SelectedRows[0];
                     selectedUsb = row.pusb;
                     buttonUsage.Enabled = true;
                 }
-                catch
-                {
-                    buttonUsage.Enabled = false;
-                }
+            }
+            catch
+            {
+                buttonUsage.Enabled = false;
+            }
+            finally
+            {
+                if (null != selectedUsb && selectedUsb.passthrough_enabled)
+                    buttonUsage.Text = Messages.USBLIST_DISABLE_PASSTHROUGH;
+                else
+                    buttonUsage.Text = Messages.USBLIST_ENABLE_PASSTHROUGH;
             }
         }
 

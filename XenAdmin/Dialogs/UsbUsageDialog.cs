@@ -41,10 +41,31 @@ namespace XenAdmin.Dialogs
 {
     public partial class UsbUsageDialog : XenDialogBase
     {
+        private PUSB _pusb;
+
         public UsbUsageDialog(PUSB pusb)
         {
+            _pusb = pusb;
             InitializeComponent();
-            this.checkBoxAllow.Checked = false;
+            refreshControls();
+        }
+
+        private void refreshControls()
+        {
+            if (_pusb.passthrough_enabled)
+            {
+                labelNote.Text = String.Format(Messages.DIALOG_USB_USAGE_NOTE_FORMAT,
+                                               Messages.DIALOG_USB_USAGE_NOTE_DISABLE,
+                                               Messages.DIALOG_USB_USAGE_NOTE_DENY);
+                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_DISABLE;
+            }
+            else
+            {
+                labelNote.Text = String.Format(Messages.DIALOG_USB_USAGE_NOTE_FORMAT,
+                                               Messages.DIALOG_USB_USAGE_NOTE_ENABLE,
+                                               Messages.DIALOG_USB_USAGE_NOTE_ALLOW);
+                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_ENABLE;
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

@@ -103,7 +103,7 @@
             // 
             this.autoHeightLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.autoHeightLabel1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.autoHeightLabel1.Location = new System.Drawing.Point(43, 185);
+            this.autoHeightLabel1.Location = new System.Drawing.Point(39, 183);
             this.autoHeightLabel1.Name = "autoHeightLabel1";
             this.autoHeightLabel1.Size = new System.Drawing.Size(332, 45);
             this.autoHeightLabel1.TabIndex = 7;

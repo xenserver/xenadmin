@@ -10926,6 +10926,69 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to allow.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_NOTE_ALLOW {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_ALLOW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to deny.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_NOTE_DENY {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_DENY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to disable.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_NOTE_DISABLE {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_DISABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to enable.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_NOTE_ENABLE {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_ENABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure that you want to {0} passthrough on this device and {1} to be passed through to VMs?.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_NOTE_FORMAT {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Yes, Disable passthrough.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_OKBUTTON_DISABLE {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_OKBUTTON_DISABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Yes, Enable passthrough.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_OKBUTTON_ENABLE {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_OKBUTTON_ENABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disa&amp;ble.
         /// </summary>
         public static string DISABLE {
@@ -34594,11 +34657,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} device(s) attached.
+        ///   Looks up a localized string similar to 1 device attached.
         /// </summary>
-        public static string USB_EDIT_SUBTEXT {
+        public static string USB_EDIT_SUBTEXT_1_DEVICE {
             get {
-                return ResourceManager.GetString("USB_EDIT_SUBTEXT", resourceCulture);
+                return ResourceManager.GetString("USB_EDIT_SUBTEXT_1_DEVICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} devices attached.
+        /// </summary>
+        public static string USB_EDIT_SUBTEXT_MULTIPLE_DEVICES {
+            get {
+                return ResourceManager.GetString("USB_EDIT_SUBTEXT_MULTIPLE_DEVICES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no devices attached.
+        /// </summary>
+        public static string USB_EDIT_SUBTEXT_NODEVICES {
+            get {
+                return ResourceManager.GetString("USB_EDIT_SUBTEXT_NODEVICES", resourceCulture);
             }
         }
         
@@ -34608,6 +34689,24 @@ namespace XenAdmin {
         public static string USB_EDIT_TEXT {
             get {
                 return ResourceManager.GetString("USB_EDIT_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable passthrough.
+        /// </summary>
+        public static string USBLIST_DISABLE_PASSTHROUGH {
+            get {
+                return ResourceManager.GetString("USBLIST_DISABLE_PASSTHROUGH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable passthrough.
+        /// </summary>
+        public static string USBLIST_ENABLE_PASSTHROUGH {
+            get {
+                return ResourceManager.GetString("USBLIST_ENABLE_PASSTHROUGH", resourceCulture);
             }
         }
         

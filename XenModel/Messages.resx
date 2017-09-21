@@ -3904,6 +3904,27 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>Scanning for free device positions</value>
   </data>
+  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
+    <value>allow</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
+    <value>deny</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_DISABLE" xml:space="preserve">
+    <value>disable</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_ENABLE" xml:space="preserve">
+    <value>enable</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_FORMAT" xml:space="preserve">
+    <value>Are you sure that you want to {0} passthrough on this device and {1} to be passed through to VMs?</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
+    <value>&amp;Yes, Disable passthrough</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_ENABLE" xml:space="preserve">
+    <value>&amp;Yes, Enable passthrough</value>
+  </data>
   <data name="DISABLE" xml:space="preserve">
     <value>Disa&amp;ble</value>
   </data>
@@ -11994,8 +12015,20 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="USB" xml:space="preserve">
     <value>USB</value>
   </data>
-  <data name="USB_EDIT_SUBTEXT" xml:space="preserve">
-    <value>{0} device(s) attached</value>
+  <data name="USBLIST_DISABLE_PASSTHROUGH" xml:space="preserve">
+    <value>Disable passthrough</value>
+  </data>
+  <data name="USBLIST_ENABLE_PASSTHROUGH" xml:space="preserve">
+    <value>Enable passthrough</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
+    <value>1 device attached</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_MULTIPLE_DEVICES" xml:space="preserve">
+    <value>{0} devices attached</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_NODEVICES" xml:space="preserve">
+    <value>no devices attached</value>
   </data>
   <data name="USB_EDIT_TEXT" xml:space="preserve">
     <value>USB</value>

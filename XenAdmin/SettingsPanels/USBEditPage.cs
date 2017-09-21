@@ -75,7 +75,12 @@ namespace XenAdmin.SettingsPanels
             {
                 if (null != _vm)
                 {
-                    return string.Format(Messages.USB_EDIT_SUBTEXT, _vm.VUSBs.Count);
+                    if (0 == _vm.VUSBs.Count)
+                        return Messages.USB_EDIT_SUBTEXT_NODEVICES;
+                    else if (1 == _vm.VUSBs.Count)
+                        return Messages.USB_EDIT_SUBTEXT_1_DEVICE;
+                    else
+                        return string.Format(Messages.USB_EDIT_SUBTEXT_MULTIPLE_DEVICES, _vm.VUSBs.Count);
                 }
                 else
                     return "";

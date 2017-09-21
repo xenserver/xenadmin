@@ -41,11 +41,11 @@
   <ItemGroup>
     <Reference Include="CookComputing.XmlRpcV2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\xml-rpc.net\obj\Release\CookComputing.XmlRpcV2.dll</HintPath>
+      <HintPath>..\packages\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\log4net\build\bin\net\2.0\release\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -378,7 +378,6 @@
     <Compile Include="XenAPI\sdn_controller_protocol.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
-    <Compile Include="XenAPI\usage.cs" />
     <Compile Include="XenAPI\USB_group.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
     <Compile Include="XenAPI\VGPU_type.cs" />
