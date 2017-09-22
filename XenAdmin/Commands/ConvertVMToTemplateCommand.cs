@@ -71,7 +71,7 @@ namespace XenAdmin.Commands
             using (var dlg = new ThreeButtonDialog(
                         new ThreeButtonDialog.Details(
                             SystemIcons.Warning,
-                            string.Format(Messages.CONVERT_TEMPLATE_DIALOG_TEXT, vm.Name.Ellipsise(25)),
+                            string.Format(Messages.CONVERT_TEMPLATE_DIALOG_TEXT, vm.Name().Ellipsise(25)),
                             Messages.CONVERT_TO_TEMPLATE),
                         new ThreeButtonDialog.TBDButton(Messages.CONVERT, DialogResult.OK, ThreeButtonDialog.ButtonType.ACCEPT, true),
                         ThreeButtonDialog.ButtonCancel))
@@ -84,7 +84,7 @@ namespace XenAdmin.Commands
 
                     MainWindowCommandInterface.CloseActiveWizards(vm);
 
-                    RunMultipleActions(actions, string.Format(Messages.ACTION_VM_TEMPLATIZING_TITLE, vm.Name),
+                    RunMultipleActions(actions, string.Format(Messages.ACTION_VM_TEMPLATIZING_TITLE, vm.Name()),
                                        Messages.ACTION_VM_TEMPLATIZING, Messages.ACTION_VM_TEMPLATIZED, true);
                 }
             }

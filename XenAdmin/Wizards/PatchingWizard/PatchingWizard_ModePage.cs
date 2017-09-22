@@ -223,7 +223,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             foreach (var server in SelectedServers)
             {
                 var pool = Helpers.GetPoolOfOne(server.Connection);
-                if (pool.IsAutoUpdateRestartsForbidden)
+                if (pool.IsAutoUpdateRestartsForbidden())
                 {
                     return true;
                 }

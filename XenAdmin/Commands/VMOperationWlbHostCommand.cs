@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
             Util.ThrowIfParameterNull(host, "host");
 
             _host = host;
-            _menuText = _host.Name.EscapeAmpersands();
+            _menuText = _host.Name().EscapeAmpersands();
             
             //Default or failure case, there is no score/star rating actually, just don't display star
             _secondImage = null;

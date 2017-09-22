@@ -104,7 +104,7 @@ namespace XenAdmin.Commands
         private static bool CanExecute(Host host)
         {
             return host != null
-                && !host.IsLive
+                && !host.IsLive()
                 && host.allowed_operations != null && host.allowed_operations.Contains(host_allowed_operations.power_on)
                 && !HelpersGUI.HasActiveHostAction(host)
                 && host.power_on_mode != "";
@@ -119,7 +119,7 @@ namespace XenAdmin.Commands
         {
             foreach (Host host in GetSelection().AsXenObjects<Host>())
             {
-                if (!CanExecute(host) && !host.IsLive)
+                if (!CanExecute(host) && !host.IsLive())
                 {
                     return new CommandErrorDialog(Messages.ERROR_DIALOG_POWER_ON_HOST_TITLE, Messages.ERROR_DIALOG_POWER_ON_HOST_TEXT, cantExecuteReasons);
                 }
@@ -150,7 +150,7 @@ namespace XenAdmin.Commands
             {
                 return base.GetCantExecuteReasonCore(item);
             }
-            if (host.IsLive)
+            if (host.IsLive())
             {
                 return Messages.HOST_ALREADY_POWERED_ON;
             }

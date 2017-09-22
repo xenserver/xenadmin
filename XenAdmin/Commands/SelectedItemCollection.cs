@@ -275,7 +275,7 @@ namespace XenAdmin.Commands
         {
             get
             {
-                return FirstIs<Host>() && ((Host)this[0].XenObject).IsLive;
+                return FirstIs<Host>() && ((Host)this[0].XenObject).IsLive();
             }
         }
 

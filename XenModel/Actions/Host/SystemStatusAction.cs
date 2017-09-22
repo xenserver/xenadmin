@@ -95,21 +95,21 @@ namespace XenAdmin.Actions
             int i = 0;
             foreach (HostWithStatus host in hosts)
             {
-                Description = string.Format(Messages.ACTION_SYSTEM_STATUS_DESCRIPTION, host.Host.Name);
+                Description = string.Format(Messages.ACTION_SYSTEM_STATUS_DESCRIPTION, host.Host.Name());
                 Pool = Helpers.GetPoolOfOne(host.Host.Connection);
                 // master/slave information
                 XenAPI.Pool p = Helpers.GetPool(host.Host.Connection);
                 if (p == null)
                 {
                     mastersInfo.Add(string.Format("Server '{0}' is a stand alone server",
-                        host.Host.Name));
+                        host.Host.Name()));
                 }
                 else
                 {
                     mastersInfo.Add(string.Format("Server '{0}' is a {1} of pool '{2}'",
-                        host.Host.Name,
+                        host.Host.Name(),
                         p.master.opaque_ref == host.Host.opaque_ref ? "master" : "slave",
-                        p.Name));
+                        p.Name()));
                 }
 
                 // Ensure downloaded filenames are unique even for hosts with the same hostname: append a counter to the timestring

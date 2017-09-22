@@ -54,7 +54,7 @@ namespace XenAdmin.Actions
         }
 
         public VbdSaveAndPlugAction(VM vm, XenAPI.VBD vbd, string vdiName, XenAPI.Session session, bool supress, Action showMustRebootBoxCD, Action showVBDWarningBox)
-            : base(vm.Connection, string.Format(Messages.ATTACHING_VIRTUAL_DISK, vdiName, vm.Name), "", supress)
+            : base(vm.Connection, string.Format(Messages.ATTACHING_VIRTUAL_DISK, vdiName, vm.Name()), "", supress)
         {
             _ShowVBDWarningBox = showVBDWarningBox;
             _ShowMustRebootBoxCD = showMustRebootBoxCD;
@@ -74,7 +74,7 @@ namespace XenAdmin.Actions
             
             string vbdServerRef = vbd.SaveChanges(Session, null, null);
 
-            if (!VM.IsHVM && vbd.empty)
+            if (!VM.IsHVM() && vbd.empty)
             {
                 // PV guest require no further action 
                 return;

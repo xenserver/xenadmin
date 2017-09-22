@@ -73,7 +73,7 @@ namespace XenAdminTests.XenModelTests
         private void SetupConnection(DatabaseInfo id)
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(id.name);
-            host.Setup(h => h.ProductVersion).Returns(id.version);
+            host.Setup(h => h.ProductVersion()).Returns(id.version);
             ObjectManager.MockConnectionFor(id.name).Setup(c => c.Resolve(It.IsAny<XenRef<Host>>())).Returns(host.Object);
         }
 

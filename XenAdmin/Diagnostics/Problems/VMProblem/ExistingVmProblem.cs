@@ -54,7 +54,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         {
             get
             {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_VM, Helpers.GetPoolOfOne(VM.Connection).Name); 
+                return String.Format(Messages.DR_WIZARD_PROBLEM_EXISTING_VM, Helpers.GetPoolOfOne(VM.Connection).Name()); 
             } 
         }
 
@@ -69,7 +69,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
             DialogResult dialogResult;
             using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_VM, VM.Name, VM.Connection.Name), Messages.ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE),
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, String.Format(Messages.CONFIRM_DELETE_VM, VM.Name(), VM.Connection.Name), Messages.ACTION_SHUTDOWN_AND_DESTROY_VM_TITLE),
                     ThreeButtonDialog.ButtonYes,
                     ThreeButtonDialog.ButtonNo))
             {

@@ -87,7 +87,7 @@ namespace XenAdminTests.DialogTests.state1_xml.OtherDialogs
     {
         protected override FolderChangeDialog NewDialog()
         {
-            return new FolderChangeDialog(GetAnyFolder().Name);
+            return new FolderChangeDialog(GetAnyFolder().Name());
         }
     }
 

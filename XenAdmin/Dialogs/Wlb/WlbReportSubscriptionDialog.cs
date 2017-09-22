@@ -338,7 +338,7 @@ namespace XenAdmin.Dialogs.Wlb
                 return String.Empty;
             }
 
-            return session.UserFriendlyName;
+            return session.UserFriendlyName();
         }
 
         private void SaveSubscription()

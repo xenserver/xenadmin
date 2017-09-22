@@ -275,7 +275,7 @@ namespace XenAdmin.Actions
 
             XenAPI.Network network = new XenAPI.Network();
             network.name_label = name_label;
-            network.AutoPlug = autoplug;
+            network.SetAutoPlug(autoplug);
             network.MTU = mtu;
             if (network.other_config == null)
                 network.other_config = new Dictionary<string, string>();

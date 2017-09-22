@@ -121,12 +121,14 @@ namespace XenAdmin.Dialogs.HealthCheck
 
             public void RefreshRow()
             {
-                _nameCell.Value = Pool.Name;
+                _nameCell.Value = Pool.Name();
                 _nameCell.Image = null;
-                _statusCell.Value = Pool.HealthCheckSettings.StatusDescription;
-                _statusCell.Image = Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled || !Pool.HealthCheckSettings.HasAnalysisResult
+                
+                var healthCheckSettings = Pool.HealthCheckSettings();
+                _statusCell.Value = healthCheckSettings.StatusDescription;
+                _statusCell.Image = healthCheckSettings.Status != HealthCheckStatus.Enabled || !healthCheckSettings.HasAnalysisResult
                     ? null
-                    : GetSeverityImage(Pool.HealthCheckSettings);
+                    : GetSeverityImage(healthCheckSettings);
             }
 
             private Image GetSeverityImage(HealthCheckSettings healthCheckSettings)
@@ -171,8 +173,8 @@ namespace XenAdmin.Dialogs.HealthCheck
             }
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
-            var healthcheckSettings = poolRow.Pool.HealthCheckSettings;
-            poolNameLabel.Text = poolRow.Pool.Name.Ellipsise(120);
+            var healthcheckSettings = poolRow.Pool.HealthCheckSettings();
+            poolNameLabel.Text = poolRow.Pool.Name().Ellipsise(120);
             scheduleLabel.Text = GetScheduleDescription(healthcheckSettings);
             lastUploadLabel.Visible = lastUploadDateLabel.Visible = !string.IsNullOrEmpty(healthcheckSettings.LastSuccessfulUpload);
             lastUploadDateLabel.Text = GetLastUploadDescription(healthcheckSettings);
@@ -188,11 +190,11 @@ namespace XenAdmin.Dialogs.HealthCheck
 
             UpdateButtonsVisibility(poolRow.Pool);
 
-            healthCheckStatusPanel.Visible = poolRow.Pool.HealthCheckSettings.Status == HealthCheckStatus.Enabled;
-            notEnrolledPanel.Visible = poolRow.Pool.HealthCheckSettings.Status != HealthCheckStatus.Enabled;
-            UpdateUploadRequestDescription(poolRow.Pool.HealthCheckSettings);
+            healthCheckStatusPanel.Visible = healthcheckSettings.Status == HealthCheckStatus.Enabled;
+            notEnrolledPanel.Visible = healthcheckSettings.Status != HealthCheckStatus.Enabled;
+            UpdateUploadRequestDescription(healthcheckSettings);
 
-            UpdateAnalysisResult(poolRow.Pool.HealthCheckSettings);
+            UpdateAnalysisResult(healthcheckSettings);
         }
 
         public string GetScheduleDescription(HealthCheckSettings healthCheckSettings)
@@ -362,7 +364,7 @@ namespace XenAdmin.Dialogs.HealthCheck
                 return;
 
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
-            var healthCheckSettings = poolRow.Pool.HealthCheckSettings;
+            var healthCheckSettings = poolRow.Pool.HealthCheckSettings();
             if (healthCheckSettings.CanRequestNewUpload)
             {
                 healthCheckSettings.NewUploadRequest = HealthCheckSettings.DateTimeToString(DateTime.UtcNow);
@@ -391,7 +393,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
             if (poolRow.Pool == null)
                 return;
-            var healthCheckSettings = poolRow.Pool.HealthCheckSettings;
+            var healthCheckSettings = poolRow.Pool.HealthCheckSettings();
             if (healthCheckSettings.Status == HealthCheckStatus.Enabled)
             {
                 string msg = Helpers.GetPool(poolRow.Pool.Connection) == null 
@@ -417,7 +419,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
             if (poolRow.Pool == null)
                 return;
-            var url = poolRow.Pool.HealthCheckSettings.GetReportAnalysisLink(Registry.HealthCheckDiagnosticDomainName);
+            var url = poolRow.Pool.HealthCheckSettings().GetReportAnalysisLink(Registry.HealthCheckDiagnosticDomainName);
             if (!string.IsNullOrEmpty(url))
                 Program.OpenURL(url);
         }
@@ -430,7 +432,7 @@ namespace XenAdmin.Dialogs.HealthCheck
             var poolRow = (PoolRow)poolsDataGridView.SelectedRows[0];
             if (poolRow.Pool == null)
                 return;
-            var url = poolRow.Pool.HealthCheckSettings.GetReportAnalysisLink(Registry.HealthCheckDiagnosticDomainName);
+            var url = poolRow.Pool.HealthCheckSettings().GetReportAnalysisLink(Registry.HealthCheckDiagnosticDomainName);
             if (!string.IsNullOrEmpty(url))
                 Program.OpenURL(url);
         }

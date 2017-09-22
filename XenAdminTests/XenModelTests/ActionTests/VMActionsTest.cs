@@ -40,7 +40,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
     {
         protected override CreateVMFastAction NewAction()
         {
-            VM template = GetAnyUserTemplate(VmIsInstant);
+            VM template = GetAnyUserTemplate(vm => vm.InstantTemplate());
             return new CreateVMFastAction(template.Connection, template, false);
         }
 
@@ -52,11 +52,6 @@ namespace XenAdminTests.XenModelTests.ActionTests
                 return false;
 
             return vm.power_state == vm_power_state.Halted;
-        }
-
-        private bool VmIsInstant(VM vm)
-        {
-            return vm.InstantTemplate;
         }
     }
 }

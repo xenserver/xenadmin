@@ -170,8 +170,8 @@ namespace XenAdminTests.CommandTests
                           foreach (DataGridViewRow row in dataGridView.Rows)
                           {
                               var curRow = row;//closure
-                              VM vm = curSelection.AsXenObjects<VM>().Find(v => v.Name == curRow.Cells[1].Value.ToString());
-                              Assert.IsFalse(vm.virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED), "PV drivers installed on " + vm + " but it couldn't suspend.");
+                              VM vm = curSelection.AsXenObjects<VM>().Find(v => v.Name() == curRow.Cells[1].Value.ToString());
+                              Assert.IsFalse(vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED), "PV drivers installed on " + vm + " but it couldn't suspend.");
                           }
                           TestUtils.GetButton(dialog, "btnClose").PerformClick();
                       });

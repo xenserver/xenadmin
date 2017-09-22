@@ -73,13 +73,13 @@ namespace XenAdmin.Dialogs
             PvsSite = (PVS_site) clone;
             if (PvsSite != null)
             {
-                textBox1.Text = PvsSite.Name;
+                textBox1.Text = PvsSite.Name();
                 pvsConfigInfoIcon.Visible = pvsConfigInfoLabel.Visible = string.IsNullOrEmpty(PvsSite.PVS_uuid);
             }
             else
             {
                 // Generate list of all taken PVS_site names
-                List<string> takenNames = new List<PVS_site>(connection.Cache.PVS_sites).ConvertAll(s => s.Name);
+                List<string> takenNames = new List<PVS_site>(connection.Cache.PVS_sites).ConvertAll(s => s.Name());
                 takenNames.AddRange(knownSiteNames);
 
                 // Generate a unique suggested name for the new site
@@ -179,7 +179,7 @@ namespace XenAdmin.Dialogs
 
         private bool NameHasChanged
         {
-            get { return PvsSite == null || textBox1.Text != PvsSite.Name; }
+            get { return PvsSite == null || textBox1.Text != PvsSite.Name(); }
         }
         
         private void SomethingChanged(object sender, EventArgs e)

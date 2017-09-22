@@ -60,7 +60,7 @@ namespace XenAdminTests.Controls
             public string ExpectedFailureDescription;
             public override string ToString()
             {
-                return String.Format("SR: {0}, Affinity {1}", Sr.name_label, Affinity.Name);
+                return String.Format("SR: {0}, Affinity {1}", Sr.name_label, Affinity.Name());
             }
         }
 
@@ -401,13 +401,13 @@ namespace XenAdminTests.Controls
 
         private SR GetLocalSr(string hostName)
         {
-            List<SR> local = DatabaseManager.ConnectionFor(dbName).Cache.SRs.Where(s => s.IsLocalSR).ToList();
+            List<SR> local = DatabaseManager.ConnectionFor(dbName).Cache.SRs.Where(s => s.IsLocalSR()).ToList();
             return local.FirstOrDefault(s => s.GetStorageHost().name_label == hostName && s.name_label == "Local storage");
         }
 
         private SR GetLocalISOSr(string hostName)
         {
-            List<SR> local = DatabaseManager.ConnectionFor(dbName).Cache.SRs.Where(s => s.IsLocalSR).ToList();
+            List<SR> local = DatabaseManager.ConnectionFor(dbName).Cache.SRs.Where(s => s.IsLocalSR()).ToList();
             SR sr = local.FirstOrDefault(s => s.GetStorageHost().name_label == hostName && s.name_label.Contains("DVD"));
             return sr;
         }
@@ -441,10 +441,10 @@ namespace XenAdminTests.Controls
         public void LunPerVDIDisablesSrPickerItem()
         {
             Mock<SR> sr = ObjectManager.NewXenObject<SR>(id);
-            sr.Setup(i => i.HBALunPerVDI).Returns(true);
+            sr.Setup(i => i.HBALunPerVDI()).Returns(true);
             SrPickerItem spi = new SrPickerItemTest(sr.Object);
             Assert.That(spi.Show, Is.False);
-            sr.Verify(a=>a.HBALunPerVDI, Times.Once());
+            sr.Verify(a=>a.HBALunPerVDI(), Times.Once());
         }
     }
 }

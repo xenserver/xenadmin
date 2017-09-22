@@ -51,9 +51,9 @@ namespace XenAdmin.Controls.GPU
             : this()
         {
             this.xenObject = xenObject;
-            pGpuLabel.Text = pGpuList[0].Name;
+            pGpuLabel.Text = pGpuList[0].Name();
             RepopulateAllowedTypes(pGpuList[0]);
-            vGpuCapability = !Helpers.FeatureForbidden(xenObject, Host.RestrictVgpu) && pGpuList[0].HasVGpu;
+            vGpuCapability = !Helpers.FeatureForbidden(xenObject, Host.RestrictVgpu) && pGpuList[0].HasVGpu();
             Rebuild(pGpuList);
             SetupPage();
         }
@@ -88,7 +88,7 @@ namespace XenAdmin.Controls.GPU
                 // add host label if needed
                 if (showingHostLabel && (hostRef == null || pgpu.host.opaque_ref != hostRef.opaque_ref))
                 {
-                    AddHostLabel(new Label { Text = String.Format(Messages.GPU_ON_HOST_LABEL, host.Name)}, ref index);
+                    AddHostLabel(new Label { Text = String.Format(Messages.GPU_ON_HOST_LABEL, host.Name())}, ref index);
                     hostRef = pgpu.host;
                 }
 
@@ -271,7 +271,7 @@ namespace XenAdmin.Controls.GPU
         public void UpdateDetails()
         {
             ImageCell.Value = EnabledType ? Resources._000_Tick_h32bit_16 : Resources._000_Abort_h32bit_16;
-            NameCell.Value = VGpuType.Name;
+            NameCell.Value = VGpuType.Name();
         }
     }
 }

@@ -500,8 +500,8 @@ namespace XenAdmin.Wizards.DRWizards
                     if (!inUse)
                         LoadPoolMetadata(vdi);
                     else
-                        log.DebugFormat("This metadata VDI is in use: '{0}' (UUID='{1}', SR='{2})'; will not attempt to load metadata from it", vdi.Name,
-                                       vdi.uuid, Connection.Resolve(vdi.SR).Name);
+                        log.DebugFormat("This metadata VDI is in use: '{0}' (UUID='{1}', SR='{2})'; will not attempt to load metadata from it", vdi.Name(),
+                                       vdi.uuid, Connection.Resolve(vdi.SR).Name());
                 }
             }
         }
@@ -582,9 +582,9 @@ namespace XenAdmin.Wizards.DRWizards
                 Sr = sr;
 
                 var cellTick = new DataGridViewCheckBoxCell { Value = selected };
-                var cellName = new DataGridViewTextBoxCell { Value = sr.Name };
-                var cellDesc = new DataGridViewTextBoxCell { Value = sr.Description };
-                var cellType = new DataGridViewTextBoxCell { Value = sr.FriendlyTypeName };
+                var cellName = new DataGridViewTextBoxCell { Value = sr.Name() };
+                var cellDesc = new DataGridViewTextBoxCell { Value = sr.Description() };
+                var cellType = new DataGridViewTextBoxCell { Value = sr.FriendlyTypeName() };
                 var cellMetadata = new DataGridViewTextBoxCell { Value = poolMetadataDetected.ToStringI18n() };
                 Cells.AddRange(cellTick, cellName, cellDesc, cellType, cellMetadata);
             }
@@ -616,7 +616,7 @@ namespace XenAdmin.Wizards.DRWizards
                 get
                 {
                     if (Sr != null)
-                        return Sr.Name;
+                        return Sr.Name();
                     return SrInfo != null ? SrInfo.Name : string.Empty;
                 }
             }

@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = string.Format(Messages.CREATING_VM_APPLIANCE, _record.Name);
+            Description = string.Format(Messages.CREATING_VM_APPLIANCE, _record.Name());
             RelatedTask = VM_appliance.async_create(Session, _record);
             PollToCompletion();
             var vmApplianceRef = new XenRef<VM_appliance>(Result);
@@ -61,7 +61,7 @@ namespace XenAdmin.Actions
             {
                 VM.set_appliance(Session, selectedVM.opaque_ref, vmApplianceRef.opaque_ref);
             }
-            Description = string.Format(Messages.CREATED_VM_APPLIANCE, _record.Name);
+            Description = string.Format(Messages.CREATED_VM_APPLIANCE, _record.Name());
             PercentComplete = 100;
         }
     }

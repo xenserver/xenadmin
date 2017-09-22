@@ -181,7 +181,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             TemplatesGridView.Rows.Clear();
 
             foreach (TemplatesGridViewItem item in rows)
-                item.Visible = searchTextBox1.Matches(item.Template.Name);
+                item.Visible = searchTextBox1.Matches(item.Template.Name());
 
             TemplatesGridView.Rows.AddRange(rows.ToArray());
             RowsChanged();
@@ -210,16 +210,16 @@ namespace XenAdmin.Wizards.NewVMWizard
             {
                 TemplatesGridViewItem item = (TemplatesGridViewItem)TemplatesGridView.SelectedRows[0];
 
-                if (item.Template.DescriptionType == VM.VmDescriptionType.None)
+                if (item.Template.DescriptionType() == VM.VmDescriptionType.None)
                     DescriptionBox.Visible = false;
                 else
                 {
-                    var description = item.Template.Description;
+                    var description = item.Template.Description();
                     DescriptionLabel.Text = string.IsNullOrEmpty(description) ? Messages.TEMPLATE_NO_DESCRIPTION : description;
                     DescriptionBox.Visible = true;
                 }
 
-                checkBoxCopyBiosStrings.Enabled = item.Template.DefaultTemplate && item.Template.IsHVM;
+                checkBoxCopyBiosStrings.Enabled = item.Template.DefaultTemplate() && item.Template.IsHVM();
             }
 
             OnPageUpdated();
@@ -235,7 +235,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                 TemplatesGridViewItem item = (TemplatesGridViewItem)TemplatesGridView.SelectedRows[0];
                 if (!checkBoxPreviouslyEnabled || !checkBoxCopyBiosStrings.Enabled)
                 {
-                    checkBoxCopyBiosStrings.Checked = item.Template.BiosStringsCopied;
+                    checkBoxCopyBiosStrings.Checked = item.Template.BiosStringsCopied();
                 }
             }
         }
@@ -254,7 +254,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     return (xScore - yScore);
                 else
                 {
-                    int result = StringUtility.NaturalCompare(xItem.Template.Name, yItem.Template.Name);
+                    int result = StringUtility.NaturalCompare(xItem.Template.Name(), yItem.Template.Name());
                     if (result != 0)
                         return result;
                     else
@@ -271,18 +271,18 @@ namespace XenAdmin.Wizards.NewVMWizard
             public TemplatesGridViewItem(VM template)
             {
                 Template = template;
-
-                SortOrder = (int)template.TemplateType;
-                if (template.IsHidden)
+                var typ = template.TemplateType();
+                SortOrder = (int)typ;
+                if (template.IsHidden())
                     SortOrder += (int)VM.VmTemplateType.Count;
 
                 var ImageCell = new DataGridViewImageCell(false)
                                     {
                                         ValueType = typeof(Image),
-                                        Value = template.TemplateType.ToBitmap()
+                                        Value = typ.ToBitmap()
                                     };
-                var TypeCell = new DataGridViewTextBoxCell { Value = template.TemplateType.ToDisplayString() };
-                var NameCell = new DataGridViewTextBoxCell { Value = template.Name };
+                var TypeCell = new DataGridViewTextBoxCell { Value = typ.ToDisplayString() };
+                var NameCell = new DataGridViewTextBoxCell { Value = template.Name() };
 
                 Cells.AddRange(ImageCell, NameCell, TypeCell);
             }

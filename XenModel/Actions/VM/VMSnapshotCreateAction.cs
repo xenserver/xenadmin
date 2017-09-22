@@ -51,7 +51,7 @@ namespace XenAdmin.Actions
         private String taskResult = null;
         private Func<VM,String,String,Image> _screenShotProvider; // 3 parameters: vm, username, password (username and password can be null)
         public VMSnapshotCreateAction(VM vm, string NewName, string newDescription, SnapshotType type,Func<VM,String,String,Image> screenShotProvider )
-            : base(vm.Connection, String.Format(Messages.ACTION_VM_SNAPSHOT_TITLE, vm.Name))
+            : base(vm.Connection, String.Format(Messages.ACTION_VM_SNAPSHOT_TITLE, vm.Name()))
         {
             this.VM = vm;
             this.NewName = NewName;

@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             get 
             { 
-                return SelectedServers.Select(host => Helpers.GetPool(host.Connection)).Where(pool => pool != null).Distinct().ToList();
+                return SelectedServers.Select(host => Helpers.GetPoolOfOne(host.Connection)).Where(pool => pool != null).Distinct().ToList();
             }
         }
 
@@ -131,9 +131,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     string patchName = null;
                     if (Patch != null)
-                        patchName = Patch.Name;
+                        patchName = Patch.Name();
                     if (PoolUpdate != null)
-                        patchName = PoolUpdate.Name;
+                        patchName = PoolUpdate.Name();
 
                     labelPrechecksFirstLine.Text = patchName != null
                         ? string.Format(Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE, patchName)
@@ -649,7 +649,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     description = _check.SuccessfulCheckDescription;
                     if (string.IsNullOrEmpty(description))
-                        description = String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name, _check.Description);
+                        description = String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name(), _check.Description);
                 }
                 
                 if (description != string.Empty)

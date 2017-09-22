@@ -49,7 +49,7 @@ namespace XenAdmin.Network
         public static Bond GetMasterManagementBond(IXenConnection conn)
         {
             PIF pif = GetMasterManagementPIF(conn);
-            return pif == null ? null : pif.BondMasterOf;
+            return pif == null ? null : pif.BondMasterOf();
         }
 
         private static PIF GetMasterManagementPIF(IXenConnection conn)
@@ -80,7 +80,7 @@ namespace XenAdmin.Network
             List<PIF> result = new List<PIF>();
             foreach (PIF pif in host.Connection.ResolveAll(host.PIFs))
             {
-                if (!pif.IsBondNIC && pif.IsPhysical)
+                if (!pif.IsBondNIC() && pif.IsPhysical())
                     result.Add(pif);
             }
 
@@ -239,7 +239,7 @@ namespace XenAdmin.Network
         public static PIF CopyIPConfig(PIF src, PIF dest)
         {
             PIF result = (PIF)dest.Clone();
-            result.ManagementPurpose = src.ManagementPurpose;
+            result.SetManagementPurspose(src.GetManagementPurpose());
             result.ip_configuration_mode = src.ip_configuration_mode;
             result.IP = src.IP;
             result.netmask = src.netmask;

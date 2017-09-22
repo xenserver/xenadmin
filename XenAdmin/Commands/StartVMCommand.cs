@@ -87,7 +87,7 @@ namespace XenAdmin.Commands
                         SR sr = null;
                         if (vdi != null)
                             sr = vm.Connection.Resolve<SR>(vdi.SR);
-                        if (vdi == null || sr.IsBroken(true) || sr.IsDetached)
+                        if (vdi == null || sr.IsBroken(true) || sr.IsDetached())
                         {
                             if (!brokenCDs.ContainsKey(vm))
                             {

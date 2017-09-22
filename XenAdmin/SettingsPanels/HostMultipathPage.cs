@@ -68,7 +68,7 @@ namespace XenAdmin.SettingsPanels
 
                 Host_metrics metrics = host.Connection.Resolve(host.metrics);
 
-                return host.MaintenanceMode || (metrics != null && !metrics.live);
+                return host.MaintenanceMode() || (metrics != null && !metrics.live);
             }
         }
 
@@ -101,7 +101,7 @@ namespace XenAdmin.SettingsPanels
             if (host == null)
                 return;
 
-            multipathCheckBox.Checked = host.MultipathEnabled;
+            multipathCheckBox.Checked = host.MultipathEnabled();
         }
 
         public AsyncAction SaveSettings()
@@ -129,7 +129,7 @@ namespace XenAdmin.SettingsPanels
         {
             get
             {
-                return multipathCheckBox.Checked != host.MultipathEnabled;
+                return multipathCheckBox.Checked != host.MultipathEnabled();
             }
         }
 

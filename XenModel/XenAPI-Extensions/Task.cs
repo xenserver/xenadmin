@@ -171,19 +171,16 @@ namespace XenAPI
             }
         }
 
-       
+
 
         /// <summary>
         /// A list of OpaqueRefs of objects to which the current task applies.  This is set
         /// by one XenCenter instance, and picked up by other ones.
         /// </summary>
-        public List<string> AppliesTo
+        public List<string> AppliesTo()
         {
-            get
-            {
-                string s = Get(other_config, "applies_to");
-                return s == null ? ExportAppliesTo() : new List<string>(s.Split(','));
-            }
+            string s = Get(other_config, "applies_to");
+            return s == null ? ExportAppliesTo() : new List<string>(s.Split(','));
         }
 
         private List<string> ExportAppliesTo()
@@ -235,12 +232,9 @@ namespace XenAPI
             }
         }
 
-        public string XenCenterUUID
+        public string XenCenterUUID()
         {
-            get
-            {
-                return Get(other_config, "XenCenterUUID");
-            }
+            return Get(other_config, "XenCenterUUID");
         }
 
         public static void SetXenCenterUUID(Session session, string _task, string uuid)
@@ -284,34 +278,30 @@ namespace XenAPI
         /// <summary>
         /// True if the task should be completely hidden (i.e. Name == null).
         /// </summary>
-        public bool Hidden
+        public override bool IsHidden()
         {
-            get
-            {
-                return  Name == null;
-            }
+            return Name() == null;
         }
 
         /// <summary>
         /// The friendly name to use for this task, or null
         /// if this task is to be completely hidden (e.g. SR.scan).
         /// </summary>
-        public override string Name
+        public override string Name()
         {
-            get
-            {
-                string nl = name_label.Replace("Async.", "");
-                return
-                    nl.StartsWith(XapiExportPrefix) ? ExportName():
-                    Names.ContainsKey(nl) ?           Names[nl] :
-                    other_config.ContainsKey("ShowInXenCenter") ? name_label :
-                                                      null;
-            }
+            string nl = name_label.Replace("Async.", "");
+            return nl.StartsWith(XapiExportPrefix)
+                ? ExportName()
+                : Names.ContainsKey(nl)
+                    ? Names[nl]
+                    : other_config.ContainsKey("ShowInXenCenter")
+                        ? name_label
+                        : null;
         }
 
-        public override string Description
+        public override string Description()
         {
-            get { return name_description; }
+            return name_description;
         }
 
         private string ExportName()
@@ -327,22 +317,24 @@ namespace XenAPI
         /// The title to use for this task, or null
         /// if this task is to be completely hidden (e.g. SR.scan).
         /// </summary>
-        public string Title
+        public string Title()
         {
-            get
+            string nl = name_label.Replace("Async.", "");
+            if (nl.StartsWith(XapiExportPrefix))
+                return ExportName();
+            if (AppliesTo() != null && Titles.ContainsKey(nl))
             {
-                string nl = name_label.Replace("Async.", "");
-                if (nl.StartsWith(XapiExportPrefix))
-                    return ExportName();
-                if (AppliesTo != null && Titles.ContainsKey(nl))
+                try
                 {
-                    try { return string.Format(Titles[nl], (object[])GetAppliesToNames().ToArray()); }
-                    catch { }  // can crash if GetAppliesToNames() can't find enough names: CA-29493
+                    return string.Format(Titles[nl], (object[])GetAppliesToNames().ToArray());
                 }
-                if (Names.ContainsKey(nl))
-                    return Names[nl];
-                return null;
+                catch
+                {
+                } // can crash if GetAppliesToNames() can't find enough names: CA-29493
             }
+            if (Names.ContainsKey(nl))
+                return Names[nl];
+            return null;
         }
 
         private List<string> GetAppliesToNames()
@@ -351,7 +343,8 @@ namespace XenAPI
             VM vm = null;
             Host host1 = null;
             Host host2 = null;
-            foreach (string r in AppliesTo)
+            var appliesTo = AppliesTo();
+            foreach (string r in appliesTo)
             {
                 VM _vm = Connection.Resolve(new XenRef<VM>(r));
                 if (_vm != null)

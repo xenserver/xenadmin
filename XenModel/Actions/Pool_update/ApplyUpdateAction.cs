@@ -49,7 +49,7 @@ namespace XenAdmin.Actions
         private string output = "";
 
         public ApplyUpdateAction(Pool_update update, Host host)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, update.Name, host.Name))
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, update.Name(), host.Name()))
         {
             this.update = update;
             this.host = host;
@@ -67,9 +67,9 @@ namespace XenAdmin.Actions
         {
             try
             {
-                this.Description = String.Format(Messages.APPLYING_PATCH, update.Name, host.Name);
+                this.Description = String.Format(Messages.APPLYING_PATCH, update.Name(), host.Name());
 
-                output += String.Format(Messages.APPLY_PATCH_LOG_MESSAGE, update.Name, host.Name);
+                output += String.Format(Messages.APPLY_PATCH_LOG_MESSAGE, update.Name(), host.Name());
                 
                 var poolUpdates = new List<Pool_update>(Connection.Cache.Pool_updates);
                 var poolUpdate = poolUpdates.FirstOrDefault(u => u != null && string.Equals(u.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
@@ -81,11 +81,11 @@ namespace XenAdmin.Actions
                 {
                     Pool_update.apply(Session, poolUpdate.opaque_ref, host.opaque_ref);
 
-                    this.Description = String.Format(Messages.PATCH_APPLIED, update.Name, host.Name);
+                    this.Description = String.Format(Messages.PATCH_APPLIED, update.Name(), host.Name());
                 }
                 else
                 {
-                    this.Description = String.Format(Messages.PATCH_APPLIED, update.Name, host.Name);
+                    this.Description = String.Format(Messages.PATCH_APPLIED, update.Name(), host.Name());
                 }
             }
             catch (Failure f)

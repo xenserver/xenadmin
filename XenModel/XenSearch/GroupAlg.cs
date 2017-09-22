@@ -116,18 +116,18 @@ namespace XenAdmin.XenSearch
 
                 // Hide VMs on non-live hosts
                 Host host = vm.Home();
-                if (host != null && !host.IsLive)
+                if (host != null && !host.IsLive())
                     return true;
             }
             else if (o is SR)
             {
                 SR sr = o as SR;
-                if (!sr.Show(XenAdminConfigManager.Provider.ShowHiddenVMs) || sr.IsToolsSR)
+                if (!sr.Show(XenAdminConfigManager.Provider.ShowHiddenVMs) || sr.IsToolsSR())
                     return true;
 
                 // Hide SRs on non-live hosts
-                Host host = sr.Home;
-                if (host != null && !host.IsLive)
+                Host host = sr.Home();
+                if (host != null && !host.IsLive())
                     return true;
             }
             else if (o is XenAPI.Network)
@@ -230,7 +230,7 @@ namespace XenAdmin.XenSearch
             if (o is Host)
                 return "30";
             VM vm = o as VM;
-            if (vm != null && vm.is_a_real_vm)
+            if (vm != null && vm.is_a_real_vm())
                 return "40";
             return o.GetType().ToString();
         }

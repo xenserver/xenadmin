@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
         {
             foreach (var vmAppliance in _selectedToDelete)
             {
-                Description = string.Format(Messages.DELETING_VM_APPLIANCE, vmAppliance.Name);
+                Description = string.Format(Messages.DELETING_VM_APPLIANCE, vmAppliance.Name());
                 foreach (var vmref in vmAppliance.VMs)
                 {
                     VM.set_appliance(Session, vmref.opaque_ref, null);

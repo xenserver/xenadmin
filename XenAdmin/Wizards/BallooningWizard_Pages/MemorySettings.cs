@@ -69,7 +69,7 @@ namespace XenAdmin.Wizards.BallooningWizard_Pages
             {
                 // Use any VM to decide which UI to show: they all have the same memory settings
                 if (!alreadyChosen)
-                    ChooseControls(value == null ? false : value[0].advanced_ballooning);
+                    ChooseControls(value != null && value.Count > 0 && value[0].advanced_ballooning());
                 alreadyChosen = true;
                 memoryControls.VMs = value;
             }

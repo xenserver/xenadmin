@@ -123,7 +123,7 @@ namespace XenAdmin.SettingsPanels
                 if (picker.SelectedAffinity == null)
                     return Messages.NONE_DEFINED;
 
-                return host.Name;
+                return host.Name();
             }
         }
 

@@ -85,16 +85,16 @@ namespace XenAdmin.Commands
 
         private bool CanBeMigrated(VDI vdi)
         {
-            if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType || vdi.cbt_enabled)
+            if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType() || vdi.cbt_enabled)
                 return false;
 
             if(vdi.Connection.ResolveAll(vdi.VBDs).Count == 0)
                 return false;
-            if(vdi.GetVMs().Any(vm=>!vm.IsRunning) && !Helpers.DundeeOrGreater(vdi.Connection))
+            if (vdi.GetVMs().Any(vm => !vm.IsRunning()) && !Helpers.DundeeOrGreater(vdi.Connection))
                 return false;
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
-            if (sr == null || sr.HBALunPerVDI)
+            if (sr == null || sr.HBALunPerVDI())
                 return false;
             if (Helpers.DundeePlusOrGreater(vdi.Connection) && !sr.allowed_operations.Contains(storage_operations.vdi_mirror))
                 return false;
@@ -112,19 +112,19 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_VDI_IS_SNAPSHOT;
             if (vdi.Locked)
                 return Messages.CANNOT_MOVE_VDI_IN_USE;
-            if (vdi.IsHaType)
+            if (vdi.IsHaType())
                 return Messages.CANNOT_MOVE_HA_VD;
             if (vdi.cbt_enabled)
                 return Messages.CANNOT_MOVE_CBT_ENABLED_VDI;
-            if (vdi.IsMetadataForDR)
+            if (vdi.IsMetadataForDR())
                 return Messages.CANNOT_MOVE_DR_VD;
-            if (vdi.GetVMs().Any(vm => !vm.IsRunning) && !Helpers.DundeeOrGreater(vdi.Connection))
+            if (vdi.GetVMs().Any(vm => !vm.IsRunning()) && !Helpers.DundeeOrGreater(vdi.Connection))
                 return Messages.CANNOT_MIGRATE_VDI_NON_RUNNING_VM;
 
             SR sr = vdi.Connection.Resolve(vdi.SR);
             if (sr == null)
                 return base.GetCantExecuteReasonCore(item);
-            if (sr.HBALunPerVDI)
+            if (sr.HBALunPerVDI())
                 return Messages.UNSUPPORTED_SR_TYPE;
             if (Helpers.DundeePlusOrGreater(vdi.Connection) && !sr.allowed_operations.Contains(storage_operations.vdi_mirror))
                 return Messages.UNSUPPORTED_SR_TYPE;

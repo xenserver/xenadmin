@@ -122,7 +122,7 @@ namespace XenAdmin.ConsoleView
         [DefaultValue(false)]
         public bool UserWantsToSwitchProtocol { get; set; }
 
-        private bool hasRDP { get { return Source != null ? Source.HasRDP : false; } }
+        private bool hasRDP { get { return Source != null && Source.HasRDP(); } }
 
         /// <summary>
         /// Whether we have tried to login without providing a password (covers the case where the user
@@ -204,7 +204,7 @@ namespace XenAdmin.ConsoleView
                 Dictionary<string, string> newNetworks = (sender as VM_guest_metrics).networks;
                 if (!equateDictionary<string, string>(newNetworks, cachedNetworks))
                 {
-                    Log.InfoFormat("Detected IP address change in vm {0}, repolling for VNC/RDP...", Source.Name);
+                    Log.InfoFormat("Detected IP address change in vm {0}, repolling for VNC/RDP...", Source.Name());
 
                     cachedNetworks = newNetworks;
 
@@ -370,7 +370,7 @@ namespace XenAdmin.ConsoleView
                         {
                             if (pif == null)
                                 ipAddressesForNetworksWithoutPifs.Add(networkInfo.Value);
-                            else if (pif.LinkStatus == PIF.LinkState.Connected)
+                            else if (pif.LinkStatus() == PIF.LinkState.Connected)
                                 ipAddresses.Add(networkInfo.Value);
                         }
                         else
@@ -379,7 +379,7 @@ namespace XenAdmin.ConsoleView
                             {
                                 if (pif == null)
                                     ipv6AddressesForNetworksWithoutPifs.Add(String.Format("[{0}]", networkInfo.Value));
-                                else if (pif.LinkStatus == PIF.LinkState.Connected)
+                                else if (pif.LinkStatus() == PIF.LinkState.Connected)
                                     ipv6Addresses.Add(String.Format("[{0}]", networkInfo.Value));
                             }
                             else
@@ -589,7 +589,7 @@ namespace XenAdmin.ConsoleView
         internal bool MustConnectRemoteDesktop()
         {
             return (UseVNC || string.IsNullOrEmpty(rdpIP)) &&
-                Source.HasGPUPassthrough && Source.power_state == vm_power_state.Running;
+                Source.HasGPUPassthrough() && Source.power_state == vm_power_state.Running;
         }
 
         private void SetKeyboardAndMouseCapture(bool value)
@@ -706,7 +706,7 @@ namespace XenAdmin.ConsoleView
                 {
                     value.PropertyChanged += new PropertyChangedEventHandler(VM_PropertyChanged);
 
-                    sourceIsPV = !value.IsHVM;
+                    sourceIsPV = !value.IsHVM();
                     
                     startPolling();
 
@@ -727,13 +727,13 @@ namespace XenAdmin.ConsoleView
                 if (Source == null)
                     return null;
 
-                if (Source.IsControlDomainZero)
-                    return string.Format(Messages.CONSOLE_HOST, Source.AffinityServerString);
+                if (Source.IsControlDomainZero())
+                    return string.Format(Messages.CONSOLE_HOST, Source.AffinityServerString());
                 
                 if (Source.is_control_domain)
-                    return string.Format(Messages.CONSOLE_HOST_NUTANIX, Source.AffinityServerString);
+                    return string.Format(Messages.CONSOLE_HOST_NUTANIX, Source.AffinityServerString());
                 
-                return Source.Name;
+                return Source.Name();
             }
         }
 
@@ -765,9 +765,9 @@ namespace XenAdmin.ConsoleView
                 }
 
                 //Start the polling again
-                if (Source != null && !Source.IsControlDomainZero)
+                if (Source != null && !Source.IsControlDomainZero())
                 {
-                    if (!Source.IsHVM)
+                    if (!Source.IsHVM())
                     {
                         connectionPoller = new Timer(PollVNCPort, null, RETRY_SLEEP_TIME, RDP_POLL_INTERVAL);
                     }

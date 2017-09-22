@@ -93,7 +93,7 @@ namespace XenAdmin.Alerts
                 List<string> names = new List<string>();
 
                 foreach (Host host in hosts)
-                    names.Add(host.Name);
+                    names.Add(host.Name());
 
                 foreach (IXenConnection connection in connections)
                     names.Add(Helpers.GetName(connection));

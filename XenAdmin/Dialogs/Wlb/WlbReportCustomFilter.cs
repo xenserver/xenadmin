@@ -137,7 +137,7 @@ namespace XenAdmin.Dialogs.Wlb
 
                     foreach(Host host in _hosts)
                     {
-                        this.comboBoxTags.Items.Add(host.Name);
+                        this.comboBoxTags.Items.Add(host.Name());
                     }
                     this.comboBoxTags.SelectedIndex = 0;
                     break;
@@ -154,7 +154,7 @@ namespace XenAdmin.Dialogs.Wlb
                     {
                         ListViewItem lvItem = new ListViewItem();
                         lvItem.Tag = vm;
-                        lvItem.SubItems.Add(vm.Name);
+                        lvItem.SubItems.Add(vm.Name());
                         if (this.checkBoxCheckAll.Checked)
                         {
                             lvItem.Checked = true;

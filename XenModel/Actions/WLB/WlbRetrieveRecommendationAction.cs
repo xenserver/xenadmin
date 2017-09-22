@@ -47,7 +47,7 @@ namespace XenAdmin.Actions.Wlb
         public Dictionary<XenRef<VM>, string[]> WLBOptPoolRecommendations = new Dictionary<XenRef<VM>, string[]>();
 
         public WlbRetrieveRecommendationAction(Pool pool)
-            : base(pool.Connection, "Retrieving recommendations for pool " + pool.Name, true)
+            : base(pool.Connection, "Retrieving recommendations for pool " + pool.Name(), true)
         {
             if (pool == null)
                 throw new ArgumentNullException("pool");
@@ -63,9 +63,9 @@ namespace XenAdmin.Actions.Wlb
         {
             try
             {
-                log.Debug("Retrieving recommendations for pool " + Pool.Name);
+                log.Debug("Retrieving recommendations for pool " + Pool.Name());
                 this.WLBOptPoolRecommendations = XenAPI.Pool.retrieve_wlb_recommendations(Session);
-                log.Debug("Success retrieving recommendations for pool " + Pool.Name);
+                log.Debug("Success retrieving recommendations for pool " + Pool.Name());
 
                 //Retrieving the recommendations was successful, so update the WlbServerState to report the current state
                 //  This is here in case there was a previous communication error which has been fixed.

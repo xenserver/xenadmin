@@ -79,7 +79,7 @@ namespace XenAdminTests.WizardTests.tampa_cpm_one_and_two_host_pools
         {
             IXenConnection connection = GetAnyConnection(c => c.Name == SourcePool);
             return new CrossPoolMigrateWizard(connection,
-                new List<SelectedItem> { new SelectedItem(GetAnyVM(v => v.Name == Vm)) }, WizardMode.Migrate);
+                new List<SelectedItem> { new SelectedItem(GetAnyVM(v => v.Name() == Vm)) }, WizardMode.Migrate);
         }
 
         protected override void TestPage(string pageName)
@@ -99,7 +99,7 @@ namespace XenAdminTests.WizardTests.tampa_cpm_one_and_two_host_pools
         {
             foreach(IEnableableXenObjectComboBoxItem item in cb.Items)
             {
-                if (item.Item.Name == itemName)
+                if (item.Item.Name() == itemName)
                 {
                     cb.SelectedItem = item;
                     return;

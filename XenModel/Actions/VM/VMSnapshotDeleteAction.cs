@@ -41,7 +41,7 @@ namespace XenAdmin.Actions
 
         private VM m_Snapshot;
         public VMSnapshotDeleteAction(VM snapshot)
-            : base(snapshot.Connection, String.Format(Messages.ACTION_VM_DELETE_SNAPSHOT_TITLE, snapshot.Name))
+            : base(snapshot.Connection, String.Format(Messages.ACTION_VM_DELETE_SNAPSHOT_TITLE, snapshot.Name()))
         {
             this.VM = Connection.Resolve<VM>(snapshot.snapshot_of);
             this.m_Snapshot = snapshot;
@@ -49,13 +49,13 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            Description = String.Format(Messages.ACTION_VM_DELETE_SNAPSHOT_TITLE, m_Snapshot.Name);
+            Description = String.Format(Messages.ACTION_VM_DELETE_SNAPSHOT_TITLE, m_Snapshot.Name());
             if (m_Snapshot.power_state == vm_power_state.Suspended)
             {
                 XenAPI.VM.hard_shutdown(Session, m_Snapshot.opaque_ref);
             }
             VMDestroyAction.DestroyVM(Session, m_Snapshot, true);
-            Description = String.Format(Messages.SNAPSHOT_DELETED, m_Snapshot.Name);
+            Description = String.Format(Messages.SNAPSHOT_DELETED, m_Snapshot.Name());
         }
     }
 }

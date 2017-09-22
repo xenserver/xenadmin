@@ -34,14 +34,13 @@ using XenAdmin.Wizards.NewPolicyWizard;
 
 namespace XenAdminTests.WizardTests.cowleyPolicies_xml
 {
-
     [TestFixture, Category(TestCategories.UICategoryB)]
     class NewPolicyWizardTest : WizardTest<NewPolicyWizard>
     {
         public NewPolicyWizardTest()
-            : base(new string[] { "Schedule Name", "VMs in the snapshot schedule", "Snapshot Type", "Snapshot schedule","Finish" }
-            , true, false)
-        { }
+            : base(new[] {"Schedule Name", "Virtual Machines", "Snapshot Type", "Snapshot Schedule", "Finish"}, true, false)
+        {
+        }
 
         protected override NewPolicyWizard NewWizard()
         {
@@ -52,7 +51,7 @@ namespace XenAdminTests.WizardTests.cowleyPolicies_xml
         {
             if (pageName == "Schedule Name")
             {
-                MW(() => (TestUtils.GetTextBox(wizard, "xenTabPagePolicy.textBoxName")).Text = "policy");
+                MW(() => TestUtils.GetTextBox(wizard, "xenTabPagePolicy.textBoxName").Text = "policy");
             }
         }
     }

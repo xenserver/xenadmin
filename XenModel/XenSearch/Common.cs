@@ -333,17 +333,14 @@ namespace XenAdmin.XenSearch
             
             properties[PropertyNames.vendor_device_state] = delegate(IXenObject o)
             {
-                return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
-                {
-                    return (bool?)vm.WindowsUpdateCapable;
-                });
+                return GetForRealVM(o, (vm, conn) => (bool?)vm.WindowsUpdateCapable());
             };
 
             properties[PropertyNames.virtualisation_status] = delegate(IXenObject o)
                 {
                     return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
                                         {
-                                            var status = vm.GetVirtualisationStatus;
+                                            var status = vm.GetVirtualisationStatus();
                                             if (!status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                                                 return null;
                                             return status;
@@ -404,7 +401,7 @@ namespace XenAdmin.XenSearch
                                             // when searching in a pre-Boston pool for VMs with HA restart priority = Restart, the search will return VMs with restart priority = AlwaysRestartHighPriority or AlwaysRestart
                                             if (vm.HaPriorityIsRestart()) 
                                                 return VM.HA_Restart_Priority.Restart;
-                                            return vm.HARestartPriority;
+                                            return vm.HARestartPriority();
                                         });
                 };
 
@@ -440,10 +437,7 @@ namespace XenAdmin.XenSearch
 
             properties[PropertyNames.read_caching_enabled] = delegate(IXenObject o)
             {
-                return GetForRealVM(o, delegate(VM vm, IXenConnection conn)
-                    {
-                        return Helpers.CreamOrGreater(conn) ? (bool?)vm.ReadCachingEnabled : null;
-                    });
+                return GetForRealVM(o, (vm, conn) => Helpers.CreamOrGreater(conn) ? (bool?)vm.ReadCachingEnabled() : null);
             };
 
             properties[PropertyNames.connection_hostname] = ConnectionHostnameProperty;
@@ -483,13 +477,13 @@ namespace XenAdmin.XenSearch
         private static IComparable DescriptionProperty(IXenObject o)
         {
             VM vm = o as VM;
-            if (vm != null && vm.DescriptionType == VM.VmDescriptionType.None)
+            if (vm != null && vm.DescriptionType() == VM.VmDescriptionType.None)
             {
                 //return string.Empty instead of null, or it prints hyphens and looks ugly
                 return string.Empty;
             }
 
-            return o.Description;
+            return o.Description();
         }
         
         private static IComparable SizeProperty(IXenObject o)
@@ -507,12 +501,12 @@ namespace XenAdmin.XenSearch
         private static IComparable UptimeProperty(IXenObject o)
         {
             VM vm = o as VM;
-            if (vm != null && vm.is_a_real_vm)
-                return vm.RunningTime;
+            if (vm != null && vm.is_a_real_vm())
+                return vm.RunningTime();
 
             Host host = o as Host;
             if (host != null)
-                return host.Uptime;
+                return host.Uptime();
 
             return null;
         }
@@ -520,7 +514,7 @@ namespace XenAdmin.XenSearch
         private static IComparable CPUTextProperty(IXenObject o)
         {
             VM vm = o as VM;
-            if (vm != null && vm.is_a_real_vm)
+            if (vm != null && vm.is_a_real_vm())
             {
                 if (vm.power_state != vm_power_state.Running)
                     return null;
@@ -543,7 +537,7 @@ namespace XenAdmin.XenSearch
         private static IComparable CPUValueProperty(IXenObject o)
         {
             VM vm = o as VM;
-            if (vm != null && vm.is_a_real_vm)
+            if (vm != null && vm.is_a_real_vm())
             {
                 if (vm.power_state != vm_power_state.Running)
                     return null;
@@ -568,11 +562,11 @@ namespace XenAdmin.XenSearch
             return Switch<IComparable>(o,
                 delegate(VM vm)
                 {
-                    if (vm.not_a_real_vm ||
+                    if (vm.not_a_real_vm() ||
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    if (!vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageString(vm);
@@ -602,11 +596,11 @@ namespace XenAdmin.XenSearch
             return Switch<IComparable>(o,
                 delegate(VM vm)
                 {
-                    if (vm.not_a_real_vm ||
+                    if (vm.not_a_real_vm() ||
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    if (!vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageRank(vm);
@@ -636,11 +630,11 @@ namespace XenAdmin.XenSearch
             return Switch<IComparable>(o,
                 delegate(VM vm)
                 {
-                    if (vm.not_a_real_vm ||
+                    if (vm.not_a_real_vm() ||
                         vm.power_state != vm_power_state.Running)
                         return null;
 
-                    if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
+                    if (!vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.MANAGEMENT_INSTALLED))
                         return null;
 
                     return PropertyAccessorHelper.vmMemoryUsageValue(vm);
@@ -670,11 +664,11 @@ namespace XenAdmin.XenSearch
             VM vm = o as VM;
             if (vm != null)
             {
-                if (vm.not_a_real_vm ||
+                if (vm.not_a_real_vm() ||
                     vm.power_state != vm_power_state.Running)
                     return null;
 
-                if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                if (!vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                     return null;
 
                 return PropertyAccessorHelper.vmNetworkUsageString(vm);
@@ -695,13 +689,13 @@ namespace XenAdmin.XenSearch
         private static IComparable DiskTextProperty(IXenObject o)
         {
             VM vm = o as VM;
-            if (vm == null || vm.not_a_real_vm)
+            if (vm == null || vm.not_a_real_vm())
                 return null;
 
             if (vm.power_state != vm_power_state.Running)
                 return null;
 
-            if (!vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+            if (!vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
                 return null;
 
             return PropertyAccessorHelper.vmDiskUsageString(vm);
@@ -800,7 +794,7 @@ namespace XenAdmin.XenSearch
         private static IComparable IsNotFullyUpgradedProperty(IXenObject o)
         {
             Pool pool = o as Pool;
-            return pool == null ? null : (IComparable)(!pool.IsPoolFullyUpgraded);
+            return pool == null ? null : (IComparable)(!pool.IsPoolFullyUpgraded());
         }
 
         private static IComparable TypeProperty(IXenObject o)
@@ -814,7 +808,7 @@ namespace XenAdmin.XenSearch
                 }
                 else if (vm.is_a_template)
                 {
-                    return vm.DefaultTemplate ? ObjectTypes.DefaultTemplate : ObjectTypes.UserTemplate;
+                    return vm.DefaultTemplate() ? ObjectTypes.DefaultTemplate : ObjectTypes.UserTemplate;
                 }
                 else if (vm.is_control_domain)
                 {
@@ -840,7 +834,7 @@ namespace XenAdmin.XenSearch
             else if (o is SR)
             {
                 SR sr = o as SR;
-                return sr.IsLocalSR ? ObjectTypes.LocalSR : ObjectTypes.RemoteSR;
+                return sr.IsLocalSR() ? ObjectTypes.LocalSR : ObjectTypes.RemoteSR;
             }
             else if (o is XenAPI.Network)
             {
@@ -869,7 +863,7 @@ namespace XenAdmin.XenSearch
             if (o is VM)
             {
                 VM vm = o as VM;
-                if (vm.not_a_real_vm)
+                if (vm.not_a_real_vm())
                     return null;
 
                 foreach (VIF vif in vm.Connection.ResolveAll(vm.VIFs))
@@ -880,8 +874,6 @@ namespace XenAdmin.XenSearch
 
                     networks.Add(network);
                 }
-
-
             }
             else if (o is XenAPI.Network)
             {
@@ -961,11 +953,7 @@ namespace XenAdmin.XenSearch
             {
                 vms.Add(((DockerContainer)o).Parent);
             }
-            vms.RemoveAll(new Predicate<VM>(delegate(VM vm)
-                {
-                    return vm.not_a_real_vm;
-                }
-                              ));
+            vms.RemoveAll(vm => vm.not_a_real_vm());
             return vms;
         }
 
@@ -1003,7 +991,7 @@ namespace XenAdmin.XenSearch
             }
             else if (o is SR)
             {
-                Host host = ((SR)o).Home;
+                Host host = ((SR)o).Home();
                 if (host != null)
                     hosts.Add(host);
             }
@@ -1025,7 +1013,7 @@ namespace XenAdmin.XenSearch
                 if (sr == null)
                     return null;
 
-                hosts.Add(sr.Home);
+                hosts.Add(sr.Home());
             }
             else if (o is DockerContainer)
             {
@@ -1045,7 +1033,7 @@ namespace XenAdmin.XenSearch
             if (o is VM)
             {
                 VM vm = o as VM;
-                if (vm.not_a_real_vm)
+                if (vm.not_a_real_vm())
                     return null;
 
                 foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
@@ -1090,7 +1078,7 @@ namespace XenAdmin.XenSearch
             else if (o is VM)
             {
                 VM vm = o as VM;
-                if (vm.not_a_real_vm)
+                if (vm.not_a_real_vm())
                     return null;
 
                 foreach (VBD vbd in vm.Connection.ResolveAll(vm.VBDs))
@@ -1111,7 +1099,7 @@ namespace XenAdmin.XenSearch
             if (o is VM)
             {
                 VM vm = o as VM;
-                if (vm.not_a_real_vm)
+                if (vm.not_a_real_vm())
                     return null;
 
                 VM_guest_metrics metrics = vm.Connection.Resolve(vm.guest_metrics);
@@ -1154,7 +1142,7 @@ namespace XenAdmin.XenSearch
             {
                 SR sr = (SR)o;
 
-                string target = sr.Target;
+                string target = sr.Target();
                 if (!string.IsNullOrEmpty(target))
                 {
                     ComparableAddress ipAddress;
@@ -1170,7 +1158,7 @@ namespace XenAdmin.XenSearch
         private static IComparable GetForRealVM(IXenObject o, VMGetter getter)
         {
             VM vm = o as VM;
-            if (vm == null || vm.not_a_real_vm)
+            if (vm == null || vm.not_a_real_vm())
                 return null;
             return getter(vm, vm.Connection);
         }

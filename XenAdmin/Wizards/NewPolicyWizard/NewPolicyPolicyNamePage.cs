@@ -37,42 +37,19 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 {
     public partial class NewPolicyPolicyNamePage : XenTabPage
     {
-        private readonly string _tabName;
-        private readonly string _tabTitle;
-
-        public NewPolicyPolicyNamePage(string pageText, string pageTextMore, string tabName, string tabTitle, string nameFieldText)
+        public NewPolicyPolicyNamePage()
         {
             InitializeComponent();
-            this.labelwizard.Text = pageText;
-            this.autoHeightLabel1.Text = pageTextMore;
-            this.label2.Text = nameFieldText;
-            _tabName = tabName;
-            _tabTitle = tabTitle;
         }
+
         public override string Text
         {
-            get
-            {
-                return _tabName;
-            }
-        }
-
-        public string SubText
-        {
-            get { return string.Empty; }
-        }
-
-        public Image Image
-        {
-            get { return Resources.edit_16; }
+            get { return Messages.VMSS_NAME; }
         }
 
         public override string PageTitle
         {
-            get
-            {
-                return _tabTitle;
-            }
+            get { return Messages.VMSS_NAME_TITLE; }
         }
 
         public override string HelpID
