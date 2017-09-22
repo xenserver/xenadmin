@@ -47,7 +47,7 @@ namespace XenAdmin.Dialogs
         {
             InitializeComponent();
             xc = connection;
-            labelBlurb.Text = String.Format(Messages.RECONNECT_AS_BLURB, Helpers.GetName(connection).Ellipsise(30), connection.Session.UserFriendlyName.Ellipsise(30));
+            labelBlurb.Text = String.Format(Messages.RECONNECT_AS_BLURB, Helpers.GetName(connection).Ellipsise(30), connection.Session.UserFriendlyName().Ellipsise(30));
         }
 
         private void SetButtonEnablement()

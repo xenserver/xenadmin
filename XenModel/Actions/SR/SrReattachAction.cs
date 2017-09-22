@@ -84,7 +84,7 @@ namespace XenAdmin.Actions
             foreach (Host host in Connection.Cache.Hosts)
             {
                 // Create the PBD
-                log.DebugFormat("Creating PBD for host {0}", host.Name);
+                log.DebugFormat("Creating PBD for host {0}", host.Name());
                 this.Description = String.Format(Messages.ACTION_SR_REPAIR_CREATE_PBD, Helpers.GetName(host));
                 pbdTemplate.host = new XenRef<Host>(host.opaque_ref);
                 RelatedTask = PBD.async_create(this.Session, pbdTemplate);
@@ -92,7 +92,7 @@ namespace XenAdmin.Actions
                 XenRef<PBD> pbdRef = new XenRef<PBD>(this.Result);
 
                 // Now plug the PBD
-                log.DebugFormat("Plugging PBD for host {0}", host.Name);
+                log.DebugFormat("Plugging PBD for host {0}", host.Name());
                 this.Description = String.Format(Messages.ACTION_SR_REPAIR_PLUGGING_PBD, Helpers.GetName(host));
                 RelatedTask = PBD.async_plug(this.Session, pbdRef);
                 PollToCompletion(PercentComplete, PercentComplete + delta);

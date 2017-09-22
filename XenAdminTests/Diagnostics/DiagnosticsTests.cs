@@ -183,7 +183,7 @@ namespace XenAdminTests.Diagnostics
             host.other_config = new Dictionary<string, string>();
             //Maintenance mode
             host.other_config.Add("MAINTENANCE_MODE", hostMaintenanceMode.ToString().ToLower());
-            Assert.AreEqual(hostMaintenanceMode,host.MaintenanceMode);
+            Assert.AreEqual(hostMaintenanceMode,host.MaintenanceMode());
             fake.Setup(x => x.Resolve(It.IsAny<XenRef<Host_metrics>>())).Returns(metric);
             //Host enabled
             host.enabled = hostEnabled;

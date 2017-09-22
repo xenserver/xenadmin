@@ -64,12 +64,12 @@ namespace XenAdminTests.Controls
 
             //Setup the remainder of the mocks to return true for enabled
             Mock<SR> sr = ObjectManager.NewXenObject<SR>(id);
-            sr.Setup(s => s.HBALunPerVDI).Returns(IsLunPerVdi);
+            sr.Setup(s => s.HBALunPerVDI()).Returns(IsLunPerVdi);
             sr.Setup(s => s.ShowInVDISRList(false)).Returns(true); //ShowHiddenVDIs == true
 
             SrPickerLunPerVDIItem item = new SrPickerLunPerVDIItemNoImage(sr.Object);
             Assert.That(item.Show, Is.True);
-            sr.Verify(s=>s.HBALunPerVDI, Times.Never());
+            sr.Verify(s=>s.HBALunPerVDI(), Times.Never());
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace XenAdminTests.Controls
         public void SrVmPickerItemCanBeEnabledChecksSrType(bool IsLunPerVdi)
         {
             Mock<SR> sr = ObjectManager.NewXenObject<SR>(id);
-            sr.Setup(s => s.HBALunPerVDI).Returns(IsLunPerVdi);
+            sr.Setup(s => s.HBALunPerVDI()).Returns(IsLunPerVdi);
             sr.Setup(s => s.ShowInVDISRList(false)).Returns(true); //ShowHiddenVDIs == true
             
             //Below sets CanBeEnabled for the picker items to be true
@@ -90,7 +90,7 @@ namespace XenAdminTests.Controls
 
             //Expect only one call to this method as the Unsupported SR call is overridden in SrPickerLunPerVDIItem 
             //This one call coms from SrPickerLunPerVDIItem's CanBeEnabled
-            sr.Verify(s => s.HBALunPerVDI, Times.Once());
+            sr.Verify(s => s.HBALunPerVDI(), Times.Once());
         }
     }
 }

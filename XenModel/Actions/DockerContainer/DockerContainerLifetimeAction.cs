@@ -67,7 +67,7 @@ namespace XenAdmin.Actions
             }
             catch (Failure failure)
             {
-                log.WarnFormat("Plugin call xscontainer.start({0}) on {1} failed with {2}", dockerContainer.uuid, host.Name,
+                log.WarnFormat("Plugin call xscontainer.start({0}) on {1} failed with {2}", dockerContainer.uuid, host.Name(),
                     failure.Message);
                 throw;
             }
@@ -76,7 +76,7 @@ namespace XenAdmin.Actions
                 Description = endDescription;
             else
             {
-                log.WarnFormat("Plugin call xscontainer.start({0}) on {1} failed with {2}", dockerContainer.uuid, host.Name, Result);
+                log.WarnFormat("Plugin call xscontainer.start({0}) on {1} failed with {2}", dockerContainer.uuid, host.Name(), Result);
                 Exception = new Exception(Result ?? Messages.ERROR_UNKNOWN);
             }
         }
@@ -89,7 +89,7 @@ namespace XenAdmin.Actions
     {
         public StartDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    string.Format(Messages.ACTION_START_CONTAINER_TITLE, dockerContainer.Name),
+                    string.Format(Messages.ACTION_START_CONTAINER_TITLE, dockerContainer.Name()),
                     Messages.ACTION_START_CONTAINER_DESCRIPTION, 
                     Messages.ACTION_START_CONTAINER_END_DESCRIPTION, 
                     "start")
@@ -103,7 +103,7 @@ namespace XenAdmin.Actions
     {
         public StopDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    string.Format(Messages.ACTION_STOP_CONTAINER_TITLE, dockerContainer.Name),
+                    string.Format(Messages.ACTION_STOP_CONTAINER_TITLE, dockerContainer.Name()),
                     Messages.ACTION_STOP_CONTAINER_DESCRIPTION,
                     Messages.ACTION_STOP_CONTAINER_END_DESCRIPTION,
                     "stop")
@@ -117,7 +117,7 @@ namespace XenAdmin.Actions
     {
         public PauseDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    string.Format(Messages.ACTION_PAUSE_CONTAINER_TITLE, dockerContainer.Name),
+                    string.Format(Messages.ACTION_PAUSE_CONTAINER_TITLE, dockerContainer.Name()),
                     Messages.ACTION_PAUSE_CONTAINER_DESCRIPTION,
                     Messages.ACTION_PAUSE_CONTAINER_END_DESCRIPTION,
                     "pause")
@@ -131,7 +131,7 @@ namespace XenAdmin.Actions
     {
         public ResumeDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    string.Format(Messages.ACTION_RESUME_CONTAINER_TITLE, dockerContainer.Name),
+                    string.Format(Messages.ACTION_RESUME_CONTAINER_TITLE, dockerContainer.Name()),
                     Messages.ACTION_RESUME_CONTAINER_DESCRIPTION,
                     Messages.ACTION_RESUME_CONTAINER_END_DESCRIPTION,
                     "unpause")
@@ -145,7 +145,7 @@ namespace XenAdmin.Actions
     {
         public RestartDockerContainerAction(DockerContainer dockerContainer)
             : base(dockerContainer,
-                    string.Format(Messages.ACTION_RESTART_CONTAINER_TITLE, dockerContainer.Name),
+                    string.Format(Messages.ACTION_RESTART_CONTAINER_TITLE, dockerContainer.Name()),
                     Messages.ACTION_RESTART_CONTAINER_DESCRIPTION,
                     Messages.ACTION_RESTART_CONTAINER_END_DESCRIPTION,
                     "restart")

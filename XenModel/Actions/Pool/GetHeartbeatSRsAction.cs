@@ -75,7 +75,7 @@ namespace XenAdmin.Actions
             {
                 try
                 {
-                    if (!sr.shared || sr.IsToolsSR)
+                    if (!sr.shared || sr.IsToolsSR())
                     {
                         // SR is unsuitable for heartbeating
                         continue;

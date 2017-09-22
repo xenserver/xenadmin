@@ -101,7 +101,7 @@ namespace XenAdmin.Commands
                 connection.Hostname = host.address;
                 connection.Username = host.Connection.Username;
                 connection.Password = host.Connection.Password;
-                connection.FriendlyName = host.Name;
+                connection.FriendlyName = host.Name();
 
                 lock (ConnectionsManager.ConnectionsLock)
                 {
@@ -135,7 +135,7 @@ namespace XenAdmin.Commands
             if (host != null && host.Connection != null )
             {
                 Pool pool = Helpers.GetPool(host.Connection);
-                return pool != null /*&& pool.master != host.opaque_ref*/ && host.resident_VMs != null && host.resident_VMs.Count < 2 && host.IsLive;
+                return pool != null && host.resident_VMs != null && host.resident_VMs.Count < 2 && host.IsLive();
             }
             return false;
         }
@@ -244,8 +244,8 @@ namespace XenAdmin.Commands
                     
                     if (selection.Count == 1)
                     {
-                        return string.Format(Messages.MAINWINDOW_CONFIRM_REMOVE_FROM_POOL, host.Name.Ellipsise(500),
-                                             Helpers.GetName(pool).Ellipsise(500), host.Name.Ellipsise(500));
+                        return string.Format(Messages.MAINWINDOW_CONFIRM_REMOVE_FROM_POOL, host.Name().Ellipsise(500),
+                                             Helpers.GetName(pool).Ellipsise(500), host.Name().Ellipsise(500));
                     }
 
                     return string.Format(Messages.MAINWINDOW_CONFIRM_REMOVE_FROM_POOL_MULTIPLE,

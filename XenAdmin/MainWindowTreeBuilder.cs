@@ -389,39 +389,39 @@ namespace XenAdmin
 
             private VirtualTreeNode AddVMNode(VM vm)
             {
-                bool hidden = vm.IsHidden;
-                string name = hidden ? String.Format(Messages.X_HIDDEN, vm.Name) : vm.Name;
+                bool hidden = vm.IsHidden();
+                string name = hidden ? String.Format(Messages.X_HIDDEN, vm.Name()) : vm.Name();
 
                 return AddNode(name, Images.GetIconFor(vm), hidden, vm);
             }
 
             private VirtualTreeNode AddDockerContainerNode(DockerContainer cont)
             {
-                return AddNode(cont.Name.Ellipsise(1000), Images.GetIconFor(cont), cont.IsHidden, cont);
+                return AddNode(cont.Name().Ellipsise(1000), Images.GetIconFor(cont), cont.IsHidden(), cont);
             }
 
-			private VirtualTreeNode AddVmApplianceNode(VM_appliance appliance)
-			{
-				return AddNode(appliance.Name, Images.GetIconFor(appliance), false, appliance);
-			}
+            private VirtualTreeNode AddVmApplianceNode(VM_appliance appliance)
+            {
+                return AddNode(appliance.Name(), Images.GetIconFor(appliance), false, appliance);
+            }
 
             private VirtualTreeNode AddHostNode(Host host)
             {
-                return AddNode(host.Name, Images.GetIconFor(host), false, host);
+                return AddNode(host.Name(), Images.GetIconFor(host), false, host);
             }
 
             private VirtualTreeNode AddSRNode(SR sr)
             {
-                bool hidden = sr.IsHidden;
-                String name = hidden ? String.Format(Messages.X_HIDDEN, sr.NameWithoutHost) : sr.NameWithoutHost;
+                bool hidden = sr.IsHidden();
+                String name = hidden ? String.Format(Messages.X_HIDDEN, sr.NameWithoutHost()) : sr.NameWithoutHost();
                 return AddNode(name, Images.GetIconFor(sr), hidden, sr);
             }
 
             private VirtualTreeNode AddNetworkNode(XenAPI.Network network)
             {
-                bool hidden = network.IsHidden;
-                bool slave = network.IsSlave;
-                string rawName = network.Name;
+                bool hidden = network.IsHidden();
+                bool slave = network.IsSlave();
+                string rawName = network.Name();
                 String name = slave
                                   ? String.Format(Messages.NIC_SLAVE, rawName)
                                   : hidden
@@ -432,13 +432,13 @@ namespace XenAdmin
 
             private VirtualTreeNode AddVDINode(VDI vdi)
             {
-                String name = String.IsNullOrEmpty(vdi.Name) ? Messages.NO_NAME : vdi.Name;
+                String name = String.IsNullOrEmpty(vdi.Name()) ? Messages.NO_NAME : vdi.Name();
                 return AddNode(name, Images.GetIconFor(vdi), false, vdi);
             }
 
             private VirtualTreeNode AddFolderNode(Folder folder)
             {
-                return AddNode(folder.Name, Images.GetIconFor(folder), false, folder);
+                return AddNode(folder.Name(), Images.GetIconFor(folder), false, folder);
             }
 
             private VirtualTreeNode AddNode(string name, Icons icon, bool grayed, object obj)

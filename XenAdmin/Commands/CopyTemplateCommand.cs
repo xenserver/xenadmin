@@ -79,7 +79,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(VM vm)
         {
-            if (vm != null && vm.is_a_template && !vm.is_a_snapshot && !vm.Locked && vm.allowed_operations != null && !vm.InternalTemplate)
+            if (vm != null && vm.is_a_template && !vm.is_a_snapshot && !vm.Locked && vm.allowed_operations != null && !vm.InternalTemplate())
             {
                 if (CrossPoolCopyTemplateCommand.CanExecute(vm, null))
                     return true;

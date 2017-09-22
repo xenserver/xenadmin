@@ -261,6 +261,9 @@
   <data name="COULD_NOT_IMPORT_DATABASE" xml:space="preserve">
     <value>An error occurred while attempting to import a database from a metadata VDI</value>
   </data>
+  <data name="COULD_NOT_UPDATE_IGMP_SNOOPING_EVERYWHERE" xml:space="preserve">
+    <value>The IGMP Snooping setting cannot be applied for some of the host, network(s).</value>
+  </data>
   <data name="CPU_FEATURE_MASKING_NOT_SUPPORTED" xml:space="preserve">
     <value>The CPU does not support masking of features.</value>
   </data>

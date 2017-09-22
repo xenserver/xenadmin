@@ -77,9 +77,9 @@ namespace XenAdmin.Wizards
             List<string> brokenSRs = new List<string>();
             foreach (SR sr in xenConnection.Cache.SRs)
             {
-                if (sr.HasPBDs && sr.IsBroken() && !sr.IsToolsSR && sr.shared)
+                if (sr.HasPBDs() && sr.IsBroken() && !sr.IsToolsSR() && sr.shared)
                 {
-                    brokenSRs.Add(sr.NameWithoutHost);
+                    brokenSRs.Add(sr.NameWithoutHost());
                 }
             }
 
@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards
         {
             if (senderPage.GetType() == typeof(AssignPriorities))
             {
-                xenTabPageHaFinish.HeartbeatSrName = xenTabPageChooseSR.SelectedHeartbeatSR.Name;
+                xenTabPageHaFinish.HeartbeatSrName = xenTabPageChooseSR.SelectedHeartbeatSR.Name();
                 xenTabPageHaFinish.Ntol = xenTabPageAssignPriorities.Ntol;
 
                 int alwaysRestartHighPriority = 0, alwaysRestart = 0, bestEffort = 0, doNotRestart = 0;

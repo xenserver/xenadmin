@@ -77,14 +77,14 @@ namespace XenAdmin.Actions
                 foreach (VM vm in startupOptions.Keys)
                 {
                     // Set new VM restart priority and ha_always_run
-                    log.DebugFormat("Setting HA priority on {0} to {1}", vm.Name, startupOptions[vm].HaRestartPriority);
+                    log.DebugFormat("Setting HA priority on {0} to {1}", vm.Name(), startupOptions[vm].HaRestartPriority);
                     XenAPI.VM.SetHaRestartPriority(this.Session, vm, (VM.HA_Restart_Priority)startupOptions[vm].HaRestartPriority);
 
                     // Set new VM order and start_delay
-                    log.DebugFormat("Setting start order on {0} to {1}", vm.Name, startupOptions[vm].Order);
+                    log.DebugFormat("Setting start order on {0} to {1}", vm.Name(), startupOptions[vm].Order);
                     XenAPI.VM.set_order(this.Session, vm.opaque_ref, startupOptions[vm].Order);
 
-                    log.DebugFormat("Setting start order on {0} to {1}", vm.Name, startupOptions[vm].StartDelay);
+                    log.DebugFormat("Setting start order on {0} to {1}", vm.Name(), startupOptions[vm].StartDelay);
                     XenAPI.VM.set_start_delay(this.Session, vm.opaque_ref, startupOptions[vm].StartDelay);
 
                     this.PercentComplete = (int)(++i * increment);
@@ -100,11 +100,11 @@ namespace XenAdmin.Actions
             {
                 refs.Add(new XenRef<SR>(sr.opaque_ref));
             }
-            log.Debug("Enabling HA for pool " + Pool.Name);
+            log.Debug("Enabling HA for pool " + Pool.Name());
             // NB the line below also performs a pool db sync
             RelatedTask = XenAPI.Pool.async_enable_ha(this.Session, refs, new Dictionary<string, string>());
             PollToCompletion(15, 100);
-            log.Debug("Success enabling HA on pool " + Pool.Name);
+            log.Debug("Success enabling HA on pool " + Pool.Name());
 
             this.Description = Messages.COMPLETED;
         }

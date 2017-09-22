@@ -120,13 +120,13 @@ namespace XenAdmin.Controls
             // get the logged in username from the session to update the logged in label
             if (connection.Session.IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(connection).external_auth_type != Auth.AUTH_TYPE_AD)
             {
-                labelUsername.Text = connection.Session.UserFriendlyName;
+                labelUsername.Text = connection.Session.UserFriendlyName();
             }
             else
             {
                 labelUsername.Text = string.Format("{0} ({1})", 
-                    connection.Session.UserFriendlyName, 
-                    connection.Session.FriendlySingleRoleDescription); ;
+                    connection.Session.UserFriendlyName(), 
+                    connection.Session.FriendlySingleRoleDescription());
             }
         }
 

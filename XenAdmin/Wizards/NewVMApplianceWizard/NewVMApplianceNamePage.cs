@@ -100,8 +100,8 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
 
         private void RefreshTab(VM_appliance vmAppliance)
         {
-            textBoxName.Text = vmAppliance.Name;
-            textBoxDescription.Text = vmAppliance.Description;
+            textBoxName.Text = vmAppliance.Name();
+            textBoxDescription.Text = vmAppliance.Description();
             labelwizard.Visible = false;
         }
 

@@ -212,7 +212,7 @@ namespace XenAdmin.Wizards.GenericPages
 						else if (type == typeof(Host))
                             mapping.XenRef = new XenRef<Host>(selectedItem.Item.opaque_ref);
 
-                        mapping.TargetName = selectedItem.Item.Name;
+                        mapping.TargetName = selectedItem.Item.Name();
 					}
 				}
 

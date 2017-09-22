@@ -120,7 +120,7 @@ namespace XenAdminTests.TabsAndMenus
         public void Tabs_UserTemplate()
         {
             EnsureChecked(MainWindowWrapper.ViewMenuItems.TemplatesToolStripMenuItem);
-            foreach (VM vm in GetAllXenObjects<VM>(v =>!v.IsHidden &&v.is_a_template && !v.DefaultTemplate && !v.is_a_snapshot))
+            foreach (VM vm in GetAllXenObjects<VM>(v =>!v.IsHidden() &&v.is_a_template && !v.DefaultTemplate() && !v.is_a_snapshot))
             {
                 VerifyTabs(vm, UserTemplateTabs);
             }
@@ -130,7 +130,7 @@ namespace XenAdminTests.TabsAndMenus
         public void Tabs_SR()
         {
             EnsureChecked(MainWindowWrapper.ViewMenuItems.LocalStorageToolStripMenuItem);
-            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR))
+            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR()))
             {
                 VerifyTabs(sr, SRTabs);
             }
@@ -159,7 +159,7 @@ namespace XenAdminTests.TabsAndMenus
             PutInNavigationMode(NavigationPane.NavigationMode.Objects);
             try
             {
-                VerifyTabs(GetAnyVDI(v => ( v.name_label != "base copy" && !v.IsHidden )), VDITabs);
+                VerifyTabs(GetAnyVDI(v => v.name_label != "base copy" && !v.IsHidden()), VDITabs);
             }
             finally
             {
@@ -268,7 +268,7 @@ namespace XenAdminTests.TabsAndMenus
         {
             foreach (VM vm in GetAllXenObjects<VM>(HasTools))
             {
-                if(vm.Name.Contains("22")) //Skip over the slave servers VMs 
+                if(vm.Name().Contains("22")) //Skip over the slave servers VMs 
                     continue;
 
                 List<ExpectedMenuItem> expectedMenuItems = new List<ExpectedMenuItem>();

@@ -54,13 +54,13 @@ namespace XenAdmin.Actions.Wlb
         {
             try
             {
-                log.Debug("Retrieving Workload Balancing configuration for pool " + Pool.Name);
+                log.Debug("Retrieving Workload Balancing configuration for pool " + Pool.Name());
                 this.WlbConfiguration = XenAPI.Pool.retrieve_wlb_configuration(this.Session);
 
                 if (this.WlbConfiguration.Count == 0)
                 {
                     //We didn;t get a configuration, so there is somethign wrong
-                    log.Debug("Failure retrieving Workload Balancing configuration on pool " + Pool.Name);
+                    log.Debug("Failure retrieving Workload Balancing configuration on pool " + Pool.Name());
                     this.Description = Messages.FAILED;
                     Failure f = new Failure(FriendlyErrorNames.WLB_NOT_INITIALIZED);
                     throw f;
@@ -70,7 +70,7 @@ namespace XenAdmin.Actions.Wlb
                 {
 
 
-                    log.Debug("Success retrieving Workload Balancing configuration on pool " + Pool.Name);
+                    log.Debug("Success retrieving Workload Balancing configuration on pool " + Pool.Name());
                     this.Description = Messages.COMPLETED;
 
                     //Retrieving the configuration was successful, so update the WlbServerState to report the current state

@@ -51,7 +51,7 @@ namespace XenAdmin.Controls.DataGridViewEx
     /// </summary>
     public abstract class PoolHostDataGridViewOneCheckboxRow : CollapsingPoolHostDataGridViewRow
     {
-        private class DataGridViewNameCell : DataGridViewExNameCell
+        private class DataGridViewNameCell : DataGridViewTextBoxCell
         {
             protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
             {

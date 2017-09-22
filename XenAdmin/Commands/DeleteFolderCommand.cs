@@ -141,7 +141,7 @@ namespace XenAdmin.Commands
                         msg = Messages.DELETE_FOLDER_CONFIRM_SUBFOLDERS;
                     }
 
-                    return string.Format(msg, folder.Name);
+                    return string.Format(msg, folder.Name());
                 }
                 else
                 {

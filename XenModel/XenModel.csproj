@@ -134,7 +134,7 @@
     <Compile Include="Actions\VMAppliances\DestroyVMApplianceAction.cs" />
     <Compile Include="Actions\VMAppliances\ShutDownApplianceAction.cs" />
     <Compile Include="Actions\VMAppliances\StartApplianceAction.cs" />
-    <Compile Include="Actions\VMSS\GetVMSSAlertsAction.cs" />
+    <Compile Include="Actions\VMSS\LoadVmssAction.cs" />
     <Compile Include="Actions\VM\ChangeMemorySettingsAction.cs" />
     <Compile Include="Actions\VM\CreateCdDriveAction.cs" />
     <Compile Include="Actions\VM\CreateVMAction.cs" />
@@ -366,6 +366,7 @@
     <Compile Include="XenAPI\PCI.cs" />
     <Compile Include="XenAPI\PGPU.cs" />
     <Compile Include="XenAPI\pgpu_dom0_access.cs" />
+    <Compile Include="XenAPI\pif_igmp_status.cs" />
     <Compile Include="XenAPI\pool_allowed_operations.cs" />
     <Compile Include="XenAPI\Pool_update.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />

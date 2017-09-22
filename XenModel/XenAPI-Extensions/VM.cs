@@ -46,10 +46,6 @@ using System.Text.RegularExpressions;
 
 namespace XenAPI
 {
-    public enum SnapshotsView
-    {
-        ListView, TreeView, None
-    }
     public partial class VM : IComparable<VM>
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -65,38 +61,30 @@ namespace XenAPI
         public const int DEFAULT_CORES_PER_SOCKET = 1;
         public const long MAX_SOCKETS = 16;  // current hard limit in Xen: CA-198276
 
-        private SnapshotsView _snapshotView = SnapshotsView.None;
-
         private XmlDocument xdRecommendations = null;
 
-        public int MaxVCPUsAllowed
+        public int MaxVCPUsAllowed()
         {
-            get
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return DEFAULT_NUM_VCPUS_ALLOWED;
+
+            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='vcpus-max']");
+
+            try
             {
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
-                    return DEFAULT_NUM_VCPUS_ALLOWED;
-
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='vcpus-max']");
-
-                try
-                {
-                    return Convert.ToInt32(xn.Attributes["max"].Value);
-                }
-                catch
-                {
-                    return DEFAULT_NUM_VCPUS_ALLOWED;
-                }
+                return Convert.ToInt32(xn.Attributes["max"].Value);
+            }
+            catch
+            {
+                return DEFAULT_NUM_VCPUS_ALLOWED;
             }
         }
 
-        public bool IsRunning
+        public bool IsRunning()
         {
-            get
-            {
-                return power_state == vm_power_state.Running;
-            }
+            return power_state == vm_power_state.Running;
         }
 
         /// <summary>
@@ -106,15 +94,11 @@ namespace XenAPI
         /// <param name="session"></param>
         /// <param name="vm"></param>
         /// <returns></returns>
-        public bool HasSavedRestartPriority
+        public bool HasSavedRestartPriority()
         {
-            get
-            {
-                Pool pool = Helpers.GetPoolOfOne(Connection);
-                return pool != null && pool.ha_enabled && !String.IsNullOrEmpty(ha_restart_priority);
-            }
+            Pool pool = Helpers.GetPoolOfOne(Connection);
+            return pool != null && pool.ha_enabled && !String.IsNullOrEmpty(ha_restart_priority);
         }
-
 
         /// <summary>
         /// Get the given VM's home, i.e. the host under which we are going to display it.  May return null, if this VM should live
@@ -140,31 +124,28 @@ namespace XenAPI
                 return storage_host;
 
             Host affinityHost = Connection.Resolve(affinity);
-            if (affinityHost != null && affinityHost.IsLive)
+            if (affinityHost != null && affinityHost.IsLive())
                 return affinityHost;
 
             return null;
         }
 
 
-        public long TotalVMSize
+        public long TotalVMSize()
         {
-            get
+            long size = 0;
+            foreach (VBD vbd in Connection.ResolveAll<VBD>(VBDs))
             {
-                long size = 0;
-                foreach (VBD vbd in Connection.ResolveAll<VBD>(VBDs))
-                {
-                    if (vbd.type == vbd_type.CD)
-                        continue;
+                if (vbd.type == vbd_type.CD)
+                    continue;
 
-                    VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
-                    if (vdi == null)
-                        continue;
+                VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
+                if (vdi == null)
+                    continue;
 
-                    size += vdi.physical_utilisation;
-                }
-                return size;
+                size += vdi.physical_utilisation;
             }
+            return size;
         }
 
         public VBD FindVMCDROM()
@@ -172,7 +153,7 @@ namespace XenAPI
             if (Connection == null)
                 return null;
 
-            List<VBD> vbds = Connection.ResolveAll(VBDs).FindAll(delegate(VBD vbd) { return vbd.IsCDROM; });
+            List<VBD> vbds = Connection.ResolveAll(VBDs).FindAll(vbd => vbd.IsCDROM());
 
             if (vbds.Count > 0)
             {
@@ -199,83 +180,71 @@ namespace XenAPI
             return null;
         }
 
-        public override string Name
+        public override string Name()
         {
-            get
+            const string CONTROL_DOMAIN = "Control domain on host: ";
+            if (name_label != null && name_label.StartsWith(CONTROL_DOMAIN))
             {
-                const string CONTROL_DOMAIN = "Control domain on host: ";
-                if (name_label != null && name_label.StartsWith(CONTROL_DOMAIN))
-                {
-                    var hostName = name_label.Substring(CONTROL_DOMAIN.Length);
-                    return string.Format(Messages.CONTROL_DOM_ON_HOST, hostName);
-                }
-                return name_label;
+                var hostName = name_label.Substring(CONTROL_DOMAIN.Length);
+                return string.Format(Messages.CONTROL_DOM_ON_HOST, hostName);
+            }
+            return name_label;
+        }
+
+        public long MaxMemAllowed()
+        {
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return DEFAULT_MEM_ALLOWED;
+
+            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
+
+            try
+            {
+                return Convert.ToInt64(xn.Attributes["max"].Value);
+            }
+            catch
+            {
+                return DEFAULT_MEM_ALLOWED;
             }
         }
 
-        public long MaxMemAllowed
+        public int MaxVIFsAllowed()
         {
-            get
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return DEFAULT_NUM_VIFS_ALLOWED;
+
+            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
+
+            try
             {
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
-                    return DEFAULT_MEM_ALLOWED;
-
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='memory-static-max']");
-
-                try
-                {
-                    return Convert.ToInt64(xn.Attributes["max"].Value);
-                }
-                catch
-                {
-                    return DEFAULT_MEM_ALLOWED;
-                }
+                return Convert.ToInt32(xn.Attributes["max"].Value);
+            }
+            catch
+            {
+                return DEFAULT_NUM_VIFS_ALLOWED;
             }
         }
 
-        public int MaxVIFsAllowed
+        public int MaxVBDsAllowed()
         {
-            get
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return DEFAULT_NUM_VBDS_ALLOWED;
+
+            XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
+
+            try
             {
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
-                    return DEFAULT_NUM_VIFS_ALLOWED;
-
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='number-of-vifs']");
-
-                try
-                {
-                    return Convert.ToInt32(xn.Attributes["max"].Value);
-                }
-                catch
-                {
-                    return DEFAULT_NUM_VIFS_ALLOWED;
-                }
+                return Convert.ToInt32(xn.Attributes["max"].Value);
             }
-        }
-
-        public int MaxVBDsAllowed
-        {
-            get
+            catch
             {
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
-                    return DEFAULT_NUM_VBDS_ALLOWED;
-
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@property='number-of-vbds']");
-
-                try
-                {
-                    return Convert.ToInt32(xn.Attributes["max"].Value);
-                }
-                catch
-                {
-                    return DEFAULT_NUM_VBDS_ALLOWED;
-                }
+                return DEFAULT_NUM_VBDS_ALLOWED;
             }
         }
 
@@ -329,147 +298,102 @@ namespace XenAPI
         /// <remarks>
         /// Default on server is CD - disk then optical
         /// </remarks>
-        public string BootOrder
+        public string GetBootOrder()
         {
-            get
-            {
-                if (this.HVM_boot_params.ContainsKey("order"))
-                    return this.HVM_boot_params["order"].ToUpper();
+            if (this.HVM_boot_params.ContainsKey("order"))
+                return this.HVM_boot_params["order"].ToUpper();
 
-                return "CD";
-            }
-            set
-            {
-                if (value == BootOrder)
-                    return;
-
-                Dictionary<string, string> new_HVM_boot_params =
-                        HVM_boot_params == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(HVM_boot_params);
-
-                new_HVM_boot_params["order"] = value.ToLower();
-
-                HVM_boot_params = new_HVM_boot_params;
-            }
+            return "CD";
         }
 
-        public long Memory
+        public void SetBootOrder(string value)
         {
-            set
-            {
-                memory_dynamic_min = value;
-                memory_dynamic_max = value;
-                memory_static_max = value;
-            }
+            HVM_boot_params = SetDictionaryKey(HVM_boot_params, "order", value.ToLower());
         }
 
-        public int VCPUWeight
+        public int GetVcpuWeight()
         {
-            get
+            if (VCPUs_params != null && VCPUs_params.ContainsKey("weight"))
             {
-                if (VCPUs_params != null && VCPUs_params.ContainsKey("weight"))
-                {
-                    int weight;
-                    if (int.TryParse(VCPUs_params["weight"], out weight)) // if we cant parse it we assume its because it is too large, obviously if it isnt a number (ie a string) then we will still go to the else
-                        return weight > 0 ? weight : 1; // because we perform a log on what is returned from this the weight must always be greater than 0
-                    else
-                        return 65536; // could not parse number, assume max
-                }
+                int weight;
+                if (int.TryParse(VCPUs_params["weight"], out weight)) // if we cant parse it we assume its because it is too large, obviously if it isnt a number (ie a string) then we will still go to the else
+                    return weight > 0 ? weight : 1; // because we perform a log on what is returned from this the weight must always be greater than 0
                 else
-                    return 256;
+                    return 65536; // could not parse number, assume max
             }
-            set
-            {
-                if (value != VCPUWeight)
-                {
-                    Dictionary<string, string> new_VCPUs_params =
-                        VCPUs_params == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(VCPUs_params);
-                    new_VCPUs_params["weight"] = value.ToString();
-                    VCPUs_params = new_VCPUs_params;
-                }
-            }
+            else
+                return 256;
         }
 
-        public bool DefaultTemplate
+        public void SetVcpuWeight(int value)
         {
-            get { return Get(other_config, "default_template") != null; }
+            VCPUs_params = SetDictionaryKey(VCPUs_params, "weight", value.ToString());
         }
 
-        public bool InternalTemplate
+        public bool DefaultTemplate()
         {
-            get { return Get(other_config, "xensource_internal") != null; }
+            return Get(other_config, "default_template") != null;
         }
 
-        public string InstallRepository
+        public bool InternalTemplate()
         {
-            get { return Get(other_config, "install-repository"); }
-            set { if (InstallRepository != value) { set_other_config("install-repository", value); } }
+            return Get(other_config, "xensource_internal") != null;
         }
 
-        public string InstallDistro
+        public string InstallRepository()
         {
-            get { return Get(other_config, "install-distro"); }
+           return Get(other_config, "install-repository");
         }
 
-        public string InstallMethods
+        public string InstallDistro()
         {
-            get { return Get(other_config, "install-methods"); }
+            return Get(other_config, "install-distro");
         }
 
-        public bool IsHVM
+        public string InstallMethods()
         {
-            get { return HVM_boot_policy != ""; }
+            return Get(other_config, "install-methods");
         }
 
-        public bool HasStaticIP
+        public bool IsHVM()
         {
-            get
-            {
-                var metrics = Connection.Resolve(this.guest_metrics);
-                if (metrics == null)
-                    return false;
-
-                return 0 != IntKey(metrics.other, "feature-static-ip-setting", 0);
-            }
+            return HVM_boot_policy != "";
         }
 
-        public bool HasRDP
+        public bool HasStaticIP()
         {
-            get
-            {
-                var metrics = Connection.Resolve(this.guest_metrics);
-                if (metrics == null)
-                    return false;
+            var metrics = Connection.Resolve(this.guest_metrics);
+            if (metrics == null)
+                return false;
 
-                return 0 != IntKey(metrics.other, "feature-ts", 0);
-            }
+            return 0 != IntKey(metrics.other, "feature-static-ip-setting", 0);
         }
 
-        public bool RDPEnabled
+        public bool HasRDP()
         {
-            get
-            {
-                var metrics = Connection.Resolve(this.guest_metrics);
-                if (metrics == null)
-                    return false;
+            var metrics = Connection.Resolve(this.guest_metrics);
+            if (metrics == null)
+                return false;
 
-                return 0 != IntKey(metrics.other, "data-ts", 0);
-            }
+            return 0 != IntKey(metrics.other, "feature-ts", 0);
         }
 
-        public bool RDPControlEnabled
+        public bool RDPEnabled()
         {
-            get
-            {
-                var metrics = Connection.Resolve(this.guest_metrics);
-                if (metrics == null)
-                    return false;
+            var vmMetrics = Connection.Resolve(this.guest_metrics);
+            if (vmMetrics == null)
+                return false;
 
-                return 0 != IntKey(metrics.other, "feature-ts2", 0);
-            }
+            return 0 != IntKey(vmMetrics.other, "data-ts", 0);
+        }
+
+        public bool RDPControlEnabled()
+        {
+            var metrics = Connection.Resolve(this.guest_metrics);
+            if (metrics == null)
+                return false;
+
+            return 0 != IntKey(metrics.other, "feature-ts2", 0);
         }
 
         /// <summary>Returns true if
@@ -477,133 +401,107 @@ namespace XenAPI
         ///   2a) the allow-gpu-passthrough restriction is absent or
         ///   2b) the allow-gpu-passthrough restriction is non-zero
         ///</summary>
-        public bool CanHaveGpu
+        public bool CanHaveGpu()
         {
-            get
+            if (!IsHVM())
+                return false;
+
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return true;
+
+            try
             {
-                if (!IsHVM)
-                    return false;
-
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
+                if (xn == null)
                     return true;
 
-                try
-                {
-                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-gpu-passthrough']");
-                    if (xn == null)
-                        return true;
-
-                    return 
-                        Convert.ToInt32(xn.Attributes["value"].Value) != 0;
-                }
-                catch
-                {
-                    return true;
-                }
+                return
+                    Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+            }
+            catch
+            {
+                return true;
             }
         }
 
-        public bool HasVendorDeviceRecommendation
+        public bool HasVendorDeviceRecommendation()
         {
-            get
+            bool result = false;
+
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return result;
+
+            try
             {
-                bool result = false;
-
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
+                if (xn == null || xn.Attributes == null)
                     return result;
 
-                try
-                {
-                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='has-vendor-device']");
-                    if (xn == null || xn.Attributes == null)
-                        return result;
-
-                    result = bool.Parse(xn.Attributes["value"].Value);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("Error parsing has-vendor-device on the template.", ex);
-                }
-
-                return result;
+                result = bool.Parse(xn.Attributes["value"].Value);
             }
-        }
+            catch (Exception ex)
+            {
+                log.Error("Error parsing has-vendor-device on the template.", ex);
+            }
 
+            return result;
+        }
 
         /// <summary>Returns true if
         /// 1) the guest is HVM and
         ///   2a) the allow-vgpu restriction is absent or
         ///   2b) the allow-vgpu restriction is non-zero
         ///</summary>
-        public bool CanHaveVGpu
+        public bool CanHaveVGpu()
         {
-            get
+            if (!IsHVM() || !CanHaveGpu())
+                return false;
+
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return true;
+
+            try
             {
-                if (!IsHVM || !CanHaveGpu)
-                    return false;
-
-                XmlDocument xd = GetRecommendations();
-
-                if (xd == null)
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
+                if (xn == null || xn.Attributes == null)
                     return true;
 
-                try
-                {
-                    XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-vgpu']");
-                    if (xn == null || xn.Attributes == null)
-                        return true;
-
-                    return
-                        Convert.ToInt32(xn.Attributes["value"].Value) != 0;
-                }
-                catch
-                {
-                    return true;
-                }
+                return
+                    Convert.ToInt32(xn.Attributes["value"].Value) != 0;
             }
-        }
-
-        void set_other_config(string key, string value)
-        {
-            Dictionary<string, string> new_other_config =
-                other_config == null ?
-                    new Dictionary<string, string>() :
-                    new Dictionary<string, string>(other_config);
-            new_other_config[key] = value;
-            other_config = new_other_config;
+            catch
+            {
+                return true;
+            }
         }
 
         // AutoPowerOn is supposed to be unsupported. However, we advise customers how to
         // enable it (http://support.citrix.com/article/CTX133910), so XenCenter has to be
         // able to recognise it, and turn it off during Rolling Pool Upgrade.
-        public bool AutoPowerOn
+        public bool GetAutoPowerOn()
         {
-            get
-            {
-                return BoolKey(other_config, "auto_poweron");
-            }
-            set
-            {
-                if (value != AutoPowerOn)
-                    set_other_config("auto_poweron", value.ToString().ToLower());
-            }
+            return BoolKey(other_config, "auto_poweron");
         }
 
-        public bool IgnoreExcessiveVcpus
+        public void SetAutoPowerOn(bool value)
         {
-            get
-            {
-                return BoolKey(other_config, "ignore_excessive_vcpus");
-            }
-            set
-            {
-                if (value != IgnoreExcessiveVcpus)
-                    set_other_config("ignore_excessive_vcpus", value.ToString().ToLower());
-            }
+            other_config = SetDictionaryKey(other_config, "auto_poweron", value.ToString().ToLower());
+        }
+
+        public bool GetIgnoreExcessiveVcpus()
+        {
+            return BoolKey(other_config, "ignore_excessive_vcpus");
+        }
+
+        public void SetIgnoreExcessiveVcpus(bool value)
+        {
+            other_config = SetDictionaryKey(other_config, "ignore_excessive_vcpus", value.ToString().ToLower());
         }
 
         public string IsOnSharedStorage()
@@ -640,13 +538,13 @@ namespace XenAPI
 
             foreach (VBD vbd in Connection.ResolveAll(VBDs))
             {
-                if (!vbd.IsCDROM)
+                if (!vbd.IsCDROM())
                 {
                     VDI VDI = Connection.Resolve<VDI>(vbd.VDI);
                     if (VDI != null && VDI.Show(showHiddenVMs))
                     {
                         SR TheSR = Connection.Resolve(VDI.SR);
-                        if (TheSR != null && !TheSR.IsToolsSR)
+                        if (TheSR != null && !TheSR.IsToolsSR())
                         {
                             totalSpace += VDI.virtual_size;
                         }
@@ -673,7 +571,7 @@ namespace XenAPI
             else if (is_a_snapshot)
                 myClass = 3;
             else if (is_a_template)
-                myClass = DefaultTemplate ? 5 : 4;
+                myClass = DefaultTemplate() ? 5 : 4;
             else
                 myClass = 2;
 
@@ -682,7 +580,7 @@ namespace XenAPI
             else if (other.is_a_snapshot)
                 otherClass = 3;
             else if (other.is_a_template)
-                otherClass = other.DefaultTemplate ? 5 : 4;
+                otherClass = other.DefaultTemplate() ? 5 : 4;
             else
                 otherClass = 2;
 
@@ -703,24 +601,22 @@ namespace XenAPI
 
         private DateTime startuptime;
 
-        public DateTime BodgeStartupTime
+        public DateTime GetBodgeStartupTime()
         {
-            get
-            {
-                return startuptime;
-            }
-            set
-            {
-                startuptime = value;
-                // This has an impact on the virt state of the VM as we allow a set amount of time for tools to show up before assuming unvirt
-                NotifyPropertyChanged("virtualisation_status");
-                if (VirtualizationTimer != null)
-                    VirtualizationTimer.Stop();
-                // 2 minutes before we give up plus some breathing space
-                VirtualizationTimer = new Timer(182000) { AutoReset = false };
-                VirtualizationTimer.Elapsed += VirtualizationTimer_Elapsed;
-                VirtualizationTimer.Start();
-            }
+            return startuptime;
+        }
+
+        public void SetBodgeStartupTime(DateTime value)
+        {
+            startuptime = value;
+            // This has an impact on the virt state of the VM as we allow a set amount of time for tools to show up before assuming unvirt
+            NotifyPropertyChanged("virtualisation_status");
+            if (VirtualizationTimer != null)
+                VirtualizationTimer.Stop();
+            // 2 minutes before we give up plus some breathing space
+            VirtualizationTimer = new Timer(182000) {AutoReset = false};
+            VirtualizationTimer.Elapsed += VirtualizationTimer_Elapsed;
+            VirtualizationTimer.Start();
         }
 
         void VirtualizationTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -739,37 +635,26 @@ namespace XenAPI
             MANAGEMENT_INSTALLED        = 8,
         };
 
-        public VirtualisationStatus virtualisation_status
+        public string VirtualisationVersion()
         {
-            get
-            {
-                return GetVirtualisationStatus;
-            }
-        }
-
-        public string VirtualisationVersion
-        {
-            get
-            {
-                if (Connection == null)
-                    return "0.0";
-                VM_guest_metrics metrics = Connection.Resolve<VM_guest_metrics>(guest_metrics);
-                if (metrics == null || !metrics.PV_drivers_version.ContainsKey("major") || !metrics.PV_drivers_version.ContainsKey("minor"))
-                    return "0.0";
-                return string.Format("{0}.{1}", metrics.PV_drivers_version["major"], metrics.PV_drivers_version["minor"]);
-            }
+            if (Connection == null)
+                return "0.0";
+            VM_guest_metrics metrics = Connection.Resolve<VM_guest_metrics>(guest_metrics);
+            if (metrics == null || !metrics.PV_drivers_version.ContainsKey("major") || !metrics.PV_drivers_version.ContainsKey("minor"))
+                return "0.0";
+            return string.Format("{0}.{1}", metrics.PV_drivers_version["major"], metrics.PV_drivers_version["minor"]);
         }
 
         public string GetVirtualisationWarningMessages()
         {
-            VirtualisationStatus status = GetVirtualisationStatus;
+            VirtualisationStatus status = GetVirtualisationStatus();
 
-            if (virtualisation_status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED)
-                || virtualisation_status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
+            if (status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED) && status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED)
+                || status.HasFlag(VM.VirtualisationStatus.UNKNOWN))
                     // calling function shouldn't send us here if tools are, or might be, present: used to assert here but it can sometimes happen (CA-51460)
                     return "";
 
-            if (virtualisation_status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            if (status.HasFlag(VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
             {
                     VM_guest_metrics guestMetrics = Connection.Resolve(guest_metrics);
                     if (guestMetrics != null
@@ -784,70 +669,64 @@ namespace XenAPI
                         return Messages.PV_DRIVERS_OUT_OF_DATE_UNKNOWN_VERSION;
             }
 
-            return HasNewVirtualisationStates ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
+            return HasNewVirtualisationStates() ? Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED : Messages.PV_DRIVERS_NOT_INSTALLED;
         }
 
-        private VirtualisationStatus GetVirtualisationStatusOldVM
+        private VirtualisationStatus GetVirtualisationStatusOldVM()
         {
-            get
+            Debug.Assert(!HasNewVirtualisationStates());
+
+            VM_guest_metrics vm_guest_metrics = Connection.Resolve(guest_metrics);
+
+            if ((DateTime.UtcNow - GetBodgeStartupTime()).TotalMinutes < 2)
             {
-                Debug.Assert(!HasNewVirtualisationStates);
-
-                VM_guest_metrics vm_guest_metrics = Connection.Resolve(guest_metrics);
-
-                if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
+                // check to see if the metrics object has appeared, if so cancel the timer, no need to notify the property changed as this should be picked up on vm_guest_metrics being created.
+                if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed())
                 {
-                    // check to see if the metrics object has appeared, if so cancel the timer, no need to notify the property changed as this should be picked up on vm_guest_metrics being created.
-                    if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_installed)
-                    {
-                        if (vm_guest_metrics.PV_drivers_up_to_date)
-                            return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
-                        else
-                            return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-                    }
-
-                    return VirtualisationStatus.UNKNOWN;
+                    if (vm_guest_metrics.PV_drivers_up_to_date)
+                        return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
+                    else
+                        return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
                 }
 
-                if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed)
-                {
-                    return 0;
-                }
-                else if (!vm_guest_metrics.PV_drivers_up_to_date)
-                {
-                    return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
-                }
-                else
-                {
-                    return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
-                }
+                return VirtualisationStatus.UNKNOWN;
+            }
+
+            if (vm_guest_metrics == null || !vm_guest_metrics.PV_drivers_installed())
+            {
+                return 0;
+            }
+            else if (!vm_guest_metrics.PV_drivers_up_to_date)
+            {
+                return VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE;
+            }
+            else
+            {
+                return VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED;
             }
         }
 
-        private VirtualisationStatus GetVirtualisationStatusNewVM
+        private VirtualisationStatus GetVirtualisationStatusNewVM()
         {
-            get
+            Debug.Assert(HasNewVirtualisationStates());
+
+            var flags = HasStaticIP()
+                ? VirtualisationStatus.MANAGEMENT_INSTALLED
+                : 0;
+
+            var vm_guest_metrics = Connection.Resolve(guest_metrics);
+            if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_detected)
+                flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
+
+            if ((DateTime.UtcNow - GetBodgeStartupTime()).TotalMinutes < 2)
             {
-                Debug.Assert(HasNewVirtualisationStates);
+                if (flags.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
+                    return flags;
 
-                var flags = HasStaticIP
-                    ? VirtualisationStatus.MANAGEMENT_INSTALLED 
-                    : 0;
-
-                var vm_guest_metrics = Connection.Resolve(guest_metrics);
-                if (vm_guest_metrics != null && vm_guest_metrics.PV_drivers_detected)
-                    flags |= VirtualisationStatus.IO_DRIVERS_INSTALLED;
-
-                if ((DateTime.UtcNow - BodgeStartupTime).TotalMinutes < 2)
-                {
-                    if (flags.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED))
-                        return flags;
-
-                    return VirtualisationStatus.UNKNOWN;
-                }
-
-                return flags;
+                return VirtualisationStatus.UNKNOWN;
             }
+
+            return flags;
         }
 
         /// <summary>
@@ -869,21 +748,18 @@ namespace XenAPI
         ///    4 = I/O Optimized
         ///   12 = I/O and Management installed
         /// </remarks>
-        public VirtualisationStatus GetVirtualisationStatus
+        public VirtualisationStatus GetVirtualisationStatus()
         {
-            get
+            if (Connection == null)
+                return VirtualisationStatus.UNKNOWN;
+
+            VM_metrics vm_metrics = Connection.Resolve(metrics);
+            if (vm_metrics == null || power_state != vm_power_state.Running)
             {
-                if (Connection == null)
-                    return VirtualisationStatus.UNKNOWN;
-
-                VM_metrics vm_metrics = Connection.Resolve(metrics);
-                if (vm_metrics == null || power_state != vm_power_state.Running)
-                {
-                    return VirtualisationStatus.UNKNOWN;
-                }
-
-                return HasNewVirtualisationStates ? GetVirtualisationStatusNewVM : GetVirtualisationStatusOldVM;
+                return VirtualisationStatus.UNKNOWN;
             }
+
+            return HasNewVirtualisationStates() ? GetVirtualisationStatusNewVM() : GetVirtualisationStatusOldVM();
         }
 
         /// <summary>
@@ -891,48 +767,38 @@ namespace XenAPI
         /// We need to know this, because for those VMs virtualization status is defined differently.
         /// This does not mean new(ly created) VM
         /// </summary>
-        public bool HasNewVirtualisationStates
+        public bool HasNewVirtualisationStates()
         {
-            get
-            {
-                return IsWindows && XenAdmin.Core.Helpers.DundeeOrGreater(Connection);
-            }
+            return IsWindows() && Helpers.DundeeOrGreater(Connection);
         }
-
 
         /// <summary>
         /// Does this VM support ballooning? I.e., are tools installed, on a ballonable OS?
         /// Doesn't check for Midnight Ride or licensing constraints.
         /// </summary>
-        public bool has_ballooning
+        public bool has_ballooning()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
+            if (Connection == null)
+                return false;
 
-                // For templates see comments in CA-34258/CA-34260: we cannot tell whether tools
-                // are installed so we offer ballooning if and only if the dynamic min != static_max.
-                if (is_a_template)
-                    return (memory_dynamic_min != memory_static_max);
+            // For templates see comments in CA-34258/CA-34260: we cannot tell whether tools
+            // are installed so we offer ballooning if and only if the dynamic min != static_max.
+            if (is_a_template)
+                return (memory_dynamic_min != memory_static_max);
 
-                VM_guest_metrics metrics = Connection.Resolve<VM_guest_metrics>(guest_metrics);
-                if (metrics == null)
-                    return false;
-                Dictionary<string, string> other_key = metrics.other;
-                return (other_key != null && other_key.ContainsKey("feature-balloon"));
-            }
+            VM_guest_metrics metrics = Connection.Resolve<VM_guest_metrics>(guest_metrics);
+            if (metrics == null)
+                return false;
+            Dictionary<string, string> other_key = metrics.other;
+            return (other_key != null && other_key.ContainsKey("feature-balloon"));
         }
 
         /// <summary>
         /// Whether to show advanced ballooning UI (i.e., separate setting of dynamic_max and static_max)
         /// </summary>
-        public bool advanced_ballooning
+        public bool advanced_ballooning()
         {
-            get
-            {
-                return (memory_dynamic_max != memory_static_max && has_ballooning);
-            }
+            return memory_dynamic_max != memory_static_max && has_ballooning();
         }
 
         /// <summary>
@@ -940,7 +806,7 @@ namespace XenAPI
         /// </summary>
         public override bool Show(bool showHiddenVMs)
         {
-            if (InternalTemplate)
+            if (InternalTemplate())
                 return false;
 
             if (name_label.StartsWith(Helpers.GuiTempObjectPrefix))
@@ -949,57 +815,48 @@ namespace XenAPI
             if (showHiddenVMs)
                 return true;
 
-            return !IsHidden;
+            return !IsHidden();
 
         }
 
         /// <summary>
         /// Returns whether the other_config.HideFromXenCenter flag is set to true.
         /// </summary>
-        public override bool IsHidden
+        public override bool IsHidden()
         {
-            get
-            {
-                return BoolKey(other_config, HIDE_FROM_XENCENTER);
-            }
+            return BoolKey(other_config, HIDE_FROM_XENCENTER);
         }
 
-        public bool HasNoDisksAndNoLocalCD
+        public bool HasNoDisksAndNoLocalCD()
         {
-            get
+            if (Connection == null)
+                return false;
+            foreach (VBD vbd in Connection.ResolveAll<VBD>(VBDs))
             {
-                if (Connection == null)
-                    return false;
-                foreach (VBD vbd in Connection.ResolveAll<VBD>(VBDs))
+                if (vbd.type == vbd_type.Disk)
                 {
-                    if (vbd.type == vbd_type.Disk)
-                    {
-                        return false;       // we have a disk :(
-                    }
-                    else
-                    {
-                        VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
-                        if (vdi == null)
-                            continue;
-                        SR sr = Connection.Resolve<SR>(vdi.SR);
-                        if (sr == null || sr.shared)
-                            continue;
-                        return false;       // we have a shared cd
-                    }
+                    return false; // we have a disk :(
                 }
-                return true;        // we have no disks hooray!!
+                else
+                {
+                    VDI vdi = Connection.Resolve<VDI>(vbd.VDI);
+                    if (vdi == null)
+                        continue;
+                    SR sr = Connection.Resolve<SR>(vdi.SR);
+                    if (sr == null || sr.shared)
+                        continue;
+                    return false; // we have a shared cd
+                }
             }
+            return true; // we have no disks hooray!!
         }
 
         private const string P2V_SOURCE_MACHINE = "p2v_source_machine";
         private const string P2V_IMPORT_DATE = "p2v_import_date";
 
-        public bool IsP2V
+        public bool IsP2V()
         {
-            get
-            {
-                return other_config != null && other_config.ContainsKey(P2V_SOURCE_MACHINE) && other_config.ContainsKey(P2V_IMPORT_DATE);
-            }
+            return other_config != null && other_config.ContainsKey(P2V_SOURCE_MACHINE) && other_config.ContainsKey(P2V_IMPORT_DATE);
         }
 
         /// <summary>
@@ -1040,140 +897,126 @@ namespace XenAPI
             Count = 22  //bump this if values are added
         }
 
-        public VmTemplateType TemplateType
+        public VmTemplateType TemplateType()
         {
-            get
+            if (!is_a_template)
+                return VmTemplateType.NoTemplate;
+
+            if (is_snapshot_from_vmpp)
+                return VmTemplateType.SnapshotFromVmpp;
+
+            if (is_a_snapshot)
+                return VmTemplateType.Snapshot;
+
+            if (!DefaultTemplate())
+                return VmTemplateType.Custom;
+
+            string os = name_label.ToLowerInvariant();
+
+            if (os.Contains("citrix"))
+                return VmTemplateType.Citrix;
+
+            if (os.Contains("debian"))
+                return VmTemplateType.Debian;
+
+            if (os.Contains("centos"))
+                return VmTemplateType.Centos;
+
+            if (os.Contains("linx"))
+                return VmTemplateType.Linx;
+
+            if (os.Contains("red hat"))
+                return VmTemplateType.RedHat;
+
+            if (os.Contains("oracle"))
+                return VmTemplateType.Oracle;
+
+            if (os.Contains("suse"))
+                return VmTemplateType.Suse;
+
+            if (os.Contains("scientific"))
+                return VmTemplateType.SciLinux;
+
+            if (os.Contains("legacy windows"))
+                return VmTemplateType.LegacyWindows;
+
+            if (os.Contains("windows"))
+                return VmTemplateType.Windows;
+
+            if (os.Contains("ubuntu"))
+                return VmTemplateType.Ubuntu;
+
+            if (os.Contains("yinhe"))
+                return VmTemplateType.YinheKylin;
+
+            if (os.Contains("kylin"))
+                return VmTemplateType.NeoKylin;
+
+            if (os.Contains("asianux"))
+                return VmTemplateType.Asianux;
+
+            if (os.Contains("turbo"))
+                return VmTemplateType.Turbo;
+
+            if (os.Contains("solaris"))
+                return VmTemplateType.Solaris;
+
+            if (os.Contains("coreos"))
+                return VmTemplateType.CoreOS;
+
+            return VmTemplateType.Misc;
+        }
+
+        public VmDescriptionType DescriptionType()
+        {
+            var templateType = TemplateType();
+
+            switch (templateType)
             {
-                if (!is_a_template)
-                    return VmTemplateType.NoTemplate;
+                case VmTemplateType.NoTemplate:
+                case VmTemplateType.Custom:
+                case VmTemplateType.Snapshot:
+                case VmTemplateType.SnapshotFromVmpp:
+                    return VmDescriptionType.ReadWrite;
 
-                if (is_snapshot_from_vmpp)
-                    return VmTemplateType.SnapshotFromVmpp;
+                case VmTemplateType.Misc:
+                    return VmDescriptionType.ReadOnly;
 
-                if (is_a_snapshot)
-                    return VmTemplateType.Snapshot;
-
-                if (!DefaultTemplate)
-                    return VmTemplateType.Custom;
-
-                string os = name_label.ToLowerInvariant();
-
-                if (os.Contains("citrix"))
-                    return VmTemplateType.Citrix;
-
-                if (os.Contains("debian"))
-                    return VmTemplateType.Debian;
-
-                if (os.Contains("centos"))
-                    return VmTemplateType.Centos;
-
-                if (os.Contains("linx"))
-                    return VmTemplateType.Linx;
-
-                if (os.Contains("red hat"))
-                    return VmTemplateType.RedHat;
-
-                if (os.Contains("oracle"))
-                    return VmTemplateType.Oracle;
-
-                if (os.Contains("suse"))
-                    return VmTemplateType.Suse;
-
-                if (os.Contains("scientific"))
-                    return VmTemplateType.SciLinux;
-
-                if (os.Contains("legacy windows"))
-                    return VmTemplateType.LegacyWindows; 
-
-                if (os.Contains("windows"))
-                    return VmTemplateType.Windows;
-
-                if (os.Contains("ubuntu"))
-                    return VmTemplateType.Ubuntu;
-
-                if (os.Contains("yinhe"))
-                    return VmTemplateType.YinheKylin;
-
-                if (os.Contains("kylin"))
-                    return VmTemplateType.NeoKylin;
-
-                if (os.Contains("asianux"))
-                    return VmTemplateType.Asianux;
-
-                if (os.Contains("turbo"))
-                    return VmTemplateType.Turbo; 
-
-                if (os.Contains("solaris"))
-                    return VmTemplateType.Solaris;
-
-                if (os.Contains("coreos"))
-                    return VmTemplateType.CoreOS;
-
-                return VmTemplateType.Misc;
+                default:
+                    return VmDescriptionType.None;
             }
         }
 
-        public VmDescriptionType DescriptionType
-        {
-            get
-            {
-                var templateType = TemplateType;
-
-                switch (templateType)
-                {
-                    case VmTemplateType.NoTemplate:
-                    case VmTemplateType.Custom:
-                    case VmTemplateType.Snapshot:
-                    case VmTemplateType.SnapshotFromVmpp:
-                        return VmDescriptionType.ReadWrite;
- 
-                    case VmTemplateType.Misc:
-                        return VmDescriptionType.ReadOnly;
-
-                    default:
-                        return VmDescriptionType.None;
-                }
-            }
-        }
-        
         public enum VmDescriptionType { None, ReadOnly, ReadWrite }
-        
-        public override string Description
+
+        public override string Description()
         {
-            get
-            {
-                // Don't i18n this
-                if (IsP2V && name_description.StartsWith("VM imported from physical machine"))
-                    return "";
-                if (DescriptionType == VmDescriptionType.ReadOnly)
-                    return PropertyManager.GetFriendlyName("VM.TemplateDescription-" + name_label) ?? name_description;
+            // Don't i18n this
+            if (IsP2V() && name_description.StartsWith("VM imported from physical machine"))
+                return "";
 
-                //if this assertion fails it means the code calling this property
-                //should be checking beforehand what the DescriptionType is
-                Debug.Assert(DescriptionType != VmDescriptionType.None);
+            if (DescriptionType() == VmDescriptionType.ReadOnly)
+                return PropertyManager.GetFriendlyName("VM.TemplateDescription-" + name_label) ?? name_description;
 
-                return name_description;
-            }
+            //if this assertion fails it means the code calling this property
+            //should be checking beforehand what the DescriptionType is
+            Debug.Assert(DescriptionType() != VmDescriptionType.None);
+
+            return name_description;
         }
 
-        public string P2V_SourceMachine
+        public string P2V_SourceMachine()
         {
-            get
-            {
-                return other_config != null && other_config.ContainsKey(P2V_SOURCE_MACHINE) ? other_config[P2V_SOURCE_MACHINE] : "";
-            }
+            return other_config != null && other_config.ContainsKey(P2V_SOURCE_MACHINE) ? other_config[P2V_SOURCE_MACHINE] : "";
         }
 
-        public DateTime P2V_ImportDate
+        public DateTime P2V_ImportDate()
         {
-            get
-            {
-                if (other_config == null || !other_config.ContainsKey(P2V_IMPORT_DATE))
-                    return DateTime.MinValue;
+            if (other_config == null || !other_config.ContainsKey(P2V_IMPORT_DATE))
+                return DateTime.MinValue;
 
-                string importDate = other_config[P2V_IMPORT_DATE];
-                return TimeUtil.ParseISO8601DateTime(importDate);
-            }
+            string importDate = other_config[P2V_IMPORT_DATE];
+            return TimeUtil.ParseISO8601DateTime(importDate);
         }
 
         public static XenRef<Task> async_live_migrate(Session session, string _vm, string _host)
@@ -1234,39 +1077,33 @@ namespace XenAPI
         }
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1);
 
-        public PrettyTimeSpan RunningTime
+        public PrettyTimeSpan RunningTime()
         {
-            get
+            if (power_state != vm_power_state.Running &&
+                power_state != vm_power_state.Paused &&
+                power_state != vm_power_state.Suspended)
             {
-                if (power_state != vm_power_state.Running &&
-                    power_state != vm_power_state.Paused &&
-                    power_state != vm_power_state.Suspended)
-                {
-                    return null;
-                }
-
-                DateTime startTime = GetStartTime();
-                if (startTime == Epoch || startTime == DateTime.MinValue)
-                    return null;
-                return new PrettyTimeSpan(DateTime.UtcNow - startTime - Connection.ServerTimeOffset);
+                return null;
             }
+
+            DateTime startTime = GetStartTime();
+            if (startTime == Epoch || startTime == DateTime.MinValue)
+                return null;
+            return new PrettyTimeSpan(DateTime.UtcNow - startTime - Connection.ServerTimeOffset);
         }
 
         /// <summary>
         /// Returns DateTime.MinValue if the date is not present in other_config.
         /// </summary>
-        public DateTime LastShutdownTime
+        public DateTime LastShutdownTime()
         {
-            get
+            if (other_config.ContainsKey("last_shutdown_time"))
             {
-                if (other_config.ContainsKey("last_shutdown_time"))
-                {
-                    return TimeUtil.ParseISO8601DateTime(other_config["last_shutdown_time"]);
-                }
-                else
-                {
-                    return DateTime.MinValue;
-                }
+                return TimeUtil.ParseISO8601DateTime(other_config["last_shutdown_time"]);
+            }
+            else
+            {
+                return DateTime.MinValue;
             }
         }
 
@@ -1279,65 +1116,51 @@ namespace XenAPI
         /// An enum-ified version of ha_restart_priority: use this one instead.
         /// NB setting this property does not change ha-always-run.
         /// </summary>
-        public HA_Restart_Priority HARestartPriority
+        public HA_Restart_Priority HARestartPriority()
         {
-            get
-            {
-                return StringToPriority(this.ha_restart_priority);
-            }
-            set
-            {
-                this.ha_restart_priority = PriorityToString(value);
-            }
+            return StringToPriority(this.ha_restart_priority);
         }
 
-        public override string NameWithLocation
+         public override string NameWithLocation()
         {
-            get
+            if (this.Connection != null)
             {
-                if (this.Connection != null)
+                if (this.is_a_real_vm())
                 {
-                    if (this.is_a_real_vm)
-                    {
-                        return base.NameWithLocation;
-                    }
-                    else if (this.is_a_snapshot)
-                    {
-                        var snapshotOf = this.Connection.Resolve(this.snapshot_of);
-                        if (snapshotOf == null)
-                            return base.NameWithLocation;
-
-                        return string.Format(Messages.SNAPSHOT_OF_TITLE, Name, snapshotOf.Name, LocationString);
-                    }
-                    else if (this.is_a_template)
-                    {
-                        if (Helpers.IsPool(Connection))
-                            return string.Format(Messages.OBJECT_IN_POOL, Name, Connection.Name);
-
-                        return string.Format(Messages.OBJECT_ON_SERVER, Name, Connection.Name);
-                    }
+                    return base.NameWithLocation();
                 }
+                else if (this.is_a_snapshot)
+                {
+                    var snapshotOf = this.Connection.Resolve(this.snapshot_of);
+                    if (snapshotOf == null)
+                        return base.NameWithLocation();
 
-                return base.NameWithLocation;
+                    return string.Format(Messages.SNAPSHOT_OF_TITLE, Name(), snapshotOf.Name(), LocationString());
+                }
+                else if (this.is_a_template)
+                {
+                    if (Helpers.IsPool(Connection))
+                        return string.Format(Messages.OBJECT_IN_POOL, Name(), Connection.Name);
+
+                    return string.Format(Messages.OBJECT_ON_SERVER, Name(), Connection.Name);
+                }
             }
+
+            return base.NameWithLocation();
         }
 
-        internal override string LocationString
+        internal override string LocationString()
         {
-            get 
-            {
-                Host server = this.Home();
-                if (server != null)
-                    return string.Format(Messages.ON_SERVER, server);
+            Host server = this.Home();
+            if (server != null)
+                return string.Format(Messages.ON_SERVER, server);
 
-                Pool pool = Helpers.GetPool(this.Connection);
-                if (pool != null)
-                    return string.Format(Messages.IN_POOL, pool);
+            Pool pool = Helpers.GetPool(this.Connection);
+            if (pool != null)
+                return string.Format(Messages.IN_POOL, pool);
 
-                return string.Empty;
-            }
+            return string.Empty;
         }
-
 
         public static List<HA_Restart_Priority> GetAvailableRestartPriorities(IXenConnection connection)
         {
@@ -1353,8 +1176,7 @@ namespace XenAPI
         /// </summary>
         public bool HaPriorityIsRestart()
         {
-            HA_Restart_Priority haRestartPriority = HARestartPriority;
-            return HaPriorityIsRestart(Connection, HARestartPriority);
+            return HaPriorityIsRestart(Connection, HARestartPriority());
         }
 
         public static bool HaPriorityIsRestart(IXenConnection connection, HA_Restart_Priority haRestartPriority)
@@ -1420,24 +1242,21 @@ namespace XenAPI
         /// </summary>
         public bool HaCanProtect(bool showHiddenVMs)
         {
-            return is_a_real_vm && Show(showHiddenVMs);
+            return is_a_real_vm() && Show(showHiddenVMs);
 
         }
 
         /// <summary>
         /// True if this VM's ha_restart_priority is not "Do not restart" and its pool has ha_enabled true.
         /// </summary>
-        public bool HAIsProtected
+        public bool HAIsProtected()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
-                Pool myPool = Helpers.GetPoolOfOne(Connection);
-                if (myPool == null)
-                    return false;
-                return myPool.ha_enabled && this.HARestartPriority != HA_Restart_Priority.DoNotRestart;
-            }
+            if (Connection == null)
+                return false;
+            Pool myPool = Helpers.GetPoolOfOne(Connection);
+            if (myPool == null)
+                return false;
+            return myPool.ha_enabled && HARestartPriority() != HA_Restart_Priority.DoNotRestart;
         }
 
         /// <summary>
@@ -1449,84 +1268,75 @@ namespace XenAPI
             VM.set_ha_restart_priority(session, vm.opaque_ref, PriorityToString(priority));
         }
 
-        public bool AnyDiskFastClonable
+        public bool AnyDiskFastClonable()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
-                foreach (VBD vbd in Connection.ResolveAll(VBDs))
-                {
-                    if (vbd.type != vbd_type.Disk)
-                        continue;
-
-                    VDI vdi = Connection.Resolve(vbd.VDI);
-                    if (vdi == null)
-                        continue;
-
-                    SR sr = Connection.Resolve(vdi.SR);
-                    if (sr == null)
-                        continue;
-
-                    SM sm = SM.GetByType(Connection, sr.type);
-                    if (sm == null)
-                        continue;
-
-                    if (Array.IndexOf(sm.capabilities, "VDI_CLONE") != -1)
-                        return true;
-                }
+            if (Connection == null)
                 return false;
+            foreach (VBD vbd in Connection.ResolveAll(VBDs))
+            {
+                if (vbd.type != vbd_type.Disk)
+                    continue;
+
+                VDI vdi = Connection.Resolve(vbd.VDI);
+                if (vdi == null)
+                    continue;
+
+                SR sr = Connection.Resolve(vdi.SR);
+                if (sr == null)
+                    continue;
+
+                SM sm = SM.GetByType(Connection, sr.type);
+                if (sm == null)
+                    continue;
+
+                if (Array.IndexOf(sm.capabilities, "VDI_CLONE") != -1)
+                    return true;
             }
+            return false;
         }
 
-        public bool HasAtLeastOneDisk
+        public bool HasAtLeastOneDisk()
         {
-            get
-            {
-                if (Connection == null)
-                    return false;
-                foreach (VBD vbd in Connection.ResolveAll(VBDs))
-                {
-                    if (vbd.type != vbd_type.Disk)
-                        continue;
-
-                    return true;
-                }
+            if (Connection == null)
                 return false;
+            foreach (VBD vbd in Connection.ResolveAll(VBDs))
+            {
+                if (vbd.type != vbd_type.Disk)
+                    continue;
+
+                return true;
             }
+            return false;
         }
 
         /// <summary>
         /// Checks whether the VM is the dom0 (the flag is_control_domain may also apply to other control domains)
         /// </summary>
-        public bool IsControlDomainZero
+        public bool IsControlDomainZero()
         {
-            get
-            {
-                if (!is_control_domain)
-                    return false;
-                
-                var host = Connection.Resolve(resident_on);
-                if (host == null)
-                    return false;
+            if (!is_control_domain)
+                return false;
 
-                if (!Helper.IsNullOrEmptyOpaqueRef(host.control_domain))
-                    return host.control_domain == opaque_ref;
+            var host = Connection.Resolve(resident_on);
+            if (host == null)
+                return false;
 
-                var vms = Connection.ResolveAll(host.resident_VMs);
-                var first = vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
-                return first != null && first.opaque_ref == opaque_ref;
-            }
+            if (!Helper.IsNullOrEmptyOpaqueRef(host.control_domain))
+                return host.control_domain == opaque_ref;
+
+            var vms = Connection.ResolveAll(host.resident_VMs);
+            var first = vms.FirstOrDefault(vm => vm.is_control_domain && vm.domid == 0);
+            return first != null && first.opaque_ref == opaque_ref;
         }
 
-        public bool not_a_real_vm
+        public bool not_a_real_vm()
         {
-            get { return is_a_snapshot || is_a_template || is_control_domain; }
+            return is_a_snapshot || is_a_template || is_control_domain;
         }
 
-        public bool is_a_real_vm
+        public bool is_a_real_vm()
         {
-            get { return !not_a_real_vm; }
+            return !not_a_real_vm();
         }
 
         private bool _isBeingCreated;
@@ -1540,37 +1350,27 @@ namespace XenAPI
             }
         }
 
-        public XmlNode ProvisionXml
+        public XmlNode ProvisionXml()
         {
-            get
+            try
             {
-                try
-                {
-                    string xml = Get(other_config, "disks");
-                    if (string.IsNullOrEmpty(xml))
-                        return null;
-
-                    XmlDocument doc = new XmlDocument();
-                    doc.LoadXml(xml);
-                    return doc.FirstChild;
-                }
-                catch (Exception)
-                {
+                string xml = Get(other_config, "disks");
+                if (string.IsNullOrEmpty(xml))
                     return null;
-                }
+
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(xml);
+                return doc.FirstChild;
             }
-            set
+            catch (Exception)
             {
-                other_config["disks"] = value.OuterXml;
+                return null;
             }
         }
 
-        public bool InstantTemplate
+        public bool InstantTemplate()
         {
-            get
-            {
-                return BoolKey(other_config, "instant");
-            }
+            return BoolKey(other_config, "instant");
         }
 
         public override string ToString()
@@ -1582,160 +1382,124 @@ namespace XenAPI
         /// The name label of the VM's affinity server, or None if it is not set
         /// (This is what the UI calls the "home server", but is not the same as VM.Home).
         /// </summary>
-        public string AffinityServerString
+        public string AffinityServerString()
         {
-            get
-            {
-                Host host = Connection.Resolve(affinity);
-                if (host == null)
-                    return Messages.NONE;
+            Host host = Connection.Resolve(affinity);
+            if (host == null)
+                return Messages.NONE;
 
-                return host.Name;
-            }
+            return host.Name();
         }
 
         /// <summary>
         /// The virtualisation state of the vm as a friendly string (optimized, out of date, not installed, unknown)
         /// </summary>
-        public string VirtualisationStatusString
+        public string VirtualisationStatusString()
         {
-            get
-            {
-                if (virtualisation_status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED))
-                {
-                    if (!HasNewVirtualisationStates)
-                        return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion);
-                    else
-                        return Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED;
-                }
+            var status = GetVirtualisationStatus();
 
-                if (virtualisation_status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
-                        return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion);
-                    
-                if (virtualisation_status == 0)
-                        return Messages.PV_DRIVERS_NOT_INSTALLED;
-                
-                if (virtualisation_status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED) 
-                    && !virtualisation_status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
-                    return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
-                
-                return Messages.VIRTUALIZATION_UNKNOWN;
+            if (status.HasFlag(VirtualisationStatus.IO_DRIVERS_INSTALLED | VirtualisationStatus.MANAGEMENT_INSTALLED))
+            {
+                if (!HasNewVirtualisationStates())
+                    return string.Format(Messages.VIRTUALIZATION_OPTIMIZED, VirtualisationVersion());
+                else
+                    return Messages.VIRTUALIZATION_STATE_VM_IO_DRIVERS_AND_MANAGEMENT_AGENT_INSTALLED;
             }
+
+            if (status.HasFlag(VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+                return string.Format(Messages.VIRTUALIZATION_OUT_OF_DATE, VirtualisationVersion());
+
+            if (status == 0)
+                return Messages.PV_DRIVERS_NOT_INSTALLED;
+
+            if (status.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED)
+                && !status.HasFlag(VirtualisationStatus.MANAGEMENT_INSTALLED))
+                return Messages.VIRTUALIZATION_STATE_VM_MANAGEMENT_AGENT_NOT_INSTALLED;
+
+            return Messages.VIRTUALIZATION_UNKNOWN;
         }
 
-        public SnapshotsView SnapshotView
+        public bool HasProvisionXML()
         {
-            get { return _snapshotView; }
-            set { _snapshotView = value; }
+            return other_config != null && other_config.ContainsKey("disks");
         }
 
-        public bool HasProvisionXML
+        public bool BiosStringsCopied()
         {
-            get
+            if (DefaultTemplate())
             {
-                return other_config != null && other_config.ContainsKey("disks");
-            }
-        }
-
-        public bool BiosStringsCopied
-        {
-            get
-            {
-                if (DefaultTemplate)
-                {
-                    return false;
-                }
-
-                if (bios_strings.Count == 0)
-                {
-                    return false;
-                }
-
-                bool value = bios_strings.ContainsKey("bios-vendor") && bios_strings["bios-vendor"] == "Xen"
-                    && bios_strings.ContainsKey("system-manufacturer") && bios_strings["system-manufacturer"] == "Xen";
-
-                return !value;
-            }
-        }
-
-        public bool HasCD
-        {
-            get
-            {
-                foreach (var vbd in this.Connection.ResolveAll<VBD>(this.VBDs))
-                {
-                    if (vbd.IsCDROM)
-                    {
-                        return true;
-                    }
-                }
                 return false;
             }
 
-        }
-
-        public bool HasVGPUs
-        {
-            get
+            if (bios_strings.Count == 0)
             {
-                return (VGPUs != null && VGPUs.Count > 0);
-            }
-        }
-
-        public bool HasGPUPassthrough
-        {
-            get
-            {
-                if (VGPUs != null && VGPUs.Count > 0)
-                {
-                    var vGPUs = Connection.ResolveAll(VGPUs);
-                    return vGPUs.Any(vGPU => vGPU != null && vGPU.IsPassthrough);
-                }
                 return false;
             }
+
+            bool value = bios_strings.ContainsKey("bios-vendor") && bios_strings["bios-vendor"] == "Xen"
+                         && bios_strings.ContainsKey("system-manufacturer") && bios_strings["system-manufacturer"] == "Xen";
+
+            return !value;
         }
 
-
-        public virtual IEnumerable<SR> SRs
+        public bool HasCD()
         {
-            get
+            foreach (var vbd in this.Connection.ResolveAll<VBD>(this.VBDs))
             {
-                List<VBD> vbds = Connection.ResolveAll(VBDs);
-                foreach (var vbd in vbds)
+                if (vbd.IsCDROM())
                 {
-                    if (vbd != null)
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool HasVGPUs()
+        {
+            return VGPUs != null && VGPUs.Count > 0;
+        }
+
+        public bool HasGPUPassthrough()
+        {
+            if (VGPUs != null && VGPUs.Count > 0)
+            {
+                var vGPUs = Connection.ResolveAll(VGPUs);
+                return vGPUs.Any(vGPU => vGPU != null && vGPU.IsPassthrough());
+            }
+            return false;
+        }
+
+        public virtual IEnumerable<SR> SRs()
+        {
+            List<VBD> vbds = Connection.ResolveAll(VBDs);
+            foreach (var vbd in vbds)
+            {
+                if (vbd != null)
+                {
+                    VDI vdi = vbd.Connection.Resolve(vbd.VDI);
+                    if (vdi != null)
                     {
-                        VDI vdi = vbd.Connection.Resolve(vbd.VDI);
-                        if (vdi != null)
-                        {
-                            yield return vdi.Connection.Resolve(vdi.SR);
-                        }
+                        yield return vdi.Connection.Resolve(vdi.SR);
                     }
                 }
             }
         }
 
-        public bool IsAssignedToVapp
+        public bool IsAssignedToVapp()
         {
-            get
-            {
-                //on pre-boston servers appliance is null
-                return appliance != null && appliance.opaque_ref != null &&
-                       appliance.opaque_ref.StartsWith("OpaqueRef:") &&
-                       appliance.opaque_ref != "OpaqueRef:NULL";
-            }
+            //on pre-boston servers appliance is null
+            return appliance != null && appliance.opaque_ref != null &&
+                   appliance.opaque_ref.StartsWith("OpaqueRef:") &&
+                   appliance.opaque_ref != "OpaqueRef:NULL";
         }
 
         /// <summary>
         /// Try to determine if this VM is WSS - this is a best guess only
         /// </summary>
-        public bool CouldBeWss
+        public bool CouldBeWss()
         {
-            get
-            {
-                const string wssName = "Web Self Service";
-                return name_label.Contains(wssName);
-            }
+            const string wssName = "Web Self Service";
+            return name_label.Contains(wssName);
         }
 
         public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, Session sessionTo)
@@ -1745,53 +1509,40 @@ namespace XenAPI
                        : null;
         }
 
-        public long CoresPerSocket
+        public long GetCoresPerSocket()
         {
-            get
+            if (platform != null && platform.ContainsKey("cores-per-socket"))
             {
-                if (platform != null && platform.ContainsKey("cores-per-socket"))
-                {
-                    long coresPerSocket;
-                    return long.TryParse(platform["cores-per-socket"], out coresPerSocket) ? coresPerSocket : DEFAULT_CORES_PER_SOCKET;
-                }
-                return DEFAULT_CORES_PER_SOCKET;
+                long coresPerSocket;
+                return long.TryParse(platform["cores-per-socket"], out coresPerSocket) ? coresPerSocket : DEFAULT_CORES_PER_SOCKET;
             }
-            set
-            {
-                if (value != CoresPerSocket)
-                {
-
-                    Dictionary<string, string> newPlatform =
-                        platform == null ?
-                            new Dictionary<string, string>() :
-                            new Dictionary<string, string>(platform);
-                    newPlatform["cores-per-socket"] = value.ToString();
-                    platform = newPlatform;
-                }
-            }
+            return DEFAULT_CORES_PER_SOCKET;
         }
 
-        public long MaxCoresPerSocket
+        public void SetCoresPerSocket(long value)
         {
-            get
-            {
-                var homeServer = Home();
-                if (homeServer != null)
-                    return homeServer.CoresPerSocket;
-
-                var maxCoresPerSocket = 0;
-                foreach (var host in this.Connection.Cache.Hosts)
-                {
-                    if (host.CoresPerSocket > maxCoresPerSocket)
-                        maxCoresPerSocket = host.CoresPerSocket;
-                }
-                return maxCoresPerSocket;
-            }
+            platform = SetDictionaryKey(platform, "cores-per-socket", value.ToString());
         }
 
-        public bool HasValidVCPUConfiguration
+        public long MaxCoresPerSocket()
         {
-            get { return ValidVCPUConfiguration(VCPUs_max, CoresPerSocket) == ""; }
+            var homeServer = Home();
+            if (homeServer != null)
+                return homeServer.CoresPerSocket();
+
+            var maxCoresPerSocket = 0;
+            foreach (var host in this.Connection.Cache.Hosts)
+            {
+                var coresPerSocket = host.CoresPerSocket();
+                if (coresPerSocket > maxCoresPerSocket)
+                    maxCoresPerSocket = coresPerSocket;
+            }
+            return maxCoresPerSocket;
+        }
+
+        public bool HasValidVCPUConfiguration()
+        {
+            return ValidVCPUConfiguration(VCPUs_max, GetCoresPerSocket()) == "";
         }
 
         public static string ValidVCPUConfiguration(long noOfVCPUs, long coresPerSocket)
@@ -1806,14 +1557,11 @@ namespace XenAPI
             return "";
         }
 
-        public string Topology
+        public string Topology()
         {
-            get
-            {
-                var cores = CoresPerSocket;
-                var sockets = ValidVCPUConfiguration(VCPUs_max, cores) == "" ? VCPUs_max/cores : 0;
-                return GetTopology(sockets, cores);
-            }
+            var cores = GetCoresPerSocket();
+            var sockets = ValidVCPUConfiguration(VCPUs_max, cores) == "" ? VCPUs_max/cores : 0;
+            return GetTopology(sockets, cores);
         }
 
         public static string GetTopology(long sockets, long cores)
@@ -1829,164 +1577,134 @@ namespace XenAPI
             return string.Format(Messages.CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE, sockets, cores);
         }
 
-        public bool CanBeEnlightened
+        public bool CanBeEnlightened()
         {
-            get { return other_config.ContainsKey("xscontainer-monitor"); }
+            return other_config.ContainsKey("xscontainer-monitor");
         }
 
-        public bool IsEnlightened
+        public bool IsEnlightened()
         {
-            get
-            {
-                var v = Get(other_config, "xscontainer-monitor");
-                return v == null ? false : v.ToLower() == "true";
-            }
-        }
-        
-        public VDI CloudConfigDrive
-        {
-            get
-            {
-                var vbds = Connection.ResolveAll(VBDs);
-                return vbds.Select(vbd => Connection.Resolve(vbd.VDI)).FirstOrDefault(vdi => vdi != null && vdi.IsCloudConfigDrive);
-            }
+            var v = Get(other_config, "xscontainer-monitor");
+            return v != null && v.ToLower() == "true";
         }
 
-        public bool CanHaveCloudConfigDrive
+        public VDI CloudConfigDrive()
         {
-            get
-            {
-                if (is_a_template && TemplateType == VmTemplateType.CoreOS)
-                    return true;
-                //otherwise check if it has a config drive
-                return CloudConfigDrive != null;
-            }
+            var vbds = Connection.ResolveAll(VBDs);
+            return vbds.Select(vbd => Connection.Resolve(vbd.VDI)).FirstOrDefault(vdi => vdi != null && vdi.IsCloudConfigDrive());
         }
 
-        public VM_Docker_Info DockerInfo
+        public bool CanHaveCloudConfigDrive()
         {
-            get
-            {
-                string xml = Get(other_config, "docker_info");
-                if (string.IsNullOrEmpty(xml))
-                    return null;
-                VM_Docker_Info info = new VM_Docker_Info(xml);
-                return info;
-            }
+            if (is_a_template && TemplateType() == VmTemplateType.CoreOS)
+                return true;
+            //otherwise check if it has a config drive
+            return CloudConfigDrive() != null;
         }
 
-        public VM_Docker_Version DockerVersion
+        public VM_Docker_Info DockerInfo()
         {
-            get
-            {
-                string xml = Get(other_config, "docker_version");
-                if (string.IsNullOrEmpty(xml))
-                    return null;
-                VM_Docker_Version info = new VM_Docker_Version(xml);
-                return info;
-            }
+            string xml = Get(other_config, "docker_info");
+            if (string.IsNullOrEmpty(xml))
+                return null;
+            VM_Docker_Info info = new VM_Docker_Info(xml);
+            return info;
         }
 
-        public bool ReadCachingEnabled
+        public VM_Docker_Version DockerVersion()
         {
-            get
-            {
-                return ReadCachingVDIs.Count > 0;
-            }
+            string xml = Get(other_config, "docker_version");
+            if (string.IsNullOrEmpty(xml))
+                return null;
+            VM_Docker_Version info = new VM_Docker_Version(xml);
+            return info;
+        }
+
+        public bool ReadCachingEnabled()
+        {
+            return ReadCachingVDIs().Count > 0;
         }
 
         /// <summary>
         /// Return the list of VDIs that have Read Caching enabled
         /// </summary>
-        public List<VDI> ReadCachingVDIs
+        public List<VDI> ReadCachingVDIs()
         {
-            get
+            var readCachingVdis = new List<VDI>();
+            foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
             {
-                var readCachingVdis = new List<VDI>();
-                foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
-                {
-                    var vdi = Connection.Resolve(vbd.VDI);
-                    var resident_host = Connection.Resolve(resident_on);
-                    if (vdi != null && resident_host != null && vdi.ReadCachingEnabled(resident_host))
-                        readCachingVdis.Add(vdi);
-                }
-                return readCachingVdis;
+                var vdi = Connection.Resolve(vbd.VDI);
+                var resident_host = Connection.Resolve(resident_on);
+                if (vdi != null && resident_host != null && vdi.ReadCachingEnabled(resident_host))
+                    readCachingVdis.Add(vdi);
             }
+            return readCachingVdis;
         }
 
-        public string ReadCachingDisabledReason
+        public string ReadCachingDisabledReason()
         {
             // The code in VDI.ReadCachingDisabledReason returns the first matching reason from the list
             // (LICENSE_RESTRICTION, SR_NOT_SUPPORTED, NO_RO_IMAGE, SR_OVERRIDE). In the case that there
             // are several VDIs with different reasons, this function returns the last matching reason,
             // because that is the VDI that is nearest to being read-cachable in some sense. As the reasons
             // are stored in an enum, we can just use greater-than to find the last reason 
-            get 
+            var ans = VDI.ReadCachingDisabledReasonCode.UNKNOWN;
+            foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
             {
-                var ans = VDI.ReadCachingDisabledReasonCode.UNKNOWN;
-                foreach (var vbd in Connection.ResolveAll(VBDs).Where(vbd => vbd != null && vbd.currently_attached))
+                var vdi = Connection.Resolve(vbd.VDI);
+                var resident_host = Connection.Resolve(resident_on);
+                if (vdi != null && resident_host != null && !vdi.ReadCachingEnabled(resident_host))
                 {
-                    var vdi = Connection.Resolve(vbd.VDI);
-                    var resident_host = Connection.Resolve(resident_on);
-                    if (vdi != null && resident_host != null && !vdi.ReadCachingEnabled(resident_host))
-                    {
-                        var reason = vdi.ReadCachingDisabledReason(resident_host);
-                        if (reason > ans)
-                            ans = reason;
-                    }
+                    var reason = vdi.ReadCachingDisabledReason(resident_host);
+                    if (reason > ans)
+                        ans = reason;
                 }
+            }
 
-                switch (ans)
-                {
-                    case VDI.ReadCachingDisabledReasonCode.LICENSE_RESTRICTION:
-                        if (Helpers.FeatureForbidden(Connection, Host.RestrictReadCaching))
-                            return Messages.VM_READ_CACHING_DISABLED_REASON_LICENSE;
-                        else
-                            return Messages.VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE;
-                    case VDI.ReadCachingDisabledReasonCode.SR_NOT_SUPPORTED:
-                        return Messages.VM_READ_CACHING_DISABLED_REASON_SR_TYPE;
-                    case VDI.ReadCachingDisabledReasonCode.NO_RO_IMAGE:
-                        return Messages.VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE;
-                    case VDI.ReadCachingDisabledReasonCode.SR_OVERRIDE:
-                        return Messages.VM_READ_CACHING_DISABLED_REASON_TURNED_OFF;
-                    default:
-                        // should only happen transiently
-                        return null;
-                }
+            switch (ans)
+            {
+                case VDI.ReadCachingDisabledReasonCode.LICENSE_RESTRICTION:
+                    if (Helpers.FeatureForbidden(Connection, Host.RestrictReadCaching))
+                        return Messages.VM_READ_CACHING_DISABLED_REASON_LICENSE;
+                    else
+                        return Messages.VM_READ_CACHING_DISABLED_REASON_PREV_LICENSE;
+                case VDI.ReadCachingDisabledReasonCode.SR_NOT_SUPPORTED:
+                    return Messages.VM_READ_CACHING_DISABLED_REASON_SR_TYPE;
+                case VDI.ReadCachingDisabledReasonCode.NO_RO_IMAGE:
+                    return Messages.VM_READ_CACHING_DISABLED_REASON_NO_RO_IMAGE;
+                case VDI.ReadCachingDisabledReasonCode.SR_OVERRIDE:
+                    return Messages.VM_READ_CACHING_DISABLED_REASON_TURNED_OFF;
+                default:
+                    // should only happen transiently
+                    return null;
             }
         }
 
         /// <summary>
         /// Whether the VM can be moved inside the pool (vdi copy + destroy) 
         /// </summary>
-        public bool CanBeMoved
+        public bool CanBeMoved()
         {
-            get
-            {
-                if (SRs.Any(sr => sr != null && sr.HBALunPerVDI))
-                    return false;
-
-                if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
-                {
-                    return Connection.ResolveAll(VBDs).Find(v => v.IsOwner) != null;
-                }
+            if (SRs().Any(sr => sr != null && sr.HBALunPerVDI()))
                 return false;
+
+            if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
+            {
+                return Connection.ResolveAll(VBDs).Find(v => v.GetIsOwner()) != null;
             }
+            return false;
         }
 
         /// <summary>
         /// Whether the VM can be copied inside the pool (vm.copy)
         /// </summary>
-        public bool CanBeCopied
+        public bool CanBeCopied()
         {
-            get
+            if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
             {
-                if (!is_a_template && !Locked && allowed_operations != null && allowed_operations.Contains(vm_operations.export) && power_state != vm_power_state.Suspended)
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
+            return false;
         }
 
         /// <summary>
@@ -1999,130 +1717,112 @@ namespace XenAPI
         /// Note that this test is better once the VM has already booted once: before then, we can't tell with complete certainty what
         /// OS is inside the VM. In particular, this also catches the "Other Install Media" template, and unbooted VMs made from it.
         /// </remarks>
-        public bool IsWindows
+        public bool IsWindows()
         {
-            get
-            {
-                var gm = Connection.Resolve(this.guest_metrics);
+            var gm = Connection.Resolve(this.guest_metrics);
 
-                if (gm != null && gm.IsVmNotWindows)
-                    return false;
+            if (gm != null && gm.IsVmNotWindows())
+                return false;
 
-                var gmFromLastBootedRecord = GuestMetricsFromLastBootedRecord;
-                if (gmFromLastBootedRecord != null && gmFromLastBootedRecord.IsVmNotWindows)
-                     return false;
+            var gmFromLastBootedRecord = GuestMetricsFromLastBootedRecord();
+            if (gmFromLastBootedRecord != null && gmFromLastBootedRecord.IsVmNotWindows())
+                return false;
 
-                //generic check
-                return 
-                    this.IsHVM && BoolKey(this.platform, "viridian");
-            }
+            //generic check
+            return
+                this.IsHVM() && BoolKey(this.platform, "viridian");
         }
 
-        private VM_guest_metrics GuestMetricsFromLastBootedRecord
+        private VM_guest_metrics GuestMetricsFromLastBootedRecord()
         {
-            get
+            if (!string.IsNullOrEmpty(this.last_booted_record))
             {
-                if (!string.IsNullOrEmpty(this.last_booted_record))
+                Regex regex = new Regex("'guest_metrics' +'(OpaqueRef:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'");
+
+                var v = regex.Match(this.last_booted_record);
+                if (v.Success)
                 {
-                    Regex regex = new Regex("'guest_metrics' +'(OpaqueRef:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'");
-
-                    var v = regex.Match(this.last_booted_record);
-                    if (v.Success)
-                    {
-                        string s = v.Groups[1].ToString();
-                        return this.Connection.Resolve<VM_guest_metrics>(new XenRef<VM_guest_metrics>(s));
-                    }
+                    string s = v.Groups[1].ToString();
+                    return this.Connection.Resolve<VM_guest_metrics>(new XenRef<VM_guest_metrics>(s));
                 }
-
-                return null;
             }
+
+            return null;
         }
 
-        public bool WindowsUpdateCapable
+        public bool WindowsUpdateCapable()
         {
-            get
-            {
-                return 
-                    this.has_vendor_device && this.IsWindows;
-            }
+            return this.has_vendor_device && this.IsWindows();
         }
 
         /// <summary>
         /// Returns the VM IP address for SSH login.
         /// </summary>
-        public string IPAddressForSSH
+        public string IPAddressForSSH()
         {
-            get
+            List<string> ipAddresses = new List<string>();
+
+            if (!this.is_control_domain) //vm
             {
-                List<string> ipAddresses = new List<string>();
+                List<VIF> vifs = this.Connection.ResolveAll(this.VIFs);
+                vifs.Sort();
 
-                if (!this.is_control_domain) //vm
+                foreach (var vif in vifs)
                 {
-                    List<VIF> vifs = this.Connection.ResolveAll(this.VIFs);
-                    vifs.Sort();
+                    if (!vif.currently_attached)
+                        continue;
 
-                    foreach (var vif in vifs)
+                    var network = vif.Connection.Resolve(vif.network);
+                    if (network != null && network.IsGuestInstallerNetwork())
+                        continue;
+
+                    ipAddresses.AddRange(vif.IPAddresses());
+                }
+            }
+            else //control domain
+            {
+                List<PIF> pifList = new List<PIF>(this.Connection.Cache.PIFs);
+                pifList.Sort(); // This sort ensures that the primary PIF comes before other management PIFs
+
+                foreach (PIF pif in pifList)
+                {
+                    if (pif.host.opaque_ref != this.resident_on.opaque_ref || !pif.currently_attached)
+                        continue;
+
+                    if (pif.IsManagementInterface(false))
                     {
-                        if (!vif.currently_attached)
-                            continue;
-
-                        var network = vif.Connection.Resolve(vif.network);
-                        if (network != null && network.IsGuestInstallerNetwork)
-                            continue;
-
-                        ipAddresses.AddRange(vif.IPAddresses);
+                        ipAddresses.Add(pif.IP);
                     }
                 }
-                else //control domain
-                {
-                    List<PIF> pifList = new List<PIF>(this.Connection.Cache.PIFs);
-                    pifList.Sort();  // This sort ensures that the primary PIF comes before other management PIFs
-
-                    foreach (PIF pif in pifList)
-                    {
-                        if (pif.host.opaque_ref != this.resident_on.opaque_ref || !pif.currently_attached)
-                            continue;
-
-                        if (pif.IsManagementInterface(false))
-                        {
-                            ipAddresses.Add(pif.IP);
-                        }
-                    }
-                }
-
-                //find first IPv4 address and return it - we would use it if there is one
-                IPAddress addr;
-                foreach (string addrString in ipAddresses)
-                    if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                        return addrString;
-
-                //return the first address (this will not be IPv4)
-                return ipAddresses.FirstOrDefault() ?? string.Empty;
             }
+
+            //find first IPv4 address and return it - we would use it if there is one
+            IPAddress addr;
+            foreach (string addrString in ipAddresses)
+                if (IPAddress.TryParse(addrString, out addr) && addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    return addrString;
+
+            //return the first address (this will not be IPv4)
+            return ipAddresses.FirstOrDefault() ?? string.Empty;
         }
 
-        public bool HciWarnBeforeShutdown
+        public bool HciWarnBeforeShutdown()
         {
-            get
-            {
-                return other_config != null && other_config.ContainsKey("hci-warn-before-shutdown");
-			}
+            return other_config != null && other_config.ContainsKey("hci-warn-before-shutdown");
         }
 
-        public bool SupportsVcpuHotplug
+        public bool SupportsVcpuHotplug()
         {
-            get
-            {
-                return !IsWindows && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
-            }
+            return !IsWindows() && !Helpers.FeatureForbidden(Connection, Host.RestrictVcpuHotplug);
         }
 
-        public PVS_proxy PvsProxy
+        public PVS_proxy PvsProxy()
         {
-            get
+            return Connection.Cache.PVS_proxies.FirstOrDefault(p =>
             {
-                return Connection.Cache.PVS_proxies.FirstOrDefault(p => p.VM != null && p.VM.Equals(this)); // null if none
-            }
+                var vm = p.VM();
+                return vm != null && vm.Equals(this);
+            }); // null if none
         }
     }
 

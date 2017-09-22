@@ -196,13 +196,13 @@ namespace XenAdmin.SettingsPanels
                 toolTipContainer1.RemoveAll();
             }
 
-            modeComboBox.SelectedIndex = vdi.read_only || vbd.read_only ? 1 : 0;
+            modeComboBox.SelectedIndex = vdi.read_only || vbd.IsReadOnly() ? 1 : 0;
 
             //
             // Set QoS Value
             //
 
-            diskAccessPriorityTrackBar.Value = vbd.IONice;
+            diskAccessPriorityTrackBar.Value = vbd.GetIoNice();
 
             Host master = Helpers.GetMaster(vbd.Connection);
 
@@ -224,8 +224,8 @@ namespace XenAdmin.SettingsPanels
             get
             {
                 return DevicePosition != vbd.userdevice
-                    || (modeComboBox.SelectedItem.ToString() == Messages.READ_ONLY) != vbd.read_only
-                    || (diskAccessPriorityTrackBar.Enabled && diskAccessPriorityTrackBar.Value != vbd.IONice);
+                    || (modeComboBox.SelectedItem.ToString() == Messages.READ_ONLY) != vbd.IsReadOnly()
+                    || (diskAccessPriorityTrackBar.Enabled && diskAccessPriorityTrackBar.Value != vbd.GetIoNice());
             }
         }
 
@@ -283,7 +283,7 @@ namespace XenAdmin.SettingsPanels
             vbd_mode vbdMode = modeComboBox.SelectedIndex == 0 ? vbd_mode.RW : vbd_mode.RO;
             string devicePosition = DevicePosition;
 
-            int priorityToSet = vbd.IONice;
+            int priorityToSet = vbd.GetIoNice();
             if (diskAccessPriorityEnabled)
             {
                 priorityToSet = diskAccessPriority;

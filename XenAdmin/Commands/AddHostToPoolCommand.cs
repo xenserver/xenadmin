@@ -160,7 +160,7 @@ namespace XenAdmin.Commands
                 Program.HideObject(opaque_ref);
             }
 
-            RunMultipleActions(actions, string.Format(Messages.ADDING_SERVERS_TO_POOL, _pool.Name), Messages.POOLCREATE_ADDING, Messages.POOLCREATE_ADDED, true);
+            RunMultipleActions(actions, string.Format(Messages.ADDING_SERVERS_TO_POOL, _pool.Name()), Messages.POOLCREATE_ADDING, Messages.POOLCREATE_ADDED, true);
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
@@ -170,7 +170,7 @@ namespace XenAdmin.Commands
                 foreach (Host host in _hosts)
                 {
                     // only allowed to add standalone hosts.
-                    if (Helpers.GetPool(host.Connection) != null || host.RestrictPooling)
+                    if (Helpers.GetPool(host.Connection) != null || Host.RestrictPooling(host))
                     {
                         return false;
                     }
@@ -186,11 +186,11 @@ namespace XenAdmin.Commands
             {
                 if (_hosts.Count == 1)
                 {
-                    return string.Format(Messages.MAINWINDOW_CONFIRM_MOVE_TO_POOL, _hosts[0].Name.Ellipsise(500), _pool.Name.Ellipsise(500));
+                    return string.Format(Messages.MAINWINDOW_CONFIRM_MOVE_TO_POOL, _hosts[0].Name().Ellipsise(500), _pool.Name().Ellipsise(500));
                 }
                 else if (_hosts.Count > 1)
                 {
-                    return string.Format(Messages.MAINWINDOW_CONFIRM_MOVE_TO_POOL_MULTIPLE, _pool.Name.Ellipsise(500));
+                    return string.Format(Messages.MAINWINDOW_CONFIRM_MOVE_TO_POOL_MULTIPLE, _pool.Name().Ellipsise(500));
                 }
                 return null;
             }

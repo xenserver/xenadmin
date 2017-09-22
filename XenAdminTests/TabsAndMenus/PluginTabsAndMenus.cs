@@ -153,7 +153,7 @@ namespace XenAdminTests.TabsAndMenus
         public void Tabs_UserTemplate()
         {
             EnsureDefaultTemplatesShown();
-            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_template && !v.DefaultTemplate && !v.is_a_snapshot))
+            foreach (VM vm in GetAllXenObjects<VM>(v => v.is_a_template && !v.DefaultTemplate() && !v.is_a_snapshot))
             {
                 VerifyTabs(vm, UserTemplateTabs);
             }
@@ -163,7 +163,7 @@ namespace XenAdminTests.TabsAndMenus
         public void Tabs_SR()
         {
             EnsureChecked(MainWindowWrapper.ViewMenuItems.LocalStorageToolStripMenuItem);
-            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR))
+            foreach (SR sr in GetAllXenObjects<SR>(s => !s.IsToolsSR()))
             {
                 VerifyTabs(sr, SRTabs);
             }

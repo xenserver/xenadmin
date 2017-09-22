@@ -170,7 +170,7 @@ namespace XenAdmin.Dialogs
             if (pool == null)
                 return false;
 
-            if (pool.HealthCheckSettings.Status == HealthCheckStatus.Undefined)
+            if (pool.HealthCheckSettings().Status == HealthCheckStatus.Undefined)
             {
                 Program.Invoke(Program.MainWindow, () => ShowHealthCheckOverview(pool));
                 return true;
@@ -186,7 +186,7 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
 
-            log.InfoFormat("Pool {0} not enrolled into Health Check. Show Health Check Overview if needed", selectedPool.Name);
+            log.InfoFormat("Pool {0} not enrolled into Health Check. Show Health Check Overview if needed", selectedPool.Name());
 
             if (Program.RunInAutomatedTestMode)
                 log.DebugFormat("In automated test mode: not showing Health Check dialog");

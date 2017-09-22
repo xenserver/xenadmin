@@ -291,7 +291,7 @@ namespace XenAdmin.Dialogs
                                 if (powerOnHost != null)
                                 {
                                     var previousSelection = NewMasterComboBox.SelectedItem as ToStringWrapper<Host>;
-                                    var hostToAdd = new ToStringWrapper<Host>(powerOnHost, powerOnHost.Name);
+                                    var hostToAdd = new ToStringWrapper<Host>(powerOnHost, powerOnHost.Name());
                                     if (NewMasterComboBox.Items.Count == 0)
                                     {
                                         powerOnHost.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
@@ -449,7 +449,7 @@ namespace XenAdmin.Dialogs
                     host.PropertyChanged -= new PropertyChangedEventHandler(host_PropertyChanged);
                     host.PropertyChanged += new PropertyChangedEventHandler(host_PropertyChanged);
                     if (host.enabled && metrics != null && metrics.live)
-                        NewMasterComboBox.Items.Add(new ToStringWrapper<Host>(host, host.Name));
+                        NewMasterComboBox.Items.Add(new ToStringWrapper<Host>(host, host.Name()));
                 }
 
                 SelectProperItemInNewMasterComboBox(previousSelection);
@@ -521,7 +521,7 @@ namespace XenAdmin.Dialogs
 
             public override string ToString()
             {
-                return vm.Name;
+                return vm.Name();
             }
 
             public int CompareTo(VmPrecheckRow otherVM)
@@ -555,13 +555,13 @@ namespace XenAdmin.Dialogs
                         break;
 
                     case Solution.InstallPVDrivers:
-                        error = String.Format(vm.HasNewVirtualisationStates ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
+                        error = String.Format(vm.HasNewVirtualisationStates() ? Messages.EVACUATE_HOST_INSTALL_MGMNT_PROMPT : Messages.EVACUATE_HOST_INSTALL_TOOLS_PROMPT, message);
                         break;
 
                     case Solution.InstallPVDriversNoSolution:
                         // if the state is not unknown we have metrics and can show a detailed message.
                         // Otherwise go with the server and just say they aren't installed
-                        error = !vm.GetVirtualisationStatus.HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN)
+                        error = !vm.GetVirtualisationStatus().HasFlag(XenAPI.VM.VirtualisationStatus.UNKNOWN)
                             ? vm.GetVirtualisationWarningMessages()
                             : Messages.PV_DRIVERS_NOT_INSTALLED;
                         break;
@@ -846,7 +846,7 @@ namespace XenAdmin.Dialogs
         {
             base.OnShown(e);
 
-            Text = string.Format(Messages.EVACUATE_HOST_DIALOG_TITLE, host.Name);
+            Text = string.Format(Messages.EVACUATE_HOST_DIALOG_TITLE, host.Name());
 
             //This dialog uses several different actions all of which might need an elevated session
             //We sudo once for all of them and store the session, or close the dialog.
@@ -913,7 +913,7 @@ namespace XenAdmin.Dialogs
                 if (string.Compare(kvp.Value[0].Trim(), "wlb", true) == 0)
                 {
                     Host toHost = this.connection.Cache.Find_By_Uuid<Host>(kvp.Value[(int)RecProperties.ToHost]);
-                    if (!(this.connection.Resolve(kvp.Key)).is_control_domain && !toHost.IsLive && !controlDomain.Contains(toHost))
+                    if (!(this.connection.Resolve(kvp.Key)).is_control_domain && !toHost.IsLive() && !controlDomain.Contains(toHost))
                     {
                         valid = false;
                         break;

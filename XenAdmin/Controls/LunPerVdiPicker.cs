@@ -239,7 +239,7 @@ namespace XenAdmin.Controls
                 if(Sr == null)
                     return false;
 
-                return Sr.HBALunPerVDI;
+                return Sr.HBALunPerVDI();
             }
         }
 
@@ -252,7 +252,7 @@ namespace XenAdmin.Controls
                 if (Vdi == null)
                     return String.Empty;
 
-                return Vdi.Name;
+                return Vdi.Name();
             }
         }
 
@@ -263,7 +263,7 @@ namespace XenAdmin.Controls
                 if (Sr == null)
                     return String.Empty;
 
-                return Sr.Name;
+                return Sr.Name();
             }
         }
 
@@ -356,7 +356,7 @@ namespace XenAdmin.Controls
 
         public override string ToString()
         {
-            return String.Format(Messages.VALUE_HYPHEN_VALUE, Vdi.name_label, Vdi.SizeText);
+            return String.Format(Messages.VALUE_HYPHEN_VALUE, Vdi.name_label, Vdi.SizeText());
         }
 
         public override bool Equals(object obj)

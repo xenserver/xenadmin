@@ -62,7 +62,7 @@ namespace XenAdmin
 
         public Session CreateActionSession(Session session, IXenConnection connection)
         {
-            return SessionFactory.CreateSession(session, connection, ConnectionTimeout);
+            return SessionFactory.DuplicateSession(session, connection, ConnectionTimeout);
         }
 
         public bool Exiting

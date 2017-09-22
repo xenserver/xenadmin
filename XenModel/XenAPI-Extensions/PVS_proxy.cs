@@ -39,15 +39,12 @@ namespace XenAPI
 {
     public partial class PVS_proxy
     {
-        public VM VM
+        public VM VM()
         {
-            get
-            {
-                var vif = Connection.Resolve(VIF);
-                if (vif == null) 
-                    return null;
-                return Connection.Resolve(vif.VM);
-            }
+            var vif = Connection.Resolve(VIF);
+            if (vif == null)
+                return null;
+            return Connection.Resolve(vif.VM);
         }
     }
 }

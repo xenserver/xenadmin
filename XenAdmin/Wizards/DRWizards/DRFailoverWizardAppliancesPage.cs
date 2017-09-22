@@ -49,7 +49,7 @@ namespace XenAdmin.Wizards.DRWizards
             {
                 _pool = value;
                 if (_pool != null)
-                    labelPageDescription.Text = string.Format(labelPageDescription.Text, Pool.Name);
+                    labelPageDescription.Text = string.Format(labelPageDescription.Text, Pool.Name());
             }
         }
 
@@ -129,7 +129,7 @@ namespace XenAdmin.Wizards.DRWizards
             {
                 case DRWizardType.Failback:
                     labelPageDescription.Text = String.Format(Messages.DR_WIZARD_APPLIANCESPAGE_DESCRIPTION_FAILBACK,
-                                                              Pool.Name);
+                                                              Pool.Name());
                     radioButtonStart.Text = Messages.DR_WIZARD_APPLIANCESPAGE_FAILBACK_START;
                     radioButtonPaused.Text = Messages.DR_WIZARD_APPLIANCESPAGE_FAILBACK_STARTPAUSED;
                     radioButtonDoNotStart.Text = Messages.DR_WIZARD_APPLIANCESPAGE_FAILBACK_DONOTSTART;
@@ -220,7 +220,7 @@ namespace XenAdmin.Wizards.DRWizards
                     //if (!String.IsNullOrEmpty(poolMetadata.Pool.Name))
                     {
                         string description = poolMetadata.Pool.uuid == Pool.uuid ? Messages.DR_WIZARD_APPLIANCESPAGE_CURRENT_POOL : string.Empty;
-                        PoolNode poolNode = new PoolNode(vdiRef, poolMetadata.Pool.Name, description);
+                        PoolNode poolNode = new PoolNode(vdiRef, poolMetadata.Pool.Name(), description);
                         ApplianceTreeView.AddNode(poolNode);
                         poolNode.Enabled = (poolMetadata.Pool.uuid != Pool.uuid);
                         PopulateTreeView(poolMetadata, poolNode);
@@ -406,7 +406,7 @@ namespace XenAdmin.Wizards.DRWizards
 
         private void Update()
         {
-            Text = Appliance.Name;
+            Text = Appliance.Name();
             Image = Images.GetImage16For(Appliance);
 
             Description = "";
@@ -430,7 +430,7 @@ namespace XenAdmin.Wizards.DRWizards
 
         private void Update()
         {
-            Text = Vm.Name;
+            Text = Vm.Name();
             Image = Images.GetImage16For(Icons.VM);
             Description = "";
             Enabled = true;

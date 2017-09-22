@@ -49,9 +49,9 @@ namespace XenAdmin.Actions.GUIActions
     {
         public bool IsSatisfiedBy(Task task)
         {
-            return (task.XenCenterUUID == Program.XenCenterUUID ||
-                    task.Connection.Resolve(task.subtask_of) != null ||
-                    task.Hidden);
+            return task.XenCenterUUID() == Program.XenCenterUUID ||
+                   task.Connection.Resolve(task.subtask_of) != null ||
+                   task.IsHidden();
         }
     }
 
@@ -67,8 +67,8 @@ namespace XenAdmin.Actions.GUIActions
 
         public bool IsSatisfiedBy(Task task)
         {
-            return (task.AppliesTo != null ||
-                    task.created + task.Connection.ServerTimeOffset < DateTime.UtcNow - awareClientHeuristic);
+            return task.AppliesTo() != null ||
+                    task.created + task.Connection.ServerTimeOffset < DateTime.UtcNow - awareClientHeuristic;
         }
     }
 

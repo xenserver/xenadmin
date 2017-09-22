@@ -40,7 +40,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly XenRef<Pool_patch> _patchRef;
 
         public ApplyPatchPlanAction(Host host, Pool_patch patch)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name, host.Name))
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name(), host.Name()))
         {
             this._host = new XenRef<Host>(host);
             this._patchRef = new XenRef<Pool_patch>(patch);

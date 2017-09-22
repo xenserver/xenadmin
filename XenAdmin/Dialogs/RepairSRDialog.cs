@@ -92,7 +92,7 @@ namespace XenAdmin.Dialogs
 
             if (_srList.Count == 1)
             {
-                Text = string.Format(Messages.REPAIR_SR_DIALOG_TITLE_SINGLE, _srList[0].Name);
+                Text = string.Format(Messages.REPAIR_SR_DIALOG_TITLE_SINGLE, _srList[0].Name());
             }
             else
             {
@@ -168,7 +168,7 @@ namespace XenAdmin.Dialogs
                 // persist expanded-state of node, or default to true
                 bool isExpanded = true;
 
-                if (_srList[i].IsBroken() || !_srList[i].MultipathAOK)
+                if (_srList[i].IsBroken() || !_srList[i].MultipathAOK())
                     anythingBroken = true;
 
                 if (firstTime)
@@ -292,7 +292,7 @@ namespace XenAdmin.Dialogs
 
         private void action_Completed(ActionBase sender)
         {
-            if(_srList.Count > 0 && _srList.Any(s=>s !=null && !s.MultipathAOK))
+            if(_srList.Count > 0 && _srList.Any(s=>s !=null && !s.MultipathAOK()))
             {
                 SucceededWithWarning = true;
                 SucceededWithWarningDescription = Messages.REPAIR_SR_WARNING_MULTIPATHS_DOWN;
@@ -321,11 +321,11 @@ namespace XenAdmin.Dialogs
 
                 if (host == null)
                 {
-                    Text = sr.Name;
+                    Text = sr.Name();
                 }
                 else
                 {
-                    Text = host.Name;
+                    Text = host.Name();
                 }
             }
         }

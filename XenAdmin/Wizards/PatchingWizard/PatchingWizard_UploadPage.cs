@@ -598,7 +598,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             var poolOrHost = Helpers.GetPool(host.Connection) ?? (IXenObject)host;
 
             string text = action == null ? Messages.UPLOAD_PATCH_ALREADY_UPLOADED : GetActionDescription(action).Ellipsise(EllipsiseValueDownDescription);
-            drawActionText(Images.GetImage16For(poolOrHost),poolOrHost.Name, text, GetTextColor(action), e);
+            drawActionText(Images.GetImage16For(poolOrHost),poolOrHost.Name(), text, GetTextColor(action), e);
         }
 
         private void drawActionText(Image icon, string actionTitle, string actionDescription, Color textColor,DrawItemEventArgs e)

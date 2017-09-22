@@ -51,7 +51,7 @@ namespace XenAdmin.Dialogs.VMAppliances
 		public void Populate(IEnumerable<VM> vms)
 		{
 			foreach (var vm in vms)
-				m_listBoxVMs.Items.Add(vm.Name);
+				m_listBoxVMs.Items.Add(vm.Name());
 		}
 
 		private void FateSharingVMsDialog_Load(object sender, EventArgs e)

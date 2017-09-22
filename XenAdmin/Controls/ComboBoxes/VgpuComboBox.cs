@@ -125,8 +125,8 @@ namespace XenAdmin.Controls
             VgpuTypes = vgpuType == null ? null : new[] {vgpuType};
             if (vgpuType != null)
             {
-                IsVgpuSubitem = gpuGroup.HasVGpu;
-                IsFractionalVgpu = !vgpuType.IsPassthrough;
+                IsVgpuSubitem = gpuGroup.HasVGpu();
+                IsFractionalVgpu = !vgpuType.IsPassthrough();
                 if (disabledVGpuTypes != null && disabledVGpuTypes.Select(t => t.opaque_ref).Contains(vgpuType.opaque_ref))
                     IsNotEnabledVgpu = true;
             }
@@ -154,17 +154,17 @@ namespace XenAdmin.Controls
             else if (VgpuTypes == null || VgpuTypes.Length == 0 || VgpuTypes[0] == null)
             {
                 //this refers to an item mapping a GPU with only passthrough type
-                displayName = GpuGroup.Name;
+                displayName = GpuGroup.Name();
             }
             else if (IsVgpuSubitem)
             {
                 //this refers to vGPU type which is a subitem of a GPU group
-                displayName = VgpuTypes[0].Description;
+                displayName = VgpuTypes[0].Description();
             }
             else
             {
                 //this refers to a GPU group head item, which is also non-selectable
-                displayName = GpuGroup.Name;
+                displayName = GpuGroup.Name();
             }    
         }
 

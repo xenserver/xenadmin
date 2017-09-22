@@ -66,7 +66,7 @@ namespace XenAdmin.Dialogs
 		public DRConfigureDialog(Pool pool)
 		{
 			InitializeComponent();
-			Text = String.Format(Messages.DR_CONFIGURE_TITLE, pool.Name);
+			Text = String.Format(Messages.DR_CONFIGURE_TITLE, pool.Name());
             pictureBoxWarning.Image = SystemIcons.Warning.ToBitmap();
             pictureBoxInfo.Image = SystemIcons.Information.ToBitmap();
 			HideAllWarnings();
@@ -304,7 +304,7 @@ namespace XenAdmin.Dialogs
 			public SrRow(SR sr, Pool pool)
 			{
 				SR = sr;
-				var availableSpace = sr.FreeSpace;
+				var availableSpace = sr.FreeSpace();
 				HasSpace = availableSpace > 0;
 
 				foreach (var vdi in pool.Connection.Cache.VDIs)
@@ -317,9 +317,9 @@ namespace XenAdmin.Dialogs
 				}
 
 				var cellTick = new DataGridViewCheckBoxCell { Value = IsDrEnabled };
-				var cellName = new DataGridViewTextAndImageCell { Value = sr.Name, Image = Images.GetImage16For(sr.GetIcon) };
-				var cellDesc = new DataGridViewTextBoxCell { Value = sr.Description };
-				var cellType = new DataGridViewTextBoxCell { Value = sr.FriendlyTypeName };
+                var cellName = new DataGridViewTextAndImageCell { Value = sr.Name(), Image = Images.GetImage16For(Images.GetIconFor(sr)) };
+				var cellDesc = new DataGridViewTextBoxCell { Value = sr.Description() };
+				var cellType = new DataGridViewTextBoxCell { Value = sr.FriendlyTypeName() };
 				var cellSpace = new DataGridViewTextBoxCell { Value = Util.DiskSizeString(availableSpace) };
 				Cells.AddRange(cellTick, cellName, cellDesc, cellType, cellSpace);
 			}

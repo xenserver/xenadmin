@@ -89,7 +89,7 @@ namespace XenAdmin.Commands
                 Session session = connection != null ? connection.Session : null;
 
                 if (host != null)
-                    return host.IsLive  && session != null && session.IsLocalSuperuser;
+                    return host.IsLive() && session != null && session.IsLocalSuperuser;
                 if (pool != null)
                     return  session != null && session.IsLocalSuperuser;                
             }
@@ -112,7 +112,7 @@ namespace XenAdmin.Commands
                     Host host = selection[0].XenObject as Host;
                     Pool pool = selection[0].XenObject as Pool;
 
-                    if (host != null && host.IsLive && connection.Session != null && !connection.Session.IsLocalSuperuser)
+                    if (host != null && host.IsLive() && connection.Session != null && !connection.Session.IsLocalSuperuser)
                     {
                         return Messages.AD_CANNOT_CHANGE_PASSWORD;
                     }

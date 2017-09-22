@@ -46,7 +46,7 @@ namespace XenAdmin.Actions
         private readonly bool ActivateFreeLicense;
 
         public ApplyLicenseAction(Network.IXenConnection connection, Host host, string filepath)
-            : base(connection, string.Format(Messages.APPLYLICENSE_TITLE, host.Name), Messages.APPLYLICENSE_PREP)
+            : base(connection, string.Format(Messages.APPLYLICENSE_TITLE, host.Name()), Messages.APPLYLICENSE_PREP)
         {
             this.Host = host;
             this.Filepath = filepath;
@@ -54,7 +54,7 @@ namespace XenAdmin.Actions
         }
 
         public ApplyLicenseAction(Network.IXenConnection connection, Host host, string filepath, bool activateFreeLicense)
-            : base(connection, string.Format(Messages.APPLYLICENSE_TITLE, host.Name), Messages.APPLYLICENSE_PREP)
+            : base(connection, string.Format(Messages.APPLYLICENSE_TITLE, host.Name()), Messages.APPLYLICENSE_PREP)
         {
             this.Host = host;
             this.Filepath = filepath;
@@ -81,7 +81,7 @@ namespace XenAdmin.Actions
                 LicensingHelper.LicenseDataStruct previousLicenseData = new LicensingHelper.LicenseDataStruct(this.Host);
 
                 this.Description = string.Format(Messages.APPLYLICENSE_APPLYING, Filepath);
-                log.DebugFormat("Applying license to server {0}", this.Host.Name);
+                log.DebugFormat("Applying license to server {0}", this.Host.Name());
                 RelatedTask = XenAPI.Host.async_license_apply(this.Session, this.Host.opaque_ref, encodedContent);
                 PollToCompletion();
                 this.Description = Messages.APPLYLICENSE_APPLIED;

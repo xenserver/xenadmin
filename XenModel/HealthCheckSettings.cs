@@ -368,8 +368,9 @@ namespace XenAdmin.Model
                 var poolOfOne = Helpers.GetPoolOfOne(connection);
                 if (poolOfOne != null)
                 {
-                    uploadToken = poolOfOne.HealthCheckSettings.GetSecretyInfo(connection, UPLOAD_TOKEN_SECRET);
-                    diagnosticToken = poolOfOne.HealthCheckSettings.GetSecretyInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
+                    var healthCheckSettings = poolOfOne.HealthCheckSettings();
+                    uploadToken = healthCheckSettings.GetSecretyInfo(connection, UPLOAD_TOKEN_SECRET);
+                    diagnosticToken = healthCheckSettings.GetSecretyInfo(connection, DIAGNOSTIC_TOKEN_SECRET);
                     if (!String.IsNullOrEmpty(uploadToken) && !String.IsNullOrEmpty(diagnosticToken))
                         return true;
                 }
