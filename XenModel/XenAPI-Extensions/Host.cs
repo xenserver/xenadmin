@@ -355,6 +355,11 @@ namespace XenAPI
             return BoolKey(h.license_params, "restrict_vss"); 
         }
 
+        public static bool RestrictPoolSize(Host h)
+        {
+            return BoolKey(h.license_params, "restrict_pool_size");
+        }
+
         public static bool RestrictPvsCache(Host h)
         {
             return BoolKeyPreferTrue(h.license_params, "restrict_pvs_proxy");
