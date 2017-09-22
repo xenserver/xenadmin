@@ -77,7 +77,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			m_selectedObject = selection.FirstAsXenObject;
 
 			if (selection.Count == 1 && (m_selectedObject is VM || m_selectedObject is VM_appliance))
-				m_pageExportAppliance.ApplianceFileName = m_selectedObject.Name;
+				m_pageExportAppliance.ApplianceFileName = m_selectedObject.Name();
 
 			m_pageExportAppliance.OvfModeOnly = m_selectedObject is VM_appliance;
 			m_pageTvmIp.IsExportMode = true;
@@ -213,7 +213,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			bool first = true;
 			foreach (var vm in m_pageExportSelectVMs.VMsToExport)
 			{
-				temp.Add(new Tuple(first ? Messages.FINISH_PAGE_REVIEW_VMS : "", vm.Name));
+				temp.Add(new Tuple(first ? Messages.FINISH_PAGE_REVIEW_VMS : "", vm.Name()));
 				first = false;
 			}
 
@@ -250,7 +250,7 @@ namespace XenAdmin.Wizards.ExportWizard
 			var temp = new List<Tuple>();
 			temp.Add(new Tuple(Messages.FINISH_PAGE_REVIEW_APPLIANCE, m_pageExportAppliance.ApplianceFileName));
 			temp.Add(new Tuple(Messages.FINISH_PAGE_REVIEW_DESTINATION, m_pageExportAppliance.ApplianceDirectory));
-			temp.Add(new Tuple(Messages.FINISH_PAGE_REVIEW_VMS, string.Join("\n", m_pageExportSelectVMs.VMsToExport.Select(vm => vm.Name).ToArray())));
+			temp.Add(new Tuple(Messages.FINISH_PAGE_REVIEW_VMS, string.Join("\n", m_pageExportSelectVMs.VMsToExport.Select(vm => vm.Name()).ToArray())));
 			return temp;
         }
     }

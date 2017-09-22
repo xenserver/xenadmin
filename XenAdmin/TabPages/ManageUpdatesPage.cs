@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -42,9 +43,12 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Controls;
+using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
+using XenAPI;
 using Timer = System.Windows.Forms.Timer;
 
 
@@ -60,6 +64,7 @@ namespace XenAdmin.TabPages
 
         Dictionary<string, bool> expandedState = new Dictionary<string, bool>();
         private List<string> selectedUpdates = new List<string>();
+        private List<string> collapsedPoolRowsList = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
         private readonly CollectionChangeEventHandler m_updateCollectionChangedWithInvoke;
@@ -79,6 +84,7 @@ namespace XenAdmin.TabPages
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
             toolStripSplitButtonDismiss.DefaultItem = dismissAllToolStripMenuItem;
             toolStripSplitButtonDismiss.Text = dismissAllToolStripMenuItem.Text;
+            toolStripButtonUpdate.Visible = false;
         }
 
         public void RefreshUpdateList()
@@ -137,9 +143,11 @@ namespace XenAdmin.TabPages
             toolStripButtonRefresh.Enabled = false;
             toolStripButtonRestoreDismissed.Enabled = false;
 
-            StoreSelectedUpdates();
+            StoreStateOfRows();
             dataGridViewUpdates.Rows.Clear();
             dataGridViewUpdates.Refresh();
+            dataGridViewHosts.Rows.Clear();
+            dataGridViewHosts.Refresh();
 
             checkForUpdatesNowLink.Enabled = false;
             checkForUpdatesNowButton.Visible = false;
@@ -219,6 +227,333 @@ namespace XenAdmin.TabPages
 
         private void Rebuild()
         {
+            if (byUpdateToolStripMenuItem.Checked)    // By update view
+                RebuildUpdateView();
+            else                                      // By host view
+                RebuildHostView();
+        }
+
+        private class UpdatePageByHostDataGridView : CollapsingPoolHostDataGridView
+        {
+            protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
+            {
+                base.OnCellPainting(e);
+
+                if (e.RowIndex >= 0 && Rows[e.RowIndex].Tag is Host)
+                {
+                    UpdatePageDataGridViewRow row = (UpdatePageDataGridViewRow) Rows[e.RowIndex];
+
+                    // Host in pool
+                    if (row.HasPool && (e.ColumnIndex == row.ExpansionCellIndex ||
+                                        e.ColumnIndex == row.IconCellIndex ||
+                                        e.ColumnIndex == row.PatchingStatusCellIndex))
+                    {
+                        e.PaintBackground(e.ClipBounds, true);
+                        e.Handled = true;
+                    }
+
+                    // Standalone host
+                    else if (!row.HasPool && e.ColumnIndex == row.ExpansionCellIndex)
+                    {
+                        e.PaintBackground(e.ClipBounds, true);
+                        e.Handled = true;
+                    }
+                }
+            }
+
+            protected override void SortColumns()
+            {
+                UpdatePageDataGridViewRow firstRow = Rows[0] as UpdatePageDataGridViewRow;
+                if (firstRow == null)
+                    return;
+
+                if (columnToBeSortedIndex == firstRow.NameCellIndex ||
+                    columnToBeSortedIndex == firstRow.VersionCellIndex ||
+                    columnToBeSortedIndex == firstRow.StatusCellIndex)
+                    SortAndRebuildTree(new CollapsingPoolHostRowSorter<UpdatePageDataGridViewRow>(direction, columnToBeSortedIndex));
+            }
+        }
+
+        private class UpdatePageDataGridViewRow : CollapsingPoolHostDataGridViewRow
+        {
+            private DataGridViewImageCell _poolIconCell;
+            private DataGridViewTextBoxCell _versionCell;
+            private DataGridViewImageCell _patchingStatusCell;
+            private DataGridViewTextBoxCell _statusCell;
+            private DataGridViewTextBoxCell _requiredUpdateCell;
+            private DataGridViewTextBoxCell _installedUpdateCell;
+
+            public UpdatePageDataGridViewRow(Pool pool)
+                : base(pool)
+            {
+                SetupCells();
+            }
+
+            public UpdatePageDataGridViewRow(Host host, bool hasPool)
+                : base(host, hasPool)
+            {
+                SetupCells();
+            }
+
+            public int IconCellIndex
+            {
+                get { return Cells.IndexOf(_poolIconCell);  }
+            }
+
+            public int VersionCellIndex
+            {
+                get { return Cells.IndexOf(_versionCell); }
+            }
+
+            public int PatchingStatusCellIndex
+            {
+                get { return Cells.IndexOf(_patchingStatusCell); }
+            }
+
+            public int StatusCellIndex
+            {
+                get { return Cells.IndexOf(_statusCell); }
+            }
+
+            public override bool IsCheckable
+            {
+                get { return IsPoolOrStandaloneHost; }
+            }
+
+            private void SetupCells()
+            {
+                _expansionCell = new DataGridViewImageCell();
+                _poolIconCell = new DataGridViewImageCell();
+                _nameCell = new DataGridViewTextAndImageCell();
+                _versionCell = new DataGridViewTextBoxCell();
+                _patchingStatusCell = new DataGridViewImageCell();
+                _statusCell = new DataGridViewTextBoxCell();
+                _requiredUpdateCell = new DataGridViewTextBoxCell();
+                _installedUpdateCell = new DataGridViewTextBoxCell();
+
+                Cells.AddRange(new DataGridViewCell[] { _expansionCell, _poolIconCell, _nameCell, _versionCell, _patchingStatusCell, _statusCell, _requiredUpdateCell, _installedUpdateCell });
+
+                this.UpdateDetails();
+            }
+
+            // fill data into row
+            private void UpdateDetails()
+            {
+                Pool pool = Tag as Pool;
+
+                if (pool != null)
+                {
+                    Host master = pool.Connection.Resolve(pool.master);
+                    SetCollapseIcon();
+                    _poolIconCell.Value = Images.GetImage16For(pool);
+
+                    DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
+                    if (nc != null)
+                        nc.Image = null;
+
+                    _nameCell.Value = pool.Name();
+                    _versionCell.Value = master.ProductVersionTextShort();
+                    _requiredUpdateCell.Value = "";
+                    _installedUpdateCell.Value = "";
+
+                    var outOfDate = pool.Connection.Cache.Hosts.Any(h => RequiredUpdatesForHost(h).Length > 0);
+                    _patchingStatusCell.Value = outOfDate
+                        ? Properties.Resources._000_error_h32bit_16
+                        : Properties.Resources._000_Tick_h32bit_16;
+                    _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
+                }
+                
+                else
+                {
+                    Host host = Tag as Host;
+                    if (host != null)
+                    {
+                        var hostRequired = RequiredUpdatesForHost(host);
+                        var hostInstalled = InstalledUpdatesForHost(host);
+                        var outOfDate = hostRequired.Length > 0;
+
+                        DataGridViewTextAndImageCell nc = _nameCell as DataGridViewTextAndImageCell;
+
+                        if (_hasPool && nc != null) // host in pool
+                        {
+                            nc.Image = Images.GetImage16For(host);
+                            _statusCell.Value = "";
+                        }
+                        else if (!_hasPool && nc != null) // standalone host
+                        {
+                            _poolIconCell.Value = Images.GetImage16For(host);
+                            nc.Image = null;
+                            _patchingStatusCell.Value = outOfDate
+                                ? Properties.Resources._000_error_h32bit_16
+                                : Properties.Resources._000_Tick_h32bit_16;
+                            _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
+                        }
+
+                        _nameCell.Value = host.Name();
+                        _versionCell.Value = host.ProductVersionTextShort();
+                        _requiredUpdateCell.Value = hostRequired;
+                        _installedUpdateCell.Value = hostInstalled;
+                    }
+                }
+            }
+
+        }
+
+        private static string RequiredUpdatesForHost(Host host)
+        {
+            var requiredUpdates = Updates.RecommendedPatchesForHost(host);
+
+            if (requiredUpdates == null)
+            {
+                // versions with no minimum patches
+                var updatesList = new List<string>();
+                var alerts = new List<Alert>(Updates.UpdateAlerts);
+                if (alerts.Count == 0)
+                    return String.Empty;
+
+                foreach (Alert alert in alerts)
+                {
+                    var patchAlert = alert as XenServerPatchAlert;
+                    if (patchAlert == null)
+                        continue;
+                    if (patchAlert.DistinctHosts.Contains(host))
+                        updatesList.Add(patchAlert.Name);
+                }
+
+                updatesList.Sort(StringUtility.NaturalCompare);
+                return string.Join(", ", updatesList.ToArray());
+            }
+
+            else
+            {
+                // versions with minimum patches
+                var result = new List<string>();
+                foreach (var patch in requiredUpdates)
+                    result.Add(patch.Name);
+
+                return string.Join(", ", result.ToArray());
+            }
+        }
+
+        private static string InstalledUpdatesForHost(Host host)
+        {
+            List<string> result = new List<string>();
+
+            foreach (Pool_patch patch in host.AppliedPatches())
+                result.Add(patch.Name());
+
+            result.Sort(StringUtility.NaturalCompare);
+            return string.Join(", ", result.ToArray());
+        }
+
+        private void RebuildHostView()
+        {
+            Program.AssertOnEventThread();
+
+            if (!Visible)
+                return;
+
+            if (checksQueue > 0)
+                return;
+
+            SetFilterLabel();
+
+            try
+            {
+                dataGridViewHosts.SuspendLayout();
+
+                if (dataGridViewHosts.RowCount > 0)
+                {
+                    StoreStateOfRows();
+                    dataGridViewHosts.Rows.Clear();
+                    dataGridViewHosts.Refresh();
+                }
+
+                ToggleCentreWarningVisibility();
+                tableLayoutPanel3.Visible = false;
+                ToggleWarningVisibility(SomeButNotAllUpdatesDisabled());
+
+                List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
+                xenConnections.Sort();
+
+                var rowList = new List<DataGridViewRow>();
+
+                foreach (IXenConnection c in xenConnections)
+                {
+                    Pool pool = Helpers.GetPool(c);
+
+                    if (pool != null)          // pool row
+                    {
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool);
+                        var hostUuidList = new List<string>();
+
+                        foreach (Host h in c.Cache.Hosts)
+                            hostUuidList.Add(h.uuid);
+
+                        // add row based on server filter status
+                        if (!toolStripDropDownButtonServerFilter.HideByLocation(hostUuidList))
+                            rowList.Add(row);
+                    }
+
+                    Host[] hosts = c.Cache.Hosts;
+                    Array.Sort(hosts);
+                    foreach (Host h in hosts)       // host row
+                    {
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null);
+
+                        // add row based on server filter status
+                        if (!toolStripDropDownButtonServerFilter.HideByLocation(h.uuid))
+                            rowList.Add(row);
+                    }
+                }
+
+                dataGridViewHosts.Rows.AddRange(rowList.ToArray());
+
+                // restore selected state and pool collapsed state
+                bool checkHostRow = false;
+                foreach (UpdatePageDataGridViewRow row in dataGridViewHosts.Rows)
+                {
+                    if (checkHostRow)
+                    {
+                        if (!row.IsPoolOrStandaloneHost)
+                        {
+                            row.Visible = !row.Visible;
+                            continue;
+                        }
+                        else
+                            checkHostRow = false;
+                    }
+
+                    Pool pool = row.Tag as Pool;
+                    if (pool != null)
+                    {
+                        row.Selected = selectedUpdates.Contains(pool.uuid);
+                        if (collapsedPoolRowsList.Contains(pool.uuid))
+                        {
+                            row.SetExpandIcon();
+                            checkHostRow = true;
+                        }
+                    }
+                    else
+                    {
+                        Host host = row.Tag as Host;
+                        if (host != null)
+                            row.Selected = selectedUpdates.Contains(host.uuid);
+                    }
+                }
+
+                if (dataGridViewHosts.SelectedRows.Count == 0 && dataGridViewHosts.Rows.Count > 0)
+                    dataGridViewHosts.Rows[0].Selected = true;
+            }
+            finally
+            {
+                dataGridViewHosts.ResumeLayout();
+                UpdateButtonEnablement();
+            }
+        }
+
+        private void RebuildUpdateView()
+        {
             Program.AssertOnEventThread();
 
             if (!Visible)
@@ -235,7 +570,7 @@ namespace XenAdmin.TabPages
 
                 if (dataGridViewUpdates.RowCount > 0)
                 {
-                    StoreSelectedUpdates();
+                    StoreStateOfRows();
                     dataGridViewUpdates.Rows.Clear();
                     dataGridViewUpdates.Refresh();
                 }
@@ -360,15 +695,71 @@ namespace XenAdmin.TabPages
             return hide;
         }
 
-        private void StoreSelectedUpdates()
+        private void StoreStateOfRows()
         {
-            selectedUpdates = (dataGridViewUpdates.SelectedRows.Cast<DataGridViewRow>().Select(
-                    selectedRow => ((Alert)selectedRow.Tag).uuid)).ToList();
+            selectedUpdates.Clear();
+
+            if (byUpdateToolStripMenuItem.Checked)    // by update view
+            {
+                selectedUpdates = (dataGridViewUpdates.SelectedRows.Cast<DataGridViewRow>().Select(
+                    selectedRow => ((Alert) selectedRow.Tag).uuid)).ToList();
+            }
+            else    // by host view
+            {
+                collapsedPoolRowsList.Clear();
+                foreach (UpdatePageDataGridViewRow row in dataGridViewHosts.Rows)
+                {
+                    Pool pool = row.Tag as Pool;
+                    if (pool != null)
+                    {
+                        if (row.Selected)
+                            selectedUpdates.Add(pool.uuid);
+                        if (row.IsACollapsedRow)
+                            collapsedPoolRowsList.Add(pool.uuid);
+                    }
+                    else
+                    {
+                        Host host = row.Tag as Host;
+                        if (host != null && row.Selected)
+                            selectedUpdates.Add(host.uuid);
+                    }
+                }
+            }
         }
 
         private void UpdateButtonEnablement()
         {
-            toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;            
+            if (byUpdateToolStripMenuItem.Checked)
+                toolStripButtonExportAll.Enabled = toolStripSplitButtonDismiss.Enabled = Updates.UpdateAlertsCount > 0;
+
+            else
+            {
+                toolStripButtonExportAll.Enabled = true;
+                toolStripButtonUpdate.ToolTipText = "";
+                var connectionList = ConnectionsManager.XenConnectionsCopy;
+
+                if (!connectionList.Any(xenConnection => xenConnection.IsConnected))
+                {
+                    toolStripButtonUpdate.Enabled = toolStripButtonExportAll.Enabled = false;
+                    return;
+                }
+
+                // check Updates Availability
+                foreach (IXenConnection connection in connectionList)
+                {
+                    foreach (Host host in connection.Cache.Hosts)
+                    {
+                        if (RequiredUpdatesForHost(host).Length > 0)
+                        {
+                            toolStripButtonUpdate.Enabled = true;
+                            return;
+                        }
+                    }
+                }
+
+                toolStripButtonUpdate.Enabled = false;
+                toolStripButtonUpdate.ToolTipText = Messages.MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE;
+            }
         }
 
         private void ShowInformationHelper(string reason)
@@ -673,34 +1064,31 @@ namespace XenAdmin.TabPages
             if (string.IsNullOrEmpty(patchUri))
                 return;
 
-            Program.Invoke(Program.MainWindow, () =>
+            var wizard = new PatchingWizard();
+            wizard.Show();
+            wizard.NextStep();
+            wizard.AddAlert(patchAlert);
+            wizard.NextStep();
+
+            var hosts = patchAlert.DistinctHosts;
+            if (hosts.Count > 0)
+            {                          
+                wizard.SelectServers(hosts);
+            }
+            else
             {
-                var wizard = new PatchingWizard();
-                wizard.Show();
-                wizard.NextStep();
-                wizard.AddAlert(patchAlert);
-                wizard.NextStep();
+                string disconnectedServerNames =
+                       clickedRow.Cells[ColumnLocation.Index].Value.ToString();
 
-                var hosts = patchAlert.DistinctHosts;
-                if (hosts.Count > 0)
-                {                          
-                    wizard.SelectServers(hosts);
-                }
-                else
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning,
+                                                  string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
+                                                               disconnectedServerNames),
+                                                  Messages.UPDATES_WIZARD)))
                 {
-                    string disconnectedServerNames =
-                           clickedRow.Cells[ColumnLocation.Index].Value.ToString();
-
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning,
-                                                      string.Format(Messages.UPDATES_WIZARD_DISCONNECTED_SERVER, 
-                                                                   disconnectedServerNames),
-                                                      Messages.UPDATES_WIZARD)))
-                    {
-                        dlg.ShowDialog(this);
-                    }
-                 }
-            });
+                    dlg.ShowDialog(this);
+                }
+            }
         }
 
         private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)
@@ -906,26 +1294,85 @@ namespace XenAdmin.TabPages
                 {
                     using (StreamWriter stream = new StreamWriter(fileName, false, UTF8Encoding.UTF8))
                     {
-                        stream.WriteLine("{0},{1},{2},{3},{4}", Messages.TITLE,
-                                         Messages.DESCRIPTION, Messages.APPLIES_TO,
-                                         Messages.TIMESTAMP, Messages.WEB_PAGE);
+                        if (byUpdateToolStripMenuItem.Checked)     // update view
+                        {
+                            stream.WriteLine("{0},{1},{2},{3},{4}", Messages.TITLE,
+                                Messages.DESCRIPTION, Messages.APPLIES_TO,
+                                Messages.TIMESTAMP, Messages.WEB_PAGE);
 
-                        if (exportAll)
-                        {
-                            foreach (Alert a in Updates.UpdateAlerts)
-                                stream.WriteLine(a.GetUpdateDetailsCSVQuotes());
-                        }
-                        else
-                        {
-                            foreach (DataGridViewRow row in dataGridViewUpdates.Rows)
+                            if (exportAll)
                             {
-                                var a = row.Tag as Alert;
-                                if (a != null)
+                                foreach (Alert a in Updates.UpdateAlerts)
                                     stream.WriteLine(a.GetUpdateDetailsCSVQuotes());
+                            }
+                            else
+                            {
+                                foreach (DataGridViewRow row in dataGridViewUpdates.Rows)
+                                {
+                                    var a = row.Tag as Alert;
+                                    if (a != null)
+                                        stream.WriteLine(a.GetUpdateDetailsCSVQuotes());
+                                }
+                            }
+                        }
+                        else      // host view
+                        {
+                            stream.WriteLine("{0},{1},{2},{3},{4},{5}", Messages.POOL,
+                                Messages.SERVER, Messages.VERSION, Messages.PATCHING_STATUS,
+                                Messages.REQUIRED_UPDATES, Messages.INSTALLED_UPDATES);
+
+                            if (exportAll)
+                            {
+                                List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
+                                xenConnections.Sort();
+
+                                foreach (IXenConnection xenConnection in xenConnections)
+                                {
+                                    Pool pool = Helpers.GetPool(xenConnection);
+                                    var hasPool = (pool != null);
+
+                                    Host[] hosts = xenConnection.Cache.Hosts;
+                                    Array.Sort(hosts);
+                                    foreach (Host host in hosts)
+                                        stream.WriteLine(GetHostUpdateDetailsCsvQuotes(xenConnection, host, hasPool));
+                                }
+                            }
+                            else
+                            {
+                                foreach (UpdatePageDataGridViewRow row in dataGridViewHosts.Rows)
+                                {
+                                    Host host = row.Tag as Host;
+                                    if (host != null)
+                                        stream.WriteLine(GetHostUpdateDetailsCsvQuotes(host.Connection, host, row.HasPool));
+                                }
                             }
                         }
                     }
                 }).RunAsync();
+        }
+
+        private string GetHostUpdateDetailsCsvQuotes(IXenConnection xenConnection, Host host, bool hasPool)
+        {
+            string pool = String.Empty;
+            string patchingStatus = String.Empty;
+            string requiredUpdates = String.Empty;
+            string installedUpdates = String.Empty;
+
+            Program.Invoke(Program.MainWindow, delegate
+            {
+                pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
+                requiredUpdates = RequiredUpdatesForHost(host);
+                installedUpdates = InstalledUpdatesForHost(host);
+                patchingStatus = requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED;
+            });
+
+            return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"",
+                                 pool.EscapeQuotes(),
+                                 host.Name().EscapeQuotes(),
+                                 host.ProductVersionTextShort().EscapeQuotes(),
+                                 patchingStatus.EscapeQuotes(),
+                                 requiredUpdates.EscapeQuotes(),
+                                 installedUpdates.EscapeQuotes());
         }
 
         #endregion
@@ -968,6 +1415,59 @@ namespace XenAdmin.TabPages
         private void tableLayoutPanel3_Resize(object sender, EventArgs e)
         {
             labelProgress.MaximumSize = new Size(tableLayoutPanel3.Width - 60, tableLayoutPanel3.Size.Height);
+        }
+
+        private void byUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Adjust checked state
+            byHostToolStripMenuItem.Checked = false;
+            byUpdateToolStripMenuItem.Checked = true;
+
+            // buttons
+            toolStripDropDownButtonDateFilter.Visible = true;
+            toolStripSplitButtonDismiss.Visible = true;
+            toolStripButtonRestoreDismissed.Visible = true;
+            toolStripButtonUpdate.Visible = false;
+
+            // Switch the grid view
+            dataGridViewUpdates.Visible = true;
+            dataGridViewHosts.Visible = false;
+            Rebuild();
+        }
+
+        private void byHostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Adjust checked state
+            byUpdateToolStripMenuItem.Checked = false;
+            byHostToolStripMenuItem.Checked = true;
+
+            // buttons
+            toolStripDropDownButtonDateFilter.Visible = false;
+            toolStripSplitButtonDismiss.Visible = false;
+            toolStripButtonRestoreDismissed.Visible = false;
+            toolStripButtonUpdate.Visible = true;
+
+            // Turn off Date Filter
+            toolStripDropDownButtonDateFilter.ResetFilterDates();
+
+            // Switch the grid view
+            dataGridViewUpdates.Visible = false;
+            dataGridViewHosts.Visible = true;
+            Rebuild();
+        }
+
+        private void toolStripButtonUpdate_Click(object sender, EventArgs e)
+        {
+            var wizard = new PatchingWizard();
+            wizard.Show();
+            wizard.NextStep();
+
+            var hostlist = new List<Host>();
+            foreach (IXenConnection c in ConnectionsManager.XenConnectionsCopy)
+                hostlist.AddRange(c.Cache.Hosts);
+
+            if (hostlist.Count > 0)
+                wizard.SelectServers(hostlist);
         }
     }
 }

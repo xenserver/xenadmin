@@ -56,8 +56,8 @@ namespace XenAdminTests.UnitTests.UnitTestHelper.MockObjectBuilders
         public override Mock BuildObject()
         {
             Mock<Host> host = ObjectManager.NewXenObject<Host>(ConnectionId);
-            host.Setup(h => h.ProductVersion).Returns(ProductVersion);
-            host.Setup(h => h.PlatformVersion).Returns(PlatformVersion);
+            host.Setup(h => h.ProductVersion()).Returns(ProductVersion);
+            host.Setup(h => h.PlatformVersion()).Returns(PlatformVersion);
             return host;
         }
     }

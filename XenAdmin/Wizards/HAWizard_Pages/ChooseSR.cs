@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             List<SRWrapper> srs = action.SRs;
             srs.Sort((a, b) => a.enabled != b.enabled
                                    ? b.enabled.CompareTo(a.enabled)
-                                   : (a.sr.NameWithoutHost.CompareTo(b.sr.NameWithoutHost)));
+                                   : a.sr.NameWithoutHost().CompareTo(b.sr.NameWithoutHost()));
 
             dataGridViewExSRs.Rows.Clear();
 
@@ -174,8 +174,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                                     ValueType = typeof(Image),
                                     Value =  Images.GetImage16For(srw.sr)
                                 };
-                cellSr = new DataGridViewTextBoxCell {Value = srw.sr.NameWithoutHost};
-                cellDescription = new DataGridViewTextBoxCell {Value = srw.sr.Description};
+                cellSr = new DataGridViewTextBoxCell {Value = srw.sr.NameWithoutHost()};
+                cellDescription = new DataGridViewTextBoxCell {Value = srw.sr.Description()};
                 cellComment = new DataGridViewTextBoxCell {Value = srw.ReasonUnsuitable};
 
                 Cells.AddRange(new DataGridViewCell[] {cellImage, cellSr, cellDescription, cellComment});

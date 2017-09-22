@@ -36,7 +36,7 @@ namespace XenAdmin.Actions
     public class DestroyPoolAction: PureAsyncAction
     {
         public DestroyPoolAction(XenAPI.Pool pool)
-            : base(pool.Connection, string.Format(Messages.DESTROYING_POOL, pool.Name))
+            : base(pool.Connection, string.Format(Messages.DESTROYING_POOL, pool.Name()))
         {
             System.Diagnostics.Trace.Assert(pool != null);
             Pool = pool;

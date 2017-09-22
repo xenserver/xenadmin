@@ -66,10 +66,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
         private static bool CheckMasterIsUpgraded(List<Host> hosts, int i)
         {
-            string masterVersion = hosts[i].LongProductVersion;
+            string masterVersion = hosts[i].LongProductVersion();
             for (int j = i + 1; j < hosts.Count; j++)
             {
-                if (hosts[j].LongProductVersion != masterVersion)
+                if (hosts[j].LongProductVersion() != masterVersion)
                     return true;
                 if (hosts[j].IsMaster())
                     break;
@@ -105,19 +105,19 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                     var host=currentHost = hosts[i];
                     if (host.IsMaster())
                     {
-                        poolHigherProductVersion = host.LongProductVersion;
+                        poolHigherProductVersion = host.LongProductVersion();
                         if (CheckMasterIsUpgraded(hosts, i))
                         {
-                            log.Debug(string.Format("Skipping master '{0}' because it is upgraded", host.Name));
+                            log.Debug(string.Format("Skipping master '{0}' because it is upgraded", host.Name()));
                             continue;
                         }
                     }
-                    else if (host.LongProductVersion == poolHigherProductVersion)
+                    else if (host.LongProductVersion() == poolHigherProductVersion)
                     {
-                        log.Debug(string.Format("Skipping host '{0}' because it is upgraded", host.Name));
+                        log.Debug(string.Format("Skipping host '{0}' because it is upgraded", host.Name()));
                         continue;
                     }
-                    log.Debug(string.Format("Starting to upgrade host '{0}'", host.Name));
+                    log.Debug(string.Format("Starting to upgrade host '{0}'", host.Name()));
                     //Add subtasks for the current host
                     bool allActionsDone = true;
                     foreach (var planAction in _planActions[host])
@@ -138,7 +138,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                                     ManageSemiAutomaticPlanAction(upgradeAction);
                                 
                                 if (host.IsMaster())
-                                    poolHigherProductVersion = upgradeAction.Host.LongProductVersion;
+                                    poolHigherProductVersion = upgradeAction.Host.LongProductVersion();
                             }
                             else
                                 planAction.Run();
@@ -146,7 +146,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                         }
                         catch (Exception excep)
                         {
-                            log.Error(string.Format("Exception in host '{0}' while it was upgraded", host.Name), excep);
+                            log.Error(string.Format("Exception in host '{0}' while it was upgraded", host.Name()), excep);
                             PlanAction action1 = planAction;
 
                             OnReportException(excep, action1, host);

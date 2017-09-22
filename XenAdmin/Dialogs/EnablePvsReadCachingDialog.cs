@@ -118,7 +118,7 @@ namespace XenAdmin.Dialogs
         /// <returns></returns>
         private AsyncAction GetAsyncActionForVm(VM vm, PVS_site siteSelected)
         {
-            if (vm.PvsProxy != null)
+            if (vm.PvsProxy() != null)
                 return null; // PVS read caching already enabled
 
             var vif = GetVifForPvsProxy(vm);
@@ -153,7 +153,7 @@ namespace XenAdmin.Dialogs
 
         public override string ToString()
         {
-            return _site.NameWithWarning;
+            return _site.NameWithWarning();
         }
 
         public IXenObject Item

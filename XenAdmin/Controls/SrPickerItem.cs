@@ -70,7 +70,7 @@ namespace XenAdmin.Controls
         {
             get
             {
-                if(TheSR.HBALunPerVDI)
+                if(TheSR.HBALunPerVDI())
                     return !TheSR.IsBroken(false) && TheSR.CanBeSeenFrom(Affinity);
                 return base.CanBeEnabled;
             }
@@ -96,11 +96,11 @@ namespace XenAdmin.Controls
             if (TheSR == null || vdi == null)
                 return false;
 
-            bool toLocal = TheSR.IsLocalSR;
+            bool toLocal = TheSR.IsLocalSR();
             if (toLocal && !HomeHostCanSeeTargetSr(vdi))
                 return false;
 
-            bool fromLocal = vdi.Connection.Resolve(vdi.SR).IsLocalSR;
+            bool fromLocal = vdi.Connection.Resolve(vdi.SR).IsLocalSR();
             if (fromLocal && toLocal)
                 return false;
 
@@ -130,7 +130,7 @@ namespace XenAdmin.Controls
                     return Messages.CURRENT_LOCATION;
                 if (LocalToLocalMove())
                     return Messages.LOCAL_TO_LOCAL_MOVE;
-                if (TheSR.IsLocalSR && existingVDIs != null && existingVDIs.Any(v => !HomeHostCanSeeTargetSr(v)))
+                if (TheSR.IsLocalSR() && existingVDIs != null && existingVDIs.Any(v => !HomeHostCanSeeTargetSr(v)))
                     return Messages.SRPICKER_ERROR_LOCAL_SR_MUST_BE_RESIDENT_HOSTS;
                 if (!TheSR.CanBeSeenFrom(Affinity))
                     return TheSR.Connection != null
@@ -142,7 +142,7 @@ namespace XenAdmin.Controls
 
         private bool LocalToLocalMove()
         {
-            return TheSR.IsLocalSR && existingVDIs != null && existingVDIs.Length > 0 && existingVDIs.All(vdi => vdi.Connection.Resolve(vdi.SR).IsLocalSR);
+            return TheSR.IsLocalSR() && existingVDIs != null && existingVDIs.Length > 0 && existingVDIs.All(vdi => vdi.Connection.Resolve(vdi.SR).IsLocalSR());
         }
 
         protected override bool CanBeEnabled
@@ -150,7 +150,7 @@ namespace XenAdmin.Controls
             get
             {
                 return existingVDIs != null && existingVDIs.Length > 0 && existingVDIs.All(CanMigrate)
-                       && TheSR.SupportsVdiCreate() && !ExistingVDILocation() && !TheSR.IsDetached && TargetSRHasEnoughFreeSpace;
+                       && TheSR.SupportsVdiCreate() && !ExistingVDILocation() && !TheSR.IsDetached() && TargetSRHasEnoughFreeSpace;
             }
         }
     }
@@ -168,7 +168,7 @@ namespace XenAdmin.Controls
         {
             get
             {
-                return !TheSR.IsDetached && TheSR.SupportsVdiCreate() && !ExistingVDILocation() &&
+                return !TheSR.IsDetached() && TheSR.SupportsVdiCreate() && !ExistingVDILocation() &&
                        TargetSRHasEnoughFreeSpace;
             }
         }
@@ -177,7 +177,7 @@ namespace XenAdmin.Controls
         {   
 	        get 
 	        {
-                if (TheSR.IsDetached)
+                if (TheSR.IsDetached())
                     return Messages.SR_DETACHED;
                 if (ExistingVDILocation())
                     return Messages.CURRENT_LOCATION;
@@ -198,14 +198,14 @@ namespace XenAdmin.Controls
 
         protected override bool CanBeEnabled
         {
-            get { return TheSR.SupportsVdiCreate() && !TheSR.IsDetached && TargetSRHasEnoughFreeSpace; }
+            get { return TheSR.SupportsVdiCreate() && !TheSR.IsDetached() && TargetSRHasEnoughFreeSpace; }
         }
 
         protected override string CannotBeShownReason
         {
             get
             {
-                if (TheSR.IsDetached)
+                if (TheSR.IsDetached())
                     return Messages.SR_DETACHED;
                 return base.CannotBeShownReason;
             }
@@ -280,13 +280,13 @@ namespace XenAdmin.Controls
         {
             get
             {
-                return TheSR.FreeSpace >= DiskSize;
+                return TheSR.FreeSpace() >= DiskSize;
             }
         }
 
         protected virtual bool UnsupportedSR
         {
-            get { return TheSR.HBALunPerVDI; }
+            get { return TheSR.HBALunPerVDI(); }
         }
 
         protected abstract bool CanBeEnabled { get; }
@@ -304,7 +304,7 @@ namespace XenAdmin.Controls
 
         public void Update()
         {
-            Text = TheSR.Name;
+            Text = TheSR.Name();
             SetImage();
 
             if(UnsupportedSR)
@@ -341,7 +341,7 @@ namespace XenAdmin.Controls
         private void ShowSREnabled()
         {
             Enabled = true;
-            Description = string.Format(Messages.SRPICKER_DISK_FREE, Util.DiskSizeString(TheSR.FreeSpace, 2),
+            Description = string.Format(Messages.SRPICKER_DISK_FREE, Util.DiskSizeString(TheSR.FreeSpace(), 2),
                                         Util.DiskSizeString(TheSR.physical_size, 2));
             CalculateEnabledSortReason();
             Show = true;
@@ -358,14 +358,14 @@ namespace XenAdmin.Controls
             {
                 if (TheSR.IsBroken(false))
                     return Messages.SR_IS_BROKEN;
-                if (TheSR.IsFull)
+                if (TheSR.IsFull())
                     return Messages.SRPICKER_SR_FULL;
                 if (DiskSize > TheSR.physical_size)
                     return string.Format(Messages.SR_PICKER_DISK_TOO_BIG, Util.DiskSizeString(DiskSize, 2),
                                          Util.DiskSizeString(TheSR.physical_size, 2));
-                if (DiskSize > (TheSR.FreeSpace))
+                if (DiskSize > (TheSR.FreeSpace()))
                     return string.Format(Messages.SR_PICKER_INSUFFICIENT_SPACE, Util.DiskSizeString(DiskSize, 2),
-                                         Util.DiskSizeString(TheSR.FreeSpace, 2));
+                                         Util.DiskSizeString(TheSR.FreeSpace(), 2));
                 return "";
             }
 
@@ -384,7 +384,7 @@ namespace XenAdmin.Controls
         {
             if (!TheSR.CanBeSeenFrom(Affinity))
                 sortingReason = SrNotEnabledReason.NotSeen;
-            else if (TheSR.IsFull || TheSR.FreeSpace < DiskSize)
+            else if (TheSR.IsFull() || TheSR.FreeSpace() < DiskSize)
                 sortingReason = SrNotEnabledReason.Full;
             else
                 sortingReason = SrNotEnabledReason.Broken;

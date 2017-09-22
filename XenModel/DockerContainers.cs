@@ -255,7 +255,7 @@ namespace XenAdmin.Model
         public static ComparableList<DockerContainer> GetDockerVMs(IXenObject o)
         {
             var vm = o as VM;
-            if (vm != null && vm.is_a_real_vm)
+            if (vm != null && vm.is_a_real_vm())
             {
                 return new ComparableList<DockerContainer>(DockerContainers.GetContainersFromOtherConfig(vm));
             }

@@ -53,7 +53,7 @@ namespace XenAdmin.Actions
 
             foreach (var policy in _selectedToDelete)
             {
-                Description = string.Format(Messages.DELETING_VMSS, policy.Name);
+                Description = string.Format(Messages.DELETING_VMSS, policy.Name());
                 foreach (var vmref in policy.VMs)
                 {
                     VM.set_snapshot_schedule(Session, vmref.opaque_ref, null);

@@ -127,7 +127,7 @@ namespace XenAdmin.Core
             IXenConnection conn = asyncAction == null ? null : asyncAction.Connection;
 
             string conn_name = conn == null ? null : Helpers.GetName(conn);
-            string vm_name = action.VM == null ? null : action.VM.Name;
+            string vm_name = action.VM == null ? null : action.VM.Name();
             string desc = action.Description;
 
             if (conn_name != null && vm_name != null && desc != null)
@@ -148,10 +148,10 @@ namespace XenAdmin.Core
         internal static string GetLocation(this ActionBase action)
         {
             if (action.Host != null)
-                return action.Host.Name;
+                return action.Host.Name();
 
             if (action.Pool != null)
-                return action.Pool.Name;
+                return action.Pool.Name();
 
             return string.Empty;
         }

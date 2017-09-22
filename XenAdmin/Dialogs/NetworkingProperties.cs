@@ -244,10 +244,10 @@ namespace XenAdmin.Dialogs
             {
                 if (network.Show(Properties.Settings.Default.ShowHiddenVMs))
                 {
-                    if (connection.ResolveAll(network.PIFs).Find(p => !p.IsTunnelAccessPIF) == null)  // no PIFs, or all the PIFs are tunnel access PIFs so the network is a CHIN
+                    if (connection.ResolveAll(network.PIFs).Find(p => !p.IsTunnelAccessPIF()) == null)  // no PIFs, or all the PIFs are tunnel access PIFs so the network is a CHIN
                         continue;
                     PIF pif = FindPIFForThisHost(network.PIFs);
-                    if (pif != null && pif.IsInUseBondSlave)
+                    if (pif != null && pif.IsInUseBondSlave())
                         continue;
                     if (!inusemap.ContainsKey(network))
                         inusemap[network] = null;
@@ -383,13 +383,8 @@ namespace XenAdmin.Dialogs
 
         private string Purpose(PIF pif)
         {
-            string purpose = pif.ManagementPurpose;
+            string purpose = pif.GetManagementPurpose();
             return string.IsNullOrEmpty(purpose) ? Messages.NETWORKING_PROPERTIES_PURPOSE_UNKNOWN : purpose;
-        }
-
-        private string PIFTabName(PIF pif)
-        {
-            return pif.ManagementPurpose ?? AuxTabName();
         }
 
         private string AuxTabName()
@@ -626,7 +621,7 @@ namespace XenAdmin.Dialogs
 
             if (page.type == NetworkingPropertiesPage.Type.SECONDARY)
             {
-                newPIF.ManagementPurpose = page.PurposeTextBox.Text;
+                newPIF.SetManagementPurspose(page.PurposeTextBox.Text);
                 newPIF.management = false;
             }
             else

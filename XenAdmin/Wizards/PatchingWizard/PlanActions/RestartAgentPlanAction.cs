@@ -44,7 +44,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         /// <param name="host"></param>
         /// <param name="owner">The Form in front of which any connecting dialogs will be shown. May be null.</param>
         public RestartAgentPlanAction(Host host)
-            : base(host.Connection, new XenRef<Host>(host), string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT,host.Name))
+            : base(host.Connection, new XenRef<Host>(host), string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, host.Name()))
         {
         }
 

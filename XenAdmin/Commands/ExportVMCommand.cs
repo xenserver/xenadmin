@@ -132,7 +132,7 @@ namespace XenAdmin.Commands
                         if (neededSpace >= freeSpace - spaceLeft)
                         {
                             string msg = string.Format(Messages.CONFIRM_EXPORT_NOT_ENOUGH_MEMORY, Util.DiskSizeString((long)neededSpace),
-                                Util.DiskSizeString((long)freeSpace), vm.Name);
+                                Util.DiskSizeString((long)freeSpace), vm.Name());
 
                             DialogResult dr;
                             using (var d = new ThreeButtonDialog(
@@ -157,7 +157,7 @@ namespace XenAdmin.Commands
                         if (diskSpaceInfo.IsFAT && neededSpace > (4 * Util.BINARY_GIGA) - 1)
                         {
                             string msg = string.Format(Messages.CONFIRM_EXPORT_FAT, Util.DiskSizeString((long)neededSpace),
-                                Util.DiskSizeString(4 * Util.BINARY_GIGA), vm.Name);
+                                Util.DiskSizeString(4 * Util.BINARY_GIGA), vm.Name());
 
                             DialogResult dr;
                             using (var d = new ThreeButtonDialog(

@@ -132,7 +132,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         
         private void GetCloudConfigParameters()
         {
-            var configDrive = vmOrTemplate.CloudConfigDrive;
+            var configDrive = vmOrTemplate.CloudConfigDrive();
             GetCloudConfigParameters(configDrive);
         }
 
@@ -201,7 +201,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         public AsyncAction SaveSettings()
         {
-            var configDrive = vmOrTemplate.CloudConfigDrive;
+            var configDrive = vmOrTemplate.CloudConfigDrive();
             if (configDrive == null || string.IsNullOrEmpty(ConfigDriveTemplateText))
                 return null;
             

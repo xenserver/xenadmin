@@ -38,10 +38,10 @@ namespace XenAdmin.Actions
         private readonly PVS_proxy proxy;
 
         public PvsProxyDestroyAction(PVS_proxy proxy)
-            : base(proxy.Connection, string.Format(Messages.ACTION_DISABLE_PVS_READ_CACHING_FOR, proxy.VM))
+            : base(proxy.Connection, string.Format(Messages.ACTION_DISABLE_PVS_READ_CACHING_FOR, proxy.VM()))
         {
             this.proxy = proxy;
-            this.VM = proxy.VM;
+            this.VM = proxy.VM();
 
             this.Description = Messages.WAITING;
             SetRBACPermissions();

@@ -59,8 +59,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
 
             this.Text = Messages.VMSS_WIZARD_TITLE;
 
-            xenTabPagePolicy = new NewPolicyPolicyNamePage(Messages.NEW_VMSS_PAGE_TEXT, Messages.NEW_VMSS_PAGE_TEXT_MORE,
-                                                            Messages.VMSS_NAME, Messages.VMSS_NAME_TITLE, Messages.VMSS_NAME_FIELD_TEXT);
+            xenTabPagePolicy = new NewPolicyPolicyNamePage();
             xenTabPageSnapshotType = new NewPolicySnapshotTypePage();
             xenTabPageVMsPage = new NewVMGroupVMsPage<VMSS>();
             xenTabPageFinish = new NewPolicyFinishPage(Messages.VMSS_FINISH_PAGE_TEXT, Messages.VMSS_FINISH_PAGE_CHECKBOX_TEXT, Messages.VMSS_FINISH_TITLE);
@@ -141,7 +140,7 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             var sb = new StringBuilder();
             foreach (var selectedVM in selectedVMs)
             {
-                sb.Append(selectedVM.Name);
+                sb.Append(selectedVM.Name());
                 sb.Append(", ");
             }
             if (sb.Length > 2)

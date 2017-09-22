@@ -115,7 +115,7 @@ namespace XenAdminTests.Controls
         public void ItemToStringIncludeSizeDetails(string sizeText, string nameLabel, string expectedResult)
         {
             Mock<VDI> vdi = GetMockVdi(0);
-            vdi.Setup(v => v.SizeText).Returns(sizeText);
+            vdi.Setup(v => v.SizeText()).Returns(sizeText);
             vdi.Setup(v => v.name_label).Returns(nameLabel);
             LunComboBoxItem item = new LunComboBoxItem(vdi.Object);
             Assert.That(item.ToString(), Is.EqualTo(expectedResult));

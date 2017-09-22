@@ -46,8 +46,8 @@ namespace XenAdmin.Actions.DR
 
         public DrRecoverAction(IXenConnection connection, IXenObject xenObject)
             : base(connection, xenObject is VM
-                                   ? string.Format(Messages.ACTION_DR_RECOVER_VM_TITLE, xenObject.Name)
-                                   : string.Format(Messages.ACTION_DR_RECOVER_APPLIANCE_TITLE, xenObject.Name))
+                                   ? string.Format(Messages.ACTION_DR_RECOVER_VM_TITLE, xenObject.Name())
+                                   : string.Format(Messages.ACTION_DR_RECOVER_APPLIANCE_TITLE, xenObject.Name()))
         {
             this.xenObject = xenObject;
 
@@ -86,7 +86,7 @@ namespace XenAdmin.Actions.DR
                                 Helpers.GetName(xenObject).Ellipsise(50), 
                                 Helpers.GetName(Pool).Ellipsise(50));
             }
-            Description = String.Format(Messages.ACTION_DR_RECOVER_DONE, xenObject.Name);
+            Description = String.Format(Messages.ACTION_DR_RECOVER_DONE, xenObject.Name());
         }
     }
 }

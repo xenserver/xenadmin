@@ -583,6 +583,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable IGMP snooping.
+        /// </summary>
+        public static string ACTION_DISABLE_IGMP_SNOOPING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_IGMP_SNOOPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable live patching.
         /// </summary>
         public static string ACTION_DISABLE_LIVE_PATCHING {
@@ -957,6 +966,15 @@ namespace XenAdmin {
         public static string ACTION_DR_TASK_DESTROY_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DR_TASK_DESTROY_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable IGMP snooping.
+        /// </summary>
+        public static string ACTION_ENABLE_IGMP_SNOOPING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_IGMP_SNOOPING", resourceCulture);
             }
         }
         
@@ -19023,6 +19041,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installed Updates.
+        /// </summary>
+        public static string INSTALLED_UPDATES {
+            get {
+                return ResourceManager.GetString("INSTALLED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a CD drive on the selected VM..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_CD {
@@ -21334,6 +21361,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No update is needed..
+        /// </summary>
+        public static string MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Management.
         /// </summary>
         public static string MANAGEMENT {
@@ -22726,6 +22762,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Network Options.
+        /// </summary>
+        public static string NETWORK_OPTIONS {
+            get {
+                return ResourceManager.GetString("NETWORK_OPTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The connection to the server was lost. No changes have been made..
         /// </summary>
         public static string NETWORK_RECONFIG_CONNECTION_LOST {
@@ -22890,6 +22935,24 @@ namespace XenAdmin {
         public static string NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL {
             get {
                 return ResourceManager.GetString("NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IGMP snooping disabled.
+        /// </summary>
+        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED {
+            get {
+                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IGMP snooping enabled.
+        /// </summary>
+        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED {
+            get {
+                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED", resourceCulture);
             }
         }
         
@@ -23399,24 +23462,6 @@ namespace XenAdmin {
         public static string NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN {
             get {
                 return ResourceManager.GetString("NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use this wizard to define a snapshot schedule that will create automatic scheduled snapshot jobs for your VMs..
-        /// </summary>
-        public static string NEW_VMSS_PAGE_TEXT {
-            get {
-                return ResourceManager.GetString("NEW_VMSS_PAGE_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To begin, enter a name for the schedule and a description (optional), then click Next..
-        /// </summary>
-        public static string NEW_VMSS_PAGE_TEXT_MORE {
-            get {
-                return ResourceManager.GetString("NEW_VMSS_PAGE_TEXT_MORE", resourceCulture);
             }
         }
         
@@ -25685,6 +25730,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Out of date.
+        /// </summary>
+        public static string NOT_UPDATED {
+            get {
+                return ResourceManager.GetString("NOT_UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Upgraded.
         /// </summary>
         public static string NOT_UPGRADED {
@@ -26306,6 +26360,15 @@ namespace XenAdmin {
         public static string PATCHING_EJECT_CDS {
             get {
                 return ResourceManager.GetString("PATCHING_EJECT_CDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patching Status.
+        /// </summary>
+        public static string PATCHING_STATUS {
+            get {
+                return ResourceManager.GetString("PATCHING_STATUS", resourceCulture);
             }
         }
         
@@ -29256,6 +29319,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Required Updates.
+        /// </summary>
+        public static string REQUIRED_UPDATES {
+            get {
+                return ResourceManager.GetString("REQUIRED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolved as {0}.
         /// </summary>
         public static string RESOLVED_AS {
@@ -29683,15 +29755,6 @@ namespace XenAdmin {
         public static string RUNNING_ON {
             get {
                 return ResourceManager.GetString("RUNNING_ON", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Taking snapshots.
-        /// </summary>
-        public static string RUNNING_SNAPSHOTS {
-            get {
-                return ResourceManager.GetString("RUNNING_SNAPSHOTS", resourceCulture);
             }
         }
         
@@ -30813,7 +30876,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Snapshot schedule.
+        ///   Looks up a localized string similar to Snapshot Schedule.
         /// </summary>
         public static string SNAPSHOT_FREQUENCY {
             get {
@@ -33175,6 +33238,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Up to date.
+        /// </summary>
+        public static string UPDATED {
+            get {
+                return ResourceManager.GetString("UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updated performance monitoring configuration.
         /// </summary>
         public static string UPDATED_PERFMON {
@@ -35134,6 +35206,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string VERSION {
+            get {
+                return ResourceManager.GetString("VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [XenCenter] version {0} (build {1}.{2}) {3}-bit.
         /// </summary>
         public static string VERSION_NUMBER {
@@ -36169,24 +36250,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a snapshot schedule for your VMs..
-        /// </summary>
-        public static string VMSS_DIALOG_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_DIALOG_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Snapshot schedules.
-        /// </summary>
-        public static string VMSS_DIALOG_TITLE {
-            get {
-                return ResourceManager.GetString("VMSS_DIALOG_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Send &amp;email notifications about snapshot schedule job alerts.
         /// </summary>
         public static string VMSS_EMAIL_CHECKBOX_TEXT {
@@ -36259,15 +36322,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Schedule na&amp;me:.
-        /// </summary>
-        public static string VMSS_NAME_FIELD_TEXT {
-            get {
-                return ResourceManager.GetString("VMSS_NAME_FIELD_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to What do you want to call this schedule?.
         /// </summary>
         public static string VMSS_NAME_TITLE {
@@ -36322,7 +36376,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VMs in the snapshot schedule.
+        ///   Looks up a localized string similar to Virtual Machines.
         /// </summary>
         public static string VMSS_VMS {
             get {

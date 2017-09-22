@@ -89,7 +89,7 @@ namespace XenAdmin.Diagnostics.Checks
                 return new PatchAlreadyApplied(this, Host);
             }
             
-            if (!Host.IsLive)
+            if (!Host.IsLive())
                 return new HostNotLiveWarning(this, Host);
 
             if (!Host.Connection.IsConnected)
@@ -271,10 +271,10 @@ namespace XenAdmin.Diagnostics.Checks
                     }
                     catch (Failure failure)
                     {
-                        log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name, failure.Message);
+                        log.WarnFormat("Plugin call disk-space.get_reclaimable_disk_space on {0} failed with {1}", Host.Name(), failure.Message);
                     }
 
-                    diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Patch.Name, requiredSpace, foundSpace, reclaimableDiskSpace);
+                    diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Patch.Name(), requiredSpace, foundSpace, reclaimableDiskSpace);
 
                     return new HostOutOfSpaceProblem(this, Host, Patch, diskSpaceReq);
                    
@@ -283,7 +283,7 @@ namespace XenAdmin.Diagnostics.Checks
                     long.TryParse(found, out foundSpace);
                     long.TryParse(required, out requiredSpace);
 
-                    diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Update.Name, requiredSpace, foundSpace, 0);
+                    diskSpaceReq = new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.install, Host, Update.Name(), requiredSpace, foundSpace, 0);
 
                     return new HostOutOfSpaceProblem(this, Host, Update, diskSpaceReq);
 
@@ -292,7 +292,7 @@ namespace XenAdmin.Diagnostics.Checks
                     {
                         var action = Patch != null
                             ? new GetDiskSpaceRequirementsAction(Host, Patch, true)
-                            : new GetDiskSpaceRequirementsAction(Host, Update.Name, Update.installation_size, true);
+                            : new GetDiskSpaceRequirementsAction(Host, Update.Name(), Update.installation_size, true);
                         try
                         {
                             action.RunExternal(action.Session);

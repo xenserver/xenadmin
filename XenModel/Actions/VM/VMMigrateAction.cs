@@ -53,8 +53,8 @@ namespace XenAdmin.Actions.VMActions
             Host residentOn = vm.Connection.Resolve(vm.resident_on);
             
             return residentOn == null
-                ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.Name, toHost.Name)
-                : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name, Helpers.GetName(residentOn), toHost.Name);
+                ? string.Format(Messages.ACTION_VM_MIGRATING_NON_RESIDENT, vm.Name(), toHost.Name())
+                : string.Format(Messages.ACTION_VM_MIGRATING_RESIDENT, vm.Name(), Helpers.GetName(residentOn), toHost.Name());
         }
 
         protected override void Run()

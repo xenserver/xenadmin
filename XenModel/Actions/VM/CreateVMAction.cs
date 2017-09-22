@@ -231,8 +231,9 @@ namespace XenAdmin.Actions.VMActions
         {
             var pool = Helpers.GetPoolOfOne(Connection);
             bool poolPolicyNoVendorDevice = pool == null || pool.policy_no_vendor_device;
+            bool hasVendorDeviceRecommendation = Template.HasVendorDeviceRecommendation();
 
-            if (Template.HasVendorDeviceRecommendation && !poolPolicyNoVendorDevice && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
+            if (hasVendorDeviceRecommendation && !poolPolicyNoVendorDevice && !Helpers.FeatureForbidden(VM, Host.RestrictVendorDevice))
             {
                 log.DebugFormat("Recommendation (has-vendor-device = true) has been found on the template ({0}) and the host is licensed, so applying it on VM ({1}) being created.", Template.opaque_ref, VM.opaque_ref);
                 VM.set_has_vendor_device(Connection.Session, VM.opaque_ref, true);
@@ -241,7 +242,7 @@ namespace XenAdmin.Actions.VMActions
             {
                 log.DebugFormat("Recommendation (has-vendor-device = true) has not been applied on the VM ({0}) being created.", VM.opaque_ref);
 
-                if (!Template.HasVendorDeviceRecommendation)
+                if (!hasVendorDeviceRecommendation)
                     log.DebugFormat("Recommendation (has-vendor-device) is not set or false on the template ({0}).", Template.opaque_ref);
 
                 if (poolPolicyNoVendorDevice)
@@ -254,7 +255,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void CloudCreateConfigDrive()
         {
-            if (Template.CanHaveCloudConfigDrive && !string.IsNullOrEmpty(cloudConfigDriveTemplateText))
+            if (Template.CanHaveCloudConfigDrive() && !string.IsNullOrEmpty(cloudConfigDriveTemplateText))
             {
                 Description = Messages.CREATING_CLOUD_CONFIG_DRIVE; 
 
@@ -285,7 +286,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void CopyBiosStrings()
         {
-            if (CopyBiosStringsFrom != null && Template.DefaultTemplate)
+            if (CopyBiosStringsFrom != null && Template.DefaultTemplate())
             {
                 VM.copy_bios_strings(Session, this.VM.opaque_ref, CopyBiosStringsFrom.opaque_ref);
             }
@@ -332,7 +333,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void SetVMBootParams()
         {
-            if (Template.IsHVM && (Disks.Count == 0 || InsMethod == InstallMethod.Network)) // CA-46213
+            if (Template.IsHVM() && (Disks.Count == 0 || InsMethod == InstallMethod.Network)) // CA-46213
             {
                 // boot from network
                 Dictionary<string, string> hvm_params = VM.HVM_boot_params;
@@ -353,7 +354,7 @@ namespace XenAdmin.Actions.VMActions
                 XenAPI.VM.set_other_config(Session, VM.opaque_ref, other_config);
             }
 
-            if (!Template.IsHVM)
+            if (!Template.IsHVM())
             {
                 XenAPI.VM.set_PV_args(Session, VM.opaque_ref, PvArgs);
             }
@@ -361,12 +362,12 @@ namespace XenAdmin.Actions.VMActions
 
         private bool IsEli()
         {
-            return !Template.IsHVM && Template.PV_bootloader == "eliloader";
+            return !Template.IsHVM() && Template.PV_bootloader == "eliloader";
         }
 
         private bool IsRhel()
         {
-            string distro = VM.InstallDistro;
+            string distro = VM.InstallDistro();
             return distro == "rhel41" || distro == "rhel44" || distro == "rhlike";
         }
 
@@ -387,7 +388,7 @@ namespace XenAdmin.Actions.VMActions
 
         private void RewriteProvisionXML()
         {
-            XmlNode xml = VM.ProvisionXml;
+            XmlNode xml = VM.ProvisionXml();
 
             if (xml == null)
                 return;
@@ -496,7 +497,7 @@ namespace XenAdmin.Actions.VMActions
                     //use the first disk to set the VM.suspend_SR
                     SR vdiSR = Connection.Resolve(vdi.SR);
                     this.firstSR = vdiSR;
-                    if(vdiSR != null && !vdiSR.HBALunPerVDI)
+                    if(vdiSR != null && !vdiSR.HBALunPerVDI())
                         suspendSr = vdi.SR;
                     firstDisk = false;
                 }
@@ -626,7 +627,7 @@ namespace XenAdmin.Actions.VMActions
             if (devices.Count == 0)
                 throw new Exception(Messages.NO_MORE_USERDEVICES);
             VBD vbd = new VBD();
-            vbd.IsOwner = true;
+            vbd.SetIsOwner(true);
             vbd.bootable = bootable;
             vbd.empty = false;
             vbd.unpluggable = true;

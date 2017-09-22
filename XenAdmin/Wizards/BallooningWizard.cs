@@ -70,7 +70,7 @@ namespace XenAdmin.Wizards
             }
 
             origStaticMax = vms[0].memory_static_max;
-            has_ballooning = vms[0].has_ballooning;
+            has_ballooning = vms[0].has_ballooning();
         }
 
         protected override void OnShown(EventArgs e)

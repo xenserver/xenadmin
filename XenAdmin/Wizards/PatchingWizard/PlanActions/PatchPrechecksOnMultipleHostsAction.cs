@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     }
                     catch (Exception ex)
                     {
-                        log.Error(string.Format("Precheck failed on host {0}", host.Name), ex);
+                        log.Error(string.Format("Precheck failed on host {0}", host.Name()), ex);
                         throw ex;
                     }
                 }

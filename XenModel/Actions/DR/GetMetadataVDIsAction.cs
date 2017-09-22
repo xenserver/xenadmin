@@ -70,14 +70,14 @@ namespace XenAdmin.Actions.DR
 
             foreach (SR sr in srs)
             {
-                if (!sr.shared || sr.IsToolsSR || sr.GetSRType(true) == SR.SRTypes.iso)
+                if (!sr.shared || sr.IsToolsSR() || sr.GetSRType(true) == SR.SRTypes.iso)
                     continue;
 
                 if (_restrictSrList != null && !_restrictSrList.Contains(sr.uuid))
                     continue;
 
-                Description = string.Format(Messages.ACTION_GET_METADATA_VDIS_STATUS, sr.Name);
-                log.DebugFormat("Looking for metadata VDIs on SR {0}.", sr.Name);
+                Description = string.Format(Messages.ACTION_GET_METADATA_VDIS_STATUS, sr.Name());
+                log.DebugFormat("Looking for metadata VDIs on SR {0}.", sr.Name());
 
                 List<VDI> vdis = sr.Connection.ResolveAll(sr.VDIs);
 
@@ -95,7 +95,7 @@ namespace XenAdmin.Actions.DR
                         continue;
                     
                     _vdis.Add(vdi);
-                    log.DebugFormat("Metadata VDI {0} found on SR {1}.", vdi.Name, sr.Name);
+                    log.DebugFormat("Metadata VDI {0} found on SR {1}.", vdi.Name(), sr.Name());
                 }
                 PercentComplete = (int) (PercentComplete + increment);
             }

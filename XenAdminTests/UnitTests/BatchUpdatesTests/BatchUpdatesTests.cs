@@ -64,9 +64,9 @@ namespace XenAdminTests.UnitTests
             mom.MockConnectionFor(id).Setup(c => c.Cache.Pools).Returns(new Pool[] { pool.Object });
 
             master.Setup(h => h.software_version).Returns(new Dictionary<string, string>());
-            master.Setup(h => h.ProductVersion).Returns(productVersion);
+            master.Setup(h => h.ProductVersion()).Returns(productVersion);
             master.Setup(h => h.AppliedPatches()).Returns(applied_patches ?? new List<Pool_patch>());
-            master.Setup(h => h.BuildNumberRaw).Returns(buildNumber);
+            master.Setup(h => h.BuildNumberRaw()).Returns(buildNumber);
             master.Setup(h => h.uuid).Returns(id);
             return master;
         }

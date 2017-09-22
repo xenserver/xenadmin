@@ -167,14 +167,14 @@ namespace XenServerHealthCheck
                 if (p == null)
                 {
                     mastersInfo.Add(string.Format("Server '{0}' is a stand alone server",
-                        host.Name));
+                        host.Name()));
                 }
                 else
                 {
                     mastersInfo.Add(string.Format("Server '{0}' is a {1} of pool '{2}'",
-                        host.Name,
+                        host.Name(),
                         p.master.opaque_ref == host.opaque_ref ? "master" : "slave",
-                        p.Name));
+                        p.Name()));
                 }
 
                 HostWithStatus hostWithStatus = new HostWithStatus(host, 0);

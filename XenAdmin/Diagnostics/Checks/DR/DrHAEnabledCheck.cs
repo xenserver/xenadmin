@@ -56,7 +56,7 @@ namespace XenAdmin.Diagnostics.Checks.DR
 
         public override string Description
         {
-            get { return String.Format(Messages.DR_HA_CHECK_DESCRIPTION, Pool.Name); }
+            get { return String.Format(Messages.DR_HA_CHECK_DESCRIPTION, Pool.Name()); }
         }
     }
 }

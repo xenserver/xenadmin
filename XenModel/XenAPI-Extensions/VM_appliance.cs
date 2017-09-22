@@ -37,14 +37,14 @@ namespace XenAPI
 {
     public partial class VM_appliance
     {
-        public override string Name
+        public override string Name()
         {
-            get { return name_label; }
+            return name_label;
         }
 
-        public override string Description
+        public override string Description()
         {
-            get { return name_description; }
+            return name_description;
         }
 
         public List<VM> GetFateSharingVMs()
@@ -64,7 +64,7 @@ namespace XenAPI
 
                 foreach (var otherVm in vmsNotInCurApp)
                 {
-                    if (otherVm.is_a_real_vm && otherVm.power_state != vm_power_state.Halted && otherVm.SRs.Intersect(thisVm.SRs).FirstOrDefault() != null && !fateSharingVms.Contains(otherVm))
+                    if (otherVm.is_a_real_vm() && otherVm.power_state != vm_power_state.Halted && otherVm.SRs().Intersect(thisVm.SRs()).FirstOrDefault() != null && !fateSharingVms.Contains(otherVm))
                         fateSharingVms.Add(otherVm);
                 }
             }
@@ -72,23 +72,20 @@ namespace XenAPI
             return fateSharingVms;
         }
 
-        public bool IsRunning
+        public bool IsRunning()
         {
-            get
+            foreach (var vmRef in VMs)
             {
-                foreach (var vmRef in VMs)
-                {
-                    VM vm = Connection.Resolve(vmRef);
-                    if (vm == null)
-                        continue;
+                VM vm = Connection.Resolve(vmRef);
+                if (vm == null)
+                    continue;
 
-                    if (vm.power_state == vm_power_state.Running
-                        || vm.power_state == vm_power_state.Paused
-                        || vm.power_state == vm_power_state.Suspended)
-                        return true;
-                }
-                return false;
+                if (vm.power_state == vm_power_state.Running
+                    || vm.power_state == vm_power_state.Paused
+                    || vm.power_state == vm_power_state.Suspended)
+                    return true;
             }
+            return false;
         }
 
         public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, Session sessionTo)

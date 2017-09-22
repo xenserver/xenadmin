@@ -101,7 +101,7 @@ namespace XenAPI
             List<Role> authRoles = Role.ValidRoleList(failure.ErrorDescription[1], Connection);
             failure.ErrorDescription[0] = Failure.RBAC_PERMISSION_DENIED_FRIENDLY;
             // Current Role(s)
-            failure.ErrorDescription[1] = Session.FriendlyRoleDescription;
+            failure.ErrorDescription[1] = Session.FriendlyRoleDescription();
             // Authorized roles
             failure.ErrorDescription[2] = Role.FriendlyCSVRoleList(authRoles);
             failure.Setup();
@@ -120,7 +120,7 @@ namespace XenAPI
             StringBuilder sb = new StringBuilder();
             foreach (Session s in Sessions)
             {
-                sb.Append(string.Format(Messages.ROLE_ON_CONNECTION, s.FriendlyRoleDescription, Helpers.GetName(s.Connection).Ellipsise(50)));
+                sb.Append(string.Format(Messages.ROLE_ON_CONNECTION, s.FriendlyRoleDescription(), Helpers.GetName(s.Connection).Ellipsise(50)));
                 sb.Append(", ");
             }
             string output = sb.ToString();

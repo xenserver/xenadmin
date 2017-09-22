@@ -42,7 +42,7 @@ namespace XenAPI
 
         String Path { get; set; }
 
-        string Name { get; }
+        string Name();
 
         IXenConnection Connection { get; set; }
 
@@ -51,7 +51,7 @@ namespace XenAPI
         /// <summary>
         /// Whether the HideFromXenCenter other_config key is set.
         /// </summary>
-        bool IsHidden { get; }
+        bool IsHidden();
 
         /// <summary>
         /// Whether the object should be shown in general (for example, VDIs with managed=false are never shown in the UI).
@@ -64,7 +64,7 @@ namespace XenAPI
         string SaveChanges(Session session);
         string SaveChanges(Session session, IXenObject beforeObject);
 
-        string Description { get; }
-        string NameWithLocation { get; }
+        string Description();
+        string NameWithLocation();
     }
 }

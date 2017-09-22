@@ -81,11 +81,11 @@ namespace XenAdmin.ConsoleView
 
         internal readonly ConsoleKeyHandler KeyHandler = new ConsoleKeyHandler();
 
-        private bool hasRDP { get { return source != null ? source.HasRDP : false; } }
+        private bool hasRDP { get { return source != null && source.HasRDP(); } }
 
-        private bool RDPEnabled { get { return source != null ? source.RDPEnabled : false; } }
+        private bool RDPEnabled { get { return source != null && source.RDPEnabled(); } }
 
-        private bool RDPControlEnabled { get { return source != null ? source.RDPControlEnabled : false; } }
+        private bool RDPControlEnabled { get { return source != null && source.RDPControlEnabled(); } }
 
         public bool IsRDPControlEnabled() { return RDPControlEnabled; }
 
@@ -113,7 +113,7 @@ namespace XenAdmin.ConsoleView
             this.guestMetrics = source.Connection.Resolve(source.guest_metrics);
             if (this.guestMetrics != null)
                 guestMetrics.PropertyChanged += guestMetrics_PropertyChanged;
-            log.DebugFormat("'{0}' console: Register Server_PropertyChanged event listener on {0}", this.source.Name);
+            log.DebugFormat("'{0}' console: Register Server_PropertyChanged event listener on {0}", this.source.Name());
             this.source.PropertyChanged += Server_PropertyChanged;
             Host_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Host_CollectionChanged);
             VM_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(VM_CollectionChanged);
@@ -124,17 +124,17 @@ namespace XenAdmin.ConsoleView
                 Host host = source.Connection.Resolve(source.resident_on);
                 if (host != null)
                 {
-                    log.DebugFormat("'{0}' console: Register Server_PropertyChanged event listener on {1}", this.source.Name, host.Name);
+                    log.DebugFormat("'{0}' console: Register Server_PropertyChanged event listener on {1}", this.source.Name(), host.Name());
                     host.PropertyChanged += Server_PropertyChanged;
 
                     Host_metrics hostMetrics = source.Connection.Resolve(host.metrics);
                     if (hostMetrics != null)
                     {
-                        log.DebugFormat("'{0}' console: Register Server_PropertyChanged event listener on host metrics", this.source.Name);
+                        log.DebugFormat("'{0}' console: Register Server_PropertyChanged event listener on host metrics", this.source.Name());
                         hostMetrics.PropertyChanged += Server_PropertyChanged;
                     }
 
-                    HostLabel.Text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name);
+                    HostLabel.Text = string.Format(source.IsControlDomainZero() ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name());
                     HostLabel.Visible = true;
                 }
             }
@@ -146,20 +146,20 @@ namespace XenAdmin.ConsoleView
                 foreach (Host cachedHost in source.Connection.Cache.Hosts)
                 {
                     log.DebugFormat("'{0}' console: Register Server_EnabledPropertyChanged event listener on {1}",
-                                    source.Name, cachedHost.Name);
+                                    source.Name(), cachedHost.Name());
                     cachedHost.PropertyChanged += Server_EnabledPropertyChanged;
                 }
                 
                 HostLabel.Visible = false;
             }
 
-            log.DebugFormat("'{0}' console: Update power state (on VNCTabView constructor)", this.source.Name);
+            log.DebugFormat("'{0}' console: Update power state (on VNCTabView constructor)", this.source.Name());
             updatePowerState();
             this.vncScreen = new XSVNCScreen(source, new EventHandler(RDPorVNCResizeHandler), this, elevatedUsername, elevatedPassword);
             ShowGpuWarningIfRequired(vncScreen.MustConnectRemoteDesktop());
             vncScreen.GpuStatusChanged += ShowGpuWarningIfRequired;
 
-            if (source.IsControlDomainZero || source.IsHVM && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
+            if (source.IsControlDomainZero() || source.IsHVM() && !hasRDP) //Linux HVM guests should only have one console: the console switch button vanishes altogether.
             {
                 toggleConsoleButton.Visible = false;
             }
@@ -251,7 +251,7 @@ namespace XenAdmin.ConsoleView
 
         private void Host_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
-            if (source.IsControlDomainZero)
+            if (source.IsControlDomainZero())
                 return;
 
             Host host = e.Element as Host;
@@ -260,14 +260,14 @@ namespace XenAdmin.ConsoleView
                 if (e.Action == CollectionChangeAction.Add)
                 {
                     log.DebugFormat("'{0}' console: Register Server_EnabledPropertyChanged event listener on {1}",
-                                    source.Name, host.Name);
+                                    source.Name(), host.Name());
                     host.PropertyChanged -= Server_EnabledPropertyChanged;
                     host.PropertyChanged += Server_EnabledPropertyChanged;
                 }
                 else if (e.Action == CollectionChangeAction.Remove)
                 {
                     log.DebugFormat("'{0}' console: Unregister Server_EnabledPropertyChanged event listener on {1}",
-                                    source.Name, host.Name);
+                                    source.Name(), host.Name());
                     host.PropertyChanged -= Server_EnabledPropertyChanged;
                 }
             }
@@ -280,27 +280,27 @@ namespace XenAdmin.ConsoleView
             if (source == null)
                 return;
 
-            log.DebugFormat("'{0}' console: Unregister Server_PropertyChanged event listener on {0}", source.Name);
+            log.DebugFormat("'{0}' console: Unregister Server_PropertyChanged event listener on {0}", source.Name());
             source.PropertyChanged -= new PropertyChangedEventHandler(Server_PropertyChanged);
             source.Connection.Cache.DeregisterCollectionChanged<VM>(VM_CollectionChangedWithInvoke);
 
             if (this.guestMetrics != null)
                 this.guestMetrics.PropertyChanged -= guestMetrics_PropertyChanged; 
 
-            if (source.IsControlDomainZero)
+            if (source.IsControlDomainZero())
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
                 if (host != null)
                 {
                     log.DebugFormat("'{0}' console: Unregister Server_PropertyChanged event listener on {1}",
-                                    source.Name, host.Name);
+                                    source.Name(), host.Name());
                     host.PropertyChanged -= Server_PropertyChanged;
 
                     Host_metrics hostMetrics = source.Connection.Resolve<Host_metrics>(host.metrics);
                     if (hostMetrics != null)
                     {
                         log.DebugFormat("'{0}' console: Unregister Server_PropertyChanged event listener on host metrics",
-                                        source.Name);
+                                        source.Name());
                         hostMetrics.PropertyChanged -= Server_PropertyChanged;
                     }
                 }
@@ -312,7 +312,7 @@ namespace XenAdmin.ConsoleView
                 foreach (Host cachedHost in source.Connection.Cache.Hosts)
                 {
                     log.DebugFormat("'{0}' console: Unregister Server_EnabledPropertyChanged event listener on {1}",
-                                    source.Name, cachedHost.Name);
+                                    source.Name(), cachedHost.Name());
                     cachedHost.PropertyChanged -= Server_EnabledPropertyChanged;
                 }
             }
@@ -528,7 +528,7 @@ namespace XenAdmin.ConsoleView
 
             if (source.is_control_domain && e.PropertyName == "name_label")
             {
-                string text = string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, source.AffinityServerString);
+                string text = string.Format(source.IsControlDomainZero() ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, source.AffinityServerString());
                 HostLabel.Text = text;
 
                 if (parentVNCView != null && parentVNCView.undockedForm != null)
@@ -590,7 +590,7 @@ namespace XenAdmin.ConsoleView
 
         private void Server_EnabledPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "enabled" || source.IsControlDomainZero)
+            if (e.PropertyName != "enabled" || source.IsControlDomainZero())
                 return;
 
             Host host = sender as Host;
@@ -613,7 +613,7 @@ namespace XenAdmin.ConsoleView
 
         private void updatePowerState()
         {
-            if (source.IsControlDomainZero)
+            if (source.IsControlDomainZero())
             {
                 Host host = source.Connection.Resolve<Host>(source.resident_on);
                 if (host == null)
@@ -679,14 +679,14 @@ namespace XenAdmin.ConsoleView
         private void hideTopBarContents()
         {
             VMPowerOff();
-            if (source.IsControlDomainZero)
+            if (source.IsControlDomainZero())
             {
-                log.DebugFormat("'{0}' console: Hide top bar contents, server is unavailable", source.Name);
+                log.DebugFormat("'{0}' console: Hide top bar contents, server is unavailable", source.Name());
                 DisablePowerStateLabel(Messages.CONSOLE_HOST_DEAD);
             }
             else
             {
-                log.DebugFormat("'{0}' console: Hide top bar contents, powerstate='{1}'", source.Name, vm_power_state_helper.ToString(source.power_state));
+                log.DebugFormat("'{0}' console: Hide top bar contents, powerstate='{1}'", source.Name(), vm_power_state_helper.ToString(source.power_state));
                 if (source.power_state == vm_power_state.Halted)
                 {
                     if (source.allowed_operations.Contains(vm_operations.start) &&
@@ -732,7 +732,7 @@ namespace XenAdmin.ConsoleView
 
         private void showTopBarContents()
         {
-            log.DebugFormat("'{0}' console: Show top bar contents, source is running", source.Name);
+            log.DebugFormat("'{0}' console: Show top bar contents, source is running", source.Name());
             Program.AssertOnEventThread();
             VMPowerOn();
             powerStateLabel.Hide();
@@ -1375,7 +1375,7 @@ namespace XenAdmin.ConsoleView
 
             ContextMenuItemCollection contextMenuItems = new ContextMenuItemCollection();
 
-            if (source.IsControlDomainZero)
+            if (source.IsControlDomainZero())
             {
                 // We're looking at the host console
                 if (host.Connection.IsConnected)
@@ -1506,7 +1506,7 @@ namespace XenAdmin.ConsoleView
 
                 try
                 {
-                    var startInfo = new ProcessStartInfo(puttyPath, source.IPAddressForSSH);
+                    var startInfo = new ProcessStartInfo(puttyPath, source.IPAddressForSSH());
                     Process.Start(startInfo);
                 }
                 catch (Exception ex)
@@ -1540,10 +1540,10 @@ namespace XenAdmin.ConsoleView
         { 
             get
             {
-                if (source.IsWindows)
+                if (source.IsWindows())
                     return false;
 
-                if (source.IsControlDomainZero)
+                if (source.IsControlDomainZero())
                 {
                     Host host = source.Connection.Resolve<Host>(source.resident_on);
                     if (host == null)
@@ -1568,7 +1568,7 @@ namespace XenAdmin.ConsoleView
                return
                    IsSSHConsoleSupported &&
                    source.power_state == vm_power_state.Running &&
-                   !string.IsNullOrEmpty(source.IPAddressForSSH);
+                   !string.IsNullOrEmpty(source.IPAddressForSSH());
             }
         }
 

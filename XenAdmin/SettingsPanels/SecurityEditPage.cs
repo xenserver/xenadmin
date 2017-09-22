@@ -75,7 +75,7 @@ namespace XenAdmin.SettingsPanels
             if (clone is Host)
                 labelRubric.Text = Messages.SECURITYEDITPAGE_RUBRIC_HOST;  // the pool version is built into the page: this overrides it in the case of a host
 
-            if (pool.ssl_legacy)
+            if (pool.ssl_legacy())
                 radioButtonSSL.Checked = true;
             else
                 radioButtonTLS.Checked = true;
@@ -95,7 +95,7 @@ namespace XenAdmin.SettingsPanels
 
         public bool HasChanged
         {
-            get { return radioButtonSSL.Checked != pool.ssl_legacy; }
+            get { return radioButtonSSL.Checked != pool.ssl_legacy(); }
         }
 
         #endregion

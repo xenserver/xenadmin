@@ -40,7 +40,7 @@ namespace XenAdminTests.XenModelTests.ActionTests
     {
         protected override ExportVmAction NewAction()
         {
-            VM template = GetAnyUserTemplate(VmIsInstant);
+            VM template = GetAnyUserTemplate(vm => vm.InstantTemplate());
             return new ExportVmAction(template.Connection, GetAnyHost(),
                                       GetAnyVM(vm => vm.power_state == vm_power_state.Halted), "xxxx.xva", true);
         }
@@ -49,12 +49,6 @@ namespace XenAdminTests.XenModelTests.ActionTests
         {
             string result = action.Result;
             return result == "";
-        }
-
-
-        private bool VmIsInstant(VM vm)
-        {
-            return vm.InstantTemplate;
         }
     }
 }

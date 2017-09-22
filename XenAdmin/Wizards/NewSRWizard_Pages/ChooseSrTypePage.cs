@@ -132,7 +132,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     // CA-21758: Use SM.other_config HideFromXenCenter flag to hide backends in the New SR wizard
                     // Only do this when we're doing a create.
 
-                    if (sm == null || (!Properties.Settings.Default.ShowHiddenVMs && sm.IsHidden))
+                    if (sm == null || (!Properties.Settings.Default.ShowHiddenVMs && sm.IsHidden()))
                         radioButton.Visible = false;
 
                     if (radioButton.Visible && radioButton.Tag.GetType() == m_preselectedWizardType)

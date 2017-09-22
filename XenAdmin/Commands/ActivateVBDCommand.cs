@@ -83,14 +83,14 @@ namespace XenAdmin.Commands
                 return false;
             }
 
-            return !vm.GetVirtualisationStatus.HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
+            return !vm.GetVirtualisationStatus().HasFlag(VM.VirtualisationStatus.IO_DRIVERS_INSTALLED);
         }
 
         private bool CanExecute(VBD vbd)
         {
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
-            if (vm == null || vm.not_a_real_vm || vdi == null)
+            if (vm == null || vm.not_a_real_vm() || vdi == null)
                 return false;
             if (vm.power_state != vm_power_state.Running)
                 return false;
@@ -112,7 +112,7 @@ namespace XenAdmin.Commands
 
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
-            if (vm == null || vm.not_a_real_vm || vdi == null)
+            if (vm == null || vm.not_a_real_vm() || vdi == null)
                 return base.GetCantExecuteReasonCore(item);
 
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
@@ -120,9 +120,14 @@ namespace XenAdmin.Commands
                 return Messages.SR_COULD_NOT_BE_CONTACTED;
 
             if (vdi.Locked)
-                return vdi.VDIType == VDI.FriendlyType.SNAPSHOT ? Messages.CANNOT_ACTIVATE_SNAPSHOT_IN_USE
-                    : vdi.VDIType == VDI.FriendlyType.ISO ? Messages.CANNOT_ACTIVATE_ISO_IN_USE
-                    : Messages.CANNOT_ACTIVATE_VD_IN_USE;
+            {
+                var vdiType = vdi.VDIType();
+                return vdiType == VDI.FriendlyType.SNAPSHOT
+                    ? Messages.CANNOT_ACTIVATE_SNAPSHOT_IN_USE
+                    : vdiType == VDI.FriendlyType.ISO
+                        ? Messages.CANNOT_ACTIVATE_ISO_IN_USE
+                        : Messages.CANNOT_ACTIVATE_VD_IN_USE;
+            }
 
             if (vm.power_state != vm_power_state.Running)
                 return string.Format(
@@ -134,7 +139,7 @@ namespace XenAdmin.Commands
 
             if (AreIODriversNeededAndMissing(vm))
                 return string.Format(
-                    vm.HasNewVirtualisationStates ? Messages.CANNOT_ACTIVATE_VD_VM_NEEDS_IO_DRIVERS : Messages.CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS, 
+                    vm.HasNewVirtualisationStates() ? Messages.CANNOT_ACTIVATE_VD_VM_NEEDS_IO_DRIVERS : Messages.CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS, 
                     Helpers.GetName(vm).Ellipsise(50));
               
             if (vbd.currently_attached)
@@ -172,7 +177,7 @@ namespace XenAdmin.Commands
         {
             VDI vdi = vbd.Connection.Resolve<VDI>(vbd.VDI);
             VM vm = vbd.Connection.Resolve<VM>(vbd.VM);
-            String title = String.Format(Messages.ACTION_DISK_ACTIVATING_TITLE, vdi.Name, vm.Name);
+            String title = String.Format(Messages.ACTION_DISK_ACTIVATING_TITLE, vdi.Name(), vm.Name());
             String startDesc = Messages.ACTION_DISK_ACTIVATING;
             String endDesc = Messages.ACTION_DISK_ACTIVATED;
 
