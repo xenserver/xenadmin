@@ -51,7 +51,7 @@ namespace XenAdmin.Dialogs
             pvsSite = site;
 
             InitializeComponent();
-            Text = string.Format(Messages.PVS_SITE_DIALOG_TITLE, pvsSite.Name.Ellipsise(50));
+            Text = string.Format(Messages.PVS_SITE_DIALOG_TITLE, pvsSite.Name().Ellipsise(50));
 
             System.Diagnostics.Trace.Assert(gridView.Columns.Count > 0);
             gridView.Columns[0].DefaultCellStyle.NullValue = null;

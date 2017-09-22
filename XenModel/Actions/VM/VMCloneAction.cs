@@ -41,7 +41,7 @@ namespace XenAdmin.Actions.VMActions
         protected string _cloneName;
         protected string _cloneDescription;
         public VMCloneAction(VM vm, string name, string description)
-            : base(vm.Connection, string.Format(Messages.CREATEVM_CLONE, name, vm.Name))
+            : base(vm.Connection, string.Format(Messages.CREATEVM_CLONE, name, vm.Name()))
         {
             this.Description = Messages.ACTION_PREPARING;
             this.VM = vm;

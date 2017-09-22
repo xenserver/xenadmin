@@ -51,12 +51,12 @@ namespace XenAdmin.Controls
                 IncludePoolNameInComboBox = false;
 
             if (IsManagement && IncludePoolNameInComboBox)
-                return String.Format(Messages.MANAGEMENT_NETWORK_WITH_POOL, Network.Name, pool.Name);
+                return String.Format(Messages.MANAGEMENT_NETWORK_WITH_POOL, Network.Name(), pool.Name());
             if (IsManagement && !IncludePoolNameInComboBox)
-                return String.Format(Messages.MANAGEMENT_NETWORK, Network.Name);
+                return String.Format(Messages.MANAGEMENT_NETWORK, Network.Name());
             if (!IsManagement && IncludePoolNameInComboBox)
-                return String.Format(Messages.NETWORK_WITH_POOL, Network.Name, pool.Name);
-            return Network.Name;
+                return String.Format(Messages.NETWORK_WITH_POOL, Network.Name(), pool.Name());
+            return Network.Name();
         }
 
     }

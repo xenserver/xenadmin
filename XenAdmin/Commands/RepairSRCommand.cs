@@ -75,7 +75,7 @@ namespace XenAdmin.Commands
         {
             List<SR> srList = selection.AsXenObjects<SR>(CanExecute);
 
-            if (srList.Find(s => !s.MultipathAOK) != null)
+            if (srList.Find(s => !s.MultipathAOK()) != null)
             {
                 using (var dlg = new ThreeButtonDialog(
                                new ThreeButtonDialog.Details(
@@ -97,7 +97,7 @@ namespace XenAdmin.Commands
 
         private bool CanExecute(SR sr)
         {
-            return sr != null && sr.HasPBDs && (sr.IsBroken() || !sr.MultipathAOK) && !HelpersGUI.GetActionInProgress(sr) && sr.CanRepairAfterUpgradeFromLegacySL;
+            return sr != null && sr.HasPBDs() && (sr.IsBroken() || !sr.MultipathAOK()) && !HelpersGUI.GetActionInProgress(sr) && sr.CanRepairAfterUpgradeFromLegacySL();
         }
 
         public override Image MenuImage

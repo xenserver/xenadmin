@@ -1018,7 +1018,7 @@ namespace XenAdmin
         /// <param name="e"></param>
         private void wlbReportView1_PoolConnectionLost(object sender, EventArgs e)
         {
-            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information, String.Format(Messages.WLB_REPORT_POOL_CONNECTION_LOST, _pool.Name), Messages.WLBREPORT_POOL_CONNECTION_LOST_CAPTION)))
+            using (var dlg = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Information, String.Format(Messages.WLB_REPORT_POOL_CONNECTION_LOST, _pool.Name()), Messages.WLBREPORT_POOL_CONNECTION_LOST_CAPTION)))
             {
                 dlg.ShowDialog(this);
             }

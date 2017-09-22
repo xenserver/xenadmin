@@ -58,7 +58,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                return string.Format(Messages.IQN_CHECK_EXISTS_TEXT, Helpers.GetName(Host), Host.iscsi_iqn, Helpers.GetName(RepeatedIQNs[Host]));
+                return string.Format(Messages.IQN_CHECK_EXISTS_TEXT, Helpers.GetName(Host), Host.GetIscsiIqn(), Helpers.GetName(RepeatedIQNs[Host]));
             }
         }
 

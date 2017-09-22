@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(Host host)
         {
-            return host != null && host.IsLive && !HelpersGUI.HasActiveHostAction(host) ;
+            return host != null && host.IsLive() && !HelpersGUI.HasActiveHostAction(host) ;
         }
 
         public override string MenuText
@@ -138,25 +138,25 @@ namespace XenAdmin.Commands
 
                 foreach (Host h in hosts)
                 {
-                    if (h.HasRunningVMs)
+                    if (h.HasRunningVMs())
                         hasRunningVMs = true;
 
-                    if (h.Connection.ResolveAll(h.resident_VMs).Exists(v => v.HciWarnBeforeShutdown))
+                    if (h.Connection.ResolveAll(h.resident_VMs).Exists(v => v.HciWarnBeforeShutdown()))
                         hciHosts.Add(h);
                 }
 
                 if (hciHosts.Count > 0)
                     return hciHosts.Count == 1
-                        ? string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name)
-                        : string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name)));
+                        ? string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name())
+                        : string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name())));
 
                 if (hasRunningVMs)
                     return hosts.Count == 1
-                        ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name)
+                        ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name())
                         : Messages.CONFIRM_SHUTDOWN_SERVERS;
 
                 return hosts.Count == 1
-                    ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name)
+                    ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name())
                     : Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS;
             }
         }
@@ -165,7 +165,7 @@ namespace XenAdmin.Commands
         {
             foreach (Host host in GetSelection().AsXenObjects<Host>())
             {
-                if (!CanExecute(host) && host.IsLive)
+                if (!CanExecute(host) && host.IsLive())
                 {
                     return new CommandErrorDialog(Messages.ERROR_DIALOG_SHUTDOWN_HOST_TITLE, Messages.ERROR_DIALOG_SHUTDOWN_HOST_TEXT, cantExecuteReasons);
                 }
@@ -180,7 +180,7 @@ namespace XenAdmin.Commands
             {
                 return base.GetCantExecuteReasonCore(item);
             }
-            if (!host.IsLive)
+            if (!host.IsLive())
             {
                 return Messages.HOST_ALREADY_SHUT_DOWN;
             }

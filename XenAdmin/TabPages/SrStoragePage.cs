@@ -318,7 +318,7 @@ namespace XenAdmin.TabPages
                 var vdi1 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex1]).VDI;
                 var vdi2 = ((VDIRow)dataGridViewVDIs.Rows[e.RowIndex2]).VDI;
 
-                var descCompare = StringUtility.NaturalCompare(vdi1.Description, vdi2.Description);
+                var descCompare = StringUtility.NaturalCompare(vdi1.Description(), vdi2.Description());
                 if (descCompare != 0)
                 {
                     e.SortResult = descCompare;
@@ -613,16 +613,16 @@ namespace XenAdmin.TabPages
                 switch (cellIndex)
                 {
                     case 0:
-                        return VDI.Name;
+                        return VDI.Name();
                     case 1:
                         string name;
                         return VDI.sm_config.TryGetValue("displayname", out name) ? name : "";
                     case 2:
-                        return VDI.Description;
+                        return VDI.Description();
                     case 3:
-                        return VDI.SizeText;
+                        return VDI.SizeText();
                     case 4:
-                        return VDI.VMsOfVDI;
+                        return VDI.VMsOfVDI();
                     case 5:
                         return VDI.cbt_enabled ? Messages.ENABLED : Messages.DISABLED;
                     default:
@@ -703,7 +703,7 @@ namespace XenAdmin.TabPages
                         sr.Connection.ResolveAll(sr.VDIs).Where(
                             vdi =>
                             vdi.Show(Properties.Settings.Default.ShowHiddenVMs) &&
-                            !vdi.IsAnIntermediateStorageMotionSnapshot)
+                            !vdi.IsAnIntermediateStorageMotionSnapshot())
                             .ToList();
 
                 bool showStorageLink = vdis.Find(v => v.sm_config.ContainsKey("SVID")) != null;

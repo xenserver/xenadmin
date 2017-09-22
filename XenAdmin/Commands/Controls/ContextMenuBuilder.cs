@@ -388,7 +388,7 @@ namespace XenAdmin.Commands
             public override bool IsValid(SelectedItemCollection selection)
             {
                 return selection.ContainsOneItemOfType<XenAPI.Network>() &&
-                    !(selection.FirstAsXenObject as XenAPI.Network).IsGuestInstallerNetwork;
+                    !(selection.FirstAsXenObject as XenAPI.Network).IsGuestInstallerNetwork();
                 // CA-218956 - Expose HIMN when showing hidden objects
                 // HIMN should not be editable
             }
@@ -512,7 +512,7 @@ namespace XenAdmin.Commands
                     {
                         Host host = item.XenObject as Host;
 
-                        if (host == null || !host.IsLive)
+                        if (host == null || !host.IsLive())
                         {
                             return false;
                         }
@@ -564,10 +564,7 @@ namespace XenAdmin.Commands
                 {
                     Host host = selection[0].XenObject as Host;
 
-                    if (host != null)
-                    {
-                        return host.IsLive;
-                    }
+                    return host != null && host.IsLive();
                 }
                 return false;
             }
@@ -615,7 +612,7 @@ namespace XenAdmin.Commands
                 if (selection.Count == 1 && selection[0].PoolAncestor == null)
                 {
                     Host host = selection[0].XenObject as Host;
-                    return host != null && host.IsLive;
+                    return host != null && host.IsLive();
                 }
                 return false;
             }
@@ -648,8 +645,10 @@ namespace XenAdmin.Commands
                         return false;
                     }
 
-                    foundAlive |= host.IsLive;
-                    foundDead |= !host.IsLive;
+                    bool isHostLive = host.IsLive();
+
+                    foundAlive |= isHostLive;
+                    foundDead |= !isHostLive;
                 }
                 return foundAlive && foundDead;
             }
@@ -681,7 +680,7 @@ namespace XenAdmin.Commands
                     {
                         Host host = item.XenObject as Host;
 
-                        if (host == null || host.IsLive)
+                        if (host == null || host.IsLive())
                         {
                             return false;
                         }
@@ -721,7 +720,7 @@ namespace XenAdmin.Commands
                 }
 
                 var pool = selection.FirstAsXenObject as Pool;
-                if (pool != null && !pool.IsPoolFullyUpgraded)
+                if (pool != null && !pool.IsPoolFullyUpgraded())
                     items.Add(new RollingUpgradeCommand(mainWindow));
 
                 items.AddSeparator();

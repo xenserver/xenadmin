@@ -64,7 +64,7 @@ namespace XenAdmin.Dialogs
             srPicker1.ItemSelectionNull += srPicker1_ItemSelectionNull;
             Host affinity = TheVM.Home();
             srPicker1.Connection = TheVM.Connection;
-            srPicker1.DiskSize = vm.TotalVMSize;
+            srPicker1.DiskSize = vm.TotalVMSize();
             srPicker1.SrHint.Text = IsRealVm ? Messages.COPY_VM_SELECT_SR : Messages.COPY_TEMPLATE_SELECT_SR;
             srPicker1.SetAffinity(affinity);
             Pool pool = Helpers.GetPoolOfOne(vm.Connection);
@@ -76,15 +76,17 @@ namespace XenAdmin.Dialogs
             Text = IsRealVm ? Messages.COPY_VM : Messages.COPY_TEMPLATE;
 
             bool allow_copy = !vm.is_a_template || vm.allowed_operations.Contains(vm_operations.copy);
+            bool anyDiskFastCloneable = vm.AnyDiskFastClonable();
+            bool hasAtLeastOneDisk = vm.HasAtLeastOneDisk();
 
-            CopyRadioButton.Enabled = allow_copy && vm.HasAtLeastOneDisk;
-            FastClonePanel.Enabled = !allow_copy || vm.AnyDiskFastClonable || !vm.HasAtLeastOneDisk;
+            CopyRadioButton.Enabled = allow_copy && hasAtLeastOneDisk;
+            FastClonePanel.Enabled = !allow_copy || anyDiskFastCloneable || !hasAtLeastOneDisk;
             if (!FastClonePanel.Enabled)
             {
                 CloneRadioButton.Checked = false;
             }
             toolTipContainer1.SetToolTip(Messages.FAST_CLONE_UNAVAILABLE);
-            if (vm.is_a_template && !(vm.AnyDiskFastClonable || allow_copy))
+            if (vm.is_a_template && !(anyDiskFastCloneable || allow_copy))
             {
                 CloneRadioButton.Text = Messages.COPY_VM_CLONE_TEMPLATE_SLOW;
                 FastCloneDescription.Text = Messages.COPY_VM_SLOW_CLONE_DESCRIPTION;
@@ -97,8 +99,8 @@ namespace XenAdmin.Dialogs
             if (!CloneRadioButton.Enabled)
                 CopyRadioButton.Checked = true;
 
-            if (vm.DescriptionType != VM.VmDescriptionType.None)
-                DescriptionTextBox.Text = vm.Description;
+            if (vm.DescriptionType() != VM.VmDescriptionType.None)
+                DescriptionTextBox.Text = vm.Description();
 
             srPicker1.srListBox.Invalidate();
             srPicker1.selectDefaultSROrAny();
@@ -189,9 +191,9 @@ namespace XenAdmin.Dialogs
             List<string> takenNames = new List<string>();
             foreach (VM vm in vmToCopy.Connection.Cache.VMs)
             {
-                takenNames.Add(vm.Name);
+                takenNames.Add(vm.Name());
             }
-            return Helpers.MakeUniqueName(string.Format(Messages.ACTION_TEMPLATE_CLONE_NEW_NAME, vmToCopy.Name), takenNames);
+            return Helpers.MakeUniqueName(string.Format(Messages.ACTION_TEMPLATE_CLONE_NEW_NAME, vmToCopy.Name()), takenNames);
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)

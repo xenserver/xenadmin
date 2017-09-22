@@ -113,10 +113,10 @@ namespace XenAdmin.Actions
 
         private string UploadSupplementalPack(SR sr)
         {
-            this.Description = String.Format(Messages.SUPP_PACK_UPLOADING_TO, sr.Name);
+            this.Description = String.Format(Messages.SUPP_PACK_UPLOADING_TO, sr.Name());
 
             String result;
-            log.DebugFormat("Creating vdi of size {0} bytes on SR '{1}'", diskSize, sr.Name);
+            log.DebugFormat("Creating vdi of size {0} bytes on SR '{1}'", diskSize, sr.Name());
 
             VDI vdi = NewVDI(sr);
             XenRef<VDI> vdiRef = null;
@@ -130,7 +130,7 @@ namespace XenAdmin.Actions
                 throw;
             }
 
-            log.DebugFormat("Uploading file '{0}' to VDI '{1}' on SR '{2}'", suppPackFilePath, vdi.Name, sr.Name);
+            log.DebugFormat("Uploading file '{0}' to VDI '{1}' on SR '{2}'", suppPackFilePath, vdi.Name(), sr.Name());
 
             Host localStorageHost = sr.GetStorageHost();
 
@@ -256,7 +256,7 @@ namespace XenAdmin.Actions
             }
 
             totalUploaded++;
-            Description = String.Format(Messages.SUPP_PACK_UPLOADED, sr.Name);
+            Description = String.Format(Messages.SUPP_PACK_UPLOADED, sr.Name());
             return result;
         }
 
@@ -271,7 +271,7 @@ namespace XenAdmin.Actions
             vdi.name_description = Helpers.ElyOrGreater(Connection) ? Messages.UPDATE_TEMP_VDI_DESCRIPTION : Messages.SUPP_PACK_TEMP_VDI_DESCRIPTION;
             vdi.sharable = false;
             vdi.type = vdi_type.user;
-            vdi.VMHint = "";
+            vdi.SetVmHint("");
             //mark the vdi as being a temporary supp pack iso
             vdi.other_config = new Dictionary<string, string> {{"supp_pack_iso", "true"}};
             return vdi;
@@ -350,12 +350,12 @@ namespace XenAdmin.Actions
 
         private bool CanCreateVdi(SR sr)
         {
-            return sr.SupportsVdiCreate() && !sr.IsDetached && SrHasEnoughFreeSpace(sr); 
+            return sr.SupportsVdiCreate() && !sr.IsDetached() && SrHasEnoughFreeSpace(sr); 
         }
 
         private bool SrHasEnoughFreeSpace(SR sr)
         {
-            return sr.FreeSpace >= diskSize; 
+            return sr.FreeSpace() >= diskSize; 
         }
     }
 }

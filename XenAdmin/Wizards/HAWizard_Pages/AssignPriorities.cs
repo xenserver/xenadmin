@@ -242,7 +242,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                     // The first case is for the HA wizard when priorities are being configured for the first time,
                     // the second is for the edit dialog, when HA is already enabled.
                     
-                    VM.HA_Restart_Priority? priority = firstTime ? (VM.HA_Restart_Priority?)null : vm.HARestartPriority;
+                    VM.HA_Restart_Priority? priority = firstTime ? (VM.HA_Restart_Priority?)null : vm.HARestartPriority();
                     var row = new VmWithSettingsRow(vm, priority);
                     newRows.Add(row);
                 }
@@ -357,7 +357,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             var vms = connection.Cache.VMs.Where(v => v.HaCanProtect(Properties.Settings.Default.ShowHiddenVMs));
             bool firstTime = IsHaActivatedFirstTime(vms);
 
-            VM.HA_Restart_Priority? priority = firstTime ? (VM.HA_Restart_Priority?)null : vm.HARestartPriority;
+            VM.HA_Restart_Priority? priority = firstTime ? (VM.HA_Restart_Priority?)null : vm.HARestartPriority();
             var row = new VmWithSettingsRow(vm, priority);
             dataGridViewVms.Rows.Add(row);
         }
@@ -777,7 +777,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             {
                 Vm = vm;
                 cellImage.Value = Images.GetImage16For(vm);
-                cellVm.Value = vm.Name;
+                cellVm.Value = vm.Name();
             }
 
             public void UpdateStartDelay(long startDelay)
@@ -811,7 +811,7 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
             public bool HasChanged()
             {
-                return Vm.order != StartOrder || Vm.start_delay != StartDelay || Vm.HARestartPriority != RestartPriority;
+                return Vm.order != StartOrder || Vm.start_delay != StartDelay || Vm.HARestartPriority() != RestartPriority;
             }
         }
 

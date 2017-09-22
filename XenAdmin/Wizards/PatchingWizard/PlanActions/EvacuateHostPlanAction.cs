@@ -43,9 +43,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public List<string> AvoidRestartHosts { private get; set; }
         
         public EvacuateHostPlanAction(Host host)
-            : base(host.Connection, string.Format(Messages.PLANACTION_VMS_MIGRATING, host.Name))
+            : base(host.Connection, string.Format(Messages.PLANACTION_VMS_MIGRATING, host.Name()))
         {
-            base.TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name);
+            base.TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name());
             this._host = new XenRef<Host>(host);
             currentHost = host;
             visible = false;
@@ -87,11 +87,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObject.resident_VMs));
 
-            log.DebugFormat("Disabling host {0}", hostObject.Name);
+            log.DebugFormat("Disabling host {0}", hostObject.Name());
             Host.disable(session, _host.opaque_ref);
 
             Status = Messages.PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST;
-            log.DebugFormat("Migrating VMs from host {0}", hostObject.Name);
+            log.DebugFormat("Migrating VMs from host {0}", hostObject.Name());
             XenRef<Task> task = Host.async_evacuate(session, _host.opaque_ref);
 
             PollTaskForResultAndDestroy(Connection, ref session, task);

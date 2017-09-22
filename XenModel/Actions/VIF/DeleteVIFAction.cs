@@ -42,7 +42,7 @@ namespace XenAdmin.Actions
     public class DeleteVIFAction : PureAsyncAction
     {
         private XenAPI.VIF _vif;
-        public DeleteVIFAction(XenAPI.VIF vif):base(vif.Connection,String.Format(Messages.ACTION_VIF_DELETING_TITLE, vif.NetworkName(), vif.Connection.Resolve(vif.VM).Name))
+        public DeleteVIFAction(XenAPI.VIF vif):base(vif.Connection,String.Format(Messages.ACTION_VIF_DELETING_TITLE, vif.NetworkName(), vif.Connection.Resolve(vif.VM).Name()))
         {
             _vif=vif;
             VM = vif.Connection.Resolve(vif.VM);

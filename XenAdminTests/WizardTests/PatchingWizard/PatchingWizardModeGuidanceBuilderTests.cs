@@ -72,7 +72,7 @@ namespace XenAdminTests.WizardTests
             
             host = ObjectManager.NewXenObject<Host>(id);
             host.Setup(h => h.IsMaster()).Returns(true);
-            host.Setup(h => h.Name).Returns("MyHost");
+            host.Setup(h => h.Name()).Returns("MyHost");
 
             if (guidance == after_apply_guidance.restartHost)
                 host.Setup(h => h.uuid).Returns("MyHostUUID");

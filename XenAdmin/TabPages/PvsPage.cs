@@ -99,7 +99,7 @@ namespace XenAdmin.TabPages
             if (XenAdminConfigManager.Provider.ObjectIsHidden(vm.opaque_ref))
                 return false;
 
-            return vm.is_a_real_vm && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && !vm.IsBeingCreated;
+            return vm.is_a_real_vm() && vm.Show(Properties.Settings.Default.ShowHiddenVMs) && !vm.IsBeingCreated;
         }
 
         private static bool VmIsJustAdded(VM vm)
@@ -136,7 +136,7 @@ namespace XenAdmin.TabPages
                 foreach (var vm in Connection.Cache.VMs)
                 {
                     // Add all real VMs and templates that begin with __gui__ (because this may be a new VM)
-                    var addVm = vm.is_a_real_vm || VmIsJustAdded(vm) || vm.IsBeingCreated;
+                    var addVm = vm.is_a_real_vm() || VmIsJustAdded(vm) || vm.IsBeingCreated;
 
                     if (!addVm)
                         continue;
@@ -199,7 +199,7 @@ namespace XenAdmin.TabPages
         {
             System.Diagnostics.Trace.Assert(vm != null);
 
-            var pvsProxy = vm.PvsProxy;
+            var pvsProxy = vm.PvsProxy();
             
             var vmCell = new DataGridViewTextBoxCell();
             var cacheEnabledCell = new DataGridViewTextBoxCell();
@@ -217,9 +217,9 @@ namespace XenAdmin.TabPages
         private void UpdateRow(DataGridViewRow row, VM vm, PVS_proxy pvsProxy, bool showRow=true)
         {
             PVS_site pvsSite = pvsProxy == null ? null : Connection.Resolve(pvsProxy.site);
-            row.Cells[0].Value = vm.Name;
+            row.Cells[0].Value = vm.Name();
             row.Cells[1].Value = pvsProxy == null ? Messages.NO : Messages.YES;
-            row.Cells[2].Value = pvsProxy == null || pvsSite == null ? Messages.NO_VALUE : pvsSite.NameWithWarning;
+            row.Cells[2].Value = pvsProxy == null || pvsSite == null ? Messages.NO_VALUE : pvsSite.NameWithWarning();
             row.Cells[3].Value = pvsProxy == null ? Messages.NO_VALUE : pvs_proxy_status_extensions.ToFriendlyString(pvsProxy.status);
 
             row.Visible = showRow;
@@ -253,7 +253,7 @@ namespace XenAdmin.TabPages
                 System.Diagnostics.Trace.Assert(vm != null);
                 vm.PropertyChanged -= VmPropertyChanged;
 
-                var pvsProxy = vm.PvsProxy;
+                var pvsProxy = vm.PvsProxy();
                 if (pvsProxy != null)
                 {
                     pvsProxy.PropertyChanged -= PvsProxyPropertyChanged;
@@ -379,7 +379,7 @@ namespace XenAdmin.TabPages
                     var vm = row.Tag as VM;
                     if (vm != null && vm.Equals(sender))
                     {
-                        row.Cells["columnVM"].Value = vm.Name;
+                        row.Cells["columnVM"].Value = vm.Name();
                         break;
                     }
                 }
@@ -397,10 +397,14 @@ namespace XenAdmin.TabPages
                 foreach (DataGridViewRow row in dataGridViewVms.Rows)
                 {
                     var vm = row.Tag as VM;
-                    if (vm != null && vm.Equals(pvsProxy.VM))
+                    if (vm != null)
                     {
-                        UpdateRow(row, pvsProxy.VM, pvsProxy);
-                        break;
+                        var pvsProxyVm = pvsProxy.VM();
+                        if (vm.Equals(pvsProxyVm))
+                        {
+                            UpdateRow(row, pvsProxyVm, pvsProxy);
+                            break;
+                        }
                     }
                 }
             });
@@ -419,7 +423,7 @@ namespace XenAdmin.TabPages
                     var vm = row.Tag as VM;
                     if (vm == null)
                         continue;
-                    var pvsProxy = vm.PvsProxy;
+                    var pvsProxy = vm.PvsProxy();
                     if (pvsProxy != null && pvsProxy.site != null && pvsProxy.site.opaque_ref == pvsSite.opaque_ref)
                     {
                         UpdateRow(row, vm, pvsProxy);

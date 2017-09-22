@@ -57,7 +57,7 @@ namespace XenAdmin.Diagnostics.Problems.VmApplianceProblem
         {
             get
             {
-                return String.Format(Messages.DR_WIZARD_PROBLEM_RUNNING_APPLIANCE, Helpers.GetPoolOfOne(VmAppliance.Connection).Name); 
+                return String.Format(Messages.DR_WIZARD_PROBLEM_RUNNING_APPLIANCE, Helpers.GetPoolOfOne(VmAppliance.Connection).Name()); 
             } 
         }
 

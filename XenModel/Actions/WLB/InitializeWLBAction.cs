@@ -73,10 +73,10 @@ namespace XenAdmin.Actions.Wlb
         {
             try
             {
-                log.Debug("Initializing Workload Balancing for pool " + Pool.Name);
+                log.Debug("Initializing Workload Balancing for pool " + Pool.Name());
                 RelatedTask = XenAPI.Pool.async_initialize_wlb(this.Session, _wlbUrl, _wlbUserName, _wlbPassword, _xenServerUserName, _xenServerPassword);
                 PollToCompletion();
-                log.Debug("Success initializing WLB on pool " + Pool.Name);
+                log.Debug("Success initializing WLB on pool " + Pool.Name());
                 this.Description = Messages.COMPLETED;
 
                 //Clear the Optimizing Pool flag in case it was left behind

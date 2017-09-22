@@ -377,14 +377,14 @@ namespace XenAdmin.TabPages
             // Sort heartbeat SRs using NaturalCompare
             heartbeatSRs.Sort((Comparison<SR>)delegate(SR a, SR b)
             {
-                return StringUtility.NaturalCompare(a.Name, b.Name);
+                return StringUtility.NaturalCompare(a.Name(), b.Name());
             });
 
             List<Host> members = new List<Host>(pool.Connection.Cache.Hosts);
             // Sort pool members using NaturalCompare
             members.Sort((Comparison<Host>)delegate(Host a, Host b)
             {
-                return StringUtility.NaturalCompare(a.Name, b.Name);
+                return StringUtility.NaturalCompare(a.Name(), b.Name());
             });
             int numCols = 1 + 2 + (2 * heartbeatSRs.Count); // Hostnames col, then 2 each for each HB target (network + SRs)
             int numRows = 1 + members.Count;
@@ -427,7 +427,7 @@ namespace XenAdmin.TabPages
             {
                 // SR icon
                 PictureBox p = new PictureBox();
-                p.Image = Images.GetImage16For(heartbeatSRs[i].GetIcon);
+                p.Image = Images.GetImage16For(Images.GetIconFor(heartbeatSRs[i]));
                 p.SizeMode = PictureBoxSizeMode.AutoSize;
                 p.Padding = new Padding(0);
                 tableLatencies.Controls.Add(p);
@@ -440,7 +440,7 @@ namespace XenAdmin.TabPages
                 l.AutoSize = false;
                 l.Size = new Size(200, 25);
                 l.AutoEllipsis = true;
-                l.Text = heartbeatSRs[i].Name;
+                l.Text = heartbeatSRs[i].Name();
                 tableLatencies.Controls.Add(l);
                 tableLatencies.SetCellPosition(l, new TableLayoutPanelCellPosition((2 * i) + 4, 0));
             }
@@ -453,7 +453,7 @@ namespace XenAdmin.TabPages
                 l.Font = BaseTabPage.ItemLabelFont;
                 l.ForeColor = BaseTabPage.ItemLabelForeColor;
                 l.AutoSize = true;
-                l.Text = members[i].Name.Ellipsise(30);
+                l.Text = members[i].Name().Ellipsise(30);
                 tableLatencies.Controls.Add(l);
                 tableLatencies.SetCellPosition(l, new TableLayoutPanelCellPosition(0, i + 1));
 

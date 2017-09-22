@@ -62,7 +62,7 @@ namespace XenAdmin.Actions
         /// <param name="pif">The PIF representing the physical NIC from which we're basing our new VLAN.</param>
         /// <param name="vlan">The new VLAN tag.</param>
         public NetworkAction(IXenConnection connection, XenAPI.Network network, PIF pif, long vlan)
-            : base(connection, string.Format(Messages.NETWORK_ACTION_CREATING_NETWORK_TITLE, network.Name,
+            : base(connection, string.Format(Messages.NETWORK_ACTION_CREATING_NETWORK_TITLE, network.Name(),
             Helpers.GetName(connection)))
         {
             actionType = network_actions.create;
@@ -86,7 +86,7 @@ namespace XenAdmin.Actions
         public NetworkAction(IXenConnection connection, XenAPI.Network network, bool create)
             : base(connection,
                    string.Format(create ? Messages.NETWORK_ACTION_CREATING_NETWORK_TITLE : Messages.NETWORK_ACTION_REMOVING_NETWORK_TITLE,
-                                 network.Name, Helpers.GetName(connection)))
+                                 network.Name(), Helpers.GetName(connection)))
         {
             this.networkClone = network;
             this.external = false;
@@ -106,11 +106,11 @@ namespace XenAdmin.Actions
                 PIFs = Connection.ResolveAll(network.PIFs);
                 #region RBAC Dependencies
                 ApiMethodsToRoleCheck.Add("network.destroy");
-                if (PIFs.Find(p => p.IsTunnelAccessPIF) != null)
+                if (PIFs.Find(p => p.IsTunnelAccessPIF()) != null)
                     ApiMethodsToRoleCheck.Add("tunnel.destroy");
-                if (PIFs.Find(p => !p.IsTunnelAccessPIF && p.physical) != null)
+                if (PIFs.Find(p => !p.IsTunnelAccessPIF() && p.physical) != null)
                     ApiMethodsToRoleCheck.Add("pif.forget");  // actually, we should have at most one of tunnel.destroy and pif.forget
-                if (PIFs.Find(p => !p.IsTunnelAccessPIF && !p.physical) != null)
+                if (PIFs.Find(p => !p.IsTunnelAccessPIF() && !p.physical) != null)
                     ApiMethodsToRoleCheck.Add("vlan.destroy");  // same here, shouldn't be both virtual and physcial really
                 #endregion
                 actionType = network_actions.destroy;
@@ -133,7 +133,7 @@ namespace XenAdmin.Actions
         public NetworkAction(IXenConnection connection, XenAPI.Network network,
             bool changePIFs, bool external, PIF pif, long vlan, bool suppressHistory)
             : base(connection, string.Format(Messages.NETWORK_ACTION_UPDATING_NETWORK_TITLE,
-            network.Name, Helpers.GetName(connection)), suppressHistory)
+            network.Name(), Helpers.GetName(connection)), suppressHistory)
         {
             actionType = network_actions.update;
             this.networkClone = network;
@@ -193,7 +193,7 @@ namespace XenAdmin.Actions
         {
             foreach (PIF pif in PIFs)
             {
-                if (pif.IsTunnelAccessPIF)
+                if (pif.IsTunnelAccessPIF())
                 {
                     // A tunnel access PIF is destroyed by destroying its tunnel.
                     // (Actually each network will have either all tunnel access PIFs (if

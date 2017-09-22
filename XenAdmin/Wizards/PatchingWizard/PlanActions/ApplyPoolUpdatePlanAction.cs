@@ -40,7 +40,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Pool_update poolUpdate;
 
         public ApplyPoolUpdatePlanAction(Host host, Pool_update patch)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name, host.Name))
+            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, patch.Name(), host.Name()))
         {
             this.host = host;
             this.poolUpdate = patch;

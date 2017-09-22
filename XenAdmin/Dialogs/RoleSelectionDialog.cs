@@ -120,7 +120,7 @@ namespace XenAdmin.Dialogs
                     c1.CheckState = CheckState.Indeterminate;
                 }
                 DataGridViewTextBoxCell c2 = new DataGridViewTextBoxCell();
-                c2.Value = role.FriendlyName;
+                c2.Value = role.FriendlyName();
                 r.Cells.Add(c1);
                 r.Cells.Add(c2);
                 r.Tag = role;
@@ -137,7 +137,7 @@ namespace XenAdmin.Dialogs
             if (r == null)
                 return;
 
-            labelDescription.Text = r.FriendlyDescription;
+            labelDescription.Text = r.FriendlyDescription();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

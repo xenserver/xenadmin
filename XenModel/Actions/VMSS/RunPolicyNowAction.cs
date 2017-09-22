@@ -39,7 +39,7 @@ namespace XenAdmin.Actions
     {
         private VMSS _policy;
         public RunPolicyNowAction(VMSS policy)
-            : base(policy.Connection, string.Format(Messages.RUN_POLICY, policy.Name))
+            : base(policy.Connection, string.Format(Messages.RUN_POLICY, policy.Name()))
         {
             _policy = policy;
             Pool = Helpers.GetPool(policy.Connection);
@@ -48,7 +48,7 @@ namespace XenAdmin.Actions
         protected override void Run()
         {
             Result = VMSS.snapshot_now(Session, _policy.opaque_ref);
-            Description = string.Format(Messages.RUN_POLICY_STARTED, _policy.Name);
+            Description = string.Format(Messages.RUN_POLICY_STARTED, _policy.Name());
         }
     }
 }

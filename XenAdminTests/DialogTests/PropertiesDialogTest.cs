@@ -74,14 +74,9 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
                 "Boot Options", "Start Options", "Alerts",  "Home Server", "GPU", "Advanced Options" })
         { }
 
-        private bool IsHVM(VM vm)
-        {
-            return vm.IsHVM;
-        }
-
         protected override PropertiesDialog NewDialog()
         {
-            return new PropertiesDialog(GetAnyVM(IsHVM));
+            return new PropertiesDialog(GetAnyVM(vm => vm.IsHVM()));
         }
     }
 
@@ -93,14 +88,9 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
                 "Boot Options", "Start Options", "Alerts",  "Home Server" })
         { }
 
-        private bool IsNotHVM(VM vm)
-        {
-            return !vm.IsHVM;
-        }
-
         protected override PropertiesDialog NewDialog()
         {
-            return new PropertiesDialog(GetAnyVM(IsNotHVM));
+            return new PropertiesDialog(GetAnyVM(vm => !vm.IsHVM()));
         }
     }
 
@@ -114,7 +104,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
 
         protected override PropertiesDialog NewDialog()
         {
-            return new PropertiesDialog(GetAnyDefaultTemplate(v => !v.IsHVM));
+            return new PropertiesDialog(GetAnyDefaultTemplate(v => !v.IsHVM()));
         }
     }
 
@@ -126,14 +116,9 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
                 "Boot Options", "Start Options", "Alerts", "Home Server", "GPU", "Advanced Options" })
         { }
 
-        private bool IsHVM(VM vm)
-        {
-            return vm.IsHVM;
-        }
-
         protected override PropertiesDialog NewDialog()
         {
-            return new PropertiesDialog(GetAnyUserTemplate(IsHVM));
+            return new PropertiesDialog(GetAnyUserTemplate(vm => vm.IsHVM()));
         }
     }
 
@@ -145,14 +130,9 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
                 "Boot Options", "Start Options", "Alerts", "Home Server" })
         { }
 
-        private bool IsNotHVM(VM vm)
-        {
-            return !vm.IsHVM;
-        }
-
         protected override PropertiesDialog NewDialog()
         {
-            return new PropertiesDialog(GetAnyUserTemplate(IsNotHVM));
+            return new PropertiesDialog(GetAnyUserTemplate(vm => !vm.IsHVM()));
         }
     }
 
@@ -190,7 +170,7 @@ namespace XenAdminTests.DialogTests.state1_xml.PropertiesDialogTests
                     foreach (VBD vbd in v.Connection.ResolveAll(v.VBDs))
                     {
                         VM vm = vbd.Connection.Resolve(vbd.VM);
-                        AddTab(vm.Name);
+                        AddTab(vm.Name());
                     }
                     vdi = v;
                     break;

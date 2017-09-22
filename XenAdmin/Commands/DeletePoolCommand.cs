@@ -90,7 +90,7 @@ namespace XenAdmin.Commands
                 IXenConnection connection = selection[0].Connection;
 
                 Pool pool = selection[0].PoolAncestor;
-                return pool!=null&&pool.IsVisible&& connection.Cache.HostCount == 1;
+                return pool != null && pool.IsVisible() && connection.Cache.HostCount == 1;
             }
             return false;
 

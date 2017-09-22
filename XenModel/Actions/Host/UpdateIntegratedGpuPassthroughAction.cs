@@ -40,7 +40,7 @@ namespace XenAdmin.Actions
         private bool enable;
 
         public UpdateIntegratedGpuPassthroughAction(Host host, bool enableOnNextReboot, bool suppressHistory)
-            : base(host.Connection, string.Format(Messages.ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE, host.Name), null, suppressHistory)
+            : base(host.Connection, string.Format(Messages.ACTION_UPDATE_INTEGRATED_GPU_PASSTHROUGH_TITLE, host.Name()), null, suppressHistory)
         {
             Host = host;
             enable = enableOnNextReboot;
@@ -56,7 +56,7 @@ namespace XenAdmin.Actions
 
             PollToCompletion(0, 50);
 
-            var pGpu = Host.SystemDisplayDevice;
+            var pGpu = Host.SystemDisplayDevice();
             if (pGpu != null)
             {
                 RelatedTask = enable 

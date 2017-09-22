@@ -88,7 +88,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             Template = template;
             VmName = vmName;
 
-            panelDefaultTemplateInfo.Visible = Template.DefaultTemplate;
+            panelDefaultTemplateInfo.Visible = Template.DefaultTemplate();
 
             BoxTitle.Text = string.Format(Messages.NEWVMWIZARD_NETWORKINGPAGE_VIFSON, VmName);//CA-56794 Helpers.TrimStringIfRequired(VmName, 50));
 
@@ -111,12 +111,12 @@ namespace XenAdmin.Wizards.NewVMWizard
         private void UpdateEnablement()
         {
             // limiting the number of Vifs allowed to 4 on creation for default templates
-            if (NetworksGridView.Rows.Count > Template.MaxVIFsAllowed)
+            if (NetworksGridView.Rows.Count > Template.MaxVIFsAllowed())
             {
                 toolTipContainerAddButton.SetToolTip(Messages.TOOLTIP_MAX_NETWORKS_FROM_TEMPLATE);
                 AddButton.Enabled = false;
             }
-            else if (Template.DefaultTemplate && NetworksGridView.Rows.Count >= MAX_NETWORKS_FOR_DEFAULT_TEMPLATES)
+            else if (Template.DefaultTemplate() && NetworksGridView.Rows.Count >= MAX_NETWORKS_FOR_DEFAULT_TEMPLATES)
             {
                 toolTipContainerAddButton.SetToolTip(string.Format(Messages.TOOLTIP_MAX_NETWORKS_FROM_DEFAULT_TEMPLATE, MAX_NETWORKS_FOR_DEFAULT_TEMPLATES));
                 AddButton.Enabled = false;
@@ -136,7 +136,7 @@ namespace XenAdmin.Wizards.NewVMWizard
         {
             NetworksGridView.Rows.Clear();
 
-            if (Template.DefaultTemplate)
+            if (Template.DefaultTemplate())
             {
                 // we add all default networks
                 List<XenAPI.Network> networks = new List<XenAPI.Network>(Connection.Cache.Networks);
@@ -145,8 +145,8 @@ namespace XenAdmin.Wizards.NewVMWizard
                 {
                     // CA-218956 - Expose HIMN when showing hidden objects
                     // HIMN shouldn't be autoplugged
-                    if (network.IsGuestInstallerNetwork ||
-                        !network.AutoPlug || !network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave)
+                    if (network.IsGuestInstallerNetwork() ||
+                        !network.GetAutoPlug() || !network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave())
                         continue;
 
                     if (NetworksGridView.Rows.Count < MAX_NETWORKS_FOR_DEFAULT_TEMPLATES)

@@ -199,7 +199,7 @@ namespace XenAdmin.Commands
                 Host host = item.Tag as Host;
                 if (host != null)
                 {
-                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name.EscapeAmpersands(), _operation, session);
+                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name().EscapeAmpersands(), _operation, session);
                     CrossPoolMigrateCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
 
                     VMOperationToolStripMenuSubItem tempItem = item;

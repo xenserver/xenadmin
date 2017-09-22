@@ -57,7 +57,7 @@ namespace XenAdmin.Actions.DR
         }
 
         public VdiOpenDatabaseAction(IXenConnection connection, VDI vdi)
-            : base(connection, String.Format(Messages.ACTION_VDI_OPEN_DATABASE_TITLE, connection.Resolve(vdi.SR).Name))
+            : base(connection, String.Format(Messages.ACTION_VDI_OPEN_DATABASE_TITLE, connection.Resolve(vdi.SR).Name()))
         {
             _vdi = vdi;
             #region RBAC Dependencies
@@ -68,7 +68,7 @@ namespace XenAdmin.Actions.DR
 
         protected override void Run()
         {
-            Description = String.Format(Messages.ACTION_VDI_OPEN_DATABASE_STATUS, Connection.Resolve(_vdi.SR).Name); 
+            Description = String.Format(Messages.ACTION_VDI_OPEN_DATABASE_STATUS, Connection.Resolve(_vdi.SR).Name()); 
             _metadataSessionRef = VDI.open_database(Session, _vdi.opaque_ref);
             if (MetadataSessionRef != null)
             {

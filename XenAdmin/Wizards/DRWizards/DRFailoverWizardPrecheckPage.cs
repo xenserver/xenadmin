@@ -392,11 +392,11 @@ namespace XenAdmin.Wizards.DRWizards
                 }
             }
             if (checkGroup.Count > 0)
-                checks.Add(new KeyValuePair<string, List<Check>>(String.Format(Messages.DR_WIZARD_CHECKING_EXISTING_APPLIANCES_AND_VMS, _pool.Name), checkGroup));
+                checks.Add(new KeyValuePair<string, List<Check>>(String.Format(Messages.DR_WIZARD_CHECKING_EXISTING_APPLIANCES_AND_VMS, _pool.Name()), checkGroup));
 
         
             //VM and appliance can be recovered checks
-            checks.Add(new KeyValuePair<string, List<Check>>(String.Format(Messages.DR_WIZARD_CHECKING_VMS_CAN_BE_RECOVERED, _pool.Name), new List<Check>()));
+            checks.Add(new KeyValuePair<string, List<Check>>(String.Format(Messages.DR_WIZARD_CHECKING_VMS_CAN_BE_RECOVERED, _pool.Name()), new List<Check>()));
             checkGroup = checks[checks.Count - 1].Value;
             foreach (PoolMetadata poolMetadata in selectedPoolMetadata.Values)
             {

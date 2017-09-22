@@ -49,7 +49,7 @@ namespace XenAdmin.Actions
         private string password;
 
         public SaveHealthCheckSettingsAction(Pool pool, HealthCheckSettings healthCheckSettings, string authenticationToken, string diagnosticToken, string userName, string passWord, bool suppressHistory)
-            : base(pool.Connection, Messages.ACTION_SAVE_HEALTHCHECK_SETTINGS, string.Format(Messages.ACTION_SAVING_HEALTHCHECK_SETTINGS, pool.Name), suppressHistory)
+            : base(pool.Connection, Messages.ACTION_SAVE_HEALTHCHECK_SETTINGS, string.Format(Messages.ACTION_SAVING_HEALTHCHECK_SETTINGS, pool.Name()), suppressHistory)
         {
             this.pool = pool;
             this.healthCheckSettings = healthCheckSettings;

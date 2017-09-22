@@ -71,7 +71,7 @@ namespace XenAdmin.SettingsPanels
             {
                 Host host = _pool.Connection.Cache.Hosts[i];
                 dataGridView2.Rows.Add();
-                dataGridView2["ColumnHostName", i].Value = host.Name;
+                dataGridView2["ColumnHostName", i].Value = host.Name();
                 dataGridView2["ColumnPowerONMode", i].Value = GetFullNameMode(host.power_on_mode);
                 dataGridView2.Rows[i].Tag = host;
             }

@@ -166,14 +166,14 @@ namespace XenAdminTests.UnitTests.AlertTests
 
         private void VerifyConnExpectations(Func<Times> times)
         {
-            connA.VerifyGet(n => n.Name, times());
-            connB.VerifyGet(n => n.Name, times());
+            connA.Verify(n => n.Name, times());
+            connB.Verify(n => n.Name, times());
         }
 
         private void VerifyHostsExpectations(Func<Times> times)
         {
-            hostA.VerifyGet(n => n.Name, times());
-            hostB.VerifyGet(n => n.Name, times());
+            hostA.Verify(n => n.Name(), times());
+            hostB.Verify(n => n.Name(), times());
         }
 
         [SetUp]
@@ -190,11 +190,11 @@ namespace XenAdminTests.UnitTests.AlertTests
             connB.Setup(x => x.Cache).Returns(cacheB);
             
             hostA = new Mock<Host>(MockBehavior.Strict);
-            hostA.Setup(n => n.Name).Returns("HostAName");
+            hostA.Setup(n => n.Name()).Returns("HostAName");
             hostA.Setup(n => n.Equals(It.IsAny<object>())).Returns((object o) => ReferenceEquals(o, hostA.Object));
 
             hostB = new Mock<Host>(MockBehavior.Strict);
-            hostB.Setup(n => n.Name).Returns("HostBName");
+            hostB.Setup(n => n.Name()).Returns("HostBName");
             hostB.Setup(n => n.Equals(It.IsAny<object>())).Returns((object o) => ReferenceEquals(o, hostB.Object));
         }
 

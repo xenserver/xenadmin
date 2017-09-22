@@ -106,10 +106,10 @@ namespace XenAdmin.Controls
                 if (sr.content_type != SR.Content_Type_ISO)
                     continue;
 
-                if (DisplayPhysical && !sr.Physical)
+                if (DisplayPhysical && !sr.Physical())
                     continue;
 
-                if (DisplayISO && (sr.Physical || (noTools && sr.IsToolsSR)))
+                if (DisplayISO && (sr.Physical() || (noTools && sr.IsToolsSR())))
                     continue;
 
                 if (vm == null && sr.IsBroken())
@@ -139,7 +139,7 @@ namespace XenAdmin.Controls
                     }
                 }
 
-                items.Add(new ToStringWrapper<SR>(sr, sr.Name));
+                items.Add(new ToStringWrapper<SR>(sr, sr.Name()));
             }
 
             if (items.Count > 0)
@@ -194,17 +194,17 @@ namespace XenAdmin.Controls
             Items.Add(srWrapper);
 
             List<ToStringWrapper<VDI>> items = new List<ToStringWrapper<VDI>>();
-            if (srWrapper.item.Physical)
+            if (srWrapper.item.Physical())
             {
                 List<ToStringWrapper<VDI>> vdis = new List<ToStringWrapper<VDI>>();
                 foreach (VDI vdi in connection.ResolveAll<VDI>(srWrapper.item.VDIs))
                 {
-                    ToStringWrapper<VDI> vdiWrapper = new ToStringWrapper<VDI>(vdi, vdi.Name);
+                    ToStringWrapper<VDI> vdiWrapper = new ToStringWrapper<VDI>(vdi, vdi.Name());
                     vdis.Add(vdiWrapper);
                 }
                 vdis.Sort(new Comparison<ToStringWrapper<VDI>>(delegate(ToStringWrapper<VDI> object1, ToStringWrapper<VDI> object2)
                 {
-                    return Core.StringUtility.NaturalCompare(object1.item.Name, object2.item.Name);
+                    return Core.StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name());
                 }));
 
                 Host host = srWrapper.item.GetStorageHost();
@@ -212,29 +212,29 @@ namespace XenAdmin.Controls
                 {
                     for (int i = 0; i < vdis.Count; i++)
                     {
-                        items.Add(new ToStringWrapper<VDI>(vdis[i].item, "    " + string.Format(Messages.ISOCOMBOBOX_CD_DRIVE, i, host.Name)));
+                        items.Add(new ToStringWrapper<VDI>(vdis[i].item, "    " + string.Format(Messages.ISOCOMBOBOX_CD_DRIVE, i, host.Name())));
                     }
                 }
             }
             else
             {
-                if (srWrapper.item.IsToolsSR)
+                if (srWrapper.item.IsToolsSR())
                 {
                     foreach (VDI vdi in connection.ResolveAll<VDI>(srWrapper.item.VDIs))
                     {
-                        if (vdi.IsToolsIso)
-                            items.Add(new ToStringWrapper<VDI>(vdi, "    " + vdi.Name));
+                        if (vdi.IsToolsIso())
+                            items.Add(new ToStringWrapper<VDI>(vdi, "    " + vdi.Name()));
                     }
                 }
                 else
                 {
                     foreach (VDI vdi in connection.ResolveAll<VDI>(srWrapper.item.VDIs))
                     {
-                        items.Add(new ToStringWrapper<VDI>(vdi, "    " + vdi.Name));
+                        items.Add(new ToStringWrapper<VDI>(vdi, "    " + vdi.Name()));
                     }
                     items.Sort(new Comparison<ToStringWrapper<VDI>>(delegate(ToStringWrapper<VDI> object1, ToStringWrapper<VDI> object2)
                     {
-                        return Core.StringUtility.NaturalCompare(object1.item.Name, object2.item.Name);
+                        return Core.StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name());
                     }));
                 }
             }

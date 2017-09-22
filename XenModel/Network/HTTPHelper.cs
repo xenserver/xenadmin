@@ -264,7 +264,7 @@ namespace XenAPI
                     // RBAC Failure
                     List<Role> roles = connection.Session.Roles;
                     roles.Sort();
-                    throw new Exception(String.Format(Messages.RBAC_HTTP_FAILURE, roles[0].FriendlyName), e);
+                    throw new Exception(String.Format(Messages.RBAC_HTTP_FAILURE, roles[0].FriendlyName()), e);
                 }
                 else
                     throw e.InnerException;

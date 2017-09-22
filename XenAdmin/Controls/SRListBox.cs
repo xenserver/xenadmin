@@ -81,7 +81,7 @@ namespace XenAdmin.Controls
         {
             SR sr = SrWizardHelpers.SrInUse(info.UUID);
 
-            if (sr != null && sr.HasPBDs)
+            if (sr != null && sr.HasPBDs())
                 return false;
 
             if (!String.IsNullOrEmpty(MustSelectUUID) && info.UUID != MustSelectUUID)
@@ -236,9 +236,9 @@ namespace XenAdmin.Controls
             }
             else
             {
-                String text = String.Format(Messages.SR_X_ON_Y, sr.Name, Helpers.GetName(sr.Connection));
+                String text = String.Format(Messages.SR_X_ON_Y, sr.Name(), Helpers.GetName(sr.Connection));
 
-                if (!sr.HasPBDs)
+                if (!sr.HasPBDs())
                     text = String.Format(Messages.DETACHED_BRACKETS, text);
 
                 Drawing.DrawText(e.Graphics, text, e.Font, e.Bounds.Location, fore);

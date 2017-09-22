@@ -38,23 +38,17 @@ namespace XenAPI
     {
         private string _messageTypeString;
 
-        public string MessageTypeString
+        public string MessageTypeString()
         {
-            get
-            {
-                if (string.IsNullOrEmpty(_messageTypeString))
-                    _messageTypeString = Type.ToString();
-                return _messageTypeString;
-            }
+            if (string.IsNullOrEmpty(_messageTypeString))
+                _messageTypeString = Type.ToString();
+            return _messageTypeString;
         }
 
-        public DateTime TimestampLocal
+        public DateTime TimestampLocal()
         {
-            get
-            {
-                DateTime t = timestamp + Connection.ServerTimeOffset;
-                return t.ToLocalTime();
-            }
+            DateTime t = timestamp + Connection.ServerTimeOffset;
+            return t.ToLocalTime();
         }
 
         public static string FriendlyName(string type)
@@ -82,35 +76,27 @@ namespace XenAPI
         /// is always ALARM, and the Body contains the XML that specifies when the alert is triggered, as sent by us
         /// to the server when the alert was configured.
         /// </summary>
-        public bool IsPerfmonAlarm
+        public bool IsPerfmonAlarm()
         {
-            get
-            {
-                return this.Type == XenAPI.Message.MessageType.ALARM;
-            }
+            return this.Type == XenAPI.Message.MessageType.ALARM;
         }
 
-        public bool ShowOnGraphs
+        public bool ShowOnGraphs()
         {
-            get
-            {
-                return this.Type == MessageType.VM_CLONED
-                    || this.Type == MessageType.VM_CRASHED
-                    || this.Type == MessageType.VM_REBOOTED
-                    || this.Type == MessageType.VM_RESUMED
-                    || this.Type == MessageType.VM_SHUTDOWN
-                    || this.Type == MessageType.VM_STARTED
-                    || this.Type == MessageType.VM_SUSPENDED;
-            }
+            var typ = this.Type;
+            return typ == MessageType.VM_CLONED
+                   || typ == MessageType.VM_CRASHED
+                   || typ == MessageType.VM_REBOOTED
+                   || typ == MessageType.VM_RESUMED
+                   || typ == MessageType.VM_SHUTDOWN
+                   || typ == MessageType.VM_STARTED
+                   || typ == MessageType.VM_SUSPENDED;
         }
 
-        public bool IsSquelched
+        public bool IsSquelched()
         {
-            get
-            {
-                // We don't show HA_POOL_OVERCOMMITTED because we get HA_POOL_DROP_IN_PLAN_EXISTS_FOR at the same time.
-                return Type == MessageType.HA_POOL_OVERCOMMITTED;
-            }
+            // We don't show HA_POOL_OVERCOMMITTED because we get HA_POOL_DROP_IN_PLAN_EXISTS_FOR at the same time.
+            return Type == MessageType.HA_POOL_OVERCOMMITTED;
         }
     }
 }

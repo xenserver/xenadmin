@@ -41,14 +41,9 @@ namespace XenAdmin.Controls.DataGridViewEx
 {
     public class CollapsingPoolHostDataGridViewRow : DataGridViewExRow
     {
-        protected class DataGridViewExNameCell : DataGridViewTextBoxCell
-        {
-
-        }
-
         protected DataGridViewImageCell _expansionCell;
         protected DataGridViewCheckBoxCell _poolCheckBoxCell;
-        protected DataGridViewExNameCell _nameCell;
+        protected DataGridViewTextBoxCell _nameCell;
         protected bool _hasPool;
 
         protected CollapsingPoolHostDataGridViewRow()
@@ -98,6 +93,11 @@ namespace XenAdmin.Controls.DataGridViewEx
             get { return Tag is Host; }
         }
 
+        public bool IsPoolOrStandaloneHost
+        {
+            get { return IsAPoolRow || (IsAHostRow && !HasPool); }
+        }
+
         /// <summary>
         /// Get the underlying pool if a pool row otherwise returns null
         /// </summary>
@@ -125,12 +125,16 @@ namespace XenAdmin.Controls.DataGridViewEx
         public void SetCollapseIcon()
         {
             _expansionCell.Value = Resources.tree_minus;
+            IsACollapsedRow = false;
         }
 
         public void SetExpandIcon()
         {
             _expansionCell.Value = Resources.tree_plus;
+            IsACollapsedRow = true;
         }
+
+        public bool IsACollapsedRow { get; protected set; }
 
         /// <summary>
         /// Convert row to a standalone host row

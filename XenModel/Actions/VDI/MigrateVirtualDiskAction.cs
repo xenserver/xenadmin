@@ -61,7 +61,7 @@ namespace XenAdmin.Actions
             }
             catch (CancelledException)
             {
-                Description = string.Format(Messages.ACTION_VM_MIGRATE_CANCELLED, vdi.Name);
+                Description = string.Format(Messages.ACTION_VM_MIGRATE_CANCELLED, vdi.Name());
                 throw;
             }
             catch (Failure boo)

@@ -41,35 +41,27 @@ namespace XenAPI
         private readonly string[] linuxDistros = { "debian", "rhel", "fedora", "centos", "scientific", "oracle", "sles", "lsb", "boot2docker", "freebsd" };
         
         //This will tell if they are install (but they may not be upto date!)
-        public bool PV_drivers_installed
+        public bool PV_drivers_installed()
         {
-            get
-            {
-                return PV_drivers_version.ContainsKey("major") && PV_drivers_version.ContainsKey("minor");
-            }
+            return PV_drivers_version.ContainsKey("major") && PV_drivers_version.ContainsKey("minor");
         }
 
         /// <summary>
         /// Returns true if (it is known that) this VM_guest_metrics belongs to a non-Windows VM.
         /// (Returns false if the VM is Windows or unknown)
         /// </summary>
-        /// <param name="gm"></param>
-        /// <returns></returns>
-        public bool IsVmNotWindows
+        public bool IsVmNotWindows()
         {
-            get
+            if (this.os_version != null)
             {
-                if (this.os_version != null)
-                {
-                    if (this.os_version.ContainsKey("distro") && !string.IsNullOrEmpty(this.os_version["distro"]) && linuxDistros.Contains(this.os_version["distro"].ToLowerInvariant()))
-                        return true;
+                if (this.os_version.ContainsKey("distro") && !string.IsNullOrEmpty(this.os_version["distro"]) && linuxDistros.Contains(this.os_version["distro"].ToLowerInvariant()))
+                    return true;
 
-                    if (this.os_version.ContainsKey("uname") && this.os_version["uname"].ToLowerInvariant().Contains("netscaler"))
-                        return true;
-                }
-
-                return false;
+                if (this.os_version.ContainsKey("uname") && this.os_version["uname"].ToLowerInvariant().Contains("netscaler"))
+                    return true;
             }
+
+            return false;
         }
     }
 }

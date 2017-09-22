@@ -94,7 +94,7 @@ namespace XenAdmin.SettingsPanels
             if(vdi == null)
                 return;
             SR sr = vdi.Connection.Resolve<SR>(vdi.SR);
-            labelLocationValueRO.Text = string.Format("'{0}'", sr.NameWithoutHost);
+            labelLocationValueRO.Text = string.Format("'{0}'", sr.NameWithoutHost());
 
             if (vdi.allowed_operations.Contains(vdi_operations.resize) ||
                 vdi.allowed_operations.Contains(vdi_operations.resize_online))
@@ -214,7 +214,7 @@ namespace XenAdmin.SettingsPanels
                 {
                     reqSize = diskSize < 0 ? long.MinValue : long.MaxValue;
                 }
-                long freeSpace = vdi.Connection.Resolve<SR>(vdi.SR).FreeSpace;
+                long freeSpace = vdi.Connection.Resolve<SR>(vdi.SR).FreeSpace();
                 return reqSize - vdi.virtual_size > freeSpace
                            ? DiskSizeValidationResult.NotEnoughSpace
                            : DiskSizeValidationResult.Valid;

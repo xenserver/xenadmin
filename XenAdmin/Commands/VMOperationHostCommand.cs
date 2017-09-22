@@ -148,7 +148,7 @@ namespace XenAdmin.Commands
             }
             catch (Exception e)
             {
-                log.ErrorFormat("There was an error calling assert_can_boot_here on host {0}", host.Name);
+                log.ErrorFormat("There was an error calling assert_can_boot_here on host {0}", host.Name());
                 log.Error(e, e);
                 return Messages.HOST_MENU_UNKNOWN_ERROR;
             }
@@ -194,10 +194,10 @@ namespace XenAdmin.Commands
             if (vm.last_boot_CPU_flags["vendor"] != targetHost.cpu_info["vendor"])
                 return true;
 
-            if (vm.IsHVM && targetHost.cpu_info.ContainsKey("features_hvm"))
+            if (vm.IsHVM() && targetHost.cpu_info.ContainsKey("features_hvm"))
                 return PoolJoinRules.FewerFeatures(targetHost.cpu_info["features_hvm"], vm.last_boot_CPU_flags["features"]);
 
-            if (!vm.IsHVM && targetHost.cpu_info.ContainsKey("features_pv"))
+            if (!vm.IsHVM() && targetHost.cpu_info.ContainsKey("features_pv"))
                 return PoolJoinRules.FewerFeatures(targetHost.cpu_info["features_pv"], vm.last_boot_CPU_flags["features"]);
 
             return false;

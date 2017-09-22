@@ -39,7 +39,7 @@ namespace XenAdmin.Actions
     {
 
         public FibreChannelProbeAction(Host master)
-            : base(master.Connection, string.Format(Messages.PROBING_HBA_TITLE, master.Name), null, true)
+            : base(master.Connection, string.Format(Messages.PROBING_HBA_TITLE, master.Name()), null, true)
         {
             Host = master;
         }

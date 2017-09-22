@@ -61,7 +61,7 @@ namespace XenAdmin.Commands
             if (selection.AllItemsAre<VM>())
             {
                 var firstVm = (VM)selection.First;
-                if (firstVm.IsAssignedToVapp)
+                if (firstVm.IsAssignedToVapp())
                 {
                     var firstVapp = firstVm.appliance;
                     if (selection.AsXenObjects<VM>().All(vm => vm.appliance != null && vm.appliance.opaque_ref == firstVapp.opaque_ref))

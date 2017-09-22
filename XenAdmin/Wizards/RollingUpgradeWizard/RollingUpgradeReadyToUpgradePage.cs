@@ -64,14 +64,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 {
                     e.Graphics.DrawString(string.Format(host.IsMaster()
                                                             ? Messages.UPGRADE_POOL_MASTER_X
-                                                            : Messages.UPGRADE_SERVER_X, host.Name.Ellipsise(64)), Program.DefaultFont, brush, e.Bounds);
+                                                            : Messages.UPGRADE_SERVER_X, host.Name().Ellipsise(64)), Program.DefaultFont, brush, e.Bounds);
                     return;
                 }
 
                 Pool pool = item as Pool;
                 if (pool != null)
                 {
-                    e.Graphics.DrawString(string.Format(Messages.POOL_X_READYUPGRADE, pool.Name.Ellipsise(64)), Program.DefaultFontBold, brush, e.Bounds);
+                    e.Graphics.DrawString(string.Format(Messages.POOL_X_READYUPGRADE, pool.Name().Ellipsise(64)), Program.DefaultFontBold, brush, e.Bounds);
                     return;
                 }
 
@@ -115,7 +115,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 if (pool != null)
                 {
                     listBox.Items.Add(pool);
-                    foreach (var host in pool.HostsToUpgrade)
+                    var hostsToUpgrade = pool.HostsToUpgrade();
+                    foreach (var host in hostsToUpgrade)
                     {
                         listBox.Items.Add(host);
                     }

@@ -51,7 +51,7 @@ namespace XenAdmin.Actions
         /// <param name="vif"></param>
         /// <param name="proxyVIF"></param>
         public UpdateVIFAction(VM vm, VIF vif, Proxy_VIF proxyVIF)
-            : base(vm.Connection, String.Format(Messages.ACTION_VIF_UPDATING_TITLE, vif.NetworkName(), vm.Name))
+            : base(vm.Connection, String.Format(Messages.ACTION_VIF_UPDATING_TITLE, vif.NetworkName(), vm.Name()))
         {
             this.vif = vif;
             VM = vm;

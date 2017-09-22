@@ -184,71 +184,59 @@ namespace XenAPI
         /// <summary>
         /// The i18n'd string for the 'Logged in as:' username (AD or local root).
         /// </summary>
-        public string UserFriendlyName
+        public string UserFriendlyName()
         {
-            get
-            {
-                if (IsLocalSuperuser)
-                    return Messages.AD_LOCAL_ROOT_ACCOUNT;
+            if (IsLocalSuperuser)
+                return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-                if (!string.IsNullOrEmpty(CurrentUserDetails.UserDisplayName))
-                    return CurrentUserDetails.UserDisplayName.Ellipsise(50);
+            if (!string.IsNullOrEmpty(CurrentUserDetails.UserDisplayName))
+                return CurrentUserDetails.UserDisplayName.Ellipsise(50);
 
-                if (!string.IsNullOrEmpty(CurrentUserDetails.UserName))
-                    return CurrentUserDetails.UserName.Ellipsise(50);
+            if (!string.IsNullOrEmpty(CurrentUserDetails.UserName))
+                return CurrentUserDetails.UserName.Ellipsise(50);
 
-                return Messages.UNKNOWN_AD_USER;
-            }
+            return Messages.UNKNOWN_AD_USER;
         }
 
         /// <summary>
         /// Useful as a unique name for logging purposes
         /// </summary>
-        public string UserLogName
+        public string UserLogName()
         {
-            get
-            {
-                if (IsLocalSuperuser)
-                    return Messages.AD_LOCAL_ROOT_ACCOUNT;
+            if (IsLocalSuperuser)
+                return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-                if (!string.IsNullOrEmpty(CurrentUserDetails.UserName))
-                    return CurrentUserDetails.UserName;
+            if (!string.IsNullOrEmpty(CurrentUserDetails.UserName))
+                return CurrentUserDetails.UserName;
 
-                return UserSid;
-            }
+            return UserSid;
         }
 
         /// <summary>
         /// This gives either a friendly csv list of the sessions roles or a friendly string for Local root account.
         /// If Pre MR gives Pool Admin for AD users.
         /// </summary>
-        public string FriendlyRoleDescription
+        public string FriendlyRoleDescription()
         {
-            get
-            {
-                if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
-                    return Messages.AD_LOCAL_ROOT_ACCOUNT;
+            if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
+                return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-                return Role.FriendlyCSVRoleList(Roles);
-            }
+            return Role.FriendlyCSVRoleList(Roles);
         }
 
         /// <summary>
         /// This gives either a friendly string for the dominant role on the session or a friendly string for Local root account.
         /// If Pre MR gives Pool Admin for AD users.
         /// </summary>
-        public string FriendlySingleRoleDescription
+        public string FriendlySingleRoleDescription()
         {
-            get
-            {
-                if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
-                    return Messages.AD_LOCAL_ROOT_ACCOUNT;
+            if (IsLocalSuperuser || XenAdmin.Core.Helpers.GetMaster(Connection).external_auth_type != Auth.AUTH_TYPE_AD)
+                return Messages.AD_LOCAL_ROOT_ACCOUNT;
 
-                //Sort roles from highest to lowest
-                roles.Sort((r1, r2) => { return r2.CompareTo(r1); });
-                //Take the highest role
-                return roles[0].FriendlyName;
-            }
+            //Sort roles from highest to lowest
+            roles.Sort((r1, r2) => { return r2.CompareTo(r1); });
+            //Take the highest role
+            return roles[0].FriendlyName();
         }
 
         public string ConnectionGroupName

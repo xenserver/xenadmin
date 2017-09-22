@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Host master = null;
 
         public RemoveUpdateFileFromMasterPlanAction(Host master, List<PoolPatchMapping> patchMappings, XenServerPatch patch)
-            : base(master.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, master.Name))
+            : base(master.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, master.Name()))
         {
             this.patchMappings = patchMappings;
             this.patch = patch;
@@ -88,7 +88,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                         Pool_update.pool_clean(session, poolUpdate.opaque_ref);
                         
-                        if (!poolUpdate.AppliedOnHosts.Any())
+                        if (!poolUpdate.AppliedOnHosts().Any())
                             Pool_update.destroy(session, poolUpdate.opaque_ref);
 
                         patchMappings.Remove(mapping);

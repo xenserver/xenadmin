@@ -86,7 +86,7 @@ namespace XenAdmin.Commands
                 return false;
             }
             Pool pool = Helpers.GetPool(host.Connection);
-            return pool != null && !Helpers.HostIsMaster(host) && !host.IsLive;
+            return pool != null && !Helpers.HostIsMaster(host) && !host.IsLive();
         }
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
@@ -125,7 +125,7 @@ namespace XenAdmin.Commands
                     Host host = (Host)selection[0].XenObject;
                     Pool pool = Helpers.GetPool(host.Connection);
                     
-                    return string.Format(Messages.CONFIRM_DESTROY_HOST, host.Name);
+                    return string.Format(Messages.CONFIRM_DESTROY_HOST, host.Name());
                 }
                 return null;
             }

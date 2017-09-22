@@ -77,7 +77,7 @@ namespace XenAdmin.Diagnostics.Checks
             var residentVMs = Host.Connection.ResolveAll(Host.resident_VMs);
             foreach (var residentVM in residentVMs)
             {
-                if (residentVM.AutoPowerOn)
+                if (residentVM.GetAutoPowerOn())
                 {
                     problems.Add(new AutoStartEnabled(this, residentVM));
                     VMsWithProblems.Add(residentVM.opaque_ref);
@@ -85,7 +85,7 @@ namespace XenAdmin.Diagnostics.Checks
                 }
 
                 SR sr = residentVM.FindVMCDROMSR();
-                if (sr != null && sr.IsToolsSR)
+                if (sr != null && sr.IsToolsSR())
                 {
                     problems.Add(new ToolsCD(this, residentVM));
                     VMsWithProblems.Add(residentVM.opaque_ref);
@@ -96,7 +96,7 @@ namespace XenAdmin.Diagnostics.Checks
                     VMsWithProblems.Add(residentVM.opaque_ref);
                 }
 
-                if (restrictMigration && residentVM.is_a_real_vm && !VMsWithProblems.Contains(residentVM.opaque_ref))
+                if (restrictMigration && residentVM.is_a_real_vm() && !VMsWithProblems.Contains(residentVM.opaque_ref))
                 {
                     problems.Add(new CannotMigrateVM(this, residentVM, CannotMigrateVM.CannotMigrateVMReason.LicenseRestriction));
                     VMsWithProblems.Add(residentVM.opaque_ref);
@@ -232,15 +232,16 @@ namespace XenAdmin.Diagnostics.Checks
         private static CannotMigrateVM.CannotMigrateVMReason GetMoreSpecificReasonForCannotMigrateVm(VM vm, CannotMigrateVM.CannotMigrateVMReason reason)
         {
             var gm = vm.Connection.Resolve(vm.guest_metrics);
+            var status = vm.GetVirtualisationStatus();
 
-            if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows)
+            if (Helpers.DundeeOrGreater(vm.Connection) && vm.IsWindows())
             {
                 if (gm != null && !gm.PV_drivers_detected)
                 {
                     reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
                 }
             }
-            else if (vm.virtualisation_status == 0 || vm.virtualisation_status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
+            else if (status == 0 || status.HasFlag(XenAPI.VM.VirtualisationStatus.PV_DRIVERS_OUT_OF_DATE))
             {
                 reason = CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoTools;
             }
@@ -253,7 +254,7 @@ namespace XenAdmin.Diagnostics.Checks
         // See RunAllChecks() for how we combine them.
         protected override Problem RunCheck()
         {
-            if (!Host.IsLive)
+            if (!Host.IsLive())
                 return new HostNotLiveWarning(this, Host);
 
             Pool pool = Helpers.GetPool(Host.Connection);

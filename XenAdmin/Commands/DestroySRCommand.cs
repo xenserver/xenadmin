@@ -83,7 +83,7 @@ namespace XenAdmin.Commands
 
         private static bool CanExecute(SR sr)
         {
-            return sr != null && !sr.HasRunningVMs() && sr.CanCreateWithXenCenter
+            return sr != null && !sr.HasRunningVMs() && sr.CanCreateWithXenCenter()
                 && sr.allowed_operations.Contains(storage_operations.destroy) && !HelpersGUI.GetActionInProgress(sr);
         }
 
@@ -113,7 +113,7 @@ namespace XenAdmin.Commands
                 List<SR> srs = GetSelection().AsXenObjects<SR>();
                 if (srs.Count == 1)
                 {
-                    return string.Format(Messages.MESSAGEBOX_DESTROY_SR_CONTINUE, srs[0].Name);
+                    return string.Format(Messages.MESSAGEBOX_DESTROY_SR_CONTINUE, srs[0].Name());
                 }
 
                 return Messages.MESSAGEBOX_DESTROY_SRS_CONTINUE;
@@ -144,7 +144,7 @@ namespace XenAdmin.Commands
             {
                 return base.GetCantExecuteReasonCore(item);
             }
-            if (!sr.HasPBDs)
+            if (!sr.HasPBDs())
             {
                 return Messages.SR_DETACHED;
             }
@@ -152,7 +152,7 @@ namespace XenAdmin.Commands
             {
                 return Messages.SR_HAS_RUNNING_VMS;
             }
-            else if (!sr.CanCreateWithXenCenter)
+            else if (!sr.CanCreateWithXenCenter())
             {
                 return Messages.SR_CANNOT_BE_DESTROYED_WITH_XC;
             }

@@ -61,7 +61,7 @@ namespace XenAdmin.Actions
             else
             {
                 Exception = new Exception(Result ?? Messages.ERROR_UNKNOWN);
-                log.WarnFormat("Plugin call xscontainer.{0}({1}) on {2} failed with {3}", action, VM.uuid, Host.Name, Exception.Message);
+                log.WarnFormat("Plugin call xscontainer.{0}({1}) on {2} failed with {3}", action, VM.uuid, Host.Name(), Exception.Message);
             }
         }
     }
@@ -69,7 +69,7 @@ namespace XenAdmin.Actions
     public class EnableVMEnlightenmentAction : VMEnlightenmentAction
     {
         public EnableVMEnlightenmentAction(VM vm, bool suppressHistory)
-            : base(vm, "register", String.Format(Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE, vm.Name), 
+            : base(vm, "register", String.Format(Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE, vm.Name()), 
                 Messages.ACTION_ENABLE_VM_ENLIGHTENMENT_DESCRIPTION, suppressHistory)
         { }
     }
@@ -77,7 +77,7 @@ namespace XenAdmin.Actions
     public class DisableVMEnlightenmentAction : VMEnlightenmentAction
     {
         public DisableVMEnlightenmentAction(VM vm, bool suppressHistory)
-            : base(vm, "deregister", String.Format(Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE, vm.Name), 
+            : base(vm, "deregister", String.Format(Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE, vm.Name()), 
                 Messages.ACTION_DISABLE_VM_ENLIGHTENMENT_DESCRIPTION, suppressHistory)
         { }
     }

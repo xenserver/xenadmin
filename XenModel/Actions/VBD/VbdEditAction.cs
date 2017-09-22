@@ -61,9 +61,9 @@ namespace XenAdmin.Actions
             if (_vbdMode != _vbd.mode)
                 VBD.set_mode(Session, _vbd.opaque_ref, _vbdMode);
 
-            if(_priority != _vbd.IONice)
+            if(_priority != _vbd.GetIoNice())
             {
-                _vbd.IONice = _priority;
+                _vbd.SetIoNice(_priority);
                 VBD.set_qos_algorithm_params(Session, _vbd.opaque_ref, _vbd.qos_algorithm_params );
             }
                 

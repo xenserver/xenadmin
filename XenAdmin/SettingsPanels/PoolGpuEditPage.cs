@@ -143,7 +143,7 @@ namespace XenAdmin.SettingsPanels
             showPlacementPolicy = isPoolOrStandaloneHost && Helpers.VGpuCapability(clone.Connection);
 
             host = clone as Host; // can be null, if we are on a Pool
-            showIntegratedGpu = host != null && host.CanEnableDisableIntegratedGpu;
+            showIntegratedGpu = host != null && host.CanEnableDisableIntegratedGpu();
 
             PopulatePage();
         }
@@ -235,7 +235,7 @@ namespace XenAdmin.SettingsPanels
             if (host == null)
                 return;
             var currentHostDisplay = host.display;
-            var systemDisplayDeviceGpu = host.SystemDisplayDevice;
+            var systemDisplayDeviceGpu = host.SystemDisplayDevice();
             var currentPgpuDom0Access = systemDisplayDeviceGpu != null ? systemDisplayDeviceGpu.dom0_access : pgpu_dom0_access.unknown;
 
             bool hostCurrentlyEnabled = currentHostDisplay == host_display.enabled || currentHostDisplay == host_display.disable_on_reboot;

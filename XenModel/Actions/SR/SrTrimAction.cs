@@ -44,7 +44,7 @@ namespace XenAdmin.Actions
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public SrTrimAction(IXenConnection connection, SR sr)
-            : base(connection, string.Format(Messages.ACTION_SR_TRIM_TITLE, sr.NameWithoutHost), false)
+            : base(connection, string.Format(Messages.ACTION_SR_TRIM_TITLE, sr.NameWithoutHost()), false)
         {
             SR = sr;
         }
@@ -71,7 +71,7 @@ namespace XenAdmin.Actions
             }
             catch (Failure failure)
             {
-                log.WarnFormat("Plugin call trim.do_trim({0}) on {1} failed with {2}", SR.uuid, host.Name,
+                log.WarnFormat("Plugin call trim.do_trim({0}) on {1} failed with {2}", SR.uuid, host.Name(),
                     failure.Message);
                 throw;
             }
@@ -80,7 +80,7 @@ namespace XenAdmin.Actions
                 Description = Messages.ACTION_SR_TRIM_DONE;
             else
             {
-                log.WarnFormat("Plugin call trim.do_trim({0}) on {1} failed with {2}", SR.uuid, host.Name, Result);
+                log.WarnFormat("Plugin call trim.do_trim({0}) on {1} failed with {2}", SR.uuid, host.Name(), Result);
                 var error = GetTrimError(Result);
                 Exception = new Exception(error ?? Messages.ERROR_UNKNOWN);
             }

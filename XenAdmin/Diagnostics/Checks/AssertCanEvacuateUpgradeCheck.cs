@@ -49,7 +49,7 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunCheck()
         {
-            if (!Host.IsLive)
+            if (!Host.IsLive())
                 return new HostNotLiveWarning(this, Host);
 
             // check if the pool has incompatible CPUs
@@ -62,9 +62,9 @@ namespace XenAdmin.Diagnostics.Checks
             }
 
             //vCPU configuration check
-            foreach (var vm in Host.Connection.Cache.VMs.Where(vm => vm.is_a_real_vm))
+            foreach (var vm in Host.Connection.Cache.VMs.Where(vm => vm.is_a_real_vm()))
             {
-                if (!vm.HasValidVCPUConfiguration)
+                if (!vm.HasValidVCPUConfiguration())
                     return new InvalidVCPUConfiguration(this, vm);
             }
 
@@ -76,7 +76,7 @@ namespace XenAdmin.Diagnostics.Checks
             if (pool == null)
                 return false;
 
-            if (!pool.Connection.Cache.VMs.Any(vm => vm.is_a_real_vm && vm.power_state != vm_power_state.Halted))
+            if (!pool.Connection.Cache.VMs.Any(vm => vm.is_a_real_vm() && vm.power_state != vm_power_state.Halted))
                 return false;
 
             foreach (var host1 in pool.Connection.Cache.Hosts)

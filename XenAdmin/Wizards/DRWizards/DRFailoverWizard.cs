@@ -208,7 +208,7 @@ namespace XenAdmin.Wizards.DRWizards
             foreach (var drTask in DrTasks.ToList())
             {
                 List<SR> srs = Pool.Connection.ResolveAll(drTask.introduced_SRs);
-                string srNames = string.Join(", ", (from sr in srs select sr.Name).ToArray());
+                string srNames = string.Join(", ", (from sr in srs select sr.Name()).ToArray());
                 
                 DR_task task = drTask;
                 var action = new DelegatedAsyncAction(xenConnection,
@@ -295,15 +295,15 @@ namespace XenAdmin.Wizards.DRWizards
             SummaryReport.AddLine(Messages.DR_WIZARD_REPORT_SELECTED_METADATA);
             foreach (var poolMetadata in DRFailoverWizardAppliancesPage1.SelectedPoolMetadata.Values)
             {
-                SummaryReport.AddLine(poolMetadata.Pool.Name, 1);
+                SummaryReport.AddLine(poolMetadata.Pool.Name(), 1);
                 foreach (var vmAppliance in poolMetadata.VmAppliances.Values)
                 {
-                    SummaryReport.AddLine(vmAppliance.Name, 2);
+                    SummaryReport.AddLine(vmAppliance.Name(), 2);
                     foreach (XenRef<VM> vmRef in vmAppliance.VMs)
                     {
                         if (poolMetadata.Vms.ContainsKey(vmRef))
                         {
-                            SummaryReport.AddLine(poolMetadata.Vms[vmRef].Name, 3);
+                            SummaryReport.AddLine(poolMetadata.Vms[vmRef].Name(), 3);
                         }
                     }
                 }
@@ -312,7 +312,7 @@ namespace XenAdmin.Wizards.DRWizards
                     if (vm.appliance.opaque_ref != null && vm.appliance.opaque_ref.StartsWith("OpaqueRef:") &&
                         vm.appliance.opaque_ref != "OpaqueRef:NULL")
                         continue;
-                    SummaryReport.AddLine(vm.Name, 2);
+                    SummaryReport.AddLine(vm.Name(), 2);
                 }
             }
 
@@ -323,7 +323,7 @@ namespace XenAdmin.Wizards.DRWizards
             if (IntroducedSrs.Count > 0)
             {
                 List<SR> srs = Pool.Connection.ResolveAll(IntroducedSrs);
-                string srNames = string.Join(", ", (from sr in srs select sr.Name).ToArray());
+                string srNames = string.Join(", ", (from sr in srs select sr.Name()).ToArray());
                 SummaryReport.AddLine(string.Format(Messages.DR_WIZARD_REPORT_INTRODUCED_SRS, srNames));
             }
             else

@@ -208,13 +208,13 @@ namespace XenAdmin.ConsoleView
             {
                 Host host = source.Connection.Resolve(source.resident_on);
                 if (host == null)
-                    return source.Name;
+                    return source.Name();
 
-                return string.Format(source.IsControlDomainZero ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name);
+                return string.Format(source.IsControlDomainZero() ? Messages.CONSOLE_HOST : Messages.CONSOLE_HOST_NUTANIX, host.Name());
             }
             else
             {
-                return source.Name;
+                return source.Name();
             }
         }
 

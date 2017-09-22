@@ -81,9 +81,11 @@ namespace XenAdmin.Dialogs
         protected virtual void buttonOK_Click(object sender, EventArgs e)
         {
             memoryControls.UnfocusSpinners();
+            var hasBallooning = vmList[0].has_ballooning();
+
             if (ConfirmAndChange(this, vmList,
-                vmList[0].has_ballooning ? (long)memoryControls.dynamic_min : (long)memoryControls.static_max,  // dynamic_min and _max should stay equal to static_max for VMs without ballooning
-                vmList[0].has_ballooning ? (long)memoryControls.dynamic_max : (long)memoryControls.static_max,
+                hasBallooning ? (long)memoryControls.dynamic_min : (long)memoryControls.static_max, // dynamic_min and _max should stay equal to static_max for VMs without ballooning
+                hasBallooning ? (long)memoryControls.dynamic_max : (long)memoryControls.static_max,
                 (long)memoryControls.static_max, origStaticMax, advanced))
             {
                 Close();
@@ -114,7 +116,7 @@ namespace XenAdmin.Dialogs
                         string msg;
                         if (advanced)
                             msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_STATIC_MAX_SINGULAR : Messages.CONFIRM_CHANGE_STATIC_MAX_PLURAL);
-                        else if (vm.has_ballooning && !Helpers.FeatureForbidden(vm, Host.RestrictDMC))
+                        else if (vm.has_ballooning() && !Helpers.FeatureForbidden(vm, Host.RestrictDMC))
                             msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_MEMORY_MAX_SINGULAR : Messages.CONFIRM_CHANGE_MEMORY_MAX_PLURAL);
                         else
                             msg = (VMs.Count == 1 ? Messages.CONFIRM_CHANGE_MEMORY_SINGULAR : Messages.CONFIRM_CHANGE_MEMORY_PLURAL);
@@ -139,7 +141,7 @@ namespace XenAdmin.Dialogs
             {
                 ChangeMemorySettingsAction action = new ChangeMemorySettingsAction(
                     vm,
-                    string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, vm.Name),
+                    string.Format(Messages.ACTION_CHANGE_MEMORY_SETTINGS, vm.Name()),
                     (long)vm.memory_static_min, dynamic_min, dynamic_max, static_max,VMOperationCommand.WarningDialogHAInvalidConfig,VMOperationCommand.StartDiagnosisForm, suppressHistory);
                 actions.Add(action);
             }

@@ -77,7 +77,7 @@ namespace XenAdmin.Commands
             {
                 IXenConnection connection = selection[0].Connection;
                 Host host = selection[0].XenObject as Host;
-                return host != null && host.IsLive;
+                return host != null && host.IsLive();
             }
             return false;
         }

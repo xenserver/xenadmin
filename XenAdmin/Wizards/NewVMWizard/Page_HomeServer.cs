@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.NewVMWizard
             {
                 List<KeyValuePair<string, string>> sum = new List<KeyValuePair<string, string>>();
                 sum.Add(new KeyValuePair<string, string>(Messages.NEWVMWIZARD_HOMESERVERPAGE_HOMESERVER,
-                                                         Affinity != null ? Affinity.Name : Messages.NEWVMWIZARD_HOMESERVER_NONE));
+                                                         Affinity != null ? Affinity.Name() : Messages.NEWVMWIZARD_HOMESERVER_NONE));
                 return sum;
             }
         }
