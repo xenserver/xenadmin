@@ -31,25 +31,26 @@
 
 using System.Drawing;
 using System.Diagnostics;
-using System.Windows.Forms;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Controls;
 using XenAdmin.Properties;
 using XenAPI;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using XenAdmin.Dialogs;
+using XenAdmin.Controls.DataGridViewEx;
+using XenAdmin.Core;
 
 namespace XenAdmin.SettingsPanels
 {
     public partial class USBEditPage : XenTabPage, IEditPage
     {
-        private UsbList _usblist;
         private VM _vm;
 
         public USBEditPage()
         {
             InitializeComponent();
-            _usblist = new UsbList();
-            this.Controls.Add(_usblist);
         }
 
         #region override IEditPage
@@ -73,11 +74,11 @@ namespace XenAdmin.SettingsPanels
         { 
             get
             {
-                if (null != _vm)
+                if (_vm != null)
                 {
-                    if (0 == _vm.VUSBs.Count)
+                    if (_vm.VUSBs.Count == 0)
                         return Messages.USB_EDIT_SUBTEXT_NODEVICES;
-                    else if (1 == _vm.VUSBs.Count)
+                    else if (_vm.VUSBs.Count == 1)
                         return Messages.USB_EDIT_SUBTEXT_1_DEVICE;
                     else
                         return string.Format(Messages.USB_EDIT_SUBTEXT_MULTIPLE_DEVICES, _vm.VUSBs.Count);
@@ -105,7 +106,44 @@ namespace XenAdmin.SettingsPanels
             if (Connection == null)
                 Connection = _vm.Connection;
 
-            _usblist.XenObject = clone;
+            BuildList();
+        }
+
+        public bool InBuildList = false;
+        private void BuildList()
+        {
+            Program.AssertOnEventThread();
+
+            if (InBuildList)
+                return;
+
+            InBuildList = true;
+
+            try
+            {
+                List<VUSB> vusbs = _vm.Connection.ResolveAll(_vm.VUSBs);
+
+                var VmUsbRowToAdd = new List<VMUsbRow>();
+                foreach (VUSB vusb in vusbs)
+                {
+                    VmUsbRowToAdd.Add(new VMUsbRow(vusb));
+                }
+                dataGridViewUsbList.Rows.AddRange(VmUsbRowToAdd.ToArray());
+
+                buttonDetach.Enabled = false;
+            }
+            finally
+            {
+                if (dataGridViewUsbList.SortedColumn != null)
+                {
+                    dataGridViewUsbList.Sort(
+                        dataGridViewUsbList.SortedColumn,
+                        dataGridViewUsbList.SortOrder == SortOrder.Ascending
+                            ? ListSortDirection.Ascending : ListSortDirection.Descending);
+                }
+                dataGridViewUsbList.ResumeLayout();
+                InBuildList = false;
+            }
         }
 
         public void ShowLocalValidationMessages()
@@ -120,5 +158,77 @@ namespace XenAdmin.SettingsPanels
 
         
         #endregion
+
+        private VMUsbRow selectedRow = null;
+        private void dataGridViewUsbList_SelectionChanged(object sender, System.EventArgs e)
+        {
+            selectedRow = null;
+            buttonDetach.Enabled = false;
+
+            if (dataGridViewUsbList.SelectedRows != null && dataGridViewUsbList.SelectedRows.Count > 0)
+            {
+                selectedRow = (VMUsbRow)dataGridViewUsbList.SelectedRows[0];
+                buttonDetach.Enabled = true;
+            }
+        }
+
+        private void buttonAttach_Click(object sender, System.EventArgs e)
+        {
+            if (_vm != null)
+            {
+                AttachUsbDialog dialog = new AttachUsbDialog(_vm);
+                dialog.ShowDialog(Program.MainWindow);
+            }
+        }
+
+        private void buttonDetach_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private class VMUsbRow : DataGridViewExRow
+        {
+            private VUSB _vusb;
+            private DataGridViewTextBoxCell locationCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell descriptionCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell attachedCell = new DataGridViewTextBoxCell();
+
+            public VMUsbRow(VUSB vusb)
+            {
+                _vusb = vusb;
+                _vusb.PropertyChanged += Vusb_PropertyChanged;
+
+                Cells.AddRange(locationCell,
+                    descriptionCell,
+                    attachedCell);
+                UpdateDetails();
+            }
+
+            public VUSB Vusb
+            {
+                get { return (VUSB)_vusb; }
+            }
+
+            public void UpdateDetails()
+            {
+                USB_group usbgroup = _vusb.Connection.Resolve(_vusb.USB_group);
+                PUSB pusb = _vusb.Connection.Resolve(usbgroup.PUSBs[0]);
+
+                locationCell.Value = pusb.path;
+                descriptionCell.Value = pusb.description;
+
+                attachedCell.Value = (_vusb.attached != null).ToYesNoStringI18n();
+            }
+
+            public void DeregisterEvents()
+            {
+                _vusb.PropertyChanged -= Vusb_PropertyChanged;
+            }
+
+            private void Vusb_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                UpdateDetails();
+            }
+        }
     }
 }

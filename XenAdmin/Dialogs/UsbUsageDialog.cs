@@ -30,11 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using XenAdmin.Commands;
-using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Dialogs
@@ -54,16 +50,16 @@ namespace XenAdmin.Dialogs
         {
             if (_pusb.passthrough_enabled)
             {
-                labelNote.Text = String.Format(Messages.DIALOG_USB_USAGE_NOTE_FORMAT,
-                                               Messages.DIALOG_USB_USAGE_NOTE_DISABLE,
-                                               Messages.DIALOG_USB_USAGE_NOTE_DENY);
+                Text = Messages.DIALOG_USB_USAGE_DISABLE_PASSTHROUGH;
+                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_DENY;
                 buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_DISABLE;
+
+                tableLayoutPanelBase.Controls.Remove(tableLayoutPanelWarning);
             }
             else
             {
-                labelNote.Text = String.Format(Messages.DIALOG_USB_USAGE_NOTE_FORMAT,
-                                               Messages.DIALOG_USB_USAGE_NOTE_ENABLE,
-                                               Messages.DIALOG_USB_USAGE_NOTE_ALLOW);
+                Text = Messages.DIALOG_USB_USAGE_ENABLE_PASSTHROUGH;
+                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_ALLOW;
                 buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_ENABLE;
             }
         }

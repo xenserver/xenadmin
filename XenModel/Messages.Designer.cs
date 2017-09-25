@@ -10926,7 +10926,70 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to allow.
+        ///   Looks up a localized string similar to Select a device to pass through from the list below..
+        /// </summary>
+        public static string DIALOG_USB_ATTACH_NOTE {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_ATTACH_NOTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attach USB.
+        /// </summary>
+        public static string DIALOG_USB_ATTACH_TITLE {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_ATTACH_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plugging in untrustworthy USB devices to your computer may put your computer at risk..
+        /// </summary>
+        public static string DIALOG_USB_ATTACH_WARNING_LINE1 {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_ATTACH_WARNING_LINE1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB devices with modifiable behaviour should only be assigned to trustworthy guest VMs..
+        /// </summary>
+        public static string DIALOG_USB_ATTACH_WARNING_LINE2 {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_ATTACH_WARNING_LINE2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A major component update of VM will be performed the first time when a USB device is passed through to it, this update is irreversible!.
+        /// </summary>
+        public static string DIALOG_USB_ATTACH_WARNING_LINE3 {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_ATTACH_WARNING_LINE3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable passthrough.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_DISABLE_PASSTHROUGH {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_DISABLE_PASSTHROUGH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable passthrough.
+        /// </summary>
+        public static string DIALOG_USB_USAGE_ENABLE_PASSTHROUGH {
+            get {
+                return ResourceManager.GetString("DIALOG_USB_USAGE_ENABLE_PASSTHROUGH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure that you want to enable passthrough on this device?.
         /// </summary>
         public static string DIALOG_USB_USAGE_NOTE_ALLOW {
             get {
@@ -10935,38 +10998,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to deny.
+        ///   Looks up a localized string similar to Are you sure that you want to disable passthrough on this device? This device will no longer be allowed to be passed through to virtual machines..
         /// </summary>
         public static string DIALOG_USB_USAGE_NOTE_DENY {
             get {
                 return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_DENY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to disable.
-        /// </summary>
-        public static string DIALOG_USB_USAGE_NOTE_DISABLE {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_DISABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to enable.
-        /// </summary>
-        public static string DIALOG_USB_USAGE_NOTE_ENABLE {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_ENABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to {0} passthrough on this device and {1} to be passed through to VMs?.
-        /// </summary>
-        public static string DIALOG_USB_USAGE_NOTE_FORMAT {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_USAGE_NOTE_FORMAT", resourceCulture);
             }
         }
         
@@ -34675,7 +34711,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to no devices attached.
+        ///   Looks up a localized string similar to No devices attached.
         /// </summary>
         public static string USB_EDIT_SUBTEXT_NODEVICES {
             get {
@@ -34693,20 +34729,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable passthrough.
+        ///   Looks up a localized string similar to &amp;Disable passthrough.
         /// </summary>
-        public static string USBLIST_DISABLE_PASSTHROUGH {
+        public static string USBLIST_DISABLE_PASSTHROUGH_HOTKEY {
             get {
-                return ResourceManager.GetString("USBLIST_DISABLE_PASSTHROUGH", resourceCulture);
+                return ResourceManager.GetString("USBLIST_DISABLE_PASSTHROUGH_HOTKEY", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable passthrough.
+        ///   Looks up a localized string similar to &amp;Enable passthrough.
         /// </summary>
-        public static string USBLIST_ENABLE_PASSTHROUGH {
+        public static string USBLIST_ENABLE_PASSTHROUGH_HOTKEY {
             get {
-                return ResourceManager.GetString("USBLIST_ENABLE_PASSTHROUGH", resourceCulture);
+                return ResourceManager.GetString("USBLIST_ENABLE_PASSTHROUGH_HOTKEY", resourceCulture);
             }
         }
         

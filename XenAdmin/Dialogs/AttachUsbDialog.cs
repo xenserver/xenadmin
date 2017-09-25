@@ -30,13 +30,9 @@
  */
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Collections.Generic;
 using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAPI;
-using XenAdmin.Actions;
 
 namespace XenAdmin.Dialogs
 {
@@ -49,6 +45,12 @@ namespace XenAdmin.Dialogs
             _vm = vm;
 
             InitializeComponent();
+
+            Text = Messages.DIALOG_USB_ATTACH_TITLE;
+            labelNote.Text = Messages.DIALOG_USB_ATTACH_NOTE;
+            labelWarningLine1.Text = Messages.DIALOG_USB_ATTACH_WARNING_LINE1;
+            labelWarningLine2.Text = Messages.DIALOG_USB_ATTACH_WARNING_LINE2;
+            labelWarningLine3.Text = Messages.DIALOG_USB_ATTACH_WARNING_LINE3;
 
             BuildList();
             treeUsbList_SelectedIndexChanged(null, null);
@@ -116,8 +118,8 @@ namespace XenAdmin.Dialogs
             public UsbItem(PUSB pusb) :base(true)
             {
                 _pusb = pusb;
-                Text = _pusb.description;
-                Description = _pusb.path;
+                Text = String.Format("{0} {1}", _pusb.path, _pusb.description);
+                Description = null;
                 Image = null;
             }
         }

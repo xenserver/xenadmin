@@ -215,12 +215,6 @@
     <Compile Include="Controls\UpsellPage.designer.cs">
       <DependentUpon>UpsellPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\USB\UsbList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\USB\UsbList.Designer.cs">
-      <DependentUpon>UsbList.cs</DependentUpon>
-    </Compile>
     <Compile Include="Core\HealthCheck.cs" />
     <Compile Include="Core\HiddenFeatures.cs" />
     <Compile Include="Core\Metadata.cs" />
@@ -1517,9 +1511,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\USB\UsbList.resx">
-      <DependentUpon>UsbList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\XenSearch\QueryPanel.ja.resx">
       <DependentUpon>QueryPanel.cs</DependentUpon>
