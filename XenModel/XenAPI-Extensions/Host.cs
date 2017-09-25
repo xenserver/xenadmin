@@ -402,6 +402,17 @@ namespace XenAPI
             return true;
         }
 
+        /// <summary>
+        /// The feature is restricted if the "restrict_rpu" key exists and it is true
+        /// or if the key is absent and the host is unlicensed
+        /// </summary>
+        public static bool RestrictRpu(Host h)
+        {
+            return h.license_params.ContainsKey("restrict_rpu")
+                ? BoolKey(h.license_params, "restrict_rpu")
+                : GetEdition(h.edition) == Edition.Free || h.LicenseExpiryUTC() < DateTime.UtcNow - h.Connection.ServerTimeOffset; // restrict on Free edition or if the license has expired
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)
