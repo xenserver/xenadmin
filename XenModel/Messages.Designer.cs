@@ -563,18 +563,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("ACTION_DETACHING_MULTIPLE_VDIS_TITLE", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable IGMP snooping.
         /// </summary>
-        public static string ACTION_DISABLE_IGMP_SNOOPING
-        {
-            get
-            {
+        public static string ACTION_DISABLE_IGMP_SNOOPING {
+            get {
                 return ResourceManager.GetString("ACTION_DISABLE_IGMP_SNOOPING", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable live patching.
         /// </summary>
@@ -934,18 +932,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("ACTION_DR_TASK_DESTROY_TITLE", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Enable IGMP Snooping.
+        ///   Looks up a localized string similar to Enable IGMP snooping.
         /// </summary>
-        public static string ACTION_ENABLE_IGMP_SNOOPING
-        {
-            get
-            {
+        public static string ACTION_ENABLE_IGMP_SNOOPING {
+            get {
                 return ResourceManager.GetString("ACTION_ENABLE_IGMP_SNOOPING", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enable live patching.
         /// </summary>
@@ -22676,6 +22672,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Network Options.
+        /// </summary>
+        public static string NETWORK_OPTIONS {
+            get {
+                return ResourceManager.GetString("NETWORK_OPTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The connection to the server was lost. No changes have been made..
         /// </summary>
         public static string NETWORK_RECONFIG_CONNECTION_LOST {
@@ -22692,35 +22697,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NETWORK_SETTINGS", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Network Options.
-        /// </summary>
-        public static string NETWORK_OPTIONS {
-            get
-            {
-                return ResourceManager.GetString("NETWORK_OPTIONS", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to IGMP snooping enabled.
-        /// </summary>
-        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED {
-            get {
-                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to IGMP snooping disabled.
-        /// </summary>
-        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED {
-            get {
-                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} on {1}.
         /// </summary>
@@ -22868,6 +22845,24 @@ namespace XenAdmin {
         public static string NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL {
             get {
                 return ResourceManager.GetString("NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IGMP snooping disabled.
+        /// </summary>
+        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED {
+            get {
+                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IGMP snooping enabled.
+        /// </summary>
+        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED {
+            get {
+                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED", resourceCulture);
             }
         }
         
@@ -29969,7 +29964,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("SECURITYEDITPAGE_SUBTEXT_TLS", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select a filter....
         /// </summary>
@@ -32972,6 +32967,15 @@ namespace XenAdmin {
         public static string UNKNOWN_OBJECT {
             get {
                 return ResourceManager.GetString("UNKNOWN_OBJECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlicensed.
+        /// </summary>
+        public static string UNLICENSED {
+            get {
+                return ResourceManager.GetString("UNLICENSED", resourceCulture);
             }
         }
         

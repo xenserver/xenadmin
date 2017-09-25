@@ -1124,6 +1124,9 @@ namespace XenAdmin
                 case "edition":
                 case "license_server":
                 case "license_params":
+                    UpdateHeader();
+                    UpdateToolbars();
+                    break;
                 case "other_config":
                     // other_config may contain HideFromXenCenter
                     UpdateToolbars();
@@ -2846,18 +2849,60 @@ namespace XenAdmin
         /// </summary>
         private void UpdateHeader()
         {
+            LicenseStatusTitleLabel.Text = string.Empty;
+            LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
+
             if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
 
             if (SearchMode && SearchPage.Search != null)
             {
                 TitleLabel.Text = HelpersGUI.GetLocalizedSearchName(SearchPage.Search);
+                LicenseStatusTitleLabel.Text = string.Empty;
                 TitleIcon.Image = Images.GetImage16For(SearchPage.Search);
             }
             else if (!SearchMode && SelectionManager.Selection.ContainsOneItemOfType<IXenObject>())
             {
                 IXenObject xenObject = SelectionManager.Selection[0].XenObject;
                 TitleLabel.Text = xenObject.NameWithLocation();
+
+                if (xenObject is Pool) 
+                {
+                    var pool = xenObject as Pool;
+
+                    if (pool.Connection != null && pool.Connection.IsConnected && pool.Connection.CacheIsPopulated)
+                    {
+                        if (pool.IsUnlicensedPool)
+                        {
+                            LicenseStatusTitleLabel.Text = "(" + Messages.UNLICENSED + ")";
+                            LicenseStatusTitleLabel.ForeColor = Color.Red;
+                        }
+                        else
+                        {
+                            LicenseStatusTitleLabel.Text = Helpers.GetFriendlyLicenseName(Helpers.GetMaster(xenObject.Connection));
+                            LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
+                        }
+                    }
+                }
+                else if (xenObject is Host)
+                {
+                    var host = xenObject as Host;
+
+                    if (host.Connection != null && host.Connection.IsConnected && host.Connection.CacheIsPopulated)
+                    {
+                        if (Host.GetEdition(host.edition) == Host.Edition.Free)
+                        {
+                            LicenseStatusTitleLabel.Text = "(" + Messages.UNLICENSED + ")";
+                            LicenseStatusTitleLabel.ForeColor = Color.Red;
+                        }
+                        else
+                        {
+                            LicenseStatusTitleLabel.Text = "(" + Helpers.GetFriendlyLicenseName(host) + ")";
+                            LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
+                        }
+                    }
+                }
+
                 TitleIcon.Image = Images.GetImage16For(xenObject);
                 // When in folder view only show the logged in label if it is clear to which connection the object belongs (most likely pools and hosts)
 
@@ -2872,6 +2917,13 @@ namespace XenAdmin
                 TitleIcon.Image = Properties.Resources.Logo;
                 loggedInLabel1.Connection = null;
             }
+
+            SetTitleLabelMaxWidth();
+        }
+
+        private void SetTitleLabelMaxWidth()
+        {
+            TitleLabel.MaximumSize = new Size(tableLayoutPanel1.Width - loggedInLabel1.Width - LicenseStatusTitleLabel.Width - 6, TitleLabel.Height);
         }
 
         private void UpdateViewMenu(NavigationPane.NavigationMode mode)
@@ -3352,6 +3404,7 @@ namespace XenAdmin
                 mainWindowResized = true;
             }
             SetSplitterDistance();
+            SetTitleLabelMaxWidth();
         }
 
         private void SetSplitterDistance()
@@ -3388,6 +3441,8 @@ namespace XenAdmin
             TabPage t = TheTabControl.SelectedTab;
             if (t == TabPageConsole)
                 ConsolePanel.UpdateRDPResolution();
+
+            SetTitleLabelMaxWidth();
         }
     }
 }

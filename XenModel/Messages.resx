@@ -11427,6 +11427,9 @@ Verify that the file is a valid {1} export.</value>
   <data name="UNKNOWN_OBJECT" xml:space="preserve">
     <value>unknown object</value>
   </data>
+  <data name="UNLICENSED" xml:space="preserve">
+    <value>Unlicensed</value>
+  </data>
   <data name="UNLIMITED" xml:space="preserve">
     <value>Unlimited</value>
   </data>

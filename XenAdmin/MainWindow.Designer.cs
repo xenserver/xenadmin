@@ -96,9 +96,10 @@ namespace XenAdmin
             this.TitleBackPanel = new XenAdmin.Controls.GradientPanel.GradientPanel();
             this.TitleIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.TitleLabel = new System.Windows.Forms.Label();
+            this.LicenseStatusTitleLabel = new System.Windows.Forms.Label();
             this.toolTipContainer1 = new XenAdmin.Controls.ToolTipContainer();
             this.loggedInLabel1 = new XenAdmin.Controls.LoggedInLabel();
-            this.TitleLabel = new System.Windows.Forms.Label();
             this.ToolStrip = new XenAdmin.Controls.ToolStripEx();
             this.backButton = new System.Windows.Forms.ToolStripSplitButton();
             this.forwardButton = new System.Windows.Forms.ToolStripSplitButton();
@@ -556,9 +557,25 @@ namespace XenAdmin
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.toolTipContainer1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.TitleLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.LicenseStatusTitleLabel, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.toolTipContainer1, 3, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // TitleLabel
+            // 
+            resources.ApplyResources(this.TitleLabel, "TitleLabel");
+            this.TitleLabel.AutoEllipsis = true;
+            this.TitleLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.UseMnemonic = false;
+            // 
+            // LicenseStatusTitleLabel
+            // 
+            resources.ApplyResources(this.LicenseStatusTitleLabel, "LicenseStatusTitleLabel");
+            this.LicenseStatusTitleLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.LicenseStatusTitleLabel.Name = "LicenseStatusTitleLabel";
+            this.LicenseStatusTitleLabel.UseMnemonic = false;
             // 
             // toolTipContainer1
             // 
@@ -572,14 +589,6 @@ namespace XenAdmin
             this.loggedInLabel1.BackColor = System.Drawing.Color.Transparent;
             this.loggedInLabel1.Connection = null;
             this.loggedInLabel1.Name = "loggedInLabel1";
-            // 
-            // TitleLabel
-            // 
-            resources.ApplyResources(this.TitleLabel, "TitleLabel");
-            this.TitleLabel.AutoEllipsis = true;
-            this.TitleLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.UseMnemonic = false;
             // 
             // ToolStrip
             // 
@@ -2146,6 +2155,7 @@ namespace XenAdmin
         private CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
         private CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
         private CommandToolStripMenuItem disablePVSReadcachingToolStripMenuItem;
+        private Label LicenseStatusTitleLabel;
     }
 
 }
