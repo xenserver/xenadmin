@@ -7219,6 +7219,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MAINWINDOW_FORGET_SR" xml:space="preserve">
     <value>&amp;Forget</value>
   </data>
+  <data name="MAINWINDOW_HEADER_LICENSED_WITH" xml:space="preserve">
+    <value>(Licensed with {0})</value>
+  </data>
   <data name="MAINWINDOW_HIGH_AVAILABILITY" xml:space="preserve">
     <value>&amp;High Availability...</value>
   </data>
@@ -11437,7 +11440,7 @@ Verify that the file is a valid {1} export.</value>
     <value>unknown object</value>
   </data>
   <data name="UNLICENSED" xml:space="preserve">
-    <value>Unlicensed</value>
+    <value>(Unlicensed)</value>
   </data>
   <data name="UNLIMITED" xml:space="preserve">
     <value>Unlimited</value>

@@ -2874,12 +2874,12 @@ namespace XenAdmin
                     {
                         if (pool.IsUnlicensedPool)
                         {
-                            LicenseStatusTitleLabel.Text = "(" + Messages.UNLICENSED + ")";
+                            LicenseStatusTitleLabel.Text = Messages.UNLICENSED;
                             LicenseStatusTitleLabel.ForeColor = Color.Red;
                         }
                         else
                         {
-                            LicenseStatusTitleLabel.Text = Helpers.GetFriendlyLicenseName(Helpers.GetMaster(xenObject.Connection));
+                            LicenseStatusTitleLabel.Text = string.Format(Helpers.GetFriendlyLicenseName(Helpers.GetMaster(xenObject.Connection)));
                             LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
                         }
                     }
@@ -2890,14 +2890,14 @@ namespace XenAdmin
 
                     if (host.Connection != null && host.Connection.IsConnected && host.Connection.CacheIsPopulated)
                     {
-                        if (Host.GetEdition(host.edition) == Host.Edition.Free || host.LicenseExpiryUTC() < DateTime.UtcNow - host.Connection.ServerTimeOffset)
+                        if (host.IsFreeLicenseOrExpired())
                         {
-                            LicenseStatusTitleLabel.Text = "(" + Messages.UNLICENSED + ")";
+                            LicenseStatusTitleLabel.Text = Messages.UNLICENSED;
                             LicenseStatusTitleLabel.ForeColor = Color.Red;
                         }
                         else
                         {
-                            LicenseStatusTitleLabel.Text = "(" + Helpers.GetFriendlyLicenseName(host) + ")";
+                            LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(host));
                             LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
                         }
                     }
