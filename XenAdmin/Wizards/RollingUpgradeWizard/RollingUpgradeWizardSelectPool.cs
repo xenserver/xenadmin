@@ -153,11 +153,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
         }
 
-        private static bool IsNotAnUpgradeableVersion(Host host)
-        {
-            return false; // currently, all supported versions are upgradable
-        }
-
         public IList<Host> SelectedMasters
         {
             get
@@ -205,13 +200,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 Pool pool = Helpers.GetPool(xenConnection);
                 Pool poolOfOne = Helpers.GetPoolOfOne(xenConnection);
 
+                bool restricted = Helpers.FeatureForbidden(xenConnection, Host.RestrictRpu);
+
                 bool hasPool = true;
                 if (pool != null)
                 {
                     int index = dataGridView1.Rows.Add(new UpgradeDataGridViewRow(pool));
-
-                    if ((IsNotAnUpgradeableVersion(pool.SmallerVersionHost()) && !pool.RollingUpgrade()) || pool.IsUpgradeForbidden())
+                    if ((restricted && !pool.RollingUpgrade()) || pool.IsUpgradeForbidden())
+                    {
                         ((DataGridViewExRow)dataGridView1.Rows[index]).Enabled = false;
+                        if (restricted)
+                            dataGridView1.Rows[index].Cells[NameColumn.Name].ToolTipText = Messages.ROLLING_UPGRADE_UNLICENSED_POOL;
+                    }
                     else if (masters.Contains(pool.Connection.Resolve(pool.master)))
                         dataGridView1.CheckBoxChange(index, 1);
                 }
@@ -225,8 +225,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 foreach (Host host in hosts)
                 {
                     int index = dataGridView1.Rows.Add(new UpgradeDataGridViewRow(host, hasPool));
-                    if (IsNotAnUpgradeableVersion(host) || (poolOfOne != null && poolOfOne.IsUpgradeForbidden()))
+                    if (restricted || (poolOfOne != null && poolOfOne.IsUpgradeForbidden()))
+                    {
                         ((DataGridViewExRow)dataGridView1.Rows[index]).Enabled = false;
+                        if (restricted)
+                            dataGridView1.Rows[index].Cells[NameColumn.Name].ToolTipText = Messages.ROLLING_UPGRADE_UNLICENSED_HOST;
+                    }
                     else if (!hasPool && masters.Contains(host))
                         dataGridView1.CheckBoxChange(index, 1);
                 }
@@ -275,6 +279,21 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     columnToBeSortedIndex == firstRow.DescriptionCellIndex ||
                     columnToBeSortedIndex == firstRow.VersionCellIndex)
                     SortAndRebuildTree(new CollapsingPoolHostRowSorter<UpgradeDataGridViewRow>(direction, columnToBeSortedIndex));
+            }
+
+            protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
+            {
+                base.OnCellPainting(e);
+
+                if (e.RowIndex >= 0)
+                {
+                    var row = (PoolHostDataGridViewOneCheckboxRow)Rows[e.RowIndex];
+                    if (row != null && !row.Enabled && e.ColumnIndex == row.PoolCheckBoxCellIndex)
+                    {
+                        e.PaintBackground(e.ClipBounds, true);
+                        e.Handled = true;
+                    }
+                }
             }
         }
 

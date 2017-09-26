@@ -59,6 +59,7 @@ namespace XenAdmin.Core
             LicensedHostUnlicensedMaster,
             UnlicensedHostLicensedMaster,
             LicenseMismatch,
+            MasterPoolMaxNumberHostReached,
             DifferentServerVersion,
             DifferentHomogeneousUpdatesFromMaster,
             DifferentHomogeneousUpdatesFromPool,
@@ -130,6 +131,9 @@ namespace XenAdmin.Core
 
             if (LicenseMismatch(slaveHost, masterHost))
                 return Reason.LicenseMismatch;
+
+            if (MasterPoolMaxNumberHostReached(masterConnection))
+                return Reason.MasterPoolMaxNumberHostReached;
             
             if (!SameLinuxPack(slaveHost, masterHost))
                 return Reason.NotSameLinuxPack;
@@ -193,6 +197,8 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER;
                 case Reason.LicenseMismatch:
                     return Messages.NEWPOOL_LICENSEMISMATCH;
+                case Reason.MasterPoolMaxNumberHostReached:
+                    return Messages.NEWPOOL_MAX_NUMBER_HOST_REACHED;
                 case Reason.DifferentServerVersion:
                     return Messages.NEWPOOL_DIFF_SERVER;
                 case Reason.DifferentHomogeneousUpdatesFromMaster:
@@ -459,6 +465,11 @@ namespace XenAdmin.Core
             Host.Edition masterEdition = Host.GetEdition(master.edition);
 
             return slaveEdition != Host.Edition.Free && masterEdition != Host.Edition.Free && slaveEdition != masterEdition;
+        }
+
+        private static bool MasterPoolMaxNumberHostReached(IXenConnection connection)
+        {
+            return Helpers.FeatureForbidden(connection, Host.RestrictPoolSize) && connection.Cache.HostCount > 2;
         }
 
         private static bool HaEnabled(IXenConnection connection)
