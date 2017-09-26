@@ -263,6 +263,13 @@ namespace XenAPI
             return edition == "free";
         }
 
+        public virtual bool IsFreeLicenseOrExpired()
+        {
+            if (Connection != null && Connection.CacheIsPopulated)
+                return IsFreeLicense() || LicenseExpiryUTC() < DateTime.UtcNow - Connection.ServerTimeOffset;
+            return true;
+        }
+
         public static bool RestrictHA(Host h)
         {
             return !BoolKey(h.license_params, "enable_xha");
@@ -410,7 +417,7 @@ namespace XenAPI
         {
             return h.license_params.ContainsKey("restrict_rpu")
                 ? BoolKey(h.license_params, "restrict_rpu")
-                : GetEdition(h.edition) == Edition.Free || h.LicenseExpiryUTC() < DateTime.UtcNow - h.Connection.ServerTimeOffset; // restrict on Free edition or if the license has expired
+                : h.IsFreeLicenseOrExpired(); // restrict on Free edition or if the license has expired
         }
 
         public bool HasPBDTo(SR sr)

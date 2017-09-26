@@ -29597,7 +29597,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The server is not licensed for rolling pool upgrade.
+        ///   Looks up a localized string similar to This server is not licensed for rolling pool upgrade.
         /// </summary>
         public static string ROLLING_UPGRADE_UNLICENSED_HOST {
             get {
@@ -29606,7 +29606,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The pool is not licensed for rolling pool upgrade.
+        ///   Looks up a localized string similar to This pool is not licensed for rolling pool upgrade.
         /// </summary>
         public static string ROLLING_UPGRADE_UNLICENSED_POOL {
             get {

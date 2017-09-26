@@ -10301,10 +10301,10 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>Upgrade Mode</value>
   </data>
   <data name="ROLLING_UPGRADE_UNLICENSED_HOST" xml:space="preserve">
-    <value>The server is not licensed for rolling pool upgrade</value>
+    <value>This server is not licensed for rolling pool upgrade</value>
   </data>
   <data name="ROLLING_UPGRADE_UNLICENSED_POOL" xml:space="preserve">
-    <value>The pool is not licensed for rolling pool upgrade</value>
+    <value>This pool is not licensed for rolling pool upgrade</value>
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade is complete.</value>
