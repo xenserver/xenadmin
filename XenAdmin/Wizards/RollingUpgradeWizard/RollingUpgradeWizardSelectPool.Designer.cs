@@ -66,7 +66,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             this.expansionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.expansionColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.expansionColumn.FillWeight = 25.80645F;
             resources.ApplyResources(this.expansionColumn, "expansionColumn");

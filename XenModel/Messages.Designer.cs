@@ -29597,6 +29597,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This server is not licensed for rolling pool upgrade.
+        /// </summary>
+        public static string ROLLING_UPGRADE_UNLICENSED_HOST {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_UNLICENSED_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This pool is not licensed for rolling pool upgrade.
+        /// </summary>
+        public static string ROLLING_UPGRADE_UNLICENSED_POOL {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_UNLICENSED_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rolling pool upgrade is complete..
         /// </summary>
         public static string ROLLING_UPGRADE_UPGRADE_COMPLETED {
