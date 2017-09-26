@@ -103,7 +103,7 @@ namespace XenAPI
                 bool unlicensed = true;
                 
                 if (Connection != null && Connection.Cache != null && Connection.Cache.Hosts != null
-                    && Connection.Cache.Hosts.All(h => Host.GetEdition(h.edition) != Host.Edition.Free))
+                    && Connection.Cache.Hosts.All(h => Host.GetEdition(h.edition) != Host.Edition.Free && h.LicenseExpiryUTC() > DateTime.UtcNow - h.Connection.ServerTimeOffset))
                     unlicensed = false;
                 
                 return unlicensed;

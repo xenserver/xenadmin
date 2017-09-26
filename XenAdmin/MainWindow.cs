@@ -2890,7 +2890,7 @@ namespace XenAdmin
 
                     if (host.Connection != null && host.Connection.IsConnected && host.Connection.CacheIsPopulated)
                     {
-                        if (Host.GetEdition(host.edition) == Host.Edition.Free)
+                        if (Host.GetEdition(host.edition) == Host.Edition.Free || host.LicenseExpiryUTC() < DateTime.UtcNow - host.Connection.ServerTimeOffset)
                         {
                             LicenseStatusTitleLabel.Text = "(" + Messages.UNLICENSED + ")";
                             LicenseStatusTitleLabel.ForeColor = Color.Red;
