@@ -126,6 +126,9 @@ namespace XenAdmin.SettingsPanels
 
             try
             {
+                dataGridViewUsbList.SuspendLayout();
+                dataGridViewUsbList.Rows.Clear();
+
                 List<VUSB> vusbs = _vm.Connection.ResolveAll(_vm.VUSBs);
                 foreach (VUSB vusb in vusbs)
                 {
@@ -155,6 +158,7 @@ namespace XenAdmin.SettingsPanels
 
         public void Cleanup()
         {
+            _vm.PropertyChanged -= Vm_PropertyChanged;
             foreach (DataGridViewExRow row in dataGridViewUsbList.Rows)
             {
                 var usbRow = row as VMUsbRow;
