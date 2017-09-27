@@ -3904,21 +3904,6 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>Scanning for free device positions</value>
   </data>
-  <data name="DIALOG_USB_ATTACH_NOTE" xml:space="preserve">
-    <value>Select a device to pass through from the list below.</value>
-  </data>
-  <data name="DIALOG_USB_ATTACH_TITLE" xml:space="preserve">
-    <value>Attach USB</value>
-  </data>
-  <data name="DIALOG_USB_ATTACH_WARNING_LINE1" xml:space="preserve">
-    <value>Plugging in untrustworthy USB devices to your computer may put your computer at risk.</value>
-  </data>
-  <data name="DIALOG_USB_ATTACH_WARNING_LINE2" xml:space="preserve">
-    <value>USB devices with modifiable behaviour should only be assigned to trustworthy guest VMs.</value>
-  </data>
-  <data name="DIALOG_USB_ATTACH_WARNING_LINE3" xml:space="preserve">
-    <value>A major component update of VM will be performed the first time when a USB device is passed through to it, this update is irreversible!</value>
-  </data>
   <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
     <value>Disable passthrough</value>
   </data>
@@ -3926,7 +3911,7 @@ This will also delete its subfolders.</value>
     <value>Enable passthrough</value>
   </data>
   <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
-    <value>Are you sure that you want to enable passthrough on this device?</value>
+    <value>Are you sure that you want to enable passthrough on this device? This will allow this device to be passed through to virtual machines.</value>
   </data>
   <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
     <value>Are you sure that you want to disable passthrough on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
@@ -12032,6 +12017,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
     <value>&amp;Enable passthrough</value>
+  </data>
+  <data name="USB_DEVICES" xml:space="preserve">
+    <value>USB devices</value>
   </data>
   <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
     <value>1 device attached</value>

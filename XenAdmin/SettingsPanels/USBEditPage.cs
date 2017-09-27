@@ -29,18 +29,19 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Drawing;
 using System.Diagnostics;
-using XenAdmin.Actions;
-using XenAdmin.Controls;
-using XenAdmin.Properties;
-using XenAPI;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using XenAdmin.Actions;
+using XenAdmin.Controls;
+using XenAdmin.Properties;
 using XenAdmin.Dialogs;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
+using XenAPI;
 
 namespace XenAdmin.SettingsPanels
 {
@@ -78,10 +79,9 @@ namespace XenAdmin.SettingsPanels
                 {
                     if (_vm.VUSBs.Count == 0)
                         return Messages.USB_EDIT_SUBTEXT_NODEVICES;
-                    else if (_vm.VUSBs.Count == 1)
+                    if (_vm.VUSBs.Count == 1)
                         return Messages.USB_EDIT_SUBTEXT_1_DEVICE;
-                    else
-                        return string.Format(Messages.USB_EDIT_SUBTEXT_MULTIPLE_DEVICES, _vm.VUSBs.Count);
+                    return string.Format(Messages.USB_EDIT_SUBTEXT_MULTIPLE_DEVICES, _vm.VUSBs.Count);
                 }
                 else
                     return "";
@@ -106,6 +106,12 @@ namespace XenAdmin.SettingsPanels
             if (Connection == null)
                 Connection = _vm.Connection;
 
+            if (_vm != null)
+            {
+                _vm.PropertyChanged += Vm_PropertyChanged;
+                _vm.Connection.Cache.RegisterBatchCollectionChanged<VUSB>(UsbCollectionChanged);
+            }
+
             BuildList();
         }
 
@@ -122,13 +128,10 @@ namespace XenAdmin.SettingsPanels
             try
             {
                 List<VUSB> vusbs = _vm.Connection.ResolveAll(_vm.VUSBs);
-
-                var VmUsbRowToAdd = new List<VMUsbRow>();
                 foreach (VUSB vusb in vusbs)
                 {
-                    VmUsbRowToAdd.Add(new VMUsbRow(vusb));
+                    dataGridViewUsbList.Rows.Add(new VMUsbRow(vusb));
                 }
-                dataGridViewUsbList.Rows.AddRange(VmUsbRowToAdd.ToArray());
 
                 buttonDetach.Enabled = false;
             }
@@ -153,11 +156,31 @@ namespace XenAdmin.SettingsPanels
 
         public void Cleanup()
         {
-
+            foreach (DataGridViewExRow row in dataGridViewUsbList.Rows)
+            {
+                var usbRow = row as VMUsbRow;
+                if (usbRow != null)
+                    usbRow.DeregisterEvents();
+            }
         }
 
         
         #endregion
+
+        void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            foreach (DataGridViewExRow row in dataGridViewUsbList.Rows)
+            {
+                var usbRow = row as VMUsbRow;
+                if (usbRow != null)
+                    usbRow.UpdateDetails();
+            }
+        }
+
+        void UsbCollectionChanged(object sender, EventArgs e)
+        {
+            BuildList();
+        }
 
         private VMUsbRow selectedRow = null;
         private void dataGridViewUsbList_SelectionChanged(object sender, System.EventArgs e)
@@ -165,7 +188,7 @@ namespace XenAdmin.SettingsPanels
             selectedRow = null;
             buttonDetach.Enabled = false;
 
-            if (dataGridViewUsbList.SelectedRows != null && dataGridViewUsbList.SelectedRows.Count > 0)
+            if (dataGridViewUsbList.SelectedRows.Count > 0)
             {
                 selectedRow = (VMUsbRow)dataGridViewUsbList.SelectedRows[0];
                 buttonDetach.Enabled = true;

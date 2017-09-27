@@ -50,17 +50,17 @@
             // 
             // buttonAttach
             // 
+            this.buttonAttach.DialogResult = System.Windows.Forms.DialogResult.OK;
             resources.ApplyResources(this.buttonAttach, "buttonAttach");
             this.buttonAttach.Name = "buttonAttach";
             this.buttonAttach.UseVisualStyleBackColor = true;
-            this.buttonAttach.Click += new System.EventHandler(this.buttonAttach_Click);
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // treeUsbList
             // 
@@ -70,10 +70,9 @@
             this.treeUsbList.NodeIndent = 19;
             this.treeUsbList.RootAlwaysExpanded = false;
             this.treeUsbList.ShowCheckboxes = false;
-            this.treeUsbList.ShowDescription = true;
+            this.treeUsbList.ShowDescription = false;
             this.treeUsbList.ShowImages = false;
             this.treeUsbList.ShowRootLines = true;
-            this.treeUsbList.SelectedIndexChanged += new System.EventHandler(this.treeUsbList_SelectedIndexChanged);
             // 
             // labelNote
             // 

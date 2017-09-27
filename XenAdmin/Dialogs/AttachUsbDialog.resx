@@ -220,13 +220,13 @@
     <value>3, 10</value>
   </data>
   <data name="labelNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 15</value>
+    <value>320, 15</value>
   </data>
   <data name="labelNote.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="labelNote.Text" xml:space="preserve">
-    <value>Select a device to pass through from the list below.</value>
+    <value>Select a device to be passed through to this virtual machine</value>
   </data>
   <data name="&gt;&gt;labelNote.Name" xml:space="preserve">
     <value>labelNote</value>
@@ -328,7 +328,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 283</value>
+    <value>3, 293</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>371, 29</value>
@@ -373,7 +373,10 @@
     <value>TopLeft</value>
   </data>
   <data name="labelWarningLine3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 62</value>
+    <value>3, 72</value>
+  </data>
+  <data name="labelWarningLine3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 5, 3, 0</value>
   </data>
   <data name="labelWarningLine3.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 45</value>
@@ -403,7 +406,10 @@
     <value>TopLeft</value>
   </data>
   <data name="labelWarningLine2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
+    <value>3, 37</value>
+  </data>
+  <data name="labelWarningLine2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 5, 3, 0</value>
   </data>
   <data name="labelWarningLine2.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 30</value>
@@ -439,7 +445,7 @@
     <value>4</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 107</value>
+    <value>342, 117</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -472,7 +478,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>371, 113</value>
+    <value>371, 123</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -505,7 +511,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 315</value>
+    <value>377, 325</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -532,7 +538,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>377, 315</value>
+    <value>377, 325</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>

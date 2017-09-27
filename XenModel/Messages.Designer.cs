@@ -10926,51 +10926,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a device to pass through from the list below..
-        /// </summary>
-        public static string DIALOG_USB_ATTACH_NOTE {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_ATTACH_NOTE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Attach USB.
-        /// </summary>
-        public static string DIALOG_USB_ATTACH_TITLE {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_ATTACH_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Plugging in untrustworthy USB devices to your computer may put your computer at risk..
-        /// </summary>
-        public static string DIALOG_USB_ATTACH_WARNING_LINE1 {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_ATTACH_WARNING_LINE1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to USB devices with modifiable behaviour should only be assigned to trustworthy guest VMs..
-        /// </summary>
-        public static string DIALOG_USB_ATTACH_WARNING_LINE2 {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_ATTACH_WARNING_LINE2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A major component update of VM will be performed the first time when a USB device is passed through to it, this update is irreversible!.
-        /// </summary>
-        public static string DIALOG_USB_ATTACH_WARNING_LINE3 {
-            get {
-                return ResourceManager.GetString("DIALOG_USB_ATTACH_WARNING_LINE3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Disable passthrough.
         /// </summary>
         public static string DIALOG_USB_USAGE_DISABLE_PASSTHROUGH {
@@ -10989,7 +10944,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure that you want to enable passthrough on this device?.
+        ///   Looks up a localized string similar to Are you sure that you want to enable passthrough on this device? This will allow this device to be passed through to virtual machines..
         /// </summary>
         public static string DIALOG_USB_USAGE_NOTE_ALLOW {
             get {
@@ -34689,6 +34644,15 @@ namespace XenAdmin {
         public static string USB {
             get {
                 return ResourceManager.GetString("USB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB devices.
+        /// </summary>
+        public static string USB_DEVICES {
+            get {
+                return ResourceManager.GetString("USB_DEVICES", resourceCulture);
             }
         }
         

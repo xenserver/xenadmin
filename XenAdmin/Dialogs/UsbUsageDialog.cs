@@ -43,10 +43,10 @@ namespace XenAdmin.Dialogs
         {
             _pusb = pusb;
             InitializeComponent();
-            refreshControls();
+            RefreshControls();
         }
 
-        private void refreshControls()
+        private void RefreshControls()
         {
             if (_pusb.passthrough_enabled)
             {
@@ -62,18 +62,6 @@ namespace XenAdmin.Dialogs
                 labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_ALLOW;
                 buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_ENABLE;
             }
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            Close();
         }
     }
 }

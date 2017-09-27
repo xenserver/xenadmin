@@ -118,13 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanelBase.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanelBase.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="tableLayoutPanelBase.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -152,15 +145,19 @@
   <data name="columnVirtualMachine.HeaderText" xml:space="preserve">
     <value>Virtual machine</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dataGridViewUsbList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dataGridViewUsbList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 24</value>
+  </data>
+  <data name="dataGridViewUsbList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 12</value>
   </data>
   <data name="dataGridViewUsbList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 204</value>
+    <value>894, 265</value>
   </data>
   <data name="dataGridViewUsbList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -176,12 +173,6 @@
   </data>
   <data name="&gt;&gt;dataGridViewUsbList.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="flowLayoutPanelButtons.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="flowLayoutPanelButtons.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
   </data>
   <data name="buttonPassthrough.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -214,10 +205,10 @@
     <value>Fill</value>
   </data>
   <data name="flowLayoutPanelButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 213</value>
+    <value>3, 304</value>
   </data>
   <data name="flowLayoutPanelButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>729, 29</value>
+    <value>894, 29</value>
   </data>
   <data name="flowLayoutPanelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -234,17 +225,50 @@
   <data name="&gt;&gt;flowLayoutPanelButtons.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="labelGridTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelGridTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="labelGridTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelGridTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 21</value>
+  </data>
+  <data name="labelGridTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelGridTitle.Text" xml:space="preserve">
+    <value>labelGridTitle</value>
+  </data>
+  <data name="&gt;&gt;labelGridTitle.Name" xml:space="preserve">
+    <value>labelGridTitle</value>
+  </data>
+  <data name="&gt;&gt;labelGridTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelGridTitle.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBase</value>
+  </data>
+  <data name="&gt;&gt;labelGridTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="tableLayoutPanelBase.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanelBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
+  <data name="tableLayoutPanelBase.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>900, 400</value>
+  </data>
   <data name="tableLayoutPanelBase.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tableLayoutPanelBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>735, 245</value>
+    <value>900, 336</value>
   </data>
   <data name="tableLayoutPanelBase.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -262,16 +286,13 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelBase.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dataGridViewUsbList" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanelButtons" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="Percent,100,Absolute,35,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dataGridViewUsbList" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutPanelButtons" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelGridTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,Absolute,35" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="pageContainerPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 78</value>
   </data>
-  <data name="pageContainerPanel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>820, 280</value>
-  </data>
   <data name="pageContainerPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 265</value>
+    <value>920, 356</value>
   </data>
   <data name="&gt;&gt;pageContainerPanel.Name" xml:space="preserve">
     <value>pageContainerPanel</value>
@@ -295,7 +316,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 343</value>
+    <value>920, 434</value>
   </data>
   <data name="&gt;&gt;columnLocation.Name" xml:space="preserve">
     <value>columnLocation</value>

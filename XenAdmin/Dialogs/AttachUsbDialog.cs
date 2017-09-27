@@ -46,14 +46,7 @@ namespace XenAdmin.Dialogs
 
             InitializeComponent();
 
-            Text = Messages.DIALOG_USB_ATTACH_TITLE;
-            labelNote.Text = Messages.DIALOG_USB_ATTACH_NOTE;
-            labelWarningLine1.Text = Messages.DIALOG_USB_ATTACH_WARNING_LINE1;
-            labelWarningLine2.Text = Messages.DIALOG_USB_ATTACH_WARNING_LINE2;
-            labelWarningLine3.Text = Messages.DIALOG_USB_ATTACH_WARNING_LINE3;
-
             BuildList();
-            treeUsbList_SelectedIndexChanged(null, null);
         }
 
         private void BuildList()
@@ -82,22 +75,6 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void treeUsbList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void buttonAttach_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
-            Close();
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            Close();
-        }
-
         private class HostItem : CustomTreeNode
         {
             private Host _host;
@@ -106,8 +83,6 @@ namespace XenAdmin.Dialogs
             {
                 _host = host;
                 Text = host.name_label;
-                Description = null;
-                Image = Images.GetImage16For(Images.GetIconFor(_host));
             }
         }
 
@@ -118,9 +93,7 @@ namespace XenAdmin.Dialogs
             public UsbItem(PUSB pusb) :base(true)
             {
                 _pusb = pusb;
-                Text = String.Format("{0} {1}", _pusb.path, _pusb.description);
-                Description = null;
-                Image = null;
+                Text = String.Format(Messages.STRING_SPACE_STRING, _pusb.path, _pusb.description);
             }
         }
     }

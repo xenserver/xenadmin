@@ -49,6 +49,10 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
             Text = Messages.USB;
+            labelGridTitle.Text = Messages.USB_DEVICES;
+
+            buttonPassthrough.Enabled = false;
+            buttonPassthrough.Text = Messages.USBLIST_ENABLE_PASSTHROUGH_HOTKEY;
         }
 
         public IXenObject XenObject
@@ -64,10 +68,9 @@ namespace XenAdmin.TabPages
 
                 UnregisterHandlers();
 
-                if (value != null && value is Host)
+                _host = value as Host;
+                if (_host != null)
                 {
-                    _host = (Host)value;
-
                     _host.PropertyChanged += Host_PropertyChanged;
                     _host.Connection.Cache.RegisterBatchCollectionChanged<PUSB>(UsbCollectionChanged);
                 }
@@ -98,13 +101,10 @@ namespace XenAdmin.TabPages
                 dataGridViewUsbList.Rows.Clear();
 
                 List<PUSB> pusbs = _host.Connection.ResolveAll(_host.PUSBs);
-
-                var HostUsbRowToAdd = new List<HostUsbRow>();
                 foreach (PUSB pusb in pusbs)
                 {
-                    HostUsbRowToAdd.Add(new HostUsbRow(pusb));
+                    dataGridViewUsbList.Rows.Add(new HostUsbRow(pusb));
                 }
-                dataGridViewUsbList.Rows.AddRange(HostUsbRowToAdd.ToArray());
             }
             finally
             {
@@ -127,6 +127,8 @@ namespace XenAdmin.TabPages
 
         public override void PageHidden()
         {
+            UnregisterHandlers();
+
             base.PageHidden();
         }
 
@@ -144,8 +146,9 @@ namespace XenAdmin.TabPages
         {
             foreach (DataGridViewExRow row in dataGridViewUsbList.Rows)
             {
-                if (row is HostUsbRow)
-                    ((HostUsbRow)row).UpdateDetails();
+                var usbRow = row as HostUsbRow;
+                if (usbRow != null)
+                    usbRow.UpdateDetails();
             }
         }
 
@@ -159,8 +162,9 @@ namespace XenAdmin.TabPages
 
             foreach (DataGridViewExRow row in dataGridViewUsbList.Rows)
             {
-                if (row is HostUsbRow)
-                    ((HostUsbRow)row).DeregisterEvents();
+                var usbRow = row as HostUsbRow;
+                if (usbRow != null)
+                    usbRow.DeregisterEvents();
             }
         }
 
@@ -170,13 +174,13 @@ namespace XenAdmin.TabPages
             selectedRow = null;
             buttonPassthrough.Enabled = false;
 
-            if (dataGridViewUsbList.SelectedRows != null && dataGridViewUsbList.SelectedRows.Count > 0)
+            if (dataGridViewUsbList.SelectedRows.Count > 0)
             {
                 selectedRow = (HostUsbRow)dataGridViewUsbList.SelectedRows[0];
                 buttonPassthrough.Enabled = true;
             }
 
-            if (selectedRow != null && ((HostUsbRow)selectedRow).Pusb.passthrough_enabled)
+            if (selectedRow != null && selectedRow.Pusb.passthrough_enabled)
                 buttonPassthrough.Text = Messages.USBLIST_DISABLE_PASSTHROUGH_HOTKEY;
             else
                 buttonPassthrough.Text = Messages.USBLIST_ENABLE_PASSTHROUGH_HOTKEY;
@@ -186,7 +190,7 @@ namespace XenAdmin.TabPages
         {
             if (selectedRow != null)
             {
-                UsbUsageDialog dialog = new UsbUsageDialog(((HostUsbRow)selectedRow).Pusb);
+                UsbUsageDialog dialog = new UsbUsageDialog(selectedRow.Pusb);
                 dialog.ShowDialog(Program.MainWindow);
             }
         }
@@ -194,6 +198,8 @@ namespace XenAdmin.TabPages
         private class HostUsbRow : DataGridViewExRow
         {
             private PUSB _pusb;
+            private VM _vm;
+
             private DataGridViewTextBoxCell locationCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell descriptionCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell passthroughCell = new DataGridViewTextBoxCell();
@@ -202,6 +208,8 @@ namespace XenAdmin.TabPages
             public HostUsbRow(PUSB pusb)
             {
                 _pusb = pusb;
+                setVm();
+
                 _pusb.PropertyChanged += Pusb_PropertyChanged;
 
                 Cells.AddRange(locationCell,
@@ -209,6 +217,17 @@ namespace XenAdmin.TabPages
                     passthroughCell,
                     vmCell);
                 UpdateDetails();
+            }
+
+            private void setVm()
+            {
+                if (_pusb != null)
+                {
+                    VUSB vusb = _pusb.Connection.Resolve(_pusb.attached);
+                    _vm = vusb == null ? null : _pusb.Connection.Resolve(vusb.VM);
+                    if (_vm != null)
+                        _vm.PropertyChanged += Vm_PropertyChanged;
+                }
             }
 
             public PUSB Pusb
@@ -220,29 +239,33 @@ namespace XenAdmin.TabPages
             {
                 locationCell.Value = _pusb.path;
                 descriptionCell.Value = _pusb.description;
-                passthroughCell.Value = _pusb.passthrough_enabled ? Messages.USB_ENABLED : Messages.USB_DISABLED;
-
-                vmCell.Value = "";
-
-                VUSB vusb = _pusb.Connection.Resolve(_pusb.attached);
-                if (vusb != null)
-                {
-                    VM vm = vusb.Connection.Resolve(vusb.VM);
-                    if (vm != null)
-                    {
-                        vmCell.Value = vm.name_label;
-                    }
-                }
+                passthroughCell.Value = _pusb.passthrough_enabled ? Messages.ENABLED : Messages.DISABLED;
+                vmCell.Value = _vm == null ? "" : _vm.name_label;
             }
 
             public void DeregisterEvents()
             {
                 _pusb.PropertyChanged -= Pusb_PropertyChanged;
+                if (_vm != null)
+                    _vm.PropertyChanged -= Vm_PropertyChanged;
             }
 
             private void Pusb_PropertyChanged(object sender, PropertyChangedEventArgs e)
             {
+                if (String.Compare(e.PropertyName, "attached") == 0)
+                {
+                    if (_vm != null)  // Remove PropertyChanged handler for old VM
+                        _vm.PropertyChanged -= Vm_PropertyChanged;
+
+                    setVm();
+                }
                 UpdateDetails();
+            }
+
+            private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                if (String.Compare(e.PropertyName, "name_label") == 0)
+                    UpdateDetails();
             }
         }
     }
