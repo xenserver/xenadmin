@@ -100,6 +100,11 @@ namespace XenAdmin.Commands
             Execute(selection.AsXenObjects<VM>());
         }
 
+        private bool CbtLicensed(VM vm)
+        {
+            return !Helpers.FeatureForbidden(vm.Connection, Host.RestrictChangedBlockTracking);
+        }
+
         private bool CanExecute(VM vm)
         {
             return vm != null &&
@@ -109,10 +114,9 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            // Can execute criteria: A selection of VMs in the same pool which is Inverness+, where at least one VM having CBT enabled
-            return selection.AllItemsAre<VM>() &&
+            // Can execute criteria: A selection of VMs in the same pool which has CBT feature licensed, where at least one VM having CBT enabled
+            return selection.AllItemsAre<VM>(CbtLicensed) &&
                 selection.GetConnectionOfAllItems() != null &&
-                Helpers.InvernessOrGreater(selection.GetConnectionOfFirstItem()) &&
                 selection.AtLeastOneXenObjectCan<VM>(CanExecute);
         }
 
@@ -141,6 +145,11 @@ namespace XenAdmin.Commands
                 return GetSelection().Count == 1 ? String.Format(Messages.CONFIRM_DISABLE_CBT_VM_TITLE, GetSelection().AsXenObjects<VM>()[0].Name()) :
                                                    Messages.CONFIRM_DISABLE_CBT_VMs_TITLE;
             }
+        }
+
+        protected override string ConfirmationDialogHelpId
+        {
+            get { return "WarningVmDisableChangedBlockTracking"; }
         }
     }
 }
