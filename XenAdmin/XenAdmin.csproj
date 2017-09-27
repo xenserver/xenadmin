@@ -234,6 +234,12 @@
     <Compile Include="Diagnostics\Problems\ProblemWithInformationUrl.cs" />
     <Compile Include="Diagnostics\Problems\SRProblem\UnsupportedStorageLinkSrIsPresentProblem.cs" />
     <Compile Include="Diagnostics\Problems\VMProblem\InvalidVCPUConfiguration.cs" />
+    <Compile Include="Dialogs\AttachUsbDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AttachUsbDialog.Designer.cs">
+      <DependentUpon>AttachUsbDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\EnablePvsReadCachingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -333,6 +339,12 @@
     <Compile Include="Dialogs\UpsellDialog.designer.cs">
       <DependentUpon>UpsellDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\UsbUsageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\UsbUsageDialog.Designer.cs">
+      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -349,6 +361,12 @@
     </Compile>
     <Compile Include="SettingsPanels\SecurityEditPage.Designer.cs">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPanels\USBEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\USBEditPage.Designer.cs">
+      <DependentUpon>USBEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\VMEnlightenmentEditPage.cs">
       <SubType>UserControl</SubType>
@@ -661,6 +679,12 @@
     </Compile>
     <Compile Include="SettingsPanels\HostMultipathPage.Designer.cs">
       <DependentUpon>HostMultipathPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\UsbPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\UsbPage.Designer.cs">
+      <DependentUpon>UsbPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\BallooningWizard.cs">
       <SubType>Form</SubType>
@@ -1497,6 +1521,9 @@
     <EmbeddedResource Include="Controls\XenSearch\QueryPanel.zh-CN.resx">
       <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AttachUsbDialog.resx">
+      <DependentUpon>AttachUsbDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1716,6 +1743,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ReconnectAsDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UsbUsageDialog.resx">
+      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VMDialogs\MoveVMDialog.resx">
       <DependentUpon>MoveVMDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1893,6 +1923,9 @@
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.zh-CN.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\USBEditPage.resx">
+      <DependentUpon>USBEditPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VDISizeLocationPage.resx">
       <DependentUpon>VDISizeLocationPage.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1985,6 +2018,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\PvsPage.zh-CN.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\UsbPage.resx">
+      <DependentUpon>UsbPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.resx">
       <SubType>Designer</SubType>
@@ -6851,7 +6887,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

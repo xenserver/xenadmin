@@ -368,6 +368,7 @@
     <Compile Include="XenAPI\pool_allowed_operations.cs" />
     <Compile Include="XenAPI\Pool_update.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />
+    <Compile Include="XenAPI\PUSB.cs" />
     <Compile Include="XenAPI\PVS_cache_storage.cs" />
     <Compile Include="XenAPI\PVS_proxy.cs" />
     <Compile Include="XenAPI\pvs_proxy_status.cs" />
@@ -377,6 +378,7 @@
     <Compile Include="XenAPI\sdn_controller_protocol.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
+    <Compile Include="XenAPI\USB_group.cs" />
     <Compile Include="XenAPI\VGPU.cs" />
     <Compile Include="XenAPI\VGPU_type.cs" />
     <Compile Include="XenAPI\vgpu_type_implementation.cs" />
@@ -388,6 +390,8 @@
     <Compile Include="XenAPI\vmss_type.cs" />
     <Compile Include="XenAPI\VM_appliance.cs" />
     <Compile Include="XenAPI\vm_appliance_operation.cs" />
+    <Compile Include="XenAPI\VUSB.cs" />
+    <Compile Include="XenAPI\vusb_operations.cs" />
     <Compile Include="XenSearch\Common.cs" />
     <Compile Include="XenSearch\GroupAlg.cs" />
     <Compile Include="XenSearch\GroupingTypes.cs" />

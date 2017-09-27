@@ -3904,6 +3904,24 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>Scanning for free device positions</value>
   </data>
+  <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
+    <value>Disable passthrough</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
+    <value>Enable passthrough</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
+    <value>Are you sure that you want to enable passthrough on this device? This will allow this device to be passed through to virtual machines.</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
+    <value>Are you sure that you want to disable passthrough on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
+    <value>&amp;Yes, Disable passthrough</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_ENABLE" xml:space="preserve">
+    <value>&amp;Yes, Enable passthrough</value>
+  </data>
   <data name="DISABLE" xml:space="preserve">
     <value>Disa&amp;ble</value>
   </data>
@@ -11990,6 +12008,30 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="URI_REGEX" xml:space="preserve">
     <value>^(http|https|file|ftp)://*</value>
+  </data>
+  <data name="USB" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="USBLIST_DISABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>&amp;Disable passthrough</value>
+  </data>
+  <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>&amp;Enable passthrough</value>
+  </data>
+  <data name="USB_DEVICES" xml:space="preserve">
+    <value>USB devices</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
+    <value>1 device attached</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_MULTIPLE_DEVICES" xml:space="preserve">
+    <value>{0} devices attached</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_NODEVICES" xml:space="preserve">
+    <value>No devices attached</value>
+  </data>
+  <data name="USB_EDIT_TEXT" xml:space="preserve">
+    <value>USB</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>[XenCenter] was unable to authorize the action as {0}. See the application log files for more information.</value>

@@ -78,6 +78,7 @@ namespace XenAdmin.Dialogs
         private Page_CloudConfigParameters CloudConfigParametersPage;
         private SecurityEditPage SecurityEditPage;
         private LivePatchingEditPage LivePatchingEditPage;
+        private USBEditPage usbEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -148,6 +149,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(VCpuMemoryEditPage = new CPUMemoryEditPage());
                     ShowTab(StartupOptionsEditPage = new BootOptionsEditPage());
                     ShowTab(VMHAEditPage = new VMHAEditPage {VerticalTabs = verticalTabs});
+                    ShowTab(usbEditPage = new USBEditPage());
                 }
 
                 if (is_vm || is_host || is_sr)

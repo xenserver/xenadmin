@@ -73,6 +73,7 @@ namespace XenAPI
             List<XenRef<Console>> consoles,
             List<XenRef<VIF>> VIFs,
             List<XenRef<VBD>> VBDs,
+            List<XenRef<VUSB>> VUSBs,
             List<XenRef<Crashdump>> crash_dumps,
             List<XenRef<VTPM>> VTPMs,
             string PV_bootloader,
@@ -156,6 +157,7 @@ namespace XenAPI
             this.consoles = consoles;
             this.VIFs = VIFs;
             this.VBDs = VBDs;
+            this.VUSBs = VUSBs;
             this.crash_dumps = crash_dumps;
             this.VTPMs = VTPMs;
             this.PV_bootloader = PV_bootloader;
@@ -251,6 +253,7 @@ namespace XenAPI
             consoles = update.consoles;
             VIFs = update.VIFs;
             VBDs = update.VBDs;
+            VUSBs = update.VUSBs;
             crash_dumps = update.crash_dumps;
             VTPMs = update.VTPMs;
             PV_bootloader = update.PV_bootloader;
@@ -337,6 +340,7 @@ namespace XenAPI
             consoles = proxy.consoles == null ? null : XenRef<Console>.Create(proxy.consoles);
             VIFs = proxy.VIFs == null ? null : XenRef<VIF>.Create(proxy.VIFs);
             VBDs = proxy.VBDs == null ? null : XenRef<VBD>.Create(proxy.VBDs);
+            VUSBs = proxy.VUSBs == null ? null : XenRef<VUSB>.Create(proxy.VUSBs);
             crash_dumps = proxy.crash_dumps == null ? null : XenRef<Crashdump>.Create(proxy.crash_dumps);
             VTPMs = proxy.VTPMs == null ? null : XenRef<VTPM>.Create(proxy.VTPMs);
             PV_bootloader = proxy.PV_bootloader == null ? null : (string)proxy.PV_bootloader;
@@ -424,6 +428,7 @@ namespace XenAPI
             result_.consoles = (consoles != null) ? Helper.RefListToStringArray(consoles) : new string[] {};
             result_.VIFs = (VIFs != null) ? Helper.RefListToStringArray(VIFs) : new string[] {};
             result_.VBDs = (VBDs != null) ? Helper.RefListToStringArray(VBDs) : new string[] {};
+            result_.VUSBs = (VUSBs != null) ? Helper.RefListToStringArray(VUSBs) : new string[] {};
             result_.crash_dumps = (crash_dumps != null) ? Helper.RefListToStringArray(crash_dumps) : new string[] {};
             result_.VTPMs = (VTPMs != null) ? Helper.RefListToStringArray(VTPMs) : new string[] {};
             result_.PV_bootloader = PV_bootloader ?? "";
@@ -515,6 +520,7 @@ namespace XenAPI
             consoles = Marshalling.ParseSetRef<Console>(table, "consoles");
             VIFs = Marshalling.ParseSetRef<VIF>(table, "VIFs");
             VBDs = Marshalling.ParseSetRef<VBD>(table, "VBDs");
+            VUSBs = Marshalling.ParseSetRef<VUSB>(table, "VUSBs");
             crash_dumps = Marshalling.ParseSetRef<Crashdump>(table, "crash_dumps");
             VTPMs = Marshalling.ParseSetRef<VTPM>(table, "VTPMs");
             PV_bootloader = Marshalling.ParseString(table, "PV_bootloader");
@@ -608,6 +614,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._consoles, other._consoles) &&
                 Helper.AreEqual2(this._VIFs, other._VIFs) &&
                 Helper.AreEqual2(this._VBDs, other._VBDs) &&
+                Helper.AreEqual2(this._VUSBs, other._VUSBs) &&
                 Helper.AreEqual2(this._crash_dumps, other._crash_dumps) &&
                 Helper.AreEqual2(this._VTPMs, other._VTPMs) &&
                 Helper.AreEqual2(this._PV_bootloader, other._PV_bootloader) &&
@@ -1220,6 +1227,17 @@ namespace XenAPI
         public static List<XenRef<VBD>> get_VBDs(Session session, string _vm)
         {
             return XenRef<VBD>.Create(session.proxy.vm_get_vbds(session.uuid, _vm ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the VUSBs field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static List<XenRef<VUSB>> get_VUSBs(Session session, string _vm)
+        {
+            return XenRef<VUSB>.Create(session.proxy.vm_get_vusbs(session.uuid, (_vm != null) ? _vm : "").parse());
         }
 
         /// <summary>
@@ -4501,6 +4519,24 @@ namespace XenAPI
             }
         }
         private List<XenRef<VBD>> _VBDs;
+
+        /// <summary>
+        /// vitual usb devices
+        /// </summary>
+        public virtual List<XenRef<VUSB>> VUSBs
+        {
+            get { return _VUSBs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VUSBs))
+                {
+                    _VUSBs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VUSBs");
+                }
+            }
+        }
+        private List<XenRef<VUSB>> _VUSBs;
 
         /// <summary>
         /// crash dumps associated with this VM
