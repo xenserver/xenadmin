@@ -3834,7 +3834,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed block tracking is disabled for virtual disk {0} due to inconsistent metadata. To continue using changed block tracking with the virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
+        ///   Looks up a localized string similar to Changed block tracking has been disabled for virtual disk {0} due to inconsistent metadata. To continue using changed block tracking with this virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
         /// </summary>
         public static string Message_body_vdi_cbt_metadata_inconsistent {
             get {
@@ -3843,7 +3843,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed block tracking is disabled for virtual disk {0} due to resizing failure. To continue using changed block tracking with the virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
+        ///   Looks up a localized string similar to Changed block tracking has been disabled for virtual disk {0} due to a resizing failure. To continue using changed block tracking with this virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
         /// </summary>
         public static string Message_body_vdi_cbt_resize_failed {
             get {
@@ -3852,7 +3852,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed block tracking is disabled for virtual disk {0} due to snapshot failure. To continue using changed block tracking with the virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
+        ///   Looks up a localized string similar to Changed block tracking has been disabled for virtual disk {0} due to a snapshot failure. To continue using changed block tracking with this virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up..
         /// </summary>
         public static string Message_body_vdi_cbt_snapshot_failed {
             get {
@@ -4626,7 +4626,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed block tracking disabled due to metadata inconsistent.
+        ///   Looks up a localized string similar to Changed block tracking disabled due to inconsistent metadata.
         /// </summary>
         public static string Message_name_vdi_cbt_metadata_inconsistent {
             get {
@@ -4635,7 +4635,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed block tracking disabled due to resizing failure.
+        ///   Looks up a localized string similar to Changed block tracking disabled due to a virtual disk resizing failure.
         /// </summary>
         public static string Message_name_vdi_cbt_resize_failed {
             get {
@@ -4644,7 +4644,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changed block tracking disabled due to snapshot failure.
+        ///   Looks up a localized string similar to Changed block tracking disabled due to a snapshot failure.
         /// </summary>
         public static string Message_name_vdi_cbt_snapshot_failed {
             get {
