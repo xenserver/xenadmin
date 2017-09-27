@@ -265,7 +265,7 @@
     <value>152, 22</value>
   </data>
   <data name="byHostToolStripMenuItem.Text" xml:space="preserve">
-    <value>By &amp;Host</value>
+    <value>By &amp;Server</value>
   </data>
   <data name="toolStripDropDownButtonView.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

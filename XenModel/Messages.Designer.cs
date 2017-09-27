@@ -26274,15 +26274,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Patching Status.
-        /// </summary>
-        public static string PATCHING_STATUS {
-            get {
-                return ResourceManager.GetString("PATCHING_STATUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Disable HA until after all the hosts have been rebooted.
         /// </summary>
         public static string PATCHING_WARNING_HA {

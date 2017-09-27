@@ -1318,7 +1318,7 @@ namespace XenAdmin.TabPages
                         else      // host view
                         {
                             stream.WriteLine("{0},{1},{2},{3},{4},{5}", Messages.POOL,
-                                Messages.SERVER, Messages.VERSION, Messages.PATCHING_STATUS,
+                                Messages.SERVER, Messages.VERSION, Messages.STATUS,
                                 Messages.REQUIRED_UPDATES, Messages.INSTALLED_UPDATES);
 
                             if (exportAll)
