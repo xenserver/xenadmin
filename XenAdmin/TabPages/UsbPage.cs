@@ -252,7 +252,7 @@ namespace XenAdmin.TabPages
 
             private void Pusb_PropertyChanged(object sender, PropertyChangedEventArgs e)
             {
-                if (String.Compare(e.PropertyName, "attached") == 0)
+                if (e.PropertyName == "attached")
                 {
                     if (_vm != null)  // Remove PropertyChanged handler for old VM
                         _vm.PropertyChanged -= Vm_PropertyChanged;
@@ -264,7 +264,7 @@ namespace XenAdmin.TabPages
 
             private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
             {
-                if (String.Compare(e.PropertyName, "name_label") == 0)
+                if (e.PropertyName == "name_label")
                     UpdateDetails();
             }
         }

@@ -109,7 +109,6 @@ namespace XenAdmin.SettingsPanels
             if (_vm != null)
             {
                 _vm.PropertyChanged += Vm_PropertyChanged;
-                _vm.Connection.Cache.RegisterBatchCollectionChanged<VUSB>(UsbCollectionChanged);
             }
 
             BuildList();
@@ -169,17 +168,8 @@ namespace XenAdmin.SettingsPanels
 
         void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            foreach (DataGridViewExRow row in dataGridViewUsbList.Rows)
-            {
-                var usbRow = row as VMUsbRow;
-                if (usbRow != null)
-                    usbRow.UpdateDetails();
-            }
-        }
-
-        void UsbCollectionChanged(object sender, EventArgs e)
-        {
-            BuildList();
+            if (e.PropertyName == "VUSBs")
+                BuildList();
         }
 
         private VMUsbRow selectedRow = null;
