@@ -9337,9 +9337,6 @@ Please wait for this operation to complete, then click Next to continue with the
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>Eject any virtual CDs from your VMs</value>
   </data>
-  <data name="PATCHING_STATUS" xml:space="preserve">
-    <value>Patching Status</value>
-  </data>
   <data name="PATCHING_WARNING_HA" xml:space="preserve">
     <value>Disable HA until after all the hosts have been rebooted</value>
   </data>
