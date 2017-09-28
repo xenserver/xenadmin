@@ -25164,6 +25164,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This pool is only licensed for XenApp/XenDesktop workloads.
+        /// </summary>
+        public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server is only licensed for XenApp/XenDesktop workloads.
+        /// </summary>
+        public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Virtual Network Interface - {0}.
         /// </summary>
         public static string NEWVNET_TITLE {

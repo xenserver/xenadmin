@@ -8593,6 +8593,12 @@ Review these settings, then click Previous if you need to change anything. Other
   <data name="NEWVMWIZARD_VGPUPAGE_TITLE" xml:space="preserve">
     <value>Assign a virtual GPU</value>
   </data>
+  <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
+    <value>This pool is only licensed for XenApp/XenDesktop workloads</value>
+  </data>
+  <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
+    <value>This server is only licensed for XenApp/XenDesktop workloads</value>
+  </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
   </data>

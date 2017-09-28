@@ -41,6 +41,7 @@ using XenAdmin.Mappings;
 using XenAdmin.Network;
 using XenAdmin.Wizards.GenericPages;
 using XenAPI;
+using System.Linq;
 
 using XenOvf;
 using XenOvf.Definitions;
@@ -109,6 +110,8 @@ namespace XenAdmin.Wizards.ImportWizard
 
 			m_pageImportSource.OvfModeOnly = ovfModeOnly;
             AddPages(m_pageImportSource, m_pageHost, m_pageStorage, m_pageNetwork, m_pageFinish);
+
+            ShowXenAppXenDesktopWarning(con);
 		}
 
 		#region Override (XenWizardBase) Methods
@@ -714,6 +717,12 @@ namespace XenAdmin.Wizards.ImportWizard
 			                     	});
 
 		}
+
+        private void ShowXenAppXenDesktopWarning(IXenConnection connection)
+        {
+            if (connection.Cache.Hosts.Any(h => h.DesktopFeaturesEnabled() || h.DesktopPlusFeaturesEnabled()))
+                ShowInformationMessage(Helpers.GetPool(connection) != null ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER);
+        }
 
 		#region Nested items
 

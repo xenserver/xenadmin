@@ -112,26 +112,26 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.CellBorderStyle" type="System.Windows.Forms.TableLayoutPanelCellBorderStyle, System.Windows.Forms">
     <value>Single</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="panelTop.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxWizard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxWizard.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -151,7 +151,7 @@
     <value>pictureBoxWizard</value>
   </data>
   <data name="&gt;&gt;pictureBoxWizard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxWizard.Parent" xml:space="preserve">
     <value>panelTop</value>
@@ -187,7 +187,7 @@
     <value>labelWizard</value>
   </data>
   <data name="&gt;&gt;labelWizard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelWizard.Parent" xml:space="preserve">
     <value>panelTop</value>
@@ -247,7 +247,7 @@
     <value>panelTop</value>
   </data>
   <data name="&gt;&gt;panelTop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelTop.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -268,7 +268,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="wizardProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 404</value>
+    <value>188, 402</value>
   </data>
   <data name="wizardProgress.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -298,7 +298,7 @@
     <value>15, 15, 15, 15</value>
   </data>
   <data name="xenTabControlBody.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 331</value>
+    <value>582, 329</value>
   </data>
   <data name="xenTabControlBody.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -367,7 +367,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 398</value>
+    <value>612, 396</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -376,7 +376,7 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -400,7 +400,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>809, 467</value>
+    <value>809, 465</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -409,7 +409,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -436,10 +436,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPrevious.Location" type="System.Drawing.Point, System.Drawing">
-    <value>560, 12</value>
+    <value>560, 13</value>
   </data>
   <data name="buttonPrevious.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 0</value>
+    <value>3, 6, 3, 0</value>
   </data>
   <data name="buttonPrevious.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -454,7 +454,7 @@
     <value>buttonPrevious</value>
   </data>
   <data name="&gt;&gt;buttonPrevious.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPrevious.Parent" xml:space="preserve">
     <value>tableLayoutPanelNavigation</value>
@@ -472,10 +472,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>722, 12</value>
+    <value>722, 13</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 0</value>
+    <value>3, 6, 3, 0</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -490,7 +490,7 @@
     <value>buttonCancel</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>tableLayoutPanelNavigation</value>
@@ -505,7 +505,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="tableLayoutPanelNavigation.ColumnCount" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="buttonNext.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -517,10 +517,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonNext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>641, 12</value>
+    <value>641, 13</value>
   </data>
   <data name="buttonNext.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 3, 0</value>
+    <value>3, 6, 3, 0</value>
   </data>
   <data name="buttonNext.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -535,7 +535,7 @@
     <value>buttonNext</value>
   </data>
   <data name="&gt;&gt;buttonNext.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonNext.Parent" xml:space="preserve">
     <value>tableLayoutPanelNavigation</value>
@@ -543,23 +543,128 @@
   <data name="&gt;&gt;buttonNext.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="labelGeneralInformationMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 0</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>527, 22</value>
+  </data>
+  <data name="labelGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
+    <value>This pool is only licensed for XenApp/XenDesktop workloads</value>
+  </data>
+  <data name="labelGeneralInformationMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomLeft</value>
+  </data>
+  <data name="&gt;&gt;labelGeneralInformationMessage.Name" xml:space="preserve">
+    <value>labelGeneralInformationMessage</value>
+  </data>
+  <data name="&gt;&gt;labelGeneralInformationMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelGeneralInformationMessage.Parent" xml:space="preserve">
+    <value>panelGeneralInformationMessage</value>
+  </data>
+  <data name="&gt;&gt;labelGeneralInformationMessage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAALeSURBVDhPXVNLTxNhFGXFfyBEKCZqCPEVNxBjunRjXBmXJkaLtmAilkQ2uDAkEmNiookkJpLA
+        woXRGKPU8CjP0gcFLKVCQSi09DFtp9N3mWln5ni/gRrq4uT7Mvecc+/97p06ADXQdbn0BA8BrT3uxPne
+        lX1215mckyz2P/+ksJ4wdrXfk/nsTiFVUpAoKghmZSyFJbyZ5dXLT5dTZDTGuDUG7ENLt0sY/B5WcpKC
+        nKSCy4m4924Dd95uYCtVho+XMREQYRjekXQme7JqUjWwDHwLK2lRQUZUIRyqMI/8wY0XXlwfWEP38BY2
+        BAXLcRnWoATDh21RZ3L80AyoJH1HvycfK8hIllQkCLGiikC6gtuv13HrlQfehIT1lAxPUoaLq2BqT8TF
+        nnmOEuspu3NtaC6JcF5BuKDggM5tXsToXAjvrfsYmtyjNyjCRwZeZkKtrMTLePkzpuqM9hVWPhwHIoIk
+        3M8p2M2SAWW/OejFBbMbbT1LmPDF4U/L2CSw0y9UYAuWwLR1beZlwRmRNIM9zUDGDsHiieHMIydOdzlh
+        /c0hkJMpLmM/LxNXxhon4qxphqu70rcaWY5KlF2m8o+CDOPeGJqNDpx6YMf8BocItRejsXKEOI3YT+/S
+        ahzf1Vr4FRURIlGEgozEML0eRWOnHQ2GRTj8HFKHCgSaEpsUOzepAq2FFpNjZmwtjSibApF4QooIc76o
+        Jm64b4N7m0OurCJ/DOFQxkdHUm3qnJ1gU9Bfe7aaDWXKyLAlIgLDgi9SY1CoqBrYogUFCZcez/C0UPqj
+        RTI5LANfQ0qiUKEM1GO2iPYnU2i8O6GhwzyNdKmsiWO5CnpHt6Tmh7axk5tY32KyC8+/BJVIliqhFphR
+        4RjsnqayQ2npWLzAM80/g6qJzrhoae9z5kYWEmqAl3BAbR2ky9hJivjk4lUqO8UyV8U1BlWwvpqNNu13
+        Ptc1y7d1TYbYvckwbWWxWj7q/gKR9BcGNs7ThQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 18</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Name" xml:space="preserve">
+    <value>pictureBoxGeneralInformationMessage</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Parent" xml:space="preserve">
+    <value>panelGeneralInformationMessage</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelGeneralInformationMessage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="panelGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 9</value>
+  </data>
+  <data name="panelGeneralInformationMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 3, 3</value>
+  </data>
+  <data name="panelGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>548, 25</value>
+  </data>
+  <data name="panelGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="panelGeneralInformationMessage.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;panelGeneralInformationMessage.Name" xml:space="preserve">
+    <value>panelGeneralInformationMessage</value>
+  </data>
+  <data name="&gt;&gt;panelGeneralInformationMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelGeneralInformationMessage.Parent" xml:space="preserve">
+    <value>tableLayoutPanelNavigation</value>
+  </data>
+  <data name="&gt;&gt;panelGeneralInformationMessage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="tableLayoutPanelNavigation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
   <data name="tableLayoutPanelNavigation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 467</value>
+    <value>0, 465</value>
   </data>
   <data name="tableLayoutPanelNavigation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanelNavigation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 12, 9, 0</value>
+    <value>0, 6, 9, 0</value>
   </data>
   <data name="tableLayoutPanelNavigation.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanelNavigation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>809, 35</value>
+    <value>809, 37</value>
   </data>
   <data name="tableLayoutPanelNavigation.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -568,7 +673,7 @@
     <value>tableLayoutPanelNavigation</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelNavigation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanelNavigation.Parent" xml:space="preserve">
     <value>$this</value>
@@ -577,9 +682,9 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanelNavigation.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="buttonPrevious" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonNext" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonCancel" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="buttonPrevious" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="buttonNext" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="buttonCancel" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="panelGeneralInformationMessage" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -590,9 +695,6 @@
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -610,6 +712,6 @@
     <value>XenWizardBase</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
