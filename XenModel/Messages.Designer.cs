@@ -20740,6 +20740,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Unlicensed).
+        /// </summary>
+        public static string MAINWINDOW_HEADER_UNLICENSED {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_HEADER_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;High Availability....
         /// </summary>
         public static string MAINWINDOW_HIGH_AVAILABILITY {
@@ -33003,15 +33012,6 @@ namespace XenAdmin {
         public static string UNKNOWN_OBJECT {
             get {
                 return ResourceManager.GetString("UNKNOWN_OBJECT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (Unlicensed).
-        /// </summary>
-        public static string UNLICENSED {
-            get {
-                return ResourceManager.GetString("UNLICENSED", resourceCulture);
             }
         }
         

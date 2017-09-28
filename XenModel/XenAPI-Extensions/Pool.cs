@@ -95,17 +95,11 @@ namespace XenAPI
             return false;
         }
 
-        public bool IsUnlicensedPool
+        public bool IsFreeLicenseOrExpired
         {
             get
             {
-
-                bool unlicensed = true;
-                
-                if (Connection != null && Connection.Cache.Hosts.All(h => Host.GetEdition(h.edition) != Host.Edition.Free && h.LicenseExpiryUTC() > DateTime.UtcNow - h.Connection.ServerTimeOffset))
-                    unlicensed = false;
-                
-                return unlicensed;
+                return Connection.Cache.Hosts.Any(h => h.IsFreeLicenseOrExpired());
             }
         }
 
