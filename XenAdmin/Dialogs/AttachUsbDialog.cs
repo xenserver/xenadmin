@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Dialogs
@@ -43,10 +44,9 @@ namespace XenAdmin.Dialogs
         public AttachUsbDialog(VM vm): base(vm.Connection)
         {
             _vm = vm;
-
             InitializeComponent();
-
             BuildList();
+            treeUsbList_SelectedIndexChanged(null, null);
         }
 
         private void BuildList()
@@ -56,16 +56,31 @@ namespace XenAdmin.Dialogs
             treeUsbList.BeginUpdate();
             try
             {
-                Host[] hosts = _vm.Connection.Cache.Hosts;
-                foreach (Host host in hosts)
+                List<XenRef<Host>> possibleHostRefs = VM.get_possible_hosts(_vm.Connection.Session, _vm.opaque_ref);
+                List<Host> possibleHosts = new List<Host>();
+                foreach (XenRef<Host> possibleHostRef in possibleHostRefs)
                 {
+                    possibleHosts.Add(_vm.Connection.Resolve(possibleHostRef));
+                }
+
+                treeUsbList.BeginUpdate();
+                foreach (Host host in possibleHosts)
+                {
+                    // Add a host node to tree list.
                     HostItem hostNode = new HostItem(host);
                     treeUsbList.AddNode(hostNode);
                     List<PUSB> pusbs = _vm.Connection.ResolveAll(host.PUSBs);
                     foreach (PUSB pusb in pusbs)
                     {
-                        UsbItem usbNode = new UsbItem(pusb);
-                        treeUsbList.AddChildNode(hostNode, usbNode);
+                        // Add a USB in the host to tree list.
+                        // Determin if the USB is valid to attach.
+                        if ((pusb != null) ||
+                            (pusb.passthrough_enabled == true) ||
+                            (pusb.attached == null))
+                        {
+                            UsbItem usbNode = new UsbItem(pusb);
+                            treeUsbList.AddChildNode(hostNode, usbNode);
+                        }
                     }
                 }
             }
@@ -73,6 +88,31 @@ namespace XenAdmin.Dialogs
             {
                 treeUsbList.EndUpdate();
             }
+        }
+
+        private void treeUsbList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UsbItem item = treeUsbList.SelectedItem as UsbItem;
+            if (item != null)
+            {
+                buttonAttach.Enabled = true;
+            }
+            else
+            {
+                buttonAttach.Enabled = false;
+            }
+        }
+
+        private void buttonAttach_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            Close();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            Close();
         }
 
         private class HostItem : CustomTreeNode

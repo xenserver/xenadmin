@@ -54,6 +54,7 @@
             resources.ApplyResources(this.buttonAttach, "buttonAttach");
             this.buttonAttach.Name = "buttonAttach";
             this.buttonAttach.UseVisualStyleBackColor = true;
+            this.buttonAttach.Click += new System.EventHandler(this.buttonAttach_Click);
             // 
             // buttonCancel
             // 
@@ -73,6 +74,7 @@
             this.treeUsbList.ShowDescription = false;
             this.treeUsbList.ShowImages = false;
             this.treeUsbList.ShowRootLines = true;
+            this.treeUsbList.SelectedIndexChanged += new System.EventHandler(this.treeUsbList_SelectedIndexChanged);
             // 
             // labelNote
             // 
