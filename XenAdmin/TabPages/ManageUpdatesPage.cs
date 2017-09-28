@@ -67,6 +67,7 @@ namespace XenAdmin.TabPages
         private List<string> collapsedPoolRowsList = new List<string>();
         private int checksQueue;
         private bool CheckForUpdatesInProgress;
+        private bool CheckForUpdateSucceeded;
         private readonly CollectionChangeEventHandler m_updateCollectionChangedWithInvoke;
 
         public ManageUpdatesPage()
@@ -166,6 +167,7 @@ namespace XenAdmin.TabPages
                     checkForUpdatesNowLink.Enabled = true;
                     checkForUpdatesNowButton.Visible = true;
                     spinningTimer.Stop();
+                    CheckForUpdateSucceeded = succeeded;
 
                     if (succeeded)
                     {
@@ -239,22 +241,33 @@ namespace XenAdmin.TabPages
             {
                 base.OnCellPainting(e);
 
-                if (e.RowIndex >= 0 && Rows[e.RowIndex].Tag is Host)
+                if (e.RowIndex >= 0)
                 {
                     UpdatePageDataGridViewRow row = (UpdatePageDataGridViewRow) Rows[e.RowIndex];
 
-                    // Host in pool
-                    if (row.HasPool && (e.ColumnIndex == row.ExpansionCellIndex ||
-                                        e.ColumnIndex == row.IconCellIndex ||
-                                        e.ColumnIndex == row.PatchingStatusCellIndex))
+                    if (row.Tag is Host)
                     {
-                        e.PaintBackground(e.ClipBounds, true);
-                        e.Handled = true;
+                        // Host in pool
+                        if (row.HasPool && (e.ColumnIndex == row.ExpansionCellIndex ||
+                                            e.ColumnIndex == row.IconCellIndex ||
+                                            e.ColumnIndex == row.PatchingStatusCellIndex))
+                        {
+                            e.PaintBackground(e.ClipBounds, true);
+                            e.Handled = true;
+                        }
+
+                        // Standalone host
+                        else if (!row.HasPool && (e.ColumnIndex == row.ExpansionCellIndex ||
+                                                  (!row.IsFullyPopulated && e.ColumnIndex == row.PatchingStatusCellIndex)))
+                        {
+                            e.PaintBackground(e.ClipBounds, true);
+                            e.Handled = true;
+                        }
                     }
 
-                    // Standalone host
-                    else if (!row.HasPool && e.ColumnIndex == row.ExpansionCellIndex)
+                    else if (row.Tag is Pool && !row.IsFullyPopulated && e.ColumnIndex == row.PatchingStatusCellIndex)
                     {
+                        // Pool row when xml file download not succeeded
                         e.PaintBackground(e.ClipBounds, true);
                         e.Handled = true;
                     }
@@ -283,15 +296,17 @@ namespace XenAdmin.TabPages
             private DataGridViewTextBoxCell _requiredUpdateCell;
             private DataGridViewTextBoxCell _installedUpdateCell;
 
-            public UpdatePageDataGridViewRow(Pool pool)
+            public UpdatePageDataGridViewRow(Pool pool, bool isFullyPopulated)
                 : base(pool)
             {
+                IsFullyPopulated = isFullyPopulated;
                 SetupCells();
             }
 
-            public UpdatePageDataGridViewRow(Host host, bool hasPool)
+            public UpdatePageDataGridViewRow(Host host, bool hasPool, bool isFullyPopulated)
                 : base(host, hasPool)
             {
+                IsFullyPopulated = isFullyPopulated;
                 SetupCells();
             }
 
@@ -319,6 +334,8 @@ namespace XenAdmin.TabPages
             {
                 get { return IsPoolOrStandaloneHost; }
             }
+
+            public bool IsFullyPopulated { get; private set; }
 
             private void SetupCells()
             {
@@ -353,14 +370,21 @@ namespace XenAdmin.TabPages
 
                     _nameCell.Value = pool.Name();
                     _versionCell.Value = master.ProductVersionTextShort();
-                    _requiredUpdateCell.Value = "";
-                    _installedUpdateCell.Value = "";
+                    _requiredUpdateCell.Value = String.Empty;
+                    _installedUpdateCell.Value = String.Empty;
 
-                    var outOfDate = pool.Connection.Cache.Hosts.Any(h => RequiredUpdatesForHost(h).Length > 0);
-                    _patchingStatusCell.Value = outOfDate
-                        ? Properties.Resources._000_error_h32bit_16
-                        : Properties.Resources._000_Tick_h32bit_16;
-                    _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
+                    if (IsFullyPopulated)
+                    {
+                        var outOfDate = pool.Connection.Cache.Hosts.Any(h => RequiredUpdatesForHost(h).Length > 0);
+                        _patchingStatusCell.Value = outOfDate
+                            ? Properties.Resources._000_error_h32bit_16
+                            : Properties.Resources._000_Tick_h32bit_16;
+                        _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
+                    }
+                    else
+                    {
+                        _statusCell.Value = String.Empty;
+                    }
                 }
                 
                 else
@@ -377,22 +401,32 @@ namespace XenAdmin.TabPages
                         if (_hasPool && nc != null) // host in pool
                         {
                             nc.Image = Images.GetImage16For(host);
-                            _statusCell.Value = "";
+                            _statusCell.Value = String.Empty;
                         }
                         else if (!_hasPool && nc != null) // standalone host
                         {
                             _poolIconCell.Value = Images.GetImage16For(host);
                             nc.Image = null;
-                            _patchingStatusCell.Value = outOfDate
-                                ? Properties.Resources._000_error_h32bit_16
-                                : Properties.Resources._000_Tick_h32bit_16;
-                            _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
+                            if (IsFullyPopulated)
+                            {
+                                _patchingStatusCell.Value = outOfDate
+                                    ? Properties.Resources._000_error_h32bit_16
+                                    : Properties.Resources._000_Tick_h32bit_16;
+                                _statusCell.Value = outOfDate ? Messages.NOT_UPDATED : Messages.UPDATED;
+                            }
+                            else
+                            {
+                                _statusCell.Value = String.Empty;
+                            }
                         }
 
                         _nameCell.Value = host.Name();
                         _versionCell.Value = host.ProductVersionTextShort();
-                        _requiredUpdateCell.Value = hostRequired;
                         _installedUpdateCell.Value = hostInstalled;
+                        if (IsFullyPopulated)
+                            _requiredUpdateCell.Value = hostRequired;
+                        else
+                            _requiredUpdateCell.Value = String.Empty;
                     }
                 }
             }
@@ -484,7 +518,7 @@ namespace XenAdmin.TabPages
 
                     if (pool != null)          // pool row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool);
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool, CheckForUpdateSucceeded);
                         var hostUuidList = new List<string>();
 
                         foreach (Host h in c.Cache.Hosts)
@@ -499,7 +533,7 @@ namespace XenAdmin.TabPages
                     Array.Sort(hosts);
                     foreach (Host h in hosts)       // host row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null);
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null, CheckForUpdateSucceeded);
 
                         // add row based on server filter status
                         if (!toolStripDropDownButtonServerFilter.HideByLocation(h.uuid))
@@ -735,12 +769,18 @@ namespace XenAdmin.TabPages
             else
             {
                 toolStripButtonExportAll.Enabled = true;
-                toolStripButtonUpdate.ToolTipText = "";
+                toolStripButtonUpdate.ToolTipText = String.Empty;
                 var connectionList = ConnectionsManager.XenConnectionsCopy;
 
                 if (!connectionList.Any(xenConnection => xenConnection.IsConnected))
                 {
                     toolStripButtonUpdate.Enabled = toolStripButtonExportAll.Enabled = false;
+                    return;
+                }
+
+                if (!CheckForUpdateSucceeded)
+                {
+                    toolStripButtonUpdate.Enabled = true;
                     return;
                 }
 
@@ -1361,9 +1401,11 @@ namespace XenAdmin.TabPages
             Program.Invoke(Program.MainWindow, delegate
             {
                 pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
-                requiredUpdates = RequiredUpdatesForHost(host);
+                requiredUpdates = CheckForUpdateSucceeded ? RequiredUpdatesForHost(host) : String.Empty;
                 installedUpdates = InstalledUpdatesForHost(host);
-                patchingStatus = requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED;
+                patchingStatus = CheckForUpdateSucceeded
+                    ? (requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED)
+                    : String.Empty;
             });
 
             return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"",
