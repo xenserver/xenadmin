@@ -25461,6 +25461,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The VM has one or more virtual USBs. Restart cannot be guaranteed..
+        /// </summary>
+        public static string NOT_AGILE_VM_HAS_VUSB {
+            get {
+                return ResourceManager.GetString("NOT_AGILE_VM_HAS_VUSB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not applied.
         /// </summary>
         public static string NOT_APPLIED {

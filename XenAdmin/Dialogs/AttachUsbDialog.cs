@@ -56,6 +56,12 @@ namespace XenAdmin.Dialogs
             treeUsbList.BeginUpdate();
             try
             {
+                VM.HA_Restart_Priority SelectedPriority = _vm.HARestartPriority();
+                Pool pool = Helpers.GetPool(_vm.Connection);
+                // Check if HA was enabled on pool and Restart priority was set on VM.
+                bool haEnabled = (pool != null &&
+                    pool.ha_enabled &&
+                    VM.HaPriorityIsRestart(_vm.Connection, SelectedPriority));
                 List<XenRef<Host>> possibleHostRefs = VM.get_possible_hosts(_vm.Connection.Session, _vm.opaque_ref);
                 List<Host> possibleHosts = new List<Host>();
                 foreach (XenRef<Host> possibleHostRef in possibleHostRefs)
@@ -74,8 +80,9 @@ namespace XenAdmin.Dialogs
                     {
                         // Add a USB in the host to tree list.
                         // Determin if the USB is valid to attach.
-                        if ((pusb != null) ||
-                            (pusb.passthrough_enabled == true) ||
+                        if ((haEnabled == false) &&
+                            (pusb != null) && 
+                            (pusb.passthrough_enabled == true) &&
                             (pusb.attached == null))
                         {
                             UsbItem usbNode = new UsbItem(pusb);
