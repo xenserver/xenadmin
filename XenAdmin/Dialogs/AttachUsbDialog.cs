@@ -69,7 +69,6 @@ namespace XenAdmin.Dialogs
                     possibleHosts.Add(_vm.Connection.Resolve(possibleHostRef));
                 }
 
-                treeUsbList.BeginUpdate();
                 foreach (Host host in possibleHosts)
                 {
                     // Add a host node to tree list.
