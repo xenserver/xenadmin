@@ -2907,7 +2907,7 @@ namespace XenAdmin
             {
                 var host = xenObject as Host;
 
-                if (host.Connection != null && host.Connection.IsConnected && host.Connection.CacheIsPopulated)
+                if (host.Connection != null && host.Connection.CacheIsPopulated)
                 {
                     if (host.IsFreeLicenseOrExpired())
                     {
@@ -3019,10 +3019,9 @@ namespace XenAdmin
 
         private void navigationPane_NavigationModeChanged(NavigationPane.NavigationMode mode)
         {
-            ResetLicenseStatusTitleLabel();
-
             if (mode == NavigationPane.NavigationMode.Notifications)
             {
+                ResetLicenseStatusTitleLabel();
                 TheTabControl.Visible = false;
             }
             else
