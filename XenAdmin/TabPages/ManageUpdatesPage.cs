@@ -39,7 +39,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenAdmin.Controls;
@@ -75,7 +74,6 @@ namespace XenAdmin.TabPages
             InitializeProgressControls();
             tableLayoutPanel1.Visible = false;
             UpdateButtonEnablement();
-            dataGridViewUpdates.Sort(ColumnDate, ListSortDirection.Descending);
             informationLabel.Click += informationLabel_Click;
             m_updateCollectionChangedWithInvoke = Program.ProgramInvokeHandler(UpdatesCollectionChanged);
             Updates.RegisterCollectionChanged(m_updateCollectionChangedWithInvoke);
@@ -584,19 +582,8 @@ namespace XenAdmin.TabPages
                 updates.RemoveAll(FilterAlert);
                 tableLayoutPanel3.Visible = false;
                 ToggleWarningVisibility(SomeButNotAllUpdatesDisabled());
-
-                if (dataGridViewUpdates.SortedColumn != null)
-                {
-                    if (dataGridViewUpdates.SortedColumn.Index == ColumnMessage.Index)
-                        updates.Sort(Alert.CompareOnTitle);
-                    else if (dataGridViewUpdates.SortedColumn.Index == ColumnDate.Index)
-                        updates.Sort(Alert.CompareOnDate);
-                    else if (dataGridViewUpdates.SortedColumn.Index == ColumnLocation.Index)
-                        updates.Sort(Alert.CompareOnAppliesTo);
-
-                    if (dataGridViewUpdates.SortOrder == SortOrder.Descending)
-                        updates.Reverse();
-                }
+                
+                sortUpdates(updates);
 
                 var rowList = new List<DataGridViewRow>();
 
@@ -829,11 +816,20 @@ namespace XenAdmin.TabPages
                 items.Add(dismiss);
             }
 
-            if (patchAlert != null && patchAlert.CanApply && !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl))
+            if (patchAlert != null && patchAlert.CanApply && !string.IsNullOrEmpty(patchAlert.Patch.PatchUrl) && patchAlert.RequiredXenCenterVersion == null)
             {
                 var download = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_AND_INSTALL);
                 download.Click += ToolStripMenuItemDownload_Click;
                 items.Add(download);
+            }
+
+            var updateAlert = alert as XenServerUpdateAlert;
+
+            if (updateAlert != null && updateAlert.RequiredXenCenterVersion != null)
+            {
+                var downloadNewXenCenter = new ToolStripMenuItem(Messages.UPDATES_DOWNLOAD_REQUIRED_XENCENTER);
+                downloadNewXenCenter.Click += ToolStripMenuItemDownloadNewXenCenter_Click;
+                items.Add(downloadNewXenCenter);
             }
 
             if (!string.IsNullOrEmpty(alert.WebPageLabel))
@@ -1089,6 +1085,24 @@ namespace XenAdmin.TabPages
                     dlg.ShowDialog(this);
                 }
             }
+        }
+
+        private void ToolStripMenuItemDownloadNewXenCenter_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow clickedRow = FindAlertRow(sender as ToolStripMenuItem);
+            if (clickedRow == null)
+                return;
+
+            XenServerUpdateAlert updateAlert = (XenServerUpdateAlert)clickedRow.Tag;
+
+            if (updateAlert == null || updateAlert.RequiredXenCenterVersion == null)
+                return;
+
+            string xenCenterUrl = updateAlert.RequiredXenCenterVersion.Url;
+            if (string.IsNullOrEmpty(xenCenterUrl))
+                return;
+
+            Program.Invoke(Program.MainWindow, () => Program.OpenURL(xenCenterUrl));
         }
 
         private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)
@@ -1395,6 +1409,26 @@ namespace XenAdmin.TabPages
                     dlg.ShowDialog(this);
                 }
             }
+        }
+
+        private void sortUpdates(List<Alert> updatesList)
+        {
+            if (dataGridViewUpdates.SortedColumn != null)
+            {
+                if (dataGridViewUpdates.SortedColumn.Index == ColumnMessage.Index)
+                    updatesList.Sort(Alert.CompareOnTitle);
+                else if (dataGridViewUpdates.SortedColumn.Index == ColumnDate.Index)
+                    updatesList.Sort(Alert.CompareOnDate);
+                else if (dataGridViewUpdates.SortedColumn.Index == ColumnLocation.Index)
+                    updatesList.Sort(Alert.CompareOnAppliesTo);
+
+                if (dataGridViewUpdates.SortOrder == SortOrder.Descending)
+                    updatesList.Reverse();
+            }
+            else
+            {
+                updatesList.Sort(new NewVersionPriorityAlertComparer());
+            }        
         }
         
         private void checkForUpdatesNowButton_Click(object sender, EventArgs e)

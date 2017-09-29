@@ -29,59 +29,39 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
+using XenAPI;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAdmin.Alerts;
 
-namespace XenAdmin.Core
+
+namespace XenAdmin.Diagnostics.Checks
 {
-    public class XenCenterVersion
+    public class XenCenterVersionCheck : Check
     {
-        public Version Version;
-        public string Name;
-        public bool Latest;
-        public bool LatestCr;
-        public string Url;
-        public string Lang;
-        public DateTime TimeStamp;
+        private XenServerVersion _newServerVersion;
 
-        public XenCenterVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp)
+        public XenCenterVersionCheck(XenServerVersion newServerVersion)
+            : base(null)
         {
-            ParseVersion(version_lang);
-            Name = name;
-            Latest = latest;
-            LatestCr = latest_cr;
-            Url = url;
-            DateTime.TryParse(timestamp, out TimeStamp);
+            _newServerVersion = newServerVersion;
+        }
+        
+        protected override Problem RunCheck()
+        {
+            var requiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(_newServerVersion);
+            if (requiredXenCenterVersion == null) 
+                return null;
+            if (_newServerVersion != null) 
+                return new XenCenterVersionProblem(this, requiredXenCenterVersion);
+            else
+                return new XenCenterVersionWarning(this, requiredXenCenterVersion);
         }
 
-        private void ParseVersion(string version_lang)
+        public override string Description
         {
-            string[] bits = version_lang.Split('.');
-            List<string> ver = new List<string>();
-            foreach (string bit in bits)
-            {
-                int num;
-                if (Int32.TryParse(bit, out num))
-                    ver.Add(bit);
-                else
-                    Lang = bit;
-            }
-            Version = new Version(string.Join(".", ver.ToArray()));
-        }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        public string VersionAndLang
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Lang))
-                    return Version.ToString();
-                return string.Format("{0}.{1}", Version.ToString(), Lang);
-            }
+            get { return Messages.XENCENTER_VERSION_CHECK_DESCRIPTION; }
         }
     }
 }

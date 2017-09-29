@@ -4806,7 +4806,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New [XenCenter] Available.
+        ///   Looks up a localized string similar to {0} is now available.
         /// </summary>
         public static string ALERT_NEW_VERSION {
             get {
@@ -6827,6 +6827,15 @@ namespace XenAdmin {
         public static string CHECKING_UPGRADE_HOTFIX_STATUS {
             get {
                 return ResourceManager.GetString("CHECKING_UPGRADE_HOTFIX_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking [XenCenter] version.
+        /// </summary>
+        public static string CHECKING_XENCENTER_VERSION {
+            get {
+                return ResourceManager.GetString("CHECKING_XENCENTER_VERSION", resourceCulture);
             }
         }
         
@@ -23376,6 +23385,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New [XenCenter] version required.
+        /// </summary>
+        public static string NEW_XENCENTER_REQUIRED_INFO {
+            get {
+                return ResourceManager.GetString("NEW_XENCENTER_REQUIRED_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You need to shutdown and then restart the VM before it can access the new disk..
         /// </summary>
         public static string NEWDISKWIZARD_MESSAGE {
@@ -26237,6 +26255,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installation size: {0}.
+        /// </summary>
+        public static string PATCH_INSTALLATION_SIZE {
+            get {
+                return ResourceManager.GetString("PATCH_INSTALLATION_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This version requires [XenCenter] {0} or newer.
+        /// </summary>
+        public static string PATCH_NEEDS_NEW_XENCENTER {
+            get {
+                return ResourceManager.GetString("PATCH_NEEDS_NEW_XENCENTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not found.
         /// </summary>
         public static string PATCH_NOT_FOUND {
@@ -26279,6 +26315,15 @@ namespace XenAdmin {
         public static string PATCHING_WARNING_HA {
             get {
                 return ResourceManager.GetString("PATCHING_WARNING_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ok..
+        /// </summary>
+        public static string PATCHING_WIZARD_CHECK_OK {
+            get {
+                return ResourceManager.GetString("PATCHING_WIZARD_CHECK_OK", resourceCulture);
             }
         }
         
@@ -26824,6 +26869,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Also apply all released updates on the new version.
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Also apply all released updates on the new version (only on pools licensed for automated updates).
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automated updates are not supported on this [XenServer] version.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION {
@@ -26926,6 +26989,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select one or more pools or standalone servers that you want to update to the new version.
+        ///Servers where this update cannot be applied appear disabled in this list..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select one or more pools or standalone servers where you want to apply the selected update.
         ///Servers where this update cannot be applied appear disabled in this list..
         /// </summary>
@@ -26972,11 +27045,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The new version has been installed..
+        /// </summary>
+        public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automated updates have finished..
         /// </summary>
         public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing updates:.
+        /// </summary>
+        public static string PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing new version:.
+        /// </summary>
+        public static string PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE", resourceCulture);
             }
         }
         
@@ -27998,6 +28098,15 @@ namespace XenAdmin {
         public static string PROBLEM_VMPROBLEM_TITLE {
             get {
                 return ResourceManager.GetString("PROBLEM_VMPROBLEM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] version.
+        /// </summary>
+        public static string PROBLEM_XENCENTER_VERSION_TITLE {
+            get {
+                return ResourceManager.GetString("PROBLEM_XENCENTER_VERSION_TITLE", resourceCulture);
             }
         }
         
@@ -33329,6 +33438,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download [XenCenter].
+        /// </summary>
+        public static string UPDATES_DOWNLOAD_REQUIRED_XENCENTER {
+            get {
+                return ResourceManager.GetString("UPDATES_DOWNLOAD_REQUIRED_XENCENTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Install Update.
         /// </summary>
         public static string UPDATES_WIZARD {
@@ -33698,6 +33816,24 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_LOCAL_STORAGE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_LOCAL_STORAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] version {0} or newer is required..
+        /// </summary>
+        public static string UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ensure you have upgraded [XenCenter] before upgrading [XenServer]..
+        /// </summary>
+        public static string UPDATES_WIZARD_NEWER_XENCENTER_WARNING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_NEWER_XENCENTER_WARNING", resourceCulture);
             }
         }
         
@@ -38755,6 +38891,15 @@ namespace XenAdmin {
         public static string XENCENTER_NEWER_AVAILABLE {
             get {
                 return ResourceManager.GetString("XENCENTER_NEWER_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [XenCenter] version check.
+        /// </summary>
+        public static string XENCENTER_VERSION_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("XENCENTER_VERSION_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         
