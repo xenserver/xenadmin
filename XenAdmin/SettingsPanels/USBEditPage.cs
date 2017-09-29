@@ -109,6 +109,7 @@ namespace XenAdmin.SettingsPanels
             if (_vm != null)
             {
                 _vm.PropertyChanged += Vm_PropertyChanged;
+                _vm.Connection.Cache.RegisterBatchCollectionChanged<VUSB>(UsbCollectionChanged);
             }
 
             BuildList();
@@ -176,6 +177,11 @@ namespace XenAdmin.SettingsPanels
                 BuildList();
         }
 
+        void UsbCollectionChanged(object sender, EventArgs e)
+        {
+            BuildList();
+        }
+
         private VMUsbRow selectedRow = null;
         private void dataGridViewUsbList_SelectionChanged(object sender, System.EventArgs e)
         {
@@ -200,7 +206,32 @@ namespace XenAdmin.SettingsPanels
 
         private void buttonDetach_Click(object sender, System.EventArgs e)
         {
-
+            if ((selectedRow != null) && (_vm != null))
+            {
+                bool confirmed = false;
+                Program.Invoke(Program.MainWindow, delegate ()
+                {
+                    using (var dlg = new ThreeButtonDialog(
+                            new ThreeButtonDialog.Details(null, Messages.ACTION_VUSB_DETACH_CONFIRM, Messages.ACTION_VUSB_DETACH),
+                            ThreeButtonDialog.ButtonYes,
+                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                    {
+                        if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes)
+                        {
+                            confirmed = true;
+                        }
+                    }
+                });
+                if (confirmed)
+                {
+                    // Run this stuff off the event thread, since it involves a server call
+                    System.Threading.ThreadPool.QueueUserWorkItem((System.Threading.WaitCallback)delegate (object o)
+                    {
+                        new XenAdmin.Actions.DeleteVUSBAction(selectedRow.Vusb, _vm).RunAsync();
+                    });
+                }
+            }
+            
         }
 
         private class VMUsbRow : DataGridViewExRow
@@ -234,7 +265,7 @@ namespace XenAdmin.SettingsPanels
                 locationCell.Value = pusb.path;
                 descriptionCell.Value = pusb.description;
 
-                attachedCell.Value = (_vusb.attached != null).ToYesNoStringI18n();
+                attachedCell.Value = (_vusb.Connection.Resolve(_vusb.attached) != null).ToYesNoStringI18n();
             }
 
             public void DeregisterEvents()

@@ -2626,6 +2626,60 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to detach USB device..
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_DISABLE_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_DISABLE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB device detached..
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_DISABLED {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detaching USB device {0} from server..
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_DISABLING {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_DISABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to attach USB device..
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_ENABLE_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_ENABLE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB device attached..
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_ENABLED {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaching USB device {0} to server..
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_ENABLING {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_ENABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual disk created.
         /// </summary>
         public static string ACTION_VDI_CREATED {
@@ -3333,6 +3387,78 @@ namespace XenAdmin {
         public static string ACTION_VMS_STARTING_ON_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_VMS_STARTING_ON_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create virtual USB..
+        /// </summary>
+        public static string ACTION_VUSB_CREATE_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_CREATE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual USB created.
+        /// </summary>
+        public static string ACTION_VUSB_CREATED {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating virtual USB &apos;{0}&apos; to VM &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VUSB_CREATING {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_CREATING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete virtual USB..
+        /// </summary>
+        public static string ACTION_VUSB_DELETE_FAILED {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DELETE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual USB deleted.
+        /// </summary>
+        public static string ACTION_VUSB_DELETED {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DELETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting virtual USB &apos;{0}&apos; from VM &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VUSB_DELETING {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DELETING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Virtual USB.
+        /// </summary>
+        public static string ACTION_VUSB_DETACH {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DETACH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to delete virtual USB?.
+        /// </summary>
+        public static string ACTION_VUSB_DETACH_CONFIRM {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DETACH_CONFIRM", resourceCulture);
             }
         }
         

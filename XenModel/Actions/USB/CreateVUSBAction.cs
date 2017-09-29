@@ -30,55 +30,39 @@
  */
 
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using XenAPI;
 
-namespace XenAdmin.Dialogs
+namespace XenAdmin.Actions
 {
-    public partial class UsbUsageDialog : XenDialogBase
+    public class CreateVUSBAction : PureAsyncAction
     {
         private PUSB _pusb;
+        private VM _vm;
+        private Dictionary<string, string> _other_config = null;
 
-        public UsbUsageDialog(PUSB pusb)
+        public CreateVUSBAction(PUSB pusb, VM vm) : 
+            base(pusb.Connection, String.Format(Messages.ACTION_VUSB_CREATING,  pusb.Name(), vm.Name()))
         {
             _pusb = pusb;
-            InitializeComponent();
-            RefreshControls();
+            _vm = vm;
         }
 
-        private void RefreshControls()
+        protected override void Run()
         {
-            if (_pusb.passthrough_enabled)
+            try
             {
-                Text = Messages.DIALOG_USB_USAGE_DISABLE_PASSTHROUGH;
-                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_DENY;
-                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_DISABLE;
-
-                tableLayoutPanelBase.Controls.Remove(tableLayoutPanelWarning);
+                XenRef<VUSB> vusbRef = VUSB.create(Session, _vm.opaque_ref, _pusb.USB_group, _other_config);
             }
-            else
+            catch
             {
-                Text = Messages.DIALOG_USB_USAGE_ENABLE_PASSTHROUGH;
-                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_ALLOW;
-                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_ENABLE;
+                Description = Messages.ACTION_VUSB_CREATE_FAILED;
+                throw;
             }
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            System.Threading.ThreadPool.QueueUserWorkItem((System.Threading.WaitCallback)delegate (object o)
-            {
-                new XenAdmin.Actions.USBPassthrough (_pusb, !_pusb.passthrough_enabled).RunAsync();
-            });
-
-            this.DialogResult = DialogResult.OK;
-            Close();
+            Description = Messages.ACTION_VUSB_CREATED;
         }
     }
 }

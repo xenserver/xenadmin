@@ -79,13 +79,24 @@ namespace XenAdmin.Dialogs
                     {
                         // Add a USB in the host to tree list.
                         // Determin if the USB is valid to attach.
-                        if ((haEnabled == false) &&
-                            (pusb != null) && 
-                            (pusb.passthrough_enabled == true) &&
-                            (pusb.attached == null))
+                        if (pusb != null)
                         {
-                            UsbItem usbNode = new UsbItem(pusb);
-                            treeUsbList.AddChildNode(hostNode, usbNode);
+                            bool attached = false;
+                            USB_group usbGroup = pusb.Connection.Resolve(pusb.USB_group);
+                            if ((usbGroup != null) && 
+                                (usbGroup.VUSBs != null) && 
+                                (usbGroup.VUSBs.Count > 0))
+                                attached = true;
+                            else
+                                attached = false;
+
+                            if ((haEnabled == false) &&
+                                (pusb.passthrough_enabled == true) &&
+                                (attached == false))
+                            {
+                                UsbItem usbNode = new UsbItem(pusb);
+                                treeUsbList.AddChildNode(hostNode, usbNode);
+                            }
                         }
                     }
                 }
@@ -111,6 +122,11 @@ namespace XenAdmin.Dialogs
 
         private void buttonAttach_Click(object sender, EventArgs e)
         {
+            UsbItem item = treeUsbList.SelectedItem as UsbItem;
+            System.Threading.ThreadPool.QueueUserWorkItem((System.Threading.WaitCallback)delegate (object o)
+            {
+                new XenAdmin.Actions.CreateVUSBAction(item._pusb, _vm).RunAsync();
+            });
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
         }
@@ -134,7 +150,7 @@ namespace XenAdmin.Dialogs
 
         private class UsbItem : CustomTreeNode
         {
-            private PUSB _pusb;
+            public PUSB _pusb { get; }
 
             public UsbItem(PUSB pusb) :base(true)
             {

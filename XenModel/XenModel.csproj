@@ -123,6 +123,9 @@
     <Compile Include="Actions\Updates\XenCenterVersion.cs" />
     <Compile Include="Actions\Updates\XenServerPatch.cs" />
     <Compile Include="Actions\Updates\XenServerVersion.cs" />
+    <Compile Include="Actions\USB\CreateVUSBAction.cs" />
+    <Compile Include="Actions\USB\DeleteVUSBAction.cs" />
+    <Compile Include="Actions\USB\USBPassthrough.cs" />
     <Compile Include="Actions\VBD\VbdEditAction.cs" />
     <Compile Include="Actions\VBD\VbdSaveAndPlugAction.cs" />
     <Compile Include="Actions\DR\VdiOpenDatabaseAction.cs" />

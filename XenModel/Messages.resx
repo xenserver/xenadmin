@@ -972,6 +972,24 @@
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>Uploading report to [Citrix] Insight Services</value>
   </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>USB device detached.</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLE_FAILED" xml:space="preserve">
+    <value>Failed to detach USB device.</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLING" xml:space="preserve">
+    <value>Detaching USB device {0} from server.</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>USB device attached.</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLE_FAILED" xml:space="preserve">
+    <value>Failed to attach USB device.</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLING" xml:space="preserve">
+    <value>Attaching USB device {0} to server.</value>
+  </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>Virtual disk created</value>
   </data>
@@ -1208,6 +1226,30 @@
   </data>
   <data name="ACTION_VM_TEMPLATIZING_TITLE" xml:space="preserve">
     <value>Converting VM '{0}' to template</value>
+  </data>
+  <data name="ACTION_VUSB_CREATED" xml:space="preserve">
+    <value>Virtual USB created</value>
+  </data>
+  <data name="ACTION_VUSB_CREATE_FAILED" xml:space="preserve">
+    <value>Failed to create virtual USB.</value>
+  </data>
+  <data name="ACTION_VUSB_CREATING" xml:space="preserve">
+    <value>Creating virtual USB '{0}' to VM '{1}'</value>
+  </data>
+  <data name="ACTION_VUSB_DELETED" xml:space="preserve">
+    <value>Virtual USB deleted</value>
+  </data>
+  <data name="ACTION_VUSB_DELETE_FAILED" xml:space="preserve">
+    <value>Failed to delete virtual USB.</value>
+  </data>
+  <data name="ACTION_VUSB_DELETING" xml:space="preserve">
+    <value>Deleting virtual USB '{0}' from VM '{1}'</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH" xml:space="preserve">
+    <value>Delete Virtual USB</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
+    <value>Are you sure to delete virtual USB?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
     <value>Waiting for slaves to recover...</value>
