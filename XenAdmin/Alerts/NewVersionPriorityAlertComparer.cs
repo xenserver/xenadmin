@@ -31,57 +31,38 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace XenAdmin.Core
+namespace XenAdmin.Alerts
 {
-    public class XenCenterVersion
+    public class NewVersionPriorityAlertComparer : IComparer<Alert>
     {
-        public Version Version;
-        public string Name;
-        public bool Latest;
-        public bool LatestCr;
-        public string Url;
-        public string Lang;
-        public DateTime TimeStamp;
-
-        public XenCenterVersion(string version_lang, string name, bool latest, bool latest_cr, string url, string timestamp)
+        public int Compare(Alert alert1, Alert alert2)
         {
-            ParseVersion(version_lang);
-            Name = name;
-            Latest = latest;
-            LatestCr = latest_cr;
-            Url = url;
-            DateTime.TryParse(timestamp, out TimeStamp);
+            if (alert1 == null || alert2 == null)
+                return 0;
+
+            int sortResult = 0;
+
+            if (IsVersionOrVersionUpdateAlert(alert1) && !IsVersionOrVersionUpdateAlert(alert2))
+                sortResult = 1;
+
+            if (!IsVersionOrVersionUpdateAlert(alert1) && IsVersionOrVersionUpdateAlert(alert2))
+                sortResult = -1;
+
+            if (sortResult == 0)
+                sortResult = Alert.CompareOnDate(alert1, alert2);
+
+            return -sortResult;
         }
 
-        private void ParseVersion(string version_lang)
+        private bool IsVersionOrVersionUpdateAlert(Alert alert)
         {
-            string[] bits = version_lang.Split('.');
-            List<string> ver = new List<string>();
-            foreach (string bit in bits)
-            {
-                int num;
-                if (Int32.TryParse(bit, out num))
-                    ver.Add(bit);
-                else
-                    Lang = bit;
-            }
-            Version = new Version(string.Join(".", ver.ToArray()));
-        }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        public string VersionAndLang
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Lang))
-                    return Version.ToString();
-                return string.Format("{0}.{1}", Version.ToString(), Lang);
-            }
+            return alert is XenServerPatchAlert && (alert as XenServerPatchAlert).ShowAsNewVersion
+                || alert is XenServerVersionAlert
+                || alert is XenCenterUpdateAlert;
         }
     }
 }

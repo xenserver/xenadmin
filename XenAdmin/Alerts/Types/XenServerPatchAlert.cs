@@ -36,6 +36,7 @@ using XenAdmin.Network;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
+using System.Text;
 
 
 namespace XenAdmin.Alerts
@@ -43,7 +44,8 @@ namespace XenAdmin.Alerts
     public class XenServerPatchAlert : XenServerUpdateAlert
     {
         public XenServerPatch Patch;
-
+        public XenServerVersion NewServerVersion;
+       
         /// <summary>
         /// Can we apply this alert. Calling this sets the CannotApplyReason where applicable
         /// </summary>
@@ -83,9 +85,17 @@ namespace XenAdmin.Alerts
             return !host.CanApplyHotfixes();
         }
 
-        public XenServerPatchAlert(XenServerPatch patch)
+        /// <summary>
+        /// Creates a patch alert
+        ///  </summary>
+        /// <param name="patch">The patch</param>
+        /// <param name="newServerVersion">The version that the patch installs, or null if the patch doesn't update the server version</param>
+        public XenServerPatchAlert(XenServerPatch patch, XenServerVersion newServerVersion = null)
         {
             Patch = patch;
+            NewServerVersion = newServerVersion;
+            if (NewServerVersion != null)
+                RequiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(NewServerVersion);
             _priority = patch.Priority;
             _timestamp = Patch.TimeStamp;
         }
@@ -114,15 +124,30 @@ namespace XenAdmin.Alerts
         {
             get
             {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Patch.Description);
                 if (Patch.InstallationSize != 0)
-                    return string.Format(Messages.PATCH_DESCRIPTION_AND_INSTALLATION_SIZE, Patch.Description, Util.DiskSizeString(Patch.InstallationSize));
-                return Patch.Description;
+                {
+                    sb.AppendLine();
+                    sb.AppendFormat(Messages.PATCH_INSTALLATION_SIZE, Util.DiskSizeString(Patch.InstallationSize));
+                }
+                if (RequiredXenCenterVersion != null)
+                {
+                    sb.AppendLine();
+                    sb.AppendFormat(Messages.PATCH_NEEDS_NEW_XENCENTER, RequiredXenCenterVersion.Version);
+                }
+                return sb.ToString();
             }
         }
 
         public override string Name
         {
-            get { return Patch.Name; }
+            get
+            {
+                if (ShowAsNewVersion)
+                    return NewServerVersion.Name; 
+                return Patch.Name;
+            }
         }
 
         public override Action FixLinkAction
@@ -148,7 +173,12 @@ namespace XenAdmin.Alerts
 
         public override string Title
         {
-            get { return string.Format(Messages.NEW_UPDATE_AVAILABLE, Patch.Name); }
+            get
+            {
+                if (ShowAsNewVersion)
+                    return string.Format(Messages.DOWLOAD_LATEST_XS_TITLE, NewServerVersion.Name); 
+                return string.Format(Messages.NEW_UPDATE_AVAILABLE, Patch.Name);
+            }
         }
 
         public override bool IsDismissed()
@@ -184,6 +214,14 @@ namespace XenAdmin.Alerts
                 return string.Equals(Patch.Uuid, ((XenServerPatchAlert)other).Patch.Uuid, StringComparison.OrdinalIgnoreCase);
             }
             return base.Equals(other);
+        }
+
+        public bool ShowAsNewVersion
+        {
+            get
+            {
+                return NewServerVersion != null && !NewServerVersion.PresentAsUpdate;
+            }
         }
     }
 }
