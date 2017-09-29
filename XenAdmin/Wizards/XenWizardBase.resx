@@ -128,10 +128,10 @@
   <data name="panelTop.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxWizard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxWizard.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -572,24 +572,6 @@
   </data>
   <data name="&gt;&gt;labelGeneralInformationMessage.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="pictureBoxGeneralInformationMessage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAALeSURBVDhPXVNLTxNhFGXFfyBEKCZqCPEVNxBjunRjXBmXJkaLtmAilkQ2uDAkEmNiookkJpLA
-        woXRGKPU8CjP0gcFLKVCQSi09DFtp9N3mWln5ni/gRrq4uT7Mvecc+/97p06ADXQdbn0BA8BrT3uxPne
-        lX1215mckyz2P/+ksJ4wdrXfk/nsTiFVUpAoKghmZSyFJbyZ5dXLT5dTZDTGuDUG7ENLt0sY/B5WcpKC
-        nKSCy4m4924Dd95uYCtVho+XMREQYRjekXQme7JqUjWwDHwLK2lRQUZUIRyqMI/8wY0XXlwfWEP38BY2
-        BAXLcRnWoATDh21RZ3L80AyoJH1HvycfK8hIllQkCLGiikC6gtuv13HrlQfehIT1lAxPUoaLq2BqT8TF
-        nnmOEuspu3NtaC6JcF5BuKDggM5tXsToXAjvrfsYmtyjNyjCRwZeZkKtrMTLePkzpuqM9hVWPhwHIoIk
-        3M8p2M2SAWW/OejFBbMbbT1LmPDF4U/L2CSw0y9UYAuWwLR1beZlwRmRNIM9zUDGDsHiieHMIydOdzlh
-        /c0hkJMpLmM/LxNXxhon4qxphqu70rcaWY5KlF2m8o+CDOPeGJqNDpx6YMf8BocItRejsXKEOI3YT+/S
-        ahzf1Vr4FRURIlGEgozEML0eRWOnHQ2GRTj8HFKHCgSaEpsUOzepAq2FFpNjZmwtjSibApF4QooIc76o
-        Jm64b4N7m0OurCJ/DOFQxkdHUm3qnJ1gU9Bfe7aaDWXKyLAlIgLDgi9SY1CoqBrYogUFCZcez/C0UPqj
-        RTI5LANfQ0qiUKEM1GO2iPYnU2i8O6GhwzyNdKmsiWO5CnpHt6Tmh7axk5tY32KyC8+/BJVIliqhFphR
-        4RjsnqayQ2npWLzAM80/g6qJzrhoae9z5kYWEmqAl3BAbR2ky9hJivjk4lUqO8UyV8U1BlWwvpqNNu13
-        Ptc1y7d1TYbYvckwbWWxWj7q/gKR9BcGNs7ThQAAAABJRU5ErkJggg==
-</value>
   </data>
   <data name="pictureBoxGeneralInformationMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

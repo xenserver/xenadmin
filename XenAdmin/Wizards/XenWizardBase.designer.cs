@@ -75,6 +75,7 @@ namespace XenAdmin.Wizards
             // 
             // pictureBoxWizard
             // 
+            this.pictureBoxWizard.Image = global::XenAdmin.Properties.Resources._000_CreateVM_h32bit_32;
             resources.ApplyResources(this.pictureBoxWizard, "pictureBoxWizard");
             this.pictureBoxWizard.Name = "pictureBoxWizard";
             this.pictureBoxWizard.TabStop = false;
@@ -169,6 +170,7 @@ namespace XenAdmin.Wizards
             // 
             // pictureBoxGeneralInformationMessage
             // 
+            this.pictureBoxGeneralInformationMessage.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
             resources.ApplyResources(this.pictureBoxGeneralInformationMessage, "pictureBoxGeneralInformationMessage");
             this.pictureBoxGeneralInformationMessage.Name = "pictureBoxGeneralInformationMessage";
             this.pictureBoxGeneralInformationMessage.TabStop = false;
