@@ -131,12 +131,6 @@ namespace XenAdmin.Dialogs
             Close();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            Close();
-        }
-
         private class HostItem : CustomTreeNode
         {
             private Host _host;

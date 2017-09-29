@@ -110,8 +110,8 @@
             // 
             // UsbUsageDialog
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanelBase);
             this.Icon = global::XenAdmin.Properties.Resources.AppIcon;
             this.Name = "UsbUsageDialog";

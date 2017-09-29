@@ -104,7 +104,7 @@
             // USBEditPage
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanelBase);
             this.Name = "USBEditPage";
             this.tableLayoutPanelBase.ResumeLayout(false);

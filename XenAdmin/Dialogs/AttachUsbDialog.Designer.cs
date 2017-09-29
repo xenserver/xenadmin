@@ -138,8 +138,8 @@
             // 
             // AttachUsbDialog
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AttachUsbDialog";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlert)).EndInit();
