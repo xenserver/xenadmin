@@ -149,7 +149,10 @@ namespace XenAdmin.Dialogs
                     ShowTab(VCpuMemoryEditPage = new CPUMemoryEditPage());
                     ShowTab(StartupOptionsEditPage = new BootOptionsEditPage());
                     ShowTab(VMHAEditPage = new VMHAEditPage {VerticalTabs = verticalTabs});
-                    ShowTab(usbEditPage = new USBEditPage());
+                    if (!Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough))
+                    {
+                        ShowTab(usbEditPage = new USBEditPage());
+                    } 
                 }
 
                 if (is_vm || is_host || is_sr)
