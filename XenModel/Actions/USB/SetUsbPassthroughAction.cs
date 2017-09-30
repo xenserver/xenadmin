@@ -38,13 +38,12 @@ using XenAPI;
 
 namespace XenAdmin.Actions
 {
-    public class USBPassthrough : PureAsyncAction
+    public class SetUsbPassthroughAction : PureAsyncAction
     {
         private PUSB _pusb;
-        private VM _vm;
         private bool _passthroughEnabled;
 
-        public USBPassthrough (PUSB pusb, bool passthroughEnabled) :
+        public SetUsbPassthroughAction (PUSB pusb, bool passthroughEnabled) :
             base(pusb.Connection, String.Format(passthroughEnabled ? Messages.ACTION_USB_PASSTHROUGH_ENABLING : Messages.ACTION_USB_PASSTHROUGH_DISABLING, pusb.Name()))
         {
             _pusb = pusb;
@@ -53,15 +52,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            try
-            {
-                PUSB.set_passthrough_enabled(_pusb.Connection.Session, _pusb.opaque_ref, _passthroughEnabled);
-            }
-            catch
-            {
-                Description = _passthroughEnabled ? Messages.ACTION_USB_PASSTHROUGH_ENABLE_FAILED : Messages.ACTION_USB_PASSTHROUGH_DISABLE_FAILED;
-                throw;
-            }
+            PUSB.set_passthrough_enabled(_pusb.Connection.Session, _pusb.opaque_ref, _passthroughEnabled);
             Description = _passthroughEnabled ? Messages.ACTION_USB_PASSTHROUGH_ENABLED : Messages.ACTION_USB_PASSTHROUGH_DISABLED;
         }
     }

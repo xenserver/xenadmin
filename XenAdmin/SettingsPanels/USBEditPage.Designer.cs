@@ -37,9 +37,12 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAttach = new System.Windows.Forms.Button();
             this.buttonDetach = new System.Windows.Forms.Button();
+            this.pictureHAWarning = new System.Windows.Forms.PictureBox();
+            this.labelHAWarning = new System.Windows.Forms.Label();
             this.tableLayoutPanelBase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsbList)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureHAWarning)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanelBase
@@ -84,6 +87,8 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.buttonAttach);
             this.flowLayoutPanel1.Controls.Add(this.buttonDetach);
+            this.flowLayoutPanel1.Controls.Add(this.pictureHAWarning);
+            this.flowLayoutPanel1.Controls.Add(this.labelHAWarning);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -101,6 +106,18 @@
             this.buttonDetach.UseVisualStyleBackColor = true;
             this.buttonDetach.Click += new System.EventHandler(this.buttonDetach_Click);
             // 
+            // pictureHAWarning
+            // 
+            resources.ApplyResources(this.pictureHAWarning, "pictureHAWarning");
+            this.pictureHAWarning.Image = global::XenAdmin.Properties.Resources._000_Alert2_h32bit_16;
+            this.pictureHAWarning.Name = "pictureHAWarning";
+            this.pictureHAWarning.TabStop = false;
+            // 
+            // labelHAWarning
+            // 
+            resources.ApplyResources(this.labelHAWarning, "labelHAWarning");
+            this.labelHAWarning.Name = "labelHAWarning";
+            // 
             // USBEditPage
             // 
             resources.ApplyResources(this, "$this");
@@ -110,6 +127,8 @@
             this.tableLayoutPanelBase.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsbList)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureHAWarning)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -124,5 +143,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnAttached;
+        private System.Windows.Forms.PictureBox pictureHAWarning;
+        private System.Windows.Forms.Label labelHAWarning;
     }
 }

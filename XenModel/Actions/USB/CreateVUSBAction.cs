@@ -53,15 +53,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            try
-            {
-                XenRef<VUSB> vusbRef = VUSB.create(Session, _vm.opaque_ref, _pusb.USB_group, _other_config);
-            }
-            catch
-            {
-                Description = Messages.ACTION_VUSB_CREATE_FAILED;
-                throw;
-            }
+            XenRef<VUSB> vusbRef = VUSB.create(Session, _vm.opaque_ref, _pusb.USB_group, _other_config);
             Description = Messages.ACTION_VUSB_CREATED;
         }
     }

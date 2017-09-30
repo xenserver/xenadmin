@@ -64,21 +64,9 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            System.Threading.ThreadPool.QueueUserWorkItem((System.Threading.WaitCallback)delegate (object o)
-            {
-                new XenAdmin.Actions.USBPassthrough (_pusb, !_pusb.passthrough_enabled).RunAsync();
-            });
-
-            this.DialogResult = DialogResult.OK;
-            Close();
+            new XenAdmin.Actions.SetUsbPassthroughAction (_pusb, !_pusb.passthrough_enabled).RunAsync();
         }
     }
 }

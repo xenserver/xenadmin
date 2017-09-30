@@ -53,15 +53,16 @@ namespace XenAdmin.Actions
             try
             {
                 VUSB.async_unplug(Session, _vusb.opaque_ref);
+                PollToCompletion(0, 50);
             }
             catch
             {
-                Description = Messages.ACTION_VUSB_DELETE_FAILED;
                 throw;
             }
             finally
             {
                 VUSB.async_destroy(Session, _vusb.opaque_ref);
+                PollToCompletion(51, 100);
             }
             Description = Messages.ACTION_VUSB_DELETED;
         }

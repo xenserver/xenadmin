@@ -54,6 +54,15 @@ namespace XenAdmin.SettingsPanels
             InitializeComponent();
         }
 
+        private VerticalTabs verticalTabs;
+        public VerticalTabs VerticalTabs
+        {
+            set
+            {
+                this.verticalTabs = value;
+            }
+        }
+
         #region override IEditPage
 
         public bool ValidToSave
@@ -90,7 +99,7 @@ namespace XenAdmin.SettingsPanels
 
         public Image Image
         {
-            get { return Resources._001_Tools_h32bit_16; }
+            get { return Resources.usb_16; }
         }
 
         public AsyncAction SaveSettings()
@@ -100,19 +109,28 @@ namespace XenAdmin.SettingsPanels
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            Trace.Assert(clone is VM);
+            Trace.Assert(orig is VM);
 
-            _vm = (VM)clone;
+            _vm = (VM)orig;
             if (Connection == null)
                 Connection = _vm.Connection;
 
             if (_vm != null)
             {
                 _vm.PropertyChanged += Vm_PropertyChanged;
-                _vm.Connection.Cache.RegisterBatchCollectionChanged<VUSB>(UsbCollectionChanged);
             }
 
             BuildList();
+
+            // Check if HA was enabled on pool and Restart priority was set on VM.
+            VM.HA_Restart_Priority SelectedPriority = _vm.HARestartPriority();
+            Pool pool = Helpers.GetPool(_vm.Connection);
+            bool haEnabled = (pool != null &&
+                pool.ha_enabled &&
+                VM.HaPriorityIsRestart(_vm.Connection, SelectedPriority));
+            labelHAWarning.Text = Messages.ALERT_USB_NOT_ATTACHABLE_HA;
+            pictureHAWarning.Visible = labelHAWarning.Visible = haEnabled;
+            buttonAttach.Enabled = !haEnabled;
         }
 
         public bool InBuildList = false;
@@ -174,12 +192,11 @@ namespace XenAdmin.SettingsPanels
         void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "VUSBs")
+            {
                 BuildList();
-        }
-
-        void UsbCollectionChanged(object sender, EventArgs e)
-        {
-            BuildList();
+                if (verticalTabs != null)
+                    verticalTabs.Refresh();
+            }
         }
 
         private VMUsbRow selectedRow = null;

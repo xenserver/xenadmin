@@ -2626,15 +2626,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to detach USB device..
-        /// </summary>
-        public static string ACTION_USB_PASSTHROUGH_DISABLE_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_DISABLE_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to USB device detached..
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_DISABLED {
@@ -2649,15 +2640,6 @@ namespace XenAdmin {
         public static string ACTION_USB_PASSTHROUGH_DISABLING {
             get {
                 return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_DISABLING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Failed to attach USB device..
-        /// </summary>
-        public static string ACTION_USB_PASSTHROUGH_ENABLE_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_ENABLE_FAILED", resourceCulture);
             }
         }
         
@@ -3391,16 +3373,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to create virtual USB..
-        /// </summary>
-        public static string ACTION_VUSB_CREATE_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_VUSB_CREATE_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virtual USB created.
+        ///   Looks up a localized string similar to USB device attached.
         /// </summary>
         public static string ACTION_VUSB_CREATED {
             get {
@@ -3409,7 +3382,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating virtual USB &apos;{0}&apos; to VM &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Attaching USB device &apos;{0}&apos; to VM &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_VUSB_CREATING {
             get {
@@ -3418,16 +3391,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to delete virtual USB..
-        /// </summary>
-        public static string ACTION_VUSB_DELETE_FAILED {
-            get {
-                return ResourceManager.GetString("ACTION_VUSB_DELETE_FAILED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virtual USB deleted.
+        ///   Looks up a localized string similar to USB device deleted.
         /// </summary>
         public static string ACTION_VUSB_DELETED {
             get {
@@ -3436,7 +3400,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting virtual USB &apos;{0}&apos; from VM &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Deleting USB device &apos;{0}&apos; from VM &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_VUSB_DELETING {
             get {
@@ -4955,6 +4919,15 @@ namespace XenAdmin {
         public static string ALERT_SR_SUB_TEXT {
             get {
                 return ResourceManager.GetString("ALERT_SR_SUB_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM is protected by HA, USB cannot be attached..
+        /// </summary>
+        public static string ALERT_USB_NOT_ATTACHABLE_HA {
+            get {
+                return ResourceManager.GetString("ALERT_USB_NOT_ATTACHABLE_HA", resourceCulture);
             }
         }
         
@@ -15013,6 +14986,33 @@ namespace XenAdmin {
         public static string FETCH_EARLIER_DATA {
             get {
                 return ResourceManager.GetString("FETCH_EARLIER_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetch possible hosts of VM {0}.
+        /// </summary>
+        public static string FETCH_POSSIBLE_HOSTS {
+            get {
+                return ResourceManager.GetString("FETCH_POSSIBLE_HOSTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetched possible hosts of VM {0}.
+        /// </summary>
+        public static string FETCHED_POSSIBLE_HOSTS {
+            get {
+                return ResourceManager.GetString("FETCHED_POSSIBLE_HOSTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetching possible hosts of VM {0}.
+        /// </summary>
+        public static string FETCHING_POSSIBLE_HOSTS {
+            get {
+                return ResourceManager.GetString("FETCHING_POSSIBLE_HOSTS", resourceCulture);
             }
         }
         

@@ -33,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Actions;
 using XenAPI;
 
 namespace XenAdmin.Dialogs
@@ -40,13 +41,27 @@ namespace XenAdmin.Dialogs
     public partial class AttachUsbDialog : XenDialogBase
     {
         private VM _vm;
+        private List<Host> possibleHosts;
 
         public AttachUsbDialog(VM vm): base(vm.Connection)
         {
             _vm = vm;
+            possibleHosts = new List<Host>();
             InitializeComponent();
             BuildList();
             treeUsbList_SelectedIndexChanged(null, null);
+
+            DelegatedAsyncAction action = new DelegatedAsyncAction(_vm.Connection,
+                string.Format(Messages.FETCH_POSSIBLE_HOSTS, _vm.Name()),
+                string.Format(Messages.FETCHING_POSSIBLE_HOSTS, _vm.Name()),
+                string.Format(Messages.FETCHED_POSSIBLE_HOSTS, _vm.Name()),
+                delegate (Session session)
+                {
+                    List<XenRef<Host>> possibleHostRefs = VM.get_possible_hosts(_vm.Connection.Session, _vm.opaque_ref);
+                    possibleHosts = _vm.Connection.ResolveAll(possibleHostRefs);
+                    Program.Invoke(Program.MainWindow, BuildList);
+                });
+            action.RunAsync();
         }
 
         private void BuildList()
@@ -55,20 +70,7 @@ namespace XenAdmin.Dialogs
 
             treeUsbList.BeginUpdate();
             try
-            {
-                VM.HA_Restart_Priority SelectedPriority = _vm.HARestartPriority();
-                Pool pool = Helpers.GetPool(_vm.Connection);
-                // Check if HA was enabled on pool and Restart priority was set on VM.
-                bool haEnabled = (pool != null &&
-                    pool.ha_enabled &&
-                    VM.HaPriorityIsRestart(_vm.Connection, SelectedPriority));
-                List<XenRef<Host>> possibleHostRefs = VM.get_possible_hosts(_vm.Connection.Session, _vm.opaque_ref);
-                List<Host> possibleHosts = new List<Host>();
-                foreach (XenRef<Host> possibleHostRef in possibleHostRefs)
-                {
-                    possibleHosts.Add(_vm.Connection.Resolve(possibleHostRef));
-                }
-
+            {   
                 foreach (Host host in possibleHosts)
                 {
                     // Add a host node to tree list.
@@ -79,24 +81,13 @@ namespace XenAdmin.Dialogs
                     {
                         // Add a USB in the host to tree list.
                         // Determin if the USB is valid to attach.
-                        if (pusb != null)
-                        {
-                            bool attached = false;
-                            USB_group usbGroup = pusb.Connection.Resolve(pusb.USB_group);
-                            if ((usbGroup != null) && 
-                                (usbGroup.VUSBs != null) && 
-                                (usbGroup.VUSBs.Count > 0))
-                                attached = true;
-                            else
-                                attached = false;
+                        USB_group usbGroup = pusb.Connection.Resolve(pusb.USB_group);
+                        bool attached = (usbGroup != null) && (usbGroup.VUSBs != null) && (usbGroup.VUSBs.Count > 0);
 
-                            if ((haEnabled == false) &&
-                                (pusb.passthrough_enabled == true) &&
-                                (attached == false))
-                            {
-                                UsbItem usbNode = new UsbItem(pusb);
-                                treeUsbList.AddChildNode(hostNode, usbNode);
-                            }
+                        if (pusb.passthrough_enabled && !attached)
+                        {
+                            UsbItem usbNode = new UsbItem(pusb);
+                            treeUsbList.AddChildNode(hostNode, usbNode);
                         }
                     }
                 }
@@ -109,24 +100,14 @@ namespace XenAdmin.Dialogs
 
         private void treeUsbList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UsbItem item = treeUsbList.SelectedItem as UsbItem;
-            if (item != null)
-            {
-                buttonAttach.Enabled = true;
-            }
-            else
-            {
-                buttonAttach.Enabled = false;
-            }
+            buttonAttach.Enabled = treeUsbList.SelectedItem is UsbItem;
         }
 
         private void buttonAttach_Click(object sender, EventArgs e)
         {
             UsbItem item = treeUsbList.SelectedItem as UsbItem;
-            System.Threading.ThreadPool.QueueUserWorkItem((System.Threading.WaitCallback)delegate (object o)
-            {
-                new XenAdmin.Actions.CreateVUSBAction(item._pusb, _vm).RunAsync();
-            });
+            if (item != null)
+                new XenAdmin.Actions.CreateVUSBAction(item.Pusb, _vm).RunAsync();
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
         }
@@ -144,12 +125,12 @@ namespace XenAdmin.Dialogs
 
         private class UsbItem : CustomTreeNode
         {
-            public PUSB _pusb { get; }
+            public PUSB Pusb { get; }
 
             public UsbItem(PUSB pusb) :base(true)
             {
-                _pusb = pusb;
-                Text = String.Format(Messages.STRING_SPACE_STRING, _pusb.path, _pusb.description);
+                Pusb = pusb;
+                Text = String.Format(Messages.STRING_SPACE_STRING, Pusb.path, Pusb.description);
             }
         }
     }

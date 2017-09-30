@@ -151,7 +151,7 @@ namespace XenAdmin.Dialogs
                     ShowTab(VMHAEditPage = new VMHAEditPage {VerticalTabs = verticalTabs});
                     if (!Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough))
                     {
-                        ShowTab(usbEditPage = new USBEditPage());
+                        ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
                     } 
                 }
 

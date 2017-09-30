@@ -213,6 +213,69 @@
   <data name="&gt;&gt;buttonDetach.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="pictureHAWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pictureHAWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 3</value>
+  </data>
+  <data name="pictureHAWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>30, 3, 3, 3</value>
+  </data>
+  <data name="pictureHAWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 22</value>
+  </data>
+  <data name="pictureHAWarning.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="pictureHAWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pictureHAWarning.Name" xml:space="preserve">
+    <value>pictureHAWarning</value>
+  </data>
+  <data name="&gt;&gt;pictureHAWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureHAWarning.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;pictureHAWarning.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelHAWarning.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelHAWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelHAWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>220, 0</value>
+  </data>
+  <data name="labelHAWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 29</value>
+  </data>
+  <data name="labelHAWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelHAWarning.Text" xml:space="preserve">
+    <value>The VM is protected by HA, USB cannot be attached.</value>
+  </data>
+  <data name="labelHAWarning.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;labelHAWarning.Name" xml:space="preserve">
+    <value>labelHAWarning</value>
+  </data>
+  <data name="&gt;&gt;labelHAWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelHAWarning.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelHAWarning.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
