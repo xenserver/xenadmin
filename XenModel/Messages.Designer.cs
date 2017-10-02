@@ -34863,7 +34863,7 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the [XenServer] VM Scheduled Snapshots feature or to start a XenServer trial, click the button below..
+        ///To learn more about the [XenServer] VM Scheduled Snapshots feature or to start a [XenServer] trial, click the button below..
         /// </summary>
         public static string UPSELL_BLURB_VMSS_MORE {
             get {
@@ -36395,7 +36395,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XenServer can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
+        ///   Looks up a localized string similar to [XenServer] can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails..
         /// </summary>
         public static string VMSS_EMAIL_PAGE_TEXT {
             get {
