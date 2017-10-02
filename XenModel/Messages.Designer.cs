@@ -11709,7 +11709,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading {0}.
+        ///   Looks up a localized string similar to Downloading update {0}.
         /// </summary>
         public static string DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC {
             get {
@@ -11718,7 +11718,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading {0} ({1} of {2}).
+        ///   Looks up a localized string similar to Downloading update {0} ({1} of {2}).
         /// </summary>
         public static string DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC {
             get {
@@ -11727,7 +11727,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extracting {0}.
+        ///   Looks up a localized string similar to Extracting update {0}.
         /// </summary>
         public static string DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC {
             get {
@@ -11754,7 +11754,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download and extract {0}.
+        ///   Looks up a localized string similar to Download and extract update {0}.
         /// </summary>
         public static string DOWNLOAD_AND_EXTRACT_ACTION_TITLE {
             get {
@@ -26442,6 +26442,15 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}....
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT", resourceCulture);
             }
         }
         

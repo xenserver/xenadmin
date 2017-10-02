@@ -4163,16 +4163,16 @@ This will also delete its subfolders.</value>
     <value>Downloading update from '{0}'...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
-    <value>Downloading {0}</value>
+    <value>Downloading update {0}</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC" xml:space="preserve">
-    <value>Downloading {0} ({1} of {2})</value>
+    <value>Downloading update {0} ({1} of {2})</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOAD_CANCELLED_DESC" xml:space="preserve">
     <value>Download canceled</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC" xml:space="preserve">
-    <value>Extracting {0}</value>
+    <value>Extracting update {0}</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR" xml:space="preserve">
     <value>Cannot extract the update file from downloaded archive. Please see application logs for more details.</value>
@@ -4181,7 +4181,7 @@ This will also delete its subfolders.</value>
     <value>Update file could not be located. Please see application logs for more details.</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_TITLE" xml:space="preserve">
-    <value>Download and extract {0}</value>
+    <value>Download and extract update {0}</value>
   </data>
   <data name="DOWNLOAD_ELLIPSES" xml:space="preserve">
     <value>Download...</value>
@@ -9127,6 +9127,9 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
     <value>The update was not completed successfully</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT" xml:space="preserve">
+    <value>{0}...</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>Upload and Install</value>
