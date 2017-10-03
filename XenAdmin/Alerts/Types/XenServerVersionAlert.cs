@@ -53,7 +53,7 @@ namespace XenAdmin.Alerts
 
         public override string WebPageLabel
         {
-            get { return Messages.AVAILABLE_UPDATES_DOWNLOAD_TEXT; }
+            get { return Version.Url; }
         }
 
         public override string Name
