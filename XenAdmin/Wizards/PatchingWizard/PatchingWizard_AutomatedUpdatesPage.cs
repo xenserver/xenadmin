@@ -291,7 +291,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (pa.Visible)
                 {
-                    sb.Append(pa);
+                    sb.Append(pa.ProgressDescription ?? pa.ToString());
                     sb.AppendLine();
                 }
             }
@@ -435,17 +435,28 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         }
 
-        private static void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
+        private void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
         {
             InitializePlanAction(bgw, action);
+
+            action.OnProgressChange += action_OnProgressChange;
 
             bgw.ReportProgress(0, action);
             action.Run();
 
             Thread.Sleep(1000);
 
+            action.OnProgressChange -= action_OnProgressChange;
             bgw.doneActions.Add(action);
             bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action);
+        }
+
+        private void action_OnProgressChange(object sender, EventArgs e)
+        {
+            Program.Invoke(Program.MainWindow, () =>
+            {
+                UpdateStatusTextBox();
+            });
         }
 
         private static void InitializePlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
