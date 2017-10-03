@@ -104,8 +104,7 @@ namespace XenAdmin.Alerts
         {
             get
             {
-                Uri uri = new Uri(Patch.Url);
-                return uri.Segments.Last();
+                return Patch.Url;
             }
         }
 
