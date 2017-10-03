@@ -245,29 +245,10 @@ namespace XenAdmin.TabPages
                 {
                     UpdatePageDataGridViewRow row = (UpdatePageDataGridViewRow) Rows[e.RowIndex];
 
-                    if (row.Tag is Host)
+                    if (!row.IsFullyPopulated && e.ColumnIndex == row.PatchingStatusCellIndex
+                       || (row.Tag is Host && (e.ColumnIndex == row.ExpansionCellIndex
+                                               || (row.HasPool && (e.ColumnIndex == row.IconCellIndex || e.ColumnIndex == row.PatchingStatusCellIndex)))))
                     {
-                        // Host in pool
-                        if (row.HasPool && (e.ColumnIndex == row.ExpansionCellIndex ||
-                                            e.ColumnIndex == row.IconCellIndex ||
-                                            e.ColumnIndex == row.PatchingStatusCellIndex))
-                        {
-                            e.PaintBackground(e.ClipBounds, true);
-                            e.Handled = true;
-                        }
-
-                        // Standalone host
-                        else if (!row.HasPool && (e.ColumnIndex == row.ExpansionCellIndex ||
-                                                  (!row.IsFullyPopulated && e.ColumnIndex == row.PatchingStatusCellIndex)))
-                        {
-                            e.PaintBackground(e.ClipBounds, true);
-                            e.Handled = true;
-                        }
-                    }
-
-                    else if (row.Tag is Pool && !row.IsFullyPopulated && e.ColumnIndex == row.PatchingStatusCellIndex)
-                    {
-                        // Pool row when xml file download not succeeded
                         e.PaintBackground(e.ClipBounds, true);
                         e.Handled = true;
                     }
@@ -480,6 +461,32 @@ namespace XenAdmin.TabPages
             return string.Join(", ", result.ToArray());
         }
 
+        private bool VersionFoundInUpdatesXml(IXenConnection connection)
+        {
+            if (connection == null)
+                return false;
+            
+            List<Host> hosts = connection.Cache.Hosts.ToList();
+
+            foreach (Host host in hosts)
+            {
+                var hostVersions = Updates.XenServerVersions.FindAll(version =>
+                {
+                    if (version.BuildNumber != string.Empty)
+                        return (host.BuildNumberRaw() == version.BuildNumber);
+
+                    return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
+                           || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
+                               && Helpers.HostProductVersion(host) == version.Version.ToString());
+                });
+
+                if (hostVersions.Count == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
         private void RebuildHostView()
         {
             Program.AssertOnEventThread();
@@ -515,10 +522,11 @@ namespace XenAdmin.TabPages
                 foreach (IXenConnection c in xenConnections)
                 {
                     Pool pool = Helpers.GetPool(c);
+                    var versionIsFound = VersionFoundInUpdatesXml(c);
 
                     if (pool != null)          // pool row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool, CheckForUpdateSucceeded);
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(pool, CheckForUpdateSucceeded && versionIsFound);
                         var hostUuidList = new List<string>();
 
                         foreach (Host h in c.Cache.Hosts)
@@ -533,7 +541,7 @@ namespace XenAdmin.TabPages
                     Array.Sort(hosts);
                     foreach (Host h in hosts)       // host row
                     {
-                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null, CheckForUpdateSucceeded);
+                        UpdatePageDataGridViewRow row = new UpdatePageDataGridViewRow(h, pool != null, CheckForUpdateSucceeded && versionIsFound);
 
                         // add row based on server filter status
                         if (!toolStripDropDownButtonServerFilter.HideByLocation(h.uuid))
@@ -787,6 +795,12 @@ namespace XenAdmin.TabPages
                 // check Updates Availability
                 foreach (IXenConnection connection in connectionList)
                 {
+                    if (!VersionFoundInUpdatesXml(connection))
+                    {
+                        toolStripButtonUpdate.Enabled = true;
+                        return;
+                    }
+
                     foreach (Host host in connection.Cache.Hosts)
                     {
                         if (RequiredUpdatesForHost(host).Length > 0)
@@ -1397,16 +1411,14 @@ namespace XenAdmin.TabPages
             string patchingStatus = String.Empty;
             string requiredUpdates = String.Empty;
             string installedUpdates = String.Empty;
+            var versionIsFound = VersionFoundInUpdatesXml(xenConnection);
 
-            Program.Invoke(Program.MainWindow, delegate
-            {
-                pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
-                requiredUpdates = CheckForUpdateSucceeded ? RequiredUpdatesForHost(host) : String.Empty;
-                installedUpdates = InstalledUpdatesForHost(host);
-                patchingStatus = CheckForUpdateSucceeded
-                    ? (requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED)
-                    : String.Empty;
-            });
+            pool = hasPool ? Helpers.GetPool(xenConnection).Name() : String.Empty;
+            requiredUpdates = CheckForUpdateSucceeded && versionIsFound ? RequiredUpdatesForHost(host) : String.Empty;
+            installedUpdates = InstalledUpdatesForHost(host);
+            patchingStatus = CheckForUpdateSucceeded && versionIsFound
+                ? (requiredUpdates.Length > 0 ? Messages.NOT_UPDATED : Messages.UPDATED)
+                : String.Empty;
 
             return String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"",
                                  pool.EscapeQuotes(),
