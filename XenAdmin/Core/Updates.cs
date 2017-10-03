@@ -866,7 +866,7 @@ namespace XenAdmin.Core
             return alert;
         }
 
-        private static List<XenServerVersion> GetServerVersions(Host host, List<XenServerVersion> xenServerVersions)
+        public static List<XenServerVersion> GetServerVersions(Host host, List<XenServerVersion> xenServerVersions)
         {
             var serverVersions = xenServerVersions.FindAll(version =>
             {
