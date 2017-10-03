@@ -461,28 +461,7 @@ namespace XenAdmin.TabPages
 
         private bool VersionFoundInUpdatesXml(IXenConnection connection)
         {
-            if (connection == null)
-                return false;
-            
-            List<Host> hosts = connection.Cache.Hosts.ToList();
-
-            foreach (Host host in hosts)
-            {
-                var hostVersions = Updates.XenServerVersions.FindAll(version =>
-                {
-                    if (version.BuildNumber != string.Empty)
-                        return (host.BuildNumberRaw() == version.BuildNumber);
-
-                    return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
-                           || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
-                               && Helpers.HostProductVersion(host) == version.Version.ToString());
-                });
-
-                if (hostVersions.Count == 0)
-                    return false;
-            }
-
-            return true;
+            return connection.Cache.Hosts.All(h => Updates.GetServerVersions(h, Updates.XenServerVersions).Count > 0);
         }
 
         private void RebuildHostView()
