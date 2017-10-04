@@ -2325,7 +2325,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the installed server SSL certificate.
+        /// Get the installed server public TLS certificate.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2336,7 +2336,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the installed server SSL certificate.
+        /// Get the installed server public TLS certificate.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>

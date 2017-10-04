@@ -565,6 +565,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking.
+        /// </summary>
+        public static string ACTION_DISABLE_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_CHANGED_BLOCK_TRACKING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling Changed Block Tracking for VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable IGMP snooping.
         /// </summary>
         public static string ACTION_DISABLE_IGMP_SNOOPING {
@@ -619,11 +637,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled Changed Block Tracking for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLED_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLED_CHANGED_BLOCK_TRACKING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabled PVS-Accelerator for selected VMs.
         /// </summary>
         public static string ACTION_DISABLED_PVS_READ_CACHING {
             get {
                 return ResourceManager.GetString("ACTION_DISABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling Changed Block Tracking for selected VMs.
+        /// </summary>
+        public static string ACTION_DISABLING_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLING_CHANGED_BLOCK_TRACKING", resourceCulture);
             }
         }
         
@@ -6477,6 +6513,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This virtual disk has CBT enabled. It cannot be moved to another storage repository..
+        /// </summary>
+        public static string CANNOT_MOVE_CBT_ENABLED_VDI {
+            get {
+                return ResourceManager.GetString("CANNOT_MOVE_CBT_ENABLED_VDI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This virtual disk is used for DR. It cannot be moved to another storage repository..
         /// </summary>
         public static string CANNOT_MOVE_DR_VD {
@@ -7339,6 +7384,42 @@ namespace XenAdmin {
         public static string CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL {
             get {
                 return ResourceManager.GetString("CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VM. If you are using any third-party solutions to back up the VM, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VM {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking on VM &quot;{0}&quot;.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VM_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VM_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VMS {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Changed Block Tracking on selected VMs.
+        /// </summary>
+        public static string CONFIRM_DISABLE_CBT_VMs_TITLE {
+            get {
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMs_TITLE", resourceCulture);
             }
         }
         
@@ -20592,6 +20673,15 @@ namespace XenAdmin {
         public static string MAINWINDOW_DETACH_SR {
             get {
                 return ResourceManager.GetString("MAINWINDOW_DETACH_SR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D&amp;isable Changed Block Tracking.
+        /// </summary>
+        public static string MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING", resourceCulture);
             }
         }
         

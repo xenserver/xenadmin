@@ -258,6 +258,11 @@ namespace XenAPI
             return BoolKeyPreferTrue(h.license_params, "restrict_storage_xen_motion");
         }
 
+        public static bool RestrictChangedBlockTracking(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_cbt");
+        }
+
         public virtual bool IsFreeLicense()
         {
             return edition == "free";
