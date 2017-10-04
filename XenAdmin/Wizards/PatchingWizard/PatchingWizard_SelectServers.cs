@@ -589,8 +589,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                         foreach (var host in pool.Connection.Cache.Hosts)
                         {
                             if (selectedServers.Contains(host))
+                            {
                                 dataGridViewHosts.CheckBoxChange(row.Index, POOL_CHECKBOX_COL);
-                            break;
+                                break;
+                            }
                         }
                     }
                 }
