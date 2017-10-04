@@ -80,9 +80,22 @@ namespace XenAdmin.Commands
 
         protected override bool CanExecuteCore(SelectedItemCollection selection)
         {
-            if (selection.AllItemsAre<VM>() && new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute())
-                return true;
-            return selection.ContainsOneItemOfType<VM>() && selection.AtLeastOneXenObjectCan<VM>(CanExecute);
+            return selection.AllItemsAre<VM>(CBTDisabled) &&
+                   (new CrossPoolMoveVMCommand(MainWindowCommandInterface, selection).CanExecute() ||
+                   selection.ContainsOneItemOfType<VM>(CanExecute));
+        }
+
+        private bool CBTDisabled(VM vm)
+        {
+            if (vm == null)
+                return false;
+            foreach (var vbd in vm.Connection.ResolveAll(vm.VBDs))
+            {
+                var vdi = vm.Connection.Resolve(vbd.VDI);
+                if (vdi != null && vdi.cbt_enabled) 
+                    return false;
+            }
+            return true;
         }
 
         private static bool CanExecute(VM vm)

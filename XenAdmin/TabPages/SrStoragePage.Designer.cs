@@ -40,12 +40,13 @@ namespace XenAdmin.TabPages
             this.toolTipContainerMove = new XenAdmin.Controls.ToolTipContainer();
             this.buttonMove = new System.Windows.Forms.Button();
             this.dataGridViewVDIs = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVolume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnVM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ColumnCBT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.RemoveButtonContainer.SuspendLayout();
@@ -203,7 +204,8 @@ namespace XenAdmin.TabPages
             this.ColumnVolume,
             this.ColumnDesc,
             this.ColumnSize,
-            this.ColumnVM});
+            this.ColumnVM,
+            this.ColumnCBT});
             resources.ApplyResources(this.dataGridViewVDIs, "dataGridViewVDIs");
             this.dataGridViewVDIs.MultiSelect = true;
             this.dataGridViewVDIs.Name = "dataGridViewVDIs";
@@ -212,6 +214,14 @@ namespace XenAdmin.TabPages
             this.dataGridViewVDIs.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.DataGridViewObject_SortCompare);
             this.dataGridViewVDIs.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridViewVDIs_KeyUp);
             this.dataGridViewVDIs.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewVDIs_MouseUp);
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewVDIs, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // ColumnName
             // 
@@ -248,13 +258,12 @@ namespace XenAdmin.TabPages
             this.ColumnVM.Name = "ColumnVM";
             this.ColumnVM.ReadOnly = true;
             // 
-            // tableLayoutPanel1
+            // ColumnCBT
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewVDIs, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.ColumnCBT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.ColumnCBT, "ColumnCBT");
+            this.ColumnCBT.Name = "ColumnCBT";
+            this.ColumnCBT.ReadOnly = true;
             // 
             // SrStoragePage
             // 
@@ -299,14 +308,15 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.ToolStripMenuItem moveVirtualDiskToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private XenAdmin.Controls.DataGridViewEx.DataGridViewEx dataGridViewVDIs;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem rescanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVolume;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDesc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVM;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStripMenuItem rescanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCBT;
 
     }
 }
