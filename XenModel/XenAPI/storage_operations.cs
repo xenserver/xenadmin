@@ -37,7 +37,7 @@ namespace XenAPI
 {
     public enum storage_operations
     {
-        scan, destroy, forget, plug, unplug, update, vdi_create, vdi_introduce, vdi_destroy, vdi_resize, vdi_clone, vdi_snapshot, vdi_mirror, vdi_enable_cbt, vdi_disable_cbt, vdi_data_destroy, vdi_list_changed_blocks, vdi_set_on_boot, pbd_create, pbd_destroy, unknown
+        scan, destroy, forget, plug, unplug, update, vdi_create, vdi_introduce, vdi_destroy, vdi_resize, vdi_clone, vdi_snapshot, vdi_mirror, vdi_enable_cbt, vdi_disable_cbt, vdi_data_destroy, vdi_export_changed_blocks, vdi_set_on_boot, pbd_create, pbd_destroy, unknown
     }
 
     public static class storage_operations_helper
@@ -78,8 +78,8 @@ namespace XenAPI
                     return "vdi_disable_cbt";
                 case storage_operations.vdi_data_destroy:
                     return "vdi_data_destroy";
-                case storage_operations.vdi_list_changed_blocks:
-                    return "vdi_list_changed_blocks";
+                case storage_operations.vdi_export_changed_blocks:
+                    return "vdi_export_changed_blocks";
                 case storage_operations.vdi_set_on_boot:
                     return "vdi_set_on_boot";
                 case storage_operations.pbd_create:

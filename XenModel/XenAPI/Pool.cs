@@ -829,7 +829,7 @@ namespace XenAPI
         /// <param name="_pool">The opaque_ref of the given pool</param>
         public static bool get_igmp_snooping_enabled(Session session, string _pool)
         {
-            return (bool)session.proxy.pool_get_igmp_snooping_enabled(session.uuid, (_pool != null) ? _pool : "").parse();
+            return (bool)session.proxy.pool_get_igmp_snooping_enabled(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -2057,7 +2057,7 @@ namespace XenAPI
         /// <param name="_value">Enable or disable IGMP Snooping on the pool</param>
         public static void set_igmp_snooping_enabled(Session session, string _pool, bool _value)
         {
-            session.proxy.pool_set_igmp_snooping_enabled(session.uuid, (_pool != null) ? _pool : "", _value).parse();
+            session.proxy.pool_set_igmp_snooping_enabled(session.uuid, _pool ?? "", _value).parse();
         }
 
         /// <summary>
@@ -2069,7 +2069,7 @@ namespace XenAPI
         /// <param name="_value">Enable or disable IGMP Snooping on the pool</param>
         public static XenRef<Task> async_set_igmp_snooping_enabled(Session session, string _pool, bool _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pool_set_igmp_snooping_enabled(session.uuid, (_pool != null) ? _pool : "", _value).parse());
+            return XenRef<Task>.Create(session.proxy.async_pool_set_igmp_snooping_enabled(session.uuid, _pool ?? "", _value).parse());
         }
 
         /// <summary>

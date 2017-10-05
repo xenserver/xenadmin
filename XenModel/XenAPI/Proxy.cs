@@ -2260,6 +2260,14 @@ namespace XenAPI
         Response<string>
         async_vm_retrieve_wlb_recommendations(string session, string _vm);
 
+        [XmlRpcMethod("VM.set_bios_strings")]
+        Response<string>
+        vm_set_bios_strings(string session, string _vm, Object _value);
+
+        [XmlRpcMethod("Async.VM.set_bios_strings")]
+        Response<string>
+        async_vm_set_bios_strings(string session, string _vm, Object _value);
+
         [XmlRpcMethod("VM.copy_bios_strings")]
         Response<string>
         vm_copy_bios_strings(string session, string _vm, string _host);
@@ -5972,13 +5980,13 @@ namespace XenAPI
         Response<string>
         async_vdi_data_destroy(string session, string _vdi);
 
-        [XmlRpcMethod("VDI.list_changed_blocks")]
+        [XmlRpcMethod("VDI.export_changed_blocks")]
         Response<string>
-        vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
+        vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
 
-        [XmlRpcMethod("Async.VDI.list_changed_blocks")]
+        [XmlRpcMethod("Async.VDI.export_changed_blocks")]
         Response<string>
-        async_vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
+        async_vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
 
         [XmlRpcMethod("VDI.get_nbd_info")]
         Response<string []>

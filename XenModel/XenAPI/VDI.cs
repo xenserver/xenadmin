@@ -1763,31 +1763,31 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Compare two VDIs in 64k block increments and report which blocks differ. This operation is not allowed when vdi_to is attached to a VM.
+        /// Reports which blocks differ in the two VDIs. This operation is not allowed when vdi_to is attached to a VM.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         /// <param name="_vdi_to">The second VDI.</param>
-        public static string list_changed_blocks(Session session, string _vdi, string _vdi_to)
+        public static string export_changed_blocks(Session session, string _vdi, string _vdi_to)
         {
-            return (string)session.proxy.vdi_list_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse();
+            return (string)session.proxy.vdi_export_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse();
         }
 
         /// <summary>
-        /// Compare two VDIs in 64k block increments and report which blocks differ. This operation is not allowed when vdi_to is attached to a VM.
+        /// Reports which blocks differ in the two VDIs. This operation is not allowed when vdi_to is attached to a VM.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         /// <param name="_vdi_to">The second VDI.</param>
-        public static XenRef<Task> async_list_changed_blocks(Session session, string _vdi, string _vdi_to)
+        public static XenRef<Task> async_export_changed_blocks(Session session, string _vdi, string _vdi_to)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_list_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse());
+            return XenRef<Task>.Create(session.proxy.async_vdi_export_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse());
         }
 
         /// <summary>
-        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed as the export name to the nbd-server running at the IP address and port specified by that URI.
+        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed to the NBD server running at the IP address and port specified by that URI as the export name.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
@@ -1798,7 +1798,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed as the export name to the nbd-server running at the IP address and port specified by that URI.
+        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed to the NBD server running at the IP address and port specified by that URI as the export name.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
