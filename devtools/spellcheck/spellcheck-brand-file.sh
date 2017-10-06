@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Copyright (c) Citrix Systems, Inc. 
 # All rights reserved.
@@ -32,19 +32,16 @@
 
 set -eu
 
-echo "INFO:	spellcheck"
+WORDS="[^[]XenCenter\|XenCenter[[:space:]][^p].*\|.*[[:space:]]XenCenter\|XenCenter[,].*\|^XenCenter\|XenCenter$\|[^[]XenServer\|XenServer[[:space:]][^p].*\|.*[[:space:]]XenServer\|XenServer[,].*\|^XenServer\|XenServer$\|[^[]Citrix\|Citrix[[:space:]][^p].*\|.*[[:space:]]Citrix\|Citrix[,].*\|^Citrix\|Citrix$"
 
-dir="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-src="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )/../.." && pwd )"
+FOUND_TYPO=$(grep -iow $WORDS $1)
+if [ "${FOUND_TYPO}" != "" ]
+then
+  echo "$1 contains $FOUND_TYPO"
+fi
 
-output=$(/usr/bin/find "$src/XenAdmin" "$src/XenModel" "$src/XenOvfApi" "$src/XenOvfTransport" \( -name \*.cs -o -name \*.resx \) -exec sh "$dir/spellcheck-file.sh" \{\} \;)
-
-output_brand=$(/usr/bin/find "$src/XenAdmin" "$src/XenModel" "$src/XenOvfApi" "$src/XenOvfTransport" \( -name \*.resx \) -exec sh "$dir/spellcheck-brand-file.sh" \{\} \;)
-
-echo "$output" | sed -e "s,$src/,,g"
-
-echo "$output_brand" | sed -e "s,$src/,,g"
-
-test -z "$output"
-
-test -z "$output_brand"
+for w in "operation system" "goto " "TODO[: ]*[rR]emove
+"
+do
+  grep -qi "$w" "$1" && echo "$1 contains $w"
+done
