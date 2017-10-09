@@ -2626,7 +2626,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to USB device detached..
+        ///   Looks up a localized string similar to USB passthrough disabled.
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_DISABLED {
             get {
@@ -2635,7 +2635,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Detaching USB device {0} from server..
+        ///   Looks up a localized string similar to Disabling USB passthrough for {0}.
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_DISABLING {
             get {
@@ -2644,7 +2644,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to USB device attached..
+        ///   Looks up a localized string similar to USB passthrough enabled.
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_ENABLED {
             get {
@@ -2653,7 +2653,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attaching USB device {0} to server..
+        ///   Looks up a localized string similar to Enabling USB passthrough for {0}.
         /// </summary>
         public static string ACTION_USB_PASSTHROUGH_ENABLING {
             get {
@@ -3391,7 +3391,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to USB device deleted.
+        ///   Looks up a localized string similar to USB device detached.
         /// </summary>
         public static string ACTION_VUSB_DELETED {
             get {
@@ -3400,7 +3400,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting USB device &apos;{0}&apos; from VM &apos;{1}&apos;.
+        ///   Looks up a localized string similar to Detaching USB device &apos;{0}&apos; from VM &apos;{1}&apos;.
         /// </summary>
         public static string ACTION_VUSB_DELETING {
             get {
@@ -3409,7 +3409,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete Virtual USB.
+        ///   Looks up a localized string similar to Detach USB device.
         /// </summary>
         public static string ACTION_VUSB_DETACH {
             get {
@@ -3418,7 +3418,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to delete virtual USB?.
+        ///   Looks up a localized string similar to Are you sure you want to detach the selected USB device?.
         /// </summary>
         public static string ACTION_VUSB_DETACH_CONFIRM {
             get {
@@ -4919,15 +4919,6 @@ namespace XenAdmin {
         public static string ALERT_SR_SUB_TEXT {
             get {
                 return ResourceManager.GetString("ALERT_SR_SUB_TEXT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The VM is protected by HA, USB cannot be attached..
-        /// </summary>
-        public static string ALERT_USB_NOT_ATTACHABLE_HA {
-            get {
-                return ResourceManager.GetString("ALERT_USB_NOT_ATTACHABLE_HA", resourceCulture);
             }
         }
         
@@ -25587,7 +25578,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM has one or more virtual USBs. Restart cannot be guaranteed..
+        ///   Looks up a localized string similar to The VM has one or more USB devices attached. Restart cannot be guaranteed..
         /// </summary>
         public static string NOT_AGILE_VM_HAS_VUSB {
             get {

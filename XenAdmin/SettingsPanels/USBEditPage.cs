@@ -48,6 +48,7 @@ namespace XenAdmin.SettingsPanels
     public partial class USBEditPage : XenTabPage, IEditPage
     {
         private VM _vm;
+        public VM.HA_Restart_Priority SelectedPriority { private get; set; }
 
         public USBEditPage()
         {
@@ -115,20 +116,21 @@ namespace XenAdmin.SettingsPanels
             if (Connection == null)
                 Connection = _vm.Connection;
 
-            if (_vm != null)
-            {
-                _vm.PropertyChanged += Vm_PropertyChanged;
-            }
+            _vm.PropertyChanged += Vm_PropertyChanged;
 
             BuildList();
+            SelectedPriority = _vm.HARestartPriority();
+            ShowHideWarnings();
+            dataGridViewUsbList_SelectionChanged(null, null);
+        }
 
+        public void ShowHideWarnings()
+        {
             // Check if HA was enabled on pool and Restart priority was set on VM.
-            VM.HA_Restart_Priority SelectedPriority = _vm.HARestartPriority();
             Pool pool = Helpers.GetPool(_vm.Connection);
             bool haEnabled = (pool != null &&
                 pool.ha_enabled &&
                 VM.HaPriorityIsRestart(_vm.Connection, SelectedPriority));
-            labelHAWarning.Text = Messages.ALERT_USB_NOT_ATTACHABLE_HA;
             pictureHAWarning.Visible = labelHAWarning.Visible = haEnabled;
             buttonAttach.Enabled = !haEnabled;
         }
@@ -153,8 +155,6 @@ namespace XenAdmin.SettingsPanels
                 {
                     dataGridViewUsbList.Rows.Add(new VMUsbRow(vusb));
                 }
-
-                buttonDetach.Enabled = false;
             }
             finally
             {
@@ -226,19 +226,16 @@ namespace XenAdmin.SettingsPanels
             if ((selectedRow != null) && (_vm != null))
             {
                 bool confirmed = false;
-                Program.Invoke(Program.MainWindow, delegate ()
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.ACTION_VUSB_DETACH_CONFIRM, Messages.ACTION_VUSB_DETACH),
+                    ThreeButtonDialog.ButtonYes,
+                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
                 {
-                    using (var dlg = new ThreeButtonDialog(
-                            new ThreeButtonDialog.Details(null, Messages.ACTION_VUSB_DETACH_CONFIRM, Messages.ACTION_VUSB_DETACH),
-                            ThreeButtonDialog.ButtonYes,
-                            new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                    if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes)
                     {
-                        if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes)
-                        {
-                            confirmed = true;
-                        }
+                        confirmed = true;
                     }
-                });
+                }
                 if (confirmed)
                 {
                     // Run this stuff off the event thread, since it involves a server call

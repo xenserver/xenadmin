@@ -973,16 +973,16 @@
     <value>Uploading report to [Citrix] Insight Services</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
-    <value>USB device detached.</value>
+    <value>USB passthrough disabled</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_DISABLING" xml:space="preserve">
-    <value>Detaching USB device {0} from server.</value>
+    <value>Disabling USB passthrough for {0}</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_ENABLED" xml:space="preserve">
-    <value>USB device attached.</value>
+    <value>USB passthrough enabled</value>
   </data>
   <data name="ACTION_USB_PASSTHROUGH_ENABLING" xml:space="preserve">
-    <value>Attaching USB device {0} to server.</value>
+    <value>Enabling USB passthrough for {0}</value>
   </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>Virtual disk created</value>
@@ -1228,16 +1228,16 @@
     <value>Attaching USB device '{0}' to VM '{1}'</value>
   </data>
   <data name="ACTION_VUSB_DELETED" xml:space="preserve">
-    <value>USB device deleted</value>
+    <value>USB device detached</value>
   </data>
   <data name="ACTION_VUSB_DELETING" xml:space="preserve">
-    <value>Deleting USB device '{0}' from VM '{1}'</value>
+    <value>Detaching USB device '{0}' from VM '{1}'</value>
   </data>
   <data name="ACTION_VUSB_DETACH" xml:space="preserve">
-    <value>Delete Virtual USB</value>
+    <value>Detach USB device</value>
   </data>
   <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
-    <value>Are you sure to delete virtual USB?</value>
+    <value>Are you sure you want to detach the selected USB device?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
     <value>Waiting for slaves to recover...</value>
@@ -1819,9 +1819,6 @@ Note that if RBAC is enabled, only alerts which you have privileges to dismiss w
   </data>
   <data name="ALERT_SR_SUB_TEXT" xml:space="preserve">
     <value>When storage throughput exceeds {0} for {1} min(s)</value>
-  </data>
-  <data name="ALERT_USB_NOT_ATTACHABLE_HA" xml:space="preserve">
-    <value>The VM is protected by HA, USB cannot be attached.</value>
   </data>
   <data name="ALLOWED_MTU_RANGE" xml:space="preserve">
     <value>Allowed MTU range: {0} to {1}</value>
@@ -8893,7 +8890,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>The VM has one or more virtual GPUs. Restart cannot be guaranteed.</value>
   </data>
   <data name="NOT_AGILE_VM_HAS_VUSB" xml:space="preserve">
-    <value>The VM has one or more virtual USBs. Restart cannot be guaranteed.</value>
+    <value>The VM has one or more USB devices attached. Restart cannot be guaranteed.</value>
   </data>
   <data name="NOT_APPLIED" xml:space="preserve">
     <value>Not applied</value>

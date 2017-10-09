@@ -149,10 +149,6 @@ namespace XenAdmin.Dialogs
                     ShowTab(VCpuMemoryEditPage = new CPUMemoryEditPage());
                     ShowTab(StartupOptionsEditPage = new BootOptionsEditPage());
                     ShowTab(VMHAEditPage = new VMHAEditPage {VerticalTabs = verticalTabs});
-                    if (!Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough))
-                    {
-                        ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
-                    } 
                 }
 
                 if (is_vm || is_host || is_sr)
@@ -226,6 +222,11 @@ namespace XenAdmin.Dialogs
                     {
                         ShowTab(GpuEditPage = new GpuEditPage());
                     }
+                }
+
+                if (is_vm && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough))
+                {
+                    ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
                 }
 
                 if (is_hvm)
@@ -508,6 +509,13 @@ namespace XenAdmin.Dialogs
             {
                 GpuEditPage.SelectedPriority = VMHAEditPage.SelectedPriority;
                 GpuEditPage.ShowHideWarnings();
+                return;
+            }
+            
+            if (verticalTabs.SelectedItem == usbEditPage && VMHAEditPage != null)
+            {
+                usbEditPage.SelectedPriority = VMHAEditPage.SelectedPriority;
+                usbEditPage.ShowHideWarnings();
                 return;
             }
         }

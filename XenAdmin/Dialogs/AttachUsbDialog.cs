@@ -59,8 +59,12 @@ namespace XenAdmin.Dialogs
                 {
                     List<XenRef<Host>> possibleHostRefs = VM.get_possible_hosts(_vm.Connection.Session, _vm.opaque_ref);
                     possibleHosts = _vm.Connection.ResolveAll(possibleHostRefs);
-                    Program.Invoke(Program.MainWindow, BuildList);
-                });
+                },
+                true);
+            action.Completed += delegate
+            {
+                Program.Invoke(Program.MainWindow, BuildList);
+            };
             action.RunAsync();
         }
 
@@ -125,7 +129,7 @@ namespace XenAdmin.Dialogs
 
         private class UsbItem : CustomTreeNode
         {
-            public PUSB Pusb { get; }
+            public PUSB Pusb { get; private set; }
 
             public UsbItem(PUSB pusb) :base(true)
             {

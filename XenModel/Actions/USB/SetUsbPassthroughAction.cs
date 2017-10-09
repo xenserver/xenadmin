@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            PUSB.set_passthrough_enabled(_pusb.Connection.Session, _pusb.opaque_ref, _passthroughEnabled);
+            PUSB.set_passthrough_enabled(Session, _pusb.opaque_ref, _passthroughEnabled);
             Description = _passthroughEnabled ? Messages.ACTION_USB_PASSTHROUGH_ENABLED : Messages.ACTION_USB_PASSTHROUGH_DISABLED;
         }
     }
