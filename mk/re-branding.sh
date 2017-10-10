@@ -151,7 +151,7 @@ RESX_rebranding "${REPO}/XenAdmin/Properties/Resources"
 rebranding_global ${REPO}/XenAdmin/app.config
 
 #XenModel rebranding
-RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames"
+RESX_rebranding "${REPO}/XenModel/Messages ${REPO}/XenModel/InvisibleMessages ${REPO}/XenModel/FriendlyNames ${REPO}/XenModel/XenAPI/FriendlyErrorNames"
 
 #XenOvfApi rebranding
 RESX_rebranding "${REPO}/XenOvfApi/Messages ${REPO}/XenOvfApi/Content"
