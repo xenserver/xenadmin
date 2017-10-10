@@ -238,11 +238,7 @@ namespace XenAdmin.SettingsPanels
                 }
                 if (confirmed)
                 {
-                    // Run this stuff off the event thread, since it involves a server call
-                    System.Threading.ThreadPool.QueueUserWorkItem((System.Threading.WaitCallback)delegate (object o)
-                    {
-                        new XenAdmin.Actions.DeleteVUSBAction(selectedRow.Vusb, _vm).RunAsync();
-                    });
+                    new XenAdmin.Actions.DeleteVUSBAction(selectedRow.Vusb, _vm).RunAsync();
                 }
             }
             

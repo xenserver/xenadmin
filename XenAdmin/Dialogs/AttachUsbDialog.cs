@@ -112,8 +112,6 @@ namespace XenAdmin.Dialogs
             UsbItem item = treeUsbList.SelectedItem as UsbItem;
             if (item != null)
                 new XenAdmin.Actions.CreateVUSBAction(item.Pusb, _vm).RunAsync();
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
-            Close();
         }
 
         private class HostItem : CustomTreeNode

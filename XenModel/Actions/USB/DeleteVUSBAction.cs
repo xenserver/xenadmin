@@ -55,18 +55,14 @@ namespace XenAdmin.Actions
                 if ((_vusb.Connection.Resolve(_vusb.attached) != null) &&
                     XenAPI.VUSB.get_allowed_operations(Session, _vusb.opaque_ref).Contains(XenAPI.vusb_operations.unplug))
                 {
-                    VUSB.async_unplug(Session, _vusb.opaque_ref);
+                    RelatedTask = VUSB.async_unplug(Session, _vusb.opaque_ref);
                     PollToCompletion(0, 50);
                 }
-            }
-            catch
-            {
-                throw;
             }
             finally
             {
                 PercentComplete = 50;
-                VUSB.async_destroy(Session, _vusb.opaque_ref);
+                RelatedTask = VUSB.async_destroy(Session, _vusb.opaque_ref);
                 PollToCompletion(51, 100);
             }
             Description = Messages.ACTION_VUSB_DELETED;
