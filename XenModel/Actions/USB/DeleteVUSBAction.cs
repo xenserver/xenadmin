@@ -30,43 +30,44 @@
  */
 
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using XenAPI;
 
-namespace XenAdmin.Dialogs
+namespace XenAdmin.Actions
 {
-    public partial class UsbUsageDialog : XenDialogBase
+    public class DeleteVUSBAction : PureAsyncAction
     {
-        private PUSB _pusb;
+        private VUSB _vusb;
 
-        public UsbUsageDialog(PUSB pusb)
+        public DeleteVUSBAction(VUSB vusb, VM vm) : 
+            base(vusb.Connection, String.Format(Messages.ACTION_VUSB_DELETING, vusb.Name(), vm.Name()))
         {
-            _pusb = pusb;
-            InitializeComponent();
-            RefreshControls();
+            _vusb = vusb;
         }
 
-        private void RefreshControls()
+        protected override void Run()
         {
-            if (_pusb.passthrough_enabled)
+            try
             {
-                Text = Messages.DIALOG_USB_USAGE_DISABLE_PASSTHROUGH;
-                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_DENY;
-                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_DISABLE;
-
-                tableLayoutPanelBase.Controls.Remove(tableLayoutPanelWarning);
+                if ((_vusb.Connection.Resolve(_vusb.attached) != null) &&
+                    XenAPI.VUSB.get_allowed_operations(Session, _vusb.opaque_ref).Contains(XenAPI.vusb_operations.unplug))
+                {
+                    RelatedTask = VUSB.async_unplug(Session, _vusb.opaque_ref);
+                    PollToCompletion(0, 50);
+                }
             }
-            else
+            finally
             {
-                Text = Messages.DIALOG_USB_USAGE_ENABLE_PASSTHROUGH;
-                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_ALLOW;
-                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_ENABLE;
+                PercentComplete = 50;
+                RelatedTask = VUSB.async_destroy(Session, _vusb.opaque_ref);
+                PollToCompletion(51, 100);
             }
+            Description = Messages.ACTION_VUSB_DELETED;
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            new XenAdmin.Actions.SetUsbPassthroughAction (_pusb, !_pusb.passthrough_enabled).RunAsync();
-        }
     }
+
 }

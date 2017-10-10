@@ -30,43 +30,30 @@
  */
 
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using XenAPI;
 
-namespace XenAdmin.Dialogs
+namespace XenAdmin.Actions
 {
-    public partial class UsbUsageDialog : XenDialogBase
+    public class SetUsbPassthroughAction : PureAsyncAction
     {
         private PUSB _pusb;
+        private bool _passthroughEnabled;
 
-        public UsbUsageDialog(PUSB pusb)
+        public SetUsbPassthroughAction (PUSB pusb, bool passthroughEnabled) :
+            base(pusb.Connection, String.Format(passthroughEnabled ? Messages.ACTION_USB_PASSTHROUGH_ENABLING : Messages.ACTION_USB_PASSTHROUGH_DISABLING, pusb.Name()))
         {
             _pusb = pusb;
-            InitializeComponent();
-            RefreshControls();
+            _passthroughEnabled = passthroughEnabled;
         }
 
-        private void RefreshControls()
+        protected override void Run()
         {
-            if (_pusb.passthrough_enabled)
-            {
-                Text = Messages.DIALOG_USB_USAGE_DISABLE_PASSTHROUGH;
-                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_DENY;
-                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_DISABLE;
-
-                tableLayoutPanelBase.Controls.Remove(tableLayoutPanelWarning);
-            }
-            else
-            {
-                Text = Messages.DIALOG_USB_USAGE_ENABLE_PASSTHROUGH;
-                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_ALLOW;
-                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_ENABLE;
-            }
-        }
-
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            new XenAdmin.Actions.SetUsbPassthroughAction (_pusb, !_pusb.passthrough_enabled).RunAsync();
+            PUSB.set_passthrough_enabled(Session, _pusb.opaque_ref, _passthroughEnabled);
+            Description = _passthroughEnabled ? Messages.ACTION_USB_PASSTHROUGH_ENABLED : Messages.ACTION_USB_PASSTHROUGH_DISABLED;
         }
     }
 }

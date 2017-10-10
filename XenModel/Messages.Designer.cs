@@ -2626,6 +2626,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to USB passthrough disabled.
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_DISABLED {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling USB passthrough for {0}.
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_DISABLING {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_DISABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB passthrough enabled.
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_ENABLED {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling USB passthrough for {0}.
+        /// </summary>
+        public static string ACTION_USB_PASSTHROUGH_ENABLING {
+            get {
+                return ResourceManager.GetString("ACTION_USB_PASSTHROUGH_ENABLING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual disk created.
         /// </summary>
         public static string ACTION_VDI_CREATED {
@@ -3333,6 +3369,60 @@ namespace XenAdmin {
         public static string ACTION_VMS_STARTING_ON_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_VMS_STARTING_ON_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB device attached.
+        /// </summary>
+        public static string ACTION_VUSB_CREATED {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaching USB device &apos;{0}&apos; to VM &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VUSB_CREATING {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_CREATING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB device detached.
+        /// </summary>
+        public static string ACTION_VUSB_DELETED {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DELETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detaching USB device &apos;{0}&apos; from VM &apos;{1}&apos;.
+        /// </summary>
+        public static string ACTION_VUSB_DELETING {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DELETING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detach USB device.
+        /// </summary>
+        public static string ACTION_VUSB_DETACH {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DETACH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to detach the selected USB device?.
+        /// </summary>
+        public static string ACTION_VUSB_DETACH_CONFIRM {
+            get {
+                return ResourceManager.GetString("ACTION_VUSB_DETACH_CONFIRM", resourceCulture);
             }
         }
         
@@ -14891,6 +14981,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fetch possible hosts of VM {0}.
+        /// </summary>
+        public static string FETCH_POSSIBLE_HOSTS {
+            get {
+                return ResourceManager.GetString("FETCH_POSSIBLE_HOSTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetched possible hosts of VM {0}.
+        /// </summary>
+        public static string FETCHED_POSSIBLE_HOSTS {
+            get {
+                return ResourceManager.GetString("FETCHED_POSSIBLE_HOSTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetching possible hosts of VM {0}.
+        /// </summary>
+        public static string FETCHING_POSSIBLE_HOSTS {
+            get {
+                return ResourceManager.GetString("FETCHING_POSSIBLE_HOSTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No LUNs were found.  Please verify your hardware configuration..
         /// </summary>
         public static string FIBRECHANNEL_NO_RESULTS {
@@ -25457,6 +25574,15 @@ namespace XenAdmin {
         public static string NOT_AGILE_VM_HAS_VGPU {
             get {
                 return ResourceManager.GetString("NOT_AGILE_VM_HAS_VGPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VM has one or more USB devices attached. Restart cannot be guaranteed..
+        /// </summary>
+        public static string NOT_AGILE_VM_HAS_VUSB {
+            get {
+                return ResourceManager.GetString("NOT_AGILE_VM_HAS_VUSB", resourceCulture);
             }
         }
         

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -123,6 +123,9 @@
     <Compile Include="Actions\Updates\XenCenterVersion.cs" />
     <Compile Include="Actions\Updates\XenServerPatch.cs" />
     <Compile Include="Actions\Updates\XenServerVersion.cs" />
+    <Compile Include="Actions\USB\CreateVUSBAction.cs" />
+    <Compile Include="Actions\USB\DeleteVUSBAction.cs" />
+    <Compile Include="Actions\USB\SetUsbPassthroughAction.cs" />
     <Compile Include="Actions\VBD\VbdEditAction.cs" />
     <Compile Include="Actions\VBD\VbdSaveAndPlugAction.cs" />
     <Compile Include="Actions\DR\VdiOpenDatabaseAction.cs" />

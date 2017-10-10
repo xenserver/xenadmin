@@ -48,10 +48,20 @@ namespace XenAdmin.SettingsPanels
     public partial class USBEditPage : XenTabPage, IEditPage
     {
         private VM _vm;
+        public VM.HA_Restart_Priority SelectedPriority { private get; set; }
 
         public USBEditPage()
         {
             InitializeComponent();
+        }
+
+        private VerticalTabs verticalTabs;
+        public VerticalTabs VerticalTabs
+        {
+            set
+            {
+                this.verticalTabs = value;
+            }
         }
 
         #region override IEditPage
@@ -90,7 +100,7 @@ namespace XenAdmin.SettingsPanels
 
         public Image Image
         {
-            get { return Resources._001_Tools_h32bit_16; }
+            get { return Resources.usb_16; }
         }
 
         public AsyncAction SaveSettings()
@@ -100,18 +110,29 @@ namespace XenAdmin.SettingsPanels
 
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
-            Trace.Assert(clone is VM);
+            Trace.Assert(orig is VM);
 
-            _vm = (VM)clone;
+            _vm = (VM)orig;
             if (Connection == null)
                 Connection = _vm.Connection;
 
-            if (_vm != null)
-            {
-                _vm.PropertyChanged += Vm_PropertyChanged;
-            }
+            _vm.PropertyChanged += Vm_PropertyChanged;
 
             BuildList();
+            SelectedPriority = _vm.HARestartPriority();
+            ShowHideWarnings();
+            dataGridViewUsbList_SelectionChanged(null, null);
+        }
+
+        public void ShowHideWarnings()
+        {
+            // Check if HA was enabled on pool and Restart priority was set on VM.
+            Pool pool = Helpers.GetPool(_vm.Connection);
+            bool haEnabled = (pool != null &&
+                pool.ha_enabled &&
+                VM.HaPriorityIsRestart(_vm.Connection, SelectedPriority));
+            pictureHAWarning.Visible = labelHAWarning.Visible = haEnabled;
+            buttonAttach.Enabled = !haEnabled;
         }
 
         public bool InBuildList = false;
@@ -134,8 +155,6 @@ namespace XenAdmin.SettingsPanels
                 {
                     dataGridViewUsbList.Rows.Add(new VMUsbRow(vusb));
                 }
-
-                buttonDetach.Enabled = false;
             }
             finally
             {
@@ -173,7 +192,11 @@ namespace XenAdmin.SettingsPanels
         void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "VUSBs")
+            {
                 BuildList();
+                if (verticalTabs != null)
+                    verticalTabs.Refresh();
+            }
         }
 
         private VMUsbRow selectedRow = null;
@@ -200,7 +223,25 @@ namespace XenAdmin.SettingsPanels
 
         private void buttonDetach_Click(object sender, System.EventArgs e)
         {
-
+            if ((selectedRow != null) && (_vm != null))
+            {
+                bool confirmed = false;
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(null, Messages.ACTION_VUSB_DETACH_CONFIRM, Messages.ACTION_VUSB_DETACH),
+                    ThreeButtonDialog.ButtonYes,
+                    new ThreeButtonDialog.TBDButton(Messages.NO_BUTTON_CAPTION, DialogResult.No, ThreeButtonDialog.ButtonType.CANCEL, true)))
+                {
+                    if (dlg.ShowDialog(Program.MainWindow) == DialogResult.Yes)
+                    {
+                        confirmed = true;
+                    }
+                }
+                if (confirmed)
+                {
+                    new XenAdmin.Actions.DeleteVUSBAction(selectedRow.Vusb, _vm).RunAsync();
+                }
+            }
+            
         }
 
         private class VMUsbRow : DataGridViewExRow
@@ -234,7 +275,7 @@ namespace XenAdmin.SettingsPanels
                 locationCell.Value = pusb.path;
                 descriptionCell.Value = pusb.description;
 
-                attachedCell.Value = (_vusb.attached != null).ToYesNoStringI18n();
+                attachedCell.Value = (_vusb.Connection.Resolve(_vusb.attached) != null).ToYesNoStringI18n();
             }
 
             public void DeregisterEvents()

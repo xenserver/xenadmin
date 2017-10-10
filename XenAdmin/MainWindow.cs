@@ -1446,11 +1446,10 @@ namespace XenAdmin
             ShowTab(TabPageNICs, !multi && !SearchMode && ((isHostSelected && isHostLive)));
             ShowTab(TabPageDockerProcess, !multi && !SearchMode && isDockerContainerSelected && !(SelectionManager.Selection.First as DockerContainer).Parent.IsWindows());
             ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
-            ShowTab(TabPageUSB, !multi && !searchMode && ((isHostSelected && isHostLive)));
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
-
             ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu));
+            ShowTab(TabPageUSB, !multi && !SearchMode && (isHostSelected && isHostLive) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough));
 
             pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
 

@@ -972,6 +972,18 @@
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>Uploading report to [Citrix] Insight Services</value>
   </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>USB passthrough disabled</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLING" xml:space="preserve">
+    <value>Disabling USB passthrough for {0}</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>USB passthrough enabled</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLING" xml:space="preserve">
+    <value>Enabling USB passthrough for {0}</value>
+  </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>Virtual disk created</value>
   </data>
@@ -1208,6 +1220,24 @@
   </data>
   <data name="ACTION_VM_TEMPLATIZING_TITLE" xml:space="preserve">
     <value>Converting VM '{0}' to template</value>
+  </data>
+  <data name="ACTION_VUSB_CREATED" xml:space="preserve">
+    <value>USB device attached</value>
+  </data>
+  <data name="ACTION_VUSB_CREATING" xml:space="preserve">
+    <value>Attaching USB device '{0}' to VM '{1}'</value>
+  </data>
+  <data name="ACTION_VUSB_DELETED" xml:space="preserve">
+    <value>USB device detached</value>
+  </data>
+  <data name="ACTION_VUSB_DELETING" xml:space="preserve">
+    <value>Detaching USB device '{0}' from VM '{1}'</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH" xml:space="preserve">
+    <value>Detach USB device</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
+    <value>Are you sure you want to detach the selected USB device?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
     <value>Waiting for slaves to recover...</value>
@@ -5232,8 +5262,17 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>Feature disabled in the registry</value>
   </data>
+  <data name="FETCHED_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>Fetched possible hosts of VM {0}</value>
+  </data>
+  <data name="FETCHING_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>Fetching possible hosts of VM {0}</value>
+  </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>&amp;Next Section</value>
+  </data>
+  <data name="FETCH_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>Fetch possible hosts of VM {0}</value>
   </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>No LUNs were found.  Please verify your hardware configuration.</value>
@@ -8849,6 +8888,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NOT_AGILE_VM_HAS_VGPU" xml:space="preserve">
     <value>The VM has one or more virtual GPUs. Restart cannot be guaranteed.</value>
+  </data>
+  <data name="NOT_AGILE_VM_HAS_VUSB" xml:space="preserve">
+    <value>The VM has one or more USB devices attached. Restart cannot be guaranteed.</value>
   </data>
   <data name="NOT_APPLIED" xml:space="preserve">
     <value>Not applied</value>
