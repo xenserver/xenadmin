@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -1521,7 +1521,13 @@
     <EmbeddedResource Include="Controls\XenSearch\QueryPanel.zh-CN.resx">
       <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AttachUsbDialog.ja.resx">
+      <DependentUpon>AttachUsbDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AttachUsbDialog.resx">
+      <DependentUpon>AttachUsbDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AttachUsbDialog.zh-CN.resx">
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\EnablePvsReadCachingDialog.ja.resx">
@@ -1743,7 +1749,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>ReconnectAsDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UsbUsageDialog.ja.resx">
+      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\UsbUsageDialog.resx">
+      <DependentUpon>UsbUsageDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\UsbUsageDialog.zh-CN.resx">
       <DependentUpon>UsbUsageDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VMDialogs\MoveVMDialog.resx">
@@ -1923,7 +1935,13 @@
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.zh-CN.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\USBEditPage.ja.resx">
+      <DependentUpon>USBEditPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\USBEditPage.resx">
+      <DependentUpon>USBEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\USBEditPage.zh-CN.resx">
       <DependentUpon>USBEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\VDISizeLocationPage.resx">
@@ -2019,7 +2037,13 @@
     <EmbeddedResource Include="TabPages\PvsPage.zh-CN.resx">
       <DependentUpon>PvsPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\UsbPage.ja.resx">
+      <DependentUpon>UsbPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\UsbPage.resx">
+      <DependentUpon>UsbPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\UsbPage.zh-CN.resx">
       <DependentUpon>UsbPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\WlbPage.resx">
