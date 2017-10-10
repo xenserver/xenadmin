@@ -117,6 +117,19 @@ namespace XenAdmin.TabPages
                     ss.ExpiryStatus,
                     true);
             });
+
+            Pool p = xenObject as Pool;
+            if (p != null)
+                Program.Invoke(Program.MainWindow, () =>
+                {
+                    var additionalString = PoolAdditionalLicenseString();
+                    pdSectionGeneral.UpdateEntryValueWithKey(
+                        Messages.POOL_LICENSE,
+                        additionalString != string.Empty
+                            ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, p.LicenseString(), additionalString)
+                            : p.LicenseString(),
+                        true);
+                });
         }
 
         void s_contentReceivedFocus(PDSection s)
@@ -1286,7 +1299,11 @@ namespace XenAdmin.TabPages
             Pool p = xenObject as Pool;
             if (p != null)
             {
-                s.AddEntry(Messages.POOL_LICENSE, p.LicenseString());
+                var additionalString = PoolAdditionalLicenseString();
+                s.AddEntry(Messages.POOL_LICENSE,
+                    additionalString != string.Empty
+                        ? string.Format(Messages.MAINWINDOW_CONTEXT_REASON, p.LicenseString(), additionalString)
+                        : p.LicenseString());
                 s.AddEntry(Messages.NUMBER_OF_SOCKETS, p.CpuSockets().ToString());
 
                 var master = p.Connection.Resolve(p.master);
@@ -1327,6 +1344,16 @@ namespace XenAdmin.TabPages
             }
 
             s.AddEntry(FriendlyName("host.uuid"), GetUUID(xenObject));
+        }
+
+        private string PoolAdditionalLicenseString()
+        {
+            if (licenseStatus.CurrentState == LicenseStatus.HostState.Expired)
+                return Messages.LICENSE_EXPIRED;
+            else if (licenseStatus.CurrentState == LicenseStatus.HostState.Free)
+                return Messages.LICENSE_UNLICENSED;
+            else   
+                return string.Empty;
         }
 
         private static void GenerateVirtualisationStatusForGeneralBox(PDSection s, VM vm)

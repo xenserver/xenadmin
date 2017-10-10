@@ -19639,7 +19639,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unlicensed.
+        ///   Looks up a localized string similar to License expired.
         /// </summary>
         public static string LICENSE_EXPIRED {
             get {
@@ -19707,15 +19707,6 @@ namespace XenAdmin {
         public static string LICENSE_EXPIRY_PURCHACE {
             get {
                 return ResourceManager.GetString("LICENSE_EXPIRY_PURCHACE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to License Expired.
-        /// </summary>
-        public static string LICENSE_EXPIRY_TITLE {
-            get {
-                return ResourceManager.GetString("LICENSE_EXPIRY_TITLE", resourceCulture);
             }
         }
         
@@ -20000,6 +19991,15 @@ namespace XenAdmin {
         public static string LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION {
             get {
                 return ResourceManager.GetString("LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlicensed.
+        /// </summary>
+        public static string LICENSE_UNLICENSED {
+            get {
+                return ResourceManager.GetString("LICENSE_UNLICENSED", resourceCulture);
             }
         }
         

@@ -6846,7 +6846,7 @@ Size: {3}</value>
   <data name="LICENSE_ERROR_TITLE" xml:space="preserve">
     <value>Licensing Error</value>
   </data>
-  <data name="LICENSE_EXPIRED" xml:space="preserve">
+  <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>Unlicensed</value>
   </data>
   <data name="LICENSE_EXPIRED_NO_LICENSES_AVAILABLE" xml:space="preserve">
@@ -6871,8 +6871,8 @@ Size: {3}</value>
     <value>[XenServer] Online</value>
     <comment>this text could be improved</comment>
   </data>
-  <data name="LICENSE_EXPIRY_TITLE" xml:space="preserve">
-    <value>License Expired</value>
+  <data name="LICENSE_EXPIRED" xml:space="preserve">
+    <value>License expired</value>
   </data>
   <data name="LICENSE_FIELD_DISABLED" xml:space="preserve">
     <value>This field is disabled due to license restrictions on the server.</value>
