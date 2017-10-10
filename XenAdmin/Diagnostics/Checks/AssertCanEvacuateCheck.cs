@@ -90,7 +90,7 @@ namespace XenAdmin.Diagnostics.Checks
                     problems.Add(new ToolsCD(this, residentVM));
                     VMsWithProblems.Add(residentVM.opaque_ref);
                 }
-                else if (sr != null && sr.content_type == SR.Content_Type_ISO)
+                else if (sr != null && sr.content_type == SR.Content_Type_ISO && (!sr.shared || Properties.Settings.Default.EjectSharedIsoOnUpdate))
                 {
                     problems.Add(new LocalCD(this, residentVM));
                     VMsWithProblems.Add(residentVM.opaque_ref);
