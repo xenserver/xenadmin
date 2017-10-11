@@ -39,9 +39,3 @@ if [ "${FOUND_TYPO}" != "" ]
 then
   echo "$1 contains $FOUND_TYPO"
 fi
-
-for w in "operation system" "goto " "TODO[: ]*[rR]emove
-"
-do
-  grep -qi "$w" "$1" && echo "$1 contains $w"
-done
