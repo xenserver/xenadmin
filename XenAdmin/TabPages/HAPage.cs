@@ -218,13 +218,15 @@ namespace XenAdmin.TabPages
 
                         if (PassedRbacChecks())
                         {
-                            buttonConfigure.Visible = true;
-                            buttonConfigure.Enabled = true;
+                            bool haRestricted = Helpers.FeatureForbidden(pool, Host.RestrictHA);
+
+                            buttonConfigure.Visible = !haRestricted;
+                            buttonConfigure.Enabled = !haRestricted;
                             buttonEnableDisableHa.Visible = true;
                             buttonEnableDisableHa.Enabled = true;
 
                             pictureBoxWarningTriangle.Visible = false;
-                            labelStatus.Text = string.Format(Messages.HA_TAB_CONFIGURED_BLURB, Helpers.GetName(pool).Ellipsise(30));
+                            labelStatus.Text = string.Format(haRestricted ? Messages.HA_TAB_CONFIGURED_UNLICENSED : Messages.HA_TAB_CONFIGURED_BLURB, Helpers.GetName(pool).Ellipsise(30));
                         }
                         else
                         {

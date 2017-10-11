@@ -5899,6 +5899,9 @@ Reduce protection levels, or bring more servers online to increase the maximum s
 
 Click Configure HA to alter the settings displayed below.</value>
   </data>
+  <data name="HA_TAB_CONFIGURED_UNLICENSED" xml:space="preserve">
+    <value>HA is currently enabled for pool '{0}'.</value>
+  </data>
   <data name="HA_UNABLE_TO_CALCULATE_MESSAGE" xml:space="preserve">
     <value>Unable to calculate maximum pool failure capacity.</value>
   </data>
