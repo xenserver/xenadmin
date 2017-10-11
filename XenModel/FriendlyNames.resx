@@ -1113,7 +1113,7 @@
     <value>Virtual machine '{0}' did not reduce its memory usage when requested.</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
-    <value>The XenServer license you are using does not allow you to use the Scheduled Snapshots feature.</value>
+    <value>The [XenServer] license you are using does not allow you to use the Scheduled Snapshots feature.</value>
   </data>
   <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
     <value>The snapshot schedule '{0}' failed because a snapshot could not be created.</value>

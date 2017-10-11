@@ -12076,7 +12076,7 @@ To learn more about the [XenServer] Role Based Access Control feature or to star
   <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
     <value>
 
-To learn more about the [XenServer] VM Scheduled Snapshots feature or to start a XenServer trial, click the button below.</value>
+To learn more about the [XenServer] VM Scheduled Snapshots feature or to start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.</value>
@@ -12377,7 +12377,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>Send &amp;email notifications about snapshot schedule job alerts</value>
   </data>
   <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
-    <value>XenServer can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails.</value>
+    <value>[XenServer] can send you email notifications when alerts associated with snapshot schedule jobs are raised, such as when a VM snapshot is created or when a snapshot operation fails.</value>
   </data>
   <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
     <value>&amp;Run the new snapshot schedule job when I click Finish</value>

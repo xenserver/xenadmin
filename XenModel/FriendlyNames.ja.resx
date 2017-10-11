@@ -1104,7 +1104,7 @@
     <value>仮想マシン '{0}' のメモリ使用が要求どおりに減少しませんでした。</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
-    <value>使用中の XenServer ライセンスでは、スナップショット スケジュール機能を使用できません。</value>
+    <value>使用中の [XenServer] ライセンスでは、スナップショット スケジュール機能を使用できません。</value>
   </data>
   <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
     <value>スナップショットが作成できなかったため、スナップショット スケジュール '{0}' が失敗しました。</value>

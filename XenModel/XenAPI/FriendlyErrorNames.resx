@@ -1857,7 +1857,7 @@ Authorized Roles: {1}</value>
     <value>You attempted an operation on a VM that needed it to be in state &apos;{1}&apos; but was in state &apos;{2}&apos;.</value>
   </data>
   <data name="VM_BIOS_STRINGS_ALREADY_SET" xml:space="preserve">
-    <value>The BIOS strings for this VM have already been set and cannot be changed anymore.</value>
+    <value>The BIOS strings for this VM have already been set and cannot be changed.</value>
   </data>
   <data name="VM_CALL_PLUGIN_RATE_LIMIT" xml:space="preserve">
     <value>There is a minimal interval required between consecutive plugin calls made on the same VM, please wait before retry.</value>
@@ -1902,7 +1902,7 @@ Authorized Roles: {1}</value>
     <value>This VM operation cannot be performed on an older-versioned host during an upgrade.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>You attempted to migrate a VM to a destination host running a version of XenServer older than the source host.</value>
+    <value>You attempted to migrate a VM to a destination host which is older than the source host.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>The VM&apos;s Virtual Hardware Platform version is incompatible with this host.</value>
