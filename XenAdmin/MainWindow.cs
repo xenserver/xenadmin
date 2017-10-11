@@ -1415,7 +1415,7 @@ namespace XenAdmin
             bool show_home = SelectionManager.Selection.Count == 1 && SelectionManager.Selection[0].Value == null;
             // The upsell pages use the first selected XenObject: but they're only shown if there is only one selected object (see calls to ShowTab() below).
             bool dmc_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictDMC);
-            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA);
+            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA) && (selectionPool != null && !selectionPool.ha_enabled);
             bool wlb_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
             bool ad_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictAD);
             bool is_connected = selectionConnection != null && selectionConnection.IsConnected;

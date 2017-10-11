@@ -16777,6 +16777,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HA is currently enabled for pool &apos;{0}&apos;..
+        /// </summary>
+        public static string HA_TAB_CONFIGURED_UNLICENSED {
+            get {
+                return ResourceManager.GetString("HA_TAB_CONFIGURED_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to calculate maximum pool failure capacity..
         /// </summary>
         public static string HA_UNABLE_TO_CALCULATE_MESSAGE {
