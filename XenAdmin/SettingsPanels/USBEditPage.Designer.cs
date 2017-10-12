@@ -40,6 +40,7 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureHAWarning = new System.Windows.Forms.PictureBox();
             this.labelHAWarning = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanelBase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsbList)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -50,9 +51,10 @@
             // tableLayoutPanelBase
             // 
             resources.ApplyResources(this.tableLayoutPanelBase, "tableLayoutPanelBase");
-            this.tableLayoutPanelBase.Controls.Add(this.dataGridViewUsbList, 0, 0);
-            this.tableLayoutPanelBase.Controls.Add(this.flowLayoutPanel1, 0, 1);
-            this.tableLayoutPanelBase.Controls.Add(this.flowLayoutPanel2, 0, 2);
+            this.tableLayoutPanelBase.Controls.Add(this.dataGridViewUsbList, 0, 1);
+            this.tableLayoutPanelBase.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanelBase.Controls.Add(this.flowLayoutPanel2, 0, 3);
+            this.tableLayoutPanelBase.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanelBase.Name = "tableLayoutPanelBase";
             // 
             // dataGridViewUsbList
@@ -126,6 +128,11 @@
             resources.ApplyResources(this.labelHAWarning, "labelHAWarning");
             this.labelHAWarning.Name = "labelHAWarning";
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // USBEditPage
             // 
             resources.ApplyResources(this, "$this");
@@ -133,6 +140,7 @@
             this.Controls.Add(this.tableLayoutPanelBase);
             this.Name = "USBEditPage";
             this.tableLayoutPanelBase.ResumeLayout(false);
+            this.tableLayoutPanelBase.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsbList)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -156,5 +164,6 @@
         private System.Windows.Forms.PictureBox pictureHAWarning;
         private System.Windows.Forms.Label labelHAWarning;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Label label1;
     }
 }

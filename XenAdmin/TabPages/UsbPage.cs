@@ -172,18 +172,28 @@ namespace XenAdmin.TabPages
         private void dataGridViewUsbList_SelectionChanged(object sender, EventArgs e)
         {
             selectedRow = null;
-            buttonPassthrough.Enabled = false;
 
             if (dataGridViewUsbList.SelectedRows.Count > 0)
-            {
                 selectedRow = (HostUsbRow)dataGridViewUsbList.SelectedRows[0];
-                buttonPassthrough.Enabled = true;
-            }
 
             if (selectedRow != null && selectedRow.Pusb.passthrough_enabled)
+            {
+                PUSB pusb = selectedRow.Pusb;
+                USB_group usbGroup = pusb.Connection.Resolve(pusb.USB_group);
+                bool attached = (usbGroup != null) && (usbGroup.VUSBs != null) && (usbGroup.VUSBs.Count > 0);
+
                 buttonPassthrough.Text = Messages.USBLIST_DISABLE_PASSTHROUGH_HOTKEY;
+
+                if (attached)
+                    buttonPassthrough.Enabled = false;
+                else
+                    buttonPassthrough.Enabled = true;
+            }
             else
+            {
                 buttonPassthrough.Text = Messages.USBLIST_ENABLE_PASSTHROUGH_HOTKEY;
+                buttonPassthrough.Enabled = true;
+            } 
         }
 
         private void buttonPassthrough_Click(object sender, EventArgs e)
@@ -238,7 +248,9 @@ namespace XenAdmin.TabPages
             public void UpdateDetails()
             {
                 locationCell.Value = _pusb.path;
-                descriptionCell.Value = _pusb.description;
+                descriptionCell.Value = string.IsNullOrEmpty(_pusb.description) ?
+                        string.Format("Vendor: {0}; Product: {1}", _pusb.vendor_id, _pusb.product_id) :
+                        _pusb.description;
                 passthroughCell.Value = _pusb.passthrough_enabled ? Messages.ENABLED : Messages.DISABLED;
                 vmCell.Value = _vm == null ? "" : _vm.name_label;
             }
