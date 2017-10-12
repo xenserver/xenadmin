@@ -6806,7 +6806,7 @@ SCSI ID: {2}
   <data name="LICENSE_ERROR_TITLE" xml:space="preserve">
     <value>ライセンス エラー</value>
   </data>
-  <data name="LICENSE_EXPIRED" xml:space="preserve">
+  <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>非ライセンス</value>
   </data>
   <data name="LICENSE_EXPIRED_NO_LICENSES_AVAILABLE" xml:space="preserve">
@@ -6831,7 +6831,7 @@ SCSI ID: {2}
     <value>[XenServer] オンライン</value>
     <comment>this text could be improved</comment>
   </data>
-  <data name="LICENSE_EXPIRY_TITLE" xml:space="preserve">
+  <data name="LICENSE_EXPIRED" xml:space="preserve">
     <value>期限切れのライセンス</value>
   </data>
   <data name="LICENSE_FIELD_DISABLED" xml:space="preserve">

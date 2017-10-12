@@ -6800,7 +6800,7 @@ SCSI ID: {2}
   <data name="LICENSE_ERROR_TITLE" xml:space="preserve">
     <value>许可错误</value>
   </data>
-  <data name="LICENSE_EXPIRED" xml:space="preserve">
+  <data name="LICENSE_UNLICENSED" xml:space="preserve">
     <value>未获许可</value>
   </data>
   <data name="LICENSE_EXPIRED_NO_LICENSES_AVAILABLE" xml:space="preserve">
@@ -6825,7 +6825,7 @@ SCSI ID: {2}
     <value>在线 [XenServer]</value>
     <comment>this text could be improved</comment>
   </data>
-  <data name="LICENSE_EXPIRY_TITLE" xml:space="preserve">
+  <data name="LICENSE_EXPIRED" xml:space="preserve">
     <value>许可证已过期</value>
   </data>
   <data name="LICENSE_FIELD_DISABLED" xml:space="preserve">
