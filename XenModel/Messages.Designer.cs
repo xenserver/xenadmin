@@ -23736,6 +23736,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The pool will exceed the maximum number of servers allowed by your license.
+        /// </summary>
+        public static string NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE {
+            get {
+                return ResourceManager.GetString("NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NFS SR [{0}].
         /// </summary>
         public static string NEWSR_ACTION {

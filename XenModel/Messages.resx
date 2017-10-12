@@ -8101,6 +8101,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
     <value>You cannot add an unlicensed server to a licensed pool</value>
   </data>
+  <data name="NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE" xml:space="preserve">
+    <value>The pool will exceed the maximum number of servers allowed by your license</value>
+  </data>
   <data name="NEWSR_ACTION" xml:space="preserve">
     <value>NFS SR [{0}]</value>
   </data>

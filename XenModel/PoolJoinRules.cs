@@ -60,6 +60,7 @@ namespace XenAdmin.Core
             UnlicensedHostLicensedMaster,
             LicenseMismatch,
             MasterPoolMaxNumberHostReached,
+            WillExceedPoolMaxSize,
             DifferentServerVersion,
             DifferentHomogeneousUpdatesFromMaster,
             DifferentHomogeneousUpdatesFromPool,
@@ -86,7 +87,7 @@ namespace XenAdmin.Core
         /// <param name="allowLicenseUpgrade">Whether we can upgrade a free host to a v6 license of the pool it's joining</param>
         /// <param name="allowCpuLevelling">Whether we can apply CPU levelling to the slave before it joins the pool</param>
         /// <returns>The reason why the server can't join the pool, or Reason.Allowed if it's OK</returns>
-        public static Reason CanJoinPool(IXenConnection slaveConnection, IXenConnection masterConnection, bool allowLicenseUpgrade, bool allowCpuLevelling, bool allowSlaveAdConfig)
+        public static Reason CanJoinPool(IXenConnection slaveConnection, IXenConnection masterConnection, bool allowLicenseUpgrade, bool allowCpuLevelling, bool allowSlaveAdConfig, int poolSizeIncrement = 1)
         {
             if (!Helpers.IsConnected(slaveConnection))  // also implies slaveConnection != null
                 return Reason.NotConnected;
@@ -134,6 +135,9 @@ namespace XenAdmin.Core
 
             if (MasterPoolMaxNumberHostReached(masterConnection))
                 return Reason.MasterPoolMaxNumberHostReached;
+
+            if (WillExceedPoolMaxSize(masterConnection, poolSizeIncrement))
+                return Reason.WillExceedPoolMaxSize;
             
             if (!SameLinuxPack(slaveHost, masterHost))
                 return Reason.NotSameLinuxPack;
@@ -199,6 +203,8 @@ namespace XenAdmin.Core
                     return Messages.NEWPOOL_LICENSEMISMATCH;
                 case Reason.MasterPoolMaxNumberHostReached:
                     return Messages.NEWPOOL_MAX_NUMBER_HOST_REACHED;
+                case Reason.WillExceedPoolMaxSize:
+                    return Messages.NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE;
                 case Reason.DifferentServerVersion:
                     return Messages.NEWPOOL_DIFF_SERVER;
                 case Reason.DifferentHomogeneousUpdatesFromMaster:
@@ -470,6 +476,11 @@ namespace XenAdmin.Core
         private static bool MasterPoolMaxNumberHostReached(IXenConnection connection)
         {
             return Helpers.FeatureForbidden(connection, Host.RestrictPoolSize) && connection.Cache.HostCount > 2;
+        }
+
+        public static bool WillExceedPoolMaxSize(IXenConnection connection, int poolSizeIncrement)
+        {
+            return Helpers.FeatureForbidden(connection, Host.RestrictPoolSize) && connection.Cache.HostCount + poolSizeIncrement > 3;
         }
 
         private static bool HaEnabled(IXenConnection connection)
