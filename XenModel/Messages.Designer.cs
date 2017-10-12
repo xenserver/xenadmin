@@ -16867,6 +16867,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HA is currently enabled for pool &apos;{0}&apos;..
+        /// </summary>
+        public static string HA_TAB_CONFIGURED_UNLICENSED {
+            get {
+                return ResourceManager.GetString("HA_TAB_CONFIGURED_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to calculate maximum pool failure capacity..
         /// </summary>
         public static string HA_UNABLE_TO_CALCULATE_MESSAGE {
@@ -20830,6 +20839,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Licensed with {0}).
+        /// </summary>
+        public static string MAINWINDOW_HEADER_LICENSED_WITH {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_HEADER_LICENSED_WITH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Unlicensed).
+        /// </summary>
+        public static string MAINWINDOW_HEADER_UNLICENSED {
+            get {
+                return ResourceManager.GetString("MAINWINDOW_HEADER_UNLICENSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;High Availability....
         /// </summary>
         public static string MAINWINDOW_HIGH_AVAILABILITY {
@@ -23673,6 +23700,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The pool has already reached the maximum number of servers allowed by your license.
+        /// </summary>
+        public static string NEWPOOL_MAX_NUMBER_HOST_REACHED {
+            get {
+                return ResourceManager.GetString("NEWPOOL_MAX_NUMBER_HOST_REACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pooling is restricted with this server&apos;s license.
         /// </summary>
         public static string NEWPOOL_POOLINGRESTRICTED {
@@ -25241,6 +25277,24 @@ namespace XenAdmin {
         public static string NEWVMWIZARD_VGPUPAGE_TITLE {
             get {
                 return ResourceManager.GetString("NEWVMWIZARD_VGPUPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This pool is only licensed for XenApp/XenDesktop workloads.
+        /// </summary>
+        public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server is only licensed for XenApp/XenDesktop workloads.
+        /// </summary>
+        public static string NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER {
+            get {
+                return ResourceManager.GetString("NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER", resourceCulture);
             }
         }
         
@@ -29783,6 +29837,24 @@ namespace XenAdmin {
         public static string ROLLING_UPGRADE_TITLE_MODE {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_TITLE_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This server is not licensed for rolling pool upgrade.
+        /// </summary>
+        public static string ROLLING_UPGRADE_UNLICENSED_HOST {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_UNLICENSED_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This pool is not licensed for rolling pool upgrade.
+        /// </summary>
+        public static string ROLLING_UPGRADE_UNLICENSED_POOL {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_UNLICENSED_POOL", resourceCulture);
             }
         }
         
