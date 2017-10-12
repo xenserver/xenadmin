@@ -11968,7 +11968,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
     <value>
-下のボタンを使用して、[XenServer] VM の定期的なスナップショット機能や XenServer の試用についての情報を参照できます。</value>
+下のボタンを使用して、[XenServer] VM の定期的なスナップショット機能や [XenServer] の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>vApp 機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能では、いくつかの VM を単一の仮想アプライアンスとしてグループ化して、それらを一緒に起動したり停止したりできます。また、プライマリの本稼働サイトに障害が発生した場合に、それらの VM を障害回復 (DR) サイトに簡単にフェイルオーバーできます。</value>
@@ -12273,7 +12273,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>スナップショット スケジュール ジョブのアラートをメールで送信する(&amp;E)</value>
   </data>
   <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
-    <value>XenServer でスナップショット スケジュール ジョブに関するアラート (VM スナップショットが作成された場合や、スナップショット作成が失敗した場合など) が生成されたときに、通知メールが送信されるように設定できます。</value>
+    <value>[XenServer] でスナップショット スケジュール ジョブに関するアラート (VM スナップショットが作成された場合や、スナップショット作成が失敗した場合など) が生成されたときに、通知メールが送信されるように設定できます。</value>
   </data>
   <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
     <value>[完了] をクリックして新規スナップショット スケジュール処理を実行する(&amp;R)</value>
