@@ -166,6 +166,8 @@ namespace XenAdmin
             this.deleteToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
             this.pluginItemsPlaceHolderToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageCPUGroupToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
+            this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
             this.PoolPropertiesToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             this.HostMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddHostToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
@@ -929,6 +931,8 @@ namespace XenAdmin
             this.deleteToolStripMenuItem,
             this.toolStripSeparator26,
             this.pluginItemsPlaceHolderToolStripMenuItem2,
+            this.manageCPUGroupToolStripMenuItem,
+            this.toolStripSeparator32,
             this.PoolPropertiesToolStripMenuItem});
             this.poolToolStripMenuItem.Name = "poolToolStripMenuItem";
             resources.ApplyResources(this.poolToolStripMenuItem, "poolToolStripMenuItem");
@@ -1066,6 +1070,17 @@ namespace XenAdmin
             // 
             this.pluginItemsPlaceHolderToolStripMenuItem2.Name = "pluginItemsPlaceHolderToolStripMenuItem2";
             resources.ApplyResources(this.pluginItemsPlaceHolderToolStripMenuItem2, "pluginItemsPlaceHolderToolStripMenuItem2");
+            // 
+            // manageCPUGroupToolStripMenuItem
+            // 
+            this.manageCPUGroupToolStripMenuItem.Command = new XenAdmin.Commands.ManageCPUGroupCommand();
+            this.manageCPUGroupToolStripMenuItem.Name = "manageCPUGroupToolStripMenuItem";
+            resources.ApplyResources(this.manageCPUGroupToolStripMenuItem, "manageCPUGroupToolStripMenuItem");
+            // 
+            // toolStripSeparator32
+            // 
+            this.toolStripSeparator32.Name = "toolStripSeparator32";
+            resources.ApplyResources(this.toolStripSeparator32, "toolStripSeparator32");
             // 
             // PoolPropertiesToolStripMenuItem
             // 
@@ -1401,13 +1416,13 @@ namespace XenAdmin
             resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
             // 
             // enablePVSReadcachingToolStripMenuItem
-            // 
+            //
             this.enablePVSReadcachingToolStripMenuItem.Command = new EnablePvsReadCachingCommand();
             this.enablePVSReadcachingToolStripMenuItem.Name = "enablePVSReadcachingToolStripMenuItem";
             resources.ApplyResources(this.enablePVSReadcachingToolStripMenuItem, "enablePVSReadcachingToolStripMenuItem");
             // 
             // disablePVSReadcachingToolStripMenuItem
-            // 
+            //
             this.disablePVSReadcachingToolStripMenuItem.Command = new DisablePvsReadCachingCommand();
             this.disablePVSReadcachingToolStripMenuItem.Name = "disablePVSReadcachingToolStripMenuItem";
             resources.ApplyResources(this.disablePVSReadcachingToolStripMenuItem, "disablePVSReadcachingToolStripMenuItem");
@@ -2155,6 +2170,8 @@ namespace XenAdmin
         private CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
         private CommandToolStripMenuItem disablePVSReadcachingToolStripMenuItem;
         private CommandToolStripMenuItem disableCbtToolStripMenuItem;
+        private CommandToolStripMenuItem manageCPUGroupToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator32;
     }
 
 }

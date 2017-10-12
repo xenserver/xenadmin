@@ -527,5 +527,14 @@ namespace XenAdmin.SettingsPanels
             if (comboBoxVCPUs.SelectedItem != null)
                 labelInvalidVCPUWarning.Text = VM.ValidVCPUConfiguration((long)comboBoxVCPUs.SelectedItem, comboBoxTopology.CoresPerSocket);
         }
+
+        private void linkLabelCPUGroup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Pool pool = Helpers.GetPoolOfOne(vm.Connection);
+            using (ManageCPUGroupDialog dialog = new ManageCPUGroupDialog(pool))
+            {
+                dialog.ShowDialog(this);
+            }
+        }
     }
 }
