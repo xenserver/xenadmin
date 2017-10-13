@@ -224,10 +224,12 @@
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
+    <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
     <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\MasterIsPendingRestartProblems.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNeedsReboot.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />

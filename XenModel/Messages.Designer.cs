@@ -6786,6 +6786,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking for pending restart.
+        /// </summary>
+        public static string CHECKING_FOR_PENDING_RESTART {
+            get {
+                return ResourceManager.GetString("CHECKING_FOR_PENDING_RESTART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking HA and WLB status.
         /// </summary>
         public static string CHECKING_HA_STATUS {
@@ -27308,6 +27317,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pending restart check.
+        /// </summary>
+        public static string PENDING_RESTART_CHECK {
+            get {
+                return ResourceManager.GetString("PENDING_RESTART_CHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Interval must be a multiple of 5.
         /// </summary>
         public static string PERFORM_ALERT_EDIT_INTERVAL_WRONG_MULTIPLE {
@@ -28197,6 +28215,42 @@ namespace XenAdmin {
         public static string PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE {
             get {
                 return ResourceManager.GetString("PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: The master needs to be rebooted first.
+        /// </summary>
+        public static string PROBLEM_MASTER_PENDING_RESTART_HOST {
+            get {
+                return ResourceManager.GetString("PROBLEM_MASTER_PENDING_RESTART_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This update requires the master to be rebooted first.
+        /// </summary>
+        public static string PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE {
+            get {
+                return ResourceManager.GetString("PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Toolstack on master needs to be restarted first.
+        /// </summary>
+        public static string PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK {
+            get {
+                return ResourceManager.GetString("PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: This update requires the toolstack on master to be restarted first.
+        /// </summary>
+        public static string PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE {
+            get {
+                return ResourceManager.GetString("PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE", resourceCulture);
             }
         }
         
