@@ -783,6 +783,24 @@
   <data name="ACTION_SR_ATTACH_SUCCESSFUL" xml:space="preserve">
     <value>已连接 SR</value>
   </data>
+  <data name="ACTION_SR_CONVERT" xml:space="preserve">
+    <value>转换“{1}”上的 SR“{0}”</value>
+  </data>
+  <data name="ACTION_SR_CONVERTED" xml:space="preserve">
+    <value>已转换 SR</value>
+  </data>
+  <data name="ACTION_SR_CONVERTED_TO_THIN" xml:space="preserve">
+    <value>已将 SR“{0}”转换为精简置备</value>
+  </data>
+  <data name="ACTION_SR_CONVERTING" xml:space="preserve">
+    <value>正在转换 SR</value>
+  </data>
+  <data name="ACTION_SR_CONVERTING_TO_THIN" xml:space="preserve">
+    <value>正在将 SR“{0}”转换为精简置备</value>
+  </data>
+  <data name="ACTION_SR_CONVERT_TO_THIN" xml:space="preserve">
+    <value>将 SR“{0}”转换为精简置备</value>
+  </data>
   <data name="ACTION_SR_CREATE_SUCCESSFUL" xml:space="preserve">
     <value>已创建 SR</value>
   </data>
@@ -2431,14 +2449,14 @@
     
 是否要改为将此 VM 分配给 vApp {2}?</value>
   </data>
-    
-    
   <data name="CHANGE_VMS_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
     <value>已将选定的部分 VM 分配至其他快照计划。
+    
 是否要改为将这些 VM 分配至计划“{0}”?</value>
   </data>
   <data name="CHANGE_VM_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
     <value>已将 VM“{0}”分配至快照计划“{1}”。
+    
 是否要改为将其分配至计划“{2}”?</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
@@ -4069,7 +4087,7 @@
     <value>容器详细信息</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
-    <value>Api 版本</value>
+    <value>API 版本</value>
   </data>
   <data name="DOCKER_INFO_ARCH" xml:space="preserve">
     <value>Arch</value>
@@ -5962,7 +5980,7 @@
     <value>https://cis.citrix.com/legal/</value>
   </data>
   <data name="HEALTH_CHECK_CITRIX_POLICY_URL" xml:space="preserve">
-    <value>http://www.citrix.com/about/legal/privacy.html</value>
+    <value>http://www.citrix.com.cn/about/legal/privacy.html</value>
   </data>
   <data name="HEALTH_CHECK_PRIVACY_POLICY" xml:space="preserve">
     <value>根据 [Citrix] Insight Services 策略(网址为 {0})和 [Citrix] 隐私策略(网址为 {1})的规定，运行状况检查上载到 [Citrix] Insight Services 的信息将用于故障排除和诊断支持目的，以及改进我们的产品质量、可靠性和性能。</value>
@@ -7320,6 +7338,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_SHUTDOWN" xml:space="preserve">
     <value>关闭(&amp;H)</value>
   </data>
+  <data name="MAINWINDOW_SR_CONVERT_TO_THIN_CONTEXT_MENU" xml:space="preserve">
+    <value>转换 SR(&amp;C)...</value>
+  </data>
   <data name="MAINWINDOW_START" xml:space="preserve">
     <value>启动(&amp;S)</value>
   </data>
@@ -8496,6 +8517,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT" xml:space="preserve">
     <value>SR“{0}”被过度使用。只有 {1} 可用空间，但新 VM 需要 {2} 可用空间。</value>
   </data>
+  <data name="NEWVMWIZARD_STORAGEPAGE_SROVERCOMMIT_THIN" xml:space="preserve">
+    <value>SR“{0}”过载。可用空间只有 {1}，而新 VM 需要 {2} (初始空间为 {3})。</value>
+  </data>
   <data name="NEWVMWIZARD_STORAGEPAGE_TITLE" xml:space="preserve">
     <value>为新 VM 配置存储</value>
   </data>
@@ -9550,7 +9574,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="PM_MODE_WOL" xml:space="preserve">
     <value>局域网唤醒</value>
   </data>
-
   <data name="POLICY_NAME" xml:space="preserve">
     <value>策略名称</value>
   </data>
@@ -10758,7 +10781,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>使用权限更大的用户帐户重试。</value>
   </data>
   <data name="SOLUTION_UNKNOWN" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>遇到一些错误。有关详细信息，请参阅 [XenCenter] 日志。</value>
@@ -10885,6 +10908,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SR_THICK_PROVISIONING" xml:space="preserve">
     <value>完整置备</value>
+  </data>
+  <data name="SR_THIN_PROVISIONING" xml:space="preserve">
+    <value>精简置备</value>
+  </data>
+  <data name="SR_THIN_PROVISIONING_COMMITTED" xml:space="preserve">
+    <value>精简置备(占 {0}%)</value>
   </data>
   <data name="SR_TRIM_NO_STORAGE_HOST_ERROR" xml:space="preserve">
     <value>由于 SR 已分离，因此无法回收释放的空间。</value>
@@ -11381,7 +11410,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>从 OVF 或 OVA 包导入设备。</value>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_VHD" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>将本地存储的 VM、模板或快照作为新 VM 导入。</value>
@@ -11492,7 +11521,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>服务器“{0}”的操作</value>
   </data>
   <data name="UPDATES_WIZARD_APPLIED_UPDATE" xml:space="preserve">
-    <value>已安装更新</value>
+    <value>已安装的更新</value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
     <value>正在将更新 {0} 安装到 {1}... </value>
@@ -11930,7 +11959,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
 要了解与 [XenServer] 灾难恢复功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
-    <value>升级 [XenServer] 许可证以启用 StorageLink™ 技术。StorageLink 使 [XenServer] 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储置备、克隆和快照功能。</value>
+    <value>升级 [XenServer] 许可证以启用 StorageLink™ 技术。StorageLink 使 XenServer 能够充分利用现有存储硬件并自动卸载存储操作。这样便可以使用存储硬件固有的特性，在硬件层面实现具有高性能和空间效率的存储置备、克隆和快照功能。</value>
   </data>
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
     <value>升级您的 [XenServer] 许可证以启用 GPU 直通功能。通过 GPU 直通功能，可以为 VM 分配专用图形处理器以提高图形性能。</value>
@@ -11969,7 +11998,8 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
     <value>
-要了解与 [XenServer] VM 计划快照功能有关的更多信息或者启动 [XenServer] 试用版，请单击下面的按钮。</value>
+
+要了解与 [XenServer] VM 计划快照功能有关的更多信息或者启动 XenServer 试用版，请单击下面的按钮。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>升级您的 [XenServer] 许可证以启用 vApp。通过 vApp 功能，您可以将 VM 放置到组中，从而允许这些 VM 作为一个单元来启动或停止，同时还允许这些 VM 在主生产站点出现灾难性故障时在 DR 站点上轻松恢复。</value>
@@ -11978,7 +12008,6 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>
 
 要了解与 [XenServer] 的 vApp 功能有关的更多信息或启动 [XenServer] 试用版，请单击下面的按钮。</value>
-
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
     <value>升级您的 [XenServer] 许可证以启用动态工作负载平衡。动态工作负载平衡功能不断对虚拟机和 [XenServer] 主机的性能进行配置，并对新工作负载进行智能重新平衡和最优安排，以确保最有效地利用资源池中的物理服务器资源。</value>
@@ -12274,7 +12303,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>发送与快照计划作业警报有关的电子邮件通知(&amp;E)</value>
   </data>
   <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
-    <value>[XenServer] 可以在引发了与快照计划作业有关的警报时向您发送电子邮件通知，例如创建 VM 快照时或快照操作失败时。</value>
+    <value>XenServer 可以在引发了与快照计划作业有关的警报时向您发送电子邮件通知，例如创建 VM 快照时或快照操作失败时。</value>
   </data>
   <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
     <value>当我单击“完成”时运行新快照计划作业(&amp;R)</value>
@@ -12727,7 +12756,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>高级</value>
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大值</value>

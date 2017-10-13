@@ -414,6 +414,132 @@
   <data name="&gt;&gt;labelError.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="initial_allocation_label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="initial_allocation_label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="initial_allocation_label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 68</value>
+  </data>
+  <data name="initial_allocation_label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="initial_allocation_label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 13</value>
+  </data>
+  <data name="initial_allocation_label.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="initial_allocation_label.Text" xml:space="preserve">
+    <value>初始分配:</value>
+  </data>
+  <data name="initial_allocation_label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;initial_allocation_label.Name" xml:space="preserve">
+    <value>initial_allocation_label</value>
+  </data>
+  <data name="&gt;&gt;initial_allocation_label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;initial_allocation_label.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;initial_allocation_label.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="incremental_allocation_label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="incremental_allocation_label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 90</value>
+  </data>
+  <data name="incremental_allocation_label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="incremental_allocation_label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 13</value>
+  </data>
+  <data name="incremental_allocation_label.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="incremental_allocation_label.Text" xml:space="preserve">
+    <value>增量分配:</value>
+  </data>
+  <data name="incremental_allocation_label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;incremental_allocation_label.Name" xml:space="preserve">
+    <value>incremental_allocation_label</value>
+  </data>
+  <data name="&gt;&gt;incremental_allocation_label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;incremental_allocation_label.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;incremental_allocation_label.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="initial_alloc_value.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="initial_alloc_value.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="initial_alloc_value.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 68</value>
+  </data>
+  <data name="initial_alloc_value.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="initial_alloc_value.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="initial_alloc_value.Text" xml:space="preserve">
+    <value>initial_alloc_value</value>
+  </data>
+  <data name="&gt;&gt;initial_alloc_value.Name" xml:space="preserve">
+    <value>initial_alloc_value</value>
+  </data>
+  <data name="&gt;&gt;initial_alloc_value.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;initial_alloc_value.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;initial_alloc_value.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="incr_alloc_value.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="incr_alloc_value.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 90</value>
+  </data>
+  <data name="incr_alloc_value.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="incr_alloc_value.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="incr_alloc_value.Text" xml:space="preserve">
+    <value>incr_alloc_value</value>
+  </data>
+  <data name="&gt;&gt;incr_alloc_value.Name" xml:space="preserve">
+    <value>incr_alloc_value</value>
+  </data>
+  <data name="&gt;&gt;incr_alloc_value.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;incr_alloc_value.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;incr_alloc_value.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -442,7 +568,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="sizeValue" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="locationLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="SizeLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="sizeNUD" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="sizeValueROLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelLocationValueRO" Row="1" RowSpan="1" Column="1" ColumnSpan="5" />&lt;Control Name="pictureBoxError" Row="0" RowSpan="1" Column="4" ColumnSpan="1" />&lt;Control Name="labelError" Row="0" RowSpan="1" Column="5" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,30,Absolute,50" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="sizeValue" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="locationLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="SizeLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="sizeNUD" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="sizeValueROLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="labelLocationValueRO" Row="1" RowSpan="1" Column="1" ColumnSpan="5" />&lt;Control Name="pictureBoxError" Row="0" RowSpan="1" Column="4" ColumnSpan="1" />&lt;Control Name="labelError" Row="0" RowSpan="1" Column="5" ColumnSpan="1" />&lt;Control Name="initial_allocation_label" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="incremental_allocation_label" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="initial_alloc_value" Row="2" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="incr_alloc_value" Row="3" RowSpan="1" Column="2" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,30,Absolute,50" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="labelShutDownWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

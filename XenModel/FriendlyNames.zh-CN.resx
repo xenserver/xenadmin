@@ -280,7 +280,7 @@
     <value>尚未在插件“{1}”的资源文件中定义“{0}.label”。</value>
   </data>
   <data name="Exception-PluginOnlyOneCommandPermitted" xml:space="preserve">
-    <value>只允许使用一条 shell 或 powershell 命令。</value>
+    <value>只允许使用一条 shell 或 PowerShell 命令。</value>
   </data>
   <data name="Exception-PluginResourcesFileNotFound" xml:space="preserve">
     <value>在“{1}”找不到插件“{0}”的资源文件。</value>
