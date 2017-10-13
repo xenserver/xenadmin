@@ -73,7 +73,7 @@ namespace XenAdmin.Dialogs
             selectSlaves(hosts);
         }
 
-        private enum InvalidReasons { NONE, EMPTY_POOL_NAME, NO_MASTER };
+        private enum InvalidReasons { NONE, EMPTY_POOL_NAME, NO_MASTER, MAX_POOL_SIZE_EXCEEDED };
         private InvalidReasons validToClose
         {
             get
@@ -86,6 +86,14 @@ namespace XenAdmin.Dialogs
 
                 if (comboBoxServers.Items.Count <= 0)
                     return InvalidReasons.NO_MASTER;
+
+                Host master = getMaster();
+                if (master != null)
+                {
+                    List<Host> slaves = getSlaves();
+                    if (PoolJoinRules.WillExceedPoolMaxSize(master.Connection, slaves.Count))
+                        return InvalidReasons.MAX_POOL_SIZE_EXCEEDED;
+                }
 
                 return InvalidReasons.NONE;
             }
@@ -117,6 +125,10 @@ namespace XenAdmin.Dialogs
                 case InvalidReasons.EMPTY_POOL_NAME:
                     buttonCreate.Enabled = false;
                     toolTipContainerCreate.SetToolTip(Messages.POOL_NAME_EMPTY);
+                    break;
+                case InvalidReasons.MAX_POOL_SIZE_EXCEEDED:
+                    buttonCreate.Enabled = false;
+                    toolTipContainerCreate.SetToolTip(Messages.NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE);
                     break;
             }
         }
@@ -401,6 +413,11 @@ namespace XenAdmin.Dialogs
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void customTreeViewServers_ItemCheckChanged(object sender, EventArgs e)
+        {
+            updateButtons();
         }
     }
 }
