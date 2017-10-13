@@ -11016,6 +11016,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Devices Available.
+        /// </summary>
+        public static string DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE {
+            get {
+                return ResourceManager.GetString("DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable passthrough.
         /// </summary>
         public static string DIALOG_USB_USAGE_DISABLE_PASSTHROUGH {

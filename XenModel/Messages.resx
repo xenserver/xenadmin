@@ -3934,6 +3934,9 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>Scanning for free device positions</value>
   </data>
+  <data name="DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE" xml:space="preserve">
+    <value>No Devices Available</value>
+  </data>
   <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
     <value>Disable passthrough</value>
   </data>
