@@ -220,13 +220,13 @@
     <value>3, 10</value>
   </data>
   <data name="labelNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 15</value>
+    <value>323, 15</value>
   </data>
   <data name="labelNote.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="labelNote.Text" xml:space="preserve">
-    <value>Select a device to be passed through to this virtual machine</value>
+    <value>Select a device to be passed through to this virtual machine.</value>
   </data>
   <data name="&gt;&gt;labelNote.Name" xml:space="preserve">
     <value>labelNote</value>
@@ -385,7 +385,7 @@
     <value>10</value>
   </data>
   <data name="labelWarningLine3.Text" xml:space="preserve">
-    <value>A major component update of VM will be performed the first time when a USB device is passed through to it, this update is irreversible!</value>
+    <value>A major component update of VM will be performed the first time when a USB device is passed through to it. This update is irreversible.</value>
   </data>
   <data name="&gt;&gt;labelWarningLine3.Name" xml:space="preserve">
     <value>labelWarningLine3</value>
