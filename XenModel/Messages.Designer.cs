@@ -11016,7 +11016,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Devices Available.
+        ///   Looks up a localized string similar to No devices available.
         /// </summary>
         public static string DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE {
             get {
@@ -34779,6 +34779,15 @@ namespace XenAdmin {
         public static string USB {
             get {
                 return ResourceManager.GetString("USB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Vendor: {0}; Product: {1}&quot;.
+        /// </summary>
+        public static string USB_DEVICE_VENDOR_PRODUCT {
+            get {
+                return ResourceManager.GetString("USB_DEVICE_VENDOR_PRODUCT", resourceCulture);
             }
         }
         

@@ -72,6 +72,7 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
 
+            treeUsbList.ClearAllNodes();
             treeUsbList.BeginUpdate();
             try
             {   
@@ -94,11 +95,12 @@ namespace XenAdmin.Dialogs
                         }
                     }
                     // Show host node only when it contains available USB devices.
-                    if (hostNode.ChildNumber > 0)
+                    if (hostNode.ChildNodes.Count > 0)
                         treeUsbList.AddNode(hostNode);
+                    
                 }
-
-                if (treeUsbList.Items.Count == 0)
+                
+                if (treeUsbList.Nodes.Count == 0)
                 {
                     CustomTreeNode noDeviceNode = new CustomTreeNode(false);
                     noDeviceNode.Text = Messages.DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE;
@@ -141,7 +143,7 @@ namespace XenAdmin.Dialogs
             public UsbItem(PUSB pusb) :base(true)
             {
                 Pusb = pusb;
-                Text = String.Format(Messages.STRING_SPACE_STRING, Pusb.path, Pusb.description);
+                Text = String.Format(Messages.STRING_SPACE_STRING, Pusb.path, Pusb.Description());
             }
         }
     }

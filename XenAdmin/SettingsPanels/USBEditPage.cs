@@ -273,10 +273,7 @@ namespace XenAdmin.SettingsPanels
                 PUSB pusb = _vusb.Connection.Resolve(usbgroup.PUSBs[0]);
 
                 locationCell.Value = pusb.path;
-                descriptionCell.Value = string.IsNullOrEmpty(pusb.description) ? 
-                        string.Format("Vendor: {0}; Product: {1}", pusb.vendor_id, pusb.product_id) : 
-                        pusb.description;
-
+                descriptionCell.Value = pusb.Description();
                 attachedCell.Value = (_vusb.Connection.Resolve(_vusb.attached) != null).ToYesNoStringI18n();
             }
 
