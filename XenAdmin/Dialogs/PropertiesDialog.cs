@@ -226,7 +226,14 @@ namespace XenAdmin.Dialogs
 
                 if (is_vm && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough))
                 {
-                    ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
+                    foreach (Host host in pool.Connection.Cache.Hosts)
+                    {
+                        if (host.PUSBs.Count > 0)
+                        {
+                            ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
+                            break;
+                        }
+                    }
                 }
 
                 if (is_hvm)

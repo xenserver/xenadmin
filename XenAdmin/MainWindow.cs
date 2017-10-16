@@ -1449,7 +1449,7 @@ namespace XenAdmin
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
             ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu));
-            ShowTab(TabPageUSB, !multi && !SearchMode && (isHostSelected && isHostLive) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough));
+            ShowTab(TabPageUSB, !multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough));
 
             pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
 
