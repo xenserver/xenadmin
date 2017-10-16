@@ -37,15 +37,11 @@
             this.labelWarningLine1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.labelWarningLine3 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.labelWarningLine2 = new XenAdmin.Controls.Common.AutoHeightLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlert)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAttach
@@ -65,6 +61,7 @@
             // 
             // treeUsbList
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.treeUsbList, 2);
             resources.ApplyResources(this.treeUsbList, "treeUsbList");
             this.treeUsbList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.treeUsbList.Name = "treeUsbList";
@@ -79,6 +76,7 @@
             // labelNote
             // 
             resources.ApplyResources(this.labelNote, "labelNote");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelNote, 2);
             this.labelNote.Name = "labelNote";
             // 
             // pictureBoxAlert
@@ -100,31 +98,20 @@
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.labelNote, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.treeUsbList, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelWarningLine3, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelWarningLine2, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelWarningLine1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxAlert, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // flowLayoutPanel1
             // 
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
             this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
             this.flowLayoutPanel1.Controls.Add(this.buttonAttach);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBoxAlert, 0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // tableLayoutPanel3
-            // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.labelWarningLine3, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.labelWarningLine1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.labelWarningLine2, 0, 2);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // labelWarningLine3
             // 
@@ -146,9 +133,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,9 +148,7 @@
         private Controls.Common.AutoHeightLabel labelWarningLine1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private Controls.Common.AutoHeightLabel labelWarningLine3;
         private Controls.Common.AutoHeightLabel labelWarningLine2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }
