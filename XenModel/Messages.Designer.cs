@@ -34783,6 +34783,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot attach USB devices because the VM is currently protected by HA..
+        /// </summary>
+        public static string USB_ATTACH_NOT_ALLOWED_HA {
+            get {
+                return ResourceManager.GetString("USB_ATTACH_NOT_ALLOWED_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot attach USB devices because the VM is currently not halted..
+        /// </summary>
+        public static string USB_ATTACH_NOT_ALLOWED_NOT_HALTED {
+            get {
+                return ResourceManager.GetString("USB_ATTACH_NOT_ALLOWED_NOT_HALTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;Vendor: {0}; Product: {1}&quot;.
         /// </summary>
         public static string USB_DEVICE_VENDOR_PRODUCT {

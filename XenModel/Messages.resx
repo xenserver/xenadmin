@@ -12063,6 +12063,12 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
     <value>&amp;Enable passthrough</value>
   </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_HA" xml:space="preserve">
+    <value>Cannot attach USB devices because the VM is currently protected by HA.</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_NOT_HALTED" xml:space="preserve">
+    <value>Cannot attach USB devices because the VM is currently not halted.</value>
+  </data>
   <data name="USB_DEVICES" xml:space="preserve">
     <value>USB devices</value>
   </data>
