@@ -477,6 +477,7 @@
     <Compile Include="XenAPI\Message.cs" />
     <Compile Include="XenAPI\Network.cs" />
     <Compile Include="XenAPI\network_operations.cs" />
+	<Compile Include="XenAPI\network_purpose.cs" />
     <Compile Include="XenAPI\on_boot.cs" />
     <Compile Include="XenAPI\on_crash_behaviour.cs" />
     <Compile Include="XenAPI\on_normal_exit.cs" />
@@ -508,6 +509,7 @@
     <Compile Include="XenAPI\vbd_operations.cs" />
     <Compile Include="XenAPI\vbd_type.cs" />
     <Compile Include="XenAPI\VDI.cs" />
+	<Compile Include="XenAPI\Vdi_nbd_server_info.cs" />
     <Compile Include="XenAPI\vdi_operations.cs" />
     <Compile Include="XenAPI\vdi_type.cs" />
     <Compile Include="XenAPI\VIF.cs" />

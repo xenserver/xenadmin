@@ -1787,25 +1787,14 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed as the export name to the nbd-server running at the IP address and port specified by that URI.
+        /// Get details specifying how to access this VDI via a Network Block Device server. For each of a set of NBD server addresses on which the VDI is available, the return value set contains a vdi_nbd_server_info object that contains an exportname to request once the NBD connection is established, and connection details for the address. An empty list is returned if there is no network that has a PIF on a host with access to the relevant SR, or if no such network has been assigned an NBD-related purpose in its purpose field. To access the given VDI, any of the vdi_nbd_server_info objects can be used to make a connection to a server, and then the VDI will be available by requesting the exportname.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
-        public static string[] get_nbd_info(Session session, string _vdi)
+        public static List<Vdi_nbd_server_info> get_nbd_info(Session session, string _vdi)
         {
-            return (string [])session.proxy.vdi_get_nbd_info(session.uuid, _vdi ?? "").parse();
-        }
-
-        /// <summary>
-        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed as the export name to the nbd-server running at the IP address and port specified by that URI.
-        /// First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vdi">The opaque_ref of the given vdi</param>
-        public static XenRef<Task> async_get_nbd_info(Session session, string _vdi)
-        {
-            return XenRef<Task>.Create(session.proxy.async_vdi_get_nbd_info(session.uuid, _vdi ?? "").parse());
+            return Helper.Proxy_Vdi_nbd_server_infoArrayToVdi_nbd_server_infoList(session.proxy.vdi_get_nbd_info(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>

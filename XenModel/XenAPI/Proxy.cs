@@ -2260,6 +2260,14 @@ namespace XenAPI
         Response<string>
         async_vm_retrieve_wlb_recommendations(string session, string _vm);
 
+        [XmlRpcMethod("VM.set_bios_strings")]
+        Response<string>
+        vm_set_bios_strings(string session, string _vm, Object _value);
+
+        [XmlRpcMethod("Async.VM.set_bios_strings")]
+        Response<string>
+        async_vm_set_bios_strings(string session, string _vm, Object _value);
+
         [XmlRpcMethod("VM.copy_bios_strings")]
         Response<string>
         vm_copy_bios_strings(string session, string _vm, string _host);
@@ -4156,6 +4164,10 @@ namespace XenAPI
         Response<Object>
         network_get_assigned_ips(string session, string _network);
 
+        [XmlRpcMethod("network.get_purpose")]
+        Response<string []>
+        network_get_purpose(string session, string _network);
+
         [XmlRpcMethod("network.set_name_label")]
         Response<string>
         network_set_name_label(string session, string _network, string _label);
@@ -4215,6 +4227,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.network.set_default_locking_mode")]
         Response<string>
         async_network_set_default_locking_mode(string session, string _network, string _value);
+
+        [XmlRpcMethod("network.add_purpose")]
+        Response<string>
+        network_add_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("Async.network.add_purpose")]
+        Response<string>
+        async_network_add_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("network.remove_purpose")]
+        Response<string>
+        network_remove_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("Async.network.remove_purpose")]
+        Response<string>
+        async_network_remove_purpose(string session, string _network, string _value);
 
         [XmlRpcMethod("network.get_all")]
         Response<string []>
@@ -5981,12 +6009,8 @@ namespace XenAPI
         async_vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
 
         [XmlRpcMethod("VDI.get_nbd_info")]
-        Response<string []>
+        Response<Proxy_Vdi_nbd_server_info[]>
         vdi_get_nbd_info(string session, string _vdi);
-
-        [XmlRpcMethod("Async.VDI.get_nbd_info")]
-        Response<string>
-        async_vdi_get_nbd_info(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_all")]
         Response<string []>
@@ -7615,6 +7639,10 @@ namespace XenAPI
         [XmlRpcMethod("SDN_controller.get_all_records")]
         Response<Object>
         sdn_controller_get_all_records(string session);
+
+        [XmlRpcMethod("vdi_nbd_server_info.get_all_records")]
+        Response<Object>
+        vdi_nbd_server_info_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8070,6 +8098,7 @@ namespace XenAPI
         public string [] tags;
         public string default_locking_mode;
         public Object assigned_ips;
+        public string [] purpose;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8560,6 +8589,16 @@ namespace XenAPI
         public string protocol;
         public string address;
         public string port;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Vdi_nbd_server_info
+    {
+        public string exportname;
+        public string address;
+        public string port;
+        public string cert;
+        public string subject;
     }
 
 }

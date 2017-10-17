@@ -690,6 +690,9 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>The network contains active VIFs ({0}) and cannot be deleted.</value>
   </data>
+  <data name="NETWORK_INCOMPATIBLE_PURPOSES" xml:space="preserve">
+    <value>You tried to add a purpose to a network but the new purpose is not compatible with an existing purpose of the network or other networks.</value>
+  </data>
   <data name="NETWORK_UNMANAGED" xml:space="preserve">
     <value>The network is not managed by xapi.</value>
   </data>
