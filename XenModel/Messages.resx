@@ -12067,7 +12067,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>Cannot attach USB devices because the VM is currently protected by HA.</value>
   </data>
   <data name="USB_ATTACH_NOT_ALLOWED_NOT_HALTED" xml:space="preserve">
-    <value>Cannot attach USB devices because the VM is currently not halted.</value>
+    <value>USB devices can only be attached when the VM is shut down.</value>
   </data>
   <data name="USB_DEVICES" xml:space="preserve">
     <value>USB devices</value>

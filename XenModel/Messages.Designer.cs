@@ -34792,7 +34792,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot attach USB devices because the VM is currently not halted..
+        ///   Looks up a localized string similar to USB devices can only be attached when the VM is shut down..
         /// </summary>
         public static string USB_ATTACH_NOT_ALLOWED_NOT_HALTED {
             get {

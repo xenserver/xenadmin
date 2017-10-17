@@ -36,9 +36,9 @@
             this.pictureBoxAlert = new System.Windows.Forms.PictureBox();
             this.labelWarningLine1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelWarningLine3 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.labelWarningLine2 = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlert)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -105,14 +105,6 @@
             this.tableLayoutPanel1.Controls.Add(this.pictureBoxAlert, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
-            // flowLayoutPanel1
-            // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
-            this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanel1.Controls.Add(this.buttonAttach);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
             // labelWarningLine3
             // 
             resources.ApplyResources(this.labelWarningLine3, "labelWarningLine3");
@@ -122,6 +114,14 @@
             // 
             resources.ApplyResources(this.labelWarningLine2, "labelWarningLine2");
             this.labelWarningLine2.Name = "labelWarningLine2";
+            // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
+            this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
+            this.flowLayoutPanel1.Controls.Add(this.buttonAttach);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
             // AttachUsbDialog
             // 

@@ -224,16 +224,10 @@ namespace XenAdmin.Dialogs
                     }
                 }
 
-                if (is_vm && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough))
+                if (is_vm && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough) &&
+                    (new List<Host>(pool.Connection.Cache.Hosts)).Exists(host => host.PUSBs.Count > 0))
                 {
-                    foreach (Host host in pool.Connection.Cache.Hosts)
-                    {
-                        if (host.PUSBs.Count > 0)
-                        {
-                            ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
-                            break;
-                        }
-                    }
+                    ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
                 }
 
                 if (is_hvm)
