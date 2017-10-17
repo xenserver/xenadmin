@@ -72,6 +72,7 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
 
+            treeUsbList.ClearAllNodes();
             treeUsbList.BeginUpdate();
             try
             {   
@@ -79,7 +80,6 @@ namespace XenAdmin.Dialogs
                 {
                     // Add a host node to tree list.
                     HostItem hostNode = new HostItem(host);
-                    treeUsbList.AddNode(hostNode);
                     List<PUSB> pusbs = _vm.Connection.ResolveAll(host.PUSBs);
                     foreach (PUSB pusb in pusbs)
                     {
@@ -94,6 +94,17 @@ namespace XenAdmin.Dialogs
                             treeUsbList.AddChildNode(hostNode, usbNode);
                         }
                     }
+                    // Show host node only when it contains available USB devices.
+                    if (hostNode.ChildNodes.Count > 0)
+                        treeUsbList.AddNode(hostNode);
+                    
+                }
+                
+                if (treeUsbList.Nodes.Count == 0)
+                {
+                    CustomTreeNode noDeviceNode = new CustomTreeNode(false);
+                    noDeviceNode.Text = Messages.DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE;
+                    treeUsbList.AddNode(noDeviceNode);
                 }
             }
             finally
@@ -132,7 +143,7 @@ namespace XenAdmin.Dialogs
             public UsbItem(PUSB pusb) :base(true)
             {
                 Pusb = pusb;
-                Text = String.Format(Messages.STRING_SPACE_STRING, Pusb.path, Pusb.description);
+                Text = String.Format(Messages.STRING_SPACE_STRING, Pusb.path, Pusb.Description());
             }
         }
     }

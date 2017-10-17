@@ -126,13 +126,28 @@ namespace XenAdmin.SettingsPanels
 
         public void ShowHideWarnings()
         {
-            // Check if HA was enabled on pool and Restart priority was set on VM.
+            // Check:
+            //    If VM is halted and
+            //    If HA was enabled on pool and Restart priority was set on VM.
             Pool pool = Helpers.GetPool(_vm.Connection);
             bool haEnabled = (pool != null &&
                 pool.ha_enabled &&
                 VM.HaPriorityIsRestart(_vm.Connection, SelectedPriority));
-            pictureHAWarning.Visible = labelHAWarning.Visible = haEnabled;
-            buttonAttach.Enabled = !haEnabled;
+            if (_vm.power_state != vm_power_state.Halted)
+            {
+                labelWarning.Text = Messages.USB_ATTACH_NOT_ALLOWED_NOT_HALTED;
+                buttonAttach.Enabled = false;
+            }
+            else if (haEnabled)
+            {
+                labelWarning.Text = Messages.USB_ATTACH_NOT_ALLOWED_HA;
+                buttonAttach.Enabled = false;
+            }
+            else
+            {
+                buttonAttach.Enabled = true;
+            }
+            flowLayoutPanelWarning.Visible = !buttonAttach.Enabled;
         }
 
         public bool InBuildList = false;
@@ -273,8 +288,7 @@ namespace XenAdmin.SettingsPanels
                 PUSB pusb = _vusb.Connection.Resolve(usbgroup.PUSBs[0]);
 
                 locationCell.Value = pusb.path;
-                descriptionCell.Value = pusb.description;
-
+                descriptionCell.Value = pusb.Description();
                 attachedCell.Value = (_vusb.Connection.Resolve(_vusb.attached) != null).ToYesNoStringI18n();
             }
 

@@ -43,6 +43,7 @@ using XenAdmin.Core;
 using XenAdmin.Wizards.NewPolicyWizard;
 using XenAdmin.Wizards.NewVMApplianceWizard;
 using XenAdmin.Wizards.GenericPages;
+using System.Linq;
 
 namespace XenAdmin.Dialogs
 {
@@ -224,7 +225,8 @@ namespace XenAdmin.Dialogs
                     }
                 }
 
-                if (is_vm && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough))
+                if (is_vm && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough) &&
+                    pool.Connection.Cache.Hosts.Any(host => host.PUSBs.Count > 0))
                 {
                     ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
                 }

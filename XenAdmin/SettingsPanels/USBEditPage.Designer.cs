@@ -37,22 +37,24 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAttach = new System.Windows.Forms.Button();
             this.buttonDetach = new System.Windows.Forms.Button();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureHAWarning = new System.Windows.Forms.PictureBox();
-            this.labelHAWarning = new System.Windows.Forms.Label();
+            this.flowLayoutPanelWarning = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureWarning = new System.Windows.Forms.PictureBox();
+            this.labelWarning = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanelBase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsbList)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureHAWarning)).BeginInit();
+            this.flowLayoutPanelWarning.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureWarning)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanelBase
             // 
             resources.ApplyResources(this.tableLayoutPanelBase, "tableLayoutPanelBase");
-            this.tableLayoutPanelBase.Controls.Add(this.dataGridViewUsbList, 0, 0);
-            this.tableLayoutPanelBase.Controls.Add(this.flowLayoutPanel1, 0, 1);
-            this.tableLayoutPanelBase.Controls.Add(this.flowLayoutPanel2, 0, 2);
+            this.tableLayoutPanelBase.Controls.Add(this.dataGridViewUsbList, 0, 1);
+            this.tableLayoutPanelBase.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanelBase.Controls.Add(this.flowLayoutPanelWarning, 0, 3);
+            this.tableLayoutPanelBase.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanelBase.Name = "tableLayoutPanelBase";
             // 
             // dataGridViewUsbList
@@ -107,24 +109,29 @@
             this.buttonDetach.UseVisualStyleBackColor = true;
             this.buttonDetach.Click += new System.EventHandler(this.buttonDetach_Click);
             // 
-            // flowLayoutPanel2
+            // flowLayoutPanelWarning
             // 
-            this.flowLayoutPanel2.Controls.Add(this.pictureHAWarning);
-            this.flowLayoutPanel2.Controls.Add(this.labelHAWarning);
-            resources.ApplyResources(this.flowLayoutPanel2, "flowLayoutPanel2");
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanelWarning.Controls.Add(this.pictureWarning);
+            this.flowLayoutPanelWarning.Controls.Add(this.labelWarning);
+            resources.ApplyResources(this.flowLayoutPanelWarning, "flowLayoutPanelWarning");
+            this.flowLayoutPanelWarning.Name = "flowLayoutPanelWarning";
             // 
-            // pictureHAWarning
+            // pictureWarning
             // 
-            resources.ApplyResources(this.pictureHAWarning, "pictureHAWarning");
-            this.pictureHAWarning.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            this.pictureHAWarning.Name = "pictureHAWarning";
-            this.pictureHAWarning.TabStop = false;
+            resources.ApplyResources(this.pictureWarning, "pictureWarning");
+            this.pictureWarning.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureWarning.Name = "pictureWarning";
+            this.pictureWarning.TabStop = false;
             // 
-            // labelHAWarning
+            // labelWarning
             // 
-            resources.ApplyResources(this.labelHAWarning, "labelHAWarning");
-            this.labelHAWarning.Name = "labelHAWarning";
+            resources.ApplyResources(this.labelWarning, "labelWarning");
+            this.labelWarning.Name = "labelWarning";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // USBEditPage
             // 
@@ -133,11 +140,12 @@
             this.Controls.Add(this.tableLayoutPanelBase);
             this.Name = "USBEditPage";
             this.tableLayoutPanelBase.ResumeLayout(false);
+            this.tableLayoutPanelBase.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsbList)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureHAWarning)).EndInit();
+            this.flowLayoutPanelWarning.ResumeLayout(false);
+            this.flowLayoutPanelWarning.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureWarning)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,8 +161,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnAttached;
-        private System.Windows.Forms.PictureBox pictureHAWarning;
-        private System.Windows.Forms.Label labelHAWarning;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.PictureBox pictureWarning;
+        private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelWarning;
+        private System.Windows.Forms.Label label1;
     }
 }

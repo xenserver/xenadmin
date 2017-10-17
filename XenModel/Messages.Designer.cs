@@ -11016,6 +11016,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No devices available.
+        /// </summary>
+        public static string DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE {
+            get {
+                return ResourceManager.GetString("DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable passthrough.
         /// </summary>
         public static string DIALOG_USB_USAGE_DISABLE_PASSTHROUGH {
@@ -34770,6 +34779,33 @@ namespace XenAdmin {
         public static string USB {
             get {
                 return ResourceManager.GetString("USB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot attach USB devices because the VM is currently protected by HA..
+        /// </summary>
+        public static string USB_ATTACH_NOT_ALLOWED_HA {
+            get {
+                return ResourceManager.GetString("USB_ATTACH_NOT_ALLOWED_HA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB devices can only be attached when the VM is shut down..
+        /// </summary>
+        public static string USB_ATTACH_NOT_ALLOWED_NOT_HALTED {
+            get {
+                return ResourceManager.GetString("USB_ATTACH_NOT_ALLOWED_NOT_HALTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Vendor: {0}; Product: {1}&quot;.
+        /// </summary>
+        public static string USB_DEVICE_VENDOR_PRODUCT {
+            get {
+                return ResourceManager.GetString("USB_DEVICE_VENDOR_PRODUCT", resourceCulture);
             }
         }
         

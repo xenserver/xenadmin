@@ -3934,6 +3934,9 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>Scanning for free device positions</value>
   </data>
+  <data name="DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE" xml:space="preserve">
+    <value>No devices available</value>
+  </data>
   <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
     <value>Disable passthrough</value>
   </data>
@@ -12060,8 +12063,17 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
     <value>&amp;Enable passthrough</value>
   </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_HA" xml:space="preserve">
+    <value>Cannot attach USB devices because the VM is currently protected by HA.</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_NOT_HALTED" xml:space="preserve">
+    <value>USB devices can only be attached when the VM is shut down.</value>
+  </data>
   <data name="USB_DEVICES" xml:space="preserve">
     <value>USB devices</value>
+  </data>
+  <data name="USB_DEVICE_VENDOR_PRODUCT" xml:space="preserve">
+    <value>"Vendor: {0}; Product: {1}"</value>
   </data>
   <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
     <value>1 device attached</value>
