@@ -226,7 +226,7 @@ namespace XenAdmin.Dialogs
                 }
 
                 if (is_vm && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough) &&
-                    (new List<Host>(pool.Connection.Cache.Hosts)).Any(host => host.PUSBs.Count > 0))
+                    pool.Connection.Cache.Hosts.Any(host => host.PUSBs.Count > 0))
                 {
                     ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
                 }
