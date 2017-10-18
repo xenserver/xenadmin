@@ -41,19 +41,26 @@ namespace XenAdmin.Actions
     public class CreateVUSBAction : PureAsyncAction
     {
         private PUSB _pusb;
-        private VM _vm;
-        private Dictionary<string, string> _other_config = null;
 
         public CreateVUSBAction(PUSB pusb, VM vm) : 
             base(pusb.Connection, String.Format(Messages.ACTION_VUSB_CREATING,  pusb.Name(), vm.Name()))
         {
             _pusb = pusb;
-            _vm = vm;
+            VM = vm;
         }
 
         protected override void Run()
         {
-            XenRef<VUSB> vusbRef = VUSB.create(Session, _vm.opaque_ref, _pusb.USB_group, _other_config);
+            if (!VM.UsingUpstreamQemu())
+            {
+                Dictionary<string, string> platform = VM.platform == null ?
+                    new Dictionary<string, string>() :
+                    new Dictionary<string, string>(VM.platform);
+                platform["device-model"] = "qemu-upstream-compat";
+                VM.set_platform(Session, VM.opaque_ref, platform);
+            }
+
+            XenRef<VUSB> vusbRef = VUSB.create(Session, VM.opaque_ref, _pusb.USB_group, null);
             Description = Messages.ACTION_VUSB_CREATED;
         }
     }

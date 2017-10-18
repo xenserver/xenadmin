@@ -33,13 +33,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using CookComputing.XmlRpc;
-
 
 namespace XenAPI
 {
     /// <summary>
-    /// Describes the physical usb device
+    /// A physical USB device
     /// First published in Unreleased.
     /// </summary>
     public partial class PUSB : XenObject<PUSB>
@@ -127,18 +125,18 @@ namespace XenAPI
         public Proxy_PUSB ToProxy()
         {
             Proxy_PUSB result_ = new Proxy_PUSB();
-            result_.uuid = (uuid != null) ? uuid : "";
-            result_.USB_group = (USB_group != null) ? USB_group : "";
-            result_.attached = (attached != null) ? attached : "";
-            result_.host = (host != null) ? host : "";
-            result_.path = (path != null) ? path : "";
-            result_.vendor_id = (vendor_id != null) ? vendor_id : "";
-            result_.vendor_desc = (vendor_desc != null) ? vendor_desc : "";
-            result_.product_id = (product_id != null) ? product_id : "";
-            result_.product_desc = (product_desc != null) ? product_desc : "";
-            result_.serial = (serial != null) ? serial : "";
-            result_.version = (version != null) ? version : "";
-            result_.description = (description != null) ? description : "";
+            result_.uuid = uuid ?? "";
+            result_.USB_group = USB_group ?? "";
+            result_.attached = attached ?? "";
+            result_.host = host ?? "";
+            result_.path = path ?? "";
+            result_.vendor_id = vendor_id ?? "";
+            result_.vendor_desc = vendor_desc ?? "";
+            result_.product_id = product_id ?? "";
+            result_.product_desc = product_desc ?? "";
+            result_.serial = serial ?? "";
+            result_.version = version ?? "";
+            result_.description = description ?? "";
             result_.passthrough_enabled = passthrough_enabled;
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             return result_;
@@ -198,17 +196,9 @@ namespace XenAPI
             }
             else
             {
-                if (!Helper.AreEqual2(_passthrough_enabled, server._passthrough_enabled))
-                {
-                    PUSB.set_passthrough_enabled(session, opaqueRef, _passthrough_enabled);
-                }
                 if (!Helper.AreEqual2(_other_config, server._other_config))
                 {
                     PUSB.set_other_config(session, opaqueRef, _other_config);
-                }
-                if (!Helper.AreEqual2(_USB_group, server._USB_group))
-                {
-                    PUSB.set_USB_group(session, opaqueRef, _USB_group);
                 }
 
                 return null;
@@ -222,7 +212,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static PUSB get_record(Session session, string _pusb)
         {
-            return new PUSB((Proxy_PUSB)session.proxy.pusb_get_record(session.uuid, (_pusb != null) ? _pusb : "").parse());
+            return new PUSB((Proxy_PUSB)session.proxy.pusb_get_record(session.uuid, _pusb ?? "").parse());
         }
 
         /// <summary>
@@ -233,7 +223,7 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PUSB> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<PUSB>.Create(session.proxy.pusb_get_by_uuid(session.uuid, (_uuid != null) ? _uuid : "").parse());
+            return XenRef<PUSB>.Create(session.proxy.pusb_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -244,7 +234,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_uuid(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_uuid(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_uuid(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -255,7 +245,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static XenRef<USB_group> get_USB_group(Session session, string _pusb)
         {
-            return XenRef<USB_group>.Create(session.proxy.pusb_get_usb_group(session.uuid, (_pusb != null) ? _pusb : "").parse());
+            return XenRef<USB_group>.Create(session.proxy.pusb_get_usb_group(session.uuid, _pusb ?? "").parse());
         }
 
         /// <summary>
@@ -266,7 +256,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static XenRef<VUSB> get_attached(Session session, string _pusb)
         {
-            return XenRef<VUSB>.Create(session.proxy.pusb_get_attached(session.uuid, (_pusb != null) ? _pusb : "").parse());
+            return XenRef<VUSB>.Create(session.proxy.pusb_get_attached(session.uuid, _pusb ?? "").parse());
         }
 
         /// <summary>
@@ -277,7 +267,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static XenRef<Host> get_host(Session session, string _pusb)
         {
-            return XenRef<Host>.Create(session.proxy.pusb_get_host(session.uuid, (_pusb != null) ? _pusb : "").parse());
+            return XenRef<Host>.Create(session.proxy.pusb_get_host(session.uuid, _pusb ?? "").parse());
         }
 
         /// <summary>
@@ -288,7 +278,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_path(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_path(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_path(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -299,7 +289,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_vendor_id(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_vendor_id(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_vendor_id(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -310,7 +300,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_vendor_desc(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_vendor_desc(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_vendor_desc(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -321,7 +311,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_product_id(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_product_id(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_product_id(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -332,7 +322,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_product_desc(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_product_desc(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_product_desc(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -343,7 +333,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_serial(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_serial(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_serial(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -354,7 +344,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_version(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_version(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_version(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -365,7 +355,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static string get_description(Session session, string _pusb)
         {
-            return (string)session.proxy.pusb_get_description(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (string)session.proxy.pusb_get_description(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -376,7 +366,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static bool get_passthrough_enabled(Session session, string _pusb)
         {
-            return (bool)session.proxy.pusb_get_passthrough_enabled(session.uuid, (_pusb != null) ? _pusb : "").parse();
+            return (bool)session.proxy.pusb_get_passthrough_enabled(session.uuid, _pusb ?? "").parse();
         }
 
         /// <summary>
@@ -387,19 +377,7 @@ namespace XenAPI
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
         public static Dictionary<string, string> get_other_config(Session session, string _pusb)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.pusb_get_other_config(session.uuid, (_pusb != null) ? _pusb : "").parse());
-        }
-
-        /// <summary>
-        /// Set the passthrough_enabled field of the given PUSB.
-        /// First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pusb">The opaque_ref of the given pusb</param>
-        /// <param name="_passthrough_enabled">New value to set</param>
-        public static void set_passthrough_enabled(Session session, string _pusb, bool _passthrough_enabled)
-        {
-            session.proxy.pusb_set_passthrough_enabled(session.uuid, (_pusb != null) ? _pusb : "", _passthrough_enabled).parse();
+            return Maps.convert_from_proxy_string_string(session.proxy.pusb_get_other_config(session.uuid, _pusb ?? "").parse());
         }
 
         /// <summary>
@@ -411,7 +389,7 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _pusb, Dictionary<string, string> _other_config)
         {
-            session.proxy.pusb_set_other_config(session.uuid, (_pusb != null) ? _pusb : "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            session.proxy.pusb_set_other_config(session.uuid, _pusb ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -424,7 +402,7 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _pusb, string _key, string _value)
         {
-            session.proxy.pusb_add_to_other_config(session.uuid, (_pusb != null) ? _pusb : "", (_key != null) ? _key : "", (_value != null) ? _value : "").parse();
+            session.proxy.pusb_add_to_other_config(session.uuid, _pusb ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -436,7 +414,29 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _pusb, string _key)
         {
-            session.proxy.pusb_remove_from_other_config(session.uuid, (_pusb != null) ? _pusb : "", (_key != null) ? _key : "").parse();
+            session.proxy.pusb_remove_from_other_config(session.uuid, _pusb ?? "", _key ?? "").parse();
+        }
+
+        /// <summary>
+        /// 
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The host</param>
+        public static void scan(Session session, string _host)
+        {
+            session.proxy.pusb_scan(session.uuid, _host ?? "").parse();
+        }
+
+        /// <summary>
+        /// 
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The host</param>
+        public static XenRef<Task> async_scan(Session session, string _host)
+        {
+            return XenRef<Task>.Create(session.proxy.async_pusb_scan(session.uuid, _host ?? "").parse());
         }
 
         /// <summary>
@@ -445,10 +445,10 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
-        /// <param name="_value">The group to which the PUSB will be moved</param>
-        public static void set_USB_group(Session session, string _pusb, string _value)
+        /// <param name="_value">passthrough is enabled when true and disabled with false</param>
+        public static void set_passthrough_enabled(Session session, string _pusb, bool _value)
         {
-            session.proxy.pusb_set_usb_group(session.uuid, (_pusb != null) ? _pusb : "", (_value != null) ? _value : "").parse();
+            session.proxy.pusb_set_passthrough_enabled(session.uuid, _pusb ?? "", _value).parse();
         }
 
         /// <summary>
@@ -457,30 +457,10 @@ namespace XenAPI
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
-        /// <param name="_value">The group to which the PUSB will be moved</param>
-        public static XenRef<Task> async_set_USB_group(Session session, string _pusb, string _value)
+        /// <param name="_value">passthrough is enabled when true and disabled with false</param>
+        public static XenRef<Task> async_set_passthrough_enabled(Session session, string _pusb, bool _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_pusb_set_usb_group(session.uuid, (_pusb != null) ? _pusb : "", (_value != null) ? _value : "").parse());
-        }
-
-        /// <summary>
-        /// 
-        /// First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        public static void scan(Session session)
-        {
-            session.proxy.pusb_scan(session.uuid).parse();
-        }
-
-        /// <summary>
-        /// 
-        /// First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        public static XenRef<Task> async_scan(Session session)
-        {
-            return XenRef<Task>.Create(session.proxy.async_pusb_scan(session.uuid).parse());
+            return XenRef<Task>.Create(session.proxy.async_pusb_set_passthrough_enabled(session.uuid, _pusb ?? "", _value).parse());
         }
 
         /// <summary>
@@ -522,7 +502,7 @@ namespace XenAPI
         private string _uuid;
 
         /// <summary>
-        /// USB group the pUSB is contained in
+        /// USB group the PUSB is contained in
         /// </summary>
         public virtual XenRef<USB_group> USB_group
         {
@@ -576,7 +556,7 @@ namespace XenAPI
         private XenRef<Host> _host;
 
         /// <summary>
-        /// port path of usb device
+        /// port path of USB device
         /// </summary>
         public virtual string path
         {
@@ -594,7 +574,7 @@ namespace XenAPI
         private string _path;
 
         /// <summary>
-        /// vendor id of the usb device
+        /// vendor id of the USB device
         /// </summary>
         public virtual string vendor_id
         {
@@ -612,7 +592,7 @@ namespace XenAPI
         private string _vendor_id;
 
         /// <summary>
-        /// vendor description of the usb device
+        /// vendor description of the USB device
         /// </summary>
         public virtual string vendor_desc
         {
@@ -630,7 +610,7 @@ namespace XenAPI
         private string _vendor_desc;
 
         /// <summary>
-        /// product id of the usb device
+        /// product id of the USB device
         /// </summary>
         public virtual string product_id
         {
@@ -648,7 +628,7 @@ namespace XenAPI
         private string _product_id;
 
         /// <summary>
-        /// product description of the usb device
+        /// product description of the USB device
         /// </summary>
         public virtual string product_desc
         {
@@ -666,7 +646,7 @@ namespace XenAPI
         private string _product_desc;
 
         /// <summary>
-        /// serial of the usb device
+        /// serial of the USB device
         /// </summary>
         public virtual string serial
         {
@@ -684,7 +664,7 @@ namespace XenAPI
         private string _serial;
 
         /// <summary>
-        /// usb device version
+        /// USB device version
         /// </summary>
         public virtual string version
         {
@@ -702,7 +682,7 @@ namespace XenAPI
         private string _version;
 
         /// <summary>
-        /// usb device descritption
+        /// USB device description
         /// </summary>
         public virtual string description
         {

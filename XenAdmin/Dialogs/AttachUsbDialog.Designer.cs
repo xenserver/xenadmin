@@ -125,8 +125,10 @@
             // 
             // AttachUsbDialog
             // 
+            this.AcceptButton = this.buttonAttach;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AttachUsbDialog";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlert)).EndInit();

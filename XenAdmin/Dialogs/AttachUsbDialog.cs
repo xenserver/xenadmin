@@ -42,7 +42,7 @@ namespace XenAdmin.Dialogs
     {
         private VM _vm;
         private List<Host> possibleHosts;
-
+        
         public AttachUsbDialog(VM vm): base(vm.Connection)
         {
             _vm = vm;
@@ -72,6 +72,8 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
 
+            labelWarningLine3.Visible = !_vm.UsingUpstreamQemu();
+            
             treeUsbList.ClearAllNodes();
             treeUsbList.BeginUpdate();
             try
