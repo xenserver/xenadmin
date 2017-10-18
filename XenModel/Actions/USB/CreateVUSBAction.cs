@@ -41,25 +41,23 @@ namespace XenAdmin.Actions
     public class CreateVUSBAction : PureAsyncAction
     {
         private PUSB _pusb;
-        private Dictionary<string, string> _platform;
 
-        public CreateVUSBAction(PUSB pusb, VM vm, Dictionary<string, string> platform) : 
+        public CreateVUSBAction(PUSB pusb, VM vm) : 
             base(pusb.Connection, String.Format(Messages.ACTION_VUSB_CREATING,  pusb.Name(), vm.Name()))
         {
             _pusb = pusb;
             VM = vm;
-            _platform = platform == null ?
-                new Dictionary<string, string>() :
-                new Dictionary<string, string>(platform);
         }
 
         protected override void Run()
         {
-            if (!_platform.ContainsKey("device-model") ||
-                (_platform["device-model"] != "qemu-upstream-compat"))
+            if (!VM.UsingUpstreamQemu())
             {
-                _platform["device-model"] = "qemu-upstream-compat";
-                VM.set_platform(Session, VM.opaque_ref, _platform);
+                Dictionary<string, string> platform = VM.platform == null ?
+                    new Dictionary<string, string>() :
+                    new Dictionary<string, string>(VM.platform);
+                platform["device-model"] = "qemu-upstream-compat";
+                VM.set_platform(Session, VM.opaque_ref, platform);
             }
 
             XenRef<VUSB> vusbRef = VUSB.create(Session, VM.opaque_ref, _pusb.USB_group, null);

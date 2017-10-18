@@ -42,13 +42,11 @@ namespace XenAdmin.Dialogs
     {
         private VM _vm;
         private List<Host> possibleHosts;
-        private Dictionary<string, string> platform;
-
+        
         public AttachUsbDialog(VM vm): base(vm.Connection)
         {
             _vm = vm;
             possibleHosts = new List<Host>();
-            platform = _vm.platform;
             InitializeComponent();
             BuildList();
             treeUsbList_SelectedIndexChanged(null, null);
@@ -74,11 +72,8 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
 
-            labelWarningLine3.Visible = 
-                (platform == null) ||
-                !platform.ContainsKey("device-model") || 
-                (platform["device-model"] != "qemu-upstream-compat");
-
+            labelWarningLine3.Visible = _vm.UsingUpstreamQemu();
+            
             treeUsbList.ClearAllNodes();
             treeUsbList.BeginUpdate();
             try
@@ -129,7 +124,7 @@ namespace XenAdmin.Dialogs
         {
             UsbItem item = treeUsbList.SelectedItem as UsbItem;
             if (item != null)
-                new XenAdmin.Actions.CreateVUSBAction(item.Pusb, _vm, platform).RunAsync();
+                new XenAdmin.Actions.CreateVUSBAction(item.Pusb, _vm).RunAsync();
         }
 
         private class HostItem : CustomTreeNode
