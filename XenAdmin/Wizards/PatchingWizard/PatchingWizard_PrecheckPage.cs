@@ -493,6 +493,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
+            if (patch != null || WizardMode == WizardMode.AutomatedUpdates)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_FOR_PENDING_RESTART, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+
+                foreach (var pool in SelectedPools)
+                {
+                    checkGroup.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, WizardMode == WizardMode.AutomatedUpdates ? null : patch.uuid));
+                }
+            }
+
             return checks;
         }
 
@@ -538,6 +549,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (Host host in applicableServers)
                 {
                     checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
+                }
+            }
+
+            if (update != null || WizardMode == WizardMode.AutomatedUpdates)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_FOR_PENDING_RESTART, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+
+                foreach (var pool in SelectedPools)
+                {
+                    checkGroup.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, WizardMode == WizardMode.AutomatedUpdates ? null : update.uuid));
                 }
             }
 
