@@ -72,7 +72,7 @@ namespace XenAdmin.Dialogs
         {
             Program.AssertOnEventThread();
 
-            labelWarningLine3.Visible = _vm.UsingUpstreamQemu();
+            labelWarningLine3.Visible = !_vm.UsingUpstreamQemu();
             
             treeUsbList.ClearAllNodes();
             treeUsbList.BeginUpdate();
