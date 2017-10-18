@@ -604,6 +604,10 @@ namespace XenAPI
         Response<bool>
         pool_get_live_patching_disabled(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_igmp_snooping_enabled")]
+        Response<bool>
+        pool_get_igmp_snooping_enabled(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -1023,6 +1027,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.pool.disable_ssl_legacy")]
         Response<string>
         async_pool_disable_ssl_legacy(string session, string _pool);
+
+        [XmlRpcMethod("pool.set_igmp_snooping_enabled")]
+        Response<string>
+        pool_set_igmp_snooping_enabled(string session, string _pool, bool _value);
+
+        [XmlRpcMethod("Async.pool.set_igmp_snooping_enabled")]
+        Response<string>
+        async_pool_set_igmp_snooping_enabled(string session, string _pool, bool _value);
 
         [XmlRpcMethod("pool.has_extension")]
         Response<bool>
@@ -2251,6 +2263,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.retrieve_wlb_recommendations")]
         Response<string>
         async_vm_retrieve_wlb_recommendations(string session, string _vm);
+
+        [XmlRpcMethod("VM.set_bios_strings")]
+        Response<string>
+        vm_set_bios_strings(string session, string _vm, Object _value);
+
+        [XmlRpcMethod("Async.VM.set_bios_strings")]
+        Response<string>
+        async_vm_set_bios_strings(string session, string _vm, Object _value);
 
         [XmlRpcMethod("VM.copy_bios_strings")]
         Response<string>
@@ -4152,6 +4172,10 @@ namespace XenAPI
         Response<Object>
         network_get_assigned_ips(string session, string _network);
 
+        [XmlRpcMethod("network.get_purpose")]
+        Response<string []>
+        network_get_purpose(string session, string _network);
+
         [XmlRpcMethod("network.set_name_label")]
         Response<string>
         network_set_name_label(string session, string _network, string _label);
@@ -4211,6 +4235,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.network.set_default_locking_mode")]
         Response<string>
         async_network_set_default_locking_mode(string session, string _network, string _value);
+
+        [XmlRpcMethod("network.add_purpose")]
+        Response<string>
+        network_add_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("Async.network.add_purpose")]
+        Response<string>
+        async_network_add_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("network.remove_purpose")]
+        Response<string>
+        network_remove_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("Async.network.remove_purpose")]
+        Response<string>
+        async_network_remove_purpose(string session, string _network, string _value);
 
         [XmlRpcMethod("network.get_all")]
         Response<string []>
@@ -4671,6 +4711,10 @@ namespace XenAPI
         [XmlRpcMethod("PIF.get_capabilities")]
         Response<string []>
         pif_get_capabilities(string session, string _pif);
+
+        [XmlRpcMethod("PIF.get_igmp_snooping_status")]
+        Response<string>
+        pif_get_igmp_snooping_status(string session, string _pif);
 
         [XmlRpcMethod("PIF.set_other_config")]
         Response<string>
@@ -5964,21 +6008,17 @@ namespace XenAPI
         Response<string>
         async_vdi_data_destroy(string session, string _vdi);
 
-        [XmlRpcMethod("VDI.export_changed_blocks")]
+        [XmlRpcMethod("VDI.list_changed_blocks")]
         Response<string>
-        vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
+        vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
 
-        [XmlRpcMethod("Async.VDI.export_changed_blocks")]
+        [XmlRpcMethod("Async.VDI.list_changed_blocks")]
         Response<string>
-        async_vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
+        async_vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
 
         [XmlRpcMethod("VDI.get_nbd_info")]
-        Response<string []>
+        Response<Proxy_Vdi_nbd_server_info[]>
         vdi_get_nbd_info(string session, string _vdi);
-
-        [XmlRpcMethod("Async.VDI.get_nbd_info")]
-        Response<string>
-        async_vdi_get_nbd_info(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_all")]
         Response<string []>
@@ -7608,6 +7648,10 @@ namespace XenAPI
         Response<Object>
         sdn_controller_get_all_records(string session);
 
+        [XmlRpcMethod("vdi_nbd_server_info.get_all_records")]
+        Response<Object>
+        vdi_nbd_server_info_get_all_records(string session);
+
         [XmlRpcMethod("PUSB.get_record")]
         Response<Proxy_PUSB>
         pusb_get_record(string session, string _pusb);
@@ -7672,10 +7716,6 @@ namespace XenAPI
         Response<Object>
         pusb_get_other_config(string session, string _pusb);
 
-        [XmlRpcMethod("PUSB.set_passthrough_enabled")]
-        Response<string>
-        pusb_set_passthrough_enabled(string session, string _pusb, bool _passthrough_enabled);
-
         [XmlRpcMethod("PUSB.set_other_config")]
         Response<string>
         pusb_set_other_config(string session, string _pusb, Object _other_config);
@@ -7688,21 +7728,21 @@ namespace XenAPI
         Response<string>
         pusb_remove_from_other_config(string session, string _pusb, string _key);
 
-        [XmlRpcMethod("PUSB.set_USB_group")]
-        Response<string>
-        pusb_set_usb_group(string session, string _pusb, string _value);
-
-        [XmlRpcMethod("Async.PUSB.set_USB_group")]
-        Response<string>
-        async_pusb_set_usb_group(string session, string _pusb, string _value);
-
         [XmlRpcMethod("PUSB.scan")]
         Response<string>
-        pusb_scan(string session);
+        pusb_scan(string session, string _host);
 
         [XmlRpcMethod("Async.PUSB.scan")]
         Response<string>
-        async_pusb_scan(string session);
+        async_pusb_scan(string session, string _host);
+
+        [XmlRpcMethod("PUSB.set_passthrough_enabled")]
+        Response<string>
+        pusb_set_passthrough_enabled(string session, string _pusb, bool _value);
+
+        [XmlRpcMethod("Async.PUSB.set_passthrough_enabled")]
+        Response<string>
+        async_pusb_set_passthrough_enabled(string session, string _pusb, bool _value);
 
         [XmlRpcMethod("PUSB.get_all")]
         Response<string []>
@@ -7976,6 +8016,7 @@ namespace XenAPI
         public Object cpu_info;
         public bool policy_no_vendor_device;
         public bool live_patching_disabled;
+        public bool igmp_snooping_enabled;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8327,6 +8368,7 @@ namespace XenAPI
         public string [] tags;
         public string default_locking_mode;
         public Object assigned_ips;
+        public string [] purpose;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8405,6 +8447,7 @@ namespace XenAPI
         public bool managed;
         public Object properties;
         public string [] capabilities;
+        public string igmp_snooping_status;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8816,6 +8859,16 @@ namespace XenAPI
         public string protocol;
         public string address;
         public string port;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Vdi_nbd_server_info
+    {
+        public string exportname;
+        public string address;
+        public string port;
+        public string cert;
+        public string subject;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

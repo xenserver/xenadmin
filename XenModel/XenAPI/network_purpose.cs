@@ -35,33 +35,21 @@ using System.Collections.Generic;
 
 namespace XenAPI
 {
-    public enum cls
+    public enum network_purpose
     {
-        VM, Host, SR, Pool, VMPP, VMSS, PVS_proxy, VDI, unknown
+        nbd, insecure_nbd, unknown
     }
 
-    public static class cls_helper
+    public static class network_purpose_helper
     {
-        public static string ToString(cls x)
+        public static string ToString(network_purpose x)
         {
             switch (x)
             {
-                case cls.VM:
-                    return "VM";
-                case cls.Host:
-                    return "Host";
-                case cls.SR:
-                    return "SR";
-                case cls.Pool:
-                    return "Pool";
-                case cls.VMPP:
-                    return "VMPP";
-                case cls.VMSS:
-                    return "VMSS";
-                case cls.PVS_proxy:
-                    return "PVS_proxy";
-                case cls.VDI:
-                    return "VDI";
+                case network_purpose.nbd:
+                    return "nbd";
+                case network_purpose.insecure_nbd:
+                    return "insecure_nbd";
                 default:
                     return "unknown";
             }

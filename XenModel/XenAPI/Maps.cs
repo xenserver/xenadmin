@@ -636,7 +636,7 @@ namespace XenAPI
                 {
                     try
                     {
-                        string k = (key != null) ? key : "";
+                        string k = key ?? "";
                         string v = vusb_operations_helper.ToString(table[key]);
                         result[k] = v;
                     }

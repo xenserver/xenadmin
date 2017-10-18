@@ -1119,7 +1119,7 @@ namespace XenAPI
         /// <param name="_host">The opaque_ref of the given host</param>
         public static List<XenRef<PUSB>> get_PUSBs(Session session, string _host)
         {
-            return XenRef<PUSB>.Create(session.proxy.host_get_pusbs(session.uuid, (_host != null) ? _host : "").parse());
+            return XenRef<PUSB>.Create(session.proxy.host_get_pusbs(session.uuid, _host ?? "").parse());
         }
 
         /// <summary>
@@ -2343,7 +2343,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the installed server SSL certificate.
+        /// Get the installed server public TLS certificate.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>
@@ -2354,7 +2354,7 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the installed server SSL certificate.
+        /// Get the installed server public TLS certificate.
         /// First published in XenServer 5.5.
         /// </summary>
         /// <param name="session">The session</param>

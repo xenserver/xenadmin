@@ -1237,7 +1237,7 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<XenRef<VUSB>> get_VUSBs(Session session, string _vm)
         {
-            return XenRef<VUSB>.Create(session.proxy.vm_get_vusbs(session.uuid, (_vm != null) ? _vm : "").parse());
+            return XenRef<VUSB>.Create(session.proxy.vm_get_vusbs(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3637,6 +3637,30 @@ namespace XenAPI
         public static XenRef<Task> async_retrieve_wlb_recommendations(Session session, string _vm)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_retrieve_wlb_recommendations(session.uuid, _vm ?? "").parse());
+        }
+
+        /// <summary>
+        /// Set custom BIOS strings to this VM. VM will be given a default set of BIOS strings, only some of which can be overridden by the supplied values. Allowed keys are: 'bios-vendor', 'bios-version', 'system-manufacturer', 'system-product-name', 'system-version', 'system-serial-number', 'enclosure-asset-tag'
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The custom BIOS strings as a list of key-value pairs</param>
+        public static void set_bios_strings(Session session, string _vm, Dictionary<string, string> _value)
+        {
+            session.proxy.vm_set_bios_strings(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
+        }
+
+        /// <summary>
+        /// Set custom BIOS strings to this VM. VM will be given a default set of BIOS strings, only some of which can be overridden by the supplied values. Allowed keys are: 'bios-vendor', 'bios-version', 'system-manufacturer', 'system-product-name', 'system-version', 'system-serial-number', 'enclosure-asset-tag'
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The custom BIOS strings as a list of key-value pairs</param>
+        public static XenRef<Task> async_set_bios_strings(Session session, string _vm, Dictionary<string, string> _value)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_set_bios_strings(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_value)).parse());
         }
 
         /// <summary>
