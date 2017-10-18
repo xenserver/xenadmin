@@ -62,9 +62,6 @@ namespace XenAdmin.Diagnostics.Checks
             double bootTime = Host.BootTime();
             double agentStart = Host.AgentStartTime();
 
-            if (bootTime == 0.0 || agentStart == 0.0)
-                return null; //fine
-
             //check reboot
             if (elyOrGreater)
             {
@@ -81,6 +78,9 @@ namespace XenAdmin.Diagnostics.Checks
             }
             else
             {
+                if (bootTime == 0.0 || agentStart == 0.0)
+                    return null; //fine
+
                 var hostRestartRequiredPatches = Host.AppliedPatches().Where(p => p.after_apply_guidance.Contains(after_apply_guidance.restartHost) && ((double)Util.ToUnixTime(p.AppliedOn(Host)) > agentStart));
 
                 foreach (Pool_patch patch in hostRestartRequiredPatches)
@@ -104,6 +104,9 @@ namespace XenAdmin.Diagnostics.Checks
 
                 if (!elyOrGreater) //normal mode pre-Ely
                 {
+                    if (bootTime == 0.0 || agentStart == 0.0)
+                        return null; //fine
+
                     if (string.Equals(patch.uuid, UpdateUuid, System.StringComparison.InvariantCultureIgnoreCase))
                         return new MasterIsPendingRestartToolstackProblem(this, pool);
                 }
