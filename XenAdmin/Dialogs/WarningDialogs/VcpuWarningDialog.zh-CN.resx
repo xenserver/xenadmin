@@ -371,6 +371,6 @@
     <value>VcpuWarningDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Dialogs.XenDialogBase, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>XenAdmin.Dialogs.XenDialogBase, XenCenter, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
