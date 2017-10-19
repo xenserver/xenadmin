@@ -151,13 +151,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dataGridViewUsbList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 24</value>
+    <value>0, 22</value>
   </data>
   <data name="dataGridViewUsbList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 12</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="dataGridViewUsbList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>894, 265</value>
+    <value>900, 279</value>
   </data>
   <data name="dataGridViewUsbList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -229,13 +229,19 @@
     <value>True</value>
   </data>
   <data name="labelGridTitle.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
+    <value>Segoe UI, 11.25pt</value>
   </data>
   <data name="labelGridTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+    <value>0, 0</value>
+  </data>
+  <data name="labelGridTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="labelGridTitle.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 2</value>
   </data>
   <data name="labelGridTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 21</value>
+    <value>99, 22</value>
   </data>
   <data name="labelGridTitle.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -260,6 +266,9 @@
   </data>
   <data name="tableLayoutPanelBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
+  </data>
+  <data name="tableLayoutPanelBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="tableLayoutPanelBase.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>900, 400</value>
@@ -311,9 +320,6 @@
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>920, 434</value>
