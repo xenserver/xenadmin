@@ -1835,4 +1835,7 @@
   <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>Repair Storage</value>
   </data>
+  <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
+    <value>GFS2</value>
+  </data>
 </root>

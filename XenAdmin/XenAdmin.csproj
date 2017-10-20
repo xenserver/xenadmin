@@ -205,6 +205,12 @@
     <Compile Include="Controls\SpinnerIcon.designer.cs">
       <DependentUpon>SpinnerIcon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SrProvisioningMethod.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SrProvisioningMethod.Designer.cs">
+      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Tags\TagList.cs" />
     <Compile Include="Controls\Tags\TagButton.cs">
       <SubType>UserControl</SubType>
@@ -1500,6 +1506,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SrProvisioningMethod.ja.resx">
+      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SrProvisioningMethod.resx">
+      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SrProvisioningMethod.zh-CN.resx">
+      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\XenSearch\QueryPanel.ja.resx">
       <DependentUpon>QueryPanel.cs</DependentUpon>

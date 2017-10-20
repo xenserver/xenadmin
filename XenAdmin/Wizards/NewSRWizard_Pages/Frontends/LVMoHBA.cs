@@ -56,11 +56,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             InitializeComponent();
         }
 
-        public virtual SR.SRTypes SrType { get { return SR.SRTypes.lvmohba; } }
+        public virtual SR.SRTypes SrType { get { return srProvisioningMethod.Lvm ? SR.SRTypes.lvmohba : SR.SRTypes.gfs2; } }
 
         public virtual bool ShowNicColumn { get { return false; } }
 
         public virtual LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
+        {
+            return SrType == SR.SRTypes.gfs2 ? new Gfs2HbaSrDescriptor(device) : new LvmOhbaSrDescriptor(device, Connection);
+        }
+
+        public virtual LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
         {
             return new LvmOhbaSrDescriptor(device, Connection);
         }
