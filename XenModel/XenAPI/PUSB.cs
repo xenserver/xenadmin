@@ -48,7 +48,6 @@ namespace XenAPI
 
         public PUSB(string uuid,
             XenRef<USB_group> USB_group,
-            XenRef<VUSB> attached,
             XenRef<Host> host,
             string path,
             string vendor_id,
@@ -63,7 +62,6 @@ namespace XenAPI
         {
             this.uuid = uuid;
             this.USB_group = USB_group;
-            this.attached = attached;
             this.host = host;
             this.path = path;
             this.vendor_id = vendor_id;
@@ -90,7 +88,6 @@ namespace XenAPI
         {
             uuid = update.uuid;
             USB_group = update.USB_group;
-            attached = update.attached;
             host = update.host;
             path = update.path;
             vendor_id = update.vendor_id;
@@ -108,7 +105,6 @@ namespace XenAPI
         {
             uuid = proxy.uuid == null ? null : (string)proxy.uuid;
             USB_group = proxy.USB_group == null ? null : XenRef<USB_group>.Create(proxy.USB_group);
-            attached = proxy.attached == null ? null : XenRef<VUSB>.Create(proxy.attached);
             host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
             path = proxy.path == null ? null : (string)proxy.path;
             vendor_id = proxy.vendor_id == null ? null : (string)proxy.vendor_id;
@@ -127,7 +123,6 @@ namespace XenAPI
             Proxy_PUSB result_ = new Proxy_PUSB();
             result_.uuid = uuid ?? "";
             result_.USB_group = USB_group ?? "";
-            result_.attached = attached ?? "";
             result_.host = host ?? "";
             result_.path = path ?? "";
             result_.vendor_id = vendor_id ?? "";
@@ -150,7 +145,6 @@ namespace XenAPI
         {
             uuid = Marshalling.ParseString(table, "uuid");
             USB_group = Marshalling.ParseRef<USB_group>(table, "USB_group");
-            attached = Marshalling.ParseRef<VUSB>(table, "attached");
             host = Marshalling.ParseRef<Host>(table, "host");
             path = Marshalling.ParseString(table, "path");
             vendor_id = Marshalling.ParseString(table, "vendor_id");
@@ -173,7 +167,6 @@ namespace XenAPI
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._USB_group, other._USB_group) &&
-                Helper.AreEqual2(this._attached, other._attached) &&
                 Helper.AreEqual2(this._host, other._host) &&
                 Helper.AreEqual2(this._path, other._path) &&
                 Helper.AreEqual2(this._vendor_id, other._vendor_id) &&
@@ -246,17 +239,6 @@ namespace XenAPI
         public static XenRef<USB_group> get_USB_group(Session session, string _pusb)
         {
             return XenRef<USB_group>.Create(session.proxy.pusb_get_usb_group(session.uuid, _pusb ?? "").parse());
-        }
-
-        /// <summary>
-        /// Get the attached field of the given PUSB.
-        /// First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_pusb">The opaque_ref of the given pusb</param>
-        public static XenRef<VUSB> get_attached(Session session, string _pusb)
-        {
-            return XenRef<VUSB>.Create(session.proxy.pusb_get_attached(session.uuid, _pusb ?? "").parse());
         }
 
         /// <summary>
@@ -518,24 +500,6 @@ namespace XenAPI
             }
         }
         private XenRef<USB_group> _USB_group;
-
-        /// <summary>
-        /// VUSB running on this PUSB
-        /// </summary>
-        public virtual XenRef<VUSB> attached
-        {
-            get { return _attached; }
-            set
-            {
-                if (!Helper.AreEqual(value, _attached))
-                {
-                    _attached = value;
-                    Changed = true;
-                    NotifyPropertyChanged("attached");
-                }
-            }
-        }
-        private XenRef<VUSB> _attached;
 
         /// <summary>
         /// Physical machine that owns the USB device

@@ -924,6 +924,9 @@
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>The provision call can only be invoked on templates, not regular VMs.</value>
   </data>
+  <data name="PUSB_VDI_CONFLICT" xml:space="preserve">
+    <value>The VDI corresponding to this PUSB has existing VBDs.</value>
+  </data>
   <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
     <value>The PVS site already has cache storage configured for the host.</value>
   </data>

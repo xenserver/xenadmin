@@ -52,7 +52,7 @@ namespace XenAdmin.Actions
         {
             try
             {
-                if ((_vusb.Connection.Resolve(_vusb.attached) != null) &&
+                if ((_vusb.currently_attached) &&
                     XenAPI.VUSB.get_allowed_operations(Session, _vusb.opaque_ref).Contains(XenAPI.vusb_operations.unplug))
                 {
                     RelatedTask = VUSB.async_unplug(Session, _vusb.opaque_ref);

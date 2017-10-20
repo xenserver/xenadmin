@@ -239,7 +239,8 @@ namespace XenAdmin.TabPages
             {
                 if (_pusb != null)
                 {
-                    VUSB vusb = _pusb.Connection.Resolve(_pusb.attached);
+                    USB_group usbgroup = _pusb.Connection.Resolve(_pusb.USB_group);
+                    VUSB vusb = usbgroup.VUSBs.Count > 0 ? _pusb.Connection.Resolve(usbgroup.VUSBs[0]) : null;
                     _vm = vusb == null ? null : _pusb.Connection.Resolve(vusb.VM);
                     if (_vm != null)
                         _vm.PropertyChanged += Vm_PropertyChanged;

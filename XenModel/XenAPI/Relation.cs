@@ -138,10 +138,6 @@ namespace XenAPI
                 new Relation("VMs", "VM", "protection_policy"),
             });
 
-            relations.Add(typeof(Proxy_PUSB), new Relation[] {
-                new Relation("attached", "VUSB", "attached"),
-            });
-
             relations.Add(typeof(Proxy_VM), new Relation[] {
                 new Relation("VUSBs", "VUSB", "VM"),
                 new Relation("VGPUs", "VGPU", "VM"),
