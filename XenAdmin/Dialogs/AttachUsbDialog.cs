@@ -77,12 +77,13 @@ namespace XenAdmin.Dialogs
             treeUsbList.ClearAllNodes();
             treeUsbList.BeginUpdate();
             try
-            {   
+            {
+                List<UsbItem> usbNodeList = new List<UsbItem>();
                 foreach (Host host in possibleHosts)
                 {
                     // Add a host node to tree list.
                     HostItem hostNode = new HostItem(host);
-                    List<PUSB> pusbs = _vm.Connection.ResolveAll(host.PUSBs);
+                    List<PUSB> pusbs = host.Connection.ResolveAll(host.PUSBs);
                     foreach (PUSB pusb in pusbs)
                     {
                         // Add a USB in the host to tree list.
@@ -93,13 +94,19 @@ namespace XenAdmin.Dialogs
                         if (pusb.passthrough_enabled && !attached)
                         {
                             UsbItem usbNode = new UsbItem(pusb);
-                            treeUsbList.AddChildNode(hostNode, usbNode);
+                            usbNodeList.Add(usbNode);
                         }
                     }
                     // Show host node only when it contains available USB devices.
-                    if (hostNode.ChildNodes.Count > 0)
+                    if (usbNodeList.Count > 0)
+                    {
                         treeUsbList.AddNode(hostNode);
-                    
+                        foreach (UsbItem item in usbNodeList)
+                        {
+                            treeUsbList.AddChildNode(hostNode, item);
+                        }
+                    }
+                    usbNodeList.Clear();
                 }
                 
                 if (treeUsbList.Nodes.Count == 0)
