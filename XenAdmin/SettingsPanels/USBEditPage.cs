@@ -289,7 +289,7 @@ namespace XenAdmin.SettingsPanels
 
                 locationCell.Value = pusb.path;
                 descriptionCell.Value = pusb.Description();
-                attachedCell.Value = (_vusb.Connection.Resolve(_vusb.attached) != null).ToYesNoStringI18n();
+                attachedCell.Value = _vusb.currently_attached.ToYesNoStringI18n();
             }
 
             public void DeregisterEvents()

@@ -52,7 +52,7 @@ namespace XenAPI
             XenRef<VM> VM,
             XenRef<USB_group> USB_group,
             Dictionary<string, string> other_config,
-            XenRef<PUSB> attached)
+            bool currently_attached)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -60,7 +60,7 @@ namespace XenAPI
             this.VM = VM;
             this.USB_group = USB_group;
             this.other_config = other_config;
-            this.attached = attached;
+            this.currently_attached = currently_attached;
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace XenAPI
             VM = update.VM;
             USB_group = update.USB_group;
             other_config = update.other_config;
-            attached = update.attached;
+            currently_attached = update.currently_attached;
         }
 
         internal void UpdateFromProxy(Proxy_VUSB proxy)
@@ -91,7 +91,7 @@ namespace XenAPI
             VM = proxy.VM == null ? null : XenRef<VM>.Create(proxy.VM);
             USB_group = proxy.USB_group == null ? null : XenRef<USB_group>.Create(proxy.USB_group);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
-            attached = proxy.attached == null ? null : XenRef<PUSB>.Create(proxy.attached);
+            currently_attached = (bool)proxy.currently_attached;
         }
 
         public Proxy_VUSB ToProxy()
@@ -103,7 +103,7 @@ namespace XenAPI
             result_.VM = VM ?? "";
             result_.USB_group = USB_group ?? "";
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
-            result_.attached = attached ?? "";
+            result_.currently_attached = currently_attached;
             return result_;
         }
 
@@ -119,7 +119,7 @@ namespace XenAPI
             VM = Marshalling.ParseRef<VM>(table, "VM");
             USB_group = Marshalling.ParseRef<USB_group>(table, "USB_group");
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            attached = Marshalling.ParseRef<PUSB>(table, "attached");
+            currently_attached = Marshalling.ParseBool(table, "currently_attached");
         }
 
         public bool DeepEquals(VUSB other, bool ignoreCurrentOperations)
@@ -137,7 +137,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._VM, other._VM) &&
                 Helper.AreEqual2(this._USB_group, other._USB_group) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
-                Helper.AreEqual2(this._attached, other._attached);
+                Helper.AreEqual2(this._currently_attached, other._currently_attached);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VUSB server)
@@ -246,14 +246,14 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Get the attached field of the given VUSB.
+        /// Get the currently_attached field of the given VUSB.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
-        public static XenRef<PUSB> get_attached(Session session, string _vusb)
+        public static bool get_currently_attached(Session session, string _vusb)
         {
-            return XenRef<PUSB>.Create(session.proxy.vusb_get_attached(session.uuid, _vusb ?? "").parse());
+            return (bool)session.proxy.vusb_get_currently_attached(session.uuid, _vusb ?? "").parse();
         }
 
         /// <summary>
@@ -492,21 +492,21 @@ namespace XenAPI
         private Dictionary<string, string> _other_config;
 
         /// <summary>
-        /// The PUSB on which this VUSB is running
+        /// is the device currently attached
         /// </summary>
-        public virtual XenRef<PUSB> attached
+        public virtual bool currently_attached
         {
-            get { return _attached; }
+            get { return _currently_attached; }
             set
             {
-                if (!Helper.AreEqual(value, _attached))
+                if (!Helper.AreEqual(value, _currently_attached))
                 {
-                    _attached = value;
+                    _currently_attached = value;
                     Changed = true;
-                    NotifyPropertyChanged("attached");
+                    NotifyPropertyChanged("currently_attached");
                 }
             }
         }
-        private XenRef<PUSB> _attached;
+        private bool _currently_attached;
     }
 }

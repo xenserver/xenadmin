@@ -224,7 +224,7 @@ namespace XenAdmin.TabPages
             public HostUsbRow(PUSB pusb)
             {
                 _pusb = pusb;
-                setVm();
+                SetVm();
 
                 _pusb.PropertyChanged += Pusb_PropertyChanged;
 
@@ -235,11 +235,12 @@ namespace XenAdmin.TabPages
                 UpdateDetails();
             }
 
-            private void setVm()
+            private void SetVm()
             {
                 if (_pusb != null)
                 {
-                    VUSB vusb = _pusb.Connection.Resolve(_pusb.attached);
+                    USB_group usbgroup = _pusb.Connection.Resolve(_pusb.USB_group);
+                    VUSB vusb = (usbgroup != null && usbgroup.VUSBs != null && usbgroup.VUSBs.Count > 0) ? _pusb.Connection.Resolve(usbgroup.VUSBs[0]) : null;
                     _vm = vusb == null ? null : _pusb.Connection.Resolve(vusb.VM);
                     if (_vm != null)
                         _vm.PropertyChanged += Vm_PropertyChanged;
@@ -273,7 +274,7 @@ namespace XenAdmin.TabPages
                     if (_vm != null)  // Remove PropertyChanged handler for old VM
                         _vm.PropertyChanged -= Vm_PropertyChanged;
 
-                    setVm();
+                    SetVm();
                 }
                 UpdateDetails();
             }

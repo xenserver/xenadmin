@@ -7668,10 +7668,6 @@ namespace XenAPI
         Response<string>
         pusb_get_usb_group(string session, string _pusb);
 
-        [XmlRpcMethod("PUSB.get_attached")]
-        Response<string>
-        pusb_get_attached(string session, string _pusb);
-
         [XmlRpcMethod("PUSB.get_host")]
         Response<string>
         pusb_get_host(string session, string _pusb);
@@ -7864,9 +7860,9 @@ namespace XenAPI
         Response<Object>
         vusb_get_other_config(string session, string _vusb);
 
-        [XmlRpcMethod("VUSB.get_attached")]
-        Response<string>
-        vusb_get_attached(string session, string _vusb);
+        [XmlRpcMethod("VUSB.get_currently_attached")]
+        Response<bool>
+        vusb_get_currently_attached(string session, string _vusb);
 
         [XmlRpcMethod("VUSB.set_other_config")]
         Response<string>
@@ -8876,7 +8872,6 @@ namespace XenAPI
     {
         public string uuid;
         public string USB_group;
-        public string attached;
         public string host;
         public string path;
         public string vendor_id;
@@ -8910,7 +8905,7 @@ namespace XenAPI
         public string VM;
         public string USB_group;
         public Object other_config;
-        public string attached;
+        public bool currently_attached;
     }
 
 }
