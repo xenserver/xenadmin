@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,39 +26,39 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
-    -->
+  -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>アクティブ化キーを適用するには、エディションの設定が free である必要があります。</value>
@@ -128,6 +128,9 @@
   </data>
   <data name="AUTH_DISABLE_FAILED" xml:space="preserve">
     <value>以下のエラーにより、外部認証が無効になりました。現在の Active Directory マシン アカウントが Active Directory サーバー上で正しく無効になっていません。</value>
+  </data>
+  <data name="AUTH_DISABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>次のエラーにより、外部認証が無効になりました: アカウントが無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません</value>
   </data>
   <data name="AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>以下のエラーにより、外部認証が無効になりました。アクセス拒否により、現在の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
@@ -167,6 +170,9 @@
   </data>
   <data name="BACKUP_SCRIPT_FAILED" xml:space="preserve">
     <value>バックアップ スクリプトにエラーが発生したため、バックアップを実行できませんでした。</value>
+  </data>
+  <data name="BALLOONING_TIMEOUT_BEFORE_MIGRATION" xml:space="preserve">
+    <value>仮想マシンの移行前にメモリバルーニングでタイムアウトが発生しました。エラーが繰り返し発生する場合、動的最小メモリ量 (memory-dynamic-min) を増やしてください。</value>
   </data>
   <data name="BOOTLOADER_FAILED" xml:space="preserve">
     <value>この VM のブートローダーからエラーが返されました -- VM が正しくインストールされていることを確認してください。{1}</value>
@@ -254,6 +260,9 @@
   </data>
   <data name="COULD_NOT_IMPORT_DATABASE" xml:space="preserve">
     <value>メタデータ VDI からのデータベースのインポート時にエラーが発生しました。</value>
+  </data>
+  <data name="COULD_NOT_UPDATE_IGMP_SNOOPING_EVERYWHERE" xml:space="preserve">
+    <value>IGMP スヌーピング設定は、一部のホスト、ネットワークには適用できません。</value>
   </data>
   <data name="CPU_FEATURE_MASKING_NOT_SUPPORTED" xml:space="preserve">
     <value>この CPU は機能のマスキングをサポートしません。</value>
@@ -681,6 +690,9 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>ネットワークにはアクティブな VIF ({0}) があるため、削除できません。</value>
   </data>
+  <data name="NETWORK_INCOMPATIBLE_PURPOSES" xml:space="preserve">
+    <value>ネットワークに追加しようとした目的は、このネットワークまたは他のネットワークの既存の目的と互換性がありません。</value>
+  </data>
   <data name="NETWORK_UNMANAGED" xml:space="preserve">
     <value>ネットワークは xapi で管理されていません。</value>
   </data>
@@ -840,11 +852,11 @@
   <data name="POOL_AUTH_DISABLE_FAILED" xml:space="preserve">
     <value>以下のエラーにより、外部認証が無効になりました。一部の Active Directory マシン アカウントが Active Directory サーバー上で正しく無効になっていません。 </value>
   </data>
-  <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
-    <value>以下のエラーにより、外部認証が無効になりました。アクセス拒否により、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
-  </data>
   <data name="POOL_AUTH_DISABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
     <value>次のエラーにより、外部認証が無効になりました: アカウントが無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
+  </data>
+  <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>以下のエラーにより、外部認証が無効になりました。アクセス拒否により、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
   </data>
   <data name="POOL_AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>以下のエラーにより、外部認証が無効になりました。資格情報が無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
@@ -1040,6 +1052,9 @@
   <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
     <value>Dconf 文字列に NetApp target パラメーターがありません。</value>
   </data>
+  <data name="SR_BACKEND_FAILURE_1200" xml:space="preserve">
+    <value>SM が一般的な python の例外をスローしました</value>
+  </data>
   <data name="SR_BACKEND_FAILURE_121" xml:space="preserve">
     <value>Dconf 文字列に NetApp username パラメーターがありません。</value>
   </data>
@@ -1213,6 +1228,12 @@
   </data>
   <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
     <value>不正なローカル パスです。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_227" xml:space="preserve">
+    <value>指定された SMB バージョンは使用できません。1.0 または 3.0 を選択してください</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_228" xml:space="preserve">
+    <value>xe-mount-isosr には "-o" が必要です</value>
   </data>
   <data name="SR_BACKEND_FAILURE_24" xml:space="preserve">
     <value>指定した VDI は現在使用中です。</value>
@@ -1399,6 +1420,9 @@
   </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI が使用できません。</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_460" xml:space="preserve">
+    <value>指定された VDI の変更ブロックを計算できませんでした。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_47" xml:space="preserve">
     <value>ストレージ リポジトリが使用できません。</value>
@@ -1727,6 +1751,9 @@
   <data name="VCPUS_MAX_ALLOWED_TITLE" xml:space="preserve">
     <value>許可される仮想 CPU の最大数</value>
   </data>
+  <data name="VDI_CBT_ENABLED" xml:space="preserve">
+    <value>指定された VDI で CBT が有効になっています。要求された操作は CBT が有効になった VDI またはその VDI がある仮想マシンで許可されていません。</value>
+  </data>
   <data name="VDI_CONTAINS_METADATA_OF_THIS_POOL" xml:space="preserve">
     <value>この VDI には現在のプールのメタデータが含まれているため、メタデータの復元に使用できません。</value>
   </data>
@@ -1769,8 +1796,11 @@
   <data name="VDI_NOT_SPARSE" xml:space="preserve">
     <value>VDI がスパース フォーマットで格納されていません。2 つの VDI での変更ブロック (差分ブロックまたはデルタ ブロック) のみを照会したり操作したりすることはできません。VHD などスパース対応の VDI を選択してください。</value>
   </data>
+  <data name="VDI_NO_CBT_METADATA" xml:space="preserve">
+    <value>指定された VDI に変更ブロック追跡のメタデータがないため、要求された操作は許可されません。</value>
+  </data>
   <data name="VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION" xml:space="preserve">
-    <value>'on-boot=reset' モードの VDI が含まれる VM では、この操作は許可されません</value>
+    <value>この操作は 'on-boot=reset' モードの VDI、またはこのような VDI がある仮想マシンで許可されていません。</value>
   </data>
   <data name="VDI_READONLY" xml:space="preserve">
     <value>この処理では書き込みアクセスが必要ですが VDI {0} は読み取り専用です。</value>
@@ -1830,7 +1860,7 @@
     <value>'{1}' 状態の VM に対する処理を、'{2}' 状態の VM に対して実行しようとしました。</value>
   </data>
   <data name="VM_BIOS_STRINGS_ALREADY_SET" xml:space="preserve">
-    <value>この VM の BIOS 文字列は設定済みであり、これ以降変更できません。</value>
+    <value>この VM の BIOS 文字列は設定済みであり、変更できません。</value>
   </data>
   <data name="VM_CALL_PLUGIN_RATE_LIMIT" xml:space="preserve">
     <value>同じ VM でのプラグインの連続呼び出しには、最小限の間隔が必要です。しばらく待ってから再試行してください。</value>
@@ -1875,7 +1905,7 @@
     <value>古いバージョンのホストをアップグレードするときにこの VM 処理は実行できません。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>移行元ホストより古いバージョンの [XenServer] を実行している移行先のホストに VM を移行しようとしました。</value>
+    <value>移行元ホストより古いバージョンの移行先ホストに VM を移行しようとしました。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM のこのバージョンの仮想ハードウェア プラットフォームには、このホストとの互換性がありません。</value>
