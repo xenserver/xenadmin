@@ -99,7 +99,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 LvmOhbaSrDescriptor descr = CreateSrDescriptor(device);
 
-                var action = new SrProbeAction(Connection, master, SrType, descr.DeviceConfig);
+                // create an LVM descriptor, to be used with sr.probe
+                LvmOhbaSrDescriptor lvmdescr = CreateLvmSrDescriptor(device);
+                SR.SRTypes srType = lvmdescr is FcoeSrDescriptor ? SR.SRTypes.lvmofcoe : SR.SRTypes.lvmohba; //srType is a workaround instead of SrType
+
+                var action = new SrProbeAction(Connection, master, srType, descr.DeviceConfig);// TODO: use SRType and descr
                 using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                     dlg.ShowDialog(this);
 
@@ -338,7 +342,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (master == null)
                 return false;
 
-            FibreChannelProbeAction action = new FibreChannelProbeAction(master, SrType);
+            SR.SRTypes srType = this is LVMoFCoE ? SR.SRTypes.lvmofcoe : SR.SRTypes.lvmohba; //srType is a workaround instead of SrType
+
+            FibreChannelProbeAction action = new FibreChannelProbeAction(master, srType);// TODO: use SRType
             using (var  dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dialog.ShowDialog(owner); //Will block until dialog closes, action completed
 

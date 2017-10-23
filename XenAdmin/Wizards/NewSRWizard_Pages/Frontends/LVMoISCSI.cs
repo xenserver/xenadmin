@@ -153,10 +153,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             // Start probe
             SrProbeAction IscsiProbeAction = new SrProbeAction(Connection, master, SR.SRTypes.lvmoiscsi, dconf); // TODO: use SRType
-            ActionProgressDialog dialog = new ActionProgressDialog(IscsiProbeAction, ProgressBarStyle.Marquee);
-            dialog.ShowCancel = true;
-            dialog.ShowDialog(this);
-
+            using (var dialog = new ActionProgressDialog(IscsiProbeAction, ProgressBarStyle.Marquee))
+            {
+                dialog.ShowCancel = true;
+                dialog.ShowDialog(this);
+            }
             // Probe has been performed. Now ask the user if they want to Reattach/Format/Cancel.
             // Will return false on cancel
             cancel = !ExamineIscsiProbeResults(IscsiProbeAction);
