@@ -123,6 +123,7 @@ namespace XenAdmin.Dialogs
             bool is_network = xenObjectCopy is XenAPI.Network;
 
             bool is_hvm = is_vm && ((VM)xenObjectCopy).IsHVM();
+            bool is_template = is_vm && ((VM)xenObjectCopy).is_a_template;
             bool is_in_pool = Helpers.GetPool(xenObjectCopy.Connection) != null;
 
             bool is_pool_or_standalone = is_pool || (is_host && !is_in_pool);
@@ -225,7 +226,7 @@ namespace XenAdmin.Dialogs
                     }
                 }
 
-                if (is_vm && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough) &&
+                if (is_hvm && !is_template && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough) &&
                     pool.Connection.Cache.Hosts.Any(host => host.PUSBs.Count > 0))
                 {
                     ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
