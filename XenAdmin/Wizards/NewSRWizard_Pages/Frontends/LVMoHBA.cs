@@ -56,11 +56,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             InitializeComponent();
         }
 
-        public virtual SR.SRTypes SrType { get { return SR.SRTypes.lvmohba; } }
+        public virtual SR.SRTypes SrType { get { return srProvisioningMethod.Lvm ? SR.SRTypes.lvmohba : SR.SRTypes.gfs2; } }
 
         public virtual bool ShowNicColumn { get { return false; } }
 
         public virtual LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
+        {
+            return SrType == SR.SRTypes.gfs2 ? new Gfs2HbaSrDescriptor(device) : new LvmOhbaSrDescriptor(device, Connection);
+        }
+
+        public virtual LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
         {
             return new LvmOhbaSrDescriptor(device, Connection);
         }
@@ -94,7 +99,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 LvmOhbaSrDescriptor descr = CreateSrDescriptor(device);
 
-                var action = new SrProbeAction(Connection, master, SrType, descr.DeviceConfig);
+                // create an LVM descriptor, to be used with sr.probe
+                LvmOhbaSrDescriptor lvmdescr = CreateLvmSrDescriptor(device);
+                SR.SRTypes srType = lvmdescr is FcoeSrDescriptor ? SR.SRTypes.lvmofcoe : SR.SRTypes.lvmohba; //srType is a workaround instead of SrType
+
+                var action = new SrProbeAction(Connection, master, srType, lvmdescr.DeviceConfig);// TODO: use SRType and descr
                 using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                     dlg.ShowDialog(this);
 
@@ -333,7 +342,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (master == null)
                 return false;
 
-            FibreChannelProbeAction action = new FibreChannelProbeAction(master, SrType);
+            SR.SRTypes srType = this is LVMoFCoE ? SR.SRTypes.lvmofcoe : SR.SRTypes.lvmohba; //srType is a workaround instead of SrType
+
+            FibreChannelProbeAction action = new FibreChannelProbeAction(master, srType);// TODO: use SRType
             using (var  dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dialog.ShowDialog(owner); //Will block until dialog closes, action completed
 

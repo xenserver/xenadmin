@@ -71,6 +71,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private const string SCSIID = "SCSIid";
         private const string CHAPUSER = "chapuser";
         private const string CHAPPASSWORD = "chappassword";
+        private const string URI = "uri";
+        private const string URIFORMAT = "iscsi://{0}{1}:{2}/{3}/{4}";  // uri= iscsi://[<username>[%<password>]@]<host>[:<port>]/<target-iqn>/<scsi-id>
+        private const string CHAPFORMAT = "{0}%{1}@";   // <username>%<password
+
 
         private IEnumerable<Control> ErrorIcons
         {
@@ -140,7 +144,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 return;
             }
 
-            Dictionary<String, String> dconf = DeviceConfig;
+            Dictionary<String, String> dconf = GetDeviceConfig(SR.SRTypes.lvmoiscsi); // TODO: use SRType
             if (dconf == null)
             {
                 cancel = true;
@@ -148,13 +152,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
 
             // Start probe
-            SrProbeAction IscsiProbeAction = new SrProbeAction(Connection, master, SR.SRTypes.lvmoiscsi, dconf);
-            using (var  dialog = new ActionProgressDialog(IscsiProbeAction, ProgressBarStyle.Marquee))
+            SrProbeAction IscsiProbeAction = new SrProbeAction(Connection, master, SR.SRTypes.lvmoiscsi, dconf); // TODO: use SRType
+            using (var dialog = new ActionProgressDialog(IscsiProbeAction, ProgressBarStyle.Marquee))
             {
                 dialog.ShowCancel = true;
                 dialog.ShowDialog(this);
             }
-
             // Probe has been performed. Now ask the user if they want to Reattach/Format/Cancel.
             // Will return false on cancel
             cancel = !ExamineIscsiProbeResults(IscsiProbeAction);
@@ -329,7 +332,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 foreach (SR sr in connection.Cache.SRs)
                 {
-                    if (sr.GetSRType(false) != SR.SRTypes.lvmoiscsi)
+                    if (sr.GetSRType(false) != SR.SRTypes.lvmoiscsi)  // TODO: use SRType
                         continue;
 
                     if (sr.PBDs.Count < 1)
@@ -846,6 +849,52 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 c.Visible = false;
         }
 
+        private Dictionary<String, String> GetDeviceConfig(SR.SRTypes srType)
+        {
+            Dictionary<String, String> dconf = new Dictionary<String, String>();
+            ToStringWrapper<IScsiIqnInfo> iqn = comboBoxIscsiIqns.SelectedItem as ToStringWrapper<IScsiIqnInfo>;
+            if (iqn == null || !LunMap.ContainsKey(getIscsiLUN()))
+                return null;
+
+            if (srType == SR.SRTypes.gfs2)
+            {
+                // build the uri for gfs2
+                //uri=iscsi://[<username>[%<password>]@]<host>[:<port>]/<target-iqn>/<scsi-id>
+                var chap = "";
+                if (IscsiUseChapCheckBox.Checked)
+                {
+                    chap = string.Format(CHAPFORMAT, IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text);
+                }
+                dconf[URI] = string.Format(URIFORMAT, chap, iqn.item.IpAddress, iqn.item.Port.ToString(), getIscsiIQN(), LunMap[getIscsiLUN()].ScsiID);
+
+                return dconf;
+            }
+
+            // Reset target IP address to home address specified in IQN scan.
+            // Allows multi-homing - see CA-11607
+            dconf[TARGET] = iqn.item.IpAddress;
+            dconf[PORT] = iqn.item.Port.ToString();
+            dconf[TARGETIQN] = getIscsiIQN();
+
+            ISCSIInfo info = LunMap[getIscsiLUN()];
+            if (info.LunID == -1)
+            {
+                dconf[LUNSERIAL] = info.Serial;
+            }
+            else
+            {
+                dconf[SCSIID] = info.ScsiID;
+            }
+
+            if (IscsiUseChapCheckBox.Checked)
+            {
+                dconf[CHAPUSER] = IScsiChapUserTextBox.Text;
+                dconf[CHAPPASSWORD] = IScsiChapSecretTextBox.Text;
+            }
+
+            return dconf;
+        }
+
         #region Accessors
 
         public SrWizardType SrWizardType { private get; set; }
@@ -865,37 +914,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             get
             {
-                Dictionary<String, String> dconf = new Dictionary<String, String>();
-                ToStringWrapper<IScsiIqnInfo> iqn = comboBoxIscsiIqns.SelectedItem as ToStringWrapper<IScsiIqnInfo>;
-                if (iqn == null)
-                    return null;
-
-                // Reset target IP address to home address specified in IQN scan.
-                // Allows multi-homing - see CA-11607
-                dconf[TARGET] = iqn.item.IpAddress;
-                dconf[PORT] = iqn.item.Port.ToString();
-                dconf[TARGETIQN] = getIscsiIQN();
-
-                if (!LunMap.ContainsKey(getIscsiLUN()))
-                    return null;
-
-                ISCSIInfo info = LunMap[getIscsiLUN()];
-                if (info.LunID == -1)
-                {
-                    dconf[LUNSERIAL] = info.Serial;
-                }
-                else
-                {
-                    dconf[SCSIID] = info.ScsiID;
-                }
-
-                if (IscsiUseChapCheckBox.Checked)
-                {
-                    dconf[CHAPUSER] = IScsiChapUserTextBox.Text;
-                    dconf[CHAPPASSWORD] = IScsiChapSecretTextBox.Text;
-                }
-
-                return dconf;
+                return GetDeviceConfig(SRType);
             }
         }
 
@@ -908,6 +927,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
         }
 
+        public SR.SRTypes SRType
+        {
+            get
+            {
+                return srProvisioningMethod.Lvm ? SR.SRTypes.lvmoiscsi : SR.SRTypes.gfs2;
+            }
+        }
         #endregion
     }
 }
