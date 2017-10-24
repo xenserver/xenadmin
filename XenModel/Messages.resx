@@ -288,6 +288,9 @@
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>Disabled PVS-Accelerator for selected VMs</value>
   </data>
+  <data name="ACTION_DISABLE_IGMP_SNOOPING" xml:space="preserve">
+    <value>Disable IGMP snooping</value>
+  </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Disable live patching</value>
   </data>
@@ -407,6 +410,9 @@
   </data>
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>Enabled PVS-Accelerator for selected VMs</value>
+  </data>
+  <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
+    <value>Enable IGMP snooping</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>Enable live patching</value>
@@ -6641,6 +6647,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="INITIALIZING_WLB_ON" xml:space="preserve">
     <value>Connecting pool {0} to Workload Balancing server.</value>
   </data>
+  <data name="INSTALLED_UPDATES" xml:space="preserve">
+    <value>Installed Updates</value>
+  </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_CD" xml:space="preserve">
     <value>Could not find a CD drive on the selected VM.</value>
   </data>
@@ -7468,6 +7477,9 @@ This will permanently delete and reinitialize all local storage on the servers. 
   <data name="MANAGEMENT_NETWORK_WITH_POOL" xml:space="preserve">
     <value>{0} (management) on {1}</value>
   </data>
+  <data name="MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE" xml:space="preserve">
+    <value>No update is needed.</value>
+  </data>
   <data name="MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO" xml:space="preserve">
     <value>Subscription Advantage required for some hosts</value>
   </data>
@@ -7921,6 +7933,12 @@ You should only proceed if you have verified that these settings are correct.</v
 
 You should only proceed if you have verified that these settings are correct.</value>
   </data>
+  <data name="NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED" xml:space="preserve">
+    <value>IGMP snooping disabled</value>
+  </data>
+  <data name="NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED" xml:space="preserve">
+    <value>IGMP snooping enabled</value>
+  </data>
   <data name="NETWORKPANEL_AUTO" xml:space="preserve">
     <value>Auto</value>
   </data>
@@ -7977,6 +7995,9 @@ You should only proceed if you have verified that these settings are correct.</v
   </data>
   <data name="NETWORK_NAME" xml:space="preserve">
     <value>Network {0}</value>
+  </data>
+  <data name="NETWORK_OPTIONS" xml:space="preserve">
+    <value>Network Options</value>
   </data>
   <data name="NETWORK_RECONFIG_CONNECTION_LOST" xml:space="preserve">
     <value>The connection to the server was lost. No changes have been made.</value>
@@ -8956,6 +8977,9 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="NOT_TRUSTED" xml:space="preserve">
     <value>not trusted</value>
+  </data>
+  <data name="NOT_UPDATED" xml:space="preserve">
+    <value>Out of date</value>
   </data>
   <data name="NOT_UPGRADED" xml:space="preserve">
     <value>Not Upgraded</value>
@@ -10201,6 +10225,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REQUIRED_HOTFIX_ISNOT_INSTALLED" xml:space="preserve">
     <value>{0}: The required hotfix is not installed</value>
+  </data>
+  <data name="REQUIRED_UPDATES" xml:space="preserve">
+    <value>Required Updates</value>
   </data>
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>Resolved as {0}</value>
@@ -11478,6 +11505,9 @@ Verify that the file is a valid {1} export.</value>
   <data name="UNTIL_RESTART_X_AFTER_RESTART_Y" xml:space="preserve">
     <value>Until next restart {0}; after restart {1}</value>
   </data>
+  <data name="UPDATED" xml:space="preserve">
+    <value>Up to date</value>
+  </data>
   <data name="UPDATED_PERFMON" xml:space="preserve">
     <value>Updated performance monitoring configuration</value>
   </data>
@@ -12230,6 +12260,9 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="VERIFYING_SIGNATURE_ERROR" xml:space="preserve">
     <value>Signature verification failed. {0}</value>
+  </data>
+  <data name="VERSION" xml:space="preserve">
+    <value>Version</value>
   </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
     <value>[XenCenter] version {0} (build {1}.{2}) {3}-bit</value>
