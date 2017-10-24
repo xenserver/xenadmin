@@ -602,6 +602,53 @@ namespace XenAPI
             return result;
         }
 
+        internal static Dictionary<string, vusb_operations>
+        convert_from_proxy_string_vusb_operations(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<string, vusb_operations> result = new Dictionary<string, vusb_operations>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key;
+                        vusb_operations v = table[key] == null ? (vusb_operations) 0 : (vusb_operations)Helper.EnumParseDefault(typeof(vusb_operations), (string)table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable
+        convert_to_proxy_string_vusb_operations(Dictionary<string, vusb_operations> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key ?? "";
+                        string v = vusb_operations_helper.ToString(table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
         internal static Dictionary<string, XenRef<Blob>>
         convert_from_proxy_string_XenRefBlob(Object o)
         {

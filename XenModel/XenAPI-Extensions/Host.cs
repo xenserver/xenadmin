@@ -305,6 +305,11 @@ namespace XenAPI
             return BoolKeyPreferTrue(h.license_params, "restrict_gpu");
         }
 
+        public static bool RestrictUsbPassthrough(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_usb_passthrough");
+        }
+
         public static bool RestrictVgpu(Host h)
         {
             return BoolKeyPreferTrue(h.license_params, "restrict_vgpu");

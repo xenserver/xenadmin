@@ -43,6 +43,7 @@ using XenAdmin.Core;
 using XenAdmin.Wizards.NewPolicyWizard;
 using XenAdmin.Wizards.NewVMApplianceWizard;
 using XenAdmin.Wizards.GenericPages;
+using System.Linq;
 
 namespace XenAdmin.Dialogs
 {
@@ -78,6 +79,7 @@ namespace XenAdmin.Dialogs
         private Page_CloudConfigParameters CloudConfigParametersPage;
         private SecurityEditPage SecurityEditPage;
         private LivePatchingEditPage LivePatchingEditPage;
+        private USBEditPage usbEditPage;
         private NetworkOptionsEditPage NetworkOptionsEditPage;
         #endregion
 
@@ -122,6 +124,7 @@ namespace XenAdmin.Dialogs
             bool is_network = xenObjectCopy is XenAPI.Network;
 
             bool is_hvm = is_vm && ((VM)xenObjectCopy).IsHVM();
+            bool is_template = is_vm && ((VM)xenObjectCopy).is_a_template;
             bool is_in_pool = Helpers.GetPool(xenObjectCopy.Connection) != null;
 
             bool is_pool_or_standalone = is_pool || (is_host && !is_in_pool);
@@ -225,6 +228,12 @@ namespace XenAdmin.Dialogs
                     {
                         ShowTab(GpuEditPage = new GpuEditPage());
                     }
+                }
+
+                if (is_hvm && !is_template && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough) &&
+                    pool.Connection.Cache.Hosts.Any(host => host.PUSBs.Count > 0))
+                {
+                    ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
                 }
 
                 if (is_hvm)
@@ -507,6 +516,13 @@ namespace XenAdmin.Dialogs
             {
                 GpuEditPage.SelectedPriority = VMHAEditPage.SelectedPriority;
                 GpuEditPage.ShowHideWarnings();
+                return;
+            }
+            
+            if (verticalTabs.SelectedItem == usbEditPage && VMHAEditPage != null)
+            {
+                usbEditPage.SelectedPriority = VMHAEditPage.SelectedPriority;
+                usbEditPage.ShowHideWarnings();
                 return;
             }
         }

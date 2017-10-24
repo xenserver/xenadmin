@@ -103,6 +103,7 @@ namespace XenAdmin
         internal readonly PvsPage PvsPage = new PvsPage();
         internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
+        internal readonly UsbPage UsbPage = new UsbPage();
 
         private ActionBase statusBarAction = null;
         public ActionBase StatusBarAction { get { return statusBarAction; } }
@@ -172,6 +173,7 @@ namespace XenAdmin
             components.Add(SearchPage);
             components.Add(DockerProcessPage);
             components.Add(DockerDetailsPage);
+            components.Add(UsbPage);
 
             AddTabContents(VMStoragePage, TabPageStorage);
             AddTabContents(SrStoragePage, TabPageSR);
@@ -196,6 +198,7 @@ namespace XenAdmin
             AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(DockerProcessPage, TabPageDockerProcess);
             AddTabContents(DockerDetailsPage, TabPageDockerDetails);
+            AddTabContents(UsbPage, TabPageUSB);
 
             #endregion
 
@@ -1448,8 +1451,8 @@ namespace XenAdmin
             ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
-
             ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu));
+            ShowTab(TabPageUSB, !multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough));
 
             pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
 
@@ -1887,6 +1890,10 @@ namespace XenAdmin
                 {
                     NetworkPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
+                else if (t == TabPageUSB)
+                {
+                    UsbPage.XenObject = SelectionManager.Selection.FirstAsXenObject as Host;
+                }
                 else if (t == TabPageNICs)
                 {
                     NICPage.Host = SelectionManager.Selection.First as Host;
@@ -2077,7 +2084,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails
+            Overview, Home, Settings, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails, USB
         }
 
         public void SwitchToTab(Tab tab)
@@ -2119,6 +2126,9 @@ namespace XenAdmin
                     break;
                 case Tab.DockerDetails:
                     TheTabControl.SelectedTab = TabPageDockerDetails;
+                    break;
+                case Tab.USB:
+                    TheTabControl.SelectedTab = TabPageUSB;
                     break;
                 default:
                     throw new NotImplementedException();

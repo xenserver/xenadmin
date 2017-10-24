@@ -35,21 +35,23 @@ using System.Collections.Generic;
 
 namespace XenAPI
 {
-    public enum network_purpose
+    public enum vusb_operations
     {
-        nbd, insecure_nbd, unknown
+        attach, plug, unplug, unknown
     }
 
-    public static class network_purpose_helper
+    public static class vusb_operations_helper
     {
-        public static string ToString(network_purpose x)
+        public static string ToString(vusb_operations x)
         {
             switch (x)
             {
-                case network_purpose.nbd:
-                    return "nbd";
-                case network_purpose.insecure_nbd:
-                    return "insecure_nbd";
+                case vusb_operations.attach:
+                    return "attach";
+                case vusb_operations.plug:
+                    return "plug";
+                case vusb_operations.unplug:
+                    return "unplug";
                 default:
                     return "unknown";
             }

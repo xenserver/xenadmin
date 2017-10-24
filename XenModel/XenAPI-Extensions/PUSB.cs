@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) Citrix Systems, Inc.
  * All rights reserved.
  *
@@ -28,31 +28,22 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using XenAdmin;
 
 namespace XenAPI
 {
-    public enum network_purpose
+    partial class PUSB
     {
-        nbd, insecure_nbd, unknown
-    }
-
-    public static class network_purpose_helper
-    {
-        public static string ToString(network_purpose x)
+        public override string Description()
         {
-            switch (x)
-            {
-                case network_purpose.nbd:
-                    return "nbd";
-                case network_purpose.insecure_nbd:
-                    return "insecure_nbd";
-                default:
-                    return "unknown";
-            }
+            return string.IsNullOrEmpty(description) ?
+                string.Format(Messages.USB_DEVICE_VENDOR_PRODUCT, vendor_id, product_id) :
+                description;
         }
     }
 }

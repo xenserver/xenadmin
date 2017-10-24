@@ -990,6 +990,18 @@
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>Uploading report to [Citrix] Insight Services</value>
   </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>USB passthrough disabled</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLING" xml:space="preserve">
+    <value>Disabling USB passthrough for {0}</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>USB passthrough enabled</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLING" xml:space="preserve">
+    <value>Enabling USB passthrough for {0}</value>
+  </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>Virtual disk created</value>
   </data>
@@ -1226,6 +1238,24 @@
   </data>
   <data name="ACTION_VM_TEMPLATIZING_TITLE" xml:space="preserve">
     <value>Converting VM '{0}' to template</value>
+  </data>
+  <data name="ACTION_VUSB_CREATED" xml:space="preserve">
+    <value>USB device attached</value>
+  </data>
+  <data name="ACTION_VUSB_CREATING" xml:space="preserve">
+    <value>Attaching USB device '{0}' to VM '{1}'</value>
+  </data>
+  <data name="ACTION_VUSB_DELETED" xml:space="preserve">
+    <value>USB device detached</value>
+  </data>
+  <data name="ACTION_VUSB_DELETING" xml:space="preserve">
+    <value>Detaching USB device '{0}' from VM '{1}'</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH" xml:space="preserve">
+    <value>Detach USB device</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
+    <value>Are you sure you want to detach the selected USB device?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
     <value>Waiting for slaves to recover...</value>
@@ -3943,6 +3973,27 @@ This will also delete its subfolders.</value>
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>Scanning for free device positions</value>
   </data>
+  <data name="DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE" xml:space="preserve">
+    <value>No devices available</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
+    <value>Disable passthrough</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
+    <value>Enable passthrough</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
+    <value>Are you sure that you want to enable passthrough on this device? This will allow this device to be passed through to virtual machines.</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
+    <value>Are you sure that you want to disable passthrough on this device? This device will no longer be allowed to be passed through to virtual machines.</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
+    <value>&amp;Yes, Disable passthrough</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_ENABLE" xml:space="preserve">
+    <value>&amp;Yes, Enable passthrough</value>
+  </data>
   <data name="DISABLE" xml:space="preserve">
     <value>Disa&amp;ble</value>
   </data>
@@ -5253,8 +5304,17 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>Feature disabled in the registry</value>
   </data>
+  <data name="FETCHED_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>Fetched possible hosts of VM {0}</value>
+  </data>
+  <data name="FETCHING_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>Fetching possible hosts of VM {0}</value>
+  </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>&amp;Next Section</value>
+  </data>
+  <data name="FETCH_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>Fetch possible hosts of VM {0}</value>
   </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>No LUNs were found.  Please verify your hardware configuration.</value>
@@ -8913,6 +8973,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NOT_AGILE_VM_HAS_VGPU" xml:space="preserve">
     <value>The VM has one or more virtual GPUs. Restart cannot be guaranteed.</value>
   </data>
+  <data name="NOT_AGILE_VM_HAS_VUSB" xml:space="preserve">
+    <value>The VM has one or more USB devices attached. Restart cannot be guaranteed.</value>
+  </data>
   <data name="NOT_APPLIED" xml:space="preserve">
     <value>Not applied</value>
   </data>
@@ -12144,6 +12207,39 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
   </data>
   <data name="URI_REGEX" xml:space="preserve">
     <value>^(http|https|file|ftp)://*</value>
+  </data>
+  <data name="USB" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="USBLIST_DISABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>&amp;Disable passthrough</value>
+  </data>
+  <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>&amp;Enable passthrough</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_HA" xml:space="preserve">
+    <value>Cannot attach USB devices because the VM is currently protected by HA.</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_NOT_HALTED" xml:space="preserve">
+    <value>USB devices can only be attached when the VM is shut down.</value>
+  </data>
+  <data name="USB_DEVICES" xml:space="preserve">
+    <value>USB devices</value>
+  </data>
+  <data name="USB_DEVICE_VENDOR_PRODUCT" xml:space="preserve">
+    <value>"Vendor: {0}; Product: {1}"</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
+    <value>1 device attached</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_MULTIPLE_DEVICES" xml:space="preserve">
+    <value>{0} devices attached</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_NODEVICES" xml:space="preserve">
+    <value>No devices attached</value>
+  </data>
+  <data name="USB_EDIT_TEXT" xml:space="preserve">
+    <value>USB</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>[XenCenter] was unable to authorize the action as {0}. See the application log files for more information.</value>
