@@ -565,6 +565,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable IGMP snooping.
+        /// </summary>
+        public static string ACTION_DISABLE_IGMP_SNOOPING {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_IGMP_SNOOPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable live patching.
         /// </summary>
         public static string ACTION_DISABLE_LIVE_PATCHING {
@@ -921,6 +930,15 @@ namespace XenAdmin {
         public static string ACTION_DR_TASK_DESTROY_TITLE {
             get {
                 return ResourceManager.GetString("ACTION_DR_TASK_DESTROY_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable IGMP snooping.
+        /// </summary>
+        public static string ACTION_ENABLE_IGMP_SNOOPING {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_IGMP_SNOOPING", resourceCulture);
             }
         }
         
@@ -19122,6 +19140,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installed Updates.
+        /// </summary>
+        public static string INSTALLED_UPDATES {
+            get {
+                return ResourceManager.GetString("INSTALLED_UPDATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a CD drive on the selected VM..
         /// </summary>
         public static string INSTALLTOOLS_COULDNOTFIND_CD {
@@ -21424,6 +21451,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No update is needed..
+        /// </summary>
+        public static string MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Management.
         /// </summary>
         public static string MANAGEMENT {
@@ -22816,6 +22852,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Network Options.
+        /// </summary>
+        public static string NETWORK_OPTIONS {
+            get {
+                return ResourceManager.GetString("NETWORK_OPTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The connection to the server was lost. No changes have been made..
         /// </summary>
         public static string NETWORK_RECONFIG_CONNECTION_LOST {
@@ -22980,6 +23025,24 @@ namespace XenAdmin {
         public static string NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL {
             get {
                 return ResourceManager.GetString("NETWORKING_PROPERTIES_WARNING_CHANGING_MANAGEMENT_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IGMP snooping disabled.
+        /// </summary>
+        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED {
+            get {
+                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IGMP snooping enabled.
+        /// </summary>
+        public static string NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED {
+            get {
+                return ResourceManager.GetString("NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED", resourceCulture);
             }
         }
         
@@ -25762,6 +25825,15 @@ namespace XenAdmin {
         public static string NOT_TRUSTED {
             get {
                 return ResourceManager.GetString("NOT_TRUSTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out of date.
+        /// </summary>
+        public static string NOT_UPDATED {
+            get {
+                return ResourceManager.GetString("NOT_UPDATED", resourceCulture);
             }
         }
         
@@ -29333,6 +29405,15 @@ namespace XenAdmin {
         public static string REQUIRED_HOTFIX_ISNOT_INSTALLED {
             get {
                 return ResourceManager.GetString("REQUIRED_HOTFIX_ISNOT_INSTALLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required Updates.
+        /// </summary>
+        public static string REQUIRED_UPDATES {
+            get {
+                return ResourceManager.GetString("REQUIRED_UPDATES", resourceCulture);
             }
         }
         
@@ -33247,6 +33328,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Up to date.
+        /// </summary>
+        public static string UPDATED {
+            get {
+                return ResourceManager.GetString("UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updated performance monitoring configuration.
         /// </summary>
         public static string UPDATED_PERFMON {
@@ -35301,6 +35391,15 @@ namespace XenAdmin {
         public static string VERIFYING_SIGNATURE_ERROR {
             get {
                 return ResourceManager.GetString("VERIFYING_SIGNATURE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string VERSION {
+            get {
+                return ResourceManager.GetString("VERSION", resourceCulture);
             }
         }
         

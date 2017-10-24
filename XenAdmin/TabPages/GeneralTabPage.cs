@@ -687,7 +687,8 @@ namespace XenAdmin.TabPages
                 }
             }
 
-            var appliedPatches = hostAppliedPatches(host);
+            var appliedPatchesList = Helpers.HostAppliedPatchesList(host);
+            var appliedPatches = string.Join(Environment.NewLine, appliedPatchesList.ToArray());
             if (!string.IsNullOrEmpty(appliedPatches))
             {
                 s.AddEntry(FriendlyName("Pool_patch.applied"), appliedPatches);
@@ -1625,30 +1626,13 @@ namespace XenAdmin.TabPages
             var result = new List<string>();
             var recommendedPatches = Updates.RecommendedPatchesForHost(host);
 
+            if (recommendedPatches == null)
+                return String.Empty;
+
             foreach (var patch in recommendedPatches)
                 result.Add(patch.Name);
 
             return string.Join(Environment.NewLine, result.ToArray());
-        }
-
-        private string hostAppliedPatches(Host host)
-        {
-            List<string> result = new List<string>();
-
-            if (Helpers.ElyOrGreater(host))
-            {
-                foreach (var update in host.AppliedUpdates())
-                    result.Add(UpdatesFriendlyNameAndVersion(update));
-            }
-            else
-            {
-                foreach (Pool_patch patch in host.AppliedPatches())
-                    result.Add(patch.Name());
-            }
-
-            result.Sort(StringUtility.NaturalCompare);
-
-            return string.Join("\n", result.ToArray());
         }
 
         private string hostUnappliedPatches(Host host)
@@ -1726,7 +1710,7 @@ namespace XenAdmin.TabPages
 
             foreach (var update in updates)
                 if (predicate(update))
-                    output.Add(UpdatesFriendlyNameAndVersion(update));
+                    output.Add(Helpers.UpdatesFriendlyNameAndVersion(update));
 
             output.Sort(StringUtility.NaturalCompare);
 
@@ -1849,8 +1833,8 @@ namespace XenAdmin.TabPages
 
         private KeyValuePair<string, string> CreateWarningRow(Host host, Pool_update update)
         {
-            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, UpdatesFriendlyName(update.Name()), host.Name());
-            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_REBOOT_WARNING, host.Name(), UpdatesFriendlyName(update.Name()));
+            var key = String.Format(Messages.GENERAL_PANEL_UPDATE_KEY, Helpers.UpdatesFriendlyName(update.Name()), host.Name());
+            var value = string.Format(Messages.GENERAL_PANEL_UPDATE_REBOOT_WARNING, host.Name(), Helpers.UpdatesFriendlyName(update.Name()));
 
             return new KeyValuePair<string, string>(key, value);
         }
@@ -1863,19 +1847,6 @@ namespace XenAdmin.TabPages
         private static string FriendlyName(string propertyName)
         {
             return Core.PropertyManager.GetFriendlyName(string.Format("Label-{0}", propertyName)) ?? propertyName;
-        }
-
-        private static string UpdatesFriendlyName(string propertyName)
-        {
-            return Core.PropertyManager.FriendlyNames.GetString(string.Format("Label-{0}", propertyName)) ?? propertyName;
-        }
-
-        private static string UpdatesFriendlyNameAndVersion(Pool_update update)
-        {
-            var friendlyName = UpdatesFriendlyName(update.Name());
-            if (string.IsNullOrEmpty(update.version))
-                return friendlyName;
-            return string.Format(Messages.SUPP_PACK_DESCRIPTION, friendlyName, update.version);
         }
 
         private void linkLabelExpand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
