@@ -103,7 +103,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 LvmOhbaSrDescriptor lvmdescr = CreateLvmSrDescriptor(device);
                 SR.SRTypes srType = lvmdescr is FcoeSrDescriptor ? SR.SRTypes.lvmofcoe : SR.SRTypes.lvmohba; //srType is a workaround instead of SrType
 
-                var action = new SrProbeAction(Connection, master, srType, descr.DeviceConfig);// TODO: use SRType and descr
+                var action = new SrProbeAction(Connection, master, srType, lvmdescr.DeviceConfig);// TODO: use SRType and descr
                 using (var dlg = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                     dlg.ShowDialog(this);
 
