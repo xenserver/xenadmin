@@ -22474,15 +22474,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This VM may not migrate because it has a dedicated GPU.
-        /// </summary>
-        public static string MIGRATION_NOT_ALLOWED_GPU {
-            get {
-                return ResourceManager.GetString("MIGRATION_NOT_ALLOWED_GPU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This VM may not migrate; it is not on shared storage.
         /// </summary>
         public static string MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE {

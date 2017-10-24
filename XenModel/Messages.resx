@@ -7822,9 +7822,6 @@ To learn more about the [XenServer] Live VDI Migration feature or to start a [Xe
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
     <value>This VM may not migrate because the destination host does not have some of the CPU features that the VM is currently using</value>
   </data>
-  <data name="MIGRATION_NOT_ALLOWED_GPU" xml:space="preserve">
-    <value>This VM may not migrate because it has a dedicated GPU</value>
-  </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
     <value>This VM may not migrate; it is not on shared storage</value>
   </data>
