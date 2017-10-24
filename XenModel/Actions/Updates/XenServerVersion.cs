@@ -41,9 +41,12 @@ namespace XenAdmin.Core
         public Version Version;
         public string Name;
         public bool Latest;
+        public bool LatestCr;
         public string Url;
         public string Oem;
         public List<XenServerPatch> Patches;
+        public string PatchUuid;
+        public bool PresentAsUpdate;
         
         /// <summary>
         /// A host of this version is considered up-to-date when it has all the patches in this list installed on it
@@ -60,22 +63,28 @@ namespace XenAdmin.Core
         /// <param name="version_oem"></param>
         /// <param name="name"></param>
         /// <param name="latest"></param>
+        /// <param name="latestCr"></param>
         /// <param name="url"></param>
         /// <param name="patches"></param>
         /// <param name="minimumPatches">can be null (see <paramref name="MinimalPatches"/></param>
         /// <param name="timestamp"></param>
         /// <param name="buildNumber"></param>
-        public XenServerVersion(string version_oem, string name, bool latest, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
-            string timestamp, string buildNumber)
+        /// <param name="patchUuid"></param>
+        /// <param name="presentAsUpdate">Indicates that the new version (usually a CU) should be presented as an update where possible</param>
+        public XenServerVersion(string version_oem, string name, bool latest, bool latestCr, string url, List<XenServerPatch> patches, List<XenServerPatch> minimumPatches,
+            string timestamp, string buildNumber, string patchUuid, bool presentAsUpdate)
         {
             ParseVersion(version_oem);
             Name = name;
             Latest = latest;
+            LatestCr = latestCr;
             Url = url;
             Patches = patches;
             MinimalPatches = minimumPatches;
             DateTime.TryParse(timestamp, out TimeStamp);
             BuildNumber = buildNumber;
+            PatchUuid = patchUuid;
+            PresentAsUpdate = presentAsUpdate;
         }
 
         private void ParseVersion(string version_oem)
@@ -103,7 +112,13 @@ namespace XenAdmin.Core
             }
         }
 
-
+        public bool IsVersionAvailableAsAnUpdate
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(PatchUuid);
+            }
+        }
 
     }
 }

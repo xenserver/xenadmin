@@ -141,6 +141,9 @@
   <data name="pictureBoxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
+  <data name="pictureBoxStatus.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;pictureBoxStatus.Name" xml:space="preserve">
     <value>pictureBoxStatus</value>
   </data>
@@ -169,13 +172,10 @@
     <value>2, 2, 0, 0</value>
   </data>
   <data name="labelHaStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>448, 15</value>
+    <value>2, 15</value>
   </data>
   <data name="labelHaStatus.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="labelHaStatus.Text" xml:space="preserve">
-    <value>HA is guaranteed. The maximum  number of servers failures that HA can protect against is {0}</value>
   </data>
   <data name="&gt;&gt;labelHaStatus.Name" xml:space="preserve">
     <value>labelHaStatus</value>

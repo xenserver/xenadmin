@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVATION_WHILE_NOT_FREE" xml:space="preserve">
     <value>仅当版本设置为“免费”时，才能应用激活密钥。</value>
@@ -1875,7 +1875,7 @@
     <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>您尝试将 VM 迁移到的目标主机运行的 XenServer 版本低于源主机。</value>
+    <value>您尝试将 VM 迁移到的目标主机运行的 [XenServer] 版本低于源主机。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM 的虚拟硬件平台版本与此主机不兼容。</value>

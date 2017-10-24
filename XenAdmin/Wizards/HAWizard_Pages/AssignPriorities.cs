@@ -420,6 +420,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
             if (!haNtolIndicator.UpdateInProgress)
             {
+                pictureBoxStatus.Visible = true;
+
                 if (haNtolIndicator.Ntol == -1)
                 {
                     labelHaStatus.Text = Messages.HA_UNABLE_TO_CALCULATE_MESSAGE;

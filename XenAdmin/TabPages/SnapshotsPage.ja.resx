@@ -1126,10 +1126,10 @@
     <value>NoControl</value>
   </data>
   <data name="newSnapshotButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 3</value>
+    <value>-10, 3</value>
   </data>
   <data name="newSnapshotButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 23</value>
+    <value>153, 23</value>
   </data>
   <data name="newSnapshotButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1156,13 +1156,13 @@
     <value>NoControl</value>
   </data>
   <data name="revertButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>10, 0</value>
   </data>
   <data name="revertButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="revertButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 23</value>
+    <value>70, 23</value>
   </data>
   <data name="revertButton.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

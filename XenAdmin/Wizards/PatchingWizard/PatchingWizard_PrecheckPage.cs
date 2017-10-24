@@ -37,6 +37,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using XenAdmin.Actions;
+using XenAdmin.Alerts;
 using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
@@ -55,7 +56,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private BackgroundWorker _worker = null;
         public List<Host> SelectedServers = new List<Host>();
         public List<Problem> ProblemsResolvedPreCheck = new List<Problem>();
-        public bool IsInAutomatedUpdatesMode { get; set; }
         private AsyncAction resolvePrechecksAction = null;
 
         protected List<Pool> SelectedPools
@@ -65,6 +65,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 return SelectedServers.Select(host => Helpers.GetPoolOfOne(host.Connection)).Where(pool => pool != null).Distinct().ToList();
             }
         }
+
+        public XenServerPatchAlert UpdateAlert { private get; set; }
+        public WizardMode WizardMode { private get; set; }
+        public bool ApplyUpdatesToNewVersion { private get; set; }
 
         public PatchingWizard_PrecheckPage()
         {
@@ -123,7 +127,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (direction == PageLoadedDirection.Back)
                     return;
 
-                if (IsInAutomatedUpdatesMode)
+                if (WizardMode == WizardMode.AutomatedUpdates)
                 {
                     labelPrechecksFirstLine.Text = Messages.PATCHINGWIZARD_PRECHECKPAGE_FIRSTLINE_AUTOMATED_UPDATES_MODE;
                 }
@@ -346,10 +350,19 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected virtual List<KeyValuePair<string, List<Check>>> GenerateCommonChecks(List<Host> applicableServers)
         {
             List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
+            List<Check> checkGroup;
+
+            //XenCenter version check
+            if (UpdateAlert != null && UpdateAlert.NewServerVersion != null)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_XENCENTER_VERSION, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                checkGroup.Add(new XenCenterVersionCheck(UpdateAlert.NewServerVersion));
+            }
 
             //HostLivenessCheck checks
             checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HOST_LIVENESS_STATUS, new List<Check>()));
-            List<Check> checkGroup = checks[checks.Count - 1].Value;
+            checkGroup = checks[checks.Count - 1].Value;
             foreach (Host host in applicableServers)
             {
                 checkGroup.Add(new HostLivenessCheck(host));
@@ -373,14 +386,24 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Disk space check for automated updates
-            if (IsInAutomatedUpdatesMode)
+            if (WizardMode != WizardMode.SingleUpdate)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
 
                 foreach (Pool pool in SelectedPools)
                 {
-                    var us = Updates.GetUpgradeSequence(pool.Connection);
+                    //if any host is not licensed for automated updates
+                    bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
+
+                    var us = WizardMode == WizardMode.NewVersion
+                        ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                        : Updates.GetUpgradeSequence(pool.Connection);
+
+                    log.InfoFormat("Minimal patches for {0}: {1}", pool.Name(), us != null && us.MinimalPatches != null ? string.Join(",", us.MinimalPatches.Select(p => p.Name)) : "");
+
+                    if (us == null)
+                        continue;
 
                     bool elyOrGreater = Helpers.ElyOrGreater(pool.Connection);
 
@@ -396,6 +419,26 @@ namespace XenAdmin.Wizards.PatchingWizard
                                         : us[host].Sum(p => p.InstallationSize) + us[host].Max(p => p.InstallationSize) // non-master: all updates on this host + largest on this host
                         ));
                     }
+                }
+            }
+
+            //Checking reboot required and can evacuate host for version updates
+            if (WizardMode == Wizards.PatchingWizard.WizardMode.NewVersion && UpdateAlert != null && UpdateAlert.Patch != null &&  UpdateAlert.Patch.after_apply_guidance == after_apply_guidance.restartHost)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                var guidance = new List<after_apply_guidance>() { UpdateAlert.Patch.after_apply_guidance };
+
+                foreach (var host in SelectedServers)
+                {
+                    checkGroup.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
+                }
+
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+                foreach (Host host in SelectedServers)
+                {
+                    checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
                 }
             }
 
@@ -424,7 +467,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (!IsInAutomatedUpdatesMode)
+            if (WizardMode == WizardMode.SingleUpdate)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
@@ -440,13 +483,24 @@ namespace XenAdmin.Wizards.PatchingWizard
             //Checking can evacuate host
             //CA-97061 - evacuate host -> suspended VMs. This is only needed for restartHost
             //Also include this check for the supplemental packs (patch == null), as their guidance is restartHost
-            if (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost))
+            if (WizardMode != WizardMode.NewVersion && (patch == null || patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)))
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
                 foreach (Host host in applicableServers)
                 {
                     checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
+                }
+            }
+
+            if (patch != null || WizardMode == WizardMode.AutomatedUpdates)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_FOR_PENDING_RESTART, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+
+                foreach (var pool in SelectedPools)
+                {
+                    checkGroup.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, WizardMode == WizardMode.AutomatedUpdates ? null : patch.uuid));
                 }
             }
 
@@ -474,7 +528,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             //Checking if the host needs a reboot
-            if (!IsInAutomatedUpdatesMode)
+            if (WizardMode == WizardMode.SingleUpdate)
             {
                 checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_NEEDS_REBOOT, new List<Check>()));
                 checkGroup = checks[checks.Count - 1].Value;
@@ -495,6 +549,17 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (Host host in applicableServers)
                 {
                     checkGroup.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
+                }
+            }
+
+            if (update != null || WizardMode == WizardMode.AutomatedUpdates)
+            {
+                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_FOR_PENDING_RESTART, new List<Check>()));
+                checkGroup = checks[checks.Count - 1].Value;
+
+                foreach (var pool in SelectedPools)
+                {
+                    checkGroup.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, WizardMode == WizardMode.AutomatedUpdates ? null : update.uuid));
                 }
             }
 
@@ -649,7 +714,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     description = _check.SuccessfulCheckDescription;
                     if (string.IsNullOrEmpty(description))
-                        description = String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name(), _check.Description);
+                        description = _check.Host != null
+                            ? String.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, _check.Host.Name(), _check.Description)
+                            : String.Format(Messages.PATCHING_WIZARD_CHECK_OK, _check.Description);
                 }
                 
                 if (description != string.Empty)

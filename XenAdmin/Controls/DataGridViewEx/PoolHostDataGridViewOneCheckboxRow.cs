@@ -51,38 +51,39 @@ namespace XenAdmin.Controls.DataGridViewEx
     /// </summary>
     public abstract class PoolHostDataGridViewOneCheckboxRow : CollapsingPoolHostDataGridViewRow
     {
-        private class DataGridViewNameCell : DataGridViewExNameCell
+        private class DataGridViewNameCell : DataGridViewTextBoxCell
         {
             protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
             {
                 PoolHostDataGridViewOneCheckboxRow row = (PoolHostDataGridViewOneCheckboxRow)this.OwningRow;
-                Host host = value as Host;
-                if (host != null)
+                if (value is Host || value is Pool)
                 {
-                    Image hostIcon = Images.GetImage16For(host);
+                    Image hostIcon = Images.GetImage16For(value as IXenObject);
+                    var iconIndent = row.IsCheckable ? 0 : 16;
+                    var textIndent = iconIndent + 16;
                     base.Paint(graphics, clipBounds,
-                               new Rectangle(cellBounds.X + 16, cellBounds.Y, cellBounds.Width - 16,
+                               new Rectangle(cellBounds.X + textIndent, cellBounds.Y, cellBounds.Width - textIndent,
                                              cellBounds.Height), rowIndex, cellState, value, formattedValue,
                                errorText, cellStyle, advancedBorderStyle, paintParts);
                     if ((cellState & DataGridViewElementStates.Selected) != 0 && row.Enabled )
                     {
                         using (var brush = new SolidBrush(DataGridView.DefaultCellStyle.SelectionBackColor))
                             graphics.FillRectangle(
-                                brush, cellBounds.X, cellBounds.Y, hostIcon.Width, cellBounds.Height);
+                                brush, cellBounds.X, cellBounds.Y, hostIcon.Width + iconIndent, cellBounds.Height);
                     }
                     else
                     {
                         //Background behind the host icon
                         using (var brush = new SolidBrush(this.DataGridView.DefaultCellStyle.BackColor))
                             graphics.FillRectangle(brush,
-                                                   cellBounds.X, cellBounds.Y, hostIcon.Width, cellBounds.Height);
+                                                   cellBounds.X, cellBounds.Y, hostIcon.Width + iconIndent, cellBounds.Height);
                     }
 
                     if (row.Enabled)
-                        graphics.DrawImage(hostIcon, cellBounds.X, cellBounds.Y + 3, hostIcon.Width, hostIcon.Height);
+                        graphics.DrawImage(hostIcon, cellBounds.X + iconIndent, cellBounds.Y + 3, hostIcon.Width, hostIcon.Height);
                     else
                         graphics.DrawImage(hostIcon,
-                                           new Rectangle(cellBounds.X, cellBounds.Y + 3, hostIcon.Width, hostIcon.Height),
+                                           new Rectangle(cellBounds.X + iconIndent, cellBounds.Y + 3, hostIcon.Width, hostIcon.Height),
                                            0, 0, hostIcon.Width, hostIcon.Height, GraphicsUnit.Pixel,
                                            Drawing.GreyScaleAttributes);
                 }

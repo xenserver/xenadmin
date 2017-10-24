@@ -1127,6 +1127,9 @@ namespace XenAdmin
                 case "edition":
                 case "license_server":
                 case "license_params":
+                    UpdateHeader();
+                    UpdateToolbars();
+                    break;
                 case "other_config":
                     // other_config may contain HideFromXenCenter
                     UpdateToolbars();
@@ -1415,7 +1418,7 @@ namespace XenAdmin
             bool show_home = SelectionManager.Selection.Count == 1 && SelectionManager.Selection[0].Value == null;
             // The upsell pages use the first selected XenObject: but they're only shown if there is only one selected object (see calls to ShowTab() below).
             bool dmc_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictDMC);
-            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA);
+            bool ha_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictHA) && (selectionPool != null && !selectionPool.ha_enabled);
             bool wlb_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictWLB);
             bool ad_upsell = Helpers.FeatureForbidden(SelectionManager.Selection.FirstAsXenObject, Host.RestrictAD);
             bool is_connected = selectionConnection != null && selectionConnection.IsConnected;
@@ -2856,6 +2859,8 @@ namespace XenAdmin
         /// </summary>
         private void UpdateHeader()
         {
+            ResetLicenseStatusTitleLabel();
+
             if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
 
@@ -2868,6 +2873,9 @@ namespace XenAdmin
             {
                 IXenObject xenObject = SelectionManager.Selection[0].XenObject;
                 TitleLabel.Text = xenObject.NameWithLocation();
+
+                UpdateLicenseStatusTitleLabel(xenObject);
+
                 TitleIcon.Image = Images.GetImage16For(xenObject);
                 // When in folder view only show the logged in label if it is clear to which connection the object belongs (most likely pools and hosts)
 
@@ -2882,6 +2890,57 @@ namespace XenAdmin
                 TitleIcon.Image = Properties.Resources.Logo;
                 loggedInLabel1.Connection = null;
             }
+
+            SetTitleLabelMaxWidth();
+        }
+
+        private void UpdateLicenseStatusTitleLabel(IXenObject xenObject)
+        {
+            if (xenObject is Pool)
+            {
+                var pool = xenObject as Pool;
+
+                if (pool.Connection != null && pool.Connection.CacheIsPopulated)
+                {
+                    if (pool.IsFreeLicenseOrExpired)
+                    {
+                        LicenseStatusTitleLabel.Text = Messages.MAINWINDOW_HEADER_UNLICENSED;
+                        LicenseStatusTitleLabel.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, pool.LicenseString());
+                    }
+                }
+            }
+            else if (xenObject is Host)
+            {
+                var host = xenObject as Host;
+
+                if (host.Connection != null && host.Connection.CacheIsPopulated)
+                {
+                    if (host.IsFreeLicenseOrExpired())
+                    {
+                        LicenseStatusTitleLabel.Text = Messages.MAINWINDOW_HEADER_UNLICENSED;
+                        LicenseStatusTitleLabel.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(host));
+                    }
+                }
+            }
+        }
+
+        private void ResetLicenseStatusTitleLabel()
+        {
+            LicenseStatusTitleLabel.Text = string.Empty;
+            LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
+        }
+
+        private void SetTitleLabelMaxWidth()
+        {
+            TitleLabel.MaximumSize = new Size(tableLayoutPanel1.Width - loggedInLabel1.Width - LicenseStatusTitleLabel.Width - 6, TitleLabel.Height);
         }
 
         private void UpdateViewMenu(NavigationPane.NavigationMode mode)
@@ -2972,6 +3031,7 @@ namespace XenAdmin
         {
             if (mode == NavigationPane.NavigationMode.Notifications)
             {
+                ResetLicenseStatusTitleLabel();
                 TheTabControl.Visible = false;
             }
             else
@@ -3362,6 +3422,7 @@ namespace XenAdmin
                 mainWindowResized = true;
             }
             SetSplitterDistance();
+            SetTitleLabelMaxWidth();
         }
 
         private void SetSplitterDistance()
@@ -3398,6 +3459,8 @@ namespace XenAdmin
             TabPage t = TheTabControl.SelectedTab;
             if (t == TabPageConsole)
                 ConsolePanel.UpdateRDPResolution();
+
+            SetTitleLabelMaxWidth();
         }
     }
 }

@@ -42,6 +42,8 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
+    public enum WizardMode { SingleUpdate, AutomatedUpdates, NewVersion }
+    
     /// <summary>
     /// Remember that equals for patches dont work across connections because 
     /// we are not allow to override equals. YOU SHOULD NOT USE ANY OPERATION THAT IMPLIES CALL EQUALS OF Pool_path or Host_patch
@@ -85,6 +87,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             PatchingWizard_SelectPatchPage.SelectDownloadAlert(alert);
             PatchingWizard_SelectPatchPage.SelectedUpdateAlert = alert;
             PatchingWizard_SelectServers.SelectedUpdateAlert = alert;
+            PatchingWizard_PrecheckPage.UpdateAlert = alert;
             PatchingWizard_UploadPage.SelectedUpdateAlert = alert;
         }
 
@@ -105,7 +108,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (prevPageType == typeof(PatchingWizard_SelectPatchPage))
             {
-                var wizardIsInAutomatedUpdatesMode = PatchingWizard_SelectPatchPage.IsInAutomatedUpdatesMode;
+                var wizardMode = PatchingWizard_SelectPatchPage.WizardMode;
+                var wizardIsInAutomatedUpdatesMode = wizardMode == WizardMode.AutomatedUpdates;
 
                 var updateType = wizardIsInAutomatedUpdatesMode ? UpdateType.NewRetail : PatchingWizard_SelectPatchPage.SelectedUpdateType;
                 var newPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedNewPatch;
@@ -113,7 +117,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var alertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.SelectedUpdateAlert;
                 var fileFromDiskAlertPatch = wizardIsInAutomatedUpdatesMode ? null : PatchingWizard_SelectPatchPage.FileFromDiskAlert;
 
-                PatchingWizard_SelectServers.IsInAutomaticMode = wizardIsInAutomatedUpdatesMode;
+                PatchingWizard_SelectServers.WizardMode = wizardMode;
                 PatchingWizard_SelectServers.SelectedUpdateType = updateType;
                 PatchingWizard_SelectServers.Patch = existPatch;
                 PatchingWizard_SelectServers.SelectedUpdateAlert = alertPatch;
@@ -123,13 +127,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 RemovePage(PatchingWizard_ModePage);
                 RemovePage(PatchingWizard_PatchingPage);
                 RemovePage(PatchingWizard_AutomatedUpdatesPage);
-                if (!wizardIsInAutomatedUpdatesMode)
+                if (wizardMode == WizardMode.SingleUpdate)
                 {
                     AddAfterPage(PatchingWizard_SelectServers, PatchingWizard_UploadPage);
                     AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_ModePage);
                     AddAfterPage(PatchingWizard_ModePage, PatchingWizard_PatchingPage);
                 }
-                else
+                else // AutomatedUpdates or NewVersion
                 {
                     AddAfterPage(PatchingWizard_PrecheckPage, PatchingWizard_AutomatedUpdatesPage);
                 }
@@ -140,19 +144,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.SelectedUpdateAlert = alertPatch; 
 
                 PatchingWizard_ModePage.Patch = existPatch;
-                PatchingWizard_ModePage.SelectedUpdateAlert = alertPatch;
-
-                PatchingWizard_PrecheckPage.IsInAutomatedUpdatesMode = wizardIsInAutomatedUpdatesMode;
-                PatchingWizard_PrecheckPage.Patch = existPatch;
-                PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
-
-                PatchingWizard_PatchingPage.Patch = existPatch;
-
-                PatchingWizard_PrecheckPage.SelectedUpdateType = updateType;
-                
                 PatchingWizard_ModePage.SelectedUpdateType = updateType;
 
+                PatchingWizard_PrecheckPage.WizardMode = wizardMode;
+                PatchingWizard_PrecheckPage.Patch = existPatch;
+                PatchingWizard_PrecheckPage.PoolUpdate = null; //reset the PoolUpdate property; it will be updated on leaving the Upload page, if this page is visible
+                PatchingWizard_PrecheckPage.SelectedUpdateType = updateType;
+                PatchingWizard_PrecheckPage.UpdateAlert = alertPatch ?? fileFromDiskAlertPatch;
+
+                PatchingWizard_AutomatedUpdatesPage.WizardMode = wizardMode;
+                PatchingWizard_AutomatedUpdatesPage.UpdateAlert = alertPatch ?? fileFromDiskAlertPatch;
+
                 PatchingWizard_PatchingPage.SelectedUpdateType = updateType;
+                PatchingWizard_PatchingPage.Patch = existPatch;
                 PatchingWizard_PatchingPage.SelectedNewPatch = newPatch;
             }
             else if (prevPageType == typeof(PatchingWizard_SelectServers))
@@ -160,8 +164,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var selectedServers = PatchingWizard_SelectServers.SelectedServers;
                 var selectedPools = PatchingWizard_SelectServers.SelectedPools;
                 var selectedMasters = PatchingWizard_SelectServers.SelectedMasters;
+                var applyUpdatesToNewVersion = PatchingWizard_SelectServers.ApplyUpdatesToNewVersion;
 
                 PatchingWizard_PrecheckPage.SelectedServers = selectedServers;
+                PatchingWizard_PrecheckPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
 
                 PatchingWizard_ModePage.SelectedServers = selectedServers;
 
@@ -173,6 +179,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PatchingWizard_UploadPage.SelectedServers = selectedServers;
 
                 PatchingWizard_AutomatedUpdatesPage.SelectedPools = selectedPools;
+                PatchingWizard_AutomatedUpdatesPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
             }
             else if (prevPageType == typeof(PatchingWizard_UploadPage))
             {
@@ -328,11 +335,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RemoveDownloadedPatches()
         {
-            var isInAutomaticMode = PatchingWizard_SelectPatchPage.IsInAutomatedUpdatesMode;
-
             List<string> listOfDownloadedFiles = new List<string>();
 
-            if (isInAutomaticMode)
+            if (PatchingWizard_SelectPatchPage.WizardMode != WizardMode.SingleUpdate) // AutomatedUpdates or NewVersion
             {
                 listOfDownloadedFiles.AddRange(PatchingWizard_AutomatedUpdatesPage.AllDownloadedPatches.Values);
             }
