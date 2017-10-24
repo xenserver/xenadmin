@@ -147,6 +147,9 @@ namespace XenAdmin.Alerts
                     case XenAPI.Message.MessageType.POOL_CPU_FEATURES_DOWN:
                     case XenAPI.Message.MessageType.HOST_CPU_FEATURES_UP:
                     case XenAPI.Message.MessageType.HOST_CPU_FEATURES_DOWN:
+                    case XenAPI.Message.MessageType.VDI_CBT_RESIZE_FAILED:
+                    case XenAPI.Message.MessageType.VDI_CBT_SNAPSHOT_FAILED:
+                    case XenAPI.Message.MessageType.VDI_CBT_METADATA_INCONSISTENT:
                         if (XenObject != null)
                             return string.Format(FriendlyFormat(), Helpers.GetName(XenObject));
                         break;

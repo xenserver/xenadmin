@@ -1970,5 +1970,38 @@ namespace XenAdmin.Core
 
             return System.Net.WebUtility.UrlEncode(str);
         }
+
+        public static string UpdatesFriendlyName(string propertyName)
+        {
+            return Core.PropertyManager.FriendlyNames.GetString(string.Format("Label-{0}", propertyName)) ?? propertyName;
+        }
+
+        public static string UpdatesFriendlyNameAndVersion(Pool_update update)
+        {
+            var friendlyName = UpdatesFriendlyName(update.Name());
+            if (string.IsNullOrEmpty(update.version))
+                return friendlyName;
+            return string.Format(Messages.SUPP_PACK_DESCRIPTION, friendlyName, update.version);
+        }
+
+        public static List<string> HostAppliedPatchesList(Host host)
+        {
+            List<string> result = new List<string>();
+
+            if (ElyOrGreater(host))
+            {
+                foreach (var update in host.AppliedUpdates())
+                    result.Add(UpdatesFriendlyNameAndVersion(update));
+            }
+            else
+            {
+                foreach (Pool_patch patch in host.AppliedPatches())
+                    result.Add(patch.Name());
+            }
+
+            result.Sort(StringUtility.NaturalCompare);
+
+            return result;
+        }
     }
 }

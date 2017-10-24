@@ -833,6 +833,16 @@ namespace XenAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _000_Pool_h32bit_16_w_alert {
+            get {
+                object obj = ResourceManager.GetObject("_000_Pool_h32bit_16_w_alert", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _000_PoolConnected_h32bit_16 {
             get {
                 object obj = ResourceManager.GetObject("_000_PoolConnected_h32bit_16", resourceCulture);
@@ -966,6 +976,16 @@ namespace XenAdmin.Properties {
         internal static System.Drawing.Bitmap _000_Server_h32bit_16 {
             get {
                 object obj = ResourceManager.GetObject("_000_Server_h32bit_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _000_Server_h32bit_16_w_alert {
+            get {
+                object obj = ResourceManager.GetObject("_000_Server_h32bit_16_w_alert", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

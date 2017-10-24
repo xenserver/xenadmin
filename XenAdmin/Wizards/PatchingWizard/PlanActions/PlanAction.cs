@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private int _percentComplete;
-        public event EventHandler OnPercentCompleteChange;
+        public event EventHandler OnProgressChange;
         public event EventHandler OnActionError;
         public event Action<PlanAction, Host> StatusChanged;
         public Exception Error;
@@ -91,8 +91,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             protected set
             {
                 _percentComplete = value;
-                if (OnPercentCompleteChange != null)
-                    OnPercentCompleteChange(this, new EventArgs());
+                if (OnProgressChange != null)
+                    OnProgressChange(this, new EventArgs());
             }
         }
 
@@ -250,6 +250,26 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             Cancelling = true;
         }
+
+
+        string _progressDescription;
+
+        public string ProgressDescription
+        {
+            get
+            {
+                return _progressDescription;
+            }
+
+            protected set
+            {
+                _progressDescription = value;
+
+                if (OnProgressChange != null)
+                    OnProgressChange(this, new EventArgs());
+            }
+        }
+
     }
 }
 

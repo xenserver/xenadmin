@@ -1076,6 +1076,15 @@
   <data name="Message.body-vcpu_qos_failed" xml:space="preserve">
     <value>Quality of Service settings for VCPU '{0}' on virtual machine '{1}' could not be obeyed.</value>
   </data>
+  <data name="Message.body-vdi_cbt_metadata_inconsistent" xml:space="preserve">
+    <value>Changed block tracking has been disabled for virtual disk {0} due to inconsistent metadata. To continue using changed block tracking with this virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up.</value>
+  </data>
+  <data name="Message.body-vdi_cbt_resize_failed" xml:space="preserve">
+    <value>Changed block tracking has been disabled for virtual disk {0} due to a resizing failure. To continue using changed block tracking with this virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up.</value>
+  </data>
+  <data name="Message.body-vdi_cbt_snapshot_failed" xml:space="preserve">
+    <value>Changed block tracking has been disabled for virtual disk {0} due to a snapshot failure. To continue using changed block tracking with this virtual disk, you will need to do the backup setup again, including re-enabling changed block tracking, taking a snapshot and backing it up.</value>
+  </data>
   <data name="Message.body-vif_qos_failed" xml:space="preserve">
     <value>Quality of Service settings for network interface '{0}' on virtual machine '{1}' could not be obeyed.</value>
   </data>
@@ -1104,7 +1113,7 @@
     <value>Virtual machine '{0}' did not reduce its memory usage when requested.</value>
   </data>
   <data name="Message.body-vmss_license_error" xml:space="preserve">
-    <value>The XenServer license you are using does not allow you to use the Scheduled Snapshots feature.</value>
+    <value>The [XenServer] license you are using does not allow you to use the Scheduled Snapshots feature.</value>
   </data>
   <data name="Message.body-vmss_snapshot_failed" xml:space="preserve">
     <value>The snapshot schedule '{0}' failed because a snapshot could not be created.</value>
@@ -1276,6 +1285,15 @@
   </data>
   <data name="Message.name-vcpu_qos_failed" xml:space="preserve">
     <value>VM vCPU QoS Failed</value>
+  </data>
+  <data name="Message.name-vdi_cbt_metadata_inconsistent" xml:space="preserve">
+    <value>Changed block tracking disabled due to inconsistent metadata</value>
+  </data>
+  <data name="Message.name-vdi_cbt_resize_failed" xml:space="preserve">
+    <value>Changed block tracking disabled due to a virtual disk resizing failure</value>
+  </data>
+  <data name="Message.name-vdi_cbt_snapshot_failed" xml:space="preserve">
+    <value>Changed block tracking disabled due to a snapshot failure</value>
   </data>
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM Network Interface QoS Failed</value>

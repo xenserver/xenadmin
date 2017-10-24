@@ -358,14 +358,14 @@ namespace XenAdmin.Dialogs
                     case Dialogs.LicenseStatus.HostState.Expired:
                         if (licenseStatus.PoolLicensingModel == Dialogs.LicenseStatus.LicensingModel.Clearwater)
                             return Messages.LICENSE_UNSUPPORTED;
-                        return Messages.LICENSE_EXPIRED;
+                        return Messages.LICENSE_UNLICENSED;
                     case Dialogs.LicenseStatus.HostState.Free:
                         switch (licenseStatus.PoolLicensingModel)
                         {
                             case Dialogs.LicenseStatus.LicensingModel.Clearwater:
                                 return Messages.LICENSE_UNSUPPORTED;
                             case Dialogs.LicenseStatus.LicensingModel.Creedence:
-                                return Messages.LICENSE_EXPIRED;
+                                return Messages.LICENSE_UNLICENSED;
                             default:
                                 return Messages.LICENSE_FREE;
                         }

@@ -72,7 +72,7 @@ namespace XenAdmin.Commands
             Dictionary<SelectedItem, string> reasons = new Dictionary<SelectedItem, string>();
             foreach (Host host in _hosts)
             {
-                PoolJoinRules.Reason reason = PoolJoinRules.CanJoinPool(host.Connection, _pool.Connection, true, true, true);
+                PoolJoinRules.Reason reason = PoolJoinRules.CanJoinPool(host.Connection, _pool.Connection, true, true, true, _hosts.Count);
                 if (reason != PoolJoinRules.Reason.Allowed)
                     reasons[new SelectedItem(host)] = PoolJoinRules.ReasonMessage(reason);
             }

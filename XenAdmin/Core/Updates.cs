@@ -305,13 +305,13 @@ namespace XenAdmin.Core
                     XenServerPatches = action.XenServerPatches;
                 }
 
-                var xenCenterAlert = NewXenCenterUpdateAlert(XenCenterVersions, Program.Version);
-                if (xenCenterAlert != null && !xenCenterAlert.IsDismissed())
-                    updateAlerts.Add(xenCenterAlert);
+                var xenCenterAlerts = NewXenCenterUpdateAlerts(XenCenterVersions, Program.Version);
+                if (xenCenterAlerts != null)
+                    updateAlerts.AddRange(xenCenterAlerts.Where(a=>!a.IsDismissed()));
 
-                var xenServerUpdateAlert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
-                if (xenServerUpdateAlert != null && !xenServerUpdateAlert.CanIgnore)
-                    updateAlerts.Add(xenServerUpdateAlert);
+                var xenServerUpdateAlerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
+                if (xenServerUpdateAlerts != null)
+                    updateAlerts.AddRange(xenServerUpdateAlerts.Where(a=>!a.CanIgnore));
 
                 var xenServerPatchAlerts = NewXenServerPatchAlerts(XenServerVersions, XenServerPatches);
                 if (xenServerPatchAlerts != null)
@@ -354,33 +354,47 @@ namespace XenAdmin.Core
         }
 
 
-        public static XenCenterUpdateAlert NewXenCenterUpdateAlert(List<XenCenterVersion> xenCenterVersions, Version currentProgramVersion)
+        public static List<XenCenterUpdateAlert> NewXenCenterUpdateAlerts(List<XenCenterVersion> xenCenterVersions,
+            Version currentProgramVersion)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
-
-            XenCenterVersion toUse = null;
+            var alerts = new List<XenCenterUpdateAlert>();
+            XenCenterVersion latest = null, latestCr = null;
             if (xenCenterVersions.Count != 0 && currentProgramVersion != new Version(0, 0, 0, 0))
             {
-                var latest = from v in xenCenterVersions where v.IsLatest select v;
+                var latestVersions = from v in xenCenterVersions where v.Latest select v;
+                latest = latestVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                         latestVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
 
-                toUse = latest.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
-                        latest.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+                if (IsSuitableForXenCenterAlert(latest, currentProgramVersion))
+                    alerts.Add(new XenCenterUpdateAlert(latest));
+
+                var latestCrVersions = from v in xenCenterVersions where v.LatestCr select v;
+                latestCr = latestCrVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                           latestCrVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+
+                if (latestCr != latest && IsSuitableForXenCenterAlert(latestCr, currentProgramVersion))
+                    alerts.Add(new XenCenterUpdateAlert(latestCr));
             }
 
-            if (toUse == null)
-                return null;
-
-            if (toUse.Version > currentProgramVersion ||
-                (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
-                 !PropertyManager.IsCultureLoaded(Program.CurrentCulture)))
+            if (alerts.Count == 0)
             {
-                return new XenCenterUpdateAlert(toUse);
+                log.Info(string.Format("Not alerting XenCenter update - latest = {0},  latestcr = {1}, detected = {2}", 
+                    latest != null ? latest.VersionAndLang : "", latestCr != null ? latestCr.VersionAndLang : "", Program.VersionAndLanguage));
             }
 
-            log.Info(string.Format("Not alerting XenCenter update - lastest = {0}, detected = {1}",
-                                   toUse.VersionAndLang, Program.VersionAndLanguage));
-            return null;
+            return alerts;
+        }
+
+        private static bool IsSuitableForXenCenterAlert(XenCenterVersion toUse, Version currentProgramVersion)
+        {
+            if (toUse == null)
+                return false;
+
+            return toUse.Version > currentProgramVersion ||
+                   (toUse.Version == currentProgramVersion && toUse.Lang == Program.CurrentLanguage &&
+                    !PropertyManager.IsCultureLoaded(Program.CurrentCulture));
         }
 
         public static List<XenServerPatchAlert> NewXenServerPatchAlerts(List<XenServerVersion> xenServerVersions,
@@ -391,6 +405,8 @@ namespace XenAdmin.Core
 
             var alerts = new List<XenServerPatchAlert>();
 
+            var xenServerVersionsAsUpdates = xenServerVersions.Where(v => v.IsVersionAvailableAsAnUpdate);
+
             foreach (IXenConnection xenConnection in ConnectionsManager.XenConnectionsCopy)
             {
                 Host master = Helpers.GetMaster(xenConnection);
@@ -399,15 +415,7 @@ namespace XenAdmin.Core
                 if (master == null || pool == null)
                     continue;
 
-                var serverVersions = xenServerVersions.FindAll(version =>
-                                                  {
-                                                      if (version.BuildNumber != string.Empty)
-                                                          return (master.BuildNumberRaw() == version.BuildNumber);
-
-                                                      return Helpers.HostProductVersionWithOEM(master) == version.VersionAndOEM
-                                                             || (version.Oem != null && Helpers.OEMName(master).StartsWith(version.Oem)
-                                                                 && Helpers.HostProductVersion(master) == version.Version.ToString());
-                                                  });
+                var serverVersions = GetServerVersions(master, xenServerVersions);
 
                 if (serverVersions.Count == 0)
                     continue;
@@ -422,7 +430,9 @@ namespace XenAdmin.Core
 
                     foreach (XenServerPatch xenServerPatch in patches)
                     {
-                        var alert = new XenServerPatchAlert(xenServerPatch);
+                        XenServerVersion newServerVersion = xenServerVersionsAsUpdates.FirstOrDefault(newVersion => newVersion.PatchUuid.Equals(xenServerPatch.Uuid, StringComparison.OrdinalIgnoreCase));
+
+                        var alert = new XenServerPatchAlert(xenServerPatch, newServerVersion);
                         var existingAlert = alerts.Find(al => al.Equals(alert));
 
                         if (existingAlert != null)
@@ -435,46 +445,8 @@ namespace XenAdmin.Core
 
                         XenServerPatch serverPatch = xenServerPatch;
 
-                        // A patch can be installed on a host if:
-                        // 1. it is not already installed and
-                        // 2. the host has all the required patches installed and
-                        // 3. the host doesn't have any of the conflicting patches installed
-
-                        var noPatchHosts = hosts.Where(host =>
-                            {
-                                bool elyOrGreater = Helpers.ElyOrGreater(host);
-                                var appliedUpdates = host.AppliedUpdates();
-                                var appliedPatches = host.AppliedPatches();
-
-                                // 1. patch is not already installed 
-                                if (elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
-                                        return false;
-                                else if (!elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
-                                        return false;
-                                
-                                // 2. the host has all the required patches installed
-                                if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
-                                    !serverPatch.RequiredPatches
-                                    .All(requiredPatchUuid => 
-                                        elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        )
-                                    )
-                                    return false;
-
-                                // 3. the host doesn't have any of the conflicting patches installed
-                                if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
-                                    serverPatch.ConflictingPatches
-                                    .Any(conflictingPatchUuid =>
-                                        elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
-                                        )
-                                    )
-                                    return false;
-
-                                return true;
-                            });
-
+                        var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host));
+        
                         if (noPatchHosts.Count() == hosts.Count)
                             alert.IncludeConnection(xenConnection);
                         else
@@ -484,6 +456,78 @@ namespace XenAdmin.Core
             }
 
             return alerts;
+        }
+
+        private static bool PatchCanBeInstalledOnHost(XenServerPatch serverPatch, Host host)
+        {
+            Debug.Assert(serverPatch != null);
+            Debug.Assert(host != null);
+            // A patch can be installed on a host if:
+            // 1. it is not already installed and
+            // 2. the host has all the required patches installed and
+            // 3. the host doesn't have any of the conflicting patches installed
+
+            bool elyOrGreater = Helpers.ElyOrGreater(host);
+            var appliedUpdates = host.AppliedUpdates();
+            var appliedPatches = host.AppliedPatches();
+
+            // 1. patch is not already installed 
+            if (elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                return false;
+            if (!elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, serverPatch.Uuid, StringComparison.OrdinalIgnoreCase)))
+                return false;
+
+            // 2. the host has all the required patches installed
+            if (serverPatch.RequiredPatches != null && serverPatch.RequiredPatches.Count > 0 &&
+                !serverPatch.RequiredPatches
+                .All(requiredPatchUuid =>
+                    elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, requiredPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    )
+                )
+                return false;
+
+            // 3. the host doesn't have any of the conflicting patches installed
+            if (serverPatch.ConflictingPatches != null && serverPatch.ConflictingPatches.Count > 0 &&
+                serverPatch.ConflictingPatches
+                .Any(conflictingPatchUuid =>
+                    elyOrGreater && appliedUpdates.Any(update => string.Equals(update.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    || !elyOrGreater && appliedPatches.Any(patch => string.Equals(patch.uuid, conflictingPatchUuid, StringComparison.OrdinalIgnoreCase))
+                    )
+                )
+                return false;
+
+            return true;
+        }
+
+
+        /// <summary>
+        /// Returns the latest XenCenter version or null, if the current version is the latest. 
+        /// If a server version is provided, it returns the XenCenter version that is required to work with that server. 
+        /// If no server version is provided it will return the latestCr XenCenter.
+        /// </summary>
+        /// <param name="serverVersion"></param>
+        /// <returns></returns>
+        public static XenCenterVersion GetRequiredXenCenterVersion(XenServerVersion serverVersion)
+        {
+            if (XenCenterVersions.Count == 0)
+                return null;
+
+            var currentProgramVersion = Program.Version;
+            if (currentProgramVersion == new Version(0, 0, 0, 0))
+                return null;
+
+            var latestVersions = from v in XenCenterVersions where v.Latest select v;
+            var latest = latestVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                         latestVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+
+            var latestCrVersions = from v in XenCenterVersions where v.LatestCr select v;
+            var latestCr = latestCrVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
+                           latestCrVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+
+            if (serverVersion != null && serverVersion.Latest && latest != null)
+                return latest.Version > currentProgramVersion ? latest : null;
+            return latestCr != null && latestCr.Version > currentProgramVersion ? latestCr : null;  
         }
         
         /// <summary>
@@ -497,24 +541,16 @@ namespace XenAdmin.Core
             var recommendedPatches = new List<XenServerPatch>();
 
             if (XenServerVersions == null)
-                return recommendedPatches;
+                return null;
 
-            var serverVersions = XenServerVersions.FindAll(version =>
-            {
-                if (version.BuildNumber != string.Empty)
-                    return (host.BuildNumberRaw() == version.BuildNumber);
-
-                return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
-                       || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
-                           && Helpers.HostProductVersion(host) == version.Version.ToString());
-            });
+            var serverVersions = GetServerVersions(host, XenServerVersions);
 
             if (serverVersions.Count != 0)
             {
                 var minimumPatches = serverVersions[0].MinimalPatches;
 
                 if (minimumPatches == null) //unknown
-                    return recommendedPatches;
+                    return null;
 
                 bool elyOrGreater = Helpers.ElyOrGreater(host);
 
@@ -552,7 +588,20 @@ namespace XenAdmin.Core
                     return null;
 
                 var uSeq = new UpgradeSequence();
-                uSeq.MinimalPatches = version.MinimalPatches;
+                uSeq.MinimalPatches = new List<XenServerPatch>(version.MinimalPatches);
+
+                // if there is a "new version" update in the update sequence, also add the minimal patches of this new version
+                if (uSeq.MinimalPatches.Count > 0)
+                {
+                    // assuming that the new version update (if there is one) is the last one in the minimal patches list
+                    var lastUpdate = uSeq.MinimalPatches[uSeq.MinimalPatches.Count - 1];
+                    
+                    var newServerVersion = XenServerVersions.FirstOrDefault(
+                        v => v.IsVersionAvailableAsAnUpdate && v.PatchUuid.Equals(lastUpdate.Uuid, StringComparison.OrdinalIgnoreCase));
+
+                    if (newServerVersion != null && newServerVersion.MinimalPatches != null)
+                        uSeq.MinimalPatches.AddRange(newServerVersion.MinimalPatches);
+                }
 
                 List<Host> hosts = conn.Cache.Hosts.ToList();
                 
@@ -570,6 +619,52 @@ namespace XenAdmin.Core
         }
 
         /// <summary>
+        /// Gets an upgrade sequence that contains a version upgrade, optionally followed by the minimal patches for the new version
+        /// </summary>
+        /// <param name="conn">Connection for the pool</param>
+        /// <param name="alert">The alert that refers the version-update</param>
+        /// <param name="updateTheNewVersion">Also add the minimum patches for the new version (true) or not (false).</param>
+        /// <returns></returns>
+        public static UpgradeSequence GetUpgradeSequence(IXenConnection conn, XenServerPatchAlert alert, bool updateTheNewVersion)
+        {
+            Debug.Assert(conn != null);
+            Debug.Assert(alert != null);
+
+            var uSeq = new UpgradeSequence();
+
+            if (XenServerVersions == null)
+                return null;
+
+            Host master = Helpers.GetMaster(conn);
+            if (master == null)
+                return null;
+
+            var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
+
+            // the pool has to be homogeneous
+            if (version != null)
+            {
+                uSeq.MinimalPatches = new List<XenServerPatch>();
+                uSeq.MinimalPatches.Add(alert.Patch);
+
+                // if it's a version updgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
+                if (updateTheNewVersion && alert.NewServerVersion != null && alert.NewServerVersion.MinimalPatches != null)
+                {
+                    uSeq.MinimalPatches.AddRange(alert.NewServerVersion.MinimalPatches);
+                }
+                
+                conn.Cache.Hosts.ToList().ForEach(h =>
+                    uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches)
+                    );
+                
+                return uSeq;
+            }
+
+            return null;
+        }
+
+
+        /// <summary>
         /// Returns a XenServerVersion if all hosts of the pool have the same version
         /// Returns null if it is unknown or they don't match
         /// </summary>
@@ -585,15 +680,7 @@ namespace XenAdmin.Core
 
             foreach (Host host in hosts)
             {
-                var hostVersions = xsVersions.FindAll(version =>
-                {
-                    if (version.BuildNumber != string.Empty)
-                        return (host.BuildNumberRaw() == version.BuildNumber);
-
-                    return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
-                           || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
-                               && Helpers.HostProductVersion(host) == version.Version.ToString());
-                });
+                var hostVersions = GetServerVersions(host, xsVersions);
 
                 var foundVersion = hostVersions.FirstOrDefault();
 
@@ -726,16 +813,31 @@ namespace XenAdmin.Core
             }
         }
 
-        public static XenServerVersionAlert NewXenServerVersionAlert(List<XenServerVersion> xenServerVersions)
+        public static List<XenServerVersionAlert> NewXenServerVersionAlerts(List<XenServerVersion> xenServerVersions)
         {
             if (Helpers.CommonCriteriaCertificationRelease)
                 return null;
 
             var latestVersion = xenServerVersions.FindAll(item => item.Latest).OrderByDescending(v => v.Version).FirstOrDefault();
-            if (latestVersion == null)
-                return null;
+            var latestCrVersion = xenServerVersions.FindAll(item => item.LatestCr).OrderByDescending(v => v.Version).FirstOrDefault();
 
-            var alert = new XenServerVersionAlert(latestVersion);
+            List<XenServerVersionAlert> alerts = new List<XenServerVersionAlert>();
+
+            if (latestVersion != null)
+                alerts.Add(CreateAlertForXenServerVersion(latestVersion));
+
+            if (latestCrVersion != null && latestCrVersion != latestVersion)
+                alerts.Add(CreateAlertForXenServerVersion(latestCrVersion));
+
+            return alerts;
+        }
+
+        private static XenServerVersionAlert CreateAlertForXenServerVersion(XenServerVersion version)
+        {
+            var alert = new XenServerVersionAlert(version);
+
+            // the patch that installs this version, if any
+            var patch  = XenServerPatches.FirstOrDefault(p => p.Uuid.Equals(version.PatchUuid, StringComparison.OrdinalIgnoreCase));
 
             foreach (IXenConnection xc in ConnectionsManager.XenConnectionsCopy)
             {
@@ -748,7 +850,12 @@ namespace XenAdmin.Core
                 if (master == null || pool == null)
                     continue;
 
-                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < latestVersion.Version);
+                // Show the Upgrade alert for a host if:
+                // - the host version is older than this version AND
+                // - there is no patch (amongst the current version patches) that can update to this version OR, if there is a patch, the patch cannot be installed
+                var patchApplicable = patch != null && GetServerVersions(master, XenServerVersions).Any(v => v.Patches.Contains(patch));
+                var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < version.Version
+                    && (!patchApplicable || !PatchCanBeInstalledOnHost(patch, host)));
 
                 if (outOfDateHosts.Count() == hosts.Count)
                     alert.IncludeConnection(xc);
@@ -759,14 +866,27 @@ namespace XenAdmin.Core
             return alert;
         }
 
+        public static List<XenServerVersion> GetServerVersions(Host host, List<XenServerVersion> xenServerVersions)
+        {
+            var serverVersions = xenServerVersions.FindAll(version =>
+            {
+                if (version.BuildNumber != string.Empty)
+                    return (host.BuildNumberRaw() == version.BuildNumber);
+
+                return Helpers.HostProductVersionWithOEM(host) == version.VersionAndOEM
+                       || (version.Oem != null && Helpers.OEMName(host).StartsWith(version.Oem)
+                           && Helpers.HostProductVersion(host) == version.Version.ToString());
+            });
+            return serverVersions;
+        }
 
         public static void CheckServerVersion()
         {
-            var alert = NewXenServerVersionAlert(XenServerVersionsForAutoCheck);
-            if (alert == null)
+            var alerts = NewXenServerVersionAlerts(XenServerVersionsForAutoCheck);
+            if (alerts == null || alerts.Count == 0)
                 return;
 
-            CheckUpdate(alert);
+            alerts.ForEach(a => CheckUpdate(a));
         }
 
         public static void CheckServerPatches()
@@ -775,8 +895,7 @@ namespace XenAdmin.Core
             if (alerts == null)
                 return;
 
-            foreach (var alert in alerts)
-                CheckUpdate(alert);
+            alerts.ForEach(a => CheckUpdate(a));
         }
 
         private static void CheckUpdate(XenServerUpdateAlert alert)

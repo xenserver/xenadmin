@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -107,6 +107,7 @@
     <Compile Include="Actions\GUIActions\IgnorePatchAction.cs" />
     <Compile Include="Actions\GUIActions\SaveDataSourceStateAction.cs" />
     <Compile Include="Actions\GUIActions\SearchAction.cs" />
+    <Compile Include="Alerts\NewVersionPriorityAlertComparer.cs" />
     <Compile Include="Alerts\Types\AlarmMessageAlert.cs" />
     <Compile Include="Alerts\Types\XenServerUpdateAlert.cs" />
     <Compile Include="Alerts\Types\DuplicateIqnAlert.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Commands\ChangeControlDomainMemoryCommand.cs" />
     <Compile Include="Commands\CrossPoolCopyVMCommand.cs" />
     <Compile Include="Commands\CrossPoolMoveVMCommand.cs" />
+    <Compile Include="Commands\DisableChangedBlockTrackingCommand.cs" />
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="Controls\ConsolePanel.Designer.cs">
       <DependentUpon>ConsolePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridViewEx\CollapsingPoolHostRowSorter.cs" />
     <Compile Include="Controls\DataGridViewEx\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -221,9 +224,12 @@
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateCheck.cs" />
     <Compile Include="Diagnostics\Checks\AssertCanEvacuateUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\DiskSpaceForBatchUpdatesCheck.cs" />
+    <Compile Include="Diagnostics\Checks\RebootPendingOnMasterCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostNeedsRebootCheck.cs" />
     <Compile Include="Diagnostics\Checks\SafeToUpgradeCheck.cs" />
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
+    <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
+    <Compile Include="Diagnostics\Problems\PoolProblem\MasterIsPendingRestartProblems.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNeedsReboot.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNotSafeToUpgradeWarning.cs" />
@@ -240,6 +246,7 @@
     <Compile Include="Dialogs\AttachUsbDialog.Designer.cs">
       <DependentUpon>AttachUsbDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Diagnostics\Problems\XenCenterVersionProblem.cs" />
     <Compile Include="Dialogs\EnablePvsReadCachingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +362,12 @@
     </Compile>
     <Compile Include="SettingsPanels\LivePatchingEditPage.Designer.cs">
       <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPanels\NetworkOptionsEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\NetworkOptionsEditPage.Designer.cs">
+      <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsPanels\SecurityEditPage.cs">
       <SubType>UserControl</SubType>
@@ -1925,6 +1938,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\LivePatchingEditPage.zh-CN.resx">
       <DependentUpon>LivePatchingEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\NetworkOptionsEditPage.ja.resx">
+      <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\NetworkOptionsEditPage.resx">
+      <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\NetworkOptionsEditPage.zh-CN.resx">
+      <DependentUpon>NetworkOptionsEditPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\SecurityEditPage.ja.resx">
       <DependentUpon>SecurityEditPage.cs</DependentUpon>
@@ -4117,8 +4139,6 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartAgentPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\UnwindProblemsAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\VMsPlanAction.cs" />
-    <Compile Include="Wizards\RollingUpgradeWizard\Sorting\UpgradeDataGridViewDescriptionSorter.cs" />
-    <Compile Include="Wizards\RollingUpgradeWizard\Sorting\UpgradeDataGridViewVersionSorter.cs" />
     <Compile Include="Wlb\WlbPoolConfiguration.cs" />
     <Compile Include="Wlb\WlbReportInfo.cs" />
     <Compile Include="Wlb\WlbReportSubscription.cs" />

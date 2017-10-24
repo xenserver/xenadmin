@@ -29,22 +29,39 @@
  * SUCH DAMAGE.
  */
 
-using System.ComponentModel;
-using XenAdmin.Controls.DataGridViewEx;
+using XenAPI;
+using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAdmin.Alerts;
 
-namespace XenAdmin.Wizards.RollingUpgradeWizard.Sorting
+
+namespace XenAdmin.Diagnostics.Checks
 {
-    public sealed class UpgradeDataGridViewVersionSorter : CollapsingPoolHostDataGridViewRowStableSorter<RollingUpgradeWizardSelectPool.UpgradeDataGridViewRow>
+    public class XenCenterVersionCheck : Check
     {
-        public UpgradeDataGridViewVersionSorter() { }
+        private XenServerVersion _newServerVersion;
 
-        public UpgradeDataGridViewVersionSorter(ListSortDirection direction) : base(direction) { }
-
-        protected override int SortRowByColumnDetails(RollingUpgradeWizardSelectPool.UpgradeDataGridViewRow rowLhs, 
-                                                 RollingUpgradeWizardSelectPool.UpgradeDataGridViewRow rowRhs)
+        public XenCenterVersionCheck(XenServerVersion newServerVersion)
+            : base(null)
         {
-            return Helpers.productVersionCompare(rowLhs.VersionText, rowRhs.VersionText);
+            _newServerVersion = newServerVersion;
+        }
+        
+        protected override Problem RunCheck()
+        {
+            var requiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(_newServerVersion);
+            if (requiredXenCenterVersion == null) 
+                return null;
+            if (_newServerVersion != null) 
+                return new XenCenterVersionProblem(this, requiredXenCenterVersion);
+            else
+                return new XenCenterVersionWarning(this, requiredXenCenterVersion);
+        }
+
+        public override string Description
+        {
+            get { return Messages.XENCENTER_VERSION_CHECK_DESCRIPTION; }
         }
     }
 }

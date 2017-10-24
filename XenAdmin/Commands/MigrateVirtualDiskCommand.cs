@@ -85,7 +85,7 @@ namespace XenAdmin.Commands
 
         private bool CanBeMigrated(VDI vdi)
         {
-            if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType())
+            if (vdi == null || vdi.is_a_snapshot || vdi.Locked || vdi.IsHaType() || vdi.cbt_enabled)
                 return false;
 
             if(vdi.Connection.ResolveAll(vdi.VBDs).Count == 0)
@@ -114,6 +114,8 @@ namespace XenAdmin.Commands
                 return Messages.CANNOT_MOVE_VDI_IN_USE;
             if (vdi.IsHaType())
                 return Messages.CANNOT_MOVE_HA_VD;
+            if (vdi.cbt_enabled)
+                return Messages.CANNOT_MOVE_CBT_ENABLED_VDI;
             if (vdi.IsMetadataForDR())
                 return Messages.CANNOT_MOVE_DR_VD;
             if (vdi.GetVMs().Any(vm => !vm.IsRunning()) && !Helpers.DundeeOrGreater(vdi.Connection))

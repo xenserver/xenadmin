@@ -241,13 +241,14 @@
     <value>23, 83</value>
   </data>
   <data name="automatedUpdatesOptionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 13</value>
+    <value>575, 26</value>
   </data>
   <data name="automatedUpdatesOptionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="automatedUpdatesOptionLabel.Text" xml:space="preserve">
-    <value>[XenCenter] will download and install all current updates from [Citrix], usually with only a single reboot at the end.</value>
+    <value>[XenCenter] will download and install all released updates on the current version from [Citrix], usually with only a single reboot at the end.
+</value>
   </data>
   <data name="&gt;&gt;automatedUpdatesOptionLabel.Name" xml:space="preserve">
     <value>automatedUpdatesOptionLabel</value>
@@ -268,19 +269,19 @@
     <value>NoControl</value>
   </data>
   <data name="downloadUpdateRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 108</value>
+    <value>3, 121</value>
   </data>
   <data name="downloadUpdateRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 12, 3, 3</value>
   </data>
   <data name="downloadUpdateRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 17</value>
+    <value>235, 17</value>
   </data>
   <data name="downloadUpdateRadioButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="downloadUpdateRadioButton.Text" xml:space="preserve">
-    <value>&amp;Download update from [Citrix]</value>
+    <value>&amp;Download update or new version from [Citrix]</value>
   </data>
   <data name="&gt;&gt;downloadUpdateRadioButton.Name" xml:space="preserve">
     <value>downloadUpdateRadioButton</value>
@@ -583,7 +584,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanelSpinner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 81</value>
+    <value>178, 75</value>
   </data>
   <data name="tableLayoutPanelSpinner.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
@@ -664,7 +665,7 @@
     <value>Vertical</value>
   </data>
   <data name="dataGridViewPatches.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 189</value>
+    <value>575, 176</value>
   </data>
   <data name="dataGridViewPatches.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -685,10 +686,10 @@
     <value>Fill</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 131</value>
+    <value>23, 144</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 189</value>
+    <value>575, 176</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>

@@ -160,6 +160,7 @@
             this.customTreeViewServers.ShowDescription = true;
             this.customTreeViewServers.ShowImages = false;
             this.customTreeViewServers.ShowRootLines = true;
+            this.customTreeViewServers.ItemCheckChanged += new System.EventHandler<System.EventArgs>(this.customTreeViewServers_ItemCheckChanged);
             // 
             // flowLayoutPanelServerListButtons
             // 

@@ -150,6 +150,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             page_3_InstallationMedia.Affinity = affinity;
             page_4_HomeServer.Affinity = affinity;
             page_6_Storage.Affinity = affinity;
+
+            ShowXenAppXenDesktopWarning(connection);
         }
 
         protected override void FinishWizard()
@@ -302,6 +304,12 @@ namespace XenAdmin.Wizards.NewVMWizard
         protected override string WizardPaneHelpID()
         {
             return CurrentStepTabPage is RBACWarningPage ? FormatHelpId("Rbac") : base.WizardPaneHelpID();
+        }
+
+        private void ShowXenAppXenDesktopWarning(IXenConnection connection)
+        {
+            if (connection.Cache.Hosts.Any(h => h.DesktopFeaturesEnabled() || h.DesktopPlusFeaturesEnabled()))
+                ShowInformationMessage(Helpers.GetPool(connection) != null ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER);
         }
     }
 }
