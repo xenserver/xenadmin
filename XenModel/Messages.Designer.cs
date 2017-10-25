@@ -9371,6 +9371,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CPU groups defined in pool &apos;{0}&apos;:.
+        /// </summary>
+        public static string CPU_GROUPS_DEFINED_FOR_POOL {
+            get {
+                return ResourceManager.GetString("CPU_GROUPS_DEFINED_FOR_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPU groups defined in server &apos;{0}&apos;:.
+        /// </summary>
+        public static string CPU_GROUPS_DEFINED_FOR_SERVER {
+            get {
+                return ResourceManager.GetString("CPU_GROUPS_DEFINED_FOR_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} vCPU(s).
         /// </summary>
         public static string CPU_SUB {
@@ -9448,6 +9466,24 @@ namespace XenAdmin {
         public static string CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE {
             get {
                 return ResourceManager.GetString("CPU_TOPOLOGY_STRING_N_SOCKET_N_CORE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPU cores in pool &apos;{0}&apos;:.
+        /// </summary>
+        public static string CPUCORES_IN_POOL {
+            get {
+                return ResourceManager.GetString("CPUCORES_IN_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPU cores in server &apos;{0}&apos;:.
+        /// </summary>
+        public static string CPUCORES_IN_SERVER {
+            get {
+                return ResourceManager.GetString("CPUCORES_IN_SERVER", resourceCulture);
             }
         }
         
@@ -23480,6 +23516,60 @@ namespace XenAdmin {
         public static string NEW_XENCENTER_REQUIRED_INFO {
             get {
                 return ResourceManager.GetString("NEW_XENCENTER_REQUIRED_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPU Cores.
+        /// </summary>
+        public static string NEWCPUGROUP_CPUCORESPAGE_TEXT {
+            get {
+                return ResourceManager.GetString("NEWCPUGROUP_CPUCORESPAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose which CPU cores to include in this CPU group.
+        /// </summary>
+        public static string NEWCPUGROUP_CPUCORESPAGE_TITLE {
+            get {
+                return ResourceManager.GetString("NEWCPUGROUP_CPUCORESPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish.
+        /// </summary>
+        public static string NEWCPUGROUP_FINISHPAGE_TEXT {
+            get {
+                return ResourceManager.GetString("NEWCPUGROUP_FINISHPAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create the new CPU group.
+        /// </summary>
+        public static string NEWCPUGROUP_FINISHPAGE_TITLE {
+            get {
+                return ResourceManager.GetString("NEWCPUGROUP_FINISHPAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string NEWCPUGROUP_NAMEPAGE_TEXT {
+            get {
+                return ResourceManager.GetString("NEWCPUGROUP_NAMEPAGE_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What do you want to call this CPU group?.
+        /// </summary>
+        public static string NEWCPUGROUP_NAMEPAGE_TITLE {
+            get {
+                return ResourceManager.GetString("NEWCPUGROUP_NAMEPAGE_TITLE", resourceCulture);
             }
         }
         

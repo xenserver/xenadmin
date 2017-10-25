@@ -2007,6 +2007,15 @@
   <data name="pluginItemsPlaceHolderToolStripMenuItem2.Text" xml:space="preserve">
     <value>PluginItemsPlaceHolder</value>
   </data>
+  <data name="manageCPUGroupToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
+  </data>
+  <data name="manageCPUGroupToolStripMenuItem.Text" xml:space="preserve">
+    <value>Manage CPU &amp;Groups...</value>
+  </data>
+  <data name="toolStripSeparator32.Size" type="System.Drawing.Size, System.Drawing">
+    <value>274, 6</value>
+  </data>
   <data name="PoolPropertiesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
   </data>
@@ -2797,7 +2806,7 @@
     <value>1008, 730</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1024, 768</value>
+    <value>1024, 726</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -3195,6 +3204,18 @@
   <data name="&gt;&gt;pluginItemsPlaceHolderToolStripMenuItem2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;manageCPUGroupToolStripMenuItem.Name" xml:space="preserve">
+    <value>manageCPUGroupToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;manageCPUGroupToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator32.Name" xml:space="preserve">
+    <value>toolStripSeparator32</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator32.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;PoolPropertiesToolStripMenuItem.Name" xml:space="preserve">
     <value>PoolPropertiesToolStripMenuItem</value>
   </data>
@@ -3481,6 +3502,12 @@
     <value>exportToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exportToolStripMenuItem.Type" xml:space="preserve">
+    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;disableCbtToolStripMenuItem.Name" xml:space="preserve">
+    <value>disableCbtToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;disableCbtToolStripMenuItem.Type" xml:space="preserve">
     <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;enablePVSReadcachingToolStripMenuItem.Name" xml:space="preserve">
@@ -3890,12 +3917,6 @@
   </data>
   <data name="&gt;&gt;statusProgressBar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;disableCbtToolStripMenuItem.Name" xml:space="preserve">
-    <value>disableCbtToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;disableCbtToolStripMenuItem.Type" xml:space="preserve">
-    <value>XenAdmin.Commands.CommandToolStripMenuItem, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainWindow</value>

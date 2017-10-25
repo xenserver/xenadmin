@@ -124,6 +124,7 @@
     <Compile Include="Commands\DragDropCrossPoolMoveHaltedVMCommand.cs" />
     <Compile Include="Commands\DisablePvsReadCachingCommand.cs" />
     <Compile Include="Commands\EnablePvsReadCachingCommand.cs" />
+    <Compile Include="Commands\ManageCPUGroupCommand.cs" />
     <Compile Include="Commands\RestartDockerContainerCommand.cs" />
     <Compile Include="Commands\ResumeDockerContainerCommand.cs" />
     <Compile Include="Commands\PauseDockerContainerCommand.cs" />
@@ -244,6 +245,12 @@
     </Compile>
     <Compile Include="Dialogs\EnablePvsReadCachingDialog.Designer.cs">
       <DependentUpon>EnablePvsReadCachingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ManageCPUGroupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ManageCPUGroupDialog.Designer.cs">
+      <DependentUpon>ManageCPUGroupDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.cs">
       <SubType>UserControl</SubType>
@@ -710,6 +717,30 @@
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
+    <Compile Include="Wizards\NewCPUGroupWizard\NewCPUGroupCPUCoresPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewCPUGroupWizard\NewCPUGroupCPUCoresPage.Designer.cs">
+      <DependentUpon>NewCPUGroupCPUCoresPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\NewCPUGroupWizard\NewCPUGroupFinishPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewCPUGroupWizard\NewCPUGroupFinishPage.Designer.cs">
+      <DependentUpon>NewCPUGroupFinishPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\NewCPUGroupWizard\NewCPUGroupNamePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewCPUGroupWizard\NewCPUGroupNamePage.Designer.cs">
+      <DependentUpon>NewCPUGroupNamePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizards\NewCPUGroupWizard\NewCPUGroupWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewCPUGroupWizard\NewCPUGroupWizard.Designer.cs">
+      <DependentUpon>NewCPUGroupWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1647,6 +1678,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>AdPasswordPrompt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ManageCPUGroupDialog.resx">
+      <DependentUpon>ManageCPUGroupDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.ja.resx">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -2064,6 +2098,18 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewCPUGroupWizard\NewCPUGroupCPUCoresPage.resx">
+      <DependentUpon>NewCPUGroupCPUCoresPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewCPUGroupWizard\NewCPUGroupFinishPage.resx">
+      <DependentUpon>NewCPUGroupFinishPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewCPUGroupWizard\NewCPUGroupNamePage.resx">
+      <DependentUpon>NewCPUGroupNamePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewCPUGroupWizard\NewCPUGroupWizard.resx">
+      <DependentUpon>NewCPUGroupWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.ja.resx">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>

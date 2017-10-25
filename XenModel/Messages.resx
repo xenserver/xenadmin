@@ -13522,4 +13522,34 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
+  <data name="NEWCPUGROUP_FINISHPAGE_TEXT" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="NEWCPUGROUP_NAMEPAGE_TEXT" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NEWCPUGROUP_CPUCORESPAGE_TEXT" xml:space="preserve">
+    <value>CPU Cores</value>
+  </data>
+  <data name="NEWCPUGROUP_FINISHPAGE_TITLE" xml:space="preserve">
+    <value>Create the new CPU group</value>
+  </data>
+  <data name="NEWCPUGROUP_NAMEPAGE_TITLE" xml:space="preserve">
+    <value>What do you want to call this CPU group?</value>
+  </data>
+  <data name="NEWCPUGROUP_CPUCORESPAGE_TITLE" xml:space="preserve">
+    <value>Choose which CPU cores to include in this CPU group</value>
+  </data>
+  <data name="CPU_GROUPS_DEFINED_FOR_POOL" xml:space="preserve">
+    <value>CPU groups defined in pool '{0}':</value>
+  </data>
+  <data name="CPU_GROUPS_DEFINED_FOR_SERVER" xml:space="preserve">
+    <value>CPU groups defined in server '{0}':</value>
+  </data>
+  <data name="CPUCORES_IN_POOL" xml:space="preserve">
+    <value>CPU cores in pool '{0}':</value>
+  </data>
+  <data name="CPUCORES_IN_SERVER" xml:space="preserve">
+    <value>CPU cores in server '{0}':</value>
+  </data>
 </root>

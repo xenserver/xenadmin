@@ -51,10 +51,17 @@ namespace XenAdmin.SettingsPanels
             this.VCPUWarningLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxVCPUs = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.linkLabelCPUGroup = new System.Windows.Forms.LinkLabel();
+            this.labelCPUGroup = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMemory)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblSliderHighest
@@ -97,6 +104,7 @@ namespace XenAdmin.SettingsPanels
             this.tableLayoutPanel1.Controls.Add(this.VCPUWarningLabel, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxVCPUs, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 11);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // comboBoxInitialVCPUs
@@ -229,6 +237,41 @@ namespace XenAdmin.SettingsPanels
             this.comboBoxVCPUs.Name = "comboBoxVCPUs";
             this.comboBoxVCPUs.SelectedIndexChanged += new System.EventHandler(this.comboBoxVCPUs_SelectedIndexChanged);
             // 
+            // groupBox1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBox1, 3);
+            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.linkLabelCPUGroup, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelCPUGroup, 0, 1);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBox1, "comboBox1");
+            this.comboBox1.Name = "comboBox1";
+            // 
+            // linkLabelCPUGroup
+            // 
+            resources.ApplyResources(this.linkLabelCPUGroup, "linkLabelCPUGroup");
+            this.linkLabelCPUGroup.Name = "linkLabelCPUGroup";
+            this.linkLabelCPUGroup.TabStop = true;
+            this.linkLabelCPUGroup.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelCPUGroup_LinkClicked);
+            // 
+            // labelCPUGroup
+            // 
+            resources.ApplyResources(this.labelCPUGroup, "labelCPUGroup");
+            this.labelCPUGroup.Name = "labelCPUGroup";
+            // 
             // CPUMemoryEditPage
             // 
             resources.ApplyResources(this, "$this");
@@ -245,6 +288,9 @@ namespace XenAdmin.SettingsPanels
             ((System.ComponentModel.ISupportInitialize)(this.nudMemory)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -273,5 +319,10 @@ namespace XenAdmin.SettingsPanels
         private System.Windows.Forms.ComboBox comboBoxVCPUs;
         private System.Windows.Forms.ComboBox comboBoxInitialVCPUs;
         private System.Windows.Forms.Label labelInitialVCPUs;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.LinkLabel linkLabelCPUGroup;
+        private System.Windows.Forms.Label labelCPUGroup;
     }
 }
