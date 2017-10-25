@@ -280,7 +280,7 @@
     <value>尚未在插件“{1}”的资源文件中定义“{0}.label”。</value>
   </data>
   <data name="Exception-PluginOnlyOneCommandPermitted" xml:space="preserve">
-    <value>只允许使用一条 shell 或 powershell 命令。</value>
+    <value>只允许使用一条 shell 或 PowerShell 命令。</value>
   </data>
   <data name="Exception-PluginResourcesFileNotFound" xml:space="preserve">
     <value>在“{1}”找不到插件“{0}”的资源文件。</value>
@@ -1076,6 +1076,15 @@
   <data name="Message.body-vcpu_qos_failed" xml:space="preserve">
     <value>无法遵循虚拟机“{1}”上 VCPU“{0}”的服务质量设置。</value>
   </data>
+  <data name="Message.body-vdi_cbt_metadata_inconsistent" xml:space="preserve">
+    <value>由于元数据不一致，因此对虚拟磁盘 {0} 禁用了更改块跟踪。需要重新执行备份设置(包括重新启动更改块跟踪、创建快照和备份快照)，才能继续对此虚拟磁盘使用更改块跟踪。</value>
+  </data>
+  <data name="Message.body-vdi_cbt_resize_failed" xml:space="preserve">
+    <value>由于调整大小失败，因此对虚拟磁盘 {0} 禁用了更改块跟踪。需要重新执行备份设置(包括重新启动更改块跟踪、创建快照和备份快照)，才能继续对此虚拟磁盘使用更改块跟踪。</value>
+  </data>
+  <data name="Message.body-vdi_cbt_snapshot_failed" xml:space="preserve">
+    <value>由于快照失败，因此对虚拟磁盘 {0} 禁用了更改块跟踪。需要重新执行备份设置(包括重新启动更改块跟踪、创建快照和备份快照)，才能继续对此虚拟磁盘使用更改块跟踪。</value>
+  </data>
   <data name="Message.body-vif_qos_failed" xml:space="preserve">
     <value>无法遵循虚拟机“{1}”上网络接口“{0}”的服务质量设置。</value>
   </data>
@@ -1276,6 +1285,15 @@
   </data>
   <data name="Message.name-vcpu_qos_failed" xml:space="preserve">
     <value>VM vCPU QoS 失败</value>
+  </data>
+  <data name="Message.name-vdi_cbt_metadata_inconsistent" xml:space="preserve">
+    <value>由于元数据不一致，更改块跟踪被禁用</value>
+  </data>
+  <data name="Message.name-vdi_cbt_resize_failed" xml:space="preserve">
+    <value>由于调整虚拟磁盘大小失败，更改块跟踪被禁用</value>
+  </data>
+  <data name="Message.name-vdi_cbt_snapshot_failed" xml:space="preserve">
+    <value>由于快照失败，更改块跟踪被禁用</value>
   </data>
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM 网络接口 QoS 失败</value>

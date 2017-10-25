@@ -1076,6 +1076,15 @@
   <data name="Message.body-vcpu_qos_failed" xml:space="preserve">
     <value>仮想マシン '{1}' の VCPU '{0}' の QoS (サービス品質) 設定を適用できません。</value>
   </data>
+  <data name="Message.body-vdi_cbt_metadata_inconsistent" xml:space="preserve">
+    <value>一貫性のないメタデータによって仮想ディスク {0} で変更ブロック追跡が無効になりました。この仮想ディスクで変更ブロック追跡を使用し続けるには、変更ブロック追跡の再有効化、スナップショットの作成とそのバックアップの作成などを含むバックアップのセットアップを再度実行する必要があります。</value>
+  </data>
+  <data name="Message.body-vdi_cbt_resize_failed" xml:space="preserve">
+    <value>サイズ変更の失敗によって仮想ディスク {0} で変更ブロック追跡が無効になりました。この仮想ディスクで変更ブロック追跡を使用し続けるには、変更ブロック追跡の再有効化、スナップショットの作成とそのバックアップの作成などを含むバックアップのセットアップを再度実行する必要があります。</value>
+  </data>
+  <data name="Message.body-vdi_cbt_snapshot_failed" xml:space="preserve">
+    <value>スナップショット作成の失敗によって仮想ディスク {0} で変更ブロック追跡が無効になりました。この仮想ディスクで変更ブロック追跡を使用し続けるには、変更ブロック追跡の再有効化、スナップショットの作成とそのバックアップの作成などを含むバックアップのセットアップを再度実行する必要があります。</value>
+  </data>
   <data name="Message.body-vif_qos_failed" xml:space="preserve">
     <value>仮想マシン '{1}' のネットワーク インターフェイス '{0}' の QoS (サービス品質) 設定を適用できません。</value>
   </data>
@@ -1276,6 +1285,15 @@
   </data>
   <data name="Message.name-vcpu_qos_failed" xml:space="preserve">
     <value>VM vCPU QoS の失敗</value>
+  </data>
+  <data name="Message.name-vdi_cbt_metadata_inconsistent" xml:space="preserve">
+    <value>一貫性のないメタデータによって変更ブロック追跡が無効になりました</value>
+  </data>
+  <data name="Message.name-vdi_cbt_resize_failed" xml:space="preserve">
+    <value>サイズ変更の失敗によって仮想ディスクで変更ブロック追跡が無効になりました</value>
+  </data>
+  <data name="Message.name-vdi_cbt_snapshot_failed" xml:space="preserve">
+    <value>スナップショット作成の失敗によって変更ブロック追跡が無効になりました</value>
   </data>
   <data name="Message.name-vif_qos_failed" xml:space="preserve">
     <value>VM ネットワーク インターフェイス QoS の失敗</value>
