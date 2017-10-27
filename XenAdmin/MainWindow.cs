@@ -2859,7 +2859,7 @@ namespace XenAdmin
         /// </summary>
         private void UpdateHeader()
         {
-            ResetLicenseStatusTitleLabel();
+            bool licenseStatusTitleLabelHandled = false;
 
             if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
@@ -2875,6 +2875,7 @@ namespace XenAdmin
                 TitleLabel.Text = xenObject.NameWithLocation();
 
                 UpdateLicenseStatusTitleLabel(xenObject);
+                licenseStatusTitleLabelHandled = true;
 
                 TitleIcon.Image = Images.GetImage16For(xenObject);
                 // When in folder view only show the logged in label if it is clear to which connection the object belongs (most likely pools and hosts)
@@ -2890,6 +2891,9 @@ namespace XenAdmin
                 TitleIcon.Image = Properties.Resources.Logo;
                 loggedInLabel1.Connection = null;
             }
+
+            if (!licenseStatusTitleLabelHandled)
+                ResetLicenseStatusTitleLabel();
 
             SetTitleLabelMaxWidth();
         }
@@ -2910,6 +2914,7 @@ namespace XenAdmin
                     else
                     {
                         LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, pool.LicenseString());
+                        LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
                     }
                 }
             }
@@ -2927,15 +2932,22 @@ namespace XenAdmin
                     else
                     {
                         LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(host));
+                        LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
                     }
                 }
+            }
+            else
+            {
+                ResetLicenseStatusTitleLabel();
             }
         }
 
         private void ResetLicenseStatusTitleLabel()
         {
+            if (string.IsNullOrEmpty(LicenseStatusTitleLabel.Text))
+                return;
+
             LicenseStatusTitleLabel.Text = string.Empty;
-            LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
         }
 
         private void SetTitleLabelMaxWidth()
