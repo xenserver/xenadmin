@@ -112,6 +112,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanelBase);
+            this.HelpButton = false;
             this.Icon = global::XenAdmin.Properties.Resources.AppIcon;
             this.Name = "UsbUsageDialog";
             this.tableLayoutPanelBase.ResumeLayout(false);
