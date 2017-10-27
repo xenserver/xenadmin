@@ -2520,6 +2520,8 @@ namespace XenAdmin
                 return "TabPageDockerDetails" + modelObj;
             if (TheTabControl.SelectedTab == TabPagePvs)
                 return "TabPagePvs" + modelObj;
+            if (TheTabControl.SelectedTab == TabPageUSB)
+                return "TabPageUSB" + modelObj;
             return "TabPageUnknown";
         }
 

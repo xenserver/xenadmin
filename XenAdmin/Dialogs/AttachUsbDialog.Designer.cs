@@ -130,6 +130,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.HelpButton = false;
             this.Name = "AttachUsbDialog";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlert)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
