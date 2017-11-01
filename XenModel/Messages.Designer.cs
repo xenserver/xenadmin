@@ -35252,7 +35252,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Vendor: {0}; Product: {1}&quot;.
+        ///   Looks up a localized string similar to Vendor: {0}; Product: {1}.
         /// </summary>
         public static string USB_DEVICE_VENDOR_PRODUCT {
             get {
