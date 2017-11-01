@@ -12224,7 +12224,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>USB devices</value>
   </data>
   <data name="USB_DEVICE_VENDOR_PRODUCT" xml:space="preserve">
-    <value>"Vendor: {0}; Product: {1}"</value>
+    <value>Vendor: {0}; Product: {1}</value>
   </data>
   <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
     <value>1 device attached</value>
