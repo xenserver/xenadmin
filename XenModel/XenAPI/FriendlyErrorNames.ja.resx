@@ -741,6 +741,9 @@
   <data name="OUT_OF_SPACE" xml:space="preserve">
     <value>アップデートをアップロードするために必要な空き容量がありません。</value>
   </data>
+  <data name="PASSTHROUGH_NOT_ENABLED" xml:space="preserve">
+    <value>USB を VM にパススルーする前に、passthrough_enabled を true に設定する必要があります。</value>
+  </data>
   <data name="PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>アップデート {0} は適用済みです。</value>
   </data>
@@ -920,6 +923,9 @@
   </data>
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>プロビジョン コールは、通常の VM ではなくテンプレートでのみ呼び出すことができます。</value>
+  </data>
+  <data name="PUSB_VDI_CONFLICT" xml:space="preserve">
+    <value>この PUSB に対応する VDI には、既存の VBD があります。</value>
   </data>
   <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
     <value>PVS サイトには既にホスト用に構成されたキャッシュ ストレージが存在します。</value>
@@ -1664,6 +1670,9 @@
   <data name="TOO_MANY_STORAGE_MIGRATES" xml:space="preserve">
     <value>同時に移行可能な VM の最大数に達しました。</value>
   </data>
+  <data name="TOO_MANY_VUSBS" xml:space="preserve">
+    <value>VM にある VUSB の数が多すぎます。</value>
+  </data>
   <data name="TRANSPORT_PIF_NOT_CONFIGURED" xml:space="preserve">
     <value>トンネル トランスポート PIF に IP 構成が設定されていません。</value>
   </data>
@@ -1708,6 +1717,21 @@
   </data>
   <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
     <value>アップデートの事前チェックに失敗しました。サーバーのバージョンが正しくありません。</value>
+  </data>
+  <data name="USB_ALREADY_ATTACHED" xml:space="preserve">
+    <value>USB デバイスは現在 VM に接続されています。</value>
+  </data>
+  <data name="USB_GROUP_CONFLICT" xml:space="preserve">
+    <value>USB_groups には現在 1 つの VUSB しか割り当てることができないよう制限されています。</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_NO_PUSBS" xml:space="preserve">
+    <value>USB グループに PUSB が割り当てられていません。</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_PUSB" xml:space="preserve">
+    <value>USB グループにアクティブな PUSB が割り当てられているため、削除できません。</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_VUSB" xml:space="preserve">
+    <value>USB グループにアクティブな VUSB が割り当てられているため、削除できません。</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>この処理を実行できるのはローカルのスーパー ユーザーだけです。</value>
@@ -1901,6 +1925,9 @@
   <data name="VM_HAS_VGPU" xml:space="preserve">
     <value>VM に 仮想 GPU が割り当てられているため、この処理を実行できません。</value>
   </data>
+  <data name="VM_HAS_VUSBS" xml:space="preserve">
+    <value>VM に VUSB が割り当てられている場合、この操作は許可されません。</value>
+  </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>古いバージョンのホストをアップグレードするときにこの VM 処理は実行できません。</value>
   </data>
@@ -2008,6 +2035,9 @@
   </data>
   <data name="VM_REQUIRES_VGPU" xml:space="preserve">
     <value>使用可能な GPU がないため VM を起動できません。</value>
+  </data>
+  <data name="VM_REQUIRES_VUSB" xml:space="preserve">
+    <value>VUSB が必要なホスト上で VM を実行しようとすると、VM に必要な USB_group の任意の PUSBに VM を割り当てることができません。</value>
   </data>
   <data name="VM_REVERT_FAILED" xml:space="preserve">
     <value>仮想マシンをスナップショットの状態に復元するときにエラーが発生しました</value>
