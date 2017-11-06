@@ -3087,6 +3087,9 @@
     <Compile Include="RDP\MsRdpClient9.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RDP\MsRdpClient6.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ConsoleView\RdpClient.cs">
     </Compile>
     <Compile Include="PowerManagment.cs" />
