@@ -401,11 +401,19 @@ namespace XenAdmin.Wizards.GenericPages
                             }
                         }
 
+                        var items = new List<DelayLoadingOptionComboBoxItem>();
                         foreach (var host in Connection.Cache.Hosts)
                         {
-                            var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
+                            items.Add(new DelayLoadingOptionComboBoxItem(host, homeserverFilters));
+                        }
+                        items.Sort(new DelayLoadingOptionComboboxItemCompare());
+
+                        foreach (var item in items)
+                        {
                             item.LoadAndWait();
                             cb.Items.Add(item);
+
+                            var host = item.Item;
 
                             if ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
                                 (target != null && target.Item.opaque_ref == host.opaque_ref))
@@ -631,6 +639,18 @@ namespace XenAdmin.Wizards.GenericPages
                 xenConnection.CachePopulated -= xenConnection_CachePopulated;
                 xenConnection.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
             }
-        } 
+        }
+
+        /// <summary>
+        /// This class is an implementation of the 'IComparer' interface 
+        /// for sorting the ordering of hosts represented by a ComboBoxItem
+        /// </summary>
+        private class DelayLoadingOptionComboboxItemCompare : IComparer<DelayLoadingOptionComboBoxItem>
+        {
+            public int Compare(DelayLoadingOptionComboBoxItem x, DelayLoadingOptionComboBoxItem y)
+            {
+                return Core.StringUtility.NaturalCompare(x.ToString(), y.ToString());
+            }
+        }
 	}
 }
