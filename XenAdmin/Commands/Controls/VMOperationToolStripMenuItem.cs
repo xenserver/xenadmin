@@ -202,7 +202,10 @@ namespace XenAdmin.Commands
             });
 
             List<VMOperationToolStripMenuSubItem> dropDownItems = DropDownItems.Cast<VMOperationToolStripMenuSubItem>().ToList();
-            
+
+            // Adds the migrate wizard button, do this before the enable checks on the other items
+            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
+
             foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
             {
                 if (_isDropDownClosed)
@@ -228,8 +231,6 @@ namespace XenAdmin.Commands
                                                             });
                 }
             }
-
-            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
         }
 
         /// <summary>
