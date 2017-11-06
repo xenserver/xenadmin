@@ -73,9 +73,18 @@ namespace XenAdmin.Commands
             base.DropDownItems.Add(new ToolStripMenuItem());
         }
 
+        private bool _isDropDownClosed;
+
+        protected override void OnDropDownClosed(EventArgs e)
+        {
+            base.OnDropDownClosed(e);
+            _isDropDownClosed = true;
+        }
+
         protected override void OnDropDownOpening(EventArgs e)
         {
             base.DropDownItems.Clear();
+            _isDropDownClosed = false;
 
             // Work around bug in tool kit where disabled menu items show their dropdown menus
             if (!Enabled)
@@ -196,6 +205,12 @@ namespace XenAdmin.Commands
             
             foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
             {
+                if (_isDropDownClosed)
+                {
+                    // Stop making requests to assert can start on each host after dropdown is closed
+                    break;
+                }
+
                 Host host = item.Tag as Host;
                 if (host != null)
                 {
