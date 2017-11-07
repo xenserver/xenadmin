@@ -352,11 +352,9 @@ namespace XenAdmin.Wizards.GenericPages
                     if (cbCell == null)
                         return;
 
-                    List<IEnableableXenObjectComboBoxItem> list =
-                        cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>().ToList();
-
                     var item =
-                        list.FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
+                        cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>().ToList()
+                            .FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
                     if (item != null)
                         cbCell.Value = item;
                 }
