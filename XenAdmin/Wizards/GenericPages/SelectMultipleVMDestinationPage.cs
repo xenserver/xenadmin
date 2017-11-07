@@ -473,7 +473,7 @@ namespace XenAdmin.Wizards.GenericPages
 	        else
 	        {
 	            /* If we have a value, and it's enabled, then enable next button
-                 * This is hit when we step back (so have a default value), but at inital load all items are disabled. 
+                 * This is hit when we step back (so have a default value), but at initial load all items are disabled. 
                  * So when they're updated and hit this they don't trigger the normal enable because cb.value != null
                  */
 	            var value = (IEnableableComboBoxItem) cb.Value;
