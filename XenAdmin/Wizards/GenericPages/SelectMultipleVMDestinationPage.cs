@@ -350,7 +350,8 @@ namespace XenAdmin.Wizards.GenericPages
 
                     List<IEnableableXenObjectComboBoxItem> list =
                         cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>().ToList();
-                    IEnableableXenObjectComboBoxItem item =
+
+                    var item =
                         list.FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
                     if (item != null)
                         cbCell.Value = item;
@@ -404,13 +405,18 @@ namespace XenAdmin.Wizards.GenericPages
                         var items = new List<DelayLoadingOptionComboBoxItem>();
                         foreach (var host in Connection.Cache.Hosts)
                         {
-                            items.Add(new DelayLoadingOptionComboBoxItem(host, homeserverFilters));
+                            var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
+                            item.ReasonUpdated +=
+                                (sender, args) =>
+                                        Program.Invoke(Program.MainWindow, delegate { SetComboBoxPreSelection(cb); }); 
+                            items.Add(item);
+
                         }
                         items.Sort(new DelayLoadingOptionComboboxItemCompare());
 
                         foreach (var item in items)
                         {
-                            item.LoadAndWait();
+                            item.Load();
                             cb.Items.Add(item);
 
                             var host = item.Item;
@@ -454,10 +460,23 @@ namespace XenAdmin.Wizards.GenericPages
 	                    SetButtonNextEnabled(false);
 	                }
 	                else
+	                {
 	                    cb.Value = cb.Items.OfType<IEnableableComboBoxItem>().First(i => i.Enabled);
-	            }  
+	                    SetButtonNextEnabled(true);
+	                }
+	            }
 	            else
 	                SetButtonNextEnabled(false); //do not allow to leave the page if a vm has no target
+	        }
+	        else
+	        {
+	            /* If we have a value, and it's enabled, then enable next button
+                 * This is hit when we step back (so have a default value), but at inital load all items are disabled. 
+                 * So when they're updated and hit this they don't trigger the normal enable because cb.value != null
+                 */
+	            var value = (IEnableableComboBoxItem) cb.Value;
+                if (value.Enabled)
+                    SetButtonNextEnabled(true);
 	        }
 	    }
 
