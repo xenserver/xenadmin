@@ -245,7 +245,7 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 DelayLoadingOptionComboBoxItem tempItem = item as DelayLoadingOptionComboBoxItem;
                 if (tempItem != null)
-                    tempItem.ReasonUpdated -= DelayLoadedComboBoxItem_ReasonChanged;
+                    tempItem.ReasonChanged -= DelayLoadedComboBoxItem_ReasonChanged;
             }
             m_comboBoxConnection.Items.Clear();
         }
@@ -290,7 +290,7 @@ namespace XenAdmin.Wizards.GenericPages
 					{
                         item = CreateDelayLoadingOptionComboBoxItem(host);
                         m_comboBoxConnection.Items.Add(item);
-                        item.ReasonUpdated += DelayLoadedComboBoxItem_ReasonChanged;
+                        item.ReasonChanged += DelayLoadedComboBoxItem_ReasonChanged;
                         item.Load();
 					    host.PropertyChanged -= PropertyChanged;
 					    host.PropertyChanged += PropertyChanged;
@@ -300,7 +300,7 @@ namespace XenAdmin.Wizards.GenericPages
 				{
                     item = CreateDelayLoadingOptionComboBoxItem(pool);
                     m_comboBoxConnection.Items.Add(item);
-                    item.ReasonUpdated += DelayLoadedComboBoxItem_ReasonChanged;
+                    item.ReasonChanged += DelayLoadedComboBoxItem_ReasonChanged;
                     item.Load();
 			        pool.PropertyChanged -= PropertyChanged;
 			        pool.PropertyChanged += PropertyChanged;
@@ -408,7 +408,7 @@ namespace XenAdmin.Wizards.GenericPages
                         foreach (var host in Connection.Cache.Hosts)
                         {
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
-                            item.ReasonUpdated +=
+                            item.ReasonChanged +=
                                 (sender, args) =>
                                         Program.Invoke(Program.MainWindow, delegate { SetComboBoxPreSelection(cb); }); 
                             items.Add(item);
@@ -543,7 +543,7 @@ namespace XenAdmin.Wizards.GenericPages
                                                             if (tempItem.PreferAsSelectedItem)
                                                                 m_comboBoxConnection.SelectedItem = tempItem;
 
-                                                            item.ReasonUpdated -= DelayLoadedComboBoxItem_ReasonChanged;
+                                                            item.ReasonChanged -= DelayLoadedComboBoxItem_ReasonChanged;
                                                         });
             }
         }
