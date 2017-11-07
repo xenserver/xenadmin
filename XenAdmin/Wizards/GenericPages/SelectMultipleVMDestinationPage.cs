@@ -96,7 +96,6 @@ namespace XenAdmin.Wizards.GenericPages
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             SetDefaultTarget(ChosenItem);
-            Program.Invoke(Program.MainWindow, ClearComboBox);
             base.PageLeave(direction, ref cancel);
         }
 
@@ -262,6 +261,11 @@ namespace XenAdmin.Wizards.GenericPages
             m_dataGridView.Rows.Clear();
             m_dataGridView.Refresh();
         }
+
+	    protected bool ComboBoxEmpty()
+	    {
+	        return m_comboBoxConnection.Items.Count == 0;
+	    }
 
 		protected void PopulateComboBox()
 		{
