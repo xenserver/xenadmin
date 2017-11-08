@@ -361,6 +361,27 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
 
+	    private void HostSelectionComboBox_ReasonChanged(DelayLoadingOptionComboBoxItem item, DataGridViewComboBoxCell comboBox)
+	    {
+            int index = comboBox.Items.IndexOf(item);
+            if (index > -1 && index <= comboBox.Items.Count)
+            {
+                Program.Invoke(Program.MainWindow, delegate
+                {
+                    if (updatingDestinationCombobox || updatingHomeServerList)
+                        return;
+
+                    DelayLoadingOptionComboBoxItem tempItem =
+                        comboBox.Items[index] as DelayLoadingOptionComboBoxItem;
+                    if (tempItem == null)
+                        throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
+                    tempItem.CopyFrom(item);
+                    comboBox.Items.RemoveAt(index);
+                    comboBox.Items.Insert(index, tempItem);
+                });
+            }
+	    }
+
 	    private bool updatingHomeServerList;
 
         private void PopulateDataGridView(List<ReasoningFilter> homeserverFilters)
@@ -404,22 +425,37 @@ namespace XenAdmin.Wizards.GenericPages
                             }
                         }
 
+                        DelayLoadingOptionComboBoxItem.ReasonChangedEventHandler reasonChangedHandler = null;
+                        reasonChangedHandler = (sender, args) =>
+                        {
+                            var item = sender as DelayLoadingOptionComboBoxItem;
+                            if (item == null)
+                                throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
+
+                            try
+                            {
+                                HostSelectionComboBox_ReasonChanged(item, cb);
+                            }
+                            finally
+                            {
+                                item.ReasonChanged -= reasonChangedHandler;
+                            }
+                        };
+
                         var items = new List<DelayLoadingOptionComboBoxItem>();
+
                         foreach (var host in Connection.Cache.Hosts)
                         {
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
-                            item.ReasonChanged +=
-                                (sender, args) =>
-                                        Program.Invoke(Program.MainWindow, delegate { SetComboBoxPreSelection(cb); }); 
                             items.Add(item);
-
                         }
                         items.Sort(new DelayLoadingOptionComboboxItemCompare());
 
                         foreach (var item in items)
                         {
-                            item.Load();
                             cb.Items.Add(item);
+                            item.ReasonChanged += reasonChangedHandler;
+                            item.Load();
 
                             var host = item.Item;
 
