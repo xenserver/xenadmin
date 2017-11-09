@@ -18537,6 +18537,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The [Xenserver] Template that you are attempting to import already exists in the selected pool..
+        /// </summary>
+        public static string IMPORT_TEMPLATE_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("IMPORT_TEMPLATE_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure storage for the new template.
         /// </summary>
         public static string IMPORT_TEMPLATE_CONFIGURE_STORAGE {
