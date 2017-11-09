@@ -44,11 +44,11 @@ namespace XenAdmin.Wizards.GenericPages
 
     public class DelayLoadingOptionComboBoxItem : IEnableableXenObjectComboBoxItem
     {
-        public delegate void ReasonUpdatedEventHandler(object sender, EventArgs args);
+        public delegate void ReasonChangedEventHandler(object sender, EventArgs args);
         /// <summary>
         /// Event raised when the reason is updated
         /// </summary>
-        public event ReasonUpdatedEventHandler ReasonUpdated;
+        public event ReasonChangedEventHandler ReasonChanged;
         private string failureReason;
         private IXenObject xenObject;
         private const int defaultRetries = 10;
@@ -86,7 +86,7 @@ namespace XenAdmin.Wizards.GenericPages
         /// As the items are threaded they may exist and be disabled but required
         /// as a selected item if they load successfully.
         /// 
-        /// Use this in the event handler for the ReasonUpdated flag to find out
+        /// Use this in the event handler for the ReasonChanged flag to find out
         /// which item should be the selected one and thus which to 
         /// set in the combo box
         /// </summary>
@@ -147,8 +147,8 @@ namespace XenAdmin.Wizards.GenericPages
         /// <param name="e"></param>
         private void OnReasonChanged(EventArgs e)
         {
-            if (ReasonUpdated != null)
-                ReasonUpdated(this, e);
+            if (ReasonChanged != null)
+                ReasonChanged(this, e);
         }
 
         public bool Enabled { get; private set; }

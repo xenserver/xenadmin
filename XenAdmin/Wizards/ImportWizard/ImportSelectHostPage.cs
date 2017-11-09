@@ -102,7 +102,8 @@ namespace XenAdmin.Wizards.ImportWizard
                 }
             }
 
-            PopulateComboBox();
+            if(direction.Equals(PageLoadedDirection.Forward) || ComboBoxEmpty())
+                PopulateComboBox();
         }
 
         #endregion

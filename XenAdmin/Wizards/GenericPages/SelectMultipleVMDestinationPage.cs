@@ -96,7 +96,6 @@ namespace XenAdmin.Wizards.GenericPages
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
             SetDefaultTarget(ChosenItem);
-            Program.Invoke(Program.MainWindow, ClearComboBox);
             base.PageLeave(direction, ref cancel);
         }
 
@@ -246,7 +245,7 @@ namespace XenAdmin.Wizards.GenericPages
             {
                 DelayLoadingOptionComboBoxItem tempItem = item as DelayLoadingOptionComboBoxItem;
                 if (tempItem != null)
-                    tempItem.ReasonUpdated -= DelayLoadedComboBoxItem_ReasonChanged;
+                    tempItem.ReasonChanged -= DelayLoadedComboBoxItem_ReasonChanged;
             }
             m_comboBoxConnection.Items.Clear();
         }
@@ -262,6 +261,11 @@ namespace XenAdmin.Wizards.GenericPages
             m_dataGridView.Rows.Clear();
             m_dataGridView.Refresh();
         }
+
+	    protected bool ComboBoxEmpty()
+	    {
+	        return m_comboBoxConnection.Items.Count == 0;
+	    }
 
 		protected void PopulateComboBox()
 		{
@@ -286,7 +290,7 @@ namespace XenAdmin.Wizards.GenericPages
 					{
                         item = CreateDelayLoadingOptionComboBoxItem(host);
                         m_comboBoxConnection.Items.Add(item);
-                        item.ReasonUpdated += DelayLoadedComboBoxItem_ReasonChanged;
+                        item.ReasonChanged += DelayLoadedComboBoxItem_ReasonChanged;
                         item.Load();
 					    host.PropertyChanged -= PropertyChanged;
 					    host.PropertyChanged += PropertyChanged;
@@ -296,7 +300,7 @@ namespace XenAdmin.Wizards.GenericPages
 				{
                     item = CreateDelayLoadingOptionComboBoxItem(pool);
                     m_comboBoxConnection.Items.Add(item);
-                    item.ReasonUpdated += DelayLoadedComboBoxItem_ReasonChanged;
+                    item.ReasonChanged += DelayLoadedComboBoxItem_ReasonChanged;
                     item.Load();
 			        pool.PropertyChanged -= PropertyChanged;
 			        pool.PropertyChanged += PropertyChanged;
@@ -348,15 +352,35 @@ namespace XenAdmin.Wizards.GenericPages
                     if (cbCell == null)
                         return;
 
-                    List<IEnableableXenObjectComboBoxItem> list =
-                        cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>().ToList();
-                    IEnableableXenObjectComboBoxItem item =
-                        list.FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
+                    var item =
+                        cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>().ToList()
+                            .FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
                     if (item != null)
                         cbCell.Value = item;
                 }
             }
         }
+
+	    private void HostSelectionComboBox_ReasonChanged(DelayLoadingOptionComboBoxItem item, DataGridViewComboBoxCell comboBox)
+	    {
+            int index = comboBox.Items.IndexOf(item);
+            if (index > -1 && index <= comboBox.Items.Count)
+            {
+                Program.Invoke(Program.MainWindow, delegate
+                {
+                    if (updatingDestinationCombobox || updatingHomeServerList)
+                        return;
+
+                    DelayLoadingOptionComboBoxItem tempItem =
+                        comboBox.Items[index] as DelayLoadingOptionComboBoxItem;
+                    if (tempItem == null)
+                        throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
+                    tempItem.CopyFrom(item);
+                    comboBox.Items.RemoveAt(index);
+                    comboBox.Items.Insert(index, tempItem);
+                });
+            }
+	    }
 
 	    private bool updatingHomeServerList;
 
@@ -401,11 +425,39 @@ namespace XenAdmin.Wizards.GenericPages
                             }
                         }
 
+                        DelayLoadingOptionComboBoxItem.ReasonChangedEventHandler reasonChangedHandler = null;
+                        reasonChangedHandler = (sender, args) =>
+                        {
+                            var item = sender as DelayLoadingOptionComboBoxItem;
+                            if (item == null)
+                                throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
+
+                            try
+                            {
+                                HostSelectionComboBox_ReasonChanged(item, cb);
+                            }
+                            finally
+                            {
+                                item.ReasonChanged -= reasonChangedHandler;
+                            }
+                        };
+
+                        var items = new List<DelayLoadingOptionComboBoxItem>();
+
                         foreach (var host in Connection.Cache.Hosts)
                         {
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
-                            item.LoadAndWait();
+                            items.Add(item);
+                        }
+                        items.Sort(new DelayLoadingOptionComboboxItemCompare());
+
+                        foreach (var item in items)
+                        {
                             cb.Items.Add(item);
+                            item.ReasonChanged += reasonChangedHandler;
+                            item.Load();
+
+                            var host = item.Item;
 
                             if ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
                                 (target != null && target.Item.opaque_ref == host.opaque_ref))
@@ -446,10 +498,23 @@ namespace XenAdmin.Wizards.GenericPages
 	                    SetButtonNextEnabled(false);
 	                }
 	                else
+	                {
 	                    cb.Value = cb.Items.OfType<IEnableableComboBoxItem>().First(i => i.Enabled);
-	            }  
+	                    SetButtonNextEnabled(true);
+	                }
+	            }
 	            else
 	                SetButtonNextEnabled(false); //do not allow to leave the page if a vm has no target
+	        }
+	        else
+	        {
+	            /* If we have a value, and it's enabled, then enable next button
+                 * This is hit when we step back (so have a default value), but at initial load all items are disabled. 
+                 * So when they're updated and hit this they don't trigger the normal enable because cb.value != null
+                 */
+	            var value = (IEnableableComboBoxItem) cb.Value;
+                if (value.Enabled)
+                    SetButtonNextEnabled(true);
 	        }
 	    }
 
@@ -514,7 +579,7 @@ namespace XenAdmin.Wizards.GenericPages
                                                             if (tempItem.PreferAsSelectedItem)
                                                                 m_comboBoxConnection.SelectedItem = tempItem;
 
-                                                            item.ReasonUpdated -= DelayLoadedComboBoxItem_ReasonChanged;
+                                                            item.ReasonChanged -= DelayLoadedComboBoxItem_ReasonChanged;
                                                         });
             }
         }
@@ -631,6 +696,18 @@ namespace XenAdmin.Wizards.GenericPages
                 xenConnection.CachePopulated -= xenConnection_CachePopulated;
                 xenConnection.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
             }
-        } 
+        }
+
+        /// <summary>
+        /// This class is an implementation of the 'IComparer' interface 
+        /// for sorting the ordering of hosts represented by a ComboBoxItem
+        /// </summary>
+        private class DelayLoadingOptionComboboxItemCompare : IComparer<DelayLoadingOptionComboBoxItem>
+        {
+            public int Compare(DelayLoadingOptionComboBoxItem x, DelayLoadingOptionComboBoxItem y)
+            {
+                return Core.StringUtility.NaturalCompare(x.ToString(), y.ToString());
+            }
+        }
 	}
 }

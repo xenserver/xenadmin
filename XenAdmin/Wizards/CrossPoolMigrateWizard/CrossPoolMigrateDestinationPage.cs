@@ -63,7 +63,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         public override void PageLoaded(PageLoadedDirection direction)
         {
             base.PageLoaded(direction);
-            PopulateComboBox();
+            if (direction.Equals(PageLoadedDirection.Forward) || ComboBoxEmpty())
+                PopulateComboBox();
         }
 
         public override bool EnableNext()
