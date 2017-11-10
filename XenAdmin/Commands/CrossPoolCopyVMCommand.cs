@@ -57,15 +57,8 @@ namespace XenAdmin.Commands
         {
             var con = selection.GetConnectionOfFirstItem();
 
-            if (Helpers.FeatureForbidden(con, Host.RestrictCrossPoolMigrate))
-            {
-                ShowUpsellDialog(Parent);
-            }
-            else
-            {
-                MainWindowCommandInterface.ShowPerConnectionWizard(con,
-                    new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Copy));
-            }
+            MainWindowCommandInterface.ShowPerConnectionWizard(con,
+                new CrossPoolMigrateWizard(con, selection, preSelectedHost, WizardMode.Copy));
         }
 
         protected override bool CanExecute(VM vm)
