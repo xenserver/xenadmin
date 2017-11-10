@@ -990,6 +990,18 @@
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>正在将报告上载到 [Citrix] Insight Services</value>
   </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>已禁用 USB 直通功能</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLING" xml:space="preserve">
+    <value>正在对 {0} 禁用 USB 直通功能</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>已启用 USB 直通功能</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLING" xml:space="preserve">
+    <value>正在对 {0} 启用 USB 直通功能</value>
+  </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>已创建虚拟磁盘</value>
   </data>
@@ -1226,6 +1238,24 @@
   </data>
   <data name="ACTION_VM_TEMPLATIZING_TITLE" xml:space="preserve">
     <value>正在将 VM“{0}”转换为模板</value>
+  </data>
+  <data name="ACTION_VUSB_CREATED" xml:space="preserve">
+    <value>已连接 USB 设备</value>
+  </data>
+  <data name="ACTION_VUSB_CREATING" xml:space="preserve">
+    <value>正在将 USB 设备“{0}”连接到 VM“{1}”</value>
+  </data>
+  <data name="ACTION_VUSB_DELETED" xml:space="preserve">
+    <value>已分离 USB 设备</value>
+  </data>
+  <data name="ACTION_VUSB_DELETING" xml:space="preserve">
+    <value>正在将 USB 设备“{0}”与 VM“{1}”分离</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH" xml:space="preserve">
+    <value>分离 USB 设备</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
+    <value>是否确实要分离选定的 USB 设备?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
     <value>正在等待从属服务器恢复...</value>
@@ -3942,6 +3972,27 @@
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>正在扫描空闲设备位置</value>
   </data>
+  <data name="DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE" xml:space="preserve">
+    <value>无可用设备</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
+    <value>禁用直通功能</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
+    <value>启用直通功能</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
+    <value>是否确实要在此设备上启用直通功能? 这允许您将此设备传递到虚拟机。</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
+    <value>是否确实要在此设备上禁用直通功能? 不再允许将此设备传递到虚拟机。</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
+    <value>是，禁用直通功能(&amp;Y)</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_ENABLE" xml:space="preserve">
+    <value>是，启用直通功能(&amp;Y)</value>
+  </data>
   <data name="DISABLE" xml:space="preserve">
     <value>禁用(&amp;B)</value>
   </data>
@@ -5252,8 +5303,17 @@
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>功能已在注册表中禁用</value>
   </data>
+  <data name="FETCHED_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>已获取 VM {0} 的可能的主机</value>
+  </data>
+  <data name="FETCHING_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>正在获取 VM {0} 的可能的主机</value>
+  </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>下一部分(&amp;N)</value>
+  </data>
+  <data name="FETCH_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>获取 VM {0} 的可能的主机</value>
   </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>未找到 LUN。请验证硬件配置。</value>
@@ -7761,9 +7821,6 @@ SCSI ID: {2}
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
     <value>此 VM 可能不迁移，因为目标主机不具备此 VM 当前正在使用的某些 CPU 功能</value>
   </data>
-  <data name="MIGRATION_NOT_ALLOWED_GPU" xml:space="preserve">
-    <value>无法迁移该 VM，因为其包含专用的 GPU</value>
-  </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
     <value>无法迁移该 VM；其没有位于共享存储上</value>
   </data>
@@ -8911,6 +8968,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NOT_AGILE_VM_HAS_VGPU" xml:space="preserve">
     <value>VM 有一个或多个虚拟 GPU。无法保证重新启动。</value>
+  </data>
+  <data name="NOT_AGILE_VM_HAS_VUSB" xml:space="preserve">
+    <value>VM 连接了一个或多个 USB 设备。不能保证重新启动。</value>
   </data>
   <data name="NOT_APPLIED" xml:space="preserve">
     <value>未应用</value>
@@ -12143,6 +12203,39 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="URI_REGEX" xml:space="preserve">
     <value>^(http|https|file|ftp)://*</value>
+  </data>
+  <data name="USB" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="USBLIST_DISABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>禁用直通功能(&amp;D)</value>
+  </data>
+  <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>启用直通功能(&amp;E)</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_HA" xml:space="preserve">
+    <value>无法连接 USB 设备，因为 VM 当前受高可用性功能保护。</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_NOT_HALTED" xml:space="preserve">
+    <value>仅当 VM 关闭时才能连接 USB 设备。</value>
+  </data>
+  <data name="USB_DEVICES" xml:space="preserve">
+    <value>USB 设备</value>
+  </data>
+  <data name="USB_DEVICE_VENDOR_PRODUCT" xml:space="preserve">
+    <value>供应商: {0}；产品: {1}</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
+    <value>已连接 1 台设备</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_MULTIPLE_DEVICES" xml:space="preserve">
+    <value>已连接 {0} 台设备</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_NODEVICES" xml:space="preserve">
+    <value>未连接任何设备</value>
+  </data>
+  <data name="USB_EDIT_TEXT" xml:space="preserve">
+    <value>USB</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>[XenCenter] 无法以 {0} 身份为操作授权。有关详细信息，请参阅应用程序日志文件。</value>

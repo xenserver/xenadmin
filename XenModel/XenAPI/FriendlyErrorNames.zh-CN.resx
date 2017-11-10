@@ -741,6 +741,9 @@
   <data name="OUT_OF_SPACE" xml:space="preserve">
     <value>空间不足，无法上载更新</value>
   </data>
+  <data name="PASSTHROUGH_NOT_ENABLED" xml:space="preserve">
+    <value>将 USB 直通连接到 VM 之前，必须将 passthrough_enabled 设置为 true。</value>
+  </data>
   <data name="PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>已应用更新 {0}</value>
   </data>
@@ -920,6 +923,9 @@
   </data>
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>只能对模板(而非常规 VM)调用置备调用。</value>
+  </data>
+  <data name="PUSB_VDI_CONFLICT" xml:space="preserve">
+    <value>与此 PUSB 对应的 VDI 具有现有的 VBD。</value>
   </data>
   <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
     <value>PVS 站点已为主机配置缓存存储。</value>
@@ -1664,6 +1670,9 @@
   <data name="TOO_MANY_STORAGE_MIGRATES" xml:space="preserve">
     <value>您的并行迁移 VM 数已达最大值。</value>
   </data>
+  <data name="TOO_MANY_VUSBS" xml:space="preserve">
+    <value>VM 具有的 VUSB 太多。</value>
+  </data>
   <data name="TRANSPORT_PIF_NOT_CONFIGURED" xml:space="preserve">
     <value>隧道传输 PIF 未设置 IP 配置。</value>
   </data>
@@ -1708,6 +1717,21 @@
   </data>
   <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
     <value>更新预检查阶段失败: 服务器版本不正确。</value>
+  </data>
+  <data name="USB_ALREADY_ATTACHED" xml:space="preserve">
+    <value>USB 设备当前已连接到 VM。</value>
+  </data>
+  <data name="USB_GROUP_CONFLICT" xml:space="preserve">
+    <value>USB_groups 当前被限制为只能包含一个 VUSB。 </value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_NO_PUSBS" xml:space="preserve">
+    <value>USB 组不包含任何 PUSB。</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_PUSB" xml:space="preserve">
+    <value>USB 组包含活动的 PUSB，不能删除。</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_VUSB" xml:space="preserve">
+    <value>USB 组包含活动的 VUSB，不能删除。</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>只有本地超级用户才能执行此操作</value>
@@ -1901,6 +1925,9 @@
   <data name="VM_HAS_VGPU" xml:space="preserve">
     <value>无法执行此操作，因为 VM 具有一个或多个虚拟 GPU。</value>
   </data>
+  <data name="VM_HAS_VUSBS" xml:space="preserve">
+    <value>VM 具有 VUSB 时不允许执行此操作。</value>
+  </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
   </data>
@@ -2008,6 +2035,9 @@
   </data>
   <data name="VM_REQUIRES_VGPU" xml:space="preserve">
     <value>VM 无法启动，因为没有可用的 GPU</value>
+  </data>
+  <data name="VM_REQUIRES_VUSB" xml:space="preserve">
+    <value>您尝试在 VM 所需的 VUSB 不能在 VM 所需的 USB_group 中的任何 PUSB 上分配的主机上运行 VM。</value>
   </data>
   <data name="VM_REVERT_FAILED" xml:space="preserve">
     <value>将指定虚拟机还原到指定快照时出错</value>

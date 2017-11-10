@@ -2737,11 +2737,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on selected VMs</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on VM "{0}"</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on selected VMs</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -6512,6 +6512,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IMPORT_SOURCE_PAGE_TITLE" xml:space="preserve">
     <value>Locate the file you want to import</value>
   </data>
+  <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>The [Xenserver] Template that you are attempting to import already exists in the selected pool.</value>
+  </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new template</value>
   </data>
@@ -7821,9 +7824,6 @@ To learn more about the [XenServer] Live VDI Migration feature or to start a [Xe
   </data>
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
     <value>This VM may not migrate because the destination host does not have some of the CPU features that the VM is currently using</value>
-  </data>
-  <data name="MIGRATION_NOT_ALLOWED_GPU" xml:space="preserve">
-    <value>This VM may not migrate because it has a dedicated GPU</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
     <value>This VM may not migrate; it is not on shared storage</value>
@@ -12227,7 +12227,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>USB devices</value>
   </data>
   <data name="USB_DEVICE_VENDOR_PRODUCT" xml:space="preserve">
-    <value>"Vendor: {0}; Product: {1}"</value>
+    <value>Vendor: {0}; Product: {1}</value>
   </data>
   <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
     <value>1 device attached</value>

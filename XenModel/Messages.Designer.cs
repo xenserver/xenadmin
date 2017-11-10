@@ -18537,6 +18537,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The [Xenserver] Template that you are attempting to import already exists in the selected pool..
+        /// </summary>
+        public static string IMPORT_TEMPLATE_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("IMPORT_TEMPLATE_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure storage for the new template.
         /// </summary>
         public static string IMPORT_TEMPLATE_CONFIGURE_STORAGE {
@@ -22470,15 +22479,6 @@ namespace XenAdmin {
         public static string MIGRATION_NOT_ALLOWED_CPU_FEATURES {
             get {
                 return ResourceManager.GetString("MIGRATION_NOT_ALLOWED_CPU_FEATURES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This VM may not migrate because it has a dedicated GPU.
-        /// </summary>
-        public static string MIGRATION_NOT_ALLOWED_GPU {
-            get {
-                return ResourceManager.GetString("MIGRATION_NOT_ALLOWED_GPU", resourceCulture);
             }
         }
         
@@ -35261,7 +35261,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Vendor: {0}; Product: {1}&quot;.
+        ///   Looks up a localized string similar to Vendor: {0}; Product: {1}.
         /// </summary>
         public static string USB_DEVICE_VENDOR_PRODUCT {
             get {
