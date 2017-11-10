@@ -52,12 +52,12 @@ namespace XenAPI
             Free,
             PerSocket,     //Added in Clearwater (PR-1589)
             XenDesktop,    //Added in Clearwater (PR-1589) and is new form of "EnterpriseXD"
-            EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
-            EnterprisePerUser,     // Added in Creedence (enterprise-per-user)
             StandardPerSocket,     // Added in Creedence (standard-per-socket)
             Desktop,               // Added in Creedence (desktop)
-            DesktopPlus,           // Added in Creedence (desktop-plus)
             Standard,              // Added in Dundee/Violet (standard)
+            EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
+            EnterprisePerUser,     // Added in Creedence (enterprise-per-user)
+            DesktopPlus,           // Added in Creedence (desktop-plus)
             Premium                // Added in Indigo (premium)
         }
 
