@@ -38,6 +38,7 @@ using XenAdmin.Core;
 using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Dialogs;
+using System.Text;
 
 
 namespace XenAdmin.Commands
@@ -135,6 +136,7 @@ namespace XenAdmin.Commands
                 List<Host> hosts = GetSelection().AsXenObjects<Host>();
                 bool hasRunningVMs = false;
                 var hciHosts = new List<Host>();
+                var poolMasters = new List<Host>();
 
                 foreach (Host h in hosts)
                 {
@@ -143,21 +145,40 @@ namespace XenAdmin.Commands
 
                     if (h.Connection.ResolveAll(h.resident_VMs).Exists(v => v.HciWarnBeforeShutdown()))
                         hciHosts.Add(h);
+
+                    if (Helpers.HostIsMaster(h) && h.Connection.Cache.HostCount > 1)
+                        poolMasters.Add(h);
                 }
 
+                StringBuilder sb = new StringBuilder();
+
                 if (hciHosts.Count > 0)
-                    return hciHosts.Count == 1
-                        ? string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name())
-                        : string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name())));
+                    sb = hciHosts.Count == 1
+                        ? sb.AppendFormat(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name())
+                        : sb.AppendFormat(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name())));
 
-                if (hasRunningVMs)
-                    return hosts.Count == 1
-                        ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name())
-                        : Messages.CONFIRM_SHUTDOWN_SERVERS;
+                else if (hasRunningVMs)
+                    sb = hosts.Count == 1
+                        ? sb.AppendFormat(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name())
+                        : sb.Append(Messages.CONFIRM_SHUTDOWN_SERVERS);
 
-                return hosts.Count == 1
-                    ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name())
-                    : Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS;
+                else sb = hosts.Count == 1
+                    ? sb.AppendFormat(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name())
+                    : sb.Append(Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS);
+
+                if (poolMasters.Count == 1)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine();
+                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_MASTER_SINGLE, poolMasters[0].Name());
+                }
+                else if (poolMasters.Count > 1)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine();
+                    sb.AppendFormat(Messages.SHUT_DOWN_POOL_MASTER_MULTIPLE, string.Join(", ", poolMasters.Select(h => h.Name())));
+                }
+                return sb.ToString();
             }
         }
 

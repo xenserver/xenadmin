@@ -31110,6 +31110,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} are pool masters. It is strongly recommended to nominate a new master for each affected pool before proceeding..
+        /// </summary>
+        public static string SHUT_DOWN_POOL_MASTER_MULTIPLE {
+            get {
+                return ResourceManager.GetString("SHUT_DOWN_POOL_MASTER_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is the pool master. It is strongly recommended to nominate a new master for the pool before proceeding..
+        /// </summary>
+        public static string SHUT_DOWN_POOL_MASTER_SINGLE {
+            get {
+                return ResourceManager.GetString("SHUT_DOWN_POOL_MASTER_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shut down.
         /// </summary>
         public static string SHUTDOWN {
