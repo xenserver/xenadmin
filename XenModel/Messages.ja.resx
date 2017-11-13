@@ -2741,11 +2741,11 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。[XenCenter] から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>選択した VM の 変更ブロック追跡を無効化</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>VM "{0}" の変更ブロック追跡を無効化</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>選択した VM の 変更ブロック追跡を無効化</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>選択したプールのヘルス チェックを無効にしてもよろしいですか?</value>
@@ -6516,6 +6516,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_TITLE" xml:space="preserve">
     <value>インポートするファイルの指定</value>
+  </data>
+  <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>インポートしようとしている [Xenserver] テンプレートは既に選択したプールに存在します。</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>新規テンプレートのストレージを構成してください</value>

@@ -2737,11 +2737,11 @@
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>此操作将在选定 VM 的磁盘上禁用更改块跟踪。如果要使用任何第三方解决方案备份这些 VM，这些磁盘将受到影响。请注意，无法再次从 [XenCenter] 启用更改块跟踪。是否要继续?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>在选定 VM 上禁用更改块跟踪</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>在 VM“{0}”上禁用更改块跟踪</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>在选定 VM 上禁用更改块跟踪</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>是否确实要在选定的池上禁用运行状况检查?</value>
@@ -6510,6 +6510,9 @@
   </data>
   <data name="IMPORT_SOURCE_PAGE_TITLE" xml:space="preserve">
     <value>查找要导入的文件</value>
+  </data>
+  <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>您正在尝试导入的 [Xenserver] 模板已存在于所选池中。</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>配置新模板的存储</value>
