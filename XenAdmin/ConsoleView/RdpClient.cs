@@ -50,6 +50,8 @@ namespace XenAdmin.ConsoleView
 
         private readonly ContainerControl parent;
 
+        public bool needsRdpVersionWarning = false;
+
         /// <summary>
         /// http://msdn2.microsoft.com/en-us/library/aa383022(VS.85).aspx
         /// </summary>
@@ -81,15 +83,18 @@ namespace XenAdmin.ConsoleView
                 // MsRdpClient8 control cannot be created (there is no appropriate version of dll present)
                 parent.Controls.Add(rdpControl);
                 allowDisplayUpdate = true;
+                needsRdpVersionWarning = false;
             }
             catch
             {
+                //any problems: fall back without thinking too much
                 if (parent.Controls.Contains(rdpControl))
                     parent.Controls.Remove(rdpControl);
                 rdpClient9 = null;
                 rdpControl = rdpClient6 = new MsRdpClient6();
                 RDPConfigure(size);
                 parent.Controls.Add(rdpControl);
+                needsRdpVersionWarning = true;
             }
             rdpControl.Resize += resizeHandler;
         }
