@@ -11286,6 +11286,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled autostart on VM &apos;{0}&apos;.
+        /// </summary>
+        public static string DISABLED_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("DISABLED_AUTOSTART_ON_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No updates found because automatic checking for updates is disabled..
         /// </summary>
         public static string DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING {
@@ -13581,6 +13590,15 @@ namespace XenAdmin {
         public static string ENABLED {
             get {
                 return ResourceManager.GetString("ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled autostart on VM &apos;{0}&apos;.
+        /// </summary>
+        public static string ENABLED_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ENABLED_AUTOSTART_ON_VM", resourceCulture);
             }
         }
         

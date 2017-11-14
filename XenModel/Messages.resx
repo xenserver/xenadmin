@@ -4000,6 +4000,9 @@ This will also delete its subfolders.</value>
   <data name="DISABLED" xml:space="preserve">
     <value>Disabled</value>
   </data>
+  <data name="DISABLED_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>Disabled autostart on VM '{0}'</value>
+  </data>
   <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
     <value>No updates found because automatic checking for updates is disabled.</value>
   </data>
@@ -4777,6 +4780,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Enabled</value>
+  </data>
+  <data name="ENABLED_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>Enabled autostart on VM '{0}'</value>
   </data>
   <data name="ENABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' enabled.</value>
