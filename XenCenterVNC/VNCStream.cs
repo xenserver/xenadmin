@@ -107,7 +107,7 @@ namespace DotNetVnc
         /// This event will be fired when an error occurs.  The helper thread is guaranteed to be
         /// closing down at this point.
         /// </summary>
-        public event XenAdmin.ExceptionEventHandler ErrorOccurred = null;
+        public event Action<object,Exception> ErrorOccurred = null;
 
         public event EventHandler ConnectionSuccess = null;
 
