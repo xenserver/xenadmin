@@ -117,6 +117,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._port, other._port);
         }
 
+        internal static List<SDN_controller> ProxyArrayToObjectList(Proxy_SDN_controller[] input)
+        {
+            var result = new List<SDN_controller>();
+            foreach (var item in input)
+                result.Add(new SDN_controller(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, SDN_controller server)
         {
             if (opaqueRef == null)

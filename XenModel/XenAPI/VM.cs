@@ -672,6 +672,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._reference_label, other._reference_label);
         }
 
+        internal static List<VM> ProxyArrayToObjectList(Proxy_VM[] input)
+        {
+            var result = new List<VM>();
+            foreach (var item in input)
+                result.Add(new VM(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VM server)
         {
             if (opaqueRef == null)
@@ -3338,6 +3347,40 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Migrate the VM to another host.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a Host.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in Unreleased.</param>
+        public static XenRef<VM> migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+        }
+
+        /// <summary>
+        /// Migrate the VM to another host.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a Host.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in Unreleased.</param>
+        public static XenRef<Task> async_migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+        }
+
+        /// <summary>
         /// Assert whether a VM can be migrated to the specified destination.
         /// First published in XenServer 6.1.
         /// </summary>
@@ -3370,11 +3413,47 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns a record describing the VM's dynamic state, initialised when the VM boots and updated to reflect runtime configuration changes e.g. CPU hotplug
-        /// First published in XenServer 4.0.
+        /// Assert whether a VM can be migrated to the specified destination.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a VM.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in Unreleased.</param>
+        public static void assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            session.proxy.vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse();
+        }
+
+        /// <summary>
+        /// Assert whether a VM can be migrated to the specified destination.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a VM.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in Unreleased.</param>
+        public static XenRef<Task> async_assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+        }
+
+        /// <summary>
+        /// Returns a record describing the VM's dynamic state, initialised when the VM boots and updated to reflect runtime configuration changes e.g. CPU hotplug
+        /// First published in XenServer 4.0.
+        /// Deprecated since Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("Unreleased")]
         public static VM get_boot_record(Session session, string _vm)
         {
             return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.uuid, _vm ?? "").parse());
@@ -3388,7 +3467,7 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<Data_source> get_data_sources(Session session, string _vm)
         {
-            return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.vm_get_data_sources(session.uuid, _vm ?? "").parse());
+            return Data_source.ProxyArrayToObjectList(session.proxy.vm_get_data_sources(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>

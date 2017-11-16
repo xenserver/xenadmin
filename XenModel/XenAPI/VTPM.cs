@@ -110,6 +110,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._backend, other._backend);
         }
 
+        internal static List<VTPM> ProxyArrayToObjectList(Proxy_VTPM[] input)
+        {
+            var result = new List<VTPM>();
+            foreach (var item in input)
+                result.Add(new VTPM(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VTPM server)
         {
             if (opaqueRef == null)

@@ -493,6 +493,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The IGMP Snooping setting cannot be applied for some of the host, network(s)..
+        /// </summary>
+        public static string COULD_NOT_UPDATE_IGMP_SNOOPING_EVERYWHERE {
+            get {
+                return ResourceManager.GetString("COULD_NOT_UPDATE_IGMP_SNOOPING_EVERYWHERE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The CPU does not support masking of features..
         /// </summary>
         public static string CPU_FEATURE_MASKING_NOT_SUPPORTED {
@@ -1771,6 +1780,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You tried to add a purpose to a network but the new purpose is not compatible with an existing purpose of the network or other networks..
+        /// </summary>
+        public static string NETWORK_INCOMPATIBLE_PURPOSES {
+            get {
+                return ResourceManager.GetString("NETWORK_INCOMPATIBLE_PURPOSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The network is not managed by xapi..
         /// </summary>
         public static string NETWORK_UNMANAGED {
@@ -1843,6 +1861,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nvidia tools error. Please ensure that the latest Nvidia tools are installed.
+        /// </summary>
+        public static string NVIDIA_TOOLS_ERROR {
+            get {
+                return ResourceManager.GetString("NVIDIA_TOOLS_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified object no longer exists..
         /// </summary>
         public static string OBJECT_NOLONGER_EXISTS {
@@ -1911,6 +1938,15 @@ namespace XenAPI {
         public static string OUT_OF_SPACE {
             get {
                 return ResourceManager.GetString("OUT_OF_SPACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The passthrough_enabled must be true before passthrough usb to vm..
+        /// </summary>
+        public static string PASSTHROUGH_NOT_ENABLED {
+            get {
+                return ResourceManager.GetString("PASSTHROUGH_NOT_ENABLED", resourceCulture);
             }
         }
         
@@ -2451,6 +2487,15 @@ namespace XenAPI {
         public static string PROVISION_ONLY_ALLOWED_ON_TEMPLATE {
             get {
                 return ResourceManager.GetString("PROVISION_ONLY_ALLOWED_ON_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The VDI corresponding to this PUSB has existing VBDs..
+        /// </summary>
+        public static string PUSB_VDI_CONFLICT {
+            get {
+                return ResourceManager.GetString("PUSB_VDI_CONFLICT", resourceCulture);
             }
         }
         
@@ -3369,6 +3414,24 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Given SMB version is not allowed. Choose either 1.0 or 3.0.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_227 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_227", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Require &quot;-o&quot; along with xe-mount-isosr.
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_228 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_228", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified VDI is currently in use.
         /// </summary>
         public static string SR_BACKEND_FAILURE_24 {
@@ -3923,6 +3986,15 @@ namespace XenAPI {
         public static string SR_BACKEND_FAILURE_46 {
             get {
                 return ResourceManager.GetString("SR_BACKEND_FAILURE_46", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to calculate changed blocks for given VDIs..
+        /// </summary>
+        public static string SR_BACKEND_FAILURE_460 {
+            get {
+                return ResourceManager.GetString("SR_BACKEND_FAILURE_460", resourceCulture);
             }
         }
         
@@ -4647,6 +4719,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The VM has too many VUSBs..
+        /// </summary>
+        public static string TOO_MANY_VUSBS {
+            get {
+                return ResourceManager.GetString("TOO_MANY_VUSBS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The tunnel transport PIF has no IP configuration set..
         /// </summary>
         public static string TRANSPORT_PIF_NOT_CONFIGURED {
@@ -4778,6 +4859,51 @@ namespace XenAPI {
         public static string UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION {
             get {
                 return ResourceManager.GetString("UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The USB device is currently attached to a VM..
+        /// </summary>
+        public static string USB_ALREADY_ATTACHED {
+            get {
+                return ResourceManager.GetString("USB_ALREADY_ATTACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USB_groups are currently restricted to contain no more than one VUSB..
+        /// </summary>
+        public static string USB_GROUP_CONFLICT {
+            get {
+                return ResourceManager.GetString("USB_GROUP_CONFLICT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The USB group does not contain any PUSBs..
+        /// </summary>
+        public static string USB_GROUP_CONTAINS_NO_PUSBS {
+            get {
+                return ResourceManager.GetString("USB_GROUP_CONTAINS_NO_PUSBS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The USB group contains active PUSBs and cannot be deleted..
+        /// </summary>
+        public static string USB_GROUP_CONTAINS_PUSB {
+            get {
+                return ResourceManager.GetString("USB_GROUP_CONTAINS_PUSB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The USB group contains active VUSBs and cannot be deleted..
+        /// </summary>
+        public static string USB_GROUP_CONTAINS_VUSB {
+            get {
+                return ResourceManager.GetString("USB_GROUP_CONTAINS_VUSB", resourceCulture);
             }
         }
         
@@ -5079,6 +5205,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The VGPU is not compatible with any PGPU in the destination..
+        /// </summary>
+        public static string VGPU_DESTINATION_INCOMPATIBLE {
+            get {
+                return ResourceManager.GetString("VGPU_DESTINATION_INCOMPATIBLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VM cannot start because all GPUs are fully used or are running other types of virtual GPU.
         /// </summary>
         public static string VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE {
@@ -5196,7 +5331,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The BIOS strings for this VM have already been set and cannot be changed anymore..
+        ///   Looks up a localized string similar to The BIOS strings for this VM have already been set and cannot be changed..
         /// </summary>
         public static string VM_BIOS_STRINGS_ALREADY_SET {
             get {
@@ -5322,6 +5457,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The operation is not allowed when the VM has VUSBs..
+        /// </summary>
+        public static string VM_HAS_VUSBS {
+            get {
+                return ResourceManager.GetString("VM_HAS_VUSBS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This VM operation cannot be performed on an older-versioned host during an upgrade..
         /// </summary>
         public static string VM_HOST_INCOMPATIBLE_VERSION {
@@ -5331,7 +5475,7 @@ namespace XenAPI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You attempted to migrate a VM to a destination host running a version of XenServer older than the source host..
+        ///   Looks up a localized string similar to You attempted to migrate a VM to a destination host which is older than the source host..
         /// </summary>
         public static string VM_HOST_INCOMPATIBLE_VERSION_MIGRATE {
             get {
@@ -5642,6 +5786,15 @@ namespace XenAPI {
         public static string VM_REQUIRES_VGPU {
             get {
                 return ResourceManager.GetString("VM_REQUIRES_VGPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You attempted to run a VM on a host on which the VUSB required by the VM cannot be allocated on any PUSBs in the USB_group needed by the VM..
+        /// </summary>
+        public static string VM_REQUIRES_VUSB {
+            get {
+                return ResourceManager.GetString("VM_REQUIRES_VUSB", resourceCulture);
             }
         }
         

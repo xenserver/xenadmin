@@ -210,6 +210,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._backtrace, other._backtrace);
         }
 
+        internal static List<Task> ProxyArrayToObjectList(Proxy_Task[] input)
+        {
+            var result = new List<Task>();
+            foreach (var item in input)
+                result.Add(new Task(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Task server)
         {
             if (opaqueRef == null)

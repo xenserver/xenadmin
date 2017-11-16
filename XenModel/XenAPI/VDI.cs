@@ -315,6 +315,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled);
         }
 
+        internal static List<VDI> ProxyArrayToObjectList(Proxy_VDI[] input)
+        {
+            var result = new List<VDI>();
+            foreach (var item in input)
+                result.Add(new VDI(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VDI server)
         {
             if (opaqueRef == null)
@@ -1794,7 +1803,7 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<Vdi_nbd_server_info> get_nbd_info(Session session, string _vdi)
         {
-            return Helper.Proxy_Vdi_nbd_server_infoArrayToVdi_nbd_server_infoList(session.proxy.vdi_get_nbd_info(session.uuid, _vdi ?? "").parse());
+            return Vdi_nbd_server_info.ProxyArrayToObjectList(session.proxy.vdi_get_nbd_info(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>

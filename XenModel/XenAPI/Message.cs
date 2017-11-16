@@ -300,6 +300,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._body, other._body);
         }
 
+        internal static List<Message> ProxyArrayToObjectList(Proxy_Message[] input)
+        {
+            var result = new List<Message>();
+            foreach (var item in input)
+                result.Add(new Message(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Message server)
         {
             if (opaqueRef == null)

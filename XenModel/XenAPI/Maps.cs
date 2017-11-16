@@ -931,6 +931,53 @@ namespace XenAPI
             return result;
         }
 
+        internal static Dictionary<XenRef<VGPU>, XenRef<GPU_group>>
+        convert_from_proxy_XenRefVGPU_XenRefGPU_group(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<XenRef<VGPU>, XenRef<GPU_group>> result = new Dictionary<XenRef<VGPU>, XenRef<GPU_group>>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        XenRef<VGPU> k = XenRef<VGPU>.Create(key);
+                        XenRef<GPU_group> v = table[key] == null ? null : XenRef<GPU_group>.Create(table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable
+        convert_to_proxy_XenRefVGPU_XenRefGPU_group(Dictionary<XenRef<VGPU>, XenRef<GPU_group>> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (XenRef<VGPU> key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key ?? "";
+                        string v = table[key] ?? "";
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
         internal static Dictionary<XenRef<VGPU_type>, long>
         convert_from_proxy_XenRefVGPU_type_long(Object o)
         {

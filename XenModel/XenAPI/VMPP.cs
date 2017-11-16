@@ -229,6 +229,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._recent_alerts, other._recent_alerts);
         }
 
+        internal static List<VMPP> ProxyArrayToObjectList(Proxy_VMPP[] input)
+        {
+            var result = new List<VMPP>();
+            foreach (var item in input)
+                result.Add(new VMPP(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VMPP server)
         {
             if (opaqueRef == null)

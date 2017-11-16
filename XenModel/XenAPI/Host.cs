@@ -483,6 +483,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._features, other._features);
         }
 
+        internal static List<Host> ProxyArrayToObjectList(Proxy_Host[] input)
+        {
+            var result = new List<Host>();
+            foreach (var item in input)
+                result.Add(new Host(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Host server)
         {
             if (opaqueRef == null)
@@ -1814,7 +1823,7 @@ namespace XenAPI
         /// <param name="_host">The opaque_ref of the given host</param>
         public static List<Data_source> get_data_sources(Session session, string _host)
         {
-            return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.host_get_data_sources(session.uuid, _host ?? "").parse());
+            return Data_source.ProxyArrayToObjectList(session.proxy.host_get_data_sources(session.uuid, _host ?? "").parse());
         }
 
         /// <summary>
