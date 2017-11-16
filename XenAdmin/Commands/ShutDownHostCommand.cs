@@ -151,20 +151,24 @@ namespace XenAdmin.Commands
                 }
 
                 StringBuilder sb = new StringBuilder();
+                string firstWarning;
+
 
                 if (hciHosts.Count > 0)
-                    sb = hciHosts.Count == 1
-                        ? sb.AppendFormat(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name())
-                        : sb.AppendFormat(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name())));
+                    firstWarning = hciHosts.Count == 1
+                        ? firstWarning = string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name())
+                        : firstWarning = string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name())));
 
                 else if (hasRunningVMs)
-                    sb = hosts.Count == 1
-                        ? sb.AppendFormat(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name())
-                        : sb.Append(Messages.CONFIRM_SHUTDOWN_SERVERS);
+                    firstWarning = hosts.Count == 1
+                        ? firstWarning = string.Format(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name())
+                        : firstWarning = Messages.CONFIRM_SHUTDOWN_SERVERS;
 
-                else sb = hosts.Count == 1
-                    ? sb.AppendFormat(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name())
-                    : sb.Append(Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS);
+                else firstWarning = hosts.Count == 1
+                    ? firstWarning = string.Format(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name())
+                    : firstWarning = Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS;
+
+                sb.Append(firstWarning);
 
                 if (poolMasters.Count == 1)
                 {
