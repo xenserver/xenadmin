@@ -36,7 +36,7 @@ using System.Threading;
 using System.IO;
 using System.Xml;
 
-using Citrix.XenCenter;
+using XenCenterLib;
 using XenAPI;
 
 using XenAdmin.Core;

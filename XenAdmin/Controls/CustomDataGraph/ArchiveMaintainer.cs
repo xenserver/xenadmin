@@ -39,7 +39,7 @@ using System.Net;
 using System.Threading;
 using System.Xml;
 
-using Citrix.XenCenter;
+using XenCenterLib;
 using XenAPI;
 using XenAdmin.Core;
 

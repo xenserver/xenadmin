@@ -33,16 +33,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Net;
-using System.Text;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
 using XenAdmin.CustomFields;
 using XenAPI;
-using Citrix.XenCenter;
-
+using XenCenterLib;
 using XenAdmin.Core;
 using XenAdmin.Network;
 

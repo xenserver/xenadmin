@@ -36,7 +36,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using XenAPI;
-using Citrix.XenCenter;
+using XenCenterLib;
 using XenAdmin.Core;
 
 namespace XenAdmin.Plugins
