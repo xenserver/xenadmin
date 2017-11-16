@@ -2164,6 +2164,14 @@ namespace XenAPI
         Response<string>
         async_vm_migrate_send(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options);
 
+        [XmlRpcMethod("VM.migrate_send")]
+        Response<string>
+        vm_migrate_send(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options, Object _vgpu_map);
+
+        [XmlRpcMethod("Async.VM.migrate_send")]
+        Response<string>
+        async_vm_migrate_send(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options, Object _vgpu_map);
+
         [XmlRpcMethod("VM.assert_can_migrate")]
         Response<string>
         vm_assert_can_migrate(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options);
@@ -2171,6 +2179,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.assert_can_migrate")]
         Response<string>
         async_vm_assert_can_migrate(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options);
+
+        [XmlRpcMethod("VM.assert_can_migrate")]
+        Response<string>
+        vm_assert_can_migrate(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options, Object _vgpu_map);
+
+        [XmlRpcMethod("Async.VM.assert_can_migrate")]
+        Response<string>
+        async_vm_assert_can_migrate(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options, Object _vgpu_map);
 
         [XmlRpcMethod("VM.get_boot_record")]
         Response<Proxy_VM>
@@ -6968,6 +6984,10 @@ namespace XenAPI
         Response<bool>
         pgpu_get_is_system_display_device(string session, string _pgpu);
 
+        [XmlRpcMethod("PGPU.get_compatibility_metadata")]
+        Response<Object>
+        pgpu_get_compatibility_metadata(string session, string _pgpu);
+
         [XmlRpcMethod("PGPU.set_other_config")]
         Response<string>
         pgpu_set_other_config(string session, string _pgpu, Object _other_config);
@@ -7191,6 +7211,10 @@ namespace XenAPI
         [XmlRpcMethod("VGPU.get_resident_on")]
         Response<string>
         vgpu_get_resident_on(string session, string _vgpu);
+
+        [XmlRpcMethod("VGPU.get_scheduled_to_be_resident_on")]
+        Response<string>
+        vgpu_get_scheduled_to_be_resident_on(string session, string _vgpu);
 
         [XmlRpcMethod("VGPU.set_other_config")]
         Response<string>
@@ -8743,6 +8767,7 @@ namespace XenAPI
         public Object supported_VGPU_max_capacities;
         public string dom0_access;
         public bool is_system_display_device;
+        public Object compatibility_metadata;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8771,6 +8796,7 @@ namespace XenAPI
         public Object other_config;
         public string type;
         public string resident_on;
+        public string scheduled_to_be_resident_on;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

@@ -131,6 +131,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<USB_group> ProxyArrayToObjectList(Proxy_USB_group[] input)
+        {
+            var result = new List<USB_group>();
+            foreach (var item in input)
+                result.Add(new USB_group(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, USB_group server)
         {
             if (opaqueRef == null)

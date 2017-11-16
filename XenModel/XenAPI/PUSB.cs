@@ -180,6 +180,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<PUSB> ProxyArrayToObjectList(Proxy_PUSB[] input)
+        {
+            var result = new List<PUSB>();
+            foreach (var item in input)
+                result.Add(new PUSB(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, PUSB server)
         {
             if (opaqueRef == null)

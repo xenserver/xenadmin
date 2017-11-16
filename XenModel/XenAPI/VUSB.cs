@@ -140,6 +140,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._currently_attached, other._currently_attached);
         }
 
+        internal static List<VUSB> ProxyArrayToObjectList(Proxy_VUSB[] input)
+        {
+            var result = new List<VUSB>();
+            foreach (var item in input)
+                result.Add(new VUSB(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VUSB server)
         {
             if (opaqueRef == null)

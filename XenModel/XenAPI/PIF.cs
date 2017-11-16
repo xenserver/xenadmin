@@ -313,6 +313,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._igmp_snooping_status, other._igmp_snooping_status);
         }
 
+        internal static List<PIF> ProxyArrayToObjectList(Proxy_PIF[] input)
+        {
+            var result = new List<PIF>();
+            foreach (var item in input)
+                result.Add(new PIF(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, PIF server)
         {
             if (opaqueRef == null)

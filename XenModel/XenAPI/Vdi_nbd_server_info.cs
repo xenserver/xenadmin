@@ -124,6 +124,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._subject, other._subject);
         }
 
+        internal static List<Vdi_nbd_server_info> ProxyArrayToObjectList(Proxy_Vdi_nbd_server_info[] input)
+        {
+            var result = new List<Vdi_nbd_server_info>();
+            foreach (var item in input)
+                result.Add(new Vdi_nbd_server_info(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Vdi_nbd_server_info server)
         {
             if (opaqueRef == null)
@@ -209,7 +218,7 @@ namespace XenAPI
         private string _cert;
 
         /// <summary>
-        /// For convenience, this redundant field holds a subject of the certificate.
+        /// For convenience, this redundant field holds a DNS (hostname) subject of the certificate. This can be a wildcard, but only for a certificate that has a wildcard subject and no concrete hostname subjects.
         /// </summary>
         public virtual string subject
         {

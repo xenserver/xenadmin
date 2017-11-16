@@ -343,6 +343,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._igmp_snooping_enabled, other._igmp_snooping_enabled);
         }
 
+        internal static List<Pool> ProxyArrayToObjectList(Proxy_Pool[] input)
+        {
+            var result = new List<Pool>();
+            foreach (var item in input)
+                result.Add(new Pool(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
         {
             if (opaqueRef == null)

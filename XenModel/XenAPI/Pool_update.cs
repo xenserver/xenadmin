@@ -166,6 +166,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._enforce_homogeneity, other._enforce_homogeneity);
         }
 
+        internal static List<Pool_update> ProxyArrayToObjectList(Proxy_Pool_update[] input)
+        {
+            var result = new List<Pool_update>();
+            foreach (var item in input)
+                result.Add(new Pool_update(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Pool_update server)
         {
             if (opaqueRef == null)

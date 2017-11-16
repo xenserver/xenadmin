@@ -117,6 +117,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<Crashdump> ProxyArrayToObjectList(Proxy_Crashdump[] input)
+        {
+            var result = new List<Crashdump>();
+            foreach (var item in input)
+                result.Add(new Crashdump(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Crashdump server)
         {
             if (opaqueRef == null)

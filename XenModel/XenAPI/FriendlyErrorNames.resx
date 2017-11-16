@@ -717,6 +717,9 @@
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>The upper limit of active redo log instances was reached.</value>
   </data>
+  <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
+    <value>Nvidia tools error. Please ensure that the latest Nvidia tools are installed</value>
+  </data>
   <data name="OBJECT_NOLONGER_EXISTS" xml:space="preserve">
     <value>The specified object no longer exists.</value>
   </data>
@@ -1831,6 +1834,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VDI_TOO_SMALL" xml:space="preserve">
     <value>The VDI is too small. Please resize it to at least the minimum size.</value>
+  </data>
+  <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
+    <value>The VGPU is not compatible with any PGPU in the destination.</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>The VM cannot start because all GPUs are fully used or are running other types of virtual GPU</value>

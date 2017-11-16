@@ -203,6 +203,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._purpose, other._purpose);
         }
 
+        internal static List<Network> ProxyArrayToObjectList(Proxy_Network[] input)
+        {
+            var result = new List<Network>();
+            foreach (var item in input)
+                result.Add(new Network(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Network server)
         {
             if (opaqueRef == null)
