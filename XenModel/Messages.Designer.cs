@@ -565,6 +565,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable VM autostart.
+        /// </summary>
+        public static string ACTION_DISABLE_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_AUTOSTART_ON_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable Changed Block Tracking.
         /// </summary>
         public static string ACTION_DISABLE_CHANGED_BLOCK_TRACKING {
@@ -651,6 +660,15 @@ namespace XenAdmin {
         public static string ACTION_DISABLED_PVS_READ_CACHING {
             get {
                 return ResourceManager.GetString("ACTION_DISABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling autostart for &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLING_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLING_AUTOSTART_ON_VM", resourceCulture);
             }
         }
         
@@ -970,6 +988,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable VM autostart.
+        /// </summary>
+        public static string ACTION_ENABLE_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_AUTOSTART_ON_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable IGMP snooping.
         /// </summary>
         public static string ACTION_ENABLE_IGMP_SNOOPING {
@@ -1029,6 +1056,15 @@ namespace XenAdmin {
         public static string ACTION_ENABLED_PVS_READ_CACHING {
             get {
                 return ResourceManager.GetString("ACTION_ENABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling autostart for &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_ENABLING_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_AUTOSTART_ON_VM", resourceCulture);
             }
         }
         
@@ -11286,15 +11322,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disabled autostart on VM &apos;{0}&apos;.
-        /// </summary>
-        public static string DISABLED_AUTOSTART_ON_VM {
-            get {
-                return ResourceManager.GetString("DISABLED_AUTOSTART_ON_VM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No updates found because automatic checking for updates is disabled..
         /// </summary>
         public static string DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING {
@@ -13590,15 +13617,6 @@ namespace XenAdmin {
         public static string ENABLED {
             get {
                 return ResourceManager.GetString("ENABLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enabled autostart on VM &apos;{0}&apos;.
-        /// </summary>
-        public static string ENABLED_AUTOSTART_ON_VM {
-            get {
-                return ResourceManager.GetString("ENABLED_AUTOSTART_ON_VM", resourceCulture);
             }
         }
         

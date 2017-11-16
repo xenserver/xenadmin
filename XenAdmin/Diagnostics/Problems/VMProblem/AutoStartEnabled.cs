@@ -58,7 +58,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;
-            return new DelegatedAsyncAction(_connection, string.Format(Messages.DISABLED_AUTOSTART_ON_VM, Helpers.GetName(VM)), "", null, ActionDelegate(false));
+            return new DelegatedAsyncAction(_connection, Messages.ACTION_DISABLE_AUTOSTART_ON_VM, "", string.Format(Messages.ACTION_DISABLING_AUTOSTART_ON_VM, Helpers.GetName(VM)), ActionDelegate(false));
         }
 
         private VM VM
@@ -103,9 +103,9 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         {
             return new DelegatedAsyncAction(
                _connection,
-               string.Format(Messages.ENABLED_AUTOSTART_ON_VM, Helpers.GetName(VM)),
+               Messages.ACTION_ENABLE_AUTOSTART_ON_VM,
                "",
-               null,
+               string.Format(Messages.ACTION_ENABLING_AUTOSTART_ON_VM, Helpers.GetName(VM)),
                ActionDelegate(true));
         }
     }
