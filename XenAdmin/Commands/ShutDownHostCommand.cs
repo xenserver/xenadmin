@@ -156,17 +156,17 @@ namespace XenAdmin.Commands
 
                 if (hciHosts.Count > 0)
                     firstWarning = hciHosts.Count == 1
-                        ? firstWarning = string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name())
-                        : firstWarning = string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name())));
+                        ? string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVER, hciHosts[0].Name())
+                        : string.Format(Messages.CONFIRM_SHUTDOWN_HCI_WARN_SERVERS, string.Join("\n", hciHosts.Select(h => h.Name())));
 
                 else if (hasRunningVMs)
                     firstWarning = hosts.Count == 1
-                        ? firstWarning = string.Format(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name())
-                        : firstWarning = Messages.CONFIRM_SHUTDOWN_SERVERS;
+                        ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER, hosts[0].Name())
+                        : Messages.CONFIRM_SHUTDOWN_SERVERS;
 
                 else firstWarning = hosts.Count == 1
-                    ? firstWarning = string.Format(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name())
-                    : firstWarning = Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS;
+                    ? string.Format(Messages.CONFIRM_SHUTDOWN_SERVER_NO_VMS, hosts[0].Name())
+                    : Messages.CONFIRM_SHUTDOWN_SERVERS_NO_VMS;
 
                 sb.Append(firstWarning);
 
