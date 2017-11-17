@@ -128,6 +128,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._site, other._site);
         }
 
+        internal static List<PVS_server> ProxyArrayToObjectList(Proxy_PVS_server[] input)
+        {
+            var result = new List<PVS_server>();
+            foreach (var item in input)
+                result.Add(new PVS_server(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, PVS_server server)
         {
             if (opaqueRef == null)

@@ -163,6 +163,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._subsystem_device_name, other._subsystem_device_name);
         }
 
+        internal static List<PCI> ProxyArrayToObjectList(Proxy_PCI[] input)
+        {
+            var result = new List<PCI>();
+            foreach (var item in input)
+                result.Add(new PCI(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, PCI server)
         {
             if (opaqueRef == null)

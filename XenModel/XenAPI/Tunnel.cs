@@ -128,6 +128,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<Tunnel> ProxyArrayToObjectList(Proxy_Tunnel[] input)
+        {
+            var result = new List<Tunnel>();
+            foreach (var item in input)
+                result.Add(new Tunnel(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Tunnel server)
         {
             if (opaqueRef == null)

@@ -34,15 +34,15 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(clsConverter))]
-    public enum cls
+    [JsonConverter(typeof(vusb_operationsConverter))]
+    public enum vusb_operations
     {
-        VM, Host, SR, Pool, VMPP, VMSS, PVS_proxy, VDI, unknown
+        attach, plug, unplug, unknown
     }
 
-    public static class cls_helper
+    public static class vusb_operations_helper
     {
-        public static string ToString(cls x)
+        public static string ToString(vusb_operations x)
         {
             return x.StringOf();
         }
@@ -50,37 +50,27 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this cls x)
+        public static string StringOf(this vusb_operations x)
         {
             switch (x)
             {
-                case cls.VM:
-                    return "VM";
-                case cls.Host:
-                    return "Host";
-                case cls.SR:
-                    return "SR";
-                case cls.Pool:
-                    return "Pool";
-                case cls.VMPP:
-                    return "VMPP";
-                case cls.VMSS:
-                    return "VMSS";
-                case cls.PVS_proxy:
-                    return "PVS_proxy";
-                case cls.VDI:
-                    return "VDI";
+                case vusb_operations.attach:
+                    return "attach";
+                case vusb_operations.plug:
+                    return "plug";
+                case vusb_operations.unplug:
+                    return "unplug";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class clsConverter : XenEnumConverter
+    internal class vusb_operationsConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((cls)value).StringOf());
+            writer.WriteValue(((vusb_operations)value).StringOf());
         }
     }
 }

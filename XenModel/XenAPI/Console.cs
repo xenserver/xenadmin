@@ -128,6 +128,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<Console> ProxyArrayToObjectList(Proxy_Console[] input)
+        {
+            var result = new List<Console>();
+            foreach (var item in input)
+                result.Add(new Console(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Console server)
         {
             if (opaqueRef == null)

@@ -34,15 +34,15 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(clsConverter))]
-    public enum cls
+    [JsonConverter(typeof(network_purposeConverter))]
+    public enum network_purpose
     {
-        VM, Host, SR, Pool, VMPP, VMSS, PVS_proxy, VDI, unknown
+        nbd, insecure_nbd, unknown
     }
 
-    public static class cls_helper
+    public static class network_purpose_helper
     {
-        public static string ToString(cls x)
+        public static string ToString(network_purpose x)
         {
             return x.StringOf();
         }
@@ -50,37 +50,25 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this cls x)
+        public static string StringOf(this network_purpose x)
         {
             switch (x)
             {
-                case cls.VM:
-                    return "VM";
-                case cls.Host:
-                    return "Host";
-                case cls.SR:
-                    return "SR";
-                case cls.Pool:
-                    return "Pool";
-                case cls.VMPP:
-                    return "VMPP";
-                case cls.VMSS:
-                    return "VMSS";
-                case cls.PVS_proxy:
-                    return "PVS_proxy";
-                case cls.VDI:
-                    return "VDI";
+                case network_purpose.nbd:
+                    return "nbd";
+                case network_purpose.insecure_nbd:
+                    return "insecure_nbd";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class clsConverter : XenEnumConverter
+    internal class network_purposeConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((cls)value).StringOf());
+            writer.WriteValue(((network_purpose)value).StringOf());
         }
     }
 }

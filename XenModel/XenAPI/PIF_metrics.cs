@@ -184,6 +184,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<PIF_metrics> ProxyArrayToObjectList(Proxy_PIF_metrics[] input)
+        {
+            var result = new List<PIF_metrics>();
+            foreach (var item in input)
+                result.Add(new PIF_metrics(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, PIF_metrics server)
         {
             if (opaqueRef == null)

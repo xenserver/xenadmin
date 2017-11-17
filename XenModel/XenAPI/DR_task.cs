@@ -107,6 +107,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._introduced_SRs, other._introduced_SRs);
         }
 
+        internal static List<DR_task> ProxyArrayToObjectList(Proxy_DR_task[] input)
+        {
+            var result = new List<DR_task>();
+            foreach (var item in input)
+                result.Add(new DR_task(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, DR_task server)
         {
             if (opaqueRef == null)

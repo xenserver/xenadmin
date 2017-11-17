@@ -1020,6 +1020,13 @@ namespace XenAPI
             return Rpc<bool>("pool.get_live_patching_disabled", new JArray(session, _pool ?? ""), serializer);
         }
 
+        public bool pool_get_igmp_snooping_enabled(string session, string _pool)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<bool>("pool.get_igmp_snooping_enabled", new JArray(session, _pool ?? ""), serializer);
+        }
+
         public void pool_set_name_label(string session, string _pool, string _name_label)
         {
             var converters = new List<JsonConverter> {};
@@ -1755,6 +1762,20 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.pool.disable_ssl_legacy", new JArray(session, _pool ?? ""), serializer);
         }
 
+        public void pool_set_igmp_snooping_enabled(string session, string _pool, bool _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("pool.set_igmp_snooping_enabled", new JArray(session, _pool ?? "", _value), serializer);
+        }
+
+        public XenRef<Task> async_pool_set_igmp_snooping_enabled(string session, string _pool, bool _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.pool.set_igmp_snooping_enabled", new JArray(session, _pool ?? "", _value), serializer);
+        }
+
         public bool pool_has_extension(string session, string _pool, string _name)
         {
             var converters = new List<JsonConverter> {};
@@ -2488,6 +2509,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefListConverter<VBD>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<List<XenRef<VBD>>>("VM.get_VBDs", new JArray(session, _vm ?? ""), serializer);
+        }
+
+        public List<XenRef<VUSB>> vm_get_vusbs(string session, string _vm)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<VUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<VUSB>>>("VM.get_VUSBs", new JArray(session, _vm ?? ""), serializer);
         }
 
         public List<XenRef<Crashdump>> vm_get_crash_dumps(string session, string _vm)
@@ -3722,6 +3750,20 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.VM.migrate_send", new JArray(session, _vm ?? "", _dest == null ? new JObject() : JObject.FromObject(_dest, serializer), _live, _vdi_map == null ? new JObject() : JObject.FromObject(_vdi_map, serializer), _vif_map == null ? new JObject() : JObject.FromObject(_vif_map, serializer), _options == null ? new JObject() : JObject.FromObject(_options, serializer)), serializer);
         }
 
+        public XenRef<VM> vm_migrate_send(string session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<VM>(), new XenRefXenRefMapConverter<VDI, SR>(), new XenRefXenRefMapConverter<VIF, Network>(), new XenRefXenRefMapConverter<VGPU, GPU_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<VM>>("VM.migrate_send", new JArray(session, _vm ?? "", _dest == null ? new JObject() : JObject.FromObject(_dest, serializer), _live, _vdi_map == null ? new JObject() : JObject.FromObject(_vdi_map, serializer), _vif_map == null ? new JObject() : JObject.FromObject(_vif_map, serializer), _options == null ? new JObject() : JObject.FromObject(_options, serializer), _vgpu_map == null ? new JObject() : JObject.FromObject(_vgpu_map, serializer)), serializer);
+        }
+
+        public XenRef<Task> async_vm_migrate_send(string session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefXenRefMapConverter<VDI, SR>(), new XenRefXenRefMapConverter<VIF, Network>(), new XenRefXenRefMapConverter<VGPU, GPU_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.VM.migrate_send", new JArray(session, _vm ?? "", _dest == null ? new JObject() : JObject.FromObject(_dest, serializer), _live, _vdi_map == null ? new JObject() : JObject.FromObject(_vdi_map, serializer), _vif_map == null ? new JObject() : JObject.FromObject(_vif_map, serializer), _options == null ? new JObject() : JObject.FromObject(_options, serializer), _vgpu_map == null ? new JObject() : JObject.FromObject(_vgpu_map, serializer)), serializer);
+        }
+
         public void vm_assert_can_migrate(string session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
             var converters = new List<JsonConverter> {new XenRefXenRefMapConverter<VDI, SR>(), new XenRefXenRefMapConverter<VIF, Network>()};
@@ -3734,6 +3776,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefXenRefMapConverter<VDI, SR>(), new XenRefXenRefMapConverter<VIF, Network>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<XenRef<Task>>("Async.VM.assert_can_migrate", new JArray(session, _vm ?? "", _dest == null ? new JObject() : JObject.FromObject(_dest, serializer), _live, _vdi_map == null ? new JObject() : JObject.FromObject(_vdi_map, serializer), _vif_map == null ? new JObject() : JObject.FromObject(_vif_map, serializer), _options == null ? new JObject() : JObject.FromObject(_options, serializer)), serializer);
+        }
+
+        public void vm_assert_can_migrate(string session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            var converters = new List<JsonConverter> {new XenRefXenRefMapConverter<VDI, SR>(), new XenRefXenRefMapConverter<VIF, Network>(), new XenRefXenRefMapConverter<VGPU, GPU_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VM.assert_can_migrate", new JArray(session, _vm ?? "", _dest == null ? new JObject() : JObject.FromObject(_dest, serializer), _live, _vdi_map == null ? new JObject() : JObject.FromObject(_vdi_map, serializer), _vif_map == null ? new JObject() : JObject.FromObject(_vif_map, serializer), _options == null ? new JObject() : JObject.FromObject(_options, serializer), _vgpu_map == null ? new JObject() : JObject.FromObject(_vgpu_map, serializer)), serializer);
+        }
+
+        public XenRef<Task> async_vm_assert_can_migrate(string session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefXenRefMapConverter<VDI, SR>(), new XenRefXenRefMapConverter<VIF, Network>(), new XenRefXenRefMapConverter<VGPU, GPU_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.VM.assert_can_migrate", new JArray(session, _vm ?? "", _dest == null ? new JObject() : JObject.FromObject(_dest, serializer), _live, _vdi_map == null ? new JObject() : JObject.FromObject(_vdi_map, serializer), _vif_map == null ? new JObject() : JObject.FromObject(_vif_map, serializer), _options == null ? new JObject() : JObject.FromObject(_options, serializer), _vgpu_map == null ? new JObject() : JObject.FromObject(_vgpu_map, serializer)), serializer);
         }
 
         public VM vm_get_boot_record(string session, string _vm)
@@ -3895,6 +3951,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<XenRef<Task>>("Async.VM.retrieve_wlb_recommendations", new JArray(session, _vm ?? ""), serializer);
+        }
+
+        public void vm_set_bios_strings(string session, string _vm, Dictionary<string, string> _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VM.set_bios_strings", new JArray(session, _vm ?? "", _value == null ? new JObject() : JObject.FromObject(_value, serializer)), serializer);
+        }
+
+        public XenRef<Task> async_vm_set_bios_strings(string session, string _vm, Dictionary<string, string> _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.VM.set_bios_strings", new JArray(session, _vm ?? "", _value == null ? new JObject() : JObject.FromObject(_value, serializer)), serializer);
         }
 
         public void vm_copy_bios_strings(string session, string _vm, string _host)
@@ -5661,6 +5731,13 @@ namespace XenAPI
             return Rpc<List<XenRef<PGPU>>>("host.get_PGPUs", new JArray(session, _host ?? ""), serializer);
         }
 
+        public List<XenRef<PUSB>> host_get_pusbs(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<PUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<PUSB>>>("host.get_PUSBs", new JArray(session, _host ?? ""), serializer);
+        }
+
         public bool host_get_ssl_legacy(string session, string _host)
         {
             var converters = new List<JsonConverter> {};
@@ -7215,6 +7292,13 @@ namespace XenAPI
             return Rpc<Dictionary<XenRef<VIF>, string>>("network.get_assigned_ips", new JArray(session, _network ?? ""), serializer);
         }
 
+        public List<network_purpose> network_get_purpose(string session, string _network)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<network_purpose>>("network.get_purpose", new JArray(session, _network ?? ""), serializer);
+        }
+
         public void network_set_name_label(string session, string _network, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -7318,6 +7402,34 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new network_default_locking_modeConverter()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<XenRef<Task>>("Async.network.set_default_locking_mode", new JArray(session, _network ?? "", _value.StringOf()), serializer);
+        }
+
+        public void network_add_purpose(string session, string _network, network_purpose _value)
+        {
+            var converters = new List<JsonConverter> {new network_purposeConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("network.add_purpose", new JArray(session, _network ?? "", _value.StringOf()), serializer);
+        }
+
+        public XenRef<Task> async_network_add_purpose(string session, string _network, network_purpose _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new network_purposeConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.network.add_purpose", new JArray(session, _network ?? "", _value.StringOf()), serializer);
+        }
+
+        public void network_remove_purpose(string session, string _network, network_purpose _value)
+        {
+            var converters = new List<JsonConverter> {new network_purposeConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("network.remove_purpose", new JArray(session, _network ?? "", _value.StringOf()), serializer);
+        }
+
+        public XenRef<Task> async_network_remove_purpose(string session, string _network, network_purpose _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new network_purposeConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.network.remove_purpose", new JArray(session, _network ?? "", _value.StringOf()), serializer);
         }
 
         public List<XenRef<Network>> network_get_all(string session)
@@ -8123,6 +8235,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<string[]>("PIF.get_capabilities", new JArray(session, _pif ?? ""), serializer);
+        }
+
+        public pif_igmp_status pif_get_igmp_snooping_status(string session, string _pif)
+        {
+            var converters = new List<JsonConverter> {new pif_igmp_statusConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<pif_igmp_status>("PIF.get_igmp_snooping_status", new JArray(session, _pif ?? ""), serializer);
         }
 
         public void pif_set_other_config(string session, string _pif, Dictionary<string, string> _other_config)
@@ -10386,32 +10505,25 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.VDI.data_destroy", new JArray(session, _vdi ?? ""), serializer);
         }
 
-        public string vdi_export_changed_blocks(string session, string _vdi, string _vdi_to)
+        public string vdi_list_changed_blocks(string session, string _vdi, string _vdi_to)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VDI>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<string>("VDI.export_changed_blocks", new JArray(session, _vdi ?? "", _vdi_to ?? ""), serializer);
+            return Rpc<string>("VDI.list_changed_blocks", new JArray(session, _vdi ?? "", _vdi_to ?? ""), serializer);
         }
 
-        public XenRef<Task> async_vdi_export_changed_blocks(string session, string _vdi, string _vdi_to)
+        public XenRef<Task> async_vdi_list_changed_blocks(string session, string _vdi, string _vdi_to)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<VDI>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VDI.export_changed_blocks", new JArray(session, _vdi ?? "", _vdi_to ?? ""), serializer);
+            return Rpc<XenRef<Task>>("Async.VDI.list_changed_blocks", new JArray(session, _vdi ?? "", _vdi_to ?? ""), serializer);
         }
 
-        public string[] vdi_get_nbd_info(string session, string _vdi)
+        public List<Vdi_nbd_server_info> vdi_get_nbd_info(string session, string _vdi)
         {
             var converters = new List<JsonConverter> {};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<string[]>("VDI.get_nbd_info", new JArray(session, _vdi ?? ""), serializer);
-        }
-
-        public XenRef<Task> async_vdi_get_nbd_info(string session, string _vdi)
-        {
-            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
-            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VDI.get_nbd_info", new JArray(session, _vdi ?? ""), serializer);
+            return Rpc<List<Vdi_nbd_server_info>>("VDI.get_nbd_info", new JArray(session, _vdi ?? ""), serializer);
         }
 
         public List<XenRef<VDI>> vdi_get_all(string session)
@@ -12073,6 +12185,13 @@ namespace XenAPI
             return Rpc<bool>("PGPU.get_is_system_display_device", new JArray(session, _pgpu ?? ""), serializer);
         }
 
+        public Dictionary<string, string> pgpu_get_compatibility_metadata(string session, string _pgpu)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, string>>("PGPU.get_compatibility_metadata", new JArray(session, _pgpu ?? ""), serializer);
+        }
+
         public void pgpu_set_other_config(string session, string _pgpu, Dictionary<string, string> _other_config)
         {
             var converters = new List<JsonConverter> {};
@@ -12463,6 +12582,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<PGPU>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<XenRef<PGPU>>("VGPU.get_resident_on", new JArray(session, _vgpu ?? ""), serializer);
+        }
+
+        public XenRef<PGPU> vgpu_get_scheduled_to_be_resident_on(string session, string _vgpu)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<PGPU>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<PGPU>>("VGPU.get_scheduled_to_be_resident_on", new JArray(session, _vgpu ?? ""), serializer);
         }
 
         public void vgpu_set_other_config(string session, string _vgpu, Dictionary<string, string> _other_config)
@@ -13261,6 +13387,461 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new RecordConverter<SDN_controller>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<SDN_controller>, SDN_controller>>("SDN_controller.get_all_records", new JArray(session), serializer);
+        }
+
+        public Dictionary<XenRef<Vdi_nbd_server_info>, Vdi_nbd_server_info> vdi_nbd_server_info_get_all_records(string session)
+        {
+            var converters = new List<JsonConverter> {new RecordConverter<Vdi_nbd_server_info>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<XenRef<Vdi_nbd_server_info>, Vdi_nbd_server_info>>("vdi_nbd_server_info.get_all_records", new JArray(session), serializer);
+        }
+
+        public PUSB pusb_get_record(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<PUSB>("PUSB.get_record", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public XenRef<PUSB> pusb_get_by_uuid(string session, string _uuid)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<PUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<PUSB>>("PUSB.get_by_uuid", new JArray(session, _uuid ?? ""), serializer);
+        }
+
+        public string pusb_get_uuid(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_uuid", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public XenRef<USB_group> pusb_get_usb_group(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<USB_group>>("PUSB.get_USB_group", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public XenRef<Host> pusb_get_host(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Host>>("PUSB.get_host", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public string pusb_get_path(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_path", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public string pusb_get_vendor_id(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_vendor_id", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public string pusb_get_vendor_desc(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_vendor_desc", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public string pusb_get_product_id(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_product_id", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public string pusb_get_product_desc(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_product_desc", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public string pusb_get_serial(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_serial", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public string pusb_get_version(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_version", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public string pusb_get_description(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PUSB.get_description", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public bool pusb_get_passthrough_enabled(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<bool>("PUSB.get_passthrough_enabled", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public Dictionary<string, string> pusb_get_other_config(string session, string _pusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, string>>("PUSB.get_other_config", new JArray(session, _pusb ?? ""), serializer);
+        }
+
+        public void pusb_set_other_config(string session, string _pusb, Dictionary<string, string> _other_config)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("PUSB.set_other_config", new JArray(session, _pusb ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
+        }
+
+        public void pusb_add_to_other_config(string session, string _pusb, string _key, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("PUSB.add_to_other_config", new JArray(session, _pusb ?? "", _key ?? "", _value ?? ""), serializer);
+        }
+
+        public void pusb_remove_from_other_config(string session, string _pusb, string _key)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("PUSB.remove_from_other_config", new JArray(session, _pusb ?? "", _key ?? ""), serializer);
+        }
+
+        public void pusb_scan(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("PUSB.scan", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_pusb_scan(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<Host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.PUSB.scan", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public void pusb_set_passthrough_enabled(string session, string _pusb, bool _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("PUSB.set_passthrough_enabled", new JArray(session, _pusb ?? "", _value), serializer);
+        }
+
+        public XenRef<Task> async_pusb_set_passthrough_enabled(string session, string _pusb, bool _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.PUSB.set_passthrough_enabled", new JArray(session, _pusb ?? "", _value), serializer);
+        }
+
+        public List<XenRef<PUSB>> pusb_get_all(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<PUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<PUSB>>>("PUSB.get_all", new JArray(session), serializer);
+        }
+
+        public Dictionary<XenRef<PUSB>, PUSB> pusb_get_all_records(string session)
+        {
+            var converters = new List<JsonConverter> {new RecordConverter<PUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<XenRef<PUSB>, PUSB>>("PUSB.get_all_records", new JArray(session), serializer);
+        }
+
+        public USB_group usb_group_get_record(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<USB_group>("USB_group.get_record", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public XenRef<USB_group> usb_group_get_by_uuid(string session, string _uuid)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<USB_group>>("USB_group.get_by_uuid", new JArray(session, _uuid ?? ""), serializer);
+        }
+
+        public List<XenRef<USB_group>> usb_group_get_by_name_label(string session, string _label)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<USB_group>>>("USB_group.get_by_name_label", new JArray(session, _label ?? ""), serializer);
+        }
+
+        public string usb_group_get_uuid(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("USB_group.get_uuid", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public string usb_group_get_name_label(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("USB_group.get_name_label", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public string usb_group_get_name_description(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("USB_group.get_name_description", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public List<XenRef<PUSB>> usb_group_get_pusbs(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<PUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<PUSB>>>("USB_group.get_PUSBs", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public List<XenRef<VUSB>> usb_group_get_vusbs(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<VUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<VUSB>>>("USB_group.get_VUSBs", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public Dictionary<string, string> usb_group_get_other_config(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, string>>("USB_group.get_other_config", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public void usb_group_set_name_label(string session, string _usb_group, string _label)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("USB_group.set_name_label", new JArray(session, _usb_group ?? "", _label ?? ""), serializer);
+        }
+
+        public void usb_group_set_name_description(string session, string _usb_group, string _description)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("USB_group.set_name_description", new JArray(session, _usb_group ?? "", _description ?? ""), serializer);
+        }
+
+        public void usb_group_set_other_config(string session, string _usb_group, Dictionary<string, string> _other_config)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("USB_group.set_other_config", new JArray(session, _usb_group ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
+        }
+
+        public void usb_group_add_to_other_config(string session, string _usb_group, string _key, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("USB_group.add_to_other_config", new JArray(session, _usb_group ?? "", _key ?? "", _value ?? ""), serializer);
+        }
+
+        public void usb_group_remove_from_other_config(string session, string _usb_group, string _key)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("USB_group.remove_from_other_config", new JArray(session, _usb_group ?? "", _key ?? ""), serializer);
+        }
+
+        public XenRef<USB_group> usb_group_create(string session, string _name_label, string _name_description, Dictionary<string, string> _other_config)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<USB_group>>("USB_group.create", new JArray(session, _name_label ?? "", _name_description ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
+        }
+
+        public XenRef<Task> async_usb_group_create(string session, string _name_label, string _name_description, Dictionary<string, string> _other_config)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.USB_group.create", new JArray(session, _name_label ?? "", _name_description ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
+        }
+
+        public void usb_group_destroy(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("USB_group.destroy", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_usb_group_destroy(string session, string _usb_group)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.USB_group.destroy", new JArray(session, _usb_group ?? ""), serializer);
+        }
+
+        public List<XenRef<USB_group>> usb_group_get_all(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<USB_group>>>("USB_group.get_all", new JArray(session), serializer);
+        }
+
+        public Dictionary<XenRef<USB_group>, USB_group> usb_group_get_all_records(string session)
+        {
+            var converters = new List<JsonConverter> {new RecordConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<XenRef<USB_group>, USB_group>>("USB_group.get_all_records", new JArray(session), serializer);
+        }
+
+        public VUSB vusb_get_record(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<VUSB>("VUSB.get_record", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public XenRef<VUSB> vusb_get_by_uuid(string session, string _uuid)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<VUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<VUSB>>("VUSB.get_by_uuid", new JArray(session, _uuid ?? ""), serializer);
+        }
+
+        public string vusb_get_uuid(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("VUSB.get_uuid", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public List<vusb_operations> vusb_get_allowed_operations(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<vusb_operations>>("VUSB.get_allowed_operations", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public Dictionary<string, vusb_operations> vusb_get_current_operations(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, vusb_operations>>("VUSB.get_current_operations", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public XenRef<VM> vusb_get_vm(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<VM>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<VM>>("VUSB.get_VM", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public XenRef<USB_group> vusb_get_usb_group(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<USB_group>>("VUSB.get_USB_group", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public Dictionary<string, string> vusb_get_other_config(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, string>>("VUSB.get_other_config", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public bool vusb_get_currently_attached(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<bool>("VUSB.get_currently_attached", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public void vusb_set_other_config(string session, string _vusb, Dictionary<string, string> _other_config)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VUSB.set_other_config", new JArray(session, _vusb ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
+        }
+
+        public void vusb_add_to_other_config(string session, string _vusb, string _key, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VUSB.add_to_other_config", new JArray(session, _vusb ?? "", _key ?? "", _value ?? ""), serializer);
+        }
+
+        public void vusb_remove_from_other_config(string session, string _vusb, string _key)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VUSB.remove_from_other_config", new JArray(session, _vusb ?? "", _key ?? ""), serializer);
+        }
+
+        public XenRef<VUSB> vusb_create(string session, string _vm, string _usb_group, Dictionary<string, string> _other_config)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<VUSB>(), new XenRefConverter<VM>(), new XenRefConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<VUSB>>("VUSB.create", new JArray(session, _vm ?? "", _usb_group ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
+        }
+
+        public XenRef<Task> async_vusb_create(string session, string _vm, string _usb_group, Dictionary<string, string> _other_config)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<VM>(), new XenRefConverter<USB_group>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.VUSB.create", new JArray(session, _vm ?? "", _usb_group ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
+        }
+
+        public void vusb_unplug(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VUSB.unplug", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_vusb_unplug(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.VUSB.unplug", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public void vusb_destroy(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VUSB.destroy", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_vusb_destroy(string session, string _vusb)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.VUSB.destroy", new JArray(session, _vusb ?? ""), serializer);
+        }
+
+        public List<XenRef<VUSB>> vusb_get_all(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<VUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<VUSB>>>("VUSB.get_all", new JArray(session), serializer);
+        }
+
+        public Dictionary<XenRef<VUSB>, VUSB> vusb_get_all_records(string session)
+        {
+            var converters = new List<JsonConverter> {new RecordConverter<VUSB>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<XenRef<VUSB>, VUSB>>("VUSB.get_all_records", new JArray(session), serializer);
         }
 
     }

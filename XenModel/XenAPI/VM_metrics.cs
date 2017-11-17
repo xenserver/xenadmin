@@ -198,6 +198,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._nomigrate, other._nomigrate);
         }
 
+        internal static List<VM_metrics> ProxyArrayToObjectList(Proxy_VM_metrics[] input)
+        {
+            var result = new List<VM_metrics>();
+            foreach (var item in input)
+                result.Add(new VM_metrics(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VM_metrics server)
         {
             if (opaqueRef == null)

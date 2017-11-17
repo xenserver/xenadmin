@@ -84,7 +84,8 @@ namespace XenAPI
             Dictionary<string, string> guest_agent_config,
             Dictionary<string, string> cpu_info,
             bool policy_no_vendor_device,
-            bool live_patching_disabled)
+            bool live_patching_disabled,
+            bool igmp_snooping_enabled)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -121,6 +122,7 @@ namespace XenAPI
             this.cpu_info = cpu_info;
             this.policy_no_vendor_device = policy_no_vendor_device;
             this.live_patching_disabled = live_patching_disabled;
+            this.igmp_snooping_enabled = igmp_snooping_enabled;
         }
 
         /// <summary>
@@ -169,6 +171,7 @@ namespace XenAPI
             cpu_info = update.cpu_info;
             policy_no_vendor_device = update.policy_no_vendor_device;
             live_patching_disabled = update.live_patching_disabled;
+            igmp_snooping_enabled = update.igmp_snooping_enabled;
         }
 
         internal void UpdateFromProxy(Proxy_Pool proxy)
@@ -208,6 +211,7 @@ namespace XenAPI
             cpu_info = proxy.cpu_info == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_info);
             policy_no_vendor_device = (bool)proxy.policy_no_vendor_device;
             live_patching_disabled = (bool)proxy.live_patching_disabled;
+            igmp_snooping_enabled = (bool)proxy.igmp_snooping_enabled;
         }
 
         public Proxy_Pool ToProxy()
@@ -248,6 +252,7 @@ namespace XenAPI
             result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
             result_.policy_no_vendor_device = policy_no_vendor_device;
             result_.live_patching_disabled = live_patching_disabled;
+            result_.igmp_snooping_enabled = igmp_snooping_enabled;
             return result_;
         }
 
@@ -292,6 +297,7 @@ namespace XenAPI
             cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
             policy_no_vendor_device = Marshalling.ParseBool(table, "policy_no_vendor_device");
             live_patching_disabled = Marshalling.ParseBool(table, "live_patching_disabled");
+            igmp_snooping_enabled = Marshalling.ParseBool(table, "igmp_snooping_enabled");
         }
 
         public bool DeepEquals(Pool other, bool ignoreCurrentOperations)
@@ -337,7 +343,17 @@ namespace XenAPI
                 Helper.AreEqual2(this._guest_agent_config, other._guest_agent_config) &&
                 Helper.AreEqual2(this._cpu_info, other._cpu_info) &&
                 Helper.AreEqual2(this._policy_no_vendor_device, other._policy_no_vendor_device) &&
-                Helper.AreEqual2(this._live_patching_disabled, other._live_patching_disabled);
+                Helper.AreEqual2(this._live_patching_disabled, other._live_patching_disabled) &&
+                Helper.AreEqual2(this._igmp_snooping_enabled, other._igmp_snooping_enabled);
+        }
+
+        internal static List<Pool> ProxyArrayToObjectList(Proxy_Pool[] input)
+        {
+            var result = new List<Pool>();
+            foreach (var item in input)
+                result.Add(new Pool(item));
+
+            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Pool server)
@@ -926,6 +942,20 @@ namespace XenAPI
                 return session.JsonRpcClient.pool_get_live_patching_disabled(session.uuid, _pool);
             else
                 return (bool)session.proxy.pool_get_live_patching_disabled(session.uuid, _pool ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the igmp_snooping_enabled field of the given pool.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        public static bool get_igmp_snooping_enabled(Session session, string _pool)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pool_get_igmp_snooping_enabled(session.uuid, _pool);
+            else
+                return (bool)session.proxy.pool_get_igmp_snooping_enabled(session.uuid, _pool ?? "").parse();
         }
 
         /// <summary>
@@ -2460,6 +2490,36 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Enable or disable IGMP Snooping on the pool.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_value">Enable or disable IGMP Snooping on the pool</param>
+        public static void set_igmp_snooping_enabled(Session session, string _pool, bool _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pool_set_igmp_snooping_enabled(session.uuid, _pool, _value);
+            else
+                session.proxy.pool_set_igmp_snooping_enabled(session.uuid, _pool ?? "", _value).parse();
+        }
+
+        /// <summary>
+        /// Enable or disable IGMP Snooping on the pool.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pool">The opaque_ref of the given pool</param>
+        /// <param name="_value">Enable or disable IGMP Snooping on the pool</param>
+        public static XenRef<Task> async_set_igmp_snooping_enabled(Session session, string _pool, bool _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pool_set_igmp_snooping_enabled(session.uuid, _pool, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_pool_set_igmp_snooping_enabled(session.uuid, _pool ?? "", _value).parse());
+        }
+
+        /// <summary>
         /// Return true if the extension is available on the pool
         /// First published in XenServer 7.0.
         /// </summary>
@@ -3238,5 +3298,24 @@ namespace XenAPI
             }
         }
         private bool _live_patching_disabled = false;
+
+        /// <summary>
+        /// true if IGMP snooping is enabled in the pool, false otherwise.
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual bool igmp_snooping_enabled
+        {
+            get { return _igmp_snooping_enabled; }
+            set
+            {
+                if (!Helper.AreEqual(value, _igmp_snooping_enabled))
+                {
+                    _igmp_snooping_enabled = value;
+                    Changed = true;
+                    NotifyPropertyChanged("igmp_snooping_enabled");
+                }
+            }
+        }
+        private bool _igmp_snooping_enabled = false;
     }
 }

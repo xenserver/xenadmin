@@ -114,6 +114,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<Secret> ProxyArrayToObjectList(Proxy_Secret[] input)
+        {
+            var result = new List<Secret>();
+            foreach (var item in input)
+                result.Add(new Secret(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Secret server)
         {
             if (opaqueRef == null)

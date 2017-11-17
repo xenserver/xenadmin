@@ -249,6 +249,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._metrics, other._metrics);
         }
 
+        internal static List<VBD> ProxyArrayToObjectList(Proxy_VBD[] input)
+        {
+            var result = new List<VBD>();
+            foreach (var item in input)
+                result.Add(new VBD(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VBD server)
         {
             if (opaqueRef == null)

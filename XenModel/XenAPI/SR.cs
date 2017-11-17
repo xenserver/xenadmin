@@ -242,6 +242,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._is_tools_sr, other._is_tools_sr);
         }
 
+        internal static List<SR> ProxyArrayToObjectList(Proxy_SR[] input)
+        {
+            var result = new List<SR>();
+            foreach (var item in input)
+                result.Add(new SR(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, SR server)
         {
             if (opaqueRef == null)
@@ -1488,7 +1497,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.sr_get_data_sources(session.uuid, _sr);
             else
-                return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.sr_get_data_sources(session.uuid, _sr ?? "").parse());
+                return Data_source.ProxyArrayToObjectList(session.proxy.sr_get_data_sources(session.uuid, _sr ?? "").parse());
         }
 
         /// <summary>

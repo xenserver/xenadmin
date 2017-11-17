@@ -163,6 +163,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._enabled_VGPU_types, other._enabled_VGPU_types);
         }
 
+        internal static List<GPU_group> ProxyArrayToObjectList(Proxy_GPU_group[] input)
+        {
+            var result = new List<GPU_group>();
+            foreach (var item in input)
+                result.Add(new GPU_group(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, GPU_group server)
         {
             if (opaqueRef == null)

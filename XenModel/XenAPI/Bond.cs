@@ -149,6 +149,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._links_up, other._links_up);
         }
 
+        internal static List<Bond> ProxyArrayToObjectList(Proxy_Bond[] input)
+        {
+            var result = new List<Bond>();
+            foreach (var item in input)
+                result.Add(new Bond(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Bond server)
         {
             if (opaqueRef == null)

@@ -142,6 +142,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._host, other._host);
         }
 
+        internal static List<Feature> ProxyArrayToObjectList(Proxy_Feature[] input)
+        {
+            var result = new List<Feature>();
+            foreach (var item in input)
+                result.Add(new Feature(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Feature server)
         {
             if (opaqueRef == null)

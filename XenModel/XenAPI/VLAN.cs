@@ -128,6 +128,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<VLAN> ProxyArrayToObjectList(Proxy_VLAN[] input)
+        {
+            var result = new List<VLAN>();
+            foreach (var item in input)
+                result.Add(new VLAN(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VLAN server)
         {
             if (opaqueRef == null)

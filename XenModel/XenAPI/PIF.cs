@@ -80,7 +80,8 @@ namespace XenAPI
             primary_address_type primary_address_type,
             bool managed,
             Dictionary<string, string> properties,
-            string[] capabilities)
+            string[] capabilities,
+            pif_igmp_status igmp_snooping_status)
         {
             this.uuid = uuid;
             this.device = device;
@@ -113,6 +114,7 @@ namespace XenAPI
             this.managed = managed;
             this.properties = properties;
             this.capabilities = capabilities;
+            this.igmp_snooping_status = igmp_snooping_status;
         }
 
         /// <summary>
@@ -157,6 +159,7 @@ namespace XenAPI
             managed = update.managed;
             properties = update.properties;
             capabilities = update.capabilities;
+            igmp_snooping_status = update.igmp_snooping_status;
         }
 
         internal void UpdateFromProxy(Proxy_PIF proxy)
@@ -192,6 +195,7 @@ namespace XenAPI
             managed = (bool)proxy.managed;
             properties = proxy.properties == null ? null : Maps.convert_from_proxy_string_string(proxy.properties);
             capabilities = proxy.capabilities == null ? new string[] {} : (string [])proxy.capabilities;
+            igmp_snooping_status = proxy.igmp_snooping_status == null ? (pif_igmp_status) 0 : (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)proxy.igmp_snooping_status);
         }
 
         public Proxy_PIF ToProxy()
@@ -228,6 +232,7 @@ namespace XenAPI
             result_.managed = managed;
             result_.properties = Maps.convert_to_proxy_string_string(properties);
             result_.capabilities = capabilities;
+            result_.igmp_snooping_status = pif_igmp_status_helper.ToString(igmp_snooping_status);
             return result_;
         }
 
@@ -268,6 +273,7 @@ namespace XenAPI
             managed = Marshalling.ParseBool(table, "managed");
             properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "properties"));
             capabilities = Marshalling.ParseStringArray(table, "capabilities");
+            igmp_snooping_status = (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), Marshalling.ParseString(table, "igmp_snooping_status"));
         }
 
         public bool DeepEquals(PIF other)
@@ -307,7 +313,17 @@ namespace XenAPI
                 Helper.AreEqual2(this._primary_address_type, other._primary_address_type) &&
                 Helper.AreEqual2(this._managed, other._managed) &&
                 Helper.AreEqual2(this._properties, other._properties) &&
-                Helper.AreEqual2(this._capabilities, other._capabilities);
+                Helper.AreEqual2(this._capabilities, other._capabilities) &&
+                Helper.AreEqual2(this._igmp_snooping_status, other._igmp_snooping_status);
+        }
+
+        internal static List<PIF> ProxyArrayToObjectList(Proxy_PIF[] input)
+        {
+            var result = new List<PIF>();
+            foreach (var item in input)
+                result.Add(new PIF(item));
+
+            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PIF server)
@@ -790,6 +806,20 @@ namespace XenAPI
                 return session.JsonRpcClient.pif_get_capabilities(session.uuid, _pif);
             else
                 return (string [])session.proxy.pif_get_capabilities(session.uuid, _pif ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the igmp_snooping_status field of the given PIF.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pif">The opaque_ref of the given pif</param>
+        public static pif_igmp_status get_igmp_snooping_status(Session session, string _pif)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pif_get_igmp_snooping_status(session.uuid, _pif);
+            else
+                return (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)session.proxy.pif_get_igmp_snooping_status(session.uuid, _pif ?? "").parse());
         }
 
         /// <summary>
@@ -2153,5 +2183,25 @@ namespace XenAPI
             }
         }
         private string[] _capabilities = {};
+
+        /// <summary>
+        /// The IGMP snooping status of the corresponding network bridge
+        /// First published in Unreleased.
+        /// </summary>
+        [JsonConverter(typeof(pif_igmp_statusConverter))]
+        public virtual pif_igmp_status igmp_snooping_status
+        {
+            get { return _igmp_snooping_status; }
+            set
+            {
+                if (!Helper.AreEqual(value, _igmp_snooping_status))
+                {
+                    _igmp_snooping_status = value;
+                    Changed = true;
+                    NotifyPropertyChanged("igmp_snooping_status");
+                }
+            }
+        }
+        private pif_igmp_status _igmp_snooping_status = pif_igmp_status.unknown;
     }
 }

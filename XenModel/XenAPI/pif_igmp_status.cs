@@ -34,15 +34,15 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(clsConverter))]
-    public enum cls
+    [JsonConverter(typeof(pif_igmp_statusConverter))]
+    public enum pif_igmp_status
     {
-        VM, Host, SR, Pool, VMPP, VMSS, PVS_proxy, VDI, unknown
+        enabled, disabled, unknown
     }
 
-    public static class cls_helper
+    public static class pif_igmp_status_helper
     {
-        public static string ToString(cls x)
+        public static string ToString(pif_igmp_status x)
         {
             return x.StringOf();
         }
@@ -50,37 +50,27 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this cls x)
+        public static string StringOf(this pif_igmp_status x)
         {
             switch (x)
             {
-                case cls.VM:
-                    return "VM";
-                case cls.Host:
-                    return "Host";
-                case cls.SR:
-                    return "SR";
-                case cls.Pool:
-                    return "Pool";
-                case cls.VMPP:
-                    return "VMPP";
-                case cls.VMSS:
-                    return "VMSS";
-                case cls.PVS_proxy:
-                    return "PVS_proxy";
-                case cls.VDI:
-                    return "VDI";
+                case pif_igmp_status.enabled:
+                    return "enabled";
+                case pif_igmp_status.disabled:
+                    return "disabled";
+                case pif_igmp_status.unknown:
+                    return "unknown";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class clsConverter : XenEnumConverter
+    internal class pif_igmp_statusConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((cls)value).StringOf());
+            writer.WriteValue(((pif_igmp_status)value).StringOf());
         }
     }
 }

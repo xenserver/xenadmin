@@ -319,6 +319,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled);
         }
 
+        internal static List<VDI> ProxyArrayToObjectList(Proxy_VDI[] input)
+        {
+            var result = new List<VDI>();
+            foreach (var item in input)
+                result.Add(new VDI(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VDI server)
         {
             if (opaqueRef == null)
@@ -2094,61 +2103,47 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Reports which blocks differ in the two VDIs. This operation is not allowed when vdi_to is attached to a VM.
+        /// Compare two VDIs in 64k block increments and report which blocks differ. This operation is not allowed when vdi_to is attached to a VM.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         /// <param name="_vdi_to">The second VDI.</param>
-        public static string export_changed_blocks(Session session, string _vdi, string _vdi_to)
+        public static string list_changed_blocks(Session session, string _vdi, string _vdi_to)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vdi_export_changed_blocks(session.uuid, _vdi, _vdi_to);
+                return session.JsonRpcClient.vdi_list_changed_blocks(session.uuid, _vdi, _vdi_to);
             else
-                return (string)session.proxy.vdi_export_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse();
+                return (string)session.proxy.vdi_list_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse();
         }
 
         /// <summary>
-        /// Reports which blocks differ in the two VDIs. This operation is not allowed when vdi_to is attached to a VM.
+        /// Compare two VDIs in 64k block increments and report which blocks differ. This operation is not allowed when vdi_to is attached to a VM.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         /// <param name="_vdi_to">The second VDI.</param>
-        public static XenRef<Task> async_export_changed_blocks(Session session, string _vdi, string _vdi_to)
+        public static XenRef<Task> async_list_changed_blocks(Session session, string _vdi, string _vdi_to)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vdi_export_changed_blocks(session.uuid, _vdi, _vdi_to);
+              return session.JsonRpcClient.async_vdi_list_changed_blocks(session.uuid, _vdi, _vdi_to);
           else
-              return XenRef<Task>.Create(session.proxy.async_vdi_export_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vdi_list_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse());
         }
 
         /// <summary>
-        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed to the NBD server running at the IP address and port specified by that URI as the export name.
+        /// Get details specifying how to access this VDI via a Network Block Device server. For each of a set of NBD server addresses on which the VDI is available, the return value set contains a vdi_nbd_server_info object that contains an exportname to request once the NBD connection is established, and connection details for the address. An empty list is returned if there is no network that has a PIF on a host with access to the relevant SR, or if no such network has been assigned an NBD-related purpose in its purpose field. To access the given VDI, any of the vdi_nbd_server_info objects can be used to make a connection to a server, and then the VDI will be available by requesting the exportname.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
-        public static string[] get_nbd_info(Session session, string _vdi)
+        public static List<Vdi_nbd_server_info> get_nbd_info(Session session, string _vdi)
         {
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vdi_get_nbd_info(session.uuid, _vdi);
             else
-                return (string [])session.proxy.vdi_get_nbd_info(session.uuid, _vdi ?? "").parse();
-        }
-
-        /// <summary>
-        /// Get a list of URIs specifying how to access this VDI via the NBD server of XenServer. A URI will be returned for each PIF of each host that is connected to the VDI's SR. An empty list is returned in case no network has a PIF on a host with access to the relevant SR. To access the given VDI, any of the returned URIs can be passed to the NBD server running at the IP address and port specified by that URI as the export name.
-        /// First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vdi">The opaque_ref of the given vdi</param>
-        public static XenRef<Task> async_get_nbd_info(Session session, string _vdi)
-        {
-          if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vdi_get_nbd_info(session.uuid, _vdi);
-          else
-              return XenRef<Task>.Create(session.proxy.async_vdi_get_nbd_info(session.uuid, _vdi ?? "").parse());
+                return Vdi_nbd_server_info.ProxyArrayToObjectList(session.proxy.vdi_get_nbd_info(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
