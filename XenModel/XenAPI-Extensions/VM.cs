@@ -1826,6 +1826,13 @@ namespace XenAPI
                 return vm != null && vm.Equals(this);
             }); // null if none
         }
+
+        public bool UsingUpstreamQemu()
+        {
+            return (platform != null) &&
+                platform.ContainsKey("device-model") &&
+                platform["device-model"] == "qemu-upstream-compat";
+        }
     }
 
     public struct VMStartupOptions

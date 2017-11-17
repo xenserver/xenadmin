@@ -420,6 +420,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
             if (!haNtolIndicator.UpdateInProgress)
             {
+                pictureBoxStatus.Visible = true;
+
                 if (haNtolIndicator.Ntol == -1)
                 {
                     labelHaStatus.Text = Messages.HA_UNABLE_TO_CALCULATE_MESSAGE;
@@ -745,6 +747,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                             return Messages.NOT_AGILE_NETWORK_NOT_SHARED;
                         case "VM_HAS_VGPU":
                             return Messages.NOT_AGILE_VM_HAS_VGPU;
+                        case "VM_HAS_VUSB":
+                            return Messages.NOT_AGILE_VM_HAS_VUSB;
                         default:
                             // We shouldn't really be here unless we have not iterated all the return errors from vm.assert_agile
                             return Messages.NOT_AGILE_UNKOWN;

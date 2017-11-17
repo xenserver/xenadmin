@@ -64,6 +64,9 @@ namespace XenAdmin
         PoolConnected,
         PoolNotFullyUpgraded,
 
+        PoolUnlicensed,
+        ServerUnlicensed,
+
         Storage,
         StorageBroken,
         StorageDefault,

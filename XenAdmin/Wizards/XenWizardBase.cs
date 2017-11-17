@@ -401,5 +401,11 @@ namespace XenAdmin.Wizards
 
             return entries;
         }
+
+        protected virtual void ShowInformationMessage(string message)
+        {
+            labelGeneralInformationMessage.Text = message;
+            panelGeneralInformationMessage.Visible = true;
+        }
     }
 }

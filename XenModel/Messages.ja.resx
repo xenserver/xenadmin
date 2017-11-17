@@ -60,7 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -70,15 +70,15 @@
                 <xsd:element minOccurs="0" name="value" type="xsd:string"/>
               </xsd:sequence>
               <xsd:attribute name="name" type="xsd:string" use="required"/>
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
@@ -90,7 +90,7 @@
               <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
               <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
               <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -98,7 +98,7 @@
               <xsd:sequence>
                 <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -285,8 +285,20 @@
   <data name="ACTION_DETACHING_MULTIPLE_VDIS_TITLE" xml:space="preserve">
     <value>複数ストレージの接続解除</value>
   </data>
+  <data name="ACTION_DISABLED_CHANGED_BLOCK_TRACKING" xml:space="preserve">
+    <value>選択した VM の 変更ブロック追跡が無効になっています</value>
+  </data>
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>選択した VM の PVS アクセラレータが無効になっています</value>
+  </data>
+  <data name="ACTION_DISABLE_CHANGED_BLOCK_TRACKING" xml:space="preserve">
+    <value>変更ブロック追跡の無効化</value>
+  </data>
+  <data name="ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR" xml:space="preserve">
+    <value>VM '{0}' の変更ブロック追跡の無効化</value>
+  </data>
+  <data name="ACTION_DISABLE_IGMP_SNOOPING" xml:space="preserve">
+    <value>IGMP スヌーピングの無効化</value>
   </data>
   <data name="ACTION_DISABLE_LIVE_PATCHING" xml:space="preserve">
     <value>ライブ パッチの無効化</value>
@@ -302,6 +314,9 @@
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>VM '{0}' 上のコンテナ管理の無効化</value>
+  </data>
+  <data name="ACTION_DISABLING_CHANGED_BLOCK_TRACKING" xml:space="preserve">
+    <value>選択した VM の変更ブロック追跡の無効化</value>
   </data>
   <data name="ACTION_DISABLING_LIVE_PATCHING" xml:space="preserve">
     <value>'{0}' のライブ パッチを無効にしています</value>
@@ -407,6 +422,9 @@
   </data>
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>選択した VM の PVS アクセラレータが有効になっています</value>
+  </data>
+  <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
+    <value>IGMP スヌーピングの有効化</value>
   </data>
   <data name="ACTION_ENABLE_LIVE_PATCHING" xml:space="preserve">
     <value>ライブ パッチの有効化</value>
@@ -972,6 +990,18 @@
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>[Citrix] Insight Services にレポートをアップロードしています</value>
   </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>USB パススルーが無効です</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLING" xml:space="preserve">
+    <value>{0} で USB パススルーを無効にしています</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>USB パススルーが有効です</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLING" xml:space="preserve">
+    <value>{0} で USB パススルーを有効にしています</value>
+  </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>仮想ディスクが作成されました</value>
   </data>
@@ -1208,6 +1238,24 @@
   </data>
   <data name="ACTION_VM_TEMPLATIZING_TITLE" xml:space="preserve">
     <value>VM '{0}' のテンプレートへの変換</value>
+  </data>
+  <data name="ACTION_VUSB_CREATED" xml:space="preserve">
+    <value>USB デバイスが接続されています</value>
+  </data>
+  <data name="ACTION_VUSB_CREATING" xml:space="preserve">
+    <value>USB デバイス '{0}' の VM '{1}' への接続</value>
+  </data>
+  <data name="ACTION_VUSB_DELETED" xml:space="preserve">
+    <value>USB デバイスが接続解除されています</value>
+  </data>
+  <data name="ACTION_VUSB_DELETING" xml:space="preserve">
+    <value>USB デバイス '{0}' を VM '{1}' から接続解除</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH" xml:space="preserve">
+    <value>USB デバイスの接続解除</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
+    <value>選択した USB デバイスを接続解除してもよろしいですか?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
     <value>スレーブの回復を待機しています...</value>
@@ -1780,7 +1828,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>Web ページを開く</value>
   </data>
   <data name="ALERT_NEW_VERSION" xml:space="preserve">
-    <value>新しい [XenCenter] が使用可能</value>
+    <value>{0} がリリースされています</value>
   </data>
   <data name="ALERT_NEW_VERSION_DETAILS" xml:space="preserve">
     <value>{0} がリリースされています。[Citrix] Web サイトから新しいバージョンをダウンロードできます。</value>
@@ -2355,6 +2403,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CANNOT_MIGRATE_VDI_NON_RUNNING_VM" xml:space="preserve">
     <value>この仮想ディスクは実行中でない仮想マシンに接続されているため、削除できません。</value>
   </data>
+  <data name="CANNOT_MOVE_CBT_ENABLED_VDI" xml:space="preserve">
+    <value>この仮想ディスクで CBT が有効になっているため、ほかのストレージ リポジトリに移動できません。</value>
+  </data>
   <data name="CANNOT_MOVE_DR_VD" xml:space="preserve">
     <value>この仮想ディスクは障害回復で使用されているため、ほかのストレージ リポジトリに移動できません。</value>
   </data>
@@ -2435,18 +2486,21 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     
 この VM に vApp '{2}' を割り当て直しますか?</value>
   </data>
-    
-    
   <data name="CHANGE_VMS_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
     <value>選択した VM の中にほかのスナップショット スケジュールが割り当てられているものがあります。
+    
 これらの VM にスケジュール '{0}' を割り当て直しますか?</value>
   </data>
   <data name="CHANGE_VM_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
     <value>VM '{0}' にはスナップショット スケジュール '{1}' が割り当てられています。
+    
 この VM にスケジュール '{2}' を割り当て直しますか?</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>VM 移行状態のチェック</value>
+  </data>
+  <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
+    <value>保留中の再起動を確認しています</value>
   </data>
   <data name="CHECKING_HA_STATUS" xml:space="preserve">
     <value>高可用性と WLB の状態のチェック</value>
@@ -2477,6 +2531,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CHECKING_UPGRADE_HOTFIX_STATUS" xml:space="preserve">
     <value>Hotfix のアップグレード状態のチェック</value>
+  </data>
+  <data name="CHECKING_XENCENTER_VERSION" xml:space="preserve">
+    <value>[XenCenter] バージョンの確認</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
     <value>プール '{0}' の WLB が有効になっています</value>
@@ -2677,6 +2734,18 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CONFIRM_DESTROY_HOST_YES_BUTTON_LABEL" xml:space="preserve">
     <value>破棄する(&amp;Y)</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VM" xml:space="preserve">
+    <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。[XenCenter] から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
+    <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。[XenCenter] から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
+    <value>VM "{0}" の変更ブロック追跡を無効化</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>選択した VM の 変更ブロック追跡を無効化</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>選択したプールのヘルス チェックを無効にしてもよろしいですか?</value>
@@ -3909,6 +3978,27 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>未割り当てのデバイスの場所のスキャン</value>
   </data>
+  <data name="DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE" xml:space="preserve">
+    <value>デバイスを使用できません</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
+    <value>パススルーの無効化</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
+    <value>パススルーの有効化</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
+    <value>このデバイスでパススルーを有効にしますか? 有効にすると、このデバイスを仮想マシンにパススルーできるようになります。</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
+    <value>このデバイスでパススルーを無効にしますか? 無効にすると、このデバイスを仮想マシンにパススルーできなくなります。</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
+    <value>はい。パススルーを無効にします(&amp;Y)</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_ENABLE" xml:space="preserve">
+    <value>はい。パススルーを有効にします(&amp;Y)</value>
+  </data>
   <data name="DISABLE" xml:space="preserve">
     <value>無効化(&amp;B)</value>
   </data>
@@ -4075,7 +4165,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>コンテナ詳細</value>
   </data>
   <data name="DOCKER_INFO_API_VERSION" xml:space="preserve">
-    <value>Api バージョン</value>
+    <value>API バージョン</value>
   </data>
   <data name="DOCKER_INFO_ARCH" xml:space="preserve">
     <value>Arch</value>
@@ -4159,7 +4249,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>'{0}' からアップデートをダウンロードしています...</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC" xml:space="preserve">
-    <value>{0} をダウンロードしています</value>
+    <value>アップデート {0} をダウンロードしています</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC" xml:space="preserve">
     <value>{0} をダウンロードしています ({1}/{2})</value>
@@ -4168,7 +4258,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>ダウンロードがキャンセルされました</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_DESC" xml:space="preserve">
-    <value>{0} を抽出しています</value>
+    <value>アップデート {0} を抽出しています</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR" xml:space="preserve">
     <value>ダウンロードしたアーカイブからアップデート ファイルを抽出できません。詳しくは、アプリケーション ログを参照してください。</value>
@@ -4177,7 +4267,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>アップデート ファイルを特定できません。詳しくは、アプリケーション ログを参照してください。</value>
   </data>
   <data name="DOWNLOAD_AND_EXTRACT_ACTION_TITLE" xml:space="preserve">
-    <value>{0} のダウンロードと抽出</value>
+    <value>アップデート {0} のダウンロードと抽出</value>
   </data>
   <data name="DOWNLOAD_ELLIPSES" xml:space="preserve">
     <value>ダウンロード...</value>
@@ -4490,7 +4580,7 @@ CD をイジェクトしてから再試行してください。</value>
     <value>[XenServer] 障害回復が進行中です。しばらくお待ちください。</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_OVERALL_PROGRESS" xml:space="preserve">
-    <value>全体の進行状況: {0} / {1}  タスクが完了</value>
+    <value>全体の進行状況: {0}/{1} タスクが完了</value>
   </data>
   <data name="DR_WIZARD_RECOVERPAGE_RECOVERING_FROM" xml:space="preserve">
     <value>{0} から回復しています</value>
@@ -5219,8 +5309,17 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>機能がレジストリで無効になっています。</value>
   </data>
+  <data name="FETCHED_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>VM {0} の使用可能なホストを取得済み</value>
+  </data>
+  <data name="FETCHING_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>VM {0} の使用可能なホストを取得中</value>
+  </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>次のセクション(&amp;N)</value>
+  </data>
+  <data name="FETCH_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>VM {0} の使用可能なホストを取得</value>
   </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>LUN が見つかりません。ハードウェア構成を確認してください。</value>
@@ -5898,6 +5997,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
 
 以下のを変更するには、[高可用性の構成] をクリックします。</value>
   </data>
+  <data name="HA_TAB_CONFIGURED_UNLICENSED" xml:space="preserve">
+    <value>プール '{0}' の高可用性は有効になっています。</value>
+  </data>
   <data name="HA_UNABLE_TO_CALCULATE_MESSAGE" xml:space="preserve">
     <value>プールの最大許容障害数を計算できません。</value>
   </data>
@@ -5958,6 +6060,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="HEALTHCHECK_STATUS_ONE_ISSUE_FOUND" xml:space="preserve">
     <value>1 項目の問題が検出されました</value>
   </data>
+  <data name="HEALTH_CHECK" xml:space="preserve">
+    <value>ヘルスチェック</value>
+  </data>
   <data name="HEALTH_CHECK_AUTHENTICATION_FAILED" xml:space="preserve">
     <value>[Citrix] Insight Services による認証が失敗しました。詳しくは、アプリケーション ログ ファイルを確認してください。</value>
   </data>
@@ -5968,7 +6073,7 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
     <value>https://cis.citrix.com/legal/</value>
   </data>
   <data name="HEALTH_CHECK_CITRIX_POLICY_URL" xml:space="preserve">
-    <value>http://www.citrix.com/about/legal/privacy.html</value>
+    <value>http://www.citrix.co.jp/about/legal/privacy/</value>
   </data>
   <data name="HEALTH_CHECK_PRIVACY_POLICY" xml:space="preserve">
     <value>ヘルス チェックによって [Citrix] Insight Services にアップロードされる情報は、トラブルシューティングや診断サポート、および [Citrix] Insight Services Policy ({0}) と [Citrix] Privacy Policy ({1}) で必要な製品の品質、信頼性、パフォーマンスを改善するために使用されます。</value>
@@ -6412,6 +6517,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   <data name="IMPORT_SOURCE_PAGE_TITLE" xml:space="preserve">
     <value>インポートするファイルの指定</value>
   </data>
+  <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>インポートしようとしている [Xenserver] テンプレートは既に選択したプールに存在します。</value>
+  </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>新規テンプレートのストレージを構成してください</value>
   </data>
@@ -6582,6 +6690,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="INITIALIZING_WLB_ON" xml:space="preserve">
     <value>プール {0} をワークロード バランス サーバーに接続しています。</value>
+  </data>
+  <data name="INSTALLED_UPDATES" xml:space="preserve">
+    <value>インストール済みアップデート</value>
   </data>
   <data name="INSTALLTOOLS_COULDNOTFIND_CD" xml:space="preserve">
     <value>選択された VM に CD ドライブが見つかりません。</value>
@@ -6807,7 +6918,7 @@ SCSI ID: {2}
     <value>ライセンス エラー</value>
   </data>
   <data name="LICENSE_EXPIRED" xml:space="preserve">
-    <value>非ライセンス</value>
+    <value>ライセンスの有効期限が切れました</value>
   </data>
   <data name="LICENSE_EXPIRED_NO_LICENSES_AVAILABLE" xml:space="preserve">
     <value>ライセンスがありません</value>
@@ -6830,9 +6941,6 @@ SCSI ID: {2}
   <data name="LICENSE_EXPIRY_PURCHACE" xml:space="preserve">
     <value>[XenServer] オンライン</value>
     <comment>this text could be improved</comment>
-  </data>
-  <data name="LICENSE_EXPIRY_TITLE" xml:space="preserve">
-    <value>期限切れのライセンス</value>
   </data>
   <data name="LICENSE_FIELD_DISABLED" xml:space="preserve">
     <value>このフィールドは、サーバーのライセンス条件により無効になっています。</value>
@@ -6931,6 +7039,9 @@ Standard 機能のみ有効です</value>
   </data>
   <data name="LICENSE_TOO_MANY_SERVERS_SELECTED_CAPTION" xml:space="preserve">
     <value>アクティブ化キーを同時に複数の無償 [XenServer] 製品に適用することはできません。</value>
+  </data>
+  <data name="LICENSE_UNLICENSED" xml:space="preserve">
+    <value>非ライセンス</value>
   </data>
   <data name="LICENSE_UNSUPPORTED" xml:space="preserve">
     <value>サポートされません</value>
@@ -7164,6 +7275,9 @@ SCSI ID: {2}
   <data name="MAINWINDOW_DETACH_SR" xml:space="preserve">
     <value>接続解除(&amp;D)...</value>
   </data>
+  <data name="MAINWINDOW_DISABLE_CHANGED_BLOCK_TRACKING" xml:space="preserve">
+    <value>変更ブロック追跡の無効化(&amp;I)</value>
+  </data>
   <data name="MAINWINDOW_DISCONNECT" xml:space="preserve">
     <value>切断(&amp;C)</value>
   </data>
@@ -7211,6 +7325,12 @@ SCSI ID: {2}
   </data>
   <data name="MAINWINDOW_FORGET_SR" xml:space="preserve">
     <value>接続の消去(&amp;F)</value>
+  </data>
+  <data name="MAINWINDOW_HEADER_LICENSED_WITH" xml:space="preserve">
+    <value>({0} のライセンス)</value>
+  </data>
+  <data name="MAINWINDOW_HEADER_UNLICENSED" xml:space="preserve">
+    <value>(ライセンス無効)</value>
   </data>
   <data name="MAINWINDOW_HIGH_AVAILABILITY" xml:space="preserve">
     <value>高可用性(&amp;H)...</value>
@@ -7409,6 +7529,9 @@ SCSI ID: {2}
   </data>
   <data name="MANAGEMENT_NETWORK_WITH_POOL" xml:space="preserve">
     <value>{1} の {0} (管理)</value>
+  </data>
+  <data name="MANAGE_UPDATES_PAGE_UPDATES_NOT_AVAILABLE" xml:space="preserve">
+    <value>アップデートは必要ありません。</value>
   </data>
   <data name="MANUAL_CHECK_FOR_UPDATES_PARTIAL_UNLICENSED_INFO" xml:space="preserve">
     <value>一部のホストで Subscription Advantage が必要です</value>
@@ -7707,9 +7830,6 @@ SCSI ID: {2}
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
     <value>VM で使用中の CPU 機能の一部が移行先のホストにないため、VM を移行することができません</value>
   </data>
-  <data name="MIGRATION_NOT_ALLOWED_GPU" xml:space="preserve">
-    <value>この VM には GPU が割り当てられているため、移行することはできません</value>
-  </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
     <value>この VM は共有ストレージ上にないため、移行することはできません</value>
   </data>
@@ -7863,6 +7983,12 @@ SCSI ID: {2}
 
 設定が正しいことを確認してから続行してください。</value>
   </data>
+  <data name="NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_DISABLED" xml:space="preserve">
+    <value>IGMP スヌーピングが無効です</value>
+  </data>
+  <data name="NETWORKOPTIONSEDITPAGE_SUBTEXT_IGMP_SNOOPING_ENABLED" xml:space="preserve">
+    <value>IGMP スヌーピングが有効です</value>
+  </data>
   <data name="NETWORKPANEL_AUTO" xml:space="preserve">
     <value>自動</value>
   </data>
@@ -7919,6 +8045,9 @@ SCSI ID: {2}
   </data>
   <data name="NETWORK_NAME" xml:space="preserve">
     <value>ネットワーク {0}</value>
+  </data>
+  <data name="NETWORK_OPTIONS" xml:space="preserve">
+    <value>ネットワーク オプション</value>
   </data>
   <data name="NETWORK_RECONFIG_CONNECTION_LOST" xml:space="preserve">
     <value>サーバーとの接続が失われました。変更内容は適用されません。</value>
@@ -8028,6 +8157,9 @@ SCSI ID: {2}
   <data name="NEWPOOL_MASTER_ROLE" xml:space="preserve">
     <value>マスターに対する現在の役割には、このプールへのホストの追加が許可されていません。</value>
   </data>
+  <data name="NEWPOOL_MAX_NUMBER_HOST_REACHED" xml:space="preserve">
+    <value>このプールのサーバー数は既にライセンスで許可される最大数に達しています</value>
+  </data>
   <data name="NEWPOOL_POOLINGRESTRICTED" xml:space="preserve">
     <value>このサーバーのライセンスではプール機能を使用できません</value>
   </data>
@@ -8036,6 +8168,9 @@ SCSI ID: {2}
   </data>
   <data name="NEWPOOL_UNLICENSED_HOST_LICENSED_MASTER" xml:space="preserve">
     <value>ライセンスが適用されたプールにライセンスが適用されていないサーバーを追加することはできません</value>
+  </data>
+  <data name="NEWPOOL_WILL_EXCEED_POOL_MAX_SIZE" xml:space="preserve">
+    <value>このプールのサーバー数はライセンスで許可される最大数を超えます</value>
   </data>
   <data name="NEWSR_ACTION" xml:space="preserve">
     <value>NFS SR [{0}]</value>
@@ -8561,6 +8696,12 @@ NFS ストレージ リポジトリを構成する場合は、NFS サーバー�
   <data name="NEWVMWIZARD_VGPUPAGE_TITLE" xml:space="preserve">
     <value>仮想 GPU の割り当て</value>
   </data>
+  <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL" xml:space="preserve">
+    <value>このプールでは XenApp/XenDesktop ワークロードに対してのみライセンスが有効です</value>
+  </data>
+  <data name="NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER" xml:space="preserve">
+    <value>このサーバーでは XenApp/XenDesktop ワークロードに対してのみライセンスが有効です</value>
+  </data>
   <data name="NEWVM_DEFAULTNAME" xml:space="preserve">
     <value>{0} ({1})</value>
   </data>
@@ -8704,12 +8845,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NEW_UPDATE_AVAILABLE" xml:space="preserve">
     <value>新しいアップデートのリリース - {0}</value>
   </data>
-  <data name="NEW_VMSS_PAGE_TEXT" xml:space="preserve">
-    <value>このウィザードを使用して、自動で定期的な VM スナップショット ジョブを作成するスナップショット スケジュールを定義します。</value>
-  </data>
-  <data name="NEW_VMSS_PAGE_TEXT_MORE" xml:space="preserve">
-    <value>まず、作成するスケジュールの名前と説明 (オプション) を入力して、[次へ] をクリックします。</value>
-  </data>
   <data name="NEW_VM_APPLIANCE" xml:space="preserve">
     <value>新規 vApp(&amp;N)...</value>
   </data>
@@ -8748,6 +8883,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="NEW_VM_WIZARD_TEMPLATEPAGE_YINHEKYLIN" xml:space="preserve">
     <value>YinheKylin</value>
+  </data>
+  <data name="NEW_XENCENTER_REQUIRED_INFO" xml:space="preserve">
+    <value>新しい [XenCenter] バージョンが必要です</value>
   </data>
   <data name="NFS_ISO_ALREADY_ATTACHED" xml:space="preserve">
     <value>この NFS ISO ストレージは既に '{0}' に接続されています</value>
@@ -8836,6 +8974,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NOT_AGILE_VM_HAS_VGPU" xml:space="preserve">
     <value>この VM には仮想 GPU があります。再起動は保証されません。</value>
   </data>
+  <data name="NOT_AGILE_VM_HAS_VUSB" xml:space="preserve">
+    <value>この VM には USB デバイスが接続されています。再起動は保証されません。</value>
+  </data>
   <data name="NOT_APPLIED" xml:space="preserve">
     <value>未適用</value>
   </data>
@@ -8897,6 +9038,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="NOT_TRUSTED" xml:space="preserve">
     <value>信頼されていない</value>
+  </data>
+  <data name="NOT_UPDATED" xml:space="preserve">
+    <value>旧バージョン</value>
   </data>
   <data name="NOT_UPGRADED" xml:space="preserve">
     <value>未アップグレード</value>
@@ -9102,6 +9246,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
     <value>アップデートに失敗しました</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT" xml:space="preserve">
+    <value>{0}...</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>アップロードしてインストール</value>
   </data>
@@ -9241,7 +9388,13 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>既存のアップデートを選択するか、新たにアップロードします</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTPATCHPAGE_UPDATESEXT" xml:space="preserve">
-    <value>[XenServer] アップデートおよびサプリメンタル パック (*.{0}, *.iso)|*.{0};*.iso</value>
+    <value>[XenServer] アップデートおよびサプリメンタル パック (*.{0}, *.iso,*.zip)|*.{0};*.iso;*.zip</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES" xml:space="preserve">
+    <value>新しいバージョンですべてのリリース済みアップデートも適用</value>
+  </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED" xml:space="preserve">
+    <value>新しいバージョンですべてのリリース済みアップデートも適用 (自動アップデートが使用できるプールでのみ)</value>
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION" xml:space="preserve">
     <value>この [XenServer] バージョンで自動アップデートはサポートされていません</value>
@@ -9278,6 +9431,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>選択されたアップデートを適用する 1つまたは複数のサーバーを選択します。
 このアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE" xml:space="preserve">
+    <value>新しいバージョンにアップデートする 1 つまたは複数のプール、またはスタンドアロン サーバーを選択します。
+このアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION" xml:space="preserve">
     <value>選択されたアップデートを適用する 1つまたは複数のプール、またはスタンドアロン サーバーを選択します。
 このアップデートが適用できないサーバーは、この一覧で無効として表示されます。</value>
@@ -9293,6 +9450,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>アップデートするサーバーを選択します</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE" xml:space="preserve">
+    <value>新しいバージョンがインストールされています。</value>
   </data>
   <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
     <value>自動アップデートが完了しました。</value>
@@ -9314,11 +9474,20 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCHINGWIZARD_UPLOADPAGE_TITLE_ONLY_UPLOAD" xml:space="preserve">
     <value>サーバーへの選択したファイルのアップロード</value>
   </data>
+  <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE" xml:space="preserve">
+    <value>アップデートのインストール中:</value>
+  </data>
+  <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE" xml:space="preserve">
+    <value>新しいバージョンのインストール中：</value>
+  </data>
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>VM から仮想 CD をイジェクトしてください</value>
   </data>
   <data name="PATCHING_WARNING_HA" xml:space="preserve">
     <value>すべてのホストが再起動されるまで、高可用性を無効にしてください</value>
+  </data>
+  <data name="PATCHING_WIZARD_CHECK_OK" xml:space="preserve">
+    <value>{0}: OK。</value>
   </data>
   <data name="PATCHING_WIZARD_CONFIRMATION_DELETE" xml:space="preserve">
     <value>パッチ {0} を削除します。続行しますか?</value>
@@ -9381,6 +9550,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PATCH_FOR_XENSERVER_VERSION" xml:space="preserve">
     <value>{0}: このパッチは、正規表現 '{1}' に一致するバージョンのサーバー用です。</value>
   </data>
+  <data name="PATCH_INSTALLATION_SIZE" xml:space="preserve">
+    <value>インストール サイズ: {0}</value>
+  </data>
+  <data name="PATCH_NEEDS_NEW_XENCENTER" xml:space="preserve">
+    <value>このバージョンには [XenCenter] {0} 以降が必要です</value>
+  </data>
   <data name="PATCH_NOT_FOUND" xml:space="preserve">
     <value>見つかりません</value>
   </data>
@@ -9399,6 +9574,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="PDSECTION_TITLE" xml:space="preserve">
     <value>タイトル</value>
+  </data>
+  <data name="PENDING_RESTART_CHECK" xml:space="preserve">
+    <value>保留中の再起動チェック</value>
   </data>
   <data name="PERFORMANCE_TAB_TITLE" xml:space="preserve">
     <value>パフォーマンス グラフ</value>
@@ -9552,7 +9730,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PM_MODE_WOL" xml:space="preserve">
     <value>Wake-on-LAN</value>
   </data>
-
   <data name="POLICY_NAME" xml:space="preserve">
     <value>ポリシー名</value>
   </data>
@@ -9700,6 +9877,18 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="PROBLEM_MAC_ADDRESS_IS_DUPLICATE_TITLE" xml:space="preserve">
     <value>MAC アドレスの重複</value>
   </data>
+  <data name="PROBLEM_MASTER_PENDING_RESTART_HOST" xml:space="preserve">
+    <value>{0}: 最初にマスターを再起動する必要があります</value>
+  </data>
+  <data name="PROBLEM_MASTER_PENDING_RESTART_HOST_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: このアップデートでは最初にマスターを再起動する必要があります</value>
+  </data>
+  <data name="PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK" xml:space="preserve">
+    <value>{0}: 最初にマスター上のツールスタックを再起動する必要があります</value>
+  </data>
+  <data name="PROBLEM_MASTER_PENDING_RESTART_TOOLSTACK_THIS_UPDATE" xml:space="preserve">
+    <value>{0}: このアップデートでは最初にマスター上のツールスタックを再起動する必要があります</value>
+  </data>
   <data name="PROBLEM_POOLPROBLEM_TITLE" xml:space="preserve">
     <value>プール '{0}'</value>
   </data>
@@ -9717,6 +9906,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="PROBLEM_VMPROBLEM_TITLE" xml:space="preserve">
     <value>VM '{0}'</value>
+  </data>
+  <data name="PROBLEM_XENCENTER_VERSION_TITLE" xml:space="preserve">
+    <value>[XenCenter] バージョン</value>
   </data>
   <data name="PROCEED" xml:space="preserve">
     <value>続行する(&amp;P)</value>
@@ -10144,6 +10336,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="REQUIRED_HOTFIX_ISNOT_INSTALLED" xml:space="preserve">
     <value>{0}: 必要な Hotfix がインストールされていません</value>
   </data>
+  <data name="REQUIRED_UPDATES" xml:space="preserve">
+    <value>必要なアップデート</value>
+  </data>
   <data name="RESOLVED_AS" xml:space="preserve">
     <value>{0} として解決されました</value>
   </data>
@@ -10272,6 +10467,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="ROLLING_UPGRADE_TITLE_MODE" xml:space="preserve">
     <value>アップグレード モード</value>
   </data>
+  <data name="ROLLING_UPGRADE_UNLICENSED_HOST" xml:space="preserve">
+    <value>プールのローリングアップグレード用のライセンスがこのサーバーにありません</value>
+  </data>
+  <data name="ROLLING_UPGRADE_UNLICENSED_POOL" xml:space="preserve">
+    <value>プールのローリングアップグレード用のライセンスがこのプールにありません</value>
+  </data>
   <data name="ROLLING_UPGRADE_UPGRADE_COMPLETED" xml:space="preserve">
     <value>プールのローリング アップグレードが完了しました。</value>
   </data>
@@ -10283,9 +10484,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="RUNNING_ON" xml:space="preserve">
     <value>実行サーバー</value>
-  </data>
-  <data name="RUNNING_SNAPSHOTS" xml:space="preserve">
-    <value>スナップショット作成中</value>
   </data>
   <data name="RUN_POLICY" xml:space="preserve">
     <value>ポリシー '{0}' の実行中</value>
@@ -10697,7 +10895,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>スナップショットを削除しています...</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY" xml:space="preserve">
-    <value>スナップショット スケジュール</value>
+    <value>スケジュール</value>
   </data>
   <data name="SNAPSHOT_FREQUENCY_TITLE" xml:space="preserve">
     <value>スナップショットの作成日時</value>
@@ -10760,7 +10958,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>権限のより多いユーザー アカウントで再試行してください。</value>
   </data>
   <data name="SOLUTION_UNKNOWN" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="SOME_ERRORS_ENCOUNTERED" xml:space="preserve">
     <value>いくつかのエラーが発生しました。詳しくは、[XenCenter] のログを参照してください。</value>
@@ -11380,7 +11578,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>OVF または OVA パッケージからアプライアンスをインポートします。</value>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_VHD" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="TYPE_PAGE_DESCRIPTION_HEADER_XVA" xml:space="preserve">
     <value>ローカルに格納された VM、テンプレート、またはスナップショットを新規 VM としてインポートします。</value>
@@ -11422,6 +11620,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UNTIL_RESTART_X_AFTER_RESTART_Y" xml:space="preserve">
     <value>次回再起動まで {0}; 再起動後 {1}</value>
+  </data>
+  <data name="UPDATED" xml:space="preserve">
+    <value>最新状態</value>
   </data>
   <data name="UPDATED_PERFMON" xml:space="preserve">
     <value>パフォーマンスの監視構成が更新されました</value>
@@ -11483,6 +11684,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UPDATES_DOWNLOAD_AND_INSTALL" xml:space="preserve">
     <value>ダウンロードしてインストール</value>
+  </data>
+  <data name="UPDATES_DOWNLOAD_REQUIRED_XENCENTER" xml:space="preserve">
+    <value>[XenCenter] のダウンロード</value>
   </data>
   <data name="UPDATES_WIZARD" xml:space="preserve">
     <value>アップデートのインストール</value>
@@ -11567,6 +11771,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPDATES_WIZARD_EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>保守モードからの切り替え</value>
   </data>
+  <data name="UPDATES_WIZARD_EXTRACT_ACTION_TITLE" xml:space="preserve">
+    <value>{0} を抽出</value>
+  </data>
   <data name="UPDATES_WIZARD_FILE_NOT_FOUND" xml:space="preserve">
     <value>アップデート ファイル '{0}' が見つかりません。
 
@@ -11608,8 +11815,17 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPDATES_WIZARD_LOCAL_STORAGE" xml:space="preserve">
     <value>{0}: VM '{1}' はローカル ストレージを使用しているため移行できません。</value>
   </data>
+  <data name="UPDATES_WIZARD_NEWER_XENCENTER_REQUIRED" xml:space="preserve">
+    <value>[XenCenter] バージョン {0} 以降が必要です。</value>
+  </data>
+  <data name="UPDATES_WIZARD_NEWER_XENCENTER_WARNING" xml:space="preserve">
+    <value>[XenServer] をアップグレードする前に [XenCenter] をアップグレードする必要があります。</value>
+  </data>
   <data name="UPDATES_WIZARD_NOTVALID_EXTENSION" xml:space="preserve">
     <value>選択したファイルには有効な拡張子がありません。有効な拡張子: *.{0} および *.iso</value>
+  </data>
+  <data name="UPDATES_WIZARD_NOTVALID_ZIPFILE" xml:space="preserve">
+    <value>{0} に有効なアップデート ファイルがありません</value>
   </data>
   <data name="UPDATES_WIZARD_NOT_ENOUGH_SPACE" xml:space="preserve">
     <value>要求された VM を一時停止するために必要な空き容量がこのストレージ リポジトリにありません。</value>
@@ -11690,7 +11906,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>{1} からアップデートのインストール ファイル {0} を削除しています... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>{0} から更新ファイルを削除しています...</value>
+    <value>{0} からアップデート ファイルを削除しています...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>修復するにはここをクリックしてください</value>
@@ -11968,7 +12184,8 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
     <value>
-下のボタンを使用して、[XenServer] VM の定期的なスナップショット機能や XenServer の試用についての情報を参照できます。</value>
+
+下のボタンを使用して、[XenServer] VM の定期的なスナップショット機能や [XenServer] の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>vApp 機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能では、いくつかの VM を単一の仮想アプライアンスとしてグループ化して、それらを一緒に起動したり停止したりできます。また、プライマリの本稼働サイトに障害が発生した場合に、それらの VM を障害回復 (DR) サイトに簡単にフェイルオーバーできます。</value>
@@ -11977,7 +12194,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>
 
 下のボタンを使用して、vApp 機能や [XenServer] の試用についての情報を参照できます。</value>
-
   </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
     <value>動的なワークロード バランス機能を使用するには、[XenServer] ライセンスをアップグレードしてください。動的なワークロード バランスにより、仮想マシンおよび [XenServer] ホストのパフォーマンスが継続的に監視され、新しいワークロードを最適に再配分および配置して、リソース プール内の物理サーバー リソースを最大限に活用します。</value>
@@ -11992,6 +12208,39 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="URI_REGEX" xml:space="preserve">
     <value>^(http|https|file|ftp)://*</value>
+  </data>
+  <data name="USB" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="USBLIST_DISABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>パススルーを無効にします(&amp;D)</value>
+  </data>
+  <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>パススルーを有効にします(&amp;E)</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_HA" xml:space="preserve">
+    <value>USB デバイスを接続できません。VM は現在 HA で保護されています。</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_NOT_HALTED" xml:space="preserve">
+    <value>USB デバイスを接続するには、VM がシャットダウン状態である必要があります。</value>
+  </data>
+  <data name="USB_DEVICES" xml:space="preserve">
+    <value>USB デバイス</value>
+  </data>
+  <data name="USB_DEVICE_VENDOR_PRODUCT" xml:space="preserve">
+    <value>ベンダー: {0}; 製品: {1}</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
+    <value>1 デバイスが接続されています</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_MULTIPLE_DEVICES" xml:space="preserve">
+    <value>{0} デバイスが接続されています</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_NODEVICES" xml:space="preserve">
+    <value>デバイスが接続されていません</value>
+  </data>
+  <data name="USB_EDIT_TEXT" xml:space="preserve">
+    <value>USB</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>[XenCenter] で {0} の操作を許可できません。詳しくは、アプリケーション ログ ファイルを参照してください。</value>
@@ -12137,6 +12386,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="VERIFYING_SIGNATURE_ERROR" xml:space="preserve">
     <value>署名の検証に失敗しました。{0}</value>
   </data>
+  <data name="VERSION" xml:space="preserve">
+    <value>バージョン</value>
+  </data>
   <data name="VERSION_NUMBER" xml:space="preserve">
     <value>[XenCenter] Version {0} (build {1}.{2}) {3} ビット</value>
   </data>
@@ -12263,17 +12515,11 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="VMSS_CONTEXT_MENU" xml:space="preserve">
     <value>スナップショット スケジュール(&amp;U)...</value>
   </data>
-  <data name="VMSS_DIALOG_TEXT" xml:space="preserve">
-    <value>VM のスナップショット スケジュールを作成する。</value>
-  </data>
-  <data name="VMSS_DIALOG_TITLE" xml:space="preserve">
-    <value>スナップショット スケジュール</value>
-  </data>
   <data name="VMSS_EMAIL_CHECKBOX_TEXT" xml:space="preserve">
     <value>スナップショット スケジュール ジョブのアラートをメールで送信する(&amp;E)</value>
   </data>
   <data name="VMSS_EMAIL_PAGE_TEXT" xml:space="preserve">
-    <value>XenServer でスナップショット スケジュール ジョブに関するアラート (VM スナップショットが作成された場合や、スナップショット作成が失敗した場合など) が生成されたときに、通知メールが送信されるように設定できます。</value>
+    <value>[XenServer] でスナップショット スケジュール ジョブに関するアラート (VM スナップショットが作成された場合や、スナップショット作成が失敗した場合など) が生成されたときに、通知メールが送信されるように設定できます。</value>
   </data>
   <data name="VMSS_FINISH_PAGE_CHECKBOX_TEXT" xml:space="preserve">
     <value>[完了] をクリックして新規スナップショット スケジュール処理を実行する(&amp;R)</value>
@@ -12292,9 +12538,6 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="VMSS_NAME" xml:space="preserve">
     <value>スケジュール名</value>
-  </data>
-  <data name="VMSS_NAME_FIELD_TEXT" xml:space="preserve">
-    <value>スケジュール名(&amp;M):</value>
   </data>
   <data name="VMSS_NAME_TITLE" xml:space="preserve">
     <value>このスケジュールの名前</value>
@@ -12315,7 +12558,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>スケジュール</value>
   </data>
   <data name="VMSS_VMS" xml:space="preserve">
-    <value>スナップショット スケジュールの VM</value>
+    <value>仮想マシン</value>
   </data>
   <data name="VMSS_VMS_TITLE" xml:space="preserve">
     <value>スナップショット スケジュールを作成する VM を選択する</value>
@@ -12726,7 +12969,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>詳細</value>
   </data>
   <data name="WLB_ADVANCED_CONFIGURATION_SUBTEXT" xml:space="preserve">
-    <value />
+    <value/>
   </data>
   <data name="WLB_AUDIT_LOG_MAXIMUM" xml:space="preserve">
     <value>最大</value>
@@ -13358,6 +13601,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="XENCENTER_NEWER_AVAILABLE" xml:space="preserve">
     <value>新しい [XenCenter] が使用可能</value>
+  </data>
+  <data name="XENCENTER_VERSION_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>[XenCenter] バージョンの確認</value>
   </data>
   <data name="XENSEARCH_SAVED_SEARCH" xml:space="preserve">
     <value>保存済みの検索 (*.{0})|*.{0}</value>

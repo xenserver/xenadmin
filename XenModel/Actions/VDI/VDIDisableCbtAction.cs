@@ -29,21 +29,30 @@
  * SUCH DAMAGE.
  */
 
-using System.ComponentModel;
-using XenAdmin.Controls.DataGridViewEx;
+using System;
+using XenAPI;
 
-namespace XenAdmin.Wizards.RollingUpgradeWizard.Sorting
+
+namespace XenAdmin.Actions
 {
-    public sealed class UpgradeDataGridViewDescriptionSorter : CollapsingPoolHostDataGridViewRowStableSorter<RollingUpgradeWizardSelectPool.UpgradeDataGridViewRow>
+    public class VDIDisableCbtAction : PureAsyncAction
     {
-        public UpgradeDataGridViewDescriptionSorter() { }
+        private VDI vdi;
 
-        public UpgradeDataGridViewDescriptionSorter(ListSortDirection direction) : base(direction) { }
-
-        protected override int SortRowByColumnDetails(RollingUpgradeWizardSelectPool.UpgradeDataGridViewRow rowLhs, 
-                                                 RollingUpgradeWizardSelectPool.UpgradeDataGridViewRow rowRhs)
+        public VDIDisableCbtAction(VM vm, VDI vdi)
+            : base(vm.Connection, String.Format(Messages.ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR, vm.Name()))
         {
-            return rowLhs.DescriptionText.CompareTo(rowRhs.DescriptionText);
+            VM = vm;
+            this.vdi = vdi;
+            Description = Messages.WAITING;
+        }
+
+        protected override void Run()
+        {
+            Description = String.Format(Messages.ACTION_DISABLE_CHANGED_BLOCK_TRACKING_FOR, VM.Name());
+            RelatedTask = VDI.async_disable_cbt(Session, vdi.opaque_ref);
+            PollToCompletion();
+            Description = Messages.DISABLED;
         }
     }
 }

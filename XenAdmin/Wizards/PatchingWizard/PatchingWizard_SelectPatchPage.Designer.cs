@@ -31,12 +31,13 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatchingWizard_SelectPatchPage));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelWithoutAutomatedUpdates = new System.Windows.Forms.Label();
             this.labelWithAutomatedUpdates = new System.Windows.Forms.Label();
@@ -213,28 +214,28 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.ColumnDescription,
             this.ColumnDate,
             this.webPageColumn});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewPatches.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPatches.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.dataGridViewPatches, "dataGridViewPatches");
             this.dataGridViewPatches.HideSelection = true;
             this.dataGridViewPatches.Name = "dataGridViewPatches";
             this.dataGridViewPatches.ReadOnly = true;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewPatches.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPatches.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPatches.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPatches.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewPatches.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewPatches.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPatches_CellContentClick);
             this.dataGridViewPatches.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewPatches_CellMouseClick);
@@ -279,6 +280,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             // webPageColumn
             // 
             this.webPageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.webPageColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.webPageColumn.FillWeight = 60F;
             resources.ApplyResources(this.webPageColumn, "webPageColumn");
             this.webPageColumn.Name = "webPageColumn";
@@ -317,10 +321,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.RadioButton downloadUpdateRadioButton;
         private System.Windows.Forms.Label labelWithAutomatedUpdates;
         private System.Windows.Forms.Button RestoreDismUpdatesButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUpdate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
-        private System.Windows.Forms.DataGridViewLinkColumn webPageColumn;
         private System.Windows.Forms.Label automatedUpdatesOptionLabel;
         private System.Windows.Forms.RadioButton AutomatedUpdatesRadioButton;
         private System.Windows.Forms.Label labelWithoutAutomatedUpdates;
@@ -329,5 +329,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSpinner;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUpdate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
+        private System.Windows.Forms.DataGridViewLinkColumn webPageColumn;
     }
 }

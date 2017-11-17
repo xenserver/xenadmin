@@ -112,23 +112,23 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="pictureBoxStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="pictureBoxStatus.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -141,11 +141,14 @@
   <data name="pictureBoxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
+  <data name="pictureBoxStatus.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;pictureBoxStatus.Name" xml:space="preserve">
     <value>pictureBoxStatus</value>
   </data>
   <data name="&gt;&gt;pictureBoxStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -174,14 +177,11 @@
   <data name="labelHaStatus.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="labelHaStatus.Text" xml:space="preserve">
-    <value>高可用性による保護が可能です。保護可能な最大許容障害数は {0} です。</value>
-  </data>
   <data name="&gt;&gt;labelHaStatus.Name" xml:space="preserve">
     <value>labelHaStatus</value>
   </data>
   <data name="&gt;&gt;labelHaStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelHaStatus.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -220,7 +220,7 @@
     <value>labelProtectionLevel</value>
   </data>
   <data name="&gt;&gt;labelProtectionLevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelProtectionLevel.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -228,7 +228,7 @@
   <data name="&gt;&gt;labelProtectionLevel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
@@ -238,7 +238,7 @@
     <value>contextMenuStrip</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="m_dropDownButtonRestartPriority.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -301,7 +301,7 @@
     <value>labelStartOrder</value>
   </data>
   <data name="&gt;&gt;labelStartOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStartOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -328,7 +328,7 @@
     <value>nudOrder</value>
   </data>
   <data name="&gt;&gt;nudOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nudOrder.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -364,7 +364,7 @@
     <value>labelStartDelay</value>
   </data>
   <data name="&gt;&gt;labelStartDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -391,7 +391,7 @@
     <value>nudStartDelay</value>
   </data>
   <data name="&gt;&gt;nudStartDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;nudStartDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -427,7 +427,7 @@
     <value>labelStartDelayUnits</value>
   </data>
   <data name="&gt;&gt;labelStartDelayUnits.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStartDelayUnits.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -463,16 +463,13 @@
     <value>linkLabelTellMeMore</value>
   </data>
   <data name="&gt;&gt;linkLabelTellMeMore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;linkLabelTellMeMore.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;linkLabelTellMeMore.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="haNtolIndicator.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="haNtolIndicator.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -504,7 +501,7 @@
   <data name="&gt;&gt;haNtolIndicator.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <metadata name="colImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="colImage.HeaderText" xml:space="preserve">
@@ -513,7 +510,7 @@
   <data name="colImage.Width" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <metadata name="colVm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colVm.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="colVm.HeaderText" xml:space="preserve">
@@ -522,7 +519,7 @@
   <data name="colVm.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="colRestartPriority.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colRestartPriority.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="colRestartPriority.HeaderText" xml:space="preserve">
@@ -531,7 +528,7 @@
   <data name="colRestartPriority.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="colStartOrder.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colStartOrder.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="colStartOrder.HeaderText" xml:space="preserve">
@@ -540,7 +537,7 @@
   <data name="colStartOrder.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="colDelay.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colDelay.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="colDelay.HeaderText" xml:space="preserve">
@@ -549,7 +546,7 @@
   <data name="colDelay.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="colAgile.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colAgile.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="colAgile.HeaderText" xml:space="preserve">
@@ -607,7 +604,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -637,9 +634,9 @@
     <value>button1</value>
   </data>
   <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AccessibleDescription" xml:space="preserve">
@@ -661,37 +658,37 @@
     <value>colImage</value>
   </data>
   <data name="&gt;&gt;colImage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colVm.Name" xml:space="preserve">
     <value>colVm</value>
   </data>
   <data name="&gt;&gt;colVm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colRestartPriority.Name" xml:space="preserve">
     <value>colRestartPriority</value>
   </data>
   <data name="&gt;&gt;colRestartPriority.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colStartOrder.Name" xml:space="preserve">
     <value>colStartOrder</value>
   </data>
   <data name="&gt;&gt;colStartOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colDelay.Name" xml:space="preserve">
     <value>colDelay</value>
   </data>
   <data name="&gt;&gt;colDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colAgile.Name" xml:space="preserve">
     <value>colAgile</value>
   </data>
   <data name="&gt;&gt;colAgile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AssignPriorities</value>

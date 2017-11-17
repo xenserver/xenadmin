@@ -50,6 +50,8 @@ namespace XenAdmin.ConsoleView
             this.sendCAD = new System.Windows.Forms.Button();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelGeneralInformationMessage = new System.Windows.Forms.Label();
+            this.pictureBoxGeneralInformationMessage = new System.Windows.Forms.PictureBox();
             this.scaleCheckBox = new System.Windows.Forms.CheckBox();
             this.fullscreenButton = new System.Windows.Forms.Button();
             this.dockButton = new System.Windows.Forms.Button();
@@ -65,6 +67,7 @@ namespace XenAdmin.ConsoleView
             this.multipleDvdIsoList1 = new XenAdmin.Controls.MultipleDvdIsoList();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGeneralInformationMessage)).BeginInit();
             this.gradientPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -85,11 +88,26 @@ namespace XenAdmin.ConsoleView
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelGeneralInformationMessage, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxGeneralInformationMessage, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.sendCAD, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.scaleCheckBox, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.fullscreenButton, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dockButton, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.scaleCheckBox, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.fullscreenButton, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dockButton, 4, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // labelGeneralInformationMessage
+            // 
+            resources.ApplyResources(this.labelGeneralInformationMessage, "labelGeneralInformationMessage");
+            this.labelGeneralInformationMessage.AutoEllipsis = true;
+            this.labelGeneralInformationMessage.Name = "labelGeneralInformationMessage";
+            // 
+            // pictureBoxGeneralInformationMessage
+            // 
+            resources.ApplyResources(this.pictureBoxGeneralInformationMessage, "pictureBoxGeneralInformationMessage");
+            this.pictureBoxGeneralInformationMessage.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBoxGeneralInformationMessage.Name = "pictureBoxGeneralInformationMessage";
+            this.pictureBoxGeneralInformationMessage.TabStop = false;
             // 
             // scaleCheckBox
             // 
@@ -215,6 +233,7 @@ namespace XenAdmin.ConsoleView
             this.Name = "VNCTabView";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGeneralInformationMessage)).EndInit();
             this.gradientPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -243,5 +262,7 @@ namespace XenAdmin.ConsoleView
         private System.Windows.Forms.Label powerStateLabel;
         private System.Windows.Forms.Label dedicatedGpuWarning;
         private System.Windows.Forms.Button buttonSSH;
+        private System.Windows.Forms.PictureBox pictureBoxGeneralInformationMessage;
+        private System.Windows.Forms.Label labelGeneralInformationMessage;
     }
 }

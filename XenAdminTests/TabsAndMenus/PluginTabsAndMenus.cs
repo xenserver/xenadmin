@@ -187,7 +187,7 @@ namespace XenAdminTests.TabsAndMenus
                 Assert.AreEqual("server_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.HostMenu.DropDownItems)[21].Text);
 
                 MainWindowWrapper.VMMenu.ShowDropDown();
-                Assert.AreEqual("vm_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.VMMenu.DropDownItems)[18].Text);
+                Assert.AreEqual("vm_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.VMMenu.DropDownItems)[19].Text);
 
                 MainWindowWrapper.TemplatesMenu.ShowDropDown();
                 Assert.AreEqual("templates_ShellTest1", GetVisibleToolStripItems(MainWindowWrapper.TemplatesMenu.DropDownItems)[7].Text);
