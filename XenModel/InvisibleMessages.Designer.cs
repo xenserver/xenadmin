@@ -88,15 +88,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://updates.xensource.com/[XenServer]/{0}/XenCenter.
-        /// </summary>
-        public static string CHECK_FOR_UPDATES_URL {
-            get {
-                return ResourceManager.GetString("CHECK_FOR_UPDATES_URL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to http://xenserver.org/.
         /// </summary>
         public static string COMMUNITY_URL {
@@ -268,137 +259,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/ad.
+        ///   Looks up a localized string similar to https://www.citrix.com/products/xenserver/get-started.html.
         /// </summary>
-        public static string UPSELL_LEARNMOREURL_AD {
+        public static string UPSELL_LEARNMOREURL_TRIAL {
             get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_AD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/alerts.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_ALERTS {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_ALERTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/storagemigration.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_CPM {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_CPM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/cpus.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_CPUMASKING {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_CPUMASKING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/dmc.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_DMC {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_DMC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/dr.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_DR {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_DR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/storage.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_ENHANCEDSR {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_ENHANCEDSR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_GENERAL {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_GENERAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/gpu.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_GPU {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_GPU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/ha.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_HA {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_HA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/performance.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_PERFORMANCE {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_PERFORMANCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/rbac.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_RBAC {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_RBAC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/vapps.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_VM_APPLIANCES {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_VM_APPLIANCES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_VMSS {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_VMSS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserver/le/features/wlb.
-        /// </summary>
-        public static string UPSELL_LEARNMOREURL_WLB {
-            get {
-                return ResourceManager.GetString("UPSELL_LEARNMOREURL_WLB", resourceCulture);
+                return ResourceManager.GetString("UPSELL_LEARNMOREURL_TRIAL", resourceCulture);
             }
         }
         
