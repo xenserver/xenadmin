@@ -10817,6 +10817,12 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>Shutting down VM {0} out of {1}</value>
   </data>
+  <data name="SHUT_DOWN_POOL_MASTER_MULTIPLE" xml:space="preserve">
+    <value>{0} are pool masters. It is strongly recommended to nominate a new master for each affected pool before proceeding.</value>
+  </data>
+  <data name="SHUT_DOWN_POOL_MASTER_SINGLE" xml:space="preserve">
+    <value>{0} is the pool master. It is strongly recommended to nominate a new master for the pool before proceeding.</value>
+  </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>Applying digital signature to appliance...</value>
   </data>
