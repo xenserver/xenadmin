@@ -39,13 +39,13 @@ using CookComputing.XmlRpc;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
+using XenCenterLib;
 using System.Diagnostics;
-
 using System.Xml.Serialization;
 
+
 namespace XenAdmin.Network
-{
-    
+{   
     [DebuggerDisplay("IXenConnection :{HostnameWithPort}")]
     public class XenConnection : IXenConnection,IXmlSerializable
     {

@@ -32,7 +32,7 @@
 using System;
 using System.IO;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
 	public class PathValidator
 	{

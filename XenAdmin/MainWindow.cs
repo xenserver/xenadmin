@@ -59,7 +59,7 @@ using XenAdmin.TabPages;
 using XenAdmin.XenSearch;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
-
+using XenCenterLib;
 using System.Linq;
 
 namespace XenAdmin

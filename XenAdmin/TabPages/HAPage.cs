@@ -40,7 +40,7 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards;
 using XenAPI;
-
+using XenCenterLib;
 
 namespace XenAdmin.TabPages
 {

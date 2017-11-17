@@ -36,7 +36,7 @@ using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
 using XenAdmin.Core;
 using XenAdmin.Wizards.ExportWizard.ApplianceChecks;
-
+using XenCenterLib;
 
 namespace XenAdmin.Wizards.ExportWizard
 {

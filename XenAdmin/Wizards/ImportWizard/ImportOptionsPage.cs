@@ -36,7 +36,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Mappings;
 using XenAPI;
 using XenOvf;

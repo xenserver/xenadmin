@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     public class Win32
     {
@@ -366,7 +366,7 @@ namespace XenAdmin.Core
 
         public static string GetWindowsMessageName(int msg)
         {
-            Type t = typeof(Core.Win32);
+            Type t = typeof(Win32);
             foreach (FieldInfo f in t.GetFields())
             {
                 object i = f.GetValue(null);

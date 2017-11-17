@@ -31,18 +31,14 @@
 
 
 using System;
-using System.Collections;
-using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Resources;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Reflection;
 using System.Text;
-
-using XenAdmin.Core;
+using XenCenterLib;
 
 namespace DotNetVnc
 {

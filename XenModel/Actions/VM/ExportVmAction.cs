@@ -37,7 +37,7 @@ using XenAdmin.Network;
 using System.Threading;
 using XenAPI;
 using XenCenterLib.Archive;
-
+using XenCenterLib;
 
 namespace XenAdmin.Actions
 {

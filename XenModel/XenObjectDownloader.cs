@@ -35,6 +35,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Runtime.Serialization;
 using XenAPI;
+using XenCenterLib;
 
 namespace XenAdmin.Core
 {

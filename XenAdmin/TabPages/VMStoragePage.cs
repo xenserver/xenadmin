@@ -44,6 +44,7 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAPI;
 using XenAdmin.Commands;
+using XenCenterLib;
 
 
 namespace XenAdmin.TabPages

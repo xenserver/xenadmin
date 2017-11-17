@@ -41,6 +41,7 @@ using System.Text.RegularExpressions;
 using DotNetVnc;
 using XenAdmin.Core;
 using System.Linq;
+using XenCenterLib;
 
 namespace XenAdmin.ConsoleView
 {

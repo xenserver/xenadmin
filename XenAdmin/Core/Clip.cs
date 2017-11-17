@@ -33,6 +33,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using XenCenterLib;
 
 namespace XenAdmin.Core
 {
