@@ -118,8 +118,8 @@ namespace XenAdmin.Commands
     	private static void ShowUpsellDialog(IWin32Window parent)
         {
             // Show upsell dialog
-            using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DR : Messages.UPSELL_BLURB_DR + Messages.UPSELL_BLURB_DR_MORE,
-                                                InvisibleMessages.UPSELL_LEARNMOREURL_DR))
+            using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DR : Messages.UPSELL_BLURB_DR + Messages.UPSELL_BLURB_TRIAL,
+                                                InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
                 dlg.ShowDialog(parent);
         }
 
