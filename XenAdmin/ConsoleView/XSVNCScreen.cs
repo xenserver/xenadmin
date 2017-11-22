@@ -117,6 +117,8 @@ namespace XenAdmin.ConsoleView
         public event Action<bool> GpuStatusChanged;
         public event Action<string> ConnectionNameChanged;
 
+        public bool RdpVersionWarningNeeded { get { return rdpClient != null && rdpClient.needsRdpVersionWarning; }}
+
         internal readonly VNCTabView parentVNCTabView;
 
         [DefaultValue(false)]

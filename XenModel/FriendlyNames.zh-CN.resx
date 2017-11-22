@@ -1032,7 +1032,7 @@
     <value>{0} 的许可证已过期。</value>
   </data>
   <data name="Message.body-license_expires_soon" xml:space="preserve">
-    <value>主机“{0}”上的许可证将在 {1} 到期。</value>
+    <value>主机“{0}”上的许可证将在 30 天内过期。</value>
   </data>
   <data name="Message.body-license_not_available" xml:space="preserve">
     <value>请求的许可证不适用于 {0}。</value>

@@ -187,6 +187,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._required_cluster_stack, other._required_cluster_stack);
         }
 
+        internal static List<SM> ProxyArrayToObjectList(Proxy_SM[] input)
+        {
+            var result = new List<SM>();
+            foreach (var item in input)
+                result.Add(new SM(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, SM server)
         {
             if (opaqueRef == null)

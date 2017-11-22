@@ -18537,6 +18537,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The [Xenserver] Template that you are attempting to import already exists in the selected pool..
+        /// </summary>
+        public static string IMPORT_TEMPLATE_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("IMPORT_TEMPLATE_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure storage for the new template.
         /// </summary>
         public static string IMPORT_TEMPLATE_CONFIGURE_STORAGE {
@@ -22436,17 +22445,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Live VDI Migration feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string MIGRATE_VDI_UPSELL_BLURB_MORE {
-            get {
-                return ResourceManager.GetString("MIGRATE_VDI_UPSELL_BLURB_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Migrate VMs off server &apos;{0}&apos;.
         /// </summary>
         public static string MIGRATE_VMS_OFF_SERVER {
@@ -22470,15 +22468,6 @@ namespace XenAdmin {
         public static string MIGRATION_NOT_ALLOWED_CPU_FEATURES {
             get {
                 return ResourceManager.GetString("MIGRATION_NOT_ALLOWED_CPU_FEATURES", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This VM may not migrate because it has a dedicated GPU.
-        /// </summary>
-        public static string MIGRATION_NOT_ALLOWED_GPU {
-            get {
-                return ResourceManager.GetString("MIGRATION_NOT_ALLOWED_GPU", resourceCulture);
             }
         }
         
@@ -31110,6 +31099,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} are pool masters. It is strongly recommended to nominate a new master for each affected pool before proceeding..
+        /// </summary>
+        public static string SHUT_DOWN_POOL_MASTER_MULTIPLE {
+            get {
+                return ResourceManager.GetString("SHUT_DOWN_POOL_MASTER_MULTIPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is the pool master. It is strongly recommended to nominate a new master for the pool before proceeding..
+        /// </summary>
+        public static string SHUT_DOWN_POOL_MASTER_SINGLE {
+            get {
+                return ResourceManager.GetString("SHUT_DOWN_POOL_MASTER_SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shut down.
         /// </summary>
         public static string SHUTDOWN {
@@ -34956,33 +34963,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Active Directory feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_AD_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_AD_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services..
         /// </summary>
         public static string UPSELL_BLURB_ALERTS {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_ALERTS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Alerting and Reporting feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_ALERTS_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_ALERTS_MORE", resourceCulture);
             }
         }
         
@@ -34996,33 +34981,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Cross-Pool Migration feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_CPM_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_CPM_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them..
         /// </summary>
         public static string UPSELL_BLURB_CPUMASKING {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_CPUMASKING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Heterogeneous Pools feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_CPUMASKING_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_CPUMASKING_MORE", resourceCulture);
             }
         }
         
@@ -35036,33 +34999,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Dynamic Memory Control feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_DMC_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_DMC_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site..
         /// </summary>
         public static string UPSELL_BLURB_DR {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_DR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Disaster Recovery feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_DR_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_DR_MORE", resourceCulture);
             }
         }
         
@@ -35085,17 +35026,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] GPU pass-through feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_GPU_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_GPU_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool..
         /// </summary>
         public static string UPSELL_BLURB_HA {
@@ -35105,33 +35035,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] High Availability feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_HA_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_HA_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change..
         /// </summary>
         public static string UPSELL_BLURB_PERFORMANCE {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_PERFORMANCE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Performance Reporting capabilities feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_PERFORMANCE_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_PERFORMANCE_MORE", resourceCulture);
             }
         }
         
@@ -35147,11 +35055,11 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to 
         ///
-        ///To learn more about the [XenServer] Role Based Access Control feature or to start a [XenServer] trial, click the button below..
+        ///To start a [XenServer] trial, click the button below..
         /// </summary>
-        public static string UPSELL_BLURB_RBAC_MORE {
+        public static string UPSELL_BLURB_TRIAL {
             get {
-                return ResourceManager.GetString("UPSELL_BLURB_RBAC_MORE", resourceCulture);
+                return ResourceManager.GetString("UPSELL_BLURB_TRIAL", resourceCulture);
             }
         }
         
@@ -35165,17 +35073,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the vApps feature of [XenServer] or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_VM_APPLIANCES_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_VM_APPLIANCES_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs..
         /// </summary>
         public static string UPSELL_BLURB_VMSS {
@@ -35185,33 +35082,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] VM Scheduled Snapshots feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_VMSS_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_VMSS_MORE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade your [XenServer] license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and [XenServer] hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool..
         /// </summary>
         public static string UPSELL_BLURB_WLB {
             get {
                 return ResourceManager.GetString("UPSELL_BLURB_WLB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 
-        ///
-        ///To learn more about the [XenServer] Dynamic Workload Balancing feature or to start a [XenServer] trial, click the button below..
-        /// </summary>
-        public static string UPSELL_BLURB_WLB_MORE {
-            get {
-                return ResourceManager.GetString("UPSELL_BLURB_WLB_MORE", resourceCulture);
             }
         }
         
@@ -35261,7 +35136,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Vendor: {0}; Product: {1}&quot;.
+        ///   Looks up a localized string similar to Vendor: {0}; Product: {1}.
         /// </summary>
         public static string USB_DEVICE_VENDOR_PRODUCT {
             get {

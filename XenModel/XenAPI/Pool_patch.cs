@@ -159,6 +159,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<Pool_patch> ProxyArrayToObjectList(Proxy_Pool_patch[] input)
+        {
+            var result = new List<Pool_patch>();
+            foreach (var item in input)
+                result.Add(new Pool_patch(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Pool_patch server)
         {
             if (opaqueRef == null)

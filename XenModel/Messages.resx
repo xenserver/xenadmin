@@ -2737,11 +2737,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on selected VMs</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on VM "{0}"</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on selected VMs</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -6512,6 +6512,9 @@ Click Configure HA to alter the settings displayed below.</value>
   <data name="IMPORT_SOURCE_PAGE_TITLE" xml:space="preserve">
     <value>Locate the file you want to import</value>
   </data>
+  <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>The [Xenserver] Template that you are attempting to import already exists in the selected pool.</value>
+  </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>Configure storage for the new template</value>
   </data>
@@ -7808,11 +7811,6 @@ To fix a corrupt configuration file revert changes to {0} or delete the file to 
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. </value>
   </data>
-  <data name="MIGRATE_VDI_UPSELL_BLURB_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Live VDI Migration feature or to start a [XenServer] trial, click the button below.</value>
-  </data>
   <data name="MIGRATE_VMS_OFF_SERVER" xml:space="preserve">
     <value>Migrate VMs off server '{0}'</value>
   </data>
@@ -7821,9 +7819,6 @@ To learn more about the [XenServer] Live VDI Migration feature or to start a [Xe
   </data>
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
     <value>This VM may not migrate because the destination host does not have some of the CPU features that the VM is currently using</value>
-  </data>
-  <data name="MIGRATION_NOT_ALLOWED_GPU" xml:space="preserve">
-    <value>This VM may not migrate because it has a dedicated GPU</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
     <value>This VM may not migrate; it is not on shared storage</value>
@@ -10817,6 +10812,12 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>Shutting down VM {0} out of {1}</value>
   </data>
+  <data name="SHUT_DOWN_POOL_MASTER_MULTIPLE" xml:space="preserve">
+    <value>{0} are pool masters. It is strongly recommended to nominate a new master for each affected pool before proceeding.</value>
+  </data>
+  <data name="SHUT_DOWN_POOL_MASTER_SINGLE" xml:space="preserve">
+    <value>{0} is the pool master. It is strongly recommended to nominate a new master for the pool before proceeding.</value>
+  </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>Applying digital signature to appliance...</value>
   </data>
@@ -12098,50 +12099,20 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Active Directory.  Active Directory allows you to configure [XenServer] access control by adding named user accounts.</value>
   </data>
-  <data name="UPSELL_BLURB_AD_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Active Directory feature or to start a [XenServer] trial, click the button below.</value>
-  </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Alerting and Reporting capabilities. Email based performance and error alerting will proactively notify administrators of error conditions or performance problems before they affect critical services.</value>
-  </data>
-  <data name="UPSELL_BLURB_ALERTS_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Alerting and Reporting feature or to start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable VM live migration. This feature enables you to migrate running VMs on shared or local storage between servers in the same pool or across pools with no VM downtime. </value>
   </data>
-  <data name="UPSELL_BLURB_CPM_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Cross-Pool Migration feature or to start a [XenServer] trial, click the button below.</value>
-  </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Heterogeneous Pools. Heterogeneous Pools allows hosts with different CPUs to form a resource pool, and allows virtual machines to migrate between them.</value>
-  </data>
-  <data name="UPSELL_BLURB_CPUMASKING_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Heterogeneous Pools feature or to start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Dynamic Memory Control.  Dynamic Memory Control allows [XenServer] to adjust the memory of live virtual machines, and respond dynamically to changing demands on the host server.</value>
   </data>
-  <data name="UPSELL_BLURB_DMC_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Dynamic Memory Control feature or to start a [XenServer] trial, click the button below.</value>
-  </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Disaster Recovery. The Disaster Recovery feature allows you to recover your critical VMs and vApps at your DR site in the event of a disaster at your primary production site.</value>
-  </data>
-  <data name="UPSELL_BLURB_DR_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Disaster Recovery feature or to start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable StorageLink™ Technology. StorageLink allows [XenServer] to leverage all the power of your existing storage hardware and offload storage operations automatically. This allows for high performance and space efficient storage provisioning, cloning, and snapshot capabilities to be handled in hardware using your storage hardware's native features.</value>
@@ -12149,58 +12120,28 @@ To learn more about the [XenServer] Disaster Recovery feature or to start a [Xen
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable GPU pass-through. The GPU pass-through feature allows you to assign a dedicated graphics processing unit to a VM for higher graphics performance.</value>
   </data>
-  <data name="UPSELL_BLURB_GPU_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] GPU pass-through feature or to start a [XenServer] trial, click the button below.</value>
-  </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable High Availability. High Availability allows virtual machines to be automatically restarted in the event of an underlying hardware failure or individual VM failure. If the server fails the VMs will be intelligently restarted on other virtualized servers in the resource pool.</value>
-  </data>
-  <data name="UPSELL_BLURB_HA_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] High Availability feature or to start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Performance Reporting capabilities. Performance Reporting provides guidance on overall environment performance trends and enables you to accurately plan capacity as business needs change.</value>
   </data>
-  <data name="UPSELL_BLURB_PERFORMANCE_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Performance Reporting capabilities feature or to start a [XenServer] trial, click the button below.</value>
-  </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Role Based Access Control. Using the RBAC feature, you will be able to control access to vital components in your [XenServer] resource pools, with full audit logging capabilities and seamless integration with your current Active Directory setup.</value>
   </data>
-  <data name="UPSELL_BLURB_RBAC_MORE" xml:space="preserve">
+  <data name="UPSELL_BLURB_TRIAL" xml:space="preserve">
     <value>
 
-To learn more about the [XenServer] Role Based Access Control feature or to start a [XenServer] trial, click the button below.</value>
+To start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable VM Scheduled Snapshots. VM Scheduled Snapshots allows you to create automatic snapshots for your critical VMs.</value>
   </data>
-  <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] VM Scheduled Snapshots feature or to start a [XenServer] trial, click the button below.</value>
-  </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable vApps. The vApps feature allows you to place your VMs into groups, allowing them to be started or stopped as a unit, and also allowing them to be easily recovered at your DR site in the event of a disaster at your primary production site.</value>
   </data>
-  <data name="UPSELL_BLURB_VM_APPLIANCES_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the vApps feature of [XenServer] or to start a [XenServer] trial, click the button below.</value>
-  </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable Dynamic Workload Balancing. Dynamic Workload Balancing continually profiles your virtual machines’ and [XenServer] hosts’ performance and will intelligently rebalance and optimally place new workloads to ensure the best use of physical server resources in your resource pool.</value>
-  </data>
-  <data name="UPSELL_BLURB_WLB_MORE" xml:space="preserve">
-    <value>
-
-To learn more about the [XenServer] Dynamic Workload Balancing feature or to start a [XenServer] trial, click the button below.</value>
   </data>
   <data name="UPTIME" xml:space="preserve">
     <value>Uptime</value>
@@ -12227,7 +12168,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>USB devices</value>
   </data>
   <data name="USB_DEVICE_VENDOR_PRODUCT" xml:space="preserve">
-    <value>"Vendor: {0}; Product: {1}"</value>
+    <value>Vendor: {0}; Product: {1}</value>
   </data>
   <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
     <value>1 device attached</value>

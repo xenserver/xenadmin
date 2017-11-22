@@ -990,6 +990,18 @@
   <data name="ACTION_UPLOAD_SERVER_STATUS_REPORT_PROGRESS" xml:space="preserve">
     <value>[Citrix] Insight Services にレポートをアップロードしています</value>
   </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLED" xml:space="preserve">
+    <value>USB パススルーが無効です</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_DISABLING" xml:space="preserve">
+    <value>{0} で USB パススルーを無効にしています</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLED" xml:space="preserve">
+    <value>USB パススルーが有効です</value>
+  </data>
+  <data name="ACTION_USB_PASSTHROUGH_ENABLING" xml:space="preserve">
+    <value>{0} で USB パススルーを有効にしています</value>
+  </data>
   <data name="ACTION_VDI_CREATED" xml:space="preserve">
     <value>仮想ディスクが作成されました</value>
   </data>
@@ -1226,6 +1238,24 @@
   </data>
   <data name="ACTION_VM_TEMPLATIZING_TITLE" xml:space="preserve">
     <value>VM '{0}' のテンプレートへの変換</value>
+  </data>
+  <data name="ACTION_VUSB_CREATED" xml:space="preserve">
+    <value>USB デバイスが接続されています</value>
+  </data>
+  <data name="ACTION_VUSB_CREATING" xml:space="preserve">
+    <value>USB デバイス '{0}' の VM '{1}' への接続</value>
+  </data>
+  <data name="ACTION_VUSB_DELETED" xml:space="preserve">
+    <value>USB デバイスが接続解除されています</value>
+  </data>
+  <data name="ACTION_VUSB_DELETING" xml:space="preserve">
+    <value>USB デバイス '{0}' を VM '{1}' から接続解除</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH" xml:space="preserve">
+    <value>USB デバイスの接続解除</value>
+  </data>
+  <data name="ACTION_VUSB_DETACH_CONFIRM" xml:space="preserve">
+    <value>選択した USB デバイスを接続解除してもよろしいですか?</value>
   </data>
   <data name="ACTION_WAIT_FOR_SLAVES_TO_RECOVER" xml:space="preserve">
     <value>スレーブの回復を待機しています...</value>
@@ -2711,11 +2741,11 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。[XenCenter] から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>選択した VM の 変更ブロック追跡を無効化</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>VM "{0}" の変更ブロック追跡を無効化</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>選択した VM の 変更ブロック追跡を無効化</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>選択したプールのヘルス チェックを無効にしてもよろしいですか?</value>
@@ -3947,6 +3977,27 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   </data>
   <data name="DEVICE_POSITION_SCANNING" xml:space="preserve">
     <value>未割り当てのデバイスの場所のスキャン</value>
+  </data>
+  <data name="DIALOG_ATTACH_USB_NO_DEVICES_AVAILABLE" xml:space="preserve">
+    <value>デバイスを使用できません</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_DISABLE_PASSTHROUGH" xml:space="preserve">
+    <value>パススルーの無効化</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_ENABLE_PASSTHROUGH" xml:space="preserve">
+    <value>パススルーの有効化</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_ALLOW" xml:space="preserve">
+    <value>このデバイスでパススルーを有効にしますか? 有効にすると、このデバイスを仮想マシンにパススルーできるようになります。</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_NOTE_DENY" xml:space="preserve">
+    <value>このデバイスでパススルーを無効にしますか? 無効にすると、このデバイスを仮想マシンにパススルーできなくなります。</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_DISABLE" xml:space="preserve">
+    <value>はい。パススルーを無効にします(&amp;Y)</value>
+  </data>
+  <data name="DIALOG_USB_USAGE_OKBUTTON_ENABLE" xml:space="preserve">
+    <value>はい。パススルーを有効にします(&amp;Y)</value>
   </data>
   <data name="DISABLE" xml:space="preserve">
     <value>無効化(&amp;B)</value>
@@ -5258,8 +5309,17 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>機能がレジストリで無効になっています。</value>
   </data>
+  <data name="FETCHED_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>VM {0} の使用可能なホストを取得済み</value>
+  </data>
+  <data name="FETCHING_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>VM {0} の使用可能なホストを取得中</value>
+  </data>
   <data name="FETCH_EARLIER_DATA" xml:space="preserve">
     <value>次のセクション(&amp;N)</value>
+  </data>
+  <data name="FETCH_POSSIBLE_HOSTS" xml:space="preserve">
+    <value>VM {0} の使用可能なホストを取得</value>
   </data>
   <data name="FIBRECHANNEL_NO_RESULTS" xml:space="preserve">
     <value>LUN が見つかりません。ハードウェア構成を確認してください。</value>
@@ -6456,6 +6516,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="IMPORT_SOURCE_PAGE_TITLE" xml:space="preserve">
     <value>インポートするファイルの指定</value>
+  </data>
+  <data name="IMPORT_TEMPLATE_ALREADY_EXISTS" xml:space="preserve">
+    <value>インポートしようとしている [Xenserver] テンプレートは既に選択したプールに存在します。</value>
   </data>
   <data name="IMPORT_TEMPLATE_CONFIGURE_STORAGE" xml:space="preserve">
     <value>新規テンプレートのストレージを構成してください</value>
@@ -7753,11 +7816,6 @@ SCSI ID: {2}
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
     <value>VDI ライブ マイグレーション機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能により、実行中の複数の VDI を、同一プールの SR 間で移行できます。VM のダウンタイムは発生しません。 </value>
   </data>
-  <data name="MIGRATE_VDI_UPSELL_BLURB_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、VDI ライブ マイグレーション機能や [XenServer] の試用についての情報を参照できます。</value>
-  </data>
   <data name="MIGRATE_VMS_OFF_SERVER" xml:space="preserve">
     <value>サーバー '{0}' からの VM の移行</value>
   </data>
@@ -7766,9 +7824,6 @@ SCSI ID: {2}
   </data>
   <data name="MIGRATION_NOT_ALLOWED_CPU_FEATURES" xml:space="preserve">
     <value>VM で使用中の CPU 機能の一部が移行先のホストにないため、VM を移行することができません</value>
-  </data>
-  <data name="MIGRATION_NOT_ALLOWED_GPU" xml:space="preserve">
-    <value>この VM には GPU が割り当てられているため、移行することはできません</value>
   </data>
   <data name="MIGRATION_NOT_ALLOWED_NO_SHARED_STORAGE" xml:space="preserve">
     <value>この VM は共有ストレージ上にないため、移行することはできません</value>
@@ -8913,6 +8968,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="NOT_AGILE_VM_HAS_VGPU" xml:space="preserve">
     <value>この VM には仮想 GPU があります。再起動は保証されません。</value>
+  </data>
+  <data name="NOT_AGILE_VM_HAS_VUSB" xml:space="preserve">
+    <value>この VM には USB デバイスが接続されています。再起動は保証されません。</value>
   </data>
   <data name="NOT_APPLIED" xml:space="preserve">
     <value>未適用</value>
@@ -10755,6 +10813,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="SHUTTING_DOWN_VM_OUT_OF" xml:space="preserve">
     <value>VM をシャットダウン中: {0} / {1}</value>
   </data>
+  <data name="SHUT_DOWN_POOL_MASTER_MULTIPLE" xml:space="preserve">
+    <value>{0} はプール マスターです。影響を受けるプールごとに新しいマスターを選出してから続行することをお勧めします。</value>
+  </data>
+  <data name="SHUT_DOWN_POOL_MASTER_SINGLE" xml:space="preserve">
+    <value>{0} はプール マスターです。このプールの新しいマスターを選出してから続行することをお勧めします。</value>
+  </data>
   <data name="SIGNING_APPLIANCE" xml:space="preserve">
     <value>アプライアンスにデジタル署名を適用しています...</value>
   </data>
@@ -12036,50 +12100,20 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPSELL_BLURB_AD" xml:space="preserve">
     <value>Active Directory を有効にするには、[XenServer] ライセンスをアップグレードします。 Active Directory で指定ユーザー アカウントを追加することで、 [XenServer] のアクセス制御を構成できます。</value>
   </data>
-  <data name="UPSELL_BLURB_AD_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、[XenServer] Active Directory 機能や [XenServer] の試用についての情報を参照できます。</value>
-  </data>
   <data name="UPSELL_BLURB_ALERTS" xml:space="preserve">
     <value>アラートとレポート機能を使用するには、[XenServer] ライセンスをアップグレードしてください。パフォーマンス上の問題やエラー状態に関するメール アラートにより、管理者は、基幹サービスが影響を受ける前に潜在的な問題に対処することができます。</value>
-  </data>
-  <data name="UPSELL_BLURB_ALERTS_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、アラート機能やレポート機能のほか、[XenServer] の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_CPM" xml:space="preserve">
     <value>VM ライブ マイグレーション機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能により、共有ストレージまたはローカル ストレージで実行中の VM を、同一プールまたは別のプールのサーバー間で移行できます。VM のダウンタイムは発生しません。 </value>
   </data>
-  <data name="UPSELL_BLURB_CPM_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、プール間の移行機能や [XenServer] の試用についての情報を参照できます。</value>
-  </data>
   <data name="UPSELL_BLURB_CPUMASKING" xml:space="preserve">
     <value>異種混在型プールを使用するには、[XenServer] ライセンスをアップグレードしてください。異種混在型プールでは、異なる種類の CPU を搭載したホストでリソース プールを作成でき、そのホスト間での VM の移行がサポートされます。</value>
-  </data>
-  <data name="UPSELL_BLURB_CPUMASKING_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、異種混在型プール機能や [XenServer] の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_DMC" xml:space="preserve">
     <value>動的メモリ制御機能を使用するには、[XenServer] ライセンスをアップグレードしてください。動的メモリ制御を使用すると、[XenServer] によって、実行中の仮想マシンのメモリがホスト サーバーでの要求に応じて動的に調節されます。</value>
   </data>
-  <data name="UPSELL_BLURB_DMC_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、動的メモリ制御機能や [XenServer] の試用についての情報を参照できます。</value>
-  </data>
   <data name="UPSELL_BLURB_DR" xml:space="preserve">
     <value>障害回復機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能では、プライマリの実稼働サイトに障害が発生した場合に、重要な VM や vApp を障害回復 (DR) サイトにフェイルオーバーできます。</value>
-  </data>
-  <data name="UPSELL_BLURB_DR_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、障害回復機能や [XenServer] の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_ENHANCEDSR" xml:space="preserve">
     <value>StorageLink™ テクノロジを使用するには、[XenServer] ライセンスをアップグレードしてください。StorageLink では、既存のストレージ ハードウェアの機能を活用して、[XenServer] でのストレージ操作の負荷を自動的に軽減させることができます。このテクノロジを使用すると、高性能で効率的なストレージ プロビジョニング、複製、およびスナップショットを、使用するストレージ ハードウェア自体の機能を使用してハードウェア内で実行できます。</value>
@@ -12087,64 +12121,67 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPSELL_BLURB_GPU" xml:space="preserve">
     <value>GPU パススルー機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能では、VM に専用の GPU (Graphics Processing Unit) を割り当てて、グラフィック パフォーマンスを向上させることができます。</value>
   </data>
-  <data name="UPSELL_BLURB_GPU_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、GPU パススルー機能や [XenServer] の試用についての情報を参照できます。</value>
-  </data>
   <data name="UPSELL_BLURB_HA" xml:space="preserve">
     <value>高可用性機能を使用するには、[XenServer] ライセンスをアップグレードしてください。高可用性により、サーバーが動作するハードウェアや個々の VM に障害が発生した場合に、VM が自動的に再起動します。サーバー障害が発生した場合、そのサーバー上の VM は、リソース プール内のほかの仮想サーバー上で正しく再起動します。</value>
-  </data>
-  <data name="UPSELL_BLURB_HA_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、高可用性機能や [XenServer] の試用についての情報を参照できます。</value>
   </data>
   <data name="UPSELL_BLURB_PERFORMANCE" xml:space="preserve">
     <value>パフォーマンス レポート機能を使用するには、[XenServer] ライセンスをアップグレードしてください。これらのレポートにより、環境の全体的なパフォーマンス傾向を分析して、業務ニーズの変化に応じた的確な展開プランニングが可能になります。</value>
   </data>
-  <data name="UPSELL_BLURB_PERFORMANCE_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、パフォーマンス レポート機能や [XenServer] の試用についての情報を参照できます。</value>
-  </data>
   <data name="UPSELL_BLURB_RBAC" xml:space="preserve">
     <value>役割ベースのアクセス制御機能を使用するには、[XenServer] ライセンスをアップグレードしてください。役割ベースのアクセス制御 (RBAC: Role Based Access Control) では、[XenServer] リソース プール環境の主要コンポーネントへのアクセスを制御するための、詳細な監査ログ機能とシームレスな Active Directory 統合が提供されます。</value>
   </data>
-  <data name="UPSELL_BLURB_RBAC_MORE" xml:space="preserve">
+  <data name="UPSELL_BLURB_TRIAL" xml:space="preserve">
     <value>
 
-下のボタンを使用して、役割ベースのアクセス制御機能や [XenServer] の試用についての情報を参照できます。</value>
+[XenServer] トライアルを開始するには、下のボタンをクリックしてください。</value>
   </data>
   <data name="UPSELL_BLURB_VMSS" xml:space="preserve">
     <value>仮想マシンのスケジュールされたスナップショット作成を有効にするには、[XenServer] ライセンスをアップグレードします。仮想マシンのスケジュールされたスナップショット作成機能で、重要な仮想マシンのスナップショットを自動で作成できます。</value>
   </data>
-  <data name="UPSELL_BLURB_VMSS_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、[XenServer] VM の定期的なスナップショット機能や [XenServer] の試用についての情報を参照できます。</value>
-  </data>
   <data name="UPSELL_BLURB_VM_APPLIANCES" xml:space="preserve">
     <value>vApp 機能を使用するには、[XenServer] ライセンスをアップグレードしてください。この機能では、いくつかの VM を単一の仮想アプライアンスとしてグループ化して、それらを一緒に起動したり停止したりできます。また、プライマリの本稼働サイトに障害が発生した場合に、それらの VM を障害回復 (DR) サイトに簡単にフェイルオーバーできます。</value>
   </data>
-  <data name="UPSELL_BLURB_VM_APPLIANCES_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、vApp 機能や [XenServer] の試用についての情報を参照できます。</value>
-  </data>
   <data name="UPSELL_BLURB_WLB" xml:space="preserve">
     <value>動的なワークロード バランス機能を使用するには、[XenServer] ライセンスをアップグレードしてください。動的なワークロード バランスにより、仮想マシンおよび [XenServer] ホストのパフォーマンスが継続的に監視され、新しいワークロードを最適に再配分および配置して、リソース プール内の物理サーバー リソースを最大限に活用します。</value>
-  </data>
-  <data name="UPSELL_BLURB_WLB_MORE" xml:space="preserve">
-    <value>
-
-下のボタンを使用して、動的なワークロード バランス機能や [XenServer] の試用についての情報を参照できます。</value>
   </data>
   <data name="UPTIME" xml:space="preserve">
     <value>アップタイム</value>
   </data>
   <data name="URI_REGEX" xml:space="preserve">
     <value>^(http|https|file|ftp)://*</value>
+  </data>
+  <data name="USB" xml:space="preserve">
+    <value>USB</value>
+  </data>
+  <data name="USBLIST_DISABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>パススルーを無効にします(&amp;D)</value>
+  </data>
+  <data name="USBLIST_ENABLE_PASSTHROUGH_HOTKEY" xml:space="preserve">
+    <value>パススルーを有効にします(&amp;E)</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_HA" xml:space="preserve">
+    <value>USB デバイスを接続できません。VM は現在 HA で保護されています。</value>
+  </data>
+  <data name="USB_ATTACH_NOT_ALLOWED_NOT_HALTED" xml:space="preserve">
+    <value>USB デバイスを接続するには、VM がシャットダウン状態である必要があります。</value>
+  </data>
+  <data name="USB_DEVICES" xml:space="preserve">
+    <value>USB デバイス</value>
+  </data>
+  <data name="USB_DEVICE_VENDOR_PRODUCT" xml:space="preserve">
+    <value>ベンダー: {0}; 製品: {1}</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_1_DEVICE" xml:space="preserve">
+    <value>1 デバイスが接続されています</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_MULTIPLE_DEVICES" xml:space="preserve">
+    <value>{0} デバイスが接続されています</value>
+  </data>
+  <data name="USB_EDIT_SUBTEXT_NODEVICES" xml:space="preserve">
+    <value>デバイスが接続されていません</value>
+  </data>
+  <data name="USB_EDIT_TEXT" xml:space="preserve">
+    <value>USB</value>
   </data>
   <data name="USER_AUTHORIZATION_FAILED" xml:space="preserve">
     <value>[XenCenter] で {0} の操作を許可できません。詳しくは、アプリケーション ログ ファイルを参照してください。</value>
