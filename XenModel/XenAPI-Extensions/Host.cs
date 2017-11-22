@@ -150,7 +150,7 @@ namespace XenAPI
 
         public void SetIscsiIqn(string value)
         {
-            SetDictionaryKey(other_config, "iscsi_iqn", value);
+            other_config = SetDictionaryKey(other_config, "iscsi_iqn", value);
         }
 
         public override string ToString()
@@ -619,7 +619,7 @@ namespace XenAPI
         /// </summary>
         public void SetSysLogDestination(string value)
         {
-            SetDictionaryKey(logging, "syslog_destination", value);
+            logging = SetDictionaryKey(logging, "syslog_destination", value);
         }
 
         public static bool IsFullyPatched(Host host,IEnumerable<IXenConnection> connections)
