@@ -3357,7 +3357,7 @@ namespace XenAPI
         /// <param name="_vdi_map">Map of source VDI to destination SR</param>
         /// <param name="_vif_map">Map of source VIF to destination network</param>
         /// <param name="_options">Other parameters</param>
-        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in Unreleased.</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in XenServer 7.3.</param>
         public static XenRef<VM> migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
         {
             return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
@@ -3374,7 +3374,7 @@ namespace XenAPI
         /// <param name="_vdi_map">Map of source VDI to destination SR</param>
         /// <param name="_vif_map">Map of source VIF to destination network</param>
         /// <param name="_options">Other parameters</param>
-        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in Unreleased.</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in XenServer 7.3.</param>
         public static XenRef<Task> async_migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
@@ -3423,7 +3423,7 @@ namespace XenAPI
         /// <param name="_vdi_map">Map of source VDI to destination SR</param>
         /// <param name="_vif_map">Map of source VIF to destination network</param>
         /// <param name="_options">Other parameters</param>
-        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in Unreleased.</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in XenServer 7.3.</param>
         public static void assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
         {
             session.proxy.vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse();
@@ -3440,7 +3440,7 @@ namespace XenAPI
         /// <param name="_vdi_map">Map of source VDI to destination SR</param>
         /// <param name="_vif_map">Map of source VIF to destination network</param>
         /// <param name="_options">Other parameters</param>
-        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in Unreleased.</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in XenServer 7.3.</param>
         public static XenRef<Task> async_assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
         {
             return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
@@ -3449,11 +3449,11 @@ namespace XenAPI
         /// <summary>
         /// Returns a record describing the VM's dynamic state, initialised when the VM boots and updated to reflect runtime configuration changes e.g. CPU hotplug
         /// First published in XenServer 4.0.
-        /// Deprecated since Unreleased.
+        /// Deprecated since XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("XenServer 7.3")]
         public static VM get_boot_record(Session session, string _vm)
         {
             return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.uuid, _vm ?? "").parse());
@@ -3720,7 +3720,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set custom BIOS strings to this VM. VM will be given a default set of BIOS strings, only some of which can be overridden by the supplied values. Allowed keys are: 'bios-vendor', 'bios-version', 'system-manufacturer', 'system-product-name', 'system-version', 'system-serial-number', 'enclosure-asset-tag'
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3732,7 +3732,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set custom BIOS strings to this VM. VM will be given a default set of BIOS strings, only some of which can be overridden by the supplied values. Allowed keys are: 'bios-vendor', 'bios-version', 'system-manufacturer', 'system-product-name', 'system-version', 'system-serial-number', 'enclosure-asset-tag'
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
