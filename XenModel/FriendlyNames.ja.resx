@@ -1032,7 +1032,7 @@
     <value>{0} のライセンスの有効期限が切れました。</value>
   </data>
   <data name="Message.body-license_expires_soon" xml:space="preserve">
-    <value>ホスト '{0}' のライセンスの有効期限は {1} に切れます。</value>
+    <value>ホスト '{0}' のライセンスの有効期限は 30 日以内に切れます。</value>
   </data>
   <data name="Message.body-license_not_available" xml:space="preserve">
     <value>{0} は要求されたライセンスを利用できません。</value>
