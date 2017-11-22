@@ -348,7 +348,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the compatibility_metadata field of the given PGPU.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
@@ -784,7 +784,7 @@ namespace XenAPI
 
         /// <summary>
         /// PGPU metadata to determine whether a VGPU can migrate between two PGPUs
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         public virtual Dictionary<string, string> compatibility_metadata
         {
