@@ -717,6 +717,9 @@
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>アクティブなやり直しログのインスタンスが上限に達しました。</value>
   </data>
+  <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
+    <value>Nvidia ツールのエラーです。最新の Nvidia ツールをインストールしてください</value>
+  </data>
   <data name="OBJECT_NOLONGER_EXISTS" xml:space="preserve">
     <value>指定されたオブジェクトはもう存在していません。</value>
   </data>
@@ -1831,6 +1834,9 @@
   </data>
   <data name="VDI_TOO_SMALL" xml:space="preserve">
     <value>VDI が小さすぎます。最小サイズよりも大きくしてください。</value>
+  </data>
+  <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
+    <value>この仮想 GPU は対象の物理 GPU と互換性がありません。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>すべての GPU が使用中か、ほかの種類の仮想 GPU を実行しているため、VM を起動できません。</value>
