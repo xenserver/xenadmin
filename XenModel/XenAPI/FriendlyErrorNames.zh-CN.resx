@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,39 +26,39 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
-    -->
+  -->
   <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element msdata:IsDataSet="true" name="root">
@@ -129,6 +129,9 @@
   <data name="AUTH_DISABLE_FAILED" xml:space="preserve">
     <value>已禁用外部身份验证，出现以下错误: 未在 AD 服务器上成功禁用您的 AD 计算机帐户。</value>
   </data>
+  <data name="AUTH_DISABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
+    <value>已禁用外部身份验证，错误消息如下: 由于帐户无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户</value>
+  </data>
   <data name="AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
     <value>已禁用外部身份验证，出现以下错误: 因权限遭拒绝，未在 AD 服务器上禁用您的 AD 计算机帐户。</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="BACKUP_SCRIPT_FAILED" xml:space="preserve">
     <value>无法执行备份，因为备份脚本失败。</value>
+  </data>
+  <data name="BALLOONING_TIMEOUT_BEFORE_MIGRATION" xml:space="preserve">
+    <value>在执行 VM 迁移之前尝试压缩内存气球超时。如果此错误重复出现，请考虑增大内存动态最小值。</value>
   </data>
   <data name="BOOTLOADER_FAILED" xml:space="preserve">
     <value>此 VM 的引导加载程序返回错误 -- 是否已成功安装 VM? {1}</value>
@@ -254,6 +260,9 @@
   </data>
   <data name="COULD_NOT_IMPORT_DATABASE" xml:space="preserve">
     <value>尝试从元数据 VDI 导入数据库时出错</value>
+  </data>
+  <data name="COULD_NOT_UPDATE_IGMP_SNOOPING_EVERYWHERE" xml:space="preserve">
+    <value>不能对某些主机和网络应用 IGMP 监听设置。</value>
   </data>
   <data name="CPU_FEATURE_MASKING_NOT_SUPPORTED" xml:space="preserve">
     <value>CPU 不支持功能屏蔽。</value>
@@ -681,6 +690,9 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>网络包含活动的 VIF ({0})，无法删除。</value>
   </data>
+  <data name="NETWORK_INCOMPATIBLE_PURPOSES" xml:space="preserve">
+    <value>您尝试向某个网络中添加用途，但新用途与该网络或其他网络的现有用途不兼容。</value>
+  </data>
   <data name="NETWORK_UNMANAGED" xml:space="preserve">
     <value>网络不是由 xapi 管理。</value>
   </data>
@@ -705,6 +717,9 @@
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>活动恢复日志实例数已达到上限。</value>
   </data>
+  <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
+    <value>Nvidia 工具错误。请务必安装最新的 Nvidia 工具</value>
+  </data>
   <data name="OBJECT_NOLONGER_EXISTS" xml:space="preserve">
     <value>指定的对象不再存在。</value>
   </data>
@@ -728,6 +743,9 @@
   </data>
   <data name="OUT_OF_SPACE" xml:space="preserve">
     <value>空间不足，无法上载更新</value>
+  </data>
+  <data name="PASSTHROUGH_NOT_ENABLED" xml:space="preserve">
+    <value>将 USB 直通连接到 VM 之前，必须将 passthrough_enabled 设置为 true。</value>
   </data>
   <data name="PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>已应用更新 {0}</value>
@@ -840,11 +858,11 @@
   <data name="POOL_AUTH_DISABLE_FAILED" xml:space="preserve">
     <value>已禁用外部身份验证，出现以下错误: 未在 AD 服务器上成功禁用某些 AD 计算机帐户。 </value>
   </data>
-  <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
-    <value>已禁用外部身份验证，出现以下错误: 由于权限遭拒绝，未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
-  </data>
   <data name="POOL_AUTH_DISABLE_FAILED_INVALID_ACCOUNT" xml:space="preserve">
     <value>已禁用外部身份验证，错误消息如下: 由于帐户无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
+  </data>
+  <data name="POOL_AUTH_DISABLE_FAILED_PERMISSION_DENIED" xml:space="preserve">
+    <value>已禁用外部身份验证，出现以下错误: 由于权限遭拒绝，未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
   </data>
   <data name="POOL_AUTH_DISABLE_FAILED_WRONG_CREDENTIALS" xml:space="preserve">
     <value>已禁用外部身份验证，错误消息如下: 由于凭据无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
@@ -908,6 +926,9 @@
   </data>
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>只能对模板(而非常规 VM)调用置备调用。</value>
+  </data>
+  <data name="PUSB_VDI_CONFLICT" xml:space="preserve">
+    <value>与此 PUSB 对应的 VDI 具有现有的 VBD。</value>
   </data>
   <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
     <value>PVS 站点已为主机配置缓存存储。</value>
@@ -1039,6 +1060,9 @@
   </data>
   <data name="SR_BACKEND_FAILURE_120" xml:space="preserve">
     <value>Dconf 字符串中缺少 Netapp 目标参数</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_1200" xml:space="preserve">
+    <value>SM 引发了一般 Python 异常</value>
   </data>
   <data name="SR_BACKEND_FAILURE_121" xml:space="preserve">
     <value>Dconf 字符串中缺少 Netapp 用户名参数</value>
@@ -1213,6 +1237,12 @@
   </data>
   <data name="SR_BACKEND_FAILURE_226" xml:space="preserve">
     <value>本地路径无效</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_227" xml:space="preserve">
+    <value>不允许使用给定的 SMB 版本。请选择 1.0 或 3.0</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_228" xml:space="preserve">
+    <value>需要 -o 以及 xe-mount-isosr</value>
   </data>
   <data name="SR_BACKEND_FAILURE_24" xml:space="preserve">
     <value>指定的 VDI 当前正在使用</value>
@@ -1399,6 +1429,9 @@
   </data>
   <data name="SR_BACKEND_FAILURE_46" xml:space="preserve">
     <value>VDI 不可用</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_460" xml:space="preserve">
+    <value>计算给定 VDI 的更改块失败。</value>
   </data>
   <data name="SR_BACKEND_FAILURE_47" xml:space="preserve">
     <value>存储库不可用</value>
@@ -1640,6 +1673,9 @@
   <data name="TOO_MANY_STORAGE_MIGRATES" xml:space="preserve">
     <value>您的并行迁移 VM 数已达最大值。</value>
   </data>
+  <data name="TOO_MANY_VUSBS" xml:space="preserve">
+    <value>VM 具有的 VUSB 太多。</value>
+  </data>
   <data name="TRANSPORT_PIF_NOT_CONFIGURED" xml:space="preserve">
     <value>隧道传输 PIF 未设置 IP 配置。</value>
   </data>
@@ -1685,6 +1721,21 @@
   <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
     <value>更新预检查阶段失败: 服务器版本不正确。</value>
   </data>
+  <data name="USB_ALREADY_ATTACHED" xml:space="preserve">
+    <value>USB 设备当前已连接到 VM。</value>
+  </data>
+  <data name="USB_GROUP_CONFLICT" xml:space="preserve">
+    <value>USB_groups 当前被限制为只能包含一个 VUSB。 </value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_NO_PUSBS" xml:space="preserve">
+    <value>USB 组不包含任何 PUSB。</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_PUSB" xml:space="preserve">
+    <value>USB 组包含活动的 PUSB，不能删除。</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_VUSB" xml:space="preserve">
+    <value>USB 组包含活动的 VUSB，不能删除。</value>
+  </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>只有本地超级用户才能执行此操作</value>
   </data>
@@ -1726,6 +1777,9 @@
   </data>
   <data name="VCPUS_MAX_ALLOWED_TITLE" xml:space="preserve">
     <value>允许的最大虚拟 CPU 数</value>
+  </data>
+  <data name="VDI_CBT_ENABLED" xml:space="preserve">
+    <value>不允许对启用了 CBT 的 VDI 或具有此类 VDI 的 VM 执行请求的操作，并且已对指定的 VDI 启用 CBT。</value>
   </data>
   <data name="VDI_CONTAINS_METADATA_OF_THIS_POOL" xml:space="preserve">
     <value>无法将 VDI 打开进行元数据恢复，因为其中包含当前池的元数据。</value>
@@ -1769,14 +1823,20 @@
   <data name="VDI_NOT_SPARSE" xml:space="preserve">
     <value>VDI 未使用稀疏格式进行存储。可能无法仅对两个 VDI 之间已更改的块(或“块差异”/“磁盘增量”)进行排队和控制。请选择使用稀疏识别技术的 VDI (例如 VHD)。</value>
   </data>
+  <data name="VDI_NO_CBT_METADATA" xml:space="preserve">
+    <value>不允许执行请求的操作，因为指定的 VDI 没有更改块跟踪元数据。</value>
+  </data>
   <data name="VDI_ON_BOOT_MODE_INCOMPATIBLE_WITH_OPERATION" xml:space="preserve">
-    <value>不允许在“on-boot=reset”模式下在包含 VDI 的 VM 上执行此操作</value>
+    <value>不允许对处于 on-boot=reset 模式的 VDI 或具有此类 VDI 的 VM 执行此操作。</value>
   </data>
   <data name="VDI_READONLY" xml:space="preserve">
     <value>该操作需要进行写入访问，但 VDI {0} 为只读</value>
   </data>
   <data name="VDI_TOO_SMALL" xml:space="preserve">
     <value>VDI 太小。请至少将其大小调整到最小大小。</value>
+  </data>
+  <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
+    <value>VGPU 与目标中的任何 PGPU 都不兼容。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>VM 无法启动，因为所有 GPU 已全部使用或者正在运行其他类型的虚拟 GPU</value>
@@ -1830,7 +1890,7 @@
     <value>您尝试执行操作的 VM 需要处于“{1}”状态，但处于“{2}”状态。</value>
   </data>
   <data name="VM_BIOS_STRINGS_ALREADY_SET" xml:space="preserve">
-    <value>已设置此 VM 的 BIOS 字符串，无法再更改。</value>
+    <value>已设置此 VM 的 BIOS 字符串，不能更改。</value>
   </data>
   <data name="VM_CALL_PLUGIN_RATE_LIMIT" xml:space="preserve">
     <value>在同一 VM 上所做的两次连续插件调用之间需要具有最小时间间隔，请稍后再试。</value>
@@ -1871,11 +1931,14 @@
   <data name="VM_HAS_VGPU" xml:space="preserve">
     <value>无法执行此操作，因为 VM 具有一个或多个虚拟 GPU。</value>
   </data>
+  <data name="VM_HAS_VUSBS" xml:space="preserve">
+    <value>VM 具有 VUSB 时不允许执行此操作。</value>
+  </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>在升级期间无法对旧版本的主机执行该 VM 操作。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION_MIGRATE" xml:space="preserve">
-    <value>您尝试将 VM 迁移到的目标主机运行的 XenServer 版本低于源主机。</value>
+    <value>您尝试将 VM 迁移到比源主机更早的目标主机。</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VIRTUAL_HARDWARE_PLATFORM_VERSION" xml:space="preserve">
     <value>VM 的虚拟硬件平台版本与此主机不兼容。</value>
@@ -1978,6 +2041,9 @@
   </data>
   <data name="VM_REQUIRES_VGPU" xml:space="preserve">
     <value>VM 无法启动，因为没有可用的 GPU</value>
+  </data>
+  <data name="VM_REQUIRES_VUSB" xml:space="preserve">
+    <value>您尝试在 VM 所需的 VUSB 不能在 VM 所需的 USB_group 中的任何 PUSB 上分配的主机上运行 VM。</value>
   </data>
   <data name="VM_REVERT_FAILED" xml:space="preserve">
     <value>将指定虚拟机还原到指定快照时出错</value>

@@ -126,9 +126,6 @@
   <data name="ACTIVATION_URL" xml:space="preserve">
     <value>https://{0}/reactivation_server.php</value>
   </data>
-  <data name="CHECK_FOR_UPDATES_URL" xml:space="preserve">
-    <value>http://updates.xensource.com/[XenServer]/{0}/XenCenter</value>
-  </data>
   <data name="COMMUNITY_URL" xml:space="preserve">
     <value>http://xenserver.org/</value>
   </data>
@@ -186,48 +183,6 @@
   <data name="SUPPORT_URL" xml:space="preserve">
     <value>http://support.citrix.com/</value>
   </data>
-  <data name="UPSELL_LEARNMOREURL_ALERTS" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/alerts</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_CPM" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/storagemigration</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_CPUMASKING" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/cpus</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_DMC" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/dmc</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_DR" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/dr</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_ENHANCEDSR" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/storage</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_GENERAL" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_GPU" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/gpu</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_HA" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/ha</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_PERFORMANCE" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/performance</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_RBAC" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/rbac</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_VMSS" xml:space="preserve">
-    <value/>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_VM_APPLIANCES" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/vapps</value>
-  </data>
-  <data name="UPSELL_LEARNMOREURL_WLB" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/wlb</value>
-  </data>
   <data name="UPSELL_SA" xml:space="preserve">
     <value>http://store.citrix.com/XSInProduct</value>
   </data>
@@ -240,10 +195,10 @@
   <data name="XENSERVER_UPDATE_URL" xml:space="preserve">
     <value>https://updates.xensource.com/XenServer/updates.xml</value>
   </data>
-  <data name="UPSELL_LEARNMOREURL_AD" xml:space="preserve">
-    <value>http://www.citrix.com/xenserver/le/features/ad</value>
-  </data>
   <data name="ISO_UPDATE" xml:space="preserve">
     <value>iso</value>
+  </data>
+  <data name="UPSELL_LEARNMOREURL_TRIAL" xml:space="preserve">
+    <value>https://www.citrix.com/products/xenserver/get-started.html</value>
   </data>
 </root>

@@ -137,6 +137,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._VMs, other._VMs);
         }
 
+        internal static List<VM_appliance> ProxyArrayToObjectList(Proxy_VM_appliance[] input)
+        {
+            var result = new List<VM_appliance>();
+            foreach (var item in input)
+                result.Add(new VM_appliance(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VM_appliance server)
         {
             if (opaqueRef == null)

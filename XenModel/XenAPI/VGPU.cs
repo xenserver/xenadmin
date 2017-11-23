@@ -57,7 +57,8 @@ namespace XenAPI
             bool currently_attached,
             Dictionary<string, string> other_config,
             XenRef<VGPU_type> type,
-            XenRef<PGPU> resident_on)
+            XenRef<PGPU> resident_on,
+            XenRef<PGPU> scheduled_to_be_resident_on)
         {
             this.uuid = uuid;
             this.VM = VM;
@@ -67,6 +68,7 @@ namespace XenAPI
             this.other_config = other_config;
             this.type = type;
             this.resident_on = resident_on;
+            this.scheduled_to_be_resident_on = scheduled_to_be_resident_on;
         }
 
         /// <summary>
@@ -88,6 +90,7 @@ namespace XenAPI
             other_config = update.other_config;
             type = update.type;
             resident_on = update.resident_on;
+            scheduled_to_be_resident_on = update.scheduled_to_be_resident_on;
         }
 
         internal void UpdateFromProxy(Proxy_VGPU proxy)
@@ -100,6 +103,7 @@ namespace XenAPI
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             type = proxy.type == null ? null : XenRef<VGPU_type>.Create(proxy.type);
             resident_on = proxy.resident_on == null ? null : XenRef<PGPU>.Create(proxy.resident_on);
+            scheduled_to_be_resident_on = proxy.scheduled_to_be_resident_on == null ? null : XenRef<PGPU>.Create(proxy.scheduled_to_be_resident_on);
         }
 
         public Proxy_VGPU ToProxy()
@@ -113,6 +117,7 @@ namespace XenAPI
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.type = type ?? "";
             result_.resident_on = resident_on ?? "";
+            result_.scheduled_to_be_resident_on = scheduled_to_be_resident_on ?? "";
             return result_;
         }
 
@@ -130,6 +135,7 @@ namespace XenAPI
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             type = Marshalling.ParseRef<VGPU_type>(table, "type");
             resident_on = Marshalling.ParseRef<PGPU>(table, "resident_on");
+            scheduled_to_be_resident_on = Marshalling.ParseRef<PGPU>(table, "scheduled_to_be_resident_on");
         }
 
         public bool DeepEquals(VGPU other)
@@ -146,7 +152,17 @@ namespace XenAPI
                 Helper.AreEqual2(this._currently_attached, other._currently_attached) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._type, other._type) &&
-                Helper.AreEqual2(this._resident_on, other._resident_on);
+                Helper.AreEqual2(this._resident_on, other._resident_on) &&
+                Helper.AreEqual2(this._scheduled_to_be_resident_on, other._scheduled_to_be_resident_on);
+        }
+
+        internal static List<VGPU> ProxyArrayToObjectList(Proxy_VGPU[] input)
+        {
+            var result = new List<VGPU>();
+            foreach (var item in input)
+                result.Add(new VGPU(item));
+
+            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VGPU server)
@@ -303,6 +319,20 @@ namespace XenAPI
                 return session.JsonRpcClient.vgpu_get_resident_on(session.uuid, _vgpu);
             else
                 return XenRef<PGPU>.Create(session.proxy.vgpu_get_resident_on(session.uuid, _vgpu ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the scheduled_to_be_resident_on field of the given VGPU.
+        /// First published in XenServer 7.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vgpu">The opaque_ref of the given vgpu</param>
+        public static XenRef<PGPU> get_scheduled_to_be_resident_on(Session session, string _vgpu)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vgpu_get_scheduled_to_be_resident_on(session.uuid, _vgpu);
+            else
+                return XenRef<PGPU>.Create(session.proxy.vgpu_get_scheduled_to_be_resident_on(session.uuid, _vgpu ?? "").parse());
         }
 
         /// <summary>
@@ -624,5 +654,25 @@ namespace XenAPI
             }
         }
         private XenRef<PGPU> _resident_on = new XenRef<PGPU>("OpaqueRef:NULL");
+
+        /// <summary>
+        /// The PGPU on which this VGPU is scheduled to run
+        /// First published in XenServer 7.0.
+        /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PGPU>))]
+        public virtual XenRef<PGPU> scheduled_to_be_resident_on
+        {
+            get { return _scheduled_to_be_resident_on; }
+            set
+            {
+                if (!Helper.AreEqual(value, _scheduled_to_be_resident_on))
+                {
+                    _scheduled_to_be_resident_on = value;
+                    Changed = true;
+                    NotifyPropertyChanged("scheduled_to_be_resident_on");
+                }
+            }
+        }
+        private XenRef<PGPU> _scheduled_to_be_resident_on = new XenRef<PGPU>("OpaqueRef:NULL");
     }
 }

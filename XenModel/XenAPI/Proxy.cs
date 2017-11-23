@@ -604,6 +604,10 @@ namespace XenAPI
         Response<bool>
         pool_get_live_patching_disabled(string session, string _pool);
 
+        [XmlRpcMethod("pool.get_igmp_snooping_enabled")]
+        Response<bool>
+        pool_get_igmp_snooping_enabled(string session, string _pool);
+
         [XmlRpcMethod("pool.set_name_label")]
         Response<string>
         pool_set_name_label(string session, string _pool, string _name_label);
@@ -1024,6 +1028,14 @@ namespace XenAPI
         Response<string>
         async_pool_disable_ssl_legacy(string session, string _pool);
 
+        [XmlRpcMethod("pool.set_igmp_snooping_enabled")]
+        Response<string>
+        pool_set_igmp_snooping_enabled(string session, string _pool, bool _value);
+
+        [XmlRpcMethod("Async.pool.set_igmp_snooping_enabled")]
+        Response<string>
+        async_pool_set_igmp_snooping_enabled(string session, string _pool, bool _value);
+
         [XmlRpcMethod("pool.has_extension")]
         Response<bool>
         pool_has_extension(string session, string _pool, string _name);
@@ -1443,6 +1455,10 @@ namespace XenAPI
         [XmlRpcMethod("VM.get_VBDs")]
         Response<string []>
         vm_get_vbds(string session, string _vm);
+
+        [XmlRpcMethod("VM.get_VUSBs")]
+        Response<string []>
+        vm_get_vusbs(string session, string _vm);
 
         [XmlRpcMethod("VM.get_crash_dumps")]
         Response<string []>
@@ -2148,6 +2164,14 @@ namespace XenAPI
         Response<string>
         async_vm_migrate_send(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options);
 
+        [XmlRpcMethod("VM.migrate_send")]
+        Response<string>
+        vm_migrate_send(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options, Object _vgpu_map);
+
+        [XmlRpcMethod("Async.VM.migrate_send")]
+        Response<string>
+        async_vm_migrate_send(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options, Object _vgpu_map);
+
         [XmlRpcMethod("VM.assert_can_migrate")]
         Response<string>
         vm_assert_can_migrate(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options);
@@ -2155,6 +2179,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.assert_can_migrate")]
         Response<string>
         async_vm_assert_can_migrate(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options);
+
+        [XmlRpcMethod("VM.assert_can_migrate")]
+        Response<string>
+        vm_assert_can_migrate(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options, Object _vgpu_map);
+
+        [XmlRpcMethod("Async.VM.assert_can_migrate")]
+        Response<string>
+        async_vm_assert_can_migrate(string session, string _vm, Object _dest, bool _live, Object _vdi_map, Object _vif_map, Object _options, Object _vgpu_map);
 
         [XmlRpcMethod("VM.get_boot_record")]
         Response<Proxy_VM>
@@ -2247,6 +2279,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.retrieve_wlb_recommendations")]
         Response<string>
         async_vm_retrieve_wlb_recommendations(string session, string _vm);
+
+        [XmlRpcMethod("VM.set_bios_strings")]
+        Response<string>
+        vm_set_bios_strings(string session, string _vm, Object _value);
+
+        [XmlRpcMethod("Async.VM.set_bios_strings")]
+        Response<string>
+        async_vm_set_bios_strings(string session, string _vm, Object _value);
 
         [XmlRpcMethod("VM.copy_bios_strings")]
         Response<string>
@@ -3256,6 +3296,10 @@ namespace XenAPI
         Response<string []>
         host_get_pgpus(string session, string _host);
 
+        [XmlRpcMethod("host.get_PUSBs")]
+        Response<string []>
+        host_get_pusbs(string session, string _host);
+
         [XmlRpcMethod("host.get_ssl_legacy")]
         Response<bool>
         host_get_ssl_legacy(string session, string _host);
@@ -4144,6 +4188,10 @@ namespace XenAPI
         Response<Object>
         network_get_assigned_ips(string session, string _network);
 
+        [XmlRpcMethod("network.get_purpose")]
+        Response<string []>
+        network_get_purpose(string session, string _network);
+
         [XmlRpcMethod("network.set_name_label")]
         Response<string>
         network_set_name_label(string session, string _network, string _label);
@@ -4203,6 +4251,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.network.set_default_locking_mode")]
         Response<string>
         async_network_set_default_locking_mode(string session, string _network, string _value);
+
+        [XmlRpcMethod("network.add_purpose")]
+        Response<string>
+        network_add_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("Async.network.add_purpose")]
+        Response<string>
+        async_network_add_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("network.remove_purpose")]
+        Response<string>
+        network_remove_purpose(string session, string _network, string _value);
+
+        [XmlRpcMethod("Async.network.remove_purpose")]
+        Response<string>
+        async_network_remove_purpose(string session, string _network, string _value);
 
         [XmlRpcMethod("network.get_all")]
         Response<string []>
@@ -4663,6 +4727,10 @@ namespace XenAPI
         [XmlRpcMethod("PIF.get_capabilities")]
         Response<string []>
         pif_get_capabilities(string session, string _pif);
+
+        [XmlRpcMethod("PIF.get_igmp_snooping_status")]
+        Response<string>
+        pif_get_igmp_snooping_status(string session, string _pif);
 
         [XmlRpcMethod("PIF.set_other_config")]
         Response<string>
@@ -5956,21 +6024,17 @@ namespace XenAPI
         Response<string>
         async_vdi_data_destroy(string session, string _vdi);
 
-        [XmlRpcMethod("VDI.export_changed_blocks")]
+        [XmlRpcMethod("VDI.list_changed_blocks")]
         Response<string>
-        vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
+        vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
 
-        [XmlRpcMethod("Async.VDI.export_changed_blocks")]
+        [XmlRpcMethod("Async.VDI.list_changed_blocks")]
         Response<string>
-        async_vdi_export_changed_blocks(string session, string _vdi, string _vdi_to);
+        async_vdi_list_changed_blocks(string session, string _vdi, string _vdi_to);
 
         [XmlRpcMethod("VDI.get_nbd_info")]
-        Response<string []>
+        Response<Proxy_Vdi_nbd_server_info[]>
         vdi_get_nbd_info(string session, string _vdi);
-
-        [XmlRpcMethod("Async.VDI.get_nbd_info")]
-        Response<string>
-        async_vdi_get_nbd_info(string session, string _vdi);
 
         [XmlRpcMethod("VDI.get_all")]
         Response<string []>
@@ -6920,6 +6984,10 @@ namespace XenAPI
         Response<bool>
         pgpu_get_is_system_display_device(string session, string _pgpu);
 
+        [XmlRpcMethod("PGPU.get_compatibility_metadata")]
+        Response<Object>
+        pgpu_get_compatibility_metadata(string session, string _pgpu);
+
         [XmlRpcMethod("PGPU.set_other_config")]
         Response<string>
         pgpu_set_other_config(string session, string _pgpu, Object _other_config);
@@ -7143,6 +7211,10 @@ namespace XenAPI
         [XmlRpcMethod("VGPU.get_resident_on")]
         Response<string>
         vgpu_get_resident_on(string session, string _vgpu);
+
+        [XmlRpcMethod("VGPU.get_scheduled_to_be_resident_on")]
+        Response<string>
+        vgpu_get_scheduled_to_be_resident_on(string session, string _vgpu);
 
         [XmlRpcMethod("VGPU.set_other_config")]
         Response<string>
@@ -7599,6 +7671,266 @@ namespace XenAPI
         [XmlRpcMethod("SDN_controller.get_all_records")]
         Response<Object>
         sdn_controller_get_all_records(string session);
+
+        [XmlRpcMethod("vdi_nbd_server_info.get_all_records")]
+        Response<Object>
+        vdi_nbd_server_info_get_all_records(string session);
+
+        [XmlRpcMethod("PUSB.get_record")]
+        Response<Proxy_PUSB>
+        pusb_get_record(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_by_uuid")]
+        Response<string>
+        pusb_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("PUSB.get_uuid")]
+        Response<string>
+        pusb_get_uuid(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_USB_group")]
+        Response<string>
+        pusb_get_usb_group(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_host")]
+        Response<string>
+        pusb_get_host(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_path")]
+        Response<string>
+        pusb_get_path(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_vendor_id")]
+        Response<string>
+        pusb_get_vendor_id(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_vendor_desc")]
+        Response<string>
+        pusb_get_vendor_desc(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_product_id")]
+        Response<string>
+        pusb_get_product_id(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_product_desc")]
+        Response<string>
+        pusb_get_product_desc(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_serial")]
+        Response<string>
+        pusb_get_serial(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_version")]
+        Response<string>
+        pusb_get_version(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_description")]
+        Response<string>
+        pusb_get_description(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_passthrough_enabled")]
+        Response<bool>
+        pusb_get_passthrough_enabled(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.get_other_config")]
+        Response<Object>
+        pusb_get_other_config(string session, string _pusb);
+
+        [XmlRpcMethod("PUSB.set_other_config")]
+        Response<string>
+        pusb_set_other_config(string session, string _pusb, Object _other_config);
+
+        [XmlRpcMethod("PUSB.add_to_other_config")]
+        Response<string>
+        pusb_add_to_other_config(string session, string _pusb, string _key, string _value);
+
+        [XmlRpcMethod("PUSB.remove_from_other_config")]
+        Response<string>
+        pusb_remove_from_other_config(string session, string _pusb, string _key);
+
+        [XmlRpcMethod("PUSB.scan")]
+        Response<string>
+        pusb_scan(string session, string _host);
+
+        [XmlRpcMethod("Async.PUSB.scan")]
+        Response<string>
+        async_pusb_scan(string session, string _host);
+
+        [XmlRpcMethod("PUSB.set_passthrough_enabled")]
+        Response<string>
+        pusb_set_passthrough_enabled(string session, string _pusb, bool _value);
+
+        [XmlRpcMethod("Async.PUSB.set_passthrough_enabled")]
+        Response<string>
+        async_pusb_set_passthrough_enabled(string session, string _pusb, bool _value);
+
+        [XmlRpcMethod("PUSB.get_all")]
+        Response<string []>
+        pusb_get_all(string session);
+
+        [XmlRpcMethod("PUSB.get_all_records")]
+        Response<Object>
+        pusb_get_all_records(string session);
+
+        [XmlRpcMethod("USB_group.get_record")]
+        Response<Proxy_USB_group>
+        usb_group_get_record(string session, string _usb_group);
+
+        [XmlRpcMethod("USB_group.get_by_uuid")]
+        Response<string>
+        usb_group_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("USB_group.get_by_name_label")]
+        Response<string []>
+        usb_group_get_by_name_label(string session, string _label);
+
+        [XmlRpcMethod("USB_group.get_uuid")]
+        Response<string>
+        usb_group_get_uuid(string session, string _usb_group);
+
+        [XmlRpcMethod("USB_group.get_name_label")]
+        Response<string>
+        usb_group_get_name_label(string session, string _usb_group);
+
+        [XmlRpcMethod("USB_group.get_name_description")]
+        Response<string>
+        usb_group_get_name_description(string session, string _usb_group);
+
+        [XmlRpcMethod("USB_group.get_PUSBs")]
+        Response<string []>
+        usb_group_get_pusbs(string session, string _usb_group);
+
+        [XmlRpcMethod("USB_group.get_VUSBs")]
+        Response<string []>
+        usb_group_get_vusbs(string session, string _usb_group);
+
+        [XmlRpcMethod("USB_group.get_other_config")]
+        Response<Object>
+        usb_group_get_other_config(string session, string _usb_group);
+
+        [XmlRpcMethod("USB_group.set_name_label")]
+        Response<string>
+        usb_group_set_name_label(string session, string _usb_group, string _label);
+
+        [XmlRpcMethod("USB_group.set_name_description")]
+        Response<string>
+        usb_group_set_name_description(string session, string _usb_group, string _description);
+
+        [XmlRpcMethod("USB_group.set_other_config")]
+        Response<string>
+        usb_group_set_other_config(string session, string _usb_group, Object _other_config);
+
+        [XmlRpcMethod("USB_group.add_to_other_config")]
+        Response<string>
+        usb_group_add_to_other_config(string session, string _usb_group, string _key, string _value);
+
+        [XmlRpcMethod("USB_group.remove_from_other_config")]
+        Response<string>
+        usb_group_remove_from_other_config(string session, string _usb_group, string _key);
+
+        [XmlRpcMethod("USB_group.create")]
+        Response<string>
+        usb_group_create(string session, string _name_label, string _name_description, Object _other_config);
+
+        [XmlRpcMethod("Async.USB_group.create")]
+        Response<string>
+        async_usb_group_create(string session, string _name_label, string _name_description, Object _other_config);
+
+        [XmlRpcMethod("USB_group.destroy")]
+        Response<string>
+        usb_group_destroy(string session, string _usb_group);
+
+        [XmlRpcMethod("Async.USB_group.destroy")]
+        Response<string>
+        async_usb_group_destroy(string session, string _usb_group);
+
+        [XmlRpcMethod("USB_group.get_all")]
+        Response<string []>
+        usb_group_get_all(string session);
+
+        [XmlRpcMethod("USB_group.get_all_records")]
+        Response<Object>
+        usb_group_get_all_records(string session);
+
+        [XmlRpcMethod("VUSB.get_record")]
+        Response<Proxy_VUSB>
+        vusb_get_record(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.get_by_uuid")]
+        Response<string>
+        vusb_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("VUSB.get_uuid")]
+        Response<string>
+        vusb_get_uuid(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.get_allowed_operations")]
+        Response<string []>
+        vusb_get_allowed_operations(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.get_current_operations")]
+        Response<Object>
+        vusb_get_current_operations(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.get_VM")]
+        Response<string>
+        vusb_get_vm(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.get_USB_group")]
+        Response<string>
+        vusb_get_usb_group(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.get_other_config")]
+        Response<Object>
+        vusb_get_other_config(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.get_currently_attached")]
+        Response<bool>
+        vusb_get_currently_attached(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.set_other_config")]
+        Response<string>
+        vusb_set_other_config(string session, string _vusb, Object _other_config);
+
+        [XmlRpcMethod("VUSB.add_to_other_config")]
+        Response<string>
+        vusb_add_to_other_config(string session, string _vusb, string _key, string _value);
+
+        [XmlRpcMethod("VUSB.remove_from_other_config")]
+        Response<string>
+        vusb_remove_from_other_config(string session, string _vusb, string _key);
+
+        [XmlRpcMethod("VUSB.create")]
+        Response<string>
+        vusb_create(string session, string _vm, string _usb_group, Object _other_config);
+
+        [XmlRpcMethod("Async.VUSB.create")]
+        Response<string>
+        async_vusb_create(string session, string _vm, string _usb_group, Object _other_config);
+
+        [XmlRpcMethod("VUSB.unplug")]
+        Response<string>
+        vusb_unplug(string session, string _vusb);
+
+        [XmlRpcMethod("Async.VUSB.unplug")]
+        Response<string>
+        async_vusb_unplug(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.destroy")]
+        Response<string>
+        vusb_destroy(string session, string _vusb);
+
+        [XmlRpcMethod("Async.VUSB.destroy")]
+        Response<string>
+        async_vusb_destroy(string session, string _vusb);
+
+        [XmlRpcMethod("VUSB.get_all")]
+        Response<string []>
+        vusb_get_all(string session);
+
+        [XmlRpcMethod("VUSB.get_all_records")]
+        Response<Object>
+        vusb_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7704,6 +8036,7 @@ namespace XenAPI
         public Object cpu_info;
         public bool policy_no_vendor_device;
         public bool live_patching_disabled;
+        public bool igmp_snooping_enabled;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -7767,6 +8100,7 @@ namespace XenAPI
         public string [] consoles;
         public string [] VIFs;
         public string [] VBDs;
+        public string [] VUSBs;
         public string [] crash_dumps;
         public string [] VTPMs;
         public string PV_bootloader;
@@ -7972,6 +8306,7 @@ namespace XenAPI
         public Object chipset_info;
         public string [] PCIs;
         public string [] PGPUs;
+        public string [] PUSBs;
         public bool ssl_legacy;
         public Object guest_VCPUs_params;
         public string display;
@@ -8053,6 +8388,7 @@ namespace XenAPI
         public string [] tags;
         public string default_locking_mode;
         public Object assigned_ips;
+        public string [] purpose;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8131,6 +8467,7 @@ namespace XenAPI
         public bool managed;
         public Object properties;
         public string [] capabilities;
+        public string igmp_snooping_status;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8430,6 +8767,7 @@ namespace XenAPI
         public Object supported_VGPU_max_capacities;
         public string dom0_access;
         public bool is_system_display_device;
+        public Object compatibility_metadata;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8458,6 +8796,7 @@ namespace XenAPI
         public Object other_config;
         public string type;
         public string resident_on;
+        public string scheduled_to_be_resident_on;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8542,6 +8881,57 @@ namespace XenAPI
         public string protocol;
         public string address;
         public string port;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Vdi_nbd_server_info
+    {
+        public string exportname;
+        public string address;
+        public string port;
+        public string cert;
+        public string subject;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_PUSB
+    {
+        public string uuid;
+        public string USB_group;
+        public string host;
+        public string path;
+        public string vendor_id;
+        public string vendor_desc;
+        public string product_id;
+        public string product_desc;
+        public string serial;
+        public string version;
+        public string description;
+        public bool passthrough_enabled;
+        public Object other_config;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_USB_group
+    {
+        public string uuid;
+        public string name_label;
+        public string name_description;
+        public string [] PUSBs;
+        public string [] VUSBs;
+        public Object other_config;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_VUSB
+    {
+        public string uuid;
+        public string [] allowed_operations;
+        public Object current_operations;
+        public string VM;
+        public string USB_group;
+        public Object other_config;
+        public bool currently_attached;
     }
 
 }

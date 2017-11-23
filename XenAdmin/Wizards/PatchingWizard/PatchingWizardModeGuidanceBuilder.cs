@@ -95,6 +95,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             StringBuilder sbLog = new StringBuilder();
             someHostMayRequireRestart = false; // If any host has restartHost guidance this will be set to true
+            servers.Sort();
 
             foreach (after_apply_guidance guide in guidance)
             {

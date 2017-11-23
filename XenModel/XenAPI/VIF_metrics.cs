@@ -128,6 +128,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<VIF_metrics> ProxyArrayToObjectList(Proxy_VIF_metrics[] input)
+        {
+            var result = new List<VIF_metrics>();
+            foreach (var item in input)
+                result.Add(new VIF_metrics(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VIF_metrics server)
         {
             if (opaqueRef == null)

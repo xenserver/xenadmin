@@ -191,6 +191,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._PV_drivers_detected, other._PV_drivers_detected);
         }
 
+        internal static List<VM_guest_metrics> ProxyArrayToObjectList(Proxy_VM_guest_metrics[] input)
+        {
+            var result = new List<VM_guest_metrics>();
+            foreach (var item in input)
+                result.Add(new VM_guest_metrics(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VM_guest_metrics server)
         {
             if (opaqueRef == null)

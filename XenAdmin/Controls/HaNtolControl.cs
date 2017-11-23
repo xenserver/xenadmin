@@ -179,6 +179,9 @@ namespace XenAdmin.Controls
 
             while (!exitNtolUpdateThread)
             {
+                waitingNtolUpdate.WaitOne();
+                log.Debug("Thread woken");
+
                 Program.Invoke(this, () =>
                     {
                         // Don't do GUI stuff if we've been told to exit
@@ -236,9 +239,6 @@ namespace XenAdmin.Controls
                                 LoadCalculationFailedMode();
                         });
                 }
-
-                waitingNtolUpdate.WaitOne();
-                log.Debug("Thread woken");
             }
 
             log.Debug("Thread exiting");
@@ -253,6 +253,7 @@ namespace XenAdmin.Controls
         internal void StartNtolUpdate()
         {
             StopNtolUpdate();
+            waitingNtolUpdate.Set();
             ntolUpdateThread = new Thread(updateNtol);
             ntolUpdateThread.IsBackground = true;
             ntolUpdateThread.Name = "Ntol updating thread for pool " + Helpers.GetName(connection);

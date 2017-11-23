@@ -82,8 +82,8 @@ namespace XenAdmin.Commands
             if (Helpers.FeatureForbidden(pool, Host.RestrictHA))
             {
                 // Show upsell dialog
-                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA : Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_HA_MORE,
-                                                    InvisibleMessages.UPSELL_LEARNMOREURL_HA))
+                using (var dlg = new UpsellDialog(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA : Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_TRIAL,
+                                                    InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL))
                     dlg.ShowDialog(Parent);
             }
             else if (pool.ha_enabled)

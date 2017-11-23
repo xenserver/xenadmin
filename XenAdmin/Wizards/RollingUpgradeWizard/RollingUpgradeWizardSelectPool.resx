@@ -147,10 +147,10 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="expansionColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>18</value>
   </data>
   <data name="expansionColumn.Width" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>18</value>
   </data>
   <metadata name="checkBoxColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -159,10 +159,10 @@
     <value />
   </data>
   <data name="checkBoxColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>20</value>
   </data>
   <data name="checkBoxColumn.Width" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>20</value>
   </data>
   <metadata name="NameColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

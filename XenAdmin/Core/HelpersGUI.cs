@@ -523,35 +523,6 @@ namespace XenAdmin.Core
                 return dayOfWeek.ToString();
         }
 
-
-        /// <summary>
-        /// The expiry date of a host's license
-        /// </summary>
-        /// <param name="referenceDate">Should be UTC!</param>
-        public static string HostLicenseExpiryString(Host h, bool longFormat, DateTime referenceDate)
-        {
-            if (h.license_params != null && h.license_params.ContainsKey("expiry"))
-            {
-                var licenceExpiryUtc = h.LicenseExpiryUTC();
-                TimeSpan timeDiff = licenceExpiryUtc.Subtract(referenceDate);
-
-                if (!LicenseStatus.IsInfinite(timeDiff))
-                {
-                    var expiryString = "";
-                    Program.Invoke(Program.MainWindow, delegate
-                    {
-                        expiryString = DateTimeToString(licenceExpiryUtc.ToLocalTime(),
-                            longFormat ? Messages.DATEFORMAT_DMY_LONG : Messages.DATEFORMAT_DMY, true);
-                    });
-                    return expiryString;
-                }
-
-                return Messages.LICENSE_NEVER;
-            }
-
-            return Messages.GENERAL_UNKNOWN;
-        }
-
         private const int WM_SETREDRAW = 11;
 
         public static void SuspendDrawing(Control control)

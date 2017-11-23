@@ -102,23 +102,25 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         private void downloadAndUnzipXenServerPatchAction_Changed(object sender)
         {
-            var action = sender as AsyncAction;
-            if (action == null)
+            var downloadAction = sender as DownloadAndUnzipXenServerPatchAction;
+            if (downloadAction == null)
                 return;
 
             if (Cancelling)
-                action.Cancel();
+                downloadAction.Cancel();
 
             Program.Invoke(Program.MainWindow, () =>
             {
-                //UpdateActionProgress(action);
-                //flickerFreeListBox1.Refresh();
-                //OnPageUpdated();
+                if (!string.IsNullOrEmpty(downloadAction.DownloadProgressDescription))
+                    ProgressDescription = string.Format(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT, downloadAction.DownloadProgressDescription);
             });
         }
 
+
         private void downloadAndUnzipXenServerPatchAction_Completed(ActionBase sender)
         {
+            ProgressDescription = null;
+
             var action = sender as AsyncAction;
             if (action == null)
                 return;

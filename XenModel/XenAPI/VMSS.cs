@@ -163,6 +163,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._VMs, other._VMs);
         }
 
+        internal static List<VMSS> ProxyArrayToObjectList(Proxy_VMSS[] input)
+        {
+            var result = new List<VMSS>();
+            foreach (var item in input)
+                result.Add(new VMSS(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VMSS server)
         {
             if (opaqueRef == null)

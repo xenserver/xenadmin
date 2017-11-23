@@ -198,6 +198,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._experimental, other._experimental);
         }
 
+        internal static List<VGPU_type> ProxyArrayToObjectList(Proxy_VGPU_type[] input)
+        {
+            var result = new List<VGPU_type>();
+            foreach (var item in input)
+                result.Add(new VGPU_type(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VGPU_type server)
         {
             if (opaqueRef == null)

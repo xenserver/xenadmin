@@ -135,6 +135,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<PBD> ProxyArrayToObjectList(Proxy_PBD[] input)
+        {
+            var result = new List<PBD>();
+            foreach (var item in input)
+                result.Add(new PBD(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, PBD server)
         {
             if (opaqueRef == null)

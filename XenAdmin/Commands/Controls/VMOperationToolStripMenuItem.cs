@@ -73,9 +73,18 @@ namespace XenAdmin.Commands
             base.DropDownItems.Add(new ToolStripMenuItem());
         }
 
+        private bool _isDropDownClosed;
+
+        protected override void OnDropDownClosed(EventArgs e)
+        {
+            base.OnDropDownClosed(e);
+            _isDropDownClosed = true;
+        }
+
         protected override void OnDropDownOpening(EventArgs e)
         {
             base.DropDownItems.Clear();
+            _isDropDownClosed = false;
 
             // Work around bug in tool kit where disabled menu items show their dropdown menus
             if (!Enabled)
@@ -193,9 +202,18 @@ namespace XenAdmin.Commands
             });
 
             List<VMOperationToolStripMenuSubItem> dropDownItems = DropDownItems.Cast<VMOperationToolStripMenuSubItem>().ToList();
-            
+
+            // Adds the migrate wizard button, do this before the enable checks on the other items
+            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
+
             foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
             {
+                if (_isDropDownClosed)
+                {
+                    // Stop making requests to assert can start on each host after dropdown is closed
+                    break;
+                }
+
                 Host host = item.Tag as Host;
                 if (host != null)
                 {
@@ -213,8 +231,6 @@ namespace XenAdmin.Commands
                                                             });
                 }
             }
-
-            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
         }
 
         /// <summary>

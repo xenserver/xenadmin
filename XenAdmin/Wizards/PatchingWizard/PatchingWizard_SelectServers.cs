@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
@@ -42,6 +43,7 @@ using XenAdmin.Properties;
 using XenAPI;
 using XenAdmin.Alerts;
 using System.Linq;
+using System.Diagnostics;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -60,8 +62,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool poolSelectionOnly;
 
         public XenServerPatchAlert SelectedUpdateAlert { private get; set; }
-
         public XenServerPatchAlert FileFromDiskAlert { private get; set; }
+        public WizardMode WizardMode { private get; set; }
 
         public PatchingWizard_SelectServers()
         {
@@ -95,10 +97,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageLoaded(direction);
             try
             {
-                poolSelectionOnly = IsInAutomaticMode || SelectedUpdateAlert != null || FileFromDiskAlert != null;
-                label1.Text = IsInAutomaticMode 
-                    ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE
-                    : poolSelectionOnly ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
+                poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null;
+
+                switch (WizardMode)
+                {
+                    case WizardMode.AutomatedUpdates :
+                        label1.Text = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_AUTOMATED_MODE;
+                        break;
+                    case WizardMode.NewVersion :
+                        label1.Text = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_NEW_VERSION_MODE;
+                        break;
+                    case WizardMode.SingleUpdate :
+                        label1.Text = poolSelectionOnly ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_POOL_SELECTION : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_RUBRIC_DEFAULT;
+                        break;
+                }
                 
                 // catch selected servers, in order to restore selection after the dataGrid is reloaded
                 List<Host> selectedServers = SelectedServers;
@@ -107,6 +119,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
                 xenConnections.Sort();
+                int licensedPoolCount = 0;
+                int poolCount = 0;
                 foreach (IXenConnection xenConnection in xenConnections)
                 {
                     // add pools, their members and standalone hosts
@@ -120,12 +134,33 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
 
                     Host[] hosts = xenConnection.Cache.Hosts;
+
+                    if (hosts.Length > 0)
+                    {
+                        poolCount++;
+                        var automatedUpdatesRestricted = hosts.Any(Host.RestrictBatchHotfixApply); //if any host is not licensed for automated updates
+                        if (!automatedUpdatesRestricted)
+                            licensedPoolCount++;
+                    }
+
                     Array.Sort(hosts);
                     foreach (Host host in hosts)
                     {
                         int index = dataGridViewHosts.Rows.Add(new PatchingHostsDataGridViewRow(host, hasPool, !poolSelectionOnly));
                         EnabledRow(host, SelectedUpdateType, index);
                     }
+                }
+
+                if (WizardMode == WizardMode.NewVersion && licensedPoolCount > 0) // in NewVersion mode and at least one pool licensed for automated updates 
+                {
+                    applyUpdatesCheckBox.Visible = true;
+                    applyUpdatesCheckBox.Text = poolCount == licensedPoolCount
+                        ? Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES
+                        : Messages.PATCHINGWIZARD_SELECTSERVERPAGE_APPLY_UPDATES_MIXED;
+                }
+                else  // not in NewVersion mode or all pools unlicensed
+                {
+                    applyUpdatesCheckBox.Visible = false;
                 }
 
                 // restore server selection
@@ -142,16 +177,14 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             dataGridViewHosts.Select();
         }
-
-        public bool IsInAutomaticMode { set; get; }
-
+        
         private void EnabledRow(Host host, UpdateType type, int index)
         {
             var row = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[index];
 
             var poolOfOne = Helpers.GetPoolOfOne(host.Connection);
 
-            if (IsInAutomaticMode)
+            if (WizardMode == WizardMode.AutomatedUpdates)
             {
                 // This check is first because it generally can't be fixed, it's a property of the host
                 if (poolOfOne != null && poolOfOne.IsAutoUpdateRestartsForbidden()) // Forbids update auto restarts
@@ -475,7 +508,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (poolSelectionOnly)
                 {
-                    if (IsInAutomaticMode)
+                    if (WizardMode != WizardMode.SingleUpdate)
                         //prechecks will fail in automated updates mode if one of the hosts is unreachable
                         return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts).ToList();
                     //prechecks will issue warning but allow updates to be installed on the reachable hosts only
@@ -506,7 +539,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (row.Tag is Pool)
                     {
-                        if (((int)row.Cells[POOL_CHECKBOX_COL].Value) != UNCHECKED)
+                        if (((int)row.Cells[POOL_CHECKBOX_COL].Value) != UNCHECKED && !pools.Contains((Pool)row.Tag))
                             pools.Add((Pool)row.Tag);
                     }
                     else if (row.Tag is Host)
@@ -515,12 +548,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             Host host = (Host)row.Tag;
                             Pool pool = Helpers.GetPoolOfOne(host.Connection);
-                            if (pool != null)
+                            if (pool != null && !pools.Contains(pool))
                                 pools.Add(pool);
                         }
                     }
                 }
                 return pools;
+            }
+        }
+
+        public bool ApplyUpdatesToNewVersion
+        {
+            get
+            {
+                return applyUpdatesCheckBox.Visible && applyUpdatesCheckBox.Checked;
             }
         }
 
@@ -548,8 +589,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                         foreach (var host in pool.Connection.Cache.Hosts)
                         {
                             if (selectedServers.Contains(host))
+                            {
                                 dataGridViewHosts.CheckBoxChange(row.Index, POOL_CHECKBOX_COL);
-                            break;
+                                break;
+                            }
                         }
                     }
                 }
@@ -742,11 +785,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return CHECKED;
                 }
             }
+
+            protected override void SortColumns()
+            {
+                PatchingHostsDataGridViewRow firstRow = Rows[0] as PatchingHostsDataGridViewRow;
+                if (firstRow == null)
+                    return;
+
+                if (columnToBeSortedIndex == firstRow.NameCellIndex ||
+                    columnToBeSortedIndex == firstRow.VersionCellIndex)
+                    SortAndRebuildTree(new CollapsingPoolHostRowSorter<PatchingHostsDataGridViewRow>(direction, columnToBeSortedIndex));
+            }
         }
 
         private class PatchingHostsDataGridViewRow : CollapsingPoolHostDataGridViewRow
         {
-            private class DataGridViewNameCell : DataGridViewExNameCell
+            private class DataGridViewNameCell : DataGridViewTextBoxCell
             {
                 protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
                 {
@@ -852,6 +906,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                 SetupCells();
             }
 
+            public int VersionCellIndex
+            {
+                get { return Cells.IndexOf(_versionCell); }
+            }
+
             public override bool IsCheckable
             {
                 get { return !HasPool; }
@@ -877,11 +936,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                                ? (int) Cells[POOL_CHECKBOX_COL].Value
                                : (int) Cells[POOL_ICON_HOST_CHECKBOX_COL].Value;
                 }
-            }
-
-            public bool IsPoolOrStandaloneHost
-            {
-                get { return IsAPoolRow || (IsAHostRow && !HasPool); }
             }
 
             public bool IsSelectableHost

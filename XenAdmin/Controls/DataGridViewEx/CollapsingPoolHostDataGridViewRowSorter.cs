@@ -64,6 +64,11 @@ namespace XenAdmin.Controls.DataGridViewEx
             this.direction = direction;
         }
 
+        protected ListSortDirection Direction
+        {
+            get { return direction; }
+        }
+
         /// <summary>
         /// Interface member correcting the sort for the direction required
         /// </summary>

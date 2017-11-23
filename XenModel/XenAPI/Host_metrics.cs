@@ -135,6 +135,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<Host_metrics> ProxyArrayToObjectList(Proxy_Host_metrics[] input)
+        {
+            var result = new List<Host_metrics>();
+            foreach (var item in input)
+                result.Add(new Host_metrics(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Host_metrics server)
         {
             if (opaqueRef == null)

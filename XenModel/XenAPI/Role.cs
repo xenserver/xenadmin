@@ -121,6 +121,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._subroles, other._subroles);
         }
 
+        internal static List<Role> ProxyArrayToObjectList(Proxy_Role[] input)
+        {
+            var result = new List<Role>();
+            foreach (var item in input)
+                result.Add(new Role(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Role server)
         {
             if (opaqueRef == null)

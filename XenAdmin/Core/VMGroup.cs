@@ -148,14 +148,14 @@ namespace XenAdmin.Core
                 if (HiddenFeatures.LinkLabelHidden)
                     return typeof(T) == typeof(VMSS) ? Messages.UPSELL_BLURB_VMSS : Messages.UPSELL_BLURB_VM_APPLIANCES;
                 else
-                    return typeof(T) == typeof(VMSS) ? Messages.UPSELL_BLURB_VMSS + Messages.UPSELL_BLURB_VMSS_MORE : Messages.UPSELL_BLURB_VM_APPLIANCES + Messages.UPSELL_BLURB_VM_APPLIANCES_MORE;
+                    return typeof(T) == typeof(VMSS) ? Messages.UPSELL_BLURB_VMSS + Messages.UPSELL_BLURB_TRIAL : Messages.UPSELL_BLURB_VM_APPLIANCES + Messages.UPSELL_BLURB_TRIAL;
                 
             }
         }
 
         internal static string UpsellLearnMoreUrl
         {
-            get { return typeof(T) == typeof(VMSS) ? InvisibleMessages.UPSELL_LEARNMOREURL_VMSS : InvisibleMessages.UPSELL_LEARNMOREURL_VM_APPLIANCES; }
+            get { return InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL; }
         }
 
         internal static AsyncAction AssignVMsToGroupAction(T group, List<XenRef<VM>> vms, bool suppressHistory)

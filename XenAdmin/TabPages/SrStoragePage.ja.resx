@@ -417,6 +417,12 @@
   <data name="ColumnVM.HeaderText" xml:space="preserve">
     <value>仮想マシン</value>
   </data>
+  <metadata name="ColumnCBT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnCBT.HeaderText" xml:space="preserve">
+    <value>変更ブロック追跡</value>
+  </data>
   <data name="dataGridViewVDIs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -688,6 +694,12 @@
     <value>ColumnVM</value>
   </data>
   <data name="&gt;&gt;ColumnVM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnCBT.Name" xml:space="preserve">
+    <value>ColumnCBT</value>
+  </data>
+  <data name="&gt;&gt;ColumnCBT.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

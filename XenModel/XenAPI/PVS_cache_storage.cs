@@ -135,6 +135,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._VDI, other._VDI);
         }
 
+        internal static List<PVS_cache_storage> ProxyArrayToObjectList(Proxy_PVS_cache_storage[] input)
+        {
+            var result = new List<PVS_cache_storage>();
+            foreach (var item in input)
+                result.Add(new PVS_cache_storage(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, PVS_cache_storage server)
         {
             if (opaqueRef == null)

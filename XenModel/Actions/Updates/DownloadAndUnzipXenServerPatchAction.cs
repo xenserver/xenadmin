@@ -253,7 +253,10 @@ namespace XenAdmin.Actions
             if (pc != PercentComplete)
             {
                 PercentComplete = pc;
-                Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
+
+                DownloadProgressDescription
+                    = Description 
+                    = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DETAILS_DESC, updateName,
                                             Util.DiskSizeString(e.BytesReceived),
                                             Util.DiskSizeString(e.TotalBytesToReceive));
             }
@@ -289,5 +292,7 @@ namespace XenAdmin.Actions
         protected override void CancelRelatedTask()
         {
         }
+
+        public string DownloadProgressDescription { get; set; }
     }
 }

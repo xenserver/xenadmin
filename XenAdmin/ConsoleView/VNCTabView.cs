@@ -95,6 +95,9 @@ namespace XenAdmin.ConsoleView
 
             InitializeComponent();
 
+            var tooltipForGeneralInformationMessage = new ToolTip();
+            tooltipForGeneralInformationMessage.SetToolTip(labelGeneralInformationMessage, labelGeneralInformationMessage.Text);
+
             HostLabel.Font = Program.HeaderGradientFont;
             HostLabel.ForeColor = Program.HeaderGradientForeColor;
             multipleDvdIsoList1.LabelSingleDvdForeColor = Program.HeaderGradientForeColor;
@@ -210,6 +213,11 @@ namespace XenAdmin.ConsoleView
             //This change is only for Cream, because RDP port scan was removed in Cream.
             if ( Helpers.CreamOrGreater(source.Connection) && Properties.Settings.Default.AutoSwitchToRDP && RDPEnabled )
                 vncScreen.AutoSwitchRDPLater = true;
+        }
+
+        void ShowOrHideRdpVersionWarning()
+        {
+            pictureBoxGeneralInformationMessage.Visible = labelGeneralInformationMessage.Visible = vncScreen.RdpVersionWarningNeeded;
         }
 
         public bool IsScaled
@@ -1229,6 +1237,8 @@ namespace XenAdmin.ConsoleView
             }
             ignoreScaleChange = false;
             scaleCheckBox_CheckedChanged(null, null);  // make sure scale setting is now correct: CA-84324
+
+            ShowOrHideRdpVersionWarning();
         }
 
         private void UpdateTooltipOfToogleButton()

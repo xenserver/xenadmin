@@ -37,7 +37,7 @@ namespace XenAPI
     [JsonConverter(typeof(clsConverter))]
     public enum cls
     {
-        VM, Host, SR, Pool, VMPP, VMSS, PVS_proxy, unknown
+        VM, Host, SR, Pool, VMPP, VMSS, PVS_proxy, VDI, unknown
     }
 
     public static class cls_helper
@@ -68,6 +68,8 @@ namespace XenAPI
                     return "VMSS";
                 case cls.PVS_proxy:
                     return "PVS_proxy";
+                case cls.VDI:
+                    return "VDI";
                 default:
                     return "unknown";
             }

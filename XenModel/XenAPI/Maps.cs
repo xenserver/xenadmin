@@ -83,6 +83,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<string, long> convert_from_proxy_string_long(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -127,6 +128,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<string, host_allowed_operations> convert_from_proxy_string_host_allowed_operations(Object o)
         {
@@ -173,6 +175,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<string, network_operations> convert_from_proxy_string_network_operations(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -217,6 +220,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<string, pool_allowed_operations> convert_from_proxy_string_pool_allowed_operations(Object o)
         {
@@ -263,6 +267,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<string, storage_operations> convert_from_proxy_string_storage_operations(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -307,6 +312,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<string, task_allowed_operations> convert_from_proxy_string_task_allowed_operations(Object o)
         {
@@ -353,6 +359,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<string, vbd_operations> convert_from_proxy_string_vbd_operations(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -397,6 +404,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<string, vdi_operations> convert_from_proxy_string_vdi_operations(Object o)
         {
@@ -443,6 +451,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<string, vif_operations> convert_from_proxy_string_vif_operations(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -487,6 +496,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<string, vm_appliance_operation> convert_from_proxy_string_vm_appliance_operation(Object o)
         {
@@ -533,6 +543,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<string, vm_operations> convert_from_proxy_string_vm_operations(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -577,6 +588,53 @@ namespace XenAPI
             }
             return result;
         }
+
+
+        internal static Dictionary<string, vusb_operations> convert_from_proxy_string_vusb_operations(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<string, vusb_operations> result = new Dictionary<string, vusb_operations>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key;
+                        vusb_operations v = table[key] == null ? (vusb_operations) 0 : (vusb_operations)Helper.EnumParseDefault(typeof(vusb_operations), (string)table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable convert_to_proxy_string_vusb_operations(Dictionary<string, vusb_operations> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key ?? "";
+                        string v = vusb_operations_helper.ToString(table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
 
         internal static Dictionary<string, XenRef<Blob>> convert_from_proxy_string_XenRefBlob(Object o)
         {
@@ -623,6 +681,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<long, long> convert_from_proxy_long_long(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -667,6 +726,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<long, double> convert_from_proxy_long_double(Object o)
         {
@@ -713,6 +773,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<long, string[]> convert_from_proxy_long_string_array(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -757,6 +818,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<vm_operations, string> convert_from_proxy_vm_operations_string(Object o)
         {
@@ -803,6 +865,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<XenRef<VDI>, XenRef<SR>> convert_from_proxy_XenRefVDI_XenRefSR(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -847,6 +910,53 @@ namespace XenAPI
             }
             return result;
         }
+
+
+        internal static Dictionary<XenRef<VGPU>, XenRef<GPU_group>> convert_from_proxy_XenRefVGPU_XenRefGPU_group(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<XenRef<VGPU>, XenRef<GPU_group>> result = new Dictionary<XenRef<VGPU>, XenRef<GPU_group>>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        XenRef<VGPU> k = XenRef<VGPU>.Create(key);
+                        XenRef<GPU_group> v = table[key] == null ? null : XenRef<GPU_group>.Create(table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable convert_to_proxy_XenRefVGPU_XenRefGPU_group(Dictionary<XenRef<VGPU>, XenRef<GPU_group>> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (XenRef<VGPU> key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key ?? "";
+                        string v = table[key] ?? "";
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
 
         internal static Dictionary<XenRef<VGPU_type>, long> convert_from_proxy_XenRefVGPU_type_long(Object o)
         {
@@ -893,6 +1003,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<XenRef<VIF>, string> convert_from_proxy_XenRefVIF_string(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -937,6 +1048,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<XenRef<VIF>, XenRef<Network>> convert_from_proxy_XenRefVIF_XenRefNetwork(Object o)
         {
@@ -983,6 +1095,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<XenRef<VM>, string> convert_from_proxy_XenRefVM_string(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -1027,6 +1140,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
         internal static Dictionary<XenRef<VM>, string[]> convert_from_proxy_XenRefVM_string_array(Object o)
         {
@@ -1073,6 +1187,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<XenRef<VM>, Dictionary<string, string>> convert_from_proxy_XenRefVM_Dictionary_string_string(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -1118,6 +1233,7 @@ namespace XenAPI
             return result;
         }
 
+
         internal static Dictionary<XenRef<Host>, string[]> convert_from_proxy_XenRefHost_string_array(Object o)
         {
             Hashtable table = (Hashtable)o;
@@ -1162,6 +1278,7 @@ namespace XenAPI
             }
             return result;
         }
+
 
     }
 }

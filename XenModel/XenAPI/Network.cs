@@ -64,7 +64,8 @@ namespace XenAPI
             Dictionary<string, XenRef<Blob>> blobs,
             string[] tags,
             network_default_locking_mode default_locking_mode,
-            Dictionary<XenRef<VIF>, string> assigned_ips)
+            Dictionary<XenRef<VIF>, string> assigned_ips,
+            List<network_purpose> purpose)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -81,6 +82,7 @@ namespace XenAPI
             this.tags = tags;
             this.default_locking_mode = default_locking_mode;
             this.assigned_ips = assigned_ips;
+            this.purpose = purpose;
         }
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace XenAPI
             tags = update.tags;
             default_locking_mode = update.default_locking_mode;
             assigned_ips = update.assigned_ips;
+            purpose = update.purpose;
         }
 
         internal void UpdateFromProxy(Proxy_Network proxy)
@@ -128,6 +131,7 @@ namespace XenAPI
             tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
             default_locking_mode = proxy.default_locking_mode == null ? (network_default_locking_mode) 0 : (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)proxy.default_locking_mode);
             assigned_ips = proxy.assigned_ips == null ? null : Maps.convert_from_proxy_XenRefVIF_string(proxy.assigned_ips);
+            purpose = proxy.purpose == null ? null : Helper.StringArrayToEnumList<network_purpose>(proxy.purpose);
         }
 
         public Proxy_Network ToProxy()
@@ -148,6 +152,7 @@ namespace XenAPI
             result_.tags = tags;
             result_.default_locking_mode = network_default_locking_mode_helper.ToString(default_locking_mode);
             result_.assigned_ips = Maps.convert_to_proxy_XenRefVIF_string(assigned_ips);
+            result_.purpose = (purpose != null) ? Helper.ObjectListToStringArray(purpose) : new string[] {};
             return result_;
         }
 
@@ -172,6 +177,7 @@ namespace XenAPI
             tags = Marshalling.ParseStringArray(table, "tags");
             default_locking_mode = (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), Marshalling.ParseString(table, "default_locking_mode"));
             assigned_ips = Maps.convert_from_proxy_XenRefVIF_string(Marshalling.ParseHashTable(table, "assigned_ips"));
+            purpose = Helper.StringArrayToEnumList<network_purpose>(Marshalling.ParseStringArray(table, "purpose"));
         }
 
         public bool DeepEquals(Network other, bool ignoreCurrentOperations)
@@ -197,7 +203,17 @@ namespace XenAPI
                 Helper.AreEqual2(this._blobs, other._blobs) &&
                 Helper.AreEqual2(this._tags, other._tags) &&
                 Helper.AreEqual2(this._default_locking_mode, other._default_locking_mode) &&
-                Helper.AreEqual2(this._assigned_ips, other._assigned_ips);
+                Helper.AreEqual2(this._assigned_ips, other._assigned_ips) &&
+                Helper.AreEqual2(this._purpose, other._purpose);
+        }
+
+        internal static List<Network> ProxyArrayToObjectList(Proxy_Network[] input)
+        {
+            var result = new List<Network>();
+            foreach (var item in input)
+                result.Add(new Network(item));
+
+            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Network server)
@@ -542,6 +558,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the purpose field of the given network.
+        /// First published in XenServer 7.3.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        public static List<network_purpose> get_purpose(Session session, string _network)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_get_purpose(session.uuid, _network);
+            else
+                return Helper.StringArrayToEnumList<network_purpose>(session.proxy.network_get_purpose(session.uuid, _network ?? "").parse());
+        }
+
+        /// <summary>
         /// Set the name/label field of the given network.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -771,6 +801,66 @@ namespace XenAPI
               return session.JsonRpcClient.async_network_set_default_locking_mode(session.uuid, _network, _value);
           else
               return XenRef<Task>.Create(session.proxy.async_network_set_default_locking_mode(session.uuid, _network ?? "", network_default_locking_mode_helper.ToString(_value)).parse());
+        }
+
+        /// <summary>
+        /// Give a network a new purpose (if not present already)
+        /// First published in XenServer 7.3.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_value">The purpose to add</param>
+        public static void add_purpose(Session session, string _network, network_purpose _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.network_add_purpose(session.uuid, _network, _value);
+            else
+                session.proxy.network_add_purpose(session.uuid, _network ?? "", network_purpose_helper.ToString(_value)).parse();
+        }
+
+        /// <summary>
+        /// Give a network a new purpose (if not present already)
+        /// First published in XenServer 7.3.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_value">The purpose to add</param>
+        public static XenRef<Task> async_add_purpose(Session session, string _network, network_purpose _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_network_add_purpose(session.uuid, _network, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_network_add_purpose(session.uuid, _network ?? "", network_purpose_helper.ToString(_value)).parse());
+        }
+
+        /// <summary>
+        /// Remove a purpose from a network (if present)
+        /// First published in XenServer 7.3.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_value">The purpose to remove</param>
+        public static void remove_purpose(Session session, string _network, network_purpose _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.network_remove_purpose(session.uuid, _network, _value);
+            else
+                session.proxy.network_remove_purpose(session.uuid, _network ?? "", network_purpose_helper.ToString(_value)).parse();
+        }
+
+        /// <summary>
+        /// Remove a purpose from a network (if present)
+        /// First published in XenServer 7.3.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_network">The opaque_ref of the given network</param>
+        /// <param name="_value">The purpose to remove</param>
+        public static XenRef<Task> async_remove_purpose(Session session, string _network, network_purpose _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_network_remove_purpose(session.uuid, _network, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_network_remove_purpose(session.uuid, _network ?? "", network_purpose_helper.ToString(_value)).parse());
         }
 
         /// <summary>
@@ -1079,5 +1169,24 @@ namespace XenAPI
             }
         }
         private Dictionary<XenRef<VIF>, string> _assigned_ips = new Dictionary<XenRef<VIF>, string>() {};
+
+        /// <summary>
+        /// Set of purposes for which the server will use this network
+        /// First published in XenServer 7.3.
+        /// </summary>
+        public virtual List<network_purpose> purpose
+        {
+            get { return _purpose; }
+            set
+            {
+                if (!Helper.AreEqual(value, _purpose))
+                {
+                    _purpose = value;
+                    Changed = true;
+                    NotifyPropertyChanged("purpose");
+                }
+            }
+        }
+        private List<network_purpose> _purpose = new List<network_purpose>() {};
     }
 }

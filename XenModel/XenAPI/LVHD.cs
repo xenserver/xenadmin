@@ -100,6 +100,15 @@ namespace XenAPI
             return Helper.AreEqual2(this._uuid, other._uuid);
         }
 
+        internal static List<LVHD> ProxyArrayToObjectList(Proxy_LVHD[] input)
+        {
+            var result = new List<LVHD>();
+            foreach (var item in input)
+                result.Add(new LVHD(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, LVHD server)
         {
             if (opaqueRef == null)

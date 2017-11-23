@@ -47,12 +47,13 @@ namespace XenAdmin.Alerts
         public XenServerVersionAlert(XenServerVersion version)
         {
             Version = version;
+            RequiredXenCenterVersion = Updates.GetRequiredXenCenterVersion(Version);
             _timestamp = version.TimeStamp;
         }
 
         public override string WebPageLabel
         {
-            get { return Messages.AVAILABLE_UPDATES_DOWNLOAD_TEXT; }
+            get { return Version.Url; }
         }
 
         public override string Name

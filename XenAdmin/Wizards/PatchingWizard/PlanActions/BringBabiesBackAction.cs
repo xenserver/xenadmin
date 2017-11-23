@@ -91,7 +91,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 retries++;
 
-                Thread.Sleep(1000);
+                Thread.Sleep(5000);
 
                 try
                 {
@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     if (retries > 60)
                         throw;
 
-                    log.Debug(string.Format("Cannot enable host {0}. Retrying in 1 sec.", _host.opaque_ref), e);
+                    log.Debug(string.Format("Cannot enable host {0}. Retrying in 5 sec.", _host.opaque_ref), e);
                 }
             }
 

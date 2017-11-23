@@ -56,31 +56,31 @@ namespace XenAdmin.TabPages
     {
         public ADUpsellPage()
             : base(Messages.ACTIVE_DIRECTORY_TAB_TITLE, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_AD :
-            Messages.UPSELL_BLURB_AD + Messages.UPSELL_BLURB_AD_MORE, InvisibleMessages.UPSELL_LEARNMOREURL_AD)
+            Messages.UPSELL_BLURB_AD + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
         { }
     }
 
     public class BallooningUpsellPage : UpsellTabPage
     {
         public BallooningUpsellPage()
-            : base(Messages.DYNAMIC_MEMORY_CONTROL, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DMC : 
-            Messages.UPSELL_BLURB_DMC + Messages.UPSELL_BLURB_DMC_MORE, InvisibleMessages.UPSELL_LEARNMOREURL_DMC)
+            : base(Messages.DYNAMIC_MEMORY_CONTROL, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_DMC :
+            Messages.UPSELL_BLURB_DMC + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
         { }
     }
 
     public class HAUpsellPage : UpsellTabPage
     {
         public HAUpsellPage()
-            : base(Messages.HIGH_AVAILABILITY, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA : 
-            Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_HA_MORE, InvisibleMessages.UPSELL_LEARNMOREURL_HA)
+            : base(Messages.HIGH_AVAILABILITY, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_HA :
+            Messages.UPSELL_BLURB_HA + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
         { }
     }
 
     public class WLBUpsellPage : UpsellTabPage
     {
         public WLBUpsellPage()
-            : base(Messages.WORKLOAD_BALANCING, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_WLB : 
-            Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_WLB_MORE, InvisibleMessages.UPSELL_LEARNMOREURL_WLB)
+            : base(Messages.WORKLOAD_BALANCING, HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_WLB :
+            Messages.UPSELL_BLURB_WLB + Messages.UPSELL_BLURB_TRIAL, InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL)
         { }
     }
 }
