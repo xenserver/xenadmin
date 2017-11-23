@@ -55,7 +55,8 @@ namespace XenAPI
         API_2_5 = 16, //XenServer 7.0 (dundee)
         API_2_6 = 17, //XenServer 7.1 (ely)
         API_2_7 = 18, //XenServer 7.2 (falcon)
-        LATEST = 18,
+        API_2_8 = 19, //XenServer 7.3 (inverness)
+        LATEST = 19,
         UNKNOWN = 99
     }
 
@@ -101,6 +102,8 @@ namespace XenAPI
                     return "2.6";
                 case API_Version.API_2_7:
                     return "2.7";
+                case API_Version.API_2_8:
+                    return "2.8";
                 default:
                     return "Unknown";
             }

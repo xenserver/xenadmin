@@ -946,7 +946,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the igmp_snooping_enabled field of the given pool.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -1470,7 +1470,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reconfigure the management network interface for all Hosts in the Pool
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The network</param>
@@ -1484,7 +1484,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reconfigure the management network interface for all Hosts in the Pool
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The network</param>
@@ -2491,7 +2491,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable or disable IGMP Snooping on the pool.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -2506,7 +2506,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable or disable IGMP Snooping on the pool.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool">The opaque_ref of the given pool</param>
@@ -3301,7 +3301,7 @@ namespace XenAPI
 
         /// <summary>
         /// true if IGMP snooping is enabled in the pool, false otherwise.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         public virtual bool igmp_snooping_enabled
         {

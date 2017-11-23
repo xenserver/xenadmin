@@ -149,11 +149,11 @@ namespace XenAPI
         /// <summary>
         /// Get a record containing the current state of the given crashdump.
         /// First published in XenServer 4.0.
-        /// Deprecated since Unreleased.
+        /// Deprecated since XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_crashdump">The opaque_ref of the given crashdump</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("XenServer 7.3")]
         public static Crashdump get_record(Session session, string _crashdump)
         {
             if (session.JsonRpcClient != null)
@@ -165,11 +165,11 @@ namespace XenAPI
         /// <summary>
         /// Get a reference to the crashdump instance with the specified UUID.
         /// First published in XenServer 4.0.
-        /// Deprecated since Unreleased.
+        /// Deprecated since XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("XenServer 7.3")]
         public static XenRef<Crashdump> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
@@ -311,10 +311,10 @@ namespace XenAPI
         /// <summary>
         /// Return a list of all the crashdumps known to the system.
         /// First published in XenServer 4.0.
-        /// Deprecated since Unreleased.
+        /// Deprecated since XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
-        [Deprecated("Unreleased")]
+        [Deprecated("XenServer 7.3")]
         public static List<XenRef<Crashdump>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)

@@ -717,6 +717,9 @@
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>活动恢复日志实例数已达到上限。</value>
   </data>
+  <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
+    <value>Nvidia 工具错误。请务必安装最新的 Nvidia 工具</value>
+  </data>
   <data name="OBJECT_NOLONGER_EXISTS" xml:space="preserve">
     <value>指定的对象不再存在。</value>
   </data>
@@ -1831,6 +1834,9 @@
   </data>
   <data name="VDI_TOO_SMALL" xml:space="preserve">
     <value>VDI 太小。请至少将其大小调整到最小大小。</value>
+  </data>
+  <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
+    <value>VGPU 与目标中的任何 PGPU 都不兼容。</value>
   </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>VM 无法启动，因为所有 GPU 已全部使用或者正在运行其他类型的虚拟 GPU</value>

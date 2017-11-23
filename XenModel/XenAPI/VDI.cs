@@ -913,7 +913,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cbt_enabled field of the given VDI.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -1471,7 +1471,7 @@ namespace XenAPI
         /// <param name="_is_a_snapshot">Storage-specific config First published in XenServer 6.1.</param>
         /// <param name="_snapshot_time">Storage-specific config First published in XenServer 6.1.</param>
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
-        /// <param name="_cbt_enabled">True if changed blocks are tracked for this VDI First published in Unreleased.</param>
+        /// <param name="_cbt_enabled">True if changed blocks are tracked for this VDI First published in XenServer 7.3.</param>
         public static XenRef<VDI> db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of, bool _cbt_enabled)
         {
             if (session.JsonRpcClient != null)
@@ -1503,7 +1503,7 @@ namespace XenAPI
         /// <param name="_is_a_snapshot">Storage-specific config First published in XenServer 6.1.</param>
         /// <param name="_snapshot_time">Storage-specific config First published in XenServer 6.1.</param>
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
-        /// <param name="_cbt_enabled">True if changed blocks are tracked for this VDI First published in Unreleased.</param>
+        /// <param name="_cbt_enabled">True if changed blocks are tracked for this VDI First published in XenServer 7.3.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of, bool _cbt_enabled)
         {
           if (session.JsonRpcClient != null)
@@ -2020,7 +2020,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable changed block tracking for the VDI. This call is idempotent - enabling CBT for a VDI for which CBT is already enabled results in a no-op, and no error will be thrown.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2034,7 +2034,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable changed block tracking for the VDI. This call is idempotent - enabling CBT for a VDI for which CBT is already enabled results in a no-op, and no error will be thrown.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2048,7 +2048,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable changed block tracking for the VDI. This call is only allowed on VDIs that support enabling CBT. It is an idempotent operation - disabling CBT for a VDI for which CBT is not enabled results in a no-op, and no error will be thrown.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2062,7 +2062,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable changed block tracking for the VDI. This call is only allowed on VDIs that support enabling CBT. It is an idempotent operation - disabling CBT for a VDI for which CBT is not enabled results in a no-op, and no error will be thrown.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2076,7 +2076,7 @@ namespace XenAPI
 
         /// <summary>
         /// Delete the data of the snapshot VDI, but keep its changed block tracking metadata. When successful, this call changes the type of the VDI to cbt_metadata. This operation is idempotent: calling it on a VDI of type cbt_metadata results in a no-op, and no error will be thrown.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2090,7 +2090,7 @@ namespace XenAPI
 
         /// <summary>
         /// Delete the data of the snapshot VDI, but keep its changed block tracking metadata. When successful, this call changes the type of the VDI to cbt_metadata. This operation is idempotent: calling it on a VDI of type cbt_metadata results in a no-op, and no error will be thrown.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2104,7 +2104,7 @@ namespace XenAPI
 
         /// <summary>
         /// Compare two VDIs in 64k block increments and report which blocks differ. This operation is not allowed when vdi_to is attached to a VM.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2119,7 +2119,7 @@ namespace XenAPI
 
         /// <summary>
         /// Compare two VDIs in 64k block increments and report which blocks differ. This operation is not allowed when vdi_to is attached to a VM.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2134,7 +2134,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get details specifying how to access this VDI via a Network Block Device server. For each of a set of NBD server addresses on which the VDI is available, the return value set contains a vdi_nbd_server_info object that contains an exportname to request once the NBD connection is established, and connection details for the address. An empty list is returned if there is no network that has a PIF on a host with access to the relevant SR, or if no such network has been assigned an NBD-related purpose in its purpose field. To access the given VDI, any of the vdi_nbd_server_info objects can be used to make a connection to a server, and then the VDI will be available by requesting the exportname.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
@@ -2755,7 +2755,7 @@ namespace XenAPI
 
         /// <summary>
         /// True if changed blocks are tracked for this VDI
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         public virtual bool cbt_enabled
         {

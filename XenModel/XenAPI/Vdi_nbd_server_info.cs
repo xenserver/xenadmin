@@ -42,7 +42,7 @@ namespace XenAPI
 {
     /// <summary>
     /// Details for connecting to a VDI using the Network Block Device protocol
-    /// First published in Unreleased.
+    /// First published in XenServer 7.3.
     /// </summary>
     public partial class Vdi_nbd_server_info : XenObject<Vdi_nbd_server_info>
     {

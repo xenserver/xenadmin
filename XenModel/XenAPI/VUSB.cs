@@ -42,7 +42,7 @@ namespace XenAPI
 {
     /// <summary>
     /// Describes the vusb device
-    /// First published in Unreleased.
+    /// First published in XenServer 7.3.
     /// </summary>
     public partial class VUSB : XenObject<VUSB>
     {
@@ -171,7 +171,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -185,7 +185,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the VUSB instance with the specified UUID.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -199,7 +199,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -213,7 +213,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the allowed_operations field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -227,7 +227,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the current_operations field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -241,7 +241,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the VM field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -255,7 +255,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the USB_group field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -269,7 +269,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the other_config field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -283,7 +283,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the currently_attached field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -297,7 +297,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the other_config field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -312,7 +312,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add the given key-value pair to the other_config field of the given VUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -328,7 +328,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the given key and its corresponding value from the other_config field of the given VUSB.  If the key is not in that Map, then do nothing.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -343,7 +343,7 @@ namespace XenAPI
 
         /// <summary>
         /// Create a new VUSB record in the database only
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The VM</param>
@@ -359,7 +359,7 @@ namespace XenAPI
 
         /// <summary>
         /// Create a new VUSB record in the database only
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The VM</param>
@@ -375,7 +375,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unplug the vusb device from the vm.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -389,7 +389,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unplug the vusb device from the vm.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -403,7 +403,7 @@ namespace XenAPI
 
         /// <summary>
         /// Removes a VUSB record from the database
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -417,7 +417,7 @@ namespace XenAPI
 
         /// <summary>
         /// Removes a VUSB record from the database
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vusb">The opaque_ref of the given vusb</param>
@@ -431,7 +431,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the VUSBs known to the system.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<VUSB>> get_all(Session session)
@@ -444,7 +444,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the VUSB Records at once, in a single XML RPC call
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VUSB>, VUSB> get_all_records(Session session)

@@ -42,7 +42,7 @@ namespace XenAPI
 {
     /// <summary>
     /// A physical USB device
-    /// First published in Unreleased.
+    /// First published in XenServer 7.3.
     /// </summary>
     public partial class PUSB : XenObject<PUSB>
     {
@@ -211,7 +211,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -225,7 +225,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the PUSB instance with the specified UUID.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -239,7 +239,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -253,7 +253,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the USB_group field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -267,7 +267,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the host field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -281,7 +281,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the path field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -295,7 +295,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the vendor_id field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -309,7 +309,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the vendor_desc field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -323,7 +323,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the product_id field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -337,7 +337,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the product_desc field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -351,7 +351,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the serial field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -365,7 +365,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the version field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -379,7 +379,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the description field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -393,7 +393,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the passthrough_enabled field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -407,7 +407,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the other_config field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -421,7 +421,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the other_config field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -436,7 +436,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add the given key-value pair to the other_config field of the given PUSB.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -452,7 +452,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the given key and its corresponding value from the other_config field of the given PUSB.  If the key is not in that Map, then do nothing.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -467,7 +467,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The host</param>
@@ -481,7 +481,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The host</param>
@@ -495,7 +495,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -510,7 +510,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pusb">The opaque_ref of the given pusb</param>
@@ -525,7 +525,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the PUSBs known to the system.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<PUSB>> get_all(Session session)
@@ -538,7 +538,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the PUSB Records at once, in a single XML RPC call
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<PUSB>, PUSB> get_all_records(Session session)

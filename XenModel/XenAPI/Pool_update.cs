@@ -365,7 +365,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the other_config field of the given pool_update.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -379,7 +379,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the enforce_homogeneity field of the given pool_update.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -393,7 +393,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the other_config field of the given pool_update.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -408,7 +408,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add the given key-value pair to the other_config field of the given pool_update.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -424,7 +424,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the given key and its corresponding value from the other_config field of the given pool_update.  If the key is not in that Map, then do nothing.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pool_update">The opaque_ref of the given pool_update</param>
@@ -801,7 +801,7 @@ namespace XenAPI
 
         /// <summary>
         /// additional configuration
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         public virtual Dictionary<string, string> other_config
         {
@@ -820,7 +820,7 @@ namespace XenAPI
 
         /// <summary>
         /// Flag - if true, all hosts in a pool must apply this update
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         public virtual bool enforce_homogeneity
         {
