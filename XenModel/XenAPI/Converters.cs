@@ -264,11 +264,6 @@ namespace XenAPI
 
     internal class XenEnumConverter : StringEnumConverter
     {
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
-
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JToken jToken = JToken.Load(reader);
