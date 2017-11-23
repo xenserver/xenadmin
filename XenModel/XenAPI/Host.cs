@@ -100,7 +100,8 @@ namespace XenAPI
             long[] virtual_hardware_platform_versions,
             XenRef<VM> control_domain,
             List<XenRef<Pool_update>> updates_requiring_reboot,
-            List<XenRef<Feature>> features)
+            List<XenRef<Feature>> features,
+            string iscsi_iqn)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -157,6 +158,7 @@ namespace XenAPI
             this.control_domain = control_domain;
             this.updates_requiring_reboot = updates_requiring_reboot;
             this.features = features;
+            this.iscsi_iqn = iscsi_iqn;
         }
 
         /// <summary>
@@ -225,6 +227,7 @@ namespace XenAPI
             control_domain = update.control_domain;
             updates_requiring_reboot = update.updates_requiring_reboot;
             features = update.features;
+            iscsi_iqn = update.iscsi_iqn;
         }
 
         internal void UpdateFromProxy(Proxy_Host proxy)
@@ -284,6 +287,7 @@ namespace XenAPI
             control_domain = proxy.control_domain == null ? null : XenRef<VM>.Create(proxy.control_domain);
             updates_requiring_reboot = proxy.updates_requiring_reboot == null ? null : XenRef<Pool_update>.Create(proxy.updates_requiring_reboot);
             features = proxy.features == null ? null : XenRef<Feature>.Create(proxy.features);
+            iscsi_iqn = proxy.iscsi_iqn == null ? null : (string)proxy.iscsi_iqn;
         }
 
         public Proxy_Host ToProxy()
@@ -344,6 +348,7 @@ namespace XenAPI
             result_.control_domain = control_domain ?? "";
             result_.updates_requiring_reboot = (updates_requiring_reboot != null) ? Helper.RefListToStringArray(updates_requiring_reboot) : new string[] {};
             result_.features = (features != null) ? Helper.RefListToStringArray(features) : new string[] {};
+            result_.iscsi_iqn = iscsi_iqn ?? "";
             return result_;
         }
 
@@ -408,6 +413,7 @@ namespace XenAPI
             control_domain = Marshalling.ParseRef<VM>(table, "control_domain");
             updates_requiring_reboot = Marshalling.ParseSetRef<Pool_update>(table, "updates_requiring_reboot");
             features = Marshalling.ParseSetRef<Feature>(table, "features");
+            iscsi_iqn = Marshalling.ParseString(table, "iscsi_iqn");
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -473,7 +479,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions) &&
                 Helper.AreEqual2(this._control_domain, other._control_domain) &&
                 Helper.AreEqual2(this._updates_requiring_reboot, other._updates_requiring_reboot) &&
-                Helper.AreEqual2(this._features, other._features);
+                Helper.AreEqual2(this._features, other._features) &&
+                Helper.AreEqual2(this._iscsi_iqn, other._iscsi_iqn);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -536,6 +543,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_ssl_legacy, server._ssl_legacy))
                 {
                     Host.set_ssl_legacy(session, opaqueRef, _ssl_legacy);
+                }
+                if (!Helper.AreEqual2(_iscsi_iqn, server._iscsi_iqn))
+                {
+                    Host.set_iscsi_iqn(session, opaqueRef, _iscsi_iqn);
                 }
 
                 return null;
@@ -1179,6 +1190,17 @@ namespace XenAPI
         public static List<XenRef<Feature>> get_features(Session session, string _host)
         {
             return XenRef<Feature>.Create(session.proxy.host_get_features(session.uuid, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the iscsi_iqn field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static string get_iscsi_iqn(Session session, string _host)
+        {
+            return (string)session.proxy.host_get_iscsi_iqn(session.uuid, _host ?? "").parse();
         }
 
         /// <summary>
@@ -2586,6 +2608,30 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Sets the initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">The value to which the IQN should be set</param>
+        public static void set_iscsi_iqn(Session session, string _host, string _value)
+        {
+            session.proxy.host_set_iscsi_iqn(session.uuid, _host ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
+        /// Sets the initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">The value to which the IQN should be set</param>
+        public static XenRef<Task> async_set_iscsi_iqn(Session session, string _host, string _value)
+        {
+            return XenRef<Task>.Create(session.proxy.async_host_set_iscsi_iqn(session.uuid, _host ?? "", _value ?? "").parse());
+        }
+
+        /// <summary>
         /// Return a list of all the hosts known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -3619,5 +3665,24 @@ namespace XenAPI
             }
         }
         private List<XenRef<Feature>> _features;
+
+        /// <summary>
+        /// The initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string iscsi_iqn
+        {
+            get { return _iscsi_iqn; }
+            set
+            {
+                if (!Helper.AreEqual(value, _iscsi_iqn))
+                {
+                    _iscsi_iqn = value;
+                    Changed = true;
+                    NotifyPropertyChanged("iscsi_iqn");
+                }
+            }
+        }
+        private string _iscsi_iqn;
     }
 }

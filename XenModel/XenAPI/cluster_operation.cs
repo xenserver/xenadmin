@@ -35,23 +35,27 @@ using System.Collections.Generic;
 
 namespace XenAPI
 {
-    public enum pool_allowed_operations
+    public enum cluster_operation
     {
-        ha_enable, ha_disable, cluster_create, unknown
+        add, remove, enable, disable, destroy, unknown
     }
 
-    public static class pool_allowed_operations_helper
+    public static class cluster_operation_helper
     {
-        public static string ToString(pool_allowed_operations x)
+        public static string ToString(cluster_operation x)
         {
             switch (x)
             {
-                case pool_allowed_operations.ha_enable:
-                    return "ha_enable";
-                case pool_allowed_operations.ha_disable:
-                    return "ha_disable";
-                case pool_allowed_operations.cluster_create:
-                    return "cluster_create";
+                case cluster_operation.add:
+                    return "add";
+                case cluster_operation.remove:
+                    return "remove";
+                case cluster_operation.enable:
+                    return "enable";
+                case cluster_operation.disable:
+                    return "disable";
+                case cluster_operation.destroy:
+                    return "destroy";
                 default:
                     return "unknown";
             }

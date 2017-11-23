@@ -255,6 +255,18 @@
   <data name="CLUSTERED_SR_DEGRADED" xml:space="preserve">
     <value>An SR is using clustered local storage. It is not safe to reboot a host at the moment.</value>
   </data>
+  <data name="CLUSTERING_DISABLED" xml:space="preserve">
+    <value>An operation was attempted while clustering was disabled on the cluster_host.</value>
+  </data>
+  <data name="CLUSTERING_ENABLED" xml:space="preserve">
+    <value>An operation was attempted while clustering was enabled on the cluster_host.</value>
+  </data>
+  <data name="CLUSTER_ALREADY_EXISTS" xml:space="preserve">
+    <value>A cluster already exists in the pool.</value>
+  </data>
+  <data name="CLUSTER_CREATE_IN_PROGRESS" xml:space="preserve">
+    <value>The operation could not be performed because cluster creation is in progress.</value>
+  </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>Could not find a network interface with the specified device name and MAC address.</value>
   </data>
