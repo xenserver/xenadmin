@@ -322,7 +322,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Session>, Session> session_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Session>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Session>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Session>, Session>>("session.get_all_records", new JArray(session), serializer);
         }
@@ -350,7 +350,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Auth>, Auth> auth_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Auth>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Auth>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Auth>, Auth>>("auth.get_all_records", new JArray(session), serializer);
         }
@@ -455,7 +455,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Subject>, Subject> subject_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Subject>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Subject>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Subject>, Subject>>("subject.get_all_records", new JArray(session), serializer);
         }
@@ -546,7 +546,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Role>, Role> role_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Role>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Role>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Role>, Role>>("role.get_all_records", new JArray(session), serializer);
         }
@@ -756,7 +756,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Task>, Task> task_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Task>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Task>, Task>>("task.get_all_records", new JArray(session), serializer);
         }
@@ -1827,7 +1827,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Pool>, Pool> pool_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Pool>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Pool>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Pool>, Pool>>("pool.get_all_records", new JArray(session), serializer);
         }
@@ -2051,7 +2051,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Pool_patch>, Pool_patch> pool_patch_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Pool_patch>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Pool_patch>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Pool_patch>, Pool_patch>>("pool_patch.get_all_records", new JArray(session), serializer);
         }
@@ -2268,7 +2268,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Pool_update>, Pool_update> pool_update_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Pool_update>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Pool_update>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Pool_update>, Pool_update>>("pool_update.get_all_records", new JArray(session), serializer);
         }
@@ -4186,7 +4186,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM>, VM> vm_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VM>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM>, VM>>("VM.get_all_records", new JArray(session), serializer);
         }
@@ -4340,7 +4340,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM_metrics>, VM_metrics> vm_metrics_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VM_metrics>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VM_metrics>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM_metrics>, VM_metrics>>("VM_metrics.get_all_records", new JArray(session), serializer);
         }
@@ -4487,7 +4487,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM_guest_metrics>, VM_guest_metrics> vm_guest_metrics_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VM_guest_metrics>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VM_guest_metrics>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM_guest_metrics>, VM_guest_metrics>>("VM_guest_metrics.get_all_records", new JArray(session), serializer);
         }
@@ -4872,7 +4872,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VMPP>, VMPP> vmpp_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VMPP>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VMPP>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VMPP>, VMPP>>("VMPP.get_all_records", new JArray(session), serializer);
         }
@@ -5082,7 +5082,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VMSS>, VMSS> vmss_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VMSS>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VMSS>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VMSS>, VMSS>>("VMSS.get_all_records", new JArray(session), serializer);
         }
@@ -5299,7 +5299,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM_appliance>, VM_appliance> vm_appliance_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VM_appliance>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VM_appliance>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM_appliance>, VM_appliance>>("VM_appliance.get_all_records", new JArray(session), serializer);
         }
@@ -5369,7 +5369,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<DR_task>, DR_task> dr_task_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<DR_task>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<DR_task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<DR_task>, DR_task>>("DR_task.get_all_records", new JArray(session), serializer);
         }
@@ -6636,7 +6636,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Host>, Host> host_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Host>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Host>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Host>, Host>>("host.get_all_records", new JArray(session), serializer);
         }
@@ -6748,7 +6748,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Host_crashdump>, Host_crashdump> host_crashdump_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Host_crashdump>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Host_crashdump>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Host_crashdump>, Host_crashdump>>("host_crashdump.get_all_records", new JArray(session), serializer);
         }
@@ -6902,7 +6902,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Host_patch>, Host_patch> host_patch_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Host_patch>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Host_patch>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Host_patch>, Host_patch>>("host_patch.get_all_records", new JArray(session), serializer);
         }
@@ -6993,7 +6993,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Host_metrics>, Host_metrics> host_metrics_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Host_metrics>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Host_metrics>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Host_metrics>, Host_metrics>>("host_metrics.get_all_records", new JArray(session), serializer);
         }
@@ -7133,7 +7133,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Host_cpu>, Host_cpu> host_cpu_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Host_cpu>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Host_cpu>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Host_cpu>, Host_cpu>>("host_cpu.get_all_records", new JArray(session), serializer);
         }
@@ -7441,7 +7441,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Network>, Network> network_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Network>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Network>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Network>, Network>>("network.get_all_records", new JArray(session), serializer);
         }
@@ -7917,7 +7917,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VIF>, VIF> vif_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VIF>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VIF>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VIF>, VIF>>("VIF.get_all_records", new JArray(session), serializer);
         }
@@ -8001,7 +8001,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VIF_metrics>, VIF_metrics> vif_metrics_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VIF_metrics>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VIF_metrics>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VIF_metrics>, VIF_metrics>>("VIF_metrics.get_all_records", new JArray(session), serializer);
         }
@@ -8519,7 +8519,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PIF>, PIF> pif_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PIF>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PIF>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PIF>, PIF>>("PIF.get_all_records", new JArray(session), serializer);
         }
@@ -8659,7 +8659,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PIF_metrics>, PIF_metrics> pif_metrics_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PIF_metrics>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PIF_metrics>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PIF_metrics>, PIF_metrics>>("PIF_metrics.get_all_records", new JArray(session), serializer);
         }
@@ -8848,7 +8848,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Bond>, Bond> bond_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Bond>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Bond>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Bond>, Bond>>("Bond.get_all_records", new JArray(session), serializer);
         }
@@ -8960,7 +8960,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VLAN>, VLAN> vlan_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VLAN>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VLAN>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VLAN>, VLAN>>("VLAN.get_all_records", new JArray(session), serializer);
         }
@@ -9114,7 +9114,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<SM>, SM> sm_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<SM>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<SM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<SM>, SM>>("SM.get_all_records", new JArray(session), serializer);
         }
@@ -9695,7 +9695,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<SR>, SR> sr_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<SR>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<SR>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<SR>, SR>>("SR.get_all_records", new JArray(session), serializer);
         }
@@ -9737,7 +9737,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<LVHD>, LVHD> lvhd_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<LVHD>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<LVHD>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<LVHD>, LVHD>>("LVHD.get_all_records", new JArray(session), serializer);
         }
@@ -10535,7 +10535,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VDI>, VDI> vdi_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VDI>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VDI>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VDI>, VDI>>("VDI.get_all_records", new JArray(session), serializer);
         }
@@ -10913,7 +10913,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VBD>, VBD> vbd_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VBD>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VBD>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VBD>, VBD>>("VBD.get_all_records", new JArray(session), serializer);
         }
@@ -10997,7 +10997,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VBD_metrics>, VBD_metrics> vbd_metrics_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VBD_metrics>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VBD_metrics>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VBD_metrics>, VBD_metrics>>("VBD_metrics.get_all_records", new JArray(session), serializer);
         }
@@ -11158,7 +11158,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PBD>, PBD> pbd_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PBD>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PBD>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PBD>, PBD>>("PBD.get_all_records", new JArray(session), serializer);
         }
@@ -11249,7 +11249,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Crashdump>, Crashdump> crashdump_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Crashdump>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Crashdump>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Crashdump>, Crashdump>>("crashdump.get_all_records", new JArray(session), serializer);
         }
@@ -11319,7 +11319,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VTPM>, VTPM> vtpm_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VTPM>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VTPM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VTPM>, VTPM>>("VTPM.get_all_records", new JArray(session), serializer);
         }
@@ -11431,7 +11431,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Console>, Console> console_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Console>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Console>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Console>, Console>>("console.get_all_records", new JArray(session), serializer);
         }
@@ -11536,14 +11536,14 @@ namespace XenAPI
 
         public Dictionary<XenRef<User>, User> user_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<User>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<User>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<User>, User>>("user.get_all_records", new JArray(session), serializer);
         }
 
         public Dictionary<XenRef<Data_source>, Data_source> data_source_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Data_source>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Data_source>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Data_source>, Data_source>>("data_source.get_all_records", new JArray(session), serializer);
         }
@@ -11669,7 +11669,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Blob>, Blob> blob_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Blob>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Blob>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Blob>, Blob>>("blob.get_all_records", new JArray(session), serializer);
         }
@@ -11690,7 +11690,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Message>, Message> message_get(string session, cls _cls, string _obj_uuid, DateTime _since)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Message>(), new clsConverter(), new XenDateTimeConverter()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Message>(), new clsConverter(), new XenDateTimeConverter()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Message>, Message>>("message.get", new JArray(session, _cls.StringOf(), _obj_uuid ?? "", _since), serializer);
         }
@@ -11704,7 +11704,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Message>, Message> message_get_since(string session, DateTime _since)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Message>(), new XenDateTimeConverter()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Message>(), new XenDateTimeConverter()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Message>, Message>>("message.get_since", new JArray(session, _since), serializer);
         }
@@ -11725,14 +11725,14 @@ namespace XenAPI
 
         public Dictionary<XenRef<Message>, Message> message_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Message>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Message>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Message>, Message>>("message.get_all_records", new JArray(session), serializer);
         }
 
         public Dictionary<XenRef<Message>, Message> message_get_all_records_where(string session, string _expr)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Message>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Message>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Message>, Message>>("message.get_all_records_where", new JArray(session, _expr ?? ""), serializer);
         }
@@ -11837,7 +11837,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Secret>, Secret> secret_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Secret>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Secret>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Secret>, Secret>>("secret.get_all_records", new JArray(session), serializer);
         }
@@ -11970,7 +11970,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Tunnel>, Tunnel> tunnel_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Tunnel>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Tunnel>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Tunnel>, Tunnel>>("tunnel.get_all_records", new JArray(session), serializer);
         }
@@ -12089,7 +12089,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PCI>, PCI> pci_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PCI>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PCI>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PCI>, PCI>>("PCI.get_all_records", new JArray(session), serializer);
         }
@@ -12320,7 +12320,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PGPU>, PGPU> pgpu_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PGPU>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PGPU>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PGPU>, PGPU>>("PGPU.get_all_records", new JArray(session), serializer);
         }
@@ -12509,7 +12509,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<GPU_group>, GPU_group> gpu_group_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<GPU_group>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<GPU_group>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<GPU_group>, GPU_group>>("GPU_group.get_all_records", new JArray(session), serializer);
         }
@@ -12663,7 +12663,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VGPU>, VGPU> vgpu_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VGPU>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VGPU>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VGPU>, VGPU>>("VGPU.get_all_records", new JArray(session), serializer);
         }
@@ -12796,7 +12796,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VGPU_type>, VGPU_type> vgpu_type_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VGPU_type>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VGPU_type>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VGPU_type>, VGPU_type>>("VGPU_type.get_all_records", new JArray(session), serializer);
         }
@@ -12936,7 +12936,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PVS_site>, PVS_site> pvs_site_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PVS_site>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PVS_site>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PVS_site>, PVS_site>>("PVS_site.get_all_records", new JArray(session), serializer);
         }
@@ -13027,7 +13027,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PVS_server>, PVS_server> pvs_server_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PVS_server>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PVS_server>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PVS_server>, PVS_server>>("PVS_server.get_all_records", new JArray(session), serializer);
         }
@@ -13118,7 +13118,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PVS_proxy>, PVS_proxy> pvs_proxy_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PVS_proxy>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PVS_proxy>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PVS_proxy>, PVS_proxy>>("PVS_proxy.get_all_records", new JArray(session), serializer);
         }
@@ -13216,7 +13216,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PVS_cache_storage>, PVS_cache_storage> pvs_cache_storage_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PVS_cache_storage>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PVS_cache_storage>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PVS_cache_storage>, PVS_cache_storage>>("PVS_cache_storage.get_all_records", new JArray(session), serializer);
         }
@@ -13300,7 +13300,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Feature>, Feature> feature_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Feature>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Feature>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Feature>, Feature>>("Feature.get_all_records", new JArray(session), serializer);
         }
@@ -13384,14 +13384,14 @@ namespace XenAPI
 
         public Dictionary<XenRef<SDN_controller>, SDN_controller> sdn_controller_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<SDN_controller>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<SDN_controller>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<SDN_controller>, SDN_controller>>("SDN_controller.get_all_records", new JArray(session), serializer);
         }
 
         public Dictionary<XenRef<Vdi_nbd_server_info>, Vdi_nbd_server_info> vdi_nbd_server_info_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<Vdi_nbd_server_info>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Vdi_nbd_server_info>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Vdi_nbd_server_info>, Vdi_nbd_server_info>>("vdi_nbd_server_info.get_all_records", new JArray(session), serializer);
         }
@@ -13559,7 +13559,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<PUSB>, PUSB> pusb_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<PUSB>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<PUSB>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<PUSB>, PUSB>>("PUSB.get_all_records", new JArray(session), serializer);
         }
@@ -13699,7 +13699,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<USB_group>, USB_group> usb_group_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<USB_group>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<USB_group>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<USB_group>, USB_group>>("USB_group.get_all_records", new JArray(session), serializer);
         }
@@ -13839,7 +13839,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VUSB>, VUSB> vusb_get_all_records(string session)
         {
-            var converters = new List<JsonConverter> {new RecordConverter<VUSB>()};
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VUSB>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VUSB>, VUSB>>("VUSB.get_all_records", new JArray(session), serializer);
         }

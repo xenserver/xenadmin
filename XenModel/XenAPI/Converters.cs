@@ -91,7 +91,7 @@ namespace XenAPI
     }
 
 
-    internal class RecordConverter<T> : CustomJsonConverter<Dictionary<XenRef<T>, T>> where T : XenObject<T>
+    internal class XenRefXenObjectMapConverter<T> : CustomJsonConverter<Dictionary<XenRef<T>, T>> where T : XenObject<T>
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
