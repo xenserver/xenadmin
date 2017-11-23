@@ -8272,9 +8272,7 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
     <value>Hardware HBA</value>
   </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
-    <value>iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
-
-Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility.</value>
+    <value>iSCSI or Fibre Channel access to a shared LUN can be configured to host fully provisioned virtual disks using LVM or be formatted with the GFS2 cluster file system for hosting thinly provisioned images.</value>
   </data>
   <data name="NEWSR_LVMOISCSI_TYPE_NAME" xml:space="preserve">
     <value>iSCSI</value>
@@ -13566,5 +13564,17 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="CHOOSE_SR_PROVISIONING_PAGE_TITLE" xml:space="preserve">
+    <value>Choose the provisioning method</value>
+  </data>
+  <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
+    <value>Your pool license does not allow GFS2.</value>
+  </data>
+  <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>GFS2 requires clustering to be enabled on the pool.</value>
+  </data>
+  <data name="PROVISIONING" xml:space="preserve">
+    <value>Provisioning</value>
   </data>
 </root>

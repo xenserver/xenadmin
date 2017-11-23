@@ -718,6 +718,12 @@
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
+    <Compile Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.Designer.cs">
+      <DependentUpon>ChooseSrProvisioningPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2081,6 +2087,9 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.resx">
+      <DependentUpon>ChooseSrProvisioningPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.ja.resx">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>

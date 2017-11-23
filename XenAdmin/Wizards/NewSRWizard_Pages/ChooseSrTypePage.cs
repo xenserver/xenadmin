@@ -48,7 +48,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     {
         private bool m_allowNext = true;
         private int _matchingFrontends;
-        private Type m_preselectedWizardType = typeof(SrWizardType_VhdoNfs);
+        private Type m_preselectedWizardType = typeof(SrWizardType_Iscsi);
         private readonly RadioButton[] _radioButtons;
 
         public ChooseSrTypePage()
@@ -71,6 +71,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 radioButtonCslg, radioButtonCifs, radioButtonFcoe,
                 radioButtonNfsIso, radioButtonCifsIso
             };
+
         }
 
         private void SetupDeprecationBanner(bool visible)
@@ -288,6 +289,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                     sm = SM.GetByType(Connection, SR.SRTypes.equal.ToString());
             }
             return sm;
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
