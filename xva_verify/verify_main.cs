@@ -58,7 +58,7 @@ class MainClass
                 f = new FileStream(filename, FileMode.Open, FileAccess.Read);
             } else
             {
-                f = new BufferedStream(Console.OpenStandardInput(), 1024);
+                f = Console.OpenStandardInput();
             }
 
             // check for gzip compression ( only on seekable inputs - i.e. not the stdin stream )
