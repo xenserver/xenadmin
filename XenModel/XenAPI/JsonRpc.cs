@@ -115,9 +115,9 @@ namespace XenAPI
 
     internal abstract class JsonResponse<T>
     {
-        [JsonProperty("id", Required = Required.AllowNull)] public int Id;
+        [JsonProperty("id", Required = Required.AllowNull )] public int Id =  0;
 
-        [JsonProperty("result", Required = Required.Default)] public T Result;
+        [JsonProperty("result", Required = Required.Default)] public T Result = default(T);
 
         public override string ToString()
         {
@@ -127,23 +127,23 @@ namespace XenAPI
 
     internal class JsonResponseV1<T> : JsonResponse<T>
     {
-        [JsonProperty("error", Required = Required.AllowNull)] public object Error;
+        [JsonProperty("error", Required = Required.AllowNull)] public object Error = null;
     }
 
     internal class JsonResponseV2<T> : JsonResponse<T>
     {
-        [JsonProperty("error", Required = Required.DisallowNull)] public JsonResponseV2Error Error;
+        [JsonProperty("error", Required = Required.DisallowNull)] public JsonResponseV2Error Error = null;
 
-        [JsonProperty("jsonrpc", Required = Required.Always)] public string JsonRpc;
+        [JsonProperty("jsonrpc", Required = Required.Always)] public string JsonRpc = null;
     }
 
     internal class JsonResponseV2Error
     {
-        [JsonProperty("code", Required = Required.Always)] public int Code;
+        [JsonProperty("code", Required = Required.Always)] public int Code = 0;
 
-        [JsonProperty("message", Required = Required.Always)] public string Message;
+        [JsonProperty("message", Required = Required.Always)] public string Message = null;
 
-        [JsonProperty("data", Required = Required.Default)] public JToken Data;
+        [JsonProperty("data", Required = Required.Default)] public JToken Data = null;
 
         public override string ToString()
         {
