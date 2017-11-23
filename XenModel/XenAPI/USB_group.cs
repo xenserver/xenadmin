@@ -38,7 +38,7 @@ namespace XenAPI
 {
     /// <summary>
     /// A group of compatible USBs across the resource pool
-    /// First published in Unreleased.
+    /// First published in XenServer 7.3.
     /// </summary>
     public partial class USB_group : XenObject<USB_group>
     {
@@ -167,7 +167,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -178,7 +178,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the USB_group instance with the specified UUID.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -189,7 +189,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the USB_group instances with the given label.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_label">label of object to return</param>
@@ -200,7 +200,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -211,7 +211,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/label field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -222,7 +222,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the name/description field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -233,7 +233,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the PUSBs field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -244,7 +244,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the VUSBs field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -255,7 +255,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the other_config field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -266,7 +266,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the name/label field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -278,7 +278,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the name/description field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -290,7 +290,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the other_config field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -302,7 +302,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add the given key-value pair to the other_config field of the given USB_group.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -315,7 +315,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the given key and its corresponding value from the other_config field of the given USB_group.  If the key is not in that Map, then do nothing.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -327,7 +327,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name_label"></param>
@@ -340,7 +340,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_name_label"></param>
@@ -353,7 +353,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -364,7 +364,7 @@ namespace XenAPI
 
         /// <summary>
         /// 
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
@@ -375,7 +375,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the USB_groups known to the system.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<USB_group>> get_all(Session session)
@@ -385,7 +385,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the USB_group Records at once, in a single XML RPC call
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<USB_group>, USB_group> get_all_records(Session session)
