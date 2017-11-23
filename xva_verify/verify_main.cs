@@ -67,9 +67,8 @@ class MainClass
                 try
                 {
                     GZipStream zip = new GZipStream(f, CompressionMode.Decompress);
-                    // try reading a few bytes
-                    byte[] buffer = new byte[10];
-                    zip.Read(buffer, 0, 5);
+                    // try reading a byte
+                    zip.ReadByte();
 
                     // success - reset stream, use the gunzipped stream from now on
                     f.Seek(0, SeekOrigin.Begin);
@@ -77,7 +76,8 @@ class MainClass
                 }
                 catch (InvalidDataException e)
                 {
-                    // we'll ignore that here - it means the stream is not compressed
+                    // just reset the stream - Exception means the stream is not compressed
+                    f.Seek(0, SeekOrigin.Begin);
                 }
             }
             
