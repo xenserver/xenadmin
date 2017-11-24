@@ -176,6 +176,36 @@ namespace XenAPI
     }
 
 
+    internal class XenRefStringSetMapConverter<T> : CustomJsonConverter<Dictionary<XenRef<T>, string[]>> where T : XenObject<T>
+    {
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            JToken jToken = JToken.Load(reader);
+            var dict = new Dictionary<XenRef<T>, string[]>();
+
+            foreach (JProperty property in jToken)
+                dict.Add(new XenRef<T>(property.Name), property.Value.ToObject<string[]>());
+
+            return dict;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var dict = value as Dictionary<XenRef<T>, string[]>;
+            writer.WriteStartObject();
+            if (dict != null)
+            {
+                foreach (var kvp in dict)
+                {
+                    writer.WritePropertyName(kvp.Key.opaque_ref);
+                    writer.WriteValue(kvp.Value);
+                }
+            }
+            writer.WriteEndObject();
+        }
+    }
+
+
     internal class StringXenRefMapConverter<T> : CustomJsonConverter<Dictionary<string, XenRef<T>>> where T : XenObject<T>
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

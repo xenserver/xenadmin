@@ -1505,7 +1505,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM>, string[]> pool_retrieve_wlb_recommendations(string session)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new XenRefStringSetMapConverter<VM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM>, string[]>>("pool.retrieve_wlb_recommendations", new JArray(session), serializer);
         }
@@ -3941,7 +3941,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<Host>, string[]> vm_retrieve_wlb_recommendations(string session, string _vm)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new XenRefStringSetMapConverter<Host>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<Host>, string[]>>("VM.retrieve_wlb_recommendations", new JArray(session, _vm ?? ""), serializer);
         }
@@ -6195,7 +6195,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM>, string[]> host_get_vms_which_prevent_evacuation(string session, string _host)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new XenRefStringSetMapConverter<VM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM>, string[]>>("host.get_vms_which_prevent_evacuation", new JArray(session, _host ?? ""), serializer);
         }
@@ -6461,7 +6461,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM>, string[]> host_retrieve_wlb_evacuate_recommendations(string session, string _host)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new XenRefStringSetMapConverter<VM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM>, string[]>>("host.retrieve_wlb_evacuate_recommendations", new JArray(session, _host ?? ""), serializer);
         }
