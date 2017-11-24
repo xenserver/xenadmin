@@ -359,9 +359,9 @@ namespace XenAPI
             //if supported swap endpoints
             JsonRpcClient = null;
             bool isELy = (int)APIVersion == (int)API_Version.API_2_6;
-            bool gtFalcon = (int)APIVersion >= (int)API_Version.API_2_7;
+            bool isInvernessOrAbove = (int)APIVersion >= (int)API_Version.API_2_8;
 
-            if (isELy || gtFalcon)
+            if (isELy || isInvernessOrAbove)
             {
                 JsonRpcClient = new JsonRpcClient(proxy.Url)
                 {
@@ -372,7 +372,7 @@ namespace XenAPI
                     WebProxy = proxy.Proxy
                 };
 
-                if (gtFalcon)
+                if (isInvernessOrAbove)
                     JsonRpcClient.JsonRpcVersion = JsonRpcVersion.v2;
 
                 proxy = null;
