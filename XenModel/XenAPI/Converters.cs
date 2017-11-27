@@ -91,7 +91,7 @@ namespace XenAPI
     }
 
 
-    internal class RecordConverter<T> : CustomJsonConverter<Dictionary<XenRef<T>, T>> where T : XenObject<T>
+    internal class XenRefXenObjectMapConverter<T> : CustomJsonConverter<Dictionary<XenRef<T>, T>> where T : XenObject<T>
     {
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
@@ -169,6 +169,36 @@ namespace XenAPI
                 {
                     writer.WritePropertyName(kvp.Key.opaque_ref);
                     writer.WriteValue(kvp.Value.opaque_ref);
+                }
+            }
+            writer.WriteEndObject();
+        }
+    }
+
+
+    internal class XenRefStringSetMapConverter<T> : CustomJsonConverter<Dictionary<XenRef<T>, string[]>> where T : XenObject<T>
+    {
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            JToken jToken = JToken.Load(reader);
+            var dict = new Dictionary<XenRef<T>, string[]>();
+
+            foreach (JProperty property in jToken)
+                dict.Add(new XenRef<T>(property.Name), property.Value.ToObject<string[]>());
+
+            return dict;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var dict = value as Dictionary<XenRef<T>, string[]>;
+            writer.WriteStartObject();
+            if (dict != null)
+            {
+                foreach (var kvp in dict)
+                {
+                    writer.WritePropertyName(kvp.Key.opaque_ref);
+                    writer.WriteValue(kvp.Value);
                 }
             }
             writer.WriteEndObject();
@@ -264,11 +294,6 @@ namespace XenAPI
 
     internal class XenEnumConverter : StringEnumConverter
     {
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
-
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JToken jToken = JToken.Load(reader);

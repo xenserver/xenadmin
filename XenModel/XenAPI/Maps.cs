@@ -32,6 +32,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CookComputing.XmlRpc;
 
 
 namespace XenAPI
@@ -63,7 +64,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_string(Dictionary<string, string> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -109,7 +110,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_long(Dictionary<string, long> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -155,7 +156,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_host_allowed_operations(Dictionary<string, host_allowed_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -201,7 +202,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_network_operations(Dictionary<string, network_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -247,7 +248,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_pool_allowed_operations(Dictionary<string, pool_allowed_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -293,7 +294,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_storage_operations(Dictionary<string, storage_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -339,7 +340,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_task_allowed_operations(Dictionary<string, task_allowed_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -385,7 +386,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_vbd_operations(Dictionary<string, vbd_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -431,7 +432,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_vdi_operations(Dictionary<string, vdi_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -477,7 +478,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_vif_operations(Dictionary<string, vif_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -523,7 +524,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_vm_appliance_operation(Dictionary<string, vm_appliance_operation> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -569,7 +570,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_vm_operations(Dictionary<string, vm_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -615,7 +616,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_vusb_operations(Dictionary<string, vusb_operations> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -661,7 +662,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_string_XenRefBlob(Dictionary<string, XenRef<Blob>> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (string key in table.Keys)
@@ -707,7 +708,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_long_long(Dictionary<long, long> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (long key in table.Keys)
@@ -753,7 +754,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_long_double(Dictionary<long, double> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (long key in table.Keys)
@@ -799,7 +800,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_long_string_array(Dictionary<long, string[]> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (long key in table.Keys)
@@ -845,7 +846,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_vm_operations_string(Dictionary<vm_operations, string> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (vm_operations key in table.Keys)
@@ -891,7 +892,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefVDI_XenRefSR(Dictionary<XenRef<VDI>, XenRef<SR>> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<VDI> key in table.Keys)
@@ -937,7 +938,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefVGPU_XenRefGPU_group(Dictionary<XenRef<VGPU>, XenRef<GPU_group>> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<VGPU> key in table.Keys)
@@ -983,7 +984,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefVGPU_type_long(Dictionary<XenRef<VGPU_type>, long> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<VGPU_type> key in table.Keys)
@@ -1029,7 +1030,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefVIF_string(Dictionary<XenRef<VIF>, string> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<VIF> key in table.Keys)
@@ -1075,7 +1076,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefVIF_XenRefNetwork(Dictionary<XenRef<VIF>, XenRef<Network>> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<VIF> key in table.Keys)
@@ -1121,7 +1122,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefVM_string(Dictionary<XenRef<VM>, string> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<VM> key in table.Keys)
@@ -1167,7 +1168,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefVM_string_array(Dictionary<XenRef<VM>, string[]> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<VM> key in table.Keys)
@@ -1213,7 +1214,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefVM_Dictionary_string_string(Dictionary<XenRef<VM>, Dictionary<string, string>> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<VM> key in table.Keys)
@@ -1259,7 +1260,7 @@ namespace XenAPI
 
         internal static Hashtable convert_to_proxy_XenRefHost_string_array(Dictionary<XenRef<Host>, string[]> table)
         {
-            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            var result = new XmlRpcStruct();
             if (table != null)
             {
                 foreach (XenRef<Host> key in table.Keys)
