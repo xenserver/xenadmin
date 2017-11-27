@@ -21,6 +21,11 @@
       "flat": "true"
     },
     {
+      "pattern": "@REMOTE_DOTNET@/dotnet46/Newtonsoft.Json.dll",
+      "target": "xenadmin.git/packages/",
+      "flat": "true"
+    },
+    {
       "pattern": "@REMOTE_DOTNET@/dotnet46/DiscUtils.dll",
       "target": "xenadmin.git/packages/",
       "flat": "true"
