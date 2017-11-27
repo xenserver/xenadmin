@@ -527,7 +527,7 @@ namespace XenAdmin
             // The application is about to exit - gracefully close connections to
             // avoid a bunch of WinForms related race conditions...
             foreach (Network.IXenConnection conn in ConnectionsManager.XenConnectionsCopy)
-                conn.EndConnect(false);
+                conn.EndConnect(false, true);
         }
 
         private static void logApplicationStats()
