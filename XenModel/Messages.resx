@@ -2516,6 +2516,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHOOSE_ANOTHER_DESTINATION" xml:space="preserve">
     <value>Choose another &amp;destination</value>
   </data>
+  <data name="CHOOSE_SR_PROVISIONING_PAGE_TITLE" xml:space="preserve">
+    <value>Choose the provisioning method</value>
+  </data>
   <data name="CHOOSE_SR_TYPE_PAGE_TITLE" xml:space="preserve">
     <value>Choose the type of new storage</value>
   </data>
@@ -2707,11 +2710,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on selected VMs</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on VM "{0}"</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on selected VMs</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -5549,6 +5552,12 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="GETPASSWORD" xml:space="preserve">
     <value>Get Password</value>
+  </data>
+  <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
+    <value>Your pool license does not allow GFS2.</value>
+  </data>
+  <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>GFS2 requires clustering to be enabled on the pool.</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
@@ -9863,6 +9872,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   <data name="PROTECTED_VMS_TITLE" xml:space="preserve">
     <value>Select the VMs that you want to protect with this policy</value>
   </data>
+  <data name="PROVISIONING" xml:space="preserve">
+    <value>Provisioning</value>
+  </data>
   <data name="PROVISIONING_OPTIONS" xml:space="preserve">
     <value>Provisioning Options</value>
   </data>
@@ -13564,17 +13576,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="CHOOSE_SR_PROVISIONING_PAGE_TITLE" xml:space="preserve">
-    <value>Choose the provisioning method</value>
-  </data>
-  <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
-    <value>Your pool license does not allow GFS2.</value>
-  </data>
-  <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
-    <value>GFS2 requires clustering to be enabled on the pool.</value>
-  </data>
-  <data name="PROVISIONING" xml:space="preserve">
-    <value>Provisioning</value>
   </data>
 </root>

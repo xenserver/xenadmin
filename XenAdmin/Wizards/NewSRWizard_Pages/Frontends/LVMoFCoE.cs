@@ -42,8 +42,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         #region LVMoHBA overrides
 
-        public override SR.SRTypes SrType { get { return SR.SRTypes.lvmofcoe; } }
-
         public override bool ShowNicColumn { get { return true; } }
 
         public override string HelpID { get { return "Location_FCOE"; } }

@@ -134,7 +134,6 @@ namespace XenAdmin.Wizards
             // Order the tab pages
             AddPage(xenTabPageChooseSrType);
             AddPage(xenTabPageSrName);
-            //AddPage(xenTabPageChooseSrProv);
             AddPage(new XenTabPage {Text = Messages.NEWSR_LOCATION});
 
             // RBAC warning page 
@@ -286,18 +285,18 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_Iscsi)
                 {
                     AddPage(xenTabPageLvmoIscsi);
-                    AddPage(xenTabPageChooseSrProv, 2);
+                    AddPage(xenTabPageChooseSrProv);
                 }
                 else if (m_srWizardType is SrWizardType_Hba)
                 {
                     AddPage(xenTabPageLvmoHba);
-                    AddPage(xenTabPageChooseSrProv, 2);
+                    AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Fcoe)
                 {
                     AddPage(xenTabPageLvmoFcoe);
-                    AddPage(xenTabPageChooseSrProv, 2);
+                    AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Cslg)

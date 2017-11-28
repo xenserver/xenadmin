@@ -286,9 +286,5 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             return sm;
         }
 
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

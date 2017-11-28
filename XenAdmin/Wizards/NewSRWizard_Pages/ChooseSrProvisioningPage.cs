@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         {
             var master = Helpers.GetMaster(Connection);
 
-            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.ClusterHosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
+            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
 
             radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
             pictureBoxInfo.Visible = labelWarning.Visible = radioButtonLvm.Checked = !gfs2Allowed;

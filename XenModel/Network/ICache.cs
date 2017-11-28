@@ -90,6 +90,6 @@ namespace XenAdmin.Network
         void UpdateDockerContainersForVM(IList<DockerContainer> d, VM v);
         void CheckDockerContainersBatchChange();
         Cluster[] Clusters { get; }
-        Cluster_host[] ClusterHosts { get; }
+        Cluster_host[] Cluster_hosts { get; }
     }
 }

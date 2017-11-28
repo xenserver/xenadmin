@@ -132,7 +132,7 @@ namespace XenAdmin.Network
             get { return contents(_cluster); }
         }
 
-        public Cluster_host[] ClusterHosts
+        public Cluster_host[] Cluster_hosts
         {
             get { return contents(_cluster_host); }
         }
