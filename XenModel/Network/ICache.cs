@@ -89,5 +89,7 @@ namespace XenAdmin.Network
         PVS_cache_storage[] PVS_cache_storages { get; }
         void UpdateDockerContainersForVM(IList<DockerContainer> d, VM v);
         void CheckDockerContainersBatchChange();
+        Cluster[] Clusters { get; }
+        Cluster_host[] ClusterHosts { get; }
     }
 }
