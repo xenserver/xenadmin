@@ -516,7 +516,7 @@
     <value>103, 19</value>
   </data>
   <data name="radioButtonFibreChannel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="radioButtonFibreChannel.Text" xml:space="preserve">
     <value>Hardware &amp;HBA</value>
@@ -552,7 +552,7 @@
     <value>101, 19</value>
   </data>
   <data name="radioButtonFcoe.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="radioButtonFcoe.Text" xml:space="preserve">
     <value>Software FCo&amp;E</value>
@@ -588,7 +588,7 @@
     <value>46, 19</value>
   </data>
   <data name="radioButtonNfs.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="radioButtonNfs.Text" xml:space="preserve">
     <value>N&amp;FS</value>
@@ -624,7 +624,7 @@
     <value>77, 19</value>
   </data>
   <data name="radioButtonCifs.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="radioButtonCifs.Text" xml:space="preserve">
     <value>S&amp;MB/CIFS</value>

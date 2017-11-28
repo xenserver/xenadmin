@@ -56,7 +56,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             InitializeComponent();
         }
 
-        public virtual SR.SRTypes SrType { get { return srProvisioningMethod.Lvm ? SR.SRTypes.lvmohba : SR.SRTypes.gfs2; } }
+        public virtual SR.SRTypes SrType { get; set; }
 
         public virtual bool ShowNicColumn { get { return false; } }
 

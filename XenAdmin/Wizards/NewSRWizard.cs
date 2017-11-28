@@ -360,8 +360,10 @@ namespace XenAdmin.Wizards
             }
             else if (senderPagetype == typeof(ChooseSrProvisioningPage))
             {
-                #region
-                #endregion
+                var isGfs2 = xenTabPageChooseSrProv.IsGfs2;
+                xenTabPageLvmoHba.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba;
+                xenTabPageLvmoFcoe.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe;
+                xenTabPageLvmoIscsi.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmoiscsi;
             }
             else if (senderPagetype == typeof(CIFS_ISO))
             {
@@ -380,7 +382,7 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
-                m_srWizardType.IsGfs2 = xenTabPageLvmoIscsi.SRType == SR.SRTypes.gfs2;
+                m_srWizardType.IsGfs2 = xenTabPageLvmoIscsi.SrType == SR.SRTypes.gfs2;
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {

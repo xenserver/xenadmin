@@ -1167,36 +1167,6 @@
   <data name="&gt;&gt;spinnerIconAtScanTargetHostButton.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="srProvisioningMethod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="srProvisioningMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 299</value>
-  </data>
-  <data name="srProvisioningMethod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 3</value>
-  </data>
-  <data name="srProvisioningMethod.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>330, 46</value>
-  </data>
-  <data name="srProvisioningMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 48</value>
-  </data>
-  <data name="srProvisioningMethod.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;srProvisioningMethod.Name" xml:space="preserve">
-    <value>srProvisioningMethod</value>
-  </data>
-  <data name="&gt;&gt;srProvisioningMethod.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.SrProvisioningMethod, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;srProvisioningMethod.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;srProvisioningMethod.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -1210,7 +1180,7 @@
     <value>11</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>524, 350</value>
+    <value>524, 293</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1228,7 +1198,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="iSCSITargetGroupBox" Row="9" RowSpan="1" Column="0" ColumnSpan="7" /&gt;&lt;Control Name="placeHolderLabel2" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="placeholderLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="errorLabelAtCHAPPassword" Row="7" RowSpan="1" Column="3" ColumnSpan="4" /&gt;&lt;Control Name="errorIconAtCHAPPassword" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="errorIconAtHostOrIP" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="scanTargetHostButton" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelIscsiTargetHost" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="textBoxIscsiHost" Row="1" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="labelColon" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="textBoxIscsiPort" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="IScsiChapUserTextBox" Row="5" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="IScsiChapSecretTextBox" Row="6" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="labelCHAPuser" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="IScsiChapSecretLabel" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="IscsiUseChapCheckBox" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label11" Row="0" RowSpan="1" Column="0" ColumnSpan="7" /&gt;&lt;Control Name="errorLabelAtHostname" Row="2" RowSpan="1" Column="3" ColumnSpan="4" /&gt;&lt;Control Name="spinnerIconAtScanTargetHostButton" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="srProvisioningMethod" Row="10" RowSpan="1" Column="0" ColumnSpan="7" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,17,Absolute,146,Absolute,22,Absolute,211,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,220,AutoSize,220" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="iSCSITargetGroupBox" Row="9" RowSpan="1" Column="0" ColumnSpan="7" /&gt;&lt;Control Name="placeHolderLabel2" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="placeholderLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="errorLabelAtCHAPPassword" Row="7" RowSpan="1" Column="3" ColumnSpan="4" /&gt;&lt;Control Name="errorIconAtCHAPPassword" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="errorIconAtHostOrIP" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="scanTargetHostButton" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelIscsiTargetHost" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="textBoxIscsiHost" Row="1" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="labelColon" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="textBoxIscsiPort" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="IScsiChapUserTextBox" Row="5" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="IScsiChapSecretTextBox" Row="6" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="labelCHAPuser" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="IScsiChapSecretLabel" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="IscsiUseChapCheckBox" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label11" Row="0" RowSpan="1" Column="0" ColumnSpan="7" /&gt;&lt;Control Name="errorLabelAtHostname" Row="2" RowSpan="1" Column="3" ColumnSpan="4" /&gt;&lt;Control Name="spinnerIconAtScanTargetHostButton" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,17,Absolute,146,Absolute,22,Absolute,211,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,220,AutoSize,220" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="toolTipContainerIQNscan.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>

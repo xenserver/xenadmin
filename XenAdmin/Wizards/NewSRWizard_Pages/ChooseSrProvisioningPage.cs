@@ -46,8 +46,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     public partial class ChooseSrProvisioningPage : XenTabPage
 
     {
-        private bool m_allowNext = true;
-
         public ChooseSrProvisioningPage()
         {
             InitializeComponent();
@@ -60,5 +58,26 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override string PageTitle { get { return Messages.CHOOSE_SR_PROVISIONING_PAGE_TITLE; } }
 
         #endregion
+
+        public bool IsGfs2
+        {
+            get
+            {
+                return radioButtonGfs2.Checked;
+            }
+        }
+
+        public override void PopulatePage()
+        {
+            var master = Helpers.GetMaster(Connection);
+
+            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.ClusterHosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
+
+            radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
+            pictureBoxInfo.Visible = labelWarning.Visible = radioButtonLvm.Checked = !gfs2Allowed;
+            labelWarning.Text = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2)
+                ? Messages.GFS2_INCORRECT_POOL_LICENSE
+                : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
+        }
     }
 }
