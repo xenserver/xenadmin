@@ -69,6 +69,10 @@ namespace XenAPI
                 new Relation("roles", "subject", "roles"),
             });
 
+            relations.Add(typeof(Proxy_Cluster), new Relation[] {
+                new Relation("cluster_hosts", "Cluster_host", "cluster"),
+            });
+
             relations.Add(typeof(Proxy_Bond), new Relation[] {
                 new Relation("slaves", "PIF", "bond_slave_of"),
             });

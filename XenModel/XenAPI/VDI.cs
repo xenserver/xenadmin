@@ -77,7 +77,8 @@ namespace XenAPI
             XenRef<Pool> metadata_of_pool,
             bool metadata_latest,
             bool is_tools_iso,
-            bool cbt_enabled)
+            bool cbt_enabled,
+            XenRef<Host> activated_on)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -111,6 +112,7 @@ namespace XenAPI
             this.metadata_latest = metadata_latest;
             this.is_tools_iso = is_tools_iso;
             this.cbt_enabled = cbt_enabled;
+            this.activated_on = activated_on;
         }
 
         /// <summary>
@@ -156,6 +158,7 @@ namespace XenAPI
             metadata_latest = update.metadata_latest;
             is_tools_iso = update.is_tools_iso;
             cbt_enabled = update.cbt_enabled;
+            activated_on = update.activated_on;
         }
 
         internal void UpdateFromProxy(Proxy_VDI proxy)
@@ -192,6 +195,7 @@ namespace XenAPI
             metadata_latest = (bool)proxy.metadata_latest;
             is_tools_iso = (bool)proxy.is_tools_iso;
             cbt_enabled = (bool)proxy.cbt_enabled;
+            activated_on = proxy.activated_on == null ? null : XenRef<Host>.Create(proxy.activated_on);
         }
 
         public Proxy_VDI ToProxy()
@@ -229,6 +233,7 @@ namespace XenAPI
             result_.metadata_latest = metadata_latest;
             result_.is_tools_iso = is_tools_iso;
             result_.cbt_enabled = cbt_enabled;
+            result_.activated_on = activated_on ?? "";
             return result_;
         }
 
@@ -270,6 +275,7 @@ namespace XenAPI
             metadata_latest = Marshalling.ParseBool(table, "metadata_latest");
             is_tools_iso = Marshalling.ParseBool(table, "is_tools_iso");
             cbt_enabled = Marshalling.ParseBool(table, "cbt_enabled");
+            activated_on = Marshalling.ParseRef<Host>(table, "activated_on");
         }
 
         public bool DeepEquals(VDI other, bool ignoreCurrentOperations)
@@ -312,7 +318,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._metadata_of_pool, other._metadata_of_pool) &&
                 Helper.AreEqual2(this._metadata_latest, other._metadata_latest) &&
                 Helper.AreEqual2(this._is_tools_iso, other._is_tools_iso) &&
-                Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled);
+                Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled) &&
+                Helper.AreEqual2(this._activated_on, other._activated_on);
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VDI server)
@@ -793,6 +800,17 @@ namespace XenAPI
         public static bool get_cbt_enabled(Session session, string _vdi)
         {
             return (bool)session.proxy.vdi_get_cbt_enabled(session.uuid, _vdi ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the activated_on field of the given VDI.
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vdi">The opaque_ref of the given vdi</param>
+        public static XenRef<Host> get_activated_on(Session session, string _vdi)
+        {
+            return XenRef<Host>.Create(session.proxy.vdi_get_activated_on(session.uuid, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -2406,5 +2424,24 @@ namespace XenAPI
             }
         }
         private bool _cbt_enabled;
+
+        /// <summary>
+        /// The host on which this VDI is activated, if any
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        public virtual XenRef<Host> activated_on
+        {
+            get { return _activated_on; }
+            set
+            {
+                if (!Helper.AreEqual(value, _activated_on))
+                {
+                    _activated_on = value;
+                    Changed = true;
+                    NotifyPropertyChanged("activated_on");
+                }
+            }
+        }
+        private XenRef<Host> _activated_on;
     }
 }

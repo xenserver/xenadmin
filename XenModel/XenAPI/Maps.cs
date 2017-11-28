@@ -132,6 +132,100 @@ namespace XenAPI
             return result;
         }
 
+        internal static Dictionary<string, cluster_host_operation>
+        convert_from_proxy_string_cluster_host_operation(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<string, cluster_host_operation> result = new Dictionary<string, cluster_host_operation>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key;
+                        cluster_host_operation v = table[key] == null ? (cluster_host_operation) 0 : (cluster_host_operation)Helper.EnumParseDefault(typeof(cluster_host_operation), (string)table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable
+        convert_to_proxy_string_cluster_host_operation(Dictionary<string, cluster_host_operation> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key ?? "";
+                        string v = cluster_host_operation_helper.ToString(table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Dictionary<string, cluster_operation>
+        convert_from_proxy_string_cluster_operation(Object o)
+        {
+            Hashtable table = (Hashtable)o;
+            Dictionary<string, cluster_operation> result = new Dictionary<string, cluster_operation>();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key;
+                        cluster_operation v = table[key] == null ? (cluster_operation) 0 : (cluster_operation)Helper.EnumParseDefault(typeof(cluster_operation), (string)table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
+        internal static Hashtable
+        convert_to_proxy_string_cluster_operation(Dictionary<string, cluster_operation> table)
+        {
+            CookComputing.XmlRpc.XmlRpcStruct result = new CookComputing.XmlRpc.XmlRpcStruct();
+            if (table != null)
+            {
+                foreach (string key in table.Keys)
+                {
+                    try
+                    {
+                        string k = key ?? "";
+                        string v = cluster_operation_helper.ToString(table[key]);
+                        result[k] = v;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return result;
+        }
+
         internal static Dictionary<string, host_allowed_operations>
         convert_from_proxy_string_host_allowed_operations(Object o)
         {

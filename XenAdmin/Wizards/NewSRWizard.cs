@@ -66,6 +66,7 @@ namespace XenAdmin.Wizards
         private readonly CslgLocation xenTabPageCslgLocation;
         private readonly FilerDetails xenTabPageFilerDetails;
         private readonly ChooseSrTypePage xenTabPageChooseSrType;
+        private readonly ChooseSrProvisioningPage xenTabPageChooseSrProv;
         private readonly RBACWarningPage xenTabPageRbacWarning;
         #endregion
 
@@ -114,6 +115,7 @@ namespace XenAdmin.Wizards
             xenTabPageCslgLocation = new CslgLocation();
             xenTabPageFilerDetails = new FilerDetails();
             xenTabPageChooseSrType = new ChooseSrTypePage();
+            xenTabPageChooseSrProv = new ChooseSrProvisioningPage();
             xenTabPageRbacWarning = new RBACWarningPage((srToReattach == null && !disasterRecoveryTask)
                              ? Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_CREATE
                              : Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_ATTACH);
@@ -283,15 +285,18 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_Iscsi)
                 {
                     AddPage(xenTabPageLvmoIscsi);
+                    AddPage(xenTabPageChooseSrProv);
                 }
                 else if (m_srWizardType is SrWizardType_Hba)
                 {
                     AddPage(xenTabPageLvmoHba);
+                    AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Fcoe)
                 {
                     AddPage(xenTabPageLvmoFcoe);
+                    AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Cslg)
@@ -352,6 +357,13 @@ namespace XenAdmin.Wizards
                     xenTabPageLvmoFcoe.SrWizardType = m_srWizardType;
                 #endregion
             }
+            else if (senderPagetype == typeof(ChooseSrProvisioningPage))
+            {
+                var isGfs2 = xenTabPageChooseSrProv.IsGfs2;
+                xenTabPageLvmoHba.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba;
+                xenTabPageLvmoFcoe.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe;
+                xenTabPageLvmoIscsi.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmoiscsi;
+            }
             else if (senderPagetype == typeof(CIFS_ISO))
             {
                 m_srWizardType.DeviceConfig = xenTabPageCifsIso.DeviceConfig;
@@ -369,7 +381,7 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
-                m_srWizardType.IsGfs2 = xenTabPageLvmoIscsi.SRType == SR.SRTypes.gfs2;
+                m_srWizardType.IsGfs2 = xenTabPageLvmoIscsi.SrType == SR.SRTypes.gfs2;
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {
@@ -786,5 +798,6 @@ namespace XenAdmin.Wizards
         {
             xenTabPageChooseSrType.PreselectNewSrWizardType(typeof(SrWizardType_NfsIso));
         }
+
     }
 }

@@ -914,7 +914,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             get
             {
-                return GetDeviceConfig(SRType);
+                return GetDeviceConfig(SrType);
             }
         }
 
@@ -927,13 +927,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
         }
 
-        public SR.SRTypes SRType
-        {
-            get
-            {
-                return srProvisioningMethod.Lvm ? SR.SRTypes.lvmoiscsi : SR.SRTypes.gfs2;
-            }
-        }
+        public SR.SRTypes SrType { get; set; }
         #endregion
     }
 }

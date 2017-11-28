@@ -205,12 +205,6 @@
     <Compile Include="Controls\SpinnerIcon.designer.cs">
       <DependentUpon>SpinnerIcon.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SrProvisioningMethod.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SrProvisioningMethod.Designer.cs">
-      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Tags\TagList.cs" />
     <Compile Include="Controls\Tags\TagButton.cs">
       <SubType>UserControl</SubType>
@@ -718,6 +712,12 @@
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
+    <Compile Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.Designer.cs">
+      <DependentUpon>ChooseSrProvisioningPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1507,15 +1507,6 @@
     <EmbeddedResource Include="Controls\PvsCacheStorageRow.zh-CN.resx">
       <DependentUpon>PvsCacheStorageRow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrProvisioningMethod.ja.resx">
-      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrProvisioningMethod.resx">
-      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SrProvisioningMethod.zh-CN.resx">
-      <DependentUpon>SrProvisioningMethod.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\XenSearch\QueryPanel.ja.resx">
       <DependentUpon>QueryPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -2081,6 +2072,9 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.resx">
+      <DependentUpon>ChooseSrProvisioningPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.ja.resx">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>

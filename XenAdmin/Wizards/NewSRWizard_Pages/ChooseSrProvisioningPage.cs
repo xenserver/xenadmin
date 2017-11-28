@@ -29,35 +29,55 @@
  * SUCH DAMAGE.
  */
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using XenAdmin.Controls;
+using XenAdmin.Core;
 using XenAPI;
 
-namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
+namespace XenAdmin.Wizards.NewSRWizard_Pages
 {
-    public partial class LVMoFCoE : LVMoHBA
+    public partial class ChooseSrProvisioningPage : XenTabPage
+
     {
-        public LVMoFCoE()
+        public ChooseSrProvisioningPage()
         {
             InitializeComponent();
         }
 
-        #region LVMoHBA overrides
+        #region XenTabPage overrides
 
-        public override bool ShowNicColumn { get { return true; } }
+        public override string Text { get { return Messages.PROVISIONING; } }
 
-        public override string HelpID { get { return "Location_FCOE"; } }
-
-        public override LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
-        {
-            if (SrType == SR.SRTypes.gfs2)
-                return new Gfs2HbaSrDescriptor(device);
-            return new FcoeSrDescriptor(device);
-        }
-
-        public override LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
-        {
-            return new FcoeSrDescriptor(device);
-        }
+        public override string PageTitle { get { return Messages.CHOOSE_SR_PROVISIONING_PAGE_TITLE; } }
 
         #endregion
+
+        public bool IsGfs2
+        {
+            get
+            {
+                return radioButtonGfs2.Checked;
+            }
+        }
+
+        public override void PopulatePage()
+        {
+            var master = Helpers.GetMaster(Connection);
+
+            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
+
+            radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
+            pictureBoxInfo.Visible = labelWarning.Visible = radioButtonLvm.Checked = !gfs2Allowed;
+            labelWarning.Text = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2)
+                ? Messages.GFS2_INCORRECT_POOL_LICENSE
+                : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
+        }
     }
 }

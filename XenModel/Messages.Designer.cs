@@ -6930,6 +6930,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose the provisioning method.
+        /// </summary>
+        public static string CHOOSE_SR_PROVISIONING_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("CHOOSE_SR_PROVISIONING_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose the type of new storage.
         /// </summary>
         public static string CHOOSE_SR_TYPE_PAGE_TITLE {
@@ -15836,6 +15845,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your pool license does not allow GFS2..
+        /// </summary>
+        public static string GFS2_INCORRECT_POOL_LICENSE {
+            get {
+                return ResourceManager.GetString("GFS2_INCORRECT_POOL_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GFS2 requires clustering to be enabled on the pool..
+        /// </summary>
+        public static string GFS2_REQUIRES_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("GFS2_REQUIRES_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GPU.
         /// </summary>
         public static string GPU {
@@ -24218,9 +24245,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
-        ///
-        ///Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility..
+        ///   Looks up a localized string similar to iSCSI or Fibre Channel access to a shared LUN can be configured to host fully provisioned virtual disks using LVM or be formatted with the GFS2 cluster file system for hosting thinly provisioned images..
         /// </summary>
         public static string NEWSR_LVMOISCSI_BLURB {
             get {
@@ -28378,6 +28403,15 @@ namespace XenAdmin {
         public static string PROTECTED_VMS_TITLE {
             get {
                 return ResourceManager.GetString("PROTECTED_VMS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisioning.
+        /// </summary>
+        public static string PROVISIONING {
+            get {
+                return ResourceManager.GetString("PROVISIONING", resourceCulture);
             }
         }
         

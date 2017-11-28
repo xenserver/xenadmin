@@ -30,12 +30,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -48,7 +43,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     {
         private bool m_allowNext = true;
         private int _matchingFrontends;
-        private Type m_preselectedWizardType = typeof(SrWizardType_VhdoNfs);
+        private Type m_preselectedWizardType = typeof(SrWizardType_Iscsi);
         private readonly RadioButton[] _radioButtons;
 
         public ChooseSrTypePage()
@@ -71,6 +66,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
                 radioButtonCslg, radioButtonCifs, radioButtonFcoe,
                 radioButtonNfsIso, radioButtonCifsIso
             };
+
         }
 
         private void SetupDeprecationBanner(bool visible)
@@ -289,5 +285,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             }
             return sm;
         }
+
     }
 }

@@ -41,7 +41,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.labelCreate = new System.Windows.Forms.Label();
             this.buttonSelectAll = new System.Windows.Forms.Button();
             this.buttonClearAll = new System.Windows.Forms.Button();
-            this.srProvisioningMethod = new XenAdmin.Controls.SrProvisioningMethod();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -115,7 +114,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.tableLayoutPanel1.Controls.Add(this.dataGridView, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.buttonSelectAll, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.buttonClearAll, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.srProvisioningMethod, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // labelCreate
@@ -137,13 +135,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.buttonClearAll.Name = "buttonClearAll";
             this.buttonClearAll.UseVisualStyleBackColor = true;
             this.buttonClearAll.Click += new System.EventHandler(this.buttonClearAll_Click);
-            // 
-            // srProvisioningMethod
-            // 
-            this.srProvisioningMethod.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutPanel1.SetColumnSpan(this.srProvisioningMethod, 2);
-            resources.ApplyResources(this.srProvisioningMethod, "srProvisioningMethod");
-            this.srProvisioningMethod.Name = "srProvisioningMethod";
             // 
             // LVMoHBA
             // 
@@ -173,6 +164,5 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNic;
-        protected Controls.SrProvisioningMethod srProvisioningMethod;
     }
 }

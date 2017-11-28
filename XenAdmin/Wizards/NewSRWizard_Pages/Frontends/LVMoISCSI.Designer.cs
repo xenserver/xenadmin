@@ -59,7 +59,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.label11 = new System.Windows.Forms.Label();
             this.errorLabelAtHostname = new System.Windows.Forms.Label();
             this.spinnerIconAtScanTargetHostButton = new XenAdmin.Controls.SpinnerIcon();
-            this.srProvisioningMethod = new XenAdmin.Controls.SrProvisioningMethod();
             this.toolTipContainerIQNscan = new XenAdmin.Controls.ToolTipContainer();
             this.tableLayoutPanel1.SuspendLayout();
             this.iSCSITargetGroupBox.SuspendLayout();
@@ -99,7 +98,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.tableLayoutPanel1.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.errorLabelAtHostname, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.spinnerIconAtScanTargetHostButton, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.srProvisioningMethod, 0, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // iSCSITargetGroupBox
@@ -301,13 +299,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.spinnerIconAtScanTargetHostButton.SucceededImage = global::XenAdmin.Properties.Resources._000_Tick_h32bit_16;
             this.spinnerIconAtScanTargetHostButton.TabStop = false;
             // 
-            // srProvisioningMethod
-            // 
-            resources.ApplyResources(this.srProvisioningMethod, "srProvisioningMethod");
-            this.srProvisioningMethod.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutPanel1.SetColumnSpan(this.srProvisioningMethod, 7);
-            this.srProvisioningMethod.Name = "srProvisioningMethod";
-            // 
             // toolTipContainerIQNscan
             // 
             resources.ApplyResources(this.toolTipContainerIQNscan, "toolTipContainerIQNscan");
@@ -369,6 +360,5 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private XenAdmin.Controls.SpinnerIcon spinnerIconAtScanTargetHostButton;
         private System.Windows.Forms.Label placeholderLabel;
         private System.Windows.Forms.Label placeHolderLabel2;
-        private Controls.SrProvisioningMethod srProvisioningMethod;
     }
 }
