@@ -109,7 +109,6 @@
             this.tableLayoutPanel3.Controls.Add(this.labelFileBasedStorage, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.labelBlockBasedStorage, 1, 1);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
             // radioButtonCslg
             // 

@@ -284,19 +284,19 @@ namespace XenAdmin.Wizards
                     AddPage(xenTabPageVhdoNFS);
                 else if (m_srWizardType is SrWizardType_Iscsi)
                 {
-                    AddPage(xenTabPageLvmoIscsi);
                     AddPage(xenTabPageChooseSrProv);
+                    AddPage(xenTabPageLvmoIscsi);
                 }
                 else if (m_srWizardType is SrWizardType_Hba)
                 {
-                    AddPage(xenTabPageLvmoHba);
                     AddPage(xenTabPageChooseSrProv);
+                    AddPage(xenTabPageLvmoHba);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Fcoe)
                 {
-                    AddPage(xenTabPageLvmoFcoe);
                     AddPage(xenTabPageChooseSrProv);
+                    AddPage(xenTabPageLvmoFcoe);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
                 else if (m_srWizardType is SrWizardType_Cslg)
