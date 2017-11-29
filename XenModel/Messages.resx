@@ -2500,7 +2500,7 @@ Do you want to assign it to the vApp '{2}' instead?</value>
 Do you want to assign these VMs to the schedule '{0}' instead?</value>
   </data>
   <data name="CHANGE_VM_SNAPSHOT_SCHEDULE_WARNING" xml:space="preserve">
-    <value>The VM '{0}' is already assigned to the snashot schedule '{1}'.
+    <value>The VM '{0}' is already assigned to the snapshot schedule '{1}'.
     
 Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
