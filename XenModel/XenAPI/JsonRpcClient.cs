@@ -373,14 +373,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Subject>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Subject>>("subject.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Subject>>("subject.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_subject_create(string session, Subject _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.subject.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.subject.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void subject_destroy(string session, string _subject)
@@ -2291,14 +2291,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<VM>>("VM.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<VM>>("VM.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_vm_create(string session, VM _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VM.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.VM.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void vm_destroy(string session, string _vm)
@@ -4510,14 +4510,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VMPP>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<VMPP>>("VMPP.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<VMPP>>("VMPP.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_vmpp_create(string session, VMPP _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VMPP.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.VMPP.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void vmpp_destroy(string session, string _vmpp)
@@ -4895,14 +4895,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VMSS>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<VMSS>>("VMSS.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<VMSS>>("VMSS.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_vmss_create(string session, VMSS _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VMSS.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.VMSS.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void vmss_destroy(string session, string _vmss)
@@ -5105,14 +5105,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VM_appliance>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<VM_appliance>>("VM_appliance.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<VM_appliance>>("VM_appliance.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_vm_appliance_create(string session, VM_appliance _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VM_appliance.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.VM_appliance.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void vm_appliance_destroy(string session, string _vm_appliance)
@@ -7156,14 +7156,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Network>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Network>>("network.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Network>>("network.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_network_create(string session, Network _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.network.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.network.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void network_destroy(string session, string _network)
@@ -7464,14 +7464,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VIF>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<VIF>>("VIF.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<VIF>>("VIF.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_vif_create(string session, VIF _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VIF.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.VIF.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void vif_destroy(string session, string _vif)
@@ -9760,14 +9760,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VDI>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<VDI>>("VDI.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<VDI>>("VDI.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_vdi_create(string session, VDI _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VDI.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.VDI.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void vdi_destroy(string session, string _vdi)
@@ -10558,14 +10558,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VBD>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<VBD>>("VBD.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<VBD>>("VBD.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_vbd_create(string session, VBD _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VBD.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.VBD.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void vbd_destroy(string session, string _vbd)
@@ -11020,14 +11020,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<PBD>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<PBD>>("PBD.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<PBD>>("PBD.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_pbd_create(string session, PBD _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.PBD.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.PBD.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void pbd_destroy(string session, string _pbd)
@@ -11272,14 +11272,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<VTPM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<VTPM>>("VTPM.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<VTPM>>("VTPM.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_vtpm_create(string session, VTPM _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.VTPM.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.VTPM.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void vtpm_destroy(string session, string _vtpm)
@@ -11342,14 +11342,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Console>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Console>>("console.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Console>>("console.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_console_create(string session, Console _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.console.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.console.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void console_destroy(string session, string _console)
@@ -11454,14 +11454,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<User>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<User>>("user.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<User>>("user.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_user_create(string session, User _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.user.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.user.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void user_destroy(string session, string _user)
@@ -11755,14 +11755,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Secret>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Secret>>("secret.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Secret>>("secret.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_secret_create(string session, Secret _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.secret.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.secret.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void secret_destroy(string session, string _secret)
@@ -13141,14 +13141,14 @@ namespace XenAPI
         {
             var converters = new List<JsonConverter> {new XenRefConverter<PVS_cache_storage>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<PVS_cache_storage>>("PVS_cache_storage.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<PVS_cache_storage>>("PVS_cache_storage.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public XenRef<Task> async_pvs_cache_storage_create(string session, PVS_cache_storage _record)
         {
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            return Rpc<XenRef<Task>>("Async.PVS_cache_storage.create", new JArray(session, JObject.FromObject(_record)), serializer);
+            return Rpc<XenRef<Task>>("Async.PVS_cache_storage.create", new JArray(session, _record.ToJObject()), serializer);
         }
 
         public void pvs_cache_storage_destroy(string session, string _pvs_cache_storage)
