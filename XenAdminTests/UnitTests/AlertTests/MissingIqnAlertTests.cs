@@ -46,7 +46,7 @@ namespace XenAdminTests.UnitTests.AlertTests
 
             validator.Verify(new AlertClassUnitTestData
             {
-                AppliesTo = null,
+                AppliesTo = "",
                 FixLinkText = "Edit IQN",
                 HelpID = "MissingIqnAlert",
                 Description = " has no iSCSI-IQN. This could cause problems with iSCSI storage on this network.",
