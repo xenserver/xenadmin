@@ -295,7 +295,6 @@ namespace XenAdmin.Wizards
                 }
                 else if (m_srWizardType is SrWizardType_Fcoe)
                 {
-                    AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoFcoe);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
