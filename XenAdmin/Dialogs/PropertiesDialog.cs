@@ -79,6 +79,7 @@ namespace XenAdmin.Dialogs
         private SecurityEditPage SecurityEditPage;
         private LivePatchingEditPage LivePatchingEditPage;
         private NetworkOptionsEditPage NetworkOptionsEditPage;
+        private ClusteringEditPage ClusteringEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -205,6 +206,9 @@ namespace XenAdmin.Dialogs
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictIGMPSnooping) && Helpers.GetMaster(pool).vSwitchNetworkBackend())
                     ShowTab(NetworkOptionsEditPage = new NetworkOptionsEditPage());
+
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictGfs2))
+                    ShowTab(ClusteringEditPage = new ClusteringEditPage());
 
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());

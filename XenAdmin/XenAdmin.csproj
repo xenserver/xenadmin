@@ -345,6 +345,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPanels\ClusteringEditPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsPanels\ClusteringEditPage.Designer.cs">
+      <DependentUpon>ClusteringEditPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPanels\LivePatchingEditPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1814,6 +1820,15 @@
       <DependentUpon>TabPageCredentialsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\ClusteringEditPage.ja.resx">
+      <DependentUpon>ClusteringEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\ClusteringEditPage.resx">
+      <DependentUpon>ClusteringEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPanels\ClusteringEditPage.zh-CN.resx">
+      <DependentUpon>ClusteringEditPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsPanels\HostPowerONPages\HostPowerONEditPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>HostPowerONEditPage.cs</DependentUpon>
@@ -2073,7 +2088,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.ja.resx">
+      <DependentUpon>ChooseSrProvisioningPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.resx">
+      <DependentUpon>ChooseSrProvisioningPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewSRWizard_Pages\ChooseSrProvisioningPage.zh-CN.resx">
       <DependentUpon>ChooseSrProvisioningPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.ja.resx">

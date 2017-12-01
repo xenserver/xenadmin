@@ -121,187 +121,130 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 10</value>
+  <data name="labelTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 15</value>
+  <data name="labelTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="labelTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 20</value>
+  </data>
+  <data name="labelTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>484, 39</value>
+  </data>
+  <data name="labelTitle.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Select the provisioning method for the new Storage Repository.</value>
+  <data name="labelTitle.Text" xml:space="preserve">
+    <value>Clustering allows you to create and use GFS2 storage repositories. Select whether you wish to enable clustering on this pool. When enabling clustering you need to provide a network which has an IP Address configured (the management interface or a secondary interface).</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
+    <value>labelTitle</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;labelTitle.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.Common.AutoHeightLabel, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="radioButtonGfs2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="CheckBoxEnableClustering.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="radioButtonGfs2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="CheckBoxEnableClustering.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="radioButtonGfs2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 34</value>
+  <data name="CheckBoxEnableClustering.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 62</value>
   </data>
-  <data name="radioButtonGfs2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 3</value>
+  <data name="CheckBoxEnableClustering.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 3, 3, 3</value>
   </data>
-  <data name="radioButtonGfs2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 19</value>
+  <data name="CheckBoxEnableClustering.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 17</value>
   </data>
-  <data name="radioButtonGfs2.TabIndex" type="System.Int32, mscorlib">
+  <data name="CheckBoxEnableClustering.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="radioButtonGfs2.Text" xml:space="preserve">
-    <value>Thin provisioning (GFS2)</value>
+  <data name="CheckBoxEnableClustering.Text" xml:space="preserve">
+    <value>&amp;Enable clustering</value>
   </data>
-  <data name="&gt;&gt;radioButtonGfs2.Name" xml:space="preserve">
-    <value>radioButtonGfs2</value>
+  <data name="&gt;&gt;CheckBoxEnableClustering.Name" xml:space="preserve">
+    <value>CheckBoxEnableClustering</value>
   </data>
-  <data name="&gt;&gt;radioButtonGfs2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;CheckBoxEnableClustering.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButtonGfs2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CheckBoxEnableClustering.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;radioButtonGfs2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CheckBoxEnableClustering.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="labelGFS2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelNetwork.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelGFS2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="labelNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="labelGFS2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 59</value>
+  <data name="labelNetwork.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 87</value>
   </data>
-  <data name="labelGFS2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>20, 3, 3, 3</value>
+  <data name="labelNetwork.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>22, 5, 3, 0</value>
   </data>
-  <data name="labelGFS2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>511, 15</value>
+  <data name="labelNetwork.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
-  <data name="labelGFS2.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelNetwork.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="labelGFS2.Text" xml:space="preserve">
-    <value>The SR will be formatted with the GFS2 cluster file system for hosting thinly provisioned images.</value>
+  <data name="labelNetwork.Text" xml:space="preserve">
+    <value>&amp;Network:</value>
   </data>
-  <data name="&gt;&gt;labelGFS2.Name" xml:space="preserve">
-    <value>labelGFS2</value>
+  <data name="&gt;&gt;labelNetwork.Name" xml:space="preserve">
+    <value>labelNetwork</value>
   </data>
-  <data name="&gt;&gt;labelGFS2.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelNetwork.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelGFS2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelNetwork.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;labelGFS2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelNetwork.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="radioButtonLvm.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButtonLvm.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="radioButtonLvm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 83</value>
-  </data>
-  <data name="radioButtonLvm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 3, 3</value>
-  </data>
-  <data name="radioButtonLvm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 19</value>
-  </data>
-  <data name="radioButtonLvm.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="radioButtonLvm.Text" xml:space="preserve">
-    <value>Full provisioning (LVM)</value>
-  </data>
-  <data name="&gt;&gt;radioButtonLvm.Name" xml:space="preserve">
-    <value>radioButtonLvm</value>
-  </data>
-  <data name="&gt;&gt;radioButtonLvm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButtonLvm.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;radioButtonLvm.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 108</value>
-  </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>20, 3, 3, 3</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 15</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>This SR will be configured to host fully provisioned virtual disks using LVM.</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="flowLayoutInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="pictureBoxInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBoxInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 15</value>
+    <value>3, 6</value>
   </data>
   <data name="pictureBoxInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 15, 3, 3</value>
+    <value>3, 6, 3, 3</value>
   </data>
   <data name="pictureBoxInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>19, 20</value>
+    <value>16, 16</value>
+  </data>
+  <data name="pictureBoxInfo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>AutoSize</value>
   </data>
   <data name="pictureBoxInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;pictureBoxInfo.Name" xml:space="preserve">
     <value>pictureBoxInfo</value>
@@ -318,20 +261,20 @@
   <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelWarning.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="labelWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 15</value>
+    <value>22, 6</value>
   </data>
   <data name="labelWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 15, 3, 0</value>
+    <value>0, 6, 3, 0</value>
   </data>
   <data name="labelWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 15</value>
+    <value>0, 13</value>
   </data>
   <data name="labelWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
     <value>labelWarning</value>
@@ -346,13 +289,16 @@
     <value>1</value>
   </data>
   <data name="flowLayoutInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 129</value>
+    <value>3, 119</value>
+  </data>
+  <data name="flowLayoutInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 3</value>
   </data>
   <data name="flowLayoutInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 38</value>
+    <value>25, 25</value>
   </data>
   <data name="flowLayoutInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;flowLayoutInfo.Name" xml:space="preserve">
     <value>flowLayoutInfo</value>
@@ -364,7 +310,28 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;flowLayoutInfo.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
+  </data>
+  <data name="comboBoxNetwork.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 85</value>
+  </data>
+  <data name="comboBoxNetwork.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 21</value>
+  </data>
+  <data name="comboBoxNetwork.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;comboBoxNetwork.Name" xml:space="preserve">
+    <value>comboBoxNetwork</value>
+  </data>
+  <data name="&gt;&gt;comboBoxNetwork.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.NetworkComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;comboBoxNetwork.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxNetwork.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -372,14 +339,11 @@
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
-  </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 336</value>
+    <value>490, 318</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -397,21 +361,21 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="radioButtonGfs2" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelGFS2" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="radioButtonLvm" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="label3" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="flowLayoutInfo" Row="5" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="CheckBoxEnableClustering" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelNetwork" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutInfo" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="comboBoxNetwork" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 336</value>
+    <value>490, 318</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ChooseSrProvisioningPage</value>
+    <value>ClusteringEditPage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
