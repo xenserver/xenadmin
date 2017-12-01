@@ -48,9 +48,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
         {
-            if (SrType == SR.SRTypes.gfs2)
-                return new Gfs2HbaSrDescriptor(device);
-            return new FcoeSrDescriptor(device);
+            return SrType == SR.SRTypes.gfs2 ? new Gfs2FcoeSrDescriptor(device) : new FcoeSrDescriptor(device);
         }
 
         public override LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
