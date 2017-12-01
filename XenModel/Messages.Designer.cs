@@ -7002,6 +7002,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clustering.
+        /// </summary>
+        public static string CLUSTERING {
+            get {
+                return ResourceManager.GetString("CLUSTERING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Collapse Children.
         /// </summary>
         public static string COLLAPSE_CHILDREN {
@@ -11061,6 +11070,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable clustering..
+        /// </summary>
+        public static string DISABLE_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLE_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable HA.
         /// </summary>
         public static string DISABLE_HA {
@@ -11183,6 +11201,15 @@ namespace XenAdmin {
         public static string DISABLING_AD_ON {
             get {
                 return ResourceManager.GetString("DISABLING_AD_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling clustering on {0}..
+        /// </summary>
+        public static string DISABLING_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLING_CLUSTERING_ON_POOL", resourceCulture);
             }
         }
         
@@ -13369,6 +13396,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable clustering..
+        /// </summary>
+        public static string ENABLE_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLE_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Enable HA....
         /// </summary>
         public static string ENABLE_HA_ELLIPSIS {
@@ -13441,6 +13477,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled clustering on {0}..
+        /// </summary>
+        public static string ENABLED_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLED_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; enabled..
         /// </summary>
         public static string ENABLED_VMSS {
@@ -13473,6 +13518,15 @@ namespace XenAdmin {
         public static string ENABLING_AD_ON {
             get {
                 return ResourceManager.GetString("ENABLING_AD_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling clustering on {0}..
+        /// </summary>
+        public static string ENABLING_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLING_CLUSTERING_ON_POOL", resourceCulture);
             }
         }
         
@@ -15845,6 +15899,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must disable HA before clustering can be enabled..
+        /// </summary>
+        public static string GFS2_HA_ENABLED {
+            get {
+                return ResourceManager.GetString("GFS2_HA_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your pool license does not allow GFS2..
         /// </summary>
         public static string GFS2_INCORRECT_POOL_LICENSE {
@@ -15854,11 +15917,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clustering cannot be enabled because there are no suitable networks..
+        /// </summary>
+        public static string GFS2_NO_NETWORK {
+            get {
+                return ResourceManager.GetString("GFS2_NO_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GFS2 requires clustering to be enabled on the pool..
         /// </summary>
         public static string GFS2_REQUIRES_CLUSTERING_ENABLED {
             get {
                 return ResourceManager.GetString("GFS2_REQUIRES_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustering cannot be disabled because there are GFS2 storage repositories attached to this pool..
+        /// </summary>
+        public static string GFS2_SR_ATTACHED {
+            get {
+                return ResourceManager.GetString("GFS2_SR_ATTACHED", resourceCulture);
             }
         }
         

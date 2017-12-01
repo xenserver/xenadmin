@@ -29,48 +29,34 @@
  * SUCH DAMAGE.
  */
 
-using System.Linq;
-using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAPI;
 
-namespace XenAdmin.Wizards.NewSRWizard_Pages
+namespace XenAdmin.Actions
 {
-    public partial class ChooseSrProvisioningPage : XenTabPage
-
+    public class EnableClusteringAction : AsyncAction
     {
-        public ChooseSrProvisioningPage()
+        private XenAPI.Network network;
+        
+        public EnableClusteringAction(Pool pool, XenAPI.Network network)
+            : base(pool.Connection, Messages.ENABLE_CLUSTERING_ON_POOL,
+            string.Format(Messages.ENABLING_CLUSTERING_ON_POOL, pool.Name()), true)
         {
-            InitializeComponent();
+            this.network = network;
+            #region RBAC Dependencies
+            ApiMethodsToRoleCheck.Add("cluster.pool_create");
+            ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
+            #endregion
         }
 
-        #region XenTabPage overrides
-
-        public override string Text { get { return Messages.PROVISIONING; } }
-
-        public override string PageTitle { get { return Messages.CHOOSE_SR_PROVISIONING_PAGE_TITLE; } }
-
-        #endregion
-
-        public bool IsGfs2
+        protected override void Run()
         {
-            get
+            foreach (var pif in Connection.ResolveAll(network.PIFs))
             {
-                return radioButtonGfs2.Checked;
+                PIF.set_disallow_unplug(Session, pif.opaque_ref, true);
             }
-        }
-
-        public override void PopulatePage()
-        {
-            var master = Helpers.GetMaster(Connection);
-
-            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
-
-            radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
-            flowLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;
-            labelWarning.Text = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2)
-                ? Messages.GFS2_INCORRECT_POOL_LICENSE
-                : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
+            Cluster.pool_create(Session, Pool.opaque_ref, "corosync", network.opaque_ref);
+            Description = string.Format(Messages.ENABLED_CLUSTERING_ON_POOL, Pool.Name());
+            
         }
     }
 }

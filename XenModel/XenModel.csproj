@@ -98,6 +98,8 @@
     <Compile Include="Actions\ParallelAction.cs" />
     <Compile Include="Actions\Pool\AddHostToPoolAction.cs" />
     <Compile Include="Actions\Pool\CreatePoolAction.cs" />
+    <Compile Include="Actions\Pool\DisableClusteringAction.cs" />
+    <Compile Include="Actions\Pool\EnableClusteringAction.cs" />
     <Compile Include="Actions\Pool\PoolAction.cs" />
     <Compile Include="Actions\Pool\SetGpuPlacementPolicyAction.cs" />
     <Compile Include="Actions\Pool\SetSslLegacyAction.cs" />

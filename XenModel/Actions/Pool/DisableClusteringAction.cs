@@ -29,48 +29,24 @@
  * SUCH DAMAGE.
  */
 
-using System.Linq;
-using XenAdmin.Controls;
-using XenAdmin.Core;
 using XenAPI;
 
-namespace XenAdmin.Wizards.NewSRWizard_Pages
+namespace XenAdmin.Actions
 {
-    public partial class ChooseSrProvisioningPage : XenTabPage
-
+    public class DisableClusteringAction : AsyncAction
     {
-        public ChooseSrProvisioningPage()
+        public DisableClusteringAction(Pool pool)
+            : base(pool.Connection, Messages.DISABLE_CLUSTERING_ON_POOL,
+            string.Format(Messages.DISABLING_CLUSTERING_ON_POOL, pool.Name()), true)
         {
-            InitializeComponent();
+            #region RBAC Dependencies
+            //ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
+            #endregion
         }
 
-        #region XenTabPage overrides
-
-        public override string Text { get { return Messages.PROVISIONING; } }
-
-        public override string PageTitle { get { return Messages.CHOOSE_SR_PROVISIONING_PAGE_TITLE; } }
-
-        #endregion
-
-        public bool IsGfs2
+        protected override void Run()
         {
-            get
-            {
-                return radioButtonGfs2.Checked;
-            }
-        }
 
-        public override void PopulatePage()
-        {
-            var master = Helpers.GetMaster(Connection);
-
-            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
-
-            radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
-            flowLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;
-            labelWarning.Text = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2)
-                ? Messages.GFS2_INCORRECT_POOL_LICENSE
-                : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
         }
     }
 }
