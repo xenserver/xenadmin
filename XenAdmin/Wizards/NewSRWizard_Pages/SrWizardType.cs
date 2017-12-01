@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
@@ -86,13 +87,31 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
     public class Gfs2HbaSrDescriptor : LvmOhbaSrDescriptor
     {
-        private const string URIFORMAT = "file:///dev/disk/by-id/scsi-{0}";  // uri=file:///dev/disk/by-id/scsi-<SCSIID>
-
         public Gfs2HbaSrDescriptor(FibreChannelDevice device)
             : base(device)
         {
-            DeviceConfig[SrProbeAction.URI] = string.Format(URIFORMAT, device.SCSIid);
+            var jsonUri = new JavaScriptSerializer().Serialize(new
+            {
+                provider = "hba",
+                ScsiId = device.SCSIid
+            });
+            DeviceConfig[SrProbeAction.URI] = jsonUri;
             Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
+        }
+    }
+
+    public class Gfs2FcoeSrDescriptor : FcoeSrDescriptor
+    {
+        public Gfs2FcoeSrDescriptor(FibreChannelDevice device)
+            : base(device)
+        {
+            var jsonUri = new JavaScriptSerializer().Serialize(new
+            {
+                provider = "fcoe",
+                ScsiId = device.SCSIid
+            });
+            DeviceConfig[SrProbeAction.URI] = jsonUri;
+            Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
         }
     }
 

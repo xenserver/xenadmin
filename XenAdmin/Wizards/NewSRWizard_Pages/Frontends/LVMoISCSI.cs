@@ -41,6 +41,7 @@ using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using System.Drawing;
 using System.Linq;
+using System.Web.Script.Serialization;
 using XenAdmin.Utils;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
@@ -72,9 +73,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private const string CHAPUSER = "chapuser";
         private const string CHAPPASSWORD = "chappassword";
         private const string URI = "uri";
-        private const string URIFORMAT = "iscsi://{0}{1}:{2}/{3}/{4}";  // uri= iscsi://[<username>[%<password>]@]<host>[:<port>]/<target-iqn>/<scsi-id>
-        private const string CHAPFORMAT = "{0}%{1}@";   // <username>%<password
-
 
         private IEnumerable<Control> ErrorIcons
         {
@@ -859,13 +857,17 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (srType == SR.SRTypes.gfs2)
             {
                 // build the uri for gfs2
-                //uri=iscsi://[<username>[%<password>]@]<host>[:<port>]/<target-iqn>/<scsi-id>
-                var chap = "";
-                if (IscsiUseChapCheckBox.Checked)
+                var jsonUri = new JavaScriptSerializer().Serialize(new
                 {
-                    chap = string.Format(CHAPFORMAT, IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text);
-                }
-                dconf[URI] = string.Format(URIFORMAT, chap, iqn.item.IpAddress, iqn.item.Port.ToString(), getIscsiIQN(), LunMap[getIscsiLUN()].ScsiID);
+                    provider = "iscsi",
+                    ips = iqn.item.IpAddress,
+                    port = iqn.item.Port.ToString(),
+                    iqns = getIscsiIQN(),
+                    ScsiId = LunMap[getIscsiLUN()].ScsiID,
+                    chapuser = IScsiChapUserTextBox.Text,
+                    chappassword = IScsiChapSecretTextBox.Text
+                });
+                dconf[URI] = jsonUri;
 
                 return dconf;
             }

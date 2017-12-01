@@ -214,7 +214,7 @@ namespace XenAdmin.Wizards
                     lvmOhbaSrDescriptor.Description = description;
 
                 m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
-                m_srWizardType.IsGfs2 = lvmOhbaSrDescriptor is Gfs2HbaSrDescriptor;
+                m_srWizardType.IsGfs2 = lvmOhbaSrDescriptor is Gfs2HbaSrDescriptor || lvmOhbaSrDescriptor is Gfs2FcoeSrDescriptor;
                 names.Add(name);
                 name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_Hba 
                                                         ? Messages.NEWSR_HBA_DEFAULT_NAME
@@ -295,7 +295,6 @@ namespace XenAdmin.Wizards
                 }
                 else if (m_srWizardType is SrWizardType_Fcoe)
                 {
-                    AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoFcoe);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
