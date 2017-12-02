@@ -109,7 +109,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
         public void NoCompositeHotfixesApply()
         {
             SetUpCompositeForTwoMocks(false, false);
-            compositeHotfix.Apply(new Host(), new Session("url", 1, 1));
+            compositeHotfix.Apply(new Host(), new Session(1, "url", 1));
             VerifyCompositeForTwoMocksShouldBeApplied();
             hotfixA.Verify(h => h.Apply(It.IsAny<Host>(), It.IsAny<Session>()), Times.Never());
             hotfixB.Verify(h => h.Apply(It.IsAny<Host>(), It.IsAny<Session>()), Times.Never());
@@ -119,7 +119,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
         public void OneCompositeHotfixesApply()
         {
             SetUpCompositeForTwoMocks(false, true);
-            compositeHotfix.Apply(new Host(), new Session("url", 1, 1));
+            compositeHotfix.Apply(new Host(), new Session(1, "url", 1));
             VerifyCompositeForTwoMocksShouldBeApplied();
             hotfixA.Verify(h => h.Apply(It.IsAny<Host>(), It.IsAny<Session>()), Times.Never());
             hotfixB.Verify(h => h.Apply(It.IsAny<Host>(), It.IsAny<Session>()), Times.Once());
@@ -129,7 +129,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
         public void BothCompositeHotfixesApply()
         {
             SetUpCompositeForTwoMocks(true, true);
-            compositeHotfix.Apply(new Host(), new Session("url", 1, 1));
+            compositeHotfix.Apply(new Host(), new Session(1, "url", 1));
             VerifyCompositeForTwoMocksShouldBeApplied();
             hotfixA.Verify(h => h.Apply(It.IsAny<Host>(), It.IsAny<Session>()), Times.Once());
             hotfixB.Verify(h => h.Apply(It.IsAny<Host>(), It.IsAny<Session>()), Times.Once());
