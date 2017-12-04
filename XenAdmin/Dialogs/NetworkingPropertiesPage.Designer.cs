@@ -47,7 +47,7 @@ namespace XenAdmin.Dialogs
             this.PreferredDNSLabel = new System.Windows.Forms.Label();
             this.AlternateDNS1Label = new System.Windows.Forms.Label();
             this.PreferredDNSTextBox = new System.Windows.Forms.TextBox();
-            this.SubnetMastLabel = new System.Windows.Forms.Label();
+            this.SubnetMaskLabel = new System.Windows.Forms.Label();
             this.GatewayLabel = new System.Windows.Forms.Label();
             this.GatewayTextBox = new System.Windows.Forms.TextBox();
             this.SubnetTextBox = new System.Windows.Forms.TextBox();
@@ -140,7 +140,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelStaticSettings.Controls.Add(this.PreferredDNSLabel, 0, 3);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.AlternateDNS1Label, 0, 4);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.PreferredDNSTextBox, 1, 3);
-            this.tableLayoutPanelStaticSettings.Controls.Add(this.SubnetMastLabel, 0, 1);
+            this.tableLayoutPanelStaticSettings.Controls.Add(this.SubnetMaskLabel, 0, 1);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.GatewayLabel, 0, 2);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.GatewayTextBox, 1, 2);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.SubnetTextBox, 1, 1);
@@ -195,10 +195,10 @@ namespace XenAdmin.Dialogs
             this.PreferredDNSTextBox.Name = "PreferredDNSTextBox";
             this.PreferredDNSTextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
-            // SubnetMastLabel
+            // SubnetMaskLabel
             // 
-            resources.ApplyResources(this.SubnetMastLabel, "SubnetMastLabel");
-            this.SubnetMastLabel.Name = "SubnetMastLabel";
+            resources.ApplyResources(this.SubnetMaskLabel, "SubnetMaskLabel");
+            this.SubnetMaskLabel.Name = "SubnetMaskLabel";
             // 
             // GatewayLabel
             // 
@@ -302,7 +302,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label RangeEndLabel;
         private System.Windows.Forms.Label IPAddressLabel;
         private System.Windows.Forms.Label GatewayLabel;
-        private System.Windows.Forms.Label SubnetMastLabel;
+        private System.Windows.Forms.Label SubnetMaskLabel;
         internal System.Windows.Forms.ComboBox NetworkComboBox;
         internal System.Windows.Forms.TextBox AlternateDNS1TextBox;
         internal System.Windows.Forms.TextBox PreferredDNSTextBox;
