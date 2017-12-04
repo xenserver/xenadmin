@@ -41,6 +41,7 @@ using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 using XenAdmin.Properties;
+using XenCenterLib;
 
 namespace XenAdmin.TabPages
 {

@@ -39,7 +39,7 @@ using System.Threading;
 // state on blog
 // IEnumerable added by Tom Wilkie (Citrix)
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     internal class SingleLinkNode<T>
     {

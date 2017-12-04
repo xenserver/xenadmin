@@ -34,11 +34,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Reflection;
 using System.Runtime.InteropServices;
-
 using XenAdmin.Core;
-
+using XenCenterLib;
 
 namespace XenAdmin.Controls
 {

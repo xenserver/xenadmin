@@ -39,7 +39,7 @@ using XenAdmin.Core;
 using System.Windows.Forms;
 using System.Drawing;
 using XenAdmin.Actions;
-using System.Collections.ObjectModel;
+using XenCenterLib;
 using System.IO;
 
 

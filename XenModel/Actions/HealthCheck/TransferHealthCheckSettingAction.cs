@@ -37,6 +37,7 @@ using System.Text;
 using System.ServiceProcess;
 using XenAdmin.Model;
 using XenAdmin.Network;
+using XenCenterLib;
 
 namespace XenAdmin.Actions
 {

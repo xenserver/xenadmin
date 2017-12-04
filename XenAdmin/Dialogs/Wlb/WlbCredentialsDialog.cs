@@ -31,17 +31,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
-
-using XenAdmin.Actions;
 using XenAdmin.Actions.Wlb;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Wlb;
 using XenAPI;
 

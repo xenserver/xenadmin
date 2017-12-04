@@ -41,7 +41,7 @@ using XenAPI;
 using System.Globalization;
 using System.Reflection;
 using System.Xml;
-using System.Diagnostics;
+using XenCenterLib;
 
 
 namespace XenAdmin.Core

@@ -31,18 +31,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Win32;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
+using XenCenterLib;
 using Registry = XenAdmin.Core.Registry;
 
 

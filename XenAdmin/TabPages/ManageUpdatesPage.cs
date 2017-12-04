@@ -47,6 +47,7 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAdmin.Wizards.PatchingWizard;
+using XenCenterLib;
 using XenAPI;
 using Timer = System.Windows.Forms.Timer;
 

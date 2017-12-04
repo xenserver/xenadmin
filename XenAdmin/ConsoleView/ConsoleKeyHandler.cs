@@ -32,7 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin.ConsoleView
 {

@@ -33,7 +33,6 @@ using System;
 using XenAdmin.Core;
 using System.IO;
 using XenAdmin.Network;
-using System.Threading;
 using XenAPI;
 using Microsoft.Reporting.WinForms;
 using System.Collections.Generic;
@@ -41,6 +40,7 @@ using XenAdmin.XenSearch;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using XenCenterLib;
 
 namespace XenAdmin.Actions
 {

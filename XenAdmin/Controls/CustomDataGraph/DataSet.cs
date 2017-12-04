@@ -35,7 +35,7 @@ using System.Text;
 using System.Drawing;
 using System.Linq;
 using XenAPI;
-using Citrix.XenCenter;
+using XenCenterLib;
 
 using XenAdmin.Core;
 

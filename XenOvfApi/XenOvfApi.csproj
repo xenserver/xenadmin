@@ -151,7 +151,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Content.zh-CN.resx" />
     <EmbeddedResource Include="Messages.ja.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Messages.resx">
@@ -198,7 +197,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties StartDate="20090814" AssemblyFileVersion="1" AssemblyVersion="1" Reset="1" />
+      <UserProperties Reset="1" AssemblyVersion="1" AssemblyFileVersion="1" StartDate="20090814" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

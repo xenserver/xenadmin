@@ -34,8 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Drawing.Text;
+using XenCenterLib;
 using XenAdmin.Core;
 
 

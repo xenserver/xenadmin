@@ -47,7 +47,7 @@ using XenAdmin.Dialogs;
 using XenAdmin.XenSearch;
 using XenAPI;
 using System.Runtime.InteropServices;
-using XenAdmin.Actions;
+using XenCenterLib;
 
 
 namespace XenAdmin

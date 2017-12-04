@@ -41,6 +41,7 @@ using System.Text.RegularExpressions;
 using DotNetVnc;
 using XenAdmin.Core;
 using System.Linq;
+using XenCenterLib;
 
 namespace XenAdmin.ConsoleView
 {
@@ -51,7 +52,7 @@ namespace XenAdmin.ConsoleView
 
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public event XenAdmin.ExceptionEventHandler ErrorOccurred = null;
+        public event Action<object, Exception> ErrorOccurred = null;
         public event EventHandler ConnectionSuccess = null;
         private VNCStream vncStream = null;
 

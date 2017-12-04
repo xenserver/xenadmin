@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
-using XenAdmin.Core;
+using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs

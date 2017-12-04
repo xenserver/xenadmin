@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using XenServerHealthCheck;
-using XenAdmin.Core;
+using XenCenterLib;
 using System.IO.Pipes;
 using XenAdmin.Model;
 using NUnit.Framework;

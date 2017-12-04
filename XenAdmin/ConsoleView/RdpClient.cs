@@ -35,7 +35,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using DotNetVnc;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.RDP;
 
 namespace XenAdmin.ConsoleView

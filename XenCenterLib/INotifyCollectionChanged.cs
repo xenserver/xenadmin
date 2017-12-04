@@ -34,7 +34,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     public interface INotifyCollectionChanged
     {

@@ -76,7 +76,6 @@
     <Compile Include="ChangeableList.cs" />
     <Compile Include="EmailAddressValidator.cs" />
     <Compile Include="EncryptionUtils.cs" />
-    <Compile Include="ExceptionEventHandler.cs" />
     <Compile Include="ComparableAddress.cs" />
     <Compile Include="ComparableList.cs" />
     <Compile Include="HelpString.cs" />

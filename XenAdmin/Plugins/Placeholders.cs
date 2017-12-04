@@ -32,7 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.XenSearch;
 using XenAPI;
 

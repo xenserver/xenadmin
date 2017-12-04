@@ -39,6 +39,7 @@ using XenAdmin.Core;
 using XenAdmin.Model;
 using System.Linq;
 using System.Diagnostics;
+using XenCenterLib;
 
 namespace XenAdmin.Network
 {

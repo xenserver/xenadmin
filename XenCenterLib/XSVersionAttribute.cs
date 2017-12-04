@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XenAdmin
+namespace XenCenterLib
 {
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
     public sealed class XSVersionAttribute : Attribute
