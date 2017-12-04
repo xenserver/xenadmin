@@ -82,7 +82,7 @@ namespace XenAdmin.SettingsPanels
         {
             pool = Helpers.GetPoolOfOne(clone.Connection);
             var master = Helpers.GetMaster(clone.Connection);
-            flowLayoutInfo.Visible = false;
+            tableLayoutInfo.Visible = false;
 
             clusteringEnabled = pool.Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
             var existingCluster = pool.Connection.Cache.Clusters.FirstOrDefault();
@@ -156,7 +156,7 @@ namespace XenAdmin.SettingsPanels
         private void DisableControls(string message)
         {
             comboBoxNetwork.Enabled = labelNetwork.Enabled = CheckBoxEnableClustering.Enabled = false;
-            flowLayoutInfo.Visible = true;
+            tableLayoutInfo.Visible = true;
             labelWarning.Text = message;
         }
 

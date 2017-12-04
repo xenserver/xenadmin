@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
 
             radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
-            flowLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;
+            tableLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;
             labelWarning.Text = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2)
                 ? Messages.GFS2_INCORRECT_POOL_LICENSE
                 : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
