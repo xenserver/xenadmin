@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -736,6 +736,12 @@
       <DependentUpon>IntraPoolCopyPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Wizards\ImportWizard\HardwareCompatibilityFilter.cs" />
+    <Compile Include="Wizards\NewNetworkWizard_Pages\NetWSriovDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizards\NewNetworkWizard_Pages\NetWSriovDetails.Designer.cs">
+      <DependentUpon>NetWSriovDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -2126,6 +2132,15 @@
     <EmbeddedResource Include="Wizards\GenericPages\RBACWarningPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RBACWarningPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewNetworkWizard_Pages\NetWSriovDetails.ja.resx">
+      <DependentUpon>NetWSriovDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewNetworkWizard_Pages\NetWSriovDetails.resx">
+      <DependentUpon>NetWSriovDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizards\NewNetworkWizard_Pages\NetWSriovDetails.zh-CN.resx">
+      <DependentUpon>NetWSriovDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewSRWizard_Pages\Frontends\CIFSFrontend.ja.resx">
       <DependentUpon>CIFSFrontend.cs</DependentUpon>
@@ -6722,6 +6737,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\GenericPages\TvmIpPage.resx">
       <DependentUpon>TvmIpPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\NewVMWizard\Page_Template.zh-CN.resx">
       <DependentUpon>Page_Template.cs</DependentUpon>

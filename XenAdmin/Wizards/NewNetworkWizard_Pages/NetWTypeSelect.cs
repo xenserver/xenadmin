@@ -71,7 +71,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                                  ? NetworkTypes.External
                                  : rbtnCHIN.Checked
                                        ? NetworkTypes.CHIN
-                                       : NetworkTypes.Internal;
+                                       : rbtnSriov.Checked
+                                           ? NetworkTypes.SRIOV
+                                           : NetworkTypes.Internal;
             }
         }
 
