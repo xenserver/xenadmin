@@ -13616,4 +13616,10 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
+    <value>S&amp;top</value>
+  </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_TEST" xml:space="preserve">
+    <value>&amp;Test</value>
+  </data>
 </root>
