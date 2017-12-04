@@ -35,12 +35,12 @@
             this.labelGFS2 = new System.Windows.Forms.Label();
             this.radioButtonLvm = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBoxInfo = new System.Windows.Forms.PictureBox();
-            this.labelWarning = new System.Windows.Forms.Label();
             this.tableLayoutInfo = new System.Windows.Forms.TableLayoutPanel();
+            this.labelWarning = new System.Windows.Forms.Label();
+            this.pictureBoxInfo = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
             this.tableLayoutInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -83,24 +83,24 @@
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             // 
-            // pictureBoxInfo
-            // 
-            this.pictureBoxInfo.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            resources.ApplyResources(this.pictureBoxInfo, "pictureBoxInfo");
-            this.pictureBoxInfo.Name = "pictureBoxInfo";
-            this.pictureBoxInfo.TabStop = false;
-            // 
-            // labelWarning
-            // 
-            resources.ApplyResources(this.labelWarning, "labelWarning");
-            this.labelWarning.Name = "labelWarning";
-            // 
             // tableLayoutInfo
             // 
             resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
             this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
             this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo, 0, 0);
             this.tableLayoutInfo.Name = "tableLayoutInfo";
+            // 
+            // labelWarning
+            // 
+            resources.ApplyResources(this.labelWarning, "labelWarning");
+            this.labelWarning.Name = "labelWarning";
+            // 
+            // pictureBoxInfo
+            // 
+            this.pictureBoxInfo.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            resources.ApplyResources(this.pictureBoxInfo, "pictureBoxInfo");
+            this.pictureBoxInfo.Name = "pictureBoxInfo";
+            this.pictureBoxInfo.TabStop = false;
             // 
             // ChooseSrProvisioningPage
             // 
@@ -110,9 +110,9 @@
             this.Name = "ChooseSrProvisioningPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).EndInit();
             this.tableLayoutInfo.ResumeLayout(false);
             this.tableLayoutInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).EndInit();
             this.ResumeLayout(false);
 
         }

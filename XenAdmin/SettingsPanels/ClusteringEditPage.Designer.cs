@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClusteringEditPage));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTitle = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.CheckBoxEnableClustering = new System.Windows.Forms.CheckBox();
             this.labelNetwork = new System.Windows.Forms.Label();
             this.pictureBoxInfo = new System.Windows.Forms.PictureBox();
             this.labelWarning = new System.Windows.Forms.Label();
-            this.comboBoxNetwork = new XenAdmin.Controls.NetworkComboBox();
             this.tableLayoutInfo = new System.Windows.Forms.TableLayoutPanel();
+            this.labelTitle = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.comboBoxNetwork = new XenAdmin.Controls.NetworkComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
             this.tableLayoutInfo.SuspendLayout();
@@ -51,12 +51,6 @@
             this.tableLayoutPanel1.Controls.Add(this.comboBoxNetwork, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutInfo, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // labelTitle
-            // 
-            resources.ApplyResources(this.labelTitle, "labelTitle");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelTitle, 2);
-            this.labelTitle.Name = "labelTitle";
             // 
             // CheckBoxEnableClustering
             // 
@@ -82,6 +76,20 @@
             resources.ApplyResources(this.labelWarning, "labelWarning");
             this.labelWarning.Name = "labelWarning";
             // 
+            // tableLayoutInfo
+            // 
+            resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutInfo, 2);
+            this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo, 0, 0);
+            this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
+            this.tableLayoutInfo.Name = "tableLayoutInfo";
+            // 
+            // labelTitle
+            // 
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelTitle, 2);
+            this.labelTitle.Name = "labelTitle";
+            // 
             // comboBoxNetwork
             // 
             this.comboBoxNetwork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -91,14 +99,6 @@
             this.comboBoxNetwork.IncludePoolNameInComboBox = false;
             resources.ApplyResources(this.comboBoxNetwork, "comboBoxNetwork");
             this.comboBoxNetwork.Name = "comboBoxNetwork";
-            // 
-            // tableLayoutInfo
-            // 
-            resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
-            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutInfo, 2);
-            this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo, 0, 0);
-            this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
-            this.tableLayoutInfo.Name = "tableLayoutInfo";
             // 
             // ClusteringEditPage
             // 
