@@ -43,6 +43,7 @@ using XenAdmin.Core;
 using XenAdmin.Wizards.NewPolicyWizard;
 using XenAdmin.Wizards.NewVMApplianceWizard;
 using XenAdmin.Wizards.GenericPages;
+using System.Linq;
 
 namespace XenAdmin.Dialogs
 {
@@ -78,6 +79,7 @@ namespace XenAdmin.Dialogs
         private Page_CloudConfigParameters CloudConfigParametersPage;
         private SecurityEditPage SecurityEditPage;
         private LivePatchingEditPage LivePatchingEditPage;
+        private USBEditPage usbEditPage;
         private NetworkOptionsEditPage NetworkOptionsEditPage;
         private ClusteringEditPage ClusteringEditPage;
         #endregion
@@ -123,6 +125,7 @@ namespace XenAdmin.Dialogs
             bool is_network = xenObjectCopy is XenAPI.Network;
 
             bool is_hvm = is_vm && ((VM)xenObjectCopy).IsHVM();
+            bool is_template = is_vm && ((VM)xenObjectCopy).is_a_template;
             bool is_in_pool = Helpers.GetPool(xenObjectCopy.Connection) != null;
 
             bool is_pool_or_standalone = is_pool || (is_host && !is_in_pool);
@@ -157,8 +160,8 @@ namespace XenAdmin.Dialogs
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
                     {
                         PerfmonAlertUpsellEditPage = new UpsellPage {Image = Properties.Resources._000_Alert2_h32bit_16, Text = Messages.ALERTS};
-                        PerfmonAlertUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_ALERTS_MORE, 
-                                                                InvisibleMessages.UPSELL_LEARNMOREURL_ALERTS);
+                        PerfmonAlertUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL, 
+                                                                InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL);
                         ShowTab(PerfmonAlertUpsellEditPage);
                     }
                     else
@@ -172,8 +175,8 @@ namespace XenAdmin.Dialogs
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictAlerts))
                     {
                         PerfmonAlertOptionsUpsellEditPage = new UpsellPage {Image = Properties.Resources._000_Email_h32bit_16, Text = Messages.EMAIL_OPTIONS};
-                        PerfmonAlertOptionsUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_ALERTS_MORE,
-                                                                        InvisibleMessages.UPSELL_LEARNMOREURL_ALERTS);
+                        PerfmonAlertOptionsUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_ALERTS : Messages.UPSELL_BLURB_ALERTS + Messages.UPSELL_BLURB_TRIAL,
+                                                                        InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL);
                         ShowTab(PerfmonAlertOptionsUpsellEditPage);
                     }
                     else
@@ -221,14 +224,20 @@ namespace XenAdmin.Dialogs
                     if (Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictGpu))
                     {
                         GpuUpsellEditPage = new UpsellPage { Image = Properties.Resources._000_GetMemoryInfo_h32bit_16, Text = Messages.GPU };
-                        GpuUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_GPU : Messages.UPSELL_BLURB_GPU + Messages.UPSELL_BLURB_GPU_MORE,
-                                                        InvisibleMessages.UPSELL_LEARNMOREURL_GPU);
+                        GpuUpsellEditPage.SetAllTexts(HiddenFeatures.LinkLabelHidden ? Messages.UPSELL_BLURB_GPU : Messages.UPSELL_BLURB_GPU + Messages.UPSELL_BLURB_TRIAL,
+                                                        InvisibleMessages.UPSELL_LEARNMOREURL_TRIAL);
                         ShowTab(GpuUpsellEditPage);
                     }
                     else
                     {
                         ShowTab(GpuEditPage = new GpuEditPage());
                     }
+                }
+
+                if (is_hvm && !is_template && !Helpers.FeatureForbidden(xenObjectCopy, Host.RestrictUsbPassthrough) &&
+                    pool.Connection.Cache.Hosts.Any(host => host.PUSBs.Count > 0))
+                {
+                    ShowTab(usbEditPage = new USBEditPage { VerticalTabs = verticalTabs });
                 }
 
                 if (is_hvm)
@@ -511,6 +520,13 @@ namespace XenAdmin.Dialogs
             {
                 GpuEditPage.SelectedPriority = VMHAEditPage.SelectedPriority;
                 GpuEditPage.ShowHideWarnings();
+                return;
+            }
+            
+            if (verticalTabs.SelectedItem == usbEditPage && VMHAEditPage != null)
+            {
+                usbEditPage.SelectedPriority = VMHAEditPage.SelectedPriority;
+                usbEditPage.ShowHideWarnings();
                 return;
             }
         }

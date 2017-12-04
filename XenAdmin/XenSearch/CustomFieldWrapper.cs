@@ -33,6 +33,7 @@ using System;
 using XenAdmin.CustomFields;
 using XenAPI;
 using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin
 {

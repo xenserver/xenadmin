@@ -36,7 +36,7 @@ using System.Windows.Forms;
 using XenAdmin.XenSearch;
 using System.Drawing;
 using XenAPI;
-
+using XenCenterLib;
 
 namespace XenAdmin.Core
 {

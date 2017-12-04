@@ -48,6 +48,7 @@ using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.SettingsPanels;
 using XenAPI;
+using XenCenterLib;
 
 namespace XenAdmin.TabPages
 {

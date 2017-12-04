@@ -52,7 +52,7 @@ namespace XenAdmin.Alerts
 
             if(Type == "info")
             {
-                Text = Message.FriendlyBody(name);
+                Text = string.Format(Message.FriendlyBody(name), policyName);
                 return;
             }
 
@@ -62,7 +62,7 @@ namespace XenAdmin.Alerts
             numberOfVMsFailed = Regex.Matches(body, "VM:").Count;              
             if(numberOfVMsFailed == 0)
             {
-                Text = Message.FriendlyBody(name);
+                Text = string.Format(Message.FriendlyBody(name), policyName);
                 return;
             }
 

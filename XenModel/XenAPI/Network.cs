@@ -203,6 +203,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._purpose, other._purpose);
         }
 
+        internal static List<Network> ProxyArrayToObjectList(Proxy_Network[] input)
+        {
+            var result = new List<Network>();
+            foreach (var item in input)
+                result.Add(new Network(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Network server)
         {
             if (opaqueRef == null)
@@ -480,7 +489,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the purpose field of the given network.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The opaque_ref of the given network</param>
@@ -678,7 +687,7 @@ namespace XenAPI
 
         /// <summary>
         /// Give a network a new purpose (if not present already)
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The opaque_ref of the given network</param>
@@ -690,7 +699,7 @@ namespace XenAPI
 
         /// <summary>
         /// Give a network a new purpose (if not present already)
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The opaque_ref of the given network</param>
@@ -702,7 +711,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a purpose from a network (if present)
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The opaque_ref of the given network</param>
@@ -714,7 +723,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a purpose from a network (if present)
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">The opaque_ref of the given network</param>
@@ -1022,7 +1031,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set of purposes for which the server will use this network
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         public virtual List<network_purpose> purpose
         {

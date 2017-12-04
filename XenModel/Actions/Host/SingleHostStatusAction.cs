@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using XenAdmin.Core;
 using XenAPI;
-
+using XenCenterLib;
 
 namespace XenAdmin.Actions
 {

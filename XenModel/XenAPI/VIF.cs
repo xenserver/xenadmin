@@ -280,6 +280,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._ipv6_gateway, other._ipv6_gateway);
         }
 
+        internal static List<VIF> ProxyArrayToObjectList(Proxy_VIF[] input)
+        {
+            var result = new List<VIF>();
+            foreach (var item in input)
+                result.Add(new VIF(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, VIF server)
         {
             if (opaqueRef == null)

@@ -36,6 +36,7 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using XenCenterLib;
 
 namespace XenAdmin.Core
 {

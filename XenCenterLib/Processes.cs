@@ -36,7 +36,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     public class Processes
     {

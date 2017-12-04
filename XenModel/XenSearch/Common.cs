@@ -29,8 +29,6 @@
  * SUCH DAMAGE.
  */
 
-//#define SHOW_CONTROL_DOMAINS
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +38,7 @@ using XenAPI;
 using XenAdmin.Core;
 using System.Collections;
 using XenAdmin.Network;
+using XenCenterLib;
 
 
 namespace XenAdmin.XenSearch

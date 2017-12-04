@@ -3672,7 +3672,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The license on host &apos;{0}&apos; will expire at {1}..
+        ///   Looks up a localized string similar to The license on host &apos;{0}&apos; will expire within 30 days..
         /// </summary>
         public static string Message_body_license_expires_soon {
             get {

@@ -36,7 +36,7 @@ using System.IO;
 using System.Xml;
 
 using XenAPI;
-using Citrix.XenCenter;
+using XenCenterLib;
 using XenAdmin.Network;
 
 namespace XenAdmin.ServerDBs

@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     public class LimitedStack<T> : IEnumerable<T> where T : class
     {

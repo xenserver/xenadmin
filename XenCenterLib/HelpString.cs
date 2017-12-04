@@ -31,7 +31,7 @@
 
 using System;
 
-namespace XenAdmin
+namespace XenCenterLib
 {
 
     public class HelpString : System.Attribute

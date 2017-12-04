@@ -37,7 +37,7 @@ using System.Windows.Forms;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
-
+using XenCenterLib;
 
 namespace XenAdmin.Controls
 {
@@ -204,7 +204,7 @@ namespace XenAdmin.Controls
                 }
                 vdis.Sort(new Comparison<ToStringWrapper<VDI>>(delegate(ToStringWrapper<VDI> object1, ToStringWrapper<VDI> object2)
                 {
-                    return Core.StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name());
+                    return StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name());
                 }));
 
                 Host host = srWrapper.item.GetStorageHost();
@@ -234,7 +234,7 @@ namespace XenAdmin.Controls
                     }
                     items.Sort(new Comparison<ToStringWrapper<VDI>>(delegate(ToStringWrapper<VDI> object1, ToStringWrapper<VDI> object2)
                     {
-                        return Core.StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name());
+                        return StringUtility.NaturalCompare(object1.item.Name(), object2.item.Name());
                     }));
                 }
             }

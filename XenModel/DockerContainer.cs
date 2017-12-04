@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using XenAPI;
-using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin.Model
 {

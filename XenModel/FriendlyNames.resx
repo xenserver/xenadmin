@@ -1032,7 +1032,7 @@
     <value>The license for {0} has expired.</value>
   </data>
   <data name="Message.body-license_expires_soon" xml:space="preserve">
-    <value>The license on host '{0}' will expire at {1}.</value>
+    <value>The license on host '{0}' will expire within 30 days.</value>
   </data>
   <data name="Message.body-license_not_available" xml:space="preserve">
     <value>The requested license is not available for {0}.</value>

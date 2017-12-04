@@ -35,8 +35,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using XenAPI;
 
-using XenAdmin.Actions;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Network;
 using System.Xml;
 using System.Linq;

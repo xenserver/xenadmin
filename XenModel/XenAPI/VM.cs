@@ -73,6 +73,7 @@ namespace XenAPI
             List<XenRef<Console>> consoles,
             List<XenRef<VIF>> VIFs,
             List<XenRef<VBD>> VBDs,
+            List<XenRef<VUSB>> VUSBs,
             List<XenRef<Crashdump>> crash_dumps,
             List<XenRef<VTPM>> VTPMs,
             string PV_bootloader,
@@ -156,6 +157,7 @@ namespace XenAPI
             this.consoles = consoles;
             this.VIFs = VIFs;
             this.VBDs = VBDs;
+            this.VUSBs = VUSBs;
             this.crash_dumps = crash_dumps;
             this.VTPMs = VTPMs;
             this.PV_bootloader = PV_bootloader;
@@ -251,6 +253,7 @@ namespace XenAPI
             consoles = update.consoles;
             VIFs = update.VIFs;
             VBDs = update.VBDs;
+            VUSBs = update.VUSBs;
             crash_dumps = update.crash_dumps;
             VTPMs = update.VTPMs;
             PV_bootloader = update.PV_bootloader;
@@ -337,6 +340,7 @@ namespace XenAPI
             consoles = proxy.consoles == null ? null : XenRef<Console>.Create(proxy.consoles);
             VIFs = proxy.VIFs == null ? null : XenRef<VIF>.Create(proxy.VIFs);
             VBDs = proxy.VBDs == null ? null : XenRef<VBD>.Create(proxy.VBDs);
+            VUSBs = proxy.VUSBs == null ? null : XenRef<VUSB>.Create(proxy.VUSBs);
             crash_dumps = proxy.crash_dumps == null ? null : XenRef<Crashdump>.Create(proxy.crash_dumps);
             VTPMs = proxy.VTPMs == null ? null : XenRef<VTPM>.Create(proxy.VTPMs);
             PV_bootloader = proxy.PV_bootloader == null ? null : (string)proxy.PV_bootloader;
@@ -424,6 +428,7 @@ namespace XenAPI
             result_.consoles = (consoles != null) ? Helper.RefListToStringArray(consoles) : new string[] {};
             result_.VIFs = (VIFs != null) ? Helper.RefListToStringArray(VIFs) : new string[] {};
             result_.VBDs = (VBDs != null) ? Helper.RefListToStringArray(VBDs) : new string[] {};
+            result_.VUSBs = (VUSBs != null) ? Helper.RefListToStringArray(VUSBs) : new string[] {};
             result_.crash_dumps = (crash_dumps != null) ? Helper.RefListToStringArray(crash_dumps) : new string[] {};
             result_.VTPMs = (VTPMs != null) ? Helper.RefListToStringArray(VTPMs) : new string[] {};
             result_.PV_bootloader = PV_bootloader ?? "";
@@ -515,6 +520,7 @@ namespace XenAPI
             consoles = Marshalling.ParseSetRef<Console>(table, "consoles");
             VIFs = Marshalling.ParseSetRef<VIF>(table, "VIFs");
             VBDs = Marshalling.ParseSetRef<VBD>(table, "VBDs");
+            VUSBs = Marshalling.ParseSetRef<VUSB>(table, "VUSBs");
             crash_dumps = Marshalling.ParseSetRef<Crashdump>(table, "crash_dumps");
             VTPMs = Marshalling.ParseSetRef<VTPM>(table, "VTPMs");
             PV_bootloader = Marshalling.ParseString(table, "PV_bootloader");
@@ -608,6 +614,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._consoles, other._consoles) &&
                 Helper.AreEqual2(this._VIFs, other._VIFs) &&
                 Helper.AreEqual2(this._VBDs, other._VBDs) &&
+                Helper.AreEqual2(this._VUSBs, other._VUSBs) &&
                 Helper.AreEqual2(this._crash_dumps, other._crash_dumps) &&
                 Helper.AreEqual2(this._VTPMs, other._VTPMs) &&
                 Helper.AreEqual2(this._PV_bootloader, other._PV_bootloader) &&
@@ -663,6 +670,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device) &&
                 Helper.AreEqual2(this._requires_reboot, other._requires_reboot) &&
                 Helper.AreEqual2(this._reference_label, other._reference_label);
+        }
+
+        internal static List<VM> ProxyArrayToObjectList(Proxy_VM[] input)
+        {
+            var result = new List<VM>();
+            foreach (var item in input)
+                result.Add(new VM(item));
+
+            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, VM server)
@@ -1220,6 +1236,17 @@ namespace XenAPI
         public static List<XenRef<VBD>> get_VBDs(Session session, string _vm)
         {
             return XenRef<VBD>.Create(session.proxy.vm_get_vbds(session.uuid, _vm ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the VUSBs field of the given VM.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static List<XenRef<VUSB>> get_VUSBs(Session session, string _vm)
+        {
+            return XenRef<VUSB>.Create(session.proxy.vm_get_vusbs(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3320,6 +3347,40 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Migrate the VM to another host.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a Host.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in XenServer 7.3.</param>
+        public static XenRef<VM> migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+        }
+
+        /// <summary>
+        /// Migrate the VM to another host.  This can only be called when the specified VM is in the Running state.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a Host.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in XenServer 7.3.</param>
+        public static XenRef<Task> async_migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+        }
+
+        /// <summary>
         /// Assert whether a VM can be migrated to the specified destination.
         /// First published in XenServer 6.1.
         /// </summary>
@@ -3352,11 +3413,47 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Returns a record describing the VM's dynamic state, initialised when the VM boots and updated to reflect runtime configuration changes e.g. CPU hotplug
-        /// First published in XenServer 4.0.
+        /// Assert whether a VM can be migrated to the specified destination.
+        /// First published in XenServer 6.1.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a VM.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in XenServer 7.3.</param>
+        public static void assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            session.proxy.vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse();
+        }
+
+        /// <summary>
+        /// Assert whether a VM can be migrated to the specified destination.
+        /// First published in XenServer 6.1.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_dest">The result of a VM.migrate_receive call.</param>
+        /// <param name="_live">Live migration</param>
+        /// <param name="_vdi_map">Map of source VDI to destination SR</param>
+        /// <param name="_vif_map">Map of source VIF to destination network</param>
+        /// <param name="_options">Other parameters</param>
+        /// <param name="_vgpu_map">Map of source vGPU to destination GPU group First published in XenServer 7.3.</param>
+        public static XenRef<Task> async_assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
+        {
+            return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+        }
+
+        /// <summary>
+        /// Returns a record describing the VM's dynamic state, initialised when the VM boots and updated to reflect runtime configuration changes e.g. CPU hotplug
+        /// First published in XenServer 4.0.
+        /// Deprecated since XenServer 7.3.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("XenServer 7.3")]
         public static VM get_boot_record(Session session, string _vm)
         {
             return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.uuid, _vm ?? "").parse());
@@ -3370,7 +3467,7 @@ namespace XenAPI
         /// <param name="_vm">The opaque_ref of the given vm</param>
         public static List<Data_source> get_data_sources(Session session, string _vm)
         {
-            return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.vm_get_data_sources(session.uuid, _vm ?? "").parse());
+            return Data_source.ProxyArrayToObjectList(session.proxy.vm_get_data_sources(session.uuid, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3623,7 +3720,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set custom BIOS strings to this VM. VM will be given a default set of BIOS strings, only some of which can be overridden by the supplied values. Allowed keys are: 'bios-vendor', 'bios-version', 'system-manufacturer', 'system-product-name', 'system-version', 'system-serial-number', 'enclosure-asset-tag'
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -3635,7 +3732,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set custom BIOS strings to this VM. VM will be given a default set of BIOS strings, only some of which can be overridden by the supplied values. Allowed keys are: 'bios-vendor', 'bios-version', 'system-manufacturer', 'system-product-name', 'system-version', 'system-serial-number', 'enclosure-asset-tag'
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -4525,6 +4622,24 @@ namespace XenAPI
             }
         }
         private List<XenRef<VBD>> _VBDs;
+
+        /// <summary>
+        /// vitual usb devices
+        /// </summary>
+        public virtual List<XenRef<VUSB>> VUSBs
+        {
+            get { return _VUSBs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _VUSBs))
+                {
+                    _VUSBs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("VUSBs");
+                }
+            }
+        }
+        private List<XenRef<VUSB>> _VUSBs;
 
         /// <summary>
         /// crash dumps associated with this VM

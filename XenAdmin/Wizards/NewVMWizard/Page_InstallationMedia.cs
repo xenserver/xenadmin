@@ -39,8 +39,8 @@ using XenAdmin.Core;
 using System.Diagnostics;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
+using XenCenterLib;
 using System.Windows.Forms;
-
 using System.Drawing;
 
 namespace XenAdmin.Wizards.NewVMWizard

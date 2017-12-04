@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Model;
 
 namespace XenAdmin.Actions

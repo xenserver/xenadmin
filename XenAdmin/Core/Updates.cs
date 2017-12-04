@@ -41,6 +41,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using XenAdmin.Dialogs;
 using System.Text;
+using XenCenterLib;
 
 namespace XenAdmin.Core
 {
