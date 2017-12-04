@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="labelTitle.Text" xml:space="preserve">
-    <value>Clustering allows you to create and use GFS2 storage repositories. Select whether you wish to enable clustering on this pool. When enabling clustering you need to provide a network which has an IP Address configured (the management interface or a secondary interface).</value>
+    <value>Clustering allows you to create and use GFS2 storage repositories. Select whether you want to enable clustering on this pool. When enabling clustering you need to provide a network which has an IP Address configured (the management interface or a secondary interface).</value>
   </data>
   <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
     <value>labelTitle</value>
@@ -363,9 +363,9 @@
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="CheckBoxEnableClustering" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelNetwork" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutInfo" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="comboBoxNetwork" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>

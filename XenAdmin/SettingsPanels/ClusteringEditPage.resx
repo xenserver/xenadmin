@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="labelTitle.Text" xml:space="preserve">
-    <value>Clustering allows you to create and use GFS2 storage repositories. Select whether you wish to enable clustering on this pool. When enabling clustering you need to provide a network which has an IP Address configured (the management interface or a secondary interface).</value>
+    <value>Clustering allows you to create and use GFS2 storage repositories. Select whether you want to enable clustering on this pool. When enabling clustering you need to provide a network which has an IP Address configured (the management interface or a secondary interface).</value>
   </data>
   <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
     <value>labelTitle</value>
