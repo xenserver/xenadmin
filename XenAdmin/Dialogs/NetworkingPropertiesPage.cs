@@ -32,6 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -164,6 +165,20 @@ namespace XenAdmin.Dialogs
                 haEnabledWarningIcon.Enabled =
                 haEnabledRubric.Enabled =
                     true;
+            }
+            if (network != null)
+            {
+                var master = Helpers.GetMaster(network.Connection);
+                var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
+                    cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
+                var existingCluster = network.Connection.Cache.Clusters.FirstOrDefault();
+
+                if (clusteringEnabled && existingCluster != null &&
+                    existingCluster.network.opaque_ref == network.opaque_ref)
+                {
+                    DisableControls("DisableForClustering",
+                        string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
+                }
             }
         }
 
@@ -330,6 +345,19 @@ namespace XenAdmin.Dialogs
                                                        int.Parse(bits[3]) + HostCount - 1);
                 }
             }
+        }
+
+        private void DisableControls(string tag, string message)
+        {
+            foreach (Control control in tableLayoutPanelBody.Controls)
+            {
+                if (control.Tag != null && control.Tag.ToString() == tag)
+                {
+                    control.Enabled = false;
+                }
+            }
+            tableLayoutInfo.Visible = true;
+            labelWarning.Text = message;
         }
     }
 }

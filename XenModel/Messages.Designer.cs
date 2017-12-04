@@ -6223,6 +6223,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}..
+        /// </summary>
+        public static string CANNOT_CHANGE_IP_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("CANNOT_CHANGE_IP_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (The network&apos;s MTU cannot be changed because it is in use as the management interface &apos;{0}&apos;).
         /// </summary>
         public static string CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT {
