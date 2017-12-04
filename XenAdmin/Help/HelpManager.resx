@@ -1152,4 +1152,7 @@
   <data name="EditVMSSGeneralSettingsDialog" xml:space="preserve">
     <value>6553</value>
   </data>
+  <data name="NewSRWizard_ProvisioningPane" xml:space="preserve">
+    <value>4029</value>
+  </data>
 </root>

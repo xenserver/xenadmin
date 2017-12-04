@@ -29,13 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin.Wizards;
-using XenAdmin.Wizards.NewSRWizard_Pages;
 using XenAdmin.Wizards.NewSRWizard_Pages.Frontends;
 
 namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
@@ -111,7 +106,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_iSCSI : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_iSCSI()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)  // can't finish because we haven't implemented probes of iSCSI LUNs etc.
+            : base(new string[] { "Type", "Name", "Provisioning", "Location" }, false, false)  // can't finish because we haven't implemented probes of iSCSI LUNs etc.
         { }
 
         protected override NewSRWizard NewWizard()
@@ -130,7 +125,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_HBA : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_HBA()
-            : base(new string[] { "Type", "Name", "Location" }, true, false)
+            : base(new string[] { "Type", "Name", "Provisioning", "Location" }, true, false)
         { }
 
         protected override NewSRWizard NewWizard()
@@ -154,7 +149,7 @@ namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests
     public class NewSRWizardTest_HBANoSelection : WizardTest<NewSRWizard>
     {
         public NewSRWizardTest_HBANoSelection()
-            : base(new string[] { "Type", "Name", "Location" }, false, false)
+            : base(new string[] { "Type", "Name", "Provisioning", "Location" }, false, false)
         { }
 
         protected override NewSRWizard NewWizard()

@@ -50,6 +50,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override string PageTitle { get { return Messages.CHOOSE_SR_PROVISIONING_PAGE_TITLE; } }
 
+        public override string HelpID
+        {
+            get { return "Provisioning"; }
+        }
         #endregion
 
         public bool IsGfs2
