@@ -432,7 +432,7 @@ namespace XenAPI
 
         public static bool RestrictGfs2(Host h)
         {
-            return false; //BoolKeyPreferTrue(h.license_params, "restrict_gfs2");
+            return !Helpers.KolkataOrGreater(h); //BoolKeyPreferTrue(h.license_params, "restrict_gfs2");
         }
 
         public bool HasPBDTo(SR sr)
