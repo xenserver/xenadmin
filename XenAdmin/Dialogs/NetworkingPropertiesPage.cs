@@ -36,6 +36,7 @@ using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAPI;
 
 
 namespace XenAdmin.Dialogs
@@ -166,15 +167,18 @@ namespace XenAdmin.Dialogs
                 haEnabledRubric.Enabled =
                     true;
             }
-            if (network != null)
-            {
-                var master = Helpers.GetMaster(network.Connection);
-                var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
-                    cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
-                var existingCluster = network.Connection.Cache.Clusters.FirstOrDefault();
 
-                if (clusteringEnabled && existingCluster != null &&
-                    existingCluster.network.opaque_ref == network.opaque_ref)
+            var pif = (PIF) Tag;
+            var existingCluster = network != null ? network.Connection.Cache.Clusters.FirstOrDefault() : null;
+
+            if (pif != null && existingCluster != null && existingCluster.network.opaque_ref == network.opaque_ref)
+            {
+                Host host = network.Connection.Resolve(pif.host);
+                    
+                var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
+                    cluster.host.opaque_ref == host.opaque_ref && cluster.enabled);
+                    
+                if (clusteringEnabled && host.enabled)
                 {
                     DisableControls("DisableForClustering",
                         string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
