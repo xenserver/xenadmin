@@ -87,6 +87,15 @@ namespace XenAPI
             return false;
         }
 
+        internal static List<Auth> ProxyArrayToObjectList(Proxy_Auth[] input)
+        {
+            var result = new List<Auth>();
+            foreach (var item in input)
+                result.Add(new Auth(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Auth server)
         {
             if (opaqueRef == null)

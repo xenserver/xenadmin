@@ -832,7 +832,7 @@
     <value>4</value>
   </data>
   <data name="decentGroupBox1.Text" xml:space="preserve">
-    <value>[Citrix] Insight Services による認証</value>
+    <value>[Citrix] Insight Services での認証</value>
   </data>
   <data name="&gt;&gt;decentGroupBox1.Name" xml:space="preserve">
     <value>decentGroupBox1</value>
@@ -871,7 +871,7 @@
     <value>10</value>
   </data>
   <data name="rubricLabel.Text" xml:space="preserve">
-    <value>ヘルス チェックでは、[XenServer] プールで設定された事前定義済みのスケジュールに基づいて、サーバーの状態レポートが [Citrix] Insight Services に自動的にアップロードされます。</value>
+    <value>ヘルス チェックでは、[XenServer] プールで設定された事前定義済みのスケジュールに基づいて、サーバーの状態レポートが自動的に [Citrix] Insight Services にアップロードされます。</value>
   </data>
   <data name="&gt;&gt;rubricLabel.Name" xml:space="preserve">
     <value>rubricLabel</value>

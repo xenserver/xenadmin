@@ -154,7 +154,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;sendCAD.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="contentPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -187,7 +187,88 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelGeneralInformationMessage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelGeneralInformationMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>223, 4</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 3, 0</value>
+  </data>
+  <data name="labelGeneralInformationMessage.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 30</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 26</value>
+  </data>
+  <data name="labelGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
+    <value>您 RDP 客户端已过时。为了获得更好的体验，请更新该客户端。</value>
+  </data>
+  <data name="labelGeneralInformationMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomLeft</value>
+  </data>
+  <data name="labelGeneralInformationMessage.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelGeneralInformationMessage.Name" xml:space="preserve">
+    <value>labelGeneralInformationMessage</value>
+  </data>
+  <data name="&gt;&gt;labelGeneralInformationMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelGeneralInformationMessage.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelGeneralInformationMessage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 0</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 34</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="pictureBoxGeneralInformationMessage.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Name" xml:space="preserve">
+    <value>pictureBoxGeneralInformationMessage</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="scaleCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -223,7 +304,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;scaleCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="fullscreenButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,7 +340,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;fullscreenButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="dockButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -307,7 +388,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;dockButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -343,50 +424,11 @@
     <value>5</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="sendCAD" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="scaleCheckBox" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="fullscreenButton" Row="0" RowSpan="1" Column="4" ColumnSpan="1" />&lt;Control Name="dockButton" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,16" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="labelGeneralInformationMessage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="pictureBoxGeneralInformationMessage" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="sendCAD" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="scaleCheckBox" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="fullscreenButton" Row="0" RowSpan="1" Column="5" ColumnSpan="1" />&lt;Control Name="dockButton" Row="0" RowSpan="1" Column="4" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Absolute,22,Percent,100,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="toggleConsoleButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="toggleConsoleButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toggleConsoleButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="toggleConsoleButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>522, 6</value>
-  </data>
-  <data name="toggleConsoleButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 6, 6, 6</value>
-  </data>
-  <data name="toggleConsoleButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 24</value>
-  </data>
-  <data name="toggleConsoleButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="toggleConsoleButton.Text" xml:space="preserve">
-    <value>正在查找来宾控制台...</value>
-  </data>
-  <data name="toggleConsoleButton.ToolTip" xml:space="preserve">
-    <value>此来宾未启用远程访问</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Name" xml:space="preserve">
-    <value>toggleConsoleButton</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;toggleConsoleButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <metadata name="LifeCycleMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>81, 17</value>
   </metadata>
@@ -548,6 +590,45 @@
   </data>
   <data name="&gt;&gt;buttonSSH.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="toggleConsoleButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="toggleConsoleButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toggleConsoleButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="toggleConsoleButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>522, 6</value>
+  </data>
+  <data name="toggleConsoleButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 6, 6, 6</value>
+  </data>
+  <data name="toggleConsoleButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 24</value>
+  </data>
+  <data name="toggleConsoleButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="toggleConsoleButton.Text" xml:space="preserve">
+    <value>正在查找来宾控制台...</value>
+  </data>
+  <data name="toggleConsoleButton.ToolTip" xml:space="preserve">
+    <value>此来宾未启用远程访问</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Name" xml:space="preserve">
+    <value>toggleConsoleButton</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;toggleConsoleButton.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="multipleDvdIsoList1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

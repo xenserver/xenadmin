@@ -33,7 +33,7 @@ using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     public class ChangeableList<T> : List<T>
     {

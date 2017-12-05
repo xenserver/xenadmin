@@ -40,7 +40,7 @@ using XenAdmin.Core;
 using XenAdmin.Wlb;
 using XenAdmin.Commands;
 using XenAdmin.Actions.VMActions;
-
+using XenCenterLib;
 
 namespace XenAdmin.Dialogs
 {

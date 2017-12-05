@@ -117,6 +117,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<User> ProxyArrayToObjectList(Proxy_User[] input)
+        {
+            var result = new List<User>();
+            foreach (var item in input)
+                result.Add(new User(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, User server)
         {
             if (opaqueRef == null)

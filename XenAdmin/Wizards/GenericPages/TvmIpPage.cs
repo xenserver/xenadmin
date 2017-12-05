@@ -35,7 +35,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using XenAdmin.Controls;
 using XenAdmin.Controls.Common;
-using XenAdmin.Core;
+using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.GenericPages

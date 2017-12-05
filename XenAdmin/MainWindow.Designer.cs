@@ -286,6 +286,7 @@ namespace XenAdmin
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.TabPageUSB = new System.Windows.Forms.TabPage();
             this.disableCbtToolStripMenuItem = new XenAdmin.Commands.CommandToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -368,6 +369,7 @@ namespace XenAdmin
             this.TheTabControl.Controls.Add(this.TabPageSearch);
             this.TheTabControl.Controls.Add(this.TabPageDockerProcess);
             this.TheTabControl.Controls.Add(this.TabPageDockerDetails);
+            this.TheTabControl.Controls.Add(this.TabPageUSB);
             this.TheTabControl.Name = "TheTabControl";
             this.TheTabControl.SelectedIndex = 4;
             // 
@@ -1890,6 +1892,11 @@ namespace XenAdmin
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             // 
+            // TabPageUSB
+            // 
+            resources.ApplyResources(this.TabPageUSB, "TabPageUSB");
+            this.TabPageUSB.Name = "TabPageUSB";
+            this.TabPageUSB.UseVisualStyleBackColor = true;
             // disableCbtToolStripMenuItem
             // 
             this.disableCbtToolStripMenuItem.Command = new XenAdmin.Commands.DisableChangedBlockTrackingCommand();
@@ -2163,6 +2170,7 @@ namespace XenAdmin
         private CommandToolStripMenuItem controlDomainMemoryToolStripMenuItem;
         private CommandToolStripMenuItem enablePVSReadcachingToolStripMenuItem;
         private CommandToolStripMenuItem disablePVSReadcachingToolStripMenuItem;
+        private TabPage TabPageUSB;
         private CommandToolStripMenuItem disableCbtToolStripMenuItem;
         private Label LicenseStatusTitleLabel;
     }

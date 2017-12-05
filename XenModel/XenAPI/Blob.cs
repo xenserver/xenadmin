@@ -138,6 +138,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._mime_type, other._mime_type);
         }
 
+        internal static List<Blob> ProxyArrayToObjectList(Proxy_Blob[] input)
+        {
+            var result = new List<Blob>();
+            foreach (var item in input)
+                result.Add(new Blob(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Blob server)
         {
             if (opaqueRef == null)

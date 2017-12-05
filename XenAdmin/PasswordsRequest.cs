@@ -34,15 +34,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+using XenCenterLib;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using System.Xml;
 using System.IO;
-using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Drawing;
 

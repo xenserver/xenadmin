@@ -40,7 +40,7 @@ using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.Model;
-
+using XenCenterLib;
 
 namespace XenAdmin.Controls.XenSearch
 {

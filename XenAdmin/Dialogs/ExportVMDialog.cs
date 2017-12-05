@@ -36,8 +36,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 using System.Runtime.InteropServices;
-using XenAdmin.Core;
-using System.IO;
+using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs

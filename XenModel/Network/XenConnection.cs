@@ -39,13 +39,13 @@ using CookComputing.XmlRpc;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAPI;
+using XenCenterLib;
 using System.Diagnostics;
-
 using System.Xml.Serialization;
 
+
 namespace XenAdmin.Network
-{
-    
+{   
     [DebuggerDisplay("IXenConnection :{HostnameWithPort}")]
     public class XenConnection : IXenConnection,IXmlSerializable
     {
@@ -757,11 +757,11 @@ namespace XenAdmin.Network
         }
 
         /// <param name="resetState">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
-        public void EndConnect(bool resetState)
+        public void EndConnect(bool resetState, bool exiting = false)
         {
             ConnectTask t = connectTask;
             connectTask = null;
-            EndConnect(resetState, t);
+            EndConnect(resetState, t, exiting);
         }
 
         /// <summary>
@@ -770,7 +770,7 @@ namespace XenAdmin.Network
         /// </summary>
         /// <param name="clearCache">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
         /// <param name="task"></param>
-        private void EndConnect(bool clearCache, ConnectTask task)
+        private void EndConnect(bool clearCache, ConnectTask task, bool exiting)
         {
             OnBeforeConnectionEnd();
 
@@ -784,7 +784,7 @@ namespace XenAdmin.Network
                     task.Session = null;
                     if (session != null)
                     {
-                        Logout(session);
+                        Logout(session, exiting);
                     }
                 }
             }
@@ -817,17 +817,27 @@ namespace XenAdmin.Network
         /// a XenAPI.Failure (which is better than them hanging around forever).
         /// Do on a background thread - otherwise, if the master has died, then this will block
         /// until the timeout is reached (default 20s).
+        /// However, in the case of exiting, the thread need to be set as foreground. 
+        /// Otherwise the logging out operation can be terminated when other foreground threads finish.
         /// </summary>
         /// <param name="session">May be null, in which case nothing happens.</param>
-        public void Logout(Session session)
+        public void Logout(Session session, bool exiting = false)
         {
             if (session == null || session.uuid == null)
                 return;
 
             Thread t = new Thread(Logout_);
             t.Name = string.Format("Logging out session {0}", session.uuid);
-            t.IsBackground = true;
-            t.Priority = ThreadPriority.Lowest;
+            if (exiting)
+            {
+                t.IsBackground = false;
+                t.Priority = ThreadPriority.AboveNormal;
+            }
+            else
+            {
+                t.IsBackground = true;
+                t.Priority = ThreadPriority.Lowest;
+            }
             t.Start(session);
         }
 
@@ -1436,7 +1446,7 @@ namespace XenAdmin.Network
 
                 if (error is ExpressRestriction)
                 {
-                    EndConnect(true, task);
+                    EndConnect(true, task, false);
 
                     ExpressRestriction e = (ExpressRestriction)error;
                     string msg = string.Format(Messages.CONNECTION_RESTRICTED_MESSAGE, e.HostName, e.ExistingHostName);
@@ -1450,7 +1460,7 @@ namespace XenAdmin.Network
                 }
                 else if (error is ServerNotSupported)
                 {
-                    EndConnect(true, task);
+                    EndConnect(true, task, false);
                     log.Info(error.Message);
                     OnConnectionResult(false, error.Message, error);
                 }
@@ -1458,7 +1468,7 @@ namespace XenAdmin.Network
                 {
                     task.Connected = false;
                     log.InfoFormat("IXenConnection: closing connection to {0}", this.HostnameWithPort);
-                    EndConnect(true, task);
+                    EndConnect(true, task, false);
                     OnConnectionClosed();
                 }
                 else if (task.Connected)
@@ -1589,7 +1599,7 @@ namespace XenAdmin.Network
             bool ha_enabled = IsHAEnabled();
 
             // NB line below clears the cache
-            EndConnect(true, task);
+            EndConnect(true, task, false);
 
             string description;
             LastMasterHostname = Hostname;

@@ -31,11 +31,8 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin.Core;
-using XenAdmin.Network;
-using System.Threading.Tasks;
 using XenAPI;
-using XenAdmin.Model;
+using XenCenterLib;
 
 namespace XenServerHealthCheck
 {

@@ -33,10 +33,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Properties;
-using XenAdmin.Actions;
 using XenAPI;
-using XenAdmin.Core;
-
+using XenCenterLib;
 
 namespace XenAdmin.Dialogs.OptionsPages
 {

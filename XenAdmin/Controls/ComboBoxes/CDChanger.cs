@@ -32,7 +32,7 @@
 using System;
 using XenAPI;
 using XenAdmin.Actions;
-using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin.Controls
 {

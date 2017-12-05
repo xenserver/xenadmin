@@ -34,7 +34,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     /// <summary>
     /// This is a dictionary which fires events when it changes.

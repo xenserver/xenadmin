@@ -43,6 +43,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web.Script.Serialization;
 using XenAdmin.Utils;
+using XenCenterLib;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 {

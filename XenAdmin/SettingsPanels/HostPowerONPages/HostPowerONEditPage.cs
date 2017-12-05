@@ -38,6 +38,7 @@ using XenAdmin.Properties;
 using XenAPI;
 using System.Collections.Generic;
 using System.Linq;
+using XenCenterLib;
 
 namespace XenAdmin.SettingsPanels
 {

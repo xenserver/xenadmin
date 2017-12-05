@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     public class ComparableList<T> : List<T>, IComparable, IComparable<ComparableList<T>> where T : IComparable
     {

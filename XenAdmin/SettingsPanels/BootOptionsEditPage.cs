@@ -36,12 +36,11 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using XenAdmin;
 using XenAPI;
 using System.Collections;
 using XenAdmin.Properties;
 using XenAdmin.Actions;
-using XenAdmin.Core;
+using XenCenterLib;
 
 
 namespace XenAdmin.SettingsPanels

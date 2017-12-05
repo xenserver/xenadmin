@@ -30,8 +30,43 @@
  */
 
 using System;
+using System.Windows.Forms;
+using XenAPI;
 
-namespace XenAdmin
+namespace XenAdmin.Dialogs
 {
-    public delegate void ExceptionEventHandler(object sender, Exception e);
+    public partial class UsbUsageDialog : XenDialogBase
+    {
+        private PUSB _pusb;
+
+        public UsbUsageDialog(PUSB pusb)
+        {
+            _pusb = pusb;
+            InitializeComponent();
+            RefreshControls();
+        }
+
+        private void RefreshControls()
+        {
+            if (_pusb.passthrough_enabled)
+            {
+                Text = Messages.DIALOG_USB_USAGE_DISABLE_PASSTHROUGH;
+                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_DENY;
+                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_DISABLE;
+
+                tableLayoutPanelBase.Controls.Remove(tableLayoutPanelWarning);
+            }
+            else
+            {
+                Text = Messages.DIALOG_USB_USAGE_ENABLE_PASSTHROUGH;
+                labelNote.Text = Messages.DIALOG_USB_USAGE_NOTE_ALLOW;
+                buttonOK.Text = Messages.DIALOG_USB_USAGE_OKBUTTON_ENABLE;
+            }
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            new XenAdmin.Actions.SetUsbPassthroughAction (_pusb, !_pusb.passthrough_enabled).RunAsync();
+        }
+    }
 }

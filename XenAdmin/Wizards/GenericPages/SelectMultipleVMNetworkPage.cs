@@ -31,16 +31,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Core;
-using XenAdmin.Dialogs;
 using XenAdmin.Mappings;
 using XenAdmin.Network;
 using XenAPI;
 using System.Linq;
-using XenOvf;
+using XenCenterLib;
 
 namespace XenAdmin.Wizards.GenericPages
 {

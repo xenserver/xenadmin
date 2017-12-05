@@ -74,12 +74,7 @@ namespace XenAdmin.Commands
                                 !draggedVM.allowed_operations.Contains(vm_operations.migrate_send))
                             {
                                 if (draggedVM.power_state == vm_power_state.Running)
-                                {
-                                    if (draggedVM.HasVGPUs())
-                                        return Messages.MIGRATION_NOT_ALLOWED_GPU;
-                                    else
-                                        return Messages.MIGRATION_NOT_ALLOWED;
-                                }
+                                    return Messages.MIGRATION_NOT_ALLOWED;
                                 return null;
                             }
 

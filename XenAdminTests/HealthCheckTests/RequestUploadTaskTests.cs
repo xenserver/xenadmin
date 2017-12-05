@@ -33,14 +33,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using XenAdmin;
 using XenServerHealthCheck;
 using XenAPI;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Network;
-using XenAdminTests;
 using System.IO.Pipes;
-using System.IO;
 using XenAdmin.Model;
 using NUnit.Framework;
 

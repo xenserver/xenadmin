@@ -313,6 +313,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._igmp_snooping_status, other._igmp_snooping_status);
         }
 
+        internal static List<PIF> ProxyArrayToObjectList(Proxy_PIF[] input)
+        {
+            var result = new List<PIF>();
+            foreach (var item in input)
+                result.Add(new PIF(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, PIF server)
         {
             if (opaqueRef == null)
@@ -699,7 +708,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the igmp_snooping_status field of the given PIF.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
@@ -1940,7 +1949,7 @@ namespace XenAPI
 
         /// <summary>
         /// The IGMP snooping status of the corresponding network bridge
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         public virtual pif_igmp_status igmp_snooping_status
         {

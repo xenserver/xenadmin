@@ -729,6 +729,9 @@
   <data name="NO_MORE_REDO_LOGS_ALLOWED" xml:space="preserve">
     <value>The upper limit of active redo log instances was reached.</value>
   </data>
+  <data name="NVIDIA_TOOLS_ERROR" xml:space="preserve">
+    <value>Nvidia tools error. Please ensure that the latest Nvidia tools are installed</value>
+  </data>
   <data name="OBJECT_NOLONGER_EXISTS" xml:space="preserve">
     <value>The specified object no longer exists.</value>
   </data>
@@ -752,6 +755,9 @@
   </data>
   <data name="OUT_OF_SPACE" xml:space="preserve">
     <value>There is not enough space to upload the update</value>
+  </data>
+  <data name="PASSTHROUGH_NOT_ENABLED" xml:space="preserve">
+    <value>The passthrough_enabled must be true before passthrough usb to vm.</value>
   </data>
   <data name="PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>The update {0} has already been applied</value>
@@ -932,6 +938,9 @@
   </data>
   <data name="PROVISION_ONLY_ALLOWED_ON_TEMPLATE" xml:space="preserve">
     <value>The provision call can only be invoked on templates, not regular VMs.</value>
+  </data>
+  <data name="PUSB_VDI_CONFLICT" xml:space="preserve">
+    <value>The VDI corresponding to this PUSB has existing VBDs.</value>
   </data>
   <data name="PVS_CACHE_STORAGE_ALREADY_PRESENT" xml:space="preserve">
     <value>The PVS site already has cache storage configured for the host.</value>
@@ -1676,6 +1685,9 @@ Authorized Roles: {1}</value>
   <data name="TOO_MANY_STORAGE_MIGRATES" xml:space="preserve">
     <value>You reached the maximal number of concurrently migrating VMs.</value>
   </data>
+  <data name="TOO_MANY_VUSBS" xml:space="preserve">
+    <value>The VM has too many VUSBs.</value>
+  </data>
   <data name="TRANSPORT_PIF_NOT_CONFIGURED" xml:space="preserve">
     <value>The tunnel transport PIF has no IP configuration set.</value>
   </data>
@@ -1720,6 +1732,21 @@ Authorized Roles: {1}</value>
   </data>
   <data name="UPDATE_PRECHECK_FAILED_WRONG_SERVER_VERSION" xml:space="preserve">
     <value>The update precheck stage failed: the server is of an incorrect version.</value>
+  </data>
+  <data name="USB_ALREADY_ATTACHED" xml:space="preserve">
+    <value>The USB device is currently attached to a VM.</value>
+  </data>
+  <data name="USB_GROUP_CONFLICT" xml:space="preserve">
+    <value>USB_groups are currently restricted to contain no more than one VUSB.</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_NO_PUSBS" xml:space="preserve">
+    <value>The USB group does not contain any PUSBs.</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_PUSB" xml:space="preserve">
+    <value>The USB group contains active PUSBs and cannot be deleted.</value>
+  </data>
+  <data name="USB_GROUP_CONTAINS_VUSB" xml:space="preserve">
+    <value>The USB group contains active VUSBs and cannot be deleted.</value>
   </data>
   <data name="USER_IS_NOT_LOCAL_SUPERUSER" xml:space="preserve">
     <value>Only the local superuser can perform this operation</value>
@@ -1820,6 +1847,9 @@ Authorized Roles: {1}</value>
   <data name="VDI_TOO_SMALL" xml:space="preserve">
     <value>The VDI is too small. Please resize it to at least the minimum size.</value>
   </data>
+  <data name="VGPU_DESTINATION_INCOMPATIBLE" xml:space="preserve">
+    <value>The VGPU is not compatible with any PGPU in the destination.</value>
+  </data>
   <data name="VGPU_TYPE_NOT_COMPATIBLE_WITH_RUNNING_TYPE" xml:space="preserve">
     <value>The VM cannot start because all GPUs are fully used or are running other types of virtual GPU</value>
   </data>
@@ -1912,6 +1942,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_HAS_VGPU" xml:space="preserve">
     <value>This operation could not be performed, because the VM has one or more virtual GPUs.</value>
+  </data>
+  <data name="VM_HAS_VUSBS" xml:space="preserve">
+    <value>The operation is not allowed when the VM has VUSBs.</value>
   </data>
   <data name="VM_HOST_INCOMPATIBLE_VERSION" xml:space="preserve">
     <value>This VM operation cannot be performed on an older-versioned host during an upgrade.</value>
@@ -2020,6 +2053,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_REQUIRES_VGPU" xml:space="preserve">
     <value>The VM cannot start because no GPU is available</value>
+  </data>
+  <data name="VM_REQUIRES_VUSB" xml:space="preserve">
+    <value>You attempted to run a VM on a host on which the VUSB required by the VM cannot be allocated on any PUSBs in the USB_group needed by the VM.</value>
   </data>
   <data name="VM_REVERT_FAILED" xml:space="preserve">
     <value>An error occurred while reverting the specified virtual machine to the specified snapshot</value>
