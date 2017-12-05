@@ -54,7 +54,7 @@ namespace XenAdmin.Actions
             {
                 PIF.set_disallow_unplug(Session, pif.opaque_ref, true);
             }
-            Cluster.pool_create(Session, Pool.opaque_ref, "corosync", network.opaque_ref);
+            Cluster.pool_create(Session, network.opaque_ref, "corosync");
             Description = string.Format(Messages.ENABLED_CLUSTERING_ON_POOL, Pool.Name());
             
         }

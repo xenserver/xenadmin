@@ -13656,4 +13656,7 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
+  <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disabled clustering on {0}.</value>
+  </data>
 </root>

@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.Linq;
 using XenAPI;
 
 namespace XenAdmin.Actions
@@ -46,7 +47,21 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
+            var existingCluster = Connection.Cache.Clusters.FirstOrDefault();
+            if (existingCluster != null)
+            {
+                Cluster.pool_destroy(Session, existingCluster.opaque_ref);
+                var network = Connection.Resolve(existingCluster.network);
 
+                if (network != null)
+                {
+                    foreach (var pif in Connection.ResolveAll(network.PIFs))
+                    {
+                        PIF.set_disallow_unplug(Session, pif.opaque_ref, false);
+                    }
+                }
+            }
+            Description = string.Format(Messages.DISABLED_CLUSTERING_ON_POOL, Pool.Name());
         }
     }
 }

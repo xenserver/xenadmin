@@ -161,6 +161,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<Cluster> ProxyArrayToObjectList(Proxy_Cluster[] input)
+        {
+            var result = new List<Cluster>();
+            foreach (var item in input)
+                result.Add(new Cluster(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Cluster server)
         {
             if (opaqueRef == null)
@@ -400,12 +409,11 @@ namespace XenAPI
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_pool">The pool to create a Cluster from</param>
-        /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
-        public static XenRef<Cluster> pool_create(Session session, string _pool, string _cluster_stack, string _network)
+        /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
+        public static XenRef<Cluster> pool_create(Session session, string _network, string _cluster_stack)
         {
-            return XenRef<Cluster>.Create(session.proxy.cluster_pool_create(session.uuid, _pool ?? "", _cluster_stack ?? "", _network ?? "").parse());
+            return XenRef<Cluster>.Create(session.proxy.cluster_pool_create(session.uuid, _network ?? "", _cluster_stack ?? "").parse());
         }
 
         /// <summary>
@@ -413,12 +421,33 @@ namespace XenAPI
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_pool">The pool to create a Cluster from</param>
-        /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
-        public static XenRef<Task> async_pool_create(Session session, string _pool, string _cluster_stack, string _network)
+        /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
+        public static XenRef<Task> async_pool_create(Session session, string _network, string _cluster_stack)
         {
-            return XenRef<Task>.Create(session.proxy.async_cluster_pool_create(session.uuid, _pool ?? "", _cluster_stack ?? "", _network ?? "").parse());
+            return XenRef<Task>.Create(session.proxy.async_cluster_pool_create(session.uuid, _network ?? "", _cluster_stack ?? "").parse());
+        }
+
+        /// <summary>
+        /// Attempt to destroy the Cluster_host objects for all hosts in the pool and then destroy the Cluster.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster">The opaque_ref of the given cluster</param>
+        public static void pool_destroy(Session session, string _cluster)
+        {
+            session.proxy.cluster_pool_destroy(session.uuid, _cluster ?? "").parse();
+        }
+
+        /// <summary>
+        /// Attempt to destroy the Cluster_host objects for all hosts in the pool and then destroy the Cluster.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster">The opaque_ref of the given cluster</param>
+        public static XenRef<Task> async_pool_destroy(Session session, string _cluster)
+        {
+            return XenRef<Task>.Create(session.proxy.async_cluster_pool_destroy(session.uuid, _cluster ?? "").parse());
         }
 
         /// <summary>

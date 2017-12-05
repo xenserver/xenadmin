@@ -6796,7 +6796,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the snashot schedule &apos;{1}&apos;.
+        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the snapshot schedule &apos;{1}&apos;.
         ///    
         ///Do you want to assign it to the schedule &apos;{2}&apos; instead?.
         /// </summary>
@@ -11354,6 +11354,15 @@ namespace XenAdmin {
         public static string DISABLED {
             get {
                 return ResourceManager.GetString("DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled clustering on {0}..
+        /// </summary>
+        public static string DISABLED_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLED_CLUSTERING_ON_POOL", resourceCulture);
             }
         }
         

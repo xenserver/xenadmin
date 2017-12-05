@@ -7691,7 +7691,7 @@ namespace XenAPI
         [XmlRpcMethod("vdi_nbd_server_info.get_all_records")]
         Response<Object>
         vdi_nbd_server_info_get_all_records(string session);
-		
+
         [XmlRpcMethod("PUSB.get_record")]
         Response<Proxy_PUSB>
         pusb_get_record(string session, string _pusb);
@@ -8026,11 +8026,19 @@ namespace XenAPI
 
         [XmlRpcMethod("Cluster.pool_create")]
         Response<string>
-        cluster_pool_create(string session, string _pool, string _cluster_stack, string _network);
+        cluster_pool_create(string session, string _network, string _cluster_stack);
 
         [XmlRpcMethod("Async.Cluster.pool_create")]
         Response<string>
-        async_cluster_pool_create(string session, string _pool, string _cluster_stack, string _network);
+        async_cluster_pool_create(string session, string _network, string _cluster_stack);
+
+        [XmlRpcMethod("Cluster.pool_destroy")]
+        Response<string>
+        cluster_pool_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Async.Cluster.pool_destroy")]
+        Response<string>
+        async_cluster_pool_destroy(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.pool_resync")]
         Response<string>
@@ -9086,8 +9094,8 @@ namespace XenAPI
         public string cert;
         public string subject;
     }
-	
-	[XmlRpcMissingMapping(MappingAction.Ignore)]
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class Proxy_PUSB
     {
         public string uuid;
@@ -9104,8 +9112,8 @@ namespace XenAPI
         public bool passthrough_enabled;
         public Object other_config;
     }
-	
-	[XmlRpcMissingMapping(MappingAction.Ignore)]
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class Proxy_USB_group
     {
         public string uuid;
