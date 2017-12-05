@@ -33,8 +33,7 @@ using System;
 using System.Collections.Generic;
 
 using XenAPI;
-
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Actions;
 using XenAdmin.Network;
 

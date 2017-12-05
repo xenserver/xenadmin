@@ -142,7 +142,7 @@
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>ポリシー名(&amp;M):</value>
+    <value>スケジュール名(&amp;M):</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -262,7 +262,7 @@
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.Text" xml:space="preserve">
-    <value>まず、作成するポリシーの名前と説明 (オプション) を入力して、[次へ] をクリックします。</value>
+    <value>まず、作成するスケジュールの名前と説明 (オプション) を入力して、[次へ] をクリックします。</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
@@ -295,7 +295,7 @@
     <value>5</value>
   </data>
   <data name="labelwizard.Text" xml:space="preserve">
-    <value>このウィザードでは、VM を定期的なスナップショット作成で保護するための VM 保護ポリシーを定義します。</value>
+    <value>このウィザードを使用して、自動で VM スナップショット ジョブを実行するスケジュールを定義します。</value>
   </data>
   <data name="&gt;&gt;labelwizard.Name" xml:space="preserve">
     <value>labelwizard</value>

@@ -174,7 +174,7 @@ namespace XenAdmin.Alerts
                         if (XenObject != null)
                         {
                             Host host = XenObject as Host ?? Helpers.GetMaster(Connection);
-                            return string.Format(FriendlyFormat(), Helpers.GetName(XenObject), host == null ? Messages.UNKNOWN : HelpersGUI.HostLicenseExpiryString(host, true, DateTime.UtcNow));
+                            return string.Format(FriendlyFormat(), Helpers.GetName(XenObject));
                         }
                         break;
 

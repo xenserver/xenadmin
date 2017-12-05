@@ -32,7 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using XenCenterLib;
 using XenAdmin.Core;
 using XenAPI;
 

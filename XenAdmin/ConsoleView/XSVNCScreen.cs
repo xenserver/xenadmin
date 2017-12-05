@@ -48,7 +48,7 @@ using System.IO;
 using XenAdmin.Dialogs;
 using System.Security.Cryptography;
 using XenAdmin.Network;
-
+using XenCenterLib;
 using Console = XenAPI.Console;
 using Message = System.Windows.Forms.Message;
 using Timer = System.Threading.Timer;
@@ -116,6 +116,8 @@ namespace XenAdmin.ConsoleView
         public event EventHandler VncConnectionAttemptCancelled;
         public event Action<bool> GpuStatusChanged;
         public event Action<string> ConnectionNameChanged;
+
+        public bool RdpVersionWarningNeeded { get { return rdpClient != null && rdpClient.needsRdpVersionWarning; }}
 
         internal readonly VNCTabView parentVNCTabView;
 

@@ -1155,4 +1155,7 @@
   <data name="NewSRWizard_ProvisioningPane" xml:space="preserve">
     <value>4029</value>
   </data>
+  <data name="TabPageUSB" xml:space="preserve">
+    <value>1020</value>
+  </data>
 </root>

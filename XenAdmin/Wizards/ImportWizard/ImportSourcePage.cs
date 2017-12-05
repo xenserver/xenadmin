@@ -39,7 +39,7 @@ using System.Xml.XPath;
 using DiscUtils;
 using DiscUtils.Wim;
 using XenAdmin.Controls;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Dialogs;
 using XenAdmin.Controls.Common;
 using XenCenterLib.Archive;

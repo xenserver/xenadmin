@@ -38,7 +38,7 @@ using XenAdmin.Controls.MainWindowControls;
 
 using XenAPI;
 using XenAdmin;
-using XenAdmin.Core;
+using XenCenterLib;
 
 
 namespace XenAdminTests.MiscTests

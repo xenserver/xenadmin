@@ -43,6 +43,7 @@ using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
+using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.BugToolWizardFiles

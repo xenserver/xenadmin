@@ -142,7 +142,7 @@
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>策略名称(&amp;M):</value>
+    <value>计划名称(&amp;M):</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -262,7 +262,7 @@
     <value>0</value>
   </data>
   <data name="autoHeightLabel1.Text" xml:space="preserve">
-    <value>开始之前，请输入策略的名称和说明(可选)，然后单击“下一步”。</value>
+    <value>首先，请输入计划的名称和说明(可选)，然后单击“下一步”。</value>
   </data>
   <data name="&gt;&gt;autoHeightLabel1.Name" xml:space="preserve">
     <value>autoHeightLabel1</value>
@@ -295,7 +295,7 @@
     <value>5</value>
   </data>
   <data name="labelwizard.Text" xml:space="preserve">
-    <value>使用此向导可定义 VM 保护策略，这样可以确保通过自动计划快照作业对关键 VM 进行保护。</value>
+    <value>使用此向导可定义为您的 VM 运行自动执行的快照作业的计划。</value>
   </data>
   <data name="&gt;&gt;labelwizard.Name" xml:space="preserve">
     <value>labelwizard</value>

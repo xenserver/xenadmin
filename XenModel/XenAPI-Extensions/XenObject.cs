@@ -35,6 +35,7 @@ using System.Reflection;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin;
+using XenCenterLib;
 
 namespace XenAPI
 {

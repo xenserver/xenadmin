@@ -145,6 +145,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._value, other._value);
         }
 
+        internal static List<Data_source> ProxyArrayToObjectList(Proxy_Data_source[] input)
+        {
+            var result = new List<Data_source>();
+            foreach (var item in input)
+                result.Add(new Data_source(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Data_source server)
         {
             if (opaqueRef == null)

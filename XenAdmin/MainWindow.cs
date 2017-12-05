@@ -59,7 +59,7 @@ using XenAdmin.TabPages;
 using XenAdmin.XenSearch;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Plugins;
-
+using XenCenterLib;
 using System.Linq;
 
 namespace XenAdmin
@@ -103,6 +103,7 @@ namespace XenAdmin
         internal readonly PvsPage PvsPage = new PvsPage();
         internal readonly DockerProcessPage DockerProcessPage = new DockerProcessPage();
         internal readonly DockerDetailsPage DockerDetailsPage = new DockerDetailsPage();
+        internal readonly UsbPage UsbPage = new UsbPage();
 
         private ActionBase statusBarAction = null;
         public ActionBase StatusBarAction { get { return statusBarAction; } }
@@ -172,6 +173,7 @@ namespace XenAdmin
             components.Add(SearchPage);
             components.Add(DockerProcessPage);
             components.Add(DockerDetailsPage);
+            components.Add(UsbPage);
 
             AddTabContents(VMStoragePage, TabPageStorage);
             AddTabContents(SrStoragePage, TabPageSR);
@@ -196,6 +198,7 @@ namespace XenAdmin
             AddTabContents(SearchPage, TabPageSearch);
             AddTabContents(DockerProcessPage, TabPageDockerProcess);
             AddTabContents(DockerDetailsPage, TabPageDockerDetails);
+            AddTabContents(UsbPage, TabPageUSB);
 
             #endregion
 
@@ -1448,8 +1451,8 @@ namespace XenAdmin
             ShowTab(TabPageDockerDetails, !multi && !SearchMode && isDockerContainerSelected);
 
             bool isPoolOrLiveStandaloneHost = isPoolSelected || (isHostSelected && isHostLive && selectionPool == null);
-
             ShowTab(TabPageGPU, !multi && !SearchMode && ((isHostSelected && isHostLive) || isPoolOrLiveStandaloneHost) && Helpers.ClearwaterSp1OrGreater(selectionConnection) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictGpu));
+            ShowTab(TabPageUSB, !multi && !SearchMode && (isHostSelected && isHostLive && (((Host)SelectionManager.Selection.First).PUSBs.Count > 0)) && !Helpers.FeatureForbidden(selectionConnection, Host.RestrictUsbPassthrough));
 
             pluginManager.SetSelectedXenObject(SelectionManager.Selection.FirstAsXenObject);
 
@@ -1887,6 +1890,10 @@ namespace XenAdmin
                 {
                     NetworkPage.XenObject = SelectionManager.Selection.FirstAsXenObject;
                 }
+                else if (t == TabPageUSB)
+                {
+                    UsbPage.XenObject = SelectionManager.Selection.FirstAsXenObject as Host;
+                }
                 else if (t == TabPageNICs)
                 {
                     NICPage.Host = SelectionManager.Selection.First as Host;
@@ -2077,7 +2084,7 @@ namespace XenAdmin
         /// </summary>
         public enum Tab
         {
-            Overview, Home, Settings, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails
+            Overview, Home, Settings, Storage, Network, Console, CvmConsole, Performance, NICs, SR, DockerProcess, DockerDetails, USB
         }
 
         public void SwitchToTab(Tab tab)
@@ -2119,6 +2126,9 @@ namespace XenAdmin
                     break;
                 case Tab.DockerDetails:
                     TheTabControl.SelectedTab = TabPageDockerDetails;
+                    break;
+                case Tab.USB:
+                    TheTabControl.SelectedTab = TabPageUSB;
                     break;
                 default:
                     throw new NotImplementedException();
@@ -2510,6 +2520,8 @@ namespace XenAdmin
                 return "TabPageDockerDetails" + modelObj;
             if (TheTabControl.SelectedTab == TabPagePvs)
                 return "TabPagePvs" + modelObj;
+            if (TheTabControl.SelectedTab == TabPageUSB)
+                return "TabPageUSB" + modelObj;
             return "TabPageUnknown";
         }
 
@@ -2849,7 +2861,7 @@ namespace XenAdmin
         /// </summary>
         private void UpdateHeader()
         {
-            ResetLicenseStatusTitleLabel();
+            bool licenseStatusTitleLabelHandled = false;
 
             if (navigationPane.currentMode == NavigationPane.NavigationMode.Notifications)
                 return;
@@ -2865,6 +2877,7 @@ namespace XenAdmin
                 TitleLabel.Text = xenObject.NameWithLocation();
 
                 UpdateLicenseStatusTitleLabel(xenObject);
+                licenseStatusTitleLabelHandled = true;
 
                 TitleIcon.Image = Images.GetImage16For(xenObject);
                 // When in folder view only show the logged in label if it is clear to which connection the object belongs (most likely pools and hosts)
@@ -2880,6 +2893,9 @@ namespace XenAdmin
                 TitleIcon.Image = Properties.Resources.Logo;
                 loggedInLabel1.Connection = null;
             }
+
+            if (!licenseStatusTitleLabelHandled)
+                ResetLicenseStatusTitleLabel();
 
             SetTitleLabelMaxWidth();
         }
@@ -2900,6 +2916,7 @@ namespace XenAdmin
                     else
                     {
                         LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, pool.LicenseString());
+                        LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
                     }
                 }
             }
@@ -2917,15 +2934,22 @@ namespace XenAdmin
                     else
                     {
                         LicenseStatusTitleLabel.Text = string.Format(Messages.MAINWINDOW_HEADER_LICENSED_WITH, Helpers.GetFriendlyLicenseName(host));
+                        LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
                     }
                 }
+            }
+            else
+            {
+                ResetLicenseStatusTitleLabel();
             }
         }
 
         private void ResetLicenseStatusTitleLabel()
         {
+            if (string.IsNullOrEmpty(LicenseStatusTitleLabel.Text))
+                return;
+
             LicenseStatusTitleLabel.Text = string.Empty;
-            LicenseStatusTitleLabel.ForeColor = Program.TitleBarForeColor;
         }
 
         private void SetTitleLabelMaxWidth()

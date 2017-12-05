@@ -56,7 +56,8 @@ namespace XenAPI
             List<XenRef<VGPU>> resident_VGPUs,
             Dictionary<XenRef<VGPU_type>, long> supported_VGPU_max_capacities,
             pgpu_dom0_access dom0_access,
-            bool is_system_display_device)
+            bool is_system_display_device,
+            Dictionary<string, string> compatibility_metadata)
         {
             this.uuid = uuid;
             this.PCI = PCI;
@@ -69,6 +70,7 @@ namespace XenAPI
             this.supported_VGPU_max_capacities = supported_VGPU_max_capacities;
             this.dom0_access = dom0_access;
             this.is_system_display_device = is_system_display_device;
+            this.compatibility_metadata = compatibility_metadata;
         }
 
         /// <summary>
@@ -93,6 +95,7 @@ namespace XenAPI
             supported_VGPU_max_capacities = update.supported_VGPU_max_capacities;
             dom0_access = update.dom0_access;
             is_system_display_device = update.is_system_display_device;
+            compatibility_metadata = update.compatibility_metadata;
         }
 
         internal void UpdateFromProxy(Proxy_PGPU proxy)
@@ -108,6 +111,7 @@ namespace XenAPI
             supported_VGPU_max_capacities = proxy.supported_VGPU_max_capacities == null ? null : Maps.convert_from_proxy_XenRefVGPU_type_long(proxy.supported_VGPU_max_capacities);
             dom0_access = proxy.dom0_access == null ? (pgpu_dom0_access) 0 : (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), (string)proxy.dom0_access);
             is_system_display_device = (bool)proxy.is_system_display_device;
+            compatibility_metadata = proxy.compatibility_metadata == null ? null : Maps.convert_from_proxy_string_string(proxy.compatibility_metadata);
         }
 
         public Proxy_PGPU ToProxy()
@@ -124,6 +128,7 @@ namespace XenAPI
             result_.supported_VGPU_max_capacities = Maps.convert_to_proxy_XenRefVGPU_type_long(supported_VGPU_max_capacities);
             result_.dom0_access = pgpu_dom0_access_helper.ToString(dom0_access);
             result_.is_system_display_device = is_system_display_device;
+            result_.compatibility_metadata = Maps.convert_to_proxy_string_string(compatibility_metadata);
             return result_;
         }
 
@@ -144,6 +149,7 @@ namespace XenAPI
             supported_VGPU_max_capacities = Maps.convert_from_proxy_XenRefVGPU_type_long(Marshalling.ParseHashTable(table, "supported_VGPU_max_capacities"));
             dom0_access = (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), Marshalling.ParseString(table, "dom0_access"));
             is_system_display_device = Marshalling.ParseBool(table, "is_system_display_device");
+            compatibility_metadata = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "compatibility_metadata"));
         }
 
         public bool DeepEquals(PGPU other)
@@ -163,7 +169,17 @@ namespace XenAPI
                 Helper.AreEqual2(this._resident_VGPUs, other._resident_VGPUs) &&
                 Helper.AreEqual2(this._supported_VGPU_max_capacities, other._supported_VGPU_max_capacities) &&
                 Helper.AreEqual2(this._dom0_access, other._dom0_access) &&
-                Helper.AreEqual2(this._is_system_display_device, other._is_system_display_device);
+                Helper.AreEqual2(this._is_system_display_device, other._is_system_display_device) &&
+                Helper.AreEqual2(this._compatibility_metadata, other._compatibility_metadata);
+        }
+
+        internal static List<PGPU> ProxyArrayToObjectList(Proxy_PGPU[] input)
+        {
+            var result = new List<PGPU>();
+            foreach (var item in input)
+                result.Add(new PGPU(item));
+
+            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, PGPU server)
@@ -328,6 +344,17 @@ namespace XenAPI
         public static bool get_is_system_display_device(Session session, string _pgpu)
         {
             return (bool)session.proxy.pgpu_get_is_system_display_device(session.uuid, _pgpu ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the compatibility_metadata field of the given PGPU.
+        /// First published in XenServer 7.3.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pgpu">The opaque_ref of the given pgpu</param>
+        public static Dictionary<string, string> get_compatibility_metadata(Session session, string _pgpu)
+        {
+            return Maps.convert_from_proxy_string_string(session.proxy.pgpu_get_compatibility_metadata(session.uuid, _pgpu ?? "").parse());
         }
 
         /// <summary>
@@ -754,5 +781,24 @@ namespace XenAPI
             }
         }
         private bool _is_system_display_device;
+
+        /// <summary>
+        /// PGPU metadata to determine whether a VGPU can migrate between two PGPUs
+        /// First published in XenServer 7.3.
+        /// </summary>
+        public virtual Dictionary<string, string> compatibility_metadata
+        {
+            get { return _compatibility_metadata; }
+            set
+            {
+                if (!Helper.AreEqual(value, _compatibility_metadata))
+                {
+                    _compatibility_metadata = value;
+                    Changed = true;
+                    NotifyPropertyChanged("compatibility_metadata");
+                }
+            }
+        }
+        private Dictionary<string, string> _compatibility_metadata;
     }
 }

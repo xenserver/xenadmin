@@ -37,7 +37,7 @@ using XenAPI;
 using System.Xml;
 using XenAdmin.Core;
 using System.Diagnostics;
-
+using XenCenterLib;
 
 namespace XenAdmin.XenSearch
 {

@@ -121,17 +121,128 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="warningsTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="warningsTable.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="warningsTable.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="imgStopVM.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value/>
+  </data>
+  <data name="imgStopVM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="imgStopVM.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value/>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+  <data name="imgStopVM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 2</value>
+  </data>
+  <data name="imgStopVM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 2, 0, 0</value>
+  </data>
+  <data name="imgStopVM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="imgStopVM.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;imgStopVM.Name" xml:space="preserve">
+    <value>imgStopVM</value>
+  </data>
+  <data name="&gt;&gt;imgStopVM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;imgStopVM.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;imgStopVM.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelWarning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 3</value>
+  </data>
+  <data name="labelWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="labelWarning.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>584, 999</value>
+  </data>
+  <data name="labelWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 13</value>
+  </data>
+  <data name="labelWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelWarning.Text" xml:space="preserve">
+    <value>您当前的许可证不允许进行跨池复制。</value>
+  </data>
+  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
+    <value>labelWarning</value>
+  </data>
+  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="warningsTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 130</value>
+  </data>
+  <data name="warningsTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 5, 3, 3</value>
+  </data>
+  <data name="warningsTable.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="warningsTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 19</value>
+  </data>
+  <data name="warningsTable.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;warningsTable.Name" xml:space="preserve">
+    <value>warningsTable</value>
+  </data>
+  <data name="&gt;&gt;warningsTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;warningsTable.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;warningsTable.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="warningsTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="imgStopVM" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,Absolute,100,Absolute,100,Absolute,100" />&lt;/TableLayoutSettings></value>
+  </data>
   <data name="labelRubric.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="labelRubric.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="labelRubric.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
   <data name="labelRubric.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
@@ -157,7 +268,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelRubric.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="intraPoolRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -166,7 +277,10 @@
     <value>NoControl</value>
   </data>
   <data name="intraPoolRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 36</value>
+    <value>4, 36</value>
+  </data>
+  <data name="intraPoolRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 3, 3</value>
   </data>
   <data name="intraPoolRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 17</value>
@@ -187,7 +301,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;intraPoolRadioButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="crossPoolRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -196,7 +310,10 @@
     <value>NoControl</value>
   </data>
   <data name="crossPoolRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 79</value>
+    <value>4, 79</value>
+  </data>
+  <data name="crossPoolRadioButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 3, 3</value>
   </data>
   <data name="crossPoolRadioButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 6, 0, 0</value>
@@ -220,7 +337,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;crossPoolRadioButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="intraPoolDescriptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -256,7 +373,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;intraPoolDescriptionLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="crossPoolDescriptionLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -292,7 +409,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;crossPoolDescriptionLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -301,7 +418,7 @@
     <value>0, 0</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 332</value>
@@ -322,7 +439,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="intraPoolRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="crossPoolRadioButton" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="intraPoolDescriptionLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="crossPoolDescriptionLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,100,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="warningsTable" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelRubric" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="intraPoolRadioButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="crossPoolRadioButton" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="intraPoolDescriptionLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="crossPoolDescriptionLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

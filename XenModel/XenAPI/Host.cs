@@ -94,6 +94,7 @@ namespace XenAPI
             Dictionary<string, string> chipset_info,
             List<XenRef<PCI>> PCIs,
             List<XenRef<PGPU>> PGPUs,
+            List<XenRef<PUSB>> PUSBs,
             bool ssl_legacy,
             Dictionary<string, string> guest_VCPUs_params,
             host_display display,
@@ -151,6 +152,7 @@ namespace XenAPI
             this.chipset_info = chipset_info;
             this.PCIs = PCIs;
             this.PGPUs = PGPUs;
+            this.PUSBs = PUSBs;
             this.ssl_legacy = ssl_legacy;
             this.guest_VCPUs_params = guest_VCPUs_params;
             this.display = display;
@@ -220,6 +222,7 @@ namespace XenAPI
             chipset_info = update.chipset_info;
             PCIs = update.PCIs;
             PGPUs = update.PGPUs;
+            PUSBs = update.PUSBs;
             ssl_legacy = update.ssl_legacy;
             guest_VCPUs_params = update.guest_VCPUs_params;
             display = update.display;
@@ -280,6 +283,7 @@ namespace XenAPI
             chipset_info = proxy.chipset_info == null ? null : Maps.convert_from_proxy_string_string(proxy.chipset_info);
             PCIs = proxy.PCIs == null ? null : XenRef<PCI>.Create(proxy.PCIs);
             PGPUs = proxy.PGPUs == null ? null : XenRef<PGPU>.Create(proxy.PGPUs);
+            PUSBs = proxy.PUSBs == null ? null : XenRef<PUSB>.Create(proxy.PUSBs);
             ssl_legacy = (bool)proxy.ssl_legacy;
             guest_VCPUs_params = proxy.guest_VCPUs_params == null ? null : Maps.convert_from_proxy_string_string(proxy.guest_VCPUs_params);
             display = proxy.display == null ? (host_display) 0 : (host_display)Helper.EnumParseDefault(typeof(host_display), (string)proxy.display);
@@ -341,6 +345,7 @@ namespace XenAPI
             result_.chipset_info = Maps.convert_to_proxy_string_string(chipset_info);
             result_.PCIs = (PCIs != null) ? Helper.RefListToStringArray(PCIs) : new string[] {};
             result_.PGPUs = (PGPUs != null) ? Helper.RefListToStringArray(PGPUs) : new string[] {};
+            result_.PUSBs = (PUSBs != null) ? Helper.RefListToStringArray(PUSBs) : new string[] {};
             result_.ssl_legacy = ssl_legacy;
             result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
             result_.display = host_display_helper.ToString(display);
@@ -406,6 +411,7 @@ namespace XenAPI
             chipset_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "chipset_info"));
             PCIs = Marshalling.ParseSetRef<PCI>(table, "PCIs");
             PGPUs = Marshalling.ParseSetRef<PGPU>(table, "PGPUs");
+            PUSBs = Marshalling.ParseSetRef<PUSB>(table, "PUSBs");
             ssl_legacy = Marshalling.ParseBool(table, "ssl_legacy");
             guest_VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
             display = (host_display)Helper.EnumParseDefault(typeof(host_display), Marshalling.ParseString(table, "display"));
@@ -473,6 +479,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._chipset_info, other._chipset_info) &&
                 Helper.AreEqual2(this._PCIs, other._PCIs) &&
                 Helper.AreEqual2(this._PGPUs, other._PGPUs) &&
+                Helper.AreEqual2(this._PUSBs, other._PUSBs) &&
                 Helper.AreEqual2(this._ssl_legacy, other._ssl_legacy) &&
                 Helper.AreEqual2(this._guest_VCPUs_params, other._guest_VCPUs_params) &&
                 Helper.AreEqual2(this._display, other._display) &&
@@ -481,6 +488,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._updates_requiring_reboot, other._updates_requiring_reboot) &&
                 Helper.AreEqual2(this._features, other._features) &&
                 Helper.AreEqual2(this._iscsi_iqn, other._iscsi_iqn);
+        }
+
+        internal static List<Host> ProxyArrayToObjectList(Proxy_Host[] input)
+        {
+            var result = new List<Host>();
+            foreach (var item in input)
+                result.Add(new Host(item));
+
+            return result;
         }
 
         public override string SaveChanges(Session session, string opaqueRef, Host server)
@@ -1113,6 +1129,17 @@ namespace XenAPI
         public static List<XenRef<PGPU>> get_PGPUs(Session session, string _host)
         {
             return XenRef<PGPU>.Create(session.proxy.host_get_pgpus(session.uuid, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the PUSBs field of the given host.
+        /// First published in XenServer 7.3.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static List<XenRef<PUSB>> get_PUSBs(Session session, string _host)
+        {
+            return XenRef<PUSB>.Create(session.proxy.host_get_pusbs(session.uuid, _host ?? "").parse());
         }
 
         /// <summary>
@@ -1818,7 +1845,7 @@ namespace XenAPI
         /// <param name="_host">The opaque_ref of the given host</param>
         public static List<Data_source> get_data_sources(Session session, string _host)
         {
-            return Helper.Proxy_Data_sourceArrayToData_sourceList(session.proxy.host_get_data_sources(session.uuid, _host ?? "").parse());
+            return Data_source.ProxyArrayToObjectList(session.proxy.host_get_data_sources(session.uuid, _host ?? "").parse());
         }
 
         /// <summary>
@@ -3532,6 +3559,25 @@ namespace XenAPI
             }
         }
         private List<XenRef<PGPU>> _PGPUs;
+
+        /// <summary>
+        /// List of physical USBs in the host
+        /// First published in XenServer 7.3.
+        /// </summary>
+        public virtual List<XenRef<PUSB>> PUSBs
+        {
+            get { return _PUSBs; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PUSBs))
+                {
+                    _PUSBs = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PUSBs");
+                }
+            }
+        }
+        private List<XenRef<PUSB>> _PUSBs;
 
         /// <summary>
         /// Allow SSLv3 protocol and ciphersuites as used by older XenServers. This controls both incoming and outgoing connections. When this is set to a different value, the host immediately restarts its SSL/TLS listening service; typically this takes less than a second but existing connections to it will be broken. XenAPI login sessions will remain valid.

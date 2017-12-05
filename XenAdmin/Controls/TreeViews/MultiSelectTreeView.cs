@@ -35,10 +35,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Collections;
-using System.Drawing.Design;
 using System.ComponentModel;
 using System.Threading;
-using XenAdmin.Core;
+using XenCenterLib;
 using System.Runtime.InteropServices;
 
 namespace XenAdmin.Controls

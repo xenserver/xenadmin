@@ -34,7 +34,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     /// <summary>
     /// Used to centralise the encryption routines used for master password

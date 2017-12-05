@@ -39,6 +39,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAdmin.XenSearch;
 using XenAPI;
+using XenCenterLib;
 
 namespace XenAdminTests.SearchTests
 {

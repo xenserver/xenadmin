@@ -35,10 +35,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Timers;
 using System.Xml;
-using Citrix.XenCenter;
+using XenCenterLib;
 using XenAdmin;
 using XenAdmin.Core;
-using XenAdmin.Model;
 using XenAdmin.Network;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -1823,6 +1822,13 @@ namespace XenAPI
                 var vm = p.VM();
                 return vm != null && vm.Equals(this);
             }); // null if none
+        }
+
+        public bool UsingUpstreamQemu()
+        {
+            return (platform != null) &&
+                platform.ContainsKey("device-model") &&
+                platform["device-model"] == "qemu-upstream-compat";
         }
     }
 

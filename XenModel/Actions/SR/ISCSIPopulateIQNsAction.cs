@@ -38,6 +38,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 using System.Globalization;
+using XenCenterLib;
 
 namespace XenAdmin.Actions
 {
