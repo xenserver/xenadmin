@@ -176,7 +176,7 @@ namespace XenAdmin.Dialogs
                 Host host = network.Connection.Resolve(pif.host);
                     
                 var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
-                    cluster.host.opaque_ref == host.opaque_ref && cluster.enabled);
+                    cluster.host.opaque_ref == pif.host.opaque_ref && cluster.enabled);
                     
                 if (clusteringEnabled && host != null && host.enabled)
                 {
