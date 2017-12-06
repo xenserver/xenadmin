@@ -78,7 +78,7 @@ namespace XenAdmin.Dialogs
             this.NetworkComboBox.FormattingEnabled = true;
             resources.ApplyResources(this.NetworkComboBox, "NetworkComboBox");
             this.NetworkComboBox.Name = "NetworkComboBox";
-            this.NetworkComboBox.Tag = "DisableForClustering";
+            this.NetworkComboBox.Tag = "";
             this.NetworkComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.NetworkComboBox_DrawItem);
             this.NetworkComboBox.SelectedIndexChanged += new System.EventHandler(this.NetworkComboBox_SelectedIndexChanged);
             // 
@@ -87,7 +87,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.Network2Label, "Network2Label");
             this.tableLayoutPanelBody.SetColumnSpan(this.Network2Label, 2);
             this.Network2Label.Name = "Network2Label";
-            this.Network2Label.Tag = "DisableForClustering";
+            this.Network2Label.Tag = "";
             // 
             // PurposeTextBox
             // 
@@ -134,7 +134,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.IpAddressSettingsLabel, "IpAddressSettingsLabel");
             this.tableLayoutPanelBody.SetColumnSpan(this.IpAddressSettingsLabel, 3);
             this.IpAddressSettingsLabel.Name = "IpAddressSettingsLabel";
-            this.IpAddressSettingsLabel.Tag = "DisableForClustering";
+            this.IpAddressSettingsLabel.Tag = "";
             // 
             // tableLayoutPanelStaticSettings
             // 
@@ -160,19 +160,19 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.AlternateDNS2TextBox, "AlternateDNS2TextBox");
             this.AlternateDNS2TextBox.Name = "AlternateDNS2TextBox";
-            this.AlternateDNS2TextBox.Tag = "DisableForClustering";
+            this.AlternateDNS2TextBox.Tag = "";
             // 
             // AlternateDNS2Label
             // 
             resources.ApplyResources(this.AlternateDNS2Label, "AlternateDNS2Label");
             this.AlternateDNS2Label.Name = "AlternateDNS2Label";
-            this.AlternateDNS2Label.Tag = "DisableForClustering";
+            this.AlternateDNS2Label.Tag = "";
             // 
             // IPAddressLabel
             // 
             resources.ApplyResources(this.IPAddressLabel, "IPAddressLabel");
             this.IPAddressLabel.Name = "IPAddressLabel";
-            this.IPAddressLabel.Tag = "DisableForClustering";
+            this.IPAddressLabel.Tag = "";
             // 
             // RangeEndLabel
             // 
@@ -183,59 +183,59 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.IPAddressTextBox, "IPAddressTextBox");
             this.IPAddressTextBox.Name = "IPAddressTextBox";
-            this.IPAddressTextBox.Tag = "DisableForClustering";
+            this.IPAddressTextBox.Tag = "";
             this.IPAddressTextBox.TextChanged += new System.EventHandler(this.IPAddressTextBox_TextChanged);
             // 
             // AlternateDNS1TextBox
             // 
             resources.ApplyResources(this.AlternateDNS1TextBox, "AlternateDNS1TextBox");
             this.AlternateDNS1TextBox.Name = "AlternateDNS1TextBox";
-            this.AlternateDNS1TextBox.Tag = "DisableForClustering";
+            this.AlternateDNS1TextBox.Tag = "";
             this.AlternateDNS1TextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // PreferredDNSLabel
             // 
             resources.ApplyResources(this.PreferredDNSLabel, "PreferredDNSLabel");
             this.PreferredDNSLabel.Name = "PreferredDNSLabel";
-            this.PreferredDNSLabel.Tag = "DisableForClustering";
+            this.PreferredDNSLabel.Tag = "";
             // 
             // AlternateDNS1Label
             // 
             resources.ApplyResources(this.AlternateDNS1Label, "AlternateDNS1Label");
             this.AlternateDNS1Label.Name = "AlternateDNS1Label";
-            this.AlternateDNS1Label.Tag = "DisableForClustering";
+            this.AlternateDNS1Label.Tag = "";
             // 
             // PreferredDNSTextBox
             // 
             resources.ApplyResources(this.PreferredDNSTextBox, "PreferredDNSTextBox");
             this.PreferredDNSTextBox.Name = "PreferredDNSTextBox";
-            this.PreferredDNSTextBox.Tag = "DisableForClustering";
+            this.PreferredDNSTextBox.Tag = "";
             this.PreferredDNSTextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // SubnetMaskLabel
             // 
             resources.ApplyResources(this.SubnetMaskLabel, "SubnetMaskLabel");
             this.SubnetMaskLabel.Name = "SubnetMaskLabel";
-            this.SubnetMaskLabel.Tag = "DisableForClustering";
+            this.SubnetMaskLabel.Tag = "";
             // 
             // GatewayLabel
             // 
             resources.ApplyResources(this.GatewayLabel, "GatewayLabel");
             this.GatewayLabel.Name = "GatewayLabel";
-            this.GatewayLabel.Tag = "DisableForClustering";
+            this.GatewayLabel.Tag = "";
             // 
             // GatewayTextBox
             // 
             resources.ApplyResources(this.GatewayTextBox, "GatewayTextBox");
             this.GatewayTextBox.Name = "GatewayTextBox";
-            this.GatewayTextBox.Tag = "DisableForClustering";
+            this.GatewayTextBox.Tag = "";
             this.GatewayTextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // SubnetTextBox
             // 
             resources.ApplyResources(this.SubnetTextBox, "SubnetTextBox");
             this.SubnetTextBox.Name = "SubnetTextBox";
-            this.SubnetTextBox.Tag = "DisableForClustering";
+            this.SubnetTextBox.Tag = "";
             this.SubnetTextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // panelHAEnabledWarning
@@ -275,7 +275,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelBody.SetColumnSpan(this.FixedIPRadioButton, 2);
             this.FixedIPRadioButton.Name = "FixedIPRadioButton";
             this.FixedIPRadioButton.TabStop = true;
-            this.FixedIPRadioButton.Tag = "DisableForClustering";
+            this.FixedIPRadioButton.Tag = "";
             this.FixedIPRadioButton.UseVisualStyleBackColor = true;
             this.FixedIPRadioButton.CheckedChanged += new System.EventHandler(this.SomethingChanged);
             // 
@@ -285,7 +285,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelBody.SetColumnSpan(this.DHCPIPRadioButton, 2);
             this.DHCPIPRadioButton.Name = "DHCPIPRadioButton";
             this.DHCPIPRadioButton.TabStop = true;
-            this.DHCPIPRadioButton.Tag = "DisableForClustering";
+            this.DHCPIPRadioButton.Tag = "";
             this.DHCPIPRadioButton.UseVisualStyleBackColor = true;
             this.DHCPIPRadioButton.CheckedChanged += new System.EventHandler(this.SomethingChanged);
             // 
@@ -294,7 +294,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.DeleteButton, "DeleteButton");
             this.DeleteButton.Image = global::XenAdmin.Properties.Resources._000_RemoveIPAddress_h32bit_16;
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Tag = "DisableForClustering";
+            this.DeleteButton.Tag = "";
             this.DeleteButton.UseVisualStyleBackColor = true;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 

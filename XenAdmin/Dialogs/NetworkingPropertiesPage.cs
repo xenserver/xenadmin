@@ -353,7 +353,7 @@ namespace XenAdmin.Dialogs
         private void DisableControls(string message)
         {
             Network2Label.Enabled = NetworkComboBox.Enabled = IpAddressSettingsLabel.Enabled =
-                DHCPIPRadioButton.Enabled = FixedIPRadioButton.Enabled = tableLayoutPanelStaticSettings.Enabled = false;
+                DHCPIPRadioButton.Enabled = FixedIPRadioButton.Enabled = tableLayoutPanelStaticSettings.Enabled = DeleteButton.Enabled = false;
             tableLayoutInfo.Visible = true;
             labelWarning.Text = message;
         }
