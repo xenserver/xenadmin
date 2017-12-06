@@ -35,12 +35,12 @@
             this.labelGFS2 = new System.Windows.Forms.Label();
             this.radioButtonLvm = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
+            this.tableLayoutInfo = new System.Windows.Forms.TableLayoutPanel();
             this.labelWarning = new System.Windows.Forms.Label();
             this.pictureBoxInfo = new System.Windows.Forms.PictureBox();
-            this.flowLayoutInfo = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
-            this.flowLayoutInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -51,20 +51,18 @@
             this.tableLayoutPanel1.Controls.Add(this.labelGFS2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.radioButtonLvm, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutInfo, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutInfo, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
             this.label1.Name = "label1";
             // 
             // radioButtonGfs2
             // 
             resources.ApplyResources(this.radioButtonGfs2, "radioButtonGfs2");
             this.radioButtonGfs2.Checked = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonGfs2, 2);
             this.radioButtonGfs2.Name = "radioButtonGfs2";
             this.radioButtonGfs2.TabStop = true;
             this.radioButtonGfs2.UseVisualStyleBackColor = true;
@@ -72,21 +70,25 @@
             // labelGFS2
             // 
             resources.ApplyResources(this.labelGFS2, "labelGFS2");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelGFS2, 2);
             this.labelGFS2.Name = "labelGFS2";
             // 
             // radioButtonLvm
             // 
             resources.ApplyResources(this.radioButtonLvm, "radioButtonLvm");
-            this.tableLayoutPanel1.SetColumnSpan(this.radioButtonLvm, 2);
             this.radioButtonLvm.Name = "radioButtonLvm";
             this.radioButtonLvm.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
-            this.tableLayoutPanel1.SetColumnSpan(this.label3, 2);
             this.label3.Name = "label3";
+            // 
+            // tableLayoutInfo
+            // 
+            resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
+            this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
+            this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo, 0, 0);
+            this.tableLayoutInfo.Name = "tableLayoutInfo";
             // 
             // labelWarning
             // 
@@ -100,14 +102,6 @@
             this.pictureBoxInfo.Name = "pictureBoxInfo";
             this.pictureBoxInfo.TabStop = false;
             // 
-            // flowLayoutInfo
-            // 
-            resources.ApplyResources(this.flowLayoutInfo, "flowLayoutInfo");
-            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutInfo, 2);
-            this.flowLayoutInfo.Controls.Add(this.pictureBoxInfo);
-            this.flowLayoutInfo.Controls.Add(this.labelWarning);
-            this.flowLayoutInfo.Name = "flowLayoutInfo";
-            // 
             // ChooseSrProvisioningPage
             // 
             resources.ApplyResources(this, "$this");
@@ -116,9 +110,9 @@
             this.Name = "ChooseSrProvisioningPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutInfo.ResumeLayout(false);
+            this.tableLayoutInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).EndInit();
-            this.flowLayoutInfo.ResumeLayout(false);
-            this.flowLayoutInfo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -133,6 +127,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBoxInfo;
         private System.Windows.Forms.Label labelWarning;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutInfo;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutInfo;
     }
 }

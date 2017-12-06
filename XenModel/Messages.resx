@@ -2313,6 +2313,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
     <value>You must install [XenServer product] Tools on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
+  <data name="CANNOT_CHANGE_IP_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}.</value>
+  </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(The network's MTU cannot be changed because it is in use as the management interface '{0}')</value>
   </data>
@@ -2755,11 +2758,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on VM "{0}"</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on selected VMs</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on VM "{0}"</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -13652,5 +13655,8 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disabled clustering on {0}.</value>
   </data>
 </root>

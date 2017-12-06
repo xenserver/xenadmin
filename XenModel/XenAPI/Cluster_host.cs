@@ -140,6 +140,15 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
 
+        internal static List<Cluster_host> ProxyArrayToObjectList(Proxy_Cluster_host[] input)
+        {
+            var result = new List<Cluster_host>();
+            foreach (var item in input)
+                result.Add(new Cluster_host(item));
+
+            return result;
+        }
+
         public override string SaveChanges(Session session, string opaqueRef, Cluster_host server)
         {
             if (opaqueRef == null)

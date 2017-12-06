@@ -6349,6 +6349,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}..
+        /// </summary>
+        public static string CANNOT_CHANGE_IP_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("CANNOT_CHANGE_IP_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (The network&apos;s MTU cannot be changed because it is in use as the management interface &apos;{0}&apos;).
         /// </summary>
         public static string CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT {
@@ -6787,7 +6796,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the snashot schedule &apos;{1}&apos;.
+        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the snapshot schedule &apos;{1}&apos;.
         ///    
         ///Do you want to assign it to the schedule &apos;{2}&apos; instead?.
         /// </summary>
@@ -11345,6 +11354,15 @@ namespace XenAdmin {
         public static string DISABLED {
             get {
                 return ResourceManager.GetString("DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled clustering on {0}..
+        /// </summary>
+        public static string DISABLED_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLED_CLUSTERING_ON_POOL", resourceCulture);
             }
         }
         

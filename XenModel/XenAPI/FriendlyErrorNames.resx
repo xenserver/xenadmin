@@ -267,6 +267,9 @@
   <data name="CLUSTER_CREATE_IN_PROGRESS" xml:space="preserve">
     <value>The operation could not be performed because cluster creation is in progress.</value>
   </data>
+  <data name="CLUSTER_DOES_NOT_HAVE_ONE_NODE" xml:space="preserve">
+    <value>The cluster does not have only one node.</value>
+  </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>Could not find a network interface with the specified device name and MAC address.</value>
   </data>

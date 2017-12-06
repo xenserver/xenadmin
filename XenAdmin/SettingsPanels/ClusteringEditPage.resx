@@ -192,6 +192,9 @@
   <data name="&gt;&gt;CheckBoxEnableClustering.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="labelNetwork.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="labelNetwork.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -199,10 +202,10 @@
     <value>NoControl</value>
   </data>
   <data name="labelNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 87</value>
+    <value>22, 89</value>
   </data>
   <data name="labelNetwork.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>22, 5, 3, 0</value>
+    <value>22, 0, 3, 0</value>
   </data>
   <data name="labelNetwork.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -225,8 +228,29 @@
   <data name="&gt;&gt;labelNetwork.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="flowLayoutInfo.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="comboBoxNetwork.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 85</value>
+  </data>
+  <data name="comboBoxNetwork.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 21</value>
+  </data>
+  <data name="comboBoxNetwork.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;comboBoxNetwork.Name" xml:space="preserve">
+    <value>comboBoxNetwork</value>
+  </data>
+  <data name="&gt;&gt;comboBoxNetwork.Type" xml:space="preserve">
+    <value>XenAdmin.Controls.NetworkComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;comboBoxNetwork.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxNetwork.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutInfo.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="pictureBoxInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -253,13 +277,16 @@
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxInfo.Parent" xml:space="preserve">
-    <value>flowLayoutInfo</value>
+    <value>tableLayoutInfo</value>
   </data>
   <data name="&gt;&gt;pictureBoxInfo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="labelWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="labelWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -271,7 +298,7 @@
     <value>0, 6, 3, 0</value>
   </data>
   <data name="labelWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
+    <value>459, 197</value>
   </data>
   <data name="labelWarning.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -283,55 +310,40 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
-    <value>flowLayoutInfo</value>
+    <value>tableLayoutInfo</value>
   </data>
   <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="flowLayoutInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 119</value>
+  <data name="tableLayoutInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="flowLayoutInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
+  <data name="tableLayoutInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 112</value>
   </data>
-  <data name="flowLayoutInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+  <data name="tableLayoutInfo.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="flowLayoutInfo.TabIndex" type="System.Int32, mscorlib">
+  <data name="tableLayoutInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>484, 203</value>
+  </data>
+  <data name="tableLayoutInfo.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;flowLayoutInfo.Name" xml:space="preserve">
-    <value>flowLayoutInfo</value>
+  <data name="&gt;&gt;tableLayoutInfo.Name" xml:space="preserve">
+    <value>tableLayoutInfo</value>
   </data>
-  <data name="&gt;&gt;flowLayoutInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tableLayoutInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;flowLayoutInfo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutInfo.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;flowLayoutInfo.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="comboBoxNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 85</value>
-  </data>
-  <data name="comboBoxNetwork.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 21</value>
-  </data>
-  <data name="comboBoxNetwork.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;comboBoxNetwork.Name" xml:space="preserve">
-    <value>comboBoxNetwork</value>
-  </data>
-  <data name="&gt;&gt;comboBoxNetwork.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.NetworkComboBox, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;comboBoxNetwork.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;comboBoxNetwork.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutInfo.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="tableLayoutInfo.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBoxInfo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -361,7 +373,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="CheckBoxEnableClustering" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelNetwork" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flowLayoutInfo" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="comboBoxNetwork" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="CheckBoxEnableClustering" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelNetwork" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="comboBoxNetwork" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutInfo" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

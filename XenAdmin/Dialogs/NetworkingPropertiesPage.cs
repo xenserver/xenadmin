@@ -32,8 +32,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAPI;
 using XenCenterLib;
 
 
@@ -164,6 +166,22 @@ namespace XenAdmin.Dialogs
                 haEnabledWarningIcon.Enabled =
                 haEnabledRubric.Enabled =
                     true;
+            }
+
+            var pif = Tag as PIF;
+            var existingCluster = network != null ? network.Connection.Cache.Clusters.FirstOrDefault() : null;
+
+            if (pif != null && existingCluster != null && existingCluster.network.opaque_ref == network.opaque_ref)
+            {
+                Host host = network.Connection.Resolve(pif.host);
+                    
+                var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
+                    cluster.host.opaque_ref == pif.host.opaque_ref && cluster.enabled);
+                    
+                if (clusteringEnabled && host != null && host.enabled)
+                {
+                    DisableControls(string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
+                }
             }
         }
 
@@ -330,6 +348,14 @@ namespace XenAdmin.Dialogs
                                                        int.Parse(bits[3]) + HostCount - 1);
                 }
             }
+        }
+
+        private void DisableControls(string message)
+        {
+            Network2Label.Enabled = NetworkComboBox.Enabled = IpAddressSettingsLabel.Enabled =
+                DHCPIPRadioButton.Enabled = FixedIPRadioButton.Enabled = tableLayoutPanelStaticSettings.Enabled = DeleteButton.Enabled = false;
+            tableLayoutInfo.Visible = true;
+            labelWarning.Text = message;
         }
     }
 }
