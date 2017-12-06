@@ -255,612 +255,6 @@
   <data name="tableLayoutPanelStaticSettings.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;AlternateDNS2TextBox.Name" xml:space="preserve">
-    <value>AlternateDNS2TextBox</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS2TextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS2TextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS2TextBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS2Label.Name" xml:space="preserve">
-    <value>AlternateDNS2Label</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS2Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS2Label.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS2Label.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;IPAddressLabel.Name" xml:space="preserve">
-    <value>IPAddressLabel</value>
-  </data>
-  <data name="&gt;&gt;IPAddressLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;IPAddressLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;IPAddressLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;RangeEndLabel.Name" xml:space="preserve">
-    <value>RangeEndLabel</value>
-  </data>
-  <data name="&gt;&gt;RangeEndLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RangeEndLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;RangeEndLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;IPAddressTextBox.Name" xml:space="preserve">
-    <value>IPAddressTextBox</value>
-  </data>
-  <data name="&gt;&gt;IPAddressTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;IPAddressTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;IPAddressTextBox.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS1TextBox.Name" xml:space="preserve">
-    <value>AlternateDNS1TextBox</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS1TextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS1TextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS1TextBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;PreferredDNSLabel.Name" xml:space="preserve">
-    <value>PreferredDNSLabel</value>
-  </data>
-  <data name="&gt;&gt;PreferredDNSLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PreferredDNSLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;PreferredDNSLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS1Label.Name" xml:space="preserve">
-    <value>AlternateDNS1Label</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS1Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS1Label.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;AlternateDNS1Label.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;PreferredDNSTextBox.Name" xml:space="preserve">
-    <value>PreferredDNSTextBox</value>
-  </data>
-  <data name="&gt;&gt;PreferredDNSTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PreferredDNSTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;PreferredDNSTextBox.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;SubnetMaskLabel.Name" xml:space="preserve">
-    <value>SubnetMaskLabel</value>
-  </data>
-  <data name="&gt;&gt;SubnetMaskLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SubnetMaskLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;SubnetMaskLabel.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;GatewayLabel.Name" xml:space="preserve">
-    <value>GatewayLabel</value>
-  </data>
-  <data name="&gt;&gt;GatewayLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GatewayLabel.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;GatewayLabel.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;GatewayTextBox.Name" xml:space="preserve">
-    <value>GatewayTextBox</value>
-  </data>
-  <data name="&gt;&gt;GatewayTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GatewayTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;GatewayTextBox.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;SubnetTextBox.Name" xml:space="preserve">
-    <value>SubnetTextBox</value>
-  </data>
-  <data name="&gt;&gt;SubnetTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SubnetTextBox.Parent" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;SubnetTextBox.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="tableLayoutPanelStaticSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 176</value>
-  </data>
-  <data name="tableLayoutPanelStaticSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tableLayoutPanelStaticSettings.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="tableLayoutPanelStaticSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 144</value>
-  </data>
-  <data name="tableLayoutPanelStaticSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelStaticSettings.Name" xml:space="preserve">
-    <value>tableLayoutPanelStaticSettings</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelStaticSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelStaticSettings.Parent" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelStaticSettings.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tableLayoutPanelStaticSettings.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="AlternateDNS2TextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="AlternateDNS2Label" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="IPAddressLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="RangeEndLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="IPAddressTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="AlternateDNS1TextBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="PreferredDNSLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AlternateDNS1Label" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PreferredDNSTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="SubnetMaskLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="GatewayLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="GatewayTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="SubnetTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Absolute,24,Absolute,24,Absolute,24,Absolute,24,Absolute,24,Absolute,24" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="&gt;&gt;haEnabledRubric.Name" xml:space="preserve">
-    <value>haEnabledRubric</value>
-  </data>
-  <data name="&gt;&gt;haEnabledRubric.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;haEnabledRubric.Parent" xml:space="preserve">
-    <value>panelHAEnabledWarning</value>
-  </data>
-  <data name="&gt;&gt;haEnabledRubric.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;haEnabledWarningIcon.Name" xml:space="preserve">
-    <value>haEnabledWarningIcon</value>
-  </data>
-  <data name="&gt;&gt;haEnabledWarningIcon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;haEnabledWarningIcon.Parent" xml:space="preserve">
-    <value>panelHAEnabledWarning</value>
-  </data>
-  <data name="&gt;&gt;haEnabledWarningIcon.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panelHAEnabledWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panelHAEnabledWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelHAEnabledWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="panelHAEnabledWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 25</value>
-  </data>
-  <data name="panelHAEnabledWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panelHAEnabledWarning.Name" xml:space="preserve">
-    <value>panelHAEnabledWarning</value>
-  </data>
-  <data name="&gt;&gt;panelHAEnabledWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelHAEnabledWarning.Parent" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;panelHAEnabledWarning.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningText.Name" xml:space="preserve">
-    <value>InUseWarningText</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningText.Parent" xml:space="preserve">
-    <value>panelInUseWarning</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningIcon.Name" xml:space="preserve">
-    <value>InUseWarningIcon</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningIcon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningIcon.Parent" xml:space="preserve">
-    <value>panelInUseWarning</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningIcon.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panelInUseWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panelInUseWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 83</value>
-  </data>
-  <data name="panelInUseWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 5, 0, 0</value>
-  </data>
-  <data name="panelInUseWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 26</value>
-  </data>
-  <data name="panelInUseWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;panelInUseWarning.Name" xml:space="preserve">
-    <value>panelInUseWarning</value>
-  </data>
-  <data name="&gt;&gt;panelInUseWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelInUseWarning.Parent" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;panelInUseWarning.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="FixedIPRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="FixedIPRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="FixedIPRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 156</value>
-  </data>
-  <data name="FixedIPRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 17</value>
-  </data>
-  <data name="FixedIPRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="FixedIPRadioButton.Text" xml:space="preserve">
-    <value>&amp;Use these settings:</value>
-  </data>
-  <data name="&gt;&gt;FixedIPRadioButton.Name" xml:space="preserve">
-    <value>FixedIPRadioButton</value>
-  </data>
-  <data name="&gt;&gt;FixedIPRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FixedIPRadioButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;FixedIPRadioButton.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="DHCPIPRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="DHCPIPRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="DHCPIPRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 133</value>
-  </data>
-  <data name="DHCPIPRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 17</value>
-  </data>
-  <data name="DHCPIPRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="DHCPIPRadioButton.Text" xml:space="preserve">
-    <value>&amp;Automatically obtain settings using DHCP</value>
-  </data>
-  <data name="&gt;&gt;DHCPIPRadioButton.Name" xml:space="preserve">
-    <value>DHCPIPRadioButton</value>
-  </data>
-  <data name="&gt;&gt;DHCPIPRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DHCPIPRadioButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;DHCPIPRadioButton.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="DeleteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="DeleteButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="DeleteButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="DeleteButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="DeleteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="DeleteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 371</value>
-  </data>
-  <data name="DeleteButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 0, 5, 0</value>
-  </data>
-  <data name="DeleteButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 23</value>
-  </data>
-  <data name="DeleteButton.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="DeleteButton.Text" xml:space="preserve">
-    <value>&amp;Remove IP Address</value>
-  </data>
-  <data name="DeleteButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;DeleteButton.Name" xml:space="preserve">
-    <value>DeleteButton</value>
-  </data>
-  <data name="&gt;&gt;DeleteButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DeleteButton.Parent" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;DeleteButton.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="tableLayoutInfo.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>18, 16</value>
-  </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>tableLayoutInfo</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 0</value>
-  </data>
-  <data name="labelWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 35</value>
-  </data>
-  <data name="labelWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
-    <value>labelWarning</value>
-  </data>
-  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
-    <value>tableLayoutInfo</value>
-  </data>
-  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 330</value>
-  </data>
-  <data name="tableLayoutInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 3</value>
-  </data>
-  <data name="tableLayoutInfo.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 35</value>
-  </data>
-  <data name="tableLayoutInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="tableLayoutInfo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutInfo.Name" xml:space="preserve">
-    <value>tableLayoutInfo</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutInfo.Parent" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutInfo.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="tableLayoutInfo.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tableLayoutPanelBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanelBody.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tableLayoutPanelBody.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 0, 3</value>
-  </data>
-  <data name="tableLayoutPanelBody.RowCount" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="tableLayoutPanelBody.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 397</value>
-  </data>
-  <data name="tableLayoutPanelBody.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelBody.Name" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelBody.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelBody.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelBody.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanelBody.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="IpAddressSettingsLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="PurposeLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="PurposeTextBox" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelStaticSettings" Row="7" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panelHAEnabledWarning" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="NetworkComboBox" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="Network2Label" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="panelInUseWarning" Row="3" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="FixedIPRadioButton" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="DHCPIPRadioButton" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="DeleteButton" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutInfo" Row="8" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,Absolute,60,Percent,100" /&gt;&lt;Rows Styles="Absolute,25,AutoSize,0,AutoSize,0,Absolute,31,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,29" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="Network2Label.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="Network2Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Network2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 51</value>
-  </data>
-  <data name="Network2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 0, 6, 0</value>
-  </data>
-  <data name="Network2Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 27</value>
-  </data>
-  <data name="Network2Label.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="Network2Label.Text" xml:space="preserve">
-    <value>&amp;Network:</value>
-  </data>
-  <data name="Network2Label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;Network2Label.Name" xml:space="preserve">
-    <value>Network2Label</value>
-  </data>
-  <data name="&gt;&gt;Network2Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Network2Label.Parent" xml:space="preserve">
-    <value>tableLayoutPanelBody</value>
-  </data>
-  <data name="&gt;&gt;Network2Label.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="InUseWarningText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="InUseWarningText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="InUseWarningText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 0</value>
-  </data>
-  <data name="InUseWarningText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 26</value>
-  </data>
-  <data name="InUseWarningText.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningText.Name" xml:space="preserve">
-    <value>InUseWarningText</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningText.Parent" xml:space="preserve">
-    <value>panelInUseWarning</value>
-  </data>
-  <data name="&gt;&gt;InUseWarningText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="haEnabledRubric.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="haEnabledRubric.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="haEnabledRubric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 0</value>
-  </data>
-  <data name="haEnabledRubric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 25</value>
-  </data>
-  <data name="haEnabledRubric.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="haEnabledRubric.Text" xml:space="preserve">
-    <value>The primary interface cannot be reconfigured because HA is enabled</value>
-  </data>
-  <data name="&gt;&gt;haEnabledRubric.Name" xml:space="preserve">
-    <value>haEnabledRubric</value>
-  </data>
-  <data name="&gt;&gt;haEnabledRubric.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;haEnabledRubric.Parent" xml:space="preserve">
-    <value>panelHAEnabledWarning</value>
-  </data>
-  <data name="&gt;&gt;haEnabledRubric.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="AlternateDNS2TextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 120</value>
   </data>
@@ -1287,6 +681,66 @@
   <data name="&gt;&gt;SubnetTextBox.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="tableLayoutPanelStaticSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 176</value>
+  </data>
+  <data name="tableLayoutPanelStaticSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanelStaticSettings.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanelStaticSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>385, 144</value>
+  </data>
+  <data name="tableLayoutPanelStaticSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelStaticSettings.Name" xml:space="preserve">
+    <value>tableLayoutPanelStaticSettings</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelStaticSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelStaticSettings.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelStaticSettings.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanelStaticSettings.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="AlternateDNS2TextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="AlternateDNS2Label" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="IPAddressLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="RangeEndLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="IPAddressTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="AlternateDNS1TextBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="PreferredDNSLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="AlternateDNS1Label" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PreferredDNSTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="SubnetMaskLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="GatewayLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="GatewayTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="SubnetTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Absolute,24,Absolute,24,Absolute,24,Absolute,24,Absolute,24,Absolute,24" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="haEnabledRubric.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="haEnabledRubric.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="haEnabledRubric.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 0</value>
+  </data>
+  <data name="haEnabledRubric.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 25</value>
+  </data>
+  <data name="haEnabledRubric.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="haEnabledRubric.Text" xml:space="preserve">
+    <value>The primary interface cannot be reconfigured because HA is enabled</value>
+  </data>
+  <data name="&gt;&gt;haEnabledRubric.Name" xml:space="preserve">
+    <value>haEnabledRubric</value>
+  </data>
+  <data name="&gt;&gt;haEnabledRubric.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;haEnabledRubric.Parent" xml:space="preserve">
+    <value>panelHAEnabledWarning</value>
+  </data>
+  <data name="&gt;&gt;haEnabledRubric.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="haEnabledWarningIcon.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -1317,6 +771,60 @@
   <data name="&gt;&gt;haEnabledWarningIcon.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="panelHAEnabledWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelHAEnabledWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelHAEnabledWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="panelHAEnabledWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 25</value>
+  </data>
+  <data name="panelHAEnabledWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelHAEnabledWarning.Name" xml:space="preserve">
+    <value>panelHAEnabledWarning</value>
+  </data>
+  <data name="&gt;&gt;panelHAEnabledWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelHAEnabledWarning.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;panelHAEnabledWarning.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="InUseWarningText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="InUseWarningText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="InUseWarningText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 0</value>
+  </data>
+  <data name="InUseWarningText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 26</value>
+  </data>
+  <data name="InUseWarningText.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;InUseWarningText.Name" xml:space="preserve">
+    <value>InUseWarningText</value>
+  </data>
+  <data name="&gt;&gt;InUseWarningText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;InUseWarningText.Parent" xml:space="preserve">
+    <value>panelInUseWarning</value>
+  </data>
+  <data name="&gt;&gt;InUseWarningText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="InUseWarningIcon.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -1346,6 +854,294 @@
   </data>
   <data name="&gt;&gt;InUseWarningIcon.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="panelInUseWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelInUseWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 83</value>
+  </data>
+  <data name="panelInUseWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 0</value>
+  </data>
+  <data name="panelInUseWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 26</value>
+  </data>
+  <data name="panelInUseWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;panelInUseWarning.Name" xml:space="preserve">
+    <value>panelInUseWarning</value>
+  </data>
+  <data name="&gt;&gt;panelInUseWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelInUseWarning.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;panelInUseWarning.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="FixedIPRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="FixedIPRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="FixedIPRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 156</value>
+  </data>
+  <data name="FixedIPRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
+  </data>
+  <data name="FixedIPRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="FixedIPRadioButton.Text" xml:space="preserve">
+    <value>&amp;Use these settings:</value>
+  </data>
+  <data name="&gt;&gt;FixedIPRadioButton.Name" xml:space="preserve">
+    <value>FixedIPRadioButton</value>
+  </data>
+  <data name="&gt;&gt;FixedIPRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FixedIPRadioButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;FixedIPRadioButton.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="DHCPIPRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="DHCPIPRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="DHCPIPRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 133</value>
+  </data>
+  <data name="DHCPIPRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 17</value>
+  </data>
+  <data name="DHCPIPRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="DHCPIPRadioButton.Text" xml:space="preserve">
+    <value>&amp;Automatically obtain settings using DHCP</value>
+  </data>
+  <data name="&gt;&gt;DHCPIPRadioButton.Name" xml:space="preserve">
+    <value>DHCPIPRadioButton</value>
+  </data>
+  <data name="&gt;&gt;DHCPIPRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DHCPIPRadioButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;DHCPIPRadioButton.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="DeleteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="DeleteButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="DeleteButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="DeleteButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="DeleteButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="DeleteButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 371</value>
+  </data>
+  <data name="DeleteButton.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 5, 0</value>
+  </data>
+  <data name="DeleteButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 23</value>
+  </data>
+  <data name="DeleteButton.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="DeleteButton.Text" xml:space="preserve">
+    <value>&amp;Remove IP Address</value>
+  </data>
+  <data name="DeleteButton.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;DeleteButton.Name" xml:space="preserve">
+    <value>DeleteButton</value>
+  </data>
+  <data name="&gt;&gt;DeleteButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DeleteButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;DeleteButton.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="tableLayoutInfo.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 16</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+    <value>tableLayoutInfo</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelWarning.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 0</value>
+  </data>
+  <data name="labelWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 35</value>
+  </data>
+  <data name="labelWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelWarning.Name" xml:space="preserve">
+    <value>labelWarning</value>
+  </data>
+  <data name="&gt;&gt;labelWarning.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelWarning.Parent" xml:space="preserve">
+    <value>tableLayoutInfo</value>
+  </data>
+  <data name="&gt;&gt;labelWarning.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 330</value>
+  </data>
+  <data name="tableLayoutInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 3</value>
+  </data>
+  <data name="tableLayoutInfo.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 35</value>
+  </data>
+  <data name="tableLayoutInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="tableLayoutInfo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutInfo.Name" xml:space="preserve">
+    <value>tableLayoutInfo</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutInfo.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutInfo.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="tableLayoutInfo.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanelBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanelBody.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanelBody.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 3</value>
+  </data>
+  <data name="tableLayoutPanelBody.RowCount" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="tableLayoutPanelBody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>405, 397</value>
+  </data>
+  <data name="tableLayoutPanelBody.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBody.Name" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBody.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBody.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelBody.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelBody.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="IpAddressSettingsLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="PurposeLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="PurposeTextBox" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelStaticSettings" Row="7" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="panelHAEnabledWarning" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="NetworkComboBox" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="Network2Label" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="panelInUseWarning" Row="3" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="FixedIPRadioButton" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="DHCPIPRadioButton" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="DeleteButton" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutInfo" Row="8" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,Absolute,60,Percent,100" /&gt;&lt;Rows Styles="Absolute,25,AutoSize,0,AutoSize,0,Absolute,31,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,29" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="Network2Label.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="Network2Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Network2Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 51</value>
+  </data>
+  <data name="Network2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 6, 0</value>
+  </data>
+  <data name="Network2Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 27</value>
+  </data>
+  <data name="Network2Label.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="Network2Label.Text" xml:space="preserve">
+    <value>&amp;Network:</value>
+  </data>
+  <data name="Network2Label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;Network2Label.Name" xml:space="preserve">
+    <value>Network2Label</value>
+  </data>
+  <data name="&gt;&gt;Network2Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Network2Label.Parent" xml:space="preserve">
+    <value>tableLayoutPanelBody</value>
+  </data>
+  <data name="&gt;&gt;Network2Label.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

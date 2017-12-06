@@ -168,7 +168,7 @@ namespace XenAdmin.Dialogs
                     true;
             }
 
-            var pif = (PIF) Tag;
+            var pif = Tag as PIF;
             var existingCluster = network != null ? network.Connection.Cache.Clusters.FirstOrDefault() : null;
 
             if (pif != null && existingCluster != null && existingCluster.network.opaque_ref == network.opaque_ref)
@@ -178,10 +178,9 @@ namespace XenAdmin.Dialogs
                 var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
                     cluster.host.opaque_ref == host.opaque_ref && cluster.enabled);
                     
-                if (clusteringEnabled && host.enabled)
+                if (clusteringEnabled && host != null && host.enabled)
                 {
-                    DisableControls("DisableForClustering",
-                        string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
+                    DisableControls(string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
                 }
             }
         }
@@ -351,15 +350,10 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        private void DisableControls(string tag, string message)
+        private void DisableControls(string message)
         {
-            foreach (Control control in tableLayoutPanelBody.Controls)
-            {
-                if (control.Tag != null && control.Tag.ToString() == tag)
-                {
-                    control.Enabled = false;
-                }
-            }
+            Network2Label.Enabled = NetworkComboBox.Enabled = IpAddressSettingsLabel.Enabled =
+                DHCPIPRadioButton.Enabled = FixedIPRadioButton.Enabled = tableLayoutPanelStaticSettings.Enabled = false;
             tableLayoutInfo.Visible = true;
             labelWarning.Text = message;
         }

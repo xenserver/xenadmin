@@ -32,14 +32,14 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.CheckBoxEnableClustering = new System.Windows.Forms.CheckBox();
             this.labelNetwork = new System.Windows.Forms.Label();
+            this.tableLayoutInfo = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBoxInfo = new System.Windows.Forms.PictureBox();
             this.labelWarning = new System.Windows.Forms.Label();
-            this.tableLayoutInfo = new System.Windows.Forms.TableLayoutPanel();
             this.labelTitle = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.comboBoxNetwork = new XenAdmin.Controls.NetworkComboBox();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
             this.tableLayoutInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -64,6 +64,14 @@
             resources.ApplyResources(this.labelNetwork, "labelNetwork");
             this.labelNetwork.Name = "labelNetwork";
             // 
+            // tableLayoutInfo
+            // 
+            resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutInfo, 2);
+            this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo, 0, 0);
+            this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
+            this.tableLayoutInfo.Name = "tableLayoutInfo";
+            // 
             // pictureBoxInfo
             // 
             this.pictureBoxInfo.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
@@ -75,14 +83,6 @@
             // 
             resources.ApplyResources(this.labelWarning, "labelWarning");
             this.labelWarning.Name = "labelWarning";
-            // 
-            // tableLayoutInfo
-            // 
-            resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
-            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutInfo, 2);
-            this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo, 0, 0);
-            this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
-            this.tableLayoutInfo.Name = "tableLayoutInfo";
             // 
             // labelTitle
             // 
@@ -108,9 +108,9 @@
             this.Name = "ClusteringEditPage";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).EndInit();
             this.tableLayoutInfo.ResumeLayout(false);
             this.tableLayoutInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
