@@ -2749,11 +2749,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on selected VMs</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on VM "{0}"</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on selected VMs</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -10437,6 +10437,12 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>Rolling Pool &amp;Upgrade...</value>
+  </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
+    <value>S&amp;top</value>
+  </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_TEST" xml:space="preserve">
+    <value>&amp;Test</value>
   </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again.</value>

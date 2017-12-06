@@ -6787,7 +6787,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the snashot schedule &apos;{1}&apos;.
+        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the snapshot schedule &apos;{1}&apos;.
         ///    
         ///Do you want to assign it to the schedule &apos;{2}&apos; instead?.
         /// </summary>
@@ -30034,6 +30034,24 @@ namespace XenAdmin {
         public static string ROLLING_POOL_UPGRADE_ELLIPSIS {
             get {
                 return ResourceManager.GetString("ROLLING_POOL_UPGRADE_ELLIPSIS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S&amp;top.
+        /// </summary>
+        public static string ROLLING_UPGRADE_BUTTON_LABEL_STOP {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_BUTTON_LABEL_STOP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Test.
+        /// </summary>
+        public static string ROLLING_UPGRADE_BUTTON_LABEL_TEST {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_BUTTON_LABEL_TEST", resourceCulture);
             }
         }
         
