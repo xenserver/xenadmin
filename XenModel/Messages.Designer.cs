@@ -7224,7 +7224,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changing the memory of these VMs while they are running will cause them to be forcibly rebooted. This operation can lose data.
+        ///   Looks up a localized string similar to Changing the memory of these VMs while they are running will cause them to be forcibly rebooted. This operation can cause data loss.
         ///
         ///Do you want to continue?.
         /// </summary>
@@ -7235,7 +7235,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changing the memory of this VM while it is running will cause it to be forcibly rebooted. This operation can lose data.
+        ///   Looks up a localized string similar to Changing the memory of this VM while it is running will cause it to be forcibly rebooted. This operation can cause data loss.
         ///
         ///Do you want to continue?.
         /// </summary>

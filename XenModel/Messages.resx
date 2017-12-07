@@ -2625,12 +2625,12 @@ Do you want to continue?</value>
 Do you want to continue?</value>
   </data>
   <data name="CONFIRM_CHANGE_MEMORY_PLURAL" xml:space="preserve">
-    <value>Changing the memory of these VMs while they are running will cause them to be forcibly rebooted. This operation can lose data.
+    <value>Changing the memory of these VMs while they are running will cause them to be forcibly rebooted. This operation can cause data loss.
 
 Do you want to continue?</value>
   </data>
   <data name="CONFIRM_CHANGE_MEMORY_SINGULAR" xml:space="preserve">
-    <value>Changing the memory of this VM while it is running will cause it to be forcibly rebooted. This operation can lose data.
+    <value>Changing the memory of this VM while it is running will cause it to be forcibly rebooted. This operation can cause data loss.
 
 Do you want to continue?</value>
   </data>
