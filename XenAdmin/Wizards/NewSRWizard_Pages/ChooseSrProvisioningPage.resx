@@ -292,7 +292,7 @@
     <value>True</value>
   </data>
   <data name="tableLayoutInfo.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="labelWarning.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -348,6 +348,36 @@
   <data name="&gt;&gt;pictureBoxInfo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="linkLabelPoolProperties.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="linkLabelPoolProperties.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 10</value>
+  </data>
+  <data name="linkLabelPoolProperties.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 10, 3, 0</value>
+  </data>
+  <data name="linkLabelPoolProperties.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
+  </data>
+  <data name="linkLabelPoolProperties.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="linkLabelPoolProperties.Text" xml:space="preserve">
+    <value>Enable clustering...</value>
+  </data>
+  <data name="&gt;&gt;linkLabelPoolProperties.Name" xml:space="preserve">
+    <value>linkLabelPoolProperties</value>
+  </data>
+  <data name="&gt;&gt;linkLabelPoolProperties.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabelPoolProperties.Parent" xml:space="preserve">
+    <value>tableLayoutInfo</value>
+  </data>
+  <data name="&gt;&gt;linkLabelPoolProperties.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="tableLayoutInfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 129</value>
   </data>
@@ -355,7 +385,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 38</value>
+    <value>131, 38</value>
   </data>
   <data name="tableLayoutInfo.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -373,7 +403,7 @@
     <value>5</value>
   </data>
   <data name="tableLayoutInfo.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxInfo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelWarning" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxInfo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelPoolProperties" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -406,7 +436,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonGfs2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelGFS2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonLvm" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutInfo" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonGfs2" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelGFS2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="radioButtonLvm" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutInfo" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

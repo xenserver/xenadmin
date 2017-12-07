@@ -601,6 +601,11 @@ namespace XenAdmin.Dialogs
             SelectPage(vdiSizeLocation);
         }
 
+        public void SelectClusteringEditPage()
+        {
+            SelectPage(ClusteringEditPage);
+        }
+
         #endregion
     }
 

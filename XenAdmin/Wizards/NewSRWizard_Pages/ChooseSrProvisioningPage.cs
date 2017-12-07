@@ -32,6 +32,7 @@
 using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAPI;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages
@@ -66,13 +67,26 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override void PopulatePage()
         {
-            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Clusters.Any();
+            var clusteringEnabled = Connection.Cache.Clusters.Any();
+            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && clusteringEnabled;
 
             radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
             tableLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;
             labelWarning.Text = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2)
                 ? Messages.GFS2_INCORRECT_POOL_LICENSE
                 : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
+            linkLabelPoolProperties.Visible = !clusteringEnabled && !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2);
+        }
+
+        private void linkLabelPoolProperties_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        {
+            var pool = Helpers.GetPoolOfOne(Connection);
+
+            using (PropertiesDialog propertiesDialog = new PropertiesDialog(pool))
+            {
+                propertiesDialog.SelectClusteringEditPage();
+                propertiesDialog.ShowDialog(this);
+            }
         }
     }
 }

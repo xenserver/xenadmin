@@ -38,6 +38,7 @@
             this.tableLayoutInfo = new System.Windows.Forms.TableLayoutPanel();
             this.labelWarning = new System.Windows.Forms.Label();
             this.pictureBoxInfo = new System.Windows.Forms.PictureBox();
+            this.linkLabelPoolProperties = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
@@ -88,6 +89,7 @@
             resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
             this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
             this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo, 0, 0);
+            this.tableLayoutInfo.Controls.Add(this.linkLabelPoolProperties, 2, 0);
             this.tableLayoutInfo.Name = "tableLayoutInfo";
             // 
             // labelWarning
@@ -101,6 +103,13 @@
             resources.ApplyResources(this.pictureBoxInfo, "pictureBoxInfo");
             this.pictureBoxInfo.Name = "pictureBoxInfo";
             this.pictureBoxInfo.TabStop = false;
+            // 
+            // linkLabelPoolProperties
+            // 
+            resources.ApplyResources(this.linkLabelPoolProperties, "linkLabelPoolProperties");
+            this.linkLabelPoolProperties.Name = "linkLabelPoolProperties";
+            this.linkLabelPoolProperties.TabStop = true;
+            this.linkLabelPoolProperties.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelPoolProperties_LinkClicked);
             // 
             // ChooseSrProvisioningPage
             // 
@@ -128,5 +137,6 @@
         private System.Windows.Forms.PictureBox pictureBoxInfo;
         private System.Windows.Forms.Label labelWarning;
         private System.Windows.Forms.TableLayoutPanel tableLayoutInfo;
+        private System.Windows.Forms.LinkLabel linkLabelPoolProperties;
     }
 }
