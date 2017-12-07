@@ -96,7 +96,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                            {
                                vm.Locked = false;
                            }
-                           int wait = 1000; // wait up to 1 second for the cache to be updated
+                           int wait = 5000; // wait up to 5 seconds for the cache to be updated
                            while (wait > 0 && vm.GetAutoPowerOn() != autostartValue)
                            {
                                Thread.Sleep(100);
