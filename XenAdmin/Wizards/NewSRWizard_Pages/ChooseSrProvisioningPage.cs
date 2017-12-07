@@ -66,9 +66,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override void PopulatePage()
         {
-            var master = Helpers.GetMaster(Connection);
-
-            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
+            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Clusters.Any();
 
             radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
             tableLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;

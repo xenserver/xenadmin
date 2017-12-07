@@ -175,10 +175,7 @@ namespace XenAdmin.Dialogs
             {
                 Host host = network.Connection.Resolve(pif.host);
                     
-                var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
-                    cluster.host.opaque_ref == pif.host.opaque_ref && cluster.enabled);
-                    
-                if (clusteringEnabled && host != null && host.enabled)
+                if (host != null && host.enabled)
                 {
                     DisableControls(string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
                 }
