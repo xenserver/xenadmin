@@ -352,10 +352,10 @@
     <value>True</value>
   </data>
   <data name="linkLabelPoolProperties.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 10</value>
+    <value>28, 15</value>
   </data>
   <data name="linkLabelPoolProperties.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 0</value>
+    <value>0, 15, 3, 0</value>
   </data>
   <data name="linkLabelPoolProperties.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -385,7 +385,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 38</value>
+    <value>128, 38</value>
   </data>
   <data name="tableLayoutInfo.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

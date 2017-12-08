@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System.ComponentModel;
 using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -43,8 +44,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public ChooseSrProvisioningPage()
         {
             InitializeComponent();
+            Cluster_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Cluster_CollectionChanged);
         }
-
+        private readonly CollectionChangeEventHandler Cluster_CollectionChangedWithInvoke;
         #region XenTabPage overrides
 
         public override string Text { get { return Messages.PROVISIONING; } }
@@ -67,26 +69,58 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
 
         public override void PopulatePage()
         {
-            var clusteringEnabled = Connection.Cache.Clusters.Any();
-            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && clusteringEnabled;
+            Connection.Cache.RegisterCollectionChanged<Cluster>(Cluster_CollectionChangedWithInvoke);
 
-            radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
+            var clusteringEnabled = Connection.Cache.Clusters.Any();
+            var restrictGfs2 = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2);
+            var gfs2Allowed = !restrictGfs2 && clusteringEnabled;
+
+            radioButtonGfs2.Enabled = labelGFS2.Enabled = radioButtonGfs2.Checked = gfs2Allowed;
+            
             tableLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;
-            labelWarning.Text = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2)
+            labelWarning.Text = restrictGfs2
                 ? Messages.GFS2_INCORRECT_POOL_LICENSE
                 : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
-            linkLabelPoolProperties.Visible = !clusteringEnabled && !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2);
+            linkLabelPoolProperties.Visible = !clusteringEnabled && !restrictGfs2;
         }
 
         private void linkLabelPoolProperties_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
         {
             var pool = Helpers.GetPoolOfOne(Connection);
 
+            if (pool == null)
+                return;
+
             using (PropertiesDialog propertiesDialog = new PropertiesDialog(pool))
             {
                 propertiesDialog.SelectClusteringEditPage();
                 propertiesDialog.ShowDialog(this);
             }
+        }
+
+        /// <summary>
+        /// Called when the current IXenConnection's VM dictionary changes.
+        /// </summary>
+        private void Cluster_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
+            Program.AssertOnEventThread();
+
+            PopulatePage();
+        }
+
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            Connection.Cache.DeregisterCollectionChanged<Cluster>(Cluster_CollectionChangedWithInvoke);
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
