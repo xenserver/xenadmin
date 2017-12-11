@@ -162,6 +162,7 @@ namespace XenAdmin.Actions
                 action.PollToCompletion(action.PercentComplete, hi);
                 log.DebugFormat("Plugging {0} {1} done.", pif.Name(), pif.uuid);
             }
+            action.PercentComplete = hi;
         }
 
         //private static void BringDown(AsyncAction action, PIF master, bool this_host, int hi)
