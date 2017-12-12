@@ -29,9 +29,11 @@
  * SUCH DAMAGE.
  */
 
+using System.ComponentModel;
 using System.Linq;
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Dialogs;
 using XenAPI;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages
@@ -42,8 +44,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public ChooseSrProvisioningPage()
         {
             InitializeComponent();
+            Cluster_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(Cluster_CollectionChanged);
         }
-
+        private readonly CollectionChangeEventHandler Cluster_CollectionChangedWithInvoke;
         #region XenTabPage overrides
 
         public override string Text { get { return Messages.PROVISIONING; } }
@@ -64,17 +67,62 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             }
         }
 
-        public override void PopulatePage()
+        private void RefreshPage()
         {
-            var master = Helpers.GetMaster(Connection);
-
-            var gfs2Allowed = !Helpers.FeatureForbidden(Connection, Host.RestrictGfs2) && Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
+            var clusteringEnabled = Connection.Cache.Clusters.Any();
+            var restrictGfs2 = Helpers.FeatureForbidden(Connection, Host.RestrictCorosync);
+            var gfs2Allowed = !restrictGfs2 && clusteringEnabled;
 
             radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
-            tableLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;
-            labelWarning.Text = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2)
+
+            if (!gfs2Allowed)
+            {
+                radioButtonLvm.Checked = true;
+            }
+
+            tableLayoutInfo.Visible = !gfs2Allowed;
+            labelWarning.Text = restrictGfs2
                 ? Messages.GFS2_INCORRECT_POOL_LICENSE
                 : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
+            linkLabelPoolProperties.Visible = !clusteringEnabled && !restrictGfs2;
+        }
+
+        public override void PageLoaded(PageLoadedDirection direction)
+        {
+            base.PageLoaded(direction);
+            RefreshPage();
+            Connection.Cache.RegisterCollectionChanged<Cluster>(Cluster_CollectionChangedWithInvoke);
+        }
+
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            Connection.Cache.DeregisterCollectionChanged<Cluster>(Cluster_CollectionChangedWithInvoke);
+            
+            base.PageLeave(direction, ref cancel);
+        }
+
+        private void linkLabelPoolProperties_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        {
+            var pool = Helpers.GetPoolOfOne(Connection);
+
+            if (pool == null)
+                return;
+
+            using (PropertiesDialog propertiesDialog = new PropertiesDialog(pool))
+            {
+                propertiesDialog.SelectClusteringEditPage();
+                propertiesDialog.ShowDialog(this);
+            }
+        }
+
+        /// <summary>
+        /// Called when the current IXenConnection's VM dictionary changes.
+        /// </summary>
+        private void Cluster_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
+            Program.AssertOnEventThread();
+
+            RefreshPage();
         }
     }
 }

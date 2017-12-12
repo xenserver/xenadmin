@@ -81,11 +81,10 @@ namespace XenAdmin.SettingsPanels
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             pool = Helpers.GetPoolOfOne(clone.Connection);
-            var master = Helpers.GetMaster(clone.Connection);
             tableLayoutInfo.Visible = false;
 
-            clusteringEnabled = pool.Connection.Cache.Cluster_hosts.Any(cluster => cluster.host.opaque_ref == master.opaque_ref && cluster.enabled);
             var existingCluster = pool.Connection.Cache.Clusters.FirstOrDefault();
+            clusteringEnabled = existingCluster != null;
             CheckBoxEnableClustering.Checked = clusteringEnabled;
             LoadNetworks(existingCluster);
 
