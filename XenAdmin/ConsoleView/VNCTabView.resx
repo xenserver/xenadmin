@@ -214,7 +214,7 @@
     <value>5</value>
   </data>
   <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
-    <value>Your RDP client is outdated. For optimal user experience, please intall the latest updates on your computer.</value>
+    <value>Your RDP client is outdated. For optimal user experience, please install the latest updates on your computer.</value>
   </data>
   <data name="labelGeneralInformationMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomLeft</value>
