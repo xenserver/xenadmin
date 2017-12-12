@@ -180,13 +180,16 @@ namespace XenAdmin.Dialogs
 
                 if (clusteringEnabled)
                 {
-                    DeleteButton.Enabled = false;
-                    tableLayoutInfo.Visible = true;
-                    labelWarning.Text = string.Format(Messages.CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK, network.Name());
-                }
-                if (clusteringEnabled && host != null && host.enabled)
-                {
-                    DisableControls(string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
+                    if (host != null && host.enabled)
+                    {
+                        DisableControls(string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
+                    }
+                    else
+                    {
+                        DeleteButton.Enabled = false;
+                        tableLayoutInfo.Visible = true;
+                        labelWarning.Text = string.Format(Messages.CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK, network.Name());
+                    }
                 }
             }
         }
