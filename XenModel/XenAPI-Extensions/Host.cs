@@ -430,9 +430,9 @@ namespace XenAPI
                 : h.IsFreeLicenseOrExpired(); // restrict on Free edition or if the license has expired
         }
 
-        public static bool RestrictGfs2(Host h)
+        public static bool RestrictCorosync(Host h)
         {
-            return !Helpers.KolkataOrGreater(h); //BoolKeyPreferTrue(h.license_params, "restrict_gfs2");
+            return BoolKeyPreferTrue(h.license_params, "restrict_corosync");
         }
 
         public bool HasPBDTo(SR sr)

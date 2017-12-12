@@ -67,21 +67,38 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             }
         }
 
-        public override void PopulatePage()
+        private void RefreshPage()
         {
-            Connection.Cache.RegisterCollectionChanged<Cluster>(Cluster_CollectionChangedWithInvoke);
-
             var clusteringEnabled = Connection.Cache.Clusters.Any();
-            var restrictGfs2 = Helpers.FeatureForbidden(Connection, Host.RestrictGfs2);
+            var restrictGfs2 = Helpers.FeatureForbidden(Connection, Host.RestrictCorosync);
             var gfs2Allowed = !restrictGfs2 && clusteringEnabled;
 
-            radioButtonGfs2.Enabled = labelGFS2.Enabled = radioButtonGfs2.Checked = gfs2Allowed;
-            
-            tableLayoutInfo.Visible = radioButtonLvm.Checked = !gfs2Allowed;
+            radioButtonGfs2.Enabled = labelGFS2.Enabled = gfs2Allowed;
+
+            if (!gfs2Allowed)
+            {
+                radioButtonLvm.Checked = true;
+            }
+
+            tableLayoutInfo.Visible = !gfs2Allowed;
             labelWarning.Text = restrictGfs2
                 ? Messages.GFS2_INCORRECT_POOL_LICENSE
                 : Messages.GFS2_REQUIRES_CLUSTERING_ENABLED;
             linkLabelPoolProperties.Visible = !clusteringEnabled && !restrictGfs2;
+        }
+
+        public override void PageLoaded(PageLoadedDirection direction)
+        {
+            base.PageLoaded(direction);
+            RefreshPage();
+            Connection.Cache.RegisterCollectionChanged<Cluster>(Cluster_CollectionChangedWithInvoke);
+        }
+
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            Connection.Cache.DeregisterCollectionChanged<Cluster>(Cluster_CollectionChangedWithInvoke);
+            
+            base.PageLeave(direction, ref cancel);
         }
 
         private void linkLabelPoolProperties_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
@@ -105,22 +122,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         {
             Program.AssertOnEventThread();
 
-            PopulatePage();
-        }
-
-
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            Connection.Cache.DeregisterCollectionChanged<Cluster>(Cluster_CollectionChangedWithInvoke);
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
+            RefreshPage();
         }
     }
 }
