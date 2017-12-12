@@ -31,8 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
@@ -97,6 +96,15 @@ namespace XenAdmin.Actions
             ApiMethodsToRoleCheck.AddRange(XenAPI.Role.CommonTaskApiList);
             if(!Helpers.FeatureForbidden(Connection, Host.RestrictManagementOnVLAN))
                 ApiMethodsToRoleCheck.Add("pool.management_reconfigure");
+            if (!Helpers.FeatureForbidden(Connection, Host.RestrictCorosync))
+            {
+                ApiMethodsToRoleCheck.Add("pbd.unplug");
+                ApiMethodsToRoleCheck.Add("cluster_host.disable");
+                ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
+                ApiMethodsToRoleCheck.Add("cluster_host.enable");
+                ApiMethodsToRoleCheck.Add("pbd.plug");
+
+            }
             #endregion
 
         }
@@ -106,9 +114,9 @@ namespace XenAdmin.Actions
             Connection.ExpectDisruption = !managementIPChanged;
             try
             {
-                int inc = (Pool == null ? 100 : 50) / (newPIFs.Count + downPIFs.Count + 1);
-                int progress = 0;
-
+                int inc = (Pool == null ? 100 : 50) / (newPIFs.Count + downPIFs.Count + (downManagement != null ? 1 : 0));
+                int progress = PercentComplete;
+                
                 // We bring up / reconfigure the interfaces on the slaves.
                 // Then the master.
                 // Then we reconfigure the management interface on the slaves.
@@ -177,10 +185,13 @@ namespace XenAdmin.Actions
             NetworkingActionHelpers.ForSomeHosts(this, pif, this_host, true, hi,
                 delegate(AsyncAction a, PIF p, int h)
                 {
+                    List<PBD> gfs2Pbds;
+                    DisableClustering(p, out gfs2Pbds);
                     if (up)
                         BringUp(pif, p, h);
                     else
                         NetworkingActionHelpers.BringDown(a, p, h);
+                    EnableClustering(p, gfs2Pbds);
                 });
         }
 
@@ -234,6 +245,76 @@ namespace XenAdmin.Actions
 
             string[] bits = range_start.Split('.');
             return string.Format("{0}.{1}.{2}.{3}", bits[0], bits[1], bits[2], int.Parse(bits[3]) + i);
+        }
+
+        /// <summary>
+        /// Disable clustering on the host (if the network is used by clustering), before changing the management interface; 
+        /// Before disabling clustering we also unplug all the GFS2 SRs
+        /// </summary>
+        private void DisableClustering(PIF pif, out List<PBD> gfs2Pbds)
+        {
+            gfs2Pbds = new List<PBD>();
+            var isUsedByClustering = Connection.Cache.Clusters.Any(cluster => cluster.network.opaque_ref == pif.network.opaque_ref);
+            if (!isUsedByClustering)
+                return;
+
+            var host = Connection.Resolve(pif.host);
+            if (host == null)
+                return;
+
+            var clusterHost = Connection.Cache.Cluster_hosts.FirstOrDefault(c => c.host.opaque_ref == host.opaque_ref);
+            if (clusterHost == null) 
+                return;
+
+            // unplug the GFS2 SRs, saving the list of the PBDs unplugged, to plug back later
+            foreach (var pbd in Connection.ResolveAll(host.PBDs).Where(pbd => pbd.currently_attached))
+            {
+                var sr = Connection.Resolve(pbd.SR);
+                if (sr != null && sr.type.ToLowerInvariant() == "gfs2")
+                {
+                    gfs2Pbds.Add(pbd);
+                    Description = string.Format(Messages.ACTION_SR_DETACHING, sr.Name(), host.Name());
+                    PBD.unplug(Session, pbd.opaque_ref);
+                }
+            }
+
+            // disable clustering
+            Description = string.Format(Messages.DISABLING_CLUSTERING_ON_POOL, host.Name());
+            log.Debug(Description);
+            Cluster_host.disable(Session, clusterHost.opaque_ref);
+        }
+
+        /// <summary>
+        /// Enable clustering on the host (if the network is used by clustering), after the management interface has been changed; 
+        /// After enabling clustering we also plug back all the GFS2 SRs that we unplugged
+        /// </summary>
+        private void EnableClustering(PIF pif, List<PBD> gfs2Pbds)
+        {
+            var isUsedByClustering = Connection.Cache.Clusters.Any(cluster => cluster.network.opaque_ref == pif.network.opaque_ref);
+            if (!isUsedByClustering)
+                return;
+
+            var host = Connection.Resolve(pif.host);
+            if (host == null)
+                return;
+
+            var clusterHost = Connection.Cache.Cluster_hosts.FirstOrDefault(c => c.host.opaque_ref == host.opaque_ref);
+            if (clusterHost == null)
+                return;
+
+            // plug the GFS2 SRs
+            foreach (var pbd in gfs2Pbds.Where(pbd => !pbd.currently_attached))
+            {
+                var sr = Connection.Resolve(pbd.SR);
+                if (sr != null)
+                    Description = string.Format(Messages.ACTION_SR_ATTACHING_TITLE, sr.Name(), host.Name());
+                PBD.plug(Session, pbd.opaque_ref);
+            }
+
+            Description = string.Format(Messages.ENABLING_CLUSTERING_ON_POOL, host.Name());
+            log.Debug(Description);
+            PIF.set_disallow_unplug(Session, pif.opaque_ref, true);
+            Cluster_host.enable(Session, clusterHost.opaque_ref);
         }
     }
 }
