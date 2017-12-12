@@ -39,7 +39,7 @@
             this.autoHeightLabel2 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_tableLpWarning = new System.Windows.Forms.TableLayoutPanel();
             this.m_labelDisable2 = new XenAdmin.Controls.Common.AutoHeightLabel();
-            this.pictureBoxWarning = new System.Windows.Forms.PictureBox();
+            this.pictureBoxWarning1 = new System.Windows.Forms.PictureBox();
             this.m_labelDisable1 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.m_tableLpInfo = new System.Windows.Forms.TableLayoutPanel();
             this.m_labelEnable = new XenAdmin.Controls.Common.AutoHeightLabel();
@@ -52,27 +52,34 @@
             this.columnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSpace = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.m_tableLpLimit = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBoxWarning2 = new System.Windows.Forms.PictureBox();
+            this.m_labelLimit1 = new XenAdmin.Controls.Common.AutoHeightLabel();
+            this.m_labelLimit2 = new XenAdmin.Controls.Common.AutoHeightLabel();
             this._worker = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.m_tableLpWarning.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarning)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarning1)).BeginInit();
             this.m_tableLpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinnerIcon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.m_dataGridView)).BeginInit();
+            this.m_tableLpLimit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarning2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.autoHeightLabel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.autoHeightLabel2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.m_tableLpWarning, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.m_tableLpInfo, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.m_tableLpLimit, 0, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // tableLayoutPanel2
@@ -110,7 +117,7 @@
             // 
             resources.ApplyResources(this.m_tableLpWarning, "m_tableLpWarning");
             this.m_tableLpWarning.Controls.Add(this.m_labelDisable2, 1, 1);
-            this.m_tableLpWarning.Controls.Add(this.pictureBoxWarning, 0, 0);
+            this.m_tableLpWarning.Controls.Add(this.pictureBoxWarning1, 0, 0);
             this.m_tableLpWarning.Controls.Add(this.m_labelDisable1, 1, 0);
             this.m_tableLpWarning.Name = "m_tableLpWarning";
             // 
@@ -119,12 +126,12 @@
             resources.ApplyResources(this.m_labelDisable2, "m_labelDisable2");
             this.m_labelDisable2.Name = "m_labelDisable2";
             // 
-            // pictureBoxWarning
+            // pictureBoxWarning1
             // 
-            resources.ApplyResources(this.pictureBoxWarning, "pictureBoxWarning");
-            this.pictureBoxWarning.Name = "pictureBoxWarning";
-            this.m_tableLpWarning.SetRowSpan(this.pictureBoxWarning, 2);
-            this.pictureBoxWarning.TabStop = false;
+            resources.ApplyResources(this.pictureBoxWarning1, "pictureBoxWarning1");
+            this.pictureBoxWarning1.Name = "pictureBoxWarning1";
+            this.m_tableLpWarning.SetRowSpan(this.pictureBoxWarning1, 2);
+            this.pictureBoxWarning1.TabStop = false;
             // 
             // m_labelDisable1
             // 
@@ -218,6 +225,31 @@
             this.columnSpace.Name = "columnSpace";
             this.columnSpace.ReadOnly = true;
             // 
+            // m_tableLpLimit
+            // 
+            resources.ApplyResources(this.m_tableLpLimit, "m_tableLpLimit");
+            this.m_tableLpLimit.Controls.Add(this.pictureBoxWarning2, 0, 0);
+            this.m_tableLpLimit.Controls.Add(this.m_labelLimit1, 1, 0);
+            this.m_tableLpLimit.Controls.Add(this.m_labelLimit2, 1, 1);
+            this.m_tableLpLimit.Name = "m_tableLpLimit";
+            // 
+            // pictureBoxWarning2
+            // 
+            resources.ApplyResources(this.pictureBoxWarning2, "pictureBoxWarning2");
+            this.pictureBoxWarning2.Name = "pictureBoxWarning2";
+            this.m_tableLpLimit.SetRowSpan(this.pictureBoxWarning2, 2);
+            this.pictureBoxWarning2.TabStop = false;
+            // 
+            // m_labelLimit1
+            // 
+            resources.ApplyResources(this.m_labelLimit1, "m_labelLimit1");
+            this.m_labelLimit1.Name = "m_labelLimit1";
+            // 
+            // m_labelLimit2
+            // 
+            resources.ApplyResources(this.m_labelLimit2, "m_labelLimit2");
+            this.m_labelLimit2.Name = "m_labelLimit2";
+            // 
             // _worker
             // 
             this._worker.WorkerReportsProgress = true;
@@ -242,13 +274,16 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.m_tableLpWarning.ResumeLayout(false);
             this.m_tableLpWarning.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarning)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarning1)).EndInit();
             this.m_tableLpInfo.ResumeLayout(false);
             this.m_tableLpInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spinnerIcon1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.m_dataGridView)).EndInit();
+            this.m_tableLpLimit.ResumeLayout(false);
+            this.m_tableLpLimit.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWarning2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,7 +299,7 @@
 		private XenAdmin.Controls.Common.AutoHeightLabel autoHeightLabel2;
 		private XenAdmin.Controls.DataGridViewEx.DataGridViewEx m_dataGridView;
 		private System.Windows.Forms.TableLayoutPanel m_tableLpWarning;
-		private System.Windows.Forms.PictureBox pictureBoxWarning;
+		private System.Windows.Forms.PictureBox pictureBoxWarning1;
         private XenAdmin.Controls.Common.AutoHeightLabel m_labelDisable1;
         private System.Windows.Forms.TableLayoutPanel m_tableLpInfo;
         private XenAdmin.Controls.Common.AutoHeightLabel m_labelEnable;
@@ -278,6 +313,10 @@
         private Controls.Common.AutoHeightLabel m_labelDisable2;
         private System.Windows.Forms.Panel panel1;
         private Controls.SpinnerIcon spinnerIcon1;
-	}
+        private System.Windows.Forms.TableLayoutPanel m_tableLpLimit;
+        private System.Windows.Forms.PictureBox pictureBoxWarning2;
+        private Controls.Common.AutoHeightLabel m_labelLimit1;
+        private Controls.Common.AutoHeightLabel m_labelLimit2;
+    }
 }
 
