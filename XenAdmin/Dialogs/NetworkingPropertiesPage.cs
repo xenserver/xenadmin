@@ -175,10 +175,10 @@ namespace XenAdmin.Dialogs
             {
                 Host host = network.Connection.Resolve(pif.host);
                     
-                var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
+                var ClusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
                     cluster.host.opaque_ref == pif.host.opaque_ref && cluster.enabled);
 
-                if (clusteringEnabled)
+                if (ClusteringEnabled)
                 {
                     if (host != null && host.enabled)
                     {
@@ -194,18 +194,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        internal bool ClusteringEnabled
-        {
-            get
-            {
-                XenAPI.Network network = (XenAPI.Network)NetworkComboBox.SelectedItem;
-                var pif = Tag as PIF;
-                if (network == null || pif == null)
-                    return false;
-                return network.Connection.Cache.Cluster_hosts.Any(cluster =>
-                    cluster.host.opaque_ref == pif.host.opaque_ref && cluster.enabled);
-            }
-        }
+        internal bool ClusteringEnabled { get; private set; }
 
         private string FindOtherPurpose(XenAPI.Network network)
         {
