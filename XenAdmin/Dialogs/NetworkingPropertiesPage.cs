@@ -175,15 +175,26 @@ namespace XenAdmin.Dialogs
             {
                 Host host = network.Connection.Resolve(pif.host);
                     
-                var clusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
+                ClusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
                     cluster.host.opaque_ref == pif.host.opaque_ref && cluster.enabled);
-                    
-                if (clusteringEnabled && host != null && host.enabled)
+
+                if (ClusteringEnabled)
                 {
-                    DisableControls(string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
+                    if (host != null && host.enabled)
+                    {
+                        DisableControls(string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
+                    }
+                    else
+                    {
+                        DeleteButton.Enabled = false;
+                        tableLayoutInfo.Visible = true;
+                        labelWarning.Text = string.Format(Messages.CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK, network.Name());
+                    }
                 }
             }
         }
+
+        internal bool ClusteringEnabled { get; private set; }
 
         private string FindOtherPurpose(XenAPI.Network network)
         {
@@ -352,7 +363,7 @@ namespace XenAdmin.Dialogs
 
         private void DisableControls(string message)
         {
-            Network2Label.Enabled = NetworkComboBox.Enabled = IpAddressSettingsLabel.Enabled =
+            PurposeLabel.Enabled = PurposeTextBox.Enabled = Network2Label.Enabled = NetworkComboBox.Enabled = IpAddressSettingsLabel.Enabled =
                 DHCPIPRadioButton.Enabled = FixedIPRadioButton.Enabled = tableLayoutPanelStaticSettings.Enabled = DeleteButton.Enabled = false;
             tableLayoutInfo.Visible = true;
             labelWarning.Text = message;

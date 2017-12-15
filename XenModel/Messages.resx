@@ -2435,6 +2435,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
   </data>
+  <data name="CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK" xml:space="preserve">
+    <value>This IP address cannot be removed, because clustering is enabled on {0}.</value>
+  </data>
   <data name="CANNOT_REMOVE_SL_SERVER" xml:space="preserve">
     <value>This StorageLink server cannot be removed because it is currently in use.</value>
   </data>
@@ -2758,11 +2761,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on selected VMs</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on VM "{0}"</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on selected VMs</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -4020,6 +4023,9 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DISABLED" xml:space="preserve">
     <value>Disabled</value>
+  </data>
+  <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disabled clustering on {0}.</value>
   </data>
   <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
     <value>No updates found because automatic checking for updates is disabled.</value>
@@ -13655,8 +13661,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
-    <value>Disabled clustering on {0}.</value>
   </data>
 </root>

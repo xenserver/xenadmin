@@ -6711,6 +6711,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This IP address cannot be removed, because clustering is enabled on {0}..
+        /// </summary>
+        public static string CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK {
+            get {
+                return ResourceManager.GetString("CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This StorageLink server cannot be removed because it is currently in use..
         /// </summary>
         public static string CANNOT_REMOVE_SL_SERVER {
