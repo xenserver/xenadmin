@@ -93,7 +93,7 @@ namespace XenAdmin.SettingsPanels
                 comboBoxNetwork.Enabled = labelNetwork.Enabled = false;
             }
 
-            var gfs2Attached = clone.Connection.Cache.SRs.Any(sr => sr.type.ToLower() == "gfs2" && !sr.IsDetached());
+            var gfs2Attached = clone.Connection.Cache.SRs.Any(sr => sr.GetSRType(true) == SR.SRTypes.gfs2 && !sr.IsDetached());
 
             if (clusteringEnabled && gfs2Attached)
             {

@@ -270,7 +270,7 @@ namespace XenAdmin.Actions
             foreach (var pbd in Connection.ResolveAll(host.PBDs).Where(pbd => pbd.currently_attached))
             {
                 var sr = Connection.Resolve(pbd.SR);
-                if (sr != null && sr.type.ToLowerInvariant() == "gfs2")
+                if (sr != null && sr.GetSRType(true) == SR.SRTypes.gfs2)
                 {
                     gfs2Pbds.Add(pbd);
                     Description = string.Format(Messages.ACTION_SR_DETACHING, sr.Name(), host.Name());
