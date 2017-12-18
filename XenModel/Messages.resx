@@ -4305,7 +4305,7 @@ Eject the CD and try again.</value>
     <value>Configure DR on '{0}'</value>
   </data>
   <data name="DR_CONFIGURE_TOO_MANY_SRS" xml:space="preserve">
-    <value>At most {0} SRs can be selected to store VM configuration data.</value>
+    <value>You can only select up to {0} SRs to store the VM configuration data.</value>
   </data>
   <data name="DR_DRYRUN_AMP" xml:space="preserve">
     <value>Dr&amp;y-run...</value>

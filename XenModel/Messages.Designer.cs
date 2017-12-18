@@ -12087,7 +12087,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to At most {0} SRs can be selected to store VM configuration data..
+        ///   Looks up a localized string similar to You can only select up to {0} SRs to store the VM configuration data..
         /// </summary>
         public static string DR_CONFIGURE_TOO_MANY_SRS {
             get {
