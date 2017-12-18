@@ -12087,6 +12087,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can only select up to {0} SRs to store the VM configuration data..
+        /// </summary>
+        public static string DR_CONFIGURE_TOO_MANY_SRS {
+            get {
+                return ResourceManager.GetString("DR_CONFIGURE_TOO_MANY_SRS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dr&amp;y-run....
         /// </summary>
         public static string DR_DRYRUN_AMP {
