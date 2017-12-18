@@ -768,9 +768,6 @@
   <data name="m_labelLimit2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="m_labelLimit2.Text" xml:space="preserve">
-    <value>At most {0} SRs can be selected to store VM configuration data.</value>
-  </data>
   <data name="m_labelLimit2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>

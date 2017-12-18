@@ -61,7 +61,7 @@ namespace XenAdmin.Dialogs
             pictureBoxWarning1.Image = SystemIcons.Warning.ToBitmap();
 			pictureBoxWarning2.Image = SystemIcons.Warning.ToBitmap();
             pictureBoxInfo.Image = SystemIcons.Information.ToBitmap();
-			m_labelLimit2.Text = String.Format(m_labelLimit2.Text, MAX_SR_SELECTED);
+			m_labelLimit2.Text = String.Format(Messages.DR_CONFIGURE_TOO_MANY_SRS, MAX_SR_SELECTED);
 			HideAllWarnings();
 			Pool = pool;
 		}
