@@ -343,6 +343,8 @@ namespace XenAdmin.Dialogs
                         return Messages.LICENSE_SUPPORT_AND_DESKTOP_PLUS_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopFeaturesEnabled))
                         return Messages.LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED;
+                    if (XenObject.Connection.Cache.Hosts.All(h => h.DesktopCloudFeaturesEnabled))
+                        return Messages.LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.PremiumFeaturesEnabled))
                         return Messages.LICENSE_SUPPORT_AND_PREMIUM_FEATURES_ENABLED;
                     if (XenObject.Connection.Cache.Hosts.All(h => h.StandardFeaturesEnabled))

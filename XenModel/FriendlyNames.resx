@@ -1916,4 +1916,7 @@
   <data name="Label-performance.sr_rw_write_latency" xml:space="preserve">
     <value>'{0}' Write Latency</value>
   </data>
+  <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
+    <value>XenApp/XenDesktop [Citrix] Cloud</value>
+  </data>
 </root>

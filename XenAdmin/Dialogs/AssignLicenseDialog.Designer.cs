@@ -50,6 +50,7 @@ namespace XenAdmin.Dialogs
             this.enterprisePerSocketRadioButton = new System.Windows.Forms.RadioButton();
             this.enterprisePerUserRadioButton = new System.Windows.Forms.RadioButton();
             this.desktopRadioButton = new System.Windows.Forms.RadioButton();
+            this.desktopCloudRadioButton = new System.Windows.Forms.RadioButton();
             this.standardPerSocketRadioButton = new System.Windows.Forms.RadioButton();
             this.buttonsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.desktopPlusRadioButton = new System.Windows.Forms.RadioButton();
@@ -136,6 +137,7 @@ namespace XenAdmin.Dialogs
             this.editionLayoutPanel.Controls.Add(this.enterprisePerUserRadioButton);
             this.editionLayoutPanel.Controls.Add(this.desktopPlusRadioButton);
             this.editionLayoutPanel.Controls.Add(this.desktopRadioButton);
+            this.editionLayoutPanel.Controls.Add(this.desktopCloudRadioButton);
             this.editionLayoutPanel.Controls.Add(this.standardPerSocketRadioButton);
             this.editionLayoutPanel.Name = "editionLayoutPanel";
             // 
@@ -188,6 +190,12 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.desktopRadioButton, "desktopRadioButton");
             this.desktopRadioButton.Name = "desktopRadioButton";
             this.desktopRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // desktopCloudRadioButton
+            // 
+            resources.ApplyResources(this.desktopCloudRadioButton, "desktopCloudRadioButton");
+            this.desktopCloudRadioButton.Name = "desktopCloudRadioButton";
+            this.desktopCloudRadioButton.UseVisualStyleBackColor = true;
             // 
             // standardPerSocketRadioButton
             // 
@@ -255,5 +263,6 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.RadioButton desktopRadioButton;
         private System.Windows.Forms.RadioButton standardPerSocketRadioButton;
         private System.Windows.Forms.RadioButton desktopPlusRadioButton;
+        private System.Windows.Forms.RadioButton desktopCloudRadioButton;
     }
 }
