@@ -799,6 +799,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to XenApp/XenDesktop [Citrix] Cloud.
+        /// </summary>
+        public static string Label_host_edition_desktop_cloud {
+            get {
+                return ResourceManager.GetString("Label-host.edition-desktop-cloud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to XenApp/XenDesktop Platinum.
         /// </summary>
         public static string Label_host_edition_desktop_plus {
