@@ -58,6 +58,7 @@ namespace XenAPI
             EnterprisePerSocket,   // Added in Creedence (enterprise-per-socket)
             EnterprisePerUser,     // Added in Creedence (enterprise-per-user)
             DesktopPlus,           // Added in Creedence (desktop-plus)
+            DesktopCloud,          // Added in Jura (desktop-cloud)
             Premium                // Added in Indigo (premium)
         }
 
@@ -86,6 +87,8 @@ namespace XenAPI
                     return Edition.Desktop;
                 case "desktop-plus":
                     return Edition.DesktopPlus;
+                case "desktop-cloud":
+                    return Edition.DesktopCloud;
                 case "basic":
                     return Edition.Free;
                 case "premium":
@@ -134,6 +137,8 @@ namespace XenAPI
                     return "desktop";
                 case Edition.DesktopPlus:
                     return "desktop-plus";
+                case Edition.DesktopCloud:
+                    return "desktop-cloud";
                 case Edition.Premium:
                     return "premium";
                 case Edition.Standard:
@@ -1317,6 +1322,11 @@ namespace XenAPI
         public bool DesktopFeaturesEnabled()
         {
             return GetEdition(edition) == Edition.Desktop;
+        }
+
+        public bool DesktopCloudFeaturesEnabled()
+        {
+            return GetEdition(edition) == Edition.DesktopCloud;
         }
 
         public bool PremiumFeaturesEnabled()

@@ -7027,6 +7027,10 @@ Size: {3}</value>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+XenAdd/XenDesktop [Citrix] Cloud features enabled</value>
+  </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
 XenApp/XenDesktop features enabled</value>
