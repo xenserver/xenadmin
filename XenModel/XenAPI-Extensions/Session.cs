@@ -33,7 +33,6 @@ using System;
 using System.IO;
 using System.Text;
 using CookComputing.XmlRpc;
-using log4net.Core;
 using XenAdmin;
 using XenAdmin.Network;
 using Newtonsoft.Json.Linq;
@@ -133,9 +132,10 @@ namespace XenAPI
 
         private void LogJsonRequest(string json)
         {
-            string methodName;
-            string parameters;
+            string methodName = "";
+            string parameters = "";
 
+#if DEBUG
             try
             {
                 JObject obj = JObject.Parse(json);
@@ -144,9 +144,12 @@ namespace XenAPI
             }
             catch
             {
-                methodName = json;
-                parameters = "";
+                //ignore
             }
+#else
+            methodName = json;
+            parameters = "";
+#endif
 
             // do not log while downloading objects
             // also exclude calls occurring frequently; we don't need to know about them;
