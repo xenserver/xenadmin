@@ -56,6 +56,7 @@ namespace XenAdmin.TabPages
             this.ColumnDeviceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnBusPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnFCoECapable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SriovSupportedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -158,7 +159,8 @@ namespace XenAdmin.TabPages
             this.ColumnVendorName,
             this.ColumnDeviceName,
             this.ColumnBusPath,
-            this.ColumnFCoECapable});
+            this.ColumnFCoECapable,
+            this.SriovSupportedColumn});
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -229,6 +231,13 @@ namespace XenAdmin.TabPages
             this.ColumnFCoECapable.Name = "ColumnFCoECapable";
             this.ColumnFCoECapable.ReadOnly = true;
             // 
+            // SriovSupportedColumn
+            // 
+            this.SriovSupportedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.SriovSupportedColumn, "SriovSupportedColumn");
+            this.SriovSupportedColumn.Name = "SriovSupportedColumn";
+            this.SriovSupportedColumn.ReadOnly = true;
+            // 
             // NICPage
             // 
             resources.ApplyResources(this, "$this");
@@ -272,5 +281,6 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDeviceName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnBusPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFCoECapable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SriovSupportedColumn;
     }
 }
