@@ -211,7 +211,7 @@
     <value>117, 17</value>
   </data>
   <data name="rbtnBondedNetwork.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="rbtnBondedNetwork.Text" xml:space="preserve">
     <value>&amp;Bonded Network</value>
@@ -278,7 +278,7 @@ This can be used as a private connection between VMs on the same host.</value>
     <value>320, 26</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Create a network that bonds together two or more of your NICs.
@@ -315,7 +315,7 @@ This will create a single higher performing channel.</value>
     <value>359, 39</value>
   </data>
   <data name="labelCHIN.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="labelCHIN.Text" xml:space="preserve">
     <value>Create a network that does not leave the [XenServer] pool.
@@ -389,7 +389,7 @@ This type of network requires the vSwitch Controller to be running.</value>
     <value>193, 17</value>
   </data>
   <data name="rbtnCHIN.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="rbtnCHIN.Text" xml:space="preserve">
     <value>&amp;Cross-Server Private Network</value>
@@ -425,7 +425,7 @@ This type of network requires the vSwitch Controller to be running.</value>
     <value>122, 17</value>
   </data>
   <data name="rbtnExternalNetwork.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rbtnExternalNetwork.Text" xml:space="preserve">
     <value>&amp;External Network</value>
@@ -464,10 +464,10 @@ This type of network requires the vSwitch Controller to be running.</value>
     <value>115, 17</value>
   </data>
   <data name="rbtnSriov.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="rbtnSriov.Text" xml:space="preserve">
-    <value>&amp;SR-IOV Network</value>
+    <value>S&amp;R-IOV Network</value>
   </data>
   <data name="&gt;&gt;rbtnSriov.Name" xml:space="preserve">
     <value>rbtnSriov</value>
@@ -500,7 +500,7 @@ This type of network requires the vSwitch Controller to be running.</value>
     <value>359, 13</value>
   </data>
   <data name="labelSriov.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="labelSriov.Text" xml:space="preserve">
     <value>Enable SR-IOV on a NIC and create a SR-IOV network on that NIC.</value>
@@ -578,7 +578,7 @@ This type of network requires the vSwitch Controller to be running.</value>
     <value>45, 13</value>
   </data>
   <data name="labelWarningChinOption.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="labelWarningChinOption.Text" xml:space="preserve">
     <value>warning</value>
@@ -608,7 +608,7 @@ This type of network requires the vSwitch Controller to be running.</value>
     <value>73, 22</value>
   </data>
   <data name="warningsTable.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;warningsTable.Name" xml:space="preserve">
     <value>warningsTable</value>

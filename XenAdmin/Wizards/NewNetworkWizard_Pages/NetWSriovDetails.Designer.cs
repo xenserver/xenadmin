@@ -49,7 +49,7 @@
             // cbxAutomatic
             // 
             resources.ApplyResources(this.cbxAutomatic, "cbxAutomatic");
-            this.tableLayoutPanel1.SetColumnSpan(this.cbxAutomatic, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.cbxAutomatic, 3);
             this.cbxAutomatic.Name = "cbxAutomatic";
             this.cbxAutomatic.UseVisualStyleBackColor = true;
             // 
@@ -66,12 +66,11 @@
             // 
             // comboBoxNicList
             // 
-            resources.ApplyResources(this.comboBoxNicList, "comboBoxNicList");
             this.comboBoxNicList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNicList.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBoxNicList, "comboBoxNicList");
             this.comboBoxNicList.Name = "comboBoxNicList";
             this.comboBoxNicList.Sorted = true;
-            this.comboBoxNicList.SelectedIndexChanged += new System.EventHandler(this.comboBoxNicList_SelectedIndexChanged);
             // 
             // NetWSriovDetails
             // 
