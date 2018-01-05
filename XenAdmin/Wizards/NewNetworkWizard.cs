@@ -50,7 +50,8 @@ namespace XenAdmin.Wizards
         Internal,  // old-style (host-only) private networks
         CHIN,      // cross-host internal (or private) networks
         External,
-        Bonded
+        Bonded,
+        SRIOV
     }
 
     public partial class NewNetworkWizard : XenWizardBase
@@ -60,6 +61,7 @@ namespace XenAdmin.Wizards
         private readonly NetWDetails pageNetworkDetails;
         private readonly NetWBondDetails pageBondDetails;
         private readonly NetWChinDetails pageChinDetails;
+        private readonly NetWSriovDetails pageSriovDetails;
 
         /// <summary>
         /// May be null.
@@ -84,6 +86,7 @@ namespace XenAdmin.Wizards
             pageNetworkDetails = new NetWDetails();
             pageBondDetails = new NetWBondDetails();
             pageChinDetails = new NetWChinDetails();
+            pageSriovDetails = new NetWSriovDetails();
 
             System.Diagnostics.Trace.Assert(host != null);
             Pool = pool;
@@ -97,6 +100,7 @@ namespace XenAdmin.Wizards
             pageNetworkDetails.Host = host;
             pageChinDetails.Host = host;
             pageChinDetails.Pool = pool;
+            pageSriovDetails.Host = host;
 
             AddPage(pageNetworkType);
             AddPage(new XenTabPage { Text = "" });
@@ -133,6 +137,10 @@ namespace XenAdmin.Wizards
 
                     if (m_networkType == NetworkTypes.CHIN)
                         AddPage(pageChinDetails);
+                    else if (m_networkType == NetworkTypes.SRIOV)
+                    {
+                        AddPage(pageSriovDetails);
+                    }
                     else
                     {
                         AddPage(pageNetworkDetails);
