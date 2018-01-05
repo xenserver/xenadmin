@@ -169,13 +169,13 @@
     <value>3, 0, 3, 30</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 13</value>
+    <value>156, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Select a NIC to enable SRIOV.</value>
+    <value>Select a NIC to enable SR-IOV.</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -209,9 +209,6 @@
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>NI&amp;C:</value>
-  </data>
-  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
