@@ -44,6 +44,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.iconWarningChinOption = new System.Windows.Forms.PictureBox();
             this.labelWarningChinOption = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.rbtnSriov = new System.Windows.Forms.RadioButton();
+            this.labelSriov = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.warningsTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconWarningChinOption)).BeginInit();
@@ -112,6 +114,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.rbtnCHIN);
             this.flowLayoutPanel1.Controls.Add(this.labelCHIN);
+            this.flowLayoutPanel1.Controls.Add(this.rbtnSriov);
+            this.flowLayoutPanel1.Controls.Add(this.labelSriov);
             this.flowLayoutPanel1.Controls.Add(this.warningsTable);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -137,6 +141,17 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             // toolTip
             // 
             this.toolTip.ShowAlways = true;
+            // 
+            // rbtnSriov
+            // 
+            resources.ApplyResources(this.rbtnSriov, "rbtnSriov");
+            this.rbtnSriov.Name = "rbtnSriov";
+            this.rbtnSriov.UseVisualStyleBackColor = true;
+            // 
+            // labelSriov
+            // 
+            resources.ApplyResources(this.labelSriov, "labelSriov");
+            this.labelSriov.Name = "labelSriov";
             // 
             // NetWTypeSelect
             // 
@@ -170,6 +185,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private System.Windows.Forms.TableLayoutPanel warningsTable;
         private System.Windows.Forms.PictureBox iconWarningChinOption;
         private System.Windows.Forms.Label labelWarningChinOption;
+        private System.Windows.Forms.RadioButton rbtnSriov;
+        private System.Windows.Forms.Label labelSriov;
 
     }
 }
