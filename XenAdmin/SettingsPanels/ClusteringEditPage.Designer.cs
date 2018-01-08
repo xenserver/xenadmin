@@ -37,9 +37,9 @@
             this.labelWarning = new System.Windows.Forms.Label();
             this.labelInfo = new System.Windows.Forms.Label();
             this.labelHostCountWarning = new System.Windows.Forms.Label();
+            this.pictureBoxInfo2 = new System.Windows.Forms.PictureBox();
             this.labelTitle = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.comboBoxNetwork = new XenAdmin.Controls.NetworkComboBox();
-            this.pictureBoxInfo2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo1)).BeginInit();
@@ -101,6 +101,13 @@
             resources.ApplyResources(this.labelHostCountWarning, "labelHostCountWarning");
             this.labelHostCountWarning.Name = "labelHostCountWarning";
             // 
+            // pictureBoxInfo2
+            // 
+            resources.ApplyResources(this.pictureBoxInfo2, "pictureBoxInfo2");
+            this.pictureBoxInfo2.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBoxInfo2.Name = "pictureBoxInfo2";
+            this.pictureBoxInfo2.TabStop = false;
+            // 
             // labelTitle
             // 
             resources.ApplyResources(this.labelTitle, "labelTitle");
@@ -116,13 +123,6 @@
             this.comboBoxNetwork.IncludePoolNameInComboBox = false;
             resources.ApplyResources(this.comboBoxNetwork, "comboBoxNetwork");
             this.comboBoxNetwork.Name = "comboBoxNetwork";
-            // 
-            // pictureBoxInfo2
-            // 
-            resources.ApplyResources(this.pictureBoxInfo2, "pictureBoxInfo2");
-            this.pictureBoxInfo2.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            this.pictureBoxInfo2.Name = "pictureBoxInfo2";
-            this.pictureBoxInfo2.TabStop = false;
             // 
             // ClusteringEditPage
             // 

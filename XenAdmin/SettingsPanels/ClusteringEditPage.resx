@@ -376,7 +376,7 @@
     <value>6</value>
   </data>
   <data name="labelInfo.Text" xml:space="preserve">
-    <value>Clustering requires a reliable infrastructure, as unreachable hosts withouth quorum will fence and restart.</value>
+    <value>Clustering requires a reliable infrastructure, as unreachable hosts without quorum will fence and restart.</value>
   </data>
   <data name="&gt;&gt;labelInfo.Name" xml:space="preserve">
     <value>labelInfo</value>
