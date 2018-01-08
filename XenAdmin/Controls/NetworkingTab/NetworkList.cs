@@ -1041,7 +1041,7 @@ namespace XenAdmin.Controls.NetworkingTab
                     return;
                 }
             }
-            e.SortResult = StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString());
+            e.SortResult = (e.CellValue1 == null || e.CellValue2 == null) ? 0 : (StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString()));
             e.Handled = true;
         }
     }

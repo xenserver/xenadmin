@@ -218,11 +218,8 @@
   <data name="ColumnSriovSupported.HeaderText" xml:space="preserve">
     <value>SR-IOV supported</value>
   </data>
-  <data name="ColumnSriovSupported.MinimumWidth" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
   <data name="ColumnSriovSupported.Width" type="System.Int32, mscorlib">
-    <value>150</value>
+    <value>125</value>
   </data>
   <data name="dataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
