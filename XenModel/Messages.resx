@@ -5656,16 +5656,16 @@ Would you like to eject these ISOs before continuing?</value>
     <value>You must disable HA before clustering can be enabled.</value>
   </data>
   <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
-    <value>Your pool license does not allow GFS2.</value>
+    <value>Your pool license does not allow Thin Provisioning (GFS2).</value>
   </data>
   <data name="GFS2_NO_NETWORK" xml:space="preserve">
     <value>Clustering cannot be enabled because there are no suitable networks.</value>
   </data>
   <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
-    <value>GFS2 requires clustering to be enabled on the pool.</value>
+    <value>Thin Provisioning (GFS2) requires clustering to be enabled on the pool.</value>
   </data>
   <data name="GFS2_SR_ATTACHED" xml:space="preserve">
-    <value>Clustering cannot be disabled because there are GFS2 storage repositories attached to this pool.</value>
+    <value>Clustering cannot be disabled because there are Thin Provisioning (GFS2) storage repositories attached to this pool.</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>

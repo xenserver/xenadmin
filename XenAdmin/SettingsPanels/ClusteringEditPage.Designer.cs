@@ -33,13 +33,17 @@
             this.CheckBoxEnableClustering = new System.Windows.Forms.CheckBox();
             this.labelNetwork = new System.Windows.Forms.Label();
             this.tableLayoutInfo = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBoxInfo = new System.Windows.Forms.PictureBox();
+            this.pictureBoxInfo1 = new System.Windows.Forms.PictureBox();
             this.labelWarning = new System.Windows.Forms.Label();
+            this.labelInfo = new System.Windows.Forms.Label();
+            this.labelHostCountWarning = new System.Windows.Forms.Label();
             this.labelTitle = new XenAdmin.Controls.Common.AutoHeightLabel();
             this.comboBoxNetwork = new XenAdmin.Controls.NetworkComboBox();
+            this.pictureBoxInfo2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -68,21 +72,34 @@
             // 
             resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutInfo, 2);
-            this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo, 0, 0);
+            this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo2, 0, 2);
+            this.tableLayoutInfo.Controls.Add(this.pictureBoxInfo1, 0, 0);
             this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
+            this.tableLayoutInfo.Controls.Add(this.labelInfo, 1, 2);
+            this.tableLayoutInfo.Controls.Add(this.labelHostCountWarning, 1, 3);
             this.tableLayoutInfo.Name = "tableLayoutInfo";
             // 
-            // pictureBoxInfo
+            // pictureBoxInfo1
             // 
-            this.pictureBoxInfo.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
-            resources.ApplyResources(this.pictureBoxInfo, "pictureBoxInfo");
-            this.pictureBoxInfo.Name = "pictureBoxInfo";
-            this.pictureBoxInfo.TabStop = false;
+            resources.ApplyResources(this.pictureBoxInfo1, "pictureBoxInfo1");
+            this.pictureBoxInfo1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBoxInfo1.Name = "pictureBoxInfo1";
+            this.pictureBoxInfo1.TabStop = false;
             // 
             // labelWarning
             // 
             resources.ApplyResources(this.labelWarning, "labelWarning");
             this.labelWarning.Name = "labelWarning";
+            // 
+            // labelInfo
+            // 
+            resources.ApplyResources(this.labelInfo, "labelInfo");
+            this.labelInfo.Name = "labelInfo";
+            // 
+            // labelHostCountWarning
+            // 
+            resources.ApplyResources(this.labelHostCountWarning, "labelHostCountWarning");
+            this.labelHostCountWarning.Name = "labelHostCountWarning";
             // 
             // labelTitle
             // 
@@ -100,6 +117,13 @@
             resources.ApplyResources(this.comboBoxNetwork, "comboBoxNetwork");
             this.comboBoxNetwork.Name = "comboBoxNetwork";
             // 
+            // pictureBoxInfo2
+            // 
+            resources.ApplyResources(this.pictureBoxInfo2, "pictureBoxInfo2");
+            this.pictureBoxInfo2.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            this.pictureBoxInfo2.Name = "pictureBoxInfo2";
+            this.pictureBoxInfo2.TabStop = false;
+            // 
             // ClusteringEditPage
             // 
             resources.ApplyResources(this, "$this");
@@ -110,7 +134,8 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutInfo.ResumeLayout(false);
             this.tableLayoutInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInfo2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -121,10 +146,13 @@
         private Controls.Common.AutoHeightLabel labelTitle;
         private System.Windows.Forms.CheckBox CheckBoxEnableClustering;
         private System.Windows.Forms.Label labelNetwork;
-        private System.Windows.Forms.PictureBox pictureBoxInfo;
+        private System.Windows.Forms.PictureBox pictureBoxInfo1;
         private System.Windows.Forms.Label labelWarning;
         private Controls.NetworkComboBox comboBoxNetwork;
         private System.Windows.Forms.TableLayoutPanel tableLayoutInfo;
+        private System.Windows.Forms.Label labelInfo;
+        private System.Windows.Forms.Label labelHostCountWarning;
+        private System.Windows.Forms.PictureBox pictureBoxInfo2;
 
     }
 }

@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -81,7 +82,8 @@ namespace XenAdmin.SettingsPanels
         public void SetXenObjects(IXenObject orig, IXenObject clone)
         {
             pool = Helpers.GetPoolOfOne(clone.Connection);
-            tableLayoutInfo.Visible = false;
+            labelWarning.Visible = false;
+            pictureBoxInfo1.Visible = false;
 
             var existingCluster = pool.Connection.Cache.Clusters.FirstOrDefault();
             clusteringEnabled = existingCluster != null;
@@ -104,6 +106,8 @@ namespace XenAdmin.SettingsPanels
             {
                 DisableControls(Messages.GFS2_HA_ENABLED);
             }
+
+            labelHostCountWarning.Visible = clone.Connection.Cache.HostCount < 3;
         }
 
         public bool ValidToSave { get { return true; }}
@@ -155,7 +159,7 @@ namespace XenAdmin.SettingsPanels
         private void DisableControls(string message)
         {
             comboBoxNetwork.Enabled = labelNetwork.Enabled = CheckBoxEnableClustering.Enabled = false;
-            tableLayoutInfo.Visible = true;
+            labelWarning.Visible = pictureBoxInfo1.Visible = true;
             labelWarning.Text = message;
         }
 

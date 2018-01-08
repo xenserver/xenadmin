@@ -16151,7 +16151,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your pool license does not allow GFS2..
+        ///   Looks up a localized string similar to Your pool license does not allow Thin Provisioning (GFS2)..
         /// </summary>
         public static string GFS2_INCORRECT_POOL_LICENSE {
             get {
@@ -16169,7 +16169,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GFS2 requires clustering to be enabled on the pool..
+        ///   Looks up a localized string similar to Thin Provisioning (GFS2) requires clustering to be enabled on the pool..
         /// </summary>
         public static string GFS2_REQUIRES_CLUSTERING_ENABLED {
             get {
@@ -16178,7 +16178,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clustering cannot be disabled because there are GFS2 storage repositories attached to this pool..
+        ///   Looks up a localized string similar to Clustering cannot be disabled because there are Thin Provisioning (GFS2) storage repositories attached to this pool..
         /// </summary>
         public static string GFS2_SR_ATTACHED {
             get {
