@@ -31,12 +31,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using XenAPI;
-
-using XenAdmin.Model;
-
 using XenAdmin.Network;
 
 namespace XenAdmin.Actions
@@ -77,22 +74,6 @@ namespace XenAdmin.Actions
             ReconfigureManagement(action, src, new_dest, false, false, lo, true);
             ReconfigureManagement(action, src, new_dest, true, false, hi, true);
         }
-
-        //internal static void DeconfigureSecondaryManagement(AsyncAction action, PIF pif, int hi)
-        //{
-        //    int mid = (action.PercentComplete + hi) / 2;
-        //    BringDown(action, pif, false, mid);
-        //    BringDown(action, pif, true, hi);
-        //}
-
-        //internal static void ReconfigureSecondaryManagement(AsyncAction action, PIF pif, int hi)
-        //{
-        //    // We reconfigure the interfaces on the slaves, then the master.
-        //    int mid = (action.PercentComplete + hi) / 2;
-
-        //    BringUp(action, pif, false, mid);
-        //    BringUp(action, pif, true, hi);
-        //}
 
         private static void BringUp(AsyncAction action, PIF new_pif, bool this_host, int hi)
         {
@@ -162,12 +143,8 @@ namespace XenAdmin.Actions
                 action.PollToCompletion(action.PercentComplete, hi);
                 log.DebugFormat("Plugging {0} {1} done.", pif.Name(), pif.uuid);
             }
+            action.PercentComplete = hi;
         }
-
-        //private static void BringDown(AsyncAction action, PIF master, bool this_host, int hi)
-        //{
-        //    ForSomeHosts(action, master, this_host, false, hi, BringDown);
-        //}
 
         /// <summary>
         /// Depurpose (set disallow_unplug=false) and remove the IP address from the given PIF.
@@ -361,6 +338,11 @@ namespace XenAdmin.Actions
         /// </summary>
         private static void ClearIP(AsyncAction action, PIF pif, int hi)
         {
+            // if the network is used by clustering, then we don't remove the IP address
+            var isUsedByClustering = pif.Connection.Cache.Clusters.Any(cluster => cluster.network.opaque_ref == pif.network.opaque_ref);
+            if (isUsedByClustering)
+                return;
+
             log.DebugFormat("Removing IP address from {0} {1}...", pif.Name(), pif.uuid);
             action.Description = string.Format(Messages.ACTION_CHANGE_NETWORKING_BRINGING_DOWN, pif.Name());
 
