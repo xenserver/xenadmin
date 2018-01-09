@@ -6966,6 +6966,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking server selection.
+        /// </summary>
+        public static string CHECKING_SERVER_SELECTION {
+            get {
+                return ResourceManager.GetString("CHECKING_SERVER_SELECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking server side status.
         /// </summary>
         public static string CHECKING_SERVER_SIDE_STATUS {
@@ -30713,6 +30722,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server selection check.
+        /// </summary>
+        public static string SERVER_SELECTION_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("SERVER_SELECTION_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk space check.
         /// </summary>
         public static string SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION {
@@ -34672,6 +34690,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_RUNNING_PRECHECK {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_RUNNING_PRECHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: The update needs to be applied on all servers in the pool..
+        /// </summary>
+        public static string UPDATES_WIZARD_SERVER_SELECTION_PROBLEM {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_SERVER_SELECTION_PROBLEM", resourceCulture);
             }
         }
         
