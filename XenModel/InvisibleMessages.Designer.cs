@@ -232,7 +232,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://wiki.xenserver.org/XenCenter_Plugins.
+        ///   Looks up a localized string similar to https://more.citrix.com/xenserver-plugin-development.
         /// </summary>
         public static string PLUGINS_URL {
             get {
