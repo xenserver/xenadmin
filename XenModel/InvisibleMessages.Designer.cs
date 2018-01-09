@@ -151,7 +151,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserverenterprise.
+        ///   Looks up a localized string similar to http://store.citrix.com/XSInProduct.
         /// </summary>
         public static string LICENSE_EXPIRY_WEBPAGE {
             get {
@@ -214,7 +214,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.citrix.com/xenserverenterprise.
+        ///   Looks up a localized string similar to https://www.citrix.com/downloads/xenserver.
         /// </summary>
         public static string OUT_OF_DATE_WEBSITE {
             get {
