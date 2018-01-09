@@ -1031,17 +1031,25 @@ namespace XenAdmin.Controls.NetworkingTab
         {
             if (XenObject != null && XenObject is VM && e.Column.Index == DeviceColumn.Index)
             {
-                int val1 = 0;
-                int val2 = 0;
-                if (int.TryParse(e.CellValue1.ToString(), out val1)
-                    && int.TryParse(e.CellValue2.ToString(), out val2))
+                int val1, val2;
+                if (e.CellValue1 != null && int.TryParse(e.CellValue1.ToString(), out val1)
+                    && e.CellValue2 != null && int.TryParse(e.CellValue2.ToString(), out val2))
                 {
                     e.SortResult = val1.CompareTo(val2);
                     e.Handled = true;
                     return;
                 }
             }
-            e.SortResult = (e.CellValue1 == null || e.CellValue2 == null) ? 0 : (StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString()));
+
+            if (e.CellValue1 == null && e.CellValue2 == null)
+                e.SortResult = 0;
+            else if (e.CellValue1 == null && e.CellValue2 != null)
+                e.SortResult = 1;
+            else if (e.CellValue1 != null && e.CellValue2 == null)
+                e.SortResult = -1;
+            else
+                e.SortResult = StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString());
+
             e.Handled = true;
         }
     }
