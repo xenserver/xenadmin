@@ -180,7 +180,7 @@
     <value>Vendor</value>
   </data>
   <data name="ColumnVendorName.Width" type="System.Int32, mscorlib">
-    <value>70</value>
+    <value>69</value>
   </data>
   <metadata name="ColumnDeviceName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -211,6 +211,15 @@
   </data>
   <data name="ColumnFCoECapable.Width" type="System.Int32, mscorlib">
     <value>105</value>
+  </data>
+  <metadata name="ColumnSriovSupported.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnSriovSupported.HeaderText" xml:space="preserve">
+    <value>SR-IOV supported</value>
+  </data>
+  <data name="ColumnSriovSupported.Width" type="System.Int32, mscorlib">
+    <value>125</value>
   </data>
   <data name="dataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -640,6 +649,12 @@
     <value>ColumnFCoECapable</value>
   </data>
   <data name="&gt;&gt;ColumnFCoECapable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnSriovSupported.Name" xml:space="preserve">
+    <value>ColumnSriovSupported</value>
+  </data>
+  <data name="&gt;&gt;ColumnSriovSupported.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
