@@ -7552,9 +7552,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Disable Changed Block Tracking on selected VMs.
         /// </summary>
-        public static string CONFIRM_DISABLE_CBT_VMs_TITLE {
+        public static string CONFIRM_DISABLE_CBT_VMS_TITLE {
             get {
-                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMs_TITLE", resourceCulture);
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMS_TITLE", resourceCulture);
             }
         }
         
