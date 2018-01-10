@@ -5665,7 +5665,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Thin Provisioning (GFS2) requires clustering to be enabled on the pool.</value>
   </data>
   <data name="GFS2_SR_ATTACHED" xml:space="preserve">
-    <value>Clustering cannot be disabled because there are Thin Provisioning (GFS2) storage repositories attached to this pool.</value>
+    <value>Clustering cannot be disabled because there are thinly provisioned (GFS2) storage repositories attached to this pool.</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>

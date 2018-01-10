@@ -16178,7 +16178,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clustering cannot be disabled because there are Thin Provisioning (GFS2) storage repositories attached to this pool..
+        ///   Looks up a localized string similar to Clustering cannot be disabled because there are thinly provisioned (GFS2) storage repositories attached to this pool..
         /// </summary>
         public static string GFS2_SR_ATTACHED {
             get {
