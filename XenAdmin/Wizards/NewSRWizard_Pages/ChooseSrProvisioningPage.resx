@@ -202,13 +202,13 @@
     <value>20, 3, 3, 3</value>
   </data>
   <data name="labelGFS2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>511, 15</value>
+    <value>506, 30</value>
   </data>
   <data name="labelGFS2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="labelGFS2.Text" xml:space="preserve">
-    <value>The SR will be formatted with the GFS2 cluster file system for hosting thinly provisioned images.</value>
+    <value>The SR will be formatted with the GFS2 cluster file system for hosting thinly provisioned virtual disks.</value>
   </data>
   <data name="&gt;&gt;labelGFS2.Name" xml:space="preserve">
     <value>labelGFS2</value>
@@ -229,7 +229,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="radioButtonLvm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 83</value>
+    <value>3, 98</value>
   </data>
   <data name="radioButtonLvm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 6, 3, 3</value>
@@ -262,7 +262,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 108</value>
+    <value>20, 123</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>20, 3, 3, 3</value>
@@ -379,7 +379,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 129</value>
+    <value>3, 144</value>
   </data>
   <data name="tableLayoutInfo.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
