@@ -143,7 +143,7 @@ namespace XenAdmin.Commands
             get
             {
                 return GetSelection().Count == 1 ? String.Format(Messages.CONFIRM_DISABLE_CBT_VM_TITLE, GetSelection().AsXenObjects<VM>()[0].Name()) :
-                                                   Messages.CONFIRM_DISABLE_CBT_VMs_TITLE;
+                                                   Messages.CONFIRM_DISABLE_CBT_VMS_TITLE;
             }
         }
 

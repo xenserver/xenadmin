@@ -834,6 +834,9 @@
   <data name="PIF_DOES_NOT_ALLOW_UNPLUG" xml:space="preserve">
     <value>The operation you requested cannot be performed because the specified PIF does not allow unplug.</value>
   </data>
+  <data name="PIF_HAS_FCOE_SR_IN_USE" xml:space="preserve">
+    <value>The operation you requested cannot be performed because the specified PIF has FCoE SR in use.</value>
+  </data>
   <data name="PIF_HAS_NO_NETWORK_CONFIGURATION" xml:space="preserve">
     <value>PIF has no network configuration</value>
   </data>

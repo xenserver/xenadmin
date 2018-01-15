@@ -115,6 +115,8 @@ namespace XenAdmin.Dialogs
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
                 standardPerSocketRadioButton.Text = String.Format(Messages.STANDARD_PERSOCKET_LICENSES_X_REQUIRED,
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h => h.CpuSockets())));
+
+                desktopCloudRadioButton.Visible = xos.TrueForAll(x => Helpers.JuraOrGreater(x.Connection));
             } 
             else 
             {
@@ -123,6 +125,7 @@ namespace XenAdmin.Dialogs
                 standardPerSocketRadioButton.Visible = false;
                 desktopPlusRadioButton.Visible = false;
                 desktopRadioButton.Visible = false;
+                desktopCloudRadioButton.Visible = false;
                 perSocketRadioButton.Checked = true;
                 perSocketRadioButton.Text = String.Format(Messages.PERSOCKET_LICENSES_X_REQUIRED,
                                                           xos.Sum(x => x.Connection.Cache.Hosts.Sum(h=>h.CpuSockets())));
@@ -160,6 +163,9 @@ namespace XenAdmin.Dialogs
                 case Host.Edition.DesktopPlus:
                     CheckRadioButtonIfVisible(desktopPlusRadioButton);
                     break;
+                case Host.Edition.DesktopCloud:
+                    CheckRadioButtonIfVisible(desktopCloudRadioButton);
+                    break;
             }
         }
 
@@ -182,6 +188,9 @@ namespace XenAdmin.Dialogs
 
             if (desktopPlusRadioButton.Checked)
                 return Host.Edition.DesktopPlus;
+
+            if (desktopCloudRadioButton.Checked)
+                return Host.Edition.DesktopCloud;
 
             return Host.Edition.StandardPerSocket;
         }
