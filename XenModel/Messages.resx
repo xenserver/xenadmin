@@ -2531,6 +2531,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>Checking reboots required</value>
   </data>
+  <data name="CHECKING_SERVER_SELECTION" xml:space="preserve">
+    <value>Checking server selection</value>
+  </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>Checking server side status</value>
   </data>
@@ -2637,12 +2640,12 @@ Do you want to continue?</value>
 Do you want to continue?</value>
   </data>
   <data name="CONFIRM_CHANGE_MEMORY_PLURAL" xml:space="preserve">
-    <value>Changing the memory of these VMs while they are running will cause them to be forcibly rebooted. This operation can lose data.
+    <value>Changing the memory of these VMs while they are running will cause them to be forcibly rebooted. This operation can cause data loss.
 
 Do you want to continue?</value>
   </data>
   <data name="CONFIRM_CHANGE_MEMORY_SINGULAR" xml:space="preserve">
-    <value>Changing the memory of this VM while it is running will cause it to be forcibly rebooted. This operation can lose data.
+    <value>Changing the memory of this VM while it is running will cause it to be forcibly rebooted. This operation can cause data loss.
 
 Do you want to continue?</value>
   </data>
@@ -2761,11 +2764,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
+  <data name="CONFIRM_DISABLE_CBT_VMS_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on selected VMs</value>
+  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on VM "{0}"</value>
-  </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on selected VMs</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -4324,6 +4327,9 @@ Eject the CD and try again.</value>
   </data>
   <data name="DR_CONFIGURE_TITLE" xml:space="preserve">
     <value>Configure DR on '{0}'</value>
+  </data>
+  <data name="DR_CONFIGURE_TOO_MANY_SRS" xml:space="preserve">
+    <value>You can only select up to {0} SRs to store the VM configuration data.</value>
   </data>
   <data name="DR_DRYRUN_AMP" xml:space="preserve">
     <value>Dr&amp;y-run...</value>
@@ -7068,6 +7074,10 @@ Size: {3}</value>
   </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
+    <value>Eligible for support 
+XenAdd/XenDesktop [Citrix] Cloud features enabled</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>Eligible for support 
@@ -10484,6 +10494,12 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>Rolling Pool &amp;Upgrade...</value>
   </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
+    <value>S&amp;top</value>
+  </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_TEST" xml:space="preserve">
+    <value>&amp;Test</value>
+  </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again.</value>
   </data>
@@ -10713,6 +10729,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="SERVER_REQUEST_IN_PROGRESS" xml:space="preserve">
     <value>A server request is in progress</value>
+  </data>
+  <data name="SERVER_SELECTION_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Server selection check</value>
   </data>
   <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
     <value>Disk space check</value>
@@ -11991,6 +12010,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_RUNNING_PRECHECK" xml:space="preserve">
     <value>Precheck for {0} in {1}...</value>
+  </data>
+  <data name="UPDATES_WIZARD_SERVER_SELECTION_PROBLEM" xml:space="preserve">
+    <value>{0}: The update needs to be applied on all servers in the pool.</value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>Storage repository '{0}'</value>

@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Threading;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
@@ -95,7 +96,12 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                            {
                                vm.Locked = false;
                            }
-
+                           int wait = 5000; // wait up to 5 seconds for the cache to be updated
+                           while (wait > 0 && vm.GetAutoPowerOn() != autostartValue)
+                           {
+                               Thread.Sleep(100);
+                               wait -= 100;
+                           }
                        };
         }
 

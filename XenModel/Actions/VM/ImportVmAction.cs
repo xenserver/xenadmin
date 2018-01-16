@@ -146,7 +146,7 @@ namespace XenAdmin.Actions
                     throw new CancelledException();
 
                 isTemplate = VM.get_is_a_template(Session, vmRef);
-                if (isTemplate && VM.get_is_default_template(Session, vmRef))
+                if (isTemplate && Helpers.FalconOrGreater(Connection) && VM.get_is_default_template(Session, vmRef))
                 {
                     var otherConfig = VM.get_other_config(Session, vmRef);
                     if (!otherConfig.ContainsKey(IMPORT_TASK) || otherConfig[IMPORT_TASK] != RelatedTask.opaque_ref)

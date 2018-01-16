@@ -399,6 +399,24 @@ namespace XenAdmin.Core
         }
 
         /// <param name="conn">May be null, in which case true is returned.</param>
+         public static bool JuraOrGreater(IXenConnection conn)
+        {
+            return conn == null || JuraOrGreater(Helpers.GetMaster(conn));
+        }
+
+        /// Jura is ver. 2.5.0
+        /// <param name="host">May be null, in which case true is returned.</param>
+        public static bool JuraOrGreater(Host host)
+        {
+            if (host == null)
+                return true;
+
+            string platform_version = HostPlatformVersion(host);
+            return
+                platform_version != null && productVersionCompare(platform_version, "2.4.50") >= 0;
+        }
+
+        /// <param name="conn">May be null, in which case true is returned.</param>
         public static bool KolkataOrGreater(IXenConnection conn)
         {
             return conn == null || KolkataOrGreater(Helpers.GetMaster(conn));

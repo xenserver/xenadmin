@@ -33,7 +33,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -48,6 +47,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private Bitmap testOK = Resources._000_Tick_h32bit_16;
+        private TestLocationInstallerAction testingAction = null;
 
         public RollingUpgradeWizardInstallMethodPage()
         {
@@ -85,6 +85,21 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public override string HelpID { get { return "upgrademethod"; } }
 
+        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        {
+            if (testingAction != null)
+            {
+                StopUrlTesting();
+            }
+        }
+
+        public override void PageCancelled()
+        {
+            if (testingAction != null)
+            {
+                StopUrlTesting();
+            }
+        }
         #endregion
 
         private void ShowBottomError(string msg)
@@ -208,6 +223,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
+            if (testingAction == null)
+            {
+                StartUrlTesting();
+            }
+            else
+            {
+                StopUrlTesting();
+            }
+        }
+
+        private void StartUrlTesting()
+        {
             var host = SelectedMasters.First();
             Pool pool = host != null ? Helpers.GetPoolOfOne(host.Connection) : null;
             host = pool != null ? pool.HostsToUpgrade().First() : null;
@@ -224,12 +251,28 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             action.Completed += action_Completed;
             ShowSideIcon(Resources.ajax_loader);
             ChangeInputEnablement(false);
+            buttonTest.Enabled = true;
+            buttonTest.Text = Messages.ROLLING_UPGRADE_BUTTON_LABEL_STOP;
+            testingAction = action;
             action.RunAsync();
+        }
+
+        // The URL-Testing is not be able to cancel, as it is implemented as a plug-in on server side.
+        // What we do is: 
+        //   1. Ignore the Completed event of the action, and 
+        //   2. Recover the button text and side icon.
+        private void StopUrlTesting()
+        {
+            buttonTest.Text = Messages.ROLLING_UPGRADE_BUTTON_LABEL_TEST;
+            testingAction.Completed -= action_Completed;
+            testingAction = null;
+            ChangeInputEnablement(true);
+            HideSideIcon();
         }
 
         private void action_Completed(ActionBase sender)
         {
-            Program.BeginInvoke(this, () => ChangeInputEnablement(true));
+            Program.BeginInvoke(this, () => StopUrlTesting());
             var action = (AsyncAction)sender;
             bool result = false;
             string resultMessage = string.Empty;
@@ -268,6 +311,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 });
             }
         }
+
 
         private void ChangeInputEnablement(bool value)
         {

@@ -514,6 +514,21 @@ namespace XenAdmin.Wizards.PatchingWizard
             List<KeyValuePair<string, List<Check>>> checks = GenerateCommonChecks(applicableServers);
             List<Check> checkGroup;
 
+            //Update Homogeneity check for InvernessOrGreater
+            if (update != null)
+            {
+                var homogeneityChecks = new List<Check>();
+                foreach (var pool in SelectedPools.Where(pool => Helpers.InvernessOrGreater(pool.Connection)))
+                {
+                    homogeneityChecks.Add(new ServerSelectionCheck(pool, update, SelectedServers));
+                }
+
+                if (homogeneityChecks.Count > 0)
+                {
+                    checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SERVER_SELECTION, homogeneityChecks));
+                }
+            }
+
             //Checking other things
             if (update != null)
             {
