@@ -1835,4 +1835,7 @@
   <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>ストレージの修復</value>
   </data>
+  <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
+    <value>XenApp/XenDesktop [Citrix] Cloud</value>
+  </data>
 </root>

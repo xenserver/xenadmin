@@ -2517,6 +2517,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>再起動の確認が必要です</value>
   </data>
+  <data name="CHECKING_SERVER_SELECTION" xml:space="preserve">
+    <value>サーバーの選択を確認しています</value>
+  </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>サーバー側の状態のチェック</value>
   </data>
@@ -3624,7 +3627,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>遅延</value>
   </data>
   <data name="DATATYPE_LOADAVERAGE" xml:space="preserve">
-    <value>読み込み平均</value>
+    <value>負荷平均</value>
   </data>
   <data name="DATATYPE_MEMORY" xml:space="preserve">
     <value>メモリ</value>
@@ -7016,6 +7019,10 @@ SCSI ID: {2}
   </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>状態</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
+    <value>サポート契約が有効です
+XenApp/XenDesktop [Citrix] Cloud 機能が有効です</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
@@ -10657,6 +10664,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="SERVER_REQUEST_IN_PROGRESS" xml:space="preserve">
     <value>サーバー要求の処理中</value>
   </data>
+  <data name="SERVER_SELECTION_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>サーバーの選択チェック</value>
+  </data>
   <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
     <value>ディスク容量のチェック</value>
   </data>
@@ -11935,6 +11945,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPDATES_WIZARD_RUNNING_PRECHECK" xml:space="preserve">
     <value>{1} の {0} を事前チェック中...</value>
   </data>
+  <data name="UPDATES_WIZARD_SERVER_SELECTION_PROBLEM" xml:space="preserve">
+    <value>{0}: プール内のすべてのサーバーに更新を適用する必要があります。</value>
+  </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>ストレージ リポジトリ '{0}'</value>
   </data>
@@ -13183,7 +13196,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>ディスク書き込み</value>
   </data>
   <data name="WLB_OPT_REASON_LOADAVERAGE" xml:space="preserve">
-    <value>読み込み平均</value>
+    <value>負荷平均</value>
   </data>
   <data name="WLB_OPT_REASON_MEMORY" xml:space="preserve">
     <value>メモリ</value>
