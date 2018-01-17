@@ -382,6 +382,7 @@
     </Compile>
     <Compile Include="XenAPI\network_default_locking_mode.cs" />
     <Compile Include="XenAPI\network_purpose.cs" />
+    <Compile Include="XenAPI\Network_sriov.cs" />
     <Compile Include="XenAPI\PCI.cs" />
     <Compile Include="XenAPI\PGPU.cs" />
     <Compile Include="XenAPI\pgpu_dom0_access.cs" />
@@ -397,6 +398,7 @@
     <Compile Include="XenAPI\PVS_site.cs" />
     <Compile Include="XenAPI\SDN_controller.cs" />
     <Compile Include="XenAPI\sdn_controller_protocol.cs" />
+    <Compile Include="XenAPI\sriov_configuration_mode.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\USB_group.cs" />
