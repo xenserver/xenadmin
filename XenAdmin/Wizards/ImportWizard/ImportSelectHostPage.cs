@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -50,6 +51,8 @@ namespace XenAdmin.Wizards.ImportWizard
         private List<Xen_ConfigurationSettingData_Type> vgpuSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> hardwarePlatformSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> vendorDeviceSettings = new List<Xen_ConfigurationSettingData_Type>();
+
+        public event Action HostSelectionChanged;
 
         #region XenTabPage overrides
 
@@ -139,6 +142,9 @@ namespace XenAdmin.Wizards.ImportWizard
             }
 
             ShowWarning(string.Join("\n", warnings));
+
+            if (HostSelectionChanged != null)
+                HostSelectionChanged();
         }
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
