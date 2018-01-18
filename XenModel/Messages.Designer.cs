@@ -23048,6 +23048,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SR-IOV.
+        /// </summary>
+        public static string NETWORK_SRIOV {
+            get {
+                return ResourceManager.GetString("NETWORK_SRIOV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} on {1}.
         /// </summary>
         public static string NETWORK_WITH_POOL {
