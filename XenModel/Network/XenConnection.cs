@@ -411,23 +411,6 @@ namespace XenAdmin.Network
         }
 
         /// <summary>
-        /// For retrieving a new session. Changes connection's Username and Password.
-        /// </summary>
-        /// <param name="hostname"></param>
-        /// <param name="port"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="isElevated"></param>
-        /// <returns></returns>
-        private Session NewSession(string hostname, int port, string username, string password, bool isElevated)
-        {
-            Password = password;
-            Username = username;
-
-            return GetNewSession(hostname, port, username, password, isElevated);
-        }
-
-        /// <summary>
         /// For retrieving a new session. 
         /// </summary>
         /// <param name="hostname"></param>
@@ -1198,7 +1181,7 @@ namespace XenAdmin.Network
             {
                 log.DebugFormat("IXenConnection: trying to connect to {0}", HostnameWithPort);
 
-                Session session = NewSession(task.Hostname, task.Port, Username, Password, false);
+                Session session = GetNewSession(task.Hostname, task.Port, Username, Password, false);
                 // Save the session so we can log it out later
                 task.Session = session;
 
