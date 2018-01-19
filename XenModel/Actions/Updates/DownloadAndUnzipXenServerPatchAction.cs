@@ -194,7 +194,7 @@ namespace XenAdmin.Actions
             }
             catch (Exception e)
             {
-                log.InfoFormat("Exception occurred when extracting downloaded archive: {0}", e.Message);
+                log.ErrorFormat("Exception occurred when extracting downloaded archive: {0}", e.Message);
                 throw new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_EXTRACTING_ERROR);
             }
             finally
@@ -209,7 +209,7 @@ namespace XenAdmin.Actions
             if (string.IsNullOrEmpty(PatchPath) && downloadUpdate)
             {
                 MarkCompleted(new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_FILE_NOT_FOUND));
-                log.InfoFormat("No '{0}' file could be located in downloaded archive", string.Concat(updateFileExtensions));
+                log.InfoFormat("The downloaded archive does not contain a file with any of the following extensions: {0}", string.Join(", ", updateFileExtensions));
             }
         }
 
