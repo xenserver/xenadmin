@@ -43,7 +43,7 @@ namespace XenAdmin.Wizards.ImportWizard
 		private IXenObject m_selectedObject;
         private bool m_buttonNextEnabled;
 
-        public event Action HostSelectionChanged;
+        public event Action<IXenConnection> ConnectionSelectionChanged;
 
 		public GlobalSelectHost()
 		{
@@ -101,8 +101,8 @@ namespace XenAdmin.Wizards.ImportWizard
 			m_buttonNextEnabled = e.SomethingSelected;
             OnPageUpdated();
 			IsDirty = true;
-            if (HostSelectionChanged != null)
-                HostSelectionChanged();
+            if (ConnectionSelectionChanged != null)
+                ConnectionSelectionChanged(SelectedHost != null ? SelectedHost.Connection : SelectedConnection);
         }
 
 		private void m_buttonAddNewServer_Click(object sender, EventArgs e)

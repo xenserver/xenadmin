@@ -36,6 +36,7 @@ using System.Text.RegularExpressions;
 
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Network;
 using XenAdmin.Wizards.GenericPages;
 using XenAdmin.Wizards.ImportWizard.Filters;
 using XenAPI;
@@ -52,7 +53,7 @@ namespace XenAdmin.Wizards.ImportWizard
         private List<Xen_ConfigurationSettingData_Type> hardwarePlatformSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> vendorDeviceSettings = new List<Xen_ConfigurationSettingData_Type>();
 
-        public event Action HostSelectionChanged;
+        public event Action<IXenConnection> ConnectionSelectionChanged;
 
         #region XenTabPage overrides
 
@@ -143,8 +144,8 @@ namespace XenAdmin.Wizards.ImportWizard
 
             ShowWarning(string.Join("\n", warnings));
 
-            if (HostSelectionChanged != null)
-                HostSelectionChanged();
+            if (ConnectionSelectionChanged != null)
+                ConnectionSelectionChanged(ChosenItem != null ? ChosenItem.Connection : null);
         }
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)

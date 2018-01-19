@@ -111,8 +111,8 @@ namespace XenAdmin.Wizards.ImportWizard
 			m_pageImportSource.OvfModeOnly = ovfModeOnly;
             AddPages(m_pageImportSource, m_pageHost, m_pageStorage, m_pageNetwork, m_pageFinish);
 
-            m_pageHost.HostSelectionChanged += pageHost_HostSelectionChanged;
-            m_pageXvaHost.HostSelectionChanged += pageXvaHost_HostSelectionChanged;
+            m_pageHost.ConnectionSelectionChanged += pageHost_ConnectionSelectionChanged;
+            m_pageXvaHost.ConnectionSelectionChanged += pageHost_ConnectionSelectionChanged;
             ShowXenAppXenDesktopWarning(con);
 		}
 
@@ -727,14 +727,9 @@ namespace XenAdmin.Wizards.ImportWizard
                 HideInformationMessage();
         }
 
-        private void pageHost_HostSelectionChanged()
+        private void pageHost_ConnectionSelectionChanged(IXenConnection connection)
         {
-            ShowXenAppXenDesktopWarning(m_pageHost.ChosenItem == null ? null : m_pageHost.ChosenItem.Connection);
-        }
-
-        private void pageXvaHost_HostSelectionChanged()
-        {
-            ShowXenAppXenDesktopWarning(m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection : m_pageXvaHost.SelectedHost.Connection);
+            ShowXenAppXenDesktopWarning(connection);
         }
 
 		#region Nested items
