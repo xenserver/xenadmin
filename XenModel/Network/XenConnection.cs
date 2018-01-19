@@ -267,20 +267,6 @@ namespace XenAdmin.Network
         }
 
         /// <summary>
-        /// Used by the automated tests. Initializes a new instance of the <see cref="XenConnection"/> class.
-        /// <param name="hostname"></param>
-        /// <param name="friendlyName"></param>
-        /// </summary>
-        public XenConnection(string hostname, string friendlyName)
-            : this()
-        {
-            this.Hostname = hostname;
-            this.FriendlyName = friendlyName;
-            this.Port = 443;
-            this.SaveDisconnected = true;
-        }
-
-        /// <summary>
         /// For use by unit tests only.
         /// </summary>
         /// <param name="user"></param>
