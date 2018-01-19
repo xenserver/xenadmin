@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.ServerDBs;
 
@@ -39,8 +38,7 @@ namespace XenAdmin.Network
     {
         public static Session CreateSession(IXenConnection connection, string hostname, int port)
         {
-
-            if (Helpers.DbProxyIsSimulatorUrl(hostname))
+            if (DbProxy.IsSimulatorUrl(hostname))
                 return new Session(DbProxy.GetProxy(connection, hostname), connection);
             else
                 return new Session(Session.STANDARD_TIMEOUT, connection, hostname, port);
@@ -48,7 +46,7 @@ namespace XenAdmin.Network
 
         public static Session DuplicateSession(Session session, IXenConnection connection, int timeout)
         {
-            if (Helpers.DbProxyIsSimulatorUrl(session.Url))
+            if (DbProxy.IsSimulatorUrl(session.Url))
                 return new Session(session, DbProxy.GetProxy(connection, session.Url), connection);
             else
                 return new Session(session, connection, timeout);
