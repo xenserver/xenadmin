@@ -42,6 +42,7 @@ using XenAPI;
 using System.Diagnostics;
 
 using System.Xml.Serialization;
+using XenAdmin.ServerDBs;
 
 namespace XenAdmin.Network
 {
@@ -1160,7 +1161,7 @@ namespace XenAdmin.Network
         {
             get
             {
-                return Helpers.DbProxyIsSimulatorUrl(this.Hostname);
+                return DbProxy.IsSimulatorUrl(this.Hostname);
             }
         }
 
