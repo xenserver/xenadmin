@@ -32,34 +32,38 @@
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.Text;
 
 class MainClass
 {
     public static void Main(string[] args)
     {
         Export.verbose_debugging = true;
-        if ((args.Length != 1) && (args.Length != 2))
+        if (args.Length < 1 || args.Length > 2)
         {
-            Console.WriteLine("Usage: ");
-            Console.WriteLine("  verify <archive> [optional copy]");
+            var sb = new StringBuilder();
+            sb.AppendLine();
+            sb.AppendLine("Usage").AppendLine();
+            sb.AppendLine("  xva_verify <archive> [copy]").AppendLine();
+            sb.AppendLine("where").AppendLine();
+            sb.AppendLine("  <archive>  The name of the archive file to verify. Use '-' to read from stdin.");
+            sb.AppendLine("  copy       If specified, a copy of the archive file is created.").AppendLine();
+
+            Console.WriteLine(sb.ToString());
             Environment.Exit(1);
         }
 
         try
         {
             string filename = args[0];
-            Stream f;
+
             Stream g = null;
             if (args.Length == 2)
-            {
                 g = new FileStream(args[1], FileMode.Create);
-            }
-            if (! args[0].Equals("-")) {
-                f = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            } else
-            {
-                f = Console.OpenStandardInput();
-            }
+
+            Stream f = args[0].Equals("-")
+                ? Console.OpenStandardInput()
+                : new FileStream(filename, FileMode.Open, FileAccess.Read);
 
             // check for gzip compression ( only on seekable inputs - i.e. not the stdin stream )
             if (f.CanSeek)
@@ -74,15 +78,14 @@ class MainClass
                     f.Seek(0, SeekOrigin.Begin);
                     f = new GZipStream(f, CompressionMode.Decompress);
                 }
-                catch (InvalidDataException e)
+                catch (InvalidDataException)
                 {
                     // just reset the stream - Exception means the stream is not compressed
                     f.Seek(0, SeekOrigin.Begin);
                 }
             }
             
-            bool cancelling = false;
-            new Export().verify(f, g, (Export.cancellingCallback)delegate() { return cancelling; });
+            new Export().verify(f, g, () => false);
         }
         catch (UnauthorizedAccessException)
         {
