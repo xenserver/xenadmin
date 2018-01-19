@@ -145,7 +145,7 @@
     <value>http://support.citrix.com/article/CTX141433</value>
   </data>
   <data name="LICENSE_EXPIRY_WEBPAGE" xml:space="preserve">
-    <value>http://www.citrix.com/xenserverenterprise</value>
+    <value>http://store.citrix.com/XSInProduct</value>
   </data>
   <data name="LICENSE_SERVER_DOWNLOAD_LINK" xml:space="preserve">
     <value>http://www.citrix.com/downloads/licensing/license-server</value>
@@ -166,13 +166,13 @@
     <value>Home.htm</value>
   </data>
   <data name="OUT_OF_DATE_WEBSITE" xml:space="preserve">
-    <value>http://www.citrix.com/xenserverenterprise</value>
+    <value>https://www.citrix.com/downloads/xenserver</value>
   </data>
   <data name="PARTNEROFFERS_URL" xml:space="preserve">
     <value>http://www.citrix.co.jp/partners.html?posit=glnav</value>
   </data>
   <data name="PLUGINS_URL" xml:space="preserve">
-    <value>https://wiki.xenserver.org/XenCenter_Plugins</value>
+    <value>https://more.citrix.com/xenserver-plugin-development</value>
   </data>
   <data name="PRIVACY" xml:space="preserve">
     <value>http://citrix.com/English/aboutCitrix/legal/privacyStatement.asp?ntref=hp_nav_US</value>

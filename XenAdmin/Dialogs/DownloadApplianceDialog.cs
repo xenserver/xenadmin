@@ -36,8 +36,7 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using XenAdmin.Core;
-
+using XenCenterLib;
 using XenOvf;
 
 namespace XenAdmin.Dialogs

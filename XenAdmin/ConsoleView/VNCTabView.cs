@@ -345,7 +345,7 @@ namespace XenAdmin.ConsoleView
             {
                 int[] bottomTableWidths = tableLayoutPanel1.GetColumnWidths();
                 int bottomPanelWidth = bottomTableWidths.Where((t, i) => tableLayoutPanel1.ColumnStyles[i].SizeType != SizeType.Percent).Sum();
-                Parent.MinimumSize = new Size(bottomPanelWidth + 20, 400);
+                Parent.MinimumSize = new Size(bottomPanelWidth + 100, 400);
             }
         }
 

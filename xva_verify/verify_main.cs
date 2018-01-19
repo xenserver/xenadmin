@@ -31,6 +31,7 @@
 
 using System;
 using System.IO;
+using System.IO.Compression;
 
 class MainClass
 {
@@ -47,12 +48,39 @@ class MainClass
         try
         {
             string filename = args[0];
+            Stream f;
             Stream g = null;
             if (args.Length == 2)
             {
                 g = new FileStream(args[1], FileMode.Create);
             }
-            Stream f = new FileStream(filename, FileMode.Open);
+            if (! args[0].Equals("-")) {
+                f = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            } else
+            {
+                f = Console.OpenStandardInput();
+            }
+
+            // check for gzip compression ( only on seekable inputs - i.e. not the stdin stream )
+            if (f.CanSeek)
+            {
+                try
+                {
+                    GZipStream zip = new GZipStream(f, CompressionMode.Decompress);
+                    // try reading a byte
+                    zip.ReadByte();
+
+                    // success - reset stream, use the gunzipped stream from now on
+                    f.Seek(0, SeekOrigin.Begin);
+                    f = new GZipStream(f, CompressionMode.Decompress);
+                }
+                catch (InvalidDataException e)
+                {
+                    // just reset the stream - Exception means the stream is not compressed
+                    f.Seek(0, SeekOrigin.Begin);
+                }
+            }
+            
             bool cancelling = false;
             new Export().verify(f, g, (Export.cancellingCallback)delegate() { return cancelling; });
         }

@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     public class PartialIP
     {

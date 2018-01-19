@@ -35,6 +35,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using XenAdmin.Network;
 using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin.Controls
 {

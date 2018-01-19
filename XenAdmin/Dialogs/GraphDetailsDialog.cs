@@ -38,6 +38,7 @@ using System.Windows.Forms;
 using XenAdmin.Actions;
 using XenAdmin.Controls.CustomDataGraph;
 using XenAdmin.Core;
+using XenCenterLib;
 
 
 namespace XenAdmin.Dialogs

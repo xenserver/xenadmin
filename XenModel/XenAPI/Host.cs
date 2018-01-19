@@ -1122,7 +1122,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the PUSBs field of the given host.
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_host">The opaque_ref of the given host</param>
@@ -3516,7 +3516,7 @@ namespace XenAPI
 
         /// <summary>
         /// List of physical USBs in the host
-        /// First published in Unreleased.
+        /// First published in XenServer 7.3.
         /// </summary>
         public virtual List<XenRef<PUSB>> PUSBs
         {

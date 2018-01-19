@@ -29,38 +29,46 @@
  * SUCH DAMAGE.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using System;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Checks;
+using XenAPI;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("XenCenterLib")]
-[assembly: AssemblyDescription("[Citrix] [XenCenter] base library")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("[Citrix]")]
-[assembly: AssemblyProduct("[XenCenter]")]
-[assembly: AssemblyCopyright("[BRANDING_COPYRIGHT]")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+namespace XenAdmin.Diagnostics.Problems.HostProblem
+{
+    class LicenseRestrictionProblem : ProblemWithInformationUrl
+    {
+        private readonly Host host;
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
+        public LicenseRestrictionProblem(Check check, Host host)
+            : base(check)
+        {
+            this.host = host;
+        }
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("be83f432-8d37-452d-bbc1-2f0b8c5969cc")]
+        public override string Description
+        {
+            get { return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, Helpers.GetName(host).Ellipsise(30), FriendlyErrorNames.LICENCE_RESTRICTION); }
+        }
 
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-[assembly: AssemblyVersion("0.0.0.0")]
-[assembly: AssemblyFileVersion("0000")]
-[assembly: XenCenterLib.XSVersion("[BRANDING_PRODUCT_VERSION]")]
-[assembly: InternalsVisibleTo("XenAdminTests")]
+        public override string Title
+        {
+            get { return Description; }
+        }
+
+        public override string LinkText
+        {
+            get { return Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT; }
+        }
+
+        public override string HelpMessage
+        {
+            get { return LinkText; }
+        }
+
+        public override Uri UriToLaunch
+        {
+            get { return new Uri(InvisibleMessages.UPSELL_SA); }
+        }
+    }
+}

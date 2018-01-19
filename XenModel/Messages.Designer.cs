@@ -565,6 +565,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable VM autostart.
+        /// </summary>
+        public static string ACTION_DISABLE_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLE_AUTOSTART_ON_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable Changed Block Tracking.
         /// </summary>
         public static string ACTION_DISABLE_CHANGED_BLOCK_TRACKING {
@@ -651,6 +660,15 @@ namespace XenAdmin {
         public static string ACTION_DISABLED_PVS_READ_CACHING {
             get {
                 return ResourceManager.GetString("ACTION_DISABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling autostart for &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_DISABLING_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ACTION_DISABLING_AUTOSTART_ON_VM", resourceCulture);
             }
         }
         
@@ -970,6 +988,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable VM autostart.
+        /// </summary>
+        public static string ACTION_ENABLE_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLE_AUTOSTART_ON_VM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable IGMP snooping.
         /// </summary>
         public static string ACTION_ENABLE_IGMP_SNOOPING {
@@ -1029,6 +1056,15 @@ namespace XenAdmin {
         public static string ACTION_ENABLED_PVS_READ_CACHING {
             get {
                 return ResourceManager.GetString("ACTION_ENABLED_PVS_READ_CACHING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling autostart for &apos;{0}&apos;.
+        /// </summary>
+        public static string ACTION_ENABLING_AUTOSTART_ON_VM {
+            get {
+                return ResourceManager.GetString("ACTION_ENABLING_AUTOSTART_ON_VM", resourceCulture);
             }
         }
         
@@ -6751,7 +6787,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the snashot schedule &apos;{1}&apos;.
+        ///   Looks up a localized string similar to The VM &apos;{0}&apos; is already assigned to the snapshot schedule &apos;{1}&apos;.
         ///    
         ///Do you want to assign it to the schedule &apos;{2}&apos; instead?.
         /// </summary>
@@ -6926,6 +6962,15 @@ namespace XenAdmin {
         public static string CHECKING_SERVER_NEEDS_REBOOT {
             get {
                 return ResourceManager.GetString("CHECKING_SERVER_NEEDS_REBOOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking server selection.
+        /// </summary>
+        public static string CHECKING_SERVER_SELECTION {
+            get {
+                return ResourceManager.GetString("CHECKING_SERVER_SELECTION", resourceCulture);
             }
         }
         
@@ -7188,7 +7233,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changing the memory of these VMs while they are running will cause them to be forcibly rebooted. This operation can lose data.
+        ///   Looks up a localized string similar to Changing the memory of these VMs while they are running will cause them to be forcibly rebooted. This operation can cause data loss.
         ///
         ///Do you want to continue?.
         /// </summary>
@@ -7199,7 +7244,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changing the memory of this VM while it is running will cause it to be forcibly rebooted. This operation can lose data.
+        ///   Looks up a localized string similar to Changing the memory of this VM while it is running will cause it to be forcibly rebooted. This operation can cause data loss.
         ///
         ///Do you want to continue?.
         /// </summary>
@@ -7516,9 +7561,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to Disable Changed Block Tracking on selected VMs.
         /// </summary>
-        public static string CONFIRM_DISABLE_CBT_VMs_TITLE {
+        public static string CONFIRM_DISABLE_CBT_VMS_TITLE {
             get {
-                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMs_TITLE", resourceCulture);
+                return ResourceManager.GetString("CONFIRM_DISABLE_CBT_VMS_TITLE", resourceCulture);
             }
         }
         
@@ -12047,6 +12092,15 @@ namespace XenAdmin {
         public static string DR_CONFIGURE_TITLE {
             get {
                 return ResourceManager.GetString("DR_CONFIGURE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only select up to {0} SRs to store the VM configuration data..
+        /// </summary>
+        public static string DR_CONFIGURE_TOO_MANY_SRS {
+            get {
+                return ResourceManager.GetString("DR_CONFIGURE_TOO_MANY_SRS", resourceCulture);
             }
         }
         
@@ -20130,6 +20184,16 @@ namespace XenAdmin {
         public static string LICENSE_STATUS {
             get {
                 return ResourceManager.GetString("LICENSE_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eligible for support 
+        ///XenAdd/XenDesktop [Citrix] Cloud features enabled.
+        /// </summary>
+        public static string LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED {
+            get {
+                return ResourceManager.GetString("LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED", resourceCulture);
             }
         }
         
@@ -30002,6 +30066,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to S&amp;top.
+        /// </summary>
+        public static string ROLLING_UPGRADE_BUTTON_LABEL_STOP {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_BUTTON_LABEL_STOP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Test.
+        /// </summary>
+        public static string ROLLING_UPGRADE_BUTTON_LABEL_TEST {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_BUTTON_LABEL_TEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This upgrade can be resumed by launching the Rolling Pool Upgrade wizard again..
         /// </summary>
         public static string ROLLING_UPGRADE_CAN_RESUME_UPGRADE {
@@ -30636,6 +30718,15 @@ namespace XenAdmin {
         public static string SERVER_REQUEST_IN_PROGRESS {
             get {
                 return ResourceManager.GetString("SERVER_REQUEST_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server selection check.
+        /// </summary>
+        public static string SERVER_SELECTION_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("SERVER_SELECTION_CHECK_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -34599,6 +34690,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_RUNNING_PRECHECK {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_RUNNING_PRECHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: The update needs to be applied on all servers in the pool..
+        /// </summary>
+        public static string UPDATES_WIZARD_SERVER_SELECTION_PROBLEM {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_SERVER_SELECTION_PROBLEM", resourceCulture);
             }
         }
         

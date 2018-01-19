@@ -36,7 +36,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin.Controls
 {

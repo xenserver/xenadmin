@@ -30,7 +30,7 @@
  */
 
 using System;
-using Citrix.XenCenter;
+using XenCenterLib;
 using NUnit.Framework;
 
 namespace XenAdminTests.MiscTests

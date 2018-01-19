@@ -34,7 +34,7 @@ using System.Threading;
 using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin.Wizards;
-using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdminTests.WizardTests
 {

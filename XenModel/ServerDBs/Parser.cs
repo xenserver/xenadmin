@@ -34,9 +34,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-using Citrix.XenCenter;
-
-using XenAdmin.Core;
+using XenCenterLib;
 using System.Text;
 
 namespace XenAdmin.ServerDBs

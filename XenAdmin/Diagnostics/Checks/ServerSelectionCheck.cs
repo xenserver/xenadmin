@@ -29,38 +29,48 @@
  * SUCH DAMAGE.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Linq;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.HostProblem;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAPI;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("XenCenterLib")]
-[assembly: AssemblyDescription("[Citrix] [XenCenter] base library")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("[Citrix]")]
-[assembly: AssemblyProduct("[XenCenter]")]
-[assembly: AssemblyCopyright("[BRANDING_COPYRIGHT]")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+namespace XenAdmin.Diagnostics.Checks
+{
+    class ServerSelectionCheck : Check
+    {
+        private readonly Pool_update update;
+        private readonly Pool pool;
+        private readonly List<Host> selectedServers;
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
+        public ServerSelectionCheck(Pool pool, Pool_update update, List<Host> selectedServers)
+            : base(Helpers.GetMaster(pool.Connection))
+        {
+            this.pool = pool;
+            this.update = update;
+            this.selectedServers = selectedServers;
+        }
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("be83f432-8d37-452d-bbc1-2f0b8c5969cc")]
+        protected override Problem RunCheck()
+        {
+            if (!Host.IsLive())
+                return new HostNotLiveWarning(this, Host);
 
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-[assembly: AssemblyVersion("0.0.0.0")]
-[assembly: AssemblyFileVersion("0000")]
-[assembly: XenCenterLib.XSVersion("[BRANDING_PRODUCT_VERSION]")]
-[assembly: InternalsVisibleTo("XenAdminTests")]
+            if (update == null || !update.EnforceHomogeneity()) 
+                return null;
+
+            if (pool.Connection.Cache.Hosts.Any(h => !update.AppliedOn(h) && !selectedServers.Contains(h)))
+                return new ServerSelectionProblem(this, pool);
+
+            return null;
+        }
+
+        public override string Description
+        {
+            get { return Messages.SERVER_SELECTION_CHECK_DESCRIPTION; }
+        }
+    }
+}
+

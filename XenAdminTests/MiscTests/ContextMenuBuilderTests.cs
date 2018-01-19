@@ -35,14 +35,9 @@ using System.Text;
 using NUnit.Framework;
 using XenAdmin.Commands;
 using XenAdmin.Plugins;
-using XenAdmin;
-using XenAdmin.Network;
-using XenAdmin.ServerDBs;
 using System.Windows.Forms;
 using XenAPI;
-using System.IO;
-using System.Reflection;
-using XenAdmin.Core;
+using XenCenterLib;
 using System.Xml;
 
 namespace XenAdminTests.MiscTests

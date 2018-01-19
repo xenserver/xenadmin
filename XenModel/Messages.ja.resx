@@ -2744,7 +2744,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>VM "{0}" の変更ブロック追跡を無効化</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+  <data name="CONFIRM_DISABLE_CBT_VMS_TITLE" xml:space="preserve">
     <value>選択した VM の 変更ブロック追跡を無効化</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">

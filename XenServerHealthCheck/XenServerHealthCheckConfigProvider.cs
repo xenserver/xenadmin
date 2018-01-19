@@ -36,7 +36,7 @@ using System.IO;
 using System.Net;
 using XenAdmin;
 using XenAdmin.Actions;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.ServerDBs;

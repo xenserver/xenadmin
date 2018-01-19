@@ -36,7 +36,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using XenAdmin.Controls.Common;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenOvf;
 using XenAdmin.Controls;
 
