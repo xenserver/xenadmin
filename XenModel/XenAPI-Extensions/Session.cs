@@ -95,7 +95,7 @@ namespace XenAPI
 
         private void InitAD(Session session)
         {
-            _uuid = session.uuid;
+            opaque_ref = session.uuid;
             APIVersion = session.APIVersion;
             _userSid = session.UserSid;
             _subject = session.Subject;
