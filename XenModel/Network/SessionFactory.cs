@@ -39,17 +39,23 @@ namespace XenAdmin.Network
         public static Session CreateSession(IXenConnection connection, string hostname, int port)
         {
             if (DbProxy.IsSimulatorUrl(hostname))
-                return new Session(DbProxy.GetProxy(connection, hostname), connection);
-            else
-                return new Session(Session.STANDARD_TIMEOUT, connection, hostname, port);
+                return new Session(DbProxy.GetProxy(connection, hostname), connection)
+                {
+                    //do nothing; we don't want to swap backends for simulator Urls
+                    XmlRpcToJsonRpcInvoker = obj => { }
+                };
+            return new Session(Session.STANDARD_TIMEOUT, connection, hostname, port);
         }
 
         public static Session DuplicateSession(Session session, IXenConnection connection, int timeout)
         {
             if (DbProxy.IsSimulatorUrl(session.Url))
-                return new Session(session, DbProxy.GetProxy(connection, session.Url), connection);
-            else
-                return new Session(session, connection, timeout);
+                return new Session(session, DbProxy.GetProxy(connection, session.Url), connection)
+                {
+                    //do nothing; we don't want to swap backends for simulator Urls
+                    XmlRpcToJsonRpcInvoker = obj => { }
+                };
+            return new Session(session, connection, timeout);
         }
     }
 }

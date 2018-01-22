@@ -56,8 +56,6 @@ namespace XenAPI
 
         public API_Version APIVersion = API_Version.API_1_1;
 
-        private string _uuid;
-
         public object Tag;
 
         // Filled in after successful session_login_with_password for version 1.6 or newer connections
@@ -66,6 +64,11 @@ namespace XenAPI
         private string _userSid = null;
         private string[] permissions = null;
         private List<Role> roles = new List<Role>();
+
+        /// <summary>
+        /// Applies only to API 2.6 (ely) or 2.8 (inverness) and above.
+        /// </summary>
+        public Action<Session> XmlRpcToJsonRpcInvoker = SwitchToJsonRpcBackend;
 
         #region Constructors
 
@@ -99,10 +102,12 @@ namespace XenAPI
         public Session(string url, string opaqueRef)
             : this(url)
         {
-            this._uuid = opaqueRef;
+            opaque_ref = opaqueRef;
             SetAPIVersion();
-            if (APIVersion >= API_Version.API_1_6)
-                SetADDetails();
+            if (XmlRpcToJsonRpcInvoker != null)
+                XmlRpcToJsonRpcInvoker(this);
+            SetADDetails();
+            SetRbacPermissions();
         }
 
         /// <summary>
@@ -115,9 +120,9 @@ namespace XenAPI
         public Session(Session session, int timeout)
             : this(session.Url, timeout)
         {
-            _uuid = session.uuid;
+            opaque_ref = session.uuid;
             APIVersion = session.APIVersion;
-            _isLocalSuperuser = session._isLocalSuperuser;
+            _isLocalSuperuser = session.IsLocalSuperuser;
             _subject = session._subject;
             _userSid = session._userSid;
         }
@@ -128,13 +133,21 @@ namespace XenAPI
         public static Session get_record(Session session, string _session)
         {
             Session newSession = new Session(session.proxy.Url);
-            newSession._uuid = _session;
+            newSession.opaque_ref = _session;
             newSession.SetAPIVersion();
+            if (newSession.XmlRpcToJsonRpcInvoker != null)
+                newSession.XmlRpcToJsonRpcInvoker(newSession);
             return newSession;
         }
 
+        /// <summary>
+        /// Applies only to API 1.6 (george) and above.
+        /// </summary>
         private void SetADDetails()
         {
+            if (APIVersion < API_Version.API_1_6)
+                return;
+
             _isLocalSuperuser = get_is_local_superuser();
             if (IsLocalSuperuser)
                 return;
@@ -145,8 +158,15 @@ namespace XenAPI
             // Cache the details of this user to avoid making server calls later
             // For example, some users get access to the pool through a group subject and will not be in the main cache
             UserDetails.UpdateDetails(_userSid, this);
+        }
 
-            if (APIVersion <= API_Version.API_1_6)  // Older versions have no RBAC, only AD
+        /// <summary>
+        /// Applies only to API 1.7 (midnight-ride) and above.
+        /// Older versions have no RBAC, only AD.
+        /// </summary>
+        private void SetRbacPermissions()
+        {
+            if (APIVersion < API_Version.API_1_7)
                 return;
 
             // allRoles will contain every role on the server, permissions contains the subset of those that are available to this session.
@@ -196,7 +216,7 @@ namespace XenAPI
 
         public string uuid
         {
-            get { return _uuid; }
+            get { return opaque_ref; }
         }
 
         public string Url
@@ -278,11 +298,13 @@ namespace XenAPI
         public void login_with_password(string username, string password)
         {
             if (JsonRpcClient != null)
-                _uuid = JsonRpcClient.session_login_with_password(username, password);
+                opaque_ref = JsonRpcClient.session_login_with_password(username, password);
             else
-                _uuid = proxy.session_login_with_password(username, password).parse();
+                opaque_ref = proxy.session_login_with_password(username, password).parse();
 
             SetAPIVersion();
+            if (XmlRpcToJsonRpcInvoker != null)
+                XmlRpcToJsonRpcInvoker(this);
         }
 
         public void login_with_password(string username, string password, string version)
@@ -290,13 +312,15 @@ namespace XenAPI
             try
             {
                 if (JsonRpcClient != null)
-                    _uuid = JsonRpcClient.session_login_with_password(username, password, version);
+                    opaque_ref = JsonRpcClient.session_login_with_password(username, password, version);
                 else
-                    _uuid = proxy.session_login_with_password(username, password, version).parse();
+                    opaque_ref = proxy.session_login_with_password(username, password, version).parse();
 
                 SetAPIVersion();
-                if (APIVersion >= API_Version.API_1_6)
-                    SetADDetails();
+                if (XmlRpcToJsonRpcInvoker != null)
+                    XmlRpcToJsonRpcInvoker(this);
+                SetADDetails();
+                SetRbacPermissions();
             }
             catch (Failure exn)
             {
@@ -317,13 +341,15 @@ namespace XenAPI
             try
             {
                 if (JsonRpcClient != null)
-                    _uuid = JsonRpcClient.session_login_with_password(username, password, version, originator);
+                    opaque_ref = JsonRpcClient.session_login_with_password(username, password, version, originator);
                 else
-                    _uuid = proxy.session_login_with_password(username, password, version, originator).parse();
+                    opaque_ref = proxy.session_login_with_password(username, password, version, originator).parse();
 
                 SetAPIVersion();
-                if (APIVersion >= API_Version.API_1_6)
-                    SetADDetails();
+                if (XmlRpcToJsonRpcInvoker != null)
+                    XmlRpcToJsonRpcInvoker(this);
+                SetADDetails();
+                SetRbacPermissions();
             }
             catch (Failure exn)
             {
@@ -353,36 +379,41 @@ namespace XenAPI
                 APIVersion = Helper.GetAPIVersion(host.API_version_major, host.API_version_minor);
                 break;
             }
+        }
 
-            //if supported swap endpoints
-            JsonRpcClient = null;
-            bool isELy = (int)APIVersion == (int)API_Version.API_2_6;
-            bool isInvernessOrAbove = (int)APIVersion >= (int)API_Version.API_2_8;
+        /// <summary>
+        /// Applies only to API 2.6 (ely) or 2.8 (inverness) and above.
+        /// </summary>
+        private static void SwitchToJsonRpcBackend(Session session)
+        {
+            session.JsonRpcClient = null;
+            bool isELy = session.APIVersion == API_Version.API_2_6;
+            bool isInvernessOrAbove = session.APIVersion >= API_Version.API_2_8;
 
             if (isELy || isInvernessOrAbove)
             {
-                JsonRpcClient = new JsonRpcClient(proxy.Url)
+                session.JsonRpcClient = new JsonRpcClient(session.proxy.Url)
                 {
-                    ConnectionGroupName = proxy.ConnectionGroupName,
-                    Timeout = proxy.Timeout,
-                    KeepAlive = proxy.KeepAlive,
-                    UserAgent = proxy.UserAgent,
-                    WebProxy = proxy.Proxy
+                    ConnectionGroupName = session.proxy.ConnectionGroupName,
+                    Timeout = session.proxy.Timeout,
+                    KeepAlive = session.proxy.KeepAlive,
+                    UserAgent = session.proxy.UserAgent,
+                    WebProxy = session.proxy.Proxy
                 };
 
                 if (isInvernessOrAbove)
-                    JsonRpcClient.JsonRpcVersion = JsonRpcVersion.v2;
+                    session.JsonRpcClient.JsonRpcVersion = JsonRpcVersion.v2;
 
-                proxy = null;
+                session.proxy = null;
             }
         }
 
         public void slave_local_login_with_password(string username, string password)
         {
             if (JsonRpcClient != null)
-                _uuid = JsonRpcClient.session_slave_local_login_with_password(username, password);
+                opaque_ref = JsonRpcClient.session_slave_local_login_with_password(username, password);
             else
-                _uuid = proxy.session_slave_local_login_with_password(username, password).parse();
+                opaque_ref = proxy.session_slave_local_login_with_password(username, password).parse();
             //assume the latest API
             APIVersion = API_Version.LATEST;
         }
@@ -398,8 +429,8 @@ namespace XenAPI
         /// <param name="session2">The session to log out</param>
         public void logout(Session session2)
         {
-            logout(session2._uuid);
-            session2._uuid = null;
+            logout(session2.uuid);
+            session2.opaque_ref = null;
         }
 
         /// <summary>
@@ -424,8 +455,8 @@ namespace XenAPI
 
         public void local_logout(Session session2)
         {
-            local_logout(session2._uuid);
-            session2._uuid = null;
+            local_logout(session2.uuid);
+            session2.opaque_ref = null;
         }
 
         public void local_logout(string session_uuid)
