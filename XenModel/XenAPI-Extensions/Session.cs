@@ -130,12 +130,23 @@ namespace XenAPI
             set { _cacheWarming = value; }
         }
 
+        /// <summary>
+        /// Do not log while downloading objects;
+        /// also exclude calls occurring frequently, we don't need to know about them
+        /// </summary>
+        private bool CanLogCall(string call)
+        {
+            return CacheWarming ||
+                   call == "event.next" || call == "event.from" || call == "host.get_servertime" ||
+                   call.StartsWith("task.get_");
+        }
+
         private void LogJsonRequest(string json)
         {
+#if DEBUG
             string methodName = "";
             string parameters = "";
 
-#if DEBUG
             try
             {
                 JObject obj = JObject.Parse(json);
@@ -146,25 +157,20 @@ namespace XenAPI
             {
                 //ignore
             }
-#else
-            methodName = json;
-            parameters = "";
-#endif
 
-            // do not log while downloading objects
-            // also exclude calls occurring frequently; we don't need to know about them;
             // only log the full parameters at Debug level because it may contain sensitive data
-
-            if (CacheWarming ||
-                methodName == "event.next" || methodName == "event.from" || methodName == "host.get_servertime" ||
-                methodName.StartsWith("task.get_"))
-            {
+            if (CanLogCall(methodName))
                 log.DebugFormat("Invoking JSON-RPC method '{0}' with params: {1}", methodName, parameters);
-            }
             else
-            {
                 log.InfoFormat("Invoking JSON-RPC method '{0}'", methodName);
-            }
+#else
+            string methodName = json;
+
+            if (CanLogCall(methodName))
+                log.DebugFormat("Invoking JSON-RPC method '{0}'", methodName);
+            else
+                log.InfoFormat("Invoking JSON-RPC method '{0}'", methodName);
+#endif
         }
 
         private void LogRequest(object o, XmlRpcRequestEventArgs args)
@@ -186,9 +192,7 @@ namespace XenAPI
             // also exclude calls occurring frequently; we don't need to know about them;
             // only log the full XML at Debug level because it may have sensitive data in: CA-80174
 
-            if (CacheWarming ||
-                methodName == "event.next" || methodName == "event.from" || methodName == "host.get_servertime" ||
-                methodName.StartsWith("task.get_"))
+            if (CanLogCall(methodName))
             {
                 log.DebugFormat("Invoking XML-RPC method {0}: {1}", methodName, xml);
             }

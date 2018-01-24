@@ -42,7 +42,7 @@ namespace XenAdmin.Network
                 return new Session(DbProxy.GetProxy(connection, hostname), connection)
                 {
                     //do nothing; we don't want to swap backends for simulator Urls
-                    XmlRpcToJsonRpcInvoker = obj => { }
+                    XmlRpcToJsonRpcInvoker = null
                 };
             return new Session(Session.STANDARD_TIMEOUT, connection, hostname, port);
         }
@@ -53,7 +53,7 @@ namespace XenAdmin.Network
                 return new Session(session, DbProxy.GetProxy(connection, session.Url), connection)
                 {
                     //do nothing; we don't want to swap backends for simulator Urls
-                    XmlRpcToJsonRpcInvoker = obj => { }
+                    XmlRpcToJsonRpcInvoker = null
                 };
             return new Session(session, connection, timeout);
         }
