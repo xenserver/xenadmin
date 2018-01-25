@@ -40,11 +40,10 @@ using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Commands;
-using XenAdmin.Core;
 using XenAdmin.Model;
 using XenAdmin.Network;
 using XenAdmin.XenSearch;
-
+using XenCenterLib;
 using XenAPI;
 
 namespace XenAdmin.Controls.MainWindowControls

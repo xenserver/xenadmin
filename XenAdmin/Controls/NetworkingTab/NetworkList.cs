@@ -37,14 +37,13 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Commands;
-using XenAdmin.Model;
 using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Wizards;
 using XenAdmin.Actions;
 using XenAdmin.Dialogs;
 using XenAdmin.Controls.DataGridViewEx;
-
+using XenCenterLib;
 
 namespace XenAdmin.Controls.NetworkingTab
 {

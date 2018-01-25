@@ -32,7 +32,7 @@
 using System;
 using System.Globalization;
 
-namespace Citrix.XenCenter
+namespace XenCenterLib
 {
     public class TimeUtil
     {

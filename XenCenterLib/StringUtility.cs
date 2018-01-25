@@ -36,7 +36,7 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     public static class StringUtility
     {

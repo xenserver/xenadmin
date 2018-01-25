@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
     // A ComparableAddress represents either an IP address (IPv4 or IPv6) or a PartialIP or a hostname
     public class ComparableAddress : IComparable

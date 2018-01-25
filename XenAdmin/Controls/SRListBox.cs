@@ -38,7 +38,7 @@ using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Wizards.NewSRWizard_Pages;
 using XenAdmin.Core;
-
+using XenCenterLib;
 
 namespace XenAdmin.Controls
 {

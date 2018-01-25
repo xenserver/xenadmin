@@ -37,9 +37,8 @@ using System.Security.Cryptography.X509Certificates;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
-using System.IO;
 using System.Configuration;
-using XenAPI;
+using XenCenterLib;
 using System.Drawing;
 
 

@@ -40,6 +40,7 @@ using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAPI;
+using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.ImportWizard

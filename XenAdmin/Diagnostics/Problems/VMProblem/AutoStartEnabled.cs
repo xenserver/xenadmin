@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Threading;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Checks;
@@ -58,7 +59,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             cancelled = false;
-            return new DelegatedAsyncAction(_connection, "", "", null, ActionDelegate(false));
+            return new DelegatedAsyncAction(_connection, Messages.ACTION_DISABLE_AUTOSTART_ON_VM, string.Format(Messages.ACTION_DISABLING_AUTOSTART_ON_VM, Helpers.GetName(VM)), null, ActionDelegate(false));
         }
 
         private VM VM
@@ -95,7 +96,12 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
                            {
                                vm.Locked = false;
                            }
-
+                           int wait = 5000; // wait up to 5 seconds for the cache to be updated
+                           while (wait > 0 && vm.GetAutoPowerOn() != autostartValue)
+                           {
+                               Thread.Sleep(100);
+                               wait -= 100;
+                           }
                        };
         }
 
@@ -103,8 +109,8 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
         {
             return new DelegatedAsyncAction(
                _connection,
-               "",
-               "",
+               Messages.ACTION_ENABLE_AUTOSTART_ON_VM,
+               string.Format(Messages.ACTION_ENABLING_AUTOSTART_ON_VM, Helpers.GetName(VM)),
                null,
                ActionDelegate(true));
         }

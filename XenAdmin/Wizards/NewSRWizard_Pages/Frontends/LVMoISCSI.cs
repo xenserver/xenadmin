@@ -42,6 +42,7 @@ using XenAdmin.Dialogs;
 using System.Drawing;
 using System.Linq;
 using XenAdmin.Utils;
+using XenCenterLib;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 {

@@ -35,7 +35,6 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using DiscUtils;
-using XenAdmin.Core;
 using XenOvf;
 using XenOvf.Definitions;
 using XenOvf.Utilities;

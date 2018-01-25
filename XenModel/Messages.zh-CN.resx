@@ -2740,7 +2740,7 @@
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>在 VM“{0}”上禁用更改块跟踪</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+  <data name="CONFIRM_DISABLE_CBT_VMS_TITLE" xml:space="preserve">
     <value>在选定 VM 上禁用更改块跟踪</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">

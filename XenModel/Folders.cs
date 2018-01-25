@@ -38,7 +38,7 @@ using XenAPI;
 using XenAdmin.Actions;
 using XenAdmin.Core;
 using XenAdmin.Network;
-
+using XenCenterLib;
 
 namespace XenAdmin.Model
 {

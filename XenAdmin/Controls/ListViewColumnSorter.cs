@@ -32,8 +32,7 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
-
-using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin.Controls
 {

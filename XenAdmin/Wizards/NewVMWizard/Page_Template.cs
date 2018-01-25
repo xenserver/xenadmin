@@ -31,12 +31,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XenAPI;
 using XenAdmin.Controls;
-using XenAdmin.Core;
+using XenCenterLib;
 using XenAdmin.Properties;
 using System.Collections;
 

@@ -40,9 +40,10 @@ namespace XenAdmin.Wizards.ImportWizard
 {
 	internal partial class GlobalSelectHost : XenTabPage
     {
-		private Host m_selectedHost;
-		private IXenConnection m_selectedConnection;
+		private IXenObject m_selectedObject;
         private bool m_buttonNextEnabled;
+
+        public event Action<IXenConnection> ConnectionSelectionChanged;
 
 		public GlobalSelectHost()
 		{
@@ -77,10 +78,11 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			m_poolHostPicker.buildList();
 
-			if (m_selectedHost != null)
-				m_poolHostPicker.SelectHost(m_selectedHost);
-			else if (m_selectedConnection != null)
-				m_poolHostPicker.SelectConnection(m_selectedConnection);
+            var selectedHost = m_selectedObject as Host;
+            if (selectedHost != null)
+                m_poolHostPicker.SelectHost(selectedHost);
+			else if (m_selectedObject != null  && m_selectedObject.Connection != null)
+                m_poolHostPicker.SelectConnection(m_selectedObject.Connection);
 
 			IsDirty = true;
 		}
@@ -99,6 +101,8 @@ namespace XenAdmin.Wizards.ImportWizard
 			m_buttonNextEnabled = e.SomethingSelected;
             OnPageUpdated();
 			IsDirty = true;
+            if (ConnectionSelectionChanged != null)
+                ConnectionSelectionChanged(SelectedHost != null ? SelectedHost.Connection : SelectedConnection);
         }
 
 		private void m_buttonAddNewServer_Click(object sender, EventArgs e)
@@ -112,20 +116,21 @@ namespace XenAdmin.Wizards.ImportWizard
 		{
 			get
 			{
-				m_selectedHost = m_poolHostPicker.ChosenHost;
-				return m_selectedHost;
+                return m_poolHostPicker.ChosenHost;
 			}
-			set { m_selectedHost = value; }
 		}
 
 		public IXenConnection SelectedConnection
 		{
 			get
 			{
-				m_selectedConnection = m_poolHostPicker.ChosenConnection;
-				return m_selectedConnection;
+                return m_poolHostPicker.ChosenConnection;
 			}
-			set { m_selectedConnection = value; }
 		}
+
+        public void SetDefaultTarget(IXenObject xenObject)
+        {
+            m_selectedObject = xenObject;
+        }
 	}
 }

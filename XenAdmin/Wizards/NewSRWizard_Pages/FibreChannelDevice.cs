@@ -32,8 +32,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
-using XenAdmin.Core;
+using XenCenterLib;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages
 {

@@ -32,7 +32,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using XenAdmin.Core;
+using XenCenterLib;
 
 
 namespace XenAdmin.Controls

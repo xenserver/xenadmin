@@ -42,7 +42,7 @@ using XenAdmin.Network;
 using XenAdmin.Plugins;
 using XenAdmin.ServerDBs;
 using XenAPI;
-
+using XenCenterLib;
 
 namespace XenAdmin
 {

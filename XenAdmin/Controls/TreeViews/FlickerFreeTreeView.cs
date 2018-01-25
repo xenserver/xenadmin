@@ -30,13 +30,12 @@
  */
 
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using XenAdmin.Core;
 using System.Collections.Generic;
 using XenAdmin.Network;
 using XenAdmin.XenSearch;
-
+using XenCenterLib;
 using XenAPI;
 using Message = System.Windows.Forms.Message;
 
@@ -83,7 +82,7 @@ namespace XenAdmin.Controls
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == Core.Win32.WM_ERASEBKGND)
+            if (m.Msg == Win32.WM_ERASEBKGND)
             {
                 m.Result = IntPtr.Zero;
                 return;

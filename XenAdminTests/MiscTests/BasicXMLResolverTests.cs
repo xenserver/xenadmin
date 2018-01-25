@@ -32,7 +32,7 @@
 using System;
 using System.IO;
 using System.Xml;
-using Citrix.XenCenter;
+using XenCenterLib;
 using NUnit.Framework;
 
 namespace XenAdminTests.MiscTests

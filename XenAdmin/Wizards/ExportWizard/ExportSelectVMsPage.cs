@@ -40,6 +40,7 @@ using XenAdmin.Controls.Common;
 using XenAdmin.Core;
 using XenAPI;
 using XenAdmin.Controls;
+using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.ExportWizard

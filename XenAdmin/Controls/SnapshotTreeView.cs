@@ -37,8 +37,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
 using System.Windows.Forms;
-using XenAdmin.Controls;
-using XenAdmin.Core;
+using XenCenterLib;
 
 using Message = System.Windows.Forms.Message;
 using System.Runtime.InteropServices;

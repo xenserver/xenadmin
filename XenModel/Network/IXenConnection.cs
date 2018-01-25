@@ -61,7 +61,7 @@ namespace XenAdmin.Network
         Session DuplicateSession();
         Session DuplicateSession(int timeout);
         void EndConnect();
-        void EndConnect(bool resetState);
+        void EndConnect(bool resetState, bool exiting = false);
         void Interrupt();
         Session Connect(string user, string password);
         List<string> PoolMembers { get; set; }
@@ -103,7 +103,7 @@ namespace XenAdmin.Network
         /// until the timeout is reached (default 20s).
         /// </summary>
         /// <param name="session">May be null, in which case nothing happens.</param>
-        void Logout(Session session);
+        void Logout(Session session, bool exiting = false);
     }
 
     public class ConnectionResultEventArgs : EventArgs

@@ -32,7 +32,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace XenAdmin.Core
+namespace XenCenterLib
 {
 
     //[Obsolete("Don't use anymore", false)]

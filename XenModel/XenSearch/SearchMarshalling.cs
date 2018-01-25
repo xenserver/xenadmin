@@ -32,13 +32,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Xml;
 
-using Citrix.XenCenter;
-
+using XenCenterLib;
 using XenAdmin.Core;
 
 namespace XenAdmin.XenSearch

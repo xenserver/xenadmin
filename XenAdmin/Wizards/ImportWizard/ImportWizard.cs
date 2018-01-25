@@ -111,6 +111,8 @@ namespace XenAdmin.Wizards.ImportWizard
 			m_pageImportSource.OvfModeOnly = ovfModeOnly;
             AddPages(m_pageImportSource, m_pageHost, m_pageStorage, m_pageNetwork, m_pageFinish);
 
+            m_pageHost.ConnectionSelectionChanged += pageHost_ConnectionSelectionChanged;
+            m_pageXvaHost.ConnectionSelectionChanged += pageHost_ConnectionSelectionChanged;
             ShowXenAppXenDesktopWarning(con);
 		}
 
@@ -236,8 +238,7 @@ namespace XenAdmin.Wizards.ImportWizard
                             RemovePages(appliancePages);
                             AddAfterPage(m_pageImportSource, xvaPages);
 						}
-						m_pageXvaHost.SelectedHost = m_selectedObject as Host;
-						m_pageXvaHost.SelectedConnection = m_selectedObject != null ? m_selectedObject.Connection : null;
+				        m_pageXvaHost.SetDefaultTarget(m_selectedObject);
 						m_pageXvaStorage.FilePath = m_pageImportSource.FilePath;
 						break;
 				}
@@ -720,8 +721,15 @@ namespace XenAdmin.Wizards.ImportWizard
 
         private void ShowXenAppXenDesktopWarning(IXenConnection connection)
         {
-            if (connection.Cache.Hosts.Any(h => h.DesktopFeaturesEnabled() || h.DesktopPlusFeaturesEnabled()))
+            if (connection != null && connection.Cache.Hosts.Any(h => h.DesktopFeaturesEnabled() || h.DesktopPlusFeaturesEnabled() || h.DesktopCloudFeaturesEnabled()))
                 ShowInformationMessage(Helpers.GetPool(connection) != null ? Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_POOL : Messages.NEWVMWIZARD_XENAPP_XENDESKTOP_INFO_MESSAGE_SERVER);
+            else
+                HideInformationMessage();
+        }
+
+        private void pageHost_ConnectionSelectionChanged(IXenConnection connection)
+        {
+            ShowXenAppXenDesktopWarning(connection);
         }
 
 		#region Nested items

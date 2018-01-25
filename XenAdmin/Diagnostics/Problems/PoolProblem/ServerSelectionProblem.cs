@@ -29,9 +29,27 @@
  * SUCH DAMAGE.
  */
 
-using System;
+using XenAdmin.Diagnostics.Checks;
+using XenAPI;
 
-namespace XenAdmin
+
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    public delegate void ExceptionEventHandler(object sender, Exception e);
+    class ServerSelectionProblem : PoolProblem
+    {
+        public ServerSelectionProblem(Check check, Pool pool)
+            : base(check, pool)
+        {
+        }
+
+        public override string Description
+        {
+            get { return string.Format(Messages.UPDATES_WIZARD_SERVER_SELECTION_PROBLEM, Pool); }
+        }
+
+        public override string HelpMessage
+        {
+            get { return null; }
+        }
+    }
 }

@@ -31,12 +31,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
 using XenAPI;
+using XenCenterLib;
 
-using XenAdmin.Core;
 
 namespace XenAdmin.Model
 {

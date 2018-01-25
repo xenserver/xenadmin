@@ -37,6 +37,7 @@ using XenAdmin.Commands;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
+using XenCenterLib;
 
 namespace XenAdmin.Dialogs
 {

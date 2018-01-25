@@ -1078,7 +1078,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the is_default_template field of the given VM.
-        /// First published in XenServer 7.1.
+        /// First published in XenServer 7.2.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
@@ -5109,7 +5109,7 @@ namespace XenAPI
 
         /// <summary>
         /// true if this is a default template. Default template VMs can never be started or migrated, they are used only for cloning other VMs
-        /// First published in XenServer 7.1.
+        /// First published in XenServer 7.2.
         /// </summary>
         public virtual bool is_default_template
         {

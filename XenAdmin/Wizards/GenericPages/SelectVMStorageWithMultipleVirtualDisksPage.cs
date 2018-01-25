@@ -39,7 +39,7 @@ using XenAdmin.Core;
 using XenAdmin.Mappings;
 using XenAdmin.Network;
 using XenAPI;
-using XenOvf;
+using XenCenterLib;
 
 
 namespace XenAdmin.Wizards.GenericPages

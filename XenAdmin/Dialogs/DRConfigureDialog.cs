@@ -51,15 +51,6 @@ namespace XenAdmin.Dialogs
 		/// </summary>
 		private const int MAX_SR_SELECTED = 8;
 
-		/// <summary>
-		/// Style to use for checkable rows
-		/// </summary>
-		private DataGridViewCellStyle regStyle;
-		/// <summary>
-		/// Style to use for non-checkable rows (should appear grayed out)
-		/// </summary>
-		private DataGridViewCellStyle dimmedStyle;
-
         private List<SR> _availableSrs = new List<SR>();
 		#endregion
 
@@ -67,15 +58,11 @@ namespace XenAdmin.Dialogs
 		{
 			InitializeComponent();
 			Text = String.Format(Messages.DR_CONFIGURE_TITLE, pool.Name());
-            pictureBoxWarning.Image = SystemIcons.Warning.ToBitmap();
+            pictureBoxWarning1.Image = SystemIcons.Warning.ToBitmap();
+			pictureBoxWarning2.Image = SystemIcons.Warning.ToBitmap();
             pictureBoxInfo.Image = SystemIcons.Information.ToBitmap();
+			m_labelLimit2.Text = String.Format(Messages.DR_CONFIGURE_TOO_MANY_SRS, MAX_SR_SELECTED);
 			HideAllWarnings();
-
-			//setup cell styles
-			regStyle = m_dataGridView.DefaultCellStyle.Clone();
-			dimmedStyle = m_dataGridView.DefaultCellStyle.Clone();
-			dimmedStyle.ForeColor = SystemColors.GrayText;
-
 			Pool = pool;
 		}
 
@@ -108,7 +95,6 @@ namespace XenAdmin.Dialogs
                     }
 
                     m_dataGridView.Rows.Add(row);
-                    ToggleRowCheckable(row);
                 }
             }
             finally
@@ -116,27 +102,6 @@ namespace XenAdmin.Dialogs
                 m_dataGridView.ResumeLayout();
             }
         }
-
-		private void ToggleRowsCheckableState()
-		{
-			foreach (DataGridViewRow row in m_dataGridView.Rows)
-				ToggleRowCheckable(row as SrRow);
-		}
-
-		private void ToggleRowCheckable(SrRow row)
-		{
-			if (row == null)
-				return;
-
-			bool checkable = row.HasSpace && m_numberOfCheckedSrs < MAX_SR_SELECTED;
-
-			//if it's already checked do not consider it
-			if (IsRowChecked(row))
-				return;
-
-			row.Cells[0].ReadOnly = !checkable;
-			row.DefaultCellStyle = checkable ? regStyle : dimmedStyle;
-		}
 
 		private bool IsRowChecked(SrRow row)
 		{
@@ -157,14 +122,16 @@ namespace XenAdmin.Dialogs
 		private void ToggleWarningsVisibleState()
 		{
 			ToggleWarningsWrapper(() =>
-			                      	{
-			                      		if (m_drOriginallyEnabled && m_numberOfCheckedSrs == 0)
-			                      			ShowWarningOnDisable();
-			                      		else if (!m_drOriginallyEnabled && m_numberOfCheckedSrs > 0)
-			                      			ShowWarningOnEnable();
-			                      		else
-			                      			HideAllWarnings();
-			                      	});
+            {
+                if (m_numberOfCheckedSrs > MAX_SR_SELECTED)
+                    ShowWarningOnLimit();
+                else if (m_drOriginallyEnabled && m_numberOfCheckedSrs == 0)
+                    ShowWarningOnDisable();
+                else if (!m_drOriginallyEnabled && m_numberOfCheckedSrs > 0)
+                    ShowWarningOnEnable();
+                else
+                    HideAllWarnings();
+            });
 		}
 
 		private void ToggleWarningsWrapper(Action action)
@@ -180,7 +147,7 @@ namespace XenAdmin.Dialogs
 			finally
 			{
 				m_tableLpWarning.ResumeLayout();
-			}
+            }
 		}
 
 		/// <summary>
@@ -190,7 +157,9 @@ namespace XenAdmin.Dialogs
 		{
 		    m_tableLpWarning.Visible = false;
             m_tableLpInfo.Visible = true;
-		}
+			m_tableLpLimit.Visible = false;
+			m_buttonOK.Enabled = true;
+        }
 
 		/// <summary>
 		/// Use the ToggleWarningsWrapper to call this to avoid flickering
@@ -199,16 +168,30 @@ namespace XenAdmin.Dialogs
         {
             m_tableLpWarning.Visible = true;
             m_tableLpInfo.Visible = false;
-		}
+			m_tableLpLimit.Visible = false;
+			m_buttonOK.Enabled = true;
+        }
 
-		/// <summary>
-		/// Use the ToggleWarningsWrapper to call this to avoid flickering
-		/// </summary>
-		private void HideAllWarnings()
+	    /// <summary>
+	    /// Use the ToggleWarningsWrapper to call this to avoid flickering
+	    /// </summary>
+	    private void ShowWarningOnLimit()
+	    {
+	        m_tableLpWarning.Visible = false;
+            m_tableLpInfo.Visible = false;
+			m_tableLpLimit.Visible = true;
+			m_buttonOK.Enabled = false;
+	    }
+        /// <summary>
+        /// Use the ToggleWarningsWrapper to call this to avoid flickering
+        /// </summary>
+        private void HideAllWarnings()
 		{
             m_tableLpWarning.Visible = false;
             m_tableLpInfo.Visible = true;
-		}
+			m_tableLpLimit.Visible = false;
+			m_buttonOK.Enabled = true;
+        }
 
         #endregion       
 		
@@ -260,7 +243,6 @@ namespace XenAdmin.Dialogs
 			}
 
 			ToggleWarningsVisibleState();
-			ToggleRowsCheckableState();
 		}
 		
         private void _worker_DoWork(object sender, DoWorkEventArgs e)

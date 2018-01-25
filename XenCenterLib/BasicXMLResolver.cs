@@ -34,7 +34,7 @@ using System.IO;
 using System.Net;
 using System.Xml;
 
-namespace Citrix.XenCenter
+namespace XenCenterLib
 {
     public class BasicXMLResolver : XmlResolver
     {
