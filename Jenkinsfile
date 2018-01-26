@@ -247,6 +247,7 @@ node("${params.BUILD_ON_NODE}") {
         List<String> list = ["check-roaming.sh", "copyrightcheck/copyrightcheck.sh", "i18ncheck/i18ncheck.sh", "deadcheck/deadcheck.sh", "spellcheck/spellcheck.sh"]
         for (String item : list) {
           bat """
+          dir ${env.WORKSPACE}\\output
           cd ${env.WORKSPACE}\\xenadmin.git\\devtools
           sh "${item}"
           """
@@ -256,6 +257,7 @@ node("${params.BUILD_ON_NODE}") {
 
     stage('Build') {
       bat """
+          dir ${env.WORKSPACE}\\output
           cd ${env.WORKSPACE}
           sh "xenadmin.git/mk/xenadmin-build.sh"
           """
@@ -266,6 +268,7 @@ node("${params.BUILD_ON_NODE}") {
       if (params.XC_BRANDING != 'citrix') {
         println "Testing package-and-sign script"
         bat """
+            dir ${env.WORKSPACE}\\output
             cd ${env.WORKSPACE}
             mkdir TestXenAdminUnsigned
             unzip -q -o output\\XenAdminUnsigned.zip -d TestXenAdminUnsigned
@@ -279,6 +282,7 @@ node("${params.BUILD_ON_NODE}") {
         timeout(time: 60, unit: 'MINUTES') {
 
           bat """
+              dir ${env.WORKSPACE}\\output
               mkdir ${env.WORKSPACE}\\tmp
               cp -r ${env.WORKSPACE}\\xenadmin.git\\XenAdminTests\\bin\\Release ${env.WORKSPACE}\\tmp
               cd ${env.WORKSPACE}\\tmp
@@ -302,7 +306,10 @@ node("${params.BUILD_ON_NODE}") {
         dir("${env.WORKSPACE}\\output") {
 
           if (params.XC_BRANDING == 'citrix') {
-            bat """del /f /q "${env.WORKSPACE}\\output\\XenAdminUnsigned.zip" """
+            bat """
+              dir
+              del /f /q "${env.WORKSPACE}\\output\\XenAdminUnsigned.zip"
+            """
           }
 
           def server = Artifactory.server('repo')
