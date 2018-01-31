@@ -92,7 +92,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// <summary>
         /// Fired (on a background thread) when new performance data are received from the server
         /// </summary>
-        internal event EventHandler<EventArgs> ArchivesUpdated;
+        internal event Action ArchivesUpdated;
 
         internal readonly Dictionary<ArchiveInterval, DataArchive> Archives = new Dictionary<ArchiveInterval, DataArchive>();
 
@@ -633,7 +633,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         private void OnArchivesUpdated()
         {
             if (ArchivesUpdated != null)
-                ArchivesUpdated(this, EventArgs.Empty);
+                ArchivesUpdated();
         }
 
         /// <summary>

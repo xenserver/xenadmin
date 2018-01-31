@@ -285,7 +285,7 @@ namespace XenAdmin.TabPages
             }
         }
         
-        private void ArchiveMaintainer_ArchivesUpdated(object sender, EventArgs args)
+        private void ArchiveMaintainer_ArchivesUpdated()
         {
             Program.Invoke(this, RefreshAll);
         }
