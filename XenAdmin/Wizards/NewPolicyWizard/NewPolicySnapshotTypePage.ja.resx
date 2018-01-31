@@ -181,7 +181,7 @@
     <value>6</value>
   </data>
   <data name="quiesceCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 87</value>
+    <value>29, 92</value>
   </data>
   <data name="quiesceCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>419, 34</value>
@@ -232,7 +232,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;radioButtonDiskAndMemory.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -268,7 +268,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkpointInfoPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 103</value>
+    <value>248, 103</value>
   </data>
   <data name="checkpointInfoPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>
