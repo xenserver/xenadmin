@@ -69,6 +69,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+        public KeyValuePair<XenServerPatch, string> PatchFromDisk { private get; set; }
 
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
 
@@ -182,8 +183,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                         var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
                         hostsToApply.Sort();
 
-                        planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches));
-                        planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
+                        planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches, PatchFromDisk));
+                        planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches, PatchFromDisk));
                         planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
 
                         foreach (var host in hostsToApply)
