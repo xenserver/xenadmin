@@ -512,8 +512,8 @@ namespace XenAdmin.Controls.NetworkingTab
                 if (d.ShowDialog(this) != DialogResult.OK)
                     return;
 
-                Proxy_VIF pVif = d.GetNewSettings();
-                pVif.VM = vm.opaque_ref;
+                var pVif = d.GetNewSettings();
+                pVif.VM = new XenRef<VM>(vm.opaque_ref);
                 CreateVIFCommand action = new CreateVIFCommand(Program.MainWindow, vm, pVif);
                 action.Execute();
             }
@@ -742,7 +742,7 @@ namespace XenAdmin.Controls.NetworkingTab
             if (d.ShowDialog() != DialogResult.OK)
                 return;
 
-            Proxy_VIF proxyVIF = d.GetNewSettings();
+            var proxyVIF = d.GetNewSettings();
             UpdateVIFCommand command = new UpdateVIFCommand(Program.MainWindow, vm, vif, proxyVIF);
             InBuildList = true;
             command.Completed += new EventHandler((s, f) => Program.Invoke(this, () =>

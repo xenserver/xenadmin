@@ -152,11 +152,14 @@ namespace XenAdmin.Dialogs
             {
                 var pvsCacheStorage = new PVS_cache_storage
                 {
-                    site = PvsSite != null ? new XenRef<PVS_site>(PvsSite) : null,
                     host = new XenRef<Host>(row.Host),
-                    SR =  row.CacheSr != null ? new XenRef<SR>(row.CacheSr) : null,
                     size = row.CacheSize
                 };
+
+                if (PvsSite != null)
+                    pvsCacheStorage.site = new XenRef<PVS_site>(PvsSite);
+                if (row.CacheSr != null)
+                    pvsCacheStorage.SR = new XenRef<SR>(row.CacheSr);
 
                 newPvsCacheStorages.Add(pvsCacheStorage);
             }

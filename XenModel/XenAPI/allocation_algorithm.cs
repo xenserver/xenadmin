@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(allocation_algorithmConverter))]
     public enum allocation_algorithm
     {
         breadth_first, depth_first, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class allocation_algorithm_helper
     {
         public static string ToString(allocation_algorithm x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this allocation_algorithm x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class allocation_algorithmConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((allocation_algorithm)value).StringOf());
         }
     }
 }

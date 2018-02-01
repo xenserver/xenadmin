@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vgpu_type_implementationConverter))]
     public enum vgpu_type_implementation
     {
         passthrough, nvidia, gvt_g, mxgpu, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vgpu_type_implementation_helper
     {
         public static string ToString(vgpu_type_implementation x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vgpu_type_implementation x)
         {
             switch (x)
             {
@@ -57,6 +65,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vgpu_type_implementationConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vgpu_type_implementation)value).StringOf());
         }
     }
 }

@@ -41,6 +41,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Net;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
@@ -1339,6 +1340,7 @@ namespace XenAPI
         }
 
         private bool _isBeingCreated;
+        [JsonIgnore]
         public bool IsBeingCreated
         {
             get { return _isBeingCreated; }

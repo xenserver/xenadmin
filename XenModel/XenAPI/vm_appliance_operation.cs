@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vm_appliance_operationConverter))]
     public enum vm_appliance_operation
     {
         start, clean_shutdown, hard_shutdown, shutdown, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vm_appliance_operation_helper
     {
         public static string ToString(vm_appliance_operation x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vm_appliance_operation x)
         {
             switch (x)
             {
@@ -57,6 +65,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vm_appliance_operationConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vm_appliance_operation)value).StringOf());
         }
     }
 }

@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(bond_modeConverter))]
     public enum bond_mode
     {
         balance_slb, active_backup, lacp, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class bond_mode_helper
     {
         public static string ToString(bond_mode x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this bond_mode x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class bond_modeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((bond_mode)value).StringOf());
         }
     }
 }

@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(pool_allowed_operationsConverter))]
     public enum pool_allowed_operations
     {
         ha_enable, ha_disable, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class pool_allowed_operations_helper
     {
         public static string ToString(pool_allowed_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this pool_allowed_operations x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class pool_allowed_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((pool_allowed_operations)value).StringOf());
         }
     }
 }

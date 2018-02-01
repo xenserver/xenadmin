@@ -38,20 +38,20 @@ namespace XenAdmin.Commands
     internal class CreateVIFCommand : BaseVIFCommand
     {
         private VM _vm;
-        private Proxy_VIF _proxyVIF;
+        private VIF _vifDescriptor;
 
-        public CreateVIFCommand(IMainWindow mainWindow, VM vm, Proxy_VIF proxyVIF)
+        public CreateVIFCommand(IMainWindow mainWindow, VM vm, VIF vifDescriptor)
             : base(mainWindow, vm)
         {
             _vm = vm;
-            _proxyVIF = proxyVIF;
+            _vifDescriptor = vifDescriptor;
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             Trace.Assert(selection.Count == 1);
 
-            var action = new CreateVIFAction(_vm, _proxyVIF);
+            var action = new CreateVIFAction(_vm, _vifDescriptor);
             action.Completed += action_Completed;
             action.RunAsync();
         }

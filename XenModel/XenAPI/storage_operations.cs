@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(storage_operationsConverter))]
     public enum storage_operations
     {
         scan, destroy, forget, plug, unplug, update, vdi_create, vdi_introduce, vdi_destroy, vdi_resize, vdi_clone, vdi_snapshot, vdi_mirror, vdi_enable_cbt, vdi_disable_cbt, vdi_data_destroy, vdi_list_changed_blocks, vdi_set_on_boot, pbd_create, pbd_destroy, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class storage_operations_helper
     {
         public static string ToString(storage_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this storage_operations x)
         {
             switch (x)
             {
@@ -89,6 +97,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class storage_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((storage_operations)value).StringOf());
         }
     }
 }

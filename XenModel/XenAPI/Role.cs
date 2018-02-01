@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -129,8 +133,7 @@ namespace XenAPI
         public override string SaveChanges(Session session, string opaqueRef, Role server)
         {
             if (opaqueRef == null)
-            {
-                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
+            {                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
                 return "";
             }
             else
@@ -146,7 +149,10 @@ namespace XenAPI
         /// <param name="_role">The opaque_ref of the given role</param>
         public static Role get_record(Session session, string _role)
         {
-            return new Role((Proxy_Role)session.proxy.role_get_record(session.uuid, _role ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_record(session.uuid, _role);
+            else
+                return new Role((Proxy_Role)session.proxy.role_get_record(session.uuid, _role ?? "").parse());
         }
 
         /// <summary>
@@ -157,7 +163,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Role> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<Role>.Create(session.proxy.role_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -168,7 +177,10 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<Role>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_by_name_label(session.uuid, _label ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_by_name_label(session.uuid, _label);
+            else
+                return XenRef<Role>.Create(session.proxy.role_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -179,7 +191,10 @@ namespace XenAPI
         /// <param name="_role">The opaque_ref of the given role</param>
         public static string get_uuid(Session session, string _role)
         {
-            return (string)session.proxy.role_get_uuid(session.uuid, _role ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_uuid(session.uuid, _role);
+            else
+                return (string)session.proxy.role_get_uuid(session.uuid, _role ?? "").parse();
         }
 
         /// <summary>
@@ -190,7 +205,10 @@ namespace XenAPI
         /// <param name="_role">The opaque_ref of the given role</param>
         public static string get_name_label(Session session, string _role)
         {
-            return (string)session.proxy.role_get_name_label(session.uuid, _role ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_name_label(session.uuid, _role);
+            else
+                return (string)session.proxy.role_get_name_label(session.uuid, _role ?? "").parse();
         }
 
         /// <summary>
@@ -201,7 +219,10 @@ namespace XenAPI
         /// <param name="_role">The opaque_ref of the given role</param>
         public static string get_name_description(Session session, string _role)
         {
-            return (string)session.proxy.role_get_name_description(session.uuid, _role ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_name_description(session.uuid, _role);
+            else
+                return (string)session.proxy.role_get_name_description(session.uuid, _role ?? "").parse();
         }
 
         /// <summary>
@@ -212,7 +233,10 @@ namespace XenAPI
         /// <param name="_role">The opaque_ref of the given role</param>
         public static List<XenRef<Role>> get_subroles(Session session, string _role)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_subroles(session.uuid, _role ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_subroles(session.uuid, _role);
+            else
+                return XenRef<Role>.Create(session.proxy.role_get_subroles(session.uuid, _role ?? "").parse());
         }
 
         /// <summary>
@@ -223,7 +247,10 @@ namespace XenAPI
         /// <param name="_role">The opaque_ref of the given role</param>
         public static List<XenRef<Role>> get_permissions(Session session, string _role)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_permissions(session.uuid, _role ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_permissions(session.uuid, _role);
+            else
+                return XenRef<Role>.Create(session.proxy.role_get_permissions(session.uuid, _role ?? "").parse());
         }
 
         /// <summary>
@@ -234,7 +261,10 @@ namespace XenAPI
         /// <param name="_role">The opaque_ref of the given role</param>
         public static string[] get_permissions_name_label(Session session, string _role)
         {
-            return (string [])session.proxy.role_get_permissions_name_label(session.uuid, _role ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_permissions_name_label(session.uuid, _role);
+            else
+                return (string [])session.proxy.role_get_permissions_name_label(session.uuid, _role ?? "").parse();
         }
 
         /// <summary>
@@ -245,7 +275,10 @@ namespace XenAPI
         /// <param name="_role">The opaque_ref of the given permission</param>
         public static List<XenRef<Role>> get_by_permission(Session session, string _role)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_by_permission(session.uuid, _role ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_by_permission(session.uuid, _role);
+            else
+                return XenRef<Role>.Create(session.proxy.role_get_by_permission(session.uuid, _role ?? "").parse());
         }
 
         /// <summary>
@@ -256,7 +289,10 @@ namespace XenAPI
         /// <param name="_label">The short friendly name of the role</param>
         public static List<XenRef<Role>> get_by_permission_name_label(Session session, string _label)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_by_permission_name_label(session.uuid, _label ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_by_permission_name_label(session.uuid, _label);
+            else
+                return XenRef<Role>.Create(session.proxy.role_get_by_permission_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -266,7 +302,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Role>> get_all(Session session)
         {
-            return XenRef<Role>.Create(session.proxy.role_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_all(session.uuid);
+            else
+                return XenRef<Role>.Create(session.proxy.role_get_all(session.uuid).parse());
         }
 
         /// <summary>
@@ -276,7 +315,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Role>, Role> get_all_records(Session session)
         {
-            return XenRef<Role>.Create<Proxy_Role>(session.proxy.role_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.role_get_all_records(session.uuid);
+            else
+                return XenRef<Role>.Create<Proxy_Role>(session.proxy.role_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
@@ -295,7 +337,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// a short user-friendly name for the role
@@ -313,7 +355,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_label;
+        private string _name_label = "";
 
         /// <summary>
         /// what this role is for
@@ -331,11 +373,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_description;
+        private string _name_description = "";
 
         /// <summary>
         /// a list of pointers to other roles or permissions
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Role>))]
         public virtual List<XenRef<Role>> subroles
         {
             get { return _subroles; }
@@ -349,6 +392,6 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Role>> _subroles;
+        private List<XenRef<Role>> _subroles = new List<XenRef<Role>>() {};
     }
 }
