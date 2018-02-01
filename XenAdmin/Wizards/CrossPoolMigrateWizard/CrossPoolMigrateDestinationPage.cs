@@ -148,15 +148,15 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
-        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem)
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem, List<VM> vmList)
         {
             var filters = new List<ReasoningFilter>();
 
             if(selectedItem != null)
             {
-                filters.Add(new ResidentHostIsSameAsSelectionFilter(selectedItem.Item, selectedVMs));
-                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, selectedVMs, wizardMode));
-                filters.Add(new WlbEnabledFilter(selectedItem.Item, selectedVMs));
+                filters.Add(new ResidentHostIsSameAsSelectionFilter(selectedItem.Item, vmList));
+                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, vmList, wizardMode));
+                filters.Add(new WlbEnabledFilter(selectedItem.Item, vmList));
             } 
 
             return filters;
