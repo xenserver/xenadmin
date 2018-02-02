@@ -54,6 +54,7 @@ namespace XenAdmin.Wizards.GenericPages
 		{
 			public string SysId { get; set; }
 			public ulong RequiredSpace { get; set; }
+			public IStorageResource ResourceData { get; set; }
 		}
 
         private class EnableableSrComboboxItem : IEnableableXenObjectComboBoxItem
@@ -196,7 +197,13 @@ namespace XenAdmin.Wizards.GenericPages
             return true;
         }
 
-        public override void PopulatePage()
+		protected virtual bool IsExtraSpaceNeeded(XenRef<SR> sourceRef, XenRef<SR> targetRef)
+		{
+			return true;
+		}
+
+
+		public override void PopulatePage()
 		{
 			m_totalSpaceRequired = 0;
 			m_dataGridView.Rows.Clear();
@@ -229,7 +236,7 @@ namespace XenAdmin.Wizards.GenericPages
                     var cellVmDisk = new DataGridViewTextBoxCell
                                          {
                                              Tag = new StorageDetail
-                                                     {RequiredSpace = resourceData.RequiredDiskCapacity, SysId = sysId},
+                                                     {RequiredSpace = resourceData.RequiredDiskCapacity, SysId = sysId, ResourceData = resourceData},
                                              Value = FormatDiskValueText(resourceData, disklabel)
 					                 	};
 
@@ -284,9 +291,23 @@ namespace XenAdmin.Wizards.GenericPages
 
 	    private void PopulateSrComboBox(List<ToStringWrapper<SR>> commonSRs)
 	    {
-	        List<EnableableSrComboboxItem> listToAdd = 
-	            commonSRs.Select(toStringWrapper => new EnableableSrComboboxItem(toStringWrapper, m_totalSpaceRequired)).ToList();
-
+			List<EnableableSrComboboxItem> listToAdd = new List<EnableableSrComboboxItem>();
+			foreach (var toStringWrapper in commonSRs)
+			{
+				ulong requiredSpace = 0;
+				foreach (var kvp in m_vmMappings)
+				{
+					foreach (IStorageResource resourceData in ResourceData(kvp.Key))
+					{
+						if (IsExtraSpaceNeeded(resourceData.SR, XenRef<SR>.Create((toStringWrapper.item.opaque_ref))))
+						{
+							requiredSpace += resourceData.RequiredDiskCapacity;
+						}
+					}
+				}
+				listToAdd.Add(new EnableableSrComboboxItem(toStringWrapper, requiredSpace));
+			} 
+	           
             if (listToAdd.Any(item => item.Enabled))
             {
                 var sortedlistToAdd = from item in listToAdd
@@ -409,11 +430,17 @@ namespace XenAdmin.Wizards.GenericPages
 
 					var storageDetail = (StorageDetail)row.Cells[0].Tag;
 					string uuid = selectedItem.item.uuid;
+					ulong requiredSpace = storageDetail.RequiredSpace;
+
+					if (!IsExtraSpaceNeeded(storageDetail.ResourceData.SR, XenRef<SR>.Create((selectedItem.item.opaque_ref))))
+					{
+						requiredSpace = 0;
+					}
 
 					if (m_spaceRequirements.ContainsKey(uuid))
-						m_spaceRequirements[uuid] += storageDetail.RequiredSpace;
+						m_spaceRequirements[uuid] += requiredSpace;
 					else
-						m_spaceRequirements.Add(uuid, storageDetail.RequiredSpace);
+						m_spaceRequirements.Add(uuid, requiredSpace);
 
 					if ((ulong)selectedItem.item.FreeSpace() <= m_spaceRequirements[uuid])
 					{
@@ -444,8 +471,8 @@ namespace XenAdmin.Wizards.GenericPages
                     continue;
 
 				bool srOnHost = pbd.host != null && pbd.host.Equals(xenRef);
-
-				if ((sr.shared || srOnHost) && (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity && SrIsSuitable(sr))
+				
+				if ((sr.shared || srOnHost) && (!IsExtraSpaceNeeded(resource.SR, pbd.SR) || (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity) && SrIsSuitable(sr))
 				{
 					var count = (from ToStringWrapper<SR> existingItem in cb.Items
 					             where existingItem.item.opaque_ref == sr.opaque_ref

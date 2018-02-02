@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             get { return vdi.opaque_ref; }
         }
 
-        public bool SRTypeInvalid
+		public bool SRTypeInvalid
         {
             get { return false;}
         }
@@ -97,6 +97,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         {
             get { return Convert.ToUInt64(vdi.physical_utilisation); }
         }
-    }
+
+		public XenRef<SR> SR
+		{
+			get { return vdi.SR; }
+		}
+	}
 }
 
