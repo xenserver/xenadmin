@@ -31,6 +31,7 @@
 
 using System;
 using XenAdmin.Wizards.GenericPages;
+using XenAPI;
 using XenOvf;
 using XenOvf.Definitions;
 
@@ -114,5 +115,10 @@ namespace XenAdmin.Wizards.ImportWizard
                                         : file.size;
             }
         }
-    }
+
+		public XenRef<SR> SR
+		{
+			get { return null; }
+		}
+	}
 }
