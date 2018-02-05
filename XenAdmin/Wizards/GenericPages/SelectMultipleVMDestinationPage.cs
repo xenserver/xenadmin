@@ -385,7 +385,7 @@ namespace XenAdmin.Wizards.GenericPages
                     var cb = new DataGridViewEnableableComboBoxCell{FlatStyle = FlatStyle.Flat};
                     List<ReasoningFilter> homeserverFilters = CreateTargetServerFilterList(
                                                                 selectedItem,
-                                                                new List<VM> { Connection.Resolve(new XenRef<VM>(kvp.Key)) });
+                                                                new List<String> { kvp.Key });
 
                     if (Connection != null)
                     {
@@ -588,19 +588,9 @@ namespace XenAdmin.Wizards.GenericPages
         /// Create a set of filters for the homeserver combo box selection
         /// </summary>
         /// <param name="item">selected item from the host combobox</param>
+        /// <param name="vmOpaqueRefs">OpaqRefs of VMs which need to apply those filters</param>
         /// <returns></returns>
-        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item)
-        {
-            return new List<ReasoningFilter>();
-        }
-
-        /// <summary>
-        /// Create a set of filters for the homeserver combo box selection
-        /// </summary>
-        /// <param name="item">selected item from the host combobox</param>
-        /// <param name="vmList">VMs which need to apply those filters</param>
-        /// <returns></returns>
-        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<VM> vmList)
+        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<string> vmOpaqueRefs)
         {
             return new List<ReasoningFilter>();
         }
