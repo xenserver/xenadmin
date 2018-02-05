@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
