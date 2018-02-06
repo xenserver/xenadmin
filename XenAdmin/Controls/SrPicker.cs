@@ -32,6 +32,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Core;
@@ -140,6 +141,11 @@ namespace XenAdmin.Controls
                 connection.Cache.RegisterCollectionChanged<SR>(SR_CollectionChangedWithInvoke);
 
                 refresh();
+                foreach (SrPickerItem srItem in srListBox.Items)
+                {
+                    SrRefreshAction a = new SrRefreshAction(srItem.TheSR, true);
+                    a.RunAsync();
+                }
             }
         }
 
@@ -215,12 +221,7 @@ namespace XenAdmin.Controls
         /// <returns></returns>
         private long GetRequiredDiskSizeForSR(SR sr)
         {
-            long allocationRate = DiskSize;
-
-            if (DiskSize > sr.physical_size)
-                return DiskSize;
-
-            return Math.Min(allocationRate, DiskSize);
+            return DiskSize;
         }
 
         private readonly SrPickerItemFactory itemFactory = new SrPickerItemFactory();

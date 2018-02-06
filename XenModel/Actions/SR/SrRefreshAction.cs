@@ -41,8 +41,8 @@ namespace XenAdmin.Actions
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public SrRefreshAction(SR Sr)
-            : base(Sr.Connection, string.Format(Messages.SR_REFRESH_ACTION_TITLE, Sr.NameWithoutHost()))
+        public SrRefreshAction(SR Sr, bool suppress_history = false)
+            : base(Sr.Connection, string.Format(Messages.SR_REFRESH_ACTION_TITLE, Sr.NameWithoutHost()), suppress_history)
         {
             SR = Sr;
         }
