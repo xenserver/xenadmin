@@ -157,7 +157,7 @@ namespace XenAdmin.Wizards.ImportWizard
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
-        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item)
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<string> vmOpaqueRefs)
         {
             var filters = new List<ReasoningFilter>();
 

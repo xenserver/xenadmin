@@ -154,6 +154,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_AutomatedUpdatesPage.WizardMode = wizardMode;
                 PatchingWizard_AutomatedUpdatesPage.UpdateAlert = alertPatch ?? fileFromDiskAlertPatch;
+                PatchingWizard_AutomatedUpdatesPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
                 PatchingWizard_PatchingPage.SelectedUpdateType = updateType;
                 PatchingWizard_PatchingPage.Patch = existPatch;

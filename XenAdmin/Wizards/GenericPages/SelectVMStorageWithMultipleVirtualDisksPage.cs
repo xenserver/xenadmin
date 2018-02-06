@@ -53,7 +53,10 @@ namespace XenAdmin.Wizards.GenericPages
 		private class StorageDetail
 		{
 			public string SysId { get; set; }
-			public ulong RequiredSpace { get; set; }
+			public IStorageResource ResourceData { get; set; }
+			public ulong RequiredSpace {
+				get { return (ResourceData == null) ? 0 : ResourceData.RequiredDiskCapacity; }
+			}
 		}
 
         private class EnableableSrComboboxItem : IEnableableXenObjectComboBoxItem
@@ -98,7 +101,6 @@ namespace XenAdmin.Wizards.GenericPages
 		#region Private fields
 
 		private Dictionary<string, ulong> m_spaceRequirements = new Dictionary<string, ulong>();
-		private ulong m_totalSpaceRequired;
 		private Dictionary<string, VmMapping> m_vmMappings;
         private bool m_buttonNextEnabled;
         private bool m_buttonPreviousEnabled;
@@ -196,9 +198,14 @@ namespace XenAdmin.Wizards.GenericPages
             return true;
         }
 
-        public override void PopulatePage()
+		protected virtual bool IsExtraSpaceNeeded(XenRef<SR> sourceRef, XenRef<SR> targetRef)
 		{
-			m_totalSpaceRequired = 0;
+			return true;
+		}
+
+
+		public override void PopulatePage()
+		{
 			m_dataGridView.Rows.Clear();
             m_ctrlError.HideError();
 			bool checkSpaceRequirements = true;
@@ -220,8 +227,6 @@ namespace XenAdmin.Wizards.GenericPages
                     if(!resourceData.CanCalculateDiskCapacity)
                         continue;
 
-                    m_totalSpaceRequired += resourceData.RequiredDiskCapacity;
-
                     string disklabel = !string.IsNullOrEmpty(resourceData.DiskLabel)
                                         ? string.Format("{0} - {1}", vmMapping.VmNameLabel, resourceData.DiskLabel)
 					                   	: string.Format("{0} - {1} {2}", vmMapping.VmNameLabel, Messages.STORAGE_DISK, i);
@@ -229,7 +234,7 @@ namespace XenAdmin.Wizards.GenericPages
                     var cellVmDisk = new DataGridViewTextBoxCell
                                          {
                                              Tag = new StorageDetail
-                                                     {RequiredSpace = resourceData.RequiredDiskCapacity, SysId = sysId},
+                                                     {SysId = sysId, ResourceData = resourceData},
                                              Value = FormatDiskValueText(resourceData, disklabel)
 					                 	};
 
@@ -284,9 +289,23 @@ namespace XenAdmin.Wizards.GenericPages
 
 	    private void PopulateSrComboBox(List<ToStringWrapper<SR>> commonSRs)
 	    {
-	        List<EnableableSrComboboxItem> listToAdd = 
-	            commonSRs.Select(toStringWrapper => new EnableableSrComboboxItem(toStringWrapper, m_totalSpaceRequired)).ToList();
-
+			List<EnableableSrComboboxItem> listToAdd = new List<EnableableSrComboboxItem>();
+			foreach (var toStringWrapper in commonSRs)
+			{
+				ulong requiredSpace = 0;
+				foreach (var kvp in m_vmMappings)
+				{
+					foreach (IStorageResource resourceData in ResourceData(kvp.Key))
+					{
+						if (IsExtraSpaceNeeded(resourceData.SR, new XenRef<SR>(toStringWrapper.item)))
+						{
+							requiredSpace += resourceData.RequiredDiskCapacity;
+						}
+					}
+				}
+				listToAdd.Add(new EnableableSrComboboxItem(toStringWrapper, requiredSpace));
+			} 
+	           
             if (listToAdd.Any(item => item.Enabled))
             {
                 var sortedlistToAdd = from item in listToAdd
@@ -409,11 +428,15 @@ namespace XenAdmin.Wizards.GenericPages
 
 					var storageDetail = (StorageDetail)row.Cells[0].Tag;
 					string uuid = selectedItem.item.uuid;
-
+					ulong requiredSpace =
+						IsExtraSpaceNeeded(storageDetail.ResourceData.SR, new XenRef<SR>(selectedItem.item))
+							? storageDetail.RequiredSpace
+							: 0;
+					
 					if (m_spaceRequirements.ContainsKey(uuid))
-						m_spaceRequirements[uuid] += storageDetail.RequiredSpace;
+						m_spaceRequirements[uuid] += requiredSpace;
 					else
-						m_spaceRequirements.Add(uuid, storageDetail.RequiredSpace);
+						m_spaceRequirements.Add(uuid, requiredSpace);
 
 					if ((ulong)selectedItem.item.FreeSpace() <= m_spaceRequirements[uuid])
 					{
@@ -444,8 +467,8 @@ namespace XenAdmin.Wizards.GenericPages
                     continue;
 
 				bool srOnHost = pbd.host != null && pbd.host.Equals(xenRef);
-
-				if ((sr.shared || srOnHost) && (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity && SrIsSuitable(sr))
+				
+				if ((sr.shared || srOnHost) && (!IsExtraSpaceNeeded(resource.SR, pbd.SR) || (ulong)sr.FreeSpace() > resource.RequiredDiskCapacity) && SrIsSuitable(sr))
 				{
 					var count = (from ToStringWrapper<SR> existingItem in cb.Items
 					             where existingItem.item.opaque_ref == sr.opaque_ref
@@ -460,8 +483,6 @@ namespace XenAdmin.Wizards.GenericPages
 						cb.Value = newItem;
 
 					//store items to populate the m_comboBoxSr
-					//note that at this point the m_totalSpaceRequired is not the final value yet,
-					//but we can add the check to get a smaller list
 
 					if ((sr.shared || (targetRefs.Count == 1 && srOnHost && targetRefs[0].Equals(xenRef))))
 					{

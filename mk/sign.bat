@@ -32,8 +32,8 @@ rem SUCH DAMAGE.
 set "descr=Citrix XenCenter"
 set timestamp_sha1=http://timestamp.verisign.com/scripts/timestamp.dll
 set timestamp_sha2=http://sha256timestamp.ws.symantec.com/sha256/timestamp
-set thumbprint1=ba949e6a25b123f17ea3149b22719a436166f78c
-set thumbprint2=6624ce2ed692d34ccb0a349979f2085f0fcad69b
+set thumbprint1=fef784ede5c0123105c5b84298a466c77ed501ac
+set thumbprint2=49f54a7d36f7be1374bf82d79fa2f7f72e3f4d7b
 if /I %~x1 == .msi (
     set is_msi=yes
 ) else (
