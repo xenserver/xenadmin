@@ -33,6 +33,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using XenAdmin;
 using XenAdmin.Actions;
 using XenAdmin.Alerts;
 using XenCenterLib.Archive;
@@ -72,8 +73,8 @@ namespace CFUValidator.Validators
 
             string tempFileName = NewTempPath();
             DownloadAndUnzipXenServerPatchAction action = new DownloadAndUnzipXenServerPatchAction(patch.Patch.Name, 
-                                                                    new Uri(patch.Patch.PatchUrl), 
-                                                                    tempFileName);
+                                                                    new Uri(patch.Patch.PatchUrl),
+                                                                    tempFileName, false, Branding.Update, Branding.UpdateIso);
             try
             {
                 Status = "Download and unzip patch " + patch.Patch.Name;

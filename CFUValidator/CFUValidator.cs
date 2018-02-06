@@ -115,10 +115,10 @@ namespace CFUValidator
             SetupMocks(xenServerPatches, xenServerVersions);
 
             Status = "Determining XenCenter update required...";
-            var xcupdateAlert = XenAdmin.Core.Updates.NewXenCenterUpdateAlert(xenCenterVersions, new Version(ServerVersion));
+            var xcupdateAlerts = XenAdmin.Core.Updates.NewXenCenterUpdateAlerts(xenCenterVersions, new Version(ServerVersion));
 
             Status = "Determining XenServer update required...";
-            var updateAlert = XenAdmin.Core.Updates.NewXenServerVersionAlert(xenServerVersions);
+            var updateAlerts = XenAdmin.Core.Updates.NewXenServerVersionAlerts(xenServerVersions).Where(alert => !alert.CanIgnore).ToList();
 
             Status = "Determining patches required...";
             var patchAlerts = XenAdmin.Core.Updates.NewXenServerPatchAlerts(xenServerVersions, xenServerPatches).Where(alert => !alert.CanIgnore).ToList();
@@ -135,7 +135,7 @@ namespace CFUValidator
             RunValidators(validators);
            
             Status = "Generating summary...";
-            GeneratePatchSummary(patchAlerts, validators, updateAlert, xcupdateAlert);
+            GeneratePatchSummary(patchAlerts, validators, updateAlerts, xcupdateAlerts);
         }
 
         private void CheckProvidedVersionNumber(List<XenServerVersion> xenServerVersions)
@@ -196,11 +196,11 @@ namespace CFUValidator
         }
 
         private void GeneratePatchSummary(List<XenServerPatchAlert> alerts, List<AlertFeatureValidator> validators,
-                                          XenServerVersionAlert updateAlert, XenCenterUpdateAlert xcupdateAlert)
+                                          List<XenServerVersionAlert> updateAlerts, List<XenCenterUpdateAlert> xcupdateAlerts)
         {
             OuputComponent oc = new OutputTextOuputComponent(XmlLocation, ServerVersion);
-            XenCenterUpdateDecorator xcud = new XenCenterUpdateDecorator(oc, xcupdateAlert);
-            XenServerUpdateDecorator xsud = new XenServerUpdateDecorator(xcud, updateAlert);
+            XenCenterUpdateDecorator xcud = new XenCenterUpdateDecorator(oc, xcupdateAlerts);
+            XenServerUpdateDecorator xsud = new XenServerUpdateDecorator(xcud, updateAlerts);
             PatchAlertDecorator pad = new PatchAlertDecorator(xsud, alerts);
             AlertFeatureValidatorDecorator afdCoreFields = new AlertFeatureValidatorDecorator(pad,
                                                                                               validators.First(v => v is CorePatchDetailsValidator),
@@ -240,19 +240,21 @@ namespace CFUValidator
 
         private void SetupMocks(List<XenServerPatch> xenServerPatches, List<XenServerVersion> xenServerVersions)
         {
-            Mock<Host>  master = mom.NewXenObject<Host>(id);
+            Mock<Host> master = mom.NewXenObject<Host>(id);
             Mock<Pool> pool = mom.NewXenObject<Pool>(id);
             XenRef<Host> masterRef = new XenRef<Host>("ref");
             pool.Setup(p => p.master).Returns(masterRef);
+            pool.Setup(p => p.other_config).Returns(new Dictionary<string, string>());
             mom.MockCacheFor(id).Setup(c => c.Resolve(It.IsAny<XenRef<Pool>>())).Returns(pool.Object);
             mom.MockConnectionFor(id).Setup(c => c.Resolve(masterRef)).Returns(master.Object);
+            mom.MockConnectionFor(id).Setup(c => c.IsConnected).Returns(true);
             master.Setup(h => h.software_version).Returns(new Dictionary<string, string>());
-            master.Setup(h => h.ProductVersion).Returns(ServerVersion);
+            master.Setup(h => h.ProductVersion()).Returns(ServerVersion);
             master.Setup(h => h.AppliedPatches()).Returns(GenerateMockPoolPatches(xenServerPatches));
             
             //Currently build number will be referenced first so if it's present hook it up
             string buildNumber = xenServerVersions.First(v => v.Version.ToString() == ServerVersion).BuildNumber;
-            master.Setup(h=>h.BuildNumberRaw).Returns(buildNumber);
+            master.Setup(h=>h.BuildNumberRaw()).Returns(buildNumber);
         }
 
         private List<Pool_patch> GenerateMockPoolPatches(List<XenServerPatch> xenServerPatches)

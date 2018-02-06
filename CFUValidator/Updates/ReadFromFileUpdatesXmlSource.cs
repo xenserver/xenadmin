@@ -40,7 +40,7 @@ namespace CFUValidator.Updates
     {
         private readonly string newLocation;
         public ReadFromFileUpdatesXmlSource(string location)
-            : base(true, true, true, string.Empty, string.Empty)
+            : base(true, true, true, "CFU", "1", location)
         {
             newLocation = location;
             ErrorRaised = null;

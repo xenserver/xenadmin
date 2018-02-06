@@ -45,7 +45,7 @@ namespace CFUValidator.Updates
         private readonly string newLocation;
 
         public AlternativeUrlDownloadUpdatesXmlSourceAction(string url)
-            : base(true, true, true, string.Empty, string.Empty)
+            : base(true, true, true, "CFU", "1", url)
         {
             newLocation = url;
             ErrorRaised = null;
