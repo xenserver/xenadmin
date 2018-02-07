@@ -88,6 +88,7 @@ namespace XenAdmin.Wizards.GenericPages
 
         public override void PageCancelled()
         {
+            CancelFilters();
             Program.Invoke(Program.MainWindow, ClearComboBox);
             Program.Invoke(Program.MainWindow, ClearDataGridView);
             ChosenItem = null;
@@ -404,12 +405,20 @@ namespace XenAdmin.Wizards.GenericPages
                             }
                         }
 
+                        var items = new List<DelayLoadingOptionComboBoxItem>();
+
                         foreach (var host in Connection.Cache.Hosts)
                         {
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
                             item.LoadAndWait();
-                            cb.Items.Add(item);
+                            items.Add(item);
+                        }
+                        items.Sort(new DelayLoadingOptionComboboxItemCompare());
 
+                        foreach (var item in items)
+                        { 
+                            cb.Items.Add(item);
+                            var host = item.Item;
                             if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
                                 (target != null && target.Item.opaque_ref == host.opaque_ref)))
                                 cb.Value = item;
@@ -635,6 +644,24 @@ namespace XenAdmin.Wizards.GenericPages
                 xenConnection.CachePopulated -= xenConnection_CachePopulated;
                 xenConnection.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
             }
-        } 
-	}
+        }
+
+	    private void CancelFilters()
+	    {
+	        foreach (var item in m_comboBoxConnection.Items)
+	        {
+	            DelayLoadingOptionComboBoxItem comboBoxItem = item as DelayLoadingOptionComboBoxItem;
+                if (comboBoxItem != null)
+                    comboBoxItem.CancelFilters();
+	        }
+        }
+
+	    private class DelayLoadingOptionComboboxItemCompare : IComparer<DelayLoadingOptionComboBoxItem>
+	    {
+	        public int Compare(DelayLoadingOptionComboBoxItem x, DelayLoadingOptionComboBoxItem y)
+	        {
+	            return string.Compare(x.ToString(), y.ToString());
+	        }
+	    }
+    }
 }
