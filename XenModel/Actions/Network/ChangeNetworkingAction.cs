@@ -302,6 +302,11 @@ namespace XenAdmin.Actions
             if (clusterHost == null)
                 return;
 
+            Description = string.Format(Messages.ENABLING_CLUSTERING_ON_POOL, host.Name());
+            log.Debug(Description);
+            PIF.set_disallow_unplug(Session, pif.opaque_ref, true);
+            Cluster_host.enable(Session, clusterHost.opaque_ref);
+
             // plug the GFS2 SRs
             foreach (var pbd in gfs2Pbds.Where(pbd => !pbd.currently_attached))
             {
@@ -310,11 +315,6 @@ namespace XenAdmin.Actions
                     Description = string.Format(Messages.ACTION_SR_ATTACHING_TITLE, sr.Name(), host.Name());
                 PBD.plug(Session, pbd.opaque_ref);
             }
-
-            Description = string.Format(Messages.ENABLING_CLUSTERING_ON_POOL, host.Name());
-            log.Debug(Description);
-            PIF.set_disallow_unplug(Session, pif.opaque_ref, true);
-            Cluster_host.enable(Session, clusterHost.opaque_ref);
         }
     }
 }
