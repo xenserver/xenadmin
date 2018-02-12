@@ -1117,7 +1117,7 @@ namespace XenOvfTransport
 
             #region UPLOAD HTTP STREAM
             XenRef<Task> taskRef = Task.create(xenSession, "UpdateStream", "UpdateStream");
-			string p2VUri = string.Format("/import_raw_vdi?session_id={0}&task_id={1}&vdi={2}", xenSession.uuid, taskRef.opaque_ref, vdiRef.opaque_ref);
+            string p2VUri = string.Format("/import_raw_vdi?session_id={0}&task_id={1}&vdi={2}", xenSession.opaque_ref, taskRef.opaque_ref, vdiRef.opaque_ref);
             NameValueCollection headers = new NameValueCollection();
             headers.Add("Content-Length", Convert.ToString(capacity));
             headers.Add("Content-Type", "application/octet-stream");

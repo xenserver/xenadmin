@@ -103,10 +103,10 @@ namespace XenAdmin.Diagnostics.Checks.DR
             try
             {
                 if (xenObject is VM)
-                    VM.assert_can_be_recovered(MetadataSession, xenObject.opaque_ref, Pool.Connection.Session.uuid);
+                    VM.assert_can_be_recovered(MetadataSession, xenObject.opaque_ref, Pool.Connection.Session.opaque_ref);
                 if (xenObject is VM_appliance)
                     VM_appliance.assert_can_be_recovered(MetadataSession, xenObject.opaque_ref,
-                                                         Pool.Connection.Session.uuid);
+                                                         Pool.Connection.Session.opaque_ref);
             }
             catch (Failure f)
             {

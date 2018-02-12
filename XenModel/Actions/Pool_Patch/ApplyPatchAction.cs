@@ -67,7 +67,7 @@ namespace XenAdmin.Actions
                 {
                     HTTPHelper.Get(this, true, filename, patch.Connection.Hostname,
                         (HTTP_actions.get_sss)HTTP_actions.get_pool_patch_download,
-                        Session.uuid, patch.uuid);
+                        Session.opaque_ref, patch.uuid);
                 }
                 catch (Exception e)
                 {
@@ -89,7 +89,7 @@ namespace XenAdmin.Actions
                 try
                 {
                     string result = HTTPHelper.Put(this, true, filename, host.Connection.Hostname,
-                        (HTTP_actions.put_ss)HTTP_actions.put_pool_patch_upload, Session.uuid);
+                        (HTTP_actions.put_ss)HTTP_actions.put_pool_patch_upload, Session.opaque_ref);
 
                     return new XenRef<Pool_patch>(result);
                 }

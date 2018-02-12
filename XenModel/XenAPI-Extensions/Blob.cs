@@ -51,7 +51,7 @@ namespace XenAPI
             uri.Port = Connection.Port;
             uri.Path = BLOB_URI;
             uri.Query = String.Format("ref={0}&session_id={1}",
-                opaque_ref, Uri.EscapeDataString(session.uuid));
+                opaque_ref, Uri.EscapeDataString(session.opaque_ref));
 
             using (Stream outStream = HTTPHelper.PUT(uri.Uri, inStream.Length, true, true))
             {
@@ -72,7 +72,7 @@ namespace XenAPI
             uri.Port = Connection.Port;
             uri.Path = BLOB_URI;
             uri.Query = String.Format("ref={0}&session_id={1}",
-                opaque_ref, Uri.EscapeDataString(session.uuid));
+                opaque_ref, Uri.EscapeDataString(session.opaque_ref));
 
             return HTTPHelper.GET(uri.Uri, Connection, true, true);
         }

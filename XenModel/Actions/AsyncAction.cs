@@ -249,7 +249,7 @@ namespace XenAdmin.Actions
                     }
                     catch(Failure ex)
                     {
-                        log.Debug("Session.logout() failed for Session uuid " + Session.uuid, ex);
+                        log.Debug("Session.logout() failed for Session uuid " + Session.opaque_ref, ex);
                     }
                 }
 
@@ -262,7 +262,7 @@ namespace XenAdmin.Actions
         {
             //Program.AssertOffEventThread();
 
-            if (Session == null || string.IsNullOrEmpty(Session.uuid) || RelatedTask == null)
+            if (Session == null || string.IsNullOrEmpty(Session.opaque_ref) || RelatedTask == null)
                 return;
 
             try

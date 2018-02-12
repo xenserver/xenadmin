@@ -169,7 +169,7 @@ namespace XenAdmin.Actions
                 }
 
                 Session local_session = GetCancelSession();
-                if (local_session == null || string.IsNullOrEmpty(local_session.uuid))
+                if (local_session == null || string.IsNullOrEmpty(local_session.opaque_ref))
                 {
                     can_cancel = false;
                     return;

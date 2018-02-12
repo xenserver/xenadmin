@@ -401,7 +401,7 @@ namespace XenAdmin.Actions
 
             return HTTPHelper.Put(this, HTTP_PUT_TIMEOUT, m_filename, hostURL,
                                   (HTTP_actions.put_ssbbs)HTTP_actions.put_import,
-                                  Session.uuid, false, false, SR.opaque_ref);
+                                  Session.opaque_ref, false, false, SR.opaque_ref);
         }
 
 		public override void RecomputeCanCancel()
