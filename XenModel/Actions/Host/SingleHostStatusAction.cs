@@ -82,7 +82,7 @@ namespace XenAdmin.Actions
 
                 HTTPHelper.Get(this, false, dataRxDelegate, filename, host.Host.address,
                     (HTTP_actions.get_ssss)HTTP_actions.get_system_status,
-                    Session.uuid, entries_string, "tar");
+                    Session.opaque_ref, entries_string, "tar");
 
                 log.DebugFormat("Getting system status from {0} successful", hostname);
 

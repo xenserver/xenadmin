@@ -105,7 +105,7 @@ namespace XenServerHealthCheck
         {
             try
             {
-                if (connection != null && connection.Session != null && connection.Session.uuid == "dummy")
+                if (connection != null && connection.Session != null && connection.Session.opaque_ref == "dummy")
                     return new XenServerHealthCheckSimulatorWebProxy(DbProxy.proxys[connection]);
 
                 switch ((HTTPHelper.ProxyStyle)Properties.Settings.Default.ProxySetting)

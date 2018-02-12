@@ -160,8 +160,8 @@ namespace XenAdmin.Actions
                 RelatedTask = Task.create(Session, "uploadTask", hostUrl);
 
                 result = HTTPHelper.Put(progressDelegate, GetCancelling, true, Connection, RelatedTask, ref session,  suppPackFilePath, hostUrl,
-                                        (HTTP_actions.put_sss)HTTP_actions.put_import_raw_vdi, 
-                                        session.uuid, vdiRef.opaque_ref);
+                                        (HTTP_actions.put_sss)HTTP_actions.put_import_raw_vdi,
+                                        session.opaque_ref, vdiRef.opaque_ref);
             }
             catch (Exception ex)
             {

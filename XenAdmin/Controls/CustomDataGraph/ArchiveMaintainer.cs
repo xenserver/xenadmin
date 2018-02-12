@@ -321,9 +321,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             string query =
                 xo is Host ?
-                    string.Format(RrdHostUpdatesQuery, Uri.EscapeDataString(session.uuid), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval)) :
+                    string.Format(RrdHostUpdatesQuery, Uri.EscapeDataString(session.opaque_ref), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval)) :
                 xo is VM ?
-                    string.Format(RrdVmUpdatesQuery, Uri.EscapeDataString(session.uuid), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval), Helpers.GetUuid(xo)) :
+                    string.Format(RrdVmUpdatesQuery, Uri.EscapeDataString(session.opaque_ref), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval), Helpers.GetUuid(xo)) :
                     "";
             return BuildUri(host, RrdUpdatesPath, query);
         }
@@ -332,9 +332,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             string query =
                 xo is Host ?
-                    string.Format(RrdHostQuery, Uri.EscapeDataString(session.uuid)) :
+                    string.Format(RrdHostQuery, Uri.EscapeDataString(session.opaque_ref)) :
                 xo is VM ?
-                    string.Format(RrdVmQuery, Uri.EscapeDataString(session.uuid), Helpers.GetUuid(xo)) :
+                    string.Format(RrdVmQuery, Uri.EscapeDataString(session.opaque_ref), Helpers.GetUuid(xo)) :
                     "";
             return BuildUri(host, xo is Host ? RrdHostPath : RrdVmPath, query);
         }

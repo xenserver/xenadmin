@@ -81,7 +81,7 @@ namespace XenAdmin.Plugins
                     {
                         return NULL_PLACEHOLDER_KEY;
                     }
-                    return objs[0].Connection.Session.uuid;
+                    return objs[0].Connection.Session.opaque_ref;
                 }
                 else
                 {

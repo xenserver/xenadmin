@@ -793,11 +793,11 @@ namespace XenAdmin.Network
         /// <param name="session">May be null, in which case nothing happens.</param>
         public void Logout(Session session, bool exiting = false)
         {
-            if (session == null || session.uuid == null)
+            if (session == null || session.opaque_ref == null)
                 return;
 
             Thread t = new Thread(Logout_);
-            t.Name = string.Format("Logging out session {0}", session.uuid);
+            t.Name = string.Format("Logging out session {0}", session.opaque_ref);
             if (exiting)
             {
                 t.IsBackground = false;

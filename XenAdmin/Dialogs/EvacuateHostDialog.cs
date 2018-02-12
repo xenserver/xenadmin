@@ -934,7 +934,7 @@ namespace XenAdmin.Dialogs
             
             deregisterVMEvents();
 
-            if (elevatedSession != null && elevatedSession.uuid != null)
+            if (elevatedSession != null && elevatedSession.opaque_ref != null)
             {
                 // NOTE: This doesnt happen currently, as we always scan once. Here as cheap insurance.
                 // we still have the session from the role elevation dialog
