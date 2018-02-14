@@ -1379,7 +1379,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM>, Dictionary<string, string>> pool_ha_compute_vm_failover_plan(string session, List<XenRef<Host>> _failed_hosts, List<XenRef<VM>> _failed_vms)
         {
-            var converters = new List<JsonConverter> {new XenRefListConverter<Host>(), new XenRefListConverter<VM>()};
+            var converters = new List<JsonConverter> {new XenRefStringStringMapMapConverter<VM>(), new XenRefListConverter<Host>(), new XenRefListConverter<VM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM>, Dictionary<string, string>>>("pool.ha_compute_vm_failover_plan", new JArray(session, _failed_hosts == null ? new JArray() : JArray.FromObject(_failed_hosts, serializer), _failed_vms == null ? new JArray() : JArray.FromObject(_failed_vms, serializer)), serializer);
         }
@@ -12166,7 +12166,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VGPU_type>, long> pgpu_get_supported_vgpu_max_capacities(string session, string _pgpu)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new XenRefLongMapConverter<VGPU_type>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VGPU_type>, long>>("PGPU.get_supported_VGPU_max_capacities", new JArray(session, _pgpu ?? ""), serializer);
         }
@@ -12589,6 +12589,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<PGPU>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<XenRef<PGPU>>("VGPU.get_scheduled_to_be_resident_on", new JArray(session, _vgpu ?? ""), serializer);
+        }
+
+        public Dictionary<string, string> vgpu_get_compatibility_metadata(string session, string _vgpu)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, string>>("VGPU.get_compatibility_metadata", new JArray(session, _vgpu ?? ""), serializer);
         }
 
         public void vgpu_set_other_config(string session, string _vgpu, Dictionary<string, string> _other_config)

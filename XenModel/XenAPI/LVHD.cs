@@ -112,7 +112,8 @@ namespace XenAPI
         public override string SaveChanges(Session session, string opaqueRef, LVHD server)
         {
             if (opaqueRef == null)
-            {                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
+            {
+                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
                 return "";
             }
             else

@@ -189,7 +189,8 @@ namespace XenAPI
         public override string SaveChanges(Session session, string opaqueRef, PGPU server)
         {
             if (opaqueRef == null)
-            {                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
+            {
+                System.Diagnostics.Debug.Assert(false, "Cannot create instances of this type on the server");
                 return "";
             }
             else
@@ -837,6 +838,7 @@ namespace XenAPI
         /// A map relating each VGPU type supported on this GPU to the maximum number of VGPUs of that type which can run simultaneously on this GPU
         /// First published in XenServer 6.2 SP1.
         /// </summary>
+        [JsonConverter(typeof(XenRefLongMapConverter<VGPU_type>))]
         public virtual Dictionary<XenRef<VGPU_type>, long> supported_VGPU_max_capacities
         {
             get { return _supported_VGPU_max_capacities; }
