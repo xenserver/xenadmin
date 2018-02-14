@@ -1634,6 +1634,9 @@ Authorized Roles: {1}</value>
   <data name="SR_REQUIRES_UPGRADE" xml:space="preserve">
     <value>The operation cannot be performed until the SR has been upgraded</value>
   </data>
+  <data name="SR_SOURCE_SPACE_INSUFFICIENT" xml:space="preserve">
+    <value>The source SR does not have sufficient temporary space available to proceed the operation.</value>
+  </data>
   <data name="SR_UNKNOWN_DRIVER" xml:space="preserve">
     <value>The SR could not be connected because the driver {0} was not recognized.</value>
   </data>

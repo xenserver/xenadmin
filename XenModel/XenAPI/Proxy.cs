@@ -7216,6 +7216,10 @@ namespace XenAPI
         Response<string>
         vgpu_get_scheduled_to_be_resident_on(string session, string _vgpu);
 
+        [XmlRpcMethod("VGPU.get_compatibility_metadata")]
+        Response<Object>
+        vgpu_get_compatibility_metadata(string session, string _vgpu);
+
         [XmlRpcMethod("VGPU.set_other_config")]
         Response<string>
         vgpu_set_other_config(string session, string _vgpu, Object _other_config);
@@ -8797,6 +8801,7 @@ namespace XenAPI
         public string type;
         public string resident_on;
         public string scheduled_to_be_resident_on;
+        public Object compatibility_metadata;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
