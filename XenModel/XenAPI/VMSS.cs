@@ -82,6 +82,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VMSS.
+        /// </summary>
         public override void UpdateFrom(VMSS update)
         {
             uuid = update.uuid;
@@ -128,20 +132,43 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VMSS from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VMSS(Hashtable table)
+        public VMSS(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            enabled = Marshalling.ParseBool(table, "enabled");
-            type = (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), Marshalling.ParseString(table, "type"));
-            retained_snapshots = Marshalling.ParseLong(table, "retained_snapshots");
-            frequency = (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), Marshalling.ParseString(table, "frequency"));
-            schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "schedule"));
-            last_run_time = Marshalling.ParseDateTime(table, "last_run_time");
-            VMs = Marshalling.ParseSetRef<VM>(table, "VMs");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VMSS
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("enabled"))
+                enabled = (bool)table["enabled"];
+            if (table.ContainsKey("type"))
+                type = (vmss_type)Helper.EnumParseDefault(typeof(vmss_type), (string)table["type"]);
+            if (table.ContainsKey("retained_snapshots"))
+                retained_snapshots = long.Parse((string)table["retained_snapshots"]);
+            if (table.ContainsKey("frequency"))
+                frequency = (vmss_frequency)Helper.EnumParseDefault(typeof(vmss_frequency), (string)table["frequency"]);
+            if (table.ContainsKey("schedule"))
+                schedule = Maps.convert_from_proxy_string_string((Hashtable)table["schedule"]);
+            if (table.ContainsKey("last_run_time"))
+                last_run_time = (DateTime)table["last_run_time"];
+            if (table.ContainsKey("VMs"))
+                VMs = XenRef<VM>.Create((object[])table["VMs"]);
         }
 
         public bool DeepEquals(VMSS other)

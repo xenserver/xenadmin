@@ -82,6 +82,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given GPU_group.
+        /// </summary>
         public override void UpdateFrom(GPU_group update)
         {
             uuid = update.uuid;
@@ -128,20 +132,43 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new GPU_group from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public GPU_group(Hashtable table)
+        public GPU_group(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            PGPUs = Marshalling.ParseSetRef<PGPU>(table, "PGPUs");
-            VGPUs = Marshalling.ParseSetRef<VGPU>(table, "VGPUs");
-            GPU_types = Marshalling.ParseStringArray(table, "GPU_types");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            allocation_algorithm = (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), Marshalling.ParseString(table, "allocation_algorithm"));
-            supported_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "supported_VGPU_types");
-            enabled_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "enabled_VGPU_types");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this GPU_group
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("PGPUs"))
+                PGPUs = XenRef<PGPU>.Create((object[])table["PGPUs"]);
+            if (table.ContainsKey("VGPUs"))
+                VGPUs = XenRef<VGPU>.Create((object[])table["VGPUs"]);
+            if (table.ContainsKey("GPU_types"))
+                GPU_types = Array.ConvertAll((object[])table["GPU_types"], o => o.ToString());
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("allocation_algorithm"))
+                allocation_algorithm = (allocation_algorithm)Helper.EnumParseDefault(typeof(allocation_algorithm), (string)table["allocation_algorithm"]);
+            if (table.ContainsKey("supported_VGPU_types"))
+                supported_VGPU_types = XenRef<VGPU_type>.Create((object[])table["supported_VGPU_types"]);
+            if (table.ContainsKey("enabled_VGPU_types"))
+                enabled_VGPU_types = XenRef<VGPU_type>.Create((object[])table["enabled_VGPU_types"]);
         }
 
         public bool DeepEquals(GPU_group other)

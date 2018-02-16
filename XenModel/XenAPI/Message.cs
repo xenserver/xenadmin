@@ -238,6 +238,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Message.
+        /// </summary>
         public override void UpdateFrom(Message update)
         {
             uuid = update.uuid;
@@ -275,17 +279,37 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Message from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Message(Hashtable table)
+        public Message(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name = Marshalling.ParseString(table, "name");
-            priority = Marshalling.ParseLong(table, "priority");
-            cls = (cls)Helper.EnumParseDefault(typeof(cls), Marshalling.ParseString(table, "cls"));
-            obj_uuid = Marshalling.ParseString(table, "obj_uuid");
-            timestamp = Marshalling.ParseDateTime(table, "timestamp");
-            body = Marshalling.ParseString(table, "body");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Message
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name"))
+                name = (string)table["name"];
+            if (table.ContainsKey("priority"))
+                priority = long.Parse((string)table["priority"]);
+            if (table.ContainsKey("cls"))
+                cls = (cls)Helper.EnumParseDefault(typeof(cls), (string)table["cls"]);
+            if (table.ContainsKey("obj_uuid"))
+                obj_uuid = (string)table["obj_uuid"];
+            if (table.ContainsKey("timestamp"))
+                timestamp = (DateTime)table["timestamp"];
+            if (table.ContainsKey("body"))
+                body = (string)table["body"];
         }
 
         public bool DeepEquals(Message other)

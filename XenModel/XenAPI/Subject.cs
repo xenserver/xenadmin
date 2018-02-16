@@ -70,6 +70,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Subject.
+        /// </summary>
         public override void UpdateFrom(Subject update)
         {
             uuid = update.uuid;
@@ -98,14 +102,31 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Subject from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Subject(Hashtable table)
+        public Subject(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            subject_identifier = Marshalling.ParseString(table, "subject_identifier");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            roles = Marshalling.ParseSetRef<Role>(table, "roles");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Subject
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("subject_identifier"))
+                subject_identifier = (string)table["subject_identifier"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("roles"))
+                roles = XenRef<Role>.Create((object[])table["roles"]);
         }
 
         public bool DeepEquals(Subject other)

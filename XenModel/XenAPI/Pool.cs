@@ -134,6 +134,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Pool.
+        /// </summary>
         public override void UpdateFrom(Pool update)
         {
             uuid = update.uuid;
@@ -258,46 +262,95 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Pool from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Pool(Hashtable table)
+        public Pool(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            master = Marshalling.ParseRef<Host>(table, "master");
-            default_SR = Marshalling.ParseRef<SR>(table, "default_SR");
-            suspend_image_SR = Marshalling.ParseRef<SR>(table, "suspend_image_SR");
-            crash_dump_SR = Marshalling.ParseRef<SR>(table, "crash_dump_SR");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            ha_enabled = Marshalling.ParseBool(table, "ha_enabled");
-            ha_configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "ha_configuration"));
-            ha_statefiles = Marshalling.ParseStringArray(table, "ha_statefiles");
-            ha_host_failures_to_tolerate = Marshalling.ParseLong(table, "ha_host_failures_to_tolerate");
-            ha_plan_exists_for = Marshalling.ParseLong(table, "ha_plan_exists_for");
-            ha_allow_overcommit = Marshalling.ParseBool(table, "ha_allow_overcommit");
-            ha_overcommitted = Marshalling.ParseBool(table, "ha_overcommitted");
-            blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
-            tags = Marshalling.ParseStringArray(table, "tags");
-            gui_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "gui_config"));
-            health_check_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "health_check_config"));
-            wlb_url = Marshalling.ParseString(table, "wlb_url");
-            wlb_username = Marshalling.ParseString(table, "wlb_username");
-            wlb_enabled = Marshalling.ParseBool(table, "wlb_enabled");
-            wlb_verify_cert = Marshalling.ParseBool(table, "wlb_verify_cert");
-            redo_log_enabled = Marshalling.ParseBool(table, "redo_log_enabled");
-            redo_log_vdi = Marshalling.ParseRef<VDI>(table, "redo_log_vdi");
-            vswitch_controller = Marshalling.ParseString(table, "vswitch_controller");
-            restrictions = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "restrictions"));
-            metadata_VDIs = Marshalling.ParseSetRef<VDI>(table, "metadata_VDIs");
-            ha_cluster_stack = Marshalling.ParseString(table, "ha_cluster_stack");
-            allowed_operations = Helper.StringArrayToEnumList<pool_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_pool_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            guest_agent_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_agent_config"));
-            cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
-            policy_no_vendor_device = Marshalling.ParseBool(table, "policy_no_vendor_device");
-            live_patching_disabled = Marshalling.ParseBool(table, "live_patching_disabled");
-            igmp_snooping_enabled = Marshalling.ParseBool(table, "igmp_snooping_enabled");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Pool
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("master"))
+                master = XenRef<Host>.Create((string)table["master"]);
+            if (table.ContainsKey("default_SR"))
+                default_SR = XenRef<SR>.Create((string)table["default_SR"]);
+            if (table.ContainsKey("suspend_image_SR"))
+                suspend_image_SR = XenRef<SR>.Create((string)table["suspend_image_SR"]);
+            if (table.ContainsKey("crash_dump_SR"))
+                crash_dump_SR = XenRef<SR>.Create((string)table["crash_dump_SR"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("ha_enabled"))
+                ha_enabled = (bool)table["ha_enabled"];
+            if (table.ContainsKey("ha_configuration"))
+                ha_configuration = Maps.convert_from_proxy_string_string((Hashtable)table["ha_configuration"]);
+            if (table.ContainsKey("ha_statefiles"))
+                ha_statefiles = Array.ConvertAll((object[])table["ha_statefiles"], o => o.ToString());
+            if (table.ContainsKey("ha_host_failures_to_tolerate"))
+                ha_host_failures_to_tolerate = long.Parse((string)table["ha_host_failures_to_tolerate"]);
+            if (table.ContainsKey("ha_plan_exists_for"))
+                ha_plan_exists_for = long.Parse((string)table["ha_plan_exists_for"]);
+            if (table.ContainsKey("ha_allow_overcommit"))
+                ha_allow_overcommit = (bool)table["ha_allow_overcommit"];
+            if (table.ContainsKey("ha_overcommitted"))
+                ha_overcommitted = (bool)table["ha_overcommitted"];
+            if (table.ContainsKey("blobs"))
+                blobs = Maps.convert_from_proxy_string_XenRefBlob((Hashtable)table["blobs"]);
+            if (table.ContainsKey("tags"))
+                tags = Array.ConvertAll((object[])table["tags"], o => o.ToString());
+            if (table.ContainsKey("gui_config"))
+                gui_config = Maps.convert_from_proxy_string_string((Hashtable)table["gui_config"]);
+            if (table.ContainsKey("health_check_config"))
+                health_check_config = Maps.convert_from_proxy_string_string((Hashtable)table["health_check_config"]);
+            if (table.ContainsKey("wlb_url"))
+                wlb_url = (string)table["wlb_url"];
+            if (table.ContainsKey("wlb_username"))
+                wlb_username = (string)table["wlb_username"];
+            if (table.ContainsKey("wlb_enabled"))
+                wlb_enabled = (bool)table["wlb_enabled"];
+            if (table.ContainsKey("wlb_verify_cert"))
+                wlb_verify_cert = (bool)table["wlb_verify_cert"];
+            if (table.ContainsKey("redo_log_enabled"))
+                redo_log_enabled = (bool)table["redo_log_enabled"];
+            if (table.ContainsKey("redo_log_vdi"))
+                redo_log_vdi = XenRef<VDI>.Create((string)table["redo_log_vdi"]);
+            if (table.ContainsKey("vswitch_controller"))
+                vswitch_controller = (string)table["vswitch_controller"];
+            if (table.ContainsKey("restrictions"))
+                restrictions = Maps.convert_from_proxy_string_string((Hashtable)table["restrictions"]);
+            if (table.ContainsKey("metadata_VDIs"))
+                metadata_VDIs = XenRef<VDI>.Create((object[])table["metadata_VDIs"]);
+            if (table.ContainsKey("ha_cluster_stack"))
+                ha_cluster_stack = (string)table["ha_cluster_stack"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<pool_allowed_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_pool_allowed_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("guest_agent_config"))
+                guest_agent_config = Maps.convert_from_proxy_string_string((Hashtable)table["guest_agent_config"]);
+            if (table.ContainsKey("cpu_info"))
+                cpu_info = Maps.convert_from_proxy_string_string((Hashtable)table["cpu_info"]);
+            if (table.ContainsKey("policy_no_vendor_device"))
+                policy_no_vendor_device = (bool)table["policy_no_vendor_device"];
+            if (table.ContainsKey("live_patching_disabled"))
+                live_patching_disabled = (bool)table["live_patching_disabled"];
+            if (table.ContainsKey("igmp_snooping_enabled"))
+                igmp_snooping_enabled = (bool)table["igmp_snooping_enabled"];
         }
 
         public bool DeepEquals(Pool other, bool ignoreCurrentOperations)

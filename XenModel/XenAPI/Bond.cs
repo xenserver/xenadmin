@@ -78,6 +78,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Bond.
+        /// </summary>
         public override void UpdateFrom(Bond update)
         {
             uuid = update.uuid;
@@ -118,18 +122,39 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Bond from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Bond(Hashtable table)
+        public Bond(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            master = Marshalling.ParseRef<PIF>(table, "master");
-            slaves = Marshalling.ParseSetRef<PIF>(table, "slaves");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            primary_slave = Marshalling.ParseRef<PIF>(table, "primary_slave");
-            mode = (bond_mode)Helper.EnumParseDefault(typeof(bond_mode), Marshalling.ParseString(table, "mode"));
-            properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "properties"));
-            links_up = Marshalling.ParseLong(table, "links_up");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Bond
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("master"))
+                master = XenRef<PIF>.Create((string)table["master"]);
+            if (table.ContainsKey("slaves"))
+                slaves = XenRef<PIF>.Create((object[])table["slaves"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("primary_slave"))
+                primary_slave = XenRef<PIF>.Create((string)table["primary_slave"]);
+            if (table.ContainsKey("mode"))
+                mode = (bond_mode)Helper.EnumParseDefault(typeof(bond_mode), (string)table["mode"]);
+            if (table.ContainsKey("properties"))
+                properties = Maps.convert_from_proxy_string_string((Hashtable)table["properties"]);
+            if (table.ContainsKey("links_up"))
+                links_up = long.Parse((string)table["links_up"]);
         }
 
         public bool DeepEquals(Bond other)

@@ -102,6 +102,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VMPP.
+        /// </summary>
         public override void UpdateFrom(VMPP update)
         {
             uuid = update.uuid;
@@ -178,30 +182,63 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VMPP from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VMPP(Hashtable table)
+        public VMPP(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            is_policy_enabled = Marshalling.ParseBool(table, "is_policy_enabled");
-            backup_type = (vmpp_backup_type)Helper.EnumParseDefault(typeof(vmpp_backup_type), Marshalling.ParseString(table, "backup_type"));
-            backup_retention_value = Marshalling.ParseLong(table, "backup_retention_value");
-            backup_frequency = (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), Marshalling.ParseString(table, "backup_frequency"));
-            backup_schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "backup_schedule"));
-            is_backup_running = Marshalling.ParseBool(table, "is_backup_running");
-            backup_last_run_time = Marshalling.ParseDateTime(table, "backup_last_run_time");
-            archive_target_type = (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), Marshalling.ParseString(table, "archive_target_type"));
-            archive_target_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "archive_target_config"));
-            archive_frequency = (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), Marshalling.ParseString(table, "archive_frequency"));
-            archive_schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "archive_schedule"));
-            is_archive_running = Marshalling.ParseBool(table, "is_archive_running");
-            archive_last_run_time = Marshalling.ParseDateTime(table, "archive_last_run_time");
-            VMs = Marshalling.ParseSetRef<VM>(table, "VMs");
-            is_alarm_enabled = Marshalling.ParseBool(table, "is_alarm_enabled");
-            alarm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "alarm_config"));
-            recent_alerts = Marshalling.ParseStringArray(table, "recent_alerts");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VMPP
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("is_policy_enabled"))
+                is_policy_enabled = (bool)table["is_policy_enabled"];
+            if (table.ContainsKey("backup_type"))
+                backup_type = (vmpp_backup_type)Helper.EnumParseDefault(typeof(vmpp_backup_type), (string)table["backup_type"]);
+            if (table.ContainsKey("backup_retention_value"))
+                backup_retention_value = long.Parse((string)table["backup_retention_value"]);
+            if (table.ContainsKey("backup_frequency"))
+                backup_frequency = (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), (string)table["backup_frequency"]);
+            if (table.ContainsKey("backup_schedule"))
+                backup_schedule = Maps.convert_from_proxy_string_string((Hashtable)table["backup_schedule"]);
+            if (table.ContainsKey("is_backup_running"))
+                is_backup_running = (bool)table["is_backup_running"];
+            if (table.ContainsKey("backup_last_run_time"))
+                backup_last_run_time = (DateTime)table["backup_last_run_time"];
+            if (table.ContainsKey("archive_target_type"))
+                archive_target_type = (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), (string)table["archive_target_type"]);
+            if (table.ContainsKey("archive_target_config"))
+                archive_target_config = Maps.convert_from_proxy_string_string((Hashtable)table["archive_target_config"]);
+            if (table.ContainsKey("archive_frequency"))
+                archive_frequency = (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), (string)table["archive_frequency"]);
+            if (table.ContainsKey("archive_schedule"))
+                archive_schedule = Maps.convert_from_proxy_string_string((Hashtable)table["archive_schedule"]);
+            if (table.ContainsKey("is_archive_running"))
+                is_archive_running = (bool)table["is_archive_running"];
+            if (table.ContainsKey("archive_last_run_time"))
+                archive_last_run_time = (DateTime)table["archive_last_run_time"];
+            if (table.ContainsKey("VMs"))
+                VMs = XenRef<VM>.Create((object[])table["VMs"]);
+            if (table.ContainsKey("is_alarm_enabled"))
+                is_alarm_enabled = (bool)table["is_alarm_enabled"];
+            if (table.ContainsKey("alarm_config"))
+                alarm_config = Maps.convert_from_proxy_string_string((Hashtable)table["alarm_config"]);
+            if (table.ContainsKey("recent_alerts"))
+                recent_alerts = Array.ConvertAll((object[])table["recent_alerts"], o => o.ToString());
         }
 
         public bool DeepEquals(VMPP other)

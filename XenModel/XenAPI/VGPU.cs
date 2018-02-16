@@ -82,6 +82,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VGPU.
+        /// </summary>
         public override void UpdateFrom(VGPU update)
         {
             uuid = update.uuid;
@@ -128,20 +132,43 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VGPU from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VGPU(Hashtable table)
+        public VGPU(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            VM = Marshalling.ParseRef<VM>(table, "VM");
-            GPU_group = Marshalling.ParseRef<GPU_group>(table, "GPU_group");
-            device = Marshalling.ParseString(table, "device");
-            currently_attached = Marshalling.ParseBool(table, "currently_attached");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            type = Marshalling.ParseRef<VGPU_type>(table, "type");
-            resident_on = Marshalling.ParseRef<PGPU>(table, "resident_on");
-            scheduled_to_be_resident_on = Marshalling.ParseRef<PGPU>(table, "scheduled_to_be_resident_on");
-            compatibility_metadata = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "compatibility_metadata"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VGPU
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("VM"))
+                VM = XenRef<VM>.Create((string)table["VM"]);
+            if (table.ContainsKey("GPU_group"))
+                GPU_group = XenRef<GPU_group>.Create((string)table["GPU_group"]);
+            if (table.ContainsKey("device"))
+                device = (string)table["device"];
+            if (table.ContainsKey("currently_attached"))
+                currently_attached = (bool)table["currently_attached"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("type"))
+                type = XenRef<VGPU_type>.Create((string)table["type"]);
+            if (table.ContainsKey("resident_on"))
+                resident_on = XenRef<PGPU>.Create((string)table["resident_on"]);
+            if (table.ContainsKey("scheduled_to_be_resident_on"))
+                scheduled_to_be_resident_on = XenRef<PGPU>.Create((string)table["scheduled_to_be_resident_on"]);
+            if (table.ContainsKey("compatibility_metadata"))
+                compatibility_metadata = Maps.convert_from_proxy_string_string((Hashtable)table["compatibility_metadata"]);
         }
 
         public bool DeepEquals(VGPU other)

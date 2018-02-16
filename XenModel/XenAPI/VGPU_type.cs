@@ -92,6 +92,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VGPU_type.
+        /// </summary>
         public override void UpdateFrom(VGPU_type update)
         {
             uuid = update.uuid;
@@ -153,25 +157,53 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VGPU_type from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VGPU_type(Hashtable table)
+        public VGPU_type(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            vendor_name = Marshalling.ParseString(table, "vendor_name");
-            model_name = Marshalling.ParseString(table, "model_name");
-            framebuffer_size = Marshalling.ParseLong(table, "framebuffer_size");
-            max_heads = Marshalling.ParseLong(table, "max_heads");
-            max_resolution_x = Marshalling.ParseLong(table, "max_resolution_x");
-            max_resolution_y = Marshalling.ParseLong(table, "max_resolution_y");
-            supported_on_PGPUs = Marshalling.ParseSetRef<PGPU>(table, "supported_on_PGPUs");
-            enabled_on_PGPUs = Marshalling.ParseSetRef<PGPU>(table, "enabled_on_PGPUs");
-            VGPUs = Marshalling.ParseSetRef<VGPU>(table, "VGPUs");
-            supported_on_GPU_groups = Marshalling.ParseSetRef<GPU_group>(table, "supported_on_GPU_groups");
-            enabled_on_GPU_groups = Marshalling.ParseSetRef<GPU_group>(table, "enabled_on_GPU_groups");
-            implementation = (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), Marshalling.ParseString(table, "implementation"));
-            identifier = Marshalling.ParseString(table, "identifier");
-            experimental = Marshalling.ParseBool(table, "experimental");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VGPU_type
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("vendor_name"))
+                vendor_name = (string)table["vendor_name"];
+            if (table.ContainsKey("model_name"))
+                model_name = (string)table["model_name"];
+            if (table.ContainsKey("framebuffer_size"))
+                framebuffer_size = long.Parse((string)table["framebuffer_size"]);
+            if (table.ContainsKey("max_heads"))
+                max_heads = long.Parse((string)table["max_heads"]);
+            if (table.ContainsKey("max_resolution_x"))
+                max_resolution_x = long.Parse((string)table["max_resolution_x"]);
+            if (table.ContainsKey("max_resolution_y"))
+                max_resolution_y = long.Parse((string)table["max_resolution_y"]);
+            if (table.ContainsKey("supported_on_PGPUs"))
+                supported_on_PGPUs = XenRef<PGPU>.Create((object[])table["supported_on_PGPUs"]);
+            if (table.ContainsKey("enabled_on_PGPUs"))
+                enabled_on_PGPUs = XenRef<PGPU>.Create((object[])table["enabled_on_PGPUs"]);
+            if (table.ContainsKey("VGPUs"))
+                VGPUs = XenRef<VGPU>.Create((object[])table["VGPUs"]);
+            if (table.ContainsKey("supported_on_GPU_groups"))
+                supported_on_GPU_groups = XenRef<GPU_group>.Create((object[])table["supported_on_GPU_groups"]);
+            if (table.ContainsKey("enabled_on_GPU_groups"))
+                enabled_on_GPU_groups = XenRef<GPU_group>.Create((object[])table["enabled_on_GPU_groups"]);
+            if (table.ContainsKey("implementation"))
+                implementation = (vgpu_type_implementation)Helper.EnumParseDefault(typeof(vgpu_type_implementation), (string)table["implementation"]);
+            if (table.ContainsKey("identifier"))
+                identifier = (string)table["identifier"];
+            if (table.ContainsKey("experimental"))
+                experimental = (bool)table["experimental"];
         }
 
         public bool DeepEquals(VGPU_type other)

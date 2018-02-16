@@ -74,6 +74,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VM_appliance.
+        /// </summary>
         public override void UpdateFrom(VM_appliance update)
         {
             uuid = update.uuid;
@@ -108,16 +112,35 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VM_appliance from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VM_appliance(Hashtable table)
+        public VM_appliance(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            allowed_operations = Helper.StringArrayToEnumList<vm_appliance_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_vm_appliance_operation(Marshalling.ParseHashTable(table, "current_operations"));
-            VMs = Marshalling.ParseSetRef<VM>(table, "VMs");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VM_appliance
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<vm_appliance_operation>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_vm_appliance_operation((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("VMs"))
+                VMs = XenRef<VM>.Create((object[])table["VMs"]);
         }
 
         public bool DeepEquals(VM_appliance other, bool ignoreCurrentOperations)

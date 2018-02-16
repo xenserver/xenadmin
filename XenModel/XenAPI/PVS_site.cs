@@ -76,6 +76,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PVS_site.
+        /// </summary>
         public override void UpdateFrom(PVS_site update)
         {
             uuid = update.uuid;
@@ -113,17 +117,37 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PVS_site from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PVS_site(Hashtable table)
+        public PVS_site(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            PVS_uuid = Marshalling.ParseString(table, "PVS_uuid");
-            cache_storage = Marshalling.ParseSetRef<PVS_cache_storage>(table, "cache_storage");
-            servers = Marshalling.ParseSetRef<PVS_server>(table, "servers");
-            proxies = Marshalling.ParseSetRef<PVS_proxy>(table, "proxies");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PVS_site
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("PVS_uuid"))
+                PVS_uuid = (string)table["PVS_uuid"];
+            if (table.ContainsKey("cache_storage"))
+                cache_storage = XenRef<PVS_cache_storage>.Create((object[])table["cache_storage"]);
+            if (table.ContainsKey("servers"))
+                servers = XenRef<PVS_server>.Create((object[])table["servers"]);
+            if (table.ContainsKey("proxies"))
+                proxies = XenRef<PVS_proxy>.Create((object[])table["proxies"]);
         }
 
         public bool DeepEquals(PVS_site other)

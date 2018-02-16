@@ -174,6 +174,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Host.
+        /// </summary>
         public override void UpdateFrom(Host update)
         {
             uuid = update.uuid;
@@ -358,66 +362,135 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Host from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Host(Hashtable table)
+        public Host(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            memory_overhead = Marshalling.ParseLong(table, "memory_overhead");
-            allowed_operations = Helper.StringArrayToEnumList<host_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_host_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            API_version_major = Marshalling.ParseLong(table, "API_version_major");
-            API_version_minor = Marshalling.ParseLong(table, "API_version_minor");
-            API_version_vendor = Marshalling.ParseString(table, "API_version_vendor");
-            API_version_vendor_implementation = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "API_version_vendor_implementation"));
-            enabled = Marshalling.ParseBool(table, "enabled");
-            software_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "software_version"));
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            capabilities = Marshalling.ParseStringArray(table, "capabilities");
-            cpu_configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_configuration"));
-            sched_policy = Marshalling.ParseString(table, "sched_policy");
-            supported_bootloaders = Marshalling.ParseStringArray(table, "supported_bootloaders");
-            resident_VMs = Marshalling.ParseSetRef<VM>(table, "resident_VMs");
-            logging = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "logging"));
-            PIFs = Marshalling.ParseSetRef<PIF>(table, "PIFs");
-            suspend_image_sr = Marshalling.ParseRef<SR>(table, "suspend_image_sr");
-            crash_dump_sr = Marshalling.ParseRef<SR>(table, "crash_dump_sr");
-            crashdumps = Marshalling.ParseSetRef<Host_crashdump>(table, "crashdumps");
-            patches = Marshalling.ParseSetRef<Host_patch>(table, "patches");
-            updates = Marshalling.ParseSetRef<Pool_update>(table, "updates");
-            PBDs = Marshalling.ParseSetRef<PBD>(table, "PBDs");
-            host_CPUs = Marshalling.ParseSetRef<Host_cpu>(table, "host_CPUs");
-            cpu_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cpu_info"));
-            hostname = Marshalling.ParseString(table, "hostname");
-            address = Marshalling.ParseString(table, "address");
-            metrics = Marshalling.ParseRef<Host_metrics>(table, "metrics");
-            license_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "license_params"));
-            ha_statefiles = Marshalling.ParseStringArray(table, "ha_statefiles");
-            ha_network_peers = Marshalling.ParseStringArray(table, "ha_network_peers");
-            blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
-            tags = Marshalling.ParseStringArray(table, "tags");
-            external_auth_type = Marshalling.ParseString(table, "external_auth_type");
-            external_auth_service_name = Marshalling.ParseString(table, "external_auth_service_name");
-            external_auth_configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "external_auth_configuration"));
-            edition = Marshalling.ParseString(table, "edition");
-            license_server = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "license_server"));
-            bios_strings = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
-            power_on_mode = Marshalling.ParseString(table, "power_on_mode");
-            power_on_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "power_on_config"));
-            local_cache_sr = Marshalling.ParseRef<SR>(table, "local_cache_sr");
-            chipset_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "chipset_info"));
-            PCIs = Marshalling.ParseSetRef<PCI>(table, "PCIs");
-            PGPUs = Marshalling.ParseSetRef<PGPU>(table, "PGPUs");
-            PUSBs = Marshalling.ParseSetRef<PUSB>(table, "PUSBs");
-            ssl_legacy = Marshalling.ParseBool(table, "ssl_legacy");
-            guest_VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "guest_VCPUs_params"));
-            display = (host_display)Helper.EnumParseDefault(typeof(host_display), Marshalling.ParseString(table, "display"));
-            virtual_hardware_platform_versions = Marshalling.ParseLongArray(table, "virtual_hardware_platform_versions");
-            control_domain = Marshalling.ParseRef<VM>(table, "control_domain");
-            updates_requiring_reboot = Marshalling.ParseSetRef<Pool_update>(table, "updates_requiring_reboot");
-            features = Marshalling.ParseSetRef<Feature>(table, "features");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Host
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("memory_overhead"))
+                memory_overhead = long.Parse((string)table["memory_overhead"]);
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<host_allowed_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_host_allowed_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("API_version_major"))
+                API_version_major = long.Parse((string)table["API_version_major"]);
+            if (table.ContainsKey("API_version_minor"))
+                API_version_minor = long.Parse((string)table["API_version_minor"]);
+            if (table.ContainsKey("API_version_vendor"))
+                API_version_vendor = (string)table["API_version_vendor"];
+            if (table.ContainsKey("API_version_vendor_implementation"))
+                API_version_vendor_implementation = Maps.convert_from_proxy_string_string((Hashtable)table["API_version_vendor_implementation"]);
+            if (table.ContainsKey("enabled"))
+                enabled = (bool)table["enabled"];
+            if (table.ContainsKey("software_version"))
+                software_version = Maps.convert_from_proxy_string_string((Hashtable)table["software_version"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("capabilities"))
+                capabilities = Array.ConvertAll((object[])table["capabilities"], o => o.ToString());
+            if (table.ContainsKey("cpu_configuration"))
+                cpu_configuration = Maps.convert_from_proxy_string_string((Hashtable)table["cpu_configuration"]);
+            if (table.ContainsKey("sched_policy"))
+                sched_policy = (string)table["sched_policy"];
+            if (table.ContainsKey("supported_bootloaders"))
+                supported_bootloaders = Array.ConvertAll((object[])table["supported_bootloaders"], o => o.ToString());
+            if (table.ContainsKey("resident_VMs"))
+                resident_VMs = XenRef<VM>.Create((object[])table["resident_VMs"]);
+            if (table.ContainsKey("logging"))
+                logging = Maps.convert_from_proxy_string_string((Hashtable)table["logging"]);
+            if (table.ContainsKey("PIFs"))
+                PIFs = XenRef<PIF>.Create((object[])table["PIFs"]);
+            if (table.ContainsKey("suspend_image_sr"))
+                suspend_image_sr = XenRef<SR>.Create((string)table["suspend_image_sr"]);
+            if (table.ContainsKey("crash_dump_sr"))
+                crash_dump_sr = XenRef<SR>.Create((string)table["crash_dump_sr"]);
+            if (table.ContainsKey("crashdumps"))
+                crashdumps = XenRef<Host_crashdump>.Create((object[])table["crashdumps"]);
+            if (table.ContainsKey("patches"))
+                patches = XenRef<Host_patch>.Create((object[])table["patches"]);
+            if (table.ContainsKey("updates"))
+                updates = XenRef<Pool_update>.Create((object[])table["updates"]);
+            if (table.ContainsKey("PBDs"))
+                PBDs = XenRef<PBD>.Create((object[])table["PBDs"]);
+            if (table.ContainsKey("host_CPUs"))
+                host_CPUs = XenRef<Host_cpu>.Create((object[])table["host_CPUs"]);
+            if (table.ContainsKey("cpu_info"))
+                cpu_info = Maps.convert_from_proxy_string_string((Hashtable)table["cpu_info"]);
+            if (table.ContainsKey("hostname"))
+                hostname = (string)table["hostname"];
+            if (table.ContainsKey("address"))
+                address = (string)table["address"];
+            if (table.ContainsKey("metrics"))
+                metrics = XenRef<Host_metrics>.Create((string)table["metrics"]);
+            if (table.ContainsKey("license_params"))
+                license_params = Maps.convert_from_proxy_string_string((Hashtable)table["license_params"]);
+            if (table.ContainsKey("ha_statefiles"))
+                ha_statefiles = Array.ConvertAll((object[])table["ha_statefiles"], o => o.ToString());
+            if (table.ContainsKey("ha_network_peers"))
+                ha_network_peers = Array.ConvertAll((object[])table["ha_network_peers"], o => o.ToString());
+            if (table.ContainsKey("blobs"))
+                blobs = Maps.convert_from_proxy_string_XenRefBlob((Hashtable)table["blobs"]);
+            if (table.ContainsKey("tags"))
+                tags = Array.ConvertAll((object[])table["tags"], o => o.ToString());
+            if (table.ContainsKey("external_auth_type"))
+                external_auth_type = (string)table["external_auth_type"];
+            if (table.ContainsKey("external_auth_service_name"))
+                external_auth_service_name = (string)table["external_auth_service_name"];
+            if (table.ContainsKey("external_auth_configuration"))
+                external_auth_configuration = Maps.convert_from_proxy_string_string((Hashtable)table["external_auth_configuration"]);
+            if (table.ContainsKey("edition"))
+                edition = (string)table["edition"];
+            if (table.ContainsKey("license_server"))
+                license_server = Maps.convert_from_proxy_string_string((Hashtable)table["license_server"]);
+            if (table.ContainsKey("bios_strings"))
+                bios_strings = Maps.convert_from_proxy_string_string((Hashtable)table["bios_strings"]);
+            if (table.ContainsKey("power_on_mode"))
+                power_on_mode = (string)table["power_on_mode"];
+            if (table.ContainsKey("power_on_config"))
+                power_on_config = Maps.convert_from_proxy_string_string((Hashtable)table["power_on_config"]);
+            if (table.ContainsKey("local_cache_sr"))
+                local_cache_sr = XenRef<SR>.Create((string)table["local_cache_sr"]);
+            if (table.ContainsKey("chipset_info"))
+                chipset_info = Maps.convert_from_proxy_string_string((Hashtable)table["chipset_info"]);
+            if (table.ContainsKey("PCIs"))
+                PCIs = XenRef<PCI>.Create((object[])table["PCIs"]);
+            if (table.ContainsKey("PGPUs"))
+                PGPUs = XenRef<PGPU>.Create((object[])table["PGPUs"]);
+            if (table.ContainsKey("PUSBs"))
+                PUSBs = XenRef<PUSB>.Create((object[])table["PUSBs"]);
+            if (table.ContainsKey("ssl_legacy"))
+                ssl_legacy = (bool)table["ssl_legacy"];
+            if (table.ContainsKey("guest_VCPUs_params"))
+                guest_VCPUs_params = Maps.convert_from_proxy_string_string((Hashtable)table["guest_VCPUs_params"]);
+            if (table.ContainsKey("display"))
+                display = (host_display)Helper.EnumParseDefault(typeof(host_display), (string)table["display"]);
+            if (table.ContainsKey("virtual_hardware_platform_versions"))
+                virtual_hardware_platform_versions = Array.ConvertAll((object[])table["virtual_hardware_platform_versions"], o => long.Parse(o.ToString()));
+            if (table.ContainsKey("control_domain"))
+                control_domain = XenRef<VM>.Create((string)table["control_domain"]);
+            if (table.ContainsKey("updates_requiring_reboot"))
+                updates_requiring_reboot = XenRef<Pool_update>.Create((object[])table["updates_requiring_reboot"]);
+            if (table.ContainsKey("features"))
+                features = XenRef<Feature>.Create((object[])table["features"]);
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)

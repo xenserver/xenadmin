@@ -126,6 +126,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VDI.
+        /// </summary>
         public override void UpdateFrom(VDI update)
         {
             uuid = update.uuid;
@@ -238,42 +242,87 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VDI from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VDI(Hashtable table)
+        public VDI(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            allowed_operations = Helper.StringArrayToEnumList<vdi_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_vdi_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            SR = Marshalling.ParseRef<SR>(table, "SR");
-            VBDs = Marshalling.ParseSetRef<VBD>(table, "VBDs");
-            crash_dumps = Marshalling.ParseSetRef<Crashdump>(table, "crash_dumps");
-            virtual_size = Marshalling.ParseLong(table, "virtual_size");
-            physical_utilisation = Marshalling.ParseLong(table, "physical_utilisation");
-            type = (vdi_type)Helper.EnumParseDefault(typeof(vdi_type), Marshalling.ParseString(table, "type"));
-            sharable = Marshalling.ParseBool(table, "sharable");
-            read_only = Marshalling.ParseBool(table, "read_only");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            storage_lock = Marshalling.ParseBool(table, "storage_lock");
-            location = Marshalling.ParseString(table, "location");
-            managed = Marshalling.ParseBool(table, "managed");
-            missing = Marshalling.ParseBool(table, "missing");
-            parent = Marshalling.ParseRef<VDI>(table, "parent");
-            xenstore_data = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
-            sm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "sm_config"));
-            is_a_snapshot = Marshalling.ParseBool(table, "is_a_snapshot");
-            snapshot_of = Marshalling.ParseRef<VDI>(table, "snapshot_of");
-            snapshots = Marshalling.ParseSetRef<VDI>(table, "snapshots");
-            snapshot_time = Marshalling.ParseDateTime(table, "snapshot_time");
-            tags = Marshalling.ParseStringArray(table, "tags");
-            allow_caching = Marshalling.ParseBool(table, "allow_caching");
-            on_boot = (on_boot)Helper.EnumParseDefault(typeof(on_boot), Marshalling.ParseString(table, "on_boot"));
-            metadata_of_pool = Marshalling.ParseRef<Pool>(table, "metadata_of_pool");
-            metadata_latest = Marshalling.ParseBool(table, "metadata_latest");
-            is_tools_iso = Marshalling.ParseBool(table, "is_tools_iso");
-            cbt_enabled = Marshalling.ParseBool(table, "cbt_enabled");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VDI
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<vdi_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_vdi_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("SR"))
+                SR = XenRef<SR>.Create((string)table["SR"]);
+            if (table.ContainsKey("VBDs"))
+                VBDs = XenRef<VBD>.Create((object[])table["VBDs"]);
+            if (table.ContainsKey("crash_dumps"))
+                crash_dumps = XenRef<Crashdump>.Create((object[])table["crash_dumps"]);
+            if (table.ContainsKey("virtual_size"))
+                virtual_size = long.Parse((string)table["virtual_size"]);
+            if (table.ContainsKey("physical_utilisation"))
+                physical_utilisation = long.Parse((string)table["physical_utilisation"]);
+            if (table.ContainsKey("type"))
+                type = (vdi_type)Helper.EnumParseDefault(typeof(vdi_type), (string)table["type"]);
+            if (table.ContainsKey("sharable"))
+                sharable = (bool)table["sharable"];
+            if (table.ContainsKey("read_only"))
+                read_only = (bool)table["read_only"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("storage_lock"))
+                storage_lock = (bool)table["storage_lock"];
+            if (table.ContainsKey("location"))
+                location = (string)table["location"];
+            if (table.ContainsKey("managed"))
+                managed = (bool)table["managed"];
+            if (table.ContainsKey("missing"))
+                missing = (bool)table["missing"];
+            if (table.ContainsKey("parent"))
+                parent = XenRef<VDI>.Create((string)table["parent"]);
+            if (table.ContainsKey("xenstore_data"))
+                xenstore_data = Maps.convert_from_proxy_string_string((Hashtable)table["xenstore_data"]);
+            if (table.ContainsKey("sm_config"))
+                sm_config = Maps.convert_from_proxy_string_string((Hashtable)table["sm_config"]);
+            if (table.ContainsKey("is_a_snapshot"))
+                is_a_snapshot = (bool)table["is_a_snapshot"];
+            if (table.ContainsKey("snapshot_of"))
+                snapshot_of = XenRef<VDI>.Create((string)table["snapshot_of"]);
+            if (table.ContainsKey("snapshots"))
+                snapshots = XenRef<VDI>.Create((object[])table["snapshots"]);
+            if (table.ContainsKey("snapshot_time"))
+                snapshot_time = (DateTime)table["snapshot_time"];
+            if (table.ContainsKey("tags"))
+                tags = Array.ConvertAll((object[])table["tags"], o => o.ToString());
+            if (table.ContainsKey("allow_caching"))
+                allow_caching = (bool)table["allow_caching"];
+            if (table.ContainsKey("on_boot"))
+                on_boot = (on_boot)Helper.EnumParseDefault(typeof(on_boot), (string)table["on_boot"]);
+            if (table.ContainsKey("metadata_of_pool"))
+                metadata_of_pool = XenRef<Pool>.Create((string)table["metadata_of_pool"]);
+            if (table.ContainsKey("metadata_latest"))
+                metadata_latest = (bool)table["metadata_latest"];
+            if (table.ContainsKey("is_tools_iso"))
+                is_tools_iso = (bool)table["is_tools_iso"];
+            if (table.ContainsKey("cbt_enabled"))
+                cbt_enabled = (bool)table["cbt_enabled"];
         }
 
         public bool DeepEquals(VDI other, bool ignoreCurrentOperations)

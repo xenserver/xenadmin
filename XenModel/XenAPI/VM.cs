@@ -228,6 +228,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VM.
+        /// </summary>
         public override void UpdateFrom(VM update)
         {
             uuid = update.uuid;
@@ -493,93 +497,189 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VM from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VM(Hashtable table)
+        public VM(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            allowed_operations = Helper.StringArrayToEnumList<vm_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_vm_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            power_state = (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), Marshalling.ParseString(table, "power_state"));
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            user_version = Marshalling.ParseLong(table, "user_version");
-            is_a_template = Marshalling.ParseBool(table, "is_a_template");
-            is_default_template = Marshalling.ParseBool(table, "is_default_template");
-            suspend_VDI = Marshalling.ParseRef<VDI>(table, "suspend_VDI");
-            resident_on = Marshalling.ParseRef<Host>(table, "resident_on");
-            affinity = Marshalling.ParseRef<Host>(table, "affinity");
-            memory_overhead = Marshalling.ParseLong(table, "memory_overhead");
-            memory_target = Marshalling.ParseLong(table, "memory_target");
-            memory_static_max = Marshalling.ParseLong(table, "memory_static_max");
-            memory_dynamic_max = Marshalling.ParseLong(table, "memory_dynamic_max");
-            memory_dynamic_min = Marshalling.ParseLong(table, "memory_dynamic_min");
-            memory_static_min = Marshalling.ParseLong(table, "memory_static_min");
-            VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "VCPUs_params"));
-            VCPUs_max = Marshalling.ParseLong(table, "VCPUs_max");
-            VCPUs_at_startup = Marshalling.ParseLong(table, "VCPUs_at_startup");
-            actions_after_shutdown = (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), Marshalling.ParseString(table, "actions_after_shutdown"));
-            actions_after_reboot = (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), Marshalling.ParseString(table, "actions_after_reboot"));
-            actions_after_crash = (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), Marshalling.ParseString(table, "actions_after_crash"));
-            consoles = Marshalling.ParseSetRef<Console>(table, "consoles");
-            VIFs = Marshalling.ParseSetRef<VIF>(table, "VIFs");
-            VBDs = Marshalling.ParseSetRef<VBD>(table, "VBDs");
-            VUSBs = Marshalling.ParseSetRef<VUSB>(table, "VUSBs");
-            crash_dumps = Marshalling.ParseSetRef<Crashdump>(table, "crash_dumps");
-            VTPMs = Marshalling.ParseSetRef<VTPM>(table, "VTPMs");
-            PV_bootloader = Marshalling.ParseString(table, "PV_bootloader");
-            PV_kernel = Marshalling.ParseString(table, "PV_kernel");
-            PV_ramdisk = Marshalling.ParseString(table, "PV_ramdisk");
-            PV_args = Marshalling.ParseString(table, "PV_args");
-            PV_bootloader_args = Marshalling.ParseString(table, "PV_bootloader_args");
-            PV_legacy_args = Marshalling.ParseString(table, "PV_legacy_args");
-            HVM_boot_policy = Marshalling.ParseString(table, "HVM_boot_policy");
-            HVM_boot_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "HVM_boot_params"));
-            HVM_shadow_multiplier = Marshalling.ParseDouble(table, "HVM_shadow_multiplier");
-            platform = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "platform"));
-            PCI_bus = Marshalling.ParseString(table, "PCI_bus");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            domid = Marshalling.ParseLong(table, "domid");
-            domarch = Marshalling.ParseString(table, "domarch");
-            last_boot_CPU_flags = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "last_boot_CPU_flags"));
-            is_control_domain = Marshalling.ParseBool(table, "is_control_domain");
-            metrics = Marshalling.ParseRef<VM_metrics>(table, "metrics");
-            guest_metrics = Marshalling.ParseRef<VM_guest_metrics>(table, "guest_metrics");
-            last_booted_record = Marshalling.ParseString(table, "last_booted_record");
-            recommendations = Marshalling.ParseString(table, "recommendations");
-            xenstore_data = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
-            ha_always_run = Marshalling.ParseBool(table, "ha_always_run");
-            ha_restart_priority = Marshalling.ParseString(table, "ha_restart_priority");
-            is_a_snapshot = Marshalling.ParseBool(table, "is_a_snapshot");
-            snapshot_of = Marshalling.ParseRef<VM>(table, "snapshot_of");
-            snapshots = Marshalling.ParseSetRef<VM>(table, "snapshots");
-            snapshot_time = Marshalling.ParseDateTime(table, "snapshot_time");
-            transportable_snapshot_id = Marshalling.ParseString(table, "transportable_snapshot_id");
-            blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
-            tags = Marshalling.ParseStringArray(table, "tags");
-            blocked_operations = Maps.convert_from_proxy_vm_operations_string(Marshalling.ParseHashTable(table, "blocked_operations"));
-            snapshot_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "snapshot_info"));
-            snapshot_metadata = Marshalling.ParseString(table, "snapshot_metadata");
-            parent = Marshalling.ParseRef<VM>(table, "parent");
-            children = Marshalling.ParseSetRef<VM>(table, "children");
-            bios_strings = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
-            protection_policy = Marshalling.ParseRef<VMPP>(table, "protection_policy");
-            is_snapshot_from_vmpp = Marshalling.ParseBool(table, "is_snapshot_from_vmpp");
-            snapshot_schedule = Marshalling.ParseRef<VMSS>(table, "snapshot_schedule");
-            is_vmss_snapshot = Marshalling.ParseBool(table, "is_vmss_snapshot");
-            appliance = Marshalling.ParseRef<VM_appliance>(table, "appliance");
-            start_delay = Marshalling.ParseLong(table, "start_delay");
-            shutdown_delay = Marshalling.ParseLong(table, "shutdown_delay");
-            order = Marshalling.ParseLong(table, "order");
-            VGPUs = Marshalling.ParseSetRef<VGPU>(table, "VGPUs");
-            attached_PCIs = Marshalling.ParseSetRef<PCI>(table, "attached_PCIs");
-            suspend_SR = Marshalling.ParseRef<SR>(table, "suspend_SR");
-            version = Marshalling.ParseLong(table, "version");
-            generation_id = Marshalling.ParseString(table, "generation_id");
-            hardware_platform_version = Marshalling.ParseLong(table, "hardware_platform_version");
-            has_vendor_device = Marshalling.ParseBool(table, "has_vendor_device");
-            requires_reboot = Marshalling.ParseBool(table, "requires_reboot");
-            reference_label = Marshalling.ParseString(table, "reference_label");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VM
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<vm_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_vm_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("power_state"))
+                power_state = (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)table["power_state"]);
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("user_version"))
+                user_version = long.Parse((string)table["user_version"]);
+            if (table.ContainsKey("is_a_template"))
+                is_a_template = (bool)table["is_a_template"];
+            if (table.ContainsKey("is_default_template"))
+                is_default_template = (bool)table["is_default_template"];
+            if (table.ContainsKey("suspend_VDI"))
+                suspend_VDI = XenRef<VDI>.Create((string)table["suspend_VDI"]);
+            if (table.ContainsKey("resident_on"))
+                resident_on = XenRef<Host>.Create((string)table["resident_on"]);
+            if (table.ContainsKey("affinity"))
+                affinity = XenRef<Host>.Create((string)table["affinity"]);
+            if (table.ContainsKey("memory_overhead"))
+                memory_overhead = long.Parse((string)table["memory_overhead"]);
+            if (table.ContainsKey("memory_target"))
+                memory_target = long.Parse((string)table["memory_target"]);
+            if (table.ContainsKey("memory_static_max"))
+                memory_static_max = long.Parse((string)table["memory_static_max"]);
+            if (table.ContainsKey("memory_dynamic_max"))
+                memory_dynamic_max = long.Parse((string)table["memory_dynamic_max"]);
+            if (table.ContainsKey("memory_dynamic_min"))
+                memory_dynamic_min = long.Parse((string)table["memory_dynamic_min"]);
+            if (table.ContainsKey("memory_static_min"))
+                memory_static_min = long.Parse((string)table["memory_static_min"]);
+            if (table.ContainsKey("VCPUs_params"))
+                VCPUs_params = Maps.convert_from_proxy_string_string((Hashtable)table["VCPUs_params"]);
+            if (table.ContainsKey("VCPUs_max"))
+                VCPUs_max = long.Parse((string)table["VCPUs_max"]);
+            if (table.ContainsKey("VCPUs_at_startup"))
+                VCPUs_at_startup = long.Parse((string)table["VCPUs_at_startup"]);
+            if (table.ContainsKey("actions_after_shutdown"))
+                actions_after_shutdown = (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)table["actions_after_shutdown"]);
+            if (table.ContainsKey("actions_after_reboot"))
+                actions_after_reboot = (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)table["actions_after_reboot"]);
+            if (table.ContainsKey("actions_after_crash"))
+                actions_after_crash = (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), (string)table["actions_after_crash"]);
+            if (table.ContainsKey("consoles"))
+                consoles = XenRef<Console>.Create((object[])table["consoles"]);
+            if (table.ContainsKey("VIFs"))
+                VIFs = XenRef<VIF>.Create((object[])table["VIFs"]);
+            if (table.ContainsKey("VBDs"))
+                VBDs = XenRef<VBD>.Create((object[])table["VBDs"]);
+            if (table.ContainsKey("VUSBs"))
+                VUSBs = XenRef<VUSB>.Create((object[])table["VUSBs"]);
+            if (table.ContainsKey("crash_dumps"))
+                crash_dumps = XenRef<Crashdump>.Create((object[])table["crash_dumps"]);
+            if (table.ContainsKey("VTPMs"))
+                VTPMs = XenRef<VTPM>.Create((object[])table["VTPMs"]);
+            if (table.ContainsKey("PV_bootloader"))
+                PV_bootloader = (string)table["PV_bootloader"];
+            if (table.ContainsKey("PV_kernel"))
+                PV_kernel = (string)table["PV_kernel"];
+            if (table.ContainsKey("PV_ramdisk"))
+                PV_ramdisk = (string)table["PV_ramdisk"];
+            if (table.ContainsKey("PV_args"))
+                PV_args = (string)table["PV_args"];
+            if (table.ContainsKey("PV_bootloader_args"))
+                PV_bootloader_args = (string)table["PV_bootloader_args"];
+            if (table.ContainsKey("PV_legacy_args"))
+                PV_legacy_args = (string)table["PV_legacy_args"];
+            if (table.ContainsKey("HVM_boot_policy"))
+                HVM_boot_policy = (string)table["HVM_boot_policy"];
+            if (table.ContainsKey("HVM_boot_params"))
+                HVM_boot_params = Maps.convert_from_proxy_string_string((Hashtable)table["HVM_boot_params"]);
+            if (table.ContainsKey("HVM_shadow_multiplier"))
+                HVM_shadow_multiplier = (double)table["HVM_shadow_multiplier"];
+            if (table.ContainsKey("platform"))
+                platform = Maps.convert_from_proxy_string_string((Hashtable)table["platform"]);
+            if (table.ContainsKey("PCI_bus"))
+                PCI_bus = (string)table["PCI_bus"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("domid"))
+                domid = long.Parse((string)table["domid"]);
+            if (table.ContainsKey("domarch"))
+                domarch = (string)table["domarch"];
+            if (table.ContainsKey("last_boot_CPU_flags"))
+                last_boot_CPU_flags = Maps.convert_from_proxy_string_string((Hashtable)table["last_boot_CPU_flags"]);
+            if (table.ContainsKey("is_control_domain"))
+                is_control_domain = (bool)table["is_control_domain"];
+            if (table.ContainsKey("metrics"))
+                metrics = XenRef<VM_metrics>.Create((string)table["metrics"]);
+            if (table.ContainsKey("guest_metrics"))
+                guest_metrics = XenRef<VM_guest_metrics>.Create((string)table["guest_metrics"]);
+            if (table.ContainsKey("last_booted_record"))
+                last_booted_record = (string)table["last_booted_record"];
+            if (table.ContainsKey("recommendations"))
+                recommendations = (string)table["recommendations"];
+            if (table.ContainsKey("xenstore_data"))
+                xenstore_data = Maps.convert_from_proxy_string_string((Hashtable)table["xenstore_data"]);
+            if (table.ContainsKey("ha_always_run"))
+                ha_always_run = (bool)table["ha_always_run"];
+            if (table.ContainsKey("ha_restart_priority"))
+                ha_restart_priority = (string)table["ha_restart_priority"];
+            if (table.ContainsKey("is_a_snapshot"))
+                is_a_snapshot = (bool)table["is_a_snapshot"];
+            if (table.ContainsKey("snapshot_of"))
+                snapshot_of = XenRef<VM>.Create((string)table["snapshot_of"]);
+            if (table.ContainsKey("snapshots"))
+                snapshots = XenRef<VM>.Create((object[])table["snapshots"]);
+            if (table.ContainsKey("snapshot_time"))
+                snapshot_time = (DateTime)table["snapshot_time"];
+            if (table.ContainsKey("transportable_snapshot_id"))
+                transportable_snapshot_id = (string)table["transportable_snapshot_id"];
+            if (table.ContainsKey("blobs"))
+                blobs = Maps.convert_from_proxy_string_XenRefBlob((Hashtable)table["blobs"]);
+            if (table.ContainsKey("tags"))
+                tags = Array.ConvertAll((object[])table["tags"], o => o.ToString());
+            if (table.ContainsKey("blocked_operations"))
+                blocked_operations = Maps.convert_from_proxy_vm_operations_string((Hashtable)table["blocked_operations"]);
+            if (table.ContainsKey("snapshot_info"))
+                snapshot_info = Maps.convert_from_proxy_string_string((Hashtable)table["snapshot_info"]);
+            if (table.ContainsKey("snapshot_metadata"))
+                snapshot_metadata = (string)table["snapshot_metadata"];
+            if (table.ContainsKey("parent"))
+                parent = XenRef<VM>.Create((string)table["parent"]);
+            if (table.ContainsKey("children"))
+                children = XenRef<VM>.Create((object[])table["children"]);
+            if (table.ContainsKey("bios_strings"))
+                bios_strings = Maps.convert_from_proxy_string_string((Hashtable)table["bios_strings"]);
+            if (table.ContainsKey("protection_policy"))
+                protection_policy = XenRef<VMPP>.Create((string)table["protection_policy"]);
+            if (table.ContainsKey("is_snapshot_from_vmpp"))
+                is_snapshot_from_vmpp = (bool)table["is_snapshot_from_vmpp"];
+            if (table.ContainsKey("snapshot_schedule"))
+                snapshot_schedule = XenRef<VMSS>.Create((string)table["snapshot_schedule"]);
+            if (table.ContainsKey("is_vmss_snapshot"))
+                is_vmss_snapshot = (bool)table["is_vmss_snapshot"];
+            if (table.ContainsKey("appliance"))
+                appliance = XenRef<VM_appliance>.Create((string)table["appliance"]);
+            if (table.ContainsKey("start_delay"))
+                start_delay = long.Parse((string)table["start_delay"]);
+            if (table.ContainsKey("shutdown_delay"))
+                shutdown_delay = long.Parse((string)table["shutdown_delay"]);
+            if (table.ContainsKey("order"))
+                order = long.Parse((string)table["order"]);
+            if (table.ContainsKey("VGPUs"))
+                VGPUs = XenRef<VGPU>.Create((object[])table["VGPUs"]);
+            if (table.ContainsKey("attached_PCIs"))
+                attached_PCIs = XenRef<PCI>.Create((object[])table["attached_PCIs"]);
+            if (table.ContainsKey("suspend_SR"))
+                suspend_SR = XenRef<SR>.Create((string)table["suspend_SR"]);
+            if (table.ContainsKey("version"))
+                version = long.Parse((string)table["version"]);
+            if (table.ContainsKey("generation_id"))
+                generation_id = (string)table["generation_id"];
+            if (table.ContainsKey("hardware_platform_version"))
+                hardware_platform_version = long.Parse((string)table["hardware_platform_version"]);
+            if (table.ContainsKey("has_vendor_device"))
+                has_vendor_device = (bool)table["has_vendor_device"];
+            if (table.ContainsKey("requires_reboot"))
+                requires_reboot = (bool)table["requires_reboot"];
+            if (table.ContainsKey("reference_label"))
+                reference_label = (string)table["reference_label"];
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)

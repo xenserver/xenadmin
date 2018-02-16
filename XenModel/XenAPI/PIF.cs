@@ -126,6 +126,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PIF.
+        /// </summary>
         public override void UpdateFrom(PIF update)
         {
             uuid = update.uuid;
@@ -238,42 +242,87 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PIF from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PIF(Hashtable table)
+        public PIF(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            device = Marshalling.ParseString(table, "device");
-            network = Marshalling.ParseRef<Network>(table, "network");
-            host = Marshalling.ParseRef<Host>(table, "host");
-            MAC = Marshalling.ParseString(table, "MAC");
-            MTU = Marshalling.ParseLong(table, "MTU");
-            VLAN = Marshalling.ParseLong(table, "VLAN");
-            metrics = Marshalling.ParseRef<PIF_metrics>(table, "metrics");
-            physical = Marshalling.ParseBool(table, "physical");
-            currently_attached = Marshalling.ParseBool(table, "currently_attached");
-            ip_configuration_mode = (ip_configuration_mode)Helper.EnumParseDefault(typeof(ip_configuration_mode), Marshalling.ParseString(table, "ip_configuration_mode"));
-            IP = Marshalling.ParseString(table, "IP");
-            netmask = Marshalling.ParseString(table, "netmask");
-            gateway = Marshalling.ParseString(table, "gateway");
-            DNS = Marshalling.ParseString(table, "DNS");
-            bond_slave_of = Marshalling.ParseRef<Bond>(table, "bond_slave_of");
-            bond_master_of = Marshalling.ParseSetRef<Bond>(table, "bond_master_of");
-            VLAN_master_of = Marshalling.ParseRef<VLAN>(table, "VLAN_master_of");
-            VLAN_slave_of = Marshalling.ParseSetRef<VLAN>(table, "VLAN_slave_of");
-            management = Marshalling.ParseBool(table, "management");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            disallow_unplug = Marshalling.ParseBool(table, "disallow_unplug");
-            tunnel_access_PIF_of = Marshalling.ParseSetRef<Tunnel>(table, "tunnel_access_PIF_of");
-            tunnel_transport_PIF_of = Marshalling.ParseSetRef<Tunnel>(table, "tunnel_transport_PIF_of");
-            ipv6_configuration_mode = (ipv6_configuration_mode)Helper.EnumParseDefault(typeof(ipv6_configuration_mode), Marshalling.ParseString(table, "ipv6_configuration_mode"));
-            IPv6 = Marshalling.ParseStringArray(table, "IPv6");
-            ipv6_gateway = Marshalling.ParseString(table, "ipv6_gateway");
-            primary_address_type = (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), Marshalling.ParseString(table, "primary_address_type"));
-            managed = Marshalling.ParseBool(table, "managed");
-            properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "properties"));
-            capabilities = Marshalling.ParseStringArray(table, "capabilities");
-            igmp_snooping_status = (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), Marshalling.ParseString(table, "igmp_snooping_status"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PIF
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("device"))
+                device = (string)table["device"];
+            if (table.ContainsKey("network"))
+                network = XenRef<Network>.Create((string)table["network"]);
+            if (table.ContainsKey("host"))
+                host = XenRef<Host>.Create((string)table["host"]);
+            if (table.ContainsKey("MAC"))
+                MAC = (string)table["MAC"];
+            if (table.ContainsKey("MTU"))
+                MTU = long.Parse((string)table["MTU"]);
+            if (table.ContainsKey("VLAN"))
+                VLAN = long.Parse((string)table["VLAN"]);
+            if (table.ContainsKey("metrics"))
+                metrics = XenRef<PIF_metrics>.Create((string)table["metrics"]);
+            if (table.ContainsKey("physical"))
+                physical = (bool)table["physical"];
+            if (table.ContainsKey("currently_attached"))
+                currently_attached = (bool)table["currently_attached"];
+            if (table.ContainsKey("ip_configuration_mode"))
+                ip_configuration_mode = (ip_configuration_mode)Helper.EnumParseDefault(typeof(ip_configuration_mode), (string)table["ip_configuration_mode"]);
+            if (table.ContainsKey("IP"))
+                IP = (string)table["IP"];
+            if (table.ContainsKey("netmask"))
+                netmask = (string)table["netmask"];
+            if (table.ContainsKey("gateway"))
+                gateway = (string)table["gateway"];
+            if (table.ContainsKey("DNS"))
+                DNS = (string)table["DNS"];
+            if (table.ContainsKey("bond_slave_of"))
+                bond_slave_of = XenRef<Bond>.Create((string)table["bond_slave_of"]);
+            if (table.ContainsKey("bond_master_of"))
+                bond_master_of = XenRef<Bond>.Create((object[])table["bond_master_of"]);
+            if (table.ContainsKey("VLAN_master_of"))
+                VLAN_master_of = XenRef<VLAN>.Create((string)table["VLAN_master_of"]);
+            if (table.ContainsKey("VLAN_slave_of"))
+                VLAN_slave_of = XenRef<VLAN>.Create((object[])table["VLAN_slave_of"]);
+            if (table.ContainsKey("management"))
+                management = (bool)table["management"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("disallow_unplug"))
+                disallow_unplug = (bool)table["disallow_unplug"];
+            if (table.ContainsKey("tunnel_access_PIF_of"))
+                tunnel_access_PIF_of = XenRef<Tunnel>.Create((object[])table["tunnel_access_PIF_of"]);
+            if (table.ContainsKey("tunnel_transport_PIF_of"))
+                tunnel_transport_PIF_of = XenRef<Tunnel>.Create((object[])table["tunnel_transport_PIF_of"]);
+            if (table.ContainsKey("ipv6_configuration_mode"))
+                ipv6_configuration_mode = (ipv6_configuration_mode)Helper.EnumParseDefault(typeof(ipv6_configuration_mode), (string)table["ipv6_configuration_mode"]);
+            if (table.ContainsKey("IPv6"))
+                IPv6 = Array.ConvertAll((object[])table["IPv6"], o => o.ToString());
+            if (table.ContainsKey("ipv6_gateway"))
+                ipv6_gateway = (string)table["ipv6_gateway"];
+            if (table.ContainsKey("primary_address_type"))
+                primary_address_type = (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), (string)table["primary_address_type"]);
+            if (table.ContainsKey("managed"))
+                managed = (bool)table["managed"];
+            if (table.ContainsKey("properties"))
+                properties = Maps.convert_from_proxy_string_string((Hashtable)table["properties"]);
+            if (table.ContainsKey("capabilities"))
+                capabilities = Array.ConvertAll((object[])table["capabilities"], o => o.ToString());
+            if (table.ContainsKey("igmp_snooping_status"))
+                igmp_snooping_status = (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)table["igmp_snooping_status"]);
         }
 
         public bool DeepEquals(PIF other)

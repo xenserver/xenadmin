@@ -88,6 +88,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PIF_metrics.
+        /// </summary>
         public override void UpdateFrom(PIF_metrics update)
         {
             uuid = update.uuid;
@@ -143,23 +147,49 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PIF_metrics from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PIF_metrics(Hashtable table)
+        public PIF_metrics(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            io_read_kbs = Marshalling.ParseDouble(table, "io_read_kbs");
-            io_write_kbs = Marshalling.ParseDouble(table, "io_write_kbs");
-            carrier = Marshalling.ParseBool(table, "carrier");
-            vendor_id = Marshalling.ParseString(table, "vendor_id");
-            vendor_name = Marshalling.ParseString(table, "vendor_name");
-            device_id = Marshalling.ParseString(table, "device_id");
-            device_name = Marshalling.ParseString(table, "device_name");
-            speed = Marshalling.ParseLong(table, "speed");
-            duplex = Marshalling.ParseBool(table, "duplex");
-            pci_bus_path = Marshalling.ParseString(table, "pci_bus_path");
-            last_updated = Marshalling.ParseDateTime(table, "last_updated");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PIF_metrics
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("io_read_kbs"))
+                io_read_kbs = (double)table["io_read_kbs"];
+            if (table.ContainsKey("io_write_kbs"))
+                io_write_kbs = (double)table["io_write_kbs"];
+            if (table.ContainsKey("carrier"))
+                carrier = (bool)table["carrier"];
+            if (table.ContainsKey("vendor_id"))
+                vendor_id = (string)table["vendor_id"];
+            if (table.ContainsKey("vendor_name"))
+                vendor_name = (string)table["vendor_name"];
+            if (table.ContainsKey("device_id"))
+                device_id = (string)table["device_id"];
+            if (table.ContainsKey("device_name"))
+                device_name = (string)table["device_name"];
+            if (table.ContainsKey("speed"))
+                speed = long.Parse((string)table["speed"]);
+            if (table.ContainsKey("duplex"))
+                duplex = (bool)table["duplex"];
+            if (table.ContainsKey("pci_bus_path"))
+                pci_bus_path = (string)table["pci_bus_path"];
+            if (table.ContainsKey("last_updated"))
+                last_updated = (DateTime)table["last_updated"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
         }
 
         public bool DeepEquals(PIF_metrics other)
