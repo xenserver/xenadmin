@@ -955,28 +955,22 @@ namespace XenOvfTransport
 
         private XenRef<VDI> CreateVDI(Session xenSession, string sruuid, string label, long capacity, string description)
         {
-            Hashtable vdiHash = new Hashtable();
-            vdiHash.Add("uuid", Guid.NewGuid().ToString());
-            vdiHash.Add("name_label", label);
-            vdiHash.Add("name_description", description);
-            if (sruuid.ToLower().StartsWith("opaque"))
+            VDI vdi = new VDI
             {
-                vdiHash.Add("SR", sruuid);
-            }
-            else
-            {
-				vdiHash.Add("SR", SR.get_by_uuid(xenSession, sruuid).opaque_ref);
-            }
-            vdiHash.Add("virtual_size", Convert.ToString(capacity));
-            vdiHash.Add("physical_utilisation", Convert.ToString(capacity));
-            vdiHash.Add("type", "user");
-            vdiHash.Add("shareable", false);
-            vdiHash.Add("read_only", false);
-            vdiHash.Add("storage_lock", false);
-            vdiHash.Add("managed", true);
-            vdiHash.Add("is_a_snapshot", false);
+                uuid = Guid.NewGuid().ToString(),
+                name_label = label,
+                name_description = description,
+                SR = sruuid.ToLower().StartsWith("opaque") ? new XenRef<SR>(sruuid) : SR.get_by_uuid(xenSession, sruuid),
+                virtual_size = capacity,
+                physical_utilisation = capacity,
+                type = vdi_type.user,
+                sharable = false,
+                read_only = false,
+                storage_lock = false,
+                managed = true,
+                is_a_snapshot = false
+            };
 
-            VDI vdi = new VDI(vdiHash);
             XenRef<VDI> vdiRef = null;
             try
             {
@@ -1080,28 +1074,24 @@ namespace XenOvfTransport
             log.DebugFormat("OVF.Import.UpdoadRadVDI Capacity: {0}", capacity);
 
             #region CREATE A VDI
-            Hashtable vdiHash = new Hashtable();
-            vdiHash.Add("uuid", Guid.NewGuid().ToString());
-            vdiHash.Add("name_label", label);
-            vdiHash.Add("name_description", description);
-            if (sruuid.ToLower().StartsWith("opaque"))
-            {
-                vdiHash.Add("SR", sruuid);
-            }
-            else
-            {
-				vdiHash.Add("SR", SR.get_by_uuid(xenSession, sruuid).opaque_ref);
-            }
-            vdiHash.Add("virtual_size", Convert.ToString(capacity + (2 * MB))); // Add 2MB, VDIs appear to round down making it too small.
-            vdiHash.Add("physical_utilisation", Convert.ToString(capacity + (2 * MB)));
-            vdiHash.Add("type", "user");
-            vdiHash.Add("shareable", false);
-            vdiHash.Add("read_only", false);
-            vdiHash.Add("storage_lock", false);
-            vdiHash.Add("managed", true);
-            vdiHash.Add("is_a_snapshot", false);
 
-            VDI vdi = new VDI(vdiHash);
+            VDI vdi = new VDI
+            {
+                uuid = Guid.NewGuid().ToString(),
+                name_label = label,
+                name_description = description,
+                SR = sruuid.ToLower().StartsWith("opaque") ? new XenRef<SR>(sruuid) : SR.get_by_uuid(xenSession, sruuid),
+                // Add 2MB, VDIs appear to round down making it too small.
+                virtual_size = capacity + 2*MB,
+                physical_utilisation = capacity + 2*MB,
+                type = vdi_type.user,
+                sharable = false,
+                read_only = false,
+                storage_lock = false,
+                managed = true,
+                is_a_snapshot = false
+            };
+
             XenRef<VDI> vdiRef = null;
             try
             {
