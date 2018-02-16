@@ -1226,109 +1226,67 @@ namespace XenOvfTransport
             }
             #endregion
 
+            var longMemorySize = memorySize > long.MaxValue ? 0 : (long)memorySize;
+            var longCpuCount = CpuCount > long.MaxValue ? 0 : (long)CpuCount;
 
-            Hashtable table = new Hashtable();
-
-            table.Add("uuid", vmUuid);
-            table.Add("name_label", vM_name_label);
-            table.Add("name_description", description);
-            table.Add("user_version", "1");
-            table.Add("is_a_template", false);
-            table.Add("is_a_snapshot", false);
-            table.Add("memory_target", Convert.ToString(memorySize));
-            table.Add("memory_static_max", Convert.ToString(memorySize));
-            table.Add("memory_dynamic_max", Convert.ToString(memorySize));
-            table.Add("memory_dynamic_min", Convert.ToString(memorySize));
-            table.Add("memory_static_min", Convert.ToString(STATMEMMIN));
-            table.Add("VCPUs_max", Convert.ToString(CpuCount));
-            table.Add("VCPUs_at_startup", Convert.ToString(CpuCount));
-            table.Add("actions_after_shutdown", "destroy");
-            table.Add("actions_after_reboot", "restart");
-            table.Add("actions_after_crash", "restart");
-
-        	double hvmshadowmultiplier = 1.0;
-            table.Add("HVM_shadow_multiplier", hvmshadowmultiplier);
-            table.Add("ha_always_run", false);
+            VM newVm = new VM
+            {
+                uuid = vmUuid,
+                name_label = vM_name_label,
+                name_description = description,
+                user_version = 1,
+                is_a_template = false,
+                is_a_snapshot = false,
+                memory_target = longMemorySize,
+                memory_static_max = longMemorySize,
+                memory_dynamic_max = longMemorySize,
+                memory_dynamic_min = longMemorySize,
+                memory_static_min = STATMEMMIN,
+                VCPUs_max = longCpuCount,
+                VCPUs_at_startup = longCpuCount,
+                actions_after_shutdown = on_normal_exit.destroy,
+                actions_after_reboot = on_normal_exit.restart,
+                actions_after_crash = on_crash_behaviour.restart,
+                HVM_shadow_multiplier = 1.0,
+                ha_always_run = false
+            };
 
             #region XEN SPECIFIC CONFIGURATION INFORMATION
+
             if (system.VirtualSystemOtherConfigurationData == null || system.VirtualSystemOtherConfigurationData.Length <= 0)
             {
                 // DEFAULT should work for all of HVM type or 301
-                table.Add("HVM_boot_policy", Properties.Settings.Default.xenBootOptions);
-                Hashtable hBoot = new Hashtable();
-                hBoot.Add("order", Properties.Settings.Default.xenBootOrder);
-                table.Add("HVM_boot_params", hBoot);
-                Hashtable hPlatform = MakePlatformHash(Properties.Settings.Default.xenPlatformSetting);
-                table.Add("platform", hPlatform);
+                newVm.HVM_boot_policy = Properties.Settings.Default.xenBootOptions;
+                newVm.HVM_boot_params = new Dictionary<string, string> {{"order", Properties.Settings.Default.xenBootOrder}};
+                newVm.platform = MakePlatformHash(Properties.Settings.Default.xenPlatformSetting);
             }
             else
             {
+                var hashtable = new Hashtable();
                 foreach (Xen_ConfigurationSettingData_Type xcsd in system.VirtualSystemOtherConfigurationData)
                 {
                     string key = xcsd.Name.Replace('-', '_');
                     switch (key.ToLower())
                     {
                         case "hvm_boot_params":
-                            {
-                                Hashtable hBoot = new Hashtable();
-                                hBoot.Add("order", xcsd.Value.Value);
-                                if (table.ContainsKey(key))
-                                {
-                                    table[key] = hBoot;
-                                }
-                                else
-                                {
-                                    table.Add(key, hBoot);
-                                }
-                                break;
-                            }
-                        case "hvm_shadow_multiplier":
-                            {
-                                if (table.ContainsKey(key))
-                                {
-                                    table[key] = Convert.ToDouble(xcsd.Value.Value);
-                                }
-                                else
-                                {
-                                    table.Add(key, Convert.ToDouble(xcsd.Value.Value));
-                                }
-                                break;
-                            }
+                            newVm.HVM_boot_params = new Dictionary<string, string> {{"order", xcsd.Value.Value}};
+                            break;
                         case "platform":
-                            {
-                                Hashtable hPlatform = MakePlatformHash(xcsd.Value.Value);
-                                if (table.ContainsKey(key))
-                                {
-                                    table[key] = hPlatform;
-                                }
-                                else
-                                {
-                                    table.Add(key, hPlatform);
-                                }
-                                break;
-                            }
+                            newVm.platform = MakePlatformHash(xcsd.Value.Value);
+                            break;
                         default:
-                            {
-                                if (table.ContainsKey(key))
-                                {
-                                    table[key] = xcsd.Value.Value;
-                                }
-                                else
-                                {
-                                    table.Add(key, xcsd.Value.Value);
-                                }
-                                break;
-                            }
+                            hashtable.Add(key, xcsd.Value.Value);
+                            break;
                     }
-                 
                 }
+                newVm.UpdateFrom(hashtable);
             }
+
             #endregion
 
             try
             {
-                VM newVM = new VM(table);
-                return VM.create(xenSession, newVM);                
+                return VM.create(xenSession, newVm);                
             }
             catch (Exception ex)
             {
@@ -1435,10 +1393,10 @@ namespace XenOvfTransport
             }
             return;
         }
-        private Hashtable MakePlatformHash(string plaform)
+        private Dictionary<string, string> MakePlatformHash(string plaform)
         {
-            Hashtable hPlatform = new Hashtable();
-            string[] platformArray = plaform.Split(new char[] { '=', ';' });
+            var hPlatform = new Dictionary<string, string>();
+            string[] platformArray = plaform.Split('=', ';');
             for (int i = 0; i < platformArray.Length - 1; i += 2)
             {
                 string identifier = platformArray[i].Trim();
@@ -1624,7 +1582,7 @@ namespace XenOvfTransport
                                 {
                                     if (rasd.Connection[0].Value.ToLower().Contains("sr="))
                                     {
-                                        string[] vpairs = rasd.Connection[0].Value.Split(new char[] { ',' });
+                                        string[] vpairs = rasd.Connection[0].Value.Split(new char[] {','});
                                         foreach (string vset in vpairs)
                                         {
                                             if (vset.ToLower().StartsWith("sr="))
@@ -1715,9 +1673,9 @@ namespace XenOvfTransport
                                         }
                                         catch (Exception ex)
                                         {
-											if (ex is OperationCanceledException)
-												throw;
-                                        	var msg = string.Format(Messages.ERROR_ADDRESOURCESETTINGDATA_FAILED, Messages.ISO);
+                                            if (ex is OperationCanceledException)
+                                                throw;
+                                            var msg = string.Format(Messages.ERROR_ADDRESOURCESETTINGDATA_FAILED, Messages.ISO);
                                             log.ErrorFormat("{0}, {1}", msg, ex.Message);
                                             throw new Exception(msg, ex);
                                         }
@@ -1735,79 +1693,68 @@ namespace XenOvfTransport
                             }
                             else
                             {
-                                vdiRef.Add(XenRef<VDI>.Create(string.Empty));                                    
+                                vdiRef.Add(XenRef<VDI>.Create(string.Empty));
                             }
 
                             #region CREATE VBD CONNECTION
-                            string booleans = "empty,bootable,unpluggable,attachable,storage-lock";
-                            string skipvalues = "sr,vdi";
-
-                            
+                         
                             foreach (XenRef<VDI> currentVDI in vdiRef)
                             {
-                                Hashtable vbdHash = new Hashtable();
+                                var hashtable = new Hashtable();
 
                                 if (rasd.Connection != null && rasd.Connection.Length > 0)
                                 {
-                                    string[] valuepairs = rasd.Connection[0].Value.Split(new char[] { ',' });
+                                    string[] valuepairs = rasd.Connection[0].Value.Split(',');
 
                                     foreach (string valuepair in valuepairs)
                                     {
-                                        string[] namevalue = valuepair.Split(new char[] { '=' });
-                                        if (!skipvalues.ToLower().Contains(namevalue[0].ToLower()))
+                                        string[] namevalue = valuepair.Split('=');
+                                        string name = namevalue[0].ToLower();
+
+                                        switch (name)
                                         {
-                                            string name = namevalue[0];
-                                            if (name.ToLower().Equals("device"))
-                                            {
-                                                name = "userdevice";
-                                            }
-                                            if (booleans.Contains(name))
-                                            {
-                                                vbdHash.Add(name, Convert.ToBoolean(namevalue[1]));
-                                            }
-                                            else
-                                            {
-                                                vbdHash.Add(name, namevalue[1]);
-                                            }
+                                            case "sr":
+                                            case "vdi":
+                                                continue;
+                                            case "device":
+                                                hashtable.Add("userdevice", namevalue[1]);
+                                                break;
+                                            default:
+                                                hashtable.Add(namevalue[0], namevalue[1]);
+                                                break;
                                         }
                                     }
                                 }
-                                if (!vbdHash.ContainsKey("vm-name-label")) vbdHash.Add("vm-name-label", VM.get_name_label(xenSession, vmRef));
-								if (!vbdHash.ContainsKey("VM")) vbdHash.Add("VM", vmRef.opaque_ref);
-								if (currentVDI != null && !string.IsNullOrEmpty(currentVDI.opaque_ref))
+
+                                VBD vbd = new VBD
                                 {
-                                    // Override values.
-									if (!vbdHash.ContainsKey("VDI")) vbdHash.Add("VDI", currentVDI.opaque_ref);
-									else vbdHash["VDI"] = currentVDI.opaque_ref;
-                                    if (!vbdHash.ContainsKey("empty")) vbdHash.Add("empty", false);
-                                    else vbdHash["empty"] = false;
-                                    if (!vbdHash.ContainsKey("bootable")) vbdHash.Add("bootable", true);
-                                    else vbdHash["bootable"] = true;
-                                    if (!vbdHash.ContainsKey("unpluggable")) vbdHash.Add("unpluggable", true);
-                                    else vbdHash["unpluggable"] = true;
+                                    VM = vmRef,
+                                    mode = vbd_mode.RO,
+                                    userdevice = "3",
+                                    type = vbd_type.CD,
+                                    storage_lock = false,
+                                    status_code = 0
+                                };
+
+                                vbd.UpdateFrom(hashtable);
+
+                                if (currentVDI != null && !string.IsNullOrEmpty(currentVDI.opaque_ref))
+                                {
+                                    vbd.VDI = currentVDI;
+                                    vbd.empty = false;
+                                    vbd.bootable = true;
+                                    vbd.unpluggable = true;
                                 }
                                 else
                                 {
-                                    // Override.
-                                    if (!vbdHash.ContainsKey("empty")) vbdHash.Add("empty", true);
-                                    else vbdHash["empty"] = true;
+                                    vbd.empty = true;
                                 }
-                                if (!vbdHash.ContainsKey("mode")) vbdHash.Add("mode", "RO");
-                                if (!vbdHash.ContainsKey("userdevice")) vbdHash.Add("userdevice", "3");
-                                if (!vbdHash.ContainsKey("type")) vbdHash.Add("type", "CD");
-                                if (!vbdHash.ContainsKey("attachable")) vbdHash.Add("attachable", true);
-                                if (!vbdHash.ContainsKey("storage-lock")) vbdHash.Add("storage-lock", false);
-                                if (!vbdHash.ContainsKey("status-code")) vbdHash.Add("status-code", "0");
 
-                                vbdHash["userdevice"] = VerifyUserDevice(xenSession, vmRef, (string)vbdHash["userdevice"]);
+                                vbd.userdevice = VerifyUserDevice(xenSession, vmRef, vbd.userdevice);
+                                vbd.other_config = new Dictionary<string, string> { { "owner", "true" } };
 
-                                Hashtable hOtherConfig = new Hashtable();
-                                hOtherConfig.Add("owner", "true");
-                                vbdHash.Add("other_config", hOtherConfig);
-
-                                if (!((string)vbdHash["userdevice"]).EndsWith("+"))
+                                if (!vbd.userdevice.EndsWith("+"))
                                 {
-                                    VBD vbd = new VBD(vbdHash);
                                     try
                                     {
                                         VBD.create(xenSession, vbd);
@@ -1821,7 +1768,7 @@ namespace XenOvfTransport
                                 {
                                     log.WarnFormat("Import:  ================== ATTENTION NEEDED =======================");
                                     log.WarnFormat("Import:  Could not determine appropriate number of device placement.");
-                                    log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", (string)vbdHash["vm_name_label"]);
+                                    log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", vmRef);
                                     log.WarnFormat("Import:  Then attach disks with labels ending with \"+\" to the device number defined before the +.");
                                     log.Warn("Import:  ===========================================================");
                                     OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Progress, "Import", Messages.WARNING_ADMIN_REQUIRED));
