@@ -72,6 +72,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Tunnel.
+        /// </summary>
         public override void UpdateFrom(Tunnel update)
         {
             uuid = update.uuid;
@@ -103,15 +107,33 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Tunnel from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Tunnel(Hashtable table)
+        public Tunnel(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            access_PIF = Marshalling.ParseRef<PIF>(table, "access_PIF");
-            transport_PIF = Marshalling.ParseRef<PIF>(table, "transport_PIF");
-            status = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "status"));
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Tunnel
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("access_PIF"))
+                access_PIF = XenRef<PIF>.Create((string)table["access_PIF"]);
+            if (table.ContainsKey("transport_PIF"))
+                transport_PIF = XenRef<PIF>.Create((string)table["transport_PIF"]);
+            if (table.ContainsKey("status"))
+                status = Maps.convert_from_proxy_string_string((Hashtable)table["status"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
         }
 
         public bool DeepEquals(Tunnel other)

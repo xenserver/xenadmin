@@ -64,6 +64,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given LVHD.
+        /// </summary>
         public override void UpdateFrom(LVHD update)
         {
             uuid = update.uuid;
@@ -83,11 +87,25 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new LVHD from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public LVHD(Hashtable table)
+        public LVHD(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this LVHD
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
         }
 
         public bool DeepEquals(LVHD other)

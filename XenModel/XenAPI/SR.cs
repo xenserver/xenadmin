@@ -104,6 +104,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given SR.
+        /// </summary>
         public override void UpdateFrom(SR update)
         {
             uuid = update.uuid;
@@ -183,31 +187,65 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new SR from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public SR(Hashtable table)
+        public SR(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            allowed_operations = Helper.StringArrayToEnumList<storage_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_storage_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            VDIs = Marshalling.ParseSetRef<VDI>(table, "VDIs");
-            PBDs = Marshalling.ParseSetRef<PBD>(table, "PBDs");
-            virtual_allocation = Marshalling.ParseLong(table, "virtual_allocation");
-            physical_utilisation = Marshalling.ParseLong(table, "physical_utilisation");
-            physical_size = Marshalling.ParseLong(table, "physical_size");
-            type = Marshalling.ParseString(table, "type");
-            content_type = Marshalling.ParseString(table, "content_type");
-            shared = Marshalling.ParseBool(table, "shared");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            tags = Marshalling.ParseStringArray(table, "tags");
-            sm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "sm_config"));
-            blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
-            local_cache_enabled = Marshalling.ParseBool(table, "local_cache_enabled");
-            introduced_by = Marshalling.ParseRef<DR_task>(table, "introduced_by");
-            clustered = Marshalling.ParseBool(table, "clustered");
-            is_tools_sr = Marshalling.ParseBool(table, "is_tools_sr");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this SR
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<storage_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_storage_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("VDIs"))
+                VDIs = XenRef<VDI>.Create((object[])table["VDIs"]);
+            if (table.ContainsKey("PBDs"))
+                PBDs = XenRef<PBD>.Create((object[])table["PBDs"]);
+            if (table.ContainsKey("virtual_allocation"))
+                virtual_allocation = long.Parse((string)table["virtual_allocation"]);
+            if (table.ContainsKey("physical_utilisation"))
+                physical_utilisation = long.Parse((string)table["physical_utilisation"]);
+            if (table.ContainsKey("physical_size"))
+                physical_size = long.Parse((string)table["physical_size"]);
+            if (table.ContainsKey("type"))
+                type = (string)table["type"];
+            if (table.ContainsKey("content_type"))
+                content_type = (string)table["content_type"];
+            if (table.ContainsKey("shared"))
+                shared = (bool)table["shared"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("tags"))
+                tags = Array.ConvertAll((object[])table["tags"], o => o.ToString());
+            if (table.ContainsKey("sm_config"))
+                sm_config = Maps.convert_from_proxy_string_string((Hashtable)table["sm_config"]);
+            if (table.ContainsKey("blobs"))
+                blobs = Maps.convert_from_proxy_string_XenRefBlob((Hashtable)table["blobs"]);
+            if (table.ContainsKey("local_cache_enabled"))
+                local_cache_enabled = (bool)table["local_cache_enabled"];
+            if (table.ContainsKey("introduced_by"))
+                introduced_by = XenRef<DR_task>.Create((string)table["introduced_by"]);
+            if (table.ContainsKey("clustered"))
+                clustered = (bool)table["clustered"];
+            if (table.ContainsKey("is_tools_sr"))
+                is_tools_sr = (bool)table["is_tools_sr"];
         }
 
         public bool DeepEquals(SR other, bool ignoreCurrentOperations)

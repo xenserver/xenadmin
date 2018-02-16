@@ -82,6 +82,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Host_patch.
+        /// </summary>
         public override void UpdateFrom(Host_patch update)
         {
             uuid = update.uuid;
@@ -128,20 +132,43 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Host_patch from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Host_patch(Hashtable table)
+        public Host_patch(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            version = Marshalling.ParseString(table, "version");
-            host = Marshalling.ParseRef<Host>(table, "host");
-            applied = Marshalling.ParseBool(table, "applied");
-            timestamp_applied = Marshalling.ParseDateTime(table, "timestamp_applied");
-            size = Marshalling.ParseLong(table, "size");
-            pool_patch = Marshalling.ParseRef<Pool_patch>(table, "pool_patch");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Host_patch
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("version"))
+                version = (string)table["version"];
+            if (table.ContainsKey("host"))
+                host = XenRef<Host>.Create((string)table["host"]);
+            if (table.ContainsKey("applied"))
+                applied = (bool)table["applied"];
+            if (table.ContainsKey("timestamp_applied"))
+                timestamp_applied = (DateTime)table["timestamp_applied"];
+            if (table.ContainsKey("size"))
+                size = long.Parse((string)table["size"]);
+            if (table.ContainsKey("pool_patch"))
+                pool_patch = XenRef<Pool_patch>.Create((string)table["pool_patch"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
         }
 
         public bool DeepEquals(Host_patch other)

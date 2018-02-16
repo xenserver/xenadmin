@@ -70,6 +70,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Crashdump.
+        /// </summary>
         public override void UpdateFrom(Crashdump update)
         {
             uuid = update.uuid;
@@ -98,14 +102,31 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Crashdump from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Crashdump(Hashtable table)
+        public Crashdump(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            VM = Marshalling.ParseRef<VM>(table, "VM");
-            VDI = Marshalling.ParseRef<VDI>(table, "VDI");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Crashdump
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("VM"))
+                VM = XenRef<VM>.Create((string)table["VM"]);
+            if (table.ContainsKey("VDI"))
+                VDI = XenRef<VDI>.Create((string)table["VDI"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
         }
 
         public bool DeepEquals(Crashdump other)

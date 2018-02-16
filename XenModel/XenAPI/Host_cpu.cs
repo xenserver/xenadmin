@@ -88,6 +88,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Host_cpu.
+        /// </summary>
         public override void UpdateFrom(Host_cpu update)
         {
             uuid = update.uuid;
@@ -143,23 +147,49 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Host_cpu from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Host_cpu(Hashtable table)
+        public Host_cpu(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            host = Marshalling.ParseRef<Host>(table, "host");
-            number = Marshalling.ParseLong(table, "number");
-            vendor = Marshalling.ParseString(table, "vendor");
-            speed = Marshalling.ParseLong(table, "speed");
-            modelname = Marshalling.ParseString(table, "modelname");
-            family = Marshalling.ParseLong(table, "family");
-            model = Marshalling.ParseLong(table, "model");
-            stepping = Marshalling.ParseString(table, "stepping");
-            flags = Marshalling.ParseString(table, "flags");
-            features = Marshalling.ParseString(table, "features");
-            utilisation = Marshalling.ParseDouble(table, "utilisation");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Host_cpu
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("host"))
+                host = XenRef<Host>.Create((string)table["host"]);
+            if (table.ContainsKey("number"))
+                number = long.Parse((string)table["number"]);
+            if (table.ContainsKey("vendor"))
+                vendor = (string)table["vendor"];
+            if (table.ContainsKey("speed"))
+                speed = long.Parse((string)table["speed"]);
+            if (table.ContainsKey("modelname"))
+                modelname = (string)table["modelname"];
+            if (table.ContainsKey("family"))
+                family = long.Parse((string)table["family"]);
+            if (table.ContainsKey("model"))
+                model = long.Parse((string)table["model"]);
+            if (table.ContainsKey("stepping"))
+                stepping = (string)table["stepping"];
+            if (table.ContainsKey("flags"))
+                flags = (string)table["flags"];
+            if (table.ContainsKey("features"))
+                features = (string)table["features"];
+            if (table.ContainsKey("utilisation"))
+                utilisation = (double)table["utilisation"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
         }
 
         public bool DeepEquals(Host_cpu other)

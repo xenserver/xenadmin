@@ -72,6 +72,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PVS_proxy.
+        /// </summary>
         public override void UpdateFrom(PVS_proxy update)
         {
             uuid = update.uuid;
@@ -103,15 +107,33 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PVS_proxy from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PVS_proxy(Hashtable table)
+        public PVS_proxy(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            site = Marshalling.ParseRef<PVS_site>(table, "site");
-            VIF = Marshalling.ParseRef<VIF>(table, "VIF");
-            currently_attached = Marshalling.ParseBool(table, "currently_attached");
-            status = (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), Marshalling.ParseString(table, "status"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PVS_proxy
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("site"))
+                site = XenRef<PVS_site>.Create((string)table["site"]);
+            if (table.ContainsKey("VIF"))
+                VIF = XenRef<VIF>.Create((string)table["VIF"]);
+            if (table.ContainsKey("currently_attached"))
+                currently_attached = (bool)table["currently_attached"];
+            if (table.ContainsKey("status"))
+                status = (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), (string)table["status"]);
         }
 
         public bool DeepEquals(PVS_proxy other)

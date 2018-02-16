@@ -76,6 +76,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Feature.
+        /// </summary>
         public override void UpdateFrom(Feature update)
         {
             uuid = update.uuid;
@@ -113,17 +117,37 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Feature from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Feature(Hashtable table)
+        public Feature(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            enabled = Marshalling.ParseBool(table, "enabled");
-            experimental = Marshalling.ParseBool(table, "experimental");
-            version = Marshalling.ParseString(table, "version");
-            host = Marshalling.ParseRef<Host>(table, "host");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Feature
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("enabled"))
+                enabled = (bool)table["enabled"];
+            if (table.ContainsKey("experimental"))
+                experimental = (bool)table["experimental"];
+            if (table.ContainsKey("version"))
+                version = (string)table["version"];
+            if (table.ContainsKey("host"))
+                host = XenRef<Host>.Create((string)table["host"]);
         }
 
         public bool DeepEquals(Feature other)

@@ -94,6 +94,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Network.
+        /// </summary>
         public override void UpdateFrom(Network update)
         {
             uuid = update.uuid;
@@ -158,26 +162,55 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Network from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Network(Hashtable table)
+        public Network(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            allowed_operations = Helper.StringArrayToEnumList<network_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_network_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            VIFs = Marshalling.ParseSetRef<VIF>(table, "VIFs");
-            PIFs = Marshalling.ParseSetRef<PIF>(table, "PIFs");
-            MTU = Marshalling.ParseLong(table, "MTU");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            bridge = Marshalling.ParseString(table, "bridge");
-            managed = Marshalling.ParseBool(table, "managed");
-            blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
-            tags = Marshalling.ParseStringArray(table, "tags");
-            default_locking_mode = (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), Marshalling.ParseString(table, "default_locking_mode"));
-            assigned_ips = Maps.convert_from_proxy_XenRefVIF_string(Marshalling.ParseHashTable(table, "assigned_ips"));
-            purpose = Helper.StringArrayToEnumList<network_purpose>(Marshalling.ParseStringArray(table, "purpose"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Network
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<network_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_network_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("VIFs"))
+                VIFs = XenRef<VIF>.Create((object[])table["VIFs"]);
+            if (table.ContainsKey("PIFs"))
+                PIFs = XenRef<PIF>.Create((object[])table["PIFs"]);
+            if (table.ContainsKey("MTU"))
+                MTU = long.Parse((string)table["MTU"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("bridge"))
+                bridge = (string)table["bridge"];
+            if (table.ContainsKey("managed"))
+                managed = (bool)table["managed"];
+            if (table.ContainsKey("blobs"))
+                blobs = Maps.convert_from_proxy_string_XenRefBlob((Hashtable)table["blobs"]);
+            if (table.ContainsKey("tags"))
+                tags = Array.ConvertAll((object[])table["tags"], o => o.ToString());
+            if (table.ContainsKey("default_locking_mode"))
+                default_locking_mode = (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)table["default_locking_mode"]);
+            if (table.ContainsKey("assigned_ips"))
+                assigned_ips = Maps.convert_from_proxy_XenRefVIF_string((Hashtable)table["assigned_ips"]);
+            if (table.ContainsKey("purpose"))
+                purpose = Helper.StringArrayToEnumList<network_purpose>(Array.ConvertAll((object[])table["purpose"], o => o.ToString()));
         }
 
         public bool DeepEquals(Network other, bool ignoreCurrentOperations)

@@ -92,6 +92,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VM_metrics.
+        /// </summary>
         public override void UpdateFrom(VM_metrics update)
         {
             uuid = update.uuid;
@@ -153,25 +157,53 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VM_metrics from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VM_metrics(Hashtable table)
+        public VM_metrics(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            memory_actual = Marshalling.ParseLong(table, "memory_actual");
-            VCPUs_number = Marshalling.ParseLong(table, "VCPUs_number");
-            VCPUs_utilisation = Maps.convert_from_proxy_long_double(Marshalling.ParseHashTable(table, "VCPUs_utilisation"));
-            VCPUs_CPU = Maps.convert_from_proxy_long_long(Marshalling.ParseHashTable(table, "VCPUs_CPU"));
-            VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "VCPUs_params"));
-            VCPUs_flags = Maps.convert_from_proxy_long_string_array(Marshalling.ParseHashTable(table, "VCPUs_flags"));
-            state = Marshalling.ParseStringArray(table, "state");
-            start_time = Marshalling.ParseDateTime(table, "start_time");
-            install_time = Marshalling.ParseDateTime(table, "install_time");
-            last_updated = Marshalling.ParseDateTime(table, "last_updated");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            hvm = Marshalling.ParseBool(table, "hvm");
-            nested_virt = Marshalling.ParseBool(table, "nested_virt");
-            nomigrate = Marshalling.ParseBool(table, "nomigrate");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VM_metrics
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("memory_actual"))
+                memory_actual = long.Parse((string)table["memory_actual"]);
+            if (table.ContainsKey("VCPUs_number"))
+                VCPUs_number = long.Parse((string)table["VCPUs_number"]);
+            if (table.ContainsKey("VCPUs_utilisation"))
+                VCPUs_utilisation = Maps.convert_from_proxy_long_double((Hashtable)table["VCPUs_utilisation"]);
+            if (table.ContainsKey("VCPUs_CPU"))
+                VCPUs_CPU = Maps.convert_from_proxy_long_long((Hashtable)table["VCPUs_CPU"]);
+            if (table.ContainsKey("VCPUs_params"))
+                VCPUs_params = Maps.convert_from_proxy_string_string((Hashtable)table["VCPUs_params"]);
+            if (table.ContainsKey("VCPUs_flags"))
+                VCPUs_flags = Maps.convert_from_proxy_long_string_array((Hashtable)table["VCPUs_flags"]);
+            if (table.ContainsKey("state"))
+                state = Array.ConvertAll((object[])table["state"], o => o.ToString());
+            if (table.ContainsKey("start_time"))
+                start_time = (DateTime)table["start_time"];
+            if (table.ContainsKey("install_time"))
+                install_time = (DateTime)table["install_time"];
+            if (table.ContainsKey("last_updated"))
+                last_updated = (DateTime)table["last_updated"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("hvm"))
+                hvm = (bool)table["hvm"];
+            if (table.ContainsKey("nested_virt"))
+                nested_virt = (bool)table["nested_virt"];
+            if (table.ContainsKey("nomigrate"))
+                nomigrate = (bool)table["nomigrate"];
         }
 
         public bool DeepEquals(VM_metrics other)

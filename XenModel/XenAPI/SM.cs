@@ -90,6 +90,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given SM.
+        /// </summary>
         public override void UpdateFrom(SM update)
         {
             uuid = update.uuid;
@@ -148,24 +152,51 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new SM from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public SM(Hashtable table)
+        public SM(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            type = Marshalling.ParseString(table, "type");
-            vendor = Marshalling.ParseString(table, "vendor");
-            copyright = Marshalling.ParseString(table, "copyright");
-            version = Marshalling.ParseString(table, "version");
-            required_api_version = Marshalling.ParseString(table, "required_api_version");
-            configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "configuration"));
-            capabilities = Marshalling.ParseStringArray(table, "capabilities");
-            features = Maps.convert_from_proxy_string_long(Marshalling.ParseHashTable(table, "features"));
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            driver_filename = Marshalling.ParseString(table, "driver_filename");
-            required_cluster_stack = Marshalling.ParseStringArray(table, "required_cluster_stack");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this SM
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("type"))
+                type = (string)table["type"];
+            if (table.ContainsKey("vendor"))
+                vendor = (string)table["vendor"];
+            if (table.ContainsKey("copyright"))
+                copyright = (string)table["copyright"];
+            if (table.ContainsKey("version"))
+                version = (string)table["version"];
+            if (table.ContainsKey("required_api_version"))
+                required_api_version = (string)table["required_api_version"];
+            if (table.ContainsKey("configuration"))
+                configuration = Maps.convert_from_proxy_string_string((Hashtable)table["configuration"]);
+            if (table.ContainsKey("capabilities"))
+                capabilities = Array.ConvertAll((object[])table["capabilities"], o => o.ToString());
+            if (table.ContainsKey("features"))
+                features = Maps.convert_from_proxy_string_long((Hashtable)table["features"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("driver_filename"))
+                driver_filename = (string)table["driver_filename"];
+            if (table.ContainsKey("required_cluster_stack"))
+                required_cluster_stack = Array.ConvertAll((object[])table["required_cluster_stack"], o => o.ToString());
         }
 
         public bool DeepEquals(SM other)

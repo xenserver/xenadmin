@@ -82,6 +82,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PCI.
+        /// </summary>
         public override void UpdateFrom(PCI update)
         {
             uuid = update.uuid;
@@ -128,20 +132,43 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PCI from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PCI(Hashtable table)
+        public PCI(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            class_name = Marshalling.ParseString(table, "class_name");
-            vendor_name = Marshalling.ParseString(table, "vendor_name");
-            device_name = Marshalling.ParseString(table, "device_name");
-            host = Marshalling.ParseRef<Host>(table, "host");
-            pci_id = Marshalling.ParseString(table, "pci_id");
-            dependencies = Marshalling.ParseSetRef<PCI>(table, "dependencies");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            subsystem_vendor_name = Marshalling.ParseString(table, "subsystem_vendor_name");
-            subsystem_device_name = Marshalling.ParseString(table, "subsystem_device_name");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PCI
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("class_name"))
+                class_name = (string)table["class_name"];
+            if (table.ContainsKey("vendor_name"))
+                vendor_name = (string)table["vendor_name"];
+            if (table.ContainsKey("device_name"))
+                device_name = (string)table["device_name"];
+            if (table.ContainsKey("host"))
+                host = XenRef<Host>.Create((string)table["host"]);
+            if (table.ContainsKey("pci_id"))
+                pci_id = (string)table["pci_id"];
+            if (table.ContainsKey("dependencies"))
+                dependencies = XenRef<PCI>.Create((object[])table["dependencies"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("subsystem_vendor_name"))
+                subsystem_vendor_name = (string)table["subsystem_vendor_name"];
+            if (table.ContainsKey("subsystem_device_name"))
+                subsystem_device_name = (string)table["subsystem_device_name"];
         }
 
         public bool DeepEquals(PCI other)

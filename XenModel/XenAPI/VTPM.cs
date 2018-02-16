@@ -68,6 +68,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VTPM.
+        /// </summary>
         public override void UpdateFrom(VTPM update)
         {
             uuid = update.uuid;
@@ -93,13 +97,29 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VTPM from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VTPM(Hashtable table)
+        public VTPM(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            VM = Marshalling.ParseRef<VM>(table, "VM");
-            backend = Marshalling.ParseRef<VM>(table, "backend");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VTPM
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("VM"))
+                VM = XenRef<VM>.Create((string)table["VM"]);
+            if (table.ContainsKey("backend"))
+                backend = XenRef<VM>.Create((string)table["backend"]);
         }
 
         public bool DeepEquals(VTPM other)

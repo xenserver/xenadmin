@@ -84,6 +84,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Pool_update.
+        /// </summary>
         public override void UpdateFrom(Pool_update update)
         {
             uuid = update.uuid;
@@ -133,21 +137,45 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Pool_update from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Pool_update(Hashtable table)
+        public Pool_update(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            version = Marshalling.ParseString(table, "version");
-            installation_size = Marshalling.ParseLong(table, "installation_size");
-            key = Marshalling.ParseString(table, "key");
-            after_apply_guidance = Helper.StringArrayToEnumList<update_after_apply_guidance>(Marshalling.ParseStringArray(table, "after_apply_guidance"));
-            vdi = Marshalling.ParseRef<VDI>(table, "vdi");
-            hosts = Marshalling.ParseSetRef<Host>(table, "hosts");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            enforce_homogeneity = Marshalling.ParseBool(table, "enforce_homogeneity");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Pool_update
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("version"))
+                version = (string)table["version"];
+            if (table.ContainsKey("installation_size"))
+                installation_size = long.Parse((string)table["installation_size"]);
+            if (table.ContainsKey("key"))
+                key = (string)table["key"];
+            if (table.ContainsKey("after_apply_guidance"))
+                after_apply_guidance = Helper.StringArrayToEnumList<update_after_apply_guidance>(Array.ConvertAll((object[])table["after_apply_guidance"], o => o.ToString()));
+            if (table.ContainsKey("vdi"))
+                vdi = XenRef<VDI>.Create((string)table["vdi"]);
+            if (table.ContainsKey("hosts"))
+                hosts = XenRef<Host>.Create((object[])table["hosts"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("enforce_homogeneity"))
+                enforce_homogeneity = (bool)table["enforce_homogeneity"];
         }
 
         public bool DeepEquals(Pool_update other)

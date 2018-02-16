@@ -76,6 +76,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VUSB.
+        /// </summary>
         public override void UpdateFrom(VUSB update)
         {
             uuid = update.uuid;
@@ -113,17 +117,37 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VUSB from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VUSB(Hashtable table)
+        public VUSB(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            allowed_operations = Helper.StringArrayToEnumList<vusb_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_vusb_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            VM = Marshalling.ParseRef<VM>(table, "VM");
-            USB_group = Marshalling.ParseRef<USB_group>(table, "USB_group");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            currently_attached = Marshalling.ParseBool(table, "currently_attached");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VUSB
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<vusb_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_vusb_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("VM"))
+                VM = XenRef<VM>.Create((string)table["VM"]);
+            if (table.ContainsKey("USB_group"))
+                USB_group = XenRef<USB_group>.Create((string)table["USB_group"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("currently_attached"))
+                currently_attached = (bool)table["currently_attached"];
         }
 
         public bool DeepEquals(VUSB other, bool ignoreCurrentOperations)

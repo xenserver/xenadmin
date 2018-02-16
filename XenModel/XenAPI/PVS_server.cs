@@ -72,6 +72,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PVS_server.
+        /// </summary>
         public override void UpdateFrom(PVS_server update)
         {
             uuid = update.uuid;
@@ -103,15 +107,33 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PVS_server from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PVS_server(Hashtable table)
+        public PVS_server(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            addresses = Marshalling.ParseStringArray(table, "addresses");
-            first_port = Marshalling.ParseLong(table, "first_port");
-            last_port = Marshalling.ParseLong(table, "last_port");
-            site = Marshalling.ParseRef<PVS_site>(table, "site");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PVS_server
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("addresses"))
+                addresses = Array.ConvertAll((object[])table["addresses"], o => o.ToString());
+            if (table.ContainsKey("first_port"))
+                first_port = long.Parse((string)table["first_port"]);
+            if (table.ContainsKey("last_port"))
+                last_port = long.Parse((string)table["last_port"]);
+            if (table.ContainsKey("site"))
+                site = XenRef<PVS_site>.Create((string)table["site"]);
         }
 
         public bool DeepEquals(PVS_server other)

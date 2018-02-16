@@ -86,6 +86,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PGPU.
+        /// </summary>
         public override void UpdateFrom(PGPU update)
         {
             uuid = update.uuid;
@@ -138,22 +142,47 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PGPU from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PGPU(Hashtable table)
+        public PGPU(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            PCI = Marshalling.ParseRef<PCI>(table, "PCI");
-            GPU_group = Marshalling.ParseRef<GPU_group>(table, "GPU_group");
-            host = Marshalling.ParseRef<Host>(table, "host");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            supported_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "supported_VGPU_types");
-            enabled_VGPU_types = Marshalling.ParseSetRef<VGPU_type>(table, "enabled_VGPU_types");
-            resident_VGPUs = Marshalling.ParseSetRef<VGPU>(table, "resident_VGPUs");
-            supported_VGPU_max_capacities = Maps.convert_from_proxy_XenRefVGPU_type_long(Marshalling.ParseHashTable(table, "supported_VGPU_max_capacities"));
-            dom0_access = (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), Marshalling.ParseString(table, "dom0_access"));
-            is_system_display_device = Marshalling.ParseBool(table, "is_system_display_device");
-            compatibility_metadata = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "compatibility_metadata"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PGPU
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("PCI"))
+                PCI = XenRef<PCI>.Create((string)table["PCI"]);
+            if (table.ContainsKey("GPU_group"))
+                GPU_group = XenRef<GPU_group>.Create((string)table["GPU_group"]);
+            if (table.ContainsKey("host"))
+                host = XenRef<Host>.Create((string)table["host"]);
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("supported_VGPU_types"))
+                supported_VGPU_types = XenRef<VGPU_type>.Create((object[])table["supported_VGPU_types"]);
+            if (table.ContainsKey("enabled_VGPU_types"))
+                enabled_VGPU_types = XenRef<VGPU_type>.Create((object[])table["enabled_VGPU_types"]);
+            if (table.ContainsKey("resident_VGPUs"))
+                resident_VGPUs = XenRef<VGPU>.Create((object[])table["resident_VGPUs"]);
+            if (table.ContainsKey("supported_VGPU_max_capacities"))
+                supported_VGPU_max_capacities = Maps.convert_from_proxy_XenRefVGPU_type_long((Hashtable)table["supported_VGPU_max_capacities"]);
+            if (table.ContainsKey("dom0_access"))
+                dom0_access = (pgpu_dom0_access)Helper.EnumParseDefault(typeof(pgpu_dom0_access), (string)table["dom0_access"]);
+            if (table.ContainsKey("is_system_display_device"))
+                is_system_display_device = (bool)table["is_system_display_device"];
+            if (table.ContainsKey("compatibility_metadata"))
+                compatibility_metadata = Maps.convert_from_proxy_string_string((Hashtable)table["compatibility_metadata"]);
         }
 
         public bool DeepEquals(PGPU other)

@@ -66,6 +66,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given DR_task.
+        /// </summary>
         public override void UpdateFrom(DR_task update)
         {
             uuid = update.uuid;
@@ -88,12 +92,27 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new DR_task from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public DR_task(Hashtable table)
+        public DR_task(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            introduced_SRs = Marshalling.ParseSetRef<SR>(table, "introduced_SRs");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this DR_task
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("introduced_SRs"))
+                introduced_SRs = XenRef<SR>.Create((object[])table["introduced_SRs"]);
         }
 
         public bool DeepEquals(DR_task other)

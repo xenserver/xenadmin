@@ -96,6 +96,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Task.
+        /// </summary>
         public override void UpdateFrom(Task update)
         {
             uuid = update.uuid;
@@ -163,27 +167,57 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Task from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Task(Hashtable table)
+        public Task(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            allowed_operations = Helper.StringArrayToEnumList<task_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_task_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            created = Marshalling.ParseDateTime(table, "created");
-            finished = Marshalling.ParseDateTime(table, "finished");
-            status = (task_status_type)Helper.EnumParseDefault(typeof(task_status_type), Marshalling.ParseString(table, "status"));
-            resident_on = Marshalling.ParseRef<Host>(table, "resident_on");
-            progress = Marshalling.ParseDouble(table, "progress");
-            type = Marshalling.ParseString(table, "type");
-            result = Marshalling.ParseString(table, "result");
-            error_info = Marshalling.ParseStringArray(table, "error_info");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            subtask_of = Marshalling.ParseRef<Task>(table, "subtask_of");
-            subtasks = Marshalling.ParseSetRef<Task>(table, "subtasks");
-            backtrace = Marshalling.ParseString(table, "backtrace");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Task
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("name_label"))
+                name_label = (string)table["name_label"];
+            if (table.ContainsKey("name_description"))
+                name_description = (string)table["name_description"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<task_allowed_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_task_allowed_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("created"))
+                created = (DateTime)table["created"];
+            if (table.ContainsKey("finished"))
+                finished = (DateTime)table["finished"];
+            if (table.ContainsKey("status"))
+                status = (task_status_type)Helper.EnumParseDefault(typeof(task_status_type), (string)table["status"]);
+            if (table.ContainsKey("resident_on"))
+                resident_on = XenRef<Host>.Create((string)table["resident_on"]);
+            if (table.ContainsKey("progress"))
+                progress = (double)table["progress"];
+            if (table.ContainsKey("type"))
+                type = (string)table["type"];
+            if (table.ContainsKey("result"))
+                result = (string)table["result"];
+            if (table.ContainsKey("error_info"))
+                error_info = Array.ConvertAll((object[])table["error_info"], o => o.ToString());
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("subtask_of"))
+                subtask_of = XenRef<Task>.Create((string)table["subtask_of"]);
+            if (table.ContainsKey("subtasks"))
+                subtasks = XenRef<Task>.Create((object[])table["subtasks"]);
+            if (table.ContainsKey("backtrace"))
+                backtrace = (string)table["backtrace"];
         }
 
         public bool DeepEquals(Task other, bool ignoreCurrentOperations)

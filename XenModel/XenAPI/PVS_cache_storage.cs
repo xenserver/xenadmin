@@ -74,6 +74,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PVS_cache_storage.
+        /// </summary>
         public override void UpdateFrom(PVS_cache_storage update)
         {
             uuid = update.uuid;
@@ -108,16 +112,35 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PVS_cache_storage from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PVS_cache_storage(Hashtable table)
+        public PVS_cache_storage(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            host = Marshalling.ParseRef<Host>(table, "host");
-            SR = Marshalling.ParseRef<SR>(table, "SR");
-            site = Marshalling.ParseRef<PVS_site>(table, "site");
-            size = Marshalling.ParseLong(table, "size");
-            VDI = Marshalling.ParseRef<VDI>(table, "VDI");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PVS_cache_storage
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("host"))
+                host = XenRef<Host>.Create((string)table["host"]);
+            if (table.ContainsKey("SR"))
+                SR = XenRef<SR>.Create((string)table["SR"]);
+            if (table.ContainsKey("site"))
+                site = XenRef<PVS_site>.Create((string)table["site"]);
+            if (table.ContainsKey("size"))
+                size = long.Parse((string)table["size"]);
+            if (table.ContainsKey("VDI"))
+                VDI = XenRef<VDI>.Create((string)table["VDI"]);
         }
 
         public bool DeepEquals(PVS_cache_storage other)

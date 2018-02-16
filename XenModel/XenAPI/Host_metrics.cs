@@ -74,6 +74,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Host_metrics.
+        /// </summary>
         public override void UpdateFrom(Host_metrics update)
         {
             uuid = update.uuid;
@@ -108,16 +112,35 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Host_metrics from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Host_metrics(Hashtable table)
+        public Host_metrics(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            memory_total = Marshalling.ParseLong(table, "memory_total");
-            memory_free = Marshalling.ParseLong(table, "memory_free");
-            live = Marshalling.ParseBool(table, "live");
-            last_updated = Marshalling.ParseDateTime(table, "last_updated");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Host_metrics
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("memory_total"))
+                memory_total = long.Parse((string)table["memory_total"]);
+            if (table.ContainsKey("memory_free"))
+                memory_free = long.Parse((string)table["memory_free"]);
+            if (table.ContainsKey("live"))
+                live = (bool)table["live"];
+            if (table.ContainsKey("last_updated"))
+                last_updated = (DateTime)table["last_updated"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
         }
 
         public bool DeepEquals(Host_metrics other)

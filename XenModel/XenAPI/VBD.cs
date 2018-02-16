@@ -106,6 +106,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VBD.
+        /// </summary>
         public override void UpdateFrom(VBD update)
         {
             uuid = update.uuid;
@@ -188,32 +192,67 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VBD from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VBD(Hashtable table)
+        public VBD(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            allowed_operations = Helper.StringArrayToEnumList<vbd_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_vbd_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            VM = Marshalling.ParseRef<VM>(table, "VM");
-            VDI = Marshalling.ParseRef<VDI>(table, "VDI");
-            device = Marshalling.ParseString(table, "device");
-            userdevice = Marshalling.ParseString(table, "userdevice");
-            bootable = Marshalling.ParseBool(table, "bootable");
-            mode = (vbd_mode)Helper.EnumParseDefault(typeof(vbd_mode), Marshalling.ParseString(table, "mode"));
-            type = (vbd_type)Helper.EnumParseDefault(typeof(vbd_type), Marshalling.ParseString(table, "type"));
-            unpluggable = Marshalling.ParseBool(table, "unpluggable");
-            storage_lock = Marshalling.ParseBool(table, "storage_lock");
-            empty = Marshalling.ParseBool(table, "empty");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            currently_attached = Marshalling.ParseBool(table, "currently_attached");
-            status_code = Marshalling.ParseLong(table, "status_code");
-            status_detail = Marshalling.ParseString(table, "status_detail");
-            runtime_properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "runtime_properties"));
-            qos_algorithm_type = Marshalling.ParseString(table, "qos_algorithm_type");
-            qos_algorithm_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "qos_algorithm_params"));
-            qos_supported_algorithms = Marshalling.ParseStringArray(table, "qos_supported_algorithms");
-            metrics = Marshalling.ParseRef<VBD_metrics>(table, "metrics");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VBD
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<vbd_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_vbd_operations((Hashtable)table["current_operations"]);
+            if (table.ContainsKey("VM"))
+                VM = XenRef<VM>.Create((string)table["VM"]);
+            if (table.ContainsKey("VDI"))
+                VDI = XenRef<VDI>.Create((string)table["VDI"]);
+            if (table.ContainsKey("device"))
+                device = (string)table["device"];
+            if (table.ContainsKey("userdevice"))
+                userdevice = (string)table["userdevice"];
+            if (table.ContainsKey("bootable"))
+                bootable = (bool)table["bootable"];
+            if (table.ContainsKey("mode"))
+                mode = (vbd_mode)Helper.EnumParseDefault(typeof(vbd_mode), (string)table["mode"]);
+            if (table.ContainsKey("type"))
+                type = (vbd_type)Helper.EnumParseDefault(typeof(vbd_type), (string)table["type"]);
+            if (table.ContainsKey("unpluggable"))
+                unpluggable = (bool)table["unpluggable"];
+            if (table.ContainsKey("storage_lock"))
+                storage_lock = (bool)table["storage_lock"];
+            if (table.ContainsKey("empty"))
+                empty = (bool)table["empty"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("currently_attached"))
+                currently_attached = (bool)table["currently_attached"];
+            if (table.ContainsKey("status_code"))
+                status_code = long.Parse((string)table["status_code"]);
+            if (table.ContainsKey("status_detail"))
+                status_detail = (string)table["status_detail"];
+            if (table.ContainsKey("runtime_properties"))
+                runtime_properties = Maps.convert_from_proxy_string_string((Hashtable)table["runtime_properties"]);
+            if (table.ContainsKey("qos_algorithm_type"))
+                qos_algorithm_type = (string)table["qos_algorithm_type"];
+            if (table.ContainsKey("qos_algorithm_params"))
+                qos_algorithm_params = Maps.convert_from_proxy_string_string((Hashtable)table["qos_algorithm_params"]);
+            if (table.ContainsKey("qos_supported_algorithms"))
+                qos_supported_algorithms = Array.ConvertAll((object[])table["qos_supported_algorithms"], o => o.ToString());
+            if (table.ContainsKey("metrics"))
+                metrics = XenRef<VBD_metrics>.Create((string)table["metrics"]);
         }
 
         public bool DeepEquals(VBD other, bool ignoreCurrentOperations)

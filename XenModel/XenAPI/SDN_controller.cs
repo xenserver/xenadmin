@@ -70,6 +70,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given SDN_controller.
+        /// </summary>
         public override void UpdateFrom(SDN_controller update)
         {
             uuid = update.uuid;
@@ -98,14 +102,31 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new SDN_controller from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public SDN_controller(Hashtable table)
+        public SDN_controller(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            protocol = (sdn_controller_protocol)Helper.EnumParseDefault(typeof(sdn_controller_protocol), Marshalling.ParseString(table, "protocol"));
-            address = Marshalling.ParseString(table, "address");
-            port = Marshalling.ParseLong(table, "port");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this SDN_controller
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("protocol"))
+                protocol = (sdn_controller_protocol)Helper.EnumParseDefault(typeof(sdn_controller_protocol), (string)table["protocol"]);
+            if (table.ContainsKey("address"))
+                address = (string)table["address"];
+            if (table.ContainsKey("port"))
+                port = long.Parse((string)table["port"]);
         }
 
         public bool DeepEquals(SDN_controller other)

@@ -90,6 +90,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VM_guest_metrics.
+        /// </summary>
         public override void UpdateFrom(VM_guest_metrics update)
         {
             uuid = update.uuid;
@@ -148,24 +152,51 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VM_guest_metrics from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VM_guest_metrics(Hashtable table)
+        public VM_guest_metrics(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            os_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "os_version"));
-            PV_drivers_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "PV_drivers_version"));
-            PV_drivers_up_to_date = Marshalling.ParseBool(table, "PV_drivers_up_to_date");
-            memory = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "memory"));
-            disks = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "disks"));
-            networks = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "networks"));
-            other = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other"));
-            last_updated = Marshalling.ParseDateTime(table, "last_updated");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            live = Marshalling.ParseBool(table, "live");
-            can_use_hotplug_vbd = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), Marshalling.ParseString(table, "can_use_hotplug_vbd"));
-            can_use_hotplug_vif = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), Marshalling.ParseString(table, "can_use_hotplug_vif"));
-            PV_drivers_detected = Marshalling.ParseBool(table, "PV_drivers_detected");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VM_guest_metrics
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = (string)table["uuid"];
+            if (table.ContainsKey("os_version"))
+                os_version = Maps.convert_from_proxy_string_string((Hashtable)table["os_version"]);
+            if (table.ContainsKey("PV_drivers_version"))
+                PV_drivers_version = Maps.convert_from_proxy_string_string((Hashtable)table["PV_drivers_version"]);
+            if (table.ContainsKey("PV_drivers_up_to_date"))
+                PV_drivers_up_to_date = (bool)table["PV_drivers_up_to_date"];
+            if (table.ContainsKey("memory"))
+                memory = Maps.convert_from_proxy_string_string((Hashtable)table["memory"]);
+            if (table.ContainsKey("disks"))
+                disks = Maps.convert_from_proxy_string_string((Hashtable)table["disks"]);
+            if (table.ContainsKey("networks"))
+                networks = Maps.convert_from_proxy_string_string((Hashtable)table["networks"]);
+            if (table.ContainsKey("other"))
+                other = Maps.convert_from_proxy_string_string((Hashtable)table["other"]);
+            if (table.ContainsKey("last_updated"))
+                last_updated = (DateTime)table["last_updated"];
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+            if (table.ContainsKey("live"))
+                live = (bool)table["live"];
+            if (table.ContainsKey("can_use_hotplug_vbd"))
+                can_use_hotplug_vbd = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)table["can_use_hotplug_vbd"]);
+            if (table.ContainsKey("can_use_hotplug_vif"))
+                can_use_hotplug_vif = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)table["can_use_hotplug_vif"]);
+            if (table.ContainsKey("PV_drivers_detected"))
+                PV_drivers_detected = (bool)table["PV_drivers_detected"];
         }
 
         public bool DeepEquals(VM_guest_metrics other)
