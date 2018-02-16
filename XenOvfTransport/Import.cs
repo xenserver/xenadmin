@@ -1850,9 +1850,9 @@ namespace XenOvfTransport
                         string sruuid = null;
                         string vdiuuid = null;
                         string userdeviceid = null;
-                        string namelabel = VM.get_name_label(xenSession, vmRef);
+                        string vmName = VM.get_name_label(xenSession, vmRef);
                         bool isbootable = false;
-                        string mode = "RW";
+                        vbd_mode mode = vbd_mode.RW;
 
                         bool importThisRasd = true;
                         if (Tools.ValidateProperty("Caption", rasd)) // rasd.Caption != null && rasd.Caption.Value != null && rasd.Caption.Value.Length > 0)
@@ -1899,7 +1899,7 @@ namespace XenOvfTransport
                                                 {
                                                     if (s[++i].Equals("r"))
                                                     {
-                                                        mode = "RO";
+                                                        mode = vbd_mode.RO;
                                                     }
                                                     break;
                                                 }
@@ -1983,7 +1983,7 @@ namespace XenOvfTransport
 
                                 try
                                 {
-                                    string disklabel = string.Format("{0}_{1}",namelabel, userdeviceid);
+                                    string disklabel = string.Format("{0}_{1}", vmName, userdeviceid);
 
                                     if ((rasd.ElementName != null) && (!string.IsNullOrEmpty(rasd.ElementName.Value)))
                                         disklabel = rasd.ElementName.Value;
@@ -2018,42 +2018,25 @@ namespace XenOvfTransport
 
                                 foreach (XenRef<VDI> currentVDI in vdiRef)
                                 {
-                                    Hashtable vbdHash = new Hashtable();
-                                    if (userdeviceid != null)
+                                    VBD vbd = new VBD
                                     {
-                                        vbdHash.Add("userdevice", VerifyUserDevice(xenSession, vmRef, userdeviceid));
-                                    }
-                                    else
+                                        userdevice = VerifyUserDevice(xenSession, vmRef, userdeviceid ?? "99"),
+                                        bootable = isbootable,
+                                        VDI = currentVDI,
+                                        mode = mode,
+                                        uuid = Guid.NewGuid().ToString(),
+                                        VM = vmRef,
+                                        empty = false,
+                                        type = vbd_type.Disk,
+                                        currently_attached = false,
+                                        storage_lock = false,
+                                        status_code = 0,
+                                        // below other_config keys XS to delete the disk along with the VM.
+                                        other_config = new Dictionary<string, string> {{"owner", "true"}}
+                                    };
+
+                                    if (!vbd.userdevice.EndsWith("+"))
                                     {
-                                        vbdHash.Add("userdevice", VerifyUserDevice(xenSession, vmRef, "99"));
-                                    }
-                                    vbdHash.Add("bootable", isbootable);
-									vbdHash.Add("VDI", currentVDI.opaque_ref);
-                                    vbdHash.Add("mode", mode);
-                                    vbdHash.Add("uuid", Guid.NewGuid().ToString());
-                                    vbdHash.Add("vm_name_label", namelabel);
-									vbdHash.Add("VM", vmRef.opaque_ref);
-                                    vbdHash.Add("empty", false);
-                                    vbdHash.Add("type", "Disk");
-                                    vbdHash.Add("currently_attached", false);
-                                    vbdHash.Add("attachable", true);
-                                    vbdHash.Add("storage_lock", false);
-                                    vbdHash.Add("status_code", "0");
-
-                                    #region SET OTHER_CONFIG STUFF HERE !
-                                    //
-                                    // below other_config keys XS to delete the disk along with the VM.
-                                    //
-                                    Hashtable hOtherConfig = new Hashtable();
-                                    hOtherConfig.Add("owner", "true");
-                                    vbdHash.Add("other_config", hOtherConfig);
-                                    #endregion
-
-
-                                    if (!((string)vbdHash["userdevice"]).EndsWith("+"))
-                                    {
-                                        VBD vbd = new VBD(vbdHash);
-
                                         try
                                         {
                                             VBD.create(xenSession, vbd);
@@ -2068,8 +2051,8 @@ namespace XenOvfTransport
                                     {
                                         log.WarnFormat("Import:  ================== ATTENTION NEEDED =======================");
                                         log.WarnFormat("Import:  Could not determine appropriate number for device placement.");
-                                        log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", (string)vbdHash["vm_name_label"]);
-                                        log.WarnFormat("Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}", (string)vbdHash["vm_name_label"]);
+                                        log.WarnFormat("Import:  Please Start, Logon, Shut down, System ({0})", vmName);
+                                        log.WarnFormat("Import:  Then manually attach disks with labels with {0}_# that are not attached to {0}", vmName);
                                         log.WarnFormat("Import:  ===========================================================");
                                         OnUpdate(new XenOvfTranportEventArgs(XenOvfTranportEventType.Progress, "Import", Messages.WARNING_ADMIN_REQUIRED));
                                     }
@@ -2080,8 +2063,6 @@ namespace XenOvfTransport
                                 log.InfoFormat("Import: FILE SKIPPED (METADATA ONLY SELECTED)  {0}", _currentfilename);
                             }
                             #endregion
-
-
                         }
                         log.Debug("Import.AddResourceSettingData: Hard Disk Image Added");
                         break;
@@ -2095,7 +2076,7 @@ namespace XenOvfTransport
         {
             log.DebugFormat("Import.VerifyUserDevice, checking device: {0} (99 = autoselect)", device);
             string usethisdevice = null;
-            List<XenRef<VBD>> vbds = VM.get_VBDs(xenSession, vmRef);
+
             string[] allowedVBDs = VM.get_allowed_VBD_devices(xenSession, vmRef);
 
             if (allowedVBDs == null || allowedVBDs.Length <= 0)
