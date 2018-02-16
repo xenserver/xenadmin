@@ -1553,7 +1553,18 @@ namespace XenOvfTransport
                         #endregion
 
                         #region ATTACH NETWORK TO VM
-                        Hashtable vifHash = new Hashtable();
+
+                        VIF vif = new VIF
+                        {
+                            uuid = Guid.NewGuid().ToString(),
+                            allowed_operations = new List<vif_operations> {vif_operations.attach},
+                            device = Convert.ToString(vifDeviceIndex++),
+                            network = net,
+                            VM = vmRef,
+                            MTU = 1500,
+                            locking_mode = vif_locking_mode.network_default
+                        };
+
                         // This is MAC address if available use it.
                         // needs to be in form:  00:00:00:00:00:00
                         if (Tools.ValidateProperty("Address", rasd))
@@ -1574,16 +1585,9 @@ namespace XenOvfTransport
                             {
                                 networkAddress.Append(rasd.Address.Value);
                             }
-                            vifHash.Add("MAC", networkAddress.ToString());
+                            vif.MAC = networkAddress.ToString();
                         }
-                        vifHash.Add("uuid", Guid.NewGuid().ToString());
-                        vifHash.Add("allowed_operations", new string[] { "attach" });
-                        vifHash.Add("device", Convert.ToString(vifDeviceIndex++));
-						vifHash.Add("network", net.opaque_ref);
-						vifHash.Add("VM", vmRef.opaque_ref);
-                        vifHash.Add("MTU", "1500");
-                        vifHash.Add("locking_mode", "network_default");
-                        VIF vif = new VIF(vifHash);
+
                         try
                         {
                             xenSession.Connection.WaitForCache(VIF.create(xenSession, vif));
