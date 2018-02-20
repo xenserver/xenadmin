@@ -146,6 +146,14 @@ namespace XenAPI
             }
         }
 
+        public SM GetSM
+        {
+            get
+            {
+                return SM.GetByType(Connection, GetSRType(true).ToString());
+            }
+        }
+
         public string ConfigType()
         {
            return Get(sm_config, "type");
@@ -829,7 +837,10 @@ namespace XenAPI
 
         public bool MultipathCapable()
         {
-            return "true" == Get(sm_config, "multipathable");
+            SM relatedSm = GetSM;
+            bool isAnSmCapability = relatedSm != null && relatedSm.MultipathEnabled;
+            bool isInSmConfig = "true" == Get(sm_config, "multipathable");
+            return isInSmConfig || isAnSmCapability;
         }
 
         public string Target()

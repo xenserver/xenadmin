@@ -53,5 +53,15 @@ namespace XenAPI
         {
             return BoolKey(other_config, HIDE_FROM_XENCENTER);
         }
+
+        public bool MultipathEnabled
+        {
+            get
+            {
+                //return features != null && features.ContainsKey("SR_MULTIPATH_CAPABLE");
+                return features != null && features.ContainsKey("VDI_ATTACH");
+            }
+
+        }
     }
 }
