@@ -58,8 +58,7 @@ namespace XenAPI
         {
             get
             {
-                //return features != null && features.ContainsKey("SR_MULTIPATH_CAPABLE");
-                return features != null && features.ContainsKey("VDI_ATTACH");
+                return features != null && features.ContainsKey("SR_MULTIPATH");
             }
 
         }
