@@ -146,12 +146,9 @@ namespace XenAPI
             }
         }
 
-        public SM GetSM
+        public SM GetSM()
         {
-            get
-            {
-                return SM.GetByType(Connection, GetSRType(true).ToString());
-            }
+            return SM.GetByType(Connection, GetSRType(true).ToString());
         }
 
         public string ConfigType()
@@ -837,9 +834,9 @@ namespace XenAPI
 
         public bool MultipathCapable()
         {
-            SM relatedSm = GetSM;
-            bool isAnSmCapability = relatedSm != null && relatedSm.MultipathEnabled;
-            bool isInSmConfig = "true" == Get(sm_config, "multipathable");
+            SM relatedSm = GetSM();
+            bool isAnSmCapability = relatedSm != null && relatedSm.MultipathEnabled();
+            bool isInSmConfig = BoolKey(sm_config, "multipathable");
             return isInSmConfig || isAnSmCapability;
         }
 
