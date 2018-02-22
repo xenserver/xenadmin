@@ -219,7 +219,7 @@ namespace XenOvfTransport
                         }
                         if (securitytype.EncryptionMethod != null && securitytype.EncryptionMethod.Algorithm != null)
                         {
-                            string algoname = (securitytype.EncryptionMethod.Algorithm.Split(new char[] { '#' }))[1].ToLower().Replace('-', '_');
+                            string algoname = (securitytype.EncryptionMethod.Algorithm.Split('#'))[1].ToLower().Replace('-', '_');
                             object x = OVF.AlgorithmMap(algoname);
                             if (x != null)
                             {
@@ -1195,7 +1195,7 @@ namespace XenOvfTransport
                     if (rasd.AllocationUnits.Value.ToLower().StartsWith("bytes"))
                     {
                         // Format:  Bytes * 2 ^ 20
-                        string[] a1 = rasd.AllocationUnits.Value.Split(new char[] { '*', '^' });
+                        string[] a1 = rasd.AllocationUnits.Value.Split('*', '^');
                         if (a1.Length == 3)
                         {
                             memoryRaise = Convert.ToDouble(a1[1]);
@@ -1455,13 +1455,13 @@ namespace XenOvfTransport
                                 if (rasd.Connection[0].Value.Contains(Properties.Settings.Default.xenNetworkKey) ||
                                     rasd.Connection[0].Value.Contains(Properties.Settings.Default.xenNetworkUuidKey))
                                 {
-                                    string[] s = rasd.Connection[0].Value.Split(new char[] { ',' });
+                                    string[] s = rasd.Connection[0].Value.Split(',');
                                     for (int i = 0; i < s.Length; i++)
                                     {
                                         if (s[i].StartsWith(Properties.Settings.Default.xenNetworkKey) ||
                                             s[i].StartsWith(Properties.Settings.Default.xenNetworkUuidKey))
                                         {
-                                            string[] s1 = s[i].Split(new char[] { '=' } );
+                                            string[] s1 = s[i].Split('=');
                                             netuuid = s1[1];
                                         }
                                     }
@@ -1582,7 +1582,7 @@ namespace XenOvfTransport
                                 {
                                     if (rasd.Connection[0].Value.ToLower().Contains("sr="))
                                     {
-                                        string[] vpairs = rasd.Connection[0].Value.Split(new char[] {','});
+                                        string[] vpairs = rasd.Connection[0].Value.Split(',');
                                         foreach (string vset in vpairs)
                                         {
                                             if (vset.ToLower().StartsWith("sr="))
@@ -1826,7 +1826,7 @@ namespace XenOvfTransport
                                 #region PARSE CONNECTION
                                 if (Tools.ValidateProperty("Connection", rasd))
                                 {
-                                    string[] s = rasd.Connection[0].Value.Split(new char[] { '=', ',' });
+                                    string[] s = rasd.Connection[0].Value.Split('=', ',');
                                     for (int i = 0; i < s.Length; i++)
                                     {
                                         string checkme = s[i].ToLower().Trim();
