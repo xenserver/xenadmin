@@ -405,15 +405,17 @@ namespace XenAdmin.Wizards.GenericPages
                             }
                         }
 
+                        var sortedHosts = new List<Host>(Connection.Cache.Hosts);
+                        sortedHosts.Sort();
+
                         var items = new List<DelayLoadingOptionComboBoxItem>();
 
-                        foreach (var host in Connection.Cache.Hosts)
+                        foreach (var host in sortedHosts)
                         {
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
                             item.LoadAndWait();
                             items.Add(item);
                         }
-                        items.Sort(new DelayLoadingOptionComboboxItemCompare());
 
                         foreach (var item in items)
                         { 
@@ -656,12 +658,5 @@ namespace XenAdmin.Wizards.GenericPages
 	        }
         }
 
-	    private class DelayLoadingOptionComboboxItemCompare : IComparer<DelayLoadingOptionComboBoxItem>
-	    {
-	        public int Compare(DelayLoadingOptionComboBoxItem x, DelayLoadingOptionComboBoxItem y)
-	        {
-	            return string.Compare(x.ToString(), y.ToString());
-	        }
-	    }
     }
 }
