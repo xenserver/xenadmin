@@ -56,7 +56,7 @@ namespace XenAPI
 
         public bool MultipathEnabled()
         {
-            return features != null && features.ContainsKey("VDI_ATTACH");
+            return features != null && features.ContainsKey("SR_MULTIPATH");
         }
     }
 }
