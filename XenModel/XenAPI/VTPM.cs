@@ -115,11 +115,11 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
+                uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("VM"))
-                VM = XenRef<VM>.Create((string)table["VM"]);
+                VM = Marshalling.ParseRef<VM>(table, "VM");
             if (table.ContainsKey("backend"))
-                backend = XenRef<VM>.Create((string)table["backend"]);
+                backend = Marshalling.ParseRef<VM>(table, "backend");
         }
 
         public bool DeepEquals(VTPM other)
@@ -164,9 +164,9 @@ namespace XenAPI
         public static VTPM get_record(Session session, string _vtpm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_record(session.uuid, _vtpm);
+                return session.JsonRpcClient.vtpm_get_record(session.opaque_ref, _vtpm);
             else
-                return new VTPM((Proxy_VTPM)session.proxy.vtpm_get_record(session.uuid, _vtpm ?? "").parse());
+                return new VTPM((Proxy_VTPM)session.proxy.vtpm_get_record(session.opaque_ref, _vtpm ?? "").parse());
         }
 
         /// <summary>
@@ -178,9 +178,9 @@ namespace XenAPI
         public static XenRef<VTPM> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.vtpm_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<VTPM>.Create(session.proxy.vtpm_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<VTPM>.Create(session.proxy.vtpm_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -192,9 +192,9 @@ namespace XenAPI
         public static XenRef<VTPM> create(Session session, VTPM _record)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_create(session.uuid, _record);
+                return session.JsonRpcClient.vtpm_create(session.opaque_ref, _record);
             else
-                return XenRef<VTPM>.Create(session.proxy.vtpm_create(session.uuid, _record.ToProxy()).parse());
+                return XenRef<VTPM>.Create(session.proxy.vtpm_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -206,9 +206,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, VTPM _record)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vtpm_create(session.uuid, _record);
+              return session.JsonRpcClient.async_vtpm_create(session.opaque_ref, _record);
           else
-              return XenRef<Task>.Create(session.proxy.async_vtpm_create(session.uuid, _record.ToProxy()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vtpm_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -220,9 +220,9 @@ namespace XenAPI
         public static void destroy(Session session, string _vtpm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vtpm_destroy(session.uuid, _vtpm);
+                session.JsonRpcClient.vtpm_destroy(session.opaque_ref, _vtpm);
             else
-                session.proxy.vtpm_destroy(session.uuid, _vtpm ?? "").parse();
+                session.proxy.vtpm_destroy(session.opaque_ref, _vtpm ?? "").parse();
         }
 
         /// <summary>
@@ -234,9 +234,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _vtpm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vtpm_destroy(session.uuid, _vtpm);
+              return session.JsonRpcClient.async_vtpm_destroy(session.opaque_ref, _vtpm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vtpm_destroy(session.uuid, _vtpm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vtpm_destroy(session.opaque_ref, _vtpm ?? "").parse());
         }
 
         /// <summary>
@@ -248,9 +248,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _vtpm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_uuid(session.uuid, _vtpm);
+                return session.JsonRpcClient.vtpm_get_uuid(session.opaque_ref, _vtpm);
             else
-                return (string)session.proxy.vtpm_get_uuid(session.uuid, _vtpm ?? "").parse();
+                return (string)session.proxy.vtpm_get_uuid(session.opaque_ref, _vtpm ?? "").parse();
         }
 
         /// <summary>
@@ -262,9 +262,9 @@ namespace XenAPI
         public static XenRef<VM> get_VM(Session session, string _vtpm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_vm(session.uuid, _vtpm);
+                return session.JsonRpcClient.vtpm_get_vm(session.opaque_ref, _vtpm);
             else
-                return XenRef<VM>.Create(session.proxy.vtpm_get_vm(session.uuid, _vtpm ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vtpm_get_vm(session.opaque_ref, _vtpm ?? "").parse());
         }
 
         /// <summary>
@@ -276,9 +276,9 @@ namespace XenAPI
         public static XenRef<VM> get_backend(Session session, string _vtpm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vtpm_get_backend(session.uuid, _vtpm);
+                return session.JsonRpcClient.vtpm_get_backend(session.opaque_ref, _vtpm);
             else
-                return XenRef<VM>.Create(session.proxy.vtpm_get_backend(session.uuid, _vtpm ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vtpm_get_backend(session.opaque_ref, _vtpm ?? "").parse());
         }
 
         /// <summary>

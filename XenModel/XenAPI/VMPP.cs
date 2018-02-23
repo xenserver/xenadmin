@@ -200,45 +200,45 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
+                uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("name_label"))
-                name_label = (string)table["name_label"];
+                name_label = Marshalling.ParseString(table, "name_label");
             if (table.ContainsKey("name_description"))
-                name_description = (string)table["name_description"];
+                name_description = Marshalling.ParseString(table, "name_description");
             if (table.ContainsKey("is_policy_enabled"))
-                is_policy_enabled = (bool)table["is_policy_enabled"];
+                is_policy_enabled = Marshalling.ParseBool(table, "is_policy_enabled");
             if (table.ContainsKey("backup_type"))
-                backup_type = (vmpp_backup_type)Helper.EnumParseDefault(typeof(vmpp_backup_type), (string)table["backup_type"]);
+                backup_type = (vmpp_backup_type)Helper.EnumParseDefault(typeof(vmpp_backup_type), Marshalling.ParseString(table, "backup_type"));
             if (table.ContainsKey("backup_retention_value"))
-                backup_retention_value = long.Parse((string)table["backup_retention_value"]);
+                backup_retention_value = Marshalling.ParseLong(table, "backup_retention_value");
             if (table.ContainsKey("backup_frequency"))
-                backup_frequency = (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), (string)table["backup_frequency"]);
+                backup_frequency = (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), Marshalling.ParseString(table, "backup_frequency"));
             if (table.ContainsKey("backup_schedule"))
-                backup_schedule = Maps.convert_from_proxy_string_string((Hashtable)table["backup_schedule"]);
+                backup_schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "backup_schedule"));
             if (table.ContainsKey("is_backup_running"))
-                is_backup_running = (bool)table["is_backup_running"];
+                is_backup_running = Marshalling.ParseBool(table, "is_backup_running");
             if (table.ContainsKey("backup_last_run_time"))
-                backup_last_run_time = (DateTime)table["backup_last_run_time"];
+                backup_last_run_time = Marshalling.ParseDateTime(table, "backup_last_run_time");
             if (table.ContainsKey("archive_target_type"))
-                archive_target_type = (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), (string)table["archive_target_type"]);
+                archive_target_type = (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), Marshalling.ParseString(table, "archive_target_type"));
             if (table.ContainsKey("archive_target_config"))
-                archive_target_config = Maps.convert_from_proxy_string_string((Hashtable)table["archive_target_config"]);
+                archive_target_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "archive_target_config"));
             if (table.ContainsKey("archive_frequency"))
-                archive_frequency = (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), (string)table["archive_frequency"]);
+                archive_frequency = (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), Marshalling.ParseString(table, "archive_frequency"));
             if (table.ContainsKey("archive_schedule"))
-                archive_schedule = Maps.convert_from_proxy_string_string((Hashtable)table["archive_schedule"]);
+                archive_schedule = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "archive_schedule"));
             if (table.ContainsKey("is_archive_running"))
-                is_archive_running = (bool)table["is_archive_running"];
+                is_archive_running = Marshalling.ParseBool(table, "is_archive_running");
             if (table.ContainsKey("archive_last_run_time"))
-                archive_last_run_time = (DateTime)table["archive_last_run_time"];
+                archive_last_run_time = Marshalling.ParseDateTime(table, "archive_last_run_time");
             if (table.ContainsKey("VMs"))
-                VMs = XenRef<VM>.Create((object[])table["VMs"]);
+                VMs = Marshalling.ParseSetRef<VM>(table, "VMs");
             if (table.ContainsKey("is_alarm_enabled"))
-                is_alarm_enabled = (bool)table["is_alarm_enabled"];
+                is_alarm_enabled = Marshalling.ParseBool(table, "is_alarm_enabled");
             if (table.ContainsKey("alarm_config"))
-                alarm_config = Maps.convert_from_proxy_string_string((Hashtable)table["alarm_config"]);
+                alarm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "alarm_config"));
             if (table.ContainsKey("recent_alerts"))
-                recent_alerts = Array.ConvertAll((object[])table["recent_alerts"], o => o.ToString());
+                recent_alerts = Marshalling.ParseStringArray(table, "recent_alerts");
         }
 
         public bool DeepEquals(VMPP other)
@@ -353,9 +353,9 @@ namespace XenAPI
         public static VMPP get_record(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_record(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_record(session.opaque_ref, _vmpp);
             else
-                return new VMPP((Proxy_VMPP)session.proxy.vmpp_get_record(session.uuid, _vmpp ?? "").parse());
+                return new VMPP((Proxy_VMPP)session.proxy.vmpp_get_record(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -367,9 +367,9 @@ namespace XenAPI
         public static XenRef<VMPP> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.vmpp_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<VMPP>.Create(session.proxy.vmpp_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<VMPP>.Create(session.proxy.vmpp_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -381,9 +381,9 @@ namespace XenAPI
         public static XenRef<VMPP> create(Session session, VMPP _record)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_create(session.uuid, _record);
+                return session.JsonRpcClient.vmpp_create(session.opaque_ref, _record);
             else
-                return XenRef<VMPP>.Create(session.proxy.vmpp_create(session.uuid, _record.ToProxy()).parse());
+                return XenRef<VMPP>.Create(session.proxy.vmpp_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -395,9 +395,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, VMPP _record)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vmpp_create(session.uuid, _record);
+              return session.JsonRpcClient.async_vmpp_create(session.opaque_ref, _record);
           else
-              return XenRef<Task>.Create(session.proxy.async_vmpp_create(session.uuid, _record.ToProxy()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vmpp_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -409,9 +409,9 @@ namespace XenAPI
         public static void destroy(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_destroy(session.uuid, _vmpp);
+                session.JsonRpcClient.vmpp_destroy(session.opaque_ref, _vmpp);
             else
-                session.proxy.vmpp_destroy(session.uuid, _vmpp ?? "").parse();
+                session.proxy.vmpp_destroy(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -423,9 +423,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _vmpp)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vmpp_destroy(session.uuid, _vmpp);
+              return session.JsonRpcClient.async_vmpp_destroy(session.opaque_ref, _vmpp);
           else
-              return XenRef<Task>.Create(session.proxy.async_vmpp_destroy(session.uuid, _vmpp ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vmpp_destroy(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -437,9 +437,9 @@ namespace XenAPI
         public static List<XenRef<VMPP>> get_by_name_label(Session session, string _label)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_by_name_label(session.uuid, _label);
+                return session.JsonRpcClient.vmpp_get_by_name_label(session.opaque_ref, _label);
             else
-                return XenRef<VMPP>.Create(session.proxy.vmpp_get_by_name_label(session.uuid, _label ?? "").parse());
+                return XenRef<VMPP>.Create(session.proxy.vmpp_get_by_name_label(session.opaque_ref, _label ?? "").parse());
         }
 
         /// <summary>
@@ -451,9 +451,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_uuid(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_uuid(session.opaque_ref, _vmpp);
             else
-                return (string)session.proxy.vmpp_get_uuid(session.uuid, _vmpp ?? "").parse();
+                return (string)session.proxy.vmpp_get_uuid(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -465,9 +465,9 @@ namespace XenAPI
         public static string get_name_label(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_name_label(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_name_label(session.opaque_ref, _vmpp);
             else
-                return (string)session.proxy.vmpp_get_name_label(session.uuid, _vmpp ?? "").parse();
+                return (string)session.proxy.vmpp_get_name_label(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -479,9 +479,9 @@ namespace XenAPI
         public static string get_name_description(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_name_description(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_name_description(session.opaque_ref, _vmpp);
             else
-                return (string)session.proxy.vmpp_get_name_description(session.uuid, _vmpp ?? "").parse();
+                return (string)session.proxy.vmpp_get_name_description(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -493,9 +493,9 @@ namespace XenAPI
         public static bool get_is_policy_enabled(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_is_policy_enabled(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_is_policy_enabled(session.opaque_ref, _vmpp);
             else
-                return (bool)session.proxy.vmpp_get_is_policy_enabled(session.uuid, _vmpp ?? "").parse();
+                return (bool)session.proxy.vmpp_get_is_policy_enabled(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -507,9 +507,9 @@ namespace XenAPI
         public static vmpp_backup_type get_backup_type(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_backup_type(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_backup_type(session.opaque_ref, _vmpp);
             else
-                return (vmpp_backup_type)Helper.EnumParseDefault(typeof(vmpp_backup_type), (string)session.proxy.vmpp_get_backup_type(session.uuid, _vmpp ?? "").parse());
+                return (vmpp_backup_type)Helper.EnumParseDefault(typeof(vmpp_backup_type), (string)session.proxy.vmpp_get_backup_type(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -521,9 +521,9 @@ namespace XenAPI
         public static long get_backup_retention_value(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_backup_retention_value(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_backup_retention_value(session.opaque_ref, _vmpp);
             else
-                return long.Parse((string)session.proxy.vmpp_get_backup_retention_value(session.uuid, _vmpp ?? "").parse());
+                return long.Parse((string)session.proxy.vmpp_get_backup_retention_value(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -535,9 +535,9 @@ namespace XenAPI
         public static vmpp_backup_frequency get_backup_frequency(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_backup_frequency(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_backup_frequency(session.opaque_ref, _vmpp);
             else
-                return (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), (string)session.proxy.vmpp_get_backup_frequency(session.uuid, _vmpp ?? "").parse());
+                return (vmpp_backup_frequency)Helper.EnumParseDefault(typeof(vmpp_backup_frequency), (string)session.proxy.vmpp_get_backup_frequency(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -549,9 +549,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_backup_schedule(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_backup_schedule(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_backup_schedule(session.opaque_ref, _vmpp);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_backup_schedule(session.uuid, _vmpp ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_backup_schedule(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -563,9 +563,9 @@ namespace XenAPI
         public static bool get_is_backup_running(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_is_backup_running(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_is_backup_running(session.opaque_ref, _vmpp);
             else
-                return (bool)session.proxy.vmpp_get_is_backup_running(session.uuid, _vmpp ?? "").parse();
+                return (bool)session.proxy.vmpp_get_is_backup_running(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -577,9 +577,9 @@ namespace XenAPI
         public static DateTime get_backup_last_run_time(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_backup_last_run_time(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_backup_last_run_time(session.opaque_ref, _vmpp);
             else
-                return session.proxy.vmpp_get_backup_last_run_time(session.uuid, _vmpp ?? "").parse();
+                return session.proxy.vmpp_get_backup_last_run_time(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -591,9 +591,9 @@ namespace XenAPI
         public static vmpp_archive_target_type get_archive_target_type(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_archive_target_type(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_archive_target_type(session.opaque_ref, _vmpp);
             else
-                return (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), (string)session.proxy.vmpp_get_archive_target_type(session.uuid, _vmpp ?? "").parse());
+                return (vmpp_archive_target_type)Helper.EnumParseDefault(typeof(vmpp_archive_target_type), (string)session.proxy.vmpp_get_archive_target_type(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -605,9 +605,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_archive_target_config(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_archive_target_config(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_archive_target_config(session.opaque_ref, _vmpp);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_archive_target_config(session.uuid, _vmpp ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_archive_target_config(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -619,9 +619,9 @@ namespace XenAPI
         public static vmpp_archive_frequency get_archive_frequency(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_archive_frequency(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_archive_frequency(session.opaque_ref, _vmpp);
             else
-                return (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), (string)session.proxy.vmpp_get_archive_frequency(session.uuid, _vmpp ?? "").parse());
+                return (vmpp_archive_frequency)Helper.EnumParseDefault(typeof(vmpp_archive_frequency), (string)session.proxy.vmpp_get_archive_frequency(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -633,9 +633,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_archive_schedule(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_archive_schedule(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_archive_schedule(session.opaque_ref, _vmpp);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_archive_schedule(session.uuid, _vmpp ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_archive_schedule(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -647,9 +647,9 @@ namespace XenAPI
         public static bool get_is_archive_running(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_is_archive_running(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_is_archive_running(session.opaque_ref, _vmpp);
             else
-                return (bool)session.proxy.vmpp_get_is_archive_running(session.uuid, _vmpp ?? "").parse();
+                return (bool)session.proxy.vmpp_get_is_archive_running(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -661,9 +661,9 @@ namespace XenAPI
         public static DateTime get_archive_last_run_time(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_archive_last_run_time(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_archive_last_run_time(session.opaque_ref, _vmpp);
             else
-                return session.proxy.vmpp_get_archive_last_run_time(session.uuid, _vmpp ?? "").parse();
+                return session.proxy.vmpp_get_archive_last_run_time(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -675,9 +675,9 @@ namespace XenAPI
         public static List<XenRef<VM>> get_VMs(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_vms(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_vms(session.opaque_ref, _vmpp);
             else
-                return XenRef<VM>.Create(session.proxy.vmpp_get_vms(session.uuid, _vmpp ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vmpp_get_vms(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -689,9 +689,9 @@ namespace XenAPI
         public static bool get_is_alarm_enabled(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_is_alarm_enabled(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_is_alarm_enabled(session.opaque_ref, _vmpp);
             else
-                return (bool)session.proxy.vmpp_get_is_alarm_enabled(session.uuid, _vmpp ?? "").parse();
+                return (bool)session.proxy.vmpp_get_is_alarm_enabled(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -703,9 +703,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_alarm_config(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_alarm_config(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_alarm_config(session.opaque_ref, _vmpp);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_alarm_config(session.uuid, _vmpp ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vmpp_get_alarm_config(session.opaque_ref, _vmpp ?? "").parse());
         }
 
         /// <summary>
@@ -717,9 +717,9 @@ namespace XenAPI
         public static string[] get_recent_alerts(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_recent_alerts(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_get_recent_alerts(session.opaque_ref, _vmpp);
             else
-                return (string [])session.proxy.vmpp_get_recent_alerts(session.uuid, _vmpp ?? "").parse();
+                return (string [])session.proxy.vmpp_get_recent_alerts(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -732,9 +732,9 @@ namespace XenAPI
         public static void set_name_label(Session session, string _vmpp, string _label)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_name_label(session.uuid, _vmpp, _label);
+                session.JsonRpcClient.vmpp_set_name_label(session.opaque_ref, _vmpp, _label);
             else
-                session.proxy.vmpp_set_name_label(session.uuid, _vmpp ?? "", _label ?? "").parse();
+                session.proxy.vmpp_set_name_label(session.opaque_ref, _vmpp ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -747,9 +747,9 @@ namespace XenAPI
         public static void set_name_description(Session session, string _vmpp, string _description)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_name_description(session.uuid, _vmpp, _description);
+                session.JsonRpcClient.vmpp_set_name_description(session.opaque_ref, _vmpp, _description);
             else
-                session.proxy.vmpp_set_name_description(session.uuid, _vmpp ?? "", _description ?? "").parse();
+                session.proxy.vmpp_set_name_description(session.opaque_ref, _vmpp ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -762,9 +762,9 @@ namespace XenAPI
         public static void set_is_policy_enabled(Session session, string _vmpp, bool _is_policy_enabled)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_is_policy_enabled(session.uuid, _vmpp, _is_policy_enabled);
+                session.JsonRpcClient.vmpp_set_is_policy_enabled(session.opaque_ref, _vmpp, _is_policy_enabled);
             else
-                session.proxy.vmpp_set_is_policy_enabled(session.uuid, _vmpp ?? "", _is_policy_enabled).parse();
+                session.proxy.vmpp_set_is_policy_enabled(session.opaque_ref, _vmpp ?? "", _is_policy_enabled).parse();
         }
 
         /// <summary>
@@ -777,9 +777,9 @@ namespace XenAPI
         public static void set_backup_type(Session session, string _vmpp, vmpp_backup_type _backup_type)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_backup_type(session.uuid, _vmpp, _backup_type);
+                session.JsonRpcClient.vmpp_set_backup_type(session.opaque_ref, _vmpp, _backup_type);
             else
-                session.proxy.vmpp_set_backup_type(session.uuid, _vmpp ?? "", vmpp_backup_type_helper.ToString(_backup_type)).parse();
+                session.proxy.vmpp_set_backup_type(session.opaque_ref, _vmpp ?? "", vmpp_backup_type_helper.ToString(_backup_type)).parse();
         }
 
         /// <summary>
@@ -791,9 +791,9 @@ namespace XenAPI
         public static string protect_now(Session session, string _vmpp)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_protect_now(session.uuid, _vmpp);
+                return session.JsonRpcClient.vmpp_protect_now(session.opaque_ref, _vmpp);
             else
-                return (string)session.proxy.vmpp_protect_now(session.uuid, _vmpp ?? "").parse();
+                return (string)session.proxy.vmpp_protect_now(session.opaque_ref, _vmpp ?? "").parse();
         }
 
         /// <summary>
@@ -805,9 +805,9 @@ namespace XenAPI
         public static string archive_now(Session session, string _snapshot)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_archive_now(session.uuid, _snapshot);
+                return session.JsonRpcClient.vmpp_archive_now(session.opaque_ref, _snapshot);
             else
-                return (string)session.proxy.vmpp_archive_now(session.uuid, _snapshot ?? "").parse();
+                return (string)session.proxy.vmpp_archive_now(session.opaque_ref, _snapshot ?? "").parse();
         }
 
         /// <summary>
@@ -820,9 +820,9 @@ namespace XenAPI
         public static string[] get_alerts(Session session, string _vmpp, long _hours_from_now)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_alerts(session.uuid, _vmpp, _hours_from_now);
+                return session.JsonRpcClient.vmpp_get_alerts(session.opaque_ref, _vmpp, _hours_from_now);
             else
-                return (string [])session.proxy.vmpp_get_alerts(session.uuid, _vmpp ?? "", _hours_from_now.ToString()).parse();
+                return (string [])session.proxy.vmpp_get_alerts(session.opaque_ref, _vmpp ?? "", _hours_from_now.ToString()).parse();
         }
 
         /// <summary>
@@ -835,9 +835,9 @@ namespace XenAPI
         public static void set_backup_retention_value(Session session, string _vmpp, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_backup_retention_value(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_backup_retention_value(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_backup_retention_value(session.uuid, _vmpp ?? "", _value.ToString()).parse();
+                session.proxy.vmpp_set_backup_retention_value(session.opaque_ref, _vmpp ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -850,9 +850,9 @@ namespace XenAPI
         public static void set_backup_frequency(Session session, string _vmpp, vmpp_backup_frequency _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_backup_frequency(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_backup_frequency(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_backup_frequency(session.uuid, _vmpp ?? "", vmpp_backup_frequency_helper.ToString(_value)).parse();
+                session.proxy.vmpp_set_backup_frequency(session.opaque_ref, _vmpp ?? "", vmpp_backup_frequency_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -865,9 +865,9 @@ namespace XenAPI
         public static void set_backup_schedule(Session session, string _vmpp, Dictionary<string, string> _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_backup_schedule(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_backup_schedule(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_backup_schedule(session.uuid, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
+                session.proxy.vmpp_set_backup_schedule(session.opaque_ref, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -880,9 +880,9 @@ namespace XenAPI
         public static void set_archive_frequency(Session session, string _vmpp, vmpp_archive_frequency _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_archive_frequency(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_archive_frequency(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_archive_frequency(session.uuid, _vmpp ?? "", vmpp_archive_frequency_helper.ToString(_value)).parse();
+                session.proxy.vmpp_set_archive_frequency(session.opaque_ref, _vmpp ?? "", vmpp_archive_frequency_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -895,9 +895,9 @@ namespace XenAPI
         public static void set_archive_schedule(Session session, string _vmpp, Dictionary<string, string> _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_archive_schedule(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_archive_schedule(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_archive_schedule(session.uuid, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
+                session.proxy.vmpp_set_archive_schedule(session.opaque_ref, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -910,9 +910,9 @@ namespace XenAPI
         public static void set_archive_target_type(Session session, string _vmpp, vmpp_archive_target_type _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_archive_target_type(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_archive_target_type(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_archive_target_type(session.uuid, _vmpp ?? "", vmpp_archive_target_type_helper.ToString(_value)).parse();
+                session.proxy.vmpp_set_archive_target_type(session.opaque_ref, _vmpp ?? "", vmpp_archive_target_type_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -925,9 +925,9 @@ namespace XenAPI
         public static void set_archive_target_config(Session session, string _vmpp, Dictionary<string, string> _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_archive_target_config(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_archive_target_config(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_archive_target_config(session.uuid, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
+                session.proxy.vmpp_set_archive_target_config(session.opaque_ref, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -940,9 +940,9 @@ namespace XenAPI
         public static void set_is_alarm_enabled(Session session, string _vmpp, bool _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_is_alarm_enabled(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_is_alarm_enabled(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_is_alarm_enabled(session.uuid, _vmpp ?? "", _value).parse();
+                session.proxy.vmpp_set_is_alarm_enabled(session.opaque_ref, _vmpp ?? "", _value).parse();
         }
 
         /// <summary>
@@ -955,9 +955,9 @@ namespace XenAPI
         public static void set_alarm_config(Session session, string _vmpp, Dictionary<string, string> _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_alarm_config(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_alarm_config(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_alarm_config(session.uuid, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
+                session.proxy.vmpp_set_alarm_config(session.opaque_ref, _vmpp ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -971,9 +971,9 @@ namespace XenAPI
         public static void add_to_backup_schedule(Session session, string _vmpp, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_add_to_backup_schedule(session.uuid, _vmpp, _key, _value);
+                session.JsonRpcClient.vmpp_add_to_backup_schedule(session.opaque_ref, _vmpp, _key, _value);
             else
-                session.proxy.vmpp_add_to_backup_schedule(session.uuid, _vmpp ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vmpp_add_to_backup_schedule(session.opaque_ref, _vmpp ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -987,9 +987,9 @@ namespace XenAPI
         public static void add_to_archive_target_config(Session session, string _vmpp, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_add_to_archive_target_config(session.uuid, _vmpp, _key, _value);
+                session.JsonRpcClient.vmpp_add_to_archive_target_config(session.opaque_ref, _vmpp, _key, _value);
             else
-                session.proxy.vmpp_add_to_archive_target_config(session.uuid, _vmpp ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vmpp_add_to_archive_target_config(session.opaque_ref, _vmpp ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1003,9 +1003,9 @@ namespace XenAPI
         public static void add_to_archive_schedule(Session session, string _vmpp, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_add_to_archive_schedule(session.uuid, _vmpp, _key, _value);
+                session.JsonRpcClient.vmpp_add_to_archive_schedule(session.opaque_ref, _vmpp, _key, _value);
             else
-                session.proxy.vmpp_add_to_archive_schedule(session.uuid, _vmpp ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vmpp_add_to_archive_schedule(session.opaque_ref, _vmpp ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1019,9 +1019,9 @@ namespace XenAPI
         public static void add_to_alarm_config(Session session, string _vmpp, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_add_to_alarm_config(session.uuid, _vmpp, _key, _value);
+                session.JsonRpcClient.vmpp_add_to_alarm_config(session.opaque_ref, _vmpp, _key, _value);
             else
-                session.proxy.vmpp_add_to_alarm_config(session.uuid, _vmpp ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vmpp_add_to_alarm_config(session.opaque_ref, _vmpp ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1034,9 +1034,9 @@ namespace XenAPI
         public static void remove_from_backup_schedule(Session session, string _vmpp, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_remove_from_backup_schedule(session.uuid, _vmpp, _key);
+                session.JsonRpcClient.vmpp_remove_from_backup_schedule(session.opaque_ref, _vmpp, _key);
             else
-                session.proxy.vmpp_remove_from_backup_schedule(session.uuid, _vmpp ?? "", _key ?? "").parse();
+                session.proxy.vmpp_remove_from_backup_schedule(session.opaque_ref, _vmpp ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -1049,9 +1049,9 @@ namespace XenAPI
         public static void remove_from_archive_target_config(Session session, string _vmpp, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_remove_from_archive_target_config(session.uuid, _vmpp, _key);
+                session.JsonRpcClient.vmpp_remove_from_archive_target_config(session.opaque_ref, _vmpp, _key);
             else
-                session.proxy.vmpp_remove_from_archive_target_config(session.uuid, _vmpp ?? "", _key ?? "").parse();
+                session.proxy.vmpp_remove_from_archive_target_config(session.opaque_ref, _vmpp ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -1064,9 +1064,9 @@ namespace XenAPI
         public static void remove_from_archive_schedule(Session session, string _vmpp, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_remove_from_archive_schedule(session.uuid, _vmpp, _key);
+                session.JsonRpcClient.vmpp_remove_from_archive_schedule(session.opaque_ref, _vmpp, _key);
             else
-                session.proxy.vmpp_remove_from_archive_schedule(session.uuid, _vmpp ?? "", _key ?? "").parse();
+                session.proxy.vmpp_remove_from_archive_schedule(session.opaque_ref, _vmpp ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -1079,9 +1079,9 @@ namespace XenAPI
         public static void remove_from_alarm_config(Session session, string _vmpp, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_remove_from_alarm_config(session.uuid, _vmpp, _key);
+                session.JsonRpcClient.vmpp_remove_from_alarm_config(session.opaque_ref, _vmpp, _key);
             else
-                session.proxy.vmpp_remove_from_alarm_config(session.uuid, _vmpp ?? "", _key ?? "").parse();
+                session.proxy.vmpp_remove_from_alarm_config(session.opaque_ref, _vmpp ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -1094,9 +1094,9 @@ namespace XenAPI
         public static void set_backup_last_run_time(Session session, string _vmpp, DateTime _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_backup_last_run_time(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_backup_last_run_time(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_backup_last_run_time(session.uuid, _vmpp ?? "", _value).parse();
+                session.proxy.vmpp_set_backup_last_run_time(session.opaque_ref, _vmpp ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1109,9 +1109,9 @@ namespace XenAPI
         public static void set_archive_last_run_time(Session session, string _vmpp, DateTime _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vmpp_set_archive_last_run_time(session.uuid, _vmpp, _value);
+                session.JsonRpcClient.vmpp_set_archive_last_run_time(session.opaque_ref, _vmpp, _value);
             else
-                session.proxy.vmpp_set_archive_last_run_time(session.uuid, _vmpp ?? "", _value).parse();
+                session.proxy.vmpp_set_archive_last_run_time(session.opaque_ref, _vmpp ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1122,9 +1122,9 @@ namespace XenAPI
         public static List<XenRef<VMPP>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_all(session.uuid);
+                return session.JsonRpcClient.vmpp_get_all(session.opaque_ref);
             else
-                return XenRef<VMPP>.Create(session.proxy.vmpp_get_all(session.uuid).parse());
+                return XenRef<VMPP>.Create(session.proxy.vmpp_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -1135,9 +1135,9 @@ namespace XenAPI
         public static Dictionary<XenRef<VMPP>, VMPP> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vmpp_get_all_records(session.uuid);
+                return session.JsonRpcClient.vmpp_get_all_records(session.opaque_ref);
             else
-                return XenRef<VMPP>.Create<Proxy_VMPP>(session.proxy.vmpp_get_all_records(session.uuid).parse());
+                return XenRef<VMPP>.Create<Proxy_VMPP>(session.proxy.vmpp_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>

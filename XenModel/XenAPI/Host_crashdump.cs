@@ -125,15 +125,15 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
+                uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("host"))
-                host = XenRef<Host>.Create((string)table["host"]);
+                host = Marshalling.ParseRef<Host>(table, "host");
             if (table.ContainsKey("timestamp"))
-                timestamp = (DateTime)table["timestamp"];
+                timestamp = Marshalling.ParseDateTime(table, "timestamp");
             if (table.ContainsKey("size"))
-                size = long.Parse((string)table["size"]);
+                size = Marshalling.ParseLong(table, "size");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(Host_crashdump other)
@@ -185,9 +185,9 @@ namespace XenAPI
         public static Host_crashdump get_record(Session session, string _host_crashdump)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_record(session.uuid, _host_crashdump);
+                return session.JsonRpcClient.host_crashdump_get_record(session.opaque_ref, _host_crashdump);
             else
-                return new Host_crashdump((Proxy_Host_crashdump)session.proxy.host_crashdump_get_record(session.uuid, _host_crashdump ?? "").parse());
+                return new Host_crashdump((Proxy_Host_crashdump)session.proxy.host_crashdump_get_record(session.opaque_ref, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -199,9 +199,9 @@ namespace XenAPI
         public static XenRef<Host_crashdump> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.host_crashdump_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<Host_crashdump>.Create(session.proxy.host_crashdump_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<Host_crashdump>.Create(session.proxy.host_crashdump_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -213,9 +213,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _host_crashdump)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_uuid(session.uuid, _host_crashdump);
+                return session.JsonRpcClient.host_crashdump_get_uuid(session.opaque_ref, _host_crashdump);
             else
-                return (string)session.proxy.host_crashdump_get_uuid(session.uuid, _host_crashdump ?? "").parse();
+                return (string)session.proxy.host_crashdump_get_uuid(session.opaque_ref, _host_crashdump ?? "").parse();
         }
 
         /// <summary>
@@ -227,9 +227,9 @@ namespace XenAPI
         public static XenRef<Host> get_host(Session session, string _host_crashdump)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_host(session.uuid, _host_crashdump);
+                return session.JsonRpcClient.host_crashdump_get_host(session.opaque_ref, _host_crashdump);
             else
-                return XenRef<Host>.Create(session.proxy.host_crashdump_get_host(session.uuid, _host_crashdump ?? "").parse());
+                return XenRef<Host>.Create(session.proxy.host_crashdump_get_host(session.opaque_ref, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -241,9 +241,9 @@ namespace XenAPI
         public static DateTime get_timestamp(Session session, string _host_crashdump)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_timestamp(session.uuid, _host_crashdump);
+                return session.JsonRpcClient.host_crashdump_get_timestamp(session.opaque_ref, _host_crashdump);
             else
-                return session.proxy.host_crashdump_get_timestamp(session.uuid, _host_crashdump ?? "").parse();
+                return session.proxy.host_crashdump_get_timestamp(session.opaque_ref, _host_crashdump ?? "").parse();
         }
 
         /// <summary>
@@ -255,9 +255,9 @@ namespace XenAPI
         public static long get_size(Session session, string _host_crashdump)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_size(session.uuid, _host_crashdump);
+                return session.JsonRpcClient.host_crashdump_get_size(session.opaque_ref, _host_crashdump);
             else
-                return long.Parse((string)session.proxy.host_crashdump_get_size(session.uuid, _host_crashdump ?? "").parse());
+                return long.Parse((string)session.proxy.host_crashdump_get_size(session.opaque_ref, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -269,9 +269,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _host_crashdump)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_other_config(session.uuid, _host_crashdump);
+                return session.JsonRpcClient.host_crashdump_get_other_config(session.opaque_ref, _host_crashdump);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.host_crashdump_get_other_config(session.uuid, _host_crashdump ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.host_crashdump_get_other_config(session.opaque_ref, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -284,9 +284,9 @@ namespace XenAPI
         public static void set_other_config(Session session, string _host_crashdump, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_crashdump_set_other_config(session.uuid, _host_crashdump, _other_config);
+                session.JsonRpcClient.host_crashdump_set_other_config(session.opaque_ref, _host_crashdump, _other_config);
             else
-                session.proxy.host_crashdump_set_other_config(session.uuid, _host_crashdump ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+                session.proxy.host_crashdump_set_other_config(session.opaque_ref, _host_crashdump ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -300,9 +300,9 @@ namespace XenAPI
         public static void add_to_other_config(Session session, string _host_crashdump, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_crashdump_add_to_other_config(session.uuid, _host_crashdump, _key, _value);
+                session.JsonRpcClient.host_crashdump_add_to_other_config(session.opaque_ref, _host_crashdump, _key, _value);
             else
-                session.proxy.host_crashdump_add_to_other_config(session.uuid, _host_crashdump ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.host_crashdump_add_to_other_config(session.opaque_ref, _host_crashdump ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -315,9 +315,9 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _host_crashdump, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_crashdump_remove_from_other_config(session.uuid, _host_crashdump, _key);
+                session.JsonRpcClient.host_crashdump_remove_from_other_config(session.opaque_ref, _host_crashdump, _key);
             else
-                session.proxy.host_crashdump_remove_from_other_config(session.uuid, _host_crashdump ?? "", _key ?? "").parse();
+                session.proxy.host_crashdump_remove_from_other_config(session.opaque_ref, _host_crashdump ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -329,9 +329,9 @@ namespace XenAPI
         public static void destroy(Session session, string _host_crashdump)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_crashdump_destroy(session.uuid, _host_crashdump);
+                session.JsonRpcClient.host_crashdump_destroy(session.opaque_ref, _host_crashdump);
             else
-                session.proxy.host_crashdump_destroy(session.uuid, _host_crashdump ?? "").parse();
+                session.proxy.host_crashdump_destroy(session.opaque_ref, _host_crashdump ?? "").parse();
         }
 
         /// <summary>
@@ -343,9 +343,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _host_crashdump)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_host_crashdump_destroy(session.uuid, _host_crashdump);
+              return session.JsonRpcClient.async_host_crashdump_destroy(session.opaque_ref, _host_crashdump);
           else
-              return XenRef<Task>.Create(session.proxy.async_host_crashdump_destroy(session.uuid, _host_crashdump ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_host_crashdump_destroy(session.opaque_ref, _host_crashdump ?? "").parse());
         }
 
         /// <summary>
@@ -359,9 +359,9 @@ namespace XenAPI
         public static void upload(Session session, string _host_crashdump, string _url, Dictionary<string, string> _options)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.host_crashdump_upload(session.uuid, _host_crashdump, _url, _options);
+                session.JsonRpcClient.host_crashdump_upload(session.opaque_ref, _host_crashdump, _url, _options);
             else
-                session.proxy.host_crashdump_upload(session.uuid, _host_crashdump ?? "", _url ?? "", Maps.convert_to_proxy_string_string(_options)).parse();
+                session.proxy.host_crashdump_upload(session.opaque_ref, _host_crashdump ?? "", _url ?? "", Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
         /// <summary>
@@ -375,9 +375,9 @@ namespace XenAPI
         public static XenRef<Task> async_upload(Session session, string _host_crashdump, string _url, Dictionary<string, string> _options)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_host_crashdump_upload(session.uuid, _host_crashdump, _url, _options);
+              return session.JsonRpcClient.async_host_crashdump_upload(session.opaque_ref, _host_crashdump, _url, _options);
           else
-              return XenRef<Task>.Create(session.proxy.async_host_crashdump_upload(session.uuid, _host_crashdump ?? "", _url ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
+              return XenRef<Task>.Create(session.proxy.async_host_crashdump_upload(session.opaque_ref, _host_crashdump ?? "", _url ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -388,9 +388,9 @@ namespace XenAPI
         public static List<XenRef<Host_crashdump>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_all(session.uuid);
+                return session.JsonRpcClient.host_crashdump_get_all(session.opaque_ref);
             else
-                return XenRef<Host_crashdump>.Create(session.proxy.host_crashdump_get_all(session.uuid).parse());
+                return XenRef<Host_crashdump>.Create(session.proxy.host_crashdump_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -401,9 +401,9 @@ namespace XenAPI
         public static Dictionary<XenRef<Host_crashdump>, Host_crashdump> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.host_crashdump_get_all_records(session.uuid);
+                return session.JsonRpcClient.host_crashdump_get_all_records(session.opaque_ref);
             else
-                return XenRef<Host_crashdump>.Create<Proxy_Host_crashdump>(session.proxy.host_crashdump_get_all_records(session.uuid).parse());
+                return XenRef<Host_crashdump>.Create<Proxy_Host_crashdump>(session.proxy.host_crashdump_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>

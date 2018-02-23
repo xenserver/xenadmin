@@ -125,15 +125,15 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("exportname"))
-                exportname = (string)table["exportname"];
+                exportname = Marshalling.ParseString(table, "exportname");
             if (table.ContainsKey("address"))
-                address = (string)table["address"];
+                address = Marshalling.ParseString(table, "address");
             if (table.ContainsKey("port"))
-                port = long.Parse((string)table["port"]);
+                port = Marshalling.ParseLong(table, "port");
             if (table.ContainsKey("cert"))
-                cert = (string)table["cert"];
+                cert = Marshalling.ParseString(table, "cert");
             if (table.ContainsKey("subject"))
-                subject = (string)table["subject"];
+                subject = Marshalling.ParseString(table, "subject");
         }
 
         public bool DeepEquals(Vdi_nbd_server_info other)

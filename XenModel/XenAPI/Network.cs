@@ -180,37 +180,37 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
+                uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("name_label"))
-                name_label = (string)table["name_label"];
+                name_label = Marshalling.ParseString(table, "name_label");
             if (table.ContainsKey("name_description"))
-                name_description = (string)table["name_description"];
+                name_description = Marshalling.ParseString(table, "name_description");
             if (table.ContainsKey("allowed_operations"))
-                allowed_operations = Helper.StringArrayToEnumList<network_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+                allowed_operations = Helper.StringArrayToEnumList<network_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_network_operations((Hashtable)table["current_operations"]);
+                current_operations = Maps.convert_from_proxy_string_network_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("VIFs"))
-                VIFs = XenRef<VIF>.Create((object[])table["VIFs"]);
+                VIFs = Marshalling.ParseSetRef<VIF>(table, "VIFs");
             if (table.ContainsKey("PIFs"))
-                PIFs = XenRef<PIF>.Create((object[])table["PIFs"]);
+                PIFs = Marshalling.ParseSetRef<PIF>(table, "PIFs");
             if (table.ContainsKey("MTU"))
-                MTU = long.Parse((string)table["MTU"]);
+                MTU = Marshalling.ParseLong(table, "MTU");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("bridge"))
-                bridge = (string)table["bridge"];
+                bridge = Marshalling.ParseString(table, "bridge");
             if (table.ContainsKey("managed"))
-                managed = (bool)table["managed"];
+                managed = Marshalling.ParseBool(table, "managed");
             if (table.ContainsKey("blobs"))
-                blobs = Maps.convert_from_proxy_string_XenRefBlob((Hashtable)table["blobs"]);
+                blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             if (table.ContainsKey("tags"))
-                tags = Array.ConvertAll((object[])table["tags"], o => o.ToString());
+                tags = Marshalling.ParseStringArray(table, "tags");
             if (table.ContainsKey("default_locking_mode"))
-                default_locking_mode = (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)table["default_locking_mode"]);
+                default_locking_mode = (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), Marshalling.ParseString(table, "default_locking_mode"));
             if (table.ContainsKey("assigned_ips"))
-                assigned_ips = Maps.convert_from_proxy_XenRefVIF_string((Hashtable)table["assigned_ips"]);
+                assigned_ips = Maps.convert_from_proxy_XenRefVIF_string(Marshalling.ParseHashTable(table, "assigned_ips"));
             if (table.ContainsKey("purpose"))
-                purpose = Helper.StringArrayToEnumList<network_purpose>(Array.ConvertAll((object[])table["purpose"], o => o.ToString()));
+                purpose = Helper.StringArrayToEnumList<network_purpose>(Marshalling.ParseStringArray(table, "purpose"));
         }
 
         public bool DeepEquals(Network other, bool ignoreCurrentOperations)
@@ -291,9 +291,9 @@ namespace XenAPI
         public static Network get_record(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_record(session.uuid, _network);
+                return session.JsonRpcClient.network_get_record(session.opaque_ref, _network);
             else
-                return new Network((Proxy_Network)session.proxy.network_get_record(session.uuid, _network ?? "").parse());
+                return new Network((Proxy_Network)session.proxy.network_get_record(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -305,9 +305,9 @@ namespace XenAPI
         public static XenRef<Network> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.network_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<Network>.Create(session.proxy.network_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<Network>.Create(session.proxy.network_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -319,9 +319,9 @@ namespace XenAPI
         public static XenRef<Network> create(Session session, Network _record)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_create(session.uuid, _record);
+                return session.JsonRpcClient.network_create(session.opaque_ref, _record);
             else
-                return XenRef<Network>.Create(session.proxy.network_create(session.uuid, _record.ToProxy()).parse());
+                return XenRef<Network>.Create(session.proxy.network_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -333,9 +333,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, Network _record)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_create(session.uuid, _record);
+              return session.JsonRpcClient.async_network_create(session.opaque_ref, _record);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_create(session.uuid, _record.ToProxy()).parse());
+              return XenRef<Task>.Create(session.proxy.async_network_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -347,9 +347,9 @@ namespace XenAPI
         public static void destroy(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_destroy(session.uuid, _network);
+                session.JsonRpcClient.network_destroy(session.opaque_ref, _network);
             else
-                session.proxy.network_destroy(session.uuid, _network ?? "").parse();
+                session.proxy.network_destroy(session.opaque_ref, _network ?? "").parse();
         }
 
         /// <summary>
@@ -361,9 +361,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _network)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_destroy(session.uuid, _network);
+              return session.JsonRpcClient.async_network_destroy(session.opaque_ref, _network);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_destroy(session.uuid, _network ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_network_destroy(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -375,9 +375,9 @@ namespace XenAPI
         public static List<XenRef<Network>> get_by_name_label(Session session, string _label)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_by_name_label(session.uuid, _label);
+                return session.JsonRpcClient.network_get_by_name_label(session.opaque_ref, _label);
             else
-                return XenRef<Network>.Create(session.proxy.network_get_by_name_label(session.uuid, _label ?? "").parse());
+                return XenRef<Network>.Create(session.proxy.network_get_by_name_label(session.opaque_ref, _label ?? "").parse());
         }
 
         /// <summary>
@@ -389,9 +389,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_uuid(session.uuid, _network);
+                return session.JsonRpcClient.network_get_uuid(session.opaque_ref, _network);
             else
-                return (string)session.proxy.network_get_uuid(session.uuid, _network ?? "").parse();
+                return (string)session.proxy.network_get_uuid(session.opaque_ref, _network ?? "").parse();
         }
 
         /// <summary>
@@ -403,9 +403,9 @@ namespace XenAPI
         public static string get_name_label(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_name_label(session.uuid, _network);
+                return session.JsonRpcClient.network_get_name_label(session.opaque_ref, _network);
             else
-                return (string)session.proxy.network_get_name_label(session.uuid, _network ?? "").parse();
+                return (string)session.proxy.network_get_name_label(session.opaque_ref, _network ?? "").parse();
         }
 
         /// <summary>
@@ -417,9 +417,9 @@ namespace XenAPI
         public static string get_name_description(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_name_description(session.uuid, _network);
+                return session.JsonRpcClient.network_get_name_description(session.opaque_ref, _network);
             else
-                return (string)session.proxy.network_get_name_description(session.uuid, _network ?? "").parse();
+                return (string)session.proxy.network_get_name_description(session.opaque_ref, _network ?? "").parse();
         }
 
         /// <summary>
@@ -431,9 +431,9 @@ namespace XenAPI
         public static List<network_operations> get_allowed_operations(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_allowed_operations(session.uuid, _network);
+                return session.JsonRpcClient.network_get_allowed_operations(session.opaque_ref, _network);
             else
-                return Helper.StringArrayToEnumList<network_operations>(session.proxy.network_get_allowed_operations(session.uuid, _network ?? "").parse());
+                return Helper.StringArrayToEnumList<network_operations>(session.proxy.network_get_allowed_operations(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -445,9 +445,9 @@ namespace XenAPI
         public static Dictionary<string, network_operations> get_current_operations(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_current_operations(session.uuid, _network);
+                return session.JsonRpcClient.network_get_current_operations(session.opaque_ref, _network);
             else
-                return Maps.convert_from_proxy_string_network_operations(session.proxy.network_get_current_operations(session.uuid, _network ?? "").parse());
+                return Maps.convert_from_proxy_string_network_operations(session.proxy.network_get_current_operations(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -459,9 +459,9 @@ namespace XenAPI
         public static List<XenRef<VIF>> get_VIFs(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_vifs(session.uuid, _network);
+                return session.JsonRpcClient.network_get_vifs(session.opaque_ref, _network);
             else
-                return XenRef<VIF>.Create(session.proxy.network_get_vifs(session.uuid, _network ?? "").parse());
+                return XenRef<VIF>.Create(session.proxy.network_get_vifs(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -473,9 +473,9 @@ namespace XenAPI
         public static List<XenRef<PIF>> get_PIFs(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_pifs(session.uuid, _network);
+                return session.JsonRpcClient.network_get_pifs(session.opaque_ref, _network);
             else
-                return XenRef<PIF>.Create(session.proxy.network_get_pifs(session.uuid, _network ?? "").parse());
+                return XenRef<PIF>.Create(session.proxy.network_get_pifs(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -487,9 +487,9 @@ namespace XenAPI
         public static long get_MTU(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_mtu(session.uuid, _network);
+                return session.JsonRpcClient.network_get_mtu(session.opaque_ref, _network);
             else
-                return long.Parse((string)session.proxy.network_get_mtu(session.uuid, _network ?? "").parse());
+                return long.Parse((string)session.proxy.network_get_mtu(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -501,9 +501,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_other_config(session.uuid, _network);
+                return session.JsonRpcClient.network_get_other_config(session.opaque_ref, _network);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.network_get_other_config(session.uuid, _network ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.network_get_other_config(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -515,9 +515,9 @@ namespace XenAPI
         public static string get_bridge(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_bridge(session.uuid, _network);
+                return session.JsonRpcClient.network_get_bridge(session.opaque_ref, _network);
             else
-                return (string)session.proxy.network_get_bridge(session.uuid, _network ?? "").parse();
+                return (string)session.proxy.network_get_bridge(session.opaque_ref, _network ?? "").parse();
         }
 
         /// <summary>
@@ -529,9 +529,9 @@ namespace XenAPI
         public static bool get_managed(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_managed(session.uuid, _network);
+                return session.JsonRpcClient.network_get_managed(session.opaque_ref, _network);
             else
-                return (bool)session.proxy.network_get_managed(session.uuid, _network ?? "").parse();
+                return (bool)session.proxy.network_get_managed(session.opaque_ref, _network ?? "").parse();
         }
 
         /// <summary>
@@ -543,9 +543,9 @@ namespace XenAPI
         public static Dictionary<string, XenRef<Blob>> get_blobs(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_blobs(session.uuid, _network);
+                return session.JsonRpcClient.network_get_blobs(session.opaque_ref, _network);
             else
-                return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.network_get_blobs(session.uuid, _network ?? "").parse());
+                return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.network_get_blobs(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -557,9 +557,9 @@ namespace XenAPI
         public static string[] get_tags(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_tags(session.uuid, _network);
+                return session.JsonRpcClient.network_get_tags(session.opaque_ref, _network);
             else
-                return (string [])session.proxy.network_get_tags(session.uuid, _network ?? "").parse();
+                return (string [])session.proxy.network_get_tags(session.opaque_ref, _network ?? "").parse();
         }
 
         /// <summary>
@@ -571,9 +571,9 @@ namespace XenAPI
         public static network_default_locking_mode get_default_locking_mode(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_default_locking_mode(session.uuid, _network);
+                return session.JsonRpcClient.network_get_default_locking_mode(session.opaque_ref, _network);
             else
-                return (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)session.proxy.network_get_default_locking_mode(session.uuid, _network ?? "").parse());
+                return (network_default_locking_mode)Helper.EnumParseDefault(typeof(network_default_locking_mode), (string)session.proxy.network_get_default_locking_mode(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -585,9 +585,9 @@ namespace XenAPI
         public static Dictionary<XenRef<VIF>, string> get_assigned_ips(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_assigned_ips(session.uuid, _network);
+                return session.JsonRpcClient.network_get_assigned_ips(session.opaque_ref, _network);
             else
-                return Maps.convert_from_proxy_XenRefVIF_string(session.proxy.network_get_assigned_ips(session.uuid, _network ?? "").parse());
+                return Maps.convert_from_proxy_XenRefVIF_string(session.proxy.network_get_assigned_ips(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -599,9 +599,9 @@ namespace XenAPI
         public static List<network_purpose> get_purpose(Session session, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_purpose(session.uuid, _network);
+                return session.JsonRpcClient.network_get_purpose(session.opaque_ref, _network);
             else
-                return Helper.StringArrayToEnumList<network_purpose>(session.proxy.network_get_purpose(session.uuid, _network ?? "").parse());
+                return Helper.StringArrayToEnumList<network_purpose>(session.proxy.network_get_purpose(session.opaque_ref, _network ?? "").parse());
         }
 
         /// <summary>
@@ -614,9 +614,9 @@ namespace XenAPI
         public static void set_name_label(Session session, string _network, string _label)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_set_name_label(session.uuid, _network, _label);
+                session.JsonRpcClient.network_set_name_label(session.opaque_ref, _network, _label);
             else
-                session.proxy.network_set_name_label(session.uuid, _network ?? "", _label ?? "").parse();
+                session.proxy.network_set_name_label(session.opaque_ref, _network ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -629,9 +629,9 @@ namespace XenAPI
         public static void set_name_description(Session session, string _network, string _description)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_set_name_description(session.uuid, _network, _description);
+                session.JsonRpcClient.network_set_name_description(session.opaque_ref, _network, _description);
             else
-                session.proxy.network_set_name_description(session.uuid, _network ?? "", _description ?? "").parse();
+                session.proxy.network_set_name_description(session.opaque_ref, _network ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -644,9 +644,9 @@ namespace XenAPI
         public static void set_MTU(Session session, string _network, long _mtu)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_set_mtu(session.uuid, _network, _mtu);
+                session.JsonRpcClient.network_set_mtu(session.opaque_ref, _network, _mtu);
             else
-                session.proxy.network_set_mtu(session.uuid, _network ?? "", _mtu.ToString()).parse();
+                session.proxy.network_set_mtu(session.opaque_ref, _network ?? "", _mtu.ToString()).parse();
         }
 
         /// <summary>
@@ -659,9 +659,9 @@ namespace XenAPI
         public static void set_other_config(Session session, string _network, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_set_other_config(session.uuid, _network, _other_config);
+                session.JsonRpcClient.network_set_other_config(session.opaque_ref, _network, _other_config);
             else
-                session.proxy.network_set_other_config(session.uuid, _network ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+                session.proxy.network_set_other_config(session.opaque_ref, _network ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -675,9 +675,9 @@ namespace XenAPI
         public static void add_to_other_config(Session session, string _network, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_add_to_other_config(session.uuid, _network, _key, _value);
+                session.JsonRpcClient.network_add_to_other_config(session.opaque_ref, _network, _key, _value);
             else
-                session.proxy.network_add_to_other_config(session.uuid, _network ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.network_add_to_other_config(session.opaque_ref, _network ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -690,9 +690,9 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _network, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_remove_from_other_config(session.uuid, _network, _key);
+                session.JsonRpcClient.network_remove_from_other_config(session.opaque_ref, _network, _key);
             else
-                session.proxy.network_remove_from_other_config(session.uuid, _network ?? "", _key ?? "").parse();
+                session.proxy.network_remove_from_other_config(session.opaque_ref, _network ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -705,9 +705,9 @@ namespace XenAPI
         public static void set_tags(Session session, string _network, string[] _tags)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_set_tags(session.uuid, _network, _tags);
+                session.JsonRpcClient.network_set_tags(session.opaque_ref, _network, _tags);
             else
-                session.proxy.network_set_tags(session.uuid, _network ?? "", _tags).parse();
+                session.proxy.network_set_tags(session.opaque_ref, _network ?? "", _tags).parse();
         }
 
         /// <summary>
@@ -720,9 +720,9 @@ namespace XenAPI
         public static void add_tags(Session session, string _network, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_add_tags(session.uuid, _network, _value);
+                session.JsonRpcClient.network_add_tags(session.opaque_ref, _network, _value);
             else
-                session.proxy.network_add_tags(session.uuid, _network ?? "", _value ?? "").parse();
+                session.proxy.network_add_tags(session.opaque_ref, _network ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -735,9 +735,9 @@ namespace XenAPI
         public static void remove_tags(Session session, string _network, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_remove_tags(session.uuid, _network, _value);
+                session.JsonRpcClient.network_remove_tags(session.opaque_ref, _network, _value);
             else
-                session.proxy.network_remove_tags(session.uuid, _network ?? "", _value ?? "").parse();
+                session.proxy.network_remove_tags(session.opaque_ref, _network ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -751,9 +751,9 @@ namespace XenAPI
         public static XenRef<Blob> create_new_blob(Session session, string _network, string _name, string _mime_type)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_create_new_blob(session.uuid, _network, _name, _mime_type);
+                return session.JsonRpcClient.network_create_new_blob(session.opaque_ref, _network, _name, _mime_type);
             else
-                return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.uuid, _network ?? "", _name ?? "", _mime_type ?? "").parse());
+                return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.opaque_ref, _network ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -767,9 +767,9 @@ namespace XenAPI
         public static XenRef<Task> async_create_new_blob(Session session, string _network, string _name, string _mime_type)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_create_new_blob(session.uuid, _network, _name, _mime_type);
+              return session.JsonRpcClient.async_network_create_new_blob(session.opaque_ref, _network, _name, _mime_type);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.uuid, _network ?? "", _name ?? "", _mime_type ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.opaque_ref, _network ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -784,9 +784,9 @@ namespace XenAPI
         public static XenRef<Blob> create_new_blob(Session session, string _network, string _name, string _mime_type, bool _public)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_create_new_blob(session.uuid, _network, _name, _mime_type, _public);
+                return session.JsonRpcClient.network_create_new_blob(session.opaque_ref, _network, _name, _mime_type, _public);
             else
-                return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.uuid, _network ?? "", _name ?? "", _mime_type ?? "", _public).parse());
+                return XenRef<Blob>.Create(session.proxy.network_create_new_blob(session.opaque_ref, _network ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -801,9 +801,9 @@ namespace XenAPI
         public static XenRef<Task> async_create_new_blob(Session session, string _network, string _name, string _mime_type, bool _public)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_create_new_blob(session.uuid, _network, _name, _mime_type, _public);
+              return session.JsonRpcClient.async_network_create_new_blob(session.opaque_ref, _network, _name, _mime_type, _public);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.uuid, _network ?? "", _name ?? "", _mime_type ?? "", _public).parse());
+              return XenRef<Task>.Create(session.proxy.async_network_create_new_blob(session.opaque_ref, _network ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -816,9 +816,9 @@ namespace XenAPI
         public static void set_default_locking_mode(Session session, string _network, network_default_locking_mode _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_set_default_locking_mode(session.uuid, _network, _value);
+                session.JsonRpcClient.network_set_default_locking_mode(session.opaque_ref, _network, _value);
             else
-                session.proxy.network_set_default_locking_mode(session.uuid, _network ?? "", network_default_locking_mode_helper.ToString(_value)).parse();
+                session.proxy.network_set_default_locking_mode(session.opaque_ref, _network ?? "", network_default_locking_mode_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -831,9 +831,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_default_locking_mode(Session session, string _network, network_default_locking_mode _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_set_default_locking_mode(session.uuid, _network, _value);
+              return session.JsonRpcClient.async_network_set_default_locking_mode(session.opaque_ref, _network, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_set_default_locking_mode(session.uuid, _network ?? "", network_default_locking_mode_helper.ToString(_value)).parse());
+              return XenRef<Task>.Create(session.proxy.async_network_set_default_locking_mode(session.opaque_ref, _network ?? "", network_default_locking_mode_helper.ToString(_value)).parse());
         }
 
         /// <summary>
@@ -846,9 +846,9 @@ namespace XenAPI
         public static void add_purpose(Session session, string _network, network_purpose _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_add_purpose(session.uuid, _network, _value);
+                session.JsonRpcClient.network_add_purpose(session.opaque_ref, _network, _value);
             else
-                session.proxy.network_add_purpose(session.uuid, _network ?? "", network_purpose_helper.ToString(_value)).parse();
+                session.proxy.network_add_purpose(session.opaque_ref, _network ?? "", network_purpose_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -861,9 +861,9 @@ namespace XenAPI
         public static XenRef<Task> async_add_purpose(Session session, string _network, network_purpose _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_add_purpose(session.uuid, _network, _value);
+              return session.JsonRpcClient.async_network_add_purpose(session.opaque_ref, _network, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_add_purpose(session.uuid, _network ?? "", network_purpose_helper.ToString(_value)).parse());
+              return XenRef<Task>.Create(session.proxy.async_network_add_purpose(session.opaque_ref, _network ?? "", network_purpose_helper.ToString(_value)).parse());
         }
 
         /// <summary>
@@ -876,9 +876,9 @@ namespace XenAPI
         public static void remove_purpose(Session session, string _network, network_purpose _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_remove_purpose(session.uuid, _network, _value);
+                session.JsonRpcClient.network_remove_purpose(session.opaque_ref, _network, _value);
             else
-                session.proxy.network_remove_purpose(session.uuid, _network ?? "", network_purpose_helper.ToString(_value)).parse();
+                session.proxy.network_remove_purpose(session.opaque_ref, _network ?? "", network_purpose_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -891,9 +891,9 @@ namespace XenAPI
         public static XenRef<Task> async_remove_purpose(Session session, string _network, network_purpose _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_remove_purpose(session.uuid, _network, _value);
+              return session.JsonRpcClient.async_network_remove_purpose(session.opaque_ref, _network, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_remove_purpose(session.uuid, _network ?? "", network_purpose_helper.ToString(_value)).parse());
+              return XenRef<Task>.Create(session.proxy.async_network_remove_purpose(session.opaque_ref, _network ?? "", network_purpose_helper.ToString(_value)).parse());
         }
 
         /// <summary>
@@ -904,9 +904,9 @@ namespace XenAPI
         public static List<XenRef<Network>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_all(session.uuid);
+                return session.JsonRpcClient.network_get_all(session.opaque_ref);
             else
-                return XenRef<Network>.Create(session.proxy.network_get_all(session.uuid).parse());
+                return XenRef<Network>.Create(session.proxy.network_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -917,9 +917,9 @@ namespace XenAPI
         public static Dictionary<XenRef<Network>, Network> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_get_all_records(session.uuid);
+                return session.JsonRpcClient.network_get_all_records(session.opaque_ref);
             else
-                return XenRef<Network>.Create<Proxy_Network>(session.proxy.network_get_all_records(session.uuid).parse());
+                return XenRef<Network>.Create<Proxy_Network>(session.proxy.network_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>

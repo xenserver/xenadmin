@@ -105,7 +105,7 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
+                uuid = Marshalling.ParseString(table, "uuid");
         }
 
         public bool DeepEquals(LVHD other)
@@ -148,9 +148,9 @@ namespace XenAPI
         public static LVHD get_record(Session session, string _lvhd)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.lvhd_get_record(session.uuid, _lvhd);
+                return session.JsonRpcClient.lvhd_get_record(session.opaque_ref, _lvhd);
             else
-                return new LVHD((Proxy_LVHD)session.proxy.lvhd_get_record(session.uuid, _lvhd ?? "").parse());
+                return new LVHD((Proxy_LVHD)session.proxy.lvhd_get_record(session.opaque_ref, _lvhd ?? "").parse());
         }
 
         /// <summary>
@@ -162,9 +162,9 @@ namespace XenAPI
         public static XenRef<LVHD> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.lvhd_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.lvhd_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<LVHD>.Create(session.proxy.lvhd_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<LVHD>.Create(session.proxy.lvhd_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -176,9 +176,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _lvhd)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.lvhd_get_uuid(session.uuid, _lvhd);
+                return session.JsonRpcClient.lvhd_get_uuid(session.opaque_ref, _lvhd);
             else
-                return (string)session.proxy.lvhd_get_uuid(session.uuid, _lvhd ?? "").parse();
+                return (string)session.proxy.lvhd_get_uuid(session.opaque_ref, _lvhd ?? "").parse();
         }
 
         /// <summary>
@@ -193,9 +193,9 @@ namespace XenAPI
         public static string enable_thin_provisioning(Session session, string _host, string _sr, long _initial_allocation, long _allocation_quantum)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.lvhd_enable_thin_provisioning(session.uuid, _host, _sr, _initial_allocation, _allocation_quantum);
+                return session.JsonRpcClient.lvhd_enable_thin_provisioning(session.opaque_ref, _host, _sr, _initial_allocation, _allocation_quantum);
             else
-                return (string)session.proxy.lvhd_enable_thin_provisioning(session.uuid, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse();
+                return (string)session.proxy.lvhd_enable_thin_provisioning(session.opaque_ref, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse();
         }
 
         /// <summary>
@@ -210,9 +210,9 @@ namespace XenAPI
         public static XenRef<Task> async_enable_thin_provisioning(Session session, string _host, string _sr, long _initial_allocation, long _allocation_quantum)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_lvhd_enable_thin_provisioning(session.uuid, _host, _sr, _initial_allocation, _allocation_quantum);
+              return session.JsonRpcClient.async_lvhd_enable_thin_provisioning(session.opaque_ref, _host, _sr, _initial_allocation, _allocation_quantum);
           else
-              return XenRef<Task>.Create(session.proxy.async_lvhd_enable_thin_provisioning(session.uuid, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_lvhd_enable_thin_provisioning(session.opaque_ref, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse());
         }
 
         /// <summary>

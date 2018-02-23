@@ -515,171 +515,171 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
+                uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("allowed_operations"))
-                allowed_operations = Helper.StringArrayToEnumList<vm_operations>(Array.ConvertAll((object[])table["allowed_operations"], o => o.ToString()));
+                allowed_operations = Helper.StringArrayToEnumList<vm_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
-                current_operations = Maps.convert_from_proxy_string_vm_operations((Hashtable)table["current_operations"]);
+                current_operations = Maps.convert_from_proxy_string_vm_operations(Marshalling.ParseHashTable(table, "current_operations"));
             if (table.ContainsKey("power_state"))
-                power_state = (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)table["power_state"]);
+                power_state = (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), Marshalling.ParseString(table, "power_state"));
             if (table.ContainsKey("name_label"))
-                name_label = (string)table["name_label"];
+                name_label = Marshalling.ParseString(table, "name_label");
             if (table.ContainsKey("name_description"))
-                name_description = (string)table["name_description"];
+                name_description = Marshalling.ParseString(table, "name_description");
             if (table.ContainsKey("user_version"))
-                user_version = long.Parse((string)table["user_version"]);
+                user_version = Marshalling.ParseLong(table, "user_version");
             if (table.ContainsKey("is_a_template"))
-                is_a_template = (bool)table["is_a_template"];
+                is_a_template = Marshalling.ParseBool(table, "is_a_template");
             if (table.ContainsKey("is_default_template"))
-                is_default_template = (bool)table["is_default_template"];
+                is_default_template = Marshalling.ParseBool(table, "is_default_template");
             if (table.ContainsKey("suspend_VDI"))
-                suspend_VDI = XenRef<VDI>.Create((string)table["suspend_VDI"]);
+                suspend_VDI = Marshalling.ParseRef<VDI>(table, "suspend_VDI");
             if (table.ContainsKey("resident_on"))
-                resident_on = XenRef<Host>.Create((string)table["resident_on"]);
+                resident_on = Marshalling.ParseRef<Host>(table, "resident_on");
             if (table.ContainsKey("affinity"))
-                affinity = XenRef<Host>.Create((string)table["affinity"]);
+                affinity = Marshalling.ParseRef<Host>(table, "affinity");
             if (table.ContainsKey("memory_overhead"))
-                memory_overhead = long.Parse((string)table["memory_overhead"]);
+                memory_overhead = Marshalling.ParseLong(table, "memory_overhead");
             if (table.ContainsKey("memory_target"))
-                memory_target = long.Parse((string)table["memory_target"]);
+                memory_target = Marshalling.ParseLong(table, "memory_target");
             if (table.ContainsKey("memory_static_max"))
-                memory_static_max = long.Parse((string)table["memory_static_max"]);
+                memory_static_max = Marshalling.ParseLong(table, "memory_static_max");
             if (table.ContainsKey("memory_dynamic_max"))
-                memory_dynamic_max = long.Parse((string)table["memory_dynamic_max"]);
+                memory_dynamic_max = Marshalling.ParseLong(table, "memory_dynamic_max");
             if (table.ContainsKey("memory_dynamic_min"))
-                memory_dynamic_min = long.Parse((string)table["memory_dynamic_min"]);
+                memory_dynamic_min = Marshalling.ParseLong(table, "memory_dynamic_min");
             if (table.ContainsKey("memory_static_min"))
-                memory_static_min = long.Parse((string)table["memory_static_min"]);
+                memory_static_min = Marshalling.ParseLong(table, "memory_static_min");
             if (table.ContainsKey("VCPUs_params"))
-                VCPUs_params = Maps.convert_from_proxy_string_string((Hashtable)table["VCPUs_params"]);
+                VCPUs_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "VCPUs_params"));
             if (table.ContainsKey("VCPUs_max"))
-                VCPUs_max = long.Parse((string)table["VCPUs_max"]);
+                VCPUs_max = Marshalling.ParseLong(table, "VCPUs_max");
             if (table.ContainsKey("VCPUs_at_startup"))
-                VCPUs_at_startup = long.Parse((string)table["VCPUs_at_startup"]);
+                VCPUs_at_startup = Marshalling.ParseLong(table, "VCPUs_at_startup");
             if (table.ContainsKey("actions_after_shutdown"))
-                actions_after_shutdown = (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)table["actions_after_shutdown"]);
+                actions_after_shutdown = (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), Marshalling.ParseString(table, "actions_after_shutdown"));
             if (table.ContainsKey("actions_after_reboot"))
-                actions_after_reboot = (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)table["actions_after_reboot"]);
+                actions_after_reboot = (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), Marshalling.ParseString(table, "actions_after_reboot"));
             if (table.ContainsKey("actions_after_crash"))
-                actions_after_crash = (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), (string)table["actions_after_crash"]);
+                actions_after_crash = (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), Marshalling.ParseString(table, "actions_after_crash"));
             if (table.ContainsKey("consoles"))
-                consoles = XenRef<Console>.Create((object[])table["consoles"]);
+                consoles = Marshalling.ParseSetRef<Console>(table, "consoles");
             if (table.ContainsKey("VIFs"))
-                VIFs = XenRef<VIF>.Create((object[])table["VIFs"]);
+                VIFs = Marshalling.ParseSetRef<VIF>(table, "VIFs");
             if (table.ContainsKey("VBDs"))
-                VBDs = XenRef<VBD>.Create((object[])table["VBDs"]);
+                VBDs = Marshalling.ParseSetRef<VBD>(table, "VBDs");
             if (table.ContainsKey("VUSBs"))
-                VUSBs = XenRef<VUSB>.Create((object[])table["VUSBs"]);
+                VUSBs = Marshalling.ParseSetRef<VUSB>(table, "VUSBs");
             if (table.ContainsKey("crash_dumps"))
-                crash_dumps = XenRef<Crashdump>.Create((object[])table["crash_dumps"]);
+                crash_dumps = Marshalling.ParseSetRef<Crashdump>(table, "crash_dumps");
             if (table.ContainsKey("VTPMs"))
-                VTPMs = XenRef<VTPM>.Create((object[])table["VTPMs"]);
+                VTPMs = Marshalling.ParseSetRef<VTPM>(table, "VTPMs");
             if (table.ContainsKey("PV_bootloader"))
-                PV_bootloader = (string)table["PV_bootloader"];
+                PV_bootloader = Marshalling.ParseString(table, "PV_bootloader");
             if (table.ContainsKey("PV_kernel"))
-                PV_kernel = (string)table["PV_kernel"];
+                PV_kernel = Marshalling.ParseString(table, "PV_kernel");
             if (table.ContainsKey("PV_ramdisk"))
-                PV_ramdisk = (string)table["PV_ramdisk"];
+                PV_ramdisk = Marshalling.ParseString(table, "PV_ramdisk");
             if (table.ContainsKey("PV_args"))
-                PV_args = (string)table["PV_args"];
+                PV_args = Marshalling.ParseString(table, "PV_args");
             if (table.ContainsKey("PV_bootloader_args"))
-                PV_bootloader_args = (string)table["PV_bootloader_args"];
+                PV_bootloader_args = Marshalling.ParseString(table, "PV_bootloader_args");
             if (table.ContainsKey("PV_legacy_args"))
-                PV_legacy_args = (string)table["PV_legacy_args"];
+                PV_legacy_args = Marshalling.ParseString(table, "PV_legacy_args");
             if (table.ContainsKey("HVM_boot_policy"))
-                HVM_boot_policy = (string)table["HVM_boot_policy"];
+                HVM_boot_policy = Marshalling.ParseString(table, "HVM_boot_policy");
             if (table.ContainsKey("HVM_boot_params"))
-                HVM_boot_params = Maps.convert_from_proxy_string_string((Hashtable)table["HVM_boot_params"]);
+                HVM_boot_params = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "HVM_boot_params"));
             if (table.ContainsKey("HVM_shadow_multiplier"))
-                HVM_shadow_multiplier = (double)table["HVM_shadow_multiplier"];
+                HVM_shadow_multiplier = Marshalling.ParseDouble(table, "HVM_shadow_multiplier");
             if (table.ContainsKey("platform"))
-                platform = Maps.convert_from_proxy_string_string((Hashtable)table["platform"]);
+                platform = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "platform"));
             if (table.ContainsKey("PCI_bus"))
-                PCI_bus = (string)table["PCI_bus"];
+                PCI_bus = Marshalling.ParseString(table, "PCI_bus");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("domid"))
-                domid = long.Parse((string)table["domid"]);
+                domid = Marshalling.ParseLong(table, "domid");
             if (table.ContainsKey("domarch"))
-                domarch = (string)table["domarch"];
+                domarch = Marshalling.ParseString(table, "domarch");
             if (table.ContainsKey("last_boot_CPU_flags"))
-                last_boot_CPU_flags = Maps.convert_from_proxy_string_string((Hashtable)table["last_boot_CPU_flags"]);
+                last_boot_CPU_flags = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "last_boot_CPU_flags"));
             if (table.ContainsKey("is_control_domain"))
-                is_control_domain = (bool)table["is_control_domain"];
+                is_control_domain = Marshalling.ParseBool(table, "is_control_domain");
             if (table.ContainsKey("metrics"))
-                metrics = XenRef<VM_metrics>.Create((string)table["metrics"]);
+                metrics = Marshalling.ParseRef<VM_metrics>(table, "metrics");
             if (table.ContainsKey("guest_metrics"))
-                guest_metrics = XenRef<VM_guest_metrics>.Create((string)table["guest_metrics"]);
+                guest_metrics = Marshalling.ParseRef<VM_guest_metrics>(table, "guest_metrics");
             if (table.ContainsKey("last_booted_record"))
-                last_booted_record = (string)table["last_booted_record"];
+                last_booted_record = Marshalling.ParseString(table, "last_booted_record");
             if (table.ContainsKey("recommendations"))
-                recommendations = (string)table["recommendations"];
+                recommendations = Marshalling.ParseString(table, "recommendations");
             if (table.ContainsKey("xenstore_data"))
-                xenstore_data = Maps.convert_from_proxy_string_string((Hashtable)table["xenstore_data"]);
+                xenstore_data = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
             if (table.ContainsKey("ha_always_run"))
-                ha_always_run = (bool)table["ha_always_run"];
+                ha_always_run = Marshalling.ParseBool(table, "ha_always_run");
             if (table.ContainsKey("ha_restart_priority"))
-                ha_restart_priority = (string)table["ha_restart_priority"];
+                ha_restart_priority = Marshalling.ParseString(table, "ha_restart_priority");
             if (table.ContainsKey("is_a_snapshot"))
-                is_a_snapshot = (bool)table["is_a_snapshot"];
+                is_a_snapshot = Marshalling.ParseBool(table, "is_a_snapshot");
             if (table.ContainsKey("snapshot_of"))
-                snapshot_of = XenRef<VM>.Create((string)table["snapshot_of"]);
+                snapshot_of = Marshalling.ParseRef<VM>(table, "snapshot_of");
             if (table.ContainsKey("snapshots"))
-                snapshots = XenRef<VM>.Create((object[])table["snapshots"]);
+                snapshots = Marshalling.ParseSetRef<VM>(table, "snapshots");
             if (table.ContainsKey("snapshot_time"))
-                snapshot_time = (DateTime)table["snapshot_time"];
+                snapshot_time = Marshalling.ParseDateTime(table, "snapshot_time");
             if (table.ContainsKey("transportable_snapshot_id"))
-                transportable_snapshot_id = (string)table["transportable_snapshot_id"];
+                transportable_snapshot_id = Marshalling.ParseString(table, "transportable_snapshot_id");
             if (table.ContainsKey("blobs"))
-                blobs = Maps.convert_from_proxy_string_XenRefBlob((Hashtable)table["blobs"]);
+                blobs = Maps.convert_from_proxy_string_XenRefBlob(Marshalling.ParseHashTable(table, "blobs"));
             if (table.ContainsKey("tags"))
-                tags = Array.ConvertAll((object[])table["tags"], o => o.ToString());
+                tags = Marshalling.ParseStringArray(table, "tags");
             if (table.ContainsKey("blocked_operations"))
-                blocked_operations = Maps.convert_from_proxy_vm_operations_string((Hashtable)table["blocked_operations"]);
+                blocked_operations = Maps.convert_from_proxy_vm_operations_string(Marshalling.ParseHashTable(table, "blocked_operations"));
             if (table.ContainsKey("snapshot_info"))
-                snapshot_info = Maps.convert_from_proxy_string_string((Hashtable)table["snapshot_info"]);
+                snapshot_info = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "snapshot_info"));
             if (table.ContainsKey("snapshot_metadata"))
-                snapshot_metadata = (string)table["snapshot_metadata"];
+                snapshot_metadata = Marshalling.ParseString(table, "snapshot_metadata");
             if (table.ContainsKey("parent"))
-                parent = XenRef<VM>.Create((string)table["parent"]);
+                parent = Marshalling.ParseRef<VM>(table, "parent");
             if (table.ContainsKey("children"))
-                children = XenRef<VM>.Create((object[])table["children"]);
+                children = Marshalling.ParseSetRef<VM>(table, "children");
             if (table.ContainsKey("bios_strings"))
-                bios_strings = Maps.convert_from_proxy_string_string((Hashtable)table["bios_strings"]);
+                bios_strings = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "bios_strings"));
             if (table.ContainsKey("protection_policy"))
-                protection_policy = XenRef<VMPP>.Create((string)table["protection_policy"]);
+                protection_policy = Marshalling.ParseRef<VMPP>(table, "protection_policy");
             if (table.ContainsKey("is_snapshot_from_vmpp"))
-                is_snapshot_from_vmpp = (bool)table["is_snapshot_from_vmpp"];
+                is_snapshot_from_vmpp = Marshalling.ParseBool(table, "is_snapshot_from_vmpp");
             if (table.ContainsKey("snapshot_schedule"))
-                snapshot_schedule = XenRef<VMSS>.Create((string)table["snapshot_schedule"]);
+                snapshot_schedule = Marshalling.ParseRef<VMSS>(table, "snapshot_schedule");
             if (table.ContainsKey("is_vmss_snapshot"))
-                is_vmss_snapshot = (bool)table["is_vmss_snapshot"];
+                is_vmss_snapshot = Marshalling.ParseBool(table, "is_vmss_snapshot");
             if (table.ContainsKey("appliance"))
-                appliance = XenRef<VM_appliance>.Create((string)table["appliance"]);
+                appliance = Marshalling.ParseRef<VM_appliance>(table, "appliance");
             if (table.ContainsKey("start_delay"))
-                start_delay = long.Parse((string)table["start_delay"]);
+                start_delay = Marshalling.ParseLong(table, "start_delay");
             if (table.ContainsKey("shutdown_delay"))
-                shutdown_delay = long.Parse((string)table["shutdown_delay"]);
+                shutdown_delay = Marshalling.ParseLong(table, "shutdown_delay");
             if (table.ContainsKey("order"))
-                order = long.Parse((string)table["order"]);
+                order = Marshalling.ParseLong(table, "order");
             if (table.ContainsKey("VGPUs"))
-                VGPUs = XenRef<VGPU>.Create((object[])table["VGPUs"]);
+                VGPUs = Marshalling.ParseSetRef<VGPU>(table, "VGPUs");
             if (table.ContainsKey("attached_PCIs"))
-                attached_PCIs = XenRef<PCI>.Create((object[])table["attached_PCIs"]);
+                attached_PCIs = Marshalling.ParseSetRef<PCI>(table, "attached_PCIs");
             if (table.ContainsKey("suspend_SR"))
-                suspend_SR = XenRef<SR>.Create((string)table["suspend_SR"]);
+                suspend_SR = Marshalling.ParseRef<SR>(table, "suspend_SR");
             if (table.ContainsKey("version"))
-                version = long.Parse((string)table["version"]);
+                version = Marshalling.ParseLong(table, "version");
             if (table.ContainsKey("generation_id"))
-                generation_id = (string)table["generation_id"];
+                generation_id = Marshalling.ParseString(table, "generation_id");
             if (table.ContainsKey("hardware_platform_version"))
-                hardware_platform_version = long.Parse((string)table["hardware_platform_version"]);
+                hardware_platform_version = Marshalling.ParseLong(table, "hardware_platform_version");
             if (table.ContainsKey("has_vendor_device"))
-                has_vendor_device = (bool)table["has_vendor_device"];
+                has_vendor_device = Marshalling.ParseBool(table, "has_vendor_device");
             if (table.ContainsKey("requires_reboot"))
-                requires_reboot = (bool)table["requires_reboot"];
+                requires_reboot = Marshalling.ParseBool(table, "requires_reboot");
             if (table.ContainsKey("reference_label"))
-                reference_label = (string)table["reference_label"];
+                reference_label = Marshalling.ParseString(table, "reference_label");
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -975,9 +975,9 @@ namespace XenAPI
         public static VM get_record(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_record(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_record(session.opaque_ref, _vm);
             else
-                return new VM((Proxy_VM)session.proxy.vm_get_record(session.uuid, _vm ?? "").parse());
+                return new VM((Proxy_VM)session.proxy.vm_get_record(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -989,9 +989,9 @@ namespace XenAPI
         public static XenRef<VM> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.vm_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<VM>.Create(session.proxy.vm_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -1003,9 +1003,9 @@ namespace XenAPI
         public static XenRef<VM> create(Session session, VM _record)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_create(session.uuid, _record);
+                return session.JsonRpcClient.vm_create(session.opaque_ref, _record);
             else
-                return XenRef<VM>.Create(session.proxy.vm_create(session.uuid, _record.ToProxy()).parse());
+                return XenRef<VM>.Create(session.proxy.vm_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -1017,9 +1017,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, VM _record)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_create(session.uuid, _record);
+              return session.JsonRpcClient.async_vm_create(session.opaque_ref, _record);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_create(session.uuid, _record.ToProxy()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -1031,9 +1031,9 @@ namespace XenAPI
         public static void destroy(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_destroy(session.uuid, _vm);
+                session.JsonRpcClient.vm_destroy(session.opaque_ref, _vm);
             else
-                session.proxy.vm_destroy(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_destroy(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1045,9 +1045,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_destroy(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_destroy(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_destroy(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_destroy(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1059,9 +1059,9 @@ namespace XenAPI
         public static List<XenRef<VM>> get_by_name_label(Session session, string _label)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_by_name_label(session.uuid, _label);
+                return session.JsonRpcClient.vm_get_by_name_label(session.opaque_ref, _label);
             else
-                return XenRef<VM>.Create(session.proxy.vm_get_by_name_label(session.uuid, _label ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_get_by_name_label(session.opaque_ref, _label ?? "").parse());
         }
 
         /// <summary>
@@ -1073,9 +1073,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_uuid(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_uuid(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_uuid(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_uuid(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1087,9 +1087,9 @@ namespace XenAPI
         public static List<vm_operations> get_allowed_operations(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_allowed_operations(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_allowed_operations(session.opaque_ref, _vm);
             else
-                return Helper.StringArrayToEnumList<vm_operations>(session.proxy.vm_get_allowed_operations(session.uuid, _vm ?? "").parse());
+                return Helper.StringArrayToEnumList<vm_operations>(session.proxy.vm_get_allowed_operations(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1101,9 +1101,9 @@ namespace XenAPI
         public static Dictionary<string, vm_operations> get_current_operations(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_current_operations(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_current_operations(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_vm_operations(session.proxy.vm_get_current_operations(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_vm_operations(session.proxy.vm_get_current_operations(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1115,9 +1115,9 @@ namespace XenAPI
         public static vm_power_state get_power_state(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_power_state(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_power_state(session.opaque_ref, _vm);
             else
-                return (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)session.proxy.vm_get_power_state(session.uuid, _vm ?? "").parse());
+                return (vm_power_state)Helper.EnumParseDefault(typeof(vm_power_state), (string)session.proxy.vm_get_power_state(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1129,9 +1129,9 @@ namespace XenAPI
         public static string get_name_label(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_name_label(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_name_label(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_name_label(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_name_label(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1143,9 +1143,9 @@ namespace XenAPI
         public static string get_name_description(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_name_description(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_name_description(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_name_description(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_name_description(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1157,9 +1157,9 @@ namespace XenAPI
         public static long get_user_version(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_user_version(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_user_version(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_user_version(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_user_version(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1171,9 +1171,9 @@ namespace XenAPI
         public static bool get_is_a_template(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_is_a_template(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_is_a_template(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_is_a_template(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_is_a_template(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1185,9 +1185,9 @@ namespace XenAPI
         public static bool get_is_default_template(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_is_default_template(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_is_default_template(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_is_default_template(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_is_default_template(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1199,9 +1199,9 @@ namespace XenAPI
         public static XenRef<VDI> get_suspend_VDI(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_suspend_vdi(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_suspend_vdi(session.opaque_ref, _vm);
             else
-                return XenRef<VDI>.Create(session.proxy.vm_get_suspend_vdi(session.uuid, _vm ?? "").parse());
+                return XenRef<VDI>.Create(session.proxy.vm_get_suspend_vdi(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1213,9 +1213,9 @@ namespace XenAPI
         public static XenRef<Host> get_resident_on(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_resident_on(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_resident_on(session.opaque_ref, _vm);
             else
-                return XenRef<Host>.Create(session.proxy.vm_get_resident_on(session.uuid, _vm ?? "").parse());
+                return XenRef<Host>.Create(session.proxy.vm_get_resident_on(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1227,9 +1227,9 @@ namespace XenAPI
         public static XenRef<Host> get_affinity(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_affinity(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_affinity(session.opaque_ref, _vm);
             else
-                return XenRef<Host>.Create(session.proxy.vm_get_affinity(session.uuid, _vm ?? "").parse());
+                return XenRef<Host>.Create(session.proxy.vm_get_affinity(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1241,9 +1241,9 @@ namespace XenAPI
         public static long get_memory_overhead(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_memory_overhead(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_memory_overhead(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_memory_overhead(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_memory_overhead(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1257,9 +1257,9 @@ namespace XenAPI
         public static long get_memory_target(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_memory_target(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_memory_target(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_memory_target(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_memory_target(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1271,9 +1271,9 @@ namespace XenAPI
         public static long get_memory_static_max(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_memory_static_max(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_memory_static_max(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_memory_static_max(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_memory_static_max(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1285,9 +1285,9 @@ namespace XenAPI
         public static long get_memory_dynamic_max(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_memory_dynamic_max(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_memory_dynamic_max(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_memory_dynamic_max(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_memory_dynamic_max(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1299,9 +1299,9 @@ namespace XenAPI
         public static long get_memory_dynamic_min(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_memory_dynamic_min(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_memory_dynamic_min(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_memory_dynamic_min(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_memory_dynamic_min(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1313,9 +1313,9 @@ namespace XenAPI
         public static long get_memory_static_min(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_memory_static_min(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_memory_static_min(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_memory_static_min(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_memory_static_min(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1327,9 +1327,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_VCPUs_params(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_vcpus_params(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_vcpus_params(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_vcpus_params(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_vcpus_params(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1341,9 +1341,9 @@ namespace XenAPI
         public static long get_VCPUs_max(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_vcpus_max(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_vcpus_max(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_vcpus_max(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_vcpus_max(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1355,9 +1355,9 @@ namespace XenAPI
         public static long get_VCPUs_at_startup(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_vcpus_at_startup(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_vcpus_at_startup(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_vcpus_at_startup(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_vcpus_at_startup(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1369,9 +1369,9 @@ namespace XenAPI
         public static on_normal_exit get_actions_after_shutdown(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_actions_after_shutdown(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_actions_after_shutdown(session.opaque_ref, _vm);
             else
-                return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_shutdown(session.uuid, _vm ?? "").parse());
+                return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_shutdown(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1383,9 +1383,9 @@ namespace XenAPI
         public static on_normal_exit get_actions_after_reboot(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_actions_after_reboot(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_actions_after_reboot(session.opaque_ref, _vm);
             else
-                return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_reboot(session.uuid, _vm ?? "").parse());
+                return (on_normal_exit)Helper.EnumParseDefault(typeof(on_normal_exit), (string)session.proxy.vm_get_actions_after_reboot(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1397,9 +1397,9 @@ namespace XenAPI
         public static on_crash_behaviour get_actions_after_crash(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_actions_after_crash(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_actions_after_crash(session.opaque_ref, _vm);
             else
-                return (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), (string)session.proxy.vm_get_actions_after_crash(session.uuid, _vm ?? "").parse());
+                return (on_crash_behaviour)Helper.EnumParseDefault(typeof(on_crash_behaviour), (string)session.proxy.vm_get_actions_after_crash(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1411,9 +1411,9 @@ namespace XenAPI
         public static List<XenRef<Console>> get_consoles(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_consoles(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_consoles(session.opaque_ref, _vm);
             else
-                return XenRef<Console>.Create(session.proxy.vm_get_consoles(session.uuid, _vm ?? "").parse());
+                return XenRef<Console>.Create(session.proxy.vm_get_consoles(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1425,9 +1425,9 @@ namespace XenAPI
         public static List<XenRef<VIF>> get_VIFs(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_vifs(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_vifs(session.opaque_ref, _vm);
             else
-                return XenRef<VIF>.Create(session.proxy.vm_get_vifs(session.uuid, _vm ?? "").parse());
+                return XenRef<VIF>.Create(session.proxy.vm_get_vifs(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1439,9 +1439,9 @@ namespace XenAPI
         public static List<XenRef<VBD>> get_VBDs(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_vbds(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_vbds(session.opaque_ref, _vm);
             else
-                return XenRef<VBD>.Create(session.proxy.vm_get_vbds(session.uuid, _vm ?? "").parse());
+                return XenRef<VBD>.Create(session.proxy.vm_get_vbds(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1453,9 +1453,9 @@ namespace XenAPI
         public static List<XenRef<VUSB>> get_VUSBs(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_vusbs(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_vusbs(session.opaque_ref, _vm);
             else
-                return XenRef<VUSB>.Create(session.proxy.vm_get_vusbs(session.uuid, _vm ?? "").parse());
+                return XenRef<VUSB>.Create(session.proxy.vm_get_vusbs(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1467,9 +1467,9 @@ namespace XenAPI
         public static List<XenRef<Crashdump>> get_crash_dumps(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_crash_dumps(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_crash_dumps(session.opaque_ref, _vm);
             else
-                return XenRef<Crashdump>.Create(session.proxy.vm_get_crash_dumps(session.uuid, _vm ?? "").parse());
+                return XenRef<Crashdump>.Create(session.proxy.vm_get_crash_dumps(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1481,9 +1481,9 @@ namespace XenAPI
         public static List<XenRef<VTPM>> get_VTPMs(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_vtpms(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_vtpms(session.opaque_ref, _vm);
             else
-                return XenRef<VTPM>.Create(session.proxy.vm_get_vtpms(session.uuid, _vm ?? "").parse());
+                return XenRef<VTPM>.Create(session.proxy.vm_get_vtpms(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1495,9 +1495,9 @@ namespace XenAPI
         public static string get_PV_bootloader(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_pv_bootloader(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_pv_bootloader(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_pv_bootloader(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_pv_bootloader(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1509,9 +1509,9 @@ namespace XenAPI
         public static string get_PV_kernel(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_pv_kernel(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_pv_kernel(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_pv_kernel(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_pv_kernel(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1523,9 +1523,9 @@ namespace XenAPI
         public static string get_PV_ramdisk(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_pv_ramdisk(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_pv_ramdisk(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_pv_ramdisk(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_pv_ramdisk(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1537,9 +1537,9 @@ namespace XenAPI
         public static string get_PV_args(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_pv_args(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_pv_args(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_pv_args(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_pv_args(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1551,9 +1551,9 @@ namespace XenAPI
         public static string get_PV_bootloader_args(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_pv_bootloader_args(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_pv_bootloader_args(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_pv_bootloader_args(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_pv_bootloader_args(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1565,9 +1565,9 @@ namespace XenAPI
         public static string get_PV_legacy_args(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_pv_legacy_args(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_pv_legacy_args(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_pv_legacy_args(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_pv_legacy_args(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1579,9 +1579,9 @@ namespace XenAPI
         public static string get_HVM_boot_policy(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_hvm_boot_policy(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_hvm_boot_policy(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_hvm_boot_policy(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_hvm_boot_policy(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1593,9 +1593,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_HVM_boot_params(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_hvm_boot_params(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_hvm_boot_params(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_hvm_boot_params(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_hvm_boot_params(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1607,9 +1607,9 @@ namespace XenAPI
         public static double get_HVM_shadow_multiplier(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_hvm_shadow_multiplier(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_hvm_shadow_multiplier(session.opaque_ref, _vm);
             else
-                return Convert.ToDouble(session.proxy.vm_get_hvm_shadow_multiplier(session.uuid, _vm ?? "").parse());
+                return Convert.ToDouble(session.proxy.vm_get_hvm_shadow_multiplier(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1621,9 +1621,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_platform(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_platform(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_platform(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_platform(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_platform(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1637,9 +1637,9 @@ namespace XenAPI
         public static string get_PCI_bus(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_pci_bus(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_pci_bus(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_pci_bus(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_pci_bus(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1651,9 +1651,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_other_config(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_other_config(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_other_config(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_other_config(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1665,9 +1665,9 @@ namespace XenAPI
         public static long get_domid(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_domid(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_domid(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_domid(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_domid(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1679,9 +1679,9 @@ namespace XenAPI
         public static string get_domarch(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_domarch(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_domarch(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_domarch(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_domarch(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1693,9 +1693,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_last_boot_CPU_flags(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_last_boot_cpu_flags(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_last_boot_cpu_flags(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_last_boot_cpu_flags(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_last_boot_cpu_flags(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1707,9 +1707,9 @@ namespace XenAPI
         public static bool get_is_control_domain(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_is_control_domain(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_is_control_domain(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_is_control_domain(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_is_control_domain(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1721,9 +1721,9 @@ namespace XenAPI
         public static XenRef<VM_metrics> get_metrics(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_metrics(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_metrics(session.opaque_ref, _vm);
             else
-                return XenRef<VM_metrics>.Create(session.proxy.vm_get_metrics(session.uuid, _vm ?? "").parse());
+                return XenRef<VM_metrics>.Create(session.proxy.vm_get_metrics(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1735,9 +1735,9 @@ namespace XenAPI
         public static XenRef<VM_guest_metrics> get_guest_metrics(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_guest_metrics(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_guest_metrics(session.opaque_ref, _vm);
             else
-                return XenRef<VM_guest_metrics>.Create(session.proxy.vm_get_guest_metrics(session.uuid, _vm ?? "").parse());
+                return XenRef<VM_guest_metrics>.Create(session.proxy.vm_get_guest_metrics(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1749,9 +1749,9 @@ namespace XenAPI
         public static string get_last_booted_record(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_last_booted_record(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_last_booted_record(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_last_booted_record(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_last_booted_record(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1763,9 +1763,9 @@ namespace XenAPI
         public static string get_recommendations(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_recommendations(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_recommendations(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_recommendations(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_recommendations(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1777,9 +1777,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_xenstore_data(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_xenstore_data(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_xenstore_data(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_xenstore_data(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_xenstore_data(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1793,9 +1793,9 @@ namespace XenAPI
         public static bool get_ha_always_run(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_ha_always_run(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_ha_always_run(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_ha_always_run(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_ha_always_run(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1807,9 +1807,9 @@ namespace XenAPI
         public static string get_ha_restart_priority(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_ha_restart_priority(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_ha_restart_priority(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_ha_restart_priority(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_ha_restart_priority(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1821,9 +1821,9 @@ namespace XenAPI
         public static bool get_is_a_snapshot(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_is_a_snapshot(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_is_a_snapshot(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_is_a_snapshot(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_is_a_snapshot(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1835,9 +1835,9 @@ namespace XenAPI
         public static XenRef<VM> get_snapshot_of(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_snapshot_of(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_snapshot_of(session.opaque_ref, _vm);
             else
-                return XenRef<VM>.Create(session.proxy.vm_get_snapshot_of(session.uuid, _vm ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_get_snapshot_of(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1849,9 +1849,9 @@ namespace XenAPI
         public static List<XenRef<VM>> get_snapshots(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_snapshots(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_snapshots(session.opaque_ref, _vm);
             else
-                return XenRef<VM>.Create(session.proxy.vm_get_snapshots(session.uuid, _vm ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_get_snapshots(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1863,9 +1863,9 @@ namespace XenAPI
         public static DateTime get_snapshot_time(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_snapshot_time(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_snapshot_time(session.opaque_ref, _vm);
             else
-                return session.proxy.vm_get_snapshot_time(session.uuid, _vm ?? "").parse();
+                return session.proxy.vm_get_snapshot_time(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1877,9 +1877,9 @@ namespace XenAPI
         public static string get_transportable_snapshot_id(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_transportable_snapshot_id(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_transportable_snapshot_id(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_transportable_snapshot_id(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_transportable_snapshot_id(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1891,9 +1891,9 @@ namespace XenAPI
         public static Dictionary<string, XenRef<Blob>> get_blobs(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_blobs(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_blobs(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.vm_get_blobs(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_XenRefBlob(session.proxy.vm_get_blobs(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1905,9 +1905,9 @@ namespace XenAPI
         public static string[] get_tags(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_tags(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_tags(session.opaque_ref, _vm);
             else
-                return (string [])session.proxy.vm_get_tags(session.uuid, _vm ?? "").parse();
+                return (string [])session.proxy.vm_get_tags(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1919,9 +1919,9 @@ namespace XenAPI
         public static Dictionary<vm_operations, string> get_blocked_operations(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_blocked_operations(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_blocked_operations(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_vm_operations_string(session.proxy.vm_get_blocked_operations(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_vm_operations_string(session.proxy.vm_get_blocked_operations(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1933,9 +1933,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_snapshot_info(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_snapshot_info(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_snapshot_info(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_snapshot_info(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_snapshot_info(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1947,9 +1947,9 @@ namespace XenAPI
         public static string get_snapshot_metadata(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_snapshot_metadata(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_snapshot_metadata(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_snapshot_metadata(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_snapshot_metadata(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -1961,9 +1961,9 @@ namespace XenAPI
         public static XenRef<VM> get_parent(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_parent(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_parent(session.opaque_ref, _vm);
             else
-                return XenRef<VM>.Create(session.proxy.vm_get_parent(session.uuid, _vm ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_get_parent(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1975,9 +1975,9 @@ namespace XenAPI
         public static List<XenRef<VM>> get_children(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_children(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_children(session.opaque_ref, _vm);
             else
-                return XenRef<VM>.Create(session.proxy.vm_get_children(session.uuid, _vm ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_get_children(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -1989,9 +1989,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_bios_strings(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_bios_strings(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_bios_strings(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_bios_strings(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_get_bios_strings(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2005,9 +2005,9 @@ namespace XenAPI
         public static XenRef<VMPP> get_protection_policy(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_protection_policy(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_protection_policy(session.opaque_ref, _vm);
             else
-                return XenRef<VMPP>.Create(session.proxy.vm_get_protection_policy(session.uuid, _vm ?? "").parse());
+                return XenRef<VMPP>.Create(session.proxy.vm_get_protection_policy(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2021,9 +2021,9 @@ namespace XenAPI
         public static bool get_is_snapshot_from_vmpp(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_is_snapshot_from_vmpp(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_is_snapshot_from_vmpp(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_is_snapshot_from_vmpp(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_is_snapshot_from_vmpp(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2035,9 +2035,9 @@ namespace XenAPI
         public static XenRef<VMSS> get_snapshot_schedule(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_snapshot_schedule(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_snapshot_schedule(session.opaque_ref, _vm);
             else
-                return XenRef<VMSS>.Create(session.proxy.vm_get_snapshot_schedule(session.uuid, _vm ?? "").parse());
+                return XenRef<VMSS>.Create(session.proxy.vm_get_snapshot_schedule(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2049,9 +2049,9 @@ namespace XenAPI
         public static bool get_is_vmss_snapshot(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_is_vmss_snapshot(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_is_vmss_snapshot(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_is_vmss_snapshot(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_is_vmss_snapshot(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2063,9 +2063,9 @@ namespace XenAPI
         public static XenRef<VM_appliance> get_appliance(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_appliance(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_appliance(session.opaque_ref, _vm);
             else
-                return XenRef<VM_appliance>.Create(session.proxy.vm_get_appliance(session.uuid, _vm ?? "").parse());
+                return XenRef<VM_appliance>.Create(session.proxy.vm_get_appliance(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2077,9 +2077,9 @@ namespace XenAPI
         public static long get_start_delay(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_start_delay(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_start_delay(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_start_delay(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_start_delay(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2091,9 +2091,9 @@ namespace XenAPI
         public static long get_shutdown_delay(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_shutdown_delay(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_shutdown_delay(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_shutdown_delay(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_shutdown_delay(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2105,9 +2105,9 @@ namespace XenAPI
         public static long get_order(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_order(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_order(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_order(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_order(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2119,9 +2119,9 @@ namespace XenAPI
         public static List<XenRef<VGPU>> get_VGPUs(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_vgpus(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_vgpus(session.opaque_ref, _vm);
             else
-                return XenRef<VGPU>.Create(session.proxy.vm_get_vgpus(session.uuid, _vm ?? "").parse());
+                return XenRef<VGPU>.Create(session.proxy.vm_get_vgpus(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2133,9 +2133,9 @@ namespace XenAPI
         public static List<XenRef<PCI>> get_attached_PCIs(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_attached_pcis(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_attached_pcis(session.opaque_ref, _vm);
             else
-                return XenRef<PCI>.Create(session.proxy.vm_get_attached_pcis(session.uuid, _vm ?? "").parse());
+                return XenRef<PCI>.Create(session.proxy.vm_get_attached_pcis(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2147,9 +2147,9 @@ namespace XenAPI
         public static XenRef<SR> get_suspend_SR(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_suspend_sr(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_suspend_sr(session.opaque_ref, _vm);
             else
-                return XenRef<SR>.Create(session.proxy.vm_get_suspend_sr(session.uuid, _vm ?? "").parse());
+                return XenRef<SR>.Create(session.proxy.vm_get_suspend_sr(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2161,9 +2161,9 @@ namespace XenAPI
         public static long get_version(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_version(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_version(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_version(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_version(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2175,9 +2175,9 @@ namespace XenAPI
         public static string get_generation_id(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_generation_id(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_generation_id(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_generation_id(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_generation_id(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2189,9 +2189,9 @@ namespace XenAPI
         public static long get_hardware_platform_version(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_hardware_platform_version(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_hardware_platform_version(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_get_hardware_platform_version(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_get_hardware_platform_version(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -2203,9 +2203,9 @@ namespace XenAPI
         public static bool get_has_vendor_device(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_has_vendor_device(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_has_vendor_device(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_has_vendor_device(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_has_vendor_device(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2217,9 +2217,9 @@ namespace XenAPI
         public static bool get_requires_reboot(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_requires_reboot(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_requires_reboot(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_requires_reboot(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_requires_reboot(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2231,9 +2231,9 @@ namespace XenAPI
         public static string get_reference_label(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_reference_label(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_reference_label(session.opaque_ref, _vm);
             else
-                return (string)session.proxy.vm_get_reference_label(session.uuid, _vm ?? "").parse();
+                return (string)session.proxy.vm_get_reference_label(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2246,9 +2246,9 @@ namespace XenAPI
         public static void set_name_label(Session session, string _vm, string _label)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_name_label(session.uuid, _vm, _label);
+                session.JsonRpcClient.vm_set_name_label(session.opaque_ref, _vm, _label);
             else
-                session.proxy.vm_set_name_label(session.uuid, _vm ?? "", _label ?? "").parse();
+                session.proxy.vm_set_name_label(session.opaque_ref, _vm ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -2261,9 +2261,9 @@ namespace XenAPI
         public static void set_name_description(Session session, string _vm, string _description)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_name_description(session.uuid, _vm, _description);
+                session.JsonRpcClient.vm_set_name_description(session.opaque_ref, _vm, _description);
             else
-                session.proxy.vm_set_name_description(session.uuid, _vm ?? "", _description ?? "").parse();
+                session.proxy.vm_set_name_description(session.opaque_ref, _vm ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -2276,9 +2276,9 @@ namespace XenAPI
         public static void set_user_version(Session session, string _vm, long _user_version)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_user_version(session.uuid, _vm, _user_version);
+                session.JsonRpcClient.vm_set_user_version(session.opaque_ref, _vm, _user_version);
             else
-                session.proxy.vm_set_user_version(session.uuid, _vm ?? "", _user_version.ToString()).parse();
+                session.proxy.vm_set_user_version(session.opaque_ref, _vm ?? "", _user_version.ToString()).parse();
         }
 
         /// <summary>
@@ -2291,9 +2291,9 @@ namespace XenAPI
         public static void set_is_a_template(Session session, string _vm, bool _is_a_template)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_is_a_template(session.uuid, _vm, _is_a_template);
+                session.JsonRpcClient.vm_set_is_a_template(session.opaque_ref, _vm, _is_a_template);
             else
-                session.proxy.vm_set_is_a_template(session.uuid, _vm ?? "", _is_a_template).parse();
+                session.proxy.vm_set_is_a_template(session.opaque_ref, _vm ?? "", _is_a_template).parse();
         }
 
         /// <summary>
@@ -2306,9 +2306,9 @@ namespace XenAPI
         public static void set_affinity(Session session, string _vm, string _affinity)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_affinity(session.uuid, _vm, _affinity);
+                session.JsonRpcClient.vm_set_affinity(session.opaque_ref, _vm, _affinity);
             else
-                session.proxy.vm_set_affinity(session.uuid, _vm ?? "", _affinity ?? "").parse();
+                session.proxy.vm_set_affinity(session.opaque_ref, _vm ?? "", _affinity ?? "").parse();
         }
 
         /// <summary>
@@ -2321,9 +2321,9 @@ namespace XenAPI
         public static void set_VCPUs_params(Session session, string _vm, Dictionary<string, string> _params)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_vcpus_params(session.uuid, _vm, _params);
+                session.JsonRpcClient.vm_set_vcpus_params(session.opaque_ref, _vm, _params);
             else
-                session.proxy.vm_set_vcpus_params(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_params)).parse();
+                session.proxy.vm_set_vcpus_params(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_params)).parse();
         }
 
         /// <summary>
@@ -2337,9 +2337,9 @@ namespace XenAPI
         public static void add_to_VCPUs_params(Session session, string _vm, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_to_vcpus_params(session.uuid, _vm, _key, _value);
+                session.JsonRpcClient.vm_add_to_vcpus_params(session.opaque_ref, _vm, _key, _value);
             else
-                session.proxy.vm_add_to_vcpus_params(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vm_add_to_vcpus_params(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2352,9 +2352,9 @@ namespace XenAPI
         public static void remove_from_VCPUs_params(Session session, string _vm, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_remove_from_vcpus_params(session.uuid, _vm, _key);
+                session.JsonRpcClient.vm_remove_from_vcpus_params(session.opaque_ref, _vm, _key);
             else
-                session.proxy.vm_remove_from_vcpus_params(session.uuid, _vm ?? "", _key ?? "").parse();
+                session.proxy.vm_remove_from_vcpus_params(session.opaque_ref, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2367,9 +2367,9 @@ namespace XenAPI
         public static void set_actions_after_shutdown(Session session, string _vm, on_normal_exit _after_shutdown)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_actions_after_shutdown(session.uuid, _vm, _after_shutdown);
+                session.JsonRpcClient.vm_set_actions_after_shutdown(session.opaque_ref, _vm, _after_shutdown);
             else
-                session.proxy.vm_set_actions_after_shutdown(session.uuid, _vm ?? "", on_normal_exit_helper.ToString(_after_shutdown)).parse();
+                session.proxy.vm_set_actions_after_shutdown(session.opaque_ref, _vm ?? "", on_normal_exit_helper.ToString(_after_shutdown)).parse();
         }
 
         /// <summary>
@@ -2382,9 +2382,9 @@ namespace XenAPI
         public static void set_actions_after_reboot(Session session, string _vm, on_normal_exit _after_reboot)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_actions_after_reboot(session.uuid, _vm, _after_reboot);
+                session.JsonRpcClient.vm_set_actions_after_reboot(session.opaque_ref, _vm, _after_reboot);
             else
-                session.proxy.vm_set_actions_after_reboot(session.uuid, _vm ?? "", on_normal_exit_helper.ToString(_after_reboot)).parse();
+                session.proxy.vm_set_actions_after_reboot(session.opaque_ref, _vm ?? "", on_normal_exit_helper.ToString(_after_reboot)).parse();
         }
 
         /// <summary>
@@ -2397,9 +2397,9 @@ namespace XenAPI
         public static void set_actions_after_crash(Session session, string _vm, on_crash_behaviour _after_crash)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_actions_after_crash(session.uuid, _vm, _after_crash);
+                session.JsonRpcClient.vm_set_actions_after_crash(session.opaque_ref, _vm, _after_crash);
             else
-                session.proxy.vm_set_actions_after_crash(session.uuid, _vm ?? "", on_crash_behaviour_helper.ToString(_after_crash)).parse();
+                session.proxy.vm_set_actions_after_crash(session.opaque_ref, _vm ?? "", on_crash_behaviour_helper.ToString(_after_crash)).parse();
         }
 
         /// <summary>
@@ -2412,9 +2412,9 @@ namespace XenAPI
         public static void set_PV_bootloader(Session session, string _vm, string _bootloader)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_pv_bootloader(session.uuid, _vm, _bootloader);
+                session.JsonRpcClient.vm_set_pv_bootloader(session.opaque_ref, _vm, _bootloader);
             else
-                session.proxy.vm_set_pv_bootloader(session.uuid, _vm ?? "", _bootloader ?? "").parse();
+                session.proxy.vm_set_pv_bootloader(session.opaque_ref, _vm ?? "", _bootloader ?? "").parse();
         }
 
         /// <summary>
@@ -2427,9 +2427,9 @@ namespace XenAPI
         public static void set_PV_kernel(Session session, string _vm, string _kernel)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_pv_kernel(session.uuid, _vm, _kernel);
+                session.JsonRpcClient.vm_set_pv_kernel(session.opaque_ref, _vm, _kernel);
             else
-                session.proxy.vm_set_pv_kernel(session.uuid, _vm ?? "", _kernel ?? "").parse();
+                session.proxy.vm_set_pv_kernel(session.opaque_ref, _vm ?? "", _kernel ?? "").parse();
         }
 
         /// <summary>
@@ -2442,9 +2442,9 @@ namespace XenAPI
         public static void set_PV_ramdisk(Session session, string _vm, string _ramdisk)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_pv_ramdisk(session.uuid, _vm, _ramdisk);
+                session.JsonRpcClient.vm_set_pv_ramdisk(session.opaque_ref, _vm, _ramdisk);
             else
-                session.proxy.vm_set_pv_ramdisk(session.uuid, _vm ?? "", _ramdisk ?? "").parse();
+                session.proxy.vm_set_pv_ramdisk(session.opaque_ref, _vm ?? "", _ramdisk ?? "").parse();
         }
 
         /// <summary>
@@ -2457,9 +2457,9 @@ namespace XenAPI
         public static void set_PV_args(Session session, string _vm, string _args)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_pv_args(session.uuid, _vm, _args);
+                session.JsonRpcClient.vm_set_pv_args(session.opaque_ref, _vm, _args);
             else
-                session.proxy.vm_set_pv_args(session.uuid, _vm ?? "", _args ?? "").parse();
+                session.proxy.vm_set_pv_args(session.opaque_ref, _vm ?? "", _args ?? "").parse();
         }
 
         /// <summary>
@@ -2472,9 +2472,9 @@ namespace XenAPI
         public static void set_PV_bootloader_args(Session session, string _vm, string _bootloader_args)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_pv_bootloader_args(session.uuid, _vm, _bootloader_args);
+                session.JsonRpcClient.vm_set_pv_bootloader_args(session.opaque_ref, _vm, _bootloader_args);
             else
-                session.proxy.vm_set_pv_bootloader_args(session.uuid, _vm ?? "", _bootloader_args ?? "").parse();
+                session.proxy.vm_set_pv_bootloader_args(session.opaque_ref, _vm ?? "", _bootloader_args ?? "").parse();
         }
 
         /// <summary>
@@ -2487,9 +2487,9 @@ namespace XenAPI
         public static void set_PV_legacy_args(Session session, string _vm, string _legacy_args)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_pv_legacy_args(session.uuid, _vm, _legacy_args);
+                session.JsonRpcClient.vm_set_pv_legacy_args(session.opaque_ref, _vm, _legacy_args);
             else
-                session.proxy.vm_set_pv_legacy_args(session.uuid, _vm ?? "", _legacy_args ?? "").parse();
+                session.proxy.vm_set_pv_legacy_args(session.opaque_ref, _vm ?? "", _legacy_args ?? "").parse();
         }
 
         /// <summary>
@@ -2502,9 +2502,9 @@ namespace XenAPI
         public static void set_HVM_boot_policy(Session session, string _vm, string _boot_policy)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_hvm_boot_policy(session.uuid, _vm, _boot_policy);
+                session.JsonRpcClient.vm_set_hvm_boot_policy(session.opaque_ref, _vm, _boot_policy);
             else
-                session.proxy.vm_set_hvm_boot_policy(session.uuid, _vm ?? "", _boot_policy ?? "").parse();
+                session.proxy.vm_set_hvm_boot_policy(session.opaque_ref, _vm ?? "", _boot_policy ?? "").parse();
         }
 
         /// <summary>
@@ -2517,9 +2517,9 @@ namespace XenAPI
         public static void set_HVM_boot_params(Session session, string _vm, Dictionary<string, string> _boot_params)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_hvm_boot_params(session.uuid, _vm, _boot_params);
+                session.JsonRpcClient.vm_set_hvm_boot_params(session.opaque_ref, _vm, _boot_params);
             else
-                session.proxy.vm_set_hvm_boot_params(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_boot_params)).parse();
+                session.proxy.vm_set_hvm_boot_params(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_boot_params)).parse();
         }
 
         /// <summary>
@@ -2533,9 +2533,9 @@ namespace XenAPI
         public static void add_to_HVM_boot_params(Session session, string _vm, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_to_hvm_boot_params(session.uuid, _vm, _key, _value);
+                session.JsonRpcClient.vm_add_to_hvm_boot_params(session.opaque_ref, _vm, _key, _value);
             else
-                session.proxy.vm_add_to_hvm_boot_params(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vm_add_to_hvm_boot_params(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2548,9 +2548,9 @@ namespace XenAPI
         public static void remove_from_HVM_boot_params(Session session, string _vm, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_remove_from_hvm_boot_params(session.uuid, _vm, _key);
+                session.JsonRpcClient.vm_remove_from_hvm_boot_params(session.opaque_ref, _vm, _key);
             else
-                session.proxy.vm_remove_from_hvm_boot_params(session.uuid, _vm ?? "", _key ?? "").parse();
+                session.proxy.vm_remove_from_hvm_boot_params(session.opaque_ref, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2563,9 +2563,9 @@ namespace XenAPI
         public static void set_platform(Session session, string _vm, Dictionary<string, string> _platform)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_platform(session.uuid, _vm, _platform);
+                session.JsonRpcClient.vm_set_platform(session.opaque_ref, _vm, _platform);
             else
-                session.proxy.vm_set_platform(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_platform)).parse();
+                session.proxy.vm_set_platform(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_platform)).parse();
         }
 
         /// <summary>
@@ -2579,9 +2579,9 @@ namespace XenAPI
         public static void add_to_platform(Session session, string _vm, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_to_platform(session.uuid, _vm, _key, _value);
+                session.JsonRpcClient.vm_add_to_platform(session.opaque_ref, _vm, _key, _value);
             else
-                session.proxy.vm_add_to_platform(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vm_add_to_platform(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2594,9 +2594,9 @@ namespace XenAPI
         public static void remove_from_platform(Session session, string _vm, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_remove_from_platform(session.uuid, _vm, _key);
+                session.JsonRpcClient.vm_remove_from_platform(session.opaque_ref, _vm, _key);
             else
-                session.proxy.vm_remove_from_platform(session.uuid, _vm ?? "", _key ?? "").parse();
+                session.proxy.vm_remove_from_platform(session.opaque_ref, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2611,9 +2611,9 @@ namespace XenAPI
         public static void set_PCI_bus(Session session, string _vm, string _pci_bus)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_pci_bus(session.uuid, _vm, _pci_bus);
+                session.JsonRpcClient.vm_set_pci_bus(session.opaque_ref, _vm, _pci_bus);
             else
-                session.proxy.vm_set_pci_bus(session.uuid, _vm ?? "", _pci_bus ?? "").parse();
+                session.proxy.vm_set_pci_bus(session.opaque_ref, _vm ?? "", _pci_bus ?? "").parse();
         }
 
         /// <summary>
@@ -2626,9 +2626,9 @@ namespace XenAPI
         public static void set_other_config(Session session, string _vm, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_other_config(session.uuid, _vm, _other_config);
+                session.JsonRpcClient.vm_set_other_config(session.opaque_ref, _vm, _other_config);
             else
-                session.proxy.vm_set_other_config(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+                session.proxy.vm_set_other_config(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -2642,9 +2642,9 @@ namespace XenAPI
         public static void add_to_other_config(Session session, string _vm, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_to_other_config(session.uuid, _vm, _key, _value);
+                session.JsonRpcClient.vm_add_to_other_config(session.opaque_ref, _vm, _key, _value);
             else
-                session.proxy.vm_add_to_other_config(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vm_add_to_other_config(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2657,9 +2657,9 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _vm, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_remove_from_other_config(session.uuid, _vm, _key);
+                session.JsonRpcClient.vm_remove_from_other_config(session.opaque_ref, _vm, _key);
             else
-                session.proxy.vm_remove_from_other_config(session.uuid, _vm ?? "", _key ?? "").parse();
+                session.proxy.vm_remove_from_other_config(session.opaque_ref, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2672,9 +2672,9 @@ namespace XenAPI
         public static void set_recommendations(Session session, string _vm, string _recommendations)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_recommendations(session.uuid, _vm, _recommendations);
+                session.JsonRpcClient.vm_set_recommendations(session.opaque_ref, _vm, _recommendations);
             else
-                session.proxy.vm_set_recommendations(session.uuid, _vm ?? "", _recommendations ?? "").parse();
+                session.proxy.vm_set_recommendations(session.opaque_ref, _vm ?? "", _recommendations ?? "").parse();
         }
 
         /// <summary>
@@ -2687,9 +2687,9 @@ namespace XenAPI
         public static void set_xenstore_data(Session session, string _vm, Dictionary<string, string> _xenstore_data)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_xenstore_data(session.uuid, _vm, _xenstore_data);
+                session.JsonRpcClient.vm_set_xenstore_data(session.opaque_ref, _vm, _xenstore_data);
             else
-                session.proxy.vm_set_xenstore_data(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
+                session.proxy.vm_set_xenstore_data(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
         }
 
         /// <summary>
@@ -2703,9 +2703,9 @@ namespace XenAPI
         public static void add_to_xenstore_data(Session session, string _vm, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_to_xenstore_data(session.uuid, _vm, _key, _value);
+                session.JsonRpcClient.vm_add_to_xenstore_data(session.opaque_ref, _vm, _key, _value);
             else
-                session.proxy.vm_add_to_xenstore_data(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vm_add_to_xenstore_data(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2718,9 +2718,9 @@ namespace XenAPI
         public static void remove_from_xenstore_data(Session session, string _vm, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_remove_from_xenstore_data(session.uuid, _vm, _key);
+                session.JsonRpcClient.vm_remove_from_xenstore_data(session.opaque_ref, _vm, _key);
             else
-                session.proxy.vm_remove_from_xenstore_data(session.uuid, _vm ?? "", _key ?? "").parse();
+                session.proxy.vm_remove_from_xenstore_data(session.opaque_ref, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -2733,9 +2733,9 @@ namespace XenAPI
         public static void set_tags(Session session, string _vm, string[] _tags)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_tags(session.uuid, _vm, _tags);
+                session.JsonRpcClient.vm_set_tags(session.opaque_ref, _vm, _tags);
             else
-                session.proxy.vm_set_tags(session.uuid, _vm ?? "", _tags).parse();
+                session.proxy.vm_set_tags(session.opaque_ref, _vm ?? "", _tags).parse();
         }
 
         /// <summary>
@@ -2748,9 +2748,9 @@ namespace XenAPI
         public static void add_tags(Session session, string _vm, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_tags(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_add_tags(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_add_tags(session.uuid, _vm ?? "", _value ?? "").parse();
+                session.proxy.vm_add_tags(session.opaque_ref, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2763,9 +2763,9 @@ namespace XenAPI
         public static void remove_tags(Session session, string _vm, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_remove_tags(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_remove_tags(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_remove_tags(session.uuid, _vm ?? "", _value ?? "").parse();
+                session.proxy.vm_remove_tags(session.opaque_ref, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -2778,9 +2778,9 @@ namespace XenAPI
         public static void set_blocked_operations(Session session, string _vm, Dictionary<vm_operations, string> _blocked_operations)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_blocked_operations(session.uuid, _vm, _blocked_operations);
+                session.JsonRpcClient.vm_set_blocked_operations(session.opaque_ref, _vm, _blocked_operations);
             else
-                session.proxy.vm_set_blocked_operations(session.uuid, _vm ?? "", Maps.convert_to_proxy_vm_operations_string(_blocked_operations)).parse();
+                session.proxy.vm_set_blocked_operations(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_vm_operations_string(_blocked_operations)).parse();
         }
 
         /// <summary>
@@ -2794,9 +2794,9 @@ namespace XenAPI
         public static void add_to_blocked_operations(Session session, string _vm, vm_operations _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_to_blocked_operations(session.uuid, _vm, _key, _value);
+                session.JsonRpcClient.vm_add_to_blocked_operations(session.opaque_ref, _vm, _key, _value);
             else
-                session.proxy.vm_add_to_blocked_operations(session.uuid, _vm ?? "", vm_operations_helper.ToString(_key), _value ?? "").parse();
+                session.proxy.vm_add_to_blocked_operations(session.opaque_ref, _vm ?? "", vm_operations_helper.ToString(_key), _value ?? "").parse();
         }
 
         /// <summary>
@@ -2809,9 +2809,9 @@ namespace XenAPI
         public static void remove_from_blocked_operations(Session session, string _vm, vm_operations _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_remove_from_blocked_operations(session.uuid, _vm, _key);
+                session.JsonRpcClient.vm_remove_from_blocked_operations(session.opaque_ref, _vm, _key);
             else
-                session.proxy.vm_remove_from_blocked_operations(session.uuid, _vm ?? "", vm_operations_helper.ToString(_key)).parse();
+                session.proxy.vm_remove_from_blocked_operations(session.opaque_ref, _vm ?? "", vm_operations_helper.ToString(_key)).parse();
         }
 
         /// <summary>
@@ -2824,9 +2824,9 @@ namespace XenAPI
         public static void set_suspend_SR(Session session, string _vm, string _suspend_sr)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_suspend_sr(session.uuid, _vm, _suspend_sr);
+                session.JsonRpcClient.vm_set_suspend_sr(session.opaque_ref, _vm, _suspend_sr);
             else
-                session.proxy.vm_set_suspend_sr(session.uuid, _vm ?? "", _suspend_sr ?? "").parse();
+                session.proxy.vm_set_suspend_sr(session.opaque_ref, _vm ?? "", _suspend_sr ?? "").parse();
         }
 
         /// <summary>
@@ -2839,9 +2839,9 @@ namespace XenAPI
         public static void set_hardware_platform_version(Session session, string _vm, long _hardware_platform_version)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_hardware_platform_version(session.uuid, _vm, _hardware_platform_version);
+                session.JsonRpcClient.vm_set_hardware_platform_version(session.opaque_ref, _vm, _hardware_platform_version);
             else
-                session.proxy.vm_set_hardware_platform_version(session.uuid, _vm ?? "", _hardware_platform_version.ToString()).parse();
+                session.proxy.vm_set_hardware_platform_version(session.opaque_ref, _vm ?? "", _hardware_platform_version.ToString()).parse();
         }
 
         /// <summary>
@@ -2854,9 +2854,9 @@ namespace XenAPI
         public static XenRef<VM> snapshot(Session session, string _vm, string _new_name)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_snapshot(session.uuid, _vm, _new_name);
+                return session.JsonRpcClient.vm_snapshot(session.opaque_ref, _vm, _new_name);
             else
-                return XenRef<VM>.Create(session.proxy.vm_snapshot(session.uuid, _vm ?? "", _new_name ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_snapshot(session.opaque_ref, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2869,9 +2869,9 @@ namespace XenAPI
         public static XenRef<Task> async_snapshot(Session session, string _vm, string _new_name)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_snapshot(session.uuid, _vm, _new_name);
+              return session.JsonRpcClient.async_vm_snapshot(session.opaque_ref, _vm, _new_name);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_snapshot(session.uuid, _vm ?? "", _new_name ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_snapshot(session.opaque_ref, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2884,9 +2884,9 @@ namespace XenAPI
         public static XenRef<VM> snapshot_with_quiesce(Session session, string _vm, string _new_name)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_snapshot_with_quiesce(session.uuid, _vm, _new_name);
+                return session.JsonRpcClient.vm_snapshot_with_quiesce(session.opaque_ref, _vm, _new_name);
             else
-                return XenRef<VM>.Create(session.proxy.vm_snapshot_with_quiesce(session.uuid, _vm ?? "", _new_name ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_snapshot_with_quiesce(session.opaque_ref, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2899,9 +2899,9 @@ namespace XenAPI
         public static XenRef<Task> async_snapshot_with_quiesce(Session session, string _vm, string _new_name)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_snapshot_with_quiesce(session.uuid, _vm, _new_name);
+              return session.JsonRpcClient.async_vm_snapshot_with_quiesce(session.opaque_ref, _vm, _new_name);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_snapshot_with_quiesce(session.uuid, _vm ?? "", _new_name ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_snapshot_with_quiesce(session.opaque_ref, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2914,9 +2914,9 @@ namespace XenAPI
         public static XenRef<VM> clone(Session session, string _vm, string _new_name)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_clone(session.uuid, _vm, _new_name);
+                return session.JsonRpcClient.vm_clone(session.opaque_ref, _vm, _new_name);
             else
-                return XenRef<VM>.Create(session.proxy.vm_clone(session.uuid, _vm ?? "", _new_name ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_clone(session.opaque_ref, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2929,9 +2929,9 @@ namespace XenAPI
         public static XenRef<Task> async_clone(Session session, string _vm, string _new_name)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_clone(session.uuid, _vm, _new_name);
+              return session.JsonRpcClient.async_vm_clone(session.opaque_ref, _vm, _new_name);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_clone(session.uuid, _vm ?? "", _new_name ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_clone(session.opaque_ref, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -2945,9 +2945,9 @@ namespace XenAPI
         public static XenRef<VM> copy(Session session, string _vm, string _new_name, string _sr)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_copy(session.uuid, _vm, _new_name, _sr);
+                return session.JsonRpcClient.vm_copy(session.opaque_ref, _vm, _new_name, _sr);
             else
-                return XenRef<VM>.Create(session.proxy.vm_copy(session.uuid, _vm ?? "", _new_name ?? "", _sr ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_copy(session.opaque_ref, _vm ?? "", _new_name ?? "", _sr ?? "").parse());
         }
 
         /// <summary>
@@ -2961,9 +2961,9 @@ namespace XenAPI
         public static XenRef<Task> async_copy(Session session, string _vm, string _new_name, string _sr)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_copy(session.uuid, _vm, _new_name, _sr);
+              return session.JsonRpcClient.async_vm_copy(session.opaque_ref, _vm, _new_name, _sr);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_copy(session.uuid, _vm ?? "", _new_name ?? "", _sr ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_copy(session.opaque_ref, _vm ?? "", _new_name ?? "", _sr ?? "").parse());
         }
 
         /// <summary>
@@ -2975,9 +2975,9 @@ namespace XenAPI
         public static void revert(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_revert(session.uuid, _vm);
+                session.JsonRpcClient.vm_revert(session.opaque_ref, _vm);
             else
-                session.proxy.vm_revert(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_revert(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -2989,9 +2989,9 @@ namespace XenAPI
         public static XenRef<Task> async_revert(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_revert(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_revert(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_revert(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_revert(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3004,9 +3004,9 @@ namespace XenAPI
         public static XenRef<VM> checkpoint(Session session, string _vm, string _new_name)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_checkpoint(session.uuid, _vm, _new_name);
+                return session.JsonRpcClient.vm_checkpoint(session.opaque_ref, _vm, _new_name);
             else
-                return XenRef<VM>.Create(session.proxy.vm_checkpoint(session.uuid, _vm ?? "", _new_name ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vm_checkpoint(session.opaque_ref, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -3019,9 +3019,9 @@ namespace XenAPI
         public static XenRef<Task> async_checkpoint(Session session, string _vm, string _new_name)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_checkpoint(session.uuid, _vm, _new_name);
+              return session.JsonRpcClient.async_vm_checkpoint(session.opaque_ref, _vm, _new_name);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_checkpoint(session.uuid, _vm ?? "", _new_name ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_checkpoint(session.opaque_ref, _vm ?? "", _new_name ?? "").parse());
         }
 
         /// <summary>
@@ -3033,9 +3033,9 @@ namespace XenAPI
         public static void provision(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_provision(session.uuid, _vm);
+                session.JsonRpcClient.vm_provision(session.opaque_ref, _vm);
             else
-                session.proxy.vm_provision(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_provision(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3047,9 +3047,9 @@ namespace XenAPI
         public static XenRef<Task> async_provision(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_provision(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_provision(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_provision(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_provision(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3063,9 +3063,9 @@ namespace XenAPI
         public static void start(Session session, string _vm, bool _start_paused, bool _force)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_start(session.uuid, _vm, _start_paused, _force);
+                session.JsonRpcClient.vm_start(session.opaque_ref, _vm, _start_paused, _force);
             else
-                session.proxy.vm_start(session.uuid, _vm ?? "", _start_paused, _force).parse();
+                session.proxy.vm_start(session.opaque_ref, _vm ?? "", _start_paused, _force).parse();
         }
 
         /// <summary>
@@ -3079,9 +3079,9 @@ namespace XenAPI
         public static XenRef<Task> async_start(Session session, string _vm, bool _start_paused, bool _force)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_start(session.uuid, _vm, _start_paused, _force);
+              return session.JsonRpcClient.async_vm_start(session.opaque_ref, _vm, _start_paused, _force);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_start(session.uuid, _vm ?? "", _start_paused, _force).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_start(session.opaque_ref, _vm ?? "", _start_paused, _force).parse());
         }
 
         /// <summary>
@@ -3096,9 +3096,9 @@ namespace XenAPI
         public static void start_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_start_on(session.uuid, _vm, _host, _start_paused, _force);
+                session.JsonRpcClient.vm_start_on(session.opaque_ref, _vm, _host, _start_paused, _force);
             else
-                session.proxy.vm_start_on(session.uuid, _vm ?? "", _host ?? "", _start_paused, _force).parse();
+                session.proxy.vm_start_on(session.opaque_ref, _vm ?? "", _host ?? "", _start_paused, _force).parse();
         }
 
         /// <summary>
@@ -3113,9 +3113,9 @@ namespace XenAPI
         public static XenRef<Task> async_start_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_start_on(session.uuid, _vm, _host, _start_paused, _force);
+              return session.JsonRpcClient.async_vm_start_on(session.opaque_ref, _vm, _host, _start_paused, _force);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_start_on(session.uuid, _vm ?? "", _host ?? "", _start_paused, _force).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_start_on(session.opaque_ref, _vm ?? "", _host ?? "", _start_paused, _force).parse());
         }
 
         /// <summary>
@@ -3127,9 +3127,9 @@ namespace XenAPI
         public static void pause(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_pause(session.uuid, _vm);
+                session.JsonRpcClient.vm_pause(session.opaque_ref, _vm);
             else
-                session.proxy.vm_pause(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_pause(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3141,9 +3141,9 @@ namespace XenAPI
         public static XenRef<Task> async_pause(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_pause(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_pause(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_pause(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_pause(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3155,9 +3155,9 @@ namespace XenAPI
         public static void unpause(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_unpause(session.uuid, _vm);
+                session.JsonRpcClient.vm_unpause(session.opaque_ref, _vm);
             else
-                session.proxy.vm_unpause(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_unpause(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3169,9 +3169,9 @@ namespace XenAPI
         public static XenRef<Task> async_unpause(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_unpause(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_unpause(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_unpause(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_unpause(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3183,9 +3183,9 @@ namespace XenAPI
         public static void clean_shutdown(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_clean_shutdown(session.uuid, _vm);
+                session.JsonRpcClient.vm_clean_shutdown(session.opaque_ref, _vm);
             else
-                session.proxy.vm_clean_shutdown(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_clean_shutdown(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3197,9 +3197,9 @@ namespace XenAPI
         public static XenRef<Task> async_clean_shutdown(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_clean_shutdown(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_clean_shutdown(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_clean_shutdown(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_clean_shutdown(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3211,9 +3211,9 @@ namespace XenAPI
         public static void shutdown(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_shutdown(session.uuid, _vm);
+                session.JsonRpcClient.vm_shutdown(session.opaque_ref, _vm);
             else
-                session.proxy.vm_shutdown(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_shutdown(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3225,9 +3225,9 @@ namespace XenAPI
         public static XenRef<Task> async_shutdown(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_shutdown(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_shutdown(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_shutdown(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_shutdown(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3239,9 +3239,9 @@ namespace XenAPI
         public static void clean_reboot(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_clean_reboot(session.uuid, _vm);
+                session.JsonRpcClient.vm_clean_reboot(session.opaque_ref, _vm);
             else
-                session.proxy.vm_clean_reboot(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_clean_reboot(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3253,9 +3253,9 @@ namespace XenAPI
         public static XenRef<Task> async_clean_reboot(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_clean_reboot(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_clean_reboot(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_clean_reboot(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_clean_reboot(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3267,9 +3267,9 @@ namespace XenAPI
         public static void hard_shutdown(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_hard_shutdown(session.uuid, _vm);
+                session.JsonRpcClient.vm_hard_shutdown(session.opaque_ref, _vm);
             else
-                session.proxy.vm_hard_shutdown(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_hard_shutdown(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3281,9 +3281,9 @@ namespace XenAPI
         public static XenRef<Task> async_hard_shutdown(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_hard_shutdown(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_hard_shutdown(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_hard_shutdown(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_hard_shutdown(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3295,9 +3295,9 @@ namespace XenAPI
         public static void power_state_reset(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_power_state_reset(session.uuid, _vm);
+                session.JsonRpcClient.vm_power_state_reset(session.opaque_ref, _vm);
             else
-                session.proxy.vm_power_state_reset(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_power_state_reset(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3309,9 +3309,9 @@ namespace XenAPI
         public static XenRef<Task> async_power_state_reset(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_power_state_reset(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_power_state_reset(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_power_state_reset(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_power_state_reset(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3323,9 +3323,9 @@ namespace XenAPI
         public static void hard_reboot(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_hard_reboot(session.uuid, _vm);
+                session.JsonRpcClient.vm_hard_reboot(session.opaque_ref, _vm);
             else
-                session.proxy.vm_hard_reboot(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_hard_reboot(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3337,9 +3337,9 @@ namespace XenAPI
         public static XenRef<Task> async_hard_reboot(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_hard_reboot(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_hard_reboot(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_hard_reboot(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_hard_reboot(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3351,9 +3351,9 @@ namespace XenAPI
         public static void suspend(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_suspend(session.uuid, _vm);
+                session.JsonRpcClient.vm_suspend(session.opaque_ref, _vm);
             else
-                session.proxy.vm_suspend(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_suspend(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3365,9 +3365,9 @@ namespace XenAPI
         public static XenRef<Task> async_suspend(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_suspend(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_suspend(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_suspend(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_suspend(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3381,9 +3381,9 @@ namespace XenAPI
         public static void resume(Session session, string _vm, bool _start_paused, bool _force)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_resume(session.uuid, _vm, _start_paused, _force);
+                session.JsonRpcClient.vm_resume(session.opaque_ref, _vm, _start_paused, _force);
             else
-                session.proxy.vm_resume(session.uuid, _vm ?? "", _start_paused, _force).parse();
+                session.proxy.vm_resume(session.opaque_ref, _vm ?? "", _start_paused, _force).parse();
         }
 
         /// <summary>
@@ -3397,9 +3397,9 @@ namespace XenAPI
         public static XenRef<Task> async_resume(Session session, string _vm, bool _start_paused, bool _force)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_resume(session.uuid, _vm, _start_paused, _force);
+              return session.JsonRpcClient.async_vm_resume(session.opaque_ref, _vm, _start_paused, _force);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_resume(session.uuid, _vm ?? "", _start_paused, _force).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_resume(session.opaque_ref, _vm ?? "", _start_paused, _force).parse());
         }
 
         /// <summary>
@@ -3414,9 +3414,9 @@ namespace XenAPI
         public static void resume_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_resume_on(session.uuid, _vm, _host, _start_paused, _force);
+                session.JsonRpcClient.vm_resume_on(session.opaque_ref, _vm, _host, _start_paused, _force);
             else
-                session.proxy.vm_resume_on(session.uuid, _vm ?? "", _host ?? "", _start_paused, _force).parse();
+                session.proxy.vm_resume_on(session.opaque_ref, _vm ?? "", _host ?? "", _start_paused, _force).parse();
         }
 
         /// <summary>
@@ -3431,9 +3431,9 @@ namespace XenAPI
         public static XenRef<Task> async_resume_on(Session session, string _vm, string _host, bool _start_paused, bool _force)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_resume_on(session.uuid, _vm, _host, _start_paused, _force);
+              return session.JsonRpcClient.async_vm_resume_on(session.opaque_ref, _vm, _host, _start_paused, _force);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_resume_on(session.uuid, _vm ?? "", _host ?? "", _start_paused, _force).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_resume_on(session.opaque_ref, _vm ?? "", _host ?? "", _start_paused, _force).parse());
         }
 
         /// <summary>
@@ -3447,9 +3447,9 @@ namespace XenAPI
         public static void pool_migrate(Session session, string _vm, string _host, Dictionary<string, string> _options)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_pool_migrate(session.uuid, _vm, _host, _options);
+                session.JsonRpcClient.vm_pool_migrate(session.opaque_ref, _vm, _host, _options);
             else
-                session.proxy.vm_pool_migrate(session.uuid, _vm ?? "", _host ?? "", Maps.convert_to_proxy_string_string(_options)).parse();
+                session.proxy.vm_pool_migrate(session.opaque_ref, _vm ?? "", _host ?? "", Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
         /// <summary>
@@ -3463,9 +3463,9 @@ namespace XenAPI
         public static XenRef<Task> async_pool_migrate(Session session, string _vm, string _host, Dictionary<string, string> _options)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_pool_migrate(session.uuid, _vm, _host, _options);
+              return session.JsonRpcClient.async_vm_pool_migrate(session.opaque_ref, _vm, _host, _options);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_pool_migrate(session.uuid, _vm ?? "", _host ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_pool_migrate(session.opaque_ref, _vm ?? "", _host ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -3478,9 +3478,9 @@ namespace XenAPI
         public static void set_VCPUs_number_live(Session session, string _vm, long _nvcpu)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_vcpus_number_live(session.uuid, _vm, _nvcpu);
+                session.JsonRpcClient.vm_set_vcpus_number_live(session.opaque_ref, _vm, _nvcpu);
             else
-                session.proxy.vm_set_vcpus_number_live(session.uuid, _vm ?? "", _nvcpu.ToString()).parse();
+                session.proxy.vm_set_vcpus_number_live(session.opaque_ref, _vm ?? "", _nvcpu.ToString()).parse();
         }
 
         /// <summary>
@@ -3493,9 +3493,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_VCPUs_number_live(Session session, string _vm, long _nvcpu)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_vcpus_number_live(session.uuid, _vm, _nvcpu);
+              return session.JsonRpcClient.async_vm_set_vcpus_number_live(session.opaque_ref, _vm, _nvcpu);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_vcpus_number_live(session.uuid, _vm ?? "", _nvcpu.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_vcpus_number_live(session.opaque_ref, _vm ?? "", _nvcpu.ToString()).parse());
         }
 
         /// <summary>
@@ -3509,9 +3509,9 @@ namespace XenAPI
         public static void add_to_VCPUs_params_live(Session session, string _vm, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_add_to_vcpus_params_live(session.uuid, _vm, _key, _value);
+                session.JsonRpcClient.vm_add_to_vcpus_params_live(session.opaque_ref, _vm, _key, _value);
             else
-                session.proxy.vm_add_to_vcpus_params_live(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vm_add_to_vcpus_params_live(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -3525,9 +3525,9 @@ namespace XenAPI
         public static XenRef<Task> async_add_to_VCPUs_params_live(Session session, string _vm, string _key, string _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_add_to_vcpus_params_live(session.uuid, _vm, _key, _value);
+              return session.JsonRpcClient.async_vm_add_to_vcpus_params_live(session.opaque_ref, _vm, _key, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_add_to_vcpus_params_live(session.uuid, _vm ?? "", _key ?? "", _value ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_add_to_vcpus_params_live(session.opaque_ref, _vm ?? "", _key ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -3540,9 +3540,9 @@ namespace XenAPI
         public static void set_ha_restart_priority(Session session, string _vm, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_ha_restart_priority(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_ha_restart_priority(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_ha_restart_priority(session.uuid, _vm ?? "", _value ?? "").parse();
+                session.proxy.vm_set_ha_restart_priority(session.opaque_ref, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -3557,9 +3557,9 @@ namespace XenAPI
         public static void set_ha_always_run(Session session, string _vm, bool _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_ha_always_run(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_ha_always_run(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_ha_always_run(session.uuid, _vm ?? "", _value).parse();
+                session.proxy.vm_set_ha_always_run(session.opaque_ref, _vm ?? "", _value).parse();
         }
 
         /// <summary>
@@ -3571,9 +3571,9 @@ namespace XenAPI
         public static long compute_memory_overhead(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_compute_memory_overhead(session.uuid, _vm);
+                return session.JsonRpcClient.vm_compute_memory_overhead(session.opaque_ref, _vm);
             else
-                return long.Parse((string)session.proxy.vm_compute_memory_overhead(session.uuid, _vm ?? "").parse());
+                return long.Parse((string)session.proxy.vm_compute_memory_overhead(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3585,9 +3585,9 @@ namespace XenAPI
         public static XenRef<Task> async_compute_memory_overhead(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_compute_memory_overhead(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_compute_memory_overhead(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_compute_memory_overhead(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_compute_memory_overhead(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3600,9 +3600,9 @@ namespace XenAPI
         public static void set_memory_dynamic_max(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory_dynamic_max(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_memory_dynamic_max(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_memory_dynamic_max(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_memory_dynamic_max(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3615,9 +3615,9 @@ namespace XenAPI
         public static void set_memory_dynamic_min(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory_dynamic_min(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_memory_dynamic_min(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_memory_dynamic_min(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_memory_dynamic_min(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3631,9 +3631,9 @@ namespace XenAPI
         public static void set_memory_dynamic_range(Session session, string _vm, long _min, long _max)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory_dynamic_range(session.uuid, _vm, _min, _max);
+                session.JsonRpcClient.vm_set_memory_dynamic_range(session.opaque_ref, _vm, _min, _max);
             else
-                session.proxy.vm_set_memory_dynamic_range(session.uuid, _vm ?? "", _min.ToString(), _max.ToString()).parse();
+                session.proxy.vm_set_memory_dynamic_range(session.opaque_ref, _vm ?? "", _min.ToString(), _max.ToString()).parse();
         }
 
         /// <summary>
@@ -3647,9 +3647,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_memory_dynamic_range(Session session, string _vm, long _min, long _max)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_memory_dynamic_range(session.uuid, _vm, _min, _max);
+              return session.JsonRpcClient.async_vm_set_memory_dynamic_range(session.opaque_ref, _vm, _min, _max);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_dynamic_range(session.uuid, _vm ?? "", _min.ToString(), _max.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_dynamic_range(session.opaque_ref, _vm ?? "", _min.ToString(), _max.ToString()).parse());
         }
 
         /// <summary>
@@ -3662,9 +3662,9 @@ namespace XenAPI
         public static void set_memory_static_max(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory_static_max(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_memory_static_max(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_memory_static_max(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_memory_static_max(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3677,9 +3677,9 @@ namespace XenAPI
         public static void set_memory_static_min(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory_static_min(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_memory_static_min(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_memory_static_min(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_memory_static_min(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3693,9 +3693,9 @@ namespace XenAPI
         public static void set_memory_static_range(Session session, string _vm, long _min, long _max)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory_static_range(session.uuid, _vm, _min, _max);
+                session.JsonRpcClient.vm_set_memory_static_range(session.opaque_ref, _vm, _min, _max);
             else
-                session.proxy.vm_set_memory_static_range(session.uuid, _vm ?? "", _min.ToString(), _max.ToString()).parse();
+                session.proxy.vm_set_memory_static_range(session.opaque_ref, _vm ?? "", _min.ToString(), _max.ToString()).parse();
         }
 
         /// <summary>
@@ -3709,9 +3709,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_memory_static_range(Session session, string _vm, long _min, long _max)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_memory_static_range(session.uuid, _vm, _min, _max);
+              return session.JsonRpcClient.async_vm_set_memory_static_range(session.opaque_ref, _vm, _min, _max);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_static_range(session.uuid, _vm ?? "", _min.ToString(), _max.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_static_range(session.opaque_ref, _vm ?? "", _min.ToString(), _max.ToString()).parse());
         }
 
         /// <summary>
@@ -3727,9 +3727,9 @@ namespace XenAPI
         public static void set_memory_limits(Session session, string _vm, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory_limits(session.uuid, _vm, _static_min, _static_max, _dynamic_min, _dynamic_max);
+                session.JsonRpcClient.vm_set_memory_limits(session.opaque_ref, _vm, _static_min, _static_max, _dynamic_min, _dynamic_max);
             else
-                session.proxy.vm_set_memory_limits(session.uuid, _vm ?? "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse();
+                session.proxy.vm_set_memory_limits(session.opaque_ref, _vm ?? "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse();
         }
 
         /// <summary>
@@ -3745,9 +3745,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_memory_limits(Session session, string _vm, long _static_min, long _static_max, long _dynamic_min, long _dynamic_max)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_memory_limits(session.uuid, _vm, _static_min, _static_max, _dynamic_min, _dynamic_max);
+              return session.JsonRpcClient.async_vm_set_memory_limits(session.opaque_ref, _vm, _static_min, _static_max, _dynamic_min, _dynamic_max);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_limits(session.uuid, _vm ?? "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_limits(session.opaque_ref, _vm ?? "", _static_min.ToString(), _static_max.ToString(), _dynamic_min.ToString(), _dynamic_max.ToString()).parse());
         }
 
         /// <summary>
@@ -3760,9 +3760,9 @@ namespace XenAPI
         public static void set_memory(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_memory(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_memory(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_memory(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3775,9 +3775,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_memory(Session session, string _vm, long _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_memory(session.uuid, _vm, _value);
+              return session.JsonRpcClient.async_vm_set_memory(session.opaque_ref, _vm, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_memory(session.uuid, _vm ?? "", _value.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory(session.opaque_ref, _vm ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -3792,9 +3792,9 @@ namespace XenAPI
         public static void set_memory_target_live(Session session, string _vm, long _target)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_memory_target_live(session.uuid, _vm, _target);
+                session.JsonRpcClient.vm_set_memory_target_live(session.opaque_ref, _vm, _target);
             else
-                session.proxy.vm_set_memory_target_live(session.uuid, _vm ?? "", _target.ToString()).parse();
+                session.proxy.vm_set_memory_target_live(session.opaque_ref, _vm ?? "", _target.ToString()).parse();
         }
 
         /// <summary>
@@ -3809,9 +3809,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_memory_target_live(Session session, string _vm, long _target)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_memory_target_live(session.uuid, _vm, _target);
+              return session.JsonRpcClient.async_vm_set_memory_target_live(session.opaque_ref, _vm, _target);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_target_live(session.uuid, _vm ?? "", _target.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_memory_target_live(session.opaque_ref, _vm ?? "", _target.ToString()).parse());
         }
 
         /// <summary>
@@ -3825,9 +3825,9 @@ namespace XenAPI
         public static void wait_memory_target_live(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_wait_memory_target_live(session.uuid, _vm);
+                session.JsonRpcClient.vm_wait_memory_target_live(session.opaque_ref, _vm);
             else
-                session.proxy.vm_wait_memory_target_live(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_wait_memory_target_live(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3841,9 +3841,9 @@ namespace XenAPI
         public static XenRef<Task> async_wait_memory_target_live(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_wait_memory_target_live(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_wait_memory_target_live(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_wait_memory_target_live(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_wait_memory_target_live(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3857,9 +3857,9 @@ namespace XenAPI
         public static bool get_cooperative(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_cooperative(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_cooperative(session.opaque_ref, _vm);
             else
-                return (bool)session.proxy.vm_get_cooperative(session.uuid, _vm ?? "").parse();
+                return (bool)session.proxy.vm_get_cooperative(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -3873,9 +3873,9 @@ namespace XenAPI
         public static XenRef<Task> async_get_cooperative(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_get_cooperative(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_get_cooperative(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_get_cooperative(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_get_cooperative(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -3888,9 +3888,9 @@ namespace XenAPI
         public static void set_HVM_shadow_multiplier(Session session, string _vm, double _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_hvm_shadow_multiplier(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_hvm_shadow_multiplier(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_hvm_shadow_multiplier(session.uuid, _vm ?? "", _value).parse();
+                session.proxy.vm_set_hvm_shadow_multiplier(session.opaque_ref, _vm ?? "", _value).parse();
         }
 
         /// <summary>
@@ -3903,9 +3903,9 @@ namespace XenAPI
         public static void set_shadow_multiplier_live(Session session, string _vm, double _multiplier)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_shadow_multiplier_live(session.uuid, _vm, _multiplier);
+                session.JsonRpcClient.vm_set_shadow_multiplier_live(session.opaque_ref, _vm, _multiplier);
             else
-                session.proxy.vm_set_shadow_multiplier_live(session.uuid, _vm ?? "", _multiplier).parse();
+                session.proxy.vm_set_shadow_multiplier_live(session.opaque_ref, _vm ?? "", _multiplier).parse();
         }
 
         /// <summary>
@@ -3918,9 +3918,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_shadow_multiplier_live(Session session, string _vm, double _multiplier)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_shadow_multiplier_live(session.uuid, _vm, _multiplier);
+              return session.JsonRpcClient.async_vm_set_shadow_multiplier_live(session.opaque_ref, _vm, _multiplier);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_shadow_multiplier_live(session.uuid, _vm ?? "", _multiplier).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_shadow_multiplier_live(session.opaque_ref, _vm ?? "", _multiplier).parse());
         }
 
         /// <summary>
@@ -3933,9 +3933,9 @@ namespace XenAPI
         public static void set_VCPUs_max(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_vcpus_max(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_vcpus_max(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_vcpus_max(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_vcpus_max(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3948,9 +3948,9 @@ namespace XenAPI
         public static void set_VCPUs_at_startup(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_vcpus_at_startup(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_vcpus_at_startup(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_vcpus_at_startup(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_vcpus_at_startup(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -3963,9 +3963,9 @@ namespace XenAPI
         public static void send_sysrq(Session session, string _vm, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_send_sysrq(session.uuid, _vm, _key);
+                session.JsonRpcClient.vm_send_sysrq(session.opaque_ref, _vm, _key);
             else
-                session.proxy.vm_send_sysrq(session.uuid, _vm ?? "", _key ?? "").parse();
+                session.proxy.vm_send_sysrq(session.opaque_ref, _vm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -3978,9 +3978,9 @@ namespace XenAPI
         public static XenRef<Task> async_send_sysrq(Session session, string _vm, string _key)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_send_sysrq(session.uuid, _vm, _key);
+              return session.JsonRpcClient.async_vm_send_sysrq(session.opaque_ref, _vm, _key);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_send_sysrq(session.uuid, _vm ?? "", _key ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_send_sysrq(session.opaque_ref, _vm ?? "", _key ?? "").parse());
         }
 
         /// <summary>
@@ -3993,9 +3993,9 @@ namespace XenAPI
         public static void send_trigger(Session session, string _vm, string _trigger)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_send_trigger(session.uuid, _vm, _trigger);
+                session.JsonRpcClient.vm_send_trigger(session.opaque_ref, _vm, _trigger);
             else
-                session.proxy.vm_send_trigger(session.uuid, _vm ?? "", _trigger ?? "").parse();
+                session.proxy.vm_send_trigger(session.opaque_ref, _vm ?? "", _trigger ?? "").parse();
         }
 
         /// <summary>
@@ -4008,9 +4008,9 @@ namespace XenAPI
         public static XenRef<Task> async_send_trigger(Session session, string _vm, string _trigger)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_send_trigger(session.uuid, _vm, _trigger);
+              return session.JsonRpcClient.async_vm_send_trigger(session.opaque_ref, _vm, _trigger);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_send_trigger(session.uuid, _vm ?? "", _trigger ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_send_trigger(session.opaque_ref, _vm ?? "", _trigger ?? "").parse());
         }
 
         /// <summary>
@@ -4024,9 +4024,9 @@ namespace XenAPI
         public static long maximise_memory(Session session, string _vm, long _total, bool _approximate)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_maximise_memory(session.uuid, _vm, _total, _approximate);
+                return session.JsonRpcClient.vm_maximise_memory(session.opaque_ref, _vm, _total, _approximate);
             else
-                return long.Parse((string)session.proxy.vm_maximise_memory(session.uuid, _vm ?? "", _total.ToString(), _approximate).parse());
+                return long.Parse((string)session.proxy.vm_maximise_memory(session.opaque_ref, _vm ?? "", _total.ToString(), _approximate).parse());
         }
 
         /// <summary>
@@ -4040,9 +4040,9 @@ namespace XenAPI
         public static XenRef<Task> async_maximise_memory(Session session, string _vm, long _total, bool _approximate)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_maximise_memory(session.uuid, _vm, _total, _approximate);
+              return session.JsonRpcClient.async_vm_maximise_memory(session.opaque_ref, _vm, _total, _approximate);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_maximise_memory(session.uuid, _vm ?? "", _total.ToString(), _approximate).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_maximise_memory(session.opaque_ref, _vm ?? "", _total.ToString(), _approximate).parse());
         }
 
         /// <summary>
@@ -4059,9 +4059,9 @@ namespace XenAPI
         public static XenRef<VM> migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_migrate_send(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options);
+                return session.JsonRpcClient.vm_migrate_send(session.opaque_ref, _vm, _dest, _live, _vdi_map, _vif_map, _options);
             else
-                return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
+                return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -4078,9 +4078,9 @@ namespace XenAPI
         public static XenRef<Task> async_migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_migrate_send(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options);
+              return session.JsonRpcClient.async_vm_migrate_send(session.opaque_ref, _vm, _dest, _live, _vdi_map, _vif_map, _options);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -4098,9 +4098,9 @@ namespace XenAPI
         public static XenRef<VM> migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_migrate_send(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options, _vgpu_map);
+                return session.JsonRpcClient.vm_migrate_send(session.opaque_ref, _vm, _dest, _live, _vdi_map, _vif_map, _options, _vgpu_map);
             else
-                return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+                return XenRef<VM>.Create(session.proxy.vm_migrate_send(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
         }
 
         /// <summary>
@@ -4118,9 +4118,9 @@ namespace XenAPI
         public static XenRef<Task> async_migrate_send(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_migrate_send(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options, _vgpu_map);
+              return session.JsonRpcClient.async_vm_migrate_send(session.opaque_ref, _vm, _dest, _live, _vdi_map, _vif_map, _options, _vgpu_map);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_migrate_send(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
         }
 
         /// <summary>
@@ -4137,9 +4137,9 @@ namespace XenAPI
         public static void assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_assert_can_migrate(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options);
+                session.JsonRpcClient.vm_assert_can_migrate(session.opaque_ref, _vm, _dest, _live, _vdi_map, _vif_map, _options);
             else
-                session.proxy.vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse();
+                session.proxy.vm_assert_can_migrate(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse();
         }
 
         /// <summary>
@@ -4156,9 +4156,9 @@ namespace XenAPI
         public static XenRef<Task> async_assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_assert_can_migrate(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options);
+              return session.JsonRpcClient.async_vm_assert_can_migrate(session.opaque_ref, _vm, _dest, _live, _vdi_map, _vif_map, _options);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -4176,9 +4176,9 @@ namespace XenAPI
         public static void assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_assert_can_migrate(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options, _vgpu_map);
+                session.JsonRpcClient.vm_assert_can_migrate(session.opaque_ref, _vm, _dest, _live, _vdi_map, _vif_map, _options, _vgpu_map);
             else
-                session.proxy.vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse();
+                session.proxy.vm_assert_can_migrate(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse();
         }
 
         /// <summary>
@@ -4196,9 +4196,9 @@ namespace XenAPI
         public static XenRef<Task> async_assert_can_migrate(Session session, string _vm, Dictionary<string, string> _dest, bool _live, Dictionary<XenRef<VDI>, XenRef<SR>> _vdi_map, Dictionary<XenRef<VIF>, XenRef<Network>> _vif_map, Dictionary<string, string> _options, Dictionary<XenRef<VGPU>, XenRef<GPU_group>> _vgpu_map)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_assert_can_migrate(session.uuid, _vm, _dest, _live, _vdi_map, _vif_map, _options, _vgpu_map);
+              return session.JsonRpcClient.async_vm_assert_can_migrate(session.opaque_ref, _vm, _dest, _live, _vdi_map, _vif_map, _options, _vgpu_map);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_migrate(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_dest), _live, Maps.convert_to_proxy_XenRefVDI_XenRefSR(_vdi_map), Maps.convert_to_proxy_XenRefVIF_XenRefNetwork(_vif_map), Maps.convert_to_proxy_string_string(_options), Maps.convert_to_proxy_XenRefVGPU_XenRefGPU_group(_vgpu_map)).parse());
         }
 
         /// <summary>
@@ -4212,9 +4212,9 @@ namespace XenAPI
         public static VM get_boot_record(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_boot_record(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_boot_record(session.opaque_ref, _vm);
             else
-                return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.uuid, _vm ?? "").parse());
+                return new VM((Proxy_VM)session.proxy.vm_get_boot_record(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4226,9 +4226,9 @@ namespace XenAPI
         public static List<Data_source> get_data_sources(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_data_sources(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_data_sources(session.opaque_ref, _vm);
             else
-                return Data_source.ProxyArrayToObjectList(session.proxy.vm_get_data_sources(session.uuid, _vm ?? "").parse());
+                return Data_source.ProxyArrayToObjectList(session.proxy.vm_get_data_sources(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4241,9 +4241,9 @@ namespace XenAPI
         public static void record_data_source(Session session, string _vm, string _data_source)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_record_data_source(session.uuid, _vm, _data_source);
+                session.JsonRpcClient.vm_record_data_source(session.opaque_ref, _vm, _data_source);
             else
-                session.proxy.vm_record_data_source(session.uuid, _vm ?? "", _data_source ?? "").parse();
+                session.proxy.vm_record_data_source(session.opaque_ref, _vm ?? "", _data_source ?? "").parse();
         }
 
         /// <summary>
@@ -4256,9 +4256,9 @@ namespace XenAPI
         public static double query_data_source(Session session, string _vm, string _data_source)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_query_data_source(session.uuid, _vm, _data_source);
+                return session.JsonRpcClient.vm_query_data_source(session.opaque_ref, _vm, _data_source);
             else
-                return Convert.ToDouble(session.proxy.vm_query_data_source(session.uuid, _vm ?? "", _data_source ?? "").parse());
+                return Convert.ToDouble(session.proxy.vm_query_data_source(session.opaque_ref, _vm ?? "", _data_source ?? "").parse());
         }
 
         /// <summary>
@@ -4271,9 +4271,9 @@ namespace XenAPI
         public static void forget_data_source_archives(Session session, string _vm, string _data_source)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_forget_data_source_archives(session.uuid, _vm, _data_source);
+                session.JsonRpcClient.vm_forget_data_source_archives(session.opaque_ref, _vm, _data_source);
             else
-                session.proxy.vm_forget_data_source_archives(session.uuid, _vm ?? "", _data_source ?? "").parse();
+                session.proxy.vm_forget_data_source_archives(session.opaque_ref, _vm ?? "", _data_source ?? "").parse();
         }
 
         /// <summary>
@@ -4286,9 +4286,9 @@ namespace XenAPI
         public static void assert_operation_valid(Session session, string _vm, vm_operations _op)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_assert_operation_valid(session.uuid, _vm, _op);
+                session.JsonRpcClient.vm_assert_operation_valid(session.opaque_ref, _vm, _op);
             else
-                session.proxy.vm_assert_operation_valid(session.uuid, _vm ?? "", vm_operations_helper.ToString(_op)).parse();
+                session.proxy.vm_assert_operation_valid(session.opaque_ref, _vm ?? "", vm_operations_helper.ToString(_op)).parse();
         }
 
         /// <summary>
@@ -4301,9 +4301,9 @@ namespace XenAPI
         public static XenRef<Task> async_assert_operation_valid(Session session, string _vm, vm_operations _op)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_assert_operation_valid(session.uuid, _vm, _op);
+              return session.JsonRpcClient.async_vm_assert_operation_valid(session.opaque_ref, _vm, _op);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_assert_operation_valid(session.uuid, _vm ?? "", vm_operations_helper.ToString(_op)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_operation_valid(session.opaque_ref, _vm ?? "", vm_operations_helper.ToString(_op)).parse());
         }
 
         /// <summary>
@@ -4315,9 +4315,9 @@ namespace XenAPI
         public static void update_allowed_operations(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_update_allowed_operations(session.uuid, _vm);
+                session.JsonRpcClient.vm_update_allowed_operations(session.opaque_ref, _vm);
             else
-                session.proxy.vm_update_allowed_operations(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_update_allowed_operations(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -4329,9 +4329,9 @@ namespace XenAPI
         public static XenRef<Task> async_update_allowed_operations(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_update_allowed_operations(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_update_allowed_operations(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_update_allowed_operations(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_update_allowed_operations(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4343,9 +4343,9 @@ namespace XenAPI
         public static string[] get_allowed_VBD_devices(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_allowed_vbd_devices(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_allowed_vbd_devices(session.opaque_ref, _vm);
             else
-                return (string [])session.proxy.vm_get_allowed_vbd_devices(session.uuid, _vm ?? "").parse();
+                return (string [])session.proxy.vm_get_allowed_vbd_devices(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -4357,9 +4357,9 @@ namespace XenAPI
         public static string[] get_allowed_VIF_devices(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_allowed_vif_devices(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_allowed_vif_devices(session.opaque_ref, _vm);
             else
-                return (string [])session.proxy.vm_get_allowed_vif_devices(session.uuid, _vm ?? "").parse();
+                return (string [])session.proxy.vm_get_allowed_vif_devices(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -4371,9 +4371,9 @@ namespace XenAPI
         public static List<XenRef<Host>> get_possible_hosts(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_possible_hosts(session.uuid, _vm);
+                return session.JsonRpcClient.vm_get_possible_hosts(session.opaque_ref, _vm);
             else
-                return XenRef<Host>.Create(session.proxy.vm_get_possible_hosts(session.uuid, _vm ?? "").parse());
+                return XenRef<Host>.Create(session.proxy.vm_get_possible_hosts(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4385,9 +4385,9 @@ namespace XenAPI
         public static XenRef<Task> async_get_possible_hosts(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_get_possible_hosts(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_get_possible_hosts(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_get_possible_hosts(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_get_possible_hosts(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4400,9 +4400,9 @@ namespace XenAPI
         public static void assert_can_boot_here(Session session, string _vm, string _host)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_assert_can_boot_here(session.uuid, _vm, _host);
+                session.JsonRpcClient.vm_assert_can_boot_here(session.opaque_ref, _vm, _host);
             else
-                session.proxy.vm_assert_can_boot_here(session.uuid, _vm ?? "", _host ?? "").parse();
+                session.proxy.vm_assert_can_boot_here(session.opaque_ref, _vm ?? "", _host ?? "").parse();
         }
 
         /// <summary>
@@ -4415,9 +4415,9 @@ namespace XenAPI
         public static XenRef<Task> async_assert_can_boot_here(Session session, string _vm, string _host)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_assert_can_boot_here(session.uuid, _vm, _host);
+              return session.JsonRpcClient.async_vm_assert_can_boot_here(session.opaque_ref, _vm, _host);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_boot_here(session.uuid, _vm ?? "", _host ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_boot_here(session.opaque_ref, _vm ?? "", _host ?? "").parse());
         }
 
         /// <summary>
@@ -4431,9 +4431,9 @@ namespace XenAPI
         public static XenRef<Blob> create_new_blob(Session session, string _vm, string _name, string _mime_type)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_create_new_blob(session.uuid, _vm, _name, _mime_type);
+                return session.JsonRpcClient.vm_create_new_blob(session.opaque_ref, _vm, _name, _mime_type);
             else
-                return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.uuid, _vm ?? "", _name ?? "", _mime_type ?? "").parse());
+                return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.opaque_ref, _vm ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -4447,9 +4447,9 @@ namespace XenAPI
         public static XenRef<Task> async_create_new_blob(Session session, string _vm, string _name, string _mime_type)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_create_new_blob(session.uuid, _vm, _name, _mime_type);
+              return session.JsonRpcClient.async_vm_create_new_blob(session.opaque_ref, _vm, _name, _mime_type);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.uuid, _vm ?? "", _name ?? "", _mime_type ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.opaque_ref, _vm ?? "", _name ?? "", _mime_type ?? "").parse());
         }
 
         /// <summary>
@@ -4464,9 +4464,9 @@ namespace XenAPI
         public static XenRef<Blob> create_new_blob(Session session, string _vm, string _name, string _mime_type, bool _public)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_create_new_blob(session.uuid, _vm, _name, _mime_type, _public);
+                return session.JsonRpcClient.vm_create_new_blob(session.opaque_ref, _vm, _name, _mime_type, _public);
             else
-                return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.uuid, _vm ?? "", _name ?? "", _mime_type ?? "", _public).parse());
+                return XenRef<Blob>.Create(session.proxy.vm_create_new_blob(session.opaque_ref, _vm ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -4481,9 +4481,9 @@ namespace XenAPI
         public static XenRef<Task> async_create_new_blob(Session session, string _vm, string _name, string _mime_type, bool _public)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_create_new_blob(session.uuid, _vm, _name, _mime_type, _public);
+              return session.JsonRpcClient.async_vm_create_new_blob(session.opaque_ref, _vm, _name, _mime_type, _public);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.uuid, _vm ?? "", _name ?? "", _mime_type ?? "", _public).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_create_new_blob(session.opaque_ref, _vm ?? "", _name ?? "", _mime_type ?? "", _public).parse());
         }
 
         /// <summary>
@@ -4495,9 +4495,9 @@ namespace XenAPI
         public static void assert_agile(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_assert_agile(session.uuid, _vm);
+                session.JsonRpcClient.vm_assert_agile(session.opaque_ref, _vm);
             else
-                session.proxy.vm_assert_agile(session.uuid, _vm ?? "").parse();
+                session.proxy.vm_assert_agile(session.opaque_ref, _vm ?? "").parse();
         }
 
         /// <summary>
@@ -4509,9 +4509,9 @@ namespace XenAPI
         public static XenRef<Task> async_assert_agile(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_assert_agile(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_assert_agile(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_assert_agile(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_agile(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4523,9 +4523,9 @@ namespace XenAPI
         public static Dictionary<XenRef<Host>, string[]> retrieve_wlb_recommendations(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_retrieve_wlb_recommendations(session.uuid, _vm);
+                return session.JsonRpcClient.vm_retrieve_wlb_recommendations(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_XenRefHost_string_array(session.proxy.vm_retrieve_wlb_recommendations(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_XenRefHost_string_array(session.proxy.vm_retrieve_wlb_recommendations(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4537,9 +4537,9 @@ namespace XenAPI
         public static XenRef<Task> async_retrieve_wlb_recommendations(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_retrieve_wlb_recommendations(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_retrieve_wlb_recommendations(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_retrieve_wlb_recommendations(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_retrieve_wlb_recommendations(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4552,9 +4552,9 @@ namespace XenAPI
         public static void set_bios_strings(Session session, string _vm, Dictionary<string, string> _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_bios_strings(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_bios_strings(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_bios_strings(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
+                session.proxy.vm_set_bios_strings(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_value)).parse();
         }
 
         /// <summary>
@@ -4567,9 +4567,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_bios_strings(Session session, string _vm, Dictionary<string, string> _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_bios_strings(session.uuid, _vm, _value);
+              return session.JsonRpcClient.async_vm_set_bios_strings(session.opaque_ref, _vm, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_bios_strings(session.uuid, _vm ?? "", Maps.convert_to_proxy_string_string(_value)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_bios_strings(session.opaque_ref, _vm ?? "", Maps.convert_to_proxy_string_string(_value)).parse());
         }
 
         /// <summary>
@@ -4582,9 +4582,9 @@ namespace XenAPI
         public static void copy_bios_strings(Session session, string _vm, string _host)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_copy_bios_strings(session.uuid, _vm, _host);
+                session.JsonRpcClient.vm_copy_bios_strings(session.opaque_ref, _vm, _host);
             else
-                session.proxy.vm_copy_bios_strings(session.uuid, _vm ?? "", _host ?? "").parse();
+                session.proxy.vm_copy_bios_strings(session.opaque_ref, _vm ?? "", _host ?? "").parse();
         }
 
         /// <summary>
@@ -4597,9 +4597,9 @@ namespace XenAPI
         public static XenRef<Task> async_copy_bios_strings(Session session, string _vm, string _host)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_copy_bios_strings(session.uuid, _vm, _host);
+              return session.JsonRpcClient.async_vm_copy_bios_strings(session.opaque_ref, _vm, _host);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_copy_bios_strings(session.uuid, _vm ?? "", _host ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_copy_bios_strings(session.opaque_ref, _vm ?? "", _host ?? "").parse());
         }
 
         /// <summary>
@@ -4612,9 +4612,9 @@ namespace XenAPI
         public static void set_protection_policy(Session session, string _vm, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_protection_policy(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_protection_policy(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_protection_policy(session.uuid, _vm ?? "", _value ?? "").parse();
+                session.proxy.vm_set_protection_policy(session.opaque_ref, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -4627,9 +4627,9 @@ namespace XenAPI
         public static void set_snapshot_schedule(Session session, string _vm, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_snapshot_schedule(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_snapshot_schedule(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_snapshot_schedule(session.uuid, _vm ?? "", _value ?? "").parse();
+                session.proxy.vm_set_snapshot_schedule(session.opaque_ref, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -4642,9 +4642,9 @@ namespace XenAPI
         public static void set_start_delay(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_start_delay(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_start_delay(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_start_delay(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_start_delay(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -4657,9 +4657,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_start_delay(Session session, string _vm, long _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_start_delay(session.uuid, _vm, _value);
+              return session.JsonRpcClient.async_vm_set_start_delay(session.opaque_ref, _vm, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_start_delay(session.uuid, _vm ?? "", _value.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_start_delay(session.opaque_ref, _vm ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -4672,9 +4672,9 @@ namespace XenAPI
         public static void set_shutdown_delay(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_shutdown_delay(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_shutdown_delay(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_shutdown_delay(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_shutdown_delay(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -4687,9 +4687,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_shutdown_delay(Session session, string _vm, long _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_shutdown_delay(session.uuid, _vm, _value);
+              return session.JsonRpcClient.async_vm_set_shutdown_delay(session.opaque_ref, _vm, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_shutdown_delay(session.uuid, _vm ?? "", _value.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_shutdown_delay(session.opaque_ref, _vm ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -4702,9 +4702,9 @@ namespace XenAPI
         public static void set_order(Session session, string _vm, long _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_order(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_order(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_order(session.uuid, _vm ?? "", _value.ToString()).parse();
+                session.proxy.vm_set_order(session.opaque_ref, _vm ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -4717,9 +4717,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_order(Session session, string _vm, long _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_order(session.uuid, _vm, _value);
+              return session.JsonRpcClient.async_vm_set_order(session.opaque_ref, _vm, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_order(session.uuid, _vm ?? "", _value.ToString()).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_order(session.opaque_ref, _vm ?? "", _value.ToString()).parse());
         }
 
         /// <summary>
@@ -4732,9 +4732,9 @@ namespace XenAPI
         public static void set_suspend_VDI(Session session, string _vm, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_suspend_vdi(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_suspend_vdi(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_suspend_vdi(session.uuid, _vm ?? "", _value ?? "").parse();
+                session.proxy.vm_set_suspend_vdi(session.opaque_ref, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -4747,9 +4747,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_suspend_VDI(Session session, string _vm, string _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_suspend_vdi(session.uuid, _vm, _value);
+              return session.JsonRpcClient.async_vm_set_suspend_vdi(session.opaque_ref, _vm, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_suspend_vdi(session.uuid, _vm ?? "", _value ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_suspend_vdi(session.opaque_ref, _vm ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -4762,9 +4762,9 @@ namespace XenAPI
         public static void assert_can_be_recovered(Session session, string _vm, string _session_to)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_assert_can_be_recovered(session.uuid, _vm, _session_to);
+                session.JsonRpcClient.vm_assert_can_be_recovered(session.opaque_ref, _vm, _session_to);
             else
-                session.proxy.vm_assert_can_be_recovered(session.uuid, _vm ?? "", _session_to ?? "").parse();
+                session.proxy.vm_assert_can_be_recovered(session.opaque_ref, _vm ?? "", _session_to ?? "").parse();
         }
 
         /// <summary>
@@ -4777,9 +4777,9 @@ namespace XenAPI
         public static XenRef<Task> async_assert_can_be_recovered(Session session, string _vm, string _session_to)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_assert_can_be_recovered(session.uuid, _vm, _session_to);
+              return session.JsonRpcClient.async_vm_assert_can_be_recovered(session.opaque_ref, _vm, _session_to);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_be_recovered(session.uuid, _vm ?? "", _session_to ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_assert_can_be_recovered(session.opaque_ref, _vm ?? "", _session_to ?? "").parse());
         }
 
         /// <summary>
@@ -4792,9 +4792,9 @@ namespace XenAPI
         public static List<XenRef<SR>> get_SRs_required_for_recovery(Session session, string _vm, string _session_to)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_srs_required_for_recovery(session.uuid, _vm, _session_to);
+                return session.JsonRpcClient.vm_get_srs_required_for_recovery(session.opaque_ref, _vm, _session_to);
             else
-                return XenRef<SR>.Create(session.proxy.vm_get_srs_required_for_recovery(session.uuid, _vm ?? "", _session_to ?? "").parse());
+                return XenRef<SR>.Create(session.proxy.vm_get_srs_required_for_recovery(session.opaque_ref, _vm ?? "", _session_to ?? "").parse());
         }
 
         /// <summary>
@@ -4807,9 +4807,9 @@ namespace XenAPI
         public static XenRef<Task> async_get_SRs_required_for_recovery(Session session, string _vm, string _session_to)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_get_srs_required_for_recovery(session.uuid, _vm, _session_to);
+              return session.JsonRpcClient.async_vm_get_srs_required_for_recovery(session.opaque_ref, _vm, _session_to);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_get_srs_required_for_recovery(session.uuid, _vm ?? "", _session_to ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_get_srs_required_for_recovery(session.opaque_ref, _vm ?? "", _session_to ?? "").parse());
         }
 
         /// <summary>
@@ -4823,9 +4823,9 @@ namespace XenAPI
         public static void recover(Session session, string _vm, string _session_to, bool _force)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_recover(session.uuid, _vm, _session_to, _force);
+                session.JsonRpcClient.vm_recover(session.opaque_ref, _vm, _session_to, _force);
             else
-                session.proxy.vm_recover(session.uuid, _vm ?? "", _session_to ?? "", _force).parse();
+                session.proxy.vm_recover(session.opaque_ref, _vm ?? "", _session_to ?? "", _force).parse();
         }
 
         /// <summary>
@@ -4839,9 +4839,9 @@ namespace XenAPI
         public static XenRef<Task> async_recover(Session session, string _vm, string _session_to, bool _force)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_recover(session.uuid, _vm, _session_to, _force);
+              return session.JsonRpcClient.async_vm_recover(session.opaque_ref, _vm, _session_to, _force);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_recover(session.uuid, _vm ?? "", _session_to ?? "", _force).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_recover(session.opaque_ref, _vm ?? "", _session_to ?? "", _force).parse());
         }
 
         /// <summary>
@@ -4857,9 +4857,9 @@ namespace XenAPI
         public static void import_convert(Session session, string _type, string _username, string _password, string _sr, Dictionary<string, string> _remote_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_import_convert(session.uuid, _type, _username, _password, _sr, _remote_config);
+                session.JsonRpcClient.vm_import_convert(session.opaque_ref, _type, _username, _password, _sr, _remote_config);
             else
-                session.proxy.vm_import_convert(session.uuid, _type ?? "", _username ?? "", _password ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_remote_config)).parse();
+                session.proxy.vm_import_convert(session.opaque_ref, _type ?? "", _username ?? "", _password ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_remote_config)).parse();
         }
 
         /// <summary>
@@ -4875,9 +4875,9 @@ namespace XenAPI
         public static XenRef<Task> async_import_convert(Session session, string _type, string _username, string _password, string _sr, Dictionary<string, string> _remote_config)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_import_convert(session.uuid, _type, _username, _password, _sr, _remote_config);
+              return session.JsonRpcClient.async_vm_import_convert(session.opaque_ref, _type, _username, _password, _sr, _remote_config);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_import_convert(session.uuid, _type ?? "", _username ?? "", _password ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_remote_config)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_import_convert(session.opaque_ref, _type ?? "", _username ?? "", _password ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_remote_config)).parse());
         }
 
         /// <summary>
@@ -4890,9 +4890,9 @@ namespace XenAPI
         public static void set_appliance(Session session, string _vm, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_appliance(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_appliance(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_appliance(session.uuid, _vm ?? "", _value ?? "").parse();
+                session.proxy.vm_set_appliance(session.opaque_ref, _vm ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -4905,9 +4905,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_appliance(Session session, string _vm, string _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_appliance(session.uuid, _vm, _value);
+              return session.JsonRpcClient.async_vm_set_appliance(session.opaque_ref, _vm, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_appliance(session.uuid, _vm ?? "", _value ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_appliance(session.opaque_ref, _vm ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -4919,9 +4919,9 @@ namespace XenAPI
         public static Dictionary<string, string> query_services(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_query_services(session.uuid, _vm);
+                return session.JsonRpcClient.vm_query_services(session.opaque_ref, _vm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_query_services(session.uuid, _vm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_query_services(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4933,9 +4933,9 @@ namespace XenAPI
         public static XenRef<Task> async_query_services(Session session, string _vm)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_query_services(session.uuid, _vm);
+              return session.JsonRpcClient.async_vm_query_services(session.opaque_ref, _vm);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_query_services(session.uuid, _vm ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_query_services(session.opaque_ref, _vm ?? "").parse());
         }
 
         /// <summary>
@@ -4950,9 +4950,9 @@ namespace XenAPI
         public static string call_plugin(Session session, string _vm, string _plugin, string _fn, Dictionary<string, string> _args)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_call_plugin(session.uuid, _vm, _plugin, _fn, _args);
+                return session.JsonRpcClient.vm_call_plugin(session.opaque_ref, _vm, _plugin, _fn, _args);
             else
-                return (string)session.proxy.vm_call_plugin(session.uuid, _vm ?? "", _plugin ?? "", _fn ?? "", Maps.convert_to_proxy_string_string(_args)).parse();
+                return (string)session.proxy.vm_call_plugin(session.opaque_ref, _vm ?? "", _plugin ?? "", _fn ?? "", Maps.convert_to_proxy_string_string(_args)).parse();
         }
 
         /// <summary>
@@ -4967,9 +4967,9 @@ namespace XenAPI
         public static XenRef<Task> async_call_plugin(Session session, string _vm, string _plugin, string _fn, Dictionary<string, string> _args)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_call_plugin(session.uuid, _vm, _plugin, _fn, _args);
+              return session.JsonRpcClient.async_vm_call_plugin(session.opaque_ref, _vm, _plugin, _fn, _args);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_call_plugin(session.uuid, _vm ?? "", _plugin ?? "", _fn ?? "", Maps.convert_to_proxy_string_string(_args)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_call_plugin(session.opaque_ref, _vm ?? "", _plugin ?? "", _fn ?? "", Maps.convert_to_proxy_string_string(_args)).parse());
         }
 
         /// <summary>
@@ -4982,9 +4982,9 @@ namespace XenAPI
         public static void set_has_vendor_device(Session session, string _vm, bool _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_has_vendor_device(session.uuid, _vm, _value);
+                session.JsonRpcClient.vm_set_has_vendor_device(session.opaque_ref, _vm, _value);
             else
-                session.proxy.vm_set_has_vendor_device(session.uuid, _vm ?? "", _value).parse();
+                session.proxy.vm_set_has_vendor_device(session.opaque_ref, _vm ?? "", _value).parse();
         }
 
         /// <summary>
@@ -4997,9 +4997,9 @@ namespace XenAPI
         public static XenRef<Task> async_set_has_vendor_device(Session session, string _vm, bool _value)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_set_has_vendor_device(session.uuid, _vm, _value);
+              return session.JsonRpcClient.async_vm_set_has_vendor_device(session.opaque_ref, _vm, _value);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_set_has_vendor_device(session.uuid, _vm ?? "", _value).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_set_has_vendor_device(session.opaque_ref, _vm ?? "", _value).parse());
         }
 
         /// <summary>
@@ -5014,9 +5014,9 @@ namespace XenAPI
         public static List<XenRef<VM>> import(Session session, string _url, string _sr, bool _full_restore, bool _force)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_import(session.uuid, _url, _sr, _full_restore, _force);
+                return session.JsonRpcClient.vm_import(session.opaque_ref, _url, _sr, _full_restore, _force);
             else
-                return XenRef<VM>.Create(session.proxy.vm_import(session.uuid, _url ?? "", _sr ?? "", _full_restore, _force).parse());
+                return XenRef<VM>.Create(session.proxy.vm_import(session.opaque_ref, _url ?? "", _sr ?? "", _full_restore, _force).parse());
         }
 
         /// <summary>
@@ -5031,9 +5031,9 @@ namespace XenAPI
         public static XenRef<Task> async_import(Session session, string _url, string _sr, bool _full_restore, bool _force)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vm_import(session.uuid, _url, _sr, _full_restore, _force);
+              return session.JsonRpcClient.async_vm_import(session.opaque_ref, _url, _sr, _full_restore, _force);
           else
-              return XenRef<Task>.Create(session.proxy.async_vm_import(session.uuid, _url ?? "", _sr ?? "", _full_restore, _force).parse());
+              return XenRef<Task>.Create(session.proxy.async_vm_import(session.opaque_ref, _url ?? "", _sr ?? "", _full_restore, _force).parse());
         }
 
         /// <summary>
@@ -5044,9 +5044,9 @@ namespace XenAPI
         public static List<XenRef<VM>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_all(session.uuid);
+                return session.JsonRpcClient.vm_get_all(session.opaque_ref);
             else
-                return XenRef<VM>.Create(session.proxy.vm_get_all(session.uuid).parse());
+                return XenRef<VM>.Create(session.proxy.vm_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -5057,9 +5057,9 @@ namespace XenAPI
         public static Dictionary<XenRef<VM>, VM> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_get_all_records(session.uuid);
+                return session.JsonRpcClient.vm_get_all_records(session.opaque_ref);
             else
-                return XenRef<VM>.Create<Proxy_VM>(session.proxy.vm_get_all_records(session.uuid).parse());
+                return XenRef<VM>.Create<Proxy_VM>(session.proxy.vm_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
