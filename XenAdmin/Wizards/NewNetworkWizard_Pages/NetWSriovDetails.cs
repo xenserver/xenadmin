@@ -31,13 +31,23 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             comboBoxNicList.Items.Clear();
             foreach (PIF thePIF in conn.Cache.PIFs)
             {
-                if (thePIF.host.opaque_ref == host.opaque_ref && thePIF.IsPhysical() && !thePIF.IsBondNIC())
+                if (thePIF.host.opaque_ref == host.opaque_ref && thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable())
                 {
                     comboBoxNicList.Items.Add(thePIF);
                 }
             }
             if (comboBoxNicList.Items.Count > 0)
                 comboBoxNicList.SelectedIndex = 0;
+        }
+
+        public XenAPI.PIF SelectedHostNic
+        {
+            get { return (XenAPI.PIF)comboBoxNicList.SelectedItem; }
+        }
+
+        public bool isAutomaticAddNicToVM
+        {
+            get { return cbxAutomatic.Checked; }
         }
     }
 }
