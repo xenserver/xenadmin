@@ -125,15 +125,15 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
+                uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("tagged_PIF"))
-                tagged_PIF = XenRef<PIF>.Create((string)table["tagged_PIF"]);
+                tagged_PIF = Marshalling.ParseRef<PIF>(table, "tagged_PIF");
             if (table.ContainsKey("untagged_PIF"))
-                untagged_PIF = XenRef<PIF>.Create((string)table["untagged_PIF"]);
+                untagged_PIF = Marshalling.ParseRef<PIF>(table, "untagged_PIF");
             if (table.ContainsKey("tag"))
-                tag = long.Parse((string)table["tag"]);
+                tag = Marshalling.ParseLong(table, "tag");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(VLAN other)
@@ -185,9 +185,9 @@ namespace XenAPI
         public static VLAN get_record(Session session, string _vlan)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_record(session.uuid, _vlan);
+                return session.JsonRpcClient.vlan_get_record(session.opaque_ref, _vlan);
             else
-                return new VLAN((Proxy_VLAN)session.proxy.vlan_get_record(session.uuid, _vlan ?? "").parse());
+                return new VLAN((Proxy_VLAN)session.proxy.vlan_get_record(session.opaque_ref, _vlan ?? "").parse());
         }
 
         /// <summary>
@@ -199,9 +199,9 @@ namespace XenAPI
         public static XenRef<VLAN> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.vlan_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<VLAN>.Create(session.proxy.vlan_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<VLAN>.Create(session.proxy.vlan_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -213,9 +213,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _vlan)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_uuid(session.uuid, _vlan);
+                return session.JsonRpcClient.vlan_get_uuid(session.opaque_ref, _vlan);
             else
-                return (string)session.proxy.vlan_get_uuid(session.uuid, _vlan ?? "").parse();
+                return (string)session.proxy.vlan_get_uuid(session.opaque_ref, _vlan ?? "").parse();
         }
 
         /// <summary>
@@ -227,9 +227,9 @@ namespace XenAPI
         public static XenRef<PIF> get_tagged_PIF(Session session, string _vlan)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_tagged_pif(session.uuid, _vlan);
+                return session.JsonRpcClient.vlan_get_tagged_pif(session.opaque_ref, _vlan);
             else
-                return XenRef<PIF>.Create(session.proxy.vlan_get_tagged_pif(session.uuid, _vlan ?? "").parse());
+                return XenRef<PIF>.Create(session.proxy.vlan_get_tagged_pif(session.opaque_ref, _vlan ?? "").parse());
         }
 
         /// <summary>
@@ -241,9 +241,9 @@ namespace XenAPI
         public static XenRef<PIF> get_untagged_PIF(Session session, string _vlan)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_untagged_pif(session.uuid, _vlan);
+                return session.JsonRpcClient.vlan_get_untagged_pif(session.opaque_ref, _vlan);
             else
-                return XenRef<PIF>.Create(session.proxy.vlan_get_untagged_pif(session.uuid, _vlan ?? "").parse());
+                return XenRef<PIF>.Create(session.proxy.vlan_get_untagged_pif(session.opaque_ref, _vlan ?? "").parse());
         }
 
         /// <summary>
@@ -255,9 +255,9 @@ namespace XenAPI
         public static long get_tag(Session session, string _vlan)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_tag(session.uuid, _vlan);
+                return session.JsonRpcClient.vlan_get_tag(session.opaque_ref, _vlan);
             else
-                return long.Parse((string)session.proxy.vlan_get_tag(session.uuid, _vlan ?? "").parse());
+                return long.Parse((string)session.proxy.vlan_get_tag(session.opaque_ref, _vlan ?? "").parse());
         }
 
         /// <summary>
@@ -269,9 +269,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _vlan)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_other_config(session.uuid, _vlan);
+                return session.JsonRpcClient.vlan_get_other_config(session.opaque_ref, _vlan);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vlan_get_other_config(session.uuid, _vlan ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vlan_get_other_config(session.opaque_ref, _vlan ?? "").parse());
         }
 
         /// <summary>
@@ -284,9 +284,9 @@ namespace XenAPI
         public static void set_other_config(Session session, string _vlan, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vlan_set_other_config(session.uuid, _vlan, _other_config);
+                session.JsonRpcClient.vlan_set_other_config(session.opaque_ref, _vlan, _other_config);
             else
-                session.proxy.vlan_set_other_config(session.uuid, _vlan ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+                session.proxy.vlan_set_other_config(session.opaque_ref, _vlan ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -300,9 +300,9 @@ namespace XenAPI
         public static void add_to_other_config(Session session, string _vlan, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vlan_add_to_other_config(session.uuid, _vlan, _key, _value);
+                session.JsonRpcClient.vlan_add_to_other_config(session.opaque_ref, _vlan, _key, _value);
             else
-                session.proxy.vlan_add_to_other_config(session.uuid, _vlan ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vlan_add_to_other_config(session.opaque_ref, _vlan ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -315,9 +315,9 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _vlan, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vlan_remove_from_other_config(session.uuid, _vlan, _key);
+                session.JsonRpcClient.vlan_remove_from_other_config(session.opaque_ref, _vlan, _key);
             else
-                session.proxy.vlan_remove_from_other_config(session.uuid, _vlan ?? "", _key ?? "").parse();
+                session.proxy.vlan_remove_from_other_config(session.opaque_ref, _vlan ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -331,9 +331,9 @@ namespace XenAPI
         public static XenRef<VLAN> create(Session session, string _tagged_pif, long _tag, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_create(session.uuid, _tagged_pif, _tag, _network);
+                return session.JsonRpcClient.vlan_create(session.opaque_ref, _tagged_pif, _tag, _network);
             else
-                return XenRef<VLAN>.Create(session.proxy.vlan_create(session.uuid, _tagged_pif ?? "", _tag.ToString(), _network ?? "").parse());
+                return XenRef<VLAN>.Create(session.proxy.vlan_create(session.opaque_ref, _tagged_pif ?? "", _tag.ToString(), _network ?? "").parse());
         }
 
         /// <summary>
@@ -347,9 +347,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, string _tagged_pif, long _tag, string _network)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vlan_create(session.uuid, _tagged_pif, _tag, _network);
+              return session.JsonRpcClient.async_vlan_create(session.opaque_ref, _tagged_pif, _tag, _network);
           else
-              return XenRef<Task>.Create(session.proxy.async_vlan_create(session.uuid, _tagged_pif ?? "", _tag.ToString(), _network ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vlan_create(session.opaque_ref, _tagged_pif ?? "", _tag.ToString(), _network ?? "").parse());
         }
 
         /// <summary>
@@ -361,9 +361,9 @@ namespace XenAPI
         public static void destroy(Session session, string _vlan)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vlan_destroy(session.uuid, _vlan);
+                session.JsonRpcClient.vlan_destroy(session.opaque_ref, _vlan);
             else
-                session.proxy.vlan_destroy(session.uuid, _vlan ?? "").parse();
+                session.proxy.vlan_destroy(session.opaque_ref, _vlan ?? "").parse();
         }
 
         /// <summary>
@@ -375,9 +375,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _vlan)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vlan_destroy(session.uuid, _vlan);
+              return session.JsonRpcClient.async_vlan_destroy(session.opaque_ref, _vlan);
           else
-              return XenRef<Task>.Create(session.proxy.async_vlan_destroy(session.uuid, _vlan ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vlan_destroy(session.opaque_ref, _vlan ?? "").parse());
         }
 
         /// <summary>
@@ -388,9 +388,9 @@ namespace XenAPI
         public static List<XenRef<VLAN>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_all(session.uuid);
+                return session.JsonRpcClient.vlan_get_all(session.opaque_ref);
             else
-                return XenRef<VLAN>.Create(session.proxy.vlan_get_all(session.uuid).parse());
+                return XenRef<VLAN>.Create(session.proxy.vlan_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -401,9 +401,9 @@ namespace XenAPI
         public static Dictionary<XenRef<VLAN>, VLAN> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vlan_get_all_records(session.uuid);
+                return session.JsonRpcClient.vlan_get_all_records(session.opaque_ref);
             else
-                return XenRef<VLAN>.Create<Proxy_VLAN>(session.proxy.vlan_get_all_records(session.uuid).parse());
+                return XenRef<VLAN>.Create<Proxy_VLAN>(session.proxy.vlan_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>

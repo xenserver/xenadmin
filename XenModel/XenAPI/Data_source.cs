@@ -140,21 +140,21 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("name_label"))
-                name_label = (string)table["name_label"];
+                name_label = Marshalling.ParseString(table, "name_label");
             if (table.ContainsKey("name_description"))
-                name_description = (string)table["name_description"];
+                name_description = Marshalling.ParseString(table, "name_description");
             if (table.ContainsKey("enabled"))
-                enabled = (bool)table["enabled"];
+                enabled = Marshalling.ParseBool(table, "enabled");
             if (table.ContainsKey("standard"))
-                standard = (bool)table["standard"];
+                standard = Marshalling.ParseBool(table, "standard");
             if (table.ContainsKey("units"))
-                units = (string)table["units"];
+                units = Marshalling.ParseString(table, "units");
             if (table.ContainsKey("min"))
-                min = (double)table["min"];
+                min = Marshalling.ParseDouble(table, "min");
             if (table.ContainsKey("max"))
-                max = (double)table["max"];
+                max = Marshalling.ParseDouble(table, "max");
             if (table.ContainsKey("value"))
-                value = (double)table["value"];
+                value = Marshalling.ParseDouble(table, "value");
         }
 
         public bool DeepEquals(Data_source other)

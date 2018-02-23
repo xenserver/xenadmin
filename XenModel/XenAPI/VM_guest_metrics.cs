@@ -170,33 +170,33 @@ namespace XenAPI
         public void UpdateFrom(Hashtable table)
         {
             if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
+                uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("os_version"))
-                os_version = Maps.convert_from_proxy_string_string((Hashtable)table["os_version"]);
+                os_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "os_version"));
             if (table.ContainsKey("PV_drivers_version"))
-                PV_drivers_version = Maps.convert_from_proxy_string_string((Hashtable)table["PV_drivers_version"]);
+                PV_drivers_version = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "PV_drivers_version"));
             if (table.ContainsKey("PV_drivers_up_to_date"))
-                PV_drivers_up_to_date = (bool)table["PV_drivers_up_to_date"];
+                PV_drivers_up_to_date = Marshalling.ParseBool(table, "PV_drivers_up_to_date");
             if (table.ContainsKey("memory"))
-                memory = Maps.convert_from_proxy_string_string((Hashtable)table["memory"]);
+                memory = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "memory"));
             if (table.ContainsKey("disks"))
-                disks = Maps.convert_from_proxy_string_string((Hashtable)table["disks"]);
+                disks = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "disks"));
             if (table.ContainsKey("networks"))
-                networks = Maps.convert_from_proxy_string_string((Hashtable)table["networks"]);
+                networks = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "networks"));
             if (table.ContainsKey("other"))
-                other = Maps.convert_from_proxy_string_string((Hashtable)table["other"]);
+                other = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other"));
             if (table.ContainsKey("last_updated"))
-                last_updated = (DateTime)table["last_updated"];
+                last_updated = Marshalling.ParseDateTime(table, "last_updated");
             if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
             if (table.ContainsKey("live"))
-                live = (bool)table["live"];
+                live = Marshalling.ParseBool(table, "live");
             if (table.ContainsKey("can_use_hotplug_vbd"))
-                can_use_hotplug_vbd = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)table["can_use_hotplug_vbd"]);
+                can_use_hotplug_vbd = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), Marshalling.ParseString(table, "can_use_hotplug_vbd"));
             if (table.ContainsKey("can_use_hotplug_vif"))
-                can_use_hotplug_vif = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)table["can_use_hotplug_vif"]);
+                can_use_hotplug_vif = (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), Marshalling.ParseString(table, "can_use_hotplug_vif"));
             if (table.ContainsKey("PV_drivers_detected"))
-                PV_drivers_detected = (bool)table["PV_drivers_detected"];
+                PV_drivers_detected = Marshalling.ParseBool(table, "PV_drivers_detected");
         }
 
         public bool DeepEquals(VM_guest_metrics other)
@@ -257,9 +257,9 @@ namespace XenAPI
         public static VM_guest_metrics get_record(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_record(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_record(session.opaque_ref, _vm_guest_metrics);
             else
-                return new VM_guest_metrics((Proxy_VM_guest_metrics)session.proxy.vm_guest_metrics_get_record(session.uuid, _vm_guest_metrics ?? "").parse());
+                return new VM_guest_metrics((Proxy_VM_guest_metrics)session.proxy.vm_guest_metrics_get_record(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -271,9 +271,9 @@ namespace XenAPI
         public static XenRef<VM_guest_metrics> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.vm_guest_metrics_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<VM_guest_metrics>.Create(session.proxy.vm_guest_metrics_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<VM_guest_metrics>.Create(session.proxy.vm_guest_metrics_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -285,9 +285,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_uuid(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_uuid(session.opaque_ref, _vm_guest_metrics);
             else
-                return (string)session.proxy.vm_guest_metrics_get_uuid(session.uuid, _vm_guest_metrics ?? "").parse();
+                return (string)session.proxy.vm_guest_metrics_get_uuid(session.opaque_ref, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -299,9 +299,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_os_version(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_os_version(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_os_version(session.opaque_ref, _vm_guest_metrics);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_os_version(session.uuid, _vm_guest_metrics ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_os_version(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -313,9 +313,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_PV_drivers_version(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_pv_drivers_version(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_pv_drivers_version(session.opaque_ref, _vm_guest_metrics);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_pv_drivers_version(session.uuid, _vm_guest_metrics ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_pv_drivers_version(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -329,9 +329,9 @@ namespace XenAPI
         public static bool get_PV_drivers_up_to_date(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_pv_drivers_up_to_date(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_pv_drivers_up_to_date(session.opaque_ref, _vm_guest_metrics);
             else
-                return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_up_to_date(session.uuid, _vm_guest_metrics ?? "").parse();
+                return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_up_to_date(session.opaque_ref, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -343,9 +343,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_memory(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_memory(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_memory(session.opaque_ref, _vm_guest_metrics);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_memory(session.uuid, _vm_guest_metrics ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_memory(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -357,9 +357,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_disks(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_disks(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_disks(session.opaque_ref, _vm_guest_metrics);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_disks(session.uuid, _vm_guest_metrics ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_disks(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -371,9 +371,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_networks(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_networks(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_networks(session.opaque_ref, _vm_guest_metrics);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_networks(session.uuid, _vm_guest_metrics ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_networks(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -385,9 +385,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_other(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_other(session.opaque_ref, _vm_guest_metrics);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other(session.uuid, _vm_guest_metrics ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -399,9 +399,9 @@ namespace XenAPI
         public static DateTime get_last_updated(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_last_updated(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_last_updated(session.opaque_ref, _vm_guest_metrics);
             else
-                return session.proxy.vm_guest_metrics_get_last_updated(session.uuid, _vm_guest_metrics ?? "").parse();
+                return session.proxy.vm_guest_metrics_get_last_updated(session.opaque_ref, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -413,9 +413,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_other_config(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_other_config(session.opaque_ref, _vm_guest_metrics);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other_config(session.uuid, _vm_guest_metrics ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_guest_metrics_get_other_config(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -427,9 +427,9 @@ namespace XenAPI
         public static bool get_live(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_live(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_live(session.opaque_ref, _vm_guest_metrics);
             else
-                return (bool)session.proxy.vm_guest_metrics_get_live(session.uuid, _vm_guest_metrics ?? "").parse();
+                return (bool)session.proxy.vm_guest_metrics_get_live(session.opaque_ref, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -441,9 +441,9 @@ namespace XenAPI
         public static tristate_type get_can_use_hotplug_vbd(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_can_use_hotplug_vbd(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_can_use_hotplug_vbd(session.opaque_ref, _vm_guest_metrics);
             else
-                return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vbd(session.uuid, _vm_guest_metrics ?? "").parse());
+                return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vbd(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -455,9 +455,9 @@ namespace XenAPI
         public static tristate_type get_can_use_hotplug_vif(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_can_use_hotplug_vif(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_can_use_hotplug_vif(session.opaque_ref, _vm_guest_metrics);
             else
-                return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vif(session.uuid, _vm_guest_metrics ?? "").parse());
+                return (tristate_type)Helper.EnumParseDefault(typeof(tristate_type), (string)session.proxy.vm_guest_metrics_get_can_use_hotplug_vif(session.opaque_ref, _vm_guest_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -469,9 +469,9 @@ namespace XenAPI
         public static bool get_PV_drivers_detected(Session session, string _vm_guest_metrics)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_pv_drivers_detected(session.uuid, _vm_guest_metrics);
+                return session.JsonRpcClient.vm_guest_metrics_get_pv_drivers_detected(session.opaque_ref, _vm_guest_metrics);
             else
-                return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_detected(session.uuid, _vm_guest_metrics ?? "").parse();
+                return (bool)session.proxy.vm_guest_metrics_get_pv_drivers_detected(session.opaque_ref, _vm_guest_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -484,9 +484,9 @@ namespace XenAPI
         public static void set_other_config(Session session, string _vm_guest_metrics, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_guest_metrics_set_other_config(session.uuid, _vm_guest_metrics, _other_config);
+                session.JsonRpcClient.vm_guest_metrics_set_other_config(session.opaque_ref, _vm_guest_metrics, _other_config);
             else
-                session.proxy.vm_guest_metrics_set_other_config(session.uuid, _vm_guest_metrics ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+                session.proxy.vm_guest_metrics_set_other_config(session.opaque_ref, _vm_guest_metrics ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -500,9 +500,9 @@ namespace XenAPI
         public static void add_to_other_config(Session session, string _vm_guest_metrics, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_guest_metrics_add_to_other_config(session.uuid, _vm_guest_metrics, _key, _value);
+                session.JsonRpcClient.vm_guest_metrics_add_to_other_config(session.opaque_ref, _vm_guest_metrics, _key, _value);
             else
-                session.proxy.vm_guest_metrics_add_to_other_config(session.uuid, _vm_guest_metrics ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vm_guest_metrics_add_to_other_config(session.opaque_ref, _vm_guest_metrics ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -515,9 +515,9 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _vm_guest_metrics, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_guest_metrics_remove_from_other_config(session.uuid, _vm_guest_metrics, _key);
+                session.JsonRpcClient.vm_guest_metrics_remove_from_other_config(session.opaque_ref, _vm_guest_metrics, _key);
             else
-                session.proxy.vm_guest_metrics_remove_from_other_config(session.uuid, _vm_guest_metrics ?? "", _key ?? "").parse();
+                session.proxy.vm_guest_metrics_remove_from_other_config(session.opaque_ref, _vm_guest_metrics ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -528,9 +528,9 @@ namespace XenAPI
         public static List<XenRef<VM_guest_metrics>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_all(session.uuid);
+                return session.JsonRpcClient.vm_guest_metrics_get_all(session.opaque_ref);
             else
-                return XenRef<VM_guest_metrics>.Create(session.proxy.vm_guest_metrics_get_all(session.uuid).parse());
+                return XenRef<VM_guest_metrics>.Create(session.proxy.vm_guest_metrics_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -541,9 +541,9 @@ namespace XenAPI
         public static Dictionary<XenRef<VM_guest_metrics>, VM_guest_metrics> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vm_guest_metrics_get_all_records(session.uuid);
+                return session.JsonRpcClient.vm_guest_metrics_get_all_records(session.opaque_ref);
             else
-                return XenRef<VM_guest_metrics>.Create<Proxy_VM_guest_metrics>(session.proxy.vm_guest_metrics_get_all_records(session.uuid).parse());
+                return XenRef<VM_guest_metrics>.Create<Proxy_VM_guest_metrics>(session.proxy.vm_guest_metrics_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
