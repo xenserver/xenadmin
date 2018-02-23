@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Collections;
 using System.ComponentModel;
@@ -42,6 +43,9 @@ using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
+using XenAdmin.Dialogs;
+using XenAdmin.Commands;
+
 
 namespace XenAdmin.Wizards
 {
@@ -169,6 +173,10 @@ namespace XenAdmin.Wizards
             {
                 CreateCHIN();
             }
+            else if (network_type == NetworkTypes.SRIOV)
+            {
+                CreateSRIOV();
+            }
             else
             {
                 CreateNonBonded();
@@ -197,6 +205,25 @@ namespace XenAdmin.Wizards
             (new CreateChinAction(xenConnection, network, theInterface)).RunAsync();
         }
 
+        private void CreateSRIOV()
+        {
+            XenAPI.Network network = PopulateNewNetworkObj();
+
+            List<PIF> sriovSelectedPifs = new List<PIF>();
+            Pool pool = Helpers.GetPoolOfOne(Host.Connection);
+            foreach (Host host in pool.Connection.Cache.Hosts)
+            {
+                foreach (PIF thePIF in Host.Connection.ResolveAll<PIF>(host.PIFs))
+                {
+                    if (thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.Name() == pageSriovDetails.SelectedHostNic.Name() && thePIF.sriov_physical_PIF_of.Count == 0)
+                        sriovSelectedPifs.Add(thePIF);
+                }
+            }
+
+            CreateSriovAction action = new CreateSriovAction(xenConnection, network, sriovSelectedPifs);
+            action.RunAsync();
+        }
+
         private void CreateNonBonded()
         {
             XenAPI.Network network = PopulateNewNetworkObj();
@@ -214,7 +241,7 @@ namespace XenAdmin.Wizards
             XenAPI.Network result = new XenAPI.Network();
             result.name_label = pageName.NetworkName;
             result.name_description = pageName.NetworkDescription;
-            result.SetAutoPlug(pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN ? pageChinDetails.isAutomaticAddNicToVM : pageNetworkDetails.isAutomaticAddNicToVM);
+            result.SetAutoPlug(pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN ? pageChinDetails.isAutomaticAddNicToVM : (pageNetworkType.SelectedNetworkType == NetworkTypes.SRIOV ? pageSriovDetails.isAutomaticAddNicToVM : pageNetworkDetails.isAutomaticAddNicToVM));
             if (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN)
                 result.MTU = pageChinDetails.MTU;
             else if (pageNetworkDetails.MTU.HasValue) //Custom MTU may not be allowed if we are making a virtual network or something

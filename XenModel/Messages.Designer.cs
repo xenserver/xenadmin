@@ -23590,6 +23590,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New SR-IOV network.
+        /// </summary>
+        public static string NEW_SRIOV_NETWORK_NAME {
+            get {
+                return ResourceManager.GetString("NEW_SRIOV_NETWORK_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit tags....
         /// </summary>
         public static string NEW_TAG_LINK {
@@ -31936,6 +31945,24 @@ namespace XenAdmin {
         public static string SR_X_ON_Y {
             get {
                 return ResourceManager.GetString("SR_X_ON_Y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These servers needs to be rebooted for this SR-IOV network to take effect:&apos;{0}&apos;.
+        /// </summary>
+        public static string SRIOV_ENABLE_REBOOT_WARNING {
+            get {
+                return ResourceManager.GetString("SRIOV_ENABLE_REBOOT_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SR-IOV networks require the SR-IOV capable NIC..
+        /// </summary>
+        public static string SRIOV_NEED_NICSUPPORT {
+            get {
+                return ResourceManager.GetString("SRIOV_NEED_NICSUPPORT", resourceCulture);
             }
         }
         

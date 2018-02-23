@@ -363,5 +363,9 @@ namespace XenAPI
         {
             return capabilities.Any(capability => capability == "fcoe");
         }
+        public bool SriovCapable()
+        {
+            return capabilities.Any(capability => capability == "sriov");
+        }
     }
 }

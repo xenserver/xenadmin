@@ -63,6 +63,7 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<XenAPI.Network>, XenAPI.Network> _network = new ChangeableDictionary<XenRef<XenAPI.Network>, XenAPI.Network>();
         private readonly ChangeableDictionary<XenRef<XenAPI.Network_sriov>, XenAPI.Network_sriov> _network_sriov = new ChangeableDictionary<XenRef<XenAPI.Network_sriov>, XenAPI.Network_sriov>();
         private readonly ChangeableDictionary<XenRef<PBD>, PBD> _pbd = new ChangeableDictionary<XenRef<PBD>, PBD>();
+        private readonly ChangeableDictionary<XenRef<XenAPI.Network_sriov>, XenAPI.Network_sriov> _network_sriov = new ChangeableDictionary<XenRef<XenAPI.Network_sriov>, XenAPI.Network_sriov>();
         private readonly ChangeableDictionary<XenRef<PUSB>, PUSB> _pusb = new ChangeableDictionary<XenRef<PUSB>, PUSB>();
         private readonly ChangeableDictionary<XenRef<VUSB>, VUSB> _vusb = new ChangeableDictionary<XenRef<VUSB>, VUSB>();
         private readonly ChangeableDictionary<XenRef<USB_group>, USB_group> _usb_group = new ChangeableDictionary<XenRef<USB_group>, USB_group>();
