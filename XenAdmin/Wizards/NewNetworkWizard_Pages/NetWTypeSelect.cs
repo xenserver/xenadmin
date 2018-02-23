@@ -104,6 +104,20 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                 rbtnCHIN.Enabled = labelCHIN.Enabled = true;
                 iconWarningChinOption.Visible = labelWarningChinOption.Visible = false;
             }
+
+            if (!pool.HasSriovNic())
+            {
+                rbtnSriov.Checked = false;
+                rbtnSriov.Enabled = labelSriov.Enabled = false;
+
+                labelWarningSriovOption.Text = Messages.SRIOV_NEED_NICSUPPORT;
+                iconWarningSriovOption.Visible = labelWarningSriovOption.Visible = true;
+            }
+            else
+            {
+                rbtnSriov.Enabled = labelCHIN.Enabled = true;
+                iconWarningSriovOption.Visible = labelWarningSriovOption.Visible = false;
+            }
         }
     }
 }
