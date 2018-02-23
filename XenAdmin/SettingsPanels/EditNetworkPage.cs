@@ -92,7 +92,7 @@ namespace XenAdmin.SettingsPanels
         // Can the network's NIC and VLAN be edited?
         private bool Editable(PIF pif)
         {
-            return (pif == null || (!pif.IsPhysical() && !pif.IsTunnelAccessPIF() && pif.sriov_logical_PIF_of.Count == 0 ));
+            return (pif == null || (!pif.IsPhysical() && !pif.IsTunnelAccessPIF() && pif.sriov_logical_PIF_of != null && pif.sriov_logical_PIF_of.Count == 0 ));
         }
 
         private void EnableDisable()
@@ -747,7 +747,7 @@ namespace XenAdmin.SettingsPanels
                 if (HostPNICList.SelectedIndex == 0)
                     return Messages.NETWORKPANEL_INTERNAL;
 
-                if (pif.sriov_logical_PIF_of.Count != 0)
+                if (pif.sriov_logical_PIF_of != null && pif.sriov_logical_PIF_of.Count != 0)
                     return Messages.NETWORK_SRIOV;
 
                 return String.Format(Messages.NIC_VLAN, HostPNICList.SelectedItem, numUpDownVLAN.Value);

@@ -30,55 +30,36 @@
  */
 
 using System;
-using XenAdmin.Controls;
-using XenAPI;
+using System.Collections.Generic;
+using XenAdmin.Core;
 using XenAdmin.Network;
+using XenAPI;
 
-namespace XenAdmin.Wizards.NewNetworkWizard_Pages
+
+namespace XenAdmin.Actions
 {
-    public partial class NetWSriovDetails : XenTabPage
+    public class CreateSriovAction : PureAsyncAction
     {
-        internal Host Host;
+        XenAPI.Network newNetwork;
+        private List<PIF> selectedPifs;
 
-        public NetWSriovDetails()
+        public CreateSriovAction(IXenConnection connection, XenAPI.Network newNetwork, List<XenAPI.PIF> pifs)
+            : base(connection,
+                string.Format(Messages.NETWORK_ACTION_CREATING_NETWORK_TITLE, newNetwork.Name(), Helpers.GetName(connection)))
         {
-            InitializeComponent();
+            this.newNetwork = newNetwork;
+            this.selectedPifs = pifs;
         }
-        public override string Text { get { return Messages.NETW_DETAILS_TEXT; } }
 
-        public override string PageTitle
+        protected override void Run()
         {
-            get
+            // Create the new network            
+            XenRef<XenAPI.Network> networkRef = XenAPI.Network.create(Session, newNetwork);
+
+            foreach (PIF thePif in selectedPifs)
             {
-                return Messages.NETW_INTERNAL_DETAILS_TITLE;
+                Network_sriov.async_create(Session, thePif.opaque_ref, networkRef);
             }
-        }
-        public override void PopulatePage()
-        {
-            PopulateHostNicList(Host, Connection);
-        }
-        private void PopulateHostNicList(Host host, IXenConnection conn)
-        {
-            comboBoxNicList.Items.Clear();
-            foreach (PIF thePIF in conn.Cache.PIFs)
-            {
-                if (thePIF.host.opaque_ref == host.opaque_ref && thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable())
-                {
-                    comboBoxNicList.Items.Add(thePIF);
-                }
-            }
-            if (comboBoxNicList.Items.Count > 0)
-                comboBoxNicList.SelectedIndex = 0;
-        }
-
-        public XenAPI.PIF SelectedHostNic
-        {
-            get { return (XenAPI.PIF)comboBoxNicList.SelectedItem; }
-        }
-
-        public bool isAutomaticAddNicToVM
-        {
-            get { return cbxAutomatic.Checked; }
         }
     }
 }

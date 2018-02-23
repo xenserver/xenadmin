@@ -55,7 +55,7 @@ namespace XenAPI
                 PIF transport_pif = Connection.Resolve(tunnel.transport_PIF);
                 return transport_pif.Name();
             }
-            else if(sriov_logical_PIF_of.Count != 0)
+            else if(sriov_logical_PIF_of != null && sriov_logical_PIF_of.Count != 0)
             {
                 if (Connection == null)
                     return "";
@@ -145,7 +145,7 @@ namespace XenAPI
 
         public bool IsPhysical()
         {
-            return VLAN == -1 && !IsTunnelAccessPIF() && sriov_logical_PIF_of.Count == 0 ;
+            return VLAN == -1 && !IsTunnelAccessPIF() && sriov_logical_PIF_of != null && sriov_logical_PIF_of.Count == 0 ;
         }
 
         public override int CompareTo(PIF other)
@@ -362,6 +362,10 @@ namespace XenAPI
         public bool FCoECapable()
         {
             return capabilities.Any(capability => capability == "fcoe");
+        }
+        public bool SriovCapable()
+        {
+            return capabilities.Any(capability => capability == "sriov");
         }
     }
 }
