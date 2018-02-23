@@ -4732,6 +4732,18 @@ namespace XenAPI
         Response<string>
         pif_get_igmp_snooping_status(string session, string _pif);
 
+        [XmlRpcMethod("PIF.get_sriov_physical_PIF_of")]
+        Response<string []>
+        pif_get_sriov_physical_pif_of(string session, string _pif);
+
+        [XmlRpcMethod("PIF.get_sriov_logical_PIF_of")]
+        Response<string []>
+        pif_get_sriov_logical_pif_of(string session, string _pif);
+
+        [XmlRpcMethod("PIF.get_pci")]
+        Response<string>
+        pif_get_pci(string session, string _pif);
+
         [XmlRpcMethod("PIF.set_other_config")]
         Response<string>
         pif_set_other_config(string session, string _pif, Object _other_config);
@@ -6912,6 +6924,10 @@ namespace XenAPI
         Response<string>
         pci_get_subsystem_device_name(string session, string _pci);
 
+        [XmlRpcMethod("PCI.get_driver_name")]
+        Response<string>
+        pci_get_driver_name(string session, string _pci);
+
         [XmlRpcMethod("PCI.set_other_config")]
         Response<string>
         pci_set_other_config(string session, string _pci, Object _other_config);
@@ -7215,6 +7231,10 @@ namespace XenAPI
         [XmlRpcMethod("VGPU.get_scheduled_to_be_resident_on")]
         Response<string>
         vgpu_get_scheduled_to_be_resident_on(string session, string _vgpu);
+
+        [XmlRpcMethod("VGPU.get_compatibility_metadata")]
+        Response<Object>
+        vgpu_get_compatibility_metadata(string session, string _vgpu);
 
         [XmlRpcMethod("VGPU.set_other_config")]
         Response<string>
@@ -7931,6 +7951,66 @@ namespace XenAPI
         [XmlRpcMethod("VUSB.get_all_records")]
         Response<Object>
         vusb_get_all_records(string session);
+
+        [XmlRpcMethod("network_sriov.get_record")]
+        Response<Proxy_Network_sriov>
+        network_sriov_get_record(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_by_uuid")]
+        Response<string>
+        network_sriov_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("network_sriov.get_uuid")]
+        Response<string>
+        network_sriov_get_uuid(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_physical_PIF")]
+        Response<string>
+        network_sriov_get_physical_pif(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_logical_PIF")]
+        Response<string>
+        network_sriov_get_logical_pif(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_requires_reboot")]
+        Response<bool>
+        network_sriov_get_requires_reboot(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_configuration_mode")]
+        Response<string>
+        network_sriov_get_configuration_mode(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.create")]
+        Response<string>
+        network_sriov_create(string session, string _pif, string _network);
+
+        [XmlRpcMethod("Async.network_sriov.create")]
+        Response<string>
+        async_network_sriov_create(string session, string _pif, string _network);
+
+        [XmlRpcMethod("network_sriov.destroy")]
+        Response<string>
+        network_sriov_destroy(string session, string _network_sriov);
+
+        [XmlRpcMethod("Async.network_sriov.destroy")]
+        Response<string>
+        async_network_sriov_destroy(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_remaining_capacity")]
+        Response<string>
+        network_sriov_get_remaining_capacity(string session, string _network_sriov);
+
+        [XmlRpcMethod("Async.network_sriov.get_remaining_capacity")]
+        Response<string>
+        async_network_sriov_get_remaining_capacity(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_all")]
+        Response<string []>
+        network_sriov_get_all(string session);
+
+        [XmlRpcMethod("network_sriov.get_all_records")]
+        Response<Object>
+        network_sriov_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8468,6 +8548,9 @@ namespace XenAPI
         public Object properties;
         public string [] capabilities;
         public string igmp_snooping_status;
+        public string [] sriov_physical_PIF_of;
+        public string [] sriov_logical_PIF_of;
+        public string pci;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8751,6 +8834,7 @@ namespace XenAPI
         public Object other_config;
         public string subsystem_vendor_name;
         public string subsystem_device_name;
+        public string driver_name;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8797,6 +8881,7 @@ namespace XenAPI
         public string type;
         public string resident_on;
         public string scheduled_to_be_resident_on;
+        public Object compatibility_metadata;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8932,6 +9017,16 @@ namespace XenAPI
         public string USB_group;
         public Object other_config;
         public bool currently_attached;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Network_sriov
+    {
+        public string uuid;
+        public string physical_PIF;
+        public string logical_PIF;
+        public bool requires_reboot;
+        public string configuration_mode;
     }
 
 }
