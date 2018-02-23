@@ -2749,11 +2749,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on VM "{0}"</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on selected VMs</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on VM "{0}"</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -8829,6 +8829,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>New Search</value>
   </data>
+  <data name="NEW_SRIOV_NETWORK_NAME" xml:space="preserve">
+    <value>New SR-IOV network</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>Connection to {0} has been lost</value>
   </data>
@@ -10992,6 +10995,12 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SR" xml:space="preserve">
     <value>Storage Repository</value>
+  </data>
+  <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
+    <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
+  </data>
+  <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
+    <value>SR-IOV networks require the SR-IOV capable NIC.</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>

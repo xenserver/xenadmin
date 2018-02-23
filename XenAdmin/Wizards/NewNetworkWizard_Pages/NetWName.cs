@@ -105,6 +105,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                 case NetworkTypes.Internal:
                 case NetworkTypes.CHIN:
                     return Messages.NEWNETWORK_VNAME;
+                case NetworkTypes.SRIOV:
+                    return Messages.NEW_SRIOV_NETWORK_NAME;
                 default:
                     return "";
             }
