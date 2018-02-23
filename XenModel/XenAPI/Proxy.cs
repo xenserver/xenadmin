@@ -4740,7 +4740,7 @@ namespace XenAPI
         Response<string []>
         pif_get_sriov_logical_pif_of(string session, string _pif);
 
-        [XmlRpcMethod("PIF.get_pci")]
+        [XmlRpcMethod("PIF.get_PCI")]
         Response<string>
         pif_get_pci(string session, string _pif);
 
@@ -8550,7 +8550,7 @@ namespace XenAPI
         public string igmp_snooping_status;
         public string [] sriov_physical_PIF_of;
         public string [] sriov_logical_PIF_of;
-        public string pci;
+        public string PCI;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
