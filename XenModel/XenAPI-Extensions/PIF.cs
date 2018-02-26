@@ -145,7 +145,7 @@ namespace XenAPI
 
         public bool IsPhysical()
         {
-            return VLAN == -1 && !IsTunnelAccessPIF() && sriov_logical_PIF_of != null && sriov_logical_PIF_of.Count == 0 ;
+            return VLAN == -1 && !IsTunnelAccessPIF() && (sriov_logical_PIF_of == null || sriov_logical_PIF_of.Count == 0);
         }
 
         public override int CompareTo(PIF other)

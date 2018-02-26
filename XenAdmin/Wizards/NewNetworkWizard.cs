@@ -43,8 +43,6 @@ using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
-using XenAdmin.Dialogs;
-using XenAdmin.Commands;
 
 
 namespace XenAdmin.Wizards
@@ -161,25 +159,24 @@ namespace XenAdmin.Wizards
         {
             NetworkTypes network_type = pageNetworkType.SelectedNetworkType;
 
-            if (network_type == NetworkTypes.Bonded)
+            switch (network_type)
             {
-                if (!CreateBonded())
-                {
-                    FinishCanceled();
-                    return;
-                }
-            }
-            else if (network_type == NetworkTypes.CHIN)
-            {
-                CreateCHIN();
-            }
-            else if (network_type == NetworkTypes.SRIOV)
-            {
-                CreateSRIOV();
-            }
-            else
-            {
-                CreateNonBonded();
+                case NetworkTypes.Bonded:
+                    if (!CreateBonded())
+                    {
+                        FinishCanceled();
+                        return;
+                    }
+                    break;
+                case NetworkTypes.CHIN:
+                    CreateCHIN();
+                    break;
+                case NetworkTypes.SRIOV:
+                    CreateSRIOV();
+                    break;
+                default:
+                    CreateNonBonded();
+                    break;
             }
 
             base.FinishWizard();
@@ -211,17 +208,17 @@ namespace XenAdmin.Wizards
 
             List<PIF> sriovSelectedPifs = new List<PIF>();
             Pool pool = Helpers.GetPoolOfOne(Host.Connection);
-            foreach (Host host in pool.Connection.Cache.Hosts)
+            if (pool == null)
+                return;
+
+            foreach (PIF thePIF in pool.Connection.Cache.PIFs)
             {
-                foreach (PIF thePIF in Host.Connection.ResolveAll<PIF>(host.PIFs))
-                {
-                    if (thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.Name() == pageSriovDetails.SelectedHostNic.Name() && thePIF.sriov_physical_PIF_of.Count == 0)
-                        sriovSelectedPifs.Add(thePIF);
-                }
+                if (thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.Name() == pageSriovDetails.SelectedHostNic.Name() && thePIF.sriov_physical_PIF_of.Count == 0)
+                    sriovSelectedPifs.Add(thePIF);
             }
 
-            CreateSriovAction action = new CreateSriovAction(xenConnection, network, sriovSelectedPifs);
-            action.RunAsync();
+            if(sriovSelectedPifs.Count != 0)
+                (new CreateSriovAction(xenConnection, network, sriovSelectedPifs)).RunAsync();
         }
 
         private void CreateNonBonded()

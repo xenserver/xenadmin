@@ -30,16 +30,12 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+using System.Linq;
 using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Controls;
+
 
 
 namespace XenAdmin.Wizards.NewNetworkWizard_Pages
@@ -92,7 +88,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
                 labelWarningChinOption.Text = 
                     Helpers.FeatureForbidden(connection, Host.RestrictVSwitchController) ?
-                    Messages.FIELD_DISABLED :
+                    String.Format(Messages.FEATURE_DISABLED, Messages.CHIN) :
                     Messages.CHINS_NEED_VSWITCHCONTROLLER;
 
                 iconWarningChinOption.Visible = labelWarningChinOption.Visible = !HiddenFeatures.CrossServerPrivateNetworkHidden;
@@ -105,12 +101,20 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                 iconWarningChinOption.Visible = labelWarningChinOption.Visible = false;
             }
 
-            if (!pool.HasSriovNic())
+            bool hasNicCanEnableSriov = pool.Connection.Cache.PIFs.Any(pif => pif.IsPhysical() && pif.SriovCapable() && pif.sriov_physical_PIF_of.Count == 0);
+            bool sriovFeatureForbidden = Helpers.FeatureForbidden(connection, Host.RestrictSriovNetwork);
+
+            if (sriovFeatureForbidden || !pool.HasSriovNic() || !hasNicCanEnableSriov)
             {
                 rbtnSriov.Checked = false;
                 rbtnSriov.Enabled = labelSriov.Enabled = false;
 
-                labelWarningSriovOption.Text = Messages.SRIOV_NEED_NICSUPPORT;
+                labelWarningSriovOption.Text = sriovFeatureForbidden ?
+                                                    String.Format(Messages.FEATURE_DISABLED, Messages.NETWORK_SRIOV) :
+                                                    pool.HasSriovNic() ?
+                                                        Messages.NICS_ARE_SRIOV_ENABLED :
+                                                        Messages.SRIOV_NEED_NICSUPPORT;
+
                 iconWarningSriovOption.Visible = labelWarningSriovOption.Visible = true;
             }
             else

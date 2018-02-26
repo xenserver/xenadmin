@@ -15141,6 +15141,16 @@ namespace XenAdmin {
                 return ResourceManager.GetString("FAST_CLONE_UNAVAILABLE", resourceCulture);
             }
         }
+
+         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; feature is disabled due to license restrictions on the server.
+        /// </summary>
+        public static string FEATURE_DISABLED {
+            get
+            {
+                return ResourceManager.GetString("FEATURE_DISABLED", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Feature disabled in the registry.
@@ -25656,7 +25666,18 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NICPANEL_FULL_DUPLEX", resourceCulture);
             }
         }
-        
+
+         /// <summary>
+        ///   Looks up a localized string similar to All the supported NICs have enabled SR-IOV..
+        /// </summary>
+        public static string NICS_ARE_SRIOV_ENABLED
+        {
+            get
+            {
+                return ResourceManager.GetString("NICS_ARE_SRIOV_ENABLED", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Half.
         /// </summary>

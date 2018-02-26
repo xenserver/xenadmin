@@ -89,10 +89,10 @@ namespace XenAdmin.SettingsPanels
             EnableDisable();
         }
 
-        // Can the network's NIC and VLAN be edited?
+        // Can the network's NIC, SR-IOV network and VLAN be edited?
         private bool Editable(PIF pif)
         {
-            return (pif == null || (!pif.IsPhysical() && !pif.IsTunnelAccessPIF() && pif.sriov_logical_PIF_of != null && pif.sriov_logical_PIF_of.Count == 0 ));
+            return (pif == null || (!pif.IsPhysical() && !pif.IsTunnelAccessPIF() && (pif.sriov_logical_PIF_of == null || pif.sriov_logical_PIF_of.Count == 0 )));
         }
 
         private void EnableDisable()

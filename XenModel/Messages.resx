@@ -13650,4 +13650,10 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
+  <data name="FEATURE_DISABLED" xml:space="preserve">
+    <value>'{0}' feature is disabled due to license restrictions on the server.</value>
+  </data>
+  <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
+    <value>All the supported NICs have enabled SR-IOV.</value>
+  </data>
 </root>

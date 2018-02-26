@@ -213,17 +213,7 @@ namespace XenAPI
 
         public bool HasSriovNic()
         {
-            foreach (Host h in Connection.Cache.Hosts)
-            {
-                var pifs = Connection.ResolveAll<PIF>(h.PIFs);
-                foreach(PIF pif in pifs)
-                {
-                    if (pif.SriovCapable())
-                        return true;
-                }
-            }
-
-            return false;
+            return Connection.Cache.PIFs.Any(pif => pif.SriovCapable());
         }
 
         public List<XenAPI.Host> HostsToUpgrade()
