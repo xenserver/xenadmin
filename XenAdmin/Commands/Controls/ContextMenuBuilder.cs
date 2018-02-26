@@ -55,6 +55,7 @@ namespace XenAdmin.Commands
         private readonly PluginManager _pluginManager;
         private readonly IMainWindow _mainWindow;
         private static readonly ReadOnlyCollection<Builder> Builders;
+        private static readonly int MAX_HOSTS_IN_CONTEXT_MENU = 16;
 
         static ContextMenuBuilder()
         {
@@ -861,6 +862,7 @@ namespace XenAdmin.Commands
             public override void Build(IMainWindow mainWindow, SelectedItemCollection selection, ContextMenuItemCollection items)
             {
                 VM vm = (VM)selection[0].XenObject;
+                int hostsCount = vm.Connection.Cache.Hosts.Length;
 
                 items.AddIfEnabled(new ShutDownVMCommand(mainWindow, selection));
                 items.AddIfEnabled(new StartVMCommand(mainWindow, selection), vm.power_state == vm_power_state.Halted);
@@ -877,8 +879,9 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new VappShutDownCommand(mainWindow, selection));
                 items.AddSeparator();
 
-                items.AddIfEnabled(new StartVMOnHostToolStripMenuItem(mainWindow, selection, true));
-                items.AddIfEnabled(new ResumeVMOnHostToolStripMenuItem(mainWindow, selection, true));
+                // Hide the menu if pool size is too large.
+                items.AddIf(new StartVMOnHostToolStripMenuItem(mainWindow, selection, true), () => { return hostsCount <= MAX_HOSTS_IN_CONTEXT_MENU; });
+                items.AddIf(new ResumeVMOnHostToolStripMenuItem(mainWindow, selection, true), () => { return hostsCount <= MAX_HOSTS_IN_CONTEXT_MENU; });
                 items.AddIfEnabled(new MigrateVMToolStripMenuItem(mainWindow, selection, true));
                 items.AddSeparator();
 
@@ -1062,6 +1065,7 @@ namespace XenAdmin.Commands
         {
             public override void Build(IMainWindow mainWindow, SelectedItemCollection selection, ContextMenuItemCollection items)
             {
+                int hostsCount = selection[0].Connection.Cache.Hosts.Length;
                 items.AddIfEnabled(new ShutDownVMCommand(mainWindow, selection));
                 items.AddIfEnabled(new StartVMCommand(mainWindow, selection));
                 items.AddIfEnabled(new ResumeVMCommand(mainWindow, selection));
@@ -1076,8 +1080,9 @@ namespace XenAdmin.Commands
                 items.AddIfEnabled(new VappShutDownCommand(mainWindow, selection));
                 items.AddSeparator();
 
-                items.AddIfEnabled(new StartVMOnHostToolStripMenuItem(mainWindow, selection, true));
-                items.AddIfEnabled(new ResumeVMOnHostToolStripMenuItem(mainWindow, selection, true));
+                // Hide the menu if pool size is too large.
+                items.AddIf(new StartVMOnHostToolStripMenuItem(mainWindow, selection, true), () => { return hostsCount <= MAX_HOSTS_IN_CONTEXT_MENU; });
+                items.AddIf(new ResumeVMOnHostToolStripMenuItem(mainWindow, selection, true), () => { return hostsCount <= MAX_HOSTS_IN_CONTEXT_MENU; });
                 items.AddIfEnabled(new MoveVMCommand(mainWindow, selection));
                 items.AddIfEnabled(new MigrateVMToolStripMenuItem(mainWindow, selection, true));
 				items.AddIfEnabled(new ExportCommand(mainWindow, selection));
