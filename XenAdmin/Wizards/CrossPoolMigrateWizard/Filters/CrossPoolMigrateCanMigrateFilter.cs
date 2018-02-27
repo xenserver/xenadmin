@@ -120,7 +120,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                             if (vmCache.ContainsKey(host.opaque_ref))
                             {
                                 disableReason = vmCache[host.opaque_ref];
-                                if (!disableReason.Equals(string.Empty))
+                                if (!disableReason.Equals(string.Empty) && !excludedHosts.Contains(host.opaque_ref))
                                 {
                                     excludedHosts.Add(host.opaque_ref);
                                 }
@@ -143,7 +143,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                             {
                                 vmCache.Add(host.opaque_ref, string.Empty);
                             }
-                            
                         }
                         catch (Failure failure)
                         {
@@ -158,7 +157,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                             }
 
                             log.ErrorFormat("VM: {0}, Host: {1} - Reason: {2};", vm.opaque_ref, host.opaque_ref, failure.Message);
-
+                            
                             if (!excludedHosts.Contains(host.opaque_ref))
                                 excludedHosts.Add(host.opaque_ref);
                         }

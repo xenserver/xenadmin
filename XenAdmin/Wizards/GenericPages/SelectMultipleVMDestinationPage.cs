@@ -414,17 +414,12 @@ namespace XenAdmin.Wizards.GenericPages
                         {
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
                             item.LoadAndWait();
-                            items.Add(item);
-                        }
-
-                        foreach (var item in items)
-                        { 
                             cb.Items.Add(item);
-                            var host = item.Item;
-                            if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
-                                (target != null && target.Item.opaque_ref == host.opaque_ref)))
+                            if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == item.Item.opaque_ref) ||
+                                                 (target != null && target.Item.opaque_ref == item.Item.opaque_ref)))
                                 cb.Value = item;
                         }
+
                     }
 
                     SetComboBoxPreSelection(cb);
