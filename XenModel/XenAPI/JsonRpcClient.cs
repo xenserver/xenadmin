@@ -1379,7 +1379,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VM>, Dictionary<string, string>> pool_ha_compute_vm_failover_plan(string session, List<XenRef<Host>> _failed_hosts, List<XenRef<VM>> _failed_vms)
         {
-            var converters = new List<JsonConverter> {new XenRefStringStringMapMapConverter<VM>(), new XenRefListConverter<Host>(), new XenRefListConverter<VM>()};
+            var converters = new List<JsonConverter> {new XenRefListConverter<Host>(), new XenRefListConverter<VM>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VM>, Dictionary<string, string>>>("pool.ha_compute_vm_failover_plan", new JArray(session, _failed_hosts == null ? new JArray() : JArray.FromObject(_failed_hosts, serializer), _failed_vms == null ? new JArray() : JArray.FromObject(_failed_vms, serializer)), serializer);
         }
@@ -8251,6 +8251,27 @@ namespace XenAPI
             return Rpc<pif_igmp_status>("PIF.get_igmp_snooping_status", new JArray(session, _pif ?? ""), serializer);
         }
 
+        public List<XenRef<Network_sriov>> pif_get_sriov_physical_pif_of(string session, string _pif)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Network_sriov>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<Network_sriov>>>("PIF.get_sriov_physical_PIF_of", new JArray(session, _pif ?? ""), serializer);
+        }
+
+        public List<XenRef<Network_sriov>> pif_get_sriov_logical_pif_of(string session, string _pif)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Network_sriov>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<Network_sriov>>>("PIF.get_sriov_logical_PIF_of", new JArray(session, _pif ?? ""), serializer);
+        }
+
+        public XenRef<PCI> pif_get_pci(string session, string _pif)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<PCI>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<PCI>>("PIF.get_PCI", new JArray(session, _pif ?? ""), serializer);
+        }
+
         public void pif_set_other_config(string session, string _pif, Dictionary<string, string> _other_config)
         {
             var converters = new List<JsonConverter> {new StringStringMapConverter()};
@@ -12073,6 +12094,13 @@ namespace XenAPI
             return Rpc<string>("PCI.get_subsystem_device_name", new JArray(session, _pci ?? ""), serializer);
         }
 
+        public string pci_get_driver_name(string session, string _pci)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("PCI.get_driver_name", new JArray(session, _pci ?? ""), serializer);
+        }
+
         public void pci_set_other_config(string session, string _pci, Dictionary<string, string> _other_config)
         {
             var converters = new List<JsonConverter> {new StringStringMapConverter()};
@@ -12180,7 +12208,7 @@ namespace XenAPI
 
         public Dictionary<XenRef<VGPU_type>, long> pgpu_get_supported_vgpu_max_capacities(string session, string _pgpu)
         {
-            var converters = new List<JsonConverter> {new XenRefLongMapConverter<VGPU_type>()};
+            var converters = new List<JsonConverter> {};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VGPU_type>, long>>("PGPU.get_supported_VGPU_max_capacities", new JArray(session, _pgpu ?? ""), serializer);
         }
@@ -13863,6 +13891,111 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VUSB>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VUSB>, VUSB>>("VUSB.get_all_records", new JArray(session), serializer);
+        }
+
+        public Network_sriov network_sriov_get_record(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Network_sriov>("network_sriov.get_record", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public XenRef<Network_sriov> network_sriov_get_by_uuid(string session, string _uuid)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Network_sriov>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Network_sriov>>("network_sriov.get_by_uuid", new JArray(session, _uuid ?? ""), serializer);
+        }
+
+        public string network_sriov_get_uuid(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("network_sriov.get_uuid", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public XenRef<PIF> network_sriov_get_physical_pif(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<PIF>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<PIF>>("network_sriov.get_physical_PIF", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public XenRef<PIF> network_sriov_get_logical_pif(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<PIF>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<PIF>>("network_sriov.get_logical_PIF", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public bool network_sriov_get_requires_reboot(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<bool>("network_sriov.get_requires_reboot", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public sriov_configuration_mode network_sriov_get_configuration_mode(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {new sriov_configuration_modeConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<sriov_configuration_mode>("network_sriov.get_configuration_mode", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public XenRef<Network_sriov> network_sriov_create(string session, string _pif, string _network)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Network_sriov>(), new XenRefConverter<PIF>(), new XenRefConverter<Network>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Network_sriov>>("network_sriov.create", new JArray(session, _pif ?? "", _network ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_network_sriov_create(string session, string _pif, string _network)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<PIF>(), new XenRefConverter<Network>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.network_sriov.create", new JArray(session, _pif ?? "", _network ?? ""), serializer);
+        }
+
+        public void network_sriov_destroy(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("network_sriov.destroy", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_network_sriov_destroy(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.network_sriov.destroy", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public long network_sriov_get_remaining_capacity(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<long>("network_sriov.get_remaining_capacity", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_network_sriov_get_remaining_capacity(string session, string _network_sriov)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.network_sriov.get_remaining_capacity", new JArray(session, _network_sriov ?? ""), serializer);
+        }
+
+        public List<XenRef<Network_sriov>> network_sriov_get_all(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Network_sriov>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<Network_sriov>>>("network_sriov.get_all", new JArray(session), serializer);
+        }
+
+        public Dictionary<XenRef<Network_sriov>, Network_sriov> network_sriov_get_all_records(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Network_sriov>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<XenRef<Network_sriov>, Network_sriov>>("network_sriov.get_all_records", new JArray(session), serializer);
         }
 
     }

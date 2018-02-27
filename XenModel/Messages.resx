@@ -8839,6 +8839,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>New Search</value>
   </data>
+  <data name="NEW_SRIOV_NETWORK_NAME" xml:space="preserve">
+    <value>New SR-IOV network</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>Connection to {0} has been lost</value>
   </data>
@@ -11005,6 +11008,12 @@ Do you want to connect to the pool master '{1}'?</value>
   </data>
   <data name="SR" xml:space="preserve">
     <value>Storage Repository</value>
+  </data>
+  <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
+    <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
+  </data>
+  <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
+    <value>SR-IOV networks require the SR-IOV capable NIC.</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>
@@ -13640,5 +13649,11 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
+  </data>
+  <data name="FEATURE_DISABLED" xml:space="preserve">
+    <value>'{0}' feature is disabled due to license restrictions on the server.</value>
+  </data>
+  <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
+    <value>All the supported NICs have enabled SR-IOV.</value>
   </data>
 </root>
