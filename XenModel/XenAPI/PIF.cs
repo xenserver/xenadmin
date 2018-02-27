@@ -84,7 +84,7 @@ namespace XenAPI
             pif_igmp_status igmp_snooping_status,
             List<XenRef<Network_sriov>> sriov_physical_PIF_of,
             List<XenRef<Network_sriov>> sriov_logical_PIF_of,
-            XenRef<PCI> pci)
+            XenRef<PCI> PCI)
         {
             this.uuid = uuid;
             this.device = device;
@@ -120,7 +120,7 @@ namespace XenAPI
             this.igmp_snooping_status = igmp_snooping_status;
             this.sriov_physical_PIF_of = sriov_physical_PIF_of;
             this.sriov_logical_PIF_of = sriov_logical_PIF_of;
-            this.pci = pci;
+            this.PCI = PCI;
         }
 
         /// <summary>
@@ -132,10 +132,6 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
-        /// <summary>
-        /// Updates each field of this instance with the value of
-        /// the corresponding field of a given PIF.
-        /// </summary>
         public override void UpdateFrom(PIF update)
         {
             uuid = update.uuid;
@@ -172,7 +168,7 @@ namespace XenAPI
             igmp_snooping_status = update.igmp_snooping_status;
             sriov_physical_PIF_of = update.sriov_physical_PIF_of;
             sriov_logical_PIF_of = update.sriov_logical_PIF_of;
-            pci = update.pci;
+            PCI = update.PCI;
         }
 
         internal void UpdateFromProxy(Proxy_PIF proxy)
@@ -211,7 +207,7 @@ namespace XenAPI
             igmp_snooping_status = proxy.igmp_snooping_status == null ? (pif_igmp_status) 0 : (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)proxy.igmp_snooping_status);
             sriov_physical_PIF_of = proxy.sriov_physical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_physical_PIF_of);
             sriov_logical_PIF_of = proxy.sriov_logical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_logical_PIF_of);
-            pci = proxy.pci == null ? null : XenRef<PCI>.Create(proxy.pci);
+            PCI = proxy.PCI == null ? null : XenRef<PCI>.Create(proxy.PCI);
         }
 
         public Proxy_PIF ToProxy()
@@ -251,7 +247,7 @@ namespace XenAPI
             result_.igmp_snooping_status = pif_igmp_status_helper.ToString(igmp_snooping_status);
             result_.sriov_physical_PIF_of = (sriov_physical_PIF_of != null) ? Helper.RefListToStringArray(sriov_physical_PIF_of) : new string[] {};
             result_.sriov_logical_PIF_of = (sriov_logical_PIF_of != null) ? Helper.RefListToStringArray(sriov_logical_PIF_of) : new string[] {};
-            result_.pci = pci ?? "";
+            result_.PCI = PCI ?? "";
             return result_;
         }
 
@@ -338,6 +334,12 @@ namespace XenAPI
                 capabilities = Marshalling.ParseStringArray(table, "capabilities");
             if (table.ContainsKey("igmp_snooping_status"))
                 igmp_snooping_status = (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), Marshalling.ParseString(table, "igmp_snooping_status"));
+            if (table.ContainsKey("sriov_physical_PIF_of"))
+                sriov_physical_PIF_of = Marshalling.ParseSetRef<Network_sriov>(table, "sriov_physical_PIF_of");
+            if (table.ContainsKey("sriov_logical_PIF_of"))
+                sriov_logical_PIF_of = Marshalling.ParseSetRef<Network_sriov>(table, "sriov_logical_PIF_of");
+            if (table.ContainsKey("PCI"))
+                PCI = Marshalling.ParseRef<PCI>(table, "PCI");
         }
 
         public bool DeepEquals(PIF other)
@@ -381,7 +383,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._igmp_snooping_status, other._igmp_snooping_status) &&
                 Helper.AreEqual2(this._sriov_physical_PIF_of, other._sriov_physical_PIF_of) &&
                 Helper.AreEqual2(this._sriov_logical_PIF_of, other._sriov_logical_PIF_of) &&
-                Helper.AreEqual2(this._pci, other._pci);
+                Helper.AreEqual2(this._PCI, other._PCI);
         }
 
         internal static List<PIF> ProxyArrayToObjectList(Proxy_PIF[] input)
@@ -898,7 +900,10 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Network_sriov>> get_sriov_physical_PIF_of(Session session, string _pif)
         {
-            return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_physical_pif_of(session.uuid, _pif ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pif_get_sriov_physical_pif_of(session.uuid, _pif);
+            else
+                return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_physical_pif_of(session.uuid, _pif ?? "").parse());
         }
 
         /// <summary>
@@ -909,18 +914,24 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Network_sriov>> get_sriov_logical_PIF_of(Session session, string _pif)
         {
-            return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_logical_pif_of(session.uuid, _pif ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pif_get_sriov_logical_pif_of(session.uuid, _pif);
+            else
+                return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_logical_pif_of(session.uuid, _pif ?? "").parse());
         }
 
         /// <summary>
-        /// Get the pci field of the given PIF.
+        /// Get the PCI field of the given PIF.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
-        public static XenRef<PCI> get_pci(Session session, string _pif)
+        public static XenRef<PCI> get_PCI(Session session, string _pif)
         {
-            return XenRef<PCI>.Create(session.proxy.pif_get_pci(session.uuid, _pif ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pif_get_pci(session.uuid, _pif);
+            else
+                return XenRef<PCI>.Create(session.proxy.pif_get_pci(session.uuid, _pif ?? "").parse());
         }
 
         /// <summary>
@@ -2311,6 +2322,7 @@ namespace XenAPI
         /// Indicates which network_sriov this interface is physical of
         /// First published in Unreleased.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Network_sriov>))]
         public virtual List<XenRef<Network_sriov>> sriov_physical_PIF_of
         {
             get { return _sriov_physical_PIF_of; }
@@ -2324,12 +2336,13 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Network_sriov>> _sriov_physical_PIF_of;
+        private List<XenRef<Network_sriov>> _sriov_physical_PIF_of = new List<XenRef<Network_sriov>>() {};
 
         /// <summary>
         /// Indicates which network_sriov this interface is logical of
         /// First published in Unreleased.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Network_sriov>))]
         public virtual List<XenRef<Network_sriov>> sriov_logical_PIF_of
         {
             get { return _sriov_logical_PIF_of; }
@@ -2343,25 +2356,26 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Network_sriov>> _sriov_logical_PIF_of;
+        private List<XenRef<Network_sriov>> _sriov_logical_PIF_of = new List<XenRef<Network_sriov>>() {};
 
         /// <summary>
-        /// Link to underlying pci device
+        /// Link to underlying PCI device
         /// First published in Unreleased.
         /// </summary>
-        public virtual XenRef<PCI> pci
+        [JsonConverter(typeof(XenRefConverter<PCI>))]
+        public virtual XenRef<PCI> PCI
         {
-            get { return _pci; }
+            get { return _PCI; }
             set
             {
-                if (!Helper.AreEqual(value, _pci))
+                if (!Helper.AreEqual(value, _PCI))
                 {
-                    _pci = value;
+                    _PCI = value;
                     Changed = true;
-                    NotifyPropertyChanged("pci");
+                    NotifyPropertyChanged("PCI");
                 }
             }
         }
-        private XenRef<PCI> _pci;
+        private XenRef<PCI> _PCI = new XenRef<PCI>("OpaqueRef:NULL");
     }
 }
