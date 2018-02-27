@@ -3417,6 +3417,7 @@ namespace XenAPI
         /// <summary>
         /// details of vendor implementation
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> API_version_vendor_implementation
         {
             get { return _API_version_vendor_implementation; }
@@ -3453,6 +3454,7 @@ namespace XenAPI
         /// <summary>
         /// version strings
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> software_version
         {
             get { return _software_version; }
@@ -3471,6 +3473,7 @@ namespace XenAPI
         /// <summary>
         /// additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -3507,6 +3510,7 @@ namespace XenAPI
         /// <summary>
         /// The CPU configuration on this host.  May contain keys such as "nr_nodes", "sockets_per_node", "cores_per_socket", or "threads_per_core"
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> cpu_configuration
         {
             get { return _cpu_configuration; }
@@ -3580,6 +3584,7 @@ namespace XenAPI
         /// <summary>
         /// logging configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> logging
         {
             get { return _logging; }
@@ -3752,6 +3757,7 @@ namespace XenAPI
         /// Details about the physical CPUs on this host
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> cpu_info
         {
             get { return _cpu_info; }
@@ -3825,6 +3831,7 @@ namespace XenAPI
         /// <summary>
         /// State of the current license
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> license_params
         {
             get { return _license_params; }
@@ -3959,6 +3966,7 @@ namespace XenAPI
         /// configuration specific to external authentication service
         /// First published in XenServer 5.5.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> external_auth_configuration
         {
             get { return _external_auth_configuration; }
@@ -3997,6 +4005,7 @@ namespace XenAPI
         /// Contact information of the license server
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> license_server
         {
             get { return _license_server; }
@@ -4016,6 +4025,7 @@ namespace XenAPI
         /// BIOS strings
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> bios_strings
         {
             get { return _bios_strings; }
@@ -4054,6 +4064,7 @@ namespace XenAPI
         /// The power on config
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> power_on_config
         {
             get { return _power_on_config; }
@@ -4093,6 +4104,7 @@ namespace XenAPI
         /// Information about chipset features
         /// First published in XenServer 6.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> chipset_info
         {
             get { return _chipset_info; }
@@ -4191,6 +4203,7 @@ namespace XenAPI
         /// VCPUs params to apply to all resident guests
         /// First published in XenServer 6.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> guest_VCPUs_params
         {
             get { return _guest_VCPUs_params; }

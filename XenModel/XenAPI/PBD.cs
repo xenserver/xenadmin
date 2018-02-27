@@ -573,6 +573,7 @@ namespace XenAPI
         /// <summary>
         /// a config string to string map that is provided to the host's SR-backend-driver
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> device_config
         {
             get { return _device_config; }
@@ -610,6 +611,7 @@ namespace XenAPI
         /// additional configuration
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

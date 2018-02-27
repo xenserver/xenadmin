@@ -1510,6 +1510,7 @@ namespace XenAPI
         /// <summary>
         /// additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -1582,6 +1583,7 @@ namespace XenAPI
         /// <summary>
         /// Device runtime properties
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> runtime_properties
         {
             get { return _runtime_properties; }
@@ -1618,6 +1620,7 @@ namespace XenAPI
         /// <summary>
         /// parameters for chosen QoS algorithm
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> qos_algorithm_params
         {
             get { return _qos_algorithm_params; }

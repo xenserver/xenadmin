@@ -513,6 +513,7 @@ namespace XenAPI
         /// <summary>
         /// Status information about the tunnel
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> status
         {
             get { return _status; }
@@ -531,6 +532,7 @@ namespace XenAPI
         /// <summary>
         /// Additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

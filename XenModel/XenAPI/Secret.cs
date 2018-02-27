@@ -416,6 +416,7 @@ namespace XenAPI
         /// <summary>
         /// other_config
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

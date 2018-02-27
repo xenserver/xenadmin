@@ -314,10 +314,6 @@ namespace XenAPI
                 {
                     VBD.set_bootable(session, opaqueRef, _bootable);
                 }
-                if (!Helper.AreEqual2(_mode, server._mode))
-                {
-                    VBD.set_mode(session, opaqueRef, _mode);
-                }
                 if (!Helper.AreEqual2(_type, server._type))
                 {
                     VBD.set_type(session, opaqueRef, _type);
@@ -337,6 +333,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_qos_algorithm_params, server._qos_algorithm_params))
                 {
                     VBD.set_qos_algorithm_params(session, opaqueRef, _qos_algorithm_params);
+                }
+                if (!Helper.AreEqual2(_mode, server._mode))
+                {
+                    VBD.set_mode(session, opaqueRef, _mode);
                 }
 
                 return null;
@@ -765,21 +765,6 @@ namespace XenAPI
         }
 
         /// <summary>
-        /// Set the mode field of the given VBD.
-        /// First published in XenServer 4.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vbd">The opaque_ref of the given vbd</param>
-        /// <param name="_mode">New value to set</param>
-        public static void set_mode(Session session, string _vbd, vbd_mode _mode)
-        {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vbd_set_mode(session.opaque_ref, _vbd, _mode);
-            else
-                session.proxy.vbd_set_mode(session.opaque_ref, _vbd ?? "", vbd_mode_helper.ToString(_mode)).parse();
-        }
-
-        /// <summary>
         /// Set the type field of the given VBD.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1087,6 +1072,36 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Sets the mode of the VBD. The power_state of the VM must be halted.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_value">New value to set</param>
+        public static void set_mode(Session session, string _vbd, vbd_mode _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vbd_set_mode(session.opaque_ref, _vbd, _value);
+            else
+                session.proxy.vbd_set_mode(session.opaque_ref, _vbd ?? "", vbd_mode_helper.ToString(_value)).parse();
+        }
+
+        /// <summary>
+        /// Sets the mode of the VBD. The power_state of the VM must be halted.
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vbd">The opaque_ref of the given vbd</param>
+        /// <param name="_value">New value to set</param>
+        public static XenRef<Task> async_set_mode(Session session, string _vbd, vbd_mode _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vbd_set_mode(session.opaque_ref, _vbd, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vbd_set_mode(session.opaque_ref, _vbd ?? "", vbd_mode_helper.ToString(_value)).parse());
+        }
+
+        /// <summary>
         /// Return a list of all the VBDs known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -1354,6 +1369,7 @@ namespace XenAPI
         /// <summary>
         /// additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -1426,6 +1442,7 @@ namespace XenAPI
         /// <summary>
         /// Device runtime properties
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> runtime_properties
         {
             get { return _runtime_properties; }
@@ -1462,6 +1479,7 @@ namespace XenAPI
         /// <summary>
         /// parameters for chosen QoS algorithm
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> qos_algorithm_params
         {
             get { return _qos_algorithm_params; }

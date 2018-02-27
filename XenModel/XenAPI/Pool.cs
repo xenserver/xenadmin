@@ -2824,6 +2824,7 @@ namespace XenAPI
         /// <summary>
         /// additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -2862,6 +2863,7 @@ namespace XenAPI
         /// The current HA configuration
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> ha_configuration
         {
             get { return _ha_configuration; }
@@ -3015,6 +3017,7 @@ namespace XenAPI
         /// gui-specific configuration for pool
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> gui_config
         {
             get { return _gui_config; }
@@ -3034,6 +3037,7 @@ namespace XenAPI
         /// Configuration for the automatic health check feature
         /// First published in XenServer 7.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> health_check_config
         {
             get { return _health_check_config; }
@@ -3187,6 +3191,7 @@ namespace XenAPI
         /// Pool-wide restrictions currently in effect
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> restrictions
         {
             get { return _restrictions; }
@@ -3281,6 +3286,7 @@ namespace XenAPI
         /// Pool-wide guest agent configuration information
         /// First published in XenServer 7.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> guest_agent_config
         {
             get { return _guest_agent_config; }
@@ -3300,6 +3306,7 @@ namespace XenAPI
         /// Details about the physical CPUs on the pool
         /// First published in XenServer 7.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> cpu_info
         {
             get { return _cpu_info; }

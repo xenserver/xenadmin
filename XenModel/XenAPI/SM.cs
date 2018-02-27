@@ -707,6 +707,7 @@ namespace XenAPI
         /// <summary>
         /// names and descriptions of device config keys
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> configuration
         {
             get { return _configuration; }
@@ -763,6 +764,7 @@ namespace XenAPI
         /// additional configuration
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

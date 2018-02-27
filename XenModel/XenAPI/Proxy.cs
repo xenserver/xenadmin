@@ -1720,10 +1720,6 @@ namespace XenAPI
         Response<string>
         vm_set_actions_after_reboot(string session, string _vm, string _after_reboot);
 
-        [XmlRpcMethod("VM.set_actions_after_crash")]
-        Response<string>
-        vm_set_actions_after_crash(string session, string _vm, string _after_crash);
-
         [XmlRpcMethod("VM.set_PV_bootloader")]
         Response<string>
         vm_set_pv_bootloader(string session, string _vm, string _bootloader);
@@ -2407,6 +2403,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VM.import")]
         Response<string>
         async_vm_import(string session, string _url, string _sr, bool _full_restore, bool _force);
+
+        [XmlRpcMethod("VM.set_actions_after_crash")]
+        Response<string>
+        vm_set_actions_after_crash(string session, string _vm, string _value);
+
+        [XmlRpcMethod("Async.VM.set_actions_after_crash")]
+        Response<string>
+        async_vm_set_actions_after_crash(string session, string _vm, string _value);
 
         [XmlRpcMethod("VM.get_all")]
         Response<string []>
@@ -6164,10 +6168,6 @@ namespace XenAPI
         Response<string>
         vbd_set_bootable(string session, string _vbd, bool _bootable);
 
-        [XmlRpcMethod("VBD.set_mode")]
-        Response<string>
-        vbd_set_mode(string session, string _vbd, string _mode);
-
         [XmlRpcMethod("VBD.set_type")]
         Response<string>
         vbd_set_type(string session, string _vbd, string _type);
@@ -6251,6 +6251,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VBD.assert_attachable")]
         Response<string>
         async_vbd_assert_attachable(string session, string _vbd);
+
+        [XmlRpcMethod("VBD.set_mode")]
+        Response<string>
+        vbd_set_mode(string session, string _vbd, string _value);
+
+        [XmlRpcMethod("Async.VBD.set_mode")]
+        Response<string>
+        async_vbd_set_mode(string session, string _vbd, string _value);
 
         [XmlRpcMethod("VBD.get_all")]
         Response<string []>
