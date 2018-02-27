@@ -30,6 +30,7 @@
  */
 
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Collections;
 using System.ComponentModel;
@@ -42,6 +43,7 @@ using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
+
 
 namespace XenAdmin.Wizards
 {
@@ -157,21 +159,24 @@ namespace XenAdmin.Wizards
         {
             NetworkTypes network_type = pageNetworkType.SelectedNetworkType;
 
-            if (network_type == NetworkTypes.Bonded)
+            switch (network_type)
             {
-                if (!CreateBonded())
-                {
-                    FinishCanceled();
-                    return;
-                }
-            }
-            else if (network_type == NetworkTypes.CHIN)
-            {
-                CreateCHIN();
-            }
-            else
-            {
-                CreateNonBonded();
+                case NetworkTypes.Bonded:
+                    if (!CreateBonded())
+                    {
+                        FinishCanceled();
+                        return;
+                    }
+                    break;
+                case NetworkTypes.CHIN:
+                    CreateCHIN();
+                    break;
+                case NetworkTypes.SRIOV:
+                    CreateSRIOV();
+                    break;
+                default:
+                    CreateNonBonded();
+                    break;
             }
 
             base.FinishWizard();
@@ -197,6 +202,28 @@ namespace XenAdmin.Wizards
             (new CreateChinAction(xenConnection, network, theInterface)).RunAsync();
         }
 
+        private void CreateSRIOV()
+        {
+            XenAPI.Network network = PopulateNewNetworkObj();
+
+            List<PIF> sriovSelectedPifs = new List<PIF>();
+            Pool pool = Helpers.GetPoolOfOne(Host.Connection);
+            if (pool == null)
+                return;
+
+            if (pageSriovDetails.SelectedHostNic == null)
+                return ;
+
+            foreach (PIF thePIF in pool.Connection.Cache.PIFs)
+            {
+                if (thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.device == pageSriovDetails.SelectedHostNic.device && thePIF.sriov_physical_PIF_of.Count == 0)
+                    sriovSelectedPifs.Add(thePIF);
+            }
+
+            if(sriovSelectedPifs.Count != 0)
+                (new CreateSriovAction(xenConnection, network, sriovSelectedPifs)).RunAsync();
+        }
+
         private void CreateNonBonded()
         {
             XenAPI.Network network = PopulateNewNetworkObj();
@@ -214,7 +241,7 @@ namespace XenAdmin.Wizards
             XenAPI.Network result = new XenAPI.Network();
             result.name_label = pageName.NetworkName;
             result.name_description = pageName.NetworkDescription;
-            result.SetAutoPlug(pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN ? pageChinDetails.isAutomaticAddNicToVM : pageNetworkDetails.isAutomaticAddNicToVM);
+            result.SetAutoPlug(pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN ? pageChinDetails.isAutomaticAddNicToVM : (pageNetworkType.SelectedNetworkType == NetworkTypes.SRIOV ? pageSriovDetails.isAutomaticAddNicToVM : pageNetworkDetails.isAutomaticAddNicToVM));
             if (pageNetworkType.SelectedNetworkType == NetworkTypes.CHIN)
                 result.MTU = pageChinDetails.MTU;
             else if (pageNetworkDetails.MTU.HasValue) //Custom MTU may not be allowed if we are making a virtual network or something

@@ -84,7 +84,7 @@ namespace XenAPI
             pif_igmp_status igmp_snooping_status,
             List<XenRef<Network_sriov>> sriov_physical_PIF_of,
             List<XenRef<Network_sriov>> sriov_logical_PIF_of,
-            XenRef<PCI> pci)
+            XenRef<PCI> PCI)
         {
             this.uuid = uuid;
             this.device = device;
@@ -120,7 +120,7 @@ namespace XenAPI
             this.igmp_snooping_status = igmp_snooping_status;
             this.sriov_physical_PIF_of = sriov_physical_PIF_of;
             this.sriov_logical_PIF_of = sriov_logical_PIF_of;
-            this.pci = pci;
+            this.PCI = PCI;
         }
 
         /// <summary>
@@ -132,10 +132,6 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
-        /// <summary>
-        /// Updates each field of this instance with the value of
-        /// the corresponding field of a given PIF.
-        /// </summary>
         public override void UpdateFrom(PIF update)
         {
             uuid = update.uuid;
@@ -172,7 +168,7 @@ namespace XenAPI
             igmp_snooping_status = update.igmp_snooping_status;
             sriov_physical_PIF_of = update.sriov_physical_PIF_of;
             sriov_logical_PIF_of = update.sriov_logical_PIF_of;
-            pci = update.pci;
+            PCI = update.PCI;
         }
 
         internal void UpdateFromProxy(Proxy_PIF proxy)
@@ -211,7 +207,7 @@ namespace XenAPI
             igmp_snooping_status = proxy.igmp_snooping_status == null ? (pif_igmp_status) 0 : (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)proxy.igmp_snooping_status);
             sriov_physical_PIF_of = proxy.sriov_physical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_physical_PIF_of);
             sriov_logical_PIF_of = proxy.sriov_logical_PIF_of == null ? null : XenRef<Network_sriov>.Create(proxy.sriov_logical_PIF_of);
-            pci = proxy.pci == null ? null : XenRef<PCI>.Create(proxy.pci);
+            PCI = proxy.PCI == null ? null : XenRef<PCI>.Create(proxy.PCI);
         }
 
         public Proxy_PIF ToProxy()
@@ -251,93 +247,51 @@ namespace XenAPI
             result_.igmp_snooping_status = pif_igmp_status_helper.ToString(igmp_snooping_status);
             result_.sriov_physical_PIF_of = (sriov_physical_PIF_of != null) ? Helper.RefListToStringArray(sriov_physical_PIF_of) : new string[] {};
             result_.sriov_logical_PIF_of = (sriov_logical_PIF_of != null) ? Helper.RefListToStringArray(sriov_logical_PIF_of) : new string[] {};
-            result_.pci = pci ?? "";
+            result_.PCI = PCI ?? "";
             return result_;
         }
 
         /// <summary>
         /// Creates a new PIF from a Hashtable.
-        /// Note that the fields not contained in the Hashtable
-        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PIF(Hashtable table) : this()
+        public PIF(Hashtable table)
         {
-            UpdateFrom(table);
-        }
-
-        /// <summary>
-        /// Given a Hashtable with field-value pairs, it updates the fields of this PIF
-        /// with the values listed in the Hashtable. Note that only the fields contained
-        /// in the Hashtable will be updated and the rest will remain the same.
-        /// </summary>
-        /// <param name="table"></param>
-        public void UpdateFrom(Hashtable table)
-        {
-            if (table.ContainsKey("uuid"))
-                uuid = (string)table["uuid"];
-            if (table.ContainsKey("device"))
-                device = (string)table["device"];
-            if (table.ContainsKey("network"))
-                network = XenRef<Network>.Create((string)table["network"]);
-            if (table.ContainsKey("host"))
-                host = XenRef<Host>.Create((string)table["host"]);
-            if (table.ContainsKey("MAC"))
-                MAC = (string)table["MAC"];
-            if (table.ContainsKey("MTU"))
-                MTU = long.Parse((string)table["MTU"]);
-            if (table.ContainsKey("VLAN"))
-                VLAN = long.Parse((string)table["VLAN"]);
-            if (table.ContainsKey("metrics"))
-                metrics = XenRef<PIF_metrics>.Create((string)table["metrics"]);
-            if (table.ContainsKey("physical"))
-                physical = (bool)table["physical"];
-            if (table.ContainsKey("currently_attached"))
-                currently_attached = (bool)table["currently_attached"];
-            if (table.ContainsKey("ip_configuration_mode"))
-                ip_configuration_mode = (ip_configuration_mode)Helper.EnumParseDefault(typeof(ip_configuration_mode), (string)table["ip_configuration_mode"]);
-            if (table.ContainsKey("IP"))
-                IP = (string)table["IP"];
-            if (table.ContainsKey("netmask"))
-                netmask = (string)table["netmask"];
-            if (table.ContainsKey("gateway"))
-                gateway = (string)table["gateway"];
-            if (table.ContainsKey("DNS"))
-                DNS = (string)table["DNS"];
-            if (table.ContainsKey("bond_slave_of"))
-                bond_slave_of = XenRef<Bond>.Create((string)table["bond_slave_of"]);
-            if (table.ContainsKey("bond_master_of"))
-                bond_master_of = XenRef<Bond>.Create((object[])table["bond_master_of"]);
-            if (table.ContainsKey("VLAN_master_of"))
-                VLAN_master_of = XenRef<VLAN>.Create((string)table["VLAN_master_of"]);
-            if (table.ContainsKey("VLAN_slave_of"))
-                VLAN_slave_of = XenRef<VLAN>.Create((object[])table["VLAN_slave_of"]);
-            if (table.ContainsKey("management"))
-                management = (bool)table["management"];
-            if (table.ContainsKey("other_config"))
-                other_config = Maps.convert_from_proxy_string_string((Hashtable)table["other_config"]);
-            if (table.ContainsKey("disallow_unplug"))
-                disallow_unplug = (bool)table["disallow_unplug"];
-            if (table.ContainsKey("tunnel_access_PIF_of"))
-                tunnel_access_PIF_of = XenRef<Tunnel>.Create((object[])table["tunnel_access_PIF_of"]);
-            if (table.ContainsKey("tunnel_transport_PIF_of"))
-                tunnel_transport_PIF_of = XenRef<Tunnel>.Create((object[])table["tunnel_transport_PIF_of"]);
-            if (table.ContainsKey("ipv6_configuration_mode"))
-                ipv6_configuration_mode = (ipv6_configuration_mode)Helper.EnumParseDefault(typeof(ipv6_configuration_mode), (string)table["ipv6_configuration_mode"]);
-            if (table.ContainsKey("IPv6"))
-                IPv6 = Array.ConvertAll((object[])table["IPv6"], o => o.ToString());
-            if (table.ContainsKey("ipv6_gateway"))
-                ipv6_gateway = (string)table["ipv6_gateway"];
-            if (table.ContainsKey("primary_address_type"))
-                primary_address_type = (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), (string)table["primary_address_type"]);
-            if (table.ContainsKey("managed"))
-                managed = (bool)table["managed"];
-            if (table.ContainsKey("properties"))
-                properties = Maps.convert_from_proxy_string_string((Hashtable)table["properties"]);
-            if (table.ContainsKey("capabilities"))
-                capabilities = Array.ConvertAll((object[])table["capabilities"], o => o.ToString());
-            if (table.ContainsKey("igmp_snooping_status"))
-                igmp_snooping_status = (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), (string)table["igmp_snooping_status"]);
+            uuid = Marshalling.ParseString(table, "uuid");
+            device = Marshalling.ParseString(table, "device");
+            network = Marshalling.ParseRef<Network>(table, "network");
+            host = Marshalling.ParseRef<Host>(table, "host");
+            MAC = Marshalling.ParseString(table, "MAC");
+            MTU = Marshalling.ParseLong(table, "MTU");
+            VLAN = Marshalling.ParseLong(table, "VLAN");
+            metrics = Marshalling.ParseRef<PIF_metrics>(table, "metrics");
+            physical = Marshalling.ParseBool(table, "physical");
+            currently_attached = Marshalling.ParseBool(table, "currently_attached");
+            ip_configuration_mode = (ip_configuration_mode)Helper.EnumParseDefault(typeof(ip_configuration_mode), Marshalling.ParseString(table, "ip_configuration_mode"));
+            IP = Marshalling.ParseString(table, "IP");
+            netmask = Marshalling.ParseString(table, "netmask");
+            gateway = Marshalling.ParseString(table, "gateway");
+            DNS = Marshalling.ParseString(table, "DNS");
+            bond_slave_of = Marshalling.ParseRef<Bond>(table, "bond_slave_of");
+            bond_master_of = Marshalling.ParseSetRef<Bond>(table, "bond_master_of");
+            VLAN_master_of = Marshalling.ParseRef<VLAN>(table, "VLAN_master_of");
+            VLAN_slave_of = Marshalling.ParseSetRef<VLAN>(table, "VLAN_slave_of");
+            management = Marshalling.ParseBool(table, "management");
+            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            disallow_unplug = Marshalling.ParseBool(table, "disallow_unplug");
+            tunnel_access_PIF_of = Marshalling.ParseSetRef<Tunnel>(table, "tunnel_access_PIF_of");
+            tunnel_transport_PIF_of = Marshalling.ParseSetRef<Tunnel>(table, "tunnel_transport_PIF_of");
+            ipv6_configuration_mode = (ipv6_configuration_mode)Helper.EnumParseDefault(typeof(ipv6_configuration_mode), Marshalling.ParseString(table, "ipv6_configuration_mode"));
+            IPv6 = Marshalling.ParseStringArray(table, "IPv6");
+            ipv6_gateway = Marshalling.ParseString(table, "ipv6_gateway");
+            primary_address_type = (primary_address_type)Helper.EnumParseDefault(typeof(primary_address_type), Marshalling.ParseString(table, "primary_address_type"));
+            managed = Marshalling.ParseBool(table, "managed");
+            properties = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "properties"));
+            capabilities = Marshalling.ParseStringArray(table, "capabilities");
+            igmp_snooping_status = (pif_igmp_status)Helper.EnumParseDefault(typeof(pif_igmp_status), Marshalling.ParseString(table, "igmp_snooping_status"));
+            sriov_physical_PIF_of = Marshalling.ParseSetRef<Network_sriov>(table, "sriov_physical_PIF_of");
+            sriov_logical_PIF_of = Marshalling.ParseSetRef<Network_sriov>(table, "sriov_logical_PIF_of");
+            PCI = Marshalling.ParseRef<PCI>(table, "PCI");
         }
 
         public bool DeepEquals(PIF other)
@@ -381,7 +335,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._igmp_snooping_status, other._igmp_snooping_status) &&
                 Helper.AreEqual2(this._sriov_physical_PIF_of, other._sriov_physical_PIF_of) &&
                 Helper.AreEqual2(this._sriov_logical_PIF_of, other._sriov_logical_PIF_of) &&
-                Helper.AreEqual2(this._pci, other._pci);
+                Helper.AreEqual2(this._PCI, other._PCI);
         }
 
         internal static List<PIF> ProxyArrayToObjectList(Proxy_PIF[] input)
@@ -898,7 +852,10 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Network_sriov>> get_sriov_physical_PIF_of(Session session, string _pif)
         {
-            return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_physical_pif_of(session.uuid, _pif ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pif_get_sriov_physical_pif_of(session.uuid, _pif);
+            else
+                return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_physical_pif_of(session.uuid, _pif ?? "").parse());
         }
 
         /// <summary>
@@ -909,18 +866,24 @@ namespace XenAPI
         /// <param name="_pif">The opaque_ref of the given pif</param>
         public static List<XenRef<Network_sriov>> get_sriov_logical_PIF_of(Session session, string _pif)
         {
-            return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_logical_pif_of(session.uuid, _pif ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pif_get_sriov_logical_pif_of(session.uuid, _pif);
+            else
+                return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_logical_pif_of(session.uuid, _pif ?? "").parse());
         }
 
         /// <summary>
-        /// Get the pci field of the given PIF.
+        /// Get the PCI field of the given PIF.
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_pif">The opaque_ref of the given pif</param>
-        public static XenRef<PCI> get_pci(Session session, string _pif)
+        public static XenRef<PCI> get_PCI(Session session, string _pif)
         {
-            return XenRef<PCI>.Create(session.proxy.pif_get_pci(session.uuid, _pif ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pif_get_pci(session.uuid, _pif);
+            else
+                return XenRef<PCI>.Create(session.proxy.pif_get_pci(session.uuid, _pif ?? "").parse());
         }
 
         /// <summary>
@@ -2309,6 +2272,7 @@ namespace XenAPI
         /// Indicates which network_sriov this interface is physical of
         /// First published in Unreleased.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Network_sriov>))]
         public virtual List<XenRef<Network_sriov>> sriov_physical_PIF_of
         {
             get { return _sriov_physical_PIF_of; }
@@ -2322,12 +2286,13 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Network_sriov>> _sriov_physical_PIF_of;
+        private List<XenRef<Network_sriov>> _sriov_physical_PIF_of = new List<XenRef<Network_sriov>>() {};
 
         /// <summary>
         /// Indicates which network_sriov this interface is logical of
         /// First published in Unreleased.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Network_sriov>))]
         public virtual List<XenRef<Network_sriov>> sriov_logical_PIF_of
         {
             get { return _sriov_logical_PIF_of; }
@@ -2341,25 +2306,26 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Network_sriov>> _sriov_logical_PIF_of;
+        private List<XenRef<Network_sriov>> _sriov_logical_PIF_of = new List<XenRef<Network_sriov>>() {};
 
         /// <summary>
-        /// Link to underlying pci device
+        /// Link to underlying PCI device
         /// First published in Unreleased.
         /// </summary>
-        public virtual XenRef<PCI> pci
+        [JsonConverter(typeof(XenRefConverter<PCI>))]
+        public virtual XenRef<PCI> PCI
         {
-            get { return _pci; }
+            get { return _PCI; }
             set
             {
-                if (!Helper.AreEqual(value, _pci))
+                if (!Helper.AreEqual(value, _PCI))
                 {
-                    _pci = value;
+                    _PCI = value;
                     Changed = true;
-                    NotifyPropertyChanged("pci");
+                    NotifyPropertyChanged("PCI");
                 }
             }
         }
-        private XenRef<PCI> _pci;
+        private XenRef<PCI> _PCI = new XenRef<PCI>("OpaqueRef:NULL");
     }
 }
