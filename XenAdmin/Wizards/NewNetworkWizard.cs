@@ -211,9 +211,12 @@ namespace XenAdmin.Wizards
             if (pool == null)
                 return;
 
+            if (pageSriovDetails.SelectedHostNic == null)
+                return ;
+
             foreach (PIF thePIF in pool.Connection.Cache.PIFs)
             {
-                if (thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.Name() == pageSriovDetails.SelectedHostNic.Name() && thePIF.sriov_physical_PIF_of.Count == 0)
+                if (thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.device == pageSriovDetails.SelectedHostNic.device && thePIF.sriov_physical_PIF_of.Count == 0)
                     sriovSelectedPifs.Add(thePIF);
             }
 
