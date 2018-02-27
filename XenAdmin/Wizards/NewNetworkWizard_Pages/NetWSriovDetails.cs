@@ -80,5 +80,10 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         {
             get { return cbxAutomatic.Checked; }
         }
+
+        public override bool EnableNext()
+        {
+            return SelectedHostNic != null;
+        }
     }
 }
