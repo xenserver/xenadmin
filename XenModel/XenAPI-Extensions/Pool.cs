@@ -211,6 +211,11 @@ namespace XenAPI
             return true;
         }
 
+        public bool HasSriovNic()
+        {
+            return Connection.Cache.PIFs.Any(pif => pif.SriovCapable());
+        }
+
         public List<XenAPI.Host> HostsToUpgrade()
         {
             //First one to upgrade has to be the master
