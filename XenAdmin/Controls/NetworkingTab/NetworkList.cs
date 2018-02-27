@@ -478,7 +478,7 @@ namespace XenAdmin.Controls.NetworkingTab
         {
             foreach (PIF pif in network.Connection.ResolveAll(network.PIFs))
             {
-                if (pif.IsPhysical() && !pif.IsBondNIC() && pif.sriov_logical_PIF_of.Count == 0)
+                if (pif.IsPhysical() && !pif.IsBondNIC())
                     return true;
             }
             return false;
