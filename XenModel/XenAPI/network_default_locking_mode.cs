@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(network_default_locking_modeConverter))]
     public enum network_default_locking_mode
     {
         unlocked, disabled, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class network_default_locking_mode_helper
     {
         public static string ToString(network_default_locking_mode x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this network_default_locking_mode x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class network_default_locking_modeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((network_default_locking_mode)value).StringOf());
         }
     }
 }

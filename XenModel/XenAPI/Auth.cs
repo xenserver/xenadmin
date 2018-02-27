@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -116,7 +120,10 @@ namespace XenAPI
         /// <param name="_subject_name">The human-readable subject_name, such as a username or a groupname</param>
         public static string get_subject_identifier(Session session, string _subject_name)
         {
-            return (string)session.proxy.auth_get_subject_identifier(session.uuid, _subject_name ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.auth_get_subject_identifier(session.uuid, _subject_name);
+            else
+                return (string)session.proxy.auth_get_subject_identifier(session.uuid, _subject_name ?? "").parse();
         }
 
         /// <summary>
@@ -127,7 +134,10 @@ namespace XenAPI
         /// <param name="_subject_identifier">A string containing the subject_identifier, unique in the external directory service</param>
         public static Dictionary<string, string> get_subject_information_from_identifier(Session session, string _subject_identifier)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.auth_get_subject_information_from_identifier(session.uuid, _subject_identifier ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.auth_get_subject_information_from_identifier(session.uuid, _subject_identifier);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.auth_get_subject_information_from_identifier(session.uuid, _subject_identifier ?? "").parse());
         }
 
         /// <summary>
@@ -138,7 +148,10 @@ namespace XenAPI
         /// <param name="_subject_identifier">A string containing the subject_identifier, unique in the external directory service</param>
         public static string[] get_group_membership(Session session, string _subject_identifier)
         {
-            return (string [])session.proxy.auth_get_group_membership(session.uuid, _subject_identifier ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.auth_get_group_membership(session.uuid, _subject_identifier);
+            else
+                return (string [])session.proxy.auth_get_group_membership(session.uuid, _subject_identifier ?? "").parse();
         }
     }
 }

@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vmss_typeConverter))]
     public enum vmss_type
     {
         snapshot, checkpoint, snapshot_with_quiesce, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vmss_type_helper
     {
         public static string ToString(vmss_type x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vmss_type x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vmss_typeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vmss_type)value).StringOf());
         }
     }
 }

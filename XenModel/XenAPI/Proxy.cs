@@ -3332,6 +3332,10 @@ namespace XenAPI
         Response<string>
         host_get_iscsi_iqn(string session, string _host);
 
+        [XmlRpcMethod("host.get_multipathing")]
+        Response<bool>
+        host_get_multipathing(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3819,6 +3823,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.set_iscsi_iqn")]
         Response<string>
         async_host_set_iscsi_iqn(string session, string _host, string _value);
+
+        [XmlRpcMethod("host.set_multipathing")]
+        Response<string>
+        host_set_multipathing(string session, string _host, bool _value);
+
+        [XmlRpcMethod("Async.host.set_multipathing")]
+        Response<string>
+        async_host_set_multipathing(string session, string _host, bool _value);
 
         [XmlRpcMethod("host.get_all")]
         Response<string []>
@@ -5756,10 +5768,6 @@ namespace XenAPI
         Response<bool>
         vdi_get_cbt_enabled(string session, string _vdi);
 
-        [XmlRpcMethod("VDI.get_activated_on")]
-        Response<string>
-        vdi_get_activated_on(string session, string _vdi);
-
         [XmlRpcMethod("VDI.set_other_config")]
         Response<string>
         vdi_set_other_config(string session, string _vdi, Object _other_config);
@@ -7232,6 +7240,10 @@ namespace XenAPI
         Response<string>
         vgpu_get_scheduled_to_be_resident_on(string session, string _vgpu);
 
+        [XmlRpcMethod("VGPU.get_compatibility_metadata")]
+        Response<Object>
+        vgpu_get_compatibility_metadata(string session, string _vgpu);
+
         [XmlRpcMethod("VGPU.set_other_config")]
         Response<string>
         vgpu_set_other_config(string session, string _vgpu, Object _other_config);
@@ -7988,6 +8000,14 @@ namespace XenAPI
         Response<bool>
         cluster_get_pool_auto_join(string session, string _cluster);
 
+        [XmlRpcMethod("Cluster.get_token_timeout")]
+        Response<string>
+        cluster_get_token_timeout(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_token_timeout_coefficient")]
+        Response<string>
+        cluster_get_token_timeout_coefficient(string session, string _cluster);
+
         [XmlRpcMethod("Cluster.get_cluster_config")]
         Response<Object>
         cluster_get_cluster_config(string session, string _cluster);
@@ -8010,11 +8030,11 @@ namespace XenAPI
 
         [XmlRpcMethod("Cluster.create")]
         Response<string>
-        cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join);
+        cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient);
 
         [XmlRpcMethod("Async.Cluster.create")]
         Response<string>
-        async_cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join);
+        async_cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient);
 
         [XmlRpcMethod("Cluster.destroy")]
         Response<string>
@@ -8026,11 +8046,19 @@ namespace XenAPI
 
         [XmlRpcMethod("Cluster.pool_create")]
         Response<string>
-        cluster_pool_create(string session, string _network, string _cluster_stack);
+        cluster_pool_create(string session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient);
 
         [XmlRpcMethod("Async.Cluster.pool_create")]
         Response<string>
-        async_cluster_pool_create(string session, string _network, string _cluster_stack);
+        async_cluster_pool_create(string session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient);
+
+        [XmlRpcMethod("Cluster.pool_force_destroy")]
+        Response<string>
+        cluster_pool_force_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Async.Cluster.pool_force_destroy")]
+        Response<string>
+        async_cluster_pool_force_destroy(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.pool_destroy")]
         Response<string>
@@ -8115,6 +8143,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.Cluster_host.enable")]
         Response<string>
         async_cluster_host_enable(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.force_destroy")]
+        Response<string>
+        cluster_host_force_destroy(string session, string _cluster_host);
+
+        [XmlRpcMethod("Async.Cluster_host.force_destroy")]
+        Response<string>
+        async_cluster_host_force_destroy(string session, string _cluster_host);
 
         [XmlRpcMethod("Cluster_host.disable")]
         Response<string>
@@ -8515,6 +8551,7 @@ namespace XenAPI
         public string [] updates_requiring_reboot;
         public string [] features;
         public string iscsi_iqn;
+        public bool multipathing;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8798,7 +8835,6 @@ namespace XenAPI
         public bool metadata_latest;
         public bool is_tools_iso;
         public bool cbt_enabled;
-        public string activated_on;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8999,6 +9035,7 @@ namespace XenAPI
         public string type;
         public string resident_on;
         public string scheduled_to_be_resident_on;
+        public Object compatibility_metadata;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9147,6 +9184,8 @@ namespace XenAPI
         public string [] allowed_operations;
         public Object current_operations;
         public bool pool_auto_join;
+        public string token_timeout;
+        public string token_timeout_coefficient;
         public Object cluster_config;
         public Object other_config;
     }

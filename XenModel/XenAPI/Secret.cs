@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -123,8 +127,8 @@ namespace XenAPI
         {
             if (opaqueRef == null)
             {
-                Proxy_Secret p = this.ToProxy();
-                return session.proxy.secret_create(session.uuid, p).parse();
+                var reference = create(session, this);
+                return reference == null ? null : reference.opaque_ref;
             }
             else
             {
@@ -148,7 +152,10 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static Secret get_record(Session session, string _secret)
         {
-            return new Secret((Proxy_Secret)session.proxy.secret_get_record(session.uuid, _secret ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.secret_get_record(session.uuid, _secret);
+            else
+                return new Secret((Proxy_Secret)session.proxy.secret_get_record(session.uuid, _secret ?? "").parse());
         }
 
         /// <summary>
@@ -159,7 +166,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Secret> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Secret>.Create(session.proxy.secret_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.secret_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<Secret>.Create(session.proxy.secret_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -170,7 +180,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Secret> create(Session session, Secret _record)
         {
-            return XenRef<Secret>.Create(session.proxy.secret_create(session.uuid, _record.ToProxy()).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.secret_create(session.uuid, _record);
+            else
+                return XenRef<Secret>.Create(session.proxy.secret_create(session.uuid, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -181,7 +194,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, Secret _record)
         {
-            return XenRef<Task>.Create(session.proxy.async_secret_create(session.uuid, _record.ToProxy()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_secret_create(session.uuid, _record);
+          else
+              return XenRef<Task>.Create(session.proxy.async_secret_create(session.uuid, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -192,7 +208,10 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static void destroy(Session session, string _secret)
         {
-            session.proxy.secret_destroy(session.uuid, _secret ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.secret_destroy(session.uuid, _secret);
+            else
+                session.proxy.secret_destroy(session.uuid, _secret ?? "").parse();
         }
 
         /// <summary>
@@ -203,7 +222,10 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static XenRef<Task> async_destroy(Session session, string _secret)
         {
-            return XenRef<Task>.Create(session.proxy.async_secret_destroy(session.uuid, _secret ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_secret_destroy(session.uuid, _secret);
+          else
+              return XenRef<Task>.Create(session.proxy.async_secret_destroy(session.uuid, _secret ?? "").parse());
         }
 
         /// <summary>
@@ -214,7 +236,10 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static string get_uuid(Session session, string _secret)
         {
-            return (string)session.proxy.secret_get_uuid(session.uuid, _secret ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.secret_get_uuid(session.uuid, _secret);
+            else
+                return (string)session.proxy.secret_get_uuid(session.uuid, _secret ?? "").parse();
         }
 
         /// <summary>
@@ -225,7 +250,10 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static string get_value(Session session, string _secret)
         {
-            return (string)session.proxy.secret_get_value(session.uuid, _secret ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.secret_get_value(session.uuid, _secret);
+            else
+                return (string)session.proxy.secret_get_value(session.uuid, _secret ?? "").parse();
         }
 
         /// <summary>
@@ -236,7 +264,10 @@ namespace XenAPI
         /// <param name="_secret">The opaque_ref of the given secret</param>
         public static Dictionary<string, string> get_other_config(Session session, string _secret)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.secret_get_other_config(session.uuid, _secret ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.secret_get_other_config(session.uuid, _secret);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.secret_get_other_config(session.uuid, _secret ?? "").parse());
         }
 
         /// <summary>
@@ -248,7 +279,10 @@ namespace XenAPI
         /// <param name="_value">New value to set</param>
         public static void set_value(Session session, string _secret, string _value)
         {
-            session.proxy.secret_set_value(session.uuid, _secret ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.secret_set_value(session.uuid, _secret, _value);
+            else
+                session.proxy.secret_set_value(session.uuid, _secret ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -260,7 +294,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _secret, Dictionary<string, string> _other_config)
         {
-            session.proxy.secret_set_other_config(session.uuid, _secret ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.secret_set_other_config(session.uuid, _secret, _other_config);
+            else
+                session.proxy.secret_set_other_config(session.uuid, _secret ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -273,7 +310,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _secret, string _key, string _value)
         {
-            session.proxy.secret_add_to_other_config(session.uuid, _secret ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.secret_add_to_other_config(session.uuid, _secret, _key, _value);
+            else
+                session.proxy.secret_add_to_other_config(session.uuid, _secret ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -285,7 +325,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _secret, string _key)
         {
-            session.proxy.secret_remove_from_other_config(session.uuid, _secret ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.secret_remove_from_other_config(session.uuid, _secret, _key);
+            else
+                session.proxy.secret_remove_from_other_config(session.uuid, _secret ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -295,7 +338,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Secret>> get_all(Session session)
         {
-            return XenRef<Secret>.Create(session.proxy.secret_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.secret_get_all(session.uuid);
+            else
+                return XenRef<Secret>.Create(session.proxy.secret_get_all(session.uuid).parse());
         }
 
         /// <summary>
@@ -305,7 +351,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Secret>, Secret> get_all_records(Session session)
         {
-            return XenRef<Secret>.Create<Proxy_Secret>(session.proxy.secret_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.secret_get_all_records(session.uuid);
+            else
+                return XenRef<Secret>.Create<Proxy_Secret>(session.proxy.secret_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
@@ -324,7 +373,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// the secret
@@ -342,7 +391,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _value;
+        private string _value = "";
 
         /// <summary>
         /// other_config
@@ -360,6 +409,6 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
     }
 }

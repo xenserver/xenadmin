@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vmpp_archive_target_typeConverter))]
     public enum vmpp_archive_target_type
     {
         none, cifs, nfs, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vmpp_archive_target_type_helper
     {
         public static string ToString(vmpp_archive_target_type x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vmpp_archive_target_type x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vmpp_archive_target_typeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vmpp_archive_target_type)value).StringOf());
         }
     }
 }

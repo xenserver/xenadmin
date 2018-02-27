@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vbd_operationsConverter))]
     public enum vbd_operations
     {
         attach, eject, insert, plug, unplug, unplug_force, pause, unpause, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vbd_operations_helper
     {
         public static string ToString(vbd_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vbd_operations x)
         {
             switch (x)
             {
@@ -65,6 +73,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vbd_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vbd_operations)value).StringOf());
         }
     }
 }

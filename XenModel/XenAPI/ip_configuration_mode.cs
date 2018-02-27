@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(ip_configuration_modeConverter))]
     public enum ip_configuration_mode
     {
         None, DHCP, Static, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class ip_configuration_mode_helper
     {
         public static string ToString(ip_configuration_mode x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this ip_configuration_mode x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class ip_configuration_modeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((ip_configuration_mode)value).StringOf());
         }
     }
 }

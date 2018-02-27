@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(on_normal_exitConverter))]
     public enum on_normal_exit
     {
         destroy, restart, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class on_normal_exit_helper
     {
         public static string ToString(on_normal_exit x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this on_normal_exit x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class on_normal_exitConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((on_normal_exit)value).StringOf());
         }
     }
 }

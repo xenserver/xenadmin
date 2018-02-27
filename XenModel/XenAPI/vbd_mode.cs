@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vbd_modeConverter))]
     public enum vbd_mode
     {
         RO, RW, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vbd_mode_helper
     {
         public static string ToString(vbd_mode x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vbd_mode x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vbd_modeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vbd_mode)value).StringOf());
         }
     }
 }

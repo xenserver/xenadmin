@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(host_displayConverter))]
     public enum host_display
     {
         enabled, disable_on_reboot, disabled, enable_on_reboot, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class host_display_helper
     {
         public static string ToString(host_display x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this host_display x)
         {
             switch (x)
             {
@@ -57,6 +65,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class host_displayConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((host_display)value).StringOf());
         }
     }
 }

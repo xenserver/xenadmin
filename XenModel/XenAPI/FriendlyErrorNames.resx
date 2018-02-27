@@ -270,6 +270,9 @@
   <data name="CLUSTER_DOES_NOT_HAVE_ONE_NODE" xml:space="preserve">
     <value>The cluster does not have only one node.</value>
   </data>
+  <data name="CLUSTER_FORCE_DESTROY_FAILED" xml:space="preserve">
+    <value>Force destroy failed on a Cluster_host while force destroying the cluster.</value>
+  </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>Could not find a network interface with the specified device name and MAC address.</value>
   </data>
@@ -725,6 +728,9 @@
   </data>
   <data name="NOT_SYSTEM_DOMAIN" xml:space="preserve">
     <value>The given VM is not registered as a system domain. This operation can only be performed on a registered system domain.</value>
+  </data>
+  <data name="NO_COMPATIBLE_CLUSTER_HOST" xml:space="preserve">
+    <value>The host does not have a Cluster_host with a compatible cluster stack.</value>
   </data>
   <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>There were no servers available to complete the specified operation.</value>
@@ -1648,6 +1654,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="SR_REQUIRES_UPGRADE" xml:space="preserve">
     <value>The operation cannot be performed until the SR has been upgraded</value>
+  </data>
+  <data name="SR_SOURCE_SPACE_INSUFFICIENT" xml:space="preserve">
+    <value>The source SR does not have sufficient temporary space available to proceed the operation.</value>
   </data>
   <data name="SR_UNKNOWN_DRIVER" xml:space="preserve">
     <value>The SR could not be connected because the driver {0} was not recognized.</value>

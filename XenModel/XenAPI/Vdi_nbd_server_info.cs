@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -161,7 +165,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _exportname;
+        private string _exportname = "";
 
         /// <summary>
         /// An address on which the server can be reached; this can be IPv4, IPv6, or a DNS name.
@@ -179,7 +183,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _address;
+        private string _address = "";
 
         /// <summary>
         /// The TCP port
@@ -215,7 +219,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _cert;
+        private string _cert = "";
 
         /// <summary>
         /// For convenience, this redundant field holds a DNS (hostname) subject of the certificate. This can be a wildcard, but only for a certificate that has a wildcard subject and no concrete hostname subjects.
@@ -233,6 +237,6 @@ namespace XenAPI
                 }
             }
         }
-        private string _subject;
+        private string _subject = "";
     }
 }

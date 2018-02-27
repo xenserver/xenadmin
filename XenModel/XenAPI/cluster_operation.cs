@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(cluster_operationConverter))]
     public enum cluster_operation
     {
         add, remove, enable, disable, destroy, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class cluster_operation_helper
     {
         public static string ToString(cluster_operation x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this cluster_operation x)
         {
             switch (x)
             {
@@ -59,6 +67,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class cluster_operationConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((cluster_operation)value).StringOf());
         }
     }
 }

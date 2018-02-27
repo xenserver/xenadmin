@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(primary_address_typeConverter))]
     public enum primary_address_type
     {
         IPv4, IPv6, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class primary_address_type_helper
     {
         public static string ToString(primary_address_type x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this primary_address_type x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class primary_address_typeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((primary_address_type)value).StringOf());
         }
     }
 }

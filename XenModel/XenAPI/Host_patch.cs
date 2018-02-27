@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -195,7 +199,10 @@ namespace XenAPI
         [Deprecated("XenServer 7.1")]
         public static Host_patch get_record(Session session, string _host_patch)
         {
-            return new Host_patch((Proxy_Host_patch)session.proxy.host_patch_get_record(session.uuid, _host_patch ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_record(session.uuid, _host_patch);
+            else
+                return new Host_patch((Proxy_Host_patch)session.proxy.host_patch_get_record(session.uuid, _host_patch ?? "").parse());
         }
 
         /// <summary>
@@ -208,7 +215,10 @@ namespace XenAPI
         [Deprecated("XenServer 7.1")]
         public static XenRef<Host_patch> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Host_patch>.Create(session.proxy.host_patch_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<Host_patch>.Create(session.proxy.host_patch_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -221,7 +231,10 @@ namespace XenAPI
         [Deprecated("XenServer 7.1")]
         public static List<XenRef<Host_patch>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<Host_patch>.Create(session.proxy.host_patch_get_by_name_label(session.uuid, _label ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_by_name_label(session.uuid, _label);
+            else
+                return XenRef<Host_patch>.Create(session.proxy.host_patch_get_by_name_label(session.uuid, _label ?? "").parse());
         }
 
         /// <summary>
@@ -232,7 +245,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static string get_uuid(Session session, string _host_patch)
         {
-            return (string)session.proxy.host_patch_get_uuid(session.uuid, _host_patch ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_uuid(session.uuid, _host_patch);
+            else
+                return (string)session.proxy.host_patch_get_uuid(session.uuid, _host_patch ?? "").parse();
         }
 
         /// <summary>
@@ -243,7 +259,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static string get_name_label(Session session, string _host_patch)
         {
-            return (string)session.proxy.host_patch_get_name_label(session.uuid, _host_patch ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_name_label(session.uuid, _host_patch);
+            else
+                return (string)session.proxy.host_patch_get_name_label(session.uuid, _host_patch ?? "").parse();
         }
 
         /// <summary>
@@ -254,7 +273,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static string get_name_description(Session session, string _host_patch)
         {
-            return (string)session.proxy.host_patch_get_name_description(session.uuid, _host_patch ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_name_description(session.uuid, _host_patch);
+            else
+                return (string)session.proxy.host_patch_get_name_description(session.uuid, _host_patch ?? "").parse();
         }
 
         /// <summary>
@@ -265,7 +287,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static string get_version(Session session, string _host_patch)
         {
-            return (string)session.proxy.host_patch_get_version(session.uuid, _host_patch ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_version(session.uuid, _host_patch);
+            else
+                return (string)session.proxy.host_patch_get_version(session.uuid, _host_patch ?? "").parse();
         }
 
         /// <summary>
@@ -276,7 +301,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static XenRef<Host> get_host(Session session, string _host_patch)
         {
-            return XenRef<Host>.Create(session.proxy.host_patch_get_host(session.uuid, _host_patch ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_host(session.uuid, _host_patch);
+            else
+                return XenRef<Host>.Create(session.proxy.host_patch_get_host(session.uuid, _host_patch ?? "").parse());
         }
 
         /// <summary>
@@ -287,7 +315,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static bool get_applied(Session session, string _host_patch)
         {
-            return (bool)session.proxy.host_patch_get_applied(session.uuid, _host_patch ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_applied(session.uuid, _host_patch);
+            else
+                return (bool)session.proxy.host_patch_get_applied(session.uuid, _host_patch ?? "").parse();
         }
 
         /// <summary>
@@ -298,7 +329,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static DateTime get_timestamp_applied(Session session, string _host_patch)
         {
-            return session.proxy.host_patch_get_timestamp_applied(session.uuid, _host_patch ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_timestamp_applied(session.uuid, _host_patch);
+            else
+                return session.proxy.host_patch_get_timestamp_applied(session.uuid, _host_patch ?? "").parse();
         }
 
         /// <summary>
@@ -309,7 +343,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static long get_size(Session session, string _host_patch)
         {
-            return long.Parse((string)session.proxy.host_patch_get_size(session.uuid, _host_patch ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_size(session.uuid, _host_patch);
+            else
+                return long.Parse((string)session.proxy.host_patch_get_size(session.uuid, _host_patch ?? "").parse());
         }
 
         /// <summary>
@@ -320,7 +357,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static XenRef<Pool_patch> get_pool_patch(Session session, string _host_patch)
         {
-            return XenRef<Pool_patch>.Create(session.proxy.host_patch_get_pool_patch(session.uuid, _host_patch ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_pool_patch(session.uuid, _host_patch);
+            else
+                return XenRef<Pool_patch>.Create(session.proxy.host_patch_get_pool_patch(session.uuid, _host_patch ?? "").parse());
         }
 
         /// <summary>
@@ -331,7 +371,10 @@ namespace XenAPI
         /// <param name="_host_patch">The opaque_ref of the given host_patch</param>
         public static Dictionary<string, string> get_other_config(Session session, string _host_patch)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.host_patch_get_other_config(session.uuid, _host_patch ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_other_config(session.uuid, _host_patch);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.host_patch_get_other_config(session.uuid, _host_patch ?? "").parse());
         }
 
         /// <summary>
@@ -343,7 +386,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _host_patch, Dictionary<string, string> _other_config)
         {
-            session.proxy.host_patch_set_other_config(session.uuid, _host_patch ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_patch_set_other_config(session.uuid, _host_patch, _other_config);
+            else
+                session.proxy.host_patch_set_other_config(session.uuid, _host_patch ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -356,7 +402,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _host_patch, string _key, string _value)
         {
-            session.proxy.host_patch_add_to_other_config(session.uuid, _host_patch ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_patch_add_to_other_config(session.uuid, _host_patch, _key, _value);
+            else
+                session.proxy.host_patch_add_to_other_config(session.uuid, _host_patch ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -368,7 +417,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _host_patch, string _key)
         {
-            session.proxy.host_patch_remove_from_other_config(session.uuid, _host_patch ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_patch_remove_from_other_config(session.uuid, _host_patch, _key);
+            else
+                session.proxy.host_patch_remove_from_other_config(session.uuid, _host_patch ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -381,7 +433,10 @@ namespace XenAPI
         [Deprecated("XenServer 4.1")]
         public static void destroy(Session session, string _host_patch)
         {
-            session.proxy.host_patch_destroy(session.uuid, _host_patch ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_patch_destroy(session.uuid, _host_patch);
+            else
+                session.proxy.host_patch_destroy(session.uuid, _host_patch ?? "").parse();
         }
 
         /// <summary>
@@ -394,7 +449,10 @@ namespace XenAPI
         [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_destroy(Session session, string _host_patch)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_patch_destroy(session.uuid, _host_patch ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_patch_destroy(session.uuid, _host_patch);
+          else
+              return XenRef<Task>.Create(session.proxy.async_host_patch_destroy(session.uuid, _host_patch ?? "").parse());
         }
 
         /// <summary>
@@ -407,7 +465,10 @@ namespace XenAPI
         [Deprecated("XenServer 4.1")]
         public static string apply(Session session, string _host_patch)
         {
-            return (string)session.proxy.host_patch_apply(session.uuid, _host_patch ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_apply(session.uuid, _host_patch);
+            else
+                return (string)session.proxy.host_patch_apply(session.uuid, _host_patch ?? "").parse();
         }
 
         /// <summary>
@@ -420,7 +481,10 @@ namespace XenAPI
         [Deprecated("XenServer 4.1")]
         public static XenRef<Task> async_apply(Session session, string _host_patch)
         {
-            return XenRef<Task>.Create(session.proxy.async_host_patch_apply(session.uuid, _host_patch ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_patch_apply(session.uuid, _host_patch);
+          else
+              return XenRef<Task>.Create(session.proxy.async_host_patch_apply(session.uuid, _host_patch ?? "").parse());
         }
 
         /// <summary>
@@ -432,7 +496,10 @@ namespace XenAPI
         [Deprecated("XenServer 7.1")]
         public static List<XenRef<Host_patch>> get_all(Session session)
         {
-            return XenRef<Host_patch>.Create(session.proxy.host_patch_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_all(session.uuid);
+            else
+                return XenRef<Host_patch>.Create(session.proxy.host_patch_get_all(session.uuid).parse());
         }
 
         /// <summary>
@@ -442,7 +509,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Host_patch>, Host_patch> get_all_records(Session session)
         {
-            return XenRef<Host_patch>.Create<Proxy_Host_patch>(session.proxy.host_patch_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_patch_get_all_records(session.uuid);
+            else
+                return XenRef<Host_patch>.Create<Proxy_Host_patch>(session.proxy.host_patch_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
@@ -461,7 +531,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// a human-readable name
@@ -479,7 +549,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_label;
+        private string _name_label = "";
 
         /// <summary>
         /// a notes field containing human-readable description
@@ -497,7 +567,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_description;
+        private string _name_description = "";
 
         /// <summary>
         /// Patch version number
@@ -515,11 +585,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _version;
+        private string _version = "";
 
         /// <summary>
         /// Host the patch relates to
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Host>))]
         public virtual XenRef<Host> host
         {
             get { return _host; }
@@ -533,7 +604,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<Host> _host;
+        private XenRef<Host> _host = new XenRef<Host>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// True if the patch has been applied
@@ -556,6 +627,7 @@ namespace XenAPI
         /// <summary>
         /// Time the patch was applied
         /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime timestamp_applied
         {
             get { return _timestamp_applied; }
@@ -593,6 +665,7 @@ namespace XenAPI
         /// The patch applied
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Pool_patch>))]
         public virtual XenRef<Pool_patch> pool_patch
         {
             get { return _pool_patch; }
@@ -606,7 +679,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<Pool_patch> _pool_patch;
+        private XenRef<Pool_patch> _pool_patch = new XenRef<Pool_patch>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// additional configuration
@@ -625,6 +698,6 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
     }
 }

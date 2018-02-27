@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(pvs_proxy_statusConverter))]
     public enum pvs_proxy_status
     {
         stopped, initialised, caching, incompatible_write_cache_mode, incompatible_protocol_version, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class pvs_proxy_status_helper
     {
         public static string ToString(pvs_proxy_status x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this pvs_proxy_status x)
         {
             switch (x)
             {
@@ -59,6 +67,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class pvs_proxy_statusConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((pvs_proxy_status)value).StringOf());
         }
     }
 }

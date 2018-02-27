@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(network_operationsConverter))]
     public enum network_operations
     {
         attaching, unknown
@@ -44,6 +44,14 @@ namespace XenAPI
     {
         public static string ToString(network_operations x)
         {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this network_operations x)
+        {
             switch (x)
             {
                 case network_operations.attaching:
@@ -51,6 +59,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class network_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((network_operations)value).StringOf());
         }
     }
 }

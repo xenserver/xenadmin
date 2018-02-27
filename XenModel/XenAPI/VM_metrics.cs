@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -228,7 +232,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static VM_metrics get_record(Session session, string _vm_metrics)
         {
-            return new VM_metrics((Proxy_VM_metrics)session.proxy.vm_metrics_get_record(session.uuid, _vm_metrics ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_record(session.uuid, _vm_metrics);
+            else
+                return new VM_metrics((Proxy_VM_metrics)session.proxy.vm_metrics_get_record(session.uuid, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -239,7 +246,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VM_metrics> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VM_metrics>.Create(session.proxy.vm_metrics_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<VM_metrics>.Create(session.proxy.vm_metrics_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -250,7 +260,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static string get_uuid(Session session, string _vm_metrics)
         {
-            return (string)session.proxy.vm_metrics_get_uuid(session.uuid, _vm_metrics ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_uuid(session.uuid, _vm_metrics);
+            else
+                return (string)session.proxy.vm_metrics_get_uuid(session.uuid, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -261,7 +274,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static long get_memory_actual(Session session, string _vm_metrics)
         {
-            return long.Parse((string)session.proxy.vm_metrics_get_memory_actual(session.uuid, _vm_metrics ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_memory_actual(session.uuid, _vm_metrics);
+            else
+                return long.Parse((string)session.proxy.vm_metrics_get_memory_actual(session.uuid, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -272,7 +288,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static long get_VCPUs_number(Session session, string _vm_metrics)
         {
-            return long.Parse((string)session.proxy.vm_metrics_get_vcpus_number(session.uuid, _vm_metrics ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_vcpus_number(session.uuid, _vm_metrics);
+            else
+                return long.Parse((string)session.proxy.vm_metrics_get_vcpus_number(session.uuid, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -283,7 +302,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<long, double> get_VCPUs_utilisation(Session session, string _vm_metrics)
         {
-            return Maps.convert_from_proxy_long_double(session.proxy.vm_metrics_get_vcpus_utilisation(session.uuid, _vm_metrics ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_vcpus_utilisation(session.uuid, _vm_metrics);
+            else
+                return Maps.convert_from_proxy_long_double(session.proxy.vm_metrics_get_vcpus_utilisation(session.uuid, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -294,7 +316,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<long, long> get_VCPUs_CPU(Session session, string _vm_metrics)
         {
-            return Maps.convert_from_proxy_long_long(session.proxy.vm_metrics_get_vcpus_cpu(session.uuid, _vm_metrics ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_vcpus_cpu(session.uuid, _vm_metrics);
+            else
+                return Maps.convert_from_proxy_long_long(session.proxy.vm_metrics_get_vcpus_cpu(session.uuid, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -305,7 +330,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<string, string> get_VCPUs_params(Session session, string _vm_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_metrics_get_vcpus_params(session.uuid, _vm_metrics ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_vcpus_params(session.uuid, _vm_metrics);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_metrics_get_vcpus_params(session.uuid, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -316,7 +344,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<long, string[]> get_VCPUs_flags(Session session, string _vm_metrics)
         {
-            return Maps.convert_from_proxy_long_string_array(session.proxy.vm_metrics_get_vcpus_flags(session.uuid, _vm_metrics ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_vcpus_flags(session.uuid, _vm_metrics);
+            else
+                return Maps.convert_from_proxy_long_string_array(session.proxy.vm_metrics_get_vcpus_flags(session.uuid, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -327,7 +358,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static string[] get_state(Session session, string _vm_metrics)
         {
-            return (string [])session.proxy.vm_metrics_get_state(session.uuid, _vm_metrics ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_state(session.uuid, _vm_metrics);
+            else
+                return (string [])session.proxy.vm_metrics_get_state(session.uuid, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -338,7 +372,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static DateTime get_start_time(Session session, string _vm_metrics)
         {
-            return session.proxy.vm_metrics_get_start_time(session.uuid, _vm_metrics ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_start_time(session.uuid, _vm_metrics);
+            else
+                return session.proxy.vm_metrics_get_start_time(session.uuid, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -349,7 +386,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static DateTime get_install_time(Session session, string _vm_metrics)
         {
-            return session.proxy.vm_metrics_get_install_time(session.uuid, _vm_metrics ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_install_time(session.uuid, _vm_metrics);
+            else
+                return session.proxy.vm_metrics_get_install_time(session.uuid, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -360,7 +400,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static DateTime get_last_updated(Session session, string _vm_metrics)
         {
-            return session.proxy.vm_metrics_get_last_updated(session.uuid, _vm_metrics ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_last_updated(session.uuid, _vm_metrics);
+            else
+                return session.proxy.vm_metrics_get_last_updated(session.uuid, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -371,7 +414,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vm_metrics)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vm_metrics_get_other_config(session.uuid, _vm_metrics ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_other_config(session.uuid, _vm_metrics);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vm_metrics_get_other_config(session.uuid, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -382,7 +428,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static bool get_hvm(Session session, string _vm_metrics)
         {
-            return (bool)session.proxy.vm_metrics_get_hvm(session.uuid, _vm_metrics ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_hvm(session.uuid, _vm_metrics);
+            else
+                return (bool)session.proxy.vm_metrics_get_hvm(session.uuid, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -393,7 +442,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static bool get_nested_virt(Session session, string _vm_metrics)
         {
-            return (bool)session.proxy.vm_metrics_get_nested_virt(session.uuid, _vm_metrics ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_nested_virt(session.uuid, _vm_metrics);
+            else
+                return (bool)session.proxy.vm_metrics_get_nested_virt(session.uuid, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -404,7 +456,10 @@ namespace XenAPI
         /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
         public static bool get_nomigrate(Session session, string _vm_metrics)
         {
-            return (bool)session.proxy.vm_metrics_get_nomigrate(session.uuid, _vm_metrics ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_nomigrate(session.uuid, _vm_metrics);
+            else
+                return (bool)session.proxy.vm_metrics_get_nomigrate(session.uuid, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -416,7 +471,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vm_metrics, Dictionary<string, string> _other_config)
         {
-            session.proxy.vm_metrics_set_other_config(session.uuid, _vm_metrics ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_metrics_set_other_config(session.uuid, _vm_metrics, _other_config);
+            else
+                session.proxy.vm_metrics_set_other_config(session.uuid, _vm_metrics ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -429,7 +487,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vm_metrics, string _key, string _value)
         {
-            session.proxy.vm_metrics_add_to_other_config(session.uuid, _vm_metrics ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_metrics_add_to_other_config(session.uuid, _vm_metrics, _key, _value);
+            else
+                session.proxy.vm_metrics_add_to_other_config(session.uuid, _vm_metrics ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -441,7 +502,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vm_metrics, string _key)
         {
-            session.proxy.vm_metrics_remove_from_other_config(session.uuid, _vm_metrics ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_metrics_remove_from_other_config(session.uuid, _vm_metrics, _key);
+            else
+                session.proxy.vm_metrics_remove_from_other_config(session.uuid, _vm_metrics ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -451,7 +515,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<VM_metrics>> get_all(Session session)
         {
-            return XenRef<VM_metrics>.Create(session.proxy.vm_metrics_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_all(session.uuid);
+            else
+                return XenRef<VM_metrics>.Create(session.proxy.vm_metrics_get_all(session.uuid).parse());
         }
 
         /// <summary>
@@ -461,7 +528,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VM_metrics>, VM_metrics> get_all_records(Session session)
         {
-            return XenRef<VM_metrics>.Create<Proxy_VM_metrics>(session.proxy.vm_metrics_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_all_records(session.uuid);
+            else
+                return XenRef<VM_metrics>.Create<Proxy_VM_metrics>(session.proxy.vm_metrics_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
@@ -480,7 +550,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// Guest's actual memory (bytes)
@@ -534,7 +604,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<long, double> _VCPUs_utilisation;
+        private Dictionary<long, double> _VCPUs_utilisation = new Dictionary<long, double>() {};
 
         /// <summary>
         /// VCPU to PCPU map
@@ -552,7 +622,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<long, long> _VCPUs_CPU;
+        private Dictionary<long, long> _VCPUs_CPU = new Dictionary<long, long>() {};
 
         /// <summary>
         /// The live equivalent to VM.VCPUs_params
@@ -570,7 +640,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _VCPUs_params;
+        private Dictionary<string, string> _VCPUs_params = new Dictionary<string, string>() {};
 
         /// <summary>
         /// CPU flags (blocked,online,running)
@@ -588,7 +658,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<long, string[]> _VCPUs_flags;
+        private Dictionary<long, string[]> _VCPUs_flags = new Dictionary<long, string[]>() {};
 
         /// <summary>
         /// The state of the guest, eg blocked, dying etc
@@ -606,11 +676,12 @@ namespace XenAPI
                 }
             }
         }
-        private string[] _state;
+        private string[] _state = {};
 
         /// <summary>
         /// Time at which this VM was last booted
         /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime start_time
         {
             get { return _start_time; }
@@ -629,6 +700,7 @@ namespace XenAPI
         /// <summary>
         /// Time at which the VM was installed
         /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime install_time
         {
             get { return _install_time; }
@@ -647,6 +719,7 @@ namespace XenAPI
         /// <summary>
         /// Time at which this information was last updated
         /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime last_updated
         {
             get { return _last_updated; }
@@ -679,7 +752,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
 
         /// <summary>
         /// hardware virtual machine
@@ -698,7 +771,7 @@ namespace XenAPI
                 }
             }
         }
-        private bool _hvm;
+        private bool _hvm = false;
 
         /// <summary>
         /// VM supports nested virtualisation
@@ -717,7 +790,7 @@ namespace XenAPI
                 }
             }
         }
-        private bool _nested_virt;
+        private bool _nested_virt = false;
 
         /// <summary>
         /// VM is immobile and can't migrate between hosts
@@ -736,6 +809,6 @@ namespace XenAPI
                 }
             }
         }
-        private bool _nomigrate;
+        private bool _nomigrate = false;
     }
 }
