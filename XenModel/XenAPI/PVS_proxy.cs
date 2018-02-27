@@ -72,6 +72,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PVS_proxy.
+        /// </summary>
         public override void UpdateFrom(PVS_proxy update)
         {
             uuid = update.uuid;
@@ -103,15 +107,33 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PVS_proxy from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PVS_proxy(Hashtable table)
+        public PVS_proxy(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            site = Marshalling.ParseRef<PVS_site>(table, "site");
-            VIF = Marshalling.ParseRef<VIF>(table, "VIF");
-            currently_attached = Marshalling.ParseBool(table, "currently_attached");
-            status = (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), Marshalling.ParseString(table, "status"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PVS_proxy
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("site"))
+                site = Marshalling.ParseRef<PVS_site>(table, "site");
+            if (table.ContainsKey("VIF"))
+                VIF = Marshalling.ParseRef<VIF>(table, "VIF");
+            if (table.ContainsKey("currently_attached"))
+                currently_attached = Marshalling.ParseBool(table, "currently_attached");
+            if (table.ContainsKey("status"))
+                status = (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), Marshalling.ParseString(table, "status"));
         }
 
         public bool DeepEquals(PVS_proxy other)
@@ -158,9 +180,9 @@ namespace XenAPI
         public static PVS_proxy get_record(Session session, string _pvs_proxy)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_record(session.uuid, _pvs_proxy);
+                return session.JsonRpcClient.pvs_proxy_get_record(session.opaque_ref, _pvs_proxy);
             else
-                return new PVS_proxy((Proxy_PVS_proxy)session.proxy.pvs_proxy_get_record(session.uuid, _pvs_proxy ?? "").parse());
+                return new PVS_proxy((Proxy_PVS_proxy)session.proxy.pvs_proxy_get_record(session.opaque_ref, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
@@ -172,9 +194,9 @@ namespace XenAPI
         public static XenRef<PVS_proxy> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.pvs_proxy_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -186,9 +208,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _pvs_proxy)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_uuid(session.uuid, _pvs_proxy);
+                return session.JsonRpcClient.pvs_proxy_get_uuid(session.opaque_ref, _pvs_proxy);
             else
-                return (string)session.proxy.pvs_proxy_get_uuid(session.uuid, _pvs_proxy ?? "").parse();
+                return (string)session.proxy.pvs_proxy_get_uuid(session.opaque_ref, _pvs_proxy ?? "").parse();
         }
 
         /// <summary>
@@ -200,9 +222,9 @@ namespace XenAPI
         public static XenRef<PVS_site> get_site(Session session, string _pvs_proxy)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_site(session.uuid, _pvs_proxy);
+                return session.JsonRpcClient.pvs_proxy_get_site(session.opaque_ref, _pvs_proxy);
             else
-                return XenRef<PVS_site>.Create(session.proxy.pvs_proxy_get_site(session.uuid, _pvs_proxy ?? "").parse());
+                return XenRef<PVS_site>.Create(session.proxy.pvs_proxy_get_site(session.opaque_ref, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
@@ -214,9 +236,9 @@ namespace XenAPI
         public static XenRef<VIF> get_VIF(Session session, string _pvs_proxy)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_vif(session.uuid, _pvs_proxy);
+                return session.JsonRpcClient.pvs_proxy_get_vif(session.opaque_ref, _pvs_proxy);
             else
-                return XenRef<VIF>.Create(session.proxy.pvs_proxy_get_vif(session.uuid, _pvs_proxy ?? "").parse());
+                return XenRef<VIF>.Create(session.proxy.pvs_proxy_get_vif(session.opaque_ref, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
@@ -228,9 +250,9 @@ namespace XenAPI
         public static bool get_currently_attached(Session session, string _pvs_proxy)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_currently_attached(session.uuid, _pvs_proxy);
+                return session.JsonRpcClient.pvs_proxy_get_currently_attached(session.opaque_ref, _pvs_proxy);
             else
-                return (bool)session.proxy.pvs_proxy_get_currently_attached(session.uuid, _pvs_proxy ?? "").parse();
+                return (bool)session.proxy.pvs_proxy_get_currently_attached(session.opaque_ref, _pvs_proxy ?? "").parse();
         }
 
         /// <summary>
@@ -242,9 +264,9 @@ namespace XenAPI
         public static pvs_proxy_status get_status(Session session, string _pvs_proxy)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_status(session.uuid, _pvs_proxy);
+                return session.JsonRpcClient.pvs_proxy_get_status(session.opaque_ref, _pvs_proxy);
             else
-                return (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), (string)session.proxy.pvs_proxy_get_status(session.uuid, _pvs_proxy ?? "").parse());
+                return (pvs_proxy_status)Helper.EnumParseDefault(typeof(pvs_proxy_status), (string)session.proxy.pvs_proxy_get_status(session.opaque_ref, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
@@ -257,9 +279,9 @@ namespace XenAPI
         public static XenRef<PVS_proxy> create(Session session, string _site, string _vif)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_create(session.uuid, _site, _vif);
+                return session.JsonRpcClient.pvs_proxy_create(session.opaque_ref, _site, _vif);
             else
-                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_create(session.uuid, _site ?? "", _vif ?? "").parse());
+                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_create(session.opaque_ref, _site ?? "", _vif ?? "").parse());
         }
 
         /// <summary>
@@ -272,9 +294,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, string _site, string _vif)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pvs_proxy_create(session.uuid, _site, _vif);
+              return session.JsonRpcClient.async_pvs_proxy_create(session.opaque_ref, _site, _vif);
           else
-              return XenRef<Task>.Create(session.proxy.async_pvs_proxy_create(session.uuid, _site ?? "", _vif ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_pvs_proxy_create(session.opaque_ref, _site ?? "", _vif ?? "").parse());
         }
 
         /// <summary>
@@ -286,9 +308,9 @@ namespace XenAPI
         public static void destroy(Session session, string _pvs_proxy)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.pvs_proxy_destroy(session.uuid, _pvs_proxy);
+                session.JsonRpcClient.pvs_proxy_destroy(session.opaque_ref, _pvs_proxy);
             else
-                session.proxy.pvs_proxy_destroy(session.uuid, _pvs_proxy ?? "").parse();
+                session.proxy.pvs_proxy_destroy(session.opaque_ref, _pvs_proxy ?? "").parse();
         }
 
         /// <summary>
@@ -300,9 +322,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _pvs_proxy)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_pvs_proxy_destroy(session.uuid, _pvs_proxy);
+              return session.JsonRpcClient.async_pvs_proxy_destroy(session.opaque_ref, _pvs_proxy);
           else
-              return XenRef<Task>.Create(session.proxy.async_pvs_proxy_destroy(session.uuid, _pvs_proxy ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_pvs_proxy_destroy(session.opaque_ref, _pvs_proxy ?? "").parse());
         }
 
         /// <summary>
@@ -313,9 +335,9 @@ namespace XenAPI
         public static List<XenRef<PVS_proxy>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_all(session.uuid);
+                return session.JsonRpcClient.pvs_proxy_get_all(session.opaque_ref);
             else
-                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_get_all(session.uuid).parse());
+                return XenRef<PVS_proxy>.Create(session.proxy.pvs_proxy_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -326,9 +348,9 @@ namespace XenAPI
         public static Dictionary<XenRef<PVS_proxy>, PVS_proxy> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pvs_proxy_get_all_records(session.uuid);
+                return session.JsonRpcClient.pvs_proxy_get_all_records(session.opaque_ref);
             else
-                return XenRef<PVS_proxy>.Create<Proxy_PVS_proxy>(session.proxy.pvs_proxy_get_all_records(session.uuid).parse());
+                return XenRef<PVS_proxy>.Create<Proxy_PVS_proxy>(session.proxy.pvs_proxy_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>

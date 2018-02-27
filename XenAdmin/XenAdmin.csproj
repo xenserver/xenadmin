@@ -230,6 +230,7 @@
     <Compile Include="Diagnostics\Checks\HostHasUnsupportedStorageLinkSRCheck.cs" />
     <Compile Include="Diagnostics\Checks\ServerSelectionCheck.cs" />
     <Compile Include="Diagnostics\Checks\XenCenterVersionCheck.cs" />
+    <Compile Include="Diagnostics\Problems\HostProblem\LicenseRestrictionProblem.cs" />
     <Compile Include="Diagnostics\Problems\PoolProblem\MasterIsPendingRestartProblems.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\PrerequisiteUpdateMissing.cs" />
     <Compile Include="Diagnostics\Problems\HostProblem\HostNeedsReboot.cs" />

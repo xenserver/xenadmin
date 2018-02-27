@@ -76,6 +76,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VUSB.
+        /// </summary>
         public override void UpdateFrom(VUSB update)
         {
             uuid = update.uuid;
@@ -113,17 +117,37 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new VUSB from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VUSB(Hashtable table)
+        public VUSB(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            allowed_operations = Helper.StringArrayToEnumList<vusb_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_vusb_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            VM = Marshalling.ParseRef<VM>(table, "VM");
-            USB_group = Marshalling.ParseRef<USB_group>(table, "USB_group");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            currently_attached = Marshalling.ParseBool(table, "currently_attached");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VUSB
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<vusb_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_vusb_operations(Marshalling.ParseHashTable(table, "current_operations"));
+            if (table.ContainsKey("VM"))
+                VM = Marshalling.ParseRef<VM>(table, "VM");
+            if (table.ContainsKey("USB_group"))
+                USB_group = Marshalling.ParseRef<USB_group>(table, "USB_group");
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            if (table.ContainsKey("currently_attached"))
+                currently_attached = Marshalling.ParseBool(table, "currently_attached");
         }
 
         public bool DeepEquals(VUSB other, bool ignoreCurrentOperations)
@@ -179,9 +203,9 @@ namespace XenAPI
         public static VUSB get_record(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_record(session.uuid, _vusb);
+                return session.JsonRpcClient.vusb_get_record(session.opaque_ref, _vusb);
             else
-                return new VUSB((Proxy_VUSB)session.proxy.vusb_get_record(session.uuid, _vusb ?? "").parse());
+                return new VUSB((Proxy_VUSB)session.proxy.vusb_get_record(session.opaque_ref, _vusb ?? "").parse());
         }
 
         /// <summary>
@@ -193,9 +217,9 @@ namespace XenAPI
         public static XenRef<VUSB> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.vusb_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<VUSB>.Create(session.proxy.vusb_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<VUSB>.Create(session.proxy.vusb_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -207,9 +231,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_uuid(session.uuid, _vusb);
+                return session.JsonRpcClient.vusb_get_uuid(session.opaque_ref, _vusb);
             else
-                return (string)session.proxy.vusb_get_uuid(session.uuid, _vusb ?? "").parse();
+                return (string)session.proxy.vusb_get_uuid(session.opaque_ref, _vusb ?? "").parse();
         }
 
         /// <summary>
@@ -221,9 +245,9 @@ namespace XenAPI
         public static List<vusb_operations> get_allowed_operations(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_allowed_operations(session.uuid, _vusb);
+                return session.JsonRpcClient.vusb_get_allowed_operations(session.opaque_ref, _vusb);
             else
-                return Helper.StringArrayToEnumList<vusb_operations>(session.proxy.vusb_get_allowed_operations(session.uuid, _vusb ?? "").parse());
+                return Helper.StringArrayToEnumList<vusb_operations>(session.proxy.vusb_get_allowed_operations(session.opaque_ref, _vusb ?? "").parse());
         }
 
         /// <summary>
@@ -235,9 +259,9 @@ namespace XenAPI
         public static Dictionary<string, vusb_operations> get_current_operations(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_current_operations(session.uuid, _vusb);
+                return session.JsonRpcClient.vusb_get_current_operations(session.opaque_ref, _vusb);
             else
-                return Maps.convert_from_proxy_string_vusb_operations(session.proxy.vusb_get_current_operations(session.uuid, _vusb ?? "").parse());
+                return Maps.convert_from_proxy_string_vusb_operations(session.proxy.vusb_get_current_operations(session.opaque_ref, _vusb ?? "").parse());
         }
 
         /// <summary>
@@ -249,9 +273,9 @@ namespace XenAPI
         public static XenRef<VM> get_VM(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_vm(session.uuid, _vusb);
+                return session.JsonRpcClient.vusb_get_vm(session.opaque_ref, _vusb);
             else
-                return XenRef<VM>.Create(session.proxy.vusb_get_vm(session.uuid, _vusb ?? "").parse());
+                return XenRef<VM>.Create(session.proxy.vusb_get_vm(session.opaque_ref, _vusb ?? "").parse());
         }
 
         /// <summary>
@@ -263,9 +287,9 @@ namespace XenAPI
         public static XenRef<USB_group> get_USB_group(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_usb_group(session.uuid, _vusb);
+                return session.JsonRpcClient.vusb_get_usb_group(session.opaque_ref, _vusb);
             else
-                return XenRef<USB_group>.Create(session.proxy.vusb_get_usb_group(session.uuid, _vusb ?? "").parse());
+                return XenRef<USB_group>.Create(session.proxy.vusb_get_usb_group(session.opaque_ref, _vusb ?? "").parse());
         }
 
         /// <summary>
@@ -277,9 +301,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_other_config(session.uuid, _vusb);
+                return session.JsonRpcClient.vusb_get_other_config(session.opaque_ref, _vusb);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.vusb_get_other_config(session.uuid, _vusb ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.vusb_get_other_config(session.opaque_ref, _vusb ?? "").parse());
         }
 
         /// <summary>
@@ -291,9 +315,9 @@ namespace XenAPI
         public static bool get_currently_attached(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_currently_attached(session.uuid, _vusb);
+                return session.JsonRpcClient.vusb_get_currently_attached(session.opaque_ref, _vusb);
             else
-                return (bool)session.proxy.vusb_get_currently_attached(session.uuid, _vusb ?? "").parse();
+                return (bool)session.proxy.vusb_get_currently_attached(session.opaque_ref, _vusb ?? "").parse();
         }
 
         /// <summary>
@@ -306,9 +330,9 @@ namespace XenAPI
         public static void set_other_config(Session session, string _vusb, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_set_other_config(session.uuid, _vusb, _other_config);
+                session.JsonRpcClient.vusb_set_other_config(session.opaque_ref, _vusb, _other_config);
             else
-                session.proxy.vusb_set_other_config(session.uuid, _vusb ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+                session.proxy.vusb_set_other_config(session.opaque_ref, _vusb ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -322,9 +346,9 @@ namespace XenAPI
         public static void add_to_other_config(Session session, string _vusb, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_add_to_other_config(session.uuid, _vusb, _key, _value);
+                session.JsonRpcClient.vusb_add_to_other_config(session.opaque_ref, _vusb, _key, _value);
             else
-                session.proxy.vusb_add_to_other_config(session.uuid, _vusb ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.vusb_add_to_other_config(session.opaque_ref, _vusb ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -337,9 +361,9 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _vusb, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_remove_from_other_config(session.uuid, _vusb, _key);
+                session.JsonRpcClient.vusb_remove_from_other_config(session.opaque_ref, _vusb, _key);
             else
-                session.proxy.vusb_remove_from_other_config(session.uuid, _vusb ?? "", _key ?? "").parse();
+                session.proxy.vusb_remove_from_other_config(session.opaque_ref, _vusb ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -353,9 +377,9 @@ namespace XenAPI
         public static XenRef<VUSB> create(Session session, string _vm, string _usb_group, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_create(session.uuid, _vm, _usb_group, _other_config);
+                return session.JsonRpcClient.vusb_create(session.opaque_ref, _vm, _usb_group, _other_config);
             else
-                return XenRef<VUSB>.Create(session.proxy.vusb_create(session.uuid, _vm ?? "", _usb_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+                return XenRef<VUSB>.Create(session.proxy.vusb_create(session.opaque_ref, _vm ?? "", _usb_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
         }
 
         /// <summary>
@@ -369,9 +393,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, string _vm, string _usb_group, Dictionary<string, string> _other_config)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vusb_create(session.uuid, _vm, _usb_group, _other_config);
+              return session.JsonRpcClient.async_vusb_create(session.opaque_ref, _vm, _usb_group, _other_config);
           else
-              return XenRef<Task>.Create(session.proxy.async_vusb_create(session.uuid, _vm ?? "", _usb_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+              return XenRef<Task>.Create(session.proxy.async_vusb_create(session.opaque_ref, _vm ?? "", _usb_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
         }
 
         /// <summary>
@@ -383,9 +407,9 @@ namespace XenAPI
         public static void unplug(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_unplug(session.uuid, _vusb);
+                session.JsonRpcClient.vusb_unplug(session.opaque_ref, _vusb);
             else
-                session.proxy.vusb_unplug(session.uuid, _vusb ?? "").parse();
+                session.proxy.vusb_unplug(session.opaque_ref, _vusb ?? "").parse();
         }
 
         /// <summary>
@@ -397,9 +421,9 @@ namespace XenAPI
         public static XenRef<Task> async_unplug(Session session, string _vusb)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vusb_unplug(session.uuid, _vusb);
+              return session.JsonRpcClient.async_vusb_unplug(session.opaque_ref, _vusb);
           else
-              return XenRef<Task>.Create(session.proxy.async_vusb_unplug(session.uuid, _vusb ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vusb_unplug(session.opaque_ref, _vusb ?? "").parse());
         }
 
         /// <summary>
@@ -411,9 +435,9 @@ namespace XenAPI
         public static void destroy(Session session, string _vusb)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vusb_destroy(session.uuid, _vusb);
+                session.JsonRpcClient.vusb_destroy(session.opaque_ref, _vusb);
             else
-                session.proxy.vusb_destroy(session.uuid, _vusb ?? "").parse();
+                session.proxy.vusb_destroy(session.opaque_ref, _vusb ?? "").parse();
         }
 
         /// <summary>
@@ -425,9 +449,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _vusb)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_vusb_destroy(session.uuid, _vusb);
+              return session.JsonRpcClient.async_vusb_destroy(session.opaque_ref, _vusb);
           else
-              return XenRef<Task>.Create(session.proxy.async_vusb_destroy(session.uuid, _vusb ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_vusb_destroy(session.opaque_ref, _vusb ?? "").parse());
         }
 
         /// <summary>
@@ -438,9 +462,9 @@ namespace XenAPI
         public static List<XenRef<VUSB>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_all(session.uuid);
+                return session.JsonRpcClient.vusb_get_all(session.opaque_ref);
             else
-                return XenRef<VUSB>.Create(session.proxy.vusb_get_all(session.uuid).parse());
+                return XenRef<VUSB>.Create(session.proxy.vusb_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -451,9 +475,9 @@ namespace XenAPI
         public static Dictionary<XenRef<VUSB>, VUSB> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.vusb_get_all_records(session.uuid);
+                return session.JsonRpcClient.vusb_get_all_records(session.opaque_ref);
             else
-                return XenRef<VUSB>.Create<Proxy_VUSB>(session.proxy.vusb_get_all_records(session.uuid).parse());
+                return XenRef<VUSB>.Create<Proxy_VUSB>(session.proxy.vusb_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -551,6 +575,7 @@ namespace XenAPI
         /// <summary>
         /// Additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

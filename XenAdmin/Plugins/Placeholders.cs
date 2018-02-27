@@ -35,6 +35,7 @@ using System.Text.RegularExpressions;
 using XenCenterLib;
 using XenAdmin.XenSearch;
 using XenAPI;
+using System.Net.Sockets;
 
 namespace XenAdmin.Plugins
 {
@@ -80,7 +81,7 @@ namespace XenAdmin.Plugins
                     {
                         return NULL_PLACEHOLDER_KEY;
                     }
-                    return objs[0].Connection.Session.uuid;
+                    return objs[0].Connection.Session.opaque_ref;
                 }
                 else
                 {
@@ -191,7 +192,14 @@ namespace XenAdmin.Plugins
                     return new List<Uri> { new Uri(u) };
                 }
 
-                return ips.ConvertAll(ip => new Uri(u.Replace(string.Format(PlaceholderFormat, ipAddressName), ip.ToString())));
+                return ips.ConvertAll(ip =>
+                {
+                    var ipstring = ip.AddressIP != null && ip.AddressIP.AddressFamily == AddressFamily.InterNetworkV6
+                        ? string.Format("[{0}]", ip)
+                        : ip.ToString();
+
+                    return new Uri(u.Replace(string.Format(PlaceholderFormat, ipAddressName), ipstring));
+                });
             }
             catch (UriFormatException)
             {

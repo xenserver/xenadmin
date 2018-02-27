@@ -96,6 +96,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Task.
+        /// </summary>
         public override void UpdateFrom(Task update)
         {
             uuid = update.uuid;
@@ -163,27 +167,57 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Task from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Task(Hashtable table)
+        public Task(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            allowed_operations = Helper.StringArrayToEnumList<task_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_task_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            created = Marshalling.ParseDateTime(table, "created");
-            finished = Marshalling.ParseDateTime(table, "finished");
-            status = (task_status_type)Helper.EnumParseDefault(typeof(task_status_type), Marshalling.ParseString(table, "status"));
-            resident_on = Marshalling.ParseRef<Host>(table, "resident_on");
-            progress = Marshalling.ParseDouble(table, "progress");
-            type = Marshalling.ParseString(table, "type");
-            result = Marshalling.ParseString(table, "result");
-            error_info = Marshalling.ParseStringArray(table, "error_info");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            subtask_of = Marshalling.ParseRef<Task>(table, "subtask_of");
-            subtasks = Marshalling.ParseSetRef<Task>(table, "subtasks");
-            backtrace = Marshalling.ParseString(table, "backtrace");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Task
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("name_label"))
+                name_label = Marshalling.ParseString(table, "name_label");
+            if (table.ContainsKey("name_description"))
+                name_description = Marshalling.ParseString(table, "name_description");
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<task_allowed_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_task_allowed_operations(Marshalling.ParseHashTable(table, "current_operations"));
+            if (table.ContainsKey("created"))
+                created = Marshalling.ParseDateTime(table, "created");
+            if (table.ContainsKey("finished"))
+                finished = Marshalling.ParseDateTime(table, "finished");
+            if (table.ContainsKey("status"))
+                status = (task_status_type)Helper.EnumParseDefault(typeof(task_status_type), Marshalling.ParseString(table, "status"));
+            if (table.ContainsKey("resident_on"))
+                resident_on = Marshalling.ParseRef<Host>(table, "resident_on");
+            if (table.ContainsKey("progress"))
+                progress = Marshalling.ParseDouble(table, "progress");
+            if (table.ContainsKey("type"))
+                type = Marshalling.ParseString(table, "type");
+            if (table.ContainsKey("result"))
+                result = Marshalling.ParseString(table, "result");
+            if (table.ContainsKey("error_info"))
+                error_info = Marshalling.ParseStringArray(table, "error_info");
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            if (table.ContainsKey("subtask_of"))
+                subtask_of = Marshalling.ParseRef<Task>(table, "subtask_of");
+            if (table.ContainsKey("subtasks"))
+                subtasks = Marshalling.ParseSetRef<Task>(table, "subtasks");
+            if (table.ContainsKey("backtrace"))
+                backtrace = Marshalling.ParseString(table, "backtrace");
         }
 
         public bool DeepEquals(Task other, bool ignoreCurrentOperations)
@@ -249,9 +283,9 @@ namespace XenAPI
         public static Task get_record(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_record(session.uuid, _task);
+                return session.JsonRpcClient.task_get_record(session.opaque_ref, _task);
             else
-                return new Task((Proxy_Task)session.proxy.task_get_record(session.uuid, _task ?? "").parse());
+                return new Task((Proxy_Task)session.proxy.task_get_record(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -263,9 +297,9 @@ namespace XenAPI
         public static XenRef<Task> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.task_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<Task>.Create(session.proxy.task_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<Task>.Create(session.proxy.task_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -277,9 +311,9 @@ namespace XenAPI
         public static List<XenRef<Task>> get_by_name_label(Session session, string _label)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_by_name_label(session.uuid, _label);
+                return session.JsonRpcClient.task_get_by_name_label(session.opaque_ref, _label);
             else
-                return XenRef<Task>.Create(session.proxy.task_get_by_name_label(session.uuid, _label ?? "").parse());
+                return XenRef<Task>.Create(session.proxy.task_get_by_name_label(session.opaque_ref, _label ?? "").parse());
         }
 
         /// <summary>
@@ -291,9 +325,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_uuid(session.uuid, _task);
+                return session.JsonRpcClient.task_get_uuid(session.opaque_ref, _task);
             else
-                return (string)session.proxy.task_get_uuid(session.uuid, _task ?? "").parse();
+                return (string)session.proxy.task_get_uuid(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -305,9 +339,9 @@ namespace XenAPI
         public static string get_name_label(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_name_label(session.uuid, _task);
+                return session.JsonRpcClient.task_get_name_label(session.opaque_ref, _task);
             else
-                return (string)session.proxy.task_get_name_label(session.uuid, _task ?? "").parse();
+                return (string)session.proxy.task_get_name_label(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -319,9 +353,9 @@ namespace XenAPI
         public static string get_name_description(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_name_description(session.uuid, _task);
+                return session.JsonRpcClient.task_get_name_description(session.opaque_ref, _task);
             else
-                return (string)session.proxy.task_get_name_description(session.uuid, _task ?? "").parse();
+                return (string)session.proxy.task_get_name_description(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -333,9 +367,9 @@ namespace XenAPI
         public static List<task_allowed_operations> get_allowed_operations(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_allowed_operations(session.uuid, _task);
+                return session.JsonRpcClient.task_get_allowed_operations(session.opaque_ref, _task);
             else
-                return Helper.StringArrayToEnumList<task_allowed_operations>(session.proxy.task_get_allowed_operations(session.uuid, _task ?? "").parse());
+                return Helper.StringArrayToEnumList<task_allowed_operations>(session.proxy.task_get_allowed_operations(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -347,9 +381,9 @@ namespace XenAPI
         public static Dictionary<string, task_allowed_operations> get_current_operations(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_current_operations(session.uuid, _task);
+                return session.JsonRpcClient.task_get_current_operations(session.opaque_ref, _task);
             else
-                return Maps.convert_from_proxy_string_task_allowed_operations(session.proxy.task_get_current_operations(session.uuid, _task ?? "").parse());
+                return Maps.convert_from_proxy_string_task_allowed_operations(session.proxy.task_get_current_operations(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -361,9 +395,9 @@ namespace XenAPI
         public static DateTime get_created(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_created(session.uuid, _task);
+                return session.JsonRpcClient.task_get_created(session.opaque_ref, _task);
             else
-                return session.proxy.task_get_created(session.uuid, _task ?? "").parse();
+                return session.proxy.task_get_created(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -375,9 +409,9 @@ namespace XenAPI
         public static DateTime get_finished(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_finished(session.uuid, _task);
+                return session.JsonRpcClient.task_get_finished(session.opaque_ref, _task);
             else
-                return session.proxy.task_get_finished(session.uuid, _task ?? "").parse();
+                return session.proxy.task_get_finished(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -389,9 +423,9 @@ namespace XenAPI
         public static task_status_type get_status(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_status(session.uuid, _task);
+                return session.JsonRpcClient.task_get_status(session.opaque_ref, _task);
             else
-                return (task_status_type)Helper.EnumParseDefault(typeof(task_status_type), (string)session.proxy.task_get_status(session.uuid, _task ?? "").parse());
+                return (task_status_type)Helper.EnumParseDefault(typeof(task_status_type), (string)session.proxy.task_get_status(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -403,9 +437,9 @@ namespace XenAPI
         public static XenRef<Host> get_resident_on(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_resident_on(session.uuid, _task);
+                return session.JsonRpcClient.task_get_resident_on(session.opaque_ref, _task);
             else
-                return XenRef<Host>.Create(session.proxy.task_get_resident_on(session.uuid, _task ?? "").parse());
+                return XenRef<Host>.Create(session.proxy.task_get_resident_on(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -417,9 +451,9 @@ namespace XenAPI
         public static double get_progress(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_progress(session.uuid, _task);
+                return session.JsonRpcClient.task_get_progress(session.opaque_ref, _task);
             else
-                return Convert.ToDouble(session.proxy.task_get_progress(session.uuid, _task ?? "").parse());
+                return Convert.ToDouble(session.proxy.task_get_progress(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -431,9 +465,9 @@ namespace XenAPI
         public static string get_type(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_type(session.uuid, _task);
+                return session.JsonRpcClient.task_get_type(session.opaque_ref, _task);
             else
-                return (string)session.proxy.task_get_type(session.uuid, _task ?? "").parse();
+                return (string)session.proxy.task_get_type(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -445,9 +479,9 @@ namespace XenAPI
         public static string get_result(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_result(session.uuid, _task);
+                return session.JsonRpcClient.task_get_result(session.opaque_ref, _task);
             else
-                return (string)session.proxy.task_get_result(session.uuid, _task ?? "").parse();
+                return (string)session.proxy.task_get_result(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -459,9 +493,9 @@ namespace XenAPI
         public static string[] get_error_info(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_error_info(session.uuid, _task);
+                return session.JsonRpcClient.task_get_error_info(session.opaque_ref, _task);
             else
-                return (string [])session.proxy.task_get_error_info(session.uuid, _task ?? "").parse();
+                return (string [])session.proxy.task_get_error_info(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -473,9 +507,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_other_config(session.uuid, _task);
+                return session.JsonRpcClient.task_get_other_config(session.opaque_ref, _task);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.task_get_other_config(session.uuid, _task ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.task_get_other_config(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -487,9 +521,9 @@ namespace XenAPI
         public static XenRef<Task> get_subtask_of(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_subtask_of(session.uuid, _task);
+                return session.JsonRpcClient.task_get_subtask_of(session.opaque_ref, _task);
             else
-                return XenRef<Task>.Create(session.proxy.task_get_subtask_of(session.uuid, _task ?? "").parse());
+                return XenRef<Task>.Create(session.proxy.task_get_subtask_of(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -501,9 +535,9 @@ namespace XenAPI
         public static List<XenRef<Task>> get_subtasks(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_subtasks(session.uuid, _task);
+                return session.JsonRpcClient.task_get_subtasks(session.opaque_ref, _task);
             else
-                return XenRef<Task>.Create(session.proxy.task_get_subtasks(session.uuid, _task ?? "").parse());
+                return XenRef<Task>.Create(session.proxy.task_get_subtasks(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -515,9 +549,9 @@ namespace XenAPI
         public static string get_backtrace(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_backtrace(session.uuid, _task);
+                return session.JsonRpcClient.task_get_backtrace(session.opaque_ref, _task);
             else
-                return (string)session.proxy.task_get_backtrace(session.uuid, _task ?? "").parse();
+                return (string)session.proxy.task_get_backtrace(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -530,9 +564,9 @@ namespace XenAPI
         public static void set_other_config(Session session, string _task, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.task_set_other_config(session.uuid, _task, _other_config);
+                session.JsonRpcClient.task_set_other_config(session.opaque_ref, _task, _other_config);
             else
-                session.proxy.task_set_other_config(session.uuid, _task ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+                session.proxy.task_set_other_config(session.opaque_ref, _task ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -546,9 +580,9 @@ namespace XenAPI
         public static void add_to_other_config(Session session, string _task, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.task_add_to_other_config(session.uuid, _task, _key, _value);
+                session.JsonRpcClient.task_add_to_other_config(session.opaque_ref, _task, _key, _value);
             else
-                session.proxy.task_add_to_other_config(session.uuid, _task ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.task_add_to_other_config(session.opaque_ref, _task ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -561,9 +595,9 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _task, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.task_remove_from_other_config(session.uuid, _task, _key);
+                session.JsonRpcClient.task_remove_from_other_config(session.opaque_ref, _task, _key);
             else
-                session.proxy.task_remove_from_other_config(session.uuid, _task ?? "", _key ?? "").parse();
+                session.proxy.task_remove_from_other_config(session.opaque_ref, _task ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -576,9 +610,9 @@ namespace XenAPI
         public static XenRef<Task> create(Session session, string _label, string _description)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_create(session.uuid, _label, _description);
+                return session.JsonRpcClient.task_create(session.opaque_ref, _label, _description);
             else
-                return XenRef<Task>.Create(session.proxy.task_create(session.uuid, _label ?? "", _description ?? "").parse());
+                return XenRef<Task>.Create(session.proxy.task_create(session.opaque_ref, _label ?? "", _description ?? "").parse());
         }
 
         /// <summary>
@@ -590,9 +624,9 @@ namespace XenAPI
         public static void destroy(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.task_destroy(session.uuid, _task);
+                session.JsonRpcClient.task_destroy(session.opaque_ref, _task);
             else
-                session.proxy.task_destroy(session.uuid, _task ?? "").parse();
+                session.proxy.task_destroy(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -604,9 +638,9 @@ namespace XenAPI
         public static void cancel(Session session, string _task)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.task_cancel(session.uuid, _task);
+                session.JsonRpcClient.task_cancel(session.opaque_ref, _task);
             else
-                session.proxy.task_cancel(session.uuid, _task ?? "").parse();
+                session.proxy.task_cancel(session.opaque_ref, _task ?? "").parse();
         }
 
         /// <summary>
@@ -618,9 +652,9 @@ namespace XenAPI
         public static XenRef<Task> async_cancel(Session session, string _task)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_task_cancel(session.uuid, _task);
+              return session.JsonRpcClient.async_task_cancel(session.opaque_ref, _task);
           else
-              return XenRef<Task>.Create(session.proxy.async_task_cancel(session.uuid, _task ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_task_cancel(session.opaque_ref, _task ?? "").parse());
         }
 
         /// <summary>
@@ -633,9 +667,9 @@ namespace XenAPI
         public static void set_status(Session session, string _task, task_status_type _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.task_set_status(session.uuid, _task, _value);
+                session.JsonRpcClient.task_set_status(session.opaque_ref, _task, _value);
             else
-                session.proxy.task_set_status(session.uuid, _task ?? "", task_status_type_helper.ToString(_value)).parse();
+                session.proxy.task_set_status(session.opaque_ref, _task ?? "", task_status_type_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -646,9 +680,9 @@ namespace XenAPI
         public static List<XenRef<Task>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_all(session.uuid);
+                return session.JsonRpcClient.task_get_all(session.opaque_ref);
             else
-                return XenRef<Task>.Create(session.proxy.task_get_all(session.uuid).parse());
+                return XenRef<Task>.Create(session.proxy.task_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -659,9 +693,9 @@ namespace XenAPI
         public static Dictionary<XenRef<Task>, Task> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.task_get_all_records(session.uuid);
+                return session.JsonRpcClient.task_get_all_records(session.opaque_ref);
             else
-                return XenRef<Task>.Create<Proxy_Task>(session.proxy.task_get_all_records(session.uuid).parse());
+                return XenRef<Task>.Create<Proxy_Task>(session.proxy.task_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -906,6 +940,7 @@ namespace XenAPI
         /// additional configuration
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

@@ -31,14 +31,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using XenAdmin.Controls;
 using XenAdmin.Controls.DataGridViewEx;
 using XenAdmin.Core;
 using XenAdmin.Properties;
 using XenAPI;
-using System.ComponentModel;
 using System.IO;
 using XenAdmin.Dialogs;
 using System.Drawing;
@@ -179,12 +177,21 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var updateAlert = downloadUpdateRadioButton.Checked && dataGridViewPatches.SelectedRows.Count > 0
                     ? (XenServerPatchAlert) ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).UpdateAlert
                     : selectFromDiskRadioButton.Checked
-                        ? GetAlertFromFileName(fileNameTextBox.Text.ToLowerInvariant())
+                        ? GetAlertFromFileName(isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath.ToLowerInvariant() : fileNameTextBox.Text.ToLowerInvariant())
                         : null;
                 if (updateAlert != null && updateAlert.NewServerVersion != null)
                     return WizardMode.NewVersion;
                 return WizardMode.SingleUpdate;
             } 
+        }
+
+        public KeyValuePair<XenServerPatch, string> PatchFromDisk
+        {
+            get {
+                return selectFromDiskRadioButton.Checked && FileFromDiskAlert != null
+                    ? new KeyValuePair<XenServerPatch, string>(FileFromDiskAlert.Patch, SelectedNewPatch)
+                    : new KeyValuePair<XenServerPatch, string>(null, null);
+            }
         }
 
         public override void PageLeave(PageLoadedDirection direction, ref bool cancel)

@@ -66,6 +66,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given DR_task.
+        /// </summary>
         public override void UpdateFrom(DR_task update)
         {
             uuid = update.uuid;
@@ -88,12 +92,27 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new DR_task from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public DR_task(Hashtable table)
+        public DR_task(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            introduced_SRs = Marshalling.ParseSetRef<SR>(table, "introduced_SRs");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this DR_task
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("introduced_SRs"))
+                introduced_SRs = Marshalling.ParseSetRef<SR>(table, "introduced_SRs");
         }
 
         public bool DeepEquals(DR_task other)
@@ -137,9 +156,9 @@ namespace XenAPI
         public static DR_task get_record(Session session, string _dr_task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.dr_task_get_record(session.uuid, _dr_task);
+                return session.JsonRpcClient.dr_task_get_record(session.opaque_ref, _dr_task);
             else
-                return new DR_task((Proxy_DR_task)session.proxy.dr_task_get_record(session.uuid, _dr_task ?? "").parse());
+                return new DR_task((Proxy_DR_task)session.proxy.dr_task_get_record(session.opaque_ref, _dr_task ?? "").parse());
         }
 
         /// <summary>
@@ -151,9 +170,9 @@ namespace XenAPI
         public static XenRef<DR_task> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.dr_task_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.dr_task_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<DR_task>.Create(session.proxy.dr_task_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<DR_task>.Create(session.proxy.dr_task_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -165,9 +184,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _dr_task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.dr_task_get_uuid(session.uuid, _dr_task);
+                return session.JsonRpcClient.dr_task_get_uuid(session.opaque_ref, _dr_task);
             else
-                return (string)session.proxy.dr_task_get_uuid(session.uuid, _dr_task ?? "").parse();
+                return (string)session.proxy.dr_task_get_uuid(session.opaque_ref, _dr_task ?? "").parse();
         }
 
         /// <summary>
@@ -179,9 +198,9 @@ namespace XenAPI
         public static List<XenRef<SR>> get_introduced_SRs(Session session, string _dr_task)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.dr_task_get_introduced_srs(session.uuid, _dr_task);
+                return session.JsonRpcClient.dr_task_get_introduced_srs(session.opaque_ref, _dr_task);
             else
-                return XenRef<SR>.Create(session.proxy.dr_task_get_introduced_srs(session.uuid, _dr_task ?? "").parse());
+                return XenRef<SR>.Create(session.proxy.dr_task_get_introduced_srs(session.opaque_ref, _dr_task ?? "").parse());
         }
 
         /// <summary>
@@ -195,9 +214,9 @@ namespace XenAPI
         public static XenRef<DR_task> create(Session session, string _type, Dictionary<string, string> _device_config, string[] _whitelist)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.dr_task_create(session.uuid, _type, _device_config, _whitelist);
+                return session.JsonRpcClient.dr_task_create(session.opaque_ref, _type, _device_config, _whitelist);
             else
-                return XenRef<DR_task>.Create(session.proxy.dr_task_create(session.uuid, _type ?? "", Maps.convert_to_proxy_string_string(_device_config), _whitelist).parse());
+                return XenRef<DR_task>.Create(session.proxy.dr_task_create(session.opaque_ref, _type ?? "", Maps.convert_to_proxy_string_string(_device_config), _whitelist).parse());
         }
 
         /// <summary>
@@ -211,9 +230,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, string _type, Dictionary<string, string> _device_config, string[] _whitelist)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_dr_task_create(session.uuid, _type, _device_config, _whitelist);
+              return session.JsonRpcClient.async_dr_task_create(session.opaque_ref, _type, _device_config, _whitelist);
           else
-              return XenRef<Task>.Create(session.proxy.async_dr_task_create(session.uuid, _type ?? "", Maps.convert_to_proxy_string_string(_device_config), _whitelist).parse());
+              return XenRef<Task>.Create(session.proxy.async_dr_task_create(session.opaque_ref, _type ?? "", Maps.convert_to_proxy_string_string(_device_config), _whitelist).parse());
         }
 
         /// <summary>
@@ -225,9 +244,9 @@ namespace XenAPI
         public static void destroy(Session session, string _dr_task)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.dr_task_destroy(session.uuid, _dr_task);
+                session.JsonRpcClient.dr_task_destroy(session.opaque_ref, _dr_task);
             else
-                session.proxy.dr_task_destroy(session.uuid, _dr_task ?? "").parse();
+                session.proxy.dr_task_destroy(session.opaque_ref, _dr_task ?? "").parse();
         }
 
         /// <summary>
@@ -239,9 +258,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _dr_task)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_dr_task_destroy(session.uuid, _dr_task);
+              return session.JsonRpcClient.async_dr_task_destroy(session.opaque_ref, _dr_task);
           else
-              return XenRef<Task>.Create(session.proxy.async_dr_task_destroy(session.uuid, _dr_task ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_dr_task_destroy(session.opaque_ref, _dr_task ?? "").parse());
         }
 
         /// <summary>
@@ -252,9 +271,9 @@ namespace XenAPI
         public static List<XenRef<DR_task>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.dr_task_get_all(session.uuid);
+                return session.JsonRpcClient.dr_task_get_all(session.opaque_ref);
             else
-                return XenRef<DR_task>.Create(session.proxy.dr_task_get_all(session.uuid).parse());
+                return XenRef<DR_task>.Create(session.proxy.dr_task_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -265,9 +284,9 @@ namespace XenAPI
         public static Dictionary<XenRef<DR_task>, DR_task> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.dr_task_get_all_records(session.uuid);
+                return session.JsonRpcClient.dr_task_get_all_records(session.opaque_ref);
             else
-                return XenRef<DR_task>.Create<Proxy_DR_task>(session.proxy.dr_task_get_all_records(session.uuid).parse());
+                return XenRef<DR_task>.Create<Proxy_DR_task>(session.proxy.dr_task_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>

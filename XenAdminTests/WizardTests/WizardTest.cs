@@ -87,8 +87,9 @@ namespace XenAdminTests.WizardTests
                         Win32.PostMessage(wizard.Handle, WM_KEYDOWN, new IntPtr((int)Keys.Enter), IntPtr.Zero);
                     });
                     // wait for any progress dialog to close
-                    while (wizard.Visible && !wizard.CanFocus)
+                    while (MW(() => wizard.Visible && !wizard.CanFocus))
                         Thread.Sleep(1000);
+
                     // check if the wizard progressed to the next page
                     Assert.AreEqual(pageNames[i + 1], CurrentPageName(wizard), "Enter key button didn't get from page: " + pageNames[i] + " to page: " + pageNames[i + 1]);
                 }

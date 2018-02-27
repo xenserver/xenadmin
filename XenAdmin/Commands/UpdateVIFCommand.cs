@@ -40,23 +40,23 @@ namespace XenAdmin.Commands
     {
         private VM _vm;
         private VIF _vif;
-        private Proxy_VIF _proxyVIF;
+        private VIF _vifDescriptor;
 
         public event EventHandler Completed;
 
-        public UpdateVIFCommand(IMainWindow mainWindow, VM vm, VIF vif, Proxy_VIF proxyVIF)
+        public UpdateVIFCommand(IMainWindow mainWindow, VM vm, VIF vif, VIF vifDescriptor)
             : base(mainWindow, vm)
         {
             _vm = vm;
             _vif = vif;
-            _proxyVIF = proxyVIF;
+            _vifDescriptor = vifDescriptor;
         }
 
         protected override void ExecuteCore(SelectedItemCollection selection)
         {
             Trace.Assert(selection.Count == 1);
 
-            var action = new UpdateVIFAction(_vm, _vif, _proxyVIF);
+            var action = new UpdateVIFAction(_vm, _vif, _vifDescriptor);
             action.Completed += action_Completed;
             action.RunAsync();
         }

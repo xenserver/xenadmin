@@ -90,6 +90,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given SM.
+        /// </summary>
         public override void UpdateFrom(SM update)
         {
             uuid = update.uuid;
@@ -148,24 +152,51 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new SM from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public SM(Hashtable table)
+        public SM(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            type = Marshalling.ParseString(table, "type");
-            vendor = Marshalling.ParseString(table, "vendor");
-            copyright = Marshalling.ParseString(table, "copyright");
-            version = Marshalling.ParseString(table, "version");
-            required_api_version = Marshalling.ParseString(table, "required_api_version");
-            configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "configuration"));
-            capabilities = Marshalling.ParseStringArray(table, "capabilities");
-            features = Maps.convert_from_proxy_string_long(Marshalling.ParseHashTable(table, "features"));
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            driver_filename = Marshalling.ParseString(table, "driver_filename");
-            required_cluster_stack = Marshalling.ParseStringArray(table, "required_cluster_stack");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this SM
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("name_label"))
+                name_label = Marshalling.ParseString(table, "name_label");
+            if (table.ContainsKey("name_description"))
+                name_description = Marshalling.ParseString(table, "name_description");
+            if (table.ContainsKey("type"))
+                type = Marshalling.ParseString(table, "type");
+            if (table.ContainsKey("vendor"))
+                vendor = Marshalling.ParseString(table, "vendor");
+            if (table.ContainsKey("copyright"))
+                copyright = Marshalling.ParseString(table, "copyright");
+            if (table.ContainsKey("version"))
+                version = Marshalling.ParseString(table, "version");
+            if (table.ContainsKey("required_api_version"))
+                required_api_version = Marshalling.ParseString(table, "required_api_version");
+            if (table.ContainsKey("configuration"))
+                configuration = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "configuration"));
+            if (table.ContainsKey("capabilities"))
+                capabilities = Marshalling.ParseStringArray(table, "capabilities");
+            if (table.ContainsKey("features"))
+                features = Maps.convert_from_proxy_string_long(Marshalling.ParseHashTable(table, "features"));
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            if (table.ContainsKey("driver_filename"))
+                driver_filename = Marshalling.ParseString(table, "driver_filename");
+            if (table.ContainsKey("required_cluster_stack"))
+                required_cluster_stack = Marshalling.ParseStringArray(table, "required_cluster_stack");
         }
 
         public bool DeepEquals(SM other)
@@ -226,9 +257,9 @@ namespace XenAPI
         public static SM get_record(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_record(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_record(session.opaque_ref, _sm);
             else
-                return new SM((Proxy_SM)session.proxy.sm_get_record(session.uuid, _sm ?? "").parse());
+                return new SM((Proxy_SM)session.proxy.sm_get_record(session.opaque_ref, _sm ?? "").parse());
         }
 
         /// <summary>
@@ -240,9 +271,9 @@ namespace XenAPI
         public static XenRef<SM> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.sm_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<SM>.Create(session.proxy.sm_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<SM>.Create(session.proxy.sm_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -254,9 +285,9 @@ namespace XenAPI
         public static List<XenRef<SM>> get_by_name_label(Session session, string _label)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_by_name_label(session.uuid, _label);
+                return session.JsonRpcClient.sm_get_by_name_label(session.opaque_ref, _label);
             else
-                return XenRef<SM>.Create(session.proxy.sm_get_by_name_label(session.uuid, _label ?? "").parse());
+                return XenRef<SM>.Create(session.proxy.sm_get_by_name_label(session.opaque_ref, _label ?? "").parse());
         }
 
         /// <summary>
@@ -268,9 +299,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_uuid(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_uuid(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_uuid(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_uuid(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -282,9 +313,9 @@ namespace XenAPI
         public static string get_name_label(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_name_label(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_name_label(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_name_label(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_name_label(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -296,9 +327,9 @@ namespace XenAPI
         public static string get_name_description(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_name_description(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_name_description(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_name_description(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_name_description(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -310,9 +341,9 @@ namespace XenAPI
         public static string get_type(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_type(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_type(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_type(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_type(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -324,9 +355,9 @@ namespace XenAPI
         public static string get_vendor(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_vendor(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_vendor(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_vendor(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_vendor(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -338,9 +369,9 @@ namespace XenAPI
         public static string get_copyright(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_copyright(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_copyright(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_copyright(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_copyright(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -352,9 +383,9 @@ namespace XenAPI
         public static string get_version(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_version(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_version(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_version(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_version(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -366,9 +397,9 @@ namespace XenAPI
         public static string get_required_api_version(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_required_api_version(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_required_api_version(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_required_api_version(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_required_api_version(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -380,9 +411,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_configuration(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_configuration(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_configuration(session.opaque_ref, _sm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.sm_get_configuration(session.uuid, _sm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.sm_get_configuration(session.opaque_ref, _sm ?? "").parse());
         }
 
         /// <summary>
@@ -396,9 +427,9 @@ namespace XenAPI
         public static string[] get_capabilities(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_capabilities(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_capabilities(session.opaque_ref, _sm);
             else
-                return (string [])session.proxy.sm_get_capabilities(session.uuid, _sm ?? "").parse();
+                return (string [])session.proxy.sm_get_capabilities(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -410,9 +441,9 @@ namespace XenAPI
         public static Dictionary<string, long> get_features(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_features(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_features(session.opaque_ref, _sm);
             else
-                return Maps.convert_from_proxy_string_long(session.proxy.sm_get_features(session.uuid, _sm ?? "").parse());
+                return Maps.convert_from_proxy_string_long(session.proxy.sm_get_features(session.opaque_ref, _sm ?? "").parse());
         }
 
         /// <summary>
@@ -424,9 +455,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_other_config(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_other_config(session.opaque_ref, _sm);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.sm_get_other_config(session.uuid, _sm ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.sm_get_other_config(session.opaque_ref, _sm ?? "").parse());
         }
 
         /// <summary>
@@ -438,9 +469,9 @@ namespace XenAPI
         public static string get_driver_filename(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_driver_filename(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_driver_filename(session.opaque_ref, _sm);
             else
-                return (string)session.proxy.sm_get_driver_filename(session.uuid, _sm ?? "").parse();
+                return (string)session.proxy.sm_get_driver_filename(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -452,9 +483,9 @@ namespace XenAPI
         public static string[] get_required_cluster_stack(Session session, string _sm)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_required_cluster_stack(session.uuid, _sm);
+                return session.JsonRpcClient.sm_get_required_cluster_stack(session.opaque_ref, _sm);
             else
-                return (string [])session.proxy.sm_get_required_cluster_stack(session.uuid, _sm ?? "").parse();
+                return (string [])session.proxy.sm_get_required_cluster_stack(session.opaque_ref, _sm ?? "").parse();
         }
 
         /// <summary>
@@ -467,9 +498,9 @@ namespace XenAPI
         public static void set_other_config(Session session, string _sm, Dictionary<string, string> _other_config)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.sm_set_other_config(session.uuid, _sm, _other_config);
+                session.JsonRpcClient.sm_set_other_config(session.opaque_ref, _sm, _other_config);
             else
-                session.proxy.sm_set_other_config(session.uuid, _sm ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+                session.proxy.sm_set_other_config(session.opaque_ref, _sm ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -483,9 +514,9 @@ namespace XenAPI
         public static void add_to_other_config(Session session, string _sm, string _key, string _value)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.sm_add_to_other_config(session.uuid, _sm, _key, _value);
+                session.JsonRpcClient.sm_add_to_other_config(session.opaque_ref, _sm, _key, _value);
             else
-                session.proxy.sm_add_to_other_config(session.uuid, _sm ?? "", _key ?? "", _value ?? "").parse();
+                session.proxy.sm_add_to_other_config(session.opaque_ref, _sm ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -498,9 +529,9 @@ namespace XenAPI
         public static void remove_from_other_config(Session session, string _sm, string _key)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.sm_remove_from_other_config(session.uuid, _sm, _key);
+                session.JsonRpcClient.sm_remove_from_other_config(session.opaque_ref, _sm, _key);
             else
-                session.proxy.sm_remove_from_other_config(session.uuid, _sm ?? "", _key ?? "").parse();
+                session.proxy.sm_remove_from_other_config(session.opaque_ref, _sm ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -511,9 +542,9 @@ namespace XenAPI
         public static List<XenRef<SM>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_all(session.uuid);
+                return session.JsonRpcClient.sm_get_all(session.opaque_ref);
             else
-                return XenRef<SM>.Create(session.proxy.sm_get_all(session.uuid).parse());
+                return XenRef<SM>.Create(session.proxy.sm_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -524,9 +555,9 @@ namespace XenAPI
         public static Dictionary<XenRef<SM>, SM> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.sm_get_all_records(session.uuid);
+                return session.JsonRpcClient.sm_get_all_records(session.opaque_ref);
             else
-                return XenRef<SM>.Create<Proxy_SM>(session.proxy.sm_get_all_records(session.uuid).parse());
+                return XenRef<SM>.Create<Proxy_SM>(session.proxy.sm_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -676,6 +707,7 @@ namespace XenAPI
         /// <summary>
         /// names and descriptions of device config keys
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> configuration
         {
             get { return _configuration; }
@@ -732,6 +764,7 @@ namespace XenAPI
         /// additional configuration
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

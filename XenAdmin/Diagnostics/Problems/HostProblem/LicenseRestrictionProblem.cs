@@ -29,33 +29,46 @@
  * SUCH DAMAGE.
  */
 
+using System;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Checks;
 using XenAPI;
-using XenAdmin.ServerDBs;
 
-namespace XenAdmin.Network
+namespace XenAdmin.Diagnostics.Problems.HostProblem
 {
-    public static class SessionFactory
+    class LicenseRestrictionProblem : ProblemWithInformationUrl
     {
-        public static Session CreateSession(IXenConnection connection, string hostname, int port)
+        private readonly Host host;
+
+        public LicenseRestrictionProblem(Check check, Host host)
+            : base(check)
         {
-            if (DbProxy.IsSimulatorUrl(hostname))
-                return new Session(DbProxy.GetProxy(connection, hostname), connection)
-                {
-                    //do nothing; we don't want to swap backends for simulator Urls
-                    XmlRpcToJsonRpcInvoker = null
-                };
-            return new Session(Session.STANDARD_TIMEOUT, connection, hostname, port);
+            this.host = host;
         }
 
-        public static Session DuplicateSession(Session session, IXenConnection connection, int timeout)
+        public override string Description
         {
-            if (DbProxy.IsSimulatorUrl(session.Url))
-                return new Session(session, DbProxy.GetProxy(connection, session.Url), connection)
-                {
-                    //do nothing; we don't want to swap backends for simulator Urls
-                    XmlRpcToJsonRpcInvoker = null
-                };
-            return new Session(session, connection, timeout);
+            get { return string.Format(Messages.UPDATES_WIZARD_PRECHECK_FAILED, Helpers.GetName(host).Ellipsise(30), FriendlyErrorNames.LICENCE_RESTRICTION); }
+        }
+
+        public override string Title
+        {
+            get { return Description; }
+        }
+
+        public override string LinkText
+        {
+            get { return Messages.LICENSE_MANAGER_BUY_LICENSE_LINK_TEXT; }
+        }
+
+        public override string HelpMessage
+        {
+            get { return LinkText; }
+        }
+
+        public override Uri UriToLaunch
+        {
+            get { return new Uri(InvisibleMessages.UPSELL_SA); }
         }
     }
 }

@@ -69,6 +69,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+        public KeyValuePair<XenServerPatch, string> PatchFromDisk { private get; set; }
 
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
 
@@ -182,15 +183,28 @@ namespace XenAdmin.Wizards.PatchingWizard
                         var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
                         hostsToApply.Sort();
 
-                        planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches));
-                        planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches));
+                        planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches, PatchFromDisk));
+                        planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches, PatchFromDisk));
                         planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
 
                         foreach (var host in hostsToApply)
                         {
                             planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
-                            planActions.AddRange(GetMandatoryActionListForPatch(host, patch));
-                            UpdateDelayedAfterPatchGuidanceActionListForHost(delayedActionsByHost[host], host, patch);
+
+                            var actions = GetAfterApplyGuidanceActionsForPatch(host, patch);
+                            if (patch.GuidanceMandatory)
+                            {
+                                planActions.AddRange(actions);
+                                // remove all delayed actions of the same kind that have already been added
+                                // (because these actions are guidance-mandatory=true, therefore
+                                // they will run immediately, making delayed ones obsolete)
+                                delayedActionsByHost[host].RemoveAll(dg => actions.Any(ma => ma.GetType() == dg.GetType()));
+                            }
+                            else
+                            {
+                                // add any action that is not already in the list
+                                delayedActionsByHost[host].AddRange(actions.Where(a => !delayedActionsByHost[host].Any(dg => a.GetType() == dg.GetType())));
+                            }
                         }
 
                         //clean up master at the end:
@@ -216,10 +230,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var bgw in backgroundWorkers)
             {
-                bgw.DoWork += new DoWorkEventHandler(WorkerDoWork);
+                bgw.DoWork += WorkerDoWork;
                 bgw.WorkerReportsProgress = true;
-                bgw.ProgressChanged += new ProgressChangedEventHandler(WorkerProgressChanged);
-                bgw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerCompleted);
+                bgw.ProgressChanged += WorkerProgressChanged;
+                bgw.RunWorkerCompleted += WorkerCompleted;
                 bgw.WorkerSupportsCancellation = true;
                 bgw.RunWorkerAsync();
             }
@@ -453,10 +467,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void action_OnProgressChange(object sender, EventArgs e)
         {
-            Program.Invoke(Program.MainWindow, () =>
-            {
-                UpdateStatusTextBox();
-            });
+            Program.Invoke(Program.MainWindow, UpdateStatusTextBox);
         }
 
         private static void InitializePlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
@@ -499,26 +510,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             OnPageUpdated();
         }
 
-        private void UpdateDelayedAfterPatchGuidanceActionListForHost(List<PlanAction> delayedGuidances, Host host, XenServerPatch patch)
-        {
-            List<PlanAction> actions = GetAfterApplyGuidanceActionsForPatch(host, patch);
-
-            if (actions.Count == 0)
-                return;
-
-            if (!patch.GuidanceMandatory)
-            {
-                // add any action that is not already in the list
-                delayedGuidances.AddRange(actions.Where(a => !delayedGuidances.Any(dg => a.GetType() == dg.GetType())));
-            }
-            else
-            {
-                // remove all delayed action of the same kinds that have already been added (Because these actions are guidance-mandatory=true, therefore
-                // they will run immediately, making delayed ones obsolete)
-                delayedGuidances.RemoveAll(dg => actions.Any(ma => ma.GetType() == dg.GetType()));                 
-            }
-        }
-
         private static List<PlanAction> GetAfterApplyGuidanceActionsForPatch(Host host, XenServerPatch patch)
         {
             List<PlanAction> actions = new List<PlanAction>();
@@ -546,18 +537,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 actions.Add(new RebootVMsPlanAction(host, RunningPvVMs(host)));
             }
-
-            return actions;
-        }
-
-        private List<PlanAction> GetMandatoryActionListForPatch(Host host, XenServerPatch patch)
-        {
-            var actions = new List<PlanAction>();
-
-            if (!patch.GuidanceMandatory)
-                return actions;
-
-            actions = GetAfterApplyGuidanceActionsForPatch(host, patch);
 
             return actions;
         }

@@ -171,14 +171,14 @@ namespace XenAdmin.Actions
                             string path = downloadUpdate ? Path.Combine(Path.GetDirectoryName(zippedFileName), iterator.CurrentFileName())
                                 : Path.Combine(Path.GetTempPath(), iterator.CurrentFileName());
 
-                            log.DebugFormat("Found '{0}' in the downloaded archive when looking for a '{1}' file. Extracting...", iterator.CurrentFileName(), currentExtension);
+                            log.InfoFormat("Found '{0}' in the downloaded archive when looking for a '{1}' file. Extracting...", iterator.CurrentFileName(), currentExtension);
 
                             using (Stream outputStream = new FileStream(path, FileMode.Create))
                             {
                                 iterator.ExtractCurrentFile(outputStream);
                                 PatchPath = path;
 
-                                log.DebugFormat("Update file extracted to '{0}'", path);
+                                log.InfoFormat("Update file extracted to '{0}'", path);
                                 
                                 break;
                             }
@@ -209,7 +209,7 @@ namespace XenAdmin.Actions
             if (string.IsNullOrEmpty(PatchPath) && downloadUpdate)
             {
                 MarkCompleted(new Exception(Messages.DOWNLOAD_AND_EXTRACT_ACTION_FILE_NOT_FOUND));
-                log.DebugFormat("File '{0}.{1}' could not be located in downloaded archive", updateName, updateFileExtensions);
+                log.InfoFormat("The downloaded archive does not contain a file with any of the following extensions: {0}", string.Join(", ", updateFileExtensions));
             }
         }
 
@@ -217,7 +217,8 @@ namespace XenAdmin.Actions
         {
             if (downloadUpdate)
             {
-                log.DebugFormat("Downloading XenServer patch '{0}' (url: {1})", updateName, address);
+                log.InfoFormat("Downloading update '{0}' (from from '{1}') to '{2}'", updateName, address, zippedFileName);
+
 
                 Description = string.Format(Messages.DOWNLOAD_AND_EXTRACT_ACTION_DOWNLOADING_DESC, updateName);
                 LogDescriptionChanges = false;

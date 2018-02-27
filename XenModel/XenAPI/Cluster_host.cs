@@ -174,9 +174,9 @@ namespace XenAPI
         public static Cluster_host get_record(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_record(session.uuid, _cluster_host);
+                return session.JsonRpcClient.cluster_host_get_record(session.opaque_ref, _cluster_host);
             else
-                return new Cluster_host((Proxy_Cluster_host)session.proxy.cluster_host_get_record(session.uuid, _cluster_host ?? "").parse());
+                return new Cluster_host((Proxy_Cluster_host)session.proxy.cluster_host_get_record(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -188,9 +188,9 @@ namespace XenAPI
         public static XenRef<Cluster_host> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.cluster_host_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<Cluster_host>.Create(session.proxy.cluster_host_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<Cluster_host>.Create(session.proxy.cluster_host_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -202,9 +202,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_uuid(session.uuid, _cluster_host);
+                return session.JsonRpcClient.cluster_host_get_uuid(session.opaque_ref, _cluster_host);
             else
-                return (string)session.proxy.cluster_host_get_uuid(session.uuid, _cluster_host ?? "").parse();
+                return (string)session.proxy.cluster_host_get_uuid(session.opaque_ref, _cluster_host ?? "").parse();
         }
 
         /// <summary>
@@ -216,9 +216,9 @@ namespace XenAPI
         public static XenRef<Cluster> get_cluster(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_cluster(session.uuid, _cluster_host);
+                return session.JsonRpcClient.cluster_host_get_cluster(session.opaque_ref, _cluster_host);
             else
-                return XenRef<Cluster>.Create(session.proxy.cluster_host_get_cluster(session.uuid, _cluster_host ?? "").parse());
+                return XenRef<Cluster>.Create(session.proxy.cluster_host_get_cluster(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -230,9 +230,9 @@ namespace XenAPI
         public static XenRef<Host> get_host(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_host(session.uuid, _cluster_host);
+                return session.JsonRpcClient.cluster_host_get_host(session.opaque_ref, _cluster_host);
             else
-                return XenRef<Host>.Create(session.proxy.cluster_host_get_host(session.uuid, _cluster_host ?? "").parse());
+                return XenRef<Host>.Create(session.proxy.cluster_host_get_host(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -244,9 +244,9 @@ namespace XenAPI
         public static bool get_enabled(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_enabled(session.uuid, _cluster_host);
+                return session.JsonRpcClient.cluster_host_get_enabled(session.opaque_ref, _cluster_host);
             else
-                return (bool)session.proxy.cluster_host_get_enabled(session.uuid, _cluster_host ?? "").parse();
+                return (bool)session.proxy.cluster_host_get_enabled(session.opaque_ref, _cluster_host ?? "").parse();
         }
 
         /// <summary>
@@ -258,9 +258,9 @@ namespace XenAPI
         public static List<cluster_host_operation> get_allowed_operations(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_allowed_operations(session.uuid, _cluster_host);
+                return session.JsonRpcClient.cluster_host_get_allowed_operations(session.opaque_ref, _cluster_host);
             else
-                return Helper.StringArrayToEnumList<cluster_host_operation>(session.proxy.cluster_host_get_allowed_operations(session.uuid, _cluster_host ?? "").parse());
+                return Helper.StringArrayToEnumList<cluster_host_operation>(session.proxy.cluster_host_get_allowed_operations(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -272,9 +272,9 @@ namespace XenAPI
         public static Dictionary<string, cluster_host_operation> get_current_operations(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_current_operations(session.uuid, _cluster_host);
+                return session.JsonRpcClient.cluster_host_get_current_operations(session.opaque_ref, _cluster_host);
             else
-                return Maps.convert_from_proxy_string_cluster_host_operation(session.proxy.cluster_host_get_current_operations(session.uuid, _cluster_host ?? "").parse());
+                return Maps.convert_from_proxy_string_cluster_host_operation(session.proxy.cluster_host_get_current_operations(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -286,9 +286,9 @@ namespace XenAPI
         public static Dictionary<string, string> get_other_config(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_other_config(session.uuid, _cluster_host);
+                return session.JsonRpcClient.cluster_host_get_other_config(session.opaque_ref, _cluster_host);
             else
-                return Maps.convert_from_proxy_string_string(session.proxy.cluster_host_get_other_config(session.uuid, _cluster_host ?? "").parse());
+                return Maps.convert_from_proxy_string_string(session.proxy.cluster_host_get_other_config(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -301,9 +301,9 @@ namespace XenAPI
         public static XenRef<Cluster_host> create(Session session, string _cluster, string _host)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_create(session.uuid, _cluster, _host);
+                return session.JsonRpcClient.cluster_host_create(session.opaque_ref, _cluster, _host);
             else
-                return XenRef<Cluster_host>.Create(session.proxy.cluster_host_create(session.uuid, _cluster ?? "", _host ?? "").parse());
+                return XenRef<Cluster_host>.Create(session.proxy.cluster_host_create(session.opaque_ref, _cluster ?? "", _host ?? "").parse());
         }
 
         /// <summary>
@@ -316,9 +316,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, string _cluster, string _host)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_cluster_host_create(session.uuid, _cluster, _host);
+              return session.JsonRpcClient.async_cluster_host_create(session.opaque_ref, _cluster, _host);
           else
-              return XenRef<Task>.Create(session.proxy.async_cluster_host_create(session.uuid, _cluster ?? "", _host ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_cluster_host_create(session.opaque_ref, _cluster ?? "", _host ?? "").parse());
         }
 
         /// <summary>
@@ -330,9 +330,9 @@ namespace XenAPI
         public static void destroy(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.cluster_host_destroy(session.uuid, _cluster_host);
+                session.JsonRpcClient.cluster_host_destroy(session.opaque_ref, _cluster_host);
             else
-                session.proxy.cluster_host_destroy(session.uuid, _cluster_host ?? "").parse();
+                session.proxy.cluster_host_destroy(session.opaque_ref, _cluster_host ?? "").parse();
         }
 
         /// <summary>
@@ -344,9 +344,9 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _cluster_host)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_cluster_host_destroy(session.uuid, _cluster_host);
+              return session.JsonRpcClient.async_cluster_host_destroy(session.opaque_ref, _cluster_host);
           else
-              return XenRef<Task>.Create(session.proxy.async_cluster_host_destroy(session.uuid, _cluster_host ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_cluster_host_destroy(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -358,9 +358,9 @@ namespace XenAPI
         public static void enable(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.cluster_host_enable(session.uuid, _cluster_host);
+                session.JsonRpcClient.cluster_host_enable(session.opaque_ref, _cluster_host);
             else
-                session.proxy.cluster_host_enable(session.uuid, _cluster_host ?? "").parse();
+                session.proxy.cluster_host_enable(session.opaque_ref, _cluster_host ?? "").parse();
         }
 
         /// <summary>
@@ -372,9 +372,9 @@ namespace XenAPI
         public static XenRef<Task> async_enable(Session session, string _cluster_host)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_cluster_host_enable(session.uuid, _cluster_host);
+              return session.JsonRpcClient.async_cluster_host_enable(session.opaque_ref, _cluster_host);
           else
-              return XenRef<Task>.Create(session.proxy.async_cluster_host_enable(session.uuid, _cluster_host ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_cluster_host_enable(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -386,9 +386,9 @@ namespace XenAPI
         public static void force_destroy(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.cluster_host_force_destroy(session.uuid, _cluster_host);
+                session.JsonRpcClient.cluster_host_force_destroy(session.opaque_ref, _cluster_host);
             else
-                session.proxy.cluster_host_force_destroy(session.uuid, _cluster_host ?? "").parse();
+                session.proxy.cluster_host_force_destroy(session.opaque_ref, _cluster_host ?? "").parse();
         }
 
         /// <summary>
@@ -400,9 +400,9 @@ namespace XenAPI
         public static XenRef<Task> async_force_destroy(Session session, string _cluster_host)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_cluster_host_force_destroy(session.uuid, _cluster_host);
+              return session.JsonRpcClient.async_cluster_host_force_destroy(session.opaque_ref, _cluster_host);
           else
-              return XenRef<Task>.Create(session.proxy.async_cluster_host_force_destroy(session.uuid, _cluster_host ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_cluster_host_force_destroy(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -414,9 +414,9 @@ namespace XenAPI
         public static void disable(Session session, string _cluster_host)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.cluster_host_disable(session.uuid, _cluster_host);
+                session.JsonRpcClient.cluster_host_disable(session.opaque_ref, _cluster_host);
             else
-                session.proxy.cluster_host_disable(session.uuid, _cluster_host ?? "").parse();
+                session.proxy.cluster_host_disable(session.opaque_ref, _cluster_host ?? "").parse();
         }
 
         /// <summary>
@@ -428,9 +428,9 @@ namespace XenAPI
         public static XenRef<Task> async_disable(Session session, string _cluster_host)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_cluster_host_disable(session.uuid, _cluster_host);
+              return session.JsonRpcClient.async_cluster_host_disable(session.opaque_ref, _cluster_host);
           else
-              return XenRef<Task>.Create(session.proxy.async_cluster_host_disable(session.uuid, _cluster_host ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_cluster_host_disable(session.opaque_ref, _cluster_host ?? "").parse());
         }
 
         /// <summary>
@@ -441,9 +441,9 @@ namespace XenAPI
         public static List<XenRef<Cluster_host>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_all(session.uuid);
+                return session.JsonRpcClient.cluster_host_get_all(session.opaque_ref);
             else
-                return XenRef<Cluster_host>.Create(session.proxy.cluster_host_get_all(session.uuid).parse());
+                return XenRef<Cluster_host>.Create(session.proxy.cluster_host_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -454,9 +454,9 @@ namespace XenAPI
         public static Dictionary<XenRef<Cluster_host>, Cluster_host> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_get_all_records(session.uuid);
+                return session.JsonRpcClient.cluster_host_get_all_records(session.opaque_ref);
             else
-                return XenRef<Cluster_host>.Create<Proxy_Cluster_host>(session.proxy.cluster_host_get_all_records(session.uuid).parse());
+                return XenRef<Cluster_host>.Create<Proxy_Cluster_host>(session.proxy.cluster_host_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>

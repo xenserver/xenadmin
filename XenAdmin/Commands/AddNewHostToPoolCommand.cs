@@ -84,12 +84,10 @@ namespace XenAdmin.Commands
         /// Called in the 'connect new server and add to pool' action after the server has connected
         /// and its cache has been populated. Adds the new server to the pool.
         /// </summary>
-        private void dialog_CachePopulated(object sender, CachePopulatedEventArgs e)
+        private void dialog_CachePopulated(IXenConnection conn)
         {
-            IXenConnection newConnection = e.Connection;
-
             // A new connection was successfully made: add the new server to its destination pool.
-            Host hostToAdd = Helpers.GetMaster(newConnection);
+            Host hostToAdd = Helpers.GetMaster(conn);
             if (hostToAdd == null)
             {
                 log.Debug("hostToAdd is null while joining host to pool in AddNewHostToPoolCommand: this should never happen!");
@@ -97,7 +95,7 @@ namespace XenAdmin.Commands
             }
 
             // Check newly-connected host is not in pool
-            Pool hostPool = Helpers.GetPool(newConnection);
+            Pool hostPool = Helpers.GetPool(conn);
 
             MainWindowCommandInterface.Invoke(delegate
             {

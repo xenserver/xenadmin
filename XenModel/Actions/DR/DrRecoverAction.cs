@@ -72,11 +72,11 @@ namespace XenAdmin.Actions.DR
             if (MetadataSession != null)
             {
                 if (xenObject is VM)
-                    RelatedTask = VM.async_recover(MetadataSession, xenObject.opaque_ref, Session.uuid, true);
+                    RelatedTask = VM.async_recover(MetadataSession, xenObject.opaque_ref, Session.opaque_ref, true);
                 if (xenObject is VM_appliance)
                 {
                     // if appliance already exists in target pool, it will be replaced during recovery and the uuid is preserved
-                    RelatedTask = VM_appliance.async_recover(MetadataSession, xenObject.opaque_ref, Session.uuid, true);
+                    RelatedTask = VM_appliance.async_recover(MetadataSession, xenObject.opaque_ref, Session.opaque_ref, true);
                 }
                 PollToCompletion();
             }

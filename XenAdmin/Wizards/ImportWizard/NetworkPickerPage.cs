@@ -110,11 +110,11 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		#region Accessors
 
-		public List<Proxy_VIF> ProxyVIFs
+		public List<VIF> VIFs
 		{
 			get
 			{
-				var vifs = new List<Proxy_VIF>();
+				var vifs = new List<VIF>();
 
 				foreach (DataGridViewRow row in m_networkGridView.Rows)
 				{
@@ -129,7 +129,7 @@ namespace XenAdmin.Wizards.ImportWizard
 					if (vif.MAC == Messages.MAC_AUTOGENERATE)
 						vif.MAC = "";
 
-					vifs.Add(vif.ToProxy());
+					vifs.Add(vif);
 				}
 
 				return vifs;

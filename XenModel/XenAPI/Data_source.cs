@@ -78,6 +78,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Data_source.
+        /// </summary>
         public override void UpdateFrom(Data_source update)
         {
             name_label = update.name_label;
@@ -118,18 +122,39 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Data_source from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Data_source(Hashtable table)
+        public Data_source(Hashtable table) : this()
         {
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            enabled = Marshalling.ParseBool(table, "enabled");
-            standard = Marshalling.ParseBool(table, "standard");
-            units = Marshalling.ParseString(table, "units");
-            min = Marshalling.ParseDouble(table, "min");
-            max = Marshalling.ParseDouble(table, "max");
-            value = Marshalling.ParseDouble(table, "value");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Data_source
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("name_label"))
+                name_label = Marshalling.ParseString(table, "name_label");
+            if (table.ContainsKey("name_description"))
+                name_description = Marshalling.ParseString(table, "name_description");
+            if (table.ContainsKey("enabled"))
+                enabled = Marshalling.ParseBool(table, "enabled");
+            if (table.ContainsKey("standard"))
+                standard = Marshalling.ParseBool(table, "standard");
+            if (table.ContainsKey("units"))
+                units = Marshalling.ParseString(table, "units");
+            if (table.ContainsKey("min"))
+                min = Marshalling.ParseDouble(table, "min");
+            if (table.ContainsKey("max"))
+                max = Marshalling.ParseDouble(table, "max");
+            if (table.ContainsKey("value"))
+                value = Marshalling.ParseDouble(table, "value");
         }
 
         public bool DeepEquals(Data_source other)

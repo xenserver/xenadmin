@@ -33,7 +33,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Xml;
 
 using XenAPI;
 using XenAdmin.Network;
@@ -150,11 +149,6 @@ namespace XenAdmin.ServerDBs
             db = new Db(connection, url);
         }
 
-        #region IInvocationHandler Members
-
-       
-        
-
         public object ExecuteMethod(ProxyMethodInfo pmi, object[] args)
         {
             object obj;
@@ -206,6 +200,8 @@ namespace XenAdmin.ServerDBs
                 handler(this, e);
             }
         }
+        
+        #region IInvocationHandler Members
 
         public object Invoke(string proxyMethodName, string returnType, params object[] args)
         {
@@ -366,6 +362,16 @@ namespace XenAdmin.ServerDBs
         }
 
         #endregion
+
+        /// <summary>
+        /// Determine if the given URL represents a simulator db proxy
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static bool IsSimulatorUrl(string url)
+        {
+            return url.EndsWith(".db") || url.EndsWith(".xml") || url.EndsWith(".tmp");
+        }
 
         // Code to create fake asynchronous tasks that just return a known value
 

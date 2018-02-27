@@ -41,6 +41,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using System.Net;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
@@ -1339,6 +1340,7 @@ namespace XenAPI
         }
 
         private bool _isBeingCreated;
+        [JsonIgnore]
         public bool IsBeingCreated
         {
             get { return _isBeingCreated; }
@@ -1504,7 +1506,7 @@ namespace XenAPI
         public static List<XenRef<SR>> GetDRMissingSRs(Session session, string vm, Session sessionTo)
         {
             return Helpers.CreedenceOrGreater(sessionTo.Connection)
-                       ? VM.get_SRs_required_for_recovery(session, vm, sessionTo.uuid)
+                       ? VM.get_SRs_required_for_recovery(session, vm, sessionTo.opaque_ref)
                        : null;
         }
 

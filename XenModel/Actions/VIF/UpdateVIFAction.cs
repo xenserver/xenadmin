@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin.Actions;
 using XenAPI;
 
 
@@ -39,37 +38,37 @@ namespace XenAdmin.Actions
 {
     public class UpdateVIFAction : AsyncAction
     {
-        readonly private VIF vif;
-        private readonly Proxy_VIF proxyVIF;
+        private readonly VIF vif;
+        private readonly VIF vifDescriptor;
 
-        private List<string> xmlRpcMethods = new List<string>();
+        private List<string> apiMethods = new List<string>();
 
         /// <summary>
         /// Update the VIF
         /// </summary>
         /// <param name="vm"></param>
         /// <param name="vif"></param>
-        /// <param name="proxyVIF"></param>
-        public UpdateVIFAction(VM vm, VIF vif, Proxy_VIF proxyVIF)
+        /// <param name="vifDescriptor"></param>
+        public UpdateVIFAction(VM vm, VIF vif, VIF vifDescriptor)
             : base(vm.Connection, String.Format(Messages.ACTION_VIF_UPDATING_TITLE, vif.NetworkName(), vm.Name()))
         {
             this.vif = vif;
             VM = vm;
-            this.proxyVIF = proxyVIF;
+            this.vifDescriptor = vifDescriptor;
             Initialise();
-            xmlRpcMethods.ForEach(method => ApiMethodsToRoleCheck.Add(method));
+            apiMethods.ForEach(method => ApiMethodsToRoleCheck.Add(method));
         }
 
         private void Initialise()
         {
-            xmlRpcMethods.AddRange(DeleteVIFAction.XmlRpcMethods);
-            xmlRpcMethods.AddRange(CreateVIFAction.XmlRpcMethods);
+            apiMethods.AddRange(DeleteVIFAction.XmlRpcMethods);
+            apiMethods.AddRange(CreateVIFAction.XmlRpcMethods);
         }
 
         private void UpdateVIF()
         {
             new DeleteVIFAction(vif).RunExternal(Session);
-            var createAction = new CreateVIFAction(VM, proxyVIF);
+            var createAction = new CreateVIFAction(VM, vifDescriptor);
             createAction.RunExternal(Session);
             Result = createAction.Result;
         }

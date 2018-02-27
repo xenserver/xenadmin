@@ -1087,17 +1087,17 @@ namespace XenAdmin.ConsoleView
             }
 
             Uri uri = new Uri(console.location);
-            String SessionUUID;
+            string sesssionRef;
 
             lock (activeSessionLock)
             {
                 // use the elevated credentials, if provided, for connecting to the console (CA-91132)
                 activeSession = (string.IsNullOrEmpty(ElevatedUsername) || string.IsNullOrEmpty(ElevatedPassword)) ?
                     console.Connection.DuplicateSession() : console.Connection.ElevatedSession(ElevatedUsername, ElevatedPassword);
-                SessionUUID = activeSession.uuid;
+                sesssionRef = activeSession.opaque_ref;
             }
 
-            Stream stream = HTTPHelper.CONNECT(uri, console.Connection, SessionUUID, false, true);
+            Stream stream = HTTPHelper.CONNECT(uri, console.Connection, sesssionRef, false, true);
 
             InvokeConnection(v, stream, console);
         }
