@@ -1271,6 +1271,7 @@ namespace XenAPI
         /// <summary>
         /// schedule of the backup containing 'hour', 'min', 'days'. Date/time-related information is in Local Timezone
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> backup_schedule
         {
             get { return _backup_schedule; }
@@ -1345,6 +1346,7 @@ namespace XenAPI
         /// <summary>
         /// configuration for the archive, including its 'location', 'username', 'password'
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> archive_target_config
         {
             get { return _archive_target_config; }
@@ -1382,6 +1384,7 @@ namespace XenAPI
         /// <summary>
         /// schedule of the archive containing 'hour', 'min', 'days'. Date/time-related information is in Local Timezone
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> archive_schedule
         {
             get { return _archive_schedule; }
@@ -1474,6 +1477,7 @@ namespace XenAPI
         /// <summary>
         /// configuration for the alarm
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> alarm_config
         {
             get { return _alarm_config; }

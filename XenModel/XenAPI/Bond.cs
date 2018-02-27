@@ -663,6 +663,7 @@ namespace XenAPI
         /// <summary>
         /// additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -722,6 +723,7 @@ namespace XenAPI
         /// Additional configuration properties specific to the bond mode.
         /// First published in XenServer 6.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> properties
         {
             get { return _properties; }

@@ -788,6 +788,7 @@ namespace XenAPI
         /// <summary>
         /// Additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -926,6 +927,7 @@ namespace XenAPI
         /// PGPU metadata to determine whether a VGPU can migrate between two PGPUs
         /// First published in XenServer 7.3.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> compatibility_metadata
         {
             get { return _compatibility_metadata; }

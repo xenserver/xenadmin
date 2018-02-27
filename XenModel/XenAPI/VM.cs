@@ -826,10 +826,6 @@ namespace XenAPI
                 {
                     VM.set_actions_after_reboot(session, opaqueRef, _actions_after_reboot);
                 }
-                if (!Helper.AreEqual2(_actions_after_crash, server._actions_after_crash))
-                {
-                    VM.set_actions_after_crash(session, opaqueRef, _actions_after_crash);
-                }
                 if (!Helper.AreEqual2(_PV_bootloader, server._PV_bootloader))
                 {
                     VM.set_PV_bootloader(session, opaqueRef, _PV_bootloader);
@@ -921,6 +917,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_VCPUs_at_startup, server._VCPUs_at_startup))
                 {
                     VM.set_VCPUs_at_startup(session, opaqueRef, _VCPUs_at_startup);
+                }
+                if (!Helper.AreEqual2(_actions_after_crash, server._actions_after_crash))
+                {
+                    VM.set_actions_after_crash(session, opaqueRef, _actions_after_crash);
                 }
                 if (!Helper.AreEqual2(_HVM_shadow_multiplier, server._HVM_shadow_multiplier))
                 {
@@ -2385,21 +2385,6 @@ namespace XenAPI
                 session.JsonRpcClient.vm_set_actions_after_reboot(session.opaque_ref, _vm, _after_reboot);
             else
                 session.proxy.vm_set_actions_after_reboot(session.opaque_ref, _vm ?? "", on_normal_exit_helper.ToString(_after_reboot)).parse();
-        }
-
-        /// <summary>
-        /// Set the actions/after_crash field of the given VM.
-        /// First published in XenServer 4.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_after_crash">New value to set</param>
-        public static void set_actions_after_crash(Session session, string _vm, on_crash_behaviour _after_crash)
-        {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_actions_after_crash(session.opaque_ref, _vm, _after_crash);
-            else
-                session.proxy.vm_set_actions_after_crash(session.opaque_ref, _vm ?? "", on_crash_behaviour_helper.ToString(_after_crash)).parse();
         }
 
         /// <summary>
@@ -5037,6 +5022,36 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Sets the actions_after_crash parameter
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new value to set</param>
+        public static void set_actions_after_crash(Session session, string _vm, on_crash_behaviour _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_actions_after_crash(session.opaque_ref, _vm, _value);
+            else
+                session.proxy.vm_set_actions_after_crash(session.opaque_ref, _vm ?? "", on_crash_behaviour_helper.ToString(_value)).parse();
+        }
+
+        /// <summary>
+        /// Sets the actions_after_crash parameter
+        /// First published in XenServer 4.0.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new value to set</param>
+        public static XenRef<Task> async_set_actions_after_crash(Session session, string _vm, on_crash_behaviour _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vm_set_actions_after_crash(session.opaque_ref, _vm, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vm_set_actions_after_crash(session.opaque_ref, _vm ?? "", on_crash_behaviour_helper.ToString(_value)).parse());
+        }
+
+        /// <summary>
         /// Return a list of all the VMs known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -5394,6 +5409,7 @@ namespace XenAPI
         /// <summary>
         /// configuration parameters for the selected VCPU policy
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> VCPUs_params
         {
             get { return _VCPUs_params; }
@@ -5745,6 +5761,7 @@ namespace XenAPI
         /// <summary>
         /// HVM boot params
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> HVM_boot_params
         {
             get { return _HVM_boot_params; }
@@ -5782,6 +5799,7 @@ namespace XenAPI
         /// <summary>
         /// platform-specific configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> platform
         {
             get { return _platform; }
@@ -5818,6 +5836,7 @@ namespace XenAPI
         /// <summary>
         /// additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -5872,6 +5891,7 @@ namespace XenAPI
         /// <summary>
         /// describes the CPU flags on which the VM was last booted
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> last_boot_CPU_flags
         {
             get { return _last_boot_CPU_flags; }
@@ -5984,6 +6004,7 @@ namespace XenAPI
         /// data to be inserted into the xenstore tree (/local/domain/&lt;domid&gt;/vm-data) after the VM is created.
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> xenstore_data
         {
             get { return _xenstore_data; }
@@ -6197,6 +6218,7 @@ namespace XenAPI
         /// Human-readable information concerning this snapshot
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> snapshot_info
         {
             get { return _snapshot_info; }
@@ -6275,6 +6297,7 @@ namespace XenAPI
         /// BIOS strings
         /// First published in XenServer 5.6.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> bios_strings
         {
             get { return _bios_strings; }

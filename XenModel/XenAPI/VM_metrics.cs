@@ -659,6 +659,7 @@ namespace XenAPI
         /// <summary>
         /// The live equivalent to VM.VCPUs_params
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> VCPUs_params
         {
             get { return _VCPUs_params; }
@@ -771,6 +772,7 @@ namespace XenAPI
         /// additional configuration
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

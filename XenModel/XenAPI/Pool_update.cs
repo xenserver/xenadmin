@@ -832,6 +832,7 @@ namespace XenAPI
         /// additional configuration
         /// First published in XenServer 7.3.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

@@ -800,6 +800,7 @@ namespace XenAPI
         /// <summary>
         /// schedule of the snapshot containing 'hour', 'min', 'days'. Date/time-related information is in Local Timezone
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> schedule
         {
             get { return _schedule; }

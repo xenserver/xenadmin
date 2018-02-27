@@ -567,6 +567,7 @@ namespace XenAPI
         /// <summary>
         /// version of the OS
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> os_version
         {
             get { return _os_version; }
@@ -585,6 +586,7 @@ namespace XenAPI
         /// <summary>
         /// version of the PV drivers
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> PV_drivers_version
         {
             get { return _PV_drivers_version; }
@@ -621,6 +623,7 @@ namespace XenAPI
         /// <summary>
         /// This field exists but has no data. Use the memory and memory_internal_free RRD data-sources instead.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> memory
         {
             get { return _memory; }
@@ -639,6 +642,7 @@ namespace XenAPI
         /// <summary>
         /// This field exists but has no data.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> disks
         {
             get { return _disks; }
@@ -657,6 +661,7 @@ namespace XenAPI
         /// <summary>
         /// network configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> networks
         {
             get { return _networks; }
@@ -675,6 +680,7 @@ namespace XenAPI
         /// <summary>
         /// anything else
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other
         {
             get { return _other; }
@@ -713,6 +719,7 @@ namespace XenAPI
         /// additional configuration
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

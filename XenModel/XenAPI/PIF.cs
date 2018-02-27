@@ -2025,6 +2025,7 @@ namespace XenAPI
         /// Additional configuration
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -2200,6 +2201,7 @@ namespace XenAPI
         /// Additional configuration properties for the interface.
         /// First published in XenServer 6.5.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> properties
         {
             get { return _properties; }
