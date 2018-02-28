@@ -203,6 +203,7 @@ node("${params.BUILD_ON_NODE}") {
     stage('Create manifest') {
       GString manifestFile = "${env.WORKSPACE}\\output\\xenadmin-manifest.txt"
       File file = new File(manifestFile)
+      file.getParentFile().mkdirs()
 
       String branchInfo = (params.XC_BRANCH == 'master') ? 'trunk' : params.XC_BRANCH
       file << "@branch=${branchInfo}\n"
