@@ -415,8 +415,8 @@ namespace XenAdmin.Wizards.GenericPages
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
                             item.LoadAndWait();
                             cb.Items.Add(item);
-                            if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == item.Item.opaque_ref) ||
-                                                 (target != null && target.Item.opaque_ref == item.Item.opaque_ref)))
+                            if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
+                                                 (target != null && target.Item.opaque_ref == host.opaque_ref)))
                                 cb.Value = item;
                         }
 

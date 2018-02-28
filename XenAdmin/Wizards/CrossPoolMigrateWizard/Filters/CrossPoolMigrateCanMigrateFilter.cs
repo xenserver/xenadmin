@@ -120,7 +120,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                             if (vmCache.ContainsKey(host.opaque_ref))
                             {
                                 disableReason = vmCache[host.opaque_ref];
-                                if (!disableReason.Equals(string.Empty) && !excludedHosts.Contains(host.opaque_ref))
+                                if (!string.IsNullOrEmpty(disableReason) && !excludedHosts.Contains(host.opaque_ref))
                                 {
                                     excludedHosts.Add(host.opaque_ref);
                                 }
