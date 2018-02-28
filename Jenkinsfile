@@ -201,7 +201,7 @@ node("${params.BUILD_ON_NODE}") {
     }
 
     stage('Create manifest') {
-      GString manifestFile = "${env.WORKSPACE}\\output\\manifest"
+      GString manifestFile = "${env.WORKSPACE}\\output\\xenadmin-manifest.txt"
       File file = new File(manifestFile)
 
       String branchInfo = (params.XC_BRANCH == 'master') ? 'trunk' : params.XC_BRANCH
@@ -236,7 +236,7 @@ node("${params.BUILD_ON_NODE}") {
       file << "xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4\n"
       file << "chroot-lenny chroots.hg 1a75fa5848e8\n"
 
-      file << readFile("${env.WORKSPACE}\\scratch\\dotnet-packages-manifest").trim()
+      file << readFile("${env.WORKSPACE}\\scratch\\dotnet-packages-manifest.txt").trim()
     }
 
     stage('Run checks') {
