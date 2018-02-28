@@ -99,7 +99,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         void Connection_ConnectionStateChanged(object sender, EventArgs e)
         {
-            Program.Invoke(Program.MainWindow, RefreshRechecks);
+            Program.Invoke(this, RefreshRechecks);
         }
 
         private void RegisterEventHandlers()
@@ -160,7 +160,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected void RefreshRechecks()
         {
-            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = false;
             _worker = null;
             _worker = new BackgroundWorker();
             _worker.DoWork += worker_DoWork;
@@ -178,32 +177,11 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (!e.Cancelled)
-                OnPageUpdated();
-            progressBar1.Value = 100;
-            labelProgress.Text = string.Empty;
-
-            bool showResolveAllButton = false;
-            foreach (PreCheckGridRow row in dataGridView1.Rows)
             {
-                PreCheckHostRow hostRow = row as PreCheckHostRow;
-                //CA-65508: if the problem cannot be solved immediately there's no point in enabling the Resolve All button
-                //CA-136211: Changed the code below to enable the Resolve All button only when there is at least one problem and all the problems have solution/fix.
-                if (hostRow != null && hostRow.IsProblem)
-                {
-                    if (!hostRow.IsFixable)
-                    {
-                        showResolveAllButton = false;
-                        break;
-                    }
-                    else
-                    {
-                        showResolveAllButton = true;
-                    }
-                }
+                progressBar1.Value = 100;
+                labelProgress.Text = string.Empty;
+                OnPageUpdated();
             }
-
-            buttonResolveAll.Enabled = showResolveAllButton;
-            buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = true;
         }
 
         private void AddRowToGridView(DataGridViewRow row)
@@ -286,11 +264,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             lock (_lock)
             {
+                _worker.ReportProgress(0, null);
                 Program.Invoke(this, () =>
                                          {
                                              dataGridView1.Rows.Clear();
-                                             progressBar1.Value = 0;
                                              labelProgress.Text = Messages.PATCHING_WIZARD_RUNNING_PRECHECKS;
+                                             OnPageUpdated();
                                          });
                 Pool_patch patch = e.Argument as Pool_patch;
                 Pool_update update = e.Argument as Pool_update;
@@ -595,18 +574,39 @@ namespace XenAdmin.Wizards.PatchingWizard
         
         public override bool EnableNext()
         {
+            // CA-65508: if the problem cannot be solved immediately there's no point in
+            // enabling the Resolve All button
+            // CA-136211: Changed the code below to enable the Resolve All button only
+            // when there is at least one problem and all the problems have solution/fix.
+
             bool problemsFound = false;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            bool allFixable = true;
+
+            foreach (PreCheckGridRow row in dataGridView1.Rows)
             {
-                PreCheckHostRow preCheckHostRow = row as PreCheckHostRow;
-                if (preCheckHostRow != null && preCheckHostRow.IsProblem)
+                PreCheckHostRow hostRow = row as PreCheckHostRow;
+                if (hostRow != null && hostRow.IsProblem)
                 {
                     problemsFound = true;
-                    break;
+
+                    if (!hostRow.IsFixable)
+                    {
+                        allFixable = false;
+                        break;
+                    }
                 }
             }
 
-            UpdateControls(problemsFound);
+            bool actionInProgress = IsResolveActionInProgress;
+            bool checkInProgress = IsCheckInProgress;
+
+            buttonResolveAll.Enabled = !actionInProgress && !checkInProgress && problemsFound && allFixable;
+            buttonReCheckProblems.Enabled = !actionInProgress && !checkInProgress;
+            checkBoxViewPrecheckFailuresOnly.Enabled = !actionInProgress && !checkInProgress;
+            
+            labelProgress.Visible = actionInProgress || checkInProgress;
+            pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress && !checkInProgress;
+
             return !IsCheckInProgress && !IsResolveActionInProgress && !problemsFound;
         }
 
@@ -902,11 +902,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             action.Changed -= resolvePrecheckAction_Changed;
             action.Completed -= resolvePrecheckAction_Completed;
 
-            Program.Invoke(this,  () =>
-            {
-                UpdateControls();
-                RefreshRechecks();
-            });
+            Program.Invoke(this,  RefreshRechecks);
         }
 
         private void StartResolvePrechecksAction()
@@ -917,7 +913,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             resolvePrechecksAction.Completed += resolvePrecheckAction_Completed;
             resolvePrechecksAction.RunAsync();
             UpdateActionProgress(resolvePrechecksAction);
-            UpdateControls();
             OnPageUpdated();
         }
 
@@ -927,15 +922,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             labelProgress.Text = action == null ? string.Empty : action.Description;
         }
 
-        private void UpdateControls(bool problemsFound = false)
-        {
-            bool actionInProgress = IsResolveActionInProgress;
-            bool checkInProgress = IsCheckInProgress;
-            buttonResolveAll.Enabled = buttonReCheckProblems.Enabled = checkBoxViewPrecheckFailuresOnly.Enabled = !actionInProgress && !checkInProgress;
-            labelProgress.Visible = actionInProgress || checkInProgress || !problemsFound;
-            pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress && !checkInProgress;
-        }
-        
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             RefreshRechecks();
