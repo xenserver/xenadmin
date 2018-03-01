@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(clsConverter))]
     public enum cls
     {
         VM, Host, SR, Pool, VMPP, VMSS, PVS_proxy, VDI, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class cls_helper
     {
         public static string ToString(cls x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this cls x)
         {
             switch (x)
             {
@@ -65,6 +73,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class clsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((cls)value).StringOf());
         }
     }
 }

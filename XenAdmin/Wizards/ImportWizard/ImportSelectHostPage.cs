@@ -29,12 +29,14 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 using XenAdmin.Controls;
 using XenAdmin.Core;
+using XenAdmin.Network;
 using XenAdmin.Wizards.GenericPages;
 using XenAdmin.Wizards.ImportWizard.Filters;
 using XenAPI;
@@ -50,6 +52,8 @@ namespace XenAdmin.Wizards.ImportWizard
         private List<Xen_ConfigurationSettingData_Type> vgpuSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> hardwarePlatformSettings = new List<Xen_ConfigurationSettingData_Type>();
         private List<Xen_ConfigurationSettingData_Type> vendorDeviceSettings = new List<Xen_ConfigurationSettingData_Type>();
+
+        public event Action<IXenConnection> ConnectionSelectionChanged;
 
         #region XenTabPage overrides
 
@@ -139,6 +143,9 @@ namespace XenAdmin.Wizards.ImportWizard
             }
 
             ShowWarning(string.Join("\n", warnings));
+
+            if (ConnectionSelectionChanged != null)
+                ConnectionSelectionChanged(ChosenItem != null ? ChosenItem.Connection : null);
         }
 
         protected override DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem)
@@ -150,7 +157,7 @@ namespace XenAdmin.Wizards.ImportWizard
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
-        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item)
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<string> vmOpaqueRefs)
         {
             var filters = new List<ReasoningFilter>();
 

@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(update_after_apply_guidanceConverter))]
     public enum update_after_apply_guidance
     {
         restartHVM, restartPV, restartHost, restartXAPI, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class update_after_apply_guidance_helper
     {
         public static string ToString(update_after_apply_guidance x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this update_after_apply_guidance x)
         {
             switch (x)
             {
@@ -57,6 +65,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class update_after_apply_guidanceConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((update_after_apply_guidance)value).StringOf());
         }
     }
 }

@@ -47,6 +47,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -356,6 +360,7 @@
     <Compile Include="XenAPI\Cluster_host.cs" />
     <Compile Include="XenAPI\cluster_host_operation.cs" />
     <Compile Include="XenAPI\cluster_operation.cs" />
+    <Compile Include="XenAPI\Converters.cs" />
     <Compile Include="XenAPI\DeprecatedAttribute.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
     <Compile Include="XenAPI\Feature.cs" />
@@ -368,6 +373,8 @@
     <Compile Include="XenAPI\host_allowed_operations.cs" />
     <Compile Include="XenAPI\host_display.cs" />
     <Compile Include="XenAPI\ipv6_configuration_mode.cs" />
+    <Compile Include="XenAPI\JsonRpc.cs" />
+    <Compile Include="XenAPI\JsonRpcClient.cs" />
     <Compile Include="XenAPI\livepatch_status.cs" />
     <Compile Include="XenAPI\LVHD.cs">
       <SubType>Code</SubType>

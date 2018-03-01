@@ -69,6 +69,8 @@ namespace XenCenterLib
             get { return partialIP != null; }
         }
 
+        public IPAddress AddressIP { get { return addressIP; } }
+
         public static bool TryParse(String candidate, bool allowPartialIP, bool allowName, out ComparableAddress address)
         {
             address = null;

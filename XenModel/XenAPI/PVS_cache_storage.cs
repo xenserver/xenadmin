@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -70,6 +74,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PVS_cache_storage.
+        /// </summary>
         public override void UpdateFrom(PVS_cache_storage update)
         {
             uuid = update.uuid;
@@ -104,16 +112,35 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PVS_cache_storage from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PVS_cache_storage(Hashtable table)
+        public PVS_cache_storage(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            host = Marshalling.ParseRef<Host>(table, "host");
-            SR = Marshalling.ParseRef<SR>(table, "SR");
-            site = Marshalling.ParseRef<PVS_site>(table, "site");
-            size = Marshalling.ParseLong(table, "size");
-            VDI = Marshalling.ParseRef<VDI>(table, "VDI");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PVS_cache_storage
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("host"))
+                host = Marshalling.ParseRef<Host>(table, "host");
+            if (table.ContainsKey("SR"))
+                SR = Marshalling.ParseRef<SR>(table, "SR");
+            if (table.ContainsKey("site"))
+                site = Marshalling.ParseRef<PVS_site>(table, "site");
+            if (table.ContainsKey("size"))
+                size = Marshalling.ParseLong(table, "size");
+            if (table.ContainsKey("VDI"))
+                VDI = Marshalling.ParseRef<VDI>(table, "VDI");
         }
 
         public bool DeepEquals(PVS_cache_storage other)
@@ -144,8 +171,8 @@ namespace XenAPI
         {
             if (opaqueRef == null)
             {
-                Proxy_PVS_cache_storage p = this.ToProxy();
-                return session.proxy.pvs_cache_storage_create(session.uuid, p).parse();
+                var reference = create(session, this);
+                return reference == null ? null : reference.opaque_ref;
             }
             else
             {
@@ -160,7 +187,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static PVS_cache_storage get_record(Session session, string _pvs_cache_storage)
         {
-            return new PVS_cache_storage((Proxy_PVS_cache_storage)session.proxy.pvs_cache_storage_get_record(session.uuid, _pvs_cache_storage ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_record(session.opaque_ref, _pvs_cache_storage);
+            else
+                return new PVS_cache_storage((Proxy_PVS_cache_storage)session.proxy.pvs_cache_storage_get_record(session.opaque_ref, _pvs_cache_storage ?? "").parse());
         }
 
         /// <summary>
@@ -171,7 +201,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PVS_cache_storage> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<PVS_cache_storage>.Create(session.proxy.pvs_cache_storage_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_by_uuid(session.opaque_ref, _uuid);
+            else
+                return XenRef<PVS_cache_storage>.Create(session.proxy.pvs_cache_storage_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -182,7 +215,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<PVS_cache_storage> create(Session session, PVS_cache_storage _record)
         {
-            return XenRef<PVS_cache_storage>.Create(session.proxy.pvs_cache_storage_create(session.uuid, _record.ToProxy()).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_create(session.opaque_ref, _record);
+            else
+                return XenRef<PVS_cache_storage>.Create(session.proxy.pvs_cache_storage_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -193,7 +229,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, PVS_cache_storage _record)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_cache_storage_create(session.uuid, _record.ToProxy()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pvs_cache_storage_create(session.opaque_ref, _record);
+          else
+              return XenRef<Task>.Create(session.proxy.async_pvs_cache_storage_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -204,7 +243,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static void destroy(Session session, string _pvs_cache_storage)
         {
-            session.proxy.pvs_cache_storage_destroy(session.uuid, _pvs_cache_storage ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pvs_cache_storage_destroy(session.opaque_ref, _pvs_cache_storage);
+            else
+                session.proxy.pvs_cache_storage_destroy(session.opaque_ref, _pvs_cache_storage ?? "").parse();
         }
 
         /// <summary>
@@ -215,7 +257,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static XenRef<Task> async_destroy(Session session, string _pvs_cache_storage)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_cache_storage_destroy(session.uuid, _pvs_cache_storage ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pvs_cache_storage_destroy(session.opaque_ref, _pvs_cache_storage);
+          else
+              return XenRef<Task>.Create(session.proxy.async_pvs_cache_storage_destroy(session.opaque_ref, _pvs_cache_storage ?? "").parse());
         }
 
         /// <summary>
@@ -226,7 +271,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static string get_uuid(Session session, string _pvs_cache_storage)
         {
-            return (string)session.proxy.pvs_cache_storage_get_uuid(session.uuid, _pvs_cache_storage ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_uuid(session.opaque_ref, _pvs_cache_storage);
+            else
+                return (string)session.proxy.pvs_cache_storage_get_uuid(session.opaque_ref, _pvs_cache_storage ?? "").parse();
         }
 
         /// <summary>
@@ -237,7 +285,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static XenRef<Host> get_host(Session session, string _pvs_cache_storage)
         {
-            return XenRef<Host>.Create(session.proxy.pvs_cache_storage_get_host(session.uuid, _pvs_cache_storage ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_host(session.opaque_ref, _pvs_cache_storage);
+            else
+                return XenRef<Host>.Create(session.proxy.pvs_cache_storage_get_host(session.opaque_ref, _pvs_cache_storage ?? "").parse());
         }
 
         /// <summary>
@@ -248,7 +299,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static XenRef<SR> get_SR(Session session, string _pvs_cache_storage)
         {
-            return XenRef<SR>.Create(session.proxy.pvs_cache_storage_get_sr(session.uuid, _pvs_cache_storage ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_sr(session.opaque_ref, _pvs_cache_storage);
+            else
+                return XenRef<SR>.Create(session.proxy.pvs_cache_storage_get_sr(session.opaque_ref, _pvs_cache_storage ?? "").parse());
         }
 
         /// <summary>
@@ -259,7 +313,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static XenRef<PVS_site> get_site(Session session, string _pvs_cache_storage)
         {
-            return XenRef<PVS_site>.Create(session.proxy.pvs_cache_storage_get_site(session.uuid, _pvs_cache_storage ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_site(session.opaque_ref, _pvs_cache_storage);
+            else
+                return XenRef<PVS_site>.Create(session.proxy.pvs_cache_storage_get_site(session.opaque_ref, _pvs_cache_storage ?? "").parse());
         }
 
         /// <summary>
@@ -270,7 +327,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static long get_size(Session session, string _pvs_cache_storage)
         {
-            return long.Parse((string)session.proxy.pvs_cache_storage_get_size(session.uuid, _pvs_cache_storage ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_size(session.opaque_ref, _pvs_cache_storage);
+            else
+                return long.Parse((string)session.proxy.pvs_cache_storage_get_size(session.opaque_ref, _pvs_cache_storage ?? "").parse());
         }
 
         /// <summary>
@@ -281,7 +341,10 @@ namespace XenAPI
         /// <param name="_pvs_cache_storage">The opaque_ref of the given pvs_cache_storage</param>
         public static XenRef<VDI> get_VDI(Session session, string _pvs_cache_storage)
         {
-            return XenRef<VDI>.Create(session.proxy.pvs_cache_storage_get_vdi(session.uuid, _pvs_cache_storage ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_vdi(session.opaque_ref, _pvs_cache_storage);
+            else
+                return XenRef<VDI>.Create(session.proxy.pvs_cache_storage_get_vdi(session.opaque_ref, _pvs_cache_storage ?? "").parse());
         }
 
         /// <summary>
@@ -291,7 +354,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<PVS_cache_storage>> get_all(Session session)
         {
-            return XenRef<PVS_cache_storage>.Create(session.proxy.pvs_cache_storage_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_all(session.opaque_ref);
+            else
+                return XenRef<PVS_cache_storage>.Create(session.proxy.pvs_cache_storage_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -301,7 +367,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<PVS_cache_storage>, PVS_cache_storage> get_all_records(Session session)
         {
-            return XenRef<PVS_cache_storage>.Create<Proxy_PVS_cache_storage>(session.proxy.pvs_cache_storage_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_cache_storage_get_all_records(session.opaque_ref);
+            else
+                return XenRef<PVS_cache_storage>.Create<Proxy_PVS_cache_storage>(session.proxy.pvs_cache_storage_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -320,11 +389,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// The host on which this object defines PVS cache storage
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Host>))]
         public virtual XenRef<Host> host
         {
             get { return _host; }
@@ -338,11 +408,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<Host> _host;
+        private XenRef<Host> _host = new XenRef<Host>("OpaqueRef:NULL");
 
         /// <summary>
         /// SR providing storage for the PVS cache
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<SR>))]
         public virtual XenRef<SR> SR
         {
             get { return _SR; }
@@ -356,11 +427,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<SR> _SR;
+        private XenRef<SR> _SR = new XenRef<SR>("OpaqueRef:NULL");
 
         /// <summary>
         /// The PVS_site for which this object defines the storage
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PVS_site>))]
         public virtual XenRef<PVS_site> site
         {
             get { return _site; }
@@ -374,7 +446,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<PVS_site> _site;
+        private XenRef<PVS_site> _site = new XenRef<PVS_site>("OpaqueRef:NULL");
 
         /// <summary>
         /// The size of the cache VDI (in bytes)
@@ -392,11 +464,12 @@ namespace XenAPI
                 }
             }
         }
-        private long _size;
+        private long _size = 21474836480;
 
         /// <summary>
         /// The VDI used for caching
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VDI>))]
         public virtual XenRef<VDI> VDI
         {
             get { return _VDI; }
@@ -410,6 +483,6 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VDI> _VDI;
+        private XenRef<VDI> _VDI = new XenRef<VDI>("OpaqueRef:NULL");
     }
 }

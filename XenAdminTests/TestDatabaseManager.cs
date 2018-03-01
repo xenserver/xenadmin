@@ -158,12 +158,19 @@ namespace XenAdminTests
         private void CreateNewConnection(string dbFileName, string username, string password)
         {
             string fileName = TestResource(dbFileName);
-            Assert.True(File.Exists(fileName), String.Format("Provided filename does not exist: '{0}'. " +
-                                                             "If this is a new file, maybe the 'Copy To Ouput Directory' property has not been set", 
-                                                             fileName));
+            Assert.True(File.Exists(fileName),
+                String.Format("Provided filename does not exist: '{0}'. " +
+                "If this is a new file, maybe the 'Copy To Ouput Directory' property has not been set",
+                fileName));
 
             XenAdminConfigManager.Provider = new TestXenAdminConfigProvider();
-            IXenConnection connection = new XenConnection(fileName, dbFileName);
+            var connection = new XenConnection
+            {
+                Hostname = fileName,
+                FriendlyName = dbFileName,
+                Port = 443,
+                SaveDisconnected = true
+            };
             ServicePointManager.DefaultConnectionLimit = 20;
             ServicePointManager.ServerCertificateValidationCallback = SSL.ValidateServerCertificate;
             

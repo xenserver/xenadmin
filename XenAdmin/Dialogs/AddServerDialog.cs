@@ -44,9 +44,9 @@ namespace XenAdmin.Dialogs
 {
     public partial class AddServerDialog : XenDialogBase
     {
-        protected readonly bool _changedPass;
+        private readonly bool _changedPass;
 
-        public event EventHandler<CachePopulatedEventArgs> CachePopulated;
+        public event Action<IXenConnection> CachePopulated;
 
         /// <summary>
         /// Dialog with defaults taken from an existing IXenConnection
@@ -81,7 +81,8 @@ namespace XenAdmin.Dialogs
             ServerNameLabel.MinimumSize = new Size(biggest, ServerNameLabel.Height);
 
         }
-        protected void PopulateXenServerHosts()
+
+        private void PopulateXenServerHosts()
         {
             AutoCompleteStringCollection history = Settings.GetServerHistory();
 
@@ -100,17 +101,14 @@ namespace XenAdmin.Dialogs
             ServerNameComboBox.AutoCompleteCustomSource = historyClone;
         }
 
-        protected virtual void OnCachePopulated(CachePopulatedEventArgs e)
+        private void OnCachePopulated(IXenConnection conn)
         {
-            EventHandler<CachePopulatedEventArgs> handler = CachePopulated;
-
+            var handler = CachePopulated;
             if (handler != null)
-            {
-                handler(this, e);
-            }
+                handler(conn);
         }
 
-        protected void AddServerDialog_Load(object sender, EventArgs e)
+        private void AddServerDialog_Load(object sender, EventArgs e)
         {
             UpdateText();
             CenterToParent();
@@ -128,7 +126,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        protected void UpdateText()
+        private void UpdateText()
         {
             if (connection == null)
             {
@@ -166,7 +164,7 @@ namespace XenAdmin.Dialogs
             }
         }
 
-        public virtual void AddButton_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)
         {
             string hostnameAndPort = ServerNameComboBox.Text.Trim();
             string username = UsernameTextBox.Text.Trim();
@@ -197,15 +195,12 @@ namespace XenAdmin.Dialogs
             Close();
         }
 
-        /// <param name="connection">May be null, in which case a new connection will be created</param>
-        protected void ConnectToServer(IXenConnection conn, string hostname, int port, string username, string password, string version)
+        private void ConnectToServer(IXenConnection conn, string hostname, int port, string username, string password, string version)
         {
             if (conn == null)
             {
-                XenConnection connection = new XenConnection();
-                connection.CachePopulated += conn_CachePopulated;
-                connection.fromDialog = true;
-                conn = connection;
+                conn = new XenConnection {fromDialog = true};
+                conn.CachePopulated += conn_CachePopulated;
             }
             else if (!_changedPass)
             {
@@ -225,9 +220,9 @@ namespace XenAdmin.Dialogs
 
         private void conn_CachePopulated(object sender, EventArgs e)
         {
-            IXenConnection connection = (IXenConnection)sender;
-            connection.CachePopulated -= conn_CachePopulated;
-            OnCachePopulated(new CachePopulatedEventArgs(connection));
+            IXenConnection conn = (IXenConnection)sender;
+            conn.CachePopulated -= conn_CachePopulated;
+            OnCachePopulated(conn);
         }
 
         private void CancelButton2_Click(object sender, EventArgs e)
@@ -240,12 +235,12 @@ namespace XenAdmin.Dialogs
             UpdateButtons();
         }
 
-        protected void UpdateButtons()
+        private void UpdateButtons()
         {
             AddButton.Enabled = OKButtonEnabled();
         }
 
-        protected virtual bool OKButtonEnabled()
+        private bool OKButtonEnabled()
         {
             return ServerNameComboBox.Text.Trim().Length > 0 && UsernameTextBox.Text.Trim().Length > 0;
         }
@@ -343,25 +338,6 @@ namespace XenAdmin.Dialogs
         {
             if (connection != null)
                 XenConnectionUI.connectionDialogs.Remove(connection);
-        }
-    }
-
-    public class CachePopulatedEventArgs : EventArgs
-    {
-        private readonly IXenConnection _connection;
-
-        public CachePopulatedEventArgs(IXenConnection connection)
-        {
-            Util.ThrowIfParameterNull(connection, "connection");
-            _connection = connection;
-        }
-
-        public IXenConnection Connection
-        {
-            get
-            {
-                return _connection;
-            }
         }
     }
 }

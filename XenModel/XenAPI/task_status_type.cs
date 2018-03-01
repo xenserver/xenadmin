@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(task_status_typeConverter))]
     public enum task_status_type
     {
         pending, success, failure, cancelling, cancelled, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class task_status_type_helper
     {
         public static string ToString(task_status_type x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this task_status_type x)
         {
             switch (x)
             {
@@ -59,6 +67,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class task_status_typeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((task_status_type)value).StringOf());
         }
     }
 }

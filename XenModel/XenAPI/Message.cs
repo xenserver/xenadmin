@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -234,6 +238,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Message.
+        /// </summary>
         public override void UpdateFrom(Message update)
         {
             uuid = update.uuid;
@@ -271,17 +279,37 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Message from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Message(Hashtable table)
+        public Message(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name = Marshalling.ParseString(table, "name");
-            priority = Marshalling.ParseLong(table, "priority");
-            cls = (cls)Helper.EnumParseDefault(typeof(cls), Marshalling.ParseString(table, "cls"));
-            obj_uuid = Marshalling.ParseString(table, "obj_uuid");
-            timestamp = Marshalling.ParseDateTime(table, "timestamp");
-            body = Marshalling.ParseString(table, "body");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Message
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("name"))
+                name = Marshalling.ParseString(table, "name");
+            if (table.ContainsKey("priority"))
+                priority = Marshalling.ParseLong(table, "priority");
+            if (table.ContainsKey("cls"))
+                cls = (cls)Helper.EnumParseDefault(typeof(cls), Marshalling.ParseString(table, "cls"));
+            if (table.ContainsKey("obj_uuid"))
+                obj_uuid = Marshalling.ParseString(table, "obj_uuid");
+            if (table.ContainsKey("timestamp"))
+                timestamp = Marshalling.ParseDateTime(table, "timestamp");
+            if (table.ContainsKey("body"))
+                body = Marshalling.ParseString(table, "body");
         }
 
         public bool DeepEquals(Message other)
@@ -333,7 +361,10 @@ namespace XenAPI
         /// <param name="_body">The body of the message</param>
         public static XenRef<Message> create(Session session, string _name, long _priority, cls _cls, string _obj_uuid, string _body)
         {
-            return XenRef<Message>.Create(session.proxy.message_create(session.uuid, _name ?? "", _priority.ToString(), cls_helper.ToString(_cls), _obj_uuid ?? "", _body ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.message_create(session.opaque_ref, _name, _priority, _cls, _obj_uuid, _body);
+            else
+                return XenRef<Message>.Create(session.proxy.message_create(session.opaque_ref, _name ?? "", _priority.ToString(), cls_helper.ToString(_cls), _obj_uuid ?? "", _body ?? "").parse());
         }
 
         /// <summary>
@@ -344,7 +375,10 @@ namespace XenAPI
         /// <param name="_message">The opaque_ref of the given message</param>
         public static void destroy(Session session, string _message)
         {
-            session.proxy.message_destroy(session.uuid, _message ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.message_destroy(session.opaque_ref, _message);
+            else
+                session.proxy.message_destroy(session.opaque_ref, _message ?? "").parse();
         }
 
         /// <summary>
@@ -357,7 +391,10 @@ namespace XenAPI
         /// <param name="_since">The cutoff time</param>
         public static Dictionary<XenRef<Message>, Message> get(Session session, cls _cls, string _obj_uuid, DateTime _since)
         {
-            return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get(session.uuid, cls_helper.ToString(_cls), _obj_uuid ?? "", _since).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.message_get(session.opaque_ref, _cls, _obj_uuid, _since);
+            else
+                return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get(session.opaque_ref, cls_helper.ToString(_cls), _obj_uuid ?? "", _since).parse());
         }
 
         /// <summary>
@@ -367,7 +404,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Message>> get_all(Session session)
         {
-            return XenRef<Message>.Create(session.proxy.message_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.message_get_all(session.opaque_ref);
+            else
+                return XenRef<Message>.Create(session.proxy.message_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -378,7 +418,10 @@ namespace XenAPI
         /// <param name="_since">The cutoff time</param>
         public static Dictionary<XenRef<Message>, Message> get_since(Session session, DateTime _since)
         {
-            return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get_since(session.uuid, _since).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.message_get_since(session.opaque_ref, _since);
+            else
+                return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get_since(session.opaque_ref, _since).parse());
         }
 
         /// <summary>
@@ -389,7 +432,10 @@ namespace XenAPI
         /// <param name="_message">The opaque_ref of the given message</param>
         public static Message get_record(Session session, string _message)
         {
-            return new Message((Proxy_Message)session.proxy.message_get_record(session.uuid, _message ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.message_get_record(session.opaque_ref, _message);
+            else
+                return new Message((Proxy_Message)session.proxy.message_get_record(session.opaque_ref, _message ?? "").parse());
         }
 
         /// <summary>
@@ -400,7 +446,10 @@ namespace XenAPI
         /// <param name="_uuid">The uuid of the message</param>
         public static XenRef<Message> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Message>.Create(session.proxy.message_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.message_get_by_uuid(session.opaque_ref, _uuid);
+            else
+                return XenRef<Message>.Create(session.proxy.message_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -410,7 +459,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Message>, Message> get_all_records(Session session)
         {
-            return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.message_get_all_records(session.opaque_ref);
+            else
+                return XenRef<Message>.Create<Proxy_Message>(session.proxy.message_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -429,7 +481,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// The name of the message
@@ -447,7 +499,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name;
+        private string _name = "";
 
         /// <summary>
         /// The message priority, 0 being low priority
@@ -470,6 +522,7 @@ namespace XenAPI
         /// <summary>
         /// The class of the object this message is associated with
         /// </summary>
+        [JsonConverter(typeof(clsConverter))]
         public virtual cls cls
         {
             get { return _cls; }
@@ -501,11 +554,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _obj_uuid;
+        private string _obj_uuid = "";
 
         /// <summary>
         /// The time at which the message was created
         /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime timestamp
         {
             get { return _timestamp; }
@@ -537,6 +591,6 @@ namespace XenAPI
                 }
             }
         }
-        private string _body;
+        private string _body = "";
     }
 }

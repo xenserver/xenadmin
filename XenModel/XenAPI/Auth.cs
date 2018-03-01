@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -55,6 +59,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Auth.
+        /// </summary>
         public override void UpdateFrom(Auth update)
         {
         }
@@ -71,9 +79,22 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Auth from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Auth(Hashtable table)
+        public Auth(Hashtable table) : this()
+        {
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Auth
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
         {
         }
 
@@ -116,7 +137,10 @@ namespace XenAPI
         /// <param name="_subject_name">The human-readable subject_name, such as a username or a groupname</param>
         public static string get_subject_identifier(Session session, string _subject_name)
         {
-            return (string)session.proxy.auth_get_subject_identifier(session.uuid, _subject_name ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.auth_get_subject_identifier(session.opaque_ref, _subject_name);
+            else
+                return (string)session.proxy.auth_get_subject_identifier(session.opaque_ref, _subject_name ?? "").parse();
         }
 
         /// <summary>
@@ -127,7 +151,10 @@ namespace XenAPI
         /// <param name="_subject_identifier">A string containing the subject_identifier, unique in the external directory service</param>
         public static Dictionary<string, string> get_subject_information_from_identifier(Session session, string _subject_identifier)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.auth_get_subject_information_from_identifier(session.uuid, _subject_identifier ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.auth_get_subject_information_from_identifier(session.opaque_ref, _subject_identifier);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.auth_get_subject_information_from_identifier(session.opaque_ref, _subject_identifier ?? "").parse());
         }
 
         /// <summary>
@@ -138,7 +165,10 @@ namespace XenAPI
         /// <param name="_subject_identifier">A string containing the subject_identifier, unique in the external directory service</param>
         public static string[] get_group_membership(Session session, string _subject_identifier)
         {
-            return (string [])session.proxy.auth_get_group_membership(session.uuid, _subject_identifier ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.auth_get_group_membership(session.opaque_ref, _subject_identifier);
+            else
+                return (string [])session.proxy.auth_get_group_membership(session.opaque_ref, _subject_identifier ?? "").parse();
         }
     }
 }

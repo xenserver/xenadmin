@@ -154,6 +154,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 PatchingWizard_AutomatedUpdatesPage.WizardMode = wizardMode;
                 PatchingWizard_AutomatedUpdatesPage.UpdateAlert = alertPatch ?? fileFromDiskAlertPatch;
+                PatchingWizard_AutomatedUpdatesPage.PatchFromDisk = PatchingWizard_SelectPatchPage.PatchFromDisk;
 
                 PatchingWizard_PatchingPage.SelectedUpdateType = updateType;
                 PatchingWizard_PatchingPage.Patch = existPatch;
@@ -337,15 +338,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             List<string> listOfDownloadedFiles = new List<string>();
 
-            if (PatchingWizard_SelectPatchPage.WizardMode != WizardMode.SingleUpdate) // AutomatedUpdates or NewVersion
-            {
-                listOfDownloadedFiles.AddRange(PatchingWizard_AutomatedUpdatesPage.AllDownloadedPatches.Values);
-            }
-            else
-            {
-                listOfDownloadedFiles.AddRange(PatchingWizard_UploadPage.AllDownloadedPatches.Values);
-                listOfDownloadedFiles.AddRange(PatchingWizard_SelectPatchPage.UnzippedUpdateFiles);
-            }
+            listOfDownloadedFiles.AddRange(PatchingWizard_AutomatedUpdatesPage.AllDownloadedPatches.Values); // AutomatedUpdates or NewVersion
+            listOfDownloadedFiles.AddRange(PatchingWizard_UploadPage.AllDownloadedPatches.Values); //SingleUpdate
+            listOfDownloadedFiles.AddRange(PatchingWizard_SelectPatchPage.UnzippedUpdateFiles);
 
             foreach (string downloadedPatch in listOfDownloadedFiles)
             {

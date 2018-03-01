@@ -484,7 +484,7 @@ namespace XenOvfTransport
         {
             try
             {
-                string host = XenAPI.Session.get_this_host(xenSession, xenSession.uuid);
+                string host = XenAPI.Session.get_this_host(xenSession, xenSession.opaque_ref);
 
                 // Transfer VM for VDI <uuid>
                 Dictionary<string, string> args = new Dictionary<string, string>();
@@ -515,7 +515,7 @@ namespace XenOvfTransport
         {
             try
             {
-                string host = XenAPI.Session.get_this_host(xenSession, xenSession.uuid);
+                string host = XenAPI.Session.get_this_host(xenSession, xenSession.opaque_ref);
                 Dictionary<string, string> args = new Dictionary<string, string>();
 
                 string handle;

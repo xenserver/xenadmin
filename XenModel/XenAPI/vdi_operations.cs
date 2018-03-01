@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vdi_operationsConverter))]
     public enum vdi_operations
     {
         clone, copy, resize, resize_online, snapshot, mirror, destroy, forget, update, force_unlock, generate_config, enable_cbt, disable_cbt, data_destroy, list_changed_blocks, set_on_boot, blocked, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vdi_operations_helper
     {
         public static string ToString(vdi_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vdi_operations x)
         {
             switch (x)
             {
@@ -83,6 +91,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vdi_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vdi_operations)value).StringOf());
         }
     }
 }

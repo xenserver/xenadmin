@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vdi_typeConverter))]
     public enum vdi_type
     {
         system, user, ephemeral, suspend, crashdump, ha_statefile, metadata, redo_log, rrd, pvs_cache, cbt_metadata, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vdi_type_helper
     {
         public static string ToString(vdi_type x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vdi_type x)
         {
             switch (x)
             {
@@ -71,6 +79,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vdi_typeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vdi_type)value).StringOf());
         }
     }
 }

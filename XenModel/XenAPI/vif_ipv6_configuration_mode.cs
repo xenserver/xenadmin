@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vif_ipv6_configuration_modeConverter))]
     public enum vif_ipv6_configuration_mode
     {
         None, Static, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vif_ipv6_configuration_mode_helper
     {
         public static string ToString(vif_ipv6_configuration_mode x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vif_ipv6_configuration_mode x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vif_ipv6_configuration_modeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vif_ipv6_configuration_mode)value).StringOf());
         }
     }
 }

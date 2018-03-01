@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(host_allowed_operationsConverter))]
     public enum host_allowed_operations
     {
         provision, evacuate, shutdown, reboot, power_on, vm_start, vm_resume, vm_migrate, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class host_allowed_operations_helper
     {
         public static string ToString(host_allowed_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this host_allowed_operations x)
         {
             switch (x)
             {
@@ -65,6 +73,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class host_allowed_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((host_allowed_operations)value).StringOf());
         }
     }
 }

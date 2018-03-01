@@ -65,16 +65,6 @@ namespace XenAdmin.Core
 
 
         /// <summary>
-        /// Determine if the given URL represents a simulator db proxy
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public static bool DbProxyIsSimulatorUrl(string url)
-        {
-            return url.EndsWith(".db") || url.EndsWith(".xml") || url.EndsWith(".tmp");
-        }
-
-        /// <summary>
         /// Return the given host's product version, or the pool master's product version if
         /// the host does not have one, or null if none can be found.
         /// </summary>

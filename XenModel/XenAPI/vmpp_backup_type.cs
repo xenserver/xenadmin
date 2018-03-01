@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vmpp_backup_typeConverter))]
     public enum vmpp_backup_type
     {
         snapshot, checkpoint, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vmpp_backup_type_helper
     {
         public static string ToString(vmpp_backup_type x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vmpp_backup_type x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vmpp_backup_typeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vmpp_backup_type)value).StringOf());
         }
     }
 }

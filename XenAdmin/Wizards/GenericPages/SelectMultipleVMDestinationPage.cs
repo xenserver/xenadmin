@@ -360,7 +360,7 @@ namespace XenAdmin.Wizards.GenericPages
 
 	    private bool updatingHomeServerList;
 
-        private void PopulateDataGridView(List<ReasoningFilter> homeserverFilters)
+        private void PopulateDataGridView(IEnableableXenObjectComboBoxItem selectedItem)
         {
             Program.AssertOnEventThread();
 
@@ -383,6 +383,9 @@ namespace XenAdmin.Wizards.GenericPages
                 {
                     var tb = new DataGridViewTextBoxCell {Value = kvp.Value.VmNameLabel, Tag = kvp.Key};
                     var cb = new DataGridViewEnableableComboBoxCell{FlatStyle = FlatStyle.Flat};
+                    List<ReasoningFilter> homeserverFilters = CreateTargetServerFilterList(
+                                                                selectedItem,
+                                                                new List<String> { kvp.Key });
 
                     if (Connection != null)
                     {
@@ -407,8 +410,8 @@ namespace XenAdmin.Wizards.GenericPages
                             item.LoadAndWait();
                             cb.Items.Add(item);
 
-                            if ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
-                                (target != null && target.Item.opaque_ref == host.opaque_ref))
+                            if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
+                                (target != null && target.Item.opaque_ref == host.opaque_ref)))
                                 cb.Value = item;
                         }
                     }
@@ -570,7 +573,7 @@ namespace XenAdmin.Wizards.GenericPages
 			    {
 			        Cursor.Current = Cursors.WaitCursor;
 			        ChosenItem = item == null ? null : item.Item;
-			        Program.Invoke(Program.MainWindow, ()=> PopulateDataGridView(CreateTargetServerFilterList(item)));
+			        Program.Invoke(Program.MainWindow, ()=> PopulateDataGridView(item));
 			    }
 			    finally
 			    {
@@ -585,8 +588,9 @@ namespace XenAdmin.Wizards.GenericPages
         /// Create a set of filters for the homeserver combo box selection
         /// </summary>
         /// <param name="item">selected item from the host combobox</param>
+        /// <param name="vmOpaqueRefs">OpaqRefs of VMs which need to apply those filters</param>
         /// <returns></returns>
-        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item)
+        protected virtual List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<string> vmOpaqueRefs)
         {
             return new List<ReasoningFilter>();
         }

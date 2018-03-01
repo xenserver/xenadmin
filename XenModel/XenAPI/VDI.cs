@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -77,8 +81,7 @@ namespace XenAPI
             XenRef<Pool> metadata_of_pool,
             bool metadata_latest,
             bool is_tools_iso,
-            bool cbt_enabled,
-            XenRef<Host> activated_on)
+            bool cbt_enabled)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -112,7 +115,6 @@ namespace XenAPI
             this.metadata_latest = metadata_latest;
             this.is_tools_iso = is_tools_iso;
             this.cbt_enabled = cbt_enabled;
-            this.activated_on = activated_on;
         }
 
         /// <summary>
@@ -124,6 +126,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given VDI.
+        /// </summary>
         public override void UpdateFrom(VDI update)
         {
             uuid = update.uuid;
@@ -158,7 +164,6 @@ namespace XenAPI
             metadata_latest = update.metadata_latest;
             is_tools_iso = update.is_tools_iso;
             cbt_enabled = update.cbt_enabled;
-            activated_on = update.activated_on;
         }
 
         internal void UpdateFromProxy(Proxy_VDI proxy)
@@ -195,7 +200,6 @@ namespace XenAPI
             metadata_latest = (bool)proxy.metadata_latest;
             is_tools_iso = (bool)proxy.is_tools_iso;
             cbt_enabled = (bool)proxy.cbt_enabled;
-            activated_on = proxy.activated_on == null ? null : XenRef<Host>.Create(proxy.activated_on);
         }
 
         public Proxy_VDI ToProxy()
@@ -233,49 +237,92 @@ namespace XenAPI
             result_.metadata_latest = metadata_latest;
             result_.is_tools_iso = is_tools_iso;
             result_.cbt_enabled = cbt_enabled;
-            result_.activated_on = activated_on ?? "";
             return result_;
         }
 
         /// <summary>
         /// Creates a new VDI from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public VDI(Hashtable table)
+        public VDI(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            allowed_operations = Helper.StringArrayToEnumList<vdi_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_vdi_operations(Marshalling.ParseHashTable(table, "current_operations"));
-            SR = Marshalling.ParseRef<SR>(table, "SR");
-            VBDs = Marshalling.ParseSetRef<VBD>(table, "VBDs");
-            crash_dumps = Marshalling.ParseSetRef<Crashdump>(table, "crash_dumps");
-            virtual_size = Marshalling.ParseLong(table, "virtual_size");
-            physical_utilisation = Marshalling.ParseLong(table, "physical_utilisation");
-            type = (vdi_type)Helper.EnumParseDefault(typeof(vdi_type), Marshalling.ParseString(table, "type"));
-            sharable = Marshalling.ParseBool(table, "sharable");
-            read_only = Marshalling.ParseBool(table, "read_only");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
-            storage_lock = Marshalling.ParseBool(table, "storage_lock");
-            location = Marshalling.ParseString(table, "location");
-            managed = Marshalling.ParseBool(table, "managed");
-            missing = Marshalling.ParseBool(table, "missing");
-            parent = Marshalling.ParseRef<VDI>(table, "parent");
-            xenstore_data = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
-            sm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "sm_config"));
-            is_a_snapshot = Marshalling.ParseBool(table, "is_a_snapshot");
-            snapshot_of = Marshalling.ParseRef<VDI>(table, "snapshot_of");
-            snapshots = Marshalling.ParseSetRef<VDI>(table, "snapshots");
-            snapshot_time = Marshalling.ParseDateTime(table, "snapshot_time");
-            tags = Marshalling.ParseStringArray(table, "tags");
-            allow_caching = Marshalling.ParseBool(table, "allow_caching");
-            on_boot = (on_boot)Helper.EnumParseDefault(typeof(on_boot), Marshalling.ParseString(table, "on_boot"));
-            metadata_of_pool = Marshalling.ParseRef<Pool>(table, "metadata_of_pool");
-            metadata_latest = Marshalling.ParseBool(table, "metadata_latest");
-            is_tools_iso = Marshalling.ParseBool(table, "is_tools_iso");
-            cbt_enabled = Marshalling.ParseBool(table, "cbt_enabled");
-            activated_on = Marshalling.ParseRef<Host>(table, "activated_on");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this VDI
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("name_label"))
+                name_label = Marshalling.ParseString(table, "name_label");
+            if (table.ContainsKey("name_description"))
+                name_description = Marshalling.ParseString(table, "name_description");
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<vdi_operations>(Marshalling.ParseStringArray(table, "allowed_operations"));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_vdi_operations(Marshalling.ParseHashTable(table, "current_operations"));
+            if (table.ContainsKey("SR"))
+                SR = Marshalling.ParseRef<SR>(table, "SR");
+            if (table.ContainsKey("VBDs"))
+                VBDs = Marshalling.ParseSetRef<VBD>(table, "VBDs");
+            if (table.ContainsKey("crash_dumps"))
+                crash_dumps = Marshalling.ParseSetRef<Crashdump>(table, "crash_dumps");
+            if (table.ContainsKey("virtual_size"))
+                virtual_size = Marshalling.ParseLong(table, "virtual_size");
+            if (table.ContainsKey("physical_utilisation"))
+                physical_utilisation = Marshalling.ParseLong(table, "physical_utilisation");
+            if (table.ContainsKey("type"))
+                type = (vdi_type)Helper.EnumParseDefault(typeof(vdi_type), Marshalling.ParseString(table, "type"));
+            if (table.ContainsKey("sharable"))
+                sharable = Marshalling.ParseBool(table, "sharable");
+            if (table.ContainsKey("read_only"))
+                read_only = Marshalling.ParseBool(table, "read_only");
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            if (table.ContainsKey("storage_lock"))
+                storage_lock = Marshalling.ParseBool(table, "storage_lock");
+            if (table.ContainsKey("location"))
+                location = Marshalling.ParseString(table, "location");
+            if (table.ContainsKey("managed"))
+                managed = Marshalling.ParseBool(table, "managed");
+            if (table.ContainsKey("missing"))
+                missing = Marshalling.ParseBool(table, "missing");
+            if (table.ContainsKey("parent"))
+                parent = Marshalling.ParseRef<VDI>(table, "parent");
+            if (table.ContainsKey("xenstore_data"))
+                xenstore_data = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "xenstore_data"));
+            if (table.ContainsKey("sm_config"))
+                sm_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "sm_config"));
+            if (table.ContainsKey("is_a_snapshot"))
+                is_a_snapshot = Marshalling.ParseBool(table, "is_a_snapshot");
+            if (table.ContainsKey("snapshot_of"))
+                snapshot_of = Marshalling.ParseRef<VDI>(table, "snapshot_of");
+            if (table.ContainsKey("snapshots"))
+                snapshots = Marshalling.ParseSetRef<VDI>(table, "snapshots");
+            if (table.ContainsKey("snapshot_time"))
+                snapshot_time = Marshalling.ParseDateTime(table, "snapshot_time");
+            if (table.ContainsKey("tags"))
+                tags = Marshalling.ParseStringArray(table, "tags");
+            if (table.ContainsKey("allow_caching"))
+                allow_caching = Marshalling.ParseBool(table, "allow_caching");
+            if (table.ContainsKey("on_boot"))
+                on_boot = (on_boot)Helper.EnumParseDefault(typeof(on_boot), Marshalling.ParseString(table, "on_boot"));
+            if (table.ContainsKey("metadata_of_pool"))
+                metadata_of_pool = Marshalling.ParseRef<Pool>(table, "metadata_of_pool");
+            if (table.ContainsKey("metadata_latest"))
+                metadata_latest = Marshalling.ParseBool(table, "metadata_latest");
+            if (table.ContainsKey("is_tools_iso"))
+                is_tools_iso = Marshalling.ParseBool(table, "is_tools_iso");
+            if (table.ContainsKey("cbt_enabled"))
+                cbt_enabled = Marshalling.ParseBool(table, "cbt_enabled");
         }
 
         public bool DeepEquals(VDI other, bool ignoreCurrentOperations)
@@ -318,8 +365,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._metadata_of_pool, other._metadata_of_pool) &&
                 Helper.AreEqual2(this._metadata_latest, other._metadata_latest) &&
                 Helper.AreEqual2(this._is_tools_iso, other._is_tools_iso) &&
-                Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled) &&
-                Helper.AreEqual2(this._activated_on, other._activated_on);
+                Helper.AreEqual2(this._cbt_enabled, other._cbt_enabled);
         }
 
         internal static List<VDI> ProxyArrayToObjectList(Proxy_VDI[] input)
@@ -335,8 +381,8 @@ namespace XenAPI
         {
             if (opaqueRef == null)
             {
-                Proxy_VDI p = this.ToProxy();
-                return session.proxy.vdi_create(session.uuid, p).parse();
+                var reference = create(session, this);
+                return reference == null ? null : reference.opaque_ref;
             }
             else
             {
@@ -388,7 +434,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static VDI get_record(Session session, string _vdi)
         {
-            return new VDI((Proxy_VDI)session.proxy.vdi_get_record(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_record(session.opaque_ref, _vdi);
+            else
+                return new VDI((Proxy_VDI)session.proxy.vdi_get_record(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -399,7 +448,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<VDI> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_by_uuid(session.opaque_ref, _uuid);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -410,7 +462,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<VDI> create(Session session, VDI _record)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_create(session.uuid, _record.ToProxy()).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_create(session.opaque_ref, _record);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -421,7 +476,10 @@ namespace XenAPI
         /// <param name="_record">All constructor arguments</param>
         public static XenRef<Task> async_create(Session session, VDI _record)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_create(session.uuid, _record.ToProxy()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_create(session.opaque_ref, _record);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -432,7 +490,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void destroy(Session session, string _vdi)
         {
-            session.proxy.vdi_destroy(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_destroy(session.opaque_ref, _vdi);
+            else
+                session.proxy.vdi_destroy(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -443,7 +504,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_destroy(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_destroy(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_destroy(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_destroy(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -454,7 +518,10 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<VDI>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_by_name_label(session.uuid, _label ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_by_name_label(session.opaque_ref, _label);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_get_by_name_label(session.opaque_ref, _label ?? "").parse());
         }
 
         /// <summary>
@@ -465,7 +532,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string get_uuid(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_get_uuid(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_uuid(session.opaque_ref, _vdi);
+            else
+                return (string)session.proxy.vdi_get_uuid(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -476,7 +546,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string get_name_label(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_get_name_label(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_name_label(session.opaque_ref, _vdi);
+            else
+                return (string)session.proxy.vdi_get_name_label(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -487,7 +560,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string get_name_description(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_get_name_description(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_name_description(session.opaque_ref, _vdi);
+            else
+                return (string)session.proxy.vdi_get_name_description(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -498,7 +574,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<vdi_operations> get_allowed_operations(Session session, string _vdi)
         {
-            return Helper.StringArrayToEnumList<vdi_operations>(session.proxy.vdi_get_allowed_operations(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_allowed_operations(session.opaque_ref, _vdi);
+            else
+                return Helper.StringArrayToEnumList<vdi_operations>(session.proxy.vdi_get_allowed_operations(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -509,7 +588,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static Dictionary<string, vdi_operations> get_current_operations(Session session, string _vdi)
         {
-            return Maps.convert_from_proxy_string_vdi_operations(session.proxy.vdi_get_current_operations(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_current_operations(session.opaque_ref, _vdi);
+            else
+                return Maps.convert_from_proxy_string_vdi_operations(session.proxy.vdi_get_current_operations(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -520,7 +602,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<SR> get_SR(Session session, string _vdi)
         {
-            return XenRef<SR>.Create(session.proxy.vdi_get_sr(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_sr(session.opaque_ref, _vdi);
+            else
+                return XenRef<SR>.Create(session.proxy.vdi_get_sr(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -531,7 +616,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<XenRef<VBD>> get_VBDs(Session session, string _vdi)
         {
-            return XenRef<VBD>.Create(session.proxy.vdi_get_vbds(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_vbds(session.opaque_ref, _vdi);
+            else
+                return XenRef<VBD>.Create(session.proxy.vdi_get_vbds(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -542,7 +630,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<XenRef<Crashdump>> get_crash_dumps(Session session, string _vdi)
         {
-            return XenRef<Crashdump>.Create(session.proxy.vdi_get_crash_dumps(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_crash_dumps(session.opaque_ref, _vdi);
+            else
+                return XenRef<Crashdump>.Create(session.proxy.vdi_get_crash_dumps(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -553,7 +644,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static long get_virtual_size(Session session, string _vdi)
         {
-            return long.Parse((string)session.proxy.vdi_get_virtual_size(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_virtual_size(session.opaque_ref, _vdi);
+            else
+                return long.Parse((string)session.proxy.vdi_get_virtual_size(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -564,7 +658,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static long get_physical_utilisation(Session session, string _vdi)
         {
-            return long.Parse((string)session.proxy.vdi_get_physical_utilisation(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_physical_utilisation(session.opaque_ref, _vdi);
+            else
+                return long.Parse((string)session.proxy.vdi_get_physical_utilisation(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -575,7 +672,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static vdi_type get_type(Session session, string _vdi)
         {
-            return (vdi_type)Helper.EnumParseDefault(typeof(vdi_type), (string)session.proxy.vdi_get_type(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_type(session.opaque_ref, _vdi);
+            else
+                return (vdi_type)Helper.EnumParseDefault(typeof(vdi_type), (string)session.proxy.vdi_get_type(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -586,7 +686,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_sharable(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_sharable(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_sharable(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_sharable(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -597,7 +700,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_read_only(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_read_only(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_read_only(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_read_only(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -608,7 +714,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static Dictionary<string, string> get_other_config(Session session, string _vdi)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_other_config(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_other_config(session.opaque_ref, _vdi);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_other_config(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -619,7 +728,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_storage_lock(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_storage_lock(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_storage_lock(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_storage_lock(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -630,7 +742,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string get_location(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_get_location(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_location(session.opaque_ref, _vdi);
+            else
+                return (string)session.proxy.vdi_get_location(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -641,7 +756,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_managed(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_managed(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_managed(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_managed(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -652,7 +770,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_missing(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_missing(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_missing(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_missing(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -665,7 +786,10 @@ namespace XenAPI
         [Deprecated("XenServer 7.1")]
         public static XenRef<VDI> get_parent(Session session, string _vdi)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_parent(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_parent(session.opaque_ref, _vdi);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_get_parent(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -676,7 +800,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static Dictionary<string, string> get_xenstore_data(Session session, string _vdi)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_xenstore_data(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_xenstore_data(session.opaque_ref, _vdi);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_xenstore_data(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -687,7 +814,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static Dictionary<string, string> get_sm_config(Session session, string _vdi)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_sm_config(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_sm_config(session.opaque_ref, _vdi);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.vdi_get_sm_config(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -698,7 +828,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_is_a_snapshot(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_is_a_snapshot(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_is_a_snapshot(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_is_a_snapshot(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -709,7 +842,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<VDI> get_snapshot_of(Session session, string _vdi)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_snapshot_of(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_snapshot_of(session.opaque_ref, _vdi);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_get_snapshot_of(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -720,7 +856,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<XenRef<VDI>> get_snapshots(Session session, string _vdi)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_snapshots(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_snapshots(session.opaque_ref, _vdi);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_get_snapshots(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -731,7 +870,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static DateTime get_snapshot_time(Session session, string _vdi)
         {
-            return session.proxy.vdi_get_snapshot_time(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_snapshot_time(session.opaque_ref, _vdi);
+            else
+                return session.proxy.vdi_get_snapshot_time(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -742,7 +884,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string[] get_tags(Session session, string _vdi)
         {
-            return (string [])session.proxy.vdi_get_tags(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_tags(session.opaque_ref, _vdi);
+            else
+                return (string [])session.proxy.vdi_get_tags(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -753,7 +898,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_allow_caching(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_allow_caching(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_allow_caching(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_allow_caching(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -764,7 +912,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static on_boot get_on_boot(Session session, string _vdi)
         {
-            return (on_boot)Helper.EnumParseDefault(typeof(on_boot), (string)session.proxy.vdi_get_on_boot(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_on_boot(session.opaque_ref, _vdi);
+            else
+                return (on_boot)Helper.EnumParseDefault(typeof(on_boot), (string)session.proxy.vdi_get_on_boot(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -775,7 +926,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Pool> get_metadata_of_pool(Session session, string _vdi)
         {
-            return XenRef<Pool>.Create(session.proxy.vdi_get_metadata_of_pool(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_metadata_of_pool(session.opaque_ref, _vdi);
+            else
+                return XenRef<Pool>.Create(session.proxy.vdi_get_metadata_of_pool(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -786,7 +940,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_metadata_latest(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_metadata_latest(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_metadata_latest(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_metadata_latest(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -797,7 +954,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_is_tools_iso(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_is_tools_iso(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_is_tools_iso(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_is_tools_iso(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -808,18 +968,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static bool get_cbt_enabled(Session session, string _vdi)
         {
-            return (bool)session.proxy.vdi_get_cbt_enabled(session.uuid, _vdi ?? "").parse();
-        }
-
-        /// <summary>
-        /// Get the activated_on field of the given VDI.
-        /// Experimental. First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vdi">The opaque_ref of the given vdi</param>
-        public static XenRef<Host> get_activated_on(Session session, string _vdi)
-        {
-            return XenRef<Host>.Create(session.proxy.vdi_get_activated_on(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_cbt_enabled(session.opaque_ref, _vdi);
+            else
+                return (bool)session.proxy.vdi_get_cbt_enabled(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -831,7 +983,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _vdi, Dictionary<string, string> _other_config)
         {
-            session.proxy.vdi_set_other_config(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_other_config(session.opaque_ref, _vdi, _other_config);
+            else
+                session.proxy.vdi_set_other_config(session.opaque_ref, _vdi ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -844,7 +999,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _vdi, string _key, string _value)
         {
-            session.proxy.vdi_add_to_other_config(session.uuid, _vdi ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_add_to_other_config(session.opaque_ref, _vdi, _key, _value);
+            else
+                session.proxy.vdi_add_to_other_config(session.opaque_ref, _vdi ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -856,7 +1014,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _vdi, string _key)
         {
-            session.proxy.vdi_remove_from_other_config(session.uuid, _vdi ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_remove_from_other_config(session.opaque_ref, _vdi, _key);
+            else
+                session.proxy.vdi_remove_from_other_config(session.opaque_ref, _vdi ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -868,7 +1029,10 @@ namespace XenAPI
         /// <param name="_xenstore_data">New value to set</param>
         public static void set_xenstore_data(Session session, string _vdi, Dictionary<string, string> _xenstore_data)
         {
-            session.proxy.vdi_set_xenstore_data(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_xenstore_data(session.opaque_ref, _vdi, _xenstore_data);
+            else
+                session.proxy.vdi_set_xenstore_data(session.opaque_ref, _vdi ?? "", Maps.convert_to_proxy_string_string(_xenstore_data)).parse();
         }
 
         /// <summary>
@@ -881,7 +1045,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_xenstore_data(Session session, string _vdi, string _key, string _value)
         {
-            session.proxy.vdi_add_to_xenstore_data(session.uuid, _vdi ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_add_to_xenstore_data(session.opaque_ref, _vdi, _key, _value);
+            else
+                session.proxy.vdi_add_to_xenstore_data(session.opaque_ref, _vdi ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -893,7 +1060,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_xenstore_data(Session session, string _vdi, string _key)
         {
-            session.proxy.vdi_remove_from_xenstore_data(session.uuid, _vdi ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_remove_from_xenstore_data(session.opaque_ref, _vdi, _key);
+            else
+                session.proxy.vdi_remove_from_xenstore_data(session.opaque_ref, _vdi ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -905,7 +1075,10 @@ namespace XenAPI
         /// <param name="_sm_config">New value to set</param>
         public static void set_sm_config(Session session, string _vdi, Dictionary<string, string> _sm_config)
         {
-            session.proxy.vdi_set_sm_config(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_sm_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_sm_config(session.opaque_ref, _vdi, _sm_config);
+            else
+                session.proxy.vdi_set_sm_config(session.opaque_ref, _vdi ?? "", Maps.convert_to_proxy_string_string(_sm_config)).parse();
         }
 
         /// <summary>
@@ -918,7 +1091,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_sm_config(Session session, string _vdi, string _key, string _value)
         {
-            session.proxy.vdi_add_to_sm_config(session.uuid, _vdi ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_add_to_sm_config(session.opaque_ref, _vdi, _key, _value);
+            else
+                session.proxy.vdi_add_to_sm_config(session.opaque_ref, _vdi ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -930,7 +1106,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_sm_config(Session session, string _vdi, string _key)
         {
-            session.proxy.vdi_remove_from_sm_config(session.uuid, _vdi ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_remove_from_sm_config(session.opaque_ref, _vdi, _key);
+            else
+                session.proxy.vdi_remove_from_sm_config(session.opaque_ref, _vdi ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -942,7 +1121,10 @@ namespace XenAPI
         /// <param name="_tags">New value to set</param>
         public static void set_tags(Session session, string _vdi, string[] _tags)
         {
-            session.proxy.vdi_set_tags(session.uuid, _vdi ?? "", _tags).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_tags(session.opaque_ref, _vdi, _tags);
+            else
+                session.proxy.vdi_set_tags(session.opaque_ref, _vdi ?? "", _tags).parse();
         }
 
         /// <summary>
@@ -954,7 +1136,10 @@ namespace XenAPI
         /// <param name="_value">New value to add</param>
         public static void add_tags(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_add_tags(session.uuid, _vdi ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_add_tags(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_add_tags(session.opaque_ref, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -966,7 +1151,10 @@ namespace XenAPI
         /// <param name="_value">Value to remove</param>
         public static void remove_tags(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_remove_tags(session.uuid, _vdi ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_remove_tags(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_remove_tags(session.opaque_ref, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -978,7 +1166,10 @@ namespace XenAPI
         /// <param name="_driver_params">Optional parameters that can be passed through to backend driver in order to specify storage-type-specific snapshot options First published in XenServer 4.1.</param>
         public static XenRef<VDI> snapshot(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_snapshot(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_snapshot(session.opaque_ref, _vdi, _driver_params);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_snapshot(session.opaque_ref, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
         }
 
         /// <summary>
@@ -990,7 +1181,10 @@ namespace XenAPI
         /// <param name="_driver_params">Optional parameters that can be passed through to backend driver in order to specify storage-type-specific snapshot options First published in XenServer 4.1.</param>
         public static XenRef<Task> async_snapshot(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_snapshot(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_snapshot(session.opaque_ref, _vdi, _driver_params);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_snapshot(session.opaque_ref, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
         }
 
         /// <summary>
@@ -1002,7 +1196,10 @@ namespace XenAPI
         /// <param name="_driver_params">Optional parameters that are passed through to the backend driver in order to specify storage-type-specific clone options First published in XenServer 4.1.</param>
         public static XenRef<VDI> clone(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_clone(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_clone(session.opaque_ref, _vdi, _driver_params);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_clone(session.opaque_ref, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
         }
 
         /// <summary>
@@ -1014,7 +1211,10 @@ namespace XenAPI
         /// <param name="_driver_params">Optional parameters that are passed through to the backend driver in order to specify storage-type-specific clone options First published in XenServer 4.1.</param>
         public static XenRef<Task> async_clone(Session session, string _vdi, Dictionary<string, string> _driver_params)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_clone(session.uuid, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_clone(session.opaque_ref, _vdi, _driver_params);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_clone(session.opaque_ref, _vdi ?? "", Maps.convert_to_proxy_string_string(_driver_params)).parse());
         }
 
         /// <summary>
@@ -1026,7 +1226,10 @@ namespace XenAPI
         /// <param name="_size">The new size of the VDI</param>
         public static void resize(Session session, string _vdi, long _size)
         {
-            session.proxy.vdi_resize(session.uuid, _vdi ?? "", _size.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_resize(session.opaque_ref, _vdi, _size);
+            else
+                session.proxy.vdi_resize(session.opaque_ref, _vdi ?? "", _size.ToString()).parse();
         }
 
         /// <summary>
@@ -1038,7 +1241,10 @@ namespace XenAPI
         /// <param name="_size">The new size of the VDI</param>
         public static XenRef<Task> async_resize(Session session, string _vdi, long _size)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_resize(session.uuid, _vdi ?? "", _size.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_resize(session.opaque_ref, _vdi, _size);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_resize(session.opaque_ref, _vdi ?? "", _size.ToString()).parse());
         }
 
         /// <summary>
@@ -1050,7 +1256,10 @@ namespace XenAPI
         /// <param name="_size">The new size of the VDI</param>
         public static void resize_online(Session session, string _vdi, long _size)
         {
-            session.proxy.vdi_resize_online(session.uuid, _vdi ?? "", _size.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_resize_online(session.opaque_ref, _vdi, _size);
+            else
+                session.proxy.vdi_resize_online(session.opaque_ref, _vdi ?? "", _size.ToString()).parse();
         }
 
         /// <summary>
@@ -1062,7 +1271,10 @@ namespace XenAPI
         /// <param name="_size">The new size of the VDI</param>
         public static XenRef<Task> async_resize_online(Session session, string _vdi, long _size)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_resize_online(session.uuid, _vdi ?? "", _size.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_resize_online(session.opaque_ref, _vdi, _size);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_resize_online(session.opaque_ref, _vdi ?? "", _size.ToString()).parse());
         }
 
         /// <summary>
@@ -1083,7 +1295,10 @@ namespace XenAPI
         /// <param name="_sm_config">Storage-specific config</param>
         public static XenRef<VDI> introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
         }
 
         /// <summary>
@@ -1104,7 +1319,10 @@ namespace XenAPI
         /// <param name="_sm_config">Storage-specific config</param>
         public static XenRef<Task> async_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
         }
 
         /// <summary>
@@ -1132,7 +1350,10 @@ namespace XenAPI
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
         public static XenRef<VDI> introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config, _managed, _virtual_size, _physical_utilisation, _metadata_of_pool, _is_a_snapshot, _snapshot_time, _snapshot_of);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
         }
 
         /// <summary>
@@ -1160,7 +1381,10 @@ namespace XenAPI
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
         public static XenRef<Task> async_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config, _managed, _virtual_size, _physical_utilisation, _metadata_of_pool, _is_a_snapshot, _snapshot_time, _snapshot_of);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
         }
 
         /// <summary>
@@ -1181,7 +1405,10 @@ namespace XenAPI
         /// <param name="_sm_config">Storage-specific config First published in XenServer 4.1.</param>
         public static XenRef<VDI> db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_db_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
         }
 
         /// <summary>
@@ -1202,7 +1429,10 @@ namespace XenAPI
         /// <param name="_sm_config">Storage-specific config First published in XenServer 4.1.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_db_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config)).parse());
         }
 
         /// <summary>
@@ -1230,7 +1460,10 @@ namespace XenAPI
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
         public static XenRef<VDI> db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_db_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config, _managed, _virtual_size, _physical_utilisation, _metadata_of_pool, _is_a_snapshot, _snapshot_time, _snapshot_of);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
         }
 
         /// <summary>
@@ -1258,7 +1491,10 @@ namespace XenAPI
         /// <param name="_snapshot_of">Storage-specific config First published in XenServer 6.1.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_db_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config, _managed, _virtual_size, _physical_utilisation, _metadata_of_pool, _is_a_snapshot, _snapshot_time, _snapshot_of);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "").parse());
         }
 
         /// <summary>
@@ -1287,7 +1523,10 @@ namespace XenAPI
         /// <param name="_cbt_enabled">True if changed blocks are tracked for this VDI First published in XenServer 7.3.</param>
         public static XenRef<VDI> db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of, bool _cbt_enabled)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "", _cbt_enabled).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_db_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config, _managed, _virtual_size, _physical_utilisation, _metadata_of_pool, _is_a_snapshot, _snapshot_time, _snapshot_of, _cbt_enabled);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_db_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "", _cbt_enabled).parse());
         }
 
         /// <summary>
@@ -1316,7 +1555,10 @@ namespace XenAPI
         /// <param name="_cbt_enabled">True if changed blocks are tracked for this VDI First published in XenServer 7.3.</param>
         public static XenRef<Task> async_db_introduce(Session session, string _uuid, string _name_label, string _name_description, string _sr, vdi_type _type, bool _sharable, bool _read_only, Dictionary<string, string> _other_config, string _location, Dictionary<string, string> _xenstore_data, Dictionary<string, string> _sm_config, bool _managed, long _virtual_size, long _physical_utilisation, string _metadata_of_pool, bool _is_a_snapshot, DateTime _snapshot_time, string _snapshot_of, bool _cbt_enabled)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.uuid, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "", _cbt_enabled).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_db_introduce(session.opaque_ref, _uuid, _name_label, _name_description, _sr, _type, _sharable, _read_only, _other_config, _location, _xenstore_data, _sm_config, _managed, _virtual_size, _physical_utilisation, _metadata_of_pool, _is_a_snapshot, _snapshot_time, _snapshot_of, _cbt_enabled);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_db_introduce(session.opaque_ref, _uuid ?? "", _name_label ?? "", _name_description ?? "", _sr ?? "", vdi_type_helper.ToString(_type), _sharable, _read_only, Maps.convert_to_proxy_string_string(_other_config), _location ?? "", Maps.convert_to_proxy_string_string(_xenstore_data), Maps.convert_to_proxy_string_string(_sm_config), _managed, _virtual_size.ToString(), _physical_utilisation.ToString(), _metadata_of_pool ?? "", _is_a_snapshot, _snapshot_time, _snapshot_of ?? "", _cbt_enabled).parse());
         }
 
         /// <summary>
@@ -1327,7 +1569,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void db_forget(Session session, string _vdi)
         {
-            session.proxy.vdi_db_forget(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_db_forget(session.opaque_ref, _vdi);
+            else
+                session.proxy.vdi_db_forget(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1338,7 +1583,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_db_forget(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_db_forget(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_db_forget(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_db_forget(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1349,7 +1597,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void update(Session session, string _vdi)
         {
-            session.proxy.vdi_update(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_update(session.opaque_ref, _vdi);
+            else
+                session.proxy.vdi_update(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1360,7 +1611,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_update(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_update(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_update(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_update(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1372,7 +1626,10 @@ namespace XenAPI
         /// <param name="_sr">The destination SR (only required if the destination VDI is not specified</param>
         public static XenRef<VDI> copy(Session session, string _vdi, string _sr)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_copy(session.uuid, _vdi ?? "", _sr ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_copy(session.opaque_ref, _vdi, _sr);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_copy(session.opaque_ref, _vdi ?? "", _sr ?? "").parse());
         }
 
         /// <summary>
@@ -1384,7 +1641,10 @@ namespace XenAPI
         /// <param name="_sr">The destination SR (only required if the destination VDI is not specified</param>
         public static XenRef<Task> async_copy(Session session, string _vdi, string _sr)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.uuid, _vdi ?? "", _sr ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_copy(session.opaque_ref, _vdi, _sr);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.opaque_ref, _vdi ?? "", _sr ?? "").parse());
         }
 
         /// <summary>
@@ -1398,7 +1658,10 @@ namespace XenAPI
         /// <param name="_into_vdi">The destination VDI to copy blocks into (if omitted then a destination SR must be provided and a fresh VDI will be created) First published in XenServer 6.2 SP1 Hotfix 4.</param>
         public static XenRef<VDI> copy(Session session, string _vdi, string _sr, string _base_vdi, string _into_vdi)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_copy(session.uuid, _vdi ?? "", _sr ?? "", _base_vdi ?? "", _into_vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_copy(session.opaque_ref, _vdi, _sr, _base_vdi, _into_vdi);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_copy(session.opaque_ref, _vdi ?? "", _sr ?? "", _base_vdi ?? "", _into_vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1412,7 +1675,10 @@ namespace XenAPI
         /// <param name="_into_vdi">The destination VDI to copy blocks into (if omitted then a destination SR must be provided and a fresh VDI will be created) First published in XenServer 6.2 SP1 Hotfix 4.</param>
         public static XenRef<Task> async_copy(Session session, string _vdi, string _sr, string _base_vdi, string _into_vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.uuid, _vdi ?? "", _sr ?? "", _base_vdi ?? "", _into_vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_copy(session.opaque_ref, _vdi, _sr, _base_vdi, _into_vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_copy(session.opaque_ref, _vdi ?? "", _sr ?? "", _base_vdi ?? "", _into_vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1424,7 +1690,10 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's managed field</param>
         public static void set_managed(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_managed(session.uuid, _vdi ?? "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_managed(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_managed(session.opaque_ref, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1435,7 +1704,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void forget(Session session, string _vdi)
         {
-            session.proxy.vdi_forget(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_forget(session.opaque_ref, _vdi);
+            else
+                session.proxy.vdi_forget(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1446,7 +1718,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_forget(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_forget(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_forget(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_forget(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1458,7 +1733,10 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's sharable field</param>
         public static void set_sharable(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_sharable(session.uuid, _vdi ?? "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_sharable(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_sharable(session.opaque_ref, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1470,7 +1748,10 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's read_only field</param>
         public static void set_read_only(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_read_only(session.uuid, _vdi ?? "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_read_only(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_read_only(session.opaque_ref, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1482,7 +1763,10 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's missing field</param>
         public static void set_missing(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_missing(session.uuid, _vdi ?? "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_missing(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_missing(session.opaque_ref, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1494,7 +1778,10 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's virtual size</param>
         public static void set_virtual_size(Session session, string _vdi, long _value)
         {
-            session.proxy.vdi_set_virtual_size(session.uuid, _vdi ?? "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_virtual_size(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_virtual_size(session.opaque_ref, _vdi ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -1506,7 +1793,10 @@ namespace XenAPI
         /// <param name="_value">The new value of the VDI's physical utilisation</param>
         public static void set_physical_utilisation(Session session, string _vdi, long _value)
         {
-            session.proxy.vdi_set_physical_utilisation(session.uuid, _vdi ?? "", _value.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_physical_utilisation(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_physical_utilisation(session.opaque_ref, _vdi ?? "", _value.ToString()).parse();
         }
 
         /// <summary>
@@ -1518,7 +1808,10 @@ namespace XenAPI
         /// <param name="_value">The new value indicating whether this VDI is a snapshot</param>
         public static void set_is_a_snapshot(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_is_a_snapshot(session.uuid, _vdi ?? "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_is_a_snapshot(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_is_a_snapshot(session.opaque_ref, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1530,7 +1823,10 @@ namespace XenAPI
         /// <param name="_value">The VDI of which this VDI is a snapshot</param>
         public static void set_snapshot_of(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_set_snapshot_of(session.uuid, _vdi ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_snapshot_of(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_snapshot_of(session.opaque_ref, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1542,7 +1838,10 @@ namespace XenAPI
         /// <param name="_value">The snapshot time of this VDI.</param>
         public static void set_snapshot_time(Session session, string _vdi, DateTime _value)
         {
-            session.proxy.vdi_set_snapshot_time(session.uuid, _vdi ?? "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_snapshot_time(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_snapshot_time(session.opaque_ref, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1554,7 +1853,10 @@ namespace XenAPI
         /// <param name="_value">The pool whose metadata is contained by this VDI</param>
         public static void set_metadata_of_pool(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_set_metadata_of_pool(session.uuid, _vdi ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_metadata_of_pool(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_metadata_of_pool(session.opaque_ref, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1566,7 +1868,10 @@ namespace XenAPI
         /// <param name="_value">The name lable for the VDI</param>
         public static void set_name_label(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_set_name_label(session.uuid, _vdi ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_name_label(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_name_label(session.opaque_ref, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1578,7 +1883,10 @@ namespace XenAPI
         /// <param name="_value">The name lable for the VDI</param>
         public static XenRef<Task> async_set_name_label(Session session, string _vdi, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_set_name_label(session.uuid, _vdi ?? "", _value ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_set_name_label(session.opaque_ref, _vdi, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_set_name_label(session.opaque_ref, _vdi ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -1590,7 +1898,10 @@ namespace XenAPI
         /// <param name="_value">The name description for the VDI</param>
         public static void set_name_description(Session session, string _vdi, string _value)
         {
-            session.proxy.vdi_set_name_description(session.uuid, _vdi ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_name_description(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_name_description(session.opaque_ref, _vdi ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -1602,7 +1913,10 @@ namespace XenAPI
         /// <param name="_value">The name description for the VDI</param>
         public static XenRef<Task> async_set_name_description(Session session, string _vdi, string _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_set_name_description(session.uuid, _vdi ?? "", _value ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_set_name_description(session.opaque_ref, _vdi, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_set_name_description(session.opaque_ref, _vdi ?? "", _value ?? "").parse());
         }
 
         /// <summary>
@@ -1614,7 +1928,10 @@ namespace XenAPI
         /// <param name="_value">The value to set</param>
         public static void set_on_boot(Session session, string _vdi, on_boot _value)
         {
-            session.proxy.vdi_set_on_boot(session.uuid, _vdi ?? "", on_boot_helper.ToString(_value)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_on_boot(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_on_boot(session.opaque_ref, _vdi ?? "", on_boot_helper.ToString(_value)).parse();
         }
 
         /// <summary>
@@ -1626,7 +1943,10 @@ namespace XenAPI
         /// <param name="_value">The value to set</param>
         public static XenRef<Task> async_set_on_boot(Session session, string _vdi, on_boot _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_set_on_boot(session.uuid, _vdi ?? "", on_boot_helper.ToString(_value)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_set_on_boot(session.opaque_ref, _vdi, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_set_on_boot(session.opaque_ref, _vdi ?? "", on_boot_helper.ToString(_value)).parse());
         }
 
         /// <summary>
@@ -1638,7 +1958,10 @@ namespace XenAPI
         /// <param name="_value">The value to set</param>
         public static void set_allow_caching(Session session, string _vdi, bool _value)
         {
-            session.proxy.vdi_set_allow_caching(session.uuid, _vdi ?? "", _value).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_set_allow_caching(session.opaque_ref, _vdi, _value);
+            else
+                session.proxy.vdi_set_allow_caching(session.opaque_ref, _vdi ?? "", _value).parse();
         }
 
         /// <summary>
@@ -1650,7 +1973,10 @@ namespace XenAPI
         /// <param name="_value">The value to set</param>
         public static XenRef<Task> async_set_allow_caching(Session session, string _vdi, bool _value)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_set_allow_caching(session.uuid, _vdi ?? "", _value).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_set_allow_caching(session.opaque_ref, _vdi, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_set_allow_caching(session.opaque_ref, _vdi ?? "", _value).parse());
         }
 
         /// <summary>
@@ -1661,7 +1987,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Session> open_database(Session session, string _vdi)
         {
-            return XenRef<Session>.Create(session.proxy.vdi_open_database(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_open_database(session.opaque_ref, _vdi);
+            else
+                return XenRef<Session>.Create(session.proxy.vdi_open_database(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1672,7 +2001,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_open_database(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_open_database(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_open_database(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_open_database(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1683,7 +2015,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static string read_database_pool_uuid(Session session, string _vdi)
         {
-            return (string)session.proxy.vdi_read_database_pool_uuid(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_read_database_pool_uuid(session.opaque_ref, _vdi);
+            else
+                return (string)session.proxy.vdi_read_database_pool_uuid(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1694,7 +2029,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_read_database_pool_uuid(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_read_database_pool_uuid(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_read_database_pool_uuid(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_read_database_pool_uuid(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1707,7 +2045,10 @@ namespace XenAPI
         /// <param name="_options">Other parameters</param>
         public static XenRef<VDI> pool_migrate(Session session, string _vdi, string _sr, Dictionary<string, string> _options)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_pool_migrate(session.uuid, _vdi ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_pool_migrate(session.opaque_ref, _vdi, _sr, _options);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_pool_migrate(session.opaque_ref, _vdi ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -1720,7 +2061,10 @@ namespace XenAPI
         /// <param name="_options">Other parameters</param>
         public static XenRef<Task> async_pool_migrate(Session session, string _vdi, string _sr, Dictionary<string, string> _options)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_pool_migrate(session.uuid, _vdi ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_pool_migrate(session.opaque_ref, _vdi, _sr, _options);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_pool_migrate(session.opaque_ref, _vdi ?? "", _sr ?? "", Maps.convert_to_proxy_string_string(_options)).parse());
         }
 
         /// <summary>
@@ -1731,7 +2075,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void enable_cbt(Session session, string _vdi)
         {
-            session.proxy.vdi_enable_cbt(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_enable_cbt(session.opaque_ref, _vdi);
+            else
+                session.proxy.vdi_enable_cbt(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1742,7 +2089,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_enable_cbt(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_enable_cbt(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_enable_cbt(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_enable_cbt(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1753,7 +2103,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void disable_cbt(Session session, string _vdi)
         {
-            session.proxy.vdi_disable_cbt(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_disable_cbt(session.opaque_ref, _vdi);
+            else
+                session.proxy.vdi_disable_cbt(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1764,7 +2117,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_disable_cbt(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_disable_cbt(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_disable_cbt(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_disable_cbt(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1775,7 +2131,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static void data_destroy(Session session, string _vdi)
         {
-            session.proxy.vdi_data_destroy(session.uuid, _vdi ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vdi_data_destroy(session.opaque_ref, _vdi);
+            else
+                session.proxy.vdi_data_destroy(session.opaque_ref, _vdi ?? "").parse();
         }
 
         /// <summary>
@@ -1786,7 +2145,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static XenRef<Task> async_data_destroy(Session session, string _vdi)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_data_destroy(session.uuid, _vdi ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_data_destroy(session.opaque_ref, _vdi);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_data_destroy(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1798,7 +2160,10 @@ namespace XenAPI
         /// <param name="_vdi_to">The second VDI.</param>
         public static string list_changed_blocks(Session session, string _vdi, string _vdi_to)
         {
-            return (string)session.proxy.vdi_list_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_list_changed_blocks(session.opaque_ref, _vdi, _vdi_to);
+            else
+                return (string)session.proxy.vdi_list_changed_blocks(session.opaque_ref, _vdi ?? "", _vdi_to ?? "").parse();
         }
 
         /// <summary>
@@ -1810,7 +2175,10 @@ namespace XenAPI
         /// <param name="_vdi_to">The second VDI.</param>
         public static XenRef<Task> async_list_changed_blocks(Session session, string _vdi, string _vdi_to)
         {
-            return XenRef<Task>.Create(session.proxy.async_vdi_list_changed_blocks(session.uuid, _vdi ?? "", _vdi_to ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_vdi_list_changed_blocks(session.opaque_ref, _vdi, _vdi_to);
+          else
+              return XenRef<Task>.Create(session.proxy.async_vdi_list_changed_blocks(session.opaque_ref, _vdi ?? "", _vdi_to ?? "").parse());
         }
 
         /// <summary>
@@ -1821,7 +2189,10 @@ namespace XenAPI
         /// <param name="_vdi">The opaque_ref of the given vdi</param>
         public static List<Vdi_nbd_server_info> get_nbd_info(Session session, string _vdi)
         {
-            return Vdi_nbd_server_info.ProxyArrayToObjectList(session.proxy.vdi_get_nbd_info(session.uuid, _vdi ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_nbd_info(session.opaque_ref, _vdi);
+            else
+                return Vdi_nbd_server_info.ProxyArrayToObjectList(session.proxy.vdi_get_nbd_info(session.opaque_ref, _vdi ?? "").parse());
         }
 
         /// <summary>
@@ -1831,7 +2202,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<VDI>> get_all(Session session)
         {
-            return XenRef<VDI>.Create(session.proxy.vdi_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_all(session.opaque_ref);
+            else
+                return XenRef<VDI>.Create(session.proxy.vdi_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -1841,7 +2215,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<VDI>, VDI> get_all_records(Session session)
         {
-            return XenRef<VDI>.Create<Proxy_VDI>(session.proxy.vdi_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vdi_get_all_records(session.opaque_ref);
+            else
+                return XenRef<VDI>.Create<Proxy_VDI>(session.proxy.vdi_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -1860,7 +2237,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// a human-readable name
@@ -1878,7 +2255,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_label;
+        private string _name_label = "";
 
         /// <summary>
         /// a notes field containing human-readable description
@@ -1896,7 +2273,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_description;
+        private string _name_description = "";
 
         /// <summary>
         /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
@@ -1914,7 +2291,7 @@ namespace XenAPI
                 }
             }
         }
-        private List<vdi_operations> _allowed_operations;
+        private List<vdi_operations> _allowed_operations = new List<vdi_operations>() {};
 
         /// <summary>
         /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
@@ -1932,11 +2309,12 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, vdi_operations> _current_operations;
+        private Dictionary<string, vdi_operations> _current_operations = new Dictionary<string, vdi_operations>() {};
 
         /// <summary>
         /// storage repository in which the VDI resides
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<SR>))]
         public virtual XenRef<SR> SR
         {
             get { return _SR; }
@@ -1950,11 +2328,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<SR> _SR;
+        private XenRef<SR> _SR = new XenRef<SR>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// list of vbds that refer to this disk
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VBD>))]
         public virtual List<XenRef<VBD>> VBDs
         {
             get { return _VBDs; }
@@ -1968,11 +2347,12 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VBD>> _VBDs;
+        private List<XenRef<VBD>> _VBDs = new List<XenRef<VBD>>() {};
 
         /// <summary>
         /// list of crash dumps that refer to this disk
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Crashdump>))]
         public virtual List<XenRef<Crashdump>> crash_dumps
         {
             get { return _crash_dumps; }
@@ -1986,7 +2366,7 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Crashdump>> _crash_dumps;
+        private List<XenRef<Crashdump>> _crash_dumps = new List<XenRef<Crashdump>>() {};
 
         /// <summary>
         /// size of disk as presented to the guest (in bytes). Note that, depending on storage backend type, requested size may not be respected exactly
@@ -2027,6 +2407,7 @@ namespace XenAPI
         /// <summary>
         /// type of the VDI
         /// </summary>
+        [JsonConverter(typeof(vdi_typeConverter))]
         public virtual vdi_type type
         {
             get { return _type; }
@@ -2081,6 +2462,7 @@ namespace XenAPI
         /// <summary>
         /// additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -2094,7 +2476,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
 
         /// <summary>
         /// true if this disk is locked at the storage level
@@ -2131,7 +2513,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _location;
+        private string _location = "";
 
         /// <summary>
         /// 
@@ -2172,6 +2554,7 @@ namespace XenAPI
         /// <summary>
         /// This field is always null. Deprecated
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VDI>))]
         public virtual XenRef<VDI> parent
         {
             get { return _parent; }
@@ -2185,12 +2568,13 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VDI> _parent;
+        private XenRef<VDI> _parent = new XenRef<VDI>(Helper.NullOpaqueRef);
 
         /// <summary>
-        /// data to be inserted into the xenstore tree (/local/domain/0/backend/vbd/<domid>/<device-id>/sm-data) after the VDI is attached. This is generally set by the SM backends on vdi_attach.
+        /// data to be inserted into the xenstore tree (/local/domain/0/backend/vbd/&lt;domid&gt;/&lt;device-id&gt;/sm-data) after the VDI is attached. This is generally set by the SM backends on vdi_attach.
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> xenstore_data
         {
             get { return _xenstore_data; }
@@ -2204,12 +2588,13 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _xenstore_data;
+        private Dictionary<string, string> _xenstore_data = new Dictionary<string, string>() {};
 
         /// <summary>
         /// SM dependent data
         /// First published in XenServer 4.1.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> sm_config
         {
             get { return _sm_config; }
@@ -2223,7 +2608,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _sm_config;
+        private Dictionary<string, string> _sm_config = new Dictionary<string, string>() {};
 
         /// <summary>
         /// true if this is a snapshot.
@@ -2242,12 +2627,13 @@ namespace XenAPI
                 }
             }
         }
-        private bool _is_a_snapshot;
+        private bool _is_a_snapshot = false;
 
         /// <summary>
         /// Ref pointing to the VDI this snapshot is of.
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<VDI>))]
         public virtual XenRef<VDI> snapshot_of
         {
             get { return _snapshot_of; }
@@ -2261,12 +2647,13 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<VDI> _snapshot_of;
+        private XenRef<VDI> _snapshot_of = new XenRef<VDI>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// List pointing to all the VDIs snapshots.
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VDI>))]
         public virtual List<XenRef<VDI>> snapshots
         {
             get { return _snapshots; }
@@ -2280,12 +2667,13 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VDI>> _snapshots;
+        private List<XenRef<VDI>> _snapshots = new List<XenRef<VDI>>() {};
 
         /// <summary>
         /// Date/time when this snapshot was created.
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(XenDateTimeConverter))]
         public virtual DateTime snapshot_time
         {
             get { return _snapshot_time; }
@@ -2299,7 +2687,7 @@ namespace XenAPI
                 }
             }
         }
-        private DateTime _snapshot_time;
+        private DateTime _snapshot_time = DateTime.ParseExact("19700101T00:00:00Z", "yyyyMMddTHH:mm:ssZ", CultureInfo.InvariantCulture);
 
         /// <summary>
         /// user-specified tags for categorization purposes
@@ -2318,7 +2706,7 @@ namespace XenAPI
                 }
             }
         }
-        private string[] _tags;
+        private string[] _tags = {};
 
         /// <summary>
         /// true if this VDI is to be cached in the local cache SR
@@ -2337,12 +2725,13 @@ namespace XenAPI
                 }
             }
         }
-        private bool _allow_caching;
+        private bool _allow_caching = false;
 
         /// <summary>
         /// The behaviour of this VDI on a VM boot
         /// First published in XenServer 5.6 FP1.
         /// </summary>
+        [JsonConverter(typeof(on_bootConverter))]
         public virtual on_boot on_boot
         {
             get { return _on_boot; }
@@ -2356,12 +2745,13 @@ namespace XenAPI
                 }
             }
         }
-        private on_boot _on_boot;
+        private on_boot _on_boot = on_boot.persist;
 
         /// <summary>
         /// The pool whose metadata is contained in this VDI
         /// First published in XenServer 6.0.
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Pool>))]
         public virtual XenRef<Pool> metadata_of_pool
         {
             get { return _metadata_of_pool; }
@@ -2375,7 +2765,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<Pool> _metadata_of_pool;
+        private XenRef<Pool> _metadata_of_pool = new XenRef<Pool>("OpaqueRef:NULL");
 
         /// <summary>
         /// Whether this VDI contains the latest known accessible metadata for the pool
@@ -2394,7 +2784,7 @@ namespace XenAPI
                 }
             }
         }
-        private bool _metadata_latest;
+        private bool _metadata_latest = false;
 
         /// <summary>
         /// Whether this VDI is a Tools ISO
@@ -2413,7 +2803,7 @@ namespace XenAPI
                 }
             }
         }
-        private bool _is_tools_iso;
+        private bool _is_tools_iso = false;
 
         /// <summary>
         /// True if changed blocks are tracked for this VDI
@@ -2432,25 +2822,6 @@ namespace XenAPI
                 }
             }
         }
-        private bool _cbt_enabled;
-
-        /// <summary>
-        /// The host on which this VDI is activated, if any
-        /// Experimental. First published in Unreleased.
-        /// </summary>
-        public virtual XenRef<Host> activated_on
-        {
-            get { return _activated_on; }
-            set
-            {
-                if (!Helper.AreEqual(value, _activated_on))
-                {
-                    _activated_on = value;
-                    Changed = true;
-                    NotifyPropertyChanged("activated_on");
-                }
-            }
-        }
-        private XenRef<Host> _activated_on;
+        private bool _cbt_enabled = false;
     }
 }

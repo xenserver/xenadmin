@@ -30,9 +30,9 @@
  */
 
 using System.Windows.Forms;
-using XenAdmin.Properties;
 using System.Drawing;
 using XenAdmin.Dialogs;
+using XenAdmin.Network;
 using XenAPI;
 
 
@@ -80,15 +80,15 @@ namespace XenAdmin.Commands
             _dialog.Show(Parent);
         }
 
-        private void dialog_CachePopulated(object sender, CachePopulatedEventArgs e)
+        private void dialog_CachePopulated(IXenConnection conn)
         {
             _dialog.CachePopulated -= dialog_CachePopulated;
 
             // first select the disconnected host in the tree
             // before the tree is populated, the opaque_ref of the disconnected host is the hostname
             // so use this to select the object.
-            MainWindowCommandInterface.Invoke(() => MainWindowCommandInterface.SelectObjectInTree(new Host { opaque_ref = e.Connection.Hostname }));
-            MainWindowCommandInterface.TrySelectNewObjectInTree(e.Connection, true, true, true);
+            MainWindowCommandInterface.Invoke(() => MainWindowCommandInterface.SelectObjectInTree(new Host { opaque_ref = conn.Hostname }));
+            MainWindowCommandInterface.TrySelectNewObjectInTree(conn, true, true, true);
         }
 
         public override Image MenuImage

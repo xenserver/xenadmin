@@ -54,7 +54,8 @@ namespace XenAdmin.Actions
             {
                 PIF.set_disallow_unplug(Session, pif.opaque_ref, true);
             }
-            Cluster.pool_create(Session, network.opaque_ref, "corosync");
+            var cluster = new Cluster(); // this Cluster object is only used for getting the default values for token_timeout and token_timeout_coefficient
+            Cluster.pool_create(Session, network.opaque_ref, "corosync", cluster.token_timeout, cluster.token_timeout_coefficient);
             Description = string.Format(Messages.ENABLED_CLUSTERING_ON_POOL, Pool.Name());
             
         }

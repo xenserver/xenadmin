@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -54,6 +58,8 @@ namespace XenAPI
             List<cluster_operation> allowed_operations,
             Dictionary<string, cluster_operation> current_operations,
             bool pool_auto_join,
+            long token_timeout,
+            long token_timeout_coefficient,
             Dictionary<string, string> cluster_config,
             Dictionary<string, string> other_config)
         {
@@ -65,6 +71,8 @@ namespace XenAPI
             this.allowed_operations = allowed_operations;
             this.current_operations = current_operations;
             this.pool_auto_join = pool_auto_join;
+            this.token_timeout = token_timeout;
+            this.token_timeout_coefficient = token_timeout_coefficient;
             this.cluster_config = cluster_config;
             this.other_config = other_config;
         }
@@ -88,6 +96,8 @@ namespace XenAPI
             allowed_operations = update.allowed_operations;
             current_operations = update.current_operations;
             pool_auto_join = update.pool_auto_join;
+            token_timeout = update.token_timeout;
+            token_timeout_coefficient = update.token_timeout_coefficient;
             cluster_config = update.cluster_config;
             other_config = update.other_config;
         }
@@ -102,6 +112,8 @@ namespace XenAPI
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<cluster_operation>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_cluster_operation(proxy.current_operations);
             pool_auto_join = (bool)proxy.pool_auto_join;
+            token_timeout = proxy.token_timeout == null ? 0 : long.Parse((string)proxy.token_timeout);
+            token_timeout_coefficient = proxy.token_timeout_coefficient == null ? 0 : long.Parse((string)proxy.token_timeout_coefficient);
             cluster_config = proxy.cluster_config == null ? null : Maps.convert_from_proxy_string_string(proxy.cluster_config);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
@@ -117,6 +129,8 @@ namespace XenAPI
             result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
             result_.current_operations = Maps.convert_to_proxy_string_cluster_operation(current_operations);
             result_.pool_auto_join = pool_auto_join;
+            result_.token_timeout = token_timeout.ToString();
+            result_.token_timeout_coefficient = token_timeout_coefficient.ToString();
             result_.cluster_config = Maps.convert_to_proxy_string_string(cluster_config);
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             return result_;
@@ -136,6 +150,8 @@ namespace XenAPI
             allowed_operations = Helper.StringArrayToEnumList<cluster_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
             current_operations = Maps.convert_from_proxy_string_cluster_operation(Marshalling.ParseHashTable(table, "current_operations"));
             pool_auto_join = Marshalling.ParseBool(table, "pool_auto_join");
+            token_timeout = Marshalling.ParseLong(table, "token_timeout");
+            token_timeout_coefficient = Marshalling.ParseLong(table, "token_timeout_coefficient");
             cluster_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cluster_config"));
             other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
@@ -157,6 +173,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._cluster_stack, other._cluster_stack) &&
                 Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
                 Helper.AreEqual2(this._pool_auto_join, other._pool_auto_join) &&
+                Helper.AreEqual2(this._token_timeout, other._token_timeout) &&
+                Helper.AreEqual2(this._token_timeout_coefficient, other._token_timeout_coefficient) &&
                 Helper.AreEqual2(this._cluster_config, other._cluster_config) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
@@ -195,7 +213,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static Cluster get_record(Session session, string _cluster)
         {
-            return new Cluster((Proxy_Cluster)session.proxy.cluster_get_record(session.uuid, _cluster ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_record(session.opaque_ref, _cluster);
+            else
+                return new Cluster((Proxy_Cluster)session.proxy.cluster_get_record(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -206,7 +227,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Cluster> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Cluster>.Create(session.proxy.cluster_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_by_uuid(session.opaque_ref, _uuid);
+            else
+                return XenRef<Cluster>.Create(session.proxy.cluster_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -217,7 +241,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static string get_uuid(Session session, string _cluster)
         {
-            return (string)session.proxy.cluster_get_uuid(session.uuid, _cluster ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_uuid(session.opaque_ref, _cluster);
+            else
+                return (string)session.proxy.cluster_get_uuid(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
@@ -228,7 +255,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static List<XenRef<Cluster_host>> get_cluster_hosts(Session session, string _cluster)
         {
-            return XenRef<Cluster_host>.Create(session.proxy.cluster_get_cluster_hosts(session.uuid, _cluster ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_cluster_hosts(session.opaque_ref, _cluster);
+            else
+                return XenRef<Cluster_host>.Create(session.proxy.cluster_get_cluster_hosts(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -239,7 +269,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static XenRef<Network> get_network(Session session, string _cluster)
         {
-            return XenRef<Network>.Create(session.proxy.cluster_get_network(session.uuid, _cluster ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_network(session.opaque_ref, _cluster);
+            else
+                return XenRef<Network>.Create(session.proxy.cluster_get_network(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -250,7 +283,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static string get_cluster_token(Session session, string _cluster)
         {
-            return (string)session.proxy.cluster_get_cluster_token(session.uuid, _cluster ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_cluster_token(session.opaque_ref, _cluster);
+            else
+                return (string)session.proxy.cluster_get_cluster_token(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
@@ -261,7 +297,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static string get_cluster_stack(Session session, string _cluster)
         {
-            return (string)session.proxy.cluster_get_cluster_stack(session.uuid, _cluster ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_cluster_stack(session.opaque_ref, _cluster);
+            else
+                return (string)session.proxy.cluster_get_cluster_stack(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
@@ -272,7 +311,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static List<cluster_operation> get_allowed_operations(Session session, string _cluster)
         {
-            return Helper.StringArrayToEnumList<cluster_operation>(session.proxy.cluster_get_allowed_operations(session.uuid, _cluster ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_allowed_operations(session.opaque_ref, _cluster);
+            else
+                return Helper.StringArrayToEnumList<cluster_operation>(session.proxy.cluster_get_allowed_operations(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -283,7 +325,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static Dictionary<string, cluster_operation> get_current_operations(Session session, string _cluster)
         {
-            return Maps.convert_from_proxy_string_cluster_operation(session.proxy.cluster_get_current_operations(session.uuid, _cluster ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_current_operations(session.opaque_ref, _cluster);
+            else
+                return Maps.convert_from_proxy_string_cluster_operation(session.proxy.cluster_get_current_operations(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -294,7 +339,38 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static bool get_pool_auto_join(Session session, string _cluster)
         {
-            return (bool)session.proxy.cluster_get_pool_auto_join(session.uuid, _cluster ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_pool_auto_join(session.opaque_ref, _cluster);
+            else
+                return (bool)session.proxy.cluster_get_pool_auto_join(session.opaque_ref, _cluster ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the token_timeout field of the given Cluster.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster">The opaque_ref of the given cluster</param>
+        public static long get_token_timeout(Session session, string _cluster)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_token_timeout(session.opaque_ref, _cluster);
+            else
+                return long.Parse((string)session.proxy.cluster_get_token_timeout(session.opaque_ref, _cluster ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the token_timeout_coefficient field of the given Cluster.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster">The opaque_ref of the given cluster</param>
+        public static long get_token_timeout_coefficient(Session session, string _cluster)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_token_timeout_coefficient(session.opaque_ref, _cluster);
+            else
+                return long.Parse((string)session.proxy.cluster_get_token_timeout_coefficient(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -305,7 +381,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static Dictionary<string, string> get_cluster_config(Session session, string _cluster)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.cluster_get_cluster_config(session.uuid, _cluster ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_cluster_config(session.opaque_ref, _cluster);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.cluster_get_cluster_config(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -316,7 +395,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static Dictionary<string, string> get_other_config(Session session, string _cluster)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.cluster_get_other_config(session.uuid, _cluster ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_other_config(session.opaque_ref, _cluster);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.cluster_get_other_config(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -328,7 +410,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _cluster, Dictionary<string, string> _other_config)
         {
-            session.proxy.cluster_set_other_config(session.uuid, _cluster ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.cluster_set_other_config(session.opaque_ref, _cluster, _other_config);
+            else
+                session.proxy.cluster_set_other_config(session.opaque_ref, _cluster ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -341,7 +426,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _cluster, string _key, string _value)
         {
-            session.proxy.cluster_add_to_other_config(session.uuid, _cluster ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.cluster_add_to_other_config(session.opaque_ref, _cluster, _key, _value);
+            else
+                session.proxy.cluster_add_to_other_config(session.opaque_ref, _cluster ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -353,7 +441,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _cluster, string _key)
         {
-            session.proxy.cluster_remove_from_other_config(session.uuid, _cluster ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.cluster_remove_from_other_config(session.opaque_ref, _cluster, _key);
+            else
+                session.proxy.cluster_remove_from_other_config(session.opaque_ref, _cluster ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -364,9 +455,14 @@ namespace XenAPI
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
         /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
         /// <param name="_pool_auto_join">true if xapi is automatically joining new pool members to the cluster</param>
-        public static XenRef<Cluster> create(Session session, string _network, string _cluster_stack, bool _pool_auto_join)
+        /// <param name="_token_timeout">Corosync token timeout in seconds</param>
+        /// <param name="_token_timeout_coefficient">Corosync token timeout coefficient in seconds</param>
+        public static XenRef<Cluster> create(Session session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
         {
-            return XenRef<Cluster>.Create(session.proxy.cluster_create(session.uuid, _network ?? "", _cluster_stack ?? "", _pool_auto_join).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_create(session.opaque_ref, _network, _cluster_stack, _pool_auto_join, _token_timeout, _token_timeout_coefficient);
+            else
+                return XenRef<Cluster>.Create(session.proxy.cluster_create(session.opaque_ref, _network ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient).parse());
         }
 
         /// <summary>
@@ -377,9 +473,14 @@ namespace XenAPI
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
         /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
         /// <param name="_pool_auto_join">true if xapi is automatically joining new pool members to the cluster</param>
-        public static XenRef<Task> async_create(Session session, string _network, string _cluster_stack, bool _pool_auto_join)
+        /// <param name="_token_timeout">Corosync token timeout in seconds</param>
+        /// <param name="_token_timeout_coefficient">Corosync token timeout coefficient in seconds</param>
+        public static XenRef<Task> async_create(Session session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
         {
-            return XenRef<Task>.Create(session.proxy.async_cluster_create(session.uuid, _network ?? "", _cluster_stack ?? "", _pool_auto_join).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_cluster_create(session.opaque_ref, _network, _cluster_stack, _pool_auto_join, _token_timeout, _token_timeout_coefficient);
+          else
+              return XenRef<Task>.Create(session.proxy.async_cluster_create(session.opaque_ref, _network ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient).parse());
         }
 
         /// <summary>
@@ -390,7 +491,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static void destroy(Session session, string _cluster)
         {
-            session.proxy.cluster_destroy(session.uuid, _cluster ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.cluster_destroy(session.opaque_ref, _cluster);
+            else
+                session.proxy.cluster_destroy(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
@@ -401,7 +505,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static XenRef<Task> async_destroy(Session session, string _cluster)
         {
-            return XenRef<Task>.Create(session.proxy.async_cluster_destroy(session.uuid, _cluster ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_cluster_destroy(session.opaque_ref, _cluster);
+          else
+              return XenRef<Task>.Create(session.proxy.async_cluster_destroy(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -411,9 +518,14 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
         /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
-        public static XenRef<Cluster> pool_create(Session session, string _network, string _cluster_stack)
+        /// <param name="_token_timeout">Corosync token timeout in seconds</param>
+        /// <param name="_token_timeout_coefficient">Corosync token timeout coefficient in seconds</param>
+        public static XenRef<Cluster> pool_create(Session session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient)
         {
-            return XenRef<Cluster>.Create(session.proxy.cluster_pool_create(session.uuid, _network ?? "", _cluster_stack ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_pool_create(session.opaque_ref, _network, _cluster_stack, _token_timeout, _token_timeout_coefficient);
+            else
+                return XenRef<Cluster>.Create(session.proxy.cluster_pool_create(session.opaque_ref, _network ?? "", _cluster_stack ?? "", _token_timeout, _token_timeout_coefficient).parse());
         }
 
         /// <summary>
@@ -423,9 +535,42 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
         /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
-        public static XenRef<Task> async_pool_create(Session session, string _network, string _cluster_stack)
+        /// <param name="_token_timeout">Corosync token timeout in seconds</param>
+        /// <param name="_token_timeout_coefficient">Corosync token timeout coefficient in seconds</param>
+        public static XenRef<Task> async_pool_create(Session session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient)
         {
-            return XenRef<Task>.Create(session.proxy.async_cluster_pool_create(session.uuid, _network ?? "", _cluster_stack ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_cluster_pool_create(session.opaque_ref, _network, _cluster_stack, _token_timeout, _token_timeout_coefficient);
+          else
+              return XenRef<Task>.Create(session.proxy.async_cluster_pool_create(session.opaque_ref, _network ?? "", _cluster_stack ?? "", _token_timeout, _token_timeout_coefficient).parse());
+        }
+
+        /// <summary>
+        /// Attempt to force destroy the Cluster_host objects, and then destroy the Cluster.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster">The opaque_ref of the given cluster</param>
+        public static void pool_force_destroy(Session session, string _cluster)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.cluster_pool_force_destroy(session.opaque_ref, _cluster);
+            else
+                session.proxy.cluster_pool_force_destroy(session.opaque_ref, _cluster ?? "").parse();
+        }
+
+        /// <summary>
+        /// Attempt to force destroy the Cluster_host objects, and then destroy the Cluster.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster">The opaque_ref of the given cluster</param>
+        public static XenRef<Task> async_pool_force_destroy(Session session, string _cluster)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_cluster_pool_force_destroy(session.opaque_ref, _cluster);
+          else
+              return XenRef<Task>.Create(session.proxy.async_cluster_pool_force_destroy(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -436,7 +581,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static void pool_destroy(Session session, string _cluster)
         {
-            session.proxy.cluster_pool_destroy(session.uuid, _cluster ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.cluster_pool_destroy(session.opaque_ref, _cluster);
+            else
+                session.proxy.cluster_pool_destroy(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
@@ -447,7 +595,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static XenRef<Task> async_pool_destroy(Session session, string _cluster)
         {
-            return XenRef<Task>.Create(session.proxy.async_cluster_pool_destroy(session.uuid, _cluster ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_cluster_pool_destroy(session.opaque_ref, _cluster);
+          else
+              return XenRef<Task>.Create(session.proxy.async_cluster_pool_destroy(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -458,7 +609,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static void pool_resync(Session session, string _cluster)
         {
-            session.proxy.cluster_pool_resync(session.uuid, _cluster ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.cluster_pool_resync(session.opaque_ref, _cluster);
+            else
+                session.proxy.cluster_pool_resync(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
@@ -469,7 +623,10 @@ namespace XenAPI
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
         public static XenRef<Task> async_pool_resync(Session session, string _cluster)
         {
-            return XenRef<Task>.Create(session.proxy.async_cluster_pool_resync(session.uuid, _cluster ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_cluster_pool_resync(session.opaque_ref, _cluster);
+          else
+              return XenRef<Task>.Create(session.proxy.async_cluster_pool_resync(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -479,7 +636,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Cluster>> get_all(Session session)
         {
-            return XenRef<Cluster>.Create(session.proxy.cluster_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_all(session.opaque_ref);
+            else
+                return XenRef<Cluster>.Create(session.proxy.cluster_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -489,7 +649,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Cluster>, Cluster> get_all_records(Session session)
         {
-            return XenRef<Cluster>.Create<Proxy_Cluster>(session.proxy.cluster_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_all_records(session.opaque_ref);
+            else
+                return XenRef<Cluster>.Create<Proxy_Cluster>(session.proxy.cluster_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -508,11 +671,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// A list of the cluster_host objects associated with the Cluster
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<Cluster_host>))]
         public virtual List<XenRef<Cluster_host>> cluster_hosts
         {
             get { return _cluster_hosts; }
@@ -526,11 +690,12 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<Cluster_host>> _cluster_hosts;
+        private List<XenRef<Cluster_host>> _cluster_hosts = new List<XenRef<Cluster_host>>() {};
 
         /// <summary>
         /// Reference to the single network on which corosync carries out its inter-host communications
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<Network>))]
         public virtual XenRef<Network> network
         {
             get { return _network; }
@@ -544,7 +709,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<Network> _network;
+        private XenRef<Network> _network = new XenRef<Network>("OpaqueRef:NULL");
 
         /// <summary>
         /// The secret key used by xapi-clusterd when it talks to itself on other hosts
@@ -562,7 +727,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _cluster_token;
+        private string _cluster_token = "";
 
         /// <summary>
         /// Simply the string 'corosync'. No other cluster stacks are currently supported
@@ -580,7 +745,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _cluster_stack;
+        private string _cluster_stack = "corosync";
 
         /// <summary>
         /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
@@ -598,7 +763,7 @@ namespace XenAPI
                 }
             }
         }
-        private List<cluster_operation> _allowed_operations;
+        private List<cluster_operation> _allowed_operations = new List<cluster_operation>() {};
 
         /// <summary>
         /// links each of the running tasks using this object (by reference) to a current_operation enum which describes the nature of the task.
@@ -616,7 +781,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, cluster_operation> _current_operations;
+        private Dictionary<string, cluster_operation> _current_operations = new Dictionary<string, cluster_operation>() {};
 
         /// <summary>
         /// True if xapi is automatically joining new pool members to the cluster. This will be `true` in the first release
@@ -634,7 +799,43 @@ namespace XenAPI
                 }
             }
         }
-        private bool _pool_auto_join;
+        private bool _pool_auto_join = true;
+
+        /// <summary>
+        /// The corosync token timeout in ms
+        /// </summary>
+        public virtual long token_timeout
+        {
+            get { return _token_timeout; }
+            set
+            {
+                if (!Helper.AreEqual(value, _token_timeout))
+                {
+                    _token_timeout = value;
+                    Changed = true;
+                    NotifyPropertyChanged("token_timeout");
+                }
+            }
+        }
+        private long _token_timeout = 20000;
+
+        /// <summary>
+        /// The corosync token timeout coefficient in ms
+        /// </summary>
+        public virtual long token_timeout_coefficient
+        {
+            get { return _token_timeout_coefficient; }
+            set
+            {
+                if (!Helper.AreEqual(value, _token_timeout_coefficient))
+                {
+                    _token_timeout_coefficient = value;
+                    Changed = true;
+                    NotifyPropertyChanged("token_timeout_coefficient");
+                }
+            }
+        }
+        private long _token_timeout_coefficient = 1000;
 
         /// <summary>
         /// Contains read-only settings for the cluster, such as timeouts and other options. It can only be set at cluster create time
@@ -652,7 +853,7 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _cluster_config;
+        private Dictionary<string, string> _cluster_config = new Dictionary<string, string>() {};
 
         /// <summary>
         /// Additional configuration
@@ -670,6 +871,6 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
     }
 }

@@ -407,5 +407,10 @@ namespace XenAdmin.Wizards
             labelGeneralInformationMessage.Text = message;
             panelGeneralInformationMessage.Visible = true;
         }
+
+        protected virtual void HideInformationMessage()
+        {
+            panelGeneralInformationMessage.Visible = false;
+        }
     }
 }

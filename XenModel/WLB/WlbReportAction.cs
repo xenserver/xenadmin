@@ -86,7 +86,7 @@ namespace XenAdmin.Actions.Wlb
             UriBuilder uriBuilder = new UriBuilder(Session.Url);
             uriBuilder.Path = "wlb_report";
             uriBuilder.Query = string.Format("session_id={0}&report={1}&task_id={2}",
-                Uri.EscapeDataString(Session.uuid),
+                Uri.EscapeDataString(Session.opaque_ref),
                 Uri.EscapeDataString(report),
                 Uri.EscapeDataString(RelatedTask.opaque_ref));
 

@@ -46,19 +46,23 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly XenServerPatch patch;
         private readonly List<PoolPatchMapping> mappings;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+        private KeyValuePair<XenServerPatch, string> patchFromDisk;
         private AsyncAction inProgressAction = null;
 
-        public UploadPatchToMasterPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches)
+        public UploadPatchToMasterPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
             : base(connection, string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, patch.Name, connection.Name))
         {
             this.patch = patch;
             this.mappings = mappings;
             this.AllDownloadedPatches = allDownloadedPatches;
+            this.patchFromDisk = patchFromDisk;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            var path = AllDownloadedPatches[patch];
+            var path = AllDownloadedPatches.ContainsKey(patch) 
+                ? AllDownloadedPatches[patch]
+                : patchFromDisk.Key == patch ? patchFromDisk.Value : null;
 
             var poolPatches = new List<Pool_patch>(session.Connection.Cache.Pool_patches);
             var poolUpdates = new List<Pool_update>(session.Connection.Cache.Pool_updates);

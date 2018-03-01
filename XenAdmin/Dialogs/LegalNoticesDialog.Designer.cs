@@ -54,11 +54,12 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
+            this.textBox1.TabStop = false;
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.label1, "label1");
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Name = "label1";
             // 
             // label3
@@ -89,6 +90,7 @@ namespace XenAdmin.Dialogs
             this.HelpButton = false;
             this.MaximizeBox = true;
             this.Name = "LegalNoticesDialog";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
