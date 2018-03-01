@@ -33,19 +33,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Reflection;
 using System.Threading;
 using log4net;
 using XenAdmin.Controls;
 using XenAdmin.Diagnostics.Problems;
-using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAPI;
-using XenAdmin.Actions;
 using System.Linq;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using System.Text;
 using System.Diagnostics;
 using XenAdmin.Alerts;
@@ -56,7 +52,6 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public XenAdmin.Core.Updates.UpgradeSequence UpgradeSequences { get; set; }
         private bool _thisPageIsCompleted = false;
 
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
@@ -125,11 +120,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
 
             base.PageCancelled();
-        }
-
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
-        {
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageLoaded(PageLoadedDirection direction)
