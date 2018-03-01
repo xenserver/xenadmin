@@ -116,6 +116,12 @@ namespace XenAdmin.Wizards.GenericPages
             ThreadPool.QueueUserWorkItem(delegate { FetchFailureReasonWithRetry(defaultRetries, defaultTimeOut); });
         }
 
+        public void CancelFilters()
+        {
+            foreach (ReasoningFilter filter in _filters)
+                filter.Cancel();
+        }
+
         private void FetchFailureReasonWithRetry(int retries, int timeOut)
         {
             string threadFailureReason = Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN;
