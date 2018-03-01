@@ -776,6 +776,37 @@ namespace XenAPI
             return resident_VMs != null && resident_VMs.Count >= 2;
         }
 
+        public List<XenRef<VM>> GetRunningPvVMs()
+        {
+            var vms = from XenRef<VM> vmref in resident_VMs
+                      let vm = Connection.Resolve(vmref)
+                      where vm != null && vm.is_a_real_vm() && !vm.IsHVM()
+                      select vmref;
+
+            return vms.ToList();
+        }
+
+        public List<XenRef<VM>> GetRunningHvmVMs()
+        {
+            var vms = from XenRef<VM> vmref in resident_VMs
+                      let vm = Connection.Resolve(vmref)
+                      where vm != null && vm.is_a_real_vm() && vm.IsHVM()
+                      select vmref;
+
+            return vms.ToList();
+        }
+
+
+        public List<XenRef<VM>> GetRunningVMs()
+        {
+            var vms = from XenRef<VM> vmref in resident_VMs
+                      let vm = Connection.Resolve(vmref)
+                      where vm != null && vm.is_a_real_vm()
+                      select vmref;
+
+            return vms.ToList();
+        }
+
         #region Save Evacuated VMs for later
 
         public const String MAINTENANCE_MODE_EVACUATED_VMS_MIGRATED = "MAINTENANCE_MODE_EVACUATED_VMS_MIGRATED";
