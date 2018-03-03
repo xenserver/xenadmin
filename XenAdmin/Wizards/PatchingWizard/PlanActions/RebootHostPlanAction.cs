@@ -47,7 +47,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             : base(host.Connection, new XenRef<Host>(host.opaque_ref), string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))
         {
             _host = host;
-            visible = false;
+            Visible = false;
         }
 
         protected override void RunWithSession(ref Session session)
@@ -60,7 +60,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 return;
             }
 
-            visible = true;
+            Visible = true;
 
             _host.Connection.ExpectDisruption = true;
             try
@@ -73,11 +73,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 _host.Connection.ExpectDisruption = false;
             }
-        }
-
-        internal void RunExternal(Session session)
-        {
-            RunWithSession(ref session);
         }
     }
 }

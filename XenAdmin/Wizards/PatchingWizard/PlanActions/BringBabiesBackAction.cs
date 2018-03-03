@@ -54,7 +54,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             this._vms = vms;
             this._enableOnly = enableOnly;
             currentHost = host;
-            visible = false;
+            Visible = false;
         }
 
         protected override Host CurrentHost
@@ -71,8 +71,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 return;
             }
-            
-            visible = true;
+
+            Visible = true;
 
             Status = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
             PBD.CheckAndBestEffortPlugPBDsFor(Connection, _vms);

@@ -35,7 +35,6 @@ using System.Threading;
 using log4net;
 using XenAdmin.Network;
 using XenAPI;
-using System.Diagnostics;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
@@ -51,18 +50,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public Exception Error;
         protected bool Cancelling = false;
 
-        protected bool visible = true;
-        public bool Visible
-        {
-            get
-            {
-                return visible;
-            }
-            set 
-            {
-                visible = value;
-            }
-        }
+        public bool Visible { get; set; }
         
         private string status;
         public string Status
@@ -108,26 +96,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         public string TitlePlan { get; set; }
 
-        private bool _showProgressBar = false;
-        public event EventHandler OnShowProgressBarChange;
-
-        public virtual bool ShowProgressBar
-        {
-            get
-            {
-                return _showProgressBar;
-            }
-
-            set
-            {
-                _showProgressBar = value;
-                if (OnShowProgressBarChange != null)
-                    OnShowProgressBarChange(this, new EventArgs());
-            }
-        }
-
         protected PlanAction(string title)
         {
+            Visible = true;
             _percentComplete = 0;
             _title = title;
         }
@@ -172,8 +143,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
 
 
-        protected delegate void UpdateProgressDelegate(int progress);
-
         private void UpdateProgress(int progress)
         {
             this.PercentComplete = progress;
@@ -197,13 +166,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
 
         protected static string PollTaskForResult(IXenConnection connection, ref Session session,
-                                                  XenRef<Task> task, UpdateProgressDelegate updateProgressDelegate)
+            XenRef<Task> task, Action<int> updateProgressDelegate)
         {
             return PollTaskForResult(connection, ref session, task, updateProgressDelegate, 0, 100);
         }
 
         protected static String PollTaskForResult(IXenConnection connection, ref Session session,
-                                                  XenRef<Task> task, UpdateProgressDelegate updateProgressDelegate, int min, int max)
+            XenRef<Task> task, Action<int> updateProgressDelegate, int min, int max)
         {
             Program.AssertOffEventThread();
 

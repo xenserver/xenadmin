@@ -51,17 +51,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             this.Host = host;
         }
 
-        protected delegate double MetricDelegate(Session session);
-        protected delegate void DelegateWithSession(Session session);
-
-        protected void WaitForReboot(ref Session session, DelegateWithSession methodInvoker)
+        protected void WaitForReboot(ref Session session, Action<Session> methodInvoker)
         {
             Host host = TryResolveWithTimeout(this.Host);
 
             _WaitForReboot(host.IsMaster(), ref session, GetHostBootTime, methodInvoker);
         }
 
-        protected void WaitForAgent(ref Session session, DelegateWithSession methodInvoker)
+        protected void WaitForAgent(ref Session session, Action<Session> methodInvoker)
         {
             Host host = TryResolveWithTimeout(this.Host);
 
@@ -127,7 +124,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Connection.ConnectionLost -= connection_ConnectionLost;
         }
 
-        private void _WaitForReboot(bool master, ref Session session, MetricDelegate metricDelegate, DelegateWithSession methodInvoker)
+        private void _WaitForReboot(bool master, ref Session session, Func<Session, double> metricDelegate, Action<Session> methodInvoker)
         {
             _cancelled = false;
             double metric = metricDelegate(session);
@@ -154,7 +151,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
 
 
-        private Session WaitForHostToStart(bool master, Session session, MetricDelegate metricDelegate, double metric)
+        private Session WaitForHostToStart(bool master, Session session, Func<Session, double> metricDelegate, double metric)
         {
             Connection.ExpectDisruption = true;
 
@@ -214,7 +211,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Thread.Sleep(1000);
         }
 
-        private void WaitForBootTimeToBeGreaterThanBefore(bool master, Session session, MetricDelegate metricDelegate, double metric)
+        private void WaitForBootTimeToBeGreaterThanBefore(bool master, Session session, Func<Session, double> metricDelegate, double metric)
         {
 
             DateTime waitForMetric = DateTime.Now;

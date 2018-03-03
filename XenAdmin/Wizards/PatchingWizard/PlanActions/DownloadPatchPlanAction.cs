@@ -57,11 +57,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            this.visible = false;
+            this.Visible = false;
 
             lock (patch)
             {
-                this.visible = true;
+                this.Visible = true;
                 this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
 
                 if (Cancelling)
@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if ((AllDownloadedPatches.ContainsKey(patch) && File.Exists(AllDownloadedPatches[patch])) 
                     || (patchFromDisk.Key == patch && File.Exists(patchFromDisk.Value)))
                 {
-                    this.visible = false;
+                    this.Visible = false;
                     this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
                 }
                 else

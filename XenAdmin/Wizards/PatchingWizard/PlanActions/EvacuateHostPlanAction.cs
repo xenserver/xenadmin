@@ -48,7 +48,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             base.TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name());
             this._host = new XenRef<Host>(host);
             currentHost = host;
-            visible = false;
+            Visible = false;
         }
 
         protected override Host CurrentHost
@@ -83,7 +83,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
             }
 
-            visible = true;
+            Visible = true;
 
             PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObject.resident_VMs));
 
