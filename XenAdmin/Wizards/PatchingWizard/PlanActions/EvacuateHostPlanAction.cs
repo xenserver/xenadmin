@@ -58,7 +58,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            Host hostObject = TryResolveWithTimeout(_host);
+            Host hostObject = Connection.TryResolveWithTimeout(_host);
 
             // If there are no patches that require reboot, we skip the evacuate-reboot-bringbabiesback sequence
             // But we only do this if we indicated that host restart should be avoided (by initializing the AvoidRestartHosts property)

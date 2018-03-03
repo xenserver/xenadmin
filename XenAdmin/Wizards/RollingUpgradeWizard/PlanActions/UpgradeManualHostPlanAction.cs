@@ -58,7 +58,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             get { return _host; }
         }
 
-        public new Host Host { get { return TryResolveWithTimeout(base.Host); } }
+        public new Host Host { get { return Connection.TryResolveWithTimeout(base.HostXenRef); } }
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -92,7 +92,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 Status = Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER;
 
                 log.DebugFormat("Waiting for host {0} to reboot", _host.Name());
-                WaitForReboot(ref session, _session => XenAPI.Host.async_reboot(_session, Host.opaque_ref));
+                WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, Host.opaque_ref));
 
                 Status = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
                 foreach (var host in _host.Connection.Cache.Hosts)
@@ -109,11 +109,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 _host.Connection.ExpectDisruption = false;
                 timer.Stop();
             }
-        }
-
-        internal void RunExternal(Session session)
-        {
-            RunWithSession(ref session);
         }
     }
 }

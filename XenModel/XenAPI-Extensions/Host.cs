@@ -705,7 +705,7 @@ namespace XenAPI
             return BoolKey(other_config, MAINTENANCE_MODE);
         }
 
-        public const string BOOT_TIME = "boot_time";
+        private const string BOOT_TIME = "boot_time";
 
         public double BootTime()
         {
@@ -724,6 +724,12 @@ namespace XenAPI
             return bootTime;
         }
 
+        public static double BootTime(Session session, string hostOpaqueRef)
+        {
+            var host = get_record(session, hostOpaqueRef);
+            return host.BootTime();
+        }
+
         public PrettyTimeSpan Uptime()
         {
             double bootTime = BootTime();
@@ -732,7 +738,7 @@ namespace XenAPI
             return new PrettyTimeSpan(DateTime.UtcNow - Util.FromUnixTime(bootTime) - Connection.ServerTimeOffset);
         }
 
-        public const string AGENT_START_TIME = "agent_start_time";
+        private const string AGENT_START_TIME = "agent_start_time";
 
         public double AgentStartTime()
         {
@@ -748,6 +754,12 @@ namespace XenAPI
                 return 0.0;
 
             return agentStartTime;
+        }
+
+        public static double AgentStartTime(Session session, string hostOpaqueRef)
+        {
+            var host = get_record(session, hostOpaqueRef);
+            return host.AgentStartTime();
         }
 
         public PrettyTimeSpan AgentUptime()

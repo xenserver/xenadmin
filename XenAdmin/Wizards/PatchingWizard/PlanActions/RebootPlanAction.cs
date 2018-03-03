@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading;
 using XenAdmin.Network;
 using XenAPI;
@@ -42,65 +41,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
     public abstract class RebootPlanAction : PlanActionWithSession
     {
-        protected readonly XenRef<Host> Host;
+        protected readonly XenRef<Host> HostXenRef;
         private bool _cancelled = false;
 
         protected RebootPlanAction(IXenConnection connection, XenRef<Host> host, String title)
             : base(connection, title)
         {
-            this.Host = host;
-        }
-
-        protected void WaitForReboot(ref Session session, Action<Session> methodInvoker)
-        {
-            Host host = TryResolveWithTimeout(this.Host);
-
-            _WaitForReboot(host.IsMaster(), ref session, GetHostBootTime, methodInvoker);
-        }
-
-        protected void WaitForAgent(ref Session session, Action<Session> methodInvoker)
-        {
-            Host host = TryResolveWithTimeout(this.Host);
-
-            _WaitForReboot(host.IsMaster(), ref session, GetAgentStartTime, methodInvoker);
-        }
-
-        private double GetAgentStartTime(Session session)
-        {
-            Dictionary<String, String> other_config = XenAPI.Host.get_other_config(session, Host);
-
-            if (other_config == null)
-                return 0.0;
-
-            if (!other_config.ContainsKey(XenAPI.Host.AGENT_START_TIME))
-                return 0.0;
-
-            double agentStartTime;
-
-            if (!double.TryParse(other_config[XenAPI.Host.AGENT_START_TIME], NumberStyles.Number,
-                                 CultureInfo.InvariantCulture, out agentStartTime))
-                return 0.0;
-
-            return agentStartTime;
-        }
-
-        private double GetHostBootTime(Session session)
-        {
-            Dictionary<String, String> other_config = XenAPI.Host.get_other_config(session, Host);
-
-            if (other_config == null)
-                return 0.0;
-
-            if (!other_config.ContainsKey(XenAPI.Host.BOOT_TIME))
-                return 0.0;
-
-            double agentStartTime;
-
-            if (!double.TryParse(other_config[XenAPI.Host.BOOT_TIME], NumberStyles.Number,
-                                 CultureInfo.InvariantCulture, out agentStartTime))
-                return 0.0;
-
-            return agentStartTime;
+            this.HostXenRef = host;
         }
 
         public override void Cancel()
@@ -124,10 +71,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Connection.ConnectionLost -= connection_ConnectionLost;
         }
 
-        private void _WaitForReboot(bool master, ref Session session, Func<Session, double> metricDelegate, Action<Session> methodInvoker)
+        protected void WaitForReboot(ref Session session, Func<Session, string, double> metricDelegate, Action<Session> methodInvoker)
         {
+            Host host = Connection.TryResolveWithTimeout(this.HostXenRef);
+            bool master = host.IsMaster();
+
             _cancelled = false;
-            double metric = metricDelegate(session);
+            double metric = metricDelegate(session, HostXenRef.opaque_ref);
 
             log.DebugFormat("{0}._WaitForReboot(master='{1}', metric='{2}')", GetType().Name, master, metric);
 
@@ -151,7 +101,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
 
 
-        private Session WaitForHostToStart(bool master, Session session, Func<Session, double> metricDelegate, double metric)
+        private Session WaitForHostToStart(bool master, Session session, Func<Session, string, double> metricDelegate, double metric)
         {
             Connection.ExpectDisruption = true;
 
@@ -211,7 +161,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Thread.Sleep(1000);
         }
 
-        private void WaitForBootTimeToBeGreaterThanBefore(bool master, Session session, Func<Session, double> metricDelegate, double metric)
+        private void WaitForBootTimeToBeGreaterThanBefore(bool master, Session session, Func<Session, string, double> metricDelegate, double metric)
         {
 
             DateTime waitForMetric = DateTime.Now;
@@ -222,7 +172,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             double currentMetric;
             do
             {
-                currentMetric = metricDelegate(session);
+                currentMetric = metricDelegate(session, HostXenRef.opaque_ref);
 
                 if (_cancelled)
                     throw new CancelledException();

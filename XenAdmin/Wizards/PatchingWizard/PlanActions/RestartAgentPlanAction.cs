@@ -29,7 +29,6 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Network;
 using XenAPI;
 
 
@@ -37,12 +36,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class RestartAgentPlanAction : RebootPlanAction
     {
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="host"></param>
-        /// <param name="owner">The Form in front of which any connecting dialogs will be shown. May be null.</param>
         public RestartAgentPlanAction(Host host)
             : base(host.Connection, new XenRef<Host>(host), string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, host.Name()))
         {
@@ -50,8 +43,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-
-            base.WaitForAgent(ref session, _session => XenAPI.Host.async_restart_agent(_session, Host.opaque_ref));
+            WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
         }
     }
 }

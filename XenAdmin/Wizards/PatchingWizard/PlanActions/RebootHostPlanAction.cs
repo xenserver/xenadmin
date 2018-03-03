@@ -31,7 +31,6 @@
 
 using System.Collections.Generic;
 using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 
 
@@ -39,7 +38,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
     public class RebootHostPlanAction : RebootPlanAction, IAvoidRestartHostsAware
     {
-
         private readonly Host _host;
         public List<string> AvoidRestartHosts { private get; set; }
         
@@ -65,7 +63,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             _host.Connection.ExpectDisruption = true;
             try
             {
-                base.WaitForReboot(ref session, _session => XenAPI.Host.async_reboot(_session, Host.opaque_ref));
+                WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, HostXenRef.opaque_ref));
                 foreach (var host in _host.Connection.Cache.Hosts)
                     host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts
             }
