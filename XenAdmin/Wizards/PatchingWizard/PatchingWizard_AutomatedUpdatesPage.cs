@@ -212,7 +212,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (planActions.Count > 0)
                 {
-                    var bgw = new UpdateProgressBackgroundWorker(master, planActions, delayedActionsByHost, finalActions);
+                    var bgw = new UpdateProgressBackgroundWorker(planActions, delayedActionsByHost, finalActions);
                     backgroundWorkers.Add(bgw);
 
                 }
@@ -395,7 +395,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             catch (Exception e)
             {
-                bgw.FailedWithExceptionAction = action;
                 errorActions.Add(action);
                 inProgressActions.Remove(action);
 
@@ -451,7 +450,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             Thread.Sleep(1000);
 
             action.OnProgressChange -= action_OnProgressChange;
-            bgw.doneActions.Add(action);
             bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action);
         }
 
