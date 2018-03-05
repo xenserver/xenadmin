@@ -32,6 +32,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace XenAPI
@@ -153,7 +157,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static Network_sriov get_record(Session session, string _network_sriov)
         {
-            return new Network_sriov((Proxy_Network_sriov)session.proxy.network_sriov_get_record(session.uuid, _network_sriov ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_record(session.uuid, _network_sriov);
+            else
+                return new Network_sriov((Proxy_Network_sriov)session.proxy.network_sriov_get_record(session.uuid, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -164,7 +171,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<Network_sriov> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<Network_sriov>.Create(session.proxy.network_sriov_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_by_uuid(session.uuid, _uuid);
+            else
+                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_get_by_uuid(session.uuid, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -175,7 +185,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static string get_uuid(Session session, string _network_sriov)
         {
-            return (string)session.proxy.network_sriov_get_uuid(session.uuid, _network_sriov ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_uuid(session.uuid, _network_sriov);
+            else
+                return (string)session.proxy.network_sriov_get_uuid(session.uuid, _network_sriov ?? "").parse();
         }
 
         /// <summary>
@@ -186,7 +199,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static XenRef<PIF> get_physical_PIF(Session session, string _network_sriov)
         {
-            return XenRef<PIF>.Create(session.proxy.network_sriov_get_physical_pif(session.uuid, _network_sriov ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_physical_pif(session.uuid, _network_sriov);
+            else
+                return XenRef<PIF>.Create(session.proxy.network_sriov_get_physical_pif(session.uuid, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -197,7 +213,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static XenRef<PIF> get_logical_PIF(Session session, string _network_sriov)
         {
-            return XenRef<PIF>.Create(session.proxy.network_sriov_get_logical_pif(session.uuid, _network_sriov ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_logical_pif(session.uuid, _network_sriov);
+            else
+                return XenRef<PIF>.Create(session.proxy.network_sriov_get_logical_pif(session.uuid, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -208,7 +227,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static bool get_requires_reboot(Session session, string _network_sriov)
         {
-            return (bool)session.proxy.network_sriov_get_requires_reboot(session.uuid, _network_sriov ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_requires_reboot(session.uuid, _network_sriov);
+            else
+                return (bool)session.proxy.network_sriov_get_requires_reboot(session.uuid, _network_sriov ?? "").parse();
         }
 
         /// <summary>
@@ -219,7 +241,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static sriov_configuration_mode get_configuration_mode(Session session, string _network_sriov)
         {
-            return (sriov_configuration_mode)Helper.EnumParseDefault(typeof(sriov_configuration_mode), (string)session.proxy.network_sriov_get_configuration_mode(session.uuid, _network_sriov ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_configuration_mode(session.uuid, _network_sriov);
+            else
+                return (sriov_configuration_mode)Helper.EnumParseDefault(typeof(sriov_configuration_mode), (string)session.proxy.network_sriov_get_configuration_mode(session.uuid, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -231,7 +256,10 @@ namespace XenAPI
         /// <param name="_network">Network to connect SR-IOV virtual functions with VM VIFs</param>
         public static XenRef<Network_sriov> create(Session session, string _pif, string _network)
         {
-            return XenRef<Network_sriov>.Create(session.proxy.network_sriov_create(session.uuid, _pif ?? "", _network ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_create(session.uuid, _pif, _network);
+            else
+                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_create(session.uuid, _pif ?? "", _network ?? "").parse());
         }
 
         /// <summary>
@@ -243,7 +271,10 @@ namespace XenAPI
         /// <param name="_network">Network to connect SR-IOV virtual functions with VM VIFs</param>
         public static XenRef<Task> async_create(Session session, string _pif, string _network)
         {
-            return XenRef<Task>.Create(session.proxy.async_network_sriov_create(session.uuid, _pif ?? "", _network ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_network_sriov_create(session.uuid, _pif, _network);
+          else
+              return XenRef<Task>.Create(session.proxy.async_network_sriov_create(session.uuid, _pif ?? "", _network ?? "").parse());
         }
 
         /// <summary>
@@ -254,7 +285,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static void destroy(Session session, string _network_sriov)
         {
-            session.proxy.network_sriov_destroy(session.uuid, _network_sriov ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.network_sriov_destroy(session.uuid, _network_sriov);
+            else
+                session.proxy.network_sriov_destroy(session.uuid, _network_sriov ?? "").parse();
         }
 
         /// <summary>
@@ -265,7 +299,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static XenRef<Task> async_destroy(Session session, string _network_sriov)
         {
-            return XenRef<Task>.Create(session.proxy.async_network_sriov_destroy(session.uuid, _network_sriov ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_network_sriov_destroy(session.uuid, _network_sriov);
+          else
+              return XenRef<Task>.Create(session.proxy.async_network_sriov_destroy(session.uuid, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -276,7 +313,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static long get_remaining_capacity(Session session, string _network_sriov)
         {
-            return long.Parse((string)session.proxy.network_sriov_get_remaining_capacity(session.uuid, _network_sriov ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_remaining_capacity(session.uuid, _network_sriov);
+            else
+                return long.Parse((string)session.proxy.network_sriov_get_remaining_capacity(session.uuid, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -287,7 +327,10 @@ namespace XenAPI
         /// <param name="_network_sriov">The opaque_ref of the given network_sriov</param>
         public static XenRef<Task> async_get_remaining_capacity(Session session, string _network_sriov)
         {
-            return XenRef<Task>.Create(session.proxy.async_network_sriov_get_remaining_capacity(session.uuid, _network_sriov ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_network_sriov_get_remaining_capacity(session.uuid, _network_sriov);
+          else
+              return XenRef<Task>.Create(session.proxy.async_network_sriov_get_remaining_capacity(session.uuid, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -297,7 +340,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<Network_sriov>> get_all(Session session)
         {
-            return XenRef<Network_sriov>.Create(session.proxy.network_sriov_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_all(session.uuid);
+            else
+                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_get_all(session.uuid).parse());
         }
 
         /// <summary>
@@ -307,7 +353,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Network_sriov>, Network_sriov> get_all_records(Session session)
         {
-            return XenRef<Network_sriov>.Create<Proxy_Network_sriov>(session.proxy.network_sriov_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.network_sriov_get_all_records(session.uuid);
+            else
+                return XenRef<Network_sriov>.Create<Proxy_Network_sriov>(session.proxy.network_sriov_get_all_records(session.uuid).parse());
         }
 
         /// <summary>
@@ -326,11 +375,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// The PIF that has SR-IOV enabled
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PIF>))]
         public virtual XenRef<PIF> physical_PIF
         {
             get { return _physical_PIF; }
@@ -344,11 +394,12 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<PIF> _physical_PIF;
+        private XenRef<PIF> _physical_PIF = new XenRef<PIF>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// The logical PIF to connect to the SR-IOV network after enable SR-IOV on the physical PIF
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PIF>))]
         public virtual XenRef<PIF> logical_PIF
         {
             get { return _logical_PIF; }
@@ -362,7 +413,7 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<PIF> _logical_PIF;
+        private XenRef<PIF> _logical_PIF = new XenRef<PIF>(Helper.NullOpaqueRef);
 
         /// <summary>
         /// Indicates whether the host need to be rebooted before SR-IOV is enabled on the physical PIF
@@ -380,11 +431,12 @@ namespace XenAPI
                 }
             }
         }
-        private bool _requires_reboot;
+        private bool _requires_reboot = false;
 
         /// <summary>
         /// The mode for configure network sriov
         /// </summary>
+        [JsonConverter(typeof(sriov_configuration_modeConverter))]
         public virtual sriov_configuration_mode configuration_mode
         {
             get { return _configuration_mode; }
@@ -398,6 +450,6 @@ namespace XenAPI
                 }
             }
         }
-        private sriov_configuration_mode _configuration_mode;
+        private sriov_configuration_mode _configuration_mode = sriov_configuration_mode.unknown;
     }
 }

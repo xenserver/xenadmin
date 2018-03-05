@@ -55,6 +55,7 @@ namespace XenAPI
                 PIF transport_pif = Connection.Resolve(tunnel.transport_PIF);
                 return transport_pif.Name();
             }
+
             else if(IsSrIovLogicalPIF())
             {
                 if (Connection == null)
@@ -367,6 +368,10 @@ namespace XenAPI
         public bool IsSrIovLogicalPIF()
         {
             return sriov_logical_PIF_of != null && sriov_logical_PIF_of.Count != 0;
+
+        public bool SriovCapable()
+        {
+            return capabilities.Any(capability => capability == "sriov");
         }
     }
 }

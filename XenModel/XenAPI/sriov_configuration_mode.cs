@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(sriov_configuration_modeConverter))]
     public enum sriov_configuration_mode
     {
         sysfs, modprobe, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class sriov_configuration_mode_helper
     {
         public static string ToString(sriov_configuration_mode x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this sriov_configuration_mode x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class sriov_configuration_modeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((sriov_configuration_mode)value).StringOf());
         }
     }
 }
