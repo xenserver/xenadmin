@@ -607,7 +607,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             labelProgress.Visible = actionInProgress || checkInProgress;
             pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress && !checkInProgress;
 
-            return !IsCheckInProgress && !IsResolveActionInProgress && !problemsFound;
+            return !checkInProgress && !actionInProgress && !problemsFound;
         }
 
         public UpdateType SelectedUpdateType { private get; set; }

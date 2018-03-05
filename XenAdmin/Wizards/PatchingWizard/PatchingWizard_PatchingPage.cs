@@ -364,16 +364,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (patch == null)
                 return actions;
 
-            List<XenRef<VM>> runningVMs = host.GetRunningVMs();
-
             actions.Add(new ApplyPatchPlanAction(host, patch));
 
-            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost) 
-                && !(LivePatchCodesByHost !=null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
+            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)
+                && !(LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
             {
                 actions.Add(new EvacuateHostPlanAction(host));
                 actions.Add(new RebootHostPlanAction(host));
-                actions.Add(new BringBabiesBackAction(runningVMs, host, false));
+                actions.Add(new BringBabiesBackAction(host.GetRunningVMs(), host, false));
             }
 
             if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI))
@@ -420,8 +418,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (SelectedUpdateType != UpdateType.ISO || poolUpdate == null)
                 return actions;
 
-            List<XenRef<VM>> runningVMs = host.GetRunningVMs();
-
             actions.Add(new ApplyPoolUpdatePlanAction(host, poolUpdate));
 
             if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartHost)
@@ -429,7 +425,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 actions.Add(new EvacuateHostPlanAction(host));
                 actions.Add(new RebootHostPlanAction(host));
-                actions.Add(new BringBabiesBackAction(runningVMs, host, false));
+                actions.Add(new BringBabiesBackAction(host.GetRunningVMs(), host, false));
             }
 
             if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartXAPI))
