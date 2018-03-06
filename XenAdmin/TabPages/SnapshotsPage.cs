@@ -78,7 +78,7 @@ namespace XenAdmin.TabPages
             base.Text = Messages.SNAPSHOTS_PAGE_TITLE;
             dataGridView.TabIndex = snapshotTreeView.TabIndex;
             dataGridView.Sorted += DataGridView_Sorted;
-            dataGridView.Columns[2].DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HM;
+            dataGridView.Columns[2].DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HMS;
             dataGridView.Columns[2].ValueType = typeof(DateTime);
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
         }

@@ -64,7 +64,7 @@ namespace XenAdmin.Dialogs.ScheduledSnapshots
             ColumnExpand.DefaultCellStyle.NullValue = null;
             comboBoxTimeSpan.SelectedIndex = 0;
             dataGridViewRunHistory.Columns[2].ValueType = typeof(DateTime);
-            dataGridViewRunHistory.Columns[2].DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HMS;
+            dataGridViewRunHistory.Columns[2].DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HM;
             panelHistory.Visible = false;
             RefreshPoolTitle(pool);
             RefreshButtons();
