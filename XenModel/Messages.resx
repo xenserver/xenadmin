@@ -13656,4 +13656,7 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
     <value>All the supported NICs have enabled SR-IOV.</value>
   </data>
+  <data name="HOST_NEEDS_REBOOT_ENABLE_SRIOV" xml:space="preserve">
+    <value>Yes (Host needs reboot)</value>
+  </data>
 </root>
