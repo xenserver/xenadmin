@@ -293,6 +293,11 @@ namespace XenAPI
             return Connection.ResolveAll(PIFs).Find(pif => pif.VLAN >= 0) != null;
         }
 
+        public bool IsSriov()
+        {
+            return Connection.ResolveAll(PIFs).Find(pif => pif.IsSrIovLogicalPIF()) != null;
+        }
+
 
         #region IEquatable<Network> Members
 
