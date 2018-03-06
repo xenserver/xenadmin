@@ -17957,6 +17957,15 @@ namespace XenAdmin {
                 return ResourceManager.GetString("HOST_NEEDS_REBOOT_CHECK_DESCRIPTION", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yes (Host needs reboot).
+        /// </summary>
+        public static string HOST_NEEDS_REBOOT_ENABLE_SRIOV {
+            get {
+                return ResourceManager.GetString("HOST_NEEDS_REBOOT_ENABLE_SRIOV", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to &amp;Add Network....

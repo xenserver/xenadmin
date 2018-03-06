@@ -902,7 +902,8 @@ namespace XenAdmin.Controls.NetworkingTab
             private DataGridViewTextBoxCell AutoCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell LinkStatusCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell MacCell = new DataGridViewTextBoxCell();
-            private DataGridViewTextBoxCell MtuCell = new DataGridViewTextBoxCell(); 
+            private DataGridViewTextBoxCell MtuCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell SriovCell = new DataGridViewTextBoxCell();
             private IXenObject Xmo;
             PIF Pif;
 
@@ -919,7 +920,8 @@ namespace XenAdmin.Controls.NetworkingTab
                                AutoCell,
                                LinkStatusCell,
                                MacCell,
-                               MtuCell);
+                               MtuCell,
+                               SriovCell);
 
                 Network.PropertyChanged += Server_PropertyChanged;
 
@@ -946,6 +948,9 @@ namespace XenAdmin.Controls.NetworkingTab
                     Pif == null ? Messages.NONE : Pif.LinkStatusString();
                 MacCell.Value = Pif != null && Pif.IsPhysical() ? Pif.MAC : Messages.SPACED_HYPHEN;
                 MtuCell.Value = Network.CanUseJumboFrames() ? Network.MTU.ToString() : Messages.SPACED_HYPHEN;
+                SriovCell.Value = Pif == null || !Pif.IsSrIovLogicalPIF()
+                                  ? Messages.NO : Pif.Connection.Resolve(Pif.sriov_logical_PIF_of[0]).requires_reboot
+                                                  ? Messages.HOST_NEEDS_REBOOT_ENABLE_SRIOV : Messages.YES;
             }
 
             public void DeregisterEvents()
