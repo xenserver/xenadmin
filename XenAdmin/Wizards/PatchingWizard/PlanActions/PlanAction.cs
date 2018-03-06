@@ -84,15 +84,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        protected string _title;
-
-        public string Title
-        {
-            get
-            {
-                return _title;
-            }
-        }
+        public string Title { get; protected set; }
 
         public string TitlePlan { get; set; }
 
@@ -100,7 +92,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             Visible = true;
             _percentComplete = 0;
-            _title = title;
+            Title = title;
         }
 
         protected abstract void _Run();

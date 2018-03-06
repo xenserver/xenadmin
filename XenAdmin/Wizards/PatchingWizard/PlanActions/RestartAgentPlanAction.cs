@@ -37,7 +37,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     public class RestartAgentPlanAction : RebootPlanAction
     {
         public RestartAgentPlanAction(Host host)
-            : base(host.Connection, new XenRef<Host>(host), string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, host.Name()))
+            : base(host, string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, host.Name()))
         {
         }
 

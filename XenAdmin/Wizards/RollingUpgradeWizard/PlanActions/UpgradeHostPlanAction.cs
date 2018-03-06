@@ -33,13 +33,12 @@ using System;
 using System.Collections.Generic;
 using XenAPI;
 
-namespace XenAdmin.Wizards.PatchingWizard.PlanActions
+namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 {
     class UpgradeHostPlanAction : UpgradeManualHostPlanAction
     {
+        private readonly Dictionary<string, string> _arguments = new Dictionary<string, string>();
 
-
-        private Dictionary<string, string> _arguments = new Dictionary<string, string>();
         public UpgradeHostPlanAction(Host host, Dictionary<string, string> arguments)
             : base(host)
         {
@@ -49,7 +48,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            string value = XenAPI.Host.call_plugin(session, Host.opaque_ref, "prepare_host_upgrade.py", "main", _arguments);
+            string value = Host.call_plugin(session, HostXenRef.opaque_ref, "prepare_host_upgrade.py", "main", _arguments);
             if (value.ToLower() == "true")
                 base.RunWithSession(ref session);
             else

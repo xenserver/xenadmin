@@ -964,9 +964,10 @@
     </Compile>
     <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyPoolUpdatePlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\ApplyXenServerPatchPlanAction.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\IAvoidRestartCapable.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\HostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PatchPrechecksOnMultipleHostsAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\DownloadPatchPlanAction.cs" />
+    <Compile Include="Wizards\PatchingWizard\PlanActions\RestartHostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\UploadPatchToMasterPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PoolPatchMapping.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RemoveUpdateFilesFromMaster.cs" />

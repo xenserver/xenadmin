@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             lock (patch)
             {
                 this.Visible = true;
-                this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
+                Title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
 
                 if (Cancelling)
                     return;
@@ -72,7 +72,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     || (patchFromDisk.Key == patch && File.Exists(patchFromDisk.Value)))
                 {
                     this.Visible = false;
-                    this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
+                    Title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
                 }
                 else
                 {

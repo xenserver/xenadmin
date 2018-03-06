@@ -930,10 +930,15 @@ namespace XenAPI
 
         public void ClearEvacuatedVMs(Session session)
         {
-            XenRef<Host> serverOpaqueRef1 = get_by_uuid(session, uuid);
-            remove_from_other_config(session, serverOpaqueRef1, MAINTENANCE_MODE_EVACUATED_VMS_MIGRATED);
-            remove_from_other_config(session, serverOpaqueRef1, MAINTENANCE_MODE_EVACUATED_VMS_HALTED);
-            remove_from_other_config(session, serverOpaqueRef1, MAINTENANCE_MODE_EVACUATED_VMS_SUSPENDED);
+            var hostRef = get_by_uuid(session, uuid);
+            ClearEvacuatedVMs(session, hostRef);
+        }
+
+        public static void ClearEvacuatedVMs(Session session, XenRef<Host> hostRef)
+        {
+            remove_from_other_config(session, hostRef, MAINTENANCE_MODE_EVACUATED_VMS_MIGRATED);
+            remove_from_other_config(session, hostRef, MAINTENANCE_MODE_EVACUATED_VMS_HALTED);
+            remove_from_other_config(session, hostRef, MAINTENANCE_MODE_EVACUATED_VMS_SUSPENDED);
         }
 
         public List<VM> GetMigratedEvacuatedVMs()

@@ -37,17 +37,13 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    // TODO COWLEY: This code is used more widely and the common parts should move into HostAction.
-
-    public abstract class RebootPlanAction : PlanActionWithSession
+    public abstract class RebootPlanAction : HostPlanAction
     {
-        protected readonly XenRef<Host> HostXenRef;
         private bool _cancelled = false;
 
-        protected RebootPlanAction(IXenConnection connection, XenRef<Host> host, String title)
-            : base(connection, title)
+        protected RebootPlanAction(Host host, string title)
+            : base(host, title)
         {
-            this.HostXenRef = host;
         }
 
         public override void Cancel()
@@ -71,10 +67,26 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Connection.ConnectionLost -= connection_ConnectionLost;
         }
 
+        protected void RebootHost(ref Session session)
+        {
+            var hostObj = GetResolvedHost();
+            Title = string.Format(Messages.UPDATES_WIZARD_REBOOTING, hostObj.Name());
+            Connection.ExpectDisruption = true;
+            try
+            {
+                WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, HostXenRef.opaque_ref));
+                foreach (var host in Connection.Cache.Hosts)
+                    host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts
+            }
+            finally
+            {
+                Connection.ExpectDisruption = false;
+            }
+        }
+
         protected void WaitForReboot(ref Session session, Func<Session, string, double> metricDelegate, Action<Session> methodInvoker)
         {
-            Host host = Connection.TryResolveWithTimeout(this.HostXenRef);
-            bool master = host.IsMaster();
+            bool master = GetResolvedHost().IsMaster();
 
             _cancelled = false;
             double metric = metricDelegate(session, HostXenRef.opaque_ref);
@@ -99,7 +111,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 DeregisterConnectionLostEvent();
             }
         }
-
 
         private Session WaitForHostToStart(bool master, Session session, Func<Session, string, double> metricDelegate, double metric)
         {

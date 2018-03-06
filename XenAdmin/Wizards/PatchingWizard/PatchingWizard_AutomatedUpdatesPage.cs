@@ -181,19 +181,28 @@ namespace XenAdmin.Wizards.PatchingWizard
                         {
                             planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
 
-                            var actions = GetAfterApplyGuidanceActionsForPatch(host, patch);
                             if (patch.GuidanceMandatory)
                             {
-                                planActions.AddRange(actions);
-                                // remove all delayed actions of the same kind that have already been added
-                                // (because these actions are guidance-mandatory=true, therefore
-                                // they will run immediately, making delayed ones obsolete)
-                                delayedActionsByHost[host].RemoveAll(dg => actions.Any(ma => ma.GetType() == dg.GetType()));
+                                var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI &&
+                                             delayedActionsByHost[host].Any(a => a is RestartHostPlanAction)
+                                    ? new RestartHostPlanAction(host, host.GetRunningVMs(), true)
+                                    : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
+
+                                if (action != null)
+                                {
+                                    planActions.Add(action);
+                                    // remove all delayed actions of the same kind that has already been added
+                                    // (because this action is guidance-mandatory=true, therefore
+                                    // it will run immediately, making delayed ones obsolete)
+                                    delayedActionsByHost[host].RemoveAll(a => action.GetType() == a.GetType());
+                                }
                             }
                             else
                             {
-                                // add any action that is not already in the list
-                                delayedActionsByHost[host].AddRange(actions.Where(a => !delayedActionsByHost[host].Any(dg => a.GetType() == dg.GetType())));
+                                var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
+                                // add the action if it's not already in the list
+                                if (action != null && !delayedActionsByHost[host].Any(a => a.GetType() == action.GetType()))
+                                    delayedActionsByHost[host].Add(action);
                             }
                         }
 
@@ -263,7 +272,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 doneActions.Add(action);
                                 inProgressActions.Remove(action);
 
-                                progressBar.Value += (int)((float)e.ProgressPercentage / (float)backgroundWorkers.Count); //extend with error handling related numbers
+                                progressBar.Value += e.ProgressPercentage/backgroundWorkers.Count; //extend with error handling related numbers
                             }
                         }
 
@@ -309,6 +318,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void WorkerDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
         {
             var bgw = sender as UpdateProgressBackgroundWorker;
+            if (bgw == null)
+                return;
+
             PlanAction action = null;
 
             try
@@ -335,9 +347,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var h in hostsOrdered)
                 {
                     var actions = bgw.DelayedActionsByHost[h];
+                    var restartActions = actions.Where(a => a is RestartHostPlanAction).ToList();
 
                     //run all restart-alike plan actions
-                    foreach (var a in actions.Where(a => a.IsRestartRelatedPlanAction()))
+                    foreach (var a in restartActions)
                     {
                         action = a;
 
@@ -350,8 +363,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                         RunPlanAction(bgw, action);
                     }
 
+                    var otherActions = actions.Where(a => !(a is RestartHostPlanAction)).ToList();
+
                     //run the rest
-                    foreach (var a in actions.Where(a => !a.IsRestartRelatedPlanAction()))
+                    foreach (var a in otherActions)
                     {
                         action = a;
 
@@ -362,19 +377,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
 
                         // any non-restart-alike delayed action needs to be run if:
-                        // - this host is pre-Ely and there isn't any restart plan action among the delayed actions, or
-                        // - this host is Ely or above and bgw.AvoidRestartHosts contains the host's uuid (shows that live patching must have succeeded) or there isn't any restart plan action among the delayed actions
-                        if (!Helpers.ElyOrGreater(h) && !actions.Any(pa => pa.IsRestartRelatedPlanAction())
-                            || Helpers.ElyOrGreater(h) && (bgw.AvoidRestartHosts != null && bgw.AvoidRestartHosts.Contains(h.uuid) || !actions.Any(pa => pa.IsRestartRelatedPlanAction())))
+                        // - this host is pre-Ely and there isn't any delayed restart plan action, or
+                        // - this host is Ely or above and live patching must have succeeded or there isn't any delayed restart plan action
+                        if ((!Helpers.ElyOrGreater(h) && restartActions.Count <= 0)
+                            || (Helpers.ElyOrGreater(h) && (h.updates_requiring_reboot.Count <= 0 || restartActions.Count <= 0)))
                         {
                             RunPlanAction(bgw, action);
                         }
                         else
                         {
-                            //skip running it
+                            //skip running it, but still need to report progress, mainly for the progress bar
 
                             action.Visible = false;
-                            bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action); //still need to report progress, mainly for the progress bar
+                            bgw.ReportProgress(100/bgw.ActionsCount, action);
                         }
                     }
                 }
@@ -440,8 +455,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
         {
-            InitializePlanAction(bgw, action);
-
             action.OnProgressChange += action_OnProgressChange;
 
             bgw.ReportProgress(0, action);
@@ -450,21 +463,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             Thread.Sleep(1000);
 
             action.OnProgressChange -= action_OnProgressChange;
-            bgw.ReportProgress((int)((1.0 / (double)bgw.ActionsCount) * 100), action);
+            bgw.ReportProgress(100/bgw.ActionsCount, action);
         }
 
         private void action_OnProgressChange(object sender, EventArgs e)
         {
             Program.Invoke(Program.MainWindow, UpdateStatusTextBox);
-        }
-
-        private static void InitializePlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
-        {
-            if (action is IAvoidRestartHostsAware)
-            {
-                var avoidRestartAction = action as IAvoidRestartHostsAware;
-                avoidRestartAction.AvoidRestartHosts = bgw.AvoidRestartHosts;
-            }
         }
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -498,33 +502,21 @@ namespace XenAdmin.Wizards.PatchingWizard
             OnPageUpdated();
         }
 
-        private static List<PlanAction> GetAfterApplyGuidanceActionsForPatch(Host host, XenServerPatch patch)
+        private PlanAction GetAfterApplyGuidanceAction(Host host, after_apply_guidance guidance)
         {
-            List<PlanAction> actions = new List<PlanAction>();
-
-            if (patch.after_apply_guidance == after_apply_guidance.restartHost)
+            switch (guidance)
             {
-                actions.Add(new EvacuateHostPlanAction(host));
-                actions.Add(new RebootHostPlanAction(host));
-                actions.Add(new BringBabiesBackAction(host.GetRunningVMs(), host, false));
+                case after_apply_guidance.restartHost:
+                    return new RestartHostPlanAction(host, host.GetRunningVMs());
+                case after_apply_guidance.restartXAPI:
+                    return new RestartAgentPlanAction(host);
+                case after_apply_guidance.restartHVM:
+                    return new RebootVMsPlanAction(host, host.GetRunningHvmVMs());
+                case after_apply_guidance.restartPV:
+                    return new RebootVMsPlanAction(host, host.GetRunningPvVMs());
+                default:
+                    return null;
             }
-
-            if (patch.after_apply_guidance == after_apply_guidance.restartXAPI)
-            {
-                actions.Add(new RestartAgentPlanAction(host));
-            }
-
-            if (patch.after_apply_guidance == after_apply_guidance.restartHVM)
-            {
-                actions.Add(new RebootVMsPlanAction(host, host.GetRunningHvmVMs()));
-            }
-
-            if (patch.after_apply_guidance == after_apply_guidance.restartPV)
-            {
-                actions.Add(new RebootVMsPlanAction(host, host.GetRunningPvVMs()));
-            }
-
-            return actions;
         }
 
         #endregion
@@ -598,15 +590,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             progressBar.Value = 100;
             pictureBox1.Image = null;
             labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
-        }
-    }
-
-    public static class Extensions
-    {
-        public static bool IsRestartRelatedPlanAction(this PlanAction a)
-        {
-            return
-                a is EvacuateHostPlanAction || a is RebootHostPlanAction || a is BringBabiesBackAction;
         }
     }
 }

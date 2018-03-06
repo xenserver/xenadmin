@@ -46,20 +46,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         public Dictionary<Host, List<PlanAction>> DelayedActionsByHost {get; private set; }
         public List<PlanAction> FinalActions { get; private set; }
 
-        private readonly List<string> avoidRestartHosts = new List<string>();
-        
-        /// <summary>
-        /// This list lists uuids of hosts that does not need to be restarted
-        /// </summary>
-        public List<string> AvoidRestartHosts
-        {
-            get
-            {
-                return avoidRestartHosts;
-            }
-        }
-
-       
         public UpdateProgressBackgroundWorker(List<PlanAction> planActions,
             Dictionary<Host, List<PlanAction>> delayedActionsByHost, List<PlanAction> finalActions)
         {

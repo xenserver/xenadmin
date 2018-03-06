@@ -79,10 +79,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                                 
                                 if (_cancel)
                                     return;
-                                
-                                if (planAction is UpgradeHostPlanAction)
+
+                                var upgradeAction = planAction as UpgradeHostPlanAction;
+                                if (upgradeAction != null)
                                 {
-                                    Host hostAfterReboot = (planAction as UpgradeHostPlanAction).Host;
+                                    Host hostAfterReboot = upgradeAction.GetResolvedHost();
                                     if (hostAfterReboot != null && Helpers.SameServerVersion(hostAfterReboot, hostVersion))
                                     {
                                         log.ErrorFormat("Host '{0}' rebooted with the same version '{1}'", hostAfterReboot.Name(), hostAfterReboot.LongProductVersion());

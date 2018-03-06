@@ -260,7 +260,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             var upgradeHostPlanAction = planAction;
             //Show dialog prepare host boot from CD or PXE boot and click OK to reboot
-            string msg = string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, planAction.Host.Name());
+            string msg = string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, planAction.GetResolvedHost().Name());
 
             UpgradeManualHostPlanAction action = upgradeHostPlanAction;
 
@@ -273,16 +273,16 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     if (Dialog.DialogResult != DialogResult.OK) // Cancel or Unknown
                     {
                         completedTitleLabel = Messages.ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED;
-                        if(action.Host.IsMaster())
+                        if (action.GetResolvedHost().IsMaster())
                             throw new ApplicationException(Messages.EXCEPTION_USER_CANCELLED_MASTER);
                         
                         throw new ApplicationException(Messages.EXCEPTION_USER_CANCELLED);
                     }
                 }
             });
-            string beforeRebootProductVersion = upgradeHostPlanAction.Host.LongProductVersion();
-            string hostName = upgradeHostPlanAction.Host.Name();
-            upgradeHostPlanAction.Timeout += new EventHandler(upgradeHostPlanAction_Timeout);
+            string beforeRebootProductVersion = upgradeHostPlanAction.GetResolvedHost().LongProductVersion();
+            string hostName = upgradeHostPlanAction.GetResolvedHost().Name();
+            upgradeHostPlanAction.Timeout += upgradeHostPlanAction_Timeout;
             try
             {
                 do
@@ -294,7 +294,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     upgradeHostPlanAction.Run();
 
                     //if comes back and does not have a different product version
-                    if (Helpers.SameServerVersion(upgradeHostPlanAction.Host, beforeRebootProductVersion))
+                    if (Helpers.SameServerVersion(upgradeHostPlanAction.GetResolvedHost(), beforeRebootProductVersion))
                     {
                         using (var dialog = new NotModalThreeButtonDialog(SystemIcons.Exclamation,
                             string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName)
@@ -304,15 +304,15 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                             if (dialog.DialogResult != DialogResult.OK) // Cancel or Unknown
                                 throw new Exception(Messages.HOST_REBOOTED_SAME_VERSION);
                             else
-                                upgradeHostPlanAction = new UpgradeManualHostPlanAction(upgradeHostPlanAction.Host);
+                                upgradeHostPlanAction = new UpgradeManualHostPlanAction(upgradeHostPlanAction.GetResolvedHost());
                         }
                     }
 
-                } while (Helpers.SameServerVersion(upgradeHostPlanAction.Host, beforeRebootProductVersion));
+                } while (Helpers.SameServerVersion(upgradeHostPlanAction.GetResolvedHost(), beforeRebootProductVersion));
             }
             finally
             {
-                upgradeHostPlanAction.Timeout -= new EventHandler(upgradeHostPlanAction_Timeout);
+                upgradeHostPlanAction.Timeout -= upgradeHostPlanAction_Timeout;
             }
         }
 
@@ -436,20 +436,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         private List<PlanAction> GetSubTasksFor(Host host)
         {
-            List<XenRef<VM>> runningVMs = RunningVMs(host);
-            if (ManualModeSelected)
-                return new List<PlanAction>
-                           {
-                               new EvacuateHostPlanAction(host),
-                               new UpgradeManualHostPlanAction(host),
-                               new BringBabiesBackAction(runningVMs, host, true)
-                           };
+            var runningVMs = RunningVMs(host);
+
+            var upgradeAction = ManualModeSelected
+                ? new UpgradeManualHostPlanAction(host)
+                : new UpgradeHostPlanAction(host, InstallMethodConfig);
+
             return new List<PlanAction>
-                       {
-                           new EvacuateHostPlanAction(host),
-                           new UpgradeHostPlanAction(host, InstallMethodConfig),
-                           new BringBabiesBackAction(runningVMs, host, true)
-                       };
+            {
+                new EvacuateHostPlanAction(host),
+                upgradeAction,
+                new BringBabiesBackAction(runningVMs, host, true)
+            };
         }
 
         private static List<XenRef<VM>> RunningVMs(Host host)

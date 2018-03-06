@@ -29,25 +29,61 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Collections.Generic;
+using XenAdmin.Core;
 using XenAPI;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public class EvacuateHostPlanAction : HostPlanAction
-    {     
-        public EvacuateHostPlanAction(Host host)
-            : base(host, string.Format(Messages.PLANACTION_VMS_MIGRATING, host.Name()))
+    public class RestartHostPlanAction : RebootPlanAction
+    {
+        private readonly List<XenRef<VM>> _vms;
+        private readonly bool _restartAgentFallback;
+
+        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool restartAgentFallback = false)
+            : base(host, string.Empty)
         {
-            TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name());
+            _vms = vms;
             Visible = false;
+            _restartAgentFallback = restartAgentFallback;
         }
 
         protected override void RunWithSession(ref Session session)
         {
             Visible = true;
+
+            var hostObj = GetResolvedHost();
+
+            if (Helpers.ElyOrGreater(hostObj))
+            {
+                log.DebugFormat("Checking host.patches_requiring_reboot now on '{0}'.", hostObj);
+
+                if (hostObj.updates_requiring_reboot.Count > 0)
+                {
+                    log.DebugFormat("Found {0} patches requiring reboot (live patching failed)."
+                                    + "Initiating evacuate-reboot-bringbabiesback process.",
+                        hostObj.updates_requiring_reboot.Count);
+                }
+                else if (_restartAgentFallback)
+                {
+                    log.Debug("Live patching succeeded. Restarting agent.");
+                    Title = string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, hostObj.Name());
+                    WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
+                    return;
+                }
+                else
+                {
+                    log.Debug("Did not find patches requiring reboot (live patching succeeded)."
+                              + " Skipping scheduled restart.");
+                    return;
+                }
+            }
+
             EvacuateHost(ref session);
+            RebootHost(ref session);
+            BringBabiesBack(ref session, _vms, false);
         }
     }
 }
