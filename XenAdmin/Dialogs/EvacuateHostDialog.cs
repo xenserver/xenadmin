@@ -801,6 +801,12 @@ namespace XenAdmin.Dialogs
 
                         break;
 
+                    case Failure.VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT:
+                        if (ErrorDescription.Length > 1)
+                            vmRef = ErrorDescription[1];
+                        AddDefaultSuspendOperation(vmRef);
+                        break;
+
                     default:
                         AddDefaultSuspendOperation(vmRef);
                         break;
