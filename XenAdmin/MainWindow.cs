@@ -142,6 +142,9 @@ namespace XenAdmin
         private bool expandTreeNodesOnStartup;
         private int connectionsInProgressOnStartup;
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        static extern uint RegisterApplicationRestart(string pszCommandline, uint dwFlags);
+
         public MainWindow(ArgType argType, string[] args)
         {
             Program.MainWindow = this;
@@ -152,6 +155,9 @@ namespace XenAdmin
             InitializeComponent();
             SetMenuItemStartIndexes();
             Icon = Properties.Resources.AppIcon;
+
+            //CA-270999: Add registration to RestartManager
+            RegisterApplicationRestart(null, 0);
 
             #region Add Tab pages
 
