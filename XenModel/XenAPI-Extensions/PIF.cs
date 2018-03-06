@@ -368,6 +368,7 @@ namespace XenAPI
         public bool IsSrIovLogicalPIF()
         {
             return sriov_logical_PIF_of != null && sriov_logical_PIF_of.Count != 0;
+        }
 
         public bool SriovCapable()
         {
