@@ -185,7 +185,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             {
                                 var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI &&
                                              delayedActionsByHost[host].Any(a => a is RestartHostPlanAction)
-                                    ? new RestartHostPlanAction(host, host.GetRunningVMs(), true)
+                                    ? new RestartHostPlanAction(host, host.GetRunningVMs(), restartAgentFallback:true)
                                     : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
 
                                 if (action != null)

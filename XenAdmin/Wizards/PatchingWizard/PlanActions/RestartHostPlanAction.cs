@@ -40,13 +40,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     public class RestartHostPlanAction : RebootPlanAction
     {
         private readonly List<XenRef<VM>> _vms;
+        private readonly bool _enableOnly;
         private readonly bool _restartAgentFallback;
 
-        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool restartAgentFallback = false)
+        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, bool restartAgentFallback = false)
             : base(host, string.Empty)
         {
             _vms = vms;
             Visible = false;
+            _enableOnly = enableOnly;
             _restartAgentFallback = restartAgentFallback;
         }
 
@@ -83,7 +85,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             EvacuateHost(ref session);
             RebootHost(ref session);
-            BringBabiesBack(ref session, _vms, false);
+            BringBabiesBack(ref session, _vms, _enableOnly);
         }
     }
 }
