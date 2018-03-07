@@ -163,6 +163,14 @@ namespace XenAdmin.Commands
             }
         }
 
+        public void AddIf(ToolStripMenuItem item, Func<bool> condition)
+        {
+            if (condition())
+            {
+                AddIfEnabled(item);
+            }
+        }
+
         public void AddIfEnabled(ToolStripMenuItem item)
         {
             if (item.Enabled)
