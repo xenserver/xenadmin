@@ -136,5 +136,15 @@ namespace XenAdmin.Commands
                 }
             }
         }
+
+        // For a large pool, the server list in the menu is too long, which is not user friendly.
+        // And updating the server list is time consuming.
+        // But the menu item of migrate wizard is still provided to the user to operate.
+        protected override bool ShouldShowServerList()
+        {
+            IXenConnection connection = Command.GetSelection()[0].Connection;
+            List<Host> hosts = new List<Host>(connection.Cache.Hosts);
+            return (hosts.Count > 16) ? false : true;
+        }
     }
 }

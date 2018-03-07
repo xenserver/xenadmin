@@ -81,6 +81,11 @@ namespace XenAdmin.Commands
             _isDropDownClosed = true;
         }
 
+        protected virtual bool ShouldShowServerList()
+        {
+            return true;
+        }
+
         protected override void OnDropDownOpening(EventArgs e)
         {
             base.DropDownItems.Clear();
@@ -111,11 +116,17 @@ namespace XenAdmin.Commands
 
             List<Host> hosts = new List<Host>(connection.Cache.Hosts);
             hosts.Sort();
-            foreach (Host host in hosts)
+
+            if (ShouldShowServerList())
             {
-                VMOperationToolStripMenuSubItem item = new VMOperationToolStripMenuSubItem(String.Format(Messages.MAINWINDOW_CONTEXT_UPDATING, host.name_label.EscapeAmpersands()), Images.StaticImages._000_ServerDisconnected_h32bit_16);
-                item.Tag = host;
-                base.DropDownItems.Add(item);
+                foreach (Host host in hosts)
+                {
+                    VMOperationToolStripMenuSubItem item = new VMOperationToolStripMenuSubItem(
+                        String.Format(Messages.MAINWINDOW_CONTEXT_UPDATING, host.name_label.EscapeAmpersands()),
+                        Images.StaticImages._000_ServerDisconnected_h32bit_16);
+                    item.Tag = host;
+                    base.DropDownItems.Add(item);
+                }
             }
 
             // start a new thread to evaluate which hosts can be used.
