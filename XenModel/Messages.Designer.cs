@@ -34031,6 +34031,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: Check skipped because the {1} storage is broken..
+        /// </summary>
+        public static string UPDATES_WIZARD_BROKEN_SR_WARNING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_BROKEN_SR_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} storage repository is broken..
         /// </summary>
         public static string UPDATES_WIZARD_BROKEN_STORAGE {

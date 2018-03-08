@@ -35,6 +35,7 @@ using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Core;
 using System.IO;
 using XenAdmin.Diagnostics.Problems.HostProblem;
+using XenAdmin.Diagnostics.Problems.SRProblem;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Collections.Generic;
@@ -53,6 +54,7 @@ namespace XenAdmin.Diagnostics.Checks
         private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
 
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
+        private Dictionary<Pool_update, Dictionary<Host, SR>> srUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
 
         public PatchPrecheckCheck(Host host, Pool_patch patch)
             : this(host, patch, null)
@@ -71,6 +73,12 @@ namespace XenAdmin.Diagnostics.Checks
             this.livePatchCodesByHost = livePatchCodesByHost;
         }
 
+        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost, Dictionary<Pool_update, Dictionary<Host, SR>> srUploadedUpdates)
+            : this(host, update, livePatchCodesByHost)
+        {
+            this.srUploadedUpdates = srUploadedUpdates;
+        }
+
         public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost)
             : base(host)
         {
@@ -80,6 +88,12 @@ namespace XenAdmin.Diagnostics.Checks
 
         protected override Problem RunCheck()
         {
+            //
+            // Check SRs that uploaded the updates is still attached
+            //
+            if (_update != null && srUploadedUpdates != null && srUploadedUpdates.ContainsKey(_update) && srUploadedUpdates[_update].ContainsKey(Host) && srUploadedUpdates[_update][Host].IsBroken())
+                return new BrokenSRWarning(this, Host, srUploadedUpdates[_update][Host]);
+
             //
             // Check patch isn't already applied here
             //

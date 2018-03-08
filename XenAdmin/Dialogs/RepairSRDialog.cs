@@ -59,7 +59,7 @@ namespace XenAdmin.Dialogs
         private Font BoldFont;
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
         private readonly CollectionChangeEventHandler PBD_CollectionChangedWithInvoke;
-
+        private bool runAction;
         public AsyncAction RepairAction
         {
             get
@@ -72,18 +72,18 @@ namespace XenAdmin.Dialogs
         /// Initializes a new instance of the <see cref="RepairSRDialog"/> class.
         /// </summary>
         /// <param name="sr">The SR to be repaired.</param>
-        public RepairSRDialog(SR sr)
-            : this(new SR[] { sr })
-        {
-        }
+        public RepairSRDialog(SR sr, bool runAction = true)
+            : this(new SR[] { sr }, runAction)
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RepairSRDialog"/> class.
         /// </summary>
         /// <param name="srs">The SRs to be repaired.</param>
-        public RepairSRDialog(IEnumerable<SR> srs)
+        public RepairSRDialog(IEnumerable<SR> srs, bool runAction = true)
         {
             Util.ThrowIfEnumerableParameterNullOrEmpty(srs, "srs");
+            this.runAction = runAction;
             BoldFont = new Font(Font, FontStyle.Bold);
             List<SR> srList = new List<SR>(srs);
             srList.Sort();
@@ -279,10 +279,14 @@ namespace XenAdmin.Dialogs
 
                 _repairAction = new MultipleAction(null, string.Empty, string.Empty, string.Empty, subActions, true);
             }
-            
-            _repairAction.Changed += action_Changed;
-            _repairAction.Completed += action_Completed;
-            Grow(_repairAction.RunAsync);
+
+            if (runAction)
+            {
+                _repairAction.Changed += action_Changed;
+                _repairAction.Completed += action_Completed;
+                Grow(_repairAction.RunAsync);
+            }
+
         }
 
         private void action_Changed(ActionBase action)

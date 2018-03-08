@@ -40,9 +40,10 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
 {
     public class BrokenSR : SRProblem
     {
-        public BrokenSR(Check check, SR sr)
-            : base(check,sr) { }
 
+        public BrokenSR(Check check, SR sr)
+            : base(check, sr)
+        {}
         public override string Description
         {
             get { return string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, Sr.NameWithoutHost()); }
@@ -52,7 +53,7 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
         {
             Program.AssertOnEventThread();
 
-            RepairSRDialog dlg = new RepairSRDialog(Sr);
+            RepairSRDialog dlg = new RepairSRDialog(Sr, false);
             if (dlg.ShowDialog(Program.MainWindow) == DialogResult.OK)
             {
                 cancelled = false;
@@ -66,6 +67,32 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
         public override string HelpMessage
         {
             get { return Messages.REPAIR_SR; }
+        }
+    }
+
+    class BrokenSRWarning : Warning
+    {
+        private readonly Host host;
+        private readonly SR sr;
+
+        public BrokenSRWarning(Check check, Host host, SR sr)
+            : base(check)
+        {
+            this.sr = sr;
+            this.host = host;
+        }
+
+        public override string Title
+        {
+            get { return Check.Description; }
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return string.Format(Messages.UPDATES_WIZARD_BROKEN_SR_WARNING, host, sr);
+            }
         }
     }
 }

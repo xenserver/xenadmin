@@ -88,7 +88,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
         public Dictionary<Pool_update, string> AllIntroducedPoolUpdates = new Dictionary<Pool_update, string>();
-
+        public Dictionary<Pool_update, Dictionary<Host, SR>> SrUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
         #endregion
 
         public override void PageLoaded(PageLoadedDirection direction)
@@ -507,6 +507,23 @@ namespace XenAdmin.Wizards.PatchingWizard
                             {
                                 _poolUpdate = newPoolUpdate;
                                 AllIntroducedPoolUpdates.Add(PoolUpdate, SelectedNewPatchPath);
+                            }
+                        }
+
+                        var uploadAction = action as UploadSupplementalPackAction;
+                        if (uploadAction != null)
+                        {
+                            foreach (var dict in uploadAction.SrUploadedUpdates)
+                            {
+
+                                if (!SrUploadedUpdates.ContainsKey(dict.Key))
+                                {
+                                    SrUploadedUpdates.Add(dict.Key, dict.Value);
+                                }
+                                else if(!SrUploadedUpdates[dict.Key].ContainsKey(action.Host))
+                                {
+                                    SrUploadedUpdates[dict.Key].Add(action.Host, dict.Value[action.Host]);
+                                }
                             }
                         }
                     }
