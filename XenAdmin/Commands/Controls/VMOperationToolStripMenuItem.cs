@@ -146,6 +146,7 @@ namespace XenAdmin.Commands
             {
                 VMOperationToolStripMenuSubItem firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
                 firstItem.Command = new VMOperationWlbOptimalServerCommand(Command.MainWindowCommandInterface, selection, _operation, recommendations);
+                firstItem.Enabled = firstItem.Command.CanExecute();
             });
 
             List<VMOperationToolStripMenuSubItem> hostMenuItems = new List<VMOperationToolStripMenuSubItem>();
@@ -157,6 +158,7 @@ namespace XenAdmin.Commands
                     if (host != null)
                     {
                         item.Command = new VMOperationWlbHostCommand(Command.MainWindowCommandInterface, selection, host, _operation, recommendations.GetStarRating(host));
+                        item.Enabled = item.Command.CanExecute();
                         hostMenuItems.Add(item);
                     }
                 }
@@ -195,10 +197,24 @@ namespace XenAdmin.Commands
                 var firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
 
                 bool oldMigrateToHomeCmdCanRun = cmdHome.CanExecute();
-                if (affinityHost == null || _operation == vm_operations.start_on || !oldMigrateToHomeCmdCanRun && !cpmCmdHome.CanExecute())
+                if (affinityHost == null || _operation == vm_operations.start_on || oldMigrateToHomeCmdCanRun)
+                {
                     firstItem.Command = cmdHome;
+                    firstItem.Enabled = oldMigrateToHomeCmdCanRun;
+                }
                 else
-                    firstItem.Command = oldMigrateToHomeCmdCanRun ? cmdHome : cpmCmdHome;
+                {
+                    if (cpmCmdHome.CanExecute())
+                    {
+                        firstItem.Command = cpmCmdHome;
+                        firstItem.Enabled = true;
+                    }
+                    else
+                    {
+                        firstItem.Command = cmdHome;
+                        firstItem.Enabled = false;
+                    }
+                }
             });
 
             List<VMOperationToolStripMenuSubItem> dropDownItems = DropDownItems.Cast<VMOperationToolStripMenuSubItem>().ToList();
@@ -222,13 +238,28 @@ namespace XenAdmin.Commands
 
                     VMOperationToolStripMenuSubItem tempItem = item;
                     Program.Invoke(Program.MainWindow, delegate
-                                                           {
-                                                               bool oldMigrateCmdCanRun = cmd.CanExecute();
-                                                               if (_operation == vm_operations.start_on || (!oldMigrateCmdCanRun && !cpmCmd.CanExecute() && string.IsNullOrEmpty(cpmCmd.CantExecuteReason)))
-                                                                   tempItem.Command = cmd;
-                                                               else
-                                                                   tempItem.Command = oldMigrateCmdCanRun ? cmd : cpmCmd;
-                                                            });
+                    {
+                        bool oldMigrateCmdCanRun = cmd.CanExecute();
+                        if ((_operation == vm_operations.start_on) || oldMigrateCmdCanRun)
+                        {
+                            tempItem.Command = cmd;
+                            tempItem.Enabled = oldMigrateCmdCanRun;
+                        }
+                        else
+                        {
+                            bool crossPoolMigrateCmdCanRun = cpmCmd.CanExecute();
+                            if (crossPoolMigrateCmdCanRun || !string.IsNullOrEmpty(cpmCmd.CantExecuteReason))
+                            {
+                                tempItem.Command = cpmCmd;
+                                tempItem.Enabled = crossPoolMigrateCmdCanRun;
+                            }
+                            else
+                            {
+                                tempItem.Command = cmd;
+                                tempItem.Enabled = oldMigrateCmdCanRun;
+                            }
+                        }
+                    });
                 }
             }
         }

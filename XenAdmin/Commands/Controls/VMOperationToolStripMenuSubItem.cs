@@ -56,8 +56,6 @@ namespace XenAdmin.Commands
 
         private void Update()
         {
-            Enabled = _command != null && _command.CanExecute();
-
             if (_command != null)
             {
                 if (_command.MenuText != null)
