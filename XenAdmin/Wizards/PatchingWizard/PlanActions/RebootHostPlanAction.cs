@@ -30,54 +30,23 @@
  */
 
 using System.Collections.Generic;
-using XenAdmin.Core;
-using XenAdmin.Network;
 using XenAPI;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public class RebootHostPlanAction : RebootPlanAction, IAvoidRestartHostsAware
+    public class RebootHostPlanAction : RebootPlanAction
     {
-
-        private readonly Host _host;
-        public List<string> AvoidRestartHosts { private get; set; }
-        
         public RebootHostPlanAction(Host host)
-            : base(host.Connection, new XenRef<Host>(host.opaque_ref), string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))
+            : base(host, string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))
         {
-            _host = host;
-            visible = false;
+            Visible = false;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            // If there are no patches that require reboot, we skip the evacuate-reboot-bringbabiesback sequence
-            if (Helpers.ElyOrGreater(_host) && AvoidRestartHosts != null && AvoidRestartHosts.Contains(_host.uuid))
-            {
-                log.Debug("Skipping scheduled restart (livepatching succeeded). RebootHostPlanAction is skipped.");
-
-                return;
-            }
-
-            visible = true;
-
-            _host.Connection.ExpectDisruption = true;
-            try
-            {
-                base.WaitForReboot(ref session, _session => XenAPI.Host.async_reboot(_session, Host.opaque_ref));
-                foreach (var host in _host.Connection.Cache.Hosts)
-                    host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts
-            }
-            finally
-            {
-                _host.Connection.ExpectDisruption = false;
-            }
-        }
-
-        internal void RunExternal(Session session)
-        {
-            RunWithSession(ref session);
+            Visible = true;
+            RebootHost(ref session);
         }
     }
 }

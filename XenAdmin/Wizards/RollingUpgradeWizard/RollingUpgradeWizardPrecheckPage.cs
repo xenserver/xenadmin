@@ -39,6 +39,8 @@ using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAPI;
 using System.Linq;
+using CheckGroup = System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<XenAdmin.Diagnostics.Checks.Check>>;
+
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
@@ -138,16 +140,16 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Upgradeprechecks"; }
         }
 
-        protected override Dictionary<string, List<Check>> GenerateChecks(Pool_patch patch)
+        protected override List<CheckGroup> GenerateChecks(Pool_patch patch)
         {
-            var groups = new Dictionary<string, List<Check>>();
+            var groups = new List<CheckGroup>();
 
             //XenCenter version check (if any of the selected server version is not the latest)
             var latestCrVersion = Updates.XenServerVersions.FindAll(item => item.LatestCr).OrderByDescending(v => v.Version).FirstOrDefault();
             if (latestCrVersion != null &&
                 SelectedServers.Any(host => new Version(Helpers.HostProductVersion(host)) < latestCrVersion.Version))
             {
-                groups[Messages.CHECKING_XENCENTER_VERSION] = new List<Check> {new XenCenterVersionCheck(null)};
+                groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(null)}));
             }
 
             //HostMaintenanceModeCheck checks
@@ -155,7 +157,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             foreach (Host host in SelectedServers)
                 livenessChecks.Add(new HostMaintenanceModeCheck(host));
 
-            groups[Messages.CHECKING_HOST_LIVENESS_STATUS] = livenessChecks;
+            groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
             //HA checks
             var haChecks = new List<Check>();
@@ -168,20 +170,20 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
                 haChecks.Add(new HAOffCheck(host));
             }
-            groups[Messages.CHECKING_HA_STATUS] = haChecks;
+            groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
             //Checking can evacuate host
             var evacuateChecks = new List<Check>();
             foreach (Host host in SelectedServers)
                 evacuateChecks.Add(new AssertCanEvacuateUpgradeCheck(host));
 
-            groups[Messages.CHECKING_CANEVACUATE_STATUS] = evacuateChecks;
+            groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
 
             //PBDsPluggedCheck
             var pbdChecks = new List<Check>();
             foreach (Host host in SelectedServers)
                 pbdChecks.Add(new PBDsPluggedCheck(host));
-            groups[Messages.CHECKING_STORAGE_CONNECTIONS_STATUS] = pbdChecks;
+            groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
 
 
             //HotfixesCheck required for MNR, Cowley, Boston and Sanibel
@@ -192,7 +194,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     hotfixChecks.Add(new HostHasHotfixCheck(host));
             }
             if (hotfixChecks.Count > 0)
-                groups[Messages.CHECKING_UPGRADE_HOTFIX_STATUS] = hotfixChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
 
 
             //iSL (StorageLink) check - CA-223486: only for pre-Creedence
@@ -202,7 +204,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 var srLinkChecks = new List<Check>();
                 foreach (Host host in preCreedenceServers)
                     srLinkChecks.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
-                groups[Messages.CHECKING_STORAGELINK_STATUS] = srLinkChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_STORAGELINK_STATUS, srLinkChecks));
             }
 
             //SafeToUpgradeCheck - in automatic mode only
@@ -212,7 +214,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 foreach (Host host in SelectedServers)
                     upgradeChecks.Add(new SafeToUpgradeCheck(host));
 
-                groups[Messages.CHECKING_SAFE_TO_UPGRADE] = upgradeChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, upgradeChecks));
             }
 
             return groups;

@@ -1872,6 +1872,26 @@ namespace XenAdmin.Network
             });
         }
 
+        public T TryResolveWithTimeout<T>(XenRef<T> t) where T : XenObject<T>
+        {
+            log.DebugFormat("Resolving {0} {1}", t, t.opaque_ref);
+            int timeout = 120; // two minutes;
+
+            while (timeout > 0)
+            {
+                T obj = Resolve(t);
+                if (obj != null)
+                    return obj;
+
+                Thread.Sleep(1000);
+                timeout = timeout - 1;
+            }
+
+            if (typeof(T) == typeof(Host))
+                throw new Failure(Failure.HOST_OFFLINE);
+            throw new Failure(Failure.HANDLE_INVALID, typeof(T).Name, t.opaque_ref);
+        }
+
         /// <summary>
         /// Stub to Cache.Resolve
         /// </summary>

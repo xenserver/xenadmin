@@ -364,16 +364,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (patch == null)
                 return actions;
 
-            List<XenRef<VM>> runningVMs = RunningVMs(host, patch);
-
             actions.Add(new ApplyPatchPlanAction(host, patch));
 
-            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost) 
-                && !(LivePatchCodesByHost !=null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
+            if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHost)
+                && !(LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
             {
-                actions.Add(new EvacuateHostPlanAction(host));
-                actions.Add(new RebootHostPlanAction(host));
-                actions.Add(new BringBabiesBackAction(runningVMs, host, false));
+                actions.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
             }
 
             if (patch.after_apply_guidance.Contains(after_apply_guidance.restartXAPI))
@@ -383,65 +379,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (patch.after_apply_guidance.Contains(after_apply_guidance.restartHVM))
             {
-                actions.Add(new RebootVMsPlanAction(host, RunningHvmVMs(host)));
+                actions.Add(new RebootVMsPlanAction(host, host.GetRunningHvmVMs()));
             }
 
             if (patch.after_apply_guidance.Contains(after_apply_guidance.restartPV))
             {
-                actions.Add(new RebootVMsPlanAction(host, RunningPvVMs(host)));
+                actions.Add(new RebootVMsPlanAction(host, host.GetRunningPvVMs()));
             }
 
             return actions;
-        }
-
-        private static List<XenRef<VM>> RunningVMs(Host host, Pool_patch patch)
-        {
-            List<XenRef<VM>> vms = new List<XenRef<VM>>();
-            foreach (VM vm in patch.Connection.ResolveAll(host.resident_VMs))
-            {
-                if (!vm.is_a_real_vm())
-                    continue;
-
-                vms.Add(new XenRef<VM>(vm.opaque_ref));
-            }
-            return vms;
-        }
-
-        private static List<XenRef<VM>> RunningHvmVMs(Host host)
-        {
-            List<XenRef<VM>> vms = new List<XenRef<VM>>();
-            foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
-            {
-                if (!vm.IsHVM() || !vm.is_a_real_vm())
-                    continue;
-                vms.Add(new XenRef<VM>(vm.opaque_ref));
-            }
-            return vms;
-        }
-
-        private static List<XenRef<VM>> RunningPvVMs(Host host)
-        {
-            List<XenRef<VM>> vms = new List<XenRef<VM>>();
-            foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
-            {
-                if (vm.IsHVM() || !vm.is_a_real_vm())
-                    continue;
-                vms.Add(new XenRef<VM>(vm.opaque_ref));
-            }
-            return vms;
-        }
-
-        private static List<XenRef<VM>> RunningVMs(Host host)
-        {
-            List<XenRef<VM>> vms = new List<XenRef<VM>>();
-            foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
-            {
-                if (!vm.is_a_real_vm())
-                    continue;
-
-                vms.Add(new XenRef<VM>(vm.opaque_ref));
-            }
-            return vms;
         }
 
         private List<PlanAction> CompileSuppPackActionList(Host host)
@@ -451,14 +397,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (SelectedUpdateType != UpdateType.ISO || SuppPackVdis == null || !SuppPackVdis.ContainsKey(host))
                 return actions;
             
-            List<XenRef<VM>> runningVMs = RunningVMs(host);
-
             actions.Add(new InstallSupplementalPackPlanAction(host, SuppPackVdis[host]));
 
             // after_apply_guidance is restartHost
-            actions.Add(new EvacuateHostPlanAction(host));
-            actions.Add(new RebootHostPlanAction(host));
-            actions.Add(new BringBabiesBackAction(runningVMs, host, false));
+            actions.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
 
             return actions;
         }
@@ -470,16 +412,12 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (SelectedUpdateType != UpdateType.ISO || poolUpdate == null)
                 return actions;
 
-            List<XenRef<VM>> runningVMs = RunningVMs(host);
-
             actions.Add(new ApplyPoolUpdatePlanAction(host, poolUpdate));
 
             if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartHost)
                 && !(LivePatchCodesByHost != null && LivePatchCodesByHost.ContainsKey(host.uuid) && LivePatchCodesByHost[host.uuid] == livepatch_status.ok_livepatch_complete))
             {
-                actions.Add(new EvacuateHostPlanAction(host));
-                actions.Add(new RebootHostPlanAction(host));
-                actions.Add(new BringBabiesBackAction(runningVMs, host, false));
+                actions.Add(new RestartHostPlanAction(host, host.GetRunningVMs()));
             }
 
             if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartXAPI))
@@ -489,12 +427,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartHVM))
             {
-                actions.Add(new RebootVMsPlanAction(host, RunningHvmVMs(host)));
+                actions.Add(new RebootVMsPlanAction(host, host.GetRunningHvmVMs()));
             }
 
             if (poolUpdate.after_apply_guidance.Contains(update_after_apply_guidance.restartPV))
             {
-                actions.Add(new RebootVMsPlanAction(host, RunningPvVMs(host)));
+                actions.Add(new RebootVMsPlanAction(host, host.GetRunningPvVMs()));
             }
             
             return actions;

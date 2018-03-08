@@ -31,8 +31,8 @@
 
 using System;
 using XenAPI;
-using XenAdmin.Core;
 using System.Collections.Generic;
+
 
 namespace XenAdmin.Network
 {
@@ -74,6 +74,7 @@ namespace XenAdmin.Network
         bool IsConnected { get; }
         string Name { get; }
         Session ElevatedSession(string username, string password);
+        T TryResolveWithTimeout<T>(XenRef<T> t) where T : XenObject<T>;
         T Resolve<T>(XenRef<T> xenRef) where T : XenObject<T>;
         List<T> ResolveAll<T>(IEnumerable<XenRef<T>> xenRefs) where T : XenObject<T>;
         List<VDI> ResolveAllShownXenModelObjects(List<XenRef<VDI>> xenRefs, bool showHiddenObjects);

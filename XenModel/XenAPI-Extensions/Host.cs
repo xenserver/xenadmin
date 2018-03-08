@@ -705,7 +705,7 @@ namespace XenAPI
             return BoolKey(other_config, MAINTENANCE_MODE);
         }
 
-        public const string BOOT_TIME = "boot_time";
+        private const string BOOT_TIME = "boot_time";
 
         public double BootTime()
         {
@@ -724,6 +724,12 @@ namespace XenAPI
             return bootTime;
         }
 
+        public static double BootTime(Session session, string hostOpaqueRef)
+        {
+            var host = get_record(session, hostOpaqueRef);
+            return host.BootTime();
+        }
+
         public PrettyTimeSpan Uptime()
         {
             double bootTime = BootTime();
@@ -732,7 +738,7 @@ namespace XenAPI
             return new PrettyTimeSpan(DateTime.UtcNow - Util.FromUnixTime(bootTime) - Connection.ServerTimeOffset);
         }
 
-        public const string AGENT_START_TIME = "agent_start_time";
+        private const string AGENT_START_TIME = "agent_start_time";
 
         public double AgentStartTime()
         {
@@ -748,6 +754,12 @@ namespace XenAPI
                 return 0.0;
 
             return agentStartTime;
+        }
+
+        public static double AgentStartTime(Session session, string hostOpaqueRef)
+        {
+            var host = get_record(session, hostOpaqueRef);
+            return host.AgentStartTime();
         }
 
         public PrettyTimeSpan AgentUptime()
@@ -774,6 +786,37 @@ namespace XenAPI
         {
             // 2 not 1, because the Control Domain doesn't count
             return resident_VMs != null && resident_VMs.Count >= 2;
+        }
+
+        public List<XenRef<VM>> GetRunningPvVMs()
+        {
+            var vms = from XenRef<VM> vmref in resident_VMs
+                      let vm = Connection.Resolve(vmref)
+                      where vm != null && vm.is_a_real_vm() && !vm.IsHVM()
+                      select vmref;
+
+            return vms.ToList();
+        }
+
+        public List<XenRef<VM>> GetRunningHvmVMs()
+        {
+            var vms = from XenRef<VM> vmref in resident_VMs
+                      let vm = Connection.Resolve(vmref)
+                      where vm != null && vm.is_a_real_vm() && vm.IsHVM()
+                      select vmref;
+
+            return vms.ToList();
+        }
+
+
+        public List<XenRef<VM>> GetRunningVMs()
+        {
+            var vms = from XenRef<VM> vmref in resident_VMs
+                      let vm = Connection.Resolve(vmref)
+                      where vm != null && vm.is_a_real_vm()
+                      select vmref;
+
+            return vms.ToList();
         }
 
         #region Save Evacuated VMs for later
@@ -887,10 +930,15 @@ namespace XenAPI
 
         public void ClearEvacuatedVMs(Session session)
         {
-            XenRef<Host> serverOpaqueRef1 = get_by_uuid(session, uuid);
-            remove_from_other_config(session, serverOpaqueRef1, MAINTENANCE_MODE_EVACUATED_VMS_MIGRATED);
-            remove_from_other_config(session, serverOpaqueRef1, MAINTENANCE_MODE_EVACUATED_VMS_HALTED);
-            remove_from_other_config(session, serverOpaqueRef1, MAINTENANCE_MODE_EVACUATED_VMS_SUSPENDED);
+            var hostRef = get_by_uuid(session, uuid);
+            ClearEvacuatedVMs(session, hostRef);
+        }
+
+        public static void ClearEvacuatedVMs(Session session, XenRef<Host> hostRef)
+        {
+            remove_from_other_config(session, hostRef, MAINTENANCE_MODE_EVACUATED_VMS_MIGRATED);
+            remove_from_other_config(session, hostRef, MAINTENANCE_MODE_EVACUATED_VMS_HALTED);
+            remove_from_other_config(session, hostRef, MAINTENANCE_MODE_EVACUATED_VMS_SUSPENDED);
         }
 
         public List<VM> GetMigratedEvacuatedVMs()

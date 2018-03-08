@@ -44,6 +44,8 @@ using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
 using XenAdmin.Dialogs;
 using XenAPI;
+using CheckGroup = System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<XenAdmin.Diagnostics.Checks.Check>>;
+
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
@@ -276,9 +278,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 LivePatchCodesByHost = new Dictionary<string, livepatch_status>();
 
+                // Note: represent the groups as list so as to enforce the order of checks;
+                // a dictionary that looks sensible from a first look is not guranteed to
+                // keep the order, especially if items are removed (although not the case here)
                 var groups = update != null ? GenerateChecks(update) : GenerateChecks(patch); //patch is expected to be null for RPU
 
-                int totalChecks = groups.Values.Sum(c => c.Count);
+                int totalChecks = groups.Sum(c => c.Value == null ? 0 : c.Value.Count);
                 int doneCheckIndex = 0;
 
                 foreach (var group in groups)
@@ -331,20 +336,20 @@ namespace XenAdmin.Wizards.PatchingWizard
             set;
         }
 
-        protected virtual Dictionary<string, List<Check>> GenerateCommonChecks(List<Host> applicableServers)
+        protected virtual List<CheckGroup> GenerateCommonChecks(List<Host> applicableServers)
         {
-            var groups = new Dictionary<string, List<Check>>();
+            var groups = new List<CheckGroup>();
 
             //XenCenter version check
             if (UpdateAlert != null && UpdateAlert.NewServerVersion != null)
-                groups[Messages.CHECKING_XENCENTER_VERSION] = new List<Check> { new XenCenterVersionCheck(UpdateAlert.NewServerVersion) };
+                groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(UpdateAlert.NewServerVersion)}));
 
             //HostLivenessCheck checks
             var livenessChecks = new List<Check>();
             foreach (Host host in applicableServers)
                 livenessChecks.Add(new HostLivenessCheck(host));
 
-            groups[Messages.CHECKING_HOST_LIVENESS_STATUS] = livenessChecks;
+            groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
             //HA checks
 
@@ -354,14 +359,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (Helpers.HostIsMaster(host))
                     haChecks.Add(new HAOffCheck(host));
             }
-            groups[Messages.CHECKING_HA_STATUS] = haChecks;
+            groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
             //PBDsPluggedCheck
             var pbdChecks = new List<Check>();
             foreach (Host host in applicableServers)
                 pbdChecks.Add(new PBDsPluggedCheck(host));
 
-            groups[Messages.CHECKING_STORAGE_CONNECTIONS_STATUS] = pbdChecks;
+            groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
 
 
             //Disk space check for automated updates
@@ -398,7 +403,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         ));
                     }
                 }
-                groups[Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE] = diskChecks;
+                groups.Add(new CheckGroup(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, diskChecks));
             }
 
             //Checking reboot required and can evacuate host for version updates
@@ -409,19 +414,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var rebootChecks = new List<Check>();
                 foreach (var host in SelectedServers)
                     rebootChecks.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
-                groups[Messages.CHECKING_SERVER_NEEDS_REBOOT] = rebootChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_SERVER_NEEDS_REBOOT, rebootChecks));
 
                 var evacuateChecks = new List<Check>();
                 foreach (Host host in SelectedServers)
                     evacuateChecks.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
 
-                groups[Messages.CHECKING_CANEVACUATE_STATUS] = evacuateChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
             return groups;
         }
 
-        protected virtual Dictionary<string, List<Check>> GenerateChecks(Pool_patch patch)
+        protected virtual List<CheckGroup> GenerateChecks(Pool_patch patch)
         {
             List<Host> applicableServers = patch != null ? SelectedServers.Where(h => patch.AppliedOn(h) == DateTime.MaxValue).ToList() : SelectedServers;
 
@@ -437,7 +442,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     Pool_patch poolPatchFromHost = poolPatches.Find(otherPatch => string.Equals(otherPatch.uuid, patch.uuid, StringComparison.OrdinalIgnoreCase));
                     serverChecks.Add(new PatchPrecheckCheck(host, poolPatchFromHost, LivePatchCodesByHost));
                 }
-                groups[Messages.CHECKING_SERVER_SIDE_STATUS] = serverChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_SERVER_SIDE_STATUS, serverChecks));
             }
 
             //Checking if the host needs a reboot
@@ -451,7 +456,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var host in applicableServers)
                     rebootChecks.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
 
-                groups[Messages.CHECKING_SERVER_NEEDS_REBOOT] = rebootChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_SERVER_NEEDS_REBOOT, rebootChecks));
             }
 
             //Checking can evacuate host
@@ -463,7 +468,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (Host host in applicableServers)
                     evacuateChecks.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
 
-                groups[Messages.CHECKING_CANEVACUATE_STATUS] = evacuateChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
             if (patch != null || WizardMode == WizardMode.AutomatedUpdates)
@@ -472,13 +477,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var pool in SelectedPools)
                     restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, WizardMode == WizardMode.AutomatedUpdates ? null : patch.uuid));
 
-                groups[Messages.CHECKING_FOR_PENDING_RESTART] = restartChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
             }
 
             return groups;
         }
 
-        protected virtual Dictionary<string, List<Check>> GenerateChecks(Pool_update update)
+        protected virtual List<CheckGroup> GenerateChecks(Pool_update update)
         {
             List<Host> applicableServers = update != null ? SelectedServers.Where(h => !update.AppliedOn(h)).ToList() : SelectedServers;
             var groups = GenerateCommonChecks(applicableServers);
@@ -491,7 +496,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     homogeneityChecks.Add(new ServerSelectionCheck(pool, update, SelectedServers));
 
                 if (homogeneityChecks.Count > 0)
-                    groups[Messages.CHECKING_SERVER_SELECTION] = homogeneityChecks;
+                    groups.Add(new CheckGroup(Messages.CHECKING_SERVER_SELECTION, homogeneityChecks));
             }
 
             //Checking other things
@@ -504,7 +509,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     Pool_update poolUpdateFromHost = updates.Find(otherPatch => string.Equals(otherPatch.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
                     serverChecks.Add(new PatchPrecheckCheck(host, poolUpdateFromHost, LivePatchCodesByHost));
                 }
-                groups[Messages.CHECKING_SERVER_SIDE_STATUS] = serverChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_SERVER_SIDE_STATUS, serverChecks));
             }
 
             //Checking if the host needs a reboot
@@ -517,7 +522,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var host in applicableServers)
                     rebootChecks.Add(new HostNeedsRebootCheck(host, guidance, LivePatchCodesByHost));
 
-                groups[Messages.CHECKING_SERVER_NEEDS_REBOOT] = rebootChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_SERVER_NEEDS_REBOOT, rebootChecks));
             }
 
             //Checking can evacuate host
@@ -527,7 +532,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (Host host in applicableServers)
                     evacuateChecks.Add(new AssertCanEvacuateCheck(host, LivePatchCodesByHost));
 
-                groups[Messages.CHECKING_CANEVACUATE_STATUS] = evacuateChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
             }
 
             if (update != null || WizardMode == WizardMode.AutomatedUpdates)
@@ -537,7 +542,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var pool in SelectedPools)
                     restartChecks.Add(new RestartHostOrToolstackPendingOnMasterCheck(pool, WizardMode == WizardMode.AutomatedUpdates ? null : update.uuid));
 
-                groups[Messages.CHECKING_FOR_PENDING_RESTART] = restartChecks;
+                groups.Add(new CheckGroup(Messages.CHECKING_FOR_PENDING_RESTART, restartChecks));
             }
 
             return groups;
@@ -607,7 +612,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             labelProgress.Visible = actionInProgress || checkInProgress;
             pictureBoxIssues.Visible = labelIssues.Visible = problemsFound && !actionInProgress && !checkInProgress;
 
-            return !IsCheckInProgress && !IsResolveActionInProgress && !problemsFound;
+            return !checkInProgress && !actionInProgress && !problemsFound;
         }
 
         public UpdateType SelectedUpdateType { private get; set; }
