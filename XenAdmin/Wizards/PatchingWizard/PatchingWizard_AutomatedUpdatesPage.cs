@@ -380,7 +380,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         // - this host is pre-Ely and there isn't any delayed restart plan action, or
                         // - this host is Ely or above and live patching must have succeeded or there isn't any delayed restart plan action
                         if ((!Helpers.ElyOrGreater(h) && restartActions.Count <= 0)
-                            || (Helpers.ElyOrGreater(h) && (h.updates_requiring_reboot.Count <= 0 || restartActions.Count <= 0)))
+                            || (Helpers.ElyOrGreater(h) && (h.Connection.TryResolveWithTimeout(new XenRef<Host>(h.opaque_ref)).updates_requiring_reboot.Count <= 0 || restartActions.Count <= 0)))
                         {
                             RunPlanAction(bgw, action);
                         }
