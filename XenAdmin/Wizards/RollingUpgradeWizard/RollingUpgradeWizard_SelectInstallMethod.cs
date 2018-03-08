@@ -91,6 +91,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 StopUrlTesting();
             }
+            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()
