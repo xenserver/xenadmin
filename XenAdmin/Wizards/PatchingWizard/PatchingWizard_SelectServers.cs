@@ -381,7 +381,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return false;
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             try
             {
@@ -420,7 +420,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
                     }
                 }
-                base.PageLeave(direction, ref cancel);
             }
             catch (Exception e)
             {

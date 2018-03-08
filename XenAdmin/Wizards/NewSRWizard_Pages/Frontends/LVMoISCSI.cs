@@ -124,7 +124,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 HelpersGUI.FocusFirstControl(Controls);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Back)
                 return;
@@ -160,8 +160,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             // Will return false on cancel
             cancel = !ExamineIscsiProbeResults(IscsiProbeAction);
             iscsiProbeError = cancel;
-            
-            base.PageLeave(direction, ref cancel);
         }
 
         bool iscsiProbeError = false;

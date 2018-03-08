@@ -92,12 +92,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         #region XenTabPage overrides
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
                 cancel = !PerformStoragePoolScan();
-
-            base.PageLeave(direction, ref cancel);
         }
 
         public override string Text { get { return Messages.STORAGE_SYSTEM; } }

@@ -164,7 +164,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return _buttonPreviousEnabled;
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             var l = new List<VM>();
             l.Add(TheVM);
@@ -173,8 +173,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 cancel = true;
                 SetButtonsEnabled(false);
             }
-
-            base.PageLeave(direction, ref cancel);
         }
         #endregion
 

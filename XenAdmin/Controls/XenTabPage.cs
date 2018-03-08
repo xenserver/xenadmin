@@ -37,8 +37,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using XenAdmin.Wizards;
 using XenAdmin.Network;
+
 
 namespace XenAdmin.Controls
 {
@@ -147,11 +147,10 @@ namespace XenAdmin.Controls
             }
         }
 
-        /// <summary>
-        /// Always remember to call the base method in the END when overriding this in derived classes
-        /// </summary>
-        public virtual void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        public void PageLeave(PageLoadedDirection direction, ref bool cancel)
         {
+            PageLeaveCore(direction, ref cancel);
+
             if (direction == PageLoadedDirection.Forward && !cancel)
             {
                 if (ImplementsIsDirty() && IsDirty && WizardContentUpdater != null)
@@ -167,6 +166,10 @@ namespace XenAdmin.Controls
                 if (!cancel && WizardContentUpdater != null)
                     WizardContentUpdater.Invoke(this);//notify the wizard that the page contents have been updated
             }
+        }
+
+        protected virtual void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
         }
 
         /// <summary>

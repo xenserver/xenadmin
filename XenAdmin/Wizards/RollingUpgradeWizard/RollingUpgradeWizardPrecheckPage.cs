@@ -107,10 +107,9 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return;
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             RemoveEventHandlersToMasters();
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()

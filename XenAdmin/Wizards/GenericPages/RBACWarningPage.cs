@@ -100,10 +100,9 @@ namespace XenAdmin.Wizards.GenericPages
                 Program.Invoke(this, RefreshPage);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             DeregisterConnectionEvents();
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()

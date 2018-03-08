@@ -118,12 +118,10 @@ namespace XenAdmin.Wizards.ExportWizard
 			EnableButtons();
 		}
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 					cancel = !PerformCheck(CheckSpaceRequirements);
-
-			base.PageLeave(direction, ref cancel);
 		}
 
         public override void PopulatePage()

@@ -77,14 +77,13 @@ namespace XenAdmin.Wizards.GenericPages
 		    OnPageUpdated();
 		}
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 			{
 				if (!PerformCheck(CheckValidData))
 					cancel = true;
 			}
-			base.PageLeave(direction, ref cancel);
 		}
 
         public override void PopulatePage()

@@ -560,7 +560,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 resolvePrechecksAction.Cancel();
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             DeregisterEventHandlers();
             if (direction == PageLoadedDirection.Back && _worker != null)
@@ -568,8 +568,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 _worker.CancelAsync();
                 _worker = null;
             }
-
-            base.PageLeave(direction, ref cancel);
         }
 
         public override bool EnablePrevious()

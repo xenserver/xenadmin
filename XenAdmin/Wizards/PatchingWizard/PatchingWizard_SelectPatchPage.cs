@@ -194,7 +194,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
             {
@@ -275,7 +275,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                 Updates.CheckForUpdatesStarted -= CheckForUpdates_CheckForUpdatesStarted;
                 Updates.CheckForUpdatesCompleted -= CheckForUpdates_CheckForUpdatesCompleted;
             }
-            base.PageLeave(direction, ref cancel);
         }
 
         private XenServerPatchAlert GetAlertFromFileName(string fileName)

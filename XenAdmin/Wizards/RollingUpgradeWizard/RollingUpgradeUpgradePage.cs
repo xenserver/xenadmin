@@ -75,7 +75,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public override string HelpID { get { return "Upgradepools"; } }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             UnregisterAllStatusUpdateActions();
             ImageAnimator.StopAnimate(animatedImage, onFrameChanged);
@@ -83,7 +83,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 planActions.Clear();
             }
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()

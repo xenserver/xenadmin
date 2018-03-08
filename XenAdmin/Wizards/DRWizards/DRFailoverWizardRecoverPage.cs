@@ -109,14 +109,13 @@ namespace XenAdmin.Wizards.DRWizards
             }
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             ImageAnimator.StopAnimate(animatedImage, onFrameChanged);
             if (direction == PageLoadedDirection.Back)
             {
                 actions.Clear();
             }
-            base.PageLeave(direction, ref cancel);
         }
 
         public override bool EnableNext()

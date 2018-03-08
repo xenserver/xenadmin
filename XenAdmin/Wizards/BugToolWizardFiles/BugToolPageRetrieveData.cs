@@ -85,7 +85,7 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                 RunAction(CapabilityList, SelectedHosts);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (OutputFolder == null)
             {
@@ -100,7 +100,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                         cancel = true;
                 }
             }
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()

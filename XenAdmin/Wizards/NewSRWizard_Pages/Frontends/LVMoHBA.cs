@@ -73,7 +73,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override string HelpID { get { return "Location_HBA"; } }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Back)
                 return;
@@ -178,8 +178,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 if (!cancel && launcher.SrDescriptors.Count > 0)
                     SrDescriptors.AddRange(launcher.SrDescriptors);
             }
-            
-            base.PageLeave(direction, ref cancel);
         }
 
         public override bool EnableNext()

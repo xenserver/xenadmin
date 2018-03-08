@@ -132,12 +132,10 @@ namespace XenAdmin.Wizards.ExportWizard
 			SetButtonNextEnabled(true);
 		}
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 				cancel = !(m_isSignatureOk && m_isEncryptionOk);
-
-			base.PageLeave(direction, ref cancel);
 		}
 
         protected override bool ImplementsIsDirty()

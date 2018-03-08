@@ -79,7 +79,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Selectpool"; }
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
             {
@@ -106,7 +106,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     }
                 }
             }
-            base.PageLeave(direction, ref cancel);
         }
 
         private bool AllSelectedHostsConnected()
