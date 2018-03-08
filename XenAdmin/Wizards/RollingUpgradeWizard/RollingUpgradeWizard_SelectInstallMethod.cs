@@ -85,13 +85,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         public override string HelpID { get { return "upgrademethod"; } }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (testingAction != null)
             {
                 StopUrlTesting();
             }
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()

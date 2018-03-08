@@ -94,11 +94,10 @@ namespace XenAdmin.Wizards.GenericPages
             ChosenItem = null;
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             SetDefaultTarget(ChosenItem);
             Program.Invoke(Program.MainWindow, ClearComboBox);
-            base.PageLeave(direction, ref cancel);
         }
 
 	    protected void InitializeText()

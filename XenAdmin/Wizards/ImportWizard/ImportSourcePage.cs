@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 			{
@@ -151,7 +151,6 @@ namespace XenAdmin.Wizards.ImportWizard
                     OnPageUpdated();
 				}
 			}
-			base.PageLeave(direction, ref cancel);
 		}
 
         public override void PopulatePage()

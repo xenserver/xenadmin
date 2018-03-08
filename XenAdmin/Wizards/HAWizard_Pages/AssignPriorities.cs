@@ -702,10 +702,9 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             dataGridViewVms.Select();
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             StopNtolUpdate();
-            base.PageLeave(direction, ref cancel);
         }
 
         #endregion

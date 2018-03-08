@@ -133,10 +133,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             tableLayoutPanel1.MouseMove -= tableLayoutPanel1_MouseMove;
-            base.PageLeave(direction, ref cancel);
         }
 
         /// <summary>

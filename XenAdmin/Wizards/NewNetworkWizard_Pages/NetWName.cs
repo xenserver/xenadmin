@@ -65,12 +65,10 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             HelpersGUI.FocusFirstControl(Controls);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
                 CheckUniqueName(txtName.Text);
-
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PopulatePage()

@@ -52,12 +52,10 @@ namespace XenAdmin.Wizards.HAWizard_Pages
 
         public override string PageTitle { get { return Messages.HA_WIZARD_FINISH_PAGE_TITLE; } }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Back)
                 ClearControls();
-            
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageLoaded(PageLoadedDirection direction)

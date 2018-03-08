@@ -75,12 +75,10 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override string HelpID { get { return IsNetApp ? "SL_NETAPP_filer" : "SL_EQL_filer"; } }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
                 cancel = !Scan();
-            
-            base.PageLeave(direction, ref cancel);
         }
 
         public override bool EnableNext()

@@ -169,8 +169,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
             return filters;
         }
-        
-        public override void PageLeave(XenAdmin.Controls.PageLoadedDirection direction, ref bool cancel)
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (!cancel)
             {
@@ -192,8 +192,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 cancel = true;
                 SetButtonNextEnabled(false);
             }
-
-            base.PageLeave(direction, ref cancel);
         }
 
         protected override string VmColumnHeaderText

@@ -86,12 +86,10 @@ namespace XenAdmin.Wizards.ImportWizard
 				SetButtonNextEnabled(OkToProceed());
 		}
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 				cancel = !OkToProceed();
-
-			base.PageLeave(direction, ref cancel);
 		}
 
         public override void CheckPageDisabled()

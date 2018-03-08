@@ -153,14 +153,12 @@ namespace XenAdmin.Wizards.GenericPages
 
 		#region Base class (XenTabPage) overrides
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 		    TargetConnection = null;
 
 			if (!cancel && direction == PageLoadedDirection.Forward && IsDirty && ImplementsIsDirty())
 					cancel = !PerformCheck(CheckStorageRequirements);
-
-			base.PageLeave(direction, ref cancel);
         }
 
         public override void PageLoaded(PageLoadedDirection direction)
