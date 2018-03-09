@@ -131,11 +131,7 @@ namespace XenAdmin.Controls
             return true;
         }
 
-        /// <summary>
-        /// Always remember to call the base method in the BEGINNING when overriding this in derived classes
-        /// so the page gets populated
-        /// </summary>
-        public virtual void PageLoaded(PageLoadedDirection direction)
+        public void PageLoaded(PageLoadedDirection direction)
         {
             if (direction == PageLoadedDirection.Forward && IsFirstLoad)
             {
@@ -145,6 +141,12 @@ namespace XenAdmin.Controls
                 PopulatePage();
                 IsFirstLoad = false;
             }
+
+            PageLoadedCore(direction);
+        }
+
+        protected virtual void PageLoadedCore(PageLoadedDirection direction)
+        {
         }
 
         public void PageLeave(PageLoadedDirection direction, ref bool cancel)

@@ -71,10 +71,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             return m_srWizardType.SrToReattach == null || MatchingFrontends > 1;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             if (direction == PageLoadedDirection.Forward)
                 HelpersGUI.FocusFirstControl(Controls);
         }

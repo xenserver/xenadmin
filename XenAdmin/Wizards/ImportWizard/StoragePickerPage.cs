@@ -85,9 +85,8 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             m_buttonNextText = (direction == PageLoadedDirection.Forward) ? Messages.IMPORT_VM_IMPORT : Messages.WIZARD_BUTTON_NEXT;
         }
 

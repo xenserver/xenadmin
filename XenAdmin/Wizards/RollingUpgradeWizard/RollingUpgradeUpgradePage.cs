@@ -110,9 +110,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return UpgradeStatus == RollingUpgradeStatus.NotStarted || UpgradeStatus == RollingUpgradeStatus.Started;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             UpgradeStatus = RollingUpgradeStatus.NotStarted;
             ImageAnimator.Animate(animatedImage, onFrameChanged);
             if (direction == PageLoadedDirection.Forward && planActions.Count > 0)

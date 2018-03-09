@@ -59,9 +59,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             return txtName.Text.Trim().Length > 0;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             HelpersGUI.FocusFirstControl(Controls);
         }
 

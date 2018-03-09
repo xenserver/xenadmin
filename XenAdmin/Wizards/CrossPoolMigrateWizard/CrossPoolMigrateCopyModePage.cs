@@ -75,9 +75,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return false;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);//call first so the page gets populated
             var crossPoolRestricted = Helpers.FeatureForbidden(Connection, Host.RestrictCrossPoolMigrate);
             warningsTable.Visible = crossPoolRestricted;
             crossPoolRadioButton.Enabled = crossPoolDescriptionLabel.Enabled = !crossPoolRestricted;

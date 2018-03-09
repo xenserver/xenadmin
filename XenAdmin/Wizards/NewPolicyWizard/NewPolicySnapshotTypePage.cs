@@ -93,9 +93,8 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Forward)
                 EnableShapshotTypes(Connection, false);
         }

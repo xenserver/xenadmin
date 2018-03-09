@@ -66,9 +66,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             return (SelectedHostNic != null || !comboBoxNICList.Visible) && !labelVlanError.Visible;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             HelpersGUI.FocusFirstControl(Controls);
         }
 

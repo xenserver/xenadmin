@@ -81,10 +81,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             return affinityPicker1.ValidState();
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             // if not using CD, use selected template storage host
             // if using CD use CD or template storage host);
            

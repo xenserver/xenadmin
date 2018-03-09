@@ -168,9 +168,8 @@ namespace XenAdmin.Wizards.GenericPages
 
 		#region Base class (XenTabPage) overrides
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-            base.PageLoaded(direction);
             ChosenItem = null;
             restoreGridHomeServerSelection = (direction == PageLoadedDirection.Back);
 		}

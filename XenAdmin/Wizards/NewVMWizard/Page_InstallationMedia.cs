@@ -63,10 +63,9 @@ namespace XenAdmin.Wizards.NewVMWizard
         public bool ShowInstallationMedia { private get; set; }
 
         public bool ShowBootParameters { get { return !SelectedTemplate.IsHVM(); } }
-        
-        public override void PageLoaded(PageLoadedDirection direction)
+
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             VM oldTemplate = m_template;
             m_template = SelectedTemplate;
 

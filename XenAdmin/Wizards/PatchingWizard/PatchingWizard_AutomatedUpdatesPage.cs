@@ -122,10 +122,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             base.PageCancelled();
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             if (_thisPageIsCompleted)
             {
                 return;

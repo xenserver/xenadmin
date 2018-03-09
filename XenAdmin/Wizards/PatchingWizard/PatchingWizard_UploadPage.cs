@@ -91,10 +91,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         #endregion
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-            
             canUpload = true;
             canDownload = true;
             UpdateButtons();

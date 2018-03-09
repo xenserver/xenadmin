@@ -133,9 +133,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return "SelectUpdate"; }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
-        {           
-            base.PageLoaded(direction);
+        protected override void PageLoadedCore(PageLoadedDirection direction)
+        {
             Updates.CheckForUpdatesStarted += CheckForUpdates_CheckForUpdatesStarted;
             Updates.CheckForUpdatesCompleted += CheckForUpdates_CheckForUpdatesCompleted;
             Updates.RestoreDismissedUpdatesStarted += Updates_RestoreDismissedUpdatesStarted;

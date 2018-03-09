@@ -175,10 +175,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             BuildServerList();
         }
 

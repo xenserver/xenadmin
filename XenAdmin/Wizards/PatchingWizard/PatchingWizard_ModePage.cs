@@ -87,10 +87,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             set;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             textBoxLog.Clear();
 
             var unknownType = false;
