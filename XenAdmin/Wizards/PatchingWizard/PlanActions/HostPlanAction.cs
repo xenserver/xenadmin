@@ -47,6 +47,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected HostPlanAction(Host host, string description)
             : base(host.Connection, description)
         {
+            _currentHost = host;
             HostXenRef = new XenRef<Host>(host);
         }
 
