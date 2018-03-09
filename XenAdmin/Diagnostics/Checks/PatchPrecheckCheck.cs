@@ -54,7 +54,7 @@ namespace XenAdmin.Diagnostics.Checks
         private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
 
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
-        private Dictionary<Pool_update, Dictionary<Host, SR>> srUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
+        private  SR srUploadedUpdates = new SR();
 
         public PatchPrecheckCheck(Host host, Pool_patch patch)
             : this(host, patch, null)
@@ -73,17 +73,12 @@ namespace XenAdmin.Diagnostics.Checks
             this.livePatchCodesByHost = livePatchCodesByHost;
         }
 
-        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost, Dictionary<Pool_update, Dictionary<Host, SR>> srUploadedUpdates)
-            : this(host, update, livePatchCodesByHost)
-        {
-            this.srUploadedUpdates = srUploadedUpdates;
-        }
-
-        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost)
+        public PatchPrecheckCheck(Host host, Pool_update update, Dictionary<string, livepatch_status> livePatchCodesByHost, SR srUploadedUpdates = null)
             : base(host)
         {
             _update = update;
             this.livePatchCodesByHost = livePatchCodesByHost;
+            this.srUploadedUpdates = srUploadedUpdates;
         }
 
         protected override Problem RunCheck()
@@ -91,8 +86,8 @@ namespace XenAdmin.Diagnostics.Checks
             //
             // Check SRs that uploaded the updates is still attached
             //
-            if (_update != null && srUploadedUpdates != null && srUploadedUpdates.ContainsKey(_update) && srUploadedUpdates[_update].ContainsKey(Host) && srUploadedUpdates[_update][Host].IsBroken())
-                return new BrokenSRWarning(this, Host, srUploadedUpdates[_update][Host]);
+            if (srUploadedUpdates != null && srUploadedUpdates.IsBroken())
+                return new BrokenSRWarning(this, Host, srUploadedUpdates);
 
             //
             // Check patch isn't already applied here

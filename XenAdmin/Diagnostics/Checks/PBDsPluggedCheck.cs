@@ -40,17 +40,15 @@ namespace XenAdmin.Diagnostics.Checks
 {
     public class PBDsPluggedCheck : Check
     {
-        private Dictionary<Pool_update, Dictionary<Host, SR>> srUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
-        Pool_update selectedUpdate = null;
+        SR srUploadedUpdates = new SR();
 
         public PBDsPluggedCheck(Host host):base(host)
         {
         }
 
-        public PBDsPluggedCheck(Host host, Pool_update selectedUpdate, Dictionary<Pool_update, Dictionary<Host, SR>> sr) : base(host)
+        public PBDsPluggedCheck(Host host, SR sr) : base(host)
         {
             srUploadedUpdates = sr;
-            this.selectedUpdate = selectedUpdate;
         }
 
         protected override Problem RunCheck()
@@ -66,14 +64,8 @@ namespace XenAdmin.Diagnostics.Checks
                 return new BrokenSR(this, sr);
             }
 
-            if (selectedUpdate != null && srUploadedUpdates != null )
-            {
-                foreach (var dict in srUploadedUpdates)
-                {
-                    if (dict.Key.uuid == selectedUpdate.uuid && dict.Value.ContainsKey(Host) && dict.Value[Host].IsBroken())
-                        return new BrokenSR(this, dict.Value[Host]);
-                }
-            }
+            if (srUploadedUpdates.IsBroken())
+                return new BrokenSR(this, srUploadedUpdates);
 
             return null;
         }

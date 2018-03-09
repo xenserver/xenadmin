@@ -53,7 +53,8 @@ namespace XenAdmin.Actions
 
         private Pool_update poolUpdate = null;
 
-        public Dictionary<Pool_update, Dictionary<Host, SR>> SrUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
+        public Dictionary<Host, SR> SrUploadedUpdates = new Dictionary<Host, SR>();
+
         public Pool_update PoolUpdate
         {
             get { return poolUpdate; }
@@ -260,21 +261,12 @@ namespace XenAdmin.Actions
             totalUploaded++;
             Description = String.Format(Messages.SUPP_PACK_UPLOADED, sr.Name());
 
-
-            if (poolUpdate != null)
+            foreach (Host host in servers)
             {
-                foreach (Host host in servers)
-                {
-                    if (!SrUploadedUpdates.ContainsKey(poolUpdate) )
-                    {
-                        SrUploadedUpdates.Add(poolUpdate, new Dictionary<Host, SR> { { host, sr } });
-                    }
-                    else if(!SrUploadedUpdates[poolUpdate].ContainsKey(host))
-                    {
-                        SrUploadedUpdates[poolUpdate].Add(host, sr);
-                    }
-                }
+                if (!SrUploadedUpdates.ContainsKey(host))
+                    SrUploadedUpdates.Add(host, sr);
             }
+
 
             return result;
         }

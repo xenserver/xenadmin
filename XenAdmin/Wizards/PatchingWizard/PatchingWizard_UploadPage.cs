@@ -510,20 +510,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                             }
                         }
 
-                        var uploadAction = action as UploadSupplementalPackAction;
-                        if (uploadAction != null)
-                        {
-                            foreach (var dict in uploadAction.SrUploadedUpdates)
-                            {
+                        var supplementalPackUploadAction = action as UploadSupplementalPackAction;
+                        var selectedPoolUpdate = supplementalPackUploadAction.PoolUpdate;
+                        if (selectedPoolUpdate == null)
+                            return;
 
-                                if (!SrUploadedUpdates.ContainsKey(dict.Key))
-                                {
-                                    SrUploadedUpdates.Add(dict.Key, dict.Value);
-                                }
-                                else if(!SrUploadedUpdates[dict.Key].ContainsKey(action.Host))
-                                {
-                                    SrUploadedUpdates[dict.Key].Add(action.Host, dict.Value[action.Host]);
-                                }
+                        foreach (var dict in supplementalPackUploadAction.SrUploadedUpdates)
+                        {
+                            if (!SrUploadedUpdates.ContainsKey(selectedPoolUpdate))
+                            {
+                                SrUploadedUpdates.Add(selectedPoolUpdate, new Dictionary<Host, SR> { { dict.Key, dict.Value } });
+                            }
+                            else
+                            {
+                                SrUploadedUpdates[selectedPoolUpdate].Add(dict.Key, dict.Value);
                             }
                         }
                     }

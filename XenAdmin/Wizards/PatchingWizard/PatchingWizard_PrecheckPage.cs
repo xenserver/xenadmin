@@ -365,7 +365,17 @@ namespace XenAdmin.Wizards.PatchingWizard
             //PBDsPluggedCheck
             var pbdChecks = new List<Check>();
             foreach (Host host in applicableServers)
-                pbdChecks.Add(new PBDsPluggedCheck(host, PoolUpdate, SrUploadedUpdates));
+            {
+
+                if (PoolUpdate != null && SrUploadedUpdates != null)
+                {
+                    foreach (var dict in SrUploadedUpdates)
+                    {
+                        if (dict.Key.uuid == PoolUpdate.uuid && dict.Value.ContainsKey(host))
+                            pbdChecks.Add(new PBDsPluggedCheck(host, dict.Value[host]));
+                    }
+                }
+            }
 
             groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
 
@@ -507,7 +517,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     List<Pool_update> updates = new List<Pool_update>(host.Connection.Cache.Pool_updates);
                     Pool_update poolUpdateFromHost = updates.Find(otherPatch => string.Equals(otherPatch.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
-                    serverChecks.Add(new PatchPrecheckCheck(host, poolUpdateFromHost, LivePatchCodesByHost, SrUploadedUpdates));
+                    if(SrUploadedUpdates != null && SrUploadedUpdates.ContainsKey(poolUpdateFromHost) && SrUploadedUpdates[poolUpdateFromHost].ContainsKey(host))
+                        serverChecks.Add(new PatchPrecheckCheck(host, poolUpdateFromHost, LivePatchCodesByHost, SrUploadedUpdates[poolUpdateFromHost][host]));
                 }
                 groups.Add(new CheckGroup(Messages.CHECKING_SERVER_SIDE_STATUS, serverChecks));
             }
