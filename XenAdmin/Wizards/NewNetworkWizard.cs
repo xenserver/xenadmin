@@ -227,7 +227,17 @@ namespace XenAdmin.Wizards
         private void CreateNonBonded()
         {
             XenAPI.Network network = PopulateNewNetworkObj();
-            PIF nic = pageNetworkDetails.SelectedHostNic;
+
+            PIF nic;
+            if(pageNetworkDetails.createVlanOnSriovNetwork)
+            {
+                var sriovLogicalPif = pageNetworkDetails.SelectedHostNic.sriov_physical_PIF_of[0];
+                nic = Pool != null ? Pool.Connection.Resolve(Pool.Connection.Resolve(sriovLogicalPif).logical_PIF) : Host.Connection.Resolve(Host.Connection.Resolve(sriovLogicalPif).logical_PIF);
+            }
+            else
+            {
+                nic = pageNetworkDetails.SelectedHostNic;
+            }
             long vlan = pageNetworkDetails.VLAN;
 
             NetworkAction action = pageNetworkType.SelectedNetworkType == NetworkTypes.External
