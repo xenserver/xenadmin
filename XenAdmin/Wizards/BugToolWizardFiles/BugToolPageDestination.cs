@@ -88,9 +88,8 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             return m_buttonNextEnabled;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             PerformCheck(CheckPathValid, CheckCredentialsEntered);
         }
 

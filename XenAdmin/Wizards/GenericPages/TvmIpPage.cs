@@ -70,9 +70,8 @@ namespace XenAdmin.Wizards.GenericPages
             return true;
         }
 
-		public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-			base.PageLoaded(direction);//call first so the page gets populated
 		    m_buttonNextEnabled = true;
 		    OnPageUpdated();
 		}

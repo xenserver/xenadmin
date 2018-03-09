@@ -691,9 +691,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
             StopNtolUpdate();
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             StartNtolUpdate();
         }
 

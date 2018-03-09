@@ -132,9 +132,9 @@ namespace XenAdmin.Wizards.DRWizards
         }
 
         private BackgroundWorker _worker = null;
-        public override void PageLoaded(PageLoadedDirection direction)
+
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             SetupLabels();
 
             try

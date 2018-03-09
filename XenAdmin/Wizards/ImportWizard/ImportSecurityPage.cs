@@ -78,10 +78,8 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-		public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-			base.PageLoaded(direction);//call first so the page gets populated
-
 			if (direction == PageLoadedDirection.Forward)
 				SetButtonNextEnabled(OkToProceed());
 		}

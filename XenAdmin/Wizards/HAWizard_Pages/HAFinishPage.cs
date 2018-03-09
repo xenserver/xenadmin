@@ -58,10 +58,8 @@ namespace XenAdmin.Wizards.HAWizard_Pages
                 ClearControls();
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-            
             labelSr.Text = HeartbeatSrName.Ellipsise(50);
             labelNtol.Text = Ntol.ToString();
             labelRestart.Text = GetVmNumber(AlwaysRestart);

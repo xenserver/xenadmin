@@ -85,9 +85,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return false;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);//call first so the page gets populated
             SetButtonsEnabled(true);
         }
 

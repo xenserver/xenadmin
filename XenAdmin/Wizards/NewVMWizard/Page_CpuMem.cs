@@ -73,10 +73,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             get { return "CPU&Memory"; }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             if (SelectedTemplate ==  Template)
                 return;
 

@@ -87,11 +87,10 @@ namespace XenAdmin.Wizards.GenericPages
             checksPerConnectionDict.Clear();
 		}
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             RegisterConnectionEvents();
             RefreshPage();
-            base.PageLoaded(direction);
         }
 
         void Connection_ConnectionResult(object sender, ConnectionResultEventArgs e)

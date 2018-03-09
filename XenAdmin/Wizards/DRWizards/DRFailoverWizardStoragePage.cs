@@ -114,9 +114,8 @@ namespace XenAdmin.Wizards.DRWizards
             }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Forward)
                 SetupLabels();
         }

@@ -165,9 +165,8 @@ namespace XenAdmin.Wizards.DRWizards
 
         public Dictionary<XenRef<VDI>, PoolMetadata> SelectedPoolMetadata { private get; set; }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Back || actions.Count > 0)
                 return;
 

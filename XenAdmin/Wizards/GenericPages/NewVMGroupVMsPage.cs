@@ -215,9 +215,8 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             RefreshTab(null);
         } 
 

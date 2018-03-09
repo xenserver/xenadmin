@@ -78,7 +78,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             Program.Invoke(Program.MainWindow, RefreshRechecks);
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             if (direction == PageLoadedDirection.Back)
             {
@@ -104,7 +104,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             AddEventHandlersToMasters();
             labelPrechecksFirstLine.Text = Messages.ROLLINGUPGRADE_PRECHECKS;
             RefreshRechecks();
-            return;
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
