@@ -2752,11 +2752,11 @@ This action is final and unrecoverable.</value>
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>This will disable Changed Block Tracking on the disks of the selected VMs. If you are using any third-party solutions to back up the VMs, they might be affected. Note that Changed Block Tracking cannot be enabled again from [XenCenter]. Do you want to continue?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
-    <value>Disable Changed Block Tracking on selected VMs</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
     <value>Disable Changed Block Tracking on VM "{0}"</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VMs_TITLE" xml:space="preserve">
+    <value>Disable Changed Block Tracking on selected VMs</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>Are you sure you want to disable Health Check on the selected pool?</value>
@@ -5319,6 +5319,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FAST_CLONE_UNAVAILABLE" xml:space="preserve">
     <value>Fast clone is not supported by this storage type</value>
   </data>
+  <data name="FEATURE_DISABLED" xml:space="preserve">
+    <value>'{0}' feature is disabled due to license restrictions on the server.</value>
+  </data>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>Feature disabled in the registry</value>
   </data>
@@ -6256,6 +6259,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Live patching status</value>
+  </data>
+  <data name="HOST_NEEDS_REBOOT_ENABLE_SRIOV" xml:space="preserve">
+    <value>Yes (Host needs reboot)</value>
   </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Add Network...</value>
@@ -8926,6 +8932,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NICPANEL_HALF_DUPLEX" xml:space="preserve">
     <value>Half</value>
+  </data>
+  <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
+    <value>All the supported NICs have enabled SR-IOV.</value>
   </data>
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (Hidden)</value>
@@ -13649,14 +13658,5 @@ You will need to navigate to the Console on each of the selected VMs to complete
   </data>
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
-  </data>
-  <data name="FEATURE_DISABLED" xml:space="preserve">
-    <value>'{0}' feature is disabled due to license restrictions on the server.</value>
-  </data>
-  <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
-    <value>All the supported NICs have enabled SR-IOV.</value>
-  </data>
-  <data name="HOST_NEEDS_REBOOT_ENABLE_SRIOV" xml:space="preserve">
-    <value>Yes (Host needs reboot)</value>
   </data>
 </root>
