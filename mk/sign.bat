@@ -39,7 +39,7 @@ if /I %~x1 == .msi (
 ) else (
     set is_msi=no
 )
-if not [%2]==[] set descr=%2
+if not [%2]==[] set "descr=%2"
 
 if defined CTXSIGN (
     echo CTXSIGN is set
