@@ -262,11 +262,7 @@ namespace XenAdmin.Actions
             Description = String.Format(Messages.SUPP_PACK_UPLOADED, sr.Name());
 
             foreach (Host host in servers)
-            {
-                if (!SrUploadedUpdates.ContainsKey(host))
-                    SrUploadedUpdates.Add(host, sr);
-            }
-
+                SrUploadedUpdates[host] = sr;
 
             return result;
         }

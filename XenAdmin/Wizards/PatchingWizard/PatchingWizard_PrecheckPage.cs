@@ -366,15 +366,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             var pbdChecks = new List<Check>();
             foreach (Host host in applicableServers)
             {
-
+                SR uploadSr = null;
                 if (PoolUpdate != null && SrUploadedUpdates != null)
                 {
                     foreach (var dict in SrUploadedUpdates)
                     {
                         if (dict.Key.uuid == PoolUpdate.uuid && dict.Value.ContainsKey(host))
-                            pbdChecks.Add(new PBDsPluggedCheck(host, dict.Value[host]));
+                        {
+                            uploadSr = dict.Value[host];
+                            break;
+                        }
                     }
                 }
+                pbdChecks.Add(new PBDsPluggedCheck(host, uploadSr));
             }
 
             groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
@@ -517,8 +521,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     List<Pool_update> updates = new List<Pool_update>(host.Connection.Cache.Pool_updates);
                     Pool_update poolUpdateFromHost = updates.Find(otherPatch => string.Equals(otherPatch.uuid, update.uuid, StringComparison.OrdinalIgnoreCase));
-                    if(SrUploadedUpdates != null && SrUploadedUpdates.ContainsKey(poolUpdateFromHost) && SrUploadedUpdates[poolUpdateFromHost].ContainsKey(host))
-                        serverChecks.Add(new PatchPrecheckCheck(host, poolUpdateFromHost, LivePatchCodesByHost, SrUploadedUpdates[poolUpdateFromHost][host]));
+                    SR uploadSr = null;
+                    if (SrUploadedUpdates != null && SrUploadedUpdates.ContainsKey(poolUpdateFromHost) && SrUploadedUpdates[poolUpdateFromHost].ContainsKey(host))
+                        uploadSr = SrUploadedUpdates[poolUpdateFromHost][host];
+                    serverChecks.Add(new PatchPrecheckCheck(host, poolUpdateFromHost, LivePatchCodesByHost, uploadSr));
                 }
                 groups.Add(new CheckGroup(Messages.CHECKING_SERVER_SIDE_STATUS, serverChecks));
             }

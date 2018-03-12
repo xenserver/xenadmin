@@ -34,19 +34,23 @@ using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Diagnostics.Problems.SRProblem
 {
     public class BrokenSR : SRProblem
     {
+        private readonly Host host;
 
-        public BrokenSR(Check check, SR sr)
+        public BrokenSR(Check check, SR sr, Host host)
             : base(check, sr)
-        {}
+        {
+            this.host = host;
+        }
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, Sr.NameWithoutHost()); }
+            get { return string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, Helpers.GetName(host).Ellipsise(30), Sr.NameWithoutHost()); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)
@@ -91,7 +95,7 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
         {
             get
             {
-                return string.Format(Messages.UPDATES_WIZARD_BROKEN_SR_WARNING, host, sr);
+                return string.Format(Messages.UPDATES_WIZARD_BROKEN_SR_WARNING, Helpers.GetName(host).Ellipsise(30), sr);
             }
         }
     }

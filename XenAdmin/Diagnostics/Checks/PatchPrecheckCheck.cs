@@ -54,7 +54,7 @@ namespace XenAdmin.Diagnostics.Checks
         private static Regex LivePatchResponseRegex = new Regex("(<livepatch).+(</livepatch>)");
 
         private readonly Dictionary<string, livepatch_status> livePatchCodesByHost;
-        private  SR srUploadedUpdates = new SR();
+        private  SR srUploadedUpdates;
 
         public PatchPrecheckCheck(Host host, Pool_patch patch)
             : this(host, patch, null)
@@ -84,9 +84,9 @@ namespace XenAdmin.Diagnostics.Checks
         protected override Problem RunCheck()
         {
             //
-            // Check SRs that uploaded the updates is still attached
+            // Check that the SR where the update was uploaded is still attached
             //
-            if (srUploadedUpdates != null && srUploadedUpdates.IsBroken())
+            if (srUploadedUpdates != null && !srUploadedUpdates.CanBeSeenFrom(Host))
                 return new BrokenSRWarning(this, Host, srUploadedUpdates);
 
             //
