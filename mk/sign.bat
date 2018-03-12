@@ -52,6 +52,7 @@ if defined CTXSIGN (
     set /p CCSS_TICKET= < out.txt
     if defined CTXSIGN2 (
         echo CTXSIGN2 %CTXSIGN2% FOUND
+		echo Descr is: %descr%
         %CTXSIGN2% --sign --key XenServer.NET_KEY --cross-sign --pagehashes yes --type Authenticode --description "%descr%" %1
         if %errorlevel% neq 0 exit /b %errorlevel%
         if "%is_msi%"=="no" (
