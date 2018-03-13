@@ -160,6 +160,12 @@
     <Compile Include="Controls\ChevronButton.Designer.cs">
       <DependentUpon>ChevronButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ColumnHeaderEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ColumnHeaderEx.Designer.cs">
+      <DependentUpon>ColumnHeaderEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ComboBoxes\CPUTopologyComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

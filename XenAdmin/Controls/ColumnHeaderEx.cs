@@ -36,38 +36,18 @@ using System.Windows.Forms;
 
 namespace XenAdmin.Controls
 {
-    public class ListViewEx : ListView
+    public partial class ColumnHeaderEx : ColumnHeader
     {
-        public ListViewEx()
+        public ColumnHeaderEx()
         {
-            // Magically eliminates flicker when the control is resized
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            InitializeComponent();
         }
 
-        protected override void OnColumnWidthChanging(ColumnWidthChangingEventArgs e)
+        private int minimalWidth;
+        public int MinimalWidth
         {
-            base.OnColumnWidthChanging(e);
-
-            ColumnHeaderEx columnex = Columns[e.ColumnIndex] as ColumnHeaderEx;
-            if (columnex != null)
-            {
-                if (e.NewWidth <= columnex.MinimalWidth)
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
-
-        protected override void OnColumnWidthChanged(ColumnWidthChangedEventArgs e)
-        {
-            base.OnColumnWidthChanged(e);
-
-            ColumnHeaderEx columnex = Columns[e.ColumnIndex] as ColumnHeaderEx;
-            if (columnex != null)
-            {
-                if (columnex.Width < columnex.MinimalWidth)
-                    columnex.Width = columnex.MinimalWidth;
-            }
+            get { return minimalWidth; }
+            set { minimalWidth = value >= 0 ? value : 0; }
         }
     }
 }
