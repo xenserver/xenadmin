@@ -279,6 +279,9 @@
   <data name="START_POST_INSTALL_INSTRUCTIONS" xml:space="preserve">
     <value>Configuring virtual machine for [XenServer] ... </value>
   </data>
+  <data name="TRUE" xml:space="preserve">
+    <value>true</value>
+  </data>
   <data name="UNDEFINED_NAME_LABEL" xml:space="preserve">
     <value>Imported.</value>
   </data>

@@ -547,6 +547,15 @@ namespace XenOvfTransport {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to true.
+        /// </summary>
+        internal static string TRUE {
+            get {
+                return ResourceManager.GetString("TRUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Imported..
         /// </summary>
         internal static string UNDEFINED_NAME_LABEL {
