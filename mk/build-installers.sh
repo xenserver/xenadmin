@@ -48,13 +48,13 @@ do
   cd ${REPO}/XenAdmin/ReportViewer && ${REPO}/mk/sign.bat ${file}
 done
 
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET by Charles Cook, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Newtonsoft.Json.dll "JSON.NET by James Newton-King, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat log4net.dll  "Log4Net by The Apache Software Foundation, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib by IC#Code, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat DiscUtils.dll "DiscUtils by Kenneth Bell, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Ionic.Zip.dll "OSS, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat putty.exe "PuTTY by Simon Tatham, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Newtonsoft.Json.dll "JSON.NET"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat log4net.dll "Log4Net"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat DiscUtils.dll "DiscUtils"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Ionic.Zip.dll "OSS"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat putty.exe "PuTTY"
 
 #copy signed files in XenServerHealthService folder
 cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
