@@ -211,7 +211,7 @@ namespace XenAdmin.Actions
                             VLAN.destroy(Session, pif.VLAN_master_of);
                         }
                         
-                        if(pif.IsSrIovLogicalPIF())
+                        if(pif.IsSriovLogicalPIF())
                         {
                             Network_sriov.destroy(Session, pif.sriov_logical_PIF_of[0]);
                         }

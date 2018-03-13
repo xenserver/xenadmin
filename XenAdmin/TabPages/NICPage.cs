@@ -205,6 +205,7 @@ namespace XenAdmin.TabPages
             string vendor = Messages.HYPHEN;
             string device = Messages.HYPHEN;
             string busPath = Messages.HYPHEN;
+            string sriovSupported ;
 
             public PIFRow(PIF pif)
             {
@@ -216,13 +217,32 @@ namespace XenAdmin.TabPages
                     device = PIFMetrics.device_name;
                     busPath = PIFMetrics.pci_bus_path;
                 }
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     Cells.Add(new DataGridViewTextBoxCell());
                     updateCell(i);
                 }
 
-            }
+                DelegatedAsyncAction action = new DelegatedAsyncAction(pif.Connection,
+                                                                        string.Format(Messages.FETCH_POSSIBLE_HOSTS, pif.Name()),
+                                                                        string.Format(Messages.FETCHING_POSSIBLE_HOSTS, pif.Name()),
+                                                                        string.Format(Messages.FETCHED_POSSIBLE_HOSTS, pif.Name()),
+                                                                        delegate (Session session)
+                                                                        {
+                                                                            sriovSupported = !pif.SriovCapable()
+                                                                                                    ? Messages.NO
+                                                                                                    : pif.IsSriovPhysicalPIF() 
+                                                                                                            ? string.Format(Messages.REAMININF_VFS, Network_sriov.get_remaining_capacity(pif.Connection.Session, pif.sriov_physical_PIF_of[0].opaque_ref)) 
+                                                                                                            : Messages.SRIOV_DISABLED;
+                                                                        },
+                                                                        true);
+                action.Completed += delegate
+                {
+                    Program.Invoke(Program.MainWindow, delegate { this.Cells[9].Value = sriovSupported; });
+                };
+                action.RunAsync();
+
+            }            
 
             private void updateCell(int index)
             {

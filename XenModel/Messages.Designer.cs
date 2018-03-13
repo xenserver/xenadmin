@@ -29290,6 +29290,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yes ({0} VFs remaining).
+        /// </summary>
+        public static string REAMININF_VFS {
+            get {
+                return ResourceManager.GetString("REAMININF_VFS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to R&amp;eattach.
         /// </summary>
         public static string REATTACH_SR {
@@ -32018,9 +32027,18 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to SR-IOV networks require the SR-IOV capable NIC..
         /// </summary>
-        public static string SRIOV_NEED_NICSUPPORT {
-            get {
+        public static string SRIOV_NEED_NICSUPPORT{
+            get
+            {
                 return ResourceManager.GetString("SRIOV_NEED_NICSUPPORT", resourceCulture);
+            }
+        }
+
+        ///   Looks up a localized string similar to Yes (disabled).
+        /// </summary>
+        public static string SRIOV_DISABLED {
+            get {
+                return ResourceManager.GetString("SRIOV_DISABLED", resourceCulture);
             }
         }
         
