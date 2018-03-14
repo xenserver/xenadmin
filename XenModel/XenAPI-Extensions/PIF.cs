@@ -339,6 +339,13 @@ namespace XenAPI
             //if (!pif.IsPhysical && !poolwide)
             //    return Messages.SPACED_HYPHEN;
 
+            if(IsSriovLogicalPIF())
+            {
+                Network_sriov network_s = Connection.Resolve(sriov_logical_PIF_of[0]);
+                if (network_s == null || network_s.requires_reboot == true)
+                    return LinkState.Disconnected;
+            }
+
             PIF_metrics pifMetrics = PIFMetrics();
             return pifMetrics == null
                 ? LinkState.Unknown
