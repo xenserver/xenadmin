@@ -55,7 +55,7 @@ namespace XenAdmin.Commands
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly vm_operations _operation;
-
+        private ProduceConsumerQueue workerQueueWithouWlb;
         private readonly bool _resumeAfter;
 
         protected VMOperationToolStripMenuItem(Command command, bool inContextMenu, vm_operations operation)
@@ -78,6 +78,7 @@ namespace XenAdmin.Commands
         protected override void OnDropDownClosed(EventArgs e)
         {
             base.OnDropDownClosed(e);
+            workerQueueWithouWlb.CancelWorkers(false);
             _isDropDownClosed = true;
         }
 
@@ -109,6 +110,7 @@ namespace XenAdmin.Commands
                 base.DropDownItems.Add(new VMOperationToolStripMenuSubItem(Messages.HOME_SERVER_MENU_ITEM, Images.StaticImages._000_ServerHome_h32bit_16));
             }
 
+            workerQueueWithouWlb = new ProduceConsumerQueue(25);
             List<Host> hosts = new List<Host>(connection.Cache.Hosts);
             hosts.Sort();
             foreach (Host host in hosts)
@@ -195,7 +197,7 @@ namespace XenAdmin.Commands
         {
             SelectedItemCollection selection = Command.GetSelection();
             IXenConnection connection = selection[0].Connection;
-            ProduceConsumerQueue queue = new ProduceConsumerQueue(25);
+            
             VMOperationCommand cmdHome = new VMOperationHomeServerCommand(Command.MainWindowCommandInterface, selection, _operation, session);
             Host affinityHost = connection.Resolve(((VM)Command.GetSelection()[0].XenObject).affinity);
             VMOperationCommand cpmCmdHome = new CrossPoolMigrateToHomeCommand(Command.MainWindowCommandInterface, selection, affinityHost);
@@ -245,7 +247,7 @@ namespace XenAdmin.Commands
                     // So a Producer-Consumer-Queue with size 25 is used here to :
                     //   1. Make API calls for different menu items happen in parallel;
                     //   2. Limit the count of concurrent threads (now it's 25).
-                    queue.EnqueueItem(() =>
+                    workerQueueWithouWlb.EnqueueItem(() =>
                     {
                         VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name().EscapeAmpersands(), _operation, session);
                         CrossPoolMigrateCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
