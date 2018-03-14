@@ -43,6 +43,7 @@ using XenAPI;
 using XenAdmin.Core;
 using XenAdmin.Actions;
 using XenAdmin.Controls;
+using XenAdmin.Dialogs;
 
 
 namespace XenAdmin.Wizards
@@ -202,10 +203,27 @@ namespace XenAdmin.Wizards
             (new CreateChinAction(xenConnection, network, theInterface)).RunAsync();
         }
 
+
+        private DialogResult ShowSriovCreationWarning()
+        {
+            var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(
+                    SystemIcons.Warning, 
+                    Messages.SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION),
+                 new ThreeButtonDialog.TBDButton(Messages.SRIOV_NETWORK_CREATE, DialogResult.OK),
+                ThreeButtonDialog.ButtonCancel);
+
+            dlg.ShowDialog(this);
+            return dlg.DialogResult;
+        }
+
         private void CreateSRIOV()
         {
             XenAPI.Network network = PopulateNewNetworkObj();
 
+            if (ShowSriovCreationWarning() != DialogResult.OK)
+                return;
+            
             List<PIF> sriovSelectedPifs = new List<PIF>();
             Pool pool = Helpers.GetPoolOfOne(Host.Connection);
             if (pool == null)
