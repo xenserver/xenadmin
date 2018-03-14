@@ -88,7 +88,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public readonly List<VDI> AllCreatedSuppPackVdis = new List<VDI>();
         public Dictionary<Host, VDI> SuppPackVdis = new Dictionary<Host, VDI>();
         public Dictionary<Pool_update, string> AllIntroducedPoolUpdates = new Dictionary<Pool_update, string>();
-
+        public Dictionary<Pool_update, Dictionary<Host, SR>> SrUploadedUpdates = new Dictionary<Pool_update, Dictionary<Host, SR>>();
         #endregion
 
         protected override void PageLoadedCore(PageLoadedDirection direction)
@@ -484,29 +484,32 @@ namespace XenAdmin.Wizards.PatchingWizard
                         _poolUpdate = null;
                     }
 
-                    if (action is UploadSupplementalPackAction)
+                    var supplementalPackUploadAction = action as UploadSupplementalPackAction;
+                    if (supplementalPackUploadAction != null)
                     {
                         _patch = null;
 
-                        foreach (var vdiRef in (action as UploadSupplementalPackAction).VdiRefsToCleanUp)
+                        foreach (var vdiRef in supplementalPackUploadAction.VdiRefsToCleanUp)
                         {
-                            SuppPackVdis[vdiRef.Key] = action.Connection.Resolve(vdiRef.Value);
+                            SuppPackVdis[vdiRef.Key] = supplementalPackUploadAction.Connection.Resolve(vdiRef.Value);
                         }
 
                         AllCreatedSuppPackVdis.AddRange(SuppPackVdis.Values.Where(vdi => !AllCreatedSuppPackVdis.Contains(vdi)));
 
                         AddToUploadedUpdates(SelectedNewPatchPath, master);
 
-                        if (Helpers.ElyOrGreater(action.Connection))
+                        if (Helpers.ElyOrGreater(supplementalPackUploadAction.Connection))
                         {
-                            var newPoolUpdate = ((UploadSupplementalPackAction)action).PoolUpdate;
+                            var newPoolUpdate = (supplementalPackUploadAction).PoolUpdate;
 
                             if (newPoolUpdate != null)
                             {
                                 _poolUpdate = newPoolUpdate;
                                 AllIntroducedPoolUpdates.Add(PoolUpdate, SelectedNewPatchPath);
+                                SrUploadedUpdates[newPoolUpdate] = new Dictionary<Host, SR>(supplementalPackUploadAction.SrUploadedUpdates);
                             }
-                        }
+                        }                       
+
                     }
 
                     if (action is DownloadAndUnzipXenServerPatchAction)

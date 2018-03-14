@@ -11740,8 +11740,11 @@ Verify that the file is a valid {1} export.</value>
   <data name="UPDATES_WIZARD_APPLY_UPDATE" xml:space="preserve">
     <value>&amp;Install update</value>
   </data>
+  <data name="UPDATES_WIZARD_BROKEN_SR_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because the '{1}' storage repository is broken.</value>
+  </data>
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
-    <value>The {0} storage repository is broken.</value>
+    <value>{0}: The '{1}' storage repository is broken.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>Unable to download update from '{0}': no longer connected.
