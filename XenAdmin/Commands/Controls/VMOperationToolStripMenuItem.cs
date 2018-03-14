@@ -123,72 +123,78 @@ namespace XenAdmin.Commands
             {
                 SelectedItemCollection selection = Command.GetSelection();
                 Session session = selection[0].Connection.DuplicateSession();
-                WlbRecommendations recommendations = new WlbRecommendations(selection.AsXenObjects<VM>(), session);
-                recommendations.Initialize();
-
-                if (recommendations.IsError)
+                if (Helpers.WlbEnabled(selection[0].Connection))
                 {
-                    EnableAppropriateHostsNoWlb(session);
+                    WlbRecommendations recommendations = new WlbRecommendations(selection.AsXenObjects<VM>(), session);
+                    recommendations.Initialize();
+
+                    if (recommendations.IsError)
+                        EnableAppropriateHostsNoWlb(session);
+                    else
+                        EnableAppropriateHostsWlb(session, recommendations);
                 }
                 else
-                {
-                    EnableAppropriateHostsWlb(session, recommendations);
-                }
+                    EnableAppropriateHostsNoWlb(session);
+
             });
         }
 
         private void EnableAppropriateHostsWlb(Session session, WlbRecommendations recommendations)
         {
             SelectedItemCollection selection = Command.GetSelection();
-
             // set the first menu item to be the WLB optimal server menu item
+            VMOperationToolStripMenuSubItem firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
+            var firstItemCmd = new VMOperationWlbOptimalServerCommand(Command.MainWindowCommandInterface, selection, _operation, recommendations);
+            var firstItemCmdCanExecute = firstItemCmd.CanExecute();
+
             Program.Invoke(Program.MainWindow, delegate
             {
-                VMOperationToolStripMenuSubItem firstItem = (VMOperationToolStripMenuSubItem)base.DropDownItems[0];
-                firstItem.Command = new VMOperationWlbOptimalServerCommand(Command.MainWindowCommandInterface, selection, _operation, recommendations);
-                firstItem.Enabled = firstItem.Command.CanExecute();
+                firstItem.Command = firstItemCmd;
+                firstItem.Enabled = firstItemCmdCanExecute;
             });
+
+            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
 
             List<VMOperationToolStripMenuSubItem> hostMenuItems = new List<VMOperationToolStripMenuSubItem>();
-            Program.Invoke(Program.MainWindow, delegate
+            foreach (VMOperationToolStripMenuSubItem item in base.DropDownItems)
             {
-                foreach (VMOperationToolStripMenuSubItem item in base.DropDownItems)
+                Host host = item.Tag as Host;
+                if (host != null)
                 {
-                    Host host = item.Tag as Host;
-                    if (host != null)
-                    {
-                        item.Command = new VMOperationWlbHostCommand(Command.MainWindowCommandInterface, selection, host, _operation, recommendations.GetStarRating(host));
-                        item.Enabled = item.Command.CanExecute();
-                        hostMenuItems.Add(item);
-                    }
-                }
-            });
+                    var cmd = new VMOperationWlbHostCommand(Command.MainWindowCommandInterface, selection, host, _operation, recommendations.GetStarRating(host));
+                    var canExecute = cmd.CanExecute();
 
+                    Program.Invoke(Program.MainWindow, delegate
+                    {
+                        item.Command = cmd;
+                        item.Enabled = canExecute;
+                        hostMenuItems.Add(item);
+                    });
+                }
+            }
+            
             // Shuffle the list to make it look cool
-            Helpers.ShuffleList(hostMenuItems);
+            // Helpers.ShuffleList(hostMenuItems);
 
             // sort the hostMenuItems by star rating
             hostMenuItems.Sort(new WlbHostStarCompare());
 
             // refresh the drop-down-items from the menuItems.
-            Program.Invoke(Program.MainWindow, delegate()
+            foreach (VMOperationToolStripMenuSubItem menuItem in hostMenuItems)
             {
-                foreach (VMOperationToolStripMenuSubItem menuItem in hostMenuItems)
+                Program.Invoke(Program.MainWindow, delegate()
                 {
                     base.DropDownItems.Insert(hostMenuItems.IndexOf(menuItem) + 1, menuItem);
-                }
-            });
-
-            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
+                });
+            }
         }
 
         private void EnableAppropriateHostsNoWlb(Session session)
         {
             SelectedItemCollection selection = Command.GetSelection();
             IXenConnection connection = selection[0].Connection;
-
+            ProduceConsumerQueue queue = new ProduceConsumerQueue(25);
             VMOperationCommand cmdHome = new VMOperationHomeServerCommand(Command.MainWindowCommandInterface, selection, _operation, session);
-            
             Host affinityHost = connection.Resolve(((VM)Command.GetSelection()[0].XenObject).affinity);
             VMOperationCommand cpmCmdHome = new CrossPoolMigrateToHomeCommand(Command.MainWindowCommandInterface, selection, affinityHost);
 
@@ -233,30 +239,43 @@ namespace XenAdmin.Commands
                 Host host = item.Tag as Host;
                 if (host != null)
                 {
-                    VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name().EscapeAmpersands(), _operation, session);
-                    CrossPoolMigrateCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
-
-                    VMOperationToolStripMenuSubItem tempItem = item;
-                    Program.Invoke(Program.MainWindow, delegate
+                    // API calls could happen in CanExecute(), which take time to wait.
+                    // So a Producer-Consumer-Queue with size 25 is used here to :
+                    //   1. Make API calls for different menu items happen in parallel;
+                    //   2. Limit the count of concurrent threads (now it's 25).
+                    queue.EnqueueItem(() =>
                     {
+                        VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name().EscapeAmpersands(), _operation, session);
+                        CrossPoolMigrateCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
+
+                        VMOperationToolStripMenuSubItem tempItem = item;
                         bool oldMigrateCmdCanRun = cmd.CanExecute();
                         if ((_operation == vm_operations.start_on) || oldMigrateCmdCanRun)
                         {
-                            tempItem.Command = cmd;
-                            tempItem.Enabled = oldMigrateCmdCanRun;
+                            Program.Invoke(Program.MainWindow, delegate
+                            {
+                                tempItem.Command = cmd;
+                                tempItem.Enabled = oldMigrateCmdCanRun;
+                            });
                         }
                         else
                         {
                             bool crossPoolMigrateCmdCanRun = cpmCmd.CanExecute();
                             if (crossPoolMigrateCmdCanRun || !string.IsNullOrEmpty(cpmCmd.CantExecuteReason))
                             {
-                                tempItem.Command = cpmCmd;
-                                tempItem.Enabled = crossPoolMigrateCmdCanRun;
+                                Program.Invoke(Program.MainWindow, delegate
+                                {
+                                    tempItem.Command = cpmCmd;
+                                    tempItem.Enabled = crossPoolMigrateCmdCanRun;
+                                });
                             }
                             else
                             {
-                                tempItem.Command = cmd;
-                                tempItem.Enabled = oldMigrateCmdCanRun;
+                                Program.Invoke(Program.MainWindow, delegate
+                                {
+                                    tempItem.Command = cmd;
+                                    tempItem.Enabled = oldMigrateCmdCanRun;
+                                });
                             }
                         }
                     });
