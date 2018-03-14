@@ -134,8 +134,9 @@ namespace XenAdmin.Commands
                         EnableAppropriateHostsWlb(session, recommendations);
                 }
                 else
+                {
                     EnableAppropriateHostsNoWlb(session);
-
+                }
             });
         }
 
@@ -152,9 +153,7 @@ namespace XenAdmin.Commands
                 firstItem.Command = firstItemCmd;
                 firstItem.Enabled = firstItemCmdCanExecute;
             });
-
-            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
-
+    
             List<VMOperationToolStripMenuSubItem> hostMenuItems = new List<VMOperationToolStripMenuSubItem>();
             foreach (VMOperationToolStripMenuSubItem item in base.DropDownItems)
             {
@@ -187,6 +186,9 @@ namespace XenAdmin.Commands
                     base.DropDownItems.Insert(hostMenuItems.IndexOf(menuItem) + 1, menuItem);
                 });
             }
+
+            Program.Invoke(Program.MainWindow, () => AddAdditionalMenuItems(selection));
+
         }
 
         private void EnableAppropriateHostsNoWlb(Session session)
