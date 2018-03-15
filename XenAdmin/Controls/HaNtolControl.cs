@@ -198,9 +198,9 @@ namespace XenAdmin.Controls
                     // Turn the settings dictionary into an api-level one we can pass to compute_hypothetical_max.
                     var config = Helpers.GetVmHaRestartPrioritiesForApi(settings);
 
-                    Session dupSess = connection.DuplicateSession(60 * 1000);
+                    Session dupSess = connection.DuplicateSession(10 * 60 * 1000);
 
-                    // Use a 1 minute timeout here (rather than the default 1 day)
+                    // Use a 10 minute timeout here (rather than the default 1 day)
                     ntolMax = Pool.GetMaximumTolerableHostFailures(dupSess, config);
 
                     if (exitNtolUpdateThread)
