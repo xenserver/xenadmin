@@ -56,7 +56,7 @@ namespace XenAPI
                 return transport_pif.Name();
             }
 
-            else if(IsSrIovLogicalPIF())
+            else if(IsSriovLogicalPIF())
             {
                 if (Connection == null)
                     return "";
@@ -146,7 +146,7 @@ namespace XenAPI
 
         public bool IsPhysical()
         {
-            return VLAN == -1 && !IsTunnelAccessPIF() && !IsSrIovLogicalPIF() ;
+            return VLAN == -1 && !IsTunnelAccessPIF() && !IsSriovLogicalPIF();
         }
 
         public override int CompareTo(PIF other)
@@ -339,6 +339,13 @@ namespace XenAPI
             //if (!pif.IsPhysical && !poolwide)
             //    return Messages.SPACED_HYPHEN;
 
+            if(IsSriovLogicalPIF())
+            {
+                Network_sriov network_s = Connection.Resolve(sriov_logical_PIF_of[0]);
+                if (network_s == null || network_s.requires_reboot == true)
+                    return LinkState.Disconnected;
+            }
+
             PIF_metrics pifMetrics = PIFMetrics();
             return pifMetrics == null
                 ? LinkState.Unknown
@@ -365,9 +372,14 @@ namespace XenAPI
             return capabilities.Any(capability => capability == "fcoe");
         }
 
-        public bool IsSrIovLogicalPIF()
+        public bool IsSriovLogicalPIF()
         {
             return sriov_logical_PIF_of != null && sriov_logical_PIF_of.Count != 0;
+        }
+
+        public bool IsSriovPhysicalPIF()
+        {
+            return sriov_physical_PIF_of != null && sriov_physical_PIF_of.Count != 0;
         }
 
         public bool SriovCapable()
