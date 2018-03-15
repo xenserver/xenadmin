@@ -50,8 +50,9 @@ namespace XenAdmin.Dialogs
         private VIF ExistingVif;
         private int Device;
         private readonly bool vSwitchController;
+        private readonly bool allowSriov;
 
-        public VIFDialog(IXenConnection Connection, VIF ExistingVif, int Device)
+        public VIFDialog(IXenConnection Connection, VIF ExistingVif, int Device, bool allowSriov = false)
             : base(Connection)
         {
             InitializeComponent();
@@ -61,6 +62,7 @@ namespace XenAdmin.Dialogs
             this.Device = Device;
             if (ExistingVif != null)
                 changeToPropertiesTitle();
+            this.allowSriov = allowSriov;
 
             // Check if vSwitch Controller is configured for the pool (CA-46299)
             Pool pool = Helpers.GetPoolOfOne(connection);
@@ -206,7 +208,7 @@ namespace XenAdmin.Dialogs
             networks.Sort();
             foreach (XenAPI.Network network in networks)
             {
-                if (!network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave())
+                if (!network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave() || (network.IsSriov() && !allowSriov))
                     continue;
 
                 comboBoxNetwork.Items.Add(new NetworkComboBoxItem(network));
