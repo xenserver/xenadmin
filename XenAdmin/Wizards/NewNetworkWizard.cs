@@ -229,15 +229,25 @@ namespace XenAdmin.Wizards
             XenAPI.Network network = PopulateNewNetworkObj();
 
             PIF nic;
-            if(pageNetworkDetails.createVlanOnSriovNetwork)
+            if (pageNetworkDetails.CreateVlanOnSriovNetwork)
             {
-                var sriovLogicalPif = pageNetworkDetails.SelectedHostNic.sriov_physical_PIF_of[0];
-                nic = Pool != null ? Pool.Connection.Resolve(Pool.Connection.Resolve(sriovLogicalPif).logical_PIF) : Host.Connection.Resolve(Host.Connection.Resolve(sriovLogicalPif).logical_PIF);
+                if (pageNetworkDetails.SelectedHostNic == null || pageNetworkDetails.SelectedHostNic.sriov_physical_PIF_of == null || pageNetworkDetails.SelectedHostNic.sriov_physical_PIF_of.Count == 0)
+                    return;
+
+                var sriovPhysicalPif = xenConnection.Resolve(pageNetworkDetails.SelectedHostNic.sriov_physical_PIF_of[0]);
+                if (sriovPhysicalPif == null)
+                    return;
+
+                nic = xenConnection.Resolve(sriovPhysicalPif.logical_PIF);
+                if (nic == null)
+                    return;
             }
             else
             {
                 nic = pageNetworkDetails.SelectedHostNic;
             }
+
+
             long vlan = pageNetworkDetails.VLAN;
 
             NetworkAction action = pageNetworkType.SelectedNetworkType == NetworkTypes.External

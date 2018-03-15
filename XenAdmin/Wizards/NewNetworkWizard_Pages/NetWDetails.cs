@@ -113,7 +113,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             get { return checkBoxAutomatic.Checked; }
         }
 
-        public bool createVlanOnSriovNetwork
+        public bool CreateVlanOnSriovNetwork
         {
             get { return checkBoxSriov.Checked; }
         }
@@ -144,7 +144,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             labelNIC.Visible = external;
             if (comboBoxNICList.Items.Count > 0)
                 comboBoxNICList.SelectedIndex = external ? comboBoxNICList.Items.Count - 1 : -1;
-            groupBoxSriovConfig.Visible = SelectedHostNic.sriov_physical_PIF_of.Count != 0;
+            groupBoxSriovConfig.Visible = SelectedHostNic != null && SelectedHostNic.sriov_physical_PIF_of != null && SelectedHostNic.sriov_physical_PIF_of.Count != 0;
 
             OnPageUpdated();
         }
