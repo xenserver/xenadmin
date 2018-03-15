@@ -169,8 +169,8 @@ namespace XenAdmin.Commands
                     {
                         item.Command = cmd;
                         item.Enabled = canExecute;
-                        hostMenuItems.Add(item);
                     });
+                    hostMenuItems.Add(item);
                 }
             }
             
@@ -200,7 +200,6 @@ namespace XenAdmin.Commands
             
             VMOperationCommand cmdHome = new VMOperationHomeServerCommand(Command.MainWindowCommandInterface, selection, _operation, session);
             Host affinityHost = connection.Resolve(((VM)Command.GetSelection()[0].XenObject).affinity);
-            VMOperationCommand cpmCmdHome = new CrossPoolMigrateToHomeCommand(Command.MainWindowCommandInterface, selection, affinityHost);
 
             Program.Invoke(Program.MainWindow, delegate
             {
@@ -214,6 +213,8 @@ namespace XenAdmin.Commands
                 }
                 else
                 {
+                    VMOperationCommand cpmCmdHome = new CrossPoolMigrateToHomeCommand(Command.MainWindowCommandInterface, selection, affinityHost);
+
                     if (cpmCmdHome.CanExecute())
                     {
                         firstItem.Command = cpmCmdHome;
@@ -249,6 +250,8 @@ namespace XenAdmin.Commands
                     //   2. Limit the count of concurrent threads (now it's 25).
                     workerQueueWithouWlb.EnqueueItem(() =>
                     {
+                        if (_isDropDownClosed)
+                            return;
                         VMOperationCommand cmd = new VMOperationHostCommand(Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name().EscapeAmpersands(), _operation, session);
                         CrossPoolMigrateCommand cpmCmd = new CrossPoolMigrateCommand(Command.MainWindowCommandInterface, selection, host, _resumeAfter);
 

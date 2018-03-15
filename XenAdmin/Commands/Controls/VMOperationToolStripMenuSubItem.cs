@@ -52,6 +52,7 @@ namespace XenAdmin.Commands
         {
             Util.ThrowIfParameterNull(command, "command");
             Command = command;
+            Enabled = command != null && command.CanExecute();
         }
 
         private void Update()

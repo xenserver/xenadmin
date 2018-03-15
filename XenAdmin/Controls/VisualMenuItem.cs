@@ -68,7 +68,7 @@ namespace XenAdmin.Controls
             {
                 base.Text = value;
                 UpdateWidths();
-                VisualMenuItemAlignData.Refresh(this);
+                VisualMenuItemAlignData.Refresh();
                 RefreshPadding();
             }
         }
@@ -93,7 +93,7 @@ namespace XenAdmin.Controls
             set
             {
                 secondImage = value;
-                VisualMenuItemAlignData.Refresh(this);
+                VisualMenuItemAlignData.Refresh();
                 RefreshPadding();
                 this.Invalidate();
             }
@@ -230,21 +230,6 @@ namespace XenAdmin.Controls
                 }
                 maxCombinedWidth = maxImageWidth + maxStringLength;
             }     
-        }
-
-        public static void Refresh(VisualMenuItem visItem)
-        {
-            if (visItem != null)
-            {
-                lock (locker)
-                {
-                    int imageWidth = visItem.ImageWidth();
-                    if (visItem.TextWidth > maxStringLength)
-                        maxStringLength = visItem.TextWidth;
-                    if ((imageWidth + maxStringLength) > maxCombinedWidth)
-                        maxCombinedWidth = imageWidth + maxStringLength;
-                }
-            }
         }
     }
     
