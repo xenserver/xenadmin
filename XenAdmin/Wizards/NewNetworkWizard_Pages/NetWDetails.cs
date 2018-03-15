@@ -113,6 +113,11 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             get { return checkBoxAutomatic.Checked; }
         }
 
+        public bool CreateVlanOnSriovNetwork
+        {
+            get { return checkBoxSriov.Checked; }
+        }
+
         /// <summary>
         /// Null if the custom MTU option is disabled
         /// </summary>
@@ -139,6 +144,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             labelNIC.Visible = external;
             if (comboBoxNICList.Items.Count > 0)
                 comboBoxNICList.SelectedIndex = external ? comboBoxNICList.Items.Count - 1 : -1;
+            groupBoxSriovConfig.Visible = SelectedHostNic != null && SelectedHostNic.sriov_physical_PIF_of != null && SelectedHostNic.sriov_physical_PIF_of.Count != 0;
 
             OnPageUpdated();
         }
@@ -193,7 +199,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
             if (SelectedHostNic == null)
                 return;
-            
+
+            groupBoxSriovConfig.Visible = SelectedHostNic.sriov_physical_PIF_of.Count != 0;
+
             numericUpDownMTU.Maximum = Math.Min(SelectedHostNic.MTU, XenAPI.Network.MTU_MAX);
 
             numericUpDownMTU.Enabled = numericUpDownMTU.Minimum != numericUpDownMTU.Maximum;
