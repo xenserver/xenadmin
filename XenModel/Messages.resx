@@ -10228,6 +10228,9 @@ Disconnect from this server, or reconnect as a more privileged user.</value>
   <data name="READ_WRITE" xml:space="preserve">
     <value>Read / Write</value>
   </data>
+  <data name="REAMININF_VFS" xml:space="preserve">
+    <value>Yes ({0} VFs remaining)</value>
+  </data>
   <data name="REATTACH_SR" xml:space="preserve">
     <value>R&amp;eattach</value>
   </data>
@@ -11064,11 +11067,20 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SR" xml:space="preserve">
     <value>Storage Repository</value>
   </data>
+  <data name="SRIOV_DISABLED" xml:space="preserve">
+    <value>Yes (disabled)</value>
+  </data>
   <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
     <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
   </data>
   <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
     <value>SR-IOV networks require the SR-IOV capable NIC.</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE" xml:space="preserve">
+    <value>Create &amp;SR-IOV anyway</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION" xml:space="preserve">
+    <value>Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>

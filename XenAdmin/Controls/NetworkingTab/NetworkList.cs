@@ -949,7 +949,7 @@ namespace XenAdmin.Controls.NetworkingTab
                     Pif == null ? Messages.NONE : Pif.LinkStatusString();
                 MacCell.Value = Pif != null && Pif.IsPhysical() ? Pif.MAC : Messages.SPACED_HYPHEN;
                 MtuCell.Value = Network.CanUseJumboFrames() ? Network.MTU.ToString() : Messages.SPACED_HYPHEN;
-                SriovCell.Value = Pif == null || !Pif.IsSrIovLogicalPIF()
+                SriovCell.Value = Pif == null || !Pif.IsSriovLogicalPIF()
                                   ? Messages.NO : Pif.Connection.Resolve(Pif.sriov_logical_PIF_of[0]).requires_reboot
                                                   ? Messages.HOST_NEEDS_REBOOT_ENABLE_SRIOV : Messages.YES;
             }

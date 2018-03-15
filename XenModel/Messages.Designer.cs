@@ -15231,13 +15231,12 @@ namespace XenAdmin {
                 return ResourceManager.GetString("FAST_CLONE_UNAVAILABLE", resourceCulture);
             }
         }
-
-         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; feature is disabled due to license restrictions on the server.
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; feature is disabled due to license restrictions on the server..
         /// </summary>
         public static string FEATURE_DISABLED {
-            get
-            {
+            get {
                 return ResourceManager.GetString("FEATURE_DISABLED", resourceCulture);
             }
         }
@@ -17957,7 +17956,7 @@ namespace XenAdmin {
                 return ResourceManager.GetString("HOST_NEEDS_REBOOT_CHECK_DESCRIPTION", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Yes (Host needs reboot).
         /// </summary>
@@ -25808,24 +25807,22 @@ namespace XenAdmin {
                 return ResourceManager.GetString("NICPANEL_FULL_DUPLEX", resourceCulture);
             }
         }
-
-         /// <summary>
-        ///   Looks up a localized string similar to All the supported NICs have enabled SR-IOV..
-        /// </summary>
-        public static string NICS_ARE_SRIOV_ENABLED
-        {
-            get
-            {
-                return ResourceManager.GetString("NICS_ARE_SRIOV_ENABLED", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Half.
         /// </summary>
         public static string NICPANEL_HALF_DUPLEX {
             get {
                 return ResourceManager.GetString("NICPANEL_HALF_DUPLEX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All the supported NICs have enabled SR-IOV..
+        /// </summary>
+        public static string NICS_ARE_SRIOV_ENABLED {
+            get {
+                return ResourceManager.GetString("NICS_ARE_SRIOV_ENABLED", resourceCulture);
             }
         }
         
@@ -29432,6 +29429,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yes ({0} VFs remaining).
+        /// </summary>
+        public static string REAMININF_VFS {
+            get {
+                return ResourceManager.GetString("REAMININF_VFS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to R&amp;eattach.
         /// </summary>
         public static string REATTACH_SR {
@@ -32160,9 +32166,36 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to SR-IOV networks require the SR-IOV capable NIC..
         /// </summary>
-        public static string SRIOV_NEED_NICSUPPORT {
-            get {
+        public static string SRIOV_NEED_NICSUPPORT{
+            get
+            {
                 return ResourceManager.GetString("SRIOV_NEED_NICSUPPORT", resourceCulture);
+            }
+        }
+
+        ///   Looks up a localized string similar to Yes (disabled).
+        /// </summary>
+        public static string SRIOV_DISABLED {
+            get {
+                return ResourceManager.GetString("SRIOV_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create &amp;SR-IOV anyway.
+        /// </summary>
+        public static string SRIOV_NETWORK_CREATE {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_CREATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed.
+        /// </summary>
+        public static string SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION", resourceCulture);
             }
         }
         
