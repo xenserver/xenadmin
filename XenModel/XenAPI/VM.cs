@@ -132,7 +132,8 @@ namespace XenAPI
             long hardware_platform_version,
             bool has_vendor_device,
             bool requires_reboot,
-            string reference_label)
+            string reference_label,
+            domain_type domain_type)
         {
             this.uuid = uuid;
             this.allowed_operations = allowed_operations;
@@ -217,6 +218,7 @@ namespace XenAPI
             this.has_vendor_device = has_vendor_device;
             this.requires_reboot = requires_reboot;
             this.reference_label = reference_label;
+            this.domain_type = domain_type;
         }
 
         /// <summary>
@@ -317,6 +319,7 @@ namespace XenAPI
             has_vendor_device = update.has_vendor_device;
             requires_reboot = update.requires_reboot;
             reference_label = update.reference_label;
+            domain_type = update.domain_type;
         }
 
         internal void UpdateFromProxy(Proxy_VM proxy)
@@ -404,6 +407,7 @@ namespace XenAPI
             has_vendor_device = (bool)proxy.has_vendor_device;
             requires_reboot = (bool)proxy.requires_reboot;
             reference_label = proxy.reference_label == null ? null : (string)proxy.reference_label;
+            domain_type = proxy.domain_type == null ? (domain_type) 0 : (domain_type)Helper.EnumParseDefault(typeof(domain_type), (string)proxy.domain_type);
         }
 
         public Proxy_VM ToProxy()
@@ -492,6 +496,7 @@ namespace XenAPI
             result_.has_vendor_device = has_vendor_device;
             result_.requires_reboot = requires_reboot;
             result_.reference_label = reference_label ?? "";
+            result_.domain_type = domain_type_helper.ToString(domain_type);
             return result_;
         }
 
@@ -680,6 +685,8 @@ namespace XenAPI
                 requires_reboot = Marshalling.ParseBool(table, "requires_reboot");
             if (table.ContainsKey("reference_label"))
                 reference_label = Marshalling.ParseString(table, "reference_label");
+            if (table.ContainsKey("domain_type"))
+                domain_type = (domain_type)Helper.EnumParseDefault(typeof(domain_type), Marshalling.ParseString(table, "domain_type"));
         }
 
         public bool DeepEquals(VM other, bool ignoreCurrentOperations)
@@ -773,7 +780,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._hardware_platform_version, other._hardware_platform_version) &&
                 Helper.AreEqual2(this._has_vendor_device, other._has_vendor_device) &&
                 Helper.AreEqual2(this._requires_reboot, other._requires_reboot) &&
-                Helper.AreEqual2(this._reference_label, other._reference_label);
+                Helper.AreEqual2(this._reference_label, other._reference_label) &&
+                Helper.AreEqual2(this._domain_type, other._domain_type);
         }
 
         internal static List<VM> ProxyArrayToObjectList(Proxy_VM[] input)
@@ -850,10 +858,6 @@ namespace XenAPI
                 {
                     VM.set_PV_legacy_args(session, opaqueRef, _PV_legacy_args);
                 }
-                if (!Helper.AreEqual2(_HVM_boot_policy, server._HVM_boot_policy))
-                {
-                    VM.set_HVM_boot_policy(session, opaqueRef, _HVM_boot_policy);
-                }
                 if (!Helper.AreEqual2(_HVM_boot_params, server._HVM_boot_params))
                 {
                     VM.set_HVM_boot_params(session, opaqueRef, _HVM_boot_params);
@@ -922,6 +926,10 @@ namespace XenAPI
                 {
                     VM.set_actions_after_crash(session, opaqueRef, _actions_after_crash);
                 }
+                if (!Helper.AreEqual2(_HVM_boot_policy, server._HVM_boot_policy))
+                {
+                    VM.set_HVM_boot_policy(session, opaqueRef, _HVM_boot_policy);
+                }
                 if (!Helper.AreEqual2(_HVM_shadow_multiplier, server._HVM_shadow_multiplier))
                 {
                     VM.set_HVM_shadow_multiplier(session, opaqueRef, _HVM_shadow_multiplier);
@@ -961,6 +969,10 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_has_vendor_device, server._has_vendor_device))
                 {
                     VM.set_has_vendor_device(session, opaqueRef, _has_vendor_device);
+                }
+                if (!Helper.AreEqual2(_domain_type, server._domain_type))
+                {
+                    VM.set_domain_type(session, opaqueRef, _domain_type);
                 }
 
                 return null;
@@ -1573,9 +1585,11 @@ namespace XenAPI
         /// <summary>
         /// Get the HVM/boot_policy field of the given VM.
         /// First published in XenServer 4.0.
+        /// Deprecated since Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_vm">The opaque_ref of the given vm</param>
+        [Deprecated("Unreleased")]
         public static string get_HVM_boot_policy(Session session, string _vm)
         {
             if (session.JsonRpcClient != null)
@@ -2237,6 +2251,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the domain_type field of the given VM.
+        /// First published in XenServer 7.4.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        public static domain_type get_domain_type(Session session, string _vm)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_get_domain_type(session.opaque_ref, _vm);
+            else
+                return (domain_type)Helper.EnumParseDefault(typeof(domain_type), (string)session.proxy.vm_get_domain_type(session.opaque_ref, _vm ?? "").parse());
+        }
+
+        /// <summary>
         /// Set the name/label field of the given VM.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -2475,21 +2503,6 @@ namespace XenAPI
                 session.JsonRpcClient.vm_set_pv_legacy_args(session.opaque_ref, _vm, _legacy_args);
             else
                 session.proxy.vm_set_pv_legacy_args(session.opaque_ref, _vm ?? "", _legacy_args ?? "").parse();
-        }
-
-        /// <summary>
-        /// Set the HVM/boot_policy field of the given VM.
-        /// First published in XenServer 4.0.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_vm">The opaque_ref of the given vm</param>
-        /// <param name="_boot_policy">New value to set</param>
-        public static void set_HVM_boot_policy(Session session, string _vm, string _boot_policy)
-        {
-            if (session.JsonRpcClient != null)
-                session.JsonRpcClient.vm_set_hvm_boot_policy(session.opaque_ref, _vm, _boot_policy);
-            else
-                session.proxy.vm_set_hvm_boot_policy(session.opaque_ref, _vm ?? "", _boot_policy ?? "").parse();
         }
 
         /// <summary>
@@ -5052,6 +5065,38 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Set the VM.domain_type field of the given VM, which will take effect when it is next started
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new domain type</param>
+        public static void set_domain_type(Session session, string _vm, domain_type _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_domain_type(session.opaque_ref, _vm, _value);
+            else
+                session.proxy.vm_set_domain_type(session.opaque_ref, _vm ?? "", domain_type_helper.ToString(_value)).parse();
+        }
+
+        /// <summary>
+        /// Set the VM.HVM_boot_policy field of the given VM, which will take effect when it is next started
+        /// First published in XenServer 4.0.
+        /// Deprecated since Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm">The opaque_ref of the given vm</param>
+        /// <param name="_value">The new HVM boot policy</param>
+        [Deprecated("Unreleased")]
+        public static void set_HVM_boot_policy(Session session, string _vm, string _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.vm_set_hvm_boot_policy(session.opaque_ref, _vm, _value);
+            else
+                session.proxy.vm_set_hvm_boot_policy(session.opaque_ref, _vm ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
         /// Return a list of all the VMs known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -6640,5 +6685,25 @@ namespace XenAPI
             }
         }
         private string _reference_label = "";
+
+        /// <summary>
+        /// The type of domain that will be created when the VM is started
+        /// First published in XenServer 7.4.
+        /// </summary>
+        [JsonConverter(typeof(domain_typeConverter))]
+        public virtual domain_type domain_type
+        {
+            get { return _domain_type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _domain_type))
+                {
+                    _domain_type = value;
+                    Changed = true;
+                    NotifyPropertyChanged("domain_type");
+                }
+            }
+        }
+        private domain_type _domain_type = domain_type.unspecified;
     }
 }

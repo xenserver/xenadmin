@@ -186,6 +186,12 @@
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot have a tunnel on it.</value>
   </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
+    <value>This is a network SR-IOV logical PIF and cannot have a tunnel on it.</value>
+  </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_VLAN_ON_SRIOV_LOGICAL" xml:space="preserve">
+    <value>This is a vlan PIF on network SR-IOV and cannot have a tunnel on it.</value>
+  </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot have a VLAN on it.</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
     <value>The requested update could not be found. Please upload the update again. This can occur when you run xe update-pool-clean before xe update-apply. </value>
+  </data>
+  <data name="CANNOT_FORGET_SRIOV_LOGICAL" xml:space="preserve">
+    <value>This is a network SR-IOV logical PIF and cannot do forget on it</value>
   </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot be plugged.</value>
@@ -690,8 +699,41 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>The network contains active VIFs ({0}) and cannot be deleted.</value>
   </data>
+  <data name="NETWORK_HAS_INCOMPATIBLE_SRIOV_PIFS" xml:space="preserve">
+    <value>The PIF is not compatible with the selected SR-IOV network</value>
+  </data>
+  <data name="NETWORK_HAS_INCOMPATIBLE_VLAN_ON_SRIOV_PIFS" xml:space="preserve">
+    <value>VLAN on the PIF is not compatible with the selected SR-IOV VLAN network</value>
+  </data>
   <data name="NETWORK_INCOMPATIBLE_PURPOSES" xml:space="preserve">
     <value>You tried to add a purpose to a network but the new purpose is not compatible with an existing purpose of the network or other networks.</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_BOND" xml:space="preserve">
+    <value>The network is incompatible with bond</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_SRIOV" xml:space="preserve">
+    <value>The network is incompatible with sriov</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_TUNNEL" xml:space="preserve">
+    <value>The network is incompatible with tunnel</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_VLAN_ON_BRIDGE" xml:space="preserve">
+    <value>The network is incompatible with vlan on bridge</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_VLAN_ON_SRIOV" xml:space="preserve">
+    <value>The network is incompatible with vlan on sriov</value>
+  </data>
+  <data name="NETWORK_SRIOV_ALREADY_ENABLED" xml:space="preserve">
+    <value>The PIF selected for the SR-IOV network is already enabled</value>
+  </data>
+  <data name="NETWORK_SRIOV_DISABLE_FAILED" xml:space="preserve">
+    <value>Failed to disable SR-IOV on PIF</value>
+  </data>
+  <data name="NETWORK_SRIOV_ENABLE_FAILED" xml:space="preserve">
+    <value>Failed to enable SR-IOV on PIF</value>
+  </data>
+  <data name="NETWORK_SRIOV_INSUFFICIENT_CAPACITY" xml:space="preserve">
+    <value>There is insufficient capacity for VF reservation</value>
   </data>
   <data name="NETWORK_UNMANAGED" xml:space="preserve">
     <value>The network is not managed by xapi.</value>
@@ -834,14 +876,26 @@
   <data name="PIF_IS_MANAGEMENT_INTERFACE" xml:space="preserve">
     <value>PIF is the management interface.</value>
   </data>
+  <data name="PIF_IS_NOT_PHYSICAL" xml:space="preserve">
+    <value>You tried to perform an operation which is only available on physical PIF</value>
+  </data>
+  <data name="PIF_IS_NOT_SRIOV_CAPABLE" xml:space="preserve">
+    <value>The selected PIF is not capable of network SR-IOV</value>
+  </data>
   <data name="PIF_IS_PHYSICAL" xml:space="preserve">
     <value>You tried to destroy the PIF {0}, but it represents an aspect of the physical server configuration, and so cannot be destroyed. </value>
+  </data>
+  <data name="PIF_IS_SRIOV_LOGICAL" xml:space="preserve">
+    <value>You tried to create a bond on top of a network SR-IOV logical PIF - use the underlying physical PIF instead</value>
   </data>
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>You tried to create a VLAN on top of another VLAN - use the underlying physical PIF/bond instead</value>
   </data>
   <data name="PIF_NOT_PRESENT" xml:space="preserve">
     <value>This host has no PIF on the given network.</value>
+  </data>
+  <data name="PIF_SRIOV_STILL_EXISTS" xml:space="preserve">
+    <value>The PIF is still related with a network SR-IOV</value>
   </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>Operation cannot proceed while a tunnel exists on this interface.</value>
@@ -899,6 +953,9 @@
   </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
     <value>The host joining the pool must not have any bonds.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_NETWORK_SRIOVS" xml:space="preserve">
+    <value>The host joining the pool must not have any network SR-IOVs.</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS" xml:space="preserve">
     <value>The host joining the pool must not have any non-management vlans.</value>

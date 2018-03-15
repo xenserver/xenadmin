@@ -72,6 +72,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Network_sriov.
+        /// </summary>
         public override void UpdateFrom(Network_sriov update)
         {
             uuid = update.uuid;
@@ -103,15 +107,33 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Network_sriov from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Network_sriov(Hashtable table)
+        public Network_sriov(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            physical_PIF = Marshalling.ParseRef<PIF>(table, "physical_PIF");
-            logical_PIF = Marshalling.ParseRef<PIF>(table, "logical_PIF");
-            requires_reboot = Marshalling.ParseBool(table, "requires_reboot");
-            configuration_mode = (sriov_configuration_mode)Helper.EnumParseDefault(typeof(sriov_configuration_mode), Marshalling.ParseString(table, "configuration_mode"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Network_sriov
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("physical_PIF"))
+                physical_PIF = Marshalling.ParseRef<PIF>(table, "physical_PIF");
+            if (table.ContainsKey("logical_PIF"))
+                logical_PIF = Marshalling.ParseRef<PIF>(table, "logical_PIF");
+            if (table.ContainsKey("requires_reboot"))
+                requires_reboot = Marshalling.ParseBool(table, "requires_reboot");
+            if (table.ContainsKey("configuration_mode"))
+                configuration_mode = (sriov_configuration_mode)Helper.EnumParseDefault(typeof(sriov_configuration_mode), Marshalling.ParseString(table, "configuration_mode"));
         }
 
         public bool DeepEquals(Network_sriov other)
@@ -158,9 +180,9 @@ namespace XenAPI
         public static Network_sriov get_record(Session session, string _network_sriov)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_record(session.uuid, _network_sriov);
+                return session.JsonRpcClient.network_sriov_get_record(session.opaque_ref, _network_sriov);
             else
-                return new Network_sriov((Proxy_Network_sriov)session.proxy.network_sriov_get_record(session.uuid, _network_sriov ?? "").parse());
+                return new Network_sriov((Proxy_Network_sriov)session.proxy.network_sriov_get_record(session.opaque_ref, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -172,9 +194,9 @@ namespace XenAPI
         public static XenRef<Network_sriov> get_by_uuid(Session session, string _uuid)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_by_uuid(session.uuid, _uuid);
+                return session.JsonRpcClient.network_sriov_get_by_uuid(session.opaque_ref, _uuid);
             else
-                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_get_by_uuid(session.uuid, _uuid ?? "").parse());
+                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -186,9 +208,9 @@ namespace XenAPI
         public static string get_uuid(Session session, string _network_sriov)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_uuid(session.uuid, _network_sriov);
+                return session.JsonRpcClient.network_sriov_get_uuid(session.opaque_ref, _network_sriov);
             else
-                return (string)session.proxy.network_sriov_get_uuid(session.uuid, _network_sriov ?? "").parse();
+                return (string)session.proxy.network_sriov_get_uuid(session.opaque_ref, _network_sriov ?? "").parse();
         }
 
         /// <summary>
@@ -200,9 +222,9 @@ namespace XenAPI
         public static XenRef<PIF> get_physical_PIF(Session session, string _network_sriov)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_physical_pif(session.uuid, _network_sriov);
+                return session.JsonRpcClient.network_sriov_get_physical_pif(session.opaque_ref, _network_sriov);
             else
-                return XenRef<PIF>.Create(session.proxy.network_sriov_get_physical_pif(session.uuid, _network_sriov ?? "").parse());
+                return XenRef<PIF>.Create(session.proxy.network_sriov_get_physical_pif(session.opaque_ref, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -214,9 +236,9 @@ namespace XenAPI
         public static XenRef<PIF> get_logical_PIF(Session session, string _network_sriov)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_logical_pif(session.uuid, _network_sriov);
+                return session.JsonRpcClient.network_sriov_get_logical_pif(session.opaque_ref, _network_sriov);
             else
-                return XenRef<PIF>.Create(session.proxy.network_sriov_get_logical_pif(session.uuid, _network_sriov ?? "").parse());
+                return XenRef<PIF>.Create(session.proxy.network_sriov_get_logical_pif(session.opaque_ref, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -228,9 +250,9 @@ namespace XenAPI
         public static bool get_requires_reboot(Session session, string _network_sriov)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_requires_reboot(session.uuid, _network_sriov);
+                return session.JsonRpcClient.network_sriov_get_requires_reboot(session.opaque_ref, _network_sriov);
             else
-                return (bool)session.proxy.network_sriov_get_requires_reboot(session.uuid, _network_sriov ?? "").parse();
+                return (bool)session.proxy.network_sriov_get_requires_reboot(session.opaque_ref, _network_sriov ?? "").parse();
         }
 
         /// <summary>
@@ -242,9 +264,9 @@ namespace XenAPI
         public static sriov_configuration_mode get_configuration_mode(Session session, string _network_sriov)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_configuration_mode(session.uuid, _network_sriov);
+                return session.JsonRpcClient.network_sriov_get_configuration_mode(session.opaque_ref, _network_sriov);
             else
-                return (sriov_configuration_mode)Helper.EnumParseDefault(typeof(sriov_configuration_mode), (string)session.proxy.network_sriov_get_configuration_mode(session.uuid, _network_sriov ?? "").parse());
+                return (sriov_configuration_mode)Helper.EnumParseDefault(typeof(sriov_configuration_mode), (string)session.proxy.network_sriov_get_configuration_mode(session.opaque_ref, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -257,9 +279,9 @@ namespace XenAPI
         public static XenRef<Network_sriov> create(Session session, string _pif, string _network)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_create(session.uuid, _pif, _network);
+                return session.JsonRpcClient.network_sriov_create(session.opaque_ref, _pif, _network);
             else
-                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_create(session.uuid, _pif ?? "", _network ?? "").parse());
+                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_create(session.opaque_ref, _pif ?? "", _network ?? "").parse());
         }
 
         /// <summary>
@@ -272,9 +294,9 @@ namespace XenAPI
         public static XenRef<Task> async_create(Session session, string _pif, string _network)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_sriov_create(session.uuid, _pif, _network);
+              return session.JsonRpcClient.async_network_sriov_create(session.opaque_ref, _pif, _network);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_sriov_create(session.uuid, _pif ?? "", _network ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_network_sriov_create(session.opaque_ref, _pif ?? "", _network ?? "").parse());
         }
 
         /// <summary>
@@ -286,9 +308,9 @@ namespace XenAPI
         public static void destroy(Session session, string _network_sriov)
         {
             if (session.JsonRpcClient != null)
-                session.JsonRpcClient.network_sriov_destroy(session.uuid, _network_sriov);
+                session.JsonRpcClient.network_sriov_destroy(session.opaque_ref, _network_sriov);
             else
-                session.proxy.network_sriov_destroy(session.uuid, _network_sriov ?? "").parse();
+                session.proxy.network_sriov_destroy(session.opaque_ref, _network_sriov ?? "").parse();
         }
 
         /// <summary>
@@ -300,13 +322,13 @@ namespace XenAPI
         public static XenRef<Task> async_destroy(Session session, string _network_sriov)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_sriov_destroy(session.uuid, _network_sriov);
+              return session.JsonRpcClient.async_network_sriov_destroy(session.opaque_ref, _network_sriov);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_sriov_destroy(session.uuid, _network_sriov ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_network_sriov_destroy(session.opaque_ref, _network_sriov ?? "").parse());
         }
 
         /// <summary>
-        /// Get the number of VF that still can be allocated from this SRIOV object
+        /// Get the number of free SR-IOV VFs on the associated PIF
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
@@ -314,13 +336,13 @@ namespace XenAPI
         public static long get_remaining_capacity(Session session, string _network_sriov)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_remaining_capacity(session.uuid, _network_sriov);
+                return session.JsonRpcClient.network_sriov_get_remaining_capacity(session.opaque_ref, _network_sriov);
             else
-                return long.Parse((string)session.proxy.network_sriov_get_remaining_capacity(session.uuid, _network_sriov ?? "").parse());
+                return long.Parse((string)session.proxy.network_sriov_get_remaining_capacity(session.opaque_ref, _network_sriov ?? "").parse());
         }
 
         /// <summary>
-        /// Get the number of VF that still can be allocated from this SRIOV object
+        /// Get the number of free SR-IOV VFs on the associated PIF
         /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
@@ -328,9 +350,9 @@ namespace XenAPI
         public static XenRef<Task> async_get_remaining_capacity(Session session, string _network_sriov)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_network_sriov_get_remaining_capacity(session.uuid, _network_sriov);
+              return session.JsonRpcClient.async_network_sriov_get_remaining_capacity(session.opaque_ref, _network_sriov);
           else
-              return XenRef<Task>.Create(session.proxy.async_network_sriov_get_remaining_capacity(session.uuid, _network_sriov ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_network_sriov_get_remaining_capacity(session.opaque_ref, _network_sriov ?? "").parse());
         }
 
         /// <summary>
@@ -341,9 +363,9 @@ namespace XenAPI
         public static List<XenRef<Network_sriov>> get_all(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_all(session.uuid);
+                return session.JsonRpcClient.network_sriov_get_all(session.opaque_ref);
             else
-                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_get_all(session.uuid).parse());
+                return XenRef<Network_sriov>.Create(session.proxy.network_sriov_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -354,9 +376,9 @@ namespace XenAPI
         public static Dictionary<XenRef<Network_sriov>, Network_sriov> get_all_records(Session session)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.network_sriov_get_all_records(session.uuid);
+                return session.JsonRpcClient.network_sriov_get_all_records(session.opaque_ref);
             else
-                return XenRef<Network_sriov>.Create<Proxy_Network_sriov>(session.proxy.network_sriov_get_all_records(session.uuid).parse());
+                return XenRef<Network_sriov>.Create<Proxy_Network_sriov>(session.proxy.network_sriov_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>

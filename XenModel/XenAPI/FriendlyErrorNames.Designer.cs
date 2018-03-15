@@ -39,7 +39,7 @@ namespace XenAPI {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XenAdmin.XenAPI.FriendlyErrorNames", typeof(FriendlyErrorNames).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XenAPI.FriendlyErrorNames", typeof(FriendlyErrorNames).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -268,6 +268,24 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is a network SR-IOV logical PIF and cannot have a tunnel on it..
+        /// </summary>
+        public static string CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL {
+            get {
+                return ResourceManager.GetString("CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a vlan PIF on network SR-IOV and cannot have a tunnel on it..
+        /// </summary>
+        public static string CANNOT_ADD_TUNNEL_TO_VLAN_ON_SRIOV_LOGICAL {
+            get {
+                return ResourceManager.GetString("CANNOT_ADD_TUNNEL_TO_VLAN_ON_SRIOV_LOGICAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This PIF is a bond slave and cannot have a VLAN on it..
         /// </summary>
         public static string CANNOT_ADD_VLAN_TO_BOND_SLAVE {
@@ -381,6 +399,15 @@ namespace XenAPI {
         public static string CANNOT_FIND_UPDATE {
             get {
                 return ResourceManager.GetString("CANNOT_FIND_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a network SR-IOV logical PIF and cannot do forget on it.
+        /// </summary>
+        public static string CANNOT_FORGET_SRIOV_LOGICAL {
+            get {
+                return ResourceManager.GetString("CANNOT_FORGET_SRIOV_LOGICAL", resourceCulture);
             }
         }
         
@@ -1780,11 +1807,110 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The PIF is not compatible with the selected SR-IOV network.
+        /// </summary>
+        public static string NETWORK_HAS_INCOMPATIBLE_SRIOV_PIFS {
+            get {
+                return ResourceManager.GetString("NETWORK_HAS_INCOMPATIBLE_SRIOV_PIFS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VLAN on the PIF is not compatible with the selected SR-IOV VLAN network.
+        /// </summary>
+        public static string NETWORK_HAS_INCOMPATIBLE_VLAN_ON_SRIOV_PIFS {
+            get {
+                return ResourceManager.GetString("NETWORK_HAS_INCOMPATIBLE_VLAN_ON_SRIOV_PIFS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You tried to add a purpose to a network but the new purpose is not compatible with an existing purpose of the network or other networks..
         /// </summary>
         public static string NETWORK_INCOMPATIBLE_PURPOSES {
             get {
                 return ResourceManager.GetString("NETWORK_INCOMPATIBLE_PURPOSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The network is incompatible with bond.
+        /// </summary>
+        public static string NETWORK_INCOMPATIBLE_WITH_BOND {
+            get {
+                return ResourceManager.GetString("NETWORK_INCOMPATIBLE_WITH_BOND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The network is incompatible with sriov.
+        /// </summary>
+        public static string NETWORK_INCOMPATIBLE_WITH_SRIOV {
+            get {
+                return ResourceManager.GetString("NETWORK_INCOMPATIBLE_WITH_SRIOV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The network is incompatible with tunnel.
+        /// </summary>
+        public static string NETWORK_INCOMPATIBLE_WITH_TUNNEL {
+            get {
+                return ResourceManager.GetString("NETWORK_INCOMPATIBLE_WITH_TUNNEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The network is incompatible with vlan on bridge.
+        /// </summary>
+        public static string NETWORK_INCOMPATIBLE_WITH_VLAN_ON_BRIDGE {
+            get {
+                return ResourceManager.GetString("NETWORK_INCOMPATIBLE_WITH_VLAN_ON_BRIDGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The network is incompatible with vlan on sriov.
+        /// </summary>
+        public static string NETWORK_INCOMPATIBLE_WITH_VLAN_ON_SRIOV {
+            get {
+                return ResourceManager.GetString("NETWORK_INCOMPATIBLE_WITH_VLAN_ON_SRIOV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PIF selected for the SR-IOV network is already enabled.
+        /// </summary>
+        public static string NETWORK_SRIOV_ALREADY_ENABLED {
+            get {
+                return ResourceManager.GetString("NETWORK_SRIOV_ALREADY_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to disable SR-IOV on PIF.
+        /// </summary>
+        public static string NETWORK_SRIOV_DISABLE_FAILED {
+            get {
+                return ResourceManager.GetString("NETWORK_SRIOV_DISABLE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to enable SR-IOV on PIF.
+        /// </summary>
+        public static string NETWORK_SRIOV_ENABLE_FAILED {
+            get {
+                return ResourceManager.GetString("NETWORK_SRIOV_ENABLE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is insufficient capacity for VF reservation.
+        /// </summary>
+        public static string NETWORK_SRIOV_INSUFFICIENT_CAPACITY {
+            get {
+                return ResourceManager.GetString("NETWORK_SRIOV_INSUFFICIENT_CAPACITY", resourceCulture);
             }
         }
         
@@ -2167,6 +2293,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The operation you requested cannot be performed because the specified PIF has FCoE SR in use..
+        /// </summary>
+        public static string PIF_HAS_FCOE_SR_IN_USE {
+            get {
+                return ResourceManager.GetString("PIF_HAS_FCOE_SR_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PIF has no network configuration.
         /// </summary>
         public static string PIF_HAS_NO_NETWORK_CONFIGURATION {
@@ -2203,11 +2338,38 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You tried to perform an operation which is only available on physical PIF.
+        /// </summary>
+        public static string PIF_IS_NOT_PHYSICAL {
+            get {
+                return ResourceManager.GetString("PIF_IS_NOT_PHYSICAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected PIF is not capable of network SR-IOV.
+        /// </summary>
+        public static string PIF_IS_NOT_SRIOV_CAPABLE {
+            get {
+                return ResourceManager.GetString("PIF_IS_NOT_SRIOV_CAPABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You tried to destroy the PIF {0}, but it represents an aspect of the physical server configuration, and so cannot be destroyed. .
         /// </summary>
         public static string PIF_IS_PHYSICAL {
             get {
                 return ResourceManager.GetString("PIF_IS_PHYSICAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You tried to create a bond on top of a network SR-IOV logical PIF - use the underlying physical PIF instead.
+        /// </summary>
+        public static string PIF_IS_SRIOV_LOGICAL {
+            get {
+                return ResourceManager.GetString("PIF_IS_SRIOV_LOGICAL", resourceCulture);
             }
         }
         
@@ -2226,6 +2388,15 @@ namespace XenAPI {
         public static string PIF_NOT_PRESENT {
             get {
                 return ResourceManager.GetString("PIF_NOT_PRESENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PIF is still related with a network SR-IOV.
+        /// </summary>
+        public static string PIF_SRIOV_STILL_EXISTS {
+            get {
+                return ResourceManager.GetString("PIF_SRIOV_STILL_EXISTS", resourceCulture);
             }
         }
         
@@ -2397,6 +2568,15 @@ namespace XenAPI {
         public static string POOL_JOINING_HOST_HAS_BONDS {
             get {
                 return ResourceManager.GetString("POOL_JOINING_HOST_HAS_BONDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The host joining the pool must not have any network SR-IOVs..
+        /// </summary>
+        public static string POOL_JOINING_HOST_HAS_NETWORK_SRIOVS {
+            get {
+                return ResourceManager.GetString("POOL_JOINING_HOST_HAS_NETWORK_SRIOVS", resourceCulture);
             }
         }
         
@@ -4589,6 +4769,15 @@ namespace XenAPI {
         public static string SR_REQUIRES_UPGRADE {
             get {
                 return ResourceManager.GetString("SR_REQUIRES_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The source SR does not have sufficient temporary space available to proceed the operation..
+        /// </summary>
+        public static string SR_SOURCE_SPACE_INSUFFICIENT {
+            get {
+                return ResourceManager.GetString("SR_SOURCE_SPACE_INSUFFICIENT", resourceCulture);
             }
         }
         
