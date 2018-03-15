@@ -509,7 +509,8 @@ namespace XenAdmin.Controls.NetworkingTab
                     // Cache populating?
                     return;
                 }
-                VIFDialog d = new VIFDialog(vm.Connection, null, VIF.GetDeviceId(vm), vm);
+
+                VIFDialog d = new VIFDialog(vm.Connection, null, VIF.GetDeviceId(vm), vm.HasSriovRecommendation());
                 if (d.ShowDialog(this) != DialogResult.OK)
                     return;
 
