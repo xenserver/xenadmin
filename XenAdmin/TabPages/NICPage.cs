@@ -263,18 +263,20 @@ namespace XenAdmin.TabPages
                         else
                         { 
                             DelegatedAsyncAction action = new DelegatedAsyncAction(pif.Connection,
-                                string.Format(Messages.FETCH_POSSIBLE_HOSTS, pif.Name()),
-                                string.Format(Messages.FETCHING_POSSIBLE_HOSTS, pif.Name()),
-                                string.Format(Messages.FETCHED_POSSIBLE_HOSTS, pif.Name()),
-                                delegate (Session session)
+                            "", "", "",
+                            delegate (Session session)
+                            {
+                                try
                                 {
-                                    sriovSupported = string.Format(Messages.REAMININF_VFS, Network_sriov.get_remaining_capacity(pif.Connection.Session, pif.sriov_physical_PIF_of[0].opaque_ref));                                                                    
-                                },
-                                true);
-
-                            action.Title = "";
-                            action.Description.StartsWith("");
-                            action.Description.EndsWith("");
+                                    var remainingCapacity = Network_sriov.get_remaining_capacity(session, pif.sriov_physical_PIF_of[0].opaque_ref);
+                                    sriovSupported = string.Format(Messages.REAMININF_VFS, remainingCapacity);
+                                }
+                                catch
+                                {
+                                    sriovSupported = Messages.YES;
+                                }
+                            },
+                            true);
 
                             action.Completed += delegate
                             {
@@ -283,7 +285,6 @@ namespace XenAdmin.TabPages
                             action.RunAsync();
                         }
                          
-
                         break;
                 }
             }
