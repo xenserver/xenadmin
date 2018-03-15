@@ -6920,6 +6920,66 @@ namespace XenAPI
         Response<Object>
         tunnel_get_all_records(string session);
 
+        [XmlRpcMethod("network_sriov.get_record")]
+        Response<Proxy_Network_sriov>
+        network_sriov_get_record(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_by_uuid")]
+        Response<string>
+        network_sriov_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("network_sriov.get_uuid")]
+        Response<string>
+        network_sriov_get_uuid(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_physical_PIF")]
+        Response<string>
+        network_sriov_get_physical_pif(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_logical_PIF")]
+        Response<string>
+        network_sriov_get_logical_pif(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_requires_reboot")]
+        Response<bool>
+        network_sriov_get_requires_reboot(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_configuration_mode")]
+        Response<string>
+        network_sriov_get_configuration_mode(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.create")]
+        Response<string>
+        network_sriov_create(string session, string _pif, string _network);
+
+        [XmlRpcMethod("Async.network_sriov.create")]
+        Response<string>
+        async_network_sriov_create(string session, string _pif, string _network);
+
+        [XmlRpcMethod("network_sriov.destroy")]
+        Response<string>
+        network_sriov_destroy(string session, string _network_sriov);
+
+        [XmlRpcMethod("Async.network_sriov.destroy")]
+        Response<string>
+        async_network_sriov_destroy(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_remaining_capacity")]
+        Response<string>
+        network_sriov_get_remaining_capacity(string session, string _network_sriov);
+
+        [XmlRpcMethod("Async.network_sriov.get_remaining_capacity")]
+        Response<string>
+        async_network_sriov_get_remaining_capacity(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_all")]
+        Response<string []>
+        network_sriov_get_all(string session);
+
+        [XmlRpcMethod("network_sriov.get_all_records")]
+        Response<Object>
+        network_sriov_get_all_records(string session);
+
         [XmlRpcMethod("PCI.get_record")]
         Response<Proxy_PCI>
         pci_get_record(string session, string _pci);
@@ -8204,65 +8264,6 @@ namespace XenAPI
         Response<Object>
         cluster_host_get_all_records(string session);
 
-        [XmlRpcMethod("network_sriov.get_record")]
-        Response<Proxy_Network_sriov>
-        network_sriov_get_record(string session, string _network_sriov);
-
-        [XmlRpcMethod("network_sriov.get_by_uuid")]
-        Response<string>
-        network_sriov_get_by_uuid(string session, string _uuid);
-
-        [XmlRpcMethod("network_sriov.get_uuid")]
-        Response<string>
-        network_sriov_get_uuid(string session, string _network_sriov);
-
-        [XmlRpcMethod("network_sriov.get_physical_PIF")]
-        Response<string>
-        network_sriov_get_physical_pif(string session, string _network_sriov);
-
-        [XmlRpcMethod("network_sriov.get_logical_PIF")]
-        Response<string>
-        network_sriov_get_logical_pif(string session, string _network_sriov);
-
-        [XmlRpcMethod("network_sriov.get_requires_reboot")]
-        Response<bool>
-        network_sriov_get_requires_reboot(string session, string _network_sriov);
-
-        [XmlRpcMethod("network_sriov.get_configuration_mode")]
-        Response<string>
-        network_sriov_get_configuration_mode(string session, string _network_sriov);
-
-        [XmlRpcMethod("network_sriov.create")]
-        Response<string>
-        network_sriov_create(string session, string _pif, string _network);
-
-        [XmlRpcMethod("Async.network_sriov.create")]
-        Response<string>
-        async_network_sriov_create(string session, string _pif, string _network);
-
-        [XmlRpcMethod("network_sriov.destroy")]
-        Response<string>
-        network_sriov_destroy(string session, string _network_sriov);
-
-        [XmlRpcMethod("Async.network_sriov.destroy")]
-        Response<string>
-        async_network_sriov_destroy(string session, string _network_sriov);
-
-        [XmlRpcMethod("network_sriov.get_remaining_capacity")]
-        Response<string>
-        network_sriov_get_remaining_capacity(string session, string _network_sriov);
-
-        [XmlRpcMethod("Async.network_sriov.get_remaining_capacity")]
-        Response<string>
-        async_network_sriov_get_remaining_capacity(string session, string _network_sriov);
-
-        [XmlRpcMethod("network_sriov.get_all")]
-        Response<string []>
-        network_sriov_get_all(string session);
-
-        [XmlRpcMethod("network_sriov.get_all_records")]
-        Response<Object>
-        network_sriov_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -9078,6 +9079,16 @@ namespace XenAPI
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Network_sriov
+    {
+        public string uuid;
+        public string physical_PIF;
+        public string logical_PIF;
+        public bool requires_reboot;
+        public string configuration_mode;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class Proxy_PCI
     {
         public string uuid;
@@ -9302,15 +9313,6 @@ namespace XenAPI
         public string [] allowed_operations;
         public Object current_operations;
         public Object other_config;
-    }
-
-    public class Proxy_Network_sriov
-    {
-        public string uuid;
-        public string physical_PIF;
-        public string logical_PIF;
-        public bool requires_reboot;
-        public string configuration_mode;
     }
 
 }

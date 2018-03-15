@@ -59,7 +59,8 @@ namespace XenAPI
             List<XenRef<PCI>> dependencies,
             Dictionary<string, string> other_config,
             string subsystem_vendor_name,
-            string subsystem_device_name)
+            string subsystem_device_name,
+            string driver_name)
         {
             this.uuid = uuid;
             this.class_name = class_name;
@@ -71,6 +72,7 @@ namespace XenAPI
             this.other_config = other_config;
             this.subsystem_vendor_name = subsystem_vendor_name;
             this.subsystem_device_name = subsystem_device_name;
+            this.driver_name = driver_name;
         }
 
         /// <summary>
@@ -98,6 +100,7 @@ namespace XenAPI
             other_config = update.other_config;
             subsystem_vendor_name = update.subsystem_vendor_name;
             subsystem_device_name = update.subsystem_device_name;
+            driver_name = update.driver_name;
         }
 
         internal void UpdateFromProxy(Proxy_PCI proxy)
@@ -112,6 +115,7 @@ namespace XenAPI
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             subsystem_vendor_name = proxy.subsystem_vendor_name == null ? null : (string)proxy.subsystem_vendor_name;
             subsystem_device_name = proxy.subsystem_device_name == null ? null : (string)proxy.subsystem_device_name;
+            driver_name = proxy.driver_name == null ? null : (string)proxy.driver_name;
         }
 
         public Proxy_PCI ToProxy()
@@ -127,6 +131,7 @@ namespace XenAPI
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             result_.subsystem_vendor_name = subsystem_vendor_name ?? "";
             result_.subsystem_device_name = subsystem_device_name ?? "";
+            result_.driver_name = driver_name ?? "";
             return result_;
         }
 
@@ -169,6 +174,8 @@ namespace XenAPI
                 subsystem_vendor_name = Marshalling.ParseString(table, "subsystem_vendor_name");
             if (table.ContainsKey("subsystem_device_name"))
                 subsystem_device_name = Marshalling.ParseString(table, "subsystem_device_name");
+            if (table.ContainsKey("driver_name"))
+                driver_name = Marshalling.ParseString(table, "driver_name");
         }
 
         public bool DeepEquals(PCI other)
@@ -187,7 +194,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._dependencies, other._dependencies) &&
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._subsystem_vendor_name, other._subsystem_vendor_name) &&
-                Helper.AreEqual2(this._subsystem_device_name, other._subsystem_device_name);
+                Helper.AreEqual2(this._subsystem_device_name, other._subsystem_device_name) &&
+                Helper.AreEqual2(this._driver_name, other._driver_name);
         }
 
         internal static List<PCI> ProxyArrayToObjectList(Proxy_PCI[] input)
@@ -382,6 +390,20 @@ namespace XenAPI
                 return session.JsonRpcClient.pci_get_subsystem_device_name(session.opaque_ref, _pci);
             else
                 return (string)session.proxy.pci_get_subsystem_device_name(session.opaque_ref, _pci ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the driver_name field of the given PCI.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_pci">The opaque_ref of the given pci</param>
+        public static string get_driver_name(Session session, string _pci)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pci_get_driver_name(session.opaque_ref, _pci);
+            else
+                return (string)session.proxy.pci_get_driver_name(session.opaque_ref, _pci ?? "").parse();
         }
 
         /// <summary>
@@ -640,5 +662,24 @@ namespace XenAPI
             }
         }
         private string _subsystem_device_name = "";
+
+        /// <summary>
+        /// Driver name
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string driver_name
+        {
+            get { return _driver_name; }
+            set
+            {
+                if (!Helper.AreEqual(value, _driver_name))
+                {
+                    _driver_name = value;
+                    Changed = true;
+                    NotifyPropertyChanged("driver_name");
+                }
+            }
+        }
+        private string _driver_name = "";
     }
 }
