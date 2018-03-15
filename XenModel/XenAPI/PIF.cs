@@ -132,6 +132,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PIF.
+        /// </summary>
         public override void UpdateFrom(PIF update)
         {
             uuid = update.uuid;
@@ -901,9 +905,9 @@ namespace XenAPI
         public static List<XenRef<Network_sriov>> get_sriov_physical_PIF_of(Session session, string _pif)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_sriov_physical_pif_of(session.uuid, _pif);
+                return session.JsonRpcClient.pif_get_sriov_physical_pif_of(session.opaque_ref, _pif);
             else
-                return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_physical_pif_of(session.uuid, _pif ?? "").parse());
+                return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_physical_pif_of(session.opaque_ref, _pif ?? "").parse());
         }
 
         /// <summary>
@@ -915,9 +919,9 @@ namespace XenAPI
         public static List<XenRef<Network_sriov>> get_sriov_logical_PIF_of(Session session, string _pif)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_sriov_logical_pif_of(session.uuid, _pif);
+                return session.JsonRpcClient.pif_get_sriov_logical_pif_of(session.opaque_ref, _pif);
             else
-                return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_logical_pif_of(session.uuid, _pif ?? "").parse());
+                return XenRef<Network_sriov>.Create(session.proxy.pif_get_sriov_logical_pif_of(session.opaque_ref, _pif ?? "").parse());
         }
 
         /// <summary>
@@ -929,9 +933,9 @@ namespace XenAPI
         public static XenRef<PCI> get_PCI(Session session, string _pif)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.pif_get_pci(session.uuid, _pif);
+                return session.JsonRpcClient.pif_get_pci(session.opaque_ref, _pif);
             else
-                return XenRef<PCI>.Create(session.proxy.pif_get_pci(session.uuid, _pif ?? "").parse());
+                return XenRef<PCI>.Create(session.proxy.pif_get_pci(session.opaque_ref, _pif ?? "").parse());
         }
 
         /// <summary>
