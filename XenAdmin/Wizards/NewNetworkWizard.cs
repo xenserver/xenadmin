@@ -219,11 +219,9 @@ namespace XenAdmin.Wizards
 
         private void CreateSRIOV()
         {
-            XenAPI.Network network = PopulateNewNetworkObj();
-
             if (ShowSriovCreationWarning() != DialogResult.OK)
                 return;
-            
+           
             List<PIF> sriovSelectedPifs = new List<PIF>();
             Pool pool = Helpers.GetPoolOfOne(Host.Connection);
             if (pool == null)
@@ -238,7 +236,9 @@ namespace XenAdmin.Wizards
                     sriovSelectedPifs.Add(thePIF);
             }
 
-            if(sriovSelectedPifs.Count != 0)
+            XenAPI.Network network = PopulateNewNetworkObj();
+
+            if (sriovSelectedPifs.Count != 0)
                 (new CreateSriovAction(xenConnection, network, sriovSelectedPifs)).RunAsync();
         }
 
