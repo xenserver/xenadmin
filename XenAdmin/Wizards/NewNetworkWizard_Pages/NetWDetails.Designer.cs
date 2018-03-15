@@ -45,6 +45,9 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.panelVLANInfo = new System.Windows.Forms.Panel();
             this.labelVlanError = new System.Windows.Forms.Label();
             this.labelVLAN0Info = new System.Windows.Forms.Label();
+            this.groupBoxSriovConfig = new System.Windows.Forms.GroupBox();
+            this.checkBoxSriov = new System.Windows.Forms.CheckBox();
+            this.lblSriov = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.infoMtuPanel.SuspendLayout();
@@ -52,6 +55,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVLAN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).BeginInit();
             this.panelVLANInfo.SuspendLayout();
+            this.groupBoxSriovConfig.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -74,6 +78,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.tableLayoutPanel1.Controls.Add(this.labelMTU, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownMTU, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.panelVLANInfo, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxSriovConfig, 3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // infoMtuPanel
@@ -181,6 +186,26 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.labelVLAN0Info.ForeColor = System.Drawing.SystemColors.ControlText;
             this.labelVLAN0Info.Name = "labelVLAN0Info";
             // 
+            // groupBoxSriovConfig
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBoxSriovConfig, 4);
+            this.groupBoxSriovConfig.Controls.Add(this.checkBoxSriov);
+            this.groupBoxSriovConfig.Controls.Add(this.lblSriov);
+            resources.ApplyResources(this.groupBoxSriovConfig, "groupBoxSriovConfig");
+            this.groupBoxSriovConfig.Name = "groupBoxSriovConfig";
+            this.groupBoxSriovConfig.TabStop = false;
+            // 
+            // checkBoxSriov
+            // 
+            resources.ApplyResources(this.checkBoxSriov, "checkBoxSriov");
+            this.checkBoxSriov.Name = "checkBoxSriov";
+            this.checkBoxSriov.UseVisualStyleBackColor = true;
+            // 
+            // lblSriov
+            // 
+            resources.ApplyResources(this.lblSriov, "lblSriov");
+            this.lblSriov.Name = "lblSriov";
+            // 
             // NetWDetails
             // 
             resources.ApplyResources(this, "$this");
@@ -198,6 +223,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMTU)).EndInit();
             this.panelVLANInfo.ResumeLayout(false);
             this.panelVLANInfo.PerformLayout();
+            this.groupBoxSriovConfig.ResumeLayout(false);
+            this.groupBoxSriovConfig.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -220,5 +247,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private System.Windows.Forms.Panel infoMtuPanel;
         private System.Windows.Forms.Label infoMtuMessage;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label lblSriov;
+        private System.Windows.Forms.GroupBox groupBoxSriovConfig;
+        private System.Windows.Forms.CheckBox checkBoxSriov;
     }
 }
