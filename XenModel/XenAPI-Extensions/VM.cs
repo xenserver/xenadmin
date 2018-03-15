@@ -426,6 +426,27 @@ namespace XenAPI
             }
         }
 
+        public bool HasSriovRecommendation()
+        {
+            XmlDocument xd = GetRecommendations();
+
+            if (xd == null)
+                return true;
+
+            try
+            {
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow_network_sriov']");
+                if (xn == null || xn.Attributes == null)
+                    return false;
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool HasVendorDeviceRecommendation()
         {
             bool result = false;
