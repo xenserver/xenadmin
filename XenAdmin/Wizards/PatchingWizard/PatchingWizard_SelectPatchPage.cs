@@ -322,17 +322,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (update == null || update.Attributes == null)
                 return null;
 
-            var uuid = "";
-            foreach (XmlAttribute attrib in update.Attributes)
-            {
-                if (attrib.Name == "uuid")
-                {
-                    uuid = attrib.Value;
-                    break;
-                }
-            }
-
-            return Updates.FindPatchAlertByUuid(uuid);
+            var uuid = update.Attributes["uuid"];
+            return uuid != null ? Updates.FindPatchAlertByUuid(uuid.Value) : null;
         }
 
         private void PageLeaveCancelled(string message)
