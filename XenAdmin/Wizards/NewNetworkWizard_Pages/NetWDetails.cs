@@ -144,7 +144,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             labelNIC.Visible = external;
             if (comboBoxNICList.Items.Count > 0)
                 comboBoxNICList.SelectedIndex = external ? comboBoxNICList.Items.Count - 1 : -1;
-            groupBoxSriovConfig.Visible = SelectedHostNic != null && SelectedHostNic.sriov_physical_PIF_of != null && SelectedHostNic.sriov_physical_PIF_of.Count != 0;
+            checkBoxSriov.Visible = SelectedHostNic != null && SelectedHostNic.IsSriovPhysicalPIF();
 
             OnPageUpdated();
         }
@@ -200,7 +200,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             if (SelectedHostNic == null)
                 return;
 
-            groupBoxSriovConfig.Visible = SelectedHostNic.sriov_physical_PIF_of.Count != 0;
+            checkBoxSriov.Visible = SelectedHostNic.IsSriovPhysicalPIF();
 
             numericUpDownMTU.Maximum = Math.Min(SelectedHostNic.MTU, XenAPI.Network.MTU_MAX);
 

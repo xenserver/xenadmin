@@ -62,7 +62,8 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             comboBoxNicList.Items.Clear();
             foreach (PIF thePIF in conn.Cache.PIFs)
             {
-                if (host != null && thePIF.host.opaque_ref == host.opaque_ref && thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.sriov_physical_PIF_of.Count == 0)
+                if (host != null && thePIF.host.opaque_ref == host.opaque_ref && thePIF.IsPhysical() && !thePIF.IsBondNIC() 
+                    && thePIF.SriovCapable() && !thePIF.IsSriovPhysicalPIF())
                 {
                     comboBoxNicList.Items.Add(thePIF);
                 }
