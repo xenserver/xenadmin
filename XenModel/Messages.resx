@@ -12425,7 +12425,7 @@ To learn more about the [XenServer] Dynamic Workload Balancing feature or to sta
     <value>View snapshot schedules</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
-    <value>The virtual network device changes will take effect when you next restart the VM.</value>
+    <value>The virtual network device changes will take effect when you shutdown and then restart the VM.</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_TITLE" xml:space="preserve">
     <value>Virtual Network Device Changes</value>
