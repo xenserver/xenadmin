@@ -176,6 +176,8 @@ namespace XenAdmin.Controls.NetworkingTab
                 int storedWidth = this.DescriptionColumn.Width;
                 this.DescriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 this.DescriptionColumn.MinimumWidth = storedWidth;
+
+                NetworkSriovColumn.Visible = Helpers.KolkataOrGreater(_xenObject.Connection);
             }
             finally
             {
