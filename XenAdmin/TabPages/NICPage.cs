@@ -181,6 +181,9 @@ namespace XenAdmin.TabPages
                     //show the FCoE column for Dundee or higher hosts only
                     ColumnFCoECapable.Visible = Helpers.DundeeOrGreater(host);
 
+                    //show the SR-IOV column for Kolkata or higher hosts only
+                    ColumnSriovCapable.Visible = Helpers.KolkataOrGreater(host);
+
                     //CA-47050: the Device column should be autosized to Fill, but should not become smaller than a minimum
                     //width, which here is chosen to be the column header width. To find what this width is 
                     //set temporarily the column's autosize mode to ColumnHeader.
