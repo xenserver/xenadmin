@@ -35866,7 +35866,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The virtual network device changes will take effect when you next restart the VM..
+        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM.
         /// </summary>
         public static string VIF_HOTPLUG_FAILED_MESSAGE {
             get {
