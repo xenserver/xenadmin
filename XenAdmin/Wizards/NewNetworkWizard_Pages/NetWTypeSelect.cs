@@ -104,7 +104,12 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             bool hasNicCanEnableSriov = pool.Connection.Cache.PIFs.Any(pif => pif.IsPhysical() && pif.SriovCapable() && pif.sriov_physical_PIF_of.Count == 0);
             bool sriovFeatureForbidden = Helpers.FeatureForbidden(connection, Host.RestrictSriovNetwork);
 
-            if (sriovFeatureForbidden || !pool.HasSriovNic() || !hasNicCanEnableSriov)
+            if( !Helpers.KolkataOrGreater(pool.Connection))
+            {
+                iconWarningSriovOption.Visible = labelWarningSriovOption.Visible = false;
+                rbtnSriov.Visible = labelSriov.Visible = false;
+            }
+            else if (sriovFeatureForbidden || !pool.HasSriovNic() || !hasNicCanEnableSriov)
             {
                 rbtnSriov.Checked = false;
                 rbtnSriov.Enabled = labelSriov.Enabled = false;

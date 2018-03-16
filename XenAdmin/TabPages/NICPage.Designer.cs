@@ -56,7 +56,7 @@ namespace XenAdmin.TabPages
             this.ColumnDeviceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnBusPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnFCoECapable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSriovSupported = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSriovCapable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageContainerPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -160,7 +160,7 @@ namespace XenAdmin.TabPages
             this.ColumnDeviceName,
             this.ColumnBusPath,
             this.ColumnFCoECapable,
-            this.ColumnSriovSupported});
+            this.ColumnSriovCapable});
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -231,12 +231,12 @@ namespace XenAdmin.TabPages
             this.ColumnFCoECapable.Name = "ColumnFCoECapable";
             this.ColumnFCoECapable.ReadOnly = true;
             // 
-            // ColumnSriovSupported
+            // ColumnSriovCapable
             // 
-            this.ColumnSriovSupported.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnSriovSupported, "ColumnSriovSupported");
-            this.ColumnSriovSupported.Name = "ColumnSriovSupported";
-            this.ColumnSriovSupported.ReadOnly = true;
+            this.ColumnSriovCapable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnSriovCapable, "ColumnSriovCapable");
+            this.ColumnSriovCapable.Name = "ColumnSriovCapable";
+            this.ColumnSriovCapable.ReadOnly = true;
             // 
             // NICPage
             // 
@@ -281,6 +281,6 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDeviceName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnBusPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFCoECapable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSriovSupported;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSriovCapable;
     }
 }
