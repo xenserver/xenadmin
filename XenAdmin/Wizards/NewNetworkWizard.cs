@@ -232,7 +232,7 @@ namespace XenAdmin.Wizards
 
             foreach (PIF thePIF in pool.Connection.Cache.PIFs)
             {
-                if (thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.device == pageSriovDetails.SelectedHostNic.device && thePIF.sriov_physical_PIF_of.Count == 0)
+                if (thePIF.IsPhysical() && !thePIF.IsBondNIC() && thePIF.SriovCapable() && thePIF.device == pageSriovDetails.SelectedHostNic.device && !thePIF.IsSriovPhysicalPIF())
                     sriovSelectedPifs.Add(thePIF);
             }
 
@@ -249,7 +249,7 @@ namespace XenAdmin.Wizards
             PIF nic;
             if (pageNetworkDetails.CreateVlanOnSriovNetwork)
             {
-                if (pageNetworkDetails.SelectedHostNic == null || pageNetworkDetails.SelectedHostNic.sriov_physical_PIF_of == null || pageNetworkDetails.SelectedHostNic.sriov_physical_PIF_of.Count == 0)
+                if (pageNetworkDetails.SelectedHostNic == null || !pageNetworkDetails.SelectedHostNic.IsSriovPhysicalPIF())
                     return;
 
                 var sriovPhysicalPif = xenConnection.Resolve(pageNetworkDetails.SelectedHostNic.sriov_physical_PIF_of[0]);

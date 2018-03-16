@@ -101,7 +101,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                 iconWarningChinOption.Visible = labelWarningChinOption.Visible = false;
             }
 
-            bool hasNicCanEnableSriov = pool.Connection.Cache.PIFs.Any(pif => pif.IsPhysical() && pif.SriovCapable() && pif.sriov_physical_PIF_of.Count == 0);
+            bool hasNicCanEnableSriov = pool.Connection.Cache.PIFs.Any(pif => pif.IsPhysical() && pif.SriovCapable() && !pif.IsSriovPhysicalPIF());
             bool sriovFeatureForbidden = Helpers.FeatureForbidden(connection, Host.RestrictSriovNetwork);
 
             if( !Helpers.KolkataOrGreater(pool.Connection))
