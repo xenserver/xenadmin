@@ -735,7 +735,7 @@ namespace XenAdmin.Controls.NetworkingTab
             VIFDialog d;
             if (int.TryParse(vif.device, out device))
             {
-                d = new VIFDialog(vm.Connection, vif, device);
+                d = new VIFDialog(vm.Connection, vif, device, vm.HasSriovRecommendation());
             }
             else
             {
