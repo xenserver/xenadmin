@@ -167,7 +167,6 @@
     <Compile Include="CustomFields\CustomFieldsCache.cs" />
     <Compile Include="CustomFields\CustomFieldsManager.cs" />
     <Compile Include="DockerContainer.cs" />
-    <Compile Include="domain_type.cs" />
     <Compile Include="Folders.cs" />
     <Compile Include="FriendlyNames.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -363,6 +362,7 @@
     <Compile Include="XenAPI\cluster_operation.cs" />
     <Compile Include="XenAPI\Converters.cs" />
     <Compile Include="XenAPI\DeprecatedAttribute.cs" />
+    <Compile Include="XenAPI\domain_type.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
     <Compile Include="XenAPI\Feature.cs" />
     <Compile Include="XenAPI\FriendlyErrorNames.Designer.cs">
