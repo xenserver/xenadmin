@@ -105,7 +105,9 @@ namespace XenAPI
             long[] virtual_hardware_platform_versions,
             XenRef<VM> control_domain,
             List<XenRef<Pool_update>> updates_requiring_reboot,
-            List<XenRef<Feature>> features)
+            List<XenRef<Feature>> features,
+            string iscsi_iqn,
+            bool multipathing)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -163,6 +165,8 @@ namespace XenAPI
             this.control_domain = control_domain;
             this.updates_requiring_reboot = updates_requiring_reboot;
             this.features = features;
+            this.iscsi_iqn = iscsi_iqn;
+            this.multipathing = multipathing;
         }
 
         /// <summary>
@@ -236,6 +240,8 @@ namespace XenAPI
             control_domain = update.control_domain;
             updates_requiring_reboot = update.updates_requiring_reboot;
             features = update.features;
+            iscsi_iqn = update.iscsi_iqn;
+            multipathing = update.multipathing;
         }
 
         internal void UpdateFromProxy(Proxy_Host proxy)
@@ -296,6 +302,8 @@ namespace XenAPI
             control_domain = proxy.control_domain == null ? null : XenRef<VM>.Create(proxy.control_domain);
             updates_requiring_reboot = proxy.updates_requiring_reboot == null ? null : XenRef<Pool_update>.Create(proxy.updates_requiring_reboot);
             features = proxy.features == null ? null : XenRef<Feature>.Create(proxy.features);
+            iscsi_iqn = proxy.iscsi_iqn == null ? null : (string)proxy.iscsi_iqn;
+            multipathing = (bool)proxy.multipathing;
         }
 
         public Proxy_Host ToProxy()
@@ -357,6 +365,8 @@ namespace XenAPI
             result_.control_domain = control_domain ?? "";
             result_.updates_requiring_reboot = (updates_requiring_reboot != null) ? Helper.RefListToStringArray(updates_requiring_reboot) : new string[] {};
             result_.features = (features != null) ? Helper.RefListToStringArray(features) : new string[] {};
+            result_.iscsi_iqn = iscsi_iqn ?? "";
+            result_.multipathing = multipathing;
             return result_;
         }
 
@@ -491,6 +501,10 @@ namespace XenAPI
                 updates_requiring_reboot = Marshalling.ParseSetRef<Pool_update>(table, "updates_requiring_reboot");
             if (table.ContainsKey("features"))
                 features = Marshalling.ParseSetRef<Feature>(table, "features");
+            if (table.ContainsKey("iscsi_iqn"))
+                iscsi_iqn = Marshalling.ParseString(table, "iscsi_iqn");
+            if (table.ContainsKey("multipathing"))
+                multipathing = Marshalling.ParseBool(table, "multipathing");
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -557,7 +571,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions) &&
                 Helper.AreEqual2(this._control_domain, other._control_domain) &&
                 Helper.AreEqual2(this._updates_requiring_reboot, other._updates_requiring_reboot) &&
-                Helper.AreEqual2(this._features, other._features);
+                Helper.AreEqual2(this._features, other._features) &&
+                Helper.AreEqual2(this._iscsi_iqn, other._iscsi_iqn) &&
+                Helper.AreEqual2(this._multipathing, other._multipathing);
         }
 
         internal static List<Host> ProxyArrayToObjectList(Proxy_Host[] input)
@@ -629,6 +645,14 @@ namespace XenAPI
                 if (!Helper.AreEqual2(_ssl_legacy, server._ssl_legacy))
                 {
                     Host.set_ssl_legacy(session, opaqueRef, _ssl_legacy);
+                }
+                if (!Helper.AreEqual2(_iscsi_iqn, server._iscsi_iqn))
+                {
+                    Host.set_iscsi_iqn(session, opaqueRef, _iscsi_iqn);
+                }
+                if (!Helper.AreEqual2(_multipathing, server._multipathing))
+                {
+                    Host.set_multipathing(session, opaqueRef, _multipathing);
                 }
 
                 return null;
@@ -1460,6 +1484,34 @@ namespace XenAPI
                 return session.JsonRpcClient.host_get_features(session.opaque_ref, _host);
             else
                 return XenRef<Feature>.Create(session.proxy.host_get_features(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the iscsi_iqn field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static string get_iscsi_iqn(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_iscsi_iqn(session.opaque_ref, _host);
+            else
+                return (string)session.proxy.host_get_iscsi_iqn(session.opaque_ref, _host ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the multipathing field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static bool get_multipathing(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_multipathing(session.opaque_ref, _host);
+            else
+                return (bool)session.proxy.host_get_multipathing(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -3227,6 +3279,66 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Sets the initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">The value to which the IQN should be set</param>
+        public static void set_iscsi_iqn(Session session, string _host, string _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_set_iscsi_iqn(session.opaque_ref, _host, _value);
+            else
+                session.proxy.host_set_iscsi_iqn(session.opaque_ref, _host ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
+        /// Sets the initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">The value to which the IQN should be set</param>
+        public static XenRef<Task> async_set_iscsi_iqn(Session session, string _host, string _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_set_iscsi_iqn(session.opaque_ref, _host, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_host_set_iscsi_iqn(session.opaque_ref, _host ?? "", _value ?? "").parse());
+        }
+
+        /// <summary>
+        /// Specifies whether multipathing is enabled
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">Whether multipathing should be enabled</param>
+        public static void set_multipathing(Session session, string _host, bool _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_set_multipathing(session.opaque_ref, _host, _value);
+            else
+                session.proxy.host_set_multipathing(session.opaque_ref, _host ?? "", _value).parse();
+        }
+
+        /// <summary>
+        /// Specifies whether multipathing is enabled
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">Whether multipathing should be enabled</param>
+        public static XenRef<Task> async_set_multipathing(Session session, string _host, bool _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_set_multipathing(session.opaque_ref, _host, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_host_set_multipathing(session.opaque_ref, _host ?? "", _value).parse());
+        }
+
+        /// <summary>
         /// Return a list of all the hosts known to the system.
         /// First published in XenServer 4.0.
         /// </summary>
@@ -4317,5 +4429,43 @@ namespace XenAPI
             }
         }
         private List<XenRef<Feature>> _features = new List<XenRef<Feature>>() {};
+
+        /// <summary>
+        /// The initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string iscsi_iqn
+        {
+            get { return _iscsi_iqn; }
+            set
+            {
+                if (!Helper.AreEqual(value, _iscsi_iqn))
+                {
+                    _iscsi_iqn = value;
+                    Changed = true;
+                    NotifyPropertyChanged("iscsi_iqn");
+                }
+            }
+        }
+        private string _iscsi_iqn = "";
+
+        /// <summary>
+        /// Specifies whether multipathing is enabled
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual bool multipathing
+        {
+            get { return _multipathing; }
+            set
+            {
+                if (!Helper.AreEqual(value, _multipathing))
+                {
+                    _multipathing = value;
+                    Changed = true;
+                    NotifyPropertyChanged("multipathing");
+                }
+            }
+        }
+        private bool _multipathing = false;
     }
 }

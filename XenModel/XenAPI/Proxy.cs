@@ -1680,6 +1680,10 @@ namespace XenAPI
         Response<string>
         vm_get_reference_label(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_domain_type")]
+        Response<string>
+        vm_get_domain_type(string session, string _vm);
+
         [XmlRpcMethod("VM.set_name_label")]
         Response<string>
         vm_set_name_label(string session, string _vm, string _label);
@@ -1743,10 +1747,6 @@ namespace XenAPI
         [XmlRpcMethod("VM.set_PV_legacy_args")]
         Response<string>
         vm_set_pv_legacy_args(string session, string _vm, string _legacy_args);
-
-        [XmlRpcMethod("VM.set_HVM_boot_policy")]
-        Response<string>
-        vm_set_hvm_boot_policy(string session, string _vm, string _boot_policy);
 
         [XmlRpcMethod("VM.set_HVM_boot_params")]
         Response<string>
@@ -2412,6 +2412,14 @@ namespace XenAPI
         Response<string>
         async_vm_set_actions_after_crash(string session, string _vm, string _value);
 
+        [XmlRpcMethod("VM.set_domain_type")]
+        Response<string>
+        vm_set_domain_type(string session, string _vm, string _value);
+
+        [XmlRpcMethod("VM.set_HVM_boot_policy")]
+        Response<string>
+        vm_set_hvm_boot_policy(string session, string _vm, string _value);
+
         [XmlRpcMethod("VM.get_all")]
         Response<string []>
         vm_get_all(string session);
@@ -2487,6 +2495,10 @@ namespace XenAPI
         [XmlRpcMethod("VM_metrics.get_nomigrate")]
         Response<bool>
         vm_metrics_get_nomigrate(string session, string _vm_metrics);
+
+        [XmlRpcMethod("VM_metrics.get_current_domain_type")]
+        Response<string>
+        vm_metrics_get_current_domain_type(string session, string _vm_metrics);
 
         [XmlRpcMethod("VM_metrics.set_other_config")]
         Response<string>
@@ -8400,6 +8412,7 @@ namespace XenAPI
         public bool has_vendor_device;
         public bool requires_reboot;
         public string reference_label;
+        public string domain_type;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8420,6 +8433,7 @@ namespace XenAPI
         public bool hvm;
         public bool nested_virt;
         public bool nomigrate;
+        public string current_domain_type;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]

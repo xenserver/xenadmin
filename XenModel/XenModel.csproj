@@ -167,6 +167,7 @@
     <Compile Include="CustomFields\CustomFieldsCache.cs" />
     <Compile Include="CustomFields\CustomFieldsManager.cs" />
     <Compile Include="DockerContainer.cs" />
+    <Compile Include="domain_type.cs" />
     <Compile Include="Folders.cs" />
     <Compile Include="FriendlyNames.Designer.cs">
       <AutoGen>True</AutoGen>

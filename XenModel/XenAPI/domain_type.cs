@@ -34,15 +34,15 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(cluster_host_operationConverter))]
-    public enum cluster_host_operation
+    [JsonConverter(typeof(domain_typeConverter))]
+    public enum domain_type
     {
-        enable, disable, destroy, unknown
+        hvm, pv, pv_in_pvh, unspecified, unknown
     }
 
-    public static class cluster_host_operation_helper
+    public static class domain_type_helper
     {
-        public static string ToString(cluster_host_operation x)
+        public static string ToString(domain_type x)
         {
             return x.StringOf();
         }
@@ -50,27 +50,29 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this cluster_host_operation x)
+        public static string StringOf(this domain_type x)
         {
             switch (x)
             {
-                case cluster_host_operation.enable:
-                    return "enable";
-                case cluster_host_operation.disable:
-                    return "disable";
-                case cluster_host_operation.destroy:
-                    return "destroy";
+                case domain_type.hvm:
+                    return "hvm";
+                case domain_type.pv:
+                    return "pv";
+                case domain_type.pv_in_pvh:
+                    return "pv_in_pvh";
+                case domain_type.unspecified:
+                    return "unspecified";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class cluster_host_operationConverter : XenEnumConverter
+    internal class domain_typeConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((cluster_host_operation)value).StringOf());
+            writer.WriteValue(((domain_type)value).StringOf());
         }
     }
 }

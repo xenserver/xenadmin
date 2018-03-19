@@ -42,7 +42,6 @@ namespace XenAPI
 {
     /// <summary>
     /// Cluster member metadata
-    /// First published in Unreleased.
     /// </summary>
     public partial class Cluster_host : XenObject<Cluster_host>
     {
@@ -76,6 +75,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Cluster_host.
+        /// </summary>
         public override void UpdateFrom(Cluster_host update)
         {
             uuid = update.uuid;
@@ -113,17 +116,37 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Cluster_host from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Cluster_host(Hashtable table)
+        public Cluster_host(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            cluster = Marshalling.ParseRef<Cluster>(table, "cluster");
-            host = Marshalling.ParseRef<Host>(table, "host");
-            enabled = Marshalling.ParseBool(table, "enabled");
-            allowed_operations = Helper.StringArrayToEnumList<cluster_host_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_cluster_host_operation(Marshalling.ParseHashTable(table, "current_operations"));
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Cluster_host
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("cluster"))
+                cluster = Marshalling.ParseRef<Cluster>(table, "cluster");
+            if (table.ContainsKey("host"))
+                host = Marshalling.ParseRef<Host>(table, "host");
+            if (table.ContainsKey("enabled"))
+                enabled = Marshalling.ParseBool(table, "enabled");
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<cluster_host_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_cluster_host_operation(Marshalling.ParseHashTable(table, "current_operations"));
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(Cluster_host other, bool ignoreCurrentOperations)
@@ -167,7 +190,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given Cluster_host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -181,7 +204,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the Cluster_host instance with the specified UUID.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -195,7 +218,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given Cluster_host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -209,7 +232,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cluster field of the given Cluster_host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -223,7 +246,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the host field of the given Cluster_host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -237,7 +260,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the enabled field of the given Cluster_host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -251,7 +274,6 @@ namespace XenAPI
 
         /// <summary>
         /// Get the allowed_operations field of the given Cluster_host.
-        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -265,7 +287,6 @@ namespace XenAPI
 
         /// <summary>
         /// Get the current_operations field of the given Cluster_host.
-        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -279,7 +300,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the other_config field of the given Cluster_host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -293,7 +314,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add a new host to an existing cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">Cluster to join</param>
@@ -308,7 +329,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add a new host to an existing cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">Cluster to join</param>
@@ -323,7 +344,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a host from an existing cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -337,7 +358,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a host from an existing cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -351,7 +372,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable cluster membership for a disabled cluster host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -365,7 +386,7 @@ namespace XenAPI
 
         /// <summary>
         /// Enable cluster membership for a disabled cluster host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -379,7 +400,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a host from an existing cluster forcefully.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -393,7 +414,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove a host from an existing cluster forcefully.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -407,7 +428,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable cluster membership for an enabled cluster host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -421,7 +442,7 @@ namespace XenAPI
 
         /// <summary>
         /// Disable cluster membership for an enabled cluster host.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
@@ -435,7 +456,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the Cluster_hosts known to the system.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<Cluster_host>> get_all(Session session)
@@ -448,7 +469,6 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the Cluster_host Records at once, in a single XML RPC call
-        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Cluster_host>, Cluster_host> get_all_records(Session session)
@@ -461,6 +481,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
+        /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual string uuid
         {
@@ -479,6 +500,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reference to the Cluster object
+        /// Experimental. First published in Unreleased.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<Cluster>))]
         public virtual XenRef<Cluster> cluster
@@ -498,6 +520,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reference to the Host object
+        /// Experimental. First published in Unreleased.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<Host>))]
         public virtual XenRef<Host> host
@@ -517,6 +540,7 @@ namespace XenAPI
 
         /// <summary>
         /// Whether the cluster host believes that clustering should be enabled on this host
+        /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual bool enabled
         {
@@ -571,7 +595,9 @@ namespace XenAPI
 
         /// <summary>
         /// Additional configuration
+        /// Experimental. First published in Unreleased.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
