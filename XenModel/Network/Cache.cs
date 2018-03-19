@@ -49,6 +49,8 @@ namespace XenAdmin.Network
         // keep sorted please
         private readonly ChangeableDictionary<XenRef<Bond>, Bond> _bond = new ChangeableDictionary<XenRef<Bond>, Bond>();
         private readonly ChangeableDictionary<XenRef<Blob>, Blob> _blob = new ChangeableDictionary<XenRef<Blob>, Blob>();
+        private readonly ChangeableDictionary<XenRef<Cluster>, Cluster> _cluster = new ChangeableDictionary<XenRef<Cluster>, Cluster>();
+        private readonly ChangeableDictionary<XenRef<Cluster_host>, Cluster_host> _cluster_host = new ChangeableDictionary<XenRef<Cluster_host>, Cluster_host>();
         private readonly ChangeableDictionary<XenRef<XenAPI.Console>, XenAPI.Console> _console = new ChangeableDictionary<XenRef<XenAPI.Console>, XenAPI.Console>();
         private readonly ChangeableDictionary<XenRef<Folder>, Folder> _folders = new ChangeableDictionary<XenRef<Folder>, Folder>();
         private readonly ChangeableDictionary<XenRef<DockerContainer>, DockerContainer> _dockerContainers = new ChangeableDictionary<XenRef<DockerContainer>, DockerContainer>();
@@ -127,6 +129,16 @@ namespace XenAdmin.Network
         public VM_appliance[] VM_appliances
         {
             get { return contents(_vm_appliance); }
+        }
+
+        public Cluster[] Clusters
+        {
+            get { return contents(_cluster); }
+        }
+
+        public Cluster_host[] Cluster_hosts
+        {
+            get { return contents(_cluster_host); }
         }
 
         public Folder[] Folders

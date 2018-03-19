@@ -549,43 +549,43 @@
   <data name="&gt;&gt;PreferredDNSTextBox.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="SubnetMastLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="SubnetMaskLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="SubnetMastLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="SubnetMaskLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="SubnetMastLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="SubnetMaskLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="SubnetMastLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="SubnetMaskLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>22, 24</value>
   </data>
-  <data name="SubnetMastLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="SubnetMaskLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>22, 0, 10, 0</value>
   </data>
-  <data name="SubnetMastLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SubnetMaskLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 24</value>
   </data>
-  <data name="SubnetMastLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="SubnetMaskLabel.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="SubnetMastLabel.Text" xml:space="preserve">
+  <data name="SubnetMaskLabel.Text" xml:space="preserve">
     <value>サブネット マスク(&amp;S):</value>
   </data>
-  <data name="SubnetMastLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="SubnetMaskLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;SubnetMastLabel.Name" xml:space="preserve">
-    <value>SubnetMastLabel</value>
+  <data name="&gt;&gt;SubnetMaskLabel.Name" xml:space="preserve">
+    <value>SubnetMaskLabel</value>
   </data>
-  <data name="&gt;&gt;SubnetMastLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;SubnetMaskLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SubnetMastLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SubnetMaskLabel.Parent" xml:space="preserve">
     <value>tableLayoutPanelStaticSettings</value>
   </data>
-  <data name="&gt;&gt;SubnetMastLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SubnetMaskLabel.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="GatewayLabel.AutoSize" type="System.Boolean, mscorlib">
@@ -709,7 +709,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanelStaticSettings.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="AlternateDNS2TextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="AlternateDNS2Label" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="IPAddressLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="RangeEndLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="IPAddressTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="AlternateDNS1TextBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="PreferredDNSLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="AlternateDNS1Label" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="PreferredDNSTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="SubnetMastLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="GatewayLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="GatewayTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="SubnetTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,50" />&lt;Rows Styles="Absolute,24,Absolute,24,Absolute,24,Absolute,24,Absolute,24,Absolute,24" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="AlternateDNS2TextBox" Row="5" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="AlternateDNS2Label" Row="5" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="IPAddressLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="RangeEndLabel" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="IPAddressTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="AlternateDNS1TextBox" Row="4" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="PreferredDNSLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="AlternateDNS1Label" Row="4" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="PreferredDNSTextBox" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="SubnetMaskLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="GatewayLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="GatewayTextBox" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="SubnetTextBox" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,50" />&lt;Rows Styles="Absolute,24,Absolute,24,Absolute,24,Absolute,24,Absolute,24,Absolute,24" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="haEnabledRubric.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

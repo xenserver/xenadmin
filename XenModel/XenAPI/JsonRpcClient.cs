@@ -5794,6 +5794,20 @@ namespace XenAPI
             return Rpc<List<XenRef<Feature>>>("host.get_features", new JArray(session, _host ?? ""), serializer);
         }
 
+        public string host_get_iscsi_iqn(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("host.get_iscsi_iqn", new JArray(session, _host ?? ""), serializer);
+        }
+
+        public bool host_get_multipathing(string session, string _host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<bool>("host.get_multipathing", new JArray(session, _host ?? ""), serializer);
+        }
+
         public void host_set_name_label(string session, string _host, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -6632,6 +6646,34 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<XenRef<Task>>("Async.host.set_ssl_legacy", new JArray(session, _host ?? "", _value), serializer);
+        }
+
+        public void host_set_iscsi_iqn(string session, string _host, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("host.set_iscsi_iqn", new JArray(session, _host ?? "", _value ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_host_set_iscsi_iqn(string session, string _host, string _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.host.set_iscsi_iqn", new JArray(session, _host ?? "", _value ?? ""), serializer);
+        }
+
+        public void host_set_multipathing(string session, string _host, bool _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("host.set_multipathing", new JArray(session, _host ?? "", _value), serializer);
+        }
+
+        public XenRef<Task> async_host_set_multipathing(string session, string _host, bool _value)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.host.set_multipathing", new JArray(session, _host ?? "", _value), serializer);
         }
 
         public List<XenRef<Host>> host_get_all(string session)
@@ -13863,6 +13905,370 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<VUSB>()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<XenRef<VUSB>, VUSB>>("VUSB.get_all_records", new JArray(session), serializer);
+        }
+
+        public Cluster cluster_get_record(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Cluster>("Cluster.get_record", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Cluster> cluster_get_by_uuid(string session, string _uuid)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Cluster>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Cluster>>("Cluster.get_by_uuid", new JArray(session, _uuid ?? ""), serializer);
+        }
+
+        public string cluster_get_uuid(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("Cluster.get_uuid", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public List<XenRef<Cluster_host>> cluster_get_cluster_hosts(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Cluster_host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<Cluster_host>>>("Cluster.get_cluster_hosts", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Network> cluster_get_network(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Network>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Network>>("Cluster.get_network", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public string cluster_get_cluster_token(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("Cluster.get_cluster_token", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public string cluster_get_cluster_stack(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("Cluster.get_cluster_stack", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public List<cluster_operation> cluster_get_allowed_operations(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<cluster_operation>>("Cluster.get_allowed_operations", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public Dictionary<string, cluster_operation> cluster_get_current_operations(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, cluster_operation>>("Cluster.get_current_operations", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public bool cluster_get_pool_auto_join(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<bool>("Cluster.get_pool_auto_join", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public long cluster_get_token_timeout(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<long>("Cluster.get_token_timeout", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public long cluster_get_token_timeout_coefficient(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<long>("Cluster.get_token_timeout_coefficient", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public Dictionary<string, string> cluster_get_cluster_config(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, string>>("Cluster.get_cluster_config", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public Dictionary<string, string> cluster_get_other_config(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, string>>("Cluster.get_other_config", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public void cluster_set_other_config(string session, string _cluster, Dictionary<string, string> _other_config)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster.set_other_config", new JArray(session, _cluster ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
+        }
+
+        public void cluster_add_to_other_config(string session, string _cluster, string _key, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster.add_to_other_config", new JArray(session, _cluster ?? "", _key ?? "", _value ?? ""), serializer);
+        }
+
+        public void cluster_remove_from_other_config(string session, string _cluster, string _key)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster.remove_from_other_config", new JArray(session, _cluster ?? "", _key ?? ""), serializer);
+        }
+
+        public XenRef<Cluster> cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Cluster>(), new XenRefConverter<Network>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Cluster>>("Cluster.create", new JArray(session, _network ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient), serializer);
+        }
+
+        public XenRef<Task> async_cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<Network>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster.create", new JArray(session, _network ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient), serializer);
+        }
+
+        public void cluster_destroy(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster.destroy", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_destroy(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster.destroy", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Cluster> cluster_pool_create(string session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Cluster>(), new XenRefConverter<Network>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Cluster>>("Cluster.pool_create", new JArray(session, _network ?? "", _cluster_stack ?? "", _token_timeout, _token_timeout_coefficient), serializer);
+        }
+
+        public XenRef<Task> async_cluster_pool_create(string session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<Network>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster.pool_create", new JArray(session, _network ?? "", _cluster_stack ?? "", _token_timeout, _token_timeout_coefficient), serializer);
+        }
+
+        public void cluster_pool_force_destroy(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster.pool_force_destroy", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_pool_force_destroy(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster.pool_force_destroy", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public void cluster_pool_destroy(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster.pool_destroy", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_pool_destroy(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster.pool_destroy", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public void cluster_pool_resync(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster.pool_resync", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_pool_resync(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster.pool_resync", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public List<XenRef<Cluster>> cluster_get_all(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Cluster>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<Cluster>>>("Cluster.get_all", new JArray(session), serializer);
+        }
+
+        public Dictionary<XenRef<Cluster>, Cluster> cluster_get_all_records(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Cluster>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<XenRef<Cluster>, Cluster>>("Cluster.get_all_records", new JArray(session), serializer);
+        }
+
+        public Cluster_host cluster_host_get_record(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Cluster_host>("Cluster_host.get_record", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public XenRef<Cluster_host> cluster_host_get_by_uuid(string session, string _uuid)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Cluster_host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Cluster_host>>("Cluster_host.get_by_uuid", new JArray(session, _uuid ?? ""), serializer);
+        }
+
+        public string cluster_host_get_uuid(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<string>("Cluster_host.get_uuid", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public XenRef<Cluster> cluster_host_get_cluster(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Cluster>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Cluster>>("Cluster_host.get_cluster", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public XenRef<Host> cluster_host_get_host(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Host>>("Cluster_host.get_host", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public bool cluster_host_get_enabled(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<bool>("Cluster_host.get_enabled", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public List<cluster_host_operation> cluster_host_get_allowed_operations(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<cluster_host_operation>>("Cluster_host.get_allowed_operations", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public Dictionary<string, cluster_host_operation> cluster_host_get_current_operations(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, cluster_host_operation>>("Cluster_host.get_current_operations", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public Dictionary<string, string> cluster_host_get_other_config(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<string, string>>("Cluster_host.get_other_config", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public XenRef<Cluster_host> cluster_host_create(string session, string _cluster, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Cluster_host>(), new XenRefConverter<Cluster>(), new XenRefConverter<Host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Cluster_host>>("Cluster_host.create", new JArray(session, _cluster ?? "", _host ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_host_create(string session, string _cluster, string _host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<Cluster>(), new XenRefConverter<Host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster_host.create", new JArray(session, _cluster ?? "", _host ?? ""), serializer);
+        }
+
+        public void cluster_host_destroy(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster_host.destroy", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_host_destroy(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster_host.destroy", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public void cluster_host_enable(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster_host.enable", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_host_enable(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster_host.enable", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public void cluster_host_force_destroy(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster_host.force_destroy", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_host_force_destroy(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster_host.force_destroy", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public void cluster_host_disable(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("Cluster_host.disable", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_host_disable(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<XenRef<Task>>("Async.Cluster_host.disable", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
+        public List<XenRef<Cluster_host>> cluster_host_get_all(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefListConverter<Cluster_host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<List<XenRef<Cluster_host>>>("Cluster_host.get_all", new JArray(session), serializer);
+        }
+
+        public Dictionary<XenRef<Cluster_host>, Cluster_host> cluster_host_get_all_records(string session)
+        {
+            var converters = new List<JsonConverter> {new XenRefXenObjectMapConverter<Cluster_host>()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<Dictionary<XenRef<Cluster_host>, Cluster_host>>("Cluster_host.get_all_records", new JArray(session), serializer);
         }
 
     }

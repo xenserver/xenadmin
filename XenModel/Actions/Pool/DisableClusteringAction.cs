@@ -29,34 +29,39 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Network;
+using System.Linq;
+using XenAPI;
 
-namespace XenAPI
+namespace XenAdmin.Actions
 {
-    public partial class SM
+    public class DisableClusteringAction : AsyncAction
     {
-        /// <summary>
-        /// Return the SM instance in the given connection's cache that has the given type, or null
-        /// if no such SM is found.
-        /// </summary>
-        public static SM GetByType(IXenConnection connection, string needle)
+        public DisableClusteringAction(Pool pool)
+            : base(pool.Connection, Messages.DISABLE_CLUSTERING_ON_POOL,
+            string.Format(Messages.DISABLING_CLUSTERING_ON_POOL, pool.Name()), true)
         {
-            foreach (SM sm in connection.Cache.SMs)
+            #region RBAC Dependencies
+            //ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
+            #endregion
+        }
+
+        protected override void Run()
+        {
+            var existingCluster = Connection.Cache.Clusters.FirstOrDefault();
+            if (existingCluster != null)
             {
-                if (sm.type == needle)
-                    return sm;
+                Cluster.pool_destroy(Session, existingCluster.opaque_ref);
+                var network = Connection.Resolve(existingCluster.network);
+
+                if (network != null)
+                {
+                    foreach (var pif in Connection.ResolveAll(network.PIFs))
+                    {
+                        PIF.set_disallow_unplug(Session, pif.opaque_ref, false);
+                    }
+                }
             }
-            return null;
-        }
-
-        public override bool IsHidden()
-        {
-            return BoolKey(other_config, HIDE_FROM_XENCENTER);
-        }
-
-        public bool MultipathEnabled()
-        {
-            return features != null && features.ContainsKey("SR_MULTIPATH");
+            Description = string.Format(Messages.DISABLED_CLUSTERING_ON_POOL, Pool.Name());
         }
     }
 }

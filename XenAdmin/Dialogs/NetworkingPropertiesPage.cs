@@ -32,8 +32,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using XenAdmin.Controls;
+using XenAPI;
 using XenCenterLib;
 
 
@@ -165,7 +167,34 @@ namespace XenAdmin.Dialogs
                 haEnabledRubric.Enabled =
                     true;
             }
+
+            var pif = Tag as PIF;
+            var existingCluster = network != null ? network.Connection.Cache.Clusters.FirstOrDefault() : null;
+
+            if (pif != null && existingCluster != null && existingCluster.network.opaque_ref == network.opaque_ref)
+            {
+                Host host = network.Connection.Resolve(pif.host);
+                    
+                ClusteringEnabled = network.Connection.Cache.Cluster_hosts.Any(cluster =>
+                    cluster.host.opaque_ref == pif.host.opaque_ref && cluster.enabled);
+
+                if (ClusteringEnabled)
+                {
+                    if (host != null && host.enabled)
+                    {
+                        DisableControls(string.Format(Messages.CANNOT_CHANGE_IP_CLUSTERING_ENABLED, network.Name()));
+                    }
+                    else
+                    {
+                        DeleteButton.Enabled = false;
+                        tableLayoutInfo.Visible = true;
+                        labelWarning.Text = string.Format(Messages.CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK, network.Name());
+                    }
+                }
+            }
         }
+
+        internal bool ClusteringEnabled { get; private set; }
 
         private string FindOtherPurpose(XenAPI.Network network)
         {
@@ -330,6 +359,14 @@ namespace XenAdmin.Dialogs
                                                        int.Parse(bits[3]) + HostCount - 1);
                 }
             }
+        }
+
+        private void DisableControls(string message)
+        {
+            PurposeLabel.Enabled = PurposeTextBox.Enabled = Network2Label.Enabled = NetworkComboBox.Enabled = IpAddressSettingsLabel.Enabled =
+                DHCPIPRadioButton.Enabled = FixedIPRadioButton.Enabled = tableLayoutPanelStaticSettings.Enabled = DeleteButton.Enabled = false;
+            tableLayoutInfo.Visible = true;
+            labelWarning.Text = message;
         }
     }
 }

@@ -255,6 +255,24 @@
   <data name="CLUSTERED_SR_DEGRADED" xml:space="preserve">
     <value>An SR is using clustered local storage. It is not safe to reboot a host at the moment.</value>
   </data>
+  <data name="CLUSTERING_DISABLED" xml:space="preserve">
+    <value>An operation was attempted while clustering was disabled on the cluster_host.</value>
+  </data>
+  <data name="CLUSTERING_ENABLED" xml:space="preserve">
+    <value>An operation was attempted while clustering was enabled on the cluster_host.</value>
+  </data>
+  <data name="CLUSTER_ALREADY_EXISTS" xml:space="preserve">
+    <value>A cluster already exists in the pool.</value>
+  </data>
+  <data name="CLUSTER_CREATE_IN_PROGRESS" xml:space="preserve">
+    <value>The operation could not be performed because cluster creation is in progress.</value>
+  </data>
+  <data name="CLUSTER_DOES_NOT_HAVE_ONE_NODE" xml:space="preserve">
+    <value>The cluster does not have only one node.</value>
+  </data>
+  <data name="CLUSTER_FORCE_DESTROY_FAILED" xml:space="preserve">
+    <value>Force destroy failed on a Cluster_host while force destroying the cluster.</value>
+  </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>Could not find a network interface with the specified device name and MAC address.</value>
   </data>
@@ -710,6 +728,9 @@
   </data>
   <data name="NOT_SYSTEM_DOMAIN" xml:space="preserve">
     <value>The given VM is not registered as a system domain. This operation can only be performed on a registered system domain.</value>
+  </data>
+  <data name="NO_COMPATIBLE_CLUSTER_HOST" xml:space="preserve">
+    <value>The host does not have a Cluster_host with a compatible cluster stack.</value>
   </data>
   <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>There were no servers available to complete the specified operation.</value>

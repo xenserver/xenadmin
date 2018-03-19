@@ -29,34 +29,35 @@
  * SUCH DAMAGE.
  */
 
-using XenAdmin.Network;
+using XenAPI;
 
-namespace XenAPI
+namespace XenAdmin.Actions
 {
-    public partial class SM
+    public class EnableClusteringAction : AsyncAction
     {
-        /// <summary>
-        /// Return the SM instance in the given connection's cache that has the given type, or null
-        /// if no such SM is found.
-        /// </summary>
-        public static SM GetByType(IXenConnection connection, string needle)
+        private XenAPI.Network network;
+        
+        public EnableClusteringAction(Pool pool, XenAPI.Network network)
+            : base(pool.Connection, Messages.ENABLE_CLUSTERING_ON_POOL,
+            string.Format(Messages.ENABLING_CLUSTERING_ON_POOL, pool.Name()), true)
         {
-            foreach (SM sm in connection.Cache.SMs)
+            this.network = network;
+            #region RBAC Dependencies
+            ApiMethodsToRoleCheck.Add("cluster.pool_create");
+            ApiMethodsToRoleCheck.Add("pif.set_disallow_unplug");
+            #endregion
+        }
+
+        protected override void Run()
+        {
+            foreach (var pif in Connection.ResolveAll(network.PIFs))
             {
-                if (sm.type == needle)
-                    return sm;
+                PIF.set_disallow_unplug(Session, pif.opaque_ref, true);
             }
-            return null;
-        }
-
-        public override bool IsHidden()
-        {
-            return BoolKey(other_config, HIDE_FROM_XENCENTER);
-        }
-
-        public bool MultipathEnabled()
-        {
-            return features != null && features.ContainsKey("SR_MULTIPATH");
+            var cluster = new Cluster(); // this Cluster object is only used for getting the default values for token_timeout and token_timeout_coefficient
+            Cluster.pool_create(Session, network.opaque_ref, "corosync", cluster.token_timeout, cluster.token_timeout_coefficient);
+            Description = string.Format(Messages.ENABLED_CLUSTERING_ON_POOL, Pool.Name());
+            
         }
     }
 }

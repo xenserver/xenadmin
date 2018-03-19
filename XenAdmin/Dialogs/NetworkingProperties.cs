@@ -682,7 +682,7 @@ namespace XenAdmin.Dialogs
                 return;
 
             NetworkingPropertiesPage page = verticalTabs.Items[e.Index] as NetworkingPropertiesPage;
-            if (page == null|| page.type != NetworkingPropertiesPage.Type.SECONDARY)
+            if (page == null|| page.type != NetworkingPropertiesPage.Type.SECONDARY || page.ClusteringEnabled)
                 return;
 
             Graphics g = e.Graphics;

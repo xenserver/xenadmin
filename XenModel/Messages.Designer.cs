@@ -6349,6 +6349,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}..
+        /// </summary>
+        public static string CANNOT_CHANGE_IP_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("CANNOT_CHANGE_IP_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (The network&apos;s MTU cannot be changed because it is in use as the management interface &apos;{0}&apos;).
         /// </summary>
         public static string CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT {
@@ -6698,6 +6707,15 @@ namespace XenAdmin {
         public static string CANNOT_PARSE_NODE_PARAM {
             get {
                 return ResourceManager.GetString("CANNOT_PARSE_NODE_PARAM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This IP address cannot be removed, because clustering is enabled on {0}..
+        /// </summary>
+        public static string CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK {
+            get {
+                return ResourceManager.GetString("CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK", resourceCulture);
             }
         }
         
@@ -7065,6 +7083,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose the provisioning method.
+        /// </summary>
+        public static string CHOOSE_SR_PROVISIONING_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("CHOOSE_SR_PROVISIONING_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose the type of new storage.
         /// </summary>
         public static string CHOOSE_SR_TYPE_PAGE_TITLE {
@@ -7124,6 +7151,15 @@ namespace XenAdmin {
         public static string CLOSE_WIZARD_CLICK_FINISH {
             get {
                 return ResourceManager.GetString("CLOSE_WIZARD_CLICK_FINISH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustering.
+        /// </summary>
+        public static string CLUSTERING {
+            get {
+                return ResourceManager.GetString("CLUSTERING", resourceCulture);
             }
         }
         
@@ -11250,6 +11286,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable clustering..
+        /// </summary>
+        public static string DISABLE_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLE_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable HA.
         /// </summary>
         public static string DISABLE_HA {
@@ -11331,6 +11376,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled clustering on {0}..
+        /// </summary>
+        public static string DISABLED_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLED_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No updates found because automatic checking for updates is disabled..
         /// </summary>
         public static string DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING {
@@ -11372,6 +11426,15 @@ namespace XenAdmin {
         public static string DISABLING_AD_ON {
             get {
                 return ResourceManager.GetString("DISABLING_AD_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling clustering on {0}..
+        /// </summary>
+        public static string DISABLING_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLING_CLUSTERING_ON_POOL", resourceCulture);
             }
         }
         
@@ -13567,6 +13630,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable clustering..
+        /// </summary>
+        public static string ENABLE_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLE_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Enable HA....
         /// </summary>
         public static string ENABLE_HA_ELLIPSIS {
@@ -13639,6 +13711,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled clustering on {0}..
+        /// </summary>
+        public static string ENABLED_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLED_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; enabled..
         /// </summary>
         public static string ENABLED_VMSS {
@@ -13671,6 +13752,15 @@ namespace XenAdmin {
         public static string ENABLING_AD_ON {
             get {
                 return ResourceManager.GetString("ENABLING_AD_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling clustering on {0}..
+        /// </summary>
+        public static string ENABLING_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLING_CLUSTERING_ON_POOL", resourceCulture);
             }
         }
         
@@ -16066,6 +16156,51 @@ namespace XenAdmin {
         public static string GETPASSWORD {
             get {
                 return ResourceManager.GetString("GETPASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must disable HA before clustering can be enabled..
+        /// </summary>
+        public static string GFS2_HA_ENABLED {
+            get {
+                return ResourceManager.GetString("GFS2_HA_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pool license does not allow Thin Provisioning (GFS2)..
+        /// </summary>
+        public static string GFS2_INCORRECT_POOL_LICENSE {
+            get {
+                return ResourceManager.GetString("GFS2_INCORRECT_POOL_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustering cannot be enabled because there are no suitable networks..
+        /// </summary>
+        public static string GFS2_NO_NETWORK {
+            get {
+                return ResourceManager.GetString("GFS2_NO_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thin Provisioning (GFS2) requires clustering to be enabled on the pool..
+        /// </summary>
+        public static string GFS2_REQUIRES_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("GFS2_REQUIRES_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustering cannot be disabled because there are thinly provisioned (GFS2) storage repositories attached to this pool..
+        /// </summary>
+        public static string GFS2_SR_ATTACHED {
+            get {
+                return ResourceManager.GetString("GFS2_SR_ATTACHED", resourceCulture);
             }
         }
         
@@ -24451,9 +24586,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
-        ///
-        ///Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility..
+        ///   Looks up a localized string similar to iSCSI or Fibre Channel access to a shared LUN can be configured to host fully provisioned virtual disks using LVM or be formatted with the GFS2 cluster file system for hosting thinly provisioned virtual disks..
         /// </summary>
         public static string NEWSR_LVMOISCSI_BLURB {
             get {
@@ -28620,6 +28753,15 @@ namespace XenAdmin {
         public static string PROTECTED_VMS_TITLE {
             get {
                 return ResourceManager.GetString("PROTECTED_VMS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisioning.
+        /// </summary>
+        public static string PROVISIONING {
+            get {
+                return ResourceManager.GetString("PROVISIONING", resourceCulture);
             }
         }
         

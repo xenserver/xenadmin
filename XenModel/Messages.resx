@@ -2313,6 +2313,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
     <value>You must install [XenServer product] Tools on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
+  <data name="CANNOT_CHANGE_IP_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}.</value>
+  </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(The network's MTU cannot be changed because it is in use as the management interface '{0}')</value>
   </data>
@@ -2431,6 +2434,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
+  </data>
+  <data name="CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK" xml:space="preserve">
+    <value>This IP address cannot be removed, because clustering is enabled on {0}.</value>
   </data>
   <data name="CANNOT_REMOVE_SL_SERVER" xml:space="preserve">
     <value>This StorageLink server cannot be removed because it is currently in use.</value>
@@ -2561,6 +2567,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHOOSE_ANOTHER_DESTINATION" xml:space="preserve">
     <value>Choose another &amp;destination</value>
   </data>
+  <data name="CHOOSE_SR_PROVISIONING_PAGE_TITLE" xml:space="preserve">
+    <value>Choose the provisioning method</value>
+  </data>
   <data name="CHOOSE_SR_TYPE_PAGE_TITLE" xml:space="preserve">
     <value>Choose the type of new storage</value>
   </data>
@@ -2581,6 +2590,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CLOSE_WIZARD_CLICK_FINISH" xml:space="preserve">
     <value>To close this wizard, click Finish</value>
+  </data>
+  <data name="CLUSTERING" xml:space="preserve">
+    <value>Clustering</value>
   </data>
   <data name="COLLAPSE_CHILDREN" xml:space="preserve">
     <value>&amp;Collapse Children</value>
@@ -4015,11 +4027,17 @@ This will also delete its subfolders.</value>
   <data name="DISABLED" xml:space="preserve">
     <value>Disabled</value>
   </data>
+  <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disabled clustering on {0}.</value>
+  </data>
   <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
     <value>No updates found because automatic checking for updates is disabled.</value>
   </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' disabled.</value>
+  </data>
+  <data name="DISABLE_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disable clustering.</value>
   </data>
   <data name="DISABLE_HA" xml:space="preserve">
     <value>Disable HA</value>
@@ -4053,6 +4071,9 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DISABLING_AD_ON" xml:space="preserve">
     <value>Disabling Active Directory Authentication on pool '{0}'</value>
+  </data>
+  <data name="DISABLING_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disabling clustering on {0}.</value>
   </data>
   <data name="DISABLING_HA" xml:space="preserve">
     <value>Disabling HA</value>
@@ -4796,8 +4817,14 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENABLED" xml:space="preserve">
     <value>Enabled</value>
   </data>
+  <data name="ENABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Enabled clustering on {0}.</value>
+  </data>
   <data name="ENABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' enabled.</value>
+  </data>
+  <data name="ENABLE_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Enable clustering.</value>
   </data>
   <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
     <value>&amp;Enable HA...</value>
@@ -4828,6 +4855,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLING_AD_ON" xml:space="preserve">
     <value>Enabling Active Directory Authentication on pool '{0}'</value>
+  </data>
+  <data name="ENABLING_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Enabling clustering on {0}.</value>
   </data>
   <data name="ENABLING_HA" xml:space="preserve">
     <value>Enabling HA</value>
@@ -5627,6 +5657,21 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="GETPASSWORD" xml:space="preserve">
     <value>Get Password</value>
+  </data>
+  <data name="GFS2_HA_ENABLED" xml:space="preserve">
+    <value>You must disable HA before clustering can be enabled.</value>
+  </data>
+  <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
+    <value>Your pool license does not allow Thin Provisioning (GFS2).</value>
+  </data>
+  <data name="GFS2_NO_NETWORK" xml:space="preserve">
+    <value>Clustering cannot be enabled because there are no suitable networks.</value>
+  </data>
+  <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>Thin Provisioning (GFS2) requires clustering to be enabled on the pool.</value>
+  </data>
+  <data name="GFS2_SR_ATTACHED" xml:space="preserve">
+    <value>Clustering cannot be disabled because there are thinly provisioned (GFS2) storage repositories attached to this pool.</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
@@ -8349,9 +8394,7 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
     <value>Hardware HBA</value>
   </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
-    <value>iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
-
-Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility.</value>
+    <value>iSCSI or Fibre Channel access to a shared LUN can be configured to host fully provisioned virtual disks using LVM or be formatted with the GFS2 cluster file system for hosting thinly provisioned virtual disks.</value>
   </data>
   <data name="NEWSR_LVMOISCSI_TYPE_NAME" xml:space="preserve">
     <value>iSCSI</value>
@@ -9944,6 +9987,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   </data>
   <data name="PROTECTED_VMS_TITLE" xml:space="preserve">
     <value>Select the VMs that you want to protect with this policy</value>
+  </data>
+  <data name="PROVISIONING" xml:space="preserve">
+    <value>Provisioning</value>
   </data>
   <data name="PROVISIONING_OPTIONS" xml:space="preserve">
     <value>Provisioning Options</value>

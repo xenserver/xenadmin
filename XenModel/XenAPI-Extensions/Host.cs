@@ -435,6 +435,11 @@ namespace XenAPI
                 : h.IsFreeLicenseOrExpired(); // restrict on Free edition or if the license has expired
         }
 
+        public static bool RestrictCorosync(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_corosync");
+        }
+
         public bool HasPBDTo(SR sr)
         {
             foreach (XenRef<PBD> pbd in PBDs)

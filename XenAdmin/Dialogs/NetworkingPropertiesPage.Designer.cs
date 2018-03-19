@@ -47,7 +47,7 @@ namespace XenAdmin.Dialogs
             this.PreferredDNSLabel = new System.Windows.Forms.Label();
             this.AlternateDNS1Label = new System.Windows.Forms.Label();
             this.PreferredDNSTextBox = new System.Windows.Forms.TextBox();
-            this.SubnetMastLabel = new System.Windows.Forms.Label();
+            this.SubnetMaskLabel = new System.Windows.Forms.Label();
             this.GatewayLabel = new System.Windows.Forms.Label();
             this.GatewayTextBox = new System.Windows.Forms.TextBox();
             this.SubnetTextBox = new System.Windows.Forms.TextBox();
@@ -58,12 +58,17 @@ namespace XenAdmin.Dialogs
             this.FixedIPRadioButton = new System.Windows.Forms.RadioButton();
             this.DHCPIPRadioButton = new System.Windows.Forms.RadioButton();
             this.DeleteButton = new System.Windows.Forms.Button();
+            this.tableLayoutInfo = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelWarning = new System.Windows.Forms.Label();
             this.tableLayoutPanelBody.SuspendLayout();
             this.tableLayoutPanelStaticSettings.SuspendLayout();
             this.panelHAEnabledWarning.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.haEnabledWarningIcon)).BeginInit();
             this.panelInUseWarning.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InUseWarningIcon)).BeginInit();
+            this.tableLayoutInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // NetworkComboBox
@@ -73,6 +78,7 @@ namespace XenAdmin.Dialogs
             this.NetworkComboBox.FormattingEnabled = true;
             resources.ApplyResources(this.NetworkComboBox, "NetworkComboBox");
             this.NetworkComboBox.Name = "NetworkComboBox";
+            this.NetworkComboBox.Tag = "";
             this.NetworkComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.NetworkComboBox_DrawItem);
             this.NetworkComboBox.SelectedIndexChanged += new System.EventHandler(this.NetworkComboBox_SelectedIndexChanged);
             // 
@@ -81,6 +87,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.Network2Label, "Network2Label");
             this.tableLayoutPanelBody.SetColumnSpan(this.Network2Label, 2);
             this.Network2Label.Name = "Network2Label";
+            this.Network2Label.Tag = "";
             // 
             // PurposeTextBox
             // 
@@ -118,7 +125,8 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelBody.Controls.Add(this.panelInUseWarning, 0, 3);
             this.tableLayoutPanelBody.Controls.Add(this.FixedIPRadioButton, 1, 6);
             this.tableLayoutPanelBody.Controls.Add(this.DHCPIPRadioButton, 1, 5);
-            this.tableLayoutPanelBody.Controls.Add(this.DeleteButton, 2, 8);
+            this.tableLayoutPanelBody.Controls.Add(this.DeleteButton, 2, 9);
+            this.tableLayoutPanelBody.Controls.Add(this.tableLayoutInfo, 0, 8);
             this.tableLayoutPanelBody.Name = "tableLayoutPanelBody";
             // 
             // IpAddressSettingsLabel
@@ -126,6 +134,7 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.IpAddressSettingsLabel, "IpAddressSettingsLabel");
             this.tableLayoutPanelBody.SetColumnSpan(this.IpAddressSettingsLabel, 3);
             this.IpAddressSettingsLabel.Name = "IpAddressSettingsLabel";
+            this.IpAddressSettingsLabel.Tag = "";
             // 
             // tableLayoutPanelStaticSettings
             // 
@@ -140,7 +149,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelStaticSettings.Controls.Add(this.PreferredDNSLabel, 0, 3);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.AlternateDNS1Label, 0, 4);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.PreferredDNSTextBox, 1, 3);
-            this.tableLayoutPanelStaticSettings.Controls.Add(this.SubnetMastLabel, 0, 1);
+            this.tableLayoutPanelStaticSettings.Controls.Add(this.SubnetMaskLabel, 0, 1);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.GatewayLabel, 0, 2);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.GatewayTextBox, 1, 2);
             this.tableLayoutPanelStaticSettings.Controls.Add(this.SubnetTextBox, 1, 1);
@@ -151,16 +160,19 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.AlternateDNS2TextBox, "AlternateDNS2TextBox");
             this.AlternateDNS2TextBox.Name = "AlternateDNS2TextBox";
+            this.AlternateDNS2TextBox.Tag = "";
             // 
             // AlternateDNS2Label
             // 
             resources.ApplyResources(this.AlternateDNS2Label, "AlternateDNS2Label");
             this.AlternateDNS2Label.Name = "AlternateDNS2Label";
+            this.AlternateDNS2Label.Tag = "";
             // 
             // IPAddressLabel
             // 
             resources.ApplyResources(this.IPAddressLabel, "IPAddressLabel");
             this.IPAddressLabel.Name = "IPAddressLabel";
+            this.IPAddressLabel.Tag = "";
             // 
             // RangeEndLabel
             // 
@@ -171,50 +183,59 @@ namespace XenAdmin.Dialogs
             // 
             resources.ApplyResources(this.IPAddressTextBox, "IPAddressTextBox");
             this.IPAddressTextBox.Name = "IPAddressTextBox";
+            this.IPAddressTextBox.Tag = "";
             this.IPAddressTextBox.TextChanged += new System.EventHandler(this.IPAddressTextBox_TextChanged);
             // 
             // AlternateDNS1TextBox
             // 
             resources.ApplyResources(this.AlternateDNS1TextBox, "AlternateDNS1TextBox");
             this.AlternateDNS1TextBox.Name = "AlternateDNS1TextBox";
+            this.AlternateDNS1TextBox.Tag = "";
             this.AlternateDNS1TextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // PreferredDNSLabel
             // 
             resources.ApplyResources(this.PreferredDNSLabel, "PreferredDNSLabel");
             this.PreferredDNSLabel.Name = "PreferredDNSLabel";
+            this.PreferredDNSLabel.Tag = "";
             // 
             // AlternateDNS1Label
             // 
             resources.ApplyResources(this.AlternateDNS1Label, "AlternateDNS1Label");
             this.AlternateDNS1Label.Name = "AlternateDNS1Label";
+            this.AlternateDNS1Label.Tag = "";
             // 
             // PreferredDNSTextBox
             // 
             resources.ApplyResources(this.PreferredDNSTextBox, "PreferredDNSTextBox");
             this.PreferredDNSTextBox.Name = "PreferredDNSTextBox";
+            this.PreferredDNSTextBox.Tag = "";
             this.PreferredDNSTextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
-            // SubnetMastLabel
+            // SubnetMaskLabel
             // 
-            resources.ApplyResources(this.SubnetMastLabel, "SubnetMastLabel");
-            this.SubnetMastLabel.Name = "SubnetMastLabel";
+            resources.ApplyResources(this.SubnetMaskLabel, "SubnetMaskLabel");
+            this.SubnetMaskLabel.Name = "SubnetMaskLabel";
+            this.SubnetMaskLabel.Tag = "";
             // 
             // GatewayLabel
             // 
             resources.ApplyResources(this.GatewayLabel, "GatewayLabel");
             this.GatewayLabel.Name = "GatewayLabel";
+            this.GatewayLabel.Tag = "";
             // 
             // GatewayTextBox
             // 
             resources.ApplyResources(this.GatewayTextBox, "GatewayTextBox");
             this.GatewayTextBox.Name = "GatewayTextBox";
+            this.GatewayTextBox.Tag = "";
             this.GatewayTextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // SubnetTextBox
             // 
             resources.ApplyResources(this.SubnetTextBox, "SubnetTextBox");
             this.SubnetTextBox.Name = "SubnetTextBox";
+            this.SubnetTextBox.Tag = "";
             this.SubnetTextBox.TextChanged += new System.EventHandler(this.SomethingChanged);
             // 
             // panelHAEnabledWarning
@@ -254,6 +275,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelBody.SetColumnSpan(this.FixedIPRadioButton, 2);
             this.FixedIPRadioButton.Name = "FixedIPRadioButton";
             this.FixedIPRadioButton.TabStop = true;
+            this.FixedIPRadioButton.Tag = "";
             this.FixedIPRadioButton.UseVisualStyleBackColor = true;
             this.FixedIPRadioButton.CheckedChanged += new System.EventHandler(this.SomethingChanged);
             // 
@@ -263,6 +285,7 @@ namespace XenAdmin.Dialogs
             this.tableLayoutPanelBody.SetColumnSpan(this.DHCPIPRadioButton, 2);
             this.DHCPIPRadioButton.Name = "DHCPIPRadioButton";
             this.DHCPIPRadioButton.TabStop = true;
+            this.DHCPIPRadioButton.Tag = "";
             this.DHCPIPRadioButton.UseVisualStyleBackColor = true;
             this.DHCPIPRadioButton.CheckedChanged += new System.EventHandler(this.SomethingChanged);
             // 
@@ -271,8 +294,29 @@ namespace XenAdmin.Dialogs
             resources.ApplyResources(this.DeleteButton, "DeleteButton");
             this.DeleteButton.Image = global::XenAdmin.Properties.Resources._000_RemoveIPAddress_h32bit_16;
             this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Tag = "";
             this.DeleteButton.UseVisualStyleBackColor = true;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // tableLayoutInfo
+            // 
+            resources.ApplyResources(this.tableLayoutInfo, "tableLayoutInfo");
+            this.tableLayoutPanelBody.SetColumnSpan(this.tableLayoutInfo, 3);
+            this.tableLayoutInfo.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutInfo.Controls.Add(this.labelWarning, 1, 0);
+            this.tableLayoutInfo.Name = "tableLayoutInfo";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::XenAdmin.Properties.Resources._000_Info3_h32bit_16;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelWarning
+            // 
+            resources.ApplyResources(this.labelWarning, "labelWarning");
+            this.labelWarning.Name = "labelWarning";
             // 
             // NetworkingPropertiesPage
             // 
@@ -291,6 +335,9 @@ namespace XenAdmin.Dialogs
             this.panelInUseWarning.ResumeLayout(false);
             this.panelInUseWarning.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InUseWarningIcon)).EndInit();
+            this.tableLayoutInfo.ResumeLayout(false);
+            this.tableLayoutInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -302,7 +349,7 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label RangeEndLabel;
         private System.Windows.Forms.Label IPAddressLabel;
         private System.Windows.Forms.Label GatewayLabel;
-        private System.Windows.Forms.Label SubnetMastLabel;
+        private System.Windows.Forms.Label SubnetMaskLabel;
         internal System.Windows.Forms.ComboBox NetworkComboBox;
         internal System.Windows.Forms.TextBox AlternateDNS1TextBox;
         internal System.Windows.Forms.TextBox PreferredDNSTextBox;
@@ -326,5 +373,8 @@ namespace XenAdmin.Dialogs
         private System.Windows.Forms.Label AlternateDNS2Label;
         internal System.Windows.Forms.TextBox AlternateDNS2TextBox;
         private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutInfo;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelWarning;
     }
 }

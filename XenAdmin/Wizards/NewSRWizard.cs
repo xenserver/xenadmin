@@ -66,6 +66,7 @@ namespace XenAdmin.Wizards
         private readonly CslgLocation xenTabPageCslgLocation;
         private readonly FilerDetails xenTabPageFilerDetails;
         private readonly ChooseSrTypePage xenTabPageChooseSrType;
+        private readonly ChooseSrProvisioningPage xenTabPageChooseSrProv;
         private readonly RBACWarningPage xenTabPageRbacWarning;
         #endregion
 
@@ -114,6 +115,7 @@ namespace XenAdmin.Wizards
             xenTabPageCslgLocation = new CslgLocation();
             xenTabPageFilerDetails = new FilerDetails();
             xenTabPageChooseSrType = new ChooseSrTypePage();
+            xenTabPageChooseSrProv = new ChooseSrProvisioningPage();
             xenTabPageRbacWarning = new RBACWarningPage((srToReattach == null && !disasterRecoveryTask)
                              ? Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_CREATE
                              : Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_ATTACH);
@@ -212,8 +214,9 @@ namespace XenAdmin.Wizards
                     lvmOhbaSrDescriptor.Description = description;
 
                 m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
+                m_srWizardType.IsGfs2 = lvmOhbaSrDescriptor is Gfs2HbaSrDescriptor || lvmOhbaSrDescriptor is Gfs2FcoeSrDescriptor;
                 names.Add(name);
-                name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_LvmoHba 
+                name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_Hba 
                                                         ? Messages.NEWSR_HBA_DEFAULT_NAME
                                                         : Messages.NEWSR_FCOE_DEFAULT_NAME, names);
             }
@@ -241,7 +244,7 @@ namespace XenAdmin.Wizards
                 {
                     return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoFcoe);
                 }
-                if (m_srWizardType is SrWizardType_LvmoHba)
+                if (m_srWizardType is SrWizardType_Hba)
                 {
                     return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoHba);
                 }
@@ -257,7 +260,7 @@ namespace XenAdmin.Wizards
                 return CanShowLVMoHBASummaryPage(xenTabPageLvmoFcoe.SrDescriptors);
             }
 
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_Hba)
             {
                 if (senderPage == xenTabPageLvmoHba)
                 {
@@ -279,12 +282,14 @@ namespace XenAdmin.Wizards
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                     AddPage(xenTabPageVhdoNFS);
-                else if (m_srWizardType is SrWizardType_LvmoIscsi)
+                else if (m_srWizardType is SrWizardType_Iscsi)
                 {
+                    AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoIscsi);
                 }
-                else if (m_srWizardType is SrWizardType_LvmoHba)
+                else if (m_srWizardType is SrWizardType_Hba)
                 {
+                    AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoHba);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
@@ -335,9 +340,9 @@ namespace XenAdmin.Wizards
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                     xenTabPageVhdoNFS.SrWizardType = m_srWizardType;
-                else if (m_srWizardType is SrWizardType_LvmoIscsi)
+                else if (m_srWizardType is SrWizardType_Iscsi)
                     xenTabPageLvmoIscsi.SrWizardType = m_srWizardType;
-                else if (m_srWizardType is SrWizardType_LvmoHba)
+                else if (m_srWizardType is SrWizardType_Hba)
                     xenTabPageLvmoHba.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_Cslg || m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
                     xenTabPageCslg.SrWizardType = m_srWizardType;
@@ -350,6 +355,13 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_Fcoe)
                     xenTabPageLvmoFcoe.SrWizardType = m_srWizardType;
                 #endregion
+            }
+            else if (senderPagetype == typeof(ChooseSrProvisioningPage))
+            {
+                var isGfs2 = xenTabPageChooseSrProv.IsGfs2;
+                xenTabPageLvmoHba.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba;
+                xenTabPageLvmoFcoe.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe;
+                xenTabPageLvmoIscsi.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmoiscsi;
             }
             else if (senderPagetype == typeof(CIFS_ISO))
             {
@@ -368,6 +380,7 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
+                m_srWizardType.IsGfs2 = xenTabPageLvmoIscsi.SrType == SR.SRTypes.gfs2;
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {
@@ -449,7 +462,7 @@ namespace XenAdmin.Wizards
 
         protected override void FinishWizard()
         {
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
             {
                 base.FinishWizard();
                 return;
@@ -533,7 +546,7 @@ namespace XenAdmin.Wizards
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
             using (var dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true})
             {
-                if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+                if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
                 {
                     ActionProgressDialog closureDialog = dialog;
                     // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
@@ -547,7 +560,7 @@ namespace XenAdmin.Wizards
                 dialog.ShowDialog(this);
             }
 
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
             {
                 foreach (var asyncAction in actionList)
                 {
@@ -784,5 +797,6 @@ namespace XenAdmin.Wizards
         {
             xenTabPageChooseSrType.PreselectNewSrWizardType(typeof(SrWizardType_NfsIso));
         }
+
     }
 }
