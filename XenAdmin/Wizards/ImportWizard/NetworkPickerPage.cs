@@ -172,9 +172,13 @@ namespace XenAdmin.Wizards.ImportWizard
         	var networks = m_selectedConnection.Cache.Networks.Where(ShowNetwork);
 
 			foreach (XenAPI.Network network in networks)
+            {
+                if (network.IsSriov() && !m_vm.HasSriovRecommendation())
+                    continue;
                 col.Items.Add(new ToStringWrapper<XenAPI.Network>(network, network.Name()));
+            }
 
-		    col.DisplayMember = ToStringWrapper<XenAPI.Network>.DisplayMember;
+            col.DisplayMember = ToStringWrapper<XenAPI.Network>.DisplayMember;
 		    col.ValueMember = ToStringWrapper<XenAPI.Network>.ValueMember;
             col.Sorted = true;
         }
