@@ -2903,6 +2903,13 @@ namespace XenAPI
             return Rpc<string>("VM.get_reference_label", new JArray(session, _vm ?? ""), serializer);
         }
 
+        public domain_type vm_get_domain_type(string session, string _vm)
+        {
+            var converters = new List<JsonConverter> {new domain_typeConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<domain_type>("VM.get_domain_type", new JArray(session, _vm ?? ""), serializer);
+        }
+
         public void vm_set_name_label(string session, string _vm, string _label)
         {
             var converters = new List<JsonConverter> {};
@@ -3013,13 +3020,6 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             Rpc("VM.set_PV_legacy_args", new JArray(session, _vm ?? "", _legacy_args ?? ""), serializer);
-        }
-
-        public void vm_set_hvm_boot_policy(string session, string _vm, string _boot_policy)
-        {
-            var converters = new List<JsonConverter> {};
-            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
-            Rpc("VM.set_HVM_boot_policy", new JArray(session, _vm ?? "", _boot_policy ?? ""), serializer);
         }
 
         public void vm_set_hvm_boot_params(string session, string _vm, Dictionary<string, string> _boot_params)
@@ -4184,6 +4184,20 @@ namespace XenAPI
             return Rpc<XenRef<Task>>("Async.VM.set_actions_after_crash", new JArray(session, _vm ?? "", _value.StringOf()), serializer);
         }
 
+        public void vm_set_domain_type(string session, string _vm, domain_type _value)
+        {
+            var converters = new List<JsonConverter> {new domain_typeConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VM.set_domain_type", new JArray(session, _vm ?? "", _value.StringOf()), serializer);
+        }
+
+        public void vm_set_hvm_boot_policy(string session, string _vm, string _value)
+        {
+            var converters = new List<JsonConverter> {};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            Rpc("VM.set_HVM_boot_policy", new JArray(session, _vm ?? "", _value ?? ""), serializer);
+        }
+
         public List<XenRef<VM>> vm_get_all(string session)
         {
             var converters = new List<JsonConverter> {new XenRefListConverter<VM>()};
@@ -4315,6 +4329,13 @@ namespace XenAPI
             var converters = new List<JsonConverter> {};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<bool>("VM_metrics.get_nomigrate", new JArray(session, _vm_metrics ?? ""), serializer);
+        }
+
+        public domain_type vm_metrics_get_current_domain_type(string session, string _vm_metrics)
+        {
+            var converters = new List<JsonConverter> {new domain_typeConverter()};
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
+            return Rpc<domain_type>("VM_metrics.get_current_domain_type", new JArray(session, _vm_metrics ?? ""), serializer);
         }
 
         public void vm_metrics_set_other_config(string session, string _vm_metrics, Dictionary<string, string> _other_config)
@@ -13993,21 +14014,21 @@ namespace XenAPI
 
         public Dictionary<string, string> cluster_get_cluster_config(string session, string _cluster)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new StringStringMapConverter()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<string, string>>("Cluster.get_cluster_config", new JArray(session, _cluster ?? ""), serializer);
         }
 
         public Dictionary<string, string> cluster_get_other_config(string session, string _cluster)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new StringStringMapConverter()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<string, string>>("Cluster.get_other_config", new JArray(session, _cluster ?? ""), serializer);
         }
 
         public void cluster_set_other_config(string session, string _cluster, Dictionary<string, string> _other_config)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new StringStringMapConverter()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             Rpc("Cluster.set_other_config", new JArray(session, _cluster ?? "", _other_config == null ? new JObject() : JObject.FromObject(_other_config, serializer)), serializer);
         }
@@ -14182,7 +14203,7 @@ namespace XenAPI
 
         public Dictionary<string, string> cluster_host_get_other_config(string session, string _cluster_host)
         {
-            var converters = new List<JsonConverter> {};
+            var converters = new List<JsonConverter> {new StringStringMapConverter()};
             var serializer = JsonSerializer.Create(new JsonSerializerSettings {Converters = converters});
             return Rpc<Dictionary<string, string>>("Cluster_host.get_other_config", new JArray(session, _cluster_host ?? ""), serializer);
         }
