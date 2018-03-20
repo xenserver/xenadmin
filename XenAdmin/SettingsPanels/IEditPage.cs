@@ -31,14 +31,13 @@
 
 using System;
 using XenAdmin.Actions;
-using System.Drawing;
 using XenAdmin.Controls;
 using XenAPI;
-using System.ComponentModel;
+
 
 namespace XenAdmin.SettingsPanels
 {
-    public interface IEditPage : VerticalTabs.VerticalTab
+    public interface IEditPage : VerticalTabs.IVerticalTab
     {
         /** Each page's SaveSettings() can do two things:
          *    1) Edit the cloned XenObject (which is a clone of the one in the cache)
