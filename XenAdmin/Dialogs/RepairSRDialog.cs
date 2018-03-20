@@ -72,6 +72,7 @@ namespace XenAdmin.Dialogs
         /// Initializes a new instance of the <see cref="RepairSRDialog"/> class.
         /// </summary>
         /// <param name="sr">The SR to be repaired.</param>
+        /// <param name="runAction"></param>
         public RepairSRDialog(SR sr, bool runAction = true)
             : this(new SR[] { sr }, runAction)
         {}
@@ -80,6 +81,7 @@ namespace XenAdmin.Dialogs
         /// Initializes a new instance of the <see cref="RepairSRDialog"/> class.
         /// </summary>
         /// <param name="srs">The SRs to be repaired.</param>
+        /// <param name="runAction"></param>
         public RepairSRDialog(IEnumerable<SR> srs, bool runAction = true)
         {
             Util.ThrowIfEnumerableParameterNullOrEmpty(srs, "srs");

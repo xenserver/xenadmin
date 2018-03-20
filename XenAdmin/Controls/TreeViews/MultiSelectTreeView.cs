@@ -1170,7 +1170,7 @@ namespace XenAdmin.Controls
 
             public struct TVITEM
             {
-#pragma warning disable 0649
+#pragma warning disable 0649, 414, 169
                 public int mask;
                 public IntPtr hItem;
                 public int state;
@@ -1182,7 +1182,7 @@ namespace XenAdmin.Controls
                 public int iSelectedImage;
                 public int cChildren;
                 public IntPtr lParam;
-#pragma warning restore 0649
+#pragma warning restore 0649, 414, 169
             }
         }
 

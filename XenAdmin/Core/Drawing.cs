@@ -291,8 +291,7 @@ namespace XenAdmin.Core
         public enum SimpleProgressBarColor { Green, Red, Blue };
 
         /// <summary>
-        /// Draws a simple progress bar (just the chunks with a grey 1 pixel border). Changes the color to
-        /// red if the <see cref="changeColor"/> value is greater than the changeColorProgress value. 
+        /// Draws a simple progress bar (just the chunks with a grey 1 pixel border).
         /// </summary>
         /// <param name="g">The device context used for drawing.</param>
         /// <param name="r">The rectangle that specifies where it should be drawn.</param>

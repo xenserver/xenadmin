@@ -68,7 +68,7 @@ namespace XenAdmin.Commands.Controls
         /// </summary>
         /// <param name="TitleMessage">The title of the dialog</param>
         /// <param name="MainMessage">A message informing the user what they are doing (e.g. You are about to delete multiple VDIs)</param>
-        /// <param name="AcceptButtonLabel">The keyword from your instruction message for the accept button (e.g. &Proceed)</param>
+        /// <param name="AcceptButtonLabel">The keyword from your instruction message for the accept button (e.g. Proceed)</param>
         public MultipleWarningDialog(string TitleMessage, string MainMessage, string AcceptButtonLabel) 
             : this (TitleMessage, MainMessage)
         {
