@@ -56,9 +56,31 @@ namespace XenAdmin.Actions
             // Create the new network            
             XenRef<XenAPI.Network> networkRef = XenAPI.Network.create(Session, newNetwork);
 
+            PIF pifOnMaster =null;
             foreach (PIF thePif in selectedPifs)
             {
-                Network_sriov.async_create(Session, thePif.opaque_ref, networkRef);
+                Host host = thePif.Connection.Resolve<XenAPI.Host>(thePif.host);
+                if (host == null)
+                    continue;
+
+                if (host.IsMaster())
+                {
+                    pifOnMaster = thePif;
+                    break;
+                }
+            }
+
+            Connection.ExpectDisruption = true;
+
+            // Enable SR-IOV network on Pool Master
+            RelatedTask = Network_sriov.async_create(Session, pifOnMaster.opaque_ref, networkRef);
+            PollToCompletion(0, 100);
+
+            // Enable SR-IOV network on Pool Slaves
+            selectedPifs.Remove(pifOnMaster);
+            foreach (PIF thePif in selectedPifs)
+            {
+                Network_sriov.create(Session, thePif.opaque_ref, networkRef);
             }
         }
     }
