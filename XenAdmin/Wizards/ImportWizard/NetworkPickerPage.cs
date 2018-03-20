@@ -173,8 +173,6 @@ namespace XenAdmin.Wizards.ImportWizard
 
 			foreach (XenAPI.Network network in networks)
             {
-                if (network.IsSriov() && !m_vm.HasSriovRecommendation())
-                    continue;
                 col.Items.Add(new ToStringWrapper<XenAPI.Network>(network, network.Name()));
             }
 
@@ -271,7 +269,10 @@ namespace XenAdmin.Wizards.ImportWizard
 			if (m_selectedAffinity == null && !network.AllHostsCanSeeNetwork())
 				return false;
 
-			return true;
+            if (network.IsSriov() && !m_vm.HasSriovRecommendation())
+                return false;
+
+            return true;
 		}
 
 		private void AddVIFRow(VIF vif)

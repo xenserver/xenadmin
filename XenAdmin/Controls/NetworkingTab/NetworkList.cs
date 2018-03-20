@@ -952,17 +952,20 @@ namespace XenAdmin.Controls.NetworkingTab
                 MacCell.Value = Pif != null && Pif.IsPhysical() ? Pif.MAC : Messages.SPACED_HYPHEN;
                 MtuCell.Value = Network.CanUseJumboFrames() ? Network.MTU.ToString() : Messages.SPACED_HYPHEN;
 
-                PIF nic = Pif;
-                if(Pif != null && Pif.VLAN != -1)
+                var networkSriov = Pif != null ? Pif.NetworkSriov() : null;
+                if(networkSriov == null)
                 {
-                    VLAN vlan = Pif.Connection.Resolve(Pif.VLAN_master_of);
-                    nic = vlan != null ? vlan.Connection.Resolve(vlan.tagged_PIF) : null;
+                    SriovCell.Value = Messages.NO;
                 }
-
-                SriovCell.Value = nic == null || !nic.IsSriovLogicalPIF()
-                  ? Messages.NO : nic.Connection.Resolve(nic.sriov_logical_PIF_of[0]).requires_reboot
-                                  ? Messages.HOST_NEEDS_REBOOT_ENABLE_SRIOV : Messages.YES;
-
+                else
+                {
+                    var sriov = Pif.Connection.Resolve(networkSriov);
+                    SriovCell.Value = sriov == null
+                        ? Messages.NO
+                        : sriov.requires_reboot
+                            ? Messages.HOST_NEEDS_REBOOT_ENABLE_SRIOV
+                            : Messages.YES;
+                }
             }
 
             public void DeregisterEvents()
