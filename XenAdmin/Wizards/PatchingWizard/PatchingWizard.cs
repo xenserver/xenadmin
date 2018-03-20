@@ -289,7 +289,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<AsyncAction> GetRemoveVdiActions()
         {
-            return GetRemoveVdiActions(PatchingWizard_UploadPage.AllCreatedSuppPackVdis); ;
+            return GetRemoveVdiActions(PatchingWizard_UploadPage.AllCreatedSuppPackVdis);
         }
 
         private void RunMultipleActions(string title, string startDescription, string endDescription,

@@ -270,9 +270,6 @@ namespace XenAdmin.Commands
         /// on each host. If the start failed due to HA_OPERATION_WOULD_BREAK_FAILOVER_PLAN, offers to decrement ntol and try the operation
         /// again.
         /// </summary>
-        /// <param name="vm"></param>
-        /// <param name="f"></param>
-        /// <param name="kind">The kind of the operation that failed. Must be one of Start/StartOn/Resume/ResumeOn.</param>
         public static void StartDiagnosisForm(VMStartAbstractAction VMStartAction , Failure failure)
         {
 

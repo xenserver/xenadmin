@@ -249,7 +249,7 @@ namespace XenAdmin.Controls.Wlb
         /// <summary>
         /// Triggered when pool wlb enabled/disabled and optimize pool
         /// </summary>
-        /// <param name="sender">XenObject<Pool></param>
+        /// <param name="sender">XenObject&lt;Pool&gt;</param>
         /// <param name="e">PropertyChangedEventArgs</param>
         private void Pool_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -299,7 +299,7 @@ namespace XenAdmin.Controls.Wlb
         /// <summary>
         /// respond to host name change and vms leaving/joining the host.
         /// </summary>
-        /// <param name="sender">XenObject<Host></param>
+        /// <param name="sender">XenObject&lt;Host&gt;</param>
         /// <param name="e">PropertyChangedEventArgs</param>      
         private void Host_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -333,8 +333,8 @@ namespace XenAdmin.Controls.Wlb
         /// Check whether Host property change relates to optimize pool list view. Will return true if the host is on the list view.
         /// Must be called on the event thread.
         /// </summary>
-        /// <param name="host">XenObject<Host></param>
-        /// <param name="checkVMHost">Whether check VM host</param>
+        /// <param name="host">XenObject&lt;Host&gt;</param>
+        /// <param name="checkVMHost">Whether to check VM host</param>
         /// <returns>True if host is on the optimize pool list view, else return false</returns>
         private bool IsHostOnListView(Host host, bool checkVMHost)
         {
@@ -401,7 +401,7 @@ namespace XenAdmin.Controls.Wlb
         /// <summary>
         /// Triggered when vm state is changed
         /// </summary>
-        /// <param name="sender">XenObject<VM></param>
+        /// <param name="sender">XenObject&lt;VM&gt;</param>
         /// <param name="e">PropertyChangedEventArgs</param>
         private void VM_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -429,8 +429,8 @@ namespace XenAdmin.Controls.Wlb
         /// Finds the ListViewItem for the given VM. Will return null if no corresponding item could be found.
         /// Must be called on the event thread.
         /// </summary>
-        /// <param name="vm">XenObject<VM></param>
-        /// <returns>Return when found listview item, null if nothing is found</returns>
+        /// <param name="vm">XenObject&lt;VM&gt;</param>
+        /// <returns>Return the listview item when found, null if nothing is found</returns>
         private ListViewItem FindItemFromVM(VM vm)
         {
             Program.AssertOnEventThread();
@@ -628,8 +628,6 @@ namespace XenAdmin.Controls.Wlb
         /// Retrieve wlb optimize pool recommendation action complete handler. 
         /// Populate optimize pool listview and enable controls properly.
         /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">e</param>
         protected void OptRecRetrieveAction_Completed(ActionBase sender)
         {
             AsyncAction action = (AsyncAction)sender;
@@ -792,7 +790,6 @@ namespace XenAdmin.Controls.Wlb
         /// <summary>
         /// Enable optimize pool controls properly
         /// </summary>
-        /// <param name="enable">enable controls if it's true, otherwise it's false </param>
         private void EnableControls(bool enableLabel, bool enableButton)
         {
             // Rules for enabling the button:

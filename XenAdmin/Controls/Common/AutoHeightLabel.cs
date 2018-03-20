@@ -36,7 +36,7 @@ using System.Windows.Forms;
 namespace XenAdmin.Controls.Common
 {
     /// <summary>
-    /// A label which automatically changes its height to accomodate its <see cref="Text"/> when in AutoSize mode. This is useful 
+    /// A label which automatically changes its height to accomodate its <see cref="Label.Text"/> when in AutoSize mode. This is useful 
     /// as it enables a multi-line label to be put in a <see cref="TableLayoutPanel"/> - the table can then be made to vertically shrink/grow 
     /// depending on the label text. 
     /// </summary>

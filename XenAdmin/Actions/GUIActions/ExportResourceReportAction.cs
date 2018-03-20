@@ -66,10 +66,8 @@ namespace XenAdmin.Actions
         enum FILE_TYPE_INDEX { XLS = 1, CSV = 2 };
         
         /// <summary> 
-        /// used for generate resource report
+        /// Used for generating resource reports
         /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="filename"></param>
         public ExportResourceReportAction(IXenConnection connection, string filename, int fileType)
             : base(connection, string.Format(Messages.ACTION_EXPORT_POOL_RESOURCE_LIST_FROM_X, Helpers.GetName(connection)),
             Messages.ACTION_EXPORT_DESCRIPTION_PREPARING)

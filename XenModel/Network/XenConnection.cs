@@ -727,6 +727,7 @@ namespace XenAdmin.Network
         }
 
         /// <param name="resetState">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
+        /// <param name="exiting"></param>
         public void EndConnect(bool resetState, bool exiting = false)
         {
             ConnectTask t = connectTask;
@@ -740,6 +741,7 @@ namespace XenAdmin.Network
         /// </summary>
         /// <param name="clearCache">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
         /// <param name="task"></param>
+        /// <param name="exiting"></param>
         private void EndConnect(bool clearCache, ConnectTask task, bool exiting)
         {
             OnBeforeConnectionEnd();
@@ -791,6 +793,7 @@ namespace XenAdmin.Network
         /// Otherwise the logging out operation can be terminated when other foreground threads finish.
         /// </summary>
         /// <param name="session">May be null, in which case nothing happens.</param>
+        /// <param name="exiting"></param>
         public void Logout(Session session, bool exiting = false)
         {
             if (session == null || session.opaque_ref == null)

@@ -61,7 +61,7 @@ namespace XenAdmin.Diagnostics.Problems.VMProblem
 
         public override string HelpMessage
         {
-            get { return Messages.SUSPEND_VM; ; }
+            get { return Messages.SUSPEND_VM; }
         }
     }
 }
