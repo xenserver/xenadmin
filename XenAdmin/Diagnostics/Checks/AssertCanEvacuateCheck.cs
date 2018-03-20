@@ -213,6 +213,9 @@ namespace XenAdmin.Diagnostics.Checks
 
                         return new VMCannotSeeNetwork(this, vm, network);
 
+                    case Failure.VM_REQUIRES_GPU:
+                        return new CannotMigrateVM(this, vm, CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoGpu);
+                        
                     case Failure.VM_HAS_VGPU:
                         return new VmHasVgpu(this, vm);
 

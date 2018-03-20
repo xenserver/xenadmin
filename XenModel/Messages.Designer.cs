@@ -34220,6 +34220,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has a virtual GPU attached and there is no suitable GPU available on other servers..
+        /// </summary>
+        public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it doesn&apos;t have up-to-date drivers installed..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS {
@@ -36008,7 +36017,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM.
+        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM..
         /// </summary>
         public static string VIF_HOTPLUG_FAILED_MESSAGE {
             get {

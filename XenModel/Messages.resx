@@ -11806,6 +11806,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
   </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has a virtual GPU attached and there is no suitable GPU available on other servers.</value>
+  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>
   </data>

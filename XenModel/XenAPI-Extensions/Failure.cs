@@ -58,6 +58,7 @@ namespace XenAPI
         public const string VM_BAD_POWER_STATE = "VM_BAD_POWER_STATE";
         public const string VM_REQUIRES_SR = "VM_REQUIRES_SR";
         public const string VM_REQUIRES_NETWORK = "VM_REQUIRES_NETWORK";
+        public const string VM_REQUIRES_GPU = "VM_REQUIRES_GPU";
         public const string VM_MISSING_PV_DRIVERS = "VM_MISSING_PV_DRIVERS";
         public const string HOST_NOT_ENOUGH_FREE_MEMORY = "HOST_NOT_ENOUGH_FREE_MEMORY";
         public const string SR_BACKEND_FAILURE_72 = "SR_BACKEND_FAILURE_72";
