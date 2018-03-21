@@ -82,6 +82,7 @@ namespace XenAPI
         public const string POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS = "POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS";
         public const string HOST_UNKNOWN_TO_MASTER = "HOST_UNKNOWN_TO_MASTER";
         public const string VM_HAS_VGPU = "VM_HAS_VGPU";
+        public const string VM_HAS_PCI_ATTACHED = "VM_HAS_PCI_ATTACHED";
         public const string OUT_OF_SPACE = "OUT_OF_SPACE";
         public const string PVS_SITE_CONTAINS_RUNNING_PROXIES = "PVS_SITE_CONTAINS_RUNNING_PROXIES";
         public const string VM_LACKS_FEATURE = "VM_LACKS_FEATURE";
