@@ -289,13 +289,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<AsyncAction> GetRemoveVdiActions()
         {
-            return GetRemoveVdiActions(PatchingWizard_UploadPage.AllCreatedSuppPackVdis); ;
+            return GetRemoveVdiActions(PatchingWizard_UploadPage.AllCreatedSuppPackVdis);
         }
 
         private void RunMultipleActions(string title, string startDescription, string endDescription,
             List<AsyncAction> subActions)
         {
-            if (subActions.Count > 0)
+            if (subActions != null && subActions.Count > 0)
             {
                 using (MultipleAction multipleAction = new MultipleAction(xenConnection, title, startDescription,
                                                                           endDescription, subActions, false, true))
