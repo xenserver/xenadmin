@@ -38,13 +38,13 @@ namespace XenAdmin.TabPages
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhysicalStoragePage));
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.listViewSrs = new XenAdmin.Controls.ListViewEx();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((XenAdmin.Controls.ColumnHeaderEx)(new XenAdmin.Controls.ColumnHeaderEx()));
+            this.columnHeader2 = ((XenAdmin.Controls.ColumnHeaderEx)(new XenAdmin.Controls.ColumnHeaderEx()));
+            this.columnHeader3 = ((XenAdmin.Controls.ColumnHeaderEx)(new XenAdmin.Controls.ColumnHeaderEx()));
+            this.columnHeader4 = ((XenAdmin.Controls.ColumnHeaderEx)(new XenAdmin.Controls.ColumnHeaderEx()));
+            this.columnHeader5 = ((XenAdmin.Controls.ColumnHeaderEx)(new XenAdmin.Controls.ColumnHeaderEx()));
+            this.columnHeader6 = ((XenAdmin.Controls.ColumnHeaderEx)(new XenAdmin.Controls.ColumnHeaderEx()));
+            this.columnHeader7 = ((XenAdmin.Controls.ColumnHeaderEx)(new XenAdmin.Controls.ColumnHeaderEx()));
             this.labelNetworkheadings = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -94,30 +94,37 @@ namespace XenAdmin.TabPages
             // 
             // columnHeader1
             // 
+            this.columnHeader1.MinimalWidth = 80;
             resources.ApplyResources(this.columnHeader1, "columnHeader1");
             // 
             // columnHeader2
             // 
+            this.columnHeader2.MinimalWidth = 90;
             resources.ApplyResources(this.columnHeader2, "columnHeader2");
             // 
             // columnHeader3
             // 
+            this.columnHeader3.MinimalWidth = 40;
             resources.ApplyResources(this.columnHeader3, "columnHeader3");
             // 
             // columnHeader4
             // 
+            this.columnHeader4.MinimalWidth = 30;
             resources.ApplyResources(this.columnHeader4, "columnHeader4");
             // 
             // columnHeader5
             // 
+            this.columnHeader5.MinimalWidth = 60;
             resources.ApplyResources(this.columnHeader5, "columnHeader5");
             // 
             // columnHeader6
             // 
+            this.columnHeader6.MinimalWidth = 30;
             resources.ApplyResources(this.columnHeader6, "columnHeader6");
             // 
             // columnHeader7
             // 
+            this.columnHeader7.MinimalWidth = 60;
             resources.ApplyResources(this.columnHeader7, "columnHeader7");
             // 
             // labelNetworkheadings
@@ -203,13 +210,6 @@ namespace XenAdmin.TabPages
         private System.Windows.Forms.Label TitleLabel;
         private XenAdmin.Controls.ListViewEx listViewSrs;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Label labelNetworkheadings;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonProperties;
@@ -218,5 +218,12 @@ namespace XenAdmin.TabPages
         private XenAdmin.Commands.CommandButton trimButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private Controls.ToolTipContainer trimButtonContainer;
+        private Controls.ColumnHeaderEx columnHeader1;
+        private Controls.ColumnHeaderEx columnHeader2;
+        private Controls.ColumnHeaderEx columnHeader3;
+        private Controls.ColumnHeaderEx columnHeader4;
+        private Controls.ColumnHeaderEx columnHeader5;
+        private Controls.ColumnHeaderEx columnHeader6;
+        private Controls.ColumnHeaderEx columnHeader7;
     }
 }
