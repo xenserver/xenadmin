@@ -83,5 +83,10 @@ namespace XenAdmin.Actions
                 Network_sriov.create(Session, thePif.opaque_ref, networkRef);
             }
         }
+
+        protected override void Clean()
+        {
+            Connection.ExpectDisruption = false;
+        }
     }
 }
