@@ -64,7 +64,8 @@ namespace XenAPI
             Dictionary<string, string> other_config,
             bool hvm,
             bool nested_virt,
-            bool nomigrate)
+            bool nomigrate,
+            domain_type current_domain_type)
         {
             this.uuid = uuid;
             this.memory_actual = memory_actual;
@@ -81,6 +82,7 @@ namespace XenAPI
             this.hvm = hvm;
             this.nested_virt = nested_virt;
             this.nomigrate = nomigrate;
+            this.current_domain_type = current_domain_type;
         }
 
         /// <summary>
@@ -113,13 +115,14 @@ namespace XenAPI
             hvm = update.hvm;
             nested_virt = update.nested_virt;
             nomigrate = update.nomigrate;
+            current_domain_type = update.current_domain_type;
         }
 
         internal void UpdateFromProxy(Proxy_VM_metrics proxy)
         {
-            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
-            memory_actual = proxy.memory_actual == null ? 0 : long.Parse((string)proxy.memory_actual);
-            VCPUs_number = proxy.VCPUs_number == null ? 0 : long.Parse((string)proxy.VCPUs_number);
+            uuid = proxy.uuid == null ? null : proxy.uuid;
+            memory_actual = proxy.memory_actual == null ? 0 : long.Parse(proxy.memory_actual);
+            VCPUs_number = proxy.VCPUs_number == null ? 0 : long.Parse(proxy.VCPUs_number);
             VCPUs_utilisation = proxy.VCPUs_utilisation == null ? null : Maps.convert_from_proxy_long_double(proxy.VCPUs_utilisation);
             VCPUs_CPU = proxy.VCPUs_CPU == null ? null : Maps.convert_from_proxy_long_long(proxy.VCPUs_CPU);
             VCPUs_params = proxy.VCPUs_params == null ? null : Maps.convert_from_proxy_string_string(proxy.VCPUs_params);
@@ -132,6 +135,7 @@ namespace XenAPI
             hvm = (bool)proxy.hvm;
             nested_virt = (bool)proxy.nested_virt;
             nomigrate = (bool)proxy.nomigrate;
+            current_domain_type = proxy.current_domain_type == null ? (domain_type) 0 : (domain_type)Helper.EnumParseDefault(typeof(domain_type), (string)proxy.current_domain_type);
         }
 
         public Proxy_VM_metrics ToProxy()
@@ -152,6 +156,7 @@ namespace XenAPI
             result_.hvm = hvm;
             result_.nested_virt = nested_virt;
             result_.nomigrate = nomigrate;
+            result_.current_domain_type = domain_type_helper.ToString(current_domain_type);
             return result_;
         }
 
@@ -204,6 +209,8 @@ namespace XenAPI
                 nested_virt = Marshalling.ParseBool(table, "nested_virt");
             if (table.ContainsKey("nomigrate"))
                 nomigrate = Marshalling.ParseBool(table, "nomigrate");
+            if (table.ContainsKey("current_domain_type"))
+                current_domain_type = (domain_type)Helper.EnumParseDefault(typeof(domain_type), Marshalling.ParseString(table, "current_domain_type"));
         }
 
         public bool DeepEquals(VM_metrics other)
@@ -227,7 +234,8 @@ namespace XenAPI
                 Helper.AreEqual2(this._other_config, other._other_config) &&
                 Helper.AreEqual2(this._hvm, other._hvm) &&
                 Helper.AreEqual2(this._nested_virt, other._nested_virt) &&
-                Helper.AreEqual2(this._nomigrate, other._nomigrate);
+                Helper.AreEqual2(this._nomigrate, other._nomigrate) &&
+                Helper.AreEqual2(this._current_domain_type, other._current_domain_type);
         }
 
         internal static List<VM_metrics> ProxyArrayToObjectList(Proxy_VM_metrics[] input)
@@ -295,7 +303,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vm_metrics_get_uuid(session.opaque_ref, _vm_metrics);
             else
-                return (string)session.proxy.vm_metrics_get_uuid(session.opaque_ref, _vm_metrics ?? "").parse();
+                return session.proxy.vm_metrics_get_uuid(session.opaque_ref, _vm_metrics ?? "").parse();
         }
 
         /// <summary>
@@ -309,7 +317,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vm_metrics_get_memory_actual(session.opaque_ref, _vm_metrics);
             else
-                return long.Parse((string)session.proxy.vm_metrics_get_memory_actual(session.opaque_ref, _vm_metrics ?? "").parse());
+                return long.Parse(session.proxy.vm_metrics_get_memory_actual(session.opaque_ref, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -323,7 +331,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.vm_metrics_get_vcpus_number(session.opaque_ref, _vm_metrics);
             else
-                return long.Parse((string)session.proxy.vm_metrics_get_vcpus_number(session.opaque_ref, _vm_metrics ?? "").parse());
+                return long.Parse(session.proxy.vm_metrics_get_vcpus_number(session.opaque_ref, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -492,6 +500,20 @@ namespace XenAPI
                 return session.JsonRpcClient.vm_metrics_get_nomigrate(session.opaque_ref, _vm_metrics);
             else
                 return (bool)session.proxy.vm_metrics_get_nomigrate(session.opaque_ref, _vm_metrics ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the current_domain_type field of the given VM_metrics.
+        /// First published in XenServer 7.4.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_vm_metrics">The opaque_ref of the given vm_metrics</param>
+        public static domain_type get_current_domain_type(Session session, string _vm_metrics)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.vm_metrics_get_current_domain_type(session.opaque_ref, _vm_metrics);
+            else
+                return (domain_type)Helper.EnumParseDefault(typeof(domain_type), (string)session.proxy.vm_metrics_get_current_domain_type(session.opaque_ref, _vm_metrics ?? "").parse());
         }
 
         /// <summary>
@@ -844,5 +866,25 @@ namespace XenAPI
             }
         }
         private bool _nomigrate = false;
+
+        /// <summary>
+        /// The current domain type of the VM (for running,suspended, or paused VMs). The last-known domain type for halted VMs.
+        /// First published in XenServer 7.4.
+        /// </summary>
+        [JsonConverter(typeof(domain_typeConverter))]
+        public virtual domain_type current_domain_type
+        {
+            get { return _current_domain_type; }
+            set
+            {
+                if (!Helper.AreEqual(value, _current_domain_type))
+                {
+                    _current_domain_type = value;
+                    Changed = true;
+                    NotifyPropertyChanged("current_domain_type");
+                }
+            }
+        }
+        private domain_type _current_domain_type = domain_type.unspecified;
     }
 }

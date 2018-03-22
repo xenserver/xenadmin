@@ -114,7 +114,7 @@ namespace XenAPI
 
     internal abstract class JsonResponse<T>
     {
-        [JsonProperty("id", Required = Required.AllowNull )] public int Id =  0;
+        [JsonProperty("id", Required = Required.AllowNull)] public int Id = 0;
 
         [JsonProperty("result", Required = Required.Default)] public T Result = default(T);
 
@@ -126,7 +126,7 @@ namespace XenAPI
 
     internal class JsonResponseV1<T> : JsonResponse<T>
     {
-        [JsonProperty("error", Required = Required.AllowNull)] public object Error = null;
+        [JsonProperty("error", Required = Required.AllowNull)] public JToken Error = null;
     }
 
     internal class JsonResponseV2<T> : JsonResponse<T>
@@ -211,8 +211,9 @@ namespace XenAPI
             // for performance reasons it's preferable to deserialize directly
             // from the Stream rather than allocating strings inbetween
             // therefore the latter will be done only in DEBUG mode
+
 #if DEBUG
-            var settings = new JsonSerializerSettings {Formatting = Formatting.Indented, Converters = serializer.Converters};
+            var settings = CreateSettings(serializer.Converters);
 #endif
 
             using (var str = webRequest.GetRequestStream())
@@ -267,12 +268,35 @@ namespace XenAPI
                                 var res1 = (JsonResponseV1<T>)serializer.Deserialize(responseReader, typeof(JsonResponseV1<T>));
 #endif
                                 if (res1.Error != null)
-                                    throw new Failure(res1.Error as string[]);
+                                {
+                                    var errorArray = res1.Error.ToObject<string[]>();
+                                    if (errorArray != null)
+                                        throw new Failure(errorArray);
+                                }
                                 return res1.Result;
                         }
                     }
                 }
             }
+        }
+
+        private JsonSerializerSettings CreateSettings(IList<JsonConverter> converters)
+        {
+            return new JsonSerializerSettings
+            {
+#if DEBUG
+                Formatting = Formatting.Indented,
+#endif
+                Converters = converters,
+                DateParseHandling = DateParseHandling.None,
+                NullValueHandling = NullValueHandling.Ignore
+            };
+        }
+
+        private JsonSerializer CreateSerializer(IList<JsonConverter> converters)
+        {
+            var settings = CreateSettings(converters);
+            return JsonSerializer.Create(settings);
         }
     }
 }

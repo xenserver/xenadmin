@@ -34,15 +34,15 @@ using Newtonsoft.Json;
 
 namespace XenAPI
 {
-    [JsonConverter(typeof(cluster_host_operationConverter))]
-    public enum cluster_host_operation
+    [JsonConverter(typeof(sr_healthConverter))]
+    public enum sr_health
     {
-        enable, disable, destroy, unknown
+        healthy, recovering, unknown
     }
 
-    public static class cluster_host_operation_helper
+    public static class sr_health_helper
     {
-        public static string ToString(cluster_host_operation x)
+        public static string ToString(sr_health x)
         {
             return x.StringOf();
         }
@@ -50,27 +50,25 @@ namespace XenAPI
 
     public static partial class EnumExt
     {
-        public static string StringOf(this cluster_host_operation x)
+        public static string StringOf(this sr_health x)
         {
             switch (x)
             {
-                case cluster_host_operation.enable:
-                    return "enable";
-                case cluster_host_operation.disable:
-                    return "disable";
-                case cluster_host_operation.destroy:
-                    return "destroy";
+                case sr_health.healthy:
+                    return "healthy";
+                case sr_health.recovering:
+                    return "recovering";
                 default:
                     return "unknown";
             }
         }
     }
 
-    internal class cluster_host_operationConverter : XenEnumConverter
+    internal class sr_healthConverter : XenEnumConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((cluster_host_operation)value).StringOf());
+            writer.WriteValue(((sr_health)value).StringOf());
         }
     }
 }
