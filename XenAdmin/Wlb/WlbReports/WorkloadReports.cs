@@ -990,17 +990,6 @@ namespace XenAdmin
 
 
         /// <summary>
-        /// Event handler for when the back button is clicked inside the reportviewer control
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void wlbReportView1_ReportBack(object sender, BackEventArgs e)
-        {
-            //SynchTreeViewReportList();
-        }
-
-
-        /// <summary>
         /// Event handler for report close button
         /// </summary>
         /// <param name="sender"></param>
