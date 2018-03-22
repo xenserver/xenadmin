@@ -44,7 +44,7 @@ namespace XenAdmin.Controls
 {
     /// <summary>
     /// A flicker-free ListBox for SRs. 
-    /// Add to this control ToStringWrapper<SR.SRInfo>s, which will
+    /// Add to this control ToStringWrapper&lt;SR.SRInfo&gt;s, which will
     /// be drawn 'UUID (size)' or will be drawn gray and unselectable.
     /// </summary>
     public class SRListBox : FlickerFreeListBox

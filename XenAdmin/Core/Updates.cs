@@ -936,5 +936,38 @@ namespace XenAdmin.Core
                 CheckForUpdates(true);
             });
         }
+
+        private static XenServerPatchAlert FindPatchAlert(Predicate<XenServerPatch> predicate)
+        {
+            var existingAlert = FindUpdate(a => a is XenServerPatchAlert && predicate(((XenServerPatchAlert)a).Patch));
+            if (existingAlert != null)
+                return existingAlert as XenServerPatchAlert;
+
+            if (XenServerPatches.Count == 0)
+                return null;
+
+            var xenServerPatch = XenServerPatches.FirstOrDefault(p => predicate(p));
+            if (xenServerPatch == null)
+                return null;
+
+            var newServerVersion = XenServerVersions.FirstOrDefault(v => v.IsVersionAvailableAsAnUpdate &&
+                    v.PatchUuid.Equals(xenServerPatch.Uuid, StringComparison.OrdinalIgnoreCase));
+
+            return new XenServerPatchAlert(xenServerPatch, newServerVersion);
+        }
+
+        public static XenServerPatchAlert FindPatchAlertByUuid(string uuid)
+        {
+            if (string.IsNullOrEmpty(uuid))
+                return null;
+            return FindPatchAlert(p => p.Uuid.Equals(uuid, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public static XenServerPatchAlert FindPatchAlertByName(string patchName)
+        {
+            if (string.IsNullOrEmpty(patchName))
+                return null;
+            return FindPatchAlert(p => p.Name.Equals(patchName, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }

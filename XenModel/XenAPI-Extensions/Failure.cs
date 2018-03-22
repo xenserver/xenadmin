@@ -86,6 +86,7 @@ namespace XenAPI
         public const string PVS_SITE_CONTAINS_RUNNING_PROXIES = "PVS_SITE_CONTAINS_RUNNING_PROXIES";
         public const string VM_LACKS_FEATURE = "VM_LACKS_FEATURE";
         public const string VM_LACKS_FEATURE_SUSPEND = "VM_LACKS_FEATURE_SUSPEND";
+        public const string VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT = "VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

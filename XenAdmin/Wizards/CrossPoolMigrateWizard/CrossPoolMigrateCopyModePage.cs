@@ -75,9 +75,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return false;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);//call first so the page gets populated
             var crossPoolRestricted = Helpers.FeatureForbidden(Connection, Host.RestrictCrossPoolMigrate);
             warningsTable.Visible = crossPoolRestricted;
             crossPoolRadioButton.Enabled = crossPoolDescriptionLabel.Enabled = !crossPoolRestricted;
@@ -100,15 +99,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return _buttonNextEnabled;
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (!CrossPoolMigrateWizard.AllVMsAvailable(selectedVMs))
             {
                 cancel = true;
                 SetButtonsEnabled(false);
             }
-
-            base.PageLeave(direction, ref cancel);
         }
         #endregion
 

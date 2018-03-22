@@ -199,6 +199,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     PatchingWizard_PatchingPage.Patch = PatchingWizard_UploadPage.Patch;
                 }
                 PatchingWizard_PrecheckPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
+                PatchingWizard_PrecheckPage.SrUploadedUpdates = PatchingWizard_UploadPage.SrUploadedUpdates;
                 PatchingWizard_PatchingPage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_ModePage.PoolUpdate = PatchingWizard_UploadPage.PoolUpdate;
                 PatchingWizard_PatchingPage.SuppPackVdis = PatchingWizard_UploadPage.SuppPackVdis;
@@ -248,7 +249,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<AsyncAction> GetRemovePatchActions(List<Pool_patch> patchesToRemove)
         {
-            if (patchesToRemove == null)
+            if (patchesToRemove == null || patchesToRemove.Count == 0)
                 return null;
 
             List<AsyncAction> list = new List<AsyncAction>();
@@ -276,7 +277,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<AsyncAction> GetRemoveVdiActions(List<VDI> vdisToRemove)
         {
-            if (vdisToRemove == null)
+            if (vdisToRemove == null || vdisToRemove.Count == 0)
                 return null;
 
             var list = (from vdi in vdisToRemove
@@ -288,13 +289,13 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private List<AsyncAction> GetRemoveVdiActions()
         {
-            return GetRemoveVdiActions(PatchingWizard_UploadPage.AllCreatedSuppPackVdis); ;
+            return GetRemoveVdiActions(PatchingWizard_UploadPage.AllCreatedSuppPackVdis);
         }
 
         private void RunMultipleActions(string title, string startDescription, string endDescription,
             List<AsyncAction> subActions)
         {
-            if (subActions.Count > 0)
+            if (subActions != null && subActions.Count > 0)
             {
                 using (MultipleAction multipleAction = new MultipleAction(xenConnection, title, startDescription,
                                                                           endDescription, subActions, false, true))

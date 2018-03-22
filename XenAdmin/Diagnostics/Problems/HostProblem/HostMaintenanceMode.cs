@@ -64,7 +64,7 @@ namespace XenAdmin.Diagnostics.Problems.HostProblem
         public override AsyncAction UnwindChanges()
         {
             Program.MainWindow.CloseActiveWizards(Server.Connection);
-            return new DisableHostAction(Server); ;
+            return new DisableHostAction(Server);
         }
 
     }

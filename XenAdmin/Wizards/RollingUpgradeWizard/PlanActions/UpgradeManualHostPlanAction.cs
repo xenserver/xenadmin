@@ -32,33 +32,24 @@
 using XenAPI;
 using System;
 using System.Timers;
+using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using Timer = System.Timers.Timer;
 
 
-namespace XenAdmin.Wizards.PatchingWizard.PlanActions
+namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 {
     public class UpgradeManualHostPlanAction : RebootPlanAction
     {
-        private readonly Host _host;
-
         public Timer timer = new Timer();
 
         public UpgradeManualHostPlanAction(Host host)
-            : base(host.Connection, new XenRef<Host>(host.opaque_ref), string.Format(Messages.UPGRADING_SERVER, host))
+            : base(host, string.Format(Messages.UPGRADING_SERVER, host))
         {
             TitlePlan = Messages.UPGRADING;
-            _host = host;
             timer.Interval = 20 * 60000;
             timer.AutoReset = true;
             timer.Elapsed += timer_Elapsed;
         }
-
-        protected override Host CurrentHost
-        {
-            get { return _host; }
-        }
-
-        public new Host Host { get { return TryResolveWithTimeout(base.Host); } }
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -77,43 +68,39 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             try
             {
-                Status = Messages.PLAN_ACTION_STATUS_DISABLING_HOST_SERVER;
+                var hostObj = GetResolvedHost();
 
-                if (Host.enabled)
+                if (hostObj.enabled)
                 {
-                    log.DebugFormat("Disabling host {0}", _host.Name());
-                    XenAPI.Host.disable(session, Host.opaque_ref);
+                    Status = Messages.PLAN_ACTION_STATUS_DISABLING_HOST_SERVER;
+                    log.DebugFormat("Disabling host {0}", hostObj.Name());
+                    Host.disable(session, HostXenRef.opaque_ref);
                 }
 
                 timer.Start();
                 rebooting = true;
 
-                log.DebugFormat("Upgrading host {0}", _host.Name());
+                log.DebugFormat("Upgrading host {0}", hostObj.Name());
                 Status = Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER;
 
-                log.DebugFormat("Waiting for host {0} to reboot", _host.Name());
-                WaitForReboot(ref session, _session => XenAPI.Host.async_reboot(_session, Host.opaque_ref));
+                log.DebugFormat("Waiting for host {0} to reboot", hostObj.Name());
+                WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, HostXenRef.opaque_ref));
 
                 Status = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
-                foreach (var host in _host.Connection.Cache.Hosts)
+                foreach (var host in Connection.Cache.Hosts)
                     host.CheckAndPlugPBDs();  // Wait for PBDs to become plugged on all hosts
                 
                 rebooting = false;
-                log.DebugFormat("Host {0} rebooted", _host.Name());
+                log.DebugFormat("Host {0} rebooted", hostObj.Name());
                 
                 Status = Messages.PLAN_ACTION_STATUS_HOST_UPGRADED;
-                log.DebugFormat("Upgraded host {0}", _host.Name());
+                log.DebugFormat("Upgraded host {0}", hostObj.Name());
             }
             finally
             {
-                _host.Connection.ExpectDisruption = false;
+                Connection.ExpectDisruption = false;
                 timer.Stop();
             }
-        }
-
-        internal void RunExternal(Session session)
-        {
-            RunWithSession(ref session);
         }
     }
 }

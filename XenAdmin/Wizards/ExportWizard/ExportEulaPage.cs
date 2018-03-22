@@ -79,9 +79,8 @@ namespace XenAdmin.Wizards.ExportWizard
 		/// </summary>
 		public override string HelpID { get { return "ExportEula"; } }
 
-		public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-			base.PageLoaded(direction);
 			SetAddButtonEnabledState();
 			SetRemoveButtonEnabledState();
 			SetViewButtonEnabledState();

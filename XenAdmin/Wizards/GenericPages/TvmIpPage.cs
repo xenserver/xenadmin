@@ -70,21 +70,19 @@ namespace XenAdmin.Wizards.GenericPages
             return true;
         }
 
-		public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-			base.PageLoaded(direction);//call first so the page gets populated
 		    m_buttonNextEnabled = true;
 		    OnPageUpdated();
 		}
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 			{
 				if (!PerformCheck(CheckValidData))
 					cancel = true;
 			}
-			base.PageLeave(direction, ref cancel);
 		}
 
         public override void PopulatePage()

@@ -102,7 +102,8 @@ namespace XenAdmin.Wizards.DRWizards
         }
 
         private readonly ConnectionLostDialogLauncher cldl = new ConnectionLostDialogLauncher();
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             _worker.CancelAsync();
 
@@ -111,12 +112,10 @@ namespace XenAdmin.Wizards.DRWizards
                 IntroduceSRs();
                 LoadMetadata();
             }
-            base.PageLeave(direction, ref cancel);
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Forward)
                 SetupLabels();
         }

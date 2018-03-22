@@ -59,18 +59,15 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             return txtName.Text.Trim().Length > 0;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             HelpersGUI.FocusFirstControl(Controls);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
                 CheckUniqueName(txtName.Text);
-
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PopulatePage()

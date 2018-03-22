@@ -49,10 +49,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             InitializeComponent();
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             VM template = SelectedTemplate;
             
             if (!template.Equals(_template))

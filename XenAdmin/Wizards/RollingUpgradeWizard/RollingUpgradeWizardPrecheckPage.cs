@@ -39,6 +39,8 @@ using XenAdmin.Diagnostics.Hotfixing;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAPI;
 using System.Linq;
+using CheckGroup = System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.List<XenAdmin.Diagnostics.Checks.Check>>;
+
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
@@ -76,7 +78,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             Program.Invoke(Program.MainWindow, RefreshRechecks);
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             if (direction == PageLoadedDirection.Back)
             {
@@ -102,13 +104,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             AddEventHandlersToMasters();
             labelPrechecksFirstLine.Text = Messages.ROLLINGUPGRADE_PRECHECKS;
             RefreshRechecks();
-            return;
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             RemoveEventHandlersToMasters();
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()
@@ -138,102 +138,84 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Upgradeprechecks"; }
         }
 
-        protected override List<KeyValuePair<string, List<Check>>> GenerateChecks(Pool_patch patch)
+        protected override List<CheckGroup> GenerateChecks(Pool_patch patch)
         {
-            List<KeyValuePair<string, List<Check>>> checks = new List<KeyValuePair<string, List<Check>>>();
-            List<Check> checkGroup;
+            var groups = new List<CheckGroup>();
 
             //XenCenter version check (if any of the selected server version is not the latest)
             var latestCrVersion = Updates.XenServerVersions.FindAll(item => item.LatestCr).OrderByDescending(v => v.Version).FirstOrDefault();
             if (latestCrVersion != null &&
                 SelectedServers.Any(host => new Version(Helpers.HostProductVersion(host)) < latestCrVersion.Version))
             {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_XENCENTER_VERSION, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
-                checkGroup.Add(new XenCenterVersionCheck(null));
+                groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(null)}));
             }
 
             //HostMaintenanceModeCheck checks
-            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HOST_LIVENESS_STATUS, new List<Check>()));
-            checkGroup = checks[checks.Count - 1].Value;
+            var livenessChecks = new List<Check>();
             foreach (Host host in SelectedServers)
-            {
-                checkGroup.Add(new HostMaintenanceModeCheck(host));
-            }
+                livenessChecks.Add(new HostMaintenanceModeCheck(host));
+
+            groups.Add(new CheckGroup(Messages.CHECKING_HOST_LIVENESS_STATUS, livenessChecks));
 
             //HA checks
-            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_HA_STATUS, new List<Check>()));
-            checkGroup = checks[checks.Count - 1].Value;
+            var haChecks = new List<Check>();
             foreach (Pool pool in SelectedPools)
             {
                 Host host = pool.Connection.Resolve(pool.master);
 
-                if(host == null) 
+                if (host == null)
                     continue;
 
-                checkGroup.Add(new HAOffCheck(host));
+                haChecks.Add(new HAOffCheck(host));
             }
+            groups.Add(new CheckGroup(Messages.CHECKING_HA_STATUS, haChecks));
 
             //Checking can evacuate host
-            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_CANEVACUATE_STATUS, new List<Check>()));
-            checkGroup = checks[checks.Count - 1].Value;
+            var evacuateChecks = new List<Check>();
             foreach (Host host in SelectedServers)
-            {
-                checkGroup.Add(new AssertCanEvacuateUpgradeCheck(host));
-            }
+                evacuateChecks.Add(new AssertCanEvacuateUpgradeCheck(host));
+
+            groups.Add(new CheckGroup(Messages.CHECKING_CANEVACUATE_STATUS, evacuateChecks));
 
             //PBDsPluggedCheck
-            checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, new List<Check>()));
-            checkGroup = checks[checks.Count - 1].Value;
+            var pbdChecks = new List<Check>();
             foreach (Host host in SelectedServers)
-            {
-                checkGroup.Add(new PBDsPluggedCheck(host));
-            }
+                pbdChecks.Add(new PBDsPluggedCheck(host));
+            groups.Add(new CheckGroup(Messages.CHECKING_STORAGE_CONNECTIONS_STATUS, pbdChecks));
 
-           
+
             //HotfixesCheck required for MNR, Cowley, Boston and Sanibel
-            bool titleAdded = false;
+            var hotfixChecks = new List<Check>();
             foreach (var host in SelectedServers)
             {
                 if (new HotfixFactory().IsHotfixRequired(host) && !ManualUpgrade)
-                {
-                    if (!titleAdded)
-                    {
-                        checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_UPGRADE_HOTFIX_STATUS,
-                                                                         new List<Check>()));
-                        checkGroup = checks[checks.Count - 1].Value;
-                        titleAdded = true;
-                    }
-                    checkGroup.Add(new HostHasHotfixCheck(host));
-                }
+                    hotfixChecks.Add(new HostHasHotfixCheck(host));
             }
+            if (hotfixChecks.Count > 0)
+                groups.Add(new CheckGroup(Messages.CHECKING_UPGRADE_HOTFIX_STATUS, hotfixChecks));
+
 
             //iSL (StorageLink) check - CA-223486: only for pre-Creedence
             var preCreedenceServers = SelectedServers.Where(h => !Helpers.CreedenceOrGreater(h)).ToList();
             if (preCreedenceServers.Any())
             {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_STORAGELINK_STATUS, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
+                var srLinkChecks = new List<Check>();
                 foreach (Host host in preCreedenceServers)
-                {
-                    checkGroup.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
-                }
+                    srLinkChecks.Add(new HostHasUnsupportedStorageLinkSRCheck(host));
+                groups.Add(new CheckGroup(Messages.CHECKING_STORAGELINK_STATUS, srLinkChecks));
             }
 
             //SafeToUpgradeCheck - in automatic mode only
             if (!ManualUpgrade)
             {
-                checks.Add(new KeyValuePair<string, List<Check>>(Messages.CHECKING_SAFE_TO_UPGRADE, new List<Check>()));
-                checkGroup = checks[checks.Count - 1].Value;
- 
+                var upgradeChecks = new List<Check>();
                 foreach (Host host in SelectedServers)
-                {
-                    checkGroup.Add(new SafeToUpgradeCheck(host));
-                }
+                    upgradeChecks.Add(new SafeToUpgradeCheck(host));
+
+                groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, upgradeChecks));
             }
 
-            return checks;
-            
+            return groups;
         }
 
         public IEnumerable<Host> SelectedMasters { private get; set; }

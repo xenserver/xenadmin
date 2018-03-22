@@ -53,6 +53,7 @@ namespace XenAdmin.Dialogs
         /// </summary>
         /// <param name="connection">The IXenConnection from which the values will be taken.  May be null, in which case an appropriate new
         /// connection will be created when the dialog is completed.</param>
+        /// <param name="changedPass"></param>
         public AddServerDialog(IXenConnection connection, bool changedPass)
             : base(connection)
         {

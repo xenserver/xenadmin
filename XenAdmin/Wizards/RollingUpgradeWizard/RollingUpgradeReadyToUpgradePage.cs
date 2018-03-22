@@ -105,9 +105,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return Messages.START_UPGRADE;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             listBox.Items.Clear();
             foreach (var master in SelectedMasters)
             {

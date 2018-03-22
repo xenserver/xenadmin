@@ -58,9 +58,8 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         #region XentabPage overrides
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             if (!templatesLoaded)
                 PopulateTemplatesBox();
             templatesLoaded = true;

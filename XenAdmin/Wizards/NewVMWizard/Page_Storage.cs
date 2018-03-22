@@ -70,9 +70,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             get { return "Storage"; }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             VM template = SelectedTemplate;
             bool installMethodIsNetwork = SelectedInstallMethod == InstallMethod.Network;
 

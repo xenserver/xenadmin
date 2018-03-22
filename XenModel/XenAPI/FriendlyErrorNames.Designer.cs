@@ -466,11 +466,65 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A cluster already exists in the pool..
+        /// </summary>
+        public static string CLUSTER_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("CLUSTER_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation could not be performed because cluster creation is in progress..
+        /// </summary>
+        public static string CLUSTER_CREATE_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("CLUSTER_CREATE_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The cluster does not have only one node..
+        /// </summary>
+        public static string CLUSTER_DOES_NOT_HAVE_ONE_NODE {
+            get {
+                return ResourceManager.GetString("CLUSTER_DOES_NOT_HAVE_ONE_NODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Force destroy failed on a Cluster_host while force destroying the cluster..
+        /// </summary>
+        public static string CLUSTER_FORCE_DESTROY_FAILED {
+            get {
+                return ResourceManager.GetString("CLUSTER_FORCE_DESTROY_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An SR is using clustered local storage. It is not safe to reboot a host at the moment..
         /// </summary>
         public static string CLUSTERED_SR_DEGRADED {
             get {
                 return ResourceManager.GetString("CLUSTERED_SR_DEGRADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An operation was attempted while clustering was disabled on the cluster_host..
+        /// </summary>
+        public static string CLUSTERING_DISABLED {
+            get {
+                return ResourceManager.GetString("CLUSTERING_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An operation was attempted while clustering was enabled on the cluster_host..
+        /// </summary>
+        public static string CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("CLUSTERING_ENABLED", resourceCulture);
             }
         }
         
@@ -1798,6 +1852,15 @@ namespace XenAPI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The host does not have a Cluster_host with a compatible cluster stack..
+        /// </summary>
+        public static string NO_COMPATIBLE_CLUSTER_HOST {
+            get {
+                return ResourceManager.GetString("NO_COMPATIBLE_CLUSTER_HOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There were no servers available to complete the specified operation..
         /// </summary>
         public static string NO_HOSTS_AVAILABLE {
@@ -2163,6 +2226,15 @@ namespace XenAPI {
         public static string PIF_DOES_NOT_ALLOW_UNPLUG {
             get {
                 return ResourceManager.GetString("PIF_DOES_NOT_ALLOW_UNPLUG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation you requested cannot be performed because the specified PIF has FCoE SR in use..
+        /// </summary>
+        public static string PIF_HAS_FCOE_SR_IN_USE {
+            get {
+                return ResourceManager.GetString("PIF_HAS_FCOE_SR_IN_USE", resourceCulture);
             }
         }
         
@@ -4589,6 +4661,15 @@ namespace XenAPI {
         public static string SR_REQUIRES_UPGRADE {
             get {
                 return ResourceManager.GetString("SR_REQUIRES_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The source SR does not have sufficient temporary space available to proceed the operation..
+        /// </summary>
+        public static string SR_SOURCE_SPACE_INSUFFICIENT {
+            get {
+                return ResourceManager.GetString("SR_SOURCE_SPACE_INSUFFICIENT", resourceCulture);
             }
         }
         

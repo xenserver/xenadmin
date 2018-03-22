@@ -73,9 +73,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             return !string.IsNullOrEmpty(SelectedName);
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             if (SelectedTemplate == Template)
                 return;
 

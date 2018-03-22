@@ -67,9 +67,8 @@ namespace XenAdmin.Wizards.NewPolicyWizard
             get { return "Finish"; }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             textBoxSummary.Text = Summary;
             checkBox1.Enabled = SelectedVMsCount > 0;
         }

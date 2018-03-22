@@ -297,6 +297,7 @@ namespace XenAdmin.Actions.Wlb
         /// </summary>
         /// <param name="vm">vm</param>
         /// <param name="failure">failure, xapi exception</param>
+        /// <param name="newNtol"></param>
         //private static bool StartDiagnosisForm(XenObject<VM> vm, Failure failure, string recommendationId)
         private bool RaiseHANotl(VM vm, Failure failure, out long newNtol)
         {
@@ -407,6 +408,7 @@ namespace XenAdmin.Actions.Wlb
             action.PollToCompletion(start, end);
         }
 
+        /*
         /// <summary>
         /// offer to bump ntol back up, if we can
         /// Asks the user if they want to increase ntol (since hypothetical_max might have gone up).
@@ -445,5 +447,6 @@ namespace XenAdmin.Actions.Wlb
         //        }
         //    }
         //}
+        */
     }
 }

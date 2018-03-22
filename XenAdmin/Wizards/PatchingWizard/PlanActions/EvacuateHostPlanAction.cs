@@ -30,71 +30,24 @@
  */
 
 using System.Collections.Generic;
-using XenAdmin.Core;
 using XenAPI;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public class EvacuateHostPlanAction : PlanActionWithSession, IAvoidRestartHostsAware
-    {
-        private readonly XenRef<Host> _host;
-        private readonly Host currentHost;
-        public List<string> AvoidRestartHosts { private get; set; }
-        
+    public class EvacuateHostPlanAction : HostPlanAction
+    {     
         public EvacuateHostPlanAction(Host host)
-            : base(host.Connection, string.Format(Messages.PLANACTION_VMS_MIGRATING, host.Name()))
+            : base(host, string.Format(Messages.PLANACTION_VMS_MIGRATING, host.Name()))
         {
-            base.TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name());
-            this._host = new XenRef<Host>(host);
-            currentHost = host;
-            visible = false;
-        }
-
-        protected override Host CurrentHost
-        {
-            get { return currentHost; }
+            TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name());
+            Visible = false;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            Host hostObject = TryResolveWithTimeout(_host);
-
-            // If there are no patches that require reboot, we skip the evacuate-reboot-bringbabiesback sequence
-            // But we only do this if we indicated that host restart should be avoided (by initializing the AvoidRestartHosts property)
-            if (Helpers.ElyOrGreater(hostObject) && AvoidRestartHosts != null)
-            {
-                log.DebugFormat("Checking host.patches_requiring_reboot now on '{0}'...", hostObject);
-
-                if (hostObject.updates_requiring_reboot.Count > 0)
-                {
-                    AvoidRestartHosts.Remove(hostObject.uuid);
-
-                    log.DebugFormat("Restart is needed now (hostObject.updates_requiring_reboot has {0} items in it). Evacuating now. Will restart after.", hostObject.updates_requiring_reboot.Count);
-                }
-                else
-                {
-                    if (!AvoidRestartHosts.Contains(hostObject.uuid))
-                        AvoidRestartHosts.Add(hostObject.uuid);
-
-                    log.Debug("Will skip scheduled restart (livepatching succeeded), because hostObject.patches_requiring_reboot is empty.");
-
-                    return;
-                }
-            }
-
-            visible = true;
-
-            PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObject.resident_VMs));
-
-            log.DebugFormat("Disabling host {0}", hostObject.Name());
-            Host.disable(session, _host.opaque_ref);
-
-            Status = Messages.PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST;
-            log.DebugFormat("Migrating VMs from host {0}", hostObject.Name());
-            XenRef<Task> task = Host.async_evacuate(session, _host.opaque_ref);
-
-            PollTaskForResultAndDestroy(Connection, ref session, task);
+            Visible = true;
+            EvacuateHost(ref session);
         }
     }
 }
