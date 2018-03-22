@@ -42,7 +42,6 @@ namespace XenAPI
 {
     /// <summary>
     /// Cluster-wide Cluster metadata
-    /// First published in Unreleased.
     /// </summary>
     public partial class Cluster : XenObject<Cluster>
     {
@@ -86,6 +85,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Cluster.
+        /// </summary>
         public override void UpdateFrom(Cluster update)
         {
             uuid = update.uuid;
@@ -104,16 +107,16 @@ namespace XenAPI
 
         internal void UpdateFromProxy(Proxy_Cluster proxy)
         {
-            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
+            uuid = proxy.uuid == null ? null : proxy.uuid;
             cluster_hosts = proxy.cluster_hosts == null ? null : XenRef<Cluster_host>.Create(proxy.cluster_hosts);
             network = proxy.network == null ? null : XenRef<Network>.Create(proxy.network);
-            cluster_token = proxy.cluster_token == null ? null : (string)proxy.cluster_token;
-            cluster_stack = proxy.cluster_stack == null ? null : (string)proxy.cluster_stack;
+            cluster_token = proxy.cluster_token == null ? null : proxy.cluster_token;
+            cluster_stack = proxy.cluster_stack == null ? null : proxy.cluster_stack;
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<cluster_operation>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_cluster_operation(proxy.current_operations);
             pool_auto_join = (bool)proxy.pool_auto_join;
-            token_timeout = proxy.token_timeout == null ? 0 : long.Parse((string)proxy.token_timeout);
-            token_timeout_coefficient = proxy.token_timeout_coefficient == null ? 0 : long.Parse((string)proxy.token_timeout_coefficient);
+            token_timeout = proxy.token_timeout == null ? 0 : long.Parse(proxy.token_timeout);
+            token_timeout_coefficient = proxy.token_timeout_coefficient == null ? 0 : long.Parse(proxy.token_timeout_coefficient);
             cluster_config = proxy.cluster_config == null ? null : Maps.convert_from_proxy_string_string(proxy.cluster_config);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
@@ -122,11 +125,11 @@ namespace XenAPI
         {
             Proxy_Cluster result_ = new Proxy_Cluster();
             result_.uuid = uuid ?? "";
-            result_.cluster_hosts = (cluster_hosts != null) ? Helper.RefListToStringArray(cluster_hosts) : new string[] {};
+            result_.cluster_hosts = cluster_hosts == null ? new string[] {} : Helper.RefListToStringArray(cluster_hosts);
             result_.network = network ?? "";
             result_.cluster_token = cluster_token ?? "";
             result_.cluster_stack = cluster_stack ?? "";
-            result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
             result_.current_operations = Maps.convert_to_proxy_string_cluster_operation(current_operations);
             result_.pool_auto_join = pool_auto_join;
             result_.token_timeout = token_timeout.ToString();
@@ -138,22 +141,47 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Cluster from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Cluster(Hashtable table)
+        public Cluster(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            cluster_hosts = Marshalling.ParseSetRef<Cluster_host>(table, "cluster_hosts");
-            network = Marshalling.ParseRef<Network>(table, "network");
-            cluster_token = Marshalling.ParseString(table, "cluster_token");
-            cluster_stack = Marshalling.ParseString(table, "cluster_stack");
-            allowed_operations = Helper.StringArrayToEnumList<cluster_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
-            current_operations = Maps.convert_from_proxy_string_cluster_operation(Marshalling.ParseHashTable(table, "current_operations"));
-            pool_auto_join = Marshalling.ParseBool(table, "pool_auto_join");
-            token_timeout = Marshalling.ParseLong(table, "token_timeout");
-            token_timeout_coefficient = Marshalling.ParseLong(table, "token_timeout_coefficient");
-            cluster_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cluster_config"));
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Cluster
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("cluster_hosts"))
+                cluster_hosts = Marshalling.ParseSetRef<Cluster_host>(table, "cluster_hosts");
+            if (table.ContainsKey("network"))
+                network = Marshalling.ParseRef<Network>(table, "network");
+            if (table.ContainsKey("cluster_token"))
+                cluster_token = Marshalling.ParseString(table, "cluster_token");
+            if (table.ContainsKey("cluster_stack"))
+                cluster_stack = Marshalling.ParseString(table, "cluster_stack");
+            if (table.ContainsKey("allowed_operations"))
+                allowed_operations = Helper.StringArrayToEnumList<cluster_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
+            if (table.ContainsKey("current_operations"))
+                current_operations = Maps.convert_from_proxy_string_cluster_operation(Marshalling.ParseHashTable(table, "current_operations"));
+            if (table.ContainsKey("pool_auto_join"))
+                pool_auto_join = Marshalling.ParseBool(table, "pool_auto_join");
+            if (table.ContainsKey("token_timeout"))
+                token_timeout = Marshalling.ParseLong(table, "token_timeout");
+            if (table.ContainsKey("token_timeout_coefficient"))
+                token_timeout_coefficient = Marshalling.ParseLong(table, "token_timeout_coefficient");
+            if (table.ContainsKey("cluster_config"))
+                cluster_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "cluster_config"));
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(Cluster other, bool ignoreCurrentOperations)
@@ -207,7 +235,7 @@ namespace XenAPI
         }
         /// <summary>
         /// Get a record containing the current state of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -221,7 +249,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get a reference to the Cluster instance with the specified UUID.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_uuid">UUID of object to return</param>
@@ -235,7 +263,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the uuid field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -244,12 +272,12 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.cluster_get_uuid(session.opaque_ref, _cluster);
             else
-                return (string)session.proxy.cluster_get_uuid(session.opaque_ref, _cluster ?? "").parse();
+                return session.proxy.cluster_get_uuid(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
         /// Get the cluster_hosts field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -263,7 +291,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the network field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -277,7 +305,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the cluster_token field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -286,12 +314,12 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.cluster_get_cluster_token(session.opaque_ref, _cluster);
             else
-                return (string)session.proxy.cluster_get_cluster_token(session.opaque_ref, _cluster ?? "").parse();
+                return session.proxy.cluster_get_cluster_token(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
         /// Get the cluster_stack field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -300,12 +328,11 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.cluster_get_cluster_stack(session.opaque_ref, _cluster);
             else
-                return (string)session.proxy.cluster_get_cluster_stack(session.opaque_ref, _cluster ?? "").parse();
+                return session.proxy.cluster_get_cluster_stack(session.opaque_ref, _cluster ?? "").parse();
         }
 
         /// <summary>
         /// Get the allowed_operations field of the given Cluster.
-        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -319,7 +346,6 @@ namespace XenAPI
 
         /// <summary>
         /// Get the current_operations field of the given Cluster.
-        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -333,7 +359,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the pool_auto_join field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -347,7 +373,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the token_timeout field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -356,12 +382,12 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.cluster_get_token_timeout(session.opaque_ref, _cluster);
             else
-                return long.Parse((string)session.proxy.cluster_get_token_timeout(session.opaque_ref, _cluster ?? "").parse());
+                return long.Parse(session.proxy.cluster_get_token_timeout(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
         /// Get the token_timeout_coefficient field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -370,12 +396,12 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.cluster_get_token_timeout_coefficient(session.opaque_ref, _cluster);
             else
-                return long.Parse((string)session.proxy.cluster_get_token_timeout_coefficient(session.opaque_ref, _cluster ?? "").parse());
+                return long.Parse(session.proxy.cluster_get_token_timeout_coefficient(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
         /// Get the cluster_config field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -389,7 +415,7 @@ namespace XenAPI
 
         /// <summary>
         /// Get the other_config field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -403,7 +429,7 @@ namespace XenAPI
 
         /// <summary>
         /// Set the other_config field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -418,7 +444,7 @@ namespace XenAPI
 
         /// <summary>
         /// Add the given key-value pair to the other_config field of the given Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -434,7 +460,7 @@ namespace XenAPI
 
         /// <summary>
         /// Remove the given key and its corresponding value from the other_config field of the given Cluster.  If the key is not in that Map, then do nothing.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -449,7 +475,7 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a Cluster object and one Cluster_host object as its first member
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
@@ -467,7 +493,7 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a Cluster object and one Cluster_host object as its first member
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
@@ -485,7 +511,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroys a Cluster object and the one remaining Cluster_host member
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -499,7 +525,7 @@ namespace XenAPI
 
         /// <summary>
         /// Destroys a Cluster object and the one remaining Cluster_host member
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -513,7 +539,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to create a Cluster from the entire pool
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
@@ -530,7 +556,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to create a Cluster from the entire pool
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
@@ -547,7 +573,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to force destroy the Cluster_host objects, and then destroy the Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -561,7 +587,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to force destroy the Cluster_host objects, and then destroy the Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -575,7 +601,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to destroy the Cluster_host objects for all hosts in the pool and then destroy the Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -589,7 +615,7 @@ namespace XenAPI
 
         /// <summary>
         /// Attempt to destroy the Cluster_host objects for all hosts in the pool and then destroy the Cluster.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -603,7 +629,7 @@ namespace XenAPI
 
         /// <summary>
         /// Resynchronise the cluster_host objects across the pool. Creates them where they need creating and then plugs them
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -617,7 +643,7 @@ namespace XenAPI
 
         /// <summary>
         /// Resynchronise the cluster_host objects across the pool. Creates them where they need creating and then plugs them
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         /// <param name="_cluster">The opaque_ref of the given cluster</param>
@@ -631,7 +657,7 @@ namespace XenAPI
 
         /// <summary>
         /// Return a list of all the Clusters known to the system.
-        /// First published in Unreleased.
+        /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         public static List<XenRef<Cluster>> get_all(Session session)
@@ -644,7 +670,6 @@ namespace XenAPI
 
         /// <summary>
         /// Get all the Cluster Records at once, in a single XML RPC call
-        /// First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<Cluster>, Cluster> get_all_records(Session session)
@@ -657,6 +682,7 @@ namespace XenAPI
 
         /// <summary>
         /// Unique identifier/object reference
+        /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual string uuid
         {
@@ -675,6 +701,7 @@ namespace XenAPI
 
         /// <summary>
         /// A list of the cluster_host objects associated with the Cluster
+        /// Experimental. First published in Unreleased.
         /// </summary>
         [JsonConverter(typeof(XenRefListConverter<Cluster_host>))]
         public virtual List<XenRef<Cluster_host>> cluster_hosts
@@ -694,6 +721,7 @@ namespace XenAPI
 
         /// <summary>
         /// Reference to the single network on which corosync carries out its inter-host communications
+        /// Experimental. First published in Unreleased.
         /// </summary>
         [JsonConverter(typeof(XenRefConverter<Network>))]
         public virtual XenRef<Network> network
@@ -713,6 +741,7 @@ namespace XenAPI
 
         /// <summary>
         /// The secret key used by xapi-clusterd when it talks to itself on other hosts
+        /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual string cluster_token
         {
@@ -731,6 +760,7 @@ namespace XenAPI
 
         /// <summary>
         /// Simply the string 'corosync'. No other cluster stacks are currently supported
+        /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual string cluster_stack
         {
@@ -785,6 +815,7 @@ namespace XenAPI
 
         /// <summary>
         /// True if xapi is automatically joining new pool members to the cluster. This will be `true` in the first release
+        /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual bool pool_auto_join
         {
@@ -803,6 +834,7 @@ namespace XenAPI
 
         /// <summary>
         /// The corosync token timeout in ms
+        /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual long token_timeout
         {
@@ -821,6 +853,7 @@ namespace XenAPI
 
         /// <summary>
         /// The corosync token timeout coefficient in ms
+        /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual long token_timeout_coefficient
         {
@@ -839,7 +872,9 @@ namespace XenAPI
 
         /// <summary>
         /// Contains read-only settings for the cluster, such as timeouts and other options. It can only be set at cluster create time
+        /// Experimental. First published in Unreleased.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> cluster_config
         {
             get { return _cluster_config; }
@@ -857,7 +892,9 @@ namespace XenAPI
 
         /// <summary>
         /// Additional configuration
+        /// Experimental. First published in Unreleased.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }

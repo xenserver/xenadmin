@@ -105,7 +105,9 @@ namespace XenAPI
             long[] virtual_hardware_platform_versions,
             XenRef<VM> control_domain,
             List<XenRef<Pool_update>> updates_requiring_reboot,
-            List<XenRef<Feature>> features)
+            List<XenRef<Feature>> features,
+            string iscsi_iqn,
+            bool multipathing)
         {
             this.uuid = uuid;
             this.name_label = name_label;
@@ -163,6 +165,8 @@ namespace XenAPI
             this.control_domain = control_domain;
             this.updates_requiring_reboot = updates_requiring_reboot;
             this.features = features;
+            this.iscsi_iqn = iscsi_iqn;
+            this.multipathing = multipathing;
         }
 
         /// <summary>
@@ -236,26 +240,28 @@ namespace XenAPI
             control_domain = update.control_domain;
             updates_requiring_reboot = update.updates_requiring_reboot;
             features = update.features;
+            iscsi_iqn = update.iscsi_iqn;
+            multipathing = update.multipathing;
         }
 
         internal void UpdateFromProxy(Proxy_Host proxy)
         {
-            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
-            name_label = proxy.name_label == null ? null : (string)proxy.name_label;
-            name_description = proxy.name_description == null ? null : (string)proxy.name_description;
-            memory_overhead = proxy.memory_overhead == null ? 0 : long.Parse((string)proxy.memory_overhead);
+            uuid = proxy.uuid == null ? null : proxy.uuid;
+            name_label = proxy.name_label == null ? null : proxy.name_label;
+            name_description = proxy.name_description == null ? null : proxy.name_description;
+            memory_overhead = proxy.memory_overhead == null ? 0 : long.Parse(proxy.memory_overhead);
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<host_allowed_operations>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_host_allowed_operations(proxy.current_operations);
-            API_version_major = proxy.API_version_major == null ? 0 : long.Parse((string)proxy.API_version_major);
-            API_version_minor = proxy.API_version_minor == null ? 0 : long.Parse((string)proxy.API_version_minor);
-            API_version_vendor = proxy.API_version_vendor == null ? null : (string)proxy.API_version_vendor;
+            API_version_major = proxy.API_version_major == null ? 0 : long.Parse(proxy.API_version_major);
+            API_version_minor = proxy.API_version_minor == null ? 0 : long.Parse(proxy.API_version_minor);
+            API_version_vendor = proxy.API_version_vendor == null ? null : proxy.API_version_vendor;
             API_version_vendor_implementation = proxy.API_version_vendor_implementation == null ? null : Maps.convert_from_proxy_string_string(proxy.API_version_vendor_implementation);
             enabled = (bool)proxy.enabled;
             software_version = proxy.software_version == null ? null : Maps.convert_from_proxy_string_string(proxy.software_version);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
             capabilities = proxy.capabilities == null ? new string[] {} : (string [])proxy.capabilities;
             cpu_configuration = proxy.cpu_configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_configuration);
-            sched_policy = proxy.sched_policy == null ? null : (string)proxy.sched_policy;
+            sched_policy = proxy.sched_policy == null ? null : proxy.sched_policy;
             supported_bootloaders = proxy.supported_bootloaders == null ? new string[] {} : (string [])proxy.supported_bootloaders;
             resident_VMs = proxy.resident_VMs == null ? null : XenRef<VM>.Create(proxy.resident_VMs);
             logging = proxy.logging == null ? null : Maps.convert_from_proxy_string_string(proxy.logging);
@@ -268,21 +274,21 @@ namespace XenAPI
             PBDs = proxy.PBDs == null ? null : XenRef<PBD>.Create(proxy.PBDs);
             host_CPUs = proxy.host_CPUs == null ? null : XenRef<Host_cpu>.Create(proxy.host_CPUs);
             cpu_info = proxy.cpu_info == null ? null : Maps.convert_from_proxy_string_string(proxy.cpu_info);
-            hostname = proxy.hostname == null ? null : (string)proxy.hostname;
-            address = proxy.address == null ? null : (string)proxy.address;
+            hostname = proxy.hostname == null ? null : proxy.hostname;
+            address = proxy.address == null ? null : proxy.address;
             metrics = proxy.metrics == null ? null : XenRef<Host_metrics>.Create(proxy.metrics);
             license_params = proxy.license_params == null ? null : Maps.convert_from_proxy_string_string(proxy.license_params);
             ha_statefiles = proxy.ha_statefiles == null ? new string[] {} : (string [])proxy.ha_statefiles;
             ha_network_peers = proxy.ha_network_peers == null ? new string[] {} : (string [])proxy.ha_network_peers;
             blobs = proxy.blobs == null ? null : Maps.convert_from_proxy_string_XenRefBlob(proxy.blobs);
             tags = proxy.tags == null ? new string[] {} : (string [])proxy.tags;
-            external_auth_type = proxy.external_auth_type == null ? null : (string)proxy.external_auth_type;
-            external_auth_service_name = proxy.external_auth_service_name == null ? null : (string)proxy.external_auth_service_name;
+            external_auth_type = proxy.external_auth_type == null ? null : proxy.external_auth_type;
+            external_auth_service_name = proxy.external_auth_service_name == null ? null : proxy.external_auth_service_name;
             external_auth_configuration = proxy.external_auth_configuration == null ? null : Maps.convert_from_proxy_string_string(proxy.external_auth_configuration);
-            edition = proxy.edition == null ? null : (string)proxy.edition;
+            edition = proxy.edition == null ? null : proxy.edition;
             license_server = proxy.license_server == null ? null : Maps.convert_from_proxy_string_string(proxy.license_server);
             bios_strings = proxy.bios_strings == null ? null : Maps.convert_from_proxy_string_string(proxy.bios_strings);
-            power_on_mode = proxy.power_on_mode == null ? null : (string)proxy.power_on_mode;
+            power_on_mode = proxy.power_on_mode == null ? null : proxy.power_on_mode;
             power_on_config = proxy.power_on_config == null ? null : Maps.convert_from_proxy_string_string(proxy.power_on_config);
             local_cache_sr = proxy.local_cache_sr == null ? null : XenRef<SR>.Create(proxy.local_cache_sr);
             chipset_info = proxy.chipset_info == null ? null : Maps.convert_from_proxy_string_string(proxy.chipset_info);
@@ -296,6 +302,8 @@ namespace XenAPI
             control_domain = proxy.control_domain == null ? null : XenRef<VM>.Create(proxy.control_domain);
             updates_requiring_reboot = proxy.updates_requiring_reboot == null ? null : XenRef<Pool_update>.Create(proxy.updates_requiring_reboot);
             features = proxy.features == null ? null : XenRef<Feature>.Create(proxy.features);
+            iscsi_iqn = proxy.iscsi_iqn == null ? null : proxy.iscsi_iqn;
+            multipathing = (bool)proxy.multipathing;
         }
 
         public Proxy_Host ToProxy()
@@ -305,7 +313,7 @@ namespace XenAPI
             result_.name_label = name_label ?? "";
             result_.name_description = name_description ?? "";
             result_.memory_overhead = memory_overhead.ToString();
-            result_.allowed_operations = (allowed_operations != null) ? Helper.ObjectListToStringArray(allowed_operations) : new string[] {};
+            result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
             result_.current_operations = Maps.convert_to_proxy_string_host_allowed_operations(current_operations);
             result_.API_version_major = API_version_major.ToString();
             result_.API_version_minor = API_version_minor.ToString();
@@ -318,16 +326,16 @@ namespace XenAPI
             result_.cpu_configuration = Maps.convert_to_proxy_string_string(cpu_configuration);
             result_.sched_policy = sched_policy ?? "";
             result_.supported_bootloaders = supported_bootloaders;
-            result_.resident_VMs = (resident_VMs != null) ? Helper.RefListToStringArray(resident_VMs) : new string[] {};
+            result_.resident_VMs = resident_VMs == null ? new string[] {} : Helper.RefListToStringArray(resident_VMs);
             result_.logging = Maps.convert_to_proxy_string_string(logging);
-            result_.PIFs = (PIFs != null) ? Helper.RefListToStringArray(PIFs) : new string[] {};
+            result_.PIFs = PIFs == null ? new string[] {} : Helper.RefListToStringArray(PIFs);
             result_.suspend_image_sr = suspend_image_sr ?? "";
             result_.crash_dump_sr = crash_dump_sr ?? "";
-            result_.crashdumps = (crashdumps != null) ? Helper.RefListToStringArray(crashdumps) : new string[] {};
-            result_.patches = (patches != null) ? Helper.RefListToStringArray(patches) : new string[] {};
-            result_.updates = (updates != null) ? Helper.RefListToStringArray(updates) : new string[] {};
-            result_.PBDs = (PBDs != null) ? Helper.RefListToStringArray(PBDs) : new string[] {};
-            result_.host_CPUs = (host_CPUs != null) ? Helper.RefListToStringArray(host_CPUs) : new string[] {};
+            result_.crashdumps = crashdumps == null ? new string[] {} : Helper.RefListToStringArray(crashdumps);
+            result_.patches = patches == null ? new string[] {} : Helper.RefListToStringArray(patches);
+            result_.updates = updates == null ? new string[] {} : Helper.RefListToStringArray(updates);
+            result_.PBDs = PBDs == null ? new string[] {} : Helper.RefListToStringArray(PBDs);
+            result_.host_CPUs = host_CPUs == null ? new string[] {} : Helper.RefListToStringArray(host_CPUs);
             result_.cpu_info = Maps.convert_to_proxy_string_string(cpu_info);
             result_.hostname = hostname ?? "";
             result_.address = address ?? "";
@@ -347,16 +355,18 @@ namespace XenAPI
             result_.power_on_config = Maps.convert_to_proxy_string_string(power_on_config);
             result_.local_cache_sr = local_cache_sr ?? "";
             result_.chipset_info = Maps.convert_to_proxy_string_string(chipset_info);
-            result_.PCIs = (PCIs != null) ? Helper.RefListToStringArray(PCIs) : new string[] {};
-            result_.PGPUs = (PGPUs != null) ? Helper.RefListToStringArray(PGPUs) : new string[] {};
-            result_.PUSBs = (PUSBs != null) ? Helper.RefListToStringArray(PUSBs) : new string[] {};
+            result_.PCIs = PCIs == null ? new string[] {} : Helper.RefListToStringArray(PCIs);
+            result_.PGPUs = PGPUs == null ? new string[] {} : Helper.RefListToStringArray(PGPUs);
+            result_.PUSBs = PUSBs == null ? new string[] {} : Helper.RefListToStringArray(PUSBs);
             result_.ssl_legacy = ssl_legacy;
             result_.guest_VCPUs_params = Maps.convert_to_proxy_string_string(guest_VCPUs_params);
             result_.display = host_display_helper.ToString(display);
-            result_.virtual_hardware_platform_versions = (virtual_hardware_platform_versions != null) ? Helper.LongArrayToStringArray(virtual_hardware_platform_versions) : new string[] {};
+            result_.virtual_hardware_platform_versions = virtual_hardware_platform_versions == null ? new string[] {} : Helper.LongArrayToStringArray(virtual_hardware_platform_versions);
             result_.control_domain = control_domain ?? "";
-            result_.updates_requiring_reboot = (updates_requiring_reboot != null) ? Helper.RefListToStringArray(updates_requiring_reboot) : new string[] {};
-            result_.features = (features != null) ? Helper.RefListToStringArray(features) : new string[] {};
+            result_.updates_requiring_reboot = updates_requiring_reboot == null ? new string[] {} : Helper.RefListToStringArray(updates_requiring_reboot);
+            result_.features = features == null ? new string[] {} : Helper.RefListToStringArray(features);
+            result_.iscsi_iqn = iscsi_iqn ?? "";
+            result_.multipathing = multipathing;
             return result_;
         }
 
@@ -491,6 +501,10 @@ namespace XenAPI
                 updates_requiring_reboot = Marshalling.ParseSetRef<Pool_update>(table, "updates_requiring_reboot");
             if (table.ContainsKey("features"))
                 features = Marshalling.ParseSetRef<Feature>(table, "features");
+            if (table.ContainsKey("iscsi_iqn"))
+                iscsi_iqn = Marshalling.ParseString(table, "iscsi_iqn");
+            if (table.ContainsKey("multipathing"))
+                multipathing = Marshalling.ParseBool(table, "multipathing");
         }
 
         public bool DeepEquals(Host other, bool ignoreCurrentOperations)
@@ -557,7 +571,9 @@ namespace XenAPI
                 Helper.AreEqual2(this._virtual_hardware_platform_versions, other._virtual_hardware_platform_versions) &&
                 Helper.AreEqual2(this._control_domain, other._control_domain) &&
                 Helper.AreEqual2(this._updates_requiring_reboot, other._updates_requiring_reboot) &&
-                Helper.AreEqual2(this._features, other._features);
+                Helper.AreEqual2(this._features, other._features) &&
+                Helper.AreEqual2(this._iscsi_iqn, other._iscsi_iqn) &&
+                Helper.AreEqual2(this._multipathing, other._multipathing);
         }
 
         internal static List<Host> ProxyArrayToObjectList(Proxy_Host[] input)
@@ -630,6 +646,14 @@ namespace XenAPI
                 {
                     Host.set_ssl_legacy(session, opaqueRef, _ssl_legacy);
                 }
+                if (!Helper.AreEqual2(_iscsi_iqn, server._iscsi_iqn))
+                {
+                    Host.set_iscsi_iqn(session, opaqueRef, _iscsi_iqn);
+                }
+                if (!Helper.AreEqual2(_multipathing, server._multipathing))
+                {
+                    Host.set_multipathing(session, opaqueRef, _multipathing);
+                }
 
                 return null;
             }
@@ -687,7 +711,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_uuid(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_uuid(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_uuid(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -701,7 +725,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_name_label(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_name_label(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_name_label(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -715,7 +739,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_name_description(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_name_description(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_name_description(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -729,7 +753,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_memory_overhead(session.opaque_ref, _host);
             else
-                return long.Parse((string)session.proxy.host_get_memory_overhead(session.opaque_ref, _host ?? "").parse());
+                return long.Parse(session.proxy.host_get_memory_overhead(session.opaque_ref, _host ?? "").parse());
         }
 
         /// <summary>
@@ -771,7 +795,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_api_version_major(session.opaque_ref, _host);
             else
-                return long.Parse((string)session.proxy.host_get_api_version_major(session.opaque_ref, _host ?? "").parse());
+                return long.Parse(session.proxy.host_get_api_version_major(session.opaque_ref, _host ?? "").parse());
         }
 
         /// <summary>
@@ -785,7 +809,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_api_version_minor(session.opaque_ref, _host);
             else
-                return long.Parse((string)session.proxy.host_get_api_version_minor(session.opaque_ref, _host ?? "").parse());
+                return long.Parse(session.proxy.host_get_api_version_minor(session.opaque_ref, _host ?? "").parse());
         }
 
         /// <summary>
@@ -799,7 +823,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_api_version_vendor(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_api_version_vendor(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_api_version_vendor(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -897,7 +921,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_sched_policy(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_sched_policy(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_sched_policy(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1081,7 +1105,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_hostname(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_hostname(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_hostname(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1095,7 +1119,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_address(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_address(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_address(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1193,7 +1217,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_external_auth_type(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_external_auth_type(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_external_auth_type(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1207,7 +1231,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_external_auth_service_name(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_external_auth_service_name(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_external_auth_service_name(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1235,7 +1259,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_edition(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_edition(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_edition(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1277,7 +1301,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_power_on_mode(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_power_on_mode(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_power_on_mode(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1460,6 +1484,34 @@ namespace XenAPI
                 return session.JsonRpcClient.host_get_features(session.opaque_ref, _host);
             else
                 return XenRef<Feature>.Create(session.proxy.host_get_features(session.opaque_ref, _host ?? "").parse());
+        }
+
+        /// <summary>
+        /// Get the iscsi_iqn field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static string get_iscsi_iqn(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_iscsi_iqn(session.opaque_ref, _host);
+            else
+                return session.proxy.host_get_iscsi_iqn(session.opaque_ref, _host ?? "").parse();
+        }
+
+        /// <summary>
+        /// Get the multipathing field of the given host.
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        public static bool get_multipathing(Session session, string _host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.host_get_multipathing(session.opaque_ref, _host);
+            else
+                return (bool)session.proxy.host_get_multipathing(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1919,7 +1971,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_dmesg(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_dmesg(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_dmesg(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1947,7 +1999,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_dmesg_clear(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_dmesg_clear(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_dmesg_clear(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -1975,7 +2027,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_log(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_log(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_log(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -2522,7 +2574,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_system_status_capabilities(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_system_status_capabilities(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_system_status_capabilities(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -2592,7 +2644,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_compute_free_memory(session.opaque_ref, _host);
             else
-                return long.Parse((string)session.proxy.host_compute_free_memory(session.opaque_ref, _host ?? "").parse());
+                return long.Parse(session.proxy.host_compute_free_memory(session.opaque_ref, _host ?? "").parse());
         }
 
         /// <summary>
@@ -2620,7 +2672,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_compute_memory_overhead(session.opaque_ref, _host);
             else
-                return long.Parse((string)session.proxy.host_compute_memory_overhead(session.opaque_ref, _host ?? "").parse());
+                return long.Parse(session.proxy.host_compute_memory_overhead(session.opaque_ref, _host ?? "").parse());
         }
 
         /// <summary>
@@ -2746,7 +2798,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_call_plugin(session.opaque_ref, _host, _plugin, _fn, _args);
             else
-                return (string)session.proxy.host_call_plugin(session.opaque_ref, _host ?? "", _plugin ?? "", _fn ?? "", Maps.convert_to_proxy_string_string(_args)).parse();
+                return session.proxy.host_call_plugin(session.opaque_ref, _host ?? "", _plugin ?? "", _fn ?? "", Maps.convert_to_proxy_string_string(_args)).parse();
         }
 
         /// <summary>
@@ -2808,7 +2860,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_call_extension(session.opaque_ref, _host, _call);
             else
-                return (string)session.proxy.host_call_extension(session.opaque_ref, _host ?? "", _call ?? "").parse();
+                return session.proxy.host_call_extension(session.opaque_ref, _host ?? "", _call ?? "").parse();
         }
 
         /// <summary>
@@ -2910,7 +2962,7 @@ namespace XenAPI
             if (session.JsonRpcClient != null)
                 return session.JsonRpcClient.host_get_server_certificate(session.opaque_ref, _host);
             else
-                return (string)session.proxy.host_get_server_certificate(session.opaque_ref, _host ?? "").parse();
+                return session.proxy.host_get_server_certificate(session.opaque_ref, _host ?? "").parse();
         }
 
         /// <summary>
@@ -3224,6 +3276,66 @@ namespace XenAPI
               return session.JsonRpcClient.async_host_set_ssl_legacy(session.opaque_ref, _host, _value);
           else
               return XenRef<Task>.Create(session.proxy.async_host_set_ssl_legacy(session.opaque_ref, _host ?? "", _value).parse());
+        }
+
+        /// <summary>
+        /// Sets the initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">The value to which the IQN should be set</param>
+        public static void set_iscsi_iqn(Session session, string _host, string _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_set_iscsi_iqn(session.opaque_ref, _host, _value);
+            else
+                session.proxy.host_set_iscsi_iqn(session.opaque_ref, _host ?? "", _value ?? "").parse();
+        }
+
+        /// <summary>
+        /// Sets the initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">The value to which the IQN should be set</param>
+        public static XenRef<Task> async_set_iscsi_iqn(Session session, string _host, string _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_set_iscsi_iqn(session.opaque_ref, _host, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_host_set_iscsi_iqn(session.opaque_ref, _host ?? "", _value ?? "").parse());
+        }
+
+        /// <summary>
+        /// Specifies whether multipathing is enabled
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">Whether multipathing should be enabled</param>
+        public static void set_multipathing(Session session, string _host, bool _value)
+        {
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.host_set_multipathing(session.opaque_ref, _host, _value);
+            else
+                session.proxy.host_set_multipathing(session.opaque_ref, _host ?? "", _value).parse();
+        }
+
+        /// <summary>
+        /// Specifies whether multipathing is enabled
+        /// First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_host">The opaque_ref of the given host</param>
+        /// <param name="_value">Whether multipathing should be enabled</param>
+        public static XenRef<Task> async_set_multipathing(Session session, string _host, bool _value)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_host_set_multipathing(session.opaque_ref, _host, _value);
+          else
+              return XenRef<Task>.Create(session.proxy.async_host_set_multipathing(session.opaque_ref, _host ?? "", _value).parse());
         }
 
         /// <summary>
@@ -4317,5 +4429,43 @@ namespace XenAPI
             }
         }
         private List<XenRef<Feature>> _features = new List<XenRef<Feature>>() {};
+
+        /// <summary>
+        /// The initiator IQN for the host
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual string iscsi_iqn
+        {
+            get { return _iscsi_iqn; }
+            set
+            {
+                if (!Helper.AreEqual(value, _iscsi_iqn))
+                {
+                    _iscsi_iqn = value;
+                    Changed = true;
+                    NotifyPropertyChanged("iscsi_iqn");
+                }
+            }
+        }
+        private string _iscsi_iqn = "";
+
+        /// <summary>
+        /// Specifies whether multipathing is enabled
+        /// First published in Unreleased.
+        /// </summary>
+        public virtual bool multipathing
+        {
+            get { return _multipathing; }
+            set
+            {
+                if (!Helper.AreEqual(value, _multipathing))
+                {
+                    _multipathing = value;
+                    Changed = true;
+                    NotifyPropertyChanged("multipathing");
+                }
+            }
+        }
+        private bool _multipathing = false;
     }
 }

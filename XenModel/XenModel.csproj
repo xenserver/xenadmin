@@ -362,6 +362,7 @@
     <Compile Include="XenAPI\cluster_operation.cs" />
     <Compile Include="XenAPI\Converters.cs" />
     <Compile Include="XenAPI\DeprecatedAttribute.cs" />
+    <Compile Include="XenAPI\domain_type.cs" />
     <Compile Include="XenAPI\DR_task.cs" />
     <Compile Include="XenAPI\Feature.cs" />
     <Compile Include="XenAPI\FriendlyErrorNames.Designer.cs">
@@ -388,6 +389,7 @@
     <Compile Include="XenAPI\pool_allowed_operations.cs" />
     <Compile Include="XenAPI\Pool_update.cs" />
     <Compile Include="XenAPI\primary_address_type.cs" />
+    <Compile Include="XenAPI\Probe_result.cs" />
     <Compile Include="XenAPI\PUSB.cs" />
     <Compile Include="XenAPI\PVS_cache_storage.cs" />
     <Compile Include="XenAPI\PVS_proxy.cs" />
@@ -396,6 +398,8 @@
     <Compile Include="XenAPI\PVS_site.cs" />
     <Compile Include="XenAPI\SDN_controller.cs" />
     <Compile Include="XenAPI\sdn_controller_protocol.cs" />
+    <Compile Include="XenAPI\sr_health.cs" />
+    <Compile Include="XenAPI\Sr_stat.cs" />
     <Compile Include="XenAPI\tristate_type.cs" />
     <Compile Include="XenAPI\update_after_apply_guidance.cs" />
     <Compile Include="XenAPI\USB_group.cs" />
