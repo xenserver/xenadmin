@@ -55,7 +55,7 @@ namespace XenAPI
         {
             JToken jToken = JToken.Load(reader);
             var str = jToken.ToObject<string>();
-            return string.IsNullOrEmpty(str) ? null : new XenRef<T>(str);
+            return new XenRef<T>(str);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -392,20 +392,7 @@ namespace XenAPI
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JToken jToken = JToken.Load(reader);
-            var str = jToken.ToObject<string>();
-
-            try
-            {
-                return DateTime.ParseExact(str, DateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
-            }
-            catch (FormatException)
-            {
-                return DateTime.MinValue;
-            }
-            catch (ArgumentException)
-            {
-                return DateTime.MinValue;
-            }
+            return DateTime.ParseExact(jToken.ToString(), DateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
         }
     }
 
@@ -415,7 +402,7 @@ namespace XenAPI
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JToken jToken = JToken.Load(reader);
-            return Helper.EnumParseDefault(objectType, jToken.ToObject<string>());
+            return Helper.EnumParseDefault(objectType, jToken.ToString());
         }
     }
 }

@@ -32,18 +32,18 @@ namespace XenAdmin.Controls.NetworkingTab
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NetworkList));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.AddNetworkButton = new System.Windows.Forms.Button();
+            this.EditButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.EditNetworkButton = new System.Windows.Forms.Button();
+            this.RemoveButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.RemoveNetworkButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.toolTipContainerActivateToggle = new XenAdmin.Controls.ToolTipContainer();
+            this.buttonActivateToggle = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EditButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.EditNetworkButton = new System.Windows.Forms.Button();
-            this.RemoveButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.RemoveNetworkButton = new System.Windows.Forms.Button();
-            this.toolTipContainerActivateToggle = new XenAdmin.Controls.ToolTipContainer();
-            this.buttonActivateToggle = new System.Windows.Forms.Button();
             this.NetworksGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
             this.ImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,11 +60,12 @@ namespace XenAdmin.Controls.NetworkingTab
             this.IpColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ActiveColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MtuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NetworkSriovColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.EditButtonContainer.SuspendLayout();
             this.RemoveButtonContainer.SuspendLayout();
             this.toolTipContainerActivateToggle.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NetworksGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,11 +87,50 @@ namespace XenAdmin.Controls.NetworkingTab
             this.AddNetworkButton.UseVisualStyleBackColor = true;
             this.AddNetworkButton.Click += new System.EventHandler(this.AddNetworkButton_Click);
             // 
+            // EditButtonContainer
+            // 
+            this.EditButtonContainer.Controls.Add(this.EditNetworkButton);
+            resources.ApplyResources(this.EditButtonContainer, "EditButtonContainer");
+            this.EditButtonContainer.Name = "EditButtonContainer";
+            // 
+            // EditNetworkButton
+            // 
+            resources.ApplyResources(this.EditNetworkButton, "EditNetworkButton");
+            this.EditNetworkButton.Name = "EditNetworkButton";
+            this.EditNetworkButton.UseVisualStyleBackColor = true;
+            this.EditNetworkButton.Click += new System.EventHandler(this.EditNetworkButton_Click);
+            // 
+            // RemoveButtonContainer
+            // 
+            resources.ApplyResources(this.RemoveButtonContainer, "RemoveButtonContainer");
+            this.RemoveButtonContainer.Controls.Add(this.RemoveNetworkButton);
+            this.RemoveButtonContainer.Name = "RemoveButtonContainer";
+            // 
+            // RemoveNetworkButton
+            // 
+            resources.ApplyResources(this.RemoveNetworkButton, "RemoveNetworkButton");
+            this.RemoveNetworkButton.Name = "RemoveNetworkButton";
+            this.RemoveNetworkButton.UseVisualStyleBackColor = true;
+            this.RemoveNetworkButton.Click += new System.EventHandler(this.RemoveNetworkButton_Click);
+            // 
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // toolTipContainerActivateToggle
+            // 
+            this.toolTipContainerActivateToggle.Controls.Add(this.buttonActivateToggle);
+            resources.ApplyResources(this.toolTipContainerActivateToggle, "toolTipContainerActivateToggle");
+            this.toolTipContainerActivateToggle.Name = "toolTipContainerActivateToggle";
+            // 
+            // buttonActivateToggle
+            // 
+            resources.ApplyResources(this.buttonActivateToggle, "buttonActivateToggle");
+            this.buttonActivateToggle.Name = "buttonActivateToggle";
+            this.buttonActivateToggle.UseVisualStyleBackColor = true;
+            this.buttonActivateToggle.Click += new System.EventHandler(this.buttonActivateToggle_Click);
             // 
             // contextMenuStrip1
             // 
@@ -128,45 +168,6 @@ namespace XenAdmin.Controls.NetworkingTab
             resources.ApplyResources(this.propertiesToolStripMenuItem, "propertiesToolStripMenuItem");
             this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.EditMenuItemHandler);
             // 
-            // EditButtonContainer
-            // 
-            this.EditButtonContainer.Controls.Add(this.EditNetworkButton);
-            resources.ApplyResources(this.EditButtonContainer, "EditButtonContainer");
-            this.EditButtonContainer.Name = "EditButtonContainer";
-            // 
-            // EditNetworkButton
-            // 
-            resources.ApplyResources(this.EditNetworkButton, "EditNetworkButton");
-            this.EditNetworkButton.Name = "EditNetworkButton";
-            this.EditNetworkButton.UseVisualStyleBackColor = true;
-            this.EditNetworkButton.Click += new System.EventHandler(this.EditNetworkButton_Click);
-            // 
-            // RemoveButtonContainer
-            // 
-            resources.ApplyResources(this.RemoveButtonContainer, "RemoveButtonContainer");
-            this.RemoveButtonContainer.Controls.Add(this.RemoveNetworkButton);
-            this.RemoveButtonContainer.Name = "RemoveButtonContainer";
-            // 
-            // RemoveNetworkButton
-            // 
-            resources.ApplyResources(this.RemoveNetworkButton, "RemoveNetworkButton");
-            this.RemoveNetworkButton.Name = "RemoveNetworkButton";
-            this.RemoveNetworkButton.UseVisualStyleBackColor = true;
-            this.RemoveNetworkButton.Click += new System.EventHandler(this.RemoveNetworkButton_Click);
-            // 
-            // toolTipContainerActivateToggle
-            // 
-            this.toolTipContainerActivateToggle.Controls.Add(this.buttonActivateToggle);
-            resources.ApplyResources(this.toolTipContainerActivateToggle, "toolTipContainerActivateToggle");
-            this.toolTipContainerActivateToggle.Name = "toolTipContainerActivateToggle";
-            // 
-            // buttonActivateToggle
-            // 
-            resources.ApplyResources(this.buttonActivateToggle, "buttonActivateToggle");
-            this.buttonActivateToggle.Name = "buttonActivateToggle";
-            this.buttonActivateToggle.UseVisualStyleBackColor = true;
-            this.buttonActivateToggle.Click += new System.EventHandler(this.buttonActivateToggle_Click);
-            // 
             // NetworksGridView
             // 
             this.NetworksGridView.AdjustColorsForClassic = false;
@@ -178,8 +179,8 @@ namespace XenAdmin.Controls.NetworkingTab
             this.NetworksGridView.ContextMenuStrip = this.contextMenuStrip1;
             this.NetworksGridView.Name = "NetworksGridView";
             this.NetworksGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.NetworksGridView_CellValueChanged);
-            this.NetworksGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.NetworksGridView_SortCompare);
             this.NetworksGridView.SelectionChanged += new System.EventHandler(this.NetworksGridView_SelectionChanged);
+            this.NetworksGridView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.NetworksGridView_SortCompare);
             // 
             // ImageColumn
             // 
@@ -274,6 +275,12 @@ namespace XenAdmin.Controls.NetworkingTab
             resources.ApplyResources(this.MtuColumn, "MtuColumn");
             this.MtuColumn.Name = "MtuColumn";
             // 
+            // NetworkSriovColumn
+            // 
+            this.NetworkSriovColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            resources.ApplyResources(this.NetworkSriovColumn, "NetworkSriovColumn");
+            this.NetworkSriovColumn.Name = "NetworkSriovColumn";
+            // 
             // NetworkList
             // 
             resources.ApplyResources(this, "$this");
@@ -282,10 +289,10 @@ namespace XenAdmin.Controls.NetworkingTab
             this.Controls.Add(this.NetworksGridView);
             this.Name = "NetworkList";
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.EditButtonContainer.ResumeLayout(false);
             this.RemoveButtonContainer.ResumeLayout(false);
             this.toolTipContainerActivateToggle.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NetworksGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -323,6 +330,6 @@ namespace XenAdmin.Controls.NetworkingTab
         private System.Windows.Forms.Button buttonActivateToggle;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn MtuColumn;
-
+        private System.Windows.Forms.DataGridViewTextBoxColumn NetworkSriovColumn;
     }
 }
