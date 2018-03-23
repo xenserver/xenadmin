@@ -46,7 +46,8 @@ namespace XenAdmin.Actions
         private readonly IEnumerable<Alert> Alerts;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        /// <param name="connection">May be null, in which case this is expected to be for client-side alerts.</param>
+        /// <param name="connection">May be null; this is expected for client-side alerts.</param>
+        /// <param name="alerts"></param>
         public DeleteAllAlertsAction(IXenConnection connection, IEnumerable<Alert> alerts)
             : base(connection,
                    GetActionTitle(connection, alerts.Count()), 

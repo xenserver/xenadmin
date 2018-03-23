@@ -47,7 +47,6 @@ namespace XenAdmin.Dialogs
         /// <summary>
         /// Initializes a new instance of the <see cref="AssignLicenseDialog"/> class.
         /// </summary>
-        /// <param name="hosts">The hosts for which the licensing is to be applied.</param>
         public AssignLicenseDialog(IEnumerable<IXenObject> xos, String firstHost, String firstPort, Host.Edition firstEdition)
         {
             Util.ThrowIfEnumerableParameterNullOrEmpty(xos, "XenObjects");

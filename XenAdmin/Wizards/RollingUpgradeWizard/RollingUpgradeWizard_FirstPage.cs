@@ -62,9 +62,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             get { return "Beforeyoustart"; }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             labelRunningOnBattery.Visible = PowerManagement.CheckBatteryDischarging();
         }
     }

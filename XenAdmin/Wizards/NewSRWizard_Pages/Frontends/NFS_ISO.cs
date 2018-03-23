@@ -106,10 +106,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             nfsVersionLabel.Visible = nfsVersionTableLayoutPanel.Visible = Helpers.DundeeOrGreater(Connection);
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             if (direction == PageLoadedDirection.Forward)
                 HelpersGUI.FocusFirstControl(Controls);
         }

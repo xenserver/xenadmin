@@ -88,18 +88,15 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             return m_buttonNextEnabled;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             PerformCheck(CheckPathValid, CheckCredentialsEntered);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Forward)
                 cancel = !PerformCheck(CheckPathValid, CheckCredentialsEntered, CheckUploadAuthentication);
-
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void SelectDefaultControl()

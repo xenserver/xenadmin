@@ -103,7 +103,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return new CrossPoolMigrationStorageResourceContainer(vdis);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (!CrossPoolMigrateWizard.AllVMsAvailable(VmMappings, Connection))
             {
@@ -111,8 +111,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 SetButtonNextEnabled(false);
                 SetButtonPreviousEnabled(false);
             }
-
-            base.PageLeave(direction, ref cancel);
         }
 
         protected override string VmDiskColumnHeaderText

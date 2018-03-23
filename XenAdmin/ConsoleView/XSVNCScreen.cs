@@ -334,7 +334,6 @@ namespace XenAdmin.ConsoleView
         /// <summary>
         /// scan each ip address (from the guest agent) for an open port
         /// </summary>
-        /// <param name="port"></param>
         public String PollPort(int port, bool vnc)
         {
             try

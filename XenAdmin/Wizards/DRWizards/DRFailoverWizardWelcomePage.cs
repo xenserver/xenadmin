@@ -78,9 +78,8 @@ namespace XenAdmin.Wizards.DRWizards
             return radioButtonFailover.Checked || radioButtonFailback.Checked || radioButtonDryrun.Checked;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Forward)
             {
                 labelFailoverDescription.Text = String.Format(labelFailoverDescription.Text, Connection.Name);

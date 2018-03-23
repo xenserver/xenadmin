@@ -200,8 +200,30 @@ node("${params.BUILD_ON_NODE}") {
       }
     }
 
+    stage('Run checks') {
+      if (params.SKIP_CHECKS) {
+        println "Skipping initial checks on request."
+      } else {
+
+        List<String> list = ["check-roaming.sh", "copyrightcheck/copyrightcheck.sh", "i18ncheck/i18ncheck.sh", "deadcheck/deadcheck.sh", "spellcheck/spellcheck.sh"]
+        for (String item : list) {
+          bat """
+          cd ${env.WORKSPACE}\\xenadmin.git\\devtools
+          sh "${item}"
+          """
+        }
+      }
+    }
+
+    stage('Build') {
+      bat """
+          cd ${env.WORKSPACE}
+          sh "xenadmin.git/mk/xenadmin-build.sh"
+          """
+    }
+
     stage('Create manifest') {
-      GString manifestFile = "${env.WORKSPACE}\\output\\manifest"
+      GString manifestFile = "${env.WORKSPACE}\\output\\xenadmin-manifest.txt"
       File file = new File(manifestFile)
 
       String branchInfo = (params.XC_BRANCH == 'master') ? 'trunk' : params.XC_BRANCH
@@ -236,29 +258,7 @@ node("${params.BUILD_ON_NODE}") {
       file << "xencenter-ovf xencenter-ovf.git 21d3d7a7041f15abfa73f916e5fd596fd7e610c4\n"
       file << "chroot-lenny chroots.hg 1a75fa5848e8\n"
 
-      file << readFile("${env.WORKSPACE}\\scratch\\dotnet-packages-manifest").trim()
-    }
-
-    stage('Run checks') {
-      if (params.SKIP_CHECKS) {
-        println "Skipping initial checks on request."
-      } else {
-
-        List<String> list = ["check-roaming.sh", "copyrightcheck/copyrightcheck.sh", "i18ncheck/i18ncheck.sh", "deadcheck/deadcheck.sh", "spellcheck/spellcheck.sh"]
-        for (String item : list) {
-          bat """
-          cd ${env.WORKSPACE}\\xenadmin.git\\devtools
-          sh "${item}"
-          """
-        }
-      }
-    }
-
-    stage('Build') {
-      bat """
-          cd ${env.WORKSPACE}
-          sh "xenadmin.git/mk/xenadmin-build.sh"
-          """
+      file << readFile("${env.WORKSPACE}\\scratch\\dotnet-packages-manifest.txt").trim()
     }
 
     stage('Run tests') {

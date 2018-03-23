@@ -88,16 +88,16 @@ namespace XenAdmin.Wizards.GenericPages
 
         public override void PageCancelled()
         {
+            CancelFilters();
             Program.Invoke(Program.MainWindow, ClearComboBox);
             Program.Invoke(Program.MainWindow, ClearDataGridView);
             ChosenItem = null;
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             SetDefaultTarget(ChosenItem);
             Program.Invoke(Program.MainWindow, ClearComboBox);
-            base.PageLeave(direction, ref cancel);
         }
 
 	    protected void InitializeText()
@@ -168,9 +168,8 @@ namespace XenAdmin.Wizards.GenericPages
 
 		#region Base class (XenTabPage) overrides
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-            base.PageLoaded(direction);
             ChosenItem = null;
             restoreGridHomeServerSelection = (direction == PageLoadedDirection.Back);
 		}
@@ -404,16 +403,21 @@ namespace XenAdmin.Wizards.GenericPages
                             }
                         }
 
-                        foreach (var host in Connection.Cache.Hosts)
+                        var sortedHosts = new List<Host>(Connection.Cache.Hosts);
+                        sortedHosts.Sort();
+
+                        var items = new List<DelayLoadingOptionComboBoxItem>();
+
+                        foreach (var host in sortedHosts)
                         {
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
                             item.LoadAndWait();
                             cb.Items.Add(item);
-
                             if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
-                                (target != null && target.Item.opaque_ref == host.opaque_ref)))
+                                                 (target != null && target.Item.opaque_ref == host.opaque_ref)))
                                 cb.Value = item;
                         }
+
                     }
 
                     SetComboBoxPreSelection(cb);
@@ -635,6 +639,17 @@ namespace XenAdmin.Wizards.GenericPages
                 xenConnection.CachePopulated -= xenConnection_CachePopulated;
                 xenConnection.Cache.DeregisterCollectionChanged<Host>(Host_CollectionChangedWithInvoke);
             }
-        } 
-	}
+        }
+
+	    private void CancelFilters()
+	    {
+	        foreach (var item in m_comboBoxConnection.Items)
+	        {
+	            DelayLoadingOptionComboBoxItem comboBoxItem = item as DelayLoadingOptionComboBoxItem;
+                if (comboBoxItem != null)
+                    comboBoxItem.CancelFilters();
+	        }
+        }
+
+    }
 }

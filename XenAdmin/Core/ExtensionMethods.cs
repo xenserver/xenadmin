@@ -58,7 +58,6 @@ namespace XenAdmin.Core
         /// objects to scale the text. This performs a binary chop on the string to get the correct length
         /// </summary>
         /// <param name="text"></param>
-        /// <param name="g"></param>
         /// <param name="rectangle"></param>
         /// <param name="font"></param>
         /// <returns></returns>

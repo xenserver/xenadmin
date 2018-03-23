@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -41,37 +40,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         protected readonly IXenConnection Connection;
 
-        protected PlanActionWithSession(IXenConnection connection, String description, int offset)
+        protected PlanActionWithSession(IXenConnection connection, string description)
             : base(description)
         {
             if(connection==null)
                 throw new ArgumentException(this.GetType().Name+" connection null");
-            this.Connection = connection;
-        }
-
-        protected PlanActionWithSession(IXenConnection connection, String description)
-            : this(connection, description, 1)
-        {
-        }
-
-        protected T TryResolveWithTimeout<T>(XenRef<T> t) where T : XenObject<T>
-        {
-            log.DebugFormat("Resolving {0} {1}", t, t.opaque_ref);
-            int timeout = 120; // two minutes;
-
-            while (timeout > 0)
-            {
-                T obj = Connection.Resolve(t);
-                if (obj != null)
-                    return obj;
-
-                Thread.Sleep(1000);
-                timeout = timeout - 1;
-            }
-
-            if (typeof(T) == typeof(Host))
-                throw new Failure(Failure.HOST_OFFLINE);
-            throw new Failure(Failure.HANDLE_INVALID, typeof(T).Name, t.opaque_ref);
+            Connection = connection;
         }
 
         protected abstract void RunWithSession(ref Session session);

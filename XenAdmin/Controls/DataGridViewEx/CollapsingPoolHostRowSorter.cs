@@ -40,6 +40,7 @@ namespace XenAdmin.Controls.DataGridViewEx
 {
     /// <summary>
     /// A class implementation to do sorting of CollapsingPoolHostDataGridViewRow derived types based on the input column index and direction
+    /// </summary>
     public class CollapsingPoolHostRowSorter<T> : CollapsingPoolHostDataGridViewRowStableSorter<T> where T : CollapsingPoolHostDataGridViewRow
     {
         private int columnClicked;

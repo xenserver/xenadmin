@@ -31,52 +31,61 @@
 
 using System;
 using System.Collections.Generic;
-using XenAdmin.Network;
+using XenAdmin.Core;
 using XenAPI;
+
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public abstract class VMsPlanAction : PlanActionWithSession
+    public class RestartHostPlanAction : RebootPlanAction
     {
         private readonly List<XenRef<VM>> _vms;
+        private readonly bool _enableOnly;
+        private readonly bool _restartAgentFallback;
 
-        protected VMsPlanAction(List<XenRef<VM>> vms, IXenConnection connection, String description)
-            : base(connection, description)
+        public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, bool restartAgentFallback = false)
+            : base(host, string.Empty)
         {
-            this._vms = vms;
+            _vms = vms;
+            Visible = false;
+            _enableOnly = enableOnly;
+            _restartAgentFallback = restartAgentFallback;
         }
-
-        protected abstract XenRef<Task> DoPerVM(Session session, VM vm);
 
         protected override void RunWithSession(ref Session session)
         {
-            List<VM> vmObjs = new List<VM>();
-            foreach (XenRef<VM> vm in _vms)
-                vmObjs.Add(Connection.TryResolveWithTimeout(vm));
+            Visible = true;
 
-            PBD.CheckAndPlugPBDsFor(vmObjs);
+            var hostObj = GetResolvedHost();
 
-            int vmCount = _vms.Count;
-            int i = 0;
-
-            foreach (VM vm in vmObjs)
+            if (Helpers.ElyOrGreater(hostObj))
             {
-                XenRef<Task> task = DoPerVM(session, vm);
+                log.DebugFormat("Checking host.patches_requiring_reboot now on '{0}'.", hostObj);
 
-                try
+                if (hostObj.updates_requiring_reboot.Count > 0)
                 {
-                    PollTaskForResult(Connection, ref session, task, delegate(int progress)
-                                                                                                 {
-                                                                                                     PercentComplete = (progress / vmCount) + ((100 * i) / vmCount);
-                                                                                                 });
-
-                    i++;
+                    log.DebugFormat("Found {0} patches requiring reboot (live patching failed)."
+                                    + "Initiating evacuate-reboot-bringbabiesback process.",
+                        hostObj.updates_requiring_reboot.Count);
                 }
-                finally
+                else if (_restartAgentFallback)
                 {
-                    Task.destroy(session, task);
+                    log.Debug("Live patching succeeded. Restarting agent.");
+                    Title = string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, hostObj.Name());
+                    WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
+                    return;
+                }
+                else
+                {
+                    log.Debug("Did not find patches requiring reboot (live patching succeeded)."
+                              + " Skipping scheduled restart.");
+                    return;
                 }
             }
+
+            EvacuateHost(ref session);
+            RebootHost(ref session);
+            BringBabiesBack(ref session, _vms, _enableOnly);
         }
     }
 }

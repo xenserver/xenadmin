@@ -113,9 +113,8 @@ namespace XenAdmin.Wizards.DRWizards
             get { return selectedPoolMetadata; }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             if (direction == PageLoadedDirection.Forward)
             {
                 SetupLabels();

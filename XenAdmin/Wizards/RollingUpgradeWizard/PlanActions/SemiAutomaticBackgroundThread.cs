@@ -130,15 +130,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
                         try
                         {
-                            if (planAction is UpgradeManualHostPlanAction)
-                            {
-                                var upgradeAction = (UpgradeManualHostPlanAction)planAction;
-                                
+                            var upgradeAction = planAction as UpgradeManualHostPlanAction;
+                            if (upgradeAction != null)
+                            {                              
                                 if (ManageSemiAutomaticPlanAction != null)
                                     ManageSemiAutomaticPlanAction(upgradeAction);
                                 
                                 if (host.IsMaster())
-                                    poolHigherProductVersion = upgradeAction.Host.LongProductVersion();
+                                    poolHigherProductVersion = upgradeAction.GetResolvedHost().LongProductVersion();
                             }
                             else
                                 planAction.Run();

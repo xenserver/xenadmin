@@ -92,9 +92,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             get { return "SelectServers"; }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             try
             {
                 poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null;
@@ -381,7 +380,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return false;
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             try
             {
@@ -420,7 +419,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
                     }
                 }
-                base.PageLeave(direction, ref cancel);
             }
             catch (Exception e)
             {
