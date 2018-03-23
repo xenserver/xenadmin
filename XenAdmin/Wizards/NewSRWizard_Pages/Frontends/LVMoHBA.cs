@@ -54,6 +54,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public LVMoHBA()
         {
             InitializeComponent();
+            SrType = SR.SRTypes.lvmohba;
         }
 
         public virtual SR.SRTypes SrType { get; set; }

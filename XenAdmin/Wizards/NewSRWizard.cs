@@ -284,12 +284,14 @@ namespace XenAdmin.Wizards
                     AddPage(xenTabPageVhdoNFS);
                 else if (m_srWizardType is SrWizardType_Iscsi)
                 {
-                    AddPage(xenTabPageChooseSrProv);
+                    if (Helpers.KolkataOrGreater(xenConnection) && !Helpers.FeatureForbidden(xenConnection, Host.CorosyncDisabled))
+                        AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoIscsi);
                 }
                 else if (m_srWizardType is SrWizardType_Hba)
                 {
-                    AddPage(xenTabPageChooseSrProv);
+                    if (Helpers.KolkataOrGreater(xenConnection) && !Helpers.FeatureForbidden(xenConnection, Host.CorosyncDisabled))
+                        AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoHba);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
