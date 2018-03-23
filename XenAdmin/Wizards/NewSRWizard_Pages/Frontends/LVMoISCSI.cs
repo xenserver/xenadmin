@@ -107,6 +107,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public LVMoISCSI()
         {
             InitializeComponent();
+            SrType = SR.SRTypes.lvmoiscsi;
         }
 
         #region XentabPage overrides

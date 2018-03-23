@@ -38,6 +38,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public LVMoFCoE()
         {
             InitializeComponent();
+            SrType = SR.SRTypes.lvmofcoe;
         }
 
         #region LVMoHBA overrides
