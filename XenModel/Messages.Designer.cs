@@ -28369,7 +28369,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs or cross-server private networks.
+        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks.
         /// </summary>
         public static string POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE {
             get {
@@ -32155,6 +32155,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yes (disabled).
+        /// </summary>
+        public static string SRIOV_DISABLED {
+            get {
+                return ResourceManager.GetString("SRIOV_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to These servers needs to be rebooted for this SR-IOV network to take effect:&apos;{0}&apos;.
         /// </summary>
         public static string SRIOV_ENABLE_REBOOT_WARNING {
@@ -32166,18 +32175,9 @@ namespace XenAdmin {
         /// <summary>
         ///   Looks up a localized string similar to SR-IOV networks require the SR-IOV capable NIC..
         /// </summary>
-        public static string SRIOV_NEED_NICSUPPORT{
-            get
-            {
-                return ResourceManager.GetString("SRIOV_NEED_NICSUPPORT", resourceCulture);
-            }
-        }
-
-        ///   Looks up a localized string similar to Yes (disabled).
-        /// </summary>
-        public static string SRIOV_DISABLED {
+        public static string SRIOV_NEED_NICSUPPORT {
             get {
-                return ResourceManager.GetString("SRIOV_DISABLED", resourceCulture);
+                return ResourceManager.GetString("SRIOV_NEED_NICSUPPORT", resourceCulture);
             }
         }
         
@@ -34328,6 +34328,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has one or more PCI devices attached..
+        /// </summary>
+        public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it cannot be suspended..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON {
@@ -36107,7 +36116,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM.
+        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM..
         /// </summary>
         public static string VIF_HOTPLUG_FAILED_MESSAGE {
             get {

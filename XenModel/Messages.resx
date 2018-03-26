@@ -9883,7 +9883,7 @@ Please reconnect the host and try again</value>
     <value>Pool join not possible</value>
   </data>
   <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>This server must not have any bonds, non management VLANs or cross-server private networks</value>
+    <value>This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
     <value>This server must not have any bonds, VLANs or cross-server private networks</value>
@@ -11838,6 +11838,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has one or more PCI devices attached.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>
