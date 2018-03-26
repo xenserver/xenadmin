@@ -172,9 +172,11 @@ namespace XenAdmin.Wizards.ImportWizard
         	var networks = m_selectedConnection.Cache.Networks.Where(ShowNetwork);
 
 			foreach (XenAPI.Network network in networks)
+            {
                 col.Items.Add(new ToStringWrapper<XenAPI.Network>(network, network.Name()));
+            }
 
-		    col.DisplayMember = ToStringWrapper<XenAPI.Network>.DisplayMember;
+            col.DisplayMember = ToStringWrapper<XenAPI.Network>.DisplayMember;
 		    col.ValueMember = ToStringWrapper<XenAPI.Network>.ValueMember;
             col.Sorted = true;
         }
@@ -267,7 +269,10 @@ namespace XenAdmin.Wizards.ImportWizard
 			if (m_selectedAffinity == null && !network.AllHostsCanSeeNetwork())
 				return false;
 
-			return true;
+            if (network.IsSriov() && !m_vm.HasSriovRecommendation())
+                return false;
+
+            return true;
 		}
 
 		private void AddVIFRow(VIF vif)

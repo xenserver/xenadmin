@@ -189,6 +189,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.tableLayoutPanel1.SetColumnSpan(this.checkBoxSriov, 4);
             this.checkBoxSriov.Name = "checkBoxSriov";
             this.checkBoxSriov.UseVisualStyleBackColor = true;
+            this.checkBoxSriov.CheckedChanged += new System.EventHandler(this.checkBoxSriov_CheckedChanged);
             // 
             // NetWDetails
             // 

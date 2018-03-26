@@ -339,11 +339,20 @@ namespace XenAPI
             //if (!pif.IsPhysical && !poolwide)
             //    return Messages.SPACED_HYPHEN;
 
-            if(IsSriovLogicalPIF())
+            // LinkStatus of SR-IOV network and VLAN on SR-IOV network
+            if(IsSriovLogicalPIF() || VLAN >= 0)
             {
-                Network_sriov network_s = Connection.Resolve(sriov_logical_PIF_of[0]);
-                if (network_s == null || network_s.requires_reboot == true)
+                var network_sriov = NetworkSriov();
+                if(network_sriov == null && VLAN < 0)
+                {
                     return LinkState.Disconnected;
+                }
+                else if(network_sriov != null)
+                {
+                    Network_sriov network_s = Connection.Resolve(network_sriov);
+                    if (network_s == null || network_s.requires_reboot == true)
+                        return LinkState.Disconnected;
+                }
             }
 
             PIF_metrics pifMetrics = PIFMetrics();
@@ -385,6 +394,20 @@ namespace XenAPI
         public bool SriovCapable()
         {
             return capabilities.Any(capability => capability == "sriov");
+        }
+
+        public XenRef<Network_sriov> NetworkSriov()
+        {
+            if (IsSriovLogicalPIF())
+                return sriov_logical_PIF_of[0];
+
+            if (VLAN < 0)
+                return null;
+            var vlan = Connection.Resolve(VLAN_master_of);
+            if (vlan == null)
+                return null;
+            var taggedPif = Connection.Resolve(vlan.tagged_PIF);
+            return taggedPif != null && taggedPif.IsSriovLogicalPIF() ? taggedPif.sriov_logical_PIF_of[0] : null;
         }
     }
 }

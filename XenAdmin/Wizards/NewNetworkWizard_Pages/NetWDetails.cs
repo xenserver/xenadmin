@@ -115,7 +115,7 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
 
         public bool CreateVlanOnSriovNetwork
         {
-            get { return checkBoxSriov.Checked; }
+            get { return checkBoxSriov.Visible && checkBoxSriov.Checked; }
         }
 
         /// <summary>
@@ -169,12 +169,13 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private List<int> GetVLANList(PIF nic)
         {
             List<int> vlans = new List<int>();
-
             foreach (PIF pif in nic.Connection.Cache.PIFs)
             {
                 if (pif.device == nic.device)
                 {
-                    vlans.Add((int)pif.VLAN);
+                    var pifIsSriov = pif.NetworkSriov() != null;
+                    if ((CreateVlanOnSriovNetwork && pifIsSriov) || (!CreateVlanOnSriovNetwork && !pifIsSriov))
+                        vlans.Add((int)pif.VLAN);
                 }
             }
 
@@ -276,6 +277,12 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
                 return;
             }
             SetError(null);
+        }
+
+        private void checkBoxSriov_CheckedChanged(object sender, EventArgs e)
+        {
+            vlans = GetVLANList(SelectedHostNic);
+            ValidateVLANValue();
         }
     }
 }
