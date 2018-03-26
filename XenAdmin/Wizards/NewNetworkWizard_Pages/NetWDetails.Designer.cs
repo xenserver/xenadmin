@@ -39,12 +39,13 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.lblNicHelp = new System.Windows.Forms.Label();
             this.numericUpDownVLAN = new System.Windows.Forms.NumericUpDown();
             this.comboBoxNICList = new System.Windows.Forms.ComboBox();
-            this.checkBoxAutomatic = new System.Windows.Forms.CheckBox();
             this.labelMTU = new System.Windows.Forms.Label();
             this.numericUpDownMTU = new System.Windows.Forms.NumericUpDown();
             this.panelVLANInfo = new System.Windows.Forms.Panel();
             this.labelVlanError = new System.Windows.Forms.Label();
             this.labelVLAN0Info = new System.Windows.Forms.Label();
+            this.checkBoxAutomatic = new System.Windows.Forms.CheckBox();
+            this.checkBoxSriov = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.infoMtuPanel.SuspendLayout();
@@ -70,10 +71,11 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.tableLayoutPanel1.Controls.Add(this.lblNicHelp, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownVLAN, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxNICList, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxAutomatic, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.labelMTU, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownMTU, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.panelVLANInfo, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxAutomatic, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxSriov, 0, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // infoMtuPanel
@@ -144,13 +146,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             this.comboBoxNICList.Sorted = true;
             this.comboBoxNICList.SelectedIndexChanged += new System.EventHandler(this.cmbHostNicList_SelectedIndexChanged);
             // 
-            // checkBoxAutomatic
-            // 
-            resources.ApplyResources(this.checkBoxAutomatic, "checkBoxAutomatic");
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAutomatic, 4);
-            this.checkBoxAutomatic.Name = "checkBoxAutomatic";
-            this.checkBoxAutomatic.UseVisualStyleBackColor = true;
-            // 
             // labelMTU
             // 
             resources.ApplyResources(this.labelMTU, "labelMTU");
@@ -180,6 +175,21 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
             resources.ApplyResources(this.labelVLAN0Info, "labelVLAN0Info");
             this.labelVLAN0Info.ForeColor = System.Drawing.SystemColors.ControlText;
             this.labelVLAN0Info.Name = "labelVLAN0Info";
+            // 
+            // checkBoxAutomatic
+            // 
+            resources.ApplyResources(this.checkBoxAutomatic, "checkBoxAutomatic");
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAutomatic, 4);
+            this.checkBoxAutomatic.Name = "checkBoxAutomatic";
+            this.checkBoxAutomatic.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSriov
+            // 
+            resources.ApplyResources(this.checkBoxSriov, "checkBoxSriov");
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxSriov, 4);
+            this.checkBoxSriov.Name = "checkBoxSriov";
+            this.checkBoxSriov.UseVisualStyleBackColor = true;
+            this.checkBoxSriov.CheckedChanged += new System.EventHandler(this.checkBoxSriov_CheckedChanged);
             // 
             // NetWDetails
             // 
@@ -220,5 +230,6 @@ namespace XenAdmin.Wizards.NewNetworkWizard_Pages
         private System.Windows.Forms.Panel infoMtuPanel;
         private System.Windows.Forms.Label infoMtuMessage;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.CheckBox checkBoxSriov;
     }
 }

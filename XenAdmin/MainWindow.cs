@@ -1832,6 +1832,7 @@ namespace XenAdmin
                 tabPage.PageHidden();
         }
 
+        /// <param name="sender"></param>
         /// <param name="e">
         /// If null, then we deduce the method was called by TreeView_AfterSelect
         /// and don't focus the VNC console. i.e. we only focus the VNC console if the user

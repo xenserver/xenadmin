@@ -5349,6 +5349,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FAST_CLONE_UNAVAILABLE" xml:space="preserve">
     <value>Fast clone is not supported by this storage type</value>
   </data>
+  <data name="FEATURE_DISABLED" xml:space="preserve">
+    <value>'{0}' feature is disabled due to license restrictions on the server.</value>
+  </data>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>Feature disabled in the registry</value>
   </data>
@@ -6301,6 +6304,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Live patching status</value>
+  </data>
+  <data name="HOST_NEEDS_REBOOT_ENABLE_SRIOV" xml:space="preserve">
+    <value>Yes (Host needs reboot)</value>
   </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Add Network...</value>
@@ -8112,6 +8118,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NETWORK_SETTINGS" xml:space="preserve">
     <value>Network Settings</value>
   </data>
+  <data name="NETWORK_SRIOV" xml:space="preserve">
+    <value>SR-IOV</value>
+  </data>
   <data name="NETWORK_WITH_POOL" xml:space="preserve">
     <value>{0} on {1}</value>
   </data>
@@ -8879,6 +8888,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>New Search</value>
   </data>
+  <data name="NEW_SRIOV_NETWORK_NAME" xml:space="preserve">
+    <value>New SR-IOV network</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>Connection to {0} has been lost</value>
   </data>
@@ -8963,6 +8975,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NICPANEL_HALF_DUPLEX" xml:space="preserve">
     <value>Half</value>
+  </data>
+  <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
+    <value>All the supported NICs have enabled SR-IOV.</value>
   </data>
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (Hidden)</value>
@@ -9868,7 +9883,7 @@ Please reconnect the host and try again</value>
     <value>Pool join not possible</value>
   </data>
   <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>This server must not have any bonds, non management VLANs or cross-server private networks</value>
+    <value>This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
     <value>This server must not have any bonds, VLANs or cross-server private networks</value>
@@ -10212,6 +10227,9 @@ Disconnect from this server, or reconnect as a more privileged user.</value>
   </data>
   <data name="READ_WRITE" xml:space="preserve">
     <value>Read / Write</value>
+  </data>
+  <data name="REAMININF_VFS" xml:space="preserve">
+    <value>Yes ({0} VFs remaining)</value>
   </data>
   <data name="REATTACH_SR" xml:space="preserve">
     <value>R&amp;eattach</value>
@@ -11049,6 +11067,21 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SR" xml:space="preserve">
     <value>Storage Repository</value>
   </data>
+  <data name="SRIOV_DISABLED" xml:space="preserve">
+    <value>Yes (disabled)</value>
+  </data>
+  <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
+    <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
+  </data>
+  <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
+    <value>SR-IOV networks require the SR-IOV capable NIC.</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE" xml:space="preserve">
+    <value>Create &amp;SR-IOV anyway</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION" xml:space="preserve">
+    <value>Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed</value>
+  </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>
   </data>
@@ -11808,6 +11841,9 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it has a virtual GPU attached and there is no suitable GPU available on other servers.</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has one or more PCI devices attached.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>

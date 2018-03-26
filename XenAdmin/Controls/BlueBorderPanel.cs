@@ -38,10 +38,7 @@ using XenAdmin.Core;
 
 namespace XenAdmin.Controls
 {
-    /// <summary>
-    /// Taken from 
-    /// http://209.85.165.104/search?q=cache:hnUUN2Zhi7YJ:www.developersdex.com/vb/message.asp%3Fp%3D2927%26r%3D5855234+NativeMethods.GetDCEx&hl=en&ct=clnk&cd=1&gl=uk&client=firefox-a
-    /// </summary>
+    // Taken from http://209.85.165.104/search?q=cache:hnUUN2Zhi7YJ:www.developersdex.com/vb/message.asp%3Fp%3D2927%26r%3D5855234+NativeMethods.GetDCEx&hl=en&ct=clnk&cd=1&gl=uk&client=firefox-a
     public class BlueBorderPanel : DoubleBufferedPanel
     {
         private Color borderColor = Drawing.XPBorderColor;

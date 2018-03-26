@@ -191,6 +191,7 @@ namespace XenAdmin.Controls.CheckableDataGridView
         /// Pass in the replacement row
         /// </summary>
         /// <param name="toUpdate">Replacement Row</param>
+        /// <param name="refreshGrid"></param>
         private void UpdateRow(CheckableDataGridViewRow toUpdate, bool refreshGrid)
         {
             if (toUpdate == null)

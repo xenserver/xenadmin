@@ -42,6 +42,8 @@ using XenAdmin.Dialogs;
 using System.Drawing;
 using XenAdmin.Alerts;
 using System.Linq;
+using System.Xml;
+using DiscUtils.Iso9660;
 using XenAdmin.Actions;
 
 
@@ -49,6 +51,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 {
     public partial class PatchingWizard_SelectPatchPage : XenTabPage
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private bool CheckForUpdatesInProgress;
         public XenServerPatchAlert SelectedUpdateAlert;
         public XenServerPatchAlert FileFromDiskAlert;
@@ -173,10 +177,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (AutomatedUpdatesRadioButton.Visible && AutomatedUpdatesRadioButton.Checked)
                     return WizardMode.AutomatedUpdates;
-                var updateAlert = downloadUpdateRadioButton.Checked && dataGridViewPatches.SelectedRows.Count > 0
-                    ? (XenServerPatchAlert) ((PatchGridViewRow) dataGridViewPatches.SelectedRows[0]).UpdateAlert
+                var updateAlert = downloadUpdateRadioButton.Checked
+                    ? SelectedUpdateAlert
                     : selectFromDiskRadioButton.Checked
-                        ? GetAlertFromFileName(isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath.ToLowerInvariant() : fileNameTextBox.Text.ToLowerInvariant())
+                        ? FileFromDiskAlert
                         : null;
                 if (updateAlert != null && updateAlert.NewServerVersion != null)
                     return WizardMode.NewVersion;
@@ -199,7 +203,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (!IsInAutomatedUpdatesMode)
                 {
-                    if (selectFromDiskRadioButton.Checked && Path.GetExtension(fileNameTextBox.Text).ToLowerInvariant().Equals(".zip"))
+                    if (selectFromDiskRadioButton.Checked && !string.IsNullOrEmpty(fileNameTextBox.Text) && Path.GetExtension(fileNameTextBox.Text).ToLowerInvariant().Equals(".zip"))
                     {
                         //check if we are installing update user sees in textbox
                         if (Path.GetFileNameWithoutExtension(unzippedUpdateFilePath) != Path.GetFileNameWithoutExtension(fileNameTextBox.Text))
@@ -216,17 +220,17 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     var fileName = isValidFile(unzippedUpdateFilePath) ? unzippedUpdateFilePath.ToLowerInvariant() : fileNameTextBox.Text.ToLowerInvariant();
 
-                    SelectedUpdateAlert = downloadUpdateRadioButton.Checked
-                             ? (XenServerPatchAlert)((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
+                    SelectedUpdateAlert = downloadUpdateRadioButton.Checked && dataGridViewPatches.SelectedRows.Count > 0
+                             ? ((PatchGridViewRow)dataGridViewPatches.SelectedRows[0]).UpdateAlert
                              : null;
 
                     FileFromDiskAlert = selectFromDiskRadioButton.Checked
-                                                 ? GetAlertFromFileName(fileName)
+                                                 ? GetAlertFromFile(fileName)
                                                  : null;
 
                     if (downloadUpdateRadioButton.Checked)
                     {
-                        if (SelectedUpdateAlert != null && SelectedUpdateAlert.DistinctHosts != null && SelectedUpdateAlert.DistinctHosts.Any(dh => Helpers.ElyOrGreater(dh))) // this is to check whether the Alert represents an ISO update (Ely or greater)
+                        if (SelectedUpdateAlert != null && SelectedUpdateAlert.DistinctHosts != null && SelectedUpdateAlert.DistinctHosts.Any(Helpers.ElyOrGreater)) // this is to check whether the Alert represents an ISO update (Ely or greater)
                         {
                             SelectedUpdateType = UpdateType.ISO;
                         }
@@ -276,16 +280,50 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private XenServerPatchAlert GetAlertFromFileName(string fileName)
+        private XenServerPatchAlert GetAlertFromFile(string fileName)
         {
-            foreach (PatchGridViewRow row in dataGridViewPatches.Rows)
+            var alertFromIso = GetAlertFromIsoFile(fileName);
+            if (alertFromIso != null)
+                return alertFromIso;
+
+            // couldn't find an alert from the information in the iso file, try matching by name
+            return Updates.FindPatchAlertByName(Path.GetFileNameWithoutExtension(fileName));
+        }
+
+        private XenServerPatchAlert GetAlertFromIsoFile(string fileName)
+        {
+            if (!fileName.EndsWith(Branding.UpdateIso))
+                return null;
+
+            var xmlDoc = new XmlDocument();
+
+            try
             {
-                if (string.Equals(row.UpdateAlert.Patch.Name, Path.GetFileNameWithoutExtension(fileName), StringComparison.OrdinalIgnoreCase))
+                using (var isoStream = File.Open(fileName, FileMode.Open))
                 {
-                    return row.UpdateAlert;
+                    var cd = new CDReader(isoStream, true);
+                    if (cd.Exists("Update.xml"))
+                    {
+                        using (var fileStream = cd.OpenFile("Update.xml", FileMode.Open))
+                        {
+                            xmlDoc.Load(fileStream);
+                        }
+                    }
                 }
             }
-            return null;
+            catch (Exception exception)
+            {
+                log.ErrorFormat("Exception while reading the update data from the iso file: {0}", exception.Message);
+            }
+
+            var elements = xmlDoc.GetElementsByTagName("update");
+            var update = elements.Count > 0 ? elements[0] : null;
+
+            if (update == null || update.Attributes == null)
+                return null;
+
+            var uuid = update.Attributes["uuid"];
+            return uuid != null ? Updates.FindPatchAlertByUuid(uuid.Value) : null;
         }
 
         private void PageLeaveCancelled(string message)

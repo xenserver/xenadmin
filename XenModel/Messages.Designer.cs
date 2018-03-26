@@ -15233,6 +15233,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; feature is disabled due to license restrictions on the server..
+        /// </summary>
+        public static string FEATURE_DISABLED {
+            get {
+                return ResourceManager.GetString("FEATURE_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature disabled in the registry.
         /// </summary>
         public static string FEATURE_DISABLED_IN_REGISTER {
@@ -17945,6 +17954,15 @@ namespace XenAdmin {
         public static string HOST_NEEDS_REBOOT_CHECK_DESCRIPTION {
             get {
                 return ResourceManager.GetString("HOST_NEEDS_REBOOT_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes (Host needs reboot).
+        /// </summary>
+        public static string HOST_NEEDS_REBOOT_ENABLE_SRIOV {
+            get {
+                return ResourceManager.GetString("HOST_NEEDS_REBOOT_ENABLE_SRIOV", resourceCulture);
             }
         }
         
@@ -23202,6 +23220,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SR-IOV.
+        /// </summary>
+        public static string NETWORK_SRIOV {
+            get {
+                return ResourceManager.GetString("NETWORK_SRIOV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} on {1}.
         /// </summary>
         public static string NETWORK_WITH_POOL {
@@ -23731,6 +23758,15 @@ namespace XenAdmin {
         public static string NEW_SR_WIZARD_FINAL_ACTION_TITLE {
             get {
                 return ResourceManager.GetString("NEW_SR_WIZARD_FINAL_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New SR-IOV network.
+        /// </summary>
+        public static string NEW_SRIOV_NETWORK_NAME {
+            get {
+                return ResourceManager.GetString("NEW_SRIOV_NETWORK_NAME", resourceCulture);
             }
         }
         
@@ -25778,6 +25814,15 @@ namespace XenAdmin {
         public static string NICPANEL_HALF_DUPLEX {
             get {
                 return ResourceManager.GetString("NICPANEL_HALF_DUPLEX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All the supported NICs have enabled SR-IOV..
+        /// </summary>
+        public static string NICS_ARE_SRIOV_ENABLED {
+            get {
+                return ResourceManager.GetString("NICS_ARE_SRIOV_ENABLED", resourceCulture);
             }
         }
         
@@ -28324,7 +28369,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs or cross-server private networks.
+        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks.
         /// </summary>
         public static string POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE {
             get {
@@ -29380,6 +29425,15 @@ namespace XenAdmin {
         public static string READY_UPGRADE {
             get {
                 return ResourceManager.GetString("READY_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes ({0} VFs remaining).
+        /// </summary>
+        public static string REAMININF_VFS {
+            get {
+                return ResourceManager.GetString("REAMININF_VFS", resourceCulture);
             }
         }
         
@@ -32101,6 +32155,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yes (disabled).
+        /// </summary>
+        public static string SRIOV_DISABLED {
+            get {
+                return ResourceManager.GetString("SRIOV_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These servers needs to be rebooted for this SR-IOV network to take effect:&apos;{0}&apos;.
+        /// </summary>
+        public static string SRIOV_ENABLE_REBOOT_WARNING {
+            get {
+                return ResourceManager.GetString("SRIOV_ENABLE_REBOOT_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SR-IOV networks require the SR-IOV capable NIC..
+        /// </summary>
+        public static string SRIOV_NEED_NICSUPPORT {
+            get {
+                return ResourceManager.GetString("SRIOV_NEED_NICSUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create &amp;SR-IOV anyway.
+        /// </summary>
+        public static string SRIOV_NETWORK_CREATE {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_CREATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed.
+        /// </summary>
+        public static string SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string SRPANEL_ACTIVE {
@@ -34234,6 +34333,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has one or more PCI devices attached..
+        /// </summary>
+        public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON", resourceCulture);
             }
         }
         

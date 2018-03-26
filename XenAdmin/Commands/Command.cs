@@ -476,7 +476,11 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Runs the specified <see cref="AsyncAction"/>s such that they are synchronous per connection but asynchronous across connections.
         /// </summary>
-        /// <param name="runActionsInParallel">Whether or not the actions should be executed symultaneously</param>
+        /// <param name="endDescription"></param>
+        /// <param name="runActionsInParallel">Whether the actions should be executed simultaneously</param>
+        /// <param name="actions"></param>
+        /// <param name="title"></param>
+        /// <param name="startDescription"></param>
         public void RunMultipleActions(IEnumerable<AsyncAction> actions, string title, string startDescription, string endDescription, bool runActionsInParallel)
         {
             MultipleActionLauncher launcher = new MultipleActionLauncher(actions, title, startDescription, endDescription, runActionsInParallel);

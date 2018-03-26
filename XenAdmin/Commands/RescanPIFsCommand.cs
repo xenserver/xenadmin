@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 using XenAPI;
 using XenAdmin.Actions;
-using XenAdmin.Core;
+
 
 namespace XenAdmin.Commands
 {
@@ -43,8 +43,6 @@ namespace XenAdmin.Commands
         /// <summary>
         /// Executes a PIF scan on a host
         /// </summary>
-        /// <param name="mainWindow"></param>
-        /// <param name="vbd"></param>
         public RescanPIFsCommand(IMainWindow mainWindow, Host host)
             : base(mainWindow, host)
         {

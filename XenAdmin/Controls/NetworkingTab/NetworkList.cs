@@ -166,7 +166,8 @@ namespace XenAdmin.Controls.NetworkingTab
                         this.AutoColumn,
                         this.LinkStatusColumn,
                         this.NetworkMacColumn,
-                        this.MtuColumn});
+                        this.MtuColumn,
+                        this.NetworkSriovColumn});
 
                 //CA-47050: the Description column should be autosized to Fill, but should not become smaller than a minimum
                 //width, which here is chosen to be the column header width. To find what this width is set temporarily the
@@ -175,6 +176,8 @@ namespace XenAdmin.Controls.NetworkingTab
                 int storedWidth = this.DescriptionColumn.Width;
                 this.DescriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 this.DescriptionColumn.MinimumWidth = storedWidth;
+
+                NetworkSriovColumn.Visible = Helpers.KolkataOrGreater(_xenObject.Connection);
             }
             finally
             {
@@ -508,7 +511,8 @@ namespace XenAdmin.Controls.NetworkingTab
                     // Cache populating?
                     return;
                 }
-                VIFDialog d = new VIFDialog(vm.Connection, null, VIF.GetDeviceId(vm));
+
+                VIFDialog d = new VIFDialog(vm.Connection, null, VIF.GetDeviceId(vm), vm.HasSriovRecommendation());
                 if (d.ShowDialog(this) != DialogResult.OK)
                     return;
 
@@ -731,7 +735,7 @@ namespace XenAdmin.Controls.NetworkingTab
             VIFDialog d;
             if (int.TryParse(vif.device, out device))
             {
-                d = new VIFDialog(vm.Connection, vif, device);
+                d = new VIFDialog(vm.Connection, vif, device, vm.HasSriovRecommendation());
             }
             else
             {
@@ -901,7 +905,8 @@ namespace XenAdmin.Controls.NetworkingTab
             private DataGridViewTextBoxCell AutoCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell LinkStatusCell = new DataGridViewTextBoxCell();
             private DataGridViewTextBoxCell MacCell = new DataGridViewTextBoxCell();
-            private DataGridViewTextBoxCell MtuCell = new DataGridViewTextBoxCell(); 
+            private DataGridViewTextBoxCell MtuCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell SriovCell = new DataGridViewTextBoxCell();
             private IXenObject Xmo;
             PIF Pif;
 
@@ -918,7 +923,8 @@ namespace XenAdmin.Controls.NetworkingTab
                                AutoCell,
                                LinkStatusCell,
                                MacCell,
-                               MtuCell);
+                               MtuCell,
+                               SriovCell);
 
                 Network.PropertyChanged += Server_PropertyChanged;
 
@@ -945,6 +951,21 @@ namespace XenAdmin.Controls.NetworkingTab
                     Pif == null ? Messages.NONE : Pif.LinkStatusString();
                 MacCell.Value = Pif != null && Pif.IsPhysical() ? Pif.MAC : Messages.SPACED_HYPHEN;
                 MtuCell.Value = Network.CanUseJumboFrames() ? Network.MTU.ToString() : Messages.SPACED_HYPHEN;
+
+                var networkSriov = Pif != null ? Pif.NetworkSriov() : null;
+                if(networkSriov == null)
+                {
+                    SriovCell.Value = Messages.NO;
+                }
+                else
+                {
+                    var sriov = Pif.Connection.Resolve(networkSriov);
+                    SriovCell.Value = sriov == null
+                        ? Messages.NO
+                        : sriov.requires_reboot
+                            ? Messages.HOST_NEEDS_REBOOT_ENABLE_SRIOV
+                            : Messages.YES;
+                }
             }
 
             public void DeregisterEvents()
@@ -1029,17 +1050,25 @@ namespace XenAdmin.Controls.NetworkingTab
         {
             if (XenObject != null && XenObject is VM && e.Column.Index == DeviceColumn.Index)
             {
-                int val1 = 0;
-                int val2 = 0;
-                if (int.TryParse(e.CellValue1.ToString(), out val1)
-                    && int.TryParse(e.CellValue2.ToString(), out val2))
+                int val1, val2;
+                if (e.CellValue1 != null && int.TryParse(e.CellValue1.ToString(), out val1)
+                    && e.CellValue2 != null && int.TryParse(e.CellValue2.ToString(), out val2))
                 {
                     e.SortResult = val1.CompareTo(val2);
                     e.Handled = true;
                     return;
                 }
             }
-            e.SortResult = StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString());
+
+            if (e.CellValue1 == null && e.CellValue2 == null)
+                e.SortResult = 0;
+            else if (e.CellValue1 == null && e.CellValue2 != null)
+                e.SortResult = 1;
+            else if (e.CellValue1 != null && e.CellValue2 == null)
+                e.SortResult = -1;
+            else
+                e.SortResult = StringUtility.NaturalCompare(e.CellValue1.ToString(), e.CellValue2.ToString());
+
             e.Handled = true;
         }
     }

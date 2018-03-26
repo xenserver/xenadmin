@@ -287,7 +287,9 @@ namespace XenAdmin.Dialogs
 
             if (!AllowManagementOnVLAN && (type == Type.PRIMARY || type == Type.PRIMARY_WITH_HA))
                 networks.RemoveAll(network=>network.IsVLAN());
-            
+        
+            networks.RemoveAll(network => network.IsSriov());
+
             NetworkComboBox.Items.AddRange(networks.ToArray());
 
             SquelchNetworkComboBoxChange = true;

@@ -237,6 +237,11 @@ namespace XenAPI
         {
             return BoolKeyPreferTrue(h.license_params, "restrict_vswitch_controller"); 
         }
+   
+        public static bool RestrictSriovNetwork(Host h)
+        {
+            return BoolKeyPreferTrue(h.license_params, "restrict_network_sriov");
+        }
 
         public static bool RestrictPooling(Host h)
         {
