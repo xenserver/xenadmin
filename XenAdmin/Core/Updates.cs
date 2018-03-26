@@ -503,9 +503,10 @@ namespace XenAdmin.Core
 
 
         /// <summary>
-        /// Returns the latest XenCenter version or null, if the current version is the latest. 
-        /// If a server version is provided, it returns the XenCenter version that is required to work with that server. 
-        /// If no server version is provided it will return the latestCr XenCenter.
+        /// If parameter is null, it returns latestcr XenCenter version if it is greater than current XC version,
+        /// or null, if the current XC version is latestcr.
+        /// If parameter is not null, it returns the minimum XenCenter version if it is greater than the current XC version,
+        /// or null, if the minimum XC version couldn't be found or the current XC version is enough.
         /// </summary>
         /// <param name="serverVersion"></param>
         /// <returns></returns>
@@ -518,17 +519,17 @@ namespace XenAdmin.Core
             if (currentProgramVersion == new Version(0, 0, 0, 0))
                 return null;
 
-            var latestVersions = from v in XenCenterVersions where v.Latest select v;
-            var latest = latestVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
-                         latestVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+            if (serverVersion == null)
+                return XenCenterVersions.FirstOrDefault(xcv => xcv.LatestCr && xcv.Version > currentProgramVersion);
 
-            var latestCrVersions = from v in XenCenterVersions where v.LatestCr select v;
-            var latestCr = latestCrVersions.FirstOrDefault(xcv => xcv.Lang == Program.CurrentLanguage) ??
-                           latestCrVersions.FirstOrDefault(xcv => string.IsNullOrEmpty(xcv.Lang));
+            var minXcVersion = serverVersion.MinimumXcVersion;
+            if (String.IsNullOrEmpty(minXcVersion))
+                return null;
 
-            if (serverVersion != null && serverVersion.Latest && latest != null)
-                return latest.Version > currentProgramVersion ? latest : null;
-            return latestCr != null && latestCr.Version > currentProgramVersion ? latestCr : null;  
+            var minimumXcVersion = XenCenterVersions.FirstOrDefault(xcv => xcv.Version.ToString() == minXcVersion);
+            return minimumXcVersion != null && minimumXcVersion.Version > currentProgramVersion
+                ? minimumXcVersion
+                : null;
         }
         
         /// <summary>

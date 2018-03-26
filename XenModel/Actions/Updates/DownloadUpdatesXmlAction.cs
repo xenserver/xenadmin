@@ -245,6 +245,7 @@ namespace XenAdmin.Actions
                     string buildNumber = "";
                     string patchUuid = "";
                     bool presentAsUpdate = false;
+                    string minXcVersion = "";
 
                     foreach (XmlAttribute attrib in version.Attributes)
                     {
@@ -266,6 +267,8 @@ namespace XenAdmin.Actions
                             patchUuid = attrib.Value;
                         else if (attrib.Name == "present-as-update")
                             presentAsUpdate = attrib.Value.ToUpperInvariant() == bool.TrueString.ToUpperInvariant();
+                        else if (attrib.Name == "minimum-xc-version")
+                            minXcVersion = attrib.Value;
                     }
 
                     List<XenServerPatch> patches = new List<XenServerPatch>();
@@ -301,7 +304,7 @@ namespace XenAdmin.Actions
                     }
 
                     XenServerVersions.Add(new XenServerVersion(version_oem, name, is_latest, is_latest_cr, url, patches, minimalPatches, timestamp,
-                                                               buildNumber, patchUuid, presentAsUpdate));
+                                                               buildNumber, patchUuid, presentAsUpdate, minXcVersion));
                 }
             }
         }
