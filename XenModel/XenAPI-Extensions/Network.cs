@@ -295,7 +295,7 @@ namespace XenAPI
 
         public bool IsSriov()
         {
-            return Connection.ResolveAll(PIFs).Find(pif => pif.IsSriovLogicalPIF()) != null;
+            return Connection.ResolveAll(PIFs).Find(pif => pif.NetworkSriov() != null) != null;
         }
 
 
