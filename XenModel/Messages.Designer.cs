@@ -28369,7 +28369,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs, SR-IOV network or cross-server private networks.
+        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks.
         /// </summary>
         public static string POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE {
             get {
@@ -34328,7 +34328,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has PCI attached..
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has one or more PCI devices attached..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON {
             get {
@@ -36116,7 +36116,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM.
+        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM..
         /// </summary>
         public static string VIF_HOTPLUG_FAILED_MESSAGE {
             get {
