@@ -291,6 +291,9 @@
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>已对选定 VM 禁用 PVS 加速器</value>
   </data>
+  <data name="ACTION_DISABLE_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>禁用 VM 自动启动</value>
+  </data>
   <data name="ACTION_DISABLE_CHANGED_BLOCK_TRACKING" xml:space="preserve">
     <value>禁用更改块跟踪</value>
   </data>
@@ -314,6 +317,9 @@
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>在 VM“{0}”上禁用容器管理</value>
+  </data>
+  <data name="ACTION_DISABLING_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>对“{0}”禁用自动启动</value>
   </data>
   <data name="ACTION_DISABLING_CHANGED_BLOCK_TRACKING" xml:space="preserve">
     <value>正在对选定 VM 禁用更改块跟踪</value>
@@ -423,6 +429,9 @@
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>已对选定 VM 启用 PVS 加速器</value>
   </data>
+  <data name="ACTION_ENABLE_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>启用 VM 自动启动</value>
+  </data>
   <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>启用 IGMP 监听</value>
   </data>
@@ -440,6 +449,9 @@
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>在 VM“{0}”上启用容器管理</value>
+  </data>
+  <data name="ACTION_ENABLING_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>对“{0}”启用自动启动</value>
   </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
     <value>对“{0}”启用实时修补</value>
@@ -2301,6 +2313,9 @@
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
     <value>必须先在 VM“{0}”上安装 [XenServer product] Tools，才能为该 VM 激活此虚拟磁盘。</value>
   </data>
+  <data name="CANNOT_CHANGE_IP_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>仅当主机处于维护模式时才能更改此接口，因为在 {0} 上启用了群集。</value>
+  </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(无法更改网络的 MTU，因为该 MTU 正用作管理接口“{0}”)</value>
   </data>
@@ -2420,6 +2435,9 @@
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>无法解析 XML 节点“{0}”上的必需参数“{1}”</value>
   </data>
+  <data name="CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK" xml:space="preserve">
+    <value>不能删除此 IP 地址，因为在 {0} 上启用了群集。</value>
+  </data>
   <data name="CANNOT_REMOVE_SL_SERVER" xml:space="preserve">
     <value>无法删除该 StorageLink 服务器，因为该服务器当前正在使用。</value>
   </data>
@@ -2513,6 +2531,9 @@
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>需要选中重新启动选项</value>
   </data>
+  <data name="CHECKING_SERVER_SELECTION" xml:space="preserve">
+    <value>检查服务器选择</value>
+  </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>正在检查服务器端状态</value>
   </data>
@@ -2546,6 +2567,9 @@
   <data name="CHOOSE_ANOTHER_DESTINATION" xml:space="preserve">
     <value>选择其他目标(&amp;D)</value>
   </data>
+  <data name="CHOOSE_SR_PROVISIONING_PAGE_TITLE" xml:space="preserve">
+    <value>选择置备方法</value>
+  </data>
   <data name="CHOOSE_SR_TYPE_PAGE_TITLE" xml:space="preserve">
     <value>选择新存储的类型</value>
   </data>
@@ -2566,6 +2590,9 @@
   </data>
   <data name="CLOSE_WIZARD_CLICK_FINISH" xml:space="preserve">
     <value>要关闭该向导，请单击“完成”</value>
+  </data>
+  <data name="CLUSTERING" xml:space="preserve">
+    <value>群集</value>
   </data>
   <data name="COLLAPSE_CHILDREN" xml:space="preserve">
     <value>折叠子项(&amp;C)</value>
@@ -2613,14 +2640,14 @@
 是否继续?</value>
   </data>
   <data name="CONFIRM_CHANGE_MEMORY_PLURAL" xml:space="preserve">
-    <value>如果在 VM 运行时更改其内存，将导致这些 VM 被强制重启。该操作会导致数据丢失。
+    <value>在这些 VM 运行过程中更改其内存将导致这些 VM 被强制重启。此操作会导致数据丢失。
 
-是否继续?</value>
+是否要继续?</value>
   </data>
   <data name="CONFIRM_CHANGE_MEMORY_SINGULAR" xml:space="preserve">
-    <value>如果在 VM 运行时更改其内存，将导致该 VM 被强制重启。该操作会导致数据丢失。
+    <value>在此 VM 运行过程中更改其内存将导致此 VM 被强制重启。此操作会导致数据丢失。
 
-是否继续?</value>
+是否要继续?</value>
   </data>
   <data name="CONFIRM_CHANGE_STATIC_MAX_PLURAL" xml:space="preserve">
     <value>如果更改这些 VM 的最大静态内存，将导致其重新启动。
@@ -2737,11 +2764,11 @@
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>此操作将在选定 VM 的磁盘上禁用更改块跟踪。如果要使用任何第三方解决方案备份这些 VM，这些磁盘将受到影响。请注意，无法再次从 [XenCenter] 启用更改块跟踪。是否要继续?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
-    <value>在 VM“{0}”上禁用更改块跟踪</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VMS_TITLE" xml:space="preserve">
     <value>在选定 VM 上禁用更改块跟踪</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
+    <value>在 VM“{0}”上禁用更改块跟踪</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>是否确实要在选定的池上禁用运行状况检查?</value>
@@ -3999,11 +4026,17 @@
   <data name="DISABLED" xml:space="preserve">
     <value>已禁用</value>
   </data>
+  <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>已在 {0} 上禁用群集。</value>
+  </data>
   <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
     <value>找不到任何更新，因为已禁用自动检查更新。</value>
   </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>已禁用快照计划“{0}”。</value>
+  </data>
+  <data name="DISABLE_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>禁用群集。</value>
   </data>
   <data name="DISABLE_HA" xml:space="preserve">
     <value>禁用高可用性</value>
@@ -4037,6 +4070,9 @@
   </data>
   <data name="DISABLING_AD_ON" xml:space="preserve">
     <value>正在池“{0}”上禁用 Active Directory 身份验证</value>
+  </data>
+  <data name="DISABLING_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>正在 {0} 上禁用群集。</value>
   </data>
   <data name="DISABLING_HA" xml:space="preserve">
     <value>正在禁用高可用性</value>
@@ -4290,6 +4326,9 @@
   </data>
   <data name="DR_CONFIGURE_TITLE" xml:space="preserve">
     <value>在“{0}”上配置 DR</value>
+  </data>
+  <data name="DR_CONFIGURE_TOO_MANY_SRS" xml:space="preserve">
+    <value>最多只能选择 {0} 个 SR 来存储 VM 配置数据。</value>
   </data>
   <data name="DR_DRYRUN_AMP" xml:space="preserve">
     <value>试运行(&amp;Y)...</value>
@@ -4777,8 +4816,14 @@
   <data name="ENABLED" xml:space="preserve">
     <value>已启用</value>
   </data>
+  <data name="ENABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>已在 {0} 上启用群集。</value>
+  </data>
   <data name="ENABLED_VMSS" xml:space="preserve">
     <value>已启用快照计划“{0}”。</value>
+  </data>
+  <data name="ENABLE_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>启用群集。</value>
   </data>
   <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
     <value>启用高可用性(&amp;E)...</value>
@@ -4809,6 +4854,9 @@
   </data>
   <data name="ENABLING_AD_ON" xml:space="preserve">
     <value>正在池“{0}”上启用 Active Directory 身份验证</value>
+  </data>
+  <data name="ENABLING_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>正在 {0} 上启用群集。</value>
   </data>
   <data name="ENABLING_HA" xml:space="preserve">
     <value>正在启用高可用性</value>
@@ -5300,6 +5348,9 @@
   <data name="FAST_CLONE_UNAVAILABLE" xml:space="preserve">
     <value>该存储类型不支持快速克隆</value>
   </data>
+  <data name="FEATURE_DISABLED" xml:space="preserve">
+    <value>'{0}' feature is disabled due to license restrictions on the server.</value>
+  </data>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>功能已在注册表中禁用</value>
   </data>
@@ -5608,6 +5659,21 @@
   </data>
   <data name="GETPASSWORD" xml:space="preserve">
     <value>获取密码</value>
+  </data>
+  <data name="GFS2_HA_ENABLED" xml:space="preserve">
+    <value>必须在启用群集之前禁用高可用性。</value>
+  </data>
+  <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
+    <value>您的池许可证不允许精简置备(GFS2)。</value>
+  </data>
+  <data name="GFS2_NO_NETWORK" xml:space="preserve">
+    <value>无法启用群集，因为没有适用的网络。</value>
+  </data>
+  <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>精简置备(GFS2)要求在池上启用群集。</value>
+  </data>
+  <data name="GFS2_SR_ATTACHED" xml:space="preserve">
+    <value>无法禁用群集，因为有精简置备的(GFS2)存储库连接到此池。</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
@@ -6237,6 +6303,9 @@
   </data>
   <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
     <value>实时修补状态</value>
+  </data>
+  <data name="HOST_NEEDS_REBOOT_ENABLE_SRIOV" xml:space="preserve">
+    <value>Yes (Host needs reboot)</value>
   </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>添加网络(&amp;A)...</value>
@@ -7010,6 +7079,10 @@ SCSI ID: {2}
   </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>状态</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
+    <value>符合支持条件 
+已启用 XenApp/XenDesktop [Citrix] Cloud 功能</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>满足支持条件 
@@ -8044,6 +8117,9 @@ SCSI ID: {2}
   <data name="NETWORK_SETTINGS" xml:space="preserve">
     <value>网络设置</value>
   </data>
+  <data name="NETWORK_SRIOV" xml:space="preserve">
+    <value>SR-IOV</value>
+  </data>
   <data name="NETWORK_WITH_POOL" xml:space="preserve">
     <value>{1} 上的 {0}</value>
   </data>
@@ -8326,9 +8402,7 @@ SCSI ID: {2}
     <value>硬件 HBA</value>
   </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
-    <value>可以使用 LVM 配置对共享 LUN 的 iSCSI 或光纤通道访问。
-
-对共享 SR 使用 LVM 提供的性能优势与对本地磁盘存储使用非共享 LVM 相同，但前者还能够灵活地启用 VM。</value>
+    <value>可以将对共享 LUN 的 iSCSI 或光纤通道访问配置为使用 LVM 托管完整置备的虚拟磁盘或通过 GFS2 群集文件系统进行格式化以便托管精简置备的虚拟磁盘。</value>
   </data>
   <data name="NEWSR_LVMOISCSI_TYPE_NAME" xml:space="preserve">
     <value>iSCSI</value>
@@ -8813,6 +8887,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>新搜索</value>
   </data>
+  <data name="NEW_SRIOV_NETWORK_NAME" xml:space="preserve">
+    <value>New SR-IOV network</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>与 {0} 的连接丢失</value>
   </data>
@@ -8897,6 +8974,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="NICPANEL_HALF_DUPLEX" xml:space="preserve">
     <value>半</value>
+  </data>
+  <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
+    <value>All the supported NICs have enabled SR-IOV.</value>
   </data>
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (隐藏)</value>
@@ -9802,7 +9882,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>无法加入池</value>
   </data>
   <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>此服务器不得具有任何绑定、非管理 VLAN 或跨服务器专用网络</value>
+    <value>This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
     <value>此服务器不得具有任何绑定、VLAN 或跨服务器专用网络</value>
@@ -9921,6 +10001,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="PROTECTED_VMS_TITLE" xml:space="preserve">
     <value>选择要通过该策略保护的 VM</value>
+  </data>
+  <data name="PROVISIONING" xml:space="preserve">
+    <value>置备</value>
   </data>
   <data name="PROVISIONING_OPTIONS" xml:space="preserve">
     <value>置备选项</value>
@@ -10143,6 +10226,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="READ_WRITE" xml:space="preserve">
     <value>读/写</value>
+  </data>
+  <data name="REAMININF_VFS" xml:space="preserve">
+    <value>Yes ({0} VFs remaining)</value>
   </data>
   <data name="REATTACH_SR" xml:space="preserve">
     <value>重新连接(&amp;E)</value>
@@ -10425,6 +10511,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>正在执行池滚动升级(&amp;U)...</value>
   </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
+    <value>停止(&amp;T)</value>
+  </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_TEST" xml:space="preserve">
+    <value>测试(&amp;T)</value>
+  </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>可以通过重新启动“池滚动升级”向导继续执行此升级。</value>
   </data>
@@ -10654,6 +10746,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SERVER_REQUEST_IN_PROGRESS" xml:space="preserve">
     <value>正在执行服务器请求</value>
+  </data>
+  <data name="SERVER_SELECTION_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>服务器选择检查</value>
   </data>
   <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
     <value>磁盘空间检查</value>
@@ -10970,6 +11065,21 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="SR" xml:space="preserve">
     <value>存储库</value>
+  </data>
+  <data name="SRIOV_DISABLED" xml:space="preserve">
+    <value>Yes (disabled)</value>
+  </data>
+  <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
+    <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
+  </data>
+  <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
+    <value>SR-IOV networks require the SR-IOV capable NIC.</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE" xml:space="preserve">
+    <value>Create &amp;SR-IOV anyway</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION" xml:space="preserve">
+    <value>Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>活动</value>
@@ -11708,8 +11818,11 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   <data name="UPDATES_WIZARD_APPLY_UPDATE" xml:space="preserve">
     <value>安装更新(&amp;I)</value>
   </data>
+  <data name="UPDATES_WIZARD_BROKEN_SR_WARNING" xml:space="preserve">
+    <value>{0}: 已跳过检查，因为“{1}”存储库已损坏。</value>
+  </data>
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
-    <value>{0} 存储库已损坏。</value>
+    <value>{0}:“{1}”存储库已损坏。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>无法从 {0} 中下载更新: 连接已断开。
@@ -11724,6 +11837,12 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
     <value>无法迁移 VM“{0}”，因为该 VM 未安装最新的驱动程序。</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has a virtual GPU attached and there is no suitable GPU available on other servers.</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has one or more PCI devices attached.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
     <value>无法迁移 VM“{0}”，因为无法暂停该 VM。</value>
@@ -11932,6 +12051,9 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
   </data>
   <data name="UPDATES_WIZARD_RUNNING_PRECHECK" xml:space="preserve">
     <value>在 {1} 中执行 {0} 的预检查...</value>
+  </data>
+  <data name="UPDATES_WIZARD_SERVER_SELECTION_PROBLEM" xml:space="preserve">
+    <value>{0}: 需要对池中的所有服务器应用更新。</value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>存储库“{0}”</value>
@@ -12365,7 +12487,7 @@ VM 克隆使用文件管理器的快照和克隆功能来实现高性能，并�
     <value>查看快照计划</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
-    <value>虚拟网络设备更改将在关闭后重新启动 VM 时生效。</value>
+    <value>当您关闭并重新启动 VM 时，虚拟网络设备更改将生效。</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_TITLE" xml:space="preserve">
     <value>虚拟网络设备更改</value>

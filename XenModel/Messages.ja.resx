@@ -291,6 +291,9 @@
   <data name="ACTION_DISABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>選択した VM の PVS アクセラレータが無効になっています</value>
   </data>
+  <data name="ACTION_DISABLE_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>VM の自動起動を無効化</value>
+  </data>
   <data name="ACTION_DISABLE_CHANGED_BLOCK_TRACKING" xml:space="preserve">
     <value>変更ブロック追跡の無効化</value>
   </data>
@@ -314,6 +317,9 @@
   </data>
   <data name="ACTION_DISABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>VM '{0}' 上のコンテナ管理の無効化</value>
+  </data>
+  <data name="ACTION_DISABLING_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>'{0}' の自動起動を無効にしています</value>
   </data>
   <data name="ACTION_DISABLING_CHANGED_BLOCK_TRACKING" xml:space="preserve">
     <value>選択した VM の変更ブロック追跡の無効化</value>
@@ -423,6 +429,9 @@
   <data name="ACTION_ENABLED_PVS_READ_CACHING" xml:space="preserve">
     <value>選択した VM の PVS アクセラレータが有効になっています</value>
   </data>
+  <data name="ACTION_ENABLE_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>VM の自動起動を有効化</value>
+  </data>
   <data name="ACTION_ENABLE_IGMP_SNOOPING" xml:space="preserve">
     <value>IGMP スヌーピングの有効化</value>
   </data>
@@ -440,6 +449,9 @@
   </data>
   <data name="ACTION_ENABLE_VM_ENLIGHTENMENT_TITLE" xml:space="preserve">
     <value>VM '{0}' 上のコンテナ管理の有効化</value>
+  </data>
+  <data name="ACTION_ENABLING_AUTOSTART_ON_VM" xml:space="preserve">
+    <value>'{0}' の自動起動を有効にしています</value>
   </data>
   <data name="ACTION_ENABLING_LIVE_PATCHING" xml:space="preserve">
     <value>'{0}' のライブ パッチを有効にしています</value>
@@ -1944,7 +1956,7 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
     <value>スナップショットの作成直後</value>
   </data>
   <data name="ASIS_CAPABLE" xml:space="preserve">
-    <value>A-SIS 可能</value>
+    <value>A-SIS 対応</value>
   </data>
   <data name="ASSERT_CAN_EVACUATE_CHECK_DESCRIPTION" xml:space="preserve">
     <value>VM 移行状態</value>
@@ -2305,6 +2317,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
     <value>この仮想ディスクを VM '{0}' 上でアクティブにするには、VM に [XenServer product] Tools をインストールする必要があります。</value>
   </data>
+  <data name="CANNOT_CHANGE_IP_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>{0} でクラスタリングが有効になるため、ホストが保守モードの場合のみインターフェイスを変更できます。</value>
+  </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(管理インターフェイス '{0}' により使用されているため、このネットワークの MTU を変更できません)</value>
   </data>
@@ -2424,6 +2439,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>XML ノード '{0}' の必須パラメーター '{1}' を解析できません。</value>
   </data>
+  <data name="CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK" xml:space="preserve">
+    <value>{0} でクラスタリングが有効なため、この IP アドレスは削除できません。</value>
+  </data>
   <data name="CANNOT_REMOVE_SL_SERVER" xml:space="preserve">
     <value>この StorageLink サーバーは使用中であり、削除できません。</value>
   </data>
@@ -2517,6 +2535,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHECKING_SERVER_NEEDS_REBOOT" xml:space="preserve">
     <value>再起動の確認が必要です</value>
   </data>
+  <data name="CHECKING_SERVER_SELECTION" xml:space="preserve">
+    <value>サーバーの選択を確認しています</value>
+  </data>
   <data name="CHECKING_SERVER_SIDE_STATUS" xml:space="preserve">
     <value>サーバー側の状態のチェック</value>
   </data>
@@ -2550,6 +2571,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CHOOSE_ANOTHER_DESTINATION" xml:space="preserve">
     <value>ほかの場所を指定(&amp;D)</value>
   </data>
+  <data name="CHOOSE_SR_PROVISIONING_PAGE_TITLE" xml:space="preserve">
+    <value>プロビジョニング方法の選択</value>
+  </data>
   <data name="CHOOSE_SR_TYPE_PAGE_TITLE" xml:space="preserve">
     <value>新規ストレージの種類を選択します</value>
   </data>
@@ -2570,6 +2594,9 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   </data>
   <data name="CLOSE_WIZARD_CLICK_FINISH" xml:space="preserve">
     <value>このウィザードを閉じるには、[完了] をクリックします</value>
+  </data>
+  <data name="CLUSTERING" xml:space="preserve">
+    <value>クラスタリング</value>
   </data>
   <data name="COLLAPSE_CHILDREN" xml:space="preserve">
     <value>子ノードを閉じる(&amp;C)</value>
@@ -2741,11 +2768,11 @@ SR の物理使用量が {2} を超えるとアラートが送信されます。
   <data name="CONFIRM_DISABLE_CBT_VMS" xml:space="preserve">
     <value>これにより、選択した VM のディスクで変更ブロック追跡が無効になります。VM のバックアップ作成にサードパーティのソリューションを使用している場合、影響を受けることがあります。[XenCenter] から再度変更ブロック追跡を有効にすることはできません。続行しますか?</value>
   </data>
-  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
-    <value>VM "{0}" の変更ブロック追跡を無効化</value>
-  </data>
   <data name="CONFIRM_DISABLE_CBT_VMS_TITLE" xml:space="preserve">
     <value>選択した VM の 変更ブロック追跡を無効化</value>
+  </data>
+  <data name="CONFIRM_DISABLE_CBT_VM_TITLE" xml:space="preserve">
+    <value>VM "{0}" の変更ブロック追跡を無効化</value>
   </data>
   <data name="CONFIRM_DISABLE_HEALTH_CHECK_POOL" xml:space="preserve">
     <value>選択したプールのヘルス チェックを無効にしてもよろしいですか?</value>
@@ -3624,7 +3651,7 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
     <value>遅延</value>
   </data>
   <data name="DATATYPE_LOADAVERAGE" xml:space="preserve">
-    <value>読み込み平均</value>
+    <value>負荷平均</value>
   </data>
   <data name="DATATYPE_MEMORY" xml:space="preserve">
     <value>メモリ</value>
@@ -4005,11 +4032,17 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   <data name="DISABLED" xml:space="preserve">
     <value>無効</value>
   </data>
+  <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>{0} でクラスタリングが無効です。</value>
+  </data>
   <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
     <value>アップデートの自動チェックが無効になっているため、アップデートが見つかりません。</value>
   </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>スナップショット スケジュール '{0}' が無効になりました。</value>
+  </data>
+  <data name="DISABLE_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>クラスタリングを無効にする。</value>
   </data>
   <data name="DISABLE_HA" xml:space="preserve">
     <value>高可用性の無効化</value>
@@ -4043,6 +4076,9 @@ VM 移行処理のパフォーマンスや信頼性を向上させるため、�
   </data>
   <data name="DISABLING_AD_ON" xml:space="preserve">
     <value>プール '{0}' の Active Directory 認証の無効化</value>
+  </data>
+  <data name="DISABLING_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>{0} でクラスタリングを無効にしています。</value>
   </data>
   <data name="DISABLING_HA" xml:space="preserve">
     <value>高可用性の無効化</value>
@@ -4296,6 +4332,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="DR_CONFIGURE_TITLE" xml:space="preserve">
     <value>'{0}' の障害回復の構成</value>
+  </data>
+  <data name="DR_CONFIGURE_TOO_MANY_SRS" xml:space="preserve">
+    <value>仮想マシン構成データを格納するための SR は {0} 個までしか選択できません。</value>
   </data>
   <data name="DR_DRYRUN_AMP" xml:space="preserve">
     <value>実行テスト(&amp;Y)...</value>
@@ -4783,8 +4822,14 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="ENABLED" xml:space="preserve">
     <value>有効</value>
   </data>
+  <data name="ENABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>{0} でクラスタリングが有効です。</value>
+  </data>
   <data name="ENABLED_VMSS" xml:space="preserve">
     <value>スナップショット スケジュール '{0}' が有効になりました。</value>
+  </data>
+  <data name="ENABLE_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>クラスタリングを有効にする。</value>
   </data>
   <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
     <value>高可用性の有効化(&amp;E)...</value>
@@ -4815,6 +4860,9 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="ENABLING_AD_ON" xml:space="preserve">
     <value>プール '{0}' の Active Directory 認証の有効化</value>
+  </data>
+  <data name="ENABLING_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>{0} でクラスタリングを有効にしています。</value>
   </data>
   <data name="ENABLING_HA" xml:space="preserve">
     <value>高可用性を有効にしています</value>
@@ -5306,6 +5354,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FAST_CLONE_UNAVAILABLE" xml:space="preserve">
     <value>この種類のストレージでは、高速複製がサポートされません。</value>
   </data>
+  <data name="FEATURE_DISABLED" xml:space="preserve">
+    <value>'{0}' feature is disabled due to license restrictions on the server.</value>
+  </data>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>機能がレジストリで無効になっています。</value>
   </data>
@@ -5614,6 +5665,21 @@ CD をイジェクトしてから再試行してください。</value>
   </data>
   <data name="GETPASSWORD" xml:space="preserve">
     <value>パスワードの入手</value>
+  </data>
+  <data name="GFS2_HA_ENABLED" xml:space="preserve">
+    <value>クラスタリングを有効にするには、HA を無効にする必要があります。</value>
+  </data>
+  <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
+    <value>使用中のプール ライセンスでシンプロビジョニング (GFS2) はできません。</value>
+  </data>
+  <data name="GFS2_NO_NETWORK" xml:space="preserve">
+    <value>適切なネットワークがないため、クラスタリングを有効にできません。</value>
+  </data>
+  <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>シンプロビジョニング (GFS2) には、プールでクラスタリングを有効にする必要があります。</value>
+  </data>
+  <data name="GFS2_SR_ATTACHED" xml:space="preserve">
+    <value>このプールにシンプロビジョニングされた (GFS2) ストレージ リポジトリが接続されているため、クラスタリングを無効にできません。</value>
   </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
@@ -6243,6 +6309,9 @@ VM の再起動優先度をクリアしてもよろしいですか?</value>
   </data>
   <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
     <value>ライブ パッチの状態</value>
+  </data>
+  <data name="HOST_NEEDS_REBOOT_ENABLE_SRIOV" xml:space="preserve">
+    <value>Yes (Host needs reboot)</value>
   </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>ネットワークの追加(&amp;A)...</value>
@@ -7016,6 +7085,10 @@ SCSI ID: {2}
   </data>
   <data name="LICENSE_STATUS" xml:space="preserve">
     <value>状態</value>
+  </data>
+  <data name="LICENSE_SUPPORT_AND_DESKTOP_CLOUD_FEATURES_ENABLED" xml:space="preserve">
+    <value>サポート契約が有効です
+XenApp/XenDesktop [Citrix] Cloud 機能が有効です</value>
   </data>
   <data name="LICENSE_SUPPORT_AND_DESKTOP_FEATURES_ENABLED" xml:space="preserve">
     <value>サポート契約が有効です
@@ -7883,7 +7956,7 @@ SCSI ID: {2}
     <value>アクティブ</value>
   </data>
   <data name="MULTIPATH_CAPABLE" xml:space="preserve">
-    <value>マルチパス可</value>
+    <value>マルチパス対応</value>
   </data>
   <data name="MULTIPATH_FAILED" xml:space="preserve">
     <value>ストレージのパスのいずれかが正しく動作していません。『[XenServer product] 管理者ガイド』を参照して、ストレージのマルチパス構成を確認してください。</value>
@@ -8049,6 +8122,9 @@ SCSI ID: {2}
   </data>
   <data name="NETWORK_SETTINGS" xml:space="preserve">
     <value>ネットワーク設定</value>
+  </data>
+  <data name="NETWORK_SRIOV" xml:space="preserve">
+    <value>SR-IOV</value>
   </data>
   <data name="NETWORK_WITH_POOL" xml:space="preserve">
     <value>{1} の {0}</value>
@@ -8332,9 +8408,7 @@ LUN をホストに提供するための構成は、[XenServer] ホストのス�
     <value>ハードウェア HBA</value>
   </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
-    <value>共有 LUN への iSCSI またはファイバ チャネルを使ったアクセスを構成するには LVM を使用します。
-
-共有 SR に LVM を使用することは、共有されていない LVM をローカル ディスク ストレージとして使用する場合と同等なパフォーマンス上の利点があり、さらに VM のアジリティが有効になります。</value>
+    <value>共有 LUN への iSCSI または ファイバチャネル アクセスを構成して、LVM の使用で、または GFS2 クラスター ファイル システム (シンプロビジョニング仮想ディスクのホスト用) の形式で、完全にプロビジョニングされた仮想ディスクをホストできます。</value>
   </data>
   <data name="NEWSR_LVMOISCSI_TYPE_NAME" xml:space="preserve">
     <value>iSCSI</value>
@@ -8815,6 +8889,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>新しい検索</value>
   </data>
+  <data name="NEW_SRIOV_NETWORK_NAME" xml:space="preserve">
+    <value>New SR-IOV network</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>{0} への接続が失われました</value>
   </data>
@@ -8899,6 +8976,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="NICPANEL_HALF_DUPLEX" xml:space="preserve">
     <value>半</value>
+  </data>
+  <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
+    <value>All the supported NICs have enabled SR-IOV.</value>
   </data>
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (非表示)</value>
@@ -9804,10 +9884,10 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>プールへの追加不可</value>
   </data>
   <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>このサーバーには、ボンディング、非管理 VLAN、またはサーバー間のプライベート ネットワークがを含めることができません</value>
+    <value>This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
-    <value>このサーバーには、ボンディング、VLAN、またはサーバー間のプライベート ネットワークがを含めることができません</value>
+    <value>このサーバーには、ボンディング、VLAN、またはサーバー間のプライベート ネットワークを使用することができません</value>
   </data>
   <data name="POOL_LICENSE" xml:space="preserve">
     <value>プール ライセンス</value>
@@ -9923,6 +10003,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="PROTECTED_VMS_TITLE" xml:space="preserve">
     <value>このポリシーで保護する VM の選択</value>
+  </data>
+  <data name="PROVISIONING" xml:space="preserve">
+    <value>プロビジョニング</value>
   </data>
   <data name="PROVISIONING_OPTIONS" xml:space="preserve">
     <value>プロビジョニング オプション</value>
@@ -10145,6 +10228,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="READ_WRITE" xml:space="preserve">
     <value>読み取り/書き込み</value>
+  </data>
+  <data name="REAMININF_VFS" xml:space="preserve">
+    <value>Yes ({0} VFs remaining)</value>
   </data>
   <data name="REATTACH_SR" xml:space="preserve">
     <value>再接続(&amp;E)</value>
@@ -10427,6 +10513,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="ROLLING_POOL_UPGRADE_ELLIPSIS" xml:space="preserve">
     <value>プールのローリング アップグレード(&amp;U)...</value>
   </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_STOP" xml:space="preserve">
+    <value>停止(&amp;T)</value>
+  </data>
+  <data name="ROLLING_UPGRADE_BUTTON_LABEL_TEST" xml:space="preserve">
+    <value>テスト(&amp;T)</value>
+  </data>
   <data name="ROLLING_UPGRADE_CAN_RESUME_UPGRADE" xml:space="preserve">
     <value>このアップグレードを再開するには、プールのローリング アップグレード ウィザードを再度実行してください。</value>
   </data>
@@ -10656,6 +10748,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="SERVER_REQUEST_IN_PROGRESS" xml:space="preserve">
     <value>サーバー要求の処理中</value>
+  </data>
+  <data name="SERVER_SELECTION_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>サーバーの選択チェック</value>
   </data>
   <data name="SERVER_SIDE_CHECK_AUTO_MODE_DESCRIPTION" xml:space="preserve">
     <value>ディスク容量のチェック</value>
@@ -10972,6 +11067,21 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="SR" xml:space="preserve">
     <value>ストレージ リポジトリ</value>
+  </data>
+  <data name="SRIOV_DISABLED" xml:space="preserve">
+    <value>Yes (disabled)</value>
+  </data>
+  <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
+    <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
+  </data>
+  <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
+    <value>SR-IOV networks require the SR-IOV capable NIC.</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE" xml:space="preserve">
+    <value>Create &amp;SR-IOV anyway</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION" xml:space="preserve">
+    <value>Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>アクティブ</value>
@@ -11710,8 +11820,11 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="UPDATES_WIZARD_APPLY_UPDATE" xml:space="preserve">
     <value>アップデートのインストール(&amp;I)</value>
   </data>
+  <data name="UPDATES_WIZARD_BROKEN_SR_WARNING" xml:space="preserve">
+    <value>{0}: '{1}' ストレージ リポジトリが破損しているためチェックは省略されました。</value>
+  </data>
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
-    <value>ストレージ リポジトリ {0} との接続に問題があります。</value>
+    <value>{0}: '{1}' ストレージ リポジトリが破損しています。</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>'{0}' からアップデートをダウンロードできません。接続が切断されました。
@@ -11726,6 +11839,12 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
     <value>仮想マシン '{0}' を移行できません。最新のドライバーがインストールされていません。</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has a virtual GPU attached and there is no suitable GPU available on other servers.</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has one or more PCI devices attached.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
     <value>仮想マシン '{0}' は一時停止できないため、移行できません。</value>
@@ -11934,6 +12053,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   </data>
   <data name="UPDATES_WIZARD_RUNNING_PRECHECK" xml:space="preserve">
     <value>{1} の {0} を事前チェック中...</value>
+  </data>
+  <data name="UPDATES_WIZARD_SERVER_SELECTION_PROBLEM" xml:space="preserve">
+    <value>{0}: プール内のすべてのサーバーに更新を適用する必要があります。</value>
   </data>
   <data name="UPDATES_WIZARD_SR_TITLE" xml:space="preserve">
     <value>ストレージ リポジトリ '{0}'</value>
@@ -12367,7 +12489,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>スナップショット スケジュールの表示</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
-    <value>仮想ネットワークへの変更は、VM の再起動後に反映されます。</value>
+    <value>仮想ネットワーク デバイスへの変更は、VM をシャットダウンして再起動した後に反映されます。</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_TITLE" xml:space="preserve">
     <value>仮想ネットワークへの変更</value>
@@ -12841,7 +12963,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>毎週 {1} の {0}</value>
   </data>
   <data name="WINDOWS_UPDATE_CAPABLE" xml:space="preserve">
-    <value>Windows Update 可能</value>
+    <value>Windows Update 対応</value>
   </data>
   <data name="WINDOWS_UPDATE_CAPABLE_NOT" xml:space="preserve">
     <value>Windows Update 不可</value>
@@ -13183,7 +13305,7 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
     <value>ディスク書き込み</value>
   </data>
   <data name="WLB_OPT_REASON_LOADAVERAGE" xml:space="preserve">
-    <value>読み込み平均</value>
+    <value>負荷平均</value>
   </data>
   <data name="WLB_OPT_REASON_MEMORY" xml:space="preserve">
     <value>メモリ</value>

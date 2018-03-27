@@ -150,6 +150,13 @@
   <data name="textBox1.Text" xml:space="preserve">
     <value>everRun is a registered trademark of Stratus Technologies Bermuda Limited.
 
+JSON.NET - Popular high-performance JSON framework for .NET by Newtonsoft (https://www.newtonsoft.com/)
+Copyright (c) 2007 James Newton-King
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
 XML-RPC.NET - XML-RPC for .NET: Copyright (C) 2001-2010 Charles Cook (chascook@gmail.com)
 xmlrpcgen: Copyright (C) 2003 Joe Bork
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -264,6 +271,9 @@ Xen, the Xen logo, XenMotion are trademarks and/or registered trademarks of [Cit
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -370,7 +380,7 @@ Xen, the Xen logo, XenMotion are trademarks and/or registered trademarks of [Cit
     <value>3</value>
   </data>
   <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Right</value>
   </data>
   <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -380,9 +390,6 @@ Xen, the Xen logo, XenMotion are trademarks and/or registered trademarks of [Cit
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>510, 231</value>
-  </data>
-  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>8, 8, 8, 8</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -449,6 +456,12 @@ Xen, the Xen logo, XenMotion are trademarks and/or registered trademarks of [Cit
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>610, 320</value>
+  </data>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>著作権情報</value>
