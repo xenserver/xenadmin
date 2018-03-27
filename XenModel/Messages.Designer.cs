@@ -14665,6 +14665,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
+        ///
+        ///Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including [XenServer] hosts that are not connected to [XenCenter]..
+        /// </summary>
+        public static string EXISTING_SR_FOUND_ON_LUN {
+            get {
+                return ResourceManager.GetString("EXISTING_SR_FOUND_ON_LUN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit &amp;Maintenance Mode.
         /// </summary>
         public static string EXIT_MAINTENANCE_MODE {
@@ -36008,7 +36019,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM.
+        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM..
         /// </summary>
         public static string VIF_HOTPLUG_FAILED_MESSAGE {
             get {

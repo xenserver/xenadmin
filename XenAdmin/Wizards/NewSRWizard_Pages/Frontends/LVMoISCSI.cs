@@ -142,7 +142,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 return;
             }
 
-            Dictionary<String, String> dconf = GetDeviceConfig(SR.SRTypes.lvmoiscsi); // TODO: use SRType
+            Dictionary<String, String> dconf = GetDeviceConfig(SrType);
             if (dconf == null)
             {
                 cancel = true;
@@ -150,7 +150,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
 
             // Start probe
-            SrProbeAction IscsiProbeAction = new SrProbeAction(Connection, master, SR.SRTypes.lvmoiscsi, dconf); // TODO: use SRType
+            SrProbeAction IscsiProbeAction = new SrProbeAction(Connection, master, SrType, dconf);
             using (var dialog = new ActionProgressDialog(IscsiProbeAction, ProgressBarStyle.Marquee))
             {
                 dialog.ShowCancel = true;
@@ -328,7 +328,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 foreach (SR sr in connection.Cache.SRs)
                 {
-                    if (sr.GetSRType(false) != SR.SRTypes.lvmoiscsi)  // TODO: use SRType
+                    if (sr.GetSRType(false) != SR.SRTypes.lvmoiscsi && sr.GetSRType(false) != SR.SRTypes.gfs2)
                         continue;
 
                     if (sr.PBDs.Count < 1)
@@ -355,10 +355,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         /// <returns></returns>
         private bool UniquenessCheckMiami(IXenConnection connection, PBD pbd)
         {
-            if (!pbd.device_config.ContainsKey(SCSIID))
+            String scsiID;
+
+            if (pbd.device_config.ContainsKey(SCSIID))
+                scsiID = pbd.device_config[SCSIID];
+            else if (pbd.device_config.ContainsKey("ScsiId"))
+                scsiID = pbd.device_config["ScsiId"];
+            else
                 return false;
 
-            String scsiID = pbd.device_config[SCSIID];
             String myLUN = getIscsiLUN();
 
             if (!LunMap.ContainsKey(myLUN))
@@ -732,7 +737,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             
             try
             {
-                List<SR.SRInfo> SRs = SR.ParseSRListXML(action.Result);
+                List<SR.SRInfo> SRs = action.ProbeExtResult != null ? SR.ParseSRList(action.ProbeExtResult) : SR.ParseSRListXML(action.Result);
 
                 if (!String.IsNullOrEmpty(SrWizardType.UUID))
                 {
@@ -806,7 +811,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     // An SR exists on this LUN. Ask the user if they want to attach it, format it and
                     // create a new SR, or cancel.
                     DialogResult result = Program.RunInAutomatedTestMode ? DialogResult.Yes :
-                        new IscsiChoicesDialog(Connection, info).ShowDialog(this);
+                        new IscsiChoicesDialog(Connection, info, action.SrType, SrType).ShowDialog(this);
                     
                     switch (result)
                     {
@@ -854,18 +859,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             if (srType == SR.SRTypes.gfs2)
             {
-                // build the uri for gfs2
-                var jsonUri = new JavaScriptSerializer().Serialize(new
-                {
-                    provider = "iscsi",
-                    ips = iqn.item.IpAddress,
-                    port = iqn.item.Port.ToString(),
-                    iqns = getIscsiIQN(),
-                    ScsiId = LunMap[getIscsiLUN()].ScsiID,
-                    chapuser = IScsiChapUserTextBox.Text,
-                    chappassword = IScsiChapSecretTextBox.Text
-                });
-                dconf[URI] = jsonUri;
+                dconf["provider"] = "iscsi";
+                dconf["ips"] = iqn.item.IpAddress;
+                dconf["port"] = iqn.item.Port.ToString();
+                dconf["iqns"] = getIscsiIQN();
+                dconf["ScsiId"] = LunMap[getIscsiLUN()].ScsiID;
+                dconf["chapuser"] = IScsiChapUserTextBox.Text;
+                dconf["chappassword"] = IScsiChapSecretTextBox.Text;
 
                 return dconf;
             }

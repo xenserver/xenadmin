@@ -41,12 +41,14 @@ namespace XenAdmin.Actions
     public class SrProbeAction : PureAsyncAction
     {
         private readonly Host host;
-        private readonly SR.SRTypes srType;
+        public readonly SR.SRTypes SrType;
         private readonly Dictionary<String, String> dconf;
         public const String DEVICE = "device";
         public const String SCSIid = "SCSIid";
         public const String PATH = "path";
         public const String URI = "uri";
+
+        public List<Probe_result> ProbeExtResult;
 
         private readonly Dictionary<String, String> smconf;
         /// <summary>
@@ -58,28 +60,32 @@ namespace XenAdmin.Actions
             : base(connection, string.Format(Messages.ACTION_SCANNING_SR_FROM, Helpers.GetName(connection)), null, true)
         {
             this.host = host;
-            this.srType = srType;
+            this.SrType = srType;
             this.dconf = dconf;
 
             switch (srType) {
-                case XenAPI.SR.SRTypes.nfs:
+                case SR.SRTypes.nfs:
                     Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        XenAPI.SR.getFriendlyTypeName(srType), dconf["server"]);
+                        SR.getFriendlyTypeName(srType), dconf["server"]);
                     break;
-                case XenAPI.SR.SRTypes.lvmoiscsi:
+                case SR.SRTypes.lvmoiscsi:
                     Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        XenAPI.SR.getFriendlyTypeName(srType), dconf["target"]);
+                        SR.getFriendlyTypeName(srType), dconf["target"]);
                     break;
-                case XenAPI.SR.SRTypes.lvmohba:
-                case XenAPI.SR.SRTypes.lvmofcoe:
+                case SR.SRTypes.lvmohba:
+                case SR.SRTypes.lvmofcoe:
                     String device = dconf.ContainsKey(DEVICE) ?
                         dconf[DEVICE] : dconf[SCSIid];
                     Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        XenAPI.SR.getFriendlyTypeName(srType), device);
+                        SR.getFriendlyTypeName(srType), device);
+                    break;
+                case SR.SRTypes.gfs2:
+                    Description = string.Format(Messages.ACTION_SR_SCANNING,
+                        SR.getFriendlyTypeName(srType), dconf["ips"]);
                     break;
                 default:
                     Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        XenAPI.SR.getFriendlyTypeName(srType), Messages.REPAIRSR_SERVER); // this is a bit minging: CA-22111
+                        SR.getFriendlyTypeName(srType), Messages.REPAIRSR_SERVER); // this is a bit minging: CA-22111
                     break;
             }
             smconf = new Dictionary<string, string>();
@@ -93,9 +99,17 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            RelatedTask = XenAPI.SR.async_probe(this.Session, host.opaque_ref,
-                dconf, srType.ToString().ToLowerInvariant(), smconf);
-            PollToCompletion();
+            if (SrType != SR.SRTypes.gfs2)
+            {
+                RelatedTask = SR.async_probe(this.Session, host.opaque_ref,
+                    dconf, SrType.ToString().ToLowerInvariant(), smconf);
+                PollToCompletion();
+            }
+            else
+            {
+                ProbeExtResult = SR.probe_ext(this.Session, host.opaque_ref,
+                    dconf, SrType.ToString().ToLowerInvariant(), smconf);
+            }
             Description = Messages.ACTION_SR_SCAN_SUCCESSFUL;
         }
     }
