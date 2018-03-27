@@ -339,23 +339,26 @@ namespace XenAPI
             //if (!pif.IsPhysical && !poolwide)
             //    return Messages.SPACED_HYPHEN;
 
+            PIF_metrics pifMetrics = PIFMetrics();
+
             // LinkStatus of SR-IOV network and VLAN on SR-IOV network
-            if(IsSriovLogicalPIF() || VLAN >= 0)
+            if (IsSriovLogicalPIF() || VLAN >= 0)
             {
                 var network_sriov = NetworkSriov();
-                if(network_sriov == null && VLAN < 0)
+                if (network_sriov == null && VLAN < 0)
                 {
                     return LinkState.Disconnected;
                 }
-                else if(network_sriov != null)
+                else if (network_sriov != null)
                 {
                     Network_sriov network_s = Connection.Resolve(network_sriov);
-                    if (network_s == null || network_s.requires_reboot == true)
+                    if (pifMetrics == null)
+                        return LinkState.Unknown;
+                    else if (!pifMetrics.carrier || (network_s == null || network_s.configuration_mode == sriov_configuration_mode.unknown || network_s.requires_reboot == true ))
                         return LinkState.Disconnected;
                 }
             }
 
-            PIF_metrics pifMetrics = PIFMetrics();
             return pifMetrics == null
                 ? LinkState.Unknown
                 : pifMetrics.carrier ? LinkState.Connected : LinkState.Disconnected;
