@@ -1835,4 +1835,10 @@
   <data name="Message.action-pbd_plug_failed_on_server_start" xml:space="preserve">
     <value>修复存储</value>
   </data>
+  <data name="Label-SR.SRTypes-gfs2" xml:space="preserve">
+    <value>GFS2</value>
+  </data>
+  <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
+    <value>XenApp/XenDesktop [Citrix] Cloud</value>
+  </data>
 </root>

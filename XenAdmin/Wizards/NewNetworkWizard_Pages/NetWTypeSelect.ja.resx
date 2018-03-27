@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="lblNetTypeSel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -156,6 +162,78 @@
   <data name="&gt;&gt;lblNetTypeSel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="rbtnExternalNetwork.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbtnExternalNetwork.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt, style=Bold</value>
+  </data>
+  <data name="rbtnExternalNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rbtnExternalNetwork.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 29</value>
+  </data>
+  <data name="rbtnExternalNetwork.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 10, 3, 3</value>
+  </data>
+  <data name="rbtnExternalNetwork.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 17</value>
+  </data>
+  <data name="rbtnExternalNetwork.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbtnExternalNetwork.Text" xml:space="preserve">
+    <value>外部ネットワーク(&amp;E)</value>
+  </data>
+  <data name="&gt;&gt;rbtnExternalNetwork.Name" xml:space="preserve">
+    <value>rbtnExternalNetwork</value>
+  </data>
+  <data name="&gt;&gt;rbtnExternalNetwork.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnExternalNetwork.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;rbtnExternalNetwork.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelExternalNetwork.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="labelExternalNetwork.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelExternalNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelExternalNetwork.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 49</value>
+  </data>
+  <data name="labelExternalNetwork.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>46, 0, 3, 3</value>
+  </data>
+  <data name="labelExternalNetwork.Size" type="System.Drawing.Size, System.Drawing">
+    <value>359, 13</value>
+  </data>
+  <data name="labelExternalNetwork.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelExternalNetwork.Text" xml:space="preserve">
+    <value>VLAN を介して外部に接続するネットワークを作成します。</value>
+  </data>
+  <data name="&gt;&gt;labelExternalNetwork.Name" xml:space="preserve">
+    <value>labelExternalNetwork</value>
+  </data>
+  <data name="&gt;&gt;labelExternalNetwork.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelExternalNetwork.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;labelExternalNetwork.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="rbtnInternalNetwork.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -191,6 +269,40 @@
   </data>
   <data name="&gt;&gt;rbtnInternalNetwork.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 91</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>46, 0, 3, 3</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>359, 26</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>[XenServer] ホストの外部に接続しないネットワークを作成します。
+これにより、同一ホスト上の VM 同士を接続できます。</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="rbtnBondedNetwork.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -228,40 +340,6 @@
   <data name="&gt;&gt;rbtnBondedNetwork.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>37, 100</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>46, 0, 3, 3</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 31</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>[XenServer] ホストの外部に接続しないネットワークを作成します。
-これにより、同一ホスト上の VM 同士を接続できます。</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -269,16 +347,16 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 156</value>
+    <value>46, 146</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>46, 0, 3, 3</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>334, 31</value>
+    <value>320, 26</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>複数の NIC を束ねて 1 つのネットワークを作成します。 
@@ -295,6 +373,42 @@
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="rbtnCHIN.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbtnCHIN.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt, style=Bold</value>
+  </data>
+  <data name="rbtnCHIN.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rbtnCHIN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 181</value>
+  </data>
+  <data name="rbtnCHIN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 6, 3, 3</value>
+  </data>
+  <data name="rbtnCHIN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 17</value>
+  </data>
+  <data name="rbtnCHIN.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="rbtnCHIN.Text" xml:space="preserve">
+    <value>サーバー間のプライベート ネットワーク(&amp;C)</value>
+  </data>
+  <data name="&gt;&gt;rbtnCHIN.Name" xml:space="preserve">
+    <value>rbtnCHIN</value>
+  </data>
+  <data name="&gt;&gt;rbtnCHIN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtnCHIN.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;rbtnCHIN.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="labelCHIN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -334,116 +448,77 @@ vSwitch コントローラが実行されている必要があります。</valu
   <data name="&gt;&gt;labelCHIN.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="labelExternalNetwork.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="labelExternalNetwork.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rbtnSriov.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelExternalNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelExternalNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 59</value>
-  </data>
-  <data name="labelExternalNetwork.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>46, 0, 3, 3</value>
-  </data>
-  <data name="labelExternalNetwork.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 13</value>
-  </data>
-  <data name="labelExternalNetwork.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="labelExternalNetwork.Text" xml:space="preserve">
-    <value>VLAN を介して外部に接続するネットワークを作成します。</value>
-  </data>
-  <data name="&gt;&gt;labelExternalNetwork.Name" xml:space="preserve">
-    <value>labelExternalNetwork</value>
-  </data>
-  <data name="&gt;&gt;labelExternalNetwork.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelExternalNetwork.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;labelExternalNetwork.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="rbtnCHIN.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rbtnCHIN.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="rbtnSriov.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt, style=Bold</value>
   </data>
-  <data name="rbtnCHIN.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rbtnSriov.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rbtnCHIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="rbtnSriov.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 249</value>
   </data>
-  <data name="rbtnCHIN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="rbtnSriov.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>20, 6, 3, 3</value>
   </data>
-  <data name="rbtnCHIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 17</value>
+  <data name="rbtnSriov.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
   </data>
-  <data name="rbtnCHIN.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="rbtnSriov.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="rbtnCHIN.Text" xml:space="preserve">
-    <value>サーバー間のプライベート ネットワーク(&amp;C)</value>
+  <data name="rbtnSriov.Text" xml:space="preserve">
+    <value>SR-IOV ネットワーク(&amp;R)</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Name" xml:space="preserve">
-    <value>rbtnCHIN</value>
+  <data name="&gt;&gt;rbtnSriov.Name" xml:space="preserve">
+    <value>rbtnSriov</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Type" xml:space="preserve">
+  <data name="&gt;&gt;rbtnSriov.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rbtnSriov.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;rbtnCHIN.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;rbtnSriov.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
-  <data name="rbtnExternalNetwork.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelSriov.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="labelSriov.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="rbtnExternalNetwork.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt, style=Bold</value>
-  </data>
-  <data name="rbtnExternalNetwork.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelSriov.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rbtnExternalNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="labelSriov.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 269</value>
   </data>
-  <data name="rbtnExternalNetwork.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>20, 20, 3, 3</value>
+  <data name="labelSriov.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>46, 0, 3, 3</value>
   </data>
-  <data name="rbtnExternalNetwork.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 17</value>
+  <data name="labelSriov.Size" type="System.Drawing.Size, System.Drawing">
+    <value>359, 13</value>
   </data>
-  <data name="rbtnExternalNetwork.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="labelSriov.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="rbtnExternalNetwork.Text" xml:space="preserve">
-    <value>外部ネットワーク(&amp;E)</value>
+  <data name="labelSriov.Text" xml:space="preserve">
+    <value>NIC 上で SR-IOV を有効にし、そこに SR-IOV ネットワークを作成します。</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Name" xml:space="preserve">
-    <value>rbtnExternalNetwork</value>
+  <data name="&gt;&gt;labelSriov.Name" xml:space="preserve">
+    <value>labelSriov</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;labelSriov.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelSriov.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;rbtnExternalNetwork.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="flowLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;labelSriov.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="warningsTable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -506,7 +581,7 @@ vSwitch コントローラが実行されている必要があります。</valu
     <value>45, 13</value>
   </data>
   <data name="labelWarningChinOption.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="labelWarningChinOption.Text" xml:space="preserve">
     <value>警告</value>
@@ -536,7 +611,7 @@ vSwitch コントローラが実行されている必要があります。</valu
     <value>73, 22</value>
   </data>
   <data name="warningsTable.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;warningsTable.Name" xml:space="preserve">
     <value>warningsTable</value>
@@ -548,10 +623,118 @@ vSwitch コントローラが実行されている必要があります。</valu
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;warningsTable.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="warningsTable.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="iconWarningChinOption" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelWarningChinOption" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="iconWarningChinOption" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelWarningChinOption" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20" />&lt;/TableLayoutSettings></value>
+  </data>
+  <data name="warningTableSriov.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="warningTableSriov.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="iconWarningSriovOption.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="iconWarningSriovOption.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value/>
+  </data>
+  <data name="iconWarningSriovOption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="iconWarningSriovOption.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value/>
+  </data>
+  <data name="iconWarningSriovOption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="iconWarningSriovOption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="iconWarningSriovOption.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>AutoSize</value>
+  </data>
+  <data name="iconWarningSriovOption.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;iconWarningSriovOption.Name" xml:space="preserve">
+    <value>iconWarningSriovOption</value>
+  </data>
+  <data name="&gt;&gt;iconWarningSriovOption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iconWarningSriovOption.Parent" xml:space="preserve">
+    <value>warningTableSriov</value>
+  </data>
+  <data name="&gt;&gt;iconWarningSriovOption.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelWarningSriovOption.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelWarningSriovOption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelWarningSriovOption.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelWarningSriovOption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 4</value>
+  </data>
+  <data name="labelWarningSriovOption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="labelWarningSriovOption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="labelWarningSriovOption.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelWarningSriovOption.Text" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="&gt;&gt;labelWarningSriovOption.Name" xml:space="preserve">
+    <value>labelWarningSriovOption</value>
+  </data>
+  <data name="&gt;&gt;labelWarningSriovOption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelWarningSriovOption.Parent" xml:space="preserve">
+    <value>warningTableSriov</value>
+  </data>
+  <data name="&gt;&gt;labelWarningSriovOption.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="warningTableSriov.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 314</value>
+  </data>
+  <data name="warningTableSriov.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 0, 3, 12</value>
+  </data>
+  <data name="warningTableSriov.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="warningTableSriov.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 22</value>
+  </data>
+  <data name="warningTableSriov.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;warningTableSriov.Name" xml:space="preserve">
+    <value>warningTableSriov</value>
+  </data>
+  <data name="&gt;&gt;warningTableSriov.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;warningTableSriov.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;warningTableSriov.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="warningTableSriov.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="iconWarningSriovOption" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelWarningSriovOption" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="flowLayoutPanel1.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
     <value>TopDown</value>
@@ -577,9 +760,6 @@ vSwitch コントローラが実行されている必要があります。</valu
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

@@ -387,50 +387,14 @@
   <data name="&gt;&gt;comboBoxNICList.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="checkBoxAutomatic.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBoxAutomatic.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
-  </data>
-  <data name="checkBoxAutomatic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBoxAutomatic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 181</value>
-  </data>
-  <data name="checkBoxAutomatic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 24, 0, 0</value>
-  </data>
-  <data name="checkBoxAutomatic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 18</value>
-  </data>
-  <data name="checkBoxAutomatic.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="checkBoxAutomatic.Text" xml:space="preserve">
-    <value>このネットワークを新規 VM に自動的に追加する(&amp;A)</value>
-  </data>
-  <data name="checkBoxAutomatic.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
-  </data>
-  <data name="&gt;&gt;checkBoxAutomatic.Name" xml:space="preserve">
-    <value>checkBoxAutomatic</value>
-  </data>
-  <data name="&gt;&gt;checkBoxAutomatic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxAutomatic.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;checkBoxAutomatic.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="labelMTU.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelMTU.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="labelMTU.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="labelMTU.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 139</value>
@@ -603,6 +567,78 @@
   <data name="&gt;&gt;panelVLANInfo.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="checkBoxAutomatic.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxAutomatic.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
+  </data>
+  <data name="checkBoxAutomatic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBoxAutomatic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 209</value>
+  </data>
+  <data name="checkBoxAutomatic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 24, 0, 0</value>
+  </data>
+  <data name="checkBoxAutomatic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 17</value>
+  </data>
+  <data name="checkBoxAutomatic.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="checkBoxAutomatic.Text" xml:space="preserve">
+    <value>このネットワークを新規 VM に自動的に追加する(&amp;A)</value>
+  </data>
+  <data name="checkBoxAutomatic.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopLeft</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAutomatic.Name" xml:space="preserve">
+    <value>checkBoxAutomatic</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAutomatic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAutomatic.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAutomatic.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="checkBoxSriov.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxSriov.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBoxSriov.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 165</value>
+  </data>
+  <data name="checkBoxSriov.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 10, 3, 3</value>
+  </data>
+  <data name="checkBoxSriov.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 17</value>
+  </data>
+  <data name="checkBoxSriov.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="checkBoxSriov.Text" xml:space="preserve">
+    <value>SR-IOV ネットワーク上に VLAN を作成する(&amp;S)</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSriov.Name" xml:space="preserve">
+    <value>checkBoxSriov</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSriov.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSriov.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSriov.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -631,7 +667,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="infoMtuPanel" Row="3" RowSpan="1" Column="2" ColumnSpan="2" />&lt;Control Name="labelNIC" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelVLAN" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="lblNicHelp" Row="0" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="numericUpDownVLAN" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="comboBoxNICList" Row="1" RowSpan="1" Column="1" ColumnSpan="2" />&lt;Control Name="checkBoxAutomatic" Row="4" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="labelMTU" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="numericUpDownMTU" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="panelVLANInfo" Row="2" RowSpan="1" Column="2" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Absolute,120,Absolute,127,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,20,Percent,100" />&lt;/TableLayoutSettings></value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="infoMtuPanel" Row="3" RowSpan="1" Column="2" ColumnSpan="2" />&lt;Control Name="labelNIC" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelVLAN" Row="2" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="lblNicHelp" Row="0" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="numericUpDownVLAN" Row="2" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="comboBoxNICList" Row="1" RowSpan="1" Column="1" ColumnSpan="2" />&lt;Control Name="labelMTU" Row="3" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="numericUpDownMTU" Row="3" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="panelVLANInfo" Row="2" RowSpan="1" Column="2" ColumnSpan="2" />&lt;Control Name="checkBoxAutomatic" Row="5" RowSpan="1" Column="0" ColumnSpan="4" />&lt;Control Name="checkBoxSriov" Row="4" RowSpan="1" Column="0" ColumnSpan="4" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Absolute,120,Absolute,127,Percent,100" />&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>

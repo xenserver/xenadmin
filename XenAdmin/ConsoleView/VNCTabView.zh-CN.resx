@@ -214,7 +214,7 @@
     <value>5</value>
   </data>
   <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
-    <value>您 RDP 客户端已过时。为了获得更好的体验，请更新该客户端。</value>
+    <value>您的 RDP 客户端已过时。为获得最佳用户体验，请在您的计算机上安装最新的更新。</value>
   </data>
   <data name="labelGeneralInformationMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomLeft</value>

@@ -391,7 +391,7 @@
     <value>True</value>
   </metadata>
   <data name="colAsis.HeaderText" xml:space="preserve">
-    <value>A-SIS 可能</value>
+    <value>A-SIS 対応</value>
   </data>
   <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 158</value>
