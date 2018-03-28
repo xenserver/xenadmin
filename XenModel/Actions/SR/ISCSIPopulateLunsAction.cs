@@ -32,8 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
-using System.Threading;
 using System.Xml;
 
 using XenAdmin.Core;
@@ -48,14 +46,13 @@ namespace XenAdmin.Actions
     /// </summary>
     public class ISCSIPopulateLunsAction : AsyncAction
     {
-        private readonly string targetHost;
-        private readonly UInt16 targetPort;
-        private readonly string targetIQN;
-        private readonly string chapUsername;
-        private readonly string chapPassword;
-        private readonly SR.SRTypes srType;
+        protected readonly string targetHost;
+        protected readonly UInt16 targetPort;
+        protected readonly string targetIQN;
+        protected readonly string chapUsername;
+        protected readonly string chapPassword;
 
-        private ISCSIInfo[] _luns;
+        protected ISCSIInfo[] _luns;
         /// <summary>
         /// Will be null if the scan has not yet successfully returned.
         /// </summary>
@@ -68,7 +65,7 @@ namespace XenAdmin.Actions
         }
 
         public ISCSIPopulateLunsAction(IXenConnection connection, string targetHost,
-            UInt16 targetPort, string targetIQN, string chapUsername, string chapPassword, SR.SRTypes srType = SR.SRTypes.lvmoiscsi)
+            UInt16 targetPort, string targetIQN, string chapUsername, string chapPassword)
             : base(connection, string.Format(Messages.ACTION_ISCSI_LUN_SCANNING, targetHost))
         {
             this.targetHost = targetHost;
@@ -76,7 +73,6 @@ namespace XenAdmin.Actions
             this.targetIQN = targetIQN;
             this.chapUsername = chapUsername;
             this.chapPassword = chapPassword;
-            this.srType = srType;
         }
 
         public class NoLUNsFoundException : Exception
@@ -103,12 +99,6 @@ namespace XenAdmin.Actions
             if (pool == null)
                 throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
 
-            if (srType == SR.SRTypes.gfs2)
-            {
-                DoProbeExt(pool.master);
-                return;
-            }
-
             Dictionary<string, string> settings = new Dictionary<string, string>();
 
             settings["target"] = targetHost;
@@ -123,8 +113,8 @@ namespace XenAdmin.Actions
             try
             {
                 RelatedTask = SR.async_create(Session, pool.master, settings, 0, 
-                    Helpers.GuiTempObjectPrefix, Messages.ISCSI_SHOULD_NO_BE_CREATED, 
-                    srType.ToString(), "user", true, new Dictionary<string, string>());
+                    Helpers.GuiTempObjectPrefix, Messages.ISCSI_SHOULD_NO_BE_CREATED,
+                    SR.SRTypes.lvmoiscsi.ToString(), "user", true, new Dictionary<string, string>());
                 this.PollToCompletion();
                 throw new InvalidOperationException(Messages.ISCSI_FAIL);
             }
@@ -196,9 +186,21 @@ namespace XenAdmin.Actions
                     throw new NoLUNsFoundException(targetHost);
             }
         }
-        
-        private void DoProbeExt(XenRef<Host> host)
+    }
+
+    public class Gfs2PopulateLunsAction : ISCSIPopulateLunsAction
+    {
+        public Gfs2PopulateLunsAction(IXenConnection connection, string targetHost,
+            UInt16 targetPort, string targetIQN, string chapUsername, string chapPassword)
+            : base(connection, targetHost, targetPort, targetIQN, chapUsername, chapPassword)
+        { }
+
+        protected override void Run()
         {
+            Pool pool = Helpers.GetPoolOfOne(Connection);
+            if (pool == null)
+                throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
+
             var deviceConfig = new Dictionary<string, string>();
             deviceConfig["provider"] = "iscsi";
             deviceConfig["ips"] = targetHost;
@@ -209,35 +211,27 @@ namespace XenAdmin.Actions
                 deviceConfig["chapuser"] = chapUsername;
                 deviceConfig["chappassword"] = chapPassword;
             }
-            
-            var probeResults = SR.probe_ext(Session, host.opaque_ref,
-                     deviceConfig, srType.ToString().ToLowerInvariant(), new Dictionary<string, string>());
+
+            var probeResults = SR.probe_ext(Session, pool.master.opaque_ref,
+                     deviceConfig, SR.SRTypes.gfs2.ToString().ToLowerInvariant(), new Dictionary<string, string>());
 
             var results = new List<ISCSIInfo>();
-            try
+            foreach (var probeResult in probeResults)
             {
-                foreach (var probeResult in probeResults)
-                {
-                    int lunid;
-                    if (!probeResult.extra_info.ContainsKey("LUNid") || !int.TryParse(probeResult.extra_info["LUNid"], out lunid))
-                        lunid = -1;
-                    var vendor = probeResult.extra_info.ContainsKey("vendor") ? probeResult.extra_info["vendor"] : "";
-                    var serial = probeResult.extra_info.ContainsKey("serial") ? probeResult.extra_info["serial"] : "";
-                    long size;
-                    if (!probeResult.extra_info.ContainsKey("size") || !long.TryParse(probeResult.extra_info["size"], out size))
-                        size = -1;
-                    var scsiid = probeResult.configuration.ContainsKey("ScsiId") ? probeResult.configuration["ScsiId"] : "";
+                int lunid;
+                if (!probeResult.extra_info.ContainsKey("LUNid") || !int.TryParse(probeResult.extra_info["LUNid"], out lunid))
+                    lunid = -1;
+                var vendor = probeResult.extra_info.ContainsKey("vendor") ? probeResult.extra_info["vendor"] : "";
+                var serial = probeResult.extra_info.ContainsKey("serial") ? probeResult.extra_info["serial"] : "";
+                long size;
+                if (!probeResult.extra_info.ContainsKey("size") || !long.TryParse(probeResult.extra_info["size"], out size))
+                    size = -1;
+                var scsiid = probeResult.configuration.ContainsKey("ScsiId") ? probeResult.configuration["ScsiId"] : "";
 
-                    results.Add(new ISCSIInfo(scsiid, lunid, vendor, serial, size));
-
-                }
-                results.Sort();
-                _luns = results.ToArray();
+                results.Add(new ISCSIInfo(scsiid, lunid, vendor, serial, size));
             }
-            catch
-            {
-                throw new BadServerResponse(targetHost);
-            }
+            results.Sort();
+            _luns = results.ToArray();
 
             if (_luns.Length < 1)
                 throw new NoLUNsFoundException(targetHost);

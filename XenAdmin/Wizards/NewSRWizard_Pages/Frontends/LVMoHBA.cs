@@ -57,7 +57,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             SrType = SR.SRTypes.lvmohba;
         }
 
-        public virtual SR.SRTypes SrType { get; set; }
+        public SR.SRTypes SrType { get; set; }
 
         public virtual bool ShowNicColumn { get { return false; } }
 

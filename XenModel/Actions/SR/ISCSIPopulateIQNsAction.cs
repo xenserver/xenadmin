@@ -38,7 +38,6 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 using System.Globalization;
-using System.Web.Script.Serialization;
 using XenCenterLib;
 
 namespace XenAdmin.Actions
@@ -48,13 +47,12 @@ namespace XenAdmin.Actions
     /// </summary>
     public class ISCSIPopulateIQNsAction : AsyncAction
     {
-        private readonly string targetHost;
-        private readonly UInt16 targetPort;
-        private readonly string chapUsername;
-        private readonly string chapPassword;
-        private readonly SR.SRTypes srType;
+        protected readonly string targetHost;
+        protected readonly UInt16 targetPort;
+        protected readonly string chapUsername;
+        protected readonly string chapPassword;
 
-        private IScsiIqnInfo[] _iqns;
+        protected IScsiIqnInfo[] _iqns;
         /// <summary>
         /// Will be null if the scan has not yet successfully returned.
         /// </summary>
@@ -67,14 +65,13 @@ namespace XenAdmin.Actions
         }
 
         public ISCSIPopulateIQNsAction(IXenConnection connection, string targetHost,
-            UInt16 targetPort, string chapUsername, string chapPassword, SR.SRTypes srType = SR.SRTypes.lvmoiscsi)
+            UInt16 targetPort, string chapUsername, string chapPassword)
             : base(connection, string.Format(Messages.ACTION_ISCSI_IQN_SCANNING, targetHost), null, true)
         {
             this.targetHost = targetHost;
             this.targetPort = targetPort;
             this.chapUsername = chapUsername;
             this.chapPassword = chapPassword;
-            this.srType = srType;
         }
 
         public class NoIQNsFoundException : Exception
@@ -119,12 +116,6 @@ namespace XenAdmin.Actions
             if (pool == null)
                 throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
 
-            if (srType == SR.SRTypes.gfs2)
-            {
-                DoProbeExt(pool.master);
-                return;
-            }
-
             Dictionary<string, string> settings = new Dictionary<string, string>();
             settings["target"] = targetHost;
             settings["port"] = targetPort.ToString(CultureInfo.InvariantCulture);
@@ -140,7 +131,7 @@ namespace XenAdmin.Actions
                 // containing the list of SRs on the filer.
                 RelatedTask = SR.async_create(Session, pool.master,
                      settings, 0, Helpers.GuiTempObjectPrefix, Messages.ISCSI_SHOULD_NO_BE_CREATED,
-                     srType.ToString(), "user", true, new Dictionary<string, string>());
+                     SR.SRTypes.lvmoiscsi.ToString(), "user", true, new Dictionary<string, string>());
                 this.PollToCompletion();
 
                 // Create should always fail and never get here
@@ -210,9 +201,20 @@ namespace XenAdmin.Actions
                     throw new NoIQNsFoundException(targetHost);
             }
         }
+    }
 
-        private void DoProbeExt(XenRef<Host> host)
+    public class Gfs2PopulateIQNsAction : ISCSIPopulateIQNsAction
+    {
+        public Gfs2PopulateIQNsAction(IXenConnection connection, string targetHost,
+            UInt16 targetPort, string chapUsername, string chapPassword)
+            : base(connection, targetHost, targetPort, chapUsername, chapPassword)
+        { }
+
+        protected override void Run()
         {
+            Pool pool = Helpers.GetPoolOfOne(Connection);
+            if (pool == null)
+                throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
             var deviceConfig = new Dictionary<string, string>();
             deviceConfig["provider"] = "iscsi";
             deviceConfig["ips"] = targetHost;
@@ -222,38 +224,31 @@ namespace XenAdmin.Actions
                 deviceConfig["chapuser"] = chapUsername;
                 deviceConfig["chappassword"] = chapPassword;
             }
-            
-            var probeResults = SR.probe_ext(Session, host.opaque_ref,
-                     deviceConfig, srType.ToString().ToLowerInvariant(), new Dictionary<string, string>());
+
+            var probeResults = SR.probe_ext(Session, pool.master.opaque_ref,
+                     deviceConfig, SR.SRTypes.gfs2.ToString(), new Dictionary<string, string>());
 
             var results = new List<IScsiIqnInfo>();
-            try
+            var index = -1;
+            foreach (var probeResult in probeResults)
             {
-                var index = -1;
-                foreach (var probeResult in probeResults)
-                {
-                    index++;
-                    var address = probeResult.configuration.ContainsKey("ips") ? probeResult.configuration["ips"] : "";
-                    UInt16 port;
-                    if (!probeResult.configuration.ContainsKey("port") || !UInt16.TryParse(probeResult.configuration["port"], out port))
-                        port = Util.DEFAULT_ISCSI_PORT;
-                    var targetIQN = probeResult.configuration.ContainsKey("iqns") ? probeResult.configuration["iqns"] : "";
+                index++;
+                var address = probeResult.configuration.ContainsKey("ips") ? probeResult.configuration["ips"] : "";
+                UInt16 port;
+                if (!probeResult.configuration.ContainsKey("port") || !UInt16.TryParse(probeResult.configuration["port"], out port))
+                    port = Util.DEFAULT_ISCSI_PORT;
+                var targetIQN = probeResult.configuration.ContainsKey("iqns") ? probeResult.configuration["iqns"] : "";
 
-                    results.Add(new IScsiIqnInfo(index, targetIQN, address, port));
-                }
-                results.Sort();
-                _iqns = results.ToArray();
+                results.Add(new IScsiIqnInfo(index, targetIQN, address, port));
             }
-            catch
-            {
-                throw new BadServerResponse(targetHost);
-            }
+            results.Sort();
+            _iqns = results.ToArray();
 
             if (_iqns.Length < 1)
                 throw new NoIQNsFoundException(targetHost);
         }
     }
-
+    
     public struct IScsiIqnInfo : IComparable<IScsiIqnInfo>, IEquatable<IScsiIqnInfo>
     {
         public readonly int Index;
