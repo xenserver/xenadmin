@@ -47,7 +47,7 @@ namespace XenAdmin.Core
         public List<XenServerPatch> Patches;
         public string PatchUuid;
         public bool PresentAsUpdate;
-        public string MinimumXcVersion;
+        public Version MinimumXcVersion;
         
         /// <summary>
         /// A host of this version is considered up-to-date when it has all the patches in this list installed on it
@@ -86,7 +86,7 @@ namespace XenAdmin.Core
             BuildNumber = buildNumber;
             PatchUuid = patchUuid;
             PresentAsUpdate = presentAsUpdate;
-            MinimumXcVersion = minXcVersion;
+            ParseMinXcVersion(minXcVersion);
         }
 
         private void ParseVersion(string version_oem)
@@ -102,6 +102,13 @@ namespace XenAdmin.Core
                     Oem = bit;
             }
             Version = new Version(string.Join(".", ver.ToArray()));
+        }
+
+        private void ParseMinXcVersion(string minXcVersion)
+        {
+            Version ver;
+            Version.TryParse(minXcVersion, out ver);
+            MinimumXcVersion = ver;
         }
 
         public string VersionAndOEM

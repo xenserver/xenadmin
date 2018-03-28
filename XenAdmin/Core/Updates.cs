@@ -523,10 +523,10 @@ namespace XenAdmin.Core
                 return XenCenterVersions.FirstOrDefault(xcv => xcv.LatestCr && xcv.Version > currentProgramVersion);
 
             var minXcVersion = serverVersion.MinimumXcVersion;
-            if (String.IsNullOrEmpty(minXcVersion))
+            if (minXcVersion == null)
                 return null;
 
-            var minimumXcVersion = XenCenterVersions.FirstOrDefault(xcv => xcv.Version.ToString() == minXcVersion);
+            var minimumXcVersion = XenCenterVersions.FirstOrDefault(xcv => xcv.Version == minXcVersion);
             return minimumXcVersion != null && minimumXcVersion.Version > currentProgramVersion
                 ? minimumXcVersion
                 : null;
