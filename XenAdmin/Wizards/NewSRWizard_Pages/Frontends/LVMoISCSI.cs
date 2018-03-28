@@ -473,12 +473,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (IscsiUseChapCheckBox.Checked)
             {
                 IscsiPopulateIqnsAction = new ISCSIPopulateIQNsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text);
+                    getIscsiHost(), getIscsiPort(), IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text, SrType);
             }
             else
             {
                 IscsiPopulateIqnsAction = new ISCSIPopulateIQNsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), null, null);
+                    getIscsiHost(), getIscsiPort(), null, null, SrType);
             }
 
             IscsiPopulateIqnsAction.Completed += IscsiPopulateIqnsAction_Completed;
@@ -601,13 +601,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             if (IscsiUseChapCheckBox.Checked)
             {
-                IscsiPopulateLunsAction = new Actions.ISCSIPopulateLunsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), getIscsiIQN(), IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text);
+                IscsiPopulateLunsAction = new ISCSIPopulateLunsAction(Connection,
+                    getIscsiHost(), getIscsiPort(), getIscsiIQN(), IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text, SrType);
             }
             else
             {
-                IscsiPopulateLunsAction = new Actions.ISCSIPopulateLunsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), getIscsiIQN(), null, null);
+                IscsiPopulateLunsAction = new ISCSIPopulateLunsAction(Connection,
+                    getIscsiHost(), getIscsiPort(), getIscsiIQN(), null, null, SrType);
             }
 
             IscsiPopulateLunsAction.Completed += IscsiPopulateLunsAction_Completed;
