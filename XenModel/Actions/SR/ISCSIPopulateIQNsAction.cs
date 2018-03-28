@@ -38,6 +38,7 @@ using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 using System.Globalization;
+using System.Web.Script.Serialization;
 using XenCenterLib;
 
 namespace XenAdmin.Actions
@@ -51,6 +52,7 @@ namespace XenAdmin.Actions
         private readonly UInt16 targetPort;
         private readonly string chapUsername;
         private readonly string chapPassword;
+        private readonly SR.SRTypes srType;
 
         private IScsiIqnInfo[] _iqns;
         /// <summary>
@@ -65,13 +67,14 @@ namespace XenAdmin.Actions
         }
 
         public ISCSIPopulateIQNsAction(IXenConnection connection, string targetHost,
-            UInt16 targetPort, string chapUsername, string chapPassword)
+            UInt16 targetPort, string chapUsername, string chapPassword, SR.SRTypes srType = SR.SRTypes.lvmoiscsi)
             : base(connection, string.Format(Messages.ACTION_ISCSI_IQN_SCANNING, targetHost), null, true)
         {
             this.targetHost = targetHost;
             this.targetPort = targetPort;
             this.chapUsername = chapUsername;
             this.chapPassword = chapPassword;
+            this.srType = srType;
         }
 
         public class NoIQNsFoundException : Exception
@@ -116,28 +119,34 @@ namespace XenAdmin.Actions
             if (pool == null)
                 throw new Failure(Failure.INTERNAL_ERROR, Messages.POOL_GONE);
 
+            if (srType == SR.SRTypes.gfs2)
+            {
+                DoProbeExt(pool.master);
+                return;
+            }
+
             Dictionary<string, string> settings = new Dictionary<string, string>();
             settings["target"] = targetHost;
             settings["port"] = targetPort.ToString(CultureInfo.InvariantCulture);
-            if (!string.IsNullOrEmpty(this.chapUsername))
+            if (!string.IsNullOrEmpty(chapUsername))
             {
-                settings["chapuser"] = this.chapUsername;
-                settings["chappassword"] = this.chapPassword;
+                settings["chapuser"] = chapUsername;
+                settings["chappassword"] = chapPassword;
             }
-
+            
             try
             {
                 // Perform a create with some missing params: should fail with the error
                 // containing the list of SRs on the filer.
-                RelatedTask = XenAPI.SR.async_create(Session, pool.master,
+                RelatedTask = SR.async_create(Session, pool.master,
                      settings, 0, Helpers.GuiTempObjectPrefix, Messages.ISCSI_SHOULD_NO_BE_CREATED,
-                     XenAPI.SR.SRTypes.lvmoiscsi.ToString(), "user", true, new Dictionary<string, string>());
+                     srType.ToString(), "user", true, new Dictionary<string, string>());
                 this.PollToCompletion();
 
                 // Create should always fail and never get here
                 throw new InvalidOperationException(Messages.ISCSI_FAIL);
             }
-            catch (XenAPI.Failure exn)
+            catch (Failure exn)
             {
                 if (exn.ErrorDescription.Count < 1)
                     throw new BadServerResponse(targetHost);
@@ -156,7 +165,7 @@ namespace XenAdmin.Actions
                 List<IScsiIqnInfo> results = new List<IScsiIqnInfo>();
                 try
                 {
-                    doc.LoadXml(exn.ErrorDescription[3].ToString());
+                    doc.LoadXml(exn.ErrorDescription[3]);
                     foreach (XmlNode targetListNode in doc.GetElementsByTagName("iscsi-target-iqns"))
                     {
                         foreach (XmlNode targetNode in targetListNode.ChildNodes)
@@ -170,7 +179,7 @@ namespace XenAdmin.Actions
                             {
                                 if (infoNode.Name.ToLowerInvariant() == "index")
                                 {
-                                    index = int.Parse(infoNode.InnerText, System.Globalization.CultureInfo.InvariantCulture);
+                                    index = int.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
                                 }
                                 else if (infoNode.Name.ToLowerInvariant() == "ipaddress")
                                 {
@@ -179,7 +188,7 @@ namespace XenAdmin.Actions
                                 }
                                 else if (infoNode.Name.ToLowerInvariant() == "port")
                                 {
-                                    port = UInt16.Parse(infoNode.InnerText, System.Globalization.CultureInfo.InvariantCulture);
+                                    port = UInt16.Parse(infoNode.InnerText, CultureInfo.InvariantCulture);
                                 }
                                 else if (infoNode.Name.ToLowerInvariant() == "targetiqn")
                                 {
@@ -200,6 +209,48 @@ namespace XenAdmin.Actions
                 if (_iqns.Length < 1)
                     throw new NoIQNsFoundException(targetHost);
             }
+        }
+
+        private void DoProbeExt(XenRef<Host> host)
+        {
+            var deviceConfig = new Dictionary<string, string>();
+            deviceConfig["provider"] = "iscsi";
+            deviceConfig["ips"] = targetHost;
+            deviceConfig["port"] = targetPort.ToString(CultureInfo.InvariantCulture);
+            if (!string.IsNullOrEmpty(chapUsername))
+            {
+                deviceConfig["chapuser"] = chapUsername;
+                deviceConfig["chappassword"] = chapPassword;
+            }
+            
+            var probeResults = SR.probe_ext(Session, host.opaque_ref,
+                     deviceConfig, srType.ToString().ToLowerInvariant(), new Dictionary<string, string>());
+
+            var results = new List<IScsiIqnInfo>();
+            try
+            {
+                var index = -1;
+                foreach (var probeResult in probeResults)
+                {
+                    index++;
+                    var address = probeResult.configuration.ContainsKey("ips") ? probeResult.configuration["ips"] : "";
+                    UInt16 port;
+                    if (!probeResult.configuration.ContainsKey("port") || !UInt16.TryParse(probeResult.configuration["port"], out port))
+                        port = Util.DEFAULT_ISCSI_PORT;
+                    var targetIQN = probeResult.configuration.ContainsKey("iqns") ? probeResult.configuration["iqns"] : "";
+
+                    results.Add(new IScsiIqnInfo(index, targetIQN, address, port));
+                }
+                results.Sort();
+                _iqns = results.ToArray();
+            }
+            catch
+            {
+                throw new BadServerResponse(targetHost);
+            }
+
+            if (_iqns.Length < 1)
+                throw new NoIQNsFoundException(targetHost);
         }
     }
 
