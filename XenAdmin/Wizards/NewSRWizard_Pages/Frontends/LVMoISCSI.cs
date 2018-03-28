@@ -470,17 +470,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             UpdateButtons();
 
-            if (IscsiUseChapCheckBox.Checked)
-            {
-                IscsiPopulateIqnsAction = new ISCSIPopulateIQNsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text, SrType);
-            }
-            else
-            {
-                IscsiPopulateIqnsAction = new ISCSIPopulateIQNsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), null, null, SrType);
-            }
+            var chapUser = IscsiUseChapCheckBox.Checked ? IScsiChapUserTextBox.Text : null;
+            var chapPwd = IscsiUseChapCheckBox.Checked ? IScsiChapSecretTextBox.Text : null;
 
+            IscsiPopulateIqnsAction = SrType == SR.SRTypes.gfs2
+                    ? new Gfs2PopulateIQNsAction(Connection, getIscsiHost(), getIscsiPort(), chapUser, chapPwd)
+                    : new ISCSIPopulateIQNsAction(Connection, getIscsiHost(), getIscsiPort(), chapUser, chapPwd);
+            
             IscsiPopulateIqnsAction.Completed += IscsiPopulateIqnsAction_Completed;
 
             controlDisabler.Reset();
@@ -599,17 +595,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             comboBoxIscsiLuns.Items.Clear();
             LunMap.Clear();
 
-            if (IscsiUseChapCheckBox.Checked)
-            {
-                IscsiPopulateLunsAction = new ISCSIPopulateLunsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), getIscsiIQN(), IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text, SrType);
-            }
-            else
-            {
-                IscsiPopulateLunsAction = new ISCSIPopulateLunsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), getIscsiIQN(), null, null, SrType);
-            }
+            var chapUser = IscsiUseChapCheckBox.Checked ? IScsiChapUserTextBox.Text : null;
+            var chapPwd = IscsiUseChapCheckBox.Checked ? IScsiChapSecretTextBox.Text : null;
 
+            IscsiPopulateLunsAction = SrType == SR.SRTypes.gfs2
+                ? new Gfs2PopulateLunsAction(Connection, getIscsiHost(), getIscsiPort(), getIscsiIQN(), chapUser, chapPwd)
+                : new ISCSIPopulateLunsAction(Connection, getIscsiHost(), getIscsiPort(), getIscsiIQN(), chapUser, chapPwd);
+            
             IscsiPopulateLunsAction.Completed += IscsiPopulateLunsAction_Completed;
 
             controlDisabler.Reset();
