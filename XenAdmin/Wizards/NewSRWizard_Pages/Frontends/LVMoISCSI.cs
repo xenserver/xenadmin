@@ -150,17 +150,91 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 return;
             }
 
+            List<SR.SRInfo> srs;
+
             // Start probe
             SrProbeAction IscsiProbeAction = new SrProbeAction(Connection, master, SrType, dconf);
-            using (var dialog = new ActionProgressDialog(IscsiProbeAction, ProgressBarStyle.Marquee))
+            bool success = RunProbe(IscsiProbeAction, out srs);
+
+            if (!success)
+            {
+                cancel = iscsiProbeError = true;
+                return;
+            }
+
+            var performSecondProbe = Helpers.KolkataOrGreater(Connection) &&
+                                     !Helpers.FeatureForbidden(Connection, Host.CorosyncDisabled);
+            if (performSecondProbe && srs.Count == 0)
+            {
+                // Start second probe
+                var secondSrType = SrType == SR.SRTypes.gfs2 ? SR.SRTypes.lvmoiscsi : SR.SRTypes.gfs2;
+                dconf = GetDeviceConfig(secondSrType);
+                IscsiProbeAction = new SrProbeAction(Connection, master, secondSrType, dconf);
+                success = RunProbe(IscsiProbeAction, out srs);
+
+                if (!success)
+                {
+                    cancel = iscsiProbeError = true;
+                    return;
+                }
+            }
+
+            // Probe has been performed. Now ask the user if they want to Reattach/Format/Cancel.
+            // Will return false on cancel
+            cancel = iscsiProbeError = !ExamineIscsiProbeResults(IscsiProbeAction, srs);
+        }
+
+        private bool RunProbe(SrProbeAction action, out List<SR.SRInfo> srs)
+        {
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
             {
                 dialog.ShowCancel = true;
                 dialog.ShowDialog(this);
             }
-            // Probe has been performed. Now ask the user if they want to Reattach/Format/Cancel.
-            // Will return false on cancel
-            cancel = !ExamineIscsiProbeResults(IscsiProbeAction);
-            iscsiProbeError = cancel;
+
+            srs = null;
+            _srToIntroduce = null;
+            if (action.Succeeded)
+            {
+                try
+                {
+                    srs = action.ProbeExtResult != null ? SR.ParseSRList(action.ProbeExtResult) : SR.ParseSRListXML(action.Result);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            DoOnProbeFailure(action);
+            return false;
+        }
+
+        private void DoOnProbeFailure(SrProbeAction action)
+        {
+            if (action.Succeeded) 
+                return;
+
+            Exception exn = action.Exception;
+            log.Warn(exn, exn);
+            Failure failure = exn as Failure;
+            if (failure != null && failure.ErrorDescription[0] == "SR_BACKEND_FAILURE_140")
+            {
+                errorIconAtHostOrIP.Visible = true;
+                errorLabelAtHostname.Visible = true;
+                errorLabelAtHostname.Text = Messages.INVALID_HOST;
+                textBoxIscsiHost.Focus();
+            }
+            else if (failure != null)
+            {
+                errorIconAtHostOrIP.Visible = true;
+                errorLabelAtHostname.Visible = true;
+                errorLabelAtHostname.Text = failure.ErrorDescription.Count > 2
+                    ? failure.ErrorDescription[2]
+                    : failure.ErrorDescription[0];
+                textBoxIscsiHost.Focus();
+            }
         }
 
         bool iscsiProbeError = false;
@@ -702,42 +776,22 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         /// Whether to continue or not - wheter to format or not is stored in 
         /// iScsiFormatLUN.
         /// </returns>
-        private bool ExamineIscsiProbeResults(SrProbeAction action)
+        private bool ExamineIscsiProbeResults(SrProbeAction action, List<SR.SRInfo> srs)
         {
             _srToIntroduce = null;
 
-            if (!action.Succeeded)
-            {
-                Exception exn = action.Exception;
-                log.Warn(exn, exn);
-                Failure failure = exn as Failure;
-                if (failure != null && failure.ErrorDescription[0] == "SR_BACKEND_FAILURE_140")
-                {
-                    errorIconAtHostOrIP.Visible = true;
-                    errorLabelAtHostname.Visible = true;
-                    errorLabelAtHostname.Text = Messages.INVALID_HOST;
-                    textBoxIscsiHost.Focus();
-                }
-                else if (failure != null)
-                {
-                    errorIconAtHostOrIP.Visible = true;
-                    errorLabelAtHostname.Visible = true;
-                    errorLabelAtHostname.Text = failure.ErrorDescription.Count > 2 ? failure.ErrorDescription[2] : failure.ErrorDescription[0];
-                    textBoxIscsiHost.Focus();
-                }
+            if (!action.Succeeded || srs == null)
                 return false;
-            }
-            
+
             try
             {
-                List<SR.SRInfo> SRs = action.ProbeExtResult != null ? SR.ParseSRList(action.ProbeExtResult) : SR.ParseSRListXML(action.Result);
-
                 if (!String.IsNullOrEmpty(SrWizardType.UUID))
                 {
                     // Check LUN contains correct SR
-                    if (SRs.Count == 1 && SRs[0].UUID == SrWizardType.UUID)
+                    if (srs.Count == 1 && srs[0].UUID == SrWizardType.UUID)
                     {
-                        _srToIntroduce = SRs[0];
+                        _srToIntroduce = srs[0];
+                        SrType = action.SrType; // the type of the existing SR
                         return true;
                     }
 
@@ -747,7 +801,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                     return false;
                 }
-                else if (SRs.Count == 0)
+                else if (srs.Count == 0)
                 {
                     // No existing SRs were found on this LUN. If allowed to create new SR, ask the user if they want to proceed and format.
                     if (!SrWizardType.AllowToCreateNewSr)
@@ -777,11 +831,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 else
                 {
                     // There should be 0 or 1 SRs on the LUN
-                    System.Diagnostics.Trace.Assert(SRs.Count == 1);
+                    System.Diagnostics.Trace.Assert(srs.Count == 1);
 
                     // CA-17230
                     // Check this isn't a detached SR
-                    SR.SRInfo info = SRs[0];
+                    SR.SRInfo info = srs[0];
                     SR sr = SrWizardHelpers.SrInUse(info.UUID);
                     if (sr != null)
                     {
@@ -798,6 +852,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                             return false;
 
                         _srToIntroduce = info;
+                        SrType = action.SrType; // the type of the existing SR
                         return true;
                     }
 
@@ -810,7 +865,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     {
                         case DialogResult.Yes:
                             // Reattach
-                            _srToIntroduce = SRs[0];
+                            _srToIntroduce = srs[0];
+                            SrType = action.SrType; // the type of the existing SR
                             return true;
 
                         case DialogResult.No:
