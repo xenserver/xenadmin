@@ -45,6 +45,8 @@ namespace XenAdmin.Actions
         }
 
         private SR.SRTypes srType = SR.SRTypes.lvmohba;
+        public List<Probe_result> ProbeExtResult;
+
 
         public FibreChannelProbeAction(Host master, SR.SRTypes srType)
             : this(master)
@@ -54,20 +56,29 @@ namespace XenAdmin.Actions
 
         protected override void Run()
         {
-            this.Description = Messages.PROBING_HBA;
-            try
+            Description = Messages.PROBING_HBA;
+            if (srType != SR.SRTypes.gfs2)
             {
-                Result = XenAPI.SR.probe(Session, Host.opaque_ref, new Dictionary<string, string>(), srType.ToString(), new Dictionary<string, string>());
+                try
+                {
+                    Result = SR.probe(Session, Host.opaque_ref, new Dictionary<string, string>(), srType.ToString(), new Dictionary<string, string>());
+                }
+                catch (Failure f)
+                {
+                    if (f.ErrorDescription[0] == "SR_BACKEND_FAILURE_90" 
+                     || f.ErrorDescription[0] == "SR_BACKEND_FAILURE_107")
+                        Result = f.ErrorDescription[3];
+                    else
+                        throw;
+                }
             }
-            catch (XenAPI.Failure f)
+            else
             {
-                if (f.ErrorDescription[0] == "SR_BACKEND_FAILURE_90" 
-                 || f.ErrorDescription[0] == "SR_BACKEND_FAILURE_107")
-                    Result = f.ErrorDescription[3];
-                else
-                    throw;
+                var deviceConfig = new Dictionary<string, string>();
+                deviceConfig["provider"] = "hba";
+                ProbeExtResult = SR.probe_ext(Session, Host.opaque_ref, deviceConfig, srType.ToString(), new Dictionary<string, string>());
             }
-            this.Description = Messages.PROBED_HBA;
+            Description = Messages.PROBED_HBA;
         }
     }
 }
