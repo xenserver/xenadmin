@@ -43,9 +43,6 @@ namespace XenAdmin.Actions
         private readonly Host host;
         public readonly SR.SRTypes SrType;
         private readonly Dictionary<String, String> dconf;
-        public const String DEVICE = "device";
-        public const String SCSIid = "SCSIid";
-        public const String PATH = "path";
 
         public List<Probe_result> ProbeExtResult;
 
@@ -62,32 +59,28 @@ namespace XenAdmin.Actions
             this.SrType = srType;
             this.dconf = dconf;
 
+            string target;
             switch (srType)
             {
                 case SR.SRTypes.nfs:
-                    Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        SR.getFriendlyTypeName(srType), dconf["server"]);
+                    target = dconf["server"];
                     break;
                 case SR.SRTypes.lvmoiscsi:
-                    Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        SR.getFriendlyTypeName(srType), dconf["target"]);
+                    target = dconf["target"];
                     break;
                 case SR.SRTypes.lvmohba:
                 case SR.SRTypes.lvmofcoe:
-                    String device = dconf.ContainsKey(DEVICE) ?
-                        dconf[DEVICE] : dconf[SCSIid];
-                    Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        SR.getFriendlyTypeName(srType), device);
+                    target = dconf.ContainsKey("device") ? dconf["device"] : dconf["SCSIid"];
                     break;
                 case SR.SRTypes.gfs2:
-                    Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        SR.getFriendlyTypeName(srType), dconf.ContainsKey("ips") ? dconf["ips"] : dconf["ScsiId"]);
+                    target = dconf.ContainsKey("ips") ? dconf["ips"] : dconf["ScsiId"];
                     break;
                 default:
-                    Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        SR.getFriendlyTypeName(srType), Messages.REPAIRSR_SERVER); // this is a bit minging: CA-22111
+                    target = Messages.REPAIRSR_SERVER;
                     break;
             }
+
+            Description = string.Format(Messages.ACTION_SR_SCANNING, SR.getFriendlyTypeName(srType), target);
 
             this.smconf = smconf;
         }
