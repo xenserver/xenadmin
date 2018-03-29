@@ -32,8 +32,8 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using XenAdmin.Actions;
 using XenAdmin.Core;
-using XenAdmin.Wizards.NewSRWizard_Pages;
 using XenAdmin.Wizards.NewSRWizard_Pages.Frontends;
 
 namespace XenAdmin.Dialogs.WarningDialogs

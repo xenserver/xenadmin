@@ -34,7 +34,7 @@ using System.Collections.Generic;
 using System.Text;
 using XenCenterLib;
 
-namespace XenAdmin.Wizards.NewSRWizard_Pages
+namespace XenAdmin.Actions
 {
     public class FibreChannelDevice : IComparable<FibreChannelDevice>
     {
