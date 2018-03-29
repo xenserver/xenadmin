@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using XenAdmin.Actions;
 using XenAPI;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends

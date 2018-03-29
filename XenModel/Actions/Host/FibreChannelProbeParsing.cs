@@ -33,11 +33,11 @@ using System.Collections.Generic;
 using System.Xml;
 using XenAPI;
 
-namespace XenAdmin.Wizards.NewSRWizard_Pages
+namespace XenAdmin.Actions
 {
-    class FibreChannelProbeParsing
+    public class FibreChannelProbeParsing
     {
-        internal static List<FibreChannelDevice> ProcessXML(string p)
+        public static List<FibreChannelDevice> ProcessXML(string p)
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(p);
@@ -128,7 +128,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             }
         }
 
-        internal static List<FibreChannelDevice> ProcessProbeExtResult(List<Probe_result> probeExtResult)
+        public static List<FibreChannelDevice> ProcessProbeExtResult(List<Probe_result> probeExtResult)
         {
             var devices = new List<FibreChannelDevice>();
 
