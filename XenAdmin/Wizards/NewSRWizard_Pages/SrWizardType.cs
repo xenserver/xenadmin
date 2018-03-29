@@ -90,12 +90,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public Gfs2HbaSrDescriptor(FibreChannelDevice device)
             : base(device)
         {
-            var jsonUri = new JavaScriptSerializer().Serialize(new
-            {
-                provider = "hba",
-                ScsiId = device.SCSIid
-            });
-            DeviceConfig[SrProbeAction.URI] = jsonUri;
+            DeviceConfig["provider"] = "hba";
+            DeviceConfig["ScsiId"] = device.SCSIid;
             Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
         }
     }
@@ -105,12 +101,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public Gfs2FcoeSrDescriptor(FibreChannelDevice device)
             : base(device)
         {
-            var jsonUri = new JavaScriptSerializer().Serialize(new
-            {
-                provider = "fcoe",
-                ScsiId = device.SCSIid
-            });
-            DeviceConfig[SrProbeAction.URI] = jsonUri;
+            DeviceConfig["provider"] = "fcoe";
+            DeviceConfig["ScsiId"] = device.SCSIid;
             Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
         }
     }

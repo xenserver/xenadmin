@@ -46,7 +46,6 @@ namespace XenAdmin.Actions
         public const String DEVICE = "device";
         public const String SCSIid = "SCSIid";
         public const String PATH = "path";
-        public const String URI = "uri";
 
         public List<Probe_result> ProbeExtResult;
 
@@ -81,7 +80,7 @@ namespace XenAdmin.Actions
                     break;
                 case SR.SRTypes.gfs2:
                     Description = string.Format(Messages.ACTION_SR_SCANNING,
-                        SR.getFriendlyTypeName(srType), dconf["ips"]);
+                        SR.getFriendlyTypeName(srType), dconf.ContainsKey("ips") ? dconf["ips"] : dconf["ScsiId"]);
                     break;
                 default:
                     Description = string.Format(Messages.ACTION_SR_SCANNING,

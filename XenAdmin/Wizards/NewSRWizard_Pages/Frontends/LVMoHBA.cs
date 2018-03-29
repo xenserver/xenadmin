@@ -61,14 +61,19 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public virtual bool ShowNicColumn { get { return false; } }
 
-        public virtual LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
+        protected LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
         {
-            return SrType == SR.SRTypes.gfs2 ? new Gfs2HbaSrDescriptor(device) : new LvmOhbaSrDescriptor(device, Connection);
+            return SrType == SR.SRTypes.gfs2 ? CreateGfs2Descriptor(device) : CreateLvmSrDescriptor(device);
         }
 
-        public virtual LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
+        protected virtual LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
         {
             return new LvmOhbaSrDescriptor(device, Connection);
+        }
+
+        protected virtual LvmOhbaSrDescriptor CreateGfs2Descriptor(FibreChannelDevice device)
+        {
+            return new Gfs2HbaSrDescriptor(device);
         }
         
         #region XenTabPage overrides
@@ -204,8 +209,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             return true;
         }
 
-        public override void PopulatePage()
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
+            if (direction == PageLoadedDirection.Back)
+                return;
+
             colNic.Visible = ShowNicColumn; 
             dataGridView.Rows.Clear();
 
@@ -341,9 +349,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (master == null)
                 return false;
 
-            SR.SRTypes srType = this is LVMoFCoE ? SR.SRTypes.lvmofcoe : SR.SRTypes.lvmohba; //srType is a workaround instead of SrType
-
-            FibreChannelProbeAction action = new FibreChannelProbeAction(master, srType);// TODO: use SRType
+            FibreChannelProbeAction action = new FibreChannelProbeAction(master, SrType);
             using (var  dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dialog.ShowDialog(owner); //Will block until dialog closes, action completed
 
@@ -352,7 +358,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             try
             {
-                devices = FibreChannelProbeParsing.ProcessXML(action.Result);
+                devices = SrType == SR.SRTypes.gfs2 ? FibreChannelProbeParsing.ProcessProbeExtResult(action.ProbeExtResult) : FibreChannelProbeParsing.ProcessXML(action.Result);
 
                 if (devices.Count == 0)
                 {

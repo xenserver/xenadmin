@@ -47,14 +47,14 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override string HelpID { get { return "Location_FCOE"; } }
 
-        public override LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
-        {
-            return SrType == SR.SRTypes.gfs2 ? new Gfs2FcoeSrDescriptor(device) : new FcoeSrDescriptor(device);
-        }
-
-        public override LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
+        protected override LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
         {
             return new FcoeSrDescriptor(device);
+        }
+
+        protected override LvmOhbaSrDescriptor CreateGfs2Descriptor(FibreChannelDevice device)
+        {
+            return new Gfs2FcoeSrDescriptor(device);
         }
 
         #endregion

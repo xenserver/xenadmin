@@ -29,10 +29,9 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
+using XenAPI;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages
 {
@@ -127,6 +126,35 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
             {
                 return long.Parse(p);
             }
+        }
+
+        internal static List<FibreChannelDevice> ProcessProbeExtResult(List<Probe_result> probeExtResult)
+        {
+            var devices = new List<FibreChannelDevice>();
+
+            foreach (var probeResult in probeExtResult)
+            {
+                var vendor = probeResult.extra_info.ContainsKey("vendor") ? probeResult.extra_info["vendor"] :"";
+                long size; 
+                if (!probeResult.extra_info.ContainsKey("size") || !long.TryParse(probeResult.extra_info["size"], out size))
+                    size = 0;
+                var serial = probeResult.extra_info.ContainsKey("serial") ? probeResult.extra_info["serial"] : "";
+                var path = probeResult.extra_info.ContainsKey("path") ? probeResult.extra_info["path"] : "";
+                var scsiid = probeResult.configuration.ContainsKey("ScsiId") ? probeResult.configuration["ScsiId"] : "";
+                var adapter = probeResult.extra_info.ContainsKey("adapter") ? probeResult.extra_info["adapter"] : "";
+                var channel = probeResult.extra_info.ContainsKey("channel") ? probeResult.extra_info["channel"] : "";
+                var id = probeResult.extra_info.ContainsKey("id") ? probeResult.extra_info["id"] : "";
+                var lun = probeResult.extra_info.ContainsKey("lun") ? probeResult.extra_info["lun"] : "";
+                var name_label = "";
+                var name_description = "";
+                var pool_metadata_detected = false;
+                var eth = "";
+
+                devices.Add(new FibreChannelDevice(serial, path, vendor, size, scsiid, adapter, channel, id, lun, name_label, name_description, pool_metadata_detected, eth));
+
+            }
+
+            return devices;
         }
     }
 }
