@@ -50,19 +50,20 @@ namespace XenAdmin.Actions
         public List<Probe_result> ProbeExtResult;
 
         private readonly Dictionary<String, String> smconf;
+
         /// <summary>
         /// Won't appear in the program history (SuppressHistory == true).
         /// </summary>
-        /// <param name="masterUuid">The UUID of the host from which to perform the probe (usually the pool master).</param>
-        /// <param name="srType">netapp or iscsi</param>
-        public SrProbeAction(IXenConnection connection, Host host, SR.SRTypes srType, Dictionary<String, String> dconf)
+        public SrProbeAction(IXenConnection connection, Host host, SR.SRTypes srType,
+            Dictionary<String, String> dconf, Dictionary<String, String> smconf)
             : base(connection, string.Format(Messages.ACTION_SCANNING_SR_FROM, Helpers.GetName(connection)), null, true)
         {
             this.host = host;
             this.SrType = srType;
             this.dconf = dconf;
 
-            switch (srType) {
+            switch (srType)
+            {
                 case SR.SRTypes.nfs:
                     Description = string.Format(Messages.ACTION_SR_SCANNING,
                         SR.getFriendlyTypeName(srType), dconf["server"]);
@@ -87,13 +88,13 @@ namespace XenAdmin.Actions
                         SR.getFriendlyTypeName(srType), Messages.REPAIRSR_SERVER); // this is a bit minging: CA-22111
                     break;
             }
-            smconf = new Dictionary<string, string>();
+
+            this.smconf = smconf;
         }
 
-        public SrProbeAction(IXenConnection connection, Host host, SR.SRTypes srType, Dictionary<String, String> dconf, Dictionary<String, String> smconf)
-            : this(connection, host, srType, dconf)
+        public SrProbeAction(IXenConnection connection, Host host, SR.SRTypes srType, Dictionary<String, String> dconf)
+            : this(connection, host, srType, dconf, new Dictionary<string, string>())
         {
-            this.smconf = smconf;
         }
 
         protected override void Run()
