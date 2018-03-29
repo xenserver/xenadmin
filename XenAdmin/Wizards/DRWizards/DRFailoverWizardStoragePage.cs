@@ -303,23 +303,11 @@ namespace XenAdmin.Wizards.DRWizards
             if (master == null)
                 return null;
 
-            FibreChannelProbeAction action = new FibreChannelProbeAction(master);
+            var action = new FibreChannelProbeAction(master);
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dialog.ShowDialog(this); //Will block until dialog closes, action completed
 
-            if (!action.Succeeded)
-                return null;
-
-            try
-            {
-                return FibreChannelProbeParsing.ProcessXML(action.Result);
-            }
-            catch (Exception e)
-            {
-                log.Debug("Exception parsing result of fibre channel scan", e);
-                log.Debug(e, e);
-                return null;
-            }
+            return action.Succeeded ? action.FibreChannelDevices : null;
         }
 
         private Dictionary<String, String> GetFCDeviceConfig(FibreChannelDevice device)

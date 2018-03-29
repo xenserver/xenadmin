@@ -5373,7 +5373,7 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
     <value>No LUNs were found.  Please verify your hardware configuration.</value>
   </data>
   <data name="FIBRECHANNEL_XML_ERROR" xml:space="preserve">
-    <value>The scan failed. Please try again.</value>
+    <value>The scan failed.</value>
   </data>
   <data name="FIELD_DISABLED" xml:space="preserve">
     <value>This feature is disabled due to license restrictions on the server.</value>

@@ -349,41 +349,23 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (master == null)
                 return false;
 
-            FibreChannelProbeAction action = new FibreChannelProbeAction(master, SrType);
+            var action = new FibreChannelProbeAction(master, SrType);
             using (var  dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
                 dialog.ShowDialog(owner); //Will block until dialog closes, action completed
 
             if (!action.Succeeded)
                 return false;
 
-            try
-            {
-                devices = SrType == SR.SRTypes.gfs2 ? FibreChannelProbeParsing.ProcessProbeExtResult(action.ProbeExtResult) : FibreChannelProbeParsing.ProcessXML(action.Result);
-
-                if (devices.Count == 0)
-                {
-                    using (var dlg = new ThreeButtonDialog(
-                        new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_NO_RESULTS, Messages.XENCENTER)))
-                    {
-                        dlg.ShowDialog();
-                    }
-
-                    return false;
-                }
+            devices = action.FibreChannelDevices;
+            if (devices != null && devices.Count > 0)
                 return true;
-            }
-            catch (Exception e)
-            {
-                log.Debug("Exception parsing result of fibre channel scan", e);
-                log.Debug(e, e);
-                using (var dlg = new ThreeButtonDialog(
-                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_XML_ERROR, Messages.XENCENTER)))
-                {
-                    dlg.ShowDialog();
-                }
 
-                return false;
+            using (var dlg = new ThreeButtonDialog(
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.FIBRECHANNEL_NO_RESULTS, Messages.XENCENTER)))
+            {
+                dlg.ShowDialog();
             }
+            return false;
         }
         #region Accessors
 
