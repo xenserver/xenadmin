@@ -143,20 +143,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 return;
             }
 
-            Dictionary<String, String> dconf = GetDeviceConfig(SrType);
-            if (dconf == null)
-            {
-                cancel = true;
-                return;
-            }
+            // Start probe
 
             List<SR.SRInfo> srs;
+            var currentSrType = SrType;
 
-            // Start probe
-            SrProbeAction IscsiProbeAction = new SrProbeAction(Connection, master, SrType, dconf);
-            bool success = RunProbe(IscsiProbeAction, out srs);
-
-            if (!success)
+            if (!RunProbe(master, currentSrType, out srs))
             {
                 cancel = iscsiProbeError = true;
                 return;
@@ -167,12 +159,9 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             if (performSecondProbe && srs.Count == 0)
             {
                 // Start second probe
-                var secondSrType = SrType == SR.SRTypes.gfs2 ? SR.SRTypes.lvmoiscsi : SR.SRTypes.gfs2;
-                dconf = GetDeviceConfig(secondSrType);
-                IscsiProbeAction = new SrProbeAction(Connection, master, secondSrType, dconf);
-                success = RunProbe(IscsiProbeAction, out srs);
+                currentSrType = SrType == SR.SRTypes.gfs2 ? SR.SRTypes.lvmoiscsi : SR.SRTypes.gfs2;
 
-                if (!success)
+                if (!RunProbe(master, currentSrType, out srs))
                 {
                     cancel = iscsiProbeError = true;
                     return;
@@ -181,18 +170,24 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             // Probe has been performed. Now ask the user if they want to Reattach/Format/Cancel.
             // Will return false on cancel
-            cancel = iscsiProbeError = !ExamineIscsiProbeResults(IscsiProbeAction, srs);
+            cancel = iscsiProbeError = !ExamineIscsiProbeResults(currentSrType, srs);
         }
 
-        private bool RunProbe(SrProbeAction action, out List<SR.SRInfo> srs)
+        private bool RunProbe(Host master, SR.SRTypes srType, out List<SR.SRInfo> srs)
         {
+            srs = null;
+
+            Dictionary<String, String> dconf = GetDeviceConfig(srType);
+            if (dconf == null)
+                return false;
+
+            var action = new SrProbeAction(Connection, master, srType, dconf);
             using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
             {
                 dialog.ShowCancel = true;
                 dialog.ShowDialog(this);
             }
 
-            srs = null;
             _srToIntroduce = null;
             if (action.Succeeded)
             {
@@ -207,34 +202,24 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 }
             }
 
-            DoOnProbeFailure(action);
-            return false;
-        }
-
-        private void DoOnProbeFailure(SrProbeAction action)
-        {
-            if (action.Succeeded) 
-                return;
-
             Exception exn = action.Exception;
             log.Warn(exn, exn);
+
             Failure failure = exn as Failure;
-            if (failure != null && failure.ErrorDescription[0] == "SR_BACKEND_FAILURE_140")
+            if (failure != null)
             {
                 errorIconAtHostOrIP.Visible = true;
                 errorLabelAtHostname.Visible = true;
-                errorLabelAtHostname.Text = Messages.INVALID_HOST;
+
+                errorLabelAtHostname.Text = failure.ErrorDescription[0] == "SR_BACKEND_FAILURE_140"
+                    ? Messages.INVALID_HOST
+                    : (failure.ErrorDescription.Count > 2
+                        ? failure.ErrorDescription[2]
+                        : failure.ErrorDescription[0]);
+
                 textBoxIscsiHost.Focus();
             }
-            else if (failure != null)
-            {
-                errorIconAtHostOrIP.Visible = true;
-                errorLabelAtHostname.Visible = true;
-                errorLabelAtHostname.Text = failure.ErrorDescription.Count > 2
-                    ? failure.ErrorDescription[2]
-                    : failure.ErrorDescription[0];
-                textBoxIscsiHost.Focus();
-            }
+            return false;
         }
 
         bool iscsiProbeError = false;
@@ -776,11 +761,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         /// Whether to continue or not - wheter to format or not is stored in 
         /// iScsiFormatLUN.
         /// </returns>
-        private bool ExamineIscsiProbeResults(SrProbeAction action, List<SR.SRInfo> srs)
+        private bool ExamineIscsiProbeResults(SR.SRTypes currentSrType, List<SR.SRInfo> srs)
         {
             _srToIntroduce = null;
 
-            if (!action.Succeeded || srs == null)
+            if (srs == null)
                 return false;
 
             try
@@ -791,7 +776,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                     if (srs.Count == 1 && srs[0].UUID == SrWizardType.UUID)
                     {
                         _srToIntroduce = srs[0];
-                        SrType = action.SrType; // the type of the existing SR
+                        SrType = currentSrType; // the type of the existing SR
                         return true;
                     }
 
@@ -852,21 +837,21 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                             return false;
 
                         _srToIntroduce = info;
-                        SrType = action.SrType; // the type of the existing SR
+                        SrType = currentSrType; // the type of the existing SR
                         return true;
                     }
 
                     // An SR exists on this LUN. Ask the user if they want to attach it, format it and
                     // create a new SR, or cancel.
                     DialogResult result = Program.RunInAutomatedTestMode ? DialogResult.Yes :
-                        new IscsiChoicesDialog(Connection, info, action.SrType, SrType).ShowDialog(this);
+                        new IscsiChoicesDialog(Connection, info, currentSrType, SrType).ShowDialog(this);
                     
                     switch (result)
                     {
                         case DialogResult.Yes:
                             // Reattach
                             _srToIntroduce = srs[0];
-                            SrType = action.SrType; // the type of the existing SR
+                            SrType = currentSrType; // the type of the existing SR
                             return true;
 
                         case DialogResult.No:
