@@ -30,6 +30,8 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 using XenAPI;
 
 
@@ -37,20 +39,14 @@ namespace XenAdmin.Actions
 {
     public class FibreChannelProbeAction : PureAsyncAction
     {
+        private readonly SR.SRTypes srType;
 
-        public FibreChannelProbeAction(Host master)
+        public List<FibreChannelDevice> FibreChannelDevices;
+
+        public FibreChannelProbeAction(Host master, SR.SRTypes srType = SR.SRTypes.lvmohba)
             : base(master.Connection, string.Format(Messages.PROBING_HBA_TITLE, master.Name()), null, true)
         {
             Host = master;
-        }
-
-        private SR.SRTypes srType = SR.SRTypes.lvmohba;
-        public List<Probe_result> ProbeExtResult;
-
-
-        public FibreChannelProbeAction(Host master, SR.SRTypes srType)
-            : this(master)
-        {
             this.srType = srType;
         }
 
@@ -71,14 +67,47 @@ namespace XenAdmin.Actions
                     else
                         throw;
                 }
+
+                FibreChannelDevices = ProcessXml(Result);
             }
             else
             {
                 var deviceConfig = new Dictionary<string, string>();
                 deviceConfig["provider"] = "hba";
-                ProbeExtResult = SR.probe_ext(Session, Host.opaque_ref, deviceConfig, srType.ToString(), new Dictionary<string, string>());
+                var result = SR.probe_ext(Session, Host.opaque_ref, deviceConfig, srType.ToString(), new Dictionary<string, string>());
+                FibreChannelDevices = (from Probe_result r in result select new FibreChannelDevice(r.extra_info)).ToList();
             }
             Description = Messages.PROBED_HBA;
+        }
+
+
+        private static List<FibreChannelDevice> ProcessXml(string p)
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(p);
+
+                var devices = new List<FibreChannelDevice>();
+
+                var blockDevices = doc.GetElementsByTagName("BlockDevice");
+
+                foreach (XmlNode device in blockDevices)
+                {
+                    var properties = new Dictionary<string, string>();
+
+                    foreach (XmlNode node in device.ChildNodes)
+                        properties.Add(node.Name.ToLowerInvariant(), node.InnerText.Trim());
+
+                    devices.Add(new FibreChannelDevice(properties));
+                }
+
+                return devices;
+            }
+            catch (XmlException e)
+            {
+                throw new Failure(Messages.FIBRECHANNEL_XML_ERROR, e);
+            }
         }
     }
 }

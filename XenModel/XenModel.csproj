@@ -87,7 +87,6 @@
     <Compile Include="Actions\Host\EnableHostAction.cs" />
     <Compile Include="Actions\Host\EvacuateHostAction.cs" />
     <Compile Include="Actions\Host\FibreChannelDevice.cs" />
-    <Compile Include="Actions\Host\FibreChannelProbeParsing.cs" />
     <Compile Include="Actions\Host\HostAbstractAction.cs" />
     <Compile Include="Actions\Host\HostWithStatus.cs" />
     <Compile Include="Actions\Host\RebootHostAction.cs" />

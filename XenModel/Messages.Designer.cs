@@ -15298,7 +15298,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The scan failed. Please try again..
+        ///   Looks up a localized string similar to The scan failed..
         /// </summary>
         public static string FIBRECHANNEL_XML_ERROR {
             get {
