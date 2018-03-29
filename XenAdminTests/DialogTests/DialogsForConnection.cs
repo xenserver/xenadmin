@@ -36,6 +36,7 @@ using NUnit.Framework;
 using XenAdmin.Dialogs;
 using XenAdmin.Network;
 using XenAdmin.Wizards.NewVMWizard;
+using XenAPI;
 
 namespace XenAdminTests.DialogTests.state1_xml.DialogsForConnection
 {
@@ -113,7 +114,7 @@ namespace XenAdminTests.DialogTests.state1_xml.DialogsForConnection
         protected override IscsiChoicesDialog NewDialog()
         {
             XenAPI.SR.SRInfo srinfo = new XenAPI.SR.SRInfo("1234-5678-9012-3456", 200000000000);
-            return new IscsiChoicesDialog(GetAnyConnection(), srinfo);
+            return new IscsiChoicesDialog(GetAnyConnection(), srinfo, SR.SRTypes.lvmoiscsi, SR.SRTypes.lvmoiscsi);
         }
     }
 
