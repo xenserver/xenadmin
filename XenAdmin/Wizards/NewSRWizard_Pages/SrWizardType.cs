@@ -31,9 +31,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -59,7 +57,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public LvmOhbaSrDescriptor(FibreChannelDevice device, IXenConnection connection)
         {
             Device = device;
-            DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
+            DeviceConfig["SCSIid"] = device.SCSIid;
 
             Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
         }
@@ -78,8 +76,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
     {
         public FcoeSrDescriptor(FibreChannelDevice device) : base(device)
         {
-            DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
-            DeviceConfig[SrProbeAction.PATH] = device.Path;
+            DeviceConfig["SCSIid"] = device.SCSIid;
+            DeviceConfig["path"] = device.Path;
 
             Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
         }
