@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
 
 using XenAdmin.Controls;
 using XenAdmin.Core;
@@ -41,6 +42,7 @@ using XenAdmin.Network;
 using XenAPI;
 using XenAdmin.Commands;
 using XenAdmin.Dialogs;
+using XenAdmin.Controls.DataGridViewEx;
 
 
 namespace XenAdmin.TabPages
@@ -51,7 +53,6 @@ namespace XenAdmin.TabPages
         private Host host;
 
         private bool NeedBuildList;
-        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         private SelectionManager selectionManager;
         private bool showTrimButton;
@@ -60,9 +61,7 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
 
-            listViewSrs.SmallImageList = Images.ImageList16;
-            listViewSrs.ListViewItemSorter = lvwColumnSorter;
-            listViewSrs.SelectedIndexChanged += new EventHandler(listViewSrs_SelectedIndexChanged);
+            dataGridViewSr.SelectionChanged += new EventHandler(dataGridViewSrs_SelectedIndexChanged);
             base.Text = Messages.STORAGE_TAB_TITLE;
             PBD_CollectionChangedWithInvoke=Program.ProgramInvokeHandler(PBD_CollectionChanged);
 
@@ -121,7 +120,7 @@ namespace XenAdmin.TabPages
 
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
-            if (listViewSrs.SelectedItems.Count != 1)
+            if (dataGridViewSr.SelectedRows.Count != 1)
             {
                 e.Cancel = true;
                 return;
@@ -129,8 +128,12 @@ namespace XenAdmin.TabPages
 
             contextMenuStrip.Items.Clear();
 
-            SR sr = (SR)listViewSrs.SelectedItems[0].Tag;
-            contextMenuStrip.Items.AddRange(Program.MainWindow.ContextMenuBuilder.Build(sr));
+            var row = dataGridViewSr.SelectedRows[0] as SRRow;
+            if (row != null)
+            {
+                contextMenuStrip.Items.AddRange(Program.MainWindow.ContextMenuBuilder.Build(row.SR));
+            }
+            
         }
 
         private void XenObjectUpdated(object sender, EventArgs e)
@@ -169,7 +172,17 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                Program.Invoke(this, () => RefreshRowForSr((SR)sender));
+                Program.Invoke(Program.MainWindow, RefreshAllItems);
+            }
+        }
+
+        private void RefreshAllItems()
+        {
+            foreach (DataGridViewRow row in dataGridViewSr.Rows)
+            {
+                var srRow = row as SRRow;
+                if (srRow != null)
+                    srRow.UpdateDetails();
             }
         }
 
@@ -196,73 +209,17 @@ namespace XenAdmin.TabPages
             UnregisterHandlers();
         }
 
-        /// <summary>
-        /// Finds the ListView row for the given SR, and calls RefreshRow on it.
-        /// </summary>
-        private void RefreshRowForSr(SR sr)
-        {
-            foreach (ListViewItem row in listViewSrs.Items)
-            {
-                if ((SR)row.Tag == sr)
-                {
-                    RefreshRow(row);
-                    return;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Fills in the subitems for the given row based on the SR it is Tag'd with.
-        /// </summary>
-        /// <param name="row"></param>
-        private void RefreshRow(ListViewItem row)
-        {
-            SR sr = (SR)row.Tag;
-
-            // Work out percent usage
-            int percent = 0;
-            double ratio = 0;
-            if (sr.physical_size > 0)
-            {
-                ratio = sr.physical_utilisation / (double)sr.physical_size;
-                percent = (int)(100.0 * ratio);
-            }
-            string percentString = string.Format(Messages.DISK_PERCENT_USED, percent.ToString(), Util.DiskSizeString(sr.physical_utilisation));
-
-            row.SubItems.Clear();
-            row.SubItems.AddRange(new string[] {
-                sr.Name(),
-                sr.Description(),
-                sr.FriendlyTypeName(),
-                sr.shared ? Messages.YES : Messages.NO,
-                percentString,
-                Util.DiskSizeString(sr.physical_size),
-                Util.DiskSizeString(sr.virtual_allocation)
-            });
-            // SubItems.Clear() always leaves 1 element in the collection,
-            // so when we do the AddRange we're left with an unwanted element at the start
-            // of the collection. Remove it below.
-            row.SubItems.RemoveAt(0);
-
-            // Tag for the benefit of our Comparison<ListViewItem.ListViewSubItem> below.
-            row.SubItems[4].Tag = ratio;
-            row.SubItems[5].Tag = sr.physical_size;
-            row.SubItems[6].Tag = sr.virtual_allocation;
-
-            row.ImageIndex = (int)Images.GetIconFor(sr);
-        }
-
         private void BuildList()
         {
             if (!this.Visible)
                 return;
-            int selectedIndex = listViewSrs.SelectedIndices.Count == 1 ? listViewSrs.SelectedIndices[0] : -1;
+            int selectedIndex = dataGridViewSr.SelectedRows.Count == 1 ? dataGridViewSr.SelectedRows[0].Index : -1;
 
-            listViewSrs.BeginUpdate();
+            dataGridViewSr.SuspendLayout();
 
             try
             {
-                listViewSrs.Items.Clear();
+                dataGridViewSr.Rows.Clear();
 
                 if (connection == null)
                     return;
@@ -296,28 +253,25 @@ namespace XenAdmin.TabPages
                     index = ~index;
                     srs.Insert(index, sr.opaque_ref);
 
-                    ListViewItem item = new ListViewItem();
-                    item.Tag = sr;
-                    RefreshRow(item);
-                    listViewSrs.Items.Add(item);
+                    SRRow row = new SRRow(sr);
+                    dataGridViewSr.Rows.Add(row);
                 }
 
-                if (selectedIndex >= 0 && selectedIndex < listViewSrs.Items.Count)
+                if (selectedIndex >= 0 && selectedIndex < dataGridViewSr.Rows.Count)
                 {
                     // Select previously selected item
-                    listViewSrs.SelectedIndices.Clear();
-                    listViewSrs.SelectedIndices.Add(selectedIndex);
+                    dataGridViewSr.Rows[selectedIndex].Selected = true;
                 }
                 else
                 {
                     // Select first item
-                    if (listViewSrs.Items.Count > 0)
-                        listViewSrs.SelectedIndices.Add(0);
+                    if (dataGridViewSr.Rows.Count > 0)
+                        dataGridViewSr.Rows[0].Selected = true;
                 }
             }
             finally
             {
-                listViewSrs.EndUpdate();
+                dataGridViewSr.ResumeLayout();
             }
             RefreshButtons();
             NeedBuildList = false;
@@ -328,74 +282,59 @@ namespace XenAdmin.TabPages
             new NewSRCommand(Program.MainWindow, connection).Execute();
         }
 
-        /// <summary>
-        /// Taken from http://support.microsoft.com/kb/319401.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void listViewSrs_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void dataGridViewSr_MouseUp(object sender, MouseEventArgs e)
         {
-            // Determine if clicked column is already the column that is being sorted.
-            if (e.Column == lvwColumnSorter.SortColumn)
+            DataGridView.HitTestInfo hitTestInfo = dataGridViewSr.HitTest(e.X, e.Y);
+
+            if (hitTestInfo.Type == DataGridViewHitTestType.None)
             {
-                // Reverse the current sort direction for this column.
-                if (lvwColumnSorter.Order == SortOrder.Ascending)
-                {
-                    lvwColumnSorter.Order = SortOrder.Descending;
-                }
+                dataGridViewSr.ClearSelection();
+            }
+            else if (hitTestInfo.Type == DataGridViewHitTestType.Cell && e.Button == MouseButtons.Right
+                     && 0 <= hitTestInfo.RowIndex && hitTestInfo.RowIndex < dataGridViewSr.Rows.Count
+                     && !dataGridViewSr.Rows[hitTestInfo.RowIndex].Selected)
+            {
+                if (dataGridViewSr.CurrentCell == dataGridViewSr[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex])
+                    dataGridViewSr.Rows[hitTestInfo.RowIndex].Selected = true;
                 else
-                {
-                    lvwColumnSorter.Order = SortOrder.Ascending;
-                }
-            }
-            else
-            {
-                // Set the column number that is to be sorted; default to ascending.
-                lvwColumnSorter.SortColumn = e.Column;
-                lvwColumnSorter.Order = SortOrder.Ascending;
+                    dataGridViewSr.CurrentCell = dataGridViewSr[hitTestInfo.ColumnIndex, hitTestInfo.RowIndex];
             }
 
-            if (4 <= e.Column && e.Column <= 6)
+            if ((hitTestInfo.Type == DataGridViewHitTestType.None || hitTestInfo.Type == DataGridViewHitTestType.Cell)
+                && e.Button == MouseButtons.Right)
             {
-                // Use a custom comparer that sorts by the subitem's tag
-                lvwColumnSorter.Comparer = (Comparison<ListViewItem.ListViewSubItem>)delegate(ListViewItem.ListViewSubItem a, ListViewItem.ListViewSubItem b)
-                {
-                    return ((IComparable)a.Tag).CompareTo((IComparable)b.Tag);
-                };
+                contextMenuStrip.Show(dataGridViewSr, new Point(e.X, e.Y));
             }
-            else
-            {
-                // Use the default comparer (Helpers.NatualCompare)
-                lvwColumnSorter.Comparer = null;
-            }
-
-            // Perform the sort with these new sort options.
-            listViewSrs.Sort();
         }
 
         private void buttonProperties_Click(object sender, EventArgs e)
         {
-            if (listViewSrs.SelectedItems.Count != 1)
+            if (dataGridViewSr.SelectedRows.Count != 1)
                 return;
 
-            SR sr = (SR)listViewSrs.SelectedItems[0].Tag;
+            var srRow = dataGridViewSr.SelectedRows[0] as SRRow;
 
-            new PropertiesDialog(sr).ShowDialog(this);
+            if (srRow != null)
+            {
+                SR sr = srRow.SR;
+
+                new PropertiesDialog(sr).ShowDialog(this);
+            }
         }
 
-        void listViewSrs_SelectedIndexChanged(object sender, EventArgs e)
+        void dataGridViewSrs_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshButtons();
             if (showTrimButton)
             {
-                List<SelectedItem> selectedSRs = (from ListViewItem item in listViewSrs.SelectedItems select new SelectedItem((SR)item.Tag)).ToList();
+                List<SelectedItem> selectedSRs = (from SRRow row in dataGridViewSr.SelectedRows select new SelectedItem(row.SR)).ToList();
                 selectionManager.SetSelection(selectedSRs);
             }
         }
 
         private void RefreshButtons()
         {
-            buttonProperties.Enabled = listViewSrs.SelectedItems.Count == 1;
+            buttonProperties.Enabled = dataGridViewSr.SelectedRows.Count == 1;
         }
 
         private void RefreshTrimButton()
@@ -412,6 +351,68 @@ namespace XenAdmin.TabPages
             {
                 trimButtonContainer.Visible = false;
                 trimButton.SelectionBroadcaster = null;
+            }
+        }
+
+        protected class SRRow: DataGridViewRow
+        {
+            private SR sr;
+            public SR SR { get { return sr; } }
+
+            private DataGridViewExImageCell imageCell = new DataGridViewExImageCell();
+            private DataGridViewTextBoxCell nameCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell descriptionCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell typeCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell sharedCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell usageCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell sizeCell = new DataGridViewTextBoxCell();
+            private DataGridViewTextBoxCell virtAllocCell = new DataGridViewTextBoxCell();
+            
+
+            public SRRow(SR sr)
+            {
+                this.sr = sr;
+                Cells.AddRange(imageCell,
+                                   nameCell,
+                                   descriptionCell,
+                                   typeCell,
+                                   sharedCell,
+                                   usageCell,
+                                   sizeCell,
+                                   virtAllocCell);
+
+                sr.PropertyChanged += sr_PropertyChanged;
+                UpdateDetails();
+            }
+
+            public void UpdateDetails()
+            {
+                if (this.sr != null)
+                {
+                    // Work out percent usage
+                    int percent = 0;
+                    double ratio = 0;
+                    if (this.sr.physical_size > 0)
+                    {
+                        ratio = this.sr.physical_utilisation / (double)this.sr.physical_size;
+                        percent = (int)(100.0 * ratio);
+                    }
+                    string percentString = string.Format(Messages.DISK_PERCENT_USED, percent.ToString(), Util.DiskSizeString(this.sr.physical_utilisation));
+
+                    imageCell.Value = Images.GetImage16For(Images.GetIconFor(this.sr));
+                    nameCell.Value = this.sr.Name();
+                    descriptionCell.Value = this.sr.Description();
+                    typeCell.Value = this.sr.FriendlyTypeName();
+                    sharedCell.Value = this.sr.shared ? Messages.YES : Messages.NO;
+                    usageCell.Value = percentString;
+                    sizeCell.Value = Util.DiskSizeString(this.sr.physical_size);
+                    virtAllocCell.Value = Util.DiskSizeString(this.sr.virtual_allocation);
+                }
+            }
+
+            void sr_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                Program.Invoke(Program.MainWindow, UpdateDetails);
             }
         }
     }
