@@ -282,9 +282,6 @@ namespace XenAdmin.Plugins
                 BrowserStates[selectedXenObject] = state;
             }
 
-            if (lastBrowserState == state)
-                return;
-
             try
             {
                 if (state.ObjectForScripting != null)
@@ -429,7 +426,6 @@ namespace XenAdmin.Plugins
                 lastXenModelObject = SelectedXenObject;
                 if (ShowTab)
                 {
-                    //Browser.Navigate("about:blank");
                     SetUrl();
                 }  
             }
