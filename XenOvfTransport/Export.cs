@@ -330,9 +330,9 @@ namespace XenOvfTransport
                     OVF.AddOtherSystemSettingData(ovfEnv, vsId, "hardware_platform_version", vm.hardware_platform_version.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
 
-                if (vm.HasSriovRecommendation())
+                if (vm.recommendations != null)
                 {
-                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "allow_network_sriov", bool.TrueString.ToLowerInvariant(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "recommendations", vm.recommendations.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
                 if (vm.has_vendor_device)
                 {
