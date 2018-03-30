@@ -105,6 +105,7 @@ namespace XenAdmin.Plugins
 
         private readonly Dictionary<IXenObject, BrowserState> BrowserStates = new Dictionary<IXenObject, BrowserState>();
         private BrowserState lastBrowserState = null;
+        private bool ResettingPage = false;
 
         private TabControl tabControl;
         private IXenObject selectedXenObject;
@@ -320,7 +321,8 @@ namespace XenAdmin.Plugins
             if (!XenCenterOnly && lastBrowserState != null)
             {
                 log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                lastBrowserState.Urls = new List<Uri> { e.Url };
+                if (ResettingPage == false)
+                    lastBrowserState.Urls = new List<Uri> { e.Url };
             }
         }
 
@@ -371,7 +373,8 @@ namespace XenAdmin.Plugins
                 DeleteUrlCacheEntry(e.Url.AbsoluteUri);
             }
 
-            lastBrowserState.Urls = new List<Uri> { e.Url };
+            if (ResettingPage == false)
+                lastBrowserState.Urls = new List<Uri> { e.Url };
         }
 
         /// <summary>
@@ -425,7 +428,10 @@ namespace XenAdmin.Plugins
 
                 lastXenModelObject = SelectedXenObject;
                 if (ShowTab)
+                {
+                    //Browser.Navigate("about:blank");
                     SetUrl();
+                }  
             }
             else
             {
@@ -435,7 +441,17 @@ namespace XenAdmin.Plugins
                 {
                     lastXenModelObject = SelectedXenObject;
                     if (ShowTab)
+                    {
+                        Browser.Navigate("about:blank");
+                        ResettingPage = true;
+                        while (Browser.ReadyState != WebBrowserReadyState.Complete)
+                        {
+                            Application.DoEvents();
+                            System.Threading.Thread.Sleep(10);
+                        }
+                        ResettingPage = false;
                         SetUrl();
+                    }
                 }
                 else if (lastXenModelObject != null)
                 {
@@ -449,7 +465,8 @@ namespace XenAdmin.Plugins
             if (!XenCenterOnly && lastBrowserState != null)
             {
                 log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                lastBrowserState.Urls = new List<Uri> { e.Url };
+                if (ResettingPage == false)
+                    lastBrowserState.Urls = new List<Uri> { e.Url };
 
                 if (lastBrowserState.IsError != navigationError)
                 {
