@@ -435,7 +435,7 @@ namespace XenAPI
 
             try
             {
-                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow_network_sriov']");
+                XmlNode xn = xd.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
                 if (xn == null || xn.Attributes == null)
                     return false;
 
