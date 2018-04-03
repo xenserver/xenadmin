@@ -48,12 +48,12 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override string HelpID { get { return "Location_FCOE"; } }
 
-        protected override LvmOhbaSrDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
+        protected override FibreChannelDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
         {
             return new FcoeSrDescriptor(device);
         }
 
-        protected override LvmOhbaSrDescriptor CreateGfs2Descriptor(FibreChannelDevice device)
+        protected override FibreChannelDescriptor CreateGfs2Descriptor(FibreChannelDevice device)
         {
             return new Gfs2FcoeSrDescriptor(device);
         }

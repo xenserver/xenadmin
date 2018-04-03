@@ -52,66 +52,76 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public string UUID { get; set; }
     }
 
-    public class LvmOhbaSrDescriptor : SrDescriptor
+    public abstract class FibreChannelDescriptor : SrDescriptor
     {
-        public LvmOhbaSrDescriptor(FibreChannelDevice device, IXenConnection connection)
+        protected FibreChannelDescriptor(FibreChannelDevice device, string descrFormat)
         {
             Device = device;
-            DeviceConfig["SCSIid"] = device.SCSIid;
-
-            Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
+            Description = string.Format(descrFormat, device.Vendor, device.Serial);
         }
 
-        public LvmOhbaSrDescriptor(FibreChannelDevice device)
-        {
-            Device = device;
-
-            Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
-        }
+        public abstract SR.SRTypes SrType { get; }
 
         public FibreChannelDevice Device { get; private set; }
+    }
 
-        public SR.SRTypes SrType
+    public class LvmOhbaSrDescriptor : FibreChannelDescriptor
+    {
+        public LvmOhbaSrDescriptor(FibreChannelDevice device)
+            : base(device, Messages.NEWSR_LVMOHBA_DESCRIPTION)
         {
-            get
-            {
-                return this is Gfs2HbaSrDescriptor || this is Gfs2FcoeSrDescriptor
-                    ? SR.SRTypes.gfs2
-                    : this is FcoeSrDescriptor ? SR.SRTypes.lvmofcoe : SR.SRTypes.lvmohba;
-                }
+            DeviceConfig["SCSIid"] = device.SCSIid;
+        }
+
+        public override SR.SRTypes SrType
+        {
+            get { return SR.SRTypes.lvmohba; }
         }
     }
 
-    public class FcoeSrDescriptor : LvmOhbaSrDescriptor
+    public class FcoeSrDescriptor : FibreChannelDescriptor
     {
-        public FcoeSrDescriptor(FibreChannelDevice device) : base(device)
+        public FcoeSrDescriptor(FibreChannelDevice device)
+            : base(device, Messages.NEWSR_LVMOFCOE_DESCRIPTION)
         {
             DeviceConfig["SCSIid"] = device.SCSIid;
             DeviceConfig["path"] = device.Path;
+        }
 
-            Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
+        public override SR.SRTypes SrType
+        {
+            get { return SR.SRTypes.lvmofcoe; }
         }
     }
 
-    public class Gfs2HbaSrDescriptor : LvmOhbaSrDescriptor
+    public class Gfs2HbaSrDescriptor : FibreChannelDescriptor
     {
         public Gfs2HbaSrDescriptor(FibreChannelDevice device)
-            : base(device)
+            : base(device, Messages.NEWSR_LVMOHBA_DESCRIPTION)
         {
             DeviceConfig["provider"] = "hba";
             DeviceConfig["ScsiId"] = device.SCSIid;
-            Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
+        }
+
+        public override SR.SRTypes SrType
+        {
+            get { return SR.SRTypes.gfs2; }
         }
     }
 
-    public class Gfs2FcoeSrDescriptor : FcoeSrDescriptor
+    public class Gfs2FcoeSrDescriptor : FibreChannelDescriptor
     {
         public Gfs2FcoeSrDescriptor(FibreChannelDevice device)
-            : base(device)
+            : base(device, Messages.NEWSR_LVMOFCOE_DESCRIPTION)
         {
             DeviceConfig["provider"] = "fcoe";
             DeviceConfig["ScsiId"] = device.SCSIid;
-            Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
+            DeviceConfig["path"] = device.Path;
+        }
+
+        public override SR.SRTypes SrType
+        {
+            get { return SR.SRTypes.gfs2; }
         }
     }
 
