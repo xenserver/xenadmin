@@ -70,6 +70,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         }
 
         public FibreChannelDevice Device { get; private set; }
+
+        public SR.SRTypes SrType
+        {
+            get
+            {
+                return this is Gfs2HbaSrDescriptor || this is Gfs2FcoeSrDescriptor
+                    ? SR.SRTypes.gfs2
+                    : this is FcoeSrDescriptor ? SR.SRTypes.lvmofcoe : SR.SRTypes.lvmohba;
+                }
+        }
     }
 
     public class FcoeSrDescriptor : LvmOhbaSrDescriptor

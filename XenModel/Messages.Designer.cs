@@ -20655,7 +20655,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An existing SR was found on the selected LUN.
+        ///   Looks up a localized string similar to Destroy any data present on the disk and create a new {0} SR.
+        /// </summary>
+        public static string LVMOHBA_WARNING_DIALOG_FORMAT_INFO {
+            get {
+                return ResourceManager.GetString("LVMOHBA_WARNING_DIALOG_FORMAT_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An existing {0} SR was found on the selected LUN.
         /// </summary>
         public static string LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR {
             get {
@@ -20681,6 +20690,15 @@ namespace XenAdmin {
         public static string LVMOHBA_WARNING_DIALOG_LUN_DETAILS {
             get {
                 return ResourceManager.GetString("LVMOHBA_WARNING_DIALOG_LUN_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the existing {0} SR.
+        /// </summary>
+        public static string LVMOHBA_WARNING_DIALOG_REATTACH_INFO {
+            get {
+                return ResourceManager.GetString("LVMOHBA_WARNING_DIALOG_REATTACH_INFO", resourceCulture);
             }
         }
         
@@ -24441,6 +24459,24 @@ namespace XenAdmin {
         public static string NEWSR_LUN_IN_USE_ON_POOL {
             get {
                 return ResourceManager.GetString("NEWSR_LUN_IN_USE_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The LUN {0} is already in use as SR {1} on your pool. Please select another LUN..
+        /// </summary>
+        public static string NEWSR_LUN_IN_USE_ON_SELECTED_POOL {
+            get {
+                return ResourceManager.GetString("NEWSR_LUN_IN_USE_ON_SELECTED_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The LUN {0} is already in use as SR {1} on your server. Please select another LUN..
+        /// </summary>
+        public static string NEWSR_LUN_IN_USE_ON_SELECTED_SERVER {
+            get {
+                return ResourceManager.GetString("NEWSR_LUN_IN_USE_ON_SELECTED_SERVER", resourceCulture);
             }
         }
         

@@ -637,6 +637,7 @@ namespace XenAdmin.Wizards
 
             foreach (var srDescriptor in m_srWizardType.SrDescriptors)
             {
+                var srType = srDescriptor is LvmOhbaSrDescriptor ? (srDescriptor as LvmOhbaSrDescriptor).SrType : m_srWizardType.Type;
                 if (String.IsNullOrEmpty(srDescriptor.UUID))
                 {
                     // Don't need to show any warning, as the only destructive creates
@@ -644,7 +645,7 @@ namespace XenAdmin.Wizards
                     finalActions.Add(new SrCreateAction(xenConnection, master,
                                                         srDescriptor.Name,
                                                         srDescriptor.Description,
-                                                        m_srWizardType.Type,
+                                                        srType,
                                                         m_srWizardType.ContentType,
                                                         srDescriptor.DeviceConfig,
                                                         srDescriptor.SMConfig));
@@ -656,7 +657,7 @@ namespace XenAdmin.Wizards
                         (_srToReattach == null || SR.SupportsDatabaseReplication(xenConnection, _srToReattach)))
                     {
                         // "Find existing SRs" or "Attach SR needed for DR" cases
-                        ScannedDeviceInfo deviceInfo = new ScannedDeviceInfo(m_srWizardType.Type,
+                        ScannedDeviceInfo deviceInfo = new ScannedDeviceInfo(srType,
                                                                              srDescriptor.DeviceConfig,
                                                                              srDescriptor.UUID);
                         finalActions.Add(new DrTaskCreateAction(xenConnection, deviceInfo));
@@ -666,7 +667,7 @@ namespace XenAdmin.Wizards
                                                                srDescriptor.UUID,
                                                                srDescriptor.Name,
                                                                srDescriptor.Description,
-                                                               m_srWizardType.Type,
+                                                               srType,
                                                                m_srWizardType.ContentType,
                                                                srDescriptor.DeviceConfig));
                 }

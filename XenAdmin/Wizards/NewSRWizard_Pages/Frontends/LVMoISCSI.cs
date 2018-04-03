@@ -73,7 +73,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         private const string SCSIID = "SCSIid";
         private const string CHAPUSER = "chapuser";
         private const string CHAPPASSWORD = "chappassword";
-        private const string URI = "uri";
 
         private IEnumerable<Control> ErrorIcons
         {
