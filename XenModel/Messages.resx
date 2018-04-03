@@ -7191,8 +7191,11 @@ Standard features only</value>
   <data name="LUNPERVDI_PAGE_TITLE" xml:space="preserve">
     <value>Map virtual disks (VDIs) to individual LUNs on the target SR</value>
   </data>
+  <data name="LVMOHBA_WARNING_DIALOG_FORMAT_INFO" xml:space="preserve">
+    <value>Destroy any data present on the disk and create a new {0} SR</value>
+  </data>
   <data name="LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR" xml:space="preserve">
-    <value>An existing SR was found on the selected LUN</value>
+    <value>An existing {0} SR was found on the selected LUN</value>
   </data>
   <data name="LVMOHBA_WARNING_DIALOG_HEADER_NO_EXISTING_SRS" xml:space="preserve">
     <value>No existing SRs were found on the selected LUN</value>
@@ -7202,6 +7205,9 @@ Standard features only</value>
 Serial Number: {1}
 SCSI ID: {2}
 Size: {3}</value>
+  </data>
+  <data name="LVMOHBA_WARNING_DIALOG_REATTACH_INFO" xml:space="preserve">
+    <value>Use the existing {0} SR</value>
   </data>
   <data name="LVMOHBA_WARNING_DIALOG_REATTACH_LABEL_TEXT" xml:space="preserve">
     <value>There is no existing SR to reattach</value>
@@ -8341,6 +8347,12 @@ Do you want to format the disk?</value>
   </data>
   <data name="NEWSR_LUN_IN_USE_ON_POOL" xml:space="preserve">
     <value>This LUN is already in use as SR {0} on pool {1}.</value>
+  </data>
+  <data name="NEWSR_LUN_IN_USE_ON_SELECTED_POOL" xml:space="preserve">
+    <value>The LUN {0} is already in use as SR {1} on your pool. Please select another LUN.</value>
+  </data>
+  <data name="NEWSR_LUN_IN_USE_ON_SELECTED_SERVER" xml:space="preserve">
+    <value>The LUN {0} is already in use as SR {1} on your server. Please select another LUN.</value>
   </data>
   <data name="NEWSR_LUN_IN_USE_ON_SERVER" xml:space="preserve">
     <value>This LUN is already in use as SR {0} on server {1}.</value>
