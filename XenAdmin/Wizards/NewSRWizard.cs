@@ -199,7 +199,7 @@ namespace XenAdmin.Wizards
             return success;
         }
 
-        private bool CanShowLVMoHBASummaryPage(List<LvmOhbaSrDescriptor> SrDescriptors)
+        private bool CanShowLVMoHBASummaryPage(List<FibreChannelDescriptor> SrDescriptors)
         {
             string description = m_srWizardType.Description;
             string name = m_srWizardType.SrName;
@@ -207,14 +207,14 @@ namespace XenAdmin.Wizards
             List<string> names = xenConnection.Cache.SRs.Select(sr => sr.Name()).ToList();
 
             m_srWizardType.SrDescriptors.Clear();
-            foreach (var lvmOhbaSrDescriptor in SrDescriptors)
+            foreach (var descriptor in SrDescriptors)
             {
-                lvmOhbaSrDescriptor.Name = name;
+                descriptor.Name = name;
                 if (!string.IsNullOrEmpty(description))
-                    lvmOhbaSrDescriptor.Description = description;
+                    descriptor.Description = description;
 
-                m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
-                m_srWizardType.IsGfs2 = lvmOhbaSrDescriptor is Gfs2HbaSrDescriptor || lvmOhbaSrDescriptor is Gfs2FcoeSrDescriptor;
+                m_srWizardType.SrDescriptors.Add(descriptor);
+                m_srWizardType.IsGfs2 = descriptor is Gfs2HbaSrDescriptor || descriptor is Gfs2FcoeSrDescriptor;
                 names.Add(name);
                 name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_Hba 
                                                         ? Messages.NEWSR_HBA_DEFAULT_NAME
@@ -637,7 +637,7 @@ namespace XenAdmin.Wizards
 
             foreach (var srDescriptor in m_srWizardType.SrDescriptors)
             {
-                var srType = srDescriptor is LvmOhbaSrDescriptor ? (srDescriptor as LvmOhbaSrDescriptor).SrType : m_srWizardType.Type;
+                var srType = srDescriptor is FibreChannelDescriptor ? (srDescriptor as FibreChannelDescriptor).SrType : m_srWizardType.Type;
                 if (String.IsNullOrEmpty(srDescriptor.UUID))
                 {
                     // Don't need to show any warning, as the only destructive creates
