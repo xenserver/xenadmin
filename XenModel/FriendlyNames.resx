@@ -1841,4 +1841,58 @@
   <data name="Label-host.edition-desktop-cloud" xml:space="preserve">
     <value>XenApp/XenDesktop [Citrix] Cloud</value>
   </data>
+  <data name="Label-host.edition-xcp-ng" xml:space="preserve">
+    <value>XCP-NG</value>
+  </data>
+  <data name="Label-performance.CPU0-avg-freq" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU1-avg-freq" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU2-avg-freq" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU3-avg-freq" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU4-avg-freq" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU10-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU11-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU12-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU13-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU14-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU15-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU16-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU5-avg-freq1" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU6-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU7-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU8-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
+  <data name="Label-performance.CPU9-avg-freq11" xml:space="preserve">
+    <value>Average CPU</value>
+  </data>
 </root>
