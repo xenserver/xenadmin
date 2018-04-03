@@ -142,7 +142,7 @@
     <value>5</value>
   </data>
   <data name="cbxAutomatic.Text" xml:space="preserve">
-    <value>&amp;Automatically add this network to new virtual machines.</value>
+    <value>このネットワークを新規 VM に自動的に追加する。(&amp;A)</value>
   </data>
   <data name="&gt;&gt;cbxAutomatic.Name" xml:space="preserve">
     <value>cbxAutomatic</value>
@@ -175,7 +175,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Select a NIC to enable SR-IOV.</value>
+    <value>NIC を選択して SR-IOV を有効にします。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -208,7 +208,7 @@
     <value>1</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>NI&amp;C:</value>
+    <value>NIC(&amp;C):</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>

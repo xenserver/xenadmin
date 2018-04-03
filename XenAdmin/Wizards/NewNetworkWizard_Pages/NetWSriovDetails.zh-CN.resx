@@ -175,7 +175,7 @@
     <value>0</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Select a NIC to enable SR-IOV.</value>
+    <value>选择一个 NIC 以启用 SR-IOV。</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
