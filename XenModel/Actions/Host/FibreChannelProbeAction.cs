@@ -75,7 +75,15 @@ namespace XenAdmin.Actions
                 var deviceConfig = new Dictionary<string, string>();
                 deviceConfig["provider"] = "hba";
                 var result = SR.probe_ext(Session, Host.opaque_ref, deviceConfig, srType.ToString(), new Dictionary<string, string>());
-                FibreChannelDevices = (from Probe_result r in result select new FibreChannelDevice(r.extra_info)).ToList();
+
+                var list = new List<FibreChannelDevice>();
+                foreach (var r in result)
+                {
+                    var dict = new Dictionary<string, string>(r.configuration);
+                    r.extra_info.ToList().ForEach(kvp => dict.Add(kvp.Key, kvp.Value));
+                    list.Add(new FibreChannelDevice(dict));
+                }
+                FibreChannelDevices = list;
             }
             Description = Messages.PROBED_HBA;
         }
