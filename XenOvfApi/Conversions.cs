@@ -84,133 +84,83 @@ namespace XenOvf
             }
         }
 
-        public static void ConvertOVFtoOVA(string pathToOvf, string ovfFileName, bool compress)
-        {
-            ConvertOVFtoOVA(pathToOvf, ovfFileName, compress, true);
-        }
-
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
              Justification = "Tar Object uses close not Dispose, it cleans up all streams used.")]
-        public static void ConvertOVFtoOVA(string pathToOvf, string ovfFileName, bool compress, bool cleanup)
+        public static void ConvertOVFtoOVA(string pathToOvf, string ovfFileName, bool compress, bool cleanup = true)
         {
-            Dictionary<long, string> filesDictionary = new Dictionary<long, string>();
+            // throws exception if any of the parameters is null (which we want)
+            string fullOvfPath = Path.Combine(pathToOvf, ovfFileName);
+            
+            if (!File.Exists(fullOvfPath))
+                throw new FileNotFoundException(string.Format(Messages.FILE_MISSING, fullOvfPath));
 
-            EnvelopeType ovfobj = Load(Path.Combine(pathToOvf, ovfFileName));
-
-            EnvelopeType ovfenv = ovfobj;
-            File_Type[] files = ovfenv.References.File;
-
-
-            string manifestfile = string.Format(@"{0}.mf", Path.GetFileNameWithoutExtension(ovfFileName));
-            string signaturefile = string.Format(@"{0}.cert", Path.GetFileNameWithoutExtension(ovfFileName));
-
-            string origDir = Directory.GetCurrentDirectory();
-            Directory.SetCurrentDirectory(pathToOvf);
-            string ick = Directory.GetCurrentDirectory();
-
-
-            if (ick != pathToOvf)
-            {
-                Directory.SetCurrentDirectory(pathToOvf);
-                // try again.
-            }
-
-            if (files != null)
-            {
-                foreach (File_Type file in files)
-                {
-                    string filename = Path.GetFileName(file.href);
-                    FileInfo fi = new FileInfo(Path.Combine(pathToOvf, filename));
-                }
-            }
-
-            string ovafilename = Path.Combine(pathToOvf, string.Format("{0}.ova", Path.GetFileNameWithoutExtension(ovfFileName)));
-
-            Stream ovaStream = null;
             // File Order is:
             // 1. OVF File
             // 2. Manifest (if exists)
             // 3. Signature File (if exists)
             // 4. All files listed in References.File.
-            ArchiveWriter tar = null;
+
+            string origDir = "";
             try
             {
-                if (ovfFileName != null && pathToOvf != null)
-                {
-                    #region COMPRESSION STREAM
+                origDir = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory(pathToOvf);
 
-                    if (compress) // need to compress.
+                EnvelopeType ovfenv = Load(ovfFileName);
+                File_Type[] files = ovfenv.References.File;
+
+                string ovafilename = string.Format("{0}.ova", Path.GetFileNameWithoutExtension(ovfFileName));
+                string manifestfile = string.Format("{0}.mf", Path.GetFileNameWithoutExtension(ovfFileName));
+                string signaturefile = string.Format("{0}.cert", Path.GetFileNameWithoutExtension(ovfFileName));
+
+                #region COMPRESSION STREAM
+
+                Stream ovaStream;
+                if (compress)
+                {
+                    if (Properties.Settings.Default.useGZip)
                     {
-                        if (Properties.Settings.Default.useGZip)
-                        {
-                            log.Info("OVF.ConvertOVFtoOVA GZIP compression stream inserted");
-                            FileStream fsStream = new FileStream(ovafilename + ".gz", FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                            ovaStream = CompressionFactory.Writer(CompressionFactory.Type.Gz, fsStream);
-                        }
-                        else
-                        {
-                            log.Info("OVF.ConvertOVFtoOVA BZIP2 compression stream inserted");
-                            FileStream fsStream = new FileStream(ovafilename + ".bz2", FileMode.CreateNew, FileAccess.Write, FileShare.None);
-                            ovaStream = CompressionFactory.Writer(CompressionFactory.Type.Bz2, fsStream);
-                        }
+                        log.Info("OVF.ConvertOVFtoOVA GZIP compression stream inserted");
+                        FileStream fsStream = new FileStream(ovafilename + ".gz", FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                        ovaStream = CompressionFactory.Writer(CompressionFactory.Type.Gz, fsStream);
                     }
                     else
                     {
-                        ovaStream = new FileStream(ovafilename, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                        log.Info("OVF.ConvertOVFtoOVA BZIP2 compression stream inserted");
+                        FileStream fsStream = new FileStream(ovafilename + ".bz2", FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                        ovaStream = CompressionFactory.Writer(CompressionFactory.Type.Bz2, fsStream);
                     }
-
-                    #endregion
-
-                    #region TAR
-
-                    using (tar = ArchiveFactory.Writer(ArchiveFactory.Type.Tar, ovaStream))
-                    {
-                        Directory.SetCurrentDirectory(pathToOvf);
-
-                        if (File.Exists(ovfFileName))
-                        {
-                            log.InfoFormat("OVF.ConvertOVFtoOVA: added file: {0}", ovfFileName);
-                            AddFileToArchiveWriter(tar, ovfFileName);
-                            if (cleanup) File.Delete(ovfFileName);
-                        }
-                        else
-                        {
-                            throw new ArgumentException(string.Format(Messages.FILE_MISSING,
-                                Path.Combine(pathToOvf, ovfFileName)));
-                        }
-
-                        if (File.Exists(manifestfile))
-                        {
-                            AddFileToArchiveWriter(tar, manifestfile);
-                            log.InfoFormat("OVF.ConvertOVFtoOVA: added file: {0}", manifestfile);
-                            if (cleanup) File.Delete(manifestfile);
-                            // Cannot exist with out manifest file.
-                            if (File.Exists(signaturefile))
-                            {
-                                AddFileToArchiveWriter(tar, signaturefile);
-                                log.InfoFormat("OVF.ConvertOVFtoOVA: added file: {0}", signaturefile);
-                                if (cleanup) File.Delete(signaturefile);
-                            }
-                        }
-                        if (files != null && files.Length > 0)
-                        {
-                            List<File_Type> filelist = new List<File_Type>();
-                            filelist.AddRange(files);
-                            foreach (File_Type file in filelist)
-                            {
-                                AddFileToArchiveWriter(tar, file.href);
-                                log.InfoFormat("OVF.ConvertOVFtoOVA: added file: {0}", file.href);
-                                if (cleanup) File.Delete(file.href);
-                            }
-                        }
-                    }
-
-                    #endregion
                 }
                 else
                 {
-                    throw new ArgumentException(string.Format(Messages.FILE_MISSING, Path.Combine(pathToOvf, ovfFileName)));
+                    ovaStream = new FileStream(ovafilename, FileMode.CreateNew, FileAccess.Write, FileShare.None);
                 }
+
+                #endregion
+
+                #region TAR
+
+                using (var tar = ArchiveFactory.Writer(ArchiveFactory.Type.Tar, ovaStream))
+                {
+                    AddFileToArchiveWriter(tar, ovfFileName, cleanup);
+
+                    if (File.Exists(manifestfile))
+                    {
+                        AddFileToArchiveWriter(tar, manifestfile, cleanup);
+                       
+                        // Cannot exist without manifest file.
+                        if (File.Exists(signaturefile))
+                            AddFileToArchiveWriter(tar, signaturefile, cleanup);
+                    }
+
+                    if (files != null)
+                    {
+                        foreach (File_Type file in files)
+                            AddFileToArchiveWriter(tar, file.href, cleanup);
+                    }
+                }
+
+                #endregion
             }
             catch (Exception ex)
             {
@@ -219,6 +169,8 @@ namespace XenOvf
             }
             finally
             {
+                Directory.SetCurrentDirectory(origDir);
+
                 _processId = System.Diagnostics.Process.GetCurrentProcess().Id;
                 _touchFile = Path.Combine(pathToOvf, "xen__" + _processId);
                 if (File.Exists(_touchFile))
@@ -229,11 +181,22 @@ namespace XenOvf
             log.Debug("OVF.ConvertOVFtoOVA completed");
         }
 
-        private static void AddFileToArchiveWriter(ArchiveWriter tar, string fileName)
+        private static void AddFileToArchiveWriter(ArchiveWriter tar, string fileName, bool cleanup)
         {
             using (FileStream fs = File.OpenRead(fileName))
-            {
                 tar.Add(fs, fileName);
+
+            log.InfoFormat("Added file {0} to OVA archive", fileName);
+
+            if (cleanup)
+            {
+                try
+                {
+                    File.Delete(fileName);
+                }
+                catch
+                {
+                }
             }
         }
 
