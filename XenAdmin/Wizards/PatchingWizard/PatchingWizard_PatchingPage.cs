@@ -114,7 +114,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return _nextEnabled;
         }
 
-        private bool _cancelEnabled;
+        private bool _cancelEnabled = true;
         public override bool EnableCancel()
         {
             return _cancelEnabled;
