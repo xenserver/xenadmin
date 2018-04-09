@@ -287,14 +287,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (pa.Visible)
                 {
-                    sb.Append(pa);
+                    sb.Append(pa.ProgressDescription ?? pa.ToString());
                     sb.AppendLine(Messages.DONE);
                 }
             }
 
             foreach (var pa in errorActions)
             {
-                sb.Append(pa);
+                sb.Append(pa.ProgressDescription ?? pa.ToString());
                 sb.AppendLine(Messages.ERROR);
             }
 
