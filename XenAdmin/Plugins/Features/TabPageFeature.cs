@@ -105,7 +105,7 @@ namespace XenAdmin.Plugins
 
         private readonly Dictionary<IXenObject, BrowserState> BrowserStates = new Dictionary<IXenObject, BrowserState>();
         private BrowserState lastBrowserState = null;
-        private bool ResettingPage = false;
+        private bool resettingPage = false;
 
         private TabControl tabControl;
         private IXenObject selectedXenObject;
@@ -307,7 +307,7 @@ namespace XenAdmin.Plugins
             if (tabControl != null && tabControl.SelectedTab != null && tabControl.SelectedTab.Tag == this)
             {
                 if (Program.MainWindow.StatusBarAction == null 
-                    || Program.MainWindow.StatusBarAction.IsCompleted && MainWindowActionAtNavigateTime.Equals(Program.MainWindow.StatusBarAction))
+                    || Program.MainWindow.StatusBarAction.IsCompleted && Program.MainWindow.StatusBarAction.Equals(MainWindowActionAtNavigateTime))
                 {
                     // we still have 'control' of the status bar
                     Program.MainWindow.SetProgressBar(false, 0);
@@ -318,7 +318,7 @@ namespace XenAdmin.Plugins
             if (!XenCenterOnly && lastBrowserState != null)
             {
                 log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                if (ResettingPage == false)
+                if (!resettingPage)
                     lastBrowserState.Urls = new List<Uri> { e.Url };
             }
         }
@@ -370,7 +370,7 @@ namespace XenAdmin.Plugins
                 DeleteUrlCacheEntry(e.Url.AbsoluteUri);
             }
 
-            if (ResettingPage == false)
+            if (!resettingPage)
                 lastBrowserState.Urls = new List<Uri> { e.Url };
         }
 
@@ -439,13 +439,13 @@ namespace XenAdmin.Plugins
                     if (ShowTab)
                     {
                         Browser.Navigate("about:blank");
-                        ResettingPage = true;
+                        resettingPage = true;
                         while (Browser.ReadyState != WebBrowserReadyState.Complete)
                         {
                             Application.DoEvents();
                             System.Threading.Thread.Sleep(10);
                         }
-                        ResettingPage = false;
+                        resettingPage = false;
                         SetUrl();
                     }
                 }
@@ -461,7 +461,7 @@ namespace XenAdmin.Plugins
             if (!XenCenterOnly && lastBrowserState != null)
             {
                 log.DebugFormat("url for '{0}' set to '{1}'", Helpers.GetName(lastBrowserState.Obj), e.Url);
-                if (ResettingPage == false)
+                if (!resettingPage)
                     lastBrowserState.Urls = new List<Uri> { e.Url };
 
                 if (lastBrowserState.IsError != navigationError)
