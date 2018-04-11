@@ -158,6 +158,9 @@
   <data name="columnType.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
+  <data name="columnType.Width" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
   <metadata name="columnShared.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -166,6 +169,9 @@
   </data>
   <data name="columnShared.MinimumWidth" type="System.Int32, mscorlib">
     <value>30</value>
+  </data>
+  <data name="columnShared.Width" type="System.Int32, mscorlib">
+    <value>68</value>
   </data>
   <metadata name="columnUsage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -176,6 +182,9 @@
   <data name="columnUsage.MinimumWidth" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
+  <data name="columnUsage.Width" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
   <metadata name="columnSize.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -183,6 +192,9 @@
     <value>Size</value>
   </data>
   <data name="columnSize.MinimumWidth" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="columnSize.Width" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
   <metadata name="columnVirtAlloc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -193,6 +205,9 @@
   </data>
   <data name="columnVirtAlloc.MinimumWidth" type="System.Int32, mscorlib">
     <value>60</value>
+  </data>
+  <data name="columnVirtAlloc.Width" type="System.Int32, mscorlib">
+    <value>120</value>
   </data>
   <data name="dataGridViewSr.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

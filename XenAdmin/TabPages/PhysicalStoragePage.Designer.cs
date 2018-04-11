@@ -41,12 +41,6 @@ namespace XenAdmin.TabPages
             this.TitleLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridViewSr = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.newSRButton = new XenAdmin.Commands.CommandButton();
-            this.trimButtonContainer = new XenAdmin.Controls.ToolTipContainer();
-            this.trimButton = new XenAdmin.Commands.CommandButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonProperties = new System.Windows.Forms.Button();
             this.columnImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +49,12 @@ namespace XenAdmin.TabPages
             this.columnUsage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnVirtAlloc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.newSRButton = new XenAdmin.Commands.CommandButton();
+            this.trimButtonContainer = new XenAdmin.Controls.ToolTipContainer();
+            this.trimButton = new XenAdmin.Commands.CommandButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonProperties = new System.Windows.Forms.Button();
             this.pageContainerPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSr)).BeginInit();
@@ -96,7 +96,7 @@ namespace XenAdmin.TabPages
             // 
             this.dataGridViewSr.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewSr.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridViewSr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewSr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnImage,
             this.columnName,
@@ -108,7 +108,58 @@ namespace XenAdmin.TabPages
             this.columnVirtAlloc});
             resources.ApplyResources(this.dataGridViewSr, "dataGridViewSr");
             this.dataGridViewSr.Name = "dataGridViewSr";
+            this.dataGridViewSr.SelectionChanged += new System.EventHandler(this.dataGridViewSrs_SelectedIndexChanged);
+            this.dataGridViewSr.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dataGridViewSr_SortCompare);
             this.dataGridViewSr.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewSr_MouseUp);
+            // 
+            // columnImage
+            // 
+            this.columnImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.columnImage, "columnImage");
+            this.columnImage.Name = "columnImage";
+            this.columnImage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // columnName
+            // 
+            this.columnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.columnName, "columnName");
+            this.columnName.Name = "columnName";
+            // 
+            // columnDescription
+            // 
+            this.columnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.columnDescription, "columnDescription");
+            this.columnDescription.Name = "columnDescription";
+            // 
+            // columnType
+            // 
+            this.columnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.columnType, "columnType");
+            this.columnType.Name = "columnType";
+            // 
+            // columnShared
+            // 
+            this.columnShared.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.columnShared, "columnShared");
+            this.columnShared.Name = "columnShared";
+            // 
+            // columnUsage
+            // 
+            this.columnUsage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.columnUsage, "columnUsage");
+            this.columnUsage.Name = "columnUsage";
+            // 
+            // columnSize
+            // 
+            this.columnSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.columnSize, "columnSize");
+            this.columnSize.Name = "columnSize";
+            // 
+            // columnVirtAlloc
+            // 
+            this.columnVirtAlloc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.columnVirtAlloc, "columnVirtAlloc");
+            this.columnVirtAlloc.Name = "columnVirtAlloc";
             // 
             // flowLayoutPanel1
             // 
@@ -151,55 +202,6 @@ namespace XenAdmin.TabPages
             this.buttonProperties.Name = "buttonProperties";
             this.buttonProperties.UseVisualStyleBackColor = true;
             this.buttonProperties.Click += new System.EventHandler(this.buttonProperties_Click);
-            // 
-            // columnImage
-            // 
-            this.columnImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.columnImage, "columnImage");
-            this.columnImage.Name = "columnImage";
-            this.columnImage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // columnName
-            // 
-            this.columnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.columnName, "columnName");
-            this.columnName.Name = "columnName";
-            // 
-            // columnDescription
-            // 
-            this.columnDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.columnDescription, "columnDescription");
-            this.columnDescription.Name = "columnDescription";
-            // 
-            // columnType
-            // 
-            this.columnType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.columnType, "columnType");
-            this.columnType.Name = "columnType";
-            // 
-            // columnShared
-            // 
-            this.columnShared.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.columnShared, "columnShared");
-            this.columnShared.Name = "columnShared";
-            // 
-            // columnUsage
-            // 
-            this.columnUsage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.columnUsage, "columnUsage");
-            this.columnUsage.Name = "columnUsage";
-            // 
-            // columnSize
-            // 
-            this.columnSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.columnSize, "columnSize");
-            this.columnSize.Name = "columnSize";
-            // 
-            // columnVirtAlloc
-            // 
-            this.columnVirtAlloc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            resources.ApplyResources(this.columnVirtAlloc, "columnVirtAlloc");
-            this.columnVirtAlloc.Name = "columnVirtAlloc";
             // 
             // PhysicalStoragePage
             // 

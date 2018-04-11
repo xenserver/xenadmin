@@ -61,7 +61,6 @@ namespace XenAdmin.TabPages
         {
             InitializeComponent();
 
-            dataGridViewSr.SelectionChanged += new EventHandler(dataGridViewSrs_SelectedIndexChanged);
             base.Text = Messages.STORAGE_TAB_TITLE;
             PBD_CollectionChangedWithInvoke=Program.ProgramInvokeHandler(PBD_CollectionChanged);
 
@@ -172,18 +171,29 @@ namespace XenAdmin.TabPages
             }
             else
             {
-                Program.Invoke(Program.MainWindow, RefreshAllItems);
+                Program.Invoke(Program.MainWindow, () => RefreshItem(sender as SR));
             }
         }
 
-        private void RefreshAllItems()
+        private void RefreshItem(SR sr=null)
         {
-            foreach (DataGridViewRow row in dataGridViewSr.Rows)
-            {
-                var srRow = row as SRRow;
-                if (srRow != null)
-                    srRow.UpdateDetails();
-            }
+            if (sr == null)
+                foreach (DataGridViewRow row in dataGridViewSr.Rows)
+                {
+                    var srRow = row as SRRow;
+                    if (srRow != null)
+                        srRow.UpdateDetails();
+                }
+            else
+                foreach (DataGridViewRow row in dataGridViewSr.Rows)
+                {
+                    var srRow = row as SRRow;
+                    if (srRow != null && srRow.SR == sr)
+                    {
+                        srRow.UpdateDetails();
+                        break;
+                    }
+                }
         }
 
         private void UnregisterHandlers()
@@ -277,11 +287,6 @@ namespace XenAdmin.TabPages
             NeedBuildList = false;
         }
 
-        private void newSRButton_Click(object sender, EventArgs e)
-        {
-            new NewSRCommand(Program.MainWindow, connection).Execute();
-        }
-
         private void dataGridViewSr_MouseUp(object sender, MouseEventArgs e)
         {
             DataGridView.HitTestInfo hitTestInfo = dataGridViewSr.HitTest(e.X, e.Y);
@@ -304,6 +309,33 @@ namespace XenAdmin.TabPages
                 && e.Button == MouseButtons.Right)
             {
                 contextMenuStrip.Show(dataGridViewSr, new Point(e.X, e.Y));
+            }
+        }
+
+        private void dataGridViewSr_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            var sr1 = ((SRRow)dataGridViewSr.Rows[e.RowIndex1]).SR;
+            var sr2 = ((SRRow)dataGridViewSr.Rows[e.RowIndex2]).SR;
+
+            if (e.Column.Index == columnUsage.Index)
+            {
+                int percent1 = sr1.physical_size == 0 ? 0 : (int)(100.0 * sr1.physical_utilisation / (double)sr1.physical_size);
+                int percent2 = sr2.physical_size == 0 ? 0 : (int)(100.0 * sr2.physical_utilisation / (double)sr2.physical_size);
+                long diff = percent1 - percent2;
+                e.SortResult = diff > 0 ? 1 : diff < 0 ? -1 : 0;
+                e.Handled = true;
+            }
+            else if (e.Column.Index == columnSize.Index)
+            {
+                long diff = sr1.physical_size - sr2.physical_size;
+                e.SortResult = diff > 0 ? 1 : diff < 0 ? -1 : 0;
+                e.Handled = true;
+            }
+            else if (e.Column.Index == columnVirtAlloc.Index)
+            {
+                long diff = sr1.virtual_allocation - sr2.virtual_allocation;
+                e.SortResult = diff > 0 ? 1 : diff < 0 ? -1 : 0;
+                e.Handled = true;
             }
         }
 
@@ -397,7 +429,7 @@ namespace XenAdmin.TabPages
                         ratio = this.sr.physical_utilisation / (double)this.sr.physical_size;
                         percent = (int)(100.0 * ratio);
                     }
-                    string percentString = string.Format(Messages.DISK_PERCENT_USED, percent.ToString(), Util.DiskSizeString(this.sr.physical_utilisation));
+                    string percentString = string.Format(Messages.DISK_PERCENT_USED, percent, Util.DiskSizeString(this.sr.physical_utilisation));
 
                     imageCell.Value = Images.GetImage16For(Images.GetIconFor(this.sr));
                     nameCell.Value = this.sr.Name();
