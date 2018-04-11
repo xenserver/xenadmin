@@ -31,6 +31,8 @@
 
 using XenAdmin.Wizards.GenericPages;
 using XenOvf.Definitions;
+using XenAPI;
+using XenOvf;
 
 namespace XenAdmin.Wizards.ImportWizard
 {
@@ -49,6 +51,32 @@ namespace XenAdmin.Wizards.ImportWizard
         protected override bool ImplementsIsDirty()
         {
             return true;
+        }
+
+        public override bool ShowNetwork(Host targetHost, XenAPI.Network network)
+        {
+            if (!network.Show(Properties.Settings.Default.ShowHiddenVMs))
+                return false;
+
+            if (network.IsSlave())
+                return false;
+
+            if (network.IsSriov() && !Allow_Sriov_Network())
+                return false;
+
+            if (targetHost != null && !targetHost.CanSeeNetwork(network))
+                return false;
+
+            if (targetHost == null && !network.AllHostsCanSeeNetwork())
+                return false;
+
+            return true;
+        }
+
+        private bool Allow_Sriov_Network()
+        {
+            string xml = OVF.ToXml(SelectedOvfEnvelope);
+            return xml.Contains("allow-network-sriov");
         }
 
         public EnvelopeType SelectedOvfEnvelope { private get; set; }

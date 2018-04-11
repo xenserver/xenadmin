@@ -255,7 +255,7 @@ namespace XenAdmin.Wizards.GenericPages
 			return cb;
 		}
 
-        private bool ShowNetwork(Host targetHost, XenAPI.Network network)
+        public virtual bool ShowNetwork(Host targetHost, XenAPI.Network network)
         {
             if (!network.Show(Properties.Settings.Default.ShowHiddenVMs))
                 return false;
