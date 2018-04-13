@@ -222,6 +222,22 @@ namespace XenAdmin.Plugins
             }
         }
 
+        public void SetSelectedTabIndexChanged()
+        {
+            foreach (PluginDescriptor plugin in Plugins)
+            {
+                foreach (Feature feature in plugin.Features)
+                {
+                    TabPageFeature tabPageFeature = feature as TabPageFeature;
+
+                    if (tabPageFeature != null)
+                    {
+                        tabPageFeature.SetSelectedTabIndexChanged();
+                    }
+                }
+            }
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

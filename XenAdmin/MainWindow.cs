@@ -2068,6 +2068,8 @@ namespace XenAdmin
             else
                 DockerProcessPage.PauseRefresh();
 
+            pluginManager.SetSelectedTabIndexChanged();
+
             if (t != null)
                 SetLastSelectedPage(SelectionManager.Selection.First, t);
         }
