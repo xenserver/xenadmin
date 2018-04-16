@@ -43,6 +43,7 @@ using XenAPI;
 using XenAdmin.Commands;
 using XenAdmin.Dialogs;
 using XenAdmin.Controls.DataGridViewEx;
+using XenCenterLib;
 
 
 namespace XenAdmin.TabPages
@@ -178,22 +179,17 @@ namespace XenAdmin.TabPages
         private void RefreshItem(SR sr=null)
         {
             if (sr == null)
-                foreach (DataGridViewRow row in dataGridViewSr.Rows)
+                return;
+
+            foreach (DataGridViewRow row in dataGridViewSr.Rows)
+            {
+                var srRow = row as SRRow;
+                if (srRow != null && sr.Equals(srRow.SR))
                 {
-                    var srRow = row as SRRow;
-                    if (srRow != null)
-                        srRow.UpdateDetails();
+                    srRow.UpdateDetails();
+                    break;
                 }
-            else
-                foreach (DataGridViewRow row in dataGridViewSr.Rows)
-                {
-                    var srRow = row as SRRow;
-                    if (srRow != null && srRow.SR == sr)
-                    {
-                        srRow.UpdateDetails();
-                        break;
-                    }
-                }
+            }
         }
 
         private void UnregisterHandlers()
@@ -317,6 +313,9 @@ namespace XenAdmin.TabPages
             var sr1 = ((SRRow)dataGridViewSr.Rows[e.RowIndex1]).SR;
             var sr2 = ((SRRow)dataGridViewSr.Rows[e.RowIndex2]).SR;
 
+            string sr1CompStr = null;
+            string sr2CompStr = null;
+
             if (e.Column.Index == columnUsage.Index)
             {
                 int percent1 = sr1.physical_size == 0 ? 0 : (int)(100.0 * sr1.physical_utilisation / (double)sr1.physical_size);
@@ -324,17 +323,45 @@ namespace XenAdmin.TabPages
                 long diff = percent1 - percent2;
                 e.SortResult = diff > 0 ? 1 : diff < 0 ? -1 : 0;
                 e.Handled = true;
+                return;
             }
             else if (e.Column.Index == columnSize.Index)
             {
                 long diff = sr1.physical_size - sr2.physical_size;
                 e.SortResult = diff > 0 ? 1 : diff < 0 ? -1 : 0;
                 e.Handled = true;
+                return;
             }
             else if (e.Column.Index == columnVirtAlloc.Index)
             {
                 long diff = sr1.virtual_allocation - sr2.virtual_allocation;
                 e.SortResult = diff > 0 ? 1 : diff < 0 ? -1 : 0;
+                e.Handled = true;
+                return;
+            }
+            else if (e.Column.Index == columnName.Index)
+            {
+                sr1CompStr = sr1.Name();
+                sr2CompStr = sr2.Name();
+            }
+            else if (e.Column.Index == columnDescription.Index)
+            {
+                sr1CompStr = sr1.Description();
+                sr2CompStr = sr2.Description();
+            }
+
+            if (sr1CompStr != null && sr2CompStr != null)
+            {
+                var descCompare = StringUtility.NaturalCompare(sr1CompStr, sr2CompStr);
+                if (descCompare != 0)
+                {
+                    e.SortResult = descCompare;
+                }
+                else
+                {
+                    var refCompare = string.Compare(sr1.opaque_ref, sr2.opaque_ref, StringComparison.Ordinal);
+                    e.SortResult = refCompare;
+                }
                 e.Handled = true;
             }
         }
