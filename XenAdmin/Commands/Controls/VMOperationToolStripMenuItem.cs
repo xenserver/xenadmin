@@ -56,7 +56,7 @@ namespace XenAdmin.Commands
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly vm_operations _operation;
         private readonly bool _resumeAfter;
-        private HostListUpdater hostListUpdater = new HostListUpdater();
+        private HostListUpdater hostListUpdater;
 
         protected VMOperationToolStripMenuItem(Command command, bool inContextMenu, vm_operations operation)
             : base(command, inContextMenu)
@@ -73,19 +73,16 @@ namespace XenAdmin.Commands
             base.DropDownItems.Add(new ToolStripMenuItem());
         }
 
-        private bool _isDropDownClosed;
-
         protected override void OnDropDownClosed(EventArgs e)
         {
             base.OnDropDownClosed(e);
-            _isDropDownClosed = true;
+            hostListUpdater.Stop();
         }
 
 
         protected override void OnDropDownOpening(EventArgs e)
         {
             base.DropDownItems.Clear();
-            _isDropDownClosed = false;
 
             // Work around bug in tool kit where disabled menu items show their dropdown menus
             if (!Enabled)
@@ -119,15 +116,12 @@ namespace XenAdmin.Commands
                 base.DropDownItems.Add(item);
             }
 
-            // start a new thread to evaluate which hosts can be used.
-            ThreadPool.QueueUserWorkItem(delegate
-            {
-                SelectedItemCollection selection = Command.GetSelection();
-                Session session = selection[0].Connection.DuplicateSession();
+            SelectedItemCollection selection = Command.GetSelection();
+            Session session = selection[0].Connection.DuplicateSession();
+            
+            hostListUpdater = new HostListUpdater();
+            hostListUpdater.updateHostList(this, session);
 
-                hostListUpdater.updateHostList(this, session);
-                
-            });
         }
 
         /// <summary>
@@ -139,10 +133,9 @@ namespace XenAdmin.Commands
 
         private class HostListUpdater
         {
-            private ProduceConsumerQueue workQueue = new ProduceConsumerQueue(1);
-            private ProduceConsumerQueue workerQueueWithouWlb = new ProduceConsumerQueue(25);
+            private ProduceConsumerQueue workerQueueWithoutWlb;
             readonly object _locker = new object();
-            private bool _Stopped;
+            private bool _stopped;
 
             private bool Stopped
             {
@@ -150,25 +143,30 @@ namespace XenAdmin.Commands
                 {
                     lock (_locker)
                     {
-                        _Stopped = value;
+                        _stopped = value;
                     }
                 }
                 get
                 {
                     lock (_locker)
                     {
-                        return _Stopped;
+                        return _stopped;
                     }
                 }
             }
 
+            public void Stop()
+            {
+                _stopped = true;
+                if (workerQueueWithoutWlb != null)
+                    workerQueueWithoutWlb.CancelWorkers(false);
+            }
+
             public void updateHostList(VMOperationToolStripMenuItem menu, Session session)
             {
-                Stopped = true;
-                workQueue.CancelWorkers(true);
                 Stopped = false;
-                workQueue = new ProduceConsumerQueue(1);
-                workQueue.EnqueueItem(() =>
+
+                ThreadPool.QueueUserWorkItem(delegate
                 {
                     if (Stopped)
                         return;
@@ -176,7 +174,6 @@ namespace XenAdmin.Commands
                     SelectedItemCollection selection = menu.Command.GetSelection();
                     if (Helpers.WlbEnabled(selection[0].Connection))
                     {
-                        workerQueueWithouWlb = new ProduceConsumerQueue(25);
                         WlbRecommendations recommendations = new WlbRecommendations(selection.AsXenObjects<VM>(), session);
                         recommendations.Initialize();
                         if (Stopped)
@@ -261,7 +258,7 @@ namespace XenAdmin.Commands
             {
                 SelectedItemCollection selection = menu.Command.GetSelection();
                 IXenConnection connection = selection[0].Connection;
-
+                workerQueueWithoutWlb = new ProduceConsumerQueue(25);
                 VMOperationCommand cmdHome = new VMOperationHomeServerCommand(menu.Command.MainWindowCommandInterface, selection, menu._operation, session);
                 Host affinityHost = connection.Resolve(((VM)menu.Command.GetSelection()[0].XenObject).affinity);
 
@@ -305,11 +302,6 @@ namespace XenAdmin.Commands
 
                 foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
                 {
-                    if (menu._isDropDownClosed)
-                    {
-                        // Stop making requests to assert can start on each host after dropdown is closed
-                        break;
-                    }
 
                     Host host = item.Tag as Host;
                     if (host != null)
@@ -318,10 +310,8 @@ namespace XenAdmin.Commands
                         // So a Producer-Consumer-Queue with size 25 is used here to :
                         //   1. Make API calls for different menu items happen in parallel;
                         //   2. Limit the count of concurrent threads (now it's 25).
-                        workerQueueWithouWlb.EnqueueItem(() =>
+                        workerQueueWithoutWlb.EnqueueItem(() =>
                         {
-                            if (menu._isDropDownClosed)
-                                return;
                             VMOperationCommand cmd = new VMOperationHostCommand(menu.Command.MainWindowCommandInterface, selection, delegate { return host; }, host.Name().EscapeAmpersands(), menu._operation, session);
                             CrossPoolMigrateCommand cpmCmd = new CrossPoolMigrateCommand(menu.Command.MainWindowCommandInterface, selection, host, menu._resumeAfter);
 
