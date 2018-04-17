@@ -28,8 +28,8 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
 # SUCH DAMAGE.
 
---- XenCenter.wxs	Mon May 23 11:07:59 2016
-+++ XenCenter.l10n.wxs	Mon May 23 11:09:01 2016
+--- XenCenter.wxs	Fri Dec  8 13:23:08 2017
++++ XenCenter.l10n.wxs	Fri Dec  8 13:23:08 2017
 @@ -40,7 +40,7 @@
  	<?define HiddenFeatures="[BRANDING_HIDDEN_FEATURES]"?>
  	<?define AdditionalFeatures="[BRANDING_ADDITIONAL_FEATURES]"?>
@@ -39,7 +39,7 @@
          <Media Id="1" Cabinet="XenCenter.cab" EmbedCab="yes" />
          <Directory Id="TARGETDIR" Name="SourceDir">
              <Directory Id="ProgramFilesFolder">
-@@ -84,70 +84,72 @@
+@@ -85,70 +85,72 @@
                              <File Id="XenOvfTransport" Source="..\XenAdmin\bin\Release\XenOvfTransport.dll" />
                              <!-- Homepage -->
                              <File Id="XenCenterHomePage" Source="..\XenAdmin\bin\Release\HomePage.mht" />
@@ -135,7 +135,7 @@
                                  </Extension>
                              </ProgId>
                          </Component>
-@@ -172,12 +174,34 @@
+@@ -173,12 +175,34 @@
                          </Directory>
                          <?else?>
                          <Component Id="readmefile" Guid="[BRANDING_README_FILE_GUID]">
@@ -171,7 +171,7 @@
                              </Component>
                          </Directory>
                          <Directory Id="EXTERNALTOOLS" ShortName="External" Name="External Tools">
-@@ -222,7 +246,7 @@
+@@ -223,7 +247,7 @@
  								  Vital="no"
  								  Name="XenServerHealthCheck"
  								  DisplayName="[Citrix] [XenServer] Health Check Service"
@@ -180,7 +180,7 @@
  								  Start="auto"
  								  Account="LocalSystem"
  								  ErrorControl="normal"
-@@ -277,13 +301,15 @@
+@@ -278,13 +302,15 @@
          <Feature Id="MainProgram" Title="[Citrix] [XenCenter]" Description="[Citrix] [XenCenter]" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" InstallDefault="local" Absent="disallow" >
              <ComponentRef Id="MainExecutable" />
              <ComponentRef Id="HelpFiles" />
@@ -197,7 +197,7 @@
              <ComponentRef Id="SchemasFilesComponent" />
              <ComponentRef Id="ExternalToolsComponent" />
              <ComponentRef Id="RegistryEntries" />
-@@ -291,7 +317,7 @@
+@@ -292,7 +318,7 @@
              <ComponentRef Id="ProgramFilesShortcut" />
    
             <?if "$(env.Branding)"="XenCenter"?>		
@@ -206,7 +206,7 @@
  					<ComponentRef Id="XenServerHealthCheck" /> 
  				</Feature>
  	       <?else ?>
-@@ -310,7 +336,7 @@
+@@ -311,7 +337,7 @@
          <Property Id="ARPPRODUCTICON" Value="XenCenterICO" />
          <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="!(loc.ErrorNewerProduct)" Schedule="afterInstallInitialize"/>
          <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED" />

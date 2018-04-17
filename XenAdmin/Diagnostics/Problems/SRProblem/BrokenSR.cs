@@ -34,25 +34,30 @@ using XenAdmin.Diagnostics.Checks;
 using XenAPI;
 using XenAdmin.Dialogs;
 using XenAdmin.Actions;
+using XenAdmin.Core;
 
 
 namespace XenAdmin.Diagnostics.Problems.SRProblem
 {
     public class BrokenSR : SRProblem
     {
-        public BrokenSR(Check check, SR sr)
-            : base(check,sr) { }
+        private readonly Host host;
 
+        public BrokenSR(Check check, SR sr, Host host)
+            : base(check, sr)
+        {
+            this.host = host;
+        }
         public override string Description
         {
-            get { return string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, Sr.NameWithoutHost()); }
+            get { return string.Format(Messages.UPDATES_WIZARD_BROKEN_STORAGE, Helpers.GetName(host).Ellipsise(30), Sr.NameWithoutHost()); }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             Program.AssertOnEventThread();
 
-            RepairSRDialog dlg = new RepairSRDialog(Sr);
+            RepairSRDialog dlg = new RepairSRDialog(Sr, false);
             if (dlg.ShowDialog(Program.MainWindow) == DialogResult.OK)
             {
                 cancelled = false;
@@ -66,6 +71,32 @@ namespace XenAdmin.Diagnostics.Problems.SRProblem
         public override string HelpMessage
         {
             get { return Messages.REPAIR_SR; }
+        }
+    }
+
+    class BrokenSRWarning : Warning
+    {
+        private readonly Host host;
+        private readonly SR sr;
+
+        public BrokenSRWarning(Check check, Host host, SR sr)
+            : base(check)
+        {
+            this.sr = sr;
+            this.host = host;
+        }
+
+        public override string Title
+        {
+            get { return Check.Description; }
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return string.Format(Messages.UPDATES_WIZARD_BROKEN_SR_WARNING, Helpers.GetName(host).Ellipsise(30), sr);
+            }
         }
     }
 }

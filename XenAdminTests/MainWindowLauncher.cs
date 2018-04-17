@@ -148,13 +148,18 @@ namespace XenAdminTests
             return LoadDB(name, "root");
         }
 
-        protected IXenConnection LoadDB(string name, string username)
+        private IXenConnection LoadDB(string name, string username)
         {
-            string fileName = TestResource(name);
+            var connection = new XenConnection
+            {
+                Username = username,
+                Password = "",
+                Hostname = TestResource(name),
+                FriendlyName = name,
+                Port = 443,
+                SaveDisconnected = true
+            };
 
-            IXenConnection connection = new XenConnection(fileName, name);
-            connection.Username = username;
-            connection.Password = "";
             lock (ConnectionsManager.ConnectionsLock)
             {
                 ConnectionsManager.XenConnections.Add(connection);

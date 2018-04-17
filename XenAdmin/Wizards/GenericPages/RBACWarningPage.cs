@@ -87,11 +87,10 @@ namespace XenAdmin.Wizards.GenericPages
             checksPerConnectionDict.Clear();
 		}
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             RegisterConnectionEvents();
             RefreshPage();
-            base.PageLoaded(direction);
         }
 
         void Connection_ConnectionResult(object sender, ConnectionResultEventArgs e)
@@ -100,10 +99,9 @@ namespace XenAdmin.Wizards.GenericPages
                 Program.Invoke(this, RefreshPage);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             DeregisterConnectionEvents();
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()

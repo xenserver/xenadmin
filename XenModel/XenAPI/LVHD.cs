@@ -32,6 +32,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
@@ -60,6 +63,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given LVHD.
+        /// </summary>
         public override void UpdateFrom(LVHD update)
         {
             uuid = update.uuid;
@@ -67,7 +74,7 @@ namespace XenAPI
 
         internal void UpdateFromProxy(Proxy_LVHD proxy)
         {
-            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
+            uuid = proxy.uuid == null ? null : proxy.uuid;
         }
 
         public Proxy_LVHD ToProxy()
@@ -79,11 +86,25 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new LVHD from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public LVHD(Hashtable table)
+        public LVHD(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this LVHD
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
         }
 
         public bool DeepEquals(LVHD other)
@@ -125,7 +146,10 @@ namespace XenAPI
         /// <param name="_lvhd">The opaque_ref of the given lvhd</param>
         public static LVHD get_record(Session session, string _lvhd)
         {
-            return new LVHD((Proxy_LVHD)session.proxy.lvhd_get_record(session.uuid, _lvhd ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.lvhd_get_record(session.opaque_ref, _lvhd);
+            else
+                return new LVHD(session.proxy.lvhd_get_record(session.opaque_ref, _lvhd ?? "").parse());
         }
 
         /// <summary>
@@ -136,7 +160,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<LVHD> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<LVHD>.Create(session.proxy.lvhd_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.lvhd_get_by_uuid(session.opaque_ref, _uuid);
+            else
+                return XenRef<LVHD>.Create(session.proxy.lvhd_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -147,7 +174,10 @@ namespace XenAPI
         /// <param name="_lvhd">The opaque_ref of the given lvhd</param>
         public static string get_uuid(Session session, string _lvhd)
         {
-            return (string)session.proxy.lvhd_get_uuid(session.uuid, _lvhd ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.lvhd_get_uuid(session.opaque_ref, _lvhd);
+            else
+                return session.proxy.lvhd_get_uuid(session.opaque_ref, _lvhd ?? "").parse();
         }
 
         /// <summary>
@@ -161,7 +191,10 @@ namespace XenAPI
         /// <param name="_allocation_quantum">The amount of space to allocate to a VDI when it needs to be enlarged in bytes</param>
         public static string enable_thin_provisioning(Session session, string _host, string _sr, long _initial_allocation, long _allocation_quantum)
         {
-            return (string)session.proxy.lvhd_enable_thin_provisioning(session.uuid, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.lvhd_enable_thin_provisioning(session.opaque_ref, _host, _sr, _initial_allocation, _allocation_quantum);
+            else
+                return session.proxy.lvhd_enable_thin_provisioning(session.opaque_ref, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse();
         }
 
         /// <summary>
@@ -175,7 +208,10 @@ namespace XenAPI
         /// <param name="_allocation_quantum">The amount of space to allocate to a VDI when it needs to be enlarged in bytes</param>
         public static XenRef<Task> async_enable_thin_provisioning(Session session, string _host, string _sr, long _initial_allocation, long _allocation_quantum)
         {
-            return XenRef<Task>.Create(session.proxy.async_lvhd_enable_thin_provisioning(session.uuid, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_lvhd_enable_thin_provisioning(session.opaque_ref, _host, _sr, _initial_allocation, _allocation_quantum);
+          else
+              return XenRef<Task>.Create(session.proxy.async_lvhd_enable_thin_provisioning(session.opaque_ref, _host ?? "", _sr ?? "", _initial_allocation.ToString(), _allocation_quantum.ToString()).parse());
         }
 
         /// <summary>
@@ -194,6 +230,6 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
     }
 }

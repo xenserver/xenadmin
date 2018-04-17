@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(task_allowed_operationsConverter))]
     public enum task_allowed_operations
     {
         cancel, destroy, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class task_allowed_operations_helper
     {
         public static string ToString(task_allowed_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this task_allowed_operations x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class task_allowed_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((task_allowed_operations)value).StringOf());
         }
     }
 }

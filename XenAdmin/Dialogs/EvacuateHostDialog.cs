@@ -801,6 +801,12 @@ namespace XenAdmin.Dialogs
 
                         break;
 
+                    case Failure.VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT:
+                        if (ErrorDescription.Length > 1)
+                            vmRef = ErrorDescription[1];
+                        AddDefaultSuspendOperation(vmRef);
+                        break;
+
                     default:
                         AddDefaultSuspendOperation(vmRef);
                         break;
@@ -934,7 +940,7 @@ namespace XenAdmin.Dialogs
             
             deregisterVMEvents();
 
-            if (elevatedSession != null && elevatedSession.uuid != null)
+            if (elevatedSession != null && elevatedSession.opaque_ref != null)
             {
                 // NOTE: This doesnt happen currently, as we always scan once. Here as cheap insurance.
                 // we still have the session from the role elevation dialog

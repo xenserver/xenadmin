@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(sdn_controller_protocolConverter))]
     public enum sdn_controller_protocol
     {
         ssl, pssl, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class sdn_controller_protocol_helper
     {
         public static string ToString(sdn_controller_protocol x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this sdn_controller_protocol x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class sdn_controller_protocolConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((sdn_controller_protocol)value).StringOf());
         }
     }
 }

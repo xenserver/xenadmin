@@ -32,6 +32,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
@@ -70,6 +73,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given USB_group.
+        /// </summary>
         public override void UpdateFrom(USB_group update)
         {
             uuid = update.uuid;
@@ -82,9 +89,9 @@ namespace XenAPI
 
         internal void UpdateFromProxy(Proxy_USB_group proxy)
         {
-            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
-            name_label = proxy.name_label == null ? null : (string)proxy.name_label;
-            name_description = proxy.name_description == null ? null : (string)proxy.name_description;
+            uuid = proxy.uuid == null ? null : proxy.uuid;
+            name_label = proxy.name_label == null ? null : proxy.name_label;
+            name_description = proxy.name_description == null ? null : proxy.name_description;
             PUSBs = proxy.PUSBs == null ? null : XenRef<PUSB>.Create(proxy.PUSBs);
             VUSBs = proxy.VUSBs == null ? null : XenRef<VUSB>.Create(proxy.VUSBs);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
@@ -96,24 +103,43 @@ namespace XenAPI
             result_.uuid = uuid ?? "";
             result_.name_label = name_label ?? "";
             result_.name_description = name_description ?? "";
-            result_.PUSBs = (PUSBs != null) ? Helper.RefListToStringArray(PUSBs) : new string[] {};
-            result_.VUSBs = (VUSBs != null) ? Helper.RefListToStringArray(VUSBs) : new string[] {};
+            result_.PUSBs = PUSBs == null ? new string[] {} : Helper.RefListToStringArray(PUSBs);
+            result_.VUSBs = VUSBs == null ? new string[] {} : Helper.RefListToStringArray(VUSBs);
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
             return result_;
         }
 
         /// <summary>
         /// Creates a new USB_group from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public USB_group(Hashtable table)
+        public USB_group(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            name_label = Marshalling.ParseString(table, "name_label");
-            name_description = Marshalling.ParseString(table, "name_description");
-            PUSBs = Marshalling.ParseSetRef<PUSB>(table, "PUSBs");
-            VUSBs = Marshalling.ParseSetRef<VUSB>(table, "VUSBs");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this USB_group
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("name_label"))
+                name_label = Marshalling.ParseString(table, "name_label");
+            if (table.ContainsKey("name_description"))
+                name_description = Marshalling.ParseString(table, "name_description");
+            if (table.ContainsKey("PUSBs"))
+                PUSBs = Marshalling.ParseSetRef<PUSB>(table, "PUSBs");
+            if (table.ContainsKey("VUSBs"))
+                VUSBs = Marshalling.ParseSetRef<VUSB>(table, "VUSBs");
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(USB_group other)
@@ -173,7 +199,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static USB_group get_record(Session session, string _usb_group)
         {
-            return new USB_group((Proxy_USB_group)session.proxy.usb_group_get_record(session.uuid, _usb_group ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_record(session.opaque_ref, _usb_group);
+            else
+                return new USB_group(session.proxy.usb_group_get_record(session.opaque_ref, _usb_group ?? "").parse());
         }
 
         /// <summary>
@@ -184,7 +213,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<USB_group> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<USB_group>.Create(session.proxy.usb_group_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_by_uuid(session.opaque_ref, _uuid);
+            else
+                return XenRef<USB_group>.Create(session.proxy.usb_group_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -195,7 +227,10 @@ namespace XenAPI
         /// <param name="_label">label of object to return</param>
         public static List<XenRef<USB_group>> get_by_name_label(Session session, string _label)
         {
-            return XenRef<USB_group>.Create(session.proxy.usb_group_get_by_name_label(session.uuid, _label ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_by_name_label(session.opaque_ref, _label);
+            else
+                return XenRef<USB_group>.Create(session.proxy.usb_group_get_by_name_label(session.opaque_ref, _label ?? "").parse());
         }
 
         /// <summary>
@@ -206,7 +241,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static string get_uuid(Session session, string _usb_group)
         {
-            return (string)session.proxy.usb_group_get_uuid(session.uuid, _usb_group ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_uuid(session.opaque_ref, _usb_group);
+            else
+                return session.proxy.usb_group_get_uuid(session.opaque_ref, _usb_group ?? "").parse();
         }
 
         /// <summary>
@@ -217,7 +255,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static string get_name_label(Session session, string _usb_group)
         {
-            return (string)session.proxy.usb_group_get_name_label(session.uuid, _usb_group ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_name_label(session.opaque_ref, _usb_group);
+            else
+                return session.proxy.usb_group_get_name_label(session.opaque_ref, _usb_group ?? "").parse();
         }
 
         /// <summary>
@@ -228,7 +269,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static string get_name_description(Session session, string _usb_group)
         {
-            return (string)session.proxy.usb_group_get_name_description(session.uuid, _usb_group ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_name_description(session.opaque_ref, _usb_group);
+            else
+                return session.proxy.usb_group_get_name_description(session.opaque_ref, _usb_group ?? "").parse();
         }
 
         /// <summary>
@@ -239,7 +283,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static List<XenRef<PUSB>> get_PUSBs(Session session, string _usb_group)
         {
-            return XenRef<PUSB>.Create(session.proxy.usb_group_get_pusbs(session.uuid, _usb_group ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_pusbs(session.opaque_ref, _usb_group);
+            else
+                return XenRef<PUSB>.Create(session.proxy.usb_group_get_pusbs(session.opaque_ref, _usb_group ?? "").parse());
         }
 
         /// <summary>
@@ -250,7 +297,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static List<XenRef<VUSB>> get_VUSBs(Session session, string _usb_group)
         {
-            return XenRef<VUSB>.Create(session.proxy.usb_group_get_vusbs(session.uuid, _usb_group ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_vusbs(session.opaque_ref, _usb_group);
+            else
+                return XenRef<VUSB>.Create(session.proxy.usb_group_get_vusbs(session.opaque_ref, _usb_group ?? "").parse());
         }
 
         /// <summary>
@@ -261,7 +311,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static Dictionary<string, string> get_other_config(Session session, string _usb_group)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.usb_group_get_other_config(session.uuid, _usb_group ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_other_config(session.opaque_ref, _usb_group);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.usb_group_get_other_config(session.opaque_ref, _usb_group ?? "").parse());
         }
 
         /// <summary>
@@ -273,7 +326,10 @@ namespace XenAPI
         /// <param name="_label">New value to set</param>
         public static void set_name_label(Session session, string _usb_group, string _label)
         {
-            session.proxy.usb_group_set_name_label(session.uuid, _usb_group ?? "", _label ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.usb_group_set_name_label(session.opaque_ref, _usb_group, _label);
+            else
+                session.proxy.usb_group_set_name_label(session.opaque_ref, _usb_group ?? "", _label ?? "").parse();
         }
 
         /// <summary>
@@ -285,7 +341,10 @@ namespace XenAPI
         /// <param name="_description">New value to set</param>
         public static void set_name_description(Session session, string _usb_group, string _description)
         {
-            session.proxy.usb_group_set_name_description(session.uuid, _usb_group ?? "", _description ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.usb_group_set_name_description(session.opaque_ref, _usb_group, _description);
+            else
+                session.proxy.usb_group_set_name_description(session.opaque_ref, _usb_group ?? "", _description ?? "").parse();
         }
 
         /// <summary>
@@ -297,7 +356,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _usb_group, Dictionary<string, string> _other_config)
         {
-            session.proxy.usb_group_set_other_config(session.uuid, _usb_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.usb_group_set_other_config(session.opaque_ref, _usb_group, _other_config);
+            else
+                session.proxy.usb_group_set_other_config(session.opaque_ref, _usb_group ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -310,7 +372,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _usb_group, string _key, string _value)
         {
-            session.proxy.usb_group_add_to_other_config(session.uuid, _usb_group ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.usb_group_add_to_other_config(session.opaque_ref, _usb_group, _key, _value);
+            else
+                session.proxy.usb_group_add_to_other_config(session.opaque_ref, _usb_group ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -322,7 +387,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _usb_group, string _key)
         {
-            session.proxy.usb_group_remove_from_other_config(session.uuid, _usb_group ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.usb_group_remove_from_other_config(session.opaque_ref, _usb_group, _key);
+            else
+                session.proxy.usb_group_remove_from_other_config(session.opaque_ref, _usb_group ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -335,7 +403,10 @@ namespace XenAPI
         /// <param name="_other_config"></param>
         public static XenRef<USB_group> create(Session session, string _name_label, string _name_description, Dictionary<string, string> _other_config)
         {
-            return XenRef<USB_group>.Create(session.proxy.usb_group_create(session.uuid, _name_label ?? "", _name_description ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_create(session.opaque_ref, _name_label, _name_description, _other_config);
+            else
+                return XenRef<USB_group>.Create(session.proxy.usb_group_create(session.opaque_ref, _name_label ?? "", _name_description ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
         }
 
         /// <summary>
@@ -348,7 +419,10 @@ namespace XenAPI
         /// <param name="_other_config"></param>
         public static XenRef<Task> async_create(Session session, string _name_label, string _name_description, Dictionary<string, string> _other_config)
         {
-            return XenRef<Task>.Create(session.proxy.async_usb_group_create(session.uuid, _name_label ?? "", _name_description ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_usb_group_create(session.opaque_ref, _name_label, _name_description, _other_config);
+          else
+              return XenRef<Task>.Create(session.proxy.async_usb_group_create(session.opaque_ref, _name_label ?? "", _name_description ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse());
         }
 
         /// <summary>
@@ -359,7 +433,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static void destroy(Session session, string _usb_group)
         {
-            session.proxy.usb_group_destroy(session.uuid, _usb_group ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.usb_group_destroy(session.opaque_ref, _usb_group);
+            else
+                session.proxy.usb_group_destroy(session.opaque_ref, _usb_group ?? "").parse();
         }
 
         /// <summary>
@@ -370,7 +447,10 @@ namespace XenAPI
         /// <param name="_usb_group">The opaque_ref of the given usb_group</param>
         public static XenRef<Task> async_destroy(Session session, string _usb_group)
         {
-            return XenRef<Task>.Create(session.proxy.async_usb_group_destroy(session.uuid, _usb_group ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_usb_group_destroy(session.opaque_ref, _usb_group);
+          else
+              return XenRef<Task>.Create(session.proxy.async_usb_group_destroy(session.opaque_ref, _usb_group ?? "").parse());
         }
 
         /// <summary>
@@ -380,7 +460,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<USB_group>> get_all(Session session)
         {
-            return XenRef<USB_group>.Create(session.proxy.usb_group_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_all(session.opaque_ref);
+            else
+                return XenRef<USB_group>.Create(session.proxy.usb_group_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -390,7 +473,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<USB_group>, USB_group> get_all_records(Session session)
         {
-            return XenRef<USB_group>.Create<Proxy_USB_group>(session.proxy.usb_group_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.usb_group_get_all_records(session.opaque_ref);
+            else
+                return XenRef<USB_group>.Create<Proxy_USB_group>(session.proxy.usb_group_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -409,7 +495,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// a human-readable name
@@ -427,7 +513,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_label;
+        private string _name_label = "";
 
         /// <summary>
         /// a notes field containing human-readable description
@@ -445,11 +531,12 @@ namespace XenAPI
                 }
             }
         }
-        private string _name_description;
+        private string _name_description = "";
 
         /// <summary>
         /// List of PUSBs in the group
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<PUSB>))]
         public virtual List<XenRef<PUSB>> PUSBs
         {
             get { return _PUSBs; }
@@ -463,11 +550,12 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<PUSB>> _PUSBs;
+        private List<XenRef<PUSB>> _PUSBs = new List<XenRef<PUSB>>() {};
 
         /// <summary>
         /// List of VUSBs using the group
         /// </summary>
+        [JsonConverter(typeof(XenRefListConverter<VUSB>))]
         public virtual List<XenRef<VUSB>> VUSBs
         {
             get { return _VUSBs; }
@@ -481,11 +569,12 @@ namespace XenAPI
                 }
             }
         }
-        private List<XenRef<VUSB>> _VUSBs;
+        private List<XenRef<VUSB>> _VUSBs = new List<XenRef<VUSB>>() {};
 
         /// <summary>
         /// Additional configuration
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -499,6 +588,6 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
     }
 }

@@ -6349,6 +6349,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}..
+        /// </summary>
+        public static string CANNOT_CHANGE_IP_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("CANNOT_CHANGE_IP_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (The network&apos;s MTU cannot be changed because it is in use as the management interface &apos;{0}&apos;).
         /// </summary>
         public static string CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT {
@@ -6698,6 +6707,15 @@ namespace XenAdmin {
         public static string CANNOT_PARSE_NODE_PARAM {
             get {
                 return ResourceManager.GetString("CANNOT_PARSE_NODE_PARAM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This IP address cannot be removed, because clustering is enabled on {0}..
+        /// </summary>
+        public static string CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK {
+            get {
+                return ResourceManager.GetString("CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK", resourceCulture);
             }
         }
         
@@ -7065,6 +7083,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose the provisioning method.
+        /// </summary>
+        public static string CHOOSE_SR_PROVISIONING_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("CHOOSE_SR_PROVISIONING_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose the type of new storage.
         /// </summary>
         public static string CHOOSE_SR_TYPE_PAGE_TITLE {
@@ -7124,6 +7151,15 @@ namespace XenAdmin {
         public static string CLOSE_WIZARD_CLICK_FINISH {
             get {
                 return ResourceManager.GetString("CLOSE_WIZARD_CLICK_FINISH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustering.
+        /// </summary>
+        public static string CLUSTERING {
+            get {
+                return ResourceManager.GetString("CLUSTERING", resourceCulture);
             }
         }
         
@@ -11250,6 +11286,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable clustering..
+        /// </summary>
+        public static string DISABLE_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLE_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable HA.
         /// </summary>
         public static string DISABLE_HA {
@@ -11331,6 +11376,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled clustering on {0}..
+        /// </summary>
+        public static string DISABLED_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLED_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No updates found because automatic checking for updates is disabled..
         /// </summary>
         public static string DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING {
@@ -11372,6 +11426,15 @@ namespace XenAdmin {
         public static string DISABLING_AD_ON {
             get {
                 return ResourceManager.GetString("DISABLING_AD_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabling clustering on {0}..
+        /// </summary>
+        public static string DISABLING_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("DISABLING_CLUSTERING_ON_POOL", resourceCulture);
             }
         }
         
@@ -13567,6 +13630,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable clustering..
+        /// </summary>
+        public static string ENABLE_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLE_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Enable HA....
         /// </summary>
         public static string ENABLE_HA_ELLIPSIS {
@@ -13639,6 +13711,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled clustering on {0}..
+        /// </summary>
+        public static string ENABLED_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLED_CLUSTERING_ON_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Snapshot schedule &apos;{0}&apos; enabled..
         /// </summary>
         public static string ENABLED_VMSS {
@@ -13671,6 +13752,15 @@ namespace XenAdmin {
         public static string ENABLING_AD_ON {
             get {
                 return ResourceManager.GetString("ENABLING_AD_ON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling clustering on {0}..
+        /// </summary>
+        public static string ENABLING_CLUSTERING_ON_POOL {
+            get {
+                return ResourceManager.GetString("ENABLING_CLUSTERING_ON_POOL", resourceCulture);
             }
         }
         
@@ -14575,6 +14665,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
+        ///
+        ///Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including [XenServer] hosts that are not connected to [XenCenter]..
+        /// </summary>
+        public static string EXISTING_SR_FOUND_ON_LUN {
+            get {
+                return ResourceManager.GetString("EXISTING_SR_FOUND_ON_LUN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit &amp;Maintenance Mode.
         /// </summary>
         public static string EXIT_MAINTENANCE_MODE {
@@ -15017,7 +15118,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Couldn&apos;t show file open dialog - {0}.
+        ///   Looks up a localized string similar to Could not show file open dialog - {0}.
         /// </summary>
         public static string EXPORTVM_COULD_NOT_SHOW {
             get {
@@ -15143,6 +15244,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; feature is disabled due to license restrictions on the server..
+        /// </summary>
+        public static string FEATURE_DISABLED {
+            get {
+                return ResourceManager.GetString("FEATURE_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature disabled in the registry.
         /// </summary>
         public static string FEATURE_DISABLED_IN_REGISTER {
@@ -15197,7 +15307,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The scan failed. Please try again..
+        ///   Looks up a localized string similar to The scan failed..
         /// </summary>
         public static string FIBRECHANNEL_XML_ERROR {
             get {
@@ -16070,6 +16180,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must disable HA before clustering can be enabled..
+        /// </summary>
+        public static string GFS2_HA_ENABLED {
+            get {
+                return ResourceManager.GetString("GFS2_HA_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pool license does not allow Thin Provisioning (GFS2)..
+        /// </summary>
+        public static string GFS2_INCORRECT_POOL_LICENSE {
+            get {
+                return ResourceManager.GetString("GFS2_INCORRECT_POOL_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustering cannot be enabled because there are no suitable networks..
+        /// </summary>
+        public static string GFS2_NO_NETWORK {
+            get {
+                return ResourceManager.GetString("GFS2_NO_NETWORK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thin Provisioning (GFS2) requires clustering to be enabled on the pool..
+        /// </summary>
+        public static string GFS2_REQUIRES_CLUSTERING_ENABLED {
+            get {
+                return ResourceManager.GetString("GFS2_REQUIRES_CLUSTERING_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clustering cannot be disabled because there are thinly provisioned (GFS2) storage repositories attached to this pool..
+        /// </summary>
+        public static string GFS2_SR_ATTACHED {
+            get {
+                return ResourceManager.GetString("GFS2_SR_ATTACHED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GPU.
         /// </summary>
         public static string GPU {
@@ -16503,7 +16658,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server &apos;{0}&apos; can not be placed in Maintenance Mode because it is the master of an HA-enabled pool..
+        ///   Looks up a localized string similar to Server &apos;{0}&apos; cannot be placed in Maintenance Mode because it is the master of an HA-enabled pool..
         /// </summary>
         public static string HA_CANNOT_EVACUATE_MASTER {
             get {
@@ -17810,6 +17965,15 @@ namespace XenAdmin {
         public static string HOST_NEEDS_REBOOT_CHECK_DESCRIPTION {
             get {
                 return ResourceManager.GetString("HOST_NEEDS_REBOOT_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes (Host needs reboot).
+        /// </summary>
+        public static string HOST_NEEDS_REBOOT_ENABLE_SRIOV {
+            get {
+                return ResourceManager.GetString("HOST_NEEDS_REBOOT_ENABLE_SRIOV", resourceCulture);
             }
         }
         
@@ -20509,7 +20673,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An existing SR was found on the selected LUN.
+        ///   Looks up a localized string similar to Destroy any data present on the disk and create a new {0} SR.
+        /// </summary>
+        public static string LVMOHBA_WARNING_DIALOG_FORMAT_INFO {
+            get {
+                return ResourceManager.GetString("LVMOHBA_WARNING_DIALOG_FORMAT_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An existing {0} SR was found on the selected LUN.
         /// </summary>
         public static string LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR {
             get {
@@ -20535,6 +20708,15 @@ namespace XenAdmin {
         public static string LVMOHBA_WARNING_DIALOG_LUN_DETAILS {
             get {
                 return ResourceManager.GetString("LVMOHBA_WARNING_DIALOG_LUN_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the existing {0} SR.
+        /// </summary>
+        public static string LVMOHBA_WARNING_DIALOG_REATTACH_INFO {
+            get {
+                return ResourceManager.GetString("LVMOHBA_WARNING_DIALOG_REATTACH_INFO", resourceCulture);
             }
         }
         
@@ -23067,6 +23249,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SR-IOV.
+        /// </summary>
+        public static string NETWORK_SRIOV {
+            get {
+                return ResourceManager.GetString("NETWORK_SRIOV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} on {1}.
         /// </summary>
         public static string NETWORK_WITH_POOL {
@@ -23596,6 +23787,15 @@ namespace XenAdmin {
         public static string NEW_SR_WIZARD_FINAL_ACTION_TITLE {
             get {
                 return ResourceManager.GetString("NEW_SR_WIZARD_FINAL_ACTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New SR-IOV network.
+        /// </summary>
+        public static string NEW_SRIOV_NETWORK_NAME {
+            get {
+                return ResourceManager.GetString("NEW_SRIOV_NETWORK_NAME", resourceCulture);
             }
         }
         
@@ -24299,6 +24499,24 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The LUN {0} is already in use as SR {1} on your pool. Please select another LUN..
+        /// </summary>
+        public static string NEWSR_LUN_IN_USE_ON_SELECTED_POOL {
+            get {
+                return ResourceManager.GetString("NEWSR_LUN_IN_USE_ON_SELECTED_POOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The LUN {0} is already in use as SR {1} on your server. Please select another LUN..
+        /// </summary>
+        public static string NEWSR_LUN_IN_USE_ON_SELECTED_SERVER {
+            get {
+                return ResourceManager.GetString("NEWSR_LUN_IN_USE_ON_SELECTED_SERVER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This LUN is already in use as SR {0} on server {1}..
         /// </summary>
         public static string NEWSR_LUN_IN_USE_ON_SERVER {
@@ -24451,9 +24669,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
-        ///
-        ///Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility..
+        ///   Looks up a localized string similar to iSCSI or Fibre Channel access to a shared LUN can be configured to host fully provisioned virtual disks using LVM or be formatted with the GFS2 cluster file system for hosting thinly provisioned virtual disks..
         /// </summary>
         public static string NEWSR_LVMOISCSI_BLURB {
             get {
@@ -25645,6 +25861,15 @@ namespace XenAdmin {
         public static string NICPANEL_HALF_DUPLEX {
             get {
                 return ResourceManager.GetString("NICPANEL_HALF_DUPLEX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All the supported NICs have enabled SR-IOV..
+        /// </summary>
+        public static string NICS_ARE_SRIOV_ENABLED {
+            get {
+                return ResourceManager.GetString("NICS_ARE_SRIOV_ENABLED", resourceCulture);
             }
         }
         
@@ -28191,7 +28416,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs or cross-server private networks.
+        ///   Looks up a localized string similar to This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks.
         /// </summary>
         public static string POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE {
             get {
@@ -28620,6 +28845,15 @@ namespace XenAdmin {
         public static string PROTECTED_VMS_TITLE {
             get {
                 return ResourceManager.GetString("PROTECTED_VMS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisioning.
+        /// </summary>
+        public static string PROVISIONING {
+            get {
+                return ResourceManager.GetString("PROVISIONING", resourceCulture);
             }
         }
         
@@ -29238,6 +29472,15 @@ namespace XenAdmin {
         public static string READY_UPGRADE {
             get {
                 return ResourceManager.GetString("READY_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes ({0} VFs remaining).
+        /// </summary>
+        public static string REAMININF_VFS {
+            get {
+                return ResourceManager.GetString("REAMININF_VFS", resourceCulture);
             }
         }
         
@@ -31959,6 +32202,51 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yes (disabled).
+        /// </summary>
+        public static string SRIOV_DISABLED {
+            get {
+                return ResourceManager.GetString("SRIOV_DISABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These servers needs to be rebooted for this SR-IOV network to take effect:&apos;{0}&apos;.
+        /// </summary>
+        public static string SRIOV_ENABLE_REBOOT_WARNING {
+            get {
+                return ResourceManager.GetString("SRIOV_ENABLE_REBOOT_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SR-IOV networks require an SR-IOV capable NIC..
+        /// </summary>
+        public static string SRIOV_NEED_NICSUPPORT {
+            get {
+                return ResourceManager.GetString("SRIOV_NEED_NICSUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create &amp;SR-IOV anyway.
+        /// </summary>
+        public static string SRIOV_NETWORK_CREATE {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_CREATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed.
+        /// </summary>
+        public static string SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string SRPANEL_ACTIVE {
@@ -34031,7 +34319,16 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} storage repository is broken..
+        ///   Looks up a localized string similar to {0}: Check skipped because the &apos;{1}&apos; storage repository is broken..
+        /// </summary>
+        public static string UPDATES_WIZARD_BROKEN_SR_WARNING {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_BROKEN_SR_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: The &apos;{1}&apos; storage repository is broken..
         /// </summary>
         public static string UPDATES_WIZARD_BROKEN_STORAGE {
             get {
@@ -34069,11 +34366,29 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has a virtual GPU attached and there is no suitable GPU available on other servers..
+        /// </summary>
+        public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it doesn&apos;t have up-to-date drivers installed..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has one or more PCI devices attached..
+        /// </summary>
+        public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON", resourceCulture);
             }
         }
         
@@ -35857,7 +36172,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The virtual network device changes will take effect when you next restart the VM..
+        ///   Looks up a localized string similar to The virtual network device changes will take effect when you shutdown and then restart the VM..
         /// </summary>
         public static string VIF_HOTPLUG_FAILED_MESSAGE {
             get {
@@ -37728,7 +38043,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB can&apos;t find a host that has required storage repositories to place a VM. .
+        ///   Looks up a localized string similar to WLB cannot find a host that has required storage repositories to place a VM. .
         /// </summary>
         public static string WLB_ERROR_4017 {
             get {
@@ -37737,7 +38052,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB can&apos;t find required free CPUs to place a VM..
+        ///   Looks up a localized string similar to WLB cannot find required free CPUs to place a VM..
         /// </summary>
         public static string WLB_ERROR_4018 {
             get {
@@ -37746,7 +38061,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WLB can&apos;t find required free memory to place a VM..
+        ///   Looks up a localized string similar to WLB cannot find required free memory to place a VM..
         /// </summary>
         public static string WLB_ERROR_4019 {
             get {

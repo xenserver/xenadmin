@@ -84,9 +84,8 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-		public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
-			base.PageLoaded(direction);//call first so the page gets populated
 		    m_buttonNextEnabled = true;
 		}
 
@@ -110,11 +109,11 @@ namespace XenAdmin.Wizards.ImportWizard
 
 		#region Accessors
 
-		public List<Proxy_VIF> ProxyVIFs
+		public List<VIF> VIFs
 		{
 			get
 			{
-				var vifs = new List<Proxy_VIF>();
+				var vifs = new List<VIF>();
 
 				foreach (DataGridViewRow row in m_networkGridView.Rows)
 				{
@@ -129,7 +128,7 @@ namespace XenAdmin.Wizards.ImportWizard
 					if (vif.MAC == Messages.MAC_AUTOGENERATE)
 						vif.MAC = "";
 
-					vifs.Add(vif.ToProxy());
+					vifs.Add(vif);
 				}
 
 				return vifs;
@@ -173,9 +172,11 @@ namespace XenAdmin.Wizards.ImportWizard
         	var networks = m_selectedConnection.Cache.Networks.Where(ShowNetwork);
 
 			foreach (XenAPI.Network network in networks)
+            {
                 col.Items.Add(new ToStringWrapper<XenAPI.Network>(network, network.Name()));
+            }
 
-		    col.DisplayMember = ToStringWrapper<XenAPI.Network>.DisplayMember;
+            col.DisplayMember = ToStringWrapper<XenAPI.Network>.DisplayMember;
 		    col.ValueMember = ToStringWrapper<XenAPI.Network>.ValueMember;
             col.Sorted = true;
         }
@@ -268,7 +269,10 @@ namespace XenAdmin.Wizards.ImportWizard
 			if (m_selectedAffinity == null && !network.AllHostsCanSeeNetwork())
 				return false;
 
-			return true;
+            if (network.IsSriov() && !m_vm.HasSriovRecommendation())
+                return false;
+
+            return true;
 		}
 
 		private void AddVIFRow(VIF vif)

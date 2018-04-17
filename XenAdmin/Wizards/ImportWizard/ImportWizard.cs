@@ -124,7 +124,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			{
 				case ImportType.Xva:
 					if (m_pageXvaStorage.ImportXvaAction != null)
-						m_pageXvaStorage.ImportXvaAction.EndWizard(m_pageFinish.StartVmsAutomatically, m_pageXvaNetwork.ProxyVIFs);
+						m_pageXvaStorage.ImportXvaAction.EndWizard(m_pageFinish.StartVmsAutomatically, m_pageXvaNetwork.VIFs);
 					break;
 				case ImportType.Ovf:
 					(new ImportApplianceAction(m_pageHost.Connection,
@@ -478,7 +478,7 @@ namespace XenAdmin.Wizards.ImportWizard
 			var con = m_pageXvaHost.SelectedHost == null ? m_pageXvaHost.SelectedConnection : m_pageXvaHost.SelectedHost.Connection;
 
 			bool first = true;
-			foreach (var vif in m_pageXvaNetwork.ProxyVIFs)
+			foreach (var vif in m_pageXvaNetwork.VIFs)
 			{
 				var netref = new XenRef<XenAPI.Network>(vif.network);
 				var network = con.Resolve(netref);

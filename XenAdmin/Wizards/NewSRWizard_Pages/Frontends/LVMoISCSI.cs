@@ -41,6 +41,7 @@ using XenAdmin.Controls;
 using XenAdmin.Dialogs;
 using System.Drawing;
 using System.Linq;
+using System.Web.Script.Serialization;
 using XenAdmin.Utils;
 using XenCenterLib;
 
@@ -105,6 +106,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public LVMoISCSI()
         {
             InitializeComponent();
+            SrType = SR.SRTypes.lvmoiscsi;
         }
 
         #region XentabPage overrides
@@ -115,16 +117,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
         public override string HelpID { get { return "Location_ISCSI"; } }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             HelpersGUI.PerformIQNCheck();
 
             if (direction == PageLoadedDirection.Forward)
                 HelpersGUI.FocusFirstControl(Controls);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Back)
                 return;
@@ -141,27 +142,83 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 return;
             }
 
-            Dictionary<String, String> dconf = DeviceConfig;
-            if (dconf == null)
+            // Start probe
+
+            List<SR.SRInfo> srs;
+            var currentSrType = SrType;
+
+            if (!RunProbe(master, currentSrType, out srs))
             {
-                cancel = true;
+                cancel = iscsiProbeError = true;
                 return;
             }
 
-            // Start probe
-            SrProbeAction IscsiProbeAction = new SrProbeAction(Connection, master, SR.SRTypes.lvmoiscsi, dconf);
-            using (var  dialog = new ActionProgressDialog(IscsiProbeAction, ProgressBarStyle.Marquee))
+            var performSecondProbe = Helpers.KolkataOrGreater(Connection) &&
+                                     !Helpers.FeatureForbidden(Connection, Host.CorosyncDisabled);
+            if (performSecondProbe && srs.Count == 0)
+            {
+                // Start second probe
+                currentSrType = SrType == SR.SRTypes.gfs2 ? SR.SRTypes.lvmoiscsi : SR.SRTypes.gfs2;
+
+                if (!RunProbe(master, currentSrType, out srs))
+                {
+                    cancel = iscsiProbeError = true;
+                    return;
+                }
+            }
+
+            // Probe has been performed. Now ask the user if they want to Reattach/Format/Cancel.
+            // Will return false on cancel
+            cancel = iscsiProbeError = !ExamineIscsiProbeResults(currentSrType, srs);
+        }
+
+        private bool RunProbe(Host master, SR.SRTypes srType, out List<SR.SRInfo> srs)
+        {
+            srs = null;
+
+            Dictionary<String, String> dconf = GetDeviceConfig(srType);
+            if (dconf == null)
+                return false;
+
+            var action = new SrProbeAction(Connection, master, srType, dconf);
+            using (var dialog = new ActionProgressDialog(action, ProgressBarStyle.Marquee))
             {
                 dialog.ShowCancel = true;
                 dialog.ShowDialog(this);
             }
 
-            // Probe has been performed. Now ask the user if they want to Reattach/Format/Cancel.
-            // Will return false on cancel
-            cancel = !ExamineIscsiProbeResults(IscsiProbeAction);
-            iscsiProbeError = cancel;
-            
-            base.PageLeave(direction, ref cancel);
+            _srToIntroduce = null;
+            if (action.Succeeded)
+            {
+                try
+                {
+                    srs = action.ProbeExtResult != null ? SR.ParseSRList(action.ProbeExtResult) : SR.ParseSRListXML(action.Result);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            Exception exn = action.Exception;
+            log.Warn(exn, exn);
+
+            Failure failure = exn as Failure;
+            if (failure != null)
+            {
+                errorIconAtHostOrIP.Visible = true;
+                errorLabelAtHostname.Visible = true;
+
+                errorLabelAtHostname.Text = failure.ErrorDescription[0] == "SR_BACKEND_FAILURE_140"
+                    ? Messages.INVALID_HOST
+                    : (failure.ErrorDescription.Count > 2
+                        ? failure.ErrorDescription[2]
+                        : failure.ErrorDescription[0]);
+
+                textBoxIscsiHost.Focus();
+            }
+            return false;
         }
 
         bool iscsiProbeError = false;
@@ -330,7 +387,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             {
                 foreach (SR sr in connection.Cache.SRs)
                 {
-                    if (sr.GetSRType(false) != SR.SRTypes.lvmoiscsi)
+                    if (sr.GetSRType(false) != SR.SRTypes.lvmoiscsi && sr.GetSRType(false) != SR.SRTypes.gfs2)
                         continue;
 
                     if (sr.PBDs.Count < 1)
@@ -357,10 +414,15 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         /// <returns></returns>
         private bool UniquenessCheckMiami(IXenConnection connection, PBD pbd)
         {
-            if (!pbd.device_config.ContainsKey(SCSIID))
+            String scsiID;
+
+            if (pbd.device_config.ContainsKey(SCSIID))
+                scsiID = pbd.device_config[SCSIID];
+            else if (pbd.device_config.ContainsKey("ScsiId"))
+                scsiID = pbd.device_config["ScsiId"];
+            else
                 return false;
 
-            String scsiID = pbd.device_config[SCSIID];
             String myLUN = getIscsiLUN();
 
             if (!LunMap.ContainsKey(myLUN))
@@ -466,17 +528,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
             UpdateButtons();
 
-            if (IscsiUseChapCheckBox.Checked)
-            {
-                IscsiPopulateIqnsAction = new ISCSIPopulateIQNsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text);
-            }
-            else
-            {
-                IscsiPopulateIqnsAction = new ISCSIPopulateIQNsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), null, null);
-            }
+            var chapUser = IscsiUseChapCheckBox.Checked ? IScsiChapUserTextBox.Text : null;
+            var chapPwd = IscsiUseChapCheckBox.Checked ? IScsiChapSecretTextBox.Text : null;
 
+            IscsiPopulateIqnsAction = SrType == SR.SRTypes.gfs2
+                    ? new Gfs2PopulateIQNsAction(Connection, getIscsiHost(), getIscsiPort(), chapUser, chapPwd)
+                    : new ISCSIPopulateIQNsAction(Connection, getIscsiHost(), getIscsiPort(), chapUser, chapPwd);
+            
             IscsiPopulateIqnsAction.Completed += IscsiPopulateIqnsAction_Completed;
 
             controlDisabler.Reset();
@@ -595,17 +653,13 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             comboBoxIscsiLuns.Items.Clear();
             LunMap.Clear();
 
-            if (IscsiUseChapCheckBox.Checked)
-            {
-                IscsiPopulateLunsAction = new Actions.ISCSIPopulateLunsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), getIscsiIQN(), IScsiChapUserTextBox.Text, IScsiChapSecretTextBox.Text);
-            }
-            else
-            {
-                IscsiPopulateLunsAction = new Actions.ISCSIPopulateLunsAction(Connection,
-                    getIscsiHost(), getIscsiPort(), getIscsiIQN(), null, null);
-            }
+            var chapUser = IscsiUseChapCheckBox.Checked ? IScsiChapUserTextBox.Text : null;
+            var chapPwd = IscsiUseChapCheckBox.Checked ? IScsiChapSecretTextBox.Text : null;
 
+            IscsiPopulateLunsAction = SrType == SR.SRTypes.gfs2
+                ? new Gfs2PopulateLunsAction(Connection, getIscsiHost(), getIscsiPort(), getIscsiIQN(), chapUser, chapPwd)
+                : new ISCSIPopulateLunsAction(Connection, getIscsiHost(), getIscsiPort(), getIscsiIQN(), chapUser, chapPwd);
+            
             IscsiPopulateLunsAction.Completed += IscsiPopulateLunsAction_Completed;
 
             controlDisabler.Reset();
@@ -706,42 +760,22 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         /// Whether to continue or not - wheter to format or not is stored in 
         /// iScsiFormatLUN.
         /// </returns>
-        private bool ExamineIscsiProbeResults(SrProbeAction action)
+        private bool ExamineIscsiProbeResults(SR.SRTypes currentSrType, List<SR.SRInfo> srs)
         {
             _srToIntroduce = null;
 
-            if (!action.Succeeded)
-            {
-                Exception exn = action.Exception;
-                log.Warn(exn, exn);
-                Failure failure = exn as Failure;
-                if (failure != null && failure.ErrorDescription[0] == "SR_BACKEND_FAILURE_140")
-                {
-                    errorIconAtHostOrIP.Visible = true;
-                    errorLabelAtHostname.Visible = true;
-                    errorLabelAtHostname.Text = Messages.INVALID_HOST;
-                    textBoxIscsiHost.Focus();
-                }
-                else if (failure != null)
-                {
-                    errorIconAtHostOrIP.Visible = true;
-                    errorLabelAtHostname.Visible = true;
-                    errorLabelAtHostname.Text = failure.ErrorDescription.Count > 2 ? failure.ErrorDescription[2] : failure.ErrorDescription[0];
-                    textBoxIscsiHost.Focus();
-                }
+            if (srs == null)
                 return false;
-            }
-            
+
             try
             {
-                List<SR.SRInfo> SRs = SR.ParseSRListXML(action.Result);
-
                 if (!String.IsNullOrEmpty(SrWizardType.UUID))
                 {
                     // Check LUN contains correct SR
-                    if (SRs.Count == 1 && SRs[0].UUID == SrWizardType.UUID)
+                    if (srs.Count == 1 && srs[0].UUID == SrWizardType.UUID)
                     {
-                        _srToIntroduce = SRs[0];
+                        _srToIntroduce = srs[0];
+                        SrType = currentSrType; // the type of the existing SR
                         return true;
                     }
 
@@ -751,7 +785,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
 
                     return false;
                 }
-                else if (SRs.Count == 0)
+                else if (srs.Count == 0)
                 {
                     // No existing SRs were found on this LUN. If allowed to create new SR, ask the user if they want to proceed and format.
                     if (!SrWizardType.AllowToCreateNewSr)
@@ -781,11 +815,11 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 else
                 {
                     // There should be 0 or 1 SRs on the LUN
-                    System.Diagnostics.Trace.Assert(SRs.Count == 1);
+                    System.Diagnostics.Trace.Assert(srs.Count == 1);
 
                     // CA-17230
                     // Check this isn't a detached SR
-                    SR.SRInfo info = SRs[0];
+                    SR.SRInfo info = srs[0];
                     SR sr = SrWizardHelpers.SrInUse(info.UUID);
                     if (sr != null)
                     {
@@ -802,19 +836,21 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                             return false;
 
                         _srToIntroduce = info;
+                        SrType = currentSrType; // the type of the existing SR
                         return true;
                     }
 
                     // An SR exists on this LUN. Ask the user if they want to attach it, format it and
                     // create a new SR, or cancel.
                     DialogResult result = Program.RunInAutomatedTestMode ? DialogResult.Yes :
-                        new IscsiChoicesDialog(Connection, info).ShowDialog(this);
+                        new IscsiChoicesDialog(Connection, info, currentSrType, SrType).ShowDialog(this);
                     
                     switch (result)
                     {
                         case DialogResult.Yes:
                             // Reattach
-                            _srToIntroduce = SRs[0];
+                            _srToIntroduce = srs[0];
+                            SrType = currentSrType; // the type of the existing SR
                             return true;
 
                         case DialogResult.No:
@@ -847,6 +883,51 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
                 c.Visible = false;
         }
 
+        private Dictionary<String, String> GetDeviceConfig(SR.SRTypes srType)
+        {
+            Dictionary<String, String> dconf = new Dictionary<String, String>();
+            ToStringWrapper<IScsiIqnInfo> iqn = comboBoxIscsiIqns.SelectedItem as ToStringWrapper<IScsiIqnInfo>;
+            if (iqn == null || !LunMap.ContainsKey(getIscsiLUN()))
+                return null;
+
+            if (srType == SR.SRTypes.gfs2)
+            {
+                dconf["provider"] = "iscsi";
+                dconf["ips"] = iqn.item.IpAddress;
+                dconf["port"] = iqn.item.Port.ToString();
+                dconf["iqns"] = getIscsiIQN();
+                dconf["ScsiId"] = LunMap[getIscsiLUN()].ScsiID;
+                dconf["chapuser"] = IScsiChapUserTextBox.Text;
+                dconf["chappassword"] = IScsiChapSecretTextBox.Text;
+
+                return dconf;
+            }
+
+            // Reset target IP address to home address specified in IQN scan.
+            // Allows multi-homing - see CA-11607
+            dconf[TARGET] = iqn.item.IpAddress;
+            dconf[PORT] = iqn.item.Port.ToString();
+            dconf[TARGETIQN] = getIscsiIQN();
+
+            ISCSIInfo info = LunMap[getIscsiLUN()];
+            if (info.LunID == -1)
+            {
+                dconf[LUNSERIAL] = info.Serial;
+            }
+            else
+            {
+                dconf[SCSIID] = info.ScsiID;
+            }
+
+            if (IscsiUseChapCheckBox.Checked)
+            {
+                dconf[CHAPUSER] = IScsiChapUserTextBox.Text;
+                dconf[CHAPPASSWORD] = IScsiChapSecretTextBox.Text;
+            }
+
+            return dconf;
+        }
+
         #region Accessors
 
         public SrWizardType SrWizardType { private get; set; }
@@ -866,37 +947,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         {
             get
             {
-                Dictionary<String, String> dconf = new Dictionary<String, String>();
-                ToStringWrapper<IScsiIqnInfo> iqn = comboBoxIscsiIqns.SelectedItem as ToStringWrapper<IScsiIqnInfo>;
-                if (iqn == null)
-                    return null;
-
-                // Reset target IP address to home address specified in IQN scan.
-                // Allows multi-homing - see CA-11607
-                dconf[TARGET] = iqn.item.IpAddress;
-                dconf[PORT] = iqn.item.Port.ToString();
-                dconf[TARGETIQN] = getIscsiIQN();
-
-                if (!LunMap.ContainsKey(getIscsiLUN()))
-                    return null;
-
-                ISCSIInfo info = LunMap[getIscsiLUN()];
-                if (info.LunID == -1)
-                {
-                    dconf[LUNSERIAL] = info.Serial;
-                }
-                else
-                {
-                    dconf[SCSIID] = info.ScsiID;
-                }
-
-                if (IscsiUseChapCheckBox.Checked)
-                {
-                    dconf[CHAPUSER] = IScsiChapUserTextBox.Text;
-                    dconf[CHAPPASSWORD] = IScsiChapSecretTextBox.Text;
-                }
-
-                return dconf;
+                return GetDeviceConfig(SrType);
             }
         }
 
@@ -909,6 +960,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             }
         }
 
+        public SR.SRTypes SrType { get; set; }
         #endregion
     }
 }

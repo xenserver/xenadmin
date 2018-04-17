@@ -33,10 +33,9 @@ using System;
 using System.IO;
 using System.Text;
 using CookComputing.XmlRpc;
-using log4net.Core;
 using XenAdmin;
-using XenAdmin.Core;
 using XenAdmin.Network;
+using Newtonsoft.Json.Linq;
 
 
 namespace XenAPI
@@ -48,31 +47,17 @@ namespace XenAPI
         public bool IsElevatedSession = false;
 
         private Session(int timeout, IXenConnection connection, string url)
+            :this(timeout, url)
         {
             Connection = connection;
-            _proxy = XmlRpcProxyGen.Create<Proxy>();
-            _proxy.Url = url;
-            _proxy.NonStandard = XmlRpcNonStandard.All;
-            _proxy.Timeout = timeout;
-            _proxy.UseIndentation = false;
-            _proxy.UserAgent = UserAgent;
-            _proxy.KeepAlive = true;
-            _proxy.RequestEvent += LogRequest;
-            _proxy.ResponseEvent += LogResponse;
-            _proxy.Proxy = Proxy;
-            // reverted because of CA-137829/CA-137959: _proxy.ConnectionGroupName = Guid.NewGuid().ToString(); // this will force the Session onto a different set of TCP streams (see CA-108676)
+            proxy.RequestEvent += LogRequest;
+            proxy.ResponseEvent += LogResponse;
         }
 
         public Session(Proxy proxy, IXenConnection connection)
         {
             Connection = connection;
-            _proxy = proxy;
-        }
-
-        public Session(Session session, Proxy proxy, IXenConnection connection)
-            : this(proxy, connection)
-        {
-            InitAD(session);
+            this.proxy = proxy;
         }
 
         public Session(int timeout, IXenConnection connection, string host, int port)
@@ -80,22 +65,42 @@ namespace XenAPI
         {
         }
 
+        public Session(Session session, Proxy proxy, IXenConnection connection)
+            : this(proxy, connection)
+        {
+            CopyADFromSession(session);
+        }
+
         /// <summary>
         /// Create a new Session instance, using the given instance and timeout.  The connection details and Xen-API session handle will be
         /// copied from the given instance, but a new connection will be created.  Use this if you want a duplicate connection to a host,
         /// for example when you need to cancel an operation that is blocking the primary connection.
         /// </summary>
-        /// <param name="session"></param>
-        /// <param name="timeout"></param>
         public Session(Session session, IXenConnection connection, int timeout)
-            : this(timeout, connection, session.Url)
         {
-            InitAD(session);
+            if (session.JsonRpcClient != null)
+            {
+                JsonRpcClient = new JsonRpcClient(session.Url)
+                {
+                    JsonRpcVersion = session.JsonRpcClient.JsonRpcVersion,
+                    Timeout = timeout
+                };
+                JsonRpcClient.RequestEvent += LogJsonRequest;
+            }
+            else
+            {
+                InitializeXmlRpcProxy(session.Url, timeout);
+                proxy.RequestEvent += LogRequest;
+                proxy.ResponseEvent += LogResponse;
+            }
+
+            Connection = connection;
+            CopyADFromSession(session);
         }
 
-        private void InitAD(Session session)
+        private void CopyADFromSession(Session session)
         {
-            _uuid = session.uuid;
+            opaque_ref = session.opaque_ref;
             APIVersion = session.APIVersion;
             _userSid = session.UserSid;
             _subject = session.Subject;
@@ -115,9 +120,51 @@ namespace XenAPI
             set { _cacheWarming = value; }
         }
 
+        /// <summary>
+        /// Do not log while downloading objects;
+        /// also exclude calls occurring frequently, we don't need to know about them
+        /// </summary>
+        private bool CanLogCall(string call)
+        {
+            return CacheWarming ||
+                   call == "event.next" || call == "event.from" || call == "host.get_servertime" ||
+                   call.StartsWith("task.get_");
+        }
+
+        private void LogJsonRequest(string json)
+        {
+#if DEBUG
+            string methodName = "";
+            string parameters = "";
+
+            try
+            {
+                JObject obj = JObject.Parse(json);
+                methodName = obj.Property("method").Value.ToString();
+                parameters = obj.Property("params").Value.ToString();
+            }
+            catch
+            {
+                //ignore
+            }
+
+            // only log the full parameters at Debug level because it may contain sensitive data
+            if (CanLogCall(methodName))
+                log.DebugFormat("Invoking JSON-RPC method '{0}' with params: {1}", methodName, parameters);
+            else
+                log.InfoFormat("Invoking JSON-RPC method '{0}'", methodName);
+#else
+            string methodName = json;
+
+            if (CanLogCall(methodName))
+                log.DebugFormat("Invoking JSON-RPC method '{0}'", methodName);
+            else
+                log.InfoFormat("Invoking JSON-RPC method '{0}'", methodName);
+#endif
+        }
+
         private void LogRequest(object o, XmlRpcRequestEventArgs args)
         {
-            Level logLevel;
             string xml = DumpStream(args.RequestStream, String.Empty);
 
             // Find the method name within the XML
@@ -125,30 +172,30 @@ namespace XenAPI
             int methodNameStart = xml.IndexOf("<methodName>");
             if (methodNameStart >= 0)
             {
-                methodNameStart += 12;  // skip past "<methodName>"
+                methodNameStart += 12; // skip past "<methodName>"
                 int methodNameEnd = xml.IndexOf('<', methodNameStart);
                 if (methodNameEnd > methodNameStart)
                     methodName = xml.Substring(methodNameStart, methodNameEnd - methodNameStart);
             }
 
-            if (CacheWarming)
-                logLevel = Level.Debug;
-            else if (methodName == "event.next" || methodName == "event.from" || methodName == "host.get_servertime" || methodName.StartsWith("task.get_"))  // these occur frequently and we don't need to know about them
-                logLevel = Level.Debug;
-            else
-                logLevel = Level.Info;
+            // do not log while downloading objects
+            // also exclude calls occurring frequently; we don't need to know about them;
+            // only log the full XML at Debug level because it may have sensitive data in: CA-80174
 
-            // Only log the full XML at Debug level because it may have sensitive data in: CA-80174
-            if (logLevel == Level.Debug)
-                LogMsg(logLevel, "Invoking XML-RPC method " +  methodName + ": " + xml);
+            if (CanLogCall(methodName))
+            {
+                log.DebugFormat("Invoking XML-RPC method {0}: {1}", methodName, xml);
+            }
             else
-                LogMsg(logLevel, "Invoking XML-RPC method " + methodName);
+            {
+                log.InfoFormat("Invoking XML-RPC method {0}", methodName);
+            }
         }
 
         private void LogResponse(object o, XmlRpcResponseEventArgs args)
         {
             if(log.IsDebugEnabled)
-                LogMsg(Level.Debug, DumpStream(args.ResponseStream, "XML-RPC response: "));
+                log.DebugFormat(DumpStream(args.ResponseStream, "XML-RPC response: "));
         }
 
         private string DumpStream(Stream s, string header)
@@ -166,19 +213,9 @@ namespace XenAPI
             }
             catch(OutOfMemoryException ex)
             {
-                LogMsg(Level.Debug, "Session ran out of memory while trying to log the XML response stream: " + ex.Message);
+                log.DebugFormat("Session ran out of memory while trying to log the XML response stream: {0}", ex.Message);
                 return String.Empty;
             }
-        }
-
-        private void LogMsg(Level logLevel, String msg)
-        {
-            if (logLevel == Level.Debug)
-                log.Debug(msg);
-            else if (logLevel == Level.Info)
-                log.Info(msg);
-            else
-                System.Diagnostics.Trace.Assert(false, "Missing log level");
         }
 
         /// <summary>
@@ -237,12 +274,6 @@ namespace XenAPI
             roles.Sort((r1, r2) => { return r2.CompareTo(r1); });
             //Take the highest role
             return roles[0].FriendlyName();
-        }
-
-        public string ConnectionGroupName
-        {
-            get { return _proxy.ConnectionGroupName; }
-            set { _proxy.ConnectionGroupName = value; }
         }
     }
 }

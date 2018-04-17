@@ -44,37 +44,39 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly XenServerPatch patch;
         private Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+        private KeyValuePair<XenServerPatch, string> patchFromDisk;
         private string tempFileName = null;
 
-        public DownloadPatchPlanAction(IXenConnection connection, XenServerPatch patch, Dictionary<XenServerPatch, string> allDownloadedPatches)
+        public DownloadPatchPlanAction(IXenConnection connection, XenServerPatch patch, Dictionary<XenServerPatch, string> allDownloadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
             : base(connection, string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name))
         {
             this.patch = patch;
             this.AllDownloadedPatches = allDownloadedPatches;
+            this.patchFromDisk = patchFromDisk;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            this.visible = false;
+            this.Visible = false;
 
             lock (patch)
             {
-                this.visible = true;
-                this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
+                this.Visible = true;
+                Title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
 
                 if (Cancelling)
                     return;
 
-                //if it has not been already downloaded
-                if (!AllDownloadedPatches.Any(dp => dp.Key == patch && !string.IsNullOrEmpty(dp.Value))
-                    || !File.Exists(AllDownloadedPatches[patch]))
+                //skip the download if the patch has been already downloaded or we are using a patch from disk
+                if ((AllDownloadedPatches.ContainsKey(patch) && File.Exists(AllDownloadedPatches[patch])) 
+                    || (patchFromDisk.Key == patch && File.Exists(patchFromDisk.Value)))
                 {
-                    DownloadFile(ref session);
+                    this.Visible = false;
+                    Title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
                 }
                 else
                 {
-                    this.visible = false;
-                    this._title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
+                    DownloadFile(ref session);
                 }
             }
 

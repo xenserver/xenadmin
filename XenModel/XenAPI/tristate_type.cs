@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(tristate_typeConverter))]
     public enum tristate_type
     {
         yes, no, unspecified, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class tristate_type_helper
     {
         public static string ToString(tristate_type x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this tristate_type x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class tristate_typeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((tristate_type)value).StringOf());
         }
     }
 }

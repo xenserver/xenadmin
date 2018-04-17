@@ -185,6 +185,9 @@ namespace XenAdmin.Diagnostics.Checks
                     case Failure.VM_LACKS_FEATURE_SUSPEND:
                         return new CannotMigrateVM(this, vm, GetMoreSpecificReasonForCannotMigrateVm(vm, CannotMigrateVM.CannotMigrateVMReason.LacksFeatureSuspend));
 
+                    case Failure.VM_HAS_PCI_ATTACHED:
+                        return new CannotMigrateVM(this, vm, GetMoreSpecificReasonForCannotMigrateVm(vm, CannotMigrateVM.CannotMigrateVMReason.HasPCIAttached));
+
                     case "VM_OLD_PV_DRIVERS":
                         return new PVDriversOutOfDate(this, vm);
 
@@ -213,6 +216,9 @@ namespace XenAdmin.Diagnostics.Checks
 
                         return new VMCannotSeeNetwork(this, vm, network);
 
+                    case Failure.VM_REQUIRES_GPU:
+                        return new CannotMigrateVM(this, vm, CannotMigrateVM.CannotMigrateVMReason.CannotMigrateVmNoGpu);
+                        
                     case Failure.VM_HAS_VGPU:
                         return new VmHasVgpu(this, vm);
 

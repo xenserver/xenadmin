@@ -30,9 +30,7 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -92,7 +90,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// <summary>
         /// Fired (on a background thread) when new performance data are received from the server
         /// </summary>
-        internal event EventHandler<EventArgs> ArchivesUpdated;
+        internal event Action ArchivesUpdated;
 
         internal readonly Dictionary<ArchiveInterval, DataArchive> Archives = new Dictionary<ArchiveInterval, DataArchive>();
 
@@ -130,40 +128,15 @@ namespace XenAdmin.Controls.CustomDataGraph
         /// </summary>
         public IXenObject XenObject
         {
-            get { return _xenObject; }
+            private get { return _xenObject; }
             set
             {
                 Program.AssertOnEventThread();
 
-                DeregEvents();
-
-                string oldref = XenObject == null ? "" : XenObject.opaque_ref;
+                string oldref = _xenObject == null ? "" : _xenObject.opaque_ref;
                 _xenObject = value;
-                string newref = XenObject == null ? "" : XenObject.opaque_ref;
+                string newref = _xenObject == null ? "" : _xenObject.opaque_ref;
                 FirstTime = FirstTime || newref != oldref;
-
-                if (FirstTime)
-                {
-                    // Restrict to at most 24 hours data if necessary
-                    if (Helpers.FeatureForbidden(XenObject, XenAPI.Host.RestrictPerformanceGraphs))
-                    {
-                        Archives[ArchiveInterval.OneHour].MaxPoints = 24;
-                        Archives[ArchiveInterval.OneDay].MaxPoints = 0;
-                    }
-                    else
-                    {
-                        Archives[ArchiveInterval.OneHour].MaxPoints = HoursInOneWeek;
-                        Archives[ArchiveInterval.OneDay].MaxPoints = DaysInOneYear;
-                    }
-
-                    foreach (DataArchive a in Archives.Values)
-                        a.Sets.Clear();
-                    
-                    LoadingInitialData = true;
-                    OnArchivesUpdated();
-                }
-
-                RegEvents();
             }
         }
 
@@ -180,7 +153,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             get
             {
-                IXenObject m = _xenObject;
+                IXenObject m = XenObject;
                 return m == null ? TimeSpan.Zero : m.Connection.ServerTimeOffset;
             }
         }
@@ -193,26 +166,39 @@ namespace XenAdmin.Controls.CustomDataGraph
             Archives.Add(ArchiveInterval.OneDay, new DataArchive(DaysInOneYear));
             Archives.Add(ArchiveInterval.None, new DataArchive(0));
 
-            UpdaterThread = new Thread(new ThreadStart(Update));
-            UpdaterThread.Name = "Archive Maintainer";
-            UpdaterThread.IsBackground = true;
+            UpdaterThread = new Thread(Update) {Name = "Archive Maintainer", IsBackground = true};
         }
 
         /// <summary>
         /// Call me, async update graph data set
         /// UpdaterThread Thread
         /// </summary>
-        public void Update()
+        private void Update()
         {
             while (RunThread)
             {
                 IXenObject xenObject = XenObject;
                 Host Host = GetHost(xenObject);
 
-                DateTime ServerWas = ServerNow(); // get time before updating so we dont miss any 5 second updates if getting the past data
+                DateTime ServerWas = ServerNow(); // get time before updating so we don't miss any 5 second updates if getting the past data
 
                 if (FirstTime)
                 {
+                    // Restrict to at most 24 hours data if necessary
+                    if (Helpers.FeatureForbidden(_xenObject, XenAPI.Host.RestrictPerformanceGraphs))
+                    {
+                        Archives[ArchiveInterval.OneHour].MaxPoints = 24;
+                        Archives[ArchiveInterval.OneDay].MaxPoints = 0;
+                    }
+                    else
+                    {
+                        Archives[ArchiveInterval.OneHour].MaxPoints = HoursInOneWeek;
+                        Archives[ArchiveInterval.OneDay].MaxPoints = DaysInOneYear;
+                    }
+
+                    foreach (DataArchive a in Archives.Values)
+                        a.ClearSets();
+
                     LoadingInitialData = true;
                     OnArchivesUpdated();
                     Get(ArchiveInterval.None, RrdsUri, RRD_Full_InspectCurrentNode, Host, xenObject);
@@ -321,9 +307,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             string query =
                 xo is Host ?
-                    string.Format(RrdHostUpdatesQuery, Uri.EscapeDataString(session.uuid), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval)) :
+                    string.Format(RrdHostUpdatesQuery, Uri.EscapeDataString(session.opaque_ref), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval)) :
                 xo is VM ?
-                    string.Format(RrdVmUpdatesQuery, Uri.EscapeDataString(session.uuid), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval), Helpers.GetUuid(xo)) :
+                    string.Format(RrdVmUpdatesQuery, Uri.EscapeDataString(session.opaque_ref), TimeFromInterval(interval), RrdCFAverage, ToSeconds(interval), Helpers.GetUuid(xo)) :
                     "";
             return BuildUri(host, RrdUpdatesPath, query);
         }
@@ -332,9 +318,9 @@ namespace XenAdmin.Controls.CustomDataGraph
         {
             string query =
                 xo is Host ?
-                    string.Format(RrdHostQuery, Uri.EscapeDataString(session.uuid)) :
+                    string.Format(RrdHostQuery, Uri.EscapeDataString(session.opaque_ref)) :
                 xo is VM ?
-                    string.Format(RrdVmQuery, Uri.EscapeDataString(session.uuid), Helpers.GetUuid(xo)) :
+                    string.Format(RrdVmQuery, Uri.EscapeDataString(session.opaque_ref), Helpers.GetUuid(xo)) :
                     "";
             return BuildUri(host, xo is Host ? RrdHostPath : RrdVmPath, query);
         }
@@ -633,61 +619,7 @@ namespace XenAdmin.Controls.CustomDataGraph
         private void OnArchivesUpdated()
         {
             if (ArchivesUpdated != null)
-                ArchivesUpdated(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Gui Thread
-        /// </summary>
-        internal void DeregEvents()
-        {
-            if (XenObject == null)
-                return;
-            Pool pool = Helpers.GetPoolOfOne(XenObject.Connection);
-            if (pool != null)
-                pool.PropertyChanged -= pool_PropertyChanged;
-
-        }
-
-        /// <summary>
-        /// Gui Thread
-        /// </summary>
-        private void RegEvents()
-        {
-            if (XenObject == null)
-                return;
-            Pool pool = Helpers.GetPoolOfOne(XenObject.Connection);
-            if (pool != null)
-                pool.PropertyChanged += pool_PropertyChanged;
-        }
-
-        /// <summary>
-        /// Random Thread
-        /// </summary>
-        void pool_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "gui_config")
-            {
-                Dictionary<string, string> gui_config = Helpers.GetGuiConfig((IXenObject)sender);
-                string uuid = Helpers.GetUuid(XenObject);
-
-                foreach (string key in gui_config.Keys)
-                {
-                    if (!Palette.OtherConfigUUIDRegex.IsMatch(key) || !key.Contains(uuid))
-                        continue;
-
-                    string value = gui_config[key];
-                    int argb;
-                    if (!Int32.TryParse(value, out argb))
-                        continue;
-
-                    string[] strs = key.Split('.');
-
-                    // just set the color, we dont care what it is
-                    Palette.SetCustomColor(Palette.GetUuid(strs[strs.Length - 1], XenObject), Color.FromArgb(argb));
-                }
-                OnArchivesUpdated();
-            }
+                ArchivesUpdated();
         }
     }
 }

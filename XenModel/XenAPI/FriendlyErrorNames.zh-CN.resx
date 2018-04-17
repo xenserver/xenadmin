@@ -186,6 +186,12 @@
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
     <value>此 PIF 是绑定从属设备，不能带有隧道。</value>
   </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
+    <value>这是网络 SR-IOV 逻辑 PIF，不能在其上创建通道。</value>
+  </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_VLAN_ON_SRIOV_LOGICAL" xml:space="preserve">
+    <value>这是网络 SR-IOV 上的 VLAN PIF，不能在其上创建通道。</value>
+  </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
     <value>此 PIF 是绑定从属设备，不能带有 VLAN。</value>
   </data>
@@ -225,6 +231,9 @@
   <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
     <value>找不到请求的更新。请再次上载更新。如果您在运行 xe update-apply 之前运行 xe update-pool-clean，则会出现此问题。 </value>
   </data>
+  <data name="CANNOT_FORGET_SRIOV_LOGICAL" xml:space="preserve">
+    <value>这是网络 SR-IOV 逻辑 PIF，不能在其上执行忘记操作</value>
+  </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>此 PIF 为绑定从属设备，不能插入。</value>
   </data>
@@ -254,6 +263,30 @@
   </data>
   <data name="CLUSTERED_SR_DEGRADED" xml:space="preserve">
     <value>SR 使用群集化的本地存储。当前重新启动主机不安全。</value>
+  </data>
+  <data name="CLUSTERING_DISABLED" xml:space="preserve">
+    <value>在 cluster_host 上禁用了群集时已尝试执行操作。</value>
+  </data>
+  <data name="CLUSTERING_ENABLED" xml:space="preserve">
+    <value>在 cluster_host 上启用了群集时已尝试执行操作。</value>
+  </data>
+  <data name="CLUSTERING_ENABLED_ON_NETWORK" xml:space="preserve">
+    <value>网络连接了群集对象。</value>
+  </data>
+  <data name="CLUSTER_ALREADY_EXISTS" xml:space="preserve">
+    <value>池中已存在群集。</value>
+  </data>
+  <data name="CLUSTER_CREATE_IN_PROGRESS" xml:space="preserve">
+    <value>无法执行此操作，因为正在创建群集。</value>
+  </data>
+  <data name="CLUSTER_DOES_NOT_HAVE_ONE_NODE" xml:space="preserve">
+    <value>群集不只有一个节点。</value>
+  </data>
+  <data name="CLUSTER_FORCE_DESTROY_FAILED" xml:space="preserve">
+    <value>强制销毁群集时在 Cluster_host 上执行强制销毁失败。</value>
+  </data>
+  <data name="CLUSTER_STACK_IN_USE" xml:space="preserve">
+    <value>群集堆栈已在使用中。</value>
   </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>找不到具有指定设备名称和 MAC 地址的网络接口。</value>
@@ -690,8 +723,41 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>网络包含活动的 VIF ({0})，无法删除。</value>
   </data>
+  <data name="NETWORK_HAS_INCOMPATIBLE_SRIOV_PIFS" xml:space="preserve">
+    <value>此 PIF 与选定的 SR-IOV 网络不兼容</value>
+  </data>
+  <data name="NETWORK_HAS_INCOMPATIBLE_VLAN_ON_SRIOV_PIFS" xml:space="preserve">
+    <value>PIF 上的 VLAN 与选定的 SR-IOV VLAN 网络不兼容</value>
+  </data>
   <data name="NETWORK_INCOMPATIBLE_PURPOSES" xml:space="preserve">
     <value>您尝试向某个网络中添加用途，但新用途与该网络或其他网络的现有用途不兼容。</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_BOND" xml:space="preserve">
+    <value>此网络与绑定不兼容</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_SRIOV" xml:space="preserve">
+    <value>此网络与 SR-IOV 不兼容</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_TUNNEL" xml:space="preserve">
+    <value>此网络与通道不兼容</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_VLAN_ON_BRIDGE" xml:space="preserve">
+    <value>此网络与桥上的 VLAN 不兼容</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_VLAN_ON_SRIOV" xml:space="preserve">
+    <value>此网络与 SR-IOV 上的 VLAN 不兼容</value>
+  </data>
+  <data name="NETWORK_SRIOV_ALREADY_ENABLED" xml:space="preserve">
+    <value>为 SR-IOV 网络选定的 PIF 已启用</value>
+  </data>
+  <data name="NETWORK_SRIOV_DISABLE_FAILED" xml:space="preserve">
+    <value>无法在 PIF 上禁用 SR-IOV</value>
+  </data>
+  <data name="NETWORK_SRIOV_ENABLE_FAILED" xml:space="preserve">
+    <value>无法在 PIF 上启用 SR-IOV</value>
+  </data>
+  <data name="NETWORK_SRIOV_INSUFFICIENT_CAPACITY" xml:space="preserve">
+    <value>VF 预留的容量不足</value>
   </data>
   <data name="NETWORK_UNMANAGED" xml:space="preserve">
     <value>网络不是由 xapi 管理。</value>
@@ -710,6 +776,9 @@
   </data>
   <data name="NOT_SYSTEM_DOMAIN" xml:space="preserve">
     <value>未将指定的 VM 注册为系统域。只能在注册的系统域中执行此操作。</value>
+  </data>
+  <data name="NO_COMPATIBLE_CLUSTER_HOST" xml:space="preserve">
+    <value>主机没有具有兼容群集堆栈的 Cluster_host。</value>
   </data>
   <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>没有可用于完成指定操作的服务器。</value>
@@ -798,6 +867,9 @@
   <data name="PGPU_NOT_COMPATIBLE_WITH_GPU_GROUP" xml:space="preserve">
     <value>GPU 类型与目标组不兼容。</value>
   </data>
+  <data name="PIF_ALLOWS_UNPLUG" xml:space="preserve">
+    <value>请求的操作无法执行，因为指定的 PIF 允许拔出。</value>
+  </data>
   <data name="PIF_ALREADY_BONDED" xml:space="preserve">
     <value>无法为已属于现有绑定的接口创建绑定。</value>
   </data>
@@ -819,6 +891,9 @@
   <data name="PIF_DOES_NOT_ALLOW_UNPLUG" xml:space="preserve">
     <value>无法执行请求的操作，因为指定的 PIF 不允许插拔。</value>
   </data>
+  <data name="PIF_HAS_FCOE_SR_IN_USE" xml:space="preserve">
+    <value>无法执行请求的操作，因为指定的 PIF 具有正在使用的 FCoE SR。</value>
+  </data>
   <data name="PIF_HAS_NO_NETWORK_CONFIGURATION" xml:space="preserve">
     <value>PIF 没有网络配置</value>
   </data>
@@ -831,14 +906,26 @@
   <data name="PIF_IS_MANAGEMENT_INTERFACE" xml:space="preserve">
     <value>PIF 为管理接口。</value>
   </data>
+  <data name="PIF_IS_NOT_PHYSICAL" xml:space="preserve">
+    <value>您尝试执行仅在物理 PIF 上可用的操作</value>
+  </data>
+  <data name="PIF_IS_NOT_SRIOV_CAPABLE" xml:space="preserve">
+    <value>选定的 PIF 不具备网络 SR-IOV 的功能</value>
+  </data>
   <data name="PIF_IS_PHYSICAL" xml:space="preserve">
     <value>您尝试销毁 PIF {0}，但其表示某一方面的物理服务器配置，因此无法破坏。 </value>
+  </data>
+  <data name="PIF_IS_SRIOV_LOGICAL" xml:space="preserve">
+    <value>您尝试在网络 SR-IOV 逻辑 PIF 的基础上创建绑定 - 请改为使用底层物理 PIF</value>
   </data>
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>您尝试在另一个 VLAN 之上创建 VLAN - 请改用基础物理 PIF/绑定</value>
   </data>
   <data name="PIF_NOT_PRESENT" xml:space="preserve">
     <value>此主机在给定的网络中没有 PIF。</value>
+  </data>
+  <data name="PIF_SRIOV_STILL_EXISTS" xml:space="preserve">
+    <value>此 PIF 仍与网络 SR-IOV 有关</value>
   </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>此接口上存在隧道时，无法继续执行操作。</value>
@@ -868,7 +955,7 @@
     <value>已禁用外部身份验证，错误消息如下: 由于凭据无效，因此未在 AD 服务器上禁用某些 AD 计算机帐户。</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED" xml:space="preserve">
-    <value>无法启用外部身份验证: {1}</value>
+    <value>无法启用外部身份验证。</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
     <value>此服务器无法与域服务器联系以启用外部身份验证。请检查您的设置是否正确以及是否存在到服务器的路由。</value>
@@ -896,6 +983,9 @@
   </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
     <value>加入池的主机不得具有任何绑定。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_NETWORK_SRIOVS" xml:space="preserve">
+    <value>加入池的主机不得有任何网络 SR-IOV。</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS" xml:space="preserve">
     <value>加入池的主机不得具有任何非管理 VLAN。</value>
@@ -1631,6 +1721,9 @@
   <data name="SR_REQUIRES_UPGRADE" xml:space="preserve">
     <value>升级 SR 前无法执行该操作</value>
   </data>
+  <data name="SR_SOURCE_SPACE_INSUFFICIENT" xml:space="preserve">
+    <value>源 SR 的可用临时空间不足，无法继续执行此操作。</value>
+  </data>
   <data name="SR_UNKNOWN_DRIVER" xml:space="preserve">
     <value>无法连接 SR，因为无法识别驱动程序 {0}。</value>
   </data>
@@ -1984,6 +2077,9 @@
   </data>
   <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
     <value>指定 VM 的内存过少，无法启动。</value>
+  </data>
+  <data name="VM_MIGRATE_CONTACT_REMOTE_SERVICE_FAILED" xml:space="preserve">
+    <value>无法联系目标主机上的服务。</value>
   </data>
   <data name="VM_MIGRATE_FAILED" xml:space="preserve">
     <value>VM 迁移失败: {3}</value>

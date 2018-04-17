@@ -72,10 +72,8 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             if (direction == PageLoadedDirection.Forward)
             {
                 ShowWarning(null);
@@ -157,7 +155,7 @@ namespace XenAdmin.Wizards.ImportWizard
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
-        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item)
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem item, List<string> vmOpaqueRefs)
         {
             var filters = new List<ReasoningFilter>();
 

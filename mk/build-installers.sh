@@ -1,33 +1,33 @@
 #!/bin/bash
 
-# Copyright (c) Citrix Systems, Inc. 
+# Copyright (c) Citrix Systems, Inc.
 # All rights reserved.
-# 
-# Redistribution and use in source and binary forms, 
-# with or without modification, are permitted provided 
-# that the following conditions are met: 
-# 
-# *   Redistributions of source code must retain the above 
-#     copyright notice, this list of conditions and the 
-#     following disclaimer. 
-# *   Redistributions in binary form must reproduce the above 
-#     copyright notice, this list of conditions and the 
-#     following disclaimer in the documentation and/or other 
-#     materials provided with the distribution. 
-# 
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
-# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
-# INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
-# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
-# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
-# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
-# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+#
+# Redistribution and use in source and binary forms,
+# with or without modification, are permitted provided
+# that the following conditions are met:
+#
+# *   Redistributions of source code must retain the above
+#     copyright notice, this list of conditions and the
+#     following disclaimer.
+# *   Redistributions in binary form must reproduce the above
+#     copyright notice, this list of conditions and the
+#     following disclaimer in the documentation and/or other
+#     materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+# CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+# INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
 set -eu
@@ -48,15 +48,16 @@ do
   cd ${REPO}/XenAdmin/ReportViewer && ${REPO}/mk/sign.bat ${file}
 done
 
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET by Charles Cook, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat log4net.dll  "Log4Net by The Apache Software Foundation, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib by IC#Code, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat DiscUtils.dll "DiscUtils by Kenneth Bell, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Ionic.Zip.dll "OSS, signed by ${BRANDING_COMPANY_NAME_SHORT}"
-cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat putty.exe "PuTTY by Simon Tatham, signed by ${BRANDING_COMPANY_NAME_SHORT}"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat CookComputing.XmlRpcV2.dll "XML-RPC.NET"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Newtonsoft.Json.dll "JSON.NET"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat log4net.dll "Log4Net"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat ICSharpCode.SharpZipLib.dll "SharpZipLib"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat DiscUtils.dll "DiscUtils"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat Ionic.Zip.dll "OSS"
+cd ${REPO}/XenAdmin/bin/Release && ${REPO}/mk/sign.bat putty.exe "PuTTY"
 
 #copy signed files in XenServerHealthService folder
-cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
+cp ${REPO}/XenAdmin/bin/Release/{CommandLib.dll,XenCenterLib.dll,XenModel.dll,CookComputing.XmlRpcV2.dll,Newtonsoft.Json.dll,log4net.dll,ICSharpCode.SharpZipLib.dll,Ionic.Zip.dll} \
    ${REPO}/XenServerHealthCheck/bin/Release
 
 #sign XenServerHealthService
@@ -77,13 +78,13 @@ compile_installer()
     langid=1033
     name=$1
   fi
-   
+
   cd ${WIX}
   mkdir -p obj${name}
   Branding=${BRANDING_BRAND_CONSOLE} WixLangId=${langid} ${CANDLE} -ext WiXNetFxExtension -out obj${name}/ $1.wxs
-   
+
   mkdir -p out${name}
-  
+
 ${LIGHT} -nologo obj${name}/$1.wixobj lib/WixUI_InstallDir.wixlib -loc wixlib/wixui_$2.wxl -loc $2.wxl -ext WiXNetFxExtension -out out${name}/${name}.msi
 }
 
@@ -94,7 +95,7 @@ sign_msi()
 
 #create just english msi
 if [ "XenCenter" != "${BRANDING_BRAND_CONSOLE}" ]
-then 
+then
   cd ${WIX}
   mv XenCenter.wxs ${BRANDING_BRAND_CONSOLE}.wxs
   mv XenCenter.l10n.wxs ${BRANDING_BRAND_CONSOLE}.l10n.wxs
@@ -111,7 +112,7 @@ cp ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n/${BRANDING_BRAND_CONSOLE}.l10n.msi \
    ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.ja-jp/${BRANDING_BRAND_CONSOLE}.l10n.ja-jp.msi \
    ${WIX}/out${BRANDING_BRAND_CONSOLE}.l10n.zh-cn/${BRANDING_BRAND_CONSOLE}.l10n.zh-cn.msi \
    ${WIX}
- 
+
 cd ${WIX} && cp ${BRANDING_BRAND_CONSOLE}.l10n.msi ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
 cd ${WIX} && cscript /nologo CodePageChange.vbs ZH-TW ${BRANDING_BRAND_CONSOLE}.l10n.zh-tw.msi
 

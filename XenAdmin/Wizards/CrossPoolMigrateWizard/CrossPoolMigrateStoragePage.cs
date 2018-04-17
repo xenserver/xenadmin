@@ -62,10 +62,20 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return sr != null && !sr.HBALunPerVDI();
         }
 
-        /// <summary>
-        /// Gets the page's title (headline)
-        /// </summary>
-        public override string PageTitle { get { return Messages.CPM_WIZARD_SELECT_STORAGE_PAGE_TITLE; } }
+	    protected override bool IsExtraSpaceNeeded(XenRef<SR> sourceRef, XenRef<SR> targetRef)
+	    {
+			// No extra space is needed for Migrate or Move operation on same SR.
+			if (targetRef.Equals(sourceRef) &&
+				((wizardMode == WizardMode.Migrate) || (wizardMode == WizardMode.Move)))
+				return false;
+			else
+				return true;
+	    }
+
+		/// <summary>
+		/// Gets the page's title (headline)
+		/// </summary>
+		public override string PageTitle { get { return Messages.CPM_WIZARD_SELECT_STORAGE_PAGE_TITLE; } }
 
         /// <summary>
         /// Gets the page's label in the (left hand side) wizard progress panel
@@ -93,7 +103,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return new CrossPoolMigrationStorageResourceContainer(vdis);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (!CrossPoolMigrateWizard.AllVMsAvailable(VmMappings, Connection))
             {
@@ -101,8 +111,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 SetButtonNextEnabled(false);
                 SetButtonPreviousEnabled(false);
             }
-
-            base.PageLeave(direction, ref cancel);
         }
 
         protected override string VmDiskColumnHeaderText

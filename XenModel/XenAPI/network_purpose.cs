@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(network_purposeConverter))]
     public enum network_purpose
     {
         nbd, insecure_nbd, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class network_purpose_helper
     {
         public static string ToString(network_purpose x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this network_purpose x)
         {
             switch (x)
             {
@@ -53,6 +61,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class network_purposeConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((network_purpose)value).StringOf());
         }
     }
 }

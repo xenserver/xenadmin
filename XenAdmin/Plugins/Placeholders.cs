@@ -35,6 +35,7 @@ using System.Text.RegularExpressions;
 using XenCenterLib;
 using XenAdmin.XenSearch;
 using XenAPI;
+using System.Net.Sockets;
 
 namespace XenAdmin.Plugins
 {
@@ -80,7 +81,7 @@ namespace XenAdmin.Plugins
                     {
                         return NULL_PLACEHOLDER_KEY;
                     }
-                    return objs[0].Connection.Session.uuid;
+                    return objs[0].Connection.Session.opaque_ref;
                 }
                 else
                 {
@@ -168,7 +169,7 @@ namespace XenAdmin.Plugins
         /// Since ip_address can take several values over different Networks, this method returns a list of Uri for
         /// each of the different IP addresses.
         /// </summary>
-        /// <param name="text">The text that contains the placeholders to be replaced.</param>
+        /// <param name="uri">The text that contains the placeholders to be replaced.</param>
         /// <param name="obj">The object that the placeholder replacements are for.</param>
         /// <returns>A List of Uris.</returns>
         public static List<Uri> SubstituteUri(string uri, IXenObject obj)
@@ -191,7 +192,14 @@ namespace XenAdmin.Plugins
                     return new List<Uri> { new Uri(u) };
                 }
 
-                return ips.ConvertAll(ip => new Uri(u.Replace(string.Format(PlaceholderFormat, ipAddressName), ip.ToString())));
+                return ips.ConvertAll(ip =>
+                {
+                    var ipstring = ip.AddressIP != null && ip.AddressIP.AddressFamily == AddressFamily.InterNetworkV6
+                        ? string.Format("[{0}]", ip)
+                        : ip.ToString();
+
+                    return new Uri(u.Replace(string.Format(PlaceholderFormat, ipAddressName), ipstring));
+                });
             }
             catch (UriFormatException)
             {

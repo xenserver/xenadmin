@@ -77,15 +77,13 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
             return false;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             if (direction == PageLoadedDirection.Forward)
                 RunAction(CapabilityList, SelectedHosts);
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (OutputFolder == null)
             {
@@ -100,7 +98,6 @@ namespace XenAdmin.Wizards.BugToolWizardFiles
                         cancel = true;
                 }
             }
-            base.PageLeave(direction, ref cancel);
         }
 
         public override void PageCancelled()

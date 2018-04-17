@@ -52,7 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             List<VM> vmObjs = new List<VM>();
             foreach (XenRef<VM> vm in _vms)
-                vmObjs.Add(TryResolveWithTimeout(vm));
+                vmObjs.Add(Connection.TryResolveWithTimeout(vm));
 
             PBD.CheckAndPlugPBDsFor(vmObjs);
 

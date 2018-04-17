@@ -186,6 +186,12 @@
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot have a tunnel on it.</value>
   </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
+    <value>This is a network SR-IOV logical PIF and cannot have a tunnel on it.</value>
+  </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_VLAN_ON_SRIOV_LOGICAL" xml:space="preserve">
+    <value>This is a vlan PIF on network SR-IOV and cannot have a tunnel on it.</value>
+  </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot have a VLAN on it.</value>
   </data>
@@ -225,6 +231,9 @@
   <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
     <value>The requested update could not be found. Please upload the update again. This can occur when you run xe update-pool-clean before xe update-apply. </value>
   </data>
+  <data name="CANNOT_FORGET_SRIOV_LOGICAL" xml:space="preserve">
+    <value>This is a network SR-IOV logical PIF and cannot do forget on it</value>
+  </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>This PIF is a bond slave and cannot be plugged.</value>
   </data>
@@ -254,6 +263,30 @@
   </data>
   <data name="CLUSTERED_SR_DEGRADED" xml:space="preserve">
     <value>An SR is using clustered local storage. It is not safe to reboot a host at the moment.</value>
+  </data>
+  <data name="CLUSTERING_DISABLED" xml:space="preserve">
+    <value>An operation was attempted while clustering was disabled on the cluster_host.</value>
+  </data>
+  <data name="CLUSTERING_ENABLED" xml:space="preserve">
+    <value>An operation was attempted while clustering was enabled on the cluster_host.</value>
+  </data>
+  <data name="CLUSTERING_ENABLED_ON_NETWORK" xml:space="preserve">
+    <value>The network has cluster objects attached.</value>
+  </data>
+  <data name="CLUSTER_ALREADY_EXISTS" xml:space="preserve">
+    <value>A cluster already exists in the pool.</value>
+  </data>
+  <data name="CLUSTER_CREATE_IN_PROGRESS" xml:space="preserve">
+    <value>The operation could not be performed because cluster creation is in progress.</value>
+  </data>
+  <data name="CLUSTER_DOES_NOT_HAVE_ONE_NODE" xml:space="preserve">
+    <value>The cluster does not have only one node.</value>
+  </data>
+  <data name="CLUSTER_FORCE_DESTROY_FAILED" xml:space="preserve">
+    <value>Force destroy failed on a Cluster_host while force destroying the cluster.</value>
+  </data>
+  <data name="CLUSTER_STACK_IN_USE" xml:space="preserve">
+    <value>The cluster stack is already in use.</value>
   </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>Could not find a network interface with the specified device name and MAC address.</value>
@@ -460,7 +493,7 @@
     <value>The server failed to acquire an IP address on its management interface and therefore cannot contact the master.</value>
   </data>
   <data name="HOST_HAS_RESIDENT_VMS" xml:space="preserve">
-    <value>This server can not be forgotten because there are some user VMs still running</value>
+    <value>This server cannot be forgotten because there are some user VMs still running</value>
   </data>
   <data name="HOST_IN_EMERGENCY_MODE" xml:space="preserve">
     <value>This server is in emergency mode</value>
@@ -547,7 +580,7 @@
     <value>This operation cannot be performed, because it is incompatible with the currently active HA cluster stack.</value>
   </data>
   <data name="INCOMPATIBLE_PIF_PROPERTIES" xml:space="preserve">
-    <value>These PIFs can not be bonded, because their properties are different.</value>
+    <value>These PIFs cannot be bonded, because their properties are different.</value>
   </data>
   <data name="INCOMPATIBLE_STATEFILE_SR" xml:space="preserve">
     <value>The specified SR is incompatible with the selected HA cluster stack.</value>
@@ -690,8 +723,41 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>The network contains active VIFs ({0}) and cannot be deleted.</value>
   </data>
+  <data name="NETWORK_HAS_INCOMPATIBLE_SRIOV_PIFS" xml:space="preserve">
+    <value>The PIF is not compatible with the selected SR-IOV network</value>
+  </data>
+  <data name="NETWORK_HAS_INCOMPATIBLE_VLAN_ON_SRIOV_PIFS" xml:space="preserve">
+    <value>VLAN on the PIF is not compatible with the selected SR-IOV VLAN network</value>
+  </data>
   <data name="NETWORK_INCOMPATIBLE_PURPOSES" xml:space="preserve">
     <value>You tried to add a purpose to a network but the new purpose is not compatible with an existing purpose of the network or other networks.</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_BOND" xml:space="preserve">
+    <value>The network is incompatible with bond</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_SRIOV" xml:space="preserve">
+    <value>The network is incompatible with sriov</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_TUNNEL" xml:space="preserve">
+    <value>The network is incompatible with tunnel</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_VLAN_ON_BRIDGE" xml:space="preserve">
+    <value>The network is incompatible with vlan on bridge</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_VLAN_ON_SRIOV" xml:space="preserve">
+    <value>The network is incompatible with vlan on sriov</value>
+  </data>
+  <data name="NETWORK_SRIOV_ALREADY_ENABLED" xml:space="preserve">
+    <value>The PIF selected for the SR-IOV network is already enabled</value>
+  </data>
+  <data name="NETWORK_SRIOV_DISABLE_FAILED" xml:space="preserve">
+    <value>Failed to disable SR-IOV on PIF</value>
+  </data>
+  <data name="NETWORK_SRIOV_ENABLE_FAILED" xml:space="preserve">
+    <value>Failed to enable SR-IOV on PIF</value>
+  </data>
+  <data name="NETWORK_SRIOV_INSUFFICIENT_CAPACITY" xml:space="preserve">
+    <value>There is insufficient capacity for VF reservation</value>
   </data>
   <data name="NETWORK_UNMANAGED" xml:space="preserve">
     <value>The network is not managed by xapi.</value>
@@ -710,6 +776,9 @@
   </data>
   <data name="NOT_SYSTEM_DOMAIN" xml:space="preserve">
     <value>The given VM is not registered as a system domain. This operation can only be performed on a registered system domain.</value>
+  </data>
+  <data name="NO_COMPATIBLE_CLUSTER_HOST" xml:space="preserve">
+    <value>The host does not have a Cluster_host with a compatible cluster stack.</value>
   </data>
   <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>There were no servers available to complete the specified operation.</value>
@@ -798,6 +867,9 @@
   <data name="PGPU_NOT_COMPATIBLE_WITH_GPU_GROUP" xml:space="preserve">
     <value>GPU type not compatible with destination group.</value>
   </data>
+  <data name="PIF_ALLOWS_UNPLUG" xml:space="preserve">
+    <value>The operation you requested cannot be performed because the specified PIF allows unplug.</value>
+  </data>
   <data name="PIF_ALREADY_BONDED" xml:space="preserve">
     <value>You cannot create a bond of an interface which is a member of an existing bond.</value>
   </data>
@@ -834,14 +906,26 @@
   <data name="PIF_IS_MANAGEMENT_INTERFACE" xml:space="preserve">
     <value>PIF is the management interface.</value>
   </data>
+  <data name="PIF_IS_NOT_PHYSICAL" xml:space="preserve">
+    <value>You tried to perform an operation which is only available on physical PIF</value>
+  </data>
+  <data name="PIF_IS_NOT_SRIOV_CAPABLE" xml:space="preserve">
+    <value>The selected PIF is not capable of network SR-IOV</value>
+  </data>
   <data name="PIF_IS_PHYSICAL" xml:space="preserve">
     <value>You tried to destroy the PIF {0}, but it represents an aspect of the physical server configuration, and so cannot be destroyed. </value>
+  </data>
+  <data name="PIF_IS_SRIOV_LOGICAL" xml:space="preserve">
+    <value>You tried to create a bond on top of a network SR-IOV logical PIF - use the underlying physical PIF instead</value>
   </data>
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>You tried to create a VLAN on top of another VLAN - use the underlying physical PIF/bond instead</value>
   </data>
   <data name="PIF_NOT_PRESENT" xml:space="preserve">
     <value>This host has no PIF on the given network.</value>
+  </data>
+  <data name="PIF_SRIOV_STILL_EXISTS" xml:space="preserve">
+    <value>The PIF is still related with a network SR-IOV</value>
   </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>Operation cannot proceed while a tunnel exists on this interface.</value>
@@ -871,7 +955,7 @@
     <value>External authentication has been disabled with errors: Some AD machine accounts were not disabled on the AD server due to invalid credentials.</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED" xml:space="preserve">
-    <value>Could not enable external authentication: {1}</value>
+    <value>Could not enable external authentication.</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
     <value>The server was unable to contact your domain server to enable external authentication. Check that your settings are correct and a route to the server exists.</value>
@@ -899,6 +983,9 @@
   </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
     <value>The host joining the pool must not have any bonds.</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_NETWORK_SRIOVS" xml:space="preserve">
+    <value>The host joining the pool must not have any network SR-IOVs.</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS" xml:space="preserve">
     <value>The host joining the pool must not have any non-management vlans.</value>
@@ -1634,6 +1721,9 @@ Authorized Roles: {1}</value>
   <data name="SR_REQUIRES_UPGRADE" xml:space="preserve">
     <value>The operation cannot be performed until the SR has been upgraded</value>
   </data>
+  <data name="SR_SOURCE_SPACE_INSUFFICIENT" xml:space="preserve">
+    <value>The source SR does not have sufficient temporary space available to proceed the operation.</value>
+  </data>
   <data name="SR_UNKNOWN_DRIVER" xml:space="preserve">
     <value>The SR could not be connected because the driver {0} was not recognized.</value>
   </data>
@@ -1987,6 +2077,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
     <value>The specified VM has too little memory to be started.</value>
+  </data>
+  <data name="VM_MIGRATE_CONTACT_REMOTE_SERVICE_FAILED" xml:space="preserve">
+    <value>Failed to contact service on the destination host.</value>
   </data>
   <data name="VM_MIGRATE_FAILED" xml:space="preserve">
     <value>VM migration failed: {3}</value>

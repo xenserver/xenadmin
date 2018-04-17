@@ -38,7 +38,7 @@ using CookComputing.XmlRpc;
 
 namespace XenAPI
 {
-    public partial interface Proxy : IXmlRpcProxy
+    public interface Proxy : IXmlRpcProxy
     {
         [XmlRpcMethod("event.get_record")]
         Response<Proxy_Event>
@@ -1680,6 +1680,10 @@ namespace XenAPI
         Response<string>
         vm_get_reference_label(string session, string _vm);
 
+        [XmlRpcMethod("VM.get_domain_type")]
+        Response<string>
+        vm_get_domain_type(string session, string _vm);
+
         [XmlRpcMethod("VM.set_name_label")]
         Response<string>
         vm_set_name_label(string session, string _vm, string _label);
@@ -1720,10 +1724,6 @@ namespace XenAPI
         Response<string>
         vm_set_actions_after_reboot(string session, string _vm, string _after_reboot);
 
-        [XmlRpcMethod("VM.set_actions_after_crash")]
-        Response<string>
-        vm_set_actions_after_crash(string session, string _vm, string _after_crash);
-
         [XmlRpcMethod("VM.set_PV_bootloader")]
         Response<string>
         vm_set_pv_bootloader(string session, string _vm, string _bootloader);
@@ -1747,10 +1747,6 @@ namespace XenAPI
         [XmlRpcMethod("VM.set_PV_legacy_args")]
         Response<string>
         vm_set_pv_legacy_args(string session, string _vm, string _legacy_args);
-
-        [XmlRpcMethod("VM.set_HVM_boot_policy")]
-        Response<string>
-        vm_set_hvm_boot_policy(string session, string _vm, string _boot_policy);
 
         [XmlRpcMethod("VM.set_HVM_boot_params")]
         Response<string>
@@ -2408,6 +2404,22 @@ namespace XenAPI
         Response<string>
         async_vm_import(string session, string _url, string _sr, bool _full_restore, bool _force);
 
+        [XmlRpcMethod("VM.set_actions_after_crash")]
+        Response<string>
+        vm_set_actions_after_crash(string session, string _vm, string _value);
+
+        [XmlRpcMethod("Async.VM.set_actions_after_crash")]
+        Response<string>
+        async_vm_set_actions_after_crash(string session, string _vm, string _value);
+
+        [XmlRpcMethod("VM.set_domain_type")]
+        Response<string>
+        vm_set_domain_type(string session, string _vm, string _value);
+
+        [XmlRpcMethod("VM.set_HVM_boot_policy")]
+        Response<string>
+        vm_set_hvm_boot_policy(string session, string _vm, string _value);
+
         [XmlRpcMethod("VM.get_all")]
         Response<string []>
         vm_get_all(string session);
@@ -2483,6 +2495,10 @@ namespace XenAPI
         [XmlRpcMethod("VM_metrics.get_nomigrate")]
         Response<bool>
         vm_metrics_get_nomigrate(string session, string _vm_metrics);
+
+        [XmlRpcMethod("VM_metrics.get_current_domain_type")]
+        Response<string>
+        vm_metrics_get_current_domain_type(string session, string _vm_metrics);
 
         [XmlRpcMethod("VM_metrics.set_other_config")]
         Response<string>
@@ -3328,6 +3344,14 @@ namespace XenAPI
         Response<string []>
         host_get_features(string session, string _host);
 
+        [XmlRpcMethod("host.get_iscsi_iqn")]
+        Response<string>
+        host_get_iscsi_iqn(string session, string _host);
+
+        [XmlRpcMethod("host.get_multipathing")]
+        Response<bool>
+        host_get_multipathing(string session, string _host);
+
         [XmlRpcMethod("host.set_name_label")]
         Response<string>
         host_set_name_label(string session, string _host, string _label);
@@ -3807,6 +3831,22 @@ namespace XenAPI
         [XmlRpcMethod("Async.host.set_ssl_legacy")]
         Response<string>
         async_host_set_ssl_legacy(string session, string _host, bool _value);
+
+        [XmlRpcMethod("host.set_iscsi_iqn")]
+        Response<string>
+        host_set_iscsi_iqn(string session, string _host, string _value);
+
+        [XmlRpcMethod("Async.host.set_iscsi_iqn")]
+        Response<string>
+        async_host_set_iscsi_iqn(string session, string _host, string _value);
+
+        [XmlRpcMethod("host.set_multipathing")]
+        Response<string>
+        host_set_multipathing(string session, string _host, bool _value);
+
+        [XmlRpcMethod("Async.host.set_multipathing")]
+        Response<string>
+        async_host_set_multipathing(string session, string _host, bool _value);
 
         [XmlRpcMethod("host.get_all")]
         Response<string []>
@@ -4732,6 +4772,18 @@ namespace XenAPI
         Response<string>
         pif_get_igmp_snooping_status(string session, string _pif);
 
+        [XmlRpcMethod("PIF.get_sriov_physical_PIF_of")]
+        Response<string []>
+        pif_get_sriov_physical_pif_of(string session, string _pif);
+
+        [XmlRpcMethod("PIF.get_sriov_logical_PIF_of")]
+        Response<string []>
+        pif_get_sriov_logical_pif_of(string session, string _pif);
+
+        [XmlRpcMethod("PIF.get_PCI")]
+        Response<string>
+        pif_get_pci(string session, string _pif);
+
         [XmlRpcMethod("PIF.set_other_config")]
         Response<string>
         pif_set_other_config(string session, string _pif, Object _other_config);
@@ -4743,10 +4795,6 @@ namespace XenAPI
         [XmlRpcMethod("PIF.remove_from_other_config")]
         Response<string>
         pif_remove_from_other_config(string session, string _pif, string _key);
-
-        [XmlRpcMethod("PIF.set_disallow_unplug")]
-        Response<string>
-        pif_set_disallow_unplug(string session, string _pif, bool _disallow_unplug);
 
         [XmlRpcMethod("PIF.create_VLAN")]
         Response<string>
@@ -4827,6 +4875,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.PIF.unplug")]
         Response<string>
         async_pif_unplug(string session, string _pif);
+
+        [XmlRpcMethod("PIF.set_disallow_unplug")]
+        Response<string>
+        pif_set_disallow_unplug(string session, string _pif, bool _value);
+
+        [XmlRpcMethod("Async.PIF.set_disallow_unplug")]
+        Response<string>
+        async_pif_set_disallow_unplug(string session, string _pif, bool _value);
 
         [XmlRpcMethod("PIF.plug")]
         Response<string>
@@ -5456,6 +5512,14 @@ namespace XenAPI
         Response<string>
         async_sr_probe(string session, string _host, Object _device_config, string _type, Object _sm_config);
 
+        [XmlRpcMethod("SR.probe_ext")]
+        Response<Proxy_Probe_result[]>
+        sr_probe_ext(string session, string _host, Object _device_config, string _type, Object _sm_config);
+
+        [XmlRpcMethod("Async.SR.probe_ext")]
+        Response<string>
+        async_sr_probe_ext(string session, string _host, Object _device_config, string _type, Object _sm_config);
+
         [XmlRpcMethod("SR.set_shared")]
         Response<string>
         sr_set_shared(string session, string _sr, bool _value);
@@ -5563,6 +5627,14 @@ namespace XenAPI
         [XmlRpcMethod("SR.get_all_records")]
         Response<Object>
         sr_get_all_records(string session);
+
+        [XmlRpcMethod("sr_stat.get_all_records")]
+        Response<Object>
+        sr_stat_get_all_records(string session);
+
+        [XmlRpcMethod("probe_result.get_all_records")]
+        Response<Object>
+        probe_result_get_all_records(string session);
 
         [XmlRpcMethod("LVHD.get_record")]
         Response<Proxy_LVHD>
@@ -6164,10 +6236,6 @@ namespace XenAPI
         Response<string>
         vbd_set_bootable(string session, string _vbd, bool _bootable);
 
-        [XmlRpcMethod("VBD.set_mode")]
-        Response<string>
-        vbd_set_mode(string session, string _vbd, string _mode);
-
         [XmlRpcMethod("VBD.set_type")]
         Response<string>
         vbd_set_type(string session, string _vbd, string _type);
@@ -6251,6 +6319,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.VBD.assert_attachable")]
         Response<string>
         async_vbd_assert_attachable(string session, string _vbd);
+
+        [XmlRpcMethod("VBD.set_mode")]
+        Response<string>
+        vbd_set_mode(string session, string _vbd, string _value);
+
+        [XmlRpcMethod("Async.VBD.set_mode")]
+        Response<string>
+        async_vbd_set_mode(string session, string _vbd, string _value);
 
         [XmlRpcMethod("VBD.get_all")]
         Response<string []>
@@ -6864,6 +6940,66 @@ namespace XenAPI
         Response<Object>
         tunnel_get_all_records(string session);
 
+        [XmlRpcMethod("network_sriov.get_record")]
+        Response<Proxy_Network_sriov>
+        network_sriov_get_record(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_by_uuid")]
+        Response<string>
+        network_sriov_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("network_sriov.get_uuid")]
+        Response<string>
+        network_sriov_get_uuid(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_physical_PIF")]
+        Response<string>
+        network_sriov_get_physical_pif(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_logical_PIF")]
+        Response<string>
+        network_sriov_get_logical_pif(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_requires_reboot")]
+        Response<bool>
+        network_sriov_get_requires_reboot(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_configuration_mode")]
+        Response<string>
+        network_sriov_get_configuration_mode(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.create")]
+        Response<string>
+        network_sriov_create(string session, string _pif, string _network);
+
+        [XmlRpcMethod("Async.network_sriov.create")]
+        Response<string>
+        async_network_sriov_create(string session, string _pif, string _network);
+
+        [XmlRpcMethod("network_sriov.destroy")]
+        Response<string>
+        network_sriov_destroy(string session, string _network_sriov);
+
+        [XmlRpcMethod("Async.network_sriov.destroy")]
+        Response<string>
+        async_network_sriov_destroy(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_remaining_capacity")]
+        Response<string>
+        network_sriov_get_remaining_capacity(string session, string _network_sriov);
+
+        [XmlRpcMethod("Async.network_sriov.get_remaining_capacity")]
+        Response<string>
+        async_network_sriov_get_remaining_capacity(string session, string _network_sriov);
+
+        [XmlRpcMethod("network_sriov.get_all")]
+        Response<string []>
+        network_sriov_get_all(string session);
+
+        [XmlRpcMethod("network_sriov.get_all_records")]
+        Response<Object>
+        network_sriov_get_all_records(string session);
+
         [XmlRpcMethod("PCI.get_record")]
         Response<Proxy_PCI>
         pci_get_record(string session, string _pci);
@@ -6911,6 +7047,10 @@ namespace XenAPI
         [XmlRpcMethod("PCI.get_subsystem_device_name")]
         Response<string>
         pci_get_subsystem_device_name(string session, string _pci);
+
+        [XmlRpcMethod("PCI.get_driver_name")]
+        Response<string>
+        pci_get_driver_name(string session, string _pci);
 
         [XmlRpcMethod("PCI.set_other_config")]
         Response<string>
@@ -7215,6 +7355,10 @@ namespace XenAPI
         [XmlRpcMethod("VGPU.get_scheduled_to_be_resident_on")]
         Response<string>
         vgpu_get_scheduled_to_be_resident_on(string session, string _vgpu);
+
+        [XmlRpcMethod("VGPU.get_compatibility_metadata")]
+        Response<Object>
+        vgpu_get_compatibility_metadata(string session, string _vgpu);
 
         [XmlRpcMethod("VGPU.set_other_config")]
         Response<string>
@@ -7931,6 +8075,214 @@ namespace XenAPI
         [XmlRpcMethod("VUSB.get_all_records")]
         Response<Object>
         vusb_get_all_records(string session);
+
+        [XmlRpcMethod("Cluster.get_record")]
+        Response<Proxy_Cluster>
+        cluster_get_record(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_by_uuid")]
+        Response<string>
+        cluster_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("Cluster.get_uuid")]
+        Response<string>
+        cluster_get_uuid(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_cluster_hosts")]
+        Response<string []>
+        cluster_get_cluster_hosts(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_network")]
+        Response<string>
+        cluster_get_network(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_cluster_token")]
+        Response<string>
+        cluster_get_cluster_token(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_cluster_stack")]
+        Response<string>
+        cluster_get_cluster_stack(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_allowed_operations")]
+        Response<string []>
+        cluster_get_allowed_operations(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_current_operations")]
+        Response<Object>
+        cluster_get_current_operations(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_pool_auto_join")]
+        Response<bool>
+        cluster_get_pool_auto_join(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_token_timeout")]
+        Response<string>
+        cluster_get_token_timeout(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_token_timeout_coefficient")]
+        Response<string>
+        cluster_get_token_timeout_coefficient(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_cluster_config")]
+        Response<Object>
+        cluster_get_cluster_config(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_other_config")]
+        Response<Object>
+        cluster_get_other_config(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.set_other_config")]
+        Response<string>
+        cluster_set_other_config(string session, string _cluster, Object _other_config);
+
+        [XmlRpcMethod("Cluster.add_to_other_config")]
+        Response<string>
+        cluster_add_to_other_config(string session, string _cluster, string _key, string _value);
+
+        [XmlRpcMethod("Cluster.remove_from_other_config")]
+        Response<string>
+        cluster_remove_from_other_config(string session, string _cluster, string _key);
+
+        [XmlRpcMethod("Cluster.create")]
+        Response<string>
+        cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient);
+
+        [XmlRpcMethod("Async.Cluster.create")]
+        Response<string>
+        async_cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient);
+
+        [XmlRpcMethod("Cluster.destroy")]
+        Response<string>
+        cluster_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Async.Cluster.destroy")]
+        Response<string>
+        async_cluster_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.pool_create")]
+        Response<string>
+        cluster_pool_create(string session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient);
+
+        [XmlRpcMethod("Async.Cluster.pool_create")]
+        Response<string>
+        async_cluster_pool_create(string session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient);
+
+        [XmlRpcMethod("Cluster.pool_force_destroy")]
+        Response<string>
+        cluster_pool_force_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Async.Cluster.pool_force_destroy")]
+        Response<string>
+        async_cluster_pool_force_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.pool_destroy")]
+        Response<string>
+        cluster_pool_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Async.Cluster.pool_destroy")]
+        Response<string>
+        async_cluster_pool_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.pool_resync")]
+        Response<string>
+        cluster_pool_resync(string session, string _cluster);
+
+        [XmlRpcMethod("Async.Cluster.pool_resync")]
+        Response<string>
+        async_cluster_pool_resync(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_all")]
+        Response<string []>
+        cluster_get_all(string session);
+
+        [XmlRpcMethod("Cluster.get_all_records")]
+        Response<Object>
+        cluster_get_all_records(string session);
+
+        [XmlRpcMethod("Cluster_host.get_record")]
+        Response<Proxy_Cluster_host>
+        cluster_host_get_record(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.get_by_uuid")]
+        Response<string>
+        cluster_host_get_by_uuid(string session, string _uuid);
+
+        [XmlRpcMethod("Cluster_host.get_uuid")]
+        Response<string>
+        cluster_host_get_uuid(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.get_cluster")]
+        Response<string>
+        cluster_host_get_cluster(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.get_host")]
+        Response<string>
+        cluster_host_get_host(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.get_enabled")]
+        Response<bool>
+        cluster_host_get_enabled(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.get_allowed_operations")]
+        Response<string []>
+        cluster_host_get_allowed_operations(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.get_current_operations")]
+        Response<Object>
+        cluster_host_get_current_operations(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.get_other_config")]
+        Response<Object>
+        cluster_host_get_other_config(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.create")]
+        Response<string>
+        cluster_host_create(string session, string _cluster, string _host);
+
+        [XmlRpcMethod("Async.Cluster_host.create")]
+        Response<string>
+        async_cluster_host_create(string session, string _cluster, string _host);
+
+        [XmlRpcMethod("Cluster_host.destroy")]
+        Response<string>
+        cluster_host_destroy(string session, string _cluster_host);
+
+        [XmlRpcMethod("Async.Cluster_host.destroy")]
+        Response<string>
+        async_cluster_host_destroy(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.enable")]
+        Response<string>
+        cluster_host_enable(string session, string _cluster_host);
+
+        [XmlRpcMethod("Async.Cluster_host.enable")]
+        Response<string>
+        async_cluster_host_enable(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.force_destroy")]
+        Response<string>
+        cluster_host_force_destroy(string session, string _cluster_host);
+
+        [XmlRpcMethod("Async.Cluster_host.force_destroy")]
+        Response<string>
+        async_cluster_host_force_destroy(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.disable")]
+        Response<string>
+        cluster_host_disable(string session, string _cluster_host);
+
+        [XmlRpcMethod("Async.Cluster_host.disable")]
+        Response<string>
+        async_cluster_host_disable(string session, string _cluster_host);
+
+        [XmlRpcMethod("Cluster_host.get_all")]
+        Response<string []>
+        cluster_host_get_all(string session);
+
+        [XmlRpcMethod("Cluster_host.get_all_records")]
+        Response<Object>
+        cluster_host_get_all_records(string session);
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8156,6 +8508,7 @@ namespace XenAPI
         public bool has_vendor_device;
         public bool requires_reboot;
         public string reference_label;
+        public string domain_type;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8176,6 +8529,7 @@ namespace XenAPI
         public bool hvm;
         public bool nested_virt;
         public bool nomigrate;
+        public string current_domain_type;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8314,6 +8668,8 @@ namespace XenAPI
         public string control_domain;
         public string [] updates_requiring_reboot;
         public string [] features;
+        public string iscsi_iqn;
+        public bool multipathing;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8468,6 +8824,9 @@ namespace XenAPI
         public Object properties;
         public string [] capabilities;
         public string igmp_snooping_status;
+        public string [] sriov_physical_PIF_of;
+        public string [] sriov_logical_PIF_of;
+        public string PCI;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8554,6 +8913,27 @@ namespace XenAPI
         public string introduced_by;
         public bool clustered;
         public bool is_tools_sr;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Sr_stat
+    {
+        public string uuid;
+        public string name_label;
+        public string name_description;
+        public string free_space;
+        public string total_space;
+        public bool clustered;
+        public string health;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Probe_result
+    {
+        public Object configuration;
+        public bool complete;
+        public Proxy_Sr_stat sr;
+        public Object extra_info;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8739,6 +9119,16 @@ namespace XenAPI
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Network_sriov
+    {
+        public string uuid;
+        public string physical_PIF;
+        public string logical_PIF;
+        public bool requires_reboot;
+        public string configuration_mode;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
     public class Proxy_PCI
     {
         public string uuid;
@@ -8751,6 +9141,7 @@ namespace XenAPI
         public Object other_config;
         public string subsystem_vendor_name;
         public string subsystem_device_name;
+        public string driver_name;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8797,6 +9188,7 @@ namespace XenAPI
         public string type;
         public string resident_on;
         public string scheduled_to_be_resident_on;
+        public Object compatibility_metadata;
     }
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -8932,6 +9324,35 @@ namespace XenAPI
         public string USB_group;
         public Object other_config;
         public bool currently_attached;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Cluster
+    {
+        public string uuid;
+        public string [] cluster_hosts;
+        public string network;
+        public string cluster_token;
+        public string cluster_stack;
+        public string [] allowed_operations;
+        public Object current_operations;
+        public bool pool_auto_join;
+        public string token_timeout;
+        public string token_timeout_coefficient;
+        public Object cluster_config;
+        public Object other_config;
+    }
+
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
+    public class Proxy_Cluster_host
+    {
+        public string uuid;
+        public string cluster;
+        public string host;
+        public bool enabled;
+        public string [] allowed_operations;
+        public Object current_operations;
+        public Object other_config;
     }
 
 }

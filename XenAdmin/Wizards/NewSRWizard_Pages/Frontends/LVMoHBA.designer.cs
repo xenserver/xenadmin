@@ -31,16 +31,16 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LVMoHBA));
             this.labelReattach = new System.Windows.Forms.Label();
             this.dataGridView = new XenAdmin.Controls.DataGridViewEx.DataGridViewEx();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelCreate = new System.Windows.Forms.Label();
-            this.buttonSelectAll = new System.Windows.Forms.Button();
-            this.buttonClearAll = new System.Windows.Forms.Button();
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSerial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelCreate = new System.Windows.Forms.Label();
+            this.buttonSelectAll = new System.Windows.Forms.Button();
+            this.buttonClearAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -69,36 +69,6 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
-            // 
-            // tableLayoutPanel1
-            // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.labelCreate, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelReattach, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.buttonSelectAll, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.buttonClearAll, 1, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // labelCreate
-            // 
-            resources.ApplyResources(this.labelCreate, "labelCreate");
-            this.tableLayoutPanel1.SetColumnSpan(this.labelCreate, 2);
-            this.labelCreate.Name = "labelCreate";
-            // 
-            // buttonSelectAll
-            // 
-            resources.ApplyResources(this.buttonSelectAll, "buttonSelectAll");
-            this.buttonSelectAll.Name = "buttonSelectAll";
-            this.buttonSelectAll.UseVisualStyleBackColor = true;
-            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
-            // 
-            // buttonClearAll
-            // 
-            resources.ApplyResources(this.buttonClearAll, "buttonClearAll");
-            this.buttonClearAll.Name = "buttonClearAll";
-            this.buttonClearAll.UseVisualStyleBackColor = true;
-            this.buttonClearAll.Click += new System.EventHandler(this.buttonClearAll_Click);
             // 
             // colCheck
             // 
@@ -135,6 +105,36 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
             resources.ApplyResources(this.colNic, "colNic");
             this.colNic.Name = "colNic";
             this.colNic.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelCreate, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelReattach, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.buttonSelectAll, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.buttonClearAll, 1, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // labelCreate
+            // 
+            resources.ApplyResources(this.labelCreate, "labelCreate");
+            this.tableLayoutPanel1.SetColumnSpan(this.labelCreate, 2);
+            this.labelCreate.Name = "labelCreate";
+            // 
+            // buttonSelectAll
+            // 
+            resources.ApplyResources(this.buttonSelectAll, "buttonSelectAll");
+            this.buttonSelectAll.Name = "buttonSelectAll";
+            this.buttonSelectAll.UseVisualStyleBackColor = true;
+            this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
+            // 
+            // buttonClearAll
+            // 
+            resources.ApplyResources(this.buttonClearAll, "buttonClearAll");
+            this.buttonClearAll.Name = "buttonClearAll";
+            this.buttonClearAll.UseVisualStyleBackColor = true;
+            this.buttonClearAll.Click += new System.EventHandler(this.buttonClearAll_Click);
             // 
             // LVMoHBA
             // 

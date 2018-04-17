@@ -52,6 +52,9 @@ namespace XenAdmin.Actions
         private readonly List<Host> servers;
 
         private Pool_update poolUpdate = null;
+
+        public Dictionary<Host, SR> SrUploadedUpdates = new Dictionary<Host, SR>();
+
         public Pool_update PoolUpdate
         {
             get { return poolUpdate; }
@@ -160,8 +163,8 @@ namespace XenAdmin.Actions
                 RelatedTask = Task.create(Session, "uploadTask", hostUrl);
 
                 result = HTTPHelper.Put(progressDelegate, GetCancelling, true, Connection, RelatedTask, ref session,  suppPackFilePath, hostUrl,
-                                        (HTTP_actions.put_sss)HTTP_actions.put_import_raw_vdi, 
-                                        session.uuid, vdiRef.opaque_ref);
+                                        (HTTP_actions.put_sss)HTTP_actions.put_import_raw_vdi,
+                                        session.opaque_ref, vdiRef.opaque_ref);
             }
             catch (Exception ex)
             {
@@ -257,6 +260,10 @@ namespace XenAdmin.Actions
 
             totalUploaded++;
             Description = String.Format(Messages.SUPP_PACK_UPLOADED, sr.Name());
+
+            foreach (Host host in servers)
+                SrUploadedUpdates[host] = sr;
+
             return result;
         }
 

@@ -329,6 +329,12 @@ namespace XenOvfTransport
                 {
                     OVF.AddOtherSystemSettingData(ovfEnv, vsId, "hardware_platform_version", vm.hardware_platform_version.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
                 }
+
+                if (!string.IsNullOrEmpty(vm.recommendations))
+                {
+                    OVF.AddOtherSystemSettingData(ovfEnv, vsId, "recommendations", vm.recommendations.ToString(), OVF.GetContentMessage("OTHER_SYSTEM_SETTING_DESCRIPTION_1"));
+                }
+
                 if (vm.has_vendor_device)
                 {
                     //serialise it with a different name to avoid it being deserialised automatically and getting the wrong type

@@ -56,6 +56,15 @@ public class ProduceConsumerQueue
                 worker.Join();
     }
 
+    public void CancelWorkers(bool waitForWorkers)
+    {
+        lock (_locker)
+        {
+            _itemQ.Clear();
+        }
+        StopWorkers(waitForWorkers);
+    }
+
     public void EnqueueItem(Action item)
     {
         lock (_locker)

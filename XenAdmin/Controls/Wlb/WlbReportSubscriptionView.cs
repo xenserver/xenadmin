@@ -184,7 +184,6 @@ namespace XenAdmin.Controls.Wlb
         /// <summary>
         /// Reset subscription view
         /// </summary>
-        /// <param name="enableWlbReportView">WlbReportSubscription instance</param>
         public void ResetSubscriptionView(WlbReportSubscription subscription)
         {
             this.ReportSubscription = subscription;

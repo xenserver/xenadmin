@@ -181,7 +181,7 @@
     <value>6</value>
   </data>
   <data name="quiesceCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 92</value>
+    <value>39, 98</value>
   </data>
   <data name="quiesceCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>419, 34</value>
@@ -268,7 +268,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkpointInfoPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 103</value>
+    <value>178, 103</value>
   </data>
   <data name="checkpointInfoPictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>16, 16</value>

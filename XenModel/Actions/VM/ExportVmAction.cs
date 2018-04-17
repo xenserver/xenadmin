@@ -104,7 +104,7 @@ namespace XenAdmin.Actions
             UriBuilder uriBuilder = new UriBuilder(this.Session.Url);
             uriBuilder.Path = "export";
             uriBuilder.Query = string.Format("session_id={0}&uuid={1}&task_id={2}",
-                Uri.EscapeDataString(this.Session.uuid),
+                Uri.EscapeDataString(this.Session.opaque_ref),
                 Uri.EscapeDataString(this.VM.uuid),
                 Uri.EscapeDataString(this.RelatedTask.opaque_ref));
 

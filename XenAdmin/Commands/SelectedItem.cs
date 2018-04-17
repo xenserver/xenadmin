@@ -58,6 +58,7 @@ namespace XenAdmin.Commands
         /// Initializes a new instance of the <see cref="SelectedItem"/> class.
         /// </summary>
         /// <param name="groupingTag">The grouping tag that is selected.</param>
+        /// <param name="rootNode"></param>
         public SelectedItem(GroupingTag groupingTag, VirtualTreeNode rootNode)
         {
             _groupingTag = groupingTag;
@@ -88,6 +89,7 @@ namespace XenAdmin.Commands
         /// <param name="poolAncestor">The pool ancestor of the xen object in the tree.</param>
         /// <param name="groupAncestor">In Objects view this is the type under which
         /// the object is grouped.</param>
+        /// <param name="rootNode"></param>
         public SelectedItem(IXenObject xenObject, IXenConnection connection, Host hostAncestor,
             Pool poolAncestor, GroupingTag groupAncestor, VirtualTreeNode rootNode)
             : this(xenObject, connection, hostAncestor, poolAncestor)

@@ -2313,6 +2313,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   <data name="CANNOT_ACTIVATE_VD_VM_NEEDS_TOOLS" xml:space="preserve">
     <value>You must install [XenServer product] Tools on VM '{0}' before you can activate this virtual disk for the VM.</value>
   </data>
+  <data name="CANNOT_CHANGE_IP_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>The interface can only be changed when the host is in maintenance mode, because clustering is enabled on {0}.</value>
+  </data>
   <data name="CANNOT_CONFIGURE_JUMBO_DISTURB_MANAGEMENT" xml:space="preserve">
     <value>(The network's MTU cannot be changed because it is in use as the management interface '{0}')</value>
   </data>
@@ -2431,6 +2434,9 @@ Deleting this bond will disrupt traffic through the secondary interface on the b
   </data>
   <data name="CANNOT_PARSE_NODE_PARAM" xml:space="preserve">
     <value>Cannot parse required parameter '{1}' on XML node '{0}'</value>
+  </data>
+  <data name="CANNOT_REMOVE_IP_WHEN_CLUSTERING_ON_NETWORK" xml:space="preserve">
+    <value>This IP address cannot be removed, because clustering is enabled on {0}.</value>
   </data>
   <data name="CANNOT_REMOVE_SL_SERVER" xml:space="preserve">
     <value>This StorageLink server cannot be removed because it is currently in use.</value>
@@ -2561,6 +2567,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHOOSE_ANOTHER_DESTINATION" xml:space="preserve">
     <value>Choose another &amp;destination</value>
   </data>
+  <data name="CHOOSE_SR_PROVISIONING_PAGE_TITLE" xml:space="preserve">
+    <value>Choose the provisioning method</value>
+  </data>
   <data name="CHOOSE_SR_TYPE_PAGE_TITLE" xml:space="preserve">
     <value>Choose the type of new storage</value>
   </data>
@@ -2581,6 +2590,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CLOSE_WIZARD_CLICK_FINISH" xml:space="preserve">
     <value>To close this wizard, click Finish</value>
+  </data>
+  <data name="CLUSTERING" xml:space="preserve">
+    <value>Clustering</value>
   </data>
   <data name="COLLAPSE_CHILDREN" xml:space="preserve">
     <value>&amp;Collapse Children</value>
@@ -4015,11 +4027,17 @@ This will also delete its subfolders.</value>
   <data name="DISABLED" xml:space="preserve">
     <value>Disabled</value>
   </data>
+  <data name="DISABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disabled clustering on {0}.</value>
+  </data>
   <data name="DISABLED_UPDATE_AUTOMATIC_CHECK_WARNING" xml:space="preserve">
     <value>No updates found because automatic checking for updates is disabled.</value>
   </data>
   <data name="DISABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' disabled.</value>
+  </data>
+  <data name="DISABLE_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disable clustering.</value>
   </data>
   <data name="DISABLE_HA" xml:space="preserve">
     <value>Disable HA</value>
@@ -4053,6 +4071,9 @@ This will also delete its subfolders.</value>
   </data>
   <data name="DISABLING_AD_ON" xml:space="preserve">
     <value>Disabling Active Directory Authentication on pool '{0}'</value>
+  </data>
+  <data name="DISABLING_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Disabling clustering on {0}.</value>
   </data>
   <data name="DISABLING_HA" xml:space="preserve">
     <value>Disabling HA</value>
@@ -4796,8 +4817,14 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="ENABLED" xml:space="preserve">
     <value>Enabled</value>
   </data>
+  <data name="ENABLED_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Enabled clustering on {0}.</value>
+  </data>
   <data name="ENABLED_VMSS" xml:space="preserve">
     <value>Snapshot schedule '{0}' enabled.</value>
+  </data>
+  <data name="ENABLE_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Enable clustering.</value>
   </data>
   <data name="ENABLE_HA_ELLIPSIS" xml:space="preserve">
     <value>&amp;Enable HA...</value>
@@ -4828,6 +4855,9 @@ Would you like to eject these ISOs before continuing?</value>
   </data>
   <data name="ENABLING_AD_ON" xml:space="preserve">
     <value>Enabling Active Directory Authentication on pool '{0}'</value>
+  </data>
+  <data name="ENABLING_CLUSTERING_ON_POOL" xml:space="preserve">
+    <value>Enabling clustering on {0}.</value>
   </data>
   <data name="ENABLING_HA" xml:space="preserve">
     <value>Enabling HA</value>
@@ -5129,6 +5159,11 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="EXCEPTION_USER_CANCELLED_MASTER" xml:space="preserve">
     <value>User canceled. Master needs to be upgraded first.</value>
   </data>
+  <data name="EXISTING_SR_FOUND_ON_LUN" xml:space="preserve">
+    <value>An existing {0} SR was found on the selected LUN. Click Reattach to use the existing SR, or click Format to destroy any data present on the disk and create a new {1} SR.
+
+Warning: to prevent data loss you must ensure that the LUN is not in use by any other system, including [XenServer] hosts that are not connected to [XenCenter].</value>
+  </data>
   <data name="EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit &amp;Maintenance Mode</value>
   </data>
@@ -5164,7 +5199,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>Exporting VMs...</value>
   </data>
   <data name="EXPORTVM_COULD_NOT_SHOW" xml:space="preserve">
-    <value>Couldn't show file open dialog - {0}</value>
+    <value>Could not show file open dialog - {0}</value>
   </data>
   <data name="EXPORTVM_NOT_HAPPEN" xml:space="preserve">
     <value>Should not happen</value>
@@ -5319,6 +5354,9 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="FAST_CLONE_UNAVAILABLE" xml:space="preserve">
     <value>Fast clone is not supported by this storage type</value>
   </data>
+  <data name="FEATURE_DISABLED" xml:space="preserve">
+    <value>'{0}' feature is disabled due to license restrictions on the server.</value>
+  </data>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>Feature disabled in the registry</value>
   </data>
@@ -5338,7 +5376,7 @@ Would you like to eject these ISOs before continuing?</value>
     <value>No LUNs were found.  Please verify your hardware configuration.</value>
   </data>
   <data name="FIBRECHANNEL_XML_ERROR" xml:space="preserve">
-    <value>The scan failed. Please try again.</value>
+    <value>The scan failed.</value>
   </data>
   <data name="FIELD_DISABLED" xml:space="preserve">
     <value>This feature is disabled due to license restrictions on the server.</value>
@@ -5628,6 +5666,21 @@ Would you like to eject these ISOs before continuing?</value>
   <data name="GETPASSWORD" xml:space="preserve">
     <value>Get Password</value>
   </data>
+  <data name="GFS2_HA_ENABLED" xml:space="preserve">
+    <value>You must disable HA before clustering can be enabled.</value>
+  </data>
+  <data name="GFS2_INCORRECT_POOL_LICENSE" xml:space="preserve">
+    <value>Your pool license does not allow Thin Provisioning (GFS2).</value>
+  </data>
+  <data name="GFS2_NO_NETWORK" xml:space="preserve">
+    <value>Clustering cannot be enabled because there are no suitable networks.</value>
+  </data>
+  <data name="GFS2_REQUIRES_CLUSTERING_ENABLED" xml:space="preserve">
+    <value>Thin Provisioning (GFS2) requires clustering to be enabled on the pool.</value>
+  </data>
+  <data name="GFS2_SR_ATTACHED" xml:space="preserve">
+    <value>Clustering cannot be disabled because there are thinly provisioned (GFS2) storage repositories attached to this pool.</value>
+  </data>
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
   </data>
@@ -5794,7 +5847,7 @@ not currently live:
 {0}</value>
   </data>
   <data name="HA_CANNOT_EVACUATE_MASTER" xml:space="preserve">
-    <value>Server '{0}' can not be placed in Maintenance Mode because it is the master of an HA-enabled pool.</value>
+    <value>Server '{0}' cannot be placed in Maintenance Mode because it is the master of an HA-enabled pool.</value>
   </data>
   <data name="HA_CHECK_DESCRIPTION" xml:space="preserve">
     <value>HA and WLB check</value>
@@ -6256,6 +6309,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="HOST_NEEDS_REBOOT_CHECK_DESCRIPTION" xml:space="preserve">
     <value>Live patching status</value>
+  </data>
+  <data name="HOST_NEEDS_REBOOT_ENABLE_SRIOV" xml:space="preserve">
+    <value>Yes (Host needs reboot)</value>
   </data>
   <data name="HOST_NETWORK_TAB_ADD_BUTTON_LABEL" xml:space="preserve">
     <value>&amp;Add Network...</value>
@@ -7141,8 +7197,11 @@ Standard features only</value>
   <data name="LUNPERVDI_PAGE_TITLE" xml:space="preserve">
     <value>Map virtual disks (VDIs) to individual LUNs on the target SR</value>
   </data>
+  <data name="LVMOHBA_WARNING_DIALOG_FORMAT_INFO" xml:space="preserve">
+    <value>Destroy any data present on the disk and create a new {0} SR</value>
+  </data>
   <data name="LVMOHBA_WARNING_DIALOG_HEADER_FOUND_EXISTING_SR" xml:space="preserve">
-    <value>An existing SR was found on the selected LUN</value>
+    <value>An existing {0} SR was found on the selected LUN</value>
   </data>
   <data name="LVMOHBA_WARNING_DIALOG_HEADER_NO_EXISTING_SRS" xml:space="preserve">
     <value>No existing SRs were found on the selected LUN</value>
@@ -7152,6 +7211,9 @@ Standard features only</value>
 Serial Number: {1}
 SCSI ID: {2}
 Size: {3}</value>
+  </data>
+  <data name="LVMOHBA_WARNING_DIALOG_REATTACH_INFO" xml:space="preserve">
+    <value>Use the existing {0} SR</value>
   </data>
   <data name="LVMOHBA_WARNING_DIALOG_REATTACH_LABEL_TEXT" xml:space="preserve">
     <value>There is no existing SR to reattach</value>
@@ -8067,6 +8129,9 @@ You should only proceed if you have verified that these settings are correct.</v
   <data name="NETWORK_SETTINGS" xml:space="preserve">
     <value>Network Settings</value>
   </data>
+  <data name="NETWORK_SRIOV" xml:space="preserve">
+    <value>SR-IOV</value>
+  </data>
   <data name="NETWORK_WITH_POOL" xml:space="preserve">
     <value>{0} on {1}</value>
   </data>
@@ -8292,6 +8357,12 @@ Do you want to format the disk?</value>
   <data name="NEWSR_LUN_IN_USE_ON_POOL" xml:space="preserve">
     <value>This LUN is already in use as SR {0} on pool {1}.</value>
   </data>
+  <data name="NEWSR_LUN_IN_USE_ON_SELECTED_POOL" xml:space="preserve">
+    <value>The LUN {0} is already in use as SR {1} on your pool. Please select another LUN.</value>
+  </data>
+  <data name="NEWSR_LUN_IN_USE_ON_SELECTED_SERVER" xml:space="preserve">
+    <value>The LUN {0} is already in use as SR {1} on your server. Please select another LUN.</value>
+  </data>
   <data name="NEWSR_LUN_IN_USE_ON_SERVER" xml:space="preserve">
     <value>This LUN is already in use as SR {0} on server {1}.</value>
   </data>
@@ -8349,9 +8420,7 @@ Once all configuration is complete the HBA will expose a SCSI device backed by t
     <value>Hardware HBA</value>
   </data>
   <data name="NEWSR_LVMOISCSI_BLURB" xml:space="preserve">
-    <value>iSCSI or Fibre Channel access to a shared LUN can be configured using LVM.
-
-Using an LVM for a shared SR provides the same performance benefits as a unshared LVM for local disk storage but also enables VM agility.</value>
+    <value>iSCSI or Fibre Channel access to a shared LUN can be configured to host fully provisioned virtual disks using LVM or be formatted with the GFS2 cluster file system for hosting thinly provisioned virtual disks.</value>
   </data>
   <data name="NEWSR_LVMOISCSI_TYPE_NAME" xml:space="preserve">
     <value>iSCSI</value>
@@ -8836,6 +8905,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   <data name="NEW_SEARCH" xml:space="preserve">
     <value>New Search</value>
   </data>
+  <data name="NEW_SRIOV_NETWORK_NAME" xml:space="preserve">
+    <value>New SR-IOV network</value>
+  </data>
   <data name="NEW_SR_CONNECTION_LOST" xml:space="preserve">
     <value>Connection to {0} has been lost</value>
   </data>
@@ -8920,6 +8992,9 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NICPANEL_HALF_DUPLEX" xml:space="preserve">
     <value>Half</value>
+  </data>
+  <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
+    <value>All the supported NICs have enabled SR-IOV.</value>
   </data>
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (Hidden)</value>
@@ -9825,7 +9900,7 @@ Please reconnect the host and try again</value>
     <value>Pool join not possible</value>
   </data>
   <data name="POOL_JOIN_NON_COMPATIBLE_MANAGEMENT_INTERFACE" xml:space="preserve">
-    <value>This server must not have any bonds, non management VLANs or cross-server private networks</value>
+    <value>This server must not have any bonds, non management VLANs, SR-IOV networks or cross-server private networks</value>
   </data>
   <data name="POOL_JOIN_NOT_PHYSICAL_PIF" xml:space="preserve">
     <value>This server must not have any bonds, VLANs or cross-server private networks</value>
@@ -9944,6 +10019,9 @@ Press OK to continue the wizard and return to the server and follow the instruct
   </data>
   <data name="PROTECTED_VMS_TITLE" xml:space="preserve">
     <value>Select the VMs that you want to protect with this policy</value>
+  </data>
+  <data name="PROVISIONING" xml:space="preserve">
+    <value>Provisioning</value>
   </data>
   <data name="PROVISIONING_OPTIONS" xml:space="preserve">
     <value>Provisioning Options</value>
@@ -10166,6 +10244,9 @@ Disconnect from this server, or reconnect as a more privileged user.</value>
   </data>
   <data name="READ_WRITE" xml:space="preserve">
     <value>Read / Write</value>
+  </data>
+  <data name="REAMININF_VFS" xml:space="preserve">
+    <value>Yes ({0} VFs remaining)</value>
   </data>
   <data name="REATTACH_SR" xml:space="preserve">
     <value>R&amp;eattach</value>
@@ -11003,6 +11084,21 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SR" xml:space="preserve">
     <value>Storage Repository</value>
   </data>
+  <data name="SRIOV_DISABLED" xml:space="preserve">
+    <value>Yes (disabled)</value>
+  </data>
+  <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
+    <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
+  </data>
+  <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
+    <value>SR-IOV networks require an SR-IOV capable NIC.</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE" xml:space="preserve">
+    <value>Create &amp;SR-IOV anyway</value>
+  </data>
+  <data name="SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION" xml:space="preserve">
+    <value>Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed</value>
+  </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>
   </data>
@@ -11740,8 +11836,11 @@ Verify that the file is a valid {1} export.</value>
   <data name="UPDATES_WIZARD_APPLY_UPDATE" xml:space="preserve">
     <value>&amp;Install update</value>
   </data>
+  <data name="UPDATES_WIZARD_BROKEN_SR_WARNING" xml:space="preserve">
+    <value>{0}: Check skipped because the '{1}' storage repository is broken.</value>
+  </data>
   <data name="UPDATES_WIZARD_BROKEN_STORAGE" xml:space="preserve">
-    <value>The {0} storage repository is broken.</value>
+    <value>{0}: The '{1}' storage repository is broken.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_DOWNLOAD_PATCH" xml:space="preserve">
     <value>Unable to download update from '{0}': no longer connected.
@@ -11756,6 +11855,12 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_GPU" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has a virtual GPU attached and there is no suitable GPU available on other servers.</value>
+  </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it has one or more PCI devices attached.</value>
   </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_SUSPEND_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it cannot be suspended.</value>
@@ -12400,7 +12505,7 @@ To start a [XenServer] trial, click the button below.</value>
     <value>View snapshot schedules</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_MESSAGE" xml:space="preserve">
-    <value>The virtual network device changes will take effect when you next restart the VM.</value>
+    <value>The virtual network device changes will take effect when you shutdown and then restart the VM.</value>
   </data>
   <data name="VIF_HOTPLUG_FAILED_TITLE" xml:space="preserve">
     <value>Virtual Network Device Changes</value>
@@ -13065,13 +13170,13 @@ A {1} user cannot alter the Workload Balancing settings.</value>
     <value>WLB does not have current metrics.</value>
   </data>
   <data name="WLB_ERROR_4017" xml:space="preserve">
-    <value>WLB can't find a host that has required storage repositories to place a VM. </value>
+    <value>WLB cannot find a host that has required storage repositories to place a VM. </value>
   </data>
   <data name="WLB_ERROR_4018" xml:space="preserve">
-    <value>WLB can't find required free CPUs to place a VM.</value>
+    <value>WLB cannot find required free CPUs to place a VM.</value>
   </data>
   <data name="WLB_ERROR_4019" xml:space="preserve">
-    <value>WLB can't find required free memory to place a VM.</value>
+    <value>WLB cannot find required free memory to place a VM.</value>
   </data>
   <data name="WLB_ERROR_4020" xml:space="preserve">
     <value>One or more hosts in the pool do not have an appropriate license.</value>

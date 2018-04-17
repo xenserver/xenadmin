@@ -53,7 +53,7 @@ namespace XenAPI
             lvmohba, egenera, egeneracd, dummy, unknown, equal, cslg, shm,
             iscsi,
             ebs, rawhba,
-            smb, lvmofcoe,
+            smb, lvmofcoe, gfs2,
             nutanix, nutanixiso, 
             tmpfs
         }
@@ -146,6 +146,11 @@ namespace XenAPI
             }
         }
 
+        public SM GetSM()
+        {
+            return SM.GetByType(Connection, GetSRType(true).ToString());
+        }
+
         public string ConfigType()
         {
            return Get(sm_config, "type");
@@ -229,16 +234,17 @@ namespace XenAPI
         /// </summary>
         public bool CanCreateWithXenCenter()
         {
-            SRTypes typ = GetSRType(false);
-            return typ == SRTypes.iso
-                   || typ == SRTypes.lvmoiscsi
-                   || typ == SRTypes.nfs
-                   || typ == SRTypes.equal
-                   || typ == SRTypes.netapp
-                   || typ == SRTypes.lvmohba
-                   || typ == SRTypes.cslg
-                   || typ == SRTypes.smb
-                   || typ == SRTypes.lvmofcoe;
+            SRTypes type = GetSRType(false);
+            return type == SRTypes.iso
+                || type == SRTypes.lvmoiscsi
+                || type == SRTypes.nfs
+                || type == SRTypes.equal
+                || type == SRTypes.netapp
+                || type == SRTypes.lvmohba
+                || type == SRTypes.cslg
+                || type == SRTypes.smb
+                || type == SRTypes.lvmofcoe
+                || type == SRTypes.gfs2;
         }
 
         public bool IsLocalSR()
@@ -467,6 +473,23 @@ namespace XenAPI
 
             SM sm = SM.GetByType(Connection, type);
             return sm != null && -1 != Array.IndexOf(sm.capabilities, "VDI_CREATE");
+        }
+
+        public static List<SRInfo> ParseSRList(List<Probe_result> probeExtResult)
+        {
+            List<SRInfo> results = new List<SRInfo>();
+            foreach (var probeResult in probeExtResult.Where(p => p.sr != null))
+            {
+                string uuid = probeResult.sr.uuid;
+                long size = probeResult.sr.total_space;
+                string aggr = "";
+                string name_label = probeResult.sr.name_label;
+                string name_description = probeResult.sr.name_description;
+                bool pool_metadata_detected = false;
+
+                results.Add(new SRInfo(uuid, size, aggr, name_label, name_description, pool_metadata_detected));
+            }
+            return results;
         }
 
         /// <summary>
@@ -828,7 +851,10 @@ namespace XenAPI
 
         public bool MultipathCapable()
         {
-            return "true" == Get(sm_config, "multipathable");
+            SM relatedSm = GetSM();
+            bool isAnSmCapability = relatedSm != null && relatedSm.MultipathEnabled();
+            bool isInSmConfig = BoolKey(sm_config, "multipathable");
+            return isInSmConfig || isAnSmCapability;
         }
 
         public string Target()

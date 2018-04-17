@@ -99,10 +99,8 @@ namespace XenAdmin.Wizards.DRWizards
             return true;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
-
             if (SummaryRetreiver == null)
                 return;
 

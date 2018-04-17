@@ -74,6 +74,10 @@ namespace XenAPI
                 new Relation("roles", "subject", "roles"),
             });
 
+            relations.Add(typeof(Proxy_Cluster), new Relation[] {
+                new Relation("cluster_hosts", "Cluster_host", "cluster"),
+            });
+
             relations.Add(typeof(Proxy_Bond), new Relation[] {
                 new Relation("slaves", "PIF", "bond_slave_of"),
             });
@@ -91,6 +95,8 @@ namespace XenAPI
             });
 
             relations.Add(typeof(Proxy_PIF), new Relation[] {
+                new Relation("sriov_logical_PIF_of", "network_sriov", "logical_PIF"),
+                new Relation("sriov_physical_PIF_of", "network_sriov", "physical_PIF"),
                 new Relation("tunnel_transport_PIF_of", "tunnel", "transport_PIF"),
                 new Relation("tunnel_access_PIF_of", "tunnel", "access_PIF"),
                 new Relation("VLAN_slave_of", "VLAN", "tagged_PIF"),

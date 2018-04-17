@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(livepatch_statusConverter))]
     public enum livepatch_status
     {
         ok_livepatch_complete, ok_livepatch_incomplete, ok, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class livepatch_status_helper
     {
         public static string ToString(livepatch_status x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this livepatch_status x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class livepatch_statusConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((livepatch_status)value).StringOf());
         }
     }
 }

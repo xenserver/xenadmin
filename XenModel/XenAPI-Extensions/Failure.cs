@@ -58,6 +58,7 @@ namespace XenAPI
         public const string VM_BAD_POWER_STATE = "VM_BAD_POWER_STATE";
         public const string VM_REQUIRES_SR = "VM_REQUIRES_SR";
         public const string VM_REQUIRES_NETWORK = "VM_REQUIRES_NETWORK";
+        public const string VM_REQUIRES_GPU = "VM_REQUIRES_GPU";
         public const string VM_MISSING_PV_DRIVERS = "VM_MISSING_PV_DRIVERS";
         public const string HOST_NOT_ENOUGH_FREE_MEMORY = "HOST_NOT_ENOUGH_FREE_MEMORY";
         public const string SR_BACKEND_FAILURE_72 = "SR_BACKEND_FAILURE_72";
@@ -82,10 +83,12 @@ namespace XenAPI
         public const string POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS = "POOL_AUTH_ENABLE_FAILED_WRONG_CREDENTIALS";
         public const string HOST_UNKNOWN_TO_MASTER = "HOST_UNKNOWN_TO_MASTER";
         public const string VM_HAS_VGPU = "VM_HAS_VGPU";
+        public const string VM_HAS_PCI_ATTACHED = "VM_HAS_PCI_ATTACHED";
         public const string OUT_OF_SPACE = "OUT_OF_SPACE";
         public const string PVS_SITE_CONTAINS_RUNNING_PROXIES = "PVS_SITE_CONTAINS_RUNNING_PROXIES";
         public const string VM_LACKS_FEATURE = "VM_LACKS_FEATURE";
         public const string VM_LACKS_FEATURE_SUSPEND = "VM_LACKS_FEATURE_SUSPEND";
+        public const string VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT = "VM_FAILED_SHUTDOWN_ACKNOWLEDGMENT";
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

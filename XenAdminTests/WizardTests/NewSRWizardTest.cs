@@ -29,13 +29,8 @@
  * SUCH DAMAGE.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using NUnit.Framework;
 using XenAdmin.Wizards;
-using XenAdmin.Wizards.NewSRWizard_Pages;
 using XenAdmin.Wizards.NewSRWizard_Pages.Frontends;
 
 namespace XenAdminTests.WizardTests.state1_xml.NewSRWizardTests

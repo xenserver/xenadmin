@@ -89,7 +89,7 @@ namespace XenAdmin.Wizards.GenericPages
             lunPerVdiPicker.Clear();
         }
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if(direction == PageLoadedDirection.Back)
             {
@@ -97,7 +97,6 @@ namespace XenAdmin.Wizards.GenericPages
             }
 
             OnPageUpdated();
-            base.PageLeave(direction, ref cancel);
         }
 
         public bool ValidSelectionMade

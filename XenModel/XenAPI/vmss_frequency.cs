@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(vmss_frequencyConverter))]
     public enum vmss_frequency
     {
         hourly, daily, weekly, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class vmss_frequency_helper
     {
         public static string ToString(vmss_frequency x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this vmss_frequency x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class vmss_frequencyConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((vmss_frequency)value).StringOf());
         }
     }
 }

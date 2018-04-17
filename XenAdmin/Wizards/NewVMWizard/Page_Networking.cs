@@ -76,9 +76,8 @@ namespace XenAdmin.Wizards.NewVMWizard
             return true;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             VM template = SelectedTemplate;
             string vmName = SelectedName;
 
@@ -146,7 +145,7 @@ namespace XenAdmin.Wizards.NewVMWizard
                     // CA-218956 - Expose HIMN when showing hidden objects
                     // HIMN shouldn't be autoplugged
                     if (network.IsGuestInstallerNetwork() ||
-                        !network.GetAutoPlug() || !network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave())
+                        !network.GetAutoPlug() || !network.Show(Properties.Settings.Default.ShowHiddenVMs) || network.IsSlave() || (network.IsSriov() && !Template.HasSriovRecommendation()))
                         continue;
 
                     if (NetworksGridView.Rows.Count < MAX_NETWORKS_FOR_DEFAULT_TEMPLATES)
@@ -167,7 +166,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            VIFDialog dialog = new VIFDialog(Connection, null, NetworksGridView.Rows.Count);
+            VIFDialog dialog = new VIFDialog(Connection, null, NetworksGridView.Rows.Count, Template.HasSriovRecommendation());
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
@@ -191,7 +190,7 @@ namespace XenAdmin.Wizards.NewVMWizard
 
             NetworkListViewItem selectedItem = ((NetworkListViewItem)NetworksGridView.SelectedRows[0]);
 
-            VIFDialog dialog = new VIFDialog(Connection, selectedItem.Vif, selectedItem.Index);
+            VIFDialog dialog = new VIFDialog(Connection, selectedItem.Vif, selectedItem.Index, Template.HasSriovRecommendation());
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 

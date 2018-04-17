@@ -40,8 +40,11 @@ namespace XenAdmin.Diagnostics.Checks
 {
     public class PBDsPluggedCheck : Check
     {
-        public PBDsPluggedCheck(Host host):base(host)
+        SR srUploadedUpdates;
+
+        public PBDsPluggedCheck(Host host, SR sr = null) : base(host)
         {
+            srUploadedUpdates = sr;
         }
 
         protected override Problem RunCheck()
@@ -54,8 +57,12 @@ namespace XenAdmin.Diagnostics.Checks
 
             foreach (SR sr in brokenSRs)
             {
-                return new BrokenSR(this, sr);
+                return new BrokenSR(this, sr, Host);
             }
+
+            if (srUploadedUpdates != null && !srUploadedUpdates.CanBeSeenFrom(Host))
+                return new BrokenSR(this, srUploadedUpdates, Host);
+
             return null;
         }
 

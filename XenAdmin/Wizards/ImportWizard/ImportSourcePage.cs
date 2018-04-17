@@ -97,28 +97,25 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 			{
 				if (IsUri() && !PerformCheck(CheckDownloadFromUri))
 				{
 					cancel = true;
-					base.PageLeave(direction, ref cancel);
 					return;
 				}
 
                 if (!PerformCheck(CheckIsSupportedType, CheckPathExists))
 				{
 					cancel = true;
-					base.PageLeave(direction, ref cancel);
 					return;
 				}
 
                 if (!PerformCheck(CheckIsCompressed))
 				{
 					cancel = true;
-					base.PageLeave(direction, ref cancel);
 					return;
 				}
 
@@ -139,7 +136,6 @@ namespace XenAdmin.Wizards.ImportWizard
 				if (!PerformCheck(checks.ToArray()))
 				{
 					cancel = true;
-					base.PageLeave(direction, ref cancel);
 					return;
 				}
 
@@ -151,7 +147,6 @@ namespace XenAdmin.Wizards.ImportWizard
                     OnPageUpdated();
 				}
 			}
-			base.PageLeave(direction, ref cancel);
 		}
 
         public override void PopulatePage()

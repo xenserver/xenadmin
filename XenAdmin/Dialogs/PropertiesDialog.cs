@@ -81,6 +81,7 @@ namespace XenAdmin.Dialogs
         private LivePatchingEditPage LivePatchingEditPage;
         private USBEditPage usbEditPage;
         private NetworkOptionsEditPage NetworkOptionsEditPage;
+        private ClusteringEditPage ClusteringEditPage;
         #endregion
 
         private IXenObject xenObject, xenObjectBefore, xenObjectCopy;
@@ -208,6 +209,9 @@ namespace XenAdmin.Dialogs
 
                 if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictIGMPSnooping) && Helpers.GetMaster(pool).vSwitchNetworkBackend())
                     ShowTab(NetworkOptionsEditPage = new NetworkOptionsEditPage());
+
+                if (is_pool_or_standalone && !Helpers.FeatureForbidden(xenObject.Connection, Host.RestrictCorosync))
+                    ShowTab(ClusteringEditPage = new ClusteringEditPage());
 
                 if (is_network)
                     ShowTab(editNetworkPage = new EditNetworkPage());
@@ -595,6 +599,11 @@ namespace XenAdmin.Dialogs
         public void SelectVdiSizeLocationPage()
         {
             SelectPage(vdiSizeLocation);
+        }
+
+        public void SelectClusteringEditPage()
+        {
+            SelectPage(ClusteringEditPage);
         }
 
         #endregion

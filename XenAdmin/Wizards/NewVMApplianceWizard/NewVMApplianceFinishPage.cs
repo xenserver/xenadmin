@@ -71,9 +71,8 @@ namespace XenAdmin.Wizards.NewVMApplianceWizard
 
         public string Summary { private get; set; }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             textBoxSummary.Text = Summary;
         }
     }

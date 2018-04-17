@@ -85,13 +85,12 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             m_buttonNextText = (direction == PageLoadedDirection.Forward) ? Messages.IMPORT_VM_IMPORT : Messages.WIZARD_BUTTON_NEXT;
         }
 
-		public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
 		{
 			if (direction == PageLoadedDirection.Forward && IsDirty)
 			{
@@ -112,7 +111,6 @@ namespace XenAdmin.Wizards.ImportWizard
                 m_alreadyFoundVM = false;
 				m_actionDialog.Show(this);
 			}
-			base.PageLeave(direction, ref cancel);
 		}
 
         public override string NextText(bool isLastPage)

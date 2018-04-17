@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using XenAdmin.Actions;
-using XenAdmin.Core;
 using XenAdmin.Network;
 using XenAPI;
 
@@ -53,34 +52,76 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public string UUID { get; set; }
     }
 
-    public class LvmOhbaSrDescriptor : SrDescriptor
+    public abstract class FibreChannelDescriptor : SrDescriptor
     {
-        public LvmOhbaSrDescriptor(FibreChannelDevice device, IXenConnection connection)
+        protected FibreChannelDescriptor(FibreChannelDevice device, string descrFormat)
         {
             Device = device;
-            DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
-
-            Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
+            Description = string.Format(descrFormat, device.Vendor, device.Serial);
         }
 
-        public LvmOhbaSrDescriptor(FibreChannelDevice device)
-        {
-            Device = device;
-
-            Description = string.Format(Messages.NEWSR_LVMOHBA_DESCRIPTION, device.Vendor, device.Serial);
-        }
+        public abstract SR.SRTypes SrType { get; }
 
         public FibreChannelDevice Device { get; private set; }
     }
 
-    public class FcoeSrDescriptor : LvmOhbaSrDescriptor
+    public class LvmOhbaSrDescriptor : FibreChannelDescriptor
     {
-        public FcoeSrDescriptor(FibreChannelDevice device) : base(device)
+        public LvmOhbaSrDescriptor(FibreChannelDevice device)
+            : base(device, Messages.NEWSR_LVMOHBA_DESCRIPTION)
         {
-            DeviceConfig[SrProbeAction.SCSIid] = device.SCSIid;
-            DeviceConfig[SrProbeAction.PATH] = device.Path;
+            DeviceConfig["SCSIid"] = device.SCSIid;
+        }
 
-            Description = string.Format(Messages.NEWSR_LVMOFCOE_DESCRIPTION, device.Vendor, device.Serial);
+        public override SR.SRTypes SrType
+        {
+            get { return SR.SRTypes.lvmohba; }
+        }
+    }
+
+    public class FcoeSrDescriptor : FibreChannelDescriptor
+    {
+        public FcoeSrDescriptor(FibreChannelDevice device)
+            : base(device, Messages.NEWSR_LVMOFCOE_DESCRIPTION)
+        {
+            DeviceConfig["SCSIid"] = device.SCSIid;
+            DeviceConfig["path"] = device.Path;
+        }
+
+        public override SR.SRTypes SrType
+        {
+            get { return SR.SRTypes.lvmofcoe; }
+        }
+    }
+
+    public class Gfs2HbaSrDescriptor : FibreChannelDescriptor
+    {
+        public Gfs2HbaSrDescriptor(FibreChannelDevice device)
+            : base(device, Messages.NEWSR_LVMOHBA_DESCRIPTION)
+        {
+            DeviceConfig["provider"] = "hba";
+            DeviceConfig["ScsiId"] = device.SCSIid;
+        }
+
+        public override SR.SRTypes SrType
+        {
+            get { return SR.SRTypes.gfs2; }
+        }
+    }
+
+    public class Gfs2FcoeSrDescriptor : FibreChannelDescriptor
+    {
+        public Gfs2FcoeSrDescriptor(FibreChannelDevice device)
+            : base(device, Messages.NEWSR_LVMOFCOE_DESCRIPTION)
+        {
+            DeviceConfig["provider"] = "fcoe";
+            DeviceConfig["ScsiId"] = device.SCSIid;
+            DeviceConfig["path"] = device.Path;
+        }
+
+        public override SR.SRTypes SrType
+        {
+            get { return SR.SRTypes.gfs2; }
         }
     }
 
@@ -107,6 +148,7 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public abstract bool ShowIntroducePrompt { get; }
         public abstract bool ShowReattachWarning { get; }
         public abstract bool AllowToCreateNewSr { get; set; }
+        public virtual bool IsGfs2 { get { return false; } set { } }
 
         public string SrName
         {
@@ -187,6 +229,8 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         {
             SrName = SrWizardHelpers.DefaultSRName(String.Format(Messages.SRWIZARD_STORAGE_NAME, SR.getFriendlyTypeName(Type)), connection);
         }
+
+        public virtual IEnumerable<SR.SRTypes> PossibleTypes { get { return new SR.SRTypes[] { Type }; } }
     }
 
     public class SrWizardType_CifsIso : SrWizardType
@@ -211,38 +255,44 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         }
     }
 
-    public class SrWizardType_LvmoIscsi : SrWizardType
+    public class SrWizardType_Iscsi : SrWizardType
     {
         public override bool IsEnhancedSR { get { return false; } }
         public override string FrontendBlurb { get { return Messages.NEWSR_LVMOISCSI_BLURB; } }
         public override string FrontendTypeName { get { return Messages.NEWSR_LVMOISCSI_TYPE_NAME; } }
-        public override SR.SRTypes Type { get { return SR.SRTypes.lvmoiscsi; } }
+        public override SR.SRTypes Type { get { return IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmoiscsi; } }
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return false; } }
         public override bool ShowReattachWarning { get { return true; } }
         public override bool AllowToCreateNewSr { get; set; }
+        public override bool IsGfs2 { get; set; }
 
         public override void ResetSrName(IXenConnection connection)
         {
             SrName = SrWizardHelpers.DefaultSRName(Messages.SRWIZARD_ISCSI_STORAGE, connection);
         }
+
+        public override IEnumerable<SR.SRTypes> PossibleTypes { get { return new SR.SRTypes[] { SR.SRTypes.lvmoiscsi, SR.SRTypes.gfs2 }; } }
     }
 
-    public class SrWizardType_LvmoHba : SrWizardType
+    public class SrWizardType_Hba : SrWizardType
     {
         public override bool IsEnhancedSR { get { return false; } }
         public override string FrontendBlurb { get { return Messages.NEWSR_LVMOHBA_BLURB; } }
         public override string FrontendTypeName { get { return Messages.NEWSR_LVMOHBA_TYPE_NAME; } }
-        public override SR.SRTypes Type { get { return SR.SRTypes.lvmohba; } }
+        public override SR.SRTypes Type { get { return IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba; } }
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return false; } }
         public override bool ShowReattachWarning { get { return true; } }
         public override bool AllowToCreateNewSr { get; set; }
+        public override bool IsGfs2 { get; set; }
 
         public override void ResetSrName(IXenConnection connection)
         {
             SrName = SrWizardHelpers.DefaultSRName(Messages.NEWSR_HBA_DEFAULT_NAME, connection);
         }
+
+        public override IEnumerable<SR.SRTypes> PossibleTypes { get { return new SR.SRTypes[] { SR.SRTypes.lvmohba, SR.SRTypes.gfs2 }; } }
     }
 
     public class SrWizardType_VhdoNfs : SrWizardType
@@ -384,15 +434,18 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages
         public override bool IsEnhancedSR { get { return false; } }
         public override string FrontendBlurb { get { return Messages.NEWSR_LVMOFCOE_BLURB; } }
         public override string FrontendTypeName { get { return Messages.NEWSR_LVMOFCOE_TYPE_NAME; } }
-        public override SR.SRTypes Type { get { return SR.SRTypes.lvmofcoe; } }
+        public override SR.SRTypes Type { get { return IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe; } }
         public override string ContentType { get { return ""; } }
         public override bool ShowIntroducePrompt { get { return false; } }
         public override bool ShowReattachWarning { get { return true; } }
         public override bool AllowToCreateNewSr { get; set; }
+        public override bool IsGfs2 { get; set; }
 
         public override void ResetSrName(IXenConnection connection)
         {
             SrName = SrWizardHelpers.DefaultSRName(Messages.NEWSR_FCOE_DEFAULT_NAME, connection);
         }
+
+        public override IEnumerable<SR.SRTypes> PossibleTypes { get { return new SR.SRTypes[] { SR.SRTypes.lvmofcoe, SR.SRTypes.gfs2 }; } }
     }
 }

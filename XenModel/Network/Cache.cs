@@ -49,7 +49,10 @@ namespace XenAdmin.Network
         // keep sorted please
         private readonly ChangeableDictionary<XenRef<Bond>, Bond> _bond = new ChangeableDictionary<XenRef<Bond>, Bond>();
         private readonly ChangeableDictionary<XenRef<Blob>, Blob> _blob = new ChangeableDictionary<XenRef<Blob>, Blob>();
+        private readonly ChangeableDictionary<XenRef<Cluster>, Cluster> _cluster = new ChangeableDictionary<XenRef<Cluster>, Cluster>();
+        private readonly ChangeableDictionary<XenRef<Cluster_host>, Cluster_host> _cluster_host = new ChangeableDictionary<XenRef<Cluster_host>, Cluster_host>();
         private readonly ChangeableDictionary<XenRef<XenAPI.Console>, XenAPI.Console> _console = new ChangeableDictionary<XenRef<XenAPI.Console>, XenAPI.Console>();
+        private readonly ChangeableDictionary<XenRef<Feature>, Feature> _feature = new ChangeableDictionary<XenRef<Feature>, Feature>();
         private readonly ChangeableDictionary<XenRef<Folder>, Folder> _folders = new ChangeableDictionary<XenRef<Folder>, Folder>();
         private readonly ChangeableDictionary<XenRef<DockerContainer>, DockerContainer> _dockerContainers = new ChangeableDictionary<XenRef<DockerContainer>, DockerContainer>();
 
@@ -61,6 +64,7 @@ namespace XenAdmin.Network
         private readonly ChangeableDictionary<XenRef<Host_patch>, Host_patch> _host_patch = new ChangeableDictionary<XenRef<Host_patch>, Host_patch>();
         private readonly ChangeableDictionary<XenRef<Message>, Message> _message = new ChangeableDictionary<XenRef<Message>, Message>();
         private readonly ChangeableDictionary<XenRef<XenAPI.Network>, XenAPI.Network> _network = new ChangeableDictionary<XenRef<XenAPI.Network>, XenAPI.Network>();
+        private readonly ChangeableDictionary<XenRef<XenAPI.Network_sriov>, XenAPI.Network_sriov> _network_sriov = new ChangeableDictionary<XenRef<XenAPI.Network_sriov>, XenAPI.Network_sriov>();
         private readonly ChangeableDictionary<XenRef<PBD>, PBD> _pbd = new ChangeableDictionary<XenRef<PBD>, PBD>();
         private readonly ChangeableDictionary<XenRef<PUSB>, PUSB> _pusb = new ChangeableDictionary<XenRef<PUSB>, PUSB>();
         private readonly ChangeableDictionary<XenRef<VUSB>, VUSB> _vusb = new ChangeableDictionary<XenRef<VUSB>, VUSB>();
@@ -129,6 +133,21 @@ namespace XenAdmin.Network
             get { return contents(_vm_appliance); }
         }
 
+        public Cluster[] Clusters
+        {
+            get { return contents(_cluster); }
+        }
+
+        public Cluster_host[] Cluster_hosts
+        {
+            get { return contents(_cluster_host); }
+        }
+
+        public Feature[] Features
+        {
+            get { return contents(_feature); }
+        }
+
         public Folder[] Folders
         {
             get { return contents(_folders); }
@@ -168,7 +187,12 @@ namespace XenAdmin.Network
         {
             get { return contents(_network); }
         }
-                
+
+        public XenAPI.Network_sriov[] Network_sriov
+        {
+            get { return contents(_network_sriov); }
+        }
+
         public PBD[] PBDs
         {
             get { return contents(_pbd); }

@@ -32,6 +32,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
@@ -68,6 +71,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given Vdi_nbd_server_info.
+        /// </summary>
         public override void UpdateFrom(Vdi_nbd_server_info update)
         {
             exportname = update.exportname;
@@ -79,11 +86,11 @@ namespace XenAPI
 
         internal void UpdateFromProxy(Proxy_Vdi_nbd_server_info proxy)
         {
-            exportname = proxy.exportname == null ? null : (string)proxy.exportname;
-            address = proxy.address == null ? null : (string)proxy.address;
-            port = proxy.port == null ? 0 : long.Parse((string)proxy.port);
-            cert = proxy.cert == null ? null : (string)proxy.cert;
-            subject = proxy.subject == null ? null : (string)proxy.subject;
+            exportname = proxy.exportname == null ? null : proxy.exportname;
+            address = proxy.address == null ? null : proxy.address;
+            port = proxy.port == null ? 0 : long.Parse(proxy.port);
+            cert = proxy.cert == null ? null : proxy.cert;
+            subject = proxy.subject == null ? null : proxy.subject;
         }
 
         public Proxy_Vdi_nbd_server_info ToProxy()
@@ -99,15 +106,33 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new Vdi_nbd_server_info from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public Vdi_nbd_server_info(Hashtable table)
+        public Vdi_nbd_server_info(Hashtable table) : this()
         {
-            exportname = Marshalling.ParseString(table, "exportname");
-            address = Marshalling.ParseString(table, "address");
-            port = Marshalling.ParseLong(table, "port");
-            cert = Marshalling.ParseString(table, "cert");
-            subject = Marshalling.ParseString(table, "subject");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this Vdi_nbd_server_info
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("exportname"))
+                exportname = Marshalling.ParseString(table, "exportname");
+            if (table.ContainsKey("address"))
+                address = Marshalling.ParseString(table, "address");
+            if (table.ContainsKey("port"))
+                port = Marshalling.ParseLong(table, "port");
+            if (table.ContainsKey("cert"))
+                cert = Marshalling.ParseString(table, "cert");
+            if (table.ContainsKey("subject"))
+                subject = Marshalling.ParseString(table, "subject");
         }
 
         public bool DeepEquals(Vdi_nbd_server_info other)
@@ -161,7 +186,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _exportname;
+        private string _exportname = "";
 
         /// <summary>
         /// An address on which the server can be reached; this can be IPv4, IPv6, or a DNS name.
@@ -179,7 +204,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _address;
+        private string _address = "";
 
         /// <summary>
         /// The TCP port
@@ -215,7 +240,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _cert;
+        private string _cert = "";
 
         /// <summary>
         /// For convenience, this redundant field holds a DNS (hostname) subject of the certificate. This can be a wildcard, but only for a certificate that has a wildcard subject and no concrete hostname subjects.
@@ -233,6 +258,6 @@ namespace XenAPI
                 }
             }
         }
-        private string _subject;
+        private string _subject = "";
     }
 }

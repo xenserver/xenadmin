@@ -42,6 +42,7 @@ using XenAPI;
 using XenCenterLib;
 using System.Diagnostics;
 using System.Xml.Serialization;
+using XenAdmin.ServerDBs;
 
 
 namespace XenAdmin.Network
@@ -266,20 +267,6 @@ namespace XenAdmin.Network
         }
 
         /// <summary>
-        /// Used by the automated tests. Initializes a new instance of the <see cref="XenConnection"/> class.
-        /// <param name="hostname"></param>
-        /// <param name="friendlyName"></param>
-        /// </summary>
-        public XenConnection(string hostname, string friendlyName)
-            : this()
-        {
-            this.Hostname = hostname;
-            this.FriendlyName = friendlyName;
-            this.Port = 443;
-            this.SaveDisconnected = true;
-        }
-
-        /// <summary>
         /// For use by unit tests only.
         /// </summary>
         /// <param name="user"></param>
@@ -408,23 +395,6 @@ namespace XenAdmin.Network
         public Session ElevatedSession(string username, string password)
         {
             return GetNewSession(Hostname, Port, username, password, true);
-        }
-
-        /// <summary>
-        /// For retrieving a new session. Changes connection's Username and Password.
-        /// </summary>
-        /// <param name="hostname"></param>
-        /// <param name="port"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="isElevated"></param>
-        /// <returns></returns>
-        private Session NewSession(string hostname, int port, string username, string password, bool isElevated)
-        {
-            Password = password;
-            Username = username;
-
-            return GetNewSession(hostname, port, username, password, isElevated);
         }
 
         /// <summary>
@@ -712,8 +682,8 @@ namespace XenAdmin.Network
         /// 
         /// This blocks, so must only be used on a background thread.
         /// </summary>
-        /// <param name="xenRef"></param>
-        /// <param name="Cancelling">A delegate to check whether to cancel.  May be null, in which case it's ignored</param>
+        /// <param name="xenref"></param>
+        /// <param name="cancelling">A delegate to check whether to cancel.  May be null, in which case it's ignored</param>
         public T WaitForCache<T>(XenRef<T> xenref, Func<bool> cancelling) where T : XenObject<T>
         {
             lock (WaitForEventRegisteredLock)
@@ -757,6 +727,7 @@ namespace XenAdmin.Network
         }
 
         /// <param name="resetState">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
+        /// <param name="exiting"></param>
         public void EndConnect(bool resetState, bool exiting = false)
         {
             ConnectTask t = connectTask;
@@ -770,6 +741,7 @@ namespace XenAdmin.Network
         /// </summary>
         /// <param name="clearCache">Whether the cache should be cleared (requires invoking onto the GUI thread)</param>
         /// <param name="task"></param>
+        /// <param name="exiting"></param>
         private void EndConnect(bool clearCache, ConnectTask task, bool exiting)
         {
             OnBeforeConnectionEnd();
@@ -821,13 +793,14 @@ namespace XenAdmin.Network
         /// Otherwise the logging out operation can be terminated when other foreground threads finish.
         /// </summary>
         /// <param name="session">May be null, in which case nothing happens.</param>
+        /// <param name="exiting"></param>
         public void Logout(Session session, bool exiting = false)
         {
-            if (session == null || session.uuid == null)
+            if (session == null || session.opaque_ref == null)
                 return;
 
             Thread t = new Thread(Logout_);
-            t.Name = string.Format("Logging out session {0}", session.uuid);
+            t.Name = string.Format("Logging out session {0}", session.opaque_ref);
             if (exiting)
             {
                 t.IsBackground = false;
@@ -1187,7 +1160,7 @@ namespace XenAdmin.Network
         {
             get
             {
-                return Helpers.DbProxyIsSimulatorUrl(this.Hostname);
+                return DbProxy.IsSimulatorUrl(this.Hostname);
             }
         }
 
@@ -1208,7 +1181,7 @@ namespace XenAdmin.Network
             {
                 log.DebugFormat("IXenConnection: trying to connect to {0}", HostnameWithPort);
 
-                Session session = NewSession(task.Hostname, task.Port, Username, Password, false);
+                Session session = GetNewSession(task.Hostname, task.Port, Username, Password, false);
                 // Save the session so we can log it out later
                 task.Session = session;
 
@@ -1900,6 +1873,26 @@ namespace XenAdmin.Network
                 if (XenObjectsUpdated != null)
                     XenObjectsUpdated(this, null);
             });
+        }
+
+        public T TryResolveWithTimeout<T>(XenRef<T> t) where T : XenObject<T>
+        {
+            log.DebugFormat("Resolving {0} {1}", t, t.opaque_ref);
+            int timeout = 120; // two minutes;
+
+            while (timeout > 0)
+            {
+                T obj = Resolve(t);
+                if (obj != null)
+                    return obj;
+
+                Thread.Sleep(1000);
+                timeout = timeout - 1;
+            }
+
+            if (typeof(T) == typeof(Host))
+                throw new Failure(Failure.HOST_OFFLINE);
+            throw new Failure(Failure.HANDLE_INVALID, typeof(T).Name, t.opaque_ref);
         }
 
         /// <summary>

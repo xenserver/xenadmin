@@ -29,6 +29,7 @@
  * SUCH DAMAGE.
  */
 
+using XenAdmin.Actions;
 using XenAPI;
 
 namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
@@ -38,19 +39,23 @@ namespace XenAdmin.Wizards.NewSRWizard_Pages.Frontends
         public LVMoFCoE()
         {
             InitializeComponent();
+            SrType = SR.SRTypes.lvmofcoe;
         }
 
         #region LVMoHBA overrides
-
-        public override SR.SRTypes SrType { get { return SR.SRTypes.lvmofcoe; } }
 
         public override bool ShowNicColumn { get { return true; } }
 
         public override string HelpID { get { return "Location_FCOE"; } }
 
-        public override LvmOhbaSrDescriptor CreateSrDescriptor(FibreChannelDevice device)
+        protected override FibreChannelDescriptor CreateLvmSrDescriptor(FibreChannelDevice device)
         {
             return new FcoeSrDescriptor(device);
+        }
+
+        protected override FibreChannelDescriptor CreateGfs2Descriptor(FibreChannelDevice device)
+        {
+            return new Gfs2FcoeSrDescriptor(device);
         }
 
         #endregion

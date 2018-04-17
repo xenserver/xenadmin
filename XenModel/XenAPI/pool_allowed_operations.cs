@@ -29,20 +29,28 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(pool_allowed_operationsConverter))]
     public enum pool_allowed_operations
     {
-        ha_enable, ha_disable, unknown
+        ha_enable, ha_disable, cluster_create, unknown
     }
 
     public static class pool_allowed_operations_helper
     {
         public static string ToString(pool_allowed_operations x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this pool_allowed_operations x)
         {
             switch (x)
             {
@@ -50,9 +58,19 @@ namespace XenAPI
                     return "ha_enable";
                 case pool_allowed_operations.ha_disable:
                     return "ha_disable";
+                case pool_allowed_operations.cluster_create:
+                    return "cluster_create";
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class pool_allowed_operationsConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((pool_allowed_operations)value).StringOf());
         }
     }
 }

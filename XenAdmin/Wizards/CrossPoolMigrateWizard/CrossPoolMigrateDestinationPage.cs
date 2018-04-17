@@ -43,8 +43,12 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
     {
         private List<VM> selectedVMs;
         private WizardMode wizardMode;
+        // A 2-level cache to store the result of CrossPoolMigrateCanMigrateFilter.
+        // Cache structure is like: <vm-ref, <host-ref, fault-reason>>.
+        private IDictionary<string, IDictionary<string, string>> migrateFilterCache = 
+            new Dictionary<string, IDictionary<string, string>>();
 
-        
+
         public CrossPoolMigrateDestinationPage()
             : this(null, null, WizardMode.Migrate, null)
         {
@@ -60,9 +64,8 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             InitializeText();
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             PopulateComboBox();
         }
 
@@ -142,27 +145,31 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             var filters = new List<ReasoningFilter>
             {
                 new ResidentHostIsSameAsSelectionFilter(xenItem, selectedVMs),
-                new CrossPoolMigrateCanMigrateFilter(xenItem, selectedVMs, wizardMode),
+                new CrossPoolMigrateCanMigrateFilter(xenItem, selectedVMs, wizardMode, migrateFilterCache),
                 new WlbEnabledFilter(xenItem, selectedVMs)
             };
             return new DelayLoadingOptionComboBoxItem(xenItem, filters);
         }
 
-        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem)
+        protected override List<ReasoningFilter> CreateTargetServerFilterList(IEnableableXenObjectComboBoxItem selectedItem, List<string> vmOpaqueRefs)
         {
             var filters = new List<ReasoningFilter>();
 
-            if(selectedItem != null)
+            if(selectedItem != null && vmOpaqueRefs != null && selectedVMs != null)
             {
-                filters.Add(new ResidentHostIsSameAsSelectionFilter(selectedItem.Item, selectedVMs));
-                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, selectedVMs, wizardMode));
-                filters.Add(new WlbEnabledFilter(selectedItem.Item, selectedVMs));
+                List<VM> vmList = new List<VM>();
+                foreach (string opaqueRef in vmOpaqueRefs)
+                    vmList.Add(selectedVMs.Find(vm => vm.opaque_ref == opaqueRef));
+
+                filters.Add(new ResidentHostIsSameAsSelectionFilter(selectedItem.Item, vmList));
+                filters.Add(new CrossPoolMigrateCanMigrateFilter(selectedItem.Item, vmList, wizardMode, migrateFilterCache));
+                filters.Add(new WlbEnabledFilter(selectedItem.Item, vmList));
             } 
 
             return filters;
         }
-        
-        public override void PageLeave(XenAdmin.Controls.PageLoadedDirection direction, ref bool cancel)
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (!cancel)
             {
@@ -184,8 +191,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
                 cancel = true;
                 SetButtonNextEnabled(false);
             }
-
-            base.PageLeave(direction, ref cancel);
         }
 
         protected override string VmColumnHeaderText

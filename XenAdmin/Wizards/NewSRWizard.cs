@@ -66,6 +66,7 @@ namespace XenAdmin.Wizards
         private readonly CslgLocation xenTabPageCslgLocation;
         private readonly FilerDetails xenTabPageFilerDetails;
         private readonly ChooseSrTypePage xenTabPageChooseSrType;
+        private readonly ChooseSrProvisioningPage xenTabPageChooseSrProv;
         private readonly RBACWarningPage xenTabPageRbacWarning;
         #endregion
 
@@ -82,6 +83,8 @@ namespace XenAdmin.Wizards
         private SrWizardType m_srWizardType;
 
         private readonly bool _rbac;
+
+        private bool showProvisioningPage;
 
         public NewSRWizard(IXenConnection connection)
             : this(connection, null)
@@ -114,6 +117,7 @@ namespace XenAdmin.Wizards
             xenTabPageCslgLocation = new CslgLocation();
             xenTabPageFilerDetails = new FilerDetails();
             xenTabPageChooseSrType = new ChooseSrTypePage();
+            xenTabPageChooseSrProv = new ChooseSrProvisioningPage();
             xenTabPageRbacWarning = new RBACWarningPage((srToReattach == null && !disasterRecoveryTask)
                              ? Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_CREATE
                              : Messages.RBAC_WARNING_PAGE_DESCRIPTION_SR_ATTACH);
@@ -146,8 +150,6 @@ namespace XenAdmin.Wizards
                     AddPage(xenTabPageRbacWarning, 0);
                 ConfigureRbacPage(disasterRecoveryTask);
             }
-
-
         }
 
         private void ConfigureRbacPage(bool disasterRecoveryTask)
@@ -197,7 +199,7 @@ namespace XenAdmin.Wizards
             return success;
         }
 
-        private bool CanShowLVMoHBASummaryPage(List<LvmOhbaSrDescriptor> SrDescriptors)
+        private bool CanShowLVMoHBASummaryPage(List<FibreChannelDescriptor> SrDescriptors)
         {
             string description = m_srWizardType.Description;
             string name = m_srWizardType.SrName;
@@ -205,15 +207,16 @@ namespace XenAdmin.Wizards
             List<string> names = xenConnection.Cache.SRs.Select(sr => sr.Name()).ToList();
 
             m_srWizardType.SrDescriptors.Clear();
-            foreach (var lvmOhbaSrDescriptor in SrDescriptors)
+            foreach (var descriptor in SrDescriptors)
             {
-                lvmOhbaSrDescriptor.Name = name;
+                descriptor.Name = name;
                 if (!string.IsNullOrEmpty(description))
-                    lvmOhbaSrDescriptor.Description = description;
+                    descriptor.Description = description;
 
-                m_srWizardType.SrDescriptors.Add(lvmOhbaSrDescriptor);
+                m_srWizardType.SrDescriptors.Add(descriptor);
+                m_srWizardType.IsGfs2 = descriptor is Gfs2HbaSrDescriptor || descriptor is Gfs2FcoeSrDescriptor;
                 names.Add(name);
-                name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_LvmoHba 
+                name = SrWizardHelpers.DefaultSRName(m_srWizardType is SrWizardType_Hba 
                                                         ? Messages.NEWSR_HBA_DEFAULT_NAME
                                                         : Messages.NEWSR_FCOE_DEFAULT_NAME, names);
             }
@@ -228,21 +231,23 @@ namespace XenAdmin.Wizards
 
         protected override bool RunNextPagePrecheck(XenTabPage senderPage)
         {
-            // if reattaching and RBAC warning page is visible, then we run the prechecks when leaving the RBAC warning page
-            // otherwise, when leaving xenTabPageSrName (Ref. CA-61525)
-            bool runPrechecks = _srToReattach != null && _rbac
-                                    ? senderPage == xenTabPageRbacWarning
-                                    : senderPage == xenTabPageSrName;
+            var runPrechecks = showProvisioningPage
+                ? senderPage == xenTabPageChooseSrProv
+                : (_srToReattach != null && _rbac
+                    ? senderPage == xenTabPageRbacWarning
+                    : senderPage == xenTabPageSrName);
 
             if (runPrechecks)
             {
 
                 if (m_srWizardType is SrWizardType_Fcoe)
                 {
+                    xenTabPageLvmoFcoe.SrType = showProvisioningPage && xenTabPageChooseSrProv.IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe;
                     return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoFcoe);
                 }
-                if (m_srWizardType is SrWizardType_LvmoHba)
+                if (m_srWizardType is SrWizardType_Hba)
                 {
+                    xenTabPageLvmoHba.SrType = showProvisioningPage && xenTabPageChooseSrProv.IsGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba;
                     return SetFCDevicesOnLVMoHBAPage(xenTabPageLvmoHba);
                 }
                 if (m_srWizardType is SrWizardType_Cslg || m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
@@ -257,7 +262,7 @@ namespace XenAdmin.Wizards
                 return CanShowLVMoHBASummaryPage(xenTabPageLvmoFcoe.SrDescriptors);
             }
 
-            if (m_srWizardType is SrWizardType_LvmoHba)
+            if (m_srWizardType is SrWizardType_Hba)
             {
                 if (senderPage == xenTabPageLvmoHba)
                 {
@@ -274,17 +279,26 @@ namespace XenAdmin.Wizards
             if (senderPagetype == typeof(ChooseSrTypePage))
             {
                 #region
+                showProvisioningPage = false;
                 RemovePagesFrom(_rbac ? 3 : 2);
                 m_srWizardType = xenTabPageChooseSrType.SrWizardType;
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                     AddPage(xenTabPageVhdoNFS);
-                else if (m_srWizardType is SrWizardType_LvmoIscsi)
+                else if (m_srWizardType is SrWizardType_Iscsi)
                 {
+                    showProvisioningPage = Helpers.KolkataOrGreater(xenConnection) &&
+                                   !Helpers.FeatureForbidden(xenConnection, Host.CorosyncDisabled);
+                    if (showProvisioningPage)
+                        AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoIscsi);
                 }
-                else if (m_srWizardType is SrWizardType_LvmoHba)
+                else if (m_srWizardType is SrWizardType_Hba)
                 {
+                    showProvisioningPage = Helpers.KolkataOrGreater(xenConnection) &&
+                                   !Helpers.FeatureForbidden(xenConnection, Host.CorosyncDisabled);
+                    if (showProvisioningPage)
+                        AddPage(xenTabPageChooseSrProv);
                     AddPage(xenTabPageLvmoHba);
                     AddPage(xenTabPageLvmoHbaSummary);
                 }
@@ -335,9 +349,9 @@ namespace XenAdmin.Wizards
 
                 if (m_srWizardType is SrWizardType_VhdoNfs)
                     xenTabPageVhdoNFS.SrWizardType = m_srWizardType;
-                else if (m_srWizardType is SrWizardType_LvmoIscsi)
+                else if (m_srWizardType is SrWizardType_Iscsi)
                     xenTabPageLvmoIscsi.SrWizardType = m_srWizardType;
-                else if (m_srWizardType is SrWizardType_LvmoHba)
+                else if (m_srWizardType is SrWizardType_Hba)
                     xenTabPageLvmoHba.SrWizardType = m_srWizardType;
                 else if (m_srWizardType is SrWizardType_Cslg || m_srWizardType is SrWizardType_NetApp || m_srWizardType is SrWizardType_EqualLogic)
                     xenTabPageCslg.SrWizardType = m_srWizardType;
@@ -350,6 +364,13 @@ namespace XenAdmin.Wizards
                 else if (m_srWizardType is SrWizardType_Fcoe)
                     xenTabPageLvmoFcoe.SrWizardType = m_srWizardType;
                 #endregion
+            }
+            else if (senderPagetype == typeof(ChooseSrProvisioningPage))
+            {
+                var isGfs2 = xenTabPageChooseSrProv.IsGfs2;
+                xenTabPageLvmoHba.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmohba;
+                xenTabPageLvmoFcoe.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmofcoe;
+                xenTabPageLvmoIscsi.SrType = isGfs2 ? SR.SRTypes.gfs2 : SR.SRTypes.lvmoiscsi;
             }
             else if (senderPagetype == typeof(CIFS_ISO))
             {
@@ -368,6 +389,7 @@ namespace XenAdmin.Wizards
 
                 m_srWizardType.UUID = xenTabPageLvmoIscsi.UUID;
                 m_srWizardType.DeviceConfig = xenTabPageLvmoIscsi.DeviceConfig;
+                m_srWizardType.IsGfs2 = xenTabPageLvmoIscsi.SrType == SR.SRTypes.gfs2;
             }
             else if (senderPagetype == typeof(NFS_ISO))
             {
@@ -449,7 +471,7 @@ namespace XenAdmin.Wizards
 
         protected override void FinishWizard()
         {
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
             {
                 base.FinishWizard();
                 return;
@@ -533,7 +555,7 @@ namespace XenAdmin.Wizards
             ProgressBarStyle progressBarStyle = FinalAction is SrIntroduceAction ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
             using (var dialog = new ActionProgressDialog(FinalAction, progressBarStyle) {ShowCancel = true})
             {
-                if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+                if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
                 {
                     ActionProgressDialog closureDialog = dialog;
                     // close dialog even when there's an error for HBA SR type as there will be the Summary page displayed.
@@ -547,7 +569,7 @@ namespace XenAdmin.Wizards
                 dialog.ShowDialog(this);
             }
 
-            if (m_srWizardType is SrWizardType_LvmoHba || m_srWizardType is SrWizardType_Fcoe)
+            if (m_srWizardType is SrWizardType_Hba || m_srWizardType is SrWizardType_Fcoe)
             {
                 foreach (var asyncAction in actionList)
                 {
@@ -615,6 +637,7 @@ namespace XenAdmin.Wizards
 
             foreach (var srDescriptor in m_srWizardType.SrDescriptors)
             {
+                var srType = srDescriptor is FibreChannelDescriptor ? (srDescriptor as FibreChannelDescriptor).SrType : m_srWizardType.Type;
                 if (String.IsNullOrEmpty(srDescriptor.UUID))
                 {
                     // Don't need to show any warning, as the only destructive creates
@@ -622,7 +645,7 @@ namespace XenAdmin.Wizards
                     finalActions.Add(new SrCreateAction(xenConnection, master,
                                                         srDescriptor.Name,
                                                         srDescriptor.Description,
-                                                        m_srWizardType.Type,
+                                                        srType,
                                                         m_srWizardType.ContentType,
                                                         srDescriptor.DeviceConfig,
                                                         srDescriptor.SMConfig));
@@ -634,7 +657,7 @@ namespace XenAdmin.Wizards
                         (_srToReattach == null || SR.SupportsDatabaseReplication(xenConnection, _srToReattach)))
                     {
                         // "Find existing SRs" or "Attach SR needed for DR" cases
-                        ScannedDeviceInfo deviceInfo = new ScannedDeviceInfo(m_srWizardType.Type,
+                        ScannedDeviceInfo deviceInfo = new ScannedDeviceInfo(srType,
                                                                              srDescriptor.DeviceConfig,
                                                                              srDescriptor.UUID);
                         finalActions.Add(new DrTaskCreateAction(xenConnection, deviceInfo));
@@ -644,7 +667,7 @@ namespace XenAdmin.Wizards
                                                                srDescriptor.UUID,
                                                                srDescriptor.Name,
                                                                srDescriptor.Description,
-                                                               m_srWizardType.Type,
+                                                               srType,
                                                                m_srWizardType.ContentType,
                                                                srDescriptor.DeviceConfig));
                 }
@@ -784,5 +807,6 @@ namespace XenAdmin.Wizards
         {
             xenTabPageChooseSrType.PreselectNewSrWizardType(typeof(SrWizardType_NfsIso));
         }
+
     }
 }

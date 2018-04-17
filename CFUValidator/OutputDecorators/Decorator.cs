@@ -30,14 +30,24 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace XenAdmin.Wizards.PatchingWizard.PlanActions
+namespace CFUValidator.OutputDecorators
 {
-    interface IAvoidRestartHostsAware
+    abstract class Decorator : OuputComponent
     {
-        List<string> AvoidRestartHosts { set; }
+        private OuputComponent ouputComponent;
+        public void SetComponent(OuputComponent ouputComponentToSet)
+        {
+            ouputComponent = ouputComponentToSet;
+        }
+
+        public override StringBuilder Generate()
+        {
+            if(ouputComponent != null)
+                return ouputComponent.Generate();
+
+            throw new NullReferenceException();
+        }
     }
 }

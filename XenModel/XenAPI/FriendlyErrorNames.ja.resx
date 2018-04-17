@@ -186,6 +186,12 @@
   <data name="CANNOT_ADD_TUNNEL_TO_BOND_SLAVE" xml:space="preserve">
     <value>この PIF ボンディング スレーブなのでトンネルを作成できません。</value>
   </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_SRIOV_LOGICAL" xml:space="preserve">
+    <value>これはネットワーク SR-IOV 論理 PIF であり、トンネルは使用できません。</value>
+  </data>
+  <data name="CANNOT_ADD_TUNNEL_TO_VLAN_ON_SRIOV_LOGICAL" xml:space="preserve">
+    <value>これはネットワーク SR-IOV 上の VLAN PIF であり、トンネルは使用できません。</value>
+  </data>
   <data name="CANNOT_ADD_VLAN_TO_BOND_SLAVE" xml:space="preserve">
     <value>この PIF ボンディング スレーブなので VLAN を作成できません。</value>
   </data>
@@ -225,6 +231,9 @@
   <data name="CANNOT_FIND_UPDATE" xml:space="preserve">
     <value>要求されたアップデートが見つかりません。アップデートを再度アップロードしてください。この問題は、xe update-apply の前に xe update-pool-clean を実行すると発生します。 </value>
   </data>
+  <data name="CANNOT_FORGET_SRIOV_LOGICAL" xml:space="preserve">
+    <value>これはネットワーク SR-IOV 論理 PIF であり、消去操作はできません。</value>
+  </data>
   <data name="CANNOT_PLUG_BOND_SLAVE" xml:space="preserve">
     <value>この PIF ボンディング スレーブなので接続できません。</value>
   </data>
@@ -254,6 +263,30 @@
   </data>
   <data name="CLUSTERED_SR_DEGRADED" xml:space="preserve">
     <value>SR がクラスター化されたローカル ストレージを使用しています。 ホストを今再起動するのは安全ではありません。</value>
+  </data>
+  <data name="CLUSTERING_DISABLED" xml:space="preserve">
+    <value>cluster_host でクラスタリングが無効になっている間に、操作が試行されました。</value>
+  </data>
+  <data name="CLUSTERING_ENABLED" xml:space="preserve">
+    <value>cluster_host でクラスタリングが有効になっている間に、操作が試行されました。</value>
+  </data>
+  <data name="CLUSTERING_ENABLED_ON_NETWORK" xml:space="preserve">
+    <value>ネットワークにクラスター オブジェクトが接続されています。</value>
+  </data>
+  <data name="CLUSTER_ALREADY_EXISTS" xml:space="preserve">
+    <value>クラスターは既にプールに存在します。</value>
+  </data>
+  <data name="CLUSTER_CREATE_IN_PROGRESS" xml:space="preserve">
+    <value>クラスターの作成が進行中であるため、この操作を実行できませんでした。</value>
+  </data>
+  <data name="CLUSTER_DOES_NOT_HAVE_ONE_NODE" xml:space="preserve">
+    <value>クラスターにノードが 1 つしかありません。</value>
+  </data>
+  <data name="CLUSTER_FORCE_DESTROY_FAILED" xml:space="preserve">
+    <value>クラスターの強制破棄中、Cluster_host での強制破棄に失敗しました。</value>
+  </data>
+  <data name="CLUSTER_STACK_IN_USE" xml:space="preserve">
+    <value>クラスター スタックは既に使用されています。</value>
   </data>
   <data name="COULD_NOT_FIND_NETWORK_INTERFACE_WITH_SPECIFIED_DEVICE_NAME_AND_MAC_ADDRESS" xml:space="preserve">
     <value>指定したデバイス名および MAC アドレスのネットワーク インターフェイスが見つかりません。</value>
@@ -690,8 +723,41 @@
   <data name="NETWORK_CONTAINS_VIF" xml:space="preserve">
     <value>ネットワークにはアクティブな VIF ({0}) があるため、削除できません。</value>
   </data>
+  <data name="NETWORK_HAS_INCOMPATIBLE_SRIOV_PIFS" xml:space="preserve">
+    <value>PIF は、選択した SR-IOV ネットワークと互換性がありません</value>
+  </data>
+  <data name="NETWORK_HAS_INCOMPATIBLE_VLAN_ON_SRIOV_PIFS" xml:space="preserve">
+    <value>PIF の VLAN は、選択した SR-IOV VLAN ネットワークと互換性がありません</value>
+  </data>
   <data name="NETWORK_INCOMPATIBLE_PURPOSES" xml:space="preserve">
     <value>ネットワークに追加しようとした目的は、このネットワークまたは他のネットワークの既存の目的と互換性がありません。</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_BOND" xml:space="preserve">
+    <value>ネットワークがボンディングと互換性がありません</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_SRIOV" xml:space="preserve">
+    <value>ネットワークは SR-IOV と互換性がありません</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_TUNNEL" xml:space="preserve">
+    <value>ネットワークはトンネルと互換性がありません</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_VLAN_ON_BRIDGE" xml:space="preserve">
+    <value>ネットワークはブリッジ上の VLAN と互換性がありません</value>
+  </data>
+  <data name="NETWORK_INCOMPATIBLE_WITH_VLAN_ON_SRIOV" xml:space="preserve">
+    <value>ネットワークは SR-IOV 上の VLAN と互換性がありません</value>
+  </data>
+  <data name="NETWORK_SRIOV_ALREADY_ENABLED" xml:space="preserve">
+    <value>SR-IOV ネットワーク用に選択された PIF が既に有効になっている</value>
+  </data>
+  <data name="NETWORK_SRIOV_DISABLE_FAILED" xml:space="preserve">
+    <value>PIF で SR-IOV を無効にできませんでした</value>
+  </data>
+  <data name="NETWORK_SRIOV_ENABLE_FAILED" xml:space="preserve">
+    <value>PIF で SR-IOV を有効にできませんでした</value>
+  </data>
+  <data name="NETWORK_SRIOV_INSUFFICIENT_CAPACITY" xml:space="preserve">
+    <value>VF の予約のための十分な容量がありません</value>
   </data>
   <data name="NETWORK_UNMANAGED" xml:space="preserve">
     <value>ネットワークは xapi で管理されていません。</value>
@@ -710,6 +776,9 @@
   </data>
   <data name="NOT_SYSTEM_DOMAIN" xml:space="preserve">
     <value>この VM はシステム ドメインとして登録されていません。この処理は、登録済みのシステム ドメインにのみ実行できます。</value>
+  </data>
+  <data name="NO_COMPATIBLE_CLUSTER_HOST" xml:space="preserve">
+    <value>ホストに、互換性のあるクラスター スタックを持つ Cluster_host がありません。</value>
   </data>
   <data name="NO_HOSTS_AVAILABLE" xml:space="preserve">
     <value>指定された処理を完了するためのサーバーがありません。</value>
@@ -798,6 +867,9 @@
   <data name="PGPU_NOT_COMPATIBLE_WITH_GPU_GROUP" xml:space="preserve">
     <value>GPU の種類が割り当て先のグループのものと非互換です。</value>
   </data>
+  <data name="PIF_ALLOWS_UNPLUG" xml:space="preserve">
+    <value>この PIF でアンプラグが許可されているため、要求された処理を実行できません。</value>
+  </data>
   <data name="PIF_ALREADY_BONDED" xml:space="preserve">
     <value>ボンディング済みのインターフェイスを使ってボンディングを作成することはできません。</value>
   </data>
@@ -819,6 +891,9 @@
   <data name="PIF_DOES_NOT_ALLOW_UNPLUG" xml:space="preserve">
     <value>この PIF でアンプラグが許可されないため、要求された処理を実行できません。</value>
   </data>
+  <data name="PIF_HAS_FCOE_SR_IN_USE" xml:space="preserve">
+    <value>指定した PIF には使用中の FCoE SR があるため、要求された処理を実行できません。</value>
+  </data>
   <data name="PIF_HAS_NO_NETWORK_CONFIGURATION" xml:space="preserve">
     <value>PIF のネットワークが構成されていません。</value>
   </data>
@@ -831,14 +906,26 @@
   <data name="PIF_IS_MANAGEMENT_INTERFACE" xml:space="preserve">
     <value>PIF は管理インターフェイスです。</value>
   </data>
+  <data name="PIF_IS_NOT_PHYSICAL" xml:space="preserve">
+    <value>物理 PIF でのみ可能な操作を実行しようとしました</value>
+  </data>
+  <data name="PIF_IS_NOT_SRIOV_CAPABLE" xml:space="preserve">
+    <value>選択した PIF はネットワーク SR-IOV に対応していません</value>
+  </data>
   <data name="PIF_IS_PHYSICAL" xml:space="preserve">
     <value>PIF {0} を破棄しようとしましたが、これは物理サーバー構成を示しているため破棄できません。 </value>
+  </data>
+  <data name="PIF_IS_SRIOV_LOGICAL" xml:space="preserve">
+    <value>ネットワーク SR-IOV 論理 PIF 上にボンディングを作成することはできません - 物理 PIFを使用してください。</value>
   </data>
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>VLAN 上に VLAN を作成することはできません。物理 PIF/ボンディングを使用してください。</value>
   </data>
   <data name="PIF_NOT_PRESENT" xml:space="preserve">
     <value>このホストには指定されたネットワークの PIF がありません。</value>
+  </data>
+  <data name="PIF_SRIOV_STILL_EXISTS" xml:space="preserve">
+    <value>PIF はまだネットワーク SR-IOV に関連しています</value>
   </data>
   <data name="PIF_TUNNEL_STILL_EXISTS" xml:space="preserve">
     <value>このインターフェイスにトンネルが存在している間は、処理を続行できません。</value>
@@ -868,7 +955,7 @@
     <value>以下のエラーにより、外部認証が無効になりました。資格情報が無効なため、一部の Active Directory マシン アカウントが Active Directory サーバー上で無効になっていません。</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED" xml:space="preserve">
-    <value>外部認証を有効にできません。{1}</value>
+    <value>外部認証を有効にできません。</value>
   </data>
   <data name="POOL_AUTH_ENABLE_FAILED_DOMAIN_LOOKUP_FAILED" xml:space="preserve">
     <value>サーバーでドメイン サーバーに接続できないため外部認証を有効にできません。設定を確認し、ドメイン サーバーに接続できることを確認してください。</value>
@@ -896,6 +983,9 @@
   </data>
   <data name="POOL_JOINING_HOST_HAS_BONDS" xml:space="preserve">
     <value>プールに追加しているホストに、ボンディングを含めることができません。</value>
+  </data>
+  <data name="POOL_JOINING_HOST_HAS_NETWORK_SRIOVS" xml:space="preserve">
+    <value>プールに追加しているホストにネットワーク SR-IOV を含めることはできません。</value>
   </data>
   <data name="POOL_JOINING_HOST_HAS_NON_MANAGEMENT_VLANS" xml:space="preserve">
     <value>プールに追加しているホストに、非管理 VLAN を含めることができません。</value>
@@ -1631,6 +1721,9 @@
   <data name="SR_REQUIRES_UPGRADE" xml:space="preserve">
     <value>この処理は、SR をアップグレードするまで実行できません。</value>
   </data>
+  <data name="SR_SOURCE_SPACE_INSUFFICIENT" xml:space="preserve">
+    <value>ソース SR には、操作を実行するための十分な一時スペースがありません。</value>
+  </data>
   <data name="SR_UNKNOWN_DRIVER" xml:space="preserve">
     <value>ドライバー {0} が認識されないため、SR を接続できませんでした。</value>
   </data>
@@ -1984,6 +2077,9 @@
   </data>
   <data name="VM_MEMORY_SIZE_TOO_LOW" xml:space="preserve">
     <value>指定した VM は、メモリが足りないため起動できません。</value>
+  </data>
+  <data name="VM_MIGRATE_CONTACT_REMOTE_SERVICE_FAILED" xml:space="preserve">
+    <value>移行先ホストのサービスと通信できません。</value>
   </data>
   <data name="VM_MIGRATE_FAILED" xml:space="preserve">
     <value>VM の移行に失敗しました。{3}</value>

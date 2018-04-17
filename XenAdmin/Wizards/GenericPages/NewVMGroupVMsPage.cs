@@ -215,9 +215,8 @@ namespace XenAdmin.Wizards.GenericPages
             }
         }
 
-        public override void PageLoaded(PageLoadedDirection direction)
+        protected override void PageLoadedCore(PageLoadedDirection direction)
         {
-            base.PageLoaded(direction);
             RefreshTab(null);
         } 
 
@@ -285,15 +284,13 @@ namespace XenAdmin.Wizards.GenericPages
 				e.Row.Selected = false;
 		}
 
-        public override void PageLeave(PageLoadedDirection direction, ref bool cancel)
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
             if (direction == PageLoadedDirection.Back)
                 return;
 
             if (!userAcceptsWarning())
                 cancel = true;
-
-            base.PageLeave(direction, ref cancel);
         }
 
         private bool userAcceptsWarning()

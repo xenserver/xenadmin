@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(pif_igmp_statusConverter))]
     public enum pif_igmp_status
     {
         enabled, disabled, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class pif_igmp_status_helper
     {
         public static string ToString(pif_igmp_status x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this pif_igmp_status x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class pif_igmp_statusConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((pif_igmp_status)value).StringOf());
         }
     }
 }

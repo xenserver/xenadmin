@@ -45,15 +45,27 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
         private readonly WizardMode _wizardMode;
         private string disableReason = string.Empty;
         private readonly List<VM> preSelectedVMs;
+        private IDictionary<string, IDictionary<string, string>> cache;
+        private bool canceled = false;
+        private static readonly Object cacheLock = new Object();
 
-        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToComboBox, List<VM> preSelectedVMs, WizardMode wizardMode)
+        public CrossPoolMigrateCanMigrateFilter(IXenObject itemAddedToComboBox, List<VM> preSelectedVMs, WizardMode wizardMode, IDictionary<string, IDictionary<string, string>> cache = null)
             : base(itemAddedToComboBox)
         {
             _wizardMode = wizardMode;
+            if (cache == null)
+                this.cache = new Dictionary<string, IDictionary<string, string>>();
+            else
+                this.cache = cache;
 
             if (preSelectedVMs == null)
                 throw new ArgumentNullException("Pre-selected VMs are null");
             this.preSelectedVMs = preSelectedVMs;
+        }
+
+        public override void Cancel()
+        {
+            canceled = true;
         }
 
         public override bool FailureFound
@@ -73,6 +85,20 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
 
                     foreach (VM vm in preSelectedVMs)
                     {
+                        if (canceled)
+                            return excludedHosts.Count == targets.Count;
+
+                        // obtain the cache data for a vm
+                        IDictionary<string, string> vmCache;
+                        lock (cacheLock)
+                        {
+                            if (!cache.ContainsKey(vm.opaque_ref))
+                            {
+                                cache.Add(vm.opaque_ref, new Dictionary<string, string>());
+                            }
+                            vmCache = cache[vm.opaque_ref];
+                        }
+
                         try
                         {
                             //CA-220218: for intra-pool motion of halted VMs we do a move, so no need to assert we can migrate
@@ -91,6 +117,16 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                                 continue;
                             }
 
+                            if (vmCache.ContainsKey(host.opaque_ref))
+                            {
+                                disableReason = vmCache[host.opaque_ref];
+                                if (!string.IsNullOrEmpty(disableReason) && !excludedHosts.Contains(host.opaque_ref))
+                                {
+                                    excludedHosts.Add(host.opaque_ref);
+                                }
+                                continue;
+                            }
+
                             PIF managementPif = host.Connection.Cache.PIFs.First(p => p.management);
                             XenAPI.Network network = host.Connection.Cache.Resolve(managementPif.network);
 
@@ -103,6 +139,10 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                                                   GetVdiMap(vm, targetSrs),
                                                   vm.Connection == host.Connection ? new Dictionary<XenRef<VIF>, XenRef<XenAPI.Network>>() : GetVifMap(vm, targetNetwork),
                                                   new Dictionary<string, string>());
+                            lock (cacheLock)
+                            {
+                                vmCache.Add(host.opaque_ref, string.Empty);
+                            }
                         }
                         catch (Failure failure)
                         {
@@ -111,8 +151,13 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard.Filters
                             else
                                 disableReason = failure.Message;
 
-                            log.ErrorFormat("VM: {0}, Host: {1} - Reason: {2};", vm.opaque_ref, host.opaque_ref, failure.Message);
+                            lock (cacheLock)
+                            {
+                                vmCache.Add(host.opaque_ref, disableReason.Clone().ToString());
+                            }
 
+                            log.ErrorFormat("VM: {0}, Host: {1} - Reason: {2};", vm.opaque_ref, host.opaque_ref, failure.Message);
+                            
                             if (!excludedHosts.Contains(host.opaque_ref))
                                 excludedHosts.Add(host.opaque_ref);
                         }

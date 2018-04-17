@@ -82,7 +82,7 @@ namespace XenAdmin.Actions
                         try
                         {
                             HTTPHelper.Get(this, true, DataReceived, filename, Host.address,
-                                (HTTP_actions.get_ss)HTTP_actions.get_host_backup, Session.uuid);
+                                (HTTP_actions.get_ss)HTTP_actions.get_host_backup, Session.opaque_ref);
                         }
                         finally
                         {
@@ -96,7 +96,7 @@ namespace XenAdmin.Actions
                         this.Description = String.Format(Messages.RESTORING_HOST, Host.Name());
 
                         HTTPHelper.Put(this, true, filename, Host.address,
-                            (HTTP_actions.put_ss)HTTP_actions.put_host_restore, Session.uuid);
+                            (HTTP_actions.put_ss)HTTP_actions.put_host_restore, Session.opaque_ref);
 
                         this.Description = String.Format(Messages.HOST_RESTORED, Host.Name());
                         break;

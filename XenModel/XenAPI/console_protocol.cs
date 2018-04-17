@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(console_protocolConverter))]
     public enum console_protocol
     {
         vt100, rfb, rdp, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class console_protocol_helper
     {
         public static string ToString(console_protocol x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this console_protocol x)
         {
             switch (x)
             {
@@ -55,6 +63,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class console_protocolConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((console_protocol)value).StringOf());
         }
     }
 }

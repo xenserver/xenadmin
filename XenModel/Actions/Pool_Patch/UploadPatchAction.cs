@@ -156,7 +156,7 @@ namespace XenAdmin.Actions
                 try
                 {
                     result = HTTPHelper.Put(progressDelegate, GetCancelling, true, Connection, RelatedTask, ref session, retailPatchPath,
-                        h.address, (HTTP_actions.put_ss)HTTP_actions.put_pool_patch_upload, session.uuid);
+                        h.address, (HTTP_actions.put_ss)HTTP_actions.put_pool_patch_upload, session.opaque_ref);
                 }
                 catch(CancelledException)
                 {

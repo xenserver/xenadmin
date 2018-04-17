@@ -32,6 +32,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
@@ -68,6 +71,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given PVS_server.
+        /// </summary>
         public override void UpdateFrom(PVS_server update)
         {
             uuid = update.uuid;
@@ -79,10 +86,10 @@ namespace XenAPI
 
         internal void UpdateFromProxy(Proxy_PVS_server proxy)
         {
-            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
+            uuid = proxy.uuid == null ? null : proxy.uuid;
             addresses = proxy.addresses == null ? new string[] {} : (string [])proxy.addresses;
-            first_port = proxy.first_port == null ? 0 : long.Parse((string)proxy.first_port);
-            last_port = proxy.last_port == null ? 0 : long.Parse((string)proxy.last_port);
+            first_port = proxy.first_port == null ? 0 : long.Parse(proxy.first_port);
+            last_port = proxy.last_port == null ? 0 : long.Parse(proxy.last_port);
             site = proxy.site == null ? null : XenRef<PVS_site>.Create(proxy.site);
         }
 
@@ -99,15 +106,33 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new PVS_server from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public PVS_server(Hashtable table)
+        public PVS_server(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            addresses = Marshalling.ParseStringArray(table, "addresses");
-            first_port = Marshalling.ParseLong(table, "first_port");
-            last_port = Marshalling.ParseLong(table, "last_port");
-            site = Marshalling.ParseRef<PVS_site>(table, "site");
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this PVS_server
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("addresses"))
+                addresses = Marshalling.ParseStringArray(table, "addresses");
+            if (table.ContainsKey("first_port"))
+                first_port = Marshalling.ParseLong(table, "first_port");
+            if (table.ContainsKey("last_port"))
+                last_port = Marshalling.ParseLong(table, "last_port");
+            if (table.ContainsKey("site"))
+                site = Marshalling.ParseRef<PVS_site>(table, "site");
         }
 
         public bool DeepEquals(PVS_server other)
@@ -153,7 +178,10 @@ namespace XenAPI
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static PVS_server get_record(Session session, string _pvs_server)
         {
-            return new PVS_server((Proxy_PVS_server)session.proxy.pvs_server_get_record(session.uuid, _pvs_server ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_record(session.opaque_ref, _pvs_server);
+            else
+                return new PVS_server(session.proxy.pvs_server_get_record(session.opaque_ref, _pvs_server ?? "").parse());
         }
 
         /// <summary>
@@ -164,7 +192,10 @@ namespace XenAPI
         /// <param name="_uuid">UUID of object to return</param>
         public static XenRef<PVS_server> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<PVS_server>.Create(session.proxy.pvs_server_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_by_uuid(session.opaque_ref, _uuid);
+            else
+                return XenRef<PVS_server>.Create(session.proxy.pvs_server_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -175,7 +206,10 @@ namespace XenAPI
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static string get_uuid(Session session, string _pvs_server)
         {
-            return (string)session.proxy.pvs_server_get_uuid(session.uuid, _pvs_server ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_uuid(session.opaque_ref, _pvs_server);
+            else
+                return session.proxy.pvs_server_get_uuid(session.opaque_ref, _pvs_server ?? "").parse();
         }
 
         /// <summary>
@@ -186,7 +220,10 @@ namespace XenAPI
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static string[] get_addresses(Session session, string _pvs_server)
         {
-            return (string [])session.proxy.pvs_server_get_addresses(session.uuid, _pvs_server ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_addresses(session.opaque_ref, _pvs_server);
+            else
+                return (string [])session.proxy.pvs_server_get_addresses(session.opaque_ref, _pvs_server ?? "").parse();
         }
 
         /// <summary>
@@ -197,7 +234,10 @@ namespace XenAPI
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static long get_first_port(Session session, string _pvs_server)
         {
-            return long.Parse((string)session.proxy.pvs_server_get_first_port(session.uuid, _pvs_server ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_first_port(session.opaque_ref, _pvs_server);
+            else
+                return long.Parse(session.proxy.pvs_server_get_first_port(session.opaque_ref, _pvs_server ?? "").parse());
         }
 
         /// <summary>
@@ -208,7 +248,10 @@ namespace XenAPI
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static long get_last_port(Session session, string _pvs_server)
         {
-            return long.Parse((string)session.proxy.pvs_server_get_last_port(session.uuid, _pvs_server ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_last_port(session.opaque_ref, _pvs_server);
+            else
+                return long.Parse(session.proxy.pvs_server_get_last_port(session.opaque_ref, _pvs_server ?? "").parse());
         }
 
         /// <summary>
@@ -219,7 +262,10 @@ namespace XenAPI
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static XenRef<PVS_site> get_site(Session session, string _pvs_server)
         {
-            return XenRef<PVS_site>.Create(session.proxy.pvs_server_get_site(session.uuid, _pvs_server ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_site(session.opaque_ref, _pvs_server);
+            else
+                return XenRef<PVS_site>.Create(session.proxy.pvs_server_get_site(session.opaque_ref, _pvs_server ?? "").parse());
         }
 
         /// <summary>
@@ -233,7 +279,10 @@ namespace XenAPI
         /// <param name="_site">PVS site this server is a part of</param>
         public static XenRef<PVS_server> introduce(Session session, string[] _addresses, long _first_port, long _last_port, string _site)
         {
-            return XenRef<PVS_server>.Create(session.proxy.pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), _site ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_introduce(session.opaque_ref, _addresses, _first_port, _last_port, _site);
+            else
+                return XenRef<PVS_server>.Create(session.proxy.pvs_server_introduce(session.opaque_ref, _addresses, _first_port.ToString(), _last_port.ToString(), _site ?? "").parse());
         }
 
         /// <summary>
@@ -247,7 +296,10 @@ namespace XenAPI
         /// <param name="_site">PVS site this server is a part of</param>
         public static XenRef<Task> async_introduce(Session session, string[] _addresses, long _first_port, long _last_port, string _site)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_server_introduce(session.uuid, _addresses, _first_port.ToString(), _last_port.ToString(), _site ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pvs_server_introduce(session.opaque_ref, _addresses, _first_port, _last_port, _site);
+          else
+              return XenRef<Task>.Create(session.proxy.async_pvs_server_introduce(session.opaque_ref, _addresses, _first_port.ToString(), _last_port.ToString(), _site ?? "").parse());
         }
 
         /// <summary>
@@ -258,7 +310,10 @@ namespace XenAPI
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static void forget(Session session, string _pvs_server)
         {
-            session.proxy.pvs_server_forget(session.uuid, _pvs_server ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.pvs_server_forget(session.opaque_ref, _pvs_server);
+            else
+                session.proxy.pvs_server_forget(session.opaque_ref, _pvs_server ?? "").parse();
         }
 
         /// <summary>
@@ -269,7 +324,10 @@ namespace XenAPI
         /// <param name="_pvs_server">The opaque_ref of the given pvs_server</param>
         public static XenRef<Task> async_forget(Session session, string _pvs_server)
         {
-            return XenRef<Task>.Create(session.proxy.async_pvs_server_forget(session.uuid, _pvs_server ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_pvs_server_forget(session.opaque_ref, _pvs_server);
+          else
+              return XenRef<Task>.Create(session.proxy.async_pvs_server_forget(session.opaque_ref, _pvs_server ?? "").parse());
         }
 
         /// <summary>
@@ -279,7 +337,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static List<XenRef<PVS_server>> get_all(Session session)
         {
-            return XenRef<PVS_server>.Create(session.proxy.pvs_server_get_all(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_all(session.opaque_ref);
+            else
+                return XenRef<PVS_server>.Create(session.proxy.pvs_server_get_all(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -289,7 +350,10 @@ namespace XenAPI
         /// <param name="session">The session</param>
         public static Dictionary<XenRef<PVS_server>, PVS_server> get_all_records(Session session)
         {
-            return XenRef<PVS_server>.Create<Proxy_PVS_server>(session.proxy.pvs_server_get_all_records(session.uuid).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.pvs_server_get_all_records(session.opaque_ref);
+            else
+                return XenRef<PVS_server>.Create<Proxy_PVS_server>(session.proxy.pvs_server_get_all_records(session.opaque_ref).parse());
         }
 
         /// <summary>
@@ -308,7 +372,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// IPv4 addresses of this server
@@ -326,7 +390,7 @@ namespace XenAPI
                 }
             }
         }
-        private string[] _addresses;
+        private string[] _addresses = {};
 
         /// <summary>
         /// First UDP port accepted by this server
@@ -344,7 +408,7 @@ namespace XenAPI
                 }
             }
         }
-        private long _first_port;
+        private long _first_port = 0;
 
         /// <summary>
         /// Last UDP port accepted by this server
@@ -362,11 +426,12 @@ namespace XenAPI
                 }
             }
         }
-        private long _last_port;
+        private long _last_port = 0;
 
         /// <summary>
         /// PVS site this server is part of
         /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PVS_site>))]
         public virtual XenRef<PVS_site> site
         {
             get { return _site; }
@@ -380,6 +445,6 @@ namespace XenAPI
                 }
             }
         }
-        private XenRef<PVS_site> _site;
+        private XenRef<PVS_site> _site = new XenRef<PVS_site>("OpaqueRef:NULL");
     }
 }

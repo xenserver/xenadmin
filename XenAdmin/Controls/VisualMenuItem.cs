@@ -229,14 +229,6 @@ namespace XenAdmin.Controls
                     }
                 }
                 maxCombinedWidth = maxImageWidth + maxStringLength;
-                foreach (ToolStripItem item in parentStrip.DropDownItems)
-                {
-                    VisualMenuItem visItem;
-                    if ((visItem = item as VisualMenuItem) != null)
-                    {
-                        visItem.RefreshPadding();
-                    }
-                }
             }     
         }
     }

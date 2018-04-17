@@ -29,12 +29,12 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
 {
+    [JsonConverter(typeof(pgpu_dom0_accessConverter))]
     public enum pgpu_dom0_access
     {
         enabled, disable_on_reboot, disabled, enable_on_reboot, unknown
@@ -43,6 +43,14 @@ namespace XenAPI
     public static class pgpu_dom0_access_helper
     {
         public static string ToString(pgpu_dom0_access x)
+        {
+            return x.StringOf();
+        }
+    }
+
+    public static partial class EnumExt
+    {
+        public static string StringOf(this pgpu_dom0_access x)
         {
             switch (x)
             {
@@ -57,6 +65,14 @@ namespace XenAPI
                 default:
                     return "unknown";
             }
+        }
+    }
+
+    internal class pgpu_dom0_accessConverter : XenEnumConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((pgpu_dom0_access)value).StringOf());
         }
     }
 }

@@ -78,6 +78,8 @@ namespace XenAdmin.TabPages
             base.Text = Messages.SNAPSHOTS_PAGE_TITLE;
             dataGridView.TabIndex = snapshotTreeView.TabIndex;
             dataGridView.Sorted += DataGridView_Sorted;
+            dataGridView.Columns[2].DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HMS;
+            dataGridView.Columns[2].ValueType = typeof(DateTime);
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
         }
 
@@ -443,7 +445,7 @@ namespace XenAdmin.TabPages
                 _name.Value = snapshot.name_label;
                 //Created On
                 Cells.Add(_creationTime);
-                _creationTime.Value = HelpersGUI.DateTimeToString(snapshot.snapshot_time.ToLocalTime() + snapshot.Connection.ServerTimeOffset, Messages.DATEFORMAT_DMY_HMS, true);
+                _creationTime.Value = snapshot.snapshot_time.ToLocalTime() + snapshot.Connection.ServerTimeOffset;
                 //Size
                 Cells.Add(_size);
                 _size.Value = GetStringSnapshotSize(snapshot);

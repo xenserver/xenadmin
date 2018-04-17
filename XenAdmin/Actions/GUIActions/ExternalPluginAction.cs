@@ -260,7 +260,7 @@ namespace XenAdmin.Actions
                 WriteTrustedCertificates(master.Connection);
             }
 
-            string sessionRef = connection.Session != null ? connection.Session.uuid : EmptyParameter;
+            string sessionRef = connection.Session != null ? connection.Session.opaque_ref : EmptyParameter;
             string objCls = obj != null ? obj.GetType().Name : EmptyParameter;
             string objUuid = obj != null && connection.Session != null ? Helpers.GetUuid(obj) : EmptyParameter;
             return new List<string>(new string[] { masterAddress, sessionRef, objCls, objUuid });
@@ -278,7 +278,7 @@ namespace XenAdmin.Actions
                 WriteTrustedCertificates(master.Connection);
             }
 
-            string sessionRef = connection.Session != null ? connection.Session.uuid : EmptyParameter;
+            string sessionRef = connection.Session != null ? connection.Session.opaque_ref : EmptyParameter;
             string objCls = BlankParamter;
             string objUuid = BlankParamter;
             return new List<string>(new string[] { masterAddress, sessionRef, objCls, objUuid });

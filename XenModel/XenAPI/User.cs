@@ -32,6 +32,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using Newtonsoft.Json;
 
 
 namespace XenAPI
@@ -66,6 +69,10 @@ namespace XenAPI
             this.UpdateFromProxy(proxy);
         }
 
+        /// <summary>
+        /// Updates each field of this instance with the value of
+        /// the corresponding field of a given User.
+        /// </summary>
         public override void UpdateFrom(User update)
         {
             uuid = update.uuid;
@@ -76,9 +83,9 @@ namespace XenAPI
 
         internal void UpdateFromProxy(Proxy_User proxy)
         {
-            uuid = proxy.uuid == null ? null : (string)proxy.uuid;
-            short_name = proxy.short_name == null ? null : (string)proxy.short_name;
-            fullname = proxy.fullname == null ? null : (string)proxy.fullname;
+            uuid = proxy.uuid == null ? null : proxy.uuid;
+            short_name = proxy.short_name == null ? null : proxy.short_name;
+            fullname = proxy.fullname == null ? null : proxy.fullname;
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
         }
 
@@ -94,14 +101,31 @@ namespace XenAPI
 
         /// <summary>
         /// Creates a new User from a Hashtable.
+        /// Note that the fields not contained in the Hashtable
+        /// will be created with their default values.
         /// </summary>
         /// <param name="table"></param>
-        public User(Hashtable table)
+        public User(Hashtable table) : this()
         {
-            uuid = Marshalling.ParseString(table, "uuid");
-            short_name = Marshalling.ParseString(table, "short_name");
-            fullname = Marshalling.ParseString(table, "fullname");
-            other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
+            UpdateFrom(table);
+        }
+
+        /// <summary>
+        /// Given a Hashtable with field-value pairs, it updates the fields of this User
+        /// with the values listed in the Hashtable. Note that only the fields contained
+        /// in the Hashtable will be updated and the rest will remain the same.
+        /// </summary>
+        /// <param name="table"></param>
+        public void UpdateFrom(Hashtable table)
+        {
+            if (table.ContainsKey("uuid"))
+                uuid = Marshalling.ParseString(table, "uuid");
+            if (table.ContainsKey("short_name"))
+                short_name = Marshalling.ParseString(table, "short_name");
+            if (table.ContainsKey("fullname"))
+                fullname = Marshalling.ParseString(table, "fullname");
+            if (table.ContainsKey("other_config"))
+                other_config = Maps.convert_from_proxy_string_string(Marshalling.ParseHashTable(table, "other_config"));
         }
 
         public bool DeepEquals(User other)
@@ -130,8 +154,8 @@ namespace XenAPI
         {
             if (opaqueRef == null)
             {
-                Proxy_User p = this.ToProxy();
-                return session.proxy.user_create(session.uuid, p).parse();
+                var reference = create(session, this);
+                return reference == null ? null : reference.opaque_ref;
             }
             else
             {
@@ -157,7 +181,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static User get_record(Session session, string _user)
         {
-            return new User((Proxy_User)session.proxy.user_get_record(session.uuid, _user ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.user_get_record(session.opaque_ref, _user);
+            else
+                return new User(session.proxy.user_get_record(session.opaque_ref, _user ?? "").parse());
         }
 
         /// <summary>
@@ -170,7 +197,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static XenRef<User> get_by_uuid(Session session, string _uuid)
         {
-            return XenRef<User>.Create(session.proxy.user_get_by_uuid(session.uuid, _uuid ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.user_get_by_uuid(session.opaque_ref, _uuid);
+            else
+                return XenRef<User>.Create(session.proxy.user_get_by_uuid(session.opaque_ref, _uuid ?? "").parse());
         }
 
         /// <summary>
@@ -183,7 +213,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static XenRef<User> create(Session session, User _record)
         {
-            return XenRef<User>.Create(session.proxy.user_create(session.uuid, _record.ToProxy()).parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.user_create(session.opaque_ref, _record);
+            else
+                return XenRef<User>.Create(session.proxy.user_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -196,7 +229,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static XenRef<Task> async_create(Session session, User _record)
         {
-            return XenRef<Task>.Create(session.proxy.async_user_create(session.uuid, _record.ToProxy()).parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_user_create(session.opaque_ref, _record);
+          else
+              return XenRef<Task>.Create(session.proxy.async_user_create(session.opaque_ref, _record.ToProxy()).parse());
         }
 
         /// <summary>
@@ -209,7 +245,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static void destroy(Session session, string _user)
         {
-            session.proxy.user_destroy(session.uuid, _user ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.user_destroy(session.opaque_ref, _user);
+            else
+                session.proxy.user_destroy(session.opaque_ref, _user ?? "").parse();
         }
 
         /// <summary>
@@ -222,7 +261,10 @@ namespace XenAPI
         [Deprecated("XenServer 5.5")]
         public static XenRef<Task> async_destroy(Session session, string _user)
         {
-            return XenRef<Task>.Create(session.proxy.async_user_destroy(session.uuid, _user ?? "").parse());
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_user_destroy(session.opaque_ref, _user);
+          else
+              return XenRef<Task>.Create(session.proxy.async_user_destroy(session.opaque_ref, _user ?? "").parse());
         }
 
         /// <summary>
@@ -233,7 +275,10 @@ namespace XenAPI
         /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_uuid(Session session, string _user)
         {
-            return (string)session.proxy.user_get_uuid(session.uuid, _user ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.user_get_uuid(session.opaque_ref, _user);
+            else
+                return session.proxy.user_get_uuid(session.opaque_ref, _user ?? "").parse();
         }
 
         /// <summary>
@@ -244,7 +289,10 @@ namespace XenAPI
         /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_short_name(Session session, string _user)
         {
-            return (string)session.proxy.user_get_short_name(session.uuid, _user ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.user_get_short_name(session.opaque_ref, _user);
+            else
+                return session.proxy.user_get_short_name(session.opaque_ref, _user ?? "").parse();
         }
 
         /// <summary>
@@ -255,7 +303,10 @@ namespace XenAPI
         /// <param name="_user">The opaque_ref of the given user</param>
         public static string get_fullname(Session session, string _user)
         {
-            return (string)session.proxy.user_get_fullname(session.uuid, _user ?? "").parse();
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.user_get_fullname(session.opaque_ref, _user);
+            else
+                return session.proxy.user_get_fullname(session.opaque_ref, _user ?? "").parse();
         }
 
         /// <summary>
@@ -266,7 +317,10 @@ namespace XenAPI
         /// <param name="_user">The opaque_ref of the given user</param>
         public static Dictionary<string, string> get_other_config(Session session, string _user)
         {
-            return Maps.convert_from_proxy_string_string(session.proxy.user_get_other_config(session.uuid, _user ?? "").parse());
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.user_get_other_config(session.opaque_ref, _user);
+            else
+                return Maps.convert_from_proxy_string_string(session.proxy.user_get_other_config(session.opaque_ref, _user ?? "").parse());
         }
 
         /// <summary>
@@ -278,7 +332,10 @@ namespace XenAPI
         /// <param name="_fullname">New value to set</param>
         public static void set_fullname(Session session, string _user, string _fullname)
         {
-            session.proxy.user_set_fullname(session.uuid, _user ?? "", _fullname ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.user_set_fullname(session.opaque_ref, _user, _fullname);
+            else
+                session.proxy.user_set_fullname(session.opaque_ref, _user ?? "", _fullname ?? "").parse();
         }
 
         /// <summary>
@@ -290,7 +347,10 @@ namespace XenAPI
         /// <param name="_other_config">New value to set</param>
         public static void set_other_config(Session session, string _user, Dictionary<string, string> _other_config)
         {
-            session.proxy.user_set_other_config(session.uuid, _user ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.user_set_other_config(session.opaque_ref, _user, _other_config);
+            else
+                session.proxy.user_set_other_config(session.opaque_ref, _user ?? "", Maps.convert_to_proxy_string_string(_other_config)).parse();
         }
 
         /// <summary>
@@ -303,7 +363,10 @@ namespace XenAPI
         /// <param name="_value">Value to add</param>
         public static void add_to_other_config(Session session, string _user, string _key, string _value)
         {
-            session.proxy.user_add_to_other_config(session.uuid, _user ?? "", _key ?? "", _value ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.user_add_to_other_config(session.opaque_ref, _user, _key, _value);
+            else
+                session.proxy.user_add_to_other_config(session.opaque_ref, _user ?? "", _key ?? "", _value ?? "").parse();
         }
 
         /// <summary>
@@ -315,7 +378,10 @@ namespace XenAPI
         /// <param name="_key">Key to remove</param>
         public static void remove_from_other_config(Session session, string _user, string _key)
         {
-            session.proxy.user_remove_from_other_config(session.uuid, _user ?? "", _key ?? "").parse();
+            if (session.JsonRpcClient != null)
+                session.JsonRpcClient.user_remove_from_other_config(session.opaque_ref, _user, _key);
+            else
+                session.proxy.user_remove_from_other_config(session.opaque_ref, _user ?? "", _key ?? "").parse();
         }
 
         /// <summary>
@@ -334,7 +400,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _uuid;
+        private string _uuid = "";
 
         /// <summary>
         /// short name (e.g. userid)
@@ -352,7 +418,7 @@ namespace XenAPI
                 }
             }
         }
-        private string _short_name;
+        private string _short_name = "";
 
         /// <summary>
         /// full name
@@ -370,12 +436,13 @@ namespace XenAPI
                 }
             }
         }
-        private string _fullname;
+        private string _fullname = "";
 
         /// <summary>
         /// additional configuration
         /// First published in XenServer 5.0.
         /// </summary>
+        [JsonConverter(typeof(StringStringMapConverter))]
         public virtual Dictionary<string, string> other_config
         {
             get { return _other_config; }
@@ -389,6 +456,6 @@ namespace XenAPI
                 }
             }
         }
-        private Dictionary<string, string> _other_config;
+        private Dictionary<string, string> _other_config = new Dictionary<string, string>() {};
     }
 }

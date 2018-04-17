@@ -58,7 +58,6 @@ namespace XenAdmin.Wizards.GenericPages
         /// <summary>
         /// Creates a new class instance and starts a thread to load data
         /// </summary>
-        /// <param name="xenObject"></param>
         public DelayLoadingOptionComboBoxItem(IXenObject xenObject, List<ReasoningFilter> filters)
         {
             this.xenObject = xenObject;
@@ -114,6 +113,12 @@ namespace XenAdmin.Wizards.GenericPages
         private void FetchReasonAsnyc()
         {
             ThreadPool.QueueUserWorkItem(delegate { FetchFailureReasonWithRetry(defaultRetries, defaultTimeOut); });
+        }
+
+        public void CancelFilters()
+        {
+            foreach (ReasoningFilter filter in _filters)
+                filter.Cancel();
         }
 
         private void FetchFailureReasonWithRetry(int retries, int timeOut)

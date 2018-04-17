@@ -94,7 +94,7 @@ namespace XenAdmin
         {
             try
             {
-                if (connection != null && connection.Session != null && connection.Session.uuid == "dummy")
+                if (connection != null && connection.Session != null && connection.Session.opaque_ref == "dummy")
                     return new XenAdminSimulatorWebProxy(DbProxy.proxys[connection]);
 
                 switch ((HTTPHelper.ProxyStyle)XenAdmin.Properties.Settings.Default.ProxySetting)

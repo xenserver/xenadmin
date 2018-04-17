@@ -880,7 +880,9 @@ namespace XenAdmin.Plugins
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public const string JAVASCRIPT_CALLBACK_METHOD = "XenCenterXML";
 
+        [Obsolete("Use SessionOpaqueRef instead.")]
         public string SessionUuid;
+        public string SessionOpaqueRef;
         public string SessionUrl;
         private IXenConnection connection;
         public WebBrowser2 browser;
@@ -932,7 +934,10 @@ namespace XenAdmin.Plugins
             if (connection != null)
             {
                 SessionUrl = connection.Session.Url;
-                SessionUuid = connection.DuplicateSession().uuid;
+                SessionOpaqueRef = connection.DuplicateSession().opaque_ref;
+#pragma warning disable 612, 618
+                SessionUuid = SessionOpaqueRef;
+#pragma warning restore 612, 618
             }
         }
 
