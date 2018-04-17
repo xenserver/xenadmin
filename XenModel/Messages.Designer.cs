@@ -32220,7 +32220,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SR-IOV networks require the SR-IOV capable NIC..
+        ///   Looks up a localized string similar to SR-IOV networks require an SR-IOV capable NIC..
         /// </summary>
         public static string SRIOV_NEED_NICSUPPORT {
             get {
