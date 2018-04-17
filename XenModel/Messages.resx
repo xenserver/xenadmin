@@ -11091,7 +11091,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
   </data>
   <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
-    <value>SR-IOV networks require the SR-IOV capable NIC.</value>
+    <value>SR-IOV networks require an SR-IOV capable NIC.</value>
   </data>
   <data name="SRIOV_NETWORK_CREATE" xml:space="preserve">
     <value>Create &amp;SR-IOV anyway</value>
