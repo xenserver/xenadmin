@@ -132,7 +132,7 @@ namespace XenAdmin.Wizards.GenericPages
                 string sysId = kvp.Key;
                 var vmMapping = kvp.Value;
 
-                var cb = FillGridComboBox(vmMapping.XenRef);
+                var cb = FillGridComboBox(vmMapping.XenRef, sysId);
 
                 foreach (INetworkResource networkResource in NetworkData(sysId))
                 {
@@ -232,14 +232,14 @@ namespace XenAdmin.Wizards.GenericPages
             OnPageUpdated();
         }   
 
-		protected DataGridViewComboBoxCell FillGridComboBox(object xenRef)
+		protected DataGridViewComboBoxCell FillGridComboBox(object xenRef, string vsId = null)
 		{
 		    var cb = new DataGridViewComboBoxCell {FlatStyle = FlatStyle.Flat, Sorted = true};
 
 			XenRef<Host> hostRef = xenRef as XenRef<Host>;
 			Host host = TargetConnection.Resolve(hostRef);
 
-            var availableNetworks = TargetConnection.Cache.Networks.Where(net => ShowNetwork(host, net));
+            var availableNetworks = TargetConnection.Cache.Networks.Where(net => ShowNetwork(host, net, vsId));
 
 			foreach (XenAPI.Network netWork in availableNetworks)
 			{
@@ -255,7 +255,7 @@ namespace XenAdmin.Wizards.GenericPages
 			return cb;
 		}
 
-        public virtual bool ShowNetwork(Host targetHost, XenAPI.Network network)
+        protected virtual bool ShowNetwork(Host targetHost, XenAPI.Network network, string vsId = null)
         {
             if (!network.Show(Properties.Settings.Default.ShowHiddenVMs))
                 return false;

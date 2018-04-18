@@ -34,6 +34,7 @@ using XenOvf.Definitions;
 using XenAPI;
 using XenOvf;
 
+
 namespace XenAdmin.Wizards.ImportWizard
 {
     class ImportSelectNetworkPage : SelectMultipleVMNetworkPage
@@ -53,30 +54,29 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-        public override bool ShowNetwork(Host targetHost, XenAPI.Network network)
+        protected override bool ShowNetwork(Host targetHost, XenAPI.Network network, string sysId = null)
         {
-            if (!network.Show(Properties.Settings.Default.ShowHiddenVMs))
+            if (network.IsSriov() && !AllowSriovNetwork(sysId))
                 return false;
 
-            if (network.IsSlave())
-                return false;
-
-            if (network.IsSriov() && !Allow_Sriov_Network())
-                return false;
-
-            if (targetHost != null && !targetHost.CanSeeNetwork(network))
-                return false;
-
-            if (targetHost == null && !network.AllHostsCanSeeNetwork())
-                return false;
-
-            return true;
+            return base.ShowNetwork(targetHost, network);
         }
 
-        private bool Allow_Sriov_Network()
+        private bool AllowSriovNetwork(string sysId)
         {
-            string xml = OVF.ToXml(SelectedOvfEnvelope);
-            return xml.Contains("allow-network-sriov");
+            var vhs = OVF.FindVirtualHardwareSectionByAffinity(SelectedOvfEnvelope, sysId, "xen");
+            var data = vhs.VirtualSystemOtherConfigurationData;
+
+            foreach (var s in data)
+            {
+                if (s.Name == "recommendations")
+                {
+                    if (s.Value.Value.Contains("allow-network-sriov"))
+                            return true;
+                }
+            }
+
+            return false;
         }
 
         public EnvelopeType SelectedOvfEnvelope { private get; set; }
