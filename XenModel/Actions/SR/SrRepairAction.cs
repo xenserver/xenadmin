@@ -32,6 +32,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using XenAdmin.Network;
 using XenAdmin.Core;
 using XenAPI;
@@ -107,6 +108,15 @@ namespace XenAdmin.Actions
 
             int max = _hostList.Count * 2;
             int delta = 100 / max;
+
+            if (SR.GetSRType(true) == SR.SRTypes.gfs2)
+            {
+                var cluster = Connection.Cache.Clusters.FirstOrDefault();
+                if (cluster != null)
+                {
+                    Cluster.pool_resync(Session, cluster.opaque_ref);
+                }
+            }
 
             foreach (Host host in _hostList)
             {
