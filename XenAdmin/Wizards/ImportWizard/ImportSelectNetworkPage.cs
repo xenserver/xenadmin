@@ -54,12 +54,12 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-        protected override bool ShowNetwork(Host targetHost, XenAPI.Network network, string sysId = null)
+        protected override bool ShowNetwork(Host targetHost, XenAPI.Network network, string sysId)
         {
             if (network.IsSriov() && !AllowSriovNetwork(sysId))
                 return false;
 
-            return base.ShowNetwork(targetHost, network);
+            return base.ShowNetwork(targetHost, network, null);
         }
 
         private bool AllowSriovNetwork(string sysId)
