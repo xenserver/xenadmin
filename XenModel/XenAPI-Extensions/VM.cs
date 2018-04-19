@@ -431,7 +431,7 @@ namespace XenAPI
             XmlDocument xd = GetRecommendations();
 
             if (xd == null)
-                return true;
+                return false;
 
             try
             {
@@ -439,12 +439,14 @@ namespace XenAPI
                 if (xn == null || xn.Attributes == null)
                     return false;
 
-                return true;
+                return
+                   Convert.ToInt32(xn.Attributes["value"].Value) != 0;
             }
             catch
             {
                 return false;
             }
+
         }
 
         public bool HasVendorDeviceRecommendation()

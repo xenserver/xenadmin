@@ -29,6 +29,8 @@
  * SUCH DAMAGE.
  */
 
+using System;
+using System.Xml;
 using XenAdmin.Wizards.GenericPages;
 using XenOvf.Definitions;
 using XenAPI;
@@ -66,17 +68,32 @@ namespace XenAdmin.Wizards.ImportWizard
         {
             var vhs = OVF.FindVirtualHardwareSectionByAffinity(SelectedOvfEnvelope, sysId, "xen");
             var data = vhs.VirtualSystemOtherConfigurationData;
+            XmlDocument xdRecommendations = new XmlDocument();
+            bool result = false;
 
             foreach (var s in data)
             {
                 if (s.Name == "recommendations")
                 {
-                    if (s.Value.Value.Contains("allow-network-sriov"))
-                            return true;
+                    try
+                    {
+                        xdRecommendations.LoadXml(s.Value.Value);
+
+                        XmlNode xn = xdRecommendations.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
+                        if (xn != null && xn.Attributes != null)
+                            result = Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+
+                    if (result)
+                        return true;                       
                 }
             }
 
-            return false;
+            return result;
         }
 
         public EnvelopeType SelectedOvfEnvelope { private get; set; }
