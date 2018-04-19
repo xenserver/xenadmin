@@ -71,8 +71,10 @@ namespace XenAdmin.Wizards.ImportWizard
                         xdRecommendations.LoadXml(s.Value.Value);
 
                         XmlNode xn = xdRecommendations.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
-                        if (xn != null && xn.Attributes != null)
-                            return Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+                        if (xn == null || xn.Attributes == null)
+                            return false;
+ 
+                        return Convert.ToInt32(xn.Attributes["value"].Value) != 0;
                     }
                     catch
                     {
