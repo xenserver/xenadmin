@@ -257,8 +257,8 @@ namespace XenAdmin.Wizards.GenericPages
 
         private bool ShowNetwork(Host targetHost, XenAPI.Network network, string vsId)
         {
-            if (network.IsSriov())
-                return AllowSriovNetwork(network, vsId);
+            if (network.IsSriov() && !AllowSriovNetwork(network, vsId))
+                return false;
 
             if (!network.Show(Properties.Settings.Default.ShowHiddenVMs))
                 return false;
