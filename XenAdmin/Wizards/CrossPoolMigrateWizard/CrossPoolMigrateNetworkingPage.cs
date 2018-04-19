@@ -102,7 +102,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (vm == null)
                 return false;
 
-            if (vm.IsRunning())
+            if (vm.power_state != vm_power_state.Halted)
                 return false;
 
             return vm.HasSriovRecommendation();
