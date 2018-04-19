@@ -157,7 +157,7 @@ namespace XenAdmin.Commands
 
             public void Stop()
             {
-                _stopped = true;
+                Stopped = true;
                 if (workerQueueWithoutWlb != null)
                     workerQueueWithoutWlb.CancelWorkers(false);
             }
