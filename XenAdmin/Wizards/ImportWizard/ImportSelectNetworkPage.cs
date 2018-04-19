@@ -56,20 +56,10 @@ namespace XenAdmin.Wizards.ImportWizard
             return true;
         }
 
-        protected override bool ShowNetwork(Host targetHost, XenAPI.Network network, string sysId)
-        {
-            if (network.IsSriov() && !AllowSriovNetwork(sysId))
-                return false;
-
-            return base.ShowNetwork(targetHost, network, null);
-        }
-
-        private bool AllowSriovNetwork(string sysId)
+        protected override bool AllowSriovNetwork(XenAPI.Network network, string sysId)
         {
             var vhs = OVF.FindVirtualHardwareSectionByAffinity(SelectedOvfEnvelope, sysId, "xen");
             var data = vhs.VirtualSystemOtherConfigurationData;
-            XmlDocument xdRecommendations = new XmlDocument();
-            bool result = false;
 
             foreach (var s in data)
             {
@@ -77,23 +67,21 @@ namespace XenAdmin.Wizards.ImportWizard
                 {
                     try
                     {
+                        XmlDocument xdRecommendations = new XmlDocument();
                         xdRecommendations.LoadXml(s.Value.Value);
 
                         XmlNode xn = xdRecommendations.SelectSingleNode(@"restrictions/restriction[@field='allow-network-sriov']");
                         if (xn != null && xn.Attributes != null)
-                            result = Convert.ToInt32(xn.Attributes["value"].Value) != 0;
+                            return Convert.ToInt32(xn.Attributes["value"].Value) != 0;
                     }
                     catch
                     {
-                        continue;
-                    }
-
-                    if (result)
-                        return true;                       
+                        return false;
+                    }                    
                 }
             }
 
-            return result;
+            return false;
         }
 
         public EnvelopeType SelectedOvfEnvelope { private get; set; }

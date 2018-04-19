@@ -96,17 +96,16 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             return new CrossPoolMigrationNetworkResourceContainer(vifs);
         }
 
-        protected override bool ShowNetwork(Host targetHost, XenAPI.Network network, string sysId)
+        protected override bool AllowSriovNetwork(XenAPI.Network network, string sysId)
         {
             VM vm = Connection.Resolve(new XenRef<VM>(sysId));
-
             if (vm == null)
                 return false;
 
-            if (network.IsSriov() && !vm.HasSriovRecommendation())
+            if (vm.IsRunning())
                 return false;
 
-            return base.ShowNetwork(targetHost, network, null);
+            return vm.HasSriovRecommendation();
         }
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)

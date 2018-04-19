@@ -232,7 +232,7 @@ namespace XenAdmin.Wizards.GenericPages
             OnPageUpdated();
         }   
 
-		protected DataGridViewComboBoxCell FillGridComboBox(object xenRef, string vsId = null)
+		private DataGridViewComboBoxCell FillGridComboBox(object xenRef, string vsId)
 		{
 		    var cb = new DataGridViewComboBoxCell {FlatStyle = FlatStyle.Flat, Sorted = true};
 
@@ -255,8 +255,11 @@ namespace XenAdmin.Wizards.GenericPages
 			return cb;
 		}
 
-        protected virtual bool ShowNetwork(Host targetHost, XenAPI.Network network, string vsId)
+        private bool ShowNetwork(Host targetHost, XenAPI.Network network, string vsId)
         {
+            if (network.IsSriov())
+                return AllowSriovNetwork(network, vsId);
+
             if (!network.Show(Properties.Settings.Default.ShowHiddenVMs))
                 return false;
 
@@ -271,6 +274,11 @@ namespace XenAdmin.Wizards.GenericPages
 
             return true;
         }
+
+        protected virtual bool AllowSriovNetwork(XenAPI.Network network, string sysId)
+	    {
+	        return true;
+	    }
 
 	    private void m_dataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
 		{
