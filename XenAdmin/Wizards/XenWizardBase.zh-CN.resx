@@ -436,7 +436,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPrevious.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 12</value>
+    <value>470, 12</value>
   </data>
   <data name="buttonPrevious.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 0</value>
@@ -472,7 +472,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>652, 12</value>
+    <value>632, 12</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 0</value>
@@ -517,7 +517,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonNext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>571, 12</value>
+    <value>551, 12</value>
   </data>
   <data name="buttonNext.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 0</value>
@@ -682,7 +682,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>817, 548</value>
+    <value>817, 588</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 12</value>
