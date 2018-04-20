@@ -25865,7 +25865,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All the supported NICs have enabled SR-IOV..
+        ///   Looks up a localized string similar to SR-IOV is already enabled on all the SR-IOV capable NICs..
         /// </summary>
         public static string NICS_ARE_SRIOV_ENABLED {
             get {
