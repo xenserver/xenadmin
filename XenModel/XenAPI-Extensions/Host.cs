@@ -158,7 +158,11 @@ namespace XenAPI
         }
 
         public void SetIscsiIqn(string value)
-        {
+        {   
+            if (Helpers.KolkataOrGreater(this))
+            {
+                other_config = SetDictionaryKey(other_config, "iscsi_iqn", iscsi_iqn);
+            }
             other_config = SetDictionaryKey(other_config, "iscsi_iqn", value);
         }
 

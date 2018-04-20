@@ -109,13 +109,21 @@ namespace XenAdmin.Actions
             int max = _hostList.Count * 2;
             int delta = 100 / max;
 
-            if (SR.GetSRType(true) == SR.SRTypes.gfs2)
+            try
             {
-                var cluster = Connection.Cache.Clusters.FirstOrDefault();
-                if (cluster != null)
+                if (SR.GetSRType(true) == SR.SRTypes.gfs2)
                 {
-                    Cluster.pool_resync(Session, cluster.opaque_ref);
+                    var cluster = Connection.Cache.Clusters.FirstOrDefault();
+                    if (cluster != null)
+                    {
+                        Cluster.pool_resync(Session, cluster.opaque_ref);
+                    }
                 }
+            }
+
+            catch (Exception e)
+            {
+                log.DebugFormat("Cluster pool resync failed with {0}", e.Message);
             }
 
             foreach (Host host in _hostList)
