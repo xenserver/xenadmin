@@ -154,8 +154,6 @@ namespace XenServerHealthCheck
                             needRetry = true;
                         }
                     }
-                    else
-                        return false;
                 }
                 catch (Exception exn)
                 {
