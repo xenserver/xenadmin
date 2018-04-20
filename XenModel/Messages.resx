@@ -8994,7 +8994,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>Half</value>
   </data>
   <data name="NICS_ARE_SRIOV_ENABLED" xml:space="preserve">
-    <value>All the supported NICs have enabled SR-IOV.</value>
+    <value>SR-IOV is already enabled on all the SR-IOV capable NICs.</value>
   </data>
   <data name="NIC_HIDDEN" xml:space="preserve">
     <value>{0} (Hidden)</value>
