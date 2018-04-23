@@ -76,7 +76,8 @@ namespace XenAdmin.Commands
         protected override void OnDropDownClosed(EventArgs e)
         {
             base.OnDropDownClosed(e);
-            hostListUpdater.Stop();
+            if (hostListUpdater != null) 
+                hostListUpdater.Stop();
         }
 
 
@@ -195,7 +196,13 @@ namespace XenAdmin.Commands
             {
                 SelectedItemCollection selection = menu.Command.GetSelection();
                 // set the first menu item to be the WLB optimal server menu item
-                VMOperationToolStripMenuSubItem firstItem = (VMOperationToolStripMenuSubItem)menu.DropDownItems[0];
+                if (menu.DropDownItems.Count == 0)
+                    return;
+
+                var firstItem = menu.DropDownItems[0] as VMOperationToolStripMenuSubItem;
+                if (firstItem == null)
+                    return;
+
                 var firstItemCmd = new VMOperationWlbOptimalServerCommand(menu.Command.MainWindowCommandInterface, selection, menu._operation, recommendations);
                 var firstItemCmdCanExecute = firstItemCmd.CanExecute();
 
@@ -209,9 +216,13 @@ namespace XenAdmin.Commands
                 });
 
                 List<VMOperationToolStripMenuSubItem> hostMenuItems = new List<VMOperationToolStripMenuSubItem>();
-                foreach (VMOperationToolStripMenuSubItem item in menu.DropDownItems)
+                foreach (var item in menu.DropDownItems)
                 {
-                    Host host = item.Tag as Host;
+                    var hostMenuItem = item as VMOperationToolStripMenuSubItem;
+                    if (hostMenuItem == null)
+                        continue;
+
+                    Host host = hostMenuItem.Tag as Host;
                     if (host != null)
                     {
                         var cmd = new VMOperationWlbHostCommand(menu.Command.MainWindowCommandInterface, selection, host, menu._operation, recommendations.GetStarRating(host));
@@ -222,10 +233,10 @@ namespace XenAdmin.Commands
 
                         Program.Invoke(Program.MainWindow, delegate
                         {
-                            item.Command = cmd;
-                            item.Enabled = canExecute;
+                            hostMenuItem.Command = cmd;
+                            hostMenuItem.Enabled = canExecute;
                         });
-                        hostMenuItems.Add(item);
+                        hostMenuItems.Add(hostMenuItem);
                     }
                 }
 
@@ -267,7 +278,12 @@ namespace XenAdmin.Commands
 
                 Program.Invoke(Program.MainWindow, delegate
                 {
-                    var firstItem = (VMOperationToolStripMenuSubItem)menu.DropDownItems[0];
+                    if (menu.DropDownItems.Count == 0)
+                        return;
+
+                    var firstItem = menu.DropDownItems[0] as VMOperationToolStripMenuSubItem;
+                    if (firstItem == null)
+                        return;
 
                     bool oldMigrateToHomeCmdCanRun = cmdHome.CanExecute();
                     if (affinityHost == null || menu._operation == vm_operations.start_on || oldMigrateToHomeCmdCanRun)
@@ -292,7 +308,7 @@ namespace XenAdmin.Commands
                     }
                 });
 
-                List<VMOperationToolStripMenuSubItem> dropDownItems = menu.DropDownItems.Cast<VMOperationToolStripMenuSubItem>().ToList();
+                List<VMOperationToolStripMenuSubItem> hostMenuItems = menu.DropDownItems.OfType<VMOperationToolStripMenuSubItem>().ToList();
 
                 if (Stopped)
                     return;
@@ -300,7 +316,7 @@ namespace XenAdmin.Commands
                 // Adds the migrate wizard button, do this before the enable checks on the other items
                 Program.Invoke(Program.MainWindow, () => menu.AddAdditionalMenuItems(selection));
 
-                foreach (VMOperationToolStripMenuSubItem item in dropDownItems)
+                foreach (VMOperationToolStripMenuSubItem item in hostMenuItems)
                 {
 
                     Host host = item.Tag as Host;
