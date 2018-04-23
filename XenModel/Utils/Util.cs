@@ -358,6 +358,11 @@ namespace XenAdmin
             return string.Format(Messages.VAL_FORMAT, p, Messages.COUNTS_PER_SEC_UNIT);
         }
 
+        public static string MegaHertzString(double p)
+        {
+            return string.Format(Messages.VAL_FORMAT, p, Messages.VAL_MHZ);
+        }
+
         public static string PercentageString(double fraction)
         {
             return string.Format("{0}%", (fraction * 100d).ToString("0.0"));

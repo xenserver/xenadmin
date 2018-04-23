@@ -35857,6 +35857,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MHz.
+        /// </summary>
+        public static string VAL_MHZ {
+            get {
+                return ResourceManager.GetString("VAL_MHZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to μs.
         /// </summary>
         public static string VAL_MICSEC {
