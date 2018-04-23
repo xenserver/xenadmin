@@ -12388,6 +12388,9 @@ VM が再起動したら、[[XenServer product] Tools のインストール] を
   <data name="VAL_MEGRATE" xml:space="preserve">
     <value>MBps</value>
   </data>
+  <data name="VAL_MHZ" xml:space="preserve">
+    <value>MHz</value>
+  </data>
   <data name="VAL_MICSEC" xml:space="preserve">
     <value>マイクロ秒</value>
   </data>

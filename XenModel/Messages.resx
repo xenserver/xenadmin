@@ -12399,6 +12399,9 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VAL_MEGRATE" xml:space="preserve">
     <value>MBps</value>
   </data>
+  <data name="VAL_MHZ" xml:space="preserve">
+    <value>MHz</value>
+  </data>
   <data name="VAL_MICSEC" xml:space="preserve">
     <value>μs</value>
   </data>
