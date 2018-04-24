@@ -73,8 +73,11 @@ namespace XenAdmin.Actions
             Connection.ExpectDisruption = true;
 
             // Enable SR-IOV network on Pool Master
-            RelatedTask = Network_sriov.async_create(Session, pifOnMaster.opaque_ref, networkRef);
-            PollToCompletion(0, 100);
+            if(pifOnMaster != null)
+            {
+                RelatedTask = Network_sriov.async_create(Session, pifOnMaster.opaque_ref, networkRef);
+                PollToCompletion(0, 100);
+            }
 
             // Enable SR-IOV network on Pool Slaves
             selectedPifs.Remove(pifOnMaster);
