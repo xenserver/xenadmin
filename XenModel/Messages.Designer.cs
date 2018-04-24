@@ -32301,6 +32301,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not find the bond in [XenCenter]&apos;s cache..
+        /// </summary>
+        public static string SRIOV_NETWORK_GONE {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_GONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string SRPANEL_ACTIVE {

@@ -13758,4 +13758,7 @@ You will need to navigate to the Console on each of the selected VMs to complete
   <data name="YOU_ARE_HERE" xml:space="preserve">
     <value>You are here</value>
   </data>
+  <data name="SRIOV_NETWORK_GONE" xml:space="preserve">
+    <value>Could not find the bond in [XenCenter]'s cache.</value>
+  </data>
 </root>
