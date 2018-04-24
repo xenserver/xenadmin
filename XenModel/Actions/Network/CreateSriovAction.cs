@@ -81,19 +81,11 @@ namespace XenAdmin.Actions
             int inc = 100 / (selectedPifs.Count + 1);
             int lo = inc;
 
-            try
+            foreach (PIF thePif in selectedPifs)
             {
-                foreach (PIF thePif in selectedPifs)
-                {
-                    RelatedTask = Network_sriov.async_create(Session, thePif.opaque_ref, networkRef);
-                    PollToCompletion(lo, lo + inc);
-                    lo += inc;
-                }
-            }
-            catch
-            {
-                XenAPI.Network.destroy(Session, networkRef);
-                throw;
+                RelatedTask = Network_sriov.async_create(Session, thePif.opaque_ref, networkRef);
+                PollToCompletion(lo, lo + inc);
+                lo += inc;
             }
 
         }
