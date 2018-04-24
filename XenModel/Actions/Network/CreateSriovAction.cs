@@ -81,16 +81,21 @@ namespace XenAdmin.Actions
             int inc = 100 / (selectedPifs.Count + 1);
             int lo = inc;
 
-            foreach (PIF thePif in selectedPifs)
+            try
             {
-                RelatedTask = Network_sriov.async_create(Session, thePif.opaque_ref, networkRef);
-                PollToCompletion(lo, lo + inc);
-
-                Network_sriov new_network_sriov = Connection.WaitForCache(new XenRef<Network_sriov>(Result));
-                if (new_network_sriov == null)
-                    throw new Failure(Failure.INTERNAL_ERROR, Messages.SRIOV_NETWORK_GONE);
-                lo += inc;
+                foreach (PIF thePif in selectedPifs)
+                {
+                    RelatedTask = Network_sriov.async_create(Session, thePif.opaque_ref, networkRef);
+                    PollToCompletion(lo, lo + inc);
+                    lo += inc;
+                }
             }
+            catch
+            {
+                XenAPI.Network.destroy(Session, networkRef);
+                throw;
+            }
+
         }
 
         protected override void Clean()
