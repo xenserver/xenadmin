@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-    <xsd:element msdata:IsDataSet="true" name="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" name="value" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
-                <xsd:element minOccurs="0" msdata:Ordinal="2" name="comment" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute msdata:Ordinal="1" name="name" type="xsd:string" use="required"/>
-              <xsd:attribute msdata:Ordinal="3" name="type" type="xsd:string"/>
-              <xsd:attribute msdata:Ordinal="4" name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element minOccurs="0" msdata:Ordinal="1" name="value" type="xsd:string"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,359 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="tableLayoutPanel1.CellBorderStyle" type="System.Windows.Forms.TableLayoutPanelCellBorderStyle, System.Windows.Forms">
-    <value>Single</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="panelTop.ColumnCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="pictureBoxWizard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-  <data name="pictureBoxWizard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="pictureBoxWizard.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="pictureBoxWizard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 60</value>
-  </data>
-  <data name="pictureBoxWizard.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>CenterImage</value>
-  </data>
-  <data name="pictureBoxWizard.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxWizard.Name" xml:space="preserve">
-    <value>pictureBoxWizard</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxWizard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxWizard.Parent" xml:space="preserve">
-    <value>panelTop</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxWizard.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="labelWizard.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="labelWizard.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 9.75pt, style=Bold</value>
-  </data>
-  <data name="labelWizard.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelWizard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 0</value>
-  </data>
-  <data name="labelWizard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>701, 60</value>
-  </data>
-  <data name="labelWizard.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="labelWizard.Text" xml:space="preserve">
-    <value>labelWizard</value>
-  </data>
-  <data name="labelWizard.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;labelWizard.Name" xml:space="preserve">
-    <value>labelWizard</value>
-  </data>
-  <data name="&gt;&gt;labelWizard.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelWizard.Parent" xml:space="preserve">
-    <value>panelTop</value>
-  </data>
-  <data name="&gt;&gt;labelWizard.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="XSHelpButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="XSHelpButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="XSHelpButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>770, 18</value>
-  </data>
-  <data name="XSHelpButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>15, 0, 15, 0</value>
-  </data>
-  <data name="XSHelpButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
-  <data name="XSHelpButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;XSHelpButton.Name" xml:space="preserve">
-    <value>XSHelpButton</value>
-  </data>
-  <data name="&gt;&gt;XSHelpButton.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.HelpButton, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;XSHelpButton.Parent" xml:space="preserve">
-    <value>panelTop</value>
-  </data>
-  <data name="&gt;&gt;XSHelpButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="panelTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panelTop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="panelTop.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="panelTop.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="panelTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>809, 60</value>
-  </data>
-  <data name="panelTop.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;panelTop.Name" xml:space="preserve">
-    <value>panelTop</value>
-  </data>
-  <data name="&gt;&gt;panelTop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelTop.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;panelTop.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panelTop.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="pictureBoxWizard" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="labelWizard" Row="0" RowSpan="1" Column="1" ColumnSpan="1" />&lt;Control Name="XSHelpButton" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" />&lt;Rows Styles="Percent,100" />&lt;/TableLayoutSettings></value>
-  </data>
-  <data name="wizardProgress.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="wizardProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 62</value>
-  </data>
-  <data name="wizardProgress.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="wizardProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 404</value>
-  </data>
-  <data name="wizardProgress.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;wizardProgress.Name" xml:space="preserve">
-    <value>wizardProgress</value>
-  </data>
-  <data name="&gt;&gt;wizardProgress.Type" xml:space="preserve">
-    <value>XenAdmin.Wizards.WizardProgress, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;wizardProgress.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;wizardProgress.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="xenTabControlBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="xenTabControlBody.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 75</value>
-  </data>
-  <data name="xenTabControlBody.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>15, 15, 15, 15</value>
-  </data>
-  <data name="xenTabControlBody.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 408</value>
-  </data>
-  <data name="xenTabControlBody.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="xenTabControlBody.Text" xml:space="preserve">
-    <value>xenTabControlBody</value>
-  </data>
-  <data name="&gt;&gt;xenTabControlBody.Name" xml:space="preserve">
-    <value>xenTabControlBody</value>
-  </data>
-  <data name="&gt;&gt;xenTabControlBody.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.XenTabControl, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;xenTabControlBody.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;xenTabControlBody.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="deprecationBanner.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="deprecationBanner.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="deprecationBanner.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="deprecationBanner.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="deprecationBanner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="deprecationBanner.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="deprecationBanner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 31</value>
-  </data>
-  <data name="deprecationBanner.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="deprecationBanner.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;deprecationBanner.Name" xml:space="preserve">
-    <value>deprecationBanner</value>
-  </data>
-  <data name="&gt;&gt;deprecationBanner.Type" xml:space="preserve">
-    <value>XenAdmin.Controls.DeprecationBanner, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;deprecationBanner.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;deprecationBanner.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 65</value>
-  </data>
-  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>188, 581</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 398</value>
-  </data>
-  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="xenTabControlBody" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="deprecationBanner" Row="0" RowSpan="1" Column="0" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Percent,100" />&lt;Rows Styles="AutoSize,0,Percent,100" />&lt;/TableLayoutSettings></value>
-  </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>612, 575</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>809, 465</value>
-  </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="panelTop" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;Control Name="wizardProgress" Row="1" RowSpan="1" Column="0" ColumnSpan="1" />&lt;Control Name="tableLayoutPanel2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" />&lt;/Controls>&lt;Columns Styles="Absolute,188,Percent,100" />&lt;Rows Styles="Absolute,60,Percent,100,Absolute,20" />&lt;/TableLayoutSettings></value>
-  </data>
-  <data name="buttonPrevious.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="buttonPrevious.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="buttonPrevious.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="buttonPrevious.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="buttonPrevious.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>809, 644</value>
   </data>
   <data name="buttonPrevious.Location" type="System.Drawing.Point, System.Drawing">
     <value>560, 15</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonPrevious.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 0</value>
   </data>
   <data name="buttonPrevious.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 25</value>
   </data>
-  <data name="buttonPrevious.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="buttonPrevious.Text" xml:space="preserve">
     <value>&lt; 上一步(&amp;P)</value>
-  </data>
-  <data name="&gt;&gt;buttonPrevious.Name" xml:space="preserve">
-    <value>buttonPrevious</value>
-  </data>
-  <data name="&gt;&gt;buttonPrevious.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonPrevious.Parent" xml:space="preserve">
-    <value>tableLayoutPanelNavigation</value>
-  </data>
-  <data name="&gt;&gt;buttonPrevious.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="buttonCancel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>726, 16</value>
@@ -478,43 +147,19 @@
     <value>3, 0, 3, 0</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 24</value>
-  </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>41, 23</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
-    <value>buttonCancel</value>
+  <data name="tableLayoutPanelNavigation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 644</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tableLayoutPanelNavigation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 12, 9, 0</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>tableLayoutPanelNavigation</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.ColumnCount" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="buttonNext.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="buttonNext.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="buttonNext.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="tableLayoutPanelNavigation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>809, 43</value>
   </data>
   <data name="buttonNext.Location" type="System.Drawing.Point, System.Drawing">
     <value>644, 15</value>
@@ -525,175 +170,103 @@
   <data name="buttonNext.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 24</value>
   </data>
-  <data name="buttonNext.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="buttonNext.Text" xml:space="preserve">
     <value>下一步(&amp;N) &gt;</value>
-  </data>
-  <data name="&gt;&gt;buttonNext.Name" xml:space="preserve">
-    <value>buttonNext</value>
-  </data>
-  <data name="&gt;&gt;buttonNext.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonNext.Parent" xml:space="preserve">
-    <value>tableLayoutPanelNavigation</value>
-  </data>
-  <data name="&gt;&gt;buttonNext.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="labelGeneralInformationMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 0</value>
-  </data>
-  <data name="labelGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>527, 22</value>
-  </data>
-  <data name="labelGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
-    <value>仅许可此池使用 XenApp/XenDesktop 工作负载</value>
-  </data>
-  <data name="labelGeneralInformationMessage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>BottomLeft</value>
-  </data>
-  <data name="&gt;&gt;labelGeneralInformationMessage.Name" xml:space="preserve">
-    <value>labelGeneralInformationMessage</value>
-  </data>
-  <data name="&gt;&gt;labelGeneralInformationMessage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelGeneralInformationMessage.Parent" xml:space="preserve">
-    <value>panelGeneralInformationMessage</value>
-  </data>
-  <data name="&gt;&gt;labelGeneralInformationMessage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBoxGeneralInformationMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBoxGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 6</value>
-  </data>
-  <data name="pictureBoxGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 18</value>
-  </data>
-  <data name="pictureBoxGeneralInformationMessage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>CenterImage</value>
-  </data>
-  <data name="pictureBoxGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Name" xml:space="preserve">
-    <value>pictureBoxGeneralInformationMessage</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.Parent" xml:space="preserve">
-    <value>panelGeneralInformationMessage</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxGeneralInformationMessage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panelGeneralInformationMessage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
   </data>
   <data name="panelGeneralInformationMessage.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 15</value>
   </data>
-  <data name="panelGeneralInformationMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 3, 3, 3</value>
+  <data name="labelGeneralInformationMessage.Text" xml:space="preserve">
+    <value>仅许可此池使用 XenApp/XenDesktop 工作负载</value>
   </data>
-  <data name="panelGeneralInformationMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 25</value>
+  <data name="XSHelpButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
   </data>
-  <data name="panelGeneralInformationMessage.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="panelGeneralInformationMessage.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;panelGeneralInformationMessage.Name" xml:space="preserve">
-    <value>panelGeneralInformationMessage</value>
-  </data>
-  <data name="&gt;&gt;panelGeneralInformationMessage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelGeneralInformationMessage.Parent" xml:space="preserve">
-    <value>tableLayoutPanelNavigation</value>
-  </data>
-  <data name="&gt;&gt;panelGeneralInformationMessage.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 465</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 12, 9, 0</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>809, 37</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelNavigation.Name" xml:space="preserve">
-    <value>tableLayoutPanelNavigation</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelNavigation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelNavigation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanelNavigation.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanelNavigation.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?>&lt;TableLayoutSettings>&lt;Controls>&lt;Control Name="buttonPrevious" Row="0" RowSpan="1" Column="2" ColumnSpan="1" />&lt;Control Name="buttonNext" Row="0" RowSpan="1" Column="3" ColumnSpan="1" />&lt;Control Name="buttonCancel" Row="0" RowSpan="1" Column="4" ColumnSpan="1" />&lt;Control Name="panelGeneralInformationMessage" Row="0" RowSpan="1" Column="0" ColumnSpan="2" />&lt;/Controls>&lt;Columns Styles="Percent,100,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" />&lt;Rows Styles="AutoSize,0" />&lt;/TableLayoutSettings></value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="xenTabControlBody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>582, 508</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>809, 599</value>
+    <value>809, 699</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>817, 588</value>
-  </data>
-  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 12</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>XenWizardBase</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>XenWizardBase</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
