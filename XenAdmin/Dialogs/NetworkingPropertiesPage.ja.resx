@@ -161,7 +161,7 @@
     <value>279, 0</value>
   </data>
   <data name="RangeEndLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 24</value>
+    <value>116, 24</value>
   </data>
   <data name="IPAddressTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>148, 0</value>
@@ -203,10 +203,10 @@
     <value>148, 24</value>
   </data>
   <data name="tableLayoutPanelStaticSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 176</value>
+    <value>42, 176</value>
   </data>
   <data name="tableLayoutPanelStaticSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>433, 144</value>
+    <value>398, 144</value>
   </data>
   <data name="haEnabledRubric.Size" type="System.Drawing.Size, System.Drawing">
     <value>424, 25</value>
@@ -224,7 +224,7 @@
     <value>440, 26</value>
   </data>
   <data name="FixedIPRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 156</value>
+    <value>45, 156</value>
   </data>
   <data name="FixedIPRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
@@ -233,7 +233,7 @@
     <value>以下の設定を使用する(&amp;U):</value>
   </data>
   <data name="DHCPIPRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 133</value>
+    <value>45, 133</value>
   </data>
   <data name="DHCPIPRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 17</value>
