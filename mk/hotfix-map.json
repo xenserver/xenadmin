@@ -5,7 +5,8 @@
       "target": "xenadmin.git/Branding/Hotfixes/{1}",
       "flat": "true",
       "recursive": "true",
-      "regexp": "true"
+      "regexp": "true",
+	  "excludePatterns": ["*.sha256"]
     }
   ]
 }
