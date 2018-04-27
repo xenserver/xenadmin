@@ -13580,6 +13580,9 @@ Would you like to adjust the current Optimization Mode to match the schedule?</v
   <data name="WLB_RETRIEVING_RECOMMENDATIONS" xml:space="preserve">
     <value>Retrieving WLB recommendations for pool {0}</value>
   </data>
+  <data name="WLB_RETRIEVING_VM_RECOMMENDATIONS" xml:space="preserve">
+    <value>Retrieving WLB recommendations </value>
+  </data>
   <data name="WLB_SAVING_SETTINGS" xml:space="preserve">
     <value>Saving Workload Balancing settings</value>
   </data>
