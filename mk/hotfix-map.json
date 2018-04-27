@@ -13,6 +13,13 @@
       "flat": "true",
       "recursive": "false",
       "regexp": "true"
+    },
+    {
+      "pattern": "builds/xs/hotfixes/@BRANCH@/(*)/(*)/(*-src-pkgs.tar)",
+      "target": "xenadmin.git/Branding/Hotfixes/{1}/{2}/{3}",
+      "flat": "true",
+      "recursive": "false",
+      "regexp": "true"
     }
   ]
 }
