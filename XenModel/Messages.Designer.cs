@@ -39237,6 +39237,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retrieving WLB recommendations .
+        /// </summary>
+        public static string WLB_RETRIEVING_VM_RECOMMENDATIONS {
+            get {
+                return ResourceManager.GetString("WLB_RETRIEVING_VM_RECOMMENDATIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saving Workload Balancing settings.
         /// </summary>
         public static string WLB_SAVING_SETTINGS {

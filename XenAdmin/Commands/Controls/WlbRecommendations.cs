@@ -44,27 +44,26 @@ namespace XenAdmin.Commands
     /// </summary>
     internal class WlbRecommendations
     {
-        private readonly static log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly ReadOnlyCollection<VM> _vms;
-        private readonly Session _session;
-        private bool _initialized;
-        private readonly Dictionary<VM, Dictionary<XenRef<Host>, string[]>> _recommendations = new Dictionary<VM, Dictionary<XenRef<Host>, string[]>>();
-        private bool _isError;
+        private readonly bool _initialized;
+        private readonly Dictionary<VM, Dictionary<XenRef<Host>, string[]>> _recommendations;
+        private readonly bool _isError;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WlbRecommendations"/> class.
         /// </summary>
         /// <param name="vms">The VMs that the recommendations are required for.</param>
-        /// <param name="session">The session.</param>
-        public WlbRecommendations(IEnumerable<VM> vms, Session session)
+        /// <param name="recommendations"></param>
+        public WlbRecommendations(List<VM> vms, Dictionary<VM, Dictionary<XenRef<Host>, string[]>> recommendations)
         {
             Util.ThrowIfEnumerableParameterNullOrEmpty(vms, "vms");
-            Util.ThrowIfParameterNull(session, "session");
 
-            _vms = new ReadOnlyCollection<VM>(new List<VM>(vms));
-            _session = session;
+            _vms = new ReadOnlyCollection<VM>(vms);
+            _recommendations = recommendations;
+            _isError = recommendations == null;
+            _initialized = recommendations != null;
         }
-
+        /*
         /// <summary>
         /// Calls VM.retrieve_wlb_recommendations for each of the VMs specified in the constructor.
         /// </summary>
@@ -96,7 +95,7 @@ namespace XenAdmin.Commands
             {
                 _isError = true;
             }
-        }
+         }*/
 
         /// <summary>
         /// Gets a value indicating whether an exception was thrown when calling VM.retrieve_wlb_recommendations.
