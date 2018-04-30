@@ -262,6 +262,12 @@
     <Compile Include="Dialogs\OptionsPages\ConfirmationOptionsPage.Designer.cs">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\OptionsPages\DisplayOptions2Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\OptionsPages\DisplayOptions2Page.Designer.cs">
+      <DependentUpon>DisplayOptions2Page.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\PvsCacheConfigurationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1711,6 +1717,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsPages\ConfirmationOptionsPage.zh-CN.resx">
       <DependentUpon>ConfirmationOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\DisplayOptions2Page.ja.resx">
+      <DependentUpon>DisplayOptions2Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\DisplayOptions2Page.resx">
+      <DependentUpon>DisplayOptions2Page.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\OptionsPages\DisplayOptions2Page.zh-CN.resx">
+      <DependentUpon>DisplayOptions2Page.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PvsCacheConfigurationDialog.ja.resx">
       <DependentUpon>PvsCacheConfigurationDialog.cs</DependentUpon>
@@ -6995,8 +7011,6 @@
     <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">mt.exe -nologo -manifest "$(ProjectDir)$(ProjectName).manifest" -outputresource:"$(TargetDir)..\..\bin\$(Configuration)\$(TargetFileName)";#1</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"
-
-copy "$(ProjectDir)\..\packages\putty.exe" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)\ReportViewer\resource_report.rdlc" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

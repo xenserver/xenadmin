@@ -4165,6 +4165,12 @@ This will also delete its subfolders.</value>
   <data name="DISPLAY" xml:space="preserve">
     <value>Display</value>
   </data>
+  <data name="DISPLAY2" xml:space="preserve">
+    <value>Display 2</value>
+  </data>
+  <data name="DISPLAY2_DETAILS" xml:space="preserve">
+    <value>Display options 2</value>
+  </data>
   <data name="DISPLAY_DETAILS" xml:space="preserve">
     <value>Display options</value>
   </data>
