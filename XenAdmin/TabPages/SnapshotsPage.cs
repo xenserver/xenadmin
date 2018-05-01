@@ -78,36 +78,36 @@ namespace XenAdmin.TabPages
             base.Text = Messages.SNAPSHOTS_PAGE_TITLE;
             dataGridView.TabIndex = snapshotTreeView.TabIndex;
             dataGridView.Sorted += DataGridView_Sorted;
-            Date.DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HMS;
-            Date.ValueType = typeof(DateTime);
+            columnCreated.DefaultCellStyle.Format = Messages.DATEFORMAT_DMY_HMS;
+            columnCreated.ValueType = typeof(DateTime);
             ConnectionsManager.History.CollectionChanged += History_CollectionChanged;
         }
 
 
         void DataGridView_Sorted(object sender, EventArgs e)
         {
-            if (dataGridView.SortedColumn.Index == Live.Index)
+            if (dataGridView.SortedColumn.Index == columnType.Index)
             {
                 sortByTypeToolStripMenuItem.Checked = true;
                 sortByNameToolStripMenuItem.Checked = false;
                 sortByCreatedOnToolStripMenuItem.Checked = false;
                 sortBySizeToolStripMenuItem.Checked = false;
             }
-            else if (dataGridView.SortedColumn.Index == Snapshot.Index)
+            else if (dataGridView.SortedColumn.Index == columnName.Index)
             {
                 sortByTypeToolStripMenuItem.Checked = false;
                 sortByNameToolStripMenuItem.Checked = true;
                 sortByCreatedOnToolStripMenuItem.Checked = false;
                 sortBySizeToolStripMenuItem.Checked = false;
             }
-            else if (dataGridView.SortedColumn.Index == Date.Index)
+            else if (dataGridView.SortedColumn.Index == columnCreated.Index)
             {
                 sortByTypeToolStripMenuItem.Checked = false;
                 sortByNameToolStripMenuItem.Checked = false;
                 sortByCreatedOnToolStripMenuItem.Checked = true;
                 sortBySizeToolStripMenuItem.Checked = false;
             }
-            else if (dataGridView.SortedColumn.Index == size.Index)
+            else if (dataGridView.SortedColumn.Index == columnSize.Index)
             {
                 sortByTypeToolStripMenuItem.Checked = false;
                 sortByNameToolStripMenuItem.Checked = false;
@@ -420,7 +420,7 @@ namespace XenAdmin.TabPages
 
             }
             if (dataGridView.SortedColumn == null)
-                dataGridView.Sort(Snapshot, ListSortDirection.Ascending);
+                dataGridView.Sort(columnName, ListSortDirection.Ascending);
             return roots;
         }
 
@@ -1219,25 +1219,25 @@ namespace XenAdmin.TabPages
         private void sortByTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!sortByTypeToolStripMenuItem.Checked)
-                dataGridView.Sort(Live, ListSortDirection.Ascending);
+                dataGridView.Sort(columnType, ListSortDirection.Ascending);
         }
 
         private void sortByNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!sortByNameToolStripMenuItem.Checked)
-                dataGridView.Sort(Snapshot, ListSortDirection.Ascending);
+                dataGridView.Sort(columnName, ListSortDirection.Ascending);
         }
 
         private void sortByCreatedOnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!sortByCreatedOnToolStripMenuItem.Checked)
-                dataGridView.Sort(Date, ListSortDirection.Ascending);
+                dataGridView.Sort(columnCreated, ListSortDirection.Ascending);
         }
 
         private void sortBySizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!sortBySizeToolStripMenuItem.Checked)
-                dataGridView.Sort(size, ListSortDirection.Ascending);
+                dataGridView.Sort(columnSize, ListSortDirection.Ascending);
         }
 
         private void screenshotPictureBox_Click(object sender, EventArgs e)
