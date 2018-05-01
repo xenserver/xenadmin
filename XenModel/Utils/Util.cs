@@ -358,9 +358,31 @@ namespace XenAdmin
             return string.Format(Messages.VAL_FORMAT, p, Messages.COUNTS_PER_SEC_UNIT);
         }
 
-        public static string MegaHertzString(double p)
+        public static string MegaHertzString(double t)
         {
-            return string.Format(Messages.VAL_FORMAT, p, Messages.VAL_MHZ);
+            string unit;
+            string value = MegaHertzValue(t, out unit);
+            return string.Format(Messages.VAL_FORMAT, value, unit);
+        }
+
+        public static string MegaHertzValue(double t, out string unit)
+        {
+            return MegaHertzValue(t, 4, out unit);
+        }
+
+        /// <summary>
+        /// Converts the input value from MHz to GHz if needed, rounding it to the specified decimal places
+        /// </summary>
+        private static string MegaHertzValue(double t, int decPlaces, out string unit)
+        {
+            if (t >= DEC_KILO)
+            {
+                unit = Messages.VAL_GIGHZ;
+                return Math.Round(t / DEC_KILO, decPlaces).ToString();
+            }
+            
+            unit = Messages.VAL_MEGHZ;
+            return Math.Round(t, decPlaces).ToString();
         }
 
         public static string PercentageString(double fraction)
