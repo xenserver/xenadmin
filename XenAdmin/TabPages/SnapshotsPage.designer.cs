@@ -528,25 +528,25 @@ namespace XenAdmin.TabPages
             // 
             this.sortByNameToolStripMenuItem.Name = "sortByNameToolStripMenuItem";
             resources.ApplyResources(this.sortByNameToolStripMenuItem, "sortByNameToolStripMenuItem");
-            this.sortByNameToolStripMenuItem.Click += new System.EventHandler(this.sortByToolStripMenuItem_Click);
+            this.sortByNameToolStripMenuItem.Click += new System.EventHandler(this.sortByNameToolStripMenuItem_Click);
             // 
             // sortByCreatedOnToolStripMenuItem
             // 
             this.sortByCreatedOnToolStripMenuItem.Name = "sortByCreatedOnToolStripMenuItem";
             resources.ApplyResources(this.sortByCreatedOnToolStripMenuItem, "sortByCreatedOnToolStripMenuItem");
-            this.sortByCreatedOnToolStripMenuItem.Click += new System.EventHandler(this.sortByToolStripMenuItem_Click);
+            this.sortByCreatedOnToolStripMenuItem.Click += new System.EventHandler(this.sortByCreatedOnToolStripMenuItem_Click);
             // 
             // sortBySizeToolStripMenuItem
             // 
             this.sortBySizeToolStripMenuItem.Name = "sortBySizeToolStripMenuItem";
             resources.ApplyResources(this.sortBySizeToolStripMenuItem, "sortBySizeToolStripMenuItem");
-            this.sortBySizeToolStripMenuItem.Click += new System.EventHandler(this.sortByToolStripMenuItem_Click);
+            this.sortBySizeToolStripMenuItem.Click += new System.EventHandler(this.sortBySizeToolStripMenuItem_Click);
             // 
             // sortByTypeToolStripMenuItem
             // 
             this.sortByTypeToolStripMenuItem.Name = "sortByTypeToolStripMenuItem";
             resources.ApplyResources(this.sortByTypeToolStripMenuItem, "sortByTypeToolStripMenuItem");
-            this.sortByTypeToolStripMenuItem.Click += new System.EventHandler(this.sortByToolStripMenuItem_Click);
+            this.sortByTypeToolStripMenuItem.Click += new System.EventHandler(this.sortByTypeToolStripMenuItem_Click);
             // 
             // sortToolStripSeparator
             // 

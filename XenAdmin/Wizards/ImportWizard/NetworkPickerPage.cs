@@ -230,7 +230,7 @@ namespace XenAdmin.Wizards.ImportWizard
 				        AddVIFRow(vif);
 				}
 
-                m_networkGridView.Sort(m_networkGridView.Columns[0], ListSortDirection.Ascending);
+                m_networkGridView.Sort(NameNetworkColumn, ListSortDirection.Ascending);
 			}
 			finally
 			{
