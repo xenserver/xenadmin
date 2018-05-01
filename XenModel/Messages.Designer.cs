@@ -35785,6 +35785,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GHz.
+        /// </summary>
+        public static string VAL_GIGHZ {
+            get {
+                return ResourceManager.GetString("VAL_GIGHZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GBps.
         /// </summary>
         public static string VAL_GIGRATE {
@@ -35848,20 +35857,20 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MHz.
+        /// </summary>
+        public static string VAL_MEGHZ {
+            get {
+                return ResourceManager.GetString("VAL_MEGHZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MBps.
         /// </summary>
         public static string VAL_MEGRATE {
             get {
                 return ResourceManager.GetString("VAL_MEGRATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to MHz.
-        /// </summary>
-        public static string VAL_MHZ {
-            get {
-                return ResourceManager.GetString("VAL_MHZ", resourceCulture);
             }
         }
         

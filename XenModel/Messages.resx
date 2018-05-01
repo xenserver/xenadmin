@@ -12378,6 +12378,9 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VAL_GIGB" xml:space="preserve">
     <value>GB</value>
   </data>
+  <data name="VAL_GIGHZ" xml:space="preserve">
+    <value>GHz</value>
+  </data>
   <data name="VAL_GIGRATE" xml:space="preserve">
     <value>GBps</value>
   </data>
@@ -12399,11 +12402,11 @@ To start a [XenServer] trial, click the button below.</value>
   <data name="VAL_MEGB" xml:space="preserve">
     <value>MB</value>
   </data>
+  <data name="VAL_MEGHZ" xml:space="preserve">
+    <value>MHz</value>
+  </data>
   <data name="VAL_MEGRATE" xml:space="preserve">
     <value>MBps</value>
-  </data>
-  <data name="VAL_MHZ" xml:space="preserve">
-    <value>MHz</value>
   </data>
   <data name="VAL_MICSEC" xml:space="preserve">
     <value>μs</value>

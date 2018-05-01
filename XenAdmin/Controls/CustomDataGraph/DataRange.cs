@@ -144,7 +144,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                         Util.MilliWattValue(Max, out unit);
                         return unit;
                     case Unit.MegaHertz:
-                        return Messages.VAL_MHZ;
+                        Util.MegaHertzValue(Max, out unit);
+                        return unit;
                     default:
                         return "";
                 }
@@ -169,6 +170,8 @@ namespace XenAdmin.Controls.CustomDataGraph
                     return Util.NanoSecondsValue(constrVal, out unit);
                 case Unit.MilliWatt:
                     return Util.MilliWattValue(constrVal, out unit);
+                case Unit.MegaHertz:
+                    return Util.MegaHertzValue(constrVal, out unit);
                 case Unit.CountsPerSecond://fall through
                 default:
                     return constrVal.ToString();
