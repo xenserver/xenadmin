@@ -80,7 +80,7 @@ namespace XenAdmin.Dialogs
 
         }
 
-        void checkableDataGridView_RowChecked(object sender, CheckableDataGridViewRowEventArgs e)
+        void checkableDataGridView_RowChecked(object sender, CheckableDataGridView.CheckableDataGridViewRowEventArgs e)
         {
             Controller.UpdateButtonEnablement();
         }
@@ -100,7 +100,7 @@ namespace XenAdmin.Dialogs
             Controller.ReleaseLicenses(checkableDataGridView.CheckedRows);
         }
 
-        private void checkableDataGridView_RowUpdated(object sender, CheckableDataGridViewRowEventArgs e)
+        private void checkableDataGridView_RowUpdated(object sender, CheckableDataGridView.CheckableDataGridViewRowEventArgs e)
         {
             LicenseCheckableDataGridView senderGrid = sender as LicenseCheckableDataGridView;
             if (senderGrid == null || e.RowIndex >= senderGrid.Rows.Count || e.RowIndex < 0)
