@@ -48,6 +48,7 @@ namespace XenAdmin.Dialogs
         public LicenseManager(LicenseManagerController lmcontroller)
         {
             InitializeComponent();
+            checkableDataGridView.StatusImageColumn = statusImageColumn;
             SetupControllers(lmcontroller);
         }
 
