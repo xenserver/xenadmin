@@ -5875,6 +5875,17 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creating this bond will automatically move the clustering network on one of your selected bond members to the bond itself:
+        ///
+        ///- If your network configuration is incorrect then hosts may permanently lose the connection to the clustering network, which will cause undesired host fences..
+        /// </summary>
+        public static string BOND_CREATE_WILL_DISTURB_CLUSTERING {
+            get {
+                return ResourceManager.GetString("BOND_CREATE_WILL_DISTURB_CLUSTERING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating this bond will automatically move the management interface on one of your selected bond members to the bond itself:
         ///
         ///- [XenCenter] connections to the pool will temporarily be disturbed

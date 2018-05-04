@@ -2149,6 +2149,11 @@ Both types of interface cannot be added to the same bond. Choose different bond 
   <data name="BOND_CREATE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>Creating this bond will disrupt traffic through the secondary interfaces on the bond members while the interfaces are moved onto the bond itself.</value>
   </data>
+  <data name="BOND_CREATE_WILL_DISTURB_CLUSTERING" xml:space="preserve">
+    <value>Creating this bond will automatically move the clustering network on one of your selected bond members to the bond itself:
+
+- If your network configuration is incorrect then hosts may permanently lose the connection to the clustering network, which will cause undesired host fences.</value>
+  </data>
   <data name="BOND_DELETE_CONTINUE" xml:space="preserve">
     <value>&amp;Delete bond anyway</value>
   </data>
