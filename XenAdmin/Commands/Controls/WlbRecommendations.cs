@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using XenAPI;
 using System.Collections.ObjectModel;
 using XenAdmin.Core;
@@ -45,7 +44,6 @@ namespace XenAdmin.Commands
     internal class WlbRecommendations
     {
         private readonly ReadOnlyCollection<VM> _vms;
-        private readonly bool _initialized;
         private readonly Dictionary<VM, Dictionary<XenRef<Host>, string[]>> _recommendations;
         private readonly bool _isError;
 
@@ -61,41 +59,7 @@ namespace XenAdmin.Commands
             _vms = new ReadOnlyCollection<VM>(vms);
             _recommendations = recommendations;
             _isError = recommendations == null;
-            _initialized = recommendations != null;
         }
-        /*
-        /// <summary>
-        /// Calls VM.retrieve_wlb_recommendations for each of the VMs specified in the constructor.
-        /// </summary>
-        public void Initialize()
-        {
-            if (_initialized)
-            {
-                throw new InvalidOperationException("Already initialized");
-            }
-
-            _initialized = true;
-
-            if (Helpers.WlbEnabled(_vms[0].Connection))
-            {
-                try
-                {
-                    foreach (VM vm in _vms)
-                    {
-                        _recommendations[vm] = VM.retrieve_wlb_recommendations(_session, vm.opaque_ref);
-                    }
-                }
-                catch (Exception e)
-                {
-                    log.Error("Error getting WLB recommendations", e);
-                    _isError = true;
-                }
-            }
-            else
-            {
-                _isError = true;
-            }
-         }*/
 
         /// <summary>
         /// Gets a value indicating whether an exception was thrown when calling VM.retrieve_wlb_recommendations.
@@ -114,10 +78,6 @@ namespace XenAdmin.Commands
             if (_isError)
             {
                 throw new InvalidOperationException("There was an error getting the WLB recommendations.");
-            }
-            if (!_initialized)
-            {
-                throw new InvalidOperationException("Initialize() has not been called.");
             }
         }
 
