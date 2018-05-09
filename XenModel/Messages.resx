@@ -5369,6 +5369,9 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>Feature disabled in the registry</value>
   </data>
+  <data name="FEATURE_EXPERIMENTAL" xml:space="preserve">
+    <value>Feature '{0}' must be enabled on all hosts in the pool before use. See release notes.</value>
+  </data>
   <data name="FETCHED_POSSIBLE_HOSTS" xml:space="preserve">
     <value>Fetched possible hosts of VM {0}</value>
   </data>
