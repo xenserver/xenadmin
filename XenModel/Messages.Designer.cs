@@ -15289,6 +15289,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Feature &apos;{0}&apos; must be enabled on all hosts in the pool before use. See release notes..
+        /// </summary>
+        public static string FEATURE_EXPERIMENTAL {
+            get {
+                return ResourceManager.GetString("FEATURE_EXPERIMENTAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Next Section.
         /// </summary>
         public static string FETCH_EARLIER_DATA {
