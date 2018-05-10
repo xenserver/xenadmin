@@ -5368,6 +5368,9 @@
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>功能已在注册表中禁用</value>
   </data>
+  <data name="FEATURE_EXPERIMENTAL" xml:space="preserve">
+    <value>使用前必须在池中的所有主机上启用“{0}”功能。请参阅“发行说明”。</value>
+  </data>
   <data name="FETCHED_POSSIBLE_HOSTS" xml:space="preserve">
     <value>已获取 VM {0} 的可能的主机</value>
   </data>

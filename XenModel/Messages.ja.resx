@@ -5374,6 +5374,9 @@ CD をイジェクトしてから再試行してください。</value>
   <data name="FEATURE_DISABLED_IN_REGISTER" xml:space="preserve">
     <value>機能がレジストリで無効になっています。</value>
   </data>
+  <data name="FEATURE_EXPERIMENTAL" xml:space="preserve">
+    <value>機能 '{0}' は、使用前にプール内のすべてのホストで有効にする必要があります。リリースノートを参照してください。</value>
+  </data>
   <data name="FETCHED_POSSIBLE_HOSTS" xml:space="preserve">
     <value>VM {0} の使用可能なホストを取得済み</value>
   </data>
