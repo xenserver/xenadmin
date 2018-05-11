@@ -167,7 +167,7 @@ namespace XenAdmin.TabPages
                 {
                     foreach (PIF PIF in host.Connection.ResolveAll(host.PIFs))
                     {
-                        if (!PIF.IsPhysical())
+                        if (!PIF.IsPhysical() && !PIF.IsSriovLogicalPIF())
                             continue;
 
                         RegisterPIFEventHandlers(PIF);
@@ -264,7 +264,15 @@ namespace XenAdmin.TabPages
                             sriovSupported = !pif.SriovCapable() ? Messages.NO : Messages.SRIOV_DISABLED;
                             Cells[9].Value = sriovSupported;                        }
                         else
-                        { 
+                        {
+                            Network_sriov network_s = pif.Connection.Resolve(pif.sriov_physical_PIF_of[0]);
+                            PIF sriovLogicalPif = network_s!=null ? pif.Connection.Resolve(network_s.logical_PIF) : null;
+                            if(sriovLogicalPif == null || !sriovLogicalPif.currently_attached)
+                            {
+                                Cells[9].Value = Messages.SRIOV_DISABLED;
+                                break;
+                            }
+
                             DelegatedAsyncAction action = new DelegatedAsyncAction(pif.Connection,
                             "", "", "",
                             delegate (Session session)
