@@ -60,8 +60,12 @@ namespace XenAdmin.Diagnostics.Checks
                 return new BrokenSR(this, sr, Host);
             }
 
-            if (srUploadedUpdates != null && !srUploadedUpdates.CanBeSeenFrom(Host))
+            if (srUploadedUpdates != null
+                && ((srUploadedUpdates.shared && !srUploadedUpdates.CanBeSeenFrom(Host))
+                 || (!srUploadedUpdates.shared && srUploadedUpdates.IsBroken())))
+            {
                 return new BrokenSR(this, srUploadedUpdates, Host);
+            }
 
             return null;
         }
