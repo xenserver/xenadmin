@@ -29539,15 +29539,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes ({0} VFs remaining).
-        /// </summary>
-        public static string REAMININF_VFS {
-            get {
-                return ResourceManager.GetString("REAMININF_VFS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to R&amp;eattach.
         /// </summary>
         public static string REATTACH_SR {
@@ -29600,6 +29591,15 @@ namespace XenAdmin {
         public static string REGION_LABLE {
             get {
                 return ResourceManager.GetString("REGION_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes ({0} VFs remaining).
+        /// </summary>
+        public static string REMAINING_VFS {
+            get {
+                return ResourceManager.GetString("REMAINING_VFS", resourceCulture);
             }
         }
         

@@ -10266,9 +10266,6 @@ Disconnect from this server, or reconnect as a more privileged user.</value>
   <data name="READ_WRITE" xml:space="preserve">
     <value>Read / Write</value>
   </data>
-  <data name="REAMININF_VFS" xml:space="preserve">
-    <value>Yes ({0} VFs remaining)</value>
-  </data>
   <data name="REATTACH_SR" xml:space="preserve">
     <value>R&amp;eattach</value>
   </data>
@@ -10288,6 +10285,9 @@ To log out of this server and log in again using a different user account, enter
   </data>
   <data name="REGION_LABLE" xml:space="preserve">
     <value>&amp;Region:</value>
+  </data>
+  <data name="REMAINING_VFS" xml:space="preserve">
+    <value>Yes ({0} VFs remaining)</value>
   </data>
   <data name="REMOTE" xml:space="preserve">
     <value>Remote ({0})</value>
