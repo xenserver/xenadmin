@@ -89,7 +89,8 @@ namespace XenAdmin.Commands
             }
 
             VisualMenuItemAlignData.ParentStrip = this;
-            IXenConnection connection = Command.GetSelection()[0].Connection;
+            var selection = Command.GetSelection();
+            IXenConnection connection = selection[0].Connection;
             bool wlb = Helpers.WlbEnabled(connection);
 
             if (wlb)
@@ -109,6 +110,9 @@ namespace XenAdmin.Commands
                 item.Tag = host;
                 base.DropDownItems.Add(item);
             }
+
+            // Adds the migrate wizard button, do this before the enable checks on the other items
+            AddAdditionalMenuItems(selection);
             
             UpdateHostList();
         }
@@ -231,8 +235,6 @@ namespace XenAdmin.Commands
             {
                 DropDownItems.Insert(hostMenuItems.IndexOf(menuItem) + 1, menuItem);
             }
-
-            AddAdditionalMenuItems(selection);
         }
 
         private void EnableAppropriateHostsNoWlb()
@@ -261,9 +263,6 @@ namespace XenAdmin.Commands
 
             if (Stopped)
                 return;
-
-            // Adds the migrate wizard button, do this before the enable checks on the other items
-            AddAdditionalMenuItems(selection);
 
             foreach (VMOperationToolStripMenuSubItem item in hostMenuItems)
             {
