@@ -32,19 +32,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 using XenAdmin.Core;
-using XenAdmin.Model;
-using System.Text.RegularExpressions;
 using XenAdmin.Dialogs;
 using XenAPI;
-using XenAdmin.Controls;
-using XenAdmin.Network;
-using XenAdmin.Help;
 using XenAdmin.Actions;
 using XenAdmin.Commands;
 
@@ -58,7 +50,6 @@ namespace XenAdmin.TabPages
         public NICPage()
         {
             InitializeComponent();
-
 
             base.Text = Messages.NIC_TAB_TITLE;
             PIF_CollectionChangedWithInvoke = Program.ProgramInvokeHandler(PIF_CollectionChanged);
@@ -174,7 +165,7 @@ namespace XenAdmin.TabPages
 
                         PIFRow p = new PIFRow(PIF);
                         dataGridView1.Rows.Add(p);
-                        if (selected != null && p.pif == selected.pif)
+                        if (selected != null && p.Pif == selected.Pif)
                             p.Selected = true;
                     }
 
@@ -202,101 +193,83 @@ namespace XenAdmin.TabPages
             }
         }
 
-        public class PIFRow : DataGridViewRow
+        private class PIFRow : DataGridViewRow
         {
-            public PIF pif;
-            string vendor = Messages.HYPHEN;
-            string device = Messages.HYPHEN;
-            string busPath = Messages.HYPHEN;
+            public readonly PIF Pif;
+
+            private readonly DataGridViewTextBoxCell _cellName = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellMac = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellConnected = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellSpeed = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellDuplex = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellVendor = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellDevice = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellBusPath = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellFcoe = new DataGridViewTextBoxCell();
+            private readonly DataGridViewTextBoxCell _cellSriov = new DataGridViewTextBoxCell();
             
             public PIFRow(PIF pif)
             {
-                this.pif = pif;
-                PIF_metrics PIFMetrics = pif.PIFMetrics();
-                if (PIFMetrics != null)
-                {
-                    vendor = PIFMetrics.vendor_name;
-                    device = PIFMetrics.device_name;
-                    busPath = PIFMetrics.pci_bus_path;
-                }
-                for (int i = 0; i < 10; i++)
-                {
-                    Cells.Add(new DataGridViewTextBoxCell());
-                    updateCell(i);
-                }
+                Pif = pif;
+                Cells.AddRange(_cellName, _cellMac, _cellConnected, _cellSpeed, _cellDuplex,
+                    _cellVendor, _cellDevice, _cellBusPath, _cellFcoe, _cellSriov);
+                Update();
             }            
 
-            private void updateCell(int index)
+            private void Update()
             {
-                switch (index)
+                _cellName.Value = Pif.Name();
+                _cellMac.Value = Pif.MAC;
+                _cellConnected.Value = Pif.Carrier() ? Messages.CONNECTED : Messages.DISCONNECTED;
+                _cellSpeed.Value = Pif.Carrier() ? Pif.Speed() : Messages.HYPHEN;
+                _cellDuplex.Value = Pif.Carrier() ? Pif.Duplex() : Messages.HYPHEN;
+
+                var pifMetrics = Pif.PIFMetrics();
+                _cellVendor.Value = pifMetrics == null ? Messages.HYPHEN : pifMetrics.vendor_name;
+                _cellDevice.Value = pifMetrics == null ? Messages.HYPHEN : pifMetrics.device_name;
+                _cellBusPath.Value = pifMetrics == null ? Messages.HYPHEN : pifMetrics.pci_bus_path;
+
+                _cellFcoe.Value = Pif.FCoECapable().ToYesNoStringI18n();
+
+                if (!Pif.SriovCapable())
                 {
-                    case 0:
-                        Cells[0].Value = pif.Name();
-                        break;
-                    case 1:
-                        Cells[1].Value = pif.MAC;
-                        break;
-                    case 2:
-                        Cells[2].Value = pif.Carrier() ? Messages.CONNECTED : Messages.DISCONNECTED;
-                        break;
-                    case 3:
-                        Cells[3].Value = pif.Carrier() ? pif.Speed() : Messages.HYPHEN;
-                        break;
-                    case 4:
-                        Cells[4].Value = pif.Carrier() ? pif.Duplex() : Messages.HYPHEN;
-                        break;
-                    case 5:
-                        Cells[5].Value = vendor;
-                        break;
-                    case 6:
-                        Cells[6].Value = device;
-                        break;
-                    case 7:
-                        Cells[7].Value = busPath;
-                        break;
-                    case 8:
-                        Cells[8].Value = pif.FCoECapable().ToYesNoStringI18n();
-                        break;
-                    case 9:
-                        string sriovSupported = ""; 
-                        if (!pif.SriovCapable() || !pif.IsSriovPhysicalPIF())
+                    _cellSriov.Value = Messages.NO;
+                }
+                else if (!Pif.IsSriovPhysicalPIF())
+                {
+                    _cellSriov.Value = Messages.SRIOV_DISABLED;
+                }
+                else
+                {
+                    var networkSriov = Pif.Connection.Resolve(Pif.sriov_physical_PIF_of[0]);
+                    PIF sriovLogicalPif = networkSriov != null ? Pif.Connection.Resolve(networkSriov.logical_PIF) : null;
+
+                    if (sriovLogicalPif == null || !sriovLogicalPif.currently_attached)
+                    {
+                        _cellSriov.Value = Messages.SRIOV_DISABLED;
+                        return;
+                    }
+
+                    var sriovSupported = "";
+                    var action = new DelegatedAsyncAction(Pif.Connection, "", "", "", delegate(Session session)
                         {
-                            sriovSupported = !pif.SriovCapable() ? Messages.NO : Messages.SRIOV_DISABLED;
-                            Cells[9].Value = sriovSupported;                        }
-                        else
-                        {
-                            Network_sriov network_s = pif.Connection.Resolve(pif.sriov_physical_PIF_of[0]);
-                            PIF sriovLogicalPif = network_s!=null ? pif.Connection.Resolve(network_s.logical_PIF) : null;
-                            if(sriovLogicalPif == null || !sriovLogicalPif.currently_attached)
+                            try
                             {
-                                Cells[9].Value = Messages.SRIOV_DISABLED;
-                                break;
+                                var remainingCapacity = Network_sriov.get_remaining_capacity(session, Pif.sriov_physical_PIF_of[0].opaque_ref);
+                                sriovSupported = string.Format(Messages.REMAINING_VFS, remainingCapacity);
                             }
-
-                            DelegatedAsyncAction action = new DelegatedAsyncAction(pif.Connection,
-                            "", "", "",
-                            delegate (Session session)
+                            catch
                             {
-                                try
-                                {
-                                    var remainingCapacity = Network_sriov.get_remaining_capacity(session, pif.sriov_physical_PIF_of[0].opaque_ref);
-                                    sriovSupported = string.Format(Messages.REAMININF_VFS, remainingCapacity);
-                                }
-                                catch
-                                {
-                                    sriovSupported = Messages.YES;
-                                }
-                            },
-                            true);
+                                sriovSupported = Messages.YES;
+                            }
+                        },
+                        true);
 
-                            action.Completed += delegate
-                            {
-                                Program.Invoke(Program.MainWindow, delegate { Cells[9].Value = sriovSupported; });
-                            };
-                            action.RunAsync();
-                        }
-                         
-                        break;
+                    action.Completed += delegate
+                    {
+                        Program.Invoke(Program.MainWindow, () => _cellSriov.Value = sriovSupported);
+                    };
+                    action.RunAsync();
                 }
             }
         }
@@ -309,7 +282,7 @@ namespace XenAdmin.TabPages
                 return;
             }
 
-            PIF pif = ((PIFRow)dataGridView1.SelectedRows[0]).pif;
+            PIF pif = ((PIFRow)dataGridView1.SelectedRows[0]).Pif;
             if (pif == null)
             {
                 DeleteBondButton.Enabled = false;
@@ -329,7 +302,7 @@ namespace XenAdmin.TabPages
 
         private void DeleteBondButton_Click(object sender, EventArgs e)
         {
-            PIF pif = ((PIFRow)dataGridView1.SelectedRows[0]).pif;
+            PIF pif = ((PIFRow)dataGridView1.SelectedRows[0]).Pif;
             System.Diagnostics.Trace.Assert(pif.IsBondNIC());
             XenAPI.Network network = pif.Connection.Resolve(pif.network);
             var destroyBondCommand = new DestroyBondCommand(Program.MainWindow, network);
@@ -354,20 +327,19 @@ namespace XenAdmin.TabPages
                 return;
 
             DataGridView.HitTestInfo i = dataGridView1.HitTest(e.X, e.Y);
-            if (i == DataGridView.HitTestInfo.Nowhere||i.RowIndex<0||i.ColumnIndex<0)
+            if (i == DataGridView.HitTestInfo.Nowhere || i.RowIndex < 0 || i.ColumnIndex < 0)
                 return;
             dataGridView1.Rows[i.RowIndex].Selected = true;
             dataGridView1.Focus();
 
             contextMenuStrip1.Items.Clear();
-            ToolStripMenuItem deleteItem = new ToolStripMenuItem(DeleteBondButton.Text, null, DeleteBondButton_Click);
-            ToolStripMenuItem copyItem = new ToolStripMenuItem(Messages.COPY_MENU_ITEM, null, CopyItemClick);
-            deleteItem.Enabled = DeleteBondButton.Enabled;
+            var deleteItem = new ToolStripMenuItem(DeleteBondButton.Text, null, DeleteBondButton_Click) {Enabled = DeleteBondButton.Enabled};
+            var copyItem = new ToolStripMenuItem(Messages.COPY_MENU_ITEM, null, CopyItemClick);
             contextMenuStrip1.Items.Add(deleteItem);
             contextMenuStrip1.Items.Add(new ToolStripSeparator());
             contextMenuStrip1.Items.Add(copyItem);
 
-            contextMenuStrip1.Show(dataGridView1, dataGridView1.PointToClient(Control.MousePosition));
+            contextMenuStrip1.Show(dataGridView1, dataGridView1.PointToClient(MousePosition));
         }
     }
 }
