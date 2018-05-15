@@ -85,7 +85,7 @@ namespace XenAdmin.Diagnostics.Hotfixing
         private readonly Hotfix elyHotfix = new SingleHotfix
         {
             Filename = "RPU004",
-            UUID = "1ac61687-8b65-43e6-957f-50602fb79572"
+            UUID = "439235bf-48fa-4ee3-9c11-d67084a01205"
         };
 
         public Hotfix Hotfix(Host host)

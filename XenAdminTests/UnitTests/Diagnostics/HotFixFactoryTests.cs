@@ -84,7 +84,7 @@ namespace XenAdminTests.UnitTests.Diagnostics
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Dundee).UUID,
                             "Dundee UUID lookup from enum");
 
-            Assert.AreEqual("1ac61687-8b65-43e6-957f-50602fb79572",
+            Assert.AreEqual("439235bf-48fa-4ee3-9c11-d67084a01205",
                             factory.Hotfix(HotfixFactory.HotfixableServerVersion.Ely).UUID,
                             "Ely UUID lookup from enum");
         }
