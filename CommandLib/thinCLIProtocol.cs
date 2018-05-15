@@ -171,7 +171,7 @@ namespace CommandLib
 	    }
 
 	    public static void writeLine(Stream stream, string line){
-		    byte[] message = Encoding.UTF8.GetBytes(line);
+            byte[] message = Encoding.UTF8.GetBytes(string.Format("{0}\r\n", line));
 		    stream.Write(message, 0, message.Length);
 		    stream.Flush();
 	    }
@@ -182,12 +182,15 @@ namespace CommandLib
 		    return Int32.Parse(bits[1]);
 	    }
 
-        /// <param name="addr">The target URI, including scheme, hostname and path.</param>
-        public static Stream doRPC(String method, Uri uri, thinCLIProtocol tCLIprotocol)
+        public static Stream doRPC(String method, Uri uri, thinCLIProtocol tCLIprotocol, params string[] headers)
         {
             Stream http = Transport.connect(tCLIprotocol, uri.Host, uri.Port);
-            String header = method + " " + uri.PathAndQuery + " HTTP/1.0\r\n\r\n";
-            writeLine(http, header);
+            String startLine = string.Format("{0} {1} HTTP/1.0", method, uri.PathAndQuery);
+            writeLine(http, startLine);
+            foreach (string h in headers)
+                writeLine(http, h);
+            writeLine(http, "");
+
             String response = readLine(http);
             int code = getResultCode(response);
             switch (code)
@@ -206,7 +209,7 @@ namespace CommandLib
                     Uri redirect = new Uri(url.Trim());
                     tCLIprotocol.conf.hostname = redirect.Host;
                     http.Close();
-                    return doRPC(method, redirect, tCLIprotocol);
+                    return doRPC(method, redirect, tCLIprotocol, headers);
                 default:
                     tCLIprotocol.dGlobalError("Received an error message from the server doing an HTTP " + method + " " + uri.PathAndQuery + " : " + response);
                     http.Close();
@@ -351,7 +354,8 @@ namespace CommandLib
             {
                 using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
                 {
-                    using (Stream http = HTTP.doRPC("PUT", uri, tCLIprotocol))
+                    using (Stream http = HTTP.doRPC("PUT", uri, tCLIprotocol, 
+                        string.Format("Content-Length: {0}", fs.Length)))
                     {
                         if (http == null)
                         {
