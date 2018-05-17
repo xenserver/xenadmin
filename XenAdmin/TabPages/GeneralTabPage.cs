@@ -1820,7 +1820,8 @@ namespace XenAdmin.TabPages
             foreach (var updateRef in updateRefs)
             {
                 var update = host.Connection.Resolve(updateRef);
-                warnings.Add(CreateWarningRow(host, update));
+                if (update != null)
+                    warnings.Add(CreateWarningRow(host, update));
             }
 
             // For Toolstack restart, legacy code has to be used to determine this - pool_patches are still populated for backward compatibility
