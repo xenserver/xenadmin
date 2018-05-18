@@ -493,7 +493,7 @@
     <value>The server failed to acquire an IP address on its management interface and therefore cannot contact the master.</value>
   </data>
   <data name="HOST_HAS_RESIDENT_VMS" xml:space="preserve">
-    <value>This server cannot be forgotten because there are some user VMs still running</value>
+    <value>This server can not be forgotten because there are some user VMs still running</value>
   </data>
   <data name="HOST_IN_EMERGENCY_MODE" xml:space="preserve">
     <value>This server is in emergency mode</value>
@@ -593,6 +593,9 @@
   </data>
   <data name="INVALID_CIDR_ADDRESS_SPECIFIED" xml:space="preserve">
     <value>A required parameter contained an invalid CIDR address (&lt;addr&gt;/&lt;prefix length&gt;)</value>
+  </data>
+  <data name="INVALID_CLUSTER_STACK" xml:space="preserve">
+    <value>The cluster stack provided is not supported.</value>
   </data>
   <data name="INVALID_DEVICE" xml:space="preserve">
     <value>The device name {0} is invalid</value>
@@ -920,6 +923,9 @@
   </data>
   <data name="PIF_IS_VLAN" xml:space="preserve">
     <value>You tried to create a VLAN on top of another VLAN - use the underlying physical PIF/bond instead</value>
+  </data>
+  <data name="PIF_NOT_ATTACHED_TO_HOST" xml:space="preserve">
+    <value>Cluster_host creation failed as the PIF provided is not attached to the host.</value>
   </data>
   <data name="PIF_NOT_PRESENT" xml:space="preserve">
     <value>This host has no PIF on the given network.</value>
@@ -1285,6 +1291,9 @@ Authorized Roles: {1}</value>
   </data>
   <data name="SR_BACKEND_FAILURE_181" xml:space="preserve">
     <value>Error in Metadata volume operation for SR.</value>
+  </data>
+  <data name="SR_BACKEND_FAILURE_182" xml:space="preserve">
+    <value>ISCSI delete failed</value>
   </data>
   <data name="SR_BACKEND_FAILURE_19" xml:space="preserve">
     <value>No such device</value>

@@ -52,6 +52,7 @@ namespace XenAPI
             XenRef<Cluster> cluster,
             XenRef<Host> host,
             bool enabled,
+            XenRef<PIF> PIF,
             List<cluster_host_operation> allowed_operations,
             Dictionary<string, cluster_host_operation> current_operations,
             Dictionary<string, string> other_config)
@@ -60,6 +61,7 @@ namespace XenAPI
             this.cluster = cluster;
             this.host = host;
             this.enabled = enabled;
+            this.PIF = PIF;
             this.allowed_operations = allowed_operations;
             this.current_operations = current_operations;
             this.other_config = other_config;
@@ -84,6 +86,7 @@ namespace XenAPI
             cluster = update.cluster;
             host = update.host;
             enabled = update.enabled;
+            PIF = update.PIF;
             allowed_operations = update.allowed_operations;
             current_operations = update.current_operations;
             other_config = update.other_config;
@@ -95,6 +98,7 @@ namespace XenAPI
             cluster = proxy.cluster == null ? null : XenRef<Cluster>.Create(proxy.cluster);
             host = proxy.host == null ? null : XenRef<Host>.Create(proxy.host);
             enabled = (bool)proxy.enabled;
+            PIF = proxy.PIF == null ? null : XenRef<PIF>.Create(proxy.PIF);
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<cluster_host_operation>(proxy.allowed_operations);
             current_operations = proxy.current_operations == null ? null : Maps.convert_from_proxy_string_cluster_host_operation(proxy.current_operations);
             other_config = proxy.other_config == null ? null : Maps.convert_from_proxy_string_string(proxy.other_config);
@@ -107,6 +111,7 @@ namespace XenAPI
             result_.cluster = cluster ?? "";
             result_.host = host ?? "";
             result_.enabled = enabled;
+            result_.PIF = PIF ?? "";
             result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
             result_.current_operations = Maps.convert_to_proxy_string_cluster_host_operation(current_operations);
             result_.other_config = Maps.convert_to_proxy_string_string(other_config);
@@ -140,6 +145,8 @@ namespace XenAPI
                 host = Marshalling.ParseRef<Host>(table, "host");
             if (table.ContainsKey("enabled"))
                 enabled = Marshalling.ParseBool(table, "enabled");
+            if (table.ContainsKey("PIF"))
+                PIF = Marshalling.ParseRef<PIF>(table, "PIF");
             if (table.ContainsKey("allowed_operations"))
                 allowed_operations = Helper.StringArrayToEnumList<cluster_host_operation>(Marshalling.ParseStringArray(table, "allowed_operations"));
             if (table.ContainsKey("current_operations"))
@@ -162,6 +169,7 @@ namespace XenAPI
                 Helper.AreEqual2(this._cluster, other._cluster) &&
                 Helper.AreEqual2(this._host, other._host) &&
                 Helper.AreEqual2(this._enabled, other._enabled) &&
+                Helper.AreEqual2(this._PIF, other._PIF) &&
                 Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
                 Helper.AreEqual2(this._other_config, other._other_config);
         }
@@ -272,6 +280,20 @@ namespace XenAPI
         }
 
         /// <summary>
+        /// Get the PIF field of the given Cluster_host.
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster_host">The opaque_ref of the given cluster_host</param>
+        public static XenRef<PIF> get_PIF(Session session, string _cluster_host)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_host_get_pif(session.opaque_ref, _cluster_host);
+            else
+                return XenRef<PIF>.Create(session.proxy.cluster_host_get_pif(session.opaque_ref, _cluster_host ?? "").parse());
+        }
+
+        /// <summary>
         /// Get the allowed_operations field of the given Cluster_host.
         /// </summary>
         /// <param name="session">The session</param>
@@ -318,12 +340,13 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_cluster">Cluster to join</param>
         /// <param name="_host">new cluster member</param>
-        public static XenRef<Cluster_host> create(Session session, string _cluster, string _host)
+        /// <param name="_pif">Network interface to use for communication</param>
+        public static XenRef<Cluster_host> create(Session session, string _cluster, string _host, string _pif)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_host_create(session.opaque_ref, _cluster, _host);
+                return session.JsonRpcClient.cluster_host_create(session.opaque_ref, _cluster, _host, _pif);
             else
-                return XenRef<Cluster_host>.Create(session.proxy.cluster_host_create(session.opaque_ref, _cluster ?? "", _host ?? "").parse());
+                return XenRef<Cluster_host>.Create(session.proxy.cluster_host_create(session.opaque_ref, _cluster ?? "", _host ?? "", _pif ?? "").parse());
         }
 
         /// <summary>
@@ -333,12 +356,13 @@ namespace XenAPI
         /// <param name="session">The session</param>
         /// <param name="_cluster">Cluster to join</param>
         /// <param name="_host">new cluster member</param>
-        public static XenRef<Task> async_create(Session session, string _cluster, string _host)
+        /// <param name="_pif">Network interface to use for communication</param>
+        public static XenRef<Task> async_create(Session session, string _cluster, string _host, string _pif)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_cluster_host_create(session.opaque_ref, _cluster, _host);
+              return session.JsonRpcClient.async_cluster_host_create(session.opaque_ref, _cluster, _host, _pif);
           else
-              return XenRef<Task>.Create(session.proxy.async_cluster_host_create(session.opaque_ref, _cluster ?? "", _host ?? "").parse());
+              return XenRef<Task>.Create(session.proxy.async_cluster_host_create(session.opaque_ref, _cluster ?? "", _host ?? "", _pif ?? "").parse());
         }
 
         /// <summary>
@@ -555,6 +579,26 @@ namespace XenAPI
             }
         }
         private bool _enabled = false;
+
+        /// <summary>
+        /// Reference to the PIF object
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        [JsonConverter(typeof(XenRefConverter<PIF>))]
+        public virtual XenRef<PIF> PIF
+        {
+            get { return _PIF; }
+            set
+            {
+                if (!Helper.AreEqual(value, _PIF))
+                {
+                    _PIF = value;
+                    Changed = true;
+                    NotifyPropertyChanged("PIF");
+                }
+            }
+        }
+        private XenRef<PIF> _PIF = new XenRef<PIF>("OpaqueRef:NULL");
 
         /// <summary>
         /// list of the operations allowed in this state. This list is advisory only and the server state may have changed by the time this field is read by a client.
