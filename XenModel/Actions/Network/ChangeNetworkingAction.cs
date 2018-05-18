@@ -250,7 +250,7 @@ namespace XenAdmin.Actions
         private void DisableClustering(PIF pif, out List<PBD> gfs2Pbds)
         {
             gfs2Pbds = new List<PBD>();
-            var isUsedByClustering = Connection.Cache.Clusters.Any(cluster => cluster.network.opaque_ref == pif.network.opaque_ref);
+            var isUsedByClustering = Connection.Cache.Cluster_hosts.Any(cluster => cluster.PIF.opaque_ref == pif.opaque_ref);
             if (!isUsedByClustering)
                 return;
 
@@ -286,7 +286,7 @@ namespace XenAdmin.Actions
         /// </summary>
         private void EnableClustering(PIF pif, List<PBD> gfs2Pbds)
         {
-            var isUsedByClustering = Connection.Cache.Clusters.Any(cluster => cluster.network.opaque_ref == pif.network.opaque_ref);
+            var isUsedByClustering = Connection.Cache.Cluster_hosts.Any(cluster => cluster.PIF.opaque_ref == pif.opaque_ref);
             if (!isUsedByClustering)
                 return;
 

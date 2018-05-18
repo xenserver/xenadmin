@@ -2255,7 +2255,7 @@ namespace XenAPI
         private primary_address_type _primary_address_type = primary_address_type.IPv4;
 
         /// <summary>
-        /// Indicates whether the interface is managed by xapi. If it is not, then xapi will not configure the interface, the commands PIF.plug/unplug/reconfigure_ip(v6) can not be used, nor can the interface be bonded or have VLANs based on top through xapi.
+        /// Indicates whether the interface is managed by xapi. If it is not, then xapi will not configure the interface, the commands PIF.plug/unplug/reconfigure_ip(v6) cannot be used, nor can the interface be bonded or have VLANs based on top through xapi.
         /// First published in XenServer 6.2 SP1.
         /// </summary>
         public virtual bool managed

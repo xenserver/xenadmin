@@ -14124,13 +14124,6 @@ namespace XenAPI
             return Rpc<List<XenRef<Cluster_host>>>("Cluster.get_cluster_hosts", new JArray(session, _cluster ?? ""), serializer);
         }
 
-        public XenRef<Network> cluster_get_network(string session, string _cluster)
-        {
-            var converters = new List<JsonConverter> {new XenRefConverter<Network>()};
-            var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Network>>("Cluster.get_network", new JArray(session, _cluster ?? ""), serializer);
-        }
-
         public string cluster_get_cluster_token(string session, string _cluster)
         {
             var converters = new List<JsonConverter> {};
@@ -14215,18 +14208,18 @@ namespace XenAPI
             Rpc("Cluster.remove_from_other_config", new JArray(session, _cluster ?? "", _key ?? ""), serializer);
         }
 
-        public XenRef<Cluster> cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
+        public XenRef<Cluster> cluster_create(string session, string _pif, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
         {
-            var converters = new List<JsonConverter> {new XenRefConverter<Cluster>(), new XenRefConverter<Network>()};
+            var converters = new List<JsonConverter> {new XenRefConverter<Cluster>(), new XenRefConverter<PIF>()};
             var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Cluster>>("Cluster.create", new JArray(session, _network ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient), serializer);
+            return Rpc<XenRef<Cluster>>("Cluster.create", new JArray(session, _pif ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient), serializer);
         }
 
-        public XenRef<Task> async_cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
+        public XenRef<Task> async_cluster_create(string session, string _pif, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
         {
-            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<Network>()};
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<PIF>()};
             var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Task>>("Async.Cluster.create", new JArray(session, _network ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient), serializer);
+            return Rpc<XenRef<Task>>("Async.Cluster.create", new JArray(session, _pif ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient), serializer);
         }
 
         public void cluster_destroy(string session, string _cluster)
@@ -14241,6 +14234,20 @@ namespace XenAPI
             var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
             var serializer = CreateSerializer(converters);
             return Rpc<XenRef<Task>>("Async.Cluster.destroy", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Network> cluster_get_network(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Network>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Network>>("Cluster.get_network", new JArray(session, _cluster ?? ""), serializer);
+        }
+
+        public XenRef<Task> async_cluster_get_network(string session, string _cluster)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<Task>>("Async.Cluster.get_network", new JArray(session, _cluster ?? ""), serializer);
         }
 
         public XenRef<Cluster> cluster_pool_create(string session, string _network, string _cluster_stack, double _token_timeout, double _token_timeout_coefficient)
@@ -14355,6 +14362,13 @@ namespace XenAPI
             return Rpc<bool>("Cluster_host.get_enabled", new JArray(session, _cluster_host ?? ""), serializer);
         }
 
+        public XenRef<PIF> cluster_host_get_pif(string session, string _cluster_host)
+        {
+            var converters = new List<JsonConverter> {new XenRefConverter<PIF>()};
+            var serializer = CreateSerializer(converters);
+            return Rpc<XenRef<PIF>>("Cluster_host.get_PIF", new JArray(session, _cluster_host ?? ""), serializer);
+        }
+
         public List<cluster_host_operation> cluster_host_get_allowed_operations(string session, string _cluster_host)
         {
             var converters = new List<JsonConverter> {};
@@ -14376,18 +14390,18 @@ namespace XenAPI
             return Rpc<Dictionary<string, string>>("Cluster_host.get_other_config", new JArray(session, _cluster_host ?? ""), serializer);
         }
 
-        public XenRef<Cluster_host> cluster_host_create(string session, string _cluster, string _host)
+        public XenRef<Cluster_host> cluster_host_create(string session, string _cluster, string _host, string _pif)
         {
-            var converters = new List<JsonConverter> {new XenRefConverter<Cluster_host>(), new XenRefConverter<Cluster>(), new XenRefConverter<Host>()};
+            var converters = new List<JsonConverter> {new XenRefConverter<Cluster_host>(), new XenRefConverter<Cluster>(), new XenRefConverter<Host>(), new XenRefConverter<PIF>()};
             var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Cluster_host>>("Cluster_host.create", new JArray(session, _cluster ?? "", _host ?? ""), serializer);
+            return Rpc<XenRef<Cluster_host>>("Cluster_host.create", new JArray(session, _cluster ?? "", _host ?? "", _pif ?? ""), serializer);
         }
 
-        public XenRef<Task> async_cluster_host_create(string session, string _cluster, string _host)
+        public XenRef<Task> async_cluster_host_create(string session, string _cluster, string _host, string _pif)
         {
-            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<Cluster>(), new XenRefConverter<Host>()};
+            var converters = new List<JsonConverter> {new XenRefConverter<Task>(), new XenRefConverter<Cluster>(), new XenRefConverter<Host>(), new XenRefConverter<PIF>()};
             var serializer = CreateSerializer(converters);
-            return Rpc<XenRef<Task>>("Async.Cluster_host.create", new JArray(session, _cluster ?? "", _host ?? ""), serializer);
+            return Rpc<XenRef<Task>>("Async.Cluster_host.create", new JArray(session, _cluster ?? "", _host ?? "", _pif ?? ""), serializer);
         }
 
         public void cluster_host_destroy(string session, string _cluster_host)

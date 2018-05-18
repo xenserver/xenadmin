@@ -8092,10 +8092,6 @@ namespace XenAPI
         Response<string []>
         cluster_get_cluster_hosts(string session, string _cluster);
 
-        [XmlRpcMethod("Cluster.get_network")]
-        Response<string>
-        cluster_get_network(string session, string _cluster);
-
         [XmlRpcMethod("Cluster.get_cluster_token")]
         Response<string>
         cluster_get_cluster_token(string session, string _cluster);
@@ -8146,11 +8142,11 @@ namespace XenAPI
 
         [XmlRpcMethod("Cluster.create")]
         Response<string>
-        cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient);
+        cluster_create(string session, string _pif, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient);
 
         [XmlRpcMethod("Async.Cluster.create")]
         Response<string>
-        async_cluster_create(string session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient);
+        async_cluster_create(string session, string _pif, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient);
 
         [XmlRpcMethod("Cluster.destroy")]
         Response<string>
@@ -8159,6 +8155,14 @@ namespace XenAPI
         [XmlRpcMethod("Async.Cluster.destroy")]
         Response<string>
         async_cluster_destroy(string session, string _cluster);
+
+        [XmlRpcMethod("Cluster.get_network")]
+        Response<string>
+        cluster_get_network(string session, string _cluster);
+
+        [XmlRpcMethod("Async.Cluster.get_network")]
+        Response<string>
+        async_cluster_get_network(string session, string _cluster);
 
         [XmlRpcMethod("Cluster.pool_create")]
         Response<string>
@@ -8224,6 +8228,10 @@ namespace XenAPI
         Response<bool>
         cluster_host_get_enabled(string session, string _cluster_host);
 
+        [XmlRpcMethod("Cluster_host.get_PIF")]
+        Response<string>
+        cluster_host_get_pif(string session, string _cluster_host);
+
         [XmlRpcMethod("Cluster_host.get_allowed_operations")]
         Response<string []>
         cluster_host_get_allowed_operations(string session, string _cluster_host);
@@ -8238,11 +8246,11 @@ namespace XenAPI
 
         [XmlRpcMethod("Cluster_host.create")]
         Response<string>
-        cluster_host_create(string session, string _cluster, string _host);
+        cluster_host_create(string session, string _cluster, string _host, string _pif);
 
         [XmlRpcMethod("Async.Cluster_host.create")]
         Response<string>
-        async_cluster_host_create(string session, string _cluster, string _host);
+        async_cluster_host_create(string session, string _cluster, string _host, string _pif);
 
         [XmlRpcMethod("Cluster_host.destroy")]
         Response<string>
@@ -9331,7 +9339,6 @@ namespace XenAPI
     {
         public string uuid;
         public string [] cluster_hosts;
-        public string network;
         public string cluster_token;
         public string cluster_stack;
         public string [] allowed_operations;
@@ -9350,6 +9357,7 @@ namespace XenAPI
         public string cluster;
         public string host;
         public bool enabled;
+        public string PIF;
         public string [] allowed_operations;
         public Object current_operations;
         public Object other_config;

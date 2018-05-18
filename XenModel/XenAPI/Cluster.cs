@@ -50,7 +50,6 @@ namespace XenAPI
 
         public Cluster(string uuid,
             List<XenRef<Cluster_host>> cluster_hosts,
-            XenRef<Network> network,
             string cluster_token,
             string cluster_stack,
             List<cluster_operation> allowed_operations,
@@ -63,7 +62,6 @@ namespace XenAPI
         {
             this.uuid = uuid;
             this.cluster_hosts = cluster_hosts;
-            this.network = network;
             this.cluster_token = cluster_token;
             this.cluster_stack = cluster_stack;
             this.allowed_operations = allowed_operations;
@@ -92,7 +90,6 @@ namespace XenAPI
         {
             uuid = update.uuid;
             cluster_hosts = update.cluster_hosts;
-            network = update.network;
             cluster_token = update.cluster_token;
             cluster_stack = update.cluster_stack;
             allowed_operations = update.allowed_operations;
@@ -108,7 +105,6 @@ namespace XenAPI
         {
             uuid = proxy.uuid == null ? null : proxy.uuid;
             cluster_hosts = proxy.cluster_hosts == null ? null : XenRef<Cluster_host>.Create(proxy.cluster_hosts);
-            network = proxy.network == null ? null : XenRef<Network>.Create(proxy.network);
             cluster_token = proxy.cluster_token == null ? null : proxy.cluster_token;
             cluster_stack = proxy.cluster_stack == null ? null : proxy.cluster_stack;
             allowed_operations = proxy.allowed_operations == null ? null : Helper.StringArrayToEnumList<cluster_operation>(proxy.allowed_operations);
@@ -125,7 +121,6 @@ namespace XenAPI
             Proxy_Cluster result_ = new Proxy_Cluster();
             result_.uuid = uuid ?? "";
             result_.cluster_hosts = cluster_hosts == null ? new string[] {} : Helper.RefListToStringArray(cluster_hosts);
-            result_.network = network ?? "";
             result_.cluster_token = cluster_token ?? "";
             result_.cluster_stack = cluster_stack ?? "";
             result_.allowed_operations = allowed_operations == null ? new string[] {} : Helper.ObjectListToStringArray(allowed_operations);
@@ -161,8 +156,6 @@ namespace XenAPI
                 uuid = Marshalling.ParseString(table, "uuid");
             if (table.ContainsKey("cluster_hosts"))
                 cluster_hosts = Marshalling.ParseSetRef<Cluster_host>(table, "cluster_hosts");
-            if (table.ContainsKey("network"))
-                network = Marshalling.ParseRef<Network>(table, "network");
             if (table.ContainsKey("cluster_token"))
                 cluster_token = Marshalling.ParseString(table, "cluster_token");
             if (table.ContainsKey("cluster_stack"))
@@ -195,7 +188,6 @@ namespace XenAPI
 
             return Helper.AreEqual2(this._uuid, other._uuid) &&
                 Helper.AreEqual2(this._cluster_hosts, other._cluster_hosts) &&
-                Helper.AreEqual2(this._network, other._network) &&
                 Helper.AreEqual2(this._cluster_token, other._cluster_token) &&
                 Helper.AreEqual2(this._cluster_stack, other._cluster_stack) &&
                 Helper.AreEqual2(this._allowed_operations, other._allowed_operations) &&
@@ -286,20 +278,6 @@ namespace XenAPI
                 return session.JsonRpcClient.cluster_get_cluster_hosts(session.opaque_ref, _cluster);
             else
                 return XenRef<Cluster_host>.Create(session.proxy.cluster_get_cluster_hosts(session.opaque_ref, _cluster ?? "").parse());
-        }
-
-        /// <summary>
-        /// Get the network field of the given Cluster.
-        /// Experimental. First published in Unreleased.
-        /// </summary>
-        /// <param name="session">The session</param>
-        /// <param name="_cluster">The opaque_ref of the given cluster</param>
-        public static XenRef<Network> get_network(Session session, string _cluster)
-        {
-            if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_get_network(session.opaque_ref, _cluster);
-            else
-                return XenRef<Network>.Create(session.proxy.cluster_get_network(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -477,17 +455,17 @@ namespace XenAPI
         /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
+        /// <param name="_pif">The PIF to connect the cluster's first cluster_host to</param>
         /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
         /// <param name="_pool_auto_join">true if xapi is automatically joining new pool members to the cluster</param>
         /// <param name="_token_timeout">Corosync token timeout in seconds</param>
         /// <param name="_token_timeout_coefficient">Corosync token timeout coefficient in seconds</param>
-        public static XenRef<Cluster> create(Session session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
+        public static XenRef<Cluster> create(Session session, string _pif, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
         {
             if (session.JsonRpcClient != null)
-                return session.JsonRpcClient.cluster_create(session.opaque_ref, _network, _cluster_stack, _pool_auto_join, _token_timeout, _token_timeout_coefficient);
+                return session.JsonRpcClient.cluster_create(session.opaque_ref, _pif, _cluster_stack, _pool_auto_join, _token_timeout, _token_timeout_coefficient);
             else
-                return XenRef<Cluster>.Create(session.proxy.cluster_create(session.opaque_ref, _network ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient).parse());
+                return XenRef<Cluster>.Create(session.proxy.cluster_create(session.opaque_ref, _pif ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient).parse());
         }
 
         /// <summary>
@@ -495,17 +473,17 @@ namespace XenAPI
         /// Experimental. First published in Unreleased.
         /// </summary>
         /// <param name="session">The session</param>
-        /// <param name="_network">the single network on which corosync carries out its inter-host communications</param>
+        /// <param name="_pif">The PIF to connect the cluster's first cluster_host to</param>
         /// <param name="_cluster_stack">simply the string 'corosync'. No other cluster stacks are currently supported</param>
         /// <param name="_pool_auto_join">true if xapi is automatically joining new pool members to the cluster</param>
         /// <param name="_token_timeout">Corosync token timeout in seconds</param>
         /// <param name="_token_timeout_coefficient">Corosync token timeout coefficient in seconds</param>
-        public static XenRef<Task> async_create(Session session, string _network, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
+        public static XenRef<Task> async_create(Session session, string _pif, string _cluster_stack, bool _pool_auto_join, double _token_timeout, double _token_timeout_coefficient)
         {
           if (session.JsonRpcClient != null)
-              return session.JsonRpcClient.async_cluster_create(session.opaque_ref, _network, _cluster_stack, _pool_auto_join, _token_timeout, _token_timeout_coefficient);
+              return session.JsonRpcClient.async_cluster_create(session.opaque_ref, _pif, _cluster_stack, _pool_auto_join, _token_timeout, _token_timeout_coefficient);
           else
-              return XenRef<Task>.Create(session.proxy.async_cluster_create(session.opaque_ref, _network ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient).parse());
+              return XenRef<Task>.Create(session.proxy.async_cluster_create(session.opaque_ref, _pif ?? "", _cluster_stack ?? "", _pool_auto_join, _token_timeout, _token_timeout_coefficient).parse());
         }
 
         /// <summary>
@@ -534,6 +512,34 @@ namespace XenAPI
               return session.JsonRpcClient.async_cluster_destroy(session.opaque_ref, _cluster);
           else
               return XenRef<Task>.Create(session.proxy.async_cluster_destroy(session.opaque_ref, _cluster ?? "").parse());
+        }
+
+        /// <summary>
+        /// Returns the network used by the cluster for inter-host communication, i.e. the network shared by all cluster host PIFs
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster">The opaque_ref of the given cluster</param>
+        public static XenRef<Network> get_network(Session session, string _cluster)
+        {
+            if (session.JsonRpcClient != null)
+                return session.JsonRpcClient.cluster_get_network(session.opaque_ref, _cluster);
+            else
+                return XenRef<Network>.Create(session.proxy.cluster_get_network(session.opaque_ref, _cluster ?? "").parse());
+        }
+
+        /// <summary>
+        /// Returns the network used by the cluster for inter-host communication, i.e. the network shared by all cluster host PIFs
+        /// Experimental. First published in Unreleased.
+        /// </summary>
+        /// <param name="session">The session</param>
+        /// <param name="_cluster">The opaque_ref of the given cluster</param>
+        public static XenRef<Task> async_get_network(Session session, string _cluster)
+        {
+          if (session.JsonRpcClient != null)
+              return session.JsonRpcClient.async_cluster_get_network(session.opaque_ref, _cluster);
+          else
+              return XenRef<Task>.Create(session.proxy.async_cluster_get_network(session.opaque_ref, _cluster ?? "").parse());
         }
 
         /// <summary>
@@ -719,26 +725,6 @@ namespace XenAPI
         private List<XenRef<Cluster_host>> _cluster_hosts = new List<XenRef<Cluster_host>>() {};
 
         /// <summary>
-        /// Reference to the single network on which corosync carries out its inter-host communications
-        /// Experimental. First published in Unreleased.
-        /// </summary>
-        [JsonConverter(typeof(XenRefConverter<Network>))]
-        public virtual XenRef<Network> network
-        {
-            get { return _network; }
-            set
-            {
-                if (!Helper.AreEqual(value, _network))
-                {
-                    _network = value;
-                    Changed = true;
-                    NotifyPropertyChanged("network");
-                }
-            }
-        }
-        private XenRef<Network> _network = new XenRef<Network>("OpaqueRef:NULL");
-
-        /// <summary>
         /// The secret key used by xapi-clusterd when it talks to itself on other hosts
         /// Experimental. First published in Unreleased.
         /// </summary>
@@ -813,7 +799,7 @@ namespace XenAPI
         private Dictionary<string, cluster_operation> _current_operations = new Dictionary<string, cluster_operation>() {};
 
         /// <summary>
-        /// True if xapi is automatically joining new pool members to the cluster. This will be `true` in the first release
+        /// True if automatically joining new pool members to the cluster. This will be `true` in the first release
         /// Experimental. First published in Unreleased.
         /// </summary>
         public virtual bool pool_auto_join
