@@ -286,7 +286,7 @@ namespace XenAdmin.Wizards.GenericPages
                         item = CreateDelayLoadingOptionComboBoxItem(host);
                         m_comboBoxConnection.Items.Add(item);
                         item.ReasonUpdated += DelayLoadedComboBoxItem_ReasonChanged;
-                        item.Load();
+                        item.LoadAsync();
 					    host.PropertyChanged -= PropertyChanged;
 					    host.PropertyChanged += PropertyChanged;
 					}
@@ -296,7 +296,7 @@ namespace XenAdmin.Wizards.GenericPages
                     item = CreateDelayLoadingOptionComboBoxItem(pool);
                     m_comboBoxConnection.Items.Add(item);
                     item.ReasonUpdated += DelayLoadedComboBoxItem_ReasonChanged;
-                    item.Load();
+                    item.LoadAsync();
 			        pool.PropertyChanged -= PropertyChanged;
 			        pool.PropertyChanged += PropertyChanged;
 				}
@@ -406,12 +406,10 @@ namespace XenAdmin.Wizards.GenericPages
                         var sortedHosts = new List<Host>(Connection.Cache.Hosts);
                         sortedHosts.Sort();
 
-                        var items = new List<DelayLoadingOptionComboBoxItem>();
-
                         foreach (var host in sortedHosts)
                         {
                             var item = new DelayLoadingOptionComboBoxItem(host, homeserverFilters);
-                            item.LoadAndWait();
+                            item.LoadSync();
                             cb.Items.Add(item);
                             if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
                                                  (target != null && target.Item.opaque_ref == host.opaque_ref)))
