@@ -51,8 +51,8 @@ namespace XenAdmin.Wizards.GenericPages
         public event ReasonUpdatedEventHandler ReasonUpdated;
         private string failureReason;
         private IXenObject xenObject;
-        private const int defaultRetries = 10;
-        private const int defaultTimeOut = 200;
+        private const int DEFAULT_RETRIES = 10;
+        private const int DEFAULT_TIMEOUT = 200;
         private readonly List<ReasoningFilter> _filters;
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace XenAdmin.Wizards.GenericPages
             //Set default reason without going through setter so as not to trigger the event
             failureReason = Messages.DELAY_LOADING_COMBO_BOX_WAITING;
 
-            ThreadPool.QueueUserWorkItem(delegate { FetchFailureReasonWithRetry(defaultRetries, defaultTimeOut); });
+            ThreadPool.QueueUserWorkItem(delegate { FetchFailureReasonWithRetry(DEFAULT_RETRIES, DEFAULT_TIMEOUT); });
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace XenAdmin.Wizards.GenericPages
         /// </summary>
         public void LoadSync()
         {
-            FetchFailureReasonWithRetry(defaultRetries, defaultTimeOut);
+            FetchFailureReasonWithRetry(DEFAULT_RETRIES, DEFAULT_TIMEOUT);
         }
  
         public void CancelFilters()
@@ -121,27 +121,21 @@ namespace XenAdmin.Wizards.GenericPages
         /// </summary>
         private void FetchFailureReasonWithRetry(int retries, int timeOut)
         {
-            string threadFailureReason = Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN;
-
             do
             {
                 try
                 {
-                    threadFailureReason = FetchFailureReason();
-                    break;
+                    FailureReason = FetchFailureReason();
+                    return;
                 }
                 catch
                 {
-                    if (retries <= 0)
-                    {
-                        FailureReason = Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN;
-                        return;
-                    }
-                    Thread.Sleep(timeOut);
+                    if (retries > 0)
+                        Thread.Sleep(timeOut);
                 }
             } while (retries-- > 0);
 
-            FailureReason = threadFailureReason;
+            FailureReason = Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN;
         }
 
         /// <summary>
