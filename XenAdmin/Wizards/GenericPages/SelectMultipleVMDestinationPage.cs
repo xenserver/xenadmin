@@ -477,10 +477,8 @@ namespace XenAdmin.Wizards.GenericPages
 
 		#region Event Handlers
 
-        private void DelayLoadedComboBoxItem_ReasonChanged(object sender, EventArgs e)
+        private void DelayLoadedComboBoxItem_ReasonChanged(DelayLoadingOptionComboBoxItem item)
         {
-            DelayLoadingOptionComboBoxItem item = sender as DelayLoadingOptionComboBoxItem;
-
             if (item == null)
                 throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
 
