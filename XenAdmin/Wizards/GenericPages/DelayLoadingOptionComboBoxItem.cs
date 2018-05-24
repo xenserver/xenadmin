@@ -94,33 +94,31 @@ namespace XenAdmin.Wizards.GenericPages
         /// <summary>
         /// Create a thread and fetch the reason
         /// </summary>
-        public void Load()
+        public void LoadAsync()
         {
-            //Set default reason without going through setter so not to trigger the event
+            //Set default reason without going through setter so as not to trigger the event
             failureReason = Messages.DELAY_LOADING_COMBO_BOX_WAITING;
 
-            //Thread will trigger event when setting the reason
-            FetchReasonAsnyc();
-
+            ThreadPool.QueueUserWorkItem(delegate { FetchFailureReasonWithRetry(defaultRetries, defaultTimeOut); });
         }
 
-        //Fetch the reason, no thread
-        public void LoadAndWait()
+        /// <summary>
+        /// Fetch the reason on the current thread
+        /// </summary>
+        public void LoadSync()
         {
             FetchFailureReasonWithRetry(defaultRetries, defaultTimeOut);
         }
  
-        private void FetchReasonAsnyc()
-        {
-            ThreadPool.QueueUserWorkItem(delegate { FetchFailureReasonWithRetry(defaultRetries, defaultTimeOut); });
-        }
-
         public void CancelFilters()
         {
             foreach (ReasoningFilter filter in _filters)
                 filter.Cancel();
         }
 
+        /// <summary>
+        /// Triggers event when setting the reason
+        /// </summary>
         private void FetchFailureReasonWithRetry(int retries, int timeOut)
         {
             string threadFailureReason = Messages.DELAY_LOADED_COMBO_BOX_ITEM_FAILURE_UNKOWN;
