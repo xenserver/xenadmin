@@ -144,6 +144,7 @@ namespace XenAdmin.SettingsPanels
 
             if (cluster != null)
             {
+                comboBoxNetwork.SelectedItem = null;
                 var clusterHostOnMaster = pool.Connection.ResolveAll(cluster.cluster_hosts).FirstOrDefault(c => c.host.opaque_ref == pool.master.opaque_ref);
                 foreach (NetworkComboBoxItem item in comboBoxNetwork.Items.Cast<NetworkComboBoxItem>())
                 {
