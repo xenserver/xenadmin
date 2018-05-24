@@ -92,9 +92,7 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
 
         public override void PopulatePage()
         {
-            networkComboBox.PopulateComboBox(Connection);
-            networkComboBox.SelectFirstNonManagementNetwork();
-            base.PopulatePage();
+            networkComboBox.PopulateComboBox(Connection, item => !item.IsManagement);
         }
 
         public KeyValuePair<string, string> NetworkUuid
