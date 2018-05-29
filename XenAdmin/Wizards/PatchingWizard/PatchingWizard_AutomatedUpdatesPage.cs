@@ -199,7 +199,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             {
                                 var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
                                 // add the action if it's not already in the list
-                                if (action != null && !delayedActionsByHost[host].Any(a => a.GetType() == action.GetType()))
+                                if (action != null && delayedActionsByHost[host].All(a => a.GetType() != action.GetType()))
                                     delayedActionsByHost[host].Add(action);
                             }
                         }
@@ -253,30 +253,29 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void WorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             var actionsWorker = sender as BackgroundWorker;
+            if (actionsWorker == null)
+                return;
 
-            Program.Invoke(Program.MainWindow, () =>
+            if (!actionsWorker.CancellationPending)
+            {
+                PlanAction action = (PlanAction)e.UserState;
+                if (action != null)
                 {
-                    if (!actionsWorker.CancellationPending)
+                    if (e.ProgressPercentage == 0)
                     {
-                        PlanAction action = (PlanAction)e.UserState;
-                        if (action != null)
-                        {
-                            if (e.ProgressPercentage == 0)
-                            {
-                                inProgressActions.Add(action);
-                            }
-                            else
-                            {
-                                doneActions.Add(action);
-                                inProgressActions.Remove(action);
-
-                                progressBar.Value += e.ProgressPercentage/backgroundWorkers.Count; //extend with error handling related numbers
-                            }
-                        }
-
-                        UpdateStatusTextBox();
+                        inProgressActions.Add(action);
                     }
-                });
+                    else
+                    {
+                        doneActions.Add(action);
+                        inProgressActions.Remove(action);
+
+                        progressBar.Value += e.ProgressPercentage / backgroundWorkers.Count; //extend with error handling related numbers
+                    }
+                }
+
+                UpdateStatusTextBox();
+            }
         }
 
         private void UpdateStatusTextBox()
@@ -473,29 +472,26 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var bgw = (UpdateProgressBackgroundWorker)sender;
 
-            Program.Invoke(Program.MainWindow, () =>
+            if (!e.Cancelled)
+            {
+                Exception exception = e.Result as Exception;
+                if (exception != null)
                 {
-                    if (!e.Cancelled)
-                    {
-                        Exception exception = e.Result as Exception;
-                        if (exception != null)
-                        {
-                            //not showing exceptions in the meantime
-                        }
+                    //not showing exceptions in the meantime
+                }
 
-                        //if all finished
-                        if (backgroundWorkers.All(w => !w.IsBusy))
-                        {
-                            AllWorkersFinished();
-                            ShowErrors();
+                //if all finished
+                if (backgroundWorkers.All(w => !w.IsBusy))
+                {
+                    AllWorkersFinished();
+                    ShowErrors();
 
-                            _thisPageIsCompleted = true;
-                            
-                            _cancelEnabled = false;
-                            _nextEnabled = true;
-                        }
-                    }
-                });
+                    _thisPageIsCompleted = true;
+
+                    _cancelEnabled = false;
+                    _nextEnabled = true;
+                }
+            }
 
             OnPageUpdated();
         }
@@ -557,11 +553,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     log.Error(exception);
 
-                    if (exception != null && exception.InnerException != null && exception.InnerException is Failure)
+                    var innerEx = exception.InnerException as Failure;
+                    if (innerEx != null)
                     {
-                        var innerEx = exception.InnerException as Failure;
                         log.Error(innerEx);
-
                         sb.AppendLine(innerEx.Message);
                     }
                     else
