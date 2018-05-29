@@ -45,8 +45,8 @@ namespace XenAdmin.Wizards.PatchingWizard
     public enum WizardMode { SingleUpdate, AutomatedUpdates, NewVersion }
     
     /// <summary>
-    /// Remember that equals for patches dont work across connections because 
-    /// we are not allow to override equals. YOU SHOULD NOT USE ANY OPERATION THAT IMPLIES CALL EQUALS OF Pool_path or Host_patch
+    /// Remember that equals for patches don't work across connections because 
+    /// we are not allow to override equals. YOU SHOULD NOT USE ANY OPERATION THAT IMPLIES CALL EQUALS OF Pool_patch or Host_patch
     /// You should do it manually or use delegates.
     /// </summary>
     public partial class PatchingWizard : XenWizardBase
