@@ -52,12 +52,14 @@ namespace XenAdmin.Wizards.GenericPages
 		private Dictionary<string, VmMapping> m_vmMappings;
 		private IXenObject m_selectedObject;
 		private bool updatingDestinationCombobox;
+        private bool restoreGridHomeServerSelection;
+        private bool updatingHomeServerList;
         private bool m_buttonNextEnabled;
         protected List<IXenConnection> ignoredConnections = new List<IXenConnection>();
         private readonly CollectionChangeEventHandler Host_CollectionChangedWithInvoke;
 
         /// <summary>
-        /// Combobox item that can executes a command but also be an IEnableableComboBoxItem
+        /// Combobox item that can execute a command but also be an IEnableableComboBoxItem
         /// </summary>
         private class AddHostExecutingComboBoxItem : IEnableableComboBoxItem
         {
@@ -171,7 +173,8 @@ namespace XenAdmin.Wizards.GenericPages
         protected override void PageLoadedCore(PageLoadedDirection direction)
 		{
             ChosenItem = null;
-            restoreGridHomeServerSelection = (direction == PageLoadedDirection.Back);
+            restoreGridHomeServerSelection = direction == PageLoadedDirection.Back;
+            PopulateComboBox();
 		}
 
         public override void SelectDefaultControl()
@@ -262,7 +265,7 @@ namespace XenAdmin.Wizards.GenericPages
             m_dataGridView.Refresh();
         }
 
-		protected void PopulateComboBox()
+		private void PopulateComboBox()
 		{
 			Program.AssertOnEventThread();
 
@@ -333,8 +336,6 @@ namespace XenAdmin.Wizards.GenericPages
             return false;
         }
 
-        private bool restoreGridHomeServerSelection;
-
         private void RestoreGridHomeServerSelectionFromMapping()
         {
             foreach (DataGridViewRow row in m_dataGridView.Rows)
@@ -356,9 +357,7 @@ namespace XenAdmin.Wizards.GenericPages
                 }
             }
         }
-
-	    private bool updatingHomeServerList;
-
+        
         private void PopulateDataGridView(IEnableableXenObjectComboBoxItem selectedItem)
         {
             Program.AssertOnEventThread();
