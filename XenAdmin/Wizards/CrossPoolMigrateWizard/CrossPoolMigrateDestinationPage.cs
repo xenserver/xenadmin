@@ -64,11 +64,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             InitializeText();
         }
 
-        protected override void PageLoadedCore(PageLoadedDirection direction)
-        {
-            PopulateComboBox();
-        }
-
         public override bool EnableNext()
         {
             return DestinationHasBeenSelected() && base.EnableNext();
