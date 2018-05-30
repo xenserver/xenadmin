@@ -64,11 +64,6 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             InitializeText();
         }
 
-        public override bool EnableNext()
-        {
-            return DestinationHasBeenSelected() && base.EnableNext();
-        }
-
         protected override bool ImplementsIsDirty()
         {
             return true;
