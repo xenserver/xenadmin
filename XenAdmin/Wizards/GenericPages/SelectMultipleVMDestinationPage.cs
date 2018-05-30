@@ -318,11 +318,6 @@ namespace XenAdmin.Wizards.GenericPages
 			updatingDestinationCombobox = false;
 		}
 
-        protected bool DestinationHasBeenSelected()
-        {
-            return m_comboBoxConnection.SelectedItem != null;
-        }
-
         private bool MatchingWithXenRefObject(IEnableableXenObjectComboBoxItem item, object xenRef)
         {
             XenRef<Host> hostRef = xenRef as XenRef<Host>;
@@ -374,7 +369,6 @@ namespace XenAdmin.Wizards.GenericPages
 
                 ClearDataGridView();
 
-                SetButtonNextEnabled(true);
                 var hasPoolSharedStorage = HasPoolSharedStorage();
 
                 foreach (var kvp in m_vmMappings)
@@ -442,18 +436,20 @@ namespace XenAdmin.Wizards.GenericPages
 	    {
 	        if (cb.Value == null)
 	        {
-	            if (cb.Items.Count > 0)
+	            var firstEnabled = cb.Items.OfType<IEnableableComboBoxItem>().FirstOrDefault(i => i.Enabled);
+	            if (firstEnabled != null)
 	            {
-	                if (cb.Items.OfType<IEnableableComboBoxItem>().All(i => !i.Enabled))
-	                {
-	                    cb.Value = null;
-	                    SetButtonNextEnabled(false);
-	                }
-	                else
-	                    cb.Value = cb.Items.OfType<IEnableableComboBoxItem>().First(i => i.Enabled);
-	            }  
+	                cb.Value = firstEnabled;
+	                SetButtonNextEnabled(true);
+	            }
 	            else
-	                SetButtonNextEnabled(false); //do not allow to leave the page if a vm has no target
+	            {
+	                SetButtonNextEnabled(false);
+	            }
+	        }
+	        else
+	        {
+                SetButtonNextEnabled(true);
 	        }
 	    }
 
@@ -601,8 +597,9 @@ namespace XenAdmin.Wizards.GenericPages
 
 			m_dataGridView.BeginEdit(false);
 
-			if (m_dataGridView.EditingControl != null && m_dataGridView.EditingControl is ComboBox)
-				(m_dataGridView.EditingControl as ComboBox).DroppedDown = true;
+		    var editingControl = m_dataGridView.EditingControl as ComboBox;
+		    if (editingControl != null)
+		        editingControl.DroppedDown = true;
 		}
 
 		private void m_dataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
