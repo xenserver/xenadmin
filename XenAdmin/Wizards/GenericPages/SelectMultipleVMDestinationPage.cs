@@ -88,20 +88,6 @@ namespace XenAdmin.Wizards.GenericPages
             ShowWarning(null);
 		}
 
-        public override void PageCancelled()
-        {
-            CancelFilters();
-            Program.Invoke(Program.MainWindow, ClearComboBox);
-            Program.Invoke(Program.MainWindow, ClearDataGridView);
-            ChosenItem = null;
-        }
-
-        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
-        {
-            SetDefaultTarget(ChosenItem);
-            Program.Invoke(Program.MainWindow, ClearComboBox);
-        }
-
 	    protected void InitializeText()
 	    {
 	        m_labelIntro.Text = InstructionText;
@@ -147,7 +133,6 @@ namespace XenAdmin.Wizards.GenericPages
 	            return m_colTarget.HeaderText;
 	        }
 	    }
-           
 
         /// <summary>
         /// Text above the table containing a list of VMs and concomitant home server
@@ -176,6 +161,20 @@ namespace XenAdmin.Wizards.GenericPages
             restoreGridHomeServerSelection = direction == PageLoadedDirection.Back;
             PopulateComboBox();
 		}
+
+        public override void PageCancelled()
+        {
+            CancelFilters();
+            ClearComboBox();
+            ClearDataGridView();
+            ChosenItem = null;
+        }
+
+        protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
+        {
+            SetDefaultTarget(ChosenItem);
+            ClearComboBox();
+        }
 
         public override void SelectDefaultControl()
         {
@@ -269,10 +268,10 @@ namespace XenAdmin.Wizards.GenericPages
 		{
 			Program.AssertOnEventThread();
 
-            Program.Invoke(Program.MainWindow, ClearDataGridView);
+		    ClearDataGridView();
 
 			updatingDestinationCombobox = true;
-			Program.Invoke(Program.MainWindow, ClearComboBox);
+		    ClearComboBox();
 
 			foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy.Where(con => con.IsConnected).Except(ignoredConnections))
 			{
@@ -363,7 +362,6 @@ namespace XenAdmin.Wizards.GenericPages
                 Connection = null;
 
                 var target = m_comboBoxConnection.SelectedItem as DelayLoadingOptionComboBoxItem;
-
                 if (target != null)
                     Connection = target.Item.Connection;
 
@@ -519,14 +517,14 @@ namespace XenAdmin.Wizards.GenericPages
 
 		private void PropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			if (e.PropertyName == "name_label" || e.PropertyName == "metrics" || e.PropertyName == "enabled" || e.PropertyName == "live" || e.PropertyName == "patches")
-				Program.Invoke(this, PopulateComboBox);
-            
+	        if (e.PropertyName == "name_label" || e.PropertyName == "metrics" ||
+	            e.PropertyName == "enabled" || e.PropertyName == "live" || e.PropertyName == "patches")
+	            Program.Invoke(this, PopulateComboBox);
 		}
 
 		private void CollectionChanged(object sender, CollectionChangeEventArgs e)
 		{
-			Program.BeginInvoke(this, PopulateComboBox);
+			Program.Invoke(this, PopulateComboBox);
 		}
 
 		private void xenConnection_CachePopulated(object sender, EventArgs e)
@@ -568,7 +566,7 @@ namespace XenAdmin.Wizards.GenericPages
 			    {
 			        Cursor.Current = Cursors.WaitCursor;
 			        ChosenItem = item == null ? null : item.Item;
-			        Program.Invoke(Program.MainWindow, ()=> PopulateDataGridView(item));
+			        PopulateDataGridView(item);
 			    }
 			    finally
 			    {

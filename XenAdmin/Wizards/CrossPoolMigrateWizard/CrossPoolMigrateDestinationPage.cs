@@ -164,15 +164,11 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
             if (!cancel)
             {
                 bool targetDisconnected = cancel;
-                Program.Invoke(Program.MainWindow,
-                               delegate
-                                   {
-                                       if (Connection == null || !Connection.IsConnected)
-                                       {
-                                           CrossPoolMigrateWizard.ShowWarningMessageBox(Messages.CPM_WIZARD_ERROR_TARGET_DISCONNECTED);
-                                           targetDisconnected = true;
-                                       }
-                                   });
+                if (Connection == null || !Connection.IsConnected)
+                {
+                    CrossPoolMigrateWizard.ShowWarningMessageBox(Messages.CPM_WIZARD_ERROR_TARGET_DISCONNECTED);
+                    targetDisconnected = true;
+                }
                 cancel = targetDisconnected;
             }
 
