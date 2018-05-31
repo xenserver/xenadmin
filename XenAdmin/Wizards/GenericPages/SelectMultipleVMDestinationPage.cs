@@ -273,7 +273,8 @@ namespace XenAdmin.Wizards.GenericPages
 			updatingDestinationCombobox = true;
 		    ClearComboBox();
 
-			foreach (var xenConnection in ConnectionsManager.XenConnectionsCopy.Where(con => con.IsConnected).Except(ignoredConnections))
+		    var targetConnections = ConnectionsManager.XenConnectionsCopy.Where(con => con.IsConnected).Except(ignoredConnections).ToList();
+            foreach (var xenConnection in targetConnections)
 			{
 			    DelayLoadingOptionComboBoxItem item = null;
 
@@ -365,6 +366,8 @@ namespace XenAdmin.Wizards.GenericPages
                 if (target != null)
                     Connection = target.Item.Connection;
 
+                m_dataGridView.SuspendLayout();
+
                 ClearDataGridView();
 
                 var hasPoolSharedStorage = HasPoolSharedStorage();
@@ -427,6 +430,7 @@ namespace XenAdmin.Wizards.GenericPages
             finally
             {
                 updatingHomeServerList = false;
+                m_dataGridView.ResumeLayout();
             }
 		}
 
@@ -475,44 +479,43 @@ namespace XenAdmin.Wizards.GenericPages
             if (item == null)
                 throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
 
-            int index = m_comboBoxConnection.Items.IndexOf(item);
-            if (index > -1)
+            Program.Invoke(Program.MainWindow, () =>
             {
-                Program.Invoke( Program.MainWindow, delegate()
-                                                        {
-                                                            int selectedIndex = m_comboBoxConnection.SelectedIndex;
+                int index = m_comboBoxConnection.Items.IndexOf(item);
+                if (index < 0 || index >= m_comboBoxConnection.Items.Count)
+                    return;
 
+                if (updatingDestinationCombobox || updatingHomeServerList)
+                    return;
 
-                                                            if (index > m_comboBoxConnection.Items.Count)
-                                                                return;
+                int selectedIndex = m_comboBoxConnection.SelectedIndex;
 
-                                                            if(updatingDestinationCombobox || updatingHomeServerList)
-                                                                return;
+                var tempItem = m_comboBoxConnection.Items[index] as DelayLoadingOptionComboBoxItem;
+                if (tempItem == null)
+                    throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
 
-                                                            DelayLoadingOptionComboBoxItem tempItem = 
-                                                                m_comboBoxConnection.Items[index] as DelayLoadingOptionComboBoxItem;
-                                                            if(tempItem == null)
-                                                                throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
-                                                            tempItem.CopyFrom(item);
-                                                            m_comboBoxConnection.BeginUpdate();
-                                                            m_comboBoxConnection.Items.RemoveAt(index);
+                tempItem.CopyFrom(item);
 
-                                                            if (updatingDestinationCombobox || updatingHomeServerList)
-                                                            {
-                                                                m_comboBoxConnection.EndUpdate();
-                                                                return;
-                                                            }
-                                                                
-                                                            m_comboBoxConnection.Items.Insert(index, tempItem);
-                                                            m_comboBoxConnection.SelectedIndex = selectedIndex;
-                                                            m_comboBoxConnection.EndUpdate();
+                try
+                {
+                    m_comboBoxConnection.BeginUpdate();
+                    m_comboBoxConnection.Items.RemoveAt(index);
 
-                                                            if (tempItem.PreferAsSelectedItem)
-                                                                m_comboBoxConnection.SelectedItem = tempItem;
+                    if (updatingDestinationCombobox || updatingHomeServerList)
+                        return;
 
-                                                            item.ReasonUpdated -= DelayLoadedComboBoxItem_ReasonChanged;
-                                                        });
-            }
+                    m_comboBoxConnection.Items.Insert(index, tempItem);
+                    m_comboBoxConnection.SelectedIndex = selectedIndex;
+
+                    if (tempItem.PreferAsSelectedItem)
+                        m_comboBoxConnection.SelectedItem = tempItem;
+                }
+                finally
+                {
+                    m_comboBoxConnection.EndUpdate();
+                    item.ReasonUpdated -= DelayLoadedComboBoxItem_ReasonChanged;
+                }
+            });
         }
 
 		private void PropertyChanged(object sender, PropertyChangedEventArgs e)
