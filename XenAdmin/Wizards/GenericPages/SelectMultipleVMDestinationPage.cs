@@ -164,6 +164,7 @@ namespace XenAdmin.Wizards.GenericPages
 
         public override void PageCancelled()
         {
+            UnregisterHandlers();
             CancelFilters();
             ClearComboBox();
             ClearDataGridView();
@@ -172,6 +173,7 @@ namespace XenAdmin.Wizards.GenericPages
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
+            UnregisterHandlers();
             SetDefaultTarget(ChosenItem);
             ClearComboBox();
         }
@@ -479,7 +481,7 @@ namespace XenAdmin.Wizards.GenericPages
             if (item == null)
                 throw new NullReferenceException("Trying to update delay loaded reason but failed to extract reason");
 
-            Program.Invoke(Program.MainWindow, () =>
+            Program.Invoke(this, () =>
             {
                 int index = m_comboBoxConnection.Items.IndexOf(item);
                 if (index < 0 || index >= m_comboBoxConnection.Items.Count)
