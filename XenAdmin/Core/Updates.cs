@@ -575,49 +575,37 @@ namespace XenAdmin.Core
 
         public static UpgradeSequence GetUpgradeSequence(IXenConnection conn)
         {
-            if (XenServerVersions == null)
-                return null;
-
-            Host master = Helpers.GetMaster(conn);
-            if (master == null)
-                return null;
-
             var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
-
-            if (version != null)
-            {
-                if (version.MinimalPatches == null)
-                    return null;
-
-                var uSeq = new UpgradeSequence();
-                uSeq.MinimalPatches = new List<XenServerPatch>(version.MinimalPatches);
-
-                // if there is a "new version" update in the update sequence, also add the minimal patches of this new version
-                if (uSeq.MinimalPatches.Count > 0)
-                {
-                    // assuming that the new version update (if there is one) is the last one in the minimal patches list
-                    var lastUpdate = uSeq.MinimalPatches[uSeq.MinimalPatches.Count - 1];
-                    
-                    var newServerVersion = XenServerVersions.FirstOrDefault(
-                        v => v.IsVersionAvailableAsAnUpdate && v.PatchUuid.Equals(lastUpdate.Uuid, StringComparison.OrdinalIgnoreCase));
-
-                    if (newServerVersion != null && newServerVersion.MinimalPatches != null)
-                        uSeq.MinimalPatches.AddRange(newServerVersion.MinimalPatches);
-                }
-
-                List<Host> hosts = conn.Cache.Hosts.ToList();
-                
-                foreach (Host h in hosts)
-                {
-                    uSeq[h] = GetPatchSequenceForHost(h, uSeq.MinimalPatches);
-                }
-
-                return uSeq;
-            }
-            else
-            {
+            if (version == null)
                 return null;
+
+            if (version.MinimalPatches == null)
+                return null;
+
+            var uSeq = new UpgradeSequence();
+            uSeq.MinimalPatches = new List<XenServerPatch>(version.MinimalPatches);
+
+            // if there is a "new version" update in the update sequence, also add the minimal patches of this new version
+            if (uSeq.MinimalPatches.Count > 0)
+            {
+                // assuming that the new version update (if there is one) is the last one in the minimal patches list
+                var lastUpdate = uSeq.MinimalPatches[uSeq.MinimalPatches.Count - 1];
+                    
+                var newServerVersion = XenServerVersions.FirstOrDefault(
+                    v => v.IsVersionAvailableAsAnUpdate && v.PatchUuid.Equals(lastUpdate.Uuid, StringComparison.OrdinalIgnoreCase));
+
+                if (newServerVersion != null && newServerVersion.MinimalPatches != null)
+                    uSeq.MinimalPatches.AddRange(newServerVersion.MinimalPatches);
             }
+
+            List<Host> hosts = conn.Cache.Hosts.ToList();
+                
+            foreach (Host h in hosts)
+            {
+                uSeq[h] = GetPatchSequenceForHost(h, uSeq.MinimalPatches);
+            }
+
+            return uSeq;
         }
 
         /// <summary>
@@ -634,32 +622,22 @@ namespace XenAdmin.Core
 
             var uSeq = new UpgradeSequence();
 
-            if (XenServerVersions == null)
-                return null;
-
-            Host master = Helpers.GetMaster(conn);
-            if (master == null)
-                return null;
-
-            var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
-
             // the pool has to be homogeneous
-            if (version != null)
+            var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
+            if (version == null)
+                return null;
+            
+            uSeq.MinimalPatches = new List<XenServerPatch> {alert.Patch};
+
+            // if it's a version updgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
+            if (updateTheNewVersion && alert.NewServerVersion != null && alert.NewServerVersion.MinimalPatches != null)
             {
-                uSeq.MinimalPatches = new List<XenServerPatch> {alert.Patch};
-
-                // if it's a version updgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
-                if (updateTheNewVersion && alert.NewServerVersion != null && alert.NewServerVersion.MinimalPatches != null)
-                {
-                    uSeq.MinimalPatches.AddRange(alert.NewServerVersion.MinimalPatches);
-                }
-
-                conn.Cache.Hosts.ToList().ForEach(h => uSeq[h] = GetPatchSequenceForHost(h, uSeq.MinimalPatches));
-                
-                return uSeq;
+                uSeq.MinimalPatches.AddRange(alert.NewServerVersion.MinimalPatches);
             }
 
-            return null;
+            conn.Cache.Hosts.ToList().ForEach(h => uSeq[h] = GetPatchSequenceForHost(h, uSeq.MinimalPatches));
+                
+            return uSeq;
         }
 
 
@@ -670,11 +648,10 @@ namespace XenAdmin.Core
         /// <returns></returns>
         private static XenServerVersion GetCommonServerVersionOfHostsInAConnection(IXenConnection connection, List<XenServerVersion> xsVersions)
         {
-            XenServerVersion commonXenServerVersion = null;
-
-            if (connection == null)
+            if (connection == null || xsVersions == null)
                 return null;
-            
+
+            XenServerVersion commonXenServerVersion = null;
             List<Host> hosts = connection.Cache.Hosts.ToList();
 
             foreach (Host host in hosts)
