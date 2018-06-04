@@ -231,8 +231,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
-                //if all hosts are up-to-date
-                if (us.AllHostsUpToDate)
+                //if host is up to date
+                if (!us.Keys.Contains(host) || us[host].Count == 0)
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;

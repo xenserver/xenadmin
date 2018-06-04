@@ -609,7 +609,7 @@ namespace XenAdmin.Core
                 
                 foreach (Host h in hosts)
                 {
-                    uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches);
+                    uSeq[h] = GetPatchSequenceForHost(h, uSeq.MinimalPatches);
                 }
 
                 return uSeq;
@@ -646,18 +646,15 @@ namespace XenAdmin.Core
             // the pool has to be homogeneous
             if (version != null)
             {
-                uSeq.MinimalPatches = new List<XenServerPatch>();
-                uSeq.MinimalPatches.Add(alert.Patch);
+                uSeq.MinimalPatches = new List<XenServerPatch> {alert.Patch};
 
                 // if it's a version updgrade the min sequence will be this patch (the upgrade) and the min patches for the new version
                 if (updateTheNewVersion && alert.NewServerVersion != null && alert.NewServerVersion.MinimalPatches != null)
                 {
                     uSeq.MinimalPatches.AddRange(alert.NewServerVersion.MinimalPatches);
                 }
-                
-                conn.Cache.Hosts.ToList().ForEach(h =>
-                    uSeq[h] = GetUpgradeSequenceForHost(h, uSeq.MinimalPatches)
-                    );
+
+                conn.Cache.Hosts.ToList().ForEach(h => uSeq[h] = GetPatchSequenceForHost(h, uSeq.MinimalPatches));
                 
                 return uSeq;
             }
@@ -707,7 +704,7 @@ namespace XenAdmin.Core
             return commonXenServerVersion;
         }
 
-        private static List<XenServerPatch> GetUpgradeSequenceForHost(Host h, List<XenServerPatch> latestPatches)
+        private static List<XenServerPatch> GetPatchSequenceForHost(Host h, List<XenServerPatch> latestPatches)
         {
             var sequence = new List<XenServerPatch>();
             var appliedUpdateUuids = new List<string>();
@@ -788,23 +785,6 @@ namespace XenAdmin.Core
                     }
 
                     return uniquePatches;
-                }
-            }
-
-            public bool AllHostsUpToDate
-            {
-                get
-                {
-                    if (this.Count == 0)
-                        return false;
-
-                    foreach (var host in this.Keys)
-                    {
-                        if (this[host].Count > 0)
-                            return false;
-                    }
-
-                    return true;
                 }
             }
 
