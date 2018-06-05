@@ -392,14 +392,24 @@ namespace XenAdmin.Wizards.PatchingWizard
                     //if any host is not licensed for automated updates
                     bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
 
-                    var us = WizardMode == WizardMode.NewVersion
-                        ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
-                        : Updates.GetUpgradeSequence(pool.Connection);
+                    var minimalPatches = WizardMode == WizardMode.NewVersion
+                        ? Updates.GetMinimalPatches(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                        : Updates.GetMinimalPatches(pool.Connection);
 
-                    log.InfoFormat("Minimal patches for {0}: {1}", pool.Name(), us != null && us.MinimalPatches != null ? string.Join(",", us.MinimalPatches.Select(p => p.Name)) : "");
-
-                    if (us == null)
+                    if (minimalPatches == null)
                         continue;
+
+                    var us = new Dictionary<Host, List<XenServerPatch>>();
+                    var hosts = pool.Connection.Cache.Hosts;
+
+                    foreach (var h in hosts)
+                    {
+                        var ps = Updates.GetPatchSequenceForHost(h, minimalPatches);
+                        if (ps != null)
+                            us[h] = ps;
+                    }
+
+                    log.InfoFormat("Minimal patches for {0}: {1}", pool.Name(), string.Join(",", minimalPatches.Select(p => p.Name)));
 
                     bool elyOrGreater = Helpers.ElyOrGreater(pool.Connection);
 

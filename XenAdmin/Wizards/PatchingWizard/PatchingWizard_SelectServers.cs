@@ -203,9 +203,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 //check updgrade sequences
-                Updates.UpgradeSequence us = Updates.GetUpgradeSequence(host.Connection);
-
-                if (us == null) //version not supported
+                var minimalPatches = Updates.GetMinimalPatches(host.Connection);
+                if (minimalPatches == null) //version not supported
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_AUTOMATED_UPDATES_NOT_SUPPORTED_HOST_VERSION;
@@ -222,8 +221,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
-                //if there is a host missing from the upgrade sequence
-                if (host.Connection.Cache.Hosts.Any(h => !us.Keys.Contains(h)))
+                var us = Updates.GetPatchSequenceForHost(host, minimalPatches);
+                if (us == null)
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_NOT_AUTO_UPGRADABLE;
@@ -232,7 +231,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 //if host is up to date
-                if (!us.Keys.Contains(host) || us[host].Count == 0)
+                if (us.Count == 0)
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_SERVER_UP_TO_DATE;

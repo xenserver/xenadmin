@@ -153,62 +153,75 @@ namespace XenAdmin.Wizards.PatchingWizard
                     delayedActionsByHost.Add(host, new List<PlanAction>());
                 }
 
-                var hosts = pool.Connection.Cache.Hosts;
-
                 //if any host is not licensed for automated updates
                 bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);
 
-                var us = WizardMode == WizardMode.NewVersion
-                    ? Updates.GetUpgradeSequence(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
-                    : Updates.GetUpgradeSequence(pool.Connection);
+                var minimalPatches = WizardMode == WizardMode.NewVersion
+                    ? Updates.GetMinimalPatches(pool.Connection, UpdateAlert, ApplyUpdatesToNewVersion && !automatedUpdatesRestricted)
+                    : Updates.GetMinimalPatches(pool.Connection);
 
-                Debug.Assert(us != null, "Update sequence should not be null.");
+                if (minimalPatches == null)
+                    continue;
 
-                if (us != null)
+                var upgradeSequence = new Dictionary<Host, List<XenServerPatch>>();
+                var allPatches = new List<XenServerPatch>();
+                var hosts = pool.Connection.Cache.Hosts;
+
+                foreach (var h in hosts)
                 {
-                    foreach (var patch in us.UniquePatches)
+                    var ps = Updates.GetPatchSequenceForHost(h, minimalPatches);
+                    if (ps != null)
                     {
-                        var hostsToApply = us.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
-                        hostsToApply.Sort();
+                        upgradeSequence[h] = ps;
+                        allPatches.AddRange(ps);
+                    }
+                }
 
-                        planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches, PatchFromDisk));
-                        planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches, PatchFromDisk));
-                        planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
+                var uniquePatches = minimalPatches.Where(minp => allPatches.Exists(p => p.Uuid == minp.Uuid));
 
-                        foreach (var host in hostsToApply)
+                foreach (var patch in uniquePatches)
+                {
+                    var hostsToApply = upgradeSequence.Where(u => u.Value.Contains(patch)).Select(u => u.Key).ToList();
+                    hostsToApply.Sort();
+
+                    planActions.Add(new DownloadPatchPlanAction(master.Connection, patch, AllDownloadedPatches, PatchFromDisk));
+                    planActions.Add(new UploadPatchToMasterPlanAction(master.Connection, patch, patchMappings, AllDownloadedPatches, PatchFromDisk));
+                    planActions.Add(new PatchPrechecksOnMultipleHostsInAPoolPlanAction(master.Connection, patch, hostsToApply, patchMappings));
+
+                    foreach (var host in hostsToApply)
+                    {
+                        planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
+
+                        if (patch.GuidanceMandatory)
                         {
-                            planActions.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
+                            var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI &&
+                                         delayedActionsByHost[host].Any(a => a is RestartHostPlanAction)
+                                ? new RestartHostPlanAction(host, host.GetRunningVMs(), restartAgentFallback: true)
+                                : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
 
-                            if (patch.GuidanceMandatory)
+                            if (action != null)
                             {
-                                var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI &&
-                                             delayedActionsByHost[host].Any(a => a is RestartHostPlanAction)
-                                    ? new RestartHostPlanAction(host, host.GetRunningVMs(), restartAgentFallback:true)
-                                    : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
-
-                                if (action != null)
-                                {
-                                    planActions.Add(action);
-                                    // remove all delayed actions of the same kind that has already been added
-                                    // (because this action is guidance-mandatory=true, therefore
-                                    // it will run immediately, making delayed ones obsolete)
-                                    delayedActionsByHost[host].RemoveAll(a => action.GetType() == a.GetType());
-                                }
-                            }
-                            else
-                            {
-                                var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
-                                // add the action if it's not already in the list
-                                if (action != null && delayedActionsByHost[host].All(a => a.GetType() != action.GetType()))
-                                    delayedActionsByHost[host].Add(action);
+                                planActions.Add(action);
+                                // remove all delayed actions of the same kind that has already been added
+                                // (because this action is guidance-mandatory=true, therefore
+                                // it will run immediately, making delayed ones obsolete)
+                                delayedActionsByHost[host].RemoveAll(a => action.GetType() == a.GetType());
                             }
                         }
+                        else
+                        {
+                            var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
+                            // add the action if it's not already in the list
+                            if (action != null && delayedActionsByHost[host].All(a => a.GetType() != action.GetType()))
+                                delayedActionsByHost[host].Add(action);
+                        }
+                    }
 
-                        //clean up master at the end:
-                        planActions.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+                    //clean up master at the end:
+                    planActions.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
 
-                    }//patch
-                }
+                } //patch
+
 
                 //add a revert pre-check action for this pool
                 var problemsToRevert = ProblemsResolvedPreCheck.Where(p => hosts.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList();
