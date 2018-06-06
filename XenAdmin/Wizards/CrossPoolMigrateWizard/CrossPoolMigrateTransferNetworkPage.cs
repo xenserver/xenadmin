@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using XenAdmin.Controls;
+using System.Linq;
 using XenAPI;
 
 namespace XenAdmin.Wizards.CrossPoolMigrateWizard
@@ -93,6 +94,9 @@ namespace XenAdmin.Wizards.CrossPoolMigrateWizard
         public override void PopulatePage()
         {
             networkComboBox.PopulateComboBox(Connection, item => !item.IsManagement);
+
+            if (networkComboBox.SelectedItem == null)
+                networkComboBox.SelectedItem = networkComboBox.Items.Cast<NetworkComboBoxItem>().FirstOrDefault(item => item.IsManagement);
         }
 
         public KeyValuePair<string, string> NetworkUuid
