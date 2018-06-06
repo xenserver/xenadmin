@@ -72,7 +72,12 @@ namespace XenAdmin.Controls
                 
                 var item = CreateNewItem(pif);
 
-                AddItemToComboBox(item);
+                if (IncludeOnlyEnabledNetworksInComboBox && !item.NetworkIsConnected)
+                    continue;
+                if (IncludeOnlyNetworksWithIPAddresses && !item.HasIPAddress)
+                    continue;
+
+                Items.Add(item);
 
                 if (!found && matchSelectionCriteria(item))
                 {
@@ -82,20 +87,6 @@ namespace XenAdmin.Controls
             }
         }
 
-        private void AddItemToComboBox(NetworkComboBoxItem item)
-        {                
-            if( IncludeOnlyEnabledNetworksInComboBox && !item.NetworkIsConnected )
-            {
-                return;
-            }
-
-            if (IncludeOnlyNetworksWithIPAddresses && !item.HasIPAddress)
-            {
-                return;
-            }
-
-            Items.Add(item);
-        }
 
         private NetworkComboBoxItem CreateNewItem(PIF pif)
         {
