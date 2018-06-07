@@ -44,6 +44,7 @@ using System.Linq;
 using XenAdmin.Core;
 using System.Text;
 using System.Diagnostics;
+using System.Runtime.Remoting.Messaging;
 using XenAdmin.Alerts;
 using HostActionTuple = System.Tuple<XenAPI.Host, System.Collections.Generic.List<XenAdmin.Wizards.PatchingWizard.PlanActions.PlanAction>, System.Collections.Generic.List<XenAdmin.Wizards.PatchingWizard.PlanActions.PlanAction>>;
 
@@ -238,10 +239,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             return atLeastOneWorkerStarted;
         }
 
-        private List<PlanAction> doneActions = new List<PlanAction>();
-        private List<PlanAction> inProgressActions = new List<PlanAction>();
-        private List<PlanAction> errorActions = new List<PlanAction>();
-
         private void StartNewWorker(List<HostActionTuple> planActions, List<PlanAction> finalActions)
         {
             var bgw = new UpdateProgressBackgroundWorker(planActions, finalActions);
@@ -256,7 +253,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void WorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            var actionsWorker = sender as BackgroundWorker;
+            var actionsWorker = sender as UpdateProgressBackgroundWorker;
             if (actionsWorker == null)
                 return;
 
@@ -267,12 +264,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (e.ProgressPercentage == 0)
                     {
-                        inProgressActions.Add(action);
+                        actionsWorker.InProgressActions.Add(action);
                     }
                     else
                     {
-                        doneActions.Add(action);
-                        inProgressActions.Remove(action);
+                        actionsWorker.DoneActions.Add(action);
+                        actionsWorker.InProgressActions.Remove(action);
 
                         progressBar.Value += e.ProgressPercentage / backgroundWorkers.Count; //extend with error handling related numbers
                     }
@@ -284,33 +281,39 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void UpdateStatusTextBox()
         {
-            var sb = new StringBuilder();
+            var allsb = new StringBuilder();
 
-            foreach (var pa in doneActions)
+            foreach (var bgw in backgroundWorkers)
             {
-                if (pa.Visible)
+                var sb = new StringBuilder();
+
+                foreach (var pa in bgw.DoneActions)
                 {
-                    sb.Append(pa.ProgressDescription ?? pa.ToString());
-                    sb.AppendLine(Messages.DONE);
+                    if (pa.Error != null)
+                    {
+                        sb.Append(pa.ProgressDescription ?? pa.ToString());
+                        sb.AppendLine(Messages.ERROR);
+                    }
+                    else if (pa.Visible)
+                    {
+                        sb.Append(pa.ProgressDescription ?? pa.ToString());
+                        sb.AppendLine(Messages.DONE);
+                    }
                 }
-            }
 
-            foreach (var pa in errorActions)
-            {
-                sb.Append(pa.ProgressDescription ?? pa.ToString());
-                sb.AppendLine(Messages.ERROR);
-            }
-
-            foreach (var pa in inProgressActions)
-            {
-                if (pa.Visible)
+                foreach (var pa in bgw.InProgressActions)
                 {
-                    sb.Append(pa.ProgressDescription ?? pa.ToString());
-                    sb.AppendLine();
+                    if (pa.Visible)
+                    {
+                        sb.Append(pa.ProgressDescription ?? pa.ToString());
+                        sb.AppendLine();
+                    }
                 }
+
+                allsb.Append(sb);
             }
 
-            textBoxLog.Text = sb.ToString();
+            textBoxLog.Text = allsb.ToString();
 
             textBoxLog.SelectionStart = textBoxLog.Text.Length;
             textBoxLog.ScrollToCaret();
@@ -407,8 +410,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             catch (Exception e)
             {
-                errorActions.Add(action);
-                inProgressActions.Remove(action);
+                bgw.DoneActions.Add(action);
+                bgw.InProgressActions.Remove(action);
 
                 log.Error("Failed to carry out plan.", e);
                 log.Debug(action.Title);
@@ -418,16 +421,25 @@ namespace XenAdmin.Wizards.PatchingWizard
                 //this pool failed, we will stop here, but try to remove update files at least
                 try
                 {
-                    // can try to clean up the host after a failed PlanAction from bgw.PlanActions only
-                    if (!(action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction || action is RemoveUpdateFileFromMasterPlanAction))
+                    if (action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction)
+                        return;
+
+                    var pos = 0;
+                    if (action is RemoveUpdateFileFromMasterPlanAction)
+                        pos = bgw.FinalActions.IndexOf(action) + 1;
+
+                    for (int i = pos; i < bgw.FinalActions.Count; i++)
                     {
-                        int pos = 0;
-                        while (pos++ < bgw.FinalActions.Count - 1)
+                        action = bgw.FinalActions[i];
+
+                        if (bgw.CancellationPending)
                         {
-                            var finalAction = bgw.FinalActions[pos];
-                            if (finalAction is RemoveUpdateFileFromMasterPlanAction)
-                                finalAction.Run();
+                            doWorkEventArgs.Cancel = true;
+                            return;
                         }
+
+                        if (action is RemoveUpdateFileFromMasterPlanAction)
+                            RunPlanAction(bgw, action);
                     }
                 }
                 catch (Exception ex2)
@@ -435,10 +447,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     //already in an error case - best effort
                     log.Error("Failed to clean up (this was a best effort attempt)", ex2);
                 }
-
-                bgw.ReportProgress(0);
+                finally
+                {
+                    bgw.ReportProgress(0);
+                }
             }
-
         }
 
         private void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
@@ -506,32 +519,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void ShowErrors()
         {
-            if (ErrorMessages != null)
+            var sb = new StringBuilder();
+            sb.AppendLine();
+
+            int errorCount = 0;
+
+            foreach (var bgw in backgroundWorkers)
             {
-                labelTitle.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED;
-                labelError.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR;
-
-                textBoxLog.Text += ErrorMessages;
-
-                log.ErrorFormat("Error message displayed: {0}", labelError.Text);
-                pictureBox1.Image = SystemIcons.Error.ToBitmap();
-                panel1.Visible = true;
-            }
-        }
-
-        private string ErrorMessages
-        {
-            get
-            {
-                if (errorActions.Count == 0)
-                    return null;
-
-                var sb = new StringBuilder();
-
-                sb.AppendLine();
-                sb.AppendLine(errorActions.Count > 1 ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED);
-
-                foreach (var action in errorActions)
+                foreach (var action in bgw.DoneActions)
                 {
                     var exception = action.Error;
                     if (exception == null)
@@ -552,10 +547,25 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         sb.AppendLine(exception.Message);
                     }
+                    errorCount++;
                 }
-
-                return sb.ToString();
             }
+
+            if (errorCount == 0)
+                return;
+
+            labelTitle.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED;
+            labelError.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR;
+
+            textBoxLog.Text += "\r\n";
+            textBoxLog.Text += errorCount > 1
+                ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED
+                : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED;
+            textBoxLog.Text += sb.ToString();
+
+            log.ErrorFormat("Error message displayed: {0}", labelError.Text);
+            pictureBox1.Image = SystemIcons.Error.ToBitmap();
+            panel1.Visible = true;
         }
 
         private void AllWorkersFinished()
