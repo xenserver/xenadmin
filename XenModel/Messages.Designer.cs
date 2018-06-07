@@ -32285,15 +32285,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These servers needs to be rebooted for this SR-IOV network to take effect:&apos;{0}&apos;.
-        /// </summary>
-        public static string SRIOV_ENABLE_REBOOT_WARNING {
-            get {
-                return ResourceManager.GetString("SRIOV_ENABLE_REBOOT_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to SR-IOV networks require an SR-IOV capable NIC..
         /// </summary>
         public static string SRIOV_NEED_NICSUPPORT {
@@ -32313,10 +32304,12 @@ namespace XenAdmin {
         
         /// <summary>
         ///   Looks up a localized string similar to Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed.
+        ///
+        ///Host(s) may need to be rebooted to enable SR-IOV network..
         /// </summary>
-        public static string SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION {
+        public static string SRIOV_NETWORK_CREATE_WARNING {
             get {
-                return ResourceManager.GetString("SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION", resourceCulture);
+                return ResourceManager.GetString("SRIOV_NETWORK_CREATE_WARNING", resourceCulture);
             }
         }
         

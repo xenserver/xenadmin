@@ -209,7 +209,7 @@ namespace XenAdmin.Wizards
             var dlg = new ThreeButtonDialog(
                 new ThreeButtonDialog.Details(
                     SystemIcons.Warning, 
-                    Messages.SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION),
+                    Messages.SRIOV_NETWORK_CREATE_WARNING),
                  new ThreeButtonDialog.TBDButton(Messages.SRIOV_NETWORK_CREATE, DialogResult.OK),
                 ThreeButtonDialog.ButtonCancel);
 
