@@ -9468,7 +9468,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected VMs are no longer available for migration. Please verify your selection is valid and relaunch the wizard..
+        ///   Looks up a localized string similar to The selected VMs are no longer available in [XenCenter]&apos;s cache. Please verify your selection is valid and relaunch the wizard..
         /// </summary>
         public static string CPM_WIZARD_VM_MISSING_ERROR {
             get {

@@ -173,6 +173,13 @@ namespace XenAdmin.Wizards.GenericPages
 
         protected override void PageLeaveCore(PageLoadedDirection direction, ref bool cancel)
         {
+            if (!PerformCheck())
+            {
+                cancel = true;
+                SetButtonNextEnabled(false);
+                return;
+            }
+
             UnregisterHandlers();
             SetDefaultTarget(ChosenItem);
             ClearComboBox();
@@ -234,12 +241,17 @@ namespace XenAdmin.Wizards.GenericPages
         protected abstract DelayLoadingOptionComboBoxItem CreateDelayLoadingOptionComboBoxItem(IXenObject xenItem);
 
 		#region Private methods
-        
-        protected void SetButtonNextEnabled(bool enabled)
+
+        private void SetButtonNextEnabled(bool enabled)
         {
             m_buttonNextEnabled = enabled;
             OnPageUpdated();
         }
+
+	    protected virtual bool PerformCheck()
+	    {
+	        return true;
+	    }
 
         private void ClearComboBox()
         {
@@ -341,14 +353,12 @@ namespace XenAdmin.Wizards.GenericPages
                 if (m_vmMappings.ContainsKey(sysId))
                 {
                     var mapping = m_vmMappings[sysId];
-                    DataGridViewEnableableComboBoxCell cbCell = row.Cells[m_colTarget.Index] as DataGridViewEnableableComboBoxCell;
+                    var cbCell = row.Cells[m_colTarget.Index] as DataGridViewEnableableComboBoxCell;
                     if (cbCell == null)
                         return;
 
-                    List<IEnableableXenObjectComboBoxItem> list =
-                        cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>().ToList();
-                    IEnableableXenObjectComboBoxItem item =
-                        list.FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
+                    var list = cbCell.Items.OfType<IEnableableXenObjectComboBoxItem>().ToList();
+                    var item = list.FirstOrDefault(cbi => MatchingWithXenRefObject(cbi, mapping.XenRef));
                     if (item != null)
                         cbCell.Value = item;
                 }
@@ -362,44 +372,38 @@ namespace XenAdmin.Wizards.GenericPages
             updatingHomeServerList = true;
             try
             {
-                Connection = null;
-
                 var target = m_comboBoxConnection.SelectedItem as DelayLoadingOptionComboBoxItem;
-                if (target != null)
-                    Connection = target.Item.Connection;
 
                 m_dataGridView.SuspendLayout();
 
                 ClearDataGridView();
 
-                var hasPoolSharedStorage = HasPoolSharedStorage();
+                var hasPoolSharedStorage = target != null && HasPoolSharedStorage(target.Item.Connection);
 
                 foreach (var kvp in m_vmMappings)
                 {
                     var tb = new DataGridViewTextBoxCell {Value = kvp.Value.VmNameLabel, Tag = kvp.Key};
                     var cb = new DataGridViewEnableableComboBoxCell{FlatStyle = FlatStyle.Flat};
-                    List<ReasoningFilter> homeserverFilters = CreateTargetServerFilterList(
-                                                                selectedItem,
-                                                                new List<String> { kvp.Key });
+                    var homeserverFilters = CreateTargetServerFilterList(selectedItem, new List<string> {kvp.Key});
 
-                    if (Connection != null)
+                    if (target != null)
                     {
                         if (hasPoolSharedStorage)
                         {
-                            foreach (var pool in Connection.Cache.Pools)
+                            foreach (var pool in target.Item.Connection.Cache.Pools)
                             {
                                 var item = new NoTargetServerPoolItem(pool);
                                 cb.Items.Add(item);
 
                                 if ((m_selectedObject != null && m_selectedObject.opaque_ref == pool.opaque_ref) ||
-                                    (target != null && target.Item.opaque_ref == pool.opaque_ref))
+                                    (target.Item.opaque_ref == pool.opaque_ref))
                                     cb.Value = item;
 
                                 break; //there exists one pool per connection
                             }
                         }
 
-                        var sortedHosts = new List<Host>(Connection.Cache.Hosts);
+                        var sortedHosts = new List<Host>(target.Item.Connection.Cache.Hosts);
                         sortedHosts.Sort();
 
                         foreach (var host in sortedHosts)
@@ -408,7 +412,7 @@ namespace XenAdmin.Wizards.GenericPages
                             item.LoadSync();
                             cb.Items.Add(item);
                             if (item.Enabled && ((m_selectedObject != null && m_selectedObject.opaque_ref == host.opaque_ref) ||
-                                                 (target != null && target.Item.opaque_ref == host.opaque_ref)))
+                                                 (target.Item.opaque_ref == host.opaque_ref)))
                                 cb.Value = item;
                         }
 
@@ -457,14 +461,14 @@ namespace XenAdmin.Wizards.GenericPages
 	        }
 	    }
 
-	    private bool HasPoolSharedStorage()
+	    private static bool HasPoolSharedStorage(IXenConnection conn)
 		{
-			if (Connection == null)
+            if (conn == null)
 				return false;
 
-			foreach (var pbd in Connection.Cache.PBDs.Where(thePbd => thePbd.SR != null))
+            foreach (var pbd in conn.Cache.PBDs.Where(thePbd => thePbd.SR != null))
 			{
-				var sr = Connection.Resolve(pbd.SR);
+                var sr = conn.Resolve(pbd.SR);
 				
 				if (sr != null && sr.SupportsVdiCreate() && sr.shared)
 						return true;
