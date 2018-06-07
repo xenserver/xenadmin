@@ -3413,7 +3413,7 @@ Please reconnect the host and try again.</value>
     <value>Migrate VM to {0}</value>
   </data>
   <data name="CPM_WIZARD_VM_MISSING_ERROR" xml:space="preserve">
-    <value>The selected VMs are no longer available for migration. Please verify your selection is valid and relaunch the wizard.</value>
+    <value>The selected VMs are no longer available in [XenCenter]'s cache. Please verify your selection is valid and relaunch the wizard.</value>
   </data>
   <data name="CPM_WIZARD_VM_SELECTION_INTRODUCTION" xml:space="preserve">
     <value>&amp;Virtual network interfaces:</value>
