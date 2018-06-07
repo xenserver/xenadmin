@@ -422,7 +422,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (!(action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction || action is RemoveUpdateFileFromMasterPlanAction))
                     {
                         int pos = 0;
-                        while (++pos < bgw.FinalActions.Count)
+                        while (pos++ < bgw.FinalActions.Count - 1)
                         {
                             var finalAction = bgw.FinalActions[pos];
                             if (finalAction is RemoveUpdateFileFromMasterPlanAction)
