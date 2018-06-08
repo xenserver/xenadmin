@@ -12068,7 +12068,7 @@ Check your settings and try again.</value>
     <value>Deleting update installation file {0} from {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL" xml:space="preserve">
-    <value>Removing update files from {0}...</value>
+    <value>Removing update file {0} from {1}...</value>
   </data>
   <data name="UPDATES_WIZARD_REPAIR_SR" xml:space="preserve">
     <value>Click here to repair</value>

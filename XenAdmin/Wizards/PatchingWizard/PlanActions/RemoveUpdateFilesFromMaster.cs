@@ -34,7 +34,7 @@ using XenAdmin.Core;
 using XenAPI;
 using System.Linq;
 using System;
-using XenAdmin.Actions;
+
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Host master = null;
 
         public RemoveUpdateFileFromMasterPlanAction(Host master, List<PoolPatchMapping> patchMappings, XenServerPatch patch)
-            : base(master.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, master.Name()))
+            : base(master.Connection, string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, patch.Name, master.Name()))
         {
             this.patchMappings = patchMappings;
             this.patch = patch;
@@ -63,13 +63,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     Pool_patch poolPatch = null;
 
-                    if (mapping != null || mapping.Pool_patch != null && mapping.Pool_patch.opaque_ref != null)
+                    if (mapping != null && mapping.Pool_patch != null && mapping.Pool_patch.opaque_ref != null)
                     {
                         poolPatch = mapping.Pool_patch;
                     }
                     else
                     {
-                        poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, patch.Uuid, System.StringComparison.InvariantCultureIgnoreCase));
+                        poolPatch = session.Connection.Cache.Pool_patches.FirstOrDefault(pp => string.Equals(pp.uuid, patch.Uuid, StringComparison.InvariantCultureIgnoreCase));
                     }
 
                     if (poolPatch != null && poolPatch.opaque_ref != null)
@@ -82,7 +82,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
                 else
                 {
-                    if (mapping != null || mapping.Pool_update != null && mapping.Pool_update.opaque_ref != null)
+                    if (mapping != null && mapping.Pool_update != null && mapping.Pool_update.opaque_ref != null)
                     {
                         var poolUpdate = mapping.Pool_update;
 

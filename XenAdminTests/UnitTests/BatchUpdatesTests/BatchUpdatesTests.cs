@@ -32,11 +32,11 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using XenAdmin.Actions;
 using Moq;
 using XenAdmin.Core;
 using XenAPI;
 using System.Linq;
+
 
 namespace XenAdminTests.UnitTests
 {
@@ -104,11 +104,11 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void GetUpgradeSequenceForNullConnection()
         {
-            Assert.AreEqual(XenAdmin.Core.Updates.GetUpgradeSequence(null), null);
+            Assert.AreEqual(Updates.GetMinimalPatches(null), null);
         }
 
         /// <summary>
-        /// Version exist
+        /// Version exists
         /// No patches in updates
         /// Nothing installed on host
         /// Result: update sequence has the host, but empty sequence
@@ -122,22 +122,17 @@ namespace XenAdminTests.UnitTests
             var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
             SetXenServerVersionsInUpdates(serverVersions);
 
-            // Act
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.NotNull(minimalPatches);
+            Assert.AreEqual(0, minimalPatches.Count);
 
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
-
-            // Assert
-
+            var upgradeSequence = Updates.GetPatchSequenceForHost(master.Object, minimalPatches);
             Assert.NotNull(upgradeSequence);
-            Assert.AreEqual(1, upgradeSequence.Count);
-            Assert.NotNull(upgradeSequence.First().Key);
-            Assert.AreEqual(upgradeSequence.First().Key.uuid, master.Object.uuid);
-            Assert.NotNull(upgradeSequence.First().Value);
-            Assert.AreEqual(upgradeSequence.First().Value.Count, 0);
+            Assert.AreEqual(0, upgradeSequence.Count);
         }
 
         /// <summary>
-        /// Version exist
+        /// Version exists
         /// 1 patch in updates. 1 in minimal list.
         /// 1 has to be installed on host
         /// Result: update sequence has the host, with the one single patch in it
@@ -152,24 +147,20 @@ namespace XenAdminTests.UnitTests
             var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
             SetXenServerVersionsInUpdates(serverVersions);
 
-            // Act
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.NotNull(minimalPatches);
+            Assert.AreEqual(1, minimalPatches.Count);
 
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
-
-            // Assert
-
+            var upgradeSequence = Updates.GetPatchSequenceForHost(master.Object, minimalPatches);
             Assert.NotNull(upgradeSequence);
             Assert.AreEqual(1, upgradeSequence.Count);
-            Assert.NotNull(upgradeSequence.First().Key);
-            Assert.AreEqual(upgradeSequence.First().Key.uuid, master.Object.uuid);
-            Assert.NotNull(upgradeSequence.First().Value);
-            Assert.AreEqual(upgradeSequence.First().Value.Count, 1);
-            Assert.AreEqual(upgradeSequence.First().Value[0], patch);
+            Assert.NotNull(upgradeSequence[0]);
+            Assert.AreEqual(upgradeSequence[0], patch);
         }
 
 
         /// <summary>
-        /// Version exist
+        /// Version exists
         /// 1 patch in updates. 1 in minimal list. But it is applied already on master.
         /// 0 has to be installed on host
         /// </summary>
@@ -184,26 +175,21 @@ namespace XenAdminTests.UnitTests
             Pool_patch pool_patch = new Pool_patch();
             pool_patch.uuid = patch.Uuid;
 
-            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber, new List<Pool_patch>() { pool_patch });
+            var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber, new List<Pool_patch> {pool_patch});
             SetXenServerVersionsInUpdates(serverVersions);
 
-            // Act
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.NotNull(minimalPatches);
+            Assert.AreEqual(1, minimalPatches.Count);
 
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
-
-            // Assert
-
+            var upgradeSequence = Updates.GetPatchSequenceForHost(master.Object, minimalPatches);
             Assert.NotNull(upgradeSequence);
-            Assert.AreEqual(1, upgradeSequence.Count);
-            Assert.NotNull(upgradeSequence.First().Key);
-            Assert.AreEqual(upgradeSequence.First().Key.uuid, master.Object.uuid);
-            Assert.NotNull(upgradeSequence.First().Value);
-            Assert.AreEqual(upgradeSequence.First().Value.Count, 0);
+            Assert.AreEqual(0, upgradeSequence.Count);
         }
 
 
         /// <summary>
-        /// Version exist
+        /// Version exists
         /// 100 patch in updates. 100 in minimal list.
         /// 100 has to be installed on host
         /// Result: update sequence has all the 100 patches in it
@@ -215,27 +201,21 @@ namespace XenAdminTests.UnitTests
             var serverVersions = GetAVersionWithGivenNumberOfPatches(100);
             var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
             SetXenServerVersionsInUpdates(serverVersions);
-
-            // Act
             
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.NotNull(minimalPatches);
+            Assert.AreEqual(100, minimalPatches.Count);
 
-            // Assert
-            
+            var upgradeSequence = Updates.GetPatchSequenceForHost(master.Object, minimalPatches);
             Assert.NotNull(upgradeSequence);
-            Assert.AreEqual(1, upgradeSequence.Count);
-            var seqToCheck = upgradeSequence.First();
-            Assert.NotNull(seqToCheck.Key);
-            Assert.AreEqual(seqToCheck.Key.uuid, master.Object.uuid);
-            Assert.NotNull(seqToCheck.Value);
-            Assert.AreEqual(seqToCheck.Value.Count, 100);
+            Assert.AreEqual(100, upgradeSequence.Count);
             
-            for (int ii = 100; ii < 0; --ii)
-                Assert.AreEqual(seqToCheck.Value[ii], serverVersions.First().Patches[ii]);
+            for (int i = 100; i < 0; --i)
+                Assert.AreEqual(upgradeSequence[i], serverVersions[0].Patches[i]);
         }
 
         /// <summary>
-        /// Version exist
+        /// Version exists
         /// 100 patch in updates. 51 in minimal list.
         /// 51 has to be installed on host
         /// Result: update sequence has all the 51 patches in it
@@ -249,29 +229,25 @@ namespace XenAdminTests.UnitTests
             RemoveANumberOfPatchesPseudoRandomly(serverVersions.First().MinimalPatches, 49);
             SetXenServerVersionsInUpdates(serverVersions);
 
-            // Act
-
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
-
             // Assert
 
-            Assert.NotNull(upgradeSequence);
-            Assert.AreEqual(1, upgradeSequence.Count);
-            var seqToCheck = upgradeSequence.First();
-            Assert.NotNull(seqToCheck.Key);
-            Assert.AreEqual(seqToCheck.Key.uuid, master.Object.uuid);
-            Assert.NotNull(seqToCheck.Value);
-            Assert.AreEqual(seqToCheck.Value.Count, 51);
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.NotNull(minimalPatches);
+            Assert.AreEqual(51, minimalPatches.Count);
 
-            foreach (var patch in seqToCheck.Value)
+            var upgradeSequence = Updates.GetPatchSequenceForHost(master.Object, minimalPatches);
+            Assert.NotNull(upgradeSequence);
+            Assert.AreEqual(51, upgradeSequence.Count);
+
+            foreach (var patch in upgradeSequence)
                 Assert.IsTrue(serverVersions.First().MinimalPatches.Contains(patch));
 
-            Assert.False(seqToCheck.Value.Exists(seqpatch => !serverVersions.First().MinimalPatches.Contains(seqpatch)));
+            Assert.False(upgradeSequence.Exists(seqpatch => !serverVersions.First().MinimalPatches.Contains(seqpatch)));
         }
 
 
         /// <summary>
-        /// Version exist
+        /// Version exists
         /// 100 patch in updates. 51 in minimal list.
         /// 41 has to be installed on host (only 41 of 51, because 10 is already installed from the Minimal list (as well as 5 other))
         /// Result: update sequence has all the 41 patches in it and all are from Minimal List and also not installed on the host
@@ -299,30 +275,25 @@ namespace XenAdminTests.UnitTests
 
             SetXenServerVersionsInUpdates(serverVersions);
 
-            // Act
-
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
-
             // Assert
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.NotNull(minimalPatches);
+            Assert.AreEqual(51, minimalPatches.Count);
 
+            var upgradeSequence = Updates.GetPatchSequenceForHost(master.Object, minimalPatches);
             Assert.NotNull(upgradeSequence);
-            Assert.AreEqual(1, upgradeSequence.Count);
-            var seqToCheck = upgradeSequence.First();
-            Assert.NotNull(seqToCheck.Key);
-            Assert.AreEqual(seqToCheck.Key.uuid, master.Object.uuid);
-            Assert.NotNull(seqToCheck.Value);
-            Assert.AreEqual(seqToCheck.Value.Count, 41);
+            Assert.AreEqual(41, upgradeSequence.Count);
 
-            foreach (var patch in seqToCheck.Value)
+            foreach (var patch in upgradeSequence)
                 Assert.IsTrue(serverVersions.First().MinimalPatches.Contains(patch) && !pool_patches.Exists(p  => p.uuid == patch.Uuid));
 
-            Assert.False(seqToCheck.Value.Exists(seqpatch => !serverVersions.First().MinimalPatches.Contains(seqpatch)));
-            Assert.True(seqToCheck.Value.Exists(seqpatch => !pool_patches.Exists(pp => pp.uuid == seqpatch.Uuid)));
+            Assert.False(upgradeSequence.Exists(seqpatch => !serverVersions.First().MinimalPatches.Contains(seqpatch)));
+            Assert.True(upgradeSequence.Exists(seqpatch => !pool_patches.Exists(pp => pp.uuid == seqpatch.Uuid)));
         }
 
 
         /// <summary>
-        /// Version exist
+        /// Version exists
         /// 2 patch in updates. 1 in minimal list.
         /// 1 has to be installed on host
         /// Result: update sequence has the host, with the one single patch in it
@@ -337,24 +308,21 @@ namespace XenAdminTests.UnitTests
             RemoveANumberOfPatchesPseudoRandomly(serverVersions.First().MinimalPatches, 1);
             SetXenServerVersionsInUpdates(serverVersions);
 
-            // Act
-            
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
-
             // Assert
+            
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.NotNull(minimalPatches);
+            Assert.AreEqual(1, minimalPatches.Count);
 
+            var upgradeSequence = Updates.GetPatchSequenceForHost(master.Object, minimalPatches);
             Assert.NotNull(upgradeSequence);
             Assert.AreEqual(1, upgradeSequence.Count);
-            Assert.NotNull(upgradeSequence.First().Key);
-            Assert.AreEqual(upgradeSequence.First().Key.uuid, master.Object.uuid);
-            Assert.NotNull(upgradeSequence.First().Value);
-            Assert.AreEqual(upgradeSequence.First().Value.Count, 1);
-            Assert.AreEqual(upgradeSequence.First().Value[0], serverVersions.First().MinimalPatches[0]);
+            Assert.AreEqual(upgradeSequence[0], serverVersions.First().MinimalPatches[0]);
         }
 
 
         /// <summary>
-        /// Version exist
+        /// Version exists
         /// 2 patch in updates. 2 in minimal list.
         /// 2 has to be installed on host
         /// Result: update sequence has the host, with the one single patch in it
@@ -368,20 +336,18 @@ namespace XenAdminTests.UnitTests
             var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber);
             SetXenServerVersionsInUpdates(serverVersions);
 
-            // Act
-
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
-
             // Assert
 
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.NotNull(minimalPatches);
+            Assert.AreEqual(2, minimalPatches.Count);
+
+            var upgradeSequence = Updates.GetPatchSequenceForHost(master.Object, minimalPatches);
             Assert.NotNull(upgradeSequence);
-            Assert.AreEqual(1, upgradeSequence.Count);
-            Assert.NotNull(upgradeSequence.First().Key);
-            Assert.AreEqual(upgradeSequence.First().Key.uuid, master.Object.uuid);
-            Assert.NotNull(upgradeSequence.First().Value);
-            Assert.AreEqual(upgradeSequence.First().Value.Count, 2);
-            Assert.AreEqual(upgradeSequence.First().Value[0], serverVersions.First().MinimalPatches[0]);
-            Assert.AreEqual(upgradeSequence.First().Value[1], serverVersions.First().MinimalPatches[1]);
+            Assert.AreEqual(2, upgradeSequence.Count);
+
+            for (int i = 0; i < upgradeSequence.Count; i++)
+                Assert.AreEqual(upgradeSequence[i], serverVersions.First().MinimalPatches[i]);
         }
 
 
@@ -393,18 +359,13 @@ namespace XenAdminTests.UnitTests
         public void NoInfoForCurrentVersion()
         {
             // Arrange
-
             var serverVersions = GetAVersionWithGivenNumberOfPatches(200);
             var master = GetAMockHost(serverVersions.First().Oem, serverVersions.First().BuildNumber + "to_make_it_not_match");
             SetXenServerVersionsInUpdates(serverVersions);
 
-            // Act
-
-            var upgradeSequence = XenAdmin.Core.Updates.GetUpgradeSequence(master.Object.Connection);
-
-            // Assert
-
-            Assert.Null(upgradeSequence);
+            // assert
+            var minimalPatches = Updates.GetMinimalPatches(master.Object.Connection);
+            Assert.Null(minimalPatches);
         }
 
 

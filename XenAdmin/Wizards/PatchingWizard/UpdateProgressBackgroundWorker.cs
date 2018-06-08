@@ -34,25 +34,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
-using XenAPI;
+using HostActionTuple = System.Tuple<XenAPI.Host, System.Collections.Generic.List<XenAdmin.Wizards.PatchingWizard.PlanActions.PlanAction>, System.Collections.Generic.List<XenAdmin.Wizards.PatchingWizard.PlanActions.PlanAction>>;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
     class UpdateProgressBackgroundWorker : BackgroundWorker
     {
         private readonly int _actionsCount;
-
-        public List<PlanAction> PlanActions { get; private set; }
-        public Dictionary<Host, List<PlanAction>> DelayedActionsByHost {get; private set; }
+        public List<HostActionTuple> HostActions { get; private set; }
         public List<PlanAction> FinalActions { get; private set; }
+        public readonly List<PlanAction> DoneActions = new List<PlanAction>();
+        public readonly List<PlanAction> InProgressActions = new List<PlanAction>();
 
-        public UpdateProgressBackgroundWorker(List<PlanAction> planActions,
-            Dictionary<Host, List<PlanAction>> delayedActionsByHost, List<PlanAction> finalActions)
+        public UpdateProgressBackgroundWorker(List<HostActionTuple> planActions, List<PlanAction> finalActions)
         {
-            PlanActions = planActions;
-            DelayedActionsByHost = delayedActionsByHost;
+            HostActions = planActions;
             FinalActions = finalActions;
-            _actionsCount = PlanActions.Count + DelayedActionsByHost.Sum(kvp => kvp.Value.Count) + FinalActions.Count;
+            _actionsCount = HostActions.Sum(t => t.Item2.Count + t.Item3.Count) + FinalActions.Count;
         }
 
         public int ActionsCount
@@ -62,11 +60,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public new void CancelAsync()
         {
-            if (PlanActions != null)
-                PlanActions.ForEach(pa => 
+            if (HostActions != null)
+                HostActions.ForEach(ha =>
                 {
-                    if (!pa.IsComplete)
-                        pa.Cancel();
+                    var cur = ha;
+                    cur.Item2.ForEach(pa =>
+                    {
+                        if (!pa.IsComplete)
+                            pa.Cancel();
+                    });
                 });
 
             base.CancelAsync();

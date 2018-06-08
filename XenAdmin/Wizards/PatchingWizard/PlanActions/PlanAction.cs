@@ -45,7 +45,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         private int _percentComplete;
         public event EventHandler OnProgressChange;
-        public event EventHandler OnActionError;
         public event Action<PlanAction, Host> StatusChanged;
         public Exception Error;
         protected bool Cancelling = false;
@@ -121,8 +120,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 else
                 {
                     Error = e;
-                    if (OnActionError != null)
-                        OnActionError(this, new EventArgs());
                     throw;
                 }
             }
