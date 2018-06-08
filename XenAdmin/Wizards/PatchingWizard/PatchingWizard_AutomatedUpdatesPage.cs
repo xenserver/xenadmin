@@ -329,15 +329,19 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
 
+                sb.AppendLine();
+
                 if (bgwErrorCount > 0)
                 {
-                    sb.AppendLine();
-
                     sb.AppendLine(bgwErrorCount > 1
-                        ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED
-                        : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED);
+                        ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY
+                        : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE);
 
                     sb.Append(errorSb);
+                }
+                else
+                {
+                    sb.AppendLine(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE);
                 }
 
                 sb.AppendLine();
@@ -514,8 +518,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     var bgw = sender as UpdateProgressBackgroundWorker;
                     if (bgw != null && bgw.DoneActions.Any(a => a.Error != null))
                     {
-                        labelTitle.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED;
-                        labelError.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR;
+                        labelError.Text = backgroundWorkers.Count > 1
+                            ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY
+                            : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE;
                         pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
                         panel1.Visible = true;
                     }
@@ -526,12 +531,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (!panel1.Visible)
                     {
-                        if (WizardMode == WizardMode.AutomatedUpdates)
-                            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
-                        else if (WizardMode == WizardMode.NewVersion)
-                            labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE;
-                        
-                        labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
+                        labelError.Text = backgroundWorkers.Count > 1
+                            ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY
+                            : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
                         pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
                         panel1.Visible = true;
                     }

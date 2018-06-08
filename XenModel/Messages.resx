@@ -9342,20 +9342,26 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PASTE" xml:space="preserve">
     <value>Paste</value>
   </data>
-  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR" xml:space="preserve">
-    <value>The automated updates process was not completed successfully.</value>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY" xml:space="preserve">
+    <value>One or more of the automated updates processes were not completed successfully.</value>
   </data>
-  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED" xml:space="preserve">
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE" xml:space="preserve">
+    <value>The automated updates process was not completed successfuly.</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY" xml:space="preserve">
     <value>The following errors occurred while automated updates were in progress:</value>
   </data>
-  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED" xml:space="preserve">
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE" xml:space="preserve">
     <value>The following error occurred while automated updates were in progress:</value>
-  </data>
-  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED" xml:space="preserve">
-    <value>The update was not completed successfully</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT" xml:space="preserve">
     <value>{0}...</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY" xml:space="preserve">
+    <value>All automated updates processes were completed successfuly.</value>
+  </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE" xml:space="preserve">
+    <value>The automated updates process was completed successfuly.</value>
   </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_TEXT" xml:space="preserve">
     <value>Upload and Install</value>
@@ -9559,12 +9565,6 @@ Servers where this update cannot be applied appear disabled in this list.</value
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_TITLE" xml:space="preserve">
     <value>Select the servers you want to update</value>
   </data>
-  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE" xml:space="preserve">
-    <value>The new version has been installed.</value>
-  </data>
-  <data name="PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE" xml:space="preserve">
-    <value>Automated updates have finished.</value>
-  </data>
   <data name="PATCHINGWIZARD_UPLOADPAGE_MESSAGE_DOWNLOAD_AND_UPLOAD" xml:space="preserve">
     <value>[XenCenter] is now downloading your update and uploading it to the servers specified in the previous step.
 Please wait for these operations to complete, then click Next to continue with the installation.</value>
@@ -9583,10 +9583,10 @@ Please wait for this operation to complete, then click Next to continue with the
     <value>Uploading the selected file to your servers</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE" xml:space="preserve">
-    <value>Installing updates:</value>
+    <value>[XenCenter] is now installing updates on your system.</value>
   </data>
   <data name="PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE" xml:space="preserve">
-    <value>Installing new version:</value>
+    <value>[XenCenter] is now installing the new version on your system.</value>
   </data>
   <data name="PATCHING_EJECT_CDS" xml:space="preserve">
     <value>Eject any virtual CDs from your VMs</value>
