@@ -339,7 +339,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     sb.Append(errorSb);
                 }
-                else
+                else if (!bgw.IsBusy)
                 {
                     sb.AppendLine(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE);
                 }
