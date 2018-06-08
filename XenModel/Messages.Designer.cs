@@ -32303,9 +32303,9 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed.
+        ///   Looks up a localized string similar to Creating this SR-IOV network will temporarily disturb [XenCenter] connections to the pool.
         ///
-        ///Host(s) may need to be rebooted to enable SR-IOV network..
+        ///You may need to reboot your server(s) to enable SR-IOV network..
         /// </summary>
         public static string SRIOV_NETWORK_CREATE_WARNING {
             get {

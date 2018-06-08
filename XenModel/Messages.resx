@@ -11120,9 +11120,9 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Create &amp;SR-IOV anyway</value>
   </data>
   <data name="SRIOV_NETWORK_CREATE_WARNING" xml:space="preserve">
-    <value>Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed.
+    <value>Creating this SR-IOV network will temporarily disturb [XenCenter] connections to the pool.
 
-Host(s) may need to be rebooted to enable SR-IOV network.</value>
+You may need to reboot your server(s) to enable SR-IOV network.</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>
