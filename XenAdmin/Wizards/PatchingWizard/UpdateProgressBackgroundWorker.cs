@@ -45,6 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public List<PlanAction> FinalActions { get; private set; }
         public readonly List<PlanAction> DoneActions = new List<PlanAction>();
         public readonly List<PlanAction> InProgressActions = new List<PlanAction>();
+        public string Name { get; set; }
 
         public UpdateProgressBackgroundWorker(List<HostActionTuple> planActions, List<PlanAction> finalActions)
         {
