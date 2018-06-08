@@ -35,7 +35,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.labelError = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.errorLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -75,16 +74,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.pictureBox1, 0, 0);
-            this.panel1.Controls.Add(this.errorLinkLabel, 2, 0);
             this.panel1.Controls.Add(this.labelError, 1, 0);
             this.panel1.Name = "panel1";
-            // 
-            // errorLinkLabel
-            // 
-            resources.ApplyResources(this.errorLinkLabel, "errorLinkLabel");
-            this.errorLinkLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.errorLinkLabel.Name = "errorLinkLabel";
-            this.errorLinkLabel.TabStop = true;
             // 
             // PatchingWizard_AutomatedUpdatesPage
             // 
@@ -111,7 +102,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TableLayoutPanel panel1;
-        private System.Windows.Forms.LinkLabel errorLinkLabel;
 
     }
 }

@@ -44,7 +44,6 @@ using System.Linq;
 using XenAdmin.Core;
 using System.Text;
 using System.Diagnostics;
-using System.Runtime.Remoting.Messaging;
 using XenAdmin.Alerts;
 using HostActionTuple = System.Tuple<XenAPI.Host, System.Collections.Generic.List<XenAdmin.Wizards.PatchingWizard.PlanActions.PlanAction>, System.Collections.Generic.List<XenAdmin.Wizards.PatchingWizard.PlanActions.PlanAction>>;
 
@@ -74,6 +73,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public PatchingWizard_AutomatedUpdatesPage()
         {
             InitializeComponent();
+            panel1.Visible = false;
         }
 
         public override string Text
@@ -232,16 +232,16 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (planActions.Count > 0)
                 {
                     atLeastOneWorkerStarted = true;
-                    StartNewWorker(planActions, finalActions);
+                    StartNewWorker(pool.Name(), planActions, finalActions);
                 }
             }
 
             return atLeastOneWorkerStarted;
         }
 
-        private void StartNewWorker(List<HostActionTuple> planActions, List<PlanAction> finalActions)
+        private void StartNewWorker(string poolName, List<HostActionTuple> planActions, List<PlanAction> finalActions)
         {
-            var bgw = new UpdateProgressBackgroundWorker(planActions, finalActions);
+            var bgw = new UpdateProgressBackgroundWorker(planActions, finalActions) { Name = poolName };
             backgroundWorkers.Add(bgw);
             bgw.DoWork += WorkerDoWork;
             bgw.WorkerReportsProgress = true;
@@ -285,7 +285,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var bgw in backgroundWorkers)
             {
+                int bgwErrorCount = 0;
                 var sb = new StringBuilder();
+                var errorSb = new StringBuilder();
+
+                if (!String.IsNullOrEmpty(bgw.Name))
+                    sb.AppendLine(string.Format("{0}:", bgw.Name)).AppendLine();
 
                 foreach (var pa in bgw.DoneActions)
                 {
@@ -293,6 +298,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         sb.Append(pa.ProgressDescription ?? pa.ToString());
                         sb.AppendLine(Messages.ERROR);
+
+                        var innerEx = pa.Error.InnerException as Failure;
+                        if (innerEx != null)
+                        {
+                            log.Error(innerEx);
+                            errorSb.AppendLine(innerEx.Message);
+                        }
+                        else
+                        {
+                            log.Error(pa.Error);
+                            errorSb.AppendLine(pa.Error.Message);
+                        }
+
+                        bgwErrorCount++;
                     }
                     else if (pa.Visible)
                     {
@@ -310,11 +329,26 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                 }
 
+                sb.AppendLine();
+
+                if (bgwErrorCount > 0)
+                {
+                    sb.AppendLine(bgwErrorCount > 1
+                        ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY
+                        : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE);
+
+                    sb.Append(errorSb);
+                }
+                else if (!bgw.IsBusy)
+                {
+                    sb.AppendLine(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE);
+                }
+
+                sb.AppendLine();
                 allsb.Append(sb);
             }
 
             textBoxLog.Text = allsb.ToString();
-
             textBoxLog.SelectionStart = textBoxLog.Text.Length;
             textBoxLog.ScrollToCaret();
         }
@@ -410,6 +444,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
             catch (Exception e)
             {
+                if (action.Error == null)
+                    action.Error = new Exception(Messages.ERROR_UNKNOWN);
+
                 bgw.DoneActions.Add(action);
                 bgw.InProgressActions.Remove(action);
 
@@ -476,25 +513,39 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (!e.Cancelled)
             {
-                Exception exception = e.Result as Exception;
-                if (exception != null)
+                if (!panel1.Visible)
                 {
-                    //not showing exceptions in the meantime
+                    var bgw = sender as UpdateProgressBackgroundWorker;
+                    if (bgw != null && bgw.DoneActions.Any(a => a.Error != null))
+                    {
+                        labelError.Text = backgroundWorkers.Count > 1
+                            ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY
+                            : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE;
+                        pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
+                        panel1.Visible = true;
+                    }
                 }
 
                 //if all finished
                 if (backgroundWorkers.All(w => !w.IsBusy))
                 {
-                    AllWorkersFinished();
-                    ShowErrors();
+                    if (!panel1.Visible)
+                    {
+                        labelError.Text = backgroundWorkers.Count > 1
+                            ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY
+                            : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
+                        pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
+                        panel1.Visible = true;
+                    }
 
+                    progressBar.Value = 100;
                     _thisPageIsCompleted = true;
-
                     _cancelEnabled = false;
                     _nextEnabled = true;
                 }
             }
 
+            UpdateStatusTextBox();
             OnPageUpdated();
         }
 
@@ -516,73 +567,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
 
         #endregion
-
-        private void ShowErrors()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine();
-
-            int errorCount = 0;
-
-            foreach (var bgw in backgroundWorkers)
-            {
-                foreach (var action in bgw.DoneActions)
-                {
-                    var exception = action.Error;
-                    if (exception == null)
-                    {
-                        log.ErrorFormat("An action has failed with an empty exception. Action: {0}", action.ToString());
-                        continue;
-                    }
-
-                    log.Error(exception);
-
-                    var innerEx = exception.InnerException as Failure;
-                    if (innerEx != null)
-                    {
-                        log.Error(innerEx);
-                        sb.AppendLine(innerEx.Message);
-                    }
-                    else
-                    {
-                        sb.AppendLine(exception.Message);
-                    }
-                    errorCount++;
-                }
-            }
-
-            if (errorCount == 0)
-                return;
-
-            labelTitle.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED;
-            labelError.Text = Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR;
-
-            textBoxLog.Text += "\r\n";
-            textBoxLog.Text += errorCount > 1
-                ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED
-                : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED;
-            textBoxLog.Text += sb.ToString();
-
-            log.ErrorFormat("Error message displayed: {0}", labelError.Text);
-            pictureBox1.Image = SystemIcons.Error.ToBitmap();
-            panel1.Visible = true;
-        }
-
-        private void AllWorkersFinished()
-        {
-            if (WizardMode == WizardMode.AutomatedUpdates)
-            {
-                labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE;
-            }
-            else if (WizardMode == WizardMode.NewVersion)
-            {
-                labelTitle.Text = Messages.PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE;
-            }
-
-            progressBar.Value = 100;
-            pictureBox1.Image = null;
-            labelError.Text = Messages.CLOSE_WIZARD_CLICK_FINISH;
-        }
     }
 }
 

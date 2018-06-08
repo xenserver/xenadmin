@@ -27086,38 +27086,38 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The automated updates process was not completed successfully..
+        ///   Looks up a localized string similar to One or more of the automated update processes were not completed successfully..
         /// </summary>
-        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR {
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following error occurred while automated updates were in progress:.
+        ///   Looks up a localized string similar to The automated update process was not completed successfuly..
         /// </summary>
-        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED {
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_OCCURRED", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The following errors occurred while automated updates were in progress:.
         /// </summary>
-        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED {
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERRORS_OCCURRED", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The update was not completed successfully.
+        ///   Looks up a localized string similar to The following error occurred while automated updates were in progress:.
         /// </summary>
-        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED {
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE {
             get {
-                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_FAILED", resourceCulture);
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE", resourceCulture);
             }
         }
         
@@ -27127,6 +27127,24 @@ namespace XenAdmin {
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT {
             get {
                 return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_IN_PROGRESS_DOTDOTDOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All automated update processes were completed successfuly..
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The automated update process was completed successfuly..
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE", resourceCulture);
             }
         }
         
@@ -27730,25 +27748,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The new version has been installed..
-        /// </summary>
-        public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_NEW_VERSION_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Automated updates have finished..
-        /// </summary>
-        public static string PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_UPDATES_DONE_AUTOMATED_UPDATES_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Installing updates:.
+        ///   Looks up a localized string similar to [XenCenter] is now installing updates on your system..
         /// </summary>
         public static string PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE {
             get {
@@ -27757,7 +27757,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing new version:.
+        ///   Looks up a localized string similar to [XenCenter] is now installing the new version on your system..
         /// </summary>
         public static string PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE {
             get {
