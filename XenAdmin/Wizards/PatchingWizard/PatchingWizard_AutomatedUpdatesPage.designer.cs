@@ -35,6 +35,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.labelError = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonRetry = new System.Windows.Forms.Button();
+            this.labelRetry = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +77,23 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.pictureBox1, 0, 0);
             this.panel1.Controls.Add(this.labelError, 1, 0);
+            this.panel1.Controls.Add(this.buttonRetry, 2, 0);
+            this.panel1.Controls.Add(this.labelRetry, 1, 1);
             this.panel1.Name = "panel1";
+            // 
+            // buttonRetry
+            // 
+            resources.ApplyResources(this.buttonRetry, "buttonRetry");
+            this.buttonRetry.Name = "buttonRetry";
+            this.panel1.SetRowSpan(this.buttonRetry, 2);
+            this.buttonRetry.UseVisualStyleBackColor = true;
+            this.buttonRetry.Click += new System.EventHandler(this.retryButton_Click);
+            // 
+            // labelRetry
+            // 
+            resources.ApplyResources(this.labelRetry, "labelRetry");
+            this.labelRetry.BackColor = System.Drawing.SystemColors.Control;
+            this.labelRetry.Name = "labelRetry";
             // 
             // PatchingWizard_AutomatedUpdatesPage
             // 
@@ -102,6 +120,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TableLayoutPanel panel1;
+        private System.Windows.Forms.Button buttonRetry;
+        private System.Windows.Forms.Label labelRetry;
 
     }
 }

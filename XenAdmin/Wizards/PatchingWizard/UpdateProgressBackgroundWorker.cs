@@ -43,6 +43,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         private readonly int _actionsCount;
         public List<HostActionTuple> HostActions { get; private set; }
         public List<PlanAction> FinalActions { get; private set; }
+        public List<PlanAction> CleanupActions { get; private set; }
         public readonly List<PlanAction> DoneActions = new List<PlanAction>();
         public readonly List<PlanAction> InProgressActions = new List<PlanAction>();
         public string Name { get; set; }
@@ -51,6 +52,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             HostActions = planActions;
             FinalActions = finalActions;
+            CleanupActions = finalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
             _actionsCount = HostActions.Sum(t => t.Item2.Count + t.Item3.Count) + FinalActions.Count;
         }
 
