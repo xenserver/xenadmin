@@ -534,31 +534,28 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (!e.Cancelled)
             {
-                if (!panel1.Visible)
+                var bgw = sender as UpdateProgressBackgroundWorker;
+                if (bgw != null && bgw.DoneActions.Any(a => a.Error != null))
                 {
-                    var bgw = sender as UpdateProgressBackgroundWorker;
-                    if (bgw != null && bgw.DoneActions.Any(a => a.Error != null))
+                    _someWorkersFailed = true;
+                }
+                //if all finished
+                if (backgroundWorkers.All(w => !w.IsBusy))
+                {
+                    panel1.Visible = true;
+                    if (_someWorkersFailed)
                     {
                         labelError.Text = backgroundWorkers.Count > 1
                             ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY
                             : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE;
                         pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
-                        panel1.Visible = true;
-
-                        _someWorkersFailed = true;
                     }
-                }
-
-                //if all finished
-                if (backgroundWorkers.All(w => !w.IsBusy))
-                {
-                    if (!panel1.Visible)
+                    else
                     {
                         labelError.Text = backgroundWorkers.Count > 1
                             ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY
                             : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
                         pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
-                        panel1.Visible = true;
                         progressBar.Value = 100;
                     }
                     
