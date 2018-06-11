@@ -302,13 +302,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 var errorSb = new StringBuilder();
 
                 if (!String.IsNullOrEmpty(bgw.Name))
-                    sb.AppendLine(string.Format("{0}:", bgw.Name)).AppendLine();
+                    sb.AppendLine(string.Format("{0}:", bgw.Name));
 
                 foreach (var pa in bgw.DoneActions)
                 {
                     if (pa.Error != null)
                     {
-                        sb.Append(pa.ProgressDescription ?? pa.ToString());
+                        sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
                         sb.AppendLine(Messages.ERROR);
 
                         var innerEx = pa.Error.InnerException as Failure;
@@ -327,7 +327,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
                     else if (pa.Visible)
                     {
-                        sb.Append(pa.ProgressDescription ?? pa.ToString());
+                        sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
                         sb.AppendLine(Messages.DONE);
                     }
                 }
@@ -336,7 +336,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 {
                     if (pa.Visible)
                     {
-                        sb.Append(pa.ProgressDescription ?? pa.ToString());
+                        sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
                         sb.AppendLine();
                     }
                 }
@@ -345,15 +345,14 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (bgwErrorCount > 0)
                 {
-                    sb.AppendLine(bgwErrorCount > 1
+                    sb.AppendIndented(bgwErrorCount > 1
                         ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY
-                        : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE);
-
-                    sb.Append(errorSb);
+                        : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE).AppendLine();
+                    sb.AppendIndented(errorSb);
                 }
                 else if (!bgw.IsBusy)
                 {
-                    sb.AppendLine(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE);
+                    sb.AppendIndented(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE).AppendLine();
                 }
 
                 sb.AppendLine();
