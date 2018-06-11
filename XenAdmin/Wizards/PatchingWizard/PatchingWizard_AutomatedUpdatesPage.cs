@@ -55,6 +55,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private bool _thisPageIsCompleted = false;
+        private bool _someWorkersFailed = false;
 
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
 
@@ -69,6 +70,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         public KeyValuePair<XenServerPatch, string> PatchFromDisk { private get; set; }
 
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
+        private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
 
         public PatchingWizard_AutomatedUpdatesPage()
         {
@@ -136,6 +138,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 labelTitle.Text = Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE;
             else if (WizardMode == WizardMode.NewVersion)
                 labelTitle.Text = Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
+            
+            ToggleRetryButton();
 
             if (!StartUpgradeWorkers())
             {
@@ -213,17 +217,18 @@ namespace XenAdmin.Wizards.PatchingWizard
                             if (action != null && delayedActionsPerHost.All(a => a.GetType() != action.GetType()))
                                 delayedActionsPerHost.Add(action);
                         }
+                        var isLastHostInPool = hosts.IndexOf(host) == hosts.Count - 1;
+                        if (isLastHostInPool)
+                        {
+                            // add cleanup action for current patch at the end of the update seuence for the last host in the pool
+                            planActionsPerHost.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+                        }
                     }
 
                     planActions.Add(new HostActionTuple(host, planActionsPerHost, delayedActionsPerHost));
                 }
 
                 var finalActions = new List<PlanAction>();
-
-                //clean up master at the end
-                foreach (var patch in uploadedPatches)
-                    finalActions.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
-
                 //add a revert pre-check action for this pool
                 var problemsToRevert = ProblemsResolvedPreCheck.Where(p => hosts.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList();
                 if (problemsToRevert.Count > 0)
@@ -271,7 +276,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                         actionsWorker.DoneActions.Add(action);
                         actionsWorker.InProgressActions.Remove(action);
 
-                        progressBar.Value += e.ProgressPercentage / backgroundWorkers.Count; //extend with error handling related numbers
+                        if (action.Error == null)
+                        {
+                            // remove the successful action from the cleanup actions (we are running the cleanup actions in case of failures or if the user cancelled the process, but we shouldn't re-run the actions that have already been run)
+                            actionsWorker.CleanupActions.Remove(action);
+
+                            // only increase the progress if the action succeeded
+                            progressBar.Value += e.ProgressPercentage/backgroundWorkers.Count;
+                        }
                     }
                 }
 
@@ -455,8 +467,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 doWorkEventArgs.Result = new Exception(action.Title, e);
 
+
+                failedWorkers.Add(sender as UpdateProgressBackgroundWorker);
+                bgw.ReportProgress(0);
+
                 //this pool failed, we will stop here, but try to remove update files at least
-                try
+                /*try
                 {
                     if (action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction)
                         return;
@@ -487,14 +503,20 @@ namespace XenAdmin.Wizards.PatchingWizard
                 finally
                 {
                     bgw.ReportProgress(0);
-                }
+                }*/
             }
         }
 
         private void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
         {
-            action.OnProgressChange += action_OnProgressChange;
+            if (bgw.DoneActions.Contains(action) && action.Error == null) // this action was completed successfully, do not run it again
+                return;
 
+            // if we retry a failed action, we need to firstly remove it from DoneActions and reset it's Error
+            bgw.DoneActions.Remove(action); 
+            action.Error = null; 
+
+            action.OnProgressChange += action_OnProgressChange;
             bgw.ReportProgress(0, action);
             action.Run();
 
@@ -523,6 +545,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                             : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE;
                         pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
                         panel1.Visible = true;
+
+                        _someWorkersFailed = true;
                     }
                 }
 
@@ -536,9 +560,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                             : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
                         pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
                         panel1.Visible = true;
+                        progressBar.Value = 100;
                     }
-
-                    progressBar.Value = 100;
+                    
+                    // show the retry button, if needed
+                    ToggleRetryButton();
+                    
                     _thisPageIsCompleted = true;
                     _cancelEnabled = false;
                     _nextEnabled = true;
@@ -566,7 +593,32 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        private void RetryFailedActions()
+        {
+            _someWorkersFailed = false;
+            panel1.Visible = false;
+            ToggleRetryButton();
+
+            var workers = new List<UpdateProgressBackgroundWorker>(failedWorkers);
+            failedWorkers.Clear();
+
+            foreach (var failedWorker in workers)
+            {
+                failedWorker.RunWorkerAsync();
+            }
+        }
+
+        private void ToggleRetryButton()
+        {
+            labelRetry.Visible = buttonRetry.Visible = _someWorkersFailed;
+        }
+
         #endregion
+
+        private void retryButton_Click(object sender, EventArgs e)
+        {
+            RetryFailedActions();
+        }
     }
 }
 

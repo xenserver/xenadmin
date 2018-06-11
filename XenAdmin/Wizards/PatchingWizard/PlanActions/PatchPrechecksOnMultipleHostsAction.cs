@@ -46,7 +46,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Host host;
 
         public PatchPrecheckOnHostPlanAction(IXenConnection connection, XenServerPatch patch, Host host, List<PoolPatchMapping> mappings)
-            : base(connection, string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, connection.Name))
+            : base(connection, string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, host.Name()))
         {
             this.patch = patch;
             this.host = host;
