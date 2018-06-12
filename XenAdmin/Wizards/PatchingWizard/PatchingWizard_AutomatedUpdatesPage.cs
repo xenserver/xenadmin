@@ -267,13 +267,15 @@ namespace XenAdmin.Wizards.PatchingWizard
                 PlanAction action = (PlanAction)e.UserState;
                 if (action != null)
                 {
-                    if (e.ProgressPercentage == 0)
+                    if (!action.IsComplete)
                     {
-                        actionsWorker.InProgressActions.Add(action);
+                        if (!actionsWorker.InProgressActions.Contains(action)) 
+                            actionsWorker.InProgressActions.Add(action);
                     }
                     else
                     {
-                        actionsWorker.DoneActions.Add(action);
+                        if (!actionsWorker.DoneActions.Contains(action)) 
+                            actionsWorker.DoneActions.Add(action);
                         actionsWorker.InProgressActions.Remove(action);
 
                         if (action.Error == null)
@@ -458,7 +460,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (action.Error == null)
                     action.Error = new Exception(Messages.ERROR_UNKNOWN);
 
-                bgw.DoneActions.Add(action);
+                if (!bgw.DoneActions.Contains(action)) 
+                    bgw.DoneActions.Add(action);
                 bgw.InProgressActions.Remove(action);
 
                 log.Error("Failed to carry out plan.", e);
@@ -511,7 +514,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (bgw.DoneActions.Contains(action) && action.Error == null) // this action was completed successfully, do not run it again
                 return;
 
-            // if we retry a failed action, we need to firstly remove it from DoneActions and reset it's Error
+            // if we retry a failed action, we need to firstly remove it from DoneActions and reset its Error
             bgw.DoneActions.Remove(action); 
             action.Error = null; 
 
@@ -602,6 +605,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 failedWorker.RunWorkerAsync();
             }
+
+            _thisPageIsCompleted = false;
+            _cancelEnabled = true;
+            _nextEnabled = false;
+            OnPageUpdated();
         }
 
         private void ToggleRetryButton()
