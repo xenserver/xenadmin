@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using XenAdmin.Alerts;
 using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Diagnostics.Problems.HostProblem;
@@ -42,6 +43,8 @@ namespace XenAdmin.Diagnostics.Checks
     class ServerSelectionCheck : Check
     {
         private readonly Pool_update update;
+        private readonly XenServerPatchAlert alert;
+        private readonly bool isNewVersionUpdate;
         private readonly Pool pool;
         private readonly List<Host> selectedServers;
 
@@ -51,6 +54,16 @@ namespace XenAdmin.Diagnostics.Checks
             this.pool = pool;
             this.update = update;
             this.selectedServers = selectedServers;
+            isNewVersionUpdate = false;
+        }
+
+        public ServerSelectionCheck(Pool pool, XenServerPatchAlert alert, List<Host> selectedServers)
+            : base(Helpers.GetMaster(pool.Connection))
+        {
+            this.pool = pool;
+            this.alert = alert;
+            this.selectedServers = selectedServers;
+            isNewVersionUpdate = true;
         }
 
         protected override Problem RunCheck()
@@ -58,9 +71,30 @@ namespace XenAdmin.Diagnostics.Checks
             if (!Host.IsLive())
                 return new HostNotLiveWarning(this, Host);
 
+            if (isNewVersionUpdate)
+            {
+                //Must select all hosts in a homogeneous pool
+                if (pool.IsPoolFullyUpgraded() && pool.Connection.Cache.Hosts.Any(h => !selectedServers.Contains(h)))
+                    return new ServerSelectionProblem(this, pool);
+
+                //For mixed pool, precheck blocks update to a new version which is higher than master without selecting it
+                if (!pool.IsPoolFullyUpgraded() &&
+                    Helpers.productVersionCompare(alert.NewServerVersion.Version.ToString(), Host.ProductVersion()) > 0 &&
+                    !selectedServers.Contains(Host))
+                    return new MasterVersionNotCompatibleProblem(this, pool);
+
+                //Otherwise, skip the precheck for a mixed pool and issue warning.
+                //Because the version update may not be compatible to all hosts.
+                if (!pool.IsPoolFullyUpgraded())
+                    return new MixedPoolServerSelectionWarning(this, pool);
+
+                return null;
+            }
+
             if (update == null || !update.EnforceHomogeneity()) 
                 return null;
 
+            //If mixed pool, skip the precheck and issue warning, because the update may not be compatible to all servers
             if (!pool.IsPoolFullyUpgraded())
                 return new MixedPoolServerSelectionWarning(this, pool);
             

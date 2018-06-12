@@ -27086,7 +27086,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more of the automated update processes were not completed successfully..
+        ///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY {
             get {
@@ -27095,7 +27095,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The automated update process was not completed successfuly..
+        ///   Looks up a localized string similar to The automated updates process was not completed successfuly..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE {
             get {
@@ -27131,7 +27131,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All automated update processes were completed successfuly..
+        ///   Looks up a localized string similar to All automated updates processes were completed successfuly..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY {
             get {
@@ -27140,7 +27140,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The automated update process was completed successfuly..
+        ///   Looks up a localized string similar to The automated updates process was completed successfuly..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE {
             get {
@@ -34717,6 +34717,15 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_LOCAL_STORAGE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_LOCAL_STORAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Master version is not compatible for this update. Please include master in the selection and try again..
+        /// </summary>
+        public static string UPDATES_WIZARD_MASTER_VERSION_NOT_COMPATIBLE_PROBLEM {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_MASTER_VERSION_NOT_COMPATIBLE_PROBLEM", resourceCulture);
             }
         }
         

@@ -416,15 +416,21 @@ namespace XenAdmin.Core
                 if (master == null || pool == null)
                     continue;
 
-                var serverVersions = GetServerVersions(master, xenServerVersions);
+                var serverVersions = new List<XenServerVersion>();
+                foreach (Host host in hosts)
+                {
+                    var serverVersion = GetServerVersions(host, xenServerVersions);
+                    serverVersions.AddRange(serverVersion);
+                }
+                serverVersions = serverVersions.Distinct().ToList();
 
                 if (serverVersions.Count == 0)
                     continue;
 
                 foreach (XenServerVersion xenServerVersion in serverVersions)
                 {
-                    XenServerVersion version = xenServerVersion;
-                    List<XenServerPatch> patches = xenServerPatches.FindAll(patch => version.Patches.Contains(patch));
+                    XenServerVersion patchApplicableVersion = xenServerVersion;
+                    List<XenServerPatch> patches = xenServerPatches.FindAll(patch => patchApplicableVersion.Patches.Contains(patch));
 
                     if (patches.Count == 0)
                         continue;
@@ -446,7 +452,7 @@ namespace XenAdmin.Core
 
                         XenServerPatch serverPatch = xenServerPatch;
 
-                        var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host));
+                        var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host, patchApplicableVersion));
         
                         if (noPatchHosts.Count() == hosts.Count)
                             alert.IncludeConnection(xenConnection);
@@ -459,10 +465,14 @@ namespace XenAdmin.Core
             return alerts;
         }
 
-        private static bool PatchCanBeInstalledOnHost(XenServerPatch serverPatch, Host host)
+        private static bool PatchCanBeInstalledOnHost(XenServerPatch serverPatch, Host host, XenServerVersion version)
         {
             Debug.Assert(serverPatch != null);
             Debug.Assert(host != null);
+
+            if (Helpers.productVersionCompare(version.Version.ToString(), host.ProductVersion()) != 0)
+                return false;
+
             // A patch can be installed on a host if:
             // 1. it is not already installed and
             // 2. the host has all the required patches installed and
@@ -609,9 +619,9 @@ namespace XenAdmin.Core
             Debug.Assert(alert != null);
 
             // the pool has to be homogeneous
-            var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
-            if (version == null)
-                return null;
+            //var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
+            //if (version == null)
+            //    return null;
 
             var minimalPatches = new List<XenServerPatch> {alert.Patch};
 
@@ -749,7 +759,7 @@ namespace XenAdmin.Core
                 // - there is no patch (amongst the current version patches) that can update to this version OR, if there is a patch, the patch cannot be installed
                 var patchApplicable = patch != null && GetServerVersions(master, XenServerVersions).Any(v => v.Patches.Contains(patch));
                 var outOfDateHosts = hosts.Where(host => new Version(Helpers.HostProductVersion(host)) < version.Version
-                    && (!patchApplicable || !PatchCanBeInstalledOnHost(patch, host)));
+                    && (!patchApplicable || !PatchCanBeInstalledOnHost(patch, host, version)));
 
                 if (outOfDateHosts.Count() == hosts.Count)
                     alert.IncludeConnection(xc);
