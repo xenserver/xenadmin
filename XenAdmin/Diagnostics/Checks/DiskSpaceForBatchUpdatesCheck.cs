@@ -29,14 +29,11 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using XenAPI;
 using XenAdmin.Diagnostics.Problems;
 using XenAdmin.Core;
 using System.IO;
 using XenAdmin.Diagnostics.Problems.HostProblem;
-using System.Text.RegularExpressions;
-using System.Xml;
 using System.Collections.Generic;
 using XenAdmin.Actions;
 using System.Linq;
@@ -46,12 +43,12 @@ namespace XenAdmin.Diagnostics.Checks
 {
     class DiskSpaceForAutomatedUpdatesCheck : Check
     {
-        private readonly long size = 0;
+        private readonly Dictionary<Host, List<XenServerPatch>> updateSequence;
 
-        public DiskSpaceForAutomatedUpdatesCheck(Host host, long size)
+        public DiskSpaceForAutomatedUpdatesCheck(Host host, Dictionary<Host, List<XenServerPatch>> updateSequence)
             : base(host)
         {
-            this.size = size;
+            this.updateSequence = updateSequence;
         }
 
         protected override Problem RunCheck()
@@ -62,25 +59,33 @@ namespace XenAdmin.Diagnostics.Checks
             if (!Host.Connection.IsConnected)
                 throw new EndOfStreamException(Helpers.GetName(Host.Connection));
 
-            if (Helpers.CreamOrGreater(Host.Connection))
+            if (!Helpers.CreamOrGreater(Host.Connection))
+                return null;
+
+            var elyOrGreater = Helpers.ElyOrGreater(Host.Connection);
+
+            // check the disk space on host
+            var size = elyOrGreater
+                ? updateSequence[Host].Sum(p => p.InstallationSize) // all updates on this host (for installation)
+                : Host.IsMaster()
+                    ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(a => a).Max(p => p.InstallationSize) // master: all updates on master (for installation) + largest update in pool (for upload)
+                    : updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence[Host].Max(p => p.InstallationSize); // non-master: all updates on this host (for installation) + largest on this host (for upload)
+
+            var action = new GetDiskSpaceRequirementsAction(Host, size, true, DiskSpaceRequirements.OperationTypes.automatedUpdates);
+
+            try
             {
-                var action = new GetDiskSpaceRequirementsAction(Host, size, true, DiskSpaceRequirements.OperationTypes.automatedUpdates);
-
-                try
-                {
-                    action.RunExternal(action.Session);
-                }
-                catch
-                {
-                    log.WarnFormat("Could not get disk space requirements");
-                }
-
-                if (action.Succeeded && action.DiskSpaceRequirements.AvailableDiskSpace < size)
-                    return new HostOutOfSpaceProblem(this, Host, action.DiskSpaceRequirements);
+                action.RunExternal(action.Session);
+            }
+            catch
+            {
+                log.WarnFormat("Could not get disk space requirements");
             }
 
+            if (action.Succeeded && action.DiskSpaceRequirements.AvailableDiskSpace < size)
+                return new HostOutOfSpaceProblem(this, Host, action.DiskSpaceRequirements);
+
             return null;
-            
         }
 
         public override string Description
