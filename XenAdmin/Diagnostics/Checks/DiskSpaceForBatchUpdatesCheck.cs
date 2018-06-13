@@ -68,8 +68,8 @@ namespace XenAdmin.Diagnostics.Checks
             var size = elyOrGreater
                 ? updateSequence[Host].Sum(p => p.InstallationSize) // all updates on this host (for installation)
                 : Host.IsMaster()
-                    ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(a => a).Max(p => p.InstallationSize) // master: all updates on master (for installation) + largest update in pool (for upload)
-                    : updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence[Host].Max(p => p.InstallationSize); // non-master: all updates on this host (for installation) + largest on this host (for upload)
+                    ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(a => a).Sum(p => p.InstallationSize) // master: all updates on master (for installation) + all updates in pool (for upload)
+                    : updateSequence[Host].Sum(p => p.InstallationSize) * 2; // non-master: all updates on this host x 2 (for installation + upload)
 
             var action = new GetDiskSpaceRequirementsAction(Host, size, true, DiskSpaceRequirements.OperationTypes.automatedUpdates);
 
