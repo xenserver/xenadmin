@@ -85,6 +85,33 @@ namespace XenAdmin.Diagnostics.Checks
             if (action.Succeeded && action.DiskSpaceRequirements.AvailableDiskSpace < size)
                 return new HostOutOfSpaceProblem(this, Host, action.DiskSpaceRequirements);
 
+            // check the disk space for uploading the update files to the pool's SRs (only needs to be done once, so only run this on master)
+            if (elyOrGreater && Host.IsMaster())
+            {
+                var allPatches = updateSequence.Values.SelectMany(p => p).Distinct().ToList();
+                var maxFileSize = allPatches.Max(p => p.DownloadSize);
+
+                var availableSRs = Host.Connection.Cache.SRs.Where(sr => sr.SupportsVdiCreate() && !sr.IsDetached()).ToList();
+                var maxSrSize = availableSRs.Max(sr => sr.FreeSpace());
+
+                // can accomodate the largest file?
+                if (maxSrSize < maxFileSize)
+                {
+                    return new HostOutOfSpaceProblem(this, Host,
+                        new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.automatedUpdatesUploadOne, Host, null, maxFileSize, maxSrSize, 0));
+                }
+
+                // can accomodate all files?
+                var totalFileSize = allPatches.Sum(p => p.DownloadSize);
+                var totalAvailableSpace = availableSRs.Sum(sr => sr.FreeSpace());
+
+                if (totalAvailableSpace < totalFileSize)
+                {
+                    return new HostOutOfSpaceProblem(this, Host,
+                        new DiskSpaceRequirements(DiskSpaceRequirements.OperationTypes.automatedUpdatesUploadAll, Host, null, totalFileSize, totalAvailableSpace, 0));
+                }
+            }
+
             return null;
         }
 
