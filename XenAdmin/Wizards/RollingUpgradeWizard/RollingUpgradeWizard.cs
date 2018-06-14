@@ -97,6 +97,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (prevPageType == typeof(RollingUpgradeWizardSelectPool))
             {
                 var selectedMasters = RollingUpgradeWizardSelectPool.SelectedMasters;
+                RollingUpgradeWizardUpgradeModePage.SelectedMasters = selectedMasters;
                 RollingUpgradeWizardPrecheckPage.SelectedMasters = selectedMasters;
                 RollingUpgradeWizardInstallMethodPage.SelectedMasters = selectedMasters;
                 RollingUpgradeReadyToUpgradePage.SelectedMasters = selectedMasters;
@@ -114,6 +115,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
                 RollingUpgradeWizardPrecheckPage.ManualModeSelected = manualModeSelected;
                 RollingUpgradeUpgradePage.ManualModeSelected = manualModeSelected;
+
+                var applyUpdatesToNewVersion = RollingUpgradeWizardUpgradeModePage.ApplyUpdatesToNewVersion;
+                RollingUpgradeWizardPrecheckPage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
+                RollingUpgradeUpgradePage.ApplyUpdatesToNewVersion = applyUpdatesToNewVersion;
             }
             else if (prevPageType == typeof(RollingUpgradeWizardInstallMethodPage))
                 RollingUpgradeUpgradePage.InstallMethodConfig = RollingUpgradeWizardInstallMethodPage.InstallMethodConfig;
