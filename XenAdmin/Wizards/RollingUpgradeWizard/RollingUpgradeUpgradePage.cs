@@ -160,7 +160,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         public Dictionary<string, string> InstallMethodConfig { private get; set; }
         public List<Problem> ProblemsResolvedPreCheck { private get; set; }
         public RollingUpgradeStatus UpgradeStatus { get; private set; }
-
+        public bool ApplyUpdatesToNewVersion { private get; set; }
         #endregion
 
         private void onFrameChanged(object sender, EventArgs e)
