@@ -455,17 +455,10 @@ namespace XenAPI
         {
             return BoolKeyPreferTrue(h.license_params, "restrict_corosync");
         }
-
-        #region Experimental Features
-
+        
         public static bool CorosyncDisabled(Host h)
         {
             return  RestrictCorosync(h) && FeatureDisabled(h, "corosync");
-        }
-
-        public static bool SriovNetworkDisabled(Host h)
-        {
-            return RestrictSriovNetwork(h) && FeatureDisabled(h, "network_sriov");
         }
 
         public static bool FeatureDisabled(Host h, string featureName)
@@ -477,8 +470,6 @@ namespace XenAPI
             }
             return false;
         }
-
-        #endregion
 
         public bool HasPBDTo(SR sr)
         {
