@@ -429,8 +429,8 @@ namespace XenAdmin.Core
 
                 foreach (XenServerVersion xenServerVersion in serverVersions)
                 {
-                    XenServerVersion patchApplicableVersion = xenServerVersion;
-                    List<XenServerPatch> patches = xenServerPatches.FindAll(patch => patchApplicableVersion.Patches.Contains(patch));
+                    XenServerVersion version = xenServerVersion;
+                    List<XenServerPatch> patches = xenServerPatches.FindAll(patch => version.Patches.Contains(patch));
 
                     if (patches.Count == 0)
                         continue;
@@ -452,7 +452,7 @@ namespace XenAdmin.Core
 
                         XenServerPatch serverPatch = xenServerPatch;
 
-                        var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host, patchApplicableVersion));
+                        var noPatchHosts = hosts.Where(host => PatchCanBeInstalledOnHost(serverPatch, host, version));
         
                         if (noPatchHosts.Count() == hosts.Count)
                             alert.IncludeConnection(xenConnection);
@@ -465,12 +465,12 @@ namespace XenAdmin.Core
             return alerts;
         }
 
-        private static bool PatchCanBeInstalledOnHost(XenServerPatch serverPatch, Host host, XenServerVersion version)
+        private static bool PatchCanBeInstalledOnHost(XenServerPatch serverPatch, Host host, XenServerVersion patchApplicableVersion)
         {
             Debug.Assert(serverPatch != null);
             Debug.Assert(host != null);
 
-            if (Helpers.productVersionCompare(version.Version.ToString(), host.ProductVersion()) != 0)
+            if (Helpers.productVersionCompare(patchApplicableVersion.Version.ToString(), host.ProductVersion()) != 0)
                 return false;
 
             // A patch can be installed on a host if:
@@ -617,11 +617,6 @@ namespace XenAdmin.Core
         {
             Debug.Assert(conn != null);
             Debug.Assert(alert != null);
-
-            // the pool has to be homogeneous
-            //var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
-            //if (version == null)
-            //    return null;
 
             var minimalPatches = new List<XenServerPatch> {alert.Patch};
 

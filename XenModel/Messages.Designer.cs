@@ -34721,7 +34721,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Master version is not compatible for this update. Please include master in the selection and try again..
+        ///   Looks up a localized string similar to {0}: The update needs to also be applied on the master..
         /// </summary>
         public static string UPDATES_WIZARD_MASTER_VERSION_NOT_COMPATIBLE_PROBLEM {
             get {
