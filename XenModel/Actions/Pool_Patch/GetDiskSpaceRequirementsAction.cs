@@ -193,6 +193,7 @@ namespace XenAdmin.Actions
         public string GetSpaceRequirementsMessage()
         {
             StringBuilder sbMessage = new StringBuilder();
+            var pool = Helpers.GetPool(Host.Connection);
 
             switch (Operation)
             {
@@ -206,10 +207,10 @@ namespace XenAdmin.Actions
                     sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE, Host.Name());
                     break;
                 case OperationTypes.automatedUpdatesUploadOne:
-                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ONE, Host.Name());
+                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ONE, pool != null ? pool.Name() : Host.Name());
                     break;
                 case OperationTypes.automatedUpdatesUploadAll:
-                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ALL, Host.Name());
+                    sbMessage.AppendFormat(Messages.NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ALL, pool != null ? pool.Name() : Host.Name());
                     break;
             }
 

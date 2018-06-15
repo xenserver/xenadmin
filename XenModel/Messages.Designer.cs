@@ -26227,7 +26227,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is not enough space on your SRs to upload all the update files required by the automated updates..
+        ///   Looks up a localized string similar to There is not enough space on the SRs on &apos;{0}&apos; to upload all the update files required by the automated updates..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ALL {
             get {
@@ -26236,7 +26236,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is not enough space on any of the SRs to upload an update file required by the automated updates..
+        ///   Looks up a localized string similar to There is not enough space on any of the SRs on &apos;{0}&apos; to upload an update file required by the automated updates..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ONE {
             get {
