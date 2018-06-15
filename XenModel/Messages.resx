@@ -9104,7 +9104,7 @@ It is strongly recommended that you Cancel and apply the latest version of the p
     <value>There is not enough space to update '{0}' with automated updates.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD" xml:space="preserve">
-    <value>There is not enough space to upload the required updates.</value>
+    <value>There is not enough space to upload the required updates to '{0}'.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ALL" xml:space="preserve">
     <value>There is not enough space on your SRs to upload all the update files required by the automated updates.</value>

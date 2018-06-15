@@ -26218,7 +26218,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is not enough space to upload the required updates..
+        ///   Looks up a localized string similar to There is not enough space to upload the required updates to &apos;{0}&apos;..
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD {
             get {

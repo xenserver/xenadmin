@@ -65,13 +65,13 @@ namespace XenAdmin.Diagnostics.Checks
             var elyOrGreater = Helpers.ElyOrGreater(Host.Connection);
 
             // check the disk space on host
-            var size = elyOrGreater
+            var requiredDiskSpace = elyOrGreater
                 ? updateSequence[Host].Sum(p => p.InstallationSize) // all updates on this host (for installation)
                 : Host.IsMaster()
-                    ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(a => a).Sum(p => p.InstallationSize) // master: all updates on master (for installation) + all updates in pool (for upload)
+                    ? updateSequence[Host].Sum(p => p.InstallationSize) + updateSequence.Values.SelectMany(p => p).Distinct().Sum(p => p.InstallationSize) // master: all updates on master (for installation) + all updates in pool (for upload)
                     : updateSequence[Host].Sum(p => p.InstallationSize) * 2; // non-master: all updates on this host x 2 (for installation + upload)
 
-            var action = new GetDiskSpaceRequirementsAction(Host, size, true, DiskSpaceRequirements.OperationTypes.automatedUpdates);
+            var action = new GetDiskSpaceRequirementsAction(Host, requiredDiskSpace, true, DiskSpaceRequirements.OperationTypes.automatedUpdates);
 
             try
             {
@@ -82,7 +82,7 @@ namespace XenAdmin.Diagnostics.Checks
                 log.WarnFormat("Could not get disk space requirements");
             }
 
-            if (action.Succeeded && action.DiskSpaceRequirements.AvailableDiskSpace < size)
+            if (action.Succeeded && action.DiskSpaceRequirements.AvailableDiskSpace < requiredDiskSpace)
                 return new HostOutOfSpaceProblem(this, Host, action.DiskSpaceRequirements);
 
             // check the disk space for uploading the update files to the pool's SRs (only needs to be done once, so only run this on master)
