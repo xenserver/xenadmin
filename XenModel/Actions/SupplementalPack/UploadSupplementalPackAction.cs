@@ -328,7 +328,7 @@ namespace XenAdmin.Actions
                 }
                 else
                 {
-                    var firstSrCanCreateVdi = Connection.Cache.SRs.First(sr => CanCreateVdi(sr));
+                    var firstSrCanCreateVdi = Connection.Cache.SRs.FirstOrDefault(sr => CanCreateVdi(sr));
                     if (firstSrCanCreateVdi != null)
                         srList.Add(firstSrCanCreateVdi);
                 }

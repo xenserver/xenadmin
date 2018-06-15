@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -26218,6 +26218,33 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is not enough space to upload the required updates to &apos;{0}&apos;..
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is not enough space on the SRs on &apos;{0}&apos; to upload all the update files required by the automated updates..
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ALL {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is not enough space on any of the SRs on &apos;{0}&apos; to upload an update file required by the automated updates..
+        /// </summary>
+        public static string NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ONE {
+            get {
+                return ResourceManager.GetString("NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Space available: {0}.
         /// </summary>
         public static string NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE {
@@ -27086,7 +27113,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more of the automated update processes were not completed successfully..
+        ///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY {
             get {
@@ -27095,7 +27122,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The automated update process was not completed successfuly..
+        ///   Looks up a localized string similar to The automated updates process was not completed successfuly..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE {
             get {
@@ -27131,7 +27158,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All automated update processes were completed successfuly..
+        ///   Looks up a localized string similar to All automated updates processes were completed successfuly..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY {
             get {
@@ -27140,7 +27167,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The automated update process was completed successfuly..
+        ///   Looks up a localized string similar to The automated updates process was completed successfuly..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE {
             get {

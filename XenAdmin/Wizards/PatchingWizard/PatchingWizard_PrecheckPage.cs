@@ -411,19 +411,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     log.InfoFormat("Minimal patches for {0}: {1}", pool.Name(), string.Join(",", minimalPatches.Select(p => p.Name)));
 
-                    bool elyOrGreater = Helpers.ElyOrGreater(pool.Connection);
-
                     foreach (Host host in us.Keys)
                     {
-                        diskChecks.Add(
-                            new DiskSpaceForAutomatedUpdatesCheck(
-                                host,
-                                elyOrGreater
-                                    ? us[host].Sum(p => p.InstallationSize) // all updates on this host
-                                    : host.IsMaster()
-                                        ? us[host].Sum(p => p.InstallationSize) + us.Values.SelectMany(a => a).Max(p => p.InstallationSize) // master: all updates on master + largest update in pool
-                                        : us[host].Sum(p => p.InstallationSize) + us[host].Max(p => p.InstallationSize) // non-master: all updates on this host + largest on this host
-                        ));
+                        diskChecks.Add(new DiskSpaceForAutomatedUpdatesCheck(host, us));
                     }
                 }
                 groups.Add(new CheckGroup(Messages.PATCHINGWIZARD_PRECHECKPAGE_CHECKING_DISK_SPACE, diskChecks));

@@ -2139,6 +2139,11 @@ To continue, either select different NICs for the bond, or disable HA, create th
 
 Both types of interface cannot be added to the same bond. Choose different bond members, or move the management interfaces before creating the bond.</value>
   </data>
+  <data name="BOND_CREATE_WILL_DISTURB_CLUSTERING" xml:space="preserve">
+    <value>Creating this bond will automatically move the clustering network on one of your selected bond members to the bond itself:
+
+- If your network configuration is incorrect then hosts may permanently lose the connection to the clustering network, which will cause undesired host fences.</value>
+  </data>
   <data name="BOND_CREATE_WILL_DISTURB_PRIMARY" xml:space="preserve">
     <value>Creating this bond will automatically move the management interface on one of your selected bond members to the bond itself:
 
@@ -2148,11 +2153,6 @@ Both types of interface cannot be added to the same bond. Choose different bond 
   </data>
   <data name="BOND_CREATE_WILL_DISTURB_SECONDARY" xml:space="preserve">
     <value>Creating this bond will disrupt traffic through the secondary interfaces on the bond members while the interfaces are moved onto the bond itself.</value>
-  </data>
-  <data name="BOND_CREATE_WILL_DISTURB_CLUSTERING" xml:space="preserve">
-    <value>Creating this bond will automatically move the clustering network on one of your selected bond members to the bond itself:
-
-- If your network configuration is incorrect then hosts may permanently lose the connection to the clustering network, which will cause undesired host fences.</value>
   </data>
   <data name="BOND_DELETE_CONTINUE" xml:space="preserve">
     <value>&amp;Delete bond anyway</value>
@@ -9102,6 +9102,15 @@ It is strongly recommended that you Cancel and apply the latest version of the p
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE" xml:space="preserve">
     <value>There is not enough space to update '{0}' with automated updates.</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD" xml:space="preserve">
+    <value>There is not enough space to upload the required updates to '{0}'.</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ALL" xml:space="preserve">
+    <value>There is not enough space on the SRs on '{0}' to upload all the update files required by the automated updates.</value>
+  </data>
+  <data name="NOT_ENOUGH_SPACE_MESSAGE_AUTO_UPDATE_UPLOAD_ONE" xml:space="preserve">
+    <value>There is not enough space on any of the SRs on '{0}' to upload an update file required by the automated updates.</value>
   </data>
   <data name="NOT_ENOUGH_SPACE_MESSAGE_AVAILABLE_SPACE" xml:space="preserve">
     <value>Space available: {0}</value>
