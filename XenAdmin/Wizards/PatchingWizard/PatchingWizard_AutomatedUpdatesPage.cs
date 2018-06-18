@@ -32,7 +32,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Reflection;
 using System.Threading;
 using log4net;
@@ -139,8 +138,6 @@ namespace XenAdmin.Wizards.PatchingWizard
             else if (WizardMode == WizardMode.NewVersion)
                 labelTitle.Text = Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
             
-            ToggleRetryButton();
-
             if (!StartUpgradeWorkers())
             {
                 _thisPageIsCompleted = true;
@@ -470,42 +467,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 doWorkEventArgs.Result = new Exception(action.Title, e);
 
 
-                failedWorkers.Add(sender as UpdateProgressBackgroundWorker);
+                failedWorkers.Add(bgw);
                 bgw.ReportProgress(0);
-
-                //this pool failed, we will stop here, but try to remove update files at least
-                /*try
-                {
-                    if (action is DownloadPatchPlanAction || action is UploadPatchToMasterPlanAction)
-                        return;
-
-                    var pos = 0;
-                    if (action is RemoveUpdateFileFromMasterPlanAction)
-                        pos = bgw.FinalActions.IndexOf(action) + 1;
-
-                    for (int i = pos; i < bgw.FinalActions.Count; i++)
-                    {
-                        action = bgw.FinalActions[i];
-
-                        if (bgw.CancellationPending)
-                        {
-                            doWorkEventArgs.Cancel = true;
-                            return;
-                        }
-
-                        if (action is RemoveUpdateFileFromMasterPlanAction)
-                            RunPlanAction(bgw, action);
-                    }
-                }
-                catch (Exception ex2)
-                {
-                    //already in an error case - best effort
-                    log.Error("Failed to clean up (this was a best effort attempt)", ex2);
-                }
-                finally
-                {
-                    bgw.ReportProgress(0);
-                }*/
             }
         }
 
@@ -552,6 +515,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                             ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY
                             : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE;
                         pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
+                        buttonRetry.Visible = true;
                     }
                     else
                     {
@@ -559,12 +523,10 @@ namespace XenAdmin.Wizards.PatchingWizard
                             ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY
                             : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
                         pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
+                        buttonRetry.Visible = false;
                         progressBar.Value = 100;
                     }
-                    
-                    // show the retry button, if needed
-                    ToggleRetryButton();
-                    
+                   
                     _thisPageIsCompleted = true;
                     _cancelEnabled = false;
                     _nextEnabled = true;
@@ -596,7 +558,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             _someWorkersFailed = false;
             panel1.Visible = false;
-            ToggleRetryButton();
 
             var workers = new List<UpdateProgressBackgroundWorker>(failedWorkers);
             failedWorkers.Clear();
@@ -612,14 +573,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             OnPageUpdated();
         }
 
-        private void ToggleRetryButton()
-        {
-            labelRetry.Visible = buttonRetry.Visible = _someWorkersFailed;
-        }
-
         #endregion
 
-        private void retryButton_Click(object sender, EventArgs e)
+        private void buttonRetry_Click(object sender, EventArgs e)
         {
             RetryFailedActions();
         }
