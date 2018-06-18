@@ -94,7 +94,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             // 
             resources.ApplyResources(this.applyUpdatesLabel, "applyUpdatesLabel");
             this.applyUpdatesLabel.Name = "applyUpdatesLabel";
-            this.applyUpdatesLabel.Click += new System.EventHandler(this.label5_Click);
             // 
             // applyUpdatesCheckBox
             // 
