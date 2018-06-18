@@ -11113,17 +11113,16 @@ Do you want to connect to the pool master '{1}'?</value>
   <data name="SRIOV_DISABLED" xml:space="preserve">
     <value>Yes (disabled)</value>
   </data>
-  <data name="SRIOV_ENABLE_REBOOT_WARNING" xml:space="preserve">
-    <value>These servers needs to be rebooted for this SR-IOV network to take effect:'{0}'</value>
-  </data>
   <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
     <value>SR-IOV networks require an SR-IOV capable NIC.</value>
   </data>
   <data name="SRIOV_NETWORK_CREATE" xml:space="preserve">
     <value>Create &amp;SR-IOV anyway</value>
   </data>
-  <data name="SRIOV_NETWORK_CREATE_WILL_DISTURB_CONNECTION" xml:space="preserve">
-    <value>Creating this SR-IOV network will have effects on network connection status and [XenCenter] connections to the pool will temporarily be disturbed</value>
+  <data name="SRIOV_NETWORK_CREATE_WARNING" xml:space="preserve">
+    <value>Creating this SR-IOV network will temporarily disturb [XenCenter] connections to the pool.
+
+You may need to reboot your server(s) to enable SR-IOV network.</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>
