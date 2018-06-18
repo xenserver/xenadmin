@@ -346,10 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="applyUpdatesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 274</value>
-  </data>
-  <data name="applyUpdatesCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 5, 3, 3</value>
+    <value>3, 272</value>
   </data>
   <data name="applyUpdatesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 14</value>
