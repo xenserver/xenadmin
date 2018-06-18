@@ -34748,6 +34748,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: The update needs to also be applied on the master..
+        /// </summary>
+        public static string UPDATES_WIZARD_MASTER_VERSION_NOT_COMPATIBLE_PROBLEM {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_MASTER_VERSION_NOT_COMPATIBLE_PROBLEM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}: Check skipped because the pool is partially upgraded..
         /// </summary>
         public static string UPDATES_WIZARD_MIXED_POOL_SERVER_SELECTION_WARNING {
