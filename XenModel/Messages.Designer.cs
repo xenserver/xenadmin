@@ -27113,7 +27113,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully..
+		///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY {
             get {
@@ -27122,7 +27122,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The automated updates process was not completed successfuly..
+        ///   Looks up a localized string similar to The automated updates process was not completed successfuly. The update process has been paused. Press Retry to resume it..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE {
             get {
