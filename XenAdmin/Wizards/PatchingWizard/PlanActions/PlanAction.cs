@@ -39,7 +39,7 @@ using XenAPI;
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 {
-    public abstract class PlanAction
+    public abstract class PlanAction : IEquatable<PlanAction>
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -197,6 +197,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 return (PercentComplete == 100 && !_running) || Error != null;
             }
+        }
+
+        public bool Equals(PlanAction other)
+        {
+            if (other == null)
+                return false;
+
+            return string.Equals(Title, other.Title, StringComparison.OrdinalIgnoreCase);
         }
 
         public override string ToString()
