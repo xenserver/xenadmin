@@ -225,8 +225,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                     return;
                 }
 
-                //unlicensed servers are not enabled
-                if (Host.RestrictBatchHotfixApply(host))
+                //check all hosts are licensed for automated updates (there may be restrictions on individual hosts)
+                if (host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
                 {
                     row.Enabled = false;
                     row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_HOST_UNLICENSED_FOR_AUTOMATED_UPDATES;
