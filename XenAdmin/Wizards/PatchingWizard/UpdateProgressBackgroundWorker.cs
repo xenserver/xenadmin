@@ -29,31 +29,31 @@
  * SUCH DAMAGE.
  */
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
-using HostActionTuple = System.Tuple<XenAPI.Host, System.Collections.Generic.List<XenAdmin.Wizards.PatchingWizard.PlanActions.PlanAction>, System.Collections.Generic.List<XenAdmin.Wizards.PatchingWizard.PlanActions.PlanAction>>;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
     class UpdateProgressBackgroundWorker : BackgroundWorker
     {
         private readonly int _actionsCount;
-        public List<HostActionTuple> HostActions { get; private set; }
+        public List<HostPlanActions> HostActions { get; private set; }
         public List<PlanAction> FinalActions { get; private set; }
         public List<PlanAction> CleanupActions { get; private set; }
         public readonly List<PlanAction> DoneActions = new List<PlanAction>();
         public readonly List<PlanAction> InProgressActions = new List<PlanAction>();
         public string Name { get; set; }
 
-        public UpdateProgressBackgroundWorker(List<HostActionTuple> planActions, List<PlanAction> finalActions)
+        public UpdateProgressBackgroundWorker(List<HostPlanActions> planActions, List<PlanAction> finalActions)
         {
             HostActions = planActions;
             FinalActions = finalActions;
             CleanupActions = finalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
-            _actionsCount = HostActions.Sum(t => t.Item2.Count + t.Item3.Count) + FinalActions.Count;
+
+            _actionsCount = HostActions.Sum(t => t.InitialPlanActions.Count + t.UpdatesPlanActions.Count + t.DelayedActions.Count) + FinalActions.Count;
+
         }
 
         public int ActionsCount
@@ -67,7 +67,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                 HostActions.ForEach(ha =>
                 {
                     var cur = ha;
-                    cur.Item2.ForEach(pa =>
+                    cur.InitialPlanActions.ForEach(pa =>
+                    {
+                        if (!pa.IsComplete)
+                            pa.Cancel();
+                    });
+
+                    cur.UpdatesPlanActions.ForEach(pa =>
                     {
                         if (!pa.IsComplete)
                             pa.Cancel();
@@ -75,6 +81,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                 });
 
             base.CancelAsync();
+        }
+    }
+
+    public struct HostPlanActions
+    {
+        public XenAPI.Host Host;
+        public List<PlanAction> InitialPlanActions;
+        public List<PlanAction> UpdatesPlanActions;
+        public List<PlanAction> DelayedActions;
+
+        public HostPlanActions(XenAPI.Host host)
+        {
+            Host = host;
+            InitialPlanActions = new List<PlanAction>();
+            UpdatesPlanActions = new List<PlanAction>();
+            DelayedActions = new List<PlanAction>();
         }
     }
 }
