@@ -29,47 +29,48 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
-using XenAPI;
-using XenAdmin.Diagnostics.Problems;
+using System.Drawing;
+using XenAdmin.Actions;
+using XenAdmin.Diagnostics.Checks;
+using XenAdmin.Dialogs;
 
-namespace XenAdmin.Diagnostics.Checks
+namespace XenAdmin.Diagnostics.Problems.UtilityProblem
 {
-    public abstract class Check
+    class CfuNotAvailableProblem : Problem
     {
-        protected Check(Host host)
+        public CfuNotAvailableProblem(Check check)
+            : base(check)
         {
-            _host = host;
         }
 
-        protected Check(){ }
-
-        protected abstract Problem RunCheck();
-
-        // By default, most Checks return zero or one Problems: but a
-        // Check can override this to return multiple Problems
-        public virtual List<Problem> RunAllChecks()
+        public override string Description
         {
-            var list = new List<Problem>(1);
-            var problem = RunCheck();
-            if (problem != null)
-                list.Add(problem);
-            return list;
+            get { return Messages.UPGRADEWIZARD_PROBLEM_CFU_STATUS; }
         }
 
-        public abstract string Description{ get;}
+        protected override AsyncAction CreateAction(out bool cancelled)
+        {
+            Program.Invoke(Program.MainWindow, delegate()
+            {
+                using (var dlg = new ThreeButtonDialog(
+                    new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.UPDATE_SERVER_NOT_REACHABLE)))
+                {
+                    dlg.ShowDialog();
+                }
+            });
 
-        public virtual string SuccessfulCheckDescription 
+            cancelled = true;
+            return null;
+        }
+
+        public override string HelpMessage
+        {
+            get { return Messages.PATCHINGWIZARD_MORE_INFO; }
+        }
+
+        public sealed override string Title
         {
             get { return string.Empty; }
         }
-
-        private readonly Host _host = null;
-        public Host Host
-        {
-            get{ return _host;}
-        }
-
     }
-
 }

@@ -71,7 +71,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         public XenServerPatchAlert UpdateAlert { private get; set; }
         public WizardMode WizardMode { private get; set; }
-        public bool ApplyUpdatesToNewVersion { private get; set; }
+        public bool ApplyUpdatesToNewVersion { protected get; set; }
 
         public PatchingWizard_PrecheckPage()
         {

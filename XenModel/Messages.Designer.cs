@@ -6807,6 +6807,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ability to download updates.
+        /// </summary>
+        public static string CFU_STATUS_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("CFU_STATUS_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change....
         /// </summary>
         public static string CHANGE {
@@ -6964,6 +6973,15 @@ namespace XenAdmin {
         public static string CHECKING_CANEVACUATE_STATUS {
             get {
                 return ResourceManager.GetString("CHECKING_CANEVACUATE_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking ability to download updates.
+        /// </summary>
+        public static string CHECKING_CFU_STATUS {
+            get {
+                return ResourceManager.GetString("CHECKING_CFU_STATUS", resourceCulture);
             }
         }
         
@@ -34122,6 +34140,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update server unreachable or network connectivity error. Please deselect the updates application checkbox on previous page and try again..
+        /// </summary>
+        public static string UPDATE_SERVER_NOT_REACHABLE {
+            get {
+                return ResourceManager.GetString("UPDATE_SERVER_NOT_REACHABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Temporary virtual disk used for the installation of an update.
         /// </summary>
         public static string UPDATE_TEMP_VDI_DESCRIPTION {
@@ -35331,6 +35358,15 @@ namespace XenAdmin {
         public static string UPGRADEWIZARD_PRECHECK_TITLE {
             get {
                 return ResourceManager.GetString("UPGRADEWIZARD_PRECHECK_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error encountered when checking ability to download updates..
+        /// </summary>
+        public static string UPGRADEWIZARD_PROBLEM_CFU_STATUS {
+            get {
+                return ResourceManager.GetString("UPGRADEWIZARD_PROBLEM_CFU_STATUS", resourceCulture);
             }
         }
         

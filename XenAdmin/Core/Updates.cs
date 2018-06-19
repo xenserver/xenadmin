@@ -200,10 +200,10 @@ namespace XenAdmin.Core
                 Properties.Settings.Default.AllowPatchesUpdates || force || forceRefresh)
             {
                 var action = CreateDownloadUpdatesXmlAction(
+                    CheckForUpdatesUrl,
                     Properties.Settings.Default.AllowXenCenterUpdates || force,
                     Properties.Settings.Default.AllowXenServerUpdates || force,
-                    Properties.Settings.Default.AllowPatchesUpdates || force,
-                    Updates.CheckForUpdatesUrl);
+                    Properties.Settings.Default.AllowPatchesUpdates || force);
 
                 action.Completed += actionCompleted;
 
@@ -214,7 +214,7 @@ namespace XenAdmin.Core
             }
         }
 
-        private static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(bool checkForXenCenter, bool checkForServerVersion, bool checkForPatches, string checkForUpdatesUrl = null)
+        public static DownloadUpdatesXmlAction CreateDownloadUpdatesXmlAction(string checkForUpdatesUrl, bool checkForXenCenter = false, bool checkForServerVersion = false, bool checkForPatches = false)
         {
             string userAgent = string.Format("{0}/{1}.{2} ({3}-bit)", Branding.BRAND_CONSOLE, Branding.XENCENTER_VERSION, Program.Version.Revision.ToString(), IntPtr.Size * 8);
             string userAgentId = GetUniqueIdHash();
@@ -259,7 +259,7 @@ namespace XenAdmin.Core
             if (Helpers.CommonCriteriaCertificationRelease)
                 return false;
 
-            var action = CreateDownloadUpdatesXmlAction(true, true, true, Updates.CheckForUpdatesUrl);
+            var action = CreateDownloadUpdatesXmlAction(CheckForUpdatesUrl, true, true, true);
             action.Completed += actionCompleted;
 
             if (CheckForUpdatesStarted != null)
