@@ -2527,6 +2527,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>Checking VM migration status</value>
   </data>
+  <data name="CHECKING_CFU_STATUS" xml:space="preserve">
+    <value>Checking ability to download updates</value>
+  </data>
   <data name="CHECKING_FOR_PENDING_RESTART" xml:space="preserve">
     <value>Checking for pending restart</value>
   </data>
@@ -2565,6 +2568,9 @@ Do you want to assign it to the schedule '{2}' instead?</value>
   </data>
   <data name="CHECKING_XENCENTER_VERSION" xml:space="preserve">
     <value>Checking [XenCenter] version</value>
+  </data>
+  <data name="CFU_STATUS_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>Ability to download updates</value>
   </data>
   <data name="CHECK_WLB_ENABLED" xml:space="preserve">
     <value>Pool '{0}' cannot have WLB enabled</value>
@@ -11789,6 +11795,9 @@ Verify that the file is a valid {1} export.</value>
   <data name="UPDATED_PROPERTIES" xml:space="preserve">
     <value>Updating complete.</value>
   </data>
+  <data name="UPDATE_SERVER_NOT_REACHABLE" xml:space="preserve">
+    <value>Update server unreachable or network connectivity error. Please deselect the updates application checkbox on previous page and try again.</value>
+  </data>
   <data name="UPDATES" xml:space="preserve">
     <value>Updates</value>
   </data>
@@ -12191,6 +12200,9 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPGRADEWIZARD_PRECHECK_TITLE" xml:space="preserve">
     <value>Problems encountered when performing upgrade prechecks.</value>
+  </data>
+  <data name="UPGRADEWIZARD_PROBLEM_CFU_STATUS" xml:space="preserve">
+    <value>Error encountered when checking ability to download updates.</value>
   </data>
   <data name="UPGRADEWIZARD_PROBLEM_INCOMPATIBLE_CPUS" xml:space="preserve">
     <value>Hosts in pool '{0}' have incompatible CPUs</value>

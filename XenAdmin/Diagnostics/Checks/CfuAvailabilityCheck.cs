@@ -29,47 +29,42 @@
  * SUCH DAMAGE.
  */
 
-using System.Collections.Generic;
-using XenAPI;
+using XenAdmin.Core;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.UtilityProblem;
 
 namespace XenAdmin.Diagnostics.Checks
 {
-    public abstract class Check
+    class CfuAvailabilityCheck : Check
     {
-        protected Check(Host host)
+
+        protected override Problem RunCheck()
         {
-            _host = host;
+            var action = Updates.CreateDownloadUpdatesXmlAction(Updates.CheckForUpdatesUrl);
+
+            try
+            {
+                action.RunExternal(action.Session);
+            }
+            catch
+            {
+                log.WarnFormat("Could not download check for update file.");
+            }
+
+            if (!action.Succeeded)
+                return new CfuNotAvailableProblem(this);
+            else
+                return null;
         }
 
-        protected Check(){ }
-
-        protected abstract Problem RunCheck();
-
-        // By default, most Checks return zero or one Problems: but a
-        // Check can override this to return multiple Problems
-        public virtual List<Problem> RunAllChecks()
+        public override string Description
         {
-            var list = new List<Problem>(1);
-            var problem = RunCheck();
-            if (problem != null)
-                list.Add(problem);
-            return list;
+            get
+            {
+                return Messages.CFU_STATUS_CHECK_DESCRIPTION;
+            }
         }
 
-        public abstract string Description{ get;}
-
-        public virtual string SuccessfulCheckDescription 
-        {
-            get { return string.Empty; }
-        }
-
-        private readonly Host _host = null;
-        public Host Host
-        {
-            get{ return _host;}
-        }
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     }
-
 }

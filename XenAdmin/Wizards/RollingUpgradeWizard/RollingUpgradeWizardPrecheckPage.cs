@@ -142,6 +142,14 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             var groups = new List<CheckGroup>();
 
+            //Check for update file check
+            var cfuCheck = new List<Check>();
+            cfuCheck.Add(new CfuAvailabilityCheck());
+            if (ApplyUpdatesToNewVersion)
+            {
+                groups.Add(new CheckGroup(Messages.CHECKING_CFU_STATUS, cfuCheck));
+            }
+
             //XenCenter version check (if any of the selected server version is not the latest)
             var latestCrVersion = Updates.XenServerVersions.FindAll(item => item.LatestCr).OrderByDescending(v => v.Version).FirstOrDefault();
             if (latestCrVersion != null &&
