@@ -45,7 +45,7 @@ using System.Text;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
-    public partial class AutomatedUpdatesBasePage : XenTabPage
+    public abstract partial class AutomatedUpdatesBasePage : XenTabPage
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -65,6 +65,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             panel1.Visible = false;
         }
 
+        #region XenTabPage overrides
         public override bool EnablePrevious()
         {
             return false;
@@ -92,20 +93,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             base.PageCancelled();
         }
-
-        public virtual string BlurbText
-        {
-            get { return ""; }
-        }
-
-        protected virtual void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions) { }
-
         protected override void PageLoadedCore(PageLoadedDirection direction)
         {
             if (_thisPageIsCompleted)
                 return;
 
-            labelTitle.Text = BlurbText;
+            labelTitle.Text = BlurbText();
 
             if (!StartUpgradeWorkers())
             {
@@ -115,8 +108,16 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        #region background workers
+        #endregion
 
+        #region Virtual members
+        public abstract string BlurbText();
+
+        protected virtual void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions) { }
+
+        #endregion
+
+        #region background workers
         private bool StartUpgradeWorkers()
         {
             bool atLeastOneWorkerStarted = false;
