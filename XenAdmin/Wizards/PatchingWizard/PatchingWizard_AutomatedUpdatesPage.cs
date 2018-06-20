@@ -77,14 +77,11 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
 
         #region AutomatedUpdatesBesePage overrides
-        public override string BlurbText
+        public override string BlurbText()
         {
-            get
-            {
-                return WizardMode == WizardMode.AutomatedUpdates
-                    ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
-                    : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
-            }
+            return WizardMode == WizardMode.AutomatedUpdates
+                ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
+                : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
         }
 
         protected override void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions)
