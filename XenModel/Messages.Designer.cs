@@ -32276,11 +32276,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes (disabled).
+        ///   Looks up a localized string similar to Yes (SR-IOV logical pif is unplugged).
         /// </summary>
-        public static string SRIOV_DISABLED {
+        public static string SRIOV_LOGICAL_PIF_UNPLUGGED {
             get {
-                return ResourceManager.GetString("SRIOV_DISABLED", resourceCulture);
+                return ResourceManager.GetString("SRIOV_LOGICAL_PIF_UNPLUGGED", resourceCulture);
             }
         }
         
@@ -32310,6 +32310,15 @@ namespace XenAdmin {
         public static string SRIOV_NETWORK_CREATE_WARNING {
             get {
                 return ResourceManager.GetString("SRIOV_NETWORK_CREATE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes (SR-IOV network should be created on this NIC to enable SR-IOV).
+        /// </summary>
+        public static string SRIOV_NETWORK_SHOULD_BE_CREATED {
+            get {
+                return ResourceManager.GetString("SRIOV_NETWORK_SHOULD_BE_CREATED", resourceCulture);
             }
         }
         
