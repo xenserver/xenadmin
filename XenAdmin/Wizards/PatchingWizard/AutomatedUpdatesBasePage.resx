@@ -141,20 +141,20 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="textBoxLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="textBoxLog.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="textBoxLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 65</value>
+    <value>3, 56</value>
   </data>
   <data name="textBoxLog.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 10, 3, 10</value>
+    <value>3, 10, 3, 0</value>
   </data>
   <data name="textBoxLog.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -163,7 +163,7 @@
     <value>Both</value>
   </data>
   <data name="textBoxLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 235</value>
+    <value>505, 239</value>
   </data>
   <data name="textBoxLog.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -175,25 +175,25 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxLog.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;textBoxLog.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="progressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="progressBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="progressBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 32</value>
+    <value>3, 23</value>
   </data>
   <data name="progressBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 10, 3, 0</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 23</value>
+    <value>505, 23</value>
   </data>
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -205,7 +205,7 @@
     <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;progressBar.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;progressBar.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -223,7 +223,7 @@
     <value>25, 5</value>
   </data>
   <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 13</value>
+    <value>396, 13</value>
   </data>
   <data name="labelError.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -277,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonRetry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 0</value>
+    <value>427, 0</value>
   </data>
   <data name="buttonRetry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 0, 3, 0</value>
@@ -307,13 +307,13 @@
     <value>Bottom</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 312</value>
+    <value>3, 309</value>
   </data>
   <data name="panel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>511, 23</value>
+    <value>505, 23</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -325,13 +325,46 @@
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="panel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelError" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonRetry" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>511, 335</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="progressBar" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBoxLog" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,50,AutoSize,50,Percent,100,Absolute,40" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -343,7 +376,7 @@
     <value>511, 335</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PatchingWizard_AutomatedUpdatesPage</value>
+    <value>AutomatedUpdatesBasePage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>XenAdmin.Controls.XenTabPage, XenCenterMain, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>

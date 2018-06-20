@@ -36,8 +36,10 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRetry = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelTitle
@@ -47,8 +49,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             // 
             // textBoxLog
             // 
-            resources.ApplyResources(this.textBoxLog, "textBoxLog");
             this.textBoxLog.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            resources.ApplyResources(this.textBoxLog, "textBoxLog");
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
             // 
@@ -86,20 +88,27 @@ namespace XenAdmin.Wizards.PatchingWizard
             this.buttonRetry.UseVisualStyleBackColor = true;
             this.buttonRetry.Click += new System.EventHandler(this.buttonRetry_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.labelTitle, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.progressBar, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxLog, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
             // AutomatedUpdatesBasePage
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.textBoxLog);
-            this.Controls.Add(this.labelTitle);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AutomatedUpdatesBasePage";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -112,5 +121,6 @@ namespace XenAdmin.Wizards.PatchingWizard
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TableLayoutPanel panel1;
         private System.Windows.Forms.Button buttonRetry;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
