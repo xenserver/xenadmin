@@ -425,7 +425,7 @@ namespace XenAdmin.Wizards.GenericPages
                     m_dataGridView.Rows.Add(row);
                 }
 
-                HelpersGUI.ResizeLastGridViewColumn(m_colTarget); //set properly the width of the last column
+                HelpersGUI.ResizeGridViewColumnToAllCells(m_colTarget); //set properly the width of the last column
 
                 if (restoreGridHomeServerSelection)
                 {
