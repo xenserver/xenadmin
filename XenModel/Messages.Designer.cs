@@ -34140,7 +34140,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update server unreachable or network connectivity error. Please deselect the updates application checkbox on previous page and try again..
+        ///   Looks up a localized string similar to Update server unreachable or network connectivity error. Please deselect the updates application checkbox on the previous page and try again..
         /// </summary>
         public static string UPDATE_SERVER_NOT_REACHABLE {
             get {

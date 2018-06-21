@@ -11796,7 +11796,7 @@ Verify that the file is a valid {1} export.</value>
     <value>Updating complete.</value>
   </data>
   <data name="UPDATE_SERVER_NOT_REACHABLE" xml:space="preserve">
-    <value>Update server unreachable or network connectivity error. Please deselect the updates application checkbox on previous page and try again.</value>
+    <value>Update server unreachable or network connectivity error. Please deselect the updates application checkbox on the previous page and try again.</value>
   </data>
   <data name="UPDATES" xml:space="preserve">
     <value>Updates</value>
