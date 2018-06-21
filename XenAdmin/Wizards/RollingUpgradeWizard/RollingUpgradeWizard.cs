@@ -38,11 +38,11 @@ using XenAdmin.Controls;
 using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using System.Windows.Forms;
+using XenAdmin.Wizards.PatchingWizard;
+using XenAPI;
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard
 {
-    public enum RollingUpgradeStatus { NotStarted, Started, Cancelled, Completed }
-
     public partial class RollingUpgradeWizard : XenWizardBase
     {
         private readonly RollingUpgradeUpgradePage RollingUpgradeUpgradePage;
@@ -101,7 +101,16 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 RollingUpgradeWizardPrecheckPage.SelectedMasters = selectedMasters;
                 RollingUpgradeWizardInstallMethodPage.SelectedMasters = selectedMasters;
                 RollingUpgradeReadyToUpgradePage.SelectedMasters = selectedMasters;
-                RollingUpgradeUpgradePage.SelectedMasters = selectedMasters;
+
+                var selectedPools = new List<Pool>();
+                foreach (var master in selectedMasters)
+                {
+                    var pool = Helpers.GetPoolOfOne(master.Connection);
+                    if (pool != null && !selectedPools.Contains(pool))
+                        selectedPools.Add(pool);
+                }
+
+                RollingUpgradeUpgradePage.SelectedPools = selectedPools;
             }
             else if (prevPageType == typeof(RollingUpgradeWizardUpgradeModePage))
             {
@@ -166,7 +175,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void OnCancel()
         {
-            if (RollingUpgradeUpgradePage.UpgradeStatus == RollingUpgradeStatus.NotStarted)
+            if (RollingUpgradeUpgradePage.Status == Status.NotStarted)
                 RevertResolvedPreChecks();
 
             base.OnCancel();
@@ -186,7 +195,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         {
             base.OnClosed(e);
 
-            if (RollingUpgradeUpgradePage.UpgradeStatus == RollingUpgradeStatus.Cancelled)
+            if (RollingUpgradeUpgradePage.Status == Status.Cancelled)
                 ThreadPool.QueueUserWorkItem(o => Program.Invoke(Program.MainWindow, ShowCanBeResumedInfo));
         }
     }

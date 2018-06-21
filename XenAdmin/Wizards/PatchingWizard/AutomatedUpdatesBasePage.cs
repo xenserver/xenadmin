@@ -45,6 +45,7 @@ using System.Text;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
+    public enum Status { NotStarted, Started, Cancelled, Completed }
     public abstract partial class AutomatedUpdatesBasePage : XenTabPage
     {
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -53,9 +54,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         private bool _someWorkersFailed = false;
 
         public List<Problem> ProblemsResolvedPreCheck { get; set; }
-
         public List<Pool> SelectedPools { private get; set; }
-        
+        public bool ApplyUpdatesToNewVersion { get; set; }
+        public Status Status { get; private set; }
+
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
         private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
 
@@ -87,6 +89,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             if (!_thisPageIsCompleted)
             {
+                Status = Status.Cancelled;
                 backgroundWorkers.ForEach(bgw => bgw.CancelAsync());
                 backgroundWorkers.Clear();
             }
@@ -98,13 +101,19 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (_thisPageIsCompleted)
                 return;
 
+            Status = Status.NotStarted;
             labelTitle.Text = BlurbText();
 
             if (!StartUpgradeWorkers())
             {
+                Status = Status.Completed;
                 _thisPageIsCompleted = true;
                 _nextEnabled = true;
                 OnPageUpdated();
+            }
+            else
+            {
+                Status = Status.Started;
             }
         }
 
@@ -115,6 +124,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected virtual void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions) { }
 
+        protected virtual bool ManageSemiAutomaticPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction planAction)
+        {
+            return false;
+        }
+
+        protected virtual bool SkipInitialPlanActions(Host host)
+        {
+            return false;
+        }
         #endregion
 
         #region background workers
@@ -206,6 +224,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     if (pa.Error != null)
                     {
                         sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
+                        if (pa.Error is CancelledException)
+                        {
+                            sb.AppendLine(Messages.CANCELLED_BY_USER);
+                            continue;
+                        }
+
                         sb.AppendLine(Messages.ERROR);
 
                         var innerEx = pa.Error.InnerException as Failure;
@@ -276,21 +300,24 @@ namespace XenAdmin.Wizards.PatchingWizard
                     var hostActions = ha;
                     var host = hostActions.Host;
 
-                    var initialActions = hostActions.InitialPlanActions; // initial actions (e.g. upgrade the host in the RPU case)
-
-                    foreach (var a in initialActions)
+                    if (!SkipInitialPlanActions(host))
                     {
-                        action = a;
+                        var initialActions = hostActions.InitialPlanActions; // initial actions (e.g. upgrade the host in the RPU case)
 
-                        if (bgw.CancellationPending)
+                        foreach (var a in initialActions)
                         {
-                            doWorkEventArgs.Cancel = true;
-                            return;
+                            action = a;
+
+                            if (bgw.CancellationPending)
+                            {
+                                doWorkEventArgs.Cancel = true;
+                                return;
+                            }
+
+                            RunPlanAction(bgw, action);
                         }
-
-                        RunPlanAction(bgw, action);
                     }
-
+                   
                     var planActions = hostActions.UpdatesPlanActions; // priority update actions
                     foreach (var a in planActions)
                     {
@@ -397,7 +424,9 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             action.OnProgressChange += action_OnProgressChange;
             bgw.ReportProgress(0, action);
-            action.Run();
+
+            if (!ManageSemiAutomaticPlanAction(bgw, action))
+                action.Run();
 
             Thread.Sleep(1000);
 
@@ -415,13 +444,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (!e.Cancelled)
             {
                 var bgw = sender as UpdateProgressBackgroundWorker;
-                if (bgw != null && bgw.DoneActions.Any(a => a.Error != null))
+                if (bgw != null && bgw.DoneActions.Any(a => a.Error != null && !(a.Error is CancelledException)))
                 {
                     _someWorkersFailed = true;
                 }
                 //if all finished
                 if (backgroundWorkers.All(w => !w.IsBusy))
                 {
+                    Status = Status.Completed;
                     panel1.Visible = true;
                     if (_someWorkersFailed)
                     {

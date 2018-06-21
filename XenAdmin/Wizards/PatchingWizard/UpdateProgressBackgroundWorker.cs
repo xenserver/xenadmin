@@ -36,7 +36,7 @@ using XenAdmin.Wizards.PatchingWizard.PlanActions;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
-    class UpdateProgressBackgroundWorker : BackgroundWorker
+    public class UpdateProgressBackgroundWorker : BackgroundWorker
     {
         private readonly int _actionsCount;
         public List<HostPlanActions> HostActions { get; private set; }

@@ -42,8 +42,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         public XenServerPatchAlert UpdateAlert { private get; set; }
         public WizardMode WizardMode { private get; set; }
-        public bool ApplyUpdatesToNewVersion { private get; set; }
-
+        
         private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
         public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
         public KeyValuePair<XenServerPatch, string> PatchFromDisk { private get; set; }
