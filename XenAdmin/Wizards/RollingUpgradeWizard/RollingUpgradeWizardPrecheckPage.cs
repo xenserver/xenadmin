@@ -223,6 +223,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 groups.Add(new CheckGroup(Messages.CHECKING_SAFE_TO_UPGRADE, upgradeChecks));
             }
 
+            //Checking automated updates license if apply updates checkbox is ticked
+            if (ApplyUpdatesToNewVersion)
+            {
+                var automatedUpdateLicenseChecks = new List<Check>();
+                foreach (var pool in SelectedPools)
+                    automatedUpdateLicenseChecks.Add(new AutomatedUpdatesLicenseCheck(pool));
+
+                groups.Add(new CheckGroup(Messages.CHECKING_AUTOMATED_UPDATES_LICENSE_STATUS,
+                    automatedUpdateLicenseChecks));
+            }
+
             return groups;
         }
 

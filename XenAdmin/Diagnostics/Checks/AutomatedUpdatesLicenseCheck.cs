@@ -29,45 +29,43 @@
  * SUCH DAMAGE.
  */
 
-using System.Drawing;
-using XenAdmin.Actions;
-using XenAdmin.Diagnostics.Checks;
-using XenAdmin.Dialogs;
+using System.Linq;
+using XenAdmin.Core;
+using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Diagnostics.Problems.PoolProblem;
+using XenAPI;
 
-namespace XenAdmin.Diagnostics.Problems.UtilityProblem
+namespace XenAdmin.Diagnostics.Checks
 {
-    class CfuNotAvailableProblem : Problem
+    class AutomatedUpdatesLicenseCheck : Check
     {
-        public CfuNotAvailableProblem(Check check)
-            : base(check)
+        private readonly Pool pool;
+
+        public AutomatedUpdatesLicenseCheck(Pool pool)
+            : base(Helpers.GetMaster(pool.Connection))
         {
+            this.pool = pool;
+        }
+
+        protected override Problem RunCheck()
+        {
+            if (pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
+                return new NotLicensedForAutomatedUpdatesWarning(this, pool);
+
+            return null;
         }
 
         public override string Description
         {
-            get { return Messages.UPGRADEWIZARD_PROBLEM_CFU_STATUS; }
+            get { return Messages.AUTOMATED_UPDATES_LICENSE_CHECK_DESCRIPTION; }
         }
 
-        protected override AsyncAction CreateAction(out bool cancelled)
+        public override string SuccessfulCheckDescription
         {
-            using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.UPDATE_SERVER_NOT_REACHABLE)))
+            get
             {
-                dlg.ShowDialog();
+                return string.Format(Messages.PATCHING_WIZARD_HOST_CHECK_OK, pool.Name(), Description);
             }
-
-            cancelled = true;
-            return null;
-        }
-
-        public override string HelpMessage
-        {
-            get { return Messages.PATCHINGWIZARD_MORE_INFO; }
-        }
-
-        public sealed override string Title
-        {
-            get { return string.Empty; }
         }
     }
 }

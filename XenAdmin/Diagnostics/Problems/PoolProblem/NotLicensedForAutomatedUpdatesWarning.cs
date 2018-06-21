@@ -29,29 +29,44 @@
  * SUCH DAMAGE.
  */
 
+using System;
 using System.Drawing;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Checks;
 using XenAdmin.Dialogs;
+using XenAPI;
 
-namespace XenAdmin.Diagnostics.Problems.UtilityProblem
+
+namespace XenAdmin.Diagnostics.Problems.PoolProblem
 {
-    class CfuNotAvailableProblem : Problem
+
+    public class NotLicensedForAutomatedUpdatesWarning : Warning
     {
-        public CfuNotAvailableProblem(Check check)
+        private readonly Pool pool;
+
+        public NotLicensedForAutomatedUpdatesWarning(Check check, Pool pool)
             : base(check)
         {
+            this.pool = pool;
+        }
+
+        public override string Title
+        {
+            get { return Check.Description; }
         }
 
         public override string Description
         {
-            get { return Messages.UPGRADEWIZARD_PROBLEM_CFU_STATUS; }
+            get
+            {
+                return string.Format(Messages.HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING, pool);
+            }
         }
 
         protected override AsyncAction CreateAction(out bool cancelled)
         {
             using (var dlg = new ThreeButtonDialog(
-                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.UPDATE_SERVER_NOT_REACHABLE)))
+                new ThreeButtonDialog.Details(SystemIcons.Warning, Messages.AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO)))
             {
                 dlg.ShowDialog();
             }
@@ -63,11 +78,6 @@ namespace XenAdmin.Diagnostics.Problems.UtilityProblem
         public override string HelpMessage
         {
             get { return Messages.PATCHINGWIZARD_MORE_INFO; }
-        }
-
-        public sealed override string Title
-        {
-            get { return string.Empty; }
         }
     }
 }
