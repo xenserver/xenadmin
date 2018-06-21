@@ -32276,7 +32276,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes (SR-IOV logical pif is unplugged).
+        ///   Looks up a localized string similar to Yes (SR-IOV logical PIF is unplugged).
         /// </summary>
         public static string SRIOV_LOGICAL_PIF_UNPLUGGED {
             get {
@@ -32314,7 +32314,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes (SR-IOV network should be created on this NIC to enable SR-IOV).
+        ///   Looks up a localized string similar to Yes (To enable SR-IOV create an SR-IOV network on this NIC).
         /// </summary>
         public static string SRIOV_NETWORK_SHOULD_BE_CREATED {
             get {

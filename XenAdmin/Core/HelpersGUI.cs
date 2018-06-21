@@ -556,6 +556,18 @@ namespace XenAdmin.Core
             col.MinimumWidth = storedWidth;
         }
 
+        public static void ResizeGrdiViewColumnToHeader(DataGridViewTextBoxColumn col)
+        {
+            //the column should be autosized to Fill, but should not become smaller than a minimum
+            //width, which here is chosen to be the column header width. To find what this width is 
+            //set temporarily the column's autosize mode to ColumnHeader.
+
+            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            int storedWidth = col.Width;
+            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            col.MinimumWidth = storedWidth;
+        }
+
         /// <summary>
         /// Get the localized Search name
         /// </summary>
