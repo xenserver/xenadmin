@@ -5534,6 +5534,30 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to License status for automated updates.
+        /// </summary>
+        public static string AUTOMATED_UPDATES_LICENSE_CHECK_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("AUTOMATED_UPDATES_LICENSE_CHECK_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This warning may have various causes. Please consider one of the following solutions and try again:
+        ///
+        ///- License any unlicensed hosts in the pool.
+        ///
+        ///- Ensure automated updates are not restricted on any hosts in the pool.
+        ///
+        ///- Deselect the updates application checkbox on the previous page. [XenCenter] will upgrade the selected servers to the new version without applying any updates..
+        /// </summary>
+        public static string AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO {
+            get {
+                return ResourceManager.GetString("AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Auto-start on server boot.
         /// </summary>
         public static string AUTOSTART {
@@ -6964,6 +6988,15 @@ namespace XenAdmin {
         public static string CHECK_WLB_ENABLED {
             get {
                 return ResourceManager.GetString("CHECK_WLB_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking automated updates license status.
+        /// </summary>
+        public static string CHECKING_AUTOMATED_UPDATES_LICENSE_STATUS {
+            get {
+                return ResourceManager.GetString("CHECKING_AUTOMATED_UPDATES_LICENSE_STATUS", resourceCulture);
             }
         }
         
@@ -18214,6 +18247,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: One or more servers in the pool are not licensed for automated updates.
+        /// </summary>
+        public static string HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING {
+            get {
+                return ResourceManager.GetString("HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Host &apos;{0}&apos;:.
         /// </summary>
         public static string HOST_X {
@@ -27131,7 +27173,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-		///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it..
+        ///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY {
             get {

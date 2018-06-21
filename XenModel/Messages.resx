@@ -2020,6 +2020,18 @@ Apply update '{0}' to server '{1}'...
   <data name="AUTHORIZING_USER" xml:space="preserve">
     <value>Authorizing User</value>
   </data>
+  <data name="AUTOMATED_UPDATES_LICENSE_CHECK_DESCRIPTION" xml:space="preserve">
+    <value>License status for automated updates</value>
+  </data>
+  <data name="AUTOMATED_UPDATES_UNLICENSED_WARNING_MORE_INFO" xml:space="preserve">
+    <value>This warning may have various causes. Please consider one of the following solutions and try again:
+
+- License any unlicensed hosts in the pool.
+
+- Ensure automated updates are not restricted on any hosts in the pool.
+
+- Deselect the updates application checkbox on the previous page. [XenCenter] will upgrade the selected servers to the new version without applying any updates.</value>
+  </data>
   <data name="AUTOSTART" xml:space="preserve">
     <value>Auto-start on server boot</value>
   </data>
@@ -2523,6 +2535,9 @@ Do you want to assign these VMs to the schedule '{0}' instead?</value>
     <value>The VM '{0}' is already assigned to the snapshot schedule '{1}'.
     
 Do you want to assign it to the schedule '{2}' instead?</value>
+  </data>
+  <data name="CHECKING_AUTOMATED_UPDATES_LICENSE_STATUS" xml:space="preserve">
+    <value>Checking automated updates license status</value>
   </data>
   <data name="CHECKING_CANEVACUATE_STATUS" xml:space="preserve">
     <value>Checking VM migration status</value>
@@ -6392,6 +6407,9 @@ Click Configure HA to alter the settings displayed below.</value>
   </data>
   <data name="HOST_SHUTDOWN" xml:space="preserve">
     <value>Shut down server</value>
+  </data>
+  <data name="HOST_UNLICENSED_FOR_AUTOMATED_UPDATES_WARNING" xml:space="preserve">
+    <value>{0}: One or more servers in the pool are not licensed for automated updates</value>
   </data>
   <data name="HOST_X" xml:space="preserve">
     <value>Host '{0}':</value>
