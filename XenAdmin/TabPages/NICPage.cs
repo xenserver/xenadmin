@@ -175,8 +175,8 @@ namespace XenAdmin.TabPages
                     //show the SR-IOV column for Kolkata or higher hosts only
                     ColumnSriovCapable.Visible = Helpers.KolkataOrGreater(host);
 
-                    HelpersGUI.ResizeGrdiViewColumnToHeader(ColumnDeviceName);
-                    HelpersGUI.ResizeGrdiViewColumnToHeader(ColumnSriovCapable);
+                    HelpersGUI.ResizeGridViewColumnToHeader(ColumnDeviceName);
+                    HelpersGUI.ResizeGridViewColumnToHeader(ColumnSriovCapable);
 
                     if (dataGridView1.SortedColumn != null)
                         dataGridView1.Sort(dataGridView1.SortedColumn, dataGridView1.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);

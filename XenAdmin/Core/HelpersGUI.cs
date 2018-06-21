@@ -544,7 +544,7 @@ namespace XenAdmin.Core
         /// <summary>
         /// Remember to call this after populating the gridview
         /// </summary>
-        public static void ResizeLastGridViewColumn(DataGridViewColumn col)
+        public static void ResizeGridViewColumnToAllCells(DataGridViewColumn col)
         {
             //the last column of the gridviews used on these pages should be autosized to Fill, but should not
             //become smaller than a minimum width, which is chosen to be the column's contents (including header)
@@ -556,7 +556,7 @@ namespace XenAdmin.Core
             col.MinimumWidth = storedWidth;
         }
 
-        public static void ResizeGrdiViewColumnToHeader(DataGridViewTextBoxColumn col)
+        public static void ResizeGridViewColumnToHeader(DataGridViewTextBoxColumn col)
         {
             //the column should be autosized to Fill, but should not become smaller than a minimum
             //width, which here is chosen to be the column header width. To find what this width is 
