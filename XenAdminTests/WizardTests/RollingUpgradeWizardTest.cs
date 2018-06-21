@@ -32,6 +32,7 @@
 using System.Threading;
 using System.Windows.Forms;
 using NUnit.Framework;
+using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Wizards.RollingUpgradeWizard;
 
 namespace XenAdminTests.WizardTests.state5_xml
@@ -70,11 +71,14 @@ namespace XenAdminTests.WizardTests.state5_xml
             {
                 //It needs work
                 var page = TestUtils.GetXenTabPage(wizard, "RollingUpgradeUpgradePage") as RollingUpgradeUpgradePage;
-                while (page.Dialog == null)
+                while (page.Dialogs.Count == 0)
                 {
                     Thread.Sleep(500);
                 }
-                MW(page.Dialog.CancelButton.PerformClick);
+                foreach (var dialog in page.Dialogs)
+                {
+                    MW(dialog.CancelButton.PerformClick);
+                }
                 while (page.EnableNext() == false)
                 {
                     Thread.Sleep(500);
@@ -91,7 +95,7 @@ namespace XenAdminTests.WizardTests.state5_xml
             get
             {
                 var page = TestUtils.GetXenTabPage(wizard, "RollingUpgradeUpgradePage") as RollingUpgradeUpgradePage;
-                return page.UpgradeStatus == RollingUpgradeStatus.NotStarted || page.UpgradeStatus == RollingUpgradeStatus.Started;
+                return page.Status == Status.NotStarted || page.Status == Status.Started;
             }
         }
     }

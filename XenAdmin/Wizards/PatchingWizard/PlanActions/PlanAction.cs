@@ -66,7 +66,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        protected virtual Host CurrentHost { get { return null; } }
+        protected internal virtual Host CurrentHost { get { return null; } }
 
         public int PercentComplete
         {

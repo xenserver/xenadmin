@@ -63,6 +63,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
         private bool rebooting = false;
 
+        public virtual bool IsManual
+        {
+            get { return true; }
+        }
+
         protected override void RunWithSession(ref Session session)
         {
             try

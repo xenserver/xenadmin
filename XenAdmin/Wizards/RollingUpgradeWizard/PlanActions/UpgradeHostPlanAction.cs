@@ -31,6 +31,7 @@
 
 using System;
 using System.Collections.Generic;
+using XenAdmin.Core;
 using XenAPI;
 
 namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
@@ -45,15 +46,37 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             _arguments = arguments;
         }
 
+        public override bool IsManual
+        {
+            get { return false; }
+        }
 
         protected override void RunWithSession(ref Session session)
         {
             Visible = true;
+
+            string hostVersionBefore = CurrentHost.LongProductVersion();
+            log.InfoFormat("Host '{0}' upgrading from version '{1}'", CurrentHost.Name(), hostVersionBefore);
+
             string value = Host.call_plugin(session, HostXenRef.opaque_ref, "prepare_host_upgrade.py", "main", _arguments);
             if (value.ToLower() == "true")
                 base.RunWithSession(ref session);
             else
                 throw new Exception(value);
+
+            Host hostAfterReboot = GetResolvedHost();
+            if (hostAfterReboot != null && Helpers.SameServerVersion(hostAfterReboot, hostVersionBefore))
+            {
+                log.ErrorFormat("Host '{0}' rebooted with the same version '{1}'", hostAfterReboot.Name(), hostAfterReboot.LongProductVersion());
+                var error = new Exception(Messages.REBOOT_WITH_SAME_VERSION);
+                if (hostAfterReboot.IsMaster())
+                    throw error;
+                Error = error;
+            }
+            if (hostAfterReboot != null)
+                log.InfoFormat("Host '{0}' upgraded with version '{1}'", hostAfterReboot.Name(), hostAfterReboot.LongProductVersion());
+            else
+                log.InfoFormat("Cannot check host's version after reboot because the host '{0}' cannot be resolved", CurrentHost.Name());
         }
     }
 }

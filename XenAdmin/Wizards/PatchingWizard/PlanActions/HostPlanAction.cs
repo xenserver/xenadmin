@@ -51,7 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             HostXenRef = new XenRef<Host>(host);
         }
 
-        protected override Host CurrentHost
+        protected internal override Host CurrentHost
         {
             get { return _currentHost; }
         }
