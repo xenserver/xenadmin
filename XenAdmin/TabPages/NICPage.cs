@@ -158,13 +158,10 @@ namespace XenAdmin.TabPages
                 {
                     foreach (PIF PIF in host.Connection.ResolveAll(host.PIFs))
                     {
-                        if (!PIF.IsPhysical() && !PIF.IsSriovLogicalPIF())
+                        if (!PIF.IsPhysical())
                             continue;
 
                         RegisterPIFEventHandlers(PIF);
-
-                        if (PIF.IsSriovLogicalPIF())
-                            continue;
 
                         PIFRow p = new PIFRow(PIF);
                         dataGridView1.Rows.Add(p);
@@ -178,13 +175,8 @@ namespace XenAdmin.TabPages
                     //show the SR-IOV column for Kolkata or higher hosts only
                     ColumnSriovCapable.Visible = Helpers.KolkataOrGreater(host);
 
-                    //CA-47050: the Device column should be autosized to Fill, but should not become smaller than a minimum
-                    //width, which here is chosen to be the column header width. To find what this width is 
-                    //set temporarily the column's autosize mode to ColumnHeader.
-                    ColumnDeviceName.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                    int storedWidth = ColumnDeviceName.Width;
-                    ColumnDeviceName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    ColumnDeviceName.MinimumWidth = storedWidth;
+                    HelpersGUI.ResizeGrdiViewColumnToHeader(ColumnDeviceName);
+                    HelpersGUI.ResizeGrdiViewColumnToHeader(ColumnSriovCapable);
 
                     if (dataGridView1.SortedColumn != null)
                         dataGridView1.Sort(dataGridView1.SortedColumn, dataGridView1.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);

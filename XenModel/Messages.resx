@@ -11111,7 +11111,7 @@ Do you want to connect to the pool master '{1}'?</value>
     <value>Storage Repository</value>
   </data>
   <data name="SRIOV_LOGICAL_PIF_UNPLUGGED" xml:space="preserve">
-    <value>Yes (SR-IOV logical pif is unplugged)</value>
+    <value>Yes (SR-IOV logical PIF is unplugged)</value>
   </data>
   <data name="SRIOV_NEED_NICSUPPORT" xml:space="preserve">
     <value>SR-IOV networks require an SR-IOV capable NIC.</value>
@@ -11125,7 +11125,7 @@ Do you want to connect to the pool master '{1}'?</value>
 You may need to reboot your server(s) to enable SR-IOV network.</value>
   </data>
   <data name="SRIOV_NETWORK_SHOULD_BE_CREATED" xml:space="preserve">
-    <value>Yes (SR-IOV network should be created on this NIC to enable SR-IOV)</value>
+    <value>Yes (To enable SR-IOV create an SR-IOV network on this NIC)</value>
   </data>
   <data name="SRPANEL_ACTIVE" xml:space="preserve">
     <value>Active</value>
