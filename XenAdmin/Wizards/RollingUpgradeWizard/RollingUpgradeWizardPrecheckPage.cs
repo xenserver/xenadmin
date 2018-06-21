@@ -143,10 +143,10 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var groups = new List<CheckGroup>();
 
             //Check for update file check
-            var cfuCheck = new List<Check>();
-            cfuCheck.Add(new CfuAvailabilityCheck());
             if (ApplyUpdatesToNewVersion)
             {
+                var cfuCheck = new List<Check>();
+                cfuCheck.Add(new CfuAvailabilityCheck());
                 groups.Add(new CheckGroup(Messages.CHECKING_CFU_STATUS, cfuCheck));
             }
 
