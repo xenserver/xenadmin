@@ -123,7 +123,12 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
 
         #region Virtual members
-        public abstract string BlurbText();
+
+        protected abstract string BlurbText();
+        protected abstract string SuccessMessageOnCompletion(bool multiplePools);
+        protected abstract string FailureMessageOnCompletion(bool multiplePools);
+        protected abstract string SuccessMessagePerPool();
+        protected abstract string FailureMessagePerPool(bool multipleErrors);
 
         protected virtual void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions) { }
 
@@ -271,14 +276,12 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 if (bgwErrorCount > 0)
                 {
-                    sb.AppendIndented(bgwErrorCount > 1
-                        ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY
-                        : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE).AppendLine();
+                    sb.AppendIndented(FailureMessagePerPool(bgwErrorCount > 1)).AppendLine();
                     sb.AppendIndented(errorSb);
                 }
                 else if (!bgw.IsBusy)
                 {
-                    sb.AppendIndented(Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE).AppendLine();
+                    sb.AppendIndented(SuccessMessagePerPool()).AppendLine();
                 }
 
                 sb.AppendLine();
@@ -506,17 +509,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                     panel1.Visible = true;
                     if (_someWorkersFailed)
                     {
-                        labelError.Text = backgroundWorkers.Count > 1
-                            ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY
-                            : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE;
+                        labelError.Text = FailureMessageOnCompletion(backgroundWorkers.Count > 1);
                         pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
                         buttonRetry.Visible = true;
                     }
                     else
                     {
-                        labelError.Text = backgroundWorkers.Count > 1
-                            ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY
-                            : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
+                        labelError.Text = SuccessMessageOnCompletion(backgroundWorkers.Count > 1);
                         pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
                         buttonRetry.Visible = false;
                         progressBar.Value = 100;

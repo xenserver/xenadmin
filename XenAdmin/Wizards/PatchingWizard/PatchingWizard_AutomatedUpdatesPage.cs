@@ -74,11 +74,32 @@ namespace XenAdmin.Wizards.PatchingWizard
         #endregion
 
         #region AutomatedUpdatesBesePage overrides
-        public override string BlurbText()
+
+        protected override string BlurbText()
         {
             return WizardMode == WizardMode.AutomatedUpdates
                 ? Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_AUTOMATED_MODE
                 : Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
+        }
+
+        protected override string SuccessMessageOnCompletion(bool multiplePools)
+        {
+            return multiplePools ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_MANY : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
+        }
+
+        protected override string FailureMessageOnCompletion(bool multiplePools)
+        {
+            return multiplePools ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_ONE;
+        }
+
+        protected override string SuccessMessagePerPool()
+        {
+            return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_SUCCESS_ONE;
+        }
+
+        protected override string FailureMessagePerPool(bool multipleErrors)
+        {
+            return multipleErrors ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE;
         }
 
         protected override void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions)

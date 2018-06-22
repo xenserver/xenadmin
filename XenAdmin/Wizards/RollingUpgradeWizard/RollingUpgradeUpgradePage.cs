@@ -65,9 +65,30 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         #endregion
 
         #region AutomatedUpdatesBesePage overrides
-        public override string BlurbText()
+
+        protected override string BlurbText()
         {
-            return Messages.PATCHINGWIZARD_UPLOAD_AND_INSTALL_TITLE_NEW_VERSION_AUTOMATED_MODE;
+            return Messages.ROLLING_UPGRADE_UPGRADE_IN_PROGRESS;
+        }
+
+        protected override string SuccessMessageOnCompletion(bool multiplePools)
+        {
+            return multiplePools ? Messages.ROLLING_UPGRADE_SUCCESS_MANY : Messages.ROLLING_UPGRADE_SUCCESS_ONE;
+        }
+
+        protected override string FailureMessageOnCompletion(bool multiplePools)
+        {
+            return multiplePools ? Messages.ROLLING_UPGRADE_ERROR_MANY : Messages.ROLLING_UPGRADE_ERROR_ONE;
+        }
+
+        protected override string SuccessMessagePerPool()
+        {
+            return Messages.ROLLING_UPGRADE_SUCCESS_ONE;
+        }
+
+        protected override string FailureMessagePerPool(bool multipleErrors)
+        {
+            return multipleErrors ? Messages.ROLLING_UPGRADE_ERROR_POOL_MANY : Messages.ROLLING_UPGRADE_ERROR_POOL_ONE;
         }
 
         protected override void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions)
@@ -189,41 +210,40 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return false;
         }
 
-        private Dictionary<Pool, List<XenServerPatch>> AllUploadedPatches = new Dictionary<Pool, List<XenServerPatch>>();
-        private Dictionary<Pool, List<XenServerPatch>> MinimalPatches = new Dictionary<Pool, List<XenServerPatch>>();
+        private Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>> AllUploadedPatches = new Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>>(); 
+        private Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>> MinimalPatches = new Dictionary<UpdateProgressBackgroundWorker, List<XenServerPatch>>(); // should be calculated only once per pool (to ensure update homogeneity)
 
         protected override void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts)
         {
+            var hostPlanActions = bgw.HostActions.FirstOrDefault(ha => ha.Host.Equals(host));
+            if (hostPlanActions == null)
+                return;
+
+            if (hostPlanActions.UpdatesPlanActions.Count > 0) // this is a retry; do not recreate actions
+                return; 
+
             if (!ApplyUpdatesToNewVersion || host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
                 return;
+            
+            if (!MinimalPatches.ContainsKey(bgw))
+                MinimalPatches.Add(bgw, Updates.GetMinimalPatches(host.Connection));
 
-            var pool = Helpers.GetPoolOfOne(host.Connection);
-            if (pool == null)
-                return;
-
-            if (!MinimalPatches.ContainsKey(pool))
-                MinimalPatches.Add(pool, Updates.GetMinimalPatches(pool.Connection));
-
-            var minimalPatches = MinimalPatches[pool];
+            var minimalPatches = MinimalPatches[bgw];
             
             if (minimalPatches == null)
                 return;
 
-            if (!AllUploadedPatches.ContainsKey(pool))
-                AllUploadedPatches.Add(pool, new List<XenServerPatch>());
-            var uploadedPatches = AllUploadedPatches[pool];
+            if (!AllUploadedPatches.ContainsKey(bgw))
+                AllUploadedPatches.Add(bgw, new List<XenServerPatch>());
+            var uploadedPatches = AllUploadedPatches[bgw];
 
             var hostActions = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, new KeyValuePair<XenServerPatch, string>());
             if (hostActions.UpdatesPlanActions != null && hostActions.UpdatesPlanActions.Count > 0)
             {
-                foreach (var ha in bgw.HostActions)
+                if (hostPlanActions != null)
                 {
-                    if (host.Equals(ha.Host))
-                    {
-                        ha.UpdatesPlanActions = hostActions.UpdatesPlanActions;
-                        ha.DelayedActions = hostActions.DelayedActions;
-                        break;
-                    }
+                    hostPlanActions.UpdatesPlanActions = hostActions.UpdatesPlanActions;
+                    hostPlanActions.DelayedActions.InsertRange(0, hostActions.DelayedActions);
                 }
             }
         }

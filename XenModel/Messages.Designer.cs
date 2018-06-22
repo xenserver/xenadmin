@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -30506,6 +30506,42 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it..
+        /// </summary>
+        public static string ROLLING_UPGRADE_ERROR_MANY {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_ERROR_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The rolling pool upgrade process was not completed successfuly. The upgrade process has been paused. Press Retry to resume it..
+        /// </summary>
+        public static string ROLLING_UPGRADE_ERROR_ONE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_ERROR_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following errors occurred while rolling pool upgrade was in progress:.
+        /// </summary>
+        public static string ROLLING_UPGRADE_ERROR_POOL_MANY {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_ERROR_POOL_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following error occurred while rolling pool upgrade was in progress:.
+        /// </summary>
+        public static string ROLLING_UPGRADE_ERROR_POOL_ONE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_ERROR_POOL_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Locate the network install files (Automatic Mode).
         /// </summary>
         public static string ROLLING_UPGRADE_METHOD_PAGE_TEXT {
@@ -30546,6 +30582,24 @@ namespace XenAdmin {
         public static string ROLLING_UPGRADE_REBOOT_MESSAGE {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_REBOOT_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All rolling pool upgrade processes were completed successfuly..
+        /// </summary>
+        public static string ROLLING_UPGRADE_SUCCESS_MANY {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_SUCCESS_MANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The rolling pool upgrade process was completed successfuly..
+        /// </summary>
+        public static string ROLLING_UPGRADE_SUCCESS_ONE {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_SUCCESS_ONE", resourceCulture);
             }
         }
         
@@ -30591,6 +30645,15 @@ namespace XenAdmin {
         public static string ROLLING_UPGRADE_UPGRADE_COMPLETED {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_UPGRADE_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rolling pool upgrade is in progress. The upgrade might take some time..
+        /// </summary>
+        public static string ROLLING_UPGRADE_UPGRADE_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_UPGRADE_IN_PROGRESS", resourceCulture);
             }
         }
         
