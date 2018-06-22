@@ -4303,7 +4303,7 @@ This will also delete its subfolders.</value>
     <value>does not use</value>
   </data>
   <data name="DONE" xml:space="preserve">
-    <value>done.</value>
+    <value> done.</value>
   </data>
   <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
     <value>Don't select a target server</value>
@@ -5210,7 +5210,7 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
 {0}</value>
   </data>
   <data name="EXIT_SERVER_FROM_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Exit {0} from maintenance mode</value>
+    <value>{0} exiting maintenance mode</value>
   </data>
   <data name="EXPAND_ALL" xml:space="preserve">
     <value>E&amp;xpand All</value>
@@ -9780,7 +9780,7 @@ File not found</value>
     <value>VMs migrated from Server</value>
   </data>
   <data name="PLANACTION_VMS_MIGRATING" xml:space="preserve">
-    <value>Migrating VMs off server '{0}' ... </value>
+    <value>Migrating VMs off server '{0}'...</value>
   </data>
   <data name="PLANACTION_VMS_REBOOT" xml:space="preserve">
     <value>Reboot specified VMs</value>
@@ -9789,7 +9789,7 @@ File not found</value>
     <value>Rebooted specified VMs</value>
   </data>
   <data name="PLANACTION_VMS_REBOOTING" xml:space="preserve">
-    <value>Rebooting specified VMs ... </value>
+    <value>Rebooting specified VMs...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_DISABLING_HOST_SERVER" xml:space="preserve">
     <value>Disabling host server</value>
@@ -11961,7 +11961,7 @@ Check your settings and try again.</value>
     <value>Exited maintenance mode</value>
   </data>
   <data name="UPDATES_WIZARD_EXITING_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Exiting {0} from maintenance mode... </value>
+    <value>{0} is exiting maintenance mode...</value>
   </data>
   <data name="UPDATES_WIZARD_EXIT_MAINTENANCE_MODE" xml:space="preserve">
     <value>Exit maintenance mode</value>
@@ -12098,7 +12098,7 @@ Check your settings and try again.</value>
     <value>Rebooted</value>
   </data>
   <data name="UPDATES_WIZARD_REBOOTING" xml:space="preserve">
-    <value>Rebooting {0} ... </value>
+    <value>Rebooting {0}...</value>
   </data>
   <data name="UPDATES_WIZARD_REBOOT_NEEDED" xml:space="preserve">
     <value>{0}: This server needs to be rebooted after the update is applied.</value>
