@@ -48,6 +48,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
+            Visible = true;
             string value = Host.call_plugin(session, HostXenRef.opaque_ref, "prepare_host_upgrade.py", "main", _arguments);
             if (value.ToLower() == "true")
                 base.RunWithSession(ref session);

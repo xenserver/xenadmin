@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using XenAPI;
 
 
@@ -48,7 +47,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             TitlePlan = string.Format(Messages.EXIT_SERVER_FROM_MAINTENANCE_MODE, host.Name());
             _vms = vms;
             _enableOnly = enableOnly;
-            Visible = false;
         }
 
         protected override void RunWithSession(ref Session session)

@@ -89,7 +89,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected PlanAction(string title)
         {
-            Visible = true;
+            Visible = false;
             _percentComplete = 0;
             Title = title;
         }

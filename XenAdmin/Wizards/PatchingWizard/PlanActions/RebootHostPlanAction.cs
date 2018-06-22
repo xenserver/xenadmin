@@ -40,7 +40,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public RebootHostPlanAction(Host host)
             : base(host, string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))
         {
-            Visible = false;
         }
 
         protected override void RunWithSession(ref Session session)

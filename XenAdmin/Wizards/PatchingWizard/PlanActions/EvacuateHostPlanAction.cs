@@ -41,7 +41,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             : base(host, string.Format(Messages.PLANACTION_VMS_MIGRATING, host.Name()))
         {
             TitlePlan = string.Format(Messages.MIGRATE_VMS_OFF_SERVER, host.Name());
-            Visible = false;
         }
 
         protected override void RunWithSession(ref Session session)

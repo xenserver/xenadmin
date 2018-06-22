@@ -50,6 +50,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
+            Visible = true;
             var suppPackVdis = new Dictionary<Host, VDI> { { host, vdi } };
             new InstallSupplementalPackAction(suppPackVdis, true).RunExternal(session);
         }

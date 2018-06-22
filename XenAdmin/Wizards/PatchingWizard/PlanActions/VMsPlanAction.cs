@@ -50,6 +50,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
+            Visible = true;
             List<VM> vmObjs = new List<VM>();
             foreach (XenRef<VM> vm in _vms)
                 vmObjs.Add(Connection.TryResolveWithTimeout(vm));
@@ -66,9 +67,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 try
                 {
                     PollTaskForResult(Connection, ref session, task, delegate(int progress)
-                                                                                                 {
-                                                                                                     PercentComplete = (progress / vmCount) + ((100 * i) / vmCount);
-                                                                                                 });
+                    {
+                        PercentComplete = progress/vmCount + 100*i/vmCount;
+                    });
 
                     i++;
                 }
