@@ -34,8 +34,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
- using XenAdmin.Controls;
- using XenAdmin.Core;
+using XenAdmin.Core;
 using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
@@ -78,12 +77,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             
             foreach (var host in hostNeedUpgrade)
             {
-                var hostUpgradePlanActions = GetSubTasksFor(host);
-                if (hostUpgradePlanActions.Count > 0)
-                {
-                    var hostPlanActions = new HostPlanActions(host) {InitialPlanActions = hostUpgradePlanActions};
-                    planActions.Add(hostPlanActions);
-                }
+                planActions.Add(GetSubTasksFor(host));
             }
 
             //add a revert pre-check action for this pool
@@ -194,24 +188,69 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             }
             return false;
         }
+
+        private Dictionary<Pool, List<XenServerPatch>> AllUploadedPatches = new Dictionary<Pool, List<XenServerPatch>>();
+        private Dictionary<Pool, List<XenServerPatch>> MinimalPatches = new Dictionary<Pool, List<XenServerPatch>>();
+
+        protected override void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts)
+        {
+            if (!ApplyUpdatesToNewVersion || host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
+                return;
+
+            var pool = Helpers.GetPoolOfOne(host.Connection);
+            if (pool == null)
+                return;
+
+            if (!MinimalPatches.ContainsKey(pool))
+                MinimalPatches.Add(pool, Updates.GetMinimalPatches(pool.Connection));
+
+            var minimalPatches = MinimalPatches[pool];
+            
+            if (minimalPatches == null)
+                return;
+
+            if (!AllUploadedPatches.ContainsKey(pool))
+                AllUploadedPatches.Add(pool, new List<XenServerPatch>());
+            var uploadedPatches = AllUploadedPatches[pool];
+
+            var hostActions = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, new KeyValuePair<XenServerPatch, string>());
+            if (hostActions.UpdatesPlanActions != null && hostActions.UpdatesPlanActions.Count > 0)
+            {
+                foreach (var ha in bgw.HostActions)
+                {
+                    if (host.Equals(ha.Host))
+                    {
+                        ha.UpdatesPlanActions = hostActions.UpdatesPlanActions;
+                        ha.DelayedActions = hostActions.DelayedActions;
+                        break;
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Private methods
-        private List<PlanAction> GetSubTasksFor(Host host)
+        private HostPlanActions GetSubTasksFor(Host host)
         {
+            var hostPlanActions = new HostPlanActions(host);
             var runningVMs = RunningVMs(host);
 
             var upgradeAction = ManualModeSelected
                 ? new UpgradeManualHostPlanAction(host)
                 : new UpgradeHostPlanAction(host, InstallMethodConfig);
 
-            return new List<PlanAction>
+            hostPlanActions.InitialPlanActions = new List<PlanAction>()
             {
                 new EvacuateHostPlanAction(host),
-                upgradeAction,
+                upgradeAction
+            };
+
+            hostPlanActions.DelayedActions = new List<PlanAction>()
+            {
                 new BringBabiesBackAction(runningVMs, host, true)
             };
-         }
+            return hostPlanActions;
+        }
 
         private static List<XenRef<VM>> RunningVMs(Host host)
         {
