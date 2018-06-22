@@ -340,18 +340,10 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             var groups = new List<CheckGroup>();
 
+            //XenCenter version check
             if (UpdateAlert != null && UpdateAlert.NewServerVersion != null)
             {
-                //XenCenter version check
                 groups.Add(new CheckGroup(Messages.CHECKING_XENCENTER_VERSION, new List<Check> {new XenCenterVersionCheck(UpdateAlert.NewServerVersion)}));
-
-                //Homogeneity check for version update
-                var homogeneityChecks = new List<Check>();
-                foreach (var pool in SelectedPools)
-                    homogeneityChecks.Add(new ServerSelectionCheck(pool, UpdateAlert, SelectedServers));
-
-                if (homogeneityChecks.Count > 0)
-                    groups.Add(new CheckGroup(Messages.CHECKING_SERVER_SELECTION, homogeneityChecks));
             }
 
             //HostLivenessCheck checks
