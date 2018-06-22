@@ -38,27 +38,19 @@ namespace XenAdmin.Wizards.PatchingWizard
 {
     public class UpdateProgressBackgroundWorker : BackgroundWorker
     {
-        private readonly int _actionsCount;
         public List<HostPlanActions> HostActions { get; private set; }
         public List<PlanAction> FinalActions { get; private set; }
         public List<PlanAction> CleanupActions { get; private set; }
         public readonly List<PlanAction> DoneActions = new List<PlanAction>();
         public readonly List<PlanAction> InProgressActions = new List<PlanAction>();
         public string Name { get; set; }
+        public int ProgressIncrement { get; set; }
 
         public UpdateProgressBackgroundWorker(List<HostPlanActions> planActions, List<PlanAction> finalActions)
         {
             HostActions = planActions;
             FinalActions = finalActions;
             CleanupActions = finalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
-
-            _actionsCount = HostActions.Sum(t => t.InitialPlanActions.Count + t.UpdatesPlanActions.Count + t.DelayedActions.Count) + FinalActions.Count;
-
-        }
-
-        public int ActionsCount
-        {
-            get { return _actionsCount; }
         }
 
         public new void CancelAsync()
@@ -84,7 +76,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         }
     }
 
-    public struct HostPlanActions
+    public class HostPlanActions
     {
         public XenAPI.Host Host;
         public List<PlanAction> InitialPlanActions;

@@ -42,9 +42,7 @@ namespace XenAdmin.Wizards.PatchingWizard
     {
         public XenServerPatchAlert UpdateAlert { private get; set; }
         public WizardMode WizardMode { private get; set; }
-        
-        private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
-        public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+      
         public KeyValuePair<XenServerPatch, string> PatchFromDisk { private get; set; }
 
         public PatchingWizard_AutomatedUpdatesPage()
@@ -100,7 +98,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var host in hosts)
             {
-                var hostActions = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches);
+                var hostActions = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, PatchFromDisk);
                 if (hostActions.UpdatesPlanActions != null && hostActions.UpdatesPlanActions.Count > 0)
                     planActions.Add(hostActions);
             }
@@ -111,88 +109,5 @@ namespace XenAdmin.Wizards.PatchingWizard
                 finalActions.Add(new UnwindProblemsAction(problemsToRevert, string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, pool.Connection.Name)));
         }
         #endregion
-
-        private HostPlanActions GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches, List<XenServerPatch> uploadedPatches)
-        {
-            var hostPlanActions = new HostPlanActions(host);
-
-            var patchSequence = Updates.GetPatchSequenceForHost(host, minimalPatches);
-            if (patchSequence == null)
-                return hostPlanActions;
-
-            var planActionsPerHost = new List<PlanAction>();
-            var delayedActionsPerHost = new List<PlanAction>();
-
-            foreach (var patch in patchSequence)
-            {
-                if (!uploadedPatches.Contains(patch))
-                {
-                    planActionsPerHost.Add(new DownloadPatchPlanAction(host.Connection, patch, AllDownloadedPatches, PatchFromDisk));
-                    planActionsPerHost.Add(new UploadPatchToMasterPlanAction(host.Connection, patch, patchMappings, AllDownloadedPatches, PatchFromDisk));
-                    uploadedPatches.Add(patch);
-                }
-
-                planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings));
-                planActionsPerHost.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
-
-                if (patch.GuidanceMandatory)
-                {
-                    var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction)
-                        ? new RestartHostPlanAction(host, host.GetRunningVMs(), true, true)
-                        : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
-
-                    if (action != null)
-                    {
-                        planActionsPerHost.Add(action);
-                        // remove all delayed actions of the same kind that has already been added
-                        // (because this action is guidance-mandatory=true, therefore
-                        // it will run immediately, making delayed ones obsolete)
-                        delayedActionsPerHost.RemoveAll(a => action.GetType() == a.GetType());
-                    }
-                }
-                else
-                {
-                    var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
-                    // add the action if it's not already in the list
-                    if (action != null && delayedActionsPerHost.All(a => a.GetType() != action.GetType()))
-                        delayedActionsPerHost.Add(action);
-                }
-
-                var isLastHostInPool = hosts.IndexOf(host) == hosts.Count - 1;
-                if (isLastHostInPool)
-                {
-                    // add cleanup action for current patch at the end of the update seuence for the last host in the pool
-                    var master = Helpers.GetMaster(host.Connection);
-                    planActionsPerHost.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
-                }
-            }
-
-            var lastRestart = delayedActionsPerHost.FindLast(a => a is RestartHostPlanAction)
-                              ?? planActionsPerHost.FindLast(a => a is RestartHostPlanAction);
-
-            if (lastRestart != null)
-                ((RestartHostPlanAction)lastRestart).EnableOnly = false;
-
-            hostPlanActions.UpdatesPlanActions = planActionsPerHost;
-            hostPlanActions.DelayedActions = delayedActionsPerHost;
-            return hostPlanActions;
-        }
-
-        private static PlanAction GetAfterApplyGuidanceAction(Host host, after_apply_guidance guidance)
-        {
-            switch (guidance)
-            {
-                case after_apply_guidance.restartHost:
-                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true);
-                case after_apply_guidance.restartXAPI:
-                    return new RestartAgentPlanAction(host);
-                case after_apply_guidance.restartHVM:
-                    return new RebootVMsPlanAction(host, host.GetRunningHvmVMs());
-                case after_apply_guidance.restartPV:
-                    return new RebootVMsPlanAction(host, host.GetRunningPvVMs());
-                default:
-                    return null;
-            }
-        }
     }
 }

@@ -61,6 +61,9 @@ namespace XenAdmin.Wizards.PatchingWizard
         private List<UpdateProgressBackgroundWorker> backgroundWorkers = new List<UpdateProgressBackgroundWorker>();
         private List<UpdateProgressBackgroundWorker> failedWorkers = new List<UpdateProgressBackgroundWorker>();
 
+        private List<PoolPatchMapping> patchMappings = new List<PoolPatchMapping>();
+        public Dictionary<XenServerPatch, string> AllDownloadedPatches = new Dictionary<XenServerPatch, string>();
+
         public AutomatedUpdatesBasePage()
         {
             InitializeComponent();
@@ -133,6 +136,8 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             return false;
         }
+
+        protected virtual void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts) { }
         #endregion
 
         #region background workers
@@ -300,9 +305,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                     var hostActions = ha;
                     var host = hostActions.Host;
 
+                    // Step 1: InitialPlanActions  (e.g. upgrade the host in the RPU case)
+                    UpdateWorkerProgressIncrement(bgw, hostActions, 1);
                     if (!SkipInitialPlanActions(host))
                     {
-                        var initialActions = hostActions.InitialPlanActions; // initial actions (e.g. upgrade the host in the RPU case)
+                        var initialActions = hostActions.InitialPlanActions;
 
                         foreach (var a in initialActions)
                         {
@@ -317,8 +324,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                             RunPlanAction(bgw, action);
                         }
                     }
-                   
-                    var planActions = hostActions.UpdatesPlanActions; // priority update actions
+
+                    DoAfterInitialPlanActions(bgw, host, bgw.HostActions.Select(h => h.Host).ToList());
+
+                    // Step 2: UpdatesPlanActions  (priority update action)
+                    UpdateWorkerProgressIncrement(bgw, hostActions, 2);
+                    var planActions = hostActions.UpdatesPlanActions; 
                     foreach (var a in planActions)
                     {
                         action = a;
@@ -332,6 +343,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                         RunPlanAction(bgw, action);
                     }
 
+                    // Step 3: DelayedActions
+                    UpdateWorkerProgressIncrement(bgw, hostActions, 3);
                     // running delayed actions, but skipping the ones that should be skipped
                     var delayedActions = hostActions.DelayedActions;
                     var restartActions = delayedActions.Where(a => a is RestartHostPlanAction).ToList();
@@ -374,12 +387,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                             //skip running it, but still need to report progress, mainly for the progress bar
 
                             action.Visible = false;
-                            bgw.ReportProgress(100 / bgw.ActionsCount, action);
+                            bgw.ReportProgress(bgw.ProgressIncrement, action);
                         }
                     }
                 }
 
-                //running final actions (eg. revert pre-checks)
+                // Step 4: FinalActions (eg. revert pre-checks)
+                UpdateWorkerProgressIncrement(bgw, null, 4);
                 foreach (var a in bgw.FinalActions)
                 {
                     action = a;
@@ -413,6 +427,43 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
+        private void UpdateWorkerProgressIncrement(UpdateProgressBackgroundWorker bgw, HostPlanActions hostPlanActions, int step)
+        {
+            // step 1 = InitialPlanActions; step 2 = UpdatePlanActions; step 3 = DelayedActions; step 4 = FinalActions.
+            // Allocated percentage allocated for each step: step 1: 30%; step 2: 60% (or 90% if there are no initial actions); step 3: 6%; step 4: 4%.
+            if (step == 4)
+            {
+                var step4ActionsCount = bgw.FinalActions.Count;
+                var step4AllocatedPercentage = 4;
+                bgw.ProgressIncrement = step4ActionsCount > 0 ? step4AllocatedPercentage / step4ActionsCount : 0;
+                return;
+            }
+
+            var hostCount = bgw.HostActions.Count;
+            var step1ActionsCount = hostPlanActions != null ? hostPlanActions.InitialPlanActions.Count: 0;
+            var step1AllocatedPercentage = step1ActionsCount > 0 ? 30 : 0;
+            if (step == 1)
+            {
+                bgw.ProgressIncrement = step1ActionsCount > 0 ? step1AllocatedPercentage / hostCount / step1ActionsCount : 0;
+                return;
+            }
+
+            var step2ActionsCount = hostPlanActions != null ? hostPlanActions.UpdatesPlanActions.Count : 0;
+            var step2AllocatedPercentage = step2ActionsCount > 0 ? (90 - step1AllocatedPercentage) : 0;
+            if (step == 2)
+            {
+                bgw.ProgressIncrement = step2ActionsCount > 0 ? step2AllocatedPercentage / hostCount / step2ActionsCount : 0;
+                return;
+            }
+
+            var step3ActionsCount = hostPlanActions != null ? hostPlanActions.DelayedActions.Count : 0;
+            var step3AllocatedPercentage = step3ActionsCount > 0 ? 96 - step1AllocatedPercentage - step2AllocatedPercentage : 0;
+            if (step == 3)
+            {
+                bgw.ProgressIncrement = step3ActionsCount > 0 ? step3AllocatedPercentage / hostCount / step3ActionsCount : 0;
+            }
+        }
+
         private void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
         {
             if (bgw.DoneActions.Contains(action) && action.Error == null) // this action was completed successfully, do not run it again
@@ -431,7 +482,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             Thread.Sleep(1000);
 
             action.OnProgressChange -= action_OnProgressChange;
-            bgw.ReportProgress(100 / bgw.ActionsCount, action);
+            bgw.ReportProgress(bgw.ProgressIncrement, action);
         }
 
         private void action_OnProgressChange(object sender, EventArgs e)
@@ -505,6 +556,89 @@ namespace XenAdmin.Wizards.PatchingWizard
         private void buttonRetry_Click(object sender, EventArgs e)
         {
             RetryFailedActions();
+        }
+
+        protected HostPlanActions GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches, List<XenServerPatch> uploadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
+        {
+            var hostPlanActions = new HostPlanActions(host);
+
+            var patchSequence = Updates.GetPatchSequenceForHost(host, minimalPatches);
+            if (patchSequence == null)
+                return hostPlanActions;
+
+            var planActionsPerHost = new List<PlanAction>();
+            var delayedActionsPerHost = new List<PlanAction>();
+
+            foreach (var patch in patchSequence)
+            {
+                if (!uploadedPatches.Contains(patch))
+                {
+                    planActionsPerHost.Add(new DownloadPatchPlanAction(host.Connection, patch, AllDownloadedPatches, patchFromDisk));
+                    planActionsPerHost.Add(new UploadPatchToMasterPlanAction(host.Connection, patch, patchMappings, AllDownloadedPatches, patchFromDisk));
+                    uploadedPatches.Add(patch);
+                }
+
+                planActionsPerHost.Add(new PatchPrecheckOnHostPlanAction(host.Connection, patch, host, patchMappings));
+                planActionsPerHost.Add(new ApplyXenServerPatchPlanAction(host, patch, patchMappings));
+
+                if (patch.GuidanceMandatory)
+                {
+                    var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction)
+                        ? new RestartHostPlanAction(host, host.GetRunningVMs(), true, true)
+                        : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
+
+                    if (action != null)
+                    {
+                        planActionsPerHost.Add(action);
+                        // remove all delayed actions of the same kind that has already been added
+                        // (because this action is guidance-mandatory=true, therefore
+                        // it will run immediately, making delayed ones obsolete)
+                        delayedActionsPerHost.RemoveAll(a => action.GetType() == a.GetType());
+                    }
+                }
+                else
+                {
+                    var action = GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
+                    // add the action if it's not already in the list
+                    if (action != null && delayedActionsPerHost.All(a => a.GetType() != action.GetType()))
+                        delayedActionsPerHost.Add(action);
+                }
+
+                var isLastHostInPool = hosts.IndexOf(host) == hosts.Count - 1;
+                if (isLastHostInPool)
+                {
+                    // add cleanup action for current patch at the end of the update seuence for the last host in the pool
+                    var master = Helpers.GetMaster(host.Connection);
+                    planActionsPerHost.Add(new RemoveUpdateFileFromMasterPlanAction(master, patchMappings, patch));
+                }
+            }
+
+            var lastRestart = delayedActionsPerHost.FindLast(a => a is RestartHostPlanAction)
+                              ?? planActionsPerHost.FindLast(a => a is RestartHostPlanAction);
+
+            if (lastRestart != null)
+                ((RestartHostPlanAction)lastRestart).EnableOnly = false;
+
+            hostPlanActions.UpdatesPlanActions = planActionsPerHost;
+            hostPlanActions.DelayedActions = delayedActionsPerHost;
+            return hostPlanActions;
+        }
+
+        private static PlanAction GetAfterApplyGuidanceAction(Host host, after_apply_guidance guidance)
+        {
+            switch (guidance)
+            {
+                case after_apply_guidance.restartHost:
+                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true);
+                case after_apply_guidance.restartXAPI:
+                    return new RestartAgentPlanAction(host);
+                case after_apply_guidance.restartHVM:
+                    return new RebootVMsPlanAction(host, host.GetRunningHvmVMs());
+                case after_apply_guidance.restartPV:
+                    return new RebootVMsPlanAction(host, host.GetRunningPvVMs());
+                default:
+                    return null;
+            }
         }
     }
 }
