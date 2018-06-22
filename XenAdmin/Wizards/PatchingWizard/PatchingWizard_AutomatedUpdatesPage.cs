@@ -139,7 +139,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (patch.GuidanceMandatory)
                 {
                     var action = patch.after_apply_guidance == after_apply_guidance.restartXAPI && delayedActionsPerHost.Any(a => a is RestartHostPlanAction)
-                        ? new RestartHostPlanAction(host, host.GetRunningVMs(), restartAgentFallback: true)
+                        ? new RestartHostPlanAction(host, host.GetRunningVMs(), true, true)
                         : GetAfterApplyGuidanceAction(host, patch.after_apply_guidance);
 
                     if (action != null)
@@ -168,6 +168,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
+            var lastRestart = delayedActionsPerHost.FindLast(a => a is RestartHostPlanAction)
+                              ?? planActionsPerHost.FindLast(a => a is RestartHostPlanAction);
+
+            if (lastRestart != null)
+                ((RestartHostPlanAction)lastRestart).EnableOnly = false;
+
             hostPlanActions.UpdatesPlanActions = planActionsPerHost;
             hostPlanActions.DelayedActions = delayedActionsPerHost;
             return hostPlanActions;
@@ -178,7 +184,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             switch (guidance)
             {
                 case after_apply_guidance.restartHost:
-                    return new RestartHostPlanAction(host, host.GetRunningVMs());
+                    return new RestartHostPlanAction(host, host.GetRunningVMs(), true);
                 case after_apply_guidance.restartXAPI:
                     return new RestartAgentPlanAction(host);
                 case after_apply_guidance.restartHVM:

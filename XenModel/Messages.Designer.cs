@@ -12080,7 +12080,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to done..
+        ///   Looks up a localized string similar to  done..
         /// </summary>
         public static string DONE {
             get {
@@ -14760,7 +14760,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exit {0} from maintenance mode.
+        ///   Looks up a localized string similar to {0} exiting maintenance mode.
         /// </summary>
         public static string EXIT_SERVER_FROM_MAINTENANCE_MODE {
             get {
@@ -27131,7 +27131,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-		///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it..
+        ///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY {
             get {
@@ -28137,7 +28137,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Migrating VMs off server &apos;{0}&apos; ... .
+        ///   Looks up a localized string similar to Migrating VMs off server &apos;{0}&apos;....
         /// </summary>
         public static string PLANACTION_VMS_MIGRATING {
             get {
@@ -28164,7 +28164,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rebooting specified VMs ... .
+        ///   Looks up a localized string similar to Rebooting specified VMs....
         /// </summary>
         public static string PLANACTION_VMS_REBOOTING {
             get {
@@ -34638,7 +34638,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exiting {0} from maintenance mode... .
+        ///   Looks up a localized string similar to {0} is exiting maintenance mode....
         /// </summary>
         public static string UPDATES_WIZARD_EXITING_MAINTENANCE_MODE {
             get {
@@ -35045,7 +35045,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rebooting {0} ... .
+        ///   Looks up a localized string similar to Rebooting {0}....
         /// </summary>
         public static string UPDATES_WIZARD_REBOOTING {
             get {
