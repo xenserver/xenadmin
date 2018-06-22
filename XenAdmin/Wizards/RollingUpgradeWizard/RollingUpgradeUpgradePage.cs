@@ -59,7 +59,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         #endregion
 
         #region Accessors
-        public List<ThreeButtonDialog> Dialogs = new List<ThreeButtonDialog>();
         public bool ManualModeSelected { private get; set; }
         public Dictionary<string, string> InstallMethodConfig { private get; set; }
         #endregion
@@ -122,10 +121,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             {
                 using (var dialog = new NonModalThreeButtonDialog(SystemIcons.Information, msg, Messages.REBOOT, Messages.SKIP_SERVER))
                 {
-                    Dialogs.Add(dialog);
-                    dialog.ShowDialog(this);
-                    Dialogs.Remove(dialog);
-                    if (dialog.DialogResult != DialogResult.OK) // Cancel or Unknown
+                    if (dialog.ShowDialog(this) != DialogResult.OK) // Cancel or Unknown
                     {
                         if (action.GetResolvedHost().IsMaster())
                         {
@@ -250,7 +246,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         private HostPlanActions GetSubTasksFor(Host host)
         {
             var hostPlanActions = new HostPlanActions(host);
-            var runningVMs = RunningVMs(host);
+            var runningVMs = host.GetRunningVMs();
 
             var upgradeAction = ManualModeSelected
                 ? new UpgradeManualHostPlanAction(host)
@@ -269,18 +265,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return hostPlanActions;
         }
 
-        private static List<XenRef<VM>> RunningVMs(Host host)
-        {
-            var vms = new List<XenRef<VM>>();
-            foreach (VM vm in host.Connection.ResolveAll(host.resident_VMs))
-            {
-                if (!vm.is_a_real_vm())
-                    continue;
-
-                vms.Add(new XenRef<VM>(vm.opaque_ref));
-            }
-            return vms;
-        }
         private void upgradeHostPlanAction_Timeout(object sender, EventArgs e)
         {
             var dialog = new NonModalThreeButtonDialog(SystemIcons.Exclamation, Messages.ROLLING_UPGRADE_TIMEOUT.Replace("\\n", "\n"), Messages.KEEP_WAITING_BUTTON_LABEL.Replace("\\n", "\n"), Messages.CANCEL);
