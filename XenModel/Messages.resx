@@ -11900,6 +11900,9 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_NO_TOOLS" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it doesn't have up-to-date drivers installed.</value>
   </data>
+  <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_OPERATION_IN_PROGRESS" xml:space="preserve">
+    <value>Cannot migrate VM '{0}', because it is involved in another operation currently in progress.</value>
+  </data>
   <data name="UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON" xml:space="preserve">
     <value>Cannot migrate VM '{0}', because it has one or more PCI devices attached.</value>
   </data>
