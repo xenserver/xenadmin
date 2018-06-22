@@ -120,7 +120,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
             Program.Invoke(this, () =>
             {
-                using (var dialog = new NotModalThreeButtonDialog(SystemIcons.Information, msg, Messages.REBOOT, Messages.SKIP_SERVER))
+                using (var dialog = new NonModalThreeButtonDialog(SystemIcons.Information, msg, Messages.REBOOT, Messages.SKIP_SERVER))
                 {
                     Dialogs.Add(dialog);
                     dialog.ShowDialog(this);
@@ -157,7 +157,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                     //if comes back and does not have a different product version
                     if (Helpers.SameServerVersion(upgradeHostPlanAction.GetResolvedHost(), beforeRebootProductVersion))
                     {
-                        using (var dialog = new NotModalThreeButtonDialog(SystemIcons.Exclamation,
+                        using (var dialog = new NonModalThreeButtonDialog(SystemIcons.Exclamation,
                             string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName)
                             , Messages.REBOOT_AGAIN_BUTTON_LABEL, Messages.SKIP_SERVER))
                         {
@@ -240,11 +240,8 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var hostActions = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, new KeyValuePair<XenServerPatch, string>());
             if (hostActions.UpdatesPlanActions != null && hostActions.UpdatesPlanActions.Count > 0)
             {
-                if (hostPlanActions != null)
-                {
-                    hostPlanActions.UpdatesPlanActions = hostActions.UpdatesPlanActions;
-                    hostPlanActions.DelayedActions.InsertRange(0, hostActions.DelayedActions);
-                }
+                hostPlanActions.UpdatesPlanActions = hostActions.UpdatesPlanActions;
+                hostPlanActions.DelayedActions.InsertRange(0, hostActions.DelayedActions);
             }
         }
         #endregion
@@ -286,37 +283,12 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
         }
         private void upgradeHostPlanAction_Timeout(object sender, EventArgs e)
         {
-            var dialog = new NotModalThreeButtonDialog(SystemIcons.Exclamation, Messages.ROLLING_UPGRADE_TIMEOUT.Replace("\\n", "\n"), Messages.KEEP_WAITING_BUTTON_LABEL.Replace("\\n", "\n"), Messages.CANCEL);
+            var dialog = new NonModalThreeButtonDialog(SystemIcons.Exclamation, Messages.ROLLING_UPGRADE_TIMEOUT.Replace("\\n", "\n"), Messages.KEEP_WAITING_BUTTON_LABEL.Replace("\\n", "\n"), Messages.CANCEL);
             Program.Invoke(this, () => dialog.ShowDialog(this));
             if (dialog.DialogResult != DialogResult.OK) // Cancel or Unknown
             {
                 UpgradeHostPlanAction action = (UpgradeHostPlanAction)sender;
                 action.Cancel();
-            }
-        }
-        #endregion
-
-        #region Nested classes
-        private class NotModalThreeButtonDialog : ThreeButtonDialog
-        {
-            public NotModalThreeButtonDialog(Icon icon, string msg, string button1Text, string button2Text)
-                : base(new Details(icon, msg),
-                    new TBDButton(button1Text, DialogResult.OK),
-                    new TBDButton(button2Text, DialogResult.Cancel))
-            {
-                Buttons[0].Click += new EventHandler(button1_Click);
-                Buttons[1].Click += new EventHandler(button2_Click);
-            }
-
-            void button1_Click(object sender, EventArgs e)
-            {
-                DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            void button2_Click(object sender, EventArgs e)
-            {
-                DialogResult = DialogResult.Cancel;
-                this.Close();
             }
         }
         #endregion
