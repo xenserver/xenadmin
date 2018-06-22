@@ -9564,6 +9564,9 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_MIXED_VERSIONS" xml:space="preserve">
     <value>The same update cannot be applied to {0} and {1} versions of [XenServer]</value>
   </data>
+  <data name="PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_NOT_UPDATE_MASTER_WITHOUT_ALL_HOSTS" xml:space="preserve">
+    <value>One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version.</value>
+  </data>
   <data name="PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED" xml:space="preserve">
     <value>Update already applied</value>
   </data>
@@ -12037,9 +12040,6 @@ Check your settings and try again.</value>
   </data>
   <data name="UPDATES_WIZARD_LOCAL_STORAGE" xml:space="preserve">
     <value>{0}: The VM '{1}' uses local storage and cannot be migrated.</value>
-  </data>
-  <data name="UPDATES_WIZARD_MASTER_VERSION_NOT_COMPATIBLE_PROBLEM" xml:space="preserve">
-    <value>{0}: The update needs to also be applied on the master.</value>
   </data>
   <data name="UPDATES_WIZARD_MIXED_POOL_SERVER_SELECTION_WARNING" xml:space="preserve">
     <value>{0}: Check skipped because the pool is partially upgraded.</value>

@@ -96,9 +96,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         {
             try
             {
-                List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
-                bool hasMixedPool = xenConnections.Select(Helpers.GetPool).Any(p => p != null && !p.IsPoolFullyUpgraded());
-                poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || (!hasMixedPool && (SelectedUpdateAlert != null || FileFromDiskAlert != null));
+                poolSelectionOnly = WizardMode == WizardMode.AutomatedUpdates || SelectedUpdateAlert != null || FileFromDiskAlert != null;
 
                 switch (WizardMode)
                 {
@@ -118,6 +116,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 dataGridViewHosts.Rows.Clear();
 
+                List<IXenConnection> xenConnections = ConnectionsManager.XenConnectionsCopy;
                 xenConnections.Sort();
                 int licensedPoolCount = 0;
                 int poolCount = 0;
@@ -127,11 +126,13 @@ namespace XenAdmin.Wizards.PatchingWizard
                     Pool pool = Helpers.GetPool(xenConnection);
                     bool hasPool = pool != null;
                     PatchingHostsDataGridViewRow poolRow = null;
+                    int poolRowIndex = -1;
+                    bool hasDisabledRow = false;
 
                     if (hasPool)
                     {
                         poolRow = new PatchingHostsDataGridViewRow(pool);
-                        dataGridViewHosts.Rows.Add(poolRow);
+                        poolRowIndex = dataGridViewHosts.Rows.Add(poolRow);
                         poolRow.Enabled = false;
                     }
 
@@ -154,12 +155,30 @@ namespace XenAdmin.Wizards.PatchingWizard
                         //Enable the pool row
                         if (poolRow != null && hostRow.Enabled && !poolRow.Enabled)
                             poolRow.Enabled = true;
+                        if (!hostRow.Enabled && !hasDisabledRow)
+                            hasDisabledRow = true;
                     }
 
-                    if (poolRow != null && !poolRow.Enabled)
+                    if (poolRow != null)
                     {
-                        var masterRow = (PatchingHostsDataGridViewRow) dataGridViewHosts.Rows[dataGridViewHosts.Rows.IndexOf(poolRow) + 1];
-                        poolRow.Cells[3].ToolTipText = masterRow.Cells[3].ToolTipText;
+                        var masterRow = (PatchingHostsDataGridViewRow)dataGridViewHosts.Rows[poolRowIndex + 1];
+
+                        if (!poolRow.Enabled)
+                        {
+                            poolRow.Cells[3].ToolTipText = masterRow.Cells[3].ToolTipText;
+                        }
+                        else if (hasDisabledRow && WizardMode == WizardMode.NewVersion && masterRow.Enabled)
+                        {
+                            for (int i = poolRowIndex; i < dataGridViewHosts.Rows.Count; i++)
+                            {
+                                var row = (PatchingHostsDataGridViewRow) dataGridViewHosts.Rows[i];
+                                if (row.Enabled)
+                                {
+                                    row.Enabled = false;
+                                    row.Cells[3].ToolTipText = Messages.PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_NOT_UPDATE_MASTER_WITHOUT_ALL_HOSTS;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -542,11 +561,18 @@ namespace XenAdmin.Wizards.PatchingWizard
             {
                 if (poolSelectionOnly)
                 {
-                    if (WizardMode != WizardMode.SingleUpdate)
+                    var enabledHosts = new List<Host>();
+                    foreach (PatchingHostsDataGridViewRow row in dataGridViewHosts.Rows)
+                    {
+                        if (row.IsAHostRow && row.Enabled)
+                            enabledHosts.Add((Host)row.Tag);
+                    }
+
+                    if (WizardMode != WizardMode.SingleUpdate)   
                         //prechecks will fail in automated updates mode if one of the hosts is unreachable
-                        return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts).ToList();
+                        return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts.Where(host => enabledHosts.Contains(host))).ToList();
                     //prechecks will issue warning but allow updates to be installed on the reachable hosts only
-                    return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts.Where(host => host.IsLive())).ToList();
+                    return SelectedPools.SelectMany(p => p.Connection.Cache.Hosts.Where(host => host.IsLive() && enabledHosts.Contains(host))).ToList();
                 }
                 else
                 {

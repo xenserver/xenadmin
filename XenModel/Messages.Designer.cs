@@ -27741,6 +27741,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to One or more servers in the pool have to be upgraded before [XenCenter] can apply the selected new version..
+        /// </summary>
+        public static string PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_NOT_UPDATE_MASTER_WITHOUT_ALL_HOSTS {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_SELECTSERVERPAGE_NEW_VERSION_NOT_UPDATE_MASTER_WITHOUT_ALL_HOSTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update already applied.
         /// </summary>
         public static string PATCHINGWIZARD_SELECTSERVERPAGE_PATCH_ALREADY_APPLIED {
@@ -34889,15 +34898,6 @@ namespace XenAdmin {
         public static string UPDATES_WIZARD_LOCAL_STORAGE {
             get {
                 return ResourceManager.GetString("UPDATES_WIZARD_LOCAL_STORAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: The update needs to also be applied on the master..
-        /// </summary>
-        public static string UPDATES_WIZARD_MASTER_VERSION_NOT_COMPATIBLE_PROBLEM {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_MASTER_VERSION_NOT_COMPATIBLE_PROBLEM", resourceCulture);
             }
         }
         
