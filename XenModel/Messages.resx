@@ -10600,6 +10600,18 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="ROLLING_UPGRADE_DISCONNECTED_SERVER" xml:space="preserve">
     <value>No longer connected to {0}. Please review your selection and try again.</value>
   </data>
+  <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
+    <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
+  </data>
+  <data name="ROLLING_UPGRADE_ERROR_ONE" xml:space="preserve">
+    <value>The rolling pool upgrade process was not completed successfuly. The upgrade process has been paused. Press Retry to resume it.</value>
+  </data>
+  <data name="ROLLING_UPGRADE_ERROR_POOL_MANY" xml:space="preserve">
+    <value>The following errors occurred while rolling pool upgrade was in progress:</value>
+  </data>
+  <data name="ROLLING_UPGRADE_ERROR_POOL_ONE" xml:space="preserve">
+    <value>The following error occurred while rolling pool upgrade was in progress:</value>
+  </data>
   <data name="ROLLING_UPGRADE_METHOD_PAGE_TEXT" xml:space="preserve">
     <value>Locate the network install files (Automatic Mode)</value>
   </data>
@@ -10623,6 +10635,12 @@ To skip this server and continue to the next server in the pool, click Skip This
 The master must be upgraded first, so if you skip the master, the rolling pool upgrade will be canceled for this pool.
 </value>
   </data>
+  <data name="ROLLING_UPGRADE_SUCCESS_MANY" xml:space="preserve">
+    <value>All rolling pool upgrade processes were completed successfuly.</value>
+  </data>
+  <data name="ROLLING_UPGRADE_SUCCESS_ONE" xml:space="preserve">
+    <value>The rolling pool upgrade process was completed successfuly.</value>
+  </data>
   <data name="ROLLING_UPGRADE_TIMEOUT" xml:space="preserve">
     <value>Still waiting for the upgrade to complete.\n\nThere maybe a problem check the server console.\n\nClick Keep Waiting if the upgrade is still running or Cancel if there was an error.</value>
   </data>
@@ -10637,6 +10655,9 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade is complete.</value>
+  </data>
+  <data name="ROLLING_UPGRADE_UPGRADE_IN_PROGRESS" xml:space="preserve">
+    <value>Rolling pool upgrade is in progress. The upgrade might take some time.</value>
   </data>
   <data name="ROLLING_UPGRADE_UPGRADE_NOT_COMPLETED" xml:space="preserve">
     <value>Rolling pool upgrade did not complete.</value>
