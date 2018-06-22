@@ -222,6 +222,9 @@ namespace XenAdmin.Diagnostics.Checks
                     case Failure.VM_HAS_VGPU:
                         return new VmHasVgpu(this, vm);
 
+                    case Failure.OTHER_OPERATION_IN_PROGRESS:
+                        return new CannotMigrateVM(this, vm, CannotMigrateVM.CannotMigrateVMReason.OperationInProgress);
+
                     default:
                         throw new NullReferenceException(exception[0]);
                 }

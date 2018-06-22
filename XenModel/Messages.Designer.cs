@@ -34545,6 +34545,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it is involved in another operation currently in progress..
+        /// </summary>
+        public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_OPERATION_IN_PROGRESS {
+            get {
+                return ResourceManager.GetString("UPDATES_WIZARD_CANNOT_MIGRATE_VM_OPERATION_IN_PROGRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot migrate VM &apos;{0}&apos;, because it has one or more PCI devices attached..
         /// </summary>
         public static string UPDATES_WIZARD_CANNOT_MIGRATE_VM_PCI_REASON {
