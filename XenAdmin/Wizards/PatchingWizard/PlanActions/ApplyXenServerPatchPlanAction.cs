@@ -62,16 +62,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
-                XenRef<Task> task = null;
+                Visible = true;
 
-                if (mapping.Pool_patch != null)
-                {
-                    task = Pool_patch.async_apply(session, mapping.Pool_patch.opaque_ref, host.opaque_ref);
-                }
-                else
-                {
-                    task = Pool_update.async_apply(session, mapping.Pool_update.opaque_ref, host.opaque_ref);
-                }
+                var task = mapping.Pool_patch == null
+                    ? Pool_update.async_apply(session, mapping.Pool_update.opaque_ref, host.opaque_ref)
+                    : Pool_patch.async_apply(session, mapping.Pool_patch.opaque_ref, host.opaque_ref);
 
                 PollTaskForResultAndDestroy(Connection, ref session, task);
             }

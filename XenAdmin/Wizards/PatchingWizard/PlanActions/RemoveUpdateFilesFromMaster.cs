@@ -74,6 +74,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     if (poolPatch != null && poolPatch.opaque_ref != null)
                     {
+                        Visible = true;
                         var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
                         PollTaskForResultAndDestroy(Connection, ref session, task);
 
@@ -84,6 +85,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     if (mapping != null && mapping.Pool_update != null && mapping.Pool_update.opaque_ref != null)
                     {
+                        Visible = true;
                         var poolUpdate = mapping.Pool_update;
 
                         Pool_update.pool_clean(session, poolUpdate.opaque_ref);

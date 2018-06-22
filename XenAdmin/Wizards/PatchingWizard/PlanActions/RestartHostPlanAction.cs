@@ -47,7 +47,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             : base(host, string.Empty)
         {
             _vms = vms;
-            Visible = false;
             _enableOnly = enableOnly;
             _restartAgentFallback = restartAgentFallback;
         }

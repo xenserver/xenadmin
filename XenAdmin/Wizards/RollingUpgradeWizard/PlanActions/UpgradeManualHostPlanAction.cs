@@ -63,11 +63,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
         private bool rebooting = false;
 
-
         protected override void RunWithSession(ref Session session)
         {
             try
             {
+                Visible = true;
                 var hostObj = GetResolvedHost();
 
                 if (hostObj.enabled)

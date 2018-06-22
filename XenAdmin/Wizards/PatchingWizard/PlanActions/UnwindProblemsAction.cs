@@ -49,6 +49,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void _Run()
         {
+            Visible = true;
             int completed = 0;
             foreach (Problem p in _problems)
             {
