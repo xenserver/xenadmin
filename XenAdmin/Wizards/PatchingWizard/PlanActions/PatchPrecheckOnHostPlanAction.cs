@@ -65,6 +65,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 try
                 {
+                    Visible = true;
                     PatchPrecheckCheck check = mapping.Pool_patch == null
                         ? new PatchPrecheckCheck(host, mapping.Pool_update)
                         : new PatchPrecheckCheck(host, mapping.Pool_patch);
@@ -78,7 +79,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     if (problem != null)
                         throw new Exception(string.Format("{0}: {1}. {2}", host, problem.Title, problem.Description));
-
                 }
                 catch (Exception ex)
                 {
