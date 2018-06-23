@@ -19,7 +19,7 @@ namespace XenAdmin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -30604,7 +30604,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Still waiting for the upgrade to complete.\n\nThere maybe a problem check the server console.\n\nClick Keep Waiting if the upgrade is still running or Cancel if there was an error..
+        ///   Looks up a localized string similar to Still waiting for the upgrade to complete.
+        ///
+        ///Please check the server console for possible errors.
+        ///    
+        ///Click Keep Waiting if the upgrade is still running or Cancel if an error occurred..
         /// </summary>
         public static string ROLLING_UPGRADE_TIMEOUT {
             get {

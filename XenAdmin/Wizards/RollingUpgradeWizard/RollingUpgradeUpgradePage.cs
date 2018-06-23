@@ -31,11 +31,8 @@
 
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 using XenAdmin.Core;
-using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
 using XenAdmin.Wizards.RollingUpgradeWizard.PlanActions;
@@ -105,82 +102,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (problemsToRevert.Count > 0)
                 finalActions.Add(new UnwindProblemsAction(problemsToRevert, string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, pool.Connection.Name)));
         }
-        
-        protected override bool ManageSemiAutomaticPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction planAction)
-        {
-            var upgradeHostPlanAction = planAction as UpgradeManualHostPlanAction;
-            if (upgradeHostPlanAction == null || !upgradeHostPlanAction.IsManual)
-                return false;
-
-            //Show dialog prepare host boot from CD or PXE boot and click OK to reboot
-            string msg = string.Format(Messages.ROLLING_UPGRADE_REBOOT_MESSAGE, upgradeHostPlanAction.GetResolvedHost().Name());
-
-            UpgradeManualHostPlanAction action = upgradeHostPlanAction;
-
-            Program.Invoke(this, () =>
-            {
-                using (var dialog = new NonModalThreeButtonDialog(SystemIcons.Information, msg, Messages.REBOOT, Messages.SKIP_SERVER))
-                {
-                    if (dialog.ShowDialog(this) != DialogResult.OK) // Cancel or Unknown
-                    {
-                        if (action.GetResolvedHost().IsMaster())
-                        {
-                            action.Error = new ApplicationException(Messages.EXCEPTION_USER_CANCELLED_MASTER);
-                            throw action.Error;
-                        }
-
-                        action.Error = new CancelledException();
-                    }
-                }
-            });
-
-            if (action.Error != null)
-                return true;
-
-            string beforeRebootProductVersion = upgradeHostPlanAction.GetResolvedHost().LongProductVersion();
-            string hostName = upgradeHostPlanAction.GetResolvedHost().Name();
-            upgradeHostPlanAction.Timeout += upgradeHostPlanAction_Timeout;
-            try
-            {
-                do
-                {
-                    if (bgw.CancellationPending)
-                        break;
-
-                    //Reboot with timeout of 20 min
-                    upgradeHostPlanAction.Run();
-
-                    //if comes back and does not have a different product version
-                    if (Helpers.SameServerVersion(upgradeHostPlanAction.GetResolvedHost(), beforeRebootProductVersion))
-                    {
-                        using (var dialog = new NonModalThreeButtonDialog(SystemIcons.Exclamation,
-                            string.Format(Messages.ROLLING_UPGRADE_REBOOT_AGAIN_MESSAGE, hostName)
-                            , Messages.REBOOT_AGAIN_BUTTON_LABEL, Messages.SKIP_SERVER))
-                        {
-                            Program.Invoke(this, () => dialog.ShowDialog(this));
-                            if (dialog.DialogResult != DialogResult.OK) // Cancel or Unknown
-                            {
-                                if (upgradeHostPlanAction.GetResolvedHost().IsMaster())
-                                {
-                                    upgradeHostPlanAction.Error = new Exception(Messages.HOST_REBOOTED_SAME_VERSION);
-                                    throw upgradeHostPlanAction.Error;
-                                }
-                                upgradeHostPlanAction.Error = new CancelledException();
-                                break;
-                            }
-                            else
-                                upgradeHostPlanAction = new UpgradeManualHostPlanAction(upgradeHostPlanAction.GetResolvedHost());
-                        }
-                    }
-
-                } while (Helpers.SameServerVersion(upgradeHostPlanAction.GetResolvedHost(), beforeRebootProductVersion));
-            }
-            finally
-            {
-                upgradeHostPlanAction.Timeout -= upgradeHostPlanAction_Timeout;
-            }
-            return true; // the action has been handled here
-        }
 
         protected override bool SkipInitialPlanActions(Host host)
         {
@@ -248,9 +169,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var hostPlanActions = new HostPlanActions(host);
             var runningVMs = host.GetRunningVMs();
 
-            var upgradeAction = ManualModeSelected
-                ? new UpgradeManualHostPlanAction(host)
-                : new UpgradeHostPlanAction(host, InstallMethodConfig);
+            UpgradeHostPlanAction upgradeAction;
+            if (ManualModeSelected)
+                upgradeAction = new UpgradeManualHostPlanAction(host, this);
+            else
+                upgradeAction = new UpgradeAutomatedHostPlanAction(host, this, InstallMethodConfig);
 
             hostPlanActions.InitialPlanActions = new List<PlanAction>()
             {
@@ -265,16 +188,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return hostPlanActions;
         }
 
-        private void upgradeHostPlanAction_Timeout(object sender, EventArgs e)
-        {
-            var dialog = new NonModalThreeButtonDialog(SystemIcons.Exclamation, Messages.ROLLING_UPGRADE_TIMEOUT.Replace("\\n", "\n"), Messages.KEEP_WAITING_BUTTON_LABEL.Replace("\\n", "\n"), Messages.CANCEL);
-            Program.Invoke(this, () => dialog.ShowDialog(this));
-            if (dialog.DialogResult != DialogResult.OK) // Cancel or Unknown
-            {
-                UpgradeHostPlanAction action = (UpgradeHostPlanAction)sender;
-                action.Cancel();
-            }
-        }
         #endregion
     }
 }
