@@ -10642,7 +10642,11 @@ The master must be upgraded first, so if you skip the master, the rolling pool u
     <value>The rolling pool upgrade process was completed successfuly.</value>
   </data>
   <data name="ROLLING_UPGRADE_TIMEOUT" xml:space="preserve">
-    <value>Still waiting for the upgrade to complete.\n\nThere maybe a problem check the server console.\n\nClick Keep Waiting if the upgrade is still running or Cancel if there was an error.</value>
+    <value>Still waiting for the upgrade to complete.
+
+Please check the server console for possible errors.
+    
+Click Keep Waiting if the upgrade is still running or Cancel if an error occurred.</value>
   </data>
   <data name="ROLLING_UPGRADE_TITLE_MODE" xml:space="preserve">
     <value>Upgrade Mode</value>

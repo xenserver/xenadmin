@@ -132,11 +132,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected virtual void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions) { }
 
-        protected virtual bool ManageSemiAutomaticPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction planAction)
-        {
-            return false;
-        }
-
         protected virtual bool SkipInitialPlanActions(Host host)
         {
             return false;
@@ -455,9 +450,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             action.OnProgressChange += action_OnProgressChange;
             bgw.ReportProgress(0, action);
 
-            if (!ManageSemiAutomaticPlanAction(bgw, action))
-                action.Run();
-
+            action.Run();
             Thread.Sleep(1000);
 
             action.OnProgressChange -= action_OnProgressChange;
