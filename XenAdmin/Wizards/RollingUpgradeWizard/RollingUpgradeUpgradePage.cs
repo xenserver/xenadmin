@@ -87,7 +87,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return multipleErrors ? Messages.ROLLING_UPGRADE_ERROR_POOL_MANY : Messages.ROLLING_UPGRADE_ERROR_POOL_ONE;
         }
 
-        protected override void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions)
+        protected override void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
             //Add masters first, then the slaves that are not ugpraded
             var hostNeedUpgrade = pool.HostsToUpgrade();
@@ -132,11 +132,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
 
         protected override void DoAfterInitialPlanActions(UpdateProgressBackgroundWorker bgw, Host host, List<Host> hosts)
         {
-            var hostPlanActions = bgw.HostActions.FirstOrDefault(ha => ha.Host.Equals(host));
-            if (hostPlanActions == null)
+            var theHostPlan = bgw.HostPlans.FirstOrDefault(ha => ha.Host.Equals(host));
+            if (theHostPlan == null)
                 return;
 
-            if (hostPlanActions.UpdatesPlanActions.Count > 0) // this is a retry; do not recreate actions
+            if (theHostPlan.UpdatesPlanActions.Count > 0) // this is a retry; do not recreate actions
                 return; 
 
             if (!ApplyUpdatesToNewVersion || host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
@@ -154,19 +154,18 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 AllUploadedPatches.Add(bgw, new List<XenServerPatch>());
             var uploadedPatches = AllUploadedPatches[bgw];
 
-            var hostActions = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, new KeyValuePair<XenServerPatch, string>());
-            if (hostActions.UpdatesPlanActions != null && hostActions.UpdatesPlanActions.Count > 0)
+            var hp = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, new KeyValuePair<XenServerPatch, string>());
+            if (hp.UpdatesPlanActions != null && hp.UpdatesPlanActions.Count > 0)
             {
-                hostPlanActions.UpdatesPlanActions = hostActions.UpdatesPlanActions;
-                hostPlanActions.DelayedActions.InsertRange(0, hostActions.DelayedActions);
+                theHostPlan.UpdatesPlanActions.AddRange(hp.UpdatesPlanActions);
+                theHostPlan.DelayedPlanActions.InsertRange(0, hp.DelayedPlanActions);
             }
         }
         #endregion
 
         #region Private methods
-        private HostPlanActions GetSubTasksFor(Host host)
+        private HostPlan GetSubTasksFor(Host host)
         {
-            var hostPlanActions = new HostPlanActions(host);
             var runningVMs = host.GetRunningVMs();
 
             UpgradeHostPlanAction upgradeAction;
@@ -175,17 +174,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             else
                 upgradeAction = new UpgradeAutomatedHostPlanAction(host, this, InstallMethodConfig);
 
-            hostPlanActions.InitialPlanActions = new List<PlanAction>()
+            var initialPlanActions = new List<PlanAction>()
             {
                 new EvacuateHostPlanAction(host),
                 upgradeAction
             };
 
-            hostPlanActions.DelayedActions = new List<PlanAction>()
+            var delayedActions = new List<PlanAction>()
             {
                 new BringBabiesBackAction(runningVMs, host, true)
             };
-            return hostPlanActions;
+            return new HostPlan(host, initialPlanActions, null, delayedActions);
         }
 
         #endregion
