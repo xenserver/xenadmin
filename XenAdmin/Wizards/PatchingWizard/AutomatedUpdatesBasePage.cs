@@ -317,14 +317,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         foreach (var a in initialActions)
                         {
                             action = a;
-
-                            if (bgw.CancellationPending)
-                            {
-                                doWorkEventArgs.Cancel = true;
-                                return;
-                            }
-
-                            RunPlanAction(bgw, action);
+                            RunPlanAction(bgw, action, ref doWorkEventArgs);
                         }
                     }
 
@@ -336,14 +329,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var a in planActions)
                     {
                         action = a;
-
-                        if (bgw.CancellationPending)
-                        {
-                            doWorkEventArgs.Cancel = true;
-                            return;
-                        }
-
-                        RunPlanAction(bgw, action);
+                        RunPlanAction(bgw, action, ref doWorkEventArgs);
                     }
 
                     // Step 3: DelayedActions
@@ -355,14 +341,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var a in restartActions)
                     {
                         action = a;
-
-                        if (bgw.CancellationPending)
-                        {
-                            doWorkEventArgs.Cancel = true;
-                            return;
-                        }
-
-                        RunPlanAction(bgw, action);
+                        RunPlanAction(bgw, action, ref doWorkEventArgs);
                     }
 
                     var otherActions = delayedActions.Where(a => !(a is RestartHostPlanAction)).ToList();
@@ -371,24 +350,22 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         action = a;
 
-                        if (bgw.CancellationPending)
-                        {
-                            doWorkEventArgs.Cancel = true;
-                            return;
-                        }
-
                         // any non-restart-alike delayed action needs to be run if:
                         // - this host is pre-Ely and there isn't any delayed restart plan action, or
                         // - this host is Ely or above and live patching must have succeeded or there isn't any delayed restart plan action
                         if (restartActions.Count <= 0 ||
                             (Helpers.ElyOrGreater(host) && host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref)).updates_requiring_reboot.Count <= 0))
                         {
-                            RunPlanAction(bgw, action);
+                            RunPlanAction(bgw, action, ref doWorkEventArgs);
                         }
                         else
                         {
                             //skip running it, but still need to report progress, mainly for the progress bar
-
+                            if (bgw.CancellationPending)
+                            {
+                                doWorkEventArgs.Cancel = true;
+                                return;
+                            }
                             action.Visible = false;
                             bgw.ReportProgress(bgw.ProgressIncrement, action);
                         }
@@ -400,14 +377,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var a in bgw.FinalActions)
                 {
                     action = a;
-
-                    if (bgw.CancellationPending)
-                    {
-                        doWorkEventArgs.Cancel = true;
-                        return;
-                    }
-
-                    RunPlanAction(bgw, action);
+                    RunPlanAction(bgw, action, ref doWorkEventArgs);
                 }
             }
             catch (Exception e)
@@ -467,8 +437,14 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action)
+        private void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action, ref DoWorkEventArgs e)
         {
+            if (bgw.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+
             if (bgw.DoneActions.Contains(action) && action.Error == null) // this action was completed successfully, do not run it again
                 return;
 
