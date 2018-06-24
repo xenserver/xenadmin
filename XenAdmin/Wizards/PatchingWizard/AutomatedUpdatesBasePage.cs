@@ -130,7 +130,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected abstract string SuccessMessagePerPool();
         protected abstract string FailureMessagePerPool(bool multipleErrors);
 
-        protected virtual void GeneratePlanActions(Pool pool, List<HostPlanActions> planActions, List<PlanAction> finalActions) { }
+        protected virtual void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions) { }
 
         protected virtual bool SkipInitialPlanActions(Host host)
         {
@@ -147,7 +147,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             foreach (var pool in SelectedPools)
             {
-                var planActions = new List<HostPlanActions>();
+                var planActions = new List<HostPlan>();
                 var finalActions = new List<PlanAction>();
 
                 GeneratePlanActions(pool, planActions, finalActions);
@@ -162,7 +162,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             return atLeastOneWorkerStarted;
         }
 
-        private void StartNewWorker(string poolName, List<HostPlanActions> planActions, List<PlanAction> finalActions)
+        private void StartNewWorker(string poolName, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
             var bgw = new UpdateProgressBackgroundWorker(planActions, finalActions) { Name = poolName };
             backgroundWorkers.Add(bgw);
@@ -298,16 +298,15 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             try
             {
-                foreach (var ha in bgw.HostActions)
+                foreach (var hp in bgw.HostPlans)
                 {
-                    var hostActions = ha;
-                    var host = hostActions.Host;
+                    var host = hp.Host;
 
                     // Step 1: InitialPlanActions  (e.g. upgrade the host in the RPU case)
-                    UpdateWorkerProgressIncrement(bgw, hostActions, 1);
+                    bgw.ProgressIncrement = bgw.InitialActionsIncrement(hp);
                     if (!SkipInitialPlanActions(host))
                     {
-                        var initialActions = hostActions.InitialPlanActions;
+                        var initialActions = hp.InitialPlanActions;
 
                         foreach (var a in initialActions)
                         {
@@ -316,11 +315,11 @@ namespace XenAdmin.Wizards.PatchingWizard
                         }
                     }
 
-                    DoAfterInitialPlanActions(bgw, host, bgw.HostActions.Select(h => h.Host).ToList());
+                    DoAfterInitialPlanActions(bgw, host, bgw.HostPlans.Select(h => h.Host).ToList());
 
                     // Step 2: UpdatesPlanActions  (priority update action)
-                    UpdateWorkerProgressIncrement(bgw, hostActions, 2);
-                    var planActions = hostActions.UpdatesPlanActions; 
+                    bgw.ProgressIncrement = bgw.UpdatesActionsIncrement(hp);
+                    var planActions = hp.UpdatesPlanActions; 
                     foreach (var a in planActions)
                     {
                         action = a;
@@ -328,9 +327,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     }
 
                     // Step 3: DelayedActions
-                    UpdateWorkerProgressIncrement(bgw, hostActions, 3);
+                    bgw.ProgressIncrement = bgw.DelayedActionsIncrement(hp);
                     // running delayed actions, but skipping the ones that should be skipped
-                    var delayedActions = hostActions.DelayedActions;
+                    var delayedActions = hp.DelayedPlanActions;
                     var restartActions = delayedActions.Where(a => a is RestartHostPlanAction).ToList();
 
                     foreach (var a in restartActions)
@@ -368,7 +367,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
 
                 // Step 4: FinalActions (eg. revert pre-checks)
-                UpdateWorkerProgressIncrement(bgw, null, 4);
+                bgw.ProgressIncrement = bgw.FinalActionsIncrement;
                 foreach (var a in bgw.FinalActions)
                 {
                     action = a;
@@ -392,43 +391,6 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 failedWorkers.Add(bgw);
                 bgw.ReportProgress(0);
-            }
-        }
-
-        private void UpdateWorkerProgressIncrement(UpdateProgressBackgroundWorker bgw, HostPlanActions hostPlanActions, int step)
-        {
-            // step 1 = InitialPlanActions; step 2 = UpdatePlanActions; step 3 = DelayedActions; step 4 = FinalActions.
-            // Allocated percentage allocated for each step: step 1: 30%; step 2: 60% (or 90% if there are no initial actions); step 3: 6%; step 4: 4%.
-            if (step == 4)
-            {
-                var step4ActionsCount = bgw.FinalActions.Count;
-                var step4AllocatedPercentage = 4;
-                bgw.ProgressIncrement = step4ActionsCount > 0 ? step4AllocatedPercentage / step4ActionsCount : 0;
-                return;
-            }
-
-            var hostCount = bgw.HostActions.Count;
-            var step1ActionsCount = hostPlanActions != null ? hostPlanActions.InitialPlanActions.Count: 0;
-            var step1AllocatedPercentage = step1ActionsCount > 0 ? 30 : 0;
-            if (step == 1)
-            {
-                bgw.ProgressIncrement = step1ActionsCount > 0 ? step1AllocatedPercentage / hostCount / step1ActionsCount : 0;
-                return;
-            }
-
-            var step2ActionsCount = hostPlanActions != null ? hostPlanActions.UpdatesPlanActions.Count : 0;
-            var step2AllocatedPercentage = step2ActionsCount > 0 ? (90 - step1AllocatedPercentage) : 0;
-            if (step == 2)
-            {
-                bgw.ProgressIncrement = step2ActionsCount > 0 ? step2AllocatedPercentage / hostCount / step2ActionsCount : 0;
-                return;
-            }
-
-            var step3ActionsCount = hostPlanActions != null ? hostPlanActions.DelayedActions.Count : 0;
-            var step3AllocatedPercentage = step3ActionsCount > 0 ? 96 - step1AllocatedPercentage - step2AllocatedPercentage : 0;
-            if (step == 3)
-            {
-                bgw.ProgressIncrement = step3ActionsCount > 0 ? step3AllocatedPercentage / hostCount / step3ActionsCount : 0;
             }
         }
 
@@ -526,13 +488,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             RetryFailedActions();
         }
 
-        protected HostPlanActions GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches, List<XenServerPatch> uploadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
+        protected HostPlan GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches, List<XenServerPatch> uploadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
         {
-            var hostPlanActions = new HostPlanActions(host);
-
             var patchSequence = Updates.GetPatchSequenceForHost(host, minimalPatches);
             if (patchSequence == null)
-                return hostPlanActions;
+                return new HostPlan(host, null, null, null);
 
             var planActionsPerHost = new List<PlanAction>();
             var delayedActionsPerHost = new List<PlanAction>();
@@ -587,9 +547,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             if (lastRestart != null)
                 ((RestartHostPlanAction)lastRestart).EnableOnly = false;
 
-            hostPlanActions.UpdatesPlanActions = planActionsPerHost;
-            hostPlanActions.DelayedActions = delayedActionsPerHost;
-            return hostPlanActions;
+            return new HostPlan(host, null, planActionsPerHost, delayedActionsPerHost);
         }
 
         private static PlanAction GetAfterApplyGuidanceAction(Host host, after_apply_guidance guidance)

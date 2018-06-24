@@ -33,12 +33,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using XenAdmin.Wizards.PatchingWizard.PlanActions;
+using XenAPI;
 
 namespace XenAdmin.Wizards.PatchingWizard
 {
     public class UpdateProgressBackgroundWorker : BackgroundWorker
     {
-        public List<HostPlanActions> HostActions { get; private set; }
+        public List<HostPlan> HostPlans { get; private set; }
         public List<PlanAction> FinalActions { get; private set; }
         public List<PlanAction> CleanupActions { get; private set; }
         public readonly List<PlanAction> DoneActions = new List<PlanAction>();
@@ -46,17 +47,17 @@ namespace XenAdmin.Wizards.PatchingWizard
         public string Name { get; set; }
         public int ProgressIncrement { get; set; }
 
-        public UpdateProgressBackgroundWorker(List<HostPlanActions> planActions, List<PlanAction> finalActions)
+        public UpdateProgressBackgroundWorker(List<HostPlan> planActions, List<PlanAction> finalActions)
         {
-            HostActions = planActions;
-            FinalActions = finalActions;
-            CleanupActions = finalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
+            HostPlans = planActions ?? new List<HostPlan>();
+            FinalActions = finalActions ?? new List<PlanAction>();
+            CleanupActions = FinalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
         }
 
         public new void CancelAsync()
         {
-            if (HostActions != null)
-                HostActions.ForEach(ha =>
+            if (HostPlans != null)
+                HostPlans.ForEach(ha =>
                 {
                     var cur = ha;
                     cur.InitialPlanActions.ForEach(pa =>
@@ -74,21 +75,116 @@ namespace XenAdmin.Wizards.PatchingWizard
 
             base.CancelAsync();
         }
+
+        private int FinalActionsPercentage
+        {
+            get
+            {
+                if (FinalActions == null || FinalActions.Count < 1)
+                    return 0;
+                return 4;
+            }
+        }
+
+        public int FinalActionsIncrement
+        {
+            get
+            {
+                if (FinalActions == null || FinalActions.Count < 1)
+                    return 0;
+                return FinalActionsPercentage / FinalActions.Count;
+            }
+        }
+
+        public int InitialActionsIncrement(HostPlan hp)
+        {
+            return hp.InitialActionsIncrement / HostPlans.Count;
+        }
+
+        public int UpdatesActionsIncrement(HostPlan hp)
+        {
+            return hp.UpdatesActionsIncrement / HostPlans.Count;
+        }
+
+        public int DelayedActionsIncrement(HostPlan hp)
+        {
+            return hp.DelayedActionsIncrement / HostPlans.Count;
+        }
     }
 
-    public class HostPlanActions
+    public class HostPlan
     {
-        public XenAPI.Host Host;
-        public List<PlanAction> InitialPlanActions;
-        public List<PlanAction> UpdatesPlanActions;
-        public List<PlanAction> DelayedActions;
+        public Host Host;
+        public readonly List<PlanAction> InitialPlanActions;
+        public readonly List<PlanAction> UpdatesPlanActions;
+        public readonly List<PlanAction> DelayedPlanActions;
 
-        public HostPlanActions(XenAPI.Host host)
+        public HostPlan(Host host, List<PlanAction> initialActions, List<PlanAction> updateActions, List<PlanAction> delayedActions)
         {
             Host = host;
-            InitialPlanActions = new List<PlanAction>();
-            UpdatesPlanActions = new List<PlanAction>();
-            DelayedActions = new List<PlanAction>();
+            InitialPlanActions = initialActions ?? new List<PlanAction>();
+            UpdatesPlanActions = updateActions ?? new List<PlanAction>();
+            DelayedPlanActions = delayedActions ?? new List<PlanAction>();
+        }
+
+        private int InitialActionsPercentage
+        {
+            get
+            {
+                if (InitialPlanActions == null || InitialPlanActions.Count < 1)
+                    return 0;
+                return 30;
+            }
+        }
+
+        private int UpdatesActionsPercentage
+        {
+            get
+            {
+                if (UpdatesPlanActions == null || UpdatesPlanActions.Count < 1)
+                    return 0;
+                return 90 - InitialActionsPercentage;
+            }
+        }
+
+        private int DelayedActionsPercentage
+        {
+            get
+            {
+                if (DelayedPlanActions == null || DelayedPlanActions.Count < 1)
+                    return 0;
+                return 96 - InitialActionsPercentage - UpdatesActionsPercentage;
+            }
+        }
+
+        public int InitialActionsIncrement
+        {
+            get
+            {
+                if (InitialPlanActions == null || InitialPlanActions.Count < 1)
+                    return 0;
+                return InitialActionsPercentage / InitialPlanActions.Count;
+            }
+        }
+
+        public int UpdatesActionsIncrement
+        {
+            get
+            {
+                if (UpdatesPlanActions == null || UpdatesPlanActions.Count < 1)
+                    return 0;
+                return UpdatesActionsPercentage / UpdatesPlanActions.Count;
+            }
+        }
+
+        public int DelayedActionsIncrement
+        {
+            get
+            {
+                if (DelayedPlanActions == null || DelayedPlanActions.Count < 1)
+                    return 0;
+                return DelayedActionsPercentage / DelayedPlanActions.Count;
+            }
         }
     }
 }
