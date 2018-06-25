@@ -4188,7 +4188,6 @@
     <Compile Include="Wizards\PatchingWizard\PlanActions\EvacuateHostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\PlanActionWithSession.cs" />
-    <Compile Include="Wizards\PatchingWizard\PlanActions\RebootHostPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RebootPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RebootVMsPlanAction.cs" />
     <Compile Include="Wizards\PatchingWizard\PlanActions\RestartAgentPlanAction.cs" />
