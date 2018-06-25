@@ -84,8 +84,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         public string Title { get; protected set; }
 
-        public string TitlePlan { get; set; }
-
         protected PlanAction(string title)
         {
             Visible = false;

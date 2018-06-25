@@ -5209,9 +5209,6 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
     <value>Do you want to have the following VMs automatically migrated back to, resumed on or started on this server?
 {0}</value>
   </data>
-  <data name="EXIT_SERVER_FROM_MAINTENANCE_MODE" xml:space="preserve">
-    <value>{0} exiting maintenance mode</value>
-  </data>
   <data name="EXPAND_ALL" xml:space="preserve">
     <value>E&amp;xpand All</value>
   </data>
@@ -7936,9 +7933,6 @@ To fix a corrupt configuration file revert changes to {0} or delete the file to 
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. </value>
   </data>
-  <data name="MIGRATE_VMS_OFF_SERVER" xml:space="preserve">
-    <value>Migrate VMs off server '{0}'</value>
-  </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
     <value>This VM may not migrate at the moment</value>
   </data>
@@ -10552,9 +10546,6 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   <data name="REVERTING_POWER_STATE" xml:space="preserve">
     <value>Reverting the power state of {0}</value>
   </data>
-  <data name="REVERTING_RESOLVED_PRECHECKS" xml:space="preserve">
-    <value>Reverting resolved prechecks</value>
-  </data>
   <data name="REVERTING_RESOLVED_PRECHECKS_POOL" xml:space="preserve">
     <value>Reverting resolved prechecks in {0}...</value>
   </data>
@@ -12300,9 +12291,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>Upgrade '{0}'</value>
-  </data>
-  <data name="UPGRADING" xml:space="preserve">
-    <value>Upgrading</value>
   </data>
   <data name="UPGRADING_SERVER" xml:space="preserve">
     <value>Upgrading server '{0}' ...</value>

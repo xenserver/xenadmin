@@ -52,7 +52,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         protected UpgradeHostPlanAction(Host host, Control invokingControl)
             : base(host, string.Format(Messages.UPGRADING_SERVER, host))
         {
-            TitlePlan = Messages.UPGRADING;
             timer = new Timer { Interval = 20 * 60000, AutoReset = true };
             timer.Elapsed += timer_Elapsed;
             this.invokingControl = invokingControl;

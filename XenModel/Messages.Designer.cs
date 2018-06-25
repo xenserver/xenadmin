@@ -14793,15 +14793,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} exiting maintenance mode.
-        /// </summary>
-        public static string EXIT_SERVER_FROM_MAINTENANCE_MODE {
-            get {
-                return ResourceManager.GetString("EXIT_SERVER_FROM_MAINTENANCE_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to E&amp;xpand All.
         /// </summary>
         public static string EXPAND_ALL {
@@ -22798,15 +22789,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Migrate VMs off server &apos;{0}&apos;.
-        /// </summary>
-        public static string MIGRATE_VMS_OFF_SERVER {
-            get {
-                return ResourceManager.GetString("MIGRATE_VMS_OFF_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to This VM may not migrate at the moment.
         /// </summary>
         public static string MIGRATION_NOT_ALLOWED {
@@ -30398,15 +30380,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reverting resolved prechecks.
-        /// </summary>
-        public static string REVERTING_RESOLVED_PRECHECKS {
-            get {
-                return ResourceManager.GetString("REVERTING_RESOLVED_PRECHECKS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Reverting resolved prechecks in {0}....
         /// </summary>
         public static string REVERTING_RESOLVED_PRECHECKS_POOL {
@@ -35539,15 +35512,6 @@ namespace XenAdmin {
         public static string UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS {
             get {
                 return ResourceManager.GetString("UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrading.
-        /// </summary>
-        public static string UPGRADING {
-            get {
-                return ResourceManager.GetString("UPGRADING", resourceCulture);
             }
         }
         

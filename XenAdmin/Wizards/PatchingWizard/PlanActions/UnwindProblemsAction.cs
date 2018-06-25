@@ -43,7 +43,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public UnwindProblemsAction(List<Problem> problems, string TitleOverride = null)
             : base(TitleOverride ?? Messages.PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTING)
         {
-            base.TitlePlan = Messages.REVERTING_RESOLVED_PRECHECKS;
             _problems = problems;
         }
 
