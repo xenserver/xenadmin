@@ -84,14 +84,10 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Visible = true;
             var sb = new StringBuilder();
             
-            var vms = hostObj.GetRunningVMs();
-            if (vms.Count > 0)
-            {
-                sb.Append(string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name()));
-                ProgressDescription = sb.ToString();
-                EvacuateHost(ref session);
-                sb.AppendLine(Messages.DONE);
-            }
+            sb.Append(string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name()));
+            ProgressDescription = sb.ToString();
+            EvacuateHost(ref session);
+            sb.AppendLine(Messages.DONE);
 
             sb.AppendIndented(string.Format(Messages.UPDATES_WIZARD_REBOOTING, hostObj.Name()), sb.Length > 0 ? 2 : 0);
             ProgressDescription = sb.ToString();
