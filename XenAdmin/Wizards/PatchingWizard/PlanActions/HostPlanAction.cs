@@ -66,16 +66,23 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             var hostObj = GetResolvedHost();
 
             Title = string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name());
-            PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObj.resident_VMs));
+
+            var vms = hostObj.GetRunningVMs();
+            if (vms.Count > 0)
+            {
+                PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObj.resident_VMs));
+            }
 
             log.DebugFormat("Disabling host {0}", hostObj.Name());
             Host.disable(session, HostXenRef.opaque_ref);
 
-            Status = Messages.PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST;
-            log.DebugFormat("Migrating VMs from host {0}", hostObj.Name());
-            XenRef<Task> task = Host.async_evacuate(session, HostXenRef.opaque_ref);
-
-            PollTaskForResultAndDestroy(Connection, ref session, task);
+            if (vms.Count > 0)
+            {
+                Status = Messages.PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST;
+                log.DebugFormat("Migrating VMs from host {0}", hostObj.Name());
+                XenRef<Task> task = Host.async_evacuate(session, HostXenRef.opaque_ref);
+                PollTaskForResultAndDestroy(Connection, ref session, task);
+            }
         }
 
         protected void BringBabiesBack(ref Session session, List<XenRef<VM>> vmrefs, bool enableOnly)

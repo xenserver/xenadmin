@@ -156,7 +156,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
                 AllUploadedPatches.Add(bgw, new List<XenServerPatch>());
             var uploadedPatches = AllUploadedPatches[bgw];
 
-            var hp = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, new KeyValuePair<XenServerPatch, string>());
+            var hp = GetUpdatePlanActionsForHost(host, hosts, minimalPatches, uploadedPatches, new KeyValuePair<XenServerPatch, string>(), false);
             if (hp.UpdatesPlanActions != null && hp.UpdatesPlanActions.Count > 0)
             {
                 theHostPlan.UpdatesPlanActions.AddRange(hp.UpdatesPlanActions);
@@ -179,14 +179,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             var initialPlanActions = new List<PlanAction>()
             {
                 new EvacuateHostPlanAction(host),
-                upgradeAction
-            };
-
-            var delayedActions = new List<PlanAction>()
-            {
+                upgradeAction,
                 new BringBabiesBackAction(runningVMs, host, true)
             };
-            return new HostPlan(host, initialPlanActions, null, delayedActions);
+
+            return new HostPlan(host, initialPlanActions, null, new List<PlanAction>());
         }
 
         #endregion

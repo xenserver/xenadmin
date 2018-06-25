@@ -488,7 +488,8 @@ namespace XenAdmin.Wizards.PatchingWizard
             RetryFailedActions();
         }
 
-        protected HostPlan GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches, List<XenServerPatch> uploadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
+        protected HostPlan GetUpdatePlanActionsForHost(Host host, List<Host> hosts, List<XenServerPatch> minimalPatches,
+            List<XenServerPatch> uploadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk, bool repatriateVms = true)
         {
             var patchSequence = Updates.GetPatchSequenceForHost(host, minimalPatches);
             if (patchSequence == null)
@@ -541,11 +542,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
             }
 
-            var lastRestart = delayedActionsPerHost.FindLast(a => a is RestartHostPlanAction)
-                              ?? planActionsPerHost.FindLast(a => a is RestartHostPlanAction);
+            if (repatriateVms)
+            {
+                var lastRestart = delayedActionsPerHost.FindLast(a => a is RestartHostPlanAction)
+                                  ?? planActionsPerHost.FindLast(a => a is RestartHostPlanAction);
 
-            if (lastRestart != null)
-                ((RestartHostPlanAction)lastRestart).EnableOnly = false;
+                if (lastRestart != null)
+                    ((RestartHostPlanAction) lastRestart).EnableOnly = false;
+            }
 
             return new HostPlan(host, null, planActionsPerHost, delayedActionsPerHost);
         }
