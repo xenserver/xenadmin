@@ -419,7 +419,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             bgw.ReportProgress(bgw.ProgressIncrement, action);
         }
 
-        private void action_OnProgressChange(object sender, EventArgs e)
+        private void action_OnProgressChange(PlanAction planAction)
         {
             Program.Invoke(Program.MainWindow, UpdateStatusTextBox);
         }

@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         private int _percentComplete;
         private string _progressDescription;
-        public event EventHandler OnProgressChange;
+        public event Action<PlanAction> OnProgressChange;
         public Exception Error;
         protected bool Cancelling;
         private bool _running;
@@ -64,7 +64,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 _progressDescription = value;
 
                 if (OnProgressChange != null)
-                    OnProgressChange(this, new EventArgs());
+                    OnProgressChange(this);
             }
         }
 
@@ -79,7 +79,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 _percentComplete = value;
                 if (OnProgressChange != null)
-                    OnProgressChange(this, new EventArgs());
+                    OnProgressChange(this);
             }
         }
 

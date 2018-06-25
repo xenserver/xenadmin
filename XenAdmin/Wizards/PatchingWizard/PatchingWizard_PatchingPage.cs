@@ -347,9 +347,9 @@ namespace XenAdmin.Wizards.PatchingWizard
             }
         }
 
-        private void action_OnProgressChange(object sender, EventArgs e)
+        private void action_OnProgressChange(PlanAction planAction)
         {
-            actionsWorker.ReportProgress(0, sender);
+            actionsWorker.ReportProgress(0, planAction);
         }
 
         private void actionsWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
