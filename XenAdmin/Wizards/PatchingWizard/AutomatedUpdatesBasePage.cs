@@ -251,7 +251,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                         bgwErrorCount++;
                     }
-                    else if (pa.Visible)
+                    else
                     {
                         sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
                         sb.AppendLine(Messages.DONE);
@@ -260,11 +260,8 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 foreach (var pa in bgw.InProgressActions)
                 {
-                    if (pa.Visible)
-                    {
-                        sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
-                        sb.AppendLine();
-                    }
+                    sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
+                    sb.AppendLine();
                 }
 
                 sb.AppendLine();
@@ -360,7 +357,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                                 doWorkEventArgs.Cancel = true;
                                 return;
                             }
-                            action.Visible = false;
+
                             bgw.ReportProgress(bgw.ProgressIncrement, action);
                         }
                     }

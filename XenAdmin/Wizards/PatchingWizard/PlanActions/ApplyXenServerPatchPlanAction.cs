@@ -62,8 +62,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
-                Visible = true;
-
                 ProgressDescription = string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name());
 
                 var task = mapping.Pool_patch == null

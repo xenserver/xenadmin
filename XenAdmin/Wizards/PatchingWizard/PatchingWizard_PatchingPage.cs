@@ -296,18 +296,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (e.ProgressPercentage == 0)
                 {
                     textBoxLog.Text = completedActionsLog.ToString();
-                    if (action.Visible)
-                    {
-                        textBoxLog.Text += action.ProgressDescription ?? action.ToString();
-                    }
+                    textBoxLog.Text += action.ProgressDescription ?? action.ToString();
                 }
                 else
                 {
-                    if (action.Visible) 
-                    {
-                        completedActionsLog.Append(action.ProgressDescription ?? action.ToString());
-                        completedActionsLog.AppendLine(Messages.DONE);
-                    }
+                    completedActionsLog.Append(action.ProgressDescription ?? action.ToString());
+                    completedActionsLog.AppendLine(Messages.DONE);
                     textBoxLog.Text = completedActionsLog.ToString();
                     progressBar.Value += e.ProgressPercentage;
                 }

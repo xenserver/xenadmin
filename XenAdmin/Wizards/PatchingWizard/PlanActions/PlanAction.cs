@@ -50,9 +50,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected bool Cancelling;
         private bool _running;
         private readonly Guid _actionId;
-
-        public bool Visible { get; set; }
-        
+       
         public string ProgressDescription
         {
             get
@@ -85,7 +83,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected PlanAction()
         {
-            Visible = false;
             _percentComplete = 0;
             _actionId = new Guid();
         }

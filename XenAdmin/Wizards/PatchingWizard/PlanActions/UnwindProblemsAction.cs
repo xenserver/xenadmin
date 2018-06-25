@@ -50,7 +50,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void _Run()
         {
-            Visible = true;
             ProgressDescription = _connection == null
                 ? Messages.REVERTING_RESOLVED_PRECHECKS
                 : string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, _connection.Name);

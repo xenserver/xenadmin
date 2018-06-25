@@ -48,7 +48,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            Visible = true;
             ProgressDescription = string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, _patch.Name(), _host.Name());
             XenRef<Task> task = Pool_patch.async_apply(session, _patch.opaque_ref, _host.opaque_ref);
             PollTaskForResultAndDestroy(Connection, ref session, task);

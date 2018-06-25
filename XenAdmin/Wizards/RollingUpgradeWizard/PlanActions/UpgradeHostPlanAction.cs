@@ -50,8 +50,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            Visible = true;
-
             string hostVersionBefore = CurrentHost.LongProductVersion();
             log.InfoFormat("Host '{0}' upgrading from version '{1}'", CurrentHost.Name(), hostVersionBefore);
 

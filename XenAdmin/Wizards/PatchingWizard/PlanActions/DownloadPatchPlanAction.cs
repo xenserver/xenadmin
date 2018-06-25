@@ -62,8 +62,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (Cancelling)
                     return;
 
-                Visible = true;
-
                 ProgressDescription = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name);
 
                 //skip the download if the patch has been already downloaded or we are using a patch from disk

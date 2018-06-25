@@ -77,7 +77,6 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         {
             try
             {
-                Visible = true;
                 var hostObj = GetResolvedHost();
                 ProgressDescription = string.Format(Messages.UPGRADING_SERVER, hostObj.Name());
 

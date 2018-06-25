@@ -50,7 +50,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            Visible = true;
             List<VM> vmObjs = new List<VM>();
             foreach (XenRef<VM> vm in _vms)
                 vmObjs.Add(Connection.TryResolveWithTimeout(vm));

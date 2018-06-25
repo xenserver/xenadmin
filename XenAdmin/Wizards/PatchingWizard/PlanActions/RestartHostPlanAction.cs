@@ -68,7 +68,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 else if (_restartAgentFallback)
                 {
                     log.Debug("Live patching succeeded. Restarting agent.");
-                    Visible = true;
                     ProgressDescription = string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, hostObj.Name());
                     WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
                     return;
@@ -81,7 +80,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
             }
 
-            Visible = true;
             var sb = new StringBuilder();
             
             sb.Append(string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name()));

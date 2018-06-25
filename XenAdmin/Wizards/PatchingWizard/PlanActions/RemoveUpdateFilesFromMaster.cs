@@ -74,7 +74,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     if (poolPatch != null && poolPatch.opaque_ref != null)
                     {
-                        Visible = true;
                         ProgressDescription = string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, poolPatch.Name(), master.Name());
                         var task = Pool_patch.async_pool_clean(session, mapping.Pool_patch.opaque_ref);
                         PollTaskForResultAndDestroy(Connection, ref session, task);
@@ -86,7 +85,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     if (mapping != null && mapping.Pool_update != null && mapping.Pool_update.opaque_ref != null)
                     {
-                        Visible = true;
                         var poolUpdate = mapping.Pool_update;
                         ProgressDescription = string.Format(Messages.UPDATES_WIZARD_REMOVING_UPDATES_FROM_POOL, poolUpdate.Name(), master.Name());
 
