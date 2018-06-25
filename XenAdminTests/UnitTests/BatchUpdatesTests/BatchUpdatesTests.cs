@@ -36,6 +36,7 @@ using Moq;
 using XenAdmin.Core;
 using XenAPI;
 using System.Linq;
+using XenAdmin.Network;
 
 
 namespace XenAdminTests.UnitTests
@@ -104,7 +105,7 @@ namespace XenAdminTests.UnitTests
         [Test]
         public void GetUpgradeSequenceForNullConnection()
         {
-            Assert.AreEqual(Updates.GetMinimalPatches(null), null);
+            Assert.AreEqual(Updates.GetMinimalPatches((IXenConnection) null), null);
         }
 
         /// <summary>

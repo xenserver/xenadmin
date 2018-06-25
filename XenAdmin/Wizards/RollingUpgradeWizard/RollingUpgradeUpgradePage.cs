@@ -139,11 +139,13 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             if (theHostPlan.UpdatesPlanActions.Count > 0) // this is a retry; do not recreate actions
                 return; 
 
+            host = host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref));
+
             if (!ApplyUpdatesToNewVersion || host.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply))
                 return;
             
             if (!MinimalPatches.ContainsKey(bgw))
-                MinimalPatches.Add(bgw, Updates.GetMinimalPatches(host.Connection));
+                MinimalPatches.Add(bgw, Updates.GetMinimalPatches(host));
 
             var minimalPatches = MinimalPatches[bgw];
             
