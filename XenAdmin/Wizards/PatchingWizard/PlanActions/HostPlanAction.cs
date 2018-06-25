@@ -51,7 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             HostXenRef = new XenRef<Host>(host);
         }
 
-        protected internal override Host CurrentHost
+        protected internal Host CurrentHost
         {
             get { return _currentHost; }
         }
@@ -78,7 +78,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (vms.Count > 0)
             {
-                Status = Messages.PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST;
+                ProgressDescription = Messages.PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST;
                 log.DebugFormat("Migrating VMs from host {0}", hostObj.Name());
                 XenRef<Task> task = Host.async_evacuate(session, HostXenRef.opaque_ref);
                 PollTaskForResultAndDestroy(Connection, ref session, task);
@@ -87,7 +87,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected void BringBabiesBack(ref Session session, List<XenRef<VM>> vmrefs, bool enableOnly)
         {
-            Status = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
+            ProgressDescription = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
             PBD.CheckAndBestEffortPlugPBDsFor(Connection, vmrefs);
 
             //
@@ -97,7 +97,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             // occasionally poking it.
             //
 
-            Status = Messages.PLAN_ACTION_STATUS_REENABLING_HOST;
+            ProgressDescription = Messages.PLAN_ACTION_STATUS_REENABLING_HOST;
 
             int retries = 0;
             while (!Host.get_enabled(session, HostXenRef.opaque_ref))
@@ -140,7 +140,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     try
                     {
-                        Status = string.Format(Messages.PLAN_ACTION_STATUS_MIGRATING_VM_X_OF_Y, vmNumber + 1, vmCount);
+                        ProgressDescription = string.Format(Messages.PLAN_ACTION_STATUS_MIGRATING_VM_X_OF_Y, vmNumber + 1, vmCount);
 
                         log.DebugFormat("Migrating VM '{0}' back to Host '{1}'", vm.Name(), hostObj.Name());
 

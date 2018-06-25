@@ -44,29 +44,28 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private int _percentComplete;
+        private string _progressDescription;
         public event EventHandler OnProgressChange;
-        public event Action<PlanAction, Host> StatusChanged;
         public Exception Error;
-        protected bool Cancelling = false;
+        protected bool Cancelling;
+        private bool _running;
 
         public bool Visible { get; set; }
         
-        private string status;
-        public string Status
+        public string ProgressDescription
         {
-            get { return status; }
+            get
+            {
+                return _progressDescription;
+            }
             protected set
             {
-                if(value != status)
-                {
-                    status = value;
-                    if (StatusChanged != null)
-                        StatusChanged(this, CurrentHost);
-                }
+                _progressDescription = value;
+
+                if (OnProgressChange != null)
+                    OnProgressChange(this, new EventArgs());
             }
         }
-
-        protected internal virtual Host CurrentHost { get { return null; } }
 
         public int PercentComplete
         {
@@ -95,8 +94,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         }
 
         protected abstract void _Run();
-
-        private bool _running = false;
 
         public virtual void Run()
         {
@@ -130,7 +127,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             PercentComplete = 100;
         }
-
 
         private void UpdateProgress(int progress)
         {
@@ -216,26 +212,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             Cancelling = true;
         }
-
-
-        string _progressDescription;
-
-        public string ProgressDescription
-        {
-            get
-            {
-                return _progressDescription;
-            }
-
-            protected set
-            {
-                _progressDescription = value;
-
-                if (OnProgressChange != null)
-                    OnProgressChange(this, new EventArgs());
-            }
-        }
-
     }
 }
 
