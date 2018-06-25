@@ -586,6 +586,19 @@ namespace XenAdmin.Core
         public static List<XenServerPatch> GetMinimalPatches(IXenConnection conn)
         {
             var version = GetCommonServerVersionOfHostsInAConnection(conn, XenServerVersions);
+            return GetMinimalPatches(version);
+        }
+
+        public static List<XenServerPatch> GetMinimalPatches(Host host)
+        {
+            if (host == null || host.Connection == null || XenServerVersions== null)
+                return null;
+            var hostVersions = GetServerVersions(host, XenServerVersions);
+            return GetMinimalPatches(hostVersions.FirstOrDefault());
+        }
+
+        private static List<XenServerPatch> GetMinimalPatches(XenServerVersion version)
+        {
             if (version == null || version.MinimalPatches == null)
                 return null;
 
