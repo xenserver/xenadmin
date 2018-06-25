@@ -38,13 +38,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     public class RebootHostPlanAction : RebootPlanAction
     {
         public RebootHostPlanAction(Host host)
-            : base(host, string.Format(Messages.UPDATES_WIZARD_REBOOTING, host))
+            : base(host)
         {
         }
 
         protected override void RunWithSession(ref Session session)
         {
             Visible = true;
+            ProgressDescription = string.Format(Messages.UPDATES_WIZARD_REBOOTING, CurrentHost);
             RebootHost(ref session);
         }
     }

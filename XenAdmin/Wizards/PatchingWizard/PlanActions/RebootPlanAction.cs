@@ -41,8 +41,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private bool _cancelled = false;
 
-        protected RebootPlanAction(Host host, string title)
-            : base(host, title)
+        protected RebootPlanAction(Host host)
+            : base(host)
         {
         }
 
@@ -70,7 +70,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected void RebootHost(ref Session session)
         {
             var hostObj = GetResolvedHost();
-            Title = string.Format(Messages.UPDATES_WIZARD_REBOOTING, hostObj.Name());
+            ProgressDescription = string.Format(Messages.UPDATES_WIZARD_REBOOTING, hostObj.Name());
             Connection.ExpectDisruption = true;
             try
             {

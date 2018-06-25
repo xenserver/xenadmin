@@ -100,7 +100,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //add a revert pre-check action for this pool
             var problemsToRevert = ProblemsResolvedPreCheck.Where(p => hostNeedUpgrade.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList();
             if (problemsToRevert.Count > 0)
-                finalActions.Add(new UnwindProblemsAction(problemsToRevert, string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, pool.Connection.Name)));
+                finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
         }
 
         protected override bool SkipInitialPlanActions(Host host)

@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly string masterUuid;
 
         public ApplyXenServerPatchPlanAction(Host host, XenServerPatch xenServerPatch, List<PoolPatchMapping> mappings)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name()))
+            : base(host.Connection)
         {
             this.host = host;
             this.xenServerPatch = xenServerPatch;
@@ -63,6 +63,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
                 Visible = true;
+
+                ProgressDescription = string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name());
 
                 var task = mapping.Pool_patch == null
                     ? Pool_update.async_apply(session, mapping.Pool_update.opaque_ref, host.opaque_ref)

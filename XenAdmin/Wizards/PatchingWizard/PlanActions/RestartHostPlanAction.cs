@@ -44,7 +44,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly bool _restartAgentFallback;
 
         public RestartHostPlanAction(Host host, List<XenRef<VM>> vms, bool enableOnly = false, bool restartAgentFallback = false)
-            : base(host, string.Empty)
+            : base(host)
         {
             _vms = vms;
             EnableOnly = enableOnly;
@@ -69,7 +69,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 {
                     log.Debug("Live patching succeeded. Restarting agent.");
                     Visible = true;
-                    Title = ProgressDescription = string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, hostObj.Name());
+                    ProgressDescription = string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, hostObj.Name());
                     WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
                     return;
                 }

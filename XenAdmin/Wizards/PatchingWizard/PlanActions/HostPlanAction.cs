@@ -44,8 +44,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Host _currentHost;
         protected readonly XenRef<Host> HostXenRef;
 
-        protected HostPlanAction(Host host, string description)
-            : base(host.Connection, description)
+        protected HostPlanAction(Host host)
+            : base(host.Connection)
         {
             _currentHost = host;
             HostXenRef = new XenRef<Host>(host);
@@ -65,7 +65,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             var hostObj = GetResolvedHost();
 
-            Title = string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name());
+            ProgressDescription = string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name());
 
             var vms = hostObj.GetRunningVMs();
             if (vms.Count > 0)

@@ -49,7 +49,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private AsyncAction inProgressAction = null;
 
         public UploadPatchToMasterPlanAction(IXenConnection connection, XenServerPatch patch, List<PoolPatchMapping> mappings, Dictionary<XenServerPatch, string> allDownloadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
-            : base(connection, string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, patch.Name, connection.Name))
+            : base(connection)
         {
             this.patch = patch;
             this.mappings = mappings;
@@ -78,6 +78,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             )
             {
                 Visible = true;
+                ProgressDescription = string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, patch.Name, conn.Name);
                 PoolPatchMapping newMapping;
 
                 if (Helpers.ElyOrGreater(master))

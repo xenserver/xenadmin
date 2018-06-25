@@ -341,7 +341,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                     log.Error("Failed to carry out plan.", e);
                     log.Debug(actionList);
-                    doWorkEventArgs.Result = new Exception(action.Title, e);
+                    doWorkEventArgs.Result = new Exception(action.ProgressDescription, e);
                     break;
                 }
             }

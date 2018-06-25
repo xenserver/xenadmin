@@ -384,9 +384,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                 bgw.InProgressActions.Remove(action);
 
                 log.Error("Failed to carry out plan.", e);
-                log.Debug(action.Title);
+                log.Debug(action.ProgressDescription);
 
-                doWorkEventArgs.Result = new Exception(action.Title, e);
+                doWorkEventArgs.Result = new Exception(action.ProgressDescription, e);
 
 
                 failedWorkers.Add(bgw);

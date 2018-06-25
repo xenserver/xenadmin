@@ -48,7 +48,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private string tempFileName = null;
 
         public DownloadPatchPlanAction(IXenConnection connection, XenServerPatch patch, Dictionary<XenServerPatch, string> allDownloadedPatches, KeyValuePair<XenServerPatch, string> patchFromDisk)
-            : base(connection, string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name))
+            : base(connection)
         {
             this.patch = patch;
             this.AllDownloadedPatches = allDownloadedPatches;
@@ -64,15 +64,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 Visible = true;
 
+                ProgressDescription = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_WAITING, patch.Name);
+
                 //skip the download if the patch has been already downloaded or we are using a patch from disk
                 if ((AllDownloadedPatches.ContainsKey(patch) && File.Exists(AllDownloadedPatches[patch])) 
                     || (patchFromDisk.Key == patch && File.Exists(patchFromDisk.Value)))
                 {
-                    Title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
+                    ProgressDescription = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING, patch.Name);
                 }
                 else
                 {
-                    Title = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
+                    ProgressDescription = string.Format(Messages.PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING, patch.Name);
                     DownloadFile(ref session);
                 }
             }
@@ -126,11 +128,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             if (action.Succeeded)
             {
                 if (action is DownloadAndUnzipXenServerPatchAction)
-                {
-                    Host master = Helpers.GetMaster(action.Connection);
-
                     AllDownloadedPatches[patch] = (action as DownloadAndUnzipXenServerPatchAction).PatchPath;
-                }
             }
            
         }

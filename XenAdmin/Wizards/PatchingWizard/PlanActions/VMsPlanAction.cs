@@ -40,8 +40,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly List<XenRef<VM>> _vms;
 
-        protected VMsPlanAction(List<XenRef<VM>> vms, IXenConnection connection, String description)
-            : base(connection, description)
+        protected VMsPlanAction(List<XenRef<VM>> vms, IXenConnection connection)
+            : base(connection)
         {
             this._vms = vms;
         }

@@ -9456,9 +9456,6 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTED" xml:space="preserve">
     <value>Resolved prechecks reverted</value>
   </data>
-  <data name="PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTING" xml:space="preserve">
-    <value>Reverting resolved prechecks...</value>
-  </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_SERVER_RESOLVE" xml:space="preserve">
     <value>Resolve server problems</value>
   </data>
@@ -10545,6 +10542,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="REVERTING_POWER_STATE" xml:space="preserve">
     <value>Reverting the power state of {0}</value>
+  </data>
+  <data name="REVERTING_RESOLVED_PRECHECKS" xml:space="preserve">
+    <value>Reverting resolved prechecks...</value>
   </data>
   <data name="REVERTING_RESOLVED_PRECHECKS_POOL" xml:space="preserve">
     <value>Reverting resolved prechecks in {0}...</value>

@@ -42,7 +42,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly VDI vdi;
 
         public InstallSupplementalPackPlanAction(Host host, VDI vdi)
-            : base(host.Connection, string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, vdi.Name(), host.Name()))
+            : base(host.Connection)
         {
             this.host = host;
             this.vdi = vdi;
@@ -51,6 +51,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected override void RunWithSession(ref Session session)
         {
             Visible = true;
+            ProgressDescription = string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, vdi.Name(), host.Name());
             var suppPackVdis = new Dictionary<Host, VDI> { { host, vdi } };
             new InstallSupplementalPackAction(suppPackVdis, true).RunExternal(session);
         }

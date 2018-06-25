@@ -27416,15 +27416,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reverting resolved prechecks....
-        /// </summary>
-        public static string PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTING {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Resolve server problems.
         /// </summary>
         public static string PATCHINGWIZARD_PATCHINGPAGE_SERVER_RESOLVE {
@@ -30376,6 +30367,15 @@ namespace XenAdmin {
         public static string REVERTING_POWER_STATE {
             get {
                 return ResourceManager.GetString("REVERTING_POWER_STATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reverting resolved prechecks....
+        /// </summary>
+        public static string REVERTING_RESOLVED_PRECHECKS {
+            get {
+                return ResourceManager.GetString("REVERTING_RESOLVED_PRECHECKS", resourceCulture);
             }
         }
         

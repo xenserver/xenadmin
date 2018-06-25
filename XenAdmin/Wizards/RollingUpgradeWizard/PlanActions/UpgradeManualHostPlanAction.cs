@@ -50,7 +50,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
         protected readonly Control invokingControl;
         
         protected UpgradeHostPlanAction(Host host, Control invokingControl)
-            : base(host, string.Format(Messages.UPGRADING_SERVER, host))
+            : base(host)
         {
             timer = new Timer { Interval = 20 * 60000, AutoReset = true };
             timer.Elapsed += timer_Elapsed;
@@ -79,6 +79,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             {
                 Visible = true;
                 var hostObj = GetResolvedHost();
+                ProgressDescription = string.Format(Messages.UPGRADING_SERVER, hostObj.Name());
 
                 if (hostObj.enabled)
                 {

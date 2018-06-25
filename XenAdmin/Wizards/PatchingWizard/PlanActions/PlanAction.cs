@@ -49,6 +49,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         public Exception Error;
         protected bool Cancelling;
         private bool _running;
+        private readonly Guid _actionId;
 
         public bool Visible { get; set; }
         
@@ -82,13 +83,11 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
-        public string Title { get; protected set; }
-
-        protected PlanAction(string title)
+        protected PlanAction()
         {
             Visible = false;
             _percentComplete = 0;
-            Title = title;
+            _actionId = new Guid();
         }
 
         protected abstract void _Run();
@@ -198,12 +197,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             if (other == null)
                 return false;
 
-            return string.Equals(Title, other.Title, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(_actionId.ToString(), other._actionId.ToString(), StringComparison.OrdinalIgnoreCase);
         }
 
         public override string ToString()
         {
-            return this.Title;
+            return ProgressDescription;
         }
 
         public virtual void Cancel()
