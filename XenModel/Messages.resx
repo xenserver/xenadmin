@@ -9399,9 +9399,6 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>Clean up...</value>
   </data>
-  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
-    <value>Downloading update {0}...</value>
-  </data>
   <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
     <value>Skipping download: Already downloaded update {0}...</value>
   </data>
@@ -9780,28 +9777,16 @@ File not found</value>
     <value>Rebooted specified VMs</value>
   </data>
   <data name="PLANACTION_VMS_REBOOTING" xml:space="preserve">
-    <value>Rebooting specified VMs...</value>
-  </data>
-  <data name="PLAN_ACTION_STATUS_DISABLING_HOST_SERVER" xml:space="preserve">
-    <value>Disabling host server</value>
-  </data>
-  <data name="PLAN_ACTION_STATUS_HOST_UPGRADED" xml:space="preserve">
-    <value>Host has been upgraded</value>
+    <value>Rebooting VM {0}...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
-    <value>Installing [XenServer]</value>
-  </data>
-  <data name="PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST" xml:space="preserve">
-    <value>Migrating VMs from host</value>
-  </data>
-  <data name="PLAN_ACTION_STATUS_MIGRATING_VM_X_OF_Y" xml:space="preserve">
-    <value>Migrating VM {0} of {1} back to Host</value>
+    <value>Installing [XenServer] on '{0}'...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_RECONNECTING_STORAGE" xml:space="preserve">
-    <value>Reconnecting storage</value>
+    <value>Reconnecting storage...</value>
   </data>
-  <data name="PLAN_ACTION_STATUS_REENABLING_HOST" xml:space="preserve">
-    <value>Re-enabling host</value>
+  <data name="PLAN_ACTION_STATUS_REPATRIATING_VMS" xml:space="preserve">
+    <value>Migrating VMs back to server {0}...</value>
   </data>
   <data name="PLEASE_RECONNECT_HOST" xml:space="preserve">
     <value>{0}
@@ -11900,10 +11885,10 @@ Verify that the file is a valid {1} export.</value>
     <value>Installed update</value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
-    <value>Installing update {0} to {1}... </value>
+    <value>Installing update {0} on {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
-    <value>Installing update to {0} servers...</value>
+    <value>Installing update on {0} servers...</value>
   </data>
   <data name="UPDATES_WIZARD_APPLY_FAILED" xml:space="preserve">
     <value>The update failed to apply.  Would you like to view the output?</value>
@@ -11967,23 +11952,11 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_EJECT_CD" xml:space="preserve">
     <value>Click here to eject CD</value>
   </data>
-  <data name="UPDATES_WIZARD_ENTERED_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Entered maintenance mode</value>
-  </data>
   <data name="UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Entering maintenance mode...</value>
-  </data>
-  <data name="UPDATES_WIZARD_ENTER_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Enter maintenance mode</value>
-  </data>
-  <data name="UPDATES_WIZARD_EXITED_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Exited maintenance mode</value>
+    <value>'{0}' is entering maintenance mode...</value>
   </data>
   <data name="UPDATES_WIZARD_EXITING_MAINTENANCE_MODE" xml:space="preserve">
-    <value>{0} is exiting maintenance mode...</value>
-  </data>
-  <data name="UPDATES_WIZARD_EXIT_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Exit maintenance mode</value>
+    <value>'{0}' is exiting maintenance mode...</value>
   </data>
   <data name="UPDATES_WIZARD_EXTRACT_ACTION_TITLE" xml:space="preserve">
     <value>Extract {0}</value>
@@ -12291,9 +12264,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>Upgrade '{0}'</value>
-  </data>
-  <data name="UPGRADING_SERVER" xml:space="preserve">
-    <value>Upgrading server '{0}' ...</value>
   </data>
   <data name="UPLOADING_PATCH" xml:space="preserve">
     <value>Uploading Update...</value>

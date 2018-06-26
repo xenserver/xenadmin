@@ -65,7 +65,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 try
                 {
-                    ProgressDescription = string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, host.Name());
+                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, host.Name()));
+
                     PatchPrecheckCheck check = mapping.Pool_patch == null
                         ? new PatchPrecheckCheck(host, mapping.Pool_update)
                         : new PatchPrecheckCheck(host, mapping.Pool_patch);

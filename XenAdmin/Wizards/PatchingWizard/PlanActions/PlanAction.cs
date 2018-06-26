@@ -30,6 +30,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using log4net;
@@ -44,27 +46,13 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private int _percentComplete;
-        private string _progressDescription;
         public event Action<PlanAction> OnProgressChange;
         public Exception Error;
         protected bool Cancelling;
         private bool _running;
         private readonly Guid _actionId;
-       
-        public string ProgressDescription
-        {
-            get
-            {
-                return _progressDescription;
-            }
-            protected set
-            {
-                _progressDescription = value;
 
-                if (OnProgressChange != null)
-                    OnProgressChange(this);
-            }
-        }
+        private readonly Stack<string> _progressHistory = new Stack<string>();
 
         public int PercentComplete
         {
@@ -72,7 +60,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             {
                 return _percentComplete;
             }
-
             protected set
             {
                 _percentComplete = value;
@@ -81,31 +68,36 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             }
         }
 
+        public List<string> ProgressHistory
+        {
+            get { return _progressHistory.Reverse().ToList(); }
+        }
+
         protected PlanAction()
         {
             _percentComplete = 0;
-            _actionId = new Guid();
+            _actionId = Guid.NewGuid();
         }
 
         protected abstract void _Run();
 
         public virtual void Run()
         {
-            _running = true;
-
             try
             {
+                _progressHistory.Clear();
+                _running = true;
+                PercentComplete = 0;
                 _Run();
+                AddProgressStep(null);
             }
             catch (Exception e)
             {
                 Failure f = e as Failure;
                 if (f != null && f.ErrorDescription != null && f.ErrorDescription.Count > 1 && f.ErrorDescription[1].Contains(FriendlyErrorNames.SR_BACKEND_FAILURE_432))
                 {
-                    // ignore this exception (CA-62989) in order to allow the Upgrade wizard to continue upgrading all the hosts in a pool. The detached SRs will be reported on Finish
-                    /*var dialog = new ThreeButtonDialog(new ThreeButtonDialog.Details(SystemIcons.Exclamation, Messages.STORAGELINK_SR_NEEDS_REATTACH));
-                    Program.Invoke(Program.MainWindow, () => dialog.ShowDialog(Program.MainWindow));
-                    throw new Exception(Messages.STORAGELINK_SR_NEEDS_REATTACH);*/
+                    // ignore this exception (CA-62989) in order to allow the Upgrade wizard to continue
+                    // upgrading all the hosts in a pool. The detached SRs will be reported on Finish
                     log.Warn(Messages.STORAGELINK_SR_NEEDS_REATTACH, f);
                 }
                 else
@@ -117,14 +109,39 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             finally
             {
                 _running = false;
+                PercentComplete = 100;
             }
-
-            PercentComplete = 100;
         }
 
-        private void UpdateProgress(int progress)
+        public string CurrentProgressStep
         {
-            this.PercentComplete = progress;
+            get { return _progressHistory.Count > 0 ? _progressHistory.Peek() : string.Empty; }
+        }
+
+        protected void AddProgressStep(string step)
+        {
+            if (_progressHistory.Count > 0)
+            {
+                var popped = _progressHistory.Pop();
+                _progressHistory.Push(popped + Messages.DONE);
+            }
+
+            if (step != null)
+                _progressHistory.Push(step);
+
+            if (OnProgressChange != null)
+                OnProgressChange(this);
+        }
+
+        protected void ReplaceProgressStep(string step)
+        {
+            if (_progressHistory.Count > 0)
+                _progressHistory.Pop();
+
+            _progressHistory.Push(step);
+
+            if (OnProgressChange != null)
+                OnProgressChange(this);
         }
 
         protected string PollTaskForResultAndDestroy(IXenConnection connection, ref Session session, XenRef<Task> task)
@@ -136,7 +153,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             try
             {
-                return PollTaskForResult(connection, ref session, task, UpdateProgress, min, max);
+                return PollTaskForResult(connection, ref session, task,
+                    progress => PercentComplete = progress, min, max);
             }
             finally
             {
@@ -195,11 +213,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 return false;
 
             return string.Equals(_actionId.ToString(), other._actionId.ToString(), StringComparison.OrdinalIgnoreCase);
-        }
-
-        public override string ToString()
-        {
-            return ProgressDescription;
         }
 
         public virtual void Cancel()

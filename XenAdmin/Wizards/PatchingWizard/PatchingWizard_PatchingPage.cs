@@ -296,14 +296,14 @@ namespace XenAdmin.Wizards.PatchingWizard
                 if (e.ProgressPercentage == 0)
                 {
                     textBoxLog.Text = completedActionsLog.ToString();
-                    textBoxLog.Text += action.ProgressDescription ?? action.ToString();
+                    textBoxLog.Text += action.CurrentProgressStep;
                 }
                 else
                 {
-                    completedActionsLog.Append(action.ProgressDescription ?? action.ToString());
-                    completedActionsLog.AppendLine(Messages.DONE);
+                    completedActionsLog.Append(action.CurrentProgressStep).AppendLine(Messages.DONE);
                     textBoxLog.Text = completedActionsLog.ToString();
-                    progressBar.Value += e.ProgressPercentage;
+                    int newVal = progressBar.Value + e.ProgressPercentage;
+                    progressBar.Value = newVal > 100 ? 100 : newVal;
                 }
             }
         }      
@@ -332,10 +332,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 catch (Exception e)
                 {
-
-                    log.Error("Failed to carry out plan.", e);
-                    log.Debug(actionList);
-                    doWorkEventArgs.Result = new Exception(action.ProgressDescription, e);
+                    log.ErrorFormat("Failed to carry out plan. {0} {1}", action.CurrentProgressStep, e);
+                    doWorkEventArgs.Result = new Exception(action.CurrentProgressStep, e);
                     break;
                 }
             }

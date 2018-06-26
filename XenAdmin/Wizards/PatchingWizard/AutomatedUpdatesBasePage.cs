@@ -202,7 +202,8 @@ namespace XenAdmin.Wizards.PatchingWizard
                             actionsWorker.CleanupActions.Remove(action);
 
                             // only increase the progress if the action succeeded
-                            progressBar.Value += e.ProgressPercentage / backgroundWorkers.Count;
+                            int newVal = progressBar.Value + e.ProgressPercentage / backgroundWorkers.Count;
+                            progressBar.Value = newVal > 100 ? 100 : newVal;
                         }
                     }
                 }
@@ -226,9 +227,10 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 foreach (var pa in bgw.DoneActions)
                 {
+                    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
+
                     if (pa.Error != null)
                     {
-                        sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
                         if (pa.Error is CancelledException)
                         {
                             sb.AppendLine(Messages.CANCELLED_BY_USER);
@@ -251,17 +253,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                         bgwErrorCount++;
                     }
-                    else
-                    {
-                        sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
-                        sb.AppendLine(Messages.DONE);
-                    }
                 }
 
                 foreach (var pa in bgw.InProgressActions)
                 {
-                    sb.AppendIndented(pa.ProgressDescription ?? pa.ToString());
-                    sb.AppendLine();
+                    pa.ProgressHistory.ForEach(step => sb.AppendIndented(step).AppendLine());
                 }
 
                 sb.AppendLine();
@@ -308,7 +304,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         foreach (var a in initialActions)
                         {
                             action = a;
-                            RunPlanAction(bgw, action, ref doWorkEventArgs);
+                            bgw.RunPlanAction(action, ref doWorkEventArgs);
                         }
                     }
 
@@ -320,7 +316,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var a in planActions)
                     {
                         action = a;
-                        RunPlanAction(bgw, action, ref doWorkEventArgs);
+                        bgw.RunPlanAction(action, ref doWorkEventArgs);
                     }
 
                     // Step 3: DelayedActions
@@ -332,7 +328,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                     foreach (var a in restartActions)
                     {
                         action = a;
-                        RunPlanAction(bgw, action, ref doWorkEventArgs);
+                        bgw.RunPlanAction(action, ref doWorkEventArgs);
                     }
 
                     var otherActions = delayedActions.Where(a => !(a is RestartHostPlanAction)).ToList();
@@ -347,7 +343,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                         if (restartActions.Count <= 0 ||
                             (Helpers.ElyOrGreater(host) && host.Connection.TryResolveWithTimeout(new XenRef<Host>(host.opaque_ref)).updates_requiring_reboot.Count <= 0))
                         {
-                            RunPlanAction(bgw, action, ref doWorkEventArgs);
+                            bgw.RunPlanAction(action, ref doWorkEventArgs);
                         }
                         else
                         {
@@ -368,7 +364,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 foreach (var a in bgw.FinalActions)
                 {
                     action = a;
-                    RunPlanAction(bgw, action, ref doWorkEventArgs);
+                    bgw.RunPlanAction(action, ref doWorkEventArgs);
                 }
             }
             catch (Exception e)
@@ -380,45 +376,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                     bgw.DoneActions.Add(action);
                 bgw.InProgressActions.Remove(action);
 
-                log.Error("Failed to carry out plan.", e);
-                log.Debug(action.ProgressDescription);
-
-                doWorkEventArgs.Result = new Exception(action.ProgressDescription, e);
-
+                log.ErrorFormat("Failed to carry out plan. {0} {1}", action.CurrentProgressStep, e);
+                doWorkEventArgs.Result = new Exception(action.CurrentProgressStep, e);
 
                 failedWorkers.Add(bgw);
                 bgw.ReportProgress(0);
             }
-        }
-
-        private void RunPlanAction(UpdateProgressBackgroundWorker bgw, PlanAction action, ref DoWorkEventArgs e)
-        {
-            if (bgw.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            if (bgw.DoneActions.Contains(action) && action.Error == null) // this action was completed successfully, do not run it again
-                return;
-
-            // if we retry a failed action, we need to firstly remove it from DoneActions and reset its Error
-            bgw.DoneActions.Remove(action);
-            action.Error = null;
-
-            action.OnProgressChange += action_OnProgressChange;
-            bgw.ReportProgress(0, action);
-
-            action.Run();
-            Thread.Sleep(1000);
-
-            action.OnProgressChange -= action_OnProgressChange;
-            bgw.ReportProgress(bgw.ProgressIncrement, action);
-        }
-
-        private void action_OnProgressChange(PlanAction planAction)
-        {
-            Program.Invoke(Program.MainWindow, UpdateStatusTextBox);
         }
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -446,7 +409,6 @@ namespace XenAdmin.Wizards.PatchingWizard
                         labelError.Text = SuccessMessageOnCompletion(backgroundWorkers.Count > 1);
                         pictureBox1.Image = Images.StaticImages._000_Tick_h32bit_16;
                         buttonRetry.Visible = false;
-                        progressBar.Value = 100;
                     }
 
                     _thisPageIsCompleted = true;

@@ -27245,15 +27245,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading update {0}....
-        /// </summary>
-        public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING {
-            get {
-                return ResourceManager.GetString("PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Skipping download: Already downloaded update {0}....
         /// </summary>
         public static string PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING {
@@ -28071,25 +28062,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disabling host server.
-        /// </summary>
-        public static string PLAN_ACTION_STATUS_DISABLING_HOST_SERVER {
-            get {
-                return ResourceManager.GetString("PLAN_ACTION_STATUS_DISABLING_HOST_SERVER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Host has been upgraded.
-        /// </summary>
-        public static string PLAN_ACTION_STATUS_HOST_UPGRADED {
-            get {
-                return ResourceManager.GetString("PLAN_ACTION_STATUS_HOST_UPGRADED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Installing [XenServer].
+        ///   Looks up a localized string similar to Installing [XenServer] on &apos;{0}&apos;....
         /// </summary>
         public static string PLAN_ACTION_STATUS_INSTALLING_XENSERVER {
             get {
@@ -28098,25 +28071,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Migrating VM {0} of {1} back to Host.
-        /// </summary>
-        public static string PLAN_ACTION_STATUS_MIGRATING_VM_X_OF_Y {
-            get {
-                return ResourceManager.GetString("PLAN_ACTION_STATUS_MIGRATING_VM_X_OF_Y", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Migrating VMs from host.
-        /// </summary>
-        public static string PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST {
-            get {
-                return ResourceManager.GetString("PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reconnecting storage.
+        ///   Looks up a localized string similar to Reconnecting storage....
         /// </summary>
         public static string PLAN_ACTION_STATUS_RECONNECTING_STORAGE {
             get {
@@ -28125,11 +28080,11 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Re-enabling host.
+        ///   Looks up a localized string similar to Migrating VMs back to server {0}....
         /// </summary>
-        public static string PLAN_ACTION_STATUS_REENABLING_HOST {
+        public static string PLAN_ACTION_STATUS_REPATRIATING_VMS {
             get {
-                return ResourceManager.GetString("PLAN_ACTION_STATUS_REENABLING_HOST", resourceCulture);
+                return ResourceManager.GetString("PLAN_ACTION_STATUS_REPATRIATING_VMS", resourceCulture);
             }
         }
         
@@ -28179,7 +28134,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rebooting specified VMs....
+        ///   Looks up a localized string similar to Rebooting VM {0}....
         /// </summary>
         public static string PLANACTION_VMS_REBOOTING {
             get {
@@ -34502,7 +34457,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing update {0} to {1}... .
+        ///   Looks up a localized string similar to Installing update {0} on {1}... .
         /// </summary>
         public static string UPDATES_WIZARD_APPLYING_UPDATE {
             get {
@@ -34511,7 +34466,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installing update to {0} servers....
+        ///   Looks up a localized string similar to Installing update on {0} servers....
         /// </summary>
         public static string UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS {
             get {
@@ -34684,25 +34639,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter maintenance mode.
-        /// </summary>
-        public static string UPDATES_WIZARD_ENTER_MAINTENANCE_MODE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_ENTER_MAINTENANCE_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Entered maintenance mode.
-        /// </summary>
-        public static string UPDATES_WIZARD_ENTERED_MAINTENANCE_MODE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_ENTERED_MAINTENANCE_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Entering maintenance mode....
+        ///   Looks up a localized string similar to &apos;{0}&apos; is entering maintenance mode....
         /// </summary>
         public static string UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE {
             get {
@@ -34711,25 +34648,7 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exit maintenance mode.
-        /// </summary>
-        public static string UPDATES_WIZARD_EXIT_MAINTENANCE_MODE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_EXIT_MAINTENANCE_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exited maintenance mode.
-        /// </summary>
-        public static string UPDATES_WIZARD_EXITED_MAINTENANCE_MODE {
-            get {
-                return ResourceManager.GetString("UPDATES_WIZARD_EXITED_MAINTENANCE_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} is exiting maintenance mode....
+        ///   Looks up a localized string similar to &apos;{0}&apos; is exiting maintenance mode....
         /// </summary>
         public static string UPDATES_WIZARD_EXITING_MAINTENANCE_MODE {
             get {
@@ -35512,15 +35431,6 @@ namespace XenAdmin {
         public static string UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS {
             get {
                 return ResourceManager.GetString("UPGRADEWIZARD_WARNING_INCOMPATIBLE_CPUS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upgrading server &apos;{0}&apos; ....
-        /// </summary>
-        public static string UPGRADING_SERVER {
-            get {
-                return ResourceManager.GetString("UPGRADING_SERVER", resourceCulture);
             }
         }
         

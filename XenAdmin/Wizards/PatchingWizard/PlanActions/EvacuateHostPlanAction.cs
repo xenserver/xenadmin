@@ -44,7 +44,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            ProgressDescription = string.Format(Messages.PLANACTION_VMS_MIGRATING, CurrentHost.Name());
             EvacuateHost(ref session);
         }
     }

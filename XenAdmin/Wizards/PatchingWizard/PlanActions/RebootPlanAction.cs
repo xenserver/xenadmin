@@ -67,10 +67,17 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             Connection.ConnectionLost -= connection_ConnectionLost;
         }
 
+        protected void RestartAgent(ref Session session)
+        {
+            var hostObj = GetResolvedHost();
+            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, hostObj.Name()));
+            WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
+        }
+
         protected void RebootHost(ref Session session)
         {
             var hostObj = GetResolvedHost();
-            ProgressDescription = string.Format(Messages.UPDATES_WIZARD_REBOOTING, hostObj.Name());
+            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_REBOOTING, hostObj.Name()));
             Connection.ExpectDisruption = true;
             try
             {

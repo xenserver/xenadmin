@@ -45,7 +45,7 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         protected override XenRef<Task> DoPerVM(Session session, VM vm)
         {
-            ProgressDescription = Messages.PLANACTION_VMS_REBOOTING;
+            AddProgressStep(string.Format(Messages.PLANACTION_VMS_REBOOTING, vm.Name()));
             return VM.async_clean_reboot(session, vm.opaque_ref);
         }
     }

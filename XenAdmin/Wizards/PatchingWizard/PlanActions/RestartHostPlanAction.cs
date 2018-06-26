@@ -68,8 +68,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 else if (_restartAgentFallback)
                 {
                     log.Debug("Live patching succeeded. Restarting agent.");
-                    ProgressDescription = string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, hostObj.Name());
-                    WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
+                    RestartAgent(ref session);
                     return;
                 }
                 else
@@ -79,21 +78,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                     return;
                 }
             }
-
-            var sb = new StringBuilder();
-            
-            sb.Append(string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name()));
-            ProgressDescription = sb.ToString();
+           
             EvacuateHost(ref session);
-            sb.AppendLine(Messages.DONE);
-
-            sb.AppendIndented(string.Format(Messages.UPDATES_WIZARD_REBOOTING, hostObj.Name()), sb.Length > 0 ? 2 : 0);
-            ProgressDescription = sb.ToString();
             RebootHost(ref session);
-            sb.AppendLine(Messages.DONE);
-
-            sb.AppendIndented(string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, hostObj.Name()));
-            ProgressDescription = sb.ToString();
             BringBabiesBack(ref session, _vms, EnableOnly);
         }
     }

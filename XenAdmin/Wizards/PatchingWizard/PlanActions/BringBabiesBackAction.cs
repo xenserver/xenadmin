@@ -50,7 +50,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            ProgressDescription = string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, CurrentHost.Name());
             BringBabiesBack(ref session, _vms, _enableOnly);
         }
     }

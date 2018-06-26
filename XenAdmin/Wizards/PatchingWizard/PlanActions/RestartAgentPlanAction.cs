@@ -43,8 +43,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            ProgressDescription = string.Format(Messages.UPDATES_WIZARD_RESTARTING_AGENT, CurrentHost.Name());
-            WaitForReboot(ref session, Host.AgentStartTime, s => Host.async_restart_agent(s, HostXenRef.opaque_ref));
+            RestartAgent(ref session);
         }
     }
 }

@@ -65,20 +65,20 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         {
             var hostObj = GetResolvedHost();
 
-            ProgressDescription = string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name());
-
             var vms = hostObj.GetRunningVMs();
             if (vms.Count > 0)
             {
+                AddProgressStep(Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE);
                 PBD.CheckAndPlugPBDsFor(Connection.ResolveAll(hostObj.resident_VMs));
             }
 
+            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE, hostObj.Name()));
             log.DebugFormat("Disabling host {0}", hostObj.Name());
             Host.disable(session, HostXenRef.opaque_ref);
 
             if (vms.Count > 0)
             {
-                ProgressDescription = Messages.PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST;
+                AddProgressStep(string.Format(Messages.PLANACTION_VMS_MIGRATING, hostObj.Name()));
                 log.DebugFormat("Migrating VMs from host {0}", hostObj.Name());
                 XenRef<Task> task = Host.async_evacuate(session, HostXenRef.opaque_ref);
                 PollTaskForResultAndDestroy(Connection, ref session, task);
@@ -87,7 +87,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected void BringBabiesBack(ref Session session, List<XenRef<VM>> vmrefs, bool enableOnly)
         {
-            ProgressDescription = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
+            AddProgressStep(Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE);
             PBD.CheckAndBestEffortPlugPBDsFor(Connection, vmrefs);
 
             //
@@ -96,8 +96,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             // Hosts do reenable themselves anyway, so just wait 1 min for that,  
             // occasionally poking it.
             //
-
-            ProgressDescription = Messages.PLAN_ACTION_STATUS_REENABLING_HOST;
+            var hostObj = GetResolvedHost();
+            AddProgressStep(string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, hostObj.Name()));
 
             int retries = 0;
             while (!Host.get_enabled(session, HostXenRef.opaque_ref))
@@ -125,10 +125,15 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             int vmCount = vmrefs.Count;
             int vmNumber = 0;
             
-            var hostObj = GetResolvedHost();
+            hostObj = GetResolvedHost();
+            AddProgressStep(string.Format(Messages.PLAN_ACTION_STATUS_REPATRIATING_VMS, hostObj.Name()));
 
-            foreach (VM vm in Connection.ResolveAll(vmrefs))
+            foreach (var vmRef in vmrefs)
             {
+                var vm = Connection.Resolve(vmRef);
+                if (vm == null)
+                    continue;
+
                 int tries = 0;
 
                 if (vm.power_state != vm_power_state.Running)
@@ -140,8 +145,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                     try
                     {
-                        ProgressDescription = string.Format(Messages.PLAN_ACTION_STATUS_MIGRATING_VM_X_OF_Y, vmNumber + 1, vmCount);
-
                         log.DebugFormat("Migrating VM '{0}' back to Host '{1}'", vm.Name(), hostObj.Name());
 
                         PollTaskForResultAndDestroy(Connection, ref session,

@@ -54,6 +54,32 @@ namespace XenAdmin.Wizards.PatchingWizard
             CleanupActions = FinalActions.Where(a => a is RemoveUpdateFileFromMasterPlanAction).ToList();
         }
 
+        public void RunPlanAction(PlanAction action, ref DoWorkEventArgs e)
+        {
+            if (CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            // if this action is completed successfully, do not run it again
+            if (DoneActions.Contains(action) && action.Error == null)
+                return;
+
+            // if we retry a failed action, we need to firstly remove it from DoneActions and reset its Error
+            DoneActions.Remove(action);
+            action.Error = null;
+
+            action.OnProgressChange += action_OnProgressChange;
+            action.Run();
+            action.OnProgressChange -= action_OnProgressChange;
+        }
+
+        private void action_OnProgressChange(PlanAction planAction)
+        {
+            ReportProgress(planAction.IsComplete ? ProgressIncrement : 0, planAction);
+        }
+
         public new void CancelAsync()
         {
             if (HostPlans != null)

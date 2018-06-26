@@ -77,7 +77,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 && !(existingMapping.Pool_update != null && poolUpdates.Any(p => string.Equals(p.uuid, existingMapping.Pool_update.uuid, StringComparison.OrdinalIgnoreCase)))
             )
             {
-                ProgressDescription = string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, patch.Name, conn.Name);
+                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_UPLOADING_UPDATE, patch.Name, conn.Name));
                 PoolPatchMapping newMapping;
 
                 if (Helpers.ElyOrGreater(master))

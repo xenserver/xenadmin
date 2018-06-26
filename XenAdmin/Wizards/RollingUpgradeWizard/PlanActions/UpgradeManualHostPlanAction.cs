@@ -78,12 +78,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
             try
             {
                 var hostObj = GetResolvedHost();
-                ProgressDescription = string.Format(Messages.UPGRADING_SERVER, hostObj.Name());
 
                 if (hostObj.enabled)
                 {
-                    ProgressDescription = Messages.PLAN_ACTION_STATUS_DISABLING_HOST_SERVER;
                     log.DebugFormat("Disabling host {0}", hostObj.Name());
+                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE, hostObj.Name()));
                     Host.disable(session, HostXenRef.opaque_ref);
                 }
 
@@ -91,20 +90,17 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard.PlanActions
                 rebooting = true;
 
                 log.DebugFormat("Upgrading host {0}", hostObj.Name());
-                ProgressDescription = Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER;
+                AddProgressStep(string.Format(Messages.PLAN_ACTION_STATUS_INSTALLING_XENSERVER, hostObj.Name()));
 
                 log.DebugFormat("Waiting for host {0} to reboot", hostObj.Name());
                 WaitForReboot(ref session, Host.BootTime, s => Host.async_reboot(s, HostXenRef.opaque_ref));
 
-                ProgressDescription = Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE;
+                AddProgressStep(Messages.PLAN_ACTION_STATUS_RECONNECTING_STORAGE);
                 foreach (var host in Connection.Cache.Hosts)
                     host.CheckAndPlugPBDs(); // Wait for PBDs to become plugged on all hosts
 
                 rebooting = false;
                 log.DebugFormat("Host {0} rebooted", hostObj.Name());
-
-                ProgressDescription = Messages.PLAN_ACTION_STATUS_HOST_UPGRADED;
-                log.DebugFormat("Upgraded host {0}", hostObj.Name());
             }
             finally
             {

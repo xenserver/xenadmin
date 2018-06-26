@@ -62,7 +62,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
             if (mapping != null && (mapping.Pool_patch != null || mapping.Pool_update != null))
             {
-                ProgressDescription = string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name());
+                AddProgressStep(string.Format(Messages.UPDATES_WIZARD_APPLYING_UPDATE, xenServerPatch.Name, host.Name()));
 
                 var task = mapping.Pool_patch == null
                     ? Pool_update.async_apply(session, mapping.Pool_update.opaque_ref, host.opaque_ref)
