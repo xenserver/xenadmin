@@ -63,7 +63,13 @@ namespace XenAdminTests.WizardTests.state5_xml
             {
                 while (!btnNext.Enabled)
                 {
-                    Assert.IsFalse(TestUtils.GetButton(wizard, "RollingUpgradeWizardPrecheckPage.buttonResolveAll").Enabled, "Upgrade prechecks failed.");
+                    var btnResolveAll = TestUtils.GetButton(wizard, "RollingUpgradeWizardPrecheckPage.buttonResolveAll");
+                    if (btnResolveAll.Enabled)
+                    {
+                        MW(btnResolveAll.PerformClick);
+                        Thread.Sleep(1000);
+                    }
+                    Assert.IsFalse(btnResolveAll.Enabled, "Upgrade prechecks failed.");
                     Thread.Sleep(1000);
                 }
                 Thread.Sleep(1000);
