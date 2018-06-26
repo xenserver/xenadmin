@@ -46,7 +46,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly Host host;
 
         public PatchPrecheckOnHostPlanAction(IXenConnection connection, XenServerPatch patch, Host host, List<PoolPatchMapping> mappings)
-            : base(connection, string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, host.Name()))
+            : base(connection)
         {
             this.patch = patch;
             this.host = host;
@@ -65,7 +65,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
                 try
                 {
-                    Visible = true;
+                    AddProgressStep(string.Format(Messages.UPDATES_WIZARD_RUNNING_PRECHECK, patch.Name, host.Name()));
+
                     PatchPrecheckCheck check = mapping.Pool_patch == null
                         ? new PatchPrecheckCheck(host, mapping.Pool_update)
                         : new PatchPrecheckCheck(host, mapping.Pool_patch);

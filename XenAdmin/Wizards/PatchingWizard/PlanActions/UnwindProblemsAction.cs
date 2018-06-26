@@ -32,6 +32,7 @@
 using System.Collections.Generic;
 using XenAdmin.Actions;
 using XenAdmin.Diagnostics.Problems;
+using XenAdmin.Network;
 
 
 namespace XenAdmin.Wizards.PatchingWizard.PlanActions
@@ -39,17 +40,21 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     public class UnwindProblemsAction : PlanAction
     {
         private readonly List<Problem> _problems;
+        private readonly IXenConnection _connection;
 
-        public UnwindProblemsAction(List<Problem> problems, string TitleOverride = null)
-            : base(TitleOverride ?? Messages.PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTING)
+        public UnwindProblemsAction(List<Problem> problems, IXenConnection connection = null)
         {
-            base.TitlePlan = Messages.REVERTING_RESOLVED_PRECHECKS;
             _problems = problems;
+            _connection = connection;
         }
 
         protected override void _Run()
         {
-            Visible = true;
+            var msg = _connection == null
+                ? Messages.REVERTING_RESOLVED_PRECHECKS
+                : string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, _connection.Name);
+            AddProgressStep(msg);
+
             int completed = 0;
             foreach (Problem p in _problems)
             {

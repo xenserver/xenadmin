@@ -39,13 +39,13 @@ namespace XenAdmin.Wizards.PatchingWizard
     public class RebootVMsPlanAction : VMsPlanAction
     {
         public RebootVMsPlanAction(Host host,List<XenRef<VM>> vms)
-            : base(vms, host.Connection, Messages.PLANACTION_VMS_REBOOTING)
+            : base(vms, host.Connection)
         {
         }
 
         protected override XenRef<Task> DoPerVM(Session session, VM vm)
         {
-            Visible = true;
+            AddProgressStep(string.Format(Messages.PLANACTION_VMS_REBOOTING, vm.Name()));
             return VM.async_clean_reboot(session, vm.opaque_ref);
         }
     }

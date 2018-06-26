@@ -87,6 +87,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return multipleErrors ? Messages.ROLLING_UPGRADE_ERROR_POOL_MANY : Messages.ROLLING_UPGRADE_ERROR_POOL_ONE;
         }
 
+        protected override string UserCancellationMessage()
+        {
+            return Messages.ROLLING_UPGRADE_CANCELLATION;
+        }
+
         protected override void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
             //Add masters first, then the slaves that are not ugpraded
@@ -100,7 +105,7 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             //add a revert pre-check action for this pool
             var problemsToRevert = ProblemsResolvedPreCheck.Where(p => hostNeedUpgrade.ToList().Select(h => h.uuid).ToList().Contains(p.Check.Host.uuid)).ToList();
             if (problemsToRevert.Count > 0)
-                finalActions.Add(new UnwindProblemsAction(problemsToRevert, string.Format(Messages.REVERTING_RESOLVED_PRECHECKS_POOL, pool.Connection.Name)));
+                finalActions.Add(new UnwindProblemsAction(problemsToRevert, pool.Connection));
         }
 
         protected override bool SkipInitialPlanActions(Host host)

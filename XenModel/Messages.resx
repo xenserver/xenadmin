@@ -4302,9 +4302,6 @@ This will also delete its subfolders.</value>
   <data name="DOES_NOT_USE" xml:space="preserve">
     <value>does not use</value>
   </data>
-  <data name="DONE" xml:space="preserve">
-    <value> done.</value>
-  </data>
   <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
     <value>Don't select a target server</value>
   </data>
@@ -5208,9 +5205,6 @@ Warning: to prevent data loss you must ensure that the LUN is not in use by any 
   <data name="EXIT_MAINTENANCE_MODE_PROMPT" xml:space="preserve">
     <value>Do you want to have the following VMs automatically migrated back to, resumed on or started on this server?
 {0}</value>
-  </data>
-  <data name="EXIT_SERVER_FROM_MAINTENANCE_MODE" xml:space="preserve">
-    <value>{0} exiting maintenance mode</value>
   </data>
   <data name="EXPAND_ALL" xml:space="preserve">
     <value>E&amp;xpand All</value>
@@ -7936,9 +7930,6 @@ To fix a corrupt configuration file revert changes to {0} or delete the file to 
   <data name="MIGRATE_VDI_UPSELL_BLURB" xml:space="preserve">
     <value>Upgrade your [XenServer] license to enable VDI live migration. This feature enables you to migrate multiple running VDIs between SRs in the same pool with no VM downtime. </value>
   </data>
-  <data name="MIGRATE_VMS_OFF_SERVER" xml:space="preserve">
-    <value>Migrate VMs off server '{0}'</value>
-  </data>
   <data name="MIGRATION_NOT_ALLOWED" xml:space="preserve">
     <value>This VM may not migrate at the moment</value>
   </data>
@@ -9375,6 +9366,9 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PASTE" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION" xml:space="preserve">
+    <value>The update process was cancelled.</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY" xml:space="preserve">
     <value>One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it.</value>
   </data>
@@ -9404,9 +9398,6 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_CLEANUP" xml:space="preserve">
     <value>Clean up...</value>
-  </data>
-  <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_DOWNLOADING" xml:space="preserve">
-    <value>Downloading update {0}...</value>
   </data>
   <data name="PATCHINGWIZARD_DOWNLOADUPDATE_ACTION_TITLE_SKIPPING" xml:space="preserve">
     <value>Skipping download: Already downloaded update {0}...</value>
@@ -9461,9 +9452,6 @@ However, there is not enough space to perform the repartitioning, so the current
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTED" xml:space="preserve">
     <value>Resolved prechecks reverted</value>
-  </data>
-  <data name="PATCHINGWIZARD_PATCHINGPAGE_PRECHECK_REVERTING" xml:space="preserve">
-    <value>Reverting resolved prechecks...</value>
   </data>
   <data name="PATCHINGWIZARD_PATCHINGPAGE_SERVER_RESOLVE" xml:space="preserve">
     <value>Resolve server problems</value>
@@ -9776,6 +9764,15 @@ File not found</value>
   <data name="PII_YES" xml:space="preserve">
     <value>These files will contain personally identifiable information.</value>
   </data>
+  <data name="PLAN_ACTION_DONE" xml:space="preserve">
+    <value> done.</value>
+  </data>
+  <data name="PLAN_ACTION_CANCELLED_BY_USER" xml:space="preserve">
+    <value> cancelled by user.</value>
+  </data>
+  <data name="PLAN_ACTION_ERROR" xml:space="preserve">
+    <value> error.</value>
+  </data>
   <data name="PLANACTION_VMS_MIGRATE" xml:space="preserve">
     <value>Migrate VMs from Server</value>
   </data>
@@ -9792,28 +9789,16 @@ File not found</value>
     <value>Rebooted specified VMs</value>
   </data>
   <data name="PLANACTION_VMS_REBOOTING" xml:space="preserve">
-    <value>Rebooting specified VMs...</value>
-  </data>
-  <data name="PLAN_ACTION_STATUS_DISABLING_HOST_SERVER" xml:space="preserve">
-    <value>Disabling host server</value>
-  </data>
-  <data name="PLAN_ACTION_STATUS_HOST_UPGRADED" xml:space="preserve">
-    <value>Host has been upgraded</value>
+    <value>Rebooting VM {0}...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_INSTALLING_XENSERVER" xml:space="preserve">
-    <value>Installing [XenServer]</value>
-  </data>
-  <data name="PLAN_ACTION_STATUS_MIGRATING_VMS_FROM_HOST" xml:space="preserve">
-    <value>Migrating VMs from host</value>
-  </data>
-  <data name="PLAN_ACTION_STATUS_MIGRATING_VM_X_OF_Y" xml:space="preserve">
-    <value>Migrating VM {0} of {1} back to Host</value>
+    <value>Installing [XenServer] on '{0}'...</value>
   </data>
   <data name="PLAN_ACTION_STATUS_RECONNECTING_STORAGE" xml:space="preserve">
-    <value>Reconnecting storage</value>
+    <value>Reconnecting storage...</value>
   </data>
-  <data name="PLAN_ACTION_STATUS_REENABLING_HOST" xml:space="preserve">
-    <value>Re-enabling host</value>
+  <data name="PLAN_ACTION_STATUS_REPATRIATING_VMS" xml:space="preserve">
+    <value>Migrating VMs back to server {0}...</value>
   </data>
   <data name="PLEASE_RECONNECT_HOST" xml:space="preserve">
     <value>{0}
@@ -10556,7 +10541,7 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
     <value>Reverting the power state of {0}</value>
   </data>
   <data name="REVERTING_RESOLVED_PRECHECKS" xml:space="preserve">
-    <value>Reverting resolved prechecks</value>
+    <value>Reverting resolved prechecks...</value>
   </data>
   <data name="REVERTING_RESOLVED_PRECHECKS_POOL" xml:space="preserve">
     <value>Reverting resolved prechecks in {0}...</value>
@@ -10602,6 +10587,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="ROLLING_UPGRADE_DISCONNECTED_SERVER" xml:space="preserve">
     <value>No longer connected to {0}. Please review your selection and try again.</value>
+  </data>
+  <data name="ROLLING_UPGRADE_CANCELLATION" xml:space="preserve">
+    <value>The rolling pool upgrade process was cancelled.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
     <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>
@@ -11912,10 +11900,10 @@ Verify that the file is a valid {1} export.</value>
     <value>Installed update</value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE" xml:space="preserve">
-    <value>Installing update {0} to {1}... </value>
+    <value>Installing update {0} on {1}... </value>
   </data>
   <data name="UPDATES_WIZARD_APPLYING_UPDATE_MULTIPLE_HOSTS" xml:space="preserve">
-    <value>Installing update to {0} servers...</value>
+    <value>Installing update on {0} servers...</value>
   </data>
   <data name="UPDATES_WIZARD_APPLY_FAILED" xml:space="preserve">
     <value>The update failed to apply.  Would you like to view the output?</value>
@@ -11979,23 +11967,11 @@ Check your settings and try again.</value>
   <data name="UPDATES_WIZARD_EJECT_CD" xml:space="preserve">
     <value>Click here to eject CD</value>
   </data>
-  <data name="UPDATES_WIZARD_ENTERED_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Entered maintenance mode</value>
-  </data>
   <data name="UPDATES_WIZARD_ENTERING_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Entering maintenance mode...</value>
-  </data>
-  <data name="UPDATES_WIZARD_ENTER_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Enter maintenance mode</value>
-  </data>
-  <data name="UPDATES_WIZARD_EXITED_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Exited maintenance mode</value>
+    <value>'{0}' is entering maintenance mode...</value>
   </data>
   <data name="UPDATES_WIZARD_EXITING_MAINTENANCE_MODE" xml:space="preserve">
-    <value>{0} is exiting maintenance mode...</value>
-  </data>
-  <data name="UPDATES_WIZARD_EXIT_MAINTENANCE_MODE" xml:space="preserve">
-    <value>Exit maintenance mode</value>
+    <value>'{0}' is exiting maintenance mode...</value>
   </data>
   <data name="UPDATES_WIZARD_EXTRACT_ACTION_TITLE" xml:space="preserve">
     <value>Extract {0}</value>
@@ -12300,12 +12276,6 @@ Note that if RBAC is enabled, only updates which you have privileges to dismiss 
   </data>
   <data name="UPGRADE_SLAVE" xml:space="preserve">
     <value>Upgrade '{0}'</value>
-  </data>
-  <data name="UPGRADING" xml:space="preserve">
-    <value>Upgrading</value>
-  </data>
-  <data name="UPGRADING_SERVER" xml:space="preserve">
-    <value>Upgrading server '{0}' ...</value>
   </data>
   <data name="UPLOADING_PATCH" xml:space="preserve">
     <value>Uploading Update...</value>

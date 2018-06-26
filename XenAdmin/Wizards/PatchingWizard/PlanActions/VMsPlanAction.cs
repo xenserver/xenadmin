@@ -40,8 +40,8 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
     {
         private readonly List<XenRef<VM>> _vms;
 
-        protected VMsPlanAction(List<XenRef<VM>> vms, IXenConnection connection, String description)
-            : base(connection, description)
+        protected VMsPlanAction(List<XenRef<VM>> vms, IXenConnection connection)
+            : base(connection)
         {
             this._vms = vms;
         }
@@ -50,7 +50,6 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
 
         protected override void RunWithSession(ref Session session)
         {
-            Visible = true;
             List<VM> vmObjs = new List<VM>();
             foreach (XenRef<VM> vm in _vms)
                 vmObjs.Add(Connection.TryResolveWithTimeout(vm));

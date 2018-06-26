@@ -42,16 +42,14 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
         private readonly bool _enableOnly;
 
         public BringBabiesBackAction(List<XenRef<VM>> vms, Host host, bool enableOnly)
-            : base(host, string.Format(Messages.UPDATES_WIZARD_EXITING_MAINTENANCE_MODE, host.Name()))
+            : base(host)
         {
-            TitlePlan = string.Format(Messages.EXIT_SERVER_FROM_MAINTENANCE_MODE, host.Name());
             _vms = vms;
             _enableOnly = enableOnly;
         }
 
         protected override void RunWithSession(ref Session session)
         {
-            Visible = true;
             BringBabiesBack(ref session, _vms, _enableOnly);
         }
     }
