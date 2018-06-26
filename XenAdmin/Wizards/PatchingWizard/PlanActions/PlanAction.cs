@@ -114,7 +114,9 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
                 else
                 {
-                    ReplaceProgressStep(CurrentProgressStep + Messages.PLAN_ACTION_DONE);
+                    var curStep = CurrentProgressStep;
+                    if (!string.IsNullOrEmpty(curStep))
+                        ReplaceProgressStep(CurrentProgressStep + Messages.PLAN_ACTION_ERROR);
                     Error = e;
                     throw;
                 }

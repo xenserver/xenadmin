@@ -419,8 +419,8 @@ namespace XenAdmin.Dialogs
 
     public class NonModalThreeButtonDialog : ThreeButtonDialog
     {
-        public NonModalThreeButtonDialog(Icon icon, string msg, string button1Text, string button2Text)
-            : base(new Details(icon, msg),
+        public NonModalThreeButtonDialog(Icon icon, string msg, string title, string button1Text, string button2Text)
+            : base(new Details(icon, msg, title),
                 new TBDButton(button1Text, DialogResult.OK),
                 new TBDButton(button2Text, DialogResult.Cancel))
         {

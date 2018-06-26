@@ -32,7 +32,8 @@
 using System.Threading;
 using System.Windows.Forms;
 using NUnit.Framework;
-using XenAdmin.Core;
+using XenAdmin;
+using XenAdmin.Dialogs;
 using XenAdmin.Wizards.PatchingWizard;
 using XenAdmin.Wizards.RollingUpgradeWizard;
 
@@ -68,29 +69,20 @@ namespace XenAdminTests.WizardTests.state5_xml
                 Thread.Sleep(1000);
                 
             }
-            else if (pageName == "Apply Upgrade")
-            {
-                //It needs work
-                var page = TestUtils.GetXenTabPage(wizard, "RollingUpgradeUpgradePage");
-                var win32Page = new Win32Window(page.Handle);
-                while (win32Page.Children.Count == 0)
-                {
-                    Thread.Sleep(500);
-                }
-                foreach (var child in win32Page.Children)
-                {
-                    var dialog = Control.FromHandle(child.Handle) as Form;
-                    if (dialog != null)
-                        MW(dialog.CancelButton.PerformClick);
-                }
-                while (page.EnableNext() == false)
-                {
-                    Thread.Sleep(500);
-                }
-            }
             else if (pageName == "Upgrade Mode")
             {
                 MW(TestUtils.GetRadioButton(wizard, "RollingUpgradeWizardUpgradeModePage.radioButtonManual").PerformClick);
+            }
+            else if (pageName == "Apply Upgrade")
+            {
+                var window = WaitForWindowToAppear(Messages.ROLLING_POOL_UPGRADE,
+                    w => Control.FromHandle(w.Handle) is NonModalThreeButtonDialog);
+                MW(() =>
+                {
+                    var dialog = Control.FromHandle(window.Handle) as Form;
+                    if (dialog != null)
+                        dialog.CancelButton.PerformClick();
+                });
             }
         }
 
