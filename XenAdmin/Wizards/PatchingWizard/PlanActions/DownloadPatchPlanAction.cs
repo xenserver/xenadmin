@@ -85,7 +85,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             tempFileName = Path.GetTempFileName();
 
             var exts = Helpers.ElyOrGreater(Connection) ? Branding.UpdateIso : Branding.Update;
-            var downloadAction = new DownloadAndUnzipXenServerPatchAction(patch.Name, address, tempFileName, false, exts);
+            var downloadAction = new DownloadAndUnzipXenServerPatchAction(patch.Name, address, tempFileName, true, exts);
 
             downloadAction.Changed += downloadAndUnzipXenServerPatchAction_Changed;
             downloadAction.Completed += downloadAndUnzipXenServerPatchAction_Completed;
@@ -94,7 +94,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
             downloadAction.RunExternal(session);
         }
 
-        private void downloadAndUnzipXenServerPatchAction_Changed(object sender)
+        private void downloadAndUnzipXenServerPatchAction_Changed(ActionBase sender)
         {
             var downloadAction = sender as DownloadAndUnzipXenServerPatchAction;
             if (downloadAction == null)
