@@ -87,6 +87,11 @@ namespace XenAdmin.Wizards.RollingUpgradeWizard
             return multipleErrors ? Messages.ROLLING_UPGRADE_ERROR_POOL_MANY : Messages.ROLLING_UPGRADE_ERROR_POOL_ONE;
         }
 
+        protected override string UserCancellationMessage()
+        {
+            return Messages.ROLLING_UPGRADE_CANCELLATION;
+        }
+
         protected override void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
             //Add masters first, then the slaves that are not ugpraded

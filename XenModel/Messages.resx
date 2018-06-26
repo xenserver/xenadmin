@@ -4302,9 +4302,6 @@ This will also delete its subfolders.</value>
   <data name="DOES_NOT_USE" xml:space="preserve">
     <value>does not use</value>
   </data>
-  <data name="DONE" xml:space="preserve">
-    <value> done.</value>
-  </data>
   <data name="DONT_SELECT_TARGET_SERVER" xml:space="preserve">
     <value>Don't select a target server</value>
   </data>
@@ -9369,6 +9366,9 @@ However, there is not enough space to perform the repartitioning, so the current
   <data name="PASTE" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION" xml:space="preserve">
+    <value>The update process was cancelled.</value>
+  </data>
   <data name="PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY" xml:space="preserve">
     <value>One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it.</value>
   </data>
@@ -9760,6 +9760,15 @@ File not found</value>
   </data>
   <data name="PII_YES" xml:space="preserve">
     <value>These files will contain personally identifiable information.</value>
+  </data>
+  <data name="PLAN_ACTION_DONE" xml:space="preserve">
+    <value> done.</value>
+  </data>
+  <data name="PLAN_ACTION_CANCELLED_BY_USER" xml:space="preserve">
+    <value> cancelled by user.</value>
+  </data>
+  <data name="PLAN_ACTION_ERROR" xml:space="preserve">
+    <value> error.</value>
   </data>
   <data name="PLANACTION_VMS_MIGRATE" xml:space="preserve">
     <value>Migrate VMs from Server</value>
@@ -10575,6 +10584,9 @@ Click Server Status Report to open the Compile Server Status Report Wizard or cl
   </data>
   <data name="ROLLING_UPGRADE_DISCONNECTED_SERVER" xml:space="preserve">
     <value>No longer connected to {0}. Please review your selection and try again.</value>
+  </data>
+  <data name="ROLLING_UPGRADE_CANCELLATION" xml:space="preserve">
+    <value>The rolling pool upgrade process was cancelled.</value>
   </data>
   <data name="ROLLING_UPGRADE_ERROR_MANY" xml:space="preserve">
     <value>One or more of the rolling pool upgrade processes were not completed successfully. The upgrade process has been paused. Press Retry to resume it.</value>

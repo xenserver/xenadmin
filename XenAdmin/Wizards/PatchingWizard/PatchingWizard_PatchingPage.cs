@@ -300,7 +300,7 @@ namespace XenAdmin.Wizards.PatchingWizard
                 }
                 else
                 {
-                    completedActionsLog.Append(action.CurrentProgressStep).AppendLine(Messages.DONE);
+                    completedActionsLog.AppendLine(action.CurrentProgressStep);
                     textBoxLog.Text = completedActionsLog.ToString();
                     int newVal = progressBar.Value + e.ProgressPercentage;
                     progressBar.Value = newVal > 100 ? 100 : newVal;

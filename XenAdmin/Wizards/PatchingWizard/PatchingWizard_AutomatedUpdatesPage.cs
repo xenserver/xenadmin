@@ -102,6 +102,11 @@ namespace XenAdmin.Wizards.PatchingWizard
             return multipleErrors ? Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_MANY : Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_POOL_ONE;
         }
 
+        protected override string UserCancellationMessage()
+        {
+            return Messages.PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION;
+        }
+
         protected override void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions)
         {
             bool automatedUpdatesRestricted = pool.Connection.Cache.Hosts.Any(Host.RestrictBatchHotfixApply);

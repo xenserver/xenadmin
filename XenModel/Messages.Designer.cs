@@ -12113,15 +12113,6 @@ namespace XenAdmin {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  done..
-        /// </summary>
-        public static string DONE {
-            get {
-                return ResourceManager.GetString("DONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Don&apos;t select a target server.
         /// </summary>
         public static string DONT_SELECT_TARGET_SERVER {
@@ -27155,6 +27146,15 @@ namespace XenAdmin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The update process was cancelled..
+        /// </summary>
+        public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION {
+            get {
+                return ResourceManager.GetString("PATCHINGWIZARD_AUTOUPDATINGPAGE_CANCELLATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more of the automated updates processes were not completed successfully. The update process has been paused. Press Retry to resume it..
         /// </summary>
         public static string PATCHINGWIZARD_AUTOUPDATINGPAGE_ERROR_MANY {
@@ -28058,6 +28058,33 @@ namespace XenAdmin {
         public static string PII_YES {
             get {
                 return ResourceManager.GetString("PII_YES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  cancelled by user..
+        /// </summary>
+        public static string PLAN_ACTION_CANCELLED_BY_USER {
+            get {
+                return ResourceManager.GetString("PLAN_ACTION_CANCELLED_BY_USER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  done..
+        /// </summary>
+        public static string PLAN_ACTION_DONE {
+            get {
+                return ResourceManager.GetString("PLAN_ACTION_DONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  error..
+        /// </summary>
+        public static string PLAN_ACTION_ERROR {
+            get {
+                return ResourceManager.GetString("PLAN_ACTION_ERROR", resourceCulture);
             }
         }
         
@@ -30421,6 +30448,15 @@ namespace XenAdmin {
         public static string ROLLING_UPGRADE_CAN_RESUME_UPGRADE {
             get {
                 return ResourceManager.GetString("ROLLING_UPGRADE_CAN_RESUME_UPGRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The rolling pool upgrade process was cancelled..
+        /// </summary>
+        public static string ROLLING_UPGRADE_CANCELLATION {
+            get {
+                return ResourceManager.GetString("ROLLING_UPGRADE_CANCELLATION", resourceCulture);
             }
         }
         

@@ -97,6 +97,12 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 _Run();
                 AddProgressStep(null);
             }
+            catch (CancelledException e)
+            {
+                ReplaceProgressStep(CurrentProgressStep + Messages.PLAN_ACTION_CANCELLED_BY_USER);
+                Error = e;
+                throw;
+            }
             catch (Exception e)
             {
                 Failure f = e as Failure;
@@ -108,6 +114,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 }
                 else
                 {
+                    ReplaceProgressStep(CurrentProgressStep + Messages.PLAN_ACTION_DONE);
                     Error = e;
                     throw;
                 }
@@ -135,7 +142,7 @@ namespace XenAdmin.Wizards.PatchingWizard.PlanActions
                 if (_progressHistory.Count > 0)
                 {
                     var popped = _progressHistory.Pop();
-                    _progressHistory.Push(popped + Messages.DONE);
+                    _progressHistory.Push(popped + Messages.PLAN_ACTION_DONE);
                 }
 
                 if (step != null)

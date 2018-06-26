@@ -129,6 +129,7 @@ namespace XenAdmin.Wizards.PatchingWizard
         protected abstract string FailureMessageOnCompletion(bool multiplePools);
         protected abstract string SuccessMessagePerPool();
         protected abstract string FailureMessagePerPool(bool multipleErrors);
+        protected abstract string UserCancellationMessage();
 
         protected virtual void GeneratePlanActions(Pool pool, List<HostPlan> planActions, List<PlanAction> finalActions) { }
 
@@ -219,6 +220,7 @@ namespace XenAdmin.Wizards.PatchingWizard
             foreach (var bgw in backgroundWorkers)
             {
                 int bgwErrorCount = 0;
+                int bgwCancellationCount = 0;
                 var sb = new StringBuilder();
                 var errorSb = new StringBuilder();
 
@@ -233,11 +235,9 @@ namespace XenAdmin.Wizards.PatchingWizard
                     {
                         if (pa.Error is CancelledException)
                         {
-                            sb.AppendLine(Messages.CANCELLED_BY_USER);
+                            bgwCancellationCount++;
                             continue;
                         }
-
-                        sb.AppendLine(Messages.ERROR);
 
                         var innerEx = pa.Error.InnerException as Failure;
                         if (innerEx != null)
@@ -262,7 +262,11 @@ namespace XenAdmin.Wizards.PatchingWizard
 
                 sb.AppendLine();
 
-                if (bgwErrorCount > 0)
+                if (bgwCancellationCount > 0)
+                {
+                    sb.AppendIndented(UserCancellationMessage()).AppendLine();
+                }
+                else if (bgwErrorCount > 0)
                 {
                     sb.AppendIndented(FailureMessagePerPool(bgwErrorCount > 1)).AppendLine();
                     sb.AppendIndented(errorSb);
@@ -386,12 +390,28 @@ namespace XenAdmin.Wizards.PatchingWizard
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (!e.Cancelled)
+            if (e.Cancelled)
             {
+                Status = Status.Completed;
+                panel1.Visible = true;
+                labelError.Text = UserCancellationMessage();
+                pictureBox1.Image = Images.StaticImages.cancelled_action_16;
+                buttonRetry.Visible = false;
+                _thisPageIsCompleted = true;
+                _cancelEnabled = false;
+                _nextEnabled = true;
+            }
+            else
+            {
+                var someWorkersCancelled = false;
                 var bgw = sender as UpdateProgressBackgroundWorker;
-                if (bgw != null && bgw.DoneActions.Any(a => a.Error != null && !(a.Error is CancelledException)))
+                if (bgw != null)
                 {
-                    _someWorkersFailed = true;
+                    if (bgw.DoneActions.Any(a => a.Error != null && !(a.Error is CancelledException)))
+                        _someWorkersFailed = true;
+
+                    if (bgw.DoneActions.Any(a => a.Error is CancelledException))
+                        someWorkersCancelled = true;
                 }
                 //if all finished
                 if (backgroundWorkers.All(w => !w.IsBusy))
@@ -403,6 +423,12 @@ namespace XenAdmin.Wizards.PatchingWizard
                         labelError.Text = FailureMessageOnCompletion(backgroundWorkers.Count > 1);
                         pictureBox1.Image = Images.StaticImages._000_error_h32bit_16;
                         buttonRetry.Visible = true;
+                    }
+                    else if (someWorkersCancelled)
+                    {
+                        labelError.Text = UserCancellationMessage();
+                        pictureBox1.Image = Images.StaticImages.cancelled_action_16;
+                        buttonRetry.Visible = false;
                     }
                     else
                     {
